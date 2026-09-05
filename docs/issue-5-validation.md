@@ -105,7 +105,13 @@ Gate 1の実PAD貼り付け読戻し（`.work/gate1/sessions/7d2274ce4c8d47b6883
 
 固定A/B成功版もLOCALAPPDATAへ同期した。そのアプリからM365を開いたところ、Copilotのタブは開き入力欄もREADYだったが、起動時に渡した一意な `about:blank#...` はCDP一覧になく、別の `edge://newtab/` があった。専用Edgeのプロセス引数には識別子が届いていた。未確認の新規タブを閉じる操作はしていない。この場合は、確認済みのCopilotタブが開いていることを成功とし、起動タブの後処理は警告として返すよう追加修正した。重複・変更・不明な所有のタブを閉じる許可には使わない。
 
-次は検証環境の保存先を両プロセスから読める状態にそろえ、固定AiCallを新しいIDで再試行する。専用「無題」には診断フローが保存されているため、全文・状態を確認してから置換する。Gate 0の切断、Gate 1/2の異常系、Gate 3〜6の実機確認は残っている。
+固定ファイル診断の成功後、同じ7アクションの全文を2回照合し、1回の削除・保存で空Mainへ戻した（`physical-probes/437c276f2d65452db102fa9c9308137d/cleanup-once/result.json`）。終了は保存済み・エラー0・実行不可であり、実行要求0、診断・旧Gate 1・所有記録は保持した。
+
+専用Edgeの入力欄を本文を保存せずに調べると、空のSPAN/P/BR構造からinnerTextだけがLFを1文字返していた。この厳密な空構造だけを空文字に正規化し、実際の空白・改行・不可視文字・未知の入力構造は保持する。実装したDOMコードを隔離Edgeで評価する51項目と既存Copilot契約119項目が通過し、独立レビューも通過した。7ページ遷移はすべてローカルfixtureで応答し、実サービスへ転送していない。実M365でも修正版を読み取りだけで確認し、入力候補1件・正規化後0文字・生成中でないことを確認した（`copilot-empty-editor-verified-6ab9ff6113284410bce44473212ebed6.json`）。入力の消去、送信、タブの再起動は行っていない。
+
+Windows起動経路の読み取り専用診断では、単なるShell.Application呼出しはCodex側のpwshを親に持ち、同じ仮想化領域を見た。デスクトップExplorerのautomation objectを介した呼出しはexplorer.exeを親に持ち、PADと同様に通常領域のAiPromptsAgentを未作成と判定した（`launch-context-probes/3cb3c628a97a40b5ab5b1b6d34614f0d.json`）。AppData作成・PAD実行・provider送信は0。この経路での導入や固定AiCallは未実施である。[MicrosoftのExplorer起動資料](https://devblogs.microsoft.com/oldnewthing/20131118-00/?p=2643)
+
+次は検証環境の保存先を両プロセスから読める状態にそろえ、固定AiCallを新しいIDで再試行する。専用「無題」は空Mainとして保存済みであり、実行前にも状態を照合する。Gate 0の切断、Gate 1/2の異常系、Gate 3〜6の実機確認は残っている。
 
 ## 再現コマンド
 

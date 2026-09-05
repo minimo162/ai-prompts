@@ -1075,7 +1075,14 @@ if(!trusted()){if(location.protocol==='https:'&&['login.microsoftonline.com','lo
 const visible=e=>{if(!e)return false;const s=getComputedStyle(e),r=e.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0;};
 const inputs=[...new Set([...document.querySelectorAll('#m365-chat-editor-target-element,[data-lexical-editor="true"][contenteditable="true"],[role="textbox"][contenteditable="true"]')])].filter(visible);
 const input=inputs.length===1?inputs[0]:null;
-const inputText=()=>input?String('value' in input?input.value:input.innerText):null;
+const inputText=()=>{
+  if(!input)return null;
+  if('value' in input)return String(input.value);
+  const text=String(input.innerText),p=input.childNodes[0],br=p&&p.childNodes[0];
+  // The observed empty M365 editor renders one LF without containing any text nodes.
+  if(input.tagName==='SPAN'&&input.contentEditable==='true'&&text==='\n'&&input.textContent===''&&input.childNodes.length===1&&p.nodeType===1&&p.tagName==='P'&&p.childNodes.length===1&&br.nodeType===1&&br.tagName==='BR'&&br.childNodes.length===0)return '';
+  return text;
+};
 const buttons=[...document.querySelectorAll('button,[role="button"]')].filter(visible);
 const label=e=>(e.getAttribute('aria-label')||e.getAttribute('title')||e.innerText||'').trim();
 const generating=buttons.some(e=>/^(stop|stop generating|stop responding|停止|応答を停止|生成を停止)$/i.test(label(e)))||[...document.querySelectorAll('[aria-busy="true"],[data-state="streaming"],[data-status="streaming"]')].some(visible);
