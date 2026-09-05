@@ -20,7 +20,7 @@ foreach($sourceFile in $sourceFiles) {
         if(-not $definitions.ContainsKey($definition.Name)){$definitions[$definition.Name]=$definition}
     }
 }
-$wanted=@('Test-AgentId','Assert-AgentId','Read-AgentJson','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','Get-AgentTextHash','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','ConvertTo-AgentComparableRobin','Get-AgentAiCallTemplate','New-AgentAiCallTemplates','Get-AgentPadAiResults','Test-AgentPadWindowTitle','Get-AgentPadElement','Get-AgentPadInvokableButton','Get-AgentPadStatusBar','Get-AgentPadStatus','Get-AgentPadErrorState','New-AgentPadSnapshotState','Get-AgentPadSnapshot','Wait-AgentPadEditable','Invoke-AgentPad')
+$wanted=@('Test-AgentId','Assert-AgentId','Read-AgentJson','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','Get-AgentTextHash','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','ConvertTo-AgentComparableRobin','Get-AgentAiCallTemplate','New-AgentAiCallTemplates','Get-AgentPadAiResults','Test-AgentPadWindowTitle','Get-AgentPadElement','Test-AgentPadRetryableSelectorFailure','Get-AgentPadInvokableButton','Get-AgentPadStatusBar','Get-AgentPadStatus','Get-AgentPadErrorState','New-AgentPadSnapshotState','Get-AgentPadSnapshot','Wait-AgentPadEditable','Invoke-AgentPad')
 foreach($name in $wanted) {
     if(-not $definitions.ContainsKey($name)){throw ('Missing production function: '+$name)}
     . ([scriptblock]::Create($definitions[$name].Extent.Text))
@@ -93,7 +93,7 @@ public sealed class PadResolverMockElement {
 function New-PadResolverElement([string]$Id,[string]$Name,[Windows.Automation.ControlType]$ControlType,[bool]$Enabled=$true,[bool]$Invoke=$true,[bool]$Selected=$false) {
     return New-Object PadResolverMockElement($Id,$Name,$ControlType,$Enabled,$Invoke,$Selected)
 }
-function New-PadResolverLayout([string]$StatusId='Flow_status_ready',[bool]$StartEnabled=$false,[bool]$StopEnabled=$false,[bool]$SaveEnabled=$true,[object]$ErrorText=$null,[bool]$SelectedMain=$true,[bool]$WorkspaceIsList=$true) {
+function New-PadResolverLayout([string]$StatusId='Flow_status_ready',[bool]$StartEnabled=$false,[bool]$StopEnabled=$false,[bool]$SaveEnabled=$true,[object]$ErrorText=$null,[bool]$SelectedMain=$true,[bool]$WorkspaceIsList=$true,[bool]$IncludeProgramDetails=$true) {
     $root=New-PadResolverElement 'Root' 'mock root' ([Windows.Automation.ControlType]::Window)
     $start=New-PadResolverElement 'StartFlowButton' 'Run' ([Windows.Automation.ControlType]::Button) $StartEnabled $true
     $stopWrapper=New-PadResolverElement 'StopFlowButton' 'stop wrapper' ([Windows.Automation.ControlType]::Custom) $true $false
@@ -108,7 +108,7 @@ function New-PadResolverLayout([string]$StatusId='Flow_status_ready',[bool]$Star
     $normalStatus=New-PadResolverElement 'NormalStatusBarItem' 'normal status' ([Windows.Automation.ControlType]::Pane)
     $programDetails=New-PadResolverElement 'ProgramDetailsStatusBarItem' 'program details' ([Windows.Automation.ControlType]::Pane)
     $status=New-PadResolverElement $StatusId '状態: mock' ([Windows.Automation.ControlType]::Text) $true $false
-    $stopWrapper.AddChild($stop); $saveWrapper.AddChild($save); $tabs.AddChild($main); $normalStatus.AddChild($status); $statusBar.AddChild($normalStatus); $statusBar.AddChild($programDetails)
+    $stopWrapper.AddChild($stop); $saveWrapper.AddChild($save); $tabs.AddChild($main); $normalStatus.AddChild($status); $statusBar.AddChild($normalStatus); if($IncludeProgramDetails){$statusBar.AddChild($programDetails)}
     foreach($element in @($start,$stopWrapper,$saveWrapper,$workspace,$tabs,$statusBar)) {$root.AddChild($element)}
     if($null -ne $ErrorText) {
         $errors=New-PadResolverElement 'ErrorsStatusBarItem' 'errors' ([Windows.Automation.ControlType]::Pane)
@@ -131,6 +131,9 @@ function Test-Flow([string]$Robin) {Test-AgentRobin -Robin $Robin -RunDirectory 
 $resolverLayout=New-PadResolverLayout
 $statusBarCondition=New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::ControlTypeProperty,[Windows.Automation.ControlType]::StatusBar)
 Assert-Case ($resolverLayout.root.FindAll([Windows.Automation.TreeScope]::Descendants,$statusBarCondition).Count -eq 1) 'Resolver mock exposes exactly one StatusBar control'
+Assert-Case (Test-AgentPadRetryableSelectorFailure 'PAD_SELECTOR: control unavailable: transient status item.') 'Only a missing selector is retryable'
+Assert-Case (-not (Test-AgentPadRetryableSelectorFailure 'PAD_SELECTOR: status ambiguous.')) 'Ambiguous selector is never retryable'
+Assert-Case (-not (Test-AgentPadRetryableSelectorFailure 'PAD_SELECTOR: SaveFlowButton is not the observed button wrapper.')) 'Wrong control contract is never retryable'
 $resolvedSave=Get-AgentPadInvokableButton $resolverLayout.root 'SaveFlowButton' '保存' -Wrapped
 Assert-Case ([object]::ReferenceEquals($resolvedSave,$resolverLayout.save) -and $resolverLayout.save_wrapper.Current.IsEnabled -and $resolvedSave.Current.IsEnabled) 'Save resolver returns the direct observed Button rather than its Custom wrapper'
 $resolverLayout.save.Current.IsEnabled=$false
@@ -163,6 +166,14 @@ foreach($id in $knownStatuses.Keys) {
     $knownStatus=Get-AgentPadStatus (New-PadResolverLayout -StatusId $id).root
     Assert-Case ($knownStatus.state -ceq $knownStatuses[$id]) ('Status resolver classifies verified transient: '+$id)
 }
+$savingWithoutProgramDetails=New-PadResolverLayout -StatusId 'Flow_status_saving_process' -IncludeProgramDetails:$false
+$savingSnapshot=Get-AgentPadSnapshot $savingWithoutProgramDetails.root -AllowErrors
+Assert-Case ($savingSnapshot.status -ceq 'saving' -and -not $savingSnapshot.idle -and -not $savingSnapshot.errors_known) 'Saving remains readable with Program Details collapsed and error state unknown'
+$parsingWithoutProgramDetails=New-PadResolverLayout -StatusId 'Flow_status_parsing' -IncludeProgramDetails:$false
+$parsingSnapshot=Get-AgentPadSnapshot $parsingWithoutProgramDetails.root -AllowErrors
+Assert-Case ($parsingSnapshot.status -ceq 'parsing' -and -not $parsingSnapshot.idle -and -not $parsingSnapshot.errors_known) 'Parsing remains readable with Program Details absent and error state unknown'
+$readyWithoutProgramDetails=New-PadResolverLayout -IncludeProgramDetails:$false
+Assert-Rejected {Get-AgentPadSnapshot $readyWithoutProgramDetails.root -AllowErrors} 'PAD_SELECTOR' 'Ready without Program Details cannot infer hidden errors are zero'
 $ambiguousStatus=New-PadResolverLayout; $ambiguousStatus.normal_status.AddChild((New-PadResolverElement 'Flow_status_saved' '状態: saved' ([Windows.Automation.ControlType]::Text) $true $false))
 Assert-Rejected {Get-AgentPadStatus $ambiguousStatus.root} 'PAD_SELECTOR' 'Status resolver rejects multiple known status descendants'
 $missingStatus=New-PadResolverLayout -StatusId 'Flow_status_unobserved'
@@ -406,6 +417,9 @@ try {
         if($script:padStatusSequence.Count -gt 0) {
             $index=[Math]::Min($script:padSnapshotReads-1,$script:padStatusSequence.Count-1)
             $status=[string]$script:padStatusSequence[$index]
+            if($status -eq 'selector_missing'){throw 'PAD_SELECTOR: control unavailable: mocked transient status-bar rebuild.'}
+            if($status -eq 'selector_ambiguous'){throw 'PAD_SELECTOR: status ambiguous.'}
+            if($status -eq 'selector_wrong_wrapper'){throw 'PAD_SELECTOR: SaveFlowButton is not the observed button wrapper.'}
             if($status -in @('saving','parsing','checking','updating','publishing','repairing')) {$idle=$false;$editable=$false;$canRun=$false;$errors=-1;$errorsKnown=$false}
             if($status -eq 'saved') {$idle=$true;$editable=$true;$canRun=$true}
         }
@@ -443,7 +457,9 @@ try {
         return $script:padMockSnapshot
     }
     function Wait-AgentPadEditable($Window,[string]$CancelPath) {
-        if($script:padScenario -eq 'settle-unknown'){throw 'PAD_SETUP: mocked state did not settle.'}
+        if($script:padScenario -in @('settle-unknown','settle-selector-unknown')){throw 'PAD_SETUP: mocked state did not settle.'}
+        if($script:padScenario -eq 'settle-selector-ambiguous'){throw 'PAD_SELECTOR: status ambiguous.'}
+        if($script:padScenario -eq 'cancel-during-settle'){throw 'CANCELLED: mocked cancellation while state settles.'}
         return $script:padMockSnapshot
     }
     function Wait-AgentPadSaveBaseline($Window,[string]$CancelPath) {
@@ -490,6 +506,8 @@ try {
         @{scenario='user-edited';prefix='PAD_OWNERSHIP';saves=0},
         @{scenario='replace-failure';prefix='PAD_REPLACE';saves=0},
         @{scenario='paste-mismatch';prefix='PAD_PASTE_MISMATCH';saves=0},
+        @{scenario='settle-selector-unknown';prefix='PAD_SETUP';saves=0},
+        @{scenario='settle-selector-ambiguous';prefix='PAD_SELECTOR';saves=0},
         @{scenario='save-stale';prefix='PAD_SAVE_UNKNOWN';saves=0},
         @{scenario='save-unknown';prefix='PAD_SAVE_UNKNOWN';saves=1},
         @{scenario='save-mismatch';prefix='PAD_SAVE_MISMATCH';saves=1},
@@ -512,6 +530,9 @@ try {
     Reset-PadMock 'cancel-during-save'
     $result=Invoke-AgentPad -Robin 'WAIT 0' -RunDirectory $script:run -RunId ('5'*32) -Job $script:job -Settings $settings -CancelPath $cancel
     Assert-Case ($result.status -ceq 'cancelled' -and $script:padRunInvocations -eq 0) 'Mock cancellation during save prevents Run'
+    Reset-PadMock 'cancel-during-settle'
+    $result=Invoke-AgentPad -Robin 'WAIT 0' -RunDirectory $script:run -RunId ('5'*32) -Job $script:job -Settings $settings -CancelPath $cancel
+    Assert-Case ($result.status -ceq 'cancelled' -and $script:padSaveInvocations -eq 0 -and $script:padRunInvocations -eq 0) 'Cancellation while editable state settles prevents Save and Run'
     Reset-PadMock 'run-unknown'
     $result=Invoke-AgentPad -Robin 'WAIT 0' -RunDirectory $script:run -RunId ('5'*32) -Job $script:job -Settings $settings -CancelPath $cancel
     Assert-Case ($result.status -ceq 'unknown' -and $result.error -like 'TEST_UI_INVOCATION_UNKNOWN:*') 'Exception at Run boundary is an unknown result'
@@ -623,8 +644,23 @@ public sealed class PadTestMutexHolder : IDisposable {
     Assert-Case ((Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel).status -ceq 'ready') 'Editable wait does not accept an early Ready before parsing resumes'
     Assert-Case ($script:padSnapshotReads -eq 5) 'Early Ready is reset by parsing and cannot authorize readback'
     Reset-PadMock 'settle-after-paste'
+    $script:padStatusSequence=@('ready','selector_missing','ready')
+    Assert-Case ((Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel).status -ceq 'ready') 'Editable wait tolerates a transient selector rebuild and waits for stable Ready'
+    Assert-Case ($script:padSnapshotReads -eq 4) 'Transient selector rebuild resets Ready stability before readback'
+    Reset-PadMock 'settle-after-paste'
     $script:padStatusSequence=@('parsing')
     Assert-Rejected {Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel -TimeoutSeconds 0} 'PAD_SETUP' 'Editable wait fails closed when parsing cannot settle'
+    Reset-PadMock 'settle-after-paste'
+    $script:padStatusSequence=@('selector_missing')
+    Assert-Rejected {Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel -TimeoutSeconds 0} 'PAD_SETUP' 'Persistent selector failure times out without authorizing UI work'
+    Reset-PadMock 'settle-after-paste'
+    $script:padStatusSequence=@('selector_ambiguous')
+    Assert-Rejected {Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel -TimeoutSeconds 1} 'PAD_SELECTOR' 'Ambiguous selector fails immediately rather than being retried'
+    Assert-Case ($script:padSnapshotReads -eq 1) 'Ambiguous selector performs no additional status poll'
+    Reset-PadMock 'settle-after-paste'
+    $script:padStatusSequence=@('selector_wrong_wrapper')
+    Assert-Rejected {Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel -TimeoutSeconds 1} 'PAD_SELECTOR' 'Wrong control contract fails immediately rather than being retried'
+    Assert-Case ($script:padSnapshotReads -eq 1) 'Wrong control contract performs no additional status poll'
     Reset-PadMock 'cancel-while-settling'
     $script:padStatusSequence=@('parsing')
     $script:padCancelDuringSettle=$cancel
@@ -634,8 +670,14 @@ public sealed class PadTestMutexHolder : IDisposable {
     $script:padStatusSequence=@('ready')
     Assert-Case ((Wait-AgentPadSaveBaseline ([pscustomobject]@{Mock=$true}) $cancel).status -ceq 'ready') 'Save helper requires a fresh ready baseline before Invoke'
     Reset-PadMock 'save-observed'
+    $script:padStatusSequence=@('selector_missing','ready')
+    Assert-Case ((Wait-AgentPadSaveBaseline ([pscustomobject]@{Mock=$true}) $cancel).status -ceq 'ready') 'Save baseline tolerates one transient selector rebuild'
+    Reset-PadMock 'save-observed'
     $script:padStatusSequence=@('saving','saved')
     Assert-Case ((Wait-AgentPadSaved ([pscustomobject]@{Mock=$true}) $cancel).status -ceq 'saved') 'Save helper accepts only an observed saving-to-saved transition'
+    Reset-PadMock 'save-observed'
+    $script:padStatusSequence=@('saving','selector_missing','saved')
+    Assert-Case ((Wait-AgentPadSaved ([pscustomobject]@{Mock=$true}) $cancel).status -ceq 'saved') 'Save helper retains fresh Saving evidence across a transient selector rebuild'
     Reset-PadMock 'save-observed'
     $script:padStatusSequence=@('saved')
     Assert-Rejected {Wait-AgentPadSaveBaseline ([pscustomobject]@{Mock=$true}) $cancel -TimeoutSeconds 0} 'PAD_SAVE_UNKNOWN' 'Stale Saved state cannot authorize this save'

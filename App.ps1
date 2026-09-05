@@ -1566,6 +1566,12 @@ function Get-AgentPadElement {
     return $null
 }
 
+function Test-AgentPadRetryableSelectorFailure([string]$Message) {
+    # A missing element is expected while PAD rebuilds the status subtree.
+    # Ambiguity and a mismatched control contract are never safe to retry.
+    return ($Message -like 'PAD_SELECTOR: control unavailable:*' -or $Message -ceq 'PAD_SELECTOR: supported PAD status bar unavailable.' -or $Message -ceq 'PAD_SELECTOR: status unavailable.')
+}
+
 function Get-AgentPadInvokableButton {
     param($Root,[string]$AutomationId,[string]$ExpectedName,[switch]$Wrapped)
     $outer=Get-AgentPadElement $Root @($AutomationId)
@@ -1573,7 +1579,8 @@ function Get-AgentPadInvokableButton {
         if($outer.Current.ControlType -ne [Windows.Automation.ControlType]::Custom) {throw ('PAD_SELECTOR: '+$AutomationId+' is not the observed button wrapper.')}
         $condition=New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::ControlTypeProperty,[Windows.Automation.ControlType]::Button)
         $children=$outer.FindAll([Windows.Automation.TreeScope]::Children,$condition)
-        if($children.Count -ne 1) {throw ('PAD_SELECTOR: '+$AutomationId+' has no unique direct button.')}
+        if($children.Count -eq 0) {throw ('PAD_SELECTOR: control unavailable: '+$AutomationId+' direct button.')}
+        if($children.Count -gt 1) {throw ('PAD_SELECTOR: '+$AutomationId+' has multiple direct buttons.')}
         $button=$children[0]
         if($button.Current.AutomationId -cne 'Button' -or $button.Current.Name -cne $ExpectedName) {throw ('PAD_SELECTOR: '+$AutomationId+' direct button does not match the observed PAD control.')}
     } else {
@@ -1588,12 +1595,13 @@ function Get-AgentPadStatusBar {
     param($Window)
     $condition=New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::ControlTypeProperty,[Windows.Automation.ControlType]::StatusBar)
     $bars=$Window.FindAll([Windows.Automation.TreeScope]::Descendants,$condition)
-    if($bars.Count -ne 1) {throw 'PAD_SELECTOR: supported PAD status bar is missing or ambiguous.'}
+    if($bars.Count -eq 0) {throw 'PAD_SELECTOR: supported PAD status bar unavailable.'}
+    if($bars.Count -gt 1) {throw 'PAD_SELECTOR: supported PAD status bar ambiguous.'}
     $bar=$bars[0]
-    # These two stable item IDs establish the supported Job Designer layout
-    # before a hidden ErrorsStatusBarItem may be interpreted as zero errors.
+    # NormalStatusBarItem is the stable identity for status observation.
+    # ProgramDetailsStatusBarItem is intentionally not required here: PAD
+    # collapses it in several valid transitional states.
     $null=Get-AgentPadElement $bar @('NormalStatusBarItem')
-    $null=Get-AgentPadElement $bar @('ProgramDetailsStatusBarItem')
     return $bar
 }
 
@@ -1628,7 +1636,8 @@ function Get-AgentPadStatus {
         $condition=New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::AutomationIdProperty,$id)
         foreach($candidate in $normalStatus.FindAll([Windows.Automation.TreeScope]::Descendants,$condition)) {$matches+=,$candidate}
     }
-    if($matches.Count -ne 1) {throw 'PAD_SELECTOR: status is missing or ambiguous.'}
+    if($matches.Count -eq 0) {throw 'PAD_SELECTOR: status unavailable.'}
+    if($matches.Count -gt 1) {throw 'PAD_SELECTOR: status ambiguous.'}
     $match=$matches[0]; $name=[string]$match.Current.Name
     if(-not $name.StartsWith('状態:',[StringComparison]::Ordinal)) {throw 'PAD_SELECTOR: status accessible name does not match the observed PAD status control.'}
     return [pscustomobject]@{id=[string]$match.Current.AutomationId;state=[string]$states[[string]$match.Current.AutomationId];name=$name;status_bar=$statusBar}
@@ -1641,7 +1650,13 @@ function Get-AgentPadErrorState {
     # BAML confirms that PAD hides ErrorsStatusBarItem while it is running.
     # Its absence can therefore prove zero only in an observed ready/saved idle state.
     if($null -eq $container) {
-        if($Idle) {return [pscustomobject]@{count=0;known=$true}}
+        if($Idle) {
+            # The Program Details item is visible in the verified Ready/Saved
+            # layout. Its presence prevents a partial/rebuilding tree from
+            # being mistaken for an intentionally hidden zero-error item.
+            $null=Get-AgentPadElement $StatusBar @('ProgramDetailsStatusBarItem')
+            return [pscustomobject]@{count=0;known=$true}
+        }
         return [pscustomobject]@{count=-1;known=$false}
     }
     if($Running) {return [pscustomobject]@{count=-1;known=$false}}
@@ -1751,7 +1766,15 @@ function Wait-AgentPadEditable {
     $deadline=[DateTime]::UtcNow.AddSeconds($TimeoutSeconds); $previousQualifying=$false
     do {
         if(Test-Path -LiteralPath $CancelPath) {throw 'CANCELLED: stopped before execution.'}
-        $snapshot=Get-AgentPadSnapshot $Window -AllowErrors
+        try {$snapshot=Get-AgentPadSnapshot $Window -AllowErrors} catch {
+            # A just-mutated WPF status bar can briefly rebuild its UIA tree.
+            # Only the known selector boundary is retried; all other failures
+            # remain fail-closed and no subsequent UI action is authorized.
+            if(-not (Test-AgentPadRetryableSelectorFailure $_.Exception.Message)) {throw}
+            $previousQualifying=$false
+            Start-Sleep -Milliseconds 200
+            continue
+        }
         $qualifying=($snapshot.idle -and $snapshot.editable -and $snapshot.errors_known -and $snapshot.errors -eq 0)
         if($qualifying -and $previousQualifying) {return $snapshot}
         $previousQualifying=$qualifying
@@ -1765,7 +1788,11 @@ function Wait-AgentPadSaveBaseline {
     $deadline=[DateTime]::UtcNow.AddSeconds($TimeoutSeconds)
     do {
         if(Test-Path -LiteralPath $CancelPath) {throw 'CANCELLED: stopped before execution.'}
-        $snapshot=Get-AgentPadSnapshot $Window -AllowErrors
+        try {$snapshot=Get-AgentPadSnapshot $Window -AllowErrors} catch {
+            if(-not (Test-AgentPadRetryableSelectorFailure $_.Exception.Message)) {throw}
+            Start-Sleep -Milliseconds 200
+            continue
+        }
         if($snapshot.status -ceq 'ready' -and $snapshot.idle -and $snapshot.editable -and $snapshot.errors_known -and $snapshot.errors -eq 0) {return $snapshot}
         Start-Sleep -Milliseconds 200
     } until([DateTime]::UtcNow -ge $deadline)
@@ -1778,7 +1805,10 @@ function Wait-AgentPadSaved {
     do {
         if(Test-Path -LiteralPath $CancelPath) {throw 'CANCELLED: stopped before execution.'}
         Start-Sleep -Milliseconds 200
-        $snapshot=Get-AgentPadSnapshot $Window -AllowErrors
+        try {$snapshot=Get-AgentPadSnapshot $Window -AllowErrors} catch {
+            if(-not (Test-AgentPadRetryableSelectorFailure $_.Exception.Message)) {throw}
+            continue
+        }
         if($snapshot.status -ceq 'saving') {$sawSaving=$true; continue}
         if($sawSaving -and $snapshot.status -ceq 'saved' -and $snapshot.idle -and $snapshot.editable -and $snapshot.errors_known -and $snapshot.errors -eq 0) {return $snapshot}
     } until([DateTime]::UtcNow -ge $deadline)
