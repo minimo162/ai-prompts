@@ -5,7 +5,7 @@ $parseErrors=$null
 $ast=[Management.Automation.Language.Parser]::ParseFile([IO.Path]::GetFullPath($SourcePath),[ref]$null,[ref]$parseErrors)
 if ($parseErrors.Count -gt 0) { throw ('PowerShell parse errors: '+$parseErrors.Count) }
 # Load definitions only, never the server/launcher top-level code.
-$wanted=@('Get-AgentCopilotConfig','Test-AgentCopilotUrl','Test-AgentCopilotAuthUrl','Test-AgentEdgeCommandLine','Test-AgentCopilotSocketUrl','Read-AgentJsonToken','Test-AgentStrictJson','ConvertFrom-AgentCopilotResponse','Assert-AgentCopilotWait','Enter-AgentCopilotMutex','Get-AgentCopilotAttemptPath','Reserve-AgentCopilotAttempt','Test-AgentCopilotTargetRecord','Write-AgentCopilotTargetRecord','Get-AgentCopilotTarget','Assert-AgentCopilotJobBaseline','Set-AgentCopilotJobSendStarted','Invoke-AgentCopilot','Get-AgentCopilotDomPrelude','Close-AgentCopilotLaunchTab','Open-AgentCopilot')
+$wanted=@('Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','Get-AgentCopilotConfig','Test-AgentCopilotUrl','Test-AgentCopilotAuthUrl','Test-AgentEdgeCommandLine','Test-AgentCopilotSocketUrl','Read-AgentJsonToken','Test-AgentStrictJson','ConvertFrom-AgentCopilotResponse','Assert-AgentCopilotWait','Enter-AgentCopilotMutex','Get-AgentCopilotAttemptPath','Reserve-AgentCopilotAttempt','Test-AgentCopilotTargetRecord','Write-AgentCopilotTargetRecord','Get-AgentCopilotTarget','Assert-AgentCopilotJobBaseline','Set-AgentCopilotJobSendStarted','Invoke-AgentCopilot','Get-AgentCopilotDomPrelude','Close-AgentCopilotLaunchTab','Open-AgentCopilot')
 foreach($name in $wanted){
     $definition=@($ast.FindAll({param($n) $n -is [Management.Automation.Language.FunctionDefinitionAst]},$false) | Where-Object Name -eq $name)
     if($definition.Count -ne 1){throw ('Missing or duplicate function: '+$name)}
@@ -50,6 +50,65 @@ $json = '{"request_id":"r1","robin":"SET Path TO $''C:\\folder\\file.txt''\nSET 
 $complete=$json+"`nAGENT_END_r1"
 $actual=ConvertFrom-AgentCopilotResponse $complete 'r1'
 Assert-Case ([string]::Equals($actual,$json,[StringComparison]::Ordinal)) 'Response preserves code, percent, whitespace and legitimate backslashes exactly'
+# This is a complete Robin flow assembled from the supported ReadText/WriteText
+# forms in pad-robin-prompts.md.  Test-AgentRobin accepts it before it is put in
+# the response frame, so the parser test cannot pass with a malformed-only fake.
+$robinTemp=Join-Path ([IO.Path]::GetTempPath()) ('ai-prompts-copilot-robin-'+[guid]::NewGuid().ToString('N'))
+try{
+$robinRun=Join-Path $robinTemp 'run';$robinTarget=Join-Path $robinTemp 'target';$robinArtifacts=Join-Path $robinRun 'artifacts'
+[IO.Directory]::CreateDirectory($robinArtifacts)|Out-Null
+[IO.Directory]::CreateDirectory($robinTarget)|Out-Null
+$robinInput=Join-Path $robinTarget 'input.txt'
+[IO.File]::WriteAllText($robinInput,"  日本語 100% \\path\\raw.txt `"引用`"  `r`n")
+$robinJob=[pscustomobject]@{target=$robinTarget;observed_artifacts=@()}
+$robinRead='File.ReadTextFromFile.ReadText File: '+(ConvertTo-AgentRobinLiteral $robinInput)+' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents'
+$robinValue='  引用: "日本語" O''Brien C:\path\raw  '
+$robinSet='SET Quote TO '+(ConvertTo-AgentRobinLiteral $robinValue)
+$robinVariable='$'+"'''%FileContents%'''"
+$robinWrite='File.WriteText File: '+(ConvertTo-AgentRobinLiteral (Join-Path $robinArtifacts 'log.txt'))+' TextToWrite: '+$robinVariable+' AppendNewLine: True IfFileExists: File.IfFileExists.Append Encoding: File.FileEncoding.UTF8'
+$robinQuoteWrite='File.WriteText File: '+(ConvertTo-AgentRobinLiteral (Join-Path $robinArtifacts 'quoted.txt'))+' TextToWrite: Quote AppendNewLine: True IfFileExists: File.IfFileExists.Append Encoding: File.FileEncoding.UTF8'
+$robinFixture=@($robinRead,$robinSet,$robinWrite,$robinQuoteWrite) -join "`r`n"
+$robinOutputs=@(Test-AgentRobin -Robin $robinFixture -RunDirectory $robinRun -Job $robinJob)
+Assert-Case ($robinOutputs.Count -eq 2) 'Complete ReadText/WriteText Robin fixture passes the production validator'
+$robinJson=([ordered]@{request_id='r-full-robin';robin=$robinFixture}|ConvertTo-Json -Compress)
+$robinFramed="`r`n`t"+$robinJson+"`r`nAGENT_END_r-full-robin`r`n  "
+$robinActualJson=ConvertFrom-AgentCopilotResponse $robinFramed 'r-full-robin'
+$robinDecoded=ConvertFrom-Json -InputObject $robinActualJson
+Assert-Case ([string]::Equals([string]$robinDecoded.robin,$robinFixture,[StringComparison]::Ordinal)) 'Complete Robin preserves decoded Japanese, quotes, apostrophe, backslashes, percent variable reference, CRLF and text whitespace'
+Assert-Case ($robinValue.StartsWith('  ') -and $robinValue.EndsWith('  ') -and $robinFixture.Contains("`r`n")) 'Complete Robin fixture contains leading/trailing text whitespace and multiple lines'
+# Stay below the production Robin line/character limits while exercising a
+# response large enough to catch accidental truncation or character assumptions.
+# Build the largest fixture that fits this machine's actual temporary path.
+$longRobinLimit=62000
+$longRobinLines=@($robinRead)
+for($longIndex=1;$longIndex -le 249;$longIndex++){
+    $longPath=Join-Path $robinArtifacts ('long-{0:D3}.txt' -f $longIndex)
+    $longLine='File.WriteText File: '+(ConvertTo-AgentRobinLiteral $longPath)+' TextToWrite: '+$robinVariable+' AppendNewLine: True IfFileExists: File.IfFileExists.Append Encoding: File.FileEncoding.UTF8'
+    $candidate=($longRobinLines+@($longLine))-join "`r`n"
+    if($candidate.Length -ge $longRobinLimit){break}
+    $longRobinLines+=@($longLine)
+}
+$longRobin=$longRobinLines -join "`r`n"
+$longOutputs=@(Test-AgentRobin -Robin $longRobin -RunDirectory $robinRun -Job $robinJob)
+$longWriteCount=$longRobinLines.Count-1
+Assert-Case ($longWriteCount -eq $longOutputs.Count -and $longWriteCount -ge 120 -and $longRobin.Length -lt 64000 -and @($longRobin -split '\r?\n').Count -le 250) 'Long complete Robin fixture stays within production line and character limits'
+$longJson=([ordered]@{request_id='r-long-robin';robin=$longRobin}|ConvertTo-Json -Compress)
+Assert-Case ($longJson.Length -gt 40000 -and $longJson.Length -lt 1048576) 'Long complete Robin response stays within the actual strict JSON response limit'
+$longFramed="`r`n  "+$longJson+"`r`nAGENT_END_r-long-robin`r`n`t"
+$longActualJson=ConvertFrom-AgentCopilotResponse $longFramed 'r-long-robin'
+$longDecoded=ConvertFrom-Json -InputObject $longActualJson
+Assert-Case ([string]::Equals([string]$longDecoded.robin,$longRobin,[StringComparison]::Ordinal)) 'Long complete Robin response is decoded without truncation'
+}finally{
+    if(Test-Path -LiteralPath $robinTemp){
+        $resolvedRobinTemp=[IO.Path]::GetFullPath($robinTemp).TrimEnd('\')
+        $expectedTempRoot=[IO.Path]::GetFullPath([IO.Path]::GetTempPath()).TrimEnd('\')+'\'
+        $resolvedRobinParent=([IO.Path]::GetDirectoryName($resolvedRobinTemp)).TrimEnd('\')+'\'
+        if($resolvedRobinParent -cne $expectedTempRoot -or [IO.Path]::GetFileName($resolvedRobinTemp) -notmatch '^ai-prompts-copilot-robin-[0-9a-f]{32}$') { throw 'Unsafe test cleanup path.' }
+        $resolvedRobinItem=Get-Item -LiteralPath $resolvedRobinTemp -Force
+        if($resolvedRobinItem.Attributes -band [IO.FileAttributes]::ReparsePoint){ throw 'Unsafe test cleanup reparse point.' }
+        Remove-Item -LiteralPath $resolvedRobinTemp -Recurse -Force
+    }
+}
 Assert-Rejected {ConvertFrom-AgentCopilotResponse $complete 'r2'} 'RESPONSE_INVALID' 'Wrong marker'
 Assert-Rejected {ConvertFrom-AgentCopilotResponse ("{"+"`nAGENT_END_r1") 'r1'} 'RESPONSE_INVALID' 'Truncated JSON'
 Assert-Rejected {ConvertFrom-AgentCopilotResponse ($json+"`nAGENT_END_r1`nextra") 'r1'} 'RESPONSE_INVALID' 'Trailing output'

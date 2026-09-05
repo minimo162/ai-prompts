@@ -20,7 +20,7 @@ foreach($sourceFile in $sourceFiles) {
         if(-not $definitions.ContainsKey($definition.Name)){$definitions[$definition.Name]=$definition}
     }
 }
-$wanted=@('Test-AgentId','Assert-AgentId','Read-AgentJson','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','Get-AgentTextHash','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','ConvertTo-AgentComparableRobin','Get-AgentAiCallTemplate','New-AgentAiCallTemplates','Get-AgentPadAiResults','Test-AgentPadWindowTitle','Invoke-AgentPad')
+$wanted=@('Test-AgentId','Assert-AgentId','Read-AgentJson','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','Get-AgentTextHash','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','ConvertTo-AgentComparableRobin','Get-AgentAiCallTemplate','New-AgentAiCallTemplates','Get-AgentPadAiResults','Test-AgentPadWindowTitle','Get-AgentPadElement','Get-AgentPadInvokableButton','Get-AgentPadStatusBar','Get-AgentPadStatus','Get-AgentPadErrorState','New-AgentPadSnapshotState','Get-AgentPadSnapshot','Wait-AgentPadEditable','Invoke-AgentPad')
 foreach($name in $wanted) {
     if(-not $definitions.ContainsKey($name)){throw ('Missing production function: '+$name)}
     . ([scriptblock]::Create($definitions[$name].Extent.Text))
@@ -39,6 +39,84 @@ function Assert-Rejected([scriptblock]$Action,[string]$Prefix,[string]$Name) {
     }
     Assert-Case $caught $Name
 }
+
+# Load UIA type metadata only.  The mock never references RootElement, a
+# process, or an actual AutomationElement, so these tests cannot inspect PAD.
+Add-Type -AssemblyName UIAutomationClient,UIAutomationTypes
+if(-not ('PadResolverMockElement' -as [type])) {
+    $uiaReferences=@([Windows.Automation.AutomationElement].Assembly.Location,[Windows.Automation.ControlType].Assembly.Location)
+    Add-Type -ReferencedAssemblies $uiaReferences -TypeDefinition @'
+using System;
+using System.Collections.Generic;
+using System.Windows.Automation;
+public sealed class PadResolverMockCurrent {
+    public string AutomationId { get; set; }
+    public string Name { get; set; }
+    public ControlType ControlType { get; set; }
+    public bool IsEnabled { get; set; }
+}
+public sealed class PadResolverMockPatternCurrent { public bool IsSelected { get; set; } }
+public sealed class PadResolverMockPattern { public PadResolverMockPatternCurrent Current { get; private set; } public PadResolverMockPattern(bool selected) { Current=new PadResolverMockPatternCurrent { IsSelected=selected }; } }
+public sealed class PadResolverMockElement {
+    public PadResolverMockCurrent Current { get; private set; }
+    private readonly List<PadResolverMockElement> children = new List<PadResolverMockElement>();
+    private readonly bool invokeAvailable;
+    private readonly bool selected;
+    public PadResolverMockElement(string id, string name, ControlType controlType, bool enabled, bool invoke, bool isSelected) {
+        Current=new PadResolverMockCurrent { AutomationId=id, Name=name, ControlType=controlType, IsEnabled=enabled };
+        invokeAvailable=invoke; selected=isSelected;
+    }
+    public void AddChild(PadResolverMockElement child) { children.Add(child); }
+    private void AddDescendants(List<PadResolverMockElement> result) { foreach(var child in children) { result.Add(child); child.AddDescendants(result); } }
+    public object[] FindAll(TreeScope scope, Condition condition) {
+        var candidates=new List<PadResolverMockElement>();
+        if(scope==TreeScope.Children) candidates.AddRange(children); else AddDescendants(candidates);
+        var property=condition as PropertyCondition;
+        if(property==null) return new object[0];
+        var matches=new List<object>();
+        foreach(var candidate in candidates) {
+            bool match=false;
+            if(property.Property.Id==AutomationElement.AutomationIdProperty.Id) match=Object.Equals(candidate.Current.AutomationId,property.Value);
+            else if(property.Property.Id==AutomationElement.ControlTypeProperty.Id) match=candidate.Current.ControlType.Id==Convert.ToInt32(property.Value);
+            if(match) matches.Add(candidate);
+        }
+        return matches.ToArray();
+    }
+    public object GetCurrentPattern(AutomationPattern pattern) {
+        if(pattern==InvokePattern.Pattern && invokeAvailable) return new PadResolverMockPattern(false);
+        if(pattern==SelectionItemPattern.Pattern) return new PadResolverMockPattern(selected);
+        throw new InvalidOperationException("Pattern unavailable in resolver mock.");
+    }
+}
+'@
+}
+function New-PadResolverElement([string]$Id,[string]$Name,[Windows.Automation.ControlType]$ControlType,[bool]$Enabled=$true,[bool]$Invoke=$true,[bool]$Selected=$false) {
+    return New-Object PadResolverMockElement($Id,$Name,$ControlType,$Enabled,$Invoke,$Selected)
+}
+function New-PadResolverLayout([string]$StatusId='Flow_status_ready',[bool]$StartEnabled=$false,[bool]$StopEnabled=$false,[bool]$SaveEnabled=$true,[object]$ErrorText=$null,[bool]$SelectedMain=$true,[bool]$WorkspaceIsList=$true) {
+    $root=New-PadResolverElement 'Root' 'mock root' ([Windows.Automation.ControlType]::Window)
+    $start=New-PadResolverElement 'StartFlowButton' 'Run' ([Windows.Automation.ControlType]::Button) $StartEnabled $true
+    $stopWrapper=New-PadResolverElement 'StopFlowButton' 'stop wrapper' ([Windows.Automation.ControlType]::Custom) $true $false
+    $stop=New-PadResolverElement 'Button' '停止' ([Windows.Automation.ControlType]::Button) $StopEnabled $true
+    $saveWrapper=New-PadResolverElement 'SaveFlowButton' 'save wrapper' ([Windows.Automation.ControlType]::Custom) $true $false
+    $save=New-PadResolverElement 'Button' '保存' ([Windows.Automation.ControlType]::Button) $SaveEnabled $true
+    $workspaceType=if($WorkspaceIsList){[Windows.Automation.ControlType]::List}else{[Windows.Automation.ControlType]::Pane}
+    $workspace=New-PadResolverElement 'ProgramItemsListBoxActions' 'workspace' $workspaceType
+    $tabs=New-PadResolverElement 'SubflowTabControl' 'tabs' ([Windows.Automation.ControlType]::Tab)
+    $main=New-PadResolverElement 'MainTab' 'Main' ([Windows.Automation.ControlType]::TabItem) $true $true $SelectedMain
+    $statusBar=New-PadResolverElement 'DesignerStatusBar' 'status bar' ([Windows.Automation.ControlType]::StatusBar)
+    $normalStatus=New-PadResolverElement 'NormalStatusBarItem' 'normal status' ([Windows.Automation.ControlType]::Pane)
+    $programDetails=New-PadResolverElement 'ProgramDetailsStatusBarItem' 'program details' ([Windows.Automation.ControlType]::Pane)
+    $status=New-PadResolverElement $StatusId '状態: mock' ([Windows.Automation.ControlType]::Text) $true $false
+    $stopWrapper.AddChild($stop); $saveWrapper.AddChild($save); $tabs.AddChild($main); $normalStatus.AddChild($status); $statusBar.AddChild($normalStatus); $statusBar.AddChild($programDetails)
+    foreach($element in @($start,$stopWrapper,$saveWrapper,$workspace,$tabs,$statusBar)) {$root.AddChild($element)}
+    if($null -ne $ErrorText) {
+        $errors=New-PadResolverElement 'ErrorsStatusBarItem' 'errors' ([Windows.Automation.ControlType]::Pane)
+        $count=New-PadResolverElement 'ErrorCountTextBlock' ([string]$ErrorText) ([Windows.Automation.ControlType]::Text) $true $false
+        $errors.AddChild($count); $statusBar.AddChild($errors)
+    }
+    return [pscustomobject]@{root=$root;start=$start;stop_wrapper=$stopWrapper;stop=$stop;save_wrapper=$saveWrapper;save=$save;workspace=$workspace;tabs=$tabs;status_bar=$statusBar;normal_status=$normalStatus;program_details=$programDetails;status=$status;main=$main}
+}
 function New-ReadAction([string]$Path,[string]$Variable='InputText') {
     'File.ReadTextFromFile.ReadText File: '+(ConvertTo-AgentRobinLiteral $Path)+' Encoding: File.TextFileEncoding.UTF8 Content=> '+$Variable
 }
@@ -46,6 +124,79 @@ function New-WriteAction([string]$Path,[string]$Value='InputText') {
     'File.WriteText File: '+(ConvertTo-AgentRobinLiteral $Path)+' TextToWrite: '+$Value+' AppendNewLine: False IfFileExists: File.IfFileExists.Append Encoding: File.FileEncoding.UTF8'
 }
 function Test-Flow([string]$Robin) {Test-AgentRobin -Robin $Robin -RunDirectory $script:run -Job $script:job}
+
+# Exercise the production UIA resolvers against a closed mock tree.  The mock
+# models only controls documented by the real PAD inspection; no selector is
+# monkey-patched for these checks.
+$resolverLayout=New-PadResolverLayout
+$statusBarCondition=New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::ControlTypeProperty,[Windows.Automation.ControlType]::StatusBar)
+Assert-Case ($resolverLayout.root.FindAll([Windows.Automation.TreeScope]::Descendants,$statusBarCondition).Count -eq 1) 'Resolver mock exposes exactly one StatusBar control'
+$resolvedSave=Get-AgentPadInvokableButton $resolverLayout.root 'SaveFlowButton' '保存' -Wrapped
+Assert-Case ([object]::ReferenceEquals($resolvedSave,$resolverLayout.save) -and $resolverLayout.save_wrapper.Current.IsEnabled -and $resolvedSave.Current.IsEnabled) 'Save resolver returns the direct observed Button rather than its Custom wrapper'
+$resolverLayout.save.Current.IsEnabled=$false
+$resolvedDisabledSave=Get-AgentPadInvokableButton $resolverLayout.root 'SaveFlowButton' '保存' -Wrapped
+Assert-Case (-not $resolvedDisabledSave.Current.IsEnabled -and $resolverLayout.save_wrapper.Current.IsEnabled) 'Wrapped Save enabled state comes from the child, not the always-enabled wrapper'
+$resolvedStop=Get-AgentPadInvokableButton $resolverLayout.root 'StopFlowButton' '停止' -Wrapped
+Assert-Case ([object]::ReferenceEquals($resolvedStop,$resolverLayout.stop)) 'Stop resolver returns the direct observed 停止 button'
+$resolvedStart=Get-AgentPadInvokableButton $resolverLayout.root 'StartFlowButton'
+Assert-Case ([object]::ReferenceEquals($resolvedStart,$resolverLayout.start)) 'Start resolver accepts the observed direct invokable button'
+$badName=New-PadResolverLayout; $badName.save.Current.Name='別の保存'
+Assert-Rejected {Get-AgentPadInvokableButton $badName.root 'SaveFlowButton' '保存' -Wrapped} 'PAD_SELECTOR' 'Wrapped Save rejects an unrelated direct child name'
+$badId=New-PadResolverLayout; $badId.save.Current.AutomationId='UnexpectedButton'
+Assert-Rejected {Get-AgentPadInvokableButton $badId.root 'SaveFlowButton' '保存' -Wrapped} 'PAD_SELECTOR' 'Wrapped Save rejects an unrelated direct child id'
+$missingChildRoot=New-PadResolverElement 'Root' 'mock root' ([Windows.Automation.ControlType]::Window)
+$missingChildWrapper=New-PadResolverElement 'SaveFlowButton' 'save wrapper' ([Windows.Automation.ControlType]::Custom) $true $false
+$missingChildRoot.AddChild($missingChildWrapper)
+Assert-Rejected {Get-AgentPadInvokableButton $missingChildRoot 'SaveFlowButton' '保存' -Wrapped} 'PAD_SELECTOR' 'Wrapped Save rejects a missing direct button'
+$multipleChild=New-PadResolverLayout; $multipleChild.save_wrapper.AddChild((New-PadResolverElement 'Button' '保存' ([Windows.Automation.ControlType]::Button) $true $true))
+Assert-Rejected {Get-AgentPadInvokableButton $multipleChild.root 'SaveFlowButton' '保存' -Wrapped} 'PAD_SELECTOR' 'Wrapped Save rejects multiple direct buttons'
+$noInvokeRoot=New-PadResolverElement 'Root' 'mock root' ([Windows.Automation.ControlType]::Window)
+$noInvokeRoot.AddChild((New-PadResolverElement 'StartFlowButton' 'Run' ([Windows.Automation.ControlType]::Button) $true $false))
+Assert-Rejected {Get-AgentPadInvokableButton $noInvokeRoot 'StartFlowButton'} 'PAD_SELECTOR' 'Start resolver rejects a button without InvokePattern'
+
+$status=Get-AgentPadStatus $resolverLayout.root
+Assert-Case ($status.id -ceq 'Flow_status_ready' -and $status.state -ceq 'ready') 'Status resolver accepts exactly one observed ready status'
+$knownStatuses=@{
+    Flow_status_errors='errors'; Flow_status_runtime_error='runtime_error'; Flow_status_parsing='parsing'; Flow_status_running='running'; Flow_status_stepping='stepping'; Flow_status_stepping_over='stepping_over'; Flow_status_stepping_out='stepping_out'; Flow_status_pausing='pausing'; Flow_status_paused='paused'; Flow_status_stopping='stopping'; Flow_status_checking='checking'; Flow_status_resuming='resuming'; Flow_status_saving_process='saving'; Flow_status_saved='saved'; Flow_status_running_flow='running_flow'; Flow_status_updating='updating'; Flow_status_publishing='publishing'; Flow_status_repairing='repairing'; Flow_status_runningCUA='running_cua'
+}
+foreach($id in $knownStatuses.Keys) {
+    $knownStatus=Get-AgentPadStatus (New-PadResolverLayout -StatusId $id).root
+    Assert-Case ($knownStatus.state -ceq $knownStatuses[$id]) ('Status resolver classifies verified transient: '+$id)
+}
+$ambiguousStatus=New-PadResolverLayout; $ambiguousStatus.normal_status.AddChild((New-PadResolverElement 'Flow_status_saved' '状態: saved' ([Windows.Automation.ControlType]::Text) $true $false))
+Assert-Rejected {Get-AgentPadStatus $ambiguousStatus.root} 'PAD_SELECTOR' 'Status resolver rejects multiple known status descendants'
+$missingStatus=New-PadResolverLayout -StatusId 'Flow_status_unobserved'
+Assert-Rejected {Get-AgentPadStatus $missingStatus.root} 'PAD_SELECTOR' 'Status resolver rejects an unknown or missing status id'
+$badStatusName=New-PadResolverLayout; $badStatusName.status.Current.Name='Status: ready'
+Assert-Rejected {Get-AgentPadStatus $badStatusName.root} 'PAD_SELECTOR' 'Status resolver requires the observed Japanese accessible-name prefix'
+
+foreach($case in @(@{text='エラー リスト (12)';count=12;name='Japanese'},@{text='Errors list (7)';count=7;name='English'},@{text='3';count=3;name='legacy numeric'})) {
+    $errorLayout=New-PadResolverLayout -ErrorText $case.text
+    $errorState=Get-AgentPadErrorState $errorLayout.root $false $true
+    Assert-Case ($errorState.known -and $errorState.count -eq $case.count) ('Error resolver reads '+$case.name+' BAML count format')
+}
+$idleNoError=Get-AgentPadErrorState $resolverLayout.root $false $true
+Assert-Case ($idleNoError.known -and $idleNoError.count -eq 0) 'Absent error status is zero only for observed idle state'
+$partialStatusRoot=New-PadResolverElement 'Root' 'mock root' ([Windows.Automation.ControlType]::Window)
+$partialStatusBar=New-PadResolverElement 'DesignerStatusBar' 'status bar' ([Windows.Automation.ControlType]::StatusBar)
+$partialStatusBar.AddChild((New-PadResolverElement 'NormalStatusBarItem' 'normal status' ([Windows.Automation.ControlType]::Pane)))
+$partialStatusRoot.AddChild($partialStatusBar)
+Assert-Rejected {Get-AgentPadErrorState $partialStatusRoot $false $true} 'PAD_SELECTOR' 'Absent errors cannot infer zero without the exact supported status-bar layout'
+foreach($stateName in @('running','paused','stopping')) {
+    $unknownError=Get-AgentPadErrorState $resolverLayout.root ($stateName -eq 'running') $false
+    Assert-Case (-not $unknownError.known -and $unknownError.count -eq -1) ('Absent error status remains unknown while '+$stateName)
+}
+
+$snapshotLayout=New-PadResolverLayout
+$snapshot=Get-AgentPadSnapshot $snapshotLayout.root
+Assert-Case ($snapshot.idle -and $snapshot.editable -and -not $snapshot.can_run -and $snapshot.errors_known -and $snapshot.errors -eq 0 -and $snapshot.status -ceq 'ready') 'Full production snapshot accepts exact empty Main layout as idle and editable'
+Assert-Case ((Wait-AgentPadEditable $snapshotLayout.root ([IO.Path]::Combine([IO.Path]::GetTempPath(),'missing-pad-cancel')) -TimeoutSeconds 1).status -ceq 'ready') 'Editable wait accepts two settled supported ready samples'
+$badMain=New-PadResolverLayout -SelectedMain:$false
+Assert-Rejected {Get-AgentPadSnapshot $badMain.root} 'PAD_SUBFLOW' 'Full snapshot requires the only Main subflow to be selected'
+$twoMain=New-PadResolverLayout; $twoMain.tabs.AddChild((New-PadResolverElement 'OtherMainTab' 'Main' ([Windows.Automation.ControlType]::TabItem) $true $true $true))
+Assert-Rejected {Get-AgentPadSnapshot $twoMain.root} 'PAD_SUBFLOW' 'Full snapshot rejects multiple Main subflow tabs'
+$wrongWorkspace=New-PadResolverLayout -WorkspaceIsList:$false
+Assert-Rejected {Get-AgentPadSnapshot $wrongWorkspace.root} 'PAD_SELECTOR' 'Full snapshot rejects a workspace outside the observed List control type'
 
 # The modern title was independently observed on the real PAD designer. These
 # are pure title-contract checks, not live window/process discovery evidence.
@@ -63,6 +214,17 @@ foreach($title in @('無題 - 別フロー','無題* - 別フロー','無題 - P
 foreach($title in @('Untitled','Untitled - Power Automate','Untitled* - Power Automate')) {
     Assert-Case (-not (Test-AgentPadWindowTitle $title 'untitled')) 'Every legacy form requires exact flow-name case'
 }
+
+# These are the production state rules used after UIA has resolved the exact
+# observed controls.  An empty Main is editable even though PAD disables Run.
+$emptyState=New-AgentPadSnapshotState -StartEnabled $false -StopEnabled $false -SaveEnabled $true -Status 'ready' -ErrorCount 0 -ErrorsKnown $true
+Assert-Case ($emptyState.idle -and $emptyState.editable -and -not $emptyState.can_run -and -not $emptyState.ready) 'Empty ready Main is adoptable but cannot run'
+$savedState=New-AgentPadSnapshotState -StartEnabled $true -StopEnabled $false -SaveEnabled $true -Status 'saved' -ErrorCount 0 -ErrorsKnown $true
+Assert-Case ($savedState.idle -and $savedState.editable -and $savedState.can_run) 'Saved enabled flow is idle, editable, and runnable'
+$savingState=New-AgentPadSnapshotState -StartEnabled $true -StopEnabled $false -SaveEnabled $true -Status 'saving' -ErrorCount -1 -ErrorsKnown $false
+Assert-Case (-not $savingState.idle -and -not $savingState.editable -and -not $savingState.can_run -and -not $savingState.errors_known) 'Saving state is not treated as idle or zero-error'
+$runningState=New-AgentPadSnapshotState -StartEnabled $false -StopEnabled $true -SaveEnabled $true -Status 'running' -ErrorCount -1 -ErrorsKnown $false
+Assert-Case ($runningState.running -and -not $runningState.idle -and -not $runningState.errors_known) 'Running state retains unknown error count'
 
 # All test data remains under this repository, with a unique directory per run.
 $testBase=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '.tmp'))
@@ -234,14 +396,24 @@ try {
         $script:padClipboard='original clipboard';$script:padClipboardRestores=0
         $script:padKeys=New-Object 'Collections.Generic.List[string]'
         $script:padMockSnapshot=$null
+        $script:padStatusSequence=@()
+        $script:padCancelDuringSettle=$null
     }
     function Get-AgentPadWindow($Settings){$script:padWindowReads++;return [pscustomobject]@{Mock=$true}}
     function Get-AgentPadSnapshot($Window,[switch]$AllowErrors) {
         $script:padSnapshotReads++
-        $ready=$true;$errors=0
-        if($script:padScenario -eq 'idle-false' -or ($script:padScenario -eq 'before-paste-busy' -and $script:padSnapshotReads -eq 2) -or ($script:padScenario -eq 'before-run-busy' -and $script:padSnapshotReads -eq 4)){$ready=$false}
+        $status='ready';$idle=$true;$editable=$true;$canRun=$true;$errors=0;$errorsKnown=$true
+        if($script:padStatusSequence.Count -gt 0) {
+            $index=[Math]::Min($script:padSnapshotReads-1,$script:padStatusSequence.Count-1)
+            $status=[string]$script:padStatusSequence[$index]
+            if($status -in @('saving','parsing','checking','updating','publishing','repairing')) {$idle=$false;$editable=$false;$canRun=$false;$errors=-1;$errorsKnown=$false}
+            if($status -eq 'saved') {$idle=$true;$editable=$true;$canRun=$true}
+        }
+        if($script:padScenario -eq 'idle-false' -or ($script:padScenario -eq 'before-paste-busy' -and $script:padSnapshotReads -eq 2) -or ($script:padScenario -eq 'before-run-busy' -and $script:padSnapshotReads -eq 3)){$idle=$false;$editable=$false;$canRun=$false}
+        if($script:padScenario -eq 'run-disabled' -and $script:padSnapshotReads -eq 3){$canRun=$false}
         if($script:padScenario -eq 'runtime-error' -and $script:padRunInvocations -gt 0){$errors=1}
-        $script:padMockSnapshot=[pscustomobject]@{ready=$ready;running=$false;errors=$errors;window=$Window;workspace='mock-workspace';start='mock-start';stop='mock-stop';save='mock-save';status='Saved'}
+        if($script:padScenario -eq 'cancel-while-settling' -and $script:padSnapshotReads -eq 1 -and $script:padCancelDuringSettle){[IO.File]::WriteAllText($script:padCancelDuringSettle,'cancel',$script:AgentEncoding)}
+        $script:padMockSnapshot=[pscustomobject]@{ready=$canRun;idle=$idle;editable=$editable;can_run=$canRun;running=$false;errors=$errors;errors_known=$errorsKnown;window=$Window;workspace='mock-workspace';start='mock-start';stop='mock-stop';save='mock-save';status=$status}
         return $script:padMockSnapshot
     }
     function Set-AgentPadFocus($Window,$Workspace) {
@@ -268,6 +440,14 @@ try {
     function Wait-AgentPadSaved($Window,[string]$CancelPath) {
         if($script:padScenario -eq 'save-unknown'){throw 'PAD_SAVE_UNKNOWN: mocked unconfirmed save.'}
         if($script:padScenario -eq 'cancel-during-save'){throw 'CANCELLED: mocked stop during save.'}
+        return $script:padMockSnapshot
+    }
+    function Wait-AgentPadEditable($Window,[string]$CancelPath) {
+        if($script:padScenario -eq 'settle-unknown'){throw 'PAD_SETUP: mocked state did not settle.'}
+        return $script:padMockSnapshot
+    }
+    function Wait-AgentPadSaveBaseline($Window,[string]$CancelPath) {
+        if($script:padScenario -eq 'save-stale'){throw 'PAD_SAVE_UNKNOWN: mocked stale saved state.'}
         return $script:padMockSnapshot
     }
     function Invoke-AgentPadControl($Element) {
@@ -310,9 +490,11 @@ try {
         @{scenario='user-edited';prefix='PAD_OWNERSHIP';saves=0},
         @{scenario='replace-failure';prefix='PAD_REPLACE';saves=0},
         @{scenario='paste-mismatch';prefix='PAD_PASTE_MISMATCH';saves=0},
+        @{scenario='save-stale';prefix='PAD_SAVE_UNKNOWN';saves=0},
         @{scenario='save-unknown';prefix='PAD_SAVE_UNKNOWN';saves=1},
         @{scenario='save-mismatch';prefix='PAD_SAVE_MISMATCH';saves=1},
-        @{scenario='before-run-busy';prefix='PAD_BUSY';saves=1}
+        @{scenario='before-run-busy';prefix='PAD_SETUP';saves=1},
+        @{scenario='run-disabled';prefix='PAD_SETUP';saves=1}
     )
     foreach($case in $mockCases) {
         Reset-PadMock $case.scenario
@@ -419,7 +601,7 @@ public sealed class PadTestMutexHolder : IDisposable {
     }
 
     # Exercise real readback/save helpers against the same narrow mock boundary.
-    foreach($name in @('Get-AgentPadCode','Wait-AgentPadSaved')) {
+    foreach($name in @('Get-AgentPadCode','Wait-AgentPadEditable','Wait-AgentPadSaveBaseline','Wait-AgentPadSaved')) {
         if(-not $definitions.ContainsKey($name)){throw ('Missing production function: '+$name)}
         . ([scriptblock]::Create($definitions[$name].Extent.Text))
     }
@@ -432,8 +614,34 @@ public sealed class PadTestMutexHolder : IDisposable {
     Assert-Case ((Get-AgentPadCode $snapshot) -ceq $branch) 'Readback helper preserves copied Robin exactly through mocked clipboard'
     Assert-Case (($script:padKeys -join ',') -ceq '^a,^c') 'Readback helper selects and copies exactly once'
     Assert-Case ($script:AgentPadClipboardValue -ceq $branch) 'Readback helper records its own clipboard value for conditional restoration'
+    Reset-PadMock 'settle-after-paste'
+    $script:padStatusSequence=@('parsing','checking','ready')
+    Assert-Case ((Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel).status -ceq 'ready') 'Editable wait observes parse/check transient states until ready'
+    Assert-Case ($script:padSnapshotReads -eq 4) 'Editable wait requires two consecutive ready samples after parse/check transients'
+    Reset-PadMock 'settle-after-paste'
+    $script:padStatusSequence=@('ready','parsing','checking','ready')
+    Assert-Case ((Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel).status -ceq 'ready') 'Editable wait does not accept an early Ready before parsing resumes'
+    Assert-Case ($script:padSnapshotReads -eq 5) 'Early Ready is reset by parsing and cannot authorize readback'
+    Reset-PadMock 'settle-after-paste'
+    $script:padStatusSequence=@('parsing')
+    Assert-Rejected {Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel -TimeoutSeconds 0} 'PAD_SETUP' 'Editable wait fails closed when parsing cannot settle'
+    Reset-PadMock 'cancel-while-settling'
+    $script:padStatusSequence=@('parsing')
+    $script:padCancelDuringSettle=$cancel
+    Assert-Rejected {Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel} 'CANCELLED' 'Editable wait observes cancellation while settling'
+    [IO.File]::Delete($cancel)
     Reset-PadMock 'save-observed'
-    Assert-Case ((Wait-AgentPadSaved ([pscustomobject]@{Mock=$true}) $cancel).status -ceq 'Saved') 'Save helper accepts an observed ready/saved snapshot'
+    $script:padStatusSequence=@('ready')
+    Assert-Case ((Wait-AgentPadSaveBaseline ([pscustomobject]@{Mock=$true}) $cancel).status -ceq 'ready') 'Save helper requires a fresh ready baseline before Invoke'
+    Reset-PadMock 'save-observed'
+    $script:padStatusSequence=@('saving','saved')
+    Assert-Case ((Wait-AgentPadSaved ([pscustomobject]@{Mock=$true}) $cancel).status -ceq 'saved') 'Save helper accepts only an observed saving-to-saved transition'
+    Reset-PadMock 'save-observed'
+    $script:padStatusSequence=@('saved')
+    Assert-Rejected {Wait-AgentPadSaveBaseline ([pscustomobject]@{Mock=$true}) $cancel -TimeoutSeconds 0} 'PAD_SAVE_UNKNOWN' 'Stale Saved state cannot authorize this save'
+    Reset-PadMock 'save-observed'
+    $script:padStatusSequence=@('saved')
+    Assert-Rejected {Wait-AgentPadSaved ([pscustomobject]@{Mock=$true}) $cancel -TimeoutSeconds 0} 'PAD_SAVE_UNKNOWN' 'Saved without a fresh saving state cannot authorize this save'
     [IO.File]::WriteAllText($cancel,'cancel',$script:AgentEncoding)
     $readsBeforeCancel=$script:padSnapshotReads
     Assert-Rejected {Wait-AgentPadSaved ([pscustomobject]@{Mock=$true}) $cancel} 'CANCELLED' 'Save helper observes cancellation before polling UI'
