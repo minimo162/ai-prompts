@@ -15,7 +15,7 @@
 | 検証 | 証拠と範囲 |
 |---|---|
 | Windows PowerShell 5.1 契約検証 | `tests/Test-App.ps1` **137 PASS**。Copilot/PADを模擬し、要求・結果・観測・再計画・パス境界・同期と実計画/AiCallプロンプトを検査する。実サービスの証拠ではない。 |
-| Copilotアダプター | `tests/Test-Copilot.ps1` **154 PASS**。CDP応答を模擬し、全文・ID・終端・生成終了・排他・ジョブ分離・異常分類、起動タブの終了と他タブの保持、送信前busy待機、実送信本文の2行契約と入力・送信の再試行禁止を検査する。本番Robin検証器で受理したReadText/WriteTextフローと約6万文字の長文をJSON復号し、原文との完全一致も確認。隔離Edgeの `tests/Test-CopilotDom.cjs` は **219 PASS**。実M365の翻訳診断では送信1回から厳格な応答取得・再読取り一致まで成功した。固定PADの正常完走とは分けて下記に記録する。 |
+| Copilotアダプター | `tests/Test-Copilot.ps1` **170 PASS**。CDP応答を模擬し、全文・ID・終端・生成終了・排他・ジョブ分離・異常分類、起動タブの終了と他タブの保持、送信前busy待機、実送信本文の2行契約と入力・送信の再試行禁止を検査する。本番Robin検証器で受理したReadText/WriteTextフローと約6万文字の長文をJSON復号し、原文との完全一致も確認。隔離Edgeの `tests/Test-CopilotDom.cjs` は **366 PASS**。実M365の翻訳診断では送信1回から厳格な応答取得・再読取り一致まで成功した。固定PADの正常完走とは分けて下記に記録する。 |
 | PADアダプター | `tests/Test-Pad.ps1` **302 PASS**。UI/クリップボード境界を模擬し、全文一致・所有権・失敗時の旧フロー実行拒否・結果帰属を検査する。状態別のUI構造、20種類の状態ID、保存・実行・中止、実ファイルに生成した2件のAiCallテンプレートとRobinの検証も本番関数で確認。実機の固定A/Bは下記に分けて記録する。 |
 | localhost HTTP | `tests/Test-Http.ps1` PASS。実App.ps1プロセスでHTML/状態、トークン/Host/Origin拒否、不完全本文の期限、再接続、設定保持、重複回答・古い質問への回答拒否、版の引き継ぎ、停止を確認。 |
 | 実ブラウザー | `tests/Test-Ui.cjs` 15 PASS。実Edgeの1280×900・390×844で入力→未接続エラー→再表示、トークン除去、同ジョブ再接続、横溢れ・JavaScriptエラーなしを確認。質問ID・Copilotジョブ分離変更を含む不変版 `a00bca7` でも再実行し、両幅のPNGを目視確認した。証跡は `.work/ui-after-question-fix-66edd1690c8a4978aae727d6e5a31807/`。隔離サーバーは専用の終了APIで停止した。 |
@@ -30,10 +30,10 @@
 
 | ゲート | 状態 | 残る実機確認 |
 |---|---|---|
-| 0: 配布・起動 | 実共有UNCからの初回・更新は合格 | 共有切断、利用者環境での再起動・UI停止 |
-| 1: 固定PADからAiCall | 第5回PADは終端照合で停止。修正後の単独実Copilot翻訳診断は合格 | 固定PADへの正常な結果受渡し、分類分岐、2回以上の直列、拒否/空/期限/中止 |
+| 0: 配布・起動 | 実共有UNCからの初回・更新、欠落UNC時の警告付きローカル起動は合格 | 実共有の切断、利用者環境での再起動・UI停止 |
+| 1: 固定PADからAiCall | 正常系合格。実PADから翻訳→分類の直列2回、結果受渡し、review分岐と出力を確認 | 拒否/空/期限/中止の実機異常系 |
 | 2: AIなしのA/B差し替え | 正常系A/B合格、異常系は未完了 | 保存・貼り付け失敗などを意図的に起こした場合の旧フロー実行防止 |
-| 3: 生成Robin全文取得 | 未検証 | 実M365で長文/日本語/引用符/改行/空白/バックスラッシュ/%、過去回答・途中停止 |
+| 3: 生成Robin全文取得 | 初回短文は不正なJSON escapeで停止。コードブロック診断では本文の正確な保持を確認 | 実M365で生成Robinの短文/長文の完全取得、過去回答・途中停止 |
 | 4: 生成AiCallフロー | 未検証 | 読取→AI→分岐→書出しを同じPADで完走 |
 | 5: 2〜3往復 | 未検証 | 実結果本文に応じた次の手順、ACT/DONE/ASK_USER/BLOCKED、最終表示 |
 | 6: 別利用者・別PC | 未検証 | 開発環境に依存しない導入・更新・認証・結果確認 |
@@ -157,7 +157,24 @@ Desktop Explorer経由で共有CMDを1回起動した結果、終了コード0�
 
 新しい要求IDによる翻訳診断 `bc551ffcb5844e5182e607d3cd022a10` は、通常Explorer環境で実Copilot呼出し1回から正常に返却された。JSONと実LFと終端を含む厳密な2行、要求/ジョブ/run/AiCall ID、success・入出力各1件、取得JSONと再読取り2回の完全一致がすべて合格した（`gate1/two-line-response-probes/bc551ffcb5844e5182e607d3cd022a10/result.json`）。実行は2026-09-05 20:24:38〜20:25:14 UTC、既存115ファイル・既存8タブ・通常サーバーは保持され、再送/再試行/PAD操作は0回。過去のunknownは変更していない。適用したApp SHA-256は `32958784b503b9316c5b61d68bc1008f879f527242033e95263e7c1e15d97b00`。この診断はCopilotアダプターの実経路の証拠であり、Gate 1の固定PAD完走ではない。
 
-Gate 0の切断、Gate 1/2の異常系、Gate 3〜6の実機確認も残っている。
+修正版をコミット `b9730e5`、release `0.1.0-f771e1b04ff57d7aa960c58e14b5741eb1ce70b8d4e13a529e91ea0167126f97` として専用共有へ公開した（`gate0/publish-latest/d16a2ab3cb364b4fa193264c0e1d7871/result.json`）。Appの原子的置換1回、旧3ファイルのバックアップ、共有のローカル側・UNC側の新3ファイル一致、共有・NTFS ACLの不変を確認した。通常Explorerからの共有CMD更新も1回で終了コード0となり、新キャッシュ・サーバーPID32352/port57702の版・引数・設定・HTTP応答と旧サーバー終了を確認した（`gate0/normal-updates/5a91f82533024bcc930018b8969c4316/result.json`）。通常63ファイル、private51ファイル、過去のowner archive2件と第5回cleanup証拠は不変だった。
+
+第6回の固定PADは新規ジョブ `1256aa873d27415f868fbec1cad6e0d6` で1回実行し、正常完走した（`gate1/sessions/8ead1dc2a51742e6b700a84f57127e20/summary.json`）。開始・終了マーカー、提出コードと所有記録、宣言2成果物と実際の2成果物、翻訳と分類のsuccess、英訳の同一フローへの受渡し、review分岐がすべて合格した。英訳成果物は `This contract contains notes that require human review.`、分類分岐成果物は `review` で、原文と指定分類条件に合っている。翻訳の意味を自動的に保証した記録ではなく、本文を別途読んで確認した。
+
+この実行は2026-09-05 20:44:36〜20:45:44 UTC、外側の実行記録もaccepted=true/status=passedである（`gate1/normal-executions/b33c495787414bf2a810613900b67a04/result.json`）。通常サーバーは同じreleaseのPID25544/port53708として復旧した。通常の旧62ファイル、private51（旧45を含む）、旧owner archive2件、既存9タブを保持し、直前ownerは別ファイルへ保存した。元の失敗・unknownと成果物を上書きせず、実PADで正常な直列AiCallと結果分岐を確認した最初の合格である。拒否・空・タイムアウト・中止の実機異常系はこの合格に含めない。
+
+Gate 3の初回 `df207bbf633e42f5abb4288b77030ee5` は、短文要求1回の送信後、`RESPONSE_INVALID` によりunknownで停止した（`gate3/sessions/df207bbf633e42f5abb4288b77030ee5/result.json`）。長文要求は未送信、PAD/再送/タブ終了は0回。通常84ファイルと既存10タブを保持し、補助の `private-after.json` でも明示的private Homeの51ファイルの不変を確認した。
+
+読み取り専用の事後観測では、assistant1件・入力0文字・生成終了、本文1336文字は可視の単一テキストノードと完全一致し、正しい実LFと終端を含む2行だった。しかしJSONのartifacts内に不正な `\U` escapeがあり、厳格な構文検証を通らない（`copilot-posthoc-e93b9021a31e4df9a5f2a91ecefddc05.json`）。生成元の誤りか表示前のMarkdown処理による変換かは、レンダリング後のDOMだけでは区別できない。バックスラッシュの補完やJSON修復は行っていない。
+
+応答コピーの診断 `c05c30524ee94ecf8f46e0dd35ebe077` は2026-09-05 21:17:47〜21:17:54 UTCに1回だけコピーした（`gate3/copy-probe/c05c30524ee94ecf8f46e0dd35ebe077/result.json`）。取得値1334文字は表示用innerTextと完全一致し、実LFが0個、二重空白も縮約され、JSONも不正のままだった。元のクリップボードは全形式の対応データをメモリ内へ独立退避し、復元後の形式・型・内容を照合して復元成功を確認した。既存150ファイルと11タブを保持し、provider送信/PAD/権限変更は0回。この結果も生成元の原文を示さず、原因の判定はinconclusiveである。次は単一textコードブロック内のJSON＋終端を用いる新規の短文診断を準備する。製品への採用や長文取得の成功は未確認。
+
+コードブロックの新規診断 `a7d40210341141d6876928f3e6f60147` は、プロンプト3文字列だけを変更したdraft `8036c7548c47ac6088cd226e3233c0ead604de123645ee7865ea8f714a07ecc3` で実送信1回を行った。現readerは行番号・言語ラベルを含め、表示オプションの閉じたメニューをcollapsedと判定するため、元の実行はRESPONSE_INVALID/unknownで保存した（`gate3/fenced-diagnostic/sessions/a7d40210341141d6876928f3e6f60147/result.json`）。実行後の2回のDOM観測は64ノードの全構造と全textnodeが一致し、本文はdata-line-indexの0・1として存在した。各行の本文を変更せず論理行境界で結合した追補検証では、未変更の厳格JSON/Planner検証と65文字の復号値完全一致がnative PS5/STAでも合格した（`posthoc-decoded-review-native.json`）。日本語、引用符、apostrophe、Windowsパス、literal backslash-n、実LF、percent、Markdown記号、前後2空白が保持された。通常/private/旧証拠169ファイルと既存11タブを保持し、PAD/再送/clipboard/latest変更は0回。これは短い搬送用文字列の追補検証であり、製品readerの成功や生成Robinの長文合格ではない。
+
+実測したコードブロック構造に限定する本文取得を実装し、計画・AiCall・送信時の共通指示を同じ形式に揃えた。既知の本文2行の文字だけを保持し、余分な要素・行・隠れた本文・未確認の構造を拒否する。表示オプションの閉じたメニューと本文の折り畳みを区別し、厳格JSON/終端/ID検証は変更していない。native PS5/STAの基本137・Copilot170、隔離Edge DOM366項目が合格した。実際の既存応答でも修正版App `8617c3aefb1d2b171da43ac1f79e4b9b5a65d75c6fb352dee76a070411ff0a1e` を読み取り専用で2回使用し、source_kind=fenced_plaintext/collapsed=false、本文ハッシュ一致、65文字の復号値完全一致を確認した（`gate3/fenced-diagnostic/sessions/a7d40210341141d6876928f3e6f60147/live-product-reader-37fc73617ada423ea40c4fa4774b65f0.json`）。この照合での送信・入力・clipboard・PAD操作は0回。旧unknown結果は保持し、生成Robinの新規短文・長文取得は別の検証として残す。
+Gate 0の追補 `d2dd3aa485384c29b884df9be83ff33c` は、実共有を読み取って作った隔離cacheに対し、未作成UNC子パスをSourcePathとして実AppのBootstrapを1回起動し、警告・新規serverの起動と状態確認・所有確認後の正常終了まで合格した（`gate0/outage-followups/d2dd3aa485384c29b884df9be83ff33c/result.json`）。2026-09-05 21:35:44〜21:35:51 UTC、Bootstrap exit 0、試験server PID13688/port56786は終了済み。通常server PID25544/port53708、既存158ファイル、共有3ファイル、cache4ファイルは保持した。実共有そのものの停止やCMD起動を行った試験ではなく、existing_share_outage=false/actual_cmd_invocations=0を記録している。旧outage失敗結果は変更していない。
+
+Gate 0の実共有切断、Gate 1/2の異常系、Gate 3〜6の実機確認も残っている。
 
 ## 再現コマンド
 

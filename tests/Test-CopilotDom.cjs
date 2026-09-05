@@ -216,7 +216,7 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
     check(response.raw.innerText, responseJson + ' ' + marker, 'Normal white-space really collapses the response LF to a space');
     check(response.raw.textContent, responseText, 'The measured response textContent retains its LF');
     check(response.raw.nodeValue, responseText, 'The measured paragraph has the complete original text node');
-    check(response.state.assistants, [{ key: 'reply-fixture', text: responseText, collapsed: false }], 'Production snapshot returns the original response node without guessing a marker boundary');
+    check(response.state.assistants, [{ key: 'reply-fixture', text: responseText, collapsed: false, source_kind: 'rendered' }], 'Production snapshot returns the original response node without guessing a marker boundary');
 
     for (const value of [
       responseJson,
@@ -229,7 +229,7 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
     ]) {
       response = await renderReply(reply(value));
       check(response.raw.nodeValue, value, 'Fixture retains the complete response text node ' + JSON.stringify(value));
-      check(response.state.assistants, [{ key: 'reply-fixture', text: value, collapsed: false }], 'Preserve every original response character ' + JSON.stringify(value));
+      check(response.state.assistants, [{ key: 'reply-fixture', text: value, collapsed: false, source_kind: 'rendered' }], 'Preserve every original response character ' + JSON.stringify(value));
     }
 
     const measuredReply = reply(responseText);
@@ -304,12 +304,12 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
     response = await renderReply(measuredReply.replace('data-testid="markdown-reply"', 'data-testid="unrelated"'));
     check(response.state.assistants, [], 'Do not select unrelated content as an assistant');
     response = await renderReply('<article data-message-author-role="assistant">outer-prefix' + measuredReply + 'outer-suffix</article>');
-    check(response.state.assistants, [{ key: 'reply-fixture', text: responseText, collapsed: false }], 'Nested supported assistant selectors keep only their leaf response');
+    check(response.state.assistants, [{ key: 'reply-fixture', text: responseText, collapsed: false, source_kind: 'rendered' }], 'Nested supported assistant selectors keep only their leaf response');
     const priorText = 'Earlier response\nAGENT_END_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
     response = await renderReply(reply(priorText, 'prior-reply') + reply(responseText, 'current-reply'));
     check(response.state.assistants, [
-      { key: 'prior-reply', text: priorText, collapsed: false },
-      { key: 'current-reply', text: responseText, collapsed: false }
+      { key: 'prior-reply', text: priorText, collapsed: false, source_kind: 'rendered' },
+      { key: 'current-reply', text: responseText, collapsed: false, source_kind: 'rendered' }
     ], 'Keep separate assistant turns and their exact texts in document order');
     for (const [label, control, collapsed] of [
       ['collapsed button', '<button aria-expanded="false">Expand</button>', true],
@@ -317,8 +317,158 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
       ['expanded button', '<button aria-expanded="true">Collapse</button>', false]
     ]) {
       response = await renderReply(measuredReply.replace(/<\/div>$/, control + '</div>'));
-      check(response.state.assistants, [{ key: 'reply-fixture', text: response.raw.innerText, collapsed }], 'Preserve production collapsed detection and fallback text: ' + label);
+      check(response.state.assistants, [{ key: 'reply-fixture', text: response.raw.innerText, collapsed, source_kind: 'rendered' }], 'Preserve production collapsed detection and fallback text: ' + label);
     }
+
+    // Semantic reproduction of the observed 64-node code block (a7d402...,
+    // observation-1). Classes, generated button IDs, icon paths and geometry
+    // deliberately differ from the live page. No .work evidence is a test input.
+    const icon = (size = '20', kind = 'icon-regular') => '<svg class="' + kind + '" fill="currentColor" aria-hidden="true" data-fui-icon="" width="' + size + '" height="' + size + '" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h3v3H1z" fill="currentColor"></path></svg>';
+    const pairedIcons = size => icon(size, 'icon-filled') + icon(size);
+    const item = markup => '<div class="header-item" data-overflow-item="">' + markup + '</div>';
+    const fencedReply = (line0, line1 = marker, key = 'fenced-fixture') =>
+      '<div dir="auto" aria-hidden="false" class="fenced-reply" data-testid="markdown-reply" data-message-id="' + key + '" data-message-type="Chat">' +
+      '<div class="fenced-wrapper"><div class="fenced-inner"><div role="group" aria-label="コードのプレビュー" tabindex="0" class="fenced-preview"><div>' +
+      '<div tabindex="-1" class="scriptor-component-code-block fixture-code scriptor-codeblock-virtualized">' +
+      '<div class="code-live"><div aria-live="assertive" class="live-assertive"></div><div aria-live="polite" class="live-polite"></div></div>' +
+      '<div class="code-header"><div class="header-flex"><div class="header-block"><div class="fui-Overflow header-controls">' +
+      item('<button type="button" id="synthetic-goto" role="button" aria-label="行に移動  (Ctrl+G)" class="goto-button"><span class="button-icon">' + pairedIcons('1em') + '</span></button>') +
+      item('<button type="button" id="synthetic-copy" role="button" aria-label="コードをコピー" class="copy-button"><span class="button-icon">' + pairedIcons('20') + '</span></button>') +
+      item('<button type="button" role="button" class="display-menu" tabindex="0" aria-haspopup="menu" aria-expanded="false" id="synthetic-menu" aria-label="表示オプション">' + pairedIcons('20') + '<span class="menu-chevron">' + icon('1em') + '</span></button>') +
+      item('<div id="language-badge" aria-label="Plain Text" class="fui-Badge language-badge"><span class="badge-icon">' + icon('20') + '</span><span class="badge-label"><span class="badge-text">Plain Text</span></span></div>') +
+      '<div class="header-spacer"></div></div></div></div></div>' +
+      '<div class="code-body"><div class="body-scroll" style="height: 100%; width: 100%; flex-grow: 1;"><div class="code-find" data-virtualized-code-find-root="true">' +
+      '<div class="body-spacer"></div><div class="code-editor" tabindex="0" role="textbox" aria-readonly="true" aria-multiline="true" aria-label="コード エディター">' +
+      '<div class="gutter">1</div><div data-line-index="0" class="code-line">' + escapeText(line0) + '</div><div class="gutter">2</div><div data-line-index="1" class="code-line">' + escapeText(line1) + '</div></div>' +
+      '<div class="more-holder"><button type="button" role="button" aria-label="その他の行を表示する" class="more-button"><span class="button-icon">' + icon('1em') + '</span>その他の行を表示する</button></div>' +
+      '</div></div></div></div></div></div></div></div></div>';
+    const fencedCss = `
+      #fixture .fenced-reply,#fixture .fenced-reply *{white-space:normal;opacity:1;content-visibility:visible}
+      #fixture .fenced-reply{display:block;width:640px}
+      .fenced-wrapper,.fixture-code,.code-body,.body-scroll,.code-find{display:flex;flex-direction:column}
+      .fenced-inner,.fenced-preview,.code-header,.header-block{display:block}
+      .header-flex,.header-controls,.header-item,.header-spacer,.button-icon,.badge-icon,.badge-label,.language-badge{display:flex}
+      .header-controls{align-items:center;justify-content:flex-end;min-height:36px}
+      .goto-button,.copy-button,.display-menu{display:flex;align-items:center;height:30px}
+      .menu-chevron,.badge-text{display:block}
+      .fenced-reply .icon-filled{display:none}.fenced-reply .icon-regular{display:block}
+      .fenced-reply .menu-chevron>svg{display:inline}
+      .code-live,.live-assertive,.live-polite,.body-spacer{display:block}
+      .body-scroll{overflow:auto}.code-find{overflow:hidden}
+      .code-editor{display:grid;grid-template-columns:24px minmax(0,1fr);overflow:hidden;max-height:300px}
+      .gutter{display:block}#fixture .fenced-reply .code-line{display:block;white-space:pre-wrap;overflow-wrap:anywhere}
+      .more-holder{display:none}.more-button{display:inline-flex;overflow:hidden}
+    `;
+    const fixtureMessage = '  日本語 "引用" O\'Brien C:\\path\\raw literal\\n %FileContents% *_`\r\n末尾\\  ';
+    const fencedJson = JSON.stringify({ request_id: requestId, state: 'BLOCKED', message: fixtureMessage, robin: '', artifacts: [] });
+    const fencedPayload = fencedJson + '\n' + marker;
+    const renderFenced = async (markup = fencedReply(fencedJson), setup, css = '') => renderReply(markup, setup, fencedCss + css);
+    response = await renderFenced();
+    const fencedShape = await page.locator('.fenced-reply').evaluate(root => {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_ALL);
+      let count = 1; while (walker.nextNode()) count++;
+      const editor = root.querySelector('[aria-label="コード エディター"]');
+      return { count, editorChildren: [...editor.childNodes].map(node => [node.nodeName, node.getAttribute('data-line-index'), node.childNodes.length, node.firstChild.nodeType]), lines: [...editor.querySelectorAll('[data-line-index]')].map(node => ({ display: getComputedStyle(node).display, whiteSpace: getComputedStyle(node).whiteSpace, value: node.firstChild.nodeValue })), menuExpanded: root.querySelector('[aria-label="表示オプション"]').getAttribute('aria-expanded'), moreRects: root.querySelector('[aria-label="その他の行を表示する"]').getClientRects().length };
+    });
+    check(fencedShape.count, 64, 'Rendered fixture retains the measured complete 64-node topology');
+    check(fencedShape.editorChildren, [['DIV', null, 1, 3], ['DIV', '0', 1, 3], ['DIV', null, 1, 3], ['DIV', '1', 1, 3]], 'Editor has alternating real gutters and two direct text-only logical rows');
+    check(fencedShape.lines, [{ display: 'block', whiteSpace: 'pre-wrap', value: fencedJson }, { display: 'block', whiteSpace: 'pre-wrap', value: marker }], 'Rendered payload rows preserve exact node values and measured white-space');
+    check({ expanded: fencedShape.menuExpanded, moreRects: fencedShape.moreRects }, { expanded: 'false', moreRects: 0 }, 'Closed display menu is distinct from an effectively hidden more-lines control');
+    check(response.state.assistants, [{ key: 'fenced-fixture', text: fencedPayload, collapsed: false, source_kind: 'fenced_plaintext' }], 'Recognized code block returns only its two payload rows, without badge, gutters or hidden control text');
+    check(JSON.parse(response.state.assistants[0].text.split('\n')[0]).message, fixtureMessage, 'Decoded fenced text preserves Japanese, quotes, apostrophe, path, trailing backslash, outer spaces, literal escape, CRLF, percent and backtick');
+    check(response.state.assistants[0].text.split('\n').length, 2, 'An encoded CRLF inside JSON never becomes extra transport rows');
+
+    response = await renderFenced(undefined, () => {
+      for (const element of document.querySelectorAll('.fenced-reply [class]')) element.classList.add('different-generated-token');
+      for (const element of document.querySelectorAll('.fenced-reply button[id]')) element.id += '-changed';
+      for (const element of document.querySelectorAll('.fenced-reply path')) element.setAttribute('d', 'M2 2h4v4H2z');
+    });
+    check(response.state.assistants[0], { key: 'fenced-fixture', text: fencedPayload, collapsed: false, source_kind: 'fenced_plaintext' }, 'Generated class, control ID and SVG path values do not define payload ownership');
+    response = await renderFenced(fencedReply(fencedJson) + '<button aria-label="Other display options" aria-haspopup="menu" aria-expanded="false">Options</button>');
+    check(response.state.assistants[0].source_kind, 'fenced_plaintext', 'An unrelated closed display-options menu outside the assistant does not imply folded code');
+
+    for (const [label, setup, css, wrap] of [
+      ['missing first index', () => document.querySelector('[data-line-index="0"]').removeAttribute('data-line-index')],
+      ['duplicate index', () => document.querySelector('[data-line-index="1"]').setAttribute('data-line-index', '0')],
+      ['reversed indices', () => { const rows = document.querySelectorAll('[data-line-index]'); rows[0].setAttribute('data-line-index', '1'); rows[1].setAttribute('data-line-index', '0'); }],
+      ['noncanonical zero index', () => document.querySelector('[data-line-index="0"]').setAttribute('data-line-index', '00')],
+      ['missing logical row', () => document.querySelector('[data-line-index="1"]').remove()],
+      ['unexpected second index', () => document.querySelector('[data-line-index="1"]').setAttribute('data-line-index', '2')],
+      ['extra indexed row', () => document.querySelector('.code-editor').appendChild(document.querySelector('[data-line-index="1"]').cloneNode(true))],
+      ['reordered direct rows', () => { const editor = document.querySelector('.code-editor'); editor.insertBefore(editor.lastChild, editor.firstChild); }],
+      ['wrong first gutter', () => { document.querySelector('.gutter').firstChild.nodeValue = '01'; }],
+      ['wrong second gutter', () => { document.querySelectorAll('.gutter')[1].firstChild.nodeValue = '3'; }],
+      ['indexed gutter', () => document.querySelector('.gutter').setAttribute('data-line-index', '0')],
+      ['wrapped payload span', () => { const row = document.querySelector('[data-line-index="0"]'); const span = document.createElement('span'); span.textContent = row.textContent; row.replaceChildren(span); }],
+      ['split payload text nodes', () => document.querySelector('[data-line-index="0"]').firstChild.splitText(20)],
+      ['payload comment', () => document.querySelector('[data-line-index="0"]').appendChild(document.createComment('extra'))],
+      ['payload empty text node', () => document.querySelector('[data-line-index="0"]').appendChild(document.createTextNode(''))],
+      ['editor comment', () => document.querySelector('.code-editor').appendChild(document.createComment('extra'))],
+      ['editor blank node', () => document.querySelector('.code-editor').appendChild(document.createTextNode(' '))],
+      ['unknown row attribute', () => document.querySelector('[data-line-index="0"]').setAttribute('title', 'unknown')],
+      ['actual LF in logical row', () => { document.querySelector('[data-line-index="0"]').firstChild.nodeValue += '\n'; }],
+      ['actual CR in logical row', () => { document.querySelector('[data-line-index="0"]').firstChild.nodeValue += '\r'; }],
+      ['empty logical row', () => { document.querySelector('[data-line-index="0"]').firstChild.nodeValue = ''; }],
+      ['second code block', () => { const code = document.querySelector('.fixture-code'); code.parentElement.appendChild(code.cloneNode(true)); }],
+      ['second editor', () => { const editor = document.querySelector('.code-editor'); editor.parentElement.appendChild(editor.cloneNode(true)); }],
+      ['plain text beside code', () => document.querySelector('.fenced-inner').appendChild(document.createTextNode('extra explanation'))],
+      ['root comment', () => document.querySelector('.fenced-reply').appendChild(document.createComment('extra'))],
+      ['root empty node', () => document.querySelector('.fenced-reply').appendChild(document.createTextNode(''))],
+      ['nonempty live region', () => { document.querySelector('[aria-live="polite"]').textContent = 'extra model text'; }],
+      ['nonempty body spacer', () => document.querySelector('.body-spacer').appendChild(document.createTextNode(''))],
+      ['header unknown text', () => document.querySelector('.header-spacer').appendChild(document.createTextNode('extra explanation'))],
+      ['header hidden text', () => { const hidden = document.createElement('span'); hidden.hidden = true; hidden.textContent = 'hidden text'; document.querySelector('.header-spacer').appendChild(hidden); }],
+      ['header duplicate known text', () => document.querySelector('.header-spacer').appendChild(document.createTextNode('Plain Text'))],
+      ['header unknown control', () => document.querySelector('.header-controls').appendChild(document.createElement('button'))],
+      ['badge unknown markup', () => document.querySelector('.badge-text').appendChild(document.createElement('span'))],
+      ['different language badge', () => { document.querySelector('.badge-text').firstChild.nodeValue = 'JavaScript'; }],
+      ['extra icon text', () => document.querySelector('.copy-button path').appendChild(document.createTextNode('payload'))],
+      ['unknown menu owner', () => document.querySelector('.display-menu').setAttribute('aria-label', 'Other menu')],
+      ['extra body collapsed signal', () => document.querySelector('.code-body').setAttribute('data-state', 'collapsed')],
+      ['visible more-lines holder', null, '.more-holder{display:block!important}'],
+      ['disabled visible more-lines', () => { document.querySelector('.more-button').disabled = true; }, '.more-holder{display:block!important}'],
+      ['partially visible more-lines', null, '.more-holder{display:block!important;opacity:.5!important}'],
+      ['body content-visibility auto', null, '.code-body{content-visibility:auto!important}'],
+      ['editor content-visibility hidden', null, '.code-editor{content-visibility:hidden!important}'],
+      ['line content-visibility auto', null, '.code-line{content-visibility:auto!important}'],
+      ['line visibility hidden', null, '.code-line{visibility:hidden!important}'],
+      ['line opacity partial', null, '.code-line{opacity:.5!important}'],
+      ['line white-space normal', null, '#fixture .fenced-reply .code-line{white-space:normal!important}'],
+      ['line display grid', null, '#fixture .fenced-reply .code-line{display:grid!important}'],
+      ['hidden ancestor', null, '', '<section class="fenced-outer" hidden>'],
+      ['aria-hidden ancestor', null, '', '<section class="fenced-outer" aria-hidden="true">'],
+      ['display-none ancestor', null, '.fenced-outer{display:none!important}', '<section class="fenced-outer">'],
+      ['hidden ancestor with visible descendants', null, '.fenced-outer{visibility:hidden!important}.fenced-reply{visibility:visible!important}', '<section class="fenced-outer">'],
+      ['zero-opacity ancestor', null, '.fenced-outer{opacity:0!important}', '<section class="fenced-outer">'],
+      ['partial-opacity ancestor', null, '.fenced-outer{opacity:.5!important}', '<section class="fenced-outer">'],
+      ['auto-content ancestor', null, '.fenced-outer{content-visibility:auto!important}', '<section class="fenced-outer">'],
+      ['hidden-content ancestor', null, '.fenced-outer{content-visibility:hidden!important}', '<section class="fenced-outer">']
+    ]) {
+      response = await renderFenced((wrap || '') + fencedReply(fencedJson) + (wrap ? '</section>' : ''), setup, css);
+      check(response.state.assistants.length, 1, 'Keep the diagnostic assistant without promoting an ineligible code shape: ' + label);
+      check(response.state.assistants[0].source_kind, 'rendered', 'Never expose ineligible content as fenced payload: ' + label);
+    }
+
+    for (const selector of ['.fenced-reply', '.fixture-code', '.code-body', '.code-editor']) {
+      for (const declaration of ['display:none', 'visibility:hidden', 'opacity:0', 'opacity:.5', 'content-visibility:auto', 'content-visibility:hidden']) {
+        response = await renderFenced(undefined, null, `${selector}{${declaration}!important}`);
+        check(response.state.assistants[0].source_kind, 'rendered', 'Reject an ineffective or unmeasured visible payload path without adding attributes: ' + selector + ' ' + declaration);
+      }
+    }
+
+    for (const [label, line0, line1] of [
+      ['missing marker', fencedJson, 'not an end marker'],
+      ['wrong request marker', fencedJson, 'AGENT_END_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'],
+      ['invalid JSON escape', '{"request_id":"' + requestId + '","path":"C:\\Users"}', marker]
+    ]) {
+      response = await renderFenced(fencedReply(line0, line1));
+      check(response.state.assistants[0], { key: 'fenced-fixture', text: line0 + '\n' + line1, collapsed: false, source_kind: 'fenced_plaintext' }, 'DOM extraction never repairs parser-owned invalidity: ' + label);
+    }
+    response = await renderFenced(fencedReply(fencedJson, marker, 'earlier-code') + fencedReply(fencedJson, marker, 'later-code'));
+    check(response.state.assistants.map(({ key, source_kind, text }) => ({ key, source_kind, text })), [
+      { key: 'earlier-code', source_kind: 'fenced_plaintext', text: fencedPayload },
+      { key: 'later-code', source_kind: 'fenced_plaintext', text: fencedPayload }
+    ], 'Each assistant owns its code block independently; turn and nonce filtering remains the adapter responsibility');
 
     for (const [url, message] of [
       ['http://m365.cloud.microsoft/chat/', 'untrusted page'],

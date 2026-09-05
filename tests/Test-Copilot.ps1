@@ -204,10 +204,10 @@ try{
     function Invoke-AgentCopilotCdp {param($Socket,$Method,$Params,$CancelPath,$Deadline);if($Method -ceq 'Input.insertText'){$script:mockInput=$Params.text}}
     function Invoke-AgentCopilotEval {param($Socket,$Expression,$CancelPath,$Deadline);if($Expression.Contains('sends[0].click()')){throw 'CDP_UNAVAILABLE: Simulated uncertain send.'};return $true}
     Assert-Rejected {Invoke-AgentCopilot -Prompt 'Test request' -RequestId 'r-uncertain' -JobId ('f'*32) -Settings @{} -HomePath $jobTemp -TimeoutSeconds 5} 'CDP_UNAVAILABLE' 'Uncertain first send fails without retry'
-    Assert-Case ($script:mockInput.StartsWith("Test request`n`n") -and $script:mockInput.Contains('応答全体は厳密に 2 行にしてください。')) 'Actual inserted wire prompt requires exactly two response lines after the task prompt'
-    Assert-Case ($script:mockInput.Contains('第1行: 指定された単一の JSON オブジェクト。') -and $script:mockInput.Contains('request_id は "r-uncertain"') -and $script:mockInput.Contains('文字列中の改行は JSON のエスケープで表してください。')) 'Actual inserted wire prompt binds the first-line JSON to the current request ID and escaped newlines'
-    Assert-Case ($script:mockInput.Contains('第2行: AGENT_END_r-uncertain だけを出力してください。')) 'Actual inserted wire prompt requires only the current nonce marker on the second line'
-    Assert-Case ($script:mockInput.Contains('ほかの文字、Markdown、コードフェンス、前後の説明は一切付けないでください。') -and $script:mockInput -notmatch 'JSON オブジェクトだけを 1 行で返してください|Return only JSON|Return exactly one JSON object') 'Actual inserted wire prompt forbids extra output without contradicting the marker requirement'
+    Assert-Case ($script:mockInput.StartsWith("Test request`n`n") -and $script:mockInput.Contains('応答全体は言語ラベル text のコードフェンス1個だけにしてください。') -and $script:mockInput.Contains('フェンス内部は厳密に2行です。')) 'Actual inserted wire prompt requires one text fence containing exactly two logical lines'
+    Assert-Case ($script:mockInput.Contains('内部の第1行: 指定された単一の JSON オブジェクト。') -and $script:mockInput.Contains('request_id は "r-uncertain"') -and $script:mockInput.Contains('改行・引用符・バックスラッシュは JSON の規則でエスケープしてください。')) 'Actual inserted wire prompt binds first-line JSON to the current request ID and JSON escaping'
+    Assert-Case ($script:mockInput.Contains('内部の第2行: AGENT_END_r-uncertain だけを出力してください。')) 'Actual inserted wire prompt requires only the current nonce marker on the second fenced line'
+    Assert-Case ($script:mockInput.Contains('フェンスの外に前置き、説明、別のコードや文字を一切付けないでください。') -and $script:mockInput.Contains('JSON のエスケープ以外に Markdown 用の手作業エスケープを追加しないでください。') -and $script:mockInput -notmatch 'JSON オブジェクトだけを 1 行で返してください|Return only JSON|Return exactly one JSON object|ほかの文字、Markdown、コードフェンス') 'Actual inserted wire prompt forbids outer text and additional Markdown escaping without contradicting fenced transport'
     $uncertainConfig=Get-AgentCopilotConfig $jobTemp @{} ('f'*32)
     $uncertainRecord=[IO.File]::ReadAllText($uncertainConfig.TargetPath,[Text.Encoding]::UTF8)|ConvertFrom-Json
     Assert-Case (-not $uncertainRecord.has_sent -and [IO.File]::Exists((Get-AgentCopilotAttemptPath $jobTemp 'r-uncertain'))) 'Uncertain send preserves fresh-history guard and durable no-replay reservation'
@@ -306,6 +306,60 @@ try{
     Assert-Rejected {Invoke-AgentCopilot -Prompt 'Test request' -RequestId 'r-no-input' -JobId ('8'*32) -Settings @{} -HomePath $jobTemp -TimeoutSeconds 20} 'AUTH_REQUIRED' 'Missing initial input still expires its original 15-second authentication wait'
     Assert-Case ($script:readyFocusCalls -eq 0 -and $script:readyKeyCalls -eq 0 -and $script:readyInsertCalls -eq 0 -and $script:readySendCalls -eq 0) 'Focus preparation never begins when the initial input wait expires'
     function Assert-AgentCopilotOwnership {param($Config)}
+    # Run the production response loop with local CDP doubles; only the DOM reader can supply fenced provenance.
+    function Reset-TestResponse([string]$RequestId,[object[]]$Candidates=@(),[object[]]$Baseline=@()) {
+        $script:responseRequest=$RequestId;$script:responseJob=[guid]::NewGuid().ToString('N')
+        $script:responseCandidates=$Candidates;$script:responseBaseline=$Baseline
+        $script:responseInput='';$script:responseSent=$false
+        $script:responseSends=0;$script:responseKeys=0;$script:responseInserts=0;$script:responseReads=0
+        $script:nextTargetId='response-'+$script:responseJob
+        $config=Get-AgentCopilotConfig $jobTemp @{} $script:responseJob
+        $target=Get-AgentCopilotTarget $config -Create
+        if($Baseline.Count -gt 0){Set-AgentCopilotJobSendStarted $config $target}
+    }
+    function Get-AgentCopilotSnapshot {
+        param($Socket,$CancelPath,$Deadline)
+        $shown=@($script:responseBaseline)
+        if($script:responseSent){$script:responseReads++;$shown+=@($script:responseCandidates)}
+        return [pscustomobject]@{inputCount=1;inputText=$script:responseInput;generating=$false;assistants=@($shown)}
+    }
+    function Invoke-AgentCopilotEval {
+        param($Socket,$Expression,$CancelPath,$Deadline)
+        if($Expression.Contains('sends[0].click()')){$script:responseSends++;$script:responseSent=$true;$script:responseInput=''}
+        return $true
+    }
+    function Invoke-AgentCopilotCdp {
+        param($Socket,$Method,$Params,$CancelPath,$Deadline)
+        if($Method -ceq 'Input.insertText'){$script:responseInserts++;$script:responseInput=$Params.text;return}
+        if($Method -ceq 'Input.dispatchKeyEvent'){$script:responseKeys++;return}
+        throw ('Unexpected response-test CDP method: '+$Method)
+    }
+    function Invoke-TestResponse {Invoke-AgentCopilot -Prompt 'Synthetic response test' -RequestId $script:responseRequest -JobId $script:responseJob -Settings @{} -HomePath $jobTemp -TimeoutSeconds 5}
+    $acceptedRaw='{"request_id":"r-fenced","value":"  日本語 C:\\path\\raw  "}'
+    $accepted=[pscustomobject]@{text=($acceptedRaw+"`nAGENT_END_r-fenced");source_kind='fenced_plaintext';collapsed=$false}
+    Reset-TestResponse 'r-fenced' @($accepted)
+    Assert-Case ([string]::Equals((Invoke-TestResponse),$acceptedRaw,[StringComparison]::Ordinal)) 'Actual adapter accepts exact JSON from a measured fenced source'
+    Assert-Case ($script:responseReads -eq 3 -and $script:responseSends -eq 1 -and $script:responseKeys -eq 4 -and $script:responseInserts -eq 1) 'Fenced success requires three stable reads after exactly one input and send sequence'
+    Assert-Rejected {Invoke-TestResponse} 'RESPONSE_INVALID' 'Successful fenced request ID cannot be replayed'
+    Assert-Case ($script:responseSends -eq 1 -and $script:responseInserts -eq 1) 'Replay rejection performs no second insert or send'
+    foreach($mode in @('rendered','missing','collapsed','refusal')){
+        $requestId='r-origin-'+$mode;$raw='{"request_id":"'+$requestId+'","value":"日本語 C:\\path\\raw"}'
+        $candidate=[pscustomobject]@{text=($raw+"`nAGENT_END_"+$requestId);source_kind='fenced_plaintext';collapsed=$false}
+        if($mode -ceq 'rendered'){$candidate.source_kind='rendered'}
+        if($mode -ceq 'missing'){$candidate.PSObject.Properties.Remove('source_kind')}
+        if($mode -ceq 'collapsed'){$candidate.collapsed=$true}
+        if($mode -ceq 'refusal'){$candidate.text='Sorry, I cannot help with this request.';$candidate.source_kind='rendered'}
+        Reset-TestResponse $requestId @($candidate)
+        $prefix=if($mode -ceq 'refusal'){'REFUSAL'}else{'RESPONSE_INVALID'}
+        Assert-Rejected {Invoke-TestResponse} $prefix ('Actual adapter rejects '+$mode+' response with its specific diagnosis')
+        Assert-Case ($script:responseSends -eq 1 -and $script:responseInserts -eq 1 -and [IO.File]::Exists((Get-AgentCopilotAttemptPath $jobTemp $requestId))) ('Rejected '+$mode+' response retains one durable attempt without resending')
+    }
+    Reset-TestResponse 'r-old-fenced' @() @([pscustomobject]@{text="{`"request_id`":`"r-old-fenced`"}`nAGENT_END_r-old-fenced";source_kind='fenced_plaintext';collapsed=$false})
+    Assert-Rejected {Invoke-TestResponse} 'RESPONSE_INVALID' 'Fenced provenance never promotes a request already present in the old baseline'
+    Assert-Case ($script:responseSends -eq 0 -and $script:responseInserts -eq 0 -and -not [IO.File]::Exists((Get-AgentCopilotAttemptPath $jobTemp 'r-old-fenced'))) 'Old fenced baseline is rejected before input and attempt reservation'
+    Reset-TestResponse 'r-fenced-timeout'
+    Assert-Rejected {Invoke-TestResponse} 'RESPONSE_TIMEOUT' 'Missing fenced response reaches the bounded existing response timeout'
+    Assert-Case ($script:responseSends -eq 1 -and $script:responseInserts -eq 1 -and [IO.File]::Exists((Get-AgentCopilotAttemptPath $jobTemp 'r-fenced-timeout'))) 'Response timeout retains its single attempt without resending'
     # First browser launch has a nonce blank plus any unrelated user/extension tabs.
     $launchConfig=Get-AgentCopilotConfig (Join-Path $jobTemp 'launch') @{}
     $launchUrl='about:blank#ai-prompts-launch-'+('1'*32)
