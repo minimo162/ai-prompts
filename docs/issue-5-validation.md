@@ -15,8 +15,8 @@
 | 検証 | 証拠と範囲 |
 |---|---|
 | Windows PowerShell 5.1 契約検証 | `tests/Test-App.ps1` **133 PASS**。Copilot/PADを模擬し、要求・結果・観測・再計画・パス境界・同期を検査する。実サービスの証拠ではない。 |
-| Copilotアダプター | `tests/Test-Copilot.ps1` **119 PASS**。CDP応答を模擬し、全文・ID・終端・生成終了・排他・ジョブ分離・異常分類、起動タブの終了と他タブの保持、起動識別タブ不在時の警告付き成功を検査する。本番Robin検証器で受理したReadText/WriteTextフローと約6万文字の長文をJSON復号し、原文との完全一致も確認。実M365の入力欄でREADYを確認したが、業務プロンプトの送信は未実施。 |
-| PADアダプター | `tests/Test-Pad.ps1` **301 PASS**。UI/クリップボード境界を模擬し、全文一致・所有権・失敗時の旧フロー実行拒否・結果帰属を検査する。状態別のUI構造、20種類の状態ID、保存・実行・中止、実ファイルに生成した2件のAiCallテンプレートとRobinの検証も本番関数で確認。実機の固定A/Bは下記に分けて記録する。 |
+| Copilotアダプター | `tests/Test-Copilot.ps1` **147 PASS**。CDP応答を模擬し、全文・ID・終端・生成終了・排他・ジョブ分離・異常分類、起動タブの終了と他タブの保持、起動識別タブ不在時の警告付き成功、送信前busy待機と入力・送信の再試行禁止を検査する。本番Robin検証器で受理したReadText/WriteTextフローと約6万文字の長文をJSON復号し、原文との完全一致も確認。実M365の入力欄でREADYを確認したが、業務プロンプトの送信は未実施。 |
+| PADアダプター | `tests/Test-Pad.ps1` **302 PASS**。UI/クリップボード境界を模擬し、全文一致・所有権・失敗時の旧フロー実行拒否・結果帰属を検査する。状態別のUI構造、20種類の状態ID、保存・実行・中止、実ファイルに生成した2件のAiCallテンプレートとRobinの検証も本番関数で確認。実機の固定A/Bは下記に分けて記録する。 |
 | localhost HTTP | `tests/Test-Http.ps1` PASS。実App.ps1プロセスでHTML/状態、トークン/Host/Origin拒否、不完全本文の期限、再接続、設定保持、重複回答・古い質問への回答拒否、版の引き継ぎ、停止を確認。 |
 | 実ブラウザー | `tests/Test-Ui.cjs` 15 PASS。実Edgeの1280×900・390×844で入力→未接続エラー→再表示、トークン除去、同ジョブ再接続、横溢れ・JavaScriptエラーなしを確認。質問ID・Copilotジョブ分離変更を含む不変版 `a00bca7` でも再実行し、両幅のPNGを目視確認した。証跡は `.work/ui-after-question-fix-66edd1690c8a4978aae727d6e5a31807/`。隔離サーバーは専用の終了APIで停止した。 |
 | 実際のCMD | リポジトリ上のCMDから実LOCALAPPDATAへ同期し、ローカルApp.ps1のHTTP応答を確認。Chromeにアプリタイトルのウィンドウが現れた。最終統合版も `Bootstrap -NoBrowser` で同期し、実LOCALAPPDATAのサーバー応答と作業コピーのApp.ps1ハッシュ一致を確認した。共有UNCからの検証は下記Gate 0記録に分ける。 |
@@ -31,7 +31,7 @@
 | ゲート | 状態 | 残る実機確認 |
 |---|---|---|
 | 0: 配布・起動 | 実共有UNCからの初回・更新は合格 | 共有切断、利用者環境での再起動・UI停止 |
-| 1: 固定PADからAiCall | 実機試行はAI呼出し前に失敗 | 検証環境のEdge起動パス整合、固定AiCallの再試行、実M365翻訳、分類分岐、2回以上の直列、拒否/空/期限/中止 |
+| 1: 固定PADからAiCall | AiCall到達、送信前に接続失敗 | 新規タブ接続の切分け、実M365翻訳、分類分岐、2回以上の直列、拒否/空/期限/中止 |
 | 2: AIなしのA/B差し替え | 正常系A/B合格、異常系は未完了 | 保存・貼り付け失敗などを意図的に起こした場合の旧フロー実行防止 |
 | 3: 生成Robin全文取得 | 未検証 | 実M365で長文/日本語/引用符/改行/空白/バックスラッシュ/%、過去回答・途中停止 |
 | 4: 生成AiCallフロー | 未検証 | 読取→AI→分岐→書出しを同じPADで完走 |
@@ -111,7 +111,29 @@ Gate 1の実PAD貼り付け読戻し（`.work/gate1/sessions/7d2274ce4c8d47b6883
 
 Windows起動経路の読み取り専用診断では、単なるShell.Application呼出しはCodex側のpwshを親に持ち、同じ仮想化領域を見た。デスクトップExplorerのautomation objectを介した呼出しはexplorer.exeを親に持ち、PADと同様に通常領域のAiPromptsAgentを未作成と判定した（`launch-context-probes/3cb3c628a97a40b5ab5b1b6d34614f0d.json`）。AppData作成・PAD実行・provider送信は0。この経路での導入や固定AiCallは未実施である。[MicrosoftのExplorer起動資料](https://devblogs.microsoft.com/oldnewthing/20131118-00/?p=2643)
 
-次は検証環境の保存先を両プロセスから読める状態にそろえ、固定AiCallを新しいIDで再試行する。専用「無題」は空Mainとして保存済みであり、実行前にも状態を照合する。Gate 0の切断、Gate 1/2の異常系、Gate 3〜6の実機確認は残っている。
+修正済みの `16c0761` の3ファイルを専用共有へ公開した。App.ps1を1回の原子的な置換で更新し、旧3ファイルを別のバックアップに保持した。ローカル共有とUNCの新ハッシュ、バックアップの旧ハッシュ、共有権限とNTFS ACLの不変を確認した（`gate0/publish-latest/33b62f2a328c414b884b295055572a4d/result.json`）。
+
+Desktop Explorer経由で共有CMDを1回起動した結果、終了コード0で通常のLOCALAPPDATAへ新キャッシュとサーバーが作成された（`gate0/normal-context/4c894cdeaf154913a8d8682db29b4f5e/result.json`）。通常Homeの最終実体パスも一致したが、後続のキャッシュ・サーバー検証は失敗として保存した。起動引数には期待文字列がすべて含まれ、末尾の空白1文字を除いた場合だけ末尾比較が一致した。元の失敗記録を書き換えず、既に起動したサーバーを読み取り専用で確認する。
+
+同じ切替の旧履歴検証は、Codex側の結合されたフォルダー表示に新キャッシュ3ファイルが加わったため全体ダイジェストが不一致となった。元の45ファイルを仮想化領域の明示した実体パスと従来の表記の両方で再計算すると、45件すべてのハッシュが一致した（`gate0/normal-switch/4c894cdeaf154913a8d8682db29b4f5e/posthoc-private-history-74f96136e82f44a393f94b5bdfd62809.json`）。元の切替結果は `unknown` のまま保持し、導入を再実行していない。
+
+通常Explorer環境からの事後確認では、元のキャッシュ検査は成功し、起動引数の末尾比較だけで同じ失敗を再現した。Windowsの引数解析では12個すべてが期待値と一致した。通常Homeの実体、新キャッシュ3ファイル、current.json、PS5サーバーのPID・開始時刻・localhost待受所有者、HTTP 200・版0.1.0・jobなしを確認した（`normal-context/4c894cdeaf154913a8d8682db29b4f5e/posthoc/913dbf5462d34bdfb597a542269c4df1/result.json`）。この確認は読み取りだけで、導入や設定変更を再実行していない。復旧側の例外も、StrictMode下で空の関数出力へ `.Count` を参照した検証スクリプトの不具合と特定した。新サーバーが稼働しているため旧サーバーの復旧起動は不要である。
+
+設定引継ぎは別の1回のPOSTで成功した。通常HomeのAPI・設定ファイルが `copilot_port=9223`、`pad_flow_name=無題`、`max_rounds=6` で一致し、jobなし、source・cache・旧設定が不変だった（`settings-recovery/9d1af217e38b4b1b82fc6d751b2893e4/result.json`）。旧45ファイルも再び全件一致した。
+
+第3回の固定AiCall実機検証は、通常Explorer環境と新キャッシュから1回実行した（`gate1/sessions/e696488ae08f43e094ce27f8aadcd795/summary.json`）。今回はPADの開始マーカー、最初のAiCall claimと結果ファイルまで進み、PADと子PowerShellが同じ保存先を利用できた。翻訳AiCallは `failed / connection / input_count=1 / output_count=0`、分類は未実行だった。ジョブ専用Copilotタブは作成されたが `has_sent=false` で送信試行記録はなく、業務プロンプト送信は確認していない。PAD観測は `PAD_SUBFLOW` により `unknown` のまま保存し、通常サーバーは復旧した。
+
+第3回の事後UIA確認では、既存の厳密条件で `Main, エラーあり,` を取得でき、Main 5行目・エラー1件・停止中・17アクションを確認した。元の11 runファイルとjob・summaryは不変だった。Copilotの事後確認も接続・空の入力欄・会話なし・生成なしで成功した（`copilot-posthoc-2d0485b26fdc4e43b1c89a7e84508726.json`）。元の接続失敗の箇所は未特定で、初期タブの表示遷移を区別する診断が必要である。いずれも事後確認を元の失敗結果の置換や再送には使っていない。
+
+新しい診断用タブを1件だけ作成し、実関数の作成→接続→最初のsnapshotを計測した。この試行の初回接続は成功したが、入力・送信0回のまま、後続snapshotで `generating=false→true→false` と変化した（`gate1/copilot-startup-probes/9c04fc30773e4288960e4425ae8fbfe1/result.json`）。その間も入力0文字・assistant 0件で、生成中と判定された時点のdocumentはinteractiveだった。これは初期表示中の判定変化の証拠であり、元のAiCall接続失敗の原因確定ではない。既存3タブと16ファイルの不変を確認し、診断タブも未送信のまま保持した。
+
+第3回フローの最初の復旧は、PADの前面化を確認できず、削除・保存前に停止した（同セッションの `cleanup-once/result.json`）。標準UI AutomationのWindow.SetFocusで対象を前面化できることを確認し、その後も既存の前面・workspace確認を通す手順を独立レビューした。別の1回の復旧は、本文2回の一致確認後に削除1回・保存1回で成功した（`cleanup-after-focus-4acf38684dc64e6bb656bd94d0a9a1d9/result.json`）。終了は保存済み・空Main・エラー0・実行不可で、実行要求0。現行19ファイル・旧45ファイル・前回復旧5ファイルと所有記録を保持した。
+
+次の診断用タブでは16回のsnapshot内で、productionの生成判定と同じ評価から原因要素を記録した（`gate1/copilot-busy-probes/17f3341dbb64416883a37b0b3960c807/result.json`）。入力・送信0回、空欄・assistant 0件のまま、1回だけ可視の `DIV[role=status][aria-busy=true]` が現れた。停止ボタンとstreaming属性はなく、約0.5秒後には消えた。documentがcompleteでもこの一時状態が発生することを確認した。旧20ファイル・既存4タブを保持し、新しい診断タブは未送信のまま残した。これは読み込み中の生成判定を再現した証拠であり、元のAiCall失敗瞬間の原因を断定するものではない。
+
+送信前のfocus確認に15秒の共有期限を設け、生成判定中だけ入力せず再観測するよう修正した。snapshot後にbusyへ変わった場合も待機し、接続・focus失敗、入力消失、所有権喪失、初回ジョブの下書きや会話の出現は停止する。生成判定、全体期限・中止、4キー・本文挿入・送信を各1回に限定する規則は維持した。従来の入力欄出現待ち15秒は別に保持する。PADはnative前面化が成功しなかった場合だけWindow.SetFocusを1回試し、既存の前面・workspace確認を必須にした。基本契約133件、Copilot契約147件、PAD契約302件と隔離Edge DOM64件が通過した。DOM検証の7ページ遷移はすべてローカル応答で、実サービスへ転送していない。
+
+次は修正版を共有経由で通常環境へ反映し、新しい固定AiCallを検証する。Gate 0の切断、Gate 1/2の異常系、Gate 3〜6の実機確認も残っている。
 
 ## 再現コマンド
 

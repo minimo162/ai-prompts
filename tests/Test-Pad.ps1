@@ -637,6 +637,7 @@ try {
         $result=Invoke-AgentPad -Robin 'WAIT 0' -RunDirectory $script:run -RunId ('5'*32) -Job $script:job -Settings $settings -CancelPath $cancel
         Assert-Case ($result.status -ceq 'failed' -and $result.error -like ($case.prefix+':*')) ('Mock failure classified: '+$case.scenario+'; '+$result.error)
         Assert-Case ($script:padRunInvocations -eq 0 -and $script:padSaveInvocations -eq $case.saves) ('No Run after '+$case.scenario)
+        if($case.scenario -eq 'focus-failure') {Assert-Case ($script:padKeys.Count -eq 0 -and $script:padReadbacks -eq 0 -and $script:padClipboard -ceq 'original clipboard') 'Unconfirmed focus prevents keyboard input, code readback, and clipboard writes'}
         if($case.scenario -in @('unowned','owner-missing','user-edited')) {Assert-Case ($script:padKeys.Count -eq 0) ('Unowned or externally edited actions cannot be deleted: '+$case.scenario)}
         if($case.scenario -eq 'paste-mismatch') {
             Assert-Case (@($script:padKeys | Where-Object {$_ -ceq '^v'}).Count -eq 1) 'Uncertain paste is attempted once'

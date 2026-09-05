@@ -1271,6 +1271,34 @@ function Get-AgentCopilotDiagnostic {
     finally { if($socket){$socket.Dispose()};if($mutex){$mutex.ReleaseMutex();$mutex.Dispose()} }
 }
 
+function Wait-AgentCopilotInputReady {
+    param($Config,$Target,$Socket,[string]$CancelPath,[datetime]$Deadline,[datetime]$ReadyDeadline,[switch]$AfterInput)
+    $readDeadline=if($Deadline -lt $ReadyDeadline){$Deadline}else{$ReadyDeadline}
+    $freshGuard=''
+    if($Target.agent_first_job_send){
+        $freshGuard='if(document.querySelector(assistantSelectors.join(",")))throw new Error("past conversation present");'
+        if(-not $AfterInput){$freshGuard+='if(inputText()!=="")throw new Error("draft present");'}
+    }
+    # Only a busy page returns false. Missing input, lost focus and CDP errors still fail immediately.
+    $focus='(()=>{'+(Get-AgentCopilotDomPrelude)+'if(!input)throw new Error("input unavailable");'+$freshGuard+'if(generating)return false;input.focus();if(document.activeElement!==input)throw new Error("focus failed");return true;})()'
+    while($true){
+        Assert-AgentCopilotWait $CancelPath $Deadline
+        if([datetime]::UtcNow -ge $ReadyDeadline){throw 'CDP_UNAVAILABLE: Copilot の入力準備が制限時間内に整いませんでした。'}
+        Assert-AgentCopilotOwnership $Config
+        $state=Get-AgentCopilotSnapshot $Socket $CancelPath $readDeadline
+        Assert-AgentCopilotJobBaseline $Target $state -AfterInput:$AfterInput
+        if($state.inputCount -ne 1){throw 'CDP_UNAVAILABLE: 専用入力欄を一意に確認できません。'}
+        if(-not $state.generating){
+            Assert-AgentCopilotWait $CancelPath $readDeadline
+            Assert-AgentCopilotOwnership $Config
+            $focused=Invoke-AgentCopilotEval $Socket $focus $CancelPath $readDeadline
+            if($focused -isnot [bool]){throw 'CDP_UNAVAILABLE: 入力先の確認結果が不正です。'}
+            if($focused){return $state}
+        }
+        Start-Sleep -Milliseconds 250
+    }
+}
+
 function Invoke-AgentCopilot {
     param([Parameter(Mandatory=$true)][string]$Prompt,[Parameter(Mandatory=$true)][string]$RequestId,[Parameter(Mandatory=$true)][string]$JobId,$Settings,[Parameter(Mandatory=$true)][string]$HomePath,[string]$CancelPath,[int]$TimeoutSeconds=180)
     if ($RequestId -notmatch '^[A-Za-z0-9_-]{1,128}$' -or [string]::IsNullOrWhiteSpace($Prompt) -or $Prompt.Length -gt 200000) { throw 'RESPONSE_INVALID: Copilot の要求が不正です。' }
@@ -1290,22 +1318,21 @@ function Invoke-AgentCopilot {
             if ([datetime]::UtcNow -ge $inputDeadline) { throw 'AUTH_REQUIRED: 専用 Edge で M365 Copilot にサインインして入力欄を表示してください。' }
             Start-Sleep -Milliseconds 250
         } while ($true)
-        if ($baseline.generating) { throw 'CDP_UNAVAILABLE: Copilot が別の回答を生成中です。完了を待ってください。' }
+        $readyDeadline=[datetime]::UtcNow.AddSeconds(15)
+        $baseline=Wait-AgentCopilotInputReady $config $target $socket $CancelPath $deadline $readyDeadline
         $baselineTexts=@($baseline.assistants | ForEach-Object { [string]$_.text })
         if (@($baselineTexts | Where-Object { $_.Contains('AGENT_END_' + $RequestId) }).Count -gt 0) { throw 'RESPONSE_INVALID: 使用済み要求 ID は再送信できません。' }
         $wirePrompt=$Prompt.Replace("`r`n","`n")+"`n`n応答形式: Markdown、コードフェンス、説明の前置きを付けず、指定された JSON オブジェクトだけを 1 行で返してください。トップレベルの request_id は `"$RequestId`" にしてください。文字列中の改行は JSON のエスケープで表してください。JSON の次の行に AGENT_END_$RequestId とだけ出力し、それより後には何も書かないでください。"
-        $focus='(()=>{'+(Get-AgentCopilotDomPrelude)+'if(!input||generating)throw new Error("input unavailable");input.focus();return document.activeElement===input;})()'
-        if (-not (Invoke-AgentCopilotEval $socket $focus $CancelPath $deadline)) { throw 'CDP_UNAVAILABLE: 専用入力欄にフォーカスできません。' }
+        $inputStarted=$false
         foreach ($event in @(@{type='rawKeyDown';key='a';code='KeyA';windowsVirtualKeyCode=65;modifiers=2},@{type='keyUp';key='a';code='KeyA';windowsVirtualKeyCode=65;modifiers=2},@{type='rawKeyDown';key='Backspace';code='Backspace';windowsVirtualKeyCode=8},@{type='keyUp';key='Backspace';code='Backspace';windowsVirtualKeyCode=8})) {
-            Assert-AgentCopilotOwnership $config
-            if (-not (Invoke-AgentCopilotEval $socket $focus $CancelPath $deadline)) { throw 'CDP_UNAVAILABLE: 入力先を確認できません。' }
+            $null=Wait-AgentCopilotInputReady $config $target $socket $CancelPath $deadline $readyDeadline -AfterInput:$inputStarted
             $null=Invoke-AgentCopilotCdp $socket 'Input.dispatchKeyEvent' $event $CancelPath $deadline
+            $inputStarted=$true
         }
         $empty=Get-AgentCopilotSnapshot $socket $CancelPath $deadline
         Assert-AgentCopilotJobBaseline $target $empty -AfterInput
         if ($empty.inputText -cne '') { throw 'CDP_UNAVAILABLE: 入力欄を空にできません。' }
-        Assert-AgentCopilotOwnership $config
-        if (-not (Invoke-AgentCopilotEval $socket $focus $CancelPath $deadline)) { throw 'CDP_UNAVAILABLE: 入力先を確認できません。' }
+        $null=Wait-AgentCopilotInputReady $config $target $socket $CancelPath $deadline $readyDeadline -AfterInput
         $null=Invoke-AgentCopilotCdp $socket 'Input.insertText' @{text=$wirePrompt} $CancelPath $deadline
         $inserted=Get-AgentCopilotSnapshot $socket $CancelPath $deadline
         Assert-AgentCopilotJobBaseline $target $inserted -AfterInput
@@ -1814,6 +1841,11 @@ function Set-AgentPadFocus {
     param($Window,$Workspace)
     $handle=[IntPtr]$Window.Current.NativeWindowHandle
     $null=[AgentPadNative]::SetForegroundWindow($handle)
+    if([AgentPadNative]::GetForegroundWindow() -ne $handle) {
+        # The observed PAD designer accepts UIA focus when the native foreground
+        # request does not take effect. Try it once, then retain the exact checks.
+        try {$Window.SetFocus()} catch {throw 'PAD_FOCUS: designer foreground was not acquired.'}
+    }
     if([AgentPadNative]::GetForegroundWindow() -ne $handle) {throw 'PAD_FOCUS: designer foreground was not acquired.'}
     $Workspace.SetFocus()
     $focus=[Windows.Automation.AutomationElement]::FocusedElement

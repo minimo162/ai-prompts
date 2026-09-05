@@ -5,7 +5,7 @@ $parseErrors=$null
 $ast=[Management.Automation.Language.Parser]::ParseFile([IO.Path]::GetFullPath($SourcePath),[ref]$null,[ref]$parseErrors)
 if ($parseErrors.Count -gt 0) { throw ('PowerShell parse errors: '+$parseErrors.Count) }
 # Load definitions only, never the server/launcher top-level code.
-$wanted=@('Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','Get-AgentCopilotConfig','Test-AgentCopilotUrl','Test-AgentCopilotAuthUrl','Test-AgentEdgeCommandLine','Test-AgentCopilotSocketUrl','Read-AgentJsonToken','Test-AgentStrictJson','ConvertFrom-AgentCopilotResponse','Assert-AgentCopilotWait','Enter-AgentCopilotMutex','Get-AgentCopilotAttemptPath','Reserve-AgentCopilotAttempt','Test-AgentCopilotTargetRecord','Write-AgentCopilotTargetRecord','Get-AgentCopilotTarget','Assert-AgentCopilotJobBaseline','Set-AgentCopilotJobSendStarted','Invoke-AgentCopilot','Get-AgentCopilotDomPrelude','Close-AgentCopilotLaunchTab','Open-AgentCopilot')
+$wanted=@('Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','Get-AgentCopilotConfig','Test-AgentCopilotUrl','Test-AgentCopilotAuthUrl','Test-AgentEdgeCommandLine','Test-AgentCopilotSocketUrl','Read-AgentJsonToken','Test-AgentStrictJson','ConvertFrom-AgentCopilotResponse','Assert-AgentCopilotWait','Enter-AgentCopilotMutex','Get-AgentCopilotAttemptPath','Reserve-AgentCopilotAttempt','Test-AgentCopilotTargetRecord','Write-AgentCopilotTargetRecord','Get-AgentCopilotTarget','Assert-AgentCopilotJobBaseline','Set-AgentCopilotJobSendStarted','Wait-AgentCopilotInputReady','Invoke-AgentCopilot','Get-AgentCopilotDomPrelude','Close-AgentCopilotLaunchTab','Open-AgentCopilot')
 foreach($name in $wanted){
     $definition=@($ast.FindAll({param($n) $n -is [Management.Automation.Language.FunctionDefinitionAst]},$false) | Where-Object Name -eq $name)
     if($definition.Count -ne 1){throw ('Missing or duplicate function: '+$name)}
@@ -205,6 +205,100 @@ try{
     $uncertainConfig=Get-AgentCopilotConfig $jobTemp @{} ('f'*32)
     $uncertainRecord=[IO.File]::ReadAllText($uncertainConfig.TargetPath,[Text.Encoding]::UTF8)|ConvertFrom-Json
     Assert-Case (-not $uncertainRecord.has_sent -and [IO.File]::Exists((Get-AgentCopilotAttemptPath $jobTemp 'r-uncertain'))) 'Uncertain send preserves fresh-history guard and durable no-replay reservation'
+    # Startup busy may recur between a ready snapshot and focus. Only that false result is waitable.
+    function Reset-TestReadiness {
+        $script:readySnapshots=New-Object 'Collections.Generic.Queue[object]'
+        $script:readyFocus=New-Object 'Collections.Generic.Queue[object]'
+        $script:readyEvents=New-Object 'Collections.Generic.List[string]'
+        $script:readyDeadlines=New-Object 'Collections.Generic.List[long]'
+        $script:readyInput='';$script:readyAlwaysBusy=$false;$script:readyMissingInput=$false;$script:readyOwnershipFails=$false;$script:readyFocusCalls=0;$script:readySnapshotCalls=0;$script:readyKeyCalls=0;$script:readyInsertCalls=0;$script:readySendCalls=0
+    }
+    function New-TestReadySnapshot([bool]$Busy=$false,[string]$Text='',[object[]]$Assistants=@()){
+        return [pscustomobject]@{inputCount=1;inputText=$Text;generating=$Busy;assistants=$Assistants}
+    }
+    function Assert-AgentCopilotOwnership {
+        param($Config)
+        $script:readyEvents.Add('ownership')
+        if($script:readyOwnershipFails){throw 'CDP_UNAVAILABLE: Simulated lost ownership.'}
+    }
+    function Get-AgentCopilotSnapshot {
+        param($Socket,$CancelPath,$Deadline)
+        $script:readySnapshotCalls++;$script:readyEvents.Add('snapshot')
+        if($script:readySnapshots.Count -gt 0){return $script:readySnapshots.Dequeue()}
+        $state=New-TestReadySnapshot $script:readyAlwaysBusy $script:readyInput
+        if($script:readyMissingInput){$state.inputCount=0}
+        return $state
+    }
+    function Invoke-AgentCopilotEval {
+        param($Socket,$Expression,$CancelPath,$Deadline)
+        if($Expression.Contains('sends[0].click()')){$script:readySendCalls++;throw 'CDP_UNAVAILABLE: Simulated uncertain send.'}
+        $script:readyFocusCalls++;$script:readyEvents.Add('focus');$script:readyDeadlines.Add($Deadline.Ticks)
+        if($script:readyFocus.Count -gt 0){
+            $result=$script:readyFocus.Dequeue()
+            if($result -is [string] -and $result -ceq 'throw'){throw 'CDP_UNAVAILABLE: Simulated focus failure.'}
+            return $result
+        }
+        return $true
+    }
+    function Invoke-AgentCopilotCdp {
+        param($Socket,$Method,$Params,$CancelPath,$Deadline)
+        if($Method -ceq 'Input.dispatchKeyEvent'){$script:readyKeyCalls++;$script:readyEvents.Add('key:'+($Params.type)+':'+($Params.key));return}
+        if($Method -ceq 'Input.insertText'){$script:readyInsertCalls++;$script:readyInput=$Params.text;return}
+        throw 'Unexpected command in readiness test.'
+    }
+    $freshTarget=[pscustomobject]@{agent_first_job_send=$true}
+    $continuingTarget=[pscustomobject]@{agent_first_job_send=$false}
+    Reset-TestReadiness
+    $script:readySnapshots.Enqueue((New-TestReadySnapshot $true))
+    $script:readyFocus.Enqueue($false);$script:readyFocus.Enqueue($true)
+    $readyState=Wait-AgentCopilotInputReady $jobB $freshTarget $null '' ([datetime]::UtcNow.AddSeconds(5)) ([datetime]::UtcNow.AddSeconds(3))
+    Assert-Case ($script:readySnapshotCalls -eq 3 -and $script:readyFocusCalls -eq 2 -and -not $readyState.generating) 'Busy snapshot and focus-time busy are reobserved before readiness succeeds'
+    Assert-Case ($script:readyEvents[0] -ceq 'ownership' -and $script:readyEvents.IndexOf('focus') -gt 3 -and $script:readyKeyCalls -eq 0 -and $script:readyInsertCalls -eq 0 -and $script:readySendCalls -eq 0) 'Busy readiness sends no key, text or provider request and rechecks ownership'
+    Reset-TestReadiness;$script:readyFocus.Enqueue('throw')
+    Assert-Rejected {Wait-AgentCopilotInputReady $jobB $freshTarget $null '' ([datetime]::UtcNow.AddSeconds(5)) ([datetime]::UtcNow.AddSeconds(3))} 'CDP_UNAVAILABLE' 'A real focus or CDP exception is not treated as transient busy'
+    Assert-Case ($script:readySnapshotCalls -eq 1 -and $script:readyFocusCalls -eq 1) 'Focus failure is not retried'
+    Reset-TestReadiness;$script:readyFocus.Enqueue('false')
+    Assert-Rejected {Wait-AgentCopilotInputReady $jobB $freshTarget $null '' ([datetime]::UtcNow.AddSeconds(5)) ([datetime]::UtcNow.AddSeconds(3))} 'CDP_UNAVAILABLE' 'A nonboolean focus response is invalid rather than waitable'
+    Assert-Case ($script:readyFocusCalls -eq 1) 'Invalid focus response is not retried'
+    foreach($changed in @((New-TestReadySnapshot $true 'restored draft'),(New-TestReadySnapshot $true '' @([pscustomobject]@{text='restored history'})))){
+        Reset-TestReadiness;$script:readySnapshots.Enqueue($changed)
+        Assert-Rejected {Wait-AgentCopilotInputReady $jobB $freshTarget $null '' ([datetime]::UtcNow.AddSeconds(5)) ([datetime]::UtcNow.AddSeconds(3))} 'RESPONSE_INVALID' 'Restored input or conversation rejects even while busy'
+        Assert-Case ($script:readyFocusCalls -eq 0 -and $script:readySnapshotCalls -eq 1) 'Restored data is rejected before focus and is not cleared'
+    }
+    Reset-TestReadiness;$script:readyInput='in-progress input'
+    $afterInput=Wait-AgentCopilotInputReady $jobB $freshTarget $null '' ([datetime]::UtcNow.AddSeconds(5)) ([datetime]::UtcNow.AddSeconds(3)) -AfterInput
+    Assert-Case ($afterInput.inputText -ceq 'in-progress input') 'AfterInput preserves existing input without repeating the initial empty-draft rule'
+    Reset-TestReadiness;$priorReply=New-TestReadySnapshot $false '' @([pscustomobject]@{text='completed previous reply'})
+    $script:readySnapshots.Enqueue($priorReply)
+    $continuedState=Wait-AgentCopilotInputReady $jobB $continuingTarget $null '' ([datetime]::UtcNow.AddSeconds(5)) ([datetime]::UtcNow.AddSeconds(3))
+    Assert-Case ($continuedState.assistants[0].text -ceq 'completed previous reply') 'A continuing job retains completed previous responses'
+    Reset-TestReadiness;$script:readyMissingInput=$true
+    Assert-Rejected {Wait-AgentCopilotInputReady $jobB $freshTarget $null '' ([datetime]::UtcNow.AddSeconds(5)) ([datetime]::UtcNow.AddSeconds(3))} 'CDP_UNAVAILABLE' 'Disappearing input during focus preparation is not retried as busy'
+    Assert-Case ($script:readySnapshotCalls -eq 1 -and $script:readyFocusCalls -eq 0) 'Missing input fails before focus'
+    Reset-TestReadiness;$script:readyOwnershipFails=$true
+    Assert-Rejected {Wait-AgentCopilotInputReady $jobB $freshTarget $null '' ([datetime]::UtcNow.AddSeconds(5)) ([datetime]::UtcNow.AddSeconds(3))} 'CDP_UNAVAILABLE' 'Lost ownership stops readiness'
+    Assert-Case ($script:readySnapshotCalls -eq 0 -and $script:readyFocusCalls -eq 0) 'Lost ownership precedes all browser reads or focus'
+    Reset-TestReadiness;$script:readyAlwaysBusy=$true
+    Assert-Rejected {Wait-AgentCopilotInputReady $jobB $freshTarget $null '' ([datetime]::UtcNow.AddSeconds(5)) ([datetime]::UtcNow.AddMilliseconds(100))} 'CDP_UNAVAILABLE' 'Persistent busy exhausts the shared preparation deadline'
+    Assert-Case ($script:readyFocusCalls -eq 0) 'Preparation timeout causes no focus or input'
+    Reset-TestReadiness
+    Assert-Rejected {Wait-AgentCopilotInputReady $jobB $freshTarget $null '' ([datetime]::UtcNow.AddSeconds(-1)) ([datetime]::UtcNow.AddSeconds(3))} 'RESPONSE_TIMEOUT' 'Overall deadline takes precedence over preparation deadline'
+    Assert-Case ($script:readySnapshotCalls -eq 0) 'Expired overall deadline performs no browser read'
+    $readyCancel=Join-Path $jobTemp 'ready-cancel';[IO.File]::WriteAllText($readyCancel,'cancel')
+    Reset-TestReadiness
+    Assert-Rejected {Wait-AgentCopilotInputReady $jobB $freshTarget $null $readyCancel ([datetime]::UtcNow.AddSeconds(5)) ([datetime]::UtcNow.AddSeconds(3))} 'CANCELLED' 'Cancellation takes precedence while waiting to prepare input'
+    Assert-Case ($script:readySnapshotCalls -eq 0) 'Cancellation performs no browser read'
+    # Exercise all real pre-send focus call sites with one focus-time busy race; each input command remains single-shot.
+    Reset-TestReadiness;$script:nextTargetId='job-ready';$script:readyFocus.Enqueue($true);$script:readyFocus.Enqueue($true);$script:readyFocus.Enqueue($false)
+    Assert-Rejected {Invoke-AgentCopilot -Prompt 'Test request' -RequestId 'r-ready-uncertain' -JobId ('7'*32) -Settings @{} -HomePath $jobTemp -TimeoutSeconds 30} 'CDP_UNAVAILABLE' 'Invocation tolerates pre-key busy but still fails an uncertain single send'
+    Assert-Case ($script:readyKeyCalls -eq 4 -and $script:readyInsertCalls -eq 1 -and $script:readySendCalls -eq 1) 'Transient pre-key busy does not replay keys, insert or send'
+    Assert-Case (@($script:readyDeadlines | Select-Object -Unique).Count -eq 1 -and $script:readyFocusCalls -eq 7) 'All focus call sites share one preparation deadline including a busy recheck'
+    Assert-Case ([IO.File]::Exists((Get-AgentCopilotAttemptPath $jobTemp 'r-ready-uncertain'))) 'Uncertain send after readiness retains the no-replay reservation'
+    # The original input-appearance timeout is separate from focus preparation and stays AUTH_REQUIRED.
+    Reset-TestReadiness;$script:readyMissingInput=$true;$script:nextTargetId='job-no-input'
+    Assert-Rejected {Invoke-AgentCopilot -Prompt 'Test request' -RequestId 'r-no-input' -JobId ('8'*32) -Settings @{} -HomePath $jobTemp -TimeoutSeconds 20} 'AUTH_REQUIRED' 'Missing initial input still expires its original 15-second authentication wait'
+    Assert-Case ($script:readyFocusCalls -eq 0 -and $script:readyKeyCalls -eq 0 -and $script:readyInsertCalls -eq 0 -and $script:readySendCalls -eq 0) 'Focus preparation never begins when the initial input wait expires'
+    function Assert-AgentCopilotOwnership {param($Config)}
     # First browser launch has a nonce blank plus any unrelated user/extension tabs.
     $launchConfig=Get-AgentCopilotConfig (Join-Path $jobTemp 'launch') @{}
     $launchUrl='about:blank#ai-prompts-launch-'+('1'*32)

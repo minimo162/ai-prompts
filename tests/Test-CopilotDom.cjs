@@ -90,8 +90,39 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
     observed = await render(span('<p><br></p>') + '<div role="textbox" contenteditable="true">draft</div>');
     check(observed.state.inputCount, 2, 'Multiple supported inputs remain ambiguous');
     check(observed.state.inputText, null, 'Ambiguous input is never treated as empty');
-    observed = await render(span('<p><br></p>') + '<button aria-label="停止">停止</button>');
-    check(observed.state.generating, true, 'Generating detection is unchanged');
+    // The observed startup indicator has no id, stop button, or streaming attribute.
+    // Keep treating it as busy until the page removes that signal, while retaining
+    // the exact empty-editor contract used before any focus or input operation.
+    observed = await render(span('<p><br></p>') + '<div role="status" aria-busy="true"></div>');
+    check(observed.state, { inputCount: 1, inputText: '', generating: true, sendReady: false }, 'Measured startup status is busy and its editor remains empty');
+    await page.locator('[role="status"]').evaluate(status => { status.setAttribute('aria-busy', 'false'); });
+    check(await page.evaluate(snapshot), { inputCount: 1, inputText: '', generating: false, sendReady: false }, 'Startup aria-busy false clears generating without changing the editor');
+    await page.locator('[role="status"]').evaluate(status => { status.setAttribute('aria-busy', 'true'); });
+    check((await page.evaluate(snapshot)).generating, true, 'A returning startup busy signal is still detected');
+    await page.locator('[role="status"]').evaluate(status => { status.removeAttribute('aria-busy'); });
+    check(await page.evaluate(snapshot), { inputCount: 1, inputText: '', generating: false, sendReady: false }, 'Removing startup aria-busy clears generating without changing the editor');
+
+    for (const [label, indicator] of [
+      ['streaming state', '<div data-state="streaming"></div>'],
+      ['streaming status', '<div data-status="streaming"></div>'],
+      ['Japanese stop button', '<button aria-label="停止">停止</button>'],
+      ['English stop button', '<button aria-label="Stop generating">Stop generating</button>']
+    ]) {
+      observed = await render(span('<p><br></p>') + indicator);
+      check(observed.state, { inputCount: 1, inputText: '', generating: true, sendReady: false }, 'Continue detecting visible ' + label);
+    }
+
+    for (const [label, indicator] of [
+      ['display-none startup status', '<div role="status" aria-busy="true" style="display:none"></div>'],
+      ['visibility-hidden startup status', '<div role="status" aria-busy="true" style="visibility:hidden"></div>'],
+      ['zero-size startup status', '<div role="status" aria-busy="true" style="min-width:0;min-height:0;width:0;height:0"></div>'],
+      ['display-none streaming state', '<div data-state="streaming" style="display:none"></div>'],
+      ['visibility-hidden streaming status', '<div data-status="streaming" style="visibility:hidden"></div>'],
+      ['display-none stop button', '<button aria-label="停止" style="display:none">停止</button>']
+    ]) {
+      observed = await render(span('<p><br></p>') + indicator);
+      check(observed.state, { inputCount: 1, inputText: '', generating: false, sendReady: false }, 'Exclude ' + label);
+    }
 
     for (const [url, message] of [
       ['http://m365.cloud.microsoft/chat/', 'untrusted page'],
