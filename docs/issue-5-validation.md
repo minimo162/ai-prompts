@@ -14,8 +14,8 @@
 
 | 検証 | 証拠と範囲 |
 |---|---|
-| Windows PowerShell 5.1 契約検証 | `tests/Test-App.ps1` **133 PASS**。Copilot/PADを模擬し、要求・結果・観測・再計画・パス境界・同期を検査する。実サービスの証拠ではない。 |
-| Copilotアダプター | `tests/Test-Copilot.ps1` **147 PASS**。CDP応答を模擬し、全文・ID・終端・生成終了・排他・ジョブ分離・異常分類、起動タブの終了と他タブの保持、起動識別タブ不在時の警告付き成功、送信前busy待機と入力・送信の再試行禁止を検査する。本番Robin検証器で受理したReadText/WriteTextフローと約6万文字の長文をJSON復号し、原文との完全一致も確認。実M365の入力欄でREADYを確認したが、業務プロンプトの送信は未実施。 |
+| Windows PowerShell 5.1 契約検証 | `tests/Test-App.ps1` **137 PASS**。Copilot/PADを模擬し、要求・結果・観測・再計画・パス境界・同期と実計画/AiCallプロンプトを検査する。実サービスの証拠ではない。 |
+| Copilotアダプター | `tests/Test-Copilot.ps1` **154 PASS**。CDP応答を模擬し、全文・ID・終端・生成終了・排他・ジョブ分離・異常分類、起動タブの終了と他タブの保持、送信前busy待機、実送信本文の2行契約と入力・送信の再試行禁止を検査する。本番Robin検証器で受理したReadText/WriteTextフローと約6万文字の長文をJSON復号し、原文との完全一致も確認。隔離Edgeの `tests/Test-CopilotDom.cjs` は **219 PASS**。実M365の翻訳診断では送信1回から厳格な応答取得・再読取り一致まで成功した。固定PADの正常完走とは分けて下記に記録する。 |
 | PADアダプター | `tests/Test-Pad.ps1` **302 PASS**。UI/クリップボード境界を模擬し、全文一致・所有権・失敗時の旧フロー実行拒否・結果帰属を検査する。状態別のUI構造、20種類の状態ID、保存・実行・中止、実ファイルに生成した2件のAiCallテンプレートとRobinの検証も本番関数で確認。実機の固定A/Bは下記に分けて記録する。 |
 | localhost HTTP | `tests/Test-Http.ps1` PASS。実App.ps1プロセスでHTML/状態、トークン/Host/Origin拒否、不完全本文の期限、再接続、設定保持、重複回答・古い質問への回答拒否、版の引き継ぎ、停止を確認。 |
 | 実ブラウザー | `tests/Test-Ui.cjs` 15 PASS。実Edgeの1280×900・390×844で入力→未接続エラー→再表示、トークン除去、同ジョブ再接続、横溢れ・JavaScriptエラーなしを確認。質問ID・Copilotジョブ分離変更を含む不変版 `a00bca7` でも再実行し、両幅のPNGを目視確認した。証跡は `.work/ui-after-question-fix-66edd1690c8a4978aae727d6e5a31807/`。隔離サーバーは専用の終了APIで停止した。 |
@@ -31,7 +31,7 @@
 | ゲート | 状態 | 残る実機確認 |
 |---|---|---|
 | 0: 配布・起動 | 実共有UNCからの初回・更新は合格 | 共有切断、利用者環境での再起動・UI停止 |
-| 1: 固定PADからAiCall | Copilot本文入力まで到達、送信前に停止 | 入力本文照合の切分け、実M365翻訳、分類分岐、2回以上の直列、拒否/空/期限/中止 |
+| 1: 固定PADからAiCall | 第5回PADは終端照合で停止。修正後の単独実Copilot翻訳診断は合格 | 固定PADへの正常な結果受渡し、分類分岐、2回以上の直列、拒否/空/期限/中止 |
 | 2: AIなしのA/B差し替え | 正常系A/B合格、異常系は未完了 | 保存・貼り付け失敗などを意図的に起こした場合の旧フロー実行防止 |
 | 3: 生成Robin全文取得 | 未検証 | 実M365で長文/日本語/引用符/改行/空白/バックスラッシュ/%、過去回答・途中停止 |
 | 4: 生成AiCallフロー | 未検証 | 読取→AI→分岐→書出しを同じPADで完走 |
@@ -144,6 +144,18 @@ Desktop Explorer経由で共有CMDを1回起動した結果、終了コード0�
 元のrequest・inputと製品内のAST代入式から送信予定本文を副作用なく再構成すると、期待した1271文字が実入力の先頭から完全一致し、改行3箇所も一致した。差分は末尾のU+200B・U+200C各1文字だけだった（`input-comparison-ca78585136e6447c8d774a585a5062c1.json`）。DOMはSPAN→P→2つのSPANで、最初のSPANは `data-lexical-text=true` の本文1271文字、後ろのSPANだけは `data-lexical-text=true / aria-hidden=true` で唯一のテキストノードが当該2文字だった（`input-suffix-2a80573875d14d729df7f4873e3924e2.json`）。この構造が現在の完全一致検査を不成立にすることを確認した。失敗瞬間の例外自体は保存されていない。旧19ファイルの不変と入力・focus・送信0回を確認した。実測した本文SPANと末尾のaria-hidden SPANだけを厳密に識別し、末尾マーカーだけを比較対象から除く修正を加えた。本文中の不可視文字・改行・空白、属性違い・未知の構造は保持する。Copilot契約147件、隔離Edge DOM99件が通過し、独立レビューも通過した。実M365の同じ未送信入力を修正版で読み取るだけの検証でも1273文字から1271文字となり、送信予定本文のSHA-256と完全一致した（`draft-input-verification-7c8e857e5b03473e8a77b47c57226b0c.json`）。この確認で入力・focus・送信・タブ操作は行っていない。
 
 第4回の失敗フローも、独立レビュー後に全文2回の照合と1回の削除・保存で空Mainへ戻した（`sessions/ba98d1a912f74425b3700229699e8888/cleanup-once/result.json`）。終了は保存済み・エラー0・実行不可で、実行・provider呼出し0回。第4回の19ファイル、旧normal 19ファイル、private 45ファイルと旧所有記録バックアップは不変だった。
+
+末尾マーカー修正版 `928b2f6`（App SHA-256 `b738672013e90ddf5de886dba7605bf0c72a0cb8ad419e047669f48307676919`）をrelease `0.1.0-5c4ef7d98162d2c5bbe28ef50f6ba6b9d7c12190f00e931fbcba8a05a88f3adb`として専用共有へ公開した。原子的なApp置換1回、旧3ファイルのバックアップとACL保持を確認した（`gate0/publish-latest/2fed9d4c4cd349c6b1a1a9c62b1d5392/result.json`）。通常Explorerからの共有CMD更新も終了コード0で成功し、新キャッシュ・サーバー・設定・引数・HTTP応答の一致、旧サーバー終了、現行20ファイル・旧normal19・private45・旧owner archive・第4cleanup証拠の不変を確認した（`gate0/normal-updates/3d66440be9c9409e860bcebbba604b63/result.json`）。
+
+第5回の固定AiCallは新規ジョブで1回実行し、今回は本文の完全一致、送信クリックの応答、英訳回答まで進んだ（`gate1/sessions/501899397d424602a8e399e5e53f95ff/summary.json`）。最初のAiCallは `failed / invalid_response`、PADの監視も `failed / AICALL_invalid_response` で停止し、分類と成果物出力は未実行だった。通常サーバーは復旧し、外側 `normal-executions/32286c2453214a53b09ab57e06411cb4/result.json` のunknownは元のまま保持した。旧normal19＋19、private45、旧owner archive、既存6タブは不変。今回の旧ownerは別ファイルへバックアップした。事後snapshotでは入力0文字・assistant1件・生成なしで、正しいID群と英訳を含むsuccess JSONがあったが、取得した本文に必須の `AGENT_END_<request_id>` がなかった（`copilot-posthoc-dc2bdcdb615247e8b28b2d4207f3fed4.json`）。追加の読み取り専用DOM確認では、assistant候補は `markdown-reply` の1件だけで、`lastChatMessage` を含む4段階の祖先とその直下要素もすべて同じ330文字だった（`copilot-posthoc-5b22513e45434989a890343233466b3d.json`）。この回答では取得範囲の切り捨てではなく、表示された応答自体に終端がない。「JSONだけ」と「次行に終端」の指示を必須2行形式に統一する修正を別draftで準備し、終端なしの受理や事後補完は行わない。
+
+第5回の失敗フローも、独立レビューと本文2回の照合後、削除1回・保存1回で空Mainへ戻った（`sessions/501899397d424602a8e399e5e53f95ff/cleanup-once/result.json`）。保存済み・エラー0・実行不可、Run/provider呼出し0回。今回の20ファイル（送信済みattemptを含む）、旧normal19＋19、private45と両owner archiveは不変だった。
+
+2行指示のdraftだけを用いた新規の翻訳診断は、実Copilot呼出し1回・再送0回・PAD操作0回で実行した（`gate1/two-line-response-probes/a786d45c23824b50957b17a9b1de7909/result.json`）。今回の回答には正しいJSONと終端があったが、本文取得値では改行が空白となり、厳格な終端照合が通らず `unknown` となった。旧112ファイルと既存タブは不変だった。読み取り専用の追加観測では、可視の `DIV[data-testid=markdown-reply] → DIV → P → 単一テキストノード` にJSON・LF・終端がそのまま存在し、`innerText` だけがLFを空白へ変換していた（`copilot-posthoc-f6b8aae1381442ecbbf58fe93f5e21ae.json`）。元のunknownは保持し、応答の補完や終端規則の緩和はせず、取得処理の修正を別draftで検証する。
+
+指示を2行形式へ統一し、実測した可視の単一テキストノード構造だけから原文を取得する修正を実装した。未知の構造は従来の取得方法を保持し、終端や改行の補完は行わない。修正前の取得では拒否される同じ実応答を、修正版では2回とも元テキストと完全一致で取得し、既存の厳格なJSON/終端/ID検証を通過した（`copilot-two-line-draft/7f539df426734827adc35e3042d25411/readonly-reader-1b7075adb66c4591bef244426855cdf1.json`）。基本137・Copilot154・隔離Edge DOM219件が通過し、独立レビューも通過した。DOMテスト初回のflexによる表示形式変換のfixture誤設定と、その修正も `dom-validation.json` に記録した。
+
+新しい要求IDによる翻訳診断 `bc551ffcb5844e5182e607d3cd022a10` は、通常Explorer環境で実Copilot呼出し1回から正常に返却された。JSONと実LFと終端を含む厳密な2行、要求/ジョブ/run/AiCall ID、success・入出力各1件、取得JSONと再読取り2回の完全一致がすべて合格した（`gate1/two-line-response-probes/bc551ffcb5844e5182e607d3cd022a10/result.json`）。実行は2026-09-05 20:24:38〜20:25:14 UTC、既存115ファイル・既存8タブ・通常サーバーは保持され、再送/再試行/PAD操作は0回。過去のunknownは変更していない。適用したApp SHA-256は `32958784b503b9316c5b61d68bc1008f879f527242033e95263e7c1e15d97b00`。この診断はCopilotアダプターの実経路の証拠であり、Gate 1の固定PAD完走ではない。
 
 Gate 0の切断、Gate 1/2の異常系、Gate 3〜6の実機確認も残っている。
 

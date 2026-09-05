@@ -7,8 +7,10 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const source = fs.readFileSync(path.resolve(process.argv[2] || path.join(__dirname, '..', 'App.ps1')), 'utf8');
 const definitions = [...source.matchAll(/function Get-AgentCopilotDomPrelude \{\r?\n[\s\S]*?return @'\r?\n([\s\S]*?)\r?\n'@\r?\n\}/g)];
 assert.equal(definitions.length, 1, 'Read exactly one production DOM prelude');
-const snapshot = '(()=>{' + definitions[0][1] + '\nreturn {inputCount:inputs.length,inputText:inputText(),generating,sendReady:sends.length===1};})()';
-const fixture = '<!doctype html><meta charset="utf-8"><style>body{margin:20px}#fixture>*{display:block;min-width:300px;min-height:40px;white-space:pre-wrap}p{margin:0}</style><main id="fixture"></main>';
+const snapshotDefinitions = [...source.matchAll(/function Get-AgentCopilotSnapshot \{\r?\n[\s\S]*?\$body = @'\r?\n([\s\S]*?)\r?\n'@\r?\n/g)];
+assert.equal(snapshotDefinitions.length, 1, 'Read exactly one production snapshot body');
+const snapshot = '(()=>{' + definitions[0][1] + '\n' + snapshotDefinitions[0][1] + '})()';
+const fixture = '<!doctype html><meta charset="utf-8"><style>body{margin:20px}#fixture>*{display:block;min-width:300px;min-height:40px;white-space:pre-wrap}p{margin:0}#fixture .measured-reply,#fixture .measured-reply *{white-space:normal;opacity:1}#fixture .measured-reply{display:block}#fixture .measured-reply>.reply-wrapper{display:flex}#fixture .measured-reply>.reply-wrapper>p{display:block}</style><main id="fixture"></main>';
 const trustedUrl = 'https://m365.cloud.microsoft/chat/';
 
 (async () => {
@@ -33,6 +35,11 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
     const pageErrors = [];
     page.on('pageerror', error => pageErrors.push(error.message));
     await page.goto(trustedUrl);
+    // Evaluate the actual production snapshot, then keep the existing input assertions scoped.
+    const inputState = async () => {
+      const { inputCount, inputText, generating, sendReady } = await page.evaluate(snapshot);
+      return { inputCount, inputText, generating, sendReady };
+    };
     const render = async (html, setup) => {
       await page.locator('#fixture').evaluate((root, markup) => { root.innerHTML = markup; }, html);
       if (setup) await page.evaluate(setup);
@@ -40,7 +47,7 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
         const input = document.querySelector('#m365-chat-editor-target-element');
         return input ? { innerText: input.innerText, textContent: input.textContent, value: 'value' in input ? input.value : null } : null;
       });
-      return { raw, state: await page.evaluate(snapshot) };
+      return { raw, state: await inputState() };
     };
     const span = html => '<span id="m365-chat-editor-target-element" contenteditable="true">' + html + '</span>';
     let observed = await render(span('<p><br></p>'));
@@ -139,11 +146,11 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
     observed = await render(span('<p><br></p>') + '<div role="status" aria-busy="true"></div>');
     check(observed.state, { inputCount: 1, inputText: '', generating: true, sendReady: false }, 'Measured startup status is busy and its editor remains empty');
     await page.locator('[role="status"]').evaluate(status => { status.setAttribute('aria-busy', 'false'); });
-    check(await page.evaluate(snapshot), { inputCount: 1, inputText: '', generating: false, sendReady: false }, 'Startup aria-busy false clears generating without changing the editor');
+    check(await inputState(), { inputCount: 1, inputText: '', generating: false, sendReady: false }, 'Startup aria-busy false clears generating without changing the editor');
     await page.locator('[role="status"]').evaluate(status => { status.setAttribute('aria-busy', 'true'); });
     check((await page.evaluate(snapshot)).generating, true, 'A returning startup busy signal is still detected');
     await page.locator('[role="status"]').evaluate(status => { status.removeAttribute('aria-busy'); });
-    check(await page.evaluate(snapshot), { inputCount: 1, inputText: '', generating: false, sendReady: false }, 'Removing startup aria-busy clears generating without changing the editor');
+    check(await inputState(), { inputCount: 1, inputText: '', generating: false, sendReady: false }, 'Removing startup aria-busy clears generating without changing the editor');
 
     for (const [label, indicator] of [
       ['streaming state', '<div data-state="streaming"></div>'],
@@ -165,6 +172,152 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
     ]) {
       observed = await render(span('<p><br></p>') + indicator);
       check(observed.state, { inputCount: 1, inputText: '', generating: false, sendReady: false }, 'Exclude ' + label);
+    }
+
+    const reply = (value, messageId = 'reply-fixture') => '<div dir="auto" aria-hidden="false" class="measured-reply" data-testid="markdown-reply" data-message-id="' + messageId + '" data-message-type="Chat"><div class="reply-wrapper"><p>' + escapeText(value) + '</p></div></div>';
+    const renderReply = async (html, setup, css = '') => {
+      await page.evaluate(({ markup, extraCss }) => {
+        const previousStyle = document.querySelector('#response-case-style');
+        if (previousStyle) previousStyle.remove();
+        document.querySelector('#fixture').innerHTML = markup;
+        if (extraCss) {
+          const style = document.createElement('style');
+          style.id = 'response-case-style';
+          style.textContent = extraCss;
+          document.head.appendChild(style);
+        }
+      }, { markup: html, extraCss: css });
+      if (setup) await page.evaluate(setup);
+      const raw = await page.evaluate(() => {
+        const root = document.querySelector('#fixture .measured-reply') || document.querySelector('#fixture').firstElementChild;
+        const paragraph = root && root.querySelector('p');
+        return root ? {
+          innerText: root.innerText,
+          textContent: root.textContent,
+          nodeValue: paragraph && paragraph.firstChild && paragraph.firstChild.nodeValue,
+          path: paragraph ? [root, paragraph.parentElement, paragraph].map(element => {
+            const style = getComputedStyle(element);
+            return { tag: element.tagName, attributes: element.attributes.length, children: element.childNodes.length, display: style.display, whiteSpace: style.whiteSpace, visibility: style.visibility, opacity: style.opacity };
+          }) : []
+        } : null;
+      });
+      return { raw, state: await page.evaluate(snapshot) };
+    };
+    const requestId = '0123456789abcdef0123456789abcdef';
+    const responseJson = JSON.stringify({ request_id: requestId, state: 'DONE', message: '日本語の fixture', robin: '', artifacts: [] });
+    const marker = 'AGENT_END_' + requestId;
+    const responseText = responseJson + '\n' + marker;
+    let response = await renderReply(reply(responseText));
+    check(response.raw.path, [
+      { tag: 'DIV', attributes: 6, children: 1, display: 'block', whiteSpace: 'normal', visibility: 'visible', opacity: '1' },
+      { tag: 'DIV', attributes: 1, children: 1, display: 'flex', whiteSpace: 'normal', visibility: 'visible', opacity: '1' },
+      { tag: 'P', attributes: 0, children: 1, display: 'block', whiteSpace: 'normal', visibility: 'visible', opacity: '1' }
+    ], 'Reproduce the measured assistant element path and computed styles');
+    check(response.raw.innerText, responseJson + ' ' + marker, 'Normal white-space really collapses the response LF to a space');
+    check(response.raw.textContent, responseText, 'The measured response textContent retains its LF');
+    check(response.raw.nodeValue, responseText, 'The measured paragraph has the complete original text node');
+    check(response.state.assistants, [{ key: 'reply-fixture', text: responseText, collapsed: false }], 'Production snapshot returns the original response node without guessing a marker boundary');
+
+    for (const value of [
+      responseJson,
+      responseJson + ' ' + marker,
+      '  日本語 "引用" O\'Brien C:\\path\\raw %FileContents%  \n' + marker,
+      'actual\nLF and literal \\n stay distinct\n\n' + marker,
+      ' \n日本語  の本文\n\n末尾 \n ',
+      '本文\u200b途中\u200cと\u2060\ufeff\n' + marker,
+      '<JSON> & "quotes" \\ %\n' + marker
+    ]) {
+      response = await renderReply(reply(value));
+      check(response.raw.nodeValue, value, 'Fixture retains the complete response text node ' + JSON.stringify(value));
+      check(response.state.assistants, [{ key: 'reply-fixture', text: value, collapsed: false }], 'Preserve every original response character ' + JSON.stringify(value));
+    }
+
+    const measuredReply = reply(responseText);
+    for (const [label, html, setup, css] of [
+      ['different supported selector', measuredReply.replace('data-testid="markdown-reply"', 'data-content="ai-message"')],
+      ['different root element', measuredReply.replace(/^<div /, '<section ').replace(/<\/div>$/, '</section>')],
+      ['different direction', measuredReply.replace('dir="auto"', 'dir="ltr"')],
+      ['missing root aria-hidden', measuredReply.replace(' aria-hidden="false"', '')],
+      ['root aria-hidden true', measuredReply.replace('aria-hidden="false"', 'aria-hidden="true"')],
+      ['empty root class', measuredReply.replace('class="measured-reply"', 'class=""')],
+      ['empty message id', measuredReply.replace('data-message-id="reply-fixture"', 'data-message-id=""')],
+      ['different message type', measuredReply.replace('data-message-type="Chat"', 'data-message-type="Other"')],
+      ['extra root attribute', measuredReply.replace('dir="auto"', 'dir="auto" title="extra"')],
+      ['hidden root attribute', measuredReply.replace('dir="auto"', 'dir="auto" hidden')],
+      ['extra root child', measuredReply.replace(/<\/div>$/, '<span>extra</span></div>')],
+      ['root comment child', measuredReply.replace(/<\/div>$/, '<!--retain--></div>')],
+      ['wrapper comment child', measuredReply.replace('</p>', '</p><!--retain-->')],
+      ['empty root text sibling', measuredReply, () => document.querySelector('.measured-reply').appendChild(document.createTextNode(''))],
+      ['extra wrapper attribute', measuredReply.replace('class="reply-wrapper"', 'class="reply-wrapper" title="extra"')],
+      ['empty wrapper class', measuredReply.replace('class="reply-wrapper"', 'class=""')],
+      ['missing wrapper class', measuredReply.replace(' class="reply-wrapper"', '')],
+      ['different wrapper type', measuredReply.replace('<div class="reply-wrapper">', '<section class="reply-wrapper">').replace('</p></div>', '</p></section>')],
+      ['paragraph attribute', measuredReply.replace('<p>', '<p class="extra">')],
+      ['different paragraph type', measuredReply.replace('<p>', '<div>').replace('</p>', '</div>')],
+      ['paragraph comment child', measuredReply.replace('</p>', '<!--retain--></p>')],
+      ['split paragraph text', measuredReply, () => document.querySelector('.measured-reply p').firstChild.splitText(1)],
+      ['nested paragraph markup', measuredReply.replace('<p>', '<p><span>').replace('</p>', '</span></p>')],
+      ['empty paragraph', reply('')],
+      ['empty paragraph text node', reply(''), () => document.querySelector('.measured-reply p').appendChild(document.createTextNode(''))],
+      ['hidden injected span', reply(responseJson).replace('</p>', '<span hidden style="display:none">\n' + marker + '</span></p>')],
+      ['root display none', measuredReply, null, '.measured-reply{display:none!important}'],
+      ['root visibility hidden', measuredReply, null, '.measured-reply{visibility:hidden!important}'],
+      ['root opacity zero', measuredReply, null, '.measured-reply{opacity:0!important}'],
+      ['root opacity partial', measuredReply, null, '.measured-reply{opacity:.5!important}'],
+      ['root display flex', measuredReply, null, '.measured-reply{display:flex!important}'],
+      ['wrapper display block', measuredReply, null, '.reply-wrapper{display:block!important}'],
+      ['paragraph display grid', measuredReply, null, '.measured-reply p{display:grid!important}'],
+      ['root pre-wrap', measuredReply, null, '.measured-reply{white-space:pre-wrap!important}'],
+      ['wrapper pre-wrap', measuredReply, null, '.reply-wrapper{white-space:pre-wrap!important}'],
+      ['paragraph pre-wrap', measuredReply, null, '.measured-reply p{white-space:pre-wrap!important}'],
+      ['wrapper opacity partial', measuredReply, null, '.reply-wrapper{opacity:.5!important}'],
+      ['paragraph opacity partial', measuredReply, null, '.measured-reply p{opacity:.5!important}'],
+      ['hidden ancestor', '<section hidden>' + measuredReply + '</section>'],
+      ['aria-hidden ancestor', '<section aria-hidden="true">' + measuredReply + '</section>'],
+      ['display-none ancestor', '<section style="display:none">' + measuredReply + '</section>'],
+      ['visibility-hidden ancestor with visible reply', '<section style="visibility:hidden">' + measuredReply + '</section>', null, '.measured-reply{visibility:visible!important}'],
+      ['partial-opacity ancestor', '<section style="opacity:.5">' + measuredReply + '</section>']
+    ]) {
+      response = await renderReply(html, setup, css);
+      // A flex item with display:inline computes to block, so use and verify a truly different computed display.
+      if (label === 'paragraph display grid') check(response.raw.path[2].display, 'grid', 'The ineligible paragraph really computes to grid');
+      check(response.state.assistants.length, 1, 'Retain the existing assistant candidate for ineligible shape: ' + label);
+      // Legacy innerText can itself include text for an entirely hidden root. This
+      // assertion preserves that behavior; it does not claim to reject hidden replies.
+      check(response.state.assistants[0].text, response.raw.innerText || '', 'Use exactly the legacy rendered text for ineligible shape: ' + label);
+      if (label === 'hidden injected span') {
+        check(response.raw.textContent.includes(marker), true, 'Hidden injection fixture actually contains a marker in textContent');
+        check(response.state.assistants[0].text.includes(marker), false, 'A hidden injected marker is not promoted into the extracted response');
+      }
+    }
+
+    for (const [label, html] of [
+      ['BR separator', measuredReply.replace(escapeText(responseText), escapeText(responseJson) + '<br>' + marker)],
+      ['paragraph separator', measuredReply.replace(escapeText(responseText), escapeText(responseJson) + '</p><p>' + marker)]
+    ]) {
+      response = await renderReply(html);
+      check(response.raw.innerText.includes('\n'), true, 'Structural response fixture renders an LF: ' + label);
+      check(response.raw.textContent, responseJson + marker, 'Structural response textContent omits the rendered separator: ' + label);
+      check(response.state.assistants[0].text, response.raw.innerText, 'Preserve structural response line breaks with the legacy fallback: ' + label);
+    }
+
+    response = await renderReply(measuredReply.replace('data-testid="markdown-reply"', 'data-testid="unrelated"'));
+    check(response.state.assistants, [], 'Do not select unrelated content as an assistant');
+    response = await renderReply('<article data-message-author-role="assistant">outer-prefix' + measuredReply + 'outer-suffix</article>');
+    check(response.state.assistants, [{ key: 'reply-fixture', text: responseText, collapsed: false }], 'Nested supported assistant selectors keep only their leaf response');
+    const priorText = 'Earlier response\nAGENT_END_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+    response = await renderReply(reply(priorText, 'prior-reply') + reply(responseText, 'current-reply'));
+    check(response.state.assistants, [
+      { key: 'prior-reply', text: priorText, collapsed: false },
+      { key: 'current-reply', text: responseText, collapsed: false }
+    ], 'Keep separate assistant turns and their exact texts in document order');
+    for (const [label, control, collapsed] of [
+      ['collapsed button', '<button aria-expanded="false">Expand</button>', true],
+      ['collapsed state', '<span data-state="collapsed">More</span>', true],
+      ['expanded button', '<button aria-expanded="true">Collapse</button>', false]
+    ]) {
+      response = await renderReply(measuredReply.replace(/<\/div>$/, control + '</div>'));
+      check(response.state.assistants, [{ key: 'reply-fixture', text: response.raw.innerText, collapsed }], 'Preserve production collapsed detection and fallback text: ' + label);
     }
 
     for (const [url, message] of [

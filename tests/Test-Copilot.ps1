@@ -110,7 +110,9 @@ Assert-Case ([string]::Equals([string]$longDecoded.robin,$longRobin,[StringCompa
     }
 }
 Assert-Rejected {ConvertFrom-AgentCopilotResponse $complete 'r2'} 'RESPONSE_INVALID' 'Wrong marker'
+Assert-Rejected {ConvertFrom-AgentCopilotResponse $json 'r1'} 'RESPONSE_INVALID' 'Complete JSON without its required marker is rejected'
 Assert-Rejected {ConvertFrom-AgentCopilotResponse ("{"+"`nAGENT_END_r1") 'r1'} 'RESPONSE_INVALID' 'Truncated JSON'
+Assert-Rejected {ConvertFrom-AgentCopilotResponse ("Here is the result:`n"+$complete) 'r1'} 'RESPONSE_INVALID' 'Leading explanation is rejected'
 Assert-Rejected {ConvertFrom-AgentCopilotResponse ($json+"`nAGENT_END_r1`nextra") 'r1'} 'RESPONSE_INVALID' 'Trailing output'
 Assert-Rejected {ConvertFrom-AgentCopilotResponse ($json+"`nAGENT_END_r1") 'r1' -Collapsed} 'RESPONSE_INVALID' 'Collapsed code'
 Assert-Rejected {ConvertFrom-AgentCopilotResponse $complete 'r1' -BaselineTexts @($complete)} 'RESPONSE_INVALID' 'Past turn is never accepted'
@@ -202,6 +204,10 @@ try{
     function Invoke-AgentCopilotCdp {param($Socket,$Method,$Params,$CancelPath,$Deadline);if($Method -ceq 'Input.insertText'){$script:mockInput=$Params.text}}
     function Invoke-AgentCopilotEval {param($Socket,$Expression,$CancelPath,$Deadline);if($Expression.Contains('sends[0].click()')){throw 'CDP_UNAVAILABLE: Simulated uncertain send.'};return $true}
     Assert-Rejected {Invoke-AgentCopilot -Prompt 'Test request' -RequestId 'r-uncertain' -JobId ('f'*32) -Settings @{} -HomePath $jobTemp -TimeoutSeconds 5} 'CDP_UNAVAILABLE' 'Uncertain first send fails without retry'
+    Assert-Case ($script:mockInput.StartsWith("Test request`n`n") -and $script:mockInput.Contains('応答全体は厳密に 2 行にしてください。')) 'Actual inserted wire prompt requires exactly two response lines after the task prompt'
+    Assert-Case ($script:mockInput.Contains('第1行: 指定された単一の JSON オブジェクト。') -and $script:mockInput.Contains('request_id は "r-uncertain"') -and $script:mockInput.Contains('文字列中の改行は JSON のエスケープで表してください。')) 'Actual inserted wire prompt binds the first-line JSON to the current request ID and escaped newlines'
+    Assert-Case ($script:mockInput.Contains('第2行: AGENT_END_r-uncertain だけを出力してください。')) 'Actual inserted wire prompt requires only the current nonce marker on the second line'
+    Assert-Case ($script:mockInput.Contains('ほかの文字、Markdown、コードフェンス、前後の説明は一切付けないでください。') -and $script:mockInput -notmatch 'JSON オブジェクトだけを 1 行で返してください|Return only JSON|Return exactly one JSON object') 'Actual inserted wire prompt forbids extra output without contradicting the marker requirement'
     $uncertainConfig=Get-AgentCopilotConfig $jobTemp @{} ('f'*32)
     $uncertainRecord=[IO.File]::ReadAllText($uncertainConfig.TargetPath,[Text.Encoding]::UTF8)|ConvertFrom-Json
     Assert-Case (-not $uncertainRecord.has_sent -and [IO.File]::Exists((Get-AgentCopilotAttemptPath $jobTemp 'r-uncertain'))) 'Uncertain send preserves fresh-history guard and durable no-replay reservation'
@@ -292,6 +298,7 @@ try{
     Reset-TestReadiness;$script:nextTargetId='job-ready';$script:readyFocus.Enqueue($true);$script:readyFocus.Enqueue($true);$script:readyFocus.Enqueue($false)
     Assert-Rejected {Invoke-AgentCopilot -Prompt 'Test request' -RequestId 'r-ready-uncertain' -JobId ('7'*32) -Settings @{} -HomePath $jobTemp -TimeoutSeconds 30} 'CDP_UNAVAILABLE' 'Invocation tolerates pre-key busy but still fails an uncertain single send'
     Assert-Case ($script:readyKeyCalls -eq 4 -and $script:readyInsertCalls -eq 1 -and $script:readySendCalls -eq 1) 'Transient pre-key busy does not replay keys, insert or send'
+    Assert-Case ($script:readyInput.Contains('request_id は "r-ready-uncertain"') -and $script:readyInput.Contains('第2行: AGENT_END_r-ready-uncertain だけを出力してください。') -and -not $script:readyInput.Contains('AGENT_END_r-uncertain')) 'A separate actual invocation binds both response lines to its own request nonce'
     Assert-Case (@($script:readyDeadlines | Select-Object -Unique).Count -eq 1 -and $script:readyFocusCalls -eq 7) 'All focus call sites share one preparation deadline including a busy recheck'
     Assert-Case ([IO.File]::Exists((Get-AgentCopilotAttemptPath $jobTemp 'r-ready-uncertain'))) 'Uncertain send after readiness retains the no-replay reservation'
     # The original input-appearance timeout is separate from focus preparation and stays AUTH_REQUIRED.

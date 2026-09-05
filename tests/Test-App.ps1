@@ -1,8 +1,8 @@
 ﻿# Local contract tests only: mocked Copilot/PAD are not live acceptance evidence.
 [CmdletBinding()]
-param()
+param([string]$AppSourcePath = (Join-Path $PSScriptRoot '..\App.ps1'))
 $ErrorActionPreference = 'Stop'
-. (Join-Path $PSScriptRoot '..\App.ps1') -Mode Library
+. ([IO.Path]::GetFullPath($AppSourcePath)) -Mode Library
 $script:ProductionRobin = (Get-Item -LiteralPath Function:\Test-AgentRobin).ScriptBlock
 $script:Checks = 0
 function Assert-True($Condition, [string]$Name) { if (-not $Condition) { throw ('FAIL: ' + $Name) }; $script:Checks++ }
@@ -159,6 +159,8 @@ try {
     $script:AiContext = New-TestAiCall $homeDirectory $input
     $ai = Invoke-AgentAiCall $homeDirectory $script:AiContext.request_path $script:AiContext.result_path
     Assert-True ($ai.status -ceq 'success' -and $ai.result -ceq "Translated 100%`n`"quoted`"") 'AiCall preserves business text'
+    Assert-True ($script:LastAiPrompt.Contains('For line 1 of the required two-line response, return one JSON object with exactly request_id,job_id,run_id,ai_call_id,status,result,error_type,input_count,output_count.')) 'Actual AiCall prompt assigns its exact JSON schema to line one of the required two-line response'
+    Assert-True ($script:LastAiPrompt -notmatch 'Return only JSON|Return exactly one JSON object') 'Actual AiCall prompt has no JSON-only whole-response instruction'
     Assert-True ([IO.File]::ReadAllText((Join-Path $script:AiContext.directory 'status.txt')) -ceq 'success') 'PAD status companion written'
     Assert-True ((Read-AgentJson $script:AiContext.result_path).ai_call_id -ceq $script:AiContext.request.ai_call_id) 'Result uses same call ID'
     $before = Get-AgentHash $script:AiContext.result_path
@@ -376,6 +378,8 @@ try {
     $job = New-TestJob $homeDirectory $input
     $completed = Invoke-AgentRun $homeDirectory $job.job_id
     Assert-True ($completed.status -ceq 'done' -and $script:Plans -eq 2 -and $script:PadRuns -eq 1) 'Run observes PAD then plans DONE without repeating PAD'
+    Assert-True ($script:LastPlannerPrompt.Contains('For line 1 of the required two-line response, return one JSON object with fields request_id,state,message,robin,artifacts.')) 'Actual planner prompt assigns its JSON schema to line one of the required two-line response'
+    Assert-True ($script:LastPlannerPrompt -notmatch 'Return only JSON|Return exactly one JSON object') 'Actual planner prompt has no JSON-only whole-response instruction'
     Assert-True ($completed.artifacts.Count -eq 1 -and $completed.final_answer -ceq '完了しました。') 'Run exposes final answer and observed artifact'
     Assert-True ($script:LastPlannerContext.observations[0].artifact_observations[0].content -ceq $script:ObservedMarker) 'Second planner request contains actual first-round output content exactly'
     Assert-True ($completed.observed_artifacts[0].sha256 -ceq (Get-AgentHash $script:Output)) 'Durable job state retains the exact verified output grant'
