@@ -39,6 +39,26 @@ function New-TestAiCall([string]$TestHome, [string]$Target) {
 try {
     Assert-True ($PSVersionTable.PSVersion.Major -eq 5) 'Suite exercises Windows PowerShell 5.1'
     Assert-True (([IO.File]::ReadAllBytes($script:AgentAppPath)[0..2] -join ',') -ceq '239,187,191') 'App has UTF-8 BOM'
+    # Exercise real Move/Replace at the observed long-directory boundary.
+    # The old appended backup suffix exceeded MAX_PATH only during an update.
+    $jsonBoundaryParent = Join-Path $testRoot ('p' * (216 - $testRoot.Length - 1))
+    $jsonBoundaryPath = Join-Path $jsonBoundaryParent 'request.json'
+    Assert-True ($jsonBoundaryParent.Length -eq 216 -and $jsonBoundaryPath.Length -eq 229) 'JSON regression uses the observed 216-character parent and 229-character destination'
+    Write-AgentJson $jsonBoundaryPath @{ step = 1; text = '初回の内容'; original_only = $true }
+    $jsonBoundaryValue = Read-AgentJson $jsonBoundaryPath
+    Assert-True ($jsonBoundaryValue.step -eq 1 -and $jsonBoundaryValue.text -ceq '初回の内容') 'First JSON creation succeeds in the long directory'
+    Assert-True (([IO.Directory]::GetFileSystemEntries($jsonBoundaryParent) -join '') -ceq $jsonBoundaryPath) 'First JSON creation leaves no temporary files'
+    Write-AgentJson $jsonBoundaryPath @{ step = 2; text = "更新 100%`n引用`"を保持" }
+    $jsonBoundaryValue = Read-AgentJson $jsonBoundaryPath
+    Assert-True ($jsonBoundaryValue.step -eq 2 -and $jsonBoundaryValue.text -ceq "更新 100%`n引用`"を保持" -and $null -eq $jsonBoundaryValue.PSObject.Properties['original_only']) 'Actual long-path Replace publishes the complete new JSON'
+    Assert-True (([IO.Directory]::GetFileSystemEntries($jsonBoundaryParent) -join '') -ceq $jsonBoundaryPath) 'Successful long-path Replace removes temporary and backup files'
+    $jsonBoundaryHash = Get-AgentHash $jsonBoundaryPath
+    $jsonBoundaryLock = [IO.File]::Open($jsonBoundaryPath, [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
+    try {
+        Assert-Throws { Write-AgentJson $jsonBoundaryPath @{ step = 3; text = '公開されない内容' } } 'Replace' 'A destination held without delete sharing rejects the actual replacement'
+    } finally { $jsonBoundaryLock.Dispose() }
+    Assert-True ((Get-AgentHash $jsonBoundaryPath) -ceq $jsonBoundaryHash -and (Read-AgentJson $jsonBoundaryPath).step -eq 2) 'Failed replacement preserves the previous JSON bytes'
+    Assert-True (([IO.Directory]::GetFileSystemEntries($jsonBoundaryParent) -join '') -ceq $jsonBoundaryPath) 'Failed replacement removes its temporary and backup files'
     $homeDirectory = Initialize-AgentHome (Join-Path $testRoot 'home')
     $source = Join-Path $testRoot 'share'
     [IO.Directory]::CreateDirectory($source) | Out-Null

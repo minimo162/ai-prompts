@@ -53,7 +53,8 @@ function Write-AgentJson([string]$Path, $Value) {
     $parent = [IO.Path]::GetDirectoryName($Path)
     [IO.Directory]::CreateDirectory($parent) | Out-Null
     $temp = Join-Path $parent ('.write-' + [guid]::NewGuid().ToString('N'))
-    $backup = $temp + '.previous'
+    # A separate short name keeps Replace within Windows PowerShell's path limit.
+    $backup = Join-Path $parent ('.backup-' + [guid]::NewGuid().ToString('N'))
     try {
         [IO.File]::WriteAllText($temp, (ConvertTo-Json -InputObject $Value -Depth 30 -Compress), $script:AgentEncoding)
         if ([IO.File]::Exists($Path)) { [IO.File]::Replace($temp, $Path, $backup) } else { [IO.File]::Move($temp, $Path) }
