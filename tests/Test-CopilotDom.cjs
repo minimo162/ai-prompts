@@ -10,6 +10,11 @@ assert.equal(definitions.length, 1, 'Read exactly one production DOM prelude');
 const snapshotDefinitions = [...source.matchAll(/function Get-AgentCopilotSnapshot \{\r?\n[\s\S]*?\$body = @'\r?\n([\s\S]*?)\r?\n'@\r?\n/g)];
 assert.equal(snapshotDefinitions.length, 1, 'Read exactly one production snapshot body');
 const snapshot = '(()=>{' + definitions[0][1] + '\n' + snapshotDefinitions[0][1] + '})()';
+const expandDefinitions = [...source.matchAll(/function Invoke-AgentCopilotExpand \{\r?\n[\s\S]*?\$body\s*=\s*@'\r?\n([\s\S]*?)\r?\n'@\r?\n/g)];
+assert.equal(expandDefinitions.length, 1, 'Read exactly one production expansion body');
+assert.equal(expandDefinitions[0][1].split('EXPAND_ARGUMENTS').length, 2, 'Production expansion has one structured argument insertion');
+const expandExpression = (key, text, requestId) => '(()=>{' + definitions[0][1] + '\n' + expandDefinitions[0][1]
+  .replace('EXPAND_ARGUMENTS', () => JSON.stringify({ key, text, request_id: requestId })) + '})()';
 const fixture = '<!doctype html><meta charset="utf-8"><style>body{margin:20px}#fixture>*{display:block;min-width:300px;min-height:40px;white-space:pre-wrap}p{margin:0}#fixture .measured-reply,#fixture .measured-reply *{white-space:normal;opacity:1}#fixture .measured-reply{display:block}#fixture .measured-reply>.reply-wrapper{display:flex}#fixture .measured-reply>.reply-wrapper>p{display:block}</style><main id="fixture"></main>';
 const trustedUrl = 'https://m365.cloud.microsoft/chat/';
 
@@ -470,6 +475,160 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
       { key: 'later-code', source_kind: 'fenced_plaintext', text: fencedPayload }
     ], 'Each assistant owns its code block independently; turn and nonce filtering remains the adapter responsibility');
 
+    // A separate real observation (7688... / b213572...) confirmed one More click:
+    // the same 64 nodes and two logical rows survive the folded -> expanded change.
+    // Only observed control/state differences are modeled; no live response is copied.
+    const expansionMessage = fixtureMessage.repeat(14) + " EXPAND_ARGUMENTS REQUEST_ID RESPONSE_TEXT $& $$ $` $'";
+    const expansionJson = JSON.stringify({ request_id: requestId, state: 'BLOCKED', message: expansionMessage, robin: '', artifacts: [] });
+    const expansionText = expansionJson + '\n' + marker;
+    const expandedReply = (line0 = expansionJson, line1 = marker, key = 'fenced-fixture') => fencedReply(line0, line1, key)
+      .replace('aria-label="その他の行を表示する"', 'aria-label="簡易表示" data-fui-focus-visible="true"')
+      .replace('</span>その他の行を表示する</button>', '</span>簡易表示</button>');
+    const visibleMoreCss = '.more-holder{display:flex;justify-content:center}.more-button{display:flex;height:32px}.code-editor{overflow:auto;max-height:300px}.code-editor.expanded-code{overflow:visible;max-height:none}';
+    const expandedCss = visibleMoreCss + '.code-editor{overflow:visible;max-height:none}';
+    const renderFolded = (markup = fencedReply(expansionJson), setup, css = '') => renderFenced(markup, setup, visibleMoreCss + css);
+    const renderExpanded = (markup = expandedReply(), setup, css = '') => renderFenced(markup, setup, expandedCss + css);
+    const expansionShape = () => page.locator('.fenced-reply').evaluate(root => {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_ALL);
+      let nodeCount = 1; while (walker.nextNode()) nodeCount++;
+      const editor = root.querySelector('.code-editor'), holder = root.querySelector('.more-holder'), button = holder.firstElementChild;
+      const box = editor.getBoundingClientRect(), rows = [...editor.children].map(row => row.getBoundingClientRect());
+      return { nodeCount, rowValues: [...editor.querySelectorAll('[data-line-index]')].map(row => row.firstChild.nodeValue), editor: { overflow: getComputedStyle(editor).overflow, maxHeight: getComputedStyle(editor).maxHeight, display: getComputedStyle(editor).display }, finalRowClipped: rows[3].bottom > box.bottom, allRowsContained: rows.every(row => row.left >= box.left && row.right <= box.right && row.top >= box.top && row.bottom <= box.bottom), holderDisplay: getComputedStyle(holder).display, buttonDisplay: getComputedStyle(button).display, label: button.getAttribute('aria-label'), text: button.lastChild.nodeValue, focusVisible: button.getAttribute('data-fui-focus-visible') };
+    });
+    response = await renderFolded();
+    check(await expansionShape(), { nodeCount: 64, rowValues: [expansionJson, marker], editor: { overflow: 'auto', maxHeight: '300px', display: 'grid' }, finalRowClipped: true, allRowsContained: false, holderDisplay: 'flex', buttonDisplay: 'flex', label: 'その他の行を表示する', text: 'その他の行を表示する', focusVisible: null }, 'Reproduce the measured folded editor with a visible More control');
+    check(response.state.assistants[0], { key: 'fenced-fixture', text: expansionText, source_kind: 'fenced_collapsed', collapsed: true }, 'Known folded code exposes exact logical text but cannot yet be accepted as expanded');
+    response = await renderExpanded();
+    check(await expansionShape(), { nodeCount: 64, rowValues: [expansionJson, marker], editor: { overflow: 'visible', maxHeight: 'none', display: 'grid' }, finalRowClipped: false, allRowsContained: true, holderDisplay: 'flex', buttonDisplay: 'flex', label: '簡易表示', text: '簡易表示', focusVisible: 'true' }, 'Reproduce the measured expanded editor and unchanged node/row structure');
+    check(response.state.assistants[0], { key: 'fenced-fixture', text: expansionText, source_kind: 'fenced_plaintext', collapsed: false }, 'Only the fully expanded measured state becomes fenced plaintext');
+    check(JSON.parse(response.state.assistants[0].text.split('\n')[0]).message, expansionMessage, 'Expansion preserves every decoded character, including literal escapes and encoded CRLF');
+    response = await renderExpanded(undefined, () => document.querySelector('.more-button').removeAttribute('data-fui-focus-visible'));
+    check(response.state.assistants[0].source_kind, 'fenced_plaintext', 'Removing a transient focus-visible flag does not fold an expanded editor');
+    response = await renderFolded(fencedReply(fencedJson));
+    check((await expansionShape()).finalRowClipped, false, 'A short synthetic body does not overflow merely because More is visible');
+    check(response.state.assistants[0].source_kind, 'rendered', 'A More label and capped overflow style alone do not prove the measured folded geometry');
+
+    for (const [label, expanded, setup, css] of [
+      ['only aria-label changed', false, () => document.querySelector('.more-button').setAttribute('aria-label', '簡易表示')],
+      ['only button text changed', false, () => { document.querySelector('.more-button').lastChild.nodeValue = '簡易表示'; }],
+      ['label and text changed without editor expansion', false, () => { const button = document.querySelector('.more-button'); button.setAttribute('aria-label', '簡易表示'); button.lastChild.nodeValue = '簡易表示'; }],
+      ['editor expanded while More label remains', false, null, '.code-editor{overflow:visible;max-height:none}'],
+      ['folded editor overflow changed alone', false, null, '.code-editor{overflow:visible}'],
+      ['folded editor max-height removed alone', false, null, '.code-editor{max-height:none}'],
+      ['expanded editor still capped', true, null, '.code-editor{max-height:300px}'],
+      ['expanded editor retains scrollbar overflow', true, null, '.code-editor{overflow:auto}'],
+      ['expanded style but rows extend below editor', true, null, '.code-editor{height:100px}'],
+      ['expanded row extends outside editor horizontally', true, null, '.code-line{position:relative;left:4px}'],
+      ['folded editor was scrolled to an unmeasured state', false, () => { const editor = document.querySelector('.code-editor'); editor.scrollTop = editor.scrollHeight; }],
+      ['expanded label hidden in holder', true, null, '.more-holder{display:none}'],
+      ['unmeasured holder block display', true, null, '.more-holder{display:block}'],
+      ['unknown focus-visible value', true, () => document.querySelector('.more-button').setAttribute('data-fui-focus-visible', 'false')],
+      ['unrecognized expanded button attribute', true, () => document.querySelector('.more-button').setAttribute('title', 'unknown')],
+      ['extra expanded row', true, () => document.querySelector('.code-editor').appendChild(document.querySelector('[data-line-index="1"]').cloneNode(true))],
+      ['unknown expanded text', true, () => document.querySelector('.header-spacer').appendChild(document.createTextNode('unowned explanation'))],
+      ['expanded root comment', true, () => document.querySelector('.fenced-reply').appendChild(document.createComment('unowned'))],
+      ['expanded payload wrapper', true, () => { const row = document.querySelector('[data-line-index="0"]'); const child = document.createElement('span'); child.textContent = row.textContent; row.replaceChildren(child); }],
+      ['expanded line hidden', true, null, '.code-line{visibility:hidden!important}'],
+      ['expanded holder opacity changed', true, null, '.more-holder{opacity:.5!important}'],
+      ['expanded ancestor content visibility changed', true, null, '.fixture-code{content-visibility:hidden!important}']
+    ]) {
+      response = await (expanded ? renderExpanded : renderFolded)(undefined, setup, css || '');
+      check(response.state.assistants[0].source_kind, 'rendered', 'Never infer expansion from a partial or unknown state: ' + label);
+    }
+
+    await page.setViewportSize({ width: 1280, height: 1000 });
+    const renderExpansionAction = async (markup = fencedReply(expansionJson) + span('<p><br></p>'), setup, css = '', transition = true) => {
+      await renderFolded(markup, null, css);
+      await page.evaluate(changeUi => {
+        window.expansionActions = { more: 0, copy: 0, menu: 0, goto: 0, inputFocus: 0, keys: [] };
+        for (const button of document.querySelectorAll('.fenced-reply button')) {
+          button.addEventListener('click', () => {
+            const counts = window.expansionActions;
+            if (button.classList.contains('copy-button')) counts.copy++;
+            if (button.classList.contains('display-menu')) counts.menu++;
+            if (button.classList.contains('goto-button')) counts.goto++;
+            if (button.classList.contains('more-button')) {
+              counts.more++;
+              const root = button.closest('.fenced-reply');
+              counts.keys.push(root.getAttribute('data-message-id'));
+              if (changeUi) {
+                root.querySelector('.code-editor').classList.add('expanded-code');
+                button.setAttribute('aria-label', '簡易表示');
+                button.setAttribute('data-fui-focus-visible', 'true');
+                button.lastChild.nodeValue = '簡易表示';
+              }
+            }
+          });
+        }
+        for (const input of document.querySelectorAll('[contenteditable="true"]')) input.addEventListener('focus', () => { window.expansionActions.inputFocus++; });
+      }, transition);
+      if (setup) await page.evaluate(setup);
+    };
+    const expansionCounts = () => page.evaluate(() => window.expansionActions);
+    const noExpansionActions = { more: 0, copy: 0, menu: 0, goto: 0, inputFocus: 0, keys: [] };
+    await renderExpansionAction();
+    const expand = expandExpression('fenced-fixture', expansionText, requestId);
+    check(await page.evaluate(expand), true, 'Actual production expansion code acknowledges one click on the measured More control');
+    check(await expansionCounts(), { more: 1, copy: 0, menu: 0, goto: 0, inputFocus: 0, keys: ['fenced-fixture'] }, 'Expansion triggers one More UI event without copy, menu, input focus or a second click');
+    check((await page.evaluate(snapshot)).assistants[0], { key: 'fenced-fixture', text: expansionText, source_kind: 'fenced_plaintext', collapsed: false }, 'The production snapshot recognizes the actual click handler transition and unchanged raw body');
+    check((await expansionShape()).nodeCount, 64, 'One expansion changes control state without adding or dropping response nodes');
+    await assert.rejects(() => page.evaluate(expand), error => error.message.includes('expand unavailable'), 'An already expanded response cannot receive another More click');
+    checks++;
+    check((await expansionCounts()).more, 1, 'Refusing a second expansion preserves the first click count');
+
+    const otherId = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+    const otherJson = JSON.stringify({ request_id: otherId, state: 'BLOCKED', message: 'Earlier independent response ' + expansionMessage, robin: '', artifacts: [] });
+    await renderExpansionAction(fencedReply(otherJson, 'AGENT_END_' + otherId, 'prior-fenced') + fencedReply(expansionJson) + span('<p><br></p>'));
+    check(await page.evaluate(expand), true, 'A prior assistant with another nonce does not prevent expanding the one matching current response');
+    check((await expansionCounts()).keys, ['fenced-fixture'], 'Only the current response More control receives the click');
+    check((await page.evaluate(snapshot)).assistants.map(({ key, source_kind }) => ({ key, source_kind })), [{ key: 'prior-fenced', source_kind: 'fenced_collapsed' }, { key: 'fenced-fixture', source_kind: 'fenced_plaintext' }], 'An older folded response remains untouched while the current one expands');
+
+    const wrongJson = JSON.stringify({ request_id: otherId, state: 'BLOCKED', message: expansionMessage, robin: '', artifacts: [] });
+    for (const [label, options] of [
+      ['expected key belongs to another response', { key: 'another-key' }],
+      ['expected body differs', { text: expansionText + ' ' }],
+      ['expected request differs', { requestId: otherId }],
+      ['current key changed since the stable reads', { setup: () => document.querySelector('.fenced-reply').setAttribute('data-message-id', 'changed-key') }],
+      ['current body changed since the stable reads', { setup: () => { document.querySelector('[data-line-index="0"]').firstChild.nodeValue += ' '; } }],
+      ['wrong marker despite unchanged expected body', { markup: fencedReply(expansionJson, 'AGENT_END_' + otherId) + span('<p><br></p>'), text: expansionJson + '\nAGENT_END_' + otherId }],
+      ['JSON request differs from marker', { markup: fencedReply(wrongJson) + span('<p><br></p>'), text: wrongJson + '\n' + marker }],
+      ['missing marker', { markup: fencedReply(expansionJson, 'not a marker') + span('<p><br></p>'), text: expansionJson + '\nnot a marker' }],
+      ['missing input', { markup: fencedReply(expansionJson) }],
+      ['two visible inputs', { markup: fencedReply(expansionJson) + span('<p><br></p>') + '<div role="textbox" contenteditable="true">draft</div>' }],
+      ['nonempty draft', { setup: () => { document.querySelector('#m365-chat-editor-target-element').textContent = 'unsubmitted'; } }],
+      ['whitespace draft', { setup: () => { document.querySelector('#m365-chat-editor-target-element').textContent = ' '; } }],
+      ['hidden input', { setup: () => { const input = document.querySelector('#m365-chat-editor-target-element'); input.hidden = true; input.style.display = 'none'; } }],
+      ['generation still active', { markup: fencedReply(expansionJson) + span('<p><br></p>') + '<div role="status" aria-busy="true"></div>' }],
+      ['visible stop-generation control', { markup: fencedReply(expansionJson) + span('<p><br></p>') + '<button aria-label="停止">停止</button>' }],
+      ['button disabled', { setup: () => { document.querySelector('.more-button').disabled = true; } }],
+      ['button aria-disabled', { setup: () => document.querySelector('.more-button').setAttribute('aria-disabled', 'true') }],
+      ['button hidden', { setup: () => { document.querySelector('.more-button').hidden = true; } }],
+      ['button inert', { setup: () => { document.querySelector('.more-button').inert = true; } }],
+      ['inert response ancestor', { markup: '<section inert>' + fencedReply(expansionJson) + '</section>' + span('<p><br></p>') }],
+      ['hidden response ancestor', { markup: '<section hidden>' + fencedReply(expansionJson) + '</section>' + span('<p><br></p>') }],
+      ['aria-hidden response ancestor', { markup: '<section aria-hidden="true">' + fencedReply(expansionJson) + '</section>' + span('<p><br></p>') }],
+      ['transparent response ancestor', { markup: '<section class="ineligible-ancestor">' + fencedReply(expansionJson) + '</section>' + span('<p><br></p>'), css: '.ineligible-ancestor{opacity:0}' }],
+      ['button opacity zero', { css: '.more-button{opacity:0!important}' }],
+      ['button visibility hidden', { css: '.more-button{visibility:hidden!important}' }],
+      ['button has no hit-test participation', { css: '.more-button{pointer-events:none}' }],
+      ['button outside viewport vertically', { css: '.more-holder{position:relative;top:10000px}' }],
+      ['button outside viewport horizontally', { css: '.more-holder{position:relative;left:-10000px}' }],
+      ['button covered by another element', { markup: fencedReply(expansionJson) + span('<p><br></p>') + '<div class="expansion-overlay"></div>', css: '.expansion-overlay{position:fixed;inset:0;z-index:999;background:transparent}' }],
+      ['second button within response', { setup: () => { const button = document.querySelector('.more-button'); button.parentElement.appendChild(button.cloneNode(true)); } }],
+      ['same nonce in two assistant replies', { markup: fencedReply(expansionJson) + fencedReply(expansionJson, marker, 'duplicate-nonce') + span('<p><br></p>') }],
+      ['same key in two assistant replies', { markup: fencedReply(expansionJson) + fencedReply(otherJson, 'AGENT_END_' + otherId) + span('<p><br></p>') }],
+      ['payload no longer a direct text node', { setup: () => { const row = document.querySelector('[data-line-index="0"]'); const inner = document.createElement('span'); inner.textContent = row.textContent; row.replaceChildren(inner); } }],
+      ['unrecognized empty node beside payload', { setup: () => document.querySelector('[data-line-index="0"]').appendChild(document.createTextNode('')) }],
+      ['already expanded state', { markup: expandedReply() + span('<p><br></p>'), css: '.code-editor{overflow:visible;max-height:none}' }],
+      ['unknown partial expansion', { css: '.code-editor{overflow:visible}' }]
+    ]) {
+      await renderExpansionAction(options.markup, options.setup, options.css || '');
+      const operation = expandExpression(options.key || 'fenced-fixture', options.text || expansionText, options.requestId || requestId);
+      await assert.rejects(() => page.evaluate(operation), error => error.message.includes('expand unavailable'), 'Production expansion rejects an unconfirmed state: ' + label);
+      checks++;
+      check(await expansionCounts(), noExpansionActions, 'A rejected expansion has no UI side effects: ' + label);
+    }
+
     for (const [url, message] of [
       ['http://m365.cloud.microsoft/chat/', 'untrusted page'],
       ['https://m365.cloud.microsoft.evil.test/chat/', 'untrusted page'],
@@ -481,6 +640,8 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
       await page.goto(url);
       await page.locator('#fixture').evaluate((root, markup) => { root.innerHTML = markup; }, span('<p><br></p>'));
       await assert.rejects(() => page.evaluate(snapshot), error => error.message.includes(message), 'Reject untrusted page ' + url);
+      checks++;
+      await assert.rejects(() => page.evaluate(expand), error => error.message.includes(message), 'Expansion also rejects untrusted page ' + url);
       checks++;
     }
     check(pageErrors, [], 'No fixture JavaScript errors');

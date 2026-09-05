@@ -1093,28 +1093,7 @@ const label=e=>(e.getAttribute('aria-label')||e.getAttribute('title')||e.innerTe
 const generating=buttons.some(e=>/^(stop|stop generating|stop responding|停止|応答を停止|生成を停止)$/i.test(label(e)))||[...document.querySelectorAll('[aria-busy="true"],[data-state="streaming"],[data-status="streaming"]')].some(visible);
 const sends=buttons.filter(e=>/^(send|send message|send prompt|送信|メッセージを送信|プロンプトを送信)$/i.test(label(e))&&!e.disabled&&e.getAttribute('aria-disabled')!=='true');
 const assistantSelectors=['[data-testid="markdown-reply"]','[data-content="ai-message"]','[data-message-author-role="assistant"]','[role="article"][data-author="assistant"]','[role="article"][aria-label*="Copilot" i]'];
-'@
-}
-
-function Get-AgentCopilotSnapshot {
-    param($Socket,[string]$CancelPath,[datetime]$Deadline)
-    $body = @'
-const roots=[...new Set(assistantSelectors.flatMap(s=>[...document.querySelectorAll(s)]))];
-const nodes=roots.filter(e=>!roots.some(other=>other!==e&&e.contains(other)));
-const assistantText=e=>{
-  const rendered=String(e.innerText||''),wrapper=e.firstChild,p=wrapper&&wrapper.firstChild,text=p&&p.firstChild;
-  // This measured plain-text M365 path contains real LF characters that normal white-space collapses in innerText.
-  if(e.tagName!=='DIV'||e.attributes.length!==6||e.getAttribute('dir')!=='auto'||e.getAttribute('aria-hidden')!=='false'||!e.getAttribute('class')||e.getAttribute('data-testid')!=='markdown-reply'||!e.getAttribute('data-message-id')||e.getAttribute('data-message-type')!=='Chat'||e.childNodes.length!==1)return rendered;
-  if(!wrapper||wrapper.nodeType!==1||wrapper.tagName!=='DIV'||wrapper.attributes.length!==1||!wrapper.getAttribute('class')||wrapper.childNodes.length!==1||!p||p.nodeType!==1||p.tagName!=='P'||p.attributes.length!==0||p.childNodes.length!==1||!text||text.nodeType!==3||text.nodeValue.length===0)return rendered;
-  const path=[e,wrapper,p],display=['block','flex','block'];
-  if(path.some((node,i)=>{const style=getComputedStyle(node);return !visible(node)||style.display!==display[i]||style.whiteSpace!=='normal'||style.visibility!=='visible'||style.opacity!=='1';}))return rendered;
-  for(let ancestor=e.parentElement;ancestor;ancestor=ancestor.parentElement){
-    const style=getComputedStyle(ancestor);
-    if(ancestor.hidden||ancestor.getAttribute('aria-hidden')==='true'||style.display==='none'||style.visibility!=='visible'||style.opacity!=='1')return rendered;
-  }
-  return text.nodeValue;
-};
-const fencedText=e=>{
+const fencedResponse=e=>{
   // Recognize the measured two-row Plain Text code editor; unknown or incomplete DOM stays rendered text.
   try{
     const owned=new Set(),classes={class:null};
@@ -1164,10 +1143,18 @@ const fencedText=e=>{
       rows.push(gutter,line);values.push(value);
     }
     const moreHolder=div(findRoot.childNodes[2],classes,1);
-    const more=check(moreHolder.firstChild,'button',{type:'button',role:'button','aria-label':'その他の行を表示する',class:null},2);
-    icon(span(more.firstChild,1).firstChild);text(more.childNodes[1],'その他の行を表示する');
-    // Only this measured hidden holder means there are no additional materialized rows to obtain.
-    if(getComputedStyle(moreHolder).display!=='none')throw 0;
+    const control=moreHolder.firstChild,controlLabel=control&&control.nodeType===1?control.getAttribute('aria-label'):null;
+    if(!['その他の行を表示する','簡易表示'].includes(controlLabel))throw 0;
+    const controlAttrs={type:'button',role:'button','aria-label':controlLabel,class:null};
+    if(controlLabel==='簡易表示'&&control.hasAttribute('data-fui-focus-visible'))controlAttrs['data-fui-focus-visible']='true';
+    const more=check(control,'button',controlAttrs,2);
+    icon(span(more.firstChild,1).firstChild);text(more.childNodes[1],controlLabel);
+    const holderStyle=getComputedStyle(moreHolder),editorStyle=getComputedStyle(editor);
+    const editorRect=editor.getBoundingClientRect(),rowRects=rows.map(n=>n.getBoundingClientRect());
+    const hidden=holderStyle.display==='none'&&controlLabel==='その他の行を表示する';
+    const folded=holderStyle.display==='flex'&&controlLabel==='その他の行を表示する'&&editorStyle.maxHeight==='300px'&&editorStyle.overflow==='auto'&&editorStyle.overflowX==='auto'&&editorStyle.overflowY==='auto'&&rowRects[3].bottom>editorRect.bottom;
+    const expanded=holderStyle.display==='flex'&&controlLabel==='簡易表示'&&editorStyle.maxHeight==='none'&&editorStyle.overflow==='visible'&&editorStyle.overflowX==='visible'&&editorStyle.overflowY==='visible'&&rowRects.every(r=>r.left>=editorRect.left&&r.right<=editorRect.right&&r.top>=editorRect.top&&r.bottom<=editorRect.bottom);
+    if(!hidden&&!folded&&!expanded)throw 0;
     const path=[e,wrapper,inner,group,container,code,body,viewport,findRoot,editor,...rows];
     const displays=['block','flex','block','block','block','flex','flex','flex','flex','grid',...rows.map(()=>'block')];
     if(path.some((n,i)=>{const s=getComputedStyle(n);return !visible(n)||n.hidden||n.getAttribute('aria-hidden')==='true'||s.display!==displays[i]||s.visibility!=='visible'||s.opacity!=='1'||s.contentVisibility!=='visible';}))throw 0;
@@ -1175,18 +1162,71 @@ const fencedText=e=>{
       const s=getComputedStyle(ancestor);
       if(ancestor.hidden||ancestor.getAttribute('aria-hidden')==='true'||s.display==='none'||s.visibility!=='visible'||s.opacity!=='1'||s.contentVisibility!=='visible')throw 0;
     }
+    if(!hidden&&[moreHolder,more].some(n=>{const s=getComputedStyle(n);return !visible(n)||n.hidden||n.getAttribute('aria-hidden')==='true'||s.visibility!=='visible'||s.opacity!=='1'||s.contentVisibility!=='visible';}))throw 0;
     const walker=document.createTreeWalker(e,NodeFilter.SHOW_ALL);while(walker.nextNode())if(!owned.has(walker.currentNode))throw 0;
     // Join actual logical rows, preserving every character within each row. The strict parser validates their contents.
-    return values.join('\n');
+    return {text:values.join('\n'),source_kind:folded?'fenced_collapsed':'fenced_plaintext',collapsed:folded,more};
   }catch{return null;}
 };
+'@
+}
+
+function Get-AgentCopilotSnapshot {
+    param($Socket,[string]$CancelPath,[datetime]$Deadline)
+    $body = @'
+const roots=[...new Set(assistantSelectors.flatMap(s=>[...document.querySelectorAll(s)]))];
+const nodes=roots.filter(e=>!roots.some(other=>other!==e&&e.contains(other)));
+const assistantText=e=>{
+  const rendered=String(e.innerText||''),wrapper=e.firstChild,p=wrapper&&wrapper.firstChild,text=p&&p.firstChild;
+  // This measured plain-text M365 path contains real LF characters that normal white-space collapses in innerText.
+  if(e.tagName!=='DIV'||e.attributes.length!==6||e.getAttribute('dir')!=='auto'||e.getAttribute('aria-hidden')!=='false'||!e.getAttribute('class')||e.getAttribute('data-testid')!=='markdown-reply'||!e.getAttribute('data-message-id')||e.getAttribute('data-message-type')!=='Chat'||e.childNodes.length!==1)return rendered;
+  if(!wrapper||wrapper.nodeType!==1||wrapper.tagName!=='DIV'||wrapper.attributes.length!==1||!wrapper.getAttribute('class')||wrapper.childNodes.length!==1||!p||p.nodeType!==1||p.tagName!=='P'||p.attributes.length!==0||p.childNodes.length!==1||!text||text.nodeType!==3||text.nodeValue.length===0)return rendered;
+  const path=[e,wrapper,p],display=['block','flex','block'];
+  if(path.some((node,i)=>{const style=getComputedStyle(node);return !visible(node)||style.display!==display[i]||style.whiteSpace!=='normal'||style.visibility!=='visible'||style.opacity!=='1';}))return rendered;
+  for(let ancestor=e.parentElement;ancestor;ancestor=ancestor.parentElement){
+    const style=getComputedStyle(ancestor);
+    if(ancestor.hidden||ancestor.getAttribute('aria-hidden')==='true'||style.display==='none'||style.visibility!=='visible'||style.opacity!=='1')return rendered;
+  }
+  return text.nodeValue;
+};
+
 const assistants=nodes.map((e,i)=>{
-  const fenced=fencedText(e),known=fenced!==null;
-  return {key:e.getAttribute('data-message-id')||e.id||String(i),text:known?fenced:assistantText(e),source_kind:known?'fenced_plaintext':'rendered',collapsed:known?false:!!e.querySelector('button[aria-expanded="false"],[data-state="collapsed"]')};
+  const fenced=fencedResponse(e),known=fenced!==null;
+  return {key:e.getAttribute('data-message-id')||e.id||String(i),text:known?fenced.text:assistantText(e),source_kind:known?fenced.source_kind:'rendered',collapsed:known?fenced.collapsed:!!e.querySelector('button[aria-expanded="false"],[data-state="collapsed"]')};
 });
 return {url:location.href,inputCount:inputs.length,inputText:inputText(),generating,sendReady:sends.length===1,assistants};
 '@
     return (Invoke-AgentCopilotEval $Socket ('(()=>{' + (Get-AgentCopilotDomPrelude) + $body + '})()') $CancelPath $Deadline)
+}
+
+function Invoke-AgentCopilotExpand {
+    param($Socket,[string]$RequestId,[string]$ResponseKey,[string]$ExpectedText,[string]$CancelPath,[datetime]$Deadline)
+    Assert-AgentCopilotWait $CancelPath $Deadline
+    if([string]::IsNullOrEmpty($ResponseKey)){throw 'RESPONSE_INVALID: 展開対象の回答 ID がありません。'}
+    # This parser pass authorizes one UI expansion only; a collapsed response is never returned as success.
+    $null=ConvertFrom-AgentCopilotResponse -Text $ExpectedText -RequestId $RequestId
+    $body=@'
+const {key:expectedKey,text:expectedText,request_id:requestId}=EXPAND_ARGUMENTS;
+const roots=[...new Set(assistantSelectors.flatMap(s=>[...document.querySelectorAll(s)]))];
+const nodes=roots.filter(e=>!roots.some(other=>other!==e&&e.contains(other)));
+const keyed=nodes.filter((e,i)=>(e.getAttribute('data-message-id')||e.id||String(i))===expectedKey);
+const matching=nodes.filter(e=>String(e.textContent).includes(requestId));
+if(keyed.length!==1||matching.length!==1||keyed[0]!==matching[0]||inputs.length!==1||inputText()!==''||generating)throw new Error('expand unavailable');
+const root=keyed[0],response=fencedResponse(root),frame=expectedText.split('\n');
+if(!response||response.source_kind!=='fenced_collapsed'||!response.collapsed||response.text!==expectedText||frame.length!==2||frame[1]!=='AGENT_END_'+requestId||JSON.parse(frame[0]).request_id!==requestId)throw new Error('expand unavailable');
+const more=response.more,controls=[...root.querySelectorAll('button[aria-label="その他の行を表示する"]')];
+if(controls.length!==1||controls[0]!==more||more.disabled||more.getAttribute('aria-disabled')==='true'||more.closest('[inert]'))throw new Error('expand unavailable');
+for(let n=more;n;n=n.parentElement){const s=getComputedStyle(n);if(n.hidden||n.getAttribute('aria-hidden')==='true'||s.display==='none'||s.visibility!=='visible'||s.opacity!=='1'||s.contentVisibility!=='visible'||s.pointerEvents==='none')throw new Error('expand unavailable');}
+const r=more.getBoundingClientRect(),x=r.x+r.width/2,y=r.y+r.height/2;
+if(r.width<=0||r.height<=0||x<0||y<0||x>=innerWidth||y>=innerHeight)throw new Error('expand unavailable');
+const hit=document.elementFromPoint(x,y);if(!hit||(hit!==more&&!more.contains(hit)))throw new Error('expand unavailable');
+HTMLButtonElement.prototype.click.call(more);return true;
+'@
+    $arguments=@{key=$ResponseKey;text=$ExpectedText;request_id=$RequestId}|ConvertTo-Json -Compress
+    $body=$body.Replace('EXPAND_ARGUMENTS',$arguments)
+    try{$ack=Invoke-AgentCopilotEval $Socket ('(()=>{'+(Get-AgentCopilotDomPrelude)+$body+'})()') $CancelPath $Deadline}
+    catch{Assert-AgentCopilotWait $CancelPath $Deadline;throw 'RESPONSE_INVALID: 回答の単回展開を確認できません。再試行しません。'}
+    if($ack -isnot [bool] -or -not $ack){throw 'RESPONSE_INVALID: 回答の単回展開を確認できません。再試行しません。'}
 }
 
 function Read-AgentJsonToken {
@@ -1408,6 +1448,7 @@ function Invoke-AgentCopilot {
         $readyDeadline=[datetime]::UtcNow.AddSeconds(15)
         $baseline=Wait-AgentCopilotInputReady $config $target $socket $CancelPath $deadline $readyDeadline
         $baselineTexts=@($baseline.assistants | ForEach-Object { [string]$_.text })
+        $baselineKeys=@($baseline.assistants | ForEach-Object { [string](Get-AgentProperty $_ 'key' '') } | Where-Object { $_ -cne '' })
         if (@($baselineTexts | Where-Object { $_.Contains('AGENT_END_' + $RequestId) }).Count -gt 0) { throw 'RESPONSE_INVALID: 使用済み要求 ID は再送信できません。' }
         $wirePrompt=$Prompt.Replace("`r`n","`n")+"`n`n応答全体は言語ラベル text のコードフェンス1個だけにしてください。開始行はバッククォート3文字と text、終了行はバッククォート3文字だけです。フェンス内部は厳密に2行です。内部の第1行: 指定された単一の JSON オブジェクト。トップレベルの request_id は `"$RequestId`" とし、改行・引用符・バックスラッシュは JSON の規則でエスケープしてください。内部の第2行: AGENT_END_$RequestId だけを出力してください。フェンスの外に前置き、説明、別のコードや文字を一切付けないでください。JSON のエスケープ以外に Markdown 用の手作業エスケープを追加しないでください。"
         $inputStarted=$false
@@ -1435,19 +1476,27 @@ function Invoke-AgentCopilot {
         Set-AgentCopilotJobSendStarted $config $target
         # A single click only. An uncertain click/response never causes a second send.
         $last='';$stable=0;$seenNew=$false;$seenText=$false;$lastError='RESPONSE_TIMEOUT: Copilot の回答を確認できません。'
+        $expandAttempted=$false;$expandKey='';$expandText='';$foldKey='';$foldText='';$foldStable=0
         while ($true) {
             Assert-AgentCopilotWait $CancelPath $deadline
             Start-Sleep -Milliseconds 500
             Assert-AgentCopilotOwnership $config
             $state=Get-AgentCopilotSnapshot $socket $CancelPath $deadline
             if ($state.inputCount -ne 1) { throw 'AUTH_REQUIRED: Copilot の入力欄が見つかりません。認証状態を確認してください。' }
-            $fresh=@($state.assistants | Where-Object { $baselineTexts -cnotcontains [string]$_.text })
+            $fresh=@($state.assistants | Where-Object { $baselineTexts -cnotcontains [string]$_.text -and $baselineKeys -cnotcontains [string](Get-AgentProperty $_ 'key' '') })
             if ($fresh.Count -gt 0) { $seenNew=$true }
             $candidates=@($fresh | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_.text) })
             if ($candidates.Count -gt 0) { $seenText=$true }
-            $valid=@()
+            if($expandAttempted -and ($fresh.Count -ne 1 -or [string](Get-AgentProperty $fresh[0] 'key' '') -cne $expandKey -or -not [string]::Equals([string]$fresh[0].text,$expandText,[StringComparison]::Ordinal))){throw 'RESPONSE_INVALID: 展開後の回答 ID または本文が一致しません。'}
+            $valid=@();$folded=@()
             foreach ($candidate in $candidates) {
                 try {
+                    if((Get-AgentProperty $candidate 'source_kind' '') -ceq 'fenced_collapsed' -and $candidate.collapsed){
+                        $null=ConvertFrom-AgentCopilotResponse -Text ([string]$candidate.text) -RequestId $RequestId -BaselineTexts $baselineTexts
+                        $folded+=,$candidate
+                        $lastError='RESPONSE_INVALID: 折り畳まれた回答の全文表示を確認できません。'
+                        continue
+                    }
                     $json=ConvertFrom-AgentCopilotResponse -Text ([string]$candidate.text) -RequestId $RequestId -BaselineTexts $baselineTexts -Collapsed:$candidate.collapsed
                     if ((Get-AgentProperty $candidate 'source_kind' '') -cne 'fenced_plaintext') { throw 'RESPONSE_INVALID: 指定されたコードフェンス内の回答を確認できません。' }
                     $valid+=$json
@@ -1455,6 +1504,18 @@ function Invoke-AgentCopilot {
                 catch { $lastError=$_.Exception.Message }
             }
             if ($valid.Count -gt 1) { throw 'RESPONSE_INVALID: 今回の回答が複数あり、一意に特定できません。' }
+            if(-not $expandAttempted -and $fresh.Count -eq 1 -and $folded.Count -eq 1 -and -not $state.generating -and [string]$state.inputText -ceq ''){
+                $key=[string](Get-AgentProperty $folded[0] 'key' '');$text=[string]$folded[0].text
+                if($key -cne '' -and $key -ceq $foldKey -and [string]::Equals($text,$foldText,[StringComparison]::Ordinal)){$foldStable++}else{$foldKey=$key;$foldText=$text;$foldStable=1}
+                if($key -cne '' -and $foldStable -ge 3){
+                    Assert-AgentCopilotWait $CancelPath $deadline;Assert-AgentCopilotOwnership $config
+                    # Reserve locally before the sole expansion call. The durable send attempt also prevents replay after a crash.
+                    $expandAttempted=$true;$expandKey=$key;$expandText=$text
+                    Invoke-AgentCopilotExpand $socket $RequestId $expandKey $expandText $CancelPath $deadline
+                    $stable=0;$last='';$foldStable=0
+                    continue
+                }
+            }else{$foldStable=0;$foldKey='';$foldText=''}
             if ($valid.Count -eq 1 -and -not $state.generating -and [string]$state.inputText -ceq '') {
                 if ([string]::Equals($last,[string]$valid[0],[StringComparison]::Ordinal)) { $stable++ } else { $last=[string]$valid[0];$stable=1 }
                 if ($stable -ge 3) { return [string]$valid[0] }

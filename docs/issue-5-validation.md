@@ -15,7 +15,7 @@
 | 検証 | 証拠と範囲 |
 |---|---|
 | Windows PowerShell 5.1 契約検証 | `tests/Test-App.ps1` **137 PASS**。Copilot/PADを模擬し、要求・結果・観測・再計画・パス境界・同期と実計画/AiCallプロンプトを検査する。実サービスの証拠ではない。 |
-| Copilotアダプター | `tests/Test-Copilot.ps1` **170 PASS**。CDP応答を模擬し、全文・ID・終端・生成終了・排他・ジョブ分離・異常分類、起動タブの終了と他タブの保持、送信前busy待機、実送信本文の2行契約と入力・送信の再試行禁止を検査する。本番Robin検証器で受理したReadText/WriteTextフローと約6万文字の長文をJSON復号し、原文との完全一致も確認。隔離Edgeの `tests/Test-CopilotDom.cjs` は **366 PASS**。実M365の翻訳診断では送信1回から厳格な応答取得・再読取り一致まで成功した。固定PADの正常完走とは分けて下記に記録する。 |
+| Copilotアダプター | `tests/Test-Copilot.ps1` **205 PASS**。CDP応答を模擬し、全文・ID・終端・生成終了・排他・ジョブ分離・異常分類、起動タブの終了と他タブの保持、送信前busy待機、実送信本文の2行契約と入力・送信の再試行禁止を検査する。本番Robin検証器で受理したReadText/WriteTextフローと約6万文字の長文をJSON復号し、原文との完全一致も確認。隔離Edgeの `tests/Test-CopilotDom.cjs` は **483 PASS**。実M365の翻訳診断では送信1回から厳格な応答取得・再読取り一致まで成功した。固定PADの正常完走とは分けて下記に記録する。 |
 | PADアダプター | `tests/Test-Pad.ps1` **302 PASS**。UI/クリップボード境界を模擬し、全文一致・所有権・失敗時の旧フロー実行拒否・結果帰属を検査する。状態別のUI構造、20種類の状態ID、保存・実行・中止、実ファイルに生成した2件のAiCallテンプレートとRobinの検証も本番関数で確認。実機の固定A/Bは下記に分けて記録する。 |
 | localhost HTTP | `tests/Test-Http.ps1` PASS。実App.ps1プロセスでHTML/状態、トークン/Host/Origin拒否、不完全本文の期限、再接続、設定保持、重複回答・古い質問への回答拒否、版の引き継ぎ、停止を確認。 |
 | 実ブラウザー | `tests/Test-Ui.cjs` 15 PASS。実Edgeの1280×900・390×844で入力→未接続エラー→再表示、トークン除去、同ジョブ再接続、横溢れ・JavaScriptエラーなしを確認。質問ID・Copilotジョブ分離変更を含む不変版 `a00bca7` でも再実行し、両幅のPNGを目視確認した。証跡は `.work/ui-after-question-fix-66edd1690c8a4978aae727d6e5a31807/`。隔離サーバーは専用の終了APIで停止した。 |
@@ -33,7 +33,7 @@
 | 0: 配布・起動 | 実共有UNCからの初回・更新、欠落UNC時の警告付きローカル起動は合格 | 実共有の切断、利用者環境での再起動・UI停止 |
 | 1: 固定PADからAiCall | 正常系合格。実PADから翻訳→分類の直列2回、結果受渡し、review分岐と出力を確認 | 拒否/空/期限/中止の実機異常系 |
 | 2: AIなしのA/B差し替え | 正常系A/B合格、異常系は未完了 | 保存・貼り付け失敗などを意図的に起こした場合の旧フロー実行防止 |
-| 3: 生成Robin全文取得 | 初回短文は不正なJSON escapeで停止。コードブロック診断では本文の正確な保持を確認 | 実M365で生成Robinの短文/長文の完全取得、過去回答・途中停止 |
+| 3: 生成Robin全文取得 | コードブロック本文の保持を確認。新版の短文は画面の折り畳みで停止し、採取済みコード自体は期待値と一致 | 実M365で生成Robinの短文/長文の完全取得、過去回答・途中停止 |
 | 4: 生成AiCallフロー | 未検証 | 読取→AI→分岐→書出しを同じPADで完走 |
 | 5: 2〜3往復 | 未検証 | 実結果本文に応じた次の手順、ACT/DONE/ASK_USER/BLOCKED、最終表示 |
 | 6: 別利用者・別PC | 未検証 | 開発環境に依存しない導入・更新・認証・結果確認 |
@@ -172,6 +172,14 @@ Gate 3の初回 `df207bbf633e42f5abb4288b77030ee5` は、短文要求1回の送�
 コードブロックの新規診断 `a7d40210341141d6876928f3e6f60147` は、プロンプト3文字列だけを変更したdraft `8036c7548c47ac6088cd226e3233c0ead604de123645ee7865ea8f714a07ecc3` で実送信1回を行った。現readerは行番号・言語ラベルを含め、表示オプションの閉じたメニューをcollapsedと判定するため、元の実行はRESPONSE_INVALID/unknownで保存した（`gate3/fenced-diagnostic/sessions/a7d40210341141d6876928f3e6f60147/result.json`）。実行後の2回のDOM観測は64ノードの全構造と全textnodeが一致し、本文はdata-line-indexの0・1として存在した。各行の本文を変更せず論理行境界で結合した追補検証では、未変更の厳格JSON/Planner検証と65文字の復号値完全一致がnative PS5/STAでも合格した（`posthoc-decoded-review-native.json`）。日本語、引用符、apostrophe、Windowsパス、literal backslash-n、実LF、percent、Markdown記号、前後2空白が保持された。通常/private/旧証拠169ファイルと既存11タブを保持し、PAD/再送/clipboard/latest変更は0回。これは短い搬送用文字列の追補検証であり、製品readerの成功や生成Robinの長文合格ではない。
 
 実測したコードブロック構造に限定する本文取得を実装し、計画・AiCall・送信時の共通指示を同じ形式に揃えた。既知の本文2行の文字だけを保持し、余分な要素・行・隠れた本文・未確認の構造を拒否する。表示オプションの閉じたメニューと本文の折り畳みを区別し、厳格JSON/終端/ID検証は変更していない。native PS5/STAの基本137・Copilot170、隔離Edge DOM366項目が合格した。実際の既存応答でも修正版App `8617c3aefb1d2b171da43ac1f79e4b9b5a65d75c6fb352dee76a070411ff0a1e` を読み取り専用で2回使用し、source_kind=fenced_plaintext/collapsed=false、本文ハッシュ一致、65文字の復号値完全一致を確認した（`gate3/fenced-diagnostic/sessions/a7d40210341141d6876928f3e6f60147/live-product-reader-37fc73617ada423ea40c4fa4774b65f0.json`）。この照合での送信・入力・clipboard・PAD操作は0回。旧unknown結果は保持し、生成Robinの新規短文・長文取得は別の検証として残す。
+本文取得修正は独立レビューで必須修正0となり、`6d46ededc65e5546f1f9eea6d60034c97614f98b` にコミットした。公開セッション `909eae638a6745588d73d8216e5a730e` はAppを1回の原子的置換で共有へ反映し、旧3ファイルの保存・UNC本文・共有設定とACLの保持を確認した。通常環境の更新 `cd7d11c27e784e7191c69f9e023f0112` は、待機中の旧serverを認証付き終了要求1回で閉じ、実UNC CMDを1回起動してexit 0、新release `0.1.0-49e2d042e35ce8e9a3f9cab4fc8513d3998e1281af62e29c2f3acf86a9412239` のserver PID33172/port52365を確認した。設定・HTTP待機状態と、通常98/private51/所有記録archive3の計152ファイルの保持が合格した。PAD・Copilotへの直接操作は0回。CMDによるローカルHTML起動は製品既定の動作として記録した。
+新版でのGate 3 `7688bbc3eb814afdb301ca55fe1e3f79` は短文の実送信1回後、折り畳まれた応答を拒否して `RESPONSE_INVALID/unknown` となった。長文は未送信、PAD・latest変更・再送は0回。実行開始時の既存3タブ・通常91ファイルを保持し、別追補でprivate51ファイルの全ハッシュ保持も確認した。最初の事後観測は祖先16階層の上限でincompleteとなったため保持し、別スクリプトで上限だけ64へ増やした。2回の完全観測は本文64ノードと39祖先を記録し、300px枠を超える本文と可視の「その他の行を表示する」を確認した（`fenced-observation-9fa821c656114cd3a85414c4884f6d5b.json`）。
+
+同じ採取済み2論理行を変更せずに行境界だけで結合したnative PS5/STA追補は、厳格JSON/Planner/Robin検証を通過した。復号後のコードは881文字・7行・4アクションで、空行・特殊文字・2つの出力先を含む期待値と完全一致した（`captured-payload-review-f3628ef2b37d4e80bfc5ec1783a338aa.json` と `short-content-review-f7e40567fc0b4d1da7badfd3f6d9018a.json`）。過剰escapeの疑いは実文字の検査で否定された。これは折り畳まれたDOMから採取した値の診断であり、製品による取得成功や元のunknownの書換えではない。該当応答だけを展開する操作と、展開後の本文取得は別途検証する。
+事後展開 `0c94e99aa7984fd1b558c8177e0eeba2` は、専用target・要求ID・元本文64ノード・ボタンの所有と可視性を照合し、claim保存後に当該「その他の行を表示する」を1回クリックした。前後各2回の完全DOM観測で本文2行の文字とハッシュは不変、旧結果・所有記録等も保持された（`fenced-expansion-0c94e99aa7984fd1b558c8177e0eeba2.json`）。展開後はeditorがmaxHeight=none/overflow=visibleとなり、ボタンのラベルが「簡易表示」へ変化した。実スクリーンショット `expanded-response-c22e3017c46e4e579f95fae49d12f78e.png` でもJSONと終端の全文を目視した。既存readerは未対応の展開後構造を引き続き拒否しており、製品への既知構造対応・新規要求での自動展開は別途検証する。provider/PAD/再送は0回。クリックに伴う内部のフォーカス等は、helperが明示的に呼んだ操作回数とは区別する。
+実測した折り畳み・展開済み・非表示Moreの3構造を共通の本文判定へ実装した。折り畳まれた新規応答は、要求ID・assistant key・本文の厳密一致、入力空欄と生成終了、3回の安定読取り、ボタン所有・可視性・hit-testを確認して1回だけ展開する。展開後も同じkey・本文と3回の安定読取りを要求し、未知の構造や残った折り畳みを全文として受理しない。旧回答はkeyと本文の両方で除外し、送信と展開の再試行は行わない。
+
+App SHA-256 `126ade09ba1a888969030c0de8e0b4d9a4f51aaa8d8a1aa08273e81450650d9f` はnative PS5/STAの基本137・Copilot205、隔離Edge DOM483項目が合格し、独立最終レビューは必須修正0だった。実画面の既存の展開済み応答を製品readerで2回読み、fenced_plaintext/collapsed=false、本文ハッシュと881文字のRobin・2成果物が完全一致した（`gate3/sessions/7688bbc3eb814afdb301ca55fe1e3f79/live-expanded-reader-a8f9fc304aa54f7883c001f3290d8aee.json`）。この照合での入力・送信・展開・PAD操作は0回。過去のunknownは保持し、新規要求で自動展開を伴う短文・長文E2Eは未実施である。
 Gate 0の追補 `d2dd3aa485384c29b884df9be83ff33c` は、実共有を読み取って作った隔離cacheに対し、未作成UNC子パスをSourcePathとして実AppのBootstrapを1回起動し、警告・新規serverの起動と状態確認・所有確認後の正常終了まで合格した（`gate0/outage-followups/d2dd3aa485384c29b884df9be83ff33c/result.json`）。2026-09-05 21:35:44〜21:35:51 UTC、Bootstrap exit 0、試験server PID13688/port56786は終了済み。通常server PID25544/port53708、既存158ファイル、共有3ファイル、cache4ファイルは保持した。実共有そのものの停止やCMD起動を行った試験ではなく、existing_share_outage=false/actual_cmd_invocations=0を記録している。旧outage失敗結果は変更していない。
 
 Gate 0の実共有切断、Gate 1/2の異常系、Gate 3〜6の実機確認も残っている。

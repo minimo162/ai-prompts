@@ -5,7 +5,7 @@ $parseErrors=$null
 $ast=[Management.Automation.Language.Parser]::ParseFile([IO.Path]::GetFullPath($SourcePath),[ref]$null,[ref]$parseErrors)
 if ($parseErrors.Count -gt 0) { throw ('PowerShell parse errors: '+$parseErrors.Count) }
 # Load definitions only, never the server/launcher top-level code.
-$wanted=@('Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','Get-AgentCopilotConfig','Test-AgentCopilotUrl','Test-AgentCopilotAuthUrl','Test-AgentEdgeCommandLine','Test-AgentCopilotSocketUrl','Read-AgentJsonToken','Test-AgentStrictJson','ConvertFrom-AgentCopilotResponse','Assert-AgentCopilotWait','Enter-AgentCopilotMutex','Get-AgentCopilotAttemptPath','Reserve-AgentCopilotAttempt','Test-AgentCopilotTargetRecord','Write-AgentCopilotTargetRecord','Get-AgentCopilotTarget','Assert-AgentCopilotJobBaseline','Set-AgentCopilotJobSendStarted','Wait-AgentCopilotInputReady','Invoke-AgentCopilot','Get-AgentCopilotDomPrelude','Close-AgentCopilotLaunchTab','Open-AgentCopilot')
+$wanted=@('Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','Get-AgentCopilotConfig','Test-AgentCopilotUrl','Test-AgentCopilotAuthUrl','Test-AgentEdgeCommandLine','Test-AgentCopilotSocketUrl','Read-AgentJsonToken','Test-AgentStrictJson','ConvertFrom-AgentCopilotResponse','Assert-AgentCopilotWait','Enter-AgentCopilotMutex','Get-AgentCopilotAttemptPath','Reserve-AgentCopilotAttempt','Test-AgentCopilotTargetRecord','Write-AgentCopilotTargetRecord','Get-AgentCopilotTarget','Assert-AgentCopilotJobBaseline','Set-AgentCopilotJobSendStarted','Wait-AgentCopilotInputReady','Invoke-AgentCopilotExpand','Invoke-AgentCopilot','Get-AgentCopilotDomPrelude','Close-AgentCopilotLaunchTab','Open-AgentCopilot')
 foreach($name in $wanted){
     $definition=@($ast.FindAll({param($n) $n -is [Management.Automation.Language.FunctionDefinitionAst]},$false) | Where-Object Name -eq $name)
     if($definition.Count -ne 1){throw ('Missing or duplicate function: '+$name)}
@@ -312,6 +312,8 @@ try{
         $script:responseCandidates=$Candidates;$script:responseBaseline=$Baseline
         $script:responseInput='';$script:responseSent=$false
         $script:responseSends=0;$script:responseKeys=0;$script:responseInserts=0;$script:responseReads=0
+        $script:responseExpansions=0;$script:responseExpansionAtRead=0;$script:responseExpandExpression='';$script:responseExpandMode='success'
+        $script:responseGenerating=$false;$script:responseHeldInput='';$script:responseCancelPath='';$script:responseCancelAtRead=0
         $script:nextTargetId='response-'+$script:responseJob
         $config=Get-AgentCopilotConfig $jobTemp @{} $script:responseJob
         $target=Get-AgentCopilotTarget $config -Create
@@ -320,12 +322,27 @@ try{
     function Get-AgentCopilotSnapshot {
         param($Socket,$CancelPath,$Deadline)
         $shown=@($script:responseBaseline)
-        if($script:responseSent){$script:responseReads++;$shown+=@($script:responseCandidates)}
-        return [pscustomobject]@{inputCount=1;inputText=$script:responseInput;generating=$false;assistants=@($shown)}
+        if($script:responseSent){
+            $script:responseReads++;$shown+=@($script:responseCandidates)
+            if($script:responseCancelAtRead -eq $script:responseReads){[IO.File]::WriteAllText($script:responseCancelPath,'cancel')}
+        }
+        $inputValue=if($script:responseSent -and $script:responseHeldInput){$script:responseHeldInput}else{$script:responseInput}
+        return [pscustomobject]@{inputCount=1;inputText=$inputValue;generating=($script:responseSent -and $script:responseGenerating);assistants=@($shown)}
     }
     function Invoke-AgentCopilotEval {
         param($Socket,$Expression,$CancelPath,$Deadline)
         if($Expression.Contains('sends[0].click()')){$script:responseSends++;$script:responseSent=$true;$script:responseInput=''}
+        if($Expression.Contains('HTMLButtonElement.prototype.click.call(more)')){
+            $script:responseExpansions++;$script:responseExpansionAtRead=$script:responseReads;$script:responseExpandExpression=$Expression
+            if($script:responseExpandMode -ceq 'uncertain'){throw 'CDP_UNAVAILABLE: Simulated uncertain expansion acknowledgement.'}
+            if($script:responseExpandMode -ceq 'false_ack'){return $false}
+            if($script:responseExpandMode -cne 'refold'){
+                $script:responseCandidates[0].source_kind='fenced_plaintext';$script:responseCandidates[0].collapsed=$false
+                if($script:responseExpandMode -ceq 'changed_text'){$script:responseCandidates[0].text=$script:responseCandidates[0].text.Replace('original','changed')}
+                if($script:responseExpandMode -ceq 'changed_key'){$script:responseCandidates[0].key='different-reply'}
+                if($script:responseExpandMode -ceq 'unknown_after'){$script:responseCandidates[0].source_kind='rendered'}
+            }
+        }
         return $true
     }
     function Invoke-AgentCopilotCdp {
@@ -334,7 +351,7 @@ try{
         if($Method -ceq 'Input.dispatchKeyEvent'){$script:responseKeys++;return}
         throw ('Unexpected response-test CDP method: '+$Method)
     }
-    function Invoke-TestResponse {Invoke-AgentCopilot -Prompt 'Synthetic response test' -RequestId $script:responseRequest -JobId $script:responseJob -Settings @{} -HomePath $jobTemp -TimeoutSeconds 5}
+    function Invoke-TestResponse {Invoke-AgentCopilot -Prompt 'Synthetic response test' -RequestId $script:responseRequest -JobId $script:responseJob -Settings @{} -HomePath $jobTemp -CancelPath $script:responseCancelPath -TimeoutSeconds 5}
     $acceptedRaw='{"request_id":"r-fenced","value":"  日本語 C:\\path\\raw  "}'
     $accepted=[pscustomobject]@{text=($acceptedRaw+"`nAGENT_END_r-fenced");source_kind='fenced_plaintext';collapsed=$false}
     Reset-TestResponse 'r-fenced' @($accepted)
@@ -360,6 +377,48 @@ try{
     Reset-TestResponse 'r-fenced-timeout'
     Assert-Rejected {Invoke-TestResponse} 'RESPONSE_TIMEOUT' 'Missing fenced response reaches the bounded existing response timeout'
     Assert-Case ($script:responseSends -eq 1 -and $script:responseInserts -eq 1 -and [IO.File]::Exists((Get-AgentCopilotAttemptPath $jobTemp 'r-fenced-timeout'))) 'Response timeout retains its single attempt without resending'
+    function New-TestFolded([string]$RequestId){
+        $raw='{"request_id":"'+$RequestId+'","value":"original EXPAND_ARGUMENTS REQUEST_ID RESPONSE_TEXT C:\\path\\raw %FileContents%"}'
+        return [pscustomobject]@{key='reply-'+$RequestId;text=($raw+"`nAGENT_END_"+$RequestId);source_kind='fenced_collapsed';collapsed=$true}
+    }
+    $folded=New-TestFolded 'r-expand-ok';$foldedText=$folded.text
+    Reset-TestResponse 'r-expand-ok' @($folded)
+    Assert-Case ([string]::Equals((Invoke-TestResponse),$foldedText.Split("`n")[0],[StringComparison]::Ordinal)) 'Collapsed response succeeds only after expansion and exact complete response validation'
+    Assert-Case ($script:responseExpansions -eq 1 -and $script:responseExpansionAtRead -eq 3 -and $script:responseReads -eq 6 -and $script:responseSends -eq 1 -and $script:responseInserts -eq 1) 'One expansion follows three folded reads and is followed by three full reads without resending'
+    Assert-Case ($script:responseExpandExpression.Contains(($foldedText|ConvertTo-Json -Compress))) 'Expansion expression preserves literal placeholder names and original escaped body through one JSON argument substitution'
+    Assert-Rejected {Invoke-TestResponse} 'RESPONSE_INVALID' 'Successful expanded request cannot be replayed'
+    Assert-Case ($script:responseExpansions -eq 1 -and $script:responseSends -eq 1) 'Replay does not send or expand again'
+    foreach($mode in @('uncertain','false_ack','refold','changed_text','changed_key','unknown_after')){
+        $requestId='r-expand-'+$mode;Reset-TestResponse $requestId @((New-TestFolded $requestId));$script:responseExpandMode=$mode
+        Assert-Rejected {Invoke-TestResponse} 'RESPONSE_INVALID' ('Expansion '+$mode+' fails closed')
+        Assert-Case ($script:responseExpansions -eq 1 -and $script:responseSends -eq 1 -and [IO.File]::Exists((Get-AgentCopilotAttemptPath $jobTemp $requestId))) ('Expansion '+$mode+' retains exactly one send and expansion reservation')
+    }
+    foreach($mode in @('malformed','wrong_nonce','unknown_dom','generating','input_present','multiple')){
+        $requestId='r-no-expand-'+$mode;$candidate=New-TestFolded $requestId;Reset-TestResponse $requestId @($candidate)
+        if($mode -ceq 'malformed'){$candidate.text='{broken'+"`nAGENT_END_"+$requestId}
+        if($mode -ceq 'wrong_nonce'){$candidate.text=$candidate.text.Replace('AGENT_END_'+$requestId,'AGENT_END_other')}
+        if($mode -ceq 'unknown_dom'){$candidate.source_kind='rendered'}
+        if($mode -ceq 'generating'){$script:responseGenerating=$true}
+        if($mode -ceq 'input_present'){$script:responseHeldInput='new unsent text'}
+        if($mode -ceq 'multiple'){$other=New-TestFolded $requestId;$other.key='second-reply';$script:responseCandidates+=@($other)}
+        $prefix=if($mode -ceq 'generating'){'RESPONSE_TIMEOUT'}else{'RESPONSE_INVALID'}
+        Assert-Rejected {Invoke-TestResponse} $prefix ('Ineligible '+$mode+' candidate is not expanded')
+        Assert-Case ($script:responseExpansions -eq 0 -and $script:responseSends -eq 1) ('Ineligible '+$mode+' candidate causes no expansion or second send')
+    }
+    $oldFolded=New-TestFolded 'r-prior-request'
+    Reset-TestResponse 'r-prior-folded-key' @() @($oldFolded)
+    # Simulate a reflow changing old displayed text while preserving its old response key.
+    $oldFolded.text='reflowed old text';$reflowed=New-TestFolded 'r-prior-folded-key';$reflowed.key=$oldFolded.key;$script:responseCandidates=@($reflowed)
+    Assert-Rejected {Invoke-TestResponse} 'RESPONSE_TIMEOUT' 'An old folded response key remains excluded when its displayed text changes'
+    Assert-Case ($script:responseExpansions -eq 0 -and $script:responseSends -eq 1) 'Old folded response is not expanded on behalf of a new request'
+    Reset-TestResponse 'r-expand-cancel' @((New-TestFolded 'r-expand-cancel'))
+    $script:responseCancelPath=Join-Path $jobTemp 'expand-cancel';$script:responseCancelAtRead=3
+    Assert-Rejected {Invoke-TestResponse} 'CANCELLED' 'Cancellation at the expansion boundary wins before the helper invocation'
+    Assert-Case ($script:responseExpansions -eq 0 -and $script:responseSends -eq 1) 'Cancellation does not expand or resend'
+    Reset-TestResponse 'r-expand-expired' @((New-TestFolded 'r-expand-expired'))
+    $expiredFold=$script:responseCandidates[0]
+    Assert-Rejected {Invoke-AgentCopilotExpand $null $script:responseRequest $expiredFold.key $expiredFold.text '' ([DateTime]::UtcNow.AddSeconds(-1))} 'RESPONSE_TIMEOUT' 'Expired overall deadline stops the expansion helper before CDP'
+    Assert-Case ($script:responseExpansions -eq 0) 'Expired expansion deadline invokes no click'
     # First browser launch has a nonce blank plus any unrelated user/extension tabs.
     $launchConfig=Get-AgentCopilotConfig (Join-Path $jobTemp 'launch') @{}
     $launchUrl='about:blank#ai-prompts-launch-'+('1'*32)
