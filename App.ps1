@@ -1706,9 +1706,27 @@ function Get-AgentPadWindow {
 
 function Get-AgentPadSnapshot {
     param($Window,[switch]$AllowErrors)
-    $start=Get-AgentPadInvokableButton $Window 'StartFlowButton'
+    $status=Get-AgentPadStatus $Window
+    # PAD intentionally collapses StartFlowButton for these ApplicationState
+    # IsRunning states. Its absence is permitted only while the observed
+    # execution status and an enabled, exact Stop control agree.
+    $runningStatus=($status.state -cin @('running','stepping','stepping_over','stepping_out','running_flow'))
     $stop=Get-AgentPadInvokableButton $Window 'StopFlowButton' '停止' -Wrapped
-    $save=Get-AgentPadInvokableButton $Window 'SaveFlowButton' '保存' -Wrapped
+    $stopEnabled=[bool]$stop.Current.IsEnabled
+    # Saved is a transient pushed status and can briefly mask a running Robin
+    # state. Only an enabled exact Stop permits treating that combination as
+    # non-idle; Ready never receives this exception.
+    $executionObserved=($runningStatus -or ($status.state -ceq 'saved' -and $stopEnabled))
+    if($runningStatus -and -not $stopEnabled) {throw 'PAD_SELECTOR: StopFlowButton is not enabled during the observed execution state.'}
+    $start=$null
+    if($executionObserved) {
+        $rawStart=Get-AgentPadElement $Window @('StartFlowButton') -Optional
+        if($null -ne $rawStart) {$start=Get-AgentPadInvokableButton $Window 'StartFlowButton'}
+    } else {
+        $start=Get-AgentPadInvokableButton $Window 'StartFlowButton'
+    }
+    $save=$null
+    if(-not $executionObserved) {$save=Get-AgentPadInvokableButton $Window 'SaveFlowButton' '保存' -Wrapped}
     $workspace=Get-AgentPadElement $Window @('ProgramItemsListBoxActions')
     if($workspace.Current.ControlType -ne [Windows.Automation.ControlType]::List) {throw 'PAD_SELECTOR: action workspace is not the observed PAD list.'}
     $tabs=Get-AgentPadElement $Window @('SubflowTabControl')
@@ -1716,12 +1734,13 @@ function Get-AgentPadSnapshot {
     $tabItems=$tabs.FindAll([Windows.Automation.TreeScope]::Descendants,$tabCondition)
     if($tabItems.Count -ne 1 -or $tabItems[0].Current.Name -cne 'Main') {throw 'PAD_SUBFLOW: exactly one Main subflow is required.'}
     if(-not $tabItems[0].GetCurrentPattern([Windows.Automation.SelectionItemPattern]::Pattern).Current.IsSelected) {throw 'PAD_SUBFLOW: Main is not selected.'}
-    $status=Get-AgentPadStatus $Window
-    $provisional=New-AgentPadSnapshotState -StartEnabled ([bool]$start.Current.IsEnabled) -StopEnabled ([bool]$stop.Current.IsEnabled) -SaveEnabled ([bool]$save.Current.IsEnabled) -Status $status.state -ErrorCount -1 -ErrorsKnown $false
+    $startEnabled=if($null -ne $start){[bool]$start.Current.IsEnabled}else{$false}
+    $saveEnabled=if($null -ne $save){[bool]$save.Current.IsEnabled}else{$false}
+    $provisional=New-AgentPadSnapshotState -StartEnabled $startEnabled -StopEnabled ([bool]$stop.Current.IsEnabled) -SaveEnabled $saveEnabled -Status $status.state -ErrorCount -1 -ErrorsKnown $false
     $errorState=Get-AgentPadErrorState -Window $Window -Running $provisional.running -Idle $provisional.idle -StatusBar $status.status_bar
-    $state=New-AgentPadSnapshotState -StartEnabled ([bool]$start.Current.IsEnabled) -StopEnabled ([bool]$stop.Current.IsEnabled) -SaveEnabled ([bool]$save.Current.IsEnabled) -Status $status.state -ErrorCount $errorState.count -ErrorsKnown $errorState.known
+    $state=New-AgentPadSnapshotState -StartEnabled $startEnabled -StopEnabled ([bool]$stop.Current.IsEnabled) -SaveEnabled $saveEnabled -Status $status.state -ErrorCount $errorState.count -ErrorsKnown $errorState.known
     if(-not $AllowErrors -and (-not $state.errors_known -or $state.errors -ne 0)) {throw 'PAD_ERRORS: designer error state is not a confirmed zero.'}
-    [pscustomobject]@{start=$start;stop=$stop;save=$save;workspace=$workspace;status=$status.state;status_id=$status.id;status_name=$status.name;window=$Window;running=$state.running;idle=$state.idle;editable=$state.editable;can_run=$state.can_run;ready=$state.ready;errors=$state.errors;errors_known=$state.errors_known}
+    [pscustomobject]@{start=$start;stop=$stop;save=$save;workspace=$workspace;status=$status.state;status_id=$status.id;status_name=$status.name;window=$Window;running=$state.running;execution_observed=$executionObserved;idle=$state.idle;editable=$state.editable;can_run=$state.can_run;ready=$state.ready;errors=$state.errors;errors_known=$state.errors_known}
 }
 
 function Set-AgentPadFocus {
@@ -1760,6 +1779,19 @@ function Set-AgentPadClipboardText([string]$Text) { [Windows.Forms.Clipboard]::S
 function Restore-AgentPadClipboard($Clipboard) { [Windows.Forms.Clipboard]::SetDataObject($Clipboard,$true) }
 function Send-AgentPadKeys([string]$Keys) { [Windows.Forms.SendKeys]::SendWait($Keys) }
 function Invoke-AgentPadControl($Element) { $Element.GetCurrentPattern([Windows.Automation.InvokePattern]::Pattern).Invoke() }
+
+function Get-AgentPadObservationLossSeconds { return 20 }
+
+function Invoke-AgentPadStopIfConfirmed {
+    param($Window,[ref]$StopSent)
+    if($StopSent.Value) {return $true}
+    $stop=Get-AgentPadInvokableButton $Window 'StopFlowButton' '停止' -Wrapped
+    if(-not [bool]$stop.Current.IsEnabled) {return $false}
+    # Mark before the one invocation so an exception cannot authorize a retry.
+    $StopSent.Value=$true
+    Invoke-AgentPadControl $stop
+    return $true
+}
 
 function Wait-AgentPadEditable {
     param($Window,[string]$CancelPath,[int]$TimeoutSeconds=20)
@@ -1916,12 +1948,37 @@ function Invoke-AgentPad {
         $started=$true
         Invoke-AgentPadControl $snapshot.start
         $deadline=[DateTime]::UtcNow.AddSeconds(900); $seenStart=$false
+        $observationLossDeadline=$null; $cancelObservationDeadline=$null
         do {
             Start-Sleep -Milliseconds 250
-            $snapshot=Get-AgentPadSnapshot $window -AllowErrors
-            if(Test-Path -LiteralPath $CancelPath) {
-                if(-not $stopSent -and $snapshot.running) {$stopSent=$true; Invoke-AgentPadControl $snapshot.stop}
+            $cancelRequested=Test-Path -LiteralPath $CancelPath
+            if($cancelRequested) {
+                if($null -eq $cancelObservationDeadline) {$cancelObservationDeadline=[DateTime]::UtcNow.AddSeconds((Get-AgentPadObservationLossSeconds))}
+                if(-not $stopSent) {
+                    try {$null=Invoke-AgentPadStopIfConfirmed -Window $window -StopSent ([ref]$stopSent)} catch {
+                        if(-not (Test-AgentPadRetryableSelectorFailure $_.Exception.Message)) {throw}
+                    }
+                }
+            }
+            try {
+                $snapshot=Get-AgentPadSnapshot $window -AllowErrors
+                $observationLossDeadline=$null
+            } catch {
+                if(Test-AgentPadRetryableSelectorFailure $_.Exception.Message) {
+                    if($null -eq $observationLossDeadline) {$observationLossDeadline=[DateTime]::UtcNow.AddSeconds((Get-AgentPadObservationLossSeconds))}
+                    if([DateTime]::UtcNow -ge $observationLossDeadline -or ($null -ne $cancelObservationDeadline -and [DateTime]::UtcNow -ge $cancelObservationDeadline)) {return @{status='unknown';error='PAD_OBSERVATION_LOSS: PAD controls could not be confirmed; no retry was attempted.';artifacts=@()}}
+                    continue
+                }
+                throw
+            }
+            if($cancelRequested) {
+                if(-not $stopSent) {
+                    try {$null=Invoke-AgentPadStopIfConfirmed -Window $window -StopSent ([ref]$stopSent)} catch {
+                        if(-not (Test-AgentPadRetryableSelectorFailure $_.Exception.Message)) {throw}
+                    }
+                }
                 if($snapshot.idle) {return @{status='cancelled';error='CANCELLED';artifacts=@()}}
+                if([DateTime]::UtcNow -ge $cancelObservationDeadline) {return @{status='unknown';error='PAD_OBSERVATION_LOSS: cancellation could not confirm an idle PAD state; no retry was attempted.';artifacts=@()}}
             }
             if($snapshot.errors_known -and $snapshot.errors -gt 0 -and -not $snapshot.running) {
                 $ai=Get-AgentPadAiResults -RunDirectory $RunDirectory -RunId $RunId -Job $Job -OnlyAttempted
@@ -1941,7 +1998,7 @@ function Invoke-AgentPad {
                 return @{status='success';error='';artifacts=$observed;ai_calls=$ai.ai_calls}
             }
         } while([DateTime]::UtcNow -lt $deadline)
-        if($snapshot.running -and -not $stopSent) {$stopSent=$true; Invoke-AgentPadControl $snapshot.stop}
+        if(-not $stopSent) {try {$null=Invoke-AgentPadStopIfConfirmed -Window $window -StopSent ([ref]$stopSent)} catch {}}
         return @{status='unknown';error='PAD_TIMEOUT: execution result unconfirmed; no retry was attempted.';artifacts=@()}
     } catch {
         return @{status=$(if($started -or $_.Exception.Message -like 'PAD_UNKNOWN:*'){'unknown'}elseif($_.Exception.Message -like 'CANCELLED:*'){'cancelled'}else{'failed'});error=$_.Exception.Message;artifacts=@()}

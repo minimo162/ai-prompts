@@ -20,7 +20,7 @@ foreach($sourceFile in $sourceFiles) {
         if(-not $definitions.ContainsKey($definition.Name)){$definitions[$definition.Name]=$definition}
     }
 }
-$wanted=@('Test-AgentId','Assert-AgentId','Read-AgentJson','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','Get-AgentTextHash','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','ConvertTo-AgentComparableRobin','Get-AgentAiCallTemplate','New-AgentAiCallTemplates','Get-AgentPadAiResults','Test-AgentPadWindowTitle','Get-AgentPadElement','Test-AgentPadRetryableSelectorFailure','Get-AgentPadInvokableButton','Get-AgentPadStatusBar','Get-AgentPadStatus','Get-AgentPadErrorState','New-AgentPadSnapshotState','Get-AgentPadSnapshot','Wait-AgentPadEditable','Invoke-AgentPad')
+$wanted=@('Test-AgentId','Assert-AgentId','Read-AgentJson','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','Get-AgentTextHash','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','ConvertTo-AgentComparableRobin','Get-AgentAiCallTemplate','New-AgentAiCallTemplates','Get-AgentPadAiResults','Test-AgentPadWindowTitle','Get-AgentPadElement','Test-AgentPadRetryableSelectorFailure','Get-AgentPadInvokableButton','Get-AgentPadStatusBar','Get-AgentPadStatus','Get-AgentPadErrorState','New-AgentPadSnapshotState','Get-AgentPadSnapshot','Get-AgentPadObservationLossSeconds','Invoke-AgentPadStopIfConfirmed','Wait-AgentPadEditable','Invoke-AgentPad')
 foreach($name in $wanted) {
     if(-not $definitions.ContainsKey($name)){throw ('Missing production function: '+$name)}
     . ([scriptblock]::Create($definitions[$name].Extent.Text))
@@ -93,7 +93,7 @@ public sealed class PadResolverMockElement {
 function New-PadResolverElement([string]$Id,[string]$Name,[Windows.Automation.ControlType]$ControlType,[bool]$Enabled=$true,[bool]$Invoke=$true,[bool]$Selected=$false) {
     return New-Object PadResolverMockElement($Id,$Name,$ControlType,$Enabled,$Invoke,$Selected)
 }
-function New-PadResolverLayout([string]$StatusId='Flow_status_ready',[bool]$StartEnabled=$false,[bool]$StopEnabled=$false,[bool]$SaveEnabled=$true,[object]$ErrorText=$null,[bool]$SelectedMain=$true,[bool]$WorkspaceIsList=$true,[bool]$IncludeProgramDetails=$true) {
+function New-PadResolverLayout([string]$StatusId='Flow_status_ready',[bool]$StartEnabled=$false,[bool]$StopEnabled=$false,[bool]$SaveEnabled=$true,[object]$ErrorText=$null,[bool]$SelectedMain=$true,[bool]$WorkspaceIsList=$true,[bool]$IncludeProgramDetails=$true,[bool]$OmitStart=$false) {
     $root=New-PadResolverElement 'Root' 'mock root' ([Windows.Automation.ControlType]::Window)
     $start=New-PadResolverElement 'StartFlowButton' 'Run' ([Windows.Automation.ControlType]::Button) $StartEnabled $true
     $stopWrapper=New-PadResolverElement 'StopFlowButton' 'stop wrapper' ([Windows.Automation.ControlType]::Custom) $true $false
@@ -109,7 +109,9 @@ function New-PadResolverLayout([string]$StatusId='Flow_status_ready',[bool]$Star
     $programDetails=New-PadResolverElement 'ProgramDetailsStatusBarItem' 'program details' ([Windows.Automation.ControlType]::Pane)
     $status=New-PadResolverElement $StatusId '状態: mock' ([Windows.Automation.ControlType]::Text) $true $false
     $stopWrapper.AddChild($stop); $saveWrapper.AddChild($save); $tabs.AddChild($main); $normalStatus.AddChild($status); $statusBar.AddChild($normalStatus); if($IncludeProgramDetails){$statusBar.AddChild($programDetails)}
-    foreach($element in @($start,$stopWrapper,$saveWrapper,$workspace,$tabs,$statusBar)) {$root.AddChild($element)}
+    $rootChildren=@($stopWrapper,$saveWrapper,$workspace,$tabs,$statusBar)
+    if(-not $OmitStart){$rootChildren=@($start)+$rootChildren}
+    foreach($element in $rootChildren) {$root.AddChild($element)}
     if($null -ne $ErrorText) {
         $errors=New-PadResolverElement 'ErrorsStatusBarItem' 'errors' ([Windows.Automation.ControlType]::Pane)
         $count=New-PadResolverElement 'ErrorCountTextBlock' ([string]$ErrorText) ([Windows.Automation.ControlType]::Text) $true $false
@@ -169,6 +171,19 @@ foreach($id in $knownStatuses.Keys) {
 $savingWithoutProgramDetails=New-PadResolverLayout -StatusId 'Flow_status_saving_process' -IncludeProgramDetails:$false
 $savingSnapshot=Get-AgentPadSnapshot $savingWithoutProgramDetails.root -AllowErrors
 Assert-Case ($savingSnapshot.status -ceq 'saving' -and -not $savingSnapshot.idle -and -not $savingSnapshot.errors_known) 'Saving remains readable with Program Details collapsed and error state unknown'
+$runningWithoutStart=New-PadResolverLayout -StatusId 'Flow_status_running' -StopEnabled:$true -OmitStart:$true -IncludeProgramDetails:$false
+$runningSnapshot=Get-AgentPadSnapshot $runningWithoutStart.root -AllowErrors
+Assert-Case ($runningSnapshot.status -ceq 'running' -and $runningSnapshot.running -and $null -eq $runningSnapshot.start -and -not $runningSnapshot.can_run -and -not $runningSnapshot.errors_known) 'Running snapshot permits absent Start only with enabled exact Stop and disables Run'
+$runningWithoutStop=New-PadResolverLayout -StatusId 'Flow_status_running' -StopEnabled:$false -OmitStart:$true -IncludeProgramDetails:$false
+Assert-Rejected {Get-AgentPadSnapshot $runningWithoutStop.root -AllowErrors} 'PAD_SELECTOR' 'Running snapshot requires an enabled exact Stop when Start is absent'
+$savedWhileRunning=New-PadResolverLayout -StatusId 'Flow_status_saved' -StopEnabled:$true -OmitStart:$true
+$savedWhileRunningSnapshot=Get-AgentPadSnapshot $savedWhileRunning.root -AllowErrors
+Assert-Case ($savedWhileRunningSnapshot.status -ceq 'saved' -and $savedWhileRunningSnapshot.execution_observed -and $savedWhileRunningSnapshot.running -and $null -eq $savedWhileRunningSnapshot.start -and -not $savedWhileRunningSnapshot.can_run) 'Saved with enabled Stop is represented as non-idle execution, never runnable'
+$pausedLayout=New-PadResolverLayout -StatusId 'Flow_status_paused' -StartEnabled:$true -StopEnabled:$false
+$pausedSnapshot=Get-AgentPadSnapshot $pausedLayout.root -AllowErrors
+Assert-Case ($pausedSnapshot.status -ceq 'paused' -and -not $pausedSnapshot.execution_observed -and -not $pausedSnapshot.idle -and -not $pausedSnapshot.can_run) 'Paused Start is never treated as authorization to resume or run'
+$readyWithoutStart=New-PadResolverLayout -OmitStart:$true
+Assert-Rejected {Get-AgentPadSnapshot $readyWithoutStart.root -AllowErrors} 'PAD_SELECTOR' 'Ready snapshot requires the real StartFlowButton even when empty'
 $parsingWithoutProgramDetails=New-PadResolverLayout -StatusId 'Flow_status_parsing' -IncludeProgramDetails:$false
 $parsingSnapshot=Get-AgentPadSnapshot $parsingWithoutProgramDetails.root -AllowErrors
 Assert-Case ($parsingSnapshot.status -ceq 'parsing' -and -not $parsingSnapshot.idle -and -not $parsingSnapshot.errors_known) 'Parsing remains readable with Program Details absent and error state unknown'
@@ -413,7 +428,7 @@ try {
     function Get-AgentPadWindow($Settings){$script:padWindowReads++;return [pscustomobject]@{Mock=$true}}
     function Get-AgentPadSnapshot($Window,[switch]$AllowErrors) {
         $script:padSnapshotReads++
-        $status='ready';$idle=$true;$editable=$true;$canRun=$true;$errors=0;$errorsKnown=$true
+        $status='ready';$idle=$true;$editable=$true;$canRun=$true;$running=$false;$errors=0;$errorsKnown=$true;$start='mock-start'
         if($script:padStatusSequence.Count -gt 0) {
             $index=[Math]::Min($script:padSnapshotReads-1,$script:padStatusSequence.Count-1)
             $status=[string]$script:padStatusSequence[$index]
@@ -426,8 +441,13 @@ try {
         if($script:padScenario -eq 'idle-false' -or ($script:padScenario -eq 'before-paste-busy' -and $script:padSnapshotReads -eq 2) -or ($script:padScenario -eq 'before-run-busy' -and $script:padSnapshotReads -eq 3)){$idle=$false;$editable=$false;$canRun=$false}
         if($script:padScenario -eq 'run-disabled' -and $script:padSnapshotReads -eq 3){$canRun=$false}
         if($script:padScenario -eq 'runtime-error' -and $script:padRunInvocations -gt 0){$errors=1}
+        if($script:padScenario -eq 'running-ambiguous' -and $script:padRunInvocations -gt 0){throw 'PAD_SELECTOR: status ambiguous.'}
+        if($script:padScenario -in @('running-missing','cancel-running-missing') -and $script:padRunInvocations -gt 0){throw 'PAD_SELECTOR: control unavailable: mocked running status subtree.'}
+        if($script:padScenario -in @('conditional-complete','cancel-during-running') -and $script:padRunInvocations -gt 0 -and $script:padSnapshotReads -le 4) {
+            $status='running';$idle=$false;$editable=$false;$canRun=$false;$running=$true;$errors=-1;$errorsKnown=$false;$start=$null
+        }
         if($script:padScenario -eq 'cancel-while-settling' -and $script:padSnapshotReads -eq 1 -and $script:padCancelDuringSettle){[IO.File]::WriteAllText($script:padCancelDuringSettle,'cancel',$script:AgentEncoding)}
-        $script:padMockSnapshot=[pscustomobject]@{ready=$canRun;idle=$idle;editable=$editable;can_run=$canRun;running=$false;errors=$errors;errors_known=$errorsKnown;window=$Window;workspace='mock-workspace';start='mock-start';stop='mock-stop';save='mock-save';status=$status}
+        $script:padMockSnapshot=[pscustomobject]@{ready=$canRun;idle=$idle;editable=$editable;can_run=$canRun;running=$running;errors=$errors;errors_known=$errorsKnown;window=$Window;workspace='mock-workspace';start=$start;stop='mock-stop';save='mock-save';status=$status}
         return $script:padMockSnapshot
     }
     function Set-AgentPadFocus($Window,$Workspace) {
@@ -480,17 +500,31 @@ try {
                     if($script:mockObservedArtifact){[IO.File]::WriteAllText($script:mockObservedArtifact,'synthetic branch result',$script:AgentEncoding)}
                     return
                 }
+                if($script:padScenario -in @('cancel-during-running','cancel-running-missing')) {[IO.File]::WriteAllText($script:mockCancelPath,'cancel',$script:AgentEncoding);return}
+                if($script:padScenario -eq 'running-missing'){return}
+                if($script:padScenario -eq 'running-ambiguous'){return}
                 if($script:padScenario -ne 'runtime-error'){throw 'TEST_UI_INVOCATION_UNKNOWN: single mocked Run returned an uncertain failure.'}
                 return
             }
             default {throw 'Unexpected mock control.'}
         }
     }
+    function Get-AgentPadObservationLossSeconds {
+        if($script:padScenario -in @('running-missing','cancel-running-missing')){return 0}
+        return 20
+    }
+    function Invoke-AgentPadStopIfConfirmed($Window,[ref]$StopSent) {
+        if($StopSent.Value){return $true}
+        $StopSent.Value=$true
+        Invoke-AgentPadControl 'mock-stop'
+        return $true
+    }
     Reset-PadMock 'idle-false'
     $settings=[pscustomobject]@{pad_flow_name='TEST ONLY'}
     $script:mockOwnedCode='SET AgentOwnedFlow TO $'+"'''AiPromptsAgent'''`nWAIT 0"
     $padOwnerPath=Join-Path (Join-Path $temp 'data') ('pad-owned-'+(Get-AgentTextHash $settings.pad_flow_name)+'.json')
     $cancel=Join-Path $temp 'cancel'
+    $script:mockCancelPath=$cancel
     $result=Invoke-AgentPad -Robin 'WAIT 0' -RunDirectory $script:run -RunId ('5'*32) -Job $script:job -Settings $settings -CancelPath $cancel
     Assert-Case ($result.status -ceq 'failed' -and $result.error -like 'PAD_BUSY:*') 'Mock busy designer fails closed before UI mutation'
     Assert-Case ($script:padWindowReads -eq 1 -and $script:padSnapshotReads -eq 1 -and $script:padRunInvocations -eq 0) 'Busy path stops at the idle gate'
@@ -564,7 +598,35 @@ try {
     Reset-PadMock 'conditional-complete'
     $result=Invoke-AgentPad -Robin $conditional -RunDirectory $script:mockRunDirectory -RunId $script:mockRunId -Job $script:job -Settings $settings -CancelPath $cancel
     Assert-Case ($result.status -ceq 'success' -and $result.artifacts.Count -eq 1 -and $result.artifacts[0] -ceq $script:mockObservedArtifact) 'Synthetic completion reports only the observed conditional branch output'
-    Assert-Case (-not [IO.File]::Exists($unselected) -and $script:padRunInvocations -eq 1) 'Unselected branch output is not fabricated'
+    Assert-Case (-not [IO.File]::Exists($unselected) -and $script:padRunInvocations -eq 1 -and $script:padSnapshotReads -ge 5) 'Running snapshot without Start then ready completion does not replay the flow'
+    $script:mockRunId='8'*32
+    $script:mockRunDirectory=Join-Path ([IO.Path]::GetDirectoryName($script:run)) $script:mockRunId
+    $null=[IO.Directory]::CreateDirectory((Join-Path $script:mockRunDirectory 'artifacts'))
+    Reset-PadMock 'running-ambiguous'
+    $result=Invoke-AgentPad -Robin 'WAIT 0' -RunDirectory $script:mockRunDirectory -RunId $script:mockRunId -Job $script:job -Settings $settings -CancelPath $cancel
+    Assert-Case ($result.status -ceq 'unknown' -and $result.error -like 'PAD_SELECTOR:*' -and $script:padRunInvocations -eq 1) 'Ambiguous running snapshot remains unknown and never replays Run'
+    $script:mockRunId='9'*32
+    $script:mockRunDirectory=Join-Path ([IO.Path]::GetDirectoryName($script:run)) $script:mockRunId
+    $null=[IO.Directory]::CreateDirectory((Join-Path $script:mockRunDirectory 'artifacts'))
+    Reset-PadMock 'cancel-during-running'
+    $result=Invoke-AgentPad -Robin 'WAIT 0' -RunDirectory $script:mockRunDirectory -RunId $script:mockRunId -Job $script:job -Settings $settings -CancelPath $cancel
+    Assert-Case ($result.status -ceq 'cancelled' -and $script:padRunInvocations -eq 1 -and $script:padStopInvocations -eq 1) 'Cancellation during running requires a fresh Stop and never replays Run'
+    [IO.File]::Delete($cancel)
+    $script:mockRunId='a'*32
+    $script:mockRunDirectory=Join-Path ([IO.Path]::GetDirectoryName($script:run)) $script:mockRunId
+    $null=[IO.Directory]::CreateDirectory((Join-Path $script:mockRunDirectory 'artifacts'))
+    Reset-PadMock 'running-missing'
+    $result=Invoke-AgentPad -Robin 'WAIT 0' -RunDirectory $script:mockRunDirectory -RunId $script:mockRunId -Job $script:job -Settings $settings -CancelPath $cancel
+    Assert-Case ($result.status -ceq 'unknown' -and $result.error -like 'PAD_OBSERVATION_LOSS:*' -and $script:padRunInvocations -eq 1) 'Persistent running selector loss becomes unknown without replaying Run'
+    $script:mockRunId='b'*32
+    $script:mockRunDirectory=Join-Path ([IO.Path]::GetDirectoryName($script:run)) $script:mockRunId
+    $null=[IO.Directory]::CreateDirectory((Join-Path $script:mockRunDirectory 'artifacts'))
+    Reset-PadMock 'cancel-running-missing'
+    $result=Invoke-AgentPad -Robin 'WAIT 0' -RunDirectory $script:mockRunDirectory -RunId $script:mockRunId -Job $script:job -Settings $settings -CancelPath $cancel
+    Assert-Case ($result.status -ceq 'unknown' -and $result.error -like 'PAD_OBSERVATION_LOSS:*' -and $script:padRunInvocations -eq 1 -and $script:padStopInvocations -eq 1) 'Cancellation amid selector loss sends freshly confirmed Stop at most once and never replays Run'
+    [IO.File]::Delete($cancel)
+    $script:mockRunId='6'*32
+    $script:mockRunDirectory=Join-Path ([IO.Path]::GetDirectoryName($script:run)) $script:mockRunId
     Reset-PadMock 'run-unknown'
     $result=Invoke-AgentPad -Robin 'WAIT 0' -RunDirectory $script:mockRunDirectory -RunId $script:mockRunId -Job $script:job -Settings $settings -CancelPath $cancel
     Assert-Case ($result.error -like 'PAD_REPLAY:*' -and $script:padRunInvocations -eq 0 -and $script:padKeys.Count -eq 0) 'Existing control markers prevent another paste or Run'
