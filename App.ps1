@@ -1639,7 +1639,7 @@ function Get-AgentPadStatus {
     if($matches.Count -eq 0) {throw 'PAD_SELECTOR: status unavailable.'}
     if($matches.Count -gt 1) {throw 'PAD_SELECTOR: status ambiguous.'}
     $match=$matches[0]; $name=[string]$match.Current.Name
-    if(-not $name.StartsWith('状態:',[StringComparison]::Ordinal)) {throw 'PAD_SELECTOR: status accessible name does not match the observed PAD status control.'}
+    if($match.Current.ControlType -ne [Windows.Automation.ControlType]::Text) {throw 'PAD_SELECTOR: status control is not the observed TextBlock.'}
     return [pscustomobject]@{id=[string]$match.Current.AutomationId;state=[string]$states[[string]$match.Current.AutomationId];name=$name;status_bar=$statusBar}
 }
 

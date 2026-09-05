@@ -193,8 +193,12 @@ $ambiguousStatus=New-PadResolverLayout; $ambiguousStatus.normal_status.AddChild(
 Assert-Rejected {Get-AgentPadStatus $ambiguousStatus.root} 'PAD_SELECTOR' 'Status resolver rejects multiple known status descendants'
 $missingStatus=New-PadResolverLayout -StatusId 'Flow_status_unobserved'
 Assert-Rejected {Get-AgentPadStatus $missingStatus.root} 'PAD_SELECTOR' 'Status resolver rejects an unknown or missing status id'
-$badStatusName=New-PadResolverLayout; $badStatusName.status.Current.Name='Status: ready'
-Assert-Rejected {Get-AgentPadStatus $badStatusName.root} 'PAD_SELECTOR' 'Status resolver requires the observed Japanese accessible-name prefix'
+$elapsedStatusName=New-PadResolverLayout -StatusId 'Flow_status_running'; $elapsedStatusName.status.Current.Name='Status Running 4 seconds'
+Assert-Case ((Get-AgentPadStatus $elapsedStatusName.root).state -ceq 'running') 'Status ID remains authoritative when elapsed accessible name changes format'
+$emptyStatusName=New-PadResolverLayout; $emptyStatusName.status.Current.Name=''
+Assert-Case ((Get-AgentPadStatus $emptyStatusName.root).state -ceq 'ready') 'Temporary empty status accessible name does not invalidate proven machine identity'
+$wrongStatusType=New-PadResolverLayout; $wrongStatusType.status.Current.ControlType=[Windows.Automation.ControlType]::Pane
+Assert-Rejected {Get-AgentPadStatus $wrongStatusType.root} 'PAD_SELECTOR' 'Status resolver requires the observed Text control type'
 
 foreach($case in @(@{text='エラー リスト (12)';count=12;name='Japanese'},@{text='Errors list (7)';count=7;name='English'},@{text='3';count=3;name='legacy numeric'})) {
     $errorLayout=New-PadResolverLayout -ErrorText $case.text
