@@ -1,6 +1,6 @@
 # Issue #5 検証記録
 
-2026-09-05 / 状態: **partial — 実機ゲート未完了**。
+2026-09-06 / 状態: **partial — 実機ゲート未完了**。
 
 [Issue #5](https://github.com/minimo162/ai-prompts/issues/5) 本文と全コメント（0件）を確認して実装した。ブランチは `codex/issue-5-business-agent`。この記録は成功条件の達成宣言ではない。
 
@@ -19,7 +19,7 @@
 | PADアダプター | `tests/Test-Pad.ps1` **281 PASS**。UI/クリップボード境界を模擬し、全文一致・所有権・失敗時の旧フロー実行拒否・結果帰属を検査する。状態別のUI構造、20種類の状態ID、保存・実行・中止、実ファイルに生成した2件のAiCallテンプレートとRobinの検証も本番関数で確認。実機の固定A/Bは下記に分けて記録する。 |
 | localhost HTTP | `tests/Test-Http.ps1` PASS。実App.ps1プロセスでHTML/状態、トークン/Host/Origin拒否、不完全本文の期限、再接続、設定保持、重複回答・古い質問への回答拒否、版の引き継ぎ、停止を確認。 |
 | 実ブラウザー | `tests/Test-Ui.cjs` 15 PASS。実Edgeの1280×900・390×844で入力→未接続エラー→再表示、トークン除去、同ジョブ再接続、横溢れ・JavaScriptエラーなしを確認。質問ID・Copilotジョブ分離変更を含む不変版 `a00bca7` でも再実行し、両幅のPNGを目視確認した。証跡は `.work/ui-after-question-fix-66edd1690c8a4978aae727d6e5a31807/`。隔離サーバーは専用の終了APIで停止した。 |
-| 実際のCMD | リポジトリ上のCMDから実LOCALAPPDATAへ同期し、ローカルApp.ps1のHTTP応答を確認。Chromeにアプリタイトルのウィンドウが現れた。最終統合版も `Bootstrap -NoBrowser` で同期し、実LOCALAPPDATAのサーバー応答と作業コピーのApp.ps1ハッシュ一致を確認した。共有UNC起動ではない。 |
+| 実際のCMD | リポジトリ上のCMDから実LOCALAPPDATAへ同期し、ローカルApp.ps1のHTTP応答を確認。Chromeにアプリタイトルのウィンドウが現れた。最終統合版も `Bootstrap -NoBrowser` で同期し、実LOCALAPPDATAのサーバー応答と作業コピーのApp.ps1ハッシュ一致を確認した。共有UNCからの検証は下記Gate 0記録に分ける。 |
 | ランチャー回帰 | `tests/Test-Launcher.ps1` **18 PASS**。実3ファイルのBootstrapと、隔離したCMDフィクスチャの環境/終了コードを区別して検証する。 |
 
 実CMDで、親のPowerShell 7用モジュール検索パスをWindows PowerShell 5.1が引き継ぎ `Get-FileHash` を解決できない不具合を再現した。CMDの `setlocal` 内でOS標準のPowerShellとモジュールパスに限定して修正した。`-File` ではparam既定値の `$PSScriptRoot` が空になる問題も再現し、param評価後に配布元を補うよう修正した。
@@ -30,13 +30,21 @@
 
 | ゲート | 状態 | 残る実機確認 |
 |---|---|---|
-| 0: 配布・起動 | 部分確認 | 実共有UNCからの初回・更新、共有切断、利用者環境での再起動・UI停止 |
-| 1: 固定PADからAiCall | 未検証 | 実M365翻訳、分類分岐、2回以上の直列、拒否/空/期限/中止 |
+| 0: 配布・起動 | 実共有UNCからの初回・更新は合格 | 共有切断、利用者環境での再起動・UI停止 |
+| 1: 固定PADからAiCall | 実機試行はAI呼出し前に失敗 | 最初の記録ファイル書込エラー解消、実M365翻訳、分類分岐、2回以上の直列、拒否/空/期限/中止 |
 | 2: AIなしのA/B差し替え | 正常系A/B合格、異常系は未完了 | 保存・貼り付け失敗などを意図的に起こした場合の旧フロー実行防止 |
 | 3: 生成Robin全文取得 | 未検証 | 実M365で長文/日本語/引用符/改行/空白/バックスラッシュ/%、過去回答・途中停止 |
 | 4: 生成AiCallフロー | 未検証 | 読取→AI→分岐→書出しを同じPADで完走 |
 | 5: 2〜3往復 | 未検証 | 実結果本文に応じた次の手順、ACT/DONE/ASK_USER/BLOCKED、最終表示 |
 | 6: 別利用者・別PC | 未検証 | 開発環境に依存しない導入・更新・認証・結果確認 |
+
+2026-09-06に利用者の許可とWindowsの管理者承認を経て、専用共有 `\\localhost\AiPromptsAgentPoC$` を作成した。共有範囲は `.work/shares/AiPromptsAgentPoC` の配布3ファイル、SMB権限は利用者本人の読み取り1件で、NTFS権限・サービス・ファイアウォールは変更していない。最初の承認後試行は共有作成前のファイル名照合で失敗した。作成スクリプトがBOMなしUTF-8だったため、Windows PowerShell 5.1が日本語CMD名を誤読していた。本文を変更せずUTF-8 BOMを付け、旧版の保存と独立した構文・ファイル名照合確認後に成功した。作成・UNC読取の証拠は `.work/gate0/share-create-6a7c02fc14f34586b7c7a5cb32def3c4.json` と `share-verified-6a7c02fc14f34586b7c7a5cb32def3c4.json`。
+
+実共有UNCのCMDを使った初回・更新の結果は `.work/gate0/sessions/ba53e2cf86914d89a514f6c5f7028b66/results/initial.json` と `update.json` に記録した。CMD子プロセスだけのLOCALAPPDATAを隔離し、`49a4535` の初回同期後に共有3ファイルを `160f130` へ更新した。再起動で更新版へ切り替わり、旧キャッシュ3ファイルのハッシュが変わらないことを確認した。各段階の隔離サーバーは所有者を照合して終了し、通常のローカル版のPID・開始時刻・版・Appハッシュは前後一致した。PAD・プロバイダーは呼び出していない。共有は最新の検証済み3ファイルを保持している。
+
+初回・更新の独立再計算は37項目すべて一致した。切断試験の事前レビューでは、検証ハーネスがBootstrapを同じPowerShell内で呼び、未設定または古い `$LASTEXITCODE` を読む問題を修正した。別のWindows PowerShell 5.1子プロセスの終了コードと30秒の上限を使い、合成4ケース・27項目（成功、exit 7、未処理例外、タイムアウト）が通過した。これは検証用スクリプトの修正であり、実共有切断時の成功証拠ではない。
+
+独立レビュー後、専用フォルダーだけを一時改名してUNCを利用不可にする手順を1回試みたが、Windowsの「別のプロセスが使用中」により改名前に拒否された。`results/outage-helper.json` は `status=failed`、`renamed=false`、`harness_invocations=0`、復元・UNCハッシュ確認済みを記録している。共有切断とオフライン起動は未検証のままであり、共有・初回/更新の記録・キャッシュは保持している。同手順は再実行していない。
 
 初期調査ではPAD 2.71.115.26224のインストール済みリソースから、`StartFlowButton`、`SaveFlowButton`、`ProgramItemsListBox` 等の操作要素の候補名を得た。実UIAでの存在・一意性・操作パターンは後続の調査で確認した。初回の新規フロー画面ではComputer Useの名前入力が反映されず、作成を取り消した。その後、利用者の明示的な作成許可を得て、Power Fx無効・自動生成名「無題」の空フローを1つ作成した。`Power Automate | 無題`、Main 1個、アクション0件、準備完了の実画面を確認し、アプリ設定も「無題」に合わせた。業務フローの実行・変更は行っていない。
 
