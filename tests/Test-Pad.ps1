@@ -20,7 +20,7 @@ foreach($sourceFile in $sourceFiles) {
         if(-not $definitions.ContainsKey($definition.Name)){$definitions[$definition.Name]=$definition}
     }
 }
-$wanted=@('Test-AgentId','Assert-AgentId','Read-AgentJson','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','Get-AgentTextHash','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','ConvertTo-AgentComparableRobin','Get-AgentAiCallTemplate','New-AgentAiCallTemplates','Get-AgentPadAiResults','Test-AgentPadWindowTitle','Get-AgentPadElement','Test-AgentPadRetryableSelectorFailure','Get-AgentPadInvokableButton','Get-AgentPadStatusBar','Get-AgentPadStatus','Get-AgentPadErrorState','New-AgentPadSnapshotState','Get-AgentPadSnapshot','Get-AgentPadObservationLossSeconds','Invoke-AgentPadStopIfConfirmed','Wait-AgentPadEditable','Invoke-AgentPad')
+$wanted=@('Test-AgentId','Assert-AgentId','Read-AgentJson','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','Get-AgentTextHash','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Read-AgentAiCallTemplates','Test-AgentRobin','ConvertTo-AgentComparableRobin','Get-AgentAiCallTemplate','New-AgentAiCallTemplates','Get-AgentPadAiResults','Test-AgentPadWindowTitle','Get-AgentPadElement','Test-AgentPadRetryableSelectorFailure','Get-AgentPadInvokableButton','Get-AgentPadStatusBar','Get-AgentPadStatus','Get-AgentPadErrorState','New-AgentPadSnapshotState','Get-AgentPadSnapshot','Get-AgentPadObservationLossSeconds','Invoke-AgentPadStopIfConfirmed','Wait-AgentPadEditable','Invoke-AgentPad')
 foreach($name in $wanted) {
     if(-not $definitions.ContainsKey($name)){throw ('Missing production function: '+$name)}
     . ([scriptblock]::Create($definitions[$name].Extent.Text))
@@ -390,6 +390,34 @@ try {
     Assert-Rejected {Test-Flow (New-ReadAction $template.request_path)} 'ROBIN_PATH' 'AiCall request JSON is outside planner data inputs'
     Assert-Rejected {Test-Flow (New-ReadAction (Join-Path $script:run ('calls\'+('4'*32)+'\result.txt')))} 'ROBIN_PATH' 'Unreserved AiCall result path rejected'
     Assert-Rejected {New-AgentAiCallTemplates -Calls @($call,$call,$call,$call) -Job $script:job -RunDirectory $script:run -RunId ('5'*32) -AppPath $SourcePath -HomePath $temp} 'AICALL_LIMIT' 'More than three serial AiCalls rejected'
+
+    # Persist two production templates, then validate the exact serial flow from
+    # disk. This guards the Windows PowerShell 5.1 Object[] manifest shape.
+    $twoRun=Join-Path $temp ('data\jobs\'+('1'*32)+'\runs\'+('c'*32))
+    $null=[IO.Directory]::CreateDirectory((Join-Path $twoRun 'artifacts'))
+    $twoCalls=@(
+        [pscustomobject]@{ai_call_id=('3'*32);operation='translate';input_path=$input;instructions='Translate the input data.';labels=@();timeout_seconds=30},
+        [pscustomobject]@{ai_call_id=('4'*32);operation='classify';input_path=$input;instructions='Classify the input data.';labels=@('yes','no');timeout_seconds=30}
+    )
+    $twoTemplates=@(New-AgentAiCallTemplates -Calls $twoCalls -Job $script:job -RunDirectory $twoRun -RunId ('c'*32) -AppPath ([IO.Path]::GetFullPath($SourcePath)) -HomePath $temp)
+    Assert-Case ($twoTemplates.Count -eq 2) 'Two server-owned AiCall templates are persisted for one round'
+    $loadedTemplates=@(Read-AgentAiCallTemplates (Join-Path $twoRun 'aicall-templates.json'))
+    Assert-Case ($loadedTemplates.Count -eq 2 -and $loadedTemplates[0].ai_call_id -ceq ('3'*32) -and $loadedTemplates[1].ai_call_id -ceq ('4'*32)) 'On-disk JSON array loads as two individually validated templates'
+    $twoFlowParts=@()
+    foreach($twoTemplate in $twoTemplates) {
+        $twoFlowParts+=$twoTemplate.robin
+        $twoFlowParts+=(New-ReadAction $twoTemplate.text_path 'AiText')
+        $twoFlowParts+=$guard
+        $twoFlowParts+=(New-ReadAction $twoTemplate.status_path 'AiStatus')
+        $twoFlowParts+=$guard
+    }
+    $twoWrites=@(Test-AgentRobin -Robin ($twoFlowParts -join "`n") -RunDirectory $twoRun -Job $script:job)
+    Assert-Case ($twoWrites.Count -eq 0) 'Production Robin validator accepts both persisted AiCall templates in serial order'
+
+    $malformedRun=Join-Path $temp ('data\jobs\'+('1'*32)+'\runs\'+('d'*32))
+    $null=[IO.Directory]::CreateDirectory((Join-Path $malformedRun 'artifacts'))
+    Write-AgentJson (Join-Path $malformedRun 'aicall-templates.json') ([ordered]@{ai_call_id=('8'*32);robin='WAIT 0';request_path='C:\request.json';result_path='C:\result.json';text_path='C:\result.txt'})
+    Assert-Rejected {Test-AgentRobin -Robin 'WAIT 0' -RunDirectory $malformedRun -Job $script:job} 'ROBIN_AICALL' 'Malformed persisted template manifest is rejected before Robin validation'
 
     # Pure observation of local result JSON; no AI provider or flow is called.
     $ai=Get-AgentPadAiResults -RunDirectory $script:run -RunId ('5'*32) -Job $script:job

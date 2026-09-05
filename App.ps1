@@ -817,7 +817,7 @@ function Invoke-AgentServer([string]$HomePath, [switch]$NoBrowser, [int]$Port = 
                             Write-AgentJson (Join-Path $homeDirectory 'data\settings.json') $body
                         }
                         '/api/diagnose' { $diagnostics = Get-AgentDiagnostics $homeDirectory (Get-AgentSettings $homeDirectory); $payload.diagnostics = $diagnostics }
-                        '/api/copilot/open' { Open-AgentCopilot -HomePath $homeDirectory -Settings (Get-AgentSettings $homeDirectory) | Out-Null }
+                        '/api/copilot/open' { $payload.copilot = Open-AgentCopilot -HomePath $homeDirectory -Settings (Get-AgentSettings $homeDirectory) }
                         '/api/restart' {
                             $job = Get-AgentJob $homeDirectory
                             if ($null -ne $job -and $job.status -cin @('queued','planning','running_pad','waiting_user')) { throw 'BUSY: 実行中の処理を終えてから再起動してください。' }
@@ -1186,7 +1186,12 @@ function Close-AgentCopilotLaunchTab {
     $pages=@(Invoke-AgentCopilotHttp $Config '/json/list')
     $active=@($pages | Where-Object { $_.id -ceq $ActiveTarget.id -and $_.type -ceq 'page' -and ((Test-AgentCopilotUrl ([string]$_.url)) -or (Test-AgentCopilotAuthUrl ([string]$_.url))) })
     $launch=@($pages | Where-Object { $_.url -ceq $LaunchUrl -and $_.type -ceq 'page' })
-    if ($active.Count -ne 1 -or $launch.Count -ne 1 -or $launch[0].id -ceq $ActiveTarget.id -or [string]$launch[0].id -notmatch '^[A-Za-z0-9_-]{1,128}$') { throw 'CDP_UNAVAILABLE: 今回作成した起動タブを一意に確認できません。ほかのタブは閉じません。' }
+    if ($active.Count -ne 1) { throw 'CDP_UNAVAILABLE: 確認済みの Copilot タブを再確認できません。ほかのタブは閉じません。' }
+    # Edge may consume or replace the startup URL before CDP exposes it. With the recorded
+    # Copilot target still verified, this is a non-mutating cleanup miss: do not infer that
+    # a remaining blank/new-tab is ours and do not make the user-requested open fail.
+    if ($launch.Count -eq 0) { return [pscustomobject]@{status='not_found';warning='今回の起動タブは確認できませんでした。ほかのタブは閉じていません。'} }
+    if ($launch.Count -ne 1 -or $launch[0].id -ceq $ActiveTarget.id -or [string]$launch[0].id -notmatch '^[A-Za-z0-9_-]{1,128}$') { throw 'CDP_UNAVAILABLE: 今回作成した起動タブを一意に確認できません。ほかのタブは閉じません。' }
     $target=$launch[0]
     if (-not (Test-AgentCopilotSocketUrl ([string]$target.webSocketDebuggerUrl) $Config.Port ([string]$target.id))) { throw 'CDP_UNAVAILABLE: 起動タブの接続先が不正です。' }
     $socket=Connect-AgentCopilotSocket $Config $target
@@ -1208,7 +1213,7 @@ function Close-AgentCopilotLaunchTab {
     do {
         Assert-AgentCopilotWait '' $Deadline
         $remaining=@((Invoke-AgentCopilotHttp $Config '/json/list') | Where-Object { $_.id -ceq $target.id })
-        if ($remaining.Count -eq 0) { return }
+        if ($remaining.Count -eq 0) { return [pscustomobject]@{status='closed';warning=''} }
         if ($remaining.Count -ne 1 -or $remaining[0].url -cne $LaunchUrl) { throw 'CDP_UNAVAILABLE: 起動タブの状態が変わったため追加操作を中止しました。' }
         if ([datetime]::UtcNow -ge $confirmUntil) { throw 'CDP_UNAVAILABLE: 今回の起動タブを閉じたことを確認できません。再操作はしません。' }
         Start-Sleep -Milliseconds 100
@@ -1219,7 +1224,7 @@ function Open-AgentCopilot {
     param([string]$HomePath,$Settings)
     $config = Get-AgentCopilotConfig $HomePath $Settings
     $deadline=[datetime]::UtcNow.AddSeconds(35); $mutex=Enter-AgentCopilotMutex $config '' $deadline
-    $launchUrl=''
+    $launchUrl='';$cleanup=[pscustomobject]@{status='not_requested';warning=''}
     try {
         if (-not (Test-AgentCopilotOwnership $config)) {
             $occupied = @(Get-NetTCPConnection -State Listen -LocalPort $config.Port -ErrorAction SilentlyContinue)
@@ -1239,8 +1244,8 @@ function Open-AgentCopilot {
         # Open is a user action: reveal only this recorded tab, including its sign-in page.
         $socket=Connect-AgentCopilotSocket $config $target
         try { $null=Invoke-AgentCopilotCdp $socket 'Page.bringToFront' @{} '' $deadline } finally { $socket.Dispose() }
-        if ($launchUrl) { Close-AgentCopilotLaunchTab $config $launchUrl $target $deadline }
-        return [pscustomobject]@{status='opened';port=$config.Port;target_id=[string]$target.id}
+        if ($launchUrl) { $cleanup=Close-AgentCopilotLaunchTab $config $launchUrl $target $deadline }
+        return [pscustomobject]@{status='opened';port=$config.Port;target_id=[string]$target.id;launch_cleanup=[string]$cleanup.status;warning=[string]$cleanup.warning}
     } finally { $mutex.ReleaseMutex();$mutex.Dispose() }
 }
 
@@ -1467,6 +1472,34 @@ function Assert-AgentPadPath {
     return $full
 }
 
+function Read-AgentAiCallTemplates {
+    param([string]$TemplatePath)
+    if ([string]::IsNullOrWhiteSpace($TemplatePath) -or -not [IO.File]::Exists($TemplatePath)) { throw 'ROBIN_AICALL: template manifest is unavailable.' }
+    try { $parsed=[IO.File]::ReadAllText($TemplatePath,[Text.Encoding]::UTF8) | ConvertFrom-Json -ErrorAction Stop }
+    catch { throw 'ROBIN_AICALL: template manifest is invalid JSON.' }
+
+    # Windows PowerShell 5.1 returns a JSON array as one Object[] pipeline value.
+    # Enumerate that value explicitly so each persisted template is validated and used.
+    $templates=@()
+    foreach($item in $parsed) { $templates+=,$item }
+    if($templates.Count -eq 0) {throw 'ROBIN_AICALL: template manifest is empty.'}
+
+    $expected=@('ai_call_id','robin','request_path','result_path','text_path','status_path')
+    $ids=@{}
+    foreach($template in $templates) {
+        if($null -eq $template) {throw 'ROBIN_AICALL: template entry is null.'}
+        $keys=@($template.PSObject.Properties.Name)
+        if($keys.Count -ne $expected.Count) {throw 'ROBIN_AICALL: template entry has unexpected fields.'}
+        foreach($key in $expected) {
+            if($keys -cnotcontains $key -or $template.$key -isnot [string] -or [string]::IsNullOrWhiteSpace([string]$template.$key)) {throw 'ROBIN_AICALL: template entry has a missing or invalid field.'}
+        }
+        if(-not (Test-AgentId ([string]$template.ai_call_id))) {throw 'ROBIN_AICALL: template entry has an invalid AI call ID.'}
+        if($ids.ContainsKey([string]$template.ai_call_id)) {throw 'ROBIN_AICALL: template manifest repeats an AI call ID.'}
+        $ids[[string]$template.ai_call_id]=$true
+    }
+    return $templates
+}
+
 function Test-AgentRobin {
     param([string]$Robin, [string]$RunDirectory, $Job)
     if ([string]::IsNullOrWhiteSpace($Robin) -or $Robin.Length -gt 64000 -or $Robin.Contains('```') -or $Robin.Contains("`t") -or $Robin.Contains([char]0)) { throw 'ROBIN_INVALID: empty, oversized or non-Robin content.' }
@@ -1478,7 +1511,7 @@ function Test-AgentRobin {
     $readRoots = @([string]$Job.target, $outputRoot)
     $templates = @(); $usedCalls = @{}; $pendingReads=New-Object System.Collections.Queue; $pendingGuard=New-Object System.Collections.Queue
     $templatePath = Join-Path $RunDirectory 'aicall-templates.json'
-    if (Test-Path -LiteralPath $templatePath) { $templates = @([IO.File]::ReadAllText($templatePath,[Text.Encoding]::UTF8) | ConvertFrom-Json) }
+    if (Test-Path -LiteralPath $templatePath) { $templates = @(Read-AgentAiCallTemplates $templatePath) }
     foreach ($sourceLine in $lines) {
         if ([string]::IsNullOrWhiteSpace($sourceLine)) { continue }
         if($pendingGuard.Count) {
@@ -1871,7 +1904,7 @@ function Get-AgentPadAiResults {
     param([string]$RunDirectory,[string]$RunId,$Job,[switch]$OnlyAttempted)
     $calls=@(); $templateFile=Join-Path $RunDirectory 'aicall-templates.json'
     if([IO.File]::Exists($templateFile)) {
-        foreach($template in @(Read-AgentJson $templateFile)) {
+        foreach($template in @(Read-AgentAiCallTemplates $templateFile)) {
             if($OnlyAttempted -and -not [IO.File]::Exists([string]$template.result_path) -and -not [IO.File]::Exists((Join-Path ([IO.Path]::GetDirectoryName([string]$template.result_path)) 'call.claim'))) {continue}
             if(-not [IO.File]::Exists([string]$template.result_path)) {return @{status='failed';error='PAD_AI_RESULT_MISSING: a required AI call did not finish.';ai_calls=$calls}}
             $result=Read-AgentJson $template.result_path

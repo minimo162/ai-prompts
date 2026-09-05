@@ -375,7 +375,8 @@
             showDiagnostics(result.diagnostics === undefined ? result : result.diagnostics);
             $('settings-details').open = true;
           }
-          message(successMessage);
+          const startupWarning = path === '/api/copilot/open' && result.copilot && result.copilot.launch_cleanup === 'not_found';
+          message(startupWarning ? 'Copilot を開きました。追加のタブは自動では閉じられませんでした。' : successMessage);
           await poll();
         } catch (error) { message(error.message, true); }
         finally { pending.delete(path); updateControls(); }

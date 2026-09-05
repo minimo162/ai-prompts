@@ -74,7 +74,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Launcher.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File .\App.ps1 -Mode Serve -HomePath "$PWD\.local"
 ```
 
-テスト結果を実機合格や他PC対応の証明として使わないでください。PAD 2.71の日本語デザイナーで固定Aの貼り付け・保存・実出力を確認しました。自動結果判定、A/Bの置換、実Copilotから生成したRobinの通し検証、他PCでの確認は残っています。
+テスト結果を他PC対応の証明として使わないでください。PAD 2.71の日本語デザイナーで固定A/Bの貼り付け・保存・置換・実行・結果判定が通りました。失敗条件の実機検証、実Copilotを含む通し検証、他PCでの確認は残っています。
 
 仕様: [Issue #5](https://github.com/minimo162/ai-prompts/issues/5)。Robinの元プロンプト: [pad-robin-prompts.md](pad-robin-prompts.md)。
 

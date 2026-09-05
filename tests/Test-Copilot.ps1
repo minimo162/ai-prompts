@@ -226,12 +226,16 @@ try{
         if($script:launchCloseMode -ceq 'closed-before-ack'){throw 'CDP_UNAVAILABLE: socket closed before acknowledgement'}
         return [pscustomobject]@{result=[pscustomobject]@{value=$true}}
     }
-    Close-AgentCopilotLaunchTab $launchConfig $launchUrl $activeSignin ([datetime]::UtcNow.AddSeconds(5))
+    $closed=Close-AgentCopilotLaunchTab $launchConfig $launchUrl $activeSignin ([datetime]::UtcNow.AddSeconds(5))
+    Assert-Case ($closed.status -ceq 'closed' -and [string]::IsNullOrEmpty([string]$closed.warning)) 'Verified nonce close reports closed only after target disappearance'
     Assert-Case ($script:closeCalls -eq 1 -and @($script:mockPages | Where-Object id -ceq 'app-launch').Count -eq 0) 'First launch removes only its nonce blank after Copilot is ready'
     Assert-Case (@($script:mockPages | Where-Object { $_.id -ceq 'user-blank' -and $_.url -ceq 'about:blank' }).Count -eq 1) 'Existing user about blank is untouched'
     Assert-Case (@($script:mockPages | Where-Object id -ceq 'extension-welcome').Count -eq 1) 'Extension welcome tab is untouched'
     Assert-Case ((Get-AgentCopilotTarget $launchConfig -Create -AllowAuthentication).id -ceq 'launch-copilot') 'Sign-in target remains recorded and reusable'
     Assert-Rejected {Close-AgentCopilotLaunchTab $launchConfig 'about:blank' $activeSignin ([datetime]::UtcNow.AddSeconds(5))} 'CDP_UNAVAILABLE' 'Plain blank cannot be claimed as app-owned'
+    $absent=Close-AgentCopilotLaunchTab $launchConfig $launchUrl $activeSignin ([datetime]::UtcNow.AddSeconds(5))
+    Assert-Case ($absent.status -ceq 'not_found' -and $absent.warning -match '閉じていません' -and $script:closeCalls -eq 1) 'Missing exact nonce is an explicit nonfatal no-close result'
+    Assert-Case (@($script:mockPages | Where-Object { $_.id -ceq 'user-blank' -and $_.url -ceq 'about:blank' }).Count -eq 1) 'Missing nonce never adopts an unrelated blank'
     $ownedBlank=New-TestCopilotPage 'app-launch';$ownedBlank.url=$launchUrl;$script:mockPages+=@($ownedBlank)
     $duplicate=New-TestCopilotPage 'duplicate-nonce';$duplicate.url=$launchUrl;$script:mockPages+=@($duplicate)
     $beforeClose=$script:closeCalls
@@ -307,15 +311,17 @@ try{
         param($Config,$LaunchUrl,$ActiveTarget,$Deadline)
         if($LaunchUrl -cne $script:openLaunchUrl -or $ActiveTarget.id -cne 'orchestration-copilot'){throw 'Cleanup must receive the exact launched nonce and confirmed Copilot target.'}
         $script:openEvents.Add('cleanup');$script:openCleanupCalls++
+        if($script:openCleanupStatus -ceq 'not_found'){return [pscustomobject]@{status='not_found';warning='今回の起動タブは確認できませんでした。ほかのタブは閉じていません。'}}
+        return [pscustomobject]@{status='closed';warning=''}
     }
     try {
         ${env:ProgramFiles(x86)}=$fakeProgramFiles
         $firstLaunchUrl=''
         foreach($launchCase in @(1,2)){
             $script:openEvents=New-Object 'Collections.Generic.List[string]'
-            $script:openOwned=$false;$script:openLaunchCalls=0;$script:openCleanupCalls=0;$script:openLaunchUrl='';$script:openArguments=''
+            $script:openOwned=$false;$script:openLaunchCalls=0;$script:openCleanupCalls=0;$script:openLaunchUrl='';$script:openArguments='';$script:openCleanupStatus='closed'
             $opened=Open-AgentCopilot -HomePath (Join-Path $jobTemp 'open-orchestration') -Settings @{}
-            Assert-Case ($opened.status -ceq 'opened' -and $opened.target_id -ceq 'orchestration-copilot') ('Real Open first-launch result '+$launchCase)
+            Assert-Case ($opened.status -ceq 'opened' -and $opened.target_id -ceq 'orchestration-copilot' -and $opened.launch_cleanup -ceq 'closed' -and [string]::IsNullOrEmpty([string]$opened.warning)) ('Real Open first-launch result '+$launchCase)
             Assert-Case ($script:openLaunchCalls -eq 1 -and $script:openCleanupCalls -eq 1) ('Real Open launches once and cleans up once '+$launchCase)
             Assert-Case ($script:openEvents.IndexOf('ownership:True') -gt $script:openEvents.IndexOf('launch') -and $script:openEvents.IndexOf('target') -gt $script:openEvents.IndexOf('ownership:True')) ('Real Open establishes ownership before target retrieval '+$launchCase)
             Assert-Case ($script:openEvents.IndexOf('target') -lt $script:openEvents.IndexOf('bring-to-front') -and $script:openEvents.IndexOf('bring-to-front') -lt $script:openEvents.IndexOf('cleanup')) ('Real Open verifies and foregrounds Copilot before nonce cleanup '+$launchCase)
@@ -323,10 +329,15 @@ try{
             if($launchCase -eq 1){$firstLaunchUrl=$script:openLaunchUrl}else{Assert-Case ($script:openLaunchUrl -cne $firstLaunchUrl) 'Separate Open launches generate different nonce URLs'}
         }
         $script:openEvents=New-Object 'Collections.Generic.List[string]'
-        $script:openOwned=$true;$script:openLaunchCalls=0;$script:openCleanupCalls=0;$script:openLaunchUrl='';$script:openArguments=''
+        $script:openOwned=$false;$script:openLaunchCalls=0;$script:openCleanupCalls=0;$script:openLaunchUrl='';$script:openArguments='';$script:openCleanupStatus='not_found'
+        $opened=Open-AgentCopilot -HomePath (Join-Path $jobTemp 'open-orchestration') -Settings @{}
+        Assert-Case ($opened.status -ceq 'opened' -and $opened.launch_cleanup -ceq 'not_found' -and $opened.warning -match '閉じていません') 'Missing nonce cleanup keeps a confirmed Copilot open successful'
+        Assert-Case ($script:openLaunchCalls -eq 1 -and $script:openCleanupCalls -eq 1 -and $script:openEvents.IndexOf('bring-to-front') -lt $script:openEvents.IndexOf('cleanup')) 'Missing nonce warning follows target confirmation and has one cleanup inspection'
+        $script:openEvents=New-Object 'Collections.Generic.List[string]'
+        $script:openOwned=$true;$script:openLaunchCalls=0;$script:openCleanupCalls=0;$script:openLaunchUrl='';$script:openArguments='';$script:openCleanupStatus='closed'
         $opened=Open-AgentCopilot -HomePath (Join-Path $jobTemp 'open-orchestration') -Settings @{}
         Assert-Case ($script:openLaunchCalls -eq 0 -and $script:openCleanupCalls -eq 0 -and -not $script:openEvents.Contains('listener-check')) 'Already-owned Open performs neither process launch nor blank cleanup'
-        Assert-Case ($opened.target_id -ceq 'orchestration-copilot' -and $script:openEvents.IndexOf('target') -ge 0 -and $script:openEvents.IndexOf('bring-to-front') -gt $script:openEvents.IndexOf('target')) 'Already-owned Open retrieves and foregrounds the recorded sign-in target'
+        Assert-Case ($opened.target_id -ceq 'orchestration-copilot' -and $opened.launch_cleanup -ceq 'not_requested' -and [string]::IsNullOrEmpty([string]$opened.warning) -and $script:openEvents.IndexOf('target') -ge 0 -and $script:openEvents.IndexOf('bring-to-front') -gt $script:openEvents.IndexOf('target')) 'Already-owned Open retrieves and foregrounds the recorded sign-in target'
     } finally { ${env:ProgramFiles(x86)}=$savedProgramFiles86 }
 }finally{
     $resolvedJobTemp=[IO.Path]::GetFullPath($jobTemp)
