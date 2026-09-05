@@ -65,6 +65,49 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
     check(observed.state.inputText, observed.raw.innerText, 'Preserve multiple paragraphs exactly as rendered');
     check(observed.state.inputText.includes('日本語の一段落') && observed.state.inputText.includes('\n') && observed.state.inputText.endsWith('次の段落'), true, 'Multiple paragraph fixture contains its line separator');
 
+    const escapeText = value => value.replace(/[&<>]/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[character]));
+    const lexicalMarker = '\u200b\u200c';
+    const lexicalBody = value => '<span data-lexical-text="true">' + escapeText(value) + '</span>';
+    const lexicalTail = '<span data-lexical-text="true" aria-hidden="true">' + lexicalMarker + '</span>';
+    const markedEditor = value => span('<p>' + lexicalBody(value) + lexicalTail + '</p>');
+    // This synthetic text has the measured body length without copying a live prompt.
+    for (const value of ['文'.repeat(1271), '先頭行\n次の行', ' \n日本語 \n ', '本文\u200b途中\u200cと\u2060\ufeff ', '本文の末尾\u200b\u200c', '本文 <入力> & 値']) {
+      observed = await render(markedEditor(value));
+      check(observed.raw, { innerText: value + lexicalMarker, textContent: value + lexicalMarker, value: null }, 'Reproduce the separate Lexical marker after ' + JSON.stringify(value.length > 80 ? '1271-character synthetic body' : value));
+      check(observed.state, { inputCount: 1, inputText: value, generating: false, sendReady: false }, 'Remove only the observed marker and preserve the complete body');
+    }
+
+    const body = lexicalBody('保持する本文');
+    for (const [label, html, setup] of [
+      ['body lacks Lexical attribute', span('<p><span>保持する本文</span>' + lexicalTail + '</p>')],
+      ['body Lexical attribute is false', span('<p><span data-lexical-text="false">保持する本文</span>' + lexicalTail + '</p>')],
+      ['marker lacks Lexical attribute', span('<p>' + body + '<span aria-hidden="true">' + lexicalMarker + '</span></p>')],
+      ['marker lacks aria-hidden', span('<p>' + body + '<span data-lexical-text="true">' + lexicalMarker + '</span></p>')],
+      ['marker aria-hidden is false', span('<p>' + body + '<span data-lexical-text="true" aria-hidden="false">' + lexicalMarker + '</span></p>')],
+      ['marker precedes body', span('<p>' + lexicalTail + body + '</p>')],
+      ['extra root sibling', span('<p>' + body + lexicalTail + '</p><!--retain-->')],
+      ['extra paragraph child', span('<p>' + body + lexicalTail + '<!--retain--></p>')],
+      ['extra body text node', markedEditor('保持する本文'), () => document.querySelector('#m365-chat-editor-target-element p > span').appendChild(document.createTextNode(''))],
+      ['extra marker child', span('<p>' + body + '<span data-lexical-text="true" aria-hidden="true">' + lexicalMarker + '<!--retain--></span></p>')],
+      ['nested body markup', span('<p><span data-lexical-text="true"><em>保持する本文</em></span>' + lexicalTail + '</p>')],
+      ['empty body text node', markedEditor(''), () => document.querySelector('#m365-chat-editor-target-element p > span').appendChild(document.createTextNode(''))],
+      ['ordinary user suffix', span('保持する本文' + lexicalMarker)],
+      ['user suffix inside a single Lexical span', span('<p>' + lexicalBody('保持する本文' + lexicalMarker) + '</p>')],
+      ['different marker sequence', span('<p>' + body + '<span data-lexical-text="true" aria-hidden="true">\u200c\u200b</span></p>')],
+      ['incomplete marker', span('<p>' + body + '<span data-lexical-text="true" aria-hidden="true">\u200b</span></p>')],
+      ['marker with extra whitespace', span('<p>' + body + '<span data-lexical-text="true" aria-hidden="true">' + lexicalMarker + ' </span></p>')],
+      ['different root element', '<div id="m365-chat-editor-target-element" contenteditable="true"><p>' + body + lexicalTail + '</p></div>'],
+      ['different paragraph element', span('<div>' + body + lexicalTail + '</div>')],
+      ['multiple paragraphs', span('<p>' + body + lexicalTail + '</p><p>次の段落</p>')]
+    ]) {
+      observed = await render(html, setup);
+      check(observed.state.inputText, observed.raw.innerText, 'Retain rendered input for unrecognized marker shape: ' + label);
+    }
+    observed = await render(markedEditor('Body'), () => { document.querySelector('#m365-chat-editor-target-element p > span').style.textTransform = 'uppercase'; });
+    check(observed.raw.textContent, 'Body' + lexicalMarker, 'Mismatched rendering fixture retains its original text node');
+    check(observed.raw.innerText, 'BODY' + lexicalMarker, 'Mismatched rendering fixture actually changes innerText');
+    check(observed.state.inputText, observed.raw.innerText, 'Do not remove a marker when innerText differs from textContent');
+
     for (const [label, html, setup] of [
       ['empty paragraph', span('<p></p>')],
       ['direct break', span('<br>')],

@@ -1081,6 +1081,11 @@ const inputText=()=>{
   const text=String(input.innerText),p=input.childNodes[0],br=p&&p.childNodes[0];
   // The observed empty M365 editor renders one LF without containing any text nodes.
   if(input.tagName==='SPAN'&&input.contentEditable==='true'&&text==='\n'&&input.textContent===''&&input.childNodes.length===1&&p.nodeType===1&&p.tagName==='P'&&p.childNodes.length===1&&br.nodeType===1&&br.tagName==='BR'&&br.childNodes.length===0)return '';
+  // M365 appends this separate, aria-hidden Lexical marker after the complete input text.
+  if(input.tagName==='SPAN'&&input.contentEditable==='true'&&input.childNodes.length===1&&p.nodeType===1&&p.tagName==='P'&&p.childNodes.length===2){
+    const body=p.childNodes[0],tail=p.childNodes[1];
+    if(body.nodeType===1&&body.tagName==='SPAN'&&body.getAttribute('data-lexical-text')==='true'&&body.childNodes.length===1&&body.firstChild.nodeType===3&&body.firstChild.nodeValue.length>0&&tail.nodeType===1&&tail.tagName==='SPAN'&&tail.getAttribute('data-lexical-text')==='true'&&tail.getAttribute('aria-hidden')==='true'&&tail.childNodes.length===1&&tail.firstChild.nodeType===3&&tail.firstChild.nodeValue==='\u200b\u200c'&&input.textContent===body.firstChild.nodeValue+tail.firstChild.nodeValue&&text===input.textContent)return body.firstChild.nodeValue;
+  }
   return text;
 };
 const buttons=[...document.querySelectorAll('button,[role="button"]')].filter(visible);
