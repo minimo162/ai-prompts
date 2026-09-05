@@ -1180,10 +1180,46 @@ function Reserve-AgentCopilotAttempt {
     } catch { throw 'RESPONSE_INVALID: この要求は送信を試行済み、または試行記録を保存できません。再送信しません。' }
 }
 
+function Close-AgentCopilotLaunchTab {
+    param($Config,[string]$LaunchUrl,$ActiveTarget,[datetime]$Deadline)
+    if ($Config.JobId -or $LaunchUrl -cnotmatch '^about:blank#ai-prompts-launch-[0-9a-f]{32}$') { throw 'CDP_UNAVAILABLE: 起動タブの所有情報が不正です。' }
+    $pages=@(Invoke-AgentCopilotHttp $Config '/json/list')
+    $active=@($pages | Where-Object { $_.id -ceq $ActiveTarget.id -and $_.type -ceq 'page' -and ((Test-AgentCopilotUrl ([string]$_.url)) -or (Test-AgentCopilotAuthUrl ([string]$_.url))) })
+    $launch=@($pages | Where-Object { $_.url -ceq $LaunchUrl -and $_.type -ceq 'page' })
+    if ($active.Count -ne 1 -or $launch.Count -ne 1 -or $launch[0].id -ceq $ActiveTarget.id -or [string]$launch[0].id -notmatch '^[A-Za-z0-9_-]{1,128}$') { throw 'CDP_UNAVAILABLE: 今回作成した起動タブを一意に確認できません。ほかのタブは閉じません。' }
+    $target=$launch[0]
+    if (-not (Test-AgentCopilotSocketUrl ([string]$target.webSocketDebuggerUrl) $Config.Port ([string]$target.id))) { throw 'CDP_UNAVAILABLE: 起動タブの接続先が不正です。' }
+    $socket=Connect-AgentCopilotSocket $Config $target
+    $changed=$false
+    try {
+        # Check and close in one synchronous evaluation on the nonce tab itself. A navigated
+        # or unrelated blank never receives an unconditional Page.close/Target.closeTarget.
+        $expression='(()=>{if(location.href!=='+($LaunchUrl|ConvertTo-Json -Compress)+')return false;window.close();return true;})()'
+        try {
+            $result=Invoke-AgentCopilotCdp $socket 'Runtime.evaluate' @{expression=$expression;returnByValue=$true;userGesture=$true} '' $Deadline
+            $changed=($null -eq $result.PSObject.Properties['result'] -or $null -eq $result.result.PSObject.Properties['value'] -or $result.result.value -ne $true)
+        } catch {
+            # Closing the tab may close its WebSocket before acknowledgement. Only absence of
+            # this exact target below can confirm success; never retry the close command.
+        }
+    } finally { $socket.Dispose() }
+    if ($changed) { throw 'CDP_UNAVAILABLE: 起動タブが変更されたため閉じていません。' }
+    $confirmUntil=[datetime]::UtcNow.AddSeconds(3)
+    do {
+        Assert-AgentCopilotWait '' $Deadline
+        $remaining=@((Invoke-AgentCopilotHttp $Config '/json/list') | Where-Object { $_.id -ceq $target.id })
+        if ($remaining.Count -eq 0) { return }
+        if ($remaining.Count -ne 1 -or $remaining[0].url -cne $LaunchUrl) { throw 'CDP_UNAVAILABLE: 起動タブの状態が変わったため追加操作を中止しました。' }
+        if ([datetime]::UtcNow -ge $confirmUntil) { throw 'CDP_UNAVAILABLE: 今回の起動タブを閉じたことを確認できません。再操作はしません。' }
+        Start-Sleep -Milliseconds 100
+    } while ($true)
+}
+
 function Open-AgentCopilot {
     param([string]$HomePath,$Settings)
     $config = Get-AgentCopilotConfig $HomePath $Settings
     $deadline=[datetime]::UtcNow.AddSeconds(35); $mutex=Enter-AgentCopilotMutex $config '' $deadline
+    $launchUrl=''
     try {
         if (-not (Test-AgentCopilotOwnership $config)) {
             $occupied = @(Get-NetTCPConnection -State Listen -LocalPort $config.Port -ErrorAction SilentlyContinue)
@@ -1193,7 +1229,8 @@ function Open-AgentCopilot {
             if ($edge.Count -ne 1) { throw 'CDP_UNAVAILABLE: インストール済み Microsoft Edge が見つかりません。' }
             [IO.Directory]::CreateDirectory($config.Profile) | Out-Null
             if ($config.Profile -match '["\r\n]') { throw 'CDP_UNAVAILABLE: 専用プロファイルのパスが不正です。' }
-            $arguments='--user-data-dir="{0}" --remote-debugging-address=127.0.0.1 --remote-debugging-port={1} --no-first-run --no-default-browser-check about:blank' -f $config.Profile,$config.Port
+            $launchUrl='about:blank#ai-prompts-launch-'+[guid]::NewGuid().ToString('N')
+            $arguments='--user-data-dir="{0}" --remote-debugging-address=127.0.0.1 --remote-debugging-port={1} --no-first-run --no-default-browser-check {2}' -f $config.Profile,$config.Port,$launchUrl
             # This is the sign-in window expressly opened by the user, not a background helper.
             Start-Process -FilePath $edge[0] -ArgumentList $arguments -WindowStyle Normal | Out-Null
             while (-not (Test-AgentCopilotOwnership $config)) { Assert-AgentCopilotWait '' $deadline; Start-Sleep -Milliseconds 250 }
@@ -1202,6 +1239,7 @@ function Open-AgentCopilot {
         # Open is a user action: reveal only this recorded tab, including its sign-in page.
         $socket=Connect-AgentCopilotSocket $config $target
         try { $null=Invoke-AgentCopilotCdp $socket 'Page.bringToFront' @{} '' $deadline } finally { $socket.Dispose() }
+        if ($launchUrl) { Close-AgentCopilotLaunchTab $config $launchUrl $target $deadline }
         return [pscustomobject]@{status='opened';port=$config.Port;target_id=[string]$target.id}
     } finally { $mutex.ReleaseMutex();$mutex.Dispose() }
 }
@@ -1528,6 +1566,12 @@ function Get-AgentPadElement {
     return $null
 }
 
+function Test-AgentPadWindowTitle {
+    param([string]$Title,[string]$FlowName)
+    if([string]::IsNullOrWhiteSpace($Title) -or [string]::IsNullOrWhiteSpace($FlowName)){return $false}
+    return ($Title.Equals($FlowName,[StringComparison]::Ordinal) -or $Title.Equals($FlowName+' - Power Automate',[StringComparison]::Ordinal) -or $Title.Equals($FlowName+'* - Power Automate',[StringComparison]::Ordinal) -or $Title.Equals('Power Automate | '+$FlowName,[StringComparison]::Ordinal))
+}
+
 function Get-AgentPadWindow {
     param($Settings)
     Initialize-AgentPadTypes
@@ -1538,7 +1582,7 @@ function Get-AgentPadWindow {
         try {
             $process=Get-Process -Id $window.Current.ProcessId -ErrorAction Stop
             $name=$window.Current.Name
-            if($process.ProcessName -eq 'PAD.Designer' -and ($name -eq $Settings.pad_flow_name -or $name.StartsWith([string]$Settings.pad_flow_name+' - ') -or $name.StartsWith([string]$Settings.pad_flow_name+'* - '))) {$found+=,$window}
+            if($process.ProcessName -eq 'PAD.Designer' -and (Test-AgentPadWindowTitle -Title $name -FlowName ([string]$Settings.pad_flow_name))) {$found+=,$window}
         } catch {}
     }
     if($found.Count -ne 1) {throw 'PAD_SETUP: open exactly one dedicated PAD flow designer (Power Fx disabled).'}

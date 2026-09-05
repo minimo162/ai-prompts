@@ -20,7 +20,7 @@ foreach($sourceFile in $sourceFiles) {
         if(-not $definitions.ContainsKey($definition.Name)){$definitions[$definition.Name]=$definition}
     }
 }
-$wanted=@('Test-AgentId','Assert-AgentId','Read-AgentJson','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','Get-AgentTextHash','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','ConvertTo-AgentComparableRobin','Get-AgentAiCallTemplate','New-AgentAiCallTemplates','Get-AgentPadAiResults','Invoke-AgentPad')
+$wanted=@('Test-AgentId','Assert-AgentId','Read-AgentJson','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','Get-AgentTextHash','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','ConvertTo-AgentComparableRobin','Get-AgentAiCallTemplate','New-AgentAiCallTemplates','Get-AgentPadAiResults','Test-AgentPadWindowTitle','Invoke-AgentPad')
 foreach($name in $wanted) {
     if(-not $definitions.ContainsKey($name)){throw ('Missing production function: '+$name)}
     . ([scriptblock]::Create($definitions[$name].Extent.Text))
@@ -46,6 +46,23 @@ function New-WriteAction([string]$Path,[string]$Value='InputText') {
     'File.WriteText File: '+(ConvertTo-AgentRobinLiteral $Path)+' TextToWrite: '+$Value+' AppendNewLine: False IfFileExists: File.IfFileExists.Append Encoding: File.FileEncoding.UTF8'
 }
 function Test-Flow([string]$Robin) {Test-AgentRobin -Robin $Robin -RunDirectory $script:run -Job $script:job}
+
+# The modern title was independently observed on the real PAD designer. These
+# are pure title-contract checks, not live window/process discovery evidence.
+foreach($title in @('無題','無題 - Power Automate','無題* - Power Automate','Power Automate | 無題')) {
+    Assert-Case (Test-AgentPadWindowTitle $title '無題') ('Dedicated PAD title form accepted: '+$title)
+}
+foreach($title in @('Power Automate | 別フロー','Power Automate | 無題2','Power Automate | 無題 コピー','Power Automate |  無題','Power Automate | 無題 ','prefix Power Automate | 無題','Power Automate | 無題 | suffix','Power Automate|無題','power automate | 無題','別の無題','無題2 - Power Automate','')) {
+    Assert-Case (-not (Test-AgentPadWindowTitle $title '無題')) ('Different or partial PAD flow title rejected: '+$title)
+}
+Assert-Case (-not (Test-AgentPadWindowTitle 'Power Automate | Untitled' 'untitled')) 'Observed modern title requires exact flow-name case'
+Assert-Case (-not (Test-AgentPadWindowTitle 'Power Automate | ' '')) 'Empty dedicated flow name rejected by pure title guard'
+foreach($title in @('無題 - 別フロー','無題* - 別フロー','無題 - Power Automate suffix','無題* - Power Automate suffix')) {
+    Assert-Case (-not (Test-AgentPadWindowTitle $title '無題')) ('Legacy title cannot adopt arbitrary suffix or another flow: '+$title)
+}
+foreach($title in @('Untitled','Untitled - Power Automate','Untitled* - Power Automate')) {
+    Assert-Case (-not (Test-AgentPadWindowTitle $title 'untitled')) 'Every legacy form requires exact flow-name case'
+}
 
 # All test data remains under this repository, with a unique directory per run.
 $testBase=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '.tmp'))
