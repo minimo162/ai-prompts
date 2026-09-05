@@ -52,6 +52,7 @@ using System.Windows.Automation;
 public sealed class PadResolverMockCurrent {
     public string AutomationId { get; set; }
     public string Name { get; set; }
+    public string ClassName { get; set; }
     public ControlType ControlType { get; set; }
     public bool IsEnabled { get; set; }
 }
@@ -71,6 +72,7 @@ public sealed class PadResolverMockElement {
     public object[] FindAll(TreeScope scope, Condition condition) {
         var candidates=new List<PadResolverMockElement>();
         if(scope==TreeScope.Children) candidates.AddRange(children); else AddDescendants(candidates);
+        if(Object.ReferenceEquals(condition,Condition.TrueCondition)) return candidates.ToArray();
         var property=condition as PropertyCondition;
         if(property==null) return new object[0];
         var matches=new List<object>();
@@ -91,9 +93,11 @@ public sealed class PadResolverMockElement {
 '@
 }
 function New-PadResolverElement([string]$Id,[string]$Name,[Windows.Automation.ControlType]$ControlType,[bool]$Enabled=$true,[bool]$Invoke=$true,[bool]$Selected=$false) {
-    return New-Object PadResolverMockElement($Id,$Name,$ControlType,$Enabled,$Invoke,$Selected)
+    $element=New-Object PadResolverMockElement($Id,$Name,$ControlType,$Enabled,$Invoke,$Selected)
+    $element.Current.ClassName=''
+    return $element
 }
-function New-PadResolverLayout([string]$StatusId='Flow_status_ready',[bool]$StartEnabled=$false,[bool]$StopEnabled=$false,[bool]$SaveEnabled=$true,[object]$ErrorText=$null,[bool]$SelectedMain=$true,[bool]$WorkspaceIsList=$true,[bool]$IncludeProgramDetails=$true,[bool]$OmitStart=$false) {
+function New-PadResolverLayout([string]$StatusId='Flow_status_ready',[bool]$StartEnabled=$false,[bool]$StopEnabled=$false,[bool]$SaveEnabled=$true,[object]$ErrorText=$null,[bool]$SelectedMain=$true,[bool]$WorkspaceIsList=$true,[bool]$IncludeProgramDetails=$true,[bool]$OmitStart=$false,[string]$MainName='Main',[switch]$RuntimeErrorMainShape) {
     $root=New-PadResolverElement 'Root' 'mock root' ([Windows.Automation.ControlType]::Window)
     $start=New-PadResolverElement 'StartFlowButton' 'Run' ([Windows.Automation.ControlType]::Button) $StartEnabled $true
     $stopWrapper=New-PadResolverElement 'StopFlowButton' 'stop wrapper' ([Windows.Automation.ControlType]::Custom) $true $false
@@ -103,7 +107,14 @@ function New-PadResolverLayout([string]$StatusId='Flow_status_ready',[bool]$Star
     $workspaceType=if($WorkspaceIsList){[Windows.Automation.ControlType]::List}else{[Windows.Automation.ControlType]::Pane}
     $workspace=New-PadResolverElement 'ProgramItemsListBoxActions' 'workspace' $workspaceType
     $tabs=New-PadResolverElement 'SubflowTabControl' 'tabs' ([Windows.Automation.ControlType]::Tab)
-    $main=New-PadResolverElement 'MainTab' 'Main' ([Windows.Automation.ControlType]::TabItem) $true $true $SelectedMain
+    $main=New-PadResolverElement 'MainTab' $MainName ([Windows.Automation.ControlType]::TabItem) $true $true $SelectedMain
+    if($RuntimeErrorMainShape) {
+        $mainText=New-PadResolverElement '' 'Main' ([Windows.Automation.ControlType]::Text)
+        $mainText.Current.ClassName='TextBlock'
+        $functionView=New-PadResolverElement '' '' ([Windows.Automation.ControlType]::Custom)
+        $functionView.Current.ClassName='FunctionView'
+        $main.AddChild($mainText); $main.AddChild($functionView)
+    }
     $statusBar=New-PadResolverElement 'DesignerStatusBar' 'status bar' ([Windows.Automation.ControlType]::StatusBar)
     $normalStatus=New-PadResolverElement 'NormalStatusBarItem' 'normal status' ([Windows.Automation.ControlType]::Pane)
     $programDetails=New-PadResolverElement 'ProgramDetailsStatusBarItem' 'program details' ([Windows.Automation.ControlType]::Pane)
@@ -221,6 +232,23 @@ $snapshotLayout=New-PadResolverLayout
 $snapshot=Get-AgentPadSnapshot $snapshotLayout.root
 Assert-Case ($snapshot.idle -and $snapshot.editable -and -not $snapshot.can_run -and $snapshot.errors_known -and $snapshot.errors -eq 0 -and $snapshot.status -ceq 'ready') 'Full production snapshot accepts exact empty Main layout as idle and editable'
 Assert-Case ((Wait-AgentPadEditable $snapshotLayout.root ([IO.Path]::Combine([IO.Path]::GetTempPath(),'missing-pad-cancel')) -TimeoutSeconds 1).status -ceq 'ready') 'Editable wait accepts two settled supported ready samples'
+$runtimeErrorLayout=New-PadResolverLayout -StatusId 'Flow_status_runtime_error' -StartEnabled:$true -ErrorText '1' -MainName 'Main, エラーあり,' -RuntimeErrorMainShape
+$runtimeErrorSnapshot=Get-AgentPadSnapshot $runtimeErrorLayout.root -AllowErrors
+Assert-Case ($runtimeErrorSnapshot.status -ceq 'runtime_error' -and -not $runtimeErrorSnapshot.ready -and -not $runtimeErrorSnapshot.idle -and $runtimeErrorSnapshot.errors_known -and $runtimeErrorSnapshot.errors -eq 1) 'Runtime error accepts only the exact decorated Main tab with the observed direct-child identity'
+$runtimeNoShape=New-PadResolverLayout -StatusId 'Flow_status_runtime_error' -StartEnabled:$true -ErrorText '1' -MainName 'Main, エラーあり,'
+Assert-Rejected {Get-AgentPadSnapshot $runtimeNoShape.root -AllowErrors} 'PAD_SUBFLOW' 'Runtime error decorated Main without the observed direct-child identity fails closed'
+$runtimeWrongOuterName=New-PadResolverLayout -StatusId 'Flow_status_runtime_error' -StartEnabled:$true -ErrorText '1' -MainName 'Main, error,' -RuntimeErrorMainShape
+Assert-Rejected {Get-AgentPadSnapshot $runtimeWrongOuterName.root -AllowErrors} 'PAD_SUBFLOW' 'Runtime error rejects a changed decorated Main name'
+$runtimeWrongState=New-PadResolverLayout -StatusId 'Flow_status_ready' -StartEnabled:$true -MainName 'Main, エラーあり,' -RuntimeErrorMainShape
+Assert-Rejected {Get-AgentPadSnapshot $runtimeWrongState.root -AllowErrors} 'PAD_SUBFLOW' 'Decorated Main is accepted only with runtime_error status'
+$runtimeBadSibling=New-PadResolverLayout -StatusId 'Flow_status_runtime_error' -StartEnabled:$true -ErrorText '1' -MainName 'Main, エラーあり,' -RuntimeErrorMainShape
+$runtimeBadSibling.main.AddChild((New-PadResolverElement '' '' ([Windows.Automation.ControlType]::Pane)))
+Assert-Rejected {Get-AgentPadSnapshot $runtimeBadSibling.root -AllowErrors} 'PAD_SUBFLOW' 'Runtime error rejects an extra direct child beside the observed Main identity'
+$runtimeBadText=New-PadResolverLayout -StatusId 'Flow_status_runtime_error' -StartEnabled:$true -ErrorText '1' -MainName 'Main, エラーあり,' -RuntimeErrorMainShape
+$runtimeBadTextChildren=@($runtimeBadText.main.FindAll([Windows.Automation.TreeScope]::Children,[Windows.Automation.Condition]::TrueCondition)); $runtimeBadTextChildren[0].Current.Name='別の名前'
+Assert-Rejected {Get-AgentPadSnapshot $runtimeBadText.root -AllowErrors} 'PAD_SUBFLOW' 'Runtime error rejects a direct TextBlock whose name is not Main'
+$runtimeUnselected=New-PadResolverLayout -StatusId 'Flow_status_runtime_error' -StartEnabled:$true -ErrorText '1' -SelectedMain:$false -MainName 'Main, エラーあり,' -RuntimeErrorMainShape
+Assert-Rejected {Get-AgentPadSnapshot $runtimeUnselected.root -AllowErrors} 'PAD_SUBFLOW' 'Runtime error decorated Main still requires the only tab to be selected'
 $badMain=New-PadResolverLayout -SelectedMain:$false
 Assert-Rejected {Get-AgentPadSnapshot $badMain.root} 'PAD_SUBFLOW' 'Full snapshot requires the only Main subflow to be selected'
 $twoMain=New-PadResolverLayout; $twoMain.tabs.AddChild((New-PadResolverElement 'OtherMainTab' 'Main' ([Windows.Automation.ControlType]::TabItem) $true $true $true))

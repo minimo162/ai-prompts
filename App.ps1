@@ -1765,8 +1765,32 @@ function Get-AgentPadSnapshot {
     $tabs=Get-AgentPadElement $Window @('SubflowTabControl')
     $tabCondition=New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::ControlTypeProperty,[Windows.Automation.ControlType]::TabItem)
     $tabItems=$tabs.FindAll([Windows.Automation.TreeScope]::Descendants,$tabCondition)
-    if($tabItems.Count -ne 1 -or $tabItems[0].Current.Name -cne 'Main') {throw 'PAD_SUBFLOW: exactly one Main subflow is required.'}
-    if(-not $tabItems[0].GetCurrentPattern([Windows.Automation.SelectionItemPattern]::Pattern).Current.IsSelected) {throw 'PAD_SUBFLOW: Main is not selected.'}
+    if($tabItems.Count -ne 1) {throw 'PAD_SUBFLOW: exactly one Main subflow is required.'}
+    $mainTab=$tabItems[0]
+    $mainTabName=[string]$mainTab.Current.Name
+    if($mainTabName -cne 'Main') {
+        # Runtime errors decorate the selected outer TabItem name.  Keep the
+        # exception exact and prove the stable direct-child identity observed
+        # in the live designer before accepting it.  This branch is deliberately
+        # status-scoped; no localized prefix or fuzzy name match is permitted.
+        if($status.state -cne 'runtime_error' -or $mainTabName -cne 'Main, エラーあり,') {throw 'PAD_SUBFLOW: exactly one Main subflow is required.'}
+        $directChildren=@($mainTab.FindAll([Windows.Automation.TreeScope]::Children,[Windows.Automation.Condition]::TrueCondition))
+        if($directChildren.Count -ne 2) {throw 'PAD_SUBFLOW: exactly one Main subflow is required.'}
+        $mainText=@($directChildren | Where-Object {
+            [string]$_.Current.AutomationId -ceq '' -and
+            [string]$_.Current.Name -ceq 'Main' -and
+            $_.Current.ControlType -eq [Windows.Automation.ControlType]::Text -and
+            [string]$_.Current.ClassName -ceq 'TextBlock'
+        })
+        $functionView=@($directChildren | Where-Object {
+            [string]$_.Current.AutomationId -ceq '' -and
+            [string]$_.Current.Name -ceq '' -and
+            $_.Current.ControlType -eq [Windows.Automation.ControlType]::Custom -and
+            [string]$_.Current.ClassName -ceq 'FunctionView'
+        })
+        if($mainText.Count -ne 1 -or $functionView.Count -ne 1) {throw 'PAD_SUBFLOW: exactly one Main subflow is required.'}
+    }
+    if(-not $mainTab.GetCurrentPattern([Windows.Automation.SelectionItemPattern]::Pattern).Current.IsSelected) {throw 'PAD_SUBFLOW: Main is not selected.'}
     $startEnabled=if($null -ne $start){[bool]$start.Current.IsEnabled}else{$false}
     $saveEnabled=if($null -ne $save){[bool]$save.Current.IsEnabled}else{$false}
     $provisional=New-AgentPadSnapshotState -StartEnabled $startEnabled -StopEnabled ([bool]$stop.Current.IsEnabled) -SaveEnabled $saveEnabled -Status $status.state -ErrorCount -1 -ErrorsKnown $false

@@ -16,7 +16,7 @@
 |---|---|
 | Windows PowerShell 5.1 契約検証 | `tests/Test-App.ps1` **125 PASS**。Copilot/PADを模擬し、要求・結果・観測・再計画・パス境界・同期を検査する。実サービスの証拠ではない。 |
 | Copilotアダプター | `tests/Test-Copilot.ps1` **119 PASS**。CDP応答を模擬し、全文・ID・終端・生成終了・排他・ジョブ分離・異常分類、起動タブの終了と他タブの保持、起動識別タブ不在時の警告付き成功を検査する。本番Robin検証器で受理したReadText/WriteTextフローと約6万文字の長文をJSON復号し、原文との完全一致も確認。実M365の入力欄でREADYを確認したが、業務プロンプトの送信は未実施。 |
-| PADアダプター | `tests/Test-Pad.ps1` **274 PASS**。UI/クリップボード境界を模擬し、全文一致・所有権・失敗時の旧フロー実行拒否・結果帰属を検査する。状態別のUI構造、20種類の状態ID、保存・実行・中止、実ファイルに生成した2件のAiCallテンプレートとRobinの検証も本番関数で確認。実機の固定A/Bは下記に分けて記録する。 |
+| PADアダプター | `tests/Test-Pad.ps1` **281 PASS**。UI/クリップボード境界を模擬し、全文一致・所有権・失敗時の旧フロー実行拒否・結果帰属を検査する。状態別のUI構造、20種類の状態ID、保存・実行・中止、実ファイルに生成した2件のAiCallテンプレートとRobinの検証も本番関数で確認。実機の固定A/Bは下記に分けて記録する。 |
 | localhost HTTP | `tests/Test-Http.ps1` PASS。実App.ps1プロセスでHTML/状態、トークン/Host/Origin拒否、不完全本文の期限、再接続、設定保持、重複回答・古い質問への回答拒否、版の引き継ぎ、停止を確認。 |
 | 実ブラウザー | `tests/Test-Ui.cjs` 15 PASS。実Edgeの1280×900・390×844で入力→未接続エラー→再表示、トークン除去、同ジョブ再接続、横溢れ・JavaScriptエラーなしを確認。質問ID・Copilotジョブ分離変更を含む不変版 `a00bca7` でも再実行し、両幅のPNGを目視確認した。証跡は `.work/ui-after-question-fix-66edd1690c8a4978aae727d6e5a31807/`。隔離サーバーは専用の終了APIで停止した。 |
 | 実際のCMD | リポジトリ上のCMDから実LOCALAPPDATAへ同期し、ローカルApp.ps1のHTTP応答を確認。Chromeにアプリタイトルのウィンドウが現れた。最終統合版も `Bootstrap -NoBrowser` で同期し、実LOCALAPPDATAのサーバー応答と作業コピーのApp.ps1ハッシュ一致を確認した。共有UNC起動ではない。 |
@@ -71,6 +71,10 @@
 Gate 1の固定2回AiCallの準備中に、Windows PowerShell 5.1のJSON配列読取りが1個のObject配列となり、2件のテンプレートを正しく参照できない不具合を再現した。明示的な配列展開と6フィールド・IDの検証を共通化し、実ファイルの2件を本番生成関数→読取り→Robin検証へ通す回帰検証を追加した。`.work/gate1/` のハーネスは準備段階で、実プロバイダー呼出しは別の検証である。
 
 Gate 1の実PAD貼り付け読戻し（`.work/gate1/sessions/7d2274ce4c8d47b6883a330f46eb5434/capture-be92b773d8294dafa32109816b0c6084/`）では、提出本文との差分が4つの同一エラーハンドラーだけだった。PADは各結果/status読取と同じインデントに `ON ERROR` / `END` を置き、本文だけを4スペース深く保持したため、生成規則と厳格バリデーターをその実観測形へ合わせた。`AgentAiReadFailed` への `ERROR` 設定、`THROW ERROR`、結果→statusの直後読取順、全文貼り付け比較は維持している。捕捉時は保存・実行0回、状態ready、エラー0、開始/終了マーカーと成果物なしであり、これは貼り付け失敗の診断であってGate 1合格ではない。
+
+`9c6f49f` のGate 1再試行は `.work/gate1/sessions/a774f4aa434d447eacaf1ac42db4a285/summary.json` に保存した。保存・実行開始までは進んだが、最初の状態観測は `PAD_SUBFLOW: exactly one Main subflow is required.` で `status=unknown`、`accepted=false` のまま保持している。同じセッションの読み取り専用事後観測 `.work/gate1/sessions/a774f4aa434d447eacaf1ac42db4a285/posthoc-runtime-error.json` は、`Flow_status_runtime_error`、`Main, エラーあり,`、2行目 `DirectoryNotFound`（`control/started.txt`）を記録した。開始マーカー・終了マーカー・AiCall結果・成果物はいずれも0で、プロバイダー送信確認もない。これは保存→実行開始の進展と別の実行時エラー証拠であり、Gate 1成功や元の `unknown` の書換えを意味しない。
+
+実行時エラーに限り、装飾されたMainタブ名と実機で確認した直下2要素の構造を厳密に照合する修正を加えた。修正版の読み取り専用実機確認は `posthoc-error-identity-fix.json` に記録し、`runtime_error`・エラー1件・`idle=false`・`can_run=false` を確認した。保存・実行は追加していない。125件の基本契約・119件のCopilot契約・281件のPAD契約検証が通過し、独立レビューもBLOCKER 0 / MUST FIX 0。保存先エラーは未解決であり、この修正は実行時エラーの検出改善に限る。
 
 アプリの正式な `/api/copilot/open` から専用Edgeを起動できた。初回の同期確認は利用者の操作対象とし、自動応答していない。その後、専用ポートと専用プロファイルのプロセスが終了したことを読み取り専用で確認した。利用者から「もう一度m365 copilotを開いて」と依頼され、同じ機能から再度開いた。M365への業務プロンプト送信、認証完了、応答取得は未検証。
 
