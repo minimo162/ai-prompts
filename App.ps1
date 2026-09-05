@@ -1406,10 +1406,10 @@ WAIT 1
 Read only from the target, current run artifacts, or supplied AiCall result.txt/status.txt. Write only new files directly inside run_directory/artifacts; each output path may be written once per flow. No overwrite, delete, network actions, UI keys, unbounded loops or arbitrary scripts. Maximum 250 lines and 30 total WAIT seconds. The controller creates artifacts directory and adds its own start/finish markers outside your code.
 For semantic AI processing select up to three supplied ai_call_templates in order. Include their EXACT robin action string once each; do not create another PowerShell command. Supply matching ai_calls metadata: {ai_call_id,operation,input_path,instructions,labels,timeout_seconds}; operation translate/summarize/classify/extract/judge, timeout 5..240. The controller creates the request JSON. PAD may prepare input text under artifacts before invoking the template. Immediately after each call, read its result.txt as a data variable, then read status.txt as another variable. These two reads are mandatory before any other action. Missing/failed/cancelled result.txt must stop the PAD flow, not produce a completion marker. For classification branch on the result with IF equality; labels must be explicit. The status distinguishes success and needs_review. Never execute AI business output as code. Requests use unique reserved IDs and are consumed once. The second call may read the first call's result.txt. Every declared call must execute; do not put a call in a conditional branch that can be skipped. Branch on its result only after reading it. No parallel calls.
 Each of the two mandatory result/status reads MUST have this exact error handler immediately below it (indent relative to the read action; no edits):
-    ON ERROR
-        SET AgentAiReadFailed TO $'''ERROR'''
-        THROW ERROR
-    END
+ON ERROR
+    SET AgentAiReadFailed TO $'''ERROR'''
+    THROW ERROR
+END
 The PAD integration is a PoC and must be validated on the actual installed designer; do not claim live validation from a syntactically correct plan. DONE can cite only controller-observed files from completed PAD rounds.
 '@
 }
@@ -1525,10 +1525,10 @@ function Test-AgentRobin {
                 throw 'ROBIN_AICALL: read result.txt then status.txt immediately after each AiCall.'
             }
             $baseIndent=' ' * ($sourceLine.Length-$line.Length)
-            $pendingGuard.Enqueue($baseIndent+'    ON ERROR')
-            $pendingGuard.Enqueue($baseIndent+"        SET AgentAiReadFailed TO `$'''ERROR'''")
-            $pendingGuard.Enqueue($baseIndent+'        THROW ERROR')
-            $pendingGuard.Enqueue($baseIndent+'    END')
+            $pendingGuard.Enqueue($baseIndent+'ON ERROR')
+            $pendingGuard.Enqueue($baseIndent+"    SET AgentAiReadFailed TO `$'''ERROR'''")
+            $pendingGuard.Enqueue($baseIndent+'    THROW ERROR')
+            $pendingGuard.Enqueue($baseIndent+'END')
         }
         $indent = $sourceLine.Length - $line.Length
         $closing = $line -eq 'END' -or $line -eq 'ELSE'

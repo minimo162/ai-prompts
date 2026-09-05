@@ -362,15 +362,20 @@ try {
     $request=[IO.File]::ReadAllText($template.request_path,[Text.Encoding]::UTF8)|ConvertFrom-Json
     Assert-Case ($request.instructions -ceq $call.instructions) 'AiCall instructions stay unchanged in the request data file'
     Assert-Case (-not $template.robin.Contains($call.instructions)) 'Business instructions do not enter executable script text'
-    $guard="    ON ERROR`n        SET AgentAiReadFailed TO `$'''ERROR'''`n        THROW ERROR`n    END"
+    # PAD keeps ON ERROR/END at the read action's indentation and indents only
+    # the handler body. Keep this fixture isolated from the full captured flow
+    # so the guard contract is tested without normalizing unrelated actions.
+    $guard="ON ERROR`n    SET AgentAiReadFailed TO `$'''ERROR'''`n    THROW ERROR`nEND"
+    $legacyIndentedGuard="    ON ERROR`n        SET AgentAiReadFailed TO `$'''ERROR'''`n        THROW ERROR`n    END"
     $unguardedCallFlow=$template.robin+"`n"+(New-ReadAction $template.text_path 'AiText')+"`n"+(New-ReadAction $template.status_path 'AiStatus')
     $callFlow=$template.robin+"`n"+(New-ReadAction $template.text_path 'AiText')+"`n"+$guard+"`n"+(New-ReadAction $template.status_path 'AiStatus')+"`n"+$guard
     $null=Test-Flow $callFlow
     Assert-Case $true 'Exact AiCall template and mandatory result/status reads with throw guards accepted'
+    Assert-Rejected {Test-Flow ($template.robin+"`n"+(New-ReadAction $template.text_path 'AiText')+"`n"+$legacyIndentedGuard+"`n"+(New-ReadAction $template.status_path 'AiStatus')+"`n"+$legacyIndentedGuard)} 'ROBIN_AICALL' 'Legacy outer-indented guard from the submitted PAD text rejected'
     Assert-Rejected {Test-Flow $unguardedCallFlow} 'ROBIN_AICALL' 'AiCall read without its exact error guard rejected'
     $missingStatusGuard=$template.robin+"`n"+(New-ReadAction $template.text_path 'AiText')+"`n"+$guard+"`n"+(New-ReadAction $template.status_path 'AiStatus')
     Assert-Rejected {Test-Flow $missingStatusGuard} 'ROBIN_AICALL' 'Missing final status-read error guard rejected'
-    foreach($alteredFlow in @($callFlow.Replace('        THROW ERROR','        WAIT 0'),$callFlow.Replace('AgentAiReadFailed','OtherName'),$callFlow.Replace('    ON ERROR','   ON ERROR'),$callFlow.Replace("'''ERROR'''","'''OK'''"))) {
+    foreach($alteredFlow in @($callFlow.Replace('    THROW ERROR','    WAIT 0'),$callFlow.Replace('AgentAiReadFailed','OtherName'),$callFlow.Replace('ON ERROR',' ON ERROR'),$callFlow.Replace("'''ERROR'''","'''OK'''"))) {
         Assert-Rejected {Test-Flow $alteredFlow} 'ROBIN_AICALL' 'Altered throw, assignment, guard indentation or error literal rejected'
     }
     $nestedCall='SET Condition TO '+$yes+"`nIF Condition = "+$yes+" THEN`n"+(($callFlow -split "`n" | ForEach-Object {'    '+$_}) -join "`n")+"`nEND"
