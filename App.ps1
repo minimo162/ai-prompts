@@ -1601,8 +1601,10 @@ function Get-AgentPadElement {
 
 function Test-AgentPadRetryableSelectorFailure([string]$Message) {
     # A missing element is expected while PAD rebuilds the status subtree.
+    # Status and Stop are read separately, so completion can disable Stop
+    # between those reads. Retry only that exact inconsistent observation.
     # Ambiguity and a mismatched control contract are never safe to retry.
-    return ($Message -like 'PAD_SELECTOR: control unavailable:*' -or $Message -ceq 'PAD_SELECTOR: supported PAD status bar unavailable.' -or $Message -ceq 'PAD_SELECTOR: status unavailable.')
+    return ($Message -like 'PAD_SELECTOR: control unavailable:*' -or $Message -ceq 'PAD_SELECTOR: supported PAD status bar unavailable.' -or $Message -ceq 'PAD_SELECTOR: status unavailable.' -or $Message -ceq 'PAD_SELECTOR: StopFlowButton is not enabled during the observed execution state.')
 }
 
 function Get-AgentPadInvokableButton {

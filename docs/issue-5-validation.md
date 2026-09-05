@@ -16,7 +16,7 @@
 |---|---|
 | Windows PowerShell 5.1 契約検証 | `tests/Test-App.ps1` **125 PASS**。Copilot/PADを模擬し、要求・結果・観測・再計画・パス境界・同期を検査する。実サービスの証拠ではない。 |
 | Copilotアダプター | `tests/Test-Copilot.ps1` **119 PASS**。CDP応答を模擬し、全文・ID・終端・生成終了・排他・ジョブ分離・異常分類、起動タブの終了と他タブの保持、起動識別タブ不在時の警告付き成功を検査する。本番Robin検証器で受理したReadText/WriteTextフローと約6万文字の長文をJSON復号し、原文との完全一致も確認。実M365の入力欄でREADYを確認したが、業務プロンプトの送信は未実施。 |
-| PADアダプター | `tests/Test-Pad.ps1` **281 PASS**。UI/クリップボード境界を模擬し、全文一致・所有権・失敗時の旧フロー実行拒否・結果帰属を検査する。状態別のUI構造、20種類の状態ID、保存・実行・中止、実ファイルに生成した2件のAiCallテンプレートとRobinの検証も本番関数で確認。実機の固定A/Bは下記に分けて記録する。 |
+| PADアダプター | `tests/Test-Pad.ps1` **301 PASS**。UI/クリップボード境界を模擬し、全文一致・所有権・失敗時の旧フロー実行拒否・結果帰属を検査する。状態別のUI構造、20種類の状態ID、保存・実行・中止、実ファイルに生成した2件のAiCallテンプレートとRobinの検証も本番関数で確認。実機の固定A/Bは下記に分けて記録する。 |
 | localhost HTTP | `tests/Test-Http.ps1` PASS。実App.ps1プロセスでHTML/状態、トークン/Host/Origin拒否、不完全本文の期限、再接続、設定保持、重複回答・古い質問への回答拒否、版の引き継ぎ、停止を確認。 |
 | 実ブラウザー | `tests/Test-Ui.cjs` 15 PASS。実Edgeの1280×900・390×844で入力→未接続エラー→再表示、トークン除去、同ジョブ再接続、横溢れ・JavaScriptエラーなしを確認。質問ID・Copilotジョブ分離変更を含む不変版 `a00bca7` でも再実行し、両幅のPNGを目視確認した。証跡は `.work/ui-after-question-fix-66edd1690c8a4978aae727d6e5a31807/`。隔離サーバーは専用の終了APIで停止した。 |
 | 実際のCMD | リポジトリ上のCMDから実LOCALAPPDATAへ同期し、ローカルApp.ps1のHTTP応答を確認。Chromeにアプリタイトルのウィンドウが現れた。最終統合版も `Bootstrap -NoBrowser` で同期し、実LOCALAPPDATAのサーバー応答と作業コピーのApp.ps1ハッシュ一致を確認した。共有UNCからの検証は下記Gate 0記録に分ける。 |
@@ -84,6 +84,12 @@ Gate 1の実PAD貼り付け読戻し（`.work/gate1/sessions/7d2274ce4c8d47b6883
 
 実行時エラーに限り、装飾されたMainタブ名と実機で確認した直下2要素の構造を厳密に照合する修正を加えた。修正版の読み取り専用実機確認は `posthoc-error-identity-fix.json` に記録し、`runtime_error`・エラー1件・`idle=false`・`can_run=false` を確認した。保存・実行は追加していない。125件の基本契約・119件のCopilot契約・281件のPAD契約検証が通過し、独立レビューもBLOCKER 0 / MUST FIX 0。保存先エラーは未解決であり、この修正は実行時エラーの検出改善に限る。
 
+失敗した第2回Gate 1のフローは、提出本文・実PADからの全文読戻し・run/jobファイル・所有記録を照合した後、1回の削除・保存で空Mainへ戻した。過去の `unknown` と証拠は保持した（`sessions/a774f4aa434d447eacaf1ac42db4a285/clear-second-runtime-error.json`）。続く固定ファイル診断 `path-probes/aa72021029f64ee9b5be32fd0faeca0b` では、同じPAD実行のworkspace書込みが成功し、AppDataの書込みだけが3行目で失敗した。書込み前後とも作成元からは対象フォルダーが存在していた。
+
+環境診断 `environment-probes/866fcb958b964966b7990dd3c17a73db` では、PADの既知フォルダー、子PowerShellの環境変数と既知フォルダーが同じAppDataを返す一方、子からは直下のAiPromptsAgent・キャッシュApp・要求ファイルが見えなかった。実行中のRobotV2と子PowerShellは同一ユーザー・同一セッションと確認した。作成元で既存ディレクトリのハンドルを解決すると、実体はCodexの `Packages/OpenAI.Codex_2p2nqsd0c76g0/LocalCache/Local/AiPromptsAgent` にあった（`host-view-50e2d69420094d0abe688449a9860207/observation.json`）。現物Codex manifestの新しい仮想化宣言はLocalAppData/OpenAIだけを除外し、Windows 11ではこの宣言が旧disabled指定に優先する。[Microsoftの仕様](https://learn.microsoft.com/en-us/windows/msix/desktop/flexible-virtualization)。今回の保存先不一致は検証を起動したCodex環境に由来し、製品の既定保存先やPADの権限設定は変更しない。上記のLOCALAPPDATA検証もこの実体に対する証拠であり、通常ユーザー起動の非仮想化領域を検証したことにはしない。
+
+環境診断の3出力と終了GUIDは生成されたが、終了観測で状態表示と停止ボタンの有効状態が一致せず、元の結果は `unknown` のまま保持した。事後観測 `posthoc-d9c4b4291c8a45a985cb775211235751` で同じフロー全文・ready・待機中・エラー0を確認した。この正確な観測不一致だけを期限内の読取り直し対象へ追加し、状態判定・操作の再送条件は変えていない。一時不一致からの復帰、持続時の期限切れ、類似文言と型違いの拒否を含むPAD契約検証は301 PASS、独立レビューもBLOCKER 0 / MUST FIX 0。実AiCall・M365送信はこの診断に含まない。
+
 アプリの正式な `/api/copilot/open` から専用Edgeを起動できた。初回の同期確認は利用者の操作対象とし、自動応答していない。その後、専用ポートと専用プロファイルのプロセスが終了したことを読み取り専用で確認した。利用者から「もう一度m365 copilotを開いて」と依頼され、同じ機能から再度開いた。M365への業務プロンプト送信、認証完了、応答取得は未検証。
 
 再起動時に余分な `about:blank` が残るとの報告を受け、明示的な空タブ起動と別のCopilotタブ作成が原因だとソースで確認した。今後の初回起動では空タブに一意の値を付け、Copilotまたは認証タブの表示後、その値・対象ID・専用プロファイル・接続先を確認して当該タブだけを閉じる。変更済み・曖昧・終了確認不能の場合は追加操作しない。既に開いている普通の空タブや拡張機能のタブは閉じない。修正の実ブラウザー検証は未実施。
@@ -96,7 +102,7 @@ Gate 1の実PAD貼り付け読戻し（`.work/gate1/sessions/7d2274ce4c8d47b6883
 
 固定A/B成功版もLOCALAPPDATAへ同期した。そのアプリからM365を開いたところ、Copilotのタブは開き入力欄もREADYだったが、起動時に渡した一意な `about:blank#...` はCDP一覧になく、別の `edge://newtab/` があった。専用Edgeのプロセス引数には識別子が届いていた。未確認の新規タブを閉じる操作はしていない。この場合は、確認済みのCopilotタブが開いていることを成功とし、起動タブの後処理は警告として返すよう追加修正した。重複・変更・不明な所有のタブを閉じる許可には使わない。
 
-次は作成済みの空の「無題」でGate 1/2を固定コードにより実施し、セレクターやRobin構文を確定してからGate 3〜5へ進む。Copilotには利用者の初回確認・必要な認証が残る。実共有パスと別PCはその後の検証対象とする。
+次は検証環境の保存先を両プロセスから読める状態にそろえ、固定AiCallを新しいIDで再試行する。専用「無題」には診断フローが保存されているため、全文・状態を確認してから置換する。Gate 0の切断、Gate 1/2の異常系、Gate 3〜6の実機確認は残っている。
 
 ## 再現コマンド
 

@@ -144,7 +144,19 @@ function Test-Flow([string]$Robin) {Test-AgentRobin -Robin $Robin -RunDirectory 
 $resolverLayout=New-PadResolverLayout
 $statusBarCondition=New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::ControlTypeProperty,[Windows.Automation.ControlType]::StatusBar)
 Assert-Case ($resolverLayout.root.FindAll([Windows.Automation.TreeScope]::Descendants,$statusBarCondition).Count -eq 1) 'Resolver mock exposes exactly one StatusBar control'
-Assert-Case (Test-AgentPadRetryableSelectorFailure 'PAD_SELECTOR: control unavailable: transient status item.') 'Only a missing selector is retryable'
+Assert-Case (Test-AgentPadRetryableSelectorFailure 'PAD_SELECTOR: control unavailable: transient status item.') 'A missing selector is retryable'
+Assert-Case (Test-AgentPadRetryableSelectorFailure 'PAD_SELECTOR: StopFlowButton is not enabled during the observed execution state.') 'The exact non-atomic status and disabled Stop observation is retryable'
+foreach($message in @(
+    'PAD_SELECTOR: StopFlowButton is not enabled.',
+    'PAD_SELECTOR: StopFlowButton is not enabled during the observed execution state',
+    'PAD_SELECTOR: StopFlowButton is not enabled during the observed execution state. Additional failure.',
+    'PAD_SELECTOR: stopFlowButton is not enabled during the observed execution state.',
+    'PAD_SELECTOR: StartFlowButton is not enabled during the observed execution state.',
+    'PAD_SELECTOR: StopFlowButton is not the observed button wrapper.',
+    'PAD_SELECTOR: StopFlowButton child is not a button.'
+)) {
+    Assert-Case (-not (Test-AgentPadRetryableSelectorFailure $message)) ('Similar Stop text or wrong control contract is never retryable: '+$message)
+}
 Assert-Case (-not (Test-AgentPadRetryableSelectorFailure 'PAD_SELECTOR: status ambiguous.')) 'Ambiguous selector is never retryable'
 Assert-Case (-not (Test-AgentPadRetryableSelectorFailure 'PAD_SELECTOR: SaveFlowButton is not the observed button wrapper.')) 'Wrong control contract is never retryable'
 $resolvedSave=Get-AgentPadInvokableButton $resolverLayout.root 'SaveFlowButton' '保存' -Wrapped
@@ -500,6 +512,9 @@ try {
             if($status -eq 'selector_missing'){throw 'PAD_SELECTOR: control unavailable: mocked transient status-bar rebuild.'}
             if($status -eq 'selector_ambiguous'){throw 'PAD_SELECTOR: status ambiguous.'}
             if($status -eq 'selector_wrong_wrapper'){throw 'PAD_SELECTOR: SaveFlowButton is not the observed button wrapper.'}
+            if($status -eq 'selector_stop_disabled'){throw 'PAD_SELECTOR: StopFlowButton is not enabled during the observed execution state.'}
+            if($status -eq 'selector_stop_similar'){throw 'PAD_SELECTOR: StopFlowButton is not enabled.'}
+            if($status -eq 'selector_stop_wrong_type'){throw 'PAD_SELECTOR: StopFlowButton is not the observed button wrapper.'}
             if($status -in @('saving','parsing','checking','updating','publishing','repairing')) {$idle=$false;$editable=$false;$canRun=$false;$errors=-1;$errorsKnown=$false}
             if($status -eq 'saved') {$idle=$true;$editable=$true;$canRun=$true}
         }
@@ -508,7 +523,8 @@ try {
         if($script:padScenario -eq 'runtime-error' -and $script:padRunInvocations -gt 0){$errors=1}
         if($script:padScenario -eq 'running-ambiguous' -and $script:padRunInvocations -gt 0){throw 'PAD_SELECTOR: status ambiguous.'}
         if($script:padScenario -in @('running-missing','cancel-running-missing') -and $script:padRunInvocations -gt 0){throw 'PAD_SELECTOR: control unavailable: mocked running status subtree.'}
-        if($script:padScenario -in @('conditional-complete','cancel-during-running') -and $script:padRunInvocations -gt 0 -and $script:padSnapshotReads -le 4) {
+        if($script:padScenario -in @('running-stop-transition','running-stop-persistent') -and $script:padRunInvocations -gt 0 -and $script:padSnapshotReads -ge 5 -and ($script:padScenario -eq 'running-stop-persistent' -or $script:padSnapshotReads -eq 5)) {throw 'PAD_SELECTOR: StopFlowButton is not enabled during the observed execution state.'}
+        if($script:padScenario -in @('conditional-complete','cancel-during-running','running-stop-transition','running-stop-persistent') -and $script:padRunInvocations -gt 0 -and $script:padSnapshotReads -le 4) {
             $status='running';$idle=$false;$editable=$false;$canRun=$false;$running=$true;$errors=-1;$errorsKnown=$false;$start=$null
         }
         if($script:padScenario -eq 'cancel-while-settling' -and $script:padSnapshotReads -eq 1 -and $script:padCancelDuringSettle){[IO.File]::WriteAllText($script:padCancelDuringSettle,'cancel',$script:AgentEncoding)}
@@ -557,7 +573,7 @@ try {
             'mock-stop' {$script:padStopInvocations++;return}
             'mock-start' {
                 $script:padRunInvocations++
-                if($script:padScenario -in @('conditional-complete','finish-marker-mismatch')) {
+                if($script:padScenario -in @('conditional-complete','finish-marker-mismatch','running-stop-transition','running-stop-persistent')) {
                     # Synthetic observer inputs only; this is not a PAD execution.
                     [IO.File]::WriteAllText((Join-Path $script:mockRunDirectory 'control\started.txt'),$script:mockRunId,$script:AgentEncoding)
                     $endValue=if($script:padScenario -eq 'finish-marker-mismatch'){'wrong-run-id'}else{$script:mockRunId}
@@ -576,6 +592,7 @@ try {
     }
     function Get-AgentPadObservationLossSeconds {
         if($script:padScenario -in @('running-missing','cancel-running-missing')){return 0}
+        if($script:padScenario -eq 'running-stop-persistent'){return 1}
         return 20
     }
     function Invoke-AgentPadStopIfConfirmed($Window,[ref]$StopSent) {
@@ -690,6 +707,20 @@ try {
     $result=Invoke-AgentPad -Robin 'WAIT 0' -RunDirectory $script:mockRunDirectory -RunId $script:mockRunId -Job $script:job -Settings $settings -CancelPath $cancel
     Assert-Case ($result.status -ceq 'unknown' -and $result.error -like 'PAD_OBSERVATION_LOSS:*' -and $script:padRunInvocations -eq 1 -and $script:padStopInvocations -eq 1) 'Cancellation amid selector loss sends freshly confirmed Stop at most once and never replays Run'
     [IO.File]::Delete($cancel)
+    foreach($scenario in @('running-stop-transition','running-stop-persistent')) {
+        $script:mockRunId=[guid]::NewGuid().ToString('N')
+        $script:mockRunDirectory=Join-Path ([IO.Path]::GetDirectoryName($script:run)) $script:mockRunId
+        $null=[IO.Directory]::CreateDirectory((Join-Path $script:mockRunDirectory 'artifacts'))
+        $script:mockObservedArtifact=$null
+        Reset-PadMock $scenario
+        $result=Invoke-AgentPad -Robin 'WAIT 0' -RunDirectory $script:mockRunDirectory -RunId $script:mockRunId -Job $script:job -Settings $settings -CancelPath $cancel
+        if($scenario -eq 'running-stop-transition') {
+            Assert-Case ($result.status -ceq 'success' -and $script:padSnapshotReads -eq 6) 'Execution observation recovers from running then disabled Stop mismatch to a confirmed Ready completion'
+        } else {
+            Assert-Case ($result.status -ceq 'unknown' -and $result.error -like 'PAD_OBSERVATION_LOSS:*' -and $script:padSnapshotReads -gt 6 -and $result.artifacts.Count -eq 0) 'Persistent disabled Stop mismatch reaches the observation deadline despite both completion markers'
+        }
+        Assert-Case ($script:padRunInvocations -eq 1 -and $script:padSaveInvocations -eq 1 -and $script:padStopInvocations -eq 0 -and ($script:padKeys -join ',') -ceq '^v') ('Status rereads never replay Paste, Save, Run, or send Stop: '+$scenario)
+    }
     $script:mockRunId='6'*32
     $script:mockRunDirectory=Join-Path ([IO.Path]::GetDirectoryName($script:run)) $script:mockRunId
     Reset-PadMock 'run-unknown'
@@ -774,6 +805,20 @@ public sealed class PadTestMutexHolder : IDisposable {
     $script:padStatusSequence=@('ready','selector_missing','ready')
     Assert-Case ((Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel).status -ceq 'ready') 'Editable wait tolerates a transient selector rebuild and waits for stable Ready'
     Assert-Case ($script:padSnapshotReads -eq 4) 'Transient selector rebuild resets Ready stability before readback'
+    Reset-PadMock 'settle-after-paste'
+    $script:padStatusSequence=@('ready','selector_stop_disabled','ready')
+    Assert-Case ((Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel -TimeoutSeconds 2).status -ceq 'ready') 'Editable wait recovers from the exact status and Stop mismatch within its deadline'
+    Assert-Case ($script:padSnapshotReads -eq 4) 'Status and Stop mismatch resets the two-sample Ready requirement'
+    Reset-PadMock 'settle-after-paste'
+    $script:padStatusSequence=@('selector_stop_disabled')
+    Assert-Rejected {Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel -TimeoutSeconds 1} 'PAD_SETUP' 'Persistent status and Stop mismatch cannot authorize editable work after its deadline'
+    Assert-Case ($script:padSnapshotReads -gt 1) 'Persistent status and Stop mismatch is reread before the editable deadline expires'
+    foreach($status in @('selector_stop_similar','selector_stop_wrong_type')) {
+        Reset-PadMock 'settle-after-paste'
+        $script:padStatusSequence=@($status)
+        Assert-Rejected {Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel -TimeoutSeconds 1} 'PAD_SELECTOR' ('Similar Stop failure and wrong Stop type fail immediately: '+$status)
+        Assert-Case ($script:padSnapshotReads -eq 1) ('Non-retryable Stop failure performs no additional poll: '+$status)
+    }
     Reset-PadMock 'settle-after-paste'
     $script:padStatusSequence=@('parsing')
     Assert-Rejected {Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel -TimeoutSeconds 0} 'PAD_SETUP' 'Editable wait fails closed when parsing cannot settle'
