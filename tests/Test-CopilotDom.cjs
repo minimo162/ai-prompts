@@ -493,7 +493,7 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
       let nodeCount = 1; while (walker.nextNode()) nodeCount++;
       const editor = root.querySelector('.code-editor'), holder = root.querySelector('.more-holder'), button = holder.firstElementChild;
       const box = editor.getBoundingClientRect(), rows = [...editor.children].map(row => row.getBoundingClientRect());
-      return { nodeCount, rowValues: [...editor.querySelectorAll('[data-line-index]')].map(row => row.firstChild.nodeValue), editor: { overflow: getComputedStyle(editor).overflow, maxHeight: getComputedStyle(editor).maxHeight, display: getComputedStyle(editor).display }, finalRowClipped: rows[3].bottom > box.bottom, allRowsContained: rows.every(row => row.left >= box.left && row.right <= box.right && row.top >= box.top && row.bottom <= box.bottom), holderDisplay: getComputedStyle(holder).display, buttonDisplay: getComputedStyle(button).display, label: button.getAttribute('aria-label'), text: button.lastChild.nodeValue, focusVisible: button.getAttribute('data-fui-focus-visible') };
+      return { nodeCount, rowValues: [...editor.querySelectorAll('[data-line-index]')].map(row => row.firstChild.nodeValue), editor: { overflow: getComputedStyle(editor).overflow, maxHeight: getComputedStyle(editor).maxHeight, display: getComputedStyle(editor).display }, finalRowClipped: rows[rows.length - 1].bottom > box.bottom, allRowsContained: rows.every(row => row.left >= box.left && row.right <= box.right && row.top >= box.top && row.bottom <= box.bottom), holderDisplay: getComputedStyle(holder).display, buttonDisplay: getComputedStyle(button).display, label: button.getAttribute('aria-label'), text: button.lastChild.nodeValue, focusVisible: button.getAttribute('data-fui-focus-visible') };
     });
     response = await renderFolded();
     check(await expansionShape(), { nodeCount: 64, rowValues: [expansionJson, marker], editor: { overflow: 'auto', maxHeight: '300px', display: 'grid' }, finalRowClipped: true, allRowsContained: false, holderDisplay: 'flex', buttonDisplay: 'flex', label: 'その他の行を表示する', text: 'その他の行を表示する', focusVisible: null }, 'Reproduce the measured folded editor with a visible More control');
@@ -627,6 +627,109 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
       await assert.rejects(() => page.evaluate(operation), error => error.message.includes('expand unavailable'), 'Production expansion rejects an unconfirmed state: ' + label);
       checks++;
       check(await expansionCounts(), noExpansionActions, 'A rejected expansion has no UI side effects: ' + label);
+    }
+
+    // Observation 2551... / 0836a159... has exactly one additional gutter/row:
+    // gutter "3", canonical index "2", and a single U+00A0 text node. Preserve it.
+    const nbsp = '\u00a0';
+    const withTrailingRow = (markup, text = nbsp) => markup.replace('</div><div class="more-holder">', () => '<div class="gutter">3</div><div data-line-index="2" class="code-line">' + escapeText(text) + '</div></div><div class="more-holder">');
+    const shortNbspText = fencedJson + '\n' + marker + '\n' + nbsp;
+    const longNbspText = expansionJson + '\n' + marker + '\n' + nbsp;
+    for (const [state, renderState, markup, json, sourceKind, collapsed] of [
+      ['hidden More', renderFenced, withTrailingRow(fencedReply(fencedJson)), fencedJson, 'fenced_plaintext', false],
+      ['folded More', renderFolded, withTrailingRow(fencedReply(expansionJson)), expansionJson, 'fenced_collapsed', true],
+      ['expanded', renderExpanded, withTrailingRow(expandedReply()), expansionJson, 'fenced_plaintext', false]
+    ]) {
+      response = await renderState(markup);
+      const shape = await expansionShape();
+      check(shape.nodeCount, 68, 'Retain the observed complete 68-node structure with trailing NBSP: ' + state);
+      check(shape.rowValues, [json, marker, nbsp], 'Read all three original node values without dropping the NBSP: ' + state);
+      check(response.state.assistants[0], { key: 'fenced-fixture', text: json + '\n' + marker + '\n' + nbsp, source_kind: sourceKind, collapsed }, 'Keep the third line in the exact snapshot transport text: ' + state);
+      check({ lines: response.state.assistants[0].text.split('\n').length, finalCodePoint: response.state.assistants[0].text.codePointAt(response.state.assistants[0].text.length - 1) }, { lines: 3, finalCodePoint: 160 }, 'The observed NBSP remains U+00A0 rather than an empty row or ordinary space: ' + state);
+    }
+    response = await renderFenced(withTrailingRow(fencedReply(fencedJson)).replace(nbsp, '&nbsp;'));
+    check(response.state.assistants[0].text, shortNbspText, 'Recognition uses the actual NBSP text node even when HTML represents it as an entity');
+
+    for (const [label, tail] of [
+      ['empty', ''], ['ordinary space', ' '], ['two NBSPs', nbsp + nbsp], ['tab', '\t'], ['LF', '\n'], ['CR', '\r'],
+      ['zero-width space', '\u200b'], ['figure space', '\u2007'], ['narrow NBSP', '\u202f'], ['BOM', '\ufeff'], ['NBSP and content', nbsp + 'x']
+    ]) {
+      for (const [state, renderState, base] of [['hidden', renderFenced, fencedReply(fencedJson)], ['folded', renderFolded, fencedReply(expansionJson)], ['expanded', renderExpanded, expandedReply()]]) {
+        response = await renderState(withTrailingRow(base, tail));
+        check(response.state.assistants[0].source_kind, 'rendered', 'Never treat an unobserved trailing value as NBSP: ' + state + ' / ' + label);
+      }
+    }
+    for (const [label, setup, css] of [
+      ['missing index', () => document.querySelector('[data-line-index="2"]').removeAttribute('data-line-index')],
+      ['duplicate index', () => document.querySelector('[data-line-index="2"]').setAttribute('data-line-index', '1')],
+      ['noncanonical index', () => document.querySelector('[data-line-index="2"]').setAttribute('data-line-index', '02')],
+      ['index hole', () => document.querySelector('[data-line-index="2"]').setAttribute('data-line-index', '3')],
+      ['tail before marker', () => { const editor = document.querySelector('.code-editor'); editor.insertBefore(editor.lastChild, editor.children[3]); }],
+      ['missing third gutter', () => document.querySelector('.code-editor').children[4].remove()],
+      ['noncanonical gutter text', () => { document.querySelector('.code-editor').children[4].firstChild.nodeValue = '03'; }],
+      ['indexed third gutter', () => document.querySelector('.code-editor').children[4].setAttribute('data-line-index', '2')],
+      ['unknown tail attribute', () => document.querySelector('[data-line-index="2"]').setAttribute('title', 'unknown')],
+      ['wrapped NBSP', () => { const row = document.querySelector('[data-line-index="2"]'); const child = document.createElement('span'); child.textContent = row.textContent; row.replaceChildren(child); }],
+      ['second tail text node', () => document.querySelector('[data-line-index="2"]').appendChild(document.createTextNode(''))],
+      ['tail comment', () => document.querySelector('[data-line-index="2"]').appendChild(document.createComment('extra'))],
+      ['editor trailing blank node', () => document.querySelector('.code-editor').appendChild(document.createTextNode(' '))],
+      ['second NBSP row', () => { const editor = document.querySelector('.code-editor'); editor.appendChild(editor.children[4].cloneNode(true)); editor.appendChild(editor.children[5].cloneNode(true)); }],
+      ['hidden tail', null, '[data-line-index="2"]{display:none!important}'],
+      ['invisible tail', null, '[data-line-index="2"]{visibility:hidden!important}'],
+      ['transparent tail', null, '[data-line-index="2"]{opacity:0!important}'],
+      ['partial-opacity tail', null, '[data-line-index="2"]{opacity:.5!important}'],
+      ['unmeasured tail content-visibility', null, '[data-line-index="2"]{content-visibility:auto!important}'],
+      ['tail white-space changed', null, '[data-line-index="2"]{white-space:normal!important}'],
+      ['third gutter hidden', null, '.code-editor>.gutter:nth-child(5){visibility:hidden!important}']
+    ]) {
+      for (const [state, renderState, base] of [['hidden', renderFenced, fencedReply(fencedJson)], ['folded', renderFolded, fencedReply(expansionJson)], ['expanded', renderExpanded, expandedReply()]]) {
+        response = await renderState(withTrailingRow(base), setup, css || '');
+        check(response.state.assistants[0].source_kind, 'rendered', 'Reject an incomplete or modified third row: ' + state + ' / ' + label);
+      }
+    }
+
+    // Isolate the third row geometry: both protocol rows fit but the NBSP is clipped.
+    const tailOnlyClippedCss = '.code-editor{grid-template-rows:260px 40px 20px}';
+    response = await renderFolded(withTrailingRow(fencedReply(fencedJson)), null, tailOnlyClippedCss);
+    const tailGeometry = await page.locator('.code-editor').evaluate(editor => {
+      const box = editor.getBoundingClientRect();
+      return { protocolRowsFit: [...editor.querySelectorAll('[data-line-index="0"],[data-line-index="1"]')].every(row => row.getBoundingClientRect().bottom <= box.bottom), tailClipped: editor.querySelector('[data-line-index="2"]').getBoundingClientRect().bottom > box.bottom };
+    });
+    check(tailGeometry, { protocolRowsFit: true, tailClipped: true }, 'Only the third NBSP row is clipped in this folded regression fixture');
+    check(response.state.assistants[0], { key: 'fenced-fixture', text: shortNbspText, source_kind: 'fenced_collapsed', collapsed: true }, 'The final NBSP row participates in folded geometry even when both protocol rows fit');
+    for (const [label, css] of [
+      ['tail below editor', '[data-line-index="2"]{position:relative;top:4px}'],
+      ['third gutter left of editor', '.code-editor>.gutter:nth-child(5){position:relative;left:-4px}']
+    ]) {
+      response = await renderExpanded(withTrailingRow(expandedReply()), null, css);
+      check(response.state.assistants[0].source_kind, 'rendered', 'Expanded geometry includes the complete third row and gutter: ' + label);
+    }
+
+    for (const [label, markup, expectedText, css] of [
+      ['long JSON with NBSP', withTrailingRow(fencedReply(expansionJson)), longNbspText, ''],
+      ['only third row clipped', withTrailingRow(fencedReply(fencedJson)), shortNbspText, tailOnlyClippedCss]
+    ]) {
+      await renderExpansionAction(markup + span('<p><br></p>'), null, css);
+      const expandNbsp = expandExpression('fenced-fixture', expectedText, requestId);
+      check(await page.evaluate(expandNbsp), true, 'Production expansion accepts the exact optional NBSP frame: ' + label);
+      check(await expansionCounts(), { more: 1, copy: 0, menu: 0, goto: 0, inputFocus: 0, keys: ['fenced-fixture'] }, 'The three-row response gets exactly one More click: ' + label);
+      check((await page.evaluate(snapshot)).assistants[0], { key: 'fenced-fixture', text: expectedText, source_kind: 'fenced_plaintext', collapsed: false }, 'Expansion retains the entire frame including the third NBSP: ' + label);
+      check({ nodes: (await expansionShape()).nodeCount, rowsInside: (await expansionShape()).allRowsContained }, { nodes: 68, rowsInside: true }, 'All six row/gutter elements survive expansion and fit inside the editor: ' + label);
+      await assert.rejects(() => page.evaluate(expandNbsp), error => error.message.includes('expand unavailable'), 'A three-row response is never expanded twice: ' + label);
+      checks++;
+      check((await expansionCounts()).more, 1, 'Rejecting a second three-row expansion adds no click: ' + label);
+    }
+    for (const [label, setup, expectedText] of [
+      ['tail dropped from expected text', null, expansionText],
+      ['tail changed since stable read', () => { document.querySelector('[data-line-index="2"]').firstChild.nodeValue = ' '; }, longNbspText],
+      ['tail removed since stable read', () => { const editor = document.querySelector('.code-editor'); editor.lastChild.remove(); editor.lastChild.remove(); }, longNbspText],
+      ['extra NBSP row since stable read', () => { const editor = document.querySelector('.code-editor'); editor.appendChild(editor.children[4].cloneNode(true)); editor.appendChild(editor.children[5].cloneNode(true)); }, longNbspText],
+      ['NBSP row wrapped since stable read', () => { const row = document.querySelector('[data-line-index="2"]'); const child = document.createElement('span'); child.textContent = row.textContent; row.replaceChildren(child); }, longNbspText]
+    ]) {
+      await renderExpansionAction(withTrailingRow(fencedReply(expansionJson)) + span('<p><br></p>'), setup);
+      await assert.rejects(() => page.evaluate(expandExpression('fenced-fixture', expectedText, requestId)), error => error.message.includes('expand unavailable'), 'The optional NBSP is still part of the exact pre-click response identity: ' + label);
+      checks++;
+      check(await expansionCounts(), noExpansionActions, 'A changed three-row frame receives no expansion: ' + label);
     }
 
     for (const [url, message] of [

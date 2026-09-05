@@ -1094,7 +1094,7 @@ const generating=buttons.some(e=>/^(stop|stop generating|stop responding|停止|
 const sends=buttons.filter(e=>/^(send|send message|send prompt|送信|メッセージを送信|プロンプトを送信)$/i.test(label(e))&&!e.disabled&&e.getAttribute('aria-disabled')!=='true');
 const assistantSelectors=['[data-testid="markdown-reply"]','[data-content="ai-message"]','[data-message-author-role="assistant"]','[role="article"][data-author="assistant"]','[role="article"][aria-label*="Copilot" i]'];
 const fencedResponse=e=>{
-  // Recognize the measured two-row Plain Text code editor; unknown or incomplete DOM stays rendered text.
+  // Recognize the measured Plain Text code editor; unknown or incomplete DOM stays rendered text.
   try{
     const owned=new Set(),classes={class:null};
     const check=(n,tag,attrs,count)=>{
@@ -1134,12 +1134,15 @@ const fencedResponse=e=>{
     const body=div(code.childNodes[2],classes,1),viewport=div(body.firstChild,{class:null,style:null},1);
     const findRoot=div(viewport.firstChild,{class:null,'data-virtualized-code-find-root':'true'},3);
     div(findRoot.childNodes[0],classes,0);
-    const editor=div(findRoot.childNodes[1],{class:null,tabindex:'0',role:'textbox','aria-readonly':'true','aria-multiline':'true','aria-label':'コード エディター'},4);
+    const editorNode=findRoot.childNodes[1],rowCount=editorNode&&editorNode.childNodes.length===6?3:2;
+    const editor=div(editorNode,{class:null,tabindex:'0',role:'textbox','aria-readonly':'true','aria-multiline':'true','aria-label':'コード エディター'},rowCount*2);
     const rows=[],values=[];
-    for(let i=0;i<2;i++){
+    for(let i=0;i<rowCount;i++){
       const gutter=div(editor.childNodes[i*2],classes,1),line=div(editor.childNodes[i*2+1],{class:null,'data-line-index':String(i)},1);
       text(gutter.firstChild,String(i+1));const value=text(line.firstChild);
       if(/[\r\n]/.test(value)||getComputedStyle(line).whiteSpace!=='pre-wrap')throw 0;
+      // The only measured third row is a single NBSP. Preserve it as a real character in the response.
+      if(i===2&&value!=='\u00a0')throw 0;
       rows.push(gutter,line);values.push(value);
     }
     const moreHolder=div(findRoot.childNodes[2],classes,1);
@@ -1152,7 +1155,7 @@ const fencedResponse=e=>{
     const holderStyle=getComputedStyle(moreHolder),editorStyle=getComputedStyle(editor);
     const editorRect=editor.getBoundingClientRect(),rowRects=rows.map(n=>n.getBoundingClientRect());
     const hidden=holderStyle.display==='none'&&controlLabel==='その他の行を表示する';
-    const folded=holderStyle.display==='flex'&&controlLabel==='その他の行を表示する'&&editorStyle.maxHeight==='300px'&&editorStyle.overflow==='auto'&&editorStyle.overflowX==='auto'&&editorStyle.overflowY==='auto'&&rowRects[3].bottom>editorRect.bottom;
+    const folded=holderStyle.display==='flex'&&controlLabel==='その他の行を表示する'&&editorStyle.maxHeight==='300px'&&editorStyle.overflow==='auto'&&editorStyle.overflowX==='auto'&&editorStyle.overflowY==='auto'&&rowRects[rowRects.length-1].bottom>editorRect.bottom;
     const expanded=holderStyle.display==='flex'&&controlLabel==='簡易表示'&&editorStyle.maxHeight==='none'&&editorStyle.overflow==='visible'&&editorStyle.overflowX==='visible'&&editorStyle.overflowY==='visible'&&rowRects.every(r=>r.left>=editorRect.left&&r.right<=editorRect.right&&r.top>=editorRect.top&&r.bottom<=editorRect.bottom);
     if(!hidden&&!folded&&!expanded)throw 0;
     const path=[e,wrapper,inner,group,container,code,body,viewport,findRoot,editor,...rows];
@@ -1213,7 +1216,7 @@ const keyed=nodes.filter((e,i)=>(e.getAttribute('data-message-id')||e.id||String
 const matching=nodes.filter(e=>String(e.textContent).includes(requestId));
 if(keyed.length!==1||matching.length!==1||keyed[0]!==matching[0]||inputs.length!==1||inputText()!==''||generating)throw new Error('expand unavailable');
 const root=keyed[0],response=fencedResponse(root),frame=expectedText.split('\n');
-if(!response||response.source_kind!=='fenced_collapsed'||!response.collapsed||response.text!==expectedText||frame.length!==2||frame[1]!=='AGENT_END_'+requestId||JSON.parse(frame[0]).request_id!==requestId)throw new Error('expand unavailable');
+if(!response||response.source_kind!=='fenced_collapsed'||!response.collapsed||response.text!==expectedText||!(frame.length===2||(frame.length===3&&frame[2]==='\u00a0'))||frame[1]!=='AGENT_END_'+requestId||JSON.parse(frame[0]).request_id!==requestId)throw new Error('expand unavailable');
 const more=response.more,controls=[...root.querySelectorAll('button[aria-label="その他の行を表示する"]')];
 if(controls.length!==1||controls[0]!==more||more.disabled||more.getAttribute('aria-disabled')==='true'||more.closest('[inert]'))throw new Error('expand unavailable');
 for(let n=more;n;n=n.parentElement){const s=getComputedStyle(n);if(n.hidden||n.getAttribute('aria-hidden')==='true'||s.display==='none'||s.visibility!=='visible'||s.opacity!=='1'||s.contentVisibility!=='visible'||s.pointerEvents==='none')throw new Error('expand unavailable');}

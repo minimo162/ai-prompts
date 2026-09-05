@@ -15,7 +15,7 @@
 | 検証 | 証拠と範囲 |
 |---|---|
 | Windows PowerShell 5.1 契約検証 | `tests/Test-App.ps1` **137 PASS**。Copilot/PADを模擬し、要求・結果・観測・再計画・パス境界・同期と実計画/AiCallプロンプトを検査する。実サービスの証拠ではない。 |
-| Copilotアダプター | `tests/Test-Copilot.ps1` **205 PASS**。CDP応答を模擬し、全文・ID・終端・生成終了・排他・ジョブ分離・異常分類、起動タブの終了と他タブの保持、送信前busy待機、実送信本文の2行契約と入力・送信の再試行禁止を検査する。本番Robin検証器で受理したReadText/WriteTextフローと約6万文字の長文をJSON復号し、原文との完全一致も確認。隔離Edgeの `tests/Test-CopilotDom.cjs` は **483 PASS**。実M365の翻訳診断では送信1回から厳格な応答取得・再読取り一致まで成功した。固定PADの正常完走とは分けて下記に記録する。 |
+| Copilotアダプター | `tests/Test-Copilot.ps1` **215 PASS**。CDP応答を模擬し、全文・ID・終端・生成終了・排他・ジョブ分離・異常分類、起動タブの終了と他タブの保持、送信前busy待機、実送信本文の2行契約と入力・送信の再試行禁止を検査する。本番Robin検証器で受理したReadText/WriteTextフローと約6万文字の長文をJSON復号し、原文との完全一致も確認。隔離Edgeの `tests/Test-CopilotDom.cjs` は **618 PASS**。実M365の翻訳診断では送信1回から厳格な応答取得・再読取り一致まで成功した。固定PADの正常完走とは分けて下記に記録する。 |
 | PADアダプター | `tests/Test-Pad.ps1` **302 PASS**。UI/クリップボード境界を模擬し、全文一致・所有権・失敗時の旧フロー実行拒否・結果帰属を検査する。状態別のUI構造、20種類の状態ID、保存・実行・中止、実ファイルに生成した2件のAiCallテンプレートとRobinの検証も本番関数で確認。実機の固定A/Bは下記に分けて記録する。 |
 | localhost HTTP | `tests/Test-Http.ps1` PASS。実App.ps1プロセスでHTML/状態、トークン/Host/Origin拒否、不完全本文の期限、再接続、設定保持、重複回答・古い質問への回答拒否、版の引き継ぎ、停止を確認。 |
 | 実ブラウザー | `tests/Test-Ui.cjs` 15 PASS。実Edgeの1280×900・390×844で入力→未接続エラー→再表示、トークン除去、同ジョブ再接続、横溢れ・JavaScriptエラーなしを確認。質問ID・Copilotジョブ分離変更を含む不変版 `a00bca7` でも再実行し、両幅のPNGを目視確認した。証跡は `.work/ui-after-question-fix-66edd1690c8a4978aae727d6e5a31807/`。隔離サーバーは専用の終了APIで停止した。 |
@@ -33,7 +33,7 @@
 | 0: 配布・起動 | 実共有UNCからの初回・更新、欠落UNC時の警告付きローカル起動は合格 | 実共有の切断、利用者環境での再起動・UI停止 |
 | 1: 固定PADからAiCall | 正常系合格。実PADから翻訳→分類の直列2回、結果受渡し、review分岐と出力を確認 | 拒否/空/期限/中止の実機異常系 |
 | 2: AIなしのA/B差し替え | 正常系A/B合格、異常系は未完了 | 保存・貼り付け失敗などを意図的に起こした場合の旧フロー実行防止 |
-| 3: 生成Robin全文取得 | コードブロック本文の保持を確認。新版の短文は画面の折り畳みで停止し、採取済みコード自体は期待値と一致 | 実M365で生成Robinの短文/長文の完全取得、過去回答・途中停止 |
+| 3: 生成Robin全文取得 | 新規短文の自動展開・881文字の完全取得が合格。約5.8万文字の要求には空コードが返り拒否 | 別の長文ケース、過去回答・途中停止 |
 | 4: 生成AiCallフロー | 未検証 | 読取→AI→分岐→書出しを同じPADで完走 |
 | 5: 2〜3往復 | 未検証 | 実結果本文に応じた次の手順、ACT/DONE/ASK_USER/BLOCKED、最終表示 |
 | 6: 別利用者・別PC | 未検証 | 開発環境に依存しない導入・更新・認証・結果確認 |
@@ -180,6 +180,18 @@ Gate 3の初回 `df207bbf633e42f5abb4288b77030ee5` は、短文要求1回の送�
 実測した折り畳み・展開済み・非表示Moreの3構造を共通の本文判定へ実装した。折り畳まれた新規応答は、要求ID・assistant key・本文の厳密一致、入力空欄と生成終了、3回の安定読取り、ボタン所有・可視性・hit-testを確認して1回だけ展開する。展開後も同じkey・本文と3回の安定読取りを要求し、未知の構造や残った折り畳みを全文として受理しない。旧回答はkeyと本文の両方で除外し、送信と展開の再試行は行わない。
 
 App SHA-256 `126ade09ba1a888969030c0de8e0b4d9a4f51aaa8d8a1aa08273e81450650d9f` はnative PS5/STAの基本137・Copilot205、隔離Edge DOM483項目が合格し、独立最終レビューは必須修正0だった。実画面の既存の展開済み応答を製品readerで2回読み、fenced_plaintext/collapsed=false、本文ハッシュと881文字のRobin・2成果物が完全一致した（`gate3/sessions/7688bbc3eb814afdb301ca55fe1e3f79/live-expanded-reader-a8f9fc304aa54f7883c001f3290d8aee.json`）。この照合での入力・送信・展開・PAD操作は0回。過去のunknownは保持し、新規要求で自動展開を伴う短文・長文E2Eは未実施である。
+展開修正版を `a4db3aedd4d0f8dae42b6fbf9adfa77886331073` にコミットし、release `0.1.0-c1cc39f7dbe34a6a39e6885790278567d6dae470019d12a93ed1e6a8c5d65c7d` として共有へ反映した（`gate0/publish-fenced-expand/1ef79c048c99450bb24ba252177bf9d9/result.json`）。原子的置換1回・旧3ファイル保存・ACL保持を確認した。通常Explorerからの更新は旧serverの認証付き停止1回、実UNC CMD1回/exit 0、新server PID19372/port58508の版・設定・HTTP待機を確認し、通常105/private51/archive3の計159ファイルを保持した（`gate0/normal-updates-fenced-expand/76cba680c3864109817ac187a34b7c26/result.json`）。
+
+この版による新規Gate 3 `11dbbf29e92b4f16b7272c8106f18573` の短文は、送信1回から製品による全文取得・再取得・厳格JSON/Planner/Robin検証まで成功した。881文字・7行・書出し2件、特殊文字と空白を含む期待コードが完全一致した（`short/result.json`）。別の事後DOM観測2回も同じ本文64ノードとハッシュを記録し、editorのoverflow=visible/maxHeight=noneと「簡易表示」を確認した。製品呼出し以外にこの応答を展開した操作はなく、新規応答の自動展開後の状態を確認できた（`fenced-observation-b2871a0a5d8d4b3cafdb1ebaa236c8b7.json`）。
+
+続く182件・約57,903文字を要求した長文では、正しい要求IDと終端を含む応答を取得・再取得したが、state=ACT、robin空、artifacts空配列だった。未変更のPlanner検証がRESPONSE_INVALIDとして拒否したため全体結果はfailedである（同セッションの `long/returned-raw.json` と `result.json`）。原因を出力上限と断定せず、約6万文字の生成成功とは扱わない。実送信は短文/長文各1回、PAD・再送・タブ終了・latest変更0。開始前の4タブと旧ファイル、private51ファイルを保持した。次の24件の長文は別fixture・別IDで測定し、この失敗結果は保持する。
+24件の別fixture `2551ea0f304746c2809fe7ebfb5ec7f3` は、先行短文の送信1回後にRESPONSE_INVALID/unknownとなり、長文は未送信だった。旧5タブと既存ファイル、private51ファイルは保持した。完全DOM観測2回は68ノード・3論理行を記録し、JSON1392文字・終端42文字に加え、末尾のindex=2に単一のNBSP（U+00A0）があった（`fenced-observation-235839a5986148e592c26faa59f54175.json`）。現readerの64ノード・2行限定がこの構造を拒否することを確認した。
+
+採取した全3行を文字変更せずLFで結合した1437文字は、既存の厳格な応答・Planner・Robin検証を通過し、期待した881文字の短文コードと完全一致した（`three-row-nbsp-parser-review-41641866b0dd4c95bd44cf2bc097b2a4.json`）。NBSPが表示用の代替文字だとは断定せず、実測した唯一の末尾NBSP行を含む68ノード構造への対応を実装した。既存parserの末尾空白許容や送信指示は変更していない。
+
+App draft `d02fc03ddb6177f5507047d9c42994765f1b92e749773775b31f020bdaab900e` で同じ実画面を2回読み取り、全3行・末尾LFとNBSP・1437文字のハッシュ一致を確認した（`live-folded-tail-reader-181d47c74e96444e8b0b9ab0dee02792.json`）。折り畳みはfenced_collapsed/trueとして保持し、通常parserが折り畳み専用の期待エラーで拒否することも確認した。取得値の保持を確認する読取り専用の診断であり、元のunknownを成功に変更していない。入力・送信・展開・PAD操作は0回。
+末尾NBSP対応版ではnative PS5/STAの基本137・Copilot215、隔離Edge DOM618項目が合格し、独立最終レビューは必須修正0だった。元の2行経路と失敗時の拒否を維持し、3行目の別文字・複数NBSP・余分な行・属性やgeometry変更、展開後の末尾変化を拒否することを検査した。実画面の読み取りと折り畳み拒否までを確認しており、新規要求での展開・長文取得は未完了である。
+
 Gate 0の追補 `d2dd3aa485384c29b884df9be83ff33c` は、実共有を読み取って作った隔離cacheに対し、未作成UNC子パスをSourcePathとして実AppのBootstrapを1回起動し、警告・新規serverの起動と状態確認・所有確認後の正常終了まで合格した（`gate0/outage-followups/d2dd3aa485384c29b884df9be83ff33c/result.json`）。2026-09-05 21:35:44〜21:35:51 UTC、Bootstrap exit 0、試験server PID13688/port56786は終了済み。通常server PID25544/port53708、既存158ファイル、共有3ファイル、cache4ファイルは保持した。実共有そのものの停止やCMD起動を行った試験ではなく、existing_share_outage=false/actual_cmd_invocations=0を記録している。旧outage失敗結果は変更していない。
 
 Gate 0の実共有切断、Gate 1/2の異常系、Gate 3〜6の実機確認も残っている。

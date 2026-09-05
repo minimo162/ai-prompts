@@ -50,6 +50,9 @@ $json = '{"request_id":"r1","robin":"SET Path TO $''C:\\folder\\file.txt''\nSET 
 $complete=$json+"`nAGENT_END_r1"
 $actual=ConvertFrom-AgentCopilotResponse $complete 'r1'
 Assert-Case ([string]::Equals($actual,$json,[StringComparison]::Ordinal)) 'Response preserves code, percent, whitespace and legitimate backslashes exactly'
+$nbspFramed=$complete+"`n"+[char]0x00a0
+Assert-Case ([string]::Equals((ConvertFrom-AgentCopilotResponse $nbspFramed 'r1'),$json,[StringComparison]::Ordinal) -and $nbspFramed.EndsWith("`n"+[char]0x00a0)) 'Existing strict parser accepts the unchanged response frame with one actual trailing NBSP row'
+Assert-Rejected {ConvertFrom-AgentCopilotResponse $nbspFramed 'r1' -Collapsed} 'RESPONSE_INVALID' 'Trailing NBSP never bypasses the collapsed response rejection'
 # This is a complete Robin flow assembled from the supported ReadText/WriteText
 # forms in pad-robin-prompts.md.  Test-AgentRobin accepts it before it is put in
 # the response frame, so the parser test cannot pass with a malformed-only fake.
@@ -341,6 +344,8 @@ try{
                 if($script:responseExpandMode -ceq 'changed_text'){$script:responseCandidates[0].text=$script:responseCandidates[0].text.Replace('original','changed')}
                 if($script:responseExpandMode -ceq 'changed_key'){$script:responseCandidates[0].key='different-reply'}
                 if($script:responseExpandMode -ceq 'unknown_after'){$script:responseCandidates[0].source_kind='rendered'}
+                if($script:responseExpandMode -ceq 'removed_nbsp'){$text=$script:responseCandidates[0].text;$script:responseCandidates[0].text=$text.Substring(0,$text.Length-2)}
+                if($script:responseExpandMode -ceq 'changed_nbsp'){$text=$script:responseCandidates[0].text;$script:responseCandidates[0].text=$text.Substring(0,$text.Length-1)+' '}
             }
         }
         return $true
@@ -388,6 +393,20 @@ try{
     Assert-Case ($script:responseExpandExpression.Contains(($foldedText|ConvertTo-Json -Compress))) 'Expansion expression preserves literal placeholder names and original escaped body through one JSON argument substitution'
     Assert-Rejected {Invoke-TestResponse} 'RESPONSE_INVALID' 'Successful expanded request cannot be replayed'
     Assert-Case ($script:responseExpansions -eq 1 -and $script:responseSends -eq 1) 'Replay does not send or expand again'
+    $nbspFull=New-TestFolded 'r-full-nbsp';$nbspFull.text+="`n"+[char]0x00a0;$nbspFull.source_kind='fenced_plaintext';$nbspFull.collapsed=$false
+    Reset-TestResponse 'r-full-nbsp' @($nbspFull)
+    Assert-Case ([string]::Equals((Invoke-TestResponse),$nbspFull.text.Split("`n")[0],[StringComparison]::Ordinal)) 'Known full three-row response is parsed without changing its JSON content'
+    Assert-Case ($script:responseReads -eq 3 -and $script:responseExpansions -eq 0 -and $script:responseSends -eq 1) 'A full NBSP-tail response needs three stable reads and no expansion'
+    $nbspFold=New-TestFolded 'r-expand-nbsp';$nbspFold.text+="`n"+[char]0x00a0;$nbspExpected=$nbspFold.text
+    Reset-TestResponse 'r-expand-nbsp' @($nbspFold)
+    Assert-Case ([string]::Equals((Invoke-TestResponse),$nbspExpected.Split("`n")[0],[StringComparison]::Ordinal)) 'Known collapsed three-row response succeeds after one expansion and complete reread'
+    Assert-Case ($script:responseExpandExpression.Contains(($nbspExpected|ConvertTo-Json -Compress)) -and $script:responseCandidates[0].text.EndsWith("`n"+[char]0x00a0) -and $script:responseExpansions -eq 1 -and $script:responseReads -eq 6 -and $script:responseSends -eq 1) 'The actual expansion argument and after reads retain the exact final LF and NBSP'
+    foreach($mode in @('removed_nbsp','changed_nbsp')){
+        $requestId='r-expand-'+$mode;$nbspCandidate=New-TestFolded $requestId;$nbspCandidate.text+="`n"+[char]0x00a0
+        Reset-TestResponse $requestId @($nbspCandidate);$script:responseExpandMode=$mode
+        Assert-Rejected {Invoke-TestResponse} 'RESPONSE_INVALID' ('Expansion '+$mode+' rejects changed final response characters')
+        Assert-Case ($script:responseExpansions -eq 1 -and $script:responseSends -eq 1 -and [IO.File]::Exists((Get-AgentCopilotAttemptPath $jobTemp $requestId))) ('Expansion '+$mode+' cannot normalize the tail or retry the click or send')
+    }
     foreach($mode in @('uncertain','false_ack','refold','changed_text','changed_key','unknown_after')){
         $requestId='r-expand-'+$mode;Reset-TestResponse $requestId @((New-TestFolded $requestId));$script:responseExpandMode=$mode
         Assert-Rejected {Invoke-TestResponse} 'RESPONSE_INVALID' ('Expansion '+$mode+' fails closed')
