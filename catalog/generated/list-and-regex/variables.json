@@ -9,7 +9,7 @@
         "toggle":  null
     },
     {
-        "name":  "CatalogList",
+        "name":  "CleanText",
         "id":  "VariablesListItem",
         "type":  "ControlType.ListItem",
         "enabled":  true,
@@ -18,7 +18,7 @@
         "toggle":  null
     },
     {
-        "name":  "CatalogList",
+        "name":  "CleanText",
         "id":  "VariableTextBlock",
         "type":  "ControlType.Text",
         "enabled":  true,
@@ -27,7 +27,7 @@
         "toggle":  null
     },
     {
-        "name":  "[CatalogItem]",
+        "name":  "Ticket ID ready",
         "id":  "VariablePreviewTextBlock",
         "type":  "ControlType.Text",
         "enabled":  true,
@@ -36,7 +36,7 @@
         "toggle":  null
     },
     {
-        "name":  "NewVar",
+        "name":  "InputText",
         "id":  "VariablesListItem",
         "type":  "ControlType.ListItem",
         "enabled":  true,
@@ -45,7 +45,7 @@
         "toggle":  null
     },
     {
-        "name":  "NewVar",
+        "name":  "InputText",
         "id":  "VariableTextBlock",
         "type":  "ControlType.Text",
         "enabled":  true,
@@ -54,7 +54,7 @@
         "toggle":  null
     },
     {
-        "name":  "日本語 100% \u0027引用\u0027 \"二重引用\" C:\\sample",
+        "name":  "Ticket 742 ready",
         "id":  "VariablePreviewTextBlock",
         "type":  "ControlType.Text",
         "enabled":  true,
@@ -63,7 +63,7 @@
         "toggle":  null
     },
     {
-        "name":  "Replaced",
+        "name":  "StatusList",
         "id":  "VariablesListItem",
         "type":  "ControlType.ListItem",
         "enabled":  true,
@@ -72,7 +72,7 @@
         "toggle":  null
     },
     {
-        "name":  "Replaced",
+        "name":  "StatusList",
         "id":  "VariableTextBlock",
         "type":  "ControlType.Text",
         "enabled":  true,
@@ -81,7 +81,7 @@
         "toggle":  null
     },
     {
-        "name":  "English 100% \u0027引用\u0027 \"二重引用\" C:\\sample",
+        "name":  "[checked]",
         "id":  "VariablePreviewTextBlock",
         "type":  "ControlType.Text",
         "enabled":  true,

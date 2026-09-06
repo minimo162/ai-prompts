@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "live_copilot_generated_native_pad_flow",
+  "status": "PASS_THIS_CASE",
+  "provider": "real M365 Copilot",
+  "source_commit": "d19ddf3d4254c650453094eadda350eb27e0d6c0",
+  "adapter_app_sha256": "1153e19e3074f801f23a485359116fb41bb9dd54e1ae66091627f1395ac794b4",
+  "source_catalog_sha256": "ca7067db341b34601e033b126fd5730c8409c4aa7d142033758dfb4f009df4b6",
+  "task": "Create StatusList with checked; replace digits in Ticket 742 ready with ID into CleanText.",
+  "expected_outputs": {
+    "CleanText": "Ticket ID ready",
+    "StatusList": [
+      "checked"
+    ]
+  },
+  "observed_variable_previews": {
+    "CleanText": "Ticket ID ready",
+    "InputText": "Ticket 742 ready",
+    "StatusList": "[checked]"
+  },
+  "scope_review": "assistant checked four pure list/text operations; no external operations",
+  "generated_code_modified": false,
+  "native_copy_byte_identical": true,
+  "native_flow_name": "RobinGenerated_20260907_01",
+  "pad_file_version": "2.71.115.26224",
+  "power_fx": false,
+  "pad_run_invocations": 1,
+  "app_run_loop_exercised": false,
+  "artifacts": {
+    "generated.robin": {
+      "sha256": "3387e8595819c104c2cc0e0da0e5c4cb55927475b64ea544ac3dc7e8825335ce",
+      "bytes": 314
+    },
+    "pasted.robin": {
+      "sha256": "3387e8595819c104c2cc0e0da0e5c4cb55927475b64ea544ac3dc7e8825335ce",
+      "bytes": 314
+    },
+    "prompt.txt": {
+      "sha256": "5ee79720a1a40c7d0e5be08c26b13a47b21bc73b2f32e0e05e31c13f22611df6",
+      "bytes": 40459
+    },
+    "variables.json": {
+      "sha256": "4d781c75c02d7a93a1fc65de352c31f8c57c02ecfb6ed4192b084c0d1c237f8e",
+      "bytes": 2266
+    },
+    "result.png": {
+      "sha256": "237d0dcd73dbfcf6eac082b78338e313c885470adfbc5e8ef4b54ff391a16318",
+      "bytes": 92747
+    }
+  },
+  "limitations": [
+    "One synthetic task with captured operations only",
+    "Native paste/save/run was orchestrated by the assistant, not the application Run loop",
+    "Other actions, recovery, broader generality and redesigned UI are unverified"
+  ]
+}

@@ -23,4 +23,6 @@ Variables.AddItemToList Item: $'''CatalogItem''' List: CatalogList
 
 空の`Roundtrip`サブフローへコピー原文を貼り付け、再コピーした`roundtrip.robin`が112文字・SHA256まで元と一致することも確認しました。実行結果を観測したのは元のMainです。
 
-Copilotによる生成、アプリのRobin検証器/実行経路との接続はまだ未確認です。実アクションがPADで動くことと、このアプリがその構文を実行できることは別です。採取・拡張の方針は[採取ガイド](../docs/robin-action-catalog.md)を参照してください。
+Copilotによる生成は[リストと正規表現の組合せ1ケース](generated/list-and-regex/README.md)で確認しました。別の変数名・入力値を使った生成コードを手直しせずPADへ貼り付け、再コピーのバイト一致、保存・実行、期待値一致まで確認しています。
+
+アプリのRobin検証器/Runループとの接続はまだ未確認です。実アクションがPADで動くことと、このアプリがその構文を実行できることは別です。採取・拡張の方針は[採取ガイド](../docs/robin-action-catalog.md)を参照してください。
