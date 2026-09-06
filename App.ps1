@@ -1,5 +1,5 @@
 ﻿# App-Version: 0.1.0
-# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6IjM2NTY5ZGE1MzU3M2E3YmYyNzdiMGYzYmViYjM2ODVjIiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiJmYzE2ZDY0OWViYjc5OGFjNjNmNmYyMWZmYWRkMGIxNGQ1MzFjNDU1MjBjMDU0M2Y5Yjc2ZWVhYjhmYTg5YWMzIiwiaHRtbF9zaGEyNTYiOiIyNzMwOTBiMTA0MDJkZDExMTQ3NDAwZjVjYWNmNTI4NTI0ZmE0NTFmYWFjYTAzMWU1MDZkMTI3ZDFlZjM3Njk4IiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
+# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6ImNiYjJjMTljNjFlMGUwZGZhY2Y0Yzc3NTRjZDg1ZWFmIiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiJjYjYyMjUyZGU0ZWEyNjBjMGU3NGQ3ZjcyNzNmMGNmYmM2MWRiNzk4YmE2MTE2Y2U5Y2M2NTBjZTkyZmY0ZjQ1IiwiaHRtbF9zaGEyNTYiOiI5NGRlZDllZTQzZDRiMmQwMzk3YjExM2FiMTgyYjMyN2Y5MDIxNzMzY2IyYjMzZTYyNjA5NmNlMmNiNTJlMGUzIiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
 # State-Contract: 2
 [CmdletBinding()]
 param(
@@ -452,7 +452,7 @@ function Save-AgentCsvPreparedJob([string]$HomePath, $Manifest, [string[]]$Categ
         $null = Get-AgentCsvSummary $Manifest @($BaseResults) $Categories
         $results = ConvertFrom-Json (ConvertTo-Json -InputObject @($BaseResults) -Depth 20 -Compress)
         $results = @($results)
-        foreach ($result in $results) { if ($ApprovedRowIds -ccontains $result.row_id) { $result.status = 'unprocessed'; $result.category = ''; $result.reason = '選択した要確認行を、追加指示で再検討します。' } }
+        foreach ($result in $results) { if ($ApprovedRowIds -ccontains $result.row_id) { $result.status = 'unprocessed'; $result.category = ''; $result.reason = '選択した行を、新しい承認範囲で処理します。' } }
         $basePath = Join-Path $directory 'csv-base-results.json'; Write-AgentJson $basePath @{schema_version=1;parent_job_id=$ParentJobId;results=$results;previous_results=@($BaseResults)}; $baseHash = Get-AgentHash $basePath
     }
     $plan = [pscustomobject]@{ action_contract = 2; plan_id = [guid]::NewGuid().ToString('N'); manifest_hash = Get-AgentHash $manifestPath; base_results_hash = $baseHash; parent_job_id = $ParentJobId; categories = $Categories; instructions = $Instructions; row_ids = $ApprovedRowIds; batch_count = $batches.batches.Count; output_directory = Join-Path $directory 'exports'; operations = @('read_rows','classify_rows','write_results','verify_results') }
@@ -485,6 +485,53 @@ function New-AgentCsvReviewJob([string]$HomePath, [string]$ParentJobId, [string[
     foreach ($id in $RowIds) { if ($allowed -cnotcontains $id -or -not $selected.Add($id)) { throw 'CSV_REVIEW_SCOPE: 選択できるのは重複のない要確認行だけです。' } }
     $instructionsValue = (Get-AgentCsvCriteria $HomePath $parent).instructions + "`n利用者の追加指示（選択した要確認行のみ）:`n" + $Instructions
     return Save-AgentCsvPreparedJob $HomePath $manifest $parent.plan.categories $instructionsValue $RequestKey $intentHash $parent.target $RowIds $results $ParentJobId
+}
+function New-AgentCsvContinuationJob([string]$HomePath,[string]$ParentJobId,[string]$RequestKey) {
+    Assert-AgentId $RequestKey;Assert-AgentNoActiveJob $HomePath
+    $parent=Get-AgentJob $HomePath $ParentJobId
+    if((Get-AgentProperty $parent 'workflow' '') -cne 'csv_classify' -or $parent.status -cnotin @('partial','cancelled','blocked')){throw 'CSV_CONTINUE_STATE: 照合済みの未完了CSV依頼を選択してください。'}
+    Assert-AgentCsvPlanUnchanged $HomePath $parent
+    $manifest=Read-AgentCsvJobManifest $HomePath $parent;Assert-AgentCsvSourcesUnchanged $manifest
+    $parent.results=Get-AgentCsvReconciledResults $HomePath $parent $manifest
+    $summary=Get-AgentCsvSummary $manifest $parent.results $parent.plan.categories
+    if($summary.unknown -gt 0 -or (Test-AgentCsvPlannerUncertain $HomePath $parent)){throw 'CSV_UNKNOWN: 不明な要求を照合するまで引き継げません。'}
+    Assert-AgentCsvPublishedArtifacts $HomePath $parent $manifest
+    $ids=@($parent.results|Where-Object {$_.status -ceq 'unprocessed' -and $parent.plan.row_ids -ccontains $_.row_id}|ForEach-Object row_id)
+    if($ids.Count -eq 0){throw 'CSV_CONTINUE_EMPTY: 引継ぎ可能な未送信行がありません。'}
+    $intent=Get-AgentTextHash (ConvertTo-Json -InputObject @('continuation',$ParentJobId,$parent.results) -Depth 20 -Compress)
+    $path=Join-Path (Get-AgentJobDirectory $HomePath $RequestKey) 'job.json'
+    if([IO.File]::Exists($path)){$existing=Read-AgentJson $path;if($existing.intent_hash -cne $intent){throw 'REQUEST_KEY_REUSED: 引継ぎ元が変わりました。'};return $existing}
+    return Save-AgentCsvPreparedJob $HomePath $manifest $parent.plan.categories (Get-AgentCsvCriteria $HomePath $parent).instructions $RequestKey $intent $parent.target $ids $parent.results $ParentJobId
+}
+function Resolve-AgentCsvLateResponses([string]$HomePath,[string]$JobId) {
+    $directory=Get-AgentJobDirectory $HomePath $JobId;$job=Get-AgentJob $HomePath $JobId
+    if((Get-AgentProperty $job 'workflow' '') -cne 'csv_classify' -or $job.status -cne 'unknown' -or (Test-AgentWorkerAlive $directory)){throw 'CSV_RECONCILE_STATE: 終了した結果不明のCSV依頼だけを照合できます。'}
+    Assert-AgentNoActiveJob $HomePath $JobId;Assert-AgentCsvPlanUnchanged $HomePath $job
+    $manifest=Read-AgentCsvJobManifest $HomePath $job;Assert-AgentCsvSourcesUnchanged $manifest
+    foreach($batchId in $job.batch_ids){
+        $attemptDirectory=Join-Path $directory ('csv-attempts\'+$batchId);$attemptPath=Join-Path $attemptDirectory 'attempt.json'
+        if(-not [IO.File]::Exists($attemptPath)){continue}
+        $attempt=Read-AgentJson $attemptPath
+        if($attempt.status -cne 'unknown'){continue}
+        if(Test-AgentCopilotUnsent $HomePath $batchId){throw 'CSV_RECONCILE_STATE: 送信記録を確認できません。'}
+        $batch=Read-AgentJson (Join-Path $directory ('csv-batches\'+$batchId+'.json'))
+        $rows=@($manifest.rows|Where-Object {$batch.row_ids -ccontains $_.row_id})
+        $raw=Read-AgentCopilotCompletedResponse $HomePath $JobId $batchId
+        $validated=ConvertFrom-AgentCsvBatchResponse $raw $batchId $rows $job.plan.categories
+        $resultPath=Join-Path $attemptDirectory 'result.json'
+        if([IO.File]::Exists($resultPath)){throw 'CSV_RECONCILE_EXISTS: 既存結果を上書きせず、保存状態を確認してください。'}
+        Write-AgentJson (Join-Path $attemptDirectory ('reconciliation-'+[guid]::NewGuid().ToString('N')+'.json')) @{before=$attempt;read_only=$true;resends=0;decoder_release=Get-AgentRuntimeRelease;observed_utc=[DateTime]::UtcNow.ToString('o')}
+        Write-AgentJson $resultPath @{schema_version=1;request_id=$batchId;results=$validated}
+        $attempt.results=$validated;$attempt.result_sha256=Get-AgentHash $resultPath;$attempt.phase='committed';$attempt.status='success'
+        $attempt | Add-Member reconciled_utc ([DateTime]::UtcNow.ToString('o')) -Force;Write-AgentJson $attemptPath $attempt
+    }
+    $job.results=Get-AgentCsvReconciledResults $HomePath $job $manifest;$job.summary=Get-AgentCsvSummary $manifest $job.results $job.plan.categories
+    [void][IO.Directory]::CreateDirectory($job.plan.output_directory)
+    $receipt=Export-AgentCsvResults $job.plan.output_directory $manifest $job.results $job.plan.categories;$job.artifacts=$receipt.artifacts
+    $job.status=if($job.summary.unknown -gt 0 -or (Test-AgentCsvPlannerUncertain $HomePath $job)){'unknown'}else{'partial'}
+    $job.error='既存の回答を照合しました。要求の再送信はしていません。';$job.final_answer='既存回答の照合後: 成功 '+$job.summary.success+'、要確認 '+$job.summary.needs_review+'、未処理 '+$job.summary.unprocessed+'、不明 '+$job.summary.unknown+'。内容は未承認です。';$job | Add-Member reconciliation_release (Get-AgentRuntimeRelease) -Force
+    Save-AgentJob $directory $job '同じ要求IDの既存回答を検証し、保存結果へ取り込みました。'
+    return $job
 }
 function Read-AgentCsvJobManifest([string]$HomePath, $Job) {
     $path = Join-Path (Get-AgentJobDirectory $HomePath $Job.job_id) 'csv-manifest.json'
@@ -1741,6 +1788,8 @@ function Invoke-AgentServer([string]$HomePath, [switch]$NoBrowser, [int]$Port = 
                         }
                         '/api/csv/approve' { $payload.job = Start-AgentCsvJob $homeDirectory ([string]$body.job_id) ([string]$body.plan_id) ([string]$body.plan_hash) }
                         '/api/csv/review' { $payload.job = New-AgentCsvReviewJob $homeDirectory ([string]$body.parent_job_id) @($body.row_ids) ([string]$body.instructions) ([string]$body.request_key) }
+                        '/api/csv/reconcile' { $payload.job=Resolve-AgentCsvLateResponses $homeDirectory ([string]$body.job_id) }
+                        '/api/csv/continue-new' { $payload.job=New-AgentCsvContinuationJob $homeDirectory ([string]$body.parent_job_id) ([string]$body.request_key) }
                         '/api/csv/resume' { $payload.job = Start-AgentCsvJob $homeDirectory ([string]$body.job_id) ([string]$body.plan_id) ([string]$body.plan_hash) -Resume }
                         '/api/start' { $payload.job = New-AgentJob $homeDirectory ([string](Get-AgentProperty $body 'goal' '')) ([string](Get-AgentProperty $body 'target' '')) }
                         '/api/stop' {
@@ -2169,7 +2218,8 @@ const fencedResponse=e=>{
     const folded=holderStyle.display==='flex'&&controlLabel==='その他の行を表示する'&&editorStyle.maxHeight==='300px'&&editorStyle.overflow==='auto'&&editorStyle.overflowX==='auto'&&editorStyle.overflowY==='auto'&&rowRects[rowRects.length-1].bottom>editorRect.bottom;
     // A measured short DONE keeps the collapsed control visible although all
     // rows fit (clientHeight === scrollHeight, including the editor padding).
-    const foldedComplete=/^AGENT_META_V2 [A-Za-z0-9_-]{1,128}$/.test(values[0])&&holderStyle.display==='flex'&&controlLabel==='その他の行を表示する'&&editorStyle.maxHeight==='300px'&&editorStyle.overflow==='auto'&&editorStyle.overflowX==='auto'&&editorStyle.overflowY==='auto'&&
+    const completeCarrier=/^AGENT_META_V2 [A-Za-z0-9_-]{1,128}$/.test(values[0])||/^AGENT_PART_V1 [A-Za-z0-9_-]{1,128} [1-9][0-9]* [1-9][0-9]*$/.test(values[0]);
+    const foldedComplete=completeCarrier&&holderStyle.display==='flex'&&controlLabel==='その他の行を表示する'&&editorStyle.maxHeight==='300px'&&editorStyle.overflow==='auto'&&editorStyle.overflowX==='auto'&&editorStyle.overflowY==='auto'&&
       editor.scrollTop===0&&editor.scrollLeft===0&&editor.clientHeight>0&&editor.scrollHeight===editor.clientHeight&&editor.clientWidth>0&&editor.scrollWidth===editor.clientWidth&&
       editorRect.height===editor.offsetHeight&&editorRect.width===editor.offsetWidth&&rowRects.every(r=>r.left>=editorRect.left&&r.right<=editorRect.right&&r.top>=editorRect.top&&r.bottom<=editorRect.bottom);
     const expanded=holderStyle.display==='flex'&&controlLabel==='簡易表示'&&editorStyle.maxHeight==='none'&&editorStyle.overflow==='visible'&&editorStyle.overflowX==='visible'&&editorStyle.overflowY==='visible'&&rowRects.every(r=>r.left>=editorRect.left&&r.right<=editorRect.right&&r.top>=editorRect.top&&r.bottom<=editorRect.bottom);
@@ -2607,6 +2657,27 @@ function Wait-AgentCopilotInputReady {
     }
 }
 
+function Read-AgentCopilotCompletedResponse([string]$HomePath,[string]$JobId,[string]$RequestId) {
+    if($script:AgentOfflineTest){throw 'CDP_UNAVAILABLE: 非ライブ試験では実回答を取得しません。'}
+    Assert-AgentId $JobId;Assert-AgentId $RequestId;Assert-AgentEdgePolicy
+    $config=Get-AgentCopilotConfig $HomePath (Get-AgentSettings $HomePath) $JobId;$deadline=[DateTime]::UtcNow.AddSeconds(20);$socket=$null;$mutex=$null;$last='';$stable=0
+    try{
+        $mutex=Enter-AgentCopilotMutex $config '' $deadline;$target=Get-AgentCopilotTarget $config;$socket=Connect-AgentCopilotSocket $config $target
+        while([DateTime]::UtcNow -lt $deadline){
+            Assert-AgentCopilotOwnership $config;$snapshot=Get-AgentCopilotSnapshot $socket '' $deadline;$valid=@()
+            if(-not $snapshot.generating -and $snapshot.inputCount -eq 1 -and [string]$snapshot.inputText -ceq ''){
+                foreach($candidate in $snapshot.assistants){
+                    if((Get-AgentProperty $candidate 'source_kind' '') -cne 'fenced_parts'){continue}
+                    try{$frames=@($candidate.frames);$json=ConvertFrom-AgentCopilotParts $frames $RequestId;$valid += [pscustomobject]@{json=$json;identity=ConvertTo-Json -InputObject @($candidate.key,$frames) -Depth 10 -Compress}}catch{}
+                }
+            }
+            if($valid.Count -gt 1){throw 'CSV_RECONCILE_AMBIGUOUS: 同じ要求の回答が複数あり、採用できません。'}
+            if($valid.Count -eq 1){if($last -ceq $valid[0].identity){$stable++}else{$last=$valid[0].identity;$stable=1};if($stable -ge (Get-AgentConnectionContract).stable_response_reads){return $valid[0].json}}else{$last='';$stable=0}
+            Start-Sleep -Milliseconds 500
+        }
+        throw 'CSV_RECONCILE_UNAVAILABLE: 同じ要求IDの完全な既存回答を確認できません。再送しません。'
+    }finally{if($socket){$socket.Dispose()};if($mutex){$mutex.ReleaseMutex();$mutex.Dispose()}}
+}
 function Invoke-AgentCopilot {
     param([Parameter(Mandatory=$true)][string]$Prompt,[Parameter(Mandatory=$true)][string]$RequestId,[Parameter(Mandatory=$true)][string]$JobId,$Settings,[Parameter(Mandatory=$true)][string]$HomePath,[string]$CancelPath,[int]$TimeoutSeconds=180,[ValidateSet('JsonPartsV1','PlannerV2')][string]$Transport='JsonPartsV1')
     if ($script:AgentOfflineTest) { throw 'CDP_UNAVAILABLE: 非ライブ試験モードでは実Copilotへの送信を禁止しています。' }

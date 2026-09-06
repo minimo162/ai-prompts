@@ -9,7 +9,7 @@ $output = Join-Path $repo ('.work\nonlive-' + [guid]::NewGuid().ToString('N'))
 $files = @('App.ps1','index.html','業務エージェント.cmd')
 function Get-CandidateHashes { $hashes = [ordered]@{}; foreach ($file in $files) { $hashes[$file] = (Get-FileHash -LiteralPath (Join-Path $repo $file) -Algorithm SHA256).Hash.ToLowerInvariant() }; return $hashes }
 $before = Get-CandidateHashes
-$names = @('Test-CsvContracts.ps1','Test-CsvBatch.ps1','Test-CsvLifecycle.ps1','Test-CsvTypedPlan.ps1','Test-CsvReview.ps1','Test-OfflineDiagnostic.ps1')
+$names = @('Test-CsvContracts.ps1','Test-CsvBatch.ps1','Test-CsvLifecycle.ps1','Test-CsvTypedPlan.ps1','Test-CsvReview.ps1','Test-CsvLateResponse.ps1','Test-QualityDraft.ps1','Test-OfflineDiagnostic.ps1')
 if ($Suite -ceq 'All') { $names += @('Test-ConnectionContract.ps1','Test-AcceptanceGate.ps1','Test-App.ps1','Test-Pad.ps1','Test-PadRecovery.ps1','Test-Copilot.ps1','Test-CopilotPlannerV2.ps1','Test-PlannerV2Transport.ps1','Test-Http.ps1','Test-Launcher.ps1','Test-ReleaseBinding.ps1','Test-PublishAgentSource.ps1','Test-PublishCrash.ps1','Test-AiCallProcess.ps1','Test-AiCallProviderFailure.ps1','Test-ClipboardSnapshot.ps1') }
 $results = @(); $started = [DateTime]::UtcNow.ToString('o')
 foreach ($name in $names) {
@@ -23,7 +23,7 @@ foreach ($name in $names) {
     Write-Output ($name + ': ' + $results[-1].status)
 }
 if ($IncludeUi) {
-    $uiTests=@('Test-CsvUi.cjs');if($Suite -ceq 'All'){$uiTests+=@('Test-PadRecoveryUi.cjs','Test-CsvCrashUi.cjs')}
+    $uiTests=@('Test-CsvUi.cjs');if($Suite -ceq 'All'){$uiTests+=@('Test-CopilotDom.cjs','Test-PadRecoveryUi.cjs','Test-CsvCrashUi.cjs')}
     foreach($name in $uiTests){
         $log = Join-Path $output ($name+'.log');$exitCode=1
         try { & node (Join-Path $PSScriptRoot $name) > $log 2>&1; $exitCode=$LASTEXITCODE }
