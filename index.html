@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="app-version" content="0.1.0">
+  <meta name="color-scheme" content="light">
+  <title>業務エージェント</title>
+  <style>
+    :root{--ink:#172f33;--muted:#54696d;--brand:#16685d;--brand-dark:#105247;--line:#d4e1dd;--canvas:#f3f6f3;--white:#fff;--soft:#e9f3ed;--danger:#a73429;--warn:#835511;--radius:18px}
+    *{box-sizing:border-box}
+    [hidden]{display:none!important}
+    body{margin:0;background:var(--canvas);color:var(--ink);font-family:"BIZ UDPGothic","Yu Gothic UI",Meiryo,system-ui,sans-serif;font-size:15px;line-height:1.75}
+    button,input,textarea{font:inherit}
+    button{min-height:44px;border:1px solid var(--line);border-radius:9px;padding:9px 17px;background:var(--white);color:var(--ink);font-weight:700;cursor:pointer;transition:background .15s,border-color .15s}
+    button:hover:enabled{background:#f1f6f3;border-color:#99b5ac}
+    button:disabled{cursor:not-allowed;opacity:.5}
+    button.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+    button.primary:hover:enabled{background:var(--brand-dark)}
+    button.stop{color:var(--danger);border-color:#dbb2ac}
+    button.stop:hover:enabled{background:#fff2ef;border-color:var(--danger)}
+    :focus-visible{outline:3px solid #296db1;outline-offset:3px}
+    input,textarea{display:block;width:100%;border:1px solid #a4b9b1;border-radius:9px;padding:12px 14px;background:#fff;color:var(--ink)}
+    input:disabled,textarea:disabled{background:#f1f4f1;color:#54696d}
+    textarea{resize:vertical;min-height:152px;line-height:1.8}
+    input::placeholder,textarea::placeholder{color:#6c7d7c;opacity:1}
+    a{color:var(--brand)}
+    h1,h2,h3,p{margin:0}
+    h1{font-size:clamp(26px,3vw,34px);letter-spacing:.035em;line-height:1.45}
+    h2{font-size:18px;line-height:1.6}
+    h3{font-size:15px;line-height:1.7}
+    .shell{max-width:1240px;margin:0 auto;padding:30px 32px 48px}
+    .masthead{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:30px}
+    .wordmark{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:.06em}
+    .mark{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:var(--brand);color:#fff;font-size:16px}
+    .connection{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);flex-wrap:wrap;justify-content:flex-end}
+    .dot{width:8px;height:8px;border-radius:50%;background:#85928f;flex:none}
+    .connection[data-state="connected"] .dot{background:#287857}
+    .connection[data-state="error"] .dot{background:#b44939}
+    .hero{margin-bottom:27px}
+    .eyebrow{font-size:11px;letter-spacing:.16em;font-weight:700;color:var(--brand);margin-bottom:7px}
+    .hero p{margin-top:10px;color:var(--muted)}
+    .workspace{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(290px,1fr);gap:22px;align-items:start}
+    .stack{display:grid;gap:22px;min-width:0}
+    .card{border:1px solid var(--line);border-radius:var(--radius);background:var(--white);padding:25px 26px;min-width:0}
+    .section-heading{display:flex;align-items:center;gap:10px;margin-bottom:21px}
+    .step{font-size:11px;font-weight:700;color:var(--brand);border:1px solid #b9d3c6;border-radius:6px;padding:2px 7px;line-height:1.7}
+    .field{margin-bottom:21px}
+    label{display:block;font-weight:700;margin-bottom:8px}
+    .optional{font-weight:400;color:var(--muted);font-size:12px;margin-left:8px}
+    .hint{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.8}
+    .actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .actions .primary{min-width:126px}
+    .fine-print{font-size:12px;color:var(--muted);margin-top:15px}
+    .status-card{background:#edf5ee;border-color:#c5d9cc}
+    .status-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .badge{display:inline-flex;align-items:center;gap:7px;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;background:#fff;border:1px solid #c5d9cc;color:var(--brand)}
+    .badge[data-tone="warning"]{background:#fff6e6;color:var(--warn);border-color:#ddcda8}
+    .badge[data-tone="error"]{background:#fff1ee;color:var(--danger);border-color:#e7bbb3}
+    .status-description{margin-top:16px;font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere}
+    .job-reference{margin-top:17px;padding-top:14px;border-top:1px solid #c5d9cc;font-size:11px;color:var(--muted);overflow-wrap:anywhere}
+    .alert{background:#fff4e5;border:1px solid #ddc8a0;border-radius:12px;padding:14px 17px;margin-bottom:20px;font-size:13px;color:#704716;white-space:pre-wrap;overflow-wrap:anywhere}
+    .alert.error{background:#fff1ed;border-color:#e4b7ae;color:#8d3026}
+    .alert .actions{margin-top:10px}
+    .question-card{border:2px solid #9dbdaf;background:#fbfdfb}
+    .question-text{white-space:pre-wrap;overflow-wrap:anywhere;margin-bottom:20px;padding:14px 16px;background:#edf5ee;border-radius:10px}
+    #answer{min-height:105px}
+    .empty{color:var(--muted);font-size:13px;padding:4px 0}
+    .result-text{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}
+    .result-subheading{margin-top:22px;margin-bottom:10px}
+    .artifact-list{list-style:none;padding:0;margin:0;display:grid;gap:11px}
+    .artifact{border:1px solid var(--line);border-radius:10px;padding:12px 13px;background:#f8faf8}
+    .artifact-label{font-size:13px;font-weight:700;margin-bottom:7px;overflow-wrap:anywhere}
+    .artifact-path{display:block;font-family:Consolas,monospace;font-size:12px;overflow-wrap:anywhere;white-space:pre-wrap;user-select:all}
+    .history{padding:0;margin:0;list-style:none;max-height:420px;overflow:auto;scrollbar-gutter:stable}
+    .history li{position:relative;padding:0 0 20px 21px;border-left:1px solid var(--line);margin-left:5px}
+    .history li:last-child{padding-bottom:0}
+    .history li:before{position:absolute;content:"";height:7px;width:7px;top:8px;left:-4px;border-radius:50%;background:#598674}
+    .history time{display:block;font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:4px}
+    .history p{font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere}
+    details.settings{margin-top:22px;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
+    summary{cursor:pointer;min-height:58px;padding:16px 25px;font-weight:700;font-size:14px;border-radius:var(--radius)}
+    .settings-body{padding:0 25px 25px;border-top:1px solid var(--line)}
+    .settings-grid{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:20px;margin-top:21px}
+    .settings-grid .field{margin-bottom:15px}
+    .settings-grid label{font-size:13px}
+    .diagnostic-area{border-top:1px solid var(--line);margin-top:23px;padding-top:20px}
+    .diagnostic-area .actions{margin-top:12px}
+    .diagnostic-output{white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f6f3;border-radius:9px;padding:14px;margin:14px 0 0;font-family:Consolas,"BIZ UDPGothic",monospace;font-size:12px;max-height:300px;overflow:auto}
+    .footer{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:20px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .skip-link{position:absolute;left:18px;top:-80px;background:#fff;padding:12px;z-index:2}
+    .skip-link:focus{top:12px}
+    @media(max-width:800px){.shell{padding:22px 20px 32px}.workspace{grid-template-columns:1fr}.workspace>.stack{display:contents}#request-section{order:1}.status-card{order:2}.question-card{order:3}#history-section{order:4}#result-section{order:5}.settings-grid{grid-template-columns:1fr}.masthead{margin-bottom:24px}.card{padding:21px}.settings-body{padding:0 20px 22px}summary{padding:16px 20px}.history{max-height:320px}}
+    @media(max-width:430px){.shell{padding:18px 13px 28px}.masthead{align-items:flex-start}.wordmark{font-size:11px}.connection{font-size:11px}.card{padding:18px}.hero p{font-size:13px}.actions>button{flex-grow:1}.settings-grid{gap:4px}.status-top{gap:8px}}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">依頼の入力へ</a>
+  <div class="shell">
+    <header>
+      <div class="masthead">
+        <div class="wordmark"><span class="mark" aria-hidden="true">↗</span>業務エージェント <span class="badge">検証版</span></div>
+        <div id="connection" class="connection" data-state="connecting"><span class="dot" aria-hidden="true"></span><span id="connection-text" role="status">アプリに接続中</span></div>
+      </div>
+      <div class="hero"><div class="eyebrow">COPILOT × POWER AUTOMATE DESKTOP</div><h1>やりたいことを、言葉で。</h1><p>Copilot が手順を考え、Power Automate Desktop が PC 上で作業します。</p></div>
+    </header>
+
+    <div id="connection-error" class="alert error" hidden><p id="connection-error-text"></p><div class="actions"><button id="reconnect" type="button">再接続</button></div></div>
+    <div id="action-message" class="alert" role="status" hidden></div>
+
+    <main id="main" class="workspace" tabindex="-1">
+      <div class="stack">
+        <section id="request-section" class="card" aria-labelledby="request-heading">
+          <div class="section-heading"><span class="step" aria-hidden="true">01</span><h2 id="request-heading">依頼する</h2></div>
+          <form id="request-form">
+            <div class="field"><label for="goal">やりたいこと</label><textarea id="goal" name="goal" required maxlength="12000" placeholder="例：このフォルダーの日本語の説明を英訳し、確認が必要なものを分けて一覧にして" aria-describedby="goal-hint"></textarea><p id="goal-hint" class="hint">仕上がりの形式や、確認してほしいことも書けます。</p></div>
+            <div class="field"><label for="target">対象ファイル／フォルダー</label><input id="target" name="target" type="text" required maxlength="4000" placeholder="例：C:\Users\user\Documents\翻訳対象" spellcheck="false" autocomplete="off" aria-describedby="target-hint"><p id="target-hint" class="hint">対象の場所を入力してください。現在の検証版は UTF-8 テキストを扱います。</p></div>
+            <div class="actions"><button id="start" class="primary" type="submit" disabled>開始する</button><button id="stop" class="stop" type="button" disabled>停止する</button></div>
+            <p class="fine-print">依頼や処理に必要な内容は M365 Copilot に送信されます。</p>
+          </form>
+        </section>
+
+        <section id="question-section" class="card question-card" aria-labelledby="question-heading" hidden>
+          <div class="section-heading"><h2 id="question-heading">Copilot からの質問</h2></div>
+          <p id="question-text" class="question-text"></p>
+          <form id="answer-form"><div class="field"><label for="answer">質問への回答</label><textarea id="answer" name="answer" required maxlength="12000" aria-describedby="question-text"></textarea></div><button id="send-answer" class="primary" type="submit">回答して続ける</button></form>
+        </section>
+
+        <section id="result-section" class="card" aria-labelledby="result-heading">
+          <div class="section-heading"><span class="step" aria-hidden="true">03</span><h2 id="result-heading">回答と成果物</h2></div>
+          <p id="result-empty" class="empty">回答や成果物が届くと、ここに表示します。</p>
+          <div id="final-answer" class="result-text" hidden></div>
+          <div id="artifacts-section" hidden><h3 class="result-subheading">成果物の場所</h3><p class="hint">場所を選択してコピーし、エクスプローラーで確認できます。</p><ul id="artifacts" class="artifact-list"></ul></div>
+        </section>
+      </div>
+
+      <aside class="stack" aria-label="作業の状況">
+        <section class="card status-card" aria-labelledby="status-heading">
+          <div class="status-top"><h2 id="status-heading">現在の状態</h2><span id="job-status" class="badge">接続待ち</span></div>
+          <p id="status-description" class="status-description" role="status" aria-atomic="true">アプリから現在の状態を読み込んでいます。</p>
+          <p id="job-error" class="alert error" style="margin-top:16px;margin-bottom:0" hidden></p>
+          <p id="job-reference" class="job-reference" hidden></p>
+        </section>
+        <section id="history-section" class="card" aria-labelledby="history-heading">
+          <div class="section-heading"><span class="step" aria-hidden="true">02</span><h2 id="history-heading">実行履歴</h2></div>
+          <p id="history-empty" class="empty">実行すると、確認できた進捗を表示します。</p><ol id="history" class="history" aria-label="実行履歴"></ol>
+        </section>
+      </aside>
+    </main>
+
+    <details id="settings-details" class="settings">
+      <summary>設定・接続</summary>
+      <div class="settings-body">
+        <form id="settings-form">
+          <div class="settings-grid">
+            <div class="field"><label for="copilot-port">Copilot 接続ポート</label><input id="copilot-port" name="copilot_port" type="number" value="9223" min="1024" max="65535" required></div>
+            <div class="field"><label for="pad-flow-name">専用 PAD フロー名</label><input id="pad-flow-name" name="pad_flow_name" value="業務エージェント専用" maxlength="80" required></div>
+            <div class="field"><label for="max-rounds">最大反復回数</label><input id="max-rounds" name="max_rounds" type="number" value="6" min="1" max="20" required></div>
+          </div>
+          <div class="actions"><button id="save-settings" type="submit" disabled>設定を保存</button><span class="hint">設定は作業を開始する前に変更できます。</span></div>
+        </form>
+        <div class="diagnostic-area"><h3>接続を確認する</h3><p class="hint">Copilot の画面を開いてサインインし、自己診断で利用条件を確認してください。</p><div class="actions"><button id="open-copilot" type="button" disabled>Copilot を開く</button><button id="diagnose" type="button" disabled>自己診断する</button></div><pre id="diagnostics" class="diagnostic-output" tabindex="0" aria-label="自己診断の結果" hidden></pre></div>
+      </div>
+    </details>
+    <footer class="footer"><p>この画面を閉じても、作業は停止しません。停止するには「停止する」を押してください。</p><p>検証版 0.1.0 · ローカル接続</p></footer>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+    <noscript><p class="alert error">この画面を利用するには、ブラウザーの JavaScript を有効にしてください。</p></noscript>
+  </div>
+  <script>
+    'use strict';
+    (() => {
+      const $ = id => document.getElementById(id);
+      const version = document.querySelector('meta[name="app-version"]').content;
+      const tokenKey = 'gyomu-agent-token';
+      const pending = new Set();
+      const activeStatuses = new Set(['queued', 'planning', 'running_pad', 'waiting_user', 'cancelling']);
+      const statuses = {
+        idle: ['開始待ち', 'やりたいことと対象を入力して、作業を開始してください。', 'normal'],
+        queued: ['開始を準備中', '依頼を受け付けました。実行プロセスを準備しています。', 'normal'],
+        planning: ['手順を検討中', 'Copilot が次の手順を考えています。', 'normal'],
+        running_pad: ['PAD で実行中', 'Power Automate Desktop が PC 上で作業しています。', 'normal'],
+        waiting_user: ['回答待ち', 'Copilot から質問が届いています。回答を入力すると作業を続けます。', 'warning'],
+        done: ['完了', '作業が完了しました。回答と成果物を確認してください。', 'normal'],
+        blocked: ['続行できません', '続行できない理由を確認してください。途中の回答や成果物がある場合は下に表示します。', 'warning'],
+        failed: ['エラーで終了', '作業中にエラーが発生しました。エラー内容と実行履歴を確認してください。', 'error'],
+        cancelling: ['停止を確認中', '停止を要求しました。アプリが停止を確認するまでお待ちください。', 'warning'],
+        cancelled: ['停止済み', '作業を停止しました。停止する前に作成・変更されたものは元に戻りません。', 'normal'],
+        unknown: ['結果を確認できません', '作業が停止したか、完了したかを確認できません。PC と PAD の状態を確認し、PAD が停止していることを確かめてから次の依頼を開始してください。自動再実行は行いません。', 'warning']
+      };
+      let token = '';
+      let state = null;
+      let connected = false;
+      let pollInFlight = false;
+      let timer = null;
+      let lastJobId = null;
+      let lastQuestionKey = '';
+      let historyKey = '';
+      let artifactKey = '';
+      let settingsLoaded = false;
+      let settingsDirty = false;
+
+      function text(node, value) {
+        const next = value == null ? '' : String(value);
+        if (node.textContent !== next) node.textContent = next;
+      }
+      function printable(value) {
+        return typeof value === 'string' ? value : value == null ? '' : JSON.stringify(value, null, 2);
+      }
+      function announce(message) { text($('announcement'), message); }
+      function message(value, error = false) {
+        text($('action-message'), value);
+        $('action-message').classList.toggle('error', error);
+        $('action-message').hidden = !value;
+      }
+      function currentStatus() { return state && state.job ? (Object.hasOwn(statuses, state.job.status) ? state.job.status : 'unknown') : 'idle'; }
+      function busy() { return !!(state && state.job && activeStatuses.has(currentStatus())); }
+      function updateControls() {
+        const working = busy();
+        const ready = !!token && connected;
+        $('start').disabled = !ready || working || pending.has('/api/start');
+        text($('start'), pending.has('/api/start') ? '開始を要求中…' : '開始する');
+        $('stop').disabled = !token || !working || currentStatus() === 'cancelling' || pending.has('/api/stop');
+        text($('stop'), pending.has('/api/stop') || currentStatus() === 'cancelling' ? '停止を要求済み' : '停止する');
+        $('goal').disabled = working || pending.has('/api/start');
+        $('target').disabled = working || pending.has('/api/start');
+        $('send-answer').disabled = !ready || currentStatus() !== 'waiting_user' || pending.has('/api/answer');
+        text($('send-answer'), pending.has('/api/answer') ? '回答を送信中…' : '回答して続ける');
+        $('answer').disabled = pending.has('/api/answer');
+        $('save-settings').disabled = !ready || working || pending.has('/api/settings');
+        ['copilot-port', 'pad-flow-name', 'max-rounds'].forEach(id => { $(id).disabled = working || pending.has('/api/settings'); });
+        $('diagnose').disabled = !ready || pending.has('/api/diagnose');
+        text($('diagnose'), pending.has('/api/diagnose') ? '診断中…' : '自己診断する');
+        $('open-copilot').disabled = !ready || working || pending.has('/api/copilot/open');
+        $('reconnect').disabled = !token || pollInFlight;
+      }
+      function connection(ok, error = '') {
+        const wasConnected = connected;
+        connected = ok;
+        $('connection').dataset.state = ok ? 'connected' : 'error';
+        text($('connection-text'), ok ? 'アプリに接続済み' : token ? '接続を確認中' : '起動用リンクが必要');
+        text($('connection-error-text'), error);
+        $('connection-error').hidden = ok;
+        if (ok && !wasConnected) announce('アプリに接続しました。現在の作業状態を表示しています。');
+        updateControls();
+      }
+      async function request(path, body) {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 20000);
+        try {
+          const response = await fetch(path, {
+            method: body === undefined ? 'GET' : 'POST',
+            headers: { 'X-App-Token': token, ...(body === undefined ? {} : { 'Content-Type': 'application/json' }) },
+            body: body === undefined ? undefined : JSON.stringify(body),
+            cache: 'no-store', credentials: 'same-origin', signal: controller.signal
+          });
+          let data;
+          try { data = await response.json(); } catch (_) { throw new Error('アプリからの応答を読み取れませんでした。'); }
+          if (!response.ok || data.ok === false) {
+            if (response.status === 401 || response.status === 403) throw new Error('接続の認証に失敗しました。起動用 CMD から画面を開き直してください。');
+            throw new Error(printable(data.error) || 'アプリへの要求に失敗しました（' + response.status + '）。');
+          }
+          return data;
+        } catch (error) {
+          if (error.name === 'AbortError') throw new Error('応答の待機時間を超えました。処理の結果は現在の状態で確認してください。');
+          if (error instanceof TypeError) throw new Error('ローカルアプリに接続できません。起動用 CMD からアプリが起動していることを確認してください。');
+          throw error;
+        } finally { clearTimeout(timeout); }
+      }
+      function render(next) {
+        state = next;
+        const job = next.job || null;
+        const status = currentStatus();
+        const description = statuses[status];
+        text($('job-status'), description[0]);
+        $('job-status').dataset.tone = description[2];
+        text($('status-description'), description[1]);
+        const jobError = job ? printable(job.error) : '';
+        text($('job-error'), jobError);
+        $('job-error').hidden = !jobError;
+        text($('job-reference'), job ? '実行 ID: ' + printable(job.job_id) : '');
+        $('job-reference').hidden = !job;
+        if (job && job.job_id !== lastJobId) {
+          lastJobId = job.job_id;
+          $('goal').value = printable(job.goal);
+          $('target').value = printable(job.target);
+        }
+        const question = job ? printable(job.question) : '';
+        const questionKey = job && status === 'waiting_user' ? job.job_id + '\n' + job.question_id : '';
+        if (questionKey !== lastQuestionKey) {
+          $('answer').value = '';
+          lastQuestionKey = questionKey;
+          if (questionKey) announce('Copilot から質問が届きました。質問への回答を入力してください。');
+        }
+        text($('question-text'), question || '質問の内容を取得できません。実行履歴を確認してください。');
+        $('question-section').hidden = status !== 'waiting_user';
+        const finalAnswer = job ? printable(job.final_answer) : '';
+        text($('final-answer'), finalAnswer);
+        $('final-answer').hidden = !finalAnswer;
+        const artifacts = job && Array.isArray(job.artifacts) ? job.artifacts : [];
+        const nextArtifactKey = JSON.stringify(artifacts);
+        if (artifactKey !== nextArtifactKey) {
+          artifactKey = nextArtifactKey;
+          const fragment = document.createDocumentFragment();
+          artifacts.forEach((artifact, index) => {
+            const item = document.createElement('li'); item.className = 'artifact';
+            const label = document.createElement('p'); label.className = 'artifact-label'; text(label, artifact.label || '成果物 ' + (index + 1));
+            const path = document.createElement('code'); path.className = 'artifact-path'; path.tabIndex = 0; text(path, artifact.path);
+            item.append(label, path); fragment.append(item);
+          });
+          $('artifacts').replaceChildren(fragment);
+        }
+        $('artifacts-section').hidden = artifacts.length === 0;
+        $('result-empty').hidden = !!finalAnswer || artifacts.length > 0;
+        const history = job && Array.isArray(job.history) ? job.history : [];
+        const nextHistoryKey = JSON.stringify(history);
+        if (historyKey !== nextHistoryKey) {
+          historyKey = nextHistoryKey;
+          const fragment = document.createDocumentFragment();
+          history.forEach(entry => {
+            const item = document.createElement('li');
+            const time = document.createElement('time');
+            const date = new Date(entry.time);
+            if (!Number.isNaN(date.getTime())) {
+              time.dateTime = date.toISOString();
+              text(time, date.toLocaleString('ja-JP', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+            } else text(time, printable(entry.time));
+            const content = document.createElement('p'); text(content, printable(entry.message));
+            item.append(time, content); fragment.append(item);
+          });
+          $('history').replaceChildren(fragment);
+        }
+        $('history-empty').hidden = history.length > 0;
+        if (next.settings && (!settingsLoaded || !settingsDirty)) {
+          $('copilot-port').value = next.settings.copilot_port;
+          $('pad-flow-name').value = next.settings.pad_flow_name;
+          $('max-rounds').value = next.settings.max_rounds;
+          settingsLoaded = true;
+        }
+        if (next.diagnostics != null) showDiagnostics(next.diagnostics);
+        updateControls();
+      }
+      function showDiagnostics(value) {
+        text($('diagnostics'), printable(value));
+        $('diagnostics').hidden = false;
+      }
+      async function poll() {
+        if (pollInFlight || !token) return;
+        clearTimeout(timer);
+        pollInFlight = true;
+        updateControls();
+        try {
+          const next = await request('/api/state');
+          if (!next || next.version !== version || !Object.hasOwn(next, 'job')) throw new Error('画面とアプリの版または応答形式が一致しません。起動用 CMD から画面を開き直してください。');
+          render(next);
+          connection(true);
+        } catch (error) {
+          connection(false, error.message + (state && state.job ? '\n表示中の作業状態は、最後に接続できた時点の情報です。通信が切れても、作業が停止したとは限りません。' : '') + '\n自動的に再接続を試みます。');
+        } finally {
+          pollInFlight = false;
+          updateControls();
+          timer = setTimeout(poll, 1000);
+        }
+      }
+      async function mutate(path, body, successMessage) {
+        if (pending.has(path) || !token) return;
+        pending.add(path);
+        message('');
+        updateControls();
+        try {
+          const result = await request(path, body);
+          if (path === '/api/settings') settingsDirty = false;
+          if (path === '/api/diagnose') {
+            showDiagnostics(result.diagnostics === undefined ? result : result.diagnostics);
+            $('settings-details').open = true;
+          }
+          const startupWarning = path === '/api/copilot/open' && result.copilot && result.copilot.launch_cleanup === 'not_found';
+          message(startupWarning ? 'Copilot を開きました。追加のタブは自動では閉じられませんでした。' : successMessage);
+          await poll();
+        } catch (error) { message(error.message, true); }
+        finally { pending.delete(path); updateControls(); }
+      }
+      $('request-form').addEventListener('submit', event => {
+        event.preventDefault();
+        if ($('start').disabled) return;
+        const goal = $('goal').value.trim();
+        if (!goal) { message('やりたいことを入力してください。', true); $('goal').focus(); return; }
+        mutate('/api/start', { goal, target: $('target').value.trim() }, '開始を受け付けました。現在の状態と実行履歴で進捗を確認できます。');
+      });
+      $('stop').addEventListener('click', () => {
+        if (!$('stop').disabled && state && state.job) mutate('/api/stop', { job_id: state.job.job_id }, '停止を要求しました。現在の状態で停止の確認結果を確認してください。');
+      });
+      $('answer-form').addEventListener('submit', event => {
+        event.preventDefault();
+        if ($('send-answer').disabled || !state || !state.job) return;
+        const answer = $('answer').value.trim();
+        if (!answer) { message('質問への回答を入力してください。', true); $('answer').focus(); return; }
+        mutate('/api/answer', { job_id: state.job.job_id, question_id: state.job.question_id, answer }, '回答を送信しました。');
+      });
+      $('settings-form').addEventListener('input', () => { settingsDirty = true; });
+      $('settings-form').addEventListener('submit', event => {
+        event.preventDefault();
+        if ($('save-settings').disabled) return;
+        const padFlowName = $('pad-flow-name').value.trim();
+        if (!padFlowName) { message('専用 PAD フロー名を入力してください。', true); $('pad-flow-name').focus(); return; }
+        mutate('/api/settings', { copilot_port: Number($('copilot-port').value), pad_flow_name: padFlowName, max_rounds: Number($('max-rounds').value) }, '設定を保存しました。');
+      });
+      $('diagnose').addEventListener('click', () => mutate('/api/diagnose', {}, '自己診断の結果を表示しました。'));
+      $('open-copilot').addEventListener('click', () => mutate('/api/copilot/open', {}, 'Copilot を開く要求を送信しました。表示された画面でサインイン状態を確認してください。'));
+      $('reconnect').addEventListener('click', poll);
+      window.addEventListener('online', poll);
+      document.addEventListener('visibilitychange', () => { if (!document.hidden) poll(); });
+      const fragment = new URLSearchParams(location.hash.slice(1));
+      if (fragment.has('token')) {
+        token = fragment.get('token') || '';
+        try { sessionStorage.setItem(tokenKey, token); } catch (_) { /* This tab can continue using the in-memory token. */ }
+        fragment.delete('token');
+        history.replaceState(null, '', location.pathname + location.search + (fragment.toString() ? '#' + fragment.toString() : ''));
+      } else {
+        try { token = sessionStorage.getItem(tokenKey) || ''; } catch (_) { /* Show the launcher guidance below. */ }
+      }
+      if (token) poll();
+      else {
+        connection(false, '起動用 CMD からこの画面を開いてください。アプリに接続するための起動情報がありません。');
+        text($('job-status'), '未接続');
+        text($('status-description'), 'アプリへの接続後、現在の作業状態を表示します。');
+      }
+    })();
+  </script>
+</body>
+</html>
