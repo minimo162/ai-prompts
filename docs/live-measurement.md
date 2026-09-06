@@ -37,3 +37,11 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools\Verify-CsvMeasurem
 ```
 
 この検証も分類理由の意味評価や人の承認を代替しません。
+
+専用Edgeの対象タブ数とプロセスツリーのメモリー使用量は、測定開始後・終了後などに次で保存できます。ブラウザーを操作せず、URL・タイトル・本文・コマンドラインは出力しません。
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools\Get-LiveMeasurementResourceSnapshot.ps1 -ContextPath $contextPath -OutputPath $newResourcePath
+```
+
+過去の検証タブが残っている場合はその分も含みます。瞬間値の合計であり、ピーク値や社内PCの必要メモリー量とは区別します。

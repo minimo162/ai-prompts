@@ -56,6 +56,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File tests\Run-NonLiveTe
 
 2026-09-07の会話分離/対象集合ID候補は全29非ライブPASS。実50件は処理完了後の確認回答を1回挟んでDONE、実100件は既存回答5件の再送なし照合と未処理80件の子ジョブでDONE。連続100件の成功とは数えない。詳細は[live-conversation-isolation-2026-09-07.md](live-conversation-isolation-2026-09-07.md)。
 
+2026-09-07、044df75と同じ3ハッシュの固定候補で短文1件102,876ms・50件457,775ms・100件836,945msと長文1件119,573msを介入なしDONE。100件は成功80/要確認20、原値と成果物保全PASS。意味品質は人未確認の正解案比較であり受入未完了。詳細と資源測定は上記会話分離記録を参照。
+
 ## 残る必須作業
 
 |Issue|次に実装・検証するもの|
