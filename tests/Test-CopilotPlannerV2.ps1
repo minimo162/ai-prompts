@@ -125,6 +125,7 @@ foreach($taskBadCall in @(
 Assert-Rejected 'ai_call_float_timeout_with_act_body' {ConvertFrom-AgentCopilotPlannerV2 (New-TestFrames ($taskWithCall.Replace('"timeout_seconds":120','"timeout_seconds":120.0')) @($taskTemplate.robin)) $taskId}
 Assert-Rejected 'ai_call_false_metadata_with_act_body' {ConvertFrom-AgentCopilotPlannerV2 (New-TestFrames ($taskWithCall.Replace('"timeout_seconds":120','"timeout_seconds":false')) @($taskTemplate.robin)) $taskId}
 $taskGoodFrames=New-TestFrames $taskMeta
+Assert-Rejected 'observed_backtick_after_metadata_end' {$f=New-TestFrames $taskMeta;$f[0]+="`n"+[char]96;ConvertFrom-AgentCopilotPlannerV2 $f $taskId}
 Assert-Rejected 'null_frames' {ConvertFrom-AgentCopilotPlannerV2 $null $taskId}
 Assert-Rejected 'single_frame' {ConvertFrom-AgentCopilotPlannerV2 @($taskGoodFrames[0]) $taskId}
 Assert-Rejected 'extra_frame' {ConvertFrom-AgentCopilotPlannerV2 (@($taskGoodFrames)+@($taskGoodFrames[1])) $taskId}
