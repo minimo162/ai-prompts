@@ -1780,7 +1780,7 @@ function Get-AgentPlannerRules {
 Adopted Robin rules from ai-prompts/pad-robin-prompts.md (2026-09-05, PAD 2.71, Power Fx off):
 Only Robin code inside the separate Planner V2 Robin body. Preserve quotes, percent, literal backslashes and Unicode. No markdown fences, line numbers, ellipsis or prose in code. Four spaces per IF level. No tabs, multiline literals, undefined variables, executable expressions or guessed actions. Read business data from UTF8 text files without modifying it. Literal escaping: backslash -> double backslash, apostrophe -> backslash apostrophe, double quote -> backslash double quote. Never interpolate input data into scripts. A literal percent sign must come from a data file, not a Robin literal. %Name% refers only to a previously defined simple variable.
 This first PoC accepts a deliberately finite subset. Unsupported app/Excel/browser operations must return BLOCKED with the missing capability, never omit them and claim DONE.
-The action examples below are literal Robin for the second Planner V2 fence. Each Windows path separator needs two backslashes in that literal Robin body. JSON escaping applies only to metadata fields such as artifacts[] and ai_calls[].input_path, where each original separator needs two backslashes in JSON source. Decode ai_call_templates[].robin from CONTEXT_JSON once and place that exact action text directly in the Robin body. Do not add or remove an escaping layer from Robin code. Use only the transport-defined empty-line marker for a completely empty Robin row.
+The action examples below are literal Robin for the Planner V2 Robin section. Each Windows path separator needs two backslashes in that literal Robin body. JSON escaping applies only to metadata fields such as artifacts[] and ai_calls[].input_path, where each original separator needs two backslashes in JSON source. Decode ai_call_templates[].robin from CONTEXT_JSON once and place that exact action text directly in the Robin body. Do not add or remove an escaping layer from Robin code. Use only the transport-defined empty-line marker for a completely empty Robin row.
 Allowed full action formats (substitute real paths and variable names):
 SET Name TO $'''value'''
 File.ReadTextFromFile.ReadText File: $'''C:\\input.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> Name
@@ -2221,17 +2221,29 @@ function Set-AgentPadFocus {
 }
 
 function Get-AgentPadCode {
-    param($Snapshot)
+    param($Snapshot,[string]$CancelPath='')
+    if($CancelPath -and (Test-Path -LiteralPath $CancelPath)){throw 'CANCELLED: stopped before copying actions.'}
     Set-AgentPadFocus $Snapshot.window $Snapshot.workspace
     $sentinel='AGENT_CLIPBOARD_'+[guid]::NewGuid().ToString('N')
     Set-AgentPadClipboardText $sentinel
     $script:AgentPadClipboardValue=$sentinel
-    Send-AgentPadKeys '^a'; Send-AgentPadKeys '^c'
-    Start-Sleep -Milliseconds 150
-    $copied=Get-AgentPadClipboardText
-    if($copied -ceq $sentinel) {throw 'PAD_COPY: no copied action content; empty workspace needs setup.'}
-    $script:AgentPadClipboardValue=$copied
-    return $copied
+    foreach($key in @('^a','^c')){
+        if($CancelPath -and (Test-Path -LiteralPath $CancelPath)){throw 'CANCELLED: stopped while copying actions.'}
+        Send-AgentPadKeys $key
+    }
+    # Copy is asynchronous in the designer. Observe its result without issuing
+    # another Copy or replacing the sentinel while the original request is pending.
+    $deadline=[DateTime]::UtcNow.AddSeconds(2)
+    do {
+        if($CancelPath -and (Test-Path -LiteralPath $CancelPath)){throw 'CANCELLED: stopped while copying actions.'}
+        $copied=Get-AgentPadClipboardText
+        if($copied -cne $sentinel -and -not [string]::IsNullOrWhiteSpace($copied)){
+            $script:AgentPadClipboardValue=$copied
+            return $copied
+        }
+        Start-Sleep -Milliseconds 50
+    } while([DateTime]::UtcNow -lt $deadline)
+    throw 'PAD_COPY: action copy did not complete within its deadline.'
 }
 
 # Narrow native boundaries allow failure-path tests without operating the desktop.
@@ -2368,7 +2380,7 @@ function Invoke-AgentPad {
         $dataDirectory=[IO.Path]::GetDirectoryName([IO.Path]::GetDirectoryName($jobDirectory))
         $ownerPath=Join-Path $dataDirectory ('pad-owned-'+(Get-AgentTextHash ([string]$Settings.pad_flow_name))+'.json')
         if(-not $empty) {
-            $old=Get-AgentPadCode $snapshot
+            $old=Get-AgentPadCode $snapshot -CancelPath $CancelPath
             if($old -notmatch '^SET AgentOwnedFlow TO \$\x27{3}AiPromptsAgent\x27{3}(?:\r?\n|$)') {throw 'PAD_OWNERSHIP: dedicated flow contains unrelated actions.'}
             if(-not [IO.File]::Exists($ownerPath)) {throw 'PAD_OWNERSHIP: no app-owned saved content record exists.'}
             $owned=Read-AgentJson $ownerPath
@@ -2399,12 +2411,12 @@ function Invoke-AgentPad {
         # Keep the submitted clipboard intact until actions are actually present.
         # An empty Ready workspace is not evidence that the asynchronous paste finished.
         $snapshot=Wait-AgentPadEditable -Window $window -CancelPath $CancelPath -RequireActions
-        $actual=Get-AgentPadCode $snapshot
+        $actual=Get-AgentPadCode $snapshot -CancelPath $CancelPath
         if((ConvertTo-AgentComparableRobin $actual) -cne (ConvertTo-AgentComparableRobin $combined)) {throw 'PAD_PASTE_MISMATCH: complete pasted content differs; execution blocked.'}
         $snapshot=Wait-AgentPadSaveBaseline -Window $window -CancelPath $CancelPath
         Invoke-AgentPadControl $snapshot.save
         $snapshot=Wait-AgentPadSaved -Window $window -CancelPath $CancelPath
-        $actual=Get-AgentPadCode $snapshot
+        $actual=Get-AgentPadCode $snapshot -CancelPath $CancelPath
         if((ConvertTo-AgentComparableRobin $actual) -cne (ConvertTo-AgentComparableRobin $combined)) {throw 'PAD_SAVE_MISMATCH: content changed after save; execution blocked.'}
         Write-AgentJson $ownerPath @{flow_name=$Settings.pad_flow_name;hash=(Get-AgentTextHash (ConvertTo-AgentComparableRobin $actual))}
         $snapshot=Get-AgentPadSnapshot $window

@@ -541,6 +541,7 @@ try {
         $script:padMockSnapshot=$null
         $script:padStatusSequence=@()
         $script:padCancelDuringSettle=$null
+        $script:padCopyPolls=0
     }
     function Get-AgentPadWindow($Settings){$script:padWindowReads++;return [pscustomobject]@{Mock=$true}}
     function Get-AgentPadSnapshot($Window,[switch]$AllowErrors) {
@@ -581,14 +582,17 @@ try {
         return $script:padScenario -notin @('unowned','owner-missing','user-edited','replace-failure')
     }
     function Get-AgentPadClipboard {return 'original clipboard'}
-    function Get-AgentPadClipboardText {return $script:padClipboard}
+    function Get-AgentPadClipboardText {
+        if($script:padScenario -eq 'delayed-copy' -and $script:padKeys.Contains('^c')){$script:padCopyPolls++;if($script:padCopyPolls -ge 4){$script:padClipboard=$script:mockCopiedCode}}
+        return $script:padClipboard
+    }
     function Set-AgentPadClipboardText([string]$Text) {$script:padClipboard=$Text}
     function Restore-AgentPadClipboard($Clipboard) {$script:padClipboardRestores++;$script:padClipboard=$Clipboard}
     function Send-AgentPadKeys([string]$Keys) {
         $script:padKeys.Add($Keys)
         if($script:padScenario -eq 'copy-result' -and $Keys -ceq '^c'){$script:padClipboard=$script:mockCopiedCode}
     }
-    function Get-AgentPadCode($Snapshot) {
+    function Get-AgentPadCode($Snapshot,[string]$CancelPath='') {
         $script:padReadbacks++
         if($script:padScenario -eq 'unowned'){return 'WAIT 0'}
         if($script:padScenario -in @('replace-failure','owner-missing')){return $script:mockOwnedCode}
@@ -841,6 +845,14 @@ public sealed class PadTestMutexHolder : IDisposable {
     Assert-Case ((Get-AgentPadCode $snapshot) -ceq $branch) 'Readback helper preserves copied Robin exactly through mocked clipboard'
     Assert-Case (($script:padKeys -join ',') -ceq '^a,^c') 'Readback helper selects and copies exactly once'
     Assert-Case ($script:AgentPadClipboardValue -ceq $branch) 'Readback helper records its own clipboard value for conditional restoration'
+    Reset-PadMock 'delayed-copy';$script:mockCopiedCode=$branch
+    $snapshot=Get-AgentPadSnapshot ([pscustomobject]@{Mock=$true})
+    Assert-Case ((Get-AgentPadCode $snapshot) -ceq $branch -and $script:padCopyPolls -eq 4) 'Readback waits for delayed clipboard delivery without changing the code'
+    Assert-Case (($script:padKeys -join ',') -ceq '^a,^c') 'Delayed clipboard delivery never reissues Select All or Copy'
+    Reset-PadMock 'copy-result';[IO.File]::WriteAllText($cancel,'stop')
+    Assert-Rejected {Get-AgentPadCode $snapshot -CancelPath $cancel} 'CANCELLED' 'Cancellation prevents a new action copy'
+    Assert-Case ($script:padKeys.Count -eq 0 -and $script:padClipboard -ceq 'original clipboard') 'Cancelled copy does not touch keys or clipboard'
+    [IO.File]::Delete($cancel)
     Reset-PadMock 'delayed-pasted-actions'
     $script:padStatusSequence=@('ready')
     Assert-Case ((Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel -RequireActions).status -ceq 'ready') 'Paste wait requires actual actions as well as Ready'

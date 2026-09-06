@@ -2,7 +2,18 @@
 
 状態は **実装済みPoC・実機ゲート未完了**。Issue #5を閉じず、残りの検証と必要な修正を続ける。今回のマージはユーザーが指定した途中成果の保存であり、全要件の受入完了ではない。
 
-## 20:16 JSTの再開情報（以下の履歴より優先）
+## 21:42 JSTの再開情報（以下の履歴より優先）
+
+**21:48 JST追記**: 実PAD→実AiCall子プロセスで、プロバイダー関数だけに拒否・空回答・応答時中止を注入した3ケースがすべてPASS。`.work/gate1-pad-provider-5c7e819ae3cb43a0bcafcd6340c46a38/` の `refusal` / `empty` / `cancelled`。制御結果はそれぞれ `failed/AICALL_refusal`、`failed/AICALL_empty_result`、`cancelled/CANCELLED`、子結果も対応する型を保持。全ケース実行1回、開始ID一致、成功本文/後続成果物/完了マーカーなし、中止ケースの停止操作1回。元Mainへの復元・保存、owner/既存ファイル/既存ページ/クリップボード保全成功。子PIDとfixture App/要求IDの記録で親関数だけの注入でないことを確認。実M365が拒否や空回答を生成した検証ではない。残る範囲はnative Save失敗、送信後期限/中止、別利用者・社内PCでの受入と最新配布物の公開。先行クリップボード例外の原因は未確定。
+
+- 現在のApp SHAは `a743aecc068eaeec9a081e41e0a78a0c6bea0ca1d8aceea6f6ffbf638662f0cf`。通常更新 `9c583bd4482645c1a6e5a12bab06d7a1` はPASS。releaseは `0.1.0-52b61a88923fd3fdc07d62b6db5cea9b3de33a2398eb74507d101aefdda3dc04`、server PID35556 / port59995 / start UTC `2026-09-06T12:22:10.2375112Z`。再開時に現物を再確認する。
+- PADコピーはSelect All/Copyを各1回だけ送り、固定150ms後の1読取りから、2秒以内の結果待ちへ変更した。コピー前と待機中の中止を確認し、空白だけの結果を受理しない。以前の `PAD_COPY` の原因を遅延だけと断定しない。Planner指示に残った「second fence」を現在のRobin sectionへ訂正した。core147/PAD335 PASS。
+- `tests/Test-AiCallProviderFailure.ps1` を追加。実PS5子プロセス内のプロバイダー関数だけを差し替え、拒否・空回答・期限・応答時中止の21件PASS。ASTによる差し戻し一致でその他の製品ソースが同一と確認した。証拠 `.work/aicall-provider-fault-36663711ffe4491287597127c959988d/validation.json`。この検査単独では実PAD/M365の証拠ではない。
+- **固定PAD→実AiCallのタイムアウト検証PASS**。`.work/gate1-timeout-recorded-173b32b027454db0b426cae231f87508/`、job `cc2f5ab033ba44178c5882cbd188c240`。実行ボタン1回、制御戻り値 `failed/AICALL_timeout`、子結果 `failed/timeout`、入力1/出力0、開始ID一致、成功本文・後続成果物・完了マーカーなし。元Mainへ貼戻し/保存各1回・復元時実行0、owner/既存ファイル/既存ページ/クリップボード保全成功。期限は5秒で**Copilot送信予約前**に切れており、送信後の回答待ちタイムアウトと称しない。
+- 直前の `.work/gate1-focused-d147709b24504929b00e19503480b345/` は同じ子timeoutと後続停止、Main/ファイル保全を確認したが、クリップボード例外で制御戻り値保存・クリップボード復元が未確認となりpartial。読取専用の `postrun-verification.json` は `AICALL_timeout`、開始ID一致、成果物なし、Main ready/error0を確認。元resultを書き換えていない。後続helperでは制御戻り値をクリップボード診断より前に保存した。クリップボード例外の根本原因は未確定。
+- PAD335の再検査を実機helperと重ねた1回は、実機側が保持する名前付きmutexとの競合でbusyゲートのアサートに失敗した。実機helper終了後の単独再実行は335 PASS。これ以降、PADテストと実機PAD検証を並行しない。
+
+## 20:16 JSTの再開情報（履歴）
 
 - 作業ソースと通常配布App SHAは `f9391133d2c52239de68a96d4f3a4a03b060f10967069d95ea2dab38c1474e45`。通常server PID356 / port60007 / start UTC `2026-09-06T11:08:31.5979449Z`。releaseは `0.1.0-57bf89e2c02486df7bca084fc6e77df4d7262a56a471e4ad15e1ab5ff36901c3`。通常更新 `5cdd478fea9c411284b1095796a8b54d` はPASS。
 - Planner V2は **1つの物理フェンス内のメタデータ/Robinの2セクション** を既定出力にした。明示マーカーで分離し、旧2フェンスの読取りも維持。AiCallはV1のまま。単一フェンスの実長文検証 `bb4d6143aec74b3f872b6232dd94bdfd` は7794文字・26行・空行1・24 Writeの完全一致、独立2読取り・保全成功、送信1/PAD0。result SHA `c1614af19c3cefe75ac29114af3e68bf100a41f26ca70657a0a098eb8bf3a17f`。

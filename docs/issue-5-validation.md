@@ -2,6 +2,24 @@
 
 2026-09-06 / 状態: **partial — 実機ゲート未完了**。
 
+同日21:48 JST、固定の実PAD→実AiCall子プロセスに対するプロバイダー境界の障害注入3ケースはすべてPASS。fixture Appは製品a743版の `Invoke-AgentCopilot` 関数だけを置換したもの（SHA `a94cc02cb136f723a6da32b67b0e78564d56ad79c0ac2327938185c453cb2600`）。子PID/Appパス/要求IDのboundary-hit記録を確認し、実M365送信予約なし。実M365自体の拒否/空回答発生とは区別する。
+
+| ケース | 実制御戻り値 | result.json SHA256 |
+|---|---|---|
+| refusal | failed / AICALL_refusal | de5183b91ef549a236aa809bb4e5ff75ab7821eff5f3ad20da103b121a2490c5 |
+| empty | failed / AICALL_empty_result | 9f3ea0d94dd9458ccdc12b34aa06fdaf4a47961ecd88e8ab712270731da11501 |
+| cancelled | cancelled / CANCELLED | 6cfb12e59926cdd7a472e4ab9106eebe5002f334afa2b85470260339b0627d6d |
+
+証拠は `.work/gate1-pad-provider-5c7e819ae3cb43a0bcafcd6340c46a38/<ケース>/`。全ケースPAD実行1回、開始ID一致、子の入力1/出力0、成功本文・後続成果物・完了マーカーなし。中止ケースは子の応答時に中止ファイルを作成し、PAD停止操作1回・子結果cancelledを確認。元Main貼戻し/保存各1回・復元時実行0、owner/既存ファイル/既存ページ/クリップボード保全成功。native Save失敗、送信後期限/中止、別利用者・社内PCの受入は残る。
+
+同日21:42 JST、App `a743aecc068eaeec9a081e41e0a78a0c6bea0ca1d8aceea6f6ffbf638662f0cf` の固定PAD→実AiCallタイムアウトはPASS。session `.work/gate1-timeout-recorded-173b32b027454db0b426cae231f87508/`、result SHA `3777d6ce9bc377d398790968807710b632a2e2e503fb806e8ee2b1f1e7aebd97`。PAD実行1回、子結果failed/timeout、制御戻り値failed/AICALL_timeout、開始ID一致、成功本文・成果物・完了マーカーなし。元Main復元と保存各1回、復元時実行0、既存ファイル・ページ・owner・クリップボード保全PASS。5秒の期限はCopilot送信予約前に切れており、送信後の回答待ち期限の証拠ではない。
+
+今回の製品差分は、PAD全文コピーを一度だけ要求し2秒以内で非空の結果を観測すること、中止確認、Planner指示に残ったsecond fence表記の訂正。core147/PAD335 PASS。PAD335を実機helperと同時に動かした1回は名前付きmutex競合で失敗し、helper終了後の単独再実行でPASS。実機検証とPADモック検査は直列にする。
+
+新しい `Test-AiCallProviderFailure.ps1` は実PS5子プロセス内のプロバイダー関数だけを差し替え、拒否・空回答・期限・応答時中止の21件PASS。その他の製品ソースの同一性をAST差し戻しで確認。`.work/aicall-provider-fault-36663711ffe4491287597127c959988d/validation.json`。このテスト単体はPAD/M365を動かさない。
+
+先行session `.work/gate1-focused-d147709b24504929b00e19503480b345/` は、子timeout・後続停止・元Main/ファイル保全を確認したものの、クリップボード例外で制御戻り値保存とクリップボード復元が未確認となりpartial。別の読取り専用記録はAICALL_timeout、開始ID一致、出力なし、Main ready/error0を確認した。元resultは変更していない。後続helperは制御戻り値を任意のクリップボード診断より先に保存する。クリップボード例外の根本原因は未確定。
+
 同日20:16 JST、最新App `f9391133d2c52239de68a96d4f3a4a03b060f10967069d95ea2dab38c1474e45` の実V2分類通し検証は **PASS**。session `ee182d3e0c9c4e73a2be8cfa43a6cf93` / job `6e8eea67fc004355b13e76f7d8016c1a`。実HTML開始1/HTTP200→単一フェンスV2 ACT→生成PAD内V1 AiCall分類review→IF分岐/下書き→実観測を受けた異なるV2 ACT→PAD2回目→V2 DONEを確認。開始/終了マーカー・各run/call ID、4応答の独立2読戻し、ファイル/owner/全タブ/attempt帰属の保全、worker終了、UI完了一致がすべて合格。result SHA `877c11492e2473fd79194c074fee392f8e786c13dbd963df5a6fa832ba864a16`。証拠は `.work/fitted-d08798810a234ce0af71690cbf310519/classification/classify-sessions/ee182d3e0c9c4e73a2be8cfa43a6cf93/`。
 
 最終 `final-review.txt` は83バイト/SHA `271fe047a97061f8eb4f3f2fd9a14d99973059fed1714a4256272da4ce2b4a5d`。入力は会議室が未定と明記するためreview分岐が妥当。下書きと最終ファイルは同一hash、normal側の出力は0。入力80バイトとの差はUTF-8 BOMだけで、UTF-8読取り後は末尾LFも含めてOrdinal完全一致した。完了画面 `complete-ui-full.png`（SHA `e29a54fc4bd5a98bf2041cb80dc32cb7dbc55dd99b6df45a54a0b247b16e0f33`）を目視し、完了/停止無効/最終回答/成果物パスを確認。`semantic-visual-review.json` と検証済み出力コピーを同sessionに保存。
