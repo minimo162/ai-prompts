@@ -2,6 +2,8 @@
 
 2026-09-06 / 状態: **partial — 実機ゲート未完了**。
 
+クリップボード修正後の[新ドラフトRelease](https://github.com/minimo162/ai-prompts/releases/tag/untagged-d8380db053eaf8b812c5) はsource `8fdb972` / App227版。ZIP SHA `40a83cf12b6abaf03873cf5a0bc72d2daf85cd7a6627b52a2a80abdf2511fcec`。GitHubから全添付を再ダウンロードし、原本およびZIP内3entryのSHA一致を確認。`.work/distributions/issue-5-poc-8fdb972-23471a9ef8bb4134b5e412660ba5b5ec/github-upload-verification.json` に記録した。旧1c981c6候補を上書きせず、新候補を社内PC確認用に指定した。
+
 同日23:03 JST、クリップボードのIDataObjectを保持するだけでは内容を保存できない問題を修正。PAD操作なしの実Windows検査で、取得直後は元のテキストを返す参照が、置換後は返さず、Restoreが例外なしでも空テキストとなることを再現した（`.work/clipboard-repro-detail-fac8350aa3bd43b5852c0f0c249fa1dc/`）。全native形式を変更前に管理下のDataObjectへ取り込み、可変画像/配列/メモリストリームを複製する。読み取れない形式はPAD_CLIPBOARDで変更前に停止し、利用者の回答前の別ACTも抑止する。形式保持8件/core149/PAD335 PASS。実テキスト3回の置換/復元も完全一致、元の空状態への復元PASS（`.work/clipboard-fixed-61292234aee942f7b302772d58b9765e/`）。
 
 最終App227版でテキスト/RTF/2画素画像を持たせた実PAD固定WAIT 0検証はPASS。`.work/pad-rich-clipboard-ce67f7099f9c46a89243b435c82bb8a7/`、result SHA `a317a82977b5287c3c06bcecb82f746d683d70b3cfd485ae348cf052fe3ba8e6`。PAD1回、開始/完了ID一致、テキスト/RTF全文・画像寸法/両画素・native形式集合一致、元Main貼戻し/保存各1回・復元実行0、旧ファイル/ページ/owner/元クリップボード保全。Copilot呼出し0。この検証を227版の業務通し検証とは呼ばない。通常更新 `af949153771e478d89ce957e26da5018` もPASSし、App SHA `227257823937fb8e37af42e4c25056ccd57ef168b6f393fd379155b94e6daaf0`、server PID11660/port61953/start UTC `2026-09-06T13:59:16.1214896Z`、release `0.1.0-9b95b4da9d2be8b9bfb1a0b663da448323dea3452115d3a8d8fe2598f565f0c6` を確認した。

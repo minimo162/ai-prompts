@@ -4,6 +4,8 @@
 
 ## 23:03 JSTのクリップボード修正（最新）
 
+修正は `8fdb972` に保存してPR #7へpush済み。[社内PC確認用の新ドラフトRelease](https://github.com/minimo162/ai-prompts/releases/tag/untagged-d8380db053eaf8b812c5) に `AiPromptsAgent-0.1.0-8fdb972.zip`、manifest、`corporate-pc-check.md` を添付した。ZIP SHA `40a83cf12b6abaf03873cf5a0bc72d2daf85cd7a6627b52a2a80abdf2511fcec`。GitHubから全添付をダウンロードし直し、原本とZIP内3entryのSHA一致を確認。証拠は `.work/distributions/issue-5-poc-8fdb972-23471a9ef8bb4134b5e412660ba5b5ec/github-upload-verification.json`。社内PC確認には旧1c981c6候補を使わず、この修正版を使用する。社内PC結果の依頼は保留中で、新候補への読み替えを伝えた。
+
 空のクリップボードから始めるPAD操作なしの検査で、Windowsの取得済みIDataObjectが置換後に元テキストを返さず、Restoreが例外なしでも空になる不具合を再現した。`.work/clipboard-repro-detail-fac8350aa3bd43b5852c0f0c249fa1dc/result.json`（SHA `4454b3f33869084cd60fb30e311f5a0164bd05e614163b1b6a3b8650421f4f94`）。実行前が空だったため業務データは使っていない。元の失敗結果は保持する。
 
 `Get-AgentPadClipboard` は変更前に全native形式の内容を管理下のDataObjectへ取り込み、画像・配列・メモリストリームも複製する。空なら空のsnapshotを明示し、復元はClearする。取得できない形式を黙って落とさずPAD操作前に `PAD_CLIPBOARD` で停止し、利用者回答前の別ACTも抑止する。形式保持8件、core149/PAD335 PASS。実Windowsのテキスト置換/復元3回も完全一致し、最初の空状態へ戻った（`.work/clipboard-fixed-61292234aee942f7b302772d58b9765e/`）。
@@ -12,7 +14,7 @@
 
 通常更新 `af949153771e478d89ce957e26da5018` はPASS。現cache release `0.1.0-9b95b4da9d2be8b9bfb1a0b663da448323dea3452115d3a8d8fe2598f565f0c6`、server PID11660 / port61953 / start UTC `2026-09-06T13:59:16.1214896Z`。ownerは7093/Main比較b5e7を保持。以下の45f配布候補はこの修正前の履歴で、社内確認には修正を含む新候補を使う。
 
-## GitHubでの引き継ぎ（今回の最新）
+## GitHubでの引き継ぎ（45f版の履歴）
 
 - 作業ブランチをpushし、[ドラフトPR #7](https://github.com/minimo162/ai-prompts/pull/7) を作成した。mainへのマージはしていない。GitHub Actionsは未設定で、PRのcheck一覧は空。
 - [社内PC確認用のドラフトRelease](https://github.com/minimo162/ai-prompts/releases/tag/untagged-9f3591bbed1fcc24cfb2) に、`AiPromptsAgent-0.1.0-1c981c6.zip`、`manifest.json`、`corporate-pc-check.md` を添付した。対象コミットは `1c981c6dd53d75b2c8f11659c0364820fb0cf349`、Appは通常配布済み45f版。正式公開・受入完了とは扱わない。
