@@ -942,6 +942,119 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
       check(response.state.assistants[0].source_kind, 'rendered', 'Reject an incomplete or unmeasured capped state: ' + label);
     }
 
+    // The 2026-09-06 two-fence observation (d1d3bb...) contains 139 nodes:
+    // one shared wrapper alternating code-block divs and one exact LF text node.
+    // Payloads below are synthetic. Saved live evidence is never a fixture input.
+    const partRows = (data, index, total) => [
+      'AGENT_PART_V1 ' + requestId + ' ' + index + ' ' + total,
+      'AGENT_DATA ' + data,
+      'AGENT_PART_END_V1 ' + requestId + ' ' + index + ' ' + total,
+      ...(index === total ? [marker] : [])
+    ];
+    const multipartReply = (frames, key = 'parts-fixture') => {
+      const first = fencedRows(frames[0], key);
+      const offset = first.indexOf('<div class="fenced-inner">');
+      return first.slice(0, offset) + frames.map(rows => {
+        const reply = fencedRows(rows);
+        return reply.slice(reply.indexOf('<div class="fenced-inner">'), -12);
+      }).join('\n') + '</div></div>';
+    };
+    const splitAt = fencedJson.indexOf('\\') + 1;
+    const twoParts = [partRows(fencedJson.slice(0, splitAt), 1, 2), partRows(fencedJson.slice(splitAt), 2, 2)];
+    const expectedParts = (frames, collapsed = false) => ({ key: 'parts-fixture', text: '', source_kind: 'fenced_parts', collapsed, frames: frames.map(rows => rows.join('\n')) });
+    response = await renderFenced(multipartReply(twoParts));
+    check(response.state.assistants, [expectedParts(twoParts)], 'Capture both exact frames in one owned assistant without joining their payloads');
+    const multipartShape = await page.locator('.fenced-reply').evaluate(root => {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_ALL);
+      let nodes = 1; while (walker.nextNode()) nodes++;
+      return { nodes, wrappers: [...root.firstChild.childNodes].map(node => node.nodeType === 3 ? ['text', node.nodeValue] : ['element', node.tagName, node.childNodes.length]), rows: [...root.querySelectorAll('.code-editor')].map(editor => editor.childNodes.length / 2) };
+    });
+    check(multipartShape, { nodes: 139, wrappers: [['element', 'DIV', 1], ['text', '\n'], ['element', 'DIV', 1]], rows: [3, 4] }, 'Reproduce all measured multipart parent nodes and direct row counts');
+    check(response.state.assistants[0].frames.map(frame => frame.split('\n')[1].slice(11)).join(''), fencedJson, 'Raw fragments may split a JSON escape and rejoin with no inserted separator');
+    check(response.state.assistants[0].frames[0].endsWith(' 1 2'), true, 'The nonfinal frame retains its own footer without synthesizing an end marker');
+    for (const count of [1, 3, 256]) {
+      const frames = Array.from({ length: count }, (_, index) => partRows('日本語' + index, index + 1, count));
+      response = await renderFenced(multipartReply(frames));
+      check(response.state.assistants, [expectedParts(frames)], 'Capture every owned bounded part for count ' + count);
+    }
+    const tooManyParts = Array.from({ length: 257 }, (_, index) => partRows('x', index + 1, 257));
+    response = await renderFenced(multipartReply(tooManyParts));
+    check(response.state.assistants[0].source_kind, 'rendered', 'Reject more than 256 DOM blocks before parsing their contents');
+    response = await renderFenced(multipartReply(twoParts), () => {
+      const wrapper = document.querySelector('.fenced-wrapper');
+      wrapper.replaceChildren(wrapper.lastChild, wrapper.childNodes[1], wrapper.firstChild);
+    });
+    check(response.state.assistants[0].source_kind, 'rendered', 'The actual DOM order must leave the final marker in the last block; never sort parts');
+    const nbspParts = twoParts.map(rows => [...rows, '\u00a0']);
+    response = await renderFenced(multipartReply(nbspParts));
+    check(response.state.assistants, [expectedParts(twoParts)], 'Omit exactly one measured structural terminal NBSP row in each frame');
+    const payloadNbspParts = [partRows(' \u00a0日本語  \u00a0', 1, 2), partRows('\u00a0 末尾 \u00a0 ', 2, 2)];
+    response = await renderFenced(multipartReply(payloadNbspParts.map(rows => [...rows, '\u00a0'])));
+    check(response.state.assistants, [expectedParts(payloadNbspParts)], 'Preserve every DATA payload space and NBSP while dropping only separate structural tails');
+
+    const foldedParts = [partRows('文'.repeat(4096), 1, 2), partRows('字'.repeat(4096), 2, 2)];
+    response = await renderFolded(multipartReply(foldedParts));
+    check(response.state.assistants, [expectedParts(foldedParts, true)], 'Complete bounded folded frames expose all direct rows with their collapsed state recorded');
+    response = await renderFolded(multipartReply(foldedParts.map(rows => [...rows, '\u00a0'])));
+    check(response.state.assistants, [expectedParts(foldedParts, true)], 'Folded frame completeness includes each observed trailing NBSP row');
+    await assert.rejects(() => page.evaluate(expandExpression('parts-fixture', foldedParts[1].join('\n'), requestId)), error => error.message.includes('expand unavailable'), 'Multipart frames never authorize the legacy More operation');
+    checks++;
+
+    for (const [label, setup, css] of [
+      ['separator missing', () => document.querySelector('.fenced-wrapper').childNodes[1].remove()],
+      ['separator is two LF', () => { document.querySelector('.fenced-wrapper').childNodes[1].nodeValue = '\n\n'; }],
+      ['separator is ordinary space', () => { document.querySelector('.fenced-wrapper').childNodes[1].nodeValue = ' '; }],
+      ['separator is CRLF', () => { document.querySelector('.fenced-wrapper').childNodes[1].nodeValue = '\r\n'; }],
+      ['separator is NBSP', () => { document.querySelector('.fenced-wrapper').childNodes[1].nodeValue = '\u00a0'; }],
+      ['separator comment', () => document.querySelector('.fenced-wrapper').childNodes[1].replaceWith(document.createComment('unknown'))],
+      ['separator element', () => { const span = document.createElement('span'); span.textContent = '\n'; document.querySelector('.fenced-wrapper').childNodes[1].replaceWith(span); }],
+      ['interleaved explanation', () => { document.querySelector('.fenced-wrapper').childNodes[1].nodeValue += 'explanation'; }],
+      ['root unowned hidden text', () => { const span = document.createElement('span'); span.hidden = true; span.textContent = 'unknown'; document.querySelector('.fenced-reply').appendChild(span); }],
+      ['wrapper leading LF', () => document.querySelector('.fenced-wrapper').prepend(document.createTextNode('\n'))],
+      ['wrapper trailing LF', () => document.querySelector('.fenced-wrapper').append(document.createTextNode('\n'))],
+      ['second block unknown attribute', () => document.querySelectorAll('.fenced-inner')[1].setAttribute('title', 'unknown')],
+      ['second block extra child', () => document.querySelectorAll('.fenced-inner')[1].appendChild(document.createComment('unknown'))],
+      ['second block unknown language', () => { document.querySelectorAll('.badge-text')[1].firstChild.nodeValue = 'JavaScript'; }],
+      ['second block missing footer pair', () => { const row = document.querySelectorAll('.code-editor')[1].querySelector('[data-line-index="2"]'); row.previousSibling.remove(); row.remove(); }],
+      ['second block missing marker pair', () => { const row = document.querySelectorAll('.code-editor')[1].querySelector('[data-line-index="3"]'); row.previousSibling.remove(); row.remove(); }],
+      ['second block wrong index', () => document.querySelectorAll('.code-editor')[1].querySelector('[data-line-index="1"]').setAttribute('data-line-index', '0')],
+      ['second block wrong gutter', () => { document.querySelectorAll('.code-editor')[1].firstChild.firstChild.nodeValue = '2'; }],
+      ['second block wrapped data', () => { const row = document.querySelectorAll('.code-editor')[1].querySelector('[data-line-index="1"]'); const span = document.createElement('span'); span.textContent = row.textContent; row.replaceChildren(span); }],
+      ['second block split text', () => document.querySelectorAll('.code-editor')[1].querySelector('[data-line-index="1"]').firstChild.splitText(12)],
+      ['second block hidden line', null, '.fenced-inner:last-child .code-line{visibility:hidden!important}'],
+      ['second block transparent', null, '.fenced-inner:last-child{opacity:0!important}'],
+      ['second block content visibility auto', null, '.fenced-inner:last-child{content-visibility:auto!important}'],
+      ['second block hidden More but clipped', null, '.fenced-inner:last-child .code-editor{height:20px}'],
+      ['second block horizontal overflow', null, '.fenced-inner:last-child .code-line{min-width:1000px}'],
+      ['second block transformed', null, '.fenced-inner:last-child .code-editor{transform:scale(.9)}']
+    ]) {
+      response = await renderFenced(multipartReply(twoParts), setup, css || '');
+      check(response.state.assistants[0].source_kind, 'rendered', 'Reject incomplete or unowned multipart DOM: ' + label);
+    }
+    for (const [label, frames] of [
+      ['nonframed block', [twoParts[0], [fencedJson, marker]]],
+      ['empty DATA', [partRows('', 1, 1)]],
+      ['oversized DATA', [partRows('x'.repeat(4097), 1, 1)]],
+      ['missing DATA prefix', [twoParts[0], twoParts[1].map((row, i) => i === 1 ? row.slice(11) : row)]],
+      ['missing footer', [twoParts[0], twoParts[1].filter((row, i) => i !== 2)]],
+      ['unknown fifth row', [twoParts[0], [...twoParts[1], 'extra']]],
+      ['two terminal NBSP rows', [twoParts[0], [...twoParts[1], '\u00a0', '\u00a0']]],
+      ['ordinary trailing space row', [twoParts[0], [...twoParts[1], ' ']]],
+      ['unknown marker line', [twoParts[0], twoParts[1].map((row, i) => i === 3 ? 'not marker' : row)]]
+    ]) {
+      response = await renderFenced(multipartReply(frames));
+      check(response.state.assistants[0].source_kind, 'rendered', 'Reject incomplete multipart carrier rows before protocol parsing: ' + label);
+    }
+    for (const [label, setup, css] of [
+      ['scrolled content', () => { document.querySelectorAll('.code-editor')[1].scrollTop = 30; }],
+      ['detached footer', () => document.querySelectorAll('.code-editor')[1].querySelector('[data-line-index="2"]').remove()],
+      ['last row outside content', null, '.fenced-inner:last-child [data-line-index="3"]{position:fixed;top:100000px}'],
+      ['DATA too long', () => { document.querySelectorAll('.code-editor')[1].querySelector('[data-line-index="1"]').firstChild.nodeValue += 'x'; }],
+      ['unknown label', () => document.querySelectorAll('.more-button')[1].setAttribute('aria-label', 'More')]
+    ]) {
+      response = await renderFolded(multipartReply(foldedParts), setup, css || '');
+      check(response.state.assistants[0].source_kind, 'rendered', 'Complete-folded exemption remains bounded: ' + label);
+    }
     for (const [url, message] of [
       ['http://m365.cloud.microsoft/chat/', 'untrusted page'],
       ['https://m365.cloud.microsoft.evil.test/chat/', 'untrusted page'],

@@ -5,7 +5,7 @@ $parseErrors=$null
 $ast=[Management.Automation.Language.Parser]::ParseFile([IO.Path]::GetFullPath($SourcePath),[ref]$null,[ref]$parseErrors)
 if ($parseErrors.Count -gt 0) { throw ('PowerShell parse errors: '+$parseErrors.Count) }
 # Load definitions only, never the server/launcher top-level code.
-$wanted=@('Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','Get-AgentCopilotConfig','Test-AgentCopilotUrl','Test-AgentCopilotAuthUrl','Test-AgentEdgeCommandLine','Test-AgentCopilotSocketUrl','Read-AgentJsonToken','Test-AgentStrictJson','ConvertFrom-AgentCopilotResponse','Assert-AgentCopilotWait','Enter-AgentCopilotMutex','Get-AgentCopilotAttemptPath','Reserve-AgentCopilotAttempt','Test-AgentCopilotTargetRecord','Write-AgentCopilotTargetRecord','Get-AgentCopilotTarget','Assert-AgentCopilotJobBaseline','Set-AgentCopilotJobSendStarted','Wait-AgentCopilotInputReady','Invoke-AgentCopilotExpand','Invoke-AgentCopilot','Get-AgentCopilotDomPrelude','Close-AgentCopilotLaunchTab','Open-AgentCopilot')
+$wanted=@('Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','Get-AgentCopilotConfig','Test-AgentCopilotUrl','Test-AgentCopilotAuthUrl','Test-AgentEdgeCommandLine','Test-AgentCopilotSocketUrl','Read-AgentJsonToken','Test-AgentStrictJson','ConvertFrom-AgentCopilotResponse','ConvertFrom-AgentCopilotParts','Assert-AgentCopilotWait','Enter-AgentCopilotMutex','Get-AgentCopilotAttemptPath','Reserve-AgentCopilotAttempt','Test-AgentCopilotTargetRecord','Write-AgentCopilotTargetRecord','Get-AgentCopilotTarget','Assert-AgentCopilotJobBaseline','Set-AgentCopilotJobSendStarted','Wait-AgentCopilotInputReady','Invoke-AgentCopilotExpand','Invoke-AgentCopilot','Get-AgentCopilotDomPrelude','Close-AgentCopilotLaunchTab','Open-AgentCopilot')
 foreach($name in $wanted){
     $definition=@($ast.FindAll({param($n) $n -is [Management.Automation.Language.FunctionDefinitionAst]},$false) | Where-Object Name -eq $name)
     if($definition.Count -ne 1){throw ('Missing or duplicate function: '+$name)}
@@ -46,6 +46,77 @@ foreach($json in @('{"request_id":"r1"}','{"items":[0,-1,1.5,1e+2,true,false,nul
 foreach($json in @('{"x":1,}','[1,]','{"x":01}','{"x":NaN}','{"x":1} trailing','{"x":1} {"y":2}','{"x":1,"x":2}','{"x":1,"\u0078":2}','{"x":"bad\q"}','{"x":"unterminated}','{"x":/* comment */1}','{"x":[1 2]}')){
     Assert-Case (-not (Test-AgentStrictJson $json)) ('Invalid JSON: '+$json)
 }
+# The carrier is a sequence of raw UTF-16 string slices, not another JSON envelope.
+function New-TestPartFrames([string[]]$Payloads,[string]$RequestId){
+    for($i=0;$i -lt $Payloads.Count;$i++){
+        $metadata=$RequestId+' '+($i+1)+' '+$Payloads.Count
+        $frame='AGENT_PART_V1 '+$metadata+"`nAGENT_DATA "+$Payloads[$i]+"`nAGENT_PART_END_V1 "+$metadata
+        if($i -eq ($Payloads.Count-1)){$frame+="`nAGENT_END_"+$RequestId}
+        $frame
+    }
+}
+function New-TestParts([string]$Json,[string]$RequestId,[int]$Width=4096){
+    $payloads=@();$offset=0
+    while($offset -lt $Json.Length){
+        $take=[Math]::Min($Width,$Json.Length-$offset)
+        if([char]::IsHighSurrogate($Json[$offset+$take-1])){$take--}
+        if($take -lt 1){throw 'Invalid test fragment width.'}
+        $payloads+=,$Json.Substring($offset,$take);$offset+=$take
+    }
+    New-TestPartFrames $payloads $RequestId
+}
+$partValue="  日本語 `"引用`" O'Brien C:\path\raw %FileContents% literal\n`r`n`r`n  "+[char]::ConvertFromUtf32(0x1f642)
+$partJson=([ordered]@{request_id='r-parts';robin=($partValue*220)}|ConvertTo-Json -Compress)
+$partFrames=@(New-TestParts $partJson 'r-parts')
+Assert-Case ($partJson.Length -gt 10000 -and $partFrames.Count -ge 3) 'One long JSON string exceeds the observed 10000-character DOM row limit across three or more parts'
+$partActual=ConvertFrom-AgentCopilotParts $partFrames 'r-parts'
+Assert-Case ([string]::Equals($partActual,$partJson,[StringComparison]::Ordinal) -and [string]::Equals(($partActual|ConvertFrom-Json).robin,($partValue*220),[StringComparison]::Ordinal)) 'Parts preserve exact JSON and Japanese, quotes, backslashes, percent, blank lines, spaces and emoji in the decoded string'
+$escapeJson='{"request_id":"r-escape","value":"  C:\\raw\n\"日本語\"  "}'
+foreach($boundary in @(($escapeJson.IndexOf('\\')+1),($escapeJson.IndexOf('\n')+1),($escapeJson.IndexOf('\"')+1))){
+    $frames=@(New-TestPartFrames @($escapeJson.Substring(0,$boundary),$escapeJson.Substring($boundary)) 'r-escape')
+    Assert-Case ([string]::Equals((ConvertFrom-AgentCopilotParts $frames 'r-escape'),$escapeJson,[StringComparison]::Ordinal)) 'Raw escape sequence can cross a part boundary without added escaping or repair'
+}
+$singleJson='{"request_id":"r-single","value":"  keep spaces  "}'
+$singleFrames=@(New-TestParts $singleJson 'r-single')
+Assert-Case ((ConvertFrom-AgentCopilotParts $singleFrames 'r-single') -ceq $singleJson -and $singleFrames.Count -eq 1) 'One framed part uses the same grammar and preserves value whitespace'
+$countJson='{"request_id":"r-count","value":"'+('a'*(256-('{"request_id":"r-count","value":""}').Length))+'"}'
+Assert-Case ($countJson.Length -eq 256) 'Maximum part-count fixture contains exactly 256 raw characters'
+$countFrames=@(New-TestParts $countJson 'r-count' 1)
+Assert-Case ((ConvertFrom-AgentCopilotParts $countFrames 'r-count') -ceq $countJson -and $countFrames.Count -eq 256) 'Canonical part indices support the explicit upper bound of 256'
+foreach($failure in @('missing','duplicate','reverse','wrong_total','wrong_index','leading_zero','missing_end','early_end','wrong_id','wrong_footer','bad_json','extra_row','crlf','double_space','empty_data','oversized_data','surrogate','surrogate_boundary','null_frame','nonstring','too_many','trailing_nbsp','leading_json_space')){
+    $frames=@($partFrames);$request='r-parts'
+    switch($failure){
+        'missing' {$frames=@($frames[1..($frames.Count-1)])}
+        'duplicate' {$frames[1]=$frames[0]}
+        'reverse' {[array]::Reverse($frames)}
+        'wrong_total' {$frames[0]=$frames[0].Replace(' 1 '+$frames.Count,' 1 1')}
+        'wrong_index' {$frames[0]=$frames[0].Replace(' 1 '+$frames.Count,' 2 '+$frames.Count)}
+        'leading_zero' {$frames[0]=$frames[0].Replace(' 1 '+$frames.Count,' 01 '+$frames.Count)}
+        'missing_end' {$frames[-1]=$frames[-1].Replace("`nAGENT_END_r-parts",'')}
+        'early_end' {$frames[0]+="`nAGENT_END_r-parts"}
+        'wrong_id' {$frames[0]=$frames[0].Replace('r-parts','r-other')}
+        'wrong_footer' {$frames[0]=$frames[0].Replace('AGENT_PART_END_V1 r-parts','AGENT_PART_END_V1 r-other')}
+        'bad_json' {$frames=@(New-TestPartFrames @('{"request_id":"r-parts","x":}') $request)}
+        'extra_row' {$frames[0]+="`nextra"}
+        'crlf' {$frames[0]=$frames[0].Replace("`n","`r`n")}
+        'double_space' {$frames[0]=$frames[0].Replace('AGENT_PART_V1 ','AGENT_PART_V1  ')}
+        'empty_data' {$frames=@(New-TestPartFrames @('') $request)}
+        'oversized_data' {$frames=@(New-TestPartFrames @(('a'*4097)) $request)}
+        'surrogate' {$frames=@(New-TestPartFrames @('{"request_id":"r-parts","x":"'+[char]0xd800+'"}') $request)}
+        'surrogate_boundary' {$frames=@(New-TestPartFrames @('{"request_id":"r-parts","x":"'+[char]0xd83d,[string][char]0xde42+'"}') $request)}
+        'null_frame' {$frames[0]=$null}
+        'nonstring' {$frames[0]=123}
+        'too_many' {$frames=@('x')*257}
+        'trailing_nbsp' {$frames[-1]+="`n"+[char]0x00a0}
+        'leading_json_space' {$frames=@(New-TestPartFrames @(' '+$singleJson.Replace('r-single','r-parts')) $request)}
+    }
+    Assert-Rejected {ConvertFrom-AgentCopilotParts $frames $request} 'RESPONSE_INVALID' ('Strict parts reject '+$failure+' without normalization')
+}
+Assert-Rejected {ConvertFrom-AgentCopilotParts @() 'r-parts'} 'RESPONSE_INVALID' 'Empty frame sequence is not a complete answer'
+Assert-Rejected {ConvertFrom-AgentCopilotParts $singleFrames "r-single`n"} 'RESPONSE_INVALID' 'Request ID cannot include a terminal LF'
+$partsDefinition=@($ast.FindAll({param($n)$n -is [Management.Automation.Language.FunctionDefinitionAst]},$false)|Where-Object Name -eq 'ConvertFrom-AgentCopilotParts')[0].Extent.Text
+Assert-Case ($partsDefinition.Contains("`$observedEnd = `$match.Groups['end'].Value") -and $partsDefinition.Contains('($json+$observedEnd)') -and -not $partsDefinition.Contains('($json+"`nAGENT_END_"+$RequestId)')) 'Parser passes the observed final marker into strict JSON validation without manufacturing one'
+
 $json = '{"request_id":"r1","robin":"SET Path TO $''C:\\folder\\file.txt''\nSET Percent TO 100%","data":"日本語、空白  2つ"}'
 $complete=$json+"`nAGENT_END_r1"
 $actual=ConvertFrom-AgentCopilotResponse $complete 'r1'
@@ -101,6 +172,10 @@ $longFramed="`r`n  "+$longJson+"`r`nAGENT_END_r-long-robin`r`n`t"
 $longActualJson=ConvertFrom-AgentCopilotResponse $longFramed 'r-long-robin'
 $longDecoded=ConvertFrom-Json -InputObject $longActualJson
 Assert-Case ([string]::Equals([string]$longDecoded.robin,$longRobin,[StringComparison]::Ordinal)) 'Long complete Robin response is decoded without truncation'
+$longParts=@(New-TestParts $longJson 'r-long-robin')
+$longPartsDecoded=(ConvertFrom-AgentCopilotParts $longParts 'r-long-robin')|ConvertFrom-Json
+Assert-Case ([string]::Equals($longPartsDecoded.robin,$longRobin,[StringComparison]::Ordinal) -and $longParts.Count -ge 10 -and @(Test-AgentRobin -Robin $longPartsDecoded.robin -RunDirectory $robinRun -Job $robinJob).Count -eq $longWriteCount) 'Framed long response restores the complete production-valid Robin with more than ten direct rows'
+
 $rowRobin=@($longRobinLines | Select-Object -First 25) -join "`r`n"
 $rowOutputs=@(Test-AgentRobin -Robin $rowRobin -RunDirectory $robinRun -Job $robinJob)
 $rowMessage='original 日本語 "引用" O''Brien C:\path\raw %FileContents% literal\n ' * 90
@@ -220,10 +295,10 @@ try{
     function Invoke-AgentCopilotCdp {param($Socket,$Method,$Params,$CancelPath,$Deadline);if($Method -ceq 'Input.insertText'){$script:mockInput=$Params.text}}
     function Invoke-AgentCopilotEval {param($Socket,$Expression,$CancelPath,$Deadline);if($Expression.Contains('sends[0].click()')){throw 'CDP_UNAVAILABLE: Simulated uncertain send.'};return $true}
     Assert-Rejected {Invoke-AgentCopilot -Prompt 'Test request' -RequestId 'r-uncertain' -JobId ('f'*32) -Settings @{} -HomePath $jobTemp -TimeoutSeconds 5} 'CDP_UNAVAILABLE' 'Uncertain first send fails without retry'
-    Assert-Case ($script:mockInput.StartsWith("Test request`n`n") -and $script:mockInput.Contains('応答全体は言語ラベル text のコードフェンス1個だけにしてください。') -and $script:mockInput.Contains('JSON はプロパティや配列要素ごとに短い行へ整形し、書式用の空行は入れないでください。')) 'Actual inserted wire prompt requires one text fence with short JSON formatting rows and no blank rows'
-    Assert-Case ($script:mockInput.Contains('request_id は "r-uncertain"') -and $script:mockInput.Contains('JSON の文字列値は分割せず、文字列内の改行・引用符・バックスラッシュは JSON の規則でエスケープしてください。')) 'Actual inserted wire prompt binds JSON to this request while keeping each complete string value intact'
-    Assert-Case ($script:mockInput.Contains('JSON の後の最終行: AGENT_END_r-uncertain だけを出力してください。') -and $script:mockInput -notmatch '厳密に2行|内部の第1行|内部の第2行') 'Actual inserted wire prompt places only the current nonce after all JSON rows without the old two-row constraint'
-    Assert-Case ($script:mockInput.Contains('フェンスの外に前置き、説明、別のコードや文字を一切付けないでください。') -and $script:mockInput.Contains('JSON のエスケープ以外に Markdown 用の手作業エスケープを追加しないでください。') -and $script:mockInput -notmatch 'JSON オブジェクトだけを 1 行で返してください|Return only JSON|Return exactly one JSON object|ほかの文字、Markdown、コードフェンス') 'Actual inserted wire prompt forbids outer text and additional Markdown escaping without contradicting fenced transport'
+    Assert-Case ($script:mockInput.StartsWith("Test request`n`n") -and $script:mockInput.Contains('コンパクト JSON') -and $script:mockInput.Contains('1個以上256個以下')) 'Wire prompt requires bounded compact JSON transport parts'
+    Assert-Case ($script:mockInput.Contains('request_id は "r-uncertain"') -and $script:mockInput.Contains('AGENT_PART_V1 r-uncertain i N') -and $script:mockInput.Contains('AGENT_PART_END_V1 r-uncertain i N')) 'Wire prompt binds both part headers and footers to this request'
+    Assert-Case ($script:mockInput.Contains('第2行 AGENT_DATA にASCIIスペース1個') -and $script:mockInput.Contains('第4行 AGENT_END_r-uncertain') -and $script:mockInput.Contains('4096 UTF-16コード単位以下') -and $script:mockInput.Contains('サロゲートペアの途中で分割しない')) 'Wire prompt states exact carrier rows, final marker, UTF16 limit and Unicode boundary'
+    Assert-Case ($script:mockInput.Contains('元の文字を追加・削除・再エスケープしない') -and $script:mockInput.Contains('フェンスの外に前置き、説明、別のコードや文字を一切付けない') -and $script:mockInput -notmatch 'コードフェンス1個だけ|pretty-printed|文字列値は分割せず') 'Wire prompt prohibits repair and conflicting single-fence formatting'
     $uncertainConfig=Get-AgentCopilotConfig $jobTemp @{} ('f'*32)
     $uncertainRecord=[IO.File]::ReadAllText($uncertainConfig.TargetPath,[Text.Encoding]::UTF8)|ConvertFrom-Json
     Assert-Case (-not $uncertainRecord.has_sent -and [IO.File]::Exists((Get-AgentCopilotAttemptPath $jobTemp 'r-uncertain'))) 'Uncertain send preserves fresh-history guard and durable no-replay reservation'
@@ -314,7 +389,7 @@ try{
     Reset-TestReadiness;$script:nextTargetId='job-ready';$script:readyFocus.Enqueue($true);$script:readyFocus.Enqueue($true);$script:readyFocus.Enqueue($false)
     Assert-Rejected {Invoke-AgentCopilot -Prompt 'Test request' -RequestId 'r-ready-uncertain' -JobId ('7'*32) -Settings @{} -HomePath $jobTemp -TimeoutSeconds 30} 'CDP_UNAVAILABLE' 'Invocation tolerates pre-key busy but still fails an uncertain single send'
     Assert-Case ($script:readyKeyCalls -eq 4 -and $script:readyInsertCalls -eq 1 -and $script:readySendCalls -eq 1) 'Transient pre-key busy does not replay keys, insert or send'
-    Assert-Case ($script:readyInput.Contains('request_id は "r-ready-uncertain"') -and $script:readyInput.Contains('JSON の後の最終行: AGENT_END_r-ready-uncertain だけを出力してください。') -and -not $script:readyInput.Contains('AGENT_END_r-uncertain')) 'A separate actual invocation binds its multiline JSON and final marker to its own request nonce'
+    Assert-Case ($script:readyInput.Contains('request_id は "r-ready-uncertain"') -and $script:readyInput.Contains('第4行 AGENT_END_r-ready-uncertain') -and -not $script:readyInput.Contains('AGENT_END_r-uncertain')) 'A separate actual invocation binds its framed compact JSON and final marker to its own request nonce'
     Assert-Case (@($script:readyDeadlines | Select-Object -Unique).Count -eq 1 -and $script:readyFocusCalls -eq 7) 'All focus call sites share one preparation deadline including a busy recheck'
     Assert-Case ([IO.File]::Exists((Get-AgentCopilotAttemptPath $jobTemp 'r-ready-uncertain'))) 'Uncertain send after readiness retains the no-replay reservation'
     # The original input-appearance timeout is separate from focus preparation and stays AUTH_REQUIRED.
@@ -329,7 +404,7 @@ try{
         $script:responseInput='';$script:responseSent=$false
         $script:responseSends=0;$script:responseKeys=0;$script:responseInserts=0;$script:responseReads=0
         $script:responseExpansions=0;$script:responseExpansionAtRead=0;$script:responseExpandExpression='';$script:responseExpandMode='success'
-        $script:responseGenerating=$false;$script:responseHeldInput='';$script:responseCancelPath='';$script:responseCancelAtRead=0
+        $script:responseMutation=$null;$script:responseGenerating=$false;$script:responseHeldInput='';$script:responseCancelPath='';$script:responseCancelAtRead=0
         $script:nextTargetId='response-'+$script:responseJob
         $config=Get-AgentCopilotConfig $jobTemp @{} $script:responseJob
         $target=Get-AgentCopilotTarget $config -Create
@@ -339,7 +414,7 @@ try{
         param($Socket,$CancelPath,$Deadline)
         $shown=@($script:responseBaseline)
         if($script:responseSent){
-            $script:responseReads++;$shown+=@($script:responseCandidates)
+            $script:responseReads++;if($null -ne $script:responseMutation){& $script:responseMutation};$shown+=@($script:responseCandidates)
             if($script:responseCancelAtRead -eq $script:responseReads){[IO.File]::WriteAllText($script:responseCancelPath,'cancel')}
         }
         $inputValue=if($script:responseSent -and $script:responseHeldInput){$script:responseHeldInput}else{$script:responseInput}
@@ -377,6 +452,48 @@ try{
     Assert-Case ($script:responseReads -eq 3 -and $script:responseSends -eq 1 -and $script:responseKeys -eq 4 -and $script:responseInserts -eq 1) 'Fenced success requires three stable reads after exactly one input and send sequence'
     Assert-Rejected {Invoke-TestResponse} 'RESPONSE_INVALID' 'Successful fenced request ID cannot be replayed'
     Assert-Case ($script:responseSends -eq 1 -and $script:responseInserts -eq 1) 'Replay rejection performs no second insert or send'
+    function New-TestPartsCandidate([string]$RequestId,[int]$Width=4096){
+        $json=([ordered]@{request_id=$RequestId;value=("  日本語 `"引用`" C:\raw %FileContents%`r`n  "+[char]::ConvertFromUtf32(0x1f642))}|ConvertTo-Json -Compress)
+        return [pscustomobject]@{key='reply-'+$RequestId;text='';frames=@(New-TestParts $json $RequestId $Width);source_kind='fenced_parts';collapsed=$true}
+    }
+    $partsCandidate=New-TestPartsCandidate 'r-parts-folded' 30
+    $partsExpected=ConvertFrom-AgentCopilotParts $partsCandidate.frames 'r-parts-folded'
+    Reset-TestResponse 'r-parts-folded' @($partsCandidate)
+    Assert-Case ([string]::Equals((Invoke-TestResponse),$partsExpected,[StringComparison]::Ordinal)) 'Production loop accepts only complete known folded carrier frames'
+    Assert-Case ($script:responseReads -eq 3 -and $script:responseExpansions -eq 0 -and $script:responseSends -eq 1 -and $script:responseInserts -eq 1) 'Framed folded success requires three stable reads, zero More and exactly one send'
+    Assert-Rejected {Invoke-TestResponse} 'RESPONSE_INVALID' 'Framed successful request is never resent'
+    $partsOld=New-TestPartsCandidate 'r-parts-baseline' 30
+    Reset-TestResponse 'r-parts-baseline' @() @($partsOld)
+    Assert-Rejected {Invoke-TestResponse} 'RESPONSE_INVALID' 'Current request nonce in past raw frames is rejected before send'
+    Assert-Case ($script:responseSends -eq 0 -and $script:responseInserts -eq 0) 'Past framed request causes no input or send'
+    $partsOld=New-TestPartsCandidate 'r-parts-old' 30
+    $partsNew=New-TestPartsCandidate 'r-parts-continued' 30
+    Reset-TestResponse 'r-parts-continued' @($partsNew) @($partsOld)
+    Assert-Case ((Invoke-TestResponse) -ceq (ConvertFrom-AgentCopilotParts $partsNew.frames 'r-parts-continued')) 'Empty text fields in past and new framed responses do not hide fresh framed data'
+    $partsNew=New-TestPartsCandidate 'r-parts-old-key' 30;$partsNew.key=$partsOld.key
+    Reset-TestResponse 'r-parts-old-key' @($partsNew) @($partsOld)
+    Assert-Rejected {Invoke-TestResponse} 'RESPONSE_TIMEOUT' 'Past response key is excluded even if its framed data changes'
+    Assert-Case ($script:responseExpansions -eq 0 -and $script:responseSends -eq 1) 'Past response never triggers a More or repeat send'
+    Reset-TestResponse 'r-parts-boundaries' @((New-TestPartsCandidate 'r-parts-boundaries' 30))
+    $script:responseMutation={if($script:responseReads -eq 3){$script:responseCandidates=@(New-TestPartsCandidate 'r-parts-boundaries' 31)}}
+    $null=Invoke-TestResponse
+    Assert-Case ($script:responseReads -eq 5 -and $script:responseExpansions -eq 0 -and $script:responseSends -eq 1) 'Same joined JSON with changed raw frame boundaries resets the required three stable reads'
+    Reset-TestResponse 'r-parts-key-change' @((New-TestPartsCandidate 'r-parts-key-change' 30))
+    $script:responseMutation={if($script:responseReads -eq 3){$script:responseCandidates[0].key='replacement-owned-reply'}}
+    $null=Invoke-TestResponse
+    Assert-Case ($script:responseReads -eq 5 -and $script:responseExpansions -eq 0) 'Changing the owned response key resets framed stability'
+    foreach($mode in @('missing_part','mixed_text','other_fresh','generating','input_present')){
+        $request='r-parts-loop-'+$mode;$candidate=New-TestPartsCandidate $request 30
+        Reset-TestResponse $request @($candidate)
+        if($mode -ceq 'missing_part'){$candidate.frames=@($candidate.frames[1..($candidate.frames.Count-1)])}
+        if($mode -ceq 'mixed_text'){$candidate.text='unexpected companion text'}
+        if($mode -ceq 'other_fresh'){$script:responseCandidates+=@([pscustomobject]@{key='extra-reply';text='unrelated new answer';source_kind='rendered';collapsed=$false})}
+        if($mode -ceq 'generating'){$script:responseGenerating=$true}
+        if($mode -ceq 'input_present'){$script:responseHeldInput='unsent draft'}
+        $prefix=if($mode -cin @('generating','input_present')){'RESPONSE_TIMEOUT'}else{'RESPONSE_INVALID'}
+        Assert-Rejected {Invoke-TestResponse} $prefix ('Production framed response refuses '+$mode)
+        Assert-Case ($script:responseExpansions -eq 0 -and $script:responseSends -eq 1 -and $script:responseInserts -eq 1) ('Rejected framed '+$mode+' causes no More or retry')
+    }
     foreach($rowMode in @('full','folded','nbsp')){
         $rowRequest='r-multiline-'+$rowMode
         $rowValue="original 日本語 C:\path %FileContents% literal\n`r`n  "

@@ -159,7 +159,7 @@ try {
     $script:AiContext = New-TestAiCall $homeDirectory $input
     $ai = Invoke-AgentAiCall $homeDirectory $script:AiContext.request_path $script:AiContext.result_path
     Assert-True ($ai.status -ceq 'success' -and $ai.result -ceq "Translated 100%`n`"quoted`"") 'AiCall preserves business text'
-    Assert-True ($script:LastAiPrompt.Contains('Inside the only fenced text code block, return one pretty-printed JSON object with exactly request_id,job_id,run_id,ai_call_id,status,result,error_type,input_count,output_count.') -and $script:LastAiPrompt.Contains('Use multiple short formatting lines without blank lines; keep each JSON string value intact and escape its internal newlines.')) 'Actual AiCall prompt assigns its exact JSON schema to a multiline fenced object while preserving string values'
+    Assert-True ($script:LastAiPrompt.Contains('Return one compact JSON object with exactly request_id,job_id,run_id,ai_call_id,status,result,error_type,input_count,output_count, carried in the numbered text-fence parts defined by the appended transport instructions.') -and $script:LastAiPrompt.Contains('preserve the final JSON schema and escape string newlines using JSON rules.')) 'Actual AiCall prompt preserves its exact JSON schema while using numbered raw JSON fragments'
     Assert-True ($script:LastAiPrompt -notmatch 'Return only JSON|Return exactly one JSON object|For line 1 inside') 'Actual AiCall prompt has no JSON-only whole-response or first-line-only instruction'
     Assert-True ([IO.File]::ReadAllText((Join-Path $script:AiContext.directory 'status.txt')) -ceq 'success') 'PAD status companion written'
     Assert-True ((Read-AgentJson $script:AiContext.result_path).ai_call_id -ceq $script:AiContext.request.ai_call_id) 'Result uses same call ID'
@@ -378,7 +378,7 @@ try {
     $job = New-TestJob $homeDirectory $input
     $completed = Invoke-AgentRun $homeDirectory $job.job_id
     Assert-True ($completed.status -ceq 'done' -and $script:Plans -eq 2 -and $script:PadRuns -eq 1) 'Run observes PAD then plans DONE without repeating PAD'
-    Assert-True ($script:LastPlannerPrompt.Contains('Inside the only fenced text code block, return one pretty-printed JSON object with fields request_id,state,message,robin,artifacts.') -and $script:LastPlannerPrompt.Contains('Use multiple short formatting lines without blank lines; keep each JSON string value intact and escape its internal newlines.')) 'Actual planner prompt assigns its JSON schema to a multiline fenced object while preserving string values'
+    Assert-True ($script:LastPlannerPrompt.Contains('Return one compact JSON object with fields request_id,state,message,robin,artifacts, carried in the numbered text-fence parts defined by the appended transport instructions.') -and $script:LastPlannerPrompt.Contains('preserve the final JSON schema and escape string newlines using JSON rules.')) 'Actual planner prompt preserves its JSON schema while using numbered raw JSON fragments'
     Assert-True ($script:LastPlannerPrompt -notmatch 'Return only JSON|Return exactly one JSON object|For line 1 inside') 'Actual planner prompt has no JSON-only whole-response or first-line-only instruction'
     Assert-True ($completed.artifacts.Count -eq 1 -and $completed.final_answer -ceq '完了しました。') 'Run exposes final answer and observed artifact'
     Assert-True ($script:LastPlannerContext.observations[0].artifact_observations[0].content -ceq $script:ObservedMarker) 'Second planner request contains actual first-round output content exactly'
