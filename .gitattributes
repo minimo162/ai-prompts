@@ -1,4 +1,5 @@
 # Keep sealed distribution bytes identical in Git and Windows checkouts.
 App.ps1 -text
+catalog/**/*.robin -text
 index.html -text
 "業務エージェント.cmd" -text

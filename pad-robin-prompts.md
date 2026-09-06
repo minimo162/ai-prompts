@@ -8,6 +8,17 @@
 
 ### 1. 書式・成果物のルール
 
+#### 採取済みの組合せ例: 空のリストへ文字列を追加
+
+2026-09-07、PAD 2.71.115.26224、日本語、Power Fx OFFで、左パネルの「変数」から追加した実例です。「新しいリストの作成」の出力変数名を`CatalogList`に設定し、「項目をリストに追加」の項目を`CatalogItem`、追加先を`%CatalogList%`に設定しました。コピーしたRobinは次のとおりです。
+
+```text
+Variables.CreateNewList List=> CatalogList
+Variables.AddItemToList Item: $'''CatalogItem''' List: CatalogList
+```
+
+同じ採取フローのMainを保存・実行し、`CatalogList`のプレビューが`[CatalogItem]`になることを確認しました。空のRoundtripサブフローへの再貼付けと、再コピーしたRobinの完全一致も確認しました。Copilotによる再生成、任意の文字列・式のバリエーションは未確認です。コピー原文と採取条件は`catalog/index.json`と`catalog/flows/list-create-add/default.robin`に記録しています。後段のアプリの実行許可範囲とは別です。
+
 #### 実アクションのコピー例を渡された場合
 
 - PADの左パネルから追加してコピーしたRobinと、対応する設定値・環境を、そのアクションの生成根拠として使ってください。アクション名だけから内部の名前や引数を推測しないでください。

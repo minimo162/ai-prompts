@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "scope": "Observed PAD action variants; not a complete action reference or execution allowlist",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "captured_date": "2026-09-07"
+  },
+  "actions": [
+    {
+      "id": "variables-create-new-list",
+      "category": "変数",
+      "ui_name": "新しいリストの作成",
+      "ui_automation_id": "Variables.CreateNewList",
+      "variant": "default",
+      "settings": {
+        "新しい空のリストの保存先 変数名": "CatalogList"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CatalogList",
+          "kind": "list"
+        }
+      ],
+      "robin_path": "actions/variables-create-new-list/default.robin",
+      "sha256": "d94dbf198e1cc061d5e820d49d6b58bf5361d6b941f2756f2c78d9b9a055910f",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "list-create-add"
+      }
+    },
+    {
+      "id": "variables-add-item-to-list",
+      "category": "変数",
+      "ui_name": "項目をリストに追加",
+      "ui_automation_id": "Variables.AddItemToList",
+      "variant": "literal-text",
+      "settings": {
+        "項目の追加": "CatalogItem",
+        "追加先リスト": "%CatalogList%"
+      },
+      "inputs": [
+        {
+          "name": "CatalogList",
+          "kind": "existing_list"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CatalogList",
+          "kind": "modified_list"
+        }
+      ],
+      "robin_path": "actions/variables-add-item-to-list/default.robin",
+      "sha256": "db5bac45c2865dbd8c7b471e945dd187cd5fa98c5de46504bb8c82b1eb3aae44",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "list-create-add"
+      }
+    }
+  ],
+  "flows": [
+    {
+      "id": "list-create-add",
+      "robin_path": "flows/list-create-add/default.robin",
+      "sha256": "49704f6f1235f3a80f9957ef51825c2457d60ed2c50224f2efe7f2f564b5bb88",
+      "action_ids": [
+        "variables-create-new-list",
+        "variables-add-item-to-list"
+      ],
+      "action_count": 2,
+      "native_flow_name": "RobinCatalog_20260907",
+      "run_invocations": 1,
+      "observed_variable": {
+        "name": "CatalogList",
+        "preview": "[CatalogItem]"
+      },
+      "observed_status": "準備完了",
+      "screenshot": "evidence/list-create-add.png",
+      "copilot_generated": false,
+      "app_executor_verified": false,
+      "roundtrip_path": "flows/list-create-add/roundtrip.robin",
+      "roundtrip_sha256": "49704f6f1235f3a80f9957ef51825c2457d60ed2c50224f2efe7f2f564b5bb88",
+      "screenshot_sha256": "fb45f878c656c160d9977ff36f8883a031d5558338ff5a6c563536c502faf890"
+    }
+  ]
+}
