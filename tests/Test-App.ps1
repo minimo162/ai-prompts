@@ -329,9 +329,9 @@ try {
     $script:RunMode = 'success'; $script:Plans = 0; $script:PadRuns = 0; $script:Output = ''; $script:PadRunIds = @()
     $script:ObservedMarker = "  ROUND_ONE_VALUE 日本語 100% C:\data `"quotes`"`r`nline two  `r`n"
     function Invoke-AgentCopilot {
-        param($Prompt,$RequestId,$Settings,$HomePath,$CancelPath,$TimeoutSeconds)
+        param($Prompt,$RequestId,$Settings,$HomePath,$CancelPath,$TimeoutSeconds,$Transport)
         $script:Plans++
-        $script:LastPlannerPrompt = $Prompt
+        $script:LastPlannerPrompt = $Prompt; $script:LastPlannerTransport = $Transport
         $contextStart = $Prompt.IndexOf("CONTEXT_JSON:`n") + "CONTEXT_JSON:`n".Length
         $contextEnd = $Prompt.IndexOf("`nAn optional", $contextStart)
         $script:LastPlannerContext = ConvertFrom-Json -InputObject $Prompt.Substring($contextStart, $contextEnd - $contextStart)
@@ -378,8 +378,9 @@ try {
     $job = New-TestJob $homeDirectory $input
     $completed = Invoke-AgentRun $homeDirectory $job.job_id
     Assert-True ($completed.status -ceq 'done' -and $script:Plans -eq 2 -and $script:PadRuns -eq 1) 'Run observes PAD then plans DONE without repeating PAD'
-    Assert-True ($script:LastPlannerPrompt.Contains('Return one compact JSON object with fields request_id,state,message,robin,artifacts, carried in the numbered text-fence parts defined by the appended transport instructions.') -and $script:LastPlannerPrompt.Contains('preserve the final JSON schema and escape string newlines using JSON rules.')) 'Actual planner prompt preserves its JSON schema while using numbered raw JSON fragments'
+    Assert-True ($script:LastPlannerTransport -ceq 'PlannerV2' -and $script:LastPlannerPrompt.Contains('Metadata fields are request_id,state,message,artifacts; the separate body supplies robin.') -and $script:LastPlannerPrompt.Contains('Include ai_calls whenever ACT uses any supplied ai_call_templates[].robin action.') -and -not $script:LastPlannerPrompt.Contains('numbered text-fence parts')) 'Actual Run selects Planner V2 while preserving required AiCall declarations and separating metadata from literal Robin'
     Assert-True ($script:LastPlannerPrompt -notmatch 'Return only JSON|Return exactly one JSON object|For line 1 inside') 'Actual planner prompt has no JSON-only whole-response or first-line-only instruction'
+    Assert-True ($script:LastPlannerPrompt -cnotmatch 'JSON robin string|JSON-encode the whole robin string|four in the response JSON source|then JSON-encode the complete') 'The actual full Planner V2 prompt contains no old whole-Robin JSON serialization instruction'
     Assert-True ($completed.artifacts.Count -eq 1 -and $completed.final_answer -ceq '完了しました。') 'Run exposes final answer and observed artifact'
     Assert-True ($script:LastPlannerContext.observations[0].artifact_observations[0].content -ceq $script:ObservedMarker) 'Second planner request contains actual first-round output content exactly'
     Assert-True ($completed.observed_artifacts[0].sha256 -ceq (Get-AgentHash $script:Output)) 'Durable job state retains the exact verified output grant'

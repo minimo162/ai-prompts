@@ -1066,6 +1066,94 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
       response = await renderFolded(multipartReply(foldedParts), setup, css || '');
       check(response.state.assistants[0].source_kind, 'rendered', 'Complete-folded exemption remains bounded: ' + label);
     }
+    // Planner V2 keeps actual code rows separate from strict JSON metadata.
+    // Empty Robin rows use an explicit nonce marker because the live renderer
+    // represented a requested empty row as an indistinguishable U+00A0 node.
+    const plannerRows = (body, meta = { request_id: requestId, state: 'ACT', message: '日本語の計画', artifacts: [] }) => [
+      ['AGENT_META_V2 ' + requestId, ...JSON.stringify(meta, null, 2).split('\n'), 'AGENT_META_END_V2 ' + requestId],
+      ['AGENT_ROBIN_V2 ' + requestId, ...body, 'AGENT_ROBIN_END_V2 ' + requestId, marker]
+    ];
+    const expectedPlanner = (frames, collapsed = false) => ({ key: 'parts-fixture', text: '', frames: frames.map(rows => rows.join('\n')), source_kind: 'fenced_planner_v2', collapsed });
+    const plannerBody = ['  File.Read "日本語" C:\\raw %FileContents%  ', 'AGENT_EMPTY_V2 ' + requestId, 'IF result = AGENT_AICALL_FAILED', '  \u00a0 ', 'END'];
+    const plannerFrames = plannerRows(plannerBody);
+    response = await renderFenced(multipartReply(plannerFrames));
+    check(response.state.assistants, [expectedPlanner(plannerFrames)], 'V2 preserves complete metadata and every literal code/sentinel/space character');
+    check((await page.evaluate(snapshot)).assistants, response.state.assistants, 'Repeated complete V2 snapshots are ordinally identical');
+    for (const state of ['DONE', 'ASK_USER', 'BLOCKED']) {
+      const frames = plannerRows([], { request_id: requestId, state, message: '観測済みの状態', artifacts: [] });
+      response = await renderFenced(multipartReply(frames));
+      check(response.state.assistants, [expectedPlanner(frames)], 'Non-ACT has exactly three marker rows and zero body rows: ' + state);
+    }
+    response = await renderFenced(multipartReply(plannerFrames.map(rows => [...rows, '\u00a0'])));
+    check(response.state.assistants, [expectedPlanner(plannerFrames)], 'V2 strips only the measured separate renderer tail after each terminal marker');
+    const nbspBody = plannerRows(['Read input', '\u00a0', 'Write output']);
+    response = await renderFenced(multipartReply(nbspBody));
+    check(response.state.assistants, [expectedPlanner(nbspBody)], 'The measured U+00A0 body row is retained and never silently decoded as empty');
+    const longPlanner = plannerRows(Array.from({ length: 25 }, (_, i) => '  File.' + i + ' "引用" C:\\path %FileContents% ' + '日本語'.repeat(90)));
+    const foldedPlannerCss = '.fenced-inner:last-child .more-holder{display:flex}.fenced-inner:last-child .more-button{display:flex;height:32px}.fenced-inner:last-child .code-editor{overflow:auto;max-height:300px}';
+    response = await renderFenced(multipartReply(longPlanner), null, foldedPlannerCss);
+    check(longPlanner[1].join('\n').length > 7000, true, 'Long Robin fixture exceeds the previously failing JSON payload size');
+    check(response.state.assistants, [expectedPlanner(longPlanner, true)], 'Short metadata and folded long Robin both retain complete geometry and all rows');
+    await assert.rejects(() => page.evaluate(expandExpression('parts-fixture', longPlanner[1].join('\n'), requestId)), error => error.message.includes('expand unavailable'), 'V2 full-row reading never authorizes a legacy More click');
+    checks++;
+    const longMeta = plannerRows(longPlanner[1].slice(1, -2), { request_id: requestId, state: 'ACT', message: '説明'.repeat(9000), artifacts: [] });
+    response = await renderFolded(multipartReply(longMeta));
+    check(response.state.assistants, [expectedPlanner(longMeta, true)], 'Metadata physical rows are not silently narrowed to the diagnostic 16384-character limit');
+    const maximumRows = plannerRows(Array.from({ length: 250 }, () => 'AGENT_EMPTY_V2 ' + requestId));
+    response = await renderFenced(multipartReply(maximumRows), null, foldedPlannerCss);
+    check(response.state.assistants, [expectedPlanner(maximumRows, true)], 'Capture all 250 wire body rows without inferring missing lines');
+    const boundedMetaValue = JSON.stringify({ request_id: requestId, state: 'ACT', message: '', artifacts: [] });
+    const encodedMessageLength = 1048576 - boundedMetaValue.length;
+    const encodedMessage = '\\u3042'.repeat(Math.floor(encodedMessageLength / 6)) + 'a'.repeat(encodedMessageLength % 6);
+    const boundedMetaText = boundedMetaValue.replace('"message":""', '"message":"' + encodedMessage + '"');
+    const boundedBody = ['SET X TO ' + 'a'.repeat(64000 - 249 - 9), ...Array.from({ length: 249 }, () => 'AGENT_EMPTY_V2 ' + requestId)];
+    const combinedBound = [['AGENT_META_V2 ' + requestId, boundedMetaText, 'AGENT_META_END_V2 ' + requestId], plannerRows(boundedBody)[1]];
+    response = await renderFolded(multipartReply(combinedBound));
+    check(combinedBound.map(rows => rows.join('\n').length).reduce((a, b) => a + b) > 1114000, true, 'Individually legal metadata and encoded-empty overhead exceed the removed aggregate shortcut');
+    check(response.state.assistants[0].source_kind, 'fenced_planner_v2', 'Preserve the complete combined boundary as a structured carrier');
+    check(response.state.assistants[0].frames.map((frame, i) => frame === expectedPlanner(combinedBound, true).frames[i]), [true, true], 'Preserve full bounded metadata and 250 encoded body rows together without narrowing the final parser contract');
+    check(JSON.stringify({ ...JSON.parse(boundedMetaText), robin: [boundedBody[0], ...Array(249).fill('')].join('\n') }).length < 1048576, true, 'The combined wire boundary still fits the decoded final JSON contract');
+    for (const [label, frames] of [
+      ['third fence', [...plannerFrames, plannerFrames[1]]],
+      ['reversed fences', [...plannerFrames].reverse()],
+      ['missing Robin end', [plannerFrames[0], plannerFrames[1].filter((_, i, rows) => i !== rows.length - 2)]],
+      ['missing final marker', [plannerFrames[0], plannerFrames[1].slice(0, -1)]],
+      ['extra terminal row', [plannerFrames[0], [...plannerFrames[1], 'extra']]],
+      ['two renderer tails', [plannerFrames[0], [...plannerFrames[1], '\u00a0', '\u00a0']]],
+      ['ordinary trailing space', [plannerFrames[0], [...plannerFrames[1], ' ']]],
+      ['251 body rows', plannerRows(Array.from({ length: 251 }, () => 'AGENT_EMPTY_V2 ' + requestId))],
+      ['unmeasured true empty row', plannerRows(['Read input', '', 'Write output'])]
+    ]) {
+      response = await renderFenced(multipartReply(frames));
+      check(response.state.assistants[0].source_kind, 'rendered', 'V2 refuses incomplete/unknown carrier shape: ' + label);
+    }
+    for (const [label, setup, css] of [
+      ['separator explanation', () => { document.querySelector('.fenced-wrapper').childNodes[1].nodeValue += 'explanation'; }],
+      ['unknown outside node', () => document.querySelector('.fenced-reply').appendChild(document.createComment('unknown'))],
+      ['missing indexed row', () => { const row = document.querySelectorAll('.code-editor')[1].querySelector('[data-line-index="2"]'); row.previousSibling.remove(); row.remove(); }],
+      ['changed row index', () => document.querySelectorAll('.code-editor')[1].querySelector('[data-line-index="2"]').setAttribute('data-line-index', '1')],
+      ['nested body text', () => { const row = document.querySelectorAll('.code-editor')[1].querySelector('[data-line-index="2"]'); const inner = document.createElement('span'); inner.textContent = row.textContent; row.replaceChildren(inner); }],
+      ['split body text', () => document.querySelectorAll('.code-editor')[1].querySelector('[data-line-index="2"]').firstChild.splitText(3)],
+      ['BR instead of blank', () => document.querySelectorAll('.code-editor')[1].querySelector('[data-line-index="2"]').replaceChildren(document.createElement('br'))],
+      ['hidden row', null, '.fenced-inner:last-child [data-line-index="2"]{visibility:hidden!important}'],
+      ['transparent ancestor', null, '.fenced-wrapper{opacity:.5!important}'],
+      ['content visibility', null, '.fenced-inner:last-child{content-visibility:auto!important}'],
+      ['clipped hidden-control body', null, '.fenced-inner:last-child .code-editor{height:20px}'],
+      ['horizontal overflow', null, '.fenced-inner:last-child .code-line{min-width:1000px}'],
+      ['transformed editor', null, '.fenced-inner:last-child .code-editor{transform:scale(.9)}']
+    ]) {
+      response = await renderFenced(multipartReply(plannerFrames), setup, css || '');
+      check(response.state.assistants[0].source_kind, 'rendered', 'V2 retains full DOM ownership and geometry checks: ' + label);
+    }
+    for (const [label, frames] of [
+      ['wrong nonce', plannerFrames.map(rows => rows.map(row => row.replaceAll(requestId, 'wrong-nonce')))],
+      ['duplicate JSON key', [['AGENT_META_V2 ' + requestId, '{"request_id":"' + requestId + '","state":"ACT","state":"DONE"}', 'AGENT_META_END_V2 ' + requestId], plannerFrames[1]]],
+      ['wrong empty marker nonce', plannerRows(['Read input', 'AGENT_EMPTY_V2 wrong-nonce', 'Write output'])]
+    ]) {
+      response = await renderFenced(multipartReply(frames));
+      check(response.state.assistants, [expectedPlanner(frames)], 'DOM keeps parser-owned invalid content exact without repair: ' + label);
+    }
+
     for (const [url, message] of [
       ['http://m365.cloud.microsoft/chat/', 'untrusted page'],
       ['https://m365.cloud.microsoft.evil.test/chat/', 'untrusted page'],

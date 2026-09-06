@@ -1,6 +1,29 @@
 # Issue #5 検証記録
 
 2026-09-06 / 状態: **partial — 実機ゲート未完了**。
+
+同日16:09 JST、Planner V2を本体ソースへ実装した。App SHAは `0fc60b7840dec296b4da5cf25910a959186a194ba2c3639d451f9fae53e630d9`。PlannerだけがメタデータJSON＋Robin本文の2フェンスを使用し、PAD内AiCallは既存JsonPartsV1を維持する。空行は今回IDの `AGENT_EMPTY_V2` 行だけを復号し、生empty・単独NBSP行は拒否、通常の文字・空白を保持する。元のPlanner契約、AiCall宣言・テンプレート一致、`Test-AgentRobin` は維持した。3回の安定読取り後にも中止・期限・ブラウザー所有を再確認する。
+
+独立コードレビューで発見した旧JSON化ルールとの矛盾は修正し、旧候補で実際の全Plannerプロンプトの回帰テストが失敗すること、新版で138 core検査が通ることを確認した。DOMは859検査PASS（外部通信を転送しない隔離Edge）。メタデータ最大1MiBと空行符号を含む250行の組合せも、完全な行と表示領域を保って取得できる合成ケースを検査した。同じ変更候補の先行版 `5833c8e5…` では、未変更の解析・応答制御・PAD経路について、native PS5でCopilot302、PAD320、V2解析107、V2/V1混在・安定性・停止境界118検査がPASS。最終コードレビューはSHIP。証拠は `.work/gate3/planner-v2-product-candidate/` と `.work/gate3/planner-v2-parser-candidate/`。実行中のキャッシュはまだ旧428ea56であり、V2の実Copilot→PAD受入、配布更新、実機での長い1物理行の取得を合格扱いしない。
+
+同日15:46 JST、短い空行診断 `fd71d463785c4daa9b4dc8e57bbb65a8` は `observed_shape`。1 Read・空行・2 Writeを実Copilotへ1回依頼し、2つの完全DOMとassistant読戻しが一致、旧392ファイル・owner・全既存タブの保全が通過した。指定した空行の位置（Robin body index 1 / DOM line-index 2）は、可視の単一テキストノード `U+00A0` 1文字だった。したがって元の空文字とは一致せず、`raw_fixture_text_values_match` とroundtripはfalseのまま保持する。PAD・Copy・More・再送は0。証拠は `.work/gate3/plain-robin-empty-feasibility/sessions/fd71d463785c4daa9b4dc8e57bbb65a8/`。この結果から、製品V2候補では空行を `AGENT_EMPTY_V2 <request_id>` という明示的な独立行で送り、今回のIDに完全一致した目印だけを空行へ復号する方式を採用する。通常の文字や空白を正規化しない。設計の独立レビューはSHIP、本体への反映とこの方式での実機受入はまだ未実施。
+
+同日15:27 JST、保存呼出し直前の障害注入セッション `0d64ad6442bf41b68846647ba4677e52` はPASS。現行Appの `Invoke-AgentPad` が実際の所有確認・削除1・貼付1・全文読戻し2を行い、診断wrapperがSaveの呼出し直前に1回だけ例外を返した。元controller観測は `failed/G2S_INJECTED_SAVE_CALL_BOUNDARY` で保存し、controllerのnative Save・Run・Stop、開始/完了marker、成果物はいずれも0。その後、実Mainが今回のsubmitted全文と一致しownerが不変であることを2回の読取りで確認し、退避した成功Mainへ削除1・貼付1・保存1で戻した。最終読戻し、owner、旧normal/privateファイル、全ブラウザータブ、全対応形式のクリップボード復元が通過し、errorsは0。事前のnative PS5境界46検査・合成Clipboard52検査と、事前/実結果の独立レビューがSHIP。証拠は `.work/gate2/save-boundary-diagnostic/sessions/0d64ad6442bf41b68846647ba4677e52/`。これは実PAD貼付後のSave呼出し境界への障害注入であり、PAD自身のnative Save失敗や業務成功と呼ばない。
+
+同日15:20 JST、自然な複数行Robinをメタデータと別フェンスで運ぶ限定診断 `823e82f11d2f471fb779c50260ec8bbe` は、実Copilotから24 Write・25行・7793文字を完全取得した。新規job `332b316424864e79bcf05508615a64bf`、request `4f335bf66ae543d688c2a21db451eaee`、owned target `335E773936F8CFDD9A187F9DE76075E7`、送信1回。2回の完全DOM・assistant読戻しが一致し、厳密なメタデータ、24個のパス順、Robin全文、既存の `Test-AgentRobin` が一致。Robin SHAは `4d6fe410078873d26dafd1ac1453016a13d4e4b48aa1a4f635e1e8c96c6a95ec`。モデルにhashや文字数の計算を要求せず、受信側だけで診断値を計算した。PAD・Copy・More・再送0、本体・共有・キャッシュにV2を実装した証拠ではない。診断一式は `.work/gate3/plain-robin-feasibility/`。事前にnative PS5の43検査、隔離Edge描画の26検査、独立レビューSHIPを確認した。
+
+この診断の元 `result.json` は `unknown/PR_PRESERVATION` のまま保持する。旧384ファイル、PAD owner、新規job/attempt/targetの所有は保持したが、以前の4分割試験のタブ `3D1B12A764C0F49BAE0B1EC41F02CDFF` のURLが既存conversationから `/chat` へ変化した。旧18タブは存在し、新規タブは今回所有の1個だけ。終了後の読取専用照合で当該URLを2回確認し、target record不変・追加送信/PAD/タブ操作0。URL変化の原因は未確定であり、利用者操作やCopilotの仕様と断定しない。取得成功と診断全体の保全不成立を区別する。空行は後続15:46の別診断で形状を測定したが、製品V2経由の受入は未検証。
+
+別PC確認用に、現行428ea56の配布3ファイルだけを含むZIPを `.work/distributions/issue-5-poc-428ea56-20260906-b69d586e48c844d6b8ccf3ca815115ea/` に作成した。全entryのSHAと実ソースが一致し、ZIP SHAは `a53a32b2d1fd4f97b107f87e05766a5291fdcd63eac0bd79865ad198d4d562df`。同フォルダーに確認手順と検証manifestを分けて置いた。別PCでの実行は未実施。
+
+同日14:44 JST、独立レビューは分類job `4146fa7dd2d74d34b4c3a6ccc95754d0` の業務経路をSHIPと判定した。4応答のpayload長は4443/271/1849/465文字で、最初の実ACTが旧4096文字上限を超えるケースも通過した。原JSON・2つの実 `flow.robin`・各実行結果・前段の観測時刻・最終UI・ファイルSHAの対応を再確認した。レビュー記録は同セッションの `independent-business-review.json`（SHA `a667d8db…`）。補助の修正版 `Invoke-Gate45ClassifyUi-PartsOwned.ps1` は、安定した2回のcarrierを製品parserで全体検証してからIDを許可する。実4回答と4attemptの一致、nonce不一致・欠落・不安定回答・未所有attempt等を含むnative PS5の39検査がPASS。証拠は `.work/gate45/parts-ownership-helper-validation.json`。新しい業務再実行や元partial記録の書換えは行っていない。
+
+同日14:31 JST、新版の分類セッション `adf5eabd49a046d2bf68b9edd0e9322d` の製品job `4146fa7dd2d74d34b4c3a6ccc95754d0` がDONEに到達した。実HTML開始1回・HTTP200、分類AiCall1回、生成された異なるRobinによるPAD2回が成功。最初の `review` と下書きをアプリが全文確認し、次のRobinがその2ファイルを読み直して条件分岐し、`final-review.txt` を作成した。最終83バイトは下書きとSHA `271fe047a97061f8eb4f3f2fd9a14d99973059fed1714a4256272da4ce2b4a5d` が一致し、normal側の出力は0。ACT/業務回答/ACT/DONEの4応答を2回読み戻して完全一致、最終UI「完了」と成果物表示・worker停止を確認した。全文画面 `complete-ui-full.png` はSHA `9c9f435a74738b81467819107f6f4043aa4c2a5b5c64e8af5227b7ac9c7de317`。
+
+同セッションの `classify-acceptance.json` はpassedだが、元 `result.json` は補助の `G45_PRESERVATION_UNCONFIRMED` によりpartialのまま保持する。独立確認では、追加された4つのattempt IDは製品parserで復元した4応答のrequest_idと一致した。補助の末尾監査が `assistant.text` だけを検索し、分割回答では空のtextと別のframesに入るnonceを見落としていたことが原因。旧ファイル・PAD owner・タブ所有は確認済み。新たな業務実行や元結果の書換えをせず、補助の修正と独立した証拠照合を進める。
+
+同日14:28 JST、コミット `428ea56` のメタデータ指示版を共有と通常起動版へ反映した。公開 `a9031ff018e7447a8428476a4a8f705c` と通常更新 `53cb744c8c924dc682676fe60015ca70` はPASS。旧348ファイル（normal294/private51/archive3）、PAD owner/content、共有ACLを保持し、新server PID9152/port62884でApp SHA `f040085c…` が一致した。証拠は `.work/gate0/release-update-428ea56-summary.json`。新規分類セッション `adf5eabd49a046d2bf68b9edd0e9322d` を実HTMLから開始した。この時点では終端と業務成果物の検証は進行中。
+
 同日14:24 JST、AiCallメタデータの生成指示を本体へ反映した。App SHA `f040085c1f3c96aa910a314cbf498a62656e82b8cd2a75f5a3ca176076ffdf30`。変更はPlanner指示2段落のみで、テンプレート呼出しに対応する `ai_calls` の必須条件を明記した。parser・schema・Robin検証・要求作成権限は不変。最終候補と本体のhash一致、native core137/Copilot302/PAD320、欠落・空配列・宣言付き対照ケース15件のPASS、独立レビューSHIPを確認した。最初の候補は既存の文面一致テストで失敗し、元文を保って同じ段落へ必須条件を追記した。元候補・結果も保持。証拠は `.work/gate3/ai-call-metadata-candidate/validation.json` と同report。共有更新と新版実機分類はこの時点で未実施。
 
 4ブロックを明示した同じ24 Write試験 `cc43392735074d4fae67c45f6c77d2e1` は、送信1・180秒で `unknown/RESPONSE_TIMEOUT`。終了後の読取専用観測 `Observe-PracticalFourFrameTimeout-6985dffdc96b4b179d9801905d6e1762.json` は14:23 JSTに、プロトコルmarkerを含まない生成拒否の本文が2回一致した。Copilotは厳密なマルチパート形式と完全一致生成要求に対応できないと回答した。原結果・旧データ・タブを保持し、追加送信・PAD・More・focus・scroll・clipboard操作0。この負荷での長文生成の安定性は未解決であり、成功扱いしない。
@@ -75,10 +98,10 @@
 |---|---|---|
 | 0: 配布・起動 | 実共有UNCからの初回・更新、欠落UNC時の警告付きローカル起動は合格 | 実共有の切断、利用者環境での再起動・UI停止 |
 | 1: 固定PADからAiCall | 正常系合格。実PADから翻訳→分類の直列2回、結果受渡し、review分岐と出力を確認 | 拒否/空/期限/中止の実機異常系 |
-| 2: AIなしのA/B差し替え | 正常系A/B合格。実行中の別controllerをPAD_BUSY・UI操作0で拒否し、元の実行を中止・出力抑止する動作を確認。検証helperの集計不具合により追試全体はunknownで保持 | 保存失敗などを意図的に起こした場合の旧フロー実行防止。実貼付後の異常でRun前に停止した過去証拠は下記 |
-| 3: 生成Robin全文取得 | 旧方式の実長文JSON12,593 UTF-8バイト・Robin7,793文字/24 Writeを取得済み。新版は通常分類の2ブロックACTを取得・検証済み | 新分割方式の36 Write・Robin1万文字超の実取得。最初の長文試行はtimeoutで、後続観測の応答も指定形式を満たさなかった |
-| 4: 生成AiCallフロー | Copilot生成の翻訳→書出しに加え、分類→IF分岐→書出しも実PADで成功 | 分類ジョブ全体のDONE取得はGate 5で未完了 |
-| 5: 2〜3往復 | ASK_USER→回答→ACT→AiCall/PAD→DONEとBLOCKEDは合格。旧版で分類の2ACTが実結果を読み直して最終ファイルを生成 | 新版の複数ACT→DONE回答取得・完了表示。Windowsロック解除後の最新試行はPAD既存本文の不一致で実行前に停止し、中止済み |
+| 2: AIなしのA/B差し替え | 正常系A/B合格。実行中の別controllerをPAD_BUSY・UI操作0で拒否し、元の実行を中止・出力抑止する動作を確認。実PAD貼付後のSave呼出し境界への障害注入でRun0・元Main復元も合格。busy/cancel追試の元unknownは保持 | PAD自身のnative Save失敗は未検証。制御した呼出し境界の失敗と、実貼付後の異常でRun前に停止した証拠を区別 |
+| 3: 生成Robin全文取得 | 旧方式の実長文JSON12,593 UTF-8バイト・Robin7,793文字/24 Writeを取得済み。新方式では2ブロックACTと、新版の4,443文字ACTを実取得・検証済み | 長文生成の安定性。24/36 Writeは調査用負荷で、Issueに必須文字数の指定はない。新版の24 Writeでは欠落や生成拒否が残る |
+| 4: 生成AiCallフロー | 翻訳→書出しと分類→IF分岐→書出しが実PADで成功。新版では分類ジョブの2ACT→DONEまで完了 | 確認した正常系の未確認事項なし。固定AiCall異常系はGate 1に記載 |
+| 5: 2〜3往復 | ASK_USER→回答→ACT→AiCall/PAD→DONEとBLOCKEDに加え、新版の分類2ACT→DONEも成功。最初の実成果物の再読込み・分岐・最終出力・完了画面を独立再照合済み | 確認した代表シナリオの未確認事項なし。原helperのpartialは分割応答IDの抽出漏れとして別記録で診断し、原結果を保持 |
 | 6: 別利用者・別PC | 未検証 | 開発環境に依存しない導入・更新・認証・結果確認 |
 
 2026-09-06に利用者の許可とWindowsの管理者承認を経て、専用共有 `\\localhost\AiPromptsAgentPoC$` を作成した。共有範囲は `.work/shares/AiPromptsAgentPoC` の配布3ファイル、SMB権限は利用者本人の読み取り1件で、NTFS権限・サービス・ファイアウォールは変更していない。最初の承認後試行は共有作成前のファイル名照合で失敗した。作成スクリプトがBOMなしUTF-8だったため、Windows PowerShell 5.1が日本語CMD名を誤読していた。本文を変更せずUTF-8 BOMを付け、旧版の保存と独立した構文・ファイル名照合確認後に成功した。作成・UNC読取の証拠は `.work/gate0/share-create-6a7c02fc14f34586b7c7a5cb32def3c4.json` と `share-verified-6a7c02fc14f34586b7c7a5cb32def3c4.json`。

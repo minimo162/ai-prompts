@@ -50,7 +50,9 @@ index.html
 
 次の計画には成果物の実際のUTF-8本文、ハッシュ、件数、切り詰め状態を渡します。本文全体を確認できていない成果物を根拠にDONEにはしません。前の実行の成果物を再利用する場合も、同じジョブで観測した正確なパスと現在のハッシュを照合します。質問ごとのIDと回答の一度だけの受付により、複数画面から回答を上書きしたり、古い質問への回答を次の質問へ流用したりしません。
 
-AI応答は、番号・総数・要求IDを持つコードブロックで受け取ります。各ブロックのJSON断片は最大8192 UTF-16文字、最大256ブロック、連結後は最大1048576文字です。順序・欠落・重複・終端を検査してから、そのまま連結します。元のJSONとRobinの契約は変えません。ブロック境界を含む全文が3回連続で一致し、生成が終了したことを確認します。折りたたみ表示でも、既知の構造に全行が存在し、この検査を通った分割回答だけを取得します。不完全なJSONやRobinの修復、正当なバックスラッシュの削除は行いません。ファイル本文やAIの業務結果はデータとして扱います。
+計画の応答は、メタデータJSONとRobin本文の2つのコードブロックで受け取ります（Planner V2）。Robinは最大64000 UTF-16文字・250行で、コードの引用符、バックスラッシュ、空白をそのまま保持します。画面上で空行と特殊な空白を混同しないよう、空行だけは今回の要求IDを含む専用の目印で送り、完全一致した目印を空行へ復号します。メタデータと復元後の最終JSONは、それぞれ最大1048576文字です。PAD内のAiCallは従来の番号付きJSON断片（1断片最大8192文字、最大256ブロック、連結後最大1048576文字）を使います。
+
+どちらも要求ID・順序・欠落・重複・終端を検査し、応答IDとブロック境界を含む全文が3回連続で一致し、生成が終了したことを確認します。折りたたみ表示でも、既知の構造に全行が存在し、この検査を通った応答だけを取得します。不完全なJSONやRobinの修復、正当なバックスラッシュの削除は行いません。ファイル本文やAIの業務結果はデータとして扱います。Planner V2の実機での通し確認は進行中です。
 
 確定した失敗は次の判断へ返します。同じ失敗手順を新しい実行IDに置き換えただけのACTは拒否します。比較時にだけアプリ発行のパス・IDを置き換え、実行するRobin本文は変更しません。結果不明・中止はそのまま終了します。
 
@@ -65,6 +67,8 @@ Appのロジックは1つのPS1内の関数です。`-Mode Library` は関数を
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-App.ps1 -AppSourcePath "$PWD\App.ps1"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Copilot.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File tests\Test-CopilotPlannerV2.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File tests\Test-PlannerV2Transport.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Pad.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Http.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Launcher.ps1
@@ -76,7 +80,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Launcher.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File .\App.ps1 -Mode Serve -HomePath "$PWD\.local"
 ```
 
-テスト結果を他PC対応の証明として使わないでください。PAD 2.71の日本語デザイナーで固定A/Bの貼り付け・保存・置換・実行・結果判定が通りました。失敗条件の実機検証、実Copilotを含む通し検証、他PCでの確認は残っています。
+テスト結果を他PC対応の証明として使わないでください。PAD 2.71の日本語デザイナーで固定A/Bの貼り付け・保存・置換・実行・結果判定と、実Copilotによる分類からPAD2回、最終ファイル保存、完了表示までの通し検証が通りました。長文生成の安定性、失敗条件の実機検証、他PCでの確認は残っています。
 
 仕様: [Issue #5](https://github.com/minimo162/ai-prompts/issues/5)。Robinの元プロンプト: [pad-robin-prompts.md](pad-robin-prompts.md)。
 
