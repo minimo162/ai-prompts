@@ -285,8 +285,14 @@
         {
           "id": "12.1",
           "requirement": "応答ID・要求ID・行順序・終端の欠落/重複/遅延回答を混ぜたfixtureで、取り違え・欠落を成功にしない。完全応答の安定確認と1回送信の条件を維持する。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ConnectionContract.ps1",
+            "tests/Test-Copilot.ps1",
+            "tests/Test-AcceptanceGate.ps1",
+            "docs/acceptance-records.md",
+            ".work/nonlive-8b4367da742f416ab79b457e07368287/verification.json"
+          ]
         },
         {
           "id": "12.2",
@@ -303,14 +309,26 @@
         {
           "id": "12.4",
           "requirement": "同じジョブの外側計画と複数AiCallを連続実行し、別要求・別ジョブの応答が混ざらない。送信後timeoutから同じ要求を無断再送しない。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ConnectionContract.ps1",
+            "tests/Test-Copilot.ps1",
+            "tests/Test-AcceptanceGate.ps1",
+            "docs/acceptance-records.md",
+            ".work/nonlive-8b4367da742f416ab79b457e07368287/verification.json"
+          ]
         },
         {
           "id": "12.5",
           "requirement": "Edgeポリシー無効の環境では、管理設定を変更せず理由と問い合わせ先を表示する。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ConnectionContract.ps1",
+            "tests/Test-Copilot.ps1",
+            "tests/Test-AcceptanceGate.ps1",
+            "docs/acceptance-records.md",
+            ".work/nonlive-8b4367da742f416ab79b457e07368287/verification.json"
+          ]
         },
         {
           "id": "12.6",
@@ -454,8 +472,14 @@
         {
           "id": "14.4",
           "requirement": "Appだけを変更した候補に過去版のE2E結果を紐付けようとすると、出荷判定が未確認になる。モックPASSだけで「別PC受入済み」にならない。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ConnectionContract.ps1",
+            "tests/Test-Copilot.ps1",
+            "tests/Test-AcceptanceGate.ps1",
+            "docs/acceptance-records.md",
+            ".work/nonlive-8b4367da742f416ab79b457e07368287/verification.json"
+          ]
         },
         {
           "id": "14.5",
@@ -472,8 +496,14 @@
         {
           "id": "14.7",
           "requirement": "最新受入索引から、版、検証環境、実施済み/未実施、関連Issue、証拠への参照を追える。古い検証結果を削除・書換えず時系列を維持する。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ConnectionContract.ps1",
+            "tests/Test-Copilot.ps1",
+            "tests/Test-AcceptanceGate.ps1",
+            "docs/acceptance-records.md",
+            ".work/nonlive-8b4367da742f416ab79b457e07368287/verification.json"
+          ]
         }
       ]
     }

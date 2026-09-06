@@ -1,5 +1,5 @@
 ﻿# App-Version: 0.1.0
-# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6IjVjNzAwOGU3NzRhNzczM2ZkYzE1NTgxNDg2OTQxMjY5IiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiJhYzdmM2UzNGRmNmI4MDAyOWQ4NWY1NmQxN2NlNjhmZDU2ZWIwMmY5YTFmOTE5YTU2M2MzNDAyM2I4MWE3ZTVkIiwiaHRtbF9zaGEyNTYiOiIyNzMwOTBiMTA0MDJkZDExMTQ3NDAwZjVjYWNmNTI4NTI0ZmE0NTFmYWFjYTAzMWU1MDZkMTI3ZDFlZjM3Njk4IiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
+# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6IjM2NTY5ZGE1MzU3M2E3YmYyNzdiMGYzYmViYjM2ODVjIiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiJmYzE2ZDY0OWViYjc5OGFjNjNmNmYyMWZmYWRkMGIxNGQ1MzFjNDU1MjBjMDU0M2Y5Yjc2ZWVhYjhmYTg5YWMzIiwiaHRtbF9zaGEyNTYiOiIyNzMwOTBiMTA0MDJkZDExMTQ3NDAwZjVjYWNmNTI4NTI0ZmE0NTFmYWFjYTAzMWU1MDZkMTI3ZDFlZjM3Njk4IiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
 # State-Contract: 2
 [CmdletBinding()]
 param(
@@ -828,7 +828,7 @@ function Get-AgentSupportDiagnostic([string]$HomePath, $Job) {
         if (-not [int]::TryParse([string]$value, [ref]$number) -or $number -lt 0 -or $number -gt 100) { $number = 0 }
         $counts[$name] = $number
     }
-    return [pscustomobject]@{ schema_version = 1; diagnostic_id = [guid]::NewGuid().ToString('N'); created_utc = [DateTime]::UtcNow.ToString('o'); app_version = $script:AgentVersion; app_sha256 = Get-AgentHash $script:AgentAppPath; os_version = [Environment]::OSVersion.Version.ToString(); powershell_version = $PSVersionTable.PSVersion.ToString(); adapter_version = 'copilot-parts-v1-planner-v2-pad-2.71'; phase = $phase; counts = [pscustomobject]$counts; stop_confirmed = ($phase -ceq 'cancelled'); offline_test = $script:AgentOfflineTest; live_acceptance = 'unverified'; includes_business_text = $false; uploaded = $false }
+    return [pscustomobject]@{ schema_version = 1; diagnostic_id = [guid]::NewGuid().ToString('N'); created_utc = [DateTime]::UtcNow.ToString('o'); app_version = $script:AgentVersion; app_sha256 = Get-AgentHash $script:AgentAppPath; os_version = [Environment]::OSVersion.Version.ToString(); powershell_version = $PSVersionTable.PSVersion.ToString(); adapter_version = (Get-AgentConnectionContract).adapter_version; pad_adapter_version = (Get-AgentConnectionContract).pad_adapter_version; phase = $phase; counts = [pscustomobject]$counts; stop_confirmed = ($phase -ceq 'cancelled'); offline_test = $script:AgentOfflineTest; live_acceptance = 'unverified'; includes_business_text = $false; uploaded = $false }
 }
 function Invoke-AgentCsvSelection([string]$HomePath, [string]$ExecutionId) {
     Assert-AgentId $ExecutionId
@@ -1791,6 +1791,61 @@ function Invoke-AgentServer([string]$HomePath, [switch]$NoBrowser, [int]$Port = 
 
 # M365 Copilot adapter. Windows PowerShell 5.1 / built-in .NET only.
 # No prompt, response, profile command line, or credential is written to logs.
+function Get-AgentConnectionContract {
+    return [pscustomobject]@{schema_version=1;adapter_version='edge-cdp-jp-1';pad_adapter_version='pad-uia-jp-2.71-1';language='ja-JP';maximum_prompt_characters=200000;stable_response_reads=3;initial_input_wait_seconds=15;preparation_wait_seconds=15;transport_versions=@('JsonPartsV1','PlannerV2');policy_name='RemoteDebuggingAllowed';live_capacity_verified=$false}
+}
+function Get-AgentEdgePolicyEntries {
+    $entries=@()
+    foreach($hive in @([Microsoft.Win32.RegistryHive]::LocalMachine,[Microsoft.Win32.RegistryHive]::CurrentUser)){
+        foreach($view in @([Microsoft.Win32.RegistryView]::Registry64,[Microsoft.Win32.RegistryView]::Registry32)){
+            $base=$null;$key=$null
+            try{
+                $base=[Microsoft.Win32.RegistryKey]::OpenBaseKey($hive,$view);$key=$base.OpenSubKey('SOFTWARE\Policies\Microsoft\Edge',$false)
+                $value=if($null -ne $key){$key.GetValue('RemoteDebuggingAllowed',$null)}else{$null}
+                $entries+=[pscustomobject]@{scope=($hive.ToString()+'.'+$view.ToString());readable=$true;value=$value}
+            }catch{$entries+=[pscustomobject]@{scope=($hive.ToString()+'.'+$view.ToString());readable=$false;value=$null}}
+            finally{if($key){$key.Dispose()};if($base){$base.Dispose()}}
+        }
+    }
+    return ,$entries
+}
+function Assert-AgentEdgePolicy {
+    $entries=Get-AgentEdgePolicyEntries
+    foreach($entry in $entries){
+        if(-not $entry.readable){throw 'POLICY_UNAVAILABLE: Edgeの管理設定を読み取れません。管理設定は変更せず、配布担当者へ確認してください。'}
+        if($null -ne $entry.value){
+            if($entry.value -isnot [int] -or $entry.value -notin @(0,1)){throw 'POLICY_UNAVAILABLE: Edgeの管理設定の形式が不明です。配布担当者へ確認してください。'}
+            if($entry.value -eq 0){throw 'POLICY_BLOCKED: 組織の設定によりEdgeのリモートデバッグが禁止されています。管理設定は変更せず、配布担当者へ問い合わせてください。'}
+        }
+    }
+}
+function New-AgentConnectionTrace([string]$HomePath,[string]$RequestId,[string]$JobId,[string]$Transport) {
+    $path=(Get-AgentCopilotAttemptPath $HomePath $RequestId)+'.json'
+    Assert-AgentNoReparse $path
+    [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($path))
+    $file=[IO.File]::Open($path,[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::None);$file.Dispose()
+    $trace=[pscustomobject]@{schema_version=1;adapter_version=(Get-AgentConnectionContract).adapter_version;request_id=$RequestId;job_id=$JobId;transport=$Transport;phase='preparing';send_reserved=$false;click_acknowledged=$false;response_complete=$false;error_type='';elapsed_ms=0;events=@([pscustomobject]@{phase='preparing';elapsed_ms=0})}
+    Write-AgentJson $path $trace
+    return $trace
+}
+function Set-AgentConnectionTrace([string]$HomePath,$Trace,[string]$Phase,[long]$ElapsedMs) {
+    if($Phase -cnotin @('preparing','send_reserved','click_acknowledged','generating','response_complete','failed','unknown','cancelled')){throw 'CONNECTION_PHASE: Unknown connection phase.'}
+    if($Trace.phase -cne $Phase){$Trace.events=@($Trace.events)+@([pscustomobject]@{phase=$Phase;elapsed_ms=$ElapsedMs})}
+    $Trace.phase=$Phase;$Trace.elapsed_ms=$ElapsedMs
+    Write-AgentJson ((Get-AgentCopilotAttemptPath $HomePath $Trace.request_id)+'.json') $Trace
+}
+function Get-AgentConnectionErrorType([string]$Message) {
+    switch -Regex ($Message){
+        '^AUTH_REQUIRED:' {return 'authentication'}
+        '^POLICY_' {return 'policy'}
+        '^CANCELLED:' {return 'cancelled'}
+        '^RESPONSE_TIMEOUT:' {return 'timeout'}
+        '^EMPTY_RESPONSE:' {return 'empty_response'}
+        '^REFUSAL:' {return 'refusal'}
+        '^(RESPONSE_INVALID|CDP_UNAVAILABLE):' {return 'compatibility_or_connection'}
+        default {return 'connection_failed'}
+    }
+}
 function Get-AgentCopilotConfig {
     param([string]$HomePath, $Settings, [string]$JobId='')
     $port = 9223
@@ -2481,6 +2536,7 @@ function Close-AgentCopilotLaunchTab {
 function Open-AgentCopilot {
     param([string]$HomePath,$Settings)
     if ($script:AgentOfflineTest) { throw 'CDP_UNAVAILABLE: 非ライブ試験では認証用ブラウザーを起動しません。' }
+    Assert-AgentEdgePolicy
     $config = Get-AgentCopilotConfig $HomePath $Settings
     $deadline=[datetime]::UtcNow.AddSeconds(35); $mutex=Enter-AgentCopilotMutex $config '' $deadline
     $launchUrl='';$cleanup=[pscustomobject]@{status='not_requested';warning=''}
@@ -2512,6 +2568,7 @@ function Get-AgentCopilotDiagnostic {
     param([string]$HomePath,$Settings)
     $socket=$null; $mutex=$null
     try {
+        Assert-AgentEdgePolicy
         $config=Get-AgentCopilotConfig $HomePath $Settings
         $deadline=[datetime]::UtcNow.AddSeconds(8); $mutex=Enter-AgentCopilotMutex $config '' $deadline
         $target=Get-AgentCopilotTarget $config; $socket=Connect-AgentCopilotSocket $config $target
@@ -2553,15 +2610,18 @@ function Wait-AgentCopilotInputReady {
 function Invoke-AgentCopilot {
     param([Parameter(Mandatory=$true)][string]$Prompt,[Parameter(Mandatory=$true)][string]$RequestId,[Parameter(Mandatory=$true)][string]$JobId,$Settings,[Parameter(Mandatory=$true)][string]$HomePath,[string]$CancelPath,[int]$TimeoutSeconds=180,[ValidateSet('JsonPartsV1','PlannerV2')][string]$Transport='JsonPartsV1')
     if ($script:AgentOfflineTest) { throw 'CDP_UNAVAILABLE: 非ライブ試験モードでは実Copilotへの送信を禁止しています。' }
-    if ($RequestId -notmatch '^[A-Za-z0-9_-]{1,128}$' -or [string]::IsNullOrWhiteSpace($Prompt) -or $Prompt.Length -gt 200000) { throw 'RESPONSE_INVALID: Copilot の要求が不正です。' }
+    Assert-AgentEdgePolicy
+    $contract=Get-AgentConnectionContract
+    if ($RequestId -notmatch '^[A-Za-z0-9_-]{1,128}$' -or [string]::IsNullOrWhiteSpace($Prompt) -or $Prompt.Length -gt $contract.maximum_prompt_characters) { throw 'RESPONSE_INVALID: Copilot の要求が不正です。' }
     if ($TimeoutSeconds -lt 5 -or $TimeoutSeconds -gt 900) { throw 'RESPONSE_INVALID: Copilot のタイムアウト設定が不正です。' }
     $config=Get-AgentCopilotConfig $HomePath $Settings $JobId; $deadline=[datetime]::UtcNow.AddSeconds($TimeoutSeconds)
-    $mutex=$null;$socket=$null
+    $mutex=$null;$socket=$null;$trace=$null;$timer=[Diagnostics.Stopwatch]::StartNew()
     try {
         $mutex=Enter-AgentCopilotMutex $config $CancelPath $deadline
         if ([IO.File]::Exists((Get-AgentCopilotAttemptPath $HomePath $RequestId))) { throw 'RESPONSE_INVALID: 使用済み要求 ID は再送信できません。' }
+        $trace=New-AgentConnectionTrace $HomePath $RequestId $JobId $Transport
         $target=Get-AgentCopilotTarget $config -Create; $socket=Connect-AgentCopilotSocket $config $target
-        $inputDeadline=[datetime]::UtcNow.AddSeconds(15)
+        $inputDeadline=[datetime]::UtcNow.AddSeconds($contract.initial_input_wait_seconds)
         do {
             Assert-AgentCopilotWait $CancelPath $deadline
             $baseline=Get-AgentCopilotSnapshot $socket $CancelPath $deadline
@@ -2572,7 +2632,7 @@ function Invoke-AgentCopilot {
         } while ($true)
         # Each readiness wait has its own short allowance. The immutable request
         # deadline still bounds all preparation, insertion, sending and response reads.
-        $baseline=Wait-AgentCopilotInputReady $config $target $socket $CancelPath $deadline ([datetime]::UtcNow.AddSeconds(15))
+        $baseline=Wait-AgentCopilotInputReady $config $target $socket $CancelPath $deadline ([datetime]::UtcNow.AddSeconds($contract.preparation_wait_seconds))
         $baselineTexts=@($baseline.assistants | ForEach-Object { [string]$_.text })
         $baselineKeys=@($baseline.assistants | ForEach-Object { [string](Get-AgentProperty $_ 'key' '') } | Where-Object { $_ -cne '' })
         $baselineParts=@($baseline.assistants | Where-Object { (Get-AgentProperty $_ 'source_kind' '') -cin @('fenced_parts','fenced_planner_v2','fenced_planner_v2_single') } | ForEach-Object { ConvertTo-Json -InputObject @((Get-AgentProperty $_ 'source_kind' ''),@(Get-AgentProperty $_ 'frames' @())) -Depth 4 -Compress })
@@ -2585,14 +2645,14 @@ function Invoke-AgentCopilot {
         }
         $inputStarted=$false
         foreach ($event in @(@{type='rawKeyDown';key='a';code='KeyA';windowsVirtualKeyCode=65;modifiers=2},@{type='keyUp';key='a';code='KeyA';windowsVirtualKeyCode=65;modifiers=2},@{type='rawKeyDown';key='Backspace';code='Backspace';windowsVirtualKeyCode=8},@{type='keyUp';key='Backspace';code='Backspace';windowsVirtualKeyCode=8})) {
-            $null=Wait-AgentCopilotInputReady $config $target $socket $CancelPath $deadline ([datetime]::UtcNow.AddSeconds(15)) -AfterInput:$inputStarted
+            $null=Wait-AgentCopilotInputReady $config $target $socket $CancelPath $deadline ([datetime]::UtcNow.AddSeconds($contract.preparation_wait_seconds)) -AfterInput:$inputStarted
             $null=Invoke-AgentCopilotCdp $socket 'Input.dispatchKeyEvent' $event $CancelPath $deadline
             $inputStarted=$true
         }
         $empty=Get-AgentCopilotSnapshot $socket $CancelPath $deadline
         Assert-AgentCopilotJobBaseline $target $empty -AfterInput
         if ($empty.inputText -cne '') { throw 'CDP_UNAVAILABLE: 入力欄を空にできません。' }
-        $null=Wait-AgentCopilotInputReady $config $target $socket $CancelPath $deadline ([datetime]::UtcNow.AddSeconds(15)) -AfterInput
+        $null=Wait-AgentCopilotInputReady $config $target $socket $CancelPath $deadline ([datetime]::UtcNow.AddSeconds($contract.preparation_wait_seconds)) -AfterInput
         $null=Invoke-AgentCopilotCdp $socket 'Input.insertText' @{text=$wirePrompt} $CancelPath $deadline
         $inserted=Get-AgentCopilotSnapshot $socket $CancelPath $deadline
         Assert-AgentCopilotJobBaseline $target $inserted -AfterInput
@@ -2603,7 +2663,10 @@ function Invoke-AgentCopilot {
         Assert-AgentCopilotOwnership $config
         Assert-AgentCopilotWait $CancelPath $deadline
         Reserve-AgentCopilotAttempt $HomePath $RequestId
-        $null=Invoke-AgentCopilotEval $socket $send $CancelPath $deadline
+        $trace.send_reserved=$true;Set-AgentConnectionTrace $HomePath $trace 'send_reserved' $timer.ElapsedMilliseconds
+        $ack=Invoke-AgentCopilotEval $socket $send $CancelPath $deadline
+        if($ack -isnot [bool] -or -not $ack){throw 'CDP_UNAVAILABLE: 送信クリックの応答が不明です。再送しません。'}
+        $trace.click_acknowledged=$true;Set-AgentConnectionTrace $HomePath $trace 'click_acknowledged' $timer.ElapsedMilliseconds
         # Only an acknowledged click advances first-send state. Failure keeps the empty-history guard.
         Set-AgentCopilotJobSendStarted $config $target
         # A single click only. An uncertain click/response never causes a second send.
@@ -2614,6 +2677,7 @@ function Invoke-AgentCopilot {
             Start-Sleep -Milliseconds 500
             Assert-AgentCopilotOwnership $config
             $state=Get-AgentCopilotSnapshot $socket $CancelPath $deadline
+            if($state.generating -and $trace.phase -cne 'generating'){Set-AgentConnectionTrace $HomePath $trace 'generating' $timer.ElapsedMilliseconds}
             if ($state.inputCount -ne 1) { throw 'AUTH_REQUIRED: Copilot の入力欄が見つかりません。認証状態を確認してください。' }
             $fresh=@($state.assistants | Where-Object {
                 if ((Get-AgentProperty $_ 'source_kind' '') -cin @('fenced_parts','fenced_planner_v2','fenced_planner_v2_single')) {
@@ -2672,7 +2736,7 @@ function Invoke-AgentCopilot {
             }else{$foldStable=0;$foldKey='';$foldText=''}
             if ($valid.Count -eq 1 -and -not $state.generating -and [string]$state.inputText -ceq '') {
                 if ([string]::Equals($last,[string]$valid[0].identity,[StringComparison]::Ordinal)) { $stable++ } else { $last=[string]$valid[0].identity;$stable=1 }
-                if ($stable -ge 3) { Assert-AgentCopilotWait $CancelPath $deadline;Assert-AgentCopilotOwnership $config;return [string]$valid[0].json }
+                if ($stable -ge $contract.stable_response_reads) { Assert-AgentCopilotWait $CancelPath $deadline;Assert-AgentCopilotOwnership $config;$trace.response_complete=$true;Set-AgentConnectionTrace $HomePath $trace 'response_complete' $timer.ElapsedMilliseconds;return [string]$valid[0].json }
             } else { $stable=0;$last='' }
             if ([datetime]::UtcNow.AddMilliseconds(600) -ge $deadline) {
                 if ($seenNew -and -not $seenText -and -not $state.generating) { throw 'EMPTY_RESPONSE: Copilot の今回の回答が空です。' }
@@ -2681,7 +2745,10 @@ function Invoke-AgentCopilot {
                 throw 'RESPONSE_TIMEOUT: 完了した今回の回答を制限時間内に確認できません。'
             }
         }
-    } finally { if($socket){$socket.Dispose()};if($mutex){$mutex.ReleaseMutex();$mutex.Dispose()} }
+    } catch {
+        if($null -ne $trace){$trace.error_type=Get-AgentConnectionErrorType $_.Exception.Message;$phase=if($trace.send_reserved){'unknown'}elseif($trace.error_type -ceq 'cancelled'){'cancelled'}else{'failed'};try{Set-AgentConnectionTrace $HomePath $trace $phase $timer.ElapsedMilliseconds}catch{}}
+        throw
+    } finally { $timer.Stop();if($socket){$socket.Dispose()};if($mutex){$mutex.ReleaseMutex();$mutex.Dispose()} }
 }
 
 

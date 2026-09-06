@@ -11,7 +11,7 @@ $parseErrors=$null;$tokens=$null
 $transportAst=[Management.Automation.Language.Parser]::ParseFile($transportSource,[ref]$tokens,[ref]$parseErrors)
 if($parseErrors.Count){throw ('PowerShell parse errors: '+$parseErrors.Count)}
 # Definitions only: never import the server/launcher top level or operate a browser.
-$wanted=@('Get-AgentProperty','Get-AgentFullPath','Assert-AgentId','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentTextHash','Get-AgentCopilotConfig','Test-AgentCopilotUrl','Test-AgentCopilotAuthUrl','Test-AgentCopilotSocketUrl','Read-AgentJsonToken','Test-AgentStrictJson','ConvertFrom-AgentJson','Get-AgentPlannerResponse','ConvertFrom-AgentCopilotResponse','ConvertFrom-AgentCopilotParts','ConvertFrom-AgentCopilotPlannerV2','Assert-AgentCopilotWait','Enter-AgentCopilotMutex','Get-AgentCopilotAttemptPath','Reserve-AgentCopilotAttempt','Test-AgentCopilotTargetRecord','Write-AgentCopilotTargetRecord','Get-AgentCopilotTarget','Assert-AgentCopilotJobBaseline','Set-AgentCopilotJobSendStarted','Wait-AgentCopilotInputReady','Invoke-AgentCopilotExpand','Invoke-AgentCopilot','Get-AgentCopilotDomPrelude')
+$wanted=@('Get-AgentConnectionContract','Assert-AgentEdgePolicy','Get-AgentEdgePolicyEntries','New-AgentConnectionTrace','Set-AgentConnectionTrace','Get-AgentConnectionErrorType','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentId','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentTextHash','Get-AgentCopilotConfig','Test-AgentCopilotUrl','Test-AgentCopilotAuthUrl','Test-AgentCopilotSocketUrl','Read-AgentJsonToken','Test-AgentStrictJson','ConvertFrom-AgentJson','Get-AgentPlannerResponse','ConvertFrom-AgentCopilotResponse','ConvertFrom-AgentCopilotParts','ConvertFrom-AgentCopilotPlannerV2','Assert-AgentCopilotWait','Enter-AgentCopilotMutex','Get-AgentCopilotAttemptPath','Reserve-AgentCopilotAttempt','Test-AgentCopilotTargetRecord','Write-AgentCopilotTargetRecord','Get-AgentCopilotTarget','Assert-AgentCopilotJobBaseline','Set-AgentCopilotJobSendStarted','Wait-AgentCopilotInputReady','Invoke-AgentCopilotExpand','Invoke-AgentCopilot','Get-AgentCopilotDomPrelude')
 $definitions=@($transportAst.FindAll({param($n)$n -is [Management.Automation.Language.FunctionDefinitionAst]},$false))
 # Permit private V2 parser helpers to evolve without importing executable top-level statements.
 $wanted+=@($definitions|Where-Object {$_.Name -like '*PlannerV2*'}|ForEach-Object Name)
@@ -20,6 +20,9 @@ foreach($name in @($wanted|Select-Object -Unique)){
  if($definition.Count -ne 1){throw ('Missing or duplicate definition: '+$name)}
  . ([scriptblock]::Create($definition[0].Extent.Text))
 }
+
+$script:AgentEncoding=New-Object Text.UTF8Encoding($false)
+function Get-AgentEdgePolicyEntries { return ,@([pscustomobject]@{scope='fixture';readable=$true;value=$null}) }
 $script:transportChecks=New-Object 'Collections.Generic.List[object]'
 function Assert-Transport([bool]$Condition,[string]$Name){$script:transportChecks.Add([pscustomobject]@{name=$Name;passed=$Condition});if(-not $Condition){throw ('FAIL: '+$Name)}}
 function Assert-TransportRejected([scriptblock]$Action,[string]$Prefix,[string]$Name){
