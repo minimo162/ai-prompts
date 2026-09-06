@@ -101,6 +101,19 @@ $longFramed="`r`n  "+$longJson+"`r`nAGENT_END_r-long-robin`r`n`t"
 $longActualJson=ConvertFrom-AgentCopilotResponse $longFramed 'r-long-robin'
 $longDecoded=ConvertFrom-Json -InputObject $longActualJson
 Assert-Case ([string]::Equals([string]$longDecoded.robin,$longRobin,[StringComparison]::Ordinal)) 'Long complete Robin response is decoded without truncation'
+$rowRobin=@($longRobinLines | Select-Object -First 25) -join "`r`n"
+$rowOutputs=@(Test-AgentRobin -Robin $rowRobin -RunDirectory $robinRun -Job $robinJob)
+$rowMessage='original 日本語 "引用" O''Brien C:\path\raw %FileContents% literal\n ' * 90
+$rowJson=([ordered]@{request_id='r-multiline-robin';state='ACT';message=$rowMessage;robin=$rowRobin;artifacts=@($rowOutputs)}|ConvertTo-Json -Depth 10)
+$rowFrame=$rowJson+"`nAGENT_END_r-multiline-robin"
+Assert-Case ($rowFrame.Length -gt 10000 -and @($rowFrame -split '\r?\n' | Where-Object {$_.Length -ge 10000 -or $_.Length -eq 0}).Count -eq 0 -and $rowOutputs.Count -eq 24) 'Multiline transport exceeds 10000 characters with each intact row below 10000 and a production-validated Robin body'
+$rowActual=ConvertFrom-AgentCopilotResponse $rowFrame 'r-multiline-robin'
+$rowDecoded=ConvertFrom-Json -InputObject $rowActual
+Assert-Case ([string]::Equals($rowActual,$rowJson,[StringComparison]::Ordinal) -and [string]::Equals($rowDecoded.robin,$rowRobin,[StringComparison]::Ordinal) -and [string]::Equals($rowDecoded.message,$rowMessage,[StringComparison]::Ordinal)) 'Multiline JSON and decoded Robin preserve all formatting, Unicode, quotes, backslashes, percent references and CRLF exactly'
+Assert-Case ([string]::Equals((ConvertFrom-AgentCopilotResponse ($rowFrame+"`n"+[char]0x00a0) 'r-multiline-robin'),$rowJson,[StringComparison]::Ordinal)) 'Optional terminal NBSP preserves the entire multiline JSON object'
+Assert-Rejected {ConvertFrom-AgentCopilotResponse $rowFrame 'r-other-multiline'} 'RESPONSE_INVALID' 'Multiline JSON never bypasses the exact terminal nonce'
+$missingMiddle=$rowJson.Replace('"ACT"','')
+Assert-Rejected {ConvertFrom-AgentCopilotResponse ($missingMiddle+"`nAGENT_END_r-multiline-robin") 'r-multiline-robin'} 'RESPONSE_INVALID' 'Malformed multiline JSON after a middle value loss is not repaired'
 }finally{
     if(Test-Path -LiteralPath $robinTemp){
         $resolvedRobinTemp=[IO.Path]::GetFullPath($robinTemp).TrimEnd('\')
@@ -207,9 +220,9 @@ try{
     function Invoke-AgentCopilotCdp {param($Socket,$Method,$Params,$CancelPath,$Deadline);if($Method -ceq 'Input.insertText'){$script:mockInput=$Params.text}}
     function Invoke-AgentCopilotEval {param($Socket,$Expression,$CancelPath,$Deadline);if($Expression.Contains('sends[0].click()')){throw 'CDP_UNAVAILABLE: Simulated uncertain send.'};return $true}
     Assert-Rejected {Invoke-AgentCopilot -Prompt 'Test request' -RequestId 'r-uncertain' -JobId ('f'*32) -Settings @{} -HomePath $jobTemp -TimeoutSeconds 5} 'CDP_UNAVAILABLE' 'Uncertain first send fails without retry'
-    Assert-Case ($script:mockInput.StartsWith("Test request`n`n") -and $script:mockInput.Contains('応答全体は言語ラベル text のコードフェンス1個だけにしてください。') -and $script:mockInput.Contains('フェンス内部は厳密に2行です。')) 'Actual inserted wire prompt requires one text fence containing exactly two logical lines'
-    Assert-Case ($script:mockInput.Contains('内部の第1行: 指定された単一の JSON オブジェクト。') -and $script:mockInput.Contains('request_id は "r-uncertain"') -and $script:mockInput.Contains('改行・引用符・バックスラッシュは JSON の規則でエスケープしてください。')) 'Actual inserted wire prompt binds first-line JSON to the current request ID and JSON escaping'
-    Assert-Case ($script:mockInput.Contains('内部の第2行: AGENT_END_r-uncertain だけを出力してください。')) 'Actual inserted wire prompt requires only the current nonce marker on the second fenced line'
+    Assert-Case ($script:mockInput.StartsWith("Test request`n`n") -and $script:mockInput.Contains('応答全体は言語ラベル text のコードフェンス1個だけにしてください。') -and $script:mockInput.Contains('JSON はプロパティや配列要素ごとに短い行へ整形し、書式用の空行は入れないでください。')) 'Actual inserted wire prompt requires one text fence with short JSON formatting rows and no blank rows'
+    Assert-Case ($script:mockInput.Contains('request_id は "r-uncertain"') -and $script:mockInput.Contains('JSON の文字列値は分割せず、文字列内の改行・引用符・バックスラッシュは JSON の規則でエスケープしてください。')) 'Actual inserted wire prompt binds JSON to this request while keeping each complete string value intact'
+    Assert-Case ($script:mockInput.Contains('JSON の後の最終行: AGENT_END_r-uncertain だけを出力してください。') -and $script:mockInput -notmatch '厳密に2行|内部の第1行|内部の第2行') 'Actual inserted wire prompt places only the current nonce after all JSON rows without the old two-row constraint'
     Assert-Case ($script:mockInput.Contains('フェンスの外に前置き、説明、別のコードや文字を一切付けないでください。') -and $script:mockInput.Contains('JSON のエスケープ以外に Markdown 用の手作業エスケープを追加しないでください。') -and $script:mockInput -notmatch 'JSON オブジェクトだけを 1 行で返してください|Return only JSON|Return exactly one JSON object|ほかの文字、Markdown、コードフェンス') 'Actual inserted wire prompt forbids outer text and additional Markdown escaping without contradicting fenced transport'
     $uncertainConfig=Get-AgentCopilotConfig $jobTemp @{} ('f'*32)
     $uncertainRecord=[IO.File]::ReadAllText($uncertainConfig.TargetPath,[Text.Encoding]::UTF8)|ConvertFrom-Json
@@ -301,7 +314,7 @@ try{
     Reset-TestReadiness;$script:nextTargetId='job-ready';$script:readyFocus.Enqueue($true);$script:readyFocus.Enqueue($true);$script:readyFocus.Enqueue($false)
     Assert-Rejected {Invoke-AgentCopilot -Prompt 'Test request' -RequestId 'r-ready-uncertain' -JobId ('7'*32) -Settings @{} -HomePath $jobTemp -TimeoutSeconds 30} 'CDP_UNAVAILABLE' 'Invocation tolerates pre-key busy but still fails an uncertain single send'
     Assert-Case ($script:readyKeyCalls -eq 4 -and $script:readyInsertCalls -eq 1 -and $script:readySendCalls -eq 1) 'Transient pre-key busy does not replay keys, insert or send'
-    Assert-Case ($script:readyInput.Contains('request_id は "r-ready-uncertain"') -and $script:readyInput.Contains('第2行: AGENT_END_r-ready-uncertain だけを出力してください。') -and -not $script:readyInput.Contains('AGENT_END_r-uncertain')) 'A separate actual invocation binds both response lines to its own request nonce'
+    Assert-Case ($script:readyInput.Contains('request_id は "r-ready-uncertain"') -and $script:readyInput.Contains('JSON の後の最終行: AGENT_END_r-ready-uncertain だけを出力してください。') -and -not $script:readyInput.Contains('AGENT_END_r-uncertain')) 'A separate actual invocation binds its multiline JSON and final marker to its own request nonce'
     Assert-Case (@($script:readyDeadlines | Select-Object -Unique).Count -eq 1 -and $script:readyFocusCalls -eq 7) 'All focus call sites share one preparation deadline including a busy recheck'
     Assert-Case ([IO.File]::Exists((Get-AgentCopilotAttemptPath $jobTemp 'r-ready-uncertain'))) 'Uncertain send after readiness retains the no-replay reservation'
     # The original input-appearance timeout is separate from focus preparation and stays AUTH_REQUIRED.
@@ -364,6 +377,31 @@ try{
     Assert-Case ($script:responseReads -eq 3 -and $script:responseSends -eq 1 -and $script:responseKeys -eq 4 -and $script:responseInserts -eq 1) 'Fenced success requires three stable reads after exactly one input and send sequence'
     Assert-Rejected {Invoke-TestResponse} 'RESPONSE_INVALID' 'Successful fenced request ID cannot be replayed'
     Assert-Case ($script:responseSends -eq 1 -and $script:responseInserts -eq 1) 'Replay rejection performs no second insert or send'
+    foreach($rowMode in @('full','folded','nbsp')){
+        $rowRequest='r-multiline-'+$rowMode
+        $rowValue="original 日本語 C:\path %FileContents% literal\n`r`n  "
+        $rowRaw=([ordered]@{request_id=$rowRequest;value=$rowValue;items=@('first','middle','last')}|ConvertTo-Json -Depth 10)
+        $rowText=$rowRaw+"`nAGENT_END_"+$rowRequest
+        if($rowMode -ceq 'nbsp'){$rowText+="`n"+[char]0x00a0}
+        $rowCandidate=[pscustomobject]@{key='reply-'+$rowRequest;text=$rowText;source_kind='fenced_plaintext';collapsed=$false}
+        if($rowMode -cne 'full'){$rowCandidate.source_kind='fenced_collapsed';$rowCandidate.collapsed=$true}
+        Reset-TestResponse $rowRequest @($rowCandidate)
+        Assert-Case ([string]::Equals((Invoke-TestResponse),$rowRaw,[StringComparison]::Ordinal)) ('Actual adapter preserves the complete multiline JSON: '+$rowMode)
+        $expectedReads=if($rowMode -ceq 'full'){3}else{6};$expectedExpansions=if($rowMode -ceq 'full'){0}else{1}
+        Assert-Case ($script:responseReads -eq $expectedReads -and $script:responseExpansions -eq $expectedExpansions -and $script:responseSends -eq 1 -and $script:responseInserts -eq 1 -and $rowCandidate.text -ceq $rowText) ('Multiline success requires all stable reads without a repeat input, send or changed tail: '+$rowMode)
+    }
+    foreach($rowFailure in @('malformed_middle','wrong_nonce','changed_text')){
+        $rowRequest='r-multiline-reject-'+$rowFailure
+        $rowRaw=([ordered]@{request_id=$rowRequest;value='original middle value';items=@('one','two')}|ConvertTo-Json -Depth 10)
+        if($rowFailure -ceq 'malformed_middle'){$rowRaw=$rowRaw -replace '"original middle value"',''}
+        $rowText=$rowRaw+"`nAGENT_END_"+$rowRequest
+        if($rowFailure -ceq 'wrong_nonce'){$rowText=$rowRaw+"`nAGENT_END_other"}
+        Reset-TestResponse $rowRequest @([pscustomobject]@{key='reply-'+$rowRequest;text=$rowText;source_kind='fenced_collapsed';collapsed=$true})
+        if($rowFailure -ceq 'changed_text'){$script:responseExpandMode='changed_text'}
+        Assert-Rejected {Invoke-TestResponse} 'RESPONSE_INVALID' ('Actual adapter refuses damaged or changed multiline response: '+$rowFailure)
+        $expectedExpansions=if($rowFailure -ceq 'changed_text'){1}else{0}
+        Assert-Case ($script:responseExpansions -eq $expectedExpansions -and $script:responseSends -eq 1 -and $script:responseInserts -eq 1) ('Multiline rejection never retries input, send or expansion: '+$rowFailure)
+    }
     foreach($mode in @('rendered','missing','collapsed','refusal')){
         $requestId='r-origin-'+$mode;$raw='{"request_id":"'+$requestId+'","value":"日本語 C:\\path\\raw"}'
         $candidate=[pscustomobject]@{text=($raw+"`nAGENT_END_"+$requestId);source_kind='fenced_plaintext';collapsed=$false}

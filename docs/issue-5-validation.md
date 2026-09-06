@@ -2,6 +2,8 @@
 
 2026-09-06 / 状態: **partial — 実機ゲート未完了**。
 
+2026-09-06 11:13 JST追記: 複数行JSONの既知DOM取得と既存More操作、PlannerのRobin/JSONパス表記・同一出力への重複Write禁止、IF/ELSE後の`Keys`変数の確定代入判定を統合した。App SHAは `f2449a5f14cfb523f4cc77e7e48691b6687275f10acdaa815a4b436bf79262fc`、配布releaseは `0.1.0-0b7bc16475f5b5c861886ce6f051efc0ea2c52673c543c0add121cc039ca3c14`。統合した実ソースに対しWindows PowerShell 5.1 x64 STAでcore 137 / Copilot 232 / PAD 320、通信をすべてローカルで応答する独立EdgeでDOM 687チェックが通過した。独立ソースレビューはSHIP・must-fixなし。coreテストの最初の相対パス起動は既存の既定引数評価で失敗し、絶対AppSourcePathを指定した実ソースで完了した。共有・通常キャッシュへの反映と新しい実Copilot/PAD検証はこの時点では未実施。単一JSON文字列の1行が10,000文字を超える場合の完全取得は保証していない。
+
 [Issue #5](https://github.com/minimo162/ai-prompts/issues/5) 本文と全コメント（0件）を確認して実装した。ブランチは `codex/issue-5-business-agent`。この記録は成功条件の達成宣言ではない。
 
 ## 実装した範囲
@@ -32,10 +34,10 @@
 |---|---|---|
 | 0: 配布・起動 | 実共有UNCからの初回・更新、欠落UNC時の警告付きローカル起動は合格 | 実共有の切断、利用者環境での再起動・UI停止 |
 | 1: 固定PADからAiCall | 正常系合格。実PADから翻訳→分類の直列2回、結果受渡し、review分岐と出力を確認 | 拒否/空/期限/中止の実機異常系 |
-| 2: AIなしのA/B差し替え | 正常系A/B合格、異常系は未完了 | 保存・貼り付け失敗などを意図的に起こした場合の旧フロー実行防止 |
-| 3: 生成Robin全文取得 | 新規短文の自動展開・881文字の完全取得が合格。約5.8万文字の要求には空コードが返り拒否 | 別の長文ケース、過去回答・途中停止 |
-| 4: 生成AiCallフロー | 未検証 | 読取→AI→分岐→書出しを同じPADで完走 |
-| 5: 2〜3往復 | 未検証 | 実結果本文に応じた次の手順、ACT/DONE/ASK_USER/BLOCKED、最終表示 |
+| 2: AIなしのA/B差し替え | 正常系A/B合格。実行中の別controllerをPAD_BUSY・UI操作0で拒否し、元の実行を中止・出力抑止する動作を確認。検証helperの集計不具合により追試全体はunknownで保持 | 保存失敗などを意図的に起こした場合の旧フロー実行防止。実貼付後の異常でRun前に停止した過去証拠は下記 |
+| 3: 生成Robin全文取得 | 新規短文の自動展開・881文字の完全取得が合格。約5.8万文字は空コード、24件の長文は時間切れ | 長文表示の10,000文字行とコピー内容の比較、完全取得、過去回答・途中停止 |
+| 4: 生成AiCallフロー | Copilot生成の読取→AiCall翻訳→書出しが実PADで合格 | 分類結果による分岐を含む生成フローの完走 |
+| 5: 2〜3往復 | 実HTMLからASK_USER→回答→ACT→AiCall/PAD→DONEが合格。別依頼のBLOCKEDも合格 | 実結果本文に応じて次のRobinを変える複数ACTの往復 |
 | 6: 別利用者・別PC | 未検証 | 開発環境に依存しない導入・更新・認証・結果確認 |
 
 2026-09-06に利用者の許可とWindowsの管理者承認を経て、専用共有 `\\localhost\AiPromptsAgentPoC$` を作成した。共有範囲は `.work/shares/AiPromptsAgentPoC` の配布3ファイル、SMB権限は利用者本人の読み取り1件で、NTFS権限・サービス・ファイアウォールは変更していない。最初の承認後試行は共有作成前のファイル名照合で失敗した。作成スクリプトがBOMなしUTF-8だったため、Windows PowerShell 5.1が日本語CMD名を誤読していた。本文を変更せずUTF-8 BOMを付け、旧版の保存と独立した構文・ファイル名照合確認後に成功した。作成・UNC読取の証拠は `.work/gate0/share-create-6a7c02fc14f34586b7c7a5cb32def3c4.json` と `share-verified-6a7c02fc14f34586b7c7a5cb32def3c4.json`。
@@ -192,9 +194,55 @@ App SHA-256 `126ade09ba1a888969030c0de8e0b4d9a4f51aaa8d8a1aa08273e81450650d9f` �
 App draft `d02fc03ddb6177f5507047d9c42994765f1b92e749773775b31f020bdaab900e` で同じ実画面を2回読み取り、全3行・末尾LFとNBSP・1437文字のハッシュ一致を確認した（`live-folded-tail-reader-181d47c74e96444e8b0b9ab0dee02792.json`）。折り畳みはfenced_collapsed/trueとして保持し、通常parserが折り畳み専用の期待エラーで拒否することも確認した。取得値の保持を確認する読取り専用の診断であり、元のunknownを成功に変更していない。入力・送信・展開・PAD操作は0回。
 末尾NBSP対応版ではnative PS5/STAの基本137・Copilot215、隔離Edge DOM618項目が合格し、独立最終レビューは必須修正0だった。元の2行経路と失敗時の拒否を維持し、3行目の別文字・複数NBSP・余分な行・属性やgeometry変更、展開後の末尾変化を拒否することを検査した。実画面の読み取りと折り畳み拒否までを確認しており、新規要求での展開・長文取得は未完了である。
 
+末尾NBSP対応を `80df2ff2535292927f2ea65c118e88d076effaa4` にコミットし、release `0.1.0-358335e401cb305e109a83f8d16385953a5a4490d08fccb3474f344a8bae6629` を専用共有へ反映した（`gate0/publish-fenced-tail/6f09157162784aa29127756980cb7c05/result.json`）。旧配布とACLを保持した。通常環境の更新 `28b0398df75d4228a4056205c5067f84` も実UNC CMD1回/exit0で成功し、新server PID33328/port64298の版・設定・HTTP待機と、通常117/private51/archive3の計171ファイル保持を確認した。
+
+同じ版での新規診断 `2cb92123e6bf49a9b5517d2a40864520` は短文1回後にunknown/RESPONSE_INVALID、長文は未送信だった。完全DOM観測2回は60ノード・1論理行・1319文字で一致し、表示されたJSONは2件目のartifactsパス途中で終わり、閉じ括弧と終端マーカーがなかった（`fenced-observation-b62006c0bc3b46d58fec1046238bada3.json`）。生成終了・入力空で安定しているが、providerの生データは観測していない。独立レビューでも不完全な応答の拒否は妥当と確認した。本文の修復や再送は行わず、旧6タブ・既存ファイル・private51ファイルを保持した。長文の有効コード取得は未合格のままとする。
+
+Gate 3の未完了範囲を保持し、別の実HTML統合経路も検証するため、Gate 4/5セッション `731bd57d74cd4965a7299a38d7c554a4` を準備した。合成の日本語メモを対象とし、実フォームへの入力・読戻し後に「開始する」を1回クリックした。フロントエンドの開始通信はHTTP200で、新ジョブ `d23aeb8a961b4b198eaef6a8ef8a087d` と「手順を検討中」の表示を確認した（`ui-click.json`、`job-owned.json`、`ui-observation-001.json`）。直接のAPI POSTやjob作成では代用していない。この記録時点では実行中で、PAD完走・Gate 4/5合格は未確認である。
+Gate 4/5の初回計画はRESPONSE_TIMEOUTでfailedとなり、helperは終端状態・worker終了・HTMLとの状態一致・旧ファイルとタブの保持を確認した（同セッション `result.json`）。PADとAiCallは未実行で、正常な2〜3往復の証拠ではない。ジョブ専用Copilotのhas_sent=trueと今回のattemptファイルを別に確認したが、helperのnew_attempt_ownership_verifiedはfalseのまま保持する。事後の2snapshotは6781文字で一致し、折り畳まれたJSONが2件目のai_call_id途中で切れ、Moreボタンを含んでいた。provider生データや未描画部分は未観測である。実HTMLの終了画面 `failed-ui-4d22e8897e1140fa97fa97c653673403.png` も撮影して目視し、エラー、履歴、実行ID、停止ボタン無効を確認した。
+
+Gate 3の1319文字の折り畳み本文は約10分後の2読取りでも不変だった（`fenced-observation-ff7c646a3c7247fd8ae104c9860b57a2.json`）。同じ応答のMoreを、対象・本文・構造・ボタン所有と永続的な単回claimを固定して1回クリックした。ACKを確認し、前後2読取りとファイル・タブ保持が合格した（`partial-tail-expansion-ad3c5fbc7019404a970cf5acaa759313.json`、SHA `e429ade05cd1933c7a6fa347abffe57be6ebbadcdb52bc5ed00d598c8e0e8626`）。ラベルは「簡易表示」に変わったが、本文は60ノード・1行・1319文字・SHA `fa8c8e49e047561079c6e0b9643f2c59d787285d4c15e2fce2bbd1b934b08379` のままだった。約2分後の独立した2読取りも同じだった（`fenced-observation-680cc59f4ab7474891e5fbabd7d38d78.json`）。この応答については展開による本文増加を観測できず、終端のない応答を拒否する現処理を維持する。provider生データの完全性は未観測であり断定しない。部分JSONの受理・修復・再送・PAD実行は0、元のunknownと未送信の長文を保持した。
+短文の成否で長文を未送信にしない別診断として、新規long-onlyセッション `cc2c1c91b16b4905a1fe8da3d2776f24` を実施した。24件・推定7817文字、送信上限1回、PAD0のfixtureで、request `3ec364775b2a46848d67f2ac113ece37` は2026-09-05 23:55:03〜23:58:05 UTCにRESPONSE_TIMEOUTとなった。全体はunknownのまま保存し、rawは保存されていない（`result.json`、SHA `27be913c9ad1e495e62c9f611b644ae03c767667f69204b148b7b0a7246e7a6f`）。実行helper PID32100は終了し、旧9タブ・既存ファイル・private51ファイルの保持を確認した。旧約6万文字の失敗結果と分けて記録し、長文の完全取得は未合格である。
+
+長文の事後完全DOM観測は64ノード・2行で、JSON行がちょうど10,000文字の途中で終わる一方、次行に正しい42文字の終端マーカーが存在した。2読取りの本文ハッシュは一致し、生成終了・入力空・保全も確認した（`fenced-observation-12f62d2c93dc42cca898e819b1e481a8.json`、SHA `f9b77b48a85319559d159b767c3e712704a52185a6d106b672404972c6c8d76f`）。表示側の1行省略が仮説として残るため、コード専用のコピー結果と比較する診断を準備中。provider原文や全文取得の成功とは扱わない。
+
+Gate 5の対応外経路は、実HTMLから合成メモをExcelブックへ保存する目的を入力した新規セッション `5435d6963bb24eabb47c5389416eafe1` で合格した。開始1回/HTTP200からjob `5c9b700086c3474abb2ea588f57c53c7` がBLOCKEDとなり、Excel操作が未対応との説明を表示した。worker終了、UI「続行できません」、job.errorとの全文一致、厳格な応答の独立2読取り一致、今回attemptの帰属、旧ファイルとタブの保持を確認した。Planner1回、PAD/AiCall/成果物ファイル0（`result.json`、SHA `abcaf68e7978fe96c81febb1d2b11f56858dac4fba589d1226956d77f3e03403`）。終了画面 `blocked-ui-55113b1400ee472f8c2718642871e215.png` を撮影・目視確認した。ASK_USERと業務完走の合格を意味しない。
+
+Gate 5の質問待機は、実HTMLから翻訳先の言語を未指定にした新規セッション `5abb825befb04bb6ad757076276f53a6` で合格した。開始1回/HTTP200からjob `ad5f3eb1a4484c15a8e9fcb5d4b1a8c5` がwaiting_userとなり、「何語に翻訳しますか？」を表示した。question ID `4e2f42ed7cca4fdd8fb77cd72e6976e8` と質問全文、worker生存を4秒隔てて照合し、厳格なASK_USER応答の2読取り一致、PAD/AiCall/成果物/回答操作0、既存ファイルとタブの保持を確認した（`gate5/ask-sessions/.../result.json`、SHA `58c55d2ebff7dfd6326d0e6b6ff49ab7a189fa5242b8cc2a17d06d055d2436d2`）。`question-ui-9fe09e595ce3441da4b0fca0f38c7a49.png`（SHA `097fba23b70cbef73da71e22f41d63206d3c5d2d954c3003d3c361746f2b0fb0`）を目視し、回答待ち・質問・開始無効・停止有効を確認した。合格範囲はinitial_question_passedで、回答後の再開と業務完了は含めない。
+
+同じ質問へ実HTMLで「英語」を入力し、「回答して続ける」を1回押した追試 `f607542bab404a2c897512ad93b7751b` は、回答HTTP200・同じquestion IDの受付と消費を経て完了した。Copilotが生成した2465バイトのRobinを製品が専用PADへ反映し、run `15684dff4af44ee082702d142a18a67a` で読取→AiCall翻訳→書出しを実行した。AiCall `0877e708da32419d9d044232549d7566` の結果を同じPADが受け取り、実成果物の観測を返した次の計画でDONEとなった。初回ASK_USERを含めた計画3回、実PAD/AiCallを含む完走、worker終了、厳格なDONEの2読取り一致、初回記録・旧ファイル・タブの保持、製品が更新したPAD ownerとの整合が合格した（`gate5/ask-answer-probes/.../result.json`、SHA `2ac5f12b80514f264bccafa26cbb4ceca544ffa77c62f212bff496de01a84c9a`）。直接のAPI POST、手動job書込み、回答の再試行は行っていない。
+
+成果物 `translation.txt` は40バイト、SHA `8ed8f67d0cd9e3485e71cbdb2f9325114772852537e98cad248241b306edb748`、本文は `Tomorrow's meeting starts at 3:00 PM.`。原文の明日・打合せ・午後3時・開始を保ち、意味の追加や欠落がないとrootが確認した（`semantic-review.json`、SHA `d2eb836c1a3d5a4d8a04c4045023a1b74dd8aca7f12340bf2cdf8ed2c28214de`）。実ファイル、観測本文とハッシュ、完了画面のパスが一致した。`done-ui-6ee4550e971444b690506c2ee6832f70.png`（SHA `8da52ec5610b5c4aa436847b0e3600f5cd35188934043844f73232b82ea0be50`）を目視確認した。初回の全画面採取ではPNGが得られず、読取り専用の採取をログ付きで再実行して成功した。現在のPADはこの完了済み翻訳フローで、owner SHAは `ecb7769b01f65d468d34ce53d99ed0e2758d77d3182bd230741aedb43cc59418`。分類分岐や複数ACTによる次のRobin変更まで合格したとは扱わない。
+
+Gate 2の実行中停止試験 `ce71b6141931453eb13ec9bc9c7abbc4` は、WAIT5秒×6と末尾の新規ファイル書込みを使い、実製品関数による差替え・保存・Run各1回、今回のstartedマーカーとrunningを確認後の停止POST1回/ACK、Stop1回を観測した。controllerはcancelled/CANCELLED、成果物・finishedマーカーなし、エラー0のidle復帰、現在ownerとsubmittedの一致を確認した。ただし末尾の保全チェックが未確認となったため全体はunknown/accepted=falseを保存している（`result.json`、SHA `a6386ac1cc789d1a14f053c286ef490ac89743fea6e4f28514e7adefed539b04`）。旧結果を変更せず、読取り専用で失敗した保全条件を切り分ける。この試験直後は保存済み中断試験フローを残し、後続の上記翻訳ジョブで製品が置き換えた。
+停止試験の保全追補 `preservation-diagnostic-a0938f49426b4409aac7669902cf3abb.json` は、既存200ファイルの過不足・ハッシュ差分0、現在ownerと今回submissionの一致、旧ownerと旧Mainの保存を確認した。失敗した条件はEdgeの一覧比較で、準備時12件に対し追補時5件だった。実タブの終了・一時的な一覧からの欠落・操作主体は未確認であり、元のunknownを合格へ書き換えない。追補は読取りのみで、旧resultのSHAは不変。最初の診断helperにはエラー整形のプロパティ参照不具合があり、旧版を保存したV2で整形だけを修正して採取した。
+
+長文コード専用コピー `c0ba12c264504777818bc54423846fb4` は2026-09-06 00:19:55〜00:20:18 UTCに1回クリックしACKを確認したが、本文を取得できずunknown/COPY_PROBE_INCOMPLETEだった（`gate3/code-copy-probe/.../result.json`、SHA `0195a9e055d207205b034e80928f7792bb7e6167ade47761eb660ca723b65da6`）。クリップボードはメモリ内へ退避した全形式・内容との一致を照合して復元し、開始時の5ページと既存ファイルは保持した。プロバイダー送信・PAD・展開・権限変更0。ブラウザーのdocument focusを前提確認していないため、コピー不成立の原因は未特定である。このrequestのコピーclaimは消費済みとして保存し、同じ診断を再試行しない。
+コピー後の読取り `current-copilot-views-67584b7f295b45f29bcc3df1961f0e23.json`（SHA `95a472dd534c7f8215fd01a9b74f7ccf722da554d17e506761c037e8ac806956`）で、長文の応答に「コードをクリップボードにコピーできません- ドキュメントにフォーカスを移動して、もう一度お試しください」というエラーを確認した。2読取りともdocument.hasFocus=false/visibilityState=hiddenで、論理行は10,000文字と42文字のまま。これにより初回コピーのフォーカス不足を画面内の証拠で特定した。別のGate 4/5タブはnonceを含む応答を取得できず、前面化1回の追補でもhasFocus=true/visibilityState=hidden、assistant一覧は空だった（`gate45-foreground-fd32a4d198fa4dcda3798813ffa71d4c.json`、SHA `097b437cfeff546fe6cd301869f04d5ae3525ad427b7ca072e0d25f5a87e30b5`）。両診断とも既存ファイル・ページ一覧は保持した。初回コピー結果を保持した上で、長文の対象ウィンドウとフォーカスを確認する別の補足診断を準備する。これは同じ診断の無条件な再試行ではなく、確認できた失敗条件を修正した2回目のコピーであり、プロバイダー送信やPAD実行は繰り返さない。
+
+前面化付きコピー補足 `92ae8aa1f7134d0c9af9fd96ef2d2c82` は、CDP上の対象ウィンドウがmaximized、Page.bringToFrontのACK後にhasFocus=trueである一方、20読取りともvisibilityState=hiddenだったため、コピー前で停止した（result SHA `555f5281bcc7779aced6f2f5c56a6e088b7f8098dde8c9cc1db4266ec12a3f58`）。この補足でのコピーとクリップボード変更は0であり、実コピーの累計は初回の1回のまま。続く `native-edge-focus-2bb891649aac4eb595e8caec03a34f16.json`（SHA `c06510ae2c76fd4939ee2ee14805b50b7dd07ef365d92facd73442e894a50146`）は、Edge PID・開始時刻・HWND・CDP矩形との一致、ウィンドウ可視・非最小化・DWM cloaked=0を確認したが、SetForegroundWindowはfalseでOSの前面取得に至らなかった。本文は77ノード・10,000文字と42文字のまま、hasFocus=true/visibilityState=hidden。コピー・権限変更・仮想デスクトップ変更0、旧記録・ファイル・ページ一覧は保持した。未表示と報告する状態の原因は未確定である。
+
+Chromiumの固定commit `8d12fea02a097cdabadbd7c84b45fc63e6b7b908` の[writeText検査](https://chromium.googlesource.com/chromium/src/+/8d12fea02a097cdabadbd7c84b45fc63e6b7b908/third_party/blink/renderer/modules/clipboard/clipboard_promise.cc#672)は、secure context・document focus・権限を要求し、visibilityStateを独立した条件にしていない。補足診断だけに加えていたvisibility条件を外し、実測focusと既存DOM・所有権・クリップボード保護を残した `Copy-CodeLongDocumentFocusOnce.ps1`（SHA `2db995b88c80086afde357e29c70762d4baa781cdeef4f745fbc86fd7c204091`）をnormal Explorerから実行した。installed Edge 152.0.4191.62との実装同一性は推定していない。
+
+追補 `7ce5e64fcd734f468e5e26eb940e654f` は2026-09-06 01:18:44〜01:19:09 UTCにコードコピー1回を要求し、ACKと直前のhasFocus=trueを確認したが、本文を取得できなかった。実コピーは累計2回、クリップボード復元済み、provider/PAD/権限変更0。結果SHAは `29b3c11255fe7c26c427908e468e4cf046c8720c6e80476e5b18690dd0170b4a`。コピー前後の4回のowned DOMは同じ64ノード・10,000文字と42文字の行で、コピー後はhasFocus=falseとなった。明示的な成功・失敗の表示はなく、フォーカス変化だけから原因を断定しない。末尾の保全エラーが先行コピーエラーを上書きし、実行直後のafter記録も保存されなかったため、元の結果は `unknown/PRESERVATION_FAILED` のまま保持する。
+
+読み取り専用の現在比較 `document-focus-current-comparison-68476708d60849ce80d98f39ee05cc98.json` は、01:24:32 UTC時点で既存247ファイル・消費claim・HEADが一致し、元の7ページを保持した上で別の1ページが増えたことを確認した。これは実行直後の状態を復元した証拠ではない。最初の比較ヘルパーはWindows PowerShell 5.1でUTF-8指定を欠きJSON読取りに失敗したため、旧ファイルを保持してUTF-8明示版で比較した。長文完全取得は未検証であり、本体へのコピー処理追加は行っていない。IssueにはJSONの物理行数指定がないため、次に複数行JSONの表示構造を測定する。長いRobin文字列自体はpretty-printだけで分割されない点も残る。
+
 Gate 0の追補 `d2dd3aa485384c29b884df9be83ff33c` は、実共有を読み取って作った隔離cacheに対し、未作成UNC子パスをSourcePathとして実AppのBootstrapを1回起動し、警告・新規serverの起動と状態確認・所有確認後の正常終了まで合格した（`gate0/outage-followups/d2dd3aa485384c29b884df9be83ff33c/result.json`）。2026-09-05 21:35:44〜21:35:51 UTC、Bootstrap exit 0、試験server PID13688/port56786は終了済み。通常server PID25544/port53708、既存158ファイル、共有3ファイル、cache4ファイルは保持した。実共有そのものの停止やCMD起動を行った試験ではなく、existing_share_outage=false/actual_cmd_invocations=0を記録している。旧outage失敗結果は変更していない。
 
 Gate 0の実共有切断、Gate 1/2の異常系、Gate 3〜6の実機確認も残っている。
+
+分類と2回の生成ACTを確かめる追加フィクスチャは、短い日本語メモをreview/normalに分類し、最初の実行で分類結果と下書きを保存、次の実行で実保存結果を読み直して最終ファイルへ書く自然文依頼とした。初回 `classify-sessions/08c9121e9e7c413faf025321f002b2b2` は、入力後・開始前に無関係な旧タブ1件の欠落を検証スクリプトが拒否した（result SHA `10c70a4319a99168ee4bc3a5489700e1b47a9b88e29893da4bebce200505af9b`）。開始・job作成・provider・PADは0。対象外タブの一覧変化は記録にとどめるクローンを作り、所有UI/Copilotタブ・job・ファイルの照合を必須のまま維持した。
+
+次の `classify-sessions/a42c6852dff2424d9642978de318b4d0` は、2026-09-06 01:30:14〜01:31:48 UTCに実HTMLの開始1回/HTTP200からjob `4d4538fe3d9f45099fa721078d5e4d7d` を作成した。Copilot応答は完全なJSONとして取得されたが、Robinの最初のReadTextパスに単独バックスラッシュがあり、現行の二重バックスラッシュ契約に合わず `ROBIN_ACTION` でPAD前に停止した。AiCallのアクションは提供済みテンプレートと一致した。また、classification.txtへのWriteがIF/ELSEの両方に現れ、後段の書込1回制約にも反していた。UIエラー一致・worker終了・旧ファイル・全タブ・PAD所有記録の保持を確認した。result SHA `77db002ec916e69769827280be41f18eb27301e561ed88c973ffd36cc0b65b33`、Copilotの2読取り記録SHA `f5532d49acd40688befcd08e59fc9e4cbeb747af7b3468fa9801c106c0e79a10`。これは不正生成コードの実行前拒否の証拠であり、分類フローの完走ではない。
+
+複数行JSONの診断 `pretty-diagnostic/sessions/846d0dd3df984619830794adb486937e` は、送信部分の表示指定だけを診断用14行へ変更し、本体を変えずに実行した。2026-09-06 01:35:38〜01:36:16 UTCに送信前の待機で `RESPONSE_TIMEOUT` となった。新規job `50ff7e1f96c344f68e20c0d38011c59c` のtarget記録は `has_sent=false`、request `a7286c4757514fccb3b1ea670ccd9ce5` のattemptファイルは存在せず、送信ACKもない。provider呼出し入口への到達を実送信と数えず、結果のprovider_callsはnullのまま保持する。旧ファイルと所有targetは保持し、PAD/コピー/展開は0。後刻の読み取り専用確認では、同じタブに空の入力欄1件、生成中表示・過去回答・busy表示0、readyState=completeを確認した。待機失敗時点の一時的な読込み状態は後刻観測から断定しない。
+
+同じ未送信のjob/request/targetを照合し、新たな一度限りの継続claimを作った `pretty-diagnostic/continuations/1be3ec8bf6364393a1fff27b5963ec08` は、01:50:30〜01:51:17 UTCに初回送信1回のACKを確認して成功した。14論理行・268 UTF-8 bytesは期待本文と完全一致し、独立した2回の全DOM読取りも一致、既存の厳密JSONパーサーとPlanner契約を通過した。result SHA `ab00bfff2540c661b94b65b5a54a12267d01ac17ae058f680b94ac607f7f0ee1`、本文SHA `7a8220e3485dc1eb53444cf8b58a52579d52890ad0f65ab188ebeb2523e8ed94`。新規タブ・PAD・コピー・展開・権限変更0、旧ファイル・所有targetを保持。これは複数行の表示構造と送信データ保持を測った診断であり、未変更の製品アダプターの複数行対応や長文Gate合格ではない。
+
+Gate 2の `busy-cancel-sessions/b05d8d6d6e564f1ab3a674bff92b9820` は、実PADでAの今回開始マーカーとrunningを確認後、別の通常PowerShell controller Bを1回呼び出した。A用helperの事前mutexは解放し、製品controllerが保持するmutexで `failed/PAD_BUSY: another PAD controller is active.` を返すこと、Bの全UI境界呼出し0・job未作成を確認した。Aは保存・実行・取消・停止各1回、取消ACK、`cancelled/CANCELLED`、出力/終了マーカー0、最後はidle・新ownerと提出コード一致。既存ファイル保持とブラウザー一覧不変も確認した。元result SHA `dd53bac9c6c1f809d5867bf292fbebd4132afe6ca081d0f1c653f3a795731de7` は `unknown/accepted=false` のまま保持する。
+
+B helperの集計は `counts` 内の `keys=0` が `.Keys` を隠し、整数添字0で先頭のcontroller_calls=1をUI合計へ加算していた。読取診断 `posthoc-8e24f21fd4274d9aaeceb4e7b0f2bfbf.json`（SHA `4472c3aff47e1e30785e40a1c44b6b7472ceb5b279380f649fcbcda530efb70f`）で、保存countsをnative PS5.1へ戻し、元式1・GetEnumeratorによる正しい合計0を再現した。元式のOR条件はここで短絡し、後続のowner/startハッシュ比較には達していなかった。現在値はauthorizationと一致したが、当時の未保存値の代用にはしない。PADを再実行せず、製品の実競合拒否・取消の証拠と、helper全体の不明判定を分けて記録する。現在のMainはこのWAITフローで、owner SHA `c20a1332d5783d0b1f91dae47ff44bd47f733c828ec3b9261eb59a8def2b38fb`、content hash `67813b2da377c4bfb792b46beb091d7f05b5a1b09699bf9bc90ea12963f83fe9`。以前の翻訳フローとownerは同sessionに退避済み。
 
 ## 再現コマンド
 

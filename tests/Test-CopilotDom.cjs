@@ -331,7 +331,7 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
     const icon = (size = '20', kind = 'icon-regular') => '<svg class="' + kind + '" fill="currentColor" aria-hidden="true" data-fui-icon="" width="' + size + '" height="' + size + '" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h3v3H1z" fill="currentColor"></path></svg>';
     const pairedIcons = size => icon(size, 'icon-filled') + icon(size);
     const item = markup => '<div class="header-item" data-overflow-item="">' + markup + '</div>';
-    const fencedReply = (line0, line1 = marker, key = 'fenced-fixture') =>
+    const fencedRows = (rows, key = 'fenced-fixture') =>
       '<div dir="auto" aria-hidden="false" class="fenced-reply" data-testid="markdown-reply" data-message-id="' + key + '" data-message-type="Chat">' +
       '<div class="fenced-wrapper"><div class="fenced-inner"><div role="group" aria-label="コードのプレビュー" tabindex="0" class="fenced-preview"><div>' +
       '<div tabindex="-1" class="scriptor-component-code-block fixture-code scriptor-codeblock-virtualized">' +
@@ -344,9 +344,10 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
       '<div class="header-spacer"></div></div></div></div></div>' +
       '<div class="code-body"><div class="body-scroll" style="height: 100%; width: 100%; flex-grow: 1;"><div class="code-find" data-virtualized-code-find-root="true">' +
       '<div class="body-spacer"></div><div class="code-editor" tabindex="0" role="textbox" aria-readonly="true" aria-multiline="true" aria-label="コード エディター">' +
-      '<div class="gutter">1</div><div data-line-index="0" class="code-line">' + escapeText(line0) + '</div><div class="gutter">2</div><div data-line-index="1" class="code-line">' + escapeText(line1) + '</div></div>' +
+      rows.map((line, index) => '<div class="gutter">' + (index + 1) + '</div><div data-line-index="' + index + '" class="code-line">' + escapeText(line) + '</div>').join('') + '</div>' +
       '<div class="more-holder"><button type="button" role="button" aria-label="その他の行を表示する" class="more-button"><span class="button-icon">' + icon('1em') + '</span>その他の行を表示する</button></div>' +
       '</div></div></div></div></div></div></div></div></div>';
+    const fencedReply = (line0, line1 = marker, key = 'fenced-fixture') => fencedRows([line0, line1], key);
     const fencedCss = `
       #fixture .fenced-reply,#fixture .fenced-reply *{white-space:normal;opacity:1;content-visibility:visible}
       #fixture .fenced-reply{display:block;width:640px}
@@ -730,6 +731,84 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
       await assert.rejects(() => page.evaluate(expandExpression('fenced-fixture', expectedText, requestId)), error => error.message.includes('expand unavailable'), 'The optional NBSP is still part of the exact pre-click response identity: ' + label);
       checks++;
       check(await expansionCounts(), noExpansionActions, 'A changed three-row frame receives no expansion: ' + label);
+    }
+
+    // Observation 1be3... reproduced 14 direct rows and 112 total nodes.
+    // Preserve that topology with synthetic values; never read live evidence here.
+    const prettyRows = (message, robin = '', nonce = requestId) => [
+      '{', '  "request_id":', '    ' + JSON.stringify(nonce) + ',',
+      '  "state":', '    "BLOCKED",', '  "message":', '    ' + JSON.stringify(message) + ',',
+      '  "robin":', '    ' + JSON.stringify(robin) + ',', '  "artifacts":', '    [', '    ]', '}', 'AGENT_END_' + nonce
+    ];
+    const shortRows = prettyRows(fixtureMessage);
+    const shortRowsText = shortRows.join('\n');
+    response = await renderFenced(fencedRows(shortRows));
+    check({ rows: shortRows.length, nodes: (await expansionShape()).nodeCount }, { rows: 14, nodes: 112 }, 'Reproduce the observed complete 14-row topology');
+    check((await expansionShape()).rowValues, shortRows, 'Every original short row retains its complete direct text node');
+    check(response.state.assistants[0], { key: 'fenced-fixture', text: shortRowsText, source_kind: 'fenced_plaintext', collapsed: false }, 'Short pretty JSON preserves all formatting rows and its terminal marker');
+    check(JSON.parse(response.state.assistants[0].text.split('\n').slice(0, -1).join('\n')).message, fixtureMessage, 'Pretty JSON decoding preserves original whitespace, escapes and Unicode');
+
+    const longRowsMessage = fixtureMessage.repeat(85);
+    const longRowsRobin = fixtureMessage.repeat(85);
+    const longRows = prettyRows(longRowsMessage, longRowsRobin);
+    const longRowsText = longRows.join('\n');
+    check(longRowsText.length > 10000 && longRows.every(line => line.length > 0 && line.length < 10000), true, 'Large synthetic transport exceeds 10000 characters while every complete row stays below 10000');
+    const expandedRows = rows => fencedRows(rows)
+      .replace('aria-label="その他の行を表示する"', 'aria-label="簡易表示" data-fui-focus-visible="true"')
+      .replace('</span>その他の行を表示する</button>', '</span>簡易表示</button>');
+    for (const [label, rows] of [['multiline', longRows], ['multiline with NBSP', [...longRows, nbsp]]]) {
+      const text = rows.join('\n');
+      response = await renderFolded(fencedRows(rows));
+      check(response.state.assistants[0], { key: 'fenced-fixture', text, source_kind: 'fenced_collapsed', collapsed: true }, 'Folded multiline transport exposes all exact rows: ' + label);
+      await renderExpansionAction(fencedRows(rows) + span('<p><br></p>'));
+      const operation = expandExpression('fenced-fixture', text, requestId);
+      check(await page.evaluate(operation), true, 'Actual expansion accepts complete multiline JSON before the final marker: ' + label);
+      check(await expansionCounts(), { more: 1, copy: 0, menu: 0, goto: 0, inputFocus: 0, keys: ['fenced-fixture'] }, 'Multiline expansion receives exactly one More click: ' + label);
+      const after = (await page.evaluate(snapshot)).assistants[0];
+      check(after, { key: 'fenced-fixture', text, source_kind: 'fenced_plaintext', collapsed: false }, 'Expansion preserves every multiline transport character: ' + label);
+      check((await expansionShape()).rowValues, rows, 'Expansion neither drops nor reorders any middle row: ' + label);
+      const decoded = JSON.parse(after.text.split('\n').slice(0, label.endsWith('NBSP') ? -2 : -1).join('\n'));
+      check({ message: decoded.message, robin: decoded.robin }, { message: longRowsMessage, robin: longRowsRobin }, 'Large multiline values roundtrip without truncation or escape normalization: ' + label);
+      await assert.rejects(() => page.evaluate(operation), error => error.message.includes('expand unavailable'), 'Already expanded multiline response cannot receive a second click: ' + label);
+      checks++;
+      check((await expansionCounts()).more, 1, 'Second multiline expansion is side-effect free: ' + label);
+    }
+    for (const [label, setup] of [
+      ['middle row removed', () => document.querySelector('[data-line-index="6"]').remove()],
+      ['middle pair removed', () => { const row = document.querySelector('[data-line-index="6"]'); row.previousSibling.remove(); row.remove(); }],
+      ['middle gutter removed', () => document.querySelector('[data-line-index="6"]').previousSibling.remove()],
+      ['middle index missing', () => document.querySelector('[data-line-index="6"]').removeAttribute('data-line-index')],
+      ['middle index duplicate', () => document.querySelector('[data-line-index="6"]').setAttribute('data-line-index', '5')],
+      ['middle index hole', () => document.querySelector('[data-line-index="6"]').setAttribute('data-line-index', '7')],
+      ['middle index noncanonical', () => document.querySelector('[data-line-index="6"]').setAttribute('data-line-index', '06')],
+      ['middle gutter noncanonical', () => { document.querySelector('[data-line-index="6"]').previousSibling.firstChild.nodeValue = '07'; }],
+      ['middle row wrapped', () => { const row = document.querySelector('[data-line-index="6"]'); const child = document.createElement('span'); child.textContent = row.textContent; row.replaceChildren(child); }],
+      ['middle row extra text node', () => document.querySelector('[data-line-index="6"]').appendChild(document.createTextNode(''))],
+      ['middle row comment', () => document.querySelector('[data-line-index="6"]').appendChild(document.createComment('unknown'))],
+      ['middle row unknown attribute', () => document.querySelector('[data-line-index="6"]').setAttribute('title', 'unknown')]
+    ]) {
+      response = await renderExpanded(expandedRows(longRows), setup);
+      check(response.state.assistants[0].source_kind, 'rendered', 'Incomplete or unrecognized multiline DOM is never promoted: ' + label);
+      await renderExpansionAction(fencedRows(longRows) + span('<p><br></p>'), setup);
+      await assert.rejects(() => page.evaluate(expandExpression('fenced-fixture', longRowsText, requestId)), error => error.message.includes('expand unavailable'), 'Damaged multiline DOM cannot be expanded: ' + label);
+      checks++;
+      check(await expansionCounts(), noExpansionActions, 'Damaged multiline DOM has no UI side effects: ' + label);
+    }
+    const wrongMultiline = [...longRows]; wrongMultiline[wrongMultiline.length - 1] = 'AGENT_END_' + otherId;
+    const mismatchedMultiline = prettyRows(longRowsMessage, longRowsRobin, otherId); mismatchedMultiline[mismatchedMultiline.length - 1] = marker;
+    const malformedMultiline = [...longRows]; malformedMultiline.splice(6, 1);
+    for (const [label, rows, expectedText] of [
+      ['wrong terminal nonce', wrongMultiline, wrongMultiline.join('\n')],
+      ['JSON nonce differs from terminal nonce', mismatchedMultiline, mismatchedMultiline.join('\n')],
+      ['middle value missing despite contiguous indices', malformedMultiline, malformedMultiline.join('\n')],
+      ['middle value changed since stable read', prettyRows(longRowsMessage + ' changed', longRowsRobin), longRowsText]
+    ]) {
+      response = await renderExpanded(expandedRows(rows));
+      check(response.state.assistants[0].text, rows.join('\n'), 'DOM observation leaves parser-owned multiline invalidity unchanged: ' + label);
+      await renderExpansionAction(fencedRows(rows) + span('<p><br></p>'));
+      await assert.rejects(() => page.evaluate(expandExpression('fenced-fixture', expectedText, requestId)), error => error.message.includes('expand unavailable') || (label === 'middle value missing despite contiguous indices' && error.message.includes('SyntaxError')), 'Multiline expansion rejects invalid or changed response identity: ' + label);
+      checks++;
+      check(await expansionCounts(), noExpansionActions, 'Invalid multiline response receives no action: ' + label);
     }
 
     for (const [url, message] of [

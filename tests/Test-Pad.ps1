@@ -20,7 +20,7 @@ foreach($sourceFile in $sourceFiles) {
         if(-not $definitions.ContainsKey($definition.Name)){$definitions[$definition.Name]=$definition}
     }
 }
-$wanted=@('Test-AgentId','Assert-AgentId','Read-AgentJson','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','Get-AgentTextHash','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Read-AgentAiCallTemplates','Test-AgentRobin','ConvertTo-AgentComparableRobin','Get-AgentAiCallTemplate','New-AgentAiCallTemplates','Get-AgentPadAiResults','Test-AgentPadWindowTitle','Get-AgentPadElement','Test-AgentPadRetryableSelectorFailure','Get-AgentPadInvokableButton','Get-AgentPadStatusBar','Get-AgentPadStatus','Get-AgentPadErrorState','New-AgentPadSnapshotState','Get-AgentPadSnapshot','Get-AgentPadObservationLossSeconds','Invoke-AgentPadStopIfConfirmed','Wait-AgentPadEditable','Invoke-AgentPad')
+$wanted=@('Test-AgentId','Assert-AgentId','Read-AgentJson','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','Get-AgentTextHash','Get-AgentPlannerRules','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Read-AgentAiCallTemplates','Test-AgentRobin','ConvertTo-AgentComparableRobin','Get-AgentAiCallTemplate','New-AgentAiCallTemplates','Get-AgentPadAiResults','Test-AgentPadWindowTitle','Get-AgentPadElement','Test-AgentPadRetryableSelectorFailure','Get-AgentPadInvokableButton','Get-AgentPadStatusBar','Get-AgentPadStatus','Get-AgentPadErrorState','New-AgentPadSnapshotState','Get-AgentPadSnapshot','Get-AgentPadObservationLossSeconds','Invoke-AgentPadStopIfConfirmed','Wait-AgentPadEditable','Invoke-AgentPad')
 foreach($name in $wanted) {
     if(-not $definitions.ContainsKey($name)){throw ('Missing production function: '+$name)}
     . ([scriptblock]::Create($definitions[$name].Extent.Text))
@@ -325,6 +325,37 @@ try {
         $null=Test-Flow ('SET Value TO '+$literal)
         Assert-Case $true 'Escaped literal accepted by production validator'
     }
+    # Exercise the generated prompt example through both JSON decoding and the
+    # unchanged production validator, including actual Unicode/space paths.
+    $sampleDirectory = Join-Path $target '日本語 sub folder'
+    [IO.Directory]::CreateDirectory($sampleDirectory) | Out-Null
+    $sampleInput = Join-Path $sampleDirectory 'memo.txt'
+    [IO.File]::WriteAllText($sampleInput,$data,$script:AgentEncoding)
+    $samplePrefix = 'TARGET_READ_ROBIN_JSON_STRING: '
+    foreach ($samplePath in @($input,$sampleInput)) {
+        $sampleRules = Get-AgentPlannerRules -TargetPath $samplePath
+        $sampleLines = @($sampleRules -split '\r?\n' | Where-Object { $_.StartsWith($samplePrefix,[StringComparison]::Ordinal) })
+        Assert-Case ($sampleLines.Count -eq 1) 'Existing target gets one canonical JSON-encoded ReadText example'
+        $sampleRead = ConvertFrom-Json -InputObject $sampleLines[0].Substring($samplePrefix.Length)
+        Assert-Case ($sampleRead -ceq (New-ReadAction $samplePath)) 'Prompt JSON example decodes to the exact escaped target action'
+        $responseJson = ConvertTo-Json -InputObject @{robin=($sampleRead+"`n"+$write);artifacts=@($output)} -Compress
+        $response = ConvertFrom-Json -InputObject $responseJson
+        Assert-Case (@(Test-Flow $response.robin).Count -eq 1) 'Decoded prompt sample passes the production Robin validator'
+        Assert-Case ($response.artifacts[0] -ceq $output) 'Ordinary JSON artifact path retains its original separators'
+    }
+    $badRead = (New-ReadAction $sampleInput).Replace('\\','\')
+    $badResponse = ConvertFrom-Json -InputObject (ConvertTo-Json -InputObject @{robin=$badRead} -Compress)
+    Assert-Rejected {Test-Flow $badResponse.robin} 'ROBIN_ACTION' 'Observed single-backslash Robin remains rejected after valid JSON decoding'
+    $percentInput = Join-Path $sampleDirectory '100% memo.txt'
+    [IO.File]::WriteAllText($percentInput,$data,$script:AgentEncoding)
+    $percentRules = Get-AgentPlannerRules -TargetPath $percentInput
+    Assert-Case (-not $percentRules.Contains($samplePrefix)) 'Unsupported percent filename is never rewritten into a canonical example'
+    Assert-Rejected {New-ReadAction $percentInput} 'ROBIN_LITERAL' 'Percent filename remains outside the existing Robin literal contract'
+    $percentRead = (New-ReadAction $sampleInput).Replace('memo.txt','100% memo.txt')
+    Assert-Rejected {Test-Flow $percentRead} 'ROBIN_PATH' 'Manually escaped percent filename remains rejected by production validation'
+    $directoryRules = Get-AgentPlannerRules -TargetPath $sampleDirectory
+    Assert-Case (-not $directoryRules.Contains($samplePrefix)) 'A folder target is not misrepresented as a readable text file'
+
     Assert-Rejected {ConvertTo-AgentRobinLiteral '100%'} 'ROBIN_LITERAL' 'Literal percent must enter through a data file'
     Assert-Rejected {ConvertTo-AgentRobinLiteral ("a"+[char]0+"b")} 'ROBIN_LITERAL' 'Literal NUL rejected'
     Assert-Rejected {ConvertFrom-AgentRobinLiteral ('$'+"'''bad\n'''" )} 'ROBIN_LITERAL' 'Unknown backslash escape is not silently repaired'
@@ -339,10 +370,13 @@ try {
     $no=ConvertTo-AgentRobinLiteral 'no'
     $branch=$read+"`nIF InputText = "+$yes+" THEN`n    SET Choice TO "+$yes+"`nELSE`n    SET Choice TO "+$no+"`nEND`n"+(New-WriteAction $output 'Choice')
     Assert-Case (@(Test-Flow $branch).Count -eq 1) 'IF/ELSE assignments are definite after both branches'
+    Assert-Case (@(Test-Flow ($branch.Replace('Choice','Keys'))).Count -eq 1) 'Variable Keys remains definitely assigned after both IF/ELSE branches'
     $thenOnly=$read+"`nIF InputText = "+$yes+" THEN`n    SET Choice TO "+$yes+"`nEND`n"+(New-WriteAction $output 'Choice')
     Assert-Rejected {Test-Flow $thenOnly} 'ROBIN_VARIABLE' 'Then-only assignment cannot escape an IF'
+    Assert-Rejected {Test-Flow ($thenOnly.Replace('Choice','Keys'))} 'ROBIN_VARIABLE' 'Then-only Keys assignment cannot escape an IF'
     $elseOnly=$read+"`nIF InputText = "+$yes+" THEN`n    SET Other TO "+$yes+"`nELSE`n    SET Choice TO "+$no+"`nEND`n"+(New-WriteAction $output 'Choice')
     Assert-Rejected {Test-Flow $elseOnly} 'ROBIN_VARIABLE' 'Else-only assignment cannot escape an IF'
+    Assert-Rejected {Test-Flow ($elseOnly.Replace('Choice','Keys'))} 'ROBIN_VARIABLE' 'Else-only Keys assignment cannot escape an IF'
     $crossBranch=$read+"`nIF InputText = "+$yes+" THEN`n    SET Choice TO "+$yes+"`nELSE`n    SET Other TO "+('$'+"'''%Choice%'''")+"`nEND"
     Assert-Rejected {Test-Flow $crossBranch} 'ROBIN_VARIABLE' 'ELSE cannot reference a variable defined only in THEN'
     Assert-Rejected {Test-Flow $write} 'ROBIN_VARIABLE' 'Write variable requires assignment'
@@ -355,6 +389,12 @@ try {
         Assert-Rejected {Test-Flow $code} 'ROBIN_ACTION' 'Unknown action or parameter combination rejected'
     }
     Assert-Rejected {Test-Flow ($read+"`n"+$write+"`n"+$write)} 'ROBIN_WRITE' 'Repeated write to an output path rejected'
+    $sharedBranchWrite = $read+"`nIF InputText = "+$yes+" THEN`n    "+$write+"`nELSE`n    "+$write+"`nEND"
+    Assert-Rejected {Test-Flow $sharedBranchWrite} 'ROBIN_WRITE' 'Mutually exclusive branches cannot contain two writes to the same output path'
+    $reviewWrite = New-WriteAction (Join-Path $artifacts 'review-draft.txt')
+    $normalWrite = New-WriteAction (Join-Path $artifacts 'normal-draft.txt')
+    $factoredBranch = $read+"`n"+$write+"`nIF InputText = "+$yes+" THEN`n    "+$reviewWrite+"`nELSE`n    "+$normalWrite+"`nEND"
+    Assert-Case (@(Test-Flow $factoredBranch).Count -eq 3) 'One common write before IF with distinct branch outputs passes production validation'
     [IO.File]::WriteAllText($output,'existing',$script:AgentEncoding)
     Assert-Rejected {Test-Flow ($read+"`n"+$write)} 'ROBIN_WRITE' 'Existing artifact cannot be appended or overwritten'
     [IO.File]::Delete($output)
