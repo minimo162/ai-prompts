@@ -26,6 +26,7 @@ foreach($name in $wanted) {
     . ([scriptblock]::Create($definitions[$name].Extent.Text))
 }
 $script:AgentEncoding=New-Object Text.UTF8Encoding($false)
+$script:AgentOfflineTest=$false # UIA and execution functions below are replaced by explicit mocks.
 $script:checks=0
 function Assert-Case([bool]$Actual,[string]$Name) {
     if(-not $Actual){throw ('FAIL: '+$Name)}

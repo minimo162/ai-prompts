@@ -1,6 +1,7 @@
 ﻿param([string]$SourcePath=(Join-Path $PSScriptRoot '..\App.ps1'))
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version 2.0
+$script:AgentOfflineTest=$false # Explicit mocked adapter boundary; no production top-level import.
 $parseErrors=$null
 $ast=[Management.Automation.Language.Parser]::ParseFile([IO.Path]::GetFullPath($SourcePath),[ref]$null,[ref]$parseErrors)
 if ($parseErrors.Count -gt 0) { throw ('PowerShell parse errors: '+$parseErrors.Count) }

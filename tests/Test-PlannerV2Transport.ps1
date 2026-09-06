@@ -4,6 +4,7 @@
 )
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version 2.0
+$script:AgentOfflineTest=$false # Transport/CDP functions are explicitly mocked below.
 $transportSource=[IO.Path]::GetFullPath($SourcePath)
 $transportSourceSha=(Get-FileHash -LiteralPath $transportSource).Hash.ToLowerInvariant()
 $parseErrors=$null;$tokens=$null
