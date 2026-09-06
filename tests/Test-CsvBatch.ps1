@@ -11,7 +11,8 @@ function Assert-Throws([scriptblock]$Action, [string]$Pattern, [string]$Name) {
     Assert-True ($message -match $Pattern) ($Name + ' (' + $message + ')')
 }
 function Invoke-AgentCopilot {
-    param($Prompt,$RequestId,$JobId,$Settings,$HomePath,$CancelPath,$TimeoutSeconds)
+    param($Prompt,$RequestId,$JobId,$Settings,$HomePath,$CancelPath,$TimeoutSeconds,$ConversationId)
+    $script:CapturedConversationId=$ConversationId
     $script:Calls++; $script:Prompts += $Prompt
     if ($script:Failure -ceq 'auth') { throw 'AUTH_REQUIRED: synthetic login failure' }
     Reserve-AgentCopilotAttempt $HomePath $RequestId
@@ -37,6 +38,7 @@ Assert-Throws { New-AgentCsvBatches $manifest @($manifest.rows[0].row_id,$manife
 $jobId = [guid]::NewGuid().ToString('N'); $jobDir = Get-AgentJobDirectory $root $jobId; [void][IO.Directory]::CreateDirectory($jobDir)
 $result = Invoke-AgentCsvBatch $root $jobId $manifest $plan.batches[0] $categories $instructions
 Assert-True ($result.phase -ceq 'committed' -and $result.results.Count -eq 5 -and $result.status -ceq 'success') 'Provider output persisted and reread'
+Assert-True ($result.conversation_id -ceq $result.request_id -and $script:CapturedConversationId -ceq $result.request_id) 'Each semantic batch explicitly uses its own conversation ID'
 $disk = Read-AgentJson (Join-Path $jobDir ('csv-attempts\' + $result.request_id + '\attempt.json'))
 Assert-True ($disk.result_sha256 -ceq (Get-AgentHash (Join-Path $jobDir ('csv-attempts\' + $result.request_id + '\result.json'))) -and $disk.phase -ceq 'committed') 'Attempt binds committed result hash'
 $before = $script:Calls

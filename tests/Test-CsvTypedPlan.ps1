@@ -40,6 +40,11 @@ $valid = New-Response $id $observation.observation_id $job.plan.plan_id @($job.p
 $text = ConvertTo-Json $valid -Depth 20 -Compress
 $parsed = ConvertFrom-AgentCsvActionPlan $text $id $job $observation
 Assert-Case ($parsed.actions.Count -eq 4) 'Valid finite sequence accepted'
+$setPlan=ConvertFrom-Json $text;$setPlan.actions[0].arguments=[pscustomobject]@{target_set_id=$observation.pending_set_id};$setPlan.actions[1].arguments=[pscustomobject]@{target_set_id=$observation.pending_set_id}
+$setParsed=ConvertFrom-AgentCsvActionPlan (ConvertTo-Json $setPlan -Depth 20) $id $job $observation
+Assert-Case (($setParsed.resolved_row_ids -join ',') -ceq ($job.plan.row_ids -join ',')) 'Host set ID resolves to the exact approved pending rows'
+$setPlan.actions[0].arguments.target_set_id='0'*32
+Assert-Rejected {ConvertFrom-AgentCsvActionPlan (ConvertTo-Json $setPlan -Depth 20) $id $job $observation} CSV_PLAN_SCOPE
 Assert-Case ((Get-AgentCsvObservation $job).observation_id -ceq $observation.observation_id) 'Same state yields same observation ID'
 Assert-Case (-not (ConvertTo-Json $observation -Depth 20).Contains($path)) 'Observation has no input path'
 function Copy-Response { return ConvertFrom-Json $text }

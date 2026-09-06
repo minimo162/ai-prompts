@@ -31,4 +31,12 @@ try{New-AgentConnectionTrace $root ('b'*32) ('a'*32) JsonPartsV1|Out-Null}catch{
 Check ((Get-AgentHash $path) -ceq $hash) 'Request trace cannot be overwritten by a new attempt'
 Check ((Get-AgentConnectionErrorType 'AUTH_REQUIRED: secret') -ceq 'authentication' -and (Get-AgentConnectionErrorType 'RESPONSE_TIMEOUT: secret') -ceq 'timeout') 'Errors reduced to fixed categories'
 Check ($before -ceq (ConvertTo-Json -InputObject (& $actualPolicy) -Compress)) 'Actual registry policy unchanged'
+function Enter-AgentCopilotMutex { return $null }
+function Get-AgentCopilotTarget { throw (New-Object IO.IOException('SYNTHETIC_SECRET C:\private\customer.txt')) }
+try{Invoke-AgentCopilot -HomePath $root -JobId ('a'*32) -RequestId ('c'*32) -Prompt 'SYNTHETIC_BUSINESS_TEXT'|Out-Null}catch{}
+$failurePath=(Get-AgentCopilotAttemptPath $root ('c'*32))+'.json'
+$failure=Read-AgentJson $failurePath
+Check ($failure.exception_type -ceq 'System.IO.IOException' -and $failure.hresult -is [int] -and $failure.failure_stage -ceq 'preparing') 'Unexpected exception retains type and stage without message'
+Check ($failure.phase -ceq 'failed' -and -not $failure.send_reserved) 'Failure before target creation is not marked sent'
+Check (-not ([IO.File]::ReadAllText($failurePath).Contains('SYNTHETIC_')) -and -not ([IO.File]::ReadAllText($failurePath).Contains('customer.txt'))) 'Exception message and business text stay out of trace'
 Write-Output "PASS: $script:checks connection contract checks; no browser or provider invoked. Evidence: $root"
