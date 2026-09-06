@@ -67,6 +67,62 @@
         "re_pasted": true,
         "executed_in_flow": "list-create-add"
       }
+    },
+    {
+      "id": "variables-set-text",
+      "category": "変数",
+      "ui_name": "変数の設定",
+      "ui_automation_id": "LanguageConstructs.Assign",
+      "variant": "literal-text",
+      "settings": {
+        "変数": "NewVar",
+        "値:": "CatalogTextValue"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NewVar",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/variables-set/default.robin",
+      "sha256": "827178aa1626c5507846c9ea3fcae61df4c59c6eb0139025f2dcf14a86559a8f",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": false,
+        "re_pasted": false,
+        "executed_in_flow": null
+      }
+    },
+    {
+      "id": "variables-set-special-text",
+      "category": "変数",
+      "ui_name": "変数の設定",
+      "ui_automation_id": "LanguageConstructs.Assign",
+      "variant": "special-text",
+      "settings": {
+        "変数": "NewVar",
+        "値:": "日本語 100%% '引用' \"二重引用\" C:\\sample"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NewVar",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/variables-set/special-text.robin",
+      "sha256": "f107b3daee90e7c388ca5fcf51eb78353bff13c6446385be046cf6510ab6ef57",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "list-create-add-set"
+      }
     }
   ],
   "flows": [
@@ -92,6 +148,33 @@
       "roundtrip_path": "flows/list-create-add/roundtrip.robin",
       "roundtrip_sha256": "49704f6f1235f3a80f9957ef51825c2457d60ed2c50224f2efe7f2f564b5bb88",
       "screenshot_sha256": "fb45f878c656c160d9977ff36f8883a031d5558338ff5a6c563536c502faf890"
+    },
+    {
+      "id": "list-create-add-set",
+      "robin_path": "flows/list-create-add-set/default.robin",
+      "sha256": "53ba1a1044b075f3e64dba2df74613bfbc4662b6a9ad6811c9db80f700c65e71",
+      "action_ids": [
+        "variables-create-new-list",
+        "variables-add-item-to-list",
+        "variables-set-special-text"
+      ],
+      "action_count": 3,
+      "native_flow_name": "RobinCatalog_20260907",
+      "run_invocations": 1,
+      "observed_variables": [
+        {
+          "name": "CatalogList",
+          "preview": "[CatalogItem]"
+        },
+        {
+          "name": "NewVar",
+          "preview": "日本語 100% '引用' \"二重引用\" C:\\sample"
+        }
+      ],
+      "screenshot": "evidence/list-create-add-set.png",
+      "screenshot_sha256": "6deef2f5dfa34c844aa825187c79d700e83d08ae5cfe2656351c13236603b117",
+      "copilot_generated": false,
+      "app_executor_verified": false
     }
   ]
 }
