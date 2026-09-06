@@ -992,7 +992,18 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
     response = await renderFenced(multipartReply(payloadNbspParts.map(rows => [...rows, '\u00a0'])));
     check(response.state.assistants, [expectedParts(payloadNbspParts)], 'Preserve every DATA payload space and NBSP while dropping only separate structural tails');
 
-    const foldedParts = [partRows('文'.repeat(4096), 1, 2), partRows('字'.repeat(4096), 2, 2)];
+    for (const length of [4096, 4097, 4685, 8192]) {
+      const value = '  日本語 "引用" C:\\raw %FileContents%\r\n\r\n  ';
+      const base = JSON.stringify({ request_id: requestId, state: 'ACT', message: value, robin: 'ReadText followed by AiCall', artifacts: [] });
+      const payload = JSON.stringify({ request_id: requestId, state: 'ACT', message: value + 'a'.repeat(length - base.length), robin: 'ReadText followed by AiCall', artifacts: [] });
+      const frames = [partRows(payload, 1, 1)];
+      response = await renderFolded(multipartReply(frames));
+      check(payload.length, length, 'Boundary fixture is complete valid JSON at ' + length + ' UTF16 units');
+      check(response.state.assistants, [expectedParts(frames, true)], 'Capture the entire single folded ACT-shaped payload at ' + length + ' UTF16 units');
+      check(JSON.parse(response.state.assistants[0].frames[0].split('\n')[1].slice(11)).message, value + 'a'.repeat(length - base.length), 'Actual DOM preserves decoded value exactly at ' + length + ' UTF16 units');
+    }
+
+    const foldedParts = [partRows('文'.repeat(8192), 1, 2), partRows('字'.repeat(8192), 2, 2)];
     response = await renderFolded(multipartReply(foldedParts));
     check(response.state.assistants, [expectedParts(foldedParts, true)], 'Complete bounded folded frames expose all direct rows with their collapsed state recorded');
     response = await renderFolded(multipartReply(foldedParts.map(rows => [...rows, '\u00a0'])));
@@ -1034,7 +1045,7 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
     for (const [label, frames] of [
       ['nonframed block', [twoParts[0], [fencedJson, marker]]],
       ['empty DATA', [partRows('', 1, 1)]],
-      ['oversized DATA', [partRows('x'.repeat(4097), 1, 1)]],
+      ['oversized DATA', [partRows('x'.repeat(8193), 1, 1)]],
       ['missing DATA prefix', [twoParts[0], twoParts[1].map((row, i) => i === 1 ? row.slice(11) : row)]],
       ['missing footer', [twoParts[0], twoParts[1].filter((row, i) => i !== 2)]],
       ['unknown fifth row', [twoParts[0], [...twoParts[1], 'extra']]],

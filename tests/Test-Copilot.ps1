@@ -79,6 +79,51 @@ foreach($boundary in @(($escapeJson.IndexOf('\\')+1),($escapeJson.IndexOf('\n')+
 $singleJson='{"request_id":"r-single","value":"  keep spaces  "}'
 $singleFrames=@(New-TestParts $singleJson 'r-single')
 Assert-Case ((ConvertFrom-AgentCopilotParts $singleFrames 'r-single') -ceq $singleJson -and $singleFrames.Count -eq 1) 'One framed part uses the same grammar and preserves value whitespace'
+# Preserve a complete single ACT-shaped response at the actual 4685-unit regression size.
+# The payload is synthetic; saved live output is not a test input.
+$boundaryValue="  日本語 `"引用`" O'Brien C:\path\raw %FileContents% `r`n`r`n  "
+$boundaryObject=[ordered]@{request_id='r-boundary';state='ACT';message=$boundaryValue;robin='File.ReadTextFromFile.ReadText File: InputPath Encoding: File.TextFileEncoding.UTF8 Content=> FileContents';artifacts=@()}
+$boundaryBase=$boundaryObject|ConvertTo-Json -Compress
+foreach($boundaryLength in @(4096,4097,4685,8192)){
+    $boundaryObject.message=$boundaryValue+('a'*($boundaryLength-$boundaryBase.Length))
+    $boundaryJson=$boundaryObject|ConvertTo-Json -Compress
+    $boundaryFrames=@(New-TestPartFrames @($boundaryJson) 'r-boundary')
+    $boundaryActual=ConvertFrom-AgentCopilotParts $boundaryFrames 'r-boundary'
+    Assert-Case ($boundaryJson.Length -eq $boundaryLength -and $boundaryFrames.Count -eq 1 -and [string]::Equals($boundaryActual,$boundaryJson,[StringComparison]::Ordinal) -and [string]::Equals(($boundaryActual|ConvertFrom-Json).message,$boundaryObject.message,[StringComparison]::Ordinal)) ('Complete single ACT-shaped frame preserves '+$boundaryLength+' UTF16 units and exact decoded Japanese, quotes, percent, CRLF and spaces')
+    if($boundaryLength -eq 4685){$actualSizedJson=$boundaryJson;$actualSizedFrames=@($boundaryFrames)}
+}
+$boundaryObject.message+='a'
+$oversizedJson=$boundaryObject|ConvertTo-Json -Compress
+Assert-Case ($oversizedJson.Length -eq 8193) 'Oversized boundary remains a complete valid JSON object'
+Assert-Rejected {ConvertFrom-AgentCopilotParts @(New-TestPartFrames @($oversizedJson) 'r-boundary') 'r-boundary'} 'RESPONSE_INVALID' 'Complete 8193-unit payload is rejected before JSON acceptance'
+foreach($boundaryFailure in @('missing_data','missing_end','truncated','wrong_nonce')){
+    $broken=@($actualSizedFrames)
+    switch($boundaryFailure){
+        'missing_data' {$broken[0]=$broken[0].Replace("AGENT_DATA $actualSizedJson`n",'')}
+        'missing_end' {$broken[0]=$broken[0].Replace("`nAGENT_END_r-boundary",'')}
+        'truncated' {$broken=@(New-TestPartFrames @($actualSizedJson.Substring(0,$actualSizedJson.Length-1)) 'r-boundary')}
+        'wrong_nonce' {$broken[0]=$broken[0].Replace('r-boundary','r-other')}
+    }
+    Assert-Rejected {ConvertFrom-AgentCopilotParts $broken 'r-boundary'} 'RESPONSE_INVALID' ('Actual-sized 4685-unit response rejects '+$boundaryFailure+' without repair')
+}
+# The longest legal frame has an 8192-unit payload, 128-unit ID, 256/256 and final marker.
+$maxFrameId='r'*128
+$maxFrameBase='{"request_id":"'+$maxFrameId+'","value":""}'
+$maxFrameJson='{"request_id":"'+$maxFrameId+'","value":"'+('a'*(8447-$maxFrameBase.Length))+'"}'
+$maxFramePayloads=@(for($i=0;$i -lt 255;$i++){$maxFrameJson.Substring($i,1)})+@($maxFrameJson.Substring(255))
+$maxFrames=@(New-TestPartFrames $maxFramePayloads $maxFrameId)
+Assert-Case ($maxFrames.Count -eq 256 -and $maxFramePayloads[-1].Length -eq 8192 -and $maxFrames[-1].Length -eq 8648 -and $maxFrames[-1].EndsWith("`nAGENT_END_"+$maxFrameId) -and (ConvertFrom-AgentCopilotParts $maxFrames $maxFrameId) -ceq $maxFrameJson) 'The exact 8648-unit maximum frame with longest nonce, 256/256 and observed final marker is accepted'
+Assert-Rejected {ConvertFrom-AgentCopilotParts @($maxFrames[0..254]+@($maxFrames[-1]+'x')) $maxFrameId} 'RESPONSE_INVALID' 'A frame exceeding the exact 8648-unit maximum is rejected'
+# Frame size and aggregate size are independent: 129 otherwise legal frames can exceed 1 MiB.
+$wholeBase='{"request_id":"r-whole","value":""}'
+$wholeJson='{"request_id":"r-whole","value":"'+('a'*(1048576-$wholeBase.Length))+'"}'
+$wholeFrames=@(New-TestParts $wholeJson 'r-whole' 8192)
+Assert-Case ($wholeJson.Length -eq 1048576 -and $wholeFrames.Count -eq 128 -and [string]::Equals((ConvertFrom-AgentCopilotParts $wholeFrames 'r-whole'),$wholeJson,[StringComparison]::Ordinal)) 'The unchanged aggregate limit accepts exactly 1048576 UTF16 units across 128 full payloads'
+$overWholeJson=$wholeJson.Insert($wholeJson.Length-2,'a')
+$overWholeFrames=@(New-TestParts $overWholeJson 'r-whole' 8192)
+Assert-Case ($overWholeJson.Length -eq 1048577 -and $overWholeFrames.Count -eq 129) 'Aggregate-overflow fixture uses 129 individually bounded frames and valid JSON'
+Assert-Rejected {ConvertFrom-AgentCopilotParts $overWholeFrames 'r-whole'} 'RESPONSE_INVALID' 'The aggregate budget rejects 1048577 UTF16 units even though every frame is individually legal'
+
 $countJson='{"request_id":"r-count","value":"'+('a'*(256-('{"request_id":"r-count","value":""}').Length))+'"}'
 Assert-Case ($countJson.Length -eq 256) 'Maximum part-count fixture contains exactly 256 raw characters'
 $countFrames=@(New-TestParts $countJson 'r-count' 1)
@@ -101,7 +146,7 @@ foreach($failure in @('missing','duplicate','reverse','wrong_total','wrong_index
         'crlf' {$frames[0]=$frames[0].Replace("`n","`r`n")}
         'double_space' {$frames[0]=$frames[0].Replace('AGENT_PART_V1 ','AGENT_PART_V1  ')}
         'empty_data' {$frames=@(New-TestPartFrames @('') $request)}
-        'oversized_data' {$frames=@(New-TestPartFrames @(('a'*4097)) $request)}
+        'oversized_data' {$frames=@(New-TestPartFrames @(('a'*8193)) $request)}
         'surrogate' {$frames=@(New-TestPartFrames @('{"request_id":"r-parts","x":"'+[char]0xd800+'"}') $request)}
         'surrogate_boundary' {$frames=@(New-TestPartFrames @('{"request_id":"r-parts","x":"'+[char]0xd83d,[string][char]0xde42+'"}') $request)}
         'null_frame' {$frames[0]=$null}
@@ -297,7 +342,7 @@ try{
     Assert-Rejected {Invoke-AgentCopilot -Prompt 'Test request' -RequestId 'r-uncertain' -JobId ('f'*32) -Settings @{} -HomePath $jobTemp -TimeoutSeconds 5} 'CDP_UNAVAILABLE' 'Uncertain first send fails without retry'
     Assert-Case ($script:mockInput.StartsWith("Test request`n`n") -and $script:mockInput.Contains('コンパクト JSON') -and $script:mockInput.Contains('1個以上256個以下')) 'Wire prompt requires bounded compact JSON transport parts'
     Assert-Case ($script:mockInput.Contains('request_id は "r-uncertain"') -and $script:mockInput.Contains('AGENT_PART_V1 r-uncertain i N') -and $script:mockInput.Contains('AGENT_PART_END_V1 r-uncertain i N')) 'Wire prompt binds both part headers and footers to this request'
-    Assert-Case ($script:mockInput.Contains('第2行 AGENT_DATA にASCIIスペース1個') -and $script:mockInput.Contains('第4行 AGENT_END_r-uncertain') -and $script:mockInput.Contains('4096 UTF-16コード単位以下') -and $script:mockInput.Contains('サロゲートペアの途中で分割しない')) 'Wire prompt states exact carrier rows, final marker, UTF16 limit and Unicode boundary'
+    Assert-Case ($script:mockInput.Contains('第2行 AGENT_DATA にASCIIスペース1個') -and $script:mockInput.Contains('第4行 AGENT_END_r-uncertain') -and $script:mockInput.Contains('8192 UTF-16コード単位以下') -and $script:mockInput.Contains('サロゲートペアの途中で分割しない')) 'Wire prompt states exact carrier rows, final marker, UTF16 limit and Unicode boundary'
     Assert-Case ($script:mockInput.Contains('元の文字を追加・削除・再エスケープしない') -and $script:mockInput.Contains('フェンスの外に前置き、説明、別のコードや文字を一切付けない') -and $script:mockInput -notmatch 'コードフェンス1個だけ|pretty-printed|文字列値は分割せず') 'Wire prompt prohibits repair and conflicting single-fence formatting'
     $uncertainConfig=Get-AgentCopilotConfig $jobTemp @{} ('f'*32)
     $uncertainRecord=[IO.File]::ReadAllText($uncertainConfig.TargetPath,[Text.Encoding]::UTF8)|ConvertFrom-Json

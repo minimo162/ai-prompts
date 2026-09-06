@@ -1,6 +1,26 @@
 # Issue #5 検証記録
 
 2026-09-06 / 状態: **partial — 実機ゲート未完了**。
+同日13:51 JST、上記候補を本体へ適用し、検証済みと同じApp SHA `7bed68c365fb8b3b328dba365bc8498764dbf0629a3bf7051f5cbe19749c525f` およびテスト2ファイルのhash一致を確認した。payload上限8192、DOM行上限8203、最大frame8648へ変更し、全体1048576・最大256ブロック・厳密な順序/nonce/終端/3回安定読取りは維持した。検証は受信アプリ側で行うことを生成指示へ明記した。native PS5 core137/Copilot302、隔離Edge DOM818はPASS。4097と実例相当4685、8192、最長frame8648、全体1048576の受理と、それぞれの超過拒否を含む。独立レビューはSHIP・must-fixなし。候補配下で最初に実行したcoreはテスト用パス長の問題で失敗したが、元の同一テストへ候補Appを指定して137件通過し、両記録を保持した。共有/通常キャッシュ更新と新版の実機通し検証はこの時点では未実施。
+
+同日13:44 JST時点: 復旧後の分類試験 `2f98b33d2c824ca38749657286b81770` は初回Copilot取得で180秒timeout、PAD反映0でfailed。実UI表示とjob終了、worker停止、旧ファイル・owned targetの保全を確認した。後続のowned DOM観測 `Observe-OversizedFrame-b4c5c1abf907498d84e1c0d6a6d4d2e1.json`（SHA `23f576ba…`）は2回とも72ノード・4行を欠落なく採取し、各行は1個のtext node、長さ50/4696/54/42文字だった。payloadは4,685 UTF-16単位で、製品の4,096上限を超えていた。DOMの行上限2箇所だけを接頭辞込み8,203へ変えた読取専用候補は、既存の所有・構造・geometry検査を保ったまま同じ4,845文字の1フレームを取得した。元のtimeoutは保持し、受信payload上限8,192・フレーム全体8,648・全体1,048,576の候補をローカル検証中。この時点で本体・キャッシュはまだ変更していない。
+
+同日13:36 JSTの24 Write比較試験 `9419b5c66b474418a8dd4915460300a2` も、Copilotが「製品ワイヤープロトコル断片化と完全一致JSON生成を保証できない」とする1ブロックのBLOCKEDを返した。raw取得は成功したが、長文2ブロック以上の条件を満たさずfailed。送信1・PAD/再送0、保全成功。以前の24 Write長文成功を新版の成功へ読み替えない。
+
+同日13:30 JST、由来と全文hashを確認した専用テストフローを、最後に保存記録と一致していた成功runの本文へ戻した。復旧helperは現在 `cfef067e…`、復旧元 `1a45e064…`、ownerファイル `0d6490a8…` を照合し、削除・貼付・保存を各1回だけ実施。取得前・貼付後・保存後の全文を保存し、最終本文と旧ownerの一致、idle/editable・エラー0、clipboard全形式復元、既存10ファイルの保全を確認した。Run・provider・owner書換え0。`Read-PadOwnership-Recover-20260906.json` はrestored。これは診断用の限定復旧であり、製品に自動復旧機能を追加したものではない。
+
+同日13:25 JST追記: 分類の保存済み2観測をnative PS5で再検証し、ACTのpayload2,500＋1,988文字、JSON4,692 UTF-8バイト、Robin3,126文字/19行が実保存 `flow.robin` と完全一致した。ASK_USERも1ブロックで製品parserが受理し、双方のnonce・attempt・key・全文境界が一致した（`multipart-transport-posthoc.json`、SHA `b4c0f86a…`）。これは実搬送の成功であり、PAD完了の証拠ではない。
+
+通常Explorerからの専用PAD読戻し `Read-PadOwnership-20260906c.json` は、Ctrl+A/Cを各1回、全形式clipboardの復元・検証を行い、236ファイルを保全した。現在本文の比較hash `cfef067e…` は、前回のPAD_FOCUS失敗run `9e07238ab9424b97a7cb4ee91b42e739` の `submitted.robin.txt` と完全一致した。ownerのhash `1a45e064…` はその前の成功run `0d670b045a254c60ad4bf0bbb48e5e19` と一致する。前回の新フローが貼付済みでowner更新前に停止した状態を特定した。Saveへ到達したかは未確定であり、利用者が編集したと断定しない。初回2つの診断helperはパスとIDの比較ミス、次いで稼働中Edgeのprofileファイル読取りで停止し、いずれもUI操作0の元unknownを保全した。
+
+36 Writeの指示範囲を明示した別試行 `b58369bd973046598f5ff10250cd96cf` は、送信1回から約32秒で指定形式のBLOCKEDを取得した。Copilotは36個の個別アクションの厳密生成に対応できないと回答した。1ブロックのため長文helperの2ブロック以上条件で `failed/GATE3_CAPTURE`。元結果・raw・snapshotを保持し、長文生成成功へ読み替えない。製品の取得自体は戻っており、PAD・再送0、既存保全は成功した。
+
+同日13:18 JST時点: 新版の通常HTML経由の分類試験 `5e677d3bb4554662b5396143aca259f3` では、実Copilotの2ブロックACTを製品が完全取得し、Robin検証を通過した。続く専用PADの既存本文照合で `PAD_OWNERSHIP` となり、差し替え・保存・Run前に停止した。次のASK_USERも1ブロック形式で取得できたが、業務は未完了。回答を捏造せず、実HTMLの停止を1回押してjob `86022f2b5fa34f93854cd0214cf25e26` のcancelledとworker終了を確認した。元の結果は `partial/G45_JOB_NOT_DONE`、末尾の検証helperの `G45_PRESERVATION_UNCONFIRMED` も保持する。既存フローは上書きせず、実画面の本文と保存記録の差を調査する。
+
+長文timeoutの後続読取 `Observe-MultipartTimeout-8288b7f9c6bc4db29ab21367120503c1.json` は13:14 JSTに2回一致・保全成功。現在の回答は194文字のBLOCKED JSONで、フェンス・分割マーカー・終端がなく、Copilotは「トップレベルJSONのみ」との不整合を理由に挙げていた。これはCopilotの説明であり、入力指示の矛盾や元の期限までに回答が完了していたことの証明ではない。元timeoutを変更せず、外側の搬送形式と内側のJSONの適用範囲を明示した別の合成検証を準備した。
+
+2026-09-06 13:04 JST時点: コミット `1c108da` の分割回答対応版を共有と通常キャッシュへ反映した。公開 `cae5bab263e3412b9a07a1aeee23ebde` と通常更新 `29e8f41c344b4a13ad457ad363da4ede` はPASS。既存301ファイル、PAD owner/content、共有ACLを保全し、新server PID26152/port51399で同じApp SHA `8f1aeacc…` を確認した。続く新規長文検証 `3069a7ef3a3b451db586c84608816847` は、送信1回から180秒の期限内に完全な回答を取得できず `unknown/RESPONSE_TIMEOUT`。PAD実行・再送0、既存ファイルとowned targetの保全は成功した。元の結果を保持し、同じ回答の読取りで原因を調査する。この時点では分割方式の製品経由の実長文成功を主張しない。
+
 2026-09-06 12:30 JST追記: Issue本文・コメント0件を再確認し、§10.2の「複数コードブロックを欠落なく取得」に対する未実装部分を特定した。既存の単一フェンス拒否だけではこの要件を満たさないため、番号・総数・要求ID付きの `AGENT_PART_V1` 形式を実装中。最終Planner/AiCall JSON契約を保ち、各断片を最大4096 UTF-16文字で運び、厳密な順序確認後に元のJSONへ戻す。実M365の2ブロック構造の観測と、独立したparser/DOM候補の検証を進めている。現時点ではこの方式の製品・実機成功は未確認。
 2026-09-06 12:32 JST、利用者のロック解除後に通常Explorerから再確認した。アクティブコンソールはセッション1へ戻り、入力デスクトップDefaultを開ける状態になった。PAD「無題」はPID25656/start一致、ready・idle・editable・can_run・エラー0件、owner/contentハッシュ保持。以前の前面操作を妨げた状態は解消した。新規PAD処理はまだ開始していない。専用Edgeの旧PID27488とポート9223は終了しており、次の検証前に製品の起動経路で再接続する。読取証拠は `.work/gate45/unlocked-desktop-a6d0d83e394f46228ba313caf9a70ac0.json`。
 同日12:38 JST、製品 `Open-AgentCopilot` を通常Explorerから1回呼び、専用Edgeのポート9223所有者PID18096を確認した。起動直後の診断はAUTH_REQUIREDだったが、ページ読込み後の別の読取専用診断はREADY。再送信・PAD操作は0回、ownerは保持した。証拠は `.work/gate3/copilot-after-unlock.json` と `copilot-after-unlock-readiness.json`。起動用タブの照合はnot_foundで、他タブは閉じていない。
@@ -28,7 +48,7 @@
 | 検証 | 証拠と範囲 |
 |---|---|
 | Windows PowerShell 5.1 契約検証 | `tests/Test-App.ps1` **137 PASS**。Copilot/PADを模擬し、要求・結果・観測・再計画・パス境界・同期と実計画/AiCallプロンプトを検査する。実サービスの証拠ではない。 |
-| Copilotアダプター | `tests/Test-Copilot.ps1` **232 PASS**。CDP応答を模擬し、全文・ID・終端・生成終了・排他・ジョブ分離・異常分類、起動タブの終了と他タブの保持、送信前busy待機、実送信本文の2行契約と入力・送信の再試行禁止を検査する。本番Robin検証器で受理したReadText/WriteTextフローと約6万文字の長文をJSON復号し、原文との完全一致も確認。隔離Edgeの `tests/Test-CopilotDom.cjs` は **752 PASS**。実M365の翻訳診断では送信1回から厳格な応答取得・再読取り一致まで成功した。固定PADの正常完走とは分けて下記に記録する。 |
+| Copilotアダプター | App SHA `7bed68c3…` に対する `tests/Test-Copilot.ps1` **302 PASS**、隔離Edgeの `tests/Test-CopilotDom.cjs` **818 PASS**。CDP応答の模擬とローカル描画で、全文・ID・終端・生成終了・排他・ジョブ分離・異常分類・他タブの保持・送信の再試行禁止を検査する。番号付き分割回答の完全復元、8192文字境界、全体1048576文字、256ブロック、Unicode、エスケープ途中の分割、欠落・重複・逆順・過去回答の拒否を含む。実M365とPADの結果は別記し、これらのローカル検査を実サービスの成功証拠には数えない。 |
 | PADアダプター | `tests/Test-Pad.ps1` **320 PASS**。UI/クリップボード境界を模擬し、全文一致・所有権・失敗時の旧フロー実行拒否・結果帰属を検査する。状態別のUI構造、20種類の状態ID、保存・実行・中止、実ファイルに生成した2件のAiCallテンプレートとRobinの検証も本番関数で確認。実機の固定A/Bは下記に分けて記録する。 |
 | localhost HTTP | `tests/Test-Http.ps1` PASS。実App.ps1プロセスでHTML/状態、トークン/Host/Origin拒否、不完全本文の期限、再接続、設定保持、重複回答・古い質問への回答拒否、版の引き継ぎ、停止を確認。 |
 | 実ブラウザー | `tests/Test-Ui.cjs` 15 PASS。実Edgeの1280×900・390×844で入力→未接続エラー→再表示、トークン除去、同ジョブ再接続、横溢れ・JavaScriptエラーなしを確認。質問ID・Copilotジョブ分離変更を含む不変版 `a00bca7` でも再実行し、両幅のPNGを目視確認した。証跡は `.work/ui-after-question-fix-66edd1690c8a4978aae727d6e5a31807/`。隔離サーバーは専用の終了APIで停止した。 |
@@ -46,9 +66,9 @@
 | 0: 配布・起動 | 実共有UNCからの初回・更新、欠落UNC時の警告付きローカル起動は合格 | 実共有の切断、利用者環境での再起動・UI停止 |
 | 1: 固定PADからAiCall | 正常系合格。実PADから翻訳→分類の直列2回、結果受渡し、review分岐と出力を確認 | 拒否/空/期限/中止の実機異常系 |
 | 2: AIなしのA/B差し替え | 正常系A/B合格。実行中の別controllerをPAD_BUSY・UI操作0で拒否し、元の実行を中止・出力抑止する動作を確認。検証helperの集計不具合により追試全体はunknownで保持 | 保存失敗などを意図的に起こした場合の旧フロー実行防止。実貼付後の異常でRun前に停止した過去証拠は下記 |
-| 3: 生成Robin全文取得 | 短文881文字に加え、修正版の実M365でJSON12,593 UTF-8バイト・Robin7,793文字/25行/24 Writeを完全取得。厳密検証と再取得との全文一致が合格 | 単一JSON文字列の物理行が10,000文字を超える場合の完全取得は未確認。24 WriteをPADで実行した試験ではない |
+| 3: 生成Robin全文取得 | 旧方式の実長文JSON12,593 UTF-8バイト・Robin7,793文字/24 Writeを取得済み。新版は通常分類の2ブロックACTを取得・検証済み | 新分割方式の36 Write・Robin1万文字超の実取得。最初の長文試行はtimeoutで、後続観測の応答も指定形式を満たさなかった |
 | 4: 生成AiCallフロー | Copilot生成の翻訳→書出しに加え、分類→IF分岐→書出しも実PADで成功 | 分類ジョブ全体のDONE取得はGate 5で未完了 |
-| 5: 2〜3往復 | ASK_USER→回答→ACT→AiCall/PAD→DONEとBLOCKEDは合格。分類の2ACTも実結果を読み直して最終ファイルを生成 | 修正版での複数ACT→DONE回答取得・完了表示。最新試行は非アクティブWindowsセッションでPAD_FOCUSとなり、中止済み |
+| 5: 2〜3往復 | ASK_USER→回答→ACT→AiCall/PAD→DONEとBLOCKEDは合格。旧版で分類の2ACTが実結果を読み直して最終ファイルを生成 | 新版の複数ACT→DONE回答取得・完了表示。Windowsロック解除後の最新試行はPAD既存本文の不一致で実行前に停止し、中止済み |
 | 6: 別利用者・別PC | 未検証 | 開発環境に依存しない導入・更新・認証・結果確認 |
 
 2026-09-06に利用者の許可とWindowsの管理者承認を経て、専用共有 `\\localhost\AiPromptsAgentPoC$` を作成した。共有範囲は `.work/shares/AiPromptsAgentPoC` の配布3ファイル、SMB権限は利用者本人の読み取り1件で、NTFS権限・サービス・ファイアウォールは変更していない。最初の承認後試行は共有作成前のファイル名照合で失敗した。作成スクリプトがBOMなしUTF-8だったため、Windows PowerShell 5.1が日本語CMD名を誤読していた。本文を変更せずUTF-8 BOMを付け、旧版の保存と独立した構文・ファイル名照合確認後に成功した。作成・UNC読取の証拠は `.work/gate0/share-create-6a7c02fc14f34586b7c7a5cb32def3c4.json` と `share-verified-6a7c02fc14f34586b7c7a5cb32def3c4.json`。

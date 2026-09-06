@@ -1185,7 +1185,7 @@ const fencedResponse=e=>{
     if(blocks.length>1||result.values[0].startsWith('AGENT_PART_V1 ')){
       const frames=blocks.map((block,index)=>{
         const rows=block.values[block.values.length-1]==='\u00a0'?block.values.slice(0,-1):block.values;
-        if(!block.frameGeometry||rows.length!==(index===blocks.length-1?4:3)||!rows[0].startsWith('AGENT_PART_V1 ')||!rows[1].startsWith('AGENT_DATA ')||rows[1].length<12||rows[1].length>4107||!rows[2].startsWith('AGENT_PART_END_V1 ')||(rows.length===4&&!/^AGENT_END_[A-Za-z0-9_-]{1,128}$/.test(rows[3]))||rows.some(row=>row.length>4107))throw 0;
+        if(!block.frameGeometry||rows.length!==(index===blocks.length-1?4:3)||!rows[0].startsWith('AGENT_PART_V1 ')||!rows[1].startsWith('AGENT_DATA ')||rows[1].length<12||rows[1].length>8203||!rows[2].startsWith('AGENT_PART_END_V1 ')||(rows.length===4&&!/^AGENT_END_[A-Za-z0-9_-]{1,128}$/.test(rows[3]))||rows.some(row=>row.length>8203))throw 0;
         return rows.join('\n');
       });
       result={text:'',frames,source_kind:'fenced_parts',collapsed:blocks.some(block=>block.collapsed)};
@@ -1337,13 +1337,13 @@ function ConvertFrom-AgentCopilotParts {
     param([object[]]$Frames,[string]$RequestId)
     if ($RequestId -cnotmatch '\A[A-Za-z0-9_-]{1,128}\z' -or $null -eq $Frames -or $Frames.Count -lt 1 -or $Frames.Count -gt 256) { throw 'RESPONSE_INVALID: 分割回答の要求 ID または個数が不正です。' }
     $id = [regex]::Escape($RequestId)
-    $pattern = '\AAGENT_PART_V1 ' + $id + ' (?<index>[1-9][0-9]{0,2}) (?<total>[1-9][0-9]{0,2})\nAGENT_DATA (?<payload>[^\r\n]{1,4096})\nAGENT_PART_END_V1 ' + $id + ' \k<index> \k<total>(?<end>\nAGENT_END_' + $id + ')?\z'
+    $pattern = '\AAGENT_PART_V1 ' + $id + ' (?<index>[1-9][0-9]{0,2}) (?<total>[1-9][0-9]{0,2})\nAGENT_DATA (?<payload>[^\r\n]{1,8192})\nAGENT_PART_END_V1 ' + $id + ' \k<index> \k<total>(?<end>\nAGENT_END_' + $id + ')?\z'
     $utf8 = New-Object Text.UTF8Encoding($false,$true)
     $joined = New-Object Text.StringBuilder
     $observedEnd = ''
     for ($part = 0; $part -lt $Frames.Count; $part++) {
         $frame = $Frames[$part]
-        if ($frame -isnot [string] -or $frame.Length -gt 6000) { throw 'RESPONSE_INVALID: 分割回答の本文型または長さが不正です。' }
+        if ($frame -isnot [string] -or $frame.Length -gt 8648) { throw 'RESPONSE_INVALID: 分割回答の本文型または長さが不正です。' }
         $match = [regex]::Match($frame,$pattern)
         if (-not $match.Success -or [int]$match.Groups['index'].Value -ne ($part+1) -or [int]$match.Groups['total'].Value -ne $Frames.Count -or $match.Groups['end'].Success -ne ($part -eq ($Frames.Count-1))) { throw 'RESPONSE_INVALID: 分割回答の順序、個数または終端が一致しません。' }
         if ($part -eq ($Frames.Count-1)) { $observedEnd = $match.Groups['end'].Value }
@@ -1514,7 +1514,7 @@ function Invoke-AgentCopilot {
         $baselineParts=@($baseline.assistants | Where-Object { (Get-AgentProperty $_ 'source_kind' '') -ceq 'fenced_parts' } | ForEach-Object { ConvertTo-Json -InputObject @(Get-AgentProperty $_ 'frames' @()) -Compress })
         $baselineFrameTexts=@($baseline.assistants | ForEach-Object { @(Get-AgentProperty $_ 'frames' @()) } | Where-Object { $_ -is [string] })
         if (@(($baselineTexts+$baselineFrameTexts) | Where-Object { $_.Contains('AGENT_END_' + $RequestId) -or $_.Contains('AGENT_PART_V1 ' + $RequestId + ' ') }).Count -gt 0) { throw 'RESPONSE_INVALID: 使用済み要求 ID は再送信できません。' }
-        $wirePrompt=$Prompt.Replace("`r`n","`n")+"`n`n指定された単一の JSON オブジェクトを、書式用改行のないコンパクト JSON として作ってください。トップレベルの request_id は `"$RequestId`" としてください。文字列内の改行・引用符・バックスラッシュは JSON の規則でエスケープしてください。その JSON の生の文字列を順番に1個以上256個以下の断片へ分け、各断片を1個の言語ラベル text のコードフェンスに入れてください。各断片は2000 UTF-16コード単位程度を目安に、必ず1文字以上4096 UTF-16コード単位以下とし、実際の改行を含めず、Unicode のサロゲートペアの途中で分割しないでください。JSON のエスケープ列の途中で分割しても、元の文字を追加・削除・再エスケープしないでください。各フェンス内部は次の3行です: 第1行 AGENT_PART_V1 $RequestId i N、第2行 AGENT_DATA にASCIIスペース1個を続けて断片そのもの、第3行 AGENT_PART_END_V1 $RequestId i N。i は1からNまでの実際の表示順、Nはフェンス総数で、数字は先頭ゼロなし、各項目の間はASCIIスペース1個だけです。最後のフェンスだけ第4行 AGENT_END_$RequestId を付けてください。N=1も同じ形式です。開始フェンス行はバッククォート3文字と text、終了フェンス行はバッククォート3文字だけです。全断片を区切り文字なしで順番に結合すると元のコンパクト JSON と完全一致する必要があります。断片の前後の空白もそのまま保持してください。フェンスの外に前置き、説明、別のコードや文字を一切付けないでください。JSON のエスケープ以外に Markdown 用の手作業エスケープを追加しないでください。"
+        $wirePrompt=$Prompt.Replace("`r`n","`n")+"`n`n指定された単一の JSON オブジェクトを、書式用改行のないコンパクト JSON として作ってください。トップレベルの request_id は `"$RequestId`" としてください。文字列内の改行・引用符・バックスラッシュは JSON の規則でエスケープしてください。その JSON の生の文字列を順番に1個以上256個以下の断片へ分け、各断片を1個の言語ラベル text のコードフェンスに入れてください。各断片は4000 UTF-16コード単位程度を目安に、必ず1文字以上8192 UTF-16コード単位以下とし、実際の改行を含めず、Unicode のサロゲートペアの途中で分割しないでください。JSON のエスケープ列の途中で分割しても、元の文字を追加・削除・再エスケープしないでください。各フェンス内部は次の3行です: 第1行 AGENT_PART_V1 $RequestId i N、第2行 AGENT_DATA にASCIIスペース1個を続けて断片そのもの、第3行 AGENT_PART_END_V1 $RequestId i N。i は1からNまでの実際の表示順、Nはフェンス総数で、数字は先頭ゼロなし、各項目の間はASCIIスペース1個だけです。最後のフェンスだけ第4行 AGENT_END_$RequestId を付けてください。N=1も同じ形式です。開始フェンス行はバッククォート3文字と text、終了フェンス行はバッククォート3文字だけです。全断片を区切り文字なしで順番に結合すると元のコンパクト JSON と完全一致する必要があります。断片の前後の空白もそのまま保持してください。フェンスの外に前置き、説明、別のコードや文字を一切付けないでください。JSON のエスケープ以外に Markdown 用の手作業エスケープを追加しないでください。構文・長さ・完全一致の検証は受信側アプリが行います。検証ツールを実行する必要はありません。指定形式の回答を生成し、生成できない部分を省略・補完しないでください。"
         $inputStarted=$false
         foreach ($event in @(@{type='rawKeyDown';key='a';code='KeyA';windowsVirtualKeyCode=65;modifiers=2},@{type='keyUp';key='a';code='KeyA';windowsVirtualKeyCode=65;modifiers=2},@{type='rawKeyDown';key='Backspace';code='Backspace';windowsVirtualKeyCode=8},@{type='keyUp';key='Backspace';code='Backspace';windowsVirtualKeyCode=8})) {
             $null=Wait-AgentCopilotInputReady $config $target $socket $CancelPath $deadline $readyDeadline -AfterInput:$inputStarted
