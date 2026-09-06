@@ -29,6 +29,22 @@ SET NewVar TO $'''日本語 100%% \'引用\' \"二重引用\" C:\\sample'''
 
 元Mainの実行後、NewVarの値が `日本語 100% '引用' "二重引用" C:\sample` であることを変数パネルから確認しました。これはこの設定・この版での実測です。Robinのエスケープを、ファイルから読む本文や他言語の文字列へ一律適用しないでください。改行や変数式はこの例の検証範囲に含みません。
 
+#### 採取済みの設定差分: 通常置換と正規表現置換
+
+同じPAD版で「テキストを置換する」を追加しました。解析対象は既存変数NewVar、出力はReplacedです。正規表現OFFで日本語をEnglishに置換したコピー原文:
+
+```text
+Text.Replace.ReplaceText Text: NewVar TextToFind: $'''日本語''' IgnoreCase: False ReplaceWith: $'''English''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+```
+
+正規表現ON、検索条件を数字の連続、置換先をNUMBERにしたコピー原文:
+
+```text
+Text.Replace.ReplaceTextWithRegex Text: NewVar TextToFind: $'''\\d+''' IgnoreCase: False ReplaceWith: $'''NUMBER''' ActivateEscapeSequences: False Result=> Replaced
+```
+
+UIの検索条件にはバックスラッシュ1個の `\d+` を入力しました。Robinではそのバックスラッシュもエスケープされています。正規表現のON/OFFで命令名が変わり、通常置換の例にはComparisonTypeも含まれます。単なる引数追加として混在させないでください。両方とも元Mainで保存・実行し、指定した箇所以外のパーセント・引用符・パスを保持した結果を確認しました。再貼付けとCopilotによる再生成は未確認です。
+
 #### 実アクションのコピー例を渡された場合
 
 - PADの左パネルから追加してコピーしたRobinと、対応する設定値・環境を、そのアクションの生成根拠として使ってください。アクション名だけから内部の名前や引数を推測しないでください。

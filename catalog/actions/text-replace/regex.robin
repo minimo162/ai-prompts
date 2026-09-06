@@ -1,0 +1,1 @@
+Text.Replace.ReplaceTextWithRegex Text: NewVar TextToFind: $'''\\d+''' IgnoreCase: False ReplaceWith: $'''NUMBER''' ActivateEscapeSequences: False Result=> Replaced

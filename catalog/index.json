@@ -123,6 +123,82 @@
         "re_pasted": false,
         "executed_in_flow": "list-create-add-set"
       }
+    },
+    {
+      "id": "text-replace-literal",
+      "category": "テキスト",
+      "ui_name": "テキストを置換する",
+      "ui_automation_id": "Text.Replace",
+      "variant": "literal",
+      "settings": {
+        "解析するテキスト": "%NewVar%",
+        "検索するテキスト": "日本語",
+        "検索と置換に正規表現を使う:": "Off",
+        "大文字と小文字を区別しない:": "Off",
+        "置き換え先のテキスト": "English",
+        "エスケープ シーケンスをアクティブ化:": "Off"
+      },
+      "comparison_type_in_robin": "Text.TextComparisonType.CultureSensitive",
+      "inputs": [
+        {
+          "name": "NewVar",
+          "kind": "existing_text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Replaced",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/text-replace/literal.robin",
+      "sha256": "2e1b8e429847402bf9bc223505e249bf929915a5a5e1419cc95c0e5453d97084",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "text-replace-literal"
+      }
+    },
+    {
+      "id": "text-replace-regex",
+      "category": "テキスト",
+      "ui_name": "テキストを置換する",
+      "ui_automation_id": "Text.Replace",
+      "variant": "regex",
+      "settings": {
+        "解析するテキスト": "%NewVar%",
+        "検索するテキスト": "\\d+",
+        "検索と置換に正規表現を使う:": "On",
+        "大文字と小文字を区別しない:": "Off",
+        "置き換え先のテキスト": "NUMBER",
+        "エスケープ シーケンスをアクティブ化:": "Off"
+      },
+      "comparison_type_in_robin": null,
+      "inputs": [
+        {
+          "name": "NewVar",
+          "kind": "existing_text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Replaced",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/text-replace/regex.robin",
+      "sha256": "3cd6b450c80439288e8afff50bd7d3b2d23c36ed98df96765e1eda0725ee2a1d",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "text-replace-regex"
+      }
     }
   ],
   "flows": [
@@ -173,6 +249,70 @@
       ],
       "screenshot": "evidence/list-create-add-set.png",
       "screenshot_sha256": "6deef2f5dfa34c844aa825187c79d700e83d08ae5cfe2656351c13236603b117",
+      "copilot_generated": false,
+      "app_executor_verified": false
+    },
+    {
+      "id": "text-replace-literal",
+      "robin_path": "flows/text-replace-literal/default.robin",
+      "sha256": "4c9833145c3757cdeb2e2a633cd4a2ec7e1edab016c0c0a6f1d15eca8a8dc4b2",
+      "action_ids": [
+        "variables-create-new-list",
+        "variables-add-item-to-list",
+        "variables-set-special-text",
+        "text-replace-literal"
+      ],
+      "action_count": 4,
+      "native_flow_name": "RobinCatalog_20260907",
+      "run_invocations": 1,
+      "observed_variables": [
+        {
+          "name": "CatalogList",
+          "preview": "[CatalogItem]"
+        },
+        {
+          "name": "NewVar",
+          "preview": "日本語 100% '引用' \"二重引用\" C:\\sample"
+        },
+        {
+          "name": "Replaced",
+          "preview": "English 100% '引用' \"二重引用\" C:\\sample"
+        }
+      ],
+      "variable_evidence": "evidence/text-replace-literal-variables.json",
+      "variable_evidence_sha256": "ae332bd7b0db5be954bf6a4597454d59543cdabf740f385b9fd0371f02e1e5dd",
+      "copilot_generated": false,
+      "app_executor_verified": false
+    },
+    {
+      "id": "text-replace-regex",
+      "robin_path": "flows/text-replace-regex/default.robin",
+      "sha256": "09eeb4accf5b0bdceac130a20df636167979474803524f532f619ce19f6033b4",
+      "action_ids": [
+        "variables-create-new-list",
+        "variables-add-item-to-list",
+        "variables-set-special-text",
+        "text-replace-regex"
+      ],
+      "action_count": 4,
+      "native_flow_name": "RobinCatalog_20260907",
+      "run_invocations": 1,
+      "observed_variables": [
+        {
+          "name": "CatalogList",
+          "preview": "[CatalogItem]"
+        },
+        {
+          "name": "NewVar",
+          "preview": "日本語 100% '引用' \"二重引用\" C:\\sample"
+        },
+        {
+          "name": "Replaced",
+          "preview": "日本語 NUMBER% '引用' \"二重引用\" C:\\sample"
+        }
+      ],
+      "variable_evidence": "evidence/text-replace-regex-variables.json",
+      "variable_evidence_sha256": "cc714f09943e8f69a957b817dadc7332c5c41386874f76ece08620ad9fea4035",
       "copilot_generated": false,
       "app_executor_verified": false
     }
