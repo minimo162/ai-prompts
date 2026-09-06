@@ -1,5 +1,5 @@
 ﻿# App-Version: 0.1.0
-# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6IjNlN2Y0ODQ4ZWRmMTM2MThjNzU0ZTlkMmQwZTE2Nzg5IiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiJmZTM0Y2Y2OTUxY2ZhZDc4MTU1ODFiYmY4NjIwMmE5NWVmZWE4NmU5OGZmYWJiOGU3YzVlZTZmNDFkYzU3YjJhIiwiaHRtbF9zaGEyNTYiOiI5NGRlZDllZTQzZDRiMmQwMzk3YjExM2FiMTgyYjMyN2Y5MDIxNzMzY2IyYjMzZTYyNjA5NmNlMmNiNTJlMGUzIiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
+# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6ImNlZmYyMDI3MjEyNzc0NTQwZTBjYTE2OWVkMTA2ZTQyIiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiJmYTRhNGExZjMyZDFmYWZiMjI1MDQ0OTc2YWQ1ZjkyZjIwMGNmMGRlNDYwZDJhNzRhZmM0M2M0MWFjNmIyMTE4IiwiaHRtbF9zaGEyNTYiOiI5NGRlZDllZTQzZDRiMmQwMzk3YjExM2FiMTgyYjMyN2Y5MDIxNzMzY2IyYjMzZTYyNjA5NmNlMmNiNTJlMGUzIiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
 # State-Contract: 2
 [CmdletBinding()]
 param(
@@ -873,6 +873,44 @@ function Get-AgentCsvView([string]$HomePath, $Job) {
     }
     return [pscustomobject]@{ sources = $manifest.sources; rows = $manifest.rows; previous_results = $previous; limits = Get-AgentCsvContract }
 }
+function ConvertTo-AgentSupportEnum($Value,[string[]]$Allowed) {
+    if($Value -is [string] -and $Allowed -ccontains $Value){return $Value};return 'unknown'
+}
+function Get-AgentInstalledComponentVersions {
+    $edge='unavailable';$pad='unavailable'
+    foreach($base in @(${env:ProgramFiles(x86)},$env:ProgramFiles)){
+        if(-not $base){continue}
+        $path=Join-Path $base 'Microsoft\Edge\Application\msedge.exe'
+        try{if([IO.File]::Exists($path)){$value=[Diagnostics.FileVersionInfo]::GetVersionInfo($path).FileVersion;if($value -cmatch '^\d{1,5}(\.\d{1,5}){1,3}$'){$edge=$value;break}}}catch{}
+    }
+    try{$packages=@(Get-AppxPackage -Name Microsoft.PowerAutomateDesktop -ErrorAction Stop);if($packages.Count -eq 1){$value=[string]$packages[0].Version;if($value -cmatch '^\d{1,5}(\.\d{1,5}){1,3}$'){$pad=$value}}}catch{}
+    return [pscustomobject]@{edge=$edge;pad=$pad;source='installed_file_or_package';running_version_verified=$false}
+}
+function Get-AgentSupportConnection([string]$HomePath,[string]$JobId) {
+    if($JobId -cnotmatch '^[a-f0-9]{32}$'){return $null}
+    $root=Join-Path $HomePath 'data\copilot-attempts'
+    if(-not [IO.Directory]::Exists($root)){return $null}
+    try{
+        Assert-AgentNoReparse $root
+        # Bounded read-only scan. No business request/result file is read or serialized.
+        $files=@(Get-ChildItem -LiteralPath $root -Filter '*.attempt.json' -File | Sort-Object LastWriteTimeUtc -Descending | Select-Object -First 200)
+        foreach($file in $files){
+            if($file.Name -cnotmatch '^[a-f0-9]{32}\.attempt\.json$' -or $file.Length -gt 131072){continue}
+            Assert-AgentNoReparse $file.FullName
+            $trace=Read-AgentJson $file.FullName
+            if((Get-AgentProperty $trace 'job_id' '') -cne $JobId -or (Get-AgentProperty $trace 'request_id' '') -cne $file.Name.Substring(0,32)){continue}
+            $elapsed=Get-AgentProperty $trace 'elapsed_ms' $null
+            if($elapsed -isnot [int] -and $elapsed -isnot [long]){$elapsed=$null}
+            if($null -ne $elapsed -and ($elapsed -lt 0 -or $elapsed -gt 86400000)){$elapsed=$null}
+            $deadline=$null;$raw=Get-AgentProperty $trace 'deadline_utc' ''
+            if($raw -is [string] -and $raw -cmatch '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{7}Z$'){$date=[datetime]::MinValue;if([datetime]::TryParse($raw,[ref]$date)){$deadline=$date.ToUniversalTime().ToString('o')}}
+            $result=[ordered]@{request_ref=(Get-AgentTextHash $trace.request_id).Substring(0,16);phase=ConvertTo-AgentSupportEnum (Get-AgentProperty $trace 'phase' '') @('preparing','send_reserved','click_acknowledged','generating','response_complete','failed','unknown','cancelled');error_type=ConvertTo-AgentSupportEnum (Get-AgentProperty $trace 'error_type' '') @('','authentication','policy','cancelled','timeout','empty_response','refusal','compatibility_or_connection','connection_failed');elapsed_ms=$elapsed;deadline_utc=$deadline;scan_limit=200}
+            foreach($name in @('send_reserved','click_acknowledged','response_complete')){$value=Get-AgentProperty $trace $name $null;$result[$name]=$(if($value -is [bool]){$value}else{$null})}
+            return [pscustomobject]$result
+        }
+    }catch{}
+    return $null
+}
 function Get-AgentSupportDiagnostic([string]$HomePath, $Job) {
     # Allowlist only. Never serialize the job, error, prompt, settings or provider record.
     $phase = [string](Get-AgentProperty $Job 'status' 'idle')
@@ -884,7 +922,11 @@ function Get-AgentSupportDiagnostic([string]$HomePath, $Job) {
         if (-not [int]::TryParse([string]$value, [ref]$number) -or $number -lt 0 -or $number -gt 100) { $number = 0 }
         $counts[$name] = $number
     }
-    return [pscustomobject]@{ schema_version = 1; diagnostic_id = [guid]::NewGuid().ToString('N'); created_utc = [DateTime]::UtcNow.ToString('o'); app_version = $script:AgentVersion; app_sha256 = Get-AgentHash $script:AgentAppPath; os_version = [Environment]::OSVersion.Version.ToString(); powershell_version = $PSVersionTable.PSVersion.ToString(); adapter_version = (Get-AgentConnectionContract).adapter_version; pad_adapter_version = (Get-AgentConnectionContract).pad_adapter_version; phase = $phase; counts = [pscustomobject]$counts; stop_confirmed = ($phase -ceq 'cancelled'); offline_test = $script:AgentOfflineTest; live_acceptance = 'unverified'; includes_business_text = $false; uploaded = $false }
+    $jobId=[string](Get-AgentProperty $Job 'job_id' '');$jobRef=$null
+    if($jobId -cmatch '^[a-f0-9]{32}$'){$jobRef=(Get-AgentTextHash $jobId).Substring(0,16)}
+    $preserved=Get-AgentProperty $Job 'preservation' $null
+    $preservation=[pscustomobject]@{main_status=ConvertTo-AgentSupportEnum (Get-AgentProperty $preserved 'main_status' '') @('not_changed','needs_recovery','kept_owned','restored');clipboard_status=ConvertTo-AgentSupportEnum (Get-AgentProperty $preserved 'clipboard_status' '') @('not_touched','restored','user_changed','restore_failed','unconfirmed','deferred');recovery_required=$(if((Get-AgentProperty $Job 'recovery_required' $null) -is [bool]){$Job.recovery_required}else{$null})}
+    return [pscustomobject]@{ schema_version = 2; diagnostic_id = [guid]::NewGuid().ToString('N'); created_utc = [DateTime]::UtcNow.ToString('o'); app_version = $script:AgentVersion; app_sha256 = Get-AgentHash $script:AgentAppPath; os_version = [Environment]::OSVersion.Version.ToString(); powershell_version = $PSVersionTable.PSVersion.ToString(); adapter_version = (Get-AgentConnectionContract).adapter_version; pad_adapter_version = (Get-AgentConnectionContract).pad_adapter_version; components=Get-AgentInstalledComponentVersions;job_ref=$jobRef;job_app_sha256=$(if([string](Get-AgentProperty $Job 'release_app_sha256' '') -cmatch '^[a-f0-9]{64}$'){$Job.release_app_sha256}else{$null});connection=Get-AgentSupportConnection $HomePath $jobId;preservation=$preservation;phase = $phase; counts = [pscustomobject]$counts; stop_confirmed = ($phase -ceq 'cancelled'); offline_test = $script:AgentOfflineTest; live_acceptance = 'unverified'; includes_business_text = $false; uploaded = $false }
 }
 function Invoke-AgentCsvSelection([string]$HomePath, [string]$ExecutionId) {
     Assert-AgentId $ExecutionId
@@ -2705,6 +2747,7 @@ function Invoke-AgentCopilot {
         $mutex=Enter-AgentCopilotMutex $config $CancelPath $deadline
         if ([IO.File]::Exists((Get-AgentCopilotAttemptPath $HomePath $RequestId))) { throw 'RESPONSE_INVALID: 使用済み要求 ID は再送信できません。' }
         $trace=New-AgentConnectionTrace $HomePath $RequestId $JobId $Transport
+        $trace | Add-Member -NotePropertyName deadline_utc -NotePropertyValue $deadline.ToUniversalTime().ToString('o') -Force
         $target=Get-AgentCopilotTarget $config -Create; $socket=Connect-AgentCopilotSocket $config $target
         $inputDeadline=[datetime]::UtcNow.AddSeconds($contract.initial_input_wait_seconds)
         do {

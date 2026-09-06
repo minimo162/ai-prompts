@@ -58,6 +58,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File tests\Run-NonLiveTe
 
 2026-09-07、044df75と同じ3ハッシュの固定候補で短文1件102,876ms・50件457,775ms・100件836,945msと長文1件119,573msを介入なしDONE。100件は成功80/要確認20、原値と成果物保全PASS。意味品質は人未確認の正解案比較であり受入未完了。詳細と資源測定は上記会話分離記録を参照。
 
+2026-09-07、問い合わせ診断schema 2を追加。インストール済みEdge/PADパッケージ版、現在/ジョブ開始ハッシュ、匿名化参照、期限/所要時間、固定接続分類、Main/クリップボード保全を許可項目だけで表示。秘密文字列/不正型/別ジョブ除外17項目、接続16項目、実Edge画面48項目PASS（AIはmock）。画面証拠 `.work/csv-ui-962c34d9c1734b4599536ab956db4926`。詳細は[support-diagnostic.md](support-diagnostic.md)。App SHA `1153e19e3074f801f23a485359116fb41bb9dd54e1ae66091627f1395ac794b4` の新候補であり、前候補の実100件PASSをこの候補へ流用しない。
+
 ## 残る必須作業
 
 |Issue|次に実装・検証するもの|
