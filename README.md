@@ -18,6 +18,8 @@ index.html
 
 必要な環境は Windows、Windows PowerShell 5.1、Microsoft Edge、PAD、M365 Copilotを利用できるアカウントです。Node、Python、独自EXE、常駐サービスは配布に不要です。認証は利用者が行います。組織で禁止されている接続・実行をアプリが解除することはありません。ランチャーは自分のPowerShellプロセスだけに実行ポリシー引数を指定し、永続設定やグループポリシーを変更しません。
 
+配布の想定経路は **GitHub → 社内PC → 社内の共有フォルダー → 利用者ローカル** です。社内PCで受け取った同じ版の上記3ファイルを、配布担当者が実際の共有フォルダーへ配置します。リポジトリのテスト・開発用補助・`.work` は利用者への配布に含めません。更新中は起動を控え、3ファイルの配置完了後に利用を再開してください。開発PC上の `\\localhost\AiPromptsAgentPoC$` は作り替え可能な検証用共有で、実際の配布先ではありません。社内PCからの導入・更新・実行は別途確認が必要です。
+
 現在はPADとM365 Copilotを日本語表示で使用してください。他言語の画面は未検証です。ChatGPTのブラウザー拡張機能は不要です。
 
 初回の準備:
@@ -50,7 +52,7 @@ index.html
 
 次の計画には成果物の実際のUTF-8本文、ハッシュ、件数、切り詰め状態を渡します。本文全体を確認できていない成果物を根拠にDONEにはしません。前の実行の成果物を再利用する場合も、同じジョブで観測した正確なパスと現在のハッシュを照合します。質問ごとのIDと回答の一度だけの受付により、複数画面から回答を上書きしたり、古い質問への回答を次の質問へ流用したりしません。
 
-計画の応答は、メタデータJSONとRobin本文の2つのコードブロックで受け取ります（Planner V2）。Robinは最大64000 UTF-16文字・250行で、コードの引用符、バックスラッシュ、空白をそのまま保持します。画面上で空行と特殊な空白を混同しないよう、空行だけは今回の要求IDを含む専用の目印で送り、完全一致した目印を空行へ復号します。メタデータと復元後の最終JSONは、それぞれ最大1048576文字です。PAD内のAiCallは従来の番号付きJSON断片（1断片最大8192文字、最大256ブロック、連結後最大1048576文字）を使います。
+計画の応答は、1つのコードブロック内にメタデータJSONとRobin本文を明示的な目印で区切って受け取ります（Planner V2）。従来の2ブロック形式の読取りも維持しています。Robinは最大64000 UTF-16文字・250行で、コードの引用符、バックスラッシュ、空白をそのまま保持します。画面上で空行と特殊な空白を混同しないよう、空行だけは今回の要求IDを含む専用の目印で送り、完全一致した目印を空行へ復号します。メタデータと復元後の最終JSONは、それぞれ最大1048576文字です。PAD内のAiCallは従来の番号付きJSON断片（1断片最大8192文字、最大256ブロック、連結後最大1048576文字）を使います。
 
 どちらも要求ID・順序・欠落・重複・終端を検査し、応答IDとブロック境界を含む全文が3回連続で一致し、生成が終了したことを確認します。折りたたみ表示でも、既知の構造に全行が存在し、この検査を通った応答だけを取得します。不完全なJSONやRobinの修復、正当なバックスラッシュの削除は行いません。ファイル本文やAIの業務結果はデータとして扱います。Planner V2の実機での通し確認は進行中です。
 
@@ -72,7 +74,13 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File tests\Test-PlannerV
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Pad.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Http.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Launcher.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-PublishAgentSource.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-AiCallProcess.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-AiCallProviderFailure.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File tests\Test-ClipboardSnapshot.ps1
 ```
+
+`Test-AiCallProviderFailure.ps1` は、実AiCall子プロセスのプロバイダー関数だけを差し替え、拒否・空回答・期限・応答時中止の受信処理を検査します。実M365の応答やPADフローの異常系検証とは区別します。
 
 開発用の状態領域を分ける場合:
 

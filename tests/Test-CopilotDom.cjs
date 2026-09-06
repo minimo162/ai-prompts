@@ -55,6 +55,31 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
       return { raw, state: await inputState() };
     };
     const span = html => '<span id="m365-chat-editor-target-element" contenteditable="true">' + html + '</span>';
+    const composerSend = '<button id="chat-send" type="submit" aria-label="送信" class="fai-SendButton fai-BebopLiteChatInput__send">送信</button>';
+    const surveySend = '<div role="alertdialog" aria-modal="false" data-testid="DxToastContentContainer"><button id="survey-send" type="button" aria-label="送信" data-testid="obf-DxTFormSubmitButton">送信</button></div>';
+    const composer = controls => '<div class="fai-BebopLiteChatInput"><div class="fai-BebopLiteChatInput__inputWrapper">' + span('test prompt') + controls + '</div></div>';
+    const selectedSends = '(()=>{' + definitions[0][1] + 'return sends.map(e=>e.id);})()';
+    await render(composer(composerSend) + surveySend);
+    check(await page.evaluate(selectedSends), ['chat-send'], 'Known composer excludes the measured survey Send button');
+    check((await inputState()).sendReady, true, 'Survey does not make the known chat sender ambiguous');
+    await page.evaluate(() => { window.chatClicks = 0; window.surveyClicks = 0; document.querySelector('#chat-send').onclick = e => { e.preventDefault(); window.chatClicks++; }; document.querySelector('#survey-send').onclick = () => window.surveyClicks++; });
+    await page.evaluate('(()=>{' + definitions[0][1] + 'if(!input||generating||sends.length!==1)throw new Error("send unavailable");sends[0].click();})()');
+    check(await page.evaluate(() => [window.chatClicks, window.surveyClicks]), [1, 0], 'The resolved send action never submits survey feedback');
+    for (const [controls, label] of [
+      ['', 'missing composer send'],
+      [composerSend.replace('type="submit"', 'type="button"'), 'unexpected button type'],
+      [composerSend.replace('fai-SendButton ', ''), 'missing measured send class'],
+      [composerSend.replace('id="chat-send"', 'disabled id="chat-send"'), 'disabled composer send'],
+      [composerSend.replace('id="chat-send"', 'aria-disabled="true" id="chat-send"'), 'aria-disabled composer send'],
+      [composerSend.replace('id="chat-send"', 'style="display:none" id="chat-send"'), 'hidden composer send']
+    ]) {
+      await render(composer(controls) + surveySend);
+      check((await inputState()).sendReady, false, label + ' cannot fall back to the survey');
+    }
+    await render(composer(composerSend + composerSend.replace('chat-send', 'duplicate-send')) + surveySend);
+    check((await inputState()).sendReady, false, 'Duplicate send controls inside the composer remain ambiguous');
+    await render(composer(composerSend) + '<div class="fai-BebopLiteChatInput">' + composerSend.replace('chat-send', 'other-send') + '</div>');
+    check(await page.evaluate(selectedSends), ['chat-send'], 'Another composer cannot receive this input');
     let observed = await render(span('<p><br></p>'));
     check(observed.raw, { innerText: '\n', textContent: '', value: null }, 'Reproduce the measured empty M365 DOM');
     check(observed.state.inputText, '', 'Only the measured empty editor becomes an empty string');
@@ -1076,6 +1101,47 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
     const expectedPlanner = (frames, collapsed = false) => ({ key: 'parts-fixture', text: '', frames: frames.map(rows => rows.join('\n')), source_kind: 'fenced_planner_v2', collapsed });
     const plannerBody = ['  File.Read "日本語" C:\\raw %FileContents%  ', 'AGENT_EMPTY_V2 ' + requestId, 'IF result = AGENT_AICALL_FAILED', '  \u00a0 ', 'END'];
     const plannerFrames = plannerRows(plannerBody);
+    const expectedSinglePlanner = (frames, collapsed = false) => ({ ...expectedPlanner(frames, collapsed), source_kind: 'fenced_planner_v2_single' });
+    const renderSinglePlanner = rows => renderFenced(multipartReply([rows]), null, '.code-editor{max-height:none}');
+    response = await renderSinglePlanner(plannerFrames.flat());
+    check(response.state.assistants, [expectedSinglePlanner(plannerFrames)], 'A single physical fence preserves the two explicit V2 sections exactly');
+    check((await page.evaluate(snapshot)).assistants, response.state.assistants, 'Single-fence V2 readback retains identity and both logical boundaries');
+    for (const state of ['DONE', 'ASK_USER', 'BLOCKED']) {
+      const frames = plannerRows([], { request_id: requestId, state, message: '観測済みの状態', artifacts: [] });
+      response = await renderSinglePlanner(frames.flat());
+      check(response.state.assistants, [expectedSinglePlanner(frames)], 'Single fence preserves zero Robin body rows for ' + state);
+    }
+    response = await renderSinglePlanner([...plannerFrames.flat(), '\u00a0']);
+    check(response.state.assistants, [expectedSinglePlanner(plannerFrames)], 'Single fence accepts only the measured final renderer tail');
+    const fittedDoneFrames = [
+      ['AGENT_META_V2 ' + requestId, '{', '  "request_id":"' + requestId + '",', '  "state":"DONE",', '  "message":"' + 'M'.repeat(73) + '",', '  "artifacts":[' + JSON.stringify('C:\\fixture\\' + 'x'.repeat(145) + '.txt') + ']', '}', 'AGENT_META_END_V2 ' + requestId],
+      ['AGENT_ROBIN_V2 ' + requestId, 'AGENT_ROBIN_END_V2 ' + requestId, marker]
+    ];
+    const fittedDoneCss = '#fixture .fenced-reply{width:706px}.code-editor{grid-template-columns:38px minmax(0,1fr);grid-template-rows:20px 20px 20px 20px 40px 80px 20px 20px 20px 20px 20px;padding:12px 0 8px;box-sizing:content-box;align-content:start}.code-line,.gutter{line-height:20px;font-family:monospace;font-size:14px}';
+    response = await renderFolded(multipartReply([fittedDoneFrames.flat()]), null, fittedDoneCss);
+    const fittedMetrics = await page.evaluate(() => { const e = document.querySelector('.code-editor'), r = e.getBoundingClientRect(); return { rows: e.querySelectorAll('[data-line-index]').length, height: r.height, client: e.clientHeight, scroll: e.scrollHeight, maxHeight: getComputedStyle(e).maxHeight, allRowsInside: [...e.children].every(n => n.getBoundingClientRect().bottom <= r.bottom) }; });
+    check(fittedMetrics, { rows: 11, height: 320, client: 320, scroll: 320, maxHeight: '300px', allRowsInside: true }, 'Reproduce the measured short DONE with visible More but no hidden rows');
+    check(response.state.assistants, [expectedSinglePlanner(fittedDoneFrames, true)], 'A complete collapsed-control state retains every short DONE row without clicking More');
+    check((await page.evaluate(snapshot)).assistants, response.state.assistants, 'Short complete folded state is stable on reread');
+    for (const [label, css] of [['hidden overflow', '.code-editor{overflow:hidden}'], ['scaled editor', '.code-editor{transform:scale(.9)}'], ['hidden final row', '.code-line[data-line-index="10"]{visibility:hidden}']]) {
+      response = await renderFolded(multipartReply([fittedDoneFrames.flat()]), null, fittedDoneCss + css);
+      check(response.state.assistants[0].source_kind, 'rendered', 'Short fitted DONE still rejects unsupported geometry: ' + label);
+    }
+    for (const [label, rows] of [
+      ['one backtick separator', [...plannerFrames[0], '`', ...plannerFrames[1]]],
+      ['two backtick separator', [...plannerFrames[0], '``', ...plannerFrames[1]]],
+      ['fence delimiter separator', [...plannerFrames[0], '```', ...plannerFrames[1]]],
+      ['missing metadata end', [...plannerFrames[0].slice(0, -1), ...plannerFrames[1]]],
+      ['duplicate metadata end', [...plannerFrames[0], plannerFrames[0].at(-1), ...plannerFrames[1]]],
+      ['mismatched section ID', [...plannerFrames[0], ...plannerFrames[1].map(row => row.replace(requestId, 'different-id'))]],
+      ['missing final marker', plannerFrames.flat().slice(0, -1)],
+      ['extra final row', [...plannerFrames.flat(), 'extra']],
+      ['extra final delimiter', [...plannerFrames.flat(), '``']],
+      ['two renderer tails', [...plannerFrames.flat(), '\u00a0', '\u00a0']]
+    ]) {
+      response = await renderSinglePlanner(rows);
+      check(response.state.assistants[0].source_kind, 'rendered', 'Single fence refuses malformed framing without repair: ' + label);
+    }
     response = await renderFenced(multipartReply(plannerFrames));
     check(response.state.assistants, [expectedPlanner(plannerFrames)], 'V2 preserves complete metadata and every literal code/sentinel/space character');
     check((await page.evaluate(snapshot)).assistants, response.state.assistants, 'Repeated complete V2 snapshots are ordinally identical');
@@ -1113,6 +1179,8 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
     check(response.state.assistants[0].source_kind, 'fenced_planner_v2', 'Preserve the complete combined boundary as a structured carrier');
     check(response.state.assistants[0].frames.map((frame, i) => frame === expectedPlanner(combinedBound, true).frames[i]), [true, true], 'Preserve full bounded metadata and 250 encoded body rows together without narrowing the final parser contract');
     check(JSON.stringify({ ...JSON.parse(boundedMetaText), robin: [boundedBody[0], ...Array(249).fill('')].join('\n') }).length < 1048576, true, 'The combined wire boundary still fits the decoded final JSON contract');
+    response = await renderFolded(multipartReply([combinedBound.flat()]));
+    check(response.state.assistants, [expectedSinglePlanner(combinedBound, true)], 'Single fence retains the full metadata and 250 encoded body rows at the combined bound');
     for (const [label, frames] of [
       ['third fence', [...plannerFrames, plannerFrames[1]]],
       ['reversed fences', [...plannerFrames].reverse()],

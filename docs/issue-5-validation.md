@@ -2,6 +2,84 @@
 
 2026-09-06 / 状態: **partial — 実機ゲート未完了**。
 
+クリップボード修正後の[新ドラフトRelease](https://github.com/minimo162/ai-prompts/releases/tag/untagged-d8380db053eaf8b812c5) はsource `8fdb972` / App227版。ZIP SHA `40a83cf12b6abaf03873cf5a0bc72d2daf85cd7a6627b52a2a80abdf2511fcec`。GitHubから全添付を再ダウンロードし、原本およびZIP内3entryのSHA一致を確認。`.work/distributions/issue-5-poc-8fdb972-23471a9ef8bb4134b5e412660ba5b5ec/github-upload-verification.json` に記録した。旧1c981c6候補を上書きせず、新候補を社内PC確認用に指定した。
+
+同日23:03 JST、クリップボードのIDataObjectを保持するだけでは内容を保存できない問題を修正。PAD操作なしの実Windows検査で、取得直後は元のテキストを返す参照が、置換後は返さず、Restoreが例外なしでも空テキストとなることを再現した（`.work/clipboard-repro-detail-fac8350aa3bd43b5852c0f0c249fa1dc/`）。全native形式を変更前に管理下のDataObjectへ取り込み、可変画像/配列/メモリストリームを複製する。読み取れない形式はPAD_CLIPBOARDで変更前に停止し、利用者の回答前の別ACTも抑止する。形式保持8件/core149/PAD335 PASS。実テキスト3回の置換/復元も完全一致、元の空状態への復元PASS（`.work/clipboard-fixed-61292234aee942f7b302772d58b9765e/`）。
+
+最終App227版でテキスト/RTF/2画素画像を持たせた実PAD固定WAIT 0検証はPASS。`.work/pad-rich-clipboard-ce67f7099f9c46a89243b435c82bb8a7/`、result SHA `a317a82977b5287c3c06bcecb82f746d683d70b3cfd485ae348cf052fe3ba8e6`。PAD1回、開始/完了ID一致、テキスト/RTF全文・画像寸法/両画素・native形式集合一致、元Main貼戻し/保存各1回・復元実行0、旧ファイル/ページ/owner/元クリップボード保全。Copilot呼出し0。この検証を227版の業務通し検証とは呼ばない。通常更新 `af949153771e478d89ce957e26da5018` もPASSし、App SHA `227257823937fb8e37af42e4c25056ccd57ef168b6f393fd379155b94e6daaf0`、server PID11660/port61953/start UTC `2026-09-06T13:59:16.1214896Z`、release `0.1.0-9b95b4da9d2be8b9bfb1a0b663da448323dea3452115d3a8d8fe2598f565f0c6` を確認した。
+
+GitHubへの途中成果保存: [ドラフトPR #7](https://github.com/minimo162/ai-prompts/pull/7)、[ドラフトRelease](https://github.com/minimo162/ai-prompts/releases/tag/untagged-9f3591bbed1fcc24cfb2) を作成。Release対象は `1c981c6dd53d75b2c8f11659c0364820fb0cf349`、配布Appは検証済み45f版。3ファイルZIP、manifest、社内PC確認手順を添付し、GitHubからダウンロードした全添付とZIP内3entryのSHA一致を確認した。ZIP SHA `12ae88a7dca77f010810cf0c475cde87a4edac22f62af4a979a13119e706ca54`。公開版や他PC合格とは扱わない。PR check一覧は空で、GitHub Actionsは未設定。IssueはOPEN、mainへのマージは未実施。
+
+同日22:29 JST、**実M365送信後の中止もPASS**。`.work/gate1-postsend-cancel-965937aac9a2404bb769858d2e1c71e4/`、job `6f2c544af5b841d8b3eb6fddea52db2a`、result SHA `f2609fc66750e46796d0e515a766e64001845899683df8db31143edd68079e4e`。固定PADの実行1回後、同版Appを読む別監視プロセスが開始ID・AiCall claim・送信クリック応答後のhas_sentを確認して中止ファイルをCreateNewで1回作成した。製品PAD停止1回、子結果cancelled/入力1/出力0、制御cancelled/CANCELLED、成功本文・後続成果物・完了マーカーなし。元Main復元・保存各1回/復元実行0、既存ファイル/ページ/owner/clipboard保全、監視・子・検証プロセス終了を確認。プロバイダー関数の差替えなし。実UI停止ボタンの押下とは区別する。
+
+同日22:24 JST、**最新App45f版の正常業務通しはPASS**。session `.work/normal45f-2eac8de5df4f482ab234974c189c7b99/classify-sessions/d131679abeca4f28ba7bf44f03c0e9da/` / job `7b289291994e47699a3aedb81721e374`。実HTML開始1/HTTP200→V2 ACT→実PAD内V1分類review→下書き→観測を受けた別V2 ACT→実PAD2回目→V2 DONE。result SHA `d54d4c15eda3c3641976aa140cce7850e5d6f7749fb7c08ed90b96bdb5f80f29`。PAD2/AiCall1、異なる生成Robin、4応答の独立2読取り、旧ファイル/owner/タブ/attempt帰属保全、worker終了、最終UI一致が合格。最終ファイル83バイト/SHA `271fe047a97061f8eb4f3f2fd9a14d99973059fed1714a4256272da4ce2b4a5d` は下書きと同一。UTF-8読取り後は入力と末尾LFを含めOrdinal完全一致し、バイト差はBOMだけ。normal側出力なし。
+
+完了画面 `complete-ui-full.png` を目視し、完了/停止無効/回答/成果物表示を確認（SHA `1e6e616c3972259b6188471ffdd2768f7e7471163dcc57f850febd1bf808c01e`）。export補助の末尾改行不足で記録が途切れ、追加exportは既存ファイルのCreateNewで拒否された。コピー本体を上書きせず、`export-verification.json` で原本/コピーのSHA一致を確認。これは製品業務失敗ではない。以後のPAD所有基準はowner SHA `7093d2d9bf7756e8bb5e1108ae4d81c6318a51563fde2a13e55982dd24d94c0d` / Main比較SHA `b5e73bdb6efeccbf57772b7f3d106da9f09492a80d3fd20c4ad07ac1f806b336`。
+
+同日22:13 JST、修正後45f版の固定PAD→実AiCall20秒期限は **PASS**。`.work/gate1-deadline-fixed-f8415abdc9ca4d43bda0859f9f1834f3/`、job `2f91a9786c704c0398fc372f9f0b8eec`、result SHA `fa7ead8659f045bf0181fccab174e03153bc4335e61c29bd4d4a4789d78515b5`。子結果failed/timeout、実制御戻り値failed/AICALL_timeout、開始ID一致、入力1/出力0、成功本文・後続成果物・完了マーカーなし。元Main復元・保存、既存ファイル/ページ/owner/クリップボード保全成功。送信予約に加え、製品が送信クリックの応答確認後に設定する `has_sent=true` を読取専用の `send-confirmation.json` で確認。実M365送信後の期限切れとして記録する。以前のinvalid_response結果は書き換えない。
+
+同日22:10 JST、App45f版は応答制御137件/Copilot302件PASS。通常更新 `8f340820b3654b10b060042a39d6d8b8` で実CMDからrelease `0.1.0-6079e7a56ebd98ad6365deb45729ea8a3adbda51b54bd51c1a7ab80996d8ff53` へ切り替え、新server PID25376 / port50142 / `2026-09-06T13:10:15.6866050Z` を確認。設定・既存ファイル・PAD所有記録を保持。これは更新検証であり、最新ソースの正常業務通し確認ではない。
+
+同日22:04 JST、20秒期限の実試行 `.work/gate1-response-deadline-47832fcd0a164b5ead7101fbe23f84ca/` は送信予約後に `AICALL_invalid_response` となり、期待したtimeoutとは異なるためpartialを保持（result SHA `82dee61d64107477f20d8d4a9c9de3b9bc0547e45ec8fcd6b10e8487075916aa`）。元Main・既存ファイル・ページ・クリップボード復元はPASS、後続成果物なし。後から実回答を操作なしで2回読み、同じ完全なV1 JSONと合成テスト文の訳文を確認した（JSON SHA `d2e9be7176253f10b845bd9e4012ec2e31773628b9a2af47bfd4f7818acc6e83`）。期限内にこの形が完成していた証拠ではない。
+
+コード上は、途中の不完全フレームの `lastError` が、その後に有効な回答を得ても残り、安定確認3回を待てず期限直前となった際にinvalid_responseへ誤分類する。追加したV1回帰で修正前のRESPONSE_INVALIDを再現し、各snapshotで判定を更新する修正後は期待どおりRESPONSE_TIMEOUTとなった。応答制御137件PASS（`.work/deadline-classification-fixed-1.json`、App SHA `45f9600171f830be7a1f010984e80ee85946b6d05c9e8bdeda3985b6662d4c7d`）。送信1回、安定確認3回、全体期限は維持。これは実試行の原因を一意に確定したことにはならない。Test-Copilot内の旧「すべての入力準備で同一期限」の期待は、既に採用済みの「操作ごとに準備期限、同じ操作のbusy再確認では不変」へ更新した。
+
+同日21:48 JST、固定の実PAD→実AiCall子プロセスに対するプロバイダー境界の障害注入3ケースはすべてPASS。fixture Appは製品a743版の `Invoke-AgentCopilot` 関数だけを置換したもの（SHA `a94cc02cb136f723a6da32b67b0e78564d56ad79c0ac2327938185c453cb2600`）。子PID/Appパス/要求IDのboundary-hit記録を確認し、実M365送信予約なし。実M365自体の拒否/空回答発生とは区別する。
+
+| ケース | 実制御戻り値 | result.json SHA256 |
+|---|---|---|
+| refusal | failed / AICALL_refusal | de5183b91ef549a236aa809bb4e5ff75ab7821eff5f3ad20da103b121a2490c5 |
+| empty | failed / AICALL_empty_result | 9f3ea0d94dd9458ccdc12b34aa06fdaf4a47961ecd88e8ab712270731da11501 |
+| cancelled | cancelled / CANCELLED | 6cfb12e59926cdd7a472e4ab9106eebe5002f334afa2b85470260339b0627d6d |
+
+証拠は `.work/gate1-pad-provider-5c7e819ae3cb43a0bcafcd6340c46a38/<ケース>/`。全ケースPAD実行1回、開始ID一致、子の入力1/出力0、成功本文・後続成果物・完了マーカーなし。中止ケースは子の応答時に中止ファイルを作成し、PAD停止操作1回・子結果cancelledを確認。元Main貼戻し/保存各1回・復元時実行0、owner/既存ファイル/既存ページ/クリップボード保全成功。native Save失敗、送信後期限/中止、別利用者・社内PCの受入は残る。
+
+同日21:42 JST、App `a743aecc068eaeec9a081e41e0a78a0c6bea0ca1d8aceea6f6ffbf638662f0cf` の固定PAD→実AiCallタイムアウトはPASS。session `.work/gate1-timeout-recorded-173b32b027454db0b426cae231f87508/`、result SHA `3777d6ce9bc377d398790968807710b632a2e2e503fb806e8ee2b1f1e7aebd97`。PAD実行1回、子結果failed/timeout、制御戻り値failed/AICALL_timeout、開始ID一致、成功本文・成果物・完了マーカーなし。元Main復元と保存各1回、復元時実行0、既存ファイル・ページ・owner・クリップボード保全PASS。5秒の期限はCopilot送信予約前に切れており、送信後の回答待ち期限の証拠ではない。
+
+今回の製品差分は、PAD全文コピーを一度だけ要求し2秒以内で非空の結果を観測すること、中止確認、Planner指示に残ったsecond fence表記の訂正。core147/PAD335 PASS。PAD335を実機helperと同時に動かした1回は名前付きmutex競合で失敗し、helper終了後の単独再実行でPASS。実機検証とPADモック検査は直列にする。
+
+新しい `Test-AiCallProviderFailure.ps1` は実PS5子プロセス内のプロバイダー関数だけを差し替え、拒否・空回答・期限・応答時中止の21件PASS。その他の製品ソースの同一性をAST差し戻しで確認。`.work/aicall-provider-fault-36663711ffe4491287597127c959988d/validation.json`。このテスト単体はPAD/M365を動かさない。
+
+先行session `.work/gate1-focused-d147709b24504929b00e19503480b345/` は、子timeout・後続停止・元Main/ファイル保全を確認したものの、クリップボード例外で制御戻り値保存とクリップボード復元が未確認となりpartial。別の読取り専用記録はAICALL_timeout、開始ID一致、出力なし、Main ready/error0を確認した。元resultは変更していない。後続helperは制御戻り値を任意のクリップボード診断より先に保存する。クリップボード例外の根本原因は未確定。
+
+同日20:16 JST、最新App `f9391133d2c52239de68a96d4f3a4a03b060f10967069d95ea2dab38c1474e45` の実V2分類通し検証は **PASS**。session `ee182d3e0c9c4e73a2be8cfa43a6cf93` / job `6e8eea67fc004355b13e76f7d8016c1a`。実HTML開始1/HTTP200→単一フェンスV2 ACT→生成PAD内V1 AiCall分類review→IF分岐/下書き→実観測を受けた異なるV2 ACT→PAD2回目→V2 DONEを確認。開始/終了マーカー・各run/call ID、4応答の独立2読戻し、ファイル/owner/全タブ/attempt帰属の保全、worker終了、UI完了一致がすべて合格。result SHA `877c11492e2473fd79194c074fee392f8e786c13dbd963df5a6fa832ba864a16`。証拠は `.work/fitted-d08798810a234ce0af71690cbf310519/classification/classify-sessions/ee182d3e0c9c4e73a2be8cfa43a6cf93/`。
+
+最終 `final-review.txt` は83バイト/SHA `271fe047a97061f8eb4f3f2fd9a14d99973059fed1714a4256272da4ce2b4a5d`。入力は会議室が未定と明記するためreview分岐が妥当。下書きと最終ファイルは同一hash、normal側の出力は0。入力80バイトとの差はUTF-8 BOMだけで、UTF-8読取り後は末尾LFも含めてOrdinal完全一致した。完了画面 `complete-ui-full.png`（SHA `e29a54fc4bd5a98bf2041cb80dc32cb7dbc55dd99b6df45a54a0b247b16e0f33`）を目視し、完了/停止無効/最終回答/成果物パスを確認。`semantic-visual-review.json` と検証済み出力コピーを同sessionに保存。
+
+この到達までの修正と証拠:
+
+- 入力確認が1回約2秒かかり、6回の確認で共通15秒枠の約12秒を使うことを実画面で送信なし計測。低速キー処理を含む回帰で旧コードの準備期限切れを再現し、確認ごとの短い枠と不変の要求全体期限を分離。全体5秒を越えた入力/送信を防ぐ検査を含め、V2/V1応答制御134件PASS。
+- 実AiCall timeout `ead2b7aa…` はfailed/timeout・成功本文なし・PAD runtime_errorを確認したが、旧実行器が途中のMain装飾表示でunknownとなった。元結果は保持し、実行中だけ完全な状態を期限内に再観測する対応を追加。永続不一致はunknownを維持し、Paste/Save/Runを再試行しない。PAD331件PASS。旧Main復旧は `.work/pastewait-db7901e78f01420c9451367b4080fbc6/restore-timeout.json`。
+- 2フェンス間の余分なバッククォートが再発したため、既存2フェンスの検査を維持したまま、1フェンス内を明示マーカーで2セクションに分ける出力を既定とした。単一フェンス実長文 `bb4d6143…` は7794文字/26行/空行1/24 Write完全一致・保全PASS。DOMの境界/欠落/余分な行の拒否は維持。
+- 実DONEの `5a165045…` は同じファイルを指す重複区切りパスが文字列比較で拒否された。`GetFullPath` でパス構文を解決後、正確な観測済みパスと現物hash、全文確認状態を照合する修正を入れた。未観測の同一内容ファイルやhash変更、全文省略は拒否。原応答/Robin/業務本文は変更しない。`needs_review` 分類の候補外ラベルも拒否し、core146件PASS。
+- 実DONE `af18a3d9…` は全11行が枠内にありながらMoreが表示される状態でrenderedへ戻っていた。CSS maxHeight300px、padding込みclientHeight=scrollHeight=320pxを実測。V2メタデータ始端を持ち全行が完全に収まる表示を追加し、DOM893件PASS。元の同じ回答を再送/More操作なしで2読取りし、厳密なDONE解析と実成果物照合が成功（`done-fitted-reader.json`）。元失敗は書き換えていない。
+
+本節の正常業務PASSを、AiCall全異常系・native Save失敗・社内/別PC・CIのPASSへ拡張しない。
+
+同日18:06 JST追記: 修正後のV2分類 `3786d28baa0f4bcead05d685065e1ab9` / job `3236f6a3662a4769b6747662de125cb3` は実HTMLから開始し、V2 ACT・生成PAD・V1 AiCall分類review・IF分岐による下書き保存と、その実観測を受けた次のV2 ACTを確認した。下書きは原文と同じ83バイト/SHA `271fe047a97061f8eb4f3f2fd9a14d99973059fed1714a4256272da4ce2b4a5d`、分類値はreview。2回目のPAD反映が `PAD_COPY` で停止しASK_USERへ移ったため、DONEの証拠ではない。元resultはpartial、旧ファイル/owner/全タブ/新attempt帰属の保全は成功した。
+
+追加の1回のコピー診断で、Main空・idle/error0、対象ListBoxフォーカス、Ctrl+A/C後もsentinel不変、owner不変、全clipboard形式/内容の復元一致を確認した。2回目のrunにはsubmitted.robin.txtがあるが開始/完了マーカーや成果物はない。旧成功Mainの貼戻し診断はpaste1/Run0で、キー送出から66msで戻り、2144ms時点の最初の状態観測でアクション存在とclipboard不変を確認。元失敗のタイミング原因は未確定。保存前の補助CancelPath指定不備を別記録で保持し、保存だけの新helperでsave1/copy2、最後の成功Mainとの全文一致・保存済み・owner不変・エラー0を確認した。実HTML停止1回でjob cancelled/worker終了。証拠はresume配下 `pad-copy-diagnostic.json`、`pad-copy-state-detail.json`、`paste-observation.json`、`finalize-main.json`、当該sessionの `stop-waiting-ownership.json`。
+
+この実例に対し、空のReady/idleを貼付完了の条件から除く `-RequireActions` を追加。アクションが存在する連続2観測を得るまで提出クリップボードを保持し、コピー・再paste・Runを行わない。期限超過は `PAD_PASTE`。App `0d812b25…` のPAD325/core138 PASS。通常cacheは送信先修正版 `6119f110…` のままで、この追加条件の配布・実機受入は未実施。
+
+同日17:35以降の配布方針: ユーザーは現共有を作り替え可能なテスト環境と明示し、実配布経路をGitHub→社内PC→社内共有フォルダーと指定した。以前のテストHTML所有者復元を継続条件から外した。開発用 `tools/Publish-AgentSource.ps1` は3ファイルすべての排他オープンと旧版バックアップを先に行い、ファイルオブジェクトを置換せず本文を更新する。ローカルファイル/ロック/ACLと単回の書込み境界例外による復元を13件検証しPASS。OS/プロセスクラッシュ時の原子性は保証しない。テスト共有への公開も成功し、操作前後のメタデータ一致を確認。これは旧失敗を合格へ書き換えたものではない。
+
+通常更新 `171c27b7299143f3b30c572d0a41bbc2` は17:38 JSTにPASS。共有CMD1回・exit0、App `2cbe52e2…` の通常server PID32812/port63788、既存399ファイル保持を確認した。先行Prepare `1161a2d4…` は日時文字列がPowerShell 7のJSON読込みでDateTime化され、ISO引数検査で変更前に拒否された。ISOへ明示整形した新wrapper/IDでのみ続行し、旧失敗を保持した。
+
+実HTML分類 `9557e7cdab414df9989eee35ca2ab14f` / job `80065a0fa6f349a7b5168410846cd267` は開始1回・HTTP200後に `CDP_UNAVAILABLE` で送信前停止。17:43の読取りで、入力18366文字、assistant0、has_sent=false、attempt存在、チャットと非モーダルの満足度アンケートに可視・有効な「送信」ボタンが各1個あることを確認した。スクリーンショットとDOMは `failed-classification-page.png` / `failed-classification-send-dom.json`。原因はグローバルな送信ボタン検索の競合だった。元resultはpartial、旧ファイル/owner保全とworker終了/UI一致を記録。タブ保全等の末尾監査は応答がない条件で先に拒否されたため、元のfalseを実際のタブ喪失と解釈しない。
+
+`App.ps1` の既知 `div.fai-BebopLiteChatInput` 内のsubmit送信ボタンに対象を限定した。アンケートへのフォールバックをせず、入力領域内の候補欠落/重複/無効/非表示では拒否する。実画面のread-only再読で2ボタンが残った状態のsend_ready=trueと入力SHA不変を確認。新回帰は旧Appでsurvey-send混入を再現して失敗、新App `6119f110…` で隔離Edge DOM870、core138、Copilot302 PASS。修正版の通常更新 `59c2d1e16964416fa05e015c33ae4ce0` もPASSし、server PID12936/port61417/start UTC `2026-09-06T08:50:38.5631842Z`、保全一致。証拠は `.work/resume-279042c639354e21a630074e81e426b7/`。元失敗要求は再送していない。
+
+同日17:27 JSTの再開検証: Issue本文と全コメント1件を再読し、HEAD `4243688`、通常server PID976/port59062、専用Edge PID12348、PAD PID25656を確認。PAD画面は専用「無題」Main、準備完了・エラー0。通常Explorerからの読取りで旧cache `0fc60b78…`、最新job DONE、owner SHA `927986a7277b956f011a2ef72dc06ff8b4fb3fd138349d63bc4a73cabf7b24eb` を照合した。
+
+最新App `2cbe52e2…` を通常ExplorerのPS5.1 STAで直接読み込む取得診断 `8cdcfab0b1fa425d889a30c42a118d39` は **retrieved**。通常サーバー/キャッシュは旧版を別ハッシュで固定し、最新版配布の成功を前提にしていない。製品の `Invoke-AgentCopilot -Transport PlannerV2` から返ったACTは、1 Read・空行1・24 Write、7794 UTF-16文字/UTF-8 bytes・26行。期待RobinとのOrdinal完全一致、厳密parser/Robin検証、独立した2回の完全DOM・assistant・フレーム再解析一致、既存401ファイルとowner/ページの保全を確認した。送信1・再送0・PAD/clipboard/展開0。result SHA `0bd7f5edbeb5c243732cbb6ca11461652e7c00d57c30ecb679c4f0d06555885e`、Robin SHA `5d4e5ec416785d55dc62cb6093c3fbcff061f6df6c7efdaa967fc7389ab8ab11`。証拠は `.work/resume-279042c639354e21a630074e81e426b7/source-retrieval/sessions/8cdcfab0b1fa425d889a30c42a118d39/`。最新版HTML→生成AiCall→PAD→DONEの証明ではない。
+
+同日17:22 JSTの共有更新診断 `76e4cca698984977a7b20306db277fa5` は **unknown/accepted=false**。既存の `Publish-PinnedSource-NullString.ps1` がApp/HTMLの2ファイルを置換後、HTMLの所有者/グループ/ACL変化を検出してCMD置換前に停止した。共有設定・ディレクトリACLは一致したが、旧HTMLは別アカウント所有で、File.Replace後は実行ユーザー所有になった。失敗resultと旧3ファイルのバックアップを保持し、17:23 JSTにApp/HTML本文を旧バックアップからファイルオブジェクトを置換せず復元。共有3ファイルの旧SHA一致を確認した。通常更新とサーバー再起動は未実施。
+
+HTMLの元所有者を含むACL復元は `Set-Acl` が拒否した（`The security identifier is not allowed to be the owner of this object.`）。このメタデータ差分は未解決で、保全成功としない。復元記録は同resume配下の `share-recovery.json`。今後の公開は、全変更ファイルの所有者/ACLを置換前に検査し、維持できない場合は変更前に停止できる手順を必要とする。旧helper/消費済みclaimの再実行や、ACL検査を外して合格扱いする対応は行わない。
+
+同日ローカル検証: READMEの引数省略実行でcore/V2解析のparam既定値にある `$PSScriptRoot` が空となる失敗を再現し、パス解決を本体開始後へ移して修正した。引数省略のcore138/V2解析108がPASS。現行AppでV2/V1応答制御118、Copilot302、PAD320、隔離Edge DOM859、launcher18、実localhost HTTP（token/Host/Origin拒否、slow-body期限、singleton再接続、質問ID/重複回答拒否、版切替、正常終了）もPASS。DOMはローカルfixture7件で外部転送0。これらは実M365/PAD業務や別PCの受入ではなく、CIも未設定。
+
 同日17:02 JST、Planner V2の製品応答ループで1 Read・空行・24 Writeの長文を検証した（`bd1e00f891dc4ea88d4e8b63b00bdc5c`）。結果は `unknown / RESPONSE_INVALID`。製品関数の呼出しは1回、再送・PAD操作は0、既存ファイル・owner・ページの保持検証は成功した。回答後のDOMではメタデータ終端の次に、単独バッククォートの `data-line-index="3"` 行が実在した。製品はこれを正常なV2応答として取得していない。取得側が追加した文字ではないが、生成とCopilot表示変換のどちらが発生源かは未確定。元の失敗を保存し、追加DOM・snapshotの保存後に検証タブを閉じた。
 
 この実例を受けて、生成指示にメタデータ終端直後のフェンス閉鎖と、余分な部分区切り文字を出力しないことを明記した。終端検査は緩和せず、同じ余分なバッククォートを拒否する解析回帰ケースを追加した。修正後の実Copilot受入は未検証。通常環境は16:48 JSTに更新済みの `0fc60b78…` のままであり、この生成指示修正はまだ配布していない。
@@ -103,10 +181,10 @@
 | ゲート | 状態 | 残る実機確認 |
 |---|---|---|
 | 0: 配布・起動 | 実共有UNCからの初回・更新、欠落UNC時の警告付きローカル起動は合格 | 実共有の切断、利用者環境での再起動・UI停止 |
-| 1: 固定PADからAiCall | 正常系合格。実PADから翻訳→分類の直列2回、結果受渡し、review分岐と出力を確認 | 拒否/空/期限/中止の実機異常系 |
+| 1: 固定PADからAiCall | 実PADから翻訳→分類の直列2回、結果受渡し、review分岐と出力を確認。a743版で送信前期限・子プロバイダー境界への拒否/空/応答時中止注入、45f版で実M365送信後期限/中止も実PADまでPASS | 拒否/空の注入検証を実M365自体の拒否/空回答発生としない。送信後中止は監視による中止ファイル作成で、UI停止ボタン押下ではない |
 | 2: AIなしのA/B差し替え | 正常系A/B合格。実行中の別controllerをPAD_BUSY・UI操作0で拒否し、元の実行を中止・出力抑止する動作を確認。実PAD貼付後のSave呼出し境界への障害注入でRun0・元Main復元も合格。busy/cancel追試の元unknownは保持 | PAD自身のnative Save失敗は未検証。制御した呼出し境界の失敗と、実貼付後の異常でRun前に停止した証拠を区別 |
-| 3: 生成Robin全文取得 | 旧方式の実長文JSON12,593 UTF-8バイト・Robin7,793文字/24 Writeを取得済み。新方式では2ブロックACTと、新版の4,443文字ACTを実取得・検証済み | 長文生成の安定性。24/36 Writeは調査用負荷で、Issueに必須文字数の指定はない。新版の24 Writeでは欠落や生成拒否が残る |
-| 4: 生成AiCallフロー | 翻訳→書出しと分類→IF分岐→書出しが実PADで成功。新版では分類ジョブの2ACT→DONEまで完了 | 確認した正常系の未確認事項なし。固定AiCall異常系はGate 1に記載 |
+| 3: 生成Robin全文取得 | f939版の単一フェンスV2で7,794文字・26行・空行1・24 Writeの期待本文完全一致と独立2読取りを確認。過去の途中停止/余分な終端行を拒否した結果も保持 | 個別合格は任意の長さや全応答の生成成功を保証しない。24/36 Writeは検証用負荷で、Issueに必須文字数の指定はない |
+| 4: 生成AiCallフロー | 翻訳→書出しと分類→IF分岐→書出しが実PADで成功。最新45f版でも単一フェンスV2分類ジョブの2ACT→DONEまで完了 | 固定AiCall異常系はGate 1に記載 |
 | 5: 2〜3往復 | ASK_USER→回答→ACT→AiCall/PAD→DONEとBLOCKEDに加え、新版の分類2ACT→DONEも成功。最初の実成果物の再読込み・分岐・最終出力・完了画面を独立再照合済み | 確認した代表シナリオの未確認事項なし。原helperのpartialは分割応答IDの抽出漏れとして別記録で診断し、原結果を保持 |
 | 6: 別利用者・別PC | 未検証 | 開発環境に依存しない導入・更新・認証・結果確認 |
 

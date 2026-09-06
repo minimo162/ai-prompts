@@ -25,7 +25,7 @@ function Assert-TransportRejected([scriptblock]$Action,[string]$Prefix,[string]$
  $caught='';try{& $Action|Out-Null}catch{$caught=$_.Exception.Message}
  Assert-Transport ($caught.StartsWith($Prefix+':',[StringComparison]::Ordinal)) ($Name+'; expected '+$Prefix+', received '+$(if($caught){$caught.Split(':')[0]}else{'success'}))
 }
-function New-TransportV2([string]$RequestId,[string]$State='ACT',[string]$Body='', [switch]$PrettyMeta){
+function New-TransportV2([string]$RequestId,[string]$State='ACT',[string]$Body='', [switch]$PrettyMeta,[switch]$SingleFence){
  if($State -ceq 'ACT' -and $Body -ceq ''){$Body="SET Probe TO `$'''  日本語 C:\raw\path %FileContents% literal\n  '''`n`n  SET Tail TO `$'''O'Brien `"quote`" '''"}
  $meta=[ordered]@{request_id=$RequestId;state=$State;message='Synthetic planner reply';artifacts=@()}
  $metaText=if($PrettyMeta){ConvertTo-Json -InputObject $meta -Depth 12}else{ConvertTo-Json -InputObject $meta -Depth 12 -Compress}
@@ -33,7 +33,7 @@ function New-TransportV2([string]$RequestId,[string]$State='ACT',[string]$Body='
  $frame1='AGENT_META_V2 '+$RequestId+"`n"+$metaText+"`nAGENT_META_END_V2 "+$RequestId
  $wireRows=@();if($Body -cne ''){foreach($row in $Body.Split([char]10)){if($row -ceq ''){$wireRows+=,('AGENT_EMPTY_V2 '+$RequestId)}else{$wireRows+=,$row}}}
  $frame2='AGENT_ROBIN_V2 '+$RequestId+"`n"+$(if($wireRows.Count){($wireRows -join "`n")+"`n"}else{''})+'AGENT_ROBIN_END_V2 '+$RequestId+"`nAGENT_END_"+$RequestId
- return [pscustomobject]@{key='reply-'+$RequestId;text='';frames=@($frame1,$frame2);source_kind='fenced_planner_v2';collapsed=$true;expected_robin=$Body;expected_state=$State}
+ return [pscustomobject]@{key='reply-'+$RequestId;text='';frames=@($frame1,$frame2);source_kind=$(if($SingleFence){'fenced_planner_v2_single'}else{'fenced_planner_v2'});collapsed=$true;expected_robin=$Body;expected_state=$State}
 }
 function New-TransportV1([string]$RequestId,[int]$Width=70){
  $raw=ConvertTo-Json -InputObject ([ordered]@{request_id=$RequestId;status='success';text="  日本語 C:\raw literal\n %Value%`n  ";items=@()}) -Depth 8 -Compress
@@ -60,6 +60,7 @@ function Reset-Transport([string]$RequestId,[object[]]$Candidates=@(),[object[]]
  $script:transportCandidates=$Candidates;$script:transportBaseline=$Baseline;$script:transportInput='';$script:transportSent=$false
  $script:transportSends=0;$script:transportKeys=0;$script:transportInserts=0;$script:transportReads=0;$script:transportMore=0;$script:transportCopy=0;$script:transportWire=''
  $script:transportMutation=$null;$script:transportGenerating=$false;$script:transportHeldInput='';$script:transportCancel='';$script:transportCancelAt=0;$script:transportSendUncertain=$false;$script:transportLoseOwnershipAt=0;$script:transportDelayAtRead=0
+ $script:transportKeyDelayMs=0
  $script:transportNextTarget='synthetic-'+$script:transportJob
  $config=Get-AgentCopilotConfig $transportTemp @{} $script:transportJob;$target=Get-AgentCopilotTarget $config -Create
  if($Baseline.Count){Set-AgentCopilotJobSendStarted $config $target}
@@ -80,11 +81,11 @@ function Invoke-AgentCopilotEval {
 function Invoke-AgentCopilotCdp {
  param($Socket,$Method,$Params,$CancelPath,$Deadline)
  if($Method -ceq 'Input.insertText'){$script:transportInserts++;$script:transportInput=$Params.text;$script:transportWire=$Params.text;return}
- if($Method -ceq 'Input.dispatchKeyEvent'){$script:transportKeys++;if($Params.key -cnotin @('a','Backspace')){if($Params.key -ceq 'c'){$script:transportCopy++};throw 'TEST_FORBIDDEN: Unexpected browser key.'};return}
+ if($Method -ceq 'Input.dispatchKeyEvent'){$script:transportKeys++;if($Params.key -cnotin @('a','Backspace')){if($Params.key -ceq 'c'){$script:transportCopy++};throw 'TEST_FORBIDDEN: Unexpected browser key.'};if($script:transportKeyDelayMs){[Threading.Thread]::Sleep($script:transportKeyDelayMs)};return}
  throw ('Unexpected synthetic CDP method: '+$Method)
 }
-function Invoke-Transport([string]$Transport='PlannerV2',[switch]$OmitTransport){
- $params=@{Prompt='Synthetic transport controller test';RequestId=$script:transportRequest;JobId=$script:transportJob;Settings=@{};HomePath=$transportTemp;CancelPath=$script:transportCancel;TimeoutSeconds=5}
+function Invoke-Transport([string]$Transport='PlannerV2',[switch]$OmitTransport,[int]$TimeoutSeconds=5){
+ $params=@{Prompt='Synthetic transport controller test';RequestId=$script:transportRequest;JobId=$script:transportJob;Settings=@{};HomePath=$transportTemp;CancelPath=$script:transportCancel;TimeoutSeconds=$TimeoutSeconds}
  if(-not $OmitTransport){$params.Transport=$Transport}
  return Invoke-AgentCopilot @params
 }
@@ -104,6 +105,24 @@ try{
  Assert-Transport ($script:transportWire.Contains('AGENT_META_V2 v2-complete') -and $script:transportWire.Contains('AGENT_ROBIN_V2 v2-complete') -and $script:transportWire.Contains('AGENT_EMPTY_V2 v2-complete') -and -not $script:transportWire.Contains('AGENT_PART_V1 v2-complete')) 'Only requested V2 prompt is sent, including current empty-row marker and nonce'
  Assert-TransportRejected {Invoke-Transport} 'RESPONSE_INVALID' 'Accepted V2 request cannot be replayed'
  Assert-TransportOneSend 'Rejected V2 replay'
+ foreach($singleState in @('ACT','DONE','ASK_USER','BLOCKED')){
+  $singleId='v2-single-'+$singleState.ToLowerInvariant();$single=New-TransportV2 $singleId $singleState -SingleFence
+  Reset-Transport $singleId @($single)
+  $singleParsed=Get-AgentPlannerResponse (Invoke-Transport) $singleId
+  Assert-Transport ($singleParsed.state -ceq $singleState -and $singleParsed.robin -ceq $single.expected_robin -and $script:transportReads -eq 3) ('Single-fence carrier preserves strict V2 schema/body and stable reads for '+$singleState)
+  Assert-TransportOneSend ('Single fence '+$singleState)
+  Assert-Transport ($script:transportWire.Contains('exactly ONE text code fence') -and $script:transportWire.Contains('Do not close or reopen the fence between sections.')) 'One-fence producer instructions contain no inter-fence closing step'
+ }
+
+ $candidate=New-TransportV2 'v2-slow-preparation';Reset-Transport 'v2-slow-preparation' @($candidate)
+ $script:transportKeyDelayMs=4000
+ $decoded=Get-AgentPlannerResponse (Invoke-Transport -TimeoutSeconds 30) 'v2-slow-preparation'
+ Assert-Transport ($decoded.state -ceq 'ACT') 'Six ready checks and slow key operations may exceed 15 seconds while respecting the total request deadline'
+ Assert-TransportOneSend 'Slow input preparation'
+ $candidate=New-TransportV2 'v2-preparation-deadline';Reset-Transport 'v2-preparation-deadline' @($candidate)
+ $script:transportKeyDelayMs=2000
+ Assert-TransportRejected {Invoke-Transport -TimeoutSeconds 5} 'RESPONSE_TIMEOUT' 'Fresh per-step readiness cannot extend the total request deadline'
+ Assert-Transport ($script:transportInserts -eq 0 -and $script:transportSends -eq 0 -and -not [IO.File]::Exists((Get-AgentCopilotAttemptPath $transportTemp $script:transportRequest))) 'Total deadline during preparation prevents insertion and send reservation'
 
  foreach($state in @('DONE','ASK_USER','BLOCKED')){
   $id='v2-state-'+$state.ToLowerInvariant();$candidate=New-TransportV2 $id $state;Reset-Transport $id @($candidate)
@@ -118,12 +137,12 @@ try{
 
  # Genuine same-job continuation exercises persisted target ownership and nonce baselines.
  $mixedJob=[guid]::NewGuid().ToString('N');$mixedBefore=$script:transportCreated
- $first=New-TransportV2 'v2-mixed-first';Reset-Transport 'v2-mixed-first' @($first) @() $mixedJob;$null=Invoke-Transport;Assert-TransportOneSend 'Mixed first planner'
+ $first=New-TransportV2 'v2-mixed-first' -SingleFence;Reset-Transport 'v2-mixed-first' @($first) @() $mixedJob;$null=Invoke-Transport;Assert-TransportOneSend 'Mixed first planner'
  $mixedConfig=Get-AgentCopilotConfig $transportTemp @{} $mixedJob;$firstTarget=(Get-AgentCopilotTarget $mixedConfig).id
  $ai=New-TransportV1 'v1-mixed-ai';Reset-Transport 'v1-mixed-ai' @($ai) @($first) $mixedJob
  Assert-Transport ((Invoke-Transport -OmitTransport) -ceq $ai.expected_raw) 'Default V1 AiCall succeeds after V2 planner in the same job'
  Assert-Transport ($script:transportWire.Contains('AGENT_PART_V1 v1-mixed-ai') -and -not $script:transportWire.Contains('AGENT_META_V2 v1-mixed-ai')) 'AiCall default prompt stays V1 within mixed conversation';Assert-TransportOneSend 'Mixed AiCall'
- $last=New-TransportV2 'v2-mixed-last' 'DONE';Reset-Transport 'v2-mixed-last' @($last) @($first,$ai) $mixedJob
+ $last=New-TransportV2 'v2-mixed-last' 'DONE' -SingleFence;Reset-Transport 'v2-mixed-last' @($last) @($first,$ai) $mixedJob
  $decoded=Get-AgentPlannerResponse (Invoke-Transport) 'v2-mixed-last'
  Assert-Transport ($decoded.state -ceq 'DONE' -and $decoded.robin -ceq '') 'Second V2 planner succeeds after same-job V1 AiCall'
  Assert-Transport ((Get-AgentCopilotTarget $mixedConfig).id -ceq $firstTarget -and $script:transportCreated -eq $mixedBefore+1) 'Mixed V2 to V1 to V2 keeps one job-owned target'
@@ -201,6 +220,21 @@ try{
  Assert-TransportRejected {Invoke-Transport} 'RESPONSE_TIMEOUT' 'Actual deadline expiry within the final stable snapshot prevents acceptance';Assert-TransportOneSend 'Final deadline expiry'
  Assert-Transport ($script:transportReads -eq 3) 'Final deadline expiry does not reread or retry the response'
  Assert-Transport ($script:transportConnects -eq $script:transportDisposed) 'Every synthetic socket is disposed after accepted, rejected, cancelled and uncertain attempts'
+ # An earlier incomplete frame must not determine the error once the current
+ # response is valid but the deadline prevents the required stable readbacks.
+ $deadlineId='v1-incomplete-then-valid-deadline'
+ $script:deadlineValid=New-TransportV1 $deadlineId
+ $incomplete=New-TransportV1 $deadlineId
+ $incomplete.frames=@('AGENT_PART_V1 '+$deadlineId+' 1 1')
+ Reset-Transport $deadlineId @($incomplete)
+ $script:transportMutation={if($script:transportReads -eq 2){
+  $script:transportCandidates=@($script:deadlineValid)
+  $delay=[Math]::Max(0,($Deadline-[DateTime]::UtcNow).TotalMilliseconds-300)
+  [Threading.Thread]::Sleep([int]$delay)
+ }}
+ Assert-TransportRejected {Invoke-Transport -OmitTransport} 'RESPONSE_TIMEOUT' 'Valid final response awaiting stability does not inherit a previous incomplete-frame error'
+ Assert-Transport ($script:transportReads -eq 2) 'Late valid response is neither accepted early nor reread after expiry'
+ Assert-TransportOneSend 'Late valid response timeout'
  Assert-Transport ((Get-FileHash -LiteralPath $transportSource).Hash.ToLowerInvariant() -ceq $transportSourceSha) 'Source remains byte-identical during the complete suite'
  $transportPassed=$true
 }catch{$transportFailure=$_.Exception.Message;throw}

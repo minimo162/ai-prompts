@@ -541,6 +541,7 @@ try {
         $script:padMockSnapshot=$null
         $script:padStatusSequence=@()
         $script:padCancelDuringSettle=$null
+        $script:padCopyPolls=0
     }
     function Get-AgentPadWindow($Settings){$script:padWindowReads++;return [pscustomobject]@{Mock=$true}}
     function Get-AgentPadSnapshot($Window,[switch]$AllowErrors) {
@@ -560,11 +561,13 @@ try {
         }
         if($script:padScenario -eq 'idle-false' -or ($script:padScenario -eq 'before-paste-busy' -and $script:padSnapshotReads -eq 2) -or ($script:padScenario -eq 'before-run-busy' -and $script:padSnapshotReads -eq 3)){$idle=$false;$editable=$false;$canRun=$false}
         if($script:padScenario -eq 'run-disabled' -and $script:padSnapshotReads -eq 3){$canRun=$false}
-        if($script:padScenario -eq 'runtime-error' -and $script:padRunInvocations -gt 0){$errors=1}
+        if($script:padScenario -in @('runtime-error','runtime-subflow-transition') -and $script:padRunInvocations -gt 0){$errors=1}
+        if($script:padScenario -eq 'runtime-subflow-transition' -and $script:padRunInvocations -gt 0 -and $script:padSnapshotReads -eq 4){throw 'PAD_SUBFLOW: exactly one Main subflow is required.'}
         if($script:padScenario -eq 'running-ambiguous' -and $script:padRunInvocations -gt 0){throw 'PAD_SELECTOR: status ambiguous.'}
         if($script:padScenario -in @('running-missing','cancel-running-missing') -and $script:padRunInvocations -gt 0){throw 'PAD_SELECTOR: control unavailable: mocked running status subtree.'}
         if($script:padScenario -in @('running-stop-transition','running-stop-persistent') -and $script:padRunInvocations -gt 0 -and $script:padSnapshotReads -ge 5 -and ($script:padScenario -eq 'running-stop-persistent' -or $script:padSnapshotReads -eq 5)) {throw 'PAD_SELECTOR: StopFlowButton is not enabled during the observed execution state.'}
-        if($script:padScenario -in @('conditional-complete','cancel-during-running','running-stop-transition','running-stop-persistent') -and $script:padRunInvocations -gt 0 -and $script:padSnapshotReads -le 4) {
+        if($script:padScenario -in @('running-subflow-transition','running-subflow-persistent') -and $script:padRunInvocations -gt 0 -and $script:padSnapshotReads -ge 5 -and ($script:padScenario -eq 'running-subflow-persistent' -or $script:padSnapshotReads -eq 5)) {throw 'PAD_SUBFLOW: exactly one Main subflow is required.'}
+        if($script:padScenario -in @('conditional-complete','cancel-during-running','running-stop-transition','running-stop-persistent','running-subflow-transition','running-subflow-persistent') -and $script:padRunInvocations -gt 0 -and $script:padSnapshotReads -le 4) {
             $status='running';$idle=$false;$editable=$false;$canRun=$false;$running=$true;$errors=-1;$errorsKnown=$false;$start=$null
         }
         if($script:padScenario -eq 'cancel-while-settling' -and $script:padSnapshotReads -eq 1 -and $script:padCancelDuringSettle){[IO.File]::WriteAllText($script:padCancelDuringSettle,'cancel',$script:AgentEncoding)}
@@ -574,16 +577,22 @@ try {
     function Set-AgentPadFocus($Window,$Workspace) {
         if($script:padScenario -eq 'focus-failure'){throw 'PAD_FOCUS: mocked focus uncertainty.'}
     }
-    function Test-AgentPadEmpty($Workspace) {return $script:padScenario -notin @('unowned','owner-missing','user-edited','replace-failure')}
+    function Test-AgentPadEmpty($Workspace) {
+        if($script:padScenario -eq 'delayed-pasted-actions'){return $script:padSnapshotReads -lt 3}
+        return $script:padScenario -notin @('unowned','owner-missing','user-edited','replace-failure')
+    }
     function Get-AgentPadClipboard {return 'original clipboard'}
-    function Get-AgentPadClipboardText {return $script:padClipboard}
+    function Get-AgentPadClipboardText {
+        if($script:padScenario -eq 'delayed-copy' -and $script:padKeys.Contains('^c')){$script:padCopyPolls++;if($script:padCopyPolls -ge 4){$script:padClipboard=$script:mockCopiedCode}}
+        return $script:padClipboard
+    }
     function Set-AgentPadClipboardText([string]$Text) {$script:padClipboard=$Text}
     function Restore-AgentPadClipboard($Clipboard) {$script:padClipboardRestores++;$script:padClipboard=$Clipboard}
     function Send-AgentPadKeys([string]$Keys) {
         $script:padKeys.Add($Keys)
         if($script:padScenario -eq 'copy-result' -and $Keys -ceq '^c'){$script:padClipboard=$script:mockCopiedCode}
     }
-    function Get-AgentPadCode($Snapshot) {
+    function Get-AgentPadCode($Snapshot,[string]$CancelPath='') {
         $script:padReadbacks++
         if($script:padScenario -eq 'unowned'){return 'WAIT 0'}
         if($script:padScenario -in @('replace-failure','owner-missing')){return $script:mockOwnedCode}
@@ -597,7 +606,7 @@ try {
         if($script:padScenario -eq 'cancel-during-save'){throw 'CANCELLED: mocked stop during save.'}
         return $script:padMockSnapshot
     }
-    function Wait-AgentPadEditable($Window,[string]$CancelPath) {
+    function Wait-AgentPadEditable($Window,[string]$CancelPath,[switch]$RequireActions) {
         if($script:padScenario -in @('settle-unknown','settle-selector-unknown')){throw 'PAD_SETUP: mocked state did not settle.'}
         if($script:padScenario -eq 'settle-selector-ambiguous'){throw 'PAD_SELECTOR: status ambiguous.'}
         if($script:padScenario -eq 'cancel-during-settle'){throw 'CANCELLED: mocked cancellation while state settles.'}
@@ -613,7 +622,7 @@ try {
             'mock-stop' {$script:padStopInvocations++;return}
             'mock-start' {
                 $script:padRunInvocations++
-                if($script:padScenario -in @('conditional-complete','finish-marker-mismatch','running-stop-transition','running-stop-persistent')) {
+                if($script:padScenario -in @('conditional-complete','finish-marker-mismatch','running-stop-transition','running-stop-persistent','running-subflow-transition','running-subflow-persistent')) {
                     # Synthetic observer inputs only; this is not a PAD execution.
                     [IO.File]::WriteAllText((Join-Path $script:mockRunDirectory 'control\started.txt'),$script:mockRunId,$script:AgentEncoding)
                     $endValue=if($script:padScenario -eq 'finish-marker-mismatch'){'wrong-run-id'}else{$script:mockRunId}
@@ -624,7 +633,7 @@ try {
                 if($script:padScenario -in @('cancel-during-running','cancel-running-missing')) {[IO.File]::WriteAllText($script:mockCancelPath,'cancel',$script:AgentEncoding);return}
                 if($script:padScenario -eq 'running-missing'){return}
                 if($script:padScenario -eq 'running-ambiguous'){return}
-                if($script:padScenario -ne 'runtime-error'){throw 'TEST_UI_INVOCATION_UNKNOWN: single mocked Run returned an uncertain failure.'}
+                if($script:padScenario -notin @('runtime-error','runtime-subflow-transition')){throw 'TEST_UI_INVOCATION_UNKNOWN: single mocked Run returned an uncertain failure.'}
                 return
             }
             default {throw 'Unexpected mock control.'}
@@ -632,7 +641,7 @@ try {
     }
     function Get-AgentPadObservationLossSeconds {
         if($script:padScenario -in @('running-missing','cancel-running-missing')){return 0}
-        if($script:padScenario -eq 'running-stop-persistent'){return 1}
+        if($script:padScenario -in @('running-stop-persistent','running-subflow-persistent')){return 1}
         return 20
     }
     function Invoke-AgentPadStopIfConfirmed($Window,[ref]$StopSent) {
@@ -700,9 +709,11 @@ try {
     foreach($aiStatus in @('failed','cancelled')) {
         $aiRecord.status=$aiStatus;$aiRecord.error_type=if($aiStatus -eq 'failed'){'RESPONSE_TIMEOUT'}else{'CANCELLED'}
         Write-AgentJson $template.result_path $aiRecord
-        Reset-PadMock 'runtime-error'
-        $result=Invoke-AgentPad -Robin 'WAIT 0' -RunDirectory $script:run -RunId ('5'*32) -Job $script:job -Settings $settings -CancelPath $cancel
-        Assert-Case ($result.status -ceq $aiStatus -and $result.error -ceq ('AICALL_'+$aiRecord.error_type) -and $result.artifacts.Count -eq 0 -and $script:padRunInvocations -eq 1) ('Stopped mock runtime preserves AI '+$aiStatus+' diagnostic without retry')
+        foreach($runtimeScenario in @('runtime-error','runtime-subflow-transition')) {
+            Reset-PadMock $runtimeScenario
+            $result=Invoke-AgentPad -Robin 'WAIT 0' -RunDirectory $script:run -RunId ('5'*32) -Job $script:job -Settings $settings -CancelPath $cancel
+            Assert-Case ($result.status -ceq $aiStatus -and $result.error -ceq ('AICALL_'+$aiRecord.error_type) -and $result.artifacts.Count -eq 0 -and $script:padRunInvocations -eq 1 -and ($runtimeScenario -ne 'runtime-subflow-transition' -or $script:padSnapshotReads -ge 5)) ('Stopped mock runtime preserves AI '+$aiStatus+' diagnostic without retry: '+$runtimeScenario)
+        }
     }
     $aiRecord.status='success';$aiRecord.error_type=''
     Write-AgentJson $template.result_path $aiRecord
@@ -748,17 +759,17 @@ try {
     $result=Invoke-AgentPad -Robin 'WAIT 0' -RunDirectory $script:mockRunDirectory -RunId $script:mockRunId -Job $script:job -Settings $settings -CancelPath $cancel
     Assert-Case ($result.status -ceq 'unknown' -and $result.error -like 'PAD_OBSERVATION_LOSS:*' -and $script:padRunInvocations -eq 1 -and $script:padStopInvocations -eq 1) 'Cancellation amid selector loss sends freshly confirmed Stop at most once and never replays Run'
     [IO.File]::Delete($cancel)
-    foreach($scenario in @('running-stop-transition','running-stop-persistent')) {
+    foreach($scenario in @('running-stop-transition','running-stop-persistent','running-subflow-transition','running-subflow-persistent')) {
         $script:mockRunId=[guid]::NewGuid().ToString('N')
         $script:mockRunDirectory=Join-Path ([IO.Path]::GetDirectoryName($script:run)) $script:mockRunId
         $null=[IO.Directory]::CreateDirectory((Join-Path $script:mockRunDirectory 'artifacts'))
         $script:mockObservedArtifact=$null
         Reset-PadMock $scenario
         $result=Invoke-AgentPad -Robin 'WAIT 0' -RunDirectory $script:mockRunDirectory -RunId $script:mockRunId -Job $script:job -Settings $settings -CancelPath $cancel
-        if($scenario -eq 'running-stop-transition') {
-            Assert-Case ($result.status -ceq 'success' -and $script:padSnapshotReads -eq 6) 'Execution observation recovers from running then disabled Stop mismatch to a confirmed Ready completion'
+        if($scenario -in @('running-stop-transition','running-subflow-transition')) {
+            Assert-Case ($result.status -ceq 'success' -and $script:padSnapshotReads -eq 6) ('Execution observation requires a complete valid snapshot after a transient mismatch: '+$scenario)
         } else {
-            Assert-Case ($result.status -ceq 'unknown' -and $result.error -like 'PAD_OBSERVATION_LOSS:*' -and $script:padSnapshotReads -gt 6 -and $result.artifacts.Count -eq 0) 'Persistent disabled Stop mismatch reaches the observation deadline despite both completion markers'
+            Assert-Case ($result.status -ceq 'unknown' -and $result.error -like 'PAD_OBSERVATION_LOSS:*' -and $script:padSnapshotReads -gt 6 -and $result.artifacts.Count -eq 0) ('Persistent mismatch stays unknown despite completion markers: '+$scenario)
         }
         Assert-Case ($script:padRunInvocations -eq 1 -and $script:padSaveInvocations -eq 1 -and $script:padStopInvocations -eq 0 -and ($script:padKeys -join ',') -ceq '^v') ('Status rereads never replay Paste, Save, Run, or send Stop: '+$scenario)
     }
@@ -834,6 +845,23 @@ public sealed class PadTestMutexHolder : IDisposable {
     Assert-Case ((Get-AgentPadCode $snapshot) -ceq $branch) 'Readback helper preserves copied Robin exactly through mocked clipboard'
     Assert-Case (($script:padKeys -join ',') -ceq '^a,^c') 'Readback helper selects and copies exactly once'
     Assert-Case ($script:AgentPadClipboardValue -ceq $branch) 'Readback helper records its own clipboard value for conditional restoration'
+    Reset-PadMock 'delayed-copy';$script:mockCopiedCode=$branch
+    $snapshot=Get-AgentPadSnapshot ([pscustomobject]@{Mock=$true})
+    Assert-Case ((Get-AgentPadCode $snapshot) -ceq $branch -and $script:padCopyPolls -eq 4) 'Readback waits for delayed clipboard delivery without changing the code'
+    Assert-Case (($script:padKeys -join ',') -ceq '^a,^c') 'Delayed clipboard delivery never reissues Select All or Copy'
+    Reset-PadMock 'copy-result';[IO.File]::WriteAllText($cancel,'stop')
+    Assert-Rejected {Get-AgentPadCode $snapshot -CancelPath $cancel} 'CANCELLED' 'Cancellation prevents a new action copy'
+    Assert-Case ($script:padKeys.Count -eq 0 -and $script:padClipboard -ceq 'original clipboard') 'Cancelled copy does not touch keys or clipboard'
+    [IO.File]::Delete($cancel)
+    Reset-PadMock 'delayed-pasted-actions'
+    $script:padStatusSequence=@('ready')
+    Assert-Case ((Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel -RequireActions).status -ceq 'ready') 'Paste wait requires actual actions as well as Ready'
+    Assert-Case ($script:padSnapshotReads -eq 4) 'Two empty Ready samples cannot authorize clipboard readback; two populated samples can'
+    Assert-Case ($script:padKeys.Count -eq 0 -and $script:padClipboard -ceq 'original clipboard') 'Waiting for pasted actions never resends paste or changes the clipboard'
+    Reset-PadMock 'settle-after-paste'
+    $script:padStatusSequence=@('ready')
+    Assert-Rejected {Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel -RequireActions -TimeoutSeconds 0} 'PAD_PASTE' 'Persistently empty Ready workspace fails without authorizing copy or Run'
+    Assert-Case ($script:padKeys.Count -eq 0 -and $script:padRunInvocations -eq 0) 'Missing pasted actions cause no keyboard or Run invocation'
     Reset-PadMock 'settle-after-paste'
     $script:padStatusSequence=@('parsing','checking','ready')
     Assert-Case ((Wait-AgentPadEditable ([pscustomobject]@{Mock=$true}) $cancel).status -ceq 'ready') 'Editable wait observes parse/check transient states until ready'
