@@ -2,6 +2,7 @@
 [CmdletBinding()]
 param([string]$AppSourcePath = '')
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'ReleaseFixture.ps1')
 if (-not $AppSourcePath) { $AppSourcePath = Join-Path $PSScriptRoot '..\App.ps1' }
 . ([IO.Path]::GetFullPath($AppSourcePath)) -Mode Library
 $script:ProductionRobin = (Get-Item -LiteralPath Function:\Test-AgentRobin).ScriptBlock
@@ -66,6 +67,7 @@ try {
     [IO.File]::WriteAllText((Join-Path $source 'App.ps1'), "# App-Version: 0.1.0`n# release test", $script:AgentEncoding)
     [IO.File]::WriteAllText((Join-Path $source 'index.html'), '<meta name="app-version" content="0.1.0"><p>初回</p>', $script:AgentEncoding)
     [IO.File]::WriteAllText((Join-Path $source '業務エージェント.cmd'), '@echo off', $script:AgentEncoding)
+    Set-TestReleaseBinding $source
     $first = Sync-AgentRelease $homeDirectory $source
     Assert-True (Test-Path -LiteralPath (Join-Path $first 'App.ps1')) 'Initial local release copied'
     $pointer = Join-Path $homeDirectory 'app\current.json'
@@ -74,6 +76,7 @@ try {
     Assert-True ($same -ceq $first -and (Get-Item -LiteralPath $pointer).LastWriteTimeUtc -eq $stamp) 'Unchanged release does not rewrite pointer'
     [IO.File]::WriteAllText((Join-Path $homeDirectory 'data\keep.txt'), 'user data')
     [IO.File]::WriteAllText((Join-Path $source 'index.html'), '<meta name="app-version" content="0.1.0"><p>変更</p>', $script:AgentEncoding)
+    Set-TestReleaseBinding $source
     $second = Sync-AgentRelease $homeDirectory $source
     Assert-True ($second -cne $first -and (Test-Path -LiteralPath $first)) 'Content change uses immutable new release'
     Assert-True ([IO.File]::ReadAllText((Join-Path $homeDirectory 'data\keep.txt')) -ceq 'user data') 'User data survives update'
@@ -88,6 +91,7 @@ try {
     [IO.File]::WriteAllText((Join-Path $cacheHome 'data\keep.txt'), 'unchanged user data', $script:AgentEncoding)
     [IO.File]::WriteAllText((Join-Path $cacheSource 'App.ps1'), "# App-Version: 0.2.0`n# newer release test", $script:AgentEncoding)
     [IO.File]::WriteAllText((Join-Path $cacheSource 'index.html'), '<meta name="app-version" content="0.2.0"><p>新版</p>', $script:AgentEncoding)
+    Set-TestReleaseBinding $cacheSource
     $newCache = Sync-AgentRelease $cacheHome $cacheSource
     Assert-True ($newCache -cne $oldCache -and (Get-AgentRelease $newCache).version -ceq '0.2.0') 'Newer release is selected before cache rollback regression'
     $cachePointer = Join-Path $cacheHome 'app\current.json'
@@ -102,6 +106,7 @@ try {
     }
     [IO.File]::WriteAllText((Join-Path $cacheSource 'App.ps1'), "# App-Version: 0.1.0`n# older external release", $script:AgentEncoding)
     [IO.File]::WriteAllText((Join-Path $cacheSource 'index.html'), '<meta name="app-version" content="0.1.0"><p>旧版</p>', $script:AgentEncoding)
+    Set-TestReleaseBinding $cacheSource
     Assert-Throws { Sync-AgentRelease $cacheHome $cacheSource } 'RELEASE_DOWNGRADE' 'Older external release is explicitly rejected'
     Assert-True ((Get-AgentHash $cachePointer) -ceq $cachePointerHash -and (Get-Item -LiteralPath $cachePointer).LastWriteTimeUtc -eq $cachePointerStamp -and (Get-AgentCachedRelease $cacheHome) -ceq $newCache) 'Rejected external downgrade preserves selected current release and pointer'
     Assert-True ((Get-AgentHash (Join-Path $cacheHome 'data\keep.txt')) -ceq $cacheDataHash) 'Rejected external downgrade leaves user data untouched'
@@ -113,6 +118,7 @@ try {
     [IO.File]::WriteAllText((Join-Path $startupSource 'index.html'), '<meta name="app-version" content="0.1.0">', $script:AgentEncoding)
     [IO.File]::WriteAllText((Join-Path $startupSource '業務エージェント.cmd'), '@echo off', $script:AgentEncoding)
     $startupError = Join-Path $testRoot 'startup-error.txt'
+    Set-TestReleaseBinding $startupSource
     $startupArguments = '-NoProfile -NonInteractive -ExecutionPolicy Bypass -STA -File "' + $script:AgentAppPath + '" -Mode Bootstrap -SourcePath "' + $startupSource + '" -HomePath "' + $startupHome + '" -NoBrowser'
     $startupProcess = Start-Process -FilePath (Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe') -ArgumentList $startupArguments -WindowStyle Hidden -RedirectStandardError $startupError -PassThru
     try {

@@ -987,6 +987,16 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
     const splitAt = fencedJson.indexOf('\\') + 1;
     const twoParts = [partRows(fencedJson.slice(0, splitAt), 1, 2), partRows(fencedJson.slice(splitAt), 2, 2)];
     const expectedParts = (frames, collapsed = false) => ({ key: 'parts-fixture', text: '', source_kind: 'fenced_parts', collapsed, frames: frames.map(rows => rows.join('\n')) });
+    const fittedParts=[partRows(JSON.stringify({request_id:requestId,result:'合成の分類結果 '.repeat(35)}),1,1)];
+    const fittedPartsCss='#fixture .fenced-reply{width:706px}.code-editor{grid-template-columns:38px minmax(0,1fr);grid-template-rows:20px 240px 20px 20px;padding:12px 0 8px;box-sizing:content-box;align-content:start}.code-line,.gutter{line-height:20px;font-family:monospace;font-size:14px}';
+    response=await renderFolded(multipartReply(fittedParts),null,fittedPartsCss);
+    const partsMetrics=await page.locator('.code-editor').evaluate(e=>({client:e.clientHeight,scroll:e.scrollHeight,rows:e.children.length/2,maxHeight:getComputedStyle(e).maxHeight}));
+    check(partsMetrics,{client:320,scroll:320,rows:4,maxHeight:'300px'},'Reproduce live short batch: visible More with four complete rows and no overflow');
+    check(response.state.assistants,[expectedParts(fittedParts,true)],'Short fitted numbered JSON carrier is read without repairing or clicking');
+    for(const [label,css] of [['hidden final row','.code-line[data-line-index="3"]{visibility:hidden}'],['hidden overflow','.code-editor{overflow:hidden}'],['scaled editor','.code-editor{transform:scale(.9)}']]){
+      response=await renderFolded(multipartReply(fittedParts),null,fittedPartsCss+css);
+      check(response.state.assistants[0].source_kind,'rendered','Short fitted numbered carrier rejects '+label);
+    }
     response = await renderFenced(multipartReply(twoParts));
     check(response.state.assistants, [expectedParts(twoParts)], 'Capture both exact frames in one owned assistant without joining their payloads');
     const multipartShape = await page.locator('.fenced-reply').evaluate(root => {

@@ -22,6 +22,7 @@
     :focus-visible{outline:3px solid #296db1;outline-offset:3px}
     input,textarea{display:block;width:100%;border:1px solid #a4b9b1;border-radius:9px;padding:12px 14px;background:#fff;color:var(--ink)}
     input:disabled,textarea:disabled{background:#f1f4f1;color:#54696d}
+    .csv-table input[type=checkbox]{display:inline-block;width:20px;height:20px;padding:0;margin:0 8px 0 0;vertical-align:middle;accent-color:var(--accent)}
     textarea{resize:vertical;min-height:152px;line-height:1.8}
     input::placeholder,textarea::placeholder{color:#6c7d7c;opacity:1}
     a{color:var(--brand)}
@@ -93,6 +94,7 @@
     .skip-link:focus{top:12px}
     @media(max-width:800px){.shell{padding:22px 20px 32px}.workspace{grid-template-columns:1fr}.workspace>.stack{display:contents}#request-section{order:1}.status-card{order:2}.question-card{order:3}#history-section{order:4}#result-section{order:5}.settings-grid{grid-template-columns:1fr}.masthead{margin-bottom:24px}.card{padding:21px}.settings-body{padding:0 20px 22px}summary{padding:16px 20px}.history{max-height:320px}}
     @media(max-width:430px){.shell{padding:18px 13px 28px}.masthead{align-items:flex-start}.wordmark{font-size:11px}.connection{font-size:11px}.card{padding:18px}.hero p{font-size:13px}.actions>button{flex-grow:1}.settings-grid{gap:4px}.status-top{gap:8px}}
+    .csv-table-wrap{overflow:auto;max-height:520px;margin-top:16px}.csv-table{border-collapse:collapse;width:100%;font-size:13px}.csv-table th,.csv-table td{padding:10px;text-align:left;vertical-align:top;border-bottom:1px solid #ddd;min-width:90px;white-space:pre-wrap;overflow-wrap:anywhere}.csv-table td:nth-child(2){min-width:180px}.csv-table th{position:sticky;top:0;background:#f5f7fa}.csv-plan{white-space:pre-wrap;overflow-wrap:anywhere}.field select{width:100%;padding:10px;font:inherit}.csv-actions{margin-top:16px}.csv-columns{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
   </style>
 </head>
@@ -112,10 +114,30 @@
 
     <main id="main" class="workspace" tabindex="-1">
       <div class="stack">
+        <section class="card" aria-labelledby="csv-heading">
+          <div class="section-heading"><h2 id="csv-heading">問い合わせCSVを分類する</h2></div>
+          <p class="hint">ID・本文を持つCSVを、分類・理由・要確認一覧にします。CSVの処理にPADの準備は不要です。最初に「Copilot を開く」から専用画面へサインインしてください。</p>
+          <form id="csv-form">
+            <div class="field"><label for="csv-paths">対象CSV</label><textarea id="csv-paths" required placeholder="ファイルを選択するか、絶対パスを1行に1つ貼り付けてください。" spellcheck="false"></textarea><button id="csv-select" type="button">CSVを選択</button><p class="hint">合計1〜100行、1MiB、最大10ファイル。フォルダーは対象外です。この上限は実機の処理速度を保証するものではありません。</p></div>
+            <div class="csv-columns"><div class="field"><label for="csv-id-column">IDの列名</label><input id="csv-id-column" value="id" required></div><div class="field"><label for="csv-text-column">本文の列名</label><input id="csv-text-column" value="本文" required></div></div>
+            <div class="field"><label for="csv-encoding">文字コード</label><select id="csv-encoding"><option value="utf-8">UTF-8（BOMあり・なし）</option><option value="cp932">Windows日本語（CP932・明示変換）</option></select></div>
+            <div class="field"><label for="csv-categories">分類候補（1行に1つ）</label><textarea id="csv-categories" required>支払
+決算
+システム
+その他</textarea></div>
+            <div class="field"><label for="csv-instructions">分類条件</label><textarea id="csv-instructions" required maxlength="8000">担当分野に分け、判断が曖昧なものは要確認にしてください。理由を短く添えてください。</textarea></div>
+            <button id="csv-prepare" class="primary" type="submit" disabled>対象と送信範囲を確認する</button>
+          </form>
+          <div id="csv-approval" class="csv-actions" hidden><h3>実行前の確認</h3><p id="csv-plan" class="csv-plan"></p><button id="csv-approve" class="primary" type="button">この範囲の送信と分類を開始</button></div>
+          <div class="actions csv-actions"><button id="csv-stop" class="stop" type="button" disabled>停止する</button><button id="csv-resume" type="button" hidden>照合して未送信分を続ける</button><button id="csv-reconcile" type="button" hidden>送信済みの既存回答を照合する</button><button id="csv-continue-new" type="button" hidden>未送信分を新しい依頼へ引き継ぐ</button></div>
+          <p id="csv-summary" role="status"></p>
+          <div id="csv-followup" hidden><h3>要確認行への追加指示</h3><p class="hint">一覧で再検討する要確認行を選択してください。選択しない結果と前回の成果物は保持します。</p><div class="field"><label for="csv-review-instructions">選択行への追加条件</label><textarea id="csv-review-instructions" maxlength="4000" placeholder="例：この依頼は請求書の支払手順についてです。支払担当の分類で再検討してください。"></textarea></div><button id="csv-review" type="button" disabled>選択した要確認行の再検討を準備</button></div>
+          <div id="csv-results" hidden><div class="field"><label for="csv-filter">結果の絞り込み</label><select id="csv-filter"><option value="all">すべて</option><option value="needs_review">要確認</option><option value="success">成功</option><option value="failed">失敗</option><option value="unprocessed">未処理</option><option value="unknown">不明</option></select></div><p class="hint">処理完了と内容の承認は別です。原文と理由を確認してください。CSVは数式風文字列を閲覧用に安全化します。原値・任意列の正本はresults.jsonです。CSVのExcel自動型変換は保証しません。</p><div class="csv-table-wrap" tabindex="0" aria-label="原文と分類結果"><table class="csv-table"><thead><tr><th scope="col">原ID</th><th scope="col">原文</th><th scope="col">分類</th><th scope="col">理由</th><th scope="col">状態</th></tr></thead><tbody id="csv-rows"></tbody></table></div></div>
+        </section>
         <section id="request-section" class="card" aria-labelledby="request-heading">
-          <div class="section-heading"><span class="step" aria-hidden="true">01</span><h2 id="request-heading">依頼する</h2></div>
+          <div class="section-heading"><span class="step" aria-hidden="true">01</span><h2 id="request-heading">従来のPAD検証用依頼</h2></div>
           <form id="request-form">
-            <div class="field"><label for="goal">やりたいこと</label><textarea id="goal" name="goal" required maxlength="12000" placeholder="例：このフォルダーの日本語の説明を英訳し、確認が必要なものを分けて一覧にして" aria-describedby="goal-hint"></textarea><p id="goal-hint" class="hint">仕上がりの形式や、確認してほしいことも書けます。</p></div>
+            <div class="field"><label for="goal">やりたいこと</label><textarea id="goal" name="goal" required maxlength="12000" placeholder="例：このUTF-8テキストを英訳し、新しいファイルに保存して" aria-describedby="goal-hint"></textarea><p id="goal-hint" class="hint">こちらは専用PADフローの準備が必要な互換経路です。フォルダー全件処理・Excel・PDFには対応していません。</p></div>
             <div class="field"><label for="target">対象ファイル／フォルダー</label><input id="target" name="target" type="text" required maxlength="4000" placeholder="例：C:\Users\user\Documents\翻訳対象" spellcheck="false" autocomplete="off" aria-describedby="target-hint"><p id="target-hint" class="hint">対象の場所を入力してください。現在の検証版は UTF-8 テキストを扱います。</p></div>
             <div class="actions"><button id="start" class="primary" type="submit" disabled>開始する</button><button id="stop" class="stop" type="button" disabled>停止する</button></div>
             <p class="fine-print">依頼や処理に必要な内容は M365 Copilot に送信されます。</p>
@@ -132,11 +154,13 @@
           <div class="section-heading"><span class="step" aria-hidden="true">03</span><h2 id="result-heading">回答と成果物</h2></div>
           <p id="result-empty" class="empty">回答や成果物が届くと、ここに表示します。</p>
           <div id="final-answer" class="result-text" hidden></div>
+          <div id="preservation-section" hidden><h3>保全・復旧</h3><p id="preservation-warning" class="alert"></p><p id="pad-recovery-message" class="hint"></p><button id="pad-recover" type="button" disabled>停止・内容を確認して元Mainを復元</button><ul id="partial-artifacts" class="artifact-list"></ul></div>
           <div id="artifacts-section" hidden><h3 class="result-subheading">成果物の場所</h3><p class="hint">場所を選択してコピーし、エクスプローラーで確認できます。</p><ul id="artifacts" class="artifact-list"></ul></div>
         </section>
       </div>
 
       <aside class="stack" aria-label="作業の状況">
+        <section class="card" aria-labelledby="past-heading"><h2 id="past-heading">依頼を切り替える</h2><div class="field"><label for="job-history">現在の依頼・過去の依頼</label><select id="job-history"><option value="">現在の依頼</option></select></div><p id="viewing-history" class="hint" hidden>過去の依頼を表示しています。実行中の状態は「現在の依頼」へ戻って確認してください。</p></section>
         <section class="card status-card" aria-labelledby="status-heading">
           <div class="status-top"><h2 id="status-heading">現在の状態</h2><span id="job-status" class="badge">接続待ち</span></div>
           <p id="status-description" class="status-description" role="status" aria-atomic="true">アプリから現在の状態を読み込んでいます。</p>
@@ -164,7 +188,9 @@
         <div class="diagnostic-area"><h3>接続を確認する</h3><p class="hint">Copilot の画面を開いてサインインし、自己診断で利用条件を確認してください。</p><div class="actions"><button id="open-copilot" type="button" disabled>Copilot を開く</button><button id="diagnose" type="button" disabled>自己診断する</button></div><pre id="diagnostics" class="diagnostic-output" tabindex="0" aria-label="自己診断の結果" hidden></pre></div>
       </div>
     </details>
-    <footer class="footer"><p>この画面を閉じても、作業は停止しません。停止するには「停止する」を押してください。</p><p>検証版 0.1.0 · ローカル接続</p></footer>
+    <details class="settings"><summary>問い合わせ用情報（本文なし）</summary><div class="settings-body"><p class="hint">版・処理状態・件数だけを取り出します。業務本文、入力パス、認証情報は含めません。保存前に内容を確認してください。外部への自動送信はありません。</p><button id="support-preview" type="button">保存する情報を確認</button><pre id="support-data" class="diagnostic-output" hidden tabindex="0"></pre><button id="support-save" type="button" hidden>確認した情報を保存</button></div></details>
+    <details class="settings"><summary>配布版・旧版への復帰</summary><div class="settings-body"><p id="runtime-release">版情報を確認中です。</p><button id="storage-show" type="button">保存方針と空き容量を確認</button><p id="storage-info">履歴・成果物・旧版は自動削除しません。</p><p class="hint">復帰する版は配布担当者の承認を確認してください。処理中・状態不明の依頼がある場合や、履歴の形式を扱えない版への復帰はできません。入力・成果物・履歴は削除しません。</p><button id="release-list" type="button">保存済みの版を確認</button><div id="rollback-panel" hidden><div class="field"><label for="rollback-target">復帰する保存済みの版</label><select id="rollback-target"></select></div><p id="rollback-status"></p><button id="rollback-select" type="button">選択した版への復帰を確認する</button><div id="rollback-confirmation" hidden><p id="rollback-confirm-text"></p><button id="rollback-confirm" type="button">この版に固定し、次回起動から使う</button></div><button id="rollback-unpin" type="button" hidden>旧版固定を解除する</button></div><p class="hint">復帰後はCMDから開き直してください。旧版固定中は共有側が新しくても自動更新しません。固定解除後の次回CMD起動で、検証できる共有版へ更新します。</p></div></details>
+    <footer class="footer"><p>この画面を閉じても、作業は停止しません。停止するには「停止する」を押してください。</p><p id="footer-release">検証版 · ローカル接続</p></footer>
     <div id="announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
     <noscript><p class="alert error">この画面を利用するには、ブラウザーの JavaScript を有効にしてください。</p></noscript>
   </div>
@@ -175,9 +201,12 @@
       const version = document.querySelector('meta[name="app-version"]').content;
       const tokenKey = 'gyomu-agent-token';
       const pending = new Set();
-      const activeStatuses = new Set(['queued', 'planning', 'running_pad', 'waiting_user', 'cancelling']);
+      const activeStatuses = new Set(['queued', 'planning', 'running_pad', 'waiting_user', 'running_csv', 'cancelling']);
       const statuses = {
         idle: ['開始待ち', 'やりたいことと対象を入力して、作業を開始してください。', 'normal'],
+        awaiting_approval: ['実行前の確認', '対象・分類条件・送信範囲を確認してください。まだ送信していません。', 'normal'],
+        running_csv: ['CSVを分類中', 'Copilotの応答を待っています。PADは操作しません。', 'normal'],
+        partial: ['一部未完了', '確定済みの結果を保持しています。理由を確認し、未送信分を続行できます。', 'warning'],
         queued: ['開始を準備中', '依頼を受け付けました。実行プロセスを準備しています。', 'normal'],
         planning: ['手順を検討中', 'Copilot が次の手順を考えています。', 'normal'],
         running_pad: ['PAD で実行中', 'Power Automate Desktop が PC 上で作業しています。', 'normal'],
@@ -200,6 +229,18 @@
       let artifactKey = '';
       let settingsLoaded = false;
       let settingsDirty = false;
+      let csvRequestKey = '';
+      let csvSelection = '';
+      let csvRenderKey = '';
+      let csvDirty = false;
+      let supportDiagnostic = null;
+      const reviewRows = new Set();
+      let reviewKey = '';
+      let csvJobId = '';
+      let continuationKey = '';
+      let selectedJobId = '';
+      let jobsRenderKey = '';
+      let releaseChoices = null;
 
       function text(node, value) {
         const next = value == null ? '' : String(value);
@@ -215,13 +256,31 @@
         $('action-message').hidden = !value;
       }
       function currentStatus() { return state && state.job ? (Object.hasOwn(statuses, state.job.status) ? state.job.status : 'unknown') : 'idle'; }
-      function busy() { return !!(state && state.job && activeStatuses.has(currentStatus())); }
+      function busy() { return !!(state && ((state.job && activeStatuses.has(currentStatus())) || (state.active_job && activeStatuses.has(state.active_job.status)))); }
       function updateControls() {
         const working = busy();
         const ready = !!token && connected;
+        $('pad-recover').disabled = !ready || working || !state?.pad_recovery?.can_attempt || pending.has('/api/pad/recover');
+        ['release-list','rollback-select','rollback-confirm','rollback-unpin','rollback-target'].forEach(id => { $(id).disabled = !ready || working || [...pending].some(p => p.startsWith('/api/releases')); });
+        const csvJob = state?.job?.workflow === 'csv_classify';
+        const viewingOther = !!state?.active_job && state?.job?.job_id !== state.active_job.job_id;
+        const csvPending = [...pending].some(path => path.startsWith('/api/csv/'));
+        $('csv-prepare').disabled = !ready || working || csvPending;
+        $('csv-select').disabled = !ready || working || !!csvSelection || csvPending;
+        $('csv-approve').disabled = !ready || working || csvPending || csvDirty || currentStatus() !== 'awaiting_approval';
+        ['csv-paths','csv-id-column','csv-text-column','csv-encoding','csv-categories','csv-instructions'].forEach(id => { $(id).disabled = working || csvPending; });
+        $('csv-stop').disabled = !ready || viewingOther || !csvJob || !working || currentStatus() === 'cancelling' || pending.has('/api/stop');
+        text($('csv-stop'), currentStatus() === 'cancelling' ? '停止要求済み' : '停止する');
+        $('csv-resume').hidden = !csvJob || !['partial','cancelled'].includes(currentStatus());
+        $('csv-resume').disabled = !ready || working || csvPending;
+        $('csv-reconcile').hidden = !csvJob || currentStatus() !== 'unknown' || !(state.job.summary?.unknown > 0);
+        $('csv-reconcile').disabled = !ready || working || csvPending;
+        $('csv-continue-new').hidden = !csvJob || !['partial','cancelled','blocked'].includes(currentStatus()) || !(state.job.summary?.unprocessed > 0) || state.job.summary?.unknown > 0;
+        $('csv-continue-new').disabled = !ready || working || csvPending;
+        $('csv-review').disabled = !ready || working || csvPending || reviewRows.size === 0 || !$('csv-review-instructions').value.trim();
         $('start').disabled = !ready || working || pending.has('/api/start');
         text($('start'), pending.has('/api/start') ? '開始を要求中…' : '開始する');
-        $('stop').disabled = !token || !working || currentStatus() === 'cancelling' || pending.has('/api/stop');
+        $('stop').disabled = !token || viewingOther || !working || currentStatus() === 'cancelling' || pending.has('/api/stop');
         text($('stop'), pending.has('/api/stop') || currentStatus() === 'cancelling' ? '停止を要求済み' : '停止する');
         $('goal').disabled = working || pending.has('/api/start');
         $('target').disabled = working || pending.has('/api/start');
@@ -271,6 +330,30 @@
       function render(next) {
         state = next;
         const job = next.job || null;
+        const preservation = job?.preservation;
+        const warnings = Array.isArray(preservation?.warnings) ? preservation.warnings : [];
+        const partial = Array.isArray(job?.partial_artifacts) ? job.partial_artifacts : [];
+        $('preservation-section').hidden = warnings.length === 0 && !next.pad_recovery?.required && partial.length === 0;
+        text($('preservation-warning'), warnings.join('\n'));
+        $('preservation-warning').hidden = warnings.length === 0;
+        text($('pad-recovery-message'), next.pad_recovery?.required ? next.pad_recovery.message : '');
+        $('pad-recover').hidden = !next.pad_recovery?.required;
+        const partialFragment = document.createDocumentFragment();
+        partial.forEach(artifact => { const item=document.createElement('li'); item.className='artifact';item.style.whiteSpace='pre-wrap';item.style.overflowWrap='anywhere';text(item, `未確認の途中ファイル: ${artifact.path}\n${artifact.reason}`); partialFragment.append(item); });
+        $('partial-artifacts').replaceChildren(partialFragment);
+        text($('footer-release'), `検証版 ${next.version} · ローカル接続`);
+        if (next.runtime_release) text($('runtime-release'), `起動中: ${next.runtime_release.version} · ${next.runtime_release.release_id.slice(0,12)} · ${next.runtime_release.channel}`);
+        const jobsKey = JSON.stringify(next.jobs || []);
+        if (jobsKey !== jobsRenderKey) {
+          jobsRenderKey = jobsKey;
+          const fragment = document.createDocumentFragment();
+          const current = document.createElement('option'); current.value = ''; text(current, '現在の依頼'); fragment.append(current);
+          (next.jobs || []).forEach(item => { const option = document.createElement('option'); option.value = item.job_id; text(option, `${new Date(item.created_utc).toLocaleString('ja-JP')} · ${item.title}`); fragment.append(option); });
+          $('job-history').replaceChildren(fragment);
+        }
+        $('job-history').value = selectedJobId;
+        $('viewing-history').hidden = !selectedJobId;
+        renderCsv();
         const status = currentStatus();
         const description = statuses[status];
         text($('job-status'), description[0]);
@@ -279,7 +362,7 @@
         const jobError = job ? printable(job.error) : '';
         text($('job-error'), jobError);
         $('job-error').hidden = !jobError;
-        text($('job-reference'), job ? '実行 ID: ' + printable(job.job_id) : '');
+        text($('job-reference'), job ? '実行 ID: ' + printable(job.job_id) + (job.release_info ? ` · 開始版 ${job.release_info.version} / ${job.release_info.release_id.slice(0,12)} / ${job.release_info.channel}` : ' · 開始版の情報は未記録') : '');
         $('job-reference').hidden = !job;
         if (job && job.job_id !== lastJobId) {
           lastJobId = job.job_id;
@@ -287,6 +370,7 @@
           $('target').value = printable(job.target);
         }
         const question = job ? printable(job.question) : '';
+        $('answer').maxLength = job?.workflow === 'csv_classify' ? 4000 : 12000;
         const questionKey = job && status === 'waiting_user' ? job.job_id + '\n' + job.question_id : '';
         if (questionKey !== lastQuestionKey) {
           $('answer').value = '';
@@ -307,7 +391,14 @@
             const item = document.createElement('li'); item.className = 'artifact';
             const label = document.createElement('p'); label.className = 'artifact-label'; text(label, artifact.label || '成果物 ' + (index + 1));
             const path = document.createElement('code'); path.className = 'artifact-path'; path.tabIndex = 0; text(path, artifact.path);
-            item.append(label, path); fragment.append(item);
+            item.append(label, path);
+            if (job.workflow === 'csv_classify' && artifact.artifact_id) {
+              text(label, artifact.name);
+              const open = document.createElement('button'); open.type = 'button'; text(open, '成果物を開く');
+              open.addEventListener('click', () => mutate('/api/csv/artifact/open', { job_id: job.job_id, artifact_id: artifact.artifact_id }, '検証した成果物を開きました。'));
+              item.append(open);
+            }
+            fragment.append(item);
           });
           $('artifacts').replaceChildren(fragment);
         }
@@ -341,6 +432,41 @@
         if (next.diagnostics != null) showDiagnostics(next.diagnostics);
         updateControls();
       }
+      function renderCsv() {
+        const job = state?.job;
+        const csv = state?.csv;
+        $('csv-approval').hidden = !csv || csvDirty || job.status !== 'awaiting_approval';
+        $('csv-results').hidden = !csv;
+        if (!csv) { $('csv-followup').hidden = true; text($('csv-summary'), ''); return; }
+        if (csvJobId !== job.job_id) { csvJobId = job.job_id; reviewRows.clear(); reviewKey = ''; continuationKey = ''; }
+        $('csv-followup').hidden = !['done','partial','cancelled','blocked'].includes(job.status) || !job.results.some(r => r.status === 'needs_review');
+        const plan = job.plan;
+        text($('csv-plan'), `${csv.sources.map(s => `${s.name} · ${s.encoding} · ${s.bytes}バイト`).join('\n')}\n対象 ${job.summary.total}行（送信対象 ${plan.row_ids.length}行）。列: ${csv.sources[0].headers.join(' / ')}\n分類候補: ${plan.categories.join(' / ')}\n条件: ${plan.instructions}\n送信内容: 選択した本文列とアプリが発行する行ID。任意列・入力パスは送信しません。\n処理: ${plan.batch_count}回に小分けして分類し、全行を照合します。\n保存先: ${plan.output_directory}\n分類結果・要確認・未処理のCSVと正本JSONを新規作成します。原ファイルは変更しません。対象外の理由は下の一覧を確認してください。`);
+        const summary = job.summary;
+        text($('csv-summary'), `全${summary.total}件：成功 ${summary.success} / 要確認 ${summary.needs_review} / 失敗 ${summary.failed} / 未処理 ${summary.unprocessed} / 不明 ${summary.unknown}。内容は未承認です。`);
+        const filter = $('csv-filter').value;
+        const key = JSON.stringify([job.job_id, job.results, filter]);
+        if (key === csvRenderKey) return;
+        csvRenderKey = key;
+        const results = new Map(job.results.map(row => [row.row_id, row]));
+        const previous = new Map((csv.previous_results || []).map(row => [row.row_id, row]));
+        const names = { success:'成功', needs_review:'要確認', failed:'失敗', unprocessed:'未処理', unknown:'不明' };
+        const fragment = document.createDocumentFragment();
+        csv.rows.forEach(row => {
+          const result = results.get(row.row_id);
+          if (!result || (filter !== 'all' && result.status !== filter)) return;
+          const tr = document.createElement('tr');
+          const before = previous.get(row.row_id);
+          [row.original_id, row.original_text, before ? `前回: ${before.category}\n今回: ${result.category || '未確定'}` : result.category, before ? `前回: ${before.reason}\n今回: ${result.reason}` : result.reason, names[result.status] || '不明'].forEach(value => { const td = document.createElement('td'); text(td, value); tr.append(td); });
+          if (result.status === 'needs_review') {
+            const checkbox = document.createElement('input'); checkbox.type = 'checkbox'; checkbox.checked = reviewRows.has(row.row_id); checkbox.setAttribute('aria-label', `${row.original_id}を再検討する`); checkbox.dataset.rowId = row.row_id;
+            checkbox.addEventListener('change', () => { if (checkbox.checked) reviewRows.add(row.row_id); else reviewRows.delete(row.row_id); reviewKey = ''; updateControls(); });
+            tr.firstChild.prepend(checkbox);
+          }
+          fragment.append(tr);
+        });
+        $('csv-rows').replaceChildren(fragment);
+      }
       function showDiagnostics(value) {
         text($('diagnostics'), printable(value));
         $('diagnostics').hidden = false;
@@ -351,10 +477,20 @@
         pollInFlight = true;
         updateControls();
         try {
-          const next = await request('/api/state');
+          const requestedJobId = selectedJobId;
+          const next = await request('/api/state' + (requestedJobId ? '?job_id=' + encodeURIComponent(requestedJobId) : ''));
+          if (selectedJobId !== requestedJobId) return;
           if (!next || next.version !== version || !Object.hasOwn(next, 'job')) throw new Error('画面とアプリの版または応答形式が一致しません。起動用 CMD から画面を開き直してください。');
           render(next);
           connection(true);
+          if (csvSelection) {
+            const selected = (await request('/api/csv/selection', { selection_id: csvSelection })).selection;
+            if (selected.status !== 'pending') {
+              csvSelection = '';
+              if (selected.status === 'selected') { $('csv-paths').value = selected.paths.join('\n'); csvRequestKey = ''; }
+              if (selected.status === 'failed') message('ファイル選択を完了できませんでした。パスの貼り付けでも指定できます。', true);
+            }
+          }
         } catch (error) {
           connection(false, error.message + (state && state.job ? '\n表示中の作業状態は、最後に接続できた時点の情報です。通信が切れても、作業が停止したとは限りません。' : '') + '\n自動的に再接続を試みます。');
         } finally {
@@ -370,6 +506,20 @@
         updateControls();
         try {
           const result = await request(path, body);
+          if (path === '/api/storage') text($('storage-info'), `空き容量: ${Math.floor(result.storage.available_bytes/1048576)} MiB。開始に必要な空き容量: 256 MiB。${result.storage.policy}`);
+          if (path === '/api/releases') {
+            releaseChoices = result.local_releases;
+            const fragment = document.createDocumentFragment();
+            releaseChoices.releases.filter(r => !r.current).forEach(release => { const option = document.createElement('option'); option.value = release.release; option.disabled = !release.compatible; text(option, `${release.version} · ${release.release_id.slice(0,12)} · ${release.channel}${release.compatible ? '' : '（履歴形式が非対応）'}`); fragment.append(option); });
+            $('rollback-target').replaceChildren(fragment); $('rollback-panel').hidden = false; $('rollback-confirmation').hidden = true;
+            $('rollback-unpin').hidden = !releaseChoices.rollback_hold;
+            text($('rollback-status'), (releaseChoices.rollback_hold ? '旧版に固定中。' : '共有版への更新が有効。') + ' 必要な状態形式: ' + releaseChoices.required_state_contract);
+          }
+          if (path === '/api/releases/rollback' || path === '/api/releases/unpin') { $('rollback-confirmation').hidden = true; $('rollback-panel').hidden = true; releaseChoices = null; }
+          if (['/api/start','/api/csv/prepare','/api/csv/review','/api/csv/continue-new'].includes(path)) selectedJobId = '';
+          if (path === '/api/csv/select') csvSelection = result.selection.selection_id;
+          if (['/api/csv/prepare','/api/csv/review','/api/csv/continue-new'].includes(path)) csvDirty = false;
+          if (path === '/api/support/preview') { supportDiagnostic = result.diagnostic; text($('support-data'), JSON.stringify(supportDiagnostic, null, 2)); $('support-data').hidden = false; $('support-save').hidden = false; }
           if (path === '/api/settings') settingsDirty = false;
           if (path === '/api/diagnose') {
             showDiagnostics(result.diagnostics === undefined ? result : result.diagnostics);
@@ -381,6 +531,46 @@
         } catch (error) { message(error.message, true); }
         finally { pending.delete(path); updateControls(); }
       }
+      $('csv-form').addEventListener('input', () => { csvRequestKey = ''; csvDirty = true; $('csv-approval').hidden = true; updateControls(); });
+      $('csv-form').addEventListener('submit', event => {
+        event.preventDefault();
+        if ($('csv-prepare').disabled) return;
+        if (!csvRequestKey) csvRequestKey = crypto.randomUUID().replaceAll('-', '');
+        mutate('/api/csv/prepare', { request_key: csvRequestKey, paths: $('csv-paths').value.split(/\r?\n/).map(s => s.trim()).filter(Boolean), id_column: $('csv-id-column').value, text_column: $('csv-text-column').value, encoding: $('csv-encoding').value, categories: $('csv-categories').value.split(/\r?\n/).map(s => s.trim()).filter(Boolean), instructions: $('csv-instructions').value }, '対象を確認しました。送信範囲を確認して開始してください。');
+      });
+      $('csv-select').addEventListener('click', () => mutate('/api/csv/select', {}, 'ファイル選択画面でCSVを選んでください。'));
+      function csvStart(path) { if (state?.job?.workflow === 'csv_classify') mutate(path, { job_id: state.job.job_id, plan_id: state.job.plan.plan_id, plan_hash: state.job.plan_hash }, '確認済み範囲の処理を受け付けました。'); }
+      $('csv-approve').addEventListener('click', () => csvStart('/api/csv/approve'));
+      $('csv-resume').addEventListener('click', () => csvStart('/api/csv/resume'));
+      $('csv-reconcile').addEventListener('click', () => mutate('/api/csv/reconcile', {job_id:state.job.job_id}, '既存回答を照合しました。要求は再送信していません。'));
+      $('csv-continue-new').addEventListener('click', () => { if(!continuationKey)continuationKey=crypto.randomUUID().replaceAll('-','');mutate('/api/csv/continue-new', {parent_job_id:state.job.job_id,request_key:continuationKey}, '未送信の行を引き継ぎました。新しい送信範囲を確認してください。'); });
+      $('csv-stop').addEventListener('click', () => mutate('/api/stop', { job_id: state.job.job_id }, '停止を要求しました。停止確認までお待ちください。'));
+      $('csv-filter').addEventListener('change', renderCsv);
+      $('job-history').addEventListener('change', () => { selectedJobId = $('job-history').value; poll(); });
+      $('pad-recover').addEventListener('click', () => { if (state?.pad_recovery?.can_attempt) mutate('/api/pad/recover', {job_id:state.job.job_id,run_id:state.pad_recovery.run_id,backup_sha256:state.pad_recovery.backup_sha256}, '元Mainと所有記録を復元しました。元の処理は再実行していません。'); });
+      $('release-list').addEventListener('click', () => mutate('/api/releases', {}, '整合性を確認できる保存済みの版を表示しました。'));
+      $('storage-show').addEventListener('click', () => mutate('/api/storage', {}, '保存方針と空き容量を表示しました。'));
+      $('rollback-target').addEventListener('change', () => { $('rollback-confirmation').hidden = true; });
+      $('rollback-select').addEventListener('click', () => {
+        const selected = releaseChoices?.releases.find(r => r.release === $('rollback-target').value && r.compatible && !r.current);
+        if (!selected) { message('復帰可能な保存済みの版を選択してください。', true); return; }
+        text($('rollback-confirm-text'), `${selected.version} / ${selected.release_id} / ${selected.channel} に固定します。入力・成果物・履歴は保持します。復帰が承認された版であることを確認してください。CMDから開き直すまで新しい依頼は開始できません。`);
+        $('rollback-confirmation').hidden = false;
+      });
+      $('rollback-confirm').addEventListener('click', () => { if (releaseChoices) mutate('/api/releases/rollback', {release:$('rollback-target').value,expected_current:releaseChoices.current_release,confirmed:true}, '旧版を選択しました。CMDから開き直してください。'); });
+      $('rollback-unpin').addEventListener('click', () => { if (releaseChoices) mutate('/api/releases/unpin', {expected_current:releaseChoices.current_release}, '旧版固定を解除しました。次回CMD起動で共有版を検証して更新します。'); });
+      $('csv-review-instructions').addEventListener('input', () => { reviewKey = ''; updateControls(); });
+      $('csv-review').addEventListener('click', () => {
+        if ($('csv-review').disabled) return;
+        if (!reviewKey) reviewKey = crypto.randomUUID().replaceAll('-', '');
+        mutate('/api/csv/review', { parent_job_id: state.job.job_id, row_ids: [...reviewRows], instructions: $('csv-review-instructions').value, request_key: reviewKey }, '選択行だけの再検討を準備しました。追加の送信範囲を確認してください。');
+      });
+      $('support-preview').addEventListener('click', () => mutate('/api/support/preview', { job_id: state?.job?.job_id || '' }, '保存する情報を表示しました。内容を確認してください。'));
+      $('support-save').addEventListener('click', () => {
+        if (!supportDiagnostic) return;
+        const url = URL.createObjectURL(new Blob([JSON.stringify(supportDiagnostic, null, 2)], { type: 'application/json' }));
+        const link = document.createElement('a'); link.href = url; link.download = 'agent-diagnostic-' + supportDiagnostic.diagnostic_id + '.json'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+      });
       $('request-form').addEventListener('submit', event => {
         event.preventDefault();
         if ($('start').disabled) return;

@@ -20,12 +20,13 @@ foreach($sourceFile in $sourceFiles) {
         if(-not $definitions.ContainsKey($definition.Name)){$definitions[$definition.Name]=$definition}
     }
 }
-$wanted=@('Test-AgentId','Assert-AgentId','Read-AgentJson','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','Get-AgentTextHash','Get-AgentPlannerRules','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Read-AgentAiCallTemplates','Test-AgentRobin','ConvertTo-AgentComparableRobin','Get-AgentAiCallTemplate','New-AgentAiCallTemplates','Get-AgentPadAiResults','Test-AgentPadWindowTitle','Get-AgentPadElement','Test-AgentPadRetryableSelectorFailure','Get-AgentPadInvokableButton','Get-AgentPadStatusBar','Get-AgentPadStatus','Get-AgentPadErrorState','New-AgentPadSnapshotState','Get-AgentPadSnapshot','Get-AgentPadObservationLossSeconds','Invoke-AgentPadStopIfConfirmed','Wait-AgentPadEditable','Invoke-AgentPad')
+$wanted=@('Test-AgentId','Assert-AgentId','Read-AgentJson','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','Get-AgentTextHash','Get-AgentPlannerRules','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Read-AgentAiCallTemplates','Test-AgentRobin','ConvertTo-AgentComparableRobin','Get-AgentAiCallTemplate','New-AgentAiCallTemplates','Get-AgentPadAiResults','Test-AgentPadWindowTitle','Get-AgentPadElement','Test-AgentPadRetryableSelectorFailure','Get-AgentPadInvokableButton','Get-AgentPadStatusBar','Get-AgentPadStatus','Get-AgentPadErrorState','New-AgentPadSnapshotState','Get-AgentPadSnapshot','Get-AgentPadObservationLossSeconds','Invoke-AgentPadStopIfConfirmed','Wait-AgentPadEditable','Invoke-AgentPad','Invoke-AgentPadCore','Get-AgentPadOwnerPath','New-AgentPadRecoveryBackup','Set-AgentPadRecoveryPhase','Test-AgentPadClipboardLease')
 foreach($name in $wanted) {
     if(-not $definitions.ContainsKey($name)){throw ('Missing production function: '+$name)}
     . ([scriptblock]::Create($definitions[$name].Extent.Text))
 }
 $script:AgentEncoding=New-Object Text.UTF8Encoding($false)
+$script:AgentOfflineTest=$false # UIA and execution functions below are replaced by explicit mocks.
 $script:checks=0
 function Assert-Case([bool]$Actual,[string]$Name) {
     if(-not $Actual){throw ('FAIL: '+$Name)}
@@ -533,6 +534,8 @@ try {
     # Mock ONLY application UI boundary functions. Native clipboard, keyboard,
     # UIA assembly, and real control invocation are never loaded or called.
     function Reset-PadMock([string]$Scenario) {
+        foreach($name in @('pad-backup.json','pad-recovery-state.json','pad-preservation.json')) { if(Test-Path -LiteralPath (Join-Path $script:run $name)) { [IO.File]::Delete((Join-Path $script:run $name)) } }
+        $script:padClipboardSequence=1
         $script:padScenario=$Scenario
         $script:padWindowReads=0;$script:padSnapshotReads=0;$script:padRunInvocations=0
         $script:padSaveInvocations=0;$script:padStopInvocations=0;$script:padReadbacks=0
@@ -581,12 +584,14 @@ try {
         if($script:padScenario -eq 'delayed-pasted-actions'){return $script:padSnapshotReads -lt 3}
         return $script:padScenario -notin @('unowned','owner-missing','user-edited','replace-failure')
     }
+    function Get-AgentPadWindowIdentity($Window) { return [pscustomobject]@{pid=$PID;handle=1;started=(Get-Process -Id $PID).StartTime.ToUniversalTime().ToString('o')} }
+    function Get-AgentPadClipboardSequence { return $script:padClipboardSequence }
     function Get-AgentPadClipboard {return 'original clipboard'}
     function Get-AgentPadClipboardText {
         if($script:padScenario -eq 'delayed-copy' -and $script:padKeys.Contains('^c')){$script:padCopyPolls++;if($script:padCopyPolls -ge 4){$script:padClipboard=$script:mockCopiedCode}}
         return $script:padClipboard
     }
-    function Set-AgentPadClipboardText([string]$Text) {$script:padClipboard=$Text}
+    function Set-AgentPadClipboardText([string]$Text) {$script:padClipboard=$Text;$script:padClipboardSequence++;$script:AgentPadClipboardValue=$Text;$script:AgentPadClipboardSequence=$script:padClipboardSequence}
     function Restore-AgentPadClipboard($Clipboard) {$script:padClipboardRestores++;$script:padClipboard=$Clipboard}
     function Send-AgentPadKeys([string]$Keys) {
         $script:padKeys.Add($Keys)

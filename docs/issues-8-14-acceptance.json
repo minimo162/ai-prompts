@@ -1,0 +1,511 @@
+{
+  "schema_version": 1,
+  "objective": "7件のGitHub Issue（#8〜#14）を全て実装する。",
+  "inspected_utc": "2026-09-06T15:33:44.1302789Z",
+  "release_approved": false,
+  "note": "個別の非ライブ試験はdocs/issues-8-14-progress.mdを参照。Issueの広い受入条件をモック結果だけでPASSにしない。",
+  "issues": [
+    {
+      "issue": 8,
+      "title": "[P1] 最初の実務を「問い合わせCSVの一次分類・理由・要確認一覧」まで完成させる",
+      "url": "https://github.com/minimo162/ai-prompts/issues/8",
+      "comments_read": 0,
+      "implementation_status": "partial",
+      "acceptance": [
+        {
+          "id": "8.1",
+          "requirement": "合成CSV 50行（改行・カンマ・引用符・日本語・空欄・先頭ゼロ・数式風文字列・重複ID候補を含む）を選択し、分類候補を自然文で指定する。列・件数・対象外理由を確認して開始できる。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "8.2",
+          "requirement": "入力検査を通った全行について、原IDと原本文を保持した結果または明示的な未処理理由が1件ずつ存在する。重複IDを無断でマージしない。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "8.3",
+          "requirement": "ラベル候補外、理由欠落、AI回答内の欠落ID・重複IDは正常結果として出力しない。曖昧な結果は要確認として原文と比較できる。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "8.4",
+          "requirement": "対象50行のうち途中で失敗を発生させた場合、成功・要確認・失敗・未処理の合計が50になり、全件成功と表示しない。原本ハッシュは不変。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "8.5",
+          "requirement": "要確認行への追加指示を行うと、既に確定した無関係の行を再処理・上書きせず、追加処理の結果と変更対象を確認できる。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-CsvTypedPlan.ps1",
+            "tests/Test-CsvReview.ps1",
+            "tests/Test-CsvUi.cjs",
+            ".work/nonlive-135f354eaabb4d058e1111aa23e461d2/verification.json"
+          ]
+        },
+        {
+          "id": "8.6",
+          "requirement": "事前に人が作成した正解・要確認例で品質を採点する。暫定目標は明確な分類例の一致率90%以上、意図的な要確認例は全件レビューへ。閾値は業務責任者と確定し、合成試験合格を実業務での精度保証と説明しない。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "8.7",
+          "requirement": "直接Copilot、固定処理、本アプリを同じ50行・同じ品質基準で比較する。準備・操作・確認・復旧の人時間、総経過時間、PC操作が制限される時間を別計測する。暫定採用目標は人時間30%以上削減。未達なら理由を記録し、拡張より先に方式を見直す。",
+          "status": "unverified",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "issue": 9,
+      "title": "[P1] 検証済みアクション実行器と対象・成果物契約を導入し、CSV／複数件を確実に処理する",
+      "url": "https://github.com/minimo162/ai-prompts/issues/9",
+      "comments_read": 0,
+      "implementation_status": "partial",
+      "acceptance": [
+        {
+          "id": "9.1",
+          "requirement": "合成CSV 1/50/100行を同じアクション集合で処理し、行数によって自由生成コードが増えない。結果ID集合が入力ID集合と一致し、分類結果か明示的な未処理理由が1行ずつある。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "9.2",
+          "requirement": "8,193文字以上の最終CSVと、複数成果物合計32,768文字超を用意する。全レコード検証済みならプレビューを制限しつつ処理完了を表示できる。未検証レコード1件を混ぜると全件成功にならない。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "9.3",
+          "requirement": "同名ファイルを別サブフォルダーに置いて選択し、衝突なく識別する。対象外ファイル、再帰OFFの下位ファイル、選択後に追加されたファイルを勝手に処理しない。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "9.4",
+          "requirement": "選択後・実行前に入力を書き換えた場合は確認または停止となる。成果物の既存ファイルを上書きしない。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "9.5",
+          "requirement": "AIが対象外のパス、未知のアクション、許可外の引数を返したとき、副作用ゼロで拒否する。原文中の命令文を実行命令として採用しない。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-CsvTypedPlan.ps1",
+            "tests/Test-CsvReview.ps1",
+            "tests/Test-CsvUi.cjs",
+            ".work/nonlive-135f354eaabb4d058e1111aa23e461d2/verification.json"
+          ]
+        },
+        {
+          "id": "9.6",
+          "requirement": "同じ観測ID／ハッシュ／件数を再計画へ返し、要確認項目への追加指示だけで次の処理対象が変わる。未処理を黙って除外してDONEにしない。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-CsvTypedPlan.ps1",
+            "tests/Test-CsvReview.ps1",
+            "tests/Test-CsvUi.cjs",
+            ".work/nonlive-135f354eaabb4d058e1111aa23e461d2/verification.json"
+          ]
+        },
+        {
+          "id": "9.7",
+          "requirement": "CSV専用処理ではPADデザイナーを前面に出さずに完了する。別途固定PAD→AiCall→後続処理の互換経路も回帰確認し、PAD内AI処理を失わない。",
+          "status": "unverified",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "issue": 10,
+      "title": "[P1] 部分成功を保持し、中断・認証切れ・PAD差し替え失敗から二重実行なしで復旧する",
+      "url": "https://github.com/minimo162/ai-prompts/issues/10",
+      "comments_read": 0,
+      "implementation_status": "partial",
+      "acceptance": [
+        {
+          "id": "10.1",
+          "requirement": "50件の合成業務で20件出力後にworkerを停止する。再起動時に20件を再検証し、残り30件と不明分を区別する。続行後の結果は50件で、先の20件の再送信・重複出力はゼロ。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-PadRecovery.ps1",
+            "tests/Test-PadRecoveryUi.cjs",
+            "tests/Test-CsvCrashUi.cjs",
+            "docs/pad-recovery.md",
+            ".work/nonlive-61b768f41bc64051a50bd0e6d27592d6/verification.json"
+          ]
+        },
+        {
+          "id": "10.2",
+          "requirement": "送信前の認証切れ、送信確認後のタイムアウト、結果書込み前後の中断を個別に発生させる。未送信のみ再送可能とし、送信状態不明を成功または無条件リトライにしない。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "10.3",
+          "requirement": "開始HTTPの応答だけを破棄し、同じキーで再要求しても同じjob IDを返す。別タブからの重複操作でも同様。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "10.4",
+          "requirement": "PADの旧Main削除後／貼付け後／保存中に失敗させる。元Mainのバックアップが残り、停止・所有が確定した場合だけ貼戻しと保存を実施する。復元時のRunは0回。人が編集したMainは上書きしない。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-PadRecovery.ps1",
+            "tests/Test-PadRecoveryUi.cjs",
+            "tests/Test-CsvCrashUi.cjs",
+            "docs/pad-recovery.md",
+            ".work/nonlive-61b768f41bc64051a50bd0e6d27592d6/verification.json"
+          ]
+        },
+        {
+          "id": "10.5",
+          "requirement": "途中で出たファイルを一覧化し、検証済み／未確認を表示する。未確認の1件があるのに「全件完了」と表示しない。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-PadRecovery.ps1",
+            "tests/Test-PadRecoveryUi.cjs",
+            "tests/Test-CsvCrashUi.cjs",
+            "docs/pad-recovery.md",
+            ".work/nonlive-61b768f41bc64051a50bd0e6d27592d6/verification.json"
+          ]
+        },
+        {
+          "id": "10.6",
+          "requirement": "停止を押すと「停止要求済み」となり、PAD/子の終了確認後に「停止済み」となる。観測不能なら「状態を確認できない」とし、新しい実行の可否も制御する。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "10.7",
+          "requirement": "クリップボード復元失敗を注入したとき、処理結果と独立した保全警告が表示され、無関係のクリップボード変更を巻き戻さない。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-PadRecovery.ps1",
+            "tests/Test-PadRecoveryUi.cjs",
+            "tests/Test-CsvCrashUi.cjs",
+            "docs/pad-recovery.md",
+            ".work/nonlive-61b768f41bc64051a50bd0e6d27592d6/verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "issue": 11,
+      "title": "[P1] 初回設定から計画確認・結果確認まで、一般利用者が迷わない操作導線を完成させる",
+      "url": "https://github.com/minimo162/ai-prompts/issues/11",
+      "comments_read": 0,
+      "implementation_status": "partial",
+      "acceptance": [
+        {
+          "id": "11.1",
+          "requirement": "新しい利用者プロファイルで共有CMDを起動し、画面の案内だけで接続確認と合成CSV50行の選択へ進める。PowerShell/Robin編集やREADMEの内部用語の理解を要求しない。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "11.2",
+          "requirement": "未対応のPDF/Excel、読めない文字コード、対象外のフォルダーを選ぶと、業務本文の送信やPAD操作の前に理由と可能な代替を示す。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "11.3",
+          "requirement": "CSV専用業務はPAD未準備でも、その業務に必要な条件が満たされれば利用できる。PADが必要な業務だけ、専用フローの準備が不足すると実行を止める。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "11.4",
+          "requirement": "対象50行、分類条件、出力先、新規作成方針を確認して開始する。確認後に対象または計画の範囲を変えると、古い確認を流用せず再確認になる。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-CsvTypedPlan.ps1",
+            "tests/Test-CsvReview.ps1",
+            "tests/Test-CsvUi.cjs",
+            ".work/nonlive-135f354eaabb4d058e1111aa23e461d2/verification.json"
+          ]
+        },
+        {
+          "id": "11.5",
+          "requirement": "20件成功・3件要確認・1件失敗・残り未処理の状態を注入し、合計50件とそれぞれの理由を表示する。停止受付と停止確認は別表示。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "11.6",
+          "requirement": "画面を閉じて再起動しても同一ジョブの状態を表示し、未知の状態を完了扱いしない。別の履歴の成果物を現在の結果として表示しない。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-CsvTypedPlan.ps1",
+            "tests/Test-CsvReview.ps1",
+            "tests/Test-CsvUi.cjs",
+            ".work/nonlive-135f354eaabb4d058e1111aa23e461d2/verification.json"
+          ]
+        },
+        {
+          "id": "11.7",
+          "requirement": "検証済み成果物IDから正しいファイルを開ける。書換え・削除・対象外パスへの差替えを検知して開く前に警告する。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-CsvTypedPlan.ps1",
+            "tests/Test-CsvReview.ps1",
+            "tests/Test-CsvUi.cjs",
+            ".work/nonlive-135f354eaabb4d058e1111aa23e461d2/verification.json"
+          ]
+        },
+        {
+          "id": "11.8",
+          "requirement": "認証切れを発生させ、サインイン案内から#10の照合・続行へ進める。単なる「もう一度開始してください」で終わらない。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "11.9",
+          "requirement": "初見の利用者5人による合成業務試行で、少なくとも4人が口頭の操作介入なしに結果確認まで完了することを暫定目標とし、失敗箇所・人の操作時間を記録する。閾値は試行前に合意する。",
+          "status": "unverified",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "issue": 12,
+      "title": "[P1] Copilot／PAD接続の対応条件と障害契約を固定し、長文・連続処理を安定化する",
+      "url": "https://github.com/minimo162/ai-prompts/issues/12",
+      "comments_read": 0,
+      "implementation_status": "partial",
+      "acceptance": [
+        {
+          "id": "12.1",
+          "requirement": "応答ID・要求ID・行順序・終端の欠落/重複/遅延回答を混ぜたfixtureで、取り違え・欠落を成功にしない。完全応答の安定確認と1回送信の条件を維持する。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ConnectionContract.ps1",
+            "tests/Test-Copilot.ps1",
+            "tests/Test-AcceptanceGate.ps1",
+            "docs/acceptance-records.md",
+            ".work/nonlive-8b4367da742f416ab79b457e07368287/verification.json"
+          ]
+        },
+        {
+          "id": "12.2",
+          "requirement": "送信ボタンが0件/複数件、または未知のDOM/UIA状態なら、推測クリックなしで停止し、互換性不一致として通知する。既知の無害な構造差は回帰根拠付きで処理できる。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "12.3",
+          "requirement": "日本語、引用符、%、空白、改行、長い応答を端から端まで比較し、削除・修復によって成功へ変えない。送信前の上限超過と生成途中の欠落を別エラーにする。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "12.4",
+          "requirement": "同じジョブの外側計画と複数AiCallを連続実行し、別要求・別ジョブの応答が混ざらない。送信後timeoutから同じ要求を無断再送しない。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ConnectionContract.ps1",
+            "tests/Test-Copilot.ps1",
+            "tests/Test-AcceptanceGate.ps1",
+            "docs/acceptance-records.md",
+            ".work/nonlive-8b4367da742f416ab79b457e07368287/verification.json"
+          ]
+        },
+        {
+          "id": "12.5",
+          "requirement": "Edgeポリシー無効の環境では、管理設定を変更せず理由と問い合わせ先を表示する。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ConnectionContract.ps1",
+            "tests/Test-Copilot.ps1",
+            "tests/Test-AcceptanceGate.ps1",
+            "docs/acceptance-records.md",
+            ".work/nonlive-8b4367da742f416ab79b457e07368287/verification.json"
+          ]
+        },
+        {
+          "id": "12.6",
+          "requirement": "合成業務1/50/100件の所要時間・成功率・停止原因・PAD占有時間を記録し、実用上限を#8の画面と受入へ反映する。少数1回成功を対応件数の保証にしない。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "12.7",
+          "requirement": "採用する方式の対応表に、公式情報の確認日、必要ライセンス・権限、社内承認の確認済み/未確認を残す。preview APIを本番サポート済みと記載しない。",
+          "status": "unverified",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "issue": 13,
+      "title": "[P1] 3ファイル配布の組合せ保証・本番公開手順・明示的な旧版復帰を整備する",
+      "url": "https://github.com/minimo162/ai-prompts/issues/13",
+      "comments_read": 0,
+      "implementation_status": "implemented_pending_live_acceptance",
+      "acceptance": [
+        {
+          "id": "13.1",
+          "requirement": "同じsemverの互換性のないA/B一式を作り、App=A/HTML=B等の安定した混在を置く。CMDから起動しても承認済み一式として新規利用されず、理由を表示する。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ReleaseBinding.ps1",
+            "tests/Test-PublishCrash.ps1",
+            "tests/Test-Launcher.ps1",
+            "tests/Test-CsvUi.cjs",
+            "docs/release-operations.md",
+            ".work/nonlive-8336e1d5c7b94459a09bc427ab8c5b7c/verification.json"
+          ]
+        },
+        {
+          "id": "13.2",
+          "requirement": "3ファイルの1つを書換えた直後に公開プロセスを強制終了する。再起動で途中一式を受理せず、公開側の復旧または明示された正常ローカル版へ誘導する。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ReleaseBinding.ps1",
+            "tests/Test-PublishCrash.ps1",
+            "tests/Test-Launcher.ps1",
+            "tests/Test-CsvUi.cjs",
+            "docs/release-operations.md",
+            ".work/nonlive-8336e1d5c7b94459a09bc427ab8c5b7c/verification.json"
+          ]
+        },
+        {
+          "id": "13.3",
+          "requirement": "公開前後の3ファイル・所有者/ACLを記録し、意図しない権限変更がない。利用者は本番公開ファイルを書き換えられない。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ReleaseBinding.ps1",
+            "tests/Test-PublishCrash.ps1",
+            "tests/Test-Launcher.ps1",
+            "tests/Test-CsvUi.cjs",
+            "docs/release-operations.md",
+            ".work/nonlive-8336e1d5c7b94459a09bc427ab8c5b7c/verification.json"
+          ]
+        },
+        {
+          "id": "13.4",
+          "requirement": "実行中に新しい版を公開して再度CMDを起動しても、実行中ジョブのApp/HTML/要求契約は途中で変わらない。終了後の新規起動だけが新版へ進む。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ReleaseBinding.ps1",
+            "tests/Test-PublishCrash.ps1",
+            "tests/Test-Launcher.ps1",
+            "tests/Test-CsvUi.cjs",
+            "docs/release-operations.md",
+            ".work/nonlive-8336e1d5c7b94459a09bc427ab8c5b7c/verification.json"
+          ]
+        },
+        {
+          "id": "13.5",
+          "requirement": "共有到達不能時は、検証済みローカル版があればその旨を示す。初回でキャッシュがなければ明確に停止する。到達可能だが壊れている共有を、無通知で正常扱いしない。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ReleaseBinding.ps1",
+            "tests/Test-PublishCrash.ps1",
+            "tests/Test-Launcher.ps1",
+            "tests/Test-CsvUi.cjs",
+            "docs/release-operations.md",
+            ".work/nonlive-8336e1d5c7b94459a09bc427ab8c5b7c/verification.json"
+          ]
+        },
+        {
+          "id": "13.6",
+          "requirement": "承認済み旧版へ明示的に復帰し、設定・入力・成果物・履歴のハッシュを保持する。互換性のない状態では復帰を拒否し、旧ジョブを再実行しない。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ReleaseBinding.ps1",
+            "tests/Test-PublishCrash.ps1",
+            "tests/Test-Launcher.ps1",
+            "tests/Test-CsvUi.cjs",
+            "docs/release-operations.md",
+            ".work/nonlive-8336e1d5c7b94459a09bc427ab8c5b7c/verification.json"
+          ]
+        },
+        {
+          "id": "13.7",
+          "requirement": "保持期間/容量の処理で、実行中データ・利用者が保持指定した成果物・最後の正常版が消えない。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ReleaseBinding.ps1",
+            "tests/Test-PublishCrash.ps1",
+            "tests/Test-Launcher.ps1",
+            "tests/Test-CsvUi.cjs",
+            "docs/release-operations.md",
+            ".work/nonlive-8336e1d5c7b94459a09bc427ab8c5b7c/verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "issue": 14,
+      "title": "[P1] 業務成功に結び付く出荷受入・単一PS1の保守境界・匿名化診断を整える",
+      "url": "https://github.com/minimo162/ai-prompts/issues/14",
+      "comments_read": 0,
+      "implementation_status": "partial",
+      "acceptance": [
+        {
+          "id": "14.1",
+          "requirement": "非ライブ試験を一つの案内から実行でき、Windows PS5・HTTP・DOM/PADモック等の種別を結果に残す。実M365への送信回数が0と確認できる。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "14.2",
+          "requirement": "旧位置のcopilot-target.jsonがなくても、既存のジョブ接続/サインイン済みhomeを渡すと、非ライブUI試験は開始前に拒否する。空homeでも通信境界で実送信できない構成にする。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "14.3",
+          "requirement": "`-Mode Library`で関数を読み込んでも、サーバー・ブラウザー・PADの起動や業務ファイル変更がない。接続層の変更を、業務状態と独立した契約試験で検証できる。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "14.4",
+          "requirement": "Appだけを変更した候補に過去版のE2E結果を紐付けようとすると、出荷判定が未確認になる。モックPASSだけで「別PC受入済み」にならない。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ConnectionContract.ps1",
+            "tests/Test-Copilot.ps1",
+            "tests/Test-AcceptanceGate.ps1",
+            "docs/acceptance-records.md",
+            ".work/nonlive-8b4367da742f416ab79b457e07368287/verification.json"
+          ]
+        },
+        {
+          "id": "14.5",
+          "requirement": "凍結した同じ3ファイルで、#8の50件業務と#10の代表的な中断復旧を実画面から実施し、ID・件数・原本保全・最終結果・人の操作時間を記録する。受入閾値を下げた場合は理由と承認を残す。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "14.6",
+          "requirement": "合成の秘密文字列・トークン・個人パス・業務本文を含む内部データを用意し、既定の診断出力にそれらが含まれない。画面から保存内容を確認でき、自動外部送信はない。",
+          "status": "unverified",
+          "evidence": []
+        },
+        {
+          "id": "14.7",
+          "requirement": "最新受入索引から、版、検証環境、実施済み/未実施、関連Issue、証拠への参照を追える。古い検証結果を削除・書換えず時系列を維持する。",
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ConnectionContract.ps1",
+            "tests/Test-Copilot.ps1",
+            "tests/Test-AcceptanceGate.ps1",
+            "docs/acceptance-records.md",
+            ".work/nonlive-8b4367da742f416ab79b457e07368287/verification.json"
+          ]
+        }
+      ]
+    }
+  ]
+}

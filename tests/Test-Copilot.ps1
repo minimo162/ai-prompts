@@ -1,16 +1,20 @@
 ﻿param([string]$SourcePath=(Join-Path $PSScriptRoot '..\App.ps1'))
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version 2.0
+$script:AgentOfflineTest=$false # Explicit mocked adapter boundary; no production top-level import.
 $parseErrors=$null
 $ast=[Management.Automation.Language.Parser]::ParseFile([IO.Path]::GetFullPath($SourcePath),[ref]$null,[ref]$parseErrors)
 if ($parseErrors.Count -gt 0) { throw ('PowerShell parse errors: '+$parseErrors.Count) }
 # Load definitions only, never the server/launcher top-level code.
-$wanted=@('Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','Get-AgentCopilotConfig','Test-AgentCopilotUrl','Test-AgentCopilotAuthUrl','Test-AgentEdgeCommandLine','Test-AgentCopilotSocketUrl','Read-AgentJsonToken','Test-AgentStrictJson','ConvertFrom-AgentCopilotResponse','ConvertFrom-AgentCopilotParts','Assert-AgentCopilotWait','Enter-AgentCopilotMutex','Get-AgentCopilotAttemptPath','Reserve-AgentCopilotAttempt','Test-AgentCopilotTargetRecord','Write-AgentCopilotTargetRecord','Get-AgentCopilotTarget','Assert-AgentCopilotJobBaseline','Set-AgentCopilotJobSendStarted','Wait-AgentCopilotInputReady','Invoke-AgentCopilotExpand','Invoke-AgentCopilot','Get-AgentCopilotDomPrelude','Close-AgentCopilotLaunchTab','Open-AgentCopilot')
+$wanted=@('Get-AgentConnectionContract','Assert-AgentEdgePolicy','Get-AgentEdgePolicyEntries','New-AgentConnectionTrace','Set-AgentConnectionTrace','Get-AgentConnectionErrorType','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Test-AgentRobin','Get-AgentCopilotConfig','Test-AgentCopilotUrl','Test-AgentCopilotAuthUrl','Test-AgentEdgeCommandLine','Test-AgentCopilotSocketUrl','Read-AgentJsonToken','Test-AgentStrictJson','ConvertFrom-AgentCopilotResponse','ConvertFrom-AgentCopilotParts','Assert-AgentCopilotWait','Enter-AgentCopilotMutex','Get-AgentCopilotAttemptPath','Reserve-AgentCopilotAttempt','Test-AgentCopilotTargetRecord','Write-AgentCopilotTargetRecord','Get-AgentCopilotTarget','Assert-AgentCopilotJobBaseline','Set-AgentCopilotJobSendStarted','Wait-AgentCopilotInputReady','Invoke-AgentCopilotExpand','Invoke-AgentCopilot','Get-AgentCopilotDomPrelude','Close-AgentCopilotLaunchTab','Open-AgentCopilot')
 foreach($name in $wanted){
     $definition=@($ast.FindAll({param($n) $n -is [Management.Automation.Language.FunctionDefinitionAst]},$false) | Where-Object Name -eq $name)
     if($definition.Count -ne 1){throw ('Missing or duplicate function: '+$name)}
     . ([scriptblock]::Create($definition[0].Extent.Text))
 }
+
+$script:AgentEncoding=New-Object Text.UTF8Encoding($false)
+function Get-AgentEdgePolicyEntries { return ,@([pscustomobject]@{scope='fixture';readable=$true;value=$null}) }
 $script:checks=0
 function Assert-Case([bool]$Actual,[string]$Name){if(-not $Actual){throw ('FAIL: '+$Name)};$script:checks++}
 function Assert-Rejected([scriptblock]$Action,[string]$Prefix,[string]$Name){
@@ -340,6 +344,8 @@ try{
     function Invoke-AgentCopilotCdp {param($Socket,$Method,$Params,$CancelPath,$Deadline);if($Method -ceq 'Input.insertText'){$script:mockInput=$Params.text}}
     function Invoke-AgentCopilotEval {param($Socket,$Expression,$CancelPath,$Deadline);if($Expression.Contains('sends[0].click()')){throw 'CDP_UNAVAILABLE: Simulated uncertain send.'};return $true}
     Assert-Rejected {Invoke-AgentCopilot -Prompt 'Test request' -RequestId 'r-uncertain' -JobId ('f'*32) -Settings @{} -HomePath $jobTemp -TimeoutSeconds 5} 'CDP_UNAVAILABLE' 'Uncertain first send fails without retry'
+    $sendTrace=ConvertFrom-Json ([IO.File]::ReadAllText(((Get-AgentCopilotAttemptPath $jobTemp 'r-uncertain')+'.json')))
+    Assert-Case ($sendTrace.send_reserved -and -not $sendTrace.click_acknowledged -and $sendTrace.phase -ceq 'unknown') 'Uncertain click is recorded separately from an acknowledged send'
     Assert-Case ($script:mockInput.StartsWith("Test request`n`n") -and $script:mockInput.Contains('コンパクト JSON') -and $script:mockInput.Contains('1個以上256個以下')) 'Wire prompt requires bounded compact JSON transport parts'
     Assert-Case ($script:mockInput.Contains('request_id は "r-uncertain"') -and $script:mockInput.Contains('AGENT_PART_V1 r-uncertain i N') -and $script:mockInput.Contains('AGENT_PART_END_V1 r-uncertain i N')) 'Wire prompt binds both part headers and footers to this request'
     Assert-Case ($script:mockInput.Contains('第2行 AGENT_DATA にASCIIスペース1個') -and $script:mockInput.Contains('第4行 AGENT_END_r-uncertain') -and $script:mockInput.Contains('8192 UTF-16コード単位以下') -and $script:mockInput.Contains('サロゲートペアの途中で分割しない')) 'Wire prompt states exact carrier rows, final marker, UTF16 limit and Unicode boundary'
@@ -495,6 +501,8 @@ try{
     Reset-TestResponse 'r-fenced' @($accepted)
     Assert-Case ([string]::Equals((Invoke-TestResponse),$acceptedRaw,[StringComparison]::Ordinal)) 'Actual adapter accepts exact JSON from a measured fenced source'
     Assert-Case ($script:responseReads -eq 3 -and $script:responseSends -eq 1 -and $script:responseKeys -eq 4 -and $script:responseInserts -eq 1) 'Fenced success requires three stable reads after exactly one input and send sequence'
+    $completeTrace=ConvertFrom-Json ([IO.File]::ReadAllText(((Get-AgentCopilotAttemptPath $jobTemp 'r-fenced')+'.json')))
+    Assert-Case ($completeTrace.phase -ceq 'response_complete' -and $completeTrace.click_acknowledged -and $completeTrace.response_complete) 'Transport completion has durable timing and send-state evidence'
     Assert-Rejected {Invoke-TestResponse} 'RESPONSE_INVALID' 'Successful fenced request ID cannot be replayed'
     Assert-Case ($script:responseSends -eq 1 -and $script:responseInserts -eq 1) 'Replay rejection performs no second insert or send'
     function New-TestPartsCandidate([string]$RequestId,[int]$Width=4096){
