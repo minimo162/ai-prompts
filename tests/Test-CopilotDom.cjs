@@ -577,6 +577,60 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
     checks++;
     check((await expansionCounts()).more, 1, 'Refusing a second expansion preserves the first click count');
 
+    // A real 32px scroll-to-bottom control covered the 192px More button's center.
+    // Keep the overlay outside the owned response and exercise actual browser hit testing.
+    const addMoreCenterOverlay = () => {
+      const r = document.querySelector('.more-button').getBoundingClientRect();
+      const overlay = document.createElement('button');
+      overlay.className = 'more-center-overlay';
+      overlay.setAttribute('aria-label', '一番下までスクロール');
+      overlay.style.cssText = `position:fixed;left:${r.x + r.width / 2 - 16}px;top:${r.y + r.height / 2 - 16}px;width:32px;height:32px;min-width:0;min-height:0;padding:0;border:0;z-index:999;background:#ddd`;
+      window.moreOverlayClicks = 0;
+      overlay.addEventListener('click', () => { window.moreOverlayClicks++; });
+      document.querySelector('#fixture').appendChild(overlay);
+    };
+    const moreHitPoints = () => page.evaluate(() => {
+      const more = document.querySelector('.more-button'), r = more.getBoundingClientRect();
+      return [1 / 2, 1 / 4, 3 / 4].map(fraction => {
+        const hit = document.elementFromPoint(r.x + r.width * fraction, r.y + r.height / 2);
+        return !!hit && (hit === more || more.contains(hit));
+      });
+    });
+    const measuredMoreWidth = '.more-button{width:192px;min-width:192px}';
+    await renderExpansionAction(undefined, addMoreCenterOverlay, measuredMoreWidth);
+    check(await moreHitPoints(), [false, true, true], 'Measured 32px overlay blocks only the center, leaving both quarter points on the owned More');
+    check(await page.evaluate(expand), true, 'Partly covered More can expand through an uncovered quarter point');
+    check(await expansionCounts(), { more: 1, copy: 0, menu: 0, goto: 0, inputFocus: 0, keys: ['fenced-fixture'] }, 'Partial overlay permits one owned More click and no other action');
+    check(await page.evaluate(() => window.moreOverlayClicks), 0, 'The overlapping scroll-to-bottom control receives no click');
+    check((await page.evaluate(snapshot)).assistants[0], { key: 'fenced-fixture', text: expansionText, source_kind: 'fenced_plaintext', collapsed: false }, 'Partial-overlay expansion preserves the complete response and exact key');
+    await assert.rejects(() => page.evaluate(expand), error => error.message.includes('expand unavailable'), 'Partial-overlay expansion cannot be repeated');
+    checks++;
+    check((await expansionCounts()).more, 1, 'Partial-overlay retry rejection leaves the single click unchanged');
+
+    await renderExpansionAction(undefined, addMoreCenterOverlay, measuredMoreWidth);
+    await page.evaluate(() => {
+      const r = document.querySelector('.more-button').getBoundingClientRect(), overlay = document.querySelector('.more-center-overlay');
+      overlay.style.left = r.x + 'px'; overlay.style.width = r.width * 0.6 + 'px';
+    });
+    check(await moreHitPoints(), [false, false, true], 'A separate overlay leaves only the right quarter of More available');
+    check(await page.evaluate(expand), true, 'Right-quarter hit remains available when center and left quarter are covered');
+    check(await expansionCounts(), { more: 1, copy: 0, menu: 0, goto: 0, inputFocus: 0, keys: ['fenced-fixture'] }, 'Right-quarter fallback still emits exactly one owned More click');
+
+    for (const [label, setup] of [
+      ['fully covered', () => { const r = document.querySelector('.more-button').getBoundingClientRect(), overlay = document.querySelector('.more-center-overlay'); overlay.style.left = r.x + 'px'; overlay.style.width = r.width + 'px'; }],
+      ['hidden', () => { document.querySelector('.more-button').hidden = true; }],
+      ['disabled', () => { document.querySelector('.more-button').disabled = true; }],
+      ['unknown attribute', () => { document.querySelector('.more-button').setAttribute('title', 'unrecognized'); }]
+    ]) {
+      await renderExpansionAction(undefined, addMoreCenterOverlay, measuredMoreWidth);
+      await page.evaluate(setup);
+      if (label === 'fully covered') check(await moreHitPoints(), [false, false, false], 'Full overlay blocks all three permitted hit-test points');
+      await assert.rejects(() => page.evaluate(expand), error => error.message.includes('expand unavailable'), 'Quarter-point fallback cannot authorize More when ' + label);
+      checks++;
+      check(await expansionCounts(), noExpansionActions, 'Rejected partial-overlay state emits no owned UI actions: ' + label);
+      check(await page.evaluate(() => window.moreOverlayClicks), 0, 'Rejected partial-overlay state never clicks the covering control: ' + label);
+    }
+
     const otherId = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
     const otherJson = JSON.stringify({ request_id: otherId, state: 'BLOCKED', message: 'Earlier independent response ' + expansionMessage, robin: '', artifacts: [] });
     await renderExpansionAction(fencedReply(otherJson, 'AGENT_END_' + otherId, 'prior-fenced') + fencedReply(expansionJson) + span('<p><br></p>'));
@@ -809,6 +863,83 @@ const trustedUrl = 'https://m365.cloud.microsoft/chat/';
       await assert.rejects(() => page.evaluate(expandExpression('fenced-fixture', expectedText, requestId)), error => error.message.includes('expand unavailable') || (label === 'middle value missing despite contiguous indices' && error.message.includes('SyntaxError')), 'Multiline expansion rejects invalid or changed response identity: ' + label);
       checks++;
       check(await expansionCounts(), noExpansionActions, 'Invalid multiline response receives no action: ' + label);
+    }
+
+    // Observed capped expansion: 33 direct rows / 188 nodes, 3050px CSS height,
+    // 3070px client height and 4080px scroll content. Use only synthetic text.
+    const cappedRowsFor = (message, robin) => {
+      const rows = prettyRows(message, robin);
+      rows.splice(11, 0, ...Array.from({ length: 19 }, (_, index) => '      ' + JSON.stringify('C:\\fixture\\artifact-' + String(index + 1).padStart(2, '0') + '.txt') + (index < 18 ? ',' : '')));
+      return rows;
+    };
+    const cappedRobinPrefix = fixtureMessage + '  CAP_SCOPE EXPAND_ARGUMENTS REQUEST_ID RESPONSE_TEXT $& $$ $` $\' ';
+    const cappedRobin = cappedRobinPrefix + 'r'.repeat(8424 - ('    ' + JSON.stringify(cappedRobinPrefix) + ',').length);
+    const cappedMessagePrefix = fixtureMessage;
+    const cappedBaseRows = cappedRowsFor(cappedMessagePrefix, cappedRobin);
+    const cappedMessage = cappedMessagePrefix + 'm'.repeat(12560 - cappedBaseRows.slice(0, -1).join('\n').length);
+    const cappedRows = cappedRowsFor(cappedMessage, cappedRobin);
+    const cappedText = cappedRows.join('\n');
+    check({ rows: cappedRows.length, longest: Math.max(...cappedRows.map(row => row.length)), jsonLength: cappedRows.slice(0, -1).join('\n').length }, { rows: 33, longest: 8424, jsonLength: 12560 }, 'Synthetic capped fixture matches the measured complete row count and transport lengths');
+    const cappedTrackSizes = cappedRows.map((row, index) => index === 6 ? '840px' : index === 8 ? '2600px' : '20px').join(' ');
+    const cappedLayoutCss = '#fixture .fenced-reply{width:706px}.code-editor{grid-template-columns:38px minmax(0,1fr);grid-template-rows:' + cappedTrackSizes + ';padding:12px 0 8px;box-sizing:content-box;align-content:start;scrollbar-gutter:stable}.code-editor::-webkit-scrollbar{width:10px;height:10px}.code-line,.gutter{line-height:20px;font-family:monospace;font-size:14px}';
+    const cappedCss = cappedLayoutCss + '.code-editor{height:3050px;max-height:3050px;overflow:auto}';
+    const cappedTransitionCss = cappedLayoutCss + '.code-editor.expanded-code{height:3050px;max-height:3050px;overflow:auto}';
+    const cappedMetrics = () => page.locator('.code-editor').evaluate(editor => {
+      const rect = editor.getBoundingClientRect(), first = editor.querySelector('[data-line-index="0"]').getBoundingClientRect(), last = editor.querySelector('[data-line-index="32"]').getBoundingClientRect();
+      return { height: getComputedStyle(editor).height, maxHeight: getComputedStyle(editor).maxHeight, overflow: getComputedStyle(editor).overflow, rectHeight: rect.height, rectWidth: rect.width, clientHeight: editor.clientHeight, scrollHeight: editor.scrollHeight, scrollTop: editor.scrollTop, clientWidth: editor.clientWidth, scrollWidth: editor.scrollWidth, scrollLeft: editor.scrollLeft, offsetHeight: editor.offsetHeight, offsetWidth: editor.offsetWidth, firstTop: first.top - rect.top, lastBottom: last.bottom - rect.top, lastBelowClient: last.bottom > rect.top + editor.clientHeight, lastBelowViewport: last.bottom > innerHeight };
+    });
+    const expectedCappedMetrics = { height: '3050px', maxHeight: '3050px', overflow: 'auto', rectHeight: 3070, rectWidth: 706, clientHeight: 3070, scrollHeight: 4080, scrollTop: 0, clientWidth: 696, scrollWidth: 696, scrollLeft: 0, offsetHeight: 3070, offsetWidth: 706, firstTop: 12, lastBottom: 4072, lastBelowClient: true, lastBelowViewport: true };
+    response = await renderExpanded(expandedRows(cappedRows), null, cappedCss);
+    check(await cappedMetrics(), expectedCappedMetrics, 'Rendered synthetic DOM reproduces measured capped editor scroll and content geometry');
+    check((await expansionShape()).nodeCount, 188, 'Capped expansion retains the complete known 188-node topology');
+    check((await expansionShape()).rowValues, cappedRows, 'All 33 capped rows remain present even below the client rectangle and viewport');
+    check(response.state.assistants[0], { key: 'fenced-fixture', text: cappedText, source_kind: 'fenced_plaintext', collapsed: false }, 'Measured capped expansion returns every complete direct row without treating viewport clipping as missing data');
+    check(JSON.parse(response.state.assistants[0].text.split('\n').slice(0, -1).join('\n')), { request_id: requestId, state: 'BLOCKED', message: cappedMessage, robin: cappedRobin, artifacts: Array.from({ length: 19 }, (_, index) => 'C:\\fixture\\artifact-' + String(index + 1).padStart(2, '0') + '.txt') }, 'Capped transport roundtrips exact Unicode, escaping, strings and all array entries');
+
+    await renderExpansionAction(fencedRows(cappedRows) + span('<p><br></p>'), null, cappedTransitionCss);
+    check((await page.evaluate(snapshot)).assistants[0], { key: 'fenced-fixture', text: cappedText, source_kind: 'fenced_collapsed', collapsed: true }, 'A capped-transition fixture starts in the known folded state');
+    const cappedOperation = expandExpression('fenced-fixture', cappedText, requestId);
+    check(await page.evaluate(cappedOperation), true, 'One production More click can transition into the measured capped expansion');
+    check(await expansionCounts(), { more: 1, copy: 0, menu: 0, goto: 0, inputFocus: 0, keys: ['fenced-fixture'] }, 'The capped transition performs no extra UI operation');
+    check(await cappedMetrics(), expectedCappedMetrics, 'The actual More handler produces the complete capped scroll geometry');
+    check((await page.evaluate(snapshot)).assistants[0], { key: 'fenced-fixture', text: cappedText, source_kind: 'fenced_plaintext', collapsed: false }, 'After one capped expansion all original response characters remain identical');
+    await assert.rejects(() => page.evaluate(cappedOperation), error => error.message.includes('expand unavailable'), 'Recognized capped expansion cannot receive a second More click');
+    checks++;
+    check((await expansionCounts()).more, 1, 'Rejecting a second capped expansion leaves the click count unchanged');
+
+    for (const [label, setup, css] of [
+      ['maximum height 3049', null, '.code-editor{max-height:3049px}'],
+      ['maximum height 3051', null, '.code-editor{max-height:3051px}'],
+      ['visible overflow', null, '.code-editor{overflow:visible}'],
+      ['hidden overflow', null, '.code-editor{overflow:hidden}'],
+      ['scroll overflow', null, '.code-editor{overflow:scroll}'],
+      ['horizontal overflow hidden', null, '.code-editor{overflow-x:hidden}'],
+      ['vertical scroll offset', () => { document.querySelector('.code-editor').scrollTop = 1; }],
+      ['horizontal overflow', null, '.code-editor{grid-template-columns:38px 700px}'],
+      ['horizontal scroll offset', () => { document.querySelector('.code-editor').scrollLeft = 1; }, '.code-editor{grid-template-columns:38px 700px}'],
+      ['scaled rectangle', null, '.code-editor{transform:scale(.99);transform-origin:top left}'],
+      ['content rectangle shorter than its final row', () => { const editor = document.querySelector('.code-editor'); Object.defineProperty(editor, 'scrollHeight', { value: editor.clientHeight + 1, configurable: true }); }],
+      ['no scroll content beyond client', () => { const editor = document.querySelector('.code-editor'); Object.defineProperty(editor, 'scrollHeight', { value: editor.clientHeight, configurable: true }); }],
+      ['zero client height', () => Object.defineProperty(document.querySelector('.code-editor'), 'clientHeight', { value: 0, configurable: true })],
+      ['zero client width', () => Object.defineProperty(document.querySelector('.code-editor'), 'clientWidth', { value: 0, configurable: true })],
+      ['row beyond scroll content', null, '[data-line-index="32"]{position:fixed;top:5000px}'],
+      ['row left of client content', null, '[data-line-index="6"]{position:relative;left:-40px}'],
+      ['detached middle row', () => document.querySelector('[data-line-index="16"]').remove()],
+      ['missing middle pair', () => { const row = document.querySelector('[data-line-index="16"]'); row.previousSibling.remove(); row.remove(); }],
+      ['missing middle index', () => document.querySelector('[data-line-index="16"]').removeAttribute('data-line-index')],
+      ['duplicate middle index', () => document.querySelector('[data-line-index="16"]').setAttribute('data-line-index', '15')],
+      ['noncanonical middle index', () => document.querySelector('[data-line-index="16"]').setAttribute('data-line-index', '016')],
+      ['missing middle gutter', () => document.querySelector('[data-line-index="16"]').previousSibling.remove()],
+      ['unknown middle attribute', () => document.querySelector('[data-line-index="16"]').setAttribute('title', 'unrecognized')],
+      ['wrapped middle value', () => { const row = document.querySelector('[data-line-index="16"]'); const wrapper = document.createElement('span'); wrapper.textContent = row.textContent; row.replaceChildren(wrapper); }],
+      ['unknown middle text node', () => document.querySelector('[data-line-index="16"]').appendChild(document.createTextNode(''))],
+      ['unknown extra editor node', () => document.querySelector('.code-editor').appendChild(document.createComment('unknown'))],
+      ['unknown extra response node', () => document.querySelector('.fenced-reply').appendChild(document.createElement('span'))],
+      ['wrong expanded label', () => document.querySelector('.more-button').setAttribute('aria-label', 'その他の行を表示する')],
+      ['unrecognized holder layout', null, '.more-holder{display:block}']
+    ]) {
+      response = await renderExpanded(expandedRows(cappedRows), setup, cappedCss + (css || ''));
+      check(response.state.assistants[0].source_kind, 'rendered', 'Reject an incomplete or unmeasured capped state: ' + label);
     }
 
     for (const [url, message] of [

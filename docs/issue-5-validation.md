@@ -4,6 +4,11 @@
 
 2026-09-06 11:13 JST追記: 複数行JSONの既知DOM取得と既存More操作、PlannerのRobin/JSONパス表記・同一出力への重複Write禁止、IF/ELSE後の`Keys`変数の確定代入判定を統合した。App SHAは `f2449a5f14cfb523f4cc77e7e48691b6687275f10acdaa815a4b436bf79262fc`、配布releaseは `0.1.0-0b7bc16475f5b5c861886ce6f051efc0ea2c52673c543c0add121cc039ca3c14`。統合した実ソースに対しWindows PowerShell 5.1 x64 STAでcore 137 / Copilot 232 / PAD 320、通信をすべてローカルで応答する独立EdgeでDOM 687チェックが通過した。独立ソースレビューはSHIP・must-fixなし。coreテストの最初の相対パス起動は既存の既定引数評価で失敗し、絶対AppSourcePathを指定した実ソースで完了した。共有・通常キャッシュへの反映と新しい実Copilot/PAD検証はこの時点では未実施。単一JSON文字列の1行が10,000文字を超える場合の完全取得は保証していない。
 
+同日11:28 JST、コミット `cf00c1b` の上記版を実共有UNCへ反映し、そのCMDから通常のローカル版を更新した。共有公開 `.work/gate0/publish-pinned-source/ba520ce4f94b46d78d7f4fe2d416f2b8/result.json` はPASS（SHA `7f6f7b9b41156665be17c85f5112fbd02ee8a4d2d007a2ced6818ed2b31b938f`）。Appの置換1回、旧3ファイルのバックアップ、ローカル共有/UNCの新hash・バックアップの旧hash、既存共有の構成とACL保持を確認した。通常更新 `.work/gate0/normal-updates-pinned-source/2337e9fc5bf74a47b166334740c35024/result.json` もPASS（SHA `c08a43ed54f2e2903e823da42aa96a3dd4ae202a58fad1222222c96b84d0642c`）。旧server終了後のUNC CMD1回・exit0、新server PID32660 / `2026-09-06T02:28:02.7613149Z` / port49672、新App hash一致、既存239ファイル（normal185/private51/archive3）の保持を確認した。更新手順自体のprovider/PAD操作は0。
+
+共有更新用ヘルパーの先行2試行は別記録で保存した。最初は準備前に停止し、追加引数`OldRelease`と同名のローカル変数の衝突を純粋再現して改名した。元例外はハッシュのみの保存で、完全な同一性は確定していない。次の試行はPowerShell 5.1の`File.Replace`への`$null`引数で置換前に失敗し、共有/UNC/バックアップは旧hashのままだった。元結果を変更せず、NullStringを使う最小修正をローカルの実ファイル置換で確認してから、新しいIDによる上記公開に成功した。これは更新用検証ヘルパーの修正であり、配布アプリ本体の追加変更ではない。
+
+同日追記: 上記長文の実DOMは33行・188ノード・12,635 UTF-8バイトが完全に存在していた。展開後も `maxHeight=3050px / overflow=auto` となる実測状態を追加認識し、全行がスクロール内容の矩形内にあることを確認する。別のDONEではMoreの中央だけに32pxの「一番下までスクロール」ボタンが重なっていたため、中心の既存viewport条件を保ち、同じMore内の左右1/4の2点だけを追加確認する。単回クリック、nonce、全文、既知DOM、可視性の検証は維持する。修正後App SHAは `871389ed29500e337c243daff4d1729433b19e4d3399e888debfcf6617cb9fcc`、releaseは `0.1.0-2d7754fb1622a94dcace8623dd48a549ddc599a421f09dafa033b1fb7a69cde4`。統合DOM752件とcore137件、Copilot232件はPASS。候補と元のunknown/failedを保持し、新しい実行による確認は別記する。
 [Issue #5](https://github.com/minimo162/ai-prompts/issues/5) 本文と全コメント（0件）を確認して実装した。ブランチは `codex/issue-5-business-agent`。この記録は成功条件の達成宣言ではない。
 
 ## 実装した範囲
@@ -17,8 +22,8 @@
 | 検証 | 証拠と範囲 |
 |---|---|
 | Windows PowerShell 5.1 契約検証 | `tests/Test-App.ps1` **137 PASS**。Copilot/PADを模擬し、要求・結果・観測・再計画・パス境界・同期と実計画/AiCallプロンプトを検査する。実サービスの証拠ではない。 |
-| Copilotアダプター | `tests/Test-Copilot.ps1` **215 PASS**。CDP応答を模擬し、全文・ID・終端・生成終了・排他・ジョブ分離・異常分類、起動タブの終了と他タブの保持、送信前busy待機、実送信本文の2行契約と入力・送信の再試行禁止を検査する。本番Robin検証器で受理したReadText/WriteTextフローと約6万文字の長文をJSON復号し、原文との完全一致も確認。隔離Edgeの `tests/Test-CopilotDom.cjs` は **618 PASS**。実M365の翻訳診断では送信1回から厳格な応答取得・再読取り一致まで成功した。固定PADの正常完走とは分けて下記に記録する。 |
-| PADアダプター | `tests/Test-Pad.ps1` **302 PASS**。UI/クリップボード境界を模擬し、全文一致・所有権・失敗時の旧フロー実行拒否・結果帰属を検査する。状態別のUI構造、20種類の状態ID、保存・実行・中止、実ファイルに生成した2件のAiCallテンプレートとRobinの検証も本番関数で確認。実機の固定A/Bは下記に分けて記録する。 |
+| Copilotアダプター | `tests/Test-Copilot.ps1` **232 PASS**。CDP応答を模擬し、全文・ID・終端・生成終了・排他・ジョブ分離・異常分類、起動タブの終了と他タブの保持、送信前busy待機、実送信本文の2行契約と入力・送信の再試行禁止を検査する。本番Robin検証器で受理したReadText/WriteTextフローと約6万文字の長文をJSON復号し、原文との完全一致も確認。隔離Edgeの `tests/Test-CopilotDom.cjs` は **752 PASS**。実M365の翻訳診断では送信1回から厳格な応答取得・再読取り一致まで成功した。固定PADの正常完走とは分けて下記に記録する。 |
+| PADアダプター | `tests/Test-Pad.ps1` **320 PASS**。UI/クリップボード境界を模擬し、全文一致・所有権・失敗時の旧フロー実行拒否・結果帰属を検査する。状態別のUI構造、20種類の状態ID、保存・実行・中止、実ファイルに生成した2件のAiCallテンプレートとRobinの検証も本番関数で確認。実機の固定A/Bは下記に分けて記録する。 |
 | localhost HTTP | `tests/Test-Http.ps1` PASS。実App.ps1プロセスでHTML/状態、トークン/Host/Origin拒否、不完全本文の期限、再接続、設定保持、重複回答・古い質問への回答拒否、版の引き継ぎ、停止を確認。 |
 | 実ブラウザー | `tests/Test-Ui.cjs` 15 PASS。実Edgeの1280×900・390×844で入力→未接続エラー→再表示、トークン除去、同ジョブ再接続、横溢れ・JavaScriptエラーなしを確認。質問ID・Copilotジョブ分離変更を含む不変版 `a00bca7` でも再実行し、両幅のPNGを目視確認した。証跡は `.work/ui-after-question-fix-66edd1690c8a4978aae727d6e5a31807/`。隔離サーバーは専用の終了APIで停止した。 |
 | 実際のCMD | リポジトリ上のCMDから実LOCALAPPDATAへ同期し、ローカルApp.ps1のHTTP応答を確認。Chromeにアプリタイトルのウィンドウが現れた。最終統合版も `Bootstrap -NoBrowser` で同期し、実LOCALAPPDATAのサーバー応答と作業コピーのApp.ps1ハッシュ一致を確認した。共有UNCからの検証は下記Gate 0記録に分ける。 |
@@ -35,9 +40,9 @@
 | 0: 配布・起動 | 実共有UNCからの初回・更新、欠落UNC時の警告付きローカル起動は合格 | 実共有の切断、利用者環境での再起動・UI停止 |
 | 1: 固定PADからAiCall | 正常系合格。実PADから翻訳→分類の直列2回、結果受渡し、review分岐と出力を確認 | 拒否/空/期限/中止の実機異常系 |
 | 2: AIなしのA/B差し替え | 正常系A/B合格。実行中の別controllerをPAD_BUSY・UI操作0で拒否し、元の実行を中止・出力抑止する動作を確認。検証helperの集計不具合により追試全体はunknownで保持 | 保存失敗などを意図的に起こした場合の旧フロー実行防止。実貼付後の異常でRun前に停止した過去証拠は下記 |
-| 3: 生成Robin全文取得 | 新規短文の自動展開・881文字の完全取得が合格。約5.8万文字は空コード、24件の長文は時間切れ | 長文表示の10,000文字行とコピー内容の比較、完全取得、過去回答・途中停止 |
-| 4: 生成AiCallフロー | Copilot生成の読取→AiCall翻訳→書出しが実PADで合格 | 分類結果による分岐を含む生成フローの完走 |
-| 5: 2〜3往復 | 実HTMLからASK_USER→回答→ACT→AiCall/PAD→DONEが合格。別依頼のBLOCKEDも合格 | 実結果本文に応じて次のRobinを変える複数ACTの往復 |
+| 3: 生成Robin全文取得 | 短文881文字は製品で合格。新長文の33行・JSON12,560文字は読み取り専用診断で完全取得したが、製品は展開後の高さ上限を拒否 | 3050px上限付きスクロール状態への対応と製品での長文取得。単一行10,000文字超の制約も残る |
+| 4: 生成AiCallフロー | Copilot生成の翻訳→書出しに加え、分類→IF分岐→書出しも実PADで成功 | 分類ジョブ全体のDONE取得はGate 5で未完了 |
+| 5: 2〜3往復 | ASK_USER→回答→ACT→AiCall/PAD→DONEとBLOCKEDは合格。分類の2ACTも実結果を読み直して最終ファイルを生成 | 複数ACT後のDONE回答の展開と完了表示 |
 | 6: 別利用者・別PC | 未検証 | 開発環境に依存しない導入・更新・認証・結果確認 |
 
 2026-09-06に利用者の許可とWindowsの管理者承認を経て、専用共有 `\\localhost\AiPromptsAgentPoC$` を作成した。共有範囲は `.work/shares/AiPromptsAgentPoC` の配布3ファイル、SMB権限は利用者本人の読み取り1件で、NTFS権限・サービス・ファイアウォールは変更していない。最初の承認後試行は共有作成前のファイル名照合で失敗した。作成スクリプトがBOMなしUTF-8だったため、Windows PowerShell 5.1が日本語CMD名を誤読していた。本文を変更せずUTF-8 BOMを付け、旧版の保存と独立した構文・ファイル名照合確認後に成功した。作成・UNC読取の証拠は `.work/gate0/share-create-6a7c02fc14f34586b7c7a5cb32def3c4.json` と `share-verified-6a7c02fc14f34586b7c7a5cb32def3c4.json`。
@@ -261,3 +266,7 @@ UIテストは開発用PlaywrightとEdgeを使う。Copilotへ接続していな
 GitHub Actionsは未設定・未実行。PR作成・マージ・Issueの完了更新は行っていない。
 
 PAD操作の追加修正は独立コードレビューで BLOCKER 0 / MUST FIX 0。固定A/Bの実機検証に進めるとの判断であり、Issue全体の完了・マージ可能性を示すものではない。実機ゲート不足は未解決のまま保持する。
+
+2026-09-06 11:30以降のcf00c1b実機検証: 長文session `7826aacf1fed4a0e8e8ad1c39e9b1597` は単一要求後に `RESPONSE_INVALID/unknown` で停止し、PAD0・旧ファイル/所有タブ保持を確認した（result SHA `cf3f5fa368809e97ecba13702f5d880f53aa9e60950a59d42b0d831ff0bf7628`）。同じ応答の読み取り専用2観測では全188ノード・33論理行が一致し、JSON12,560文字・最長行8,424文字・厳密JSON/nonceは完全だった。保存証拠 `.work/gate3/long-pretty-observation-aceb801b39134ea8aa431206e7048521.json` のSHAは `d477616fc8b5217fae5e3a506ef3e67508b9713f75b477a5eba229a4bd2c9ed2`。『簡易表示』でもeditorがmaxHeight=3050px/overflow=autoで、末尾行が可視枠外に残るため、現在の全面内包条件を満たさずrenderedへ戻っていた。今回の失敗を10,000文字での切断とは扱わない。元の製品結果は変更せず、この実測状態に限定した修正候補を準備中。
+
+分類session `0d882e301e7c495a972efa4082fcc9eb` は実HTMLからStart1回、job `351437fe00e343c5be53fcbca810e70a` のAiCall `8d617876c2e94e0895f5c5a018d4e7b2` がsuccess/reviewを返し、実PADの2段階（run `74c9336b08ec44819f579f76be0ba064` と `0d670b045a254c60ad4bf0bbb48e5e19`）は双方successになった。2回目の異なる生成Robinは最初のclassification.txt/review-draft.txtを読み直して分岐する。review-draft.txtとfinal-review.txtは83バイト・同一SHA `271fe047a97061f8eb4f3f2fd9a14d99973059fed1714a4256272da4ce2b4a5d`、UTF-8読取り後の本文は元メモとOrdinal完全一致した。normal側の成果物は存在しない。読み取り専用の補足検証は `two-act-artifacts-posthoc.json`（SHA `5662fb5b566f58f718bb35889a287f87b2a72238e1fef4eb75d1ba72d088a7b9`）。ただし最後のDONE要求 `67ca6fda77a146c3ba1b665bddd45de0` が単回展開を確認できずfailedになり、画面はその失敗と一致した。ヘルパー全体もpartialのまま保持する（result SHA `e5c40a82c5fe9be9e5136e70a97acfc1bb9cb26a8185da882c7dfaa0ad71eee3`）。旧ファイル/所有記録/タブ保持・worker終了を確認済み。DONEの604文字は最終2snapshotで同じfenced_collapsedとして残っており、別の読み取り専用診断で具体的な展開拒否条件を調査中。

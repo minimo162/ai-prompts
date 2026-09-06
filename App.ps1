@@ -1160,7 +1160,14 @@ const fencedResponse=e=>{
     const hidden=holderStyle.display==='none'&&controlLabel==='その他の行を表示する';
     const folded=holderStyle.display==='flex'&&controlLabel==='その他の行を表示する'&&editorStyle.maxHeight==='300px'&&editorStyle.overflow==='auto'&&editorStyle.overflowX==='auto'&&editorStyle.overflowY==='auto'&&rowRects[rowRects.length-1].bottom>editorRect.bottom;
     const expanded=holderStyle.display==='flex'&&controlLabel==='簡易表示'&&editorStyle.maxHeight==='none'&&editorStyle.overflow==='visible'&&editorStyle.overflowX==='visible'&&editorStyle.overflowY==='visible'&&rowRects.every(r=>r.left>=editorRect.left&&r.right<=editorRect.right&&r.top>=editorRect.top&&r.bottom<=editorRect.bottom);
-    if(!hidden&&!folded&&!expanded)throw 0;
+    // Measured long replies retain every logical row after More while the editor is capped at 3050px.
+    // Recognize only this scrollable state, with all known rows inside its complete content area.
+    const contentLeft=editorRect.left+editor.clientLeft,contentTop=editorRect.top+editor.clientTop;
+    const expandedScrollable=holderStyle.display==='flex'&&controlLabel==='簡易表示'&&editorStyle.maxHeight==='3050px'&&editorStyle.overflow==='auto'&&editorStyle.overflowX==='auto'&&editorStyle.overflowY==='auto'&&
+      editor.scrollTop===0&&editor.scrollLeft===0&&editor.clientHeight>0&&editor.scrollHeight>editor.clientHeight&&editor.clientWidth>0&&editor.scrollWidth===editor.clientWidth&&
+      editorRect.height===editor.offsetHeight&&editorRect.width===editor.offsetWidth&&rowRects[rowRects.length-1].bottom>editorRect.bottom&&
+      rowRects.every(r=>r.left>=contentLeft&&r.right<=contentLeft+editor.clientWidth&&r.top>=contentTop&&r.bottom<=contentTop+editor.scrollHeight);
+    if(!hidden&&!folded&&!expanded&&!expandedScrollable)throw 0;
     const path=[e,wrapper,inner,group,container,code,body,viewport,findRoot,editor,...rows];
     const displays=['block','flex','block','block','block','flex','flex','flex','flex','grid',...rows.map(()=>'block')];
     if(path.some((n,i)=>{const s=getComputedStyle(n);return !visible(n)||n.hidden||n.getAttribute('aria-hidden')==='true'||s.display!==displays[i]||s.visibility!=='visible'||s.opacity!=='1'||s.contentVisibility!=='visible';}))throw 0;
@@ -1226,7 +1233,8 @@ if(controls.length!==1||controls[0]!==more||more.disabled||more.getAttribute('ar
 for(let n=more;n;n=n.parentElement){const s=getComputedStyle(n);if(n.hidden||n.getAttribute('aria-hidden')==='true'||s.display==='none'||s.visibility!=='visible'||s.opacity!=='1'||s.contentVisibility!=='visible'||s.pointerEvents==='none')throw new Error('expand unavailable');}
 const r=more.getBoundingClientRect(),x=r.x+r.width/2,y=r.y+r.height/2;
 if(r.width<=0||r.height<=0||x<0||y<0||x>=innerWidth||y>=innerHeight)throw new Error('expand unavailable');
-const hit=document.elementFromPoint(x,y);if(!hit||(hit!==more&&!more.contains(hit)))throw new Error('expand unavailable');
+const hitsMore=(px,py)=>{const hit=document.elementFromPoint(px,py);return !!hit&&(hit===more||more.contains(hit));};
+if(!hitsMore(x,y)&&![r.x+r.width/4,r.x+3*r.width/4].some(px=>px>=0&&px<innerWidth&&y>=0&&y<innerHeight&&hitsMore(px,y)))throw new Error('expand unavailable');
 HTMLButtonElement.prototype.click.call(more);return true;
 '@
     $arguments=@{key=$ResponseKey;text=$ExpectedText;request_id=$RequestId}|ConvertTo-Json -Compress

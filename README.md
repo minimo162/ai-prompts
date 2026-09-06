@@ -18,6 +18,8 @@ index.html
 
 必要な環境は Windows、Windows PowerShell 5.1、Microsoft Edge、PAD、M365 Copilotを利用できるアカウントです。Node、Python、独自EXE、常駐サービスは配布に不要です。認証は利用者が行います。組織で禁止されている接続・実行をアプリが解除することはありません。ランチャーは自分のPowerShellプロセスだけに実行ポリシー引数を指定し、永続設定やグループポリシーを変更しません。
 
+現在はPADとM365 Copilotを日本語表示で使用してください。他言語の画面は未検証です。ChatGPTのブラウザー拡張機能は不要です。
+
 初回の準備:
 
 1. HTML画面の「設定・接続確認」で「Copilot を開く」を押し、アプリ専用のEdgeでM365 Copilotへサインインします。既存の個人ブラウザープロファイルは流用しません。
@@ -52,7 +54,7 @@ AI応答からコードフェンスや正当なバックスラッシュを削除
 
 確定した失敗は次の判断へ返します。同じ失敗手順を新しい実行IDに置き換えただけのACTは拒否します。比較時にだけアプリ発行のパス・IDを置き換え、実行するRobin本文は変更しません。結果不明・中止はそのまま終了します。
 
-Copilotへ送信するタブはジョブごとに新規作成し、同じジョブの計画とAiCallで使います。サインイン用や以前のジョブのタブは送信先に流用しません。最初の送信前に過去の回答や下書きが見つかれば停止します。この分離の実M365での確認は残っています。
+Copilotへ送信するタブはジョブごとに新規作成し、同じジョブの計画とAiCallで使います。サインイン用や以前のジョブのタブは送信先に流用しません。最初の送信前に過去の回答や下書きが見つかれば停止します。ジョブごとのタブ分離は実M365で確認済みです。
 
 ローカルHTTP APIは `127.0.0.1` に限定します。ページの起動トークン、Host、Originを検査し、任意ファイル配信APIは設けません。画面の表示文字列はDOMのテキストとして描画します。
 
@@ -61,7 +63,7 @@ Copilotへ送信するタブはジョブごとに新規作成し、同じジョ�
 Appのロジックは1つのPS1内の関数です。`-Mode Library` は関数を読み込むだけで、サービス起動やCopilot/PAD操作は行いません。テスト・説明書は配布ファイルには含めません。
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-App.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-App.ps1 -AppSourcePath "$PWD\App.ps1"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Copilot.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Pad.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Http.ps1
