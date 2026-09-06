@@ -1,6 +1,14 @@
 ﻿# Issue #5 引き継ぎ（2026-09-06）
 
-状態は **実装済みPoC・実機ゲート未完了**。Issue #5を閉じず、残りの検証と必要な修正を続ける。今回のマージはユーザーが指定した途中成果の保存であり、全要件の受入完了ではない。
+状態は **実装済みPoC・実機ゲート未完了**。Issue #5を閉じず、残りの検証と必要な修正を続ける。過去のPR #6のマージは途中成果の保存であり、全要件の受入完了ではない。
+
+## GitHubでの引き継ぎ（今回の最新）
+
+- 作業ブランチをpushし、[ドラフトPR #7](https://github.com/minimo162/ai-prompts/pull/7) を作成した。mainへのマージはしていない。GitHub Actionsは未設定で、PRのcheck一覧は空。
+- [社内PC確認用のドラフトRelease](https://github.com/minimo162/ai-prompts/releases/tag/untagged-9f3591bbed1fcc24cfb2) に、`AiPromptsAgent-0.1.0-1c981c6.zip`、`manifest.json`、`corporate-pc-check.md` を添付した。対象コミットは `1c981c6dd53d75b2c8f11659c0364820fb0cf349`、Appは通常配布済み45f版。正式公開・受入完了とは扱わない。
+- ZIP SHAは `12ae88a7dca77f010810cf0c475cde87a4edac22f62af4a979a13119e706ca54`。3ファイルのみで、GitHubからダウンロードし直したZIPの各entryと、manifest/手順書をローカル原本と照合してPASS。証拠は `.work/distributions/issue-5-poc-1c981c6-7dfece3733a14043ac1d2cb269607c70/github-upload-verification.json`。過去の候補は保持した。
+- 最新版の正常業務・実M365送信後timeout/中止は以下のとおりPASS。残りは社内PC/別利用者の実機受入、PAD自身のnative Save失敗。社内PCへはこの環境から接続できないため、添付手順での初回起動・更新・分類業務の結果、Windows/PAD版、エラー表示をユーザーへ依頼した。
+- 過去のクリップボード例外の根本原因は未確定。失敗証拠を保持し、後続PASSをその原因解消の証明としない。現在のPAD ownerは7093/Main比較b5e7（下記の完全SHA）。
 
 ## 22:24 JSTの最新版正常業務
 

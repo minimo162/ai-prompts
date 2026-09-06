@@ -2,6 +2,8 @@
 
 2026-09-06 / 状態: **partial — 実機ゲート未完了**。
 
+GitHubへの途中成果保存: [ドラフトPR #7](https://github.com/minimo162/ai-prompts/pull/7)、[ドラフトRelease](https://github.com/minimo162/ai-prompts/releases/tag/untagged-9f3591bbed1fcc24cfb2) を作成。Release対象は `1c981c6dd53d75b2c8f11659c0364820fb0cf349`、配布Appは検証済み45f版。3ファイルZIP、manifest、社内PC確認手順を添付し、GitHubからダウンロードした全添付とZIP内3entryのSHA一致を確認した。ZIP SHA `12ae88a7dca77f010810cf0c475cde87a4edac22f62af4a979a13119e706ca54`。公開版や他PC合格とは扱わない。PR check一覧は空で、GitHub Actionsは未設定。IssueはOPEN、mainへのマージは未実施。
+
 同日22:29 JST、**実M365送信後の中止もPASS**。`.work/gate1-postsend-cancel-965937aac9a2404bb769858d2e1c71e4/`、job `6f2c544af5b841d8b3eb6fddea52db2a`、result SHA `f2609fc66750e46796d0e515a766e64001845899683df8db31143edd68079e4e`。固定PADの実行1回後、同版Appを読む別監視プロセスが開始ID・AiCall claim・送信クリック応答後のhas_sentを確認して中止ファイルをCreateNewで1回作成した。製品PAD停止1回、子結果cancelled/入力1/出力0、制御cancelled/CANCELLED、成功本文・後続成果物・完了マーカーなし。元Main復元・保存各1回/復元実行0、既存ファイル/ページ/owner/clipboard保全、監視・子・検証プロセス終了を確認。プロバイダー関数の差替えなし。実UI停止ボタンの押下とは区別する。
 
 同日22:24 JST、**最新App45f版の正常業務通しはPASS**。session `.work/normal45f-2eac8de5df4f482ab234974c189c7b99/classify-sessions/d131679abeca4f28ba7bf44f03c0e9da/` / job `7b289291994e47699a3aedb81721e374`。実HTML開始1/HTTP200→V2 ACT→実PAD内V1分類review→下書き→観測を受けた別V2 ACT→実PAD2回目→V2 DONE。result SHA `d54d4c15eda3c3641976aa140cce7850e5d6f7749fb7c08ed90b96bdb5f80f29`。PAD2/AiCall1、異なる生成Robin、4応答の独立2読取り、旧ファイル/owner/タブ/attempt帰属保全、worker終了、最終UI一致が合格。最終ファイル83バイト/SHA `271fe047a97061f8eb4f3f2fd9a14d99973059fed1714a4256272da4ce2b4a5d` は下書きと同一。UTF-8読取り後は入力と末尾LFを含めOrdinal完全一致し、バイト差はBOMだけ。normal側出力なし。
