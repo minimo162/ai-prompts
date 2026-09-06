@@ -1,6 +1,16 @@
 # Issue #5 検証記録
 
 2026-09-06 / 状態: **partial — 実機ゲート未完了**。
+同日14:24 JST、AiCallメタデータの生成指示を本体へ反映した。App SHA `f040085c1f3c96aa910a314cbf498a62656e82b8cd2a75f5a3ca176076ffdf30`。変更はPlanner指示2段落のみで、テンプレート呼出しに対応する `ai_calls` の必須条件を明記した。parser・schema・Robin検証・要求作成権限は不変。最終候補と本体のhash一致、native core137/Copilot302/PAD320、欠落・空配列・宣言付き対照ケース15件のPASS、独立レビューSHIPを確認した。最初の候補は既存の文面一致テストで失敗し、元文を保って同じ段落へ必須条件を追記した。元候補・結果も保持。証拠は `.work/gate3/ai-call-metadata-candidate/validation.json` と同report。共有更新と新版実機分類はこの時点で未実施。
+
+4ブロックを明示した同じ24 Write試験 `cc43392735074d4fae67c45f6c77d2e1` は、送信1・180秒で `unknown/RESPONSE_TIMEOUT`。終了後の読取専用観測 `Observe-PracticalFourFrameTimeout-6985dffdc96b4b179d9801905d6e1762.json` は14:23 JSTに、プロトコルmarkerを含まない生成拒否の本文が2回一致した。Copilotは厳密なマルチパート形式と完全一致生成要求に対応できないと回答した。原結果・旧データ・タブを保持し、追加送信・PAD・More・focus・scroll・clipboard操作0。この負荷での長文生成の安定性は未解決であり、成功扱いしない。
+
+同日14:12 JST追記: コミット `54bb3e5` の8192文字対応版を共有と通常起動版へ反映した。公開 `5405a47dc9644e4b950b1071337f5c29` と通常更新 `1b70cd9cd42a4a6785fb7f9ddcd848f2` はPASS。332ファイル（normal278/private51/archive3）、PAD owner/content、共有ACLを保持し、新server PID11132/port61243でApp SHA `7bed68c3…` が一致した。証拠は `.work/gate0/release-update-54bb3e5-summary.json`。分類用起動補助の初回は日時をロケール表記で渡したため引数検証で停止し、UI/provider/PAD操作前の失敗を保存した。ISO形式に修正した別セッションで以下を実施した。
+
+分類試験 `139fa42459ae4355a2ae6ae84defad41` は実HTML開始1回・HTTP200からACTを完全取得したが、`ROBIN_ACTION` でPAD反映前に停止した。保存した2観測のpayloadは3811文字、frame3971文字で一致。純粋PS5診断ではJSON・改行・パス・AiCallアクションそのものは正しく、回答に `ai_calls` が欠けていたため承認済みテンプレートと要求ファイルを作れないことが原因だった。元結果は `partial/G45_JOB_NOT_DONE`、末尾の `G45_PRESERVATION_UNCONFIRMED` も保持する。実UIとjob終了・worker停止、旧ファイル・PAD owner保持を確認した。診断は `.work/gate3/frame8192-generation-diagnosis/report.md`。メタデータの推測や応答修復は行わず、生成指示2段落の明確化を候補で検証中。
+
+24 Write長文試験 `899979974a8e47e7b3d250f6e7c0a9b5` は送信1回・180秒で `unknown/RESPONSE_TIMEOUT`、raw未保存、PAD/再送0、保全成功。終了後の読取専用観測 `Observe-Practical8192Timeout-5bea5424f0e84e7687e7d9fee9e90552.json` は14:10 JSTに2回一致した。回答はACTの1/1フレームで、DATA物理行は10000文字、payload9989文字、`long-009` のパス途中で切れた未完JSONだった。終端markerは存在した。8192上限超過と欠落のある回答を実行していない。切断の発生層、元の期限以前の状態は未確定。24ファイル保持、追加送信・More・scroll・focus・clipboard・PAD操作0であり、この観測を長文取得成功へ読み替えない。
+
 同日13:51 JST、上記候補を本体へ適用し、検証済みと同じApp SHA `7bed68c365fb8b3b328dba365bc8498764dbf0629a3bf7051f5cbe19749c525f` およびテスト2ファイルのhash一致を確認した。payload上限8192、DOM行上限8203、最大frame8648へ変更し、全体1048576・最大256ブロック・厳密な順序/nonce/終端/3回安定読取りは維持した。検証は受信アプリ側で行うことを生成指示へ明記した。native PS5 core137/Copilot302、隔離Edge DOM818はPASS。4097と実例相当4685、8192、最長frame8648、全体1048576の受理と、それぞれの超過拒否を含む。独立レビューはSHIP・must-fixなし。候補配下で最初に実行したcoreはテスト用パス長の問題で失敗したが、元の同一テストへ候補Appを指定して137件通過し、両記録を保持した。共有/通常キャッシュ更新と新版の実機通し検証はこの時点では未実施。
 
 同日13:44 JST時点: 復旧後の分類試験 `2f98b33d2c824ca38749657286b81770` は初回Copilot取得で180秒timeout、PAD反映0でfailed。実UI表示とjob終了、worker停止、旧ファイル・owned targetの保全を確認した。後続のowned DOM観測 `Observe-OversizedFrame-b4c5c1abf907498d84e1c0d6a6d4d2e1.json`（SHA `23f576ba…`）は2回とも72ノード・4行を欠落なく採取し、各行は1個のtext node、長さ50/4696/54/42文字だった。payloadは4,685 UTF-16単位で、製品の4,096上限を超えていた。DOMの行上限2箇所だけを接頭辞込み8,203へ変えた読取専用候補は、既存の所有・構造・geometry検査を保ったまま同じ4,845文字の1フレームを取得した。元のtimeoutは保持し、受信payload上限8,192・フレーム全体8,648・全体1,048,576の候補をローカル検証中。この時点で本体・キャッシュはまだ変更していない。
