@@ -2,13 +2,23 @@
 
 状態は **実装済みPoC・実機ゲート未完了**。Issue #5を閉じず、残りの検証と必要な修正を続ける。過去のPR #6のマージは途中成果の保存であり、全要件の受入完了ではない。
 
+## 23:03 JSTのクリップボード修正（最新）
+
+空のクリップボードから始めるPAD操作なしの検査で、Windowsの取得済みIDataObjectが置換後に元テキストを返さず、Restoreが例外なしでも空になる不具合を再現した。`.work/clipboard-repro-detail-fac8350aa3bd43b5852c0f0c249fa1dc/result.json`（SHA `4454b3f33869084cd60fb30e311f5a0164bd05e614163b1b6a3b8650421f4f94`）。実行前が空だったため業務データは使っていない。元の失敗結果は保持する。
+
+`Get-AgentPadClipboard` は変更前に全native形式の内容を管理下のDataObjectへ取り込み、画像・配列・メモリストリームも複製する。空なら空のsnapshotを明示し、復元はClearする。取得できない形式を黙って落とさずPAD操作前に `PAD_CLIPBOARD` で停止し、利用者回答前の別ACTも抑止する。形式保持8件、core149/PAD335 PASS。実Windowsのテキスト置換/復元3回も完全一致し、最初の空状態へ戻った（`.work/clipboard-fixed-61292234aee942f7b302772d58b9765e/`）。
+
+最終App `227257823937fb8e37af42e4c25056ccd57ef168b6f393fd379155b94e6daaf0` の実PAD検証 `.work/pad-rich-clipboard-ce67f7099f9c46a89243b435c82bb8a7/` はPASS。テキスト/RTF/2画素画像を入れて固定WAIT 0を1回実行し、3形式・全文・画像寸法/両画素が復元された。開始/完了ID一致、元Mainへの貼戻し/保存各1回・復元実行0、旧ファイル/ページ/owner/元の空クリップボード保全も通過。result SHA `a317a82977b5287c3c06bcecb82f746d683d70b3cfd485ae348cf052fe3ba8e6`。以前のGetText例外すべてがこの原因だったとは断定しない。
+
+通常更新 `af949153771e478d89ce957e26da5018` はPASS。現cache release `0.1.0-9b95b4da9d2be8b9bfb1a0b663da448323dea3452115d3a8d8fe2598f565f0c6`、server PID11660 / port61953 / start UTC `2026-09-06T13:59:16.1214896Z`。ownerは7093/Main比較b5e7を保持。以下の45f配布候補はこの修正前の履歴で、社内確認には修正を含む新候補を使う。
+
 ## GitHubでの引き継ぎ（今回の最新）
 
 - 作業ブランチをpushし、[ドラフトPR #7](https://github.com/minimo162/ai-prompts/pull/7) を作成した。mainへのマージはしていない。GitHub Actionsは未設定で、PRのcheck一覧は空。
 - [社内PC確認用のドラフトRelease](https://github.com/minimo162/ai-prompts/releases/tag/untagged-9f3591bbed1fcc24cfb2) に、`AiPromptsAgent-0.1.0-1c981c6.zip`、`manifest.json`、`corporate-pc-check.md` を添付した。対象コミットは `1c981c6dd53d75b2c8f11659c0364820fb0cf349`、Appは通常配布済み45f版。正式公開・受入完了とは扱わない。
 - ZIP SHAは `12ae88a7dca77f010810cf0c475cde87a4edac22f62af4a979a13119e706ca54`。3ファイルのみで、GitHubからダウンロードし直したZIPの各entryと、manifest/手順書をローカル原本と照合してPASS。証拠は `.work/distributions/issue-5-poc-1c981c6-7dfece3733a14043ac1d2cb269607c70/github-upload-verification.json`。過去の候補は保持した。
 - 最新版の正常業務・実M365送信後timeout/中止は以下のとおりPASS。残りは社内PC/別利用者の実機受入、PAD自身のnative Save失敗。社内PCへはこの環境から接続できないため、添付手順での初回起動・更新・分類業務の結果、Windows/PAD版、エラー表示をユーザーへ依頼した。
-- 過去のクリップボード例外の根本原因は未確定。失敗証拠を保持し、後続PASSをその原因解消の証明としない。現在のPAD ownerは7093/Main比較b5e7（下記の完全SHA）。
+- クリップボード復元時の内容喪失は上記で再現・修正した。過去のGetText例外すべてを同一原因とは断定しない。現在のPAD ownerは7093/Main比較b5e7（下記の完全SHA）。
 
 ## 22:24 JSTの最新版正常業務
 

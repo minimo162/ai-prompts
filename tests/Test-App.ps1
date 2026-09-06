@@ -360,6 +360,7 @@ try {
             $plan.robin = 'File.ReadTextFromFile.ReadText File: ' + (ConvertTo-AgentRobinLiteral $script:Output) + ' Encoding: File.TextFileEncoding.UTF8 Content=> PriorText'
         }
         if ($script:RunMode -cin @('failed-retry','failed-auth','failed-setup') -and $script:Plans -eq 2) { $plan.state = 'ACT'; $plan.robin = "SET Text TO 'テスト 100%'"; $plan.artifacts = @() }
+        if ($script:RunMode -ceq 'failed-clipboard' -and $script:Plans -eq 2) { $plan.state = 'ACT'; $plan.robin = "SET Different TO 'changed action'"; $plan.artifacts = @() }
         if ($script:RunMode -ceq 'failed-replan' -and $script:Plans -eq 2) { $plan.state = 'BLOCKED'; $plan.robin = ''; $plan.artifacts = @(); $plan.message = '失敗内容の確認が必要です。' }
         if ($script:RunMode -ceq 'failed-change' -and $script:Plans -eq 2) { $plan.state = 'ACT'; $plan.robin = 'SET ChangedApproach TO 1'; $plan.artifacts = @(); $plan.message = '観測した失敗を踏まえて手順を変更します。' }
         if ($script:RunMode -cin @('failed-new-ids','failed-new-business') -and $script:Plans -le 2) {
@@ -381,6 +382,7 @@ try {
             $errorValue = 'PAD_RUNTIME_ERROR: confirmed failure marker'
             if ($script:RunMode -ceq 'failed-auth') { $errorValue = 'AICALL_auth_required' }
             if ($script:RunMode -ceq 'failed-setup') { $errorValue = 'PAD_SETUP: dedicated designer unavailable' }
+            if ($script:RunMode -ceq 'failed-clipboard') { $errorValue = 'PAD_CLIPBOARD: original data cannot be captured' }
             return [pscustomobject]@{ status = 'failed'; error = $errorValue; artifacts = @(); ai_calls = @([pscustomobject]@{ ai_call_id = ('f' * 32); status = 'failed'; input_count = 1; output_count = 0; error_type = 'processing_failed' }) }
         }
         if ($script:RunMode -ceq 'two-act' -and $script:PadRuns -eq 2) { $null = & $script:ProductionRobin -Robin $Robin -RunDirectory $RunDirectory -Job $Job }
@@ -414,7 +416,7 @@ try {
     Assert-True ($answered.status -ceq 'done' -and $script:Plans -eq 3 -and $script:PadRuns -eq 1) 'ASK_USER resumes with one user answer and no repeated PAD run'
     Assert-True ($script:LastPlannerPrompt.Contains('100%そのまま保持してください。')) 'Question answer is preserved in subsequent planner context'
     Assert-True ($answered.question_id -ceq '') 'Question identity is cleared after the matching answer is consumed'
-    foreach ($modeValue in @('two-act','aliased-done','truncated','truncated-aliased','unavailable','failed-replan','failed-retry','failed-auth','failed-setup','failed-change','failed-new-ids','failed-new-business')) {
+    foreach ($modeValue in @('two-act','aliased-done','truncated','truncated-aliased','unavailable','failed-replan','failed-retry','failed-auth','failed-setup','failed-clipboard','failed-change','failed-new-ids','failed-new-business')) {
         $script:RunMode = $modeValue; $script:Plans = 0; $script:PadRuns = 0; $script:PadRunIds = @()
         $job = New-TestJob $homeDirectory $input
         $checked = Invoke-AgentRun $homeDirectory $job.job_id

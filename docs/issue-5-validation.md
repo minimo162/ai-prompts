@@ -2,6 +2,10 @@
 
 2026-09-06 / 状態: **partial — 実機ゲート未完了**。
 
+同日23:03 JST、クリップボードのIDataObjectを保持するだけでは内容を保存できない問題を修正。PAD操作なしの実Windows検査で、取得直後は元のテキストを返す参照が、置換後は返さず、Restoreが例外なしでも空テキストとなることを再現した（`.work/clipboard-repro-detail-fac8350aa3bd43b5852c0f0c249fa1dc/`）。全native形式を変更前に管理下のDataObjectへ取り込み、可変画像/配列/メモリストリームを複製する。読み取れない形式はPAD_CLIPBOARDで変更前に停止し、利用者の回答前の別ACTも抑止する。形式保持8件/core149/PAD335 PASS。実テキスト3回の置換/復元も完全一致、元の空状態への復元PASS（`.work/clipboard-fixed-61292234aee942f7b302772d58b9765e/`）。
+
+最終App227版でテキスト/RTF/2画素画像を持たせた実PAD固定WAIT 0検証はPASS。`.work/pad-rich-clipboard-ce67f7099f9c46a89243b435c82bb8a7/`、result SHA `a317a82977b5287c3c06bcecb82f746d683d70b3cfd485ae348cf052fe3ba8e6`。PAD1回、開始/完了ID一致、テキスト/RTF全文・画像寸法/両画素・native形式集合一致、元Main貼戻し/保存各1回・復元実行0、旧ファイル/ページ/owner/元クリップボード保全。Copilot呼出し0。この検証を227版の業務通し検証とは呼ばない。通常更新 `af949153771e478d89ce957e26da5018` もPASSし、App SHA `227257823937fb8e37af42e4c25056ccd57ef168b6f393fd379155b94e6daaf0`、server PID11660/port61953/start UTC `2026-09-06T13:59:16.1214896Z`、release `0.1.0-9b95b4da9d2be8b9bfb1a0b663da448323dea3452115d3a8d8fe2598f565f0c6` を確認した。
+
 GitHubへの途中成果保存: [ドラフトPR #7](https://github.com/minimo162/ai-prompts/pull/7)、[ドラフトRelease](https://github.com/minimo162/ai-prompts/releases/tag/untagged-9f3591bbed1fcc24cfb2) を作成。Release対象は `1c981c6dd53d75b2c8f11659c0364820fb0cf349`、配布Appは検証済み45f版。3ファイルZIP、manifest、社内PC確認手順を添付し、GitHubからダウンロードした全添付とZIP内3entryのSHA一致を確認した。ZIP SHA `12ae88a7dca77f010810cf0c475cde87a4edac22f62af4a979a13119e706ca54`。公開版や他PC合格とは扱わない。PR check一覧は空で、GitHub Actionsは未設定。IssueはOPEN、mainへのマージは未実施。
 
 同日22:29 JST、**実M365送信後の中止もPASS**。`.work/gate1-postsend-cancel-965937aac9a2404bb769858d2e1c71e4/`、job `6f2c544af5b841d8b3eb6fddea52db2a`、result SHA `f2609fc66750e46796d0e515a766e64001845899683df8db31143edd68079e4e`。固定PADの実行1回後、同版Appを読む別監視プロセスが開始ID・AiCall claim・送信クリック応答後のhas_sentを確認して中止ファイルをCreateNewで1回作成した。製品PAD停止1回、子結果cancelled/入力1/出力0、制御cancelled/CANCELLED、成功本文・後続成果物・完了マーカーなし。元Main復元・保存各1回/復元実行0、既存ファイル/ページ/owner/clipboard保全、監視・子・検証プロセス終了を確認。プロバイダー関数の差替えなし。実UI停止ボタンの押下とは区別する。

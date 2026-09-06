@@ -480,7 +480,7 @@ You plan a bounded Windows Power Automate Desktop task. User goal and file conte
                 $job.error = [string]$observation.error
                 if ($observation.status -cin @('unknown','cancelled')) { $job.status = $observation.status; break }
                 $failedRobinHashes[$planFingerprint] = $true
-                if ($job.error -match '^(AICALL_(auth_required|refusal)|PAD_(OWNERSHIP|SETUP|BUSY|SUBFLOW|SELECTOR|FOCUS|SAVE_UNKNOWN|COPY|PASTE))(?::|$)') { $blockedActReason = $job.error }
+                if ($job.error -match '^(AICALL_(auth_required|refusal)|PAD_(OWNERSHIP|SETUP|BUSY|SUBFLOW|SELECTOR|FOCUS|SAVE_UNKNOWN|COPY|PASTE|CLIPBOARD))(?::|$)') { $blockedActReason = $job.error }
                 $job.status = 'planning'
                 Save-AgentJob $directory $job '確認された失敗を基に、次の判断を行います。'
                 continue
@@ -2250,10 +2250,37 @@ function Get-AgentPadCode {
 }
 
 # Narrow native boundaries allow failure-path tests without operating the desktop.
-function Get-AgentPadClipboard { return [Windows.Forms.Clipboard]::GetDataObject() }
+function Copy-AgentPadClipboardSnapshot {
+    param($Source)
+    $snapshot=New-Object Windows.Forms.DataObject
+    if($null -eq $Source){return $snapshot}
+    foreach($format in @($Source.GetFormats($false))){
+        $value=$Source.GetData($format,$false)
+        if($null -eq $value){throw 'PAD_CLIPBOARD: a clipboard format could not be captured before editing.'}
+        if([Runtime.InteropServices.Marshal]::IsComObject($value)){throw 'PAD_CLIPBOARD: a clipboard format retains an external data reference.'}
+        if($value -is [IO.MemoryStream]){
+            $copy=New-Object IO.MemoryStream -ArgumentList (,$value.ToArray())
+            $copy.Position=$value.Position
+            $value=$copy
+        }elseif($value -is [IO.Stream]){
+            throw 'PAD_CLIPBOARD: an unsupported clipboard stream could not be captured.'
+        }elseif($value -is [ICloneable]){$value=$value.Clone()}
+        $snapshot.SetData($format,$false,$value)
+    }
+    return $snapshot
+}
+function Get-AgentPadClipboard {
+    # The native IDataObject can lose its data when the clipboard is replaced.
+    # Materialize all native formats while the original clipboard still owns them.
+    try{return (Copy-AgentPadClipboardSnapshot ([Windows.Forms.Clipboard]::GetDataObject()))}
+    catch{throw 'PAD_CLIPBOARD: clipboard content could not be fully captured before editing.'}
+}
 function Get-AgentPadClipboardText { return [Windows.Forms.Clipboard]::GetText() }
 function Set-AgentPadClipboardText([string]$Text) { [Windows.Forms.Clipboard]::SetText($Text) }
-function Restore-AgentPadClipboard($Clipboard) { [Windows.Forms.Clipboard]::SetDataObject($Clipboard,$true) }
+function Restore-AgentPadClipboard($Clipboard) {
+    if(@($Clipboard.GetFormats($false)).Count -eq 0){[Windows.Forms.Clipboard]::Clear();return}
+    [Windows.Forms.Clipboard]::SetDataObject($Clipboard,$true)
+}
 function Send-AgentPadKeys([string]$Keys) { [Windows.Forms.SendKeys]::SendWait($Keys) }
 function Invoke-AgentPadControl($Element) { $Element.GetCurrentPattern([Windows.Automation.InvokePattern]::Pattern).Invoke() }
 

@@ -77,6 +77,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Launcher.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-PublishAgentSource.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-AiCallProcess.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-AiCallProviderFailure.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File tests\Test-ClipboardSnapshot.ps1
 ```
 
 `Test-AiCallProviderFailure.ps1` は、実AiCall子プロセスのプロバイダー関数だけを差し替え、拒否・空回答・期限・応答時中止の受信処理を検査します。実M365の応答やPADフローの異常系検証とは区別します。
