@@ -220,6 +220,21 @@ try{
  Assert-TransportRejected {Invoke-Transport} 'RESPONSE_TIMEOUT' 'Actual deadline expiry within the final stable snapshot prevents acceptance';Assert-TransportOneSend 'Final deadline expiry'
  Assert-Transport ($script:transportReads -eq 3) 'Final deadline expiry does not reread or retry the response'
  Assert-Transport ($script:transportConnects -eq $script:transportDisposed) 'Every synthetic socket is disposed after accepted, rejected, cancelled and uncertain attempts'
+ # An earlier incomplete frame must not determine the error once the current
+ # response is valid but the deadline prevents the required stable readbacks.
+ $deadlineId='v1-incomplete-then-valid-deadline'
+ $script:deadlineValid=New-TransportV1 $deadlineId
+ $incomplete=New-TransportV1 $deadlineId
+ $incomplete.frames=@('AGENT_PART_V1 '+$deadlineId+' 1 1')
+ Reset-Transport $deadlineId @($incomplete)
+ $script:transportMutation={if($script:transportReads -eq 2){
+  $script:transportCandidates=@($script:deadlineValid)
+  $delay=[Math]::Max(0,($Deadline-[DateTime]::UtcNow).TotalMilliseconds-300)
+  [Threading.Thread]::Sleep([int]$delay)
+ }}
+ Assert-TransportRejected {Invoke-Transport -OmitTransport} 'RESPONSE_TIMEOUT' 'Valid final response awaiting stability does not inherit a previous incomplete-frame error'
+ Assert-Transport ($script:transportReads -eq 2) 'Late valid response is neither accepted early nor reread after expiry'
+ Assert-TransportOneSend 'Late valid response timeout'
  Assert-Transport ((Get-FileHash -LiteralPath $transportSource).Hash.ToLowerInvariant() -ceq $transportSourceSha) 'Source remains byte-identical during the complete suite'
  $transportPassed=$true
 }catch{$transportFailure=$_.Exception.Message;throw}

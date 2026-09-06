@@ -435,7 +435,7 @@ try{
     Assert-Rejected {Invoke-AgentCopilot -Prompt 'Test request' -RequestId 'r-ready-uncertain' -JobId ('7'*32) -Settings @{} -HomePath $jobTemp -TimeoutSeconds 30} 'CDP_UNAVAILABLE' 'Invocation tolerates pre-key busy but still fails an uncertain single send'
     Assert-Case ($script:readyKeyCalls -eq 4 -and $script:readyInsertCalls -eq 1 -and $script:readySendCalls -eq 1) 'Transient pre-key busy does not replay keys, insert or send'
     Assert-Case ($script:readyInput.Contains('request_id は "r-ready-uncertain"') -and $script:readyInput.Contains('第4行 AGENT_END_r-ready-uncertain') -and -not $script:readyInput.Contains('AGENT_END_r-uncertain')) 'A separate actual invocation binds its framed compact JSON and final marker to its own request nonce'
-    Assert-Case (@($script:readyDeadlines | Select-Object -Unique).Count -eq 1 -and $script:readyFocusCalls -eq 7) 'All focus call sites share one preparation deadline including a busy recheck'
+    Assert-Case ($script:readyDeadlines[0] -lt $script:readyDeadlines[6] -and $script:readyDeadlines[2] -eq $script:readyDeadlines[3] -and $script:readyFocusCalls -eq 7) 'Each focus step gets fresh preparation time while its busy recheck retains the same deadline'
     Assert-Case ([IO.File]::Exists((Get-AgentCopilotAttemptPath $jobTemp 'r-ready-uncertain'))) 'Uncertain send after readiness retains the no-replay reservation'
     # The original input-appearance timeout is separate from focus preparation and stays AUTH_REQUIRED.
     Reset-TestReadiness;$script:readyMissingInput=$true;$script:nextTargetId='job-no-input'

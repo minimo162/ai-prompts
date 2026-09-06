@@ -1672,6 +1672,9 @@ function Invoke-AgentCopilot {
             $candidates=@($fresh | Where-Object { (Get-AgentProperty $_ 'source_kind' '') -cin @('fenced_parts','fenced_planner_v2','fenced_planner_v2_single') -or -not [string]::IsNullOrWhiteSpace([string]$_.text) })
             if ($candidates.Count -gt 0) { $seenText=$true }
             if($expandAttempted -and ($fresh.Count -ne 1 -or [string](Get-AgentProperty $fresh[0] 'key' '') -cne $expandKey -or -not [string]::Equals([string]$fresh[0].text,$expandText,[StringComparison]::Ordinal))){throw 'RESPONSE_INVALID: 展開後の回答 ID または本文が一致しません。'}
+            # Classify the current snapshot, not a partial frame seen earlier.
+            # Valid content still needs three stable reads before the deadline.
+            $lastError='RESPONSE_TIMEOUT: Copilot の回答を確認できません。'
             $valid=@();$folded=@()
             foreach ($candidate in $candidates) {
                 try {

@@ -2,6 +2,14 @@
 
 2026-09-06 / 状態: **partial — 実機ゲート未完了**。
 
+同日22:13 JST、修正後45f版の固定PAD→実AiCall20秒期限は **PASS**。`.work/gate1-deadline-fixed-f8415abdc9ca4d43bda0859f9f1834f3/`、job `2f91a9786c704c0398fc372f9f0b8eec`、result SHA `fa7ead8659f045bf0181fccab174e03153bc4335e61c29bd4d4a4789d78515b5`。子結果failed/timeout、実制御戻り値failed/AICALL_timeout、開始ID一致、入力1/出力0、成功本文・後続成果物・完了マーカーなし。元Main復元・保存、既存ファイル/ページ/owner/クリップボード保全成功。送信予約に加え、製品が送信クリックの応答確認後に設定する `has_sent=true` を読取専用の `send-confirmation.json` で確認。実M365送信後の期限切れとして記録する。以前のinvalid_response結果は書き換えない。
+
+同日22:10 JST、App45f版は応答制御137件/Copilot302件PASS。通常更新 `8f340820b3654b10b060042a39d6d8b8` で実CMDからrelease `0.1.0-6079e7a56ebd98ad6365deb45729ea8a3adbda51b54bd51c1a7ab80996d8ff53` へ切り替え、新server PID25376 / port50142 / `2026-09-06T13:10:15.6866050Z` を確認。設定・既存ファイル・PAD所有記録を保持。これは更新検証であり、最新ソースの正常業務通し確認ではない。
+
+同日22:04 JST、20秒期限の実試行 `.work/gate1-response-deadline-47832fcd0a164b5ead7101fbe23f84ca/` は送信予約後に `AICALL_invalid_response` となり、期待したtimeoutとは異なるためpartialを保持（result SHA `82dee61d64107477f20d8d4a9c9de3b9bc0547e45ec8fcd6b10e8487075916aa`）。元Main・既存ファイル・ページ・クリップボード復元はPASS、後続成果物なし。後から実回答を操作なしで2回読み、同じ完全なV1 JSONと合成テスト文の訳文を確認した（JSON SHA `d2e9be7176253f10b845bd9e4012ec2e31773628b9a2af47bfd4f7818acc6e83`）。期限内にこの形が完成していた証拠ではない。
+
+コード上は、途中の不完全フレームの `lastError` が、その後に有効な回答を得ても残り、安定確認3回を待てず期限直前となった際にinvalid_responseへ誤分類する。追加したV1回帰で修正前のRESPONSE_INVALIDを再現し、各snapshotで判定を更新する修正後は期待どおりRESPONSE_TIMEOUTとなった。応答制御137件PASS（`.work/deadline-classification-fixed-1.json`、App SHA `45f9600171f830be7a1f010984e80ee85946b6d05c9e8bdeda3985b6662d4c7d`）。送信1回、安定確認3回、全体期限は維持。これは実試行の原因を一意に確定したことにはならない。Test-Copilot内の旧「すべての入力準備で同一期限」の期待は、既に採用済みの「操作ごとに準備期限、同じ操作のbusy再確認では不変」へ更新した。
+
 同日21:48 JST、固定の実PAD→実AiCall子プロセスに対するプロバイダー境界の障害注入3ケースはすべてPASS。fixture Appは製品a743版の `Invoke-AgentCopilot` 関数だけを置換したもの（SHA `a94cc02cb136f723a6da32b67b0e78564d56ad79c0ac2327938185c453cb2600`）。子PID/Appパス/要求IDのboundary-hit記録を確認し、実M365送信予約なし。実M365自体の拒否/空回答発生とは区別する。
 
 | ケース | 実制御戻り値 | result.json SHA256 |
@@ -159,10 +167,10 @@ HTMLの元所有者を含むACL復元は `Set-Acl` が拒否した（`The securi
 | ゲート | 状態 | 残る実機確認 |
 |---|---|---|
 | 0: 配布・起動 | 実共有UNCからの初回・更新、欠落UNC時の警告付きローカル起動は合格 | 実共有の切断、利用者環境での再起動・UI停止 |
-| 1: 固定PADからAiCall | 正常系合格。実PADから翻訳→分類の直列2回、結果受渡し、review分岐と出力を確認 | 拒否/空/期限/中止の実機異常系 |
+| 1: 固定PADからAiCall | 実PADから翻訳→分類の直列2回、結果受渡し、review分岐と出力を確認。a743版で送信前期限・子プロバイダー境界への拒否/空/応答時中止注入、45f版で実M365送信後期限も実PADまでPASS | 実M365送信後の中止。注入検証を実M365自体の拒否/空回答発生としない |
 | 2: AIなしのA/B差し替え | 正常系A/B合格。実行中の別controllerをPAD_BUSY・UI操作0で拒否し、元の実行を中止・出力抑止する動作を確認。実PAD貼付後のSave呼出し境界への障害注入でRun0・元Main復元も合格。busy/cancel追試の元unknownは保持 | PAD自身のnative Save失敗は未検証。制御した呼出し境界の失敗と、実貼付後の異常でRun前に停止した証拠を区別 |
-| 3: 生成Robin全文取得 | 旧方式の実長文JSON12,593 UTF-8バイト・Robin7,793文字/24 Writeを取得済み。新方式では2ブロックACTと、新版の4,443文字ACTを実取得・検証済み | 長文生成の安定性。24/36 Writeは調査用負荷で、Issueに必須文字数の指定はない。新版の24 Writeでは欠落や生成拒否が残る |
-| 4: 生成AiCallフロー | 翻訳→書出しと分類→IF分岐→書出しが実PADで成功。新版では分類ジョブの2ACT→DONEまで完了 | 確認した正常系の未確認事項なし。固定AiCall異常系はGate 1に記載 |
+| 3: 生成Robin全文取得 | f939版の単一フェンスV2で7,794文字・26行・空行1・24 Writeの期待本文完全一致と独立2読取りを確認。過去の途中停止/余分な終端行を拒否した結果も保持 | 個別合格は任意の長さや全応答の生成成功を保証しない。24/36 Writeは検証用負荷で、Issueに必須文字数の指定はない |
+| 4: 生成AiCallフロー | 翻訳→書出しと分類→IF分岐→書出しが実PADで成功。f939版では単一フェンスV2分類ジョブの2ACT→DONEまで完了 | 最新a743版での正常業務通し再確認。固定AiCall異常系はGate 1に記載 |
 | 5: 2〜3往復 | ASK_USER→回答→ACT→AiCall/PAD→DONEとBLOCKEDに加え、新版の分類2ACT→DONEも成功。最初の実成果物の再読込み・分岐・最終出力・完了画面を独立再照合済み | 確認した代表シナリオの未確認事項なし。原helperのpartialは分割応答IDの抽出漏れとして別記録で診断し、原結果を保持 |
 | 6: 別利用者・別PC | 未検証 | 開発環境に依存しない導入・更新・認証・結果確認 |
 

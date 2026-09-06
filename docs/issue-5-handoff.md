@@ -1,6 +1,16 @@
-# Issue #5 引き継ぎ（2026-09-06）
+﻿# Issue #5 引き継ぎ（2026-09-06）
 
 状態は **実装済みPoC・実機ゲート未完了**。Issue #5を閉じず、残りの検証と必要な修正を続ける。今回のマージはユーザーが指定した途中成果の保存であり、全要件の受入完了ではない。
+
+## 22:04 JSTの期限判定修正
+
+**22:13 JST追記**: 修正後45f版の固定PAD→実AiCall20秒期限はPASS。`.work/gate1-deadline-fixed-f8415abdc9ca4d43bda0859f9f1834f3/`、job `2f91a9786c704c0398fc372f9f0b8eec`、result SHA `fa7ead8659f045bf0181fccab174e03153bc4335e61c29bd4d4a4789d78515b5`。送信クリック応答確認後の製品記録 `has_sent=true`、子failed/timeout、制御failed/AICALL_timeout、開始ID一致、後続成果物/完了マーカーなし。元Main・既存ファイル・ページ・owner・clipboard復元成功。実M365送信後の期限切れを確認できた。残る作業は最新ソースの正常業務通し、実M365送信後中止、native Save失敗、社内PC/別利用者の受入とGitHub公開。過去のクリップボード例外は根本原因未確定のまま保持。
+
+**22:10 JST更新**: 応答制御137件とCopilot302件PASS。通常更新 `8f340820b3654b10b060042a39d6d8b8` もPASSし、通常キャッシュはApp `45f9600171f830be7a1f010984e80ee85946b6d05c9e8bdeda3985b6662d4c7d` / release `0.1.0-6079e7a56ebd98ad6365deb45729ea8a3adbda51b54bd51c1a7ab80996d8ff53` に切替済み。新server PID25376 / port50142 / start UTC `2026-09-06T13:10:15.6866050Z`。既存ファイル/設定/PAD owner保持。
+
+途中成果はローカル `d122e7868087aa10066cc16774c9222265c78ddb` に保存。a743版の3ファイルZIPは `.work/distributions/issue-5-poc-d122e78-f43e0972cbe44f81a94240364914cb61/`、ZIP SHA `7c814f92f0b5d3dee717940692bab67dcdc2c2cd266d95020be031d39f4b16ab`。GitHub公開・社内PC検証は未実施。
+
+その後の20秒実試行 `47832fcd0a164b5ead7101fbe23f84ca` は送信予約後にinvalid_responseとなりpartial。後続処理なし、元Main/ファイル/ページ/clipboard復元成功。失敗後の独立2読取りでは有効なV1訳文を確認したが、期限内の完成を証明しない。途中の不完全フレームのエラーを後の有効な回答へ引き継ぐ誤分類は別の回帰で再現した。各snapshotでエラー判定を更新するApp `45f9600171f830be7a1f010984e80ee85946b6d05c9e8bdeda3985b6662d4c7d` は応答制御137件PASS。安定確認3回・全体期限・送信1回は維持。通常キャッシュは上記22:10 JSTの更新で45f版へ切替済み。更新wrapperは `.work/deadlinefix-479e93e05eba4b1b82ce05fe621dbda5/` にあり、この更新のPrepare/Executeは消費済みのため再使用しない。
 
 ## 21:42 JSTの再開情報（以下の履歴より優先）
 
