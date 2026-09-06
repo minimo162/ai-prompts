@@ -2,6 +2,16 @@
 
 状態は **実装済みPoC・実機ゲート未完了**。Issue #5を閉じず、残りの検証と必要な修正を続ける。今回のマージはユーザーが指定した途中成果の保存であり、全要件の受入完了ではない。
 
+## 22:24 JSTの最新版正常業務
+
+**22:29 JST追記**: 実M365送信後の中止もPASS。`.work/gate1-postsend-cancel-965937aac9a2404bb769858d2e1c71e4/`、job `6f2c544af5b841d8b3eb6fddea52db2a`、result SHA `f2609fc66750e46796d0e515a766e64001845899683df8db31143edd68079e4e`。固定PADを1回実行し、別の読取監視プロセスが開始ID・実AiCall claim・送信クリック応答後のhas_sentを確認して中止ファイルを1回作成。製品のPAD停止1回、子結果cancelled/出力0、制御cancelled/CANCELLED、後続成果物/完了マーカーなし。元Main復元・保存各1回/復元実行0、既存ファイル/ページ/owner/clipboard保全、監視・子・検証プロセス終了を確認。実UIの停止ボタンを押した検証とは区別する。現在ownerは下記7093のまま。残る実機範囲はnative Save失敗と社内PC/別利用者の受入で、以前のクリップボード例外の原因も未確定。
+
+App45f / HEAD `1f67893` の実HTML→単一フェンスV2 ACT→PAD内V1分類review→観測を受けた別V2 ACT→PAD2回目→V2 DONEがPASS。session `.work/normal45f-2eac8de5df4f482ab234974c189c7b99/classify-sessions/d131679abeca4f28ba7bf44f03c0e9da/`、job `7b289291994e47699a3aedb81721e374`、result SHA `d54d4c15eda3c3641976aa140cce7850e5d6f7749fb7c08ed90b96bdb5f80f29`。開始1回/HTTP200、PAD2/AiCall1、異なる生成Robin、4応答の独立2読取り、元ファイル/owner/タブ/attempt帰属保全、worker終了、最終UI一致を確認。
+
+最終83バイトの本文は、入力と末尾LFを含めOrdinal完全一致（UTF-8 BOMのみ差）。下書き/最終SHA `271fe047a97061f8eb4f3f2fd9a14d99973059fed1714a4256272da4ce2b4a5d`。`complete-ui-full.png` を目視し、完了・停止無効・回答・成果物表示を確認、SHA `1e6e616c3972259b6188471ffdd2768f7e7471163dcc57f850febd1bf808c01e`。補助スクリプトの末尾改行不足でexport記録が未保存になったが、コピー本体は保存済みだった。追加exportはCreateNewで拒否され、既存コピーを上書きせず別の読取検証 `export-verification.json` で原本/コピーのSHA一致を確認した。業務結果はPASSのまま、補助エラーは別に保持。
+
+現在のPAD owner SHAは `7093d2d9bf7756e8bb5e1108ae4d81c6318a51563fde2a13e55982dd24d94c0d`、Main比較SHA `b5e73bdb6efeccbf57772b7f3d106da9f09492a80d3fd20c4ad07ac1f806b336`。正常業務は成功フローをMainに残すため、以前の1c4 ownerを以後の基準にしない。
+
 ## 22:04 JSTの期限判定修正
 
 **22:13 JST追記**: 修正後45f版の固定PAD→実AiCall20秒期限はPASS。`.work/gate1-deadline-fixed-f8415abdc9ca4d43bda0859f9f1834f3/`、job `2f91a9786c704c0398fc372f9f0b8eec`、result SHA `fa7ead8659f045bf0181fccab174e03153bc4335e61c29bd4d4a4789d78515b5`。送信クリック応答確認後の製品記録 `has_sent=true`、子failed/timeout、制御failed/AICALL_timeout、開始ID一致、後続成果物/完了マーカーなし。元Main・既存ファイル・ページ・owner・clipboard復元成功。実M365送信後の期限切れを確認できた。残る作業は最新ソースの正常業務通し、実M365送信後中止、native Save失敗、社内PC/別利用者の受入とGitHub公開。過去のクリップボード例外は根本原因未確定のまま保持。

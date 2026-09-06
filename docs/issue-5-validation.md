@@ -2,6 +2,12 @@
 
 2026-09-06 / 状態: **partial — 実機ゲート未完了**。
 
+同日22:29 JST、**実M365送信後の中止もPASS**。`.work/gate1-postsend-cancel-965937aac9a2404bb769858d2e1c71e4/`、job `6f2c544af5b841d8b3eb6fddea52db2a`、result SHA `f2609fc66750e46796d0e515a766e64001845899683df8db31143edd68079e4e`。固定PADの実行1回後、同版Appを読む別監視プロセスが開始ID・AiCall claim・送信クリック応答後のhas_sentを確認して中止ファイルをCreateNewで1回作成した。製品PAD停止1回、子結果cancelled/入力1/出力0、制御cancelled/CANCELLED、成功本文・後続成果物・完了マーカーなし。元Main復元・保存各1回/復元実行0、既存ファイル/ページ/owner/clipboard保全、監視・子・検証プロセス終了を確認。プロバイダー関数の差替えなし。実UI停止ボタンの押下とは区別する。
+
+同日22:24 JST、**最新App45f版の正常業務通しはPASS**。session `.work/normal45f-2eac8de5df4f482ab234974c189c7b99/classify-sessions/d131679abeca4f28ba7bf44f03c0e9da/` / job `7b289291994e47699a3aedb81721e374`。実HTML開始1/HTTP200→V2 ACT→実PAD内V1分類review→下書き→観測を受けた別V2 ACT→実PAD2回目→V2 DONE。result SHA `d54d4c15eda3c3641976aa140cce7850e5d6f7749fb7c08ed90b96bdb5f80f29`。PAD2/AiCall1、異なる生成Robin、4応答の独立2読取り、旧ファイル/owner/タブ/attempt帰属保全、worker終了、最終UI一致が合格。最終ファイル83バイト/SHA `271fe047a97061f8eb4f3f2fd9a14d99973059fed1714a4256272da4ce2b4a5d` は下書きと同一。UTF-8読取り後は入力と末尾LFを含めOrdinal完全一致し、バイト差はBOMだけ。normal側出力なし。
+
+完了画面 `complete-ui-full.png` を目視し、完了/停止無効/回答/成果物表示を確認（SHA `1e6e616c3972259b6188471ffdd2768f7e7471163dcc57f850febd1bf808c01e`）。export補助の末尾改行不足で記録が途切れ、追加exportは既存ファイルのCreateNewで拒否された。コピー本体を上書きせず、`export-verification.json` で原本/コピーのSHA一致を確認。これは製品業務失敗ではない。以後のPAD所有基準はowner SHA `7093d2d9bf7756e8bb5e1108ae4d81c6318a51563fde2a13e55982dd24d94c0d` / Main比較SHA `b5e73bdb6efeccbf57772b7f3d106da9f09492a80d3fd20c4ad07ac1f806b336`。
+
 同日22:13 JST、修正後45f版の固定PAD→実AiCall20秒期限は **PASS**。`.work/gate1-deadline-fixed-f8415abdc9ca4d43bda0859f9f1834f3/`、job `2f91a9786c704c0398fc372f9f0b8eec`、result SHA `fa7ead8659f045bf0181fccab174e03153bc4335e61c29bd4d4a4789d78515b5`。子結果failed/timeout、実制御戻り値failed/AICALL_timeout、開始ID一致、入力1/出力0、成功本文・後続成果物・完了マーカーなし。元Main復元・保存、既存ファイル/ページ/owner/クリップボード保全成功。送信予約に加え、製品が送信クリックの応答確認後に設定する `has_sent=true` を読取専用の `send-confirmation.json` で確認。実M365送信後の期限切れとして記録する。以前のinvalid_response結果は書き換えない。
 
 同日22:10 JST、App45f版は応答制御137件/Copilot302件PASS。通常更新 `8f340820b3654b10b060042a39d6d8b8` で実CMDからrelease `0.1.0-6079e7a56ebd98ad6365deb45729ea8a3adbda51b54bd51c1a7ab80996d8ff53` へ切り替え、新server PID25376 / port50142 / `2026-09-06T13:10:15.6866050Z` を確認。設定・既存ファイル・PAD所有記録を保持。これは更新検証であり、最新ソースの正常業務通し確認ではない。
@@ -167,10 +173,10 @@ HTMLの元所有者を含むACL復元は `Set-Acl` が拒否した（`The securi
 | ゲート | 状態 | 残る実機確認 |
 |---|---|---|
 | 0: 配布・起動 | 実共有UNCからの初回・更新、欠落UNC時の警告付きローカル起動は合格 | 実共有の切断、利用者環境での再起動・UI停止 |
-| 1: 固定PADからAiCall | 実PADから翻訳→分類の直列2回、結果受渡し、review分岐と出力を確認。a743版で送信前期限・子プロバイダー境界への拒否/空/応答時中止注入、45f版で実M365送信後期限も実PADまでPASS | 実M365送信後の中止。注入検証を実M365自体の拒否/空回答発生としない |
+| 1: 固定PADからAiCall | 実PADから翻訳→分類の直列2回、結果受渡し、review分岐と出力を確認。a743版で送信前期限・子プロバイダー境界への拒否/空/応答時中止注入、45f版で実M365送信後期限/中止も実PADまでPASS | 拒否/空の注入検証を実M365自体の拒否/空回答発生としない。送信後中止は監視による中止ファイル作成で、UI停止ボタン押下ではない |
 | 2: AIなしのA/B差し替え | 正常系A/B合格。実行中の別controllerをPAD_BUSY・UI操作0で拒否し、元の実行を中止・出力抑止する動作を確認。実PAD貼付後のSave呼出し境界への障害注入でRun0・元Main復元も合格。busy/cancel追試の元unknownは保持 | PAD自身のnative Save失敗は未検証。制御した呼出し境界の失敗と、実貼付後の異常でRun前に停止した証拠を区別 |
 | 3: 生成Robin全文取得 | f939版の単一フェンスV2で7,794文字・26行・空行1・24 Writeの期待本文完全一致と独立2読取りを確認。過去の途中停止/余分な終端行を拒否した結果も保持 | 個別合格は任意の長さや全応答の生成成功を保証しない。24/36 Writeは検証用負荷で、Issueに必須文字数の指定はない |
-| 4: 生成AiCallフロー | 翻訳→書出しと分類→IF分岐→書出しが実PADで成功。f939版では単一フェンスV2分類ジョブの2ACT→DONEまで完了 | 最新a743版での正常業務通し再確認。固定AiCall異常系はGate 1に記載 |
+| 4: 生成AiCallフロー | 翻訳→書出しと分類→IF分岐→書出しが実PADで成功。最新45f版でも単一フェンスV2分類ジョブの2ACT→DONEまで完了 | 固定AiCall異常系はGate 1に記載 |
 | 5: 2〜3往復 | ASK_USER→回答→ACT→AiCall/PAD→DONEとBLOCKEDに加え、新版の分類2ACT→DONEも成功。最初の実成果物の再読込み・分岐・最終出力・完了画面を独立再照合済み | 確認した代表シナリオの未確認事項なし。原helperのpartialは分割応答IDの抽出漏れとして別記録で診断し、原結果を保持 |
 | 6: 別利用者・別PC | 未検証 | 開発環境に依存しない導入・更新・認証・結果確認 |
 
