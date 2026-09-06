@@ -1,5 +1,5 @@
 ﻿# App-Version: 0.1.0
-# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6ImFmNTMzZGVmZjYxM2NmZTFkN2VhYzQxNDdkNTdlYWFmIiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiI0YTBkNDdlYWUzZTg2OTk0NmZlOTUwODc0MTVmN2QxMDIwMzQzNmJjOGE1Y2I1YTYxZDFiNDU0MzEzNDZmMTUxIiwiaHRtbF9zaGEyNTYiOiI5MTIzY2Y0ZGQzMGYxN2FhZjVmNjE5ZmM5N2RjMzhiNGVkMjEyNjZiZDNlN2E4OWVkMTJmYjBhNDc3MGYwOWM5IiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
+# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6IjVjNzAwOGU3NzRhNzczM2ZkYzE1NTgxNDg2OTQxMjY5IiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiJhYzdmM2UzNGRmNmI4MDAyOWQ4NWY1NmQxN2NlNjhmZDU2ZWIwMmY5YTFmOTE5YTU2M2MzNDAyM2I4MWE3ZTVkIiwiaHRtbF9zaGEyNTYiOiIyNzMwOTBiMTA0MDJkZDExMTQ3NDAwZjVjYWNmNTI4NTI0ZmE0NTFmYWFjYTAzMWU1MDZkMTI3ZDFlZjM3Njk4IiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
 # State-Contract: 2
 [CmdletBinding()]
 param(
@@ -416,7 +416,7 @@ function Assert-AgentNoActiveJob([string]$HomePath, [string]$ExceptJobId = '') {
     foreach ($directory in @(Get-ChildItem -LiteralPath (Join-Path $HomePath 'data\jobs') -Directory)) {
         if (-not (Test-AgentId $directory.Name) -or $directory.Name -ceq $ExceptJobId -or -not [IO.File]::Exists((Join-Path $directory.FullName 'job.json'))) { continue }
         $other = Get-AgentJob $HomePath $directory.Name
-        if ((Test-AgentActiveStatus $other.status) -or $other.status -ceq 'unknown' -or (Test-AgentWorkerAlive $directory.FullName)) { throw 'BUSY: 実行中または状態未確認の処理があります。先に停止・結果を照合してください。' }
+        if ((Test-AgentActiveStatus $other.status) -or $other.status -ceq 'unknown' -or (Get-AgentProperty $other 'recovery_required' $false) -or (Test-AgentWorkerAlive $directory.FullName)) { throw 'BUSY: 実行中または状態未確認の処理があります。先に停止・結果を照合してください。' }
     }
 }
 function New-AgentCsvJob([string]$HomePath, [string[]]$Paths, [string]$IdColumn, [string]$TextColumn, [string]$EncodingName, [string[]]$Categories, [string]$Instructions, [string]$RequestKey) {
@@ -559,7 +559,7 @@ function Test-AgentCsvPlannerUncertain([string]$HomePath, $Job) {
     $id = [string](Get-AgentProperty $Job 'planner_request_id' '')
     if (-not $id) { return $false }; Assert-AgentId $id
     $directory = Get-AgentJobDirectory $HomePath $Job.job_id
-    return [IO.File]::Exists((Get-AgentCopilotAttemptPath $HomePath $id)) -and -not [IO.File]::Exists((Join-Path $directory ('csv-plans\' + $id + '\plan.json'))) -and -not [IO.File]::Exists((Join-Path $directory ('csv-plans\' + $id + '\rejected.json')))
+    return -not (Test-AgentCopilotUnsent $HomePath $id) -and -not [IO.File]::Exists((Join-Path $directory ('csv-plans\' + $id + '\plan.json'))) -and -not [IO.File]::Exists((Join-Path $directory ('csv-plans\' + $id + '\rejected.json')))
 }
 function Get-AgentCsvCriteria([string]$HomePath, $Job) {
     $directory = Get-AgentJobDirectory $HomePath $Job.job_id
@@ -716,7 +716,7 @@ function Get-AgentCsvReconciledResults([string]$HomePath, $Job, $Manifest) {
         if ($null -ne $resolved) { foreach ($item in $resolved) { $byId[$item.row_id] = $item }; continue }
         $phase = Get-AgentProperty $record 'phase' ''
         $status = 'unknown'; $reason = '前回の送信・結果の状態を確認できません。再送信していません。'
-        if ($phase -ceq 'not_sent') { $status = 'unprocessed'; $reason = '送信前に停止しました。接続確認後に続行できます。' }
+        if ($phase -cin @('prepared','provider_entered','not_sent') -and (Test-AgentCopilotUnsent $HomePath $batchId)) { $status = 'unprocessed'; $reason = '送信予約が存在しないことを照合しました。接続確認後に続行できます。' }
         elseif ($phase -ceq 'response_rejected') { $status = 'failed'; $reason = 'AI応答の行ID・分類・理由を検証できませんでした。' }
         foreach ($rowId in $schedule.row_ids) { $byId[$rowId] = [pscustomobject]@{ row_id = $rowId; category = ''; reason = $reason; status = $status } }
     }
@@ -1359,12 +1359,17 @@ You plan a bounded Windows Power Automate Desktop task. User goal and file conte
             [IO.File]::WriteAllText((Join-Path $runDirectory 'flow.robin'), $planner.robin, $script:AgentEncoding)
             Write-AgentJson $activePath @{ job_id = $JobId; run_id = $runId; run_directory = $runDirectory; app_path = $script:AgentAppPath; status = 'pad_running' }
             $job.status = 'running_pad'
+            $job | Add-Member -NotePropertyName last_pad_run_id -NotePropertyValue $runId -Force
             Save-AgentJob $directory $job '専用PADフローを実行しています。'
             # Invoke-AgentCopilot released its mutex before PAD can invoke an inner AiCall.
             try { $observation = Invoke-AgentPad -Robin $planner.robin -RunDirectory $runDirectory -RunId $runId -Job $job -Settings $settings -CancelPath $cancel }
             finally { if (Test-Path -LiteralPath $activePath) { [IO.File]::Delete($activePath) } }
             if ($null -eq $observation -or $observation.status -cnotin @('success','failed','cancelled','unknown')) { throw 'INVALID_OBSERVATION: Invalid PAD execution result.' }
             Write-AgentJson (Join-Path $runDirectory 'observation.json') $observation
+            Set-AgentJobPreservation $job (Get-AgentProperty $observation 'preservation' $null)
+            $job | Add-Member -NotePropertyName partial_artifacts -NotePropertyValue @((Get-AgentProperty $observation 'partial_artifacts' @())) -Force
+            $job | Add-Member -NotePropertyName recovery_required -NotePropertyValue ([bool](Get-AgentProperty $observation 'recovery_required' $false)) -Force
+            if($job.recovery_required){$job.status='blocked';$job.error='Mainの編集が途中で停止しました。元Mainの復元を確認してから新しい依頼を開始してください。';break}
             if ($observation.status -cne 'success') {
                 $observations += [pscustomobject]@{ run_id = $runId; status = $observation.status; artifacts = @(); artifact_observations = @(); ai_calls = @(Get-AgentProperty $observation 'ai_calls' @()); error = [string]$observation.error }
                 $job.error = [string]$observation.error
@@ -1708,11 +1713,12 @@ function Invoke-AgentServer([string]$HomePath, [switch]$NoBrowser, [int]$Port = 
                         else { throw 'INVALID_ID: 履歴の依頼IDが不正です。' }
                     }
                     $activeSummary = if ($null -ne $currentJob) { @{job_id=$currentJob.job_id;status=$currentJob.status} } else { $null }
-                    $payload = @{ ok = $true; version = $script:AgentVersion; runtime_release=$runtimeRelease; job = $viewedJob; active_job = $activeSummary; jobs = (Get-AgentJobHistory $homeDirectory); csv = (Get-AgentCsvView $homeDirectory $viewedJob); settings = (Get-AgentSettings $homeDirectory); diagnostics = $diagnostics }
+                    $payload = @{ ok = $true; version = $script:AgentVersion; runtime_release=$runtimeRelease; job = $viewedJob; pad_recovery=Get-AgentPadRecoveryView $homeDirectory $viewedJob; active_job = $activeSummary; jobs = (Get-AgentJobHistory $homeDirectory); csv = (Get-AgentCsvView $homeDirectory $viewedJob); settings = (Get-AgentSettings $homeDirectory); diagnostics = $diagnostics }
                 } elseif ($request.HttpMethod -ceq 'POST' -and $route.StartsWith('/api/')) {
                     $body = Read-AgentHttpBody $request
                     $payload = @{ ok = $true }
                     switch -CaseSensitive ($route) {
+                        '/api/pad/recover' { $payload.recovery=Invoke-AgentPadRecoveryRequest $homeDirectory ([string]$body.job_id) ([string]$body.run_id) ([string]$body.backup_sha256) }
                         '/api/releases' { $payload.local_releases=Get-AgentLocalReleases $homeDirectory }
                         '/api/storage' { $payload.storage=Get-AgentStorageStatus $homeDirectory }
                         '/api/releases/rollback' { if ((Get-AgentProperty $body 'confirmed' $false) -isnot [bool] -or -not $body.confirmed) { throw 'ROLLBACK_CONFIRM: 復帰する版を確認してください。' }; $payload.selection=Set-AgentRollback $homeDirectory ([string]$body.release) ([string]$body.expected_current) }
@@ -2416,6 +2422,11 @@ function Get-AgentCopilotAttemptPath {
     return (Join-Path ([IO.Path]::GetFullPath($HomePath)) ('data\copilot-attempts\'+$RequestId+'.attempt'))
 }
 
+function Test-AgentCopilotUnsent([string]$HomePath,[string]$RequestId) {
+    $path=Get-AgentCopilotAttemptPath $HomePath $RequestId
+    try { Assert-AgentNoReparse $path; $null=[IO.File]::GetAttributes($path); return $false }
+    catch { $cause=$_.Exception.GetBaseException(); return ($cause -is [IO.FileNotFoundException] -or $cause -is [IO.DirectoryNotFoundException]) }
+}
 function Reserve-AgentCopilotAttempt {
     param([string]$HomePath,[string]$RequestId)
     $path=Get-AgentCopilotAttemptPath $HomePath $RequestId
@@ -2767,6 +2778,7 @@ using System.Runtime.InteropServices;
 public static class AgentPadNative {
   [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
   [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
+  [DllImport("user32.dll")] public static extern uint GetClipboardSequenceNumber();
 }
 '@
     }
@@ -3180,9 +3192,12 @@ function Get-AgentPadCode {
     $deadline=[DateTime]::UtcNow.AddSeconds(2)
     do {
         if($CancelPath -and (Test-Path -LiteralPath $CancelPath)){throw 'CANCELLED: stopped while copying actions.'}
+        $sequence=Get-AgentPadClipboardSequence
         $copied=Get-AgentPadClipboardText
         if($copied -cne $sentinel -and -not [string]::IsNullOrWhiteSpace($copied)){
+            if($sequence -ne (Get-AgentPadClipboardSequence)){continue}
             $script:AgentPadClipboardValue=$copied
+            $script:AgentPadClipboardSequence=$sequence
             return $copied
         }
         Start-Sleep -Milliseconds 50
@@ -3213,11 +3228,21 @@ function Copy-AgentPadClipboardSnapshot {
 function Get-AgentPadClipboard {
     # The native IDataObject can lose its data when the clipboard is replaced.
     # Materialize all native formats while the original clipboard still owns them.
-    try{return (Copy-AgentPadClipboardSnapshot ([Windows.Forms.Clipboard]::GetDataObject()))}
+    try{$before=Get-AgentPadClipboardSequence;$snapshot=Copy-AgentPadClipboardSnapshot ([Windows.Forms.Clipboard]::GetDataObject());if((Get-AgentPadClipboardSequence) -ne $before){throw 'Clipboard changed during capture.'};return $snapshot}
     catch{throw 'PAD_CLIPBOARD: clipboard content could not be fully captured before editing.'}
 }
 function Get-AgentPadClipboardText { return [Windows.Forms.Clipboard]::GetText() }
-function Set-AgentPadClipboardText([string]$Text) { [Windows.Forms.Clipboard]::SetText($Text) }
+function Get-AgentPadClipboardSequence { Initialize-AgentPadTypes; return [AgentPadNative]::GetClipboardSequenceNumber() }
+function Test-AgentPadClipboardLease {
+    $value=Get-Variable AgentPadClipboardValue -Scope Script -ErrorAction SilentlyContinue
+    $sequence=Get-Variable AgentPadClipboardSequence -Scope Script -ErrorAction SilentlyContinue
+    return $null -ne $value -and $null -ne $sequence -and (Get-AgentPadClipboardSequence) -eq $sequence.Value -and (Get-AgentPadClipboardText) -ceq $value.Value
+}
+function Assert-AgentPadClipboardUnchanged {
+    $session=Get-Variable AgentPadClipboardSessionInitial -Scope Script -ErrorAction SilentlyContinue
+    if($null -ne $session -and (Get-AgentPadClipboardSequence) -ne $session.Value -and -not(Test-AgentPadClipboardLease)){throw 'PAD_CLIPBOARD_CHANGED: 別操作で変更されたクリップボードは上書きしません。'}
+}
+function Set-AgentPadClipboardText([string]$Text) { Assert-AgentPadClipboardUnchanged;[Windows.Forms.Clipboard]::SetText($Text);$script:AgentPadClipboardValue=$Text;$script:AgentPadClipboardSequence=Get-AgentPadClipboardSequence }
 function Restore-AgentPadClipboard($Clipboard) {
     if(@($Clipboard.GetFormats($false)).Count -eq 0){[Windows.Forms.Clipboard]::Clear();return}
     [Windows.Forms.Clipboard]::SetDataObject($Clipboard,$true)
@@ -3331,11 +3356,161 @@ function Get-AgentPadAiResults {
     return @{status='success';error='';ai_calls=$calls}
 }
 
+function Set-AgentJobPreservation($Job,$Preservation) {
+    if($null -eq $Preservation){return}
+    $previous=Get-AgentProperty $Job 'preservation' $null
+    $warnings=@((Get-AgentProperty $previous 'warnings' @()) | Where-Object { [string]$_ -like '*クリップボード*' })+@((Get-AgentProperty $Preservation 'warnings' @()))
+    $Preservation | Add-Member -NotePropertyName warnings -NotePropertyValue @($warnings | Select-Object -Unique) -Force
+    $Job | Add-Member -NotePropertyName preservation -NotePropertyValue $Preservation -Force
+}
+function Get-AgentPadRecoveryView([string]$HomePath,$Job) {
+    $runId=[string](Get-AgentProperty $Job 'last_pad_run_id' '')
+    if(-not $runId){return $null};Assert-AgentId $runId
+    $directory=Join-Path (Get-AgentJobDirectory $HomePath $Job.job_id) ('runs\'+$runId)
+    $backupPath=Join-Path $directory 'pad-backup.json';$statePath=Join-Path $directory 'pad-recovery-state.json'
+    if(-not [IO.File]::Exists($backupPath) -or -not [IO.File]::Exists($statePath)){return $null}
+    $state=Read-AgentJson $statePath
+    $required= -not $state.execution_reserved -and -not $state.restored -and ((Get-AgentProperty $Job 'recovery_required' $false) -or $Job.status -ceq 'unknown')
+    return [pscustomobject]@{run_id=$runId;backup_sha256=Get-AgentHash $backupPath;required=$required;phase=$state.phase;can_attempt=($required -and -not(Test-AgentWorkerAlive (Get-AgentJobDirectory $HomePath $Job.job_id)) -and $state.phase -cin @('prepared','deleted','paste_observed','pasted','saving','saved','owner_writing','ready'));message='元の処理は再実行しません。同じPADウィンドウ・停止・内容と所有記録の一致を確認した場合だけ元Mainを戻して保存します。操作未確定や利用者の編集がある場合は拒否します。'}
+}
+function Invoke-AgentPadRecoveryRequest([string]$HomePath,[string]$JobId,[string]$RunId,[string]$BackupHash) {
+    $directory=Get-AgentJobDirectory $HomePath $JobId;$job=Get-AgentJob $HomePath $JobId
+    if((Get-AgentProperty $job 'last_pad_run_id' '') -cne $RunId){throw 'PAD_RECOVERY_SCOPE: 現在の依頼の最後のPAD操作だけを復元できます。'}
+    if(Test-AgentWorkerAlive $directory){throw 'PAD_RECOVERY_BUSY: 元の処理が終了するまで待ってください。'}
+    Assert-AgentNoActiveJob $HomePath $JobId
+    $view=Get-AgentPadRecoveryView $HomePath $job
+    if($null -eq $view -or -not $view.required){throw 'PAD_RECOVERY_STATE: 復元待ちの操作ではありません。'}
+    $result=Restore-AgentPadMain $HomePath $JobId $RunId $BackupHash
+    $job | Add-Member -NotePropertyName recovery_required -NotePropertyValue $false -Force
+    $warnings=@()
+    if($result.clipboard_status -cin @('restore_failed','unconfirmed')){$warnings+='Mainは復元しましたが、クリップボードの復元は確認できません。'}
+    Set-AgentJobPreservation $job ([pscustomobject]@{main_status='restored';clipboard_status=$result.clipboard_status;warnings=$warnings})
+    $job.status='blocked';$job.error='元Mainの復元と保存を確認しました。元の依頼は再実行していません。'
+    Save-AgentJob $directory $job '元Mainと所有記録を復元しました。Run操作は0回です。'
+    return $result
+}
+function Get-AgentPadWindowIdentity($Window) {
+    $pidValue=[int]$Window.Current.ProcessId
+    $handle=[int]$Window.Current.NativeWindowHandle
+    if($pidValue -le 0 -or $handle -eq 0){throw 'PAD_RECOVERY_IDENTITY: PADウィンドウを識別できません。'}
+    $process=Get-Process -Id $pidValue -ErrorAction Stop
+    return [pscustomobject]@{pid=$pidValue;handle=$handle;started=$process.StartTime.ToUniversalTime().ToString('o')}
+}
+function Get-AgentPadOwnerPath([string]$RunDirectory,[string]$JobId,[string]$FlowName) {
+    Assert-AgentId $JobId
+    $jobDirectory=[IO.Path]::GetDirectoryName([IO.Path]::GetDirectoryName((Get-AgentFullPath $RunDirectory)))
+    if([IO.Path]::GetFileName($jobDirectory) -cne $JobId -or [string]::IsNullOrWhiteSpace($FlowName) -or $FlowName -notmatch '^[\p{L}\p{N} _-]{1,80}$'){throw 'PAD_CONTEXT: 復旧対象の対応が不正です。'}
+    $dataDirectory=[IO.Path]::GetDirectoryName([IO.Path]::GetDirectoryName($jobDirectory))
+    return Assert-AgentPathUnder (Join-Path $dataDirectory ('pad-owned-'+(Get-AgentTextHash $FlowName)+'.json')) $dataDirectory
+}
+function New-AgentPadRecoveryBackup([string]$RunDirectory,[string]$RunId,$Job,$Settings,$Window,[string]$Original,[string]$Submitted) {
+    $backupPath=Join-Path $RunDirectory 'pad-backup.json';$statePath=Join-Path $RunDirectory 'pad-recovery-state.json'
+    if([IO.File]::Exists($backupPath) -or [IO.File]::Exists($statePath)){throw 'PAD_REPLAY: この実行の編集記録が既に存在します。'}
+    $ownerPath=Get-AgentPadOwnerPath $RunDirectory $Job.job_id $Settings.pad_flow_name
+    $ownerExists=[IO.File]::Exists($ownerPath);$ownerBase64='';$ownerHash=''
+    if($ownerExists){if((Get-Item -LiteralPath $ownerPath).Length -gt 65536){throw 'PAD_OWNERSHIP: 所有記録が大きすぎます。'};$ownerBase64=[Convert]::ToBase64String([IO.File]::ReadAllBytes($ownerPath));$ownerHash=Get-AgentHash $ownerPath}
+    $submittedHash=Get-AgentTextHash (ConvertTo-AgentComparableRobin $Submitted)
+    $newOwner=[ordered]@{flow_name=$Settings.pad_flow_name;hash=$submittedHash}
+    $backup=[ordered]@{schema_version=1;job_id=$Job.job_id;run_id=$RunId;flow_name=$Settings.pad_flow_name;window_identity=Get-AgentPadWindowIdentity $Window;original_main=$Original;original_main_sha256=Get-AgentTextHash (ConvertTo-AgentComparableRobin $Original);owner_existed=$ownerExists;owner_base64=$ownerBase64;owner_sha256=$ownerHash;submitted_sha256=$submittedHash;expected_owner_sha256=Get-AgentTextHash (ConvertTo-Json $newOwner -Compress);controller_pid=$PID;controller_started=(Get-Process -Id $PID).StartTime.ToUniversalTime().ToString('o')}
+    Write-AgentJson $backupPath $backup
+    $state=[pscustomobject]@{schema_version=1;backup_sha256=Get-AgentHash $backupPath;phase='prepared';execution_reserved=$false;paste_settled=$false;restored=$false}
+    Write-AgentJson $statePath $state
+    return $state
+}
+function Set-AgentPadRecoveryPhase([string]$RunDirectory,$State,[string]$Phase) {
+    $State.phase=$Phase
+    Write-AgentJson (Join-Path $RunDirectory 'pad-recovery-state.json') $State
+}
+function Restore-AgentPadMain([string]$HomePath,[string]$JobId,[string]$RunId,[string]$ExpectedBackupHash) {
+    if($script:AgentOfflineTest){throw 'PAD_UNAVAILABLE: 非ライブ試験モードではPADを操作しません。'}
+    Assert-AgentId $RunId
+    $jobDirectory=Get-AgentJobDirectory $HomePath $JobId
+    $directory=Assert-AgentPathUnder (Join-Path $jobDirectory ('runs\'+$RunId)) $jobDirectory
+    $backupPath=Join-Path $directory 'pad-backup.json';$statePath=Join-Path $directory 'pad-recovery-state.json'
+    if($ExpectedBackupHash -cnotmatch '^[a-f0-9]{64}$' -or (Get-AgentHash $backupPath) -cne $ExpectedBackupHash){throw 'PAD_RECOVERY_CHANGED: バックアップが変わっています。'}
+    $backup=Read-AgentJson $backupPath;$state=Read-AgentJson $statePath
+    if($state.execution_reserved -isnot [bool] -or $state.paste_settled -isnot [bool] -or $state.restored -isnot [bool] -or $backup.owner_existed -isnot [bool] -or $backup.controller_pid -isnot [int] -or $backup.controller_pid -le 0){throw 'PAD_RECOVERY_STATE: 復旧記録の型が不正です。'}
+    if($backup.schema_version -ne 1 -or $state.schema_version -ne 1 -or $backup.job_id -cne $JobId -or $backup.run_id -cne $RunId -or $state.backup_sha256 -cne $ExpectedBackupHash -or $state.execution_reserved){throw 'PAD_RECOVERY_STATE: 実行開始後または未対応の状態はMainの復元対象にできません。'}
+    if($state.restored){$reportPath=Join-Path $directory 'pad-restoration.json';if([IO.File]::Exists($reportPath)){$prior=Read-AgentJson $reportPath;if($prior.status -ceq 'restored' -and $prior.run_id -ceq $RunId){return $prior}};return [pscustomobject]@{status='restored';run_id=$RunId;run_invocations=0;clipboard_status='unconfirmed'}}
+    try{$controller=Get-Process -Id $backup.controller_pid -ErrorAction Stop}catch{$controller=$null}
+    if($null -ne $controller -and $controller.StartTime.ToUniversalTime().ToString('o') -ceq $backup.controller_started){throw 'PAD_RECOVERY_BUSY: 元の処理が終了するまで待ってください。'}
+    if($backup.original_main -isnot [string] -or (Get-AgentTextHash (ConvertTo-AgentComparableRobin $backup.original_main)) -cne $backup.original_main_sha256){throw 'PAD_RECOVERY_CHANGED: 元Mainの内容を検証できません。'}
+    $ownerBytes=@()
+    if($backup.owner_existed){
+        try{$ownerBytes=[Convert]::FromBase64String($backup.owner_base64);$sha=[Security.Cryptography.SHA256]::Create();try{$ownerContentHash=([BitConverter]::ToString($sha.ComputeHash([byte[]]$ownerBytes))).Replace('-','').ToLowerInvariant()}finally{$sha.Dispose()}}catch{throw 'PAD_RECOVERY_CHANGED: 所有記録を復号できません。'}
+        if($ownerBytes.Length -gt 65536 -or $ownerContentHash -cne $backup.owner_sha256){throw 'PAD_RECOVERY_CHANGED: 元の所有記録のハッシュが一致しません。'}
+    }elseif($backup.owner_sha256 -cne '' -or $backup.owner_base64 -cne ''){throw 'PAD_RECOVERY_CHANGED: 所有記録の有無が一致しません。'}
+    if($state.phase -cnotin @('prepared','deleted','paste_observed','pasted','saving','saved','owner_writing','ready')){throw 'PAD_RECOVERY_UNCERTAIN: 編集操作の確定が記録されていません。専用フローを手動で確認してください。'}
+    if($state.phase -cin @('paste_observed','pasted','saving','saved','owner_writing','ready') -and -not $state.paste_settled){throw 'PAD_RECOVERY_UNCERTAIN: 貼付けの完了が未確認です。'}
+    $ownerPath=Get-AgentPadOwnerPath $directory $JobId $backup.flow_name
+    $acceptedOwner=@($backup.owner_sha256,$backup.expected_owner_sha256)
+    $ownerNow=if([IO.File]::Exists($ownerPath)){Get-AgentHash $ownerPath}else{''}
+    if($acceptedOwner -cnotcontains $ownerNow){throw 'PAD_RECOVERY_OWNER: 所有記録が外部で変更されています。'}
+    $mutex=New-Object Threading.Mutex($false,'Local\AiPromptsAgent-PAD');$held=$false;$clipboard=$null;$clipboardBefore=0
+    $report=[ordered]@{status='refused';run_id=$RunId;run_invocations=0;main_restored=$false;owner_restored=$false;clipboard_status='not_touched';error=''}
+    try{
+        try{$held=$mutex.WaitOne(0)}catch [Threading.AbandonedMutexException]{$held=$true}
+        if(-not $held){throw 'PAD_RECOVERY_BUSY: 別のPAD操作が実行中です。'}
+        $window=Get-AgentPadWindow ([pscustomobject]@{pad_flow_name=$backup.flow_name})
+        $identity=Get-AgentPadWindowIdentity $window
+        if($identity.pid -ne $backup.window_identity.pid -or $identity.handle -ne $backup.window_identity.handle -or $identity.started -cne $backup.window_identity.started){throw 'PAD_RECOVERY_IDENTITY: 元のPADウィンドウと一致しません。'}
+        $snapshot=Get-AgentPadSnapshot $window -AllowErrors
+        if(-not $snapshot.idle -or -not $snapshot.editable -or $snapshot.running -or -not $snapshot.errors_known -or $snapshot.status -cnotin @('ready','saved')){throw 'PAD_RECOVERY_BUSY: PADの停止・編集可能状態を確認できません。'}
+        $clipboardBefore=Get-AgentPadClipboardSequence;$clipboard=Get-AgentPadClipboard;$script:AgentPadClipboardSessionInitial=$clipboardBefore
+        $empty=Test-AgentPadEmpty $snapshot.workspace
+        $current=if($empty){''}else{Get-AgentPadCode $snapshot}
+        $currentHash=Get-AgentTextHash (ConvertTo-AgentComparableRobin $current)
+        $allowed=@($backup.original_main_sha256,$backup.submitted_sha256)
+        if($state.phase -ceq 'deleted'){$allowed+=Get-AgentTextHash ''}
+        if($allowed -cnotcontains $currentHash){throw 'PAD_RECOVERY_EDITED: 利用者の編集または未確認の内容があります。上書きしません。'}
+        if($currentHash -cne $backup.original_main_sha256){
+            Set-AgentPadFocus $window $snapshot.workspace
+            if(-not $empty){Send-AgentPadKeys '^a';Send-AgentPadKeys '{DELETE}';$snapshot=Wait-AgentPadEditable $window '';if(-not(Test-AgentPadEmpty $snapshot.workspace)){throw 'PAD_RECOVERY_DELETE: 現在のMainを取り除けませんでした。'}}
+            if($backup.original_main.Length -gt 0){Set-AgentPadFocus $window $snapshot.workspace;Set-AgentPadClipboardText $backup.original_main;$script:AgentPadClipboardValue=$backup.original_main;Send-AgentPadKeys '^v';$snapshot=Wait-AgentPadEditable $window '' -RequireActions}
+        }
+        $actual=if(Test-AgentPadEmpty $snapshot.workspace){''}else{Get-AgentPadCode $snapshot}
+        if((Get-AgentTextHash (ConvertTo-AgentComparableRobin $actual)) -cne $backup.original_main_sha256){throw 'PAD_RECOVERY_VERIFY: 元Mainのコピー戻しが一致しません。'}
+        if($snapshot.status -cne 'saved'){$snapshot=Wait-AgentPadSaveBaseline $window '';Invoke-AgentPadControl $snapshot.save;$snapshot=Wait-AgentPadSaved $window ''}
+        $actual=if(Test-AgentPadEmpty $snapshot.workspace){''}else{Get-AgentPadCode $snapshot}
+        if((Get-AgentTextHash (ConvertTo-AgentComparableRobin $actual)) -cne $backup.original_main_sha256){throw 'PAD_RECOVERY_VERIFY: 保存後のMainが一致しません。'}
+        $report.main_restored=$true
+        $ownerNow=if([IO.File]::Exists($ownerPath)){Get-AgentHash $ownerPath}else{''}
+        if($acceptedOwner -cnotcontains $ownerNow){throw 'PAD_RECOVERY_OWNER: 復元中に所有記録が変更されました。'}
+        if($backup.owner_existed){
+            $temp=Join-Path ([IO.Path]::GetDirectoryName($ownerPath)) ('.restore-owner-'+[guid]::NewGuid().ToString('N'))
+            try{[IO.File]::WriteAllBytes($temp,$ownerBytes);if((Get-AgentHash $temp) -cne $backup.owner_sha256){throw 'PAD_RECOVERY_OWNER: 元の所有記録を検証できません。'};if([IO.File]::Exists($ownerPath)){[IO.File]::Replace($temp,$ownerPath,[Management.Automation.Language.NullString]::Value)}else{[IO.File]::Move($temp,$ownerPath)}}finally{if([IO.File]::Exists($temp)){[IO.File]::Delete($temp)}}
+        }elseif([IO.File]::Exists($ownerPath)){[IO.File]::Delete($ownerPath)}
+        $report.owner_restored=$true;$report.status='restored';$state.restored=$true;Set-AgentPadRecoveryPhase $directory $state 'restored'
+    }catch{$report.error=$_.Exception.Message;if($report.main_restored){$report.status='partial'}}
+    finally{
+        if($null -ne $clipboard){try{if((Get-AgentPadClipboardSequence) -eq $clipboardBefore){$report.clipboard_status='not_touched'}elseif(Test-AgentPadClipboardLease){Restore-AgentPadClipboard $clipboard;$report.clipboard_status='restored'}else{$report.clipboard_status='user_changed'}}catch{$report.clipboard_status='restore_failed'}}
+        Remove-Variable AgentPadClipboardSessionInitial -Scope Script -ErrorAction SilentlyContinue
+        if($held){$mutex.ReleaseMutex()};$mutex.Dispose()
+        Write-AgentJson (Join-Path $directory 'pad-restoration.json') $report
+    }
+    if($report.status -cne 'restored'){throw ('PAD_RECOVERY_FAILED: '+$report.error)}
+    return [pscustomobject]$report
+}
 function Invoke-AgentPad {
     param([string]$Robin,[string]$RunDirectory,[string]$RunId,$Job,$Settings,[string]$CancelPath)
+    if($script:AgentOfflineTest){throw 'PAD_UNAVAILABLE: 非ライブ試験ではPADを操作しません。'}
+    $preservation=[ordered]@{schema_version=1;job_id=$Job.job_id;run_id=$RunId;main_status='not_changed';clipboard_status='not_touched';backup_sha256='';warnings=@();declared_outputs=@()}
+    $result=Invoke-AgentPadCore $Robin $RunDirectory $RunId $Job $Settings $CancelPath $preservation
+    $result.preservation=[pscustomobject]$preservation
+    $result.recovery_required=$preservation.main_status -ceq 'needs_recovery'
+    $partial=@()
+    if($result.status -cne 'success'){
+        foreach($path in $preservation.declared_outputs){try{$path=Assert-AgentPathUnder $path (Join-Path $RunDirectory 'artifacts');if([IO.File]::Exists($path)){$partial += [pscustomobject]@{path=$path;state='unverified';reason='途中で存在を確認したファイルです。内容・処理完了は未検証です。'}}}catch{}}
+    }
+    $result.partial_artifacts=$partial
+    return [pscustomobject]$result
+}
+function Invoke-AgentPadCore {
+    param([string]$Robin,[string]$RunDirectory,[string]$RunId,$Job,$Settings,[string]$CancelPath,$Preservation)
     if ($script:AgentOfflineTest) { throw 'PAD_UNAVAILABLE: 非ライブ試験ではPAD操作を禁止しています。' }
     $outputs=@(Test-AgentRobin -Robin $Robin -RunDirectory $RunDirectory -Job $Job)
-    $started=$false; $stopSent=$false; $clipboard=$null; $mutex=$null; $held=$false
+    $started=$false; $stopSent=$false; $clipboard=$null; $mutex=$null; $held=$false;$recovery=$null;$edited=$false;$clipboardBefore=0
+    $Preservation.declared_outputs=@($outputs)
     try {
         if(Test-Path -LiteralPath $CancelPath) {return @{status='cancelled';error='CANCELLED';artifacts=@()}}
         $mutex=New-Object Threading.Mutex($false,'Local\AiPromptsAgent-PAD')
@@ -3344,13 +3519,14 @@ function Invoke-AgentPad {
         $window=Get-AgentPadWindow $Settings
         $snapshot=Get-AgentPadSnapshot $window
         if(-not ($snapshot.idle -and $snapshot.editable)) {throw 'PAD_BUSY: dedicated flow is not idle and editable.'}
-        $clipboard=Get-AgentPadClipboard
+        $clipboardBefore=Get-AgentPadClipboardSequence;$clipboard=Get-AgentPadClipboard;$script:AgentPadClipboardSessionInitial=$clipboardBefore
         # Adopt an empty dedicated Main only. Existing unrelated actions are never replaced.
         $empty=Test-AgentPadEmpty $snapshot.workspace
         $jobDirectory=[IO.Path]::GetDirectoryName([IO.Path]::GetDirectoryName($RunDirectory))
         if([IO.Path]::GetFileName($jobDirectory) -cne $Job.job_id) {throw 'PAD_CONTEXT: run directory and job ID differ.'}
         $dataDirectory=[IO.Path]::GetDirectoryName([IO.Path]::GetDirectoryName($jobDirectory))
         $ownerPath=Join-Path $dataDirectory ('pad-owned-'+(Get-AgentTextHash ([string]$Settings.pad_flow_name))+'.json')
+        $old=''
         if(-not $empty) {
             $old=Get-AgentPadCode $snapshot -CancelPath $CancelPath
             if($old -notmatch '^SET AgentOwnedFlow TO \$\x27{3}AiPromptsAgent\x27{3}(?:\r?\n|$)') {throw 'PAD_OWNERSHIP: dedicated flow contains unrelated actions.'}
@@ -3367,35 +3543,51 @@ function Invoke-AgentPad {
         $end=$markerTemplate -f (ConvertTo-AgentRobinLiteral $endPath),(ConvertTo-AgentRobinLiteral $RunId)
         $combined="SET AgentOwnedFlow TO `$'''AiPromptsAgent'''`r`n"+$begin+"`r`n"+$Robin.Replace("`r`n","`n").Replace("`n","`r`n")+"`r`n"+$end
         [IO.File]::WriteAllText((Join-Path $RunDirectory 'submitted.robin.txt'),$combined,(New-Object Text.UTF8Encoding($false)))
+        $recovery=New-AgentPadRecoveryBackup $RunDirectory $RunId $Job $Settings $window $old $combined
+        $Preservation.backup_sha256=$recovery.backup_sha256
         # Verify removal before one paste. Never issue Run after a failed or uncertain step.
         $snapshot=Get-AgentPadSnapshot $window
         if(-not ($snapshot.idle -and $snapshot.editable)) {throw 'PAD_BUSY: state changed before paste.'}
+        if($empty -and -not(Test-AgentPadEmpty $snapshot.workspace)){throw 'PAD_OWNERSHIP: Empty Main changed before paste.'}
+        $backupCheck=Read-AgentJson (Join-Path $RunDirectory 'pad-backup.json')
+        $currentOwnerHash=if([IO.File]::Exists($ownerPath)){Get-AgentHash $ownerPath}else{''}
+        if($currentOwnerHash -cne $backupCheck.owner_sha256){throw 'PAD_OWNERSHIP: Owner record changed before replacement.'}
         Set-AgentPadFocus $window $snapshot.workspace
         if(-not $empty) {
+            if((Get-AgentTextHash (ConvertTo-AgentComparableRobin (Get-AgentPadCode $snapshot -CancelPath $CancelPath))) -cne (Get-AgentTextHash (ConvertTo-AgentComparableRobin $old))){throw 'PAD_OWNERSHIP: Main changed before replacement.'}
+            Set-AgentPadRecoveryPhase $RunDirectory $recovery 'deleting';$edited=$true
             Send-AgentPadKeys '^a'; Send-AgentPadKeys '{DELETE}'
             $snapshot=Wait-AgentPadEditable -Window $window -CancelPath $CancelPath
             if(-not (Test-AgentPadEmpty $snapshot.workspace)) {throw 'PAD_REPLACE: old actions were not completely removed.'}
+            Set-AgentPadRecoveryPhase $RunDirectory $recovery 'deleted'
             Set-AgentPadFocus $window $snapshot.workspace
         }
         Set-AgentPadClipboardText $combined
         $script:AgentPadClipboardValue=$combined
+        Set-AgentPadRecoveryPhase $RunDirectory $recovery 'paste_requested';$edited=$true
         Send-AgentPadKeys '^v'
         # Keep the submitted clipboard intact until actions are actually present.
         # An empty Ready workspace is not evidence that the asynchronous paste finished.
         $snapshot=Wait-AgentPadEditable -Window $window -CancelPath $CancelPath -RequireActions
+        $recovery.paste_settled=$true;Set-AgentPadRecoveryPhase $RunDirectory $recovery 'paste_observed'
         $actual=Get-AgentPadCode $snapshot -CancelPath $CancelPath
         if((ConvertTo-AgentComparableRobin $actual) -cne (ConvertTo-AgentComparableRobin $combined)) {throw 'PAD_PASTE_MISMATCH: complete pasted content differs; execution blocked.'}
+        Set-AgentPadRecoveryPhase $RunDirectory $recovery 'pasted'
         $snapshot=Wait-AgentPadSaveBaseline -Window $window -CancelPath $CancelPath
+        Set-AgentPadRecoveryPhase $RunDirectory $recovery 'saving'
         Invoke-AgentPadControl $snapshot.save
         $snapshot=Wait-AgentPadSaved -Window $window -CancelPath $CancelPath
         $actual=Get-AgentPadCode $snapshot -CancelPath $CancelPath
         if((ConvertTo-AgentComparableRobin $actual) -cne (ConvertTo-AgentComparableRobin $combined)) {throw 'PAD_SAVE_MISMATCH: content changed after save; execution blocked.'}
-        Write-AgentJson $ownerPath @{flow_name=$Settings.pad_flow_name;hash=(Get-AgentTextHash (ConvertTo-AgentComparableRobin $actual))}
+        Set-AgentPadRecoveryPhase $RunDirectory $recovery 'owner_writing'
+        Write-AgentJson $ownerPath ([ordered]@{flow_name=$Settings.pad_flow_name;hash=(Get-AgentTextHash (ConvertTo-AgentComparableRobin $actual))})
+        Set-AgentPadRecoveryPhase $RunDirectory $recovery 'ready'
         $snapshot=Get-AgentPadSnapshot $window
         if(-not ($snapshot.idle -and $snapshot.can_run -and $snapshot.errors_known -and $snapshot.errors -eq 0)) {throw 'PAD_SETUP: dedicated flow is not ready to run.'}
         if(Test-Path -LiteralPath $CancelPath) {return @{status='cancelled';error='CANCELLED';artifacts=@()}}
         # Mark uncertainty BEFORE the single UI invocation; never retry it.
         $started=$true
+        $recovery.execution_reserved=$true;Set-AgentPadRecoveryPhase $RunDirectory $recovery 'execution_reserved'
         Invoke-AgentPadControl $snapshot.start
         $deadline=[DateTime]::UtcNow.AddSeconds(900); $seenStart=$false
         $observationLossDeadline=$null; $cancelObservationDeadline=$null
@@ -3456,7 +3648,17 @@ function Invoke-AgentPad {
     } catch {
         return @{status=$(if($started -or $_.Exception.Message -like 'PAD_UNKNOWN:*'){'unknown'}elseif($_.Exception.Message -like 'CANCELLED:*'){'cancelled'}else{'failed'});error=$_.Exception.Message;artifacts=@()}
     } finally {
-        if($null -ne $clipboard) {try {if((Get-AgentPadClipboardText) -ceq $script:AgentPadClipboardValue) {Restore-AgentPadClipboard $clipboard}} catch {}}
+        if($edited -and -not $started){$Preservation.main_status='needs_recovery';$Preservation.warnings+= 'Mainの編集が完了していません。元Mainへの復元を確認してください。'}elseif($started){$Preservation.main_status='kept_owned'}
+        if($null -ne $clipboard) {
+            try {
+                if($null -ne $recovery -and $recovery.phase -ceq 'paste_requested' -and -not $recovery.paste_settled){$Preservation.clipboard_status='deferred';$Preservation.warnings+='貼付けの完了が不明なため、クリップボードを戻していません。専用フローの状態を確認してください。'}
+                elseif((Get-AgentPadClipboardSequence) -eq $clipboardBefore){$Preservation.clipboard_status='not_touched'}
+                elseif(Test-AgentPadClipboardLease){Restore-AgentPadClipboard $clipboard;$Preservation.clipboard_status='restored'}
+                else{$Preservation.clipboard_status='user_changed'}
+            }catch{$Preservation.clipboard_status='restore_failed';$Preservation.warnings+='クリップボードを復元できませんでした。処理結果とは別に確認してください。'}
+        }
+        try{Write-AgentJson (Join-Path $RunDirectory 'pad-preservation.json') $Preservation}catch{$Preservation.warnings+='保全状態の記録を保存できませんでした。'}
+        Remove-Variable AgentPadClipboardSessionInitial -Scope Script -ErrorAction SilentlyContinue
         if($held) {$mutex.ReleaseMutex()}; if($mutex) {$mutex.Dispose()}
     }
 }

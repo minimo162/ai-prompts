@@ -98,8 +98,17 @@ function Invoke-AgentCopilot {
     await page.locator('#answer').fill('表示した分類候補の範囲で進めてください。');
     await page.locator('#send-answer').click();
     await until(async () => (await state()).job.summary.success === 20, '20 records');
-    await page.locator('#csv-stop').click();
-    await until(async () => (await state()).job.status === 'cancelled', 'UI cancellation');
+    if(process.env.CSV_TEST_FORCE_KILL === '1') {
+      const running=await state(),workerPath=path.join(home,'data','jobs',running.job.job_id,'worker.json');
+      const killScript=path.join(root,'stop-owned-worker.ps1');
+      fs.writeFileSync(killScript,"param($RecordPath,$ExpectedApp); $ErrorActionPreference='Stop'; $w=Get-Content -LiteralPath $RecordPath -Raw -Encoding UTF8 | ConvertFrom-Json; if($w.app_path -cne $ExpectedApp){throw 'WRONG_APP'}; $p=Get-Process -Id $w.pid; if($p.StartTime.ToUniversalTime().ToString('o') -cne $w.started){throw 'STALE_WORKER'}; $p.Kill(); if(-not $p.WaitForExit(5000)){throw 'WORKER_NOT_STOPPED'}");
+      const killed=spawnSync(ps,['-NoProfile','-ExecutionPolicy','Bypass','-File',killScript,'-RecordPath',workerPath,'-ExpectedApp',path.join(app,'App.ps1')],{windowsHide:true});
+      assert.equal(killed.status,0,killed.stderr.toString());checks++;
+      await until(async()=>(await state()).job.status === 'partial','worker-exit reconciliation');
+    } else {
+      await page.locator('#csv-stop').click();
+      await until(async () => (await state()).job.status === 'cancelled', 'UI cancellation');
+    }
     let current = await state();
     assert.equal(current.job.summary.success, 20); assert.equal(current.job.summary.unprocessed, 30); checks += 2;
     fs.writeFileSync(path.join(home, 'resume-ready'), 'continue');
@@ -192,7 +201,7 @@ function Invoke-AgentCopilot {
     await until(()=>JSON.parse(fs.readFileSync(pointerPath,'utf8')).rollback_hold === false,'explicit unpin'); checks++;
     await page.locator('#storage-show').click();await until(async()=>/空き容量: \d+ MiB/.test(await page.locator('#storage-info').innerText()),'storage policy and measured capacity');checks++;
     assert.deepEqual(errors, []); checks++;
-    fs.writeFileSync(path.join(root, 'verification.json'), JSON.stringify({ status:'PASS', checks, scope:'real PS5 HTTP and child worker; rendered Edge; mock provider', live_sends:0, rows:50, duplicate_sends:0, explicitly_reprocessed_review_rows:1, remaining:'real M365, native picker, other PCs and users' }, null, 2));
+    fs.writeFileSync(path.join(root, 'verification.json'), JSON.stringify({ status:'PASS', checks, scope:'real PS5 HTTP and child worker; rendered Edge; mock provider', interruption:process.env.CSV_TEST_FORCE_KILL==='1'?'owned_worker_kill':'ui_stop', live_sends:0, rows:50, duplicate_sends:0, explicitly_reprocessed_review_rows:1, remaining:'real M365, native picker, other PCs and users' }, null, 2));
     console.log(`PASS: ${checks} rendered CSV checks. Evidence: ${root}`);
   } catch (error) {
     if (page) { console.error(await page.locator('body').innerText()); await page.screenshot({ path:path.join(root,'failure.png'), fullPage:true }); }

@@ -154,6 +154,7 @@
           <div class="section-heading"><span class="step" aria-hidden="true">03</span><h2 id="result-heading">回答と成果物</h2></div>
           <p id="result-empty" class="empty">回答や成果物が届くと、ここに表示します。</p>
           <div id="final-answer" class="result-text" hidden></div>
+          <div id="preservation-section" hidden><h3>保全・復旧</h3><p id="preservation-warning" class="alert"></p><p id="pad-recovery-message" class="hint"></p><button id="pad-recover" type="button" disabled>停止・内容を確認して元Mainを復元</button><ul id="partial-artifacts" class="artifact-list"></ul></div>
           <div id="artifacts-section" hidden><h3 class="result-subheading">成果物の場所</h3><p class="hint">場所を選択してコピーし、エクスプローラーで確認できます。</p><ul id="artifacts" class="artifact-list"></ul></div>
         </section>
       </div>
@@ -258,6 +259,7 @@
       function updateControls() {
         const working = busy();
         const ready = !!token && connected;
+        $('pad-recover').disabled = !ready || working || !state?.pad_recovery?.can_attempt || pending.has('/api/pad/recover');
         ['release-list','rollback-select','rollback-confirm','rollback-unpin','rollback-target'].forEach(id => { $(id).disabled = !ready || working || [...pending].some(p => p.startsWith('/api/releases')); });
         const csvJob = state?.job?.workflow === 'csv_classify';
         const viewingOther = !!state?.active_job && state?.job?.job_id !== state.active_job.job_id;
@@ -323,6 +325,17 @@
       function render(next) {
         state = next;
         const job = next.job || null;
+        const preservation = job?.preservation;
+        const warnings = Array.isArray(preservation?.warnings) ? preservation.warnings : [];
+        const partial = Array.isArray(job?.partial_artifacts) ? job.partial_artifacts : [];
+        $('preservation-section').hidden = warnings.length === 0 && !next.pad_recovery?.required && partial.length === 0;
+        text($('preservation-warning'), warnings.join('\n'));
+        $('preservation-warning').hidden = warnings.length === 0;
+        text($('pad-recovery-message'), next.pad_recovery?.required ? next.pad_recovery.message : '');
+        $('pad-recover').hidden = !next.pad_recovery?.required;
+        const partialFragment = document.createDocumentFragment();
+        partial.forEach(artifact => { const item=document.createElement('li'); item.className='artifact';item.style.whiteSpace='pre-wrap';item.style.overflowWrap='anywhere';text(item, `未確認の途中ファイル: ${artifact.path}\n${artifact.reason}`); partialFragment.append(item); });
+        $('partial-artifacts').replaceChildren(partialFragment);
         text($('footer-release'), `検証版 ${next.version} · ローカル接続`);
         if (next.runtime_release) text($('runtime-release'), `起動中: ${next.runtime_release.version} · ${next.runtime_release.release_id.slice(0,12)} · ${next.runtime_release.channel}`);
         const jobsKey = JSON.stringify(next.jobs || []);
@@ -527,6 +540,7 @@
       $('csv-stop').addEventListener('click', () => mutate('/api/stop', { job_id: state.job.job_id }, '停止を要求しました。停止確認までお待ちください。'));
       $('csv-filter').addEventListener('change', renderCsv);
       $('job-history').addEventListener('change', () => { selectedJobId = $('job-history').value; poll(); });
+      $('pad-recover').addEventListener('click', () => { if (state?.pad_recovery?.can_attempt) mutate('/api/pad/recover', {job_id:state.job.job_id,run_id:state.pad_recovery.run_id,backup_sha256:state.pad_recovery.backup_sha256}, '元Mainと所有記録を復元しました。元の処理は再実行していません。'); });
       $('release-list').addEventListener('click', () => mutate('/api/releases', {}, '整合性を確認できる保存済みの版を表示しました。'));
       $('storage-show').addEventListener('click', () => mutate('/api/storage', {}, '保存方針と空き容量を表示しました。'));
       $('rollback-target').addEventListener('change', () => { $('rollback-confirmation').hidden = true; });
