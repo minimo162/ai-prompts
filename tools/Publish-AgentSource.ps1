@@ -5,7 +5,8 @@ param(
     [Parameter(Mandatory=$true)][string]$DestinationDirectory,
     [Parameter(Mandatory=$true)][string]$EvidenceDirectory,
     [Parameter(Mandatory=$true)][string]$ExpectedSourceRelease,
-    [Parameter(Mandatory=$true)][string]$ExpectedDestinationRelease
+    [Parameter(Mandatory=$true)][string]$ExpectedDestinationRelease,
+    [switch]$Rollback
 )
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version 2.0
@@ -22,7 +23,7 @@ $items=@(Get-ChildItem -LiteralPath $destination -Force)
 if($items.Count -ne 3 -or @($items|Where-Object {$_.PSIsContainer -or $names -cnotcontains $_.Name}).Count){throw 'PUBLISH_DESTINATION: Exactly three existing distribution files required.'}
 $new=Get-AgentRelease $source;$old=Get-AgentRelease $destination
 if($new.release -cne $ExpectedSourceRelease -or $old.release -cne $ExpectedDestinationRelease){throw 'PUBLISH_PIN: Release changed before publication.'}
-if([version]$new.version -lt [version]$old.version){throw 'PUBLISH_VERSION: Downgrade refused.'}
+if([version]$new.version -lt [version]$old.version -and -not $Rollback){throw 'PUBLISH_VERSION: Downgrade requires explicit -Rollback and pinned source/destination releases.'}
 # Open all files before the first destination write. This preserves their file objects,
 # owner and ACL, and prevents normal readers from seeing a partially written package.
 # Process/OS crashes are not transactional: retain the backup for explicit recovery.
@@ -57,7 +58,7 @@ try {
     }
     $backup=Join-Path $evidence 'backup';[IO.Directory]::CreateDirectory($backup)|Out-Null
     foreach($name in $names){[IO.File]::WriteAllBytes((Join-Path $backup $name),$originals[$name])}
-    Write-AgentJson (Join-Path $evidence 'before.json') @{source=$new;destination=$old;acl=$acls}
+    Write-AgentJson (Join-Path $evidence 'before.json') @{source=$new;destination=$old;destination_path=$destination;acl=$acls;explicit_rollback=[bool]$Rollback;publisher_pid=$PID;publisher_started=(Get-Process -Id $PID).StartTime.ToUniversalTime().ToString('o')}
     foreach($name in $names){
         if($new.hashes.$name -ceq $old.hashes.$name){continue}
         $changed=$true;$report.writes++

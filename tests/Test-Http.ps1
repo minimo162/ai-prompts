@@ -74,6 +74,7 @@ try {
     [IO.Directory]::CreateDirectory($replacementDirectory) | Out-Null
     $replacementApp = Join-Path $replacementDirectory 'App.ps1'
     [IO.File]::Copy($script:AgentAppPath, $replacementApp)
+    [IO.File]::Copy((Join-Path ([IO.Path]::GetDirectoryName($script:AgentAppPath)) '業務エージェント.cmd'), (Join-Path $replacementDirectory '業務エージェント.cmd'))
     [IO.File]::Copy((Join-Path ([IO.Path]::GetDirectoryName($script:AgentAppPath)) 'index.html'), (Join-Path $replacementDirectory 'index.html'))
     $oldServer = $server
     $server = Start-AgentProcess -AppPath $replacementApp -HomePath $testHome -Mode Serve -NoBrowser

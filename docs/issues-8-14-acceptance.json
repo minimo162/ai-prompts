@@ -307,49 +307,98 @@
       "title": "[P1] 3ファイル配布の組合せ保証・本番公開手順・明示的な旧版復帰を整備する",
       "url": "https://github.com/minimo162/ai-prompts/issues/13",
       "comments_read": 0,
-      "implementation_status": "not_started",
+      "implementation_status": "implemented_pending_live_acceptance",
       "acceptance": [
         {
           "id": "13.1",
           "requirement": "同じsemverの互換性のないA/B一式を作り、App=A/HTML=B等の安定した混在を置く。CMDから起動しても承認済み一式として新規利用されず、理由を表示する。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ReleaseBinding.ps1",
+            "tests/Test-PublishCrash.ps1",
+            "tests/Test-Launcher.ps1",
+            "tests/Test-CsvUi.cjs",
+            "docs/release-operations.md",
+            ".work/nonlive-8336e1d5c7b94459a09bc427ab8c5b7c/verification.json"
+          ]
         },
         {
           "id": "13.2",
           "requirement": "3ファイルの1つを書換えた直後に公開プロセスを強制終了する。再起動で途中一式を受理せず、公開側の復旧または明示された正常ローカル版へ誘導する。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ReleaseBinding.ps1",
+            "tests/Test-PublishCrash.ps1",
+            "tests/Test-Launcher.ps1",
+            "tests/Test-CsvUi.cjs",
+            "docs/release-operations.md",
+            ".work/nonlive-8336e1d5c7b94459a09bc427ab8c5b7c/verification.json"
+          ]
         },
         {
           "id": "13.3",
           "requirement": "公開前後の3ファイル・所有者/ACLを記録し、意図しない権限変更がない。利用者は本番公開ファイルを書き換えられない。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ReleaseBinding.ps1",
+            "tests/Test-PublishCrash.ps1",
+            "tests/Test-Launcher.ps1",
+            "tests/Test-CsvUi.cjs",
+            "docs/release-operations.md",
+            ".work/nonlive-8336e1d5c7b94459a09bc427ab8c5b7c/verification.json"
+          ]
         },
         {
           "id": "13.4",
           "requirement": "実行中に新しい版を公開して再度CMDを起動しても、実行中ジョブのApp/HTML/要求契約は途中で変わらない。終了後の新規起動だけが新版へ進む。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ReleaseBinding.ps1",
+            "tests/Test-PublishCrash.ps1",
+            "tests/Test-Launcher.ps1",
+            "tests/Test-CsvUi.cjs",
+            "docs/release-operations.md",
+            ".work/nonlive-8336e1d5c7b94459a09bc427ab8c5b7c/verification.json"
+          ]
         },
         {
           "id": "13.5",
           "requirement": "共有到達不能時は、検証済みローカル版があればその旨を示す。初回でキャッシュがなければ明確に停止する。到達可能だが壊れている共有を、無通知で正常扱いしない。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ReleaseBinding.ps1",
+            "tests/Test-PublishCrash.ps1",
+            "tests/Test-Launcher.ps1",
+            "tests/Test-CsvUi.cjs",
+            "docs/release-operations.md",
+            ".work/nonlive-8336e1d5c7b94459a09bc427ab8c5b7c/verification.json"
+          ]
         },
         {
           "id": "13.6",
           "requirement": "承認済み旧版へ明示的に復帰し、設定・入力・成果物・履歴のハッシュを保持する。互換性のない状態では復帰を拒否し、旧ジョブを再実行しない。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ReleaseBinding.ps1",
+            "tests/Test-PublishCrash.ps1",
+            "tests/Test-Launcher.ps1",
+            "tests/Test-CsvUi.cjs",
+            "docs/release-operations.md",
+            ".work/nonlive-8336e1d5c7b94459a09bc427ab8c5b7c/verification.json"
+          ]
         },
         {
           "id": "13.7",
           "requirement": "保持期間/容量の処理で、実行中データ・利用者が保持指定した成果物・最後の正常版が消えない。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-ReleaseBinding.ps1",
+            "tests/Test-PublishCrash.ps1",
+            "tests/Test-Launcher.ps1",
+            "tests/Test-CsvUi.cjs",
+            "docs/release-operations.md",
+            ".work/nonlive-8336e1d5c7b94459a09bc427ab8c5b7c/verification.json"
+          ]
         }
       ]
     },

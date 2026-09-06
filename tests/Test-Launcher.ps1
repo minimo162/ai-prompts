@@ -78,6 +78,10 @@ $probe=[ordered]@{mode=$Mode;source=$SourcePath;major=$PSVersionTable.PSVersion.
 if($env:LAUNCHER_TEST_FAILURE -eq '1'){throw 'CONTROLLED_INERT_APP_FAILURE'}
 '@
     [IO.File]::WriteAllText((Join-Path $fixture 'App.ps1'),$fixtureScript,$encoding)
+    [IO.File]::WriteAllText((Join-Path $fixture 'App.ps1'),("# App-Version: 0.1.0`r`n"+$fixtureScript),$encoding)
+    [IO.File]::WriteAllText((Join-Path $fixture 'index.html'),'<meta name="app-version" content="0.1.0">',$encoding)
+    . (Join-Path $PSScriptRoot 'ReleaseFixture.ps1')
+    Set-TestReleaseBinding $fixture
     [IO.File]::WriteAllText((Join-Path $fakeBin 'powershell.cmd'),"@echo off`r`necho wrongly-resolved>%LAUNCHER_TEST_SPY_FILE%`r`nexit /b 99`r`n",[Text.Encoding]::ASCII)
     $spy=Join-Path $temp 'wrong-powershell-used.txt'
     $probePath=Join-Path $temp 'cmd-probe.json'

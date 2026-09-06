@@ -37,9 +37,9 @@ index.html
 
 アプリは `app/<版>-<内容のSHA256>/` に保存します。初回・内容変更時だけ一時ディレクトリへコピーし、3ファイルと版・ハッシュを検査してから `app/current.json` を切り替えます。起動中の版を上書きせず、ジョブは開始時のPS1を使い続けます。状態、設定、認証プロファイル、履歴、成果物は `data/` です。
 
-配布時はAppの `# App-Version` とHTMLの `app-version` を同じ新しい版にして、3ファイルの置換完了後に利用可能にしてください。共有側が更新中で版が異なる場合やファイルが欠けた場合はエラーにします。共有パスが利用不可で、検証できるローカル版がある場合だけ、その旨を表示して継続します。共有フォルダー自体が開けない場合、そこにあるCMDもダブルクリックできないため、既に同期したローカル版のCMDから起動してください。
+配布時はAppの `# App-Version` とHTMLの `app-version` を合わせ、`tools/Seal-AgentRelease.ps1`でApp・HTML・CMDの組合せを封入してから検証・公開します。版番号が同じでも、対応するハッシュが異なる組合せはCMD起動前に拒否します。Appを編集すると封入は無効になるため、検証前に再封入が必要です。App.ps1のUTF-8 BOMありを維持してください。[凍結・持込み・公開・復旧の手順](docs/release-operations.md)を参照してください。共有パスが利用不可で、検証できるローカル版がある場合だけ、その旨を表示して継続します。共有フォルダー自体が開けない場合、そこにあるCMDもダブルクリックできないため、既に同期したローカル版のCMDから起動してください。
 
-以前の版を自動削除しません。更新に伴って利用者データを消さないためです。保存済みの古いCMDを開いても、検証した現在のローカル版を起動します。共有版がローカル版より古い場合は更新を拒否します。実行中のジョブがある場合は既存サーバーへ再接続し、その版を使い続けます。ジョブが終了した後にCMDから開き直すと、新しい版へ切り替わります。
+以前の版を自動削除しません。保存済みの古いCMDも現在のローカル版を開く入口です。通常は低い共有版への更新を拒否しますが、「配布版・旧版への復帰」から互換性を確認した保存済みの版を明示選択できます。入力・成果物・履歴を保ったまま旧版に固定し、CMDから開き直します。固定解除後は共有側のCMDで更新できます。未封入の従来キャッシュは、元のハッシュが一致するときだけ新しい共有版への更新用に読取り照合し、旧版候補にはしません。実行中のジョブは開始版を使い続けます。CSVの続行も記録した開始版のPS1とハッシュを照合します。
 
 ## 実行の契約
 
@@ -69,6 +69,7 @@ Copilotへ送信するタブはジョブごとに新規作成し、同じジョ�
 Appのロジックは1つのPS1内の関数です。`-Mode Library` は関数を読み込むだけで、サービス起動やCopilot/PAD操作は行いません。テスト・説明書は配布ファイルには含めません。
 
 ```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools\Seal-AgentRelease.ps1 -Directory "$PWD" -Channel candidate
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-App.ps1 -AppSourcePath "$PWD\App.ps1"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Copilot.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File tests\Test-CopilotPlannerV2.ps1

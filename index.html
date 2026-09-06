@@ -188,7 +188,8 @@
       </div>
     </details>
     <details class="settings"><summary>問い合わせ用情報（本文なし）</summary><div class="settings-body"><p class="hint">版・処理状態・件数だけを取り出します。業務本文、入力パス、認証情報は含めません。保存前に内容を確認してください。外部への自動送信はありません。</p><button id="support-preview" type="button">保存する情報を確認</button><pre id="support-data" class="diagnostic-output" hidden tabindex="0"></pre><button id="support-save" type="button" hidden>確認した情報を保存</button></div></details>
-    <footer class="footer"><p>この画面を閉じても、作業は停止しません。停止するには「停止する」を押してください。</p><p>検証版 0.1.0 · ローカル接続</p></footer>
+    <details class="settings"><summary>配布版・旧版への復帰</summary><div class="settings-body"><p id="runtime-release">版情報を確認中です。</p><button id="storage-show" type="button">保存方針と空き容量を確認</button><p id="storage-info">履歴・成果物・旧版は自動削除しません。</p><p class="hint">復帰する版は配布担当者の承認を確認してください。処理中・状態不明の依頼がある場合や、履歴の形式を扱えない版への復帰はできません。入力・成果物・履歴は削除しません。</p><button id="release-list" type="button">保存済みの版を確認</button><div id="rollback-panel" hidden><div class="field"><label for="rollback-target">復帰する保存済みの版</label><select id="rollback-target"></select></div><p id="rollback-status"></p><button id="rollback-select" type="button">選択した版への復帰を確認する</button><div id="rollback-confirmation" hidden><p id="rollback-confirm-text"></p><button id="rollback-confirm" type="button">この版に固定し、次回起動から使う</button></div><button id="rollback-unpin" type="button" hidden>旧版固定を解除する</button></div><p class="hint">復帰後はCMDから開き直してください。旧版固定中は共有側が新しくても自動更新しません。固定解除後の次回CMD起動で、検証できる共有版へ更新します。</p></div></details>
+    <footer class="footer"><p>この画面を閉じても、作業は停止しません。停止するには「停止する」を押してください。</p><p id="footer-release">検証版 · ローカル接続</p></footer>
     <div id="announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
     <noscript><p class="alert error">この画面を利用するには、ブラウザーの JavaScript を有効にしてください。</p></noscript>
   </div>
@@ -237,6 +238,7 @@
       let csvJobId = '';
       let selectedJobId = '';
       let jobsRenderKey = '';
+      let releaseChoices = null;
 
       function text(node, value) {
         const next = value == null ? '' : String(value);
@@ -256,6 +258,7 @@
       function updateControls() {
         const working = busy();
         const ready = !!token && connected;
+        ['release-list','rollback-select','rollback-confirm','rollback-unpin','rollback-target'].forEach(id => { $(id).disabled = !ready || working || [...pending].some(p => p.startsWith('/api/releases')); });
         const csvJob = state?.job?.workflow === 'csv_classify';
         const viewingOther = !!state?.active_job && state?.job?.job_id !== state.active_job.job_id;
         const csvPending = [...pending].some(path => path.startsWith('/api/csv/'));
@@ -320,6 +323,8 @@
       function render(next) {
         state = next;
         const job = next.job || null;
+        text($('footer-release'), `検証版 ${next.version} · ローカル接続`);
+        if (next.runtime_release) text($('runtime-release'), `起動中: ${next.runtime_release.version} · ${next.runtime_release.release_id.slice(0,12)} · ${next.runtime_release.channel}`);
         const jobsKey = JSON.stringify(next.jobs || []);
         if (jobsKey !== jobsRenderKey) {
           jobsRenderKey = jobsKey;
@@ -339,7 +344,7 @@
         const jobError = job ? printable(job.error) : '';
         text($('job-error'), jobError);
         $('job-error').hidden = !jobError;
-        text($('job-reference'), job ? '実行 ID: ' + printable(job.job_id) : '');
+        text($('job-reference'), job ? '実行 ID: ' + printable(job.job_id) + (job.release_info ? ` · 開始版 ${job.release_info.version} / ${job.release_info.release_id.slice(0,12)} / ${job.release_info.channel}` : ' · 開始版の情報は未記録') : '');
         $('job-reference').hidden = !job;
         if (job && job.job_id !== lastJobId) {
           lastJobId = job.job_id;
@@ -483,6 +488,16 @@
         updateControls();
         try {
           const result = await request(path, body);
+          if (path === '/api/storage') text($('storage-info'), `空き容量: ${Math.floor(result.storage.available_bytes/1048576)} MiB。開始に必要な空き容量: 256 MiB。${result.storage.policy}`);
+          if (path === '/api/releases') {
+            releaseChoices = result.local_releases;
+            const fragment = document.createDocumentFragment();
+            releaseChoices.releases.filter(r => !r.current).forEach(release => { const option = document.createElement('option'); option.value = release.release; option.disabled = !release.compatible; text(option, `${release.version} · ${release.release_id.slice(0,12)} · ${release.channel}${release.compatible ? '' : '（履歴形式が非対応）'}`); fragment.append(option); });
+            $('rollback-target').replaceChildren(fragment); $('rollback-panel').hidden = false; $('rollback-confirmation').hidden = true;
+            $('rollback-unpin').hidden = !releaseChoices.rollback_hold;
+            text($('rollback-status'), (releaseChoices.rollback_hold ? '旧版に固定中。' : '共有版への更新が有効。') + ' 必要な状態形式: ' + releaseChoices.required_state_contract);
+          }
+          if (path === '/api/releases/rollback' || path === '/api/releases/unpin') { $('rollback-confirmation').hidden = true; $('rollback-panel').hidden = true; releaseChoices = null; }
           if (['/api/start','/api/csv/prepare','/api/csv/review'].includes(path)) selectedJobId = '';
           if (path === '/api/csv/select') csvSelection = result.selection.selection_id;
           if (path === '/api/csv/prepare' || path === '/api/csv/review') csvDirty = false;
@@ -512,6 +527,17 @@
       $('csv-stop').addEventListener('click', () => mutate('/api/stop', { job_id: state.job.job_id }, '停止を要求しました。停止確認までお待ちください。'));
       $('csv-filter').addEventListener('change', renderCsv);
       $('job-history').addEventListener('change', () => { selectedJobId = $('job-history').value; poll(); });
+      $('release-list').addEventListener('click', () => mutate('/api/releases', {}, '整合性を確認できる保存済みの版を表示しました。'));
+      $('storage-show').addEventListener('click', () => mutate('/api/storage', {}, '保存方針と空き容量を表示しました。'));
+      $('rollback-target').addEventListener('change', () => { $('rollback-confirmation').hidden = true; });
+      $('rollback-select').addEventListener('click', () => {
+        const selected = releaseChoices?.releases.find(r => r.release === $('rollback-target').value && r.compatible && !r.current);
+        if (!selected) { message('復帰可能な保存済みの版を選択してください。', true); return; }
+        text($('rollback-confirm-text'), `${selected.version} / ${selected.release_id} / ${selected.channel} に固定します。入力・成果物・履歴は保持します。復帰が承認された版であることを確認してください。CMDから開き直すまで新しい依頼は開始できません。`);
+        $('rollback-confirmation').hidden = false;
+      });
+      $('rollback-confirm').addEventListener('click', () => { if (releaseChoices) mutate('/api/releases/rollback', {release:$('rollback-target').value,expected_current:releaseChoices.current_release,confirmed:true}, '旧版を選択しました。CMDから開き直してください。'); });
+      $('rollback-unpin').addEventListener('click', () => { if (releaseChoices) mutate('/api/releases/unpin', {expected_current:releaseChoices.current_release}, '旧版固定を解除しました。次回CMD起動で共有版を検証して更新します。'); });
       $('csv-review-instructions').addEventListener('input', () => { reviewKey = ''; updateControls(); });
       $('csv-review').addEventListener('click', () => {
         if ($('csv-review').disabled) return;

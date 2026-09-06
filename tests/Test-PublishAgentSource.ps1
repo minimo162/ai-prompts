@@ -12,6 +12,8 @@ foreach($entry in @(@($target,'0.1.0'),@($source,'0.1.1'))){
     [IO.File]::WriteAllText((Join-Path $entry[0] 'index.html'),('<meta name="app-version" content="'+$entry[1]+'">'))
     [IO.File]::WriteAllText((Join-Path $entry[0] '業務エージェント.cmd'),('@rem '+$entry[1]+"`r`n@exit /b 0`r`n"))
 }
+. (Join-Path $PSScriptRoot 'ReleaseFixture.ps1')
+Set-TestReleaseBinding $target; Set-TestReleaseBinding $source
 $old=Get-AgentRelease $target;$new=Get-AgentRelease $source
 $before=@{};foreach($name in $names){$before[$name]=(Get-Acl (Join-Path $target $name)).Sddl}
 $checks=0

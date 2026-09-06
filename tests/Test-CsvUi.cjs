@@ -3,7 +3,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
-const { spawn } = require('node:child_process');
+const { spawn, spawnSync } = require('node:child_process');
 const { randomUUID } = require('node:crypto');
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -50,7 +50,11 @@ function Invoke-AgentCopilot {
   assert.equal(source.split(marker).length, 2);
   fs.writeFileSync(path.join(app, 'App.ps1'), source.replace(marker, () => fixture + '\r\n' + marker));
   fs.copyFileSync(path.join(repo, 'index.html'), path.join(app, 'index.html'));
+  fs.copyFileSync(path.join(repo, '業務エージェント.cmd'), path.join(app, '業務エージェント.cmd'));
   const ps = path.join(process.env.SystemRoot, 'System32', 'WindowsPowerShell', 'v1.0', 'powershell.exe');
+  const fixtureRecord = path.join(root,'fixture-release.json');
+  const sealed = spawnSync(ps, ['-NoProfile','-ExecutionPolicy','Bypass','-File',path.join(repo,'tools','Seal-AgentRelease.ps1'),'-Directory',app,'-Channel','development','-RecordPath',fixtureRecord], {windowsHide:true,env:{...process.env,PSModulePath:path.join(path.dirname(ps),'Modules')}});
+  assert.equal(sealed.status,0,sealed.stderr.toString());
   // Match the native CMD launcher, which isolates Windows PowerShell's module path.
   const child = spawn(ps, ['-NoProfile','-ExecutionPolicy','Bypass','-STA','-File',path.join(app,'App.ps1'),'-Mode','Serve','-HomePath',home,'-NoBrowser','-OfflineTest'], { windowsHide: true, env: { ...process.env, PSModulePath: path.join(path.dirname(ps), 'Modules') } });
   let stderr = ''; child.stderr.on('data', chunk => { stderr += chunk; });
@@ -160,6 +164,33 @@ function Invoke-AgentCopilot {
     const downloadEvent = page.waitForEvent('download'); await page.locator('#support-save').click(); const download = await downloadEvent;
     await download.saveAs(path.join(root, 'diagnostic.json'));
     assert.equal(fs.readFileSync(path.join(root, 'diagnostic.json'), 'utf8'), diagnostic); checks++;
+    // Exercise real release selection in a private cache after all business workers have ended.
+    const releaseB = JSON.parse(fs.readFileSync(fixtureRecord,'utf8')).release;
+    const prior = path.join(root,'previous'); fs.mkdirSync(prior);
+    for (const name of ['App.ps1','index.html','業務エージェント.cmd']) fs.copyFileSync(path.join(app,name),path.join(prior,name));
+    fs.appendFileSync(path.join(prior,'App.ps1'),'\r\n# Synthetic previous candidate\r\n');
+    const priorRecord=path.join(root,'previous-release.json');
+    const resealed=spawnSync(ps,['-NoProfile','-ExecutionPolicy','Bypass','-File',path.join(repo,'tools','Seal-AgentRelease.ps1'),'-Directory',prior,'-Channel','development','-RecordPath',priorRecord],{windowsHide:true,env:{...process.env,PSModulePath:path.join(path.dirname(ps),'Modules')}});
+    assert.equal(resealed.status,0,resealed.stderr.toString());
+    const releaseA=JSON.parse(fs.readFileSync(priorRecord,'utf8')).release;
+    for(const [directory,release] of [[app,releaseB],[prior,releaseA]]) {
+      const cache=path.join(home,'app',release.release);fs.mkdirSync(cache,{recursive:true});
+      for(const name of ['App.ps1','index.html','業務エージェント.cmd']) fs.copyFileSync(path.join(directory,name),path.join(cache,name));
+    }
+    const pointerPath=path.join(home,'app','current.json');fs.writeFileSync(pointerPath,JSON.stringify({version:releaseB.version,release:releaseB.release,app_sha256:releaseB.hashes['App.ps1']}));
+    await page.getByText('配布版・旧版への復帰',{exact:true}).click();
+    await page.locator('#release-list').click();await page.locator('#rollback-panel').waitFor({state:'visible'});
+    await page.locator('#rollback-target').selectOption(releaseA.release);await page.locator('#rollback-select').click();
+    assert.match(await page.locator('#rollback-confirm-text').innerText(),new RegExp(releaseA.release_id)); checks++;
+    await page.locator('#rollback-confirm').click();
+    await until(()=>JSON.parse(fs.readFileSync(pointerPath,'utf8')).rollback_hold === true,'rollback pin');
+    assert.equal(JSON.parse(fs.readFileSync(pointerPath,'utf8')).release,releaseA.release); checks++;
+    await page.locator('#csv-paths').fill(input);
+    await page.locator('#csv-prepare').click();await until(async()=>/RESTART_REQUIRED/.test(await page.locator('#action-message').innerText()),'new work requires selected runtime'); checks++;
+    assert.deepEqual(fs.readFileSync(input),original);assert.deepEqual(fs.readFileSync(parentJobPath),parentBytes);checks+=2;
+    await page.locator('#release-list').click();await page.locator('#rollback-unpin').waitFor({state:'visible'});await page.locator('#rollback-unpin').click();
+    await until(()=>JSON.parse(fs.readFileSync(pointerPath,'utf8')).rollback_hold === false,'explicit unpin'); checks++;
+    await page.locator('#storage-show').click();await until(async()=>/空き容量: \d+ MiB/.test(await page.locator('#storage-info').innerText()),'storage policy and measured capacity');checks++;
     assert.deepEqual(errors, []); checks++;
     fs.writeFileSync(path.join(root, 'verification.json'), JSON.stringify({ status:'PASS', checks, scope:'real PS5 HTTP and child worker; rendered Edge; mock provider', live_sends:0, rows:50, duplicate_sends:0, explicitly_reprocessed_review_rows:1, remaining:'real M365, native picker, other PCs and users' }, null, 2));
     console.log(`PASS: ${checks} rendered CSV checks. Evidence: ${root}`);

@@ -1,4 +1,6 @@
 ﻿# App-Version: 0.1.0
+# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6ImFmNTMzZGVmZjYxM2NmZTFkN2VhYzQxNDdkNTdlYWFmIiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiI0YTBkNDdlYWUzZTg2OTk0NmZlOTUwODc0MTVmN2QxMDIwMzQzNmJjOGE1Y2I1YTYxZDFiNDU0MzEzNDZmMTUxIiwiaHRtbF9zaGEyNTYiOiI5MTIzY2Y0ZGQzMGYxN2FhZjVmNjE5ZmM5N2RjMzhiNGVkMjEyNjZiZDNlN2E4OWVkMTJmYjBhNDc3MGYwOWM5IiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
+# State-Contract: 2
 [CmdletBinding()]
 param(
     [ValidateSet('Bootstrap','Serve','Run','CsvRun','SelectCsv','AiCall','Diagnose','Library')][string]$Mode = 'Bootstrap',
@@ -14,7 +16,8 @@ param(
 )
 Set-StrictMode -Version 2.0
 $ErrorActionPreference = 'Stop'
-$script:AgentVersion = '0.1.0'
+$script:AgentVersion = ([regex]::Match([IO.File]::ReadAllText($PSCommandPath,[Text.Encoding]::UTF8),'(?m)^# App-Version: ([0-9]+\.[0-9]+\.[0-9]+)\r?$')).Groups[1].Value
+if (-not $script:AgentVersion) { throw 'INVALID_RELEASE: Missing application version.' }
 $script:AgentAppPath = $PSCommandPath
 $script:AgentOfflineTest = [bool]$OfflineTest
 $script:AgentEncoding = New-Object System.Text.UTF8Encoding($false)
@@ -417,6 +420,8 @@ function Assert-AgentNoActiveJob([string]$HomePath, [string]$ExceptJobId = '') {
     }
 }
 function New-AgentCsvJob([string]$HomePath, [string[]]$Paths, [string]$IdColumn, [string]$TextColumn, [string]$EncodingName, [string[]]$Categories, [string]$Instructions, [string]$RequestKey) {
+    Assert-AgentRollbackRuntime $HomePath
+    Assert-AgentStorageCapacity $HomePath
     Assert-AgentId $RequestKey
     $intentHash = Get-AgentTextHash (ConvertTo-Json -InputObject @($Paths,$IdColumn,$TextColumn,$EncodingName,$Categories,$Instructions) -Depth 10 -Compress)
     # The loop is serialized by the HTTP server; the key is also the immutable job directory ID.
@@ -718,6 +723,8 @@ function Get-AgentCsvReconciledResults([string]$HomePath, $Job, $Manifest) {
     return ,@($Manifest.rows | ForEach-Object { $byId[$_.row_id] })
 }
 function Start-AgentCsvJob([string]$HomePath, [string]$JobId, [string]$PlanId, [string]$PlanHash, [switch]$Resume) {
+    Assert-AgentRollbackRuntime $HomePath
+    Assert-AgentStorageCapacity $HomePath
     $directory = Get-AgentJobDirectory $HomePath $JobId; $job = Get-AgentJob $HomePath $JobId
     if ((Get-AgentProperty $job 'workflow' '') -cne 'csv_classify') { throw 'CSV_JOB: CSVジョブではありません。' }
     Assert-AgentCsvPlanUnchanged $HomePath $job
@@ -739,11 +746,21 @@ function Start-AgentCsvJob([string]$HomePath, [string]$JobId, [string]$PlanId, [
     Write-AgentJson (Join-Path $directory ('csv-executions\' + $executionIdValue + '.json')) @{ execution_id = $executionIdValue; batch_ids = @($batches.batches | ForEach-Object request_id); plan_hash = $PlanHash }
     $job.batch_ids = @($job.batch_ids) + @($batches.batches | ForEach-Object request_id)
     $job.approved_plan_hash = $PlanHash; $job.execution_id = $executionIdValue; $job.status = 'queued'; $job.error = ''
+    $workerApp = $script:AgentAppPath
+    if ($Resume -and (Get-AgentProperty $job 'execution_app_path' '')) {
+        $workerApp = Get-AgentFullPath $job.execution_app_path
+        if ($workerApp -cne $script:AgentAppPath) { $null=Assert-AgentPathUnder $workerApp (Join-Path $HomePath 'app') }
+        if ((Get-AgentHash $workerApp) -cne $job.release_info.app_sha256) { throw 'JOB_VERSION_CHANGED: この依頼の開始版が変更されています。' }
+        $null=Get-AgentRelease ([IO.Path]::GetDirectoryName($workerApp))
+    } else {
+        $job | Add-Member -NotePropertyName release_info -NotePropertyValue (Get-AgentRuntimeRelease) -Force
+        $job | Add-Member -NotePropertyName execution_app_path -NotePropertyValue $workerApp -Force
+    }
     Save-AgentJob $directory $job '確認済みの対象について、未送信の行を処理します。'
     try {
         Write-AgentJson (Join-Path $HomePath 'data\latest.json') @{job_id=$JobId}
-        $process = Start-AgentProcess -AppPath $script:AgentAppPath -HomePath $HomePath -Mode CsvRun -JobId $JobId -ExecutionId $executionIdValue
-        Write-AgentJson (Join-Path $directory 'worker.json') @{ pid = $process.Id; started = $process.StartTime.ToUniversalTime().ToString('o'); app_path = $script:AgentAppPath }
+        $process = Start-AgentProcess -AppPath $workerApp -HomePath $HomePath -Mode CsvRun -JobId $JobId -ExecutionId $executionIdValue
+        Write-AgentJson (Join-Path $directory 'worker.json') @{ pid = $process.Id; started = $process.StartTime.ToUniversalTime().ToString('o'); app_path = $workerApp }
     } catch { $job.status = 'partial'; $job.error = '処理プロセスを起動できませんでした。続行操作で未送信分を再開できます。'; Save-AgentJob $directory $job; throw }
     return $job
 }
@@ -860,7 +877,7 @@ function Assert-AgentSettings($Settings) {
     if ($Settings.max_rounds -isnot [int] -or $Settings.max_rounds -lt 1 -or $Settings.max_rounds -gt 20) { throw 'INVALID_SETTINGS: Maximum rounds must be 1..20.' }
     if ($Settings.pad_flow_name -isnot [string] -or $Settings.pad_flow_name -notmatch '^[\p{L}\p{N} _-]{1,80}$') { throw 'INVALID_SETTINGS: Use a simple dedicated PAD flow name.' }
 }
-function Get-AgentRelease([string]$Directory) {
+function Get-AgentReleaseFileIdentity([string]$Directory) {
     $files = @('App.ps1','index.html','業務エージェント.cmd')
     foreach ($file in $files) { if (-not (Test-Path -LiteralPath (Join-Path $Directory $file) -PathType Leaf)) { throw ('INVALID_RELEASE: Missing ' + $file) } }
     $ps = [IO.File]::ReadAllText((Join-Path $Directory 'App.ps1'), [Text.Encoding]::UTF8)
@@ -873,7 +890,44 @@ function Get-AgentRelease([string]$Directory) {
     $hashes = [ordered]@{}
     foreach ($file in $files) { $hashes[$file] = Get-AgentHash (Join-Path $Directory $file) }
     $digest = Get-AgentTextHash (($files | ForEach-Object { $_ + ':' + $hashes[$_] }) -join '|')
-    return [pscustomobject]@{ version = $version; release = ($version + '-' + $digest); hashes = [pscustomobject]$hashes }
+    return [pscustomobject]@{ version=$version;release=($version+'-'+$digest);hashes=[pscustomobject]$hashes }
+}
+function Get-AgentRelease([string]$Directory) {
+    $identity=Get-AgentReleaseFileIdentity $Directory
+    $binding=Get-AgentReleaseBinding $Directory
+    if($binding.html_sha256 -cne $identity.hashes.'index.html' -or $binding.cmd_sha256 -cne $identity.hashes.'業務エージェント.cmd'){throw 'INVALID_RELEASE: Release binding integrity mismatch; App/HTML/CMD are not one declared set.'}
+    return [pscustomobject]@{version=$identity.version;release=$identity.release;hashes=$identity.hashes;release_id=$binding.release_id;channel=$binding.channel;state_contract=$binding.state_contract}
+}
+function Get-AgentPreviousReleaseForUpgrade([string]$HomePath) {
+    $pointer=Read-AgentJson (Join-Path $HomePath 'app\current.json')
+    if($pointer.release -cnotmatch '^[0-9]+\.[0-9]+\.[0-9]+-[a-f0-9]{64}$'){throw 'INVALID_RELEASE: Invalid previous release pointer.'}
+    $directory=Assert-AgentPathUnder (Join-Path $HomePath ('app\'+$pointer.release)) (Join-Path $HomePath 'app')
+    $text=[IO.File]::ReadAllText((Join-Path $directory 'App.ps1'),[Text.Encoding]::UTF8)
+    if($text -match '(?m)^# Release-Binding:'){return Get-AgentRelease (Get-AgentCachedRelease $HomePath)}
+    # Read-only legacy identity check for an upgrade. This never authorizes launching/rolling back to the old set.
+    foreach($name in @('App.ps1','index.html','業務エージェント.cmd')){Assert-AgentNoReparse (Join-Path $directory $name)}
+    $identity=Get-AgentReleaseFileIdentity $directory
+    if($identity.release -cne $pointer.release -or $identity.version -cne $pointer.version -or $identity.hashes.'App.ps1' -cne $pointer.app_sha256){throw 'INVALID_RELEASE: Previous legacy cache integrity mismatch.'}
+    return $identity
+}
+function Get-AgentReleasePayloadHash([string]$AppPath) {
+    $text = (New-Object Text.UTF8Encoding($false,$true)).GetString([IO.File]::ReadAllBytes($AppPath))
+    $pattern = '(?m)^# Release-Binding: [^\r\n]*'
+    if ([regex]::Matches($text,$pattern).Count -ne 1) { throw 'INVALID_RELEASE: Exactly one release binding declaration is required.' }
+    return Get-AgentTextHash ([regex]::Replace($text,$pattern,'# Release-Binding: NORMALIZED'))
+}
+function Get-AgentReleaseBinding([string]$Directory) {
+    $app = Join-Path $Directory 'App.ps1'
+    $text = [IO.File]::ReadAllText($app,[Text.Encoding]::UTF8)
+    $matches = [regex]::Matches($text,'(?m)^# Release-Binding: ([A-Za-z0-9+/=]+)\r?$')
+    if ($matches.Count -ne 1) { throw 'INVALID_RELEASE: Missing sealed release binding.' }
+    try { $json = (New-Object Text.UTF8Encoding($false,$true)).GetString([Convert]::FromBase64String($matches[0].Groups[1].Value)); $binding = ConvertFrom-AgentJson $json @('schema_version','release_id','channel','state_contract','app_payload_sha256','html_sha256','cmd_sha256') }
+    catch { throw 'INVALID_RELEASE: Invalid release binding.' }
+    if ($binding.schema_version -isnot [int] -or $binding.schema_version -ne 1 -or $binding.channel -cnotin @('development','candidate','production') -or $binding.state_contract -isnot [int] -or $binding.state_contract -lt 1 -or $binding.state_contract -gt 2 -or -not (Test-AgentId $binding.release_id)) { throw 'INVALID_RELEASE: Unsupported release binding contract.' }
+    foreach ($hash in @($binding.app_payload_sha256,$binding.html_sha256,$binding.cmd_sha256)) { if ($hash -isnot [string] -or $hash -cnotmatch '^[a-f0-9]{64}$') { throw 'INVALID_RELEASE: Invalid bound hash.' } }
+    $state = [regex]::Matches($text,'(?m)^# State-Contract: ([12])\r?$')
+    if ($state.Count -ne 1 -or [int]$state[0].Groups[1].Value -ne $binding.state_contract -or (Get-AgentReleasePayloadHash $app) -cne $binding.app_payload_sha256) { throw 'INVALID_RELEASE: Application binding integrity mismatch.' }
+    return $binding
 }
 function Get-AgentCachedRelease([string]$HomePath) {
     $pointer = Read-AgentJson (Join-Path $HomePath 'app\current.json')
@@ -882,6 +936,90 @@ function Get-AgentCachedRelease([string]$HomePath) {
     $actual = Get-AgentRelease $directory
     if ($actual.release -cne $pointer.release -or $actual.version -cne $pointer.version -or $actual.hashes.'App.ps1' -cne $pointer.app_sha256) { throw 'INVALID_RELEASE: Cached release integrity check failed.' }
     return $directory
+}
+function Get-AgentRequiredStateContract([string]$HomePath) {
+    $required = 1
+    foreach ($directory in @(Get-ChildItem -LiteralPath (Join-Path $HomePath 'data\jobs') -Directory)) {
+        if (-not (Test-AgentId $directory.Name) -or -not [IO.File]::Exists((Join-Path $directory.FullName 'job.json'))) { continue }
+        $job = Read-AgentJson (Join-Path $directory.FullName 'job.json')
+        $schema = Get-AgentProperty $job 'schema_version' 1
+        if ($schema -isnot [int] -or $schema -lt 1 -or $schema -gt 2) { throw 'ROLLBACK_SCHEMA: Unknown job schema; rollback refused.' }
+        if ((Get-AgentProperty $job 'workflow' '') -ceq 'csv_classify') {
+            $contract = Get-AgentProperty $job.plan 'action_contract' 1
+            if ($contract -isnot [int] -or $contract -lt 1 -or $contract -gt 2) { throw 'ROLLBACK_SCHEMA: Unknown action contract; rollback refused.' }
+            if ($contract -eq 2 -or (Get-AgentProperty $job.plan 'base_results_hash' '') -or @((Get-AgentProperty $job 'clarifications' @())).Count -gt 0) { $required = 2 }
+        }
+    }
+    return $required
+}
+function Get-AgentLocalReleases([string]$HomePath) {
+    $items = @()
+    $pointerPath = Join-Path $HomePath 'app\current.json'
+    $pointer = if ([IO.File]::Exists($pointerPath)) { Read-AgentJson $pointerPath } else { $null }
+    $required = Get-AgentRequiredStateContract $HomePath
+    foreach ($directory in @(Get-ChildItem -LiteralPath (Join-Path $HomePath 'app') -Directory | Sort-Object CreationTimeUtc -Descending)) {
+        if ($directory.Name -cnotmatch '^[0-9]+\.[0-9]+\.[0-9]+-[a-f0-9]{64}$') { continue }
+        try {
+            $path = Assert-AgentPathUnder $directory.FullName (Join-Path $HomePath 'app')
+            $release = Get-AgentRelease $path
+            if ($release.release -cne $directory.Name) { continue }
+            $items += [pscustomobject]@{ release=$release.release; release_id=$release.release_id; version=$release.version; channel=$release.channel; state_contract=$release.state_contract; compatible=($release.state_contract -ge $required); current=($null -ne $pointer -and $pointer.release -ceq $release.release) }
+        } catch { } # An invalid cache is never a rollback choice.
+    }
+    return [pscustomobject]@{ required_state_contract=$required; current_release=[string](Get-AgentProperty $pointer 'release' ''); rollback_hold=[bool](Get-AgentProperty $pointer 'rollback_hold' $false); releases=$items }
+}
+function Assert-AgentRollbackRuntime([string]$HomePath) {
+    $path = Join-Path $HomePath 'app\current.json'
+    if (-not [IO.File]::Exists($path)) { return }
+    $pointer = Read-AgentJson $path
+    if ((Get-AgentProperty $pointer 'rollback_hold' $false) -and (Get-AgentHash $script:AgentAppPath) -cne $pointer.app_sha256) { throw 'RESTART_REQUIRED: 旧版を選択しました。CMDから開き直してから新しい処理を開始してください。' }
+}
+function Get-AgentStorageStatus([string]$HomePath) {
+    $root=[IO.Path]::GetPathRoot((Get-AgentFullPath $HomePath))
+    $drive=New-Object IO.DriveInfo($root)
+    return [pscustomobject]@{available_bytes=$drive.AvailableFreeSpace;minimum_start_bytes=268435456;automatic_deletion=$false;policy='旧版・履歴・成果物・認証プロファイルは自動削除しません。保存期間は配布担当者の情報取扱ルールで確認してください。'}
+}
+function Assert-AgentStorageCapacity([string]$HomePath) {
+    $storage=Get-AgentStorageStatus $HomePath
+    if($storage.available_bytes -lt $storage.minimum_start_bytes){throw 'STORAGE_FULL: 空き容量が256MiB未満のため、新しい処理を開始しません。既存の成果物・履歴・旧版は削除していません。'}
+}
+function Set-AgentRollback([string]$HomePath, [string]$Release, [string]$ExpectedCurrent) {
+    if ($Release -cnotmatch '^[0-9]+\.[0-9]+\.[0-9]+-[a-f0-9]{64}$') { throw 'INVALID_RELEASE: Invalid rollback selection.' }
+    $homeDirectory = Initialize-AgentHome $HomePath
+    $mutex = New-Object Threading.Mutex($false, ('Local\AiPromptsAgent.Sync.' + (Get-AgentTextHash $homeDirectory.ToLowerInvariant()).Substring(0,24)))
+    $held = $false
+    try {
+        try { $held = $mutex.WaitOne(1000) } catch [Threading.AbandonedMutexException] { $held=$true }
+        if (-not $held) { throw 'SYNC_BUSY: 同期中です。終了後に版を選択してください。' }
+        Assert-AgentNoActiveJob $homeDirectory
+        $currentDirectory = Get-AgentCachedRelease $homeDirectory
+        $current = Get-AgentRelease $currentDirectory
+        if ($current.release -cne $ExpectedCurrent) { throw 'ROLLBACK_CHANGED: 現在の版が変わりました。選択し直してください。' }
+        $targetDirectory = Assert-AgentPathUnder (Join-Path $homeDirectory ('app\'+$Release)) (Join-Path $homeDirectory 'app')
+        $target = Get-AgentRelease $targetDirectory
+        if ($target.release -cne $Release -or $target.release -ceq $current.release -or [version]$target.version -gt [version]$current.version) { throw 'ROLLBACK_SELECTION: 保存済みの以前の完全な版を選択してください。' }
+        if ($target.state_contract -lt (Get-AgentRequiredStateContract $homeDirectory)) { throw 'ROLLBACK_SCHEMA: この版では現在の履歴・状態形式を扱えません。データは変更していません。' }
+        $record = [ordered]@{version=$target.version;release=$target.release;app_sha256=$target.hashes.'App.ps1';rollback_hold=$true;rollback_from=$current.release;selected_utc=[DateTime]::UtcNow.ToString('o')}
+        Write-AgentJson (Join-Path $homeDirectory 'app\current.json') $record
+        return [pscustomobject]@{release=$target.release;release_id=$target.release_id;restart_required=$true;rollback_hold=$true}
+    } finally { if($held){$mutex.ReleaseMutex()};$mutex.Dispose() }
+}
+function Clear-AgentRollbackHold([string]$HomePath, [string]$ExpectedCurrent) {
+    $homeDirectory=Get-AgentFullPath $HomePath
+    $mutex=New-Object Threading.Mutex($false,('Local\AiPromptsAgent.Sync.'+(Get-AgentTextHash $homeDirectory.ToLowerInvariant()).Substring(0,24)));$held=$false
+    try {
+        try{$held=$mutex.WaitOne(1000)}catch [Threading.AbandonedMutexException]{$held=$true}
+        if(-not $held){throw 'SYNC_BUSY: 同期中です。'}
+        Assert-AgentNoActiveJob $homeDirectory
+        $path=Join-Path $homeDirectory 'app\current.json'; $pointer=Read-AgentJson $path
+        if ($pointer.release -cne $ExpectedCurrent) { throw 'ROLLBACK_CHANGED: 現在の版が変わりました。' }
+        $null=Get-AgentCachedRelease $homeDirectory
+        Write-AgentJson $path @{version=$pointer.version;release=$pointer.release;app_sha256=$pointer.app_sha256;rollback_hold=$false}
+    } finally {if($held){$mutex.ReleaseMutex()};$mutex.Dispose()}
+}
+function Get-AgentRuntimeRelease {
+    $release=Get-AgentRelease ([IO.Path]::GetDirectoryName($script:AgentAppPath))
+    return [pscustomobject]@{version=$release.version;release_id=$release.release_id;channel=$release.channel;app_sha256=$release.hashes.'App.ps1'}
 }
 function Sync-AgentRelease([string]$HomePath, [string]$SourcePath) {
     $homeDirectory = Initialize-AgentHome $HomePath
@@ -910,7 +1048,11 @@ function Sync-AgentReleaseUnlocked([string]$HomePath, [string]$SourcePath) {
     $source = Get-AgentRelease $SourcePath
     $currentPointer=Join-Path $homeDirectory 'app\current.json'
     if([IO.File]::Exists($currentPointer)) {
-        $currentRelease=Get-AgentRelease (Get-AgentCachedRelease $homeDirectory)
+        $currentRelease=Get-AgentPreviousReleaseForUpgrade $homeDirectory
+        if (Get-AgentProperty (Read-AgentJson $currentPointer) 'rollback_hold' $false) {
+            if ($source.release -cne $currentRelease.release) { Write-Warning '選択した旧版に固定しています。共有版へ戻すには、画面で旧版固定を解除してください。' }
+            return Get-AgentCachedRelease $homeDirectory
+        }
         if([version]$source.version -lt [version]$currentRelease.version) {throw 'RELEASE_DOWNGRADE: 共有版がローカル版より古いため、更新を停止しました。'}
     }
     $destination = Join-Path $homeDirectory ('app\' + $source.release)
@@ -1383,6 +1525,8 @@ function Repair-AgentInterruptedJobs([string]$HomePath) {
     }
 }
 function New-AgentJob([string]$HomePath, [string]$Goal, [string]$Target) {
+    Assert-AgentRollbackRuntime $HomePath
+    Assert-AgentStorageCapacity $HomePath
     Assert-AgentNoActiveJob $HomePath
     if ([string]::IsNullOrWhiteSpace($Goal) -or $Goal.Length -gt 16000) { throw 'INVALID_REQUEST: 目的は1〜16000文字で入力してください。' }
     $targetFull = Get-AgentFullPath $Target
@@ -1397,7 +1541,7 @@ function New-AgentJob([string]$HomePath, [string]$Goal, [string]$Target) {
     $id = [guid]::NewGuid().ToString('N')
     $directory = Get-AgentJobDirectory $HomePath $id
     [IO.Directory]::CreateDirectory($directory) | Out-Null
-    $job = [pscustomobject]@{ job_id = $id; status = 'queued'; goal = $Goal; target = $targetFull; question = ''; final_answer = ''; artifacts = @(); history = @(); error = '' }
+    $job = [pscustomobject]@{ job_id = $id; status = 'queued'; goal = $Goal; target = $targetFull; question = ''; final_answer = ''; artifacts = @(); history = @(); error = ''; release_info=Get-AgentRuntimeRelease; execution_app_path=$script:AgentAppPath }
     Save-AgentJob $directory $job '依頼を受け付けました。'
     Write-AgentJson (Join-Path $HomePath 'data\latest.json') @{ job_id = $id }
     try {
@@ -1494,6 +1638,7 @@ function Send-AgentHttpResponse($Response, [int]$Status, [string]$Content, [stri
     try { $Response.stream.Write($headerBytes, 0, $headerBytes.Length); $Response.stream.Write($bytes, 0, $bytes.Length) } finally { $Response.client.Close() }
 }
 function Invoke-AgentServer([string]$HomePath, [switch]$NoBrowser, [int]$Port = 0) {
+    $runtimeRelease = Get-AgentRuntimeRelease
     $homeDirectory = Initialize-AgentHome $HomePath
     $mutexName = 'Local\AiPromptsAgent.Server.' + (Get-AgentTextHash $homeDirectory.ToLowerInvariant()).Substring(0, 24)
     $mutex = New-Object Threading.Mutex($false, $mutexName)
@@ -1563,11 +1708,15 @@ function Invoke-AgentServer([string]$HomePath, [switch]$NoBrowser, [int]$Port = 
                         else { throw 'INVALID_ID: 履歴の依頼IDが不正です。' }
                     }
                     $activeSummary = if ($null -ne $currentJob) { @{job_id=$currentJob.job_id;status=$currentJob.status} } else { $null }
-                    $payload = @{ ok = $true; version = $script:AgentVersion; job = $viewedJob; active_job = $activeSummary; jobs = (Get-AgentJobHistory $homeDirectory); csv = (Get-AgentCsvView $homeDirectory $viewedJob); settings = (Get-AgentSettings $homeDirectory); diagnostics = $diagnostics }
+                    $payload = @{ ok = $true; version = $script:AgentVersion; runtime_release=$runtimeRelease; job = $viewedJob; active_job = $activeSummary; jobs = (Get-AgentJobHistory $homeDirectory); csv = (Get-AgentCsvView $homeDirectory $viewedJob); settings = (Get-AgentSettings $homeDirectory); diagnostics = $diagnostics }
                 } elseif ($request.HttpMethod -ceq 'POST' -and $route.StartsWith('/api/')) {
                     $body = Read-AgentHttpBody $request
                     $payload = @{ ok = $true }
                     switch -CaseSensitive ($route) {
+                        '/api/releases' { $payload.local_releases=Get-AgentLocalReleases $homeDirectory }
+                        '/api/storage' { $payload.storage=Get-AgentStorageStatus $homeDirectory }
+                        '/api/releases/rollback' { if ((Get-AgentProperty $body 'confirmed' $false) -isnot [bool] -or -not $body.confirmed) { throw 'ROLLBACK_CONFIRM: 復帰する版を確認してください。' }; $payload.selection=Set-AgentRollback $homeDirectory ([string]$body.release) ([string]$body.expected_current) }
+                        '/api/releases/unpin' { Clear-AgentRollbackHold $homeDirectory ([string]$body.expected_current) }
                         '/api/support/preview' { $payload.diagnostic = Get-AgentSupportDiagnostic $homeDirectory (Get-AgentJob $homeDirectory ([string](Get-AgentProperty $body 'job_id' ''))) }
                         '/api/csv/select' {
                             $selectionId = [guid]::NewGuid().ToString('N')
