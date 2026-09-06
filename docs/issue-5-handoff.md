@@ -2,6 +2,50 @@
 
 状態は **実装済みPoC・実機ゲート未完了**。Issue #5を閉じず、残りの検証と必要な修正を続ける。今回のマージはユーザーが指定した途中成果の保存であり、全要件の受入完了ではない。
 
+## 20:16 JSTの再開情報（以下の履歴より優先）
+
+- 作業ソースと通常配布App SHAは `f9391133d2c52239de68a96d4f3a4a03b060f10967069d95ea2dab38c1474e45`。通常server PID356 / port60007 / start UTC `2026-09-06T11:08:31.5979449Z`。releaseは `0.1.0-57bf89e2c02486df7bca084fc6e77df4d7262a56a471e4ad15e1ab5ff36901c3`。通常更新 `5cdd478fea9c411284b1095796a8b54d` はPASS。
+- Planner V2は **1つの物理フェンス内のメタデータ/Robinの2セクション** を既定出力にした。明示マーカーで分離し、旧2フェンスの読取りも維持。AiCallはV1のまま。単一フェンスの実長文検証 `bb4d6143aec74b3f872b6232dd94bdfd` は7794文字・26行・空行1・24 Writeの完全一致、独立2読取り・保全成功、送信1/PAD0。result SHA `c1614af19c3cefe75ac29114af3e68bf100a41f26ca70657a0a098eb8bf3a17f`。
+- 入力準備で複数の確認が共通15秒枠を消費する問題を計測・再現し、各確認の枠と不変の要求全体期限を分けた。低速準備・全体期限・単一V2→V1→単一V2を含む応答制御134件PASS。PAD実行中のMain表示不一致は、20秒以内の完全な再観測でのみ回復し、持続すればunknown。PAD331件PASS。
+- DONE成果物パスはWindowsの `GetFullPath` でパス構文を正規化してから、観測済みの正確なパス・現物hash・全文確認状態と照合する。Robinや業務本文は変更しない。`needs_review` の分類結果も候補ラベルに限定した。core146件PASS。
+- 正しいDONEなのに「More表示あり・全行が既に枠内」の状態を拒否していた。実測は11行、CSS maxHeight300px、padding込みclientHeight=scrollHeight=320px。V2メタデータ始端を持つ、この完全な表示状態に対応しDOM893件PASS。元の実回答を再送/展開せず2回読んでDONEと成果物を検証できた（`.work/completion-7009a7601b87455a99d3bd9dedfc79b9/done-fitted-reader.json`）。元jobはfailedのまま。
+- **最新V2業務通し検証はPASS**。`.work/fitted-d08798810a234ce0af71690cbf310519/classification/` のsession `ee182d3e0c9c4e73a2be8cfa43a6cf93` / job `6e8eea67fc004355b13e76f7d8016c1a` は実HTML開始1回→V2 ACT→PAD内V1分類review→分岐と下書き→実観測を受けたV2 ACT→別PAD実行→V2 DONEまで完了した。PAD2回/AiCall1回、異なる生成Robin、4応答の独立2読取り、元ファイル/owner/全タブ/attempt帰属の保全、worker終了、最終UI一致がすべてPASS。result SHA `877c11492e2473fd79194c074fee392f8e786c13dbd963df5a6fa832ba864a16`。
+- 最終83バイトの `final-review.txt` は下書きとSHA `271fe047a97061f8eb4f3f2fd9a14d99973059fed1714a4256272da4ce2b4a5d` が一致。元入力80バイトとの差はUTF-8 BOMで、デコード後は末尾LFを含めOrdinal完全一致。完了画面 `complete-ui-full.png` を目視し、完了状態・停止無効・回答・正規化済み成果物パスを確認。スクリーンショットSHA `e29a54fc4bd5a98bf2041cb80dc32cb7dbc55dd99b6df45a54a0b247b16e0f33`。同sessionへ検証済み最終ファイルもコピーした。
+- 最新検証後owner SHAは `1c4be84229f793e0dd3335a95df111c7ab0385c57cc2fdf37bc17c48a8ad0ee2`。現在Mainは上記2回目の成功フロー。再開時はこの所有記録と今回のsubmittedを照合する。古いowner/pid/headに固定されたhelperや消費済みclaimを再実行しない。
+
+途中結果の保存先: `.work/pastewait-db7901e78f01420c9451367b4080fbc6/`（実AiCall timeoutとPAD runtime_errorの読取り、旧Main復旧、入力準備計測）、`.work/readiness-17c8799f71814fbdbf8ac3c0ff08bc2a/`（入力準備修正）、`.work/single-fence-803c838f4ccf4d90b59dd1ed627f802a/`（新形式・パス照合の切分け）、`.work/completion-7009a7601b87455a99d3bd9dedfc79b9/`（正しいDONEの表示状態切分け）。失敗/unknownを成功へ書き換えていない。
+
+追加の `tests/Test-AiCallProcess.ps1` は実PS5子プロセス5回による14件PASS。空入力・開始前中止・再入・別Appのcontextを送信前に拒否する検査で、PAD途中の全異常系やプロバイダーの空回答の証拠ではない。
+
+次の作業はAiCallの拒否/空回答/期限/実行中中止が同じPADに戻る異常系の不足分、native Save失敗、その他ゲートの監査、GitHub経由で社内PCへ渡す最新版パッケージと別PC検証。ここでのV2正常業務成功はIssue全体の受入完了ではない。GitHub Actionsは未設定で、新しいPR公開/マージは未実施。
+
+## 配布先の確定事項と17:50 JSTの更新
+
+**18:06 JST追記**: 現在の作業ソースAppは `0d812b25e8371e89c241f098538406b67292398f1425234583750f216221f3d0`。下記の通常配布 `6119f110…` に、貼り付け後はアクションが実際に存在するReady/idle/error0の連続2観測を要求する `Wait-AgentPadEditable -RequireActions` を追加した。空のReadyではクリップボード読戻しへ進まず、期限後は `PAD_PASTE` で停止する。PAD325/core138 PASSだが、この追加条件は未配布・実機未検証。
+
+V2分類 `3786d28baa0f4bcead05d685065e1ab9` / job `3236f6a3662a4769b6747662de125cb3` は、実HTML開始→V2 ACT→生成PAD→V1 AiCall分類review→分岐・83バイトの下書き保存→実観測を受けた次のV2 ACTまで進んだ。2回目の反映が `PAD_COPY` で停止し、ASK_USERへ移った。2回目のsubmittedはあるが開始/完了マーカーはなく、最終ファイルは未作成。元結果はpartialのまま保持。旧ファイル/owner/タブ保全はすべて通過した。
+
+読取診断ではMainが実際に空で、Ctrl+A/C各1回でもsentinelのまま、owner不変、clipboard復元一致だった。元成功Mainを実行せず1回貼り戻し、キー送出から66msで戻り、2144ms時点の最初の状態観測でアクション存在/clipboard不変を確認した。これだけで元失敗がタイミングだけに由来すると断定しない。診断の保存前に空CancelPathによる補助エラーがあったため、新しい保存専用helperで保存1・全文コピー2・owner一致・エラー0まで確認した（`finalize-main.json`）。現在owner SHA `2c078c05fde96fd36c21aa1c3acf46a5d16ed9ddc8350ec3483bf2d3aa966424`、Main比較SHA `cd4ca140f56d90c2a88b95751ac3aec609cdbdf742b470d7f956ea768c39ab50`。ジョブは実UI停止1回でcancelled、worker終了済み。次の検証はこの新ownerを基準にする。
+
+記録は `.work/resume-279042c639354e21a630074e81e426b7/`。過去の失敗タブ2件の閉鎖スクリプトは自動承認レビューに拒否され未実行。タブを閉じる再試行は行っていない。旧 `2cbe52e2…` のZIP候補は `.work/distributions/issue-5-poc-4243688-9777d2c6bdba4b16a7e8e79f92f7c0d9/` に保持し、最新修正の配布物として使わない。
+
+ユーザーから、現在の `\\localhost\AiPromptsAgentPoC$` は削除・新規作成を含めて作り替え可能なテスト共有で、実際の配布は **GitHub → 社内PC → 社内共有フォルダー** と確認された。以前のテストHTML所有者の復元を受入条件や継続の障害にしない。失敗証拠は保持するが、社内共有の設定をこのテスト環境から推定しない。
+
+最新Appは `6119f11066b5f3e1b5e60fe1885df6a7e8de8a6dc1a3ec7e8c0c44e5db0ca144`。通常更新 `59c2d1e16964416fa05e015c33ae4ce0` はPASS、server PID12936 / port61417 / start UTC `2026-09-06T08:50:38.5631842Z`。releaseは `0.1.0-31da91be164f2f207cf1f1796494e35503066b341c9f12049267aa270982a8eb`。既存ファイルとPAD所有記録を保持した。これは後述の旧cache状態を更新する。
+
+変更はCopilotの送信ボタン判定。実分類 `9557e7cdab414df9989eee35ca2ab14f` は、非モーダルの満足度アンケートにも有効な「送信」ボタンがあり、ページ全体から探す判定が2件となって送信前に停止した。既知のチャット入力領域にあるsubmitボタンへ限定し、アンケートを送信しない回帰を追加。旧版で回帰失敗、新版でDOM870/core138/Copilot302 PASS。実画面の読取りでも、2ボタンが存在したまま正しい送信先を一意に検出し、入力SHA不変を確認した。元失敗要求のattemptは消費済みで再送しない。
+
+## 17:27 JSTの再開結果（履歴）
+
+- 作業ブランチは `codex/issue-5-resume-validation`、開始HEADは `424368831c7f5d60c23c3587814451f111afd9bd`。Issue本文と全コメント1件を再読した。
+- **最新ソースによるV2長文・空行の実取得は成功**。診断 `8cdcfab0b1fa425d889a30c42a118d39` は1 Read＋空行1＋24 Write、7794文字・26行を期待本文と完全一致で取得。実送信1・再送0・PAD0、独立2回のDOM/assistant読戻し一致、既存401ファイル・owner・ページ保全成功。結果SHAは `0bd7f5edbeb5c243732cbb6ca11461652e7c00d57c30ecb679c4f0d06555885e`。
+- これは通常Explorerから**最新ソースの関数を直接読み込んだ取得診断**。通常キャッシュは旧 `0fc60b78…` のまま別にハッシュ固定した。最新版配布後のHTML→PAD業務受入とは数えない。証拠は `.work/resume-279042c639354e21a630074e81e426b7/source-retrieval/`。
+- **共有更新は未合格**。公開診断 `76e4cca698984977a7b20306db277fa5` で `File.Replace` が旧HTMLの別アカウント所有者/ACLを変更し、App/HTML更新後・CMD更新前に停止した。3ファイル本文は固定バックアップから旧版へ復元し、全SHA一致を確認。通常更新・サーバー再起動は実施していない。
+- **残る共有メタデータ差分**: `index.html` の元所有者/グループ/ACLを戻す `Set-Acl` は「The security identifier is not allowed to be the owner of this object」で失敗。共有設定を緩めたり権限を迂回したりしていない。失敗結果、旧バックアップと `share-recovery.json` を保持。旧公開helperはこの所有者差を置換前に検出できないため、そのまま再実行しない。元メタデータの復元と、全変更ファイルの所有者/ACLを事前確認する公開手順が先に必要。
+- `tests/Test-App.ps1` と `tests/Test-CopilotPlannerV2.ps1` の既定ソースパス解決をparam評価から本体へ移し、PS5.1でREADMEの引数省略コマンドが失敗する問題を修正。core138、V2解析108、V2/V1応答制御118、Copilot302、PAD320、隔離Edge DOM859、launcher18、実localhost HTTP検証がPASS。Copilot/PADのモック検査を実機業務の証拠にはしない。
+
+この時点では共有メタデータの復元を次作業としていたが、その後のユーザー指示と上記更新で扱いを変更した。V2分類業務、AiCall失敗実経路・native Save失敗・別PCの未検証を継続する。今回の取得成功で以前の失敗結果を書き換えない。
+
 ## 再開時に読むもの
 
 1. GitHub Issue #5の本文と全コメント。

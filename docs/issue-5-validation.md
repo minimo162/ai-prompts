@@ -2,6 +2,44 @@
 
 2026-09-06 / 状態: **partial — 実機ゲート未完了**。
 
+同日20:16 JST、最新App `f9391133d2c52239de68a96d4f3a4a03b060f10967069d95ea2dab38c1474e45` の実V2分類通し検証は **PASS**。session `ee182d3e0c9c4e73a2be8cfa43a6cf93` / job `6e8eea67fc004355b13e76f7d8016c1a`。実HTML開始1/HTTP200→単一フェンスV2 ACT→生成PAD内V1 AiCall分類review→IF分岐/下書き→実観測を受けた異なるV2 ACT→PAD2回目→V2 DONEを確認。開始/終了マーカー・各run/call ID、4応答の独立2読戻し、ファイル/owner/全タブ/attempt帰属の保全、worker終了、UI完了一致がすべて合格。result SHA `877c11492e2473fd79194c074fee392f8e786c13dbd963df5a6fa832ba864a16`。証拠は `.work/fitted-d08798810a234ce0af71690cbf310519/classification/classify-sessions/ee182d3e0c9c4e73a2be8cfa43a6cf93/`。
+
+最終 `final-review.txt` は83バイト/SHA `271fe047a97061f8eb4f3f2fd9a14d99973059fed1714a4256272da4ce2b4a5d`。入力は会議室が未定と明記するためreview分岐が妥当。下書きと最終ファイルは同一hash、normal側の出力は0。入力80バイトとの差はUTF-8 BOMだけで、UTF-8読取り後は末尾LFも含めてOrdinal完全一致した。完了画面 `complete-ui-full.png`（SHA `e29a54fc4bd5a98bf2041cb80dc32cb7dbc55dd99b6df45a54a0b247b16e0f33`）を目視し、完了/停止無効/最終回答/成果物パスを確認。`semantic-visual-review.json` と検証済み出力コピーを同sessionに保存。
+
+この到達までの修正と証拠:
+
+- 入力確認が1回約2秒かかり、6回の確認で共通15秒枠の約12秒を使うことを実画面で送信なし計測。低速キー処理を含む回帰で旧コードの準備期限切れを再現し、確認ごとの短い枠と不変の要求全体期限を分離。全体5秒を越えた入力/送信を防ぐ検査を含め、V2/V1応答制御134件PASS。
+- 実AiCall timeout `ead2b7aa…` はfailed/timeout・成功本文なし・PAD runtime_errorを確認したが、旧実行器が途中のMain装飾表示でunknownとなった。元結果は保持し、実行中だけ完全な状態を期限内に再観測する対応を追加。永続不一致はunknownを維持し、Paste/Save/Runを再試行しない。PAD331件PASS。旧Main復旧は `.work/pastewait-db7901e78f01420c9451367b4080fbc6/restore-timeout.json`。
+- 2フェンス間の余分なバッククォートが再発したため、既存2フェンスの検査を維持したまま、1フェンス内を明示マーカーで2セクションに分ける出力を既定とした。単一フェンス実長文 `bb4d6143…` は7794文字/26行/空行1/24 Write完全一致・保全PASS。DOMの境界/欠落/余分な行の拒否は維持。
+- 実DONEの `5a165045…` は同じファイルを指す重複区切りパスが文字列比較で拒否された。`GetFullPath` でパス構文を解決後、正確な観測済みパスと現物hash、全文確認状態を照合する修正を入れた。未観測の同一内容ファイルやhash変更、全文省略は拒否。原応答/Robin/業務本文は変更しない。`needs_review` 分類の候補外ラベルも拒否し、core146件PASS。
+- 実DONE `af18a3d9…` は全11行が枠内にありながらMoreが表示される状態でrenderedへ戻っていた。CSS maxHeight300px、padding込みclientHeight=scrollHeight=320pxを実測。V2メタデータ始端を持ち全行が完全に収まる表示を追加し、DOM893件PASS。元の同じ回答を再送/More操作なしで2読取りし、厳密なDONE解析と実成果物照合が成功（`done-fitted-reader.json`）。元失敗は書き換えていない。
+
+本節の正常業務PASSを、AiCall全異常系・native Save失敗・社内/別PC・CIのPASSへ拡張しない。
+
+同日18:06 JST追記: 修正後のV2分類 `3786d28baa0f4bcead05d685065e1ab9` / job `3236f6a3662a4769b6747662de125cb3` は実HTMLから開始し、V2 ACT・生成PAD・V1 AiCall分類review・IF分岐による下書き保存と、その実観測を受けた次のV2 ACTを確認した。下書きは原文と同じ83バイト/SHA `271fe047a97061f8eb4f3f2fd9a14d99973059fed1714a4256272da4ce2b4a5d`、分類値はreview。2回目のPAD反映が `PAD_COPY` で停止しASK_USERへ移ったため、DONEの証拠ではない。元resultはpartial、旧ファイル/owner/全タブ/新attempt帰属の保全は成功した。
+
+追加の1回のコピー診断で、Main空・idle/error0、対象ListBoxフォーカス、Ctrl+A/C後もsentinel不変、owner不変、全clipboard形式/内容の復元一致を確認した。2回目のrunにはsubmitted.robin.txtがあるが開始/完了マーカーや成果物はない。旧成功Mainの貼戻し診断はpaste1/Run0で、キー送出から66msで戻り、2144ms時点の最初の状態観測でアクション存在とclipboard不変を確認。元失敗のタイミング原因は未確定。保存前の補助CancelPath指定不備を別記録で保持し、保存だけの新helperでsave1/copy2、最後の成功Mainとの全文一致・保存済み・owner不変・エラー0を確認した。実HTML停止1回でjob cancelled/worker終了。証拠はresume配下 `pad-copy-diagnostic.json`、`pad-copy-state-detail.json`、`paste-observation.json`、`finalize-main.json`、当該sessionの `stop-waiting-ownership.json`。
+
+この実例に対し、空のReady/idleを貼付完了の条件から除く `-RequireActions` を追加。アクションが存在する連続2観測を得るまで提出クリップボードを保持し、コピー・再paste・Runを行わない。期限超過は `PAD_PASTE`。App `0d812b25…` のPAD325/core138 PASS。通常cacheは送信先修正版 `6119f110…` のままで、この追加条件の配布・実機受入は未実施。
+
+同日17:35以降の配布方針: ユーザーは現共有を作り替え可能なテスト環境と明示し、実配布経路をGitHub→社内PC→社内共有フォルダーと指定した。以前のテストHTML所有者復元を継続条件から外した。開発用 `tools/Publish-AgentSource.ps1` は3ファイルすべての排他オープンと旧版バックアップを先に行い、ファイルオブジェクトを置換せず本文を更新する。ローカルファイル/ロック/ACLと単回の書込み境界例外による復元を13件検証しPASS。OS/プロセスクラッシュ時の原子性は保証しない。テスト共有への公開も成功し、操作前後のメタデータ一致を確認。これは旧失敗を合格へ書き換えたものではない。
+
+通常更新 `171c27b7299143f3b30c572d0a41bbc2` は17:38 JSTにPASS。共有CMD1回・exit0、App `2cbe52e2…` の通常server PID32812/port63788、既存399ファイル保持を確認した。先行Prepare `1161a2d4…` は日時文字列がPowerShell 7のJSON読込みでDateTime化され、ISO引数検査で変更前に拒否された。ISOへ明示整形した新wrapper/IDでのみ続行し、旧失敗を保持した。
+
+実HTML分類 `9557e7cdab414df9989eee35ca2ab14f` / job `80065a0fa6f349a7b5168410846cd267` は開始1回・HTTP200後に `CDP_UNAVAILABLE` で送信前停止。17:43の読取りで、入力18366文字、assistant0、has_sent=false、attempt存在、チャットと非モーダルの満足度アンケートに可視・有効な「送信」ボタンが各1個あることを確認した。スクリーンショットとDOMは `failed-classification-page.png` / `failed-classification-send-dom.json`。原因はグローバルな送信ボタン検索の競合だった。元resultはpartial、旧ファイル/owner保全とworker終了/UI一致を記録。タブ保全等の末尾監査は応答がない条件で先に拒否されたため、元のfalseを実際のタブ喪失と解釈しない。
+
+`App.ps1` の既知 `div.fai-BebopLiteChatInput` 内のsubmit送信ボタンに対象を限定した。アンケートへのフォールバックをせず、入力領域内の候補欠落/重複/無効/非表示では拒否する。実画面のread-only再読で2ボタンが残った状態のsend_ready=trueと入力SHA不変を確認。新回帰は旧Appでsurvey-send混入を再現して失敗、新App `6119f110…` で隔離Edge DOM870、core138、Copilot302 PASS。修正版の通常更新 `59c2d1e16964416fa05e015c33ae4ce0` もPASSし、server PID12936/port61417/start UTC `2026-09-06T08:50:38.5631842Z`、保全一致。証拠は `.work/resume-279042c639354e21a630074e81e426b7/`。元失敗要求は再送していない。
+
+同日17:27 JSTの再開検証: Issue本文と全コメント1件を再読し、HEAD `4243688`、通常server PID976/port59062、専用Edge PID12348、PAD PID25656を確認。PAD画面は専用「無題」Main、準備完了・エラー0。通常Explorerからの読取りで旧cache `0fc60b78…`、最新job DONE、owner SHA `927986a7277b956f011a2ef72dc06ff8b4fb3fd138349d63bc4a73cabf7b24eb` を照合した。
+
+最新App `2cbe52e2…` を通常ExplorerのPS5.1 STAで直接読み込む取得診断 `8cdcfab0b1fa425d889a30c42a118d39` は **retrieved**。通常サーバー/キャッシュは旧版を別ハッシュで固定し、最新版配布の成功を前提にしていない。製品の `Invoke-AgentCopilot -Transport PlannerV2` から返ったACTは、1 Read・空行1・24 Write、7794 UTF-16文字/UTF-8 bytes・26行。期待RobinとのOrdinal完全一致、厳密parser/Robin検証、独立した2回の完全DOM・assistant・フレーム再解析一致、既存401ファイルとowner/ページの保全を確認した。送信1・再送0・PAD/clipboard/展開0。result SHA `0bd7f5edbeb5c243732cbb6ca11461652e7c00d57c30ecb679c4f0d06555885e`、Robin SHA `5d4e5ec416785d55dc62cb6093c3fbcff061f6df6c7efdaa967fc7389ab8ab11`。証拠は `.work/resume-279042c639354e21a630074e81e426b7/source-retrieval/sessions/8cdcfab0b1fa425d889a30c42a118d39/`。最新版HTML→生成AiCall→PAD→DONEの証明ではない。
+
+同日17:22 JSTの共有更新診断 `76e4cca698984977a7b20306db277fa5` は **unknown/accepted=false**。既存の `Publish-PinnedSource-NullString.ps1` がApp/HTMLの2ファイルを置換後、HTMLの所有者/グループ/ACL変化を検出してCMD置換前に停止した。共有設定・ディレクトリACLは一致したが、旧HTMLは別アカウント所有で、File.Replace後は実行ユーザー所有になった。失敗resultと旧3ファイルのバックアップを保持し、17:23 JSTにApp/HTML本文を旧バックアップからファイルオブジェクトを置換せず復元。共有3ファイルの旧SHA一致を確認した。通常更新とサーバー再起動は未実施。
+
+HTMLの元所有者を含むACL復元は `Set-Acl` が拒否した（`The security identifier is not allowed to be the owner of this object.`）。このメタデータ差分は未解決で、保全成功としない。復元記録は同resume配下の `share-recovery.json`。今後の公開は、全変更ファイルの所有者/ACLを置換前に検査し、維持できない場合は変更前に停止できる手順を必要とする。旧helper/消費済みclaimの再実行や、ACL検査を外して合格扱いする対応は行わない。
+
+同日ローカル検証: READMEの引数省略実行でcore/V2解析のparam既定値にある `$PSScriptRoot` が空となる失敗を再現し、パス解決を本体開始後へ移して修正した。引数省略のcore138/V2解析108がPASS。現行AppでV2/V1応答制御118、Copilot302、PAD320、隔離Edge DOM859、launcher18、実localhost HTTP（token/Host/Origin拒否、slow-body期限、singleton再接続、質問ID/重複回答拒否、版切替、正常終了）もPASS。DOMはローカルfixture7件で外部転送0。これらは実M365/PAD業務や別PCの受入ではなく、CIも未設定。
+
 同日17:02 JST、Planner V2の製品応答ループで1 Read・空行・24 Writeの長文を検証した（`bd1e00f891dc4ea88d4e8b63b00bdc5c`）。結果は `unknown / RESPONSE_INVALID`。製品関数の呼出しは1回、再送・PAD操作は0、既存ファイル・owner・ページの保持検証は成功した。回答後のDOMではメタデータ終端の次に、単独バッククォートの `data-line-index="3"` 行が実在した。製品はこれを正常なV2応答として取得していない。取得側が追加した文字ではないが、生成とCopilot表示変換のどちらが発生源かは未確定。元の失敗を保存し、追加DOM・snapshotの保存後に検証タブを閉じた。
 
 この実例を受けて、生成指示にメタデータ終端直後のフェンス閉鎖と、余分な部分区切り文字を出力しないことを明記した。終端検査は緩和せず、同じ余分なバッククォートを拒否する解析回帰ケースを追加した。修正後の実Copilot受入は未検証。通常環境は16:48 JSTに更新済みの `0fc60b78…` のままであり、この生成指示修正はまだ配布していない。

@@ -1,7 +1,8 @@
 ﻿# Local contract tests only: mocked Copilot/PAD are not live acceptance evidence.
 [CmdletBinding()]
-param([string]$AppSourcePath = (Join-Path $PSScriptRoot '..\App.ps1'))
+param([string]$AppSourcePath = '')
 $ErrorActionPreference = 'Stop'
+if (-not $AppSourcePath) { $AppSourcePath = Join-Path $PSScriptRoot '..\App.ps1' }
 . ([IO.Path]::GetFullPath($AppSourcePath)) -Mode Library
 $script:ProductionRobin = (Get-Item -LiteralPath Function:\Test-AgentRobin).ScriptBlock
 $script:Checks = 0
@@ -153,6 +154,7 @@ try {
         $text = "Translated 100%`n`"quoted`""
         if ($script:AiMode -ceq 'empty') { $text = '' }
         $response = @{ request_id = $RequestId; job_id = $request.job_id; run_id = $request.run_id; ai_call_id = $request.ai_call_id; status = 'success'; result = $text; error_type = ''; input_count = 1; output_count = 1 }
+        if ($script:AiMode -cin @('review-unknown','review-label')) { $response.status='needs_review'; $response.error_type='review_required'; if($script:AiMode -ceq 'review-label'){$response.result='要確認'} }
         if ($script:AiMode -ceq 'wrong-id') { $response.run_id = [guid]::NewGuid().ToString('N') }
         return ConvertTo-Json -InputObject $response -Compress
     }
@@ -189,6 +191,18 @@ try {
     Write-AgentJson $script:AiContext.request_path $script:AiContext.request
     $ai = Invoke-AgentAiCall $homeDirectory $script:AiContext.request_path $script:AiContext.result_path
     Assert-True ($ai.status -ceq 'failed' -and $ai.error_type -ceq 'invalid_response') 'Classification rejects results outside label candidates'
+    foreach($reviewMode in @('review-unknown','review-label')) {
+        $script:AiMode=$reviewMode; $script:AiContext=New-TestAiCall $homeDirectory $input
+        $script:AiContext.request.operation='classify'; $script:AiContext.request.labels=@('確認済み','要確認')
+        Write-AgentJson $script:AiContext.request_path $script:AiContext.request
+        $ai=Invoke-AgentAiCall $homeDirectory $script:AiContext.request_path $script:AiContext.result_path
+        if($reviewMode -ceq 'review-unknown') {
+            Assert-True ($ai.status -ceq 'failed' -and $ai.error_type -ceq 'invalid_response' -and -not (Test-Path (Join-Path $script:AiContext.directory 'result.txt'))) 'Needs-review classification cannot pass an unknown label to a PAD ELSE branch'
+        } else {
+            Assert-True ($ai.status -ceq 'needs_review' -and $ai.result -ceq '要確認' -and $ai.error_type -ceq 'review_required') 'Valid classification label retains needs-review status'
+        }
+    }
+    $script:AiMode='success'
     $script:AiContext = New-TestAiCall $homeDirectory $input
     $script:AiContext.request.operation = 'classify'
     Write-AgentJson $script:AiContext.request_path $script:AiContext.request
@@ -337,6 +351,7 @@ try {
         $script:LastPlannerContext = ConvertFrom-Json -InputObject $Prompt.Substring($contextStart, $contextEnd - $contextStart)
         $plan = @{ request_id = $RequestId; state = 'ACT'; message = '一回実行'; robin = "SET Text TO 'テスト 100%'"; artifacts = @() }
         if ($script:Plans -gt 1 -or $script:RunMode -ceq 'false-done') { $plan.state = 'DONE'; $plan.message = '完了しました。'; $plan.robin = ''; $plan.artifacts = @($script:Output) }
+        if ($plan.state -ceq 'DONE' -and $script:RunMode -cin @('aliased-done','truncated-aliased')) { $plan.artifacts=@($script:Output.Replace('\','\\')) }
         if ($script:RunMode -ceq 'blocked') { $plan.state = 'BLOCKED'; $plan.robin = ''; $plan.message = '許可範囲が不明です。' }
         if ($script:RunMode -ceq 'max') { $plan.state = 'ACT'; $plan.robin = 'SET X TO 1' }
         if ($script:RunMode -ceq 'ask' -and $script:Plans -eq 2) { $plan.state = 'ASK_USER'; $plan.robin = ''; $plan.artifacts = @(); $plan.message = '丁寧な英語にしますか？' }
@@ -371,7 +386,7 @@ try {
         if ($script:RunMode -ceq 'two-act' -and $script:PadRuns -eq 2) { $null = & $script:ProductionRobin -Robin $Robin -RunDirectory $RunDirectory -Job $Job }
         $artifacts = Join-Path $RunDirectory 'artifacts'; [IO.Directory]::CreateDirectory($artifacts) | Out-Null
         $script:Output = Join-Path $artifacts 'translated.txt'; [IO.File]::WriteAllText($script:Output, $script:ObservedMarker, $script:AgentEncoding)
-        if ($script:RunMode -ceq 'truncated') { [IO.File]::WriteAllText($script:Output, ('x' * 9000), $script:AgentEncoding) }
+        if ($script:RunMode -cin @('truncated','truncated-aliased')) { [IO.File]::WriteAllText($script:Output, ('x' * 9000), $script:AgentEncoding) }
         if ($script:RunMode -ceq 'unavailable') { [IO.File]::WriteAllBytes($script:Output, [byte[]]@(255,254,65,0)) }
         return [pscustomobject]@{ status = 'success'; error = ''; artifacts = @($script:Output) }
     }
@@ -398,15 +413,18 @@ try {
     Assert-True ($answered.status -ceq 'done' -and $script:Plans -eq 3 -and $script:PadRuns -eq 1) 'ASK_USER resumes with one user answer and no repeated PAD run'
     Assert-True ($script:LastPlannerPrompt.Contains('100%そのまま保持してください。')) 'Question answer is preserved in subsequent planner context'
     Assert-True ($answered.question_id -ceq '') 'Question identity is cleared after the matching answer is consumed'
-    foreach ($modeValue in @('two-act','truncated','unavailable','failed-replan','failed-retry','failed-auth','failed-setup','failed-change','failed-new-ids','failed-new-business')) {
+    foreach ($modeValue in @('two-act','aliased-done','truncated','truncated-aliased','unavailable','failed-replan','failed-retry','failed-auth','failed-setup','failed-change','failed-new-ids','failed-new-business')) {
         $script:RunMode = $modeValue; $script:Plans = 0; $script:PadRuns = 0; $script:PadRunIds = @()
         $job = New-TestJob $homeDirectory $input
         $checked = Invoke-AgentRun $homeDirectory $job.job_id
         if ($modeValue -ceq 'two-act') {
             Assert-True ($checked.status -ceq 'done' -and $script:Plans -eq 3 -and $script:PadRuns -eq 2) 'Two ACT rounds can read an exact prior output before a final DONE'
             Assert-True ($script:LastPlannerContext.observations[0].artifact_observations[0].content -ceq $script:ObservedMarker -and $script:LastPlannerContext.prior_readable_artifacts.Count -eq 2) 'Later context keeps observed content and exact prior read grants'
-        } elseif ($modeValue -cin @('truncated','unavailable')) {
-            Assert-True ($checked.status -ceq 'blocked' -and $script:LastPlannerContext.observations[0].artifact_observations[0].text_status -ceq $modeValue) ('DONE is blocked for ' + $modeValue + ' output content')
+        } elseif ($modeValue -ceq 'aliased-done') {
+            Assert-True ($checked.status -ceq 'done' -and $checked.artifacts.Count -eq 1 -and $checked.artifacts[0].path -ceq $script:Output -and $script:PadRuns -eq 1) 'DONE resolves repeated path separators to the observed artifact without repeating PAD'
+        } elseif ($modeValue -cin @('truncated','truncated-aliased','unavailable')) {
+            $expectedTextStatus=if($modeValue -ceq 'truncated-aliased'){'truncated'}else{$modeValue}
+            Assert-True ($checked.status -ceq 'blocked' -and $script:LastPlannerContext.observations[0].artifact_observations[0].text_status -ceq $expectedTextStatus) ('DONE is blocked for ' + $modeValue + ' output content')
         } elseif ($modeValue -cin @('failed-change','failed-new-business')) {
             Assert-True ($checked.status -ceq 'done' -and $script:PadRuns -eq 2 -and $script:Plans -eq 3) 'A definite failure may be followed by an explicitly changed planner action'
             Assert-True (($script:PadRunIds | Select-Object -Unique).Count -eq 2) 'Replanned action uses a fresh run identity'
@@ -416,8 +434,16 @@ try {
         }
     }
     $observed = @([pscustomobject]@{ path = $script:Output; sha256 = Get-AgentHash $script:Output })
+    $aliasedPlan=[pscustomobject]@{artifacts=@($script:Output.Replace('\','\\'))}
+    $resolved=@(Assert-AgentCompletion $aliasedPlan $observed)
+    Assert-True ($resolved.Count -eq 1 -and $resolved[0] -ceq $script:Output -and $aliasedPlan.artifacts[0] -cne $script:Output) 'Only filesystem references are canonicalized; the original planner object is unchanged'
+    Assert-Throws { Assert-AgentCompletion $aliasedPlan @($observed[0],$observed[0]) } 'not observed' 'Canonicalization does not permit ambiguous observed grants'
+    $unobservedCopy=Join-Path ([IO.Path]::GetDirectoryName($script:Output)) 'unobserved-copy.txt'
+    [IO.File]::Copy($script:Output,$unobservedCopy)
+    Assert-Throws { Assert-AgentCompletion ([pscustomobject]@{artifacts=@($unobservedCopy.Replace('\','\\'))}) $observed } 'not observed' 'Identical bytes at an unobserved path cannot authorize DONE'
     [IO.File]::AppendAllText($script:Output, 'changed')
     Assert-Throws { Assert-AgentCompletion ([pscustomobject]@{ artifacts = @($script:Output) }) $observed } 'changed' 'DONE rejects changed output'
+    Assert-Throws { Assert-AgentCompletion $aliasedPlan $observed } 'changed' 'An aliased path cannot bypass the current hash check'
     foreach ($modeValue in @('unknown','false-done','blocked','max')) {
         $script:RunMode = $modeValue; $script:Plans = 0; $script:PadRuns = 0
         $job = New-TestJob $homeDirectory $input

@@ -1,9 +1,10 @@
 ﻿[CmdletBinding()]
 param(
-    [string]$SourcePath=(Join-Path $PSScriptRoot '..\App.ps1'),
+    [string]$SourcePath='',
     [string]$EvidencePath=''
 )
 $ErrorActionPreference='Stop'
+if(-not $SourcePath){$SourcePath=Join-Path $PSScriptRoot '..\App.ps1'}
 $env:PSModulePath=Join-Path $PSHOME 'Modules'
 $taskApp='';$taskAppHash='';$taskAfterHash='';$taskEvidenceFile='';$taskFailureRecord=$null;$taskSourceFunctionCount=0
 $taskTestPath=$PSCommandPath;$taskTestHash=(Get-FileHash -LiteralPath $taskTestPath).Hash.ToLowerInvariant()
