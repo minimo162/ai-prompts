@@ -17,6 +17,17 @@ function Invoke-AgentCopilot {
   param($Prompt,$RequestId,$JobId,$Settings,$HomePath,$CancelPath,$TimeoutSeconds)
   if (-not $script:AgentOfflineTest) { throw 'TEST_REQUIRES_OFFLINE' }
   $payload = ConvertFrom-Json ($Prompt.Substring($Prompt.IndexOf("REQUEST_JSON:\n") + "REQUEST_JSON:\n".Length))
+  if ((Get-AgentProperty $payload 'kind' '') -ceq 'csv_plan') {
+    Reserve-AgentCopilotAttempt $HomePath $RequestId
+    $askedMarker = Join-Path $HomePath 'fixture-asked'
+    if (-not [IO.File]::Exists($askedMarker)) {
+      [IO.File]::WriteAllText($askedMarker,'asked')
+      return ConvertTo-Json -Depth 20 -Compress @{schema_version=1;request_id=$RequestId;observation_id=$payload.observation.observation_id;state='ASK_USER';message='分類候補を確認しました。今回の分類条件を回答してください。';actions=@()}
+    }
+    $actions = @(); $state = if ($payload.observation.summary.processing_complete) {'DONE'} else {'ACT'}
+    if ($state -ceq 'ACT') { $actions = @(@{operation='read_rows';arguments=@{row_ids=@($payload.observation.pending_row_ids)}},@{operation='classify_rows';arguments=@{row_ids=@($payload.observation.pending_row_ids)}},@{operation='write_results';arguments=@{output_id=$payload.approved_output_id}},@{operation='verify_results';arguments=@{output_id=$payload.approved_output_id}}) }
+    return ConvertTo-Json -Depth 20 -Compress @{schema_version=1;request_id=$RequestId;observation_id=$payload.observation.observation_id;state=$state;message='合成の型付き計画';actions=$actions}
+  }
   if ($payload.rows[0].text -ceq '合成問い合わせ21') {
     $deadline = [DateTime]::UtcNow.AddSeconds(30)
     while (-not [IO.File]::Exists((Join-Path $HomePath 'resume-ready'))) {
@@ -28,8 +39,9 @@ function Invoke-AgentCopilot {
   Reserve-AgentCopilotAttempt $HomePath $RequestId
   foreach ($row in $payload.rows) { [IO.File]::AppendAllText((Join-Path $HomePath 'mock-sends.txt'), $row.row_id + [Environment]::NewLine) }
   Start-Sleep -Milliseconds 150
+  $reviewPass = $payload.instructions.Contains('追加指示')
   return ConvertTo-Json -Depth 10 -Compress @{schema_version=1;request_id=$RequestId;results=@($payload.rows | ForEach-Object {
-    @{row_id=$_.row_id;category='支払';reason='合成応答 <script> を文字として表示';status=$(if ($_.text -match '問い合わせ2[123]$') {'needs_review'} else {'success'})}
+    @{row_id=$_.row_id;category=$(if($reviewPass){'その他'}else{'支払'});reason='合成応答 <script> を文字として表示';status=$(if (-not $reviewPass -and $_.text -match '問い合わせ2[123]$') {'needs_review'} else {'success'})}
   })}
 }
 `;
@@ -77,6 +89,10 @@ function Invoke-AgentCopilot {
     await wait(1300); assert(await page.locator('#csv-approval').isHidden()); checks++;
     await page.locator('#csv-prepare').click(); await page.locator('#csv-approval').waitFor({ state: 'visible' });
     await page.locator('#csv-approve').click();
+    await page.locator('#question-section').waitFor({state:'visible'});
+    assert(!fs.existsSync(path.join(home,'mock-sends.txt'))); checks++;
+    await page.locator('#answer').fill('表示した分類候補の範囲で進めてください。');
+    await page.locator('#send-answer').click();
     await until(async () => (await state()).job.summary.success === 20, '20 records');
     await page.locator('#csv-stop').click();
     await until(async () => (await state()).job.status === 'cancelled', 'UI cancellation');
@@ -90,7 +106,16 @@ function Invoke-AgentCopilot {
     assert.equal(current.job.summary.success, 47); assert.equal(current.job.summary.needs_review, 3); checks += 2;
     const sends = fs.readFileSync(path.join(home, 'mock-sends.txt'), 'utf8').trim().split(/\r?\n/);
     assert.equal(sends.length, 50); assert.equal(new Set(sends).size, 50); checks += 2;
+    assert.equal(current.job.clarifications.length,1); checks++;
     assert.deepEqual(fs.readFileSync(input), original); checks++;
+    const postArtifact = async artifactId => fetch(`${base}/api/csv/artifact/open`, {method:'POST',headers:{...headers,'Content-Type':'application/json'},body:JSON.stringify({job_id:current.job.job_id,artifact_id:artifactId})}).then(r=>r.json());
+    assert.match((await postArtifact(randomUUID().replaceAll('-',''))).error,/ARTIFACT_SCOPE/); checks++;
+    const artifact = current.job.artifacts.find(a=>a.name==='classified.csv'); const artifactBytes=fs.readFileSync(artifact.path);
+    assert.match((await postArtifact(artifact.artifact_id)).error,/ARTIFACT_OPEN_OFFLINE/); checks++;
+    fs.appendFileSync(artifact.path,'modified');
+    try { assert.match((await postArtifact(artifact.artifact_id)).error,/ARTIFACT_CHANGED/); checks++; } finally { fs.writeFileSync(artifact.path,artifactBytes); }
+    const displaced=artifact.path+'.test-held'; fs.renameSync(artifact.path,displaced);
+    try { assert.equal((await postArtifact(artifact.artifact_id)).ok,false); checks++; } finally { fs.renameSync(displaced,artifact.path); }
     await page.locator('#csv-filter').selectOption('needs_review');
     await until(async () => (await page.locator('#csv-rows tr').count()) === 3, 'three review rows'); checks++;
     assert.equal(await page.locator('#csv-rows script').count(), 0); checks++;
@@ -102,6 +127,32 @@ function Invoke-AgentCopilot {
     await page.screenshot({ path: path.join(root, 'results-mobile.png') });
     await page.reload(); await page.getByText('アプリに接続済み', { exact: true }).waitFor();
     assert.equal((await state()).job.job_id, current.job.job_id); checks++;
+    const parentId = current.job.job_id;
+    const parentJobPath = path.join(home,'data','jobs',parentId,'job.json'); const parentBytes = fs.readFileSync(parentJobPath);
+    await page.getByRole('checkbox', { name:'00021を再検討する', exact:true }).check();
+    await page.locator('#csv-review-instructions').fill('その他として再検討してください。');
+    await page.locator('#csv-review').click(); await page.locator('#csv-approval').waitFor({ state:'visible' });
+    assert.match(await page.locator('#csv-plan').innerText(), /送信対象 1行/); checks++;
+    assert.equal(fs.readFileSync(path.join(home,'mock-sends.txt'),'utf8').trim().split(/\r?\n/).length,50); checks++;
+    await page.locator('#csv-approve').click();
+    await until(async () => { const s = await state(); return s.job.job_id !== parentId && s.job.status === 'done'; }, 'selected review');
+    await page.locator('#job-status').filter({ hasText:/^完了$/ }).waitFor();
+    const reviewed = await state();
+    assert.equal(reviewed.job.summary.success,48); assert.equal(reviewed.job.summary.needs_review,2); checks += 2;
+    const afterSends = fs.readFileSync(path.join(home,'mock-sends.txt'),'utf8').trim().split(/\r?\n/);
+    const selectedId = current.csv.rows.find(row => row.original_id === '00021').row_id;
+    assert.equal(afterSends.length,51); assert.equal(afterSends[50],selectedId); checks += 2;
+    assert.deepEqual(fs.readFileSync(parentJobPath),parentBytes); checks++;
+    await page.locator('#csv-filter').selectOption('all');
+    assert.match(await page.locator('#csv-rows').innerText(), /前回: 支払\s*今回: その他/); checks++;
+    await page.locator('#job-history').selectOption(parentId);
+    await until(async () => (await page.locator('#csv-summary').innerText()).includes('成功 47'), 'parent history');
+    assert.equal((await state()).job.job_id, reviewed.job.job_id); checks++;
+    const historyResponse = await fetch(`${base}/api/state?job_id=${parentId}`, {headers}).then(r=>r.json());
+    assert.equal(historyResponse.job.job_id,parentId); assert.equal(historyResponse.active_job.job_id,reviewed.job.job_id); checks += 2;
+    assert.equal(historyResponse.job.artifacts[0].artifact_id,current.job.artifacts[0].artifact_id); checks++;
+    await page.locator('#job-history').selectOption('');
+    await until(async () => (await page.locator('#csv-summary').innerText()).includes('成功 48'), 'current history'); checks++;
     await page.getByText('問い合わせ用情報（本文なし）', { exact:true }).click();
     await page.locator('#support-preview').click(); await page.locator('#support-data').waitFor({ state:'visible' });
     const diagnostic = await page.locator('#support-data').innerText();
@@ -110,7 +161,7 @@ function Invoke-AgentCopilot {
     await download.saveAs(path.join(root, 'diagnostic.json'));
     assert.equal(fs.readFileSync(path.join(root, 'diagnostic.json'), 'utf8'), diagnostic); checks++;
     assert.deepEqual(errors, []); checks++;
-    fs.writeFileSync(path.join(root, 'verification.json'), JSON.stringify({ status:'PASS', checks, scope:'real PS5 HTTP and child worker; rendered Edge; mock provider', live_sends:0, rows:50, duplicate_sends:0, remaining:'real M365, native picker, other PCs and users' }, null, 2));
+    fs.writeFileSync(path.join(root, 'verification.json'), JSON.stringify({ status:'PASS', checks, scope:'real PS5 HTTP and child worker; rendered Edge; mock provider', live_sends:0, rows:50, duplicate_sends:0, explicitly_reprocessed_review_rows:1, remaining:'real M365, native picker, other PCs and users' }, null, 2));
     console.log(`PASS: ${checks} rendered CSV checks. Evidence: ${root}`);
   } catch (error) {
     if (page) { console.error(await page.locator('body').innerText()); await page.screenshot({ path:path.join(root,'failure.png'), fullPage:true }); }

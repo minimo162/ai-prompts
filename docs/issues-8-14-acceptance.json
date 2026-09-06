@@ -39,8 +39,13 @@
         {
           "id": "8.5",
           "requirement": "要確認行への追加指示を行うと、既に確定した無関係の行を再処理・上書きせず、追加処理の結果と変更対象を確認できる。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-CsvTypedPlan.ps1",
+            "tests/Test-CsvReview.ps1",
+            "tests/Test-CsvUi.cjs",
+            ".work/nonlive-135f354eaabb4d058e1111aa23e461d2/verification.json"
+          ]
         },
         {
           "id": "8.6",
@@ -90,14 +95,24 @@
         {
           "id": "9.5",
           "requirement": "AIが対象外のパス、未知のアクション、許可外の引数を返したとき、副作用ゼロで拒否する。原文中の命令文を実行命令として採用しない。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-CsvTypedPlan.ps1",
+            "tests/Test-CsvReview.ps1",
+            "tests/Test-CsvUi.cjs",
+            ".work/nonlive-135f354eaabb4d058e1111aa23e461d2/verification.json"
+          ]
         },
         {
           "id": "9.6",
           "requirement": "同じ観測ID／ハッシュ／件数を再計画へ返し、要確認項目への追加指示だけで次の処理対象が変わる。未処理を黙って除外してDONEにしない。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-CsvTypedPlan.ps1",
+            "tests/Test-CsvReview.ps1",
+            "tests/Test-CsvUi.cjs",
+            ".work/nonlive-135f354eaabb4d058e1111aa23e461d2/verification.json"
+          ]
         },
         {
           "id": "9.7",
@@ -186,8 +201,13 @@
         {
           "id": "11.4",
           "requirement": "対象50行、分類条件、出力先、新規作成方針を確認して開始する。確認後に対象または計画の範囲を変えると、古い確認を流用せず再確認になる。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-CsvTypedPlan.ps1",
+            "tests/Test-CsvReview.ps1",
+            "tests/Test-CsvUi.cjs",
+            ".work/nonlive-135f354eaabb4d058e1111aa23e461d2/verification.json"
+          ]
         },
         {
           "id": "11.5",
@@ -198,14 +218,24 @@
         {
           "id": "11.6",
           "requirement": "画面を閉じて再起動しても同一ジョブの状態を表示し、未知の状態を完了扱いしない。別の履歴の成果物を現在の結果として表示しない。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-CsvTypedPlan.ps1",
+            "tests/Test-CsvReview.ps1",
+            "tests/Test-CsvUi.cjs",
+            ".work/nonlive-135f354eaabb4d058e1111aa23e461d2/verification.json"
+          ]
         },
         {
           "id": "11.7",
           "requirement": "検証済み成果物IDから正しいファイルを開ける。書換え・削除・対象外パスへの差替えを検知して開く前に警告する。",
-          "status": "unverified",
-          "evidence": []
+          "status": "partial_nonlive_verified",
+          "evidence": [
+            "tests/Test-CsvTypedPlan.ps1",
+            "tests/Test-CsvReview.ps1",
+            "tests/Test-CsvUi.cjs",
+            ".work/nonlive-135f354eaabb4d058e1111aa23e461d2/verification.json"
+          ]
         },
         {
           "id": "11.8",

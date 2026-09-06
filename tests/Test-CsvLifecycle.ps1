@@ -14,8 +14,17 @@ function Start-AgentProcess { param($AppPath,$HomePath,$Mode,$JobId,$ExecutionId
 function Test-AgentWorkerAlive { param($Directory); return $false }
 function Invoke-AgentCopilot {
     param($Prompt,$RequestId,$JobId,$Settings,$HomePath,$CancelPath,$TimeoutSeconds)
-    $script:Calls++; Reserve-AgentCopilotAttempt $HomePath $RequestId
+    Reserve-AgentCopilotAttempt $HomePath $RequestId
     $payload = ConvertFrom-Json ($Prompt.Substring($Prompt.IndexOf("REQUEST_JSON:`n") + "REQUEST_JSON:`n".Length))
+    if ((Get-AgentProperty $payload 'kind' '') -ceq 'csv_plan') {
+        $actions = @()
+        $state = if ($payload.observation.summary.processing_complete) { 'DONE' } else { 'ACT' }
+        if ($state -ceq 'ACT') {
+            $actions = @(@{operation='read_rows';arguments=@{row_ids=@($payload.observation.pending_row_ids)}},@{operation='classify_rows';arguments=@{row_ids=@($payload.observation.pending_row_ids)}},@{operation='write_results';arguments=@{output_id=$payload.approved_output_id}},@{operation='verify_results';arguments=@{output_id=$payload.approved_output_id}})
+        }
+        return ConvertTo-Json -Depth 20 -Compress @{schema_version=1;request_id=$RequestId;observation_id=$payload.observation.observation_id;state=$state;message='合成の型付き計画';actions=$actions}
+    }
+    $script:Calls++
     $script:SentIds += @($payload.rows | ForEach-Object row_id)
     if ($script:Calls -eq $script:StopAfter) { [IO.File]::WriteAllText($CancelPath, 'stop', $script:AgentEncoding) }
     return ConvertTo-Json -Depth 10 -Compress @{ schema_version = 1; request_id = $RequestId; results = @($payload.rows | ForEach-Object { @{ row_id = $_.row_id; category = '支払'; reason = '合成応答'; status = 'success' } }) }
