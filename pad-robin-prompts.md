@@ -45,6 +45,20 @@ Text.Replace.ReplaceTextWithRegex Text: NewVar TextToFind: $'''\\d+''' IgnoreCas
 
 UIの検索条件にはバックスラッシュ1個の `\d+` を入力しました。Robinではそのバックスラッシュもエスケープされています。正規表現のON/OFFで命令名が変わり、通常置換の例にはComparisonTypeも含まれます。単なる引数追加として混在させないでください。両方とも元Mainで保存・実行し、指定した箇所以外のパーセント・引用符・パスを保持した結果を確認しました。再貼付けとCopilotによる再生成は未確認です。
 
+#### 採取済みの設定差分: テキストの分割と結合
+
+カスタムのカンマ区切り、標準のスペース区切り、カスタムの結合区切りをPAD 2.71.115.26224から採取しました。次の3行は設定ごとの独立した例です。
+
+```text
+Text.SplitText.SplitWithDelimiter Text: $'''alpha,beta,gamma''' CustomDelimiter: $''',''' IsRegEx: False Result=> TextList
+Text.SplitText.Split Text: Replaced StandardDelimiter: Text.StandardDelimiter.Space DelimiterTimes: 1 Result=> TextList
+Text.JoinText.JoinWithCustomDelimiter List: TextList CustomDelimiter: $''' | ''' Result=> JoinedText
+```
+
+分割はリストTextListを作り、結合は既存のリストを使って文字列JoinedTextを作ります。カンマ区切りのalpha,beta,gammaから `alpha | beta | gamma` を得ることと、前の処理の文字列変数Replacedを標準スペースで分割して結合することを実行確認しました。
+
+カスタム区切り記号へ空白1文字を入れた場合は、入力欄の長さ1を確認してもPADが「空にできません」と表示しました。この設定で空白だけを使わず、標準のスペースを選んでください。結合区切りの前後の空白はコピー原文と実行結果で保持されています。標準モードでは命令と引数が変わるため、カスタムの引数と混在させないでください。
+
 #### 実アクションのコピー例を渡された場合
 
 - PADの左パネルから追加してコピーしたRobinと、対応する設定値・環境を、そのアクションの生成根拠として使ってください。アクション名だけから内部の名前や引数を推測しないでください。

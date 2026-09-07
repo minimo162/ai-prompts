@@ -31,4 +31,16 @@ Reject ($set+"`n"+$condition+"`n    "+$list+"`nEND`n"+$add) ROBIN_VARIABLE
 Reject ($set+"`n"+$list+"`n"+$condition+"`n    SET Items TO "+$q+'text'+$end+"`nEND`n"+$add) ROBIN_TYPE
 Accept ($set+"`n"+$condition+"`n    "+$list+"`nELSE`n    "+$list+"`nEND`n"+$add)
 Reject ($set+"`n"+$condition+"`n    "+$list+"`nELSE`n    SET Items TO "+$q+'text'+$end+"`nEND`n"+$add) ROBIN_TYPE
+$split=[IO.File]::ReadAllText((Join-Path $PSScriptRoot '..\catalog\actions\text-split\custom-comma.robin'))
+$join=[IO.File]::ReadAllText((Join-Path $PSScriptRoot '..\catalog\actions\text-join\custom-pipe.robin'))
+$spaceSplit=[IO.File]::ReadAllText((Join-Path $PSScriptRoot '..\catalog\actions\text-split\standard-space.robin'))
+Accept ($split+$join)
+Accept ($split+$join+$replace.Replace('Text: TextValue','Text: JoinedText'))
+Reject $join ROBIN_VARIABLE
+Reject ('SET TextList TO '+$q+'text'+$end+"`n"+$join) ROBIN_TYPE
+Reject ($list+"`n"+$split.Replace('Text: '+$q+'alpha,beta,gamma'+$end,'Text: Items')) ROBIN_TYPE
+Reject ($split.Replace('CustomDelimiter: '+$q+','+$end,'CustomDelimiter: '+$q+' '+$end)) ROBIN_ARGUMENT
+Reject ($split.Replace('IsRegEx: False','IsRegEx: True')) ROBIN_ACTION
+Reject ('SET Replaced TO '+$q+'a b'+$end+"`n"+$spaceSplit.Replace('DelimiterTimes: 1','DelimiterTimes: 2')) ROBIN_ACTION
+Reject ($split+$join.Replace('CustomDelimiter: '+$q+' | '+$end,'CustomDelimiter: '+$q+$end)) ROBIN_ARGUMENT
 Write-Output "PASS: $checks Robin catalog checks; no PAD/Copilot invoked."

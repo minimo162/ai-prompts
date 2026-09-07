@@ -1,0 +1,6 @@
+Variables.CreateNewList List=> CatalogList
+Variables.AddItemToList Item: $'''CatalogItem''' List: CatalogList
+SET NewVar TO $'''日本語 100%% \'引用\' \"二重引用\" C:\\sample'''
+Text.Replace.ReplaceTextWithRegex Text: NewVar TextToFind: $'''\\d+''' IgnoreCase: False ReplaceWith: $'''NUMBER''' ActivateEscapeSequences: False Result=> Replaced
+Text.SplitText.SplitWithDelimiter Text: $'''alpha,beta,gamma''' CustomDelimiter: $''',''' IsRegEx: False Result=> TextList
+Text.JoinText.JoinWithCustomDelimiter List: TextList CustomDelimiter: $''' | ''' Result=> JoinedText

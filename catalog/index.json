@@ -199,6 +199,105 @@
         "re_pasted": false,
         "executed_in_flow": "text-replace-regex"
       }
+    },
+    {
+      "id": "text-split-comma",
+      "category": "テキスト",
+      "ui_name": "テキストの分割",
+      "ui_automation_id": "Text.SplitText",
+      "variant": "custom-comma",
+      "settings": {
+        "分割するテキスト": "alpha,beta,gamma",
+        "区切り記号の種類": "カスタム",
+        "カスタム区切り記号": ",",
+        "正規表現である:": "Off"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "TextList",
+          "kind": "list"
+        }
+      ],
+      "robin_path": "actions/text-split/custom-comma.robin",
+      "sha256": "e1cb7f758da81a972a261436399819c2c6303499a8e7d0343e6fca96c49cd9b2",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "text-split-join-comma"
+      }
+    },
+    {
+      "id": "text-split-space",
+      "category": "テキスト",
+      "ui_name": "テキストの分割",
+      "ui_automation_id": "Text.SplitText",
+      "variant": "standard-space",
+      "settings": {
+        "分割するテキスト": "%Replaced%",
+        "区切り記号の種類": "標準",
+        "標準の区切り記号": "スペース",
+        "回数": "1"
+      },
+      "inputs": [
+        {
+          "name": "Replaced",
+          "kind": "existing_text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TextList",
+          "kind": "list"
+        }
+      ],
+      "robin_path": "actions/text-split/standard-space.robin",
+      "sha256": "9f77859fd50f7c950719a9744be478cbccd7ae89f2537a3f1f30926cbbf36113",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "text-split-join-space"
+      }
+    },
+    {
+      "id": "text-join-pipe",
+      "category": "テキスト",
+      "ui_name": "テキストの結合",
+      "ui_automation_id": "Text.JoinText",
+      "variant": "custom-pipe",
+      "settings": {
+        "結合するリストを指定": "%TextList%",
+        "リスト項目を区切る区切り記号": "カスタム",
+        "カスタム区切り記号": " | "
+      },
+      "inputs": [
+        {
+          "name": "TextList",
+          "kind": "existing_list"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "JoinedText",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/text-join/custom-pipe.robin",
+      "sha256": "4b85a79644f2ac3a2d18ee21a9881190f9b4492c579a215c426827e59b5e2f2e",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "text-split-join-comma"
+      }
     }
   ],
   "flows": [
@@ -313,6 +412,90 @@
       ],
       "variable_evidence": "evidence/text-replace-regex-variables.json",
       "variable_evidence_sha256": "cc714f09943e8f69a957b817dadc7332c5c41386874f76ece08620ad9fea4035",
+      "copilot_generated": false,
+      "app_executor_verified": false
+    },
+    {
+      "id": "text-split-join-comma",
+      "robin_path": "flows/text-split-join/default.robin",
+      "sha256": "e9608cf7055b90b9c84d2a540adc9c92356edabe14a6e08a234aeca8089d50e4",
+      "action_ids": [
+        "variables-create-new-list",
+        "variables-add-item-to-list",
+        "variables-set-special-text",
+        "text-replace-regex",
+        "text-split-comma",
+        "text-join-pipe"
+      ],
+      "action_count": 6,
+      "native_flow_name": "RobinCatalog_20260907",
+      "run_invocations": 1,
+      "observed_variables": [
+        {
+          "name": "CatalogList",
+          "preview": "[CatalogItem]"
+        },
+        {
+          "name": "JoinedText",
+          "preview": "alpha | beta | gamma"
+        },
+        {
+          "name": "NewVar",
+          "preview": "日本語 100% '引用' \"二重引用\" C:\\sample"
+        },
+        {
+          "name": "Replaced",
+          "preview": "日本語 NUMBER% '引用' \"二重引用\" C:\\sample"
+        },
+        {
+          "name": "TextList",
+          "preview": "[alpha, beta, gamma]"
+        }
+      ],
+      "variable_evidence": "evidence/text-split-join-variables.json",
+      "variable_evidence_sha256": "616eca0f57b088e9eb66cb039e4140ec5e3d9e5bf604fc614e47c19c7e507bd2",
+      "copilot_generated": false,
+      "app_executor_verified": false
+    },
+    {
+      "id": "text-split-join-space",
+      "robin_path": "flows/text-split-join/standard-space.robin",
+      "sha256": "7c6e32215252fffc60d7e76c708bad015831b61bb57e4a9a40c9084a684d57e6",
+      "action_ids": [
+        "variables-create-new-list",
+        "variables-add-item-to-list",
+        "variables-set-special-text",
+        "text-replace-regex",
+        "text-split-space",
+        "text-join-pipe"
+      ],
+      "action_count": 6,
+      "native_flow_name": "RobinCatalog_20260907",
+      "run_invocations": 1,
+      "observed_variables": [
+        {
+          "name": "CatalogList",
+          "preview": "[CatalogItem]"
+        },
+        {
+          "name": "JoinedText",
+          "preview": "日本語 | NUMBER% | '引用' | \"二重引用\" | C:\\sample"
+        },
+        {
+          "name": "NewVar",
+          "preview": "日本語 100% '引用' \"二重引用\" C:\\sample"
+        },
+        {
+          "name": "Replaced",
+          "preview": "日本語 NUMBER% '引用' \"二重引用\" C:\\sample"
+        },
+        {
+          "name": "TextList",
+          "preview": "[日本語, NUMBER%, '引用', \"二重引用\", C:\\sample]"
+        }
+      ],
+      "variable_evidence": "evidence/text-split-join-space-final.json",
+      "variable_evidence_sha256": "10cbfbf556fa638abbccb90b81985c2f1ce8dd207b8ca643fa942dcd1df2234b",
       "copilot_generated": false,
       "app_executor_verified": false
     }

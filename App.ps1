@@ -1,5 +1,5 @@
 ﻿# App-Version: 0.1.0
-# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6ImI3NjZiZTJiZmMwYjMzMmQ1ODQ5NDY5MjgyZjhhNzg1IiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiIwZmE4ZTVjNmFmYmU5NjgxMDUxYWYwNjhhYzc2MjU1MGE3YjcxNTViOGFkNmM4OWE2MDNmMzdiOTlkMTIwY2RiIiwiaHRtbF9zaGEyNTYiOiJjYmFiNDViYjAyZDg2ODgyZjdiMTY0MmMwZTU3ZTM5MTkwNWVkMTMzNWEzZWUwOWY3NjJkY2ZlZDBmOTc5OWU4IiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
+# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6ImVjMzE3NDVjNzRiYWZlNTlkNzA3NWUyOGMyMzU1NWM0IiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiJjODRhNWUxYjEzNjE5NGE4MzlmNzQ1ZjM4MzU4ZWM2NTczNWQxZDAxYzNlOTk5ZGM2OGZlZWNlYjYyMDk3Mjg4IiwiaHRtbF9zaGEyNTYiOiJjYmFiNDViYjAyZDg2ODgyZjdiMTY0MmMwZTU3ZTM5MTkwNWVkMTMzNWEzZWUwOWY3NjJkY2ZlZDBmOTc5OWU4IiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
 # State-Contract: 2
 [CmdletBinding()]
 param(
@@ -3002,6 +3002,9 @@ Allowed full action formats (substitute real paths and variable names):
 SET Name TO $'''value'''
 Variables.CreateNewList List=> Items
 Variables.AddItemToList Item: $'''checked''' List: Items
+Text.SplitText.SplitWithDelimiter Text: Name CustomDelimiter: $''',''' IsRegEx: False Result=> Parts
+Text.SplitText.Split Text: Name StandardDelimiter: Text.StandardDelimiter.Space DelimiterTimes: 1 Result=> Parts
+Text.JoinText.JoinWithCustomDelimiter List: Parts CustomDelimiter: $''' | ''' Result=> Joined
 Text.Replace.ReplaceText Text: Name TextToFind: $'''value''' IgnoreCase: False ReplaceWith: $'''replacement''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
 Text.Replace.ReplaceTextWithRegex Text: Name TextToFind: $'''\\d+''' IgnoreCase: False ReplaceWith: $'''ID''' ActivateEscapeSequences: False Result=> Replaced
 File.ReadTextFromFile.ReadText File: $'''C:\\input.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> Name
@@ -3013,6 +3016,7 @@ ELSE
 END
 WAIT 1
 The list/text formats were copied from native PAD 2.71.115.26224 and tested in catalog/. Create the list before adding a literal item. Text.Replace requires a previously assigned text variable (plain text SET, UTF8 file read, or AI result); do not pass a list or a branch-dependent type. Regex uses ReplaceTextWithRegex WITHOUT ComparisonType; literal replacement uses ReplaceText WITH the shown ComparisonType. ActivateEscapeSequences must remain False. These helpers alone do not produce controller-observed output: write the final text once to a new artifacts file before DONE.
+Split accepts a literal text or an assigned text variable and produces a list. Join requires an assigned list and produces text. Custom split delimiters cannot be empty or whitespace-only; use the standard Space variant for space splitting. Only the shown non-regex custom split and standard Space/DelimiterTimes 1 are currently verified. Keep spaces around a custom join delimiter when requested.
 Read only from the target, current run artifacts, or supplied AiCall result.txt/status.txt. Write only new files directly inside run_directory/artifacts; each output path may appear in only one File.WriteText action in the entire flow, including mutually exclusive IF/ELSE branches. Write a shared result such as classification.txt once before IF; branch only the distinct draft output paths. No overwrite, delete, network actions, UI keys, unbounded loops or arbitrary scripts. Maximum 250 lines and 30 total WAIT seconds. The controller creates artifacts directory and adds its own start/finish markers outside your code.
 For semantic AI processing select up to three supplied ai_call_templates in order. Include their EXACT robin action string once each; do not create another PowerShell command. Supply matching ai_calls metadata: {ai_call_id,operation,input_path,instructions,labels,timeout_seconds}; operation translate/summarize/classify/extract/judge, timeout 5..240. The controller creates the request JSON. PAD may prepare input text under artifacts before invoking the template. Immediately after each call, read its result.txt as a data variable, then read status.txt as another variable. These two reads are mandatory before any other action. Missing/failed/cancelled result.txt must stop the PAD flow, not produce a completion marker. For classification branch on the result with IF equality; labels must be explicit. The status distinguishes success and needs_review. Never execute AI business output as code. Requests use unique reserved IDs and are consumed once. The second call may read the first call's result.txt. Every declared call must execute; do not put a call in a conditional branch that can be skipped. Branch on its result only after reading it. No parallel calls.
 Each of the two mandatory result/status reads MUST have this exact error handler immediately below it (indent relative to the read action; no edits):
@@ -3177,6 +3181,17 @@ function Test-AgentRobin {
             if(-not $variables.ContainsKey($listName)){throw 'ROBIN_VARIABLE: list must be assigned before use.'}
             if($variables[$listName] -cne 'list'){throw 'ROBIN_TYPE: destination must be a definitely assigned list.'}
             $value=ConvertFrom-AgentRobinLiteral $itemLiteral -AllowVariables
+        } elseif($line -cmatch "^Text\.SplitText\.SplitWithDelimiter Text: (?<input>$literal|[A-Za-z][A-Za-z0-9_]*) CustomDelimiter: (?<delimiter>$literal) IsRegEx: False Result=> (?<output>[A-Za-z][A-Za-z0-9_]*)$" -or $line -cmatch "^Text\.SplitText\.Split Text: (?<input>$literal|[A-Za-z][A-Za-z0-9_]*) StandardDelimiter: Text\.StandardDelimiter\.Space DelimiterTimes: 1 Result=> (?<output>[A-Za-z][A-Za-z0-9_]*)$") {
+            $inputOperand=$Matches['input'];$delimiterLiteral=$Matches['delimiter'];$newVariable=$Matches['output'];$newKind='list'
+            if($inputOperand.StartsWith('$')){$values+=,(ConvertFrom-AgentRobinLiteral $inputOperand -AllowVariables)}
+            else{if(-not $variables.ContainsKey($inputOperand)){throw 'ROBIN_VARIABLE: split input must be assigned.'};if($variables[$inputOperand] -cne 'text'){throw 'ROBIN_TYPE: split input must be textual.'}}
+            if($delimiterLiteral){$delimiterValue=ConvertFrom-AgentRobinLiteral $delimiterLiteral -AllowVariables;if([string]::IsNullOrWhiteSpace($delimiterValue)){throw 'ROBIN_ARGUMENT: use standard space splitting instead of a blank custom delimiter.'};$values+=,$delimiterValue}
+        } elseif($line -cmatch "^Text\.JoinText\.JoinWithCustomDelimiter List: (?<list>[A-Za-z][A-Za-z0-9_]*) CustomDelimiter: (?<delimiter>$literal) Result=> (?<output>[A-Za-z][A-Za-z0-9_]*)$") {
+            $listName=$Matches['list'];$delimiterLiteral=$Matches['delimiter'];$newVariable=$Matches['output']
+            if(-not $variables.ContainsKey($listName)){throw 'ROBIN_VARIABLE: join input must be assigned.'}
+            if($variables[$listName] -cne 'list'){throw 'ROBIN_TYPE: join input must be a list.'}
+            $value=ConvertFrom-AgentRobinLiteral $delimiterLiteral -AllowVariables
+            if([string]::IsNullOrEmpty($value)){throw 'ROBIN_ARGUMENT: custom join delimiter cannot be empty.'}
         } elseif($line -cmatch "^Text\.Replace\.(?<mode>ReplaceText|ReplaceTextWithRegex) Text: (?<input>[A-Za-z][A-Za-z0-9_]*) TextToFind: (?<find>$literal) IgnoreCase: (True|False) ReplaceWith: (?<replacement>$literal) ActivateEscapeSequences: False(?<comparison> ComparisonType: Text\.TextComparisonType\.CultureSensitive)? Result=> (?<output>[A-Za-z][A-Za-z0-9_]*)$") {
             $mode=$Matches.mode;$inputName=$Matches.input;$findLiteral=$Matches.find;$replacementLiteral=$Matches.replacement;$comparison=$Matches['comparison'];$newVariable=$Matches.output
             if(($mode -ceq 'ReplaceText') -ne (-not [string]::IsNullOrEmpty($comparison))){throw 'ROBIN_ACTION: replacement mode and comparison arguments differ from captured formats.'}
