@@ -346,6 +346,9 @@ try {
         Assert-True ((Get-AgentPlanFingerprint $altered $nextRun $fingerprintTemplates[1]) -cne $firstFingerprint) ('Changed business contract remains distinguishable: ' + $contractField)
     }
     # Run contracts use deterministic adapters and actual local artifact files.
+    # These legacy planner cases keep the new completion boundary neutral; its real
+    # parsing and early termination are exercised in Test-CompletionDecision.ps1.
+    function Invoke-AgentCompletionDecision { return [pscustomobject]@{state='CONTINUE';message='fixture continues';artifacts=@()} }
     $script:RunMode = 'success'; $script:Plans = 0; $script:PadRuns = 0; $script:Output = ''; $script:PadRunIds = @()
     $script:ObservedMarker = "  ROUND_ONE_VALUE 日本語 100% C:\data `"quotes`"`r`nline two  `r`n"
     function Invoke-AgentCopilot {
