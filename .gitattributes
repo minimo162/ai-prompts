@@ -1,9 +1,9 @@
 # Keep sealed distribution bytes identical in Git and Windows checkouts.
-App.ps1 -text
-catalog/**/*.robin -text
+App.ps1 -text whitespace=cr-at-eol
+catalog/**/*.robin -text whitespace=cr-at-eol
 catalog/index.json -text
-catalog/evidence/** -text
-catalog/generated/** -text
+catalog/evidence/** -text whitespace=cr-at-eol
+catalog/generated/** -text whitespace=cr-at-eol
 # Literal model input preserves Markdown hard breaks and other source whitespace.
 catalog/generated/**/prompt.txt -whitespace
 index.html -text

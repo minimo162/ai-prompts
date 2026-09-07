@@ -1,0 +1,1 @@
+Excel.ReadFromExcel.ReadCells Instance: ExcelInstance2 StartColumn: $'''A''' StartRow: 1 EndColumn: $'''B''' EndRow: 2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ExcelData2

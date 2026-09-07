@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "expected": "OfficeCatalog 日本語 100%",
+  "files": [
+    {
+      "name": "excel-catalog.xlsx",
+      "bytes": 8954,
+      "sha256": "e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6"
+    },
+    {
+      "name": "word-catalog.docx",
+      "bytes": 13687,
+      "sha256": "2753855b1e6b7b8dccc857cb60ad1f9bf548908fbd10fea8dc8efa2ff8003cbd"
+    },
+    {
+      "name": "powerpoint-catalog.pptx",
+      "bytes": 34298,
+      "sha256": "4acd73548e145ce412b6769dc7844c6326a2f99f61c5d2631aaa26ede35b150d"
+    }
+  ],
+  "checks": [
+    {
+      "cell": "A1",
+      "actual": "OfficeCatalog 日本語 100%",
+      "kind": "xlsx"
+    },
+    {
+      "actual": "OfficeCatalog 日本語 100%",
+      "kind": "docx"
+    },
+    {
+      "actual": "OfficeCatalog 日本語 100%",
+      "slides": 1,
+      "kind": "pptx"
+    }
+  ]
+}

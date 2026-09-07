@@ -1,0 +1,1 @@
+Word.WriteToWord.WriteEndOfDocument Instance: WordInstance Text: $'''OfficeCatalog 日本語 100%%''' AppendNewLine: False

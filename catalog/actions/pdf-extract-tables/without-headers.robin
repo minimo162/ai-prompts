@@ -1,0 +1,1 @@
+Pdf.ExtractTablesFromPDF.ExtractTables PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' MultiPageTables: True SetFirstRowAsHeader: False ExtractedPDFTables=> ExtractedPDFTables

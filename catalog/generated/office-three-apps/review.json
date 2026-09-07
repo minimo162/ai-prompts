@@ -1,0 +1,8 @@
+{
+  "scope_review": "PASS_EXACT_16_ACTIONS",
+  "generated_code_modified": false,
+  "comparison": "Exact action lines against copied examples with only requested text and output basenames replaced; permits LF/CRLF and one trailing newline",
+  "robin_sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+  "existing_output_files": 0,
+  "app_run_loop_exercised": false
+}

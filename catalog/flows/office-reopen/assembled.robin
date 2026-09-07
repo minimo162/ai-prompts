@@ -1,0 +1,11 @@
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\excel-catalog.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelInstance2
+Excel.ReadFromExcel.ReadAllCells Instance: ExcelInstance2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ExcelUsedData
+Excel.ReadFromExcel.ReadCells Instance: ExcelInstance2 StartColumn: $'''A''' StartRow: 1 EndColumn: $'''B''' EndRow: 2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ExcelRangeData
+Excel.CloseExcel.Close Instance: ExcelInstance2
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\word-catalog.docx''' Visible: True ReadOnly: True Instance=> WordInstance2
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance2 TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''OfficeVerified''' MatchCase: False MatchEntireWord: False
+Word.ReadFromWord.Read Instance: WordInstance2 WordData=> WordData
+Word.CloseWord.Close Instance: WordInstance2
+PowerPoint.LaunchPowerPoint.LaunchAndOpen Path: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\powerpoint-catalog.pptx''' ReadOnly: False Instance=> PowerPointInstance2
+PowerPoint.ReadFromPowerPoint.Read Instance: PowerPointInstance2 PowerPointData=> PowerPointData
+PowerPoint.ClosePowerPoint.Close Instance: PowerPointInstance2

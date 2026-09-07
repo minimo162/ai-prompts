@@ -1,0 +1,2 @@
+Pdf.ExtractTablesFromPDF.ExtractTables PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' MultiPageTables: True SetFirstRowAsHeader: True ExtractedPDFTables=> PdfTablesHeaders
+File.WriteToCSVFile.WriteCSV VariableToWrite: PdfTablesHeaders[0].DataTable CSVFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\table-csv-probe.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: True IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.Comma

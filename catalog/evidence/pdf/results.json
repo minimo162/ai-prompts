@@ -1,0 +1,225 @@
+{
+  "status": "PASS_CAPTURE_WITH_MERGE_ORDER_FINDING",
+  "files": {
+    "source-a.pdf": {
+      "pages": 3,
+      "tokens": [
+        "A1",
+        "A2",
+        "A3"
+      ],
+      "sha256": "f5f246849a31e2797f998e426f459ac18b7260ed76206ab987950a1bf80c348d"
+    },
+    "source-b.pdf": {
+      "pages": 2,
+      "tokens": [
+        "B1",
+        "B2"
+      ],
+      "sha256": "0e6237b4acf726b27c91319f330d30a181820824d9dca169f2cbba2ce3152ff4"
+    },
+    "pages-2-3.pdf": {
+      "pages": 2,
+      "tokens": [
+        "A2",
+        "A3"
+      ],
+      "sha256": "a5da24ec840d4733fc974e95b8e3cb9b4cc702157144240ab9a1a7e75f4bb889"
+    },
+    "merged-a-b.pdf": {
+      "pages": 5,
+      "tokens": [
+        "B1",
+        "B2",
+        "A1",
+        "A2",
+        "A3"
+      ],
+      "sha256": "ffe2ac062f868bb1b9df1e63edbfce229912a09a8b748c6550aed3698cc82d48"
+    },
+    "merged-b-a.pdf": {
+      "pages": 5,
+      "tokens": [
+        "A1",
+        "A2",
+        "A3",
+        "B1",
+        "B2"
+      ],
+      "sha256": "b1734277af75f2c93cc3e89fb314232d2596106813a677f045ad11c9b5c310a4"
+    }
+  },
+  "text": {
+    "text-all": {
+      "tokens": [
+        "A1",
+        "A2",
+        "A3"
+      ],
+      "characters": 262,
+      "japanese_and_percent_preserved": true
+    },
+    "text-range": {
+      "tokens": [
+        "A2",
+        "A3"
+      ],
+      "characters": 191,
+      "japanese_and_percent_preserved": true
+    },
+    "text-single": {
+      "tokens": [
+        "A2"
+      ],
+      "characters": 120,
+      "japanese_and_percent_preserved": true
+    },
+    "text-layout": {
+      "tokens": [
+        "A2"
+      ],
+      "characters": 249,
+      "japanese_and_percent_preserved": true
+    },
+    "page_boundary_separator_guaranteed": false
+  },
+  "images": {
+    "images-all": {
+      "filename": "CatalogImage_0.png",
+      "size": [
+        160,
+        80
+      ],
+      "pixel_match": true
+    },
+    "images-page1": {
+      "filename": "CatalogImage_0.png",
+      "size": [
+        160,
+        80
+      ],
+      "pixel_match": true
+    }
+  },
+  "render_matches": [
+    {
+      "output": "pages-2-3.pdf",
+      "page": 1,
+      "source_token": "A2",
+      "pixels_identical": true
+    },
+    {
+      "output": "pages-2-3.pdf",
+      "page": 2,
+      "source_token": "A3",
+      "pixels_identical": true
+    },
+    {
+      "output": "merged-a-b.pdf",
+      "page": 1,
+      "source_token": "B1",
+      "pixels_identical": true
+    },
+    {
+      "output": "merged-a-b.pdf",
+      "page": 2,
+      "source_token": "B2",
+      "pixels_identical": true
+    },
+    {
+      "output": "merged-a-b.pdf",
+      "page": 3,
+      "source_token": "A1",
+      "pixels_identical": true
+    },
+    {
+      "output": "merged-a-b.pdf",
+      "page": 4,
+      "source_token": "A2",
+      "pixels_identical": true
+    },
+    {
+      "output": "merged-a-b.pdf",
+      "page": 5,
+      "source_token": "A3",
+      "pixels_identical": true
+    },
+    {
+      "output": "merged-b-a.pdf",
+      "page": 1,
+      "source_token": "A1",
+      "pixels_identical": true
+    },
+    {
+      "output": "merged-b-a.pdf",
+      "page": 2,
+      "source_token": "A2",
+      "pixels_identical": true
+    },
+    {
+      "output": "merged-b-a.pdf",
+      "page": 3,
+      "source_token": "A3",
+      "pixels_identical": true
+    },
+    {
+      "output": "merged-b-a.pdf",
+      "page": 4,
+      "source_token": "B1",
+      "pixels_identical": true
+    },
+    {
+      "output": "merged-b-a.pdf",
+      "page": 5,
+      "source_token": "B2",
+      "pixels_identical": true
+    }
+  ],
+  "merge_order": {
+    "input_order_preserved": false,
+    "case_1": {
+      "input": [
+        "A",
+        "B"
+      ],
+      "output": [
+        "B",
+        "A"
+      ]
+    },
+    "case_2": {
+      "input": [
+        "B",
+        "A"
+      ],
+      "output": [
+        "A",
+        "B"
+      ]
+    },
+    "scope": "Two inline-list fixtures on PAD 2.71.115.26224; do not generalize to arbitrary lists or versions"
+  },
+  "tables": {
+    "with_headers": {
+      "rows": 2,
+      "columns": [
+        "Item",
+        "Quantity",
+        "Code"
+      ]
+    },
+    "without_headers": {
+      "rows": 3,
+      "columns": [
+        "Column1",
+        "Column2",
+        "Column3"
+      ]
+    },
+    "result_kind": "list of PDF table information objects; DataTable property contains table",
+    "starting_page": 2,
+    "ending_page": 2,
+    "order_in_page": 1
+  },
+  "source_hashes_unchanged": true
+}

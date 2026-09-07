@@ -1,0 +1,182 @@
+[
+  {
+    "name": "",
+    "id": "VariablesPanelFlowVariablesList",
+    "type": "ControlType.List",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "ExcelData",
+    "id": "VariablesListItem",
+    "type": "ControlType.ListItem",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "ExcelData",
+    "id": "VariableTextBlock",
+    "type": "ControlType.Text",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "ExcelInstance",
+    "id": "VariablesListItem",
+    "type": "ControlType.ListItem",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "ExcelInstance",
+    "id": "VariableTextBlock",
+    "type": "ControlType.Text",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "<空白>",
+    "id": "VariablePreviewTextBlock",
+    "type": "ControlType.Text",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "PowerPointData",
+    "id": "VariablesListItem",
+    "type": "ControlType.ListItem",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "PowerPointData",
+    "id": "VariableTextBlock",
+    "type": "ControlType.Text",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "OfficeCatalog 日本語 100%  ",
+    "id": "VariablePreviewTextBlock",
+    "type": "ControlType.Text",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "PowerPointInstance",
+    "id": "VariablesListItem",
+    "type": "ControlType.ListItem",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "PowerPointInstance",
+    "id": "VariableTextBlock",
+    "type": "ControlType.Text",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "PowerPoint instance",
+    "id": "VariablePreviewTextBlock",
+    "type": "ControlType.Text",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "SlideIndex",
+    "id": "VariablesListItem",
+    "type": "ControlType.ListItem",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "SlideIndex",
+    "id": "VariableTextBlock",
+    "type": "ControlType.Text",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "1",
+    "id": "VariablePreviewTextBlock",
+    "type": "ControlType.Text",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "WordData",
+    "id": "VariablesListItem",
+    "type": "ControlType.ListItem",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "WordData",
+    "id": "VariableTextBlock",
+    "type": "ControlType.Text",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "WordInstance",
+    "id": "VariablesListItem",
+    "type": "ControlType.ListItem",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "WordInstance",
+    "id": "VariableTextBlock",
+    "type": "ControlType.Text",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  },
+  {
+    "name": "<空白>",
+    "id": "VariablePreviewTextBlock",
+    "type": "ControlType.Text",
+    "enabled": true,
+    "handle": 0,
+    "value": null,
+    "toggle": null
+  }
+]

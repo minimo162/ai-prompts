@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "expected": "CopilotOffice 246",
+  "files": [
+    {
+      "name": "copilot-excel.xlsx",
+      "sha256": "0915c6fe6c3d2d17d224d58e6a42f7e7847865150f833c3592ce951ca418a005",
+      "bytes": 8936
+    },
+    {
+      "name": "copilot-word.docx",
+      "sha256": "42b0f160d955647189b395a849b08b2879220dd8a912b09651d77483981a8e0e",
+      "bytes": 13654
+    },
+    {
+      "name": "copilot-powerpoint.pptx",
+      "sha256": "c2a45ce6f8427e0aeb8f8360958af1fdfbfd38b6c315cf085a3e6e1f16534e5c",
+      "bytes": 34098
+    }
+  ],
+  "checks": [
+    {
+      "cell": "A1",
+      "actual": "CopilotOffice 246",
+      "kind": "xlsx"
+    },
+    {
+      "actual": "CopilotOffice 246",
+      "kind": "docx"
+    },
+    {
+      "actual": "CopilotOffice 246",
+      "kind": "pptx",
+      "slides": 1
+    }
+  ]
+}

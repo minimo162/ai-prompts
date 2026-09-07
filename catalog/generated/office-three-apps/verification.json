@@ -1,0 +1,28 @@
+{
+  "status": "PASS_THIS_CASE",
+  "generated_code_modified": false,
+  "byte_identical": false,
+  "action_text_identical_after_line_ending_normalization": true,
+  "generated_sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+  "pasted_sha256": "b64dc42eeddefb28aa64d3142e3c6cba677d8fdf0b460f115e6b974cc665f3d7",
+  "prompt_sha256": "dcbff4373803884dbae674cc347bd4f6430caae10634c3805a0ef0b72e2e04c6",
+  "source_commit": "b8c9ab8877791f89fcea24e86556df8549b597f1",
+  "app_sha256": "1f376113a498eef977f611081cd94403ae16d78a926cef1ec38cc69049333ccf",
+  "pad_runs": 1,
+  "native_flow_name": "test",
+  "native_subflow": "OfficeCopilot",
+  "app_run_loop_exercised": false,
+  "artifact_evidence": "../../evidence/office/copilot-artifacts.json",
+  "generation_attempts": [
+    {
+      "attempt": 1,
+      "status": "stopped_before_send",
+      "has_sent": false,
+      "reason": "CDP_UNAVAILABLE before sending; subsequent readiness check returned READY"
+    },
+    {
+      "attempt": 2,
+      "status": "generated_and_executed"
+    }
+  ]
+}

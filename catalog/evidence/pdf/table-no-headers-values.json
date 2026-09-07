@@ -1,0 +1,82 @@
+[
+  {
+    "name": "#\u001f\u0017\u0018\u0019\u001f",
+    "id": "",
+    "type": "ControlType.HeaderItem"
+  },
+  {
+    "name": "Column1",
+    "id": "",
+    "type": "ControlType.HeaderItem"
+  },
+  {
+    "name": "Column2",
+    "id": "",
+    "type": "ControlType.HeaderItem"
+  },
+  {
+    "name": "Column3",
+    "id": "",
+    "type": "ControlType.HeaderItem"
+  },
+  {
+    "name": "0",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "Item",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "Quantity",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "Code",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "1",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "Alpha",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "12",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "A-01",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "2",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "Beta",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "34",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "B-02",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  }
+]

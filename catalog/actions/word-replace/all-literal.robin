@@ -1,0 +1,1 @@
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance2 TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''OfficeVerified''' MatchCase: False MatchEntireWord: False

@@ -551,6 +551,1194 @@
         "re_pasted": false,
         "executed_in_flow": "number-conversion"
       }
+    },
+    {
+      "id": "excel-launch-new-visible",
+      "category": "Excel",
+      "ui_name": "Excel の起動",
+      "ui_automation_id": "Excel.LaunchExcel",
+      "variant": "new-visible",
+      "settings": {
+        "Excel の起動": "空のドキュメントを使用",
+        "インスタンスを表示する": true
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "ExcelInstance",
+          "kind": "excel_instance"
+        }
+      ],
+      "robin_path": "actions/excel-launch/new-visible.robin",
+      "sha256": "9407c4494fc35fb7f90e8d5dc3640c7d65362dfab6ed47e6788c94fd8ad843fe",
+      "native_flow_name": "test",
+      "native_subflow": "Main",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-excel",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": false,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "excel-launch-open-readonly",
+      "category": "Excel",
+      "ui_name": "Excel の起動",
+      "ui_automation_id": "Excel.LaunchExcel",
+      "variant": "open-readonly",
+      "settings": {
+        "Excel の起動": "次のドキュメントを開く",
+        "ドキュメント パス": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\excel-catalog.xlsx",
+        "読み取り専用として開く": true
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "ExcelInstance2",
+          "kind": "excel_instance"
+        }
+      ],
+      "robin_path": "actions/excel-launch/open-readonly.robin",
+      "sha256": "fb6cf6fc13e18dc9e9ad115b766b4323263dabf68faaa8b4c7b86433123b3e0d",
+      "native_flow_name": "test",
+      "native_subflow": "OfficeOpenSamples",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-reopen",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "excel-write-cell-a1-text",
+      "category": "Excel",
+      "ui_name": "Excel ワークシートに書き込む",
+      "ui_automation_id": "Excel.WriteToExcel",
+      "variant": "cell-a1-text",
+      "settings": {
+        "列": "A",
+        "行": 1,
+        "書き込む値": "OfficeCatalog 日本語 100%%"
+      },
+      "inputs": [
+        {
+          "name": "ExcelInstance",
+          "kind": "existing_excel_instance"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/excel-write/cell-a1-text.robin",
+      "sha256": "cfeb129a47b62455c42b5de44a9f357fa0b64c0ab6beb413605ec3057c4ec375",
+      "native_flow_name": "test",
+      "native_subflow": "Main",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-excel",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "excel-read-cell-a1-typed",
+      "category": "Excel",
+      "ui_name": "Excel ワークシートから読み取る",
+      "ui_automation_id": "Excel.ReadFromExcel",
+      "variant": "cell-a1-typed",
+      "settings": {
+        "取得": "単一セルの値",
+        "先頭列": "A",
+        "先頭行": 1,
+        "セルの内容を取得する形式": "入力された値"
+      },
+      "inputs": [
+        {
+          "name": "ExcelInstance",
+          "kind": "existing_excel_instance"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ExcelData",
+          "kind": "read_result"
+        }
+      ],
+      "robin_path": "actions/excel-read/cell-a1-typed.robin",
+      "sha256": "955398d363ad61b1f111b9c01c6af1b4e2672980430e23e1fafcf04fb8253a57",
+      "native_flow_name": "test",
+      "native_subflow": "Main",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-excel",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "excel-read-used-range",
+      "category": "Excel",
+      "ui_name": "Excel ワークシートから読み取る",
+      "ui_automation_id": "Excel.ReadFromExcel",
+      "variant": "used-range",
+      "settings": {
+        "取得": "ワークシートに含まれる使用可能なすべての値"
+      },
+      "inputs": [
+        {
+          "name": "ExcelInstance2",
+          "kind": "existing_excel_instance"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ExcelData2",
+          "kind": "datatable"
+        }
+      ],
+      "robin_path": "actions/excel-read/used-range.robin",
+      "sha256": "86414dfed04ea9b50b2e4d74fe9817d6e781622522367f6de804bb561a8a5ee6",
+      "native_flow_name": "test",
+      "native_subflow": "OfficeOpenSamples",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "office-reopen",
+        "variable_renaming_in_reopen": true,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      },
+      "copied_options": {
+        "FirstLineIsHeader": false
+      }
+    },
+    {
+      "id": "excel-read-range-a1-b2",
+      "category": "Excel",
+      "ui_name": "Excel ワークシートから読み取る",
+      "ui_automation_id": "Excel.ReadFromExcel",
+      "variant": "range-a1-b2",
+      "settings": {
+        "取得": "セル範囲の値",
+        "先頭列": "A",
+        "先頭行": 1,
+        "最終列": "B",
+        "最終行": 2
+      },
+      "inputs": [
+        {
+          "name": "ExcelInstance2",
+          "kind": "existing_excel_instance"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ExcelData2",
+          "kind": "datatable"
+        }
+      ],
+      "robin_path": "actions/excel-read/range-a1-b2.robin",
+      "sha256": "51e4c46a0ed91b2173886e1aad020da285092e26378ab2055d8a8fdfc380486c",
+      "native_flow_name": "test",
+      "native_subflow": "OfficeOpenSamples",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "office-reopen",
+        "variable_renaming_in_reopen": true,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "excel-save-as-xlsx",
+      "category": "Excel",
+      "ui_name": "Excel の保存",
+      "ui_automation_id": "Excel.SaveExcel",
+      "variant": "as-xlsx",
+      "settings": {
+        "保存モード": "名前を付けてドキュメントを保存",
+        "ドキュメント形式": "Excel ブック (.xlsx)",
+        "ドキュメント パス": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\excel-catalog.xlsx"
+      },
+      "inputs": [
+        {
+          "name": "ExcelInstance",
+          "kind": "existing_excel_instance"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/excel-save/as-xlsx.robin",
+      "sha256": "3d5662cff142b5d9d93ab8743fb55e57ef9c3ef76aae3824488751ef19fec127",
+      "native_flow_name": "test",
+      "native_subflow": "Main",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-excel",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "excel-close-no-save",
+      "category": "Excel",
+      "ui_name": "Excel を閉じる",
+      "ui_automation_id": "Excel.CloseExcel",
+      "variant": "no-save",
+      "settings": {
+        "Excel を閉じる前": "ドキュメントを保存しない"
+      },
+      "inputs": [
+        {
+          "name": "ExcelInstance",
+          "kind": "existing_excel_instance"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/excel-close/no-save.robin",
+      "sha256": "ec175730925eda1fef8376c2f4ebb5ef65899fddd9d299e40a2eb79e744a0638",
+      "native_flow_name": "test",
+      "native_subflow": "Main",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-excel",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "word-launch-new-visible",
+      "category": "Word",
+      "ui_name": "Word を起動する",
+      "ui_automation_id": "Word.LaunchWord",
+      "variant": "new-visible",
+      "settings": {
+        "Word を起動する": "空のドキュメントを使用",
+        "インスタンスを表示する": true
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "WordInstance",
+          "kind": "word_instance"
+        }
+      ],
+      "robin_path": "actions/word-launch/new-visible.robin",
+      "sha256": "36de832ab0d97a24510a1dcf5a98852bf3851aa9ac45234d4851747c9b5ae1d0",
+      "native_flow_name": "test",
+      "native_subflow": "OfficeWord",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-word",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "word-launch-open-readonly",
+      "category": "Word",
+      "ui_name": "Word を起動する",
+      "ui_automation_id": "Word.LaunchWord",
+      "variant": "open-readonly",
+      "settings": {
+        "Word を起動する": "次のドキュメントを開く",
+        "ドキュメント パス": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\word-catalog.docx",
+        "読み取り専用として開く": true
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "WordInstance2",
+          "kind": "word_instance"
+        }
+      ],
+      "robin_path": "actions/word-launch/open-readonly.robin",
+      "sha256": "6196fcce84861ae48c47399c3f38378f4ab0f23e941eb4877d553702c2a6ee90",
+      "native_flow_name": "test",
+      "native_subflow": "OfficeOpenSamples",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-reopen",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "word-write-end-text",
+      "category": "Word",
+      "ui_name": "Word 文書に書き込む",
+      "ui_automation_id": "Word.WriteToWord",
+      "variant": "end-text",
+      "settings": {
+        "書き込むテキスト": "OfficeCatalog 日本語 100%%",
+        "テキストを次に書き込む": "Word ファイルの末尾",
+        "新しい行を追加する": false
+      },
+      "inputs": [
+        {
+          "name": "WordInstance",
+          "kind": "existing_word_instance"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/word-write/end-text.robin",
+      "sha256": "d2e632d65faead30a249b472a99a9817f299f1b9521208f7edecb56916025e61",
+      "native_flow_name": "test",
+      "native_subflow": "OfficeWord",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-word",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "word-read-all-text",
+      "category": "Word",
+      "ui_name": "Word 文書から読み取る",
+      "ui_automation_id": "Word.ReadFromWord",
+      "variant": "all-text",
+      "settings": {
+        "取得": "全文（コピー原文 Word.ReadFromWord.Read）"
+      },
+      "inputs": [
+        {
+          "name": "WordInstance",
+          "kind": "existing_word_instance"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "WordData",
+          "kind": "read_result"
+        }
+      ],
+      "robin_path": "actions/word-read/all-text.robin",
+      "sha256": "1a2b6137dce2b7ad70fb112583eeec90635d5e6c933fec47686c0614aa32084a",
+      "native_flow_name": "test",
+      "native_subflow": "OfficeWord",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-word",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "word-replace-all-literal",
+      "category": "Word",
+      "ui_name": "Word 文書内の単語を検索して置換する",
+      "ui_automation_id": "Word.FindAndReplaceWord",
+      "variant": "all-literal",
+      "settings": {
+        "検索するテキスト": "OfficeCatalog",
+        "置換するテキスト": "OfficeVerified",
+        "すべての一致": true,
+        "ワイルドカードを使用する": false,
+        "単語単位で探す": false
+      },
+      "inputs": [
+        {
+          "name": "WordInstance2",
+          "kind": "existing_word_instance"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/word-replace/all-literal.robin",
+      "sha256": "07358aac2a4fb631c80a3f649e5c8ea1d4f78e98a16b3b00b1e90d36c92744c3",
+      "native_flow_name": "test",
+      "native_subflow": "OfficeOpenSamples",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-reopen",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "word-save-as-docx-extension",
+      "category": "Word",
+      "ui_name": "Word を保存",
+      "ui_automation_id": "Word.SaveWord",
+      "variant": "as-docx-extension",
+      "settings": {
+        "保存モード": "名前を付けてドキュメントを保存",
+        "ドキュメント形式": "既定 (拡張機能から)",
+        "ドキュメント パス": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\word-catalog.docx"
+      },
+      "inputs": [
+        {
+          "name": "WordInstance",
+          "kind": "existing_word_instance"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/word-save/as-docx-extension.robin",
+      "sha256": "ea638ec3a903e0e09ea471b3efad9ddffaa91f3f20e4d157e9569d1b9685d2e4",
+      "native_flow_name": "test",
+      "native_subflow": "OfficeWord",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-word",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "word-close-no-save",
+      "category": "Word",
+      "ui_name": "Word を閉じる",
+      "ui_automation_id": "Word.CloseWord",
+      "variant": "no-save",
+      "settings": {
+        "Word を閉じる前": "ドキュメントを保存しない"
+      },
+      "inputs": [
+        {
+          "name": "WordInstance",
+          "kind": "existing_word_instance"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/word-close/no-save.robin",
+      "sha256": "1c0958df2f9106e9bc0978134e91d44b1e675792bc6d792344650ba04a0ab12c",
+      "native_flow_name": "test",
+      "native_subflow": "OfficeWord",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-word",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "powerpoint-launch-new",
+      "category": "PowerPoint",
+      "ui_name": "Launch PowerPoint",
+      "ui_automation_id": "PowerPoint.LaunchPowerPoint",
+      "variant": "new",
+      "settings": {
+        "Launch PowerPoint": "with a blank presentation"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "PowerPointInstance",
+          "kind": "powerpoint_instance"
+        }
+      ],
+      "robin_path": "actions/powerpoint-launch/new.robin",
+      "sha256": "4c2d78344f62b3b9514788b3c37ca15b2a4f8f69b1935649f65545c66227023a",
+      "native_flow_name": "test",
+      "native_subflow": "OfficePowerPoint",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-powerpoint",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "powerpoint-launch-open",
+      "category": "PowerPoint",
+      "ui_name": "Launch PowerPoint",
+      "ui_automation_id": "PowerPoint.LaunchPowerPoint",
+      "variant": "open",
+      "settings": {
+        "Launch PowerPoint": "and open the following presentation",
+        "Presentation path": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\powerpoint-catalog.pptx"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "PowerPointInstance2",
+          "kind": "powerpoint_instance"
+        }
+      ],
+      "robin_path": "actions/powerpoint-launch/open.robin",
+      "sha256": "5afd8eed23f471edb2758bdefb47f585c97a8b51afb6c5474a674c3d5caaffee",
+      "native_flow_name": "test",
+      "native_subflow": "OfficeOpenSamples",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-reopen",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "powerpoint-add-slide-end",
+      "category": "PowerPoint",
+      "ui_name": "Add slide to PowerPoint",
+      "ui_automation_id": "PowerPoint.AddPowerPointSlide",
+      "variant": "end",
+      "settings": {
+        "Add slide": "末尾（コピー原文 AddSlideAsLast）"
+      },
+      "inputs": [
+        {
+          "name": "PowerPointInstance",
+          "kind": "existing_powerpoint_instance"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SlideIndex",
+          "kind": "number"
+        }
+      ],
+      "robin_path": "actions/powerpoint-add-slide/end.robin",
+      "sha256": "f008ebefce01429a393007defd49d1665bad58c74c848dbf33a798d32c4f2b1e",
+      "native_flow_name": "test",
+      "native_subflow": "OfficePowerPoint",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-powerpoint",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "powerpoint-write-slide-index",
+      "category": "PowerPoint",
+      "ui_name": "Write to PowerPoint",
+      "ui_automation_id": "PowerPoint.WriteToPowerPoint",
+      "variant": "slide-index",
+      "settings": {
+        "Text to write": "OfficeCatalog 日本語 100%%",
+        "Write text on": "slide at position",
+        "Slide position": "%SlideIndex%",
+        "Append new line": false
+      },
+      "inputs": [
+        {
+          "name": "PowerPointInstance",
+          "kind": "existing_powerpoint_instance"
+        },
+        {
+          "name": "SlideIndex",
+          "kind": "existing_number"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/powerpoint-write/slide-index.robin",
+      "sha256": "1f0bc35c84685a6e86c5e8d1797f11213d736efe842422284c86246764fcfa95",
+      "native_flow_name": "test",
+      "native_subflow": "OfficePowerPoint",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-powerpoint",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "powerpoint-read-all-text",
+      "category": "PowerPoint",
+      "ui_name": "Read from PowerPoint",
+      "ui_automation_id": "PowerPoint.ReadFromPowerPoint",
+      "variant": "all-text",
+      "settings": {
+        "Read mode": "全文（コピー原文 ReadFromPowerPoint.Read）"
+      },
+      "inputs": [
+        {
+          "name": "PowerPointInstance",
+          "kind": "existing_powerpoint_instance"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "PowerPointData",
+          "kind": "read_result"
+        }
+      ],
+      "robin_path": "actions/powerpoint-read/all-text.robin",
+      "sha256": "6eca9bb683e0131cb9e3d7f30f3bd468b7cb4b828548960de1e4c6f656ca6990",
+      "native_flow_name": "test",
+      "native_subflow": "OfficePowerPoint",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-powerpoint",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "powerpoint-save-as-pptx",
+      "category": "PowerPoint",
+      "ui_name": "Save PowerPoint",
+      "ui_automation_id": "PowerPoint.SavePowerPoint",
+      "variant": "as-pptx",
+      "settings": {
+        "Save mode": "Save presentation as",
+        "Document format": "PowerPoint Presentation (*.pptx)",
+        "Document path": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\powerpoint-catalog.pptx"
+      },
+      "inputs": [
+        {
+          "name": "PowerPointInstance",
+          "kind": "existing_powerpoint_instance"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/powerpoint-save/as-pptx.robin",
+      "sha256": "e15c9f202c2fa29e4331be50ed0a1075e5398ecb46fe2dc9ba32e88f6d5992cb",
+      "native_flow_name": "test",
+      "native_subflow": "OfficePowerPoint",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-powerpoint",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "powerpoint-close-no-save",
+      "category": "PowerPoint",
+      "ui_name": "Close PowerPoint",
+      "ui_automation_id": "PowerPoint.ClosePowerPoint",
+      "variant": "no-save",
+      "settings": {
+        "Before closing PowerPoint": "保存なし（コピー原文 ClosePowerPoint.Close）"
+      },
+      "inputs": [
+        {
+          "name": "PowerPointInstance",
+          "kind": "existing_powerpoint_instance"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/powerpoint-close/no-save.robin",
+      "sha256": "a6b4abbde13c367c147fce373495f912945beb3244c195e013a95487215a8894",
+      "native_flow_name": "test",
+      "native_subflow": "OfficePowerPoint",
+      "capture_session": "office-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-powerpoint",
+        "variable_renaming_in_reopen": false,
+        "clipboard_restored": true,
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "pdf-extract-text-all-pages",
+      "category": "PDF",
+      "ui_name": "PDF からテキストを抽出",
+      "ui_automation_id": "Pdf.ExtractTextFromPDF",
+      "variant": "all-pages",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "抽出するページ": "すべて",
+        "構造化データに最適化": false
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "ExtractedPDFText",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/pdf-extract-text/all-pages.robin",
+      "sha256": "8817cb2b81788621264444e9556d7f3b466f3f2e03864223a791f23c47cdb038",
+      "capture_session": "pdf-2026-09-07",
+      "native_flow_name": "test",
+      "native_subflow": "PdfCatalog",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "re_pasted_with_output_renaming": true,
+        "executed_in_flow": "pdf-variants",
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "pdf-extract-text-pages-2-3",
+      "category": "PDF",
+      "ui_name": "PDF からテキストを抽出",
+      "ui_automation_id": "Pdf.ExtractTextFromPDF",
+      "variant": "pages-2-3",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "抽出するページ": "範囲",
+        "開始ページ番号": 2,
+        "終了ページ番号": 3,
+        "構造化データに最適化": false
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "ExtractedPDFText",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/pdf-extract-text/pages-2-3.robin",
+      "sha256": "b30ad031fc7fbd50f139b470b01f1c0ed900cc0c523f651dccbcd693a286ff0c",
+      "capture_session": "pdf-2026-09-07",
+      "native_flow_name": "test",
+      "native_subflow": "PdfCatalog",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "re_pasted_with_output_renaming": true,
+        "executed_in_flow": "pdf-variants",
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "pdf-extract-text-page-2",
+      "category": "PDF",
+      "ui_name": "PDF からテキストを抽出",
+      "ui_automation_id": "Pdf.ExtractTextFromPDF",
+      "variant": "page-2",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "抽出するページ": "単一",
+        "単一ページ番号": 2,
+        "構造化データに最適化": false
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "ExtractedPDFText",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/pdf-extract-text/page-2.robin",
+      "sha256": "5daeeadb6cbdf002e3bddd6ead5069a549efbfc729551ebac41412500b30e4bc",
+      "capture_session": "pdf-2026-09-07",
+      "native_flow_name": "test",
+      "native_subflow": "PdfCatalog",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "re_pasted_with_output_renaming": true,
+        "executed_in_flow": "pdf-variants",
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "pdf-extract-text-page-2-layout",
+      "category": "PDF",
+      "ui_name": "PDF からテキストを抽出",
+      "ui_automation_id": "Pdf.ExtractTextFromPDF",
+      "variant": "page-2-layout",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "抽出するページ": "単一",
+        "単一ページ番号": 2,
+        "構造化データに最適化": true
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "ExtractedPDFText",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/pdf-extract-text/page-2-layout.robin",
+      "sha256": "1d4315354fedc07c6303c7ddd65a46af70c0e26df19020bec305f0b263a84381",
+      "capture_session": "pdf-2026-09-07",
+      "native_flow_name": "test",
+      "native_subflow": "PdfCatalog",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "re_pasted_with_output_renaming": true,
+        "executed_in_flow": "pdf-variants",
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "pdf-extract-tables-with-headers",
+      "category": "PDF",
+      "ui_name": "PDF からテーブルを抽出する",
+      "ui_automation_id": "Pdf.ExtractTablesFromPDF",
+      "variant": "with-headers",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "抽出するページ": "すべて",
+        "ページの余白を超えるテーブルをマージする": true,
+        "最初の行に列名が含まれています": true
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "ExtractedPDFTables",
+          "kind": "list_of_pdf_table_information"
+        }
+      ],
+      "robin_path": "actions/pdf-extract-tables/with-headers.robin",
+      "sha256": "c60b716283f481defb7a426708978bb11ae1fa8f3813a560e37ee806e8eaebd0",
+      "capture_session": "pdf-2026-09-07",
+      "native_flow_name": "test",
+      "native_subflow": "PdfCatalog",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "re_pasted_with_output_renaming": true,
+        "executed_in_flow": "pdf-variants",
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "pdf-extract-tables-without-headers",
+      "category": "PDF",
+      "ui_name": "PDF からテーブルを抽出する",
+      "ui_automation_id": "Pdf.ExtractTablesFromPDF",
+      "variant": "without-headers",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "抽出するページ": "すべて",
+        "ページの余白を超えるテーブルをマージする": true,
+        "最初の行に列名が含まれています": false
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "ExtractedPDFTables",
+          "kind": "list_of_pdf_table_information"
+        }
+      ],
+      "robin_path": "actions/pdf-extract-tables/without-headers.robin",
+      "sha256": "4d41a5db1d0d21085d0bf260f14b70c6ea558f7d5450b68181998354b1dc2428",
+      "capture_session": "pdf-2026-09-07",
+      "native_flow_name": "test",
+      "native_subflow": "PdfCatalog",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "re_pasted_with_output_renaming": true,
+        "executed_in_flow": "pdf-variants",
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "pdf-extract-images-all-pages",
+      "category": "PDF",
+      "ui_name": "PDF から画像を抽出",
+      "ui_automation_id": "Pdf.ExtractImagesFromPDF",
+      "variant": "all-pages",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "抽出するページ": "すべて",
+        "画像名": "CatalogImage",
+        "画像の保存先": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\images-all"
+      },
+      "inputs": [],
+      "outputs": [],
+      "robin_path": "actions/pdf-extract-images/all-pages.robin",
+      "sha256": "168f810b6bb6a47b0640ba2a9748b8fe1e0dc09b71530290ac74db1aafbd0397",
+      "capture_session": "pdf-2026-09-07",
+      "native_flow_name": "test",
+      "native_subflow": "PdfCatalog",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "re_pasted_with_output_renaming": false,
+        "executed_in_flow": "pdf-variants",
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "pdf-extract-images-page-1",
+      "category": "PDF",
+      "ui_name": "PDF から画像を抽出",
+      "ui_automation_id": "Pdf.ExtractImagesFromPDF",
+      "variant": "page-1",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "抽出するページ": "単一",
+        "単一ページ番号": 1,
+        "画像名": "CatalogImage",
+        "画像の保存先": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\images-page1"
+      },
+      "inputs": [],
+      "outputs": [],
+      "robin_path": "actions/pdf-extract-images/page-1.robin",
+      "sha256": "50186fbe6e9d36d6104b46c6d9fcfba3dfa35a993c2fa22accb9004d10bbbf29",
+      "capture_session": "pdf-2026-09-07",
+      "native_flow_name": "test",
+      "native_subflow": "PdfCatalog",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "re_pasted_with_output_renaming": false,
+        "executed_in_flow": "pdf-variants",
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "pdf-extract-pages-pages-2-3-no-overwrite",
+      "category": "PDF",
+      "ui_name": "新しい PDF ファイルへの PDF ファイル ページの抽出",
+      "ui_automation_id": "Pdf.ExtractPages",
+      "variant": "pages-2-3-no-overwrite",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "ページ選択": "2-3",
+        "抽出された PDF ファイルのパス": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\pages-2-3.pdf",
+        "ファイルが存在する場合": "上書きしない"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "ExtractedPDF",
+          "kind": "pdf_file_result"
+        }
+      ],
+      "robin_path": "actions/pdf-extract-pages/pages-2-3-no-overwrite.robin",
+      "sha256": "db5286b815be81e95ffa9705324d0624a4d4411aac1624193d1c57a68914fc82",
+      "capture_session": "pdf-2026-09-07",
+      "native_flow_name": "test",
+      "native_subflow": "PdfCatalog",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "re_pasted_with_output_renaming": false,
+        "executed_in_flow": "pdf-variants",
+        "app_executor_verified": false
+      }
+    },
+    {
+      "id": "pdf-merge-two-files-no-overwrite",
+      "category": "PDF",
+      "ui_name": "PDF ファイルを統合",
+      "ui_automation_id": "Pdf.MergeFiles",
+      "variant": "two-files-no-overwrite",
+      "settings": {
+        "PDF ファイル": [
+          "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+          "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-b.pdf"
+        ],
+        "統合された PDF のパス": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\merged-a-b.pdf",
+        "ファイルが存在する場合": "上書きしない"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MergedPDF",
+          "kind": "pdf_file_result"
+        }
+      ],
+      "robin_path": "actions/pdf-merge/two-files-no-overwrite.robin",
+      "sha256": "cc3a6685edb18c81b25d8deaca05a36699572456fbb3f1c3a4a108430c31c4fb",
+      "capture_session": "pdf-2026-09-07",
+      "native_flow_name": "test",
+      "native_subflow": "PdfCatalog",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "re_pasted_with_output_renaming": false,
+        "executed_in_flow": "pdf-variants",
+        "app_executor_verified": false
+      },
+      "known_finding": "Two inline-list inputs were merged in reverse input order in both observed cases; inspect output order, do not generalize."
+    },
+    {
+      "id": "pdf-merge-two-files-b-a-no-overwrite",
+      "category": "PDF",
+      "ui_name": "PDF ファイルを統合",
+      "ui_automation_id": "Pdf.MergeFiles",
+      "variant": "two-files-b-a-no-overwrite",
+      "settings": {
+        "PDF ファイル": [
+          "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-b.pdf",
+          "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf"
+        ],
+        "統合された PDF のパス": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\merged-b-a.pdf",
+        "ファイルが存在する場合": "上書きしない"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MergedPDF",
+          "kind": "pdf_file_result"
+        }
+      ],
+      "robin_path": "actions/pdf-merge/two-files-b-a-no-overwrite.robin",
+      "sha256": "413ba81e232da7379e7a53edfb64ec789b4e2cffb7ec7314e1291548a9bc60fc",
+      "capture_session": "pdf-2026-09-07",
+      "native_flow_name": "test",
+      "native_subflow": "PdfCatalog",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "re_pasted_with_output_renaming": false,
+        "executed_in_flow": "pdf-merge-order",
+        "app_executor_verified": false
+      },
+      "known_finding": "Two inline-list inputs were merged in reverse input order in both observed cases; inspect output order, do not generalize."
+    },
+    {
+      "id": "file-write-csv-pdf-table-headers",
+      "category": "ファイル",
+      "ui_name": "CSV ファイルに書き込む",
+      "ui_automation_id": "File.WriteToCSVFile",
+      "variant": "pdf-table-headers",
+      "settings": {
+        "書き込む変数": "%PdfTablesHeaders[0].DataTable%",
+        "エンコード": "UTF-8",
+        "列名を含めます": true,
+        "区切り記号": "コンマ",
+        "ファイルが存在する場合": "上書き"
+      },
+      "inputs": [
+        {
+          "name": "PdfTablesHeaders",
+          "kind": "list_of_pdf_table_information",
+          "projection": "[0].DataTable"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/file-write-csv/pdf-table-headers.robin",
+      "sha256": "02e704f37984a87a9ffde7ad82d51d06d215b1b22e1eec170ea0ad4a4962464e",
+      "capture_session": "document-csv-2026-09-07",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "re_pasted": true,
+        "executed_in_flow": "pdf-table-csv",
+        "app_executor_verified": true,
+        "app_case": "evidence/document-run/live-verification.json"
+      }
     }
   ],
   "flows": [
@@ -846,6 +2034,169 @@
       "variable_evidence_sha256": "5b2c60f994c4f463572611394abac54da49317d3175e144eca60bbc85f25c853",
       "copilot_generated": false,
       "app_executor_verified": false
+    },
+    {
+      "id": "office-excel",
+      "robin_path": "flows/office-excel/default.robin",
+      "sha256": "720e912a3d29ae19477d281c110bc68ae69dcf0f6f6c0eccea43a179e5ad84db",
+      "action_ids": [
+        "excel-launch-new-visible",
+        "excel-write-cell-a1-text",
+        "excel-read-cell-a1-typed",
+        "excel-save-as-xlsx",
+        "excel-close-no-save"
+      ],
+      "action_count": 5,
+      "native_flow_name": "test",
+      "native_subflow": "Main",
+      "re_pasted_in": "OfficeRoundtrip",
+      "executed": true,
+      "artifact_evidence": "evidence/office/catalog-artifacts.json",
+      "app_executor_verified": false,
+      "controller_support": "validated_subset"
+    },
+    {
+      "id": "office-word",
+      "robin_path": "flows/office-word/default.robin",
+      "sha256": "c3635a073d7858e19b7a55248c3051d13c4a4dccc3be12484796d746f17779db",
+      "action_ids": [
+        "word-launch-new-visible",
+        "word-write-end-text",
+        "word-read-all-text",
+        "word-save-as-docx-extension",
+        "word-close-no-save"
+      ],
+      "action_count": 5,
+      "native_flow_name": "test",
+      "native_subflow": "OfficeWord",
+      "re_pasted_in": "OfficeRoundtrip",
+      "executed": true,
+      "artifact_evidence": "evidence/office/catalog-artifacts.json",
+      "app_executor_verified": false,
+      "controller_support": "validated_subset"
+    },
+    {
+      "id": "office-powerpoint",
+      "robin_path": "flows/office-powerpoint/default.robin",
+      "sha256": "5d40d4712c9a0540582f9ddfc376df8afa2170cdc94d703a171dcce95bbcb5e2",
+      "action_ids": [
+        "powerpoint-launch-new",
+        "powerpoint-add-slide-end",
+        "powerpoint-write-slide-index",
+        "powerpoint-read-all-text",
+        "powerpoint-save-as-pptx",
+        "powerpoint-close-no-save"
+      ],
+      "action_count": 6,
+      "native_flow_name": "test",
+      "native_subflow": "OfficePowerPoint",
+      "re_pasted_in": "OfficeRoundtrip",
+      "executed": true,
+      "artifact_evidence": "evidence/office/catalog-artifacts.json",
+      "app_executor_verified": false,
+      "controller_support": "validated_subset"
+    },
+    {
+      "id": "office-reopen",
+      "robin_path": "flows/office-reopen/assembled.robin",
+      "sha256": "9122619e2740109ea6972a4a2e10ef51b80da57aa1f70befbe66216efd91cc53",
+      "copied_from_native_flow": false,
+      "assembly_note": "Copied actions combined; instance references and Excel result variables renamed explicitly. Original action files preserved.",
+      "roundtrip_path": "flows/office-reopen/pasted.robin",
+      "roundtrip_sha256": "9122619e2740109ea6972a4a2e10ef51b80da57aa1f70befbe66216efd91cc53",
+      "action_count": 11,
+      "native_flow_name": "test",
+      "native_subflow": "OfficeReopen",
+      "executed": true,
+      "app_executor_verified": false,
+      "controller_support": "validated_subset"
+    },
+    {
+      "id": "pdf-catalog",
+      "robin_path": "flows/pdf-catalog/default.robin",
+      "sha256": "54e0f9d10a7c04d4b363747b92b175fd01da11c382a4e81cc185fee635f59647",
+      "action_count": 5,
+      "native_flow_name": "test",
+      "native_subflow": "PdfCatalog",
+      "executed": false,
+      "controller_support": "validated_subset",
+      "app_executor_verified": false,
+      "notes": "Copied intermediate 5-action snapshot, not itself executed.",
+      "evidence": "evidence/pdf/results.json"
+    },
+    {
+      "id": "pdf-variants",
+      "robin_path": "flows/pdf-variants/assembled.robin",
+      "sha256": "8d1786cdce56c304fdc8392ee18ee5a202eaa21f7dafc9784e02eaba8bbcda2b",
+      "action_count": 10,
+      "native_flow_name": "test",
+      "native_subflow": "PdfVariants",
+      "executed": true,
+      "controller_support": "validated_subset",
+      "app_executor_verified": false,
+      "notes": "Copied actions assembled with only six result-variable names changed; 10-action run and byte-identical roundtrip.",
+      "evidence": "evidence/pdf/results.json"
+    },
+    {
+      "id": "pdf-merge-order",
+      "robin_path": "flows/pdf-merge-order/roundtrip.robin",
+      "sha256": "413ba81e232da7379e7a53edfb64ec789b4e2cffb7ec7314e1291548a9bc60fc",
+      "action_count": 1,
+      "native_flow_name": "test",
+      "native_subflow": "PdfCatalog",
+      "executed": true,
+      "controller_support": "validated_subset",
+      "app_executor_verified": false,
+      "notes": "Executed just the last merge action in PdfCatalog; exact one-action roundtrip in PdfMergeOrder.",
+      "evidence": "evidence/pdf/results.json"
+    },
+    {
+      "id": "pdf-table-csv",
+      "robin_path": "flows/pdf-table-csv/roundtrip.robin",
+      "sha256": "9d062670f2385e832e20b0c31607dc9d5ca257e9fa9184e96acc93be483d7ce0",
+      "action_count": 2,
+      "native_flow_name": "test",
+      "native_subflow": "DocCsvExecute",
+      "executed": true,
+      "controller_support": "validated_subset",
+      "app_executor_verified": true,
+      "evidence": "evidence/document-run/live-verification.json"
     }
-  ]
+  ],
+  "capture_sessions": [
+    {
+      "id": "office-2026-09-07",
+      "date": "2026-09-07",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP; PowerPoint action labels en-US",
+      "power_fx": null,
+      "power_fx_note": "Setting toggle not separately rechecked in user-created test flow; normal Robin copied, pasted and executed successfully.",
+      "native_flow_name": "test",
+      "evidence": "evidence/office/verification.json"
+    },
+    {
+      "id": "pdf-2026-09-07",
+      "date": "2026-09-07",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": null,
+      "power_fx_note": "Same user-created test flow; setting toggle not separately rechecked. Copied normal Robin was pasted and executed.",
+      "native_flow_name": "test",
+      "evidence": "evidence/pdf/results.json"
+    },
+    {
+      "id": "document-csv-2026-09-07",
+      "date": "2026-09-07",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "test",
+      "native_subflow": "DocCsvProbe",
+      "evidence": "evidence/document-run/table-csv-probe.csv"
+    }
+  ],
+  "application_integration": {
+    "scope": "Guarded captured formats; live verification covers only the listed cases, not every variant.",
+    "record": "evidence/document-run/live-verification.json",
+    "limitations": "docs/document-run-checkpoint-2026-09-08.md"
+  }
 }

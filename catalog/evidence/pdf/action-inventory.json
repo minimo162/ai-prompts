@@ -1,0 +1,26 @@
+{
+  "scope": "PDF category observed in this PAD installation",
+  "pad_file_version": "2.71.115.26224",
+  "actions": [
+    {
+      "name": "PDF からテキストを抽出",
+      "id": "Pdf.ExtractTextFromPDF"
+    },
+    {
+      "name": "PDF からテーブルを抽出する",
+      "id": "Pdf.ExtractTablesFromPDF"
+    },
+    {
+      "name": "PDF から画像を抽出",
+      "id": "Pdf.ExtractImagesFromPDF"
+    },
+    {
+      "name": "新しい PDF ファイルへの PDF ファイル ページの抽出",
+      "id": "Pdf.ExtractPages"
+    },
+    {
+      "name": "PDF ファイルを統合",
+      "id": "Pdf.MergeFiles"
+    }
+  ]
+}

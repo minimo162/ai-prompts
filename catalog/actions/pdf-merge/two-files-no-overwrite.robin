@@ -1,0 +1,1 @@
+Pdf.MergeFiles PDFFiles: ['C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf', 'C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-b.pdf'] MergedPDFPath: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\merged-a-b.pdf''' IfFileExists: Pdf.IfFileExists.DoNotModifyFiles PasswordDelimiter: $''',''' MergedPDF=> MergedPDF
