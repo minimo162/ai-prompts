@@ -1,5 +1,5 @@
 ﻿# App-Version: 0.1.0
-# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6IjUyZDEwOTZjY2FhYzRjNTU1YmYyNzI4ODIxNGViNDk4IiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiIxYTZlOGEzNTE3ODFlZDYxZWE1YmJhMWRmMmRiNjMxMjcwZWIyZGFkYTc5OGQ2OWYwOWJmMzc4NjRjNGMzMjQwIiwiaHRtbF9zaGEyNTYiOiJjYmFiNDViYjAyZDg2ODgyZjdiMTY0MmMwZTU3ZTM5MTkwNWVkMTMzNWEzZWUwOWY3NjJkY2ZlZDBmOTc5OWU4IiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
+# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6IjMxN2MwMzBjMWRhZDIxZjVjNjU2NDg3NWQ1OWYyNmMxIiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiI5N2VhNzkxMDllMDQxZDNiMDQ0MTUwZGZlYzMzMzdiNzg5NmFjY2IxMDk2NTU1YTQxOTE2ZTJlZjA1ZDUyNTcxIiwiaHRtbF9zaGEyNTYiOiI3MWIwMzEwNzM3MTc3ZjIxNjk4ODlmYThkOTk4MzY2ODhhZTNlYzMxZWRkNDAxM2MzOGVlY2Q3M2FiOTRiMDJjIiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
 # State-Contract: 2
 [CmdletBinding()]
 param(
@@ -954,6 +954,31 @@ function Open-AgentCsvArtifact([string]$HomePath, [string]$JobId, [string]$Artif
     if ($script:AgentOfflineTest) { throw 'ARTIFACT_OPEN_OFFLINE: 成果物を検証しました。非ライブ試験では関連付けアプリを起動しません。' }
     Start-Process -FilePath $path | Out-Null
 }
+function Get-AgentArtifactView($Observed) {
+    foreach($artifact in $Observed){
+        $view=[ordered]@{path=$artifact.path;label=$artifact.label}
+        $id=[string](Get-AgentProperty $artifact 'artifact_id' '')
+        if(Test-AgentId $id){$view.artifact_id=$id;$view.open_supported=([IO.Path]::GetExtension($artifact.path).ToLowerInvariant() -cin @('.txt','.json'))}
+        [pscustomobject]$view
+    }
+}
+function Open-AgentArtifact([string]$HomePath,[string]$JobId,[string]$ArtifactId) {
+    Assert-AgentId $JobId;Assert-AgentId $ArtifactId
+    $job=Get-AgentJob $HomePath $JobId
+    if((Get-AgentProperty $job 'workflow' '') -ceq 'csv_classify'){Open-AgentCsvArtifact $HomePath $JobId $ArtifactId;return}
+    $visible=@($job.artifacts|Where-Object {(Get-AgentProperty $_ 'artifact_id' '') -ceq $ArtifactId})
+    $proven=@((Get-AgentProperty $job 'observed_artifacts' @())|Where-Object {(Get-AgentProperty $_ 'artifact_id' '') -ceq $ArtifactId})
+    if($visible.Count -ne 1 -or $proven.Count -ne 1 -or $visible[0].path -cne $proven[0].path){throw 'ARTIFACT_SCOPE: この依頼で確認した成果物が見つかりません。'}
+    $runsRoot=Join-Path (Get-AgentJobDirectory $HomePath $JobId) 'runs'
+    $path=Assert-AgentPathUnder $proven[0].path $runsRoot
+    $relative=$path.Substring($runsRoot.Length+1)
+    if($relative -cnotmatch '^[a-f0-9]{32}\\artifacts\\.+$'){throw 'ARTIFACT_SCOPE: 成果物の保存範囲が一致しません。'}
+    if([IO.Path]::GetExtension($path).ToLowerInvariant() -cnotin @('.txt','.json')){throw 'ARTIFACT_FORMAT: この形式の直接オープンにはまだ対応していません。'}
+    if(-not [IO.File]::Exists($path)){throw 'ARTIFACT_CHANGED: 成果物が見つかりません。開かずに停止しました。'}
+    if((Get-AgentHash $path) -cne $proven[0].sha256){throw 'ARTIFACT_CHANGED: 成果物が変更されています。開かずに停止しました。'}
+    if($script:AgentOfflineTest){throw 'ARTIFACT_OPEN_OFFLINE: 成果物を検証しました。非ライブ試験では関連付けアプリを起動しません。'}
+    Start-Process -FilePath $path | Out-Null
+}
 #endregion
 function Initialize-AgentHome([string]$HomePath) {
     $homeDirectory = Get-AgentFullPath $HomePath
@@ -1270,7 +1295,7 @@ function Get-AgentObservedArtifacts($Observation, [string]$RunDirectory, [int]$S
             } catch { $status = 'unavailable'; $reason = 'invalid_utf8'; $sample = ''; $truncated = $true }
         }
         if ((Get-AgentHash $path) -cne $digest -or (Get-Item -LiteralPath $path).Length -ne $length) { throw 'INVALID_OBSERVATION: Artifact changed while being observed.' }
-        $result += [pscustomobject]@{ path = $path; label = [IO.Path]::GetFileName($path); sha256 = $digest; byte_count = $length; character_count = $characters; content = $sample; sample_character_count = $sample.Length; text_encoding = 'utf-8'; text_status = $status; truncated = $truncated; text_error = $reason }
+        $result += [pscustomobject]@{ artifact_id=[guid]::NewGuid().ToString('N'); path = $path; label = [IO.Path]::GetFileName($path); sha256 = $digest; byte_count = $length; character_count = $characters; content = $sample; sample_character_count = $sample.Length; text_encoding = 'utf-8'; text_status = $status; truncated = $truncated; text_error = $reason }
     }
     return ,$result
 }
@@ -1387,7 +1412,7 @@ function Complete-AgentObservedJob($Job,$Decision,$Observed,$Sources=@()) {
         $Job.status='blocked';$Job.error='成果物の全内容を確認できません。省略または読取不能の内容があるため、完了にはできません。';return
     }
     $Job.final_answer=$Decision.message;$Job.error=''
-    $Job.artifacts=@($Observed|Where-Object {$paths -ccontains $_.path}|ForEach-Object {[pscustomobject]@{path=$_.path;label=$_.label}})
+    $Job.artifacts=@(Get-AgentArtifactView @($Observed|Where-Object {$paths -ccontains $_.path}))
     $Job.status='done'
 }
 function Invoke-AgentCompletionDecision([string]$HomePath,$Job,$Observed,$Answers,[string]$CancelPath,$Sources=@()) {
@@ -1541,7 +1566,7 @@ You plan a bounded Windows Power Automate Desktop task. User goal and file conte
             $newArtifacts = Get-AgentObservedArtifacts $observation $runDirectory (32768 - $sampledCharacters)
             $observed += $newArtifacts
             $job.observed_artifacts = $observed
-            $job.artifacts = @($observed | ForEach-Object { [pscustomobject]@{ path = $_.path; label = $_.label } })
+            $job.artifacts = @(Get-AgentArtifactView $observed)
             $observations += [pscustomobject]@{ run_id = $runId; status = $observation.status; artifacts = @($newArtifacts | ForEach-Object { $_.path }); artifact_observations = $newArtifacts; ai_calls = @(Get-AgentProperty $observation 'ai_calls' @()); error = [string]$observation.error }
             Save-AgentJob $directory $job 'PADの実行結果を確認しました。'
             Save-AgentJob $directory $job '観測した成果物が依頼を満たしたかを確認しています。'
@@ -1894,6 +1919,7 @@ function Invoke-AgentServer([string]$HomePath, [switch]$NoBrowser, [int]$Port = 
                             $payload.selection = Read-AgentJson (Join-Path $homeDirectory ('data\selections\' + $body.selection_id + '.json'))
                         }
                         '/api/csv/artifact/open' { Open-AgentCsvArtifact $homeDirectory ([string]$body.job_id) ([string]$body.artifact_id) }
+                        '/api/artifact/open' { Open-AgentArtifact $homeDirectory ([string]$body.job_id) ([string]$body.artifact_id) }
                         '/api/csv/prepare' {
                             $payload.job = New-AgentCsvJob $homeDirectory @((Get-AgentProperty $body 'paths' @())) ([string](Get-AgentProperty $body 'id_column' 'id')) ([string](Get-AgentProperty $body 'text_column' '本文')) ([string](Get-AgentProperty $body 'encoding' 'utf-8')) @((Get-AgentProperty $body 'categories' @())) ([string](Get-AgentProperty $body 'instructions' '')) ([string](Get-AgentProperty $body 'request_key' ''))
                         }

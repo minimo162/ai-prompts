@@ -117,7 +117,7 @@
       <div class="stack">
         <section id="request-section" class="card" aria-labelledby="request-heading">
           <div class="section-heading"><span class="step" aria-hidden="true">01</span><h2 id="request-heading">作業を依頼する</h2></div>
-          <p class="hint capability-note">現在の対応：UTF-8テキストの読取り・新規保存、文字列とリストの処理、条件分岐、AIへの翻訳・要約などの依頼。Excel・PDF・ブラウザー操作はまだ実行できません。専用PADフローの準備が必要です。</p>
+          <p class="hint capability-note">現在の対応：UTF-8テキストの読取り・新規保存、文字列とリストの処理、数値計算・有限ループ、条件分岐、AIへの翻訳・要約などの依頼。Excel・PDF・ブラウザー操作はまだ実行できません。専用PADフローの準備が必要です。</p>
           <form id="request-form">
             <div class="field"><label for="goal">やりたいこと</label><textarea id="goal" name="goal" required maxlength="12000" placeholder="例：文章中の番号を置き換え、結果を新しいファイルにまとめて" aria-describedby="goal-hint"></textarea><p id="goal-hint" class="hint">目的と仕上がり、残したい条件を書いてください。Copilotが手順を考え、PADで実行します。</p></div>
             <div class="field"><label for="target">作業対象のファイル／フォルダー</label><input id="target" name="target" type="text" required maxlength="4000" placeholder="例：C:\Work\対象" spellcheck="false" autocomplete="off" aria-describedby="target-hint"><p id="target-hint" class="hint">読み取るファイル、または作業範囲のフォルダーを指定してください。原本を上書きせず、新しい成果物として保存します。</p></div>
@@ -396,10 +396,10 @@
             const label = document.createElement('p'); label.className = 'artifact-label'; text(label, artifact.label || '成果物 ' + (index + 1));
             const path = document.createElement('code'); path.className = 'artifact-path'; path.tabIndex = 0; text(path, artifact.path);
             item.append(label, path);
-            if (job.workflow === 'csv_classify' && artifact.artifact_id) {
-              text(label, artifact.name);
+            if (job.workflow === 'csv_classify') text(label, artifact.name);
+            if (artifact.artifact_id && artifact.open_supported !== false) {
               const open = document.createElement('button'); open.type = 'button'; text(open, '成果物を開く');
-              open.addEventListener('click', () => mutate('/api/csv/artifact/open', { job_id: job.job_id, artifact_id: artifact.artifact_id }, '検証した成果物を開きました。'));
+              open.addEventListener('click', () => mutate('/api/artifact/open', { job_id: job.job_id, artifact_id: artifact.artifact_id }, '検証した成果物を開きました。'));
               item.append(open);
             }
             fragment.append(item);

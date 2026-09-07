@@ -42,6 +42,7 @@ function Run-Case([string]$Mode,[int]$Rounds=1){
 }
 $job=Run-Case done
 Check ($job.status -ceq 'done' -and $script:plans -eq 1 -and $script:padRuns -eq 1 -and $script:reviews -eq 1) 'Completion ends the first round without another code generation, even at max_rounds=1'
+Check (Test-AgentId $job.artifacts[0].artifact_id) 'Completion retains the observed artifact ID'
 $job=Run-Case continue 2
 Check ($job.status -ceq 'done' -and $script:plans -eq 2 -and $script:padRuns -eq 2) 'An unmet requirement permits another bounded step'
 $job=Run-Case blocked
