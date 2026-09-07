@@ -1,9 +1,15 @@
-# Windows PS5 entrypoint; these results are not live-service or other-PC acceptance.
+﻿# Windows PS5 entrypoint; these results are not live-service or other-PC acceptance.
 [CmdletBinding()]
 param([ValidateSet('Csv','All')][string]$Suite = 'Csv', [switch]$IncludeUi)
 $ErrorActionPreference = 'Stop'
 if ($PSVersionTable.PSVersion.Major -ne 5 -or $PSVersionTable.PSVersion.Minor -ne 1) { throw 'Run with Windows PowerShell 5.1.' }
 $repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
+# Windows PS5 parses BOM-less non-ASCII scripts using the ANSI code page.
+foreach($scriptFile in @(Get-ChildItem -LiteralPath $PSScriptRoot -Filter '*.ps1' -File)){
+    $bytes=[IO.File]::ReadAllBytes($scriptFile.FullName)
+    $hasBom=$bytes.Length -ge 3 -and $bytes[0] -eq 239 -and $bytes[1] -eq 187 -and $bytes[2] -eq 191
+    if(-not $hasBom -and [Text.Encoding]::UTF8.GetString($bytes) -match '[^\x00-\x7F]'){throw ('TEST_ENCODING: UTF-8 BOM is required for '+$scriptFile.Name)}
+}
 $output = Join-Path $repo ('.work\nonlive-' + [guid]::NewGuid().ToString('N'))
 [void][IO.Directory]::CreateDirectory($output)
 $files = @('App.ps1','index.html','業務エージェント.cmd')

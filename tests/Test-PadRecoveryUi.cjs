@@ -36,7 +36,7 @@ function Restore-AgentPadMain {
   await page.goto(base+'/#token='+runtime.token);await page.getByText('アプリに接続済み',{exact:true}).waitFor();
   assert.match(await page.locator('#preservation-warning').innerText(),/クリップボード/);assert.match(await page.locator('#partial-artifacts').innerText(),/未確認の途中ファイル/);checks+=2;
   const wrong=await fetch(base+'/api/pad/recover',{method:'POST',headers:{...headers,'Content-Type':'application/json'},body:JSON.stringify({job_id:jobId,run_id:randomUUID().replaceAll('-',''),backup_sha256:'0'.repeat(64)})}).then(r=>r.json());assert.match(wrong.error,/PAD_RECOVERY_SCOPE/);assert(!fs.existsSync(path.join(home,'mock-restores.txt')));checks+=2;
-  await page.locator('#pad-recover').click();await until(()=>JSON.parse(fs.readFileSync(path.join(jobDir,'job.json'),'utf8')).recovery_required===false,'recovery state');
+  await page.locator('#pad-recover').click();await until(async()=>{const current=await fetch(base+'/api/state',{headers}).then(r=>r.json());assert.equal(current.ok,true);return current.job.recovery_required===false},'recovery state');
   await page.locator('#pad-recover').waitFor({state:'hidden'});assert.match(await page.locator('#preservation-warning').innerText(),/Mainは復元しましたが/);checks++;
   assert.equal(fs.readFileSync(path.join(home,'mock-restores.txt'),'utf8').trim(),'one');assert.equal(fs.readFileSync(path.join(jobDir,'run.claim'),'utf8'),'preserve claim');checks+=2;
   await page.setViewportSize({width:390,height:844});await page.locator('#preservation-section').scrollIntoViewIfNeeded();assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));checks++;
