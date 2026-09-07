@@ -1,0 +1,6 @@
+PowerPoint.LaunchPowerPoint.Launch Instance=> PowerPointInstance
+PowerPoint.AddPowerPointSlide.AddSlideAsLast Instance: PowerPointInstance SlideIndex=> SlideIndex
+PowerPoint.WriteToPowerPoint.WriteToSlideAtPosition Instance: PowerPointInstance Text: $'''OfficeCatalog 日本語 100%%''' AppendNewLine: False SlidePosition: SlideIndex
+PowerPoint.ReadFromPowerPoint.Read Instance: PowerPointInstance PowerPointData=> PowerPointData
+PowerPoint.SavePowerPoint.SaveAs Instance: PowerPointInstance DocumentFormat: PowerPoint.PowerPointFormat.PPTX DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\powerpoint-catalog.pptx'''
+PowerPoint.ClosePowerPoint.Close Instance: PowerPointInstance

@@ -1,0 +1,1 @@
+Pdf.ExtractPages PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' PageSelection: $'''2-3''' ExtractedPDFPath: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\pages-2-3.pdf''' IfFileExists: Pdf.IfFileExists.DoNotModifyFiles ExtractedPDFFile=> ExtractedPDF

@@ -1,0 +1,244 @@
+{
+  "status": "PASS",
+  "candidate_unchanged": true,
+  "candidate_hashes": {
+    "App.ps1": "a29f4bc0757f295a3f4f5e0b2efa4eba1e6851604963b620aab58de3e60c764d",
+    "index.html": "0c9e88a63b9c40cb1b20e96e9d3756b66a74f468e2af7db3b022d56cd129d280",
+    "業務エージェント.cmd": "567c50573e3e3c17a8ed075b07f64dd6ca279a3d41ae8377a611f2fdc34e53e7"
+  },
+  "tests": [
+    {
+      "test": "Test-CsvContracts.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 1464
+    },
+    {
+      "test": "Test-CsvBatch.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 1095
+    },
+    {
+      "test": "Test-CsvLifecycle.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 3348
+    },
+    {
+      "test": "Test-CsvTypedPlan.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 2135
+    },
+    {
+      "test": "Test-CsvReview.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 1926
+    },
+    {
+      "test": "Test-CsvLateResponse.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 1922
+    },
+    {
+      "test": "Test-QualityDraft.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 809
+    },
+    {
+      "test": "Test-OfflineDiagnostic.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 1643
+    },
+    {
+      "test": "Test-ConversationScope.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 562
+    },
+    {
+      "test": "Test-ConnectionContract.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 625
+    },
+    {
+      "test": "Test-AcceptanceGate.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 970
+    },
+    {
+      "test": "Test-App.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 13597
+    },
+    {
+      "test": "Test-Pad.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 22621
+    },
+    {
+      "test": "Test-RobinCatalog.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 1438
+    },
+    {
+      "test": "Test-BoundedRobinLoop.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 851
+    },
+    {
+      "test": "Test-RobinNumberConversion.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 599
+    },
+    {
+      "test": "Test-GeneralJobStart.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 737
+    },
+    {
+      "test": "Test-GeneralArtifactOpen.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 826
+    },
+    {
+      "test": "Test-CompletionDecision.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 2066
+    },
+    {
+      "test": "Test-PadRecovery.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 3667
+    },
+    {
+      "test": "Test-Copilot.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 166895
+    },
+    {
+      "test": "Test-CopilotPlannerV2.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 3223
+    },
+    {
+      "test": "Test-PlannerV2Transport.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 152806
+    },
+    {
+      "test": "Test-Http.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 13263
+    },
+    {
+      "test": "Test-Launcher.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 4466
+    },
+    {
+      "test": "Test-ReleaseBinding.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 9963
+    },
+    {
+      "test": "Test-PublishAgentSource.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 1096
+    },
+    {
+      "test": "Test-PublishCrash.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 1759
+    },
+    {
+      "test": "Test-AiCallProcess.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 3440
+    },
+    {
+      "test": "Test-AiCallProviderFailure.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 4083
+    },
+    {
+      "test": "Test-ClipboardSnapshot.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 416
+    },
+    {
+      "test": "Test-DocumentRobin.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 1201
+    },
+    {
+      "test": "Test-DocumentObservation.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 1104
+    },
+    {
+      "test": "Test-ClipboardReadRetry.ps1",
+      "kind": "Windows PS5 non-live contract/process",
+      "status": "PASS",
+      "elapsed_ms": 1700
+    },
+    {
+      "test": "Test-CsvUi.cjs",
+      "kind": "rendered Edge + PS5 HTTP/child + mock external boundary",
+      "status": "PASS"
+    },
+    {
+      "test": "Test-CopilotDom.cjs",
+      "kind": "rendered Edge + PS5 HTTP/child + mock external boundary",
+      "status": "PASS"
+    },
+    {
+      "test": "Test-GeneralArtifactUi.cjs",
+      "kind": "rendered Edge + PS5 HTTP/child + mock external boundary",
+      "status": "PASS"
+    },
+    {
+      "test": "Test-PadRecoveryUi.cjs",
+      "kind": "rendered Edge + PS5 HTTP/child + mock external boundary",
+      "status": "PASS"
+    },
+    {
+      "test": "Test-CsvCrashUi.cjs",
+      "kind": "rendered Edge + PS5 HTTP/child + mock external boundary",
+      "status": "PASS"
+    }
+  ],
+  "suite_count": 39,
+  "local_evidence": ".work/nonlive-ea4742a24a134873a2fdd8c1364bb723/verification.json",
+  "github_checks": "not_configured",
+  "additional_catalog_check": "44 checks PASS after CSV catalog registration; no product byte changes"
+}

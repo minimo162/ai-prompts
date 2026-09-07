@@ -1,0 +1,1 @@
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\excel-catalog.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelInstance2

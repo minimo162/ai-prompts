@@ -1,0 +1,1 @@
+Pdf.ExtractTextFromPDF.ExtractText PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' DetectLayout: False ExtractedText=> ExtractedPDFText

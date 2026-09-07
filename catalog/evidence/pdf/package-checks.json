@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "catalog_hashes_verified": 66,
+  "pdf_action_kinds": 5,
+  "pdf_variants": 11,
+  "prior_catalog_preserved": true,
+  "prior_prompt_preserved": true,
+  "all_pdf_original_lines_in_prompt": true,
+  "roundtrips_byte_identical": true,
+  "merge_order_finding_explicit": true,
+  "app_executor_verified": false
+}

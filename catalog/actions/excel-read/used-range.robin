@@ -1,0 +1,1 @@
+Excel.ReadFromExcel.ReadAllCells Instance: ExcelInstance2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ExcelData2

@@ -404,6 +404,11 @@
             }
             const snapshots = Array.isArray(job.observed_artifacts) ? job.observed_artifacts : [];
             const observed = artifact.artifact_id && snapshots.find(entry => entry.artifact_id === artifact.artifact_id && entry.path === artifact.path);
+            if (observed && observed.inspection_kind && observed.inspection_kind !== 'utf8_text') {
+              const scope = document.createElement('p'); scope.className = 'hint';
+              text(scope, observed.inspection_kind === 'image_metadata' ? '画像の形式と大きさを確認しています。画像内容・OCRは未確認です。' : '文字や値の内容を確認しています。書式・レイアウトは未確認です。');
+              item.append(scope);
+            }
             if (observed && typeof observed.content === 'string' && ['complete','truncated'].includes(observed.text_status)) {
               const preview = document.createElement('details'); preview.className = 'artifact-preview';
               const summary = document.createElement('summary'); text(summary, observed.truncated ? '実行時に確認した内容（一部）' : '実行時に確認した内容');

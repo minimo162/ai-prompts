@@ -1,0 +1,1 @@
+Pdf.ExtractImagesFromPDF.ExtractImagesFromPage PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' PageNumber: 1 ImagesName: $'''CatalogImage''' ImagesFolder: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\images-page1'''

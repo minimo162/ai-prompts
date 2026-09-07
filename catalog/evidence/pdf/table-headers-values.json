@@ -1,0 +1,62 @@
+[
+  {
+    "name": "#\u001f\u0017\u0018\u0019\u001f",
+    "id": "",
+    "type": "ControlType.HeaderItem"
+  },
+  {
+    "name": "Item",
+    "id": "",
+    "type": "ControlType.HeaderItem"
+  },
+  {
+    "name": "Quantity",
+    "id": "",
+    "type": "ControlType.HeaderItem"
+  },
+  {
+    "name": "Code",
+    "id": "",
+    "type": "ControlType.HeaderItem"
+  },
+  {
+    "name": "0",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "Alpha",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "12",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "A-01",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "1",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "Beta",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "34",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "B-02",
+    "id": "TrimmableTextBlock",
+    "type": "ControlType.Text"
+  }
+]

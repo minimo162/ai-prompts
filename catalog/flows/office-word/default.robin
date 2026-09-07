@@ -1,0 +1,5 @@
+Word.LaunchWord.Launch Visible: True Instance=> WordInstance
+Word.WriteToWord.WriteEndOfDocument Instance: WordInstance Text: $'''OfficeCatalog 日本語 100%%''' AppendNewLine: False
+Word.ReadFromWord.Read Instance: WordInstance WordData=> WordData
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\word-catalog.docx'''
+Word.CloseWord.Close Instance: WordInstance

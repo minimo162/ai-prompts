@@ -1,0 +1,10 @@
+Pdf.ExtractTextFromPDF.ExtractText PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' DetectLayout: False ExtractedText=> PdfTextAll
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 3 DetectLayout: False ExtractedText=> PdfTextRange
+Pdf.ExtractTextFromPDF.ExtractTextFromPage PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' PageNumber: 2 DetectLayout: False ExtractedText=> PdfTextSingle
+Pdf.ExtractTextFromPDF.ExtractTextFromPage PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' PageNumber: 2 DetectLayout: True ExtractedText=> PdfTextLayout
+Pdf.ExtractTablesFromPDF.ExtractTables PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' MultiPageTables: True SetFirstRowAsHeader: True ExtractedPDFTables=> PdfTablesHeaders
+Pdf.ExtractTablesFromPDF.ExtractTables PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' MultiPageTables: True SetFirstRowAsHeader: False ExtractedPDFTables=> PdfTablesRows
+Pdf.ExtractImagesFromPDF.ExtractImages PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' ImagesName: $'''CatalogImage''' ImagesFolder: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\images-all'''
+Pdf.ExtractImagesFromPDF.ExtractImagesFromPage PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' PageNumber: 1 ImagesName: $'''CatalogImage''' ImagesFolder: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\images-page1'''
+Pdf.ExtractPages PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' PageSelection: $'''2-3''' ExtractedPDFPath: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\pages-2-3.pdf''' IfFileExists: Pdf.IfFileExists.DoNotModifyFiles ExtractedPDFFile=> ExtractedPDF
+Pdf.MergeFiles PDFFiles: ['C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf', 'C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-b.pdf'] MergedPDFPath: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\merged-a-b.pdf''' IfFileExists: Pdf.IfFileExists.DoNotModifyFiles PasswordDelimiter: $''',''' MergedPDF=> MergedPDF

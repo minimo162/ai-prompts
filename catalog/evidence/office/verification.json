@@ -1,0 +1,24 @@
+{
+  "status": "PASS_SCOPED_OFFICE_CAPTURE",
+  "new_action_kinds": 17,
+  "new_variants": 22,
+  "base_actions": 16,
+  "base_roundtrip_sha256": "f9beb73b1f3e46e75c985e6000e1d225757ec3ce870b80709ce3b5d02f1c7643",
+  "base_roundtrip_byte_identical": true,
+  "reopen_roundtrip_byte_identical": true,
+  "reopen_results": {
+    "ExcelUsedData": "1 row, 1 column",
+    "ExcelRangeData": "2 rows, 2 columns; A1 OfficeCatalog 日本語 100%; other 3 cells empty",
+    "WordData_preview": "OfficeVerified 日本語 100% ",
+    "PowerPointData_preview": "OfficeCatalog 日本語 100%  ",
+    "source_file_hashes_unchanged": true
+  },
+  "copilot_case": "../../generated/office-three-apps/verification.json",
+  "app_executor_verified": false,
+  "limits": [
+    "Not all Office actions/settings",
+    "No formulas, styling, tables, charts, template or macro coverage",
+    "Power Fx toggle not separately inspected",
+    "Native runtime variable previews include line/paragraph separators; do not trim business data based on these previews"
+  ]
+}

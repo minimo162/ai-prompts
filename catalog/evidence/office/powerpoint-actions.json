@@ -1,0 +1,50 @@
+{
+  "scope": "Currently observed PowerPoint category; not a cross-version exhaustive reference",
+  "pad_file_version": "2.71.115.26224",
+  "actions": [
+    {
+      "name": "PowerPoint",
+      "id": "PowerPoint"
+    },
+    {
+      "name": "Launch PowerPoint",
+      "id": "PowerPoint.LaunchPowerPoint"
+    },
+    {
+      "name": "Add slide to PowerPoint",
+      "id": "PowerPoint.AddPowerPointSlide"
+    },
+    {
+      "name": "Save PowerPoint",
+      "id": "PowerPoint.SavePowerPoint"
+    },
+    {
+      "name": "Close PowerPoint",
+      "id": "PowerPoint.ClosePowerPoint"
+    },
+    {
+      "name": "Delete slide from PowerPoint",
+      "id": "PowerPoint.DeletePowerPointSlide"
+    },
+    {
+      "name": "Copy and paste slide in PowerPoint",
+      "id": "PowerPoint.CopyPastePowerPointSlide"
+    },
+    {
+      "name": "Attach to running PowerPoint",
+      "id": "PowerPoint.AttachToRunningPowerPoint"
+    },
+    {
+      "name": "Move PowerPoint slide",
+      "id": "PowerPoint.MovePowerPointSlide"
+    },
+    {
+      "name": "Read from PowerPoint",
+      "id": "PowerPoint.ReadFromPowerPoint"
+    },
+    {
+      "name": "Write to PowerPoint",
+      "id": "PowerPoint.WriteToPowerPoint"
+    }
+  ]
+}

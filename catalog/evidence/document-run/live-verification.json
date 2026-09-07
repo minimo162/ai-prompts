@@ -1,0 +1,157 @@
+{
+  "status": "PASS_SCOPED_CASES",
+  "cases": [
+    {
+      "case": "document-live-office-03",
+      "status": "PASS_THIS_CASE",
+      "candidate_hashes": {
+        "App.ps1": "a29f4bc0757f295a3f4f5e0b2efa4eba1e6851604963b620aab58de3e60c764d",
+        "index.html": "0c9e88a63b9c40cb1b20e96e9d3756b66a74f468e2af7db3b022d56cd129d280",
+        "業務エージェント.cmd": "567c50573e3e3c17a8ed075b07f64dd6ca279a3d41ae8377a611f2fdc34e53e7"
+      },
+      "job_id": "6e66185519c44674be1b210fef90753e",
+      "pad_runs": 1,
+      "completion_reviews": 1,
+      "elapsed_ms": 112395,
+      "clipboard": "restored",
+      "input_preserved": true,
+      "flow_sha256": "a7375ea9eb7be2ddf6fb94948c513a8f2459d8c5abb61077f1c4587af95d7f89",
+      "submitted_sha256": "0fc69ab87539328c6b1ec3089538dc67dce4c620af1f0b4a04faf4006d81bd98",
+      "artifacts": [
+        {
+          "name": "office.pptx",
+          "sha256": "e9ad219801844121e9ac0437c46b14ed3762567c5ef6419e6dde495e2105cc9f",
+          "bytes": 34114
+        },
+        {
+          "name": "office.xlsx",
+          "sha256": "7cb79941fd1fac742b7995dc25025a6c864abe7b63ec343322f10be48d62af14",
+          "bytes": 9019
+        },
+        {
+          "name": "office.docx",
+          "sha256": "8e38d7b7c5e1eed28cfc48007c09174b222890689dd63af63c0663bcd0c1303f",
+          "bytes": 13649
+        }
+      ],
+      "checks": {
+        "office.pptx": {
+          "slides": 1,
+          "text": "AutoRunOffice 731"
+        },
+        "office.xlsx": {
+          "A1": "AutoRunOffice 731"
+        },
+        "office.docx": {
+          "text": "AutoRunOffice 731"
+        }
+      },
+      "ui_evidence_local": ".work\\document-live-office-03\\run-1788796212166\\result.png"
+    },
+    {
+      "case": "document-live-pdf-01",
+      "status": "PASS_THIS_CASE",
+      "candidate_hashes": {
+        "App.ps1": "a29f4bc0757f295a3f4f5e0b2efa4eba1e6851604963b620aab58de3e60c764d",
+        "index.html": "0c9e88a63b9c40cb1b20e96e9d3756b66a74f468e2af7db3b022d56cd129d280",
+        "業務エージェント.cmd": "567c50573e3e3c17a8ed075b07f64dd6ca279a3d41ae8377a611f2fdc34e53e7"
+      },
+      "job_id": "601bcc4f72b846ba8633e9149aa8b362",
+      "pad_runs": 1,
+      "completion_reviews": 1,
+      "elapsed_ms": 109191,
+      "clipboard": "restored",
+      "input_preserved": true,
+      "flow_sha256": "6d04acf9e503f766179e4dffc9a766c9b12dd7ab5f1a32887841222a35673480",
+      "submitted_sha256": "3fe2f2dcbe663f1b589c02135f85ed38c47b70047dea698852148ea64d368226",
+      "artifacts": [
+        {
+          "name": "all.txt",
+          "sha256": "d5228721fcbaaa4e7d6ef1bbde5296c7dd76d36932eb137e2804257405581fd8",
+          "bytes": 301
+        },
+        {
+          "name": "first.pdf",
+          "sha256": "a8b94ab4d638cde405d4749dc9af867200ad18e4a2828a431de07bffff6a8609",
+          "bytes": 20759
+        },
+        {
+          "name": "merged.pdf",
+          "sha256": "c91f59cd9328ee8e96bdd2c9610a652e192115ce9012c729033bc1aebcefa678",
+          "bytes": 41162
+        },
+        {
+          "name": "rest.pdf",
+          "sha256": "4f69b78bb0e4a87abf4dfd39eb8929fbe95f7e2b977806c8c73608a39f94b0e4",
+          "bytes": 20834
+        },
+        {
+          "name": "table.csv",
+          "sha256": "dfbea19f64a28264169dc37fa5d1f8b5d2f26df373642c4a6aacbe20d846f2fc",
+          "bytes": 50
+        },
+        {
+          "name": "pic_0.png",
+          "sha256": "db9e09759b3b636e834e6390a80657e9ea46978d95ca9200a18692270575ae00",
+          "bytes": 329
+        },
+        {
+          "name": "manifest.json",
+          "sha256": "4e558b14d2c82ef65fe5263da75326d8515208644f202e5b2bf50c6f7887c1c9",
+          "bytes": 326
+        }
+      ],
+      "checks": {
+        "first.pdf": {
+          "page_tokens": [
+            "A1"
+          ],
+          "pages": 1
+        },
+        "rest.pdf": {
+          "page_tokens": [
+            "A2",
+            "A3"
+          ],
+          "pages": 2
+        },
+        "merged.pdf": {
+          "page_tokens": [
+            "A1",
+            "A2",
+            "A3"
+          ],
+          "pages": 3
+        },
+        "table.csv": {
+          "rows": [
+            [
+              "Item",
+              "Quantity",
+              "Code"
+            ],
+            [
+              "Alpha",
+              "12",
+              "A-01"
+            ],
+            [
+              "Beta",
+              "34",
+              "B-02"
+            ]
+          ]
+        },
+        "images": {
+          "count": 1,
+          "size": [
+            160,
+            80
+          ]
+        }
+      },
+      "ui_evidence_local": ".work\\document-live-pdf-01\\run-1788796498581\\result.png"
+    }
+  ],
+  "scope": "Synthetic fixtures on this PC. Content representation only; not visual layout, other-PC or production acceptance."
+}

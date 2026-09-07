@@ -8,7 +8,11 @@ CMDからローカルへ同期して起動する、Windows PowerShell + HTML の
 
 画面は「やりたいこと」と「作業対象」から依頼する構成です。PAD左パネルから採取した[Robinカタログ](catalog/README.md)を根拠に、プロンプトと検証器を広げています。現在の追加対応はリスト作成・文字列項目追加、テキスト置換・分割・結合、数値変換・書式化・有限ループです。未定義変数や分岐後の不確かな型は実行前に拒否します。正規表現置換を含む1ケースでは、新UI→実M365→PAD実行1回→入力/出力を比較する完了判断→DONEまで約80秒で確認しました。[実機記録と未完了範囲](docs/general-agent-live-2026-09-07.md)を参照してください。他の操作や複数業務全般の受入は継続中です。
 
-CSV分類は「CSVの定型分類」を開いて使う補助機能です。対象・列・文字コード・分類条件・送信範囲を確認して開始します。CSV処理にはPADは不要です。過去の実装と未完了の受入は[実装状況](docs/issues-8-14-progress.md)、新しい汎用化の範囲は[採取・接続の方針](docs/robin-action-catalog.md)を参照してください。Excel・PDF・ブラウザー等への拡張はこれからです。
+Office用の[Robin生成プロンプト](pad-robin-prompts.md)には、PAD左欄から採取したExcel・Word・PowerPointの17種類・22設定例を収録しました。採取形式をアプリの検証器・成果物観測へ接続し、新規3形式の作成は画面から開始してDONEまで確認しています。[現在の接続範囲と実機結果](docs/document-run-checkpoint-2026-09-08.md)を参照してください。
+
+PDFの5種類・11設定例も同じプロンプトに収録しました。テキスト・表・画像の抽出とページ抽出・統合を実機で検査しています。この環境では2ファイルの統合が入力リストと逆順になる挙動があり、[PDF採取記録](docs/pdf-action-capture.md)に条件と結果を記載しています。
+
+CSV分類は「CSVの定型分類」を開いて使う補助機能です。対象・列・文字コード・分類条件・送信範囲を確認して開始します。CSV処理にはPADは不要です。過去の実装と未完了の受入は[実装状況](docs/issues-8-14-progress.md)、新しい汎用化の範囲は[採取・接続の方針](docs/robin-action-catalog.md)を参照してください。Office・PDFは限定した形式で自動Runへ接続しました。ブラウザー等と、既存文書・他環境での受入は継続中です。
 
 ## 配布と起動
 
@@ -106,3 +110,10 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File .\App.ps1 -Mode Ser
 仕様: [Issue #5](https://github.com/minimo162/ai-prompts/issues/5)。Robinの元プロンプト: [pad-robin-prompts.md](pad-robin-prompts.md)。
 
 一般仕様の確認先: [PADデザイナーのコピー・保存](https://learn.microsoft.com/en-us/power-automate/desktop-flows/designer-workspace)、[スクリプト実行アクション](https://learn.microsoft.com/en-us/power-automate/desktop-flows/actions-reference/scripting)、[Edge DevTools Protocol](https://learn.microsoft.com/en-us/microsoft-edge/devtools/protocol/)。これらは本アプリの実機合格証拠ではありません。
+
+
+## アプリ接続の追記（2026-09-08）
+
+上記の採取時点の「自動Run未接続／未検証」は、その後の実装で更新しました。Office/PDFの採取形式を検証器・出力観測・完了判定へ接続し、Office3ファイル作成とPDF各操作の2ケースをアプリ開始からDONEまで確認しました。PDF表は追加採取したCSV書出しで保存します。現在のカタログは34種類・51設定です。
+
+検証範囲・制約・先行失敗・未完了事項は [自動Run接続チェックポイント](docs/document-run-checkpoint-2026-09-08.md) を参照してください。既存Office文書の自動Run、書式・レイアウト、別PC・社内受入は未確認です。

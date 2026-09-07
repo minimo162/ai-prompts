@@ -7,6 +7,25 @@ function Reject([string]$Text,[string]$Code){$message='';try{$null=Test-AgentRob
 $catalog=Read-AgentJson (Join-Path $PSScriptRoot '..\catalog\index.json')
 foreach($flow in $catalog.flows){
     $code=[IO.File]::ReadAllText((Join-Path $PSScriptRoot ('..\catalog\'+$flow.robin_path)));$job.target=$root
+    if ((Get-AgentProperty $flow 'controller_support' '') -eq 'validated_subset') {
+        # Scope/lifecycle contract only. Native document contents are tested separately.
+        $inputs=Join-Path $root 'document-inputs';$outputs=Join-Path $root 'artifacts'
+        [void][IO.Directory]::CreateDirectory($inputs);[void][IO.Directory]::CreateDirectory($outputs)
+        foreach($name in @('excel-catalog.xlsx','word-catalog.docx','powerpoint-catalog.pptx','source-a.pdf','source-b.pdf')){
+            $fixture=Join-Path $inputs $name;if(-not [IO.File]::Exists($fixture)){[IO.File]::WriteAllText($fixture,'contract fixture, not a live document')}
+        }
+        $literal='\$\x27{3}(?:[^\x27\\\r\n]|\\[\\\x27\x22])*\x27{3}'
+        $code=[regex]::Replace($code,'(DocumentPath|ExtractedPDFPath|MergedPDFPath|ImagesFolder|CSVFile): ('+$literal+')',[Text.RegularExpressions.MatchEvaluator]{param($m)
+            $path=ConvertFrom-AgentRobinLiteral $m.Groups[2].Value
+            return $m.Groups[1].Value+': '+(ConvertTo-AgentRobinLiteral (Join-Path $outputs ([IO.Path]::GetFileName($path))))
+        })
+        foreach($sourceRoot in @('C:\\Temp\\AiPromptsOfficeCatalog_20260907\\','C:\\Temp\\AiPromptsPdfCatalog_20260907\\')){$code=$code.Replace($sourceRoot,($inputs+'\').Replace('\','\\'))}
+    }
+    # Native PAD captures are syntax evidence, not automatic controller permission.
+    if ((Get-AgentProperty $flow 'controller_support' '') -eq 'not_implemented') {
+        Reject $code ROBIN_ACTION
+        continue
+    }
     if(Get-AgentProperty $flow 'input_scope' ''){
         # Substitute only the captured file-path literal for this local contract test.
         # The copied Robin evidence itself remains byte-identical.

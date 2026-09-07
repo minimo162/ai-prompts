@@ -1,0 +1,1 @@
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 3 DetectLayout: False ExtractedText=> ExtractedPDFText
