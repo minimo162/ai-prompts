@@ -1,0 +1,4 @@
+SET NewVar2 TO 0
+LOOP LoopIndex FROM 1 TO 3 STEP 1
+    Variables.IncreaseVariable Value: NewVar2 IncrementValue: LoopIndex
+END

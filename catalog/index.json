@@ -298,6 +298,133 @@
         "re_pasted": false,
         "executed_in_flow": "text-split-join-comma"
       }
+    },
+    {
+      "id": "loop-one-to-three",
+      "category": "ループ",
+      "ui_name": "Loop",
+      "ui_automation_id": "LanguageConstructs.Loop",
+      "variant": "constant-range",
+      "settings": {
+        "開始値": "1",
+        "終了": "3",
+        "増分": "1"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LoopIndex",
+          "kind": "number"
+        }
+      ],
+      "robin_path": "actions/loop/one-to-three.robin",
+      "sha256": "196389de7aefd0a683cd61ff507d8b83154a09312cef25b509e19b1086f85c78",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "bounded-loop-count"
+      }
+    },
+    {
+      "id": "variables-set-zero",
+      "category": "変数",
+      "ui_name": "変数の設定",
+      "ui_automation_id": "LanguageConstructs.Assign",
+      "variant": "integer-zero",
+      "settings": {
+        "変数": "NewVar2",
+        "値:": "0"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NewVar2",
+          "kind": "number"
+        }
+      ],
+      "robin_path": "actions/variables-set/numeric-zero.robin",
+      "sha256": "9df7f4bd80aac4395ad58da2319901f725562426f254c1a5e1633e008fb0a2ca",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "bounded-loop-count"
+      }
+    },
+    {
+      "id": "variables-increase-one",
+      "category": "変数",
+      "ui_name": "変数を大きくする",
+      "ui_automation_id": "Variables.IncreaseVariable",
+      "variant": "integer-one",
+      "settings": {
+        "変数名": "%NewVar2%",
+        "大きくする数値": "1"
+      },
+      "inputs": [
+        {
+          "name": "NewVar2",
+          "kind": "existing_number"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "NewVar2",
+          "kind": "modified_number"
+        }
+      ],
+      "robin_path": "actions/variables-increase/one.robin",
+      "sha256": "06beae55ef783422555bdd50d2f0c797459c5278b8de71b16e4f44db41626417",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "bounded-loop-count"
+      }
+    },
+    {
+      "id": "variables-increase-index",
+      "category": "変数",
+      "ui_name": "変数を大きくする",
+      "ui_automation_id": "Variables.IncreaseVariable",
+      "variant": "numeric-variable",
+      "settings": {
+        "変数名": "%NewVar2%",
+        "大きくする数値": "%LoopIndex%"
+      },
+      "inputs": [
+        {
+          "name": "NewVar2",
+          "kind": "existing_number"
+        },
+        {
+          "name": "LoopIndex",
+          "kind": "existing_number"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "NewVar2",
+          "kind": "modified_number"
+        }
+      ],
+      "robin_path": "actions/variables-increase/loop-index.robin",
+      "sha256": "13c18537b84b2444a1b1c62bb63d9eacafd2ee5ec1d610cc8acd297903eee522",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "bounded-loop-sum"
+      }
     }
   ],
   "flows": [
@@ -496,6 +623,66 @@
       ],
       "variable_evidence": "evidence/text-split-join-space-final.json",
       "variable_evidence_sha256": "10cbfbf556fa638abbccb90b81985c2f1ce8dd207b8ca643fa942dcd1df2234b",
+      "copilot_generated": false,
+      "app_executor_verified": false
+    },
+    {
+      "id": "bounded-loop-count",
+      "robin_path": "flows/bounded-loop/default.robin",
+      "sha256": "7636f319e3aa1b5e185b0de9819f813d58e8fbb95e5aba5d390782ee97cd5383",
+      "action_ids": [
+        "variables-set-zero",
+        "loop-one-to-three",
+        "variables-increase-one"
+      ],
+      "action_count": 4,
+      "action_count_includes_block_end": true,
+      "native_flow_name": "RobinCatalog_20260907",
+      "native_subflow": "LoopSamples",
+      "entry_point": "context menu start from first action with default values",
+      "run_invocations": 1,
+      "observed_variables": [
+        {
+          "name": "NewVar2",
+          "preview": "3"
+        },
+        {
+          "name": "LoopIndex",
+          "preview": "4"
+        }
+      ],
+      "variable_evidence": "evidence/bounded-loop-variables.json",
+      "variable_evidence_sha256": "5886458b80bf8d214f69ab248fb48070885bf193299236723c645e16101972a8",
+      "copilot_generated": false,
+      "app_executor_verified": false
+    },
+    {
+      "id": "bounded-loop-sum",
+      "robin_path": "flows/bounded-loop/sum-index.robin",
+      "sha256": "483c6437971cb53861a4d95af1034fc7e87aea1fc3f3a964ebf3338e31ddd3a6",
+      "action_ids": [
+        "variables-set-zero",
+        "loop-one-to-three",
+        "variables-increase-index"
+      ],
+      "action_count": 4,
+      "action_count_includes_block_end": true,
+      "native_flow_name": "RobinCatalog_20260907",
+      "native_subflow": "LoopSamples",
+      "entry_point": "context menu start from first action with default values",
+      "run_invocations": 1,
+      "observed_variables": [
+        {
+          "name": "NewVar2",
+          "preview": "6"
+        },
+        {
+          "name": "LoopIndex",
+          "preview": "4"
+        }
+      ],
+      "variable_evidence": "evidence/bounded-loop-sum-variables.json",
+      "variable_evidence_sha256": "d6029fe4512585ee7c3efd00fc209688c8f6408f07ebcd09ad9e2172af2981f0",
       "copilot_generated": false,
       "app_executor_verified": false
     }

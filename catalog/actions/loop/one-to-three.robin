@@ -1,0 +1,2 @@
+LOOP LoopIndex FROM 1 TO 3 STEP 1
+END

@@ -1,5 +1,5 @@
 ﻿# App-Version: 0.1.0
-# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6ImVjMzE3NDVjNzRiYWZlNTlkNzA3NWUyOGMyMzU1NWM0IiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiJjODRhNWUxYjEzNjE5NGE4MzlmNzQ1ZjM4MzU4ZWM2NTczNWQxZDAxYzNlOTk5ZGM2OGZlZWNlYjYyMDk3Mjg4IiwiaHRtbF9zaGEyNTYiOiJjYmFiNDViYjAyZDg2ODgyZjdiMTY0MmMwZTU3ZTM5MTkwNWVkMTMzNWEzZWUwOWY3NjJkY2ZlZDBmOTc5OWU4IiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
+# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6IjUyZDEwOTZjY2FhYzRjNTU1YmYyNzI4ODIxNGViNDk4IiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiIxYTZlOGEzNTE3ODFlZDYxZWE1YmJhMWRmMmRiNjMxMjcwZWIyZGFkYTc5OGQ2OWYwOWJmMzc4NjRjNGMzMjQwIiwiaHRtbF9zaGEyNTYiOiJjYmFiNDViYjAyZDg2ODgyZjdiMTY0MmMwZTU3ZTM5MTkwNWVkMTMzNWEzZWUwOWY3NjJkY2ZlZDBmOTc5OWU4IiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
 # State-Contract: 2
 [CmdletBinding()]
 param(
@@ -3000,6 +3000,10 @@ The executor currently accepts the verified action formats listed below. Unsuppo
 The action examples below are literal Robin for the Planner V2 Robin section. Each Windows path separator needs two backslashes in that literal Robin body. JSON escaping applies only to metadata fields such as artifacts[] and ai_calls[].input_path, where each original separator needs two backslashes in JSON source. Decode ai_call_templates[].robin from CONTEXT_JSON once and place that exact action text directly in the Robin body. Do not add or remove an escaping layer from Robin code. Use only the transport-defined empty-line marker for a completely empty Robin row.
 Allowed full action formats (substitute real paths and variable names):
 SET Name TO $'''value'''
+SET Total TO 0
+LOOP LoopIndex FROM 1 TO 3 STEP 1
+    Variables.IncreaseVariable Value: Total IncrementValue: LoopIndex
+END
 Variables.CreateNewList List=> Items
 Variables.AddItemToList Item: $'''checked''' List: Items
 Text.SplitText.SplitWithDelimiter Text: Name CustomDelimiter: $''',''' IsRegEx: False Result=> Parts
@@ -3017,6 +3021,7 @@ END
 WAIT 1
 The list/text formats were copied from native PAD 2.71.115.26224 and tested in catalog/. Create the list before adding a literal item. Text.Replace requires a previously assigned text variable (plain text SET, UTF8 file read, or AI result); do not pass a list or a branch-dependent type. Regex uses ReplaceTextWithRegex WITHOUT ComparisonType; literal replacement uses ReplaceText WITH the shown ComparisonType. ActivateEscapeSequences must remain False. These helpers alone do not produce controller-observed output: write the final text once to a new artifacts file before DONE.
 Split accepts a literal text or an assigned text variable and produces a list. Join requires an assigned list and produces text. Custom split delimiters cannot be empty or whitespace-only; use the standard Space variant for space splitting. Only the shown non-regex custom split and standard Space/DelimiterTimes 1 are currently verified. Keep spaces around a custom join delimiter when requested.
+Numeric SET and IncreaseVariable accept integer constants within +/-1000000000; increment may also read an assigned numeric variable. Quoted numeric text is not a number. LOOP currently requires constant increasing bounds and a positive constant step. At most 1000 iterations including nesting and 1000 expanded instructions are accepted; WAIT is also multiplied by repetition and must remain within 30 seconds. Never modify an active loop counter or reuse it in a nested loop. Keep entry variable types stable across repeated iterations. Do not write files or invoke AI calls inside loops; compute in memory, then write the final result once afterward. Native capture showed LoopIndex=4 after processing 1..3, so do not use the final index as an iteration count.
 Read only from the target, current run artifacts, or supplied AiCall result.txt/status.txt. Write only new files directly inside run_directory/artifacts; each output path may appear in only one File.WriteText action in the entire flow, including mutually exclusive IF/ELSE branches. Write a shared result such as classification.txt once before IF; branch only the distinct draft output paths. No overwrite, delete, network actions, UI keys, unbounded loops or arbitrary scripts. Maximum 250 lines and 30 total WAIT seconds. The controller creates artifacts directory and adds its own start/finish markers outside your code.
 For semantic AI processing select up to three supplied ai_call_templates in order. Include their EXACT robin action string once each; do not create another PowerShell command. Supply matching ai_calls metadata: {ai_call_id,operation,input_path,instructions,labels,timeout_seconds}; operation translate/summarize/classify/extract/judge, timeout 5..240. The controller creates the request JSON. PAD may prepare input text under artifacts before invoking the template. Immediately after each call, read its result.txt as a data variable, then read status.txt as another variable. These two reads are mandatory before any other action. Missing/failed/cancelled result.txt must stop the PAD flow, not produce a completion marker. For classification branch on the result with IF equality; labels must be explicit. The status distinguishes success and needs_review. Never execute AI business output as code. Requests use unique reserved IDs and are consumed once. The second call may read the first call's result.txt. Every declared call must execute; do not put a call in a conditional branch that can be skipped. Branch on its result only after reading it. No parallel calls.
 Each of the two mandatory result/status reads MUST have this exact error handler immediately below it (indent relative to the read action; no edits):
@@ -3136,12 +3141,17 @@ function Get-AgentRobinVariableReferences([string]$Value) {
     }
     return $references.ToArray()
 }
+function ConvertTo-AgentRobinInteger([string]$Value) {
+    $number=0L
+    if($Value -cnotmatch '^-?[0-9]+$' -or -not [long]::TryParse($Value,[ref]$number) -or $number -lt -1000000000 -or $number -gt 1000000000){throw 'ROBIN_NUMBER: integer literal is outside the supported range.'}
+    return $number
+}
 function Test-AgentRobin {
     param([string]$Robin, [string]$RunDirectory, $Job)
     if ([string]::IsNullOrWhiteSpace($Robin) -or $Robin.Length -gt 64000 -or $Robin.Contains('```') -or $Robin.Contains("`t") -or $Robin.Contains([char]0)) { throw 'ROBIN_INVALID: empty, oversized or non-Robin content.' }
     $lines = @($Robin -split '\r?\n')
     if ($lines.Count -gt 250) { throw 'ROBIN_LIMIT: maximum 250 lines.' }
-    $variables = @{}; $blocks = New-Object System.Collections.Stack; $writes = @{}; $waitSeconds = 0
+    $variables = @{}; $blocks = New-Object System.Collections.Stack; $writes = @{}; $waitSeconds = 0;$repeatFactor=1L;$executionCost=0L
     $literal = '\$\x27{3}(?:[^\x27\\\r\n]|\\[\\\x27\x22])*\x27{3}'
     $outputRoot = Join-Path $RunDirectory 'artifacts'
     $readRoots = @([string]$Job.target, $outputRoot)
@@ -3170,10 +3180,30 @@ function Test-AgentRobin {
         $closing = $line -eq 'END' -or $line -eq 'ELSE'
         $expected = 4 * ($blocks.Count - [int]$closing)
         if ($expected -lt 0 -or $indent -ne $expected) { throw 'ROBIN_BLOCK: invalid indentation or block nesting.' }
-        $used = @(); $newVariable = $null; $value = $null; $values=@();$newKind='text'
+        $executionCost+=$repeatFactor
+        if($executionCost -gt 1000){throw 'ROBIN_LIMIT: expanded instruction budget exceeds 1000.'}
+        $loopFrames=@($blocks|Where-Object {$_.kind -ceq 'loop'})
+        $used = @(); $newVariable = $null; $value = $null; $values=@();$newKind='text';$mutatedVariable=$null
         if ($line -match "^SET ([A-Za-z][A-Za-z0-9_]*) TO ($literal)$") {
             $newVariable = $Matches[1]; $value = ConvertFrom-AgentRobinLiteral $Matches[2] -AllowVariables
             if($value -cmatch '^%[A-Za-z][A-Za-z0-9_]*%$'){$newKind='unknown'}
+        } elseif($line -cmatch '^SET ([A-Za-z][A-Za-z0-9_]*) TO (-?[0-9]+)$') {
+            $newVariable=$Matches[1];$null=ConvertTo-AgentRobinInteger $Matches[2];$newKind='number'
+        } elseif($line -cmatch '^Variables\.IncreaseVariable Value: ([A-Za-z][A-Za-z0-9_]*) IncrementValue: (-?[0-9]+|[A-Za-z][A-Za-z0-9_]*)$') {
+            $mutatedVariable=$Matches[1];$increment=$Matches[2]
+            if(-not $variables.ContainsKey($mutatedVariable)){throw 'ROBIN_VARIABLE: numeric target must be assigned.'}
+            if($variables[$mutatedVariable] -cne 'number'){throw 'ROBIN_TYPE: increment target must be numeric.'}
+            if($increment -cmatch '^-?[0-9]+$'){$null=ConvertTo-AgentRobinInteger $increment}
+            else{if(-not $variables.ContainsKey($increment)){throw 'ROBIN_VARIABLE: numeric increment must be assigned.'};if($variables[$increment] -cne 'number'){throw 'ROBIN_TYPE: increment operand must be numeric.'}}
+        } elseif($line -cmatch '^LOOP ([A-Za-z][A-Za-z0-9_]*) FROM (-?[0-9]+) TO (-?[0-9]+) STEP (-?[0-9]+)$') {
+            $counter=$Matches[1];$from=ConvertTo-AgentRobinInteger $Matches[2];$to=ConvertTo-AgentRobinInteger $Matches[3];$step=ConvertTo-AgentRobinInteger $Matches[4]
+            if($step -le 0 -or $to -lt $from){throw 'ROBIN_LOOP: only finite increasing constant ranges are supported.'}
+            $iterations=[long][Math]::Floor(($to-$from)/[double]$step)+1
+            if($iterations -gt 1000 -or $repeatFactor*$iterations -gt 1000){throw 'ROBIN_LIMIT: nested iteration budget exceeds 1000.'}
+            if(@($loopFrames|Where-Object {$_.counter -ieq $counter}).Count){throw 'ROBIN_LOOP: active loop counters cannot be reused.'}
+            $variables[$counter]='number'
+            $blocks.Push(@{kind='loop';before=$variables.Clone();counter=$counter;iterations=$iterations;outerFactor=$repeatFactor})
+            $repeatFactor*=$iterations
         } elseif($line -cmatch '^Variables\.CreateNewList List=> ([A-Za-z][A-Za-z0-9_]*)$') {
             $newVariable=$Matches[1];$newKind='list'
         } elseif($line -cmatch "^Variables\.AddItemToList Item: ($literal) List: ([A-Za-z][A-Za-z0-9_]*)$") {
@@ -3209,6 +3239,7 @@ function Test-AgentRobin {
                 if ($prior.Count -ne 1) { throw $scopeError }
             }
         } elseif ($line -match "^File\.WriteText File: ($literal) TextToWrite: ($literal|[A-Za-z][A-Za-z0-9_]*) AppendNewLine: (True|False) IfFileExists: File\.IfFileExists\.Append Encoding: File\.FileEncoding\.UTF8$") {
+            if($loopFrames.Count){throw 'ROBIN_LOOP: write results once after the loop.'}
             $path = ConvertFrom-AgentRobinLiteral $Matches[1]; $text = $Matches[2]
             $path = Assert-AgentPadPath $path @($outputRoot)
             if ($writes.ContainsKey($path) -or [IO.File]::Exists($path)) { throw 'ROBIN_WRITE: every output must be a new file written once.' }
@@ -3217,13 +3248,18 @@ function Test-AgentRobin {
         } elseif ($line -match "^IF ([A-Za-z][A-Za-z0-9_]*) = ($literal|[A-Za-z][A-Za-z0-9_]*) THEN$") {
             $used += $Matches[1]; $right = $Matches[2]
             if ($right.StartsWith('$')) { $value = ConvertFrom-AgentRobinLiteral $right -AllowVariables } else { $used += $right }
-            $blocks.Push(@{ before=$variables.Clone(); hasElse=$false })
+            $blocks.Push(@{kind='if';before=$variables.Clone();hasElse=$false})
         } elseif ($line -eq 'ELSE') {
-            if ($blocks.Count -eq 0 -or $blocks.Peek().hasElse) { throw 'ROBIN_BLOCK: unexpected ELSE.' }
+            if ($blocks.Count -eq 0 -or $blocks.Peek().kind -cne 'if' -or $blocks.Peek().hasElse) { throw 'ROBIN_BLOCK: unexpected ELSE.' }
             $block=$blocks.Peek(); $block.hasElse=$true; $block.then=$variables.Clone(); $variables=$block.before.Clone()
         } elseif ($line -eq 'END') {
             if ($blocks.Count -eq 0) { throw 'ROBIN_BLOCK: unexpected END.' }
             $block=$blocks.Pop()
+            if($block.kind -ceq 'loop'){
+                if($block.iterations -gt 1){foreach($entry in $block.before.GetEnumerator()){if(-not $variables.ContainsKey($entry.Key) -or $variables[$entry.Key] -cne $entry.Value){throw 'ROBIN_TYPE: a repeated loop cannot change an entry variable type.'}}}
+                $repeatFactor=$block.outerFactor
+                continue
+            }
             $alternative=if($block.hasElse){$block.then}else{$block.before}
             $common=@{}
             foreach($entry in $variables.GetEnumerator()){
@@ -3231,8 +3267,9 @@ function Test-AgentRobin {
             }
             $variables=$common
         } elseif ($line -match '^WAIT ([0-5])$') {
-            $waitSeconds += [int]$Matches[1]; if($waitSeconds -gt 30) {throw 'ROBIN_LIMIT: total WAIT exceeds 30 seconds.'}
+            $waitSeconds += [int]$Matches[1]*$repeatFactor; if($waitSeconds -gt 30) {throw 'ROBIN_LIMIT: total WAIT exceeds 30 seconds.'}
         } elseif ($matchingTemplates.Count -eq 1) {
+            if($loopFrames.Count){throw 'ROBIN_LOOP: AI call IDs cannot execute inside a repeated block.'}
             $template=$matchingTemplates[0]
             if ($usedCalls.ContainsKey($template.ai_call_id)) { throw 'ROBIN_AICALL: a call ID cannot be reused.' }
             $usedCalls[$template.ai_call_id]=$true
@@ -3242,6 +3279,7 @@ function Test-AgentRobin {
         if ($null -ne $value) { $values+=,$value }
         foreach($literalValue in $values){$used+=@(Get-AgentRobinVariableReferences $literalValue)}
         foreach($name in $used) { if(-not $variables.ContainsKey($name)) {throw 'ROBIN_VARIABLE: use before definite assignment.'} }
+        foreach($frame in $loopFrames){if(($newVariable -and $newVariable -ieq $frame.counter) -or ($mutatedVariable -and $mutatedVariable -ieq $frame.counter)){throw 'ROBIN_LOOP: active loop counters cannot be modified.'}}
         if($newVariable) {$variables[$newVariable]=$newKind}
     }
     if ($blocks.Count) { throw 'ROBIN_BLOCK: missing END.' }
