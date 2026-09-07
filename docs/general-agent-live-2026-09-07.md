@@ -72,3 +72,17 @@
 - 出力は改行なしの`6`、UTF-8 BOM付き4バイト。SHA256 `d3d1d98df443947ab0b52378acbb5f5c21593677b45f0403b3831c93d8be7fca`、クリップボードrestored。
 
 証拠は`.work/general-live-06/run-1788747019879/measurement.json`/`result.png`、`.work/general-live-06/verification.json`、ジョブ`0a04bea5834d4096a97628b30c7b3aad`。ループ境界20項目、カタログ35項目、PAD契約335項目もPASSしました。下降・可変範囲、For each、他カテゴリ、別PCは未検証です。
+
+## 文字列の数値変換と書式化
+
+`478647d`で、UTF-8読取り、Text.ToNumber、Text.FromNumber（小数2桁・桁区切りなし）を実採取・接続しました。カタログは11種類・17設定例です。採取用NumberSamplesでは`1234.5`を読み、`1234.50`に書式化できました。別ファイルの`not-a-number`はPADがランタイムエラーで停止し、0等へ補完していません。確認後は元の有効入力へ戻して再実行しました。
+
+新UIから別入力`87.6`を読み、数値へ変換、1加算、小数2桁の文字列へ戻して新規保存する依頼を実行しました。
+
+- App SHA256: `1f376113a498eef977f611081cd94403ae16d78a926cef1ec38cc69049333ccf`。
+- 83,268ms、PAD1回・完了判断1回でDONE。
+- 実コードにText.ToNumber、Variables.IncreaseVariable、Text.FromNumberを確認。
+- 出力は`88.60`、UTF-8 BOM付き8バイト、SHA256 `cbf1b93fc1aec350fad697e96bf3bf89f9709634b06f35e27fe2b26df339fd2e`。
+- 入力不変、成果物ハッシュ一致、クリップボードrestored、完了画面を確認。
+
+証拠は`.work/general-live-08/run-1788751067036/measurement.json`/`result.png`、`.work/general-live-08/verification.json`、ジョブ`90884f0944b84214a001ab3dd34b2f6c`です。数値変換契約12項目、カタログ36項目、PAD契約335項目もPASS。別地域設定、桁区切りON、他の小数桁数は未検証です。
