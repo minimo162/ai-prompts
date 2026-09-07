@@ -425,6 +425,132 @@
         "re_pasted": false,
         "executed_in_flow": "bounded-loop-sum"
       }
+    },
+    {
+      "id": "file-read-text-utf8",
+      "category": "ファイル",
+      "ui_name": "ファイルからテキストを読み取る",
+      "ui_automation_id": "File.ReadTextFromFile",
+      "variant": "utf8",
+      "settings": {
+        "ファイル パス": "C:\\Temp\\AiPromptsCatalogNumbers_20260907\\input.txt",
+        "エンコード": "UTF-8"
+      },
+      "inputs": [
+        {
+          "name": "C:\\Temp\\AiPromptsCatalogNumbers_20260907\\input.txt",
+          "kind": "file"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FileContents",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/file-read-text/utf8.robin",
+      "sha256": "3d1cd834edb55c047d97bb7d3d1d82ab4df66c0eeb01d272e13fe44952511c2b",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "number-conversion"
+      }
+    },
+    {
+      "id": "text-to-number-decimal",
+      "category": "テキスト",
+      "ui_name": "テキストを数値に変換",
+      "ui_automation_id": "Text.ToNumber",
+      "variant": "numeric-literal",
+      "settings": {
+        "変換するテキスト": "12.5"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "TextAsNumber",
+          "kind": "number"
+        }
+      ],
+      "robin_path": "actions/text-to-number/decimal.robin",
+      "sha256": "bb133582a25fd9477010a892da6889263fd07109fec4fc4643b88ae8ee55a5fc",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": false,
+        "re_pasted": false,
+        "executed_in_flow": null
+      }
+    },
+    {
+      "id": "text-to-number-variable",
+      "category": "テキスト",
+      "ui_name": "テキストを数値に変換",
+      "ui_automation_id": "Text.ToNumber",
+      "variant": "text-variable",
+      "settings": {
+        "変換するテキスト": "%FileContents%"
+      },
+      "inputs": [
+        {
+          "name": "FileContents",
+          "kind": "existing_text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TextAsNumber",
+          "kind": "number"
+        }
+      ],
+      "robin_path": "actions/text-to-number/variable.robin",
+      "sha256": "ab234ac0f425af8fe589a72e6cf23743f58616ed466b1710f5b2307bed2bb894",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "number-conversion"
+      }
+    },
+    {
+      "id": "number-to-text-two-decimals",
+      "category": "テキスト",
+      "ui_name": "数値をテキストに変換",
+      "ui_automation_id": "Text.FromNumber",
+      "variant": "two-decimals-no-grouping",
+      "settings": {
+        "変換する数値": "%TextAsNumber%",
+        "小数点以下の桁数": "2",
+        "桁区切り記号を使う:": "Off"
+      },
+      "inputs": [
+        {
+          "name": "TextAsNumber",
+          "kind": "existing_number"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FormattedNumber",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/number-to-text/two-decimals.robin",
+      "sha256": "841949028d56fb9837215c98d2d9d58a7e9cd578bb3493e059b1b72f56bfe60f",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "number-conversion"
+      }
     }
   ],
   "flows": [
@@ -683,6 +809,41 @@
       ],
       "variable_evidence": "evidence/bounded-loop-sum-variables.json",
       "variable_evidence_sha256": "d6029fe4512585ee7c3efd00fc209688c8f6408f07ebcd09ad9e2172af2981f0",
+      "copilot_generated": false,
+      "app_executor_verified": false
+    },
+    {
+      "id": "number-conversion",
+      "robin_path": "flows/number-conversion/default.robin",
+      "sha256": "d14194cb5ae416e7df73ffc8b9da23453f11da5034db9960302e0138dcdc26e8",
+      "action_ids": [
+        "file-read-text-utf8",
+        "text-to-number-variable",
+        "number-to-text-two-decimals"
+      ],
+      "action_count": 3,
+      "native_flow_name": "RobinCatalog_20260907",
+      "native_subflow": "NumberSamples",
+      "entry_point": "context menu start from first action with default values",
+      "input_scope": "C:\\Temp\\AiPromptsCatalogNumbers_20260907\\input.txt",
+      "input_fixture": "fixtures/number-input.txt",
+      "run_invocations": 1,
+      "observed_variables": [
+        {
+          "name": "FileContents",
+          "preview": "1234.5"
+        },
+        {
+          "name": "TextAsNumber",
+          "preview": "1234.5"
+        },
+        {
+          "name": "FormattedNumber",
+          "preview": "1234.50"
+        }
+      ],
+      "variable_evidence": "evidence/number-conversion-variables.json",
+      "variable_evidence_sha256": "5b2c60f994c4f463572611394abac54da49317d3175e144eca60bbc85f25c853",
       "copilot_generated": false,
       "app_executor_verified": false
     }

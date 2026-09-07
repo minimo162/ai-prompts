@@ -72,6 +72,18 @@ END
 
 採取用LoopSamplesサブフローの先頭から実行し、1ずつ加算した例ではNewVar2=3、LoopIndexを加算した例ではNewVar2=6を確認しました。終了後のLoopIndexは両方とも4でした。最後に処理した値や反復回数と同じとはみなさないでください。初期化をループ内に置くと毎回リセットされるため、目的に応じて外へ置きます。下降/可変範囲/ゼロ増分はこの採取では未検証です。
 
+#### 採取済みの組合せ: ファイルの数値を小数2桁に整える
+
+UTF-8ファイルから1234.5を読み、テキストを数値へ変換し、小数2桁・桁区切りなしで1234.50にできることを採取用サブフローで確認しました。ファイルパスはこの採取の実例であり、実際の対象へ置き換えてください。
+
+```text
+File.ReadTextFromFile.ReadText File: $'''C:\\Temp\\AiPromptsCatalogNumbers_20260907\\input.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+Text.ToNumber Text: FileContents Number=> TextAsNumber
+Text.FromNumber Number: TextAsNumber DecimalPlaces: 2 UseThousandsSeparator: False FormattedNumber=> FormattedNumber
+```
+
+not-a-numberを読み込ませた別試行では、数値に変換できないランタイムエラーになりました。失敗した値を0等へ置き換えたり、区切り記号を推測で削除したりしないでください。桁区切りON、他の小数桁数、別地域設定はこの実測に含みません。
+
 #### 実アクションのコピー例を渡された場合
 
 - PADの左パネルから追加してコピーしたRobinと、対応する設定値・環境を、そのアクションの生成根拠として使ってください。アクション名だけから内部の名前や引数を推測しないでください。

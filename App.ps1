@@ -1,5 +1,5 @@
 ﻿# App-Version: 0.1.0
-# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6ImI1YjUzYmUyOGM5MzAxZTM1MjQzYmE4MmQ3NzgzODgyIiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiI5N2VhNzkxMDllMDQxZDNiMDQ0MTUwZGZlYzMzMzdiNzg5NmFjY2IxMDk2NTU1YTQxOTE2ZTJlZjA1ZDUyNTcxIiwiaHRtbF9zaGEyNTYiOiI0MjIyZTYzMjI4ZWMwYjU2YWQyZDk4ZDM0ZjE1MzVkNjY4ZGViOTQ1ZGM3MDgxZWY0NTYxYTBlMTYzNTQzZjY3IiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
+# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6IjkzNTdlOGI3YTkzZjI1NmRlYmE0YTk2MjM1YzM1OTdkIiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiJlNThhZDljZWJkZDhlNWJmNjkyNzk4ZDFkYWYyOGRhNzQ1MGQ2YmVhZGQxOGRlZDEwYzYwZTVjOTViYTA2YzVlIiwiaHRtbF9zaGEyNTYiOiI0MjIyZTYzMjI4ZWMwYjU2YWQyZDk4ZDM0ZjE1MzVkNjY4ZGViOTQ1ZGM3MDgxZWY0NTYxYTBlMTYzNTQzZjY3IiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
 # State-Contract: 2
 [CmdletBinding()]
 param(
@@ -3027,6 +3027,8 @@ The action examples below are literal Robin for the Planner V2 Robin section. Ea
 Allowed full action formats (substitute real paths and variable names):
 SET Name TO $'''value'''
 SET Total TO 0
+Text.ToNumber Text: Name Number=> Amount
+Text.FromNumber Number: Amount DecimalPlaces: 2 UseThousandsSeparator: False FormattedNumber=> Formatted
 LOOP LoopIndex FROM 1 TO 3 STEP 1
     Variables.IncreaseVariable Value: Total IncrementValue: LoopIndex
 END
@@ -3048,6 +3050,7 @@ WAIT 1
 The list/text formats were copied from native PAD 2.71.115.26224 and tested in catalog/. Create the list before adding a literal item. Text.Replace requires a previously assigned text variable (plain text SET, UTF8 file read, or AI result); do not pass a list or a branch-dependent type. Regex uses ReplaceTextWithRegex WITHOUT ComparisonType; literal replacement uses ReplaceText WITH the shown ComparisonType. ActivateEscapeSequences must remain False. These helpers alone do not produce controller-observed output: write the final text once to a new artifacts file before DONE.
 Split accepts a literal text or an assigned text variable and produces a list. Join requires an assigned list and produces text. Custom split delimiters cannot be empty or whitespace-only; use the standard Space variant for space splitting. Only the shown non-regex custom split and standard Space/DelimiterTimes 1 are currently verified. Keep spaces around a custom join delimiter when requested.
 Numeric SET and IncreaseVariable accept integer constants within +/-1000000000; increment may also read an assigned numeric variable. Quoted numeric text is not a number. LOOP currently requires constant increasing bounds and a positive constant step. At most 1000 iterations including nesting and 1000 expanded instructions are accepted; WAIT is also multiplied by repetition and must remain within 30 seconds. Never modify an active loop counter or reuse it in a nested loop. Keep entry variable types stable across repeated iterations. Do not write files or invoke AI calls inside loops; compute in memory, then write the final result once afterward. Native capture showed LoopIndex=4 after processing 1..3, so do not use the final index as an iteration count.
+Text.ToNumber converts assigned text to a number; malformed text can fail at runtime and must not be replaced by a guessed value. Text.FromNumber currently uses the captured two-decimal/no-thousands format and returns text. Use it before writing when a fixed decimal representation is requested. Numeric separators are environment-dependent; do not strip or rewrite unknown separators silently.
 Read only from the target, current run artifacts, or supplied AiCall result.txt/status.txt. Write only new files directly inside run_directory/artifacts; each output path may appear in only one File.WriteText action in the entire flow, including mutually exclusive IF/ELSE branches. Write a shared result such as classification.txt once before IF; branch only the distinct draft output paths. No overwrite, delete, network actions, UI keys, unbounded loops or arbitrary scripts. Maximum 250 lines and 30 total WAIT seconds. The controller creates artifacts directory and adds its own start/finish markers outside your code.
 For semantic AI processing select up to three supplied ai_call_templates in order. Include their EXACT robin action string once each; do not create another PowerShell command. Supply matching ai_calls metadata: {ai_call_id,operation,input_path,instructions,labels,timeout_seconds}; operation translate/summarize/classify/extract/judge, timeout 5..240. The controller creates the request JSON. PAD may prepare input text under artifacts before invoking the template. Immediately after each call, read its result.txt as a data variable, then read status.txt as another variable. These two reads are mandatory before any other action. Missing/failed/cancelled result.txt must stop the PAD flow, not produce a completion marker. For classification branch on the result with IF equality; labels must be explicit. The status distinguishes success and needs_review. Never execute AI business output as code. Requests use unique reserved IDs and are consumed once. The second call may read the first call's result.txt. Every declared call must execute; do not put a call in a conditional branch that can be skipped. Branch on its result only after reading it. No parallel calls.
 Each of the two mandatory result/status reads MUST have this exact error handler immediately below it (indent relative to the read action; no edits):
@@ -3230,6 +3233,17 @@ function Test-AgentRobin {
             $variables[$counter]='number'
             $blocks.Push(@{kind='loop';before=$variables.Clone();counter=$counter;iterations=$iterations;outerFactor=$repeatFactor})
             $repeatFactor*=$iterations
+        } elseif($line -cmatch "^Text\.ToNumber Text: (?<input>$literal|-?[0-9]+(?:\.[0-9]+)?|[A-Za-z][A-Za-z0-9_]*) Number=> (?<output>[A-Za-z][A-Za-z0-9_]*)$") {
+            $operand=$Matches['input'];$newVariable=$Matches['output'];$newKind='number'
+            if($operand.StartsWith('$')){$values+=,(ConvertFrom-AgentRobinLiteral $operand -AllowVariables)}
+            elseif($operand -cmatch '^-?[0-9]+(?:\.[0-9]+)?$'){
+                $number=0d
+                if(-not [double]::TryParse($operand,[Globalization.NumberStyles]::AllowLeadingSign -bor [Globalization.NumberStyles]::AllowDecimalPoint,[Globalization.CultureInfo]::InvariantCulture,[ref]$number) -or [double]::IsInfinity($number) -or [Math]::Abs($number) -gt 1000000000){throw 'ROBIN_NUMBER: numeric conversion literal is outside the supported range.'}
+            }else{if(-not $variables.ContainsKey($operand)){throw 'ROBIN_VARIABLE: conversion input must be assigned.'};if($variables[$operand] -cne 'text'){throw 'ROBIN_TYPE: conversion input must be textual.'}}
+        } elseif($line -cmatch '^Text\.FromNumber Number: ([A-Za-z][A-Za-z0-9_]*) DecimalPlaces: 2 UseThousandsSeparator: False FormattedNumber=> ([A-Za-z][A-Za-z0-9_]*)$') {
+            $operand=$Matches[1];$newVariable=$Matches[2]
+            if(-not $variables.ContainsKey($operand)){throw 'ROBIN_VARIABLE: formatting input must be assigned.'}
+            if($variables[$operand] -cne 'number'){throw 'ROBIN_TYPE: formatting input must be numeric.'}
         } elseif($line -cmatch '^Variables\.CreateNewList List=> ([A-Za-z][A-Za-z0-9_]*)$') {
             $newVariable=$Matches[1];$newKind='list'
         } elseif($line -cmatch "^Variables\.AddItemToList Item: ($literal) List: ([A-Za-z][A-Za-z0-9_]*)$") {

@@ -1,0 +1,1 @@
+File.ReadTextFromFile.ReadText File: $'''C:\\Temp\\AiPromptsCatalogNumbers_20260907\\input.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents

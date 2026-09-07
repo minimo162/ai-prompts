@@ -5,7 +5,17 @@ $job=[pscustomobject]@{target=$root};$checks=0
 function Accept([string]$Text){$null=Test-AgentRobin $Text $root $job;$script:checks++}
 function Reject([string]$Text,[string]$Code){$message='';try{$null=Test-AgentRobin $Text $root $job}catch{$message=$_.Exception.Message};if($message -notlike ($Code+':*')){throw ('Unexpected result: '+$message)};$script:checks++}
 $catalog=Read-AgentJson (Join-Path $PSScriptRoot '..\catalog\index.json')
-foreach($flow in $catalog.flows){Accept ([IO.File]::ReadAllText((Join-Path $PSScriptRoot ('..\catalog\'+$flow.robin_path))))}
+foreach($flow in $catalog.flows){
+    $code=[IO.File]::ReadAllText((Join-Path $PSScriptRoot ('..\catalog\'+$flow.robin_path)));$job.target=$root
+    if(Get-AgentProperty $flow 'input_scope' ''){
+        # Substitute only the captured file-path literal for this local contract test.
+        # The copied Robin evidence itself remains byte-identical.
+        $fixture=Join-Path $root ($flow.id+'-input.txt');[IO.File]::Copy((Join-Path $PSScriptRoot ('..\catalog\'+$flow.input_fixture)),$fixture)
+        $code=$code.Replace((ConvertTo-AgentRobinLiteral $flow.input_scope),(ConvertTo-AgentRobinLiteral $fixture));$job.target=$fixture
+    }
+    Accept $code
+}
+$job.target=$root
 $generated=[IO.File]::ReadAllText((Join-Path $PSScriptRoot '..\catalog\generated\list-and-regex\generated.robin'))
 Accept $generated
 $list='Variables.CreateNewList List=> Items'
