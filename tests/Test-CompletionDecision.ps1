@@ -8,6 +8,8 @@ function Invoke-AgentCopilot {
  if($Prompt.Contains('REVIEW_JSON:')){
   $script:reviews++;$context=$Prompt.Substring($Prompt.IndexOf("REVIEW_JSON:`n")+"REVIEW_JSON:`n".Length)|ConvertFrom-Json
   Check ($ConversationId -ceq $RequestId) 'Review uses a fresh scoped conversation'
+  Check ($context.sources.Count -eq 1 -and $context.sources[0].content -ceq 'source' -and $context.sources[0].role -ceq 'input_not_output') 'Review receives separate original input evidence'
+  Check ($Prompt.Contains('including all required text fences and markers')) 'Payload instruction preserves transport framing'
   Check ($context.artifacts[0].content -ceq $(if($script:completionCaseMode -eq 'truncated'){'x'*8192}else{'ready'})) 'Review receives actual observed content'
   $state=if($script:completionCaseMode -eq 'continue' -and $script:reviews -eq 1){'CONTINUE'}elseif($script:completionCaseMode -eq 'blocked'){'BLOCKED'}else{'DONE'}
   $reply=@{request_id=$RequestId;observation_id=$context.observation_id;state=$state;message='fixture decision';artifacts=@()}
@@ -16,6 +18,7 @@ function Invoke-AgentCopilot {
   if($script:completionCaseMode -eq 'stale'){$reply.observation_id='stale'}
   if($script:completionCaseMode -eq 'extra'){$reply.robin='WAIT 0'}
   if($script:completionCaseMode -eq 'changed'){[IO.File]::AppendAllText($context.artifacts[-1].path,'changed')}
+  if($script:completionCaseMode -eq 'input-changed'){[IO.File]::AppendAllText($context.sources[0].path,'changed')}
   return ($reply|ConvertTo-Json -Depth 8 -Compress)
  }
  $script:plans++
@@ -43,7 +46,15 @@ $job=Run-Case continue 2
 Check ($job.status -ceq 'done' -and $script:plans -eq 2 -and $script:padRuns -eq 2) 'An unmet requirement permits another bounded step'
 $job=Run-Case blocked
 Check ($job.status -ceq 'blocked' -and $script:padRuns -eq 1) 'Blocked review cannot trigger another PAD run'
-foreach($caseName in @('unobserved','stale','extra','changed')){$job=Run-Case $caseName;Check ($job.status -ceq 'failed' -and $script:padRuns -eq 1) ('Invalid review cannot finish or reexecute: '+$caseName)}
+foreach($caseName in @('unobserved','stale','extra','changed','input-changed')){$job=Run-Case $caseName;Check ($job.status -ceq 'failed' -and $script:padRuns -eq 1) ('Invalid review cannot finish or reexecute: '+$caseName)}
 $job=Run-Case truncated
 Check ($job.status -ceq 'blocked' -and $script:padRuns -eq 1) 'A truncated artifact cannot become DONE'
+$sourcePath=Join-Path $root 'source-evidence.txt';$sourceText="  100% C:\sample 'quote'`r`nnext  "
+[IO.File]::WriteAllText($sourcePath,$sourceText,(New-Object Text.UTF8Encoding($true)))
+$source=@(Get-AgentSourceEvidence ([pscustomobject]@{target=$sourcePath}))[0]
+Check ($source.content -ceq $sourceText -and $source.text_status -ceq 'complete') 'Input observation excludes BOM but preserves all content'
+[IO.File]::WriteAllText($sourcePath,('x'*8191)+[char]::ConvertFromUtf32(0x1f600)+'z',(New-Object Text.UTF8Encoding($false)))
+$source=@(Get-AgentSourceEvidence ([pscustomobject]@{target=$sourcePath}))[0]
+Check ($source.content.Length -eq 8191 -and $source.truncated) 'Input sample never ends with half a surrogate pair'
+Check (@(Get-AgentSourceEvidence ([pscustomobject]@{target=$root})).Count -eq 0) 'Directory scope is not silently read recursively'
 Write-Output "PASS: $checks completion decision checks; provider/PAD mocked. Evidence: $root"
