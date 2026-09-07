@@ -44,3 +44,16 @@
 証拠は`.work/general-live-04/run-1788742860088/measurement.json`、`.work/general-live-04/verification.json`、ジョブ`e744761fb6c14c75990470242e74dbed`の`source-observations.json`/`completion-reviews`/`runs`です。最初の`result.png`はAPI終端を先に観測し、画面更新前に撮られたためplanning表示でした。同じ保存済みジョブを再実行せず開き直し、完了表示を`done-view.png`、ジョブのバイト不変・実行0を`done-view.json`へ追加記録しました。失敗した以前の候補と成果物は保持しています。
 
 回帰は`Test-CompletionDecision.ps1`の53項目と基本契約149項目がPASS。最終許可回数でも1回で終了できること、CONTINUEのみ追加手順へ進むこと、観測ID違い・余計なコード・入力を成果物として引用・入力/出力改変・切り詰め出力を拒否することを含みます。別PCや他カテゴリ、複数業務全般の完了を示すものではありません。
+
+## 分割・結合の別課題
+
+左パネルからテキスト分割（カスタムのカンマ、標準スペース）と結合（カスタム` | `）を採取し、`d2be39c`でプロンプト・型検証へ接続しました。カタログは6種類・9設定例です。
+
+別の合成入力`red,green,blue`を、分割してリストを作り、` | `で結合して新規保存する依頼を新UIから実行しました。固定候補App SHAは`fdf8e99e839fa1b64a0e585b6871c0999dfe51485e6c4cafadfc33acbedeb939`です。
+
+- 81,299ms、PAD実行1回・完了判断1回でDONE。
+- 実際のRobinに`Text.SplitText.SplitWithDelimiter`と`Text.JoinText.JoinWithCustomDelimiter`があり、条件分岐でスキップされない直列処理であることを確認。
+- 出力は正確に`red | green | blue`、UTF-8 BOM付き21バイト、SHA256 `4053ce75f6c26782b2c24c2a46d49bca00fae0c5d45f226057fa3343d59d175e`。
+- 入力不変、出力ハッシュ一致、クリップボードrestored、画面の完了表示を確認。
+
+証拠は`.work/general-live-05/run-1788744901112/measurement.json`/`result.png`、`.work/general-live-05/verification.json`、ジョブ`5ab001eb873e45298f58d96e7e0d6e72`です。操作検証33項目・PAD契約335項目もPASS。前の成功ケースをこの候補の証拠として流用していません。他カテゴリ・設定の全組合せ・別PCの検証は未完了です。
