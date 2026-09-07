@@ -1,5 +1,5 @@
 ﻿# App-Version: 0.1.0
-# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6IjllYmZhNzIxYWRiNDE2M2I3MGUxNTlhMzFhM2NmODM5IiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiIzODA1ZDBiZjU3ZjMwZjliYzA1ZTE1YjhjZTAxNjJhZWE1NDhlZWNlY2ZmYTFkZDcyMzM4OWNhODk4NTIyYWQ0IiwiaHRtbF9zaGEyNTYiOiJjYmFiNDViYjAyZDg2ODgyZjdiMTY0MmMwZTU3ZTM5MTkwNWVkMTMzNWEzZWUwOWY3NjJkY2ZlZDBmOTc5OWU4IiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
+# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6ImY3Y2NjZmIyZTI0MWQzNTcwY2I4NDg3MTQ4MWI2NWNiIiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiIwMjA1MTA0MDNiNjIxYzRkNGNiMmY5ZmMzY2ExNWQwNmQ0ZTJkYThmZTE0YWMyMTQzZTE5NjllOGYzMDViZTUzIiwiaHRtbF9zaGEyNTYiOiJjYmFiNDViYjAyZDg2ODgyZjdiMTY0MmMwZTU3ZTM5MTkwNWVkMTMzNWEzZWUwOWY3NjJkY2ZlZDBmOTc5OWU4IiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
 # State-Contract: 2
 [CmdletBinding()]
 param(
@@ -1635,12 +1635,9 @@ function New-AgentJob([string]$HomePath, [string]$Goal, [string]$Target) {
     $targetFull = Get-AgentFullPath $Target
     Assert-AgentNoReparse $targetFull
     if (-not (Test-Path -LiteralPath $targetFull)) { throw 'INVALID_REQUEST: 対象ファイルまたはフォルダーが見つかりません。' }
-    foreach ($directory in @(Get-ChildItem -LiteralPath (Join-Path $HomePath 'data\jobs') -Directory)) {
-        if (Test-AgentId $directory.Name) {
-            $existing = Get-AgentJob $HomePath $directory.Name
-            if ($existing.status -cin @('queued','planning','running_pad','waiting_user','running_csv','cancelling')) { throw 'BUSY: 実行中の処理があります。' }
-        }
-    }
+    # Recheck after target validation, using the same registered-job boundary as CSV/history.
+    # Connection-only directories are not complete jobs; do not require a job.json in them.
+    Assert-AgentNoActiveJob $HomePath
     $id = [guid]::NewGuid().ToString('N')
     $directory = Get-AgentJobDirectory $HomePath $id
     [IO.Directory]::CreateDirectory($directory) | Out-Null
