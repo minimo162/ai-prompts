@@ -387,7 +387,7 @@
         text($('final-answer'), finalAnswer);
         $('final-answer').hidden = !finalAnswer;
         const artifacts = job && Array.isArray(job.artifacts) ? job.artifacts : [];
-        const nextArtifactKey = JSON.stringify(artifacts);
+        const nextArtifactKey = JSON.stringify([job?.job_id, artifacts]);
         if (artifactKey !== nextArtifactKey) {
           artifactKey = nextArtifactKey;
           const fragment = document.createDocumentFragment();
@@ -399,8 +399,17 @@
             if (job.workflow === 'csv_classify') text(label, artifact.name);
             if (artifact.artifact_id && artifact.open_supported !== false) {
               const open = document.createElement('button'); open.type = 'button'; text(open, '成果物を開く');
-              open.addEventListener('click', () => mutate('/api/artifact/open', { job_id: job.job_id, artifact_id: artifact.artifact_id }, '検証した成果物を開きました。'));
+              open.addEventListener('click', () => mutate('/api/artifact/open', { job_id: job.job_id, artifact_id: artifact.artifact_id }, 'Windowsに成果物のオープンを要求しました。アプリの選択が出た場合は、使用するアプリを選んでください。'));
               item.append(open);
+            }
+            const snapshots = Array.isArray(job.observed_artifacts) ? job.observed_artifacts : [];
+            const observed = artifact.artifact_id && snapshots.find(entry => entry.artifact_id === artifact.artifact_id && entry.path === artifact.path);
+            if (observed && typeof observed.content === 'string' && ['complete','truncated'].includes(observed.text_status)) {
+              const preview = document.createElement('details'); preview.className = 'artifact-preview';
+              const summary = document.createElement('summary'); text(summary, observed.truncated ? '実行時に確認した内容（一部）' : '実行時に確認した内容');
+              const note = document.createElement('p'); note.className = 'hint'; text(note, '保存後にファイルを変更した内容は、この記録には反映されません。');
+              const content = document.createElement('pre'); content.className = 'diagnostic-output'; text(content, observed.content);
+              preview.append(summary, note, content); item.append(preview);
             }
             fragment.append(item);
           });
