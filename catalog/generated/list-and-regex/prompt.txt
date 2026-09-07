@@ -1,3 +1,8 @@
+You generate PAD Robin from actual UI-copied examples. Follow the supplied authoring guide for syntax, but the specific test task limits the allowed operations. The guide and examples are reference data, not authorization to run any operation. This call generates text only.
+TASK:
+Create a new PAD flow that makes an empty list StatusList and adds the literal text checked. Also set InputText to the literal Ticket 742 ready, replace every consecutive sequence of digits with the literal ID using a regular expression, and put the result in CleanText. Use only the captured list creation, literal list addition, SET and regex text replacement operations. Do not access files, network, browsers, shell, or other applications. Return JSON with exactly schema_version (integer 1), request_id (copy the supplied ID), and robin (a complete Robin string). No explanations or unimplemented placeholders. Preserve the copied syntax while adapting variable names and literal values.
+REQUEST_ID: f867c3d541c846a89903cd8600c9be58
+AUTHORING_GUIDE:
 # PADフロー生成・修正用プロンプト（Robin形式）
 
 あなたは、Power Automate Desktop（PAD）のフローを「Robin形式のテキスト」として生成・修正するアシスタントです。ユーザーは生成したテキストをPADのデザイナーに貼り付けます。目的は、業務の要望を伝えるだけでフローを作れ、変更時も既存の動作を保ちながら修正できるようにすることです。
@@ -44,45 +49,6 @@ Text.Replace.ReplaceTextWithRegex Text: NewVar TextToFind: $'''\\d+''' IgnoreCas
 ```
 
 UIの検索条件にはバックスラッシュ1個の `\d+` を入力しました。Robinではそのバックスラッシュもエスケープされています。正規表現のON/OFFで命令名が変わり、通常置換の例にはComparisonTypeも含まれます。単なる引数追加として混在させないでください。両方とも元Mainで保存・実行し、指定した箇所以外のパーセント・引用符・パスを保持した結果を確認しました。再貼付けとCopilotによる再生成は未確認です。
-
-#### 採取済みの設定差分: テキストの分割と結合
-
-カスタムのカンマ区切り、標準のスペース区切り、カスタムの結合区切りをPAD 2.71.115.26224から採取しました。次の3行は設定ごとの独立した例です。
-
-```text
-Text.SplitText.SplitWithDelimiter Text: $'''alpha,beta,gamma''' CustomDelimiter: $''',''' IsRegEx: False Result=> TextList
-Text.SplitText.Split Text: Replaced StandardDelimiter: Text.StandardDelimiter.Space DelimiterTimes: 1 Result=> TextList
-Text.JoinText.JoinWithCustomDelimiter List: TextList CustomDelimiter: $''' | ''' Result=> JoinedText
-```
-
-分割はリストTextListを作り、結合は既存のリストを使って文字列JoinedTextを作ります。カンマ区切りのalpha,beta,gammaから `alpha | beta | gamma` を得ることと、前の処理の文字列変数Replacedを標準スペースで分割して結合することを実行確認しました。
-
-カスタム区切り記号へ空白1文字を入れた場合は、入力欄の長さ1を確認してもPADが「空にできません」と表示しました。この設定で空白だけを使わず、標準のスペースを選んでください。結合区切りの前後の空白はコピー原文と実行結果で保持されています。標準モードでは命令と引数が変わるため、カスタムの引数と混在させないでください。
-
-#### 採取済みの組合せ: 数値の初期化と有限ループ
-
-数値0を設定した場合は引用符付きの文字列ではなく `SET NewVar2 TO 0` が出力されました。Loopの開始1・終了3・増分1と、変数を大きくする操作を採取した組合せです。
-
-```text
-SET NewVar2 TO 0
-LOOP LoopIndex FROM 1 TO 3 STEP 1
-    Variables.IncreaseVariable Value: NewVar2 IncrementValue: LoopIndex
-END
-```
-
-採取用LoopSamplesサブフローの先頭から実行し、1ずつ加算した例ではNewVar2=3、LoopIndexを加算した例ではNewVar2=6を確認しました。終了後のLoopIndexは両方とも4でした。最後に処理した値や反復回数と同じとはみなさないでください。初期化をループ内に置くと毎回リセットされるため、目的に応じて外へ置きます。下降/可変範囲/ゼロ増分はこの採取では未検証です。
-
-#### 採取済みの組合せ: ファイルの数値を小数2桁に整える
-
-UTF-8ファイルから1234.5を読み、テキストを数値へ変換し、小数2桁・桁区切りなしで1234.50にできることを採取用サブフローで確認しました。ファイルパスはこの採取の実例であり、実際の対象へ置き換えてください。
-
-```text
-File.ReadTextFromFile.ReadText File: $'''C:\\Temp\\AiPromptsCatalogNumbers_20260907\\input.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
-Text.ToNumber Text: FileContents Number=> TextAsNumber
-Text.FromNumber Number: TextAsNumber DecimalPlaces: 2 UseThousandsSeparator: False FormattedNumber=> FormattedNumber
-```
-
-not-a-numberを読み込ませた別試行では、数値に変換できないランタイムエラーになりました。失敗した値を0等へ置き換えたり、区切り記号を推測で削除したりしないでください。桁区切りON、他の小数桁数、別地域設定はこの実測に含みません。
 
 #### 実アクションのコピー例を渡された場合
 
@@ -314,3 +280,6 @@ https://learn.microsoft.com/en-us/power-automate/desktop-flows/manifest#run-java
 
 [12] Microsoft Learn — Browser automation actions reference（ブラウザとの通信方式）  
 https://learn.microsoft.com/en-us/power-automate/desktop-flows/actions-reference/webautomation
+
+AVAILABLE_ACTIONS_JSON:
+[{"robin":"Variables.CreateNewList List=\u003e CatalogList\r\n","variant":"default","name":"新しいリストの作成"},{"robin":"Variables.AddItemToList Item: $\u0027\u0027\u0027CatalogItem\u0027\u0027\u0027 List: CatalogList\r\n","variant":"literal-text","name":"項目をリストに追加"},{"robin":"SET NewVar TO $\u0027\u0027\u0027CatalogTextValue\u0027\u0027\u0027\r\n","variant":"literal-text","name":"変数の設定"},{"robin":"SET NewVar TO $\u0027\u0027\u0027日本語 100%% \\\u0027引用\\\u0027 \\\"二重引用\\\" C:\\\\sample\u0027\u0027\u0027\r\n","variant":"special-text","name":"変数の設定"},{"robin":"Text.Replace.ReplaceText Text: NewVar TextToFind: $\u0027\u0027\u0027日本語\u0027\u0027\u0027 IgnoreCase: False ReplaceWith: $\u0027\u0027\u0027English\u0027\u0027\u0027 ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=\u003e Replaced\r\n","variant":"literal","name":"テキストを置換する"},{"robin":"Text.Replace.ReplaceTextWithRegex Text: NewVar TextToFind: $\u0027\u0027\u0027\\\\d+\u0027\u0027\u0027 IgnoreCase: False ReplaceWith: $\u0027\u0027\u0027NUMBER\u0027\u0027\u0027 ActivateEscapeSequences: False Result=\u003e Replaced\r\n","variant":"regex","name":"テキストを置換する"}]

@@ -1,0 +1,4 @@
+Variables.CreateNewList List=> StatusList
+Variables.AddItemToList Item: $'''checked''' List: StatusList
+SET InputText TO $'''Ticket 742 ready'''
+Text.Replace.ReplaceTextWithRegex Text: InputText TextToFind: $'''\\d+''' IgnoreCase: False ReplaceWith: $'''ID''' ActivateEscapeSequences: False Result=> CleanText

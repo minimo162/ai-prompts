@@ -1,0 +1,92 @@
+[
+    {
+        "name":  "",
+        "id":  "VariablesPanelFlowVariablesList",
+        "type":  "ControlType.List",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "CatalogList",
+        "id":  "VariablesListItem",
+        "type":  "ControlType.ListItem",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "CatalogList",
+        "id":  "VariableTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "[CatalogItem]",
+        "id":  "VariablePreviewTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "NewVar",
+        "id":  "VariablesListItem",
+        "type":  "ControlType.ListItem",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "NewVar",
+        "id":  "VariableTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "日本語 100% \u0027引用\u0027 \"二重引用\" C:\\sample",
+        "id":  "VariablePreviewTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "Replaced",
+        "id":  "VariablesListItem",
+        "type":  "ControlType.ListItem",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "Replaced",
+        "id":  "VariableTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "日本語 NUMBER% \u0027引用\u0027 \"二重引用\" C:\\sample",
+        "id":  "VariablePreviewTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    }
+]

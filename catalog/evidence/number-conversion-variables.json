@@ -1,0 +1,254 @@
+[
+    {
+        "name":  "",
+        "id":  "VariablesPanelFlowVariablesList",
+        "type":  "ControlType.List",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "CatalogList",
+        "id":  "VariablesListItem",
+        "type":  "ControlType.ListItem",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "CatalogList",
+        "id":  "VariableTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "[]",
+        "id":  "VariablePreviewTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "FileContents",
+        "id":  "VariablesListItem",
+        "type":  "ControlType.ListItem",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "FileContents",
+        "id":  "VariableTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "1234.5",
+        "id":  "VariablePreviewTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "FormattedNumber",
+        "id":  "VariablesListItem",
+        "type":  "ControlType.ListItem",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "FormattedNumber",
+        "id":  "VariableTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "1234.50",
+        "id":  "VariablePreviewTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "JoinedText",
+        "id":  "VariablesListItem",
+        "type":  "ControlType.ListItem",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "JoinedText",
+        "id":  "VariableTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "LoopIndex",
+        "id":  "VariablesListItem",
+        "type":  "ControlType.ListItem",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "LoopIndex",
+        "id":  "VariableTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "0",
+        "id":  "VariablePreviewTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "NewVar",
+        "id":  "VariablesListItem",
+        "type":  "ControlType.ListItem",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "NewVar",
+        "id":  "VariableTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "NewVar2",
+        "id":  "VariablesListItem",
+        "type":  "ControlType.ListItem",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "NewVar2",
+        "id":  "VariableTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "0",
+        "id":  "VariablePreviewTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "Replaced",
+        "id":  "VariablesListItem",
+        "type":  "ControlType.ListItem",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "Replaced",
+        "id":  "VariableTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "TextAsNumber",
+        "id":  "VariablesListItem",
+        "type":  "ControlType.ListItem",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "TextAsNumber",
+        "id":  "VariableTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "1234.5",
+        "id":  "VariablePreviewTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "TextList",
+        "id":  "VariablesListItem",
+        "type":  "ControlType.ListItem",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "TextList",
+        "id":  "VariableTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "[]",
+        "id":  "VariablePreviewTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    }
+]

@@ -1,0 +1,851 @@
+{
+  "schema_version": 1,
+  "scope": "Observed PAD action variants; not a complete action reference or execution allowlist",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "captured_date": "2026-09-07"
+  },
+  "actions": [
+    {
+      "id": "variables-create-new-list",
+      "category": "変数",
+      "ui_name": "新しいリストの作成",
+      "ui_automation_id": "Variables.CreateNewList",
+      "variant": "default",
+      "settings": {
+        "新しい空のリストの保存先 変数名": "CatalogList"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CatalogList",
+          "kind": "list"
+        }
+      ],
+      "robin_path": "actions/variables-create-new-list/default.robin",
+      "sha256": "d94dbf198e1cc061d5e820d49d6b58bf5361d6b941f2756f2c78d9b9a055910f",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "list-create-add"
+      }
+    },
+    {
+      "id": "variables-add-item-to-list",
+      "category": "変数",
+      "ui_name": "項目をリストに追加",
+      "ui_automation_id": "Variables.AddItemToList",
+      "variant": "literal-text",
+      "settings": {
+        "項目の追加": "CatalogItem",
+        "追加先リスト": "%CatalogList%"
+      },
+      "inputs": [
+        {
+          "name": "CatalogList",
+          "kind": "existing_list"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CatalogList",
+          "kind": "modified_list"
+        }
+      ],
+      "robin_path": "actions/variables-add-item-to-list/default.robin",
+      "sha256": "db5bac45c2865dbd8c7b471e945dd187cd5fa98c5de46504bb8c82b1eb3aae44",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "list-create-add"
+      }
+    },
+    {
+      "id": "variables-set-text",
+      "category": "変数",
+      "ui_name": "変数の設定",
+      "ui_automation_id": "LanguageConstructs.Assign",
+      "variant": "literal-text",
+      "settings": {
+        "変数": "NewVar",
+        "値:": "CatalogTextValue"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NewVar",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/variables-set/default.robin",
+      "sha256": "827178aa1626c5507846c9ea3fcae61df4c59c6eb0139025f2dcf14a86559a8f",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": false,
+        "re_pasted": false,
+        "executed_in_flow": null
+      }
+    },
+    {
+      "id": "variables-set-special-text",
+      "category": "変数",
+      "ui_name": "変数の設定",
+      "ui_automation_id": "LanguageConstructs.Assign",
+      "variant": "special-text",
+      "settings": {
+        "変数": "NewVar",
+        "値:": "日本語 100%% '引用' \"二重引用\" C:\\sample"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NewVar",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/variables-set/special-text.robin",
+      "sha256": "f107b3daee90e7c388ca5fcf51eb78353bff13c6446385be046cf6510ab6ef57",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "list-create-add-set"
+      }
+    },
+    {
+      "id": "text-replace-literal",
+      "category": "テキスト",
+      "ui_name": "テキストを置換する",
+      "ui_automation_id": "Text.Replace",
+      "variant": "literal",
+      "settings": {
+        "解析するテキスト": "%NewVar%",
+        "検索するテキスト": "日本語",
+        "検索と置換に正規表現を使う:": "Off",
+        "大文字と小文字を区別しない:": "Off",
+        "置き換え先のテキスト": "English",
+        "エスケープ シーケンスをアクティブ化:": "Off"
+      },
+      "comparison_type_in_robin": "Text.TextComparisonType.CultureSensitive",
+      "inputs": [
+        {
+          "name": "NewVar",
+          "kind": "existing_text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Replaced",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/text-replace/literal.robin",
+      "sha256": "2e1b8e429847402bf9bc223505e249bf929915a5a5e1419cc95c0e5453d97084",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "text-replace-literal"
+      }
+    },
+    {
+      "id": "text-replace-regex",
+      "category": "テキスト",
+      "ui_name": "テキストを置換する",
+      "ui_automation_id": "Text.Replace",
+      "variant": "regex",
+      "settings": {
+        "解析するテキスト": "%NewVar%",
+        "検索するテキスト": "\\d+",
+        "検索と置換に正規表現を使う:": "On",
+        "大文字と小文字を区別しない:": "Off",
+        "置き換え先のテキスト": "NUMBER",
+        "エスケープ シーケンスをアクティブ化:": "Off"
+      },
+      "comparison_type_in_robin": null,
+      "inputs": [
+        {
+          "name": "NewVar",
+          "kind": "existing_text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Replaced",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/text-replace/regex.robin",
+      "sha256": "3cd6b450c80439288e8afff50bd7d3b2d23c36ed98df96765e1eda0725ee2a1d",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "text-replace-regex"
+      }
+    },
+    {
+      "id": "text-split-comma",
+      "category": "テキスト",
+      "ui_name": "テキストの分割",
+      "ui_automation_id": "Text.SplitText",
+      "variant": "custom-comma",
+      "settings": {
+        "分割するテキスト": "alpha,beta,gamma",
+        "区切り記号の種類": "カスタム",
+        "カスタム区切り記号": ",",
+        "正規表現である:": "Off"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "TextList",
+          "kind": "list"
+        }
+      ],
+      "robin_path": "actions/text-split/custom-comma.robin",
+      "sha256": "e1cb7f758da81a972a261436399819c2c6303499a8e7d0343e6fca96c49cd9b2",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "text-split-join-comma"
+      }
+    },
+    {
+      "id": "text-split-space",
+      "category": "テキスト",
+      "ui_name": "テキストの分割",
+      "ui_automation_id": "Text.SplitText",
+      "variant": "standard-space",
+      "settings": {
+        "分割するテキスト": "%Replaced%",
+        "区切り記号の種類": "標準",
+        "標準の区切り記号": "スペース",
+        "回数": "1"
+      },
+      "inputs": [
+        {
+          "name": "Replaced",
+          "kind": "existing_text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TextList",
+          "kind": "list"
+        }
+      ],
+      "robin_path": "actions/text-split/standard-space.robin",
+      "sha256": "9f77859fd50f7c950719a9744be478cbccd7ae89f2537a3f1f30926cbbf36113",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "text-split-join-space"
+      }
+    },
+    {
+      "id": "text-join-pipe",
+      "category": "テキスト",
+      "ui_name": "テキストの結合",
+      "ui_automation_id": "Text.JoinText",
+      "variant": "custom-pipe",
+      "settings": {
+        "結合するリストを指定": "%TextList%",
+        "リスト項目を区切る区切り記号": "カスタム",
+        "カスタム区切り記号": " | "
+      },
+      "inputs": [
+        {
+          "name": "TextList",
+          "kind": "existing_list"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "JoinedText",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/text-join/custom-pipe.robin",
+      "sha256": "4b85a79644f2ac3a2d18ee21a9881190f9b4492c579a215c426827e59b5e2f2e",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "text-split-join-comma"
+      }
+    },
+    {
+      "id": "loop-one-to-three",
+      "category": "ループ",
+      "ui_name": "Loop",
+      "ui_automation_id": "LanguageConstructs.Loop",
+      "variant": "constant-range",
+      "settings": {
+        "開始値": "1",
+        "終了": "3",
+        "増分": "1"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LoopIndex",
+          "kind": "number"
+        }
+      ],
+      "robin_path": "actions/loop/one-to-three.robin",
+      "sha256": "196389de7aefd0a683cd61ff507d8b83154a09312cef25b509e19b1086f85c78",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "bounded-loop-count"
+      }
+    },
+    {
+      "id": "variables-set-zero",
+      "category": "変数",
+      "ui_name": "変数の設定",
+      "ui_automation_id": "LanguageConstructs.Assign",
+      "variant": "integer-zero",
+      "settings": {
+        "変数": "NewVar2",
+        "値:": "0"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NewVar2",
+          "kind": "number"
+        }
+      ],
+      "robin_path": "actions/variables-set/numeric-zero.robin",
+      "sha256": "9df7f4bd80aac4395ad58da2319901f725562426f254c1a5e1633e008fb0a2ca",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "bounded-loop-count"
+      }
+    },
+    {
+      "id": "variables-increase-one",
+      "category": "変数",
+      "ui_name": "変数を大きくする",
+      "ui_automation_id": "Variables.IncreaseVariable",
+      "variant": "integer-one",
+      "settings": {
+        "変数名": "%NewVar2%",
+        "大きくする数値": "1"
+      },
+      "inputs": [
+        {
+          "name": "NewVar2",
+          "kind": "existing_number"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "NewVar2",
+          "kind": "modified_number"
+        }
+      ],
+      "robin_path": "actions/variables-increase/one.robin",
+      "sha256": "06beae55ef783422555bdd50d2f0c797459c5278b8de71b16e4f44db41626417",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "bounded-loop-count"
+      }
+    },
+    {
+      "id": "variables-increase-index",
+      "category": "変数",
+      "ui_name": "変数を大きくする",
+      "ui_automation_id": "Variables.IncreaseVariable",
+      "variant": "numeric-variable",
+      "settings": {
+        "変数名": "%NewVar2%",
+        "大きくする数値": "%LoopIndex%"
+      },
+      "inputs": [
+        {
+          "name": "NewVar2",
+          "kind": "existing_number"
+        },
+        {
+          "name": "LoopIndex",
+          "kind": "existing_number"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "NewVar2",
+          "kind": "modified_number"
+        }
+      ],
+      "robin_path": "actions/variables-increase/loop-index.robin",
+      "sha256": "13c18537b84b2444a1b1c62bb63d9eacafd2ee5ec1d610cc8acd297903eee522",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "bounded-loop-sum"
+      }
+    },
+    {
+      "id": "file-read-text-utf8",
+      "category": "ファイル",
+      "ui_name": "ファイルからテキストを読み取る",
+      "ui_automation_id": "File.ReadTextFromFile",
+      "variant": "utf8",
+      "settings": {
+        "ファイル パス": "C:\\Temp\\AiPromptsCatalogNumbers_20260907\\input.txt",
+        "エンコード": "UTF-8"
+      },
+      "inputs": [
+        {
+          "name": "C:\\Temp\\AiPromptsCatalogNumbers_20260907\\input.txt",
+          "kind": "file"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FileContents",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/file-read-text/utf8.robin",
+      "sha256": "3d1cd834edb55c047d97bb7d3d1d82ab4df66c0eeb01d272e13fe44952511c2b",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "number-conversion"
+      }
+    },
+    {
+      "id": "text-to-number-decimal",
+      "category": "テキスト",
+      "ui_name": "テキストを数値に変換",
+      "ui_automation_id": "Text.ToNumber",
+      "variant": "numeric-literal",
+      "settings": {
+        "変換するテキスト": "12.5"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "TextAsNumber",
+          "kind": "number"
+        }
+      ],
+      "robin_path": "actions/text-to-number/decimal.robin",
+      "sha256": "bb133582a25fd9477010a892da6889263fd07109fec4fc4643b88ae8ee55a5fc",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": false,
+        "re_pasted": false,
+        "executed_in_flow": null
+      }
+    },
+    {
+      "id": "text-to-number-variable",
+      "category": "テキスト",
+      "ui_name": "テキストを数値に変換",
+      "ui_automation_id": "Text.ToNumber",
+      "variant": "text-variable",
+      "settings": {
+        "変換するテキスト": "%FileContents%"
+      },
+      "inputs": [
+        {
+          "name": "FileContents",
+          "kind": "existing_text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TextAsNumber",
+          "kind": "number"
+        }
+      ],
+      "robin_path": "actions/text-to-number/variable.robin",
+      "sha256": "ab234ac0f425af8fe589a72e6cf23743f58616ed466b1710f5b2307bed2bb894",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "number-conversion"
+      }
+    },
+    {
+      "id": "number-to-text-two-decimals",
+      "category": "テキスト",
+      "ui_name": "数値をテキストに変換",
+      "ui_automation_id": "Text.FromNumber",
+      "variant": "two-decimals-no-grouping",
+      "settings": {
+        "変換する数値": "%TextAsNumber%",
+        "小数点以下の桁数": "2",
+        "桁区切り記号を使う:": "Off"
+      },
+      "inputs": [
+        {
+          "name": "TextAsNumber",
+          "kind": "existing_number"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FormattedNumber",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/number-to-text/two-decimals.robin",
+      "sha256": "841949028d56fb9837215c98d2d9d58a7e9cd578bb3493e059b1b72f56bfe60f",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "number-conversion"
+      }
+    }
+  ],
+  "flows": [
+    {
+      "id": "list-create-add",
+      "robin_path": "flows/list-create-add/default.robin",
+      "sha256": "49704f6f1235f3a80f9957ef51825c2457d60ed2c50224f2efe7f2f564b5bb88",
+      "action_ids": [
+        "variables-create-new-list",
+        "variables-add-item-to-list"
+      ],
+      "action_count": 2,
+      "native_flow_name": "RobinCatalog_20260907",
+      "run_invocations": 1,
+      "observed_variable": {
+        "name": "CatalogList",
+        "preview": "[CatalogItem]"
+      },
+      "observed_status": "準備完了",
+      "screenshot": "evidence/list-create-add.png",
+      "copilot_generated": false,
+      "app_executor_verified": false,
+      "roundtrip_path": "flows/list-create-add/roundtrip.robin",
+      "roundtrip_sha256": "49704f6f1235f3a80f9957ef51825c2457d60ed2c50224f2efe7f2f564b5bb88",
+      "screenshot_sha256": "fb45f878c656c160d9977ff36f8883a031d5558338ff5a6c563536c502faf890"
+    },
+    {
+      "id": "list-create-add-set",
+      "robin_path": "flows/list-create-add-set/default.robin",
+      "sha256": "53ba1a1044b075f3e64dba2df74613bfbc4662b6a9ad6811c9db80f700c65e71",
+      "action_ids": [
+        "variables-create-new-list",
+        "variables-add-item-to-list",
+        "variables-set-special-text"
+      ],
+      "action_count": 3,
+      "native_flow_name": "RobinCatalog_20260907",
+      "run_invocations": 1,
+      "observed_variables": [
+        {
+          "name": "CatalogList",
+          "preview": "[CatalogItem]"
+        },
+        {
+          "name": "NewVar",
+          "preview": "日本語 100% '引用' \"二重引用\" C:\\sample"
+        }
+      ],
+      "screenshot": "evidence/list-create-add-set.png",
+      "screenshot_sha256": "6deef2f5dfa34c844aa825187c79d700e83d08ae5cfe2656351c13236603b117",
+      "copilot_generated": false,
+      "app_executor_verified": false
+    },
+    {
+      "id": "text-replace-literal",
+      "robin_path": "flows/text-replace-literal/default.robin",
+      "sha256": "4c9833145c3757cdeb2e2a633cd4a2ec7e1edab016c0c0a6f1d15eca8a8dc4b2",
+      "action_ids": [
+        "variables-create-new-list",
+        "variables-add-item-to-list",
+        "variables-set-special-text",
+        "text-replace-literal"
+      ],
+      "action_count": 4,
+      "native_flow_name": "RobinCatalog_20260907",
+      "run_invocations": 1,
+      "observed_variables": [
+        {
+          "name": "CatalogList",
+          "preview": "[CatalogItem]"
+        },
+        {
+          "name": "NewVar",
+          "preview": "日本語 100% '引用' \"二重引用\" C:\\sample"
+        },
+        {
+          "name": "Replaced",
+          "preview": "English 100% '引用' \"二重引用\" C:\\sample"
+        }
+      ],
+      "variable_evidence": "evidence/text-replace-literal-variables.json",
+      "variable_evidence_sha256": "ae332bd7b0db5be954bf6a4597454d59543cdabf740f385b9fd0371f02e1e5dd",
+      "copilot_generated": false,
+      "app_executor_verified": false
+    },
+    {
+      "id": "text-replace-regex",
+      "robin_path": "flows/text-replace-regex/default.robin",
+      "sha256": "09eeb4accf5b0bdceac130a20df636167979474803524f532f619ce19f6033b4",
+      "action_ids": [
+        "variables-create-new-list",
+        "variables-add-item-to-list",
+        "variables-set-special-text",
+        "text-replace-regex"
+      ],
+      "action_count": 4,
+      "native_flow_name": "RobinCatalog_20260907",
+      "run_invocations": 1,
+      "observed_variables": [
+        {
+          "name": "CatalogList",
+          "preview": "[CatalogItem]"
+        },
+        {
+          "name": "NewVar",
+          "preview": "日本語 100% '引用' \"二重引用\" C:\\sample"
+        },
+        {
+          "name": "Replaced",
+          "preview": "日本語 NUMBER% '引用' \"二重引用\" C:\\sample"
+        }
+      ],
+      "variable_evidence": "evidence/text-replace-regex-variables.json",
+      "variable_evidence_sha256": "cc714f09943e8f69a957b817dadc7332c5c41386874f76ece08620ad9fea4035",
+      "copilot_generated": false,
+      "app_executor_verified": false
+    },
+    {
+      "id": "text-split-join-comma",
+      "robin_path": "flows/text-split-join/default.robin",
+      "sha256": "e9608cf7055b90b9c84d2a540adc9c92356edabe14a6e08a234aeca8089d50e4",
+      "action_ids": [
+        "variables-create-new-list",
+        "variables-add-item-to-list",
+        "variables-set-special-text",
+        "text-replace-regex",
+        "text-split-comma",
+        "text-join-pipe"
+      ],
+      "action_count": 6,
+      "native_flow_name": "RobinCatalog_20260907",
+      "run_invocations": 1,
+      "observed_variables": [
+        {
+          "name": "CatalogList",
+          "preview": "[CatalogItem]"
+        },
+        {
+          "name": "JoinedText",
+          "preview": "alpha | beta | gamma"
+        },
+        {
+          "name": "NewVar",
+          "preview": "日本語 100% '引用' \"二重引用\" C:\\sample"
+        },
+        {
+          "name": "Replaced",
+          "preview": "日本語 NUMBER% '引用' \"二重引用\" C:\\sample"
+        },
+        {
+          "name": "TextList",
+          "preview": "[alpha, beta, gamma]"
+        }
+      ],
+      "variable_evidence": "evidence/text-split-join-variables.json",
+      "variable_evidence_sha256": "616eca0f57b088e9eb66cb039e4140ec5e3d9e5bf604fc614e47c19c7e507bd2",
+      "copilot_generated": false,
+      "app_executor_verified": false
+    },
+    {
+      "id": "text-split-join-space",
+      "robin_path": "flows/text-split-join/standard-space.robin",
+      "sha256": "7c6e32215252fffc60d7e76c708bad015831b61bb57e4a9a40c9084a684d57e6",
+      "action_ids": [
+        "variables-create-new-list",
+        "variables-add-item-to-list",
+        "variables-set-special-text",
+        "text-replace-regex",
+        "text-split-space",
+        "text-join-pipe"
+      ],
+      "action_count": 6,
+      "native_flow_name": "RobinCatalog_20260907",
+      "run_invocations": 1,
+      "observed_variables": [
+        {
+          "name": "CatalogList",
+          "preview": "[CatalogItem]"
+        },
+        {
+          "name": "JoinedText",
+          "preview": "日本語 | NUMBER% | '引用' | \"二重引用\" | C:\\sample"
+        },
+        {
+          "name": "NewVar",
+          "preview": "日本語 100% '引用' \"二重引用\" C:\\sample"
+        },
+        {
+          "name": "Replaced",
+          "preview": "日本語 NUMBER% '引用' \"二重引用\" C:\\sample"
+        },
+        {
+          "name": "TextList",
+          "preview": "[日本語, NUMBER%, '引用', \"二重引用\", C:\\sample]"
+        }
+      ],
+      "variable_evidence": "evidence/text-split-join-space-final.json",
+      "variable_evidence_sha256": "10cbfbf556fa638abbccb90b81985c2f1ce8dd207b8ca643fa942dcd1df2234b",
+      "copilot_generated": false,
+      "app_executor_verified": false
+    },
+    {
+      "id": "bounded-loop-count",
+      "robin_path": "flows/bounded-loop/default.robin",
+      "sha256": "7636f319e3aa1b5e185b0de9819f813d58e8fbb95e5aba5d390782ee97cd5383",
+      "action_ids": [
+        "variables-set-zero",
+        "loop-one-to-three",
+        "variables-increase-one"
+      ],
+      "action_count": 4,
+      "action_count_includes_block_end": true,
+      "native_flow_name": "RobinCatalog_20260907",
+      "native_subflow": "LoopSamples",
+      "entry_point": "context menu start from first action with default values",
+      "run_invocations": 1,
+      "observed_variables": [
+        {
+          "name": "NewVar2",
+          "preview": "3"
+        },
+        {
+          "name": "LoopIndex",
+          "preview": "4"
+        }
+      ],
+      "variable_evidence": "evidence/bounded-loop-variables.json",
+      "variable_evidence_sha256": "5886458b80bf8d214f69ab248fb48070885bf193299236723c645e16101972a8",
+      "copilot_generated": false,
+      "app_executor_verified": false
+    },
+    {
+      "id": "bounded-loop-sum",
+      "robin_path": "flows/bounded-loop/sum-index.robin",
+      "sha256": "483c6437971cb53861a4d95af1034fc7e87aea1fc3f3a964ebf3338e31ddd3a6",
+      "action_ids": [
+        "variables-set-zero",
+        "loop-one-to-three",
+        "variables-increase-index"
+      ],
+      "action_count": 4,
+      "action_count_includes_block_end": true,
+      "native_flow_name": "RobinCatalog_20260907",
+      "native_subflow": "LoopSamples",
+      "entry_point": "context menu start from first action with default values",
+      "run_invocations": 1,
+      "observed_variables": [
+        {
+          "name": "NewVar2",
+          "preview": "6"
+        },
+        {
+          "name": "LoopIndex",
+          "preview": "4"
+        }
+      ],
+      "variable_evidence": "evidence/bounded-loop-sum-variables.json",
+      "variable_evidence_sha256": "d6029fe4512585ee7c3efd00fc209688c8f6408f07ebcd09ad9e2172af2981f0",
+      "copilot_generated": false,
+      "app_executor_verified": false
+    },
+    {
+      "id": "number-conversion",
+      "robin_path": "flows/number-conversion/default.robin",
+      "sha256": "d14194cb5ae416e7df73ffc8b9da23453f11da5034db9960302e0138dcdc26e8",
+      "action_ids": [
+        "file-read-text-utf8",
+        "text-to-number-variable",
+        "number-to-text-two-decimals"
+      ],
+      "action_count": 3,
+      "native_flow_name": "RobinCatalog_20260907",
+      "native_subflow": "NumberSamples",
+      "entry_point": "context menu start from first action with default values",
+      "input_scope": "C:\\Temp\\AiPromptsCatalogNumbers_20260907\\input.txt",
+      "input_fixture": "fixtures/number-input.txt",
+      "run_invocations": 1,
+      "observed_variables": [
+        {
+          "name": "FileContents",
+          "preview": "1234.5"
+        },
+        {
+          "name": "TextAsNumber",
+          "preview": "1234.5"
+        },
+        {
+          "name": "FormattedNumber",
+          "preview": "1234.50"
+        }
+      ],
+      "variable_evidence": "evidence/number-conversion-variables.json",
+      "variable_evidence_sha256": "5b2c60f994c4f463572611394abac54da49317d3175e144eca60bbc85f25c853",
+      "copilot_generated": false,
+      "app_executor_verified": false
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "run_succeeded": false,
+  "status": "runtime_error",
+  "input": "not-a-number",
+  "messages": [
+    "テキスト 'not-a-number' を有効な数値に変換できません (指定されたテキストが認識できない形式であるか、文字数が多すぎます)。"
+  ]
+}

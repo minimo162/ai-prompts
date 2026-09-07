@@ -1,0 +1,1 @@
+Text.Replace.ReplaceText Text: NewVar TextToFind: $'''日本語''' IgnoreCase: False ReplaceWith: $'''English''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced

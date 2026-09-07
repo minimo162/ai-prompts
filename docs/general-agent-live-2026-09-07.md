@@ -1,0 +1,88 @@
+# 汎用Run経路の実機確認
+
+新UIから、合成テキスト`Ticket 742 ready`の連続した数字を正規表現で`ID`へ置換し、新規UTF-8ファイルに保存する依頼を実行しました。CSV経路や手動生成コードの貼付けではなく、アプリのRunから実M365 CopilotとPADを呼び出しています。
+
+## 開始処理の修正
+
+最初の候補は、接続記録だけのジョブディレクトリーにも`job.json`が存在する前提の古い走査で開始を拒否しました。新ジョブ生成・Copilot送信・PAD実行はありません。`New-AgentJob`の重複した走査を共通の`Assert-AgentNoActiveJob`へそろえました。
+
+回帰試験は、接続記録だけのディレクトリーを保持して開始できること、queued/unknownの登録ジョブは引き続き拒否することを確認します。`Test-GeneralJobStart.ps1`、基本契約149項目、HTTP試験がPASSしました。修正コミットは`cca1550`です。
+
+## 修正版の結果
+
+- App SHA256: `c22753f33b8823d53ff547b531e91ceb175d5dc4453df25a4bcba50a0459bded`。
+- HTML SHA256: `cbab45bb02d86882f7b1642c0e57e391905ed1335a3ee09f762dcfed0f9799e8`。
+- 新しい空の専用PADフロー`AgentRuntime_20260907`、Power Fx OFFで開始しました。既存の無題・採取・生成フローは上書きしていません。
+- アプリが計画、検証、Main反映、保存、PAD実行、成果物読取りまで進みました。6回のPAD実行はすべてsuccessで、クリップボード復元も記録されています。
+- 各出力はUTF-8 BOM付き18バイト、内容は正確に`Ticket ID ready`でした。入力ハッシュは不変、出力の保存ハッシュも一致しました。
+- しかしCopilotはDONEを選ばず、成功した同等の処理を新しい出力先で繰り返しました。最大6往復に達してblockedで停止しています。**エージェントとしての通し完了ではありません。**
+
+保存された観測には実際の内容、`text_status=complete`、`truncated=false`がありました。成果物が読めなかったという説明ではありません。今後は完了判断と次のコード生成の分離、成功済み処理の反復の扱いを検証します。出力があるだけで自動的にDONEへ変更しません。
+
+ローカル証拠は`.work/general-live-01/start-failure.json`、`.work/general-live-02/run-1788740621492/measurement.json`、`.work/general-live-02/verification.json`、検証Homeのジョブ`04d57e2304754217941e19af9b891ace`です。元の記録と6つの出力は保持しています。
+
+## 完了判断の分離と再検証
+
+`24d595c`で、PAD成功後にコードを生成しない専用の完了判断を追加しました。この最初の実機試行では、元の入力内容が判断へ渡っていないためM365はBLOCKED相当の説明を返しました。同時に応答が必要な搬送形式を満たさず、アプリはRESPONSE_INVALIDで停止しました。生のJSONを後から補完・採用していません。記録は`.work/general-live-03`です。
+
+`ccaa684`では、明示指定された入力ファイルの読み取り証拠を追加しました。入力と出力を別の役割で渡し、入力は成果物として引用できません。入力はUTF-8・最大256KiB、モデルへ渡す内容は最大8192文字で、省略や読取り不能を明示します。フォルダーを再帰的に読む変更ではありません。入力ハッシュを実行前・完了前に再確認します。完了判断の指示も、JSONの内容と搬送用フェンス/マーカーを区別する形へ変更しました。
+
+修正版の同じ課題は、新UIの開始操作から79,565msでDONEになりました。
+
+|確認|結果|
+|---|---|
+|App SHA256|`5c9ba2297589edba59dbb86cc192b06252c34506e0fe30aa0cc5dd0fbbf336ac`|
+|PAD実行|1回、成功|
+|専用の完了判断|1回、DONE|
+|入力|`Ticket 742 ready`、ハッシュ不変|
+|成果物|`Ticket ID ready`、UTF-8 BOM付き18バイト、保存ハッシュ一致|
+|クリップボード|restored|
+|繰返し・手直し|開始後の手動介入や追加PAD実行なし|
+
+完了判断には実際の入力・出力内容が渡り、応答の要求ID/観測ID、成果物の存在・所属・現在ハッシュ・全文読取り状態も検証しました。単にモデルがDONEと答えただけで完了にしていません。
+
+証拠は`.work/general-live-04/run-1788742860088/measurement.json`、`.work/general-live-04/verification.json`、ジョブ`e744761fb6c14c75990470242e74dbed`の`source-observations.json`/`completion-reviews`/`runs`です。最初の`result.png`はAPI終端を先に観測し、画面更新前に撮られたためplanning表示でした。同じ保存済みジョブを再実行せず開き直し、完了表示を`done-view.png`、ジョブのバイト不変・実行0を`done-view.json`へ追加記録しました。失敗した以前の候補と成果物は保持しています。
+
+回帰は`Test-CompletionDecision.ps1`の53項目と基本契約149項目がPASS。最終許可回数でも1回で終了できること、CONTINUEのみ追加手順へ進むこと、観測ID違い・余計なコード・入力を成果物として引用・入力/出力改変・切り詰め出力を拒否することを含みます。別PCや他カテゴリ、複数業務全般の完了を示すものではありません。
+
+## 分割・結合の別課題
+
+左パネルからテキスト分割（カスタムのカンマ、標準スペース）と結合（カスタム` | `）を採取し、`d2be39c`でプロンプト・型検証へ接続しました。カタログは6種類・9設定例です。
+
+別の合成入力`red,green,blue`を、分割してリストを作り、` | `で結合して新規保存する依頼を新UIから実行しました。固定候補App SHAは`fdf8e99e839fa1b64a0e585b6871c0999dfe51485e6c4cafadfc33acbedeb939`です。
+
+- 81,299ms、PAD実行1回・完了判断1回でDONE。
+- 実際のRobinに`Text.SplitText.SplitWithDelimiter`と`Text.JoinText.JoinWithCustomDelimiter`があり、条件分岐でスキップされない直列処理であることを確認。
+- 出力は正確に`red | green | blue`、UTF-8 BOM付き21バイト、SHA256 `4053ce75f6c26782b2c24c2a46d49bca00fae0c5d45f226057fa3343d59d175e`。
+- 入力不変、出力ハッシュ一致、クリップボードrestored、画面の完了表示を確認。
+
+証拠は`.work/general-live-05/run-1788744901112/measurement.json`/`result.png`、`.work/general-live-05/verification.json`、ジョブ`5ab001eb873e45298f58d96e7e0d6e72`です。操作検証33項目・PAD契約335項目もPASS。前の成功ケースをこの候補の証拠として流用していません。他カテゴリ・設定の全組合せ・別PCの検証は未完了です。
+
+## 数値と有限ループの別課題
+
+`2d6dbeb`で数値SET、固定値/数値変数による加算、定数範囲のLoopを採取・接続しました。採取用LoopSamplesでは0から1ずつ3回加算して3、ループ変数1〜3の加算で6を確認しました。終了後のLoopIndexは4でした。カタログは8種類・13設定例です。
+
+アプリでは正の定数ステップによる増加範囲、各定数±10億以内、入れ子込み反復積と展開命令予算1000以内を検査します。ループ変数の書換え、入れ子での同名カウンター、反復時の型変化、ループ内の成果物書込み/AI呼出しを拒否します。WAITも反復を掛けて30秒以内です。これは静的な操作予算であり、すべての処理の所要時間やメモリー使用量の保証ではありません。
+
+新UIで作業フォルダーを指定し、入力ファイルを使わず1〜3をLoop/加算アクションで合計して新規保存する依頼を実行しました。
+
+- App SHA256: `453ea31ff5795a6820a1bdec1295b5c60cf6f65963349a4b2fe59d93916ef9ef`。
+- 85,197ms、PAD1回・完了判断1回でDONE。
+- 実コードは数値0の初期化→Loop 1〜3→ループ変数の加算→終了後のファイル書込み。入力を読むRobinはなく、入力観測配列も空でした。
+- 出力は改行なしの`6`、UTF-8 BOM付き4バイト。SHA256 `d3d1d98df443947ab0b52378acbb5f5c21593677b45f0403b3831c93d8be7fca`、クリップボードrestored。
+
+証拠は`.work/general-live-06/run-1788747019879/measurement.json`/`result.png`、`.work/general-live-06/verification.json`、ジョブ`0a04bea5834d4096a97628b30c7b3aad`。ループ境界20項目、カタログ35項目、PAD契約335項目もPASSしました。下降・可変範囲、For each、他カテゴリ、別PCは未検証です。
+
+## 文字列の数値変換と書式化
+
+`478647d`で、UTF-8読取り、Text.ToNumber、Text.FromNumber（小数2桁・桁区切りなし）を実採取・接続しました。カタログは11種類・17設定例です。採取用NumberSamplesでは`1234.5`を読み、`1234.50`に書式化できました。別ファイルの`not-a-number`はPADがランタイムエラーで停止し、0等へ補完していません。確認後は元の有効入力へ戻して再実行しました。
+
+新UIから別入力`87.6`を読み、数値へ変換、1加算、小数2桁の文字列へ戻して新規保存する依頼を実行しました。
+
+- App SHA256: `1f376113a498eef977f611081cd94403ae16d78a926cef1ec38cc69049333ccf`。
+- 83,268ms、PAD1回・完了判断1回でDONE。
+- 実コードにText.ToNumber、Variables.IncreaseVariable、Text.FromNumberを確認。
+- 出力は`88.60`、UTF-8 BOM付き8バイト、SHA256 `cbf1b93fc1aec350fad697e96bf3bf89f9709634b06f35e27fe2b26df339fd2e`。
+- 入力不変、成果物ハッシュ一致、クリップボードrestored、完了画面を確認。
+
+証拠は`.work/general-live-08/run-1788751067036/measurement.json`/`result.png`、`.work/general-live-08/verification.json`、ジョブ`90884f0944b84214a001ab3dd34b2f6c`です。数値変換契約12項目、カタログ36項目、PAD契約335項目もPASS。別地域設定、桁区切りON、他の小数桁数は未検証です。

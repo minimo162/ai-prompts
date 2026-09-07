@@ -1,0 +1,92 @@
+[
+    {
+        "name":  "",
+        "id":  "VariablesPanelFlowVariablesList",
+        "type":  "ControlType.List",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "CleanText",
+        "id":  "VariablesListItem",
+        "type":  "ControlType.ListItem",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "CleanText",
+        "id":  "VariableTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "Ticket ID ready",
+        "id":  "VariablePreviewTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "InputText",
+        "id":  "VariablesListItem",
+        "type":  "ControlType.ListItem",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "InputText",
+        "id":  "VariableTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "Ticket 742 ready",
+        "id":  "VariablePreviewTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "StatusList",
+        "id":  "VariablesListItem",
+        "type":  "ControlType.ListItem",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "StatusList",
+        "id":  "VariableTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    },
+    {
+        "name":  "[checked]",
+        "id":  "VariablePreviewTextBlock",
+        "type":  "ControlType.Text",
+        "enabled":  true,
+        "handle":  0,
+        "value":  null,
+        "toggle":  null
+    }
+]

@@ -1,4 +1,4 @@
-# Managed clipboard data only: this test never reads or writes the OS clipboard.
+﻿# Managed clipboard data only: this test never reads or writes the OS clipboard.
 $ErrorActionPreference='Stop'
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing

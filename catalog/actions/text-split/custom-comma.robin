@@ -1,0 +1,1 @@
+Text.SplitText.SplitWithDelimiter Text: $'''alpha,beta,gamma''' CustomDelimiter: $''',''' IsRegEx: False Result=> TextList

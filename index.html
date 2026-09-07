@@ -92,10 +92,11 @@
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     .skip-link{position:absolute;left:18px;top:-80px;background:#fff;padding:12px;z-index:2}
     .skip-link:focus{top:12px}
-    @media(max-width:800px){.shell{padding:22px 20px 32px}.workspace{grid-template-columns:1fr}.workspace>.stack{display:contents}#request-section{order:1}.status-card{order:2}.question-card{order:3}#history-section{order:4}#result-section{order:5}.settings-grid{grid-template-columns:1fr}.masthead{margin-bottom:24px}.card{padding:21px}.settings-body{padding:0 20px 22px}summary{padding:16px 20px}.history{max-height:320px}}
+    @media(max-width:800px){.shell{padding:22px 20px 32px}.workspace{grid-template-columns:1fr}.workspace>.stack{display:contents}#request-section{order:0}#csv-section{order:6}.status-card{order:2}.question-card{order:3}#history-section{order:4}#result-section{order:5}.settings-grid{grid-template-columns:1fr}.masthead{margin-bottom:24px}.card{padding:21px}.settings-body{padding:0 20px 22px}summary{padding:16px 20px}.history{max-height:320px}}
     @media(max-width:430px){.shell{padding:18px 13px 28px}.masthead{align-items:flex-start}.wordmark{font-size:11px}.connection{font-size:11px}.card{padding:18px}.hero p{font-size:13px}.actions>button{flex-grow:1}.settings-grid{gap:4px}.status-top{gap:8px}}
     .csv-table-wrap{overflow:auto;max-height:520px;margin-top:16px}.csv-table{border-collapse:collapse;width:100%;font-size:13px}.csv-table th,.csv-table td{padding:10px;text-align:left;vertical-align:top;border-bottom:1px solid #ddd;min-width:90px;white-space:pre-wrap;overflow-wrap:anywhere}.csv-table td:nth-child(2){min-width:180px}.csv-table th{position:sticky;top:0;background:#f5f7fa}.csv-plan{white-space:pre-wrap;overflow-wrap:anywhere}.field select{width:100%;padding:10px;font:inherit}.csv-actions{margin-top:16px}.csv-columns{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+  .card.csv-optional{padding:0}.csv-body{padding:0 25px 25px}.capability-note{margin-bottom:18px}
   </style>
 </head>
 <body>
@@ -114,8 +115,19 @@
 
     <main id="main" class="workspace" tabindex="-1">
       <div class="stack">
-        <section class="card" aria-labelledby="csv-heading">
-          <div class="section-heading"><h2 id="csv-heading">問い合わせCSVを分類する</h2></div>
+        <section id="request-section" class="card" aria-labelledby="request-heading">
+          <div class="section-heading"><span class="step" aria-hidden="true">01</span><h2 id="request-heading">作業を依頼する</h2></div>
+          <p class="hint capability-note">現在の対応：UTF-8テキストの読取り・新規保存、文字列とリストの処理、数値計算・有限ループ、条件分岐、AIへの翻訳・要約などの依頼。Excel・PDF・ブラウザー操作はまだ実行できません。専用PADフローの準備が必要です。</p>
+          <form id="request-form">
+            <div class="field"><label for="goal">やりたいこと</label><textarea id="goal" name="goal" required maxlength="12000" placeholder="例：文章中の番号を置き換え、結果を新しいファイルにまとめて" aria-describedby="goal-hint"></textarea><p id="goal-hint" class="hint">目的と仕上がり、残したい条件を書いてください。Copilotが手順を考え、PADで実行します。</p></div>
+            <div class="field"><label for="target">作業対象のファイル／フォルダー</label><input id="target" name="target" type="text" required maxlength="4000" placeholder="例：C:\Work\対象" spellcheck="false" autocomplete="off" aria-describedby="target-hint"><p id="target-hint" class="hint">読み取るファイル、または作業範囲のフォルダーを指定してください。原本を上書きせず、新しい成果物として保存します。</p></div>
+            <div class="actions"><button id="start" class="primary" type="submit" disabled>開始する</button><button id="stop" class="stop" type="button" disabled>停止する</button></div>
+            <p class="fine-print">依頼や処理に必要な内容は M365 Copilot に送信されます。</p>
+          </form>
+        </section>
+
+        <details id="csv-section" class="card csv-optional" aria-labelledby="csv-heading">
+          <summary id="csv-heading">CSVの定型分類</summary><div class="csv-body">
           <p class="hint">ID・本文を持つCSVを、分類・理由・要確認一覧にします。CSVの処理にPADの準備は不要です。最初に「Copilot を開く」から専用画面へサインインしてください。</p>
           <form id="csv-form">
             <div class="field"><label for="csv-paths">対象CSV</label><textarea id="csv-paths" required placeholder="ファイルを選択するか、絶対パスを1行に1つ貼り付けてください。" spellcheck="false"></textarea><button id="csv-select" type="button">CSVを選択</button><p class="hint">合計1〜100行、1MiB、最大10ファイル。フォルダーは対象外です。この上限は実機の処理速度を保証するものではありません。</p></div>
@@ -133,16 +145,8 @@
           <p id="csv-summary" role="status"></p>
           <div id="csv-followup" hidden><h3>要確認行への追加指示</h3><p class="hint">一覧で再検討する要確認行を選択してください。選択しない結果と前回の成果物は保持します。</p><div class="field"><label for="csv-review-instructions">選択行への追加条件</label><textarea id="csv-review-instructions" maxlength="4000" placeholder="例：この依頼は請求書の支払手順についてです。支払担当の分類で再検討してください。"></textarea></div><button id="csv-review" type="button" disabled>選択した要確認行の再検討を準備</button></div>
           <div id="csv-results" hidden><div class="field"><label for="csv-filter">結果の絞り込み</label><select id="csv-filter"><option value="all">すべて</option><option value="needs_review">要確認</option><option value="success">成功</option><option value="failed">失敗</option><option value="unprocessed">未処理</option><option value="unknown">不明</option></select></div><p class="hint">処理完了と内容の承認は別です。原文と理由を確認してください。CSVは数式風文字列を閲覧用に安全化します。原値・任意列の正本はresults.jsonです。CSVのExcel自動型変換は保証しません。</p><div class="csv-table-wrap" tabindex="0" aria-label="原文と分類結果"><table class="csv-table"><thead><tr><th scope="col">原ID</th><th scope="col">原文</th><th scope="col">分類</th><th scope="col">理由</th><th scope="col">状態</th></tr></thead><tbody id="csv-rows"></tbody></table></div></div>
-        </section>
-        <section id="request-section" class="card" aria-labelledby="request-heading">
-          <div class="section-heading"><span class="step" aria-hidden="true">01</span><h2 id="request-heading">従来のPAD検証用依頼</h2></div>
-          <form id="request-form">
-            <div class="field"><label for="goal">やりたいこと</label><textarea id="goal" name="goal" required maxlength="12000" placeholder="例：このUTF-8テキストを英訳し、新しいファイルに保存して" aria-describedby="goal-hint"></textarea><p id="goal-hint" class="hint">こちらは専用PADフローの準備が必要な互換経路です。フォルダー全件処理・Excel・PDFには対応していません。</p></div>
-            <div class="field"><label for="target">対象ファイル／フォルダー</label><input id="target" name="target" type="text" required maxlength="4000" placeholder="例：C:\Users\user\Documents\翻訳対象" spellcheck="false" autocomplete="off" aria-describedby="target-hint"><p id="target-hint" class="hint">対象の場所を入力してください。現在の検証版は UTF-8 テキストを扱います。</p></div>
-            <div class="actions"><button id="start" class="primary" type="submit" disabled>開始する</button><button id="stop" class="stop" type="button" disabled>停止する</button></div>
-            <p class="fine-print">依頼や処理に必要な内容は M365 Copilot に送信されます。</p>
-          </form>
-        </section>
+        </div></details>
+
 
         <section id="question-section" class="card question-card" aria-labelledby="question-heading" hidden>
           <div class="section-heading"><h2 id="question-heading">Copilot からの質問</h2></div>
@@ -383,7 +387,7 @@
         text($('final-answer'), finalAnswer);
         $('final-answer').hidden = !finalAnswer;
         const artifacts = job && Array.isArray(job.artifacts) ? job.artifacts : [];
-        const nextArtifactKey = JSON.stringify(artifacts);
+        const nextArtifactKey = JSON.stringify([job?.job_id, artifacts]);
         if (artifactKey !== nextArtifactKey) {
           artifactKey = nextArtifactKey;
           const fragment = document.createDocumentFragment();
@@ -392,11 +396,20 @@
             const label = document.createElement('p'); label.className = 'artifact-label'; text(label, artifact.label || '成果物 ' + (index + 1));
             const path = document.createElement('code'); path.className = 'artifact-path'; path.tabIndex = 0; text(path, artifact.path);
             item.append(label, path);
-            if (job.workflow === 'csv_classify' && artifact.artifact_id) {
-              text(label, artifact.name);
+            if (job.workflow === 'csv_classify') text(label, artifact.name);
+            if (artifact.artifact_id && artifact.open_supported !== false) {
               const open = document.createElement('button'); open.type = 'button'; text(open, '成果物を開く');
-              open.addEventListener('click', () => mutate('/api/csv/artifact/open', { job_id: job.job_id, artifact_id: artifact.artifact_id }, '検証した成果物を開きました。'));
+              open.addEventListener('click', () => mutate('/api/artifact/open', { job_id: job.job_id, artifact_id: artifact.artifact_id }, 'Windowsに成果物のオープンを要求しました。アプリの選択が出た場合は、使用するアプリを選んでください。'));
               item.append(open);
+            }
+            const snapshots = Array.isArray(job.observed_artifacts) ? job.observed_artifacts : [];
+            const observed = artifact.artifact_id && snapshots.find(entry => entry.artifact_id === artifact.artifact_id && entry.path === artifact.path);
+            if (observed && typeof observed.content === 'string' && ['complete','truncated'].includes(observed.text_status)) {
+              const preview = document.createElement('details'); preview.className = 'artifact-preview';
+              const summary = document.createElement('summary'); text(summary, observed.truncated ? '実行時に確認した内容（一部）' : '実行時に確認した内容');
+              const note = document.createElement('p'); note.className = 'hint'; text(note, '保存後にファイルを変更した内容は、この記録には反映されません。');
+              const content = document.createElement('pre'); content.className = 'diagnostic-output'; text(content, observed.content);
+              preview.append(summary, note, content); item.append(preview);
             }
             fragment.append(item);
           });
@@ -438,7 +451,7 @@
         $('csv-approval').hidden = !csv || csvDirty || job.status !== 'awaiting_approval';
         $('csv-results').hidden = !csv;
         if (!csv) { $('csv-followup').hidden = true; text($('csv-summary'), ''); return; }
-        if (csvJobId !== job.job_id) { csvJobId = job.job_id; reviewRows.clear(); reviewKey = ''; continuationKey = ''; }
+        if (csvJobId !== job.job_id) { $('csv-section').open = true; csvJobId = job.job_id; reviewRows.clear(); reviewKey = ''; continuationKey = ''; }
         $('csv-followup').hidden = !['done','partial','cancelled','blocked'].includes(job.status) || !job.results.some(r => r.status === 'needs_review');
         const plan = job.plan;
         text($('csv-plan'), `${csv.sources.map(s => `${s.name} · ${s.encoding} · ${s.bytes}バイト`).join('\n')}\n対象 ${job.summary.total}行（送信対象 ${plan.row_ids.length}行）。列: ${csv.sources[0].headers.join(' / ')}\n分類候補: ${plan.categories.join(' / ')}\n条件: ${plan.instructions}\n送信内容: 選択した本文列とアプリが発行する行ID。任意列・入力パスは送信しません。\n処理: ${plan.batch_count}回に小分けして分類し、全行を照合します。\n保存先: ${plan.output_directory}\n分類結果・要確認・未処理のCSVと正本JSONを新規作成します。原ファイルは変更しません。対象外の理由は下の一覧を確認してください。`);
