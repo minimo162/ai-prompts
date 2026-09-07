@@ -1,5 +1,5 @@
 ﻿# App-Version: 0.1.0
-# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6ImNlZmYyMDI3MjEyNzc0NTQwZTBjYTE2OWVkMTA2ZTQyIiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiJmYTRhNGExZjMyZDFmYWZiMjI1MDQ0OTc2YWQ1ZjkyZjIwMGNmMGRlNDYwZDJhNzRhZmM0M2M0MWFjNmIyMTE4IiwiaHRtbF9zaGEyNTYiOiI5NGRlZDllZTQzZDRiMmQwMzk3YjExM2FiMTgyYjMyN2Y5MDIxNzMzY2IyYjMzZTYyNjA5NmNlMmNiNTJlMGUzIiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
+# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6IjllYmZhNzIxYWRiNDE2M2I3MGUxNTlhMzFhM2NmODM5IiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiIzODA1ZDBiZjU3ZjMwZjliYzA1ZTE1YjhjZTAxNjJhZWE1NDhlZWNlY2ZmYTFkZDcyMzM4OWNhODk4NTIyYWQ0IiwiaHRtbF9zaGEyNTYiOiJjYmFiNDViYjAyZDg2ODgyZjdiMTY0MmMwZTU3ZTM5MTkwNWVkMTMzNWEzZWUwOWY3NjJkY2ZlZDBmOTc5OWU4IiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
 # State-Contract: 2
 [CmdletBinding()]
 param(
@@ -2934,12 +2934,16 @@ function New-AgentAiCallTemplates {
 function Get-AgentPlannerRules {
     param([string]$TargetPath = '')
     $rules = @'
-Adopted Robin rules from ai-prompts/pad-robin-prompts.md (2026-09-05, PAD 2.71, Power Fx off):
-Only Robin code inside the separate Planner V2 Robin body. Preserve quotes, percent, literal backslashes and Unicode. No markdown fences, line numbers, ellipsis or prose in code. Four spaces per IF level. No tabs, multiline literals, undefined variables, executable expressions or guessed actions. Read business data from UTF8 text files without modifying it. Literal escaping: backslash -> double backslash, apostrophe -> backslash apostrophe, double quote -> backslash double quote. Never interpolate input data into scripts. A literal percent sign must come from a data file, not a Robin literal. %Name% refers only to a previously defined simple variable.
-This first PoC accepts a deliberately finite subset. Unsupported app/Excel/browser operations must return BLOCKED with the missing capability, never omit them and claim DONE.
+Adopted Robin rules from ai-prompts/pad-robin-prompts.md and native catalog captures (2026-09-07, PAD 2.71, Power Fx off):
+Only Robin code inside the separate Planner V2 Robin body. Preserve quotes, percent, literal backslashes and Unicode. No markdown fences, line numbers, ellipsis or prose in code. Four spaces per IF level. No tabs, multiline literals, undefined variables, executable expressions or guessed actions. Read business data from UTF8 text files without modifying it. Literal escaping: backslash -> double backslash, apostrophe -> backslash apostrophe, double quote -> backslash double quote. Never interpolate input data into scripts. In text literals, %% represents one literal percent (captured on PAD 2.71); raw unpaired percent is invalid. Preserve business file contents as read. %Name% refers only to a previously defined simple variable.
+The executor currently accepts the verified action formats listed below. Unsupported app/Excel/browser operations must return BLOCKED with the missing capability, never omit them and claim DONE.
 The action examples below are literal Robin for the Planner V2 Robin section. Each Windows path separator needs two backslashes in that literal Robin body. JSON escaping applies only to metadata fields such as artifacts[] and ai_calls[].input_path, where each original separator needs two backslashes in JSON source. Decode ai_call_templates[].robin from CONTEXT_JSON once and place that exact action text directly in the Robin body. Do not add or remove an escaping layer from Robin code. Use only the transport-defined empty-line marker for a completely empty Robin row.
 Allowed full action formats (substitute real paths and variable names):
 SET Name TO $'''value'''
+Variables.CreateNewList List=> Items
+Variables.AddItemToList Item: $'''checked''' List: Items
+Text.Replace.ReplaceText Text: Name TextToFind: $'''value''' IgnoreCase: False ReplaceWith: $'''replacement''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+Text.Replace.ReplaceTextWithRegex Text: Name TextToFind: $'''\\d+''' IgnoreCase: False ReplaceWith: $'''ID''' ActivateEscapeSequences: False Result=> Replaced
 File.ReadTextFromFile.ReadText File: $'''C:\\input.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> Name
 File.WriteText File: $'''C:\\run\\artifacts\\output.txt''' TextToWrite: Name AppendNewLine: False IfFileExists: File.IfFileExists.Append Encoding: File.FileEncoding.UTF8
 IF Name = $'''value''' THEN
@@ -2948,6 +2952,7 @@ ELSE
     SET Other TO $'''other value'''
 END
 WAIT 1
+The list/text formats were copied from native PAD 2.71.115.26224 and tested in catalog/. Create the list before adding a literal item. Text.Replace requires a previously assigned text variable (plain text SET, UTF8 file read, or AI result); do not pass a list or a branch-dependent type. Regex uses ReplaceTextWithRegex WITHOUT ComparisonType; literal replacement uses ReplaceText WITH the shown ComparisonType. ActivateEscapeSequences must remain False. These helpers alone do not produce controller-observed output: write the final text once to a new artifacts file before DONE.
 Read only from the target, current run artifacts, or supplied AiCall result.txt/status.txt. Write only new files directly inside run_directory/artifacts; each output path may appear in only one File.WriteText action in the entire flow, including mutually exclusive IF/ELSE branches. Write a shared result such as classification.txt once before IF; branch only the distinct draft output paths. No overwrite, delete, network actions, UI keys, unbounded loops or arbitrary scripts. Maximum 250 lines and 30 total WAIT seconds. The controller creates artifacts directory and adds its own start/finish markers outside your code.
 For semantic AI processing select up to three supplied ai_call_templates in order. Include their EXACT robin action string once each; do not create another PowerShell command. Supply matching ai_calls metadata: {ai_call_id,operation,input_path,instructions,labels,timeout_seconds}; operation translate/summarize/classify/extract/judge, timeout 5..240. The controller creates the request JSON. PAD may prepare input text under artifacts before invoking the template. Immediately after each call, read its result.txt as a data variable, then read status.txt as another variable. These two reads are mandatory before any other action. Missing/failed/cancelled result.txt must stop the PAD flow, not produce a completion marker. For classification branch on the result with IF equality; labels must be explicit. The status distinguishes success and needs_review. Never execute AI business output as code. Requests use unique reserved IDs and are consumed once. The second call may read the first call's result.txt. Every declared call must execute; do not put a call in a conditional branch that can be skipped. Branch on its result only after reading it. No parallel calls.
 Each of the two mandatory result/status reads MUST have this exact error handler immediately below it (indent relative to the read action; no edits):
@@ -3056,6 +3061,17 @@ function Read-AgentAiCallTemplates {
     return $templates
 }
 
+function Get-AgentRobinVariableReferences([string]$Value) {
+    $references=New-Object 'Collections.Generic.List[string]'
+    for($i=0;$i -lt $Value.Length;$i++){
+        if($Value[$i] -ne '%'){continue}
+        if($i+1 -lt $Value.Length -and $Value[$i+1] -eq '%'){$i++;continue}
+        $reference=[regex]::Match($Value.Substring($i),'^%([A-Za-z][A-Za-z0-9_]*)%')
+        if(-not $reference.Success){throw 'ROBIN_EXPRESSION: only simple variable references or escaped literal percent are accepted.'}
+        $references.Add($reference.Groups[1].Value);$i+=$reference.Length-1
+    }
+    return $references.ToArray()
+}
 function Test-AgentRobin {
     param([string]$Robin, [string]$RunDirectory, $Job)
     if ([string]::IsNullOrWhiteSpace($Robin) -or $Robin.Length -gt 64000 -or $Robin.Contains('```') -or $Robin.Contains("`t") -or $Robin.Contains([char]0)) { throw 'ROBIN_INVALID: empty, oversized or non-Robin content.' }
@@ -3090,9 +3106,23 @@ function Test-AgentRobin {
         $closing = $line -eq 'END' -or $line -eq 'ELSE'
         $expected = 4 * ($blocks.Count - [int]$closing)
         if ($expected -lt 0 -or $indent -ne $expected) { throw 'ROBIN_BLOCK: invalid indentation or block nesting.' }
-        $used = @(); $newVariable = $null; $value = $null
+        $used = @(); $newVariable = $null; $value = $null; $values=@();$newKind='text'
         if ($line -match "^SET ([A-Za-z][A-Za-z0-9_]*) TO ($literal)$") {
             $newVariable = $Matches[1]; $value = ConvertFrom-AgentRobinLiteral $Matches[2] -AllowVariables
+            if($value -cmatch '^%[A-Za-z][A-Za-z0-9_]*%$'){$newKind='unknown'}
+        } elseif($line -cmatch '^Variables\.CreateNewList List=> ([A-Za-z][A-Za-z0-9_]*)$') {
+            $newVariable=$Matches[1];$newKind='list'
+        } elseif($line -cmatch "^Variables\.AddItemToList Item: ($literal) List: ([A-Za-z][A-Za-z0-9_]*)$") {
+            $itemLiteral=$Matches[1];$listName=$Matches[2]
+            if(-not $variables.ContainsKey($listName)){throw 'ROBIN_VARIABLE: list must be assigned before use.'}
+            if($variables[$listName] -cne 'list'){throw 'ROBIN_TYPE: destination must be a definitely assigned list.'}
+            $value=ConvertFrom-AgentRobinLiteral $itemLiteral -AllowVariables
+        } elseif($line -cmatch "^Text\.Replace\.(?<mode>ReplaceText|ReplaceTextWithRegex) Text: (?<input>[A-Za-z][A-Za-z0-9_]*) TextToFind: (?<find>$literal) IgnoreCase: (True|False) ReplaceWith: (?<replacement>$literal) ActivateEscapeSequences: False(?<comparison> ComparisonType: Text\.TextComparisonType\.CultureSensitive)? Result=> (?<output>[A-Za-z][A-Za-z0-9_]*)$") {
+            $mode=$Matches.mode;$inputName=$Matches.input;$findLiteral=$Matches.find;$replacementLiteral=$Matches.replacement;$comparison=$Matches['comparison'];$newVariable=$Matches.output
+            if(($mode -ceq 'ReplaceText') -ne (-not [string]::IsNullOrEmpty($comparison))){throw 'ROBIN_ACTION: replacement mode and comparison arguments differ from captured formats.'}
+            if(-not $variables.ContainsKey($inputName)){throw 'ROBIN_VARIABLE: replacement input must be assigned before use.'}
+            if($variables[$inputName] -cne 'text'){throw 'ROBIN_TYPE: replacement input must be definitely textual.'}
+            $values=@((ConvertFrom-AgentRobinLiteral $findLiteral -AllowVariables),(ConvertFrom-AgentRobinLiteral $replacementLiteral -AllowVariables))
         } elseif ($line -match "^File\.ReadTextFromFile\.ReadText File: ($literal) Encoding: File\.TextFileEncoding\.UTF8 Content=> ([A-Za-z][A-Za-z0-9_]*)$") {
             $path = ConvertFrom-AgentRobinLiteral $Matches[1]; $newVariable = $Matches[2]
             $roots = $readRoots
@@ -3119,9 +3149,12 @@ function Test-AgentRobin {
         } elseif ($line -eq 'END') {
             if ($blocks.Count -eq 0) { throw 'ROBIN_BLOCK: unexpected END.' }
             $block=$blocks.Pop()
-            if ($block.hasElse) {
-                $common=@{}; foreach($entry in $variables.GetEnumerator()) { if($block.then.ContainsKey($entry.Key)) {$common[$entry.Key]=$true} }; $variables=$common
-            } else { $variables=$block.before.Clone() }
+            $alternative=if($block.hasElse){$block.then}else{$block.before}
+            $common=@{}
+            foreach($entry in $variables.GetEnumerator()){
+                if($alternative.ContainsKey($entry.Key)){$common[$entry.Key]=$(if($alternative[$entry.Key] -ceq $entry.Value){$entry.Value}else{'unknown'})}
+            }
+            $variables=$common
         } elseif ($line -match '^WAIT ([0-5])$') {
             $waitSeconds += [int]$Matches[1]; if($waitSeconds -gt 30) {throw 'ROBIN_LIMIT: total WAIT exceeds 30 seconds.'}
         } elseif ($matchingTemplates.Count -eq 1) {
@@ -3131,12 +3164,10 @@ function Test-AgentRobin {
             $pendingReads.Enqueue([string]$template.text_path); $pendingReads.Enqueue([string]$template.status_path)
             $newVariable='AgentAiOutput'
         } else { throw 'ROBIN_ACTION: action or parameter combination is outside the validated PoC subset.' }
-        if ($null -ne $value) {
-            $used += @([regex]::Matches($value,'%([A-Za-z][A-Za-z0-9_]*)%') | ForEach-Object { $_.Groups[1].Value })
-            if ([regex]::Replace($value,'%[A-Za-z][A-Za-z0-9_]*%','').Contains('%')) { throw 'ROBIN_EXPRESSION: use input files for literal percent signs; expressions are not accepted.' }
-        }
+        if ($null -ne $value) { $values+=,$value }
+        foreach($literalValue in $values){$used+=@(Get-AgentRobinVariableReferences $literalValue)}
         foreach($name in $used) { if(-not $variables.ContainsKey($name)) {throw 'ROBIN_VARIABLE: use before definite assignment.'} }
-        if($newVariable) {$variables[$newVariable]=$true}
+        if($newVariable) {$variables[$newVariable]=$newKind}
     }
     if ($blocks.Count) { throw 'ROBIN_BLOCK: missing END.' }
     if ($pendingReads.Count -or $pendingGuard.Count) {throw 'ROBIN_AICALL: required result reads or error guards are missing.'}

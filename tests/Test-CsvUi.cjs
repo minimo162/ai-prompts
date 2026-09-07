@@ -82,6 +82,16 @@ function Invoke-AgentCopilot {
     page = await context.newPage(); const errors = []; page.on('pageerror', e => errors.push(e.message));
     await page.goto(`${base}/#token=${runtime.token}`);
     await page.getByText('アプリに接続済み', { exact: true }).waitFor();
+    assert.equal(await page.locator('#csv-section').evaluate(el=>el.open),false);checks++;
+    assert((await page.locator('#request-section').boundingBox()).y < (await page.locator('#csv-section').boundingBox()).y);checks++;
+    await page.screenshot({path:path.join(root,'initial-general.png'),fullPage:true});
+    await page.setViewportSize({width:390,height:844});
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));checks++;
+    assert((await page.locator('#request-section').boundingBox()).y < (await page.locator('#csv-section').boundingBox()).y);checks++;
+    assert((await page.locator('#request-section').boundingBox()).y < (await page.locator('[aria-labelledby="past-heading"]').boundingBox()).y);checks++;
+    await page.screenshot({path:path.join(root,'initial-general-mobile.png'),fullPage:true});
+    await page.setViewportSize({width:1280,height:960});
+    await page.locator('#csv-section > summary').click();
     await page.locator('#csv-paths').fill(input);
     await page.locator('#csv-prepare').click();
     await page.locator('#csv-approval').waitFor({ state: 'visible' });
