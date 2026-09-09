@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-09T20:05:18.019Z",
+  "bundle_sha256": "5a9b9c33efa402b16d4af82e27c8e25e7ce49a9e9dd52696765279189997f1be",
+  "note": "T02 and T04 were supplied to fresh normal M365 Copilot chats with the current bundle and GPT 5.6 Think Deeper. The responses correctly refused to invent unobserved Robin; this is boundary evidence, not PAD acceptance.",
+  "cases": [
+    {
+      "case": "T02",
+      "result": "catalog/generated/normal-chat-t02-20260910-current/result.json",
+      "bundle_sha256": "5a9b9c33efa402b16d4af82e27c8e25e7ce49a9e9dd52696765279189997f1be",
+      "model": "GPT 5.6 Think Deeper",
+      "attachment_input_mode": "preexisting_cdp_input",
+      "attachment_count": 1,
+      "body_match": true,
+      "sent": true,
+      "response_observed": true,
+      "robin_block_count": 0,
+      "boundary": "FilterDataTable条件付きRobin原文未採取のため生成拒否"
+    },
+    {
+      "case": "T04",
+      "result": "catalog/generated/normal-chat-t04-20260910-current/result.json",
+      "bundle_sha256": "5a9b9c33efa402b16d4af82e27c8e25e7ce49a9e9dd52696765279189997f1be",
+      "model": "GPT 5.6 Think Deeper",
+      "attachment_input_mode": "preexisting_cdp_input",
+      "attachment_count": 1,
+      "body_match": true,
+      "sent": true,
+      "response_observed": true,
+      "robin_block_count": 0,
+      "boundary": "Excel条件抽出・集計Robin未採取のため生成拒否",
+      "independent": {
+        "result": "catalog/generated/normal-chat-t04-20260910-independent/result.json",
+        "bundle_sha256": "5a9b9c33efa402b16d4af82e27c8e25e7ce49a9e9dd52696765279189997f1be",
+        "model": "GPT 5.6 Think Deeper",
+        "attachment_input_mode": "preexisting_cdp_input",
+        "attachment_count": 1,
+        "body_match": true,
+        "sent": true,
+        "response_observed": true,
+        "robin_block_count": 0
+      }
+    }
+  ]
+}

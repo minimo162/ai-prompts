@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-09T17:04:04.7625775+09:00",
+  "generated_at": "2026-09-10T07:22:50.8257321+09:00",
   "environment": {
     "pad_file_version": "2.71.115.26224",
     "language": "ja-JP",
@@ -83,7 +83,7 @@
       "文書変換",
       "変数"
     ],
-    "observed_variant_count": 57,
+    "observed_variant_count": 73,
     "live_node_count": 412,
     "live_action_count": 340,
     "live_inventory_path": "catalog/evidence/pad-action-inventory-20260909.json",
@@ -982,6 +982,29 @@
     },
     {
       "category": "PDF",
+      "ui_name": "PDF からテキストを抽出",
+      "action_id": "pdf-extract-text-page-2-repo",
+      "variant": "page-2-repo-fixture",
+      "settings": {
+        "PDF ファイル": "catalog/fixtures/pdf/source-a.pdf",
+        "抽出するページ": "範囲",
+        "開始ページ番号": 2,
+        "終了ページ番号": 2,
+        "構造化データに最適化": false
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/pdf-extract-text/page-2-repo.robin",
+      "evidence": {
+        "sha256": "df7b51aecbfa32e99792b48e011a4e4f0b9d8d7c8824d587f9107b94466165c4",
+        "added_from_left_panel": false,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "RobinKnowledgeT07Final_20260910"
+      }
+    },
+    {
+      "category": "PDF",
       "ui_name": "PDF からテーブルを抽出する",
       "action_id": "pdf-extract-tables-with-headers",
       "variant": "with-headers",
@@ -1252,6 +1275,30 @@
     },
     {
       "category": "ファイル",
+      "ui_name": "CSV ファイルに書き込む",
+      "action_id": "csv-write-filtered-table-headers",
+      "variant": "filtered-table-with-header",
+      "settings": {
+        "書き込む変数": "FilteredDataTable",
+        "ファイル パス": "catalog/evidence/normal-chat-t02-output-20260910.csv",
+        "エンコード": "UTF-8",
+        "列名を含めます": true,
+        "ファイルが存在する場合": "上書き",
+        "区切り記号": "SystemDefault"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/csv-write/filtered-table-headers.robin",
+      "evidence": {
+        "sha256": "b20c34d83a6d7fe28879aea3633607d98d925b9f124c0197d24a7a3281851586",
+        "added_from_left_panel": false,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "RobinKnowledgeT02CopilotRoundtripFinal_20260910"
+      }
+    },
+    {
+      "category": "ファイル",
       "ui_name": "CSV ファイルから読み取る",
       "action_id": "csv-read-utf8-system-default-no-header",
       "variant": "utf8-trim-no-header-system-default",
@@ -1276,6 +1323,30 @@
     },
     {
       "category": "ファイル",
+      "ui_name": "CSV ファイルから読み取る",
+      "action_id": "csv-read-utf8-system-default-header",
+      "variant": "utf8-trim-header-system-default",
+      "settings": {
+        "ファイル パス": "catalog/fixtures/csv/t02-input-20260910.csv",
+        "エンコード": "UTF-8",
+        "TrimFields": true,
+        "FirstLineContainsColumnNames": true,
+        "ColumnsSeparator": "SystemDefault",
+        "CSVTable": "CSVTable"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/csv-read/utf8-header.robin",
+      "evidence": {
+        "sha256": "cd7e56ec2cff77b4247072c7d2dee3c6e68911e016a6ea949251bf9a46c4216b",
+        "added_from_left_panel": false,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "RobinKnowledgeT02FilterRoundtrip2_20260910"
+      }
+    },
+    {
+      "category": "ファイル",
       "ui_name": "ファイルのコピー",
       "action_id": "file-copy-single-no-overwrite",
       "variant": "single-file-do-nothing-if-exists",
@@ -1294,6 +1365,302 @@
         "saved": true,
         "re_pasted": true,
         "executed_in_flow": "file-copy-single-no-overwrite"
+      }
+    },
+    {
+      "category": "テキスト",
+      "ui_name": "サブテキストの取得",
+      "action_id": "text-get-subtext-mixed-index-length",
+      "variant": "mixed-unicode-index-1-length-3",
+      "settings": {
+        "元のテキスト": "A日本語BC",
+        "開始インデックス": "1",
+        "長さ": "3",
+        "生成された変数": "Subtext",
+        "エラー発生時": "既定"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/text-substring/mixed-index-length.robin",
+      "evidence": {
+        "sha256": "4f1021aafc353edba483e83ea61c6dd93d3c7944ad7b4566049c50fe81e4f70c",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "text-substring"
+      }
+    },
+    {
+      "category": "ファイル",
+      "ui_name": "テキストをファイルに書き込む",
+      "action_id": "file-write-text-utf8-overwrite",
+      "variant": "utf8-overwrite-append-newline",
+      "settings": {
+        "ファイル パス": "catalog/evidence/text-write-output-valid-20260909.txt",
+        "書き込むテキスト": "日本語\\n対象語 100%%\\n'引用' \"二重引用\" C:\\sample\\n対象語",
+        "新しい行を追加する": true,
+        "ファイルが存在する場合": "既存の内容を上書きする",
+        "エンコード": "UTF-8",
+        "エラー発生時": "既定"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/file-write-text/utf8-overwrite.robin",
+      "evidence": {
+        "sha256": "3f31e923d6466abcb14e5f7fa864d414256158a6b5431ad9e5f126323818bb86",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "file-write-text"
+      }
+    },
+    {
+      "category": "ファイル",
+      "ui_name": "テキストをファイルに書き込む",
+      "action_id": "file-write-text-variable-reference",
+      "variant": "utf8-overwrite-variable-append-newline",
+      "settings": {
+        "ファイル パス": "catalog/evidence/text-write-output-valid-20260909.txt",
+        "書き込むテキスト": "Replaced",
+        "新しい行を追加する": true,
+        "ファイルが存在する場合": "既存の内容を上書きする",
+        "エンコード": "UTF-8",
+        "エラー発生時": "既定"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/file-write-text/variable-reference.robin",
+      "evidence": {
+        "sha256": "7d73b162b4b298a547b7c45f98eab0f116a0abf047e6ec1e65de3d426063adac",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "normal-chat-t01-generated-append-newline"
+      }
+    },
+    {
+      "category": "ファイル",
+      "ui_name": "テキストをファイルに書き込む",
+      "action_id": "file-write-text-variable-reference-no-append",
+      "variant": "utf8-overwrite-variable-no-append-newline",
+      "settings": {
+        "ファイル パス": "catalog/evidence/text-write-output-valid-20260909.txt",
+        "書き込むテキスト": "Replaced",
+        "新しい行を追加する": false,
+        "ファイルが存在する場合": "既存の内容を上書きする",
+        "エンコード": "UTF-8",
+        "エラー発生時": "既定"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/file-write-text/variable-reference-no-append.robin",
+      "evidence": {
+        "sha256": "ca6006e287fdd4050f277f4965d6c2e8c3e1aa724dfbcbd4f3300cd3e7d2abe6",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "normal-chat-t01-generated-no-append"
+      }
+    },
+    {
+      "category": "ループ",
+      "ui_name": "For each",
+      "action_id": "foreach-items-variable",
+      "variant": "items-current-item",
+      "settings": {
+        "反復処理を行う値": "Items",
+        "保存先": "CurrentItem"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/foreach/items-variable.robin",
+      "evidence": {
+        "sha256": "38a2be31b6aa79dde80309d0a606093de36165968a7449ad487c5a4674bbfc27",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": null
+      }
+    },
+    {
+      "category": "条件",
+      "ui_name": "If",
+      "action_id": "if-current-item-status-equals",
+      "variant": "current-item-status-equals",
+      "settings": {
+        "最初のオペランド": "CurrentItem[Status]",
+        "演算子": "と等しい (=)",
+        "2 番目のオペランド": "対象"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/if/current-item-status-equals.robin",
+      "evidence": {
+        "sha256": "12a2c5b7bac32d98291560ae9bd1e170f256c5efdc35d88d47b0e6ad8987a35a",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": null
+      }
+    },
+    {
+      "category": "Excel",
+      "ui_name": "Excel の起動",
+      "action_id": "excel-launch-open-editable",
+      "variant": "open-editable",
+      "settings": {
+        "Excel の起動": "次のドキュメントを開く",
+        "ドキュメント パス": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\excel-catalog.xlsx",
+        "インスタンスを表示する": true,
+        "読み取り専用として開く": false,
+        "UseMachineLocale": false
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/excel-launch/open-editable.robin",
+      "evidence": {
+        "sha256": "1b55a963e33056ae4b0b0bb65af88550476f3c31717f3129b38fc3d3c5e7b82a",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": null
+      }
+    },
+    {
+      "category": "Word",
+      "ui_name": "Word を起動する",
+      "action_id": "word-launch-open-editable",
+      "variant": "open-editable",
+      "settings": {
+        "Word の起動": "次のドキュメントを開く",
+        "ドキュメント パス": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\word-catalog.docx",
+        "インスタンスを表示する": true,
+        "読み取り専用として開く": false
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/word-launch/open-editable.robin",
+      "evidence": {
+        "sha256": "d92644f9dccaafeee6dc41b497120a18a301317f010ccb7a78ae8df907e86939",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": null
+      }
+    },
+    {
+      "category": "ファイル",
+      "ui_name": "フォルダー内のファイルを取得",
+      "action_id": "folder-get-files-txt-no-subfolders",
+      "variant": "txt-no-subfolders-no-sort",
+      "settings": {
+        "フォルダー": "catalog/fixtures/files",
+        "ファイル フィルター": "*.txt",
+        "サブフォルダーを含める": false,
+        "アクセス拒否時に失敗": true,
+        "並び替え": "なし",
+        "生成された変数": "Files"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/folder-get-files/txt-files.robin",
+      "evidence": {
+        "sha256": "85bcc7fae4cb143e906e9f85bf8775658ff8b2b1c2c41269321ae528879cd06c",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "folder-get-files-rt"
+      }
+    },
+    {
+      "category": "ファイル",
+      "ui_name": "ファイルからテキストを読み取る",
+      "action_id": "file-read-text-variable-path",
+      "variant": "variable-path-utf8",
+      "settings": {
+        "ファイル パス": "CurrentFile",
+        "エンコード": "UTF-8",
+        "生成された変数": "FileContents"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/file-read-text/variable-path-utf8.robin",
+      "evidence": {
+        "sha256": "365ed2c2017f33ba31eba5c448febbaaf11e017aaf052548b4eb7f68d6b75be9",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "t03-partial"
+      }
+    },
+    {
+      "category": "条件",
+      "ui_name": "If",
+      "action_id": "if-current-file-contains-txt",
+      "variant": "current-file-contains-txt",
+      "settings": {
+        "最初のオペランド": "CurrentFile",
+        "演算子": "次を含む",
+        "2 番目のオペランド": ".txt",
+        "大文字小文字区別": false
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/if/current-file-contains-txt.robin",
+      "evidence": {
+        "sha256": "f634ff144bee7dd5d4faa9cf81f2d42ac484c1c8e2186d1436ceb79d5e27061c",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": null
+      }
+    },
+    {
+      "category": "変数",
+      "ui_name": "データ テーブルをフィルター処理",
+      "action_id": "datatable-filter-status-equals-index2",
+      "variant": "status-equals-index2",
+      "settings": {
+        "データ テーブル": "CSVTable",
+        "列またはインデックス": "2",
+        "演算子": "と等しい (=)",
+        "値": "対象",
+        "照合の大文字小文字区別": true,
+        "生成された変数": "FilteredDataTable"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/datatable-filter/status-equals-index2.robin",
+      "evidence": {
+        "sha256": "54878f58f2860e6d5151ef7690450aa878741bc65a80fad2b5f9c482fde5c2ca",
+        "added_from_left_panel": false,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "RobinKnowledgeT02FilterRoundtrip2_20260910"
+      }
+    },
+    {
+      "category": "ファイル",
+      "ui_name": "フォルダー内のファイルを取得",
+      "action_id": "folder-get-files-all-no-subfolders",
+      "variant": "all-files-no-subfolders-no-sort",
+      "settings": {
+        "フォルダー": "catalog/fixtures/files",
+        "ファイル フィルター": "*",
+        "サブフォルダーを含める": false,
+        "アクセス拒否時に失敗": true,
+        "並び替え": "なし",
+        "生成された変数": "Files"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/folder-get-files/all-files-no-subfolders.robin",
+      "evidence": {
+        "sha256": "f6642f88007dbd5c3a012af9c2686ad921363e082067512b14a2792563e6b5d8",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "folder-get-files-all-rt"
       }
     }
   ],
@@ -1391,10 +1758,12 @@
       "id": "A-text-substring",
       "area": "A",
       "purpose": "文字列の切出し",
-      "status": "not_observed",
-      "observed_action_ids": [],
-      "reason": "現在の実測カタログに該当アクションなし。表示名を推測していない。",
-      "reference": null,
+      "status": "observed_partial",
+      "observed_action_ids": [
+        "text-get-subtext-mixed-index-length"
+      ],
+      "reason": "サブテキストの取得で開始インデックス1・長さ3のUnicode混在リテラルを実測済み。別の開始位置・末尾まで取得する長さ設定は未確認。",
+      "reference": "catalog/index.json; catalog/evidence/text-substring-validation.json",
       "live_ui_candidates": []
     },
     {
@@ -1530,13 +1899,14 @@
       "purpose": "データテーブル作成・行追加・行反復・セル参照",
       "status": "partial",
       "observed_action_ids": [
-        "datatable-create-empty"
+        "datatable-create-empty",
+        "datatable-filter-status-equals-index2"
       ],
       "failed_action_ids": [
         "datatable-add-row-empty-failed"
       ],
-      "reason": "空のデータテーブル作成は今回の左パネル採取・再貼付け・実行まで確認済み。0行0列への空行追加は設計エラーとなったため失敗例として保存。列を持つテーブルの行追加・行反復・セル参照は未採取。",
-      "reference": "catalog/index.json; catalog/evidence/datatable-create-validation.json; catalog/evidence/datatable-add-row-empty-failed.robin",
+      "reason": "空のデータテーブル作成と、列インデックス2のFilterDataTable条件は実測済み。0行0列への空行追加は設計エラーとなったため失敗例として保存。列を持つテーブルの行追加・行反復・セル参照は未採取。",
+      "reference": "catalog/index.json; catalog/evidence/datatable-create-validation.json; catalog/evidence/filter-t02-roundtrip2-run-2.json",
       "live_ui_candidates": [
         {
           "ui_name": "新しいデータ テーブルを作成する",
@@ -1563,10 +1933,11 @@
       "observed_action_ids": [
         "file-write-csv-pdf-table-headers",
         "csv-read-utf8-system-default-no-header",
+        "csv-read-utf8-system-default-header",
         "csv-write-variable-reference"
       ],
-      "reason": "UTF-8 CSV読取り（ヘッダーを列名にしない）と、DataTable変数参照でのCSV書出しは今回の実測で確認済み。ヘッダーを列名にする設定・別区切り・引用符境界は未確認。",
-      "reference": "catalog/index.json; catalog/evidence/csv-read-validation.json",
+      "reason": "UTF-8 CSV読取り（ヘッダーなし／ヘッダーあり）と、DataTable変数参照でのCSV書出しは実測済み。別区切り・引用符境界の追加モードは未確認。",
+      "reference": "catalog/index.json; catalog/evidence/csv-read-validation.json; catalog/evidence/filter-t02-roundtrip2-run-2.json",
       "live_ui_candidates": [
         {
           "ui_name": "CSV テキスト変数から読み取る",
@@ -1592,10 +1963,11 @@
       "status": "partial",
       "observed_action_ids": [
         "file-read-text-utf8",
+        "file-write-text-utf8-overwrite",
         "file-copy-single-no-overwrite"
       ],
-      "reason": "UTF-8読取り、CSV読書き、単一ファイルのコピー（衝突時は何もしない）は実測済み。フォルダー内取得、存在確認、作成、テキスト書出し、移動・名前変更は未確認または別設定が必要。",
-      "reference": "catalog/index.json; catalog/evidence/file-copy-validation.json",
+      "reason": "UTF-8読取り、UTF-8書出し、単一ファイルのコピー（衝突時は何もしない）は実測済み。フォルダー内取得、存在確認、作成、移動・名前変更は未確認または別設定が必要。",
+      "reference": "catalog/index.json; catalog/evidence/text-write-validation.json; catalog/evidence/file-copy-validation.json",
       "live_ui_candidates": [
         {
           "ui_name": "ファイルが存在する場合",

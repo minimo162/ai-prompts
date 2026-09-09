@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-09T22:43:58.917Z",
+  "case": "T02",
+  "bundle_sha256": "660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca",
+  "normal_chat": {
+    "result": "catalog/generated/normal-chat-t02-20260910-final-final/result.json",
+    "model": "GPT 5.6 Think Deeper",
+    "attachment_input_mode": "preexisting_cdp_input",
+    "attachment_count": 1,
+    "body_match": true,
+    "sent": true,
+    "response_observed": true,
+    "robin_block_count": 1,
+    "generated_robin_sha256": "11f370b0369f10f6506e73e99e060417f1120cf5e5488213fc6ba33618cf5168"
+  },
+  "pad": {
+    "paste_source": "catalog/generated/normal-chat-t02-20260910-final-final/robin.txt",
+    "paste_source_sha256": "11f370b0369f10f6506e73e99e060417f1120cf5e5488213fc6ba33618cf5168",
+    "paste_unmodified": true,
+    "paste_evidence": "catalog/evidence/filter-t02-copilot-final2-paste.json",
+    "flow_name": "RobinKnowledgeT02CopilotRoundtripFinal2_20260910",
+    "designer_pid": 22028,
+    "recopy_path": "catalog/evidence/filter-t02-copilot-final2-recopy.robin",
+    "recopy_sha256": "b075a7f85928bd2ecebb5d21be81e04c84d613466f3307e2e051909f85fc5aee",
+    "parser_normalized_robin": true,
+    "logical_robin_match": true,
+    "run_evidence": "catalog/evidence/filter-t02-roundtrip2-run.json",
+    "run_status": "success",
+    "error_count": 0
+  },
+  "output": {
+    "path": "catalog/evidence/normal-chat-t02-output-20260910.csv",
+    "sha256": "8f0748cc4d149228331dfacc0a5c46e117270a7e9dee564c4f631924142cf7d3",
+    "bytes": 73,
+    "logical_matches_expected": true,
+    "encoding": "UTF-8 BOM"
+  },
+  "source": {
+    "path": "catalog/fixtures/csv/t02-input-20260910.csv",
+    "sha256_after_run": "978581e03c1c9f6283ee7aec3269ef66a8105a8a596c3ebd4ba5fee7fe79a11f",
+    "matches_fixed_fixture": true
+  }
+}

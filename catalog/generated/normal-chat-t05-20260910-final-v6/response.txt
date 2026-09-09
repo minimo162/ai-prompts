@@ -1,0 +1,75 @@
+1. 前提・対象範囲・未確認点
+
+目的: 既存Excelを編集可能 (ReadOnly: False) で開き、セル B2 のみを T05-Changed に変更し、別名で保存して終了します。
+
+対象入力:
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\excel-catalog.xlsx
+
+出力:
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t05-final.xlsx
+
+成功条件:
+
+B2 が T05-Changed
+元ファイル excel-catalog.xlsx は変更されない
+A1 を含む無関係なセルは変更しない
+別名保存された normal-chat-t05-final.xlsx に変更内容が存在する
+
+根拠:
+
+編集可能な既存Excel起動 (ReadOnly: False) の実測原文あり。
+Excelセル書込み、別名保存、終了の実測原文あり。
+シート選択やデータ反復は未確認と記録されているため使用しません。
+
+確認状態:
+
+起動 (open-editable.robin) は実測原文あり。
+セル書込み、SaveAs、Close は実測原文あり。
+この依頼用のパス・セル位置へ組み合わせた完成フロー自体の再貼付け・実行証拠はナレッジ内にありません。確認済み原文の組み合わせ案です。
+2. PADで先に確認する設定・依存
+入力ファイル excel-catalog.xlsx が存在すること。
+出力先 normal-chat-t05-final.xlsx の上書き可否を利用者側で確認すること。
+Excelが起動可能な環境であること。
+既定シート上の B2 を変更する前提です。シート選択アクションの実測原文は未採取です。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance
+2
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T05-Changed''' Column: $'''B''' Row: 2
+3
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-final.xlsx'''
+4
+Excel.CloseExcel.Close Instance: ExcelInstance
+4. デザイナー上の確認方法
+エラー表示がないこと。
+アクション数が4個であること。
+実行順が以下と一致すること。
+Excel の起動（既存ファイル・ReadOnly=False）
+Excel ワークシートに書き込む
+Excel の保存（Save As）
+Excel を閉じる
+変数:
+ExcelInstance のみ使用
+Column: B
+Row: 2
+Value: T05-Changed
+保存先が normal-chat-t05-final.xlsx
+
+根拠は編集可能起動、セル書込み、SaveAs、Close の実測原文です。
+
+5. 合成データでの保存・実行・照合手順
+フローを保存。
+実行。
+出力ファイル normal-chat-t05-final.xlsx を開く。
+B2 が T05-Changed になっていることを確認。
+A1 など無関係セルが変化していないことを確認。
+元の excel-catalog.xlsx を開き、変更されていないことを確認。
+同じフローを再実行する場合は、出力ファイルの上書き挙動を事前に確認する。
+
+根拠: Excel編集可能起動、セル書込み、別名保存、終了の観測済み原文およびOffice実行記録。

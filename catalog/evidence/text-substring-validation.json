@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-09",
+  "pad_version": "2.71.115.26224",
+  "language": "ja-JP",
+  "power_fx": false,
+  "native_designer_pid": 26352,
+  "roundtrip_designer_pid": 27092,
+  "native_flow_name": "RobinKnowledgeSubstring_20260909",
+  "roundtrip_flow_name": "RobinKnowledgeSubstringRT_20260909",
+  "action_name": "サブテキストの取得",
+  "automation_id": "Text.GetSubtext",
+  "settings": {
+    "元のテキスト": "A日本語BC",
+    "開始インデックス": "1",
+    "長さ": "3",
+    "生成された変数": "Subtext",
+    "エラー発生時": "既定"
+  },
+  "source_robin": "catalog/actions/text-substring/mixed-index-length.robin",
+  "source_sha256": "4f1021aafc353edba483e83ea61c6dd93d3c7944ad7b4566049c50fe81e4f70c",
+  "roundtrip_robin": "catalog/flows/text-substring/roundtrip.robin",
+  "roundtrip_sha256": "4f1021aafc353edba483e83ea61c6dd93d3c7944ad7b4566049c50fe81e4f70c",
+  "roundtrip_recopy": "catalog/evidence/text-substring-roundtrip-recopy.robin",
+  "roundtrip_recopy_sha256": "4f1021aafc353edba483e83ea61c6dd93d3c7944ad7b4566049c50fe81e4f70c",
+  "original_runs": [
+    {
+      "evidence": "catalog/evidence/text-substring-run-1.json",
+      "run_status": "success",
+      "variable_preview": "日本語"
+    },
+    {
+      "evidence": "catalog/evidence/text-substring-run-2.json",
+      "run_status": "success",
+      "variable_preview": "日本語"
+    }
+  ],
+  "roundtrip_runs": [
+    {
+      "evidence": "catalog/evidence/text-substring-rt-run-1.json",
+      "run_status": "success",
+      "variable_preview": "日本語"
+    },
+    {
+      "evidence": "catalog/evidence/text-substring-rt-run-2.json",
+      "run_status": "success",
+      "variable_preview": "日本語"
+    }
+  ],
+  "expected_value": "日本語",
+  "all_checks_passed": true,
+  "notes": "開始インデックス1、長さ3で、A日本語BCから日本語を取得した。原文コピー、別の空フローへのファイル貼付け、保存、再コピー、元フローとRoundtripフローの各2回実行を確認した。"
+}

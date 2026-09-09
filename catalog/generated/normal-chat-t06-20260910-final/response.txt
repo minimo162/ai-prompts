@@ -1,0 +1,72 @@
+1. 前提・対象範囲・未確認点
+
+目的
+既存の Word 文書を ReadOnly=False（編集可能） で開き、本文中の OfficeCatalog を T06Replaced に置換し、別名で保存します。元ファイルは変更しません。
+
+入力
+
+word-catalog.docx
+C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+
+出力
+
+normal-chat-t06-final.docx
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx
+
+既存 Word インスタンス依存
+
+実測原文では Word.LaunchWord.LaunchAndOpen が新たに Word インスタンスを生成し、Instance => WordInstance を後続アクションへ渡しています。既存の別 Word インスタンスを流用する実測例はナレッジ内にありません。
+
+確認済み範囲
+
+Word を既存文書で起動（ReadOnly=False）
+Word 文書内の単語を検索して置換する
+Word を別名保存する（DocumentFormat: FromExtension）
+Word を閉じる
+
+未確認
+
+この4アクションを今回のパス・文字列で組み合わせた再貼付け／実行証跡はナレッジ内にありません。以下は確認済み原文を組み合わせたフロー案です。
+2. PADで先に確認する設定・依存
+入力ファイルが存在すること。
+出力先フォルダー
+C:\Users\yuuki\ai-prompts\catalog\evidence\ が存在すること。
+出力ファイルが既に存在する場合の挙動は、ナレッジ内に Word SaveAs の衝突設定例がありません。必要に応じて事前確認してください。
+保存形式は実測例どおり Word.WordFormat.FromExtension を使用します。保存先拡張子 .docx に従う想定です。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+2
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+3
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t06-final.docx'''
+4
+Word.CloseWord.Close Instance: WordInstance
+4. デザイナー上の確認方法
+アクション数が 4個 であること。
+順序が以下と一致すること。
+Word を起動する（既存文書・ReadOnly=False）
+Word 文書内の単語を検索して置換する
+Word を保存（Save As）
+Word を閉じる
+すべての Word アクションが同じ WordInstance を参照していること。
+TextToFind が OfficeCatalog、TextToReplaceWith が T06Replaced になっていること。
+保存先が元ファイルではなく normal-chat-t06-final.docx になっていること。
+5. 保存・実行・照合手順
+合成入力ファイル word-catalog.docx を使用して保存。
+フロー実行。
+出力ファイル normal-chat-t06-final.docx を開く。
+本文中の OfficeCatalog が T06Replaced に置換されていることを確認。
+OfficeCatalog 以外の本文が保持されていることを確認。
+元ファイル word-catalog.docx を開き、元の内容のままであることを確認。
+再実行時も出力内容が期待どおりか確認。
+
+期待結果
+
+出力ファイルのみが T06Replaced を含む。
+指定文字列以外の本文は保持される。
+元ファイルは変更されない。保存操作は別名保存先に対して実施される。

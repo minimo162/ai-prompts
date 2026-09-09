@@ -1,0 +1,96 @@
+1. 前提・対象範囲・未確認点
+
+目的
+合成Wordファイル C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx を**編集可能（ReadOnly=False）**で開き、本文中の OfficeCatalog を T06Replaced に置換し、別名で C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx へ保存します。元ファイルは変更しません。
+
+入力
+
+Wordファイル: C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+
+出力
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx
+
+依存
+
+Wordインスタンス: WordInstance
+WordアプリがPAD実行環境で利用可能であること
+
+成功条件
+
+出力ファイルにおいて本文中の OfficeCatalog が T06Replaced へ置換されている
+指定文字列以外の本文は保持されている
+元ファイル word-catalog.docx は変更されていない
+
+確認済み根拠
+
+Wordを既存文書として編集可能で開く（ReadOnly=False）: catalog/actions/word-launch/open-editable.robin
+Word置換: catalog/actions/word-replace/all-literal.robin
+Word別名保存: catalog/actions/word-save/as-docx-extension.robin
+Word終了: catalog/actions/word-close/no-save.robin
+いずれもナレッジに収録されています。今回の組合せ・対象パス・置換語は依頼内容への適用であり、当該パスでの再実行証跡はナレッジ内にありません。
+2. PADで先に確認する設定・依存
+置換対象ファイルが存在すること
+C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+保存先フォルダーが存在すること
+C:\Users\yuuki\ai-prompts\catalog\evidence
+フロー内で使用するWordインスタンス名
+WordInstance
+保存形式
+Word.WordFormat.FromExtension
+起動設定
+Visible: True
+ReadOnly: False
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+2
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+3
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t06-final.docx'''
+4
+Word.CloseWord.Close Instance: WordInstance
+4. デザイナー上の確認方法
+
+アクション数が 4個 であること
+
+Word を起動する（既存文書を開く）
+Word 文書内の単語を検索して置換する
+Word を保存（別名保存）
+Word を閉じる
+
+変数型
+
+WordInstance : Wordインスタンス
+
+エラー表示確認
+
+貼り付け直後に赤色エラーが出ていないこと
+WordInstance の未定義エラーがないこと
+SaveAs の保存先パスが有効であること
+
+順序確認
+
+起動 → 置換 → SaveAs → Close
+SaveAs が Close より前にあること
+5. 保存・実行・照合手順
+元ファイル word-catalog.docx のバックアップハッシュまたは更新日時を記録する。
+フローを保存して実行する。
+出力ファイル
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx が生成されることを確認する。
+出力ファイルを開き、OfficeCatalog が T06Replaced へ置換されていることを確認する。
+置換対象以外の本文（日本語、改行、その他テキスト）が保持されていることを確認する。
+元ファイル word-catalog.docx を開き、OfficeCatalog のままであることを確認する。
+再実行時も元ファイルが変化していないことを確認する。
+
+根拠ファイル
+
+catalog/actions/word-launch/open-editable.robin
+catalog/actions/word-replace/all-literal.robin
+catalog/actions/word-save/as-docx-extension.robin
+catalog/actions/word-close/no-save.robin
+catalog/flows/office-word/default.robin（Word操作の組合せ例）

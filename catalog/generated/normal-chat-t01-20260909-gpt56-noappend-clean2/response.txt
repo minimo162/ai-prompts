@@ -1,0 +1,91 @@
+1. 前提・対象範囲・未確認点
+
+目的
+UTF-8テキストを読み込み、検索語 対象語 を置換語 置換後 に通常置換し、UTF-8テキストとして新規保存します。
+
+入力
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+
+出力
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260909.txt
+
+期待結果
+
+対象語 のみを 置換後 に通常置換
+特殊文字・引用符・バックスラッシュ・対象外文字を保持
+入力の末尾改行を保持
+依頼されていない追加改行を出さない
+
+根拠
+
+UTF-8テキスト読取り: catalog/actions/file-read-text/utf8.robin（確認済み）
+通常置換: catalog/actions/text-replace/literal.robin（確認済み）
+テキスト変数書込み・追加改行なし: catalog/actions/file-write-text/variable-reference-no-append.robin（確認済み）
+
+未確認
+
+この特定入力ファイルの実行結果そのものは未確認
+実際の入力内容に対する置換件数は未確認
+2. PADで先に確認する設定
+変数
+
+このフローで生成される変数:
+
+変数名	型
+FileContents	テキスト
+Replaced	テキスト
+保存先
+
+出力先フォルダー:
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\
+
+出力ファイル:
+
+normal-chat-t01-output-20260909.txt
+
+置換設定
+通常置換
+検索語: 対象語
+置換語: 置換後
+IgnoreCase=False
+正規表現は使用しない
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-20260909.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+4. デザイナー上の確認方法
+貼り付け後、アクション数が 3個 であることを確認。
+順序が以下になっていることを確認。
+ファイルからテキストを読み取る
+テキストを置換する
+テキストをファイルに書き込む
+出力変数が以下になっていることを確認。
+FileContents
+Replaced
+デザイナーに赤エラーが表示されていないことを確認。
+TextToWrite: Replaced が文字列リテラルではなく変数参照になっていることを確認。
+書込みアクションの
+エンコード = UTF-8
+ファイル存在時 = 上書き
+新しい行を追加する = False になっていることを確認。
+5. 合成データでの検証手順
+入力ファイルをバックアップせず読み取り専用で使用する。
+フローを実行する。
+出力ファイル normal-chat-t01-output-20260909.txt を生成できたことを確認する。
+入力ファイルと出力ファイルを比較し、
+対象語 → 置換後
+置換対象以外の文字が一致
+日本語・引用符・バックスラッシュが保持
+行数が変化していない
+末尾改行が入力と一致 を確認する。
+同じ入力で再実行し、出力内容が再現することを確認する。

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-10T01:16:17.6604129+09:00",
+  "flow_name": "RobinKnowledgeT10Independent_20260910",
+  "excel_a1": "T10-Changed",
+  "word_text": "CopilotOffice 246",
+  "powerpoint_text": "CopilotOffice 246",
+  "outputs": [
+    {
+      "path": "catalog\\evidence\\copilot-excel-t10-v6.xlsx",
+      "bytes": 8932,
+      "sha256": "b45f120309fe621f6d26154e41358bcba715d9caa684a72b40b1526ed9783f3f"
+    },
+    {
+      "path": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-word.docx",
+      "bytes": 13649,
+      "sha256": "971df2c2a82a9adb54544c5866ed68f8952c307a911825dc6373dca5d6be3b1a"
+    },
+    {
+      "path": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-powerpoint.pptx",
+      "bytes": 34121,
+      "sha256": "2505cdf415d4b8f13009cbe0d0af9a38b3344b58d1c5135333f38d59437145ba"
+    }
+  ],
+  "expected_scope": "Excel WriteCell literal and Excel SaveAs filename changed only",
+  "run_evidence": "evidence/normal-chat-t10-independent-run.json"
+}

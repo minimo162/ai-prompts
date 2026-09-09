@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-09T14:48:34.6542157Z",
+  "flow_name": "RobinKnowledgeTextWriteVariableNoAppend_20260909",
+  "source_robin": "catalog\\actions\\file-write-text\\variable-reference.robin",
+  "source_sha256": "7d73b162b4b298a547b7c45f98eab0f116a0abf047e6ec1e65de3d426063adac",
+  "source_bytes": 232,
+  "paste_confirmed": true,
+  "action_count_after_paste": 1,
+  "saved_confirmed": true,
+  "clipboard_restored": true,
+  "execution_requested": false
+}

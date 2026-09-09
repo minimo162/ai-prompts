@@ -1,0 +1,86 @@
+1. 前提・対象範囲・未確認点
+
+目的: UTF-8 の CSV を読み込み、Status 列が 対象 の行のみを新しい CSV として保存する。入力 CSV は変更しない。
+
+対象:
+
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\csv\t02-input-20260910.csv
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t02-output-20260910.csv
+フィルター条件: Status = 対象
+要件: 列数保持、日本語保持、カンマを含む引用フィールド保持、二重引用符保持
+出力ファイル: 上書き設定を明示
+
+未確認点:
+
+今回の処理を完成するために必要な「DataTable 行追加」「CSV 読込結果の DataTable をフィルター後 DataTable へ構築する実行済み組合せ」が、添付ナレッジの確認済み範囲にありません。For each と If の単独構文は採取済みですが、CSV 読取り結果を新しい DataTable へ行追加する成功例は未採取です。さらに、確認済みの行追加例は 0 行 0 列テーブルへの失敗記録のみです。したがって、動作確認済みとして貼り付け用 Robin を生成する根拠が不足しています。
+
+2. PADで確認できている設定・依存
+CSV読取り（確認済み）
+
+確認済みの CSV 読取りアクションは以下です。
+
+アクション: 「CSV ファイルから読み取る」
+エンコード: UTF-8
+区切り: File.CSVColumnsSeparator.SystemDefault
+出力: DataTable (CSVTable)
+実行確認あり
+CSV書出し（確認済み）
+
+確認済みの CSV 書出しアクションは以下です。
+
+アクション: 「CSV ファイルに書き込む」
+エンコード: UTF-8
+列名出力: IncludeColumnNames: False
+ファイル存在時: File.IfFileExists.Overwrite
+区切り: File.CSVColumnsSeparator.SystemDefault
+DataTable 変数からの書出し実行確認あり
+フィルター条件（構文のみ採取済み）
+アクション: 「For each」
+構文: LOOP FOREACH CurrentItem IN Items
+アクション: 「If」
+構文: IF CurrentItem[Status] = $'''対象''' THEN
+
+ただし CSV 読込み結果との組合せ実行は未確認です。
+
+3. 貼り付け用Robin
+
+現時点では提示できません。
+
+理由:
+
+Status=対象 の行だけを新しい DataTable に追加するための確認済み Robin 原文がない。
+成功した「行をデータ テーブルに挿入する」の原文・設定・実行証拠がナレッジに存在しない。
+ナレッジの失敗例のみから行追加構文を推測することは契約上できない。
+4. デザイナー上で先に追加採取が必要な項目
+
+以下を 1 アクションずつ追加し、PAD の「コピー」で取得した Robin 原文を提示してください。
+
+行をデータ テーブルに挿入する
+
+列定義済み DataTable に対する成功例
+RowToAdd 設定済み状態
+
+CSV の列名あり読取り設定
+
+Status 列を CurrentItem[Status] で参照できることを確認できる状態
+
+フィルター後 DataTable への追加例
+
+1 行だけ追加した成功実行結果
+
+これらの原文があれば、確認済みアクションだけで組み立てたフロー案を作成できます。
+
+5. 期待結果（要件として確認）
+
+追加採取後に実装できた場合の期待結果は次のとおりです。
+
+入力 CSV は変更しない。
+出力先 normal-chat-t02-output-20260910.csv を新規生成または上書きする。
+Status 列が 対象 の行のみ出力する。
+日本語を保持する。
+CSV の引用フィールドを保持する。
+フィールド内のカンマを保持する。
+二重引用符を保持する。
+UTF-8 で保存する。
+
+現状のナレッジだけでは、上記処理を実現するための貼り付け用 Robin を確認済み根拠付きで作成できません。行追加アクションの成功例 Robin を提示いただければ、その範囲で組み立てます。

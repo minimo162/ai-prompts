@@ -1,0 +1,1 @@
+Variables.FilterDataTable DataTable: $'''CSVTable''' FilterParameters: `` MatchCase: True FilteredDataTable=> FilteredDataTable

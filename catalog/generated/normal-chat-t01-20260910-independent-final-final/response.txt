@@ -1,0 +1,91 @@
+1. 前提・対象範囲・未確認点
+
+目的: UTF-8テキストを読み取り、検索語 対象語 を置換語 置換後 に通常置換し、UTF-8の新規テキストとして保存します。対象外文字、特殊文字、改行は入力内容を保持します。入力末尾改行を保持し、依頼されていない追加改行は行いません。
+
+対象:
+
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+検索語: 対象語
+置換語: 置換後
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt
+文字コード: UTF-8
+上書き: 既存内容を上書き
+
+根拠:
+
+「ファイルからテキストを読み取る（UTF-8）」確認済み。
+「テキストを置換する（通常置換）」確認済み。
+「テキスト変数を書き込む（UTF-8・AppendNewLine=False）」確認済み。
+
+未確認:
+
+この3アクションを今回の組合せとして再貼付け・実行・期待値照合した証拠はナレッジ内にありません。各アクション単体の確認済み原文を組み合わせたフロー案です。
+2. PADで先に確認する設定
+
+事前作成は不要です。
+
+使用される変数:
+
+FileContents : テキスト
+Replaced : テキスト
+
+入力ファイルが存在することを確認してください。
+
+出力先フォルダー:
+
+C:\Users\yuuki\ai-prompts\catalog\evidence
+
+が存在することを確認してください。
+
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-20260910.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+根拠:
+
+読取り原文: UTF-8読取りの確認済み例。
+置換原文: 通常置換 Text.Replace.ReplaceText の確認済み例。
+書込み原文: テキスト変数参照かつ AppendNewLine: False の確認済み例。
+4. デザイナー上の確認方法
+
+アクション数:
+
+ファイルからテキストを読み取る
+テキストを置換する
+テキストをファイルに書き込む
+
+確認ポイント:
+
+エラー表示がないこと
+FileContents がテキスト型として生成されること
+Replaced がテキスト型として生成されること
+置換アクションの出力が Replaced であること
+書込みアクションの TextToWrite が文字列リテラルではなく変数 Replaced になっていること
+書込みアクションの AppendNewLine が False であること
+5. 合成データでの保存・実行・照合手順
+空フローへRobinを貼り付ける。
+保存する。
+実行する。
+出力ファイル normal-chat-t01-output-20260910.txt を確認する。
+以下を照合する。
+対象語 のみが 置換後 へ置換されている。
+対象外文字は変更されていない。
+日本語・特殊文字・引用符・バックスラッシュが保持されている。
+改行数が入力と一致している。
+入力に末尾改行がある場合は保持されている。
+追加の空行が末尾へ付与されていない。
+同じ入力で再実行し、出力内容が再現することを確認する。
+
+確認済み根拠ファイル:
+
+通常置換: catalog/actions/text-replace/literal.robin
+UTF-8読取り: catalog/actions/file-read-text/utf8.robin
+UTF-8書込み（変数参照・AppendNewLine=False）: catalog/actions/file-write-text/variable-reference-no-append.robin

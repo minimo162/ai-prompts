@@ -1,0 +1,89 @@
+1. 前提・対象範囲・未確認点
+
+目的
+合成Word word-catalog.docx を**編集可能（ReadOnly=False）**で開き、本文中の OfficeCatalog を T06Replaced に置換し、別名で
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-output.docx
+
+へ保存します。元ファイルは変更しません。
+
+確認済み根拠
+
+Word既存文書を編集可能で開く原文あり（ReadOnly: False）。
+Word全文置換（リテラル置換）の原文あり。
+Word別名保存（SaveAs、Word.WordFormat.FromExtension）の原文あり。
+Word終了の原文あり。
+
+未確認
+
+ご提示の実ファイル配置場所（入力側の word-catalog.docx のフルパス）は依頼文に記載されていません。
+ナレッジには「Word既存文書を編集可能で開く」原文はありますが、このT06の実ファイルに対する再貼付け・実行結果は未確認です。したがって下記は確認済み原文の組合せによるフロー案です。
+2. PADで先に作る設定・依存
+入力Wordファイル
+
+Path: を実際の word-catalog.docx の保存場所へ変更してください。
+
+例:
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+
+※実パスは利用環境に合わせて設定。
+
+Wordインスタンス
+生成変数: WordInstance
+既存Wordインスタンス依存なし
+アクション内で新規取得するWordインスタンスを後続へ渡す構成。
+保存形式
+DocumentFormat: Word.WordFormat.FromExtension
+出力先拡張子が .docx のため、拡張子準拠の形式で保存。
+出力先
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-output.docx
+
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+2
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+3
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-output.docx'''
+4
+Word.CloseWord.Close Instance: WordInstance
+4. デザイナー上の確認方法
+アクション順序
+Word を起動する（既存文書を開く）
+Word 文書内の単語を検索して置換する
+Word を保存（別名保存）
+Word を閉じる
+
+上記4アクションになっていることを確認してください。
+
+変数
+WordInstance : Wordインスタンス
+
+他の変数は不要です。
+
+エラー確認
+WordInstance が全アクションで同一になっていること。
+SaveAs の保存先が出力ファイルになっていること。
+Open の ReadOnly が False になっていること。
+5. 保存・実行・照合手順
+フローを保存。
+合成Wordのコピーを使って実行。
+normal-chat-t06-output.docx が生成されることを確認。
+元の word-catalog.docx を開き、変更されていないことを確認。
+出力ファイルを開き、
+OfficeCatalog → T06Replaced
+それ以外の本文は保持
+不要な追記・削除がない を確認。
+
+期待結果
+
+出力ファイルでは本文中の OfficeCatalog のみが T06Replaced に置換される。
+指定文字列以外の本文は保持される。
+元の word-catalog.docx は変更されない（別名保存運用）。
+終了時に WordInstance を閉じる。

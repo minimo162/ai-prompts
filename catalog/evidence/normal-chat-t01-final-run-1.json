@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-09T16:43:35.7152940Z",
+  "flow_name": "RobinKnowledgeT01Final_20260910",
+  "run_status": "success",
+  "ready_observed": true,
+  "start_enabled_after": true,
+  "variable_previews": [
+    "日本語 対象語 100% '引用' \"二重引用\" C:\\sample 対象語 対象外語 ",
+    "日本語 置換後 100% '引用' \"二重引用\" C:\\sample 置換後 対象外語 "
+  ]
+}

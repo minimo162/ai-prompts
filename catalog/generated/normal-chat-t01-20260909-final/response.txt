@@ -1,0 +1,138 @@
+1. 前提・対象範囲・未確認点
+
+目的
+UTF-8テキストを読み込み、指定語だけを通常置換し、日本語・引用符・100%・バックスラッシュ・改行・対象外文字を保持したまま、新しいUTF-8テキストとして保存するフロー案です。
+
+処理対象（安全な仮定）
+
+入力: UTF-8テキストファイル
+置換: 指定語のみ（正規表現ではなく通常置換）
+出力: 別ファイルへ保存
+上書き: 出力先ファイルは上書き可
+
+未確認点
+
+ナレッジには以下の実測原文があります。
+ファイルからテキストを読み取る
+テキストをファイルに書き込む（UTF-8・上書き）
+テキストを置換する（通常置換）のアクション存在と実測条件
+ただし、通常置換アクションのRobin原文全体は結合版に掲載されていません。
+そのため、Text.Replace.ReplaceText の完全な引数列・出力変数名まで含めた貼り付け用Robinを、確認済み原文として再現できません。推測で補完するとルール違反になるため記載しません。
+
+根拠
+
+PAD-Robin-Knowledge-Bundle 内
+copilot/knowledge/PAD-Robin-01-Basics.txt
+copilot/knowledge/PAD-Robin-03-Files.txt
+に実測情報あり。
+2. PADで先に作る設定
+入力変数
+変数名	型	用途
+InputFilePath	文字列	入力UTF-8テキスト
+OutputFilePath	文字列	出力UTF-8テキスト
+SearchText	文字列	検索語
+ReplaceText	文字列	置換後文字列
+確認済みアクション
+ファイルからテキストを読み取る
+テキストを置換する（通常置換）
+テキストをファイルに書き込む
+保存設定
+
+実測済みの書き込み設定は以下です。
+
+エンコード: UTF-8
+ファイルが存在する場合: 既存の内容を上書きする
+新しい行を追加する: True
+3. 貼り付け用Robin
+確認済み原文
+
+入力ファイル読込み（実測原文）
+
+Plain Text
+robin は完全にはサポートされていません。構文ハイライトは Plain Text に基づいています。
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Temp\\input.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+
+出力ファイル保存（実測原文）
+
+Plain Text
+robin は完全にはサポートされていません。構文ハイライトは Plain Text に基づいています。
+1
+File.WriteText File: $'''C:\\Temp\\output.txt''' TextToWrite: $'''置換後テキスト''' AppendNewLine: True IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+未確認のため掲載できない部分
+
+通常置換アクションは、
+
+UI名: テキストを置換する
+Robin命令名: Text.Replace.ReplaceText
+ComparisonType: Text.TextComparisonType.CultureSensitive
+
+までは確認できますが、結合版には完全なRobin原文が掲載されていません。
+
+そのため、
+
+Plain Text
+robin は完全にはサポートされていません。構文ハイライトは Plain Text に基づいています。
+1
+Text.Replace.ReplaceText ...
+2
+``
+
+以降の引数名・出力変数名を推測した貼り付け用コードは出せません。
+
+4. デザイナー上の確認方法
+アクション順序
+ファイルからテキストを読み取る
+テキストを置換する（通常置換）
+テキストをファイルに書き込む
+型確認
+変数	想定型
+FileContents	文字列
+SearchText	文字列
+ReplaceText	文字列
+ReplaceResult	文字列
+設定確認
+通常置換を使用していること
+正規表現置換ではないこと
+UTF-8で読込み
+UTF-8で書出し
+出力先が入力元と別であること
+5. 合成データでの照合手順
+入力例
+Plain Text
+1
+日本語
+2
+対象語 100%
+3
+'引用' "二重引用" C:\sample
+4
+対象語
+置換条件
+検索語: 対象語
+置換語: REPLACED
+期待結果
+Plain Text
+1
+日本語
+2
+REPLACED 100%
+3
+'引用' "二重引用" C:\sample
+4
+REPLACED
+確認ポイント
+日本語が変化していない
+100% が保持されている
+' および " が保持されている
+C:\sample が保持されている
+改行数が保持されている
+指定語以外の文字が変化していない
+出力ファイルがUTF-8で保存されている
+確認済み範囲
+テキスト読込み（UTF-8）: 確認済み原文あり。
+テキスト書出し（UTF-8・上書き）: 再貼付け・実行・期待値照合済み。
+通常置換アクションの存在とモード: 確認済み。
+通常置換アクションの完全Robin原文: 未掲載・未確認。
+
+通常置換アクションを1件PADからコピーしたRobin原文（「テキストを置換する」を単独配置してコピーした内容）があれば、その実測原文を根拠に貼り付け可能な完成Robinへ組み立てできます。

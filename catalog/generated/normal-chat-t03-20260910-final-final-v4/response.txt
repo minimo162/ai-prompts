@@ -1,0 +1,74 @@
+1. 前提・対象範囲・未確認点
+
+目的: C:\Users\yuuki\ai-prompts\catalog\fixtures\files 内の複数ファイルを一度ずつ処理し、.txt のみ UTF-8 で内容を読む。.csv と .md は対象外にする。
+
+確認済みとしてナレッジに存在するのは以下です。
+
+フォルダー内ファイル取得（フィルター *）
+For each の開始構文 LOOP FOREACH CurrentItem IN Items
+ファイルパス変数に対する .txt 含有判定 IF Contains(CurrentFile, $'''.txt''', False) THEN
+ファイルパス変数から UTF-8 でテキスト読取り File.ReadTextFromFile.ReadText File: CurrentFile ...
+Folder.GetFiles → For each → ReadText の組合せ実行証拠（ただし拡張子判定・Else は未確認）
+
+未確認:
+
+ファイル名のみ取得するアクション／構文
+Else の Robin 原文
+For each および If の終端行（ブロック終端）
+.csv と .md を明示的に振り分ける条件式
+上記を含む完成フローの通し実行
+
+そのため、以下の Robin は「確認済み原文のみ」で構成した部分フローです。完成・実行済みフローとしては扱いません。
+
+2. PADで先に作る設定
+対象フォルダー
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+取得変数: Files
+ループ変数: CurrentFile
+読取り結果変数: FileContents
+読取りエンコード: UTF-8
+3. 貼り付け用Robin（確認済み原文のみ）
+Plain Text
+1
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+2
+LOOP FOREACH CurrentFile IN Files
+3
+IF Contains(CurrentFile, $'''.txt''', False) THEN
+4
+File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+
+根拠:
+
+フォルダー内全ファイル取得: catalog/actions/folder-get-files/all-files-no-subfolders.robin
+For each: catalog/actions/foreach/items-variable.robin
+.txt 判定: catalog/actions/if/current-file-contains-txt.robin
+UTF-8読取り: catalog/actions/file-read-text/variable-path-utf8.robin
+4. デザイナー上で確認する点
+
+確認済み部分:
+
+Folder.GetFiles の出力型はリスト変数 Files。
+CurrentFile は For each の反復変数。
+File.ReadTextFromFile.ReadText の出力は FileContents。
+
+追加採取が必要な部分:
+
+For each の終端を追加してコピー
+If の終端を追加してコピー
+Else を追加してコピー
+.csv および .md を対象外へ振り分ける条件設定をコピー
+保存→再貼付け→実行で構文一致を確認
+
+現時点では、.csv と .md を別経路へ送る Robin 原文はナレッジ内にありません。
+
+5. 合成データでの確認手順
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files に .txt、.csv、.md を配置。
+フローを保存。
+実行。
+各反復で CurrentFile を確認。
+.txt のときのみ FileContents に内容が入ることを確認。
+.csv、.md が読取りアクションへ進まないことを確認。
+再実行して同じ結果になることを確認。
+
+.csv／.md の対象外経路を含む完成版 Robin を作るには、Else とブロック終端の実測原文採取が先に必要です。現ナレッジではその構文は未確認です。

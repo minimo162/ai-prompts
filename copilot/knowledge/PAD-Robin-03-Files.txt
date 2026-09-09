@@ -10,7 +10,7 @@ PAD Robin ファイル・CSV
 - 原文ファイル: catalog/actions/datatable-create/empty.robin（SHA-256: f3eef9ad3585b35d39c8f90d9202629d63907414e1f7601270e9d0fff7af9256）。
 - 空の別フローへファイルから貼り付け、保存、再コピーした原文は同じSHA-256。2回の実行で「DataTable: 0 行, 0 列」を確認した。
 - 証拠: catalog/evidence/datatable-create-validation.json、catalog/evidence/datatable-create-run-1.json、catalog/evidence/datatable-create-run-2.json。
-- 未確認: 行追加、セル参照、列定義を含む非空テーブル、CSV読取り／書出しとの組合せ。
+- 未確認: 行追加、セル参照、列定義を含む非空テーブル。CSV読取り／書出しとの組合せは下記の追加採取で確認済み。
 
 今回の追加採取: CSV読取りとDataTable変数参照での書出し
 - 入力fixtureは `ID,Name,Status`、日本語と二重引用符を含む3行CSV。
@@ -20,7 +20,42 @@ PAD Robin ファイル・CSV
 - DataTableをCSVへ書き出す原文（変数欄へ%CSVTable%を設定した結果）:
   `File.WriteToCSVFile.WriteCSV VariableToWrite: CSVTable CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\csv-read-write-output2-20260909.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: False IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault`
 - 2回実行した出力は入力と同じ3論理行で、日本語・引用符を保持した。出力ファイルはUTF-8 BOM付き（66 bytes）。証拠: catalog/evidence/csv-read-validation.json。
+
+今回の追加採取: CSVヘッダー付きDataTableのFilterDataTable抽出
+- 合成入力 `catalog/fixtures/csv/t02-input-20260910.csv` をUTF-8、TrimFields=True、FirstLineContainsColumnNames=True、SystemDefault区切りで読み取り、`CSVTable`を生成した。
+- Filter DataTableの条件画面で列／インデックス=`2`、演算子=`と等しい (=)`、値=`対象`、照合の大文字小文字区別=True、生成変数=`FilteredDataTable`を設定した。
+- 条件付きFilterDataTableの実測Robin:
+  `Variables.FilterDataTable DataTable: CSVTable FilterParameters: { ^['RULE', 'COLUMN', 'OPERATOR', 'VALUE'], [$'''''', 2, $'''Equal''', $'''対象'''] } MatchCase: True FilteredDataTable=> FilteredDataTable`
+- 原文ファイル: catalog/actions/datatable-filter/status-equals-index2.robin（SHA-256: 54878f58f2860e6d5151ef7690450aa878741bc65a80fad2b5f9c482fde5c2ca）。
+- ヘッダー付きCSV読取りの原文は catalog/actions/csv-read/utf8-header.robin（SHA-256: cd7e56ec2cff77b4247072c7d2dee3c6e68911e016a6ea949251bf9a46c4216b）。
+- CSV書出しは `FilteredDataTable`を変数参照として指定し、列名を含める=True、UTF-8、上書きで新規CSVへ保存した。3アクションの組合せ原文は catalog/flows/datatable-filter/roundtrip.robin。
+- 別の空フロー `RobinKnowledgeT02FilterRoundtrip2_20260910` へ組合せ原文を貼り付け、保存、再コピー、2回実行した。出力はUTF-8 BOM・CRLF・末尾改行なしだが、論理CSVはヘッダーとStatus=対象の2行に一致した。証拠: catalog/evidence/filter-t02-roundtrip2-run-2.json。
+- 変数欄へ文字列をそのまま入力した場合はデータテーブル型エラーになるため、変数参照として設定する。条件設定だけの未解決フローは別証拠へ分離し、成功例へ混ぜていない。
+
+今回の追加採取: テキストをファイルに書き込む（UTF-8・上書き）
+- UI名: テキストをファイルに書き込む、automation id: File.WriteText。
+- 設定: ファイル パス=`catalog/evidence/text-write-output-valid-20260909.txt`、書き込むテキストは日本語・対象語・`100%%`・引用符・`C:\sample`を含む4行、新しい行を追加する=True、ファイルが存在する場合=既存の内容を上書きする、エンコード=UTF-8、エラー発生時=既定。
+- 左パネルから追加してコピーした原文:
+  `File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\text-write-output-valid-20260909.txt''' TextToWrite: $'''日本語
+対象語 100%%
+\'引用\' \"二重引用\" C:\\sample
+対象語''' AppendNewLine: True IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8`
+- 原文ファイル: catalog/actions/file-write-text/utf8-overwrite.robin（SHA-256: 3f31e923d6466abcb14e5f7fa864d414256158a6b5431ad9e5f126323818bb86）。
+- 別の空フローへ貼り付け、保存、再コピーした原文は同じSHA-256。元フローとRoundtripを各2回実行した。
+- 出力はUTF-8 BOM付き73 bytes。正規化した4行は日本語、`対象語 100%`、引用符・バックスラッシュを含む行、`対象語`。証拠: catalog/evidence/text-write-validation.json。
+- 100%をそのまま入力した別の試行はデザイナー設計エラーとなり、成功例へ混ぜていない。失敗状態は catalog/evidence/text-write-invalid-percent.json。
 - 書き込む変数欄へ文字列 `CSVTable` をそのまま入力すると、Robinは `$'''CSVTable'''` となり「エクスポートする変数は、データ テーブル、データ行、またはリストである必要があります」のランタイムエラーになった。変数参照と文字列リテラルを混同しない。
+
+今回の追加採取: テキスト書込みアクションへのテキスト変数参照
+- 同じ設定ダイアログの「書き込むテキスト」へ `%Replaced%` を入力し、保存後にアクションを再コピーした。
+- 実測Robin: `File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\text-write-output-valid-20260909.txt''' TextToWrite: Replaced AppendNewLine: True IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8`
+- 原文ファイル: catalog/actions/file-write-text/variable-reference.robin（SHA-256: 7d73b162b4b298a547b7c45f98eab0f116a0abf047e6ec1e65de3d426063adac）。空フローへの貼付け・保存証拠: catalog/evidence/text-write-variable-paste.json。
+- `TextToWrite: Replaced` は既存のテキスト変数を渡す構文であり、文字列リテラル `$'''Replaced'''` とは異なる。実行時は変数 `Replaced` を先行アクションで生成してから使う。
+
+今回の追加採取: テキスト変数書込み・末尾改行を追加しない設定
+- 上記の変数参照例で「新しい行を追加する」をOFFに変更し、保存後に再コピーした。
+- 実測Robin: `File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\text-write-output-valid-20260909.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8`
+- 原文ファイル: catalog/actions/file-write-text/variable-reference-no-append.robin（SHA-256: ca6006e287fdd4050f277f4965d6c2e8c3e1aa724dfbcbd4f3300cd3e7d2abe6）。入力自身の末尾改行を保持し、追加改行を要求しない保存ではこの設定を使う。別の空フローへの貼付け・保存証拠: catalog/evidence/text-write-variable-noappend-paste.json。
 
 失敗例: 0行0列テーブルへの空行追加
 - 「行をデータ テーブルに挿入する」でDataTable、挿入場所=データ テーブルの末尾、新しい値=[]を設定した。
@@ -35,6 +70,16 @@ PAD Robin ファイル・CSV
   `File.Copy Files: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files\\copy-input-20260909.txt''' Destination: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\file-copy-output-20260909''' IfFileExists: File.IfExists.DoNothing CopiedFiles=> CopiedFiles`
 - 別の空フローへファイルから貼り付け、保存、再コピーした原文はSHA-256 `a8fad878ee52f6fb2d8a1f74e8f145e213b7a5c63b63450969f922a53082bedc` で一致した。1回目は出力ファイルのSHA-256が入力と一致し、2回目はDoNothingにより `CopiedFiles=[]`、既存出力は不変だった。
 - 証拠: catalog/evidence/file-copy-validation.json。削除、移動、名前変更、上書きする設定は別採取。
+
+今回の追加採取: フォルダー内のファイルを取得
+- `catalog/fixtures/files` の`*.txt`をサブフォルダーなし、アクセス拒否時は失敗、並び替えなしで取得し、出力変数`Files`を作成した。
+- 実測Robin: `Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*.txt''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files`。
+- 原文`catalog/actions/folder-get-files/txt-files.robin`（SHA-256: 85bcc7fae4cb143e906e9f85bf8775658ff8b2b1c2c41269321ae528879cd06c）。別空フローへ貼付け・保存・2回実行し、`copy-input-20260909.txt`の1件を確認した。証拠: catalog/evidence/folder-get-files-paste.json、folder-get-files-rt-run-1.json、folder-get-files-rt-run-2.json。
+- 追加設定として同じフォルダーの全ファイルをフィルター`*`、サブフォルダーなし、アクセス拒否時は失敗、並び替えなしで取得した。実測Robin: `Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files`。原文`catalog/actions/folder-get-files/all-files-no-subfolders.robin`（SHA-256: f6642f88007dbd5c3a012af9c2686ad921363e082067512b14a2792563e6b5d8）。別空フローへ貼付け・保存・2回実行した。
+
+今回の追加採取: ファイルパス変数からテキストを読み取る
+- `File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents` を採取した。原文`catalog/actions/file-read-text/variable-path-utf8.robin`（SHA-256: 365ed2c2017f33ba31eba5c448febbaaf11e017aaf052548b4eb7f68d6b75be9）。
+- `Folder.GetFiles`→`LOOP FOREACH CurrentFile IN Files`→この読取りを組み合わせた別フローを保存・実行し、合成`.txt`ファイルの内容を取得した。組合せ原文は`catalog/flows/t03-folder-foreach-read/partial.robin`、証拠は`catalog/evidence/t03-partial-paste.json`と`t03-partial-run-1.json`。拡張子判定・Elseは未確認。
 
 確認済みの原文
 - ファイルからテキストを読み取る（id: file-read-text-utf8、variant: utf8）
@@ -52,7 +97,7 @@ PAD Robin ファイル・CSV
 
 注意
 - 読み取ったテキストと数値は型が異なる。空文字、別エンコード、桁区切り、改行の扱いは該当原文と実行証拠を確認する。
-- CSVの引用符を含む読み取り、CSV読取りアクション、フォルダー内ファイル取得、存在確認、フォルダー作成、テキスト書出し、コピー、移動、名前変更は、今回の左パネルで表示名を観測したが、`catalog/index.json` には今回条件のRobin原文・実行証拠がまだない。古い記録の名称や一般的なPAD説明からRobinを作らない。
+- フォルダー内ファイル取得、存在確認、フォルダー作成、テキスト書出し、移動、名前変更は、今回の左パネルで表示名を観測したが、今回条件のRobin原文・実行証拠がまだない。古い記録の名称や一般的なPAD説明からRobinを作らない。CSV読取り・書出しと単一ファイルコピーは上記の原文・実行証拠を正本とする。
 - ファイルを上書き・移動・削除する依頼では、対象、出力、衝突時の設定、結果確認を明示する。確認できない失敗後に後続処理や完了マーカーを作成しない。
 
 関連証拠

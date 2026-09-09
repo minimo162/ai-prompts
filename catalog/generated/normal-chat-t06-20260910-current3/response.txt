@@ -1,0 +1,96 @@
+1. 前提・対象範囲・未確認点
+
+目的
+合成Word文書 C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx を**編集可能（ReadOnly=False）**で開き、本文中の OfficeCatalog を T06Replaced に置換し、別名で C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx へ保存します。元ファイルは変更しません。
+
+処理対象
+
+入力: word-catalog.docx
+置換対象文字列: OfficeCatalog
+置換後文字列: T06Replaced
+出力: normal-chat-t06-final.docx
+
+依存
+
+Wordインスタンス: WordInstance
+Wordアプリが利用可能であること
+保存先フォルダーが存在すること
+
+確認済み根拠
+
+Word編集可能起動（ReadOnly=False）: catalog/actions/word-launch/open-editable.robin
+Word文書内の単語を検索して置換: catalog/actions/word-replace/all-literal.robin
+Word別名保存: catalog/actions/word-save/as-docx-extension.robin
+Word終了: catalog/actions/word-close/no-save.robin
+出典: PAD-Robin-Knowledge-Bundle
+
+未確認
+
+この4アクションを今回のパスで組み合わせた実行証拠はナレッジ内にありません。
+以下は確認済み原文アクションを組み合わせたフロー案であり、今回条件での貼付け・実行・期待値照合済みとは確認できません。
+2. PADで先に確認する設定・依存
+
+入力ファイル
+C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+
+出力ファイル
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx
+
+Word起動アクション
+
+既存ファイルを開く
+Visible=True
+ReadOnly=False
+インスタンス名: WordInstance
+
+終了処理
+
+Wordを閉じる
+インスタンス: WordInstance
+3. 貼り付け用Robin
+
+対象サブフロー: 置換処理本体
+
+Plain Text
+1
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+2
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+3
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t06-final.docx'''
+4
+Word.CloseWord.Close Instance: WordInstance
+4. デザイナー上の確認方法
+
+アクション数: 4
+
+順序:
+
+Word を起動する（既存文書・編集可能）
+Word 文書内の単語を検索して置換する
+Word を保存（別名保存）
+Word を閉じる
+
+変数型:
+
+WordInstance : Wordインスタンス
+
+エラー確認:
+
+4アクションすべてに赤いエラー表示がないこと
+WordInstance 未定義エラーがないこと
+保存先パス入力エラーがないこと
+5. 保存・実行・照合手順
+元ファイル word-catalog.docx をバックアップせずそのまま使用する。
+フローを保存。
+フローを実行。
+出力ファイル normal-chat-t06-final.docx が生成されることを確認。
+出力ファイルを開き、本文中の OfficeCatalog が T06Replaced に置換されていることを確認。
+OfficeCatalog 以外の本文が保持されていることを確認。
+元ファイル word-catalog.docx を開き、変更されていないことを確認。
+
+期待結果
+
+出力ファイルには T06Replaced が反映される。
+指定文字列以外の本文は保持される。
+元の word-catalog.docx は変更されない。

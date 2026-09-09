@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "started_at": "2026-09-09T14:10:14.525Z",
+  "requested_url": "https://m365.cloud.microsoft/chat/",
+  "browser": "Microsoft Edge CDP",
+  "cdp_port": 9444,
+  "profile": "C:\\Users\\yuuki\\.pdf-kosei-ps\\edge-profile",
+  "attachment_mode": "mechanical_bundle",
+  "files": [
+    {
+      "path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+      "name": "PAD-Robin-Knowledge-Bundle.txt",
+      "sha256": "5f7765fdaa3e7bbf2528fcab145b44475f18fa319bcb3cdabb9245ec6a36ffb7"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "copilot/knowledge/PAD-Robin-00-Index.txt",
+      "name": "PAD-Robin-00-Index.txt",
+      "sha256": "239ef9b6dd1f9dad40bf61867edace3a20b6069762a2d0c85a3aaecd3f2728d8"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-01-Basics.txt",
+      "name": "PAD-Robin-01-Basics.txt",
+      "sha256": "484f05f1d020e0e9f1c68c2e2b97f678be491ddc95f6e9676ba7895a17c55ffb"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-02-Control.txt",
+      "name": "PAD-Robin-02-Control.txt",
+      "sha256": "64ab0c9da6cd8349b1fa218570b47df430db72e57268ec5af9c94e84ecdcc870"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-03-Files.txt",
+      "name": "PAD-Robin-03-Files.txt",
+      "sha256": "ec2bf793ef6c22c915a51576700b39c9b2980f45ac71e3532d44571f64d925dc"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-04-Office-PDF.txt",
+      "name": "PAD-Robin-04-Office-PDF.txt",
+      "sha256": "2f5d10ea6b73013626e40187f25293f3b1601430d3d7656b1e3397e3a5aefc5b"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-05-UI-Web.txt",
+      "name": "PAD-Robin-05-UI-Web.txt",
+      "sha256": "697bade6ae4c0e2c6faf0ab27e78ae4168dc16b6956326785114708a79e0b306"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-06-Examples.txt",
+      "name": "PAD-Robin-06-Examples.txt",
+      "sha256": "2ad4f50b63fd07801bbfbfe2c948a749deaaf155ea0dab7c50ea23d9e44bd900"
+    }
+  ],
+  "instruction_sha256": "8872367787943563ebf69400e24023b3e00efd90b62dbb2e28a8468712473a6a",
+  "prompt_sha256": "bba979cdca7d7daffcffcae40cc99648226b5b8079c53f4f961e7e6c7c96a764",
+  "prompt_utf16": 2537,
+  "stages": [
+    {
+      "event": "cdp_ready",
+      "observed_at": "2026-09-09T14:10:14.550Z",
+      "browser": "Edg/152.0.4191.66"
+    },
+    {
+      "event": "chat_ready",
+      "observed_at": "2026-09-09T14:10:15.829Z",
+      "origin": "https://m365.cloud.microsoft",
+      "url": "https://m365.cloud.microsoft/chat/",
+      "title": "Microsoft Copilot",
+      "editor": true
+    },
+    {
+      "event": "sequential_attachment_start",
+      "observed_at": "2026-09-09T14:10:21.002Z",
+      "count": 1
+    },
+    {
+      "event": "file_attached_check",
+      "observed_at": "2026-09-09T14:10:24.486Z",
+      "index": 1,
+      "name": "PAD-Robin-Knowledge-Bundle.txt",
+      "input_state": {
+        "count": 0,
+        "names": [],
+        "accept": ".doc,application/msword,.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docm,application/vnd.ms-word.document.macroEnabled.12,.xls,application/vnd.ms-excel,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.ppt,application/vnd.ms-powerpoint,.pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation,.txt,text/plain,.csv,text/csv,.pdf,application/pdf,.rtf,application/rtf,.loop,application/vnd.microsoft.loop,.fluid,application/vnd.microsoft.fluid,.tsv,text/tab-separated-values,.html,text/html,.md,text/markdown,.xml,application/xml,.c,.yaml,application/yaml,.php,.sh,application/x-sh,.dart,.css,text/css,.lua,.config,.utf8,.htm,.cpp,.yml,.log,.h,.bash,.ini,.json,application/json,.java,text/x-java-source,.pl,.rs,.js,application/javascript,.py,.tsx,.cs,.jsx,text/jscript,.sql,application/sql,.xlsm,application/vnd.ms-excel.sheet.macroEnabled.12,.ppsm,application/vnd.ms-powerpoint.slideshow.macroEnabled.12,.page,application/vnd.microsoft.page,.jpg,image/jpeg,.jpeg,.png,image/png,.bmp,image/bmp,.jfif,image/jfif,.gif,image/gif,.pjpeg,image/pjpeg,.pjp,image/pjp,.webp,image/webp,.msg,application/vnd.ms-outlook,.eml,message/rfc822"
+      },
+      "attachment_state": {
+        "url": "https://m365.cloud.microsoft/chat/",
+        "title": "チャット | Microsoft Copilot",
+        "labels": [
+          "PAD-Robin-Knowledge-Bundle.txt"
+        ],
+        "attached": [
+          true
+        ],
+        "pending": false,
+        "count": 1
+      }
+    },
+    {
+      "event": "files_attached",
+      "observed_at": "2026-09-09T14:10:24.487Z",
+      "state": {
+        "url": "https://m365.cloud.microsoft/chat/",
+        "title": "チャット | Microsoft Copilot",
+        "labels": [
+          "PAD-Robin-Knowledge-Bundle.txt"
+        ],
+        "attached": [
+          true
+        ],
+        "pending": false,
+        "count": 1
+      }
+    },
+    {
+      "event": "body_inserted_and_verified",
+      "observed_at": "2026-09-09T14:10:24.825Z",
+      "chars": 2537
+    },
+    {
+      "event": "sent",
+      "observed_at": "2026-09-09T14:10:24.910Z"
+    }
+  ],
+  "file_input_state": {
+    "count": 0,
+    "names": [],
+    "accept": ".doc,application/msword,.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docm,application/vnd.ms-word.document.macroEnabled.12,.xls,application/vnd.ms-excel,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.ppt,application/vnd.ms-powerpoint,.pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation,.txt,text/plain,.csv,text/csv,.pdf,application/pdf,.rtf,application/rtf,.loop,application/vnd.microsoft.loop,.fluid,application/vnd.microsoft.fluid,.tsv,text/tab-separated-values,.html,text/html,.md,text/markdown,.xml,application/xml,.c,.yaml,application/yaml,.php,.sh,application/x-sh,.dart,.css,text/css,.lua,.config,.utf8,.htm,.cpp,.yml,.log,.h,.bash,.ini,.json,application/json,.java,text/x-java-source,.pl,.rs,.js,application/javascript,.py,.tsx,.cs,.jsx,text/jscript,.sql,application/sql,.xlsm,application/vnd.ms-excel.sheet.macroEnabled.12,.ppsm,application/vnd.ms-powerpoint.slideshow.macroEnabled.12,.page,application/vnd.microsoft.page,.jpg,image/jpeg,.jpeg,.png,image/png,.bmp,image/bmp,.jfif,image/jfif,.gif,image/gif,.pjpeg,image/pjpeg,.pjp,image/pjp,.webp,image/webp,.msg,application/vnd.ms-outlook,.eml,message/rfc822"
+  },
+  "attachment_state": {
+    "url": "https://m365.cloud.microsoft/chat/",
+    "title": "チャット | Microsoft Copilot",
+    "labels": [
+      "PAD-Robin-Knowledge-Bundle.txt"
+    ],
+    "attached": [
+      true
+    ],
+    "pending": false,
+    "count": 1
+  },
+  "input_state": {
+    "matched": true,
+    "observed_chars": 2537,
+    "raw_observed_chars": 2539,
+    "expected_chars": 2537,
+    "reader": "editor"
+  },
+  "send_state": {
+    "clicked": true
+  },
+  "last_response_chars": 2649,
+  "response": "1. 前提・対象範囲・未確認点\n\n目的\nUTF-8テキストファイルを読み込み、日本語・引用符・100%・バックスラッシュを含む文字列のうち、指定語だけを通常置換し、改行や対象外文字を保持したまま、新しいUTF-8テキストとして保存するフロー案です。\n\n確認済み根拠\n\n「ファイルからテキストを読み取る」実測あり。原文例あり。\n根拠: copilot/knowledge/PAD-Robin-03-Files.txt →catalog/actions/file-read-text/utf8.robin\n「テキストを置換する（通常置換）」実測あり。\n根拠: copilot/knowledge/PAD-Robin-01-Basics.txt →catalog/actions/text-replace/literal.robin\n「テキストをファイルに書き込む（UTF-8・上書き）」実測あり。\n根拠: copilot/knowledge/PAD-Robin-03-Files.txt → catalog/actions/file-write-text/utf8-overwrite.robin\n\n未確認点\n\n入出力ファイルパスは依頼内で未指定のため、下記Robinでは例示パスを使用しています。\n「入力変数」を作るRobin原文はナレッジ内にないため、PAD側で事前作成する前提です。\nこの組み合わせ全体のフローはナレッジにないため、**確認済み原文の組合せ案（貼付け・実行未確認）**です。各アクション自体は実測済みです。\n2. PADで先に作る設定\n入力変数\n変数名\t型\t例\nInputFilePath\tテキスト\tC:\\Work\\Input.txt\nOutputFilePath\tテキスト\tC:\\Work\\Output.txt\nSearchText\tテキスト\t対象語\nReplaceText\tテキスト\t新対象語\n入力テキスト例\nPlain Text\n1\n日本語\n2\n対象語 100%\n3\n'引用' \"二重引用\" C:\\sample\n4\n対象語\n保存先\n出力先は入力ファイルと別ファイル推奨\n既存ファイルを上書きする設定を使用\nエンコードは UTF-8\n3. 貼り付け用Robin\n\n対象サブフロー: Main\n置換範囲: 新規追加\n\nPlain Text\n1\nFile.ReadTextFromFile.ReadText File: InputFilePath Encoding: File.TextFileEncoding.UTF8 Content=> FileContents\n2\nText.Replace.ReplaceText Text: FileContents TextToFind: SearchText IgnoreCase: False ReplaceWith: ReplaceText ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced\n3\nFile.WriteText File: OutputFilePath TextToWrite: Replaced AppendNewLine: True IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8\n根拠\n読取り: File.ReadTextFromFile.ReadText 実測原文あり。\n通常置換: Text.Replace.ReplaceText 実測原文あり。\nUTF-8書出し: File.WriteText 実測原文あり。\n4. デザイナー上の確認方法\nアクション数\n\n3アクション\n\nファイルからテキストを読み取る\nテキストを置換する\nテキストをファイルに書き込む\n変数型\n変数\t型\nFileContents\tテキスト\nReplaced\tテキスト\nInputFilePath\tテキスト\nOutputFilePath\tテキスト\nSearchText\tテキスト\nReplaceText\tテキスト\n確認ポイント\n「テキストを置換する」が通常置換になっていること\nIgnoreCase=False\nActivateEscapeSequences=False\n書込みのエンコードが UTF-8\n書込みの「ファイルが存在する場合」が「既存の内容を上書きする」\n期待される動作\n\n入力:\n\nPlain Text\n1\n日本語\n2\n対象語 100%\n3\n'引用' \"二重引用\" C:\\sample\n4\n対象語\n\n検索語:\n\nPlain Text\n1\n対象語\n\n置換語:\n\nPlain Text\n1\n置換後\n\n出力:\n\nPlain Text\n1\n日本語\n2\n置換後 100%\n3\n'引用' \"二重引用\" C:\\sample\n4\n置換後\n\n改行、引用符、100%、バックスラッシュは保持され、指定語のみ変更されることを確認します。\n\n5. 合成データでの検証手順\n合成テキストファイルをUTF-8で保存する。\nInputFilePath に指定する。\nSearchText=対象語、ReplaceText=置換後 を設定する。\nフロー保存後に実行する。\n出力ファイルをテキストエディターで開く。\n以下を照合する。\n「対象語」だけが「置換後」になっている。\n日本語が文字化けしていない。\n100% が変化していない。\n'、\" が保持されている。\nC:\\sample が保持されている。\n行数と改行位置が入力と一致している。\n同じ入力で再実行し、出力内容が再現することを確認する。\n\n確認済み原文の根拠\n\n通常置換: catalog/actions/text-replace/literal.robin\nUTF-8テキスト書出し: catalog/actions/file-write-text/utf8-overwrite.robin\nUTF-8テキスト読取り: catalog/actions/file-read-text/utf8.robin\n\n検証状態\n\n各アクション単体: 実測済み。\nこの組合せフロー全体: ナレッジ内に再貼付け・実行証拠なし（貼付け用フロー案）。",
+  "response_observed": true,
+  "finished_at": "2026-09-09T14:10:54.286Z"
+}

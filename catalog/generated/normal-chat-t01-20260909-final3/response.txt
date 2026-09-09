@@ -1,0 +1,143 @@
+1. 前提・対象範囲・未確認点
+
+目的
+UTF-8テキストファイルを読み込み、日本語・引用符・100%・バックスラッシュを含む文字列のうち、指定語だけを通常置換し、改行や対象外文字を保持したまま、新しいUTF-8テキストとして保存するフロー案です。
+
+確認済み根拠
+
+「ファイルからテキストを読み取る」実測あり。原文例あり。
+根拠: copilot/knowledge/PAD-Robin-03-Files.txt →catalog/actions/file-read-text/utf8.robin
+「テキストを置換する（通常置換）」実測あり。
+根拠: copilot/knowledge/PAD-Robin-01-Basics.txt →catalog/actions/text-replace/literal.robin
+「テキストをファイルに書き込む（UTF-8・上書き）」実測あり。
+根拠: copilot/knowledge/PAD-Robin-03-Files.txt → catalog/actions/file-write-text/utf8-overwrite.robin
+
+未確認点
+
+入出力ファイルパスは依頼内で未指定のため、下記Robinでは例示パスを使用しています。
+「入力変数」を作るRobin原文はナレッジ内にないため、PAD側で事前作成する前提です。
+この組み合わせ全体のフローはナレッジにないため、**確認済み原文の組合せ案（貼付け・実行未確認）**です。各アクション自体は実測済みです。
+2. PADで先に作る設定
+入力変数
+変数名	型	例
+InputFilePath	テキスト	C:\Work\Input.txt
+OutputFilePath	テキスト	C:\Work\Output.txt
+SearchText	テキスト	対象語
+ReplaceText	テキスト	新対象語
+入力テキスト例
+Plain Text
+1
+日本語
+2
+対象語 100%
+3
+'引用' "二重引用" C:\sample
+4
+対象語
+保存先
+出力先は入力ファイルと別ファイル推奨
+既存ファイルを上書きする設定を使用
+エンコードは UTF-8
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: 新規追加
+
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: InputFilePath Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: SearchText IgnoreCase: False ReplaceWith: ReplaceText ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: OutputFilePath TextToWrite: Replaced AppendNewLine: True IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+根拠
+読取り: File.ReadTextFromFile.ReadText 実測原文あり。
+通常置換: Text.Replace.ReplaceText 実測原文あり。
+UTF-8書出し: File.WriteText 実測原文あり。
+4. デザイナー上の確認方法
+アクション数
+
+3アクション
+
+ファイルからテキストを読み取る
+テキストを置換する
+テキストをファイルに書き込む
+変数型
+変数	型
+FileContents	テキスト
+Replaced	テキスト
+InputFilePath	テキスト
+OutputFilePath	テキスト
+SearchText	テキスト
+ReplaceText	テキスト
+確認ポイント
+「テキストを置換する」が通常置換になっていること
+IgnoreCase=False
+ActivateEscapeSequences=False
+書込みのエンコードが UTF-8
+書込みの「ファイルが存在する場合」が「既存の内容を上書きする」
+期待される動作
+
+入力:
+
+Plain Text
+1
+日本語
+2
+対象語 100%
+3
+'引用' "二重引用" C:\sample
+4
+対象語
+
+検索語:
+
+Plain Text
+1
+対象語
+
+置換語:
+
+Plain Text
+1
+置換後
+
+出力:
+
+Plain Text
+1
+日本語
+2
+置換後 100%
+3
+'引用' "二重引用" C:\sample
+4
+置換後
+
+改行、引用符、100%、バックスラッシュは保持され、指定語のみ変更されることを確認します。
+
+5. 合成データでの検証手順
+合成テキストファイルをUTF-8で保存する。
+InputFilePath に指定する。
+SearchText=対象語、ReplaceText=置換後 を設定する。
+フロー保存後に実行する。
+出力ファイルをテキストエディターで開く。
+以下を照合する。
+「対象語」だけが「置換後」になっている。
+日本語が文字化けしていない。
+100% が変化していない。
+'、" が保持されている。
+C:\sample が保持されている。
+行数と改行位置が入力と一致している。
+同じ入力で再実行し、出力内容が再現することを確認する。
+
+確認済み原文の根拠
+
+通常置換: catalog/actions/text-replace/literal.robin
+UTF-8テキスト書出し: catalog/actions/file-write-text/utf8-overwrite.robin
+UTF-8テキスト読取り: catalog/actions/file-read-text/utf8.robin
+
+検証状態
+
+各アクション単体: 実測済み。
+この組合せフロー全体: ナレッジ内に再貼付け・実行証拠なし（貼付け用フロー案）。

@@ -1,0 +1,88 @@
+1. 前提・対象範囲・未確認点
+
+対象:
+
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+読み込み: UTF-8
+検索語: 対象語
+置換語: 置換後
+置換方式: 通常置換（正規表現ではない）
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt
+保存: UTF-8、新規テキストとして上書き保存
+末尾改行: 入力テキスト中の改行は保持し、保存時に追加改行を付与しない
+
+根拠:
+
+テキスト読取り（UTF-8）: catalog/actions/file-read-text/utf8.robin（確認済み）
+通常置換: catalog/actions/text-replace/literal.robin（実行確認済み）
+テキスト変数を書込み（UTF-8・上書き・AppendNewLine=False）: catalog/actions/file-write-text/variable-reference-no-append.robin（貼付け・保存確認済み）
+
+未確認点:
+
+この3アクションを組み合わせた T01 専用フローの再貼付け・実行・期待値照合の証拠はナレッジ内にありません。
+各アクション単体の確認済み原文を組み合わせたフロー案です。完成・実行済み例としては扱いません。
+2. PADで先に作る設定
+
+特別な入力変数は不要です。
+
+使用変数:
+
+FileContents（テキスト）
+Replaced（テキスト）
+
+PADの各アクション設定:
+
+ファイルからテキストを読み取る
+
+エンコード: UTF-8
+出力変数: FileContents
+
+テキストを置換する
+
+入力テキスト: FileContents
+検索文字列: 対象語
+置換文字列: 置換後
+IgnoreCase: False
+通常置換
+出力変数: Replaced
+
+テキストをファイルに書き込む
+
+書き込むテキスト: Replaced
+新しい行を追加する: False
+ファイルが存在する場合: 上書き
+エンコード: UTF-8
+3. 貼り付け用Robin
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-20260910.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+4. デザイナー上の確認方法
+アクション数が 3個 であること。
+順序が以下になっていること。
+File.ReadTextFromFile.ReadText
+Text.Replace.ReplaceText
+File.WriteText
+FileContents が読取り結果のテキスト変数であること。
+Replaced が置換後テキスト変数であること。
+最後のアクションが
+AppendNewLine: False
+IfFileExists: File.IfFileExists.Overwrite
+Encoding: File.FileEncoding.UTF8 になっていること。
+デザイナーに赤いエラー表示が出ていないこと。
+5. 保存・実行・照合手順
+新しい空フローへRobinを貼り付ける。
+保存する。
+入力ファイルに合成データを配置する。
+フローを実行する。
+出力ファイル normal-chat-t01-output-20260910.txt をUTF-8で開く。
+次を確認する。
+対象語 が 置換後 にのみ置換されている。
+対象外の文字列は変更されていない。
+日本語・特殊文字・引用符・バックスラッシュが保持されている。
+行数が意図せず増減していない。
+末尾改行が入力と同じ状態で保持されている。
+同じ入力で再実行し、出力内容が一致することを確認する。

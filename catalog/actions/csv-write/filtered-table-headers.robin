@@ -1,0 +1,1 @@
+File.WriteToCSVFile.WriteCSV VariableToWrite: FilteredDataTable CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t02-output-20260910.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: True IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault

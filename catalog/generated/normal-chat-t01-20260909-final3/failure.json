@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "trial": "T01",
+  "status": "FAIL",
+  "reason_category": "instruction_format",
+  "response_path": "catalog/generated/normal-chat-t01-20260909-final3/response.txt",
+  "result_path": "catalog/generated/normal-chat-t01-20260909-final3/result.json",
+  "attachment_mode": "mechanical_bundle",
+  "attachment_path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+  "body_verified": true,
+  "sent": true,
+  "response_stable": true,
+  "knowledge_reference_observation": "テキスト読取り・通常置換・UTF-8書出しの各実測原文を参照したが、3アクション組合せは未実行として明示した",
+  "format_failures": [
+    "RobinコードブロックにPlain Text表示と行番号が混在した",
+    "コードブロック内にNBSPの空行代替が混在した",
+    "T01の組合せフローは貼付け・実行未確認として回答された"
+  ],
+  "pad_execution": "NOT_RUN",
+  "next_change": "agent-instructions.txtで禁止トークンを列挙し、T01依頼へ合成入力・検索語・置換語・出力先を追加して新しい会話で再生成する"
+}

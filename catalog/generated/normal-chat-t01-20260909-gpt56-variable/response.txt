@@ -1,0 +1,79 @@
+1. 前提・対象範囲・未確認点
+
+目的
+UTF-8 テキストを読み込み、検索語 対象語 を 置換後 に通常置換し、新しい UTF-8 テキストとして保存します。
+
+入力
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+
+出力
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260909.txt
+
+使用変数
+
+FileContents（テキスト）
+Replaced（テキスト）
+
+根拠
+
+「ファイルからテキストを読み取る」UTF-8例あり。
+「テキストを置換する（通常置換）」実測原文あり。
+「テキストをファイルに書き込む（UTF-8・変数参照）」実測原文あり。
+
+未確認点
+
+この3アクションを今回の入力パスで組み合わせた再実行証拠はナレッジ内にありません。
+ただし各アクション単体の原文・設定は採取済みです。
+2. PADで先に確認する設定
+
+出力先フォルダーが存在することを確認。
+
+C:\Users\yuuki\ai-prompts\catalog\evidence
+
+Power Fx はナレッジ採取条件と同様に OFF が前提。
+
+「テキストをファイルに書き込む」は実測例に合わせて
+
+エンコード: UTF-8
+ファイルが存在する場合: 既存の内容を上書きする を使用。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-20260909.txt''' TextToWrite: Replaced AppendNewLine: True IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+4. デザイナー上の確認方法
+アクション数が 3個 であることを確認。
+順序が以下になっていることを確認。
+ファイルからテキストを読み取る
+テキストを置換する
+テキストをファイルに書き込む
+変数型を確認。
+FileContents : テキスト
+Replaced : テキスト
+デザイナー上でエラー表示が出ていないことを確認。
+TextToWrite: Replaced となっており、$'''Replaced''' ではないことを確認。これは実測済みの変数参照構文です。
+5. 合成データでの保存・実行・照合手順
+フローを保存。
+実行。
+出力ファイル
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260909.txt が生成または更新されたことを確認。
+入力ファイルと出力ファイルを比較。
+対象語 のみが 置換後 に変更されていること。
+対象外文字が変更されていないこと。
+日本語、引用符、バックスラッシュ等が保持されていること。
+改行数が期待どおりであること。
+再実行し、同じ出力内容になることを確認。
+
+確認済み根拠
+
+UTF-8読取り: ファイル読取り実測例。
+通常置換: Text.Replace.ReplaceText 実測例。
+UTF-8書込み（変数参照）: File.WriteText ... TextToWrite: Replaced 実測例。

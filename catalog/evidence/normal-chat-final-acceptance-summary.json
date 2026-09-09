@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-09T23:20:42.533Z",
+  "knowledge_bundle_sha256": "660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca",
+  "instruction_sha256": "ecefa66549326aca3e0995b9c9d331da2ec9a5ec84640d8befa06b848febd6cc",
+  "cases": {
+    "T01": {
+      "result": "catalog/generated/normal-chat-t01-20260910-final-latest/result.json",
+      "bundle_or_context_sha256": "660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca",
+      "model": "GPT 5.6 Think Deeper",
+      "attachment_input_mode": "preexisting_cdp_input",
+      "attachment_count": 1,
+      "body_match": true,
+      "sent": true,
+      "response_observed": true,
+      "robin_blocks": 1,
+      "pad": "catalog/evidence/normal-chat-t01-independent-final-comparison.json"
+    },
+    "T02": {
+      "result": "catalog/generated/normal-chat-t02-20260910-final-latest/result.json",
+      "bundle_or_context_sha256": "660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca",
+      "model": "GPT 5.6 Think Deeper",
+      "attachment_input_mode": "preexisting_cdp_input",
+      "attachment_count": 1,
+      "body_match": true,
+      "sent": true,
+      "response_observed": true,
+      "robin_blocks": 1,
+      "pad": "catalog/evidence/normal-chat-t02-final-latest-equivalence.json"
+    },
+    "T03": {
+      "result": "catalog/generated/normal-chat-t03-20260910-final-latest/result.json",
+      "bundle_or_context_sha256": "660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca",
+      "model": "GPT 5.6 Think Deeper",
+      "attachment_input_mode": "preexisting_cdp_input",
+      "attachment_count": 1,
+      "body_match": true,
+      "sent": true,
+      "response_observed": true,
+      "robin_blocks": 1,
+      "pad": "catalog/evidence/normal-chat-t03-final-current-run.json"
+    },
+    "T04": {
+      "result": "catalog/generated/normal-chat-t04-20260910-final-final/result.json",
+      "bundle_or_context_sha256": "660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca",
+      "model": "GPT 5.6 Think Deeper",
+      "attachment_input_mode": "preexisting_cdp_input",
+      "attachment_count": 1,
+      "body_match": true,
+      "sent": true,
+      "response_observed": true,
+      "robin_blocks": 0
+    },
+    "T05": {
+      "result": "catalog/generated/normal-chat-t05-20260910-final-latest/result.json",
+      "bundle_or_context_sha256": "660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca",
+      "model": "GPT 5.6 Think Deeper",
+      "attachment_input_mode": "preexisting_cdp_input",
+      "attachment_count": 1,
+      "body_match": true,
+      "sent": true,
+      "response_observed": true,
+      "robin_blocks": 1,
+      "pad": "catalog/evidence/normal-chat-final-bundle-comparison.json"
+    },
+    "T06": {
+      "result": "catalog/generated/normal-chat-t06-20260910-final-latest/result.json",
+      "bundle_or_context_sha256": "660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca",
+      "model": "GPT 5.6 Think Deeper",
+      "attachment_input_mode": "preexisting_cdp_input",
+      "attachment_count": 1,
+      "body_match": true,
+      "sent": true,
+      "response_observed": true,
+      "robin_blocks": 1,
+      "pad": "catalog/evidence/normal-chat-final-bundle-comparison.json"
+    },
+    "T07": {
+      "result": "catalog/generated/normal-chat-t07-20260910-final-latest/result.json",
+      "bundle_or_context_sha256": "660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca",
+      "model": "GPT 5.6 Think Deeper",
+      "attachment_input_mode": "preexisting_cdp_input",
+      "attachment_count": 1,
+      "body_match": true,
+      "sent": true,
+      "response_observed": true,
+      "robin_blocks": 1,
+      "pad": "catalog/evidence/normal-chat-final-bundle-comparison.json"
+    },
+    "T08": {
+      "result": "catalog/generated/normal-chat-t08-20260910-final-latest/result.json",
+      "bundle_or_context_sha256": "660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca",
+      "model": "GPT 5.6 Think Deeper",
+      "attachment_input_mode": "preexisting_cdp_input",
+      "attachment_count": 1,
+      "body_match": true,
+      "sent": true,
+      "response_observed": true,
+      "robin_blocks": 1,
+      "pad": "catalog/evidence/normal-chat-final-bundle-comparison.json"
+    },
+    "T10": {
+      "result": "catalog/generated/normal-chat-t10-20260910-final-strict/result.json",
+      "bundle_or_context_sha256": "bb93fff3d910be25f7836072616d905540bcc041f78063dd4db012ffa51e7ebc",
+      "model": "GPT 5.6 Think Deeper",
+      "attachment_input_mode": "preexisting_cdp_input",
+      "attachment_count": 1,
+      "body_match": true,
+      "sent": true,
+      "response_observed": true,
+      "robin_blocks": 1,
+      "pad": "catalog/evidence/normal-chat-t10-independent-final-comparison.json"
+    }
+  },
+  "unfinished": {
+    "T04": "Excel条件抽出・集計のPAD原文とPAD受入未完了",
+    "T09": "UIブラウザー通し経路未実測",
+    "T04_independent": "拒否境界のみ確認しPAD受入未実施"
+  }
+}

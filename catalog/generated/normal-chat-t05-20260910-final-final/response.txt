@@ -1,0 +1,77 @@
+1. 前提・対象範囲・未確認点
+
+目的: 既存 Excel を編集可能 (ReadOnly=False) で開き、セル B2 のみに文字列 T05-Changed を書き込み、別名保存して終了します。A1 を含む他セルや元ファイルは変更しません。
+
+対象:
+
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\excel-catalog.xlsx
+変更セル: B2
+書込値: T05-Changed（ASCII文字列）
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t05-final.xlsx
+
+根拠として確認できたアクション:
+
+Excel の編集可能起動 (ReadOnly: False)
+Excel ワークシートへの単一セル書込み
+Excel の別名保存 (SaveAs)
+Excel の終了 (Close)
+
+未確認:
+
+ナレッジには excel-catalog.xlsx の実際の B2 値やシート構成の記録はありません。したがって「B2 を上書きする」ことのみを対象とし、シート切替やデータ反復は行いません。これらは未観測です。
+2. PADで先に確認する設定・依存
+入力ファイル excel-catalog.xlsx が存在すること。
+出力先フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence が存在すること。
+ブックが他プロセスでロックされていないこと。
+Excel インスタンス変数名は下記 Robin の ExcelInstance を使用。
+シート選択アクションは入れていません。起動時に開かれるブックのアクティブシート上の B2 を対象とします。シート選択構文はナレッジ未採取です。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance
+2
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T05-Changed''' Column: $'''B''' Row: 2
+3
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-final.xlsx'''
+4
+Excel.CloseExcel.Close Instance: ExcelInstance
+
+根拠:
+
+編集可能起動の実測原文: catalog/actions/excel-launch/open-editable.robin
+Excel セル書込みの実測カテゴリ: Excel ワークシートに書き込む
+SaveAs の実測原文パターン: Office Excel 完成例
+Close の実測原文パターン: Office Excel 完成例
+
+検証状態:
+
+各アクションはナレッジに実測記録あり。
+今回指定の入力パス・出力パス・B2 値との組合せは、このチャットでは再貼付け・実行未確認です。
+4. デザイナー上の確認方法
+アクション数: 4
+順序:
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess
+Excel.WriteToExcel.WriteCell
+Excel.SaveExcel.SaveAs
+Excel.CloseExcel.Close
+変数:
+ExcelInstance : Excel インスタンス
+エラー確認:
+すべてのアクションに赤いエラーマークが出ていないこと。
+ExcelInstance が未定義になっていないこと。
+SaveAs の出力パスに入力パスを誤設定していないこと。
+5. 保存・実行・照合手順
+空フローへ Robin を貼り付ける。
+保存する。
+実行する。
+normal-chat-t05-final.xlsx が生成されることを確認する。
+出力ブックを開く。
+B2 が T05-Changed になっていることを確認する。
+A1 を含む無関係セルが入力ブックと一致することを確認する。
+元の excel-catalog.xlsx を開き、B2 が変更されていないことを確認する。
+再実行時は出力ファイルの更新時刻と B2 の値を再確認する。
+
+根拠ファイル: Excel 編集可能起動、セル書込み、SaveAs、Close は Office/Excel 実測ナレッジに記録されています。

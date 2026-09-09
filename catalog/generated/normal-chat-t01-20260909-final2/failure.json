@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "trial": "T01",
+  "status": "FAIL",
+  "reason_category": "instruction_format_and_combination_unverified",
+  "response_path": "catalog/generated/normal-chat-t01-20260909-final2/response.txt",
+  "result_path": "catalog/generated/normal-chat-t01-20260909-final2/result.json",
+  "attachment_mode": "mechanical_bundle",
+  "attachment_path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+  "body_verified": true,
+  "sent": true,
+  "response_stable": true,
+  "format_failures": [
+    "貼り付け用コードにPlain Text表示・行番号・NBSPの空行が混在した",
+    "コードブロックが説明文と分離されず、無修正貼付け契約を満たさない"
+  ],
+  "knowledge_finding": "テキスト読取り、通常置換、UTF-8書出しの個別原文は参照したが、3アクションの組合せはナレッジ内で実行確認済みではないと回答した",
+  "pad_execution": "NOT_RUN",
+  "next_change": "agent-instructions.txtへ通常チャット用コードブロックの厳密な無番号・NBSP禁止・単一Robin本文契約を追加し、結合版を再生成して新しい会話で再試験する"
+}

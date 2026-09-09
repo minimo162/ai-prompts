@@ -1,0 +1,69 @@
+1. 前提・対象範囲・未確認点
+
+目的
+UTF-8 テキストを読み込み、検索語 対象語 を通常置換で 置換後 に変換し、新しい UTF-8 テキストとして保存します。入力内の特殊文字・改行・対象外文字は保持します。
+
+処理対象
+
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+検索語: 対象語
+置換語: 置換後
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt
+
+使用する確認済みアクション
+
+ファイルからテキストを読み取る（UTF-8）
+テキストを置換する（通常置換）
+テキストをファイルに書き込む（UTF-8・変数参照・AppendNewLine=False）
+
+未確認点
+
+この3アクションを上記パスで組み合わせた実行証跡はナレッジ内にありません。
+各アクションの原文と設定差分は確認済みですが、この組合せ自体は「貼付け・実行未確認」のフロー案です。
+2. PADで先に確認する設定
+入力ファイルが存在すること。
+出力先フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence\ が存在すること。
+Power Fx は採取条件と同じ OFF 環境が推奨です。
+既存ファイルがある場合は上書き保存されます（IfFileExists: File.IfFileExists.Overwrite）。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-20260910.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+根拠
+
+読取り: catalog/actions/file-read-text/utf8.robin および UTF-8 変数パス読取り例。
+通常置換: catalog/actions/text-replace/literal.robin。
+書込み（変数参照・AppendNewLine=False）: catalog/actions/file-write-text/variable-reference-no-append.robin。
+4. デザイナー上での確認方法
+アクション数が 3個 であること。
+実行順序が
+読取り
+置換
+書込み の順であること。
+変数型
+FileContents : テキスト
+Replaced : テキスト
+エラー表示が出ていないこと。
+TextToWrite: Replaced になっており、$'''Replaced''' という文字列リテラルになっていないこと。
+書込みで AppendNewLine: False になっていること。これにより入力自身の末尾改行は保持しつつ、依頼されていない追加改行を発生させません。
+5. 合成データでの保存・実行・照合
+空のフローへ上記Robinを貼り付ける。
+保存する。
+実行する。
+出力ファイル normal-chat-t01-output-20260910.txt を UTF-8 で開く。
+次を確認する。
+対象語 が 置換後 に置換されている。
+対象語 以外の文字列は変化していない。
+特殊文字・引用符・バックスラッシュが維持されている。
+改行数が入力と一致している。
+入力に末尾改行があった場合は保持されている。
+追加の空行が末尾に増えていない。
+同じフローを再実行し、出力内容が同一であることを確認する。上書き保存設定のため、同名出力ファイルは更新されます。

@@ -3,6 +3,8 @@
 作成日：2026-09-09
 対象リポジトリ：minimo162/ai-prompts
 実行担当：ユーザーが選択するGPT 5.6 Luna／xhighのCodexセッション
+
+検証方式の最新優先仕様: `CODEX_CORRECTION_M365_CHAT_VALIDATION.md`。今回の検証は通常のM365 Copilotチャットへの本文入力・実ファイル添付で行い、Agent Builder／Copilot Studioの作成・権限調査は行わない。
 実行方法：このファイルをリポジトリ直下に保存し、別メッセージの /goal から参照する。
 
 > 継続時の利用先・再開条件の訂正は、リポジトリ直下の `CODEX_CORRECTION_M365_AGENT_BUILDER.md` を参照する。元依頼書と食い違う点だけ同訂正方針を優先し、既存成果物と証拠は保全する。

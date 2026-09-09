@@ -1,0 +1,88 @@
+1. 前提・対象範囲・未確認点
+
+目的
+C:\Users\yuuki\ai-prompts\catalog\fixtures\pdf\source-a.pdf の ページ2のみ からテキストを抽出し、C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt へ UTF-8 テキストとして保存します。
+
+入力
+
+PDF: C:\Users\yuuki\ai-prompts\catalog\fixtures\pdf\source-a.pdf
+
+出力
+
+テキスト: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt
+
+使用する確認済みアクション
+
+PDF からテキストを抽出（ページ範囲版の実測あり）
+テキストをファイルに書き込む（UTF-8、変数参照、上書き、AppendNewLine=False の実測あり）
+
+未確認点
+
+ナレッジには「2ページ抽出バリアントが存在する」と記録がありますが、ページ2専用のRobin原文は結合版内に掲載されていません。
+そのため、以下は確認済み原文のページ範囲抽出構文を用い、FromPageNumber=2 と ToPageNumber=2 に設定した組合せ案です。貼付け・実行済み証拠は提示されていません。
+2. PADで先に作る設定
+変数
+
+作成不要です。以下のアクションで生成されます。
+
+ExtractedPDFText（テキスト）
+保存先
+
+出力先フォルダーが存在することを確認します。
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\
+PDF設定
+対象ページ: 2
+ページ範囲: 2 ～ 2
+DetectLayout: False
+入力PDFは変更しません。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 2 DetectLayout: False ExtractedText=> ExtractedPDFText
+2
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt''' TextToWrite: ExtractedPDFText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+4. デザイナー上の確認方法
+アクション数
+
+2アクション
+
+PDF からテキストを抽出
+テキストをファイルに書き込む
+変数型
+ExtractedPDFText : テキスト
+設定確認
+PDF からテキストを抽出
+PDFFile = source-a.pdf
+FromPageNumber = 2
+ToPageNumber = 2
+DetectLayout = False
+出力 = ExtractedPDFText
+テキストをファイルに書き込む
+TextToWrite = ExtractedPDFText
+AppendNewLine = False
+IfFileExists = Overwrite
+Encoding = UTF8
+エラー確認
+ExtractedPDFText が未定義になっていないこと。
+アクション1の出力変数名と、アクション2の入力変数名が一致していること。
+デザイナー上で赤い設定エラーが表示されないこと。
+5. 保存・実行・照合手順
+空のフローへRobinを貼り付ける。
+保存する。
+実行する。
+出力ファイル
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt が生成または上書きされることを確認する。
+UTF-8テキストとして開く。
+抽出内容が PDFのページ2のみ に対応していることを確認する。
+ページ2の識別文字が出力ファイル内に存在すること を確認する。
+同じフローを再実行し、出力が更新されることを確認する。
+期待結果
+入力PDFは変更されない。
+出力ファイルは UTF-8 で保存される。
+抽出対象は ページ2のみ。
+テキスト中に ページ2の識別文字 が含まれる。
+ページ境界や抽出順は PAD の抽出結果をそのまま保存し、追加整形しない。

@@ -1,0 +1,5 @@
+LOOP FOREACH CurrentFile IN Files
+    IF Contains(CurrentFile, $'''.txt''', False) THEN
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+    END
+END

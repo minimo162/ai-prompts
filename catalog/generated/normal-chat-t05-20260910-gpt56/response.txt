@@ -1,0 +1,96 @@
+1. 前提・対象範囲・未確認点
+
+目的
+既存Excelを編集可能（ReadOnly=False）で開き、セル B2 のみに T05-Changed を書き込み、別名保存して終了する。
+
+入力
+
+元ファイル: C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\excel-catalog.xlsx
+
+出力
+
+保存先: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t05-output.xlsx
+
+成功条件
+
+B2セルのみが T05-Changed
+A1を含む無関係なセルは変更されない
+元ファイル excel-catalog.xlsx は変更されない
+出力先に別名保存されたxlsxが生成される
+
+根拠
+
+Excelを編集可能で開く: copilot/knowledge/PAD-Robin-04-Office-PDF.txt 記載の catalog/actions/excel-launch/open-editable.robin（既存Excelを ReadOnly: False で開く実測原文）
+Excelセル書込み: 同ファイルのExcelセル書込み実測例
+Excel別名保存: 同ファイルの Excel.SaveExcel.SaveAs
+Excel終了: 同ファイルの Excel.CloseExcel.Close
+
+未確認
+
+シート選択アクションは未観測。
+B2指定の実測例そのものは採取されていないが、確認済みの「セル書込み」アクションを同一構文で列=B、行=2へ適用する案である。
+データ反復構文は使用しない。
+2. PADで先に確認する設定・依存
+元ファイルが存在すること。
+保存先フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence\ が存在すること。
+出力ファイル normal-chat-t05-output.xlsx を上書きしたくない場合は事前に退避すること。
+対象セルB2が存在するワークシートが、ブックを開いた既定シートであること。 （シート選択の確認済みRobinはナレッジ未採取）
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance
+2
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T05-Changed''' Column: $'''B''' Row: 2
+3
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-output.xlsx'''
+4
+Excel.CloseExcel.Close Instance: ExcelInstance
+4. デザイナー上の確認方法
+アクション数
+
+4アクションであること。
+
+Excel の起動
+Excel ワークシートに書き込む
+Excel の保存（名前を付けて保存）
+Excel を閉じる
+順序
+
+上記順序になっていること。
+
+変数
+ExcelInstance
+Excelインスタンス型として生成されること。
+エラー確認
+貼り付け後に赤いエラー表示がないこと。
+保存できること。
+実行ボタンが有効であること。
+5. 合成データでの検証手順
+
+元ファイル excel-catalog.xlsx をバックアップとして保持する。
+
+フローを実行する。
+
+出力ファイル normal-chat-t05-output.xlsx を開く。
+
+以下を確認する。
+
+B2 = T05-Changed
+A1の値が実行前と一致
+その他の無関係セルが変更されていない
+
+元ファイル excel-catalog.xlsx を開き、
+
+B2が書き換わっていないこと
+ファイル内容が保持されていること を確認する。
+根拠の検証状態
+項目	状態	根拠
+Excel編集可能起動（ReadOnly=False）	PADからコピーした原文あり	catalog/actions/excel-launch/open-editable.robin
+Excelセル書込み	実測例あり	PAD-Robin-04-Office-PDF.txt Excel節
+Excel別名保存（SaveAs）	実測例あり	PAD-Robin-04-Office-PDF.txt Excel節
+Excel終了	実測例あり	PAD-Robin-04-Office-PDF.txt Excel節
+B2のみ変更の結果照合	この組合せは貼付け・実行未確認	今回利用者環境で確認が必要
+シート選択	未採取	ナレッジ対象外

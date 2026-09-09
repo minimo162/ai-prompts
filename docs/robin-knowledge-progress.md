@@ -1,6 +1,6 @@
 # Robinナレッジ作成 進捗
 
-更新日: 2026-09-09
+更新日: 2026-09-10
 
 ## 全体目標
 
@@ -8,39 +8,43 @@
 
 ## 作業ブランチ／基準コミット
 
-- ブランチ: `codex/robin-knowledge-2026-09-09`
-- 基準コミット: `7613e999661ceeb4e025dbfad11dfc21bd42b376`（main）
+- ブランチ: `codex/robin-knowledge-restart-2026-09-09`（PR #19 squashマージ後の再開作業）
+- 基準コミット: `45275ed18c47cd91d3a8ff5ac556d2b9fdec6a19`（main）
 - origin: `https://github.com/minimo162/ai-prompts.git`
-- push、PR、merge、公開: 実施しない
+- PR #19: squashマージ済み。今回の再開確認では新規push・PR・merge・公開を行わない。
 
 ## 実機の条件
 
 - 既存記録で確認済みの条件: PAD `2.71.115.26224`、日本語UI、Power Fx OFF、合成データ・専用フロー。
 - これは過去の記録であり、この再開ターンでのPAD画面・版・Power Fxの再確認ではない。
-- 現在のDesigner PID 27436でファイルバージョン `2.71.115.26224`、日本語UI、作成ダイアログのPower Fx=Offを確認した。専用フロー `RobinKnowledgeLive_20260909` と空の `RobinKnowledgeRoundtrip_20260909` を使用している。
+- 前回の専用フローではDesigner PID 27436でファイルバージョン `2.71.115.26224`、日本語UI、作成ダイアログのPower Fx=Offを確認した。今回のサブテキスト採取では専用フロー `RobinKnowledgeSubstring_20260909`（PID 26352）と空の `RobinKnowledgeSubstringRT_20260909`（PID 27092）を使用した。
 - Computer Useはブラウザー操作に限定されるため、PADは既存のUI Automation補助を読み取り・専用フローに限定して再利用した。既存業務フローは操作していない。
 
 ## 既存資産の再集計
 
-- `catalog/index.json` の実測エントリ: 51件。
-- 今回の日時取得・空データテーブル・空テーブルへの行追加失敗・CSV読取り・CSV書出し・ファイルコピーを追加後の `catalog/index.json`: 57件（既存51＋新規6）。
-- 既存カテゴリ別: 変数7、テキスト8、ループ1、ファイル2、Excel8、Word7、PowerPoint7、PDF11。今回、日時1・変数2（成功1、失敗1）・ファイル3（CSV読取り／書出し／コピー）を追加。
+- 追加前の既存 `catalog/index.json` 実測エントリ: 51件。
+- 今回の日時取得・空データテーブル・空テーブルへの行追加失敗・CSV読取り2・CSV書出し2・FilterDataTable・ファイルコピー・サブテキスト取得・テキスト書出し・テキスト変数書込み2設定・For each・If2・Excel/Word編集可能起動2設定・フォルダー取得2設定・ファイル変数読取り・PDFページ2単独抽出を追加後の `catalog/index.json`: 73件（既存51＋追加22）。
+- 既存カテゴリ別: 変数7、テキスト8、ループ1、ファイル2、Excel8、Word7、PowerPoint7、PDF11。今回、日時1・テキスト1・変数2（成功1、失敗1）・ファイル9（CSV読取り／書出し／コピー／テキスト書出し／テキスト変数書込み2設定／フォルダー取得2／ファイル変数読取り）・ループ1・条件2・Excel起動1・Word起動1を追加。
 - 索引のscopeは「Observed PAD action variants」であり、全アクション一覧でも実行許可集合でもない。
 - 既存の生成・実行証拠は `catalog/generated/list-and-regex/` と `catalog/generated/office-three-apps/` にあるが、新しいエージェントへの登録試験とは区別する。
 
 ## 固定した必須採取チェックリスト
 
-- A 基礎: 既存の変数・文字列・数値・リスト・置換・分割・結合・数値変換に加え、日時取得のdate-only設定を実測済み。日時加算・減算・書式化、一般の数値減算、リスト取出しは未確認。
+- A 基礎: 既存の変数・文字列・数値・リスト・置換・分割・結合・数値変換に加え、日時取得のdate-only設定とサブテキスト取得のUnicode混在1設定を実測済み。日時加算・減算・書式化、一般の数値減算、リスト取出し、サブテキストの別モードは未確認。
 - B 制御: 定数範囲Loopは観測済み。If/Else、For each、ループ脱出、エラー処理、サブフロー作成・呼出しは今回の必須チェックとして未確認。
 - C データ処理: 空データテーブル作成、CSV読取り、DataTable変数参照でのCSV書出しは実測済み。0行0列への空行追加は設計エラーとして記録。列を持つテーブルの行追加・行反復・セル参照は未確認。
-- D ファイル: UTF-8テキスト読取り、CSV読取り、CSV書出しは観測済み。フォルダー内ファイル取得、存在確認、フォルダー作成、テキスト書出し、コピー・移動・名前変更は未確認または既存記録との対応整理が必要。
+- D ファイル: UTF-8テキスト読取り・書出し、CSV読取り・書出し、単一ファイルのコピーは観測済み。フォルダー内ファイル取得、存在確認、フォルダー作成、移動・名前変更は未確認または既存記録との対応整理が必要。
 - E Excel: 起動・セル/範囲読取り・書込み・保存・終了は観測済み。シート選択・データ反復の独立例は未確認。
 - F Word・PowerPoint・PDF: 既存採取・証跡を引き継ぐ教材化と再利用確認が必要。未採取モードを完成例へ混ぜない。
 - G UI・ブラウザー: 既存記録ではEdge起動が拡張機能通信エラー。起動・入力・クリック・待機・文字取得・終了の通し実測は未確認。
 
 ## 現在の段階
 
-採取／教材化（左パネル全体観測と日時取得1設定のRoundtrip・2回実行を完了。M365 Copilot内Agent Builder試験待ち）。
+採取／教材化（左パネル全体観測と追加22設定の実測を完了。通常のM365 CopilotチャットでGPT 5.6 Think Deeperを選択し、結合版添付・本文入力・T01/T02/T03/T05/T06/T07/T08/T10の生成・PAD実行・成果物照合を確認。T04は現行bundleで未採取構文を推測しない拒否境界を確認し、独立チャットでも再確認した。T09とT04のPAD受入、T04独立PAD再試験を継続中）。
+
+T02のFilter DataTableは、PAD UIで列／インデックス=`2`・等価演算子・値=`対象`を設定し、先行CSV読取り・CSV書出しを含む新規フローへ無修正Robinを貼付け、保存・2回実行・CSV照合まで完了した。先行CSVTable生成がない専用フローの未解決入力試行は失敗例として分離した。
+
+最終bundle SHA-256は `660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca`。T01/T02/T03/T05/T06/T07/T08/T10とT01/T10独立通常チャットをこの版で再生成し、T02は現行生成Robinを無修正でPAD実行した。T04は拒否境界のみ、T09は未実測。
 
 ## 直前に完了した項目
 
@@ -48,16 +52,23 @@
 - 既存索引を再集計し、51件・8カテゴリであることを確認した。
 - 作業ブランチを作成した。
 - `copilot/agent-instructions.txt` と7つの登録用 `.txt`、`copilot/README.md` を作成した。
-- `catalog/coverage.json` を生成し、観測済み56件と必須範囲A〜Gの16チェックを明示した。
+- `catalog/coverage.json` を生成し、観測済み73件と必須範囲A〜Gの16チェックを明示した。
 - T01〜T10の依頼・期待値を `catalog/generated/acceptance-t01-t10/README.md` に固定した。
 - `docs/robin-knowledge-validation.md` に静的検証、実機・CopilotのBLOCKED状態、再開手順を保存した。
-- `tests/Test-CopilotRobinPackage.ps1` がPASS（指示欄UTF-16 2,045、ナレッジ7、観測51）。
+- `tests/Test-CopilotRobinPackage.ps1` がPASS（指示欄UTF-16 2,045、ナレッジ7、観測59）。
+- `tests/Test-RobinCatalog.ps1` がPASS（49 checks、PAD/Copilotを呼び出さない静的契約検査）。
 - 左パネルをActionsTreeViewで再観測し、412ノード（グループ72、アクション340）を `catalog/evidence/pad-action-inventory-20260909.json` に保存した。
 - 「現在の日時を取得」を「現在の日付のみ」で採取し、保存テキストを別の空フローへ貼付け・保存・再コピー・SHA-256一致・2回実行・期待値照合した。
 - 「新しいデータ テーブルを作成する」を0行0列設定で採取し、別の空フローへ貼付け・保存・再コピー・SHA-256一致・2回実行・0行0列期待値照合した。行追加・セル参照は未採取。
 - 0行0列DataTableへの空リスト行追加を試し、設計エラーを観測。失敗原文を保存し、成功件数へ含めていない。
 - 日本語・引用符を含む合成CSVをUTF-8で読み、3行3列を確認。DataTable変数参照で別CSVへ書き戻し、内容一致と2回の実行を確認した。
 - 合成ファイルのコピーを専用フォルダーへ実行し、1回目の入力・出力ハッシュ一致と、2回目のDoNothingによる出力不変を確認した。
+- 「サブテキストの取得」を左パネルから追加し、Unicode混在テキストを開始インデックス1・長さ3で切り出した。原文保存、別フローへの貼付け・保存・再コピー、元フローとRoundtripの各2回実行、`Subtext=日本語`照合まで完了した。
+- 「テキストをファイルに書き込む」をUTF-8・上書き・末尾改行で追加採取し、原文保存、別フロー貼付け・保存・再コピー、元フローとRoundtrip各2回実行、BOM付き出力の内容照合まで完了した。`100%`をそのまま入力した失敗フローも分離保存した。
+- 「テキストをファイルに書き込む」の既存テキスト変数参照（`TextToWrite: Replaced`）と`AppendNewLine=False`を追加採取し、各原文の再コピー一致を確認した。結合版を最新版へ再生成した。
+- 通常M365 Copilotチャットでモデルを`GPT 5.6 Think Deeper`へ切り替え、結合版をCDPの既存file inputへ直接添付し、本文3,128文字を全文一致で送信した。回答の3行Robinを無修正で新規PADフローへ貼付け、保存、2回実行した。出力はUTF-8 BOM付き85 bytes、期待5行と完全一致した。詳細は`catalog/generated/normal-chat-t01-20260909-gpt56-noappend-clean2/`、`catalog/evidence/normal-chat-t01-noappend-paste.json`、`normal-chat-t01-noappend-run-1.json`、`normal-chat-t01-noappend-run-2.json`。
+- T03は全ファイル取得、For each、`.txt`判定、ファイルパス変数のUTF-8読取りを通常チャットから生成し、PAD実行で`.txt`だけ読み取り、`.csv`/`.md`を読み取らないことを確認した。T05は編集可能Excel起動原文を追加採取後、B2だけを変更するRobinを通常チャットから生成し、元ブックA1/B2不変、出力B2=`T05-Changed`を照合した。T06は編集可能Word起動・置換・別名保存・終了を通常チャットから生成し、元文書SHA不変・出力置換を確認した。T07はPDF2ページ抽出を2回実行し、T08は存在しないファイルのErrorsGrid期待エラーを記録した。
+- T10は既存16アクションをT10-Knowledge-Flow-Bundleへ機械的に供給し、Excelの1書込み値と1保存名だけをASCII変更したRobinを生成した。PADでExcel A1=`T10-Changed`、Word/PowerPoint本文保持、独立再試験同結果まで確認した。複数ファイル添付は後続ファイルを落としたため、結合版へ切り替えた。
 
 ## その証拠ファイル
 
@@ -80,6 +91,71 @@
 - `catalog/evidence/datetime-current-date-roundtrip-recopy.robin`
 - `catalog/evidence/datetime-current-date-validation.json`
 - `catalog/generated/agent-builder-m365-entry-20260909.json`
+- `catalog/generated/agent-builder-m365-entry-rerun-20260909.json`
+- `catalog/evidence/m365-chat-attachment-attempt-20260910.json`
+- `catalog/evidence/text-substring-validation.json`
+- `catalog/actions/text-substring/mixed-index-length.robin`
+- `catalog/flows/text-substring/roundtrip.robin`
+- `catalog/actions/file-write-text/utf8-overwrite.robin`
+- `catalog/flows/file-write-text/roundtrip.robin`
+- `catalog/evidence/text-write-validation.json`
+- `catalog/evidence/text-write-invalid-percent.json`
+- `catalog/actions/file-write-text/variable-reference.robin`
+- `catalog/actions/file-write-text/variable-reference-no-append.robin`
+- `catalog/evidence/text-write-variable-recopy.robin`
+- `catalog/evidence/text-write-variable-noappend-recopy.robin`
+- `catalog/evidence/text-write-variable-paste.json`
+- `catalog/evidence/text-write-variable-noappend-paste.json`
+- `catalog/generated/normal-chat-t01-20260909-gpt56-variable/`
+- `catalog/generated/normal-chat-t01-20260909-gpt56-noappend-clean2/`
+- `catalog/evidence/normal-chat-t01-pad-paste.json`
+- `catalog/evidence/normal-chat-t01-pad-run-1.json`
+- `catalog/evidence/normal-chat-t01-pad-run-2.json`
+- `catalog/evidence/normal-chat-t01-noappend-paste.json`
+- `catalog/evidence/normal-chat-t01-noappend-run-1.json`
+- `catalog/evidence/normal-chat-t01-noappend-run-2.json`
+- `catalog/fixtures/excel/excel-catalog.xlsx`
+- `catalog/fixtures/word/word-catalog.docx`
+- `catalog/generated/normal-chat-t05-20260910-gpt56/`
+- `catalog/generated/normal-chat-t05-20260910-final-v3/`
+- `catalog/evidence/normal-chat-t05-paste.json`
+- `catalog/evidence/normal-chat-t05-run-1.json`
+- `catalog/generated/normal-chat-t06-20260910-gpt56-v2/`
+- `catalog/generated/normal-chat-t06-20260910-final/`
+- `catalog/evidence/normal-chat-t06-paste.json`
+- `catalog/evidence/normal-chat-t06-run-1.json`
+- `catalog/generated/normal-chat-t07-20260910-gpt56/`
+- `catalog/generated/normal-chat-t07-20260910-final/`
+- `catalog/evidence/normal-chat-t07-paste.json`
+- `catalog/evidence/normal-chat-t07-run-1.json`
+- `catalog/evidence/normal-chat-t07-run-2.json`
+- `catalog/generated/normal-chat-t08-20260910-gpt56/`
+- `catalog/generated/normal-chat-t08-20260910-final/`
+- `catalog/evidence/normal-chat-t08-paste.json`
+- `catalog/evidence/normal-chat-t08-run.json`
+- `catalog/generated/normal-chat-t10-20260910-gpt56-v6/`
+- `catalog/generated/normal-chat-t10-20260910-final-v2/`
+- `catalog/generated/normal-chat-t10-20260910-final-independent-v2/`
+- `catalog/evidence/normal-chat-t10-v6-paste.json`
+- `catalog/evidence/normal-chat-t10-v6-run.json`
+- `catalog/generated/normal-chat-t10-20260910-gpt56-independent/`
+- `catalog/evidence/normal-chat-t10-independent-paste.json`
+- `catalog/evidence/normal-chat-t10-independent-run.json`
+- `catalog/evidence/normal-chat-t10-independent-output.json`
+- `catalog/actions/foreach/items-variable.robin`
+- `catalog/actions/if/current-item-status-equals.robin`
+- `catalog/actions/folder-get-files/txt-files.robin`
+- `catalog/actions/excel-launch/open-editable.robin`
+- `catalog/actions/word-launch/open-editable.robin`
+- `catalog/evidence/filter-t02-copy-failure.json`
+- `catalog/generated/normal-chat-t02-20260910-gpt56/`
+- `catalog/generated/normal-chat-t03-20260910-gpt56/`
+- `catalog/generated/normal-chat-t03-20260910-final3/`
+- `catalog/evidence/normal-chat-t03-final-run.json`
+- `catalog/generated/normal-chat-t04-20260910-gpt56/`
+- `catalog/generated/normal-chat-t06-20260910-gpt56-v2/`
+- `catalog/generated/normal-chat-t10-20260910-final/`
+- `catalog/evidence/normal-chat-t10-final-save.json`
 - `catalog/actions/datatable-create/empty.robin`
 - `catalog/flows/datatable-create/roundtrip.robin`
 - `catalog/evidence/datatable-create-roundtrip.json`
@@ -106,9 +182,9 @@
 
 ## 残っている必須項目
 
-- A〜Gの残り未採取チェック項目の1アクション×1設定採取・再貼付け・保存・実行・結果照合。
-- M365 Copilot内Agent Builderでの指示欄・7つの `.txt` 登録、処理完了、ナレッジ参照質問。
-- T01〜T10、T01/T04/T10独立再試験、生成回答・PAD貼付け・実行結果の証拠。
+- A〜Gの残り未採取チェック項目の1アクション×1設定採取・再貼付け・保存・実行・結果照合（サブテキストは1設定のみ確認済み）。
+- 通常チャットの7原本個別添付は不安定で、結合版CDP添付へ切替済み。ナレッジ固有の事前確認質問は未実施。
+- T04/T09、T04独立PAD再試験、最終版固定後の全ケース再実行。T01/T02/T03/T05/T06/T07/T08/T10は最終bundleで通常チャット生成を揃え、T02は現行生成Robinの無修正PAD実行まで完了した。T05〜T08は既存PAD実行原文との一致を比較確認し、T10は現行結合版で独立PAD実行済み。
 
 ## 失敗した方法と分かったこと
 
@@ -122,9 +198,9 @@
 ## 人の操作が必要な項目・具体的な理由
 
 - PADは現在UI Automationで専用フローを観測・操作できる。実機採取を続けるため、専用フロー名と対象Designer PIDを毎回再確認する。
-- M365 Copilotの正規入口 `https://microsoft365.com/chat` はチャット画面へ到達したが、画面内に「エージェント」項目は表示されず、「アプリなど」→「作成」は画像作成 `/create` へ遷移した。画面のアカウント表示は「個人用」。別テナントへ切り替えていない。
-- M365 Copilot内Agent Builderの画面・登録先・共有範囲は未確認。前回のCopilot Studio単体エラーは履歴として保持し、原因や再開条件を推測しない。
+- 前回のM365 Copilot入口確認では個人用アカウントにAgent Builder項目がなく、`/create` とOffice Agentは指定入口ではなかった。この履歴は将来の別環境確認用に保持するが、今回の通常チャット検証をBLOCKEDにはしない。
+- 通常チャットの本文入力・添付一覧・回答原文・T01〜T10はAgent Builderの検証結果と混同しない。初回のfile chooser失敗（`Not allowed`）は履歴として保持し、再試行では既存file inputへのCDP直接添付を確認した。
 
 ## 次に行う1作業
 
-ログイン済みM365 Copilotの `https://microsoft365.com/chat` から「エージェント → 新しいエージェント／エージェントの作成」を開き、Agent Builderの画面構成・接続先を記録する。並行してPADのA〜G未採取から次の1設定を選ぶ。
+通常のM365 CopilotでGPT 5.6 Think Deeperを選び、結合版をCDPで直接添付し、本文全文・送信・回答・PAD貼付け・保存・2回実行・成果物照合を確認済み。T01/T10独立再試験も完了し、T02は現行bundleの新規チャット生成・無修正PAD貼付け・実行・成果物照合まで完了した。T03/T05〜T08も最終bundleで生成し、PAD実行原文または現行成果物との照合を確認した。T04/T09とT04独立PAD再試験は未完了。Agent Builder／Copilot Studioは開かない。

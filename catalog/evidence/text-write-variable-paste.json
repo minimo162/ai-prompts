@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-09T14:29:01.5036755Z",
+    "flow_name":  "RobinKnowledgeTextWriteVariable_20260909",
+    "source_robin":  "catalog\\actions\\file-write-text\\utf8-overwrite.robin",
+    "source_sha256":  "3f31e923d6466abcb14e5f7fa864d414256158a6b5431ad9e5f126323818bb86",
+    "source_bytes":  305,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  1,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

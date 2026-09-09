@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T00:41:37.5847394+09:00",
+  "flow_name": "RobinKnowledgeT08Generated_20260910",
+  "input_path": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt",
+  "run_status": "expected_error",
+  "error_messages": [
+    "ファイル C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt が見つかりません"
+  ],
+  "errors_grid_observed": true,
+  "downstream_actions": 0,
+  "output_exists": false
+}

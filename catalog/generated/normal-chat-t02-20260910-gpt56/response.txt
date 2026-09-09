@@ -1,0 +1,119 @@
+前提・対象範囲・未確認点
+
+目的
+UTF-8 の CSV を読み込み、Status 列が 対象 の行だけを新しい CSV として保存するフローです。
+
+入力
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\csv\t02-input-20260910.csv
+
+出力
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t02-output-20260910.csv
+
+要求事項
+
+入力 CSV は変更しない
+UTF-8 読み込み
+Status = 対象 の行だけ出力
+列数維持
+日本語維持
+カンマを含む引用フィールド維持
+二重引用符維持
+出力は新規 CSV
+上書き設定を明示
+
+未確認点（この依頼に影響）
+
+ナレッジには
+「CSV ファイルから読み取る」
+「CSV ファイルに書き込む」
+「新しいデータ テーブルを作成する」 の実測 Robin はあります。
+しかし
+データテーブルの行反復
+列値参照
+条件分岐（If）
+行追加
+データテーブル抽出／フィルター の実測 Robin 原文は未採取と明記されています。
+
+そのため、「Status 列で抽出する処理」を実現する Robin を、確認済み原文だけで構成することはできません。
+未採取アクションの引数や構文を推測して貼り付け用 Robin を作ることはできません。
+
+PADで先に確認する設定・依存
+CSV読取り（確認済み）
+
+ナレッジ上の確認済み設定は以下です。
+
+アクション: CSV ファイルから読み取る
+Encoding: File.CSVEncoding.UTF8
+TrimFields: True
+FirstLineContainsColumnNames: 明示設定が必要
+ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault
+出力: DataTable
+
+今回の要件では列名 Status を使うため、ヘッダー行を列名として扱う設定が必要です。
+ただし、ナレッジ内には FirstLineContainsColumnNames=True の実測 Robin がありません。確認済み例は False のみです。
+
+CSV書出し（確認済み）
+
+ナレッジ上の確認済み設定は以下です。
+
+Encoding: File.CSVEncoding.UTF8
+IfFileExists: File.IfFileExists.Overwrite
+IncludeColumnNames: 設定ありの実測例あり
+ColumnsSeparator:
+SystemDefault
+Comma の実測例あり
+抽出処理に必要だが未採取
+
+以下の実測 Robin が不足しています。
+
+For each
+If / Else
+行をデータ テーブルに挿入する（成功例）
+DataTable 行アクセス
+DataTable フィルター
+貼り付け用Robin
+
+出力しません。
+
+理由:
+
+Status 列による抽出に必要なアクションの Robin 原文がナレッジ内に存在せず、
+未採取の構文・引数・列アクセス方法を推測すると、利用者指定の契約に反します。
+デザイナー上で確認する項目
+
+抽出処理の採取を行う場合は、次の 1 アクションずつの Robin 原文が必要です。
+
+For each を追加してコピー
+If を追加してコピー
+DataTable の行から列値を取得する操作を追加してコピー
+行をデータ テーブルに挿入する成功例をコピー
+保存
+空フローへ再貼付け
+実行
+出力 CSV の内容照合
+
+現在のナレッジでは、これらの工程の実測原文がありません。
+
+期待結果（抽出処理が実装できた場合）
+
+出力ファイル:
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t02-output-20260910.csv
+
+確認内容:
+
+UTF-8 で保存される
+入力ファイルは変更されない
+Status 列が 対象 の行のみ出力される
+列順が保持される
+列数が保持される
+日本語が保持される
+"a,b" のような引用付きカンマフィールドが保持される
+"" を含む項目の二重引用符が保持される
+上書き設定は Overwrite を使用する
+
+現時点で確認済みなのは、PAD の CSV 読取り・CSV 書出しが UTF-8 で日本語・引用符を保持した実測例までです。Status 列による抽出そのものは未採取範囲です。
+
+次に進める場合は、For each／If／行追加（成功例）の Robin 原文を採取した資料を提示してください。その範囲なら根拠付きで貼り付け用 Robin を組み立てます。

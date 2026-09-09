@@ -1,0 +1,99 @@
+1. 前提・対象範囲・未確認点
+
+目的
+合成PDF C:\Users\yuuki\ai-prompts\catalog\fixtures\pdf\source-a.pdf のページ2のみからテキストを抽出し、UTF-8テキストとして C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt に保存する。入力PDFは変更しない。
+
+根拠
+ナレッジには、この対象・保存先での T07ページ2単独抽出 の実測済み組合せが収録されています。PAD-Robin-Knowledge-Bundle の「PAD Robin Office・PDF > T07のページ2単独抽出」。
+
+確認済み範囲
+
+PAD 2.71.115.26224
+日本語UI
+Power Fx OFF
+PDFテキスト抽出（ページ範囲指定）
+UTF-8テキスト保存（上書き、追加改行なし）
+貼付け・保存・実行・期待結果照合済みの組合せあり。
+
+重要
+
+ナレッジ上の実測例は FromPageNumber=2 / ToPageNumber=2 であり、ページ2のみを抽出しています。ページ境界の再整形や抽出順の推測は行いません。
+2. PADで先に確認する設定・依存
+入力PDF
+C:\Users\yuuki\ai-prompts\catalog\fixtures\pdf\source-a.pdf
+
+出力テキスト
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt
+
+使用アクション
+PDF からテキストを抽出
+テキストをファイルに書き込む
+生成される変数
+変数名	型	用途
+ExtractedPDFText	テキスト	PDFページ2から抽出したテキスト
+保存設定
+エンコード: UTF-8
+存在時: 上書き
+AppendNewLine: False
+
+根拠: 実測済みの T07 組合せ原文。
+
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 2 DetectLayout: False ExtractedText=> ExtractedPDFText
+2
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt''' TextToWrite: ExtractedPDFText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+根拠ファイル
+
+catalog/generated/normal-chat-t07-20260910-final/robin.txt
+T07実測記録（貼付け・保存・実行・照合済み）
+4. デザイナー上の確認方法
+アクション数
+
+2個であること。
+
+順序
+PDF からテキストを抽出
+テキストをファイルに書き込む
+変数
+ExtractedPDFText がテキスト型として生成されること。
+主要設定
+
+PDF抽出アクション:
+
+PDFFile = source-a.pdf
+FromPageNumber = 2
+ToPageNumber = 2
+DetectLayout = False
+
+テキスト保存アクション:
+
+TextToWrite = ExtractedPDFText
+AppendNewLine = False
+UTF-8
+Overwrite
+5. 合成データでの保存・実行・照合
+フローを保存する。
+実行する。
+出力ファイル
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt
+
+が生成または更新されることを確認する。
+出力内容を開く。
+ページ2の識別文字列
+PAGE_TOKEN_A2
+
+が含まれることを確認する。
+同時に
+PAGE_TOKEN_A1
+
+が含まれないことを確認する。
+入力PDF source-a.pdf が変更されていないことを確認する。
+
+期待結果（実測記録）
+T07実測では、出力テキストに PAGE_TOKEN_A2 を含み、PAGE_TOKEN_A1 を含まないことを確認済みです。

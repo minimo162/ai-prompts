@@ -1,0 +1,115 @@
+1. 前提・対象範囲・未確認点
+
+目的
+UTF-8テキストを読み込み、検索語 対象語 を通常置換で 置換後 に変更し、UTF-8テキストとして新規保存します。
+
+入力
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+
+出力
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt
+
+置換条件
+
+検索語: 対象語
+置換語: 置換後
+通常置換（正規表現ではない）
+特殊文字・改行・対象外文字を保持
+
+変数
+
+FileContents（テキスト）
+Replaced（テキスト）
+
+上書き
+
+出力先ファイルが存在する場合は上書き
+
+未確認点
+
+個別アクションの原文は実測済みです。
+今回の「読取り → 通常置換 → テキスト変数保存」の組合せ全体については、添付ナレッジ内に実行証拠は記載されていません。
+ただし使用アクションの原文・設定はすべて確認済み範囲から構成しています。
+2. PADで先に作る設定・依存
+
+特別な入力変数は不要です。
+
+使用する確認済みアクション:
+
+ファイルからテキストを読み取る
+
+エンコード: UTF-8
+出力変数: FileContents
+
+テキストを置換する
+
+入力: FileContents
+検索文字列: 対象語
+置換文字列: 置換後
+IgnoreCase: False
+ActivateEscapeSequences: False
+ComparisonType: Text.TextComparisonType.CultureSensitive
+出力変数: Replaced
+
+テキストをファイルに書き込む
+
+書き込むテキスト: Replaced
+エンコード: UTF-8
+ファイル存在時: 上書き
+AppendNewLine: False
+
+末尾改行については、確認済みの AppendNewLine: False を使用し、入力テキストに含まれる末尾改行は保持しつつ、依頼されていない追加改行を付与しません。
+
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-20260910.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+4. デザイナー上の確認方法
+
+アクション順序が次の3個になっていることを確認します。
+
+ファイルからテキストを読み取る
+テキストを置換する
+テキストをファイルに書き込む
+
+変数型の確認:
+
+FileContents : テキスト
+Replaced : テキスト
+
+特に以下を確認してください。
+
+TextToFind が 対象語
+ReplaceWith が 置換後
+置換アクションが Text.Replace.ReplaceText（通常置換）
+保存アクションが TextToWrite: Replaced
+AppendNewLine: False
+Encoding: File.FileEncoding.UTF8
+
+根拠:
+
+通常置換の確認済み原文: catalog/actions/text-replace/literal.robin
+テキスト変数保存（追加改行なし）の確認済み原文: catalog/actions/file-write-text/variable-reference-no-append.robin
+UTF-8読取りの確認済み原文: catalog/actions/file-read-text/utf8.robin
+5. 合成データでの保存・実行・照合
+フローを保存。
+実行。
+出力ファイル
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt を開く。
+以下を確認。
+対象語 が 置換後 に置換されている。
+その他の文字列は変化していない。
+日本語・引用符・バックスラッシュ・特殊文字が保持されている。
+改行位置が入力と一致している。
+出力がUTF-8で読める。
+依頼していない末尾改行が追加されていない。
+同じ入力で再実行し、出力内容が再現されることを確認する。

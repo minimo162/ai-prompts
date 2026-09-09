@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-09T21:11:59+09:00",
+  "requested_url": "https://microsoft365.com/chat",
+  "m365_copilot_url": "https://m365.cloud.microsoft/chat?fromcode=cmmytyyffxy&es=UnauthClick&login_hint=yuukikod%40gmail.com",
+  "m365_copilot_title": "Microsoft Copilot",
+  "entrance_reached": true,
+  "account_label_seen": "個人用アカウント",
+  "account_name_visible": true,
+  "tenant_switch_performed": false,
+  "visible_navigation": [
+    "新しいチャット",
+    "検索",
+    "ライブラリ",
+    "ノートブック",
+    "詳細"
+  ],
+  "agent_builder_menu_visible": false,
+  "new_agent_menu_visible": false,
+  "app_launcher_create_target": "https://m365.cloud.microsoft/create?fromcode=cmmytyyffxy&es=UnauthClick&login_hint=yuukikod%40gmail.com",
+  "app_launcher_create_target_type": "create_page_not_agent_builder",
+  "office_agent_tile_target": "https://officeagent.microsoft.com/?srcref=officehome",
+  "office_agent_tile_observation": "Office Agentページへ遷移し、画面にはOffice Agent、ワークスペース、ワークフロー、新しいタスクが表示された。指定されたM365 Copilot内Agent Builderの入口とは確認できないため、Agent Builderとして扱っていない。",
+  "agent_builder_test": "NOT_RUN",
+  "reason": "ログイン済みのM365 Copilot画面にはエージェント／新しいエージェント項目が表示されず、別の作成・Office Agent入口は指定経路と異なる。別テナントへの切替、Copilot Studio単体ポータルへの移行、ライセンス原因の推測は行っていない。"
+}

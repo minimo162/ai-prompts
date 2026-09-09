@@ -1,0 +1,133 @@
+1. 前提・対象範囲・未確認点
+
+目的
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files 内の複数ファイルを 1 回ずつ処理し、.txt のみ UTF-8 で読み取る。
+
+入力
+
+フォルダー: C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+
+出力
+
+読み取った内容を変数 FileContents に格納
+
+使用する確認済み要素
+
+フォルダー内のファイルを取得（全ファイル取得）
+根拠: catalog/actions/folder-get-files/all-files-no-subfolders.robin
+For each 構文
+根拠: catalog/actions/foreach/items-variable.robin
+ファイルパス変数から UTF-8 テキスト読取り
+根拠: catalog/actions/file-read-text/variable-path-utf8.robin
+ファイルパス文字列に .txt を含む If 条件
+根拠: catalog/actions/if/current-file-contains-txt.robin
+
+未確認
+
+Else の Robin 原文は未採取。表示名は観測済みだが Robin 構文は未確認。
+ファイル名のみ取得、拡張子のみ取得のアクション原文は未採取。
+.csv と .md を個別判定する Else If 構文は未採取。
+
+そのため、確認済み Robin として提示できるのは「全ファイル取得 → For each → .txt 判定 → UTF-8読取り」までです。
+.csv と .md の対象外経路は PAD 側で Else／Else If の原文採取が必要です。
+
+2. PADで先に作る設定
+
+特別な入力変数は不要です。
+
+使用変数:
+
+変数	型	根拠
+Files	ファイル一覧	Folder.GetFiles 出力
+CurrentFile	現在のファイル	For each 出力
+FileContents	テキスト	File.ReadText 出力
+
+対象フォルダー:
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+
+3. 貼り付け用Robin
+
+確認済み部分のみ。
+根拠:
+
+catalog/actions/folder-get-files/all-files-no-subfolders.robin
+catalog/actions/foreach/items-variable.robin
+catalog/actions/if/current-file-contains-txt.robin
+catalog/actions/file-read-text/variable-path-utf8.robin
+catalog/flows/t03-folder-foreach-read/partial.robin（部分組合せ実行済み）
+Plain Text
+1
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+2
+LOOP FOREACH CurrentFile IN Files
+3
+    IF Contains(CurrentFile, $'''.txt''', False) THEN
+4
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+5
+    END
+6
+END
+4. デザイナー上の確認方法
+アクション数
+
+確認済み構成は 4 要素です。
+
+フォルダー内のファイルを取得
+For each
+If
+ファイルからテキストを読み取る
+ブロック対応
+
+対応関係:
+
+LOOP FOREACH ...
+END
+IF ... THEN
+END
+変数型
+変数	期待型
+Files	ファイル一覧
+CurrentFile	ファイルパス
+FileContents	テキスト
+想定確認
+
+Files にフォルダー内の全ファイルが入る。
+
+.txt のときのみ FileContents が生成される。
+
+5. 保存・実行・照合手順
+合成データ例
+
+フォルダーへ以下を配置:
+
+sample1.txt
+sample2.txt
+sample3.csv
+sample4.md
+実行確認
+フロー保存
+実行
+For each 実行回数を確認
+.txt ファイルでのみ File.ReadTextFromFile.ReadText が実行されることを確認
+期待結果
+sample1.txt → 読取り実行
+sample2.txt → 読取り実行
+sample3.csv → 読取り実行されない
+sample4.md → 読取り実行されない
+再実行
+
+同一フォルダーで再実行しても、確認済み範囲ではファイル更新・削除・移動を行わないため副作用はありません。
+
+.csv と .md の対象外経路について
+
+要求にある「.csv と .md は対象外経路にする」は、Else／Else If の Robin 原文がナレッジに存在しないため、現時点では確認済み Robin を提示できません。
+
+追加採取として、
+
+Else
+Else If
+ファイル名または拡張子取得
+
+の各アクションを PAD で最小構成作成 → コピー → 再貼付け → 実行確認した原文が必要です。

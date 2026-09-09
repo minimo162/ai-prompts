@@ -1,0 +1,137 @@
+1. 前提・対象範囲・未確認点
+
+対象: 添付の既存フロー generated.robin の最小変更です。
+
+依頼どおり、変更は次の2点のみに限定します。
+
+書込み文字列 CopilotOffice 246 → T10-Changed 日本語
+Excel の最初の保存先のみ C:\Temp\AiPromptsOfficeCatalog_20260907\copilot-excel.xlsx → C:\Users\yuuki\ai-prompts\catalog\evidence\copilot-excel-t10.xlsx
+
+保持対象:
+
+既存の変数名
+アクション順序
+Excel/Word/PowerPoint処理
+保存形式
+終了処理
+Word/PowerPointの保存先
+読取り処理
+インスタンス名
+
+根拠:
+
+添付バンドル内 catalog/generated/office-three-apps/generated.robin の実測原文。
+Officeアクションの確認済み例は PAD-Robin-04-Office-PDF.txt に記録。
+2. PADで先に作る設定
+
+追加の変数・UI要素・保存先設定は不要です。
+
+Excel保存先フォルダー:
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\
+
+が存在することだけ確認してください。
+
+3. 貼り付け用Robin
+
+置換対象: 添付フロー全体
+
+Plain Text
+1
+Excel.LaunchExcel.LaunchUnderExistingProcess Visible: True UseMachineLocale: False Instance=> ExcelInstance
+2
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T10-Changed 日本語''' Column: $'''A''' Row: 1
+3
+Excel.ReadFromExcel.ReadCell Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues CellValue=> ExcelData
+4
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\copilot-excel-t10.xlsx'''
+5
+Excel.CloseExcel.Close Instance: ExcelInstance
+6
+Word.LaunchWord.Launch Visible: True Instance=> WordInstance
+7
+Word.WriteToWord.WriteEndOfDocument Instance: WordInstance Text: $'''T10-Changed 日本語''' AppendNewLine: False
+8
+Word.ReadFromWord.Read Instance: WordInstance WordData=> WordData
+9
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-word.docx'''
+10
+Word.CloseWord.Close Instance: WordInstance
+11
+PowerPoint.LaunchPowerPoint.Launch Instance=> PowerPointInstance
+12
+PowerPoint.AddPowerPointSlide.AddSlideAsLast Instance: PowerPointInstance SlideIndex=> SlideIndex
+13
+PowerPoint.WriteToPowerPoint.WriteToSlideAtPosition Instance: PowerPointInstance Text: $'''T10-Changed 日本語''' AppendNewLine: False SlidePosition: SlideIndex
+14
+PowerPoint.ReadFromPowerPoint.Read Instance: PowerPointInstance PowerPointData=> PowerPointData
+15
+PowerPoint.SavePowerPoint.SaveAs Instance: PowerPointInstance DocumentFormat: PowerPoint.PowerPointFormat.PPTX DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-powerpoint.pptx'''
+16
+PowerPoint.ClosePowerPoint.Close Instance: PowerPointInstance
+その他の行を表示する
+4. 変更点・保持点・PADでの確認方法
+変更点
+Excel書込み文字列変更
+Word書込み文字列変更
+PowerPoint書込み文字列変更
+Excel保存先変更
+保持点
+ExcelInstance
+WordInstance
+PowerPointInstance
+SlideIndex
+ExcelData
+WordData
+PowerPointData
+アクション数
+アクション順序
+SaveAs形式
+Close処理
+デザイナー確認
+貼り付け後に保存。
+アクション数が18個のままであることを確認。
+赤いデザインエラーが出ていないことを確認。
+Excel SaveAs のパスだけが変更されていることを確認。
+Word/PowerPoint SaveAs が元のままであることを確認。
+3か所の書込み文字列が T10-Changed 日本語 になっていることを確認。
+5. 実行・照合手順と期待結果
+実行
+フローを保存。
+実行。
+正常終了を確認。
+生成物
+
+Excel:
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\copilot-excel-t10.xlsx
+
+Word:
+
+C:\Temp\AiPromptsOfficeCatalog_20260907\copilot-word.docx
+
+PowerPoint:
+
+C:\Temp\AiPromptsOfficeCatalog_20260907\copilot-powerpoint.pptx
+
+内容照合
+
+Excel A1:
+
+T10-Changed 日本語
+
+Word末尾追記:
+
+T10-Changed 日本語
+
+PowerPoint追加スライド:
+
+T10-Changed 日本語
+
+再実行確認
+同じフローを再実行する。
+Excel出力先が引き続き copilot-excel-t10.xlsx であることを確認。
+Word/PowerPoint保存先が変更されていないことを確認。
+3成果物の書込み文字列がすべて T10-Changed 日本語 のままであることを確認。
+
+根拠: 添付の実測済み原文 catalog/generated/office-three-apps/generated.robin および Office アクション確認済み記録。

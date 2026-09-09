@@ -1,0 +1,89 @@
+1. 前提・対象範囲・未確認点
+
+目的
+合成Word文書 word-catalog.docx を編集可能（ReadOnly=False）で開き、本文中の OfficeCatalog を T06Replaced に置換し、別名で保存して元ファイルは変更しないフロー案です。
+
+入力
+
+元ファイル: C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+検索文字列: OfficeCatalog
+置換文字列: T06Replaced
+
+出力
+
+保存先: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx
+
+依存
+
+Wordインスタンス: WordInstance
+Wordアプリが利用可能であること
+
+未確認点
+
+ナレッジには「既存文書を編集可能で開く（ReadOnly=False）」の実測原文があります。
+ナレッジには「検索置換」「別名保存」「Word終了」の実測原文があります。
+ただし、この4アクションを今回のファイルパスで組み合わせた再貼付け・実行・期待値照合済み証拠は記載されていません。したがって、以下は確認済み原文の組合せ案であり、「今回条件で実行確認済み」とは表記しません。
+2. PADで先に確認する設定・依存
+Wordアクションが利用可能なPAD 2.71系環境であること。
+入力ファイル
+C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+出力ファイル
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx
+保存形式
+Word.WordFormat.FromExtension
+保存先拡張子 .docx に従う設定。
+終了処理
+Word.CloseWord.Close
+ナレッジの代表例では終了アクションが使用されています。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+2
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+3
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx'''
+4
+Word.CloseWord.Close Instance: WordInstance
+
+根拠
+
+編集可能で開く: catalog/actions/word-launch/open-editable.robin。
+全件リテラル置換: catalog/actions/word-replace/all-literal.robin。
+Word別名保存: catalog/actions/word-save/as-docx-extension.robin。
+Word終了: catalog/actions/word-close/no-save.robin。
+4. デザイナー上の確認方法
+貼り付け後、アクション数が 4個 であること。
+順序が次の通りであること。
+Word起動（既存文書を開く）
+検索置換
+別名保存
+Word終了
+Wordインスタンス参照がすべて WordInstance で一致していること。
+起動アクションが
+ReadOnly: False
+入力ファイルが元文書 になっていること。
+保存アクションが
+出力先 normal-chat-t06-final.docx になっていること。
+5. 保存・実行・照合手順
+元ファイル word-catalog.docx をバックアップ不要な合成データとして保持する。
+フロー保存後に実行する。
+出力ファイル
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx が生成されることを確認する。
+出力文書を開き、
+OfficeCatalog → T06Replaced に置換されていることを確認する。
+入力文書
+C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx を開き、
+元の内容のまま
+OfficeCatalog が残っている ことを確認する。
+指定文字列以外の本文が保持されていることを比較確認する。
+同じフローを再実行しても、元ファイルが変更されていないことを確認する。
+
+期待結果
+
+出力ファイルには T06Replaced が含まれる。
+指定文字列以外の本文は保持される。
+元ファイルは変更されない（別名保存のため）。

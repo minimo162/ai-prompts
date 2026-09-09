@@ -1,0 +1,156 @@
+1. 前提・対象範囲・未確認点
+
+目的
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files 内の複数ファイルを1回ずつ処理し、.txt のみUTF-8で読み取る。
+
+処理対象
+
+対象フォルダー: C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+.txt → 読み取り対象
+.csv → 対象外
+.md → 対象外
+
+確認済みナレッジから利用できるもの
+
+フォルダー内のファイルを取得 (Folder.GetFiles)
+根拠: catalog/actions/folder-get-files/all-files-no-subfolders.robin
+For each (LOOP FOREACH CurrentItem IN Items)
+根拠: catalog/actions/foreach/items-variable.robin
+ファイルパス文字列に .txt を含む If
+根拠: catalog/actions/if/current-file-contains-txt.robin
+UTF-8でファイルからテキストを読み取る
+根拠: catalog/actions/file-read-text/variable-path-utf8.robin
+上記を組み合わせた部分フロー
+根拠: catalog/flows/t03-folder-foreach-read/partial.robin
+
+未確認
+
+Else ブロックのRobin原文
+.csv と .md を個別判定するIf構文
+拡張子取得専用アクション
+For each＋If＋Else の完全な実行証拠
+
+そのため、確認済み部分のみRobinとして提示し、対象外経路はコード外で分離して記載します。
+
+2. PADで先に作る設定
+入力
+
+なし（固定フォルダーを直接指定）
+
+使用変数
+変数	型	根拠
+Files	リスト	Folder.GetFiles出力
+CurrentFile	各ファイル要素	For each出力
+FileContents	テキスト	File.ReadTextFromFile出力
+フォルダー取得設定
+フォルダー
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+FileFilter
+*
+IncludeSubfolders
+False
+出力
+Files
+
+根拠: catalog/actions/folder-get-files/all-files-no-subfolders.robin
+
+3. 貼り付け用Robin（確認済み原文のみ）
+
+対象サブフロー: 新規サブフロー
+
+Plain Text
+1
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+2
+LOOP FOREACH CurrentFile IN Files
+3
+    IF Contains(CurrentFile, $'''.txt''', False) THEN
+4
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+5
+    END
+6
+END
+根拠
+Folder.GetFiles
+catalog/actions/folder-get-files/all-files-no-subfolders.robin
+再貼付け・保存・実行確認あり
+LOOP FOREACH CurrentFile IN Files
+catalog/actions/foreach/items-variable.robin
+構文採取済み
+IF Contains(CurrentFile, $'''.txt''', False) THEN
+catalog/actions/if/current-file-contains-txt.robin
+構文採取済み
+File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+catalog/actions/file-read-text/variable-path-utf8.robin
+実行確認あり
+4. デザイナー上の確認方法
+アクション順
+フォルダー内のファイルを取得
+For each
+If
+ファイルからテキストを読み取る
+End
+End
+変数確認
+Files
+リストとして生成されること
+CurrentFile
+ループ内でファイルパス文字列を保持すること
+FileContents
+.txt ファイル読取り後に内容が格納されること
+確認ポイント
+フォルダー取得の FileFilter が *
+テキスト読取りの Encoding が UTF-8
+If 条件が .txt 判定になっていること
+デザイナーに赤エラーが出ていないこと
+5. .csv と .md の対象外経路について
+
+利用者要件では
+
+.txt → 読取り
+.csv → 対象外
+.md → 対象外
+
+ですが、
+
+Else のRobin原文
+.csv 判定のIf原文
+.md 判定のIf原文
+
+はナレッジ内に存在せず、PAD-Robin-02-Control.txt でも Else側の実行は未確認 とされています。
+
+したがって現時点で確認済み原文だけから言えるのは、
+
+.txt のみ読取り
+.csv と .md は条件に一致しないため読取りアクションへ進まない
+
+という範囲までです。
+
+.csv と .md を明示的に対象外処理（ログ出力・カウント・別経路）へ分岐したい場合は、PADで以下を1アクションずつ採取してください。
+
+Else を追加
+.csv 判定用 If を追加
+.md 判定用 If を追加
+保存
+Robinコピー
+
+その原文が取得できれば、確認済み根拠に基づいて完全な分岐フローへ拡張できます。
+
+期待結果（合成フォルダー）
+
+フォルダー内に
+
+sample1.txt
+sample2.txt
+sample.csv
+README.md
+
+がある場合、
+
+sample1.txt → UTF-8読取り実行
+sample2.txt → UTF-8読取り実行
+sample.csv → 読取り対象外
+README.md → 読取り対象外
+
+となることを変数ビューで確認します。

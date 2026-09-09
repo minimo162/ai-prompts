@@ -1,0 +1,1 @@
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\text-write-output-valid-20260909.txt''' TextToWrite: Replaced AppendNewLine: True IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8

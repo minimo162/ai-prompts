@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-09T18:47:32.9040695Z",
+  "flow_name": "RobinKnowledgeFolderGetFilesAll2RT_20260910",
+  "source_robin": "catalog\\actions\\folder-get-files\\all-files-no-subfolders.robin",
+  "source_sha256": "f6642f88007dbd5c3a012af9c2686ad921363e082067512b14a2792563e6b5d8",
+  "source_bytes": 331,
+  "paste_confirmed": true,
+  "action_count_after_paste": 1,
+  "saved_confirmed": true,
+  "clipboard_restored": true,
+  "execution_requested": false
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-09T22:56:13.560Z",
+  "case": "T01-independent",
+  "bundle_sha256": "660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca",
+  "result": "catalog/generated/normal-chat-t01-20260910-independent-final-final/result.json",
+  "model": "GPT 5.6 Think Deeper",
+  "attachment_input_mode": "preexisting_cdp_input",
+  "attachment_count": 1,
+  "body_match": true,
+  "sent": true,
+  "response_observed": true,
+  "robin_sha256": "cfb0812cc98315ba5e22c917af0756b94f601f91d99460ebc693bde2fd49ab15",
+  "prior_pad_run_robin": "catalog/generated/normal-chat-t01-20260910-independent-final/robin.txt",
+  "prior_pad_run_robin_sha256": "cfb0812cc98315ba5e22c917af0756b94f601f91d99460ebc693bde2fd49ab15",
+  "logical_robin_match": true,
+  "pad_execution_evidence": "catalog/evidence/normal-chat-t01-independent-run-1.json",
+  "note": "Independent final-bundle chat generated the same Robin as the existing independent PAD-run Robin."
+}

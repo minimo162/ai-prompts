@@ -1,0 +1,110 @@
+1. 前提・対象範囲・未確認点
+依頼内容
+対象フォルダー: C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+フォルダー内の複数ファイルを For each で1回ずつ処理
+.txt のみ UTF-8 で読み取る
+.csv と .md は対象外経路へ分岐
+ファイル一覧取得、For each、拡張子または名前条件、UTF-8読取りを明示
+確認済み根拠
+フォルダー内のファイルを取得: Folder.GetFiles 実測済み
+根拠: catalog/actions/folder-get-files/txt-files.robin（PAD-Robin-03-Files）
+For each 構文: LOOP FOREACH CurrentItem IN Items 実測済み
+根拠: catalog/actions/foreach/items-variable.robin（PAD-Robin-02-Control）
+ファイルパス変数から UTF-8 読取り: File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 実測済み
+根拠: catalog/actions/file-read-text/variable-path-utf8.robin（PAD-Robin-03-Files）
+ファイルパスに .txt を含む条件: IF Contains(CurrentFile, $'''.txt''', False) THEN 実測済み
+根拠: catalog/actions/if/current-file-contains-txt.robin（PAD-Robin-02-Control）
+未確認
+Folder.GetFiles を *.* で取得する設定
+Else ブロックのRobin原文
+.csv と .md を個別判定するIf構文
+ファイル名のみ取得する専用アクション
+複数条件のAND/OR構文
+
+ナレッジ上、これらは実測原文がありません。したがって完成済み・実行確認済みRobinとしては提示できません。
+
+2. PADで先に作る設定
+フォルダー取得アクション
+
+実測例では以下フォルダー取得が確認済みです。
+
+アクション: 「フォルダー内のファイルを取得」
+フォルダー: C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+出力変数: Files
+
+実測例は *.txt フィルターですが、今回の要件では .csv と .md も分岐対象にするため、まず全ファイル取得が必要です。しかし全ファイル取得のRobin原文は未採取です。PAD上で取得条件を設定してコピー採取が必要です。
+
+For each
+対象リスト: Files
+現在項目: CurrentFile
+読み取り結果
+出力変数: FileContents
+3. 貼り付け用Robin
+
+以下は実測原文だけで構成できる部分です。
+対象サブフロー: ファイル列挙～.txt読取り部分
+
+Plain Text
+1
+LOOP FOREACH CurrentFile IN Files
+2
+    IF Contains(CurrentFile, $'''.txt''', False) THEN
+3
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+4
+    END
+5
+END
+根拠
+LOOP FOREACH CurrentFile IN Files → catalog/actions/foreach/items-variable.robin の実測構文を変数名対応で使用。
+IF Contains(CurrentFile, $'''.txt''', False) THEN → catalog/actions/if/current-file-contains-txt.robin。
+File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents → catalog/actions/file-read-text/variable-path-utf8.robin。
+未確認のため未掲載
+Else
+.csv
+.md
+全ファイル取得
+対象外専用経路
+
+これらのRobin原文はナレッジに存在しません。
+
+4. デザイナー上の確認方法
+アクション順序
+フォルダー内のファイルを取得
+For each
+If
+ファイルからテキストを読み取る
+If終了
+For each終了
+変数
+変数	型
+Files	ファイル一覧
+CurrentFile	ファイルパス
+FileContents	テキスト
+エラー確認
+Files が未定義でない
+CurrentFile が For each の保存先になっている
+FileContents が読み取り出力として生成される
+For each と If のブロック対応が崩れていない
+5. 合成データでの確認手順
+テストファイル例
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+
+sample1.txt
+sample2.txt
+sample.csv
+sample.md
+実行確認
+フロー保存
+実行
+For eachが全ファイルを巡回することを確認
+.txt のときだけ FileContents に内容が入ることを確認
+.csv と .md で読取りアクションへ進まないことを確認
+期待結果
+sample1.txt → UTF-8で読取り
+sample2.txt → UTF-8で読取り
+sample.csv → 対象外
+sample.md → 対象外
+
+.csv と .md の対象外経路を含む完成版を作るには、PADで「Else」および拡張子条件の実測Robin原文（1アクションずつ追加→保存→コピー）を追加採取する必要があります。現ナレッジだけではその部分を推測生成できません。

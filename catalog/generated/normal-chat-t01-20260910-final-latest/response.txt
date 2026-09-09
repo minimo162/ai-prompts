@@ -1,0 +1,94 @@
+1. 前提・対象範囲・未確認点
+
+目的
+UTF-8テキストを読み取り、検索語 対象語 を置換語 置換後 に通常置換し、UTF-8テキストとして新規出力します。
+
+入力
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+
+出力
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt
+
+成功条件
+
+対象語 のみが 置換後 に置換される。
+対象外文字、特殊文字、引用符、バックスラッシュ、改行を保持する。
+入力ファイルに存在する末尾改行は保持する。
+PAD側で追加改行を発生させないため、確認済み設定 AppendNewLine: False を使用する。
+
+根拠
+
+テキスト読取り: catalog/actions/file-read-text/utf8.robin（確認済み）
+通常置換: catalog/actions/text-replace/literal.robin（確認済み）
+テキスト変数書込み（AppendNewLine=False）: catalog/actions/file-write-text/variable-reference-no-append.robin（確認済み）
+
+検証状態
+
+各アクション単体は実測原文あり。
+今回の3アクション組合せそのものの再貼付け・実行証拠はナレッジ内にありません。したがって「確認済み原文の組合せ案」であり、「今回条件で実行確認済み完成フロー」ではありません。
+2. PADで先に確認する設定・依存
+入力ファイルが存在することを確認。
+出力先フォルダー
+C:\Users\yuuki\ai-prompts\catalog\evidence\
+が存在することを確認。
+出力ファイルの上書きを許可する前提です。
+変数は以下を使用します。
+FileContents : テキスト
+Replaced : テキスト
+エンコードは読取り・書込みとも UTF-8 を使用します。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-20260910.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+4. デザイナー上の確認方法
+
+貼り付け後、アクション数が 3個 であることを確認。
+
+ファイルからテキストを読み取る
+テキストを置換する
+テキストをファイルに書き込む
+
+変数生成を確認。
+
+読取り結果 → FileContents
+置換結果 → Replaced
+
+エラー表示がないことを確認。
+
+パス入力エラーがない
+未定義変数エラーがない
+アクション順が変更されていない
+
+置換アクション設定を確認。
+
+検索文字列 = 対象語
+置換文字列 = 置換後
+IgnoreCase = False
+正規表現モードではない
+
+書込みアクション設定を確認。
+
+UTF-8
+上書き
+AppendNewLine=False
+5. 合成データでの保存・実行・照合手順
+フローを保存。
+実行。
+出力ファイル C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt を開く。
+以下を照合。
+対象語 が 置換後 に変わっている。
+対象語 以外の文字は変化していない。
+日本語、引用符、バックスラッシュ、特殊文字が保持されている。
+行数が入力と一致している。
+入力に存在する末尾改行は保持されている。
+余分な改行が追加されていない。
+同じ入力で再実行し、出力内容が再度一致することを確認する。

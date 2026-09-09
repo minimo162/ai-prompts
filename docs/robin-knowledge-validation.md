@@ -1,21 +1,21 @@
 # Robinナレッジ検証報告（途中）
 
-更新日: 2026-09-09
-ブランチ: `codex/robin-knowledge-2026-09-09`
-基準: `7613e999661ceeb4e025dbfad11dfc21bd42b376`
+更新日: 2026-09-10
+ブランチ: `codex/robin-knowledge-restart-2026-09-09`
+基準: `45275ed18c47cd91d3a8ff5ac556d2b9fdec6a19`
 状態: partial
 
 ## 利用先の訂正
 
-検証対象は、ログイン済みの `https://microsoft365.com/chat` から「エージェント → 新しいエージェント／エージェントの作成」で開くMicrosoft 365 Copilot内Agent Builderです。Copilot Studio単体ポータルを利用先にしません。前回のStudio単体保存拒否は履歴として保持しますが、M365 Copilot内Agent Builderの原因や再開条件とは断定しません。詳細は `CODEX_CORRECTION_M365_AGENT_BUILDER.md` を参照します。
+検証対象は、ログイン済みの `https://microsoft365.com/chat` の通常M365 Copilotチャットです。Agent Builder／Copilot Studioは今回の検証先から外し、別環境での確認事項として扱います。前回のStudio単体保存拒否と入口観測は履歴として保持します。最新仕様は `CODEX_CORRECTION_M365_CHAT_VALIDATION.md` を参照します。
 
-2026-09-09の実測では、`https://microsoft365.com/chat` は `https://m365.cloud.microsoft/chat` のMicrosoft Copilot画面へ到達した。ナビゲーションと「アプリなど」を確認したが、表示された項目はチャット、検索、ライブラリ、ノートブック、詳細等で、「エージェント」項目は画面上に現れなかった。「アプリなど」→「作成」は `/create` の画像作成画面へ遷移した。画面には「個人用」のアカウント表示があり、別テナントへの切替は行っていない。この観測だけからライセンスや管理者設定の原因は推測しない。Agent Builderの正規入口が表示される組織・アカウント条件の確認が必要である。最小限の観測値は `catalog/generated/agent-builder-m365-entry-20260909.json` に保存した。
+2026-09-09の再実測では、ログイン済みEdgeの `https://microsoft365.com/chat` は `https://m365.cloud.microsoft/chat` のMicrosoft Copilot画面へ到達した。ナビゲーションと「アプリなど」を確認したが、表示された項目はチャット、検索、ライブラリ、ノートブック、詳細等で、「エージェント」項目は画面上に現れなかった。「アプリなど」→「作成」は `/create` の作成画面へ遷移し、別タイルの「Office Agent」は `https://officeagent.microsoft.com/?srcref=officehome` のOffice Agent画面へ遷移した。後者は画面構成が指定のM365 Copilot内Agent Builderと異なるため、Agent Builderとして扱っていない。画面には「個人用アカウント」と表示され、別テナントへの切替は行っていない。この観測だけからライセンスや管理者設定の原因は推測しない。Agent Builderの正規入口が表示される組織・アカウント条件の確認が必要である。再実測値は `catalog/generated/agent-builder-m365-entry-rerun-20260909.json` に保存した。
 
 ## 静的・ファイル検証
 
-- `copilot/agent-instructions.txt` を作成。UTF-8 BOMなし、5,648バイト、Unicodeスカラー数2,045、UTF-16コード単位数2,045、36行。7,000文字目標および8,000文字上限以内。
+- `copilot/agent-instructions.txt` を作成。UTF-8 BOMなし、7,840バイト、Unicodeスカラー数2,943、UTF-16コード単位数2,943、47行。8,000文字上限以内。
 - ナレッジ配布版は7つの `.txt`。指示欄と技術資料を分離し、合計9ファイル（READMEを含む）で20ファイル上限を超えない。
-- `catalog/coverage.json` は `catalog/index.json` から生成し、観測バリアント57件（既存51＋日時取得1＋空データテーブル1＋行追加失敗1＋CSV読取り1＋CSV書出し1＋ファイルコピー1）と必須範囲A〜Gの16チェックを記録。左側一覧は `complete=false`、未観測の名称は推測していない。
+- `catalog/coverage.json` は `catalog/index.json` から生成し、観測バリアント73件（既存51＋追加22件）と必須範囲A〜Gの16チェックを記録。左側一覧は `complete=false`、未観測の名称は推測していない。
 - `README.md` 冒頭をCopilotエージェント用配布物の入口へ変更。旧アプリ説明は過去資産として区別した。
 - `pad-robin-prompts.md` 冒頭に編集用原稿であることと配布正本への対応を追記した。
 - `catalog/generated/acceptance-t01-t10/README.md` にT01〜T10の依頼要点・期待値・状態を固定した。
@@ -34,7 +34,7 @@
 |ネイティブPADウィンドウ|PASS（観測のみ）|専用フロー `RobinKnowledgeLive_20260909` を作成し、Designer PID 27436をUI Automationで観測した|
 |PAD版・言語・Power Fx|PASS（条件確認）|Designer file version `2.71.115.26224`、日本語UI、作成ダイアログのPower Fx=Offを確認した|
 |左側アクション一覧|PASS（観測範囲）|ActionsTreeViewを展開して上端から下端までスクロールし、412ノード（グループ72、アクション340）を保存。全機能一覧とは表示していない|
-|A〜Gの追加・コピー・別フロー再貼付け・保存・実行|部分PASS|日時取得の1設定を今回の全工程で実測。残りの未採取項目は未完了|
+|A〜Gの追加・コピー・別フロー再貼付け・保存・実行|部分PASS|日時取得、空DataTable、CSV、ファイルコピー、サブテキスト取得を今回の全工程で実測。残りの未採取項目は未完了|
 
 ### 日時取得の1設定
 
@@ -54,36 +54,74 @@
 
 「ファイルのコピー」を左パネルから追加し、合成入力 `copy-input-20260909.txt` を専用出力フォルダーへコピーする設定（衝突時=何もしない、出力変数=CopiedFiles）を採取した。別の空フローへファイルから貼付け、保存、再コピーし、1回目はCopiedFilesに出力ファイルが入り、入力・出力のSHA-256 `c9b143da9a441652db51c7d921cbe46fa5df2bca8cc69e7ff7718f5fd300ffa5` が一致した。2回目は衝突時の「何もしない」によりCopiedFilesが空、既存出力が不変だった。詳細は `catalog/evidence/file-copy-validation.json`。移動・名前変更・上書きは未採取。
 
-## Copilotエージェント（M365入口の実測と過去のStudio単体経路）
+### サブテキスト取得の1設定
 
-### M365 Copilot内Agent Builder（今回）
+「サブテキストの取得」を左パネルから追加し、元のテキスト=`A日本語BC`、開始インデックス=1、長さ=3、生成変数=`Subtext`を設定した。原文 `Text.GetSubtext.GetSubtext Text: $'''A日本語BC''' CharacterPosition: 1 NumberOfChars: 3 Subtext=> Subtext` を保存し、別の空フローへ貼付け・保存・再コピーした。原文と再コピーのSHA-256は `4f1021aafc353edba483e83ea61c6dd93d3c7944ad7b4566049c50fe81e4f70c` で一致した。元フローとRoundtripフローを各2回実行し、両方で `Subtext=日本語` を照合した。別の開始位置、末尾まで取得、範囲外入力は未確認。詳細は `catalog/evidence/text-substring-validation.json`。
+
+### テキスト書出しの1設定
+
+「テキストをファイルに書き込む」を左パネルから追加し、UI入力では`100%%`、エンコード=UTF-8、既存内容を上書き、末尾改行=Trueを設定した。原文を保存し、別の空フローへ貼付け・保存・再コピー、元フローとRoundtrip各2回実行まで確認した。出力はUTF-8 BOM付き73 bytesで、正規化した4行に日本語、100%、引用符、バックスラッシュ、対象語を保持した。`100%`をそのまま入力した失敗試行は設計エラーとして別証拠に分離した。詳細は `catalog/evidence/text-write-validation.json` と `catalog/evidence/text-write-invalid-percent.json`。
+
+### テキスト変数書込みと末尾改行なし設定
+
+「書き込むテキスト」へ既存テキスト変数`Replaced`を指定した原文`File.WriteText ... TextToWrite: Replaced AppendNewLine: True ...`を採取し、別空フローへの貼付け・保存・再コピーでSHA-256 `7d73b162b4b298a547b7c45f98eab0f116a0abf047e6ec1e65de3d426063adac`の一致を確認した。さらに同じ変数参照で`AppendNewLine=False`へ変更した原文`catalog/actions/file-write-text/variable-reference-no-append.robin`（SHA-256 `ca6006e287fdd4050f277f4965d6c2e8c3e1aa724dfbcbd4f3300cd3e7d2abe6`）を採取し、別空フローへの貼付け・保存・再コピーを確認した。
+
+### 通常M365チャットのT01初回修正版
+
+通常のMicrosoft 365 Copilotチャットでモデルメニューから`GPT OpenAI`→`GPT 5.6 Think Deeper`を選び、表示が`GPT 5.6 Think`になることを確認した。7原本の機械的結合版（現行SHA-256 `dd6091bbea9c05eee84f59d5c1105a178ba8b4c76b0cb6c74fe9038d97ce433a`）をCDPで既存`input[type=file]`へ直接設定し、アップロードメニュー操作なしで添付チップ1件を確認した。本文はcontenteditable正規化後に全文一致し、送信・回答取得を確認した。
+
+回答のRobinを編集せず`catalog/generated/normal-chat-t01-20260909-gpt56-noappend-clean2/robin.txt`から新規PADフローへ貼付け、3アクション・保存・2回実行を確認した。出力`catalog/evidence/normal-chat-t01-output-20260909.txt`はUTF-8 BOM付き85 bytesで、期待する5行（日本語、対象語だけ置換、100%、引用符、バックスラッシュ、対象外語、末尾改行）と完全一致した。証拠は`catalog/evidence/normal-chat-t01-noappend-paste.json`、`normal-chat-t01-noappend-run-1.json`、`normal-chat-t01-noappend-run-2.json`。AppendNewLine=Trueの初回生成は末尾に追加改行が生じたため失敗として残し、最新版ではFalseへ修正した。
+
+## 通常のM365 Copilotチャット検証
+
+今回の検証先は、ログイン済み `https://microsoft365.com/chat` の通常チャットである。Agent Builder／Copilot Studioの作成・権限調査は行わない。通常チャットの成功は「通常のM365 Copilotチャット＋PADで検証済み」と記録できるが、Agent Builderの登録・検索・指示遵守・実行環境差は未検証として併記する。
 
 |項目|状態|証拠・再開条件|
 |---|---|---|
-|正規入口 `microsoft365.com/chat`|PASS（到達）|Microsoft Copilotのチャット画面へ到達した|
-|「エージェント → 新しいエージェント／エージェントの作成」|NOT_FOUND|現在の画面にはエージェント項目が表示されず、`/create` は画像作成画面だった。表示される組織・アカウント条件を確認する|
-|指示欄・ナレッジ登録|NOT_RUN|Agent Builder画面が見つからないため入力・アップロードしていない|
-|登録後の質問・T01〜T10|NOT_RUN|上記画面での登録完了後に実施|
+|通常チャット到達|PASS|専用EdgeのCDPでログイン済みM365 Copilot通常チャットと本文入力欄を確認した|
+|本文全文入力|PASS|2,307文字を挿入し、contenteditable境界を正規化した全文一致を確認した|
+|7つの実ファイル添付|PARTIAL（結合版へ切替）|7件逐次添付は4件目以降の一対一保持を確認できず、7原本を機械的に結合した1ファイルを添付する方式へ切り替えた。元ファイルのSHAと区切りはmanifestへ保存した|
+|ナレッジ固有質問|NOT_RUN|実ファイル添付が確認できた後、別の事前確認用チャットで実施する|
+|T01生成回答|PASS（初回修正版）|GPT 5.6 Think Deeperの新規チャットで結合版を添付し、本文3,128文字・回答全文・3行Robinを保存。`gpt56-noappend-clean2`の`robin.txt`は3アクション|
+|T01 PAD実行・成果物照合|PASS（初回修正版）|回答Robinを無修正で新規フローへ貼付け、保存、2回実行。出力UTF-8 BOM付き85 bytes、期待内容と完全一致。`normal-chat-t01-noappend-*`|
+|T02〜T10|NOT_RUN|T01と同じ版の本文・添付を新しいチャットへ供給して実施する|
+|T01独立再試験|NOT_RUN|T01初回修正版の固定版を新しい通常チャットへ再供給し、別PADフローで再実行する|
+|T04/T10独立再試験|NOT_RUN|T01〜T10最終版合格後に別チャットで実施する|
 
-前回、Copilot Studio単体ポータルの作成フォームへ指示文を入力したが、保存時に「You don't have permission to create agents」「Ask your admin to grant you the right role, then try again.」「ユーザーの管理者ライセンスが無効です。」と表示され、作成は拒否された。これは失敗履歴として保持し、M365 Copilot内Agent Builderの再開条件にはしない。M365 Copilot内Agent Builderの登録・生成試験は未実施。
+前回のCopilot Studio単体保存拒否と、M365 Copilot画面でAgent Builder項目が見えなかった事実は履歴として保持するが、今回の通常チャット検証の再開条件やBLOCKED理由にはしない。
 
-|項目|状態|再開条件|
-|---|---|---|
-|M365 Copilot内Agent Builder指示欄|NOT_RUN|正規入口でエージェント項目が表示されなかった|
-|M365 Copilot内Agent Builder作成・ナレッジ登録|NOT_RUN|Agent Builder画面、登録先、共有範囲を確認していない|
-|実測固有質問|NOT_RUN|登録完了後に新しい会話で実施|
-|T01〜T10|NOT_RUN|登録完了、PAD専用フロー、合成データ、実行観測がそろう|
-|T01/T04/T10独立再試験|NOT_RUN|T01〜T10最終版合格後に実施|
+### 受入マトリクス更新（2026-09-10）
+
+上表の初期 `NOT_RUN` 集約行は、以下の実測結果で上書きする。T01/T02/T03/T05/T06/T07/T08/T10は生成・PAD実行・成果物照合まで確認した。T04は必要構文未採取のため生成拒否境界を確認し、T09は実機経路が未完了、T04独立再試験は拒否境界のみ確認済みでPAD受入未実施である。
+
+なお、T02/T03/T07向けの追加採取と索引更新後の最終結合版SHA-256は `660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca` である。T01/T02/T03/T05/T06/T07/T08/T10はこの版を通常チャットへ供給して生成確認した。
+
+- T05: 編集可能Excelを開き、B2だけを変更して別名保存。元ブックA1/B2不変、出力B2=`T05-Changed`。
+- T06: 編集可能Wordを開き、`OfficeCatalog`だけを`T06Replaced`へ置換して別名保存。元ファイルSHA不変。
+- T07: PDF 2ページ範囲抽出→UTF-8保存を2回実行。`PAGE_TOKEN_A2`あり、`PAGE_TOKEN_A1`なし。
+- T08: 存在しないファイルでErrorsGridに「ファイルが見つかりません」。後続アクションと出力はなし。
+- T03: 全ファイル列挙→For each→`.txt`判定→UTF-8読取りを無修正貼付け・実行。最終対象が`.md`でもFileContentsは直前の`.txt`値のままで、対象外を読み取らないことを確認。
+- T10: 既存16アクションのExcel書込み値とExcel出力名だけを変更。Excel A1=`T10-Changed`、Word/PowerPointは`CopilotOffice 246`保持。独立再試験も同結果。
+- T02: 現行bundleのFilterDataTable条件付きRobinを無修正で新規PADフローへ貼り付け、保存・実行。ヘッダーとStatus=対象の2行を含むUTF-8 BOM CSVを確認し、入力fixture内容を保持した。
+
+### 現行bundleの再生成照合（2026-09-10）
+
+現行bundle SHA-256 `660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca` を添付し、GPT 5.6 Think Deeperを明示選択した通常チャットでT01/T02/T03/T05/T06/T07/T08/T10を再生成した。T05〜T08のRobin本文は既存PAD実行原文と完全一致し、T02は生成Robinの無修正貼付け・保存・実行・成果物照合まで確認した。T01/T10の独立チャットも同版で確認し、既存独立PAD実行原文との一致を記録した。比較証拠は `catalog/evidence/normal-chat-final-bundle-comparison.json`、`catalog/evidence/normal-chat-t01-independent-final-comparison.json`、`catalog/evidence/normal-chat-t10-independent-final-comparison.json`、`catalog/evidence/normal-chat-t02-final-pad-run.json`。T09は未完了である。
+
+T04は現行bundleを新しい通常チャットへ供給し、Excel条件抽出・集計Robinを未採取構文として推測せず生成を拒否した。T04は独立チャットでも同じ境界を確認したが、PAD受入は未実施。証拠は `catalog/evidence/normal-chat-t02-t04-current-boundary.json`。
+
+T02ではPADのFilter DataTable設定画面で列／インデックス=`2`、演算子=`と等しい (=)`、値=`対象`を入力し、先行CSV読取りとCSV書出しを含む新規フローで保存・2回実行した。条件付きRobin原文と成果物は `catalog/actions/datatable-filter/status-equals-index2.robin`、`catalog/flows/datatable-filter/roundtrip.robin`、`catalog/evidence/normal-chat-t02-final-pad-run.json` に記録した。先行アクションなしの未解決入力試行は `catalog/evidence/filter-t02-condition-config-attempt.json` に失敗境界として分離している。
 
 ## 未対応・未確認
 
 - A〜Gの必須チェックには未観測項目が残る（coverage.json参照）。必須項目のBLOCKED／未確認が残るため、目標は未完了。
-- Copilotの認証・エージェント登録・生成・PAD実行の外部依存が未解消。
-- push、PR、merge、公開、旧アプリの機能拡張は実施していない。
+- 通常チャットの7原本個別添付は一対一完了を確認できず、結合版へ切り替えた。結合版のCDP直接添付・本文送信・T01生成・PAD実行は完了した。個別7件添付とナレッジ固有質問は未確認。
+- Agent Builderの登録・検索・指示遵守・実行環境差は今回の別環境確認事項。
+- PR #19は既にsquashマージ済み。今回の再開確認では新規push・PR・merge・公開・旧アプリの機能拡張は実施していない。
 
 ## 次の再開手順
 
-1. ログイン済みM365 Copilotの `https://microsoft365.com/chat` から「エージェント」を開き、Agent Builderの画面構成・接続先を確認する。
-2. `copilot/README.md` に従って指示欄・7つの `.txt` を登録し、処理完了を確認する。
-3. PAD専用フローでcoverageの未採取から1アクション×1設定を選び、依頼書第5節の全工程を通す。
-4. T01〜T10を固定期待値のまま実施し、結果をこの報告へ追記する。
+1. 通常チャットの事前確認用会話で、ナレッジ固有質問と回答原文照合を行う。
+2. 固定した結合版・本文・GPT 5.6 Think DeeperでT01独立再試験を行う。
+3. T02〜T10を各新規チャットで実施し、回答を無修正でPADへ貼付け、保存・実行・成果物を照合する。
+4. 失敗原因を分類し、最新版を新しいチャットへ再添付してから追加修正とT04/T10独立再試験を実施する。

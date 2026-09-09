@@ -1,0 +1,451 @@
+{
+  "schema_version": 1,
+  "started_at": "2026-09-09T22:48:32.747Z",
+  "requested_url": "https://m365.cloud.microsoft/chat/",
+  "browser": "Microsoft Edge CDP",
+  "cdp_port": 9444,
+  "profile": "C:\\Users\\yuuki\\.pdf-kosei-ps\\edge-profile",
+  "attachment_mode": "mechanical_bundle",
+  "files": [
+    {
+      "path": "catalog/generated/normal-chat-t10-20260910/T10-Knowledge-Flow-Bundle.txt",
+      "name": "T10-Knowledge-Flow-Bundle.txt",
+      "sha256": "bb93fff3d910be25f7836072616d905540bcc041f78063dd4db012ffa51e7ebc"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "copilot/knowledge/PAD-Robin-00-Index.txt",
+      "name": "PAD-Robin-00-Index.txt",
+      "sha256": "fd98f66ac05e3ed68842894ac5637bb4e6e23f97197d92c4cef5078dfacd710e"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-01-Basics.txt",
+      "name": "PAD-Robin-01-Basics.txt",
+      "sha256": "484f05f1d020e0e9f1c68c2e2b97f678be491ddc95f6e9676ba7895a17c55ffb"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-02-Control.txt",
+      "name": "PAD-Robin-02-Control.txt",
+      "sha256": "5b46629c98e6333b79c168816a4daecef18a62003f2cbd3e70b7599ee80ed159"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-03-Files.txt",
+      "name": "PAD-Robin-03-Files.txt",
+      "sha256": "55cebdf2e7db76a04134b2e068c9bc9830f7c65c6a73de8abbe198244e2a5adb"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-04-Office-PDF.txt",
+      "name": "PAD-Robin-04-Office-PDF.txt",
+      "sha256": "d54f8ac883f065ac0c4e19dba906b4e09564f815b7bafcf67774e107c4f3981e"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-05-UI-Web.txt",
+      "name": "PAD-Robin-05-UI-Web.txt",
+      "sha256": "697bade6ae4c0e2c6faf0ab27e78ae4168dc16b6956326785114708a79e0b306"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-06-Examples.txt",
+      "name": "PAD-Robin-06-Examples.txt",
+      "sha256": "e01197553e9c0e4e4f98f2b427dbedec54c12fded72165d43bc23b4b81d4e16b"
+    }
+  ],
+  "instruction_sha256": "ecefa66549326aca3e0995b9c9d331da2ec9a5ec84640d8befa06b848febd6cc",
+  "prompt_sha256": "b9dc49eaa6ce455f5eb211996e0196d7031901ba5aac5c6c83700bb40666750a",
+  "prompt_utf16": 3733,
+  "stages": [
+    {
+      "event": "cdp_ready",
+      "observed_at": "2026-09-09T22:48:33.324Z",
+      "browser": "Edg/152.0.4191.66"
+    },
+    {
+      "event": "chat_ready",
+      "observed_at": "2026-09-09T22:48:34.470Z",
+      "origin": "https://m365.cloud.microsoft",
+      "url": "https://m365.cloud.microsoft/chat/",
+      "title": "Microsoft Copilot",
+      "editor": true
+    },
+    {
+      "event": "model_selected",
+      "observed_at": "2026-09-09T22:48:39.539Z",
+      "model": "GPT 5.6 Think"
+    },
+    {
+      "event": "sequential_attachment_start",
+      "observed_at": "2026-09-09T22:48:39.556Z",
+      "count": 1
+    },
+    {
+      "event": "file_attached_check",
+      "observed_at": "2026-09-09T22:48:42.465Z",
+      "index": 1,
+      "name": "T10-Knowledge-Flow-Bundle.txt",
+      "input_state": {
+        "count": 1,
+        "names": [
+          {}
+        ],
+        "accept": ".doc,application/msword,.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docm,application/vnd.ms-word.document.macroEnabled.12,.xls,application/vnd.ms-excel,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.ppt,application/vnd.ms-powerpoint,.pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation,.txt,text/plain,.csv,text/csv,.pdf,application/pdf,.rtf,application/rtf,.loop,application/vnd.microsoft.loop,.fluid,application/vnd.microsoft.fluid,.tsv,text/tab-separated-values,.html,text/html,.md,text/markdown,.xml,application/xml,.c,.yaml,application/yaml,.php,.sh,application/x-sh,.dart,.css,text/css,.lua,.config,.utf8,.htm,.cpp,.yml,.log,.h,.bash,.ini,.json,application/json,.java,text/x-java-source,.pl,.rs,.js,application/javascript,.py,.tsx,.cs,.jsx,text/jscript,.sql,application/sql,.xlsm,application/vnd.ms-excel.sheet.macroEnabled.12,.ppsm,application/vnd.ms-powerpoint.slideshow.macroEnabled.12,.page,application/vnd.microsoft.page,.jpg,image/jpeg,.jpeg,.png,image/png,.bmp,image/bmp,.jfif,image/jfif,.gif,image/gif,.pjpeg,image/pjpeg,.pjp,image/pjp,.webp,image/webp,.msg,application/vnd.ms-outlook,.eml,message/rfc822"
+      },
+      "attachment_state": {
+        "url": "https://m365.cloud.microsoft/chat/",
+        "title": "チャット | Microsoft Copilot",
+        "labels": [
+          "T10-Knowledge-Flow-Bundle.txt"
+        ],
+        "attached": [
+          true
+        ],
+        "pending": false,
+        "count": 1
+      }
+    },
+    {
+      "event": "files_attached",
+      "observed_at": "2026-09-09T22:48:42.467Z",
+      "state": {
+        "url": "https://m365.cloud.microsoft/chat/",
+        "title": "チャット | Microsoft Copilot",
+        "labels": [
+          "T10-Knowledge-Flow-Bundle.txt"
+        ],
+        "attached": [
+          true
+        ],
+        "pending": false,
+        "count": 1
+      }
+    },
+    {
+      "event": "body_inserted_and_verified",
+      "observed_at": "2026-09-09T22:48:42.793Z",
+      "chars": 3733
+    },
+    {
+      "event": "sent",
+      "observed_at": "2026-09-09T22:48:42.864Z"
+    }
+  ],
+  "model_requested": "GPT 5.6 Think Deeper",
+  "model_menu_after_selector": [
+    {
+      "role": "BUTTON",
+      "label": "ナビゲーションの展開",
+      "expanded": "false",
+      "checked": null
+    },
+    {
+      "role": "button",
+      "label": "ノートブック",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "button",
+      "label": "詳細",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "button",
+      "label": "小谷 侑輝",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "モデル セレクター",
+      "expanded": "true",
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "一時的なチャット",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "設定など",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "ソースの追加と管理",
+      "expanded": "false",
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "ディクテーションを開始",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "新しいボイス チャットを開始します",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "学習します",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "説明します",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "リライト",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "作成する",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "menu",
+      "label": "自動考える時間の長さを決定しますクイック応答すぐに回答しますThink Deeperより良い回答のために長く考えますGPTOpenAI",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "menuitemradio",
+      "label": "自動考える時間の長さを決定します",
+      "expanded": null,
+      "checked": "true"
+    },
+    {
+      "role": "menuitemradio",
+      "label": "クイック応答すぐに回答します",
+      "expanded": null,
+      "checked": "false"
+    },
+    {
+      "role": "menuitemradio",
+      "label": "Think Deeperより良い回答のために長く考えます",
+      "expanded": null,
+      "checked": "false"
+    },
+    {
+      "role": "menuitem",
+      "label": "GPTOpenAI",
+      "expanded": "false",
+      "checked": null
+    }
+  ],
+  "model_submenu_after_provider": [
+    {
+      "role": "BUTTON",
+      "label": "ナビゲーションの展開",
+      "expanded": "false",
+      "checked": null
+    },
+    {
+      "role": "button",
+      "label": "ノートブック",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "button",
+      "label": "詳細",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "button",
+      "label": "小谷 侑輝",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "モデル セレクター",
+      "expanded": "true",
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "一時的なチャット",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "設定など",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "ソースの追加と管理",
+      "expanded": "false",
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "ディクテーションを開始",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "新しいボイス チャットを開始します",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "学習します",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "説明します",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "リライト",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "作成する",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "menu",
+      "label": "自動考える時間の長さを決定しますクイック応答すぐに回答しますThink Deeperより良い回答のために長く考えますGPTOpenAI",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "menuitemradio",
+      "label": "自動考える時間の長さを決定します",
+      "expanded": null,
+      "checked": "true"
+    },
+    {
+      "role": "menuitemradio",
+      "label": "クイック応答すぐに回答します",
+      "expanded": null,
+      "checked": "false"
+    },
+    {
+      "role": "menuitemradio",
+      "label": "Think Deeperより良い回答のために長く考えます",
+      "expanded": null,
+      "checked": "false"
+    },
+    {
+      "role": "menuitem",
+      "label": "GPTOpenAI",
+      "expanded": "true",
+      "checked": null
+    },
+    {
+      "role": "menu",
+      "label": "GPT 5.6 Think DeeperGPT 5.5 Quick Response",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "menuitemradio",
+      "label": "GPT 5.6 Think Deeper",
+      "expanded": null,
+      "checked": "false"
+    },
+    {
+      "role": "menuitemradio",
+      "label": "GPT 5.5 Quick Response",
+      "expanded": null,
+      "checked": "false"
+    }
+  ],
+  "model_selection": {
+    "selector": {
+      "found": true,
+      "label": "モデル セレクター"
+    },
+    "provider": {
+      "found": true,
+      "label": "GPTOpenAI"
+    },
+    "option": {
+      "found": true,
+      "label": "GPT 5.6 Think Deeper"
+    },
+    "evidence": {
+      "button_text": "GPT 5.6 Think",
+      "button_aria": "モデル セレクター",
+      "labels": [
+        "ナビゲーションの展開",
+        "ノートブック",
+        "詳細",
+        "小谷 侑輝",
+        "モデル セレクター",
+        "一時的なチャット",
+        "設定など",
+        "ソースの追加と管理",
+        "ディクテーションを開始",
+        "新しいボイス チャットを開始します",
+        "学習します",
+        "説明します",
+        "リライト",
+        "作成する"
+      ]
+    }
+  },
+  "attachment_input_mode": "preexisting_cdp_input",
+  "file_input_state": {
+    "count": 0,
+    "names": [],
+    "accept": ".doc,application/msword,.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docm,application/vnd.ms-word.document.macroEnabled.12,.xls,application/vnd.ms-excel,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.ppt,application/vnd.ms-powerpoint,.pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation,.txt,text/plain,.csv,text/csv,.pdf,application/pdf,.rtf,application/rtf,.loop,application/vnd.microsoft.loop,.fluid,application/vnd.microsoft.fluid,.tsv,text/tab-separated-values,.html,text/html,.md,text/markdown,.xml,application/xml,.c,.yaml,application/yaml,.php,.sh,application/x-sh,.dart,.css,text/css,.lua,.config,.utf8,.htm,.cpp,.yml,.log,.h,.bash,.ini,.json,application/json,.java,text/x-java-source,.pl,.rs,.js,application/javascript,.py,.tsx,.cs,.jsx,text/jscript,.sql,application/sql,.xlsm,application/vnd.ms-excel.sheet.macroEnabled.12,.ppsm,application/vnd.ms-powerpoint.slideshow.macroEnabled.12,.page,application/vnd.microsoft.page,.jpg,image/jpeg,.jpeg,.png,image/png,.bmp,image/bmp,.jfif,image/jfif,.gif,image/gif,.pjpeg,image/pjpeg,.pjp,image/pjp,.webp,image/webp,.msg,application/vnd.ms-outlook,.eml,message/rfc822"
+  },
+  "attachment_state": {
+    "url": "https://m365.cloud.microsoft/chat/",
+    "title": "チャット | Microsoft Copilot",
+    "labels": [
+      "T10-Knowledge-Flow-Bundle.txt"
+    ],
+    "attached": [
+      true
+    ],
+    "pending": false,
+    "count": 1
+  },
+  "input_state": {
+    "matched": true,
+    "observed_chars": 3733,
+    "raw_observed_chars": 3735,
+    "expected_chars": 3733,
+    "reader": "editor"
+  },
+  "send_state": {
+    "clicked": true
+  },
+  "last_response_chars": 3679,
+  "response": "1. 前提・対象範囲・未確認点\n\n対象は添付の T10-Knowledge-Flow-Bundle 内の catalog/generated/office-three-apps/generated.robin です。\n\n依頼どおり、変更は以下の2点のみに限定しました。\n\nExcel.WriteToExcel.WriteCell の値 CopilotOffice 246 → T10-Changed\nExcel.SaveExcel.SaveAs の保存先ファイル名のみ → C:\\\\Users\\\\yuuki\\\\ai-prompts\\\\catalog\\\\evidence\\\\copilot-excel-t10-v6.xlsx\n\nそれ以外の Excel/Word/PowerPoint の処理、変数名、アクション順、保存形式、終了処理は保持しています。特に Word と PowerPoint の CopilotOffice 246 は変更していません。根拠原文は catalog/generated/office-three-apps/generated.robin です。\n\n2. 事前設定\n\n追加の入力変数・UI要素・保存先変数は不要です。\n\n保存先として使用するパス:\n\nC:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\copilot-excel-t10-v6.xlsx\n\nが書込み可能であることのみ確認してください。\n\n3. 貼り付け用Robin\nPlain Text\n1\nExcel.LaunchExcel.LaunchUnderExistingProcess Visible: True UseMachineLocale: False Instance=> ExcelInstance\n2\nExcel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T10-Changed''' Column: $'''A''' Row: 1\n3\nExcel.ReadFromExcel.ReadCell Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues CellValue=> ExcelData\n4\nExcel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\\\Users\\\\yuuki\\\\ai-prompts\\\\catalog\\\\evidence\\\\copilot-excel-t10-v6.xlsx'''\n5\nExcel.CloseExcel.Close Instance: ExcelInstance\n6\nWord.LaunchWord.Launch Visible: True Instance=> WordInstance\n7\nWord.WriteToWord.WriteEndOfDocument Instance: WordInstance Text: $'''CopilotOffice 246''' AppendNewLine: False\n8\nWord.ReadFromWord.Read Instance: WordInstance WordData=> WordData\n9\nWord.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\\\\\\\Temp\\\\\\\\AiPromptsOfficeCatalog\\_20260907\\\\\\\\copilot-word.docx'''\n10\nWord.CloseWord.Close Instance: WordInstance\n11\nPowerPoint.LaunchPowerPoint.Launch Instance=> PowerPointInstance\n12\nPowerPoint.AddPowerPointSlide.AddSlideAsLast Instance: PowerPointInstance SlideIndex=> SlideIndex\n13\nPowerPoint.WriteToPowerPoint.WriteToSlideAtPosition Instance: PowerPointInstance Text: $'''CopilotOffice 246''' AppendNewLine: False SlidePosition: SlideIndex\n14\nPowerPoint.ReadFromPowerPoint.Read Instance: PowerPointInstance PowerPointData=> PowerPointData\n15\nPowerPoint.SavePowerPoint.SaveAs Instance: PowerPointInstance DocumentFormat: PowerPoint.PowerPointFormat.PPTX DocumentPath: $'''C:\\\\\\\\Temp\\\\\\\\AiPromptsOfficeCatalog\\_20260907\\\\\\\\copilot-powerpoint.pptx'''\n16\nPowerPoint.ClosePowerPoint.Close Instance: PowerPointInstance\nその他の行を表示する\n4. デザイナー上の確認方法\n\n変更点:\n\nExcel.WriteToExcel.WriteCell\n\n変更前: CopilotOffice 246\n変更後: T10-Changed\n\nExcel.SaveExcel.SaveAs\n\n変更前: C:\\\\\\\\Temp\\\\\\\\AiPromptsOfficeCatalog\\_20260907\\\\\\\\copilot-excel.xlsx\n変更後: C:\\\\Users\\\\yuuki\\\\ai-prompts\\\\catalog\\\\evidence\\\\copilot-excel-t10-v6.xlsx\n\n保持点:\n\nExcel アクション数: 5件\nWord アクション数: 5件\nPowerPoint アクション数: 6件\nアクション順序は原文と同一\nExcelInstance、WordInstance、PowerPointInstance は保持\nWord の CopilotOffice 246 は保持\nPowerPoint の CopilotOffice 246 は保持\n保存形式:\nExcel: Excel.ExcelFormat.OpenXmlWorkbook\nWord: Word.WordFormat.FromExtension\nPowerPoint: PowerPoint.PowerPointFormat.PPTX\n終了処理は保持\n\n根拠原文: catalog/generated/office-three-apps/generated.robin。\n\n5. 保存・実行・照合手順\n既存フローをバックアップ。\n対象サブフローへ上記 Robin を貼り付け。\n保存。\nデザイナーでエラー表示がないことを確認。\n実行。\nExcel 出力ファイル\nC:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\copilot-excel-t10-v6.xlsx を開く。\nセル A1 が T10-Changed であることを確認。\nWord 出力を開き、\nCopilotOffice 246 が保持されていることを確認。\nPowerPoint 出力を開き、\nスライド内容が CopilotOffice 246 のままであることを確認。\n再実行時に Excel ファイルが更新され、Word/PowerPoint の保存先や内容が変化していないことを確認。\n根拠\n対象フロー原文: catalog/generated/office-three-apps/generated.robin。\nOfficeアクションの実測済みカテゴリと保存構文: PAD-Robin-04-Office-PDF.txt。\nT10対象フローの元コード: catalog/generated/office-three-apps/generated.robin。",
+  "robin_blocks": [
+    "Excel.LaunchExcel.LaunchUnderExistingProcess Visible: True UseMachineLocale: False Instance=> ExcelInstance\nExcel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T10-Changed''' Column: $'''A''' Row: 1\nExcel.ReadFromExcel.ReadCell Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues CellValue=> ExcelData\nExcel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\\\Users\\\\yuuki\\\\ai-prompts\\\\catalog\\\\evidence\\\\copilot-excel-t10-v6.xlsx'''\nExcel.CloseExcel.Close Instance: ExcelInstance\nWord.LaunchWord.Launch Visible: True Instance=> WordInstance\nWord.WriteToWord.WriteEndOfDocument Instance: WordInstance Text: $'''CopilotOffice 246''' AppendNewLine: False\nWord.ReadFromWord.Read Instance: WordInstance WordData=> WordData\nWord.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\\\\\\\Temp\\\\\\\\AiPromptsOfficeCatalog\\_20260907\\\\\\\\copilot-word.docx'''\nWord.CloseWord.Close Instance: WordInstance\nPowerPoint.LaunchPowerPoint.Launch Instance=> PowerPointInstance\nPowerPoint.AddPowerPointSlide.AddSlideAsLast Instance: PowerPointInstance SlideIndex=> SlideIndex\nPowerPoint.WriteToPowerPoint.WriteToSlideAtPosition Instance: PowerPointInstance Text: $'''CopilotOffice 246''' AppendNewLine: False SlidePosition: SlideIndex\nPowerPoint.ReadFromPowerPoint.Read Instance: PowerPointInstance PowerPointData=> PowerPointData\nPowerPoint.SavePowerPoint.SaveAs Instance: PowerPointInstance DocumentFormat: PowerPoint.PowerPointFormat.PPTX DocumentPath: $'''C:\\\\\\\\Temp\\\\\\\\AiPromptsOfficeCatalog\\_20260907\\\\\\\\copilot-powerpoint.pptx'''\nPowerPoint.ClosePowerPoint.Close Instance: PowerPointInstance"
+  ],
+  "response_observed": true,
+  "finished_at": "2026-09-09T22:49:15.229Z"
+}

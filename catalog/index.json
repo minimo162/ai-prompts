@@ -1465,6 +1465,42 @@
       }
     },
     {
+      "id": "pdf-extract-text-page-2-repo",
+      "category": "PDF",
+      "ui_name": "PDF からテキストを抽出",
+      "ui_automation_id": "Pdf.ExtractTextFromPDF",
+      "variant": "page-2-repo-fixture",
+      "settings": {
+        "PDF ファイル": "catalog/fixtures/pdf/source-a.pdf",
+        "抽出するページ": "範囲",
+        "開始ページ番号": 2,
+        "終了ページ番号": 2,
+        "構造化データに最適化": false
+      },
+      "inputs": [
+        { "name": "catalog/fixtures/pdf/source-a.pdf", "kind": "file" }
+      ],
+      "outputs": [
+        { "name": "ExtractedPDFText", "kind": "text" }
+      ],
+      "robin_path": "actions/pdf-extract-text/page-2-repo.robin",
+      "sha256": "df7b51aecbfa32e99792b48e011a4e4f0b9d8d7c8824d587f9107b94466165c4",
+      "capture_session": "normal-chat-t07-2026-09-10",
+      "native_flow_name": "RobinKnowledgeT07Final_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": false,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "RobinKnowledgeT07Final_20260910",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/normal-chat-t07-final-run-1.json"
+      },
+      "known_finding": "リポジトリfixtureの2ページ範囲を指定し、PAGE_TOKEN_A2のみを抽出した。"
+    },
+    {
       "id": "pdf-extract-tables-with-headers",
       "category": "PDF",
       "ui_name": "PDF からテーブルを抽出する",
@@ -1886,6 +1922,42 @@
       "known_finding": "書き込む変数へ%CSVTable%を設定すると、RobinではCSVTableが未引用の変数参照になった。文字列リテラルを入れると型エラーになる。"
     },
     {
+      "id": "csv-write-filtered-table-headers",
+      "category": "ファイル",
+      "ui_name": "CSV ファイルに書き込む",
+      "ui_automation_id": "File.WriteToCSVFile",
+      "variant": "filtered-table-with-header",
+      "settings": {
+        "書き込む変数": "FilteredDataTable",
+        "ファイル パス": "catalog/evidence/normal-chat-t02-output-20260910.csv",
+        "エンコード": "UTF-8",
+        "列名を含めます": true,
+        "ファイルが存在する場合": "上書き",
+        "区切り記号": "SystemDefault"
+      },
+      "inputs": [
+        { "name": "FilteredDataTable", "kind": "data_table" }
+      ],
+      "outputs": [],
+      "robin_path": "actions/csv-write/filtered-table-headers.robin",
+      "sha256": "b20c34d83a6d7fe28879aea3633607d98d925b9f124c0197d24a7a3281851586",
+      "capture_session": "datatable-filter-2026-09-10",
+      "native_flow_name": "RobinKnowledgeT02CopilotRoundtripFinal2_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": false,
+        "added_via_search": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "RobinKnowledgeT02CopilotRoundtripFinal_20260910",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/normal-chat-t02-final-pad-run.json"
+      },
+      "known_finding": "FilteredDataTableを変数参照として指定し、列名を含める=Trueで新規CSVへ保存した。"
+    },
+    {
       "id": "csv-read-utf8-system-default-no-header",
       "category": "ファイル",
       "ui_name": "CSV ファイルから読み取る",
@@ -1929,6 +2001,43 @@
       "known_finding": "FirstLineContainsColumnNames=Falseでは、ヘッダー行を含む3行3列のDataTableになった。日本語と引用符は書出し結果でも保持された。"
     },
     {
+      "id": "csv-read-utf8-system-default-header",
+      "category": "ファイル",
+      "ui_name": "CSV ファイルから読み取る",
+      "ui_automation_id": "File.ReadFromCSVFile",
+      "variant": "utf8-trim-header-system-default",
+      "settings": {
+        "ファイル パス": "catalog/fixtures/csv/t02-input-20260910.csv",
+        "エンコード": "UTF-8",
+        "TrimFields": true,
+        "FirstLineContainsColumnNames": true,
+        "ColumnsSeparator": "SystemDefault",
+        "CSVTable": "CSVTable"
+      },
+      "inputs": [
+        { "name": "catalog/fixtures/csv/t02-input-20260910.csv", "kind": "file" }
+      ],
+      "outputs": [
+        { "name": "CSVTable", "kind": "data_table" }
+      ],
+      "robin_path": "actions/csv-read/utf8-header.robin",
+      "sha256": "cd7e56ec2cff77b4247072c7d2dee3c6e68911e016a6ea949251bf9a46c4216b",
+      "capture_session": "datatable-filter-2026-09-10",
+      "native_flow_name": "RobinKnowledgeT02FilterRoundtrip2_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": false,
+        "added_via_search": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "RobinKnowledgeT02FilterRoundtrip2_20260910",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/filter-t02-roundtrip2-run-2.json"
+      },
+      "known_finding": "FirstLineContainsColumnNames=TrueでStatus列を列名として扱う構成を実測した。"
+    },
+    {
       "id": "file-copy-single-no-overwrite",
       "category": "ファイル",
       "ui_name": "ファイルのコピー",
@@ -1968,6 +2077,521 @@
         "execution_evidence": "evidence/file-copy-validation.json"
       },
       "known_finding": "1回目はCopiedFilesにコピー先ファイルが入り、入力と出力のSHA-256が一致。2回目は何もしない設定によりCopiedFilesが空になり、既存出力は不変。"
+    },
+    {
+      "id": "text-get-subtext-mixed-index-length",
+      "category": "テキスト",
+      "ui_name": "サブテキストの取得",
+      "ui_automation_id": "Text.GetSubtext",
+      "variant": "mixed-unicode-index-1-length-3",
+      "settings": {
+        "元のテキスト": "A日本語BC",
+        "開始インデックス": "1",
+        "長さ": "3",
+        "生成された変数": "Subtext",
+        "エラー発生時": "既定"
+      },
+      "inputs": [
+        {
+          "name": "A日本語BC",
+          "kind": "text_literal"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Subtext",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/text-substring/mixed-index-length.robin",
+      "sha256": "4f1021aafc353edba483e83ea61c6dd93d3c7944ad7b4566049c50fe81e4f70c",
+      "capture_session": "text-substring-2026-09-09",
+      "native_flow_name": "RobinKnowledgeSubstring_20260909",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "text-substring",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/text-substring-validation.json"
+      },
+      "known_finding": "開始インデックス1、長さ3でA日本語BCから日本語を取得した。Unicodeを含むリテラルで、元フローと別フローを各2回実行して同じ値を確認した。"
+    },
+    {
+      "id": "file-write-text-utf8-overwrite",
+      "category": "ファイル",
+      "ui_name": "テキストをファイルに書き込む",
+      "ui_automation_id": "File.WriteText",
+      "variant": "utf8-overwrite-append-newline",
+      "settings": {
+        "ファイル パス": "catalog/evidence/text-write-output-valid-20260909.txt",
+        "書き込むテキスト": "日本語\\n対象語 100%%\\n'引用' \"二重引用\" C:\\sample\\n対象語",
+        "新しい行を追加する": true,
+        "ファイルが存在する場合": "既存の内容を上書きする",
+        "エンコード": "UTF-8",
+        "エラー発生時": "既定"
+      },
+      "inputs": [
+        {
+          "name": "日本語・対象語・100%%・引用符・バックスラッシュ",
+          "kind": "text_literal"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/file-write-text/utf8-overwrite.robin",
+      "sha256": "3f31e923d6466abcb14e5f7fa864d414256158a6b5431ad9e5f126323818bb86",
+      "capture_session": "file-write-text-2026-09-09",
+      "native_flow_name": "RobinKnowledgeTextWriteValid_20260909",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "file-write-text",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/text-write-validation.json"
+      },
+      "known_finding": "UI入力で100%%とした原文をUTF-8・上書き・末尾改行で実行し、出力はBOM付き73 bytes、100%を含む4論理行になった。100%をそのまま入力した別フローは設計エラーとなったため失敗証拠を分離した。"
+    },
+    {
+      "id": "file-write-text-variable-reference",
+      "category": "ファイル",
+      "ui_name": "テキストをファイルに書き込む",
+      "ui_automation_id": "File.WriteText",
+      "variant": "utf8-overwrite-variable-append-newline",
+      "settings": {
+        "ファイル パス": "catalog/evidence/text-write-output-valid-20260909.txt",
+        "書き込むテキスト": "Replaced",
+        "新しい行を追加する": true,
+        "ファイルが存在する場合": "既存の内容を上書きする",
+        "エンコード": "UTF-8",
+        "エラー発生時": "既定"
+      },
+      "inputs": [
+        {
+          "name": "Replaced",
+          "kind": "existing_text"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/file-write-text/variable-reference.robin",
+      "sha256": "7d73b162b4b298a547b7c45f98eab0f116a0abf047e6ec1e65de3d426063adac",
+      "capture_session": "file-write-text-variable-2026-09-09",
+      "native_flow_name": "RobinKnowledgeTextWriteVariable_20260909",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "normal-chat-t01-generated-append-newline",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/normal-chat-t01-pad-run-1.json",
+        "recopy_evidence": "evidence/text-write-variable-recopy.robin"
+      },
+      "known_finding": "書き込むテキストへ既存のテキスト変数Replacedを設定すると、RobinではTextToWrite: Replacedとなる。AppendNewLine=Trueのため入力末尾に追加改行が生じる場合がある。"
+    },
+    {
+      "id": "file-write-text-variable-reference-no-append",
+      "category": "ファイル",
+      "ui_name": "テキストをファイルに書き込む",
+      "ui_automation_id": "File.WriteText",
+      "variant": "utf8-overwrite-variable-no-append-newline",
+      "settings": {
+        "ファイル パス": "catalog/evidence/text-write-output-valid-20260909.txt",
+        "書き込むテキスト": "Replaced",
+        "新しい行を追加する": false,
+        "ファイルが存在する場合": "既存の内容を上書きする",
+        "エンコード": "UTF-8",
+        "エラー発生時": "既定"
+      },
+      "inputs": [
+        {
+          "name": "Replaced",
+          "kind": "existing_text"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/file-write-text/variable-reference-no-append.robin",
+      "sha256": "ca6006e287fdd4050f277f4965d6c2e8c3e1aa724dfbcbd4f3300cd3e7d2abe6",
+      "capture_session": "file-write-text-variable-no-append-2026-09-09",
+      "native_flow_name": "RobinKnowledgeTextWriteVariableNoAppend_20260909",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "normal-chat-t01-generated-no-append",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/normal-chat-t01-noappend-run-1.json",
+        "recopy_evidence": "evidence/text-write-variable-noappend-recopy.robin"
+      },
+      "known_finding": "AppendNewLine=Falseの変数書込みを実測した。入力末尾改行を保持し、依頼されていない追加改行を避ける設定としてT01で実行した。"
+    },
+    {
+      "id": "foreach-items-variable",
+      "category": "ループ",
+      "ui_name": "For each",
+      "ui_automation_id": "LanguageConstructs.Foreach",
+      "variant": "items-current-item",
+      "settings": {
+        "反復処理を行う値": "Items",
+        "保存先": "CurrentItem"
+      },
+      "inputs": [
+        {
+          "name": "Items",
+          "kind": "existing_list"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CurrentItem",
+          "kind": "loop_item"
+        }
+      ],
+      "robin_path": "actions/foreach/items-variable.robin",
+      "sha256": "38a2be31b6aa79dde80309d0a606093de36165968a7449ad487c5a4674bbfc27",
+      "capture_session": "foreach-items-2026-09-10",
+      "native_flow_name": "RobinKnowledgeForEach_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": null,
+        "app_executor_verified": false,
+        "execution_evidence": null
+      },
+      "known_finding": "既存リストItemsを反復し、現在項目をCurrentItemへ保存する原文を採取した。完全な組合せ実行は未確認。"
+    },
+    {
+      "id": "if-current-item-status-equals",
+      "category": "条件",
+      "ui_name": "If",
+      "ui_automation_id": "LanguageConstructs.If",
+      "variant": "current-item-status-equals",
+      "settings": {
+        "最初のオペランド": "CurrentItem[Status]",
+        "演算子": "と等しい (=)",
+        "2 番目のオペランド": "対象"
+      },
+      "inputs": [
+        {
+          "name": "CurrentItem",
+          "kind": "existing_data_row"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/if/current-item-status-equals.robin",
+      "sha256": "12a2c5b7bac32d98291560ae9bd1e170f256c5efdc35d88d47b0e6ad8987a35a",
+      "capture_session": "if-current-item-status-2026-09-10",
+      "native_flow_name": "RobinKnowledgeIf_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": null,
+        "app_executor_verified": false,
+        "execution_evidence": null
+      },
+      "known_finding": "CurrentItem[Status]と対象の等価比較を行うIf開始行を採取した。条件ブロックの組合せ実行は未確認。"
+    },
+    {
+      "id": "excel-launch-open-editable",
+      "category": "Excel",
+      "ui_name": "Excel の起動",
+      "ui_automation_id": "Excel.LaunchExcel",
+      "variant": "open-editable",
+      "settings": {
+        "Excel の起動": "次のドキュメントを開く",
+        "ドキュメント パス": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\excel-catalog.xlsx",
+        "インスタンスを表示する": true,
+        "読み取り専用として開く": false,
+        "UseMachineLocale": false
+      },
+      "inputs": [
+        {
+          "name": "excel-catalog.xlsx",
+          "kind": "file"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ExcelInstance",
+          "kind": "excel_instance"
+        }
+      ],
+      "robin_path": "actions/excel-launch/open-editable.robin",
+      "sha256": "1b55a963e33056ae4b0b0bb65af88550476f3c31717f3129b38fc3d3c5e7b82a",
+      "capture_session": "excel-open-editable-2026-09-10",
+      "native_flow_name": "RobinKnowledgeExcelOpenEditable_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": null,
+        "app_executor_verified": false,
+        "execution_evidence": null
+      },
+      "known_finding": "既存ExcelをReadOnly=Falseで開く原文を追加採取した。"
+    },
+    {
+      "id": "word-launch-open-editable",
+      "category": "Word",
+      "ui_name": "Word を起動する",
+      "ui_automation_id": "Word.LaunchWord",
+      "variant": "open-editable",
+      "settings": {
+        "Word の起動": "次のドキュメントを開く",
+        "ドキュメント パス": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\word-catalog.docx",
+        "インスタンスを表示する": true,
+        "読み取り専用として開く": false
+      },
+      "inputs": [
+        {
+          "name": "word-catalog.docx",
+          "kind": "file"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "WordInstance",
+          "kind": "word_instance"
+        }
+      ],
+      "robin_path": "actions/word-launch/open-editable.robin",
+      "sha256": "d92644f9dccaafeee6dc41b497120a18a301317f010ccb7a78ae8df907e86939",
+      "capture_session": "word-open-editable-2026-09-10",
+      "native_flow_name": "RobinKnowledgeWordOpenEditable_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": null,
+        "app_executor_verified": false,
+        "execution_evidence": null
+      },
+      "known_finding": "既存WordをReadOnly=Falseで開く原文を追加採取した。"
+    },
+    {
+      "id": "folder-get-files-txt-no-subfolders",
+      "category": "ファイル",
+      "ui_name": "フォルダー内のファイルを取得",
+      "ui_automation_id": "Folder.GetFiles",
+      "variant": "txt-no-subfolders-no-sort",
+      "settings": {
+        "フォルダー": "catalog/fixtures/files",
+        "ファイル フィルター": "*.txt",
+        "サブフォルダーを含める": false,
+        "アクセス拒否時に失敗": true,
+        "並び替え": "なし",
+        "生成された変数": "Files"
+      },
+      "inputs": [
+        {
+          "name": "catalog/fixtures/files",
+          "kind": "folder"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Files",
+          "kind": "file_list"
+        }
+      ],
+      "robin_path": "actions/folder-get-files/txt-files.robin",
+      "sha256": "85bcc7fae4cb143e906e9f85bf8775658ff8b2b1c2c41269321ae528879cd06c",
+      "capture_session": "folder-get-files-2026-09-10",
+      "native_flow_name": "RobinKnowledgeFolderGetFiles_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "folder-get-files-rt",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/folder-get-files-rt-run-1.json"
+      },
+      "known_finding": "txtフィルター、サブフォルダーなし、アクセス拒否時は失敗、並び替えなしで1件を取得した。"
+    },
+    {
+      "id": "file-read-text-variable-path",
+      "category": "ファイル",
+      "ui_name": "ファイルからテキストを読み取る",
+      "ui_automation_id": "File.ReadTextFromFile",
+      "variant": "variable-path-utf8",
+      "settings": {
+        "ファイル パス": "CurrentFile",
+        "エンコード": "UTF-8",
+        "生成された変数": "FileContents"
+      },
+      "inputs": [
+        {
+          "name": "CurrentFile",
+          "kind": "existing_file"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FileContents",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/file-read-text/variable-path-utf8.robin",
+      "sha256": "365ed2c2017f33ba31eba5c448febbaaf11e017aaf052548b4eb7f68d6b75be9",
+      "capture_session": "file-read-variable-path-2026-09-10",
+      "native_flow_name": "RobinKnowledgeReadTextVariable_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "t03-partial",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/t03-partial-run-1.json"
+      },
+      "known_finding": "ファイルパス変数CurrentFileをUTF-8読取りへ渡し、For each組合せで合成txtを取得した。"
+    },
+    {
+      "id": "if-current-file-contains-txt",
+      "category": "条件",
+      "ui_name": "If",
+      "ui_automation_id": "LanguageConstructs.If",
+      "variant": "current-file-contains-txt",
+      "settings": {
+        "最初のオペランド": "CurrentFile",
+        "演算子": "次を含む",
+        "2 番目のオペランド": ".txt",
+        "大文字小文字区別": false
+      },
+      "inputs": [
+        {
+          "name": "CurrentFile",
+          "kind": "existing_file"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/if/current-file-contains-txt.robin",
+      "sha256": "f634ff144bee7dd5d4faa9cf81f2d42ac484c1c8e2186d1436ceb79d5e27061c",
+      "capture_session": "if-file-contains-txt-2026-09-10",
+      "native_flow_name": "RobinKnowledgeIfContainsTxt_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": null,
+        "app_executor_verified": false,
+        "execution_evidence": null
+      },
+      "known_finding": "CurrentFileのパスに.txtを含むか判定するIf開始行を採取した。Else側の組合せ実行は未確認。"
+    },
+    {
+      "id": "datatable-filter-status-equals-index2",
+      "category": "変数",
+      "ui_name": "データ テーブルをフィルター処理",
+      "ui_automation_id": "Variables.FilterDataTable",
+      "variant": "status-equals-index2",
+      "settings": {
+        "データ テーブル": "CSVTable",
+        "列またはインデックス": "2",
+        "演算子": "と等しい (=)",
+        "値": "対象",
+        "照合の大文字小文字区別": true,
+        "生成された変数": "FilteredDataTable"
+      },
+      "inputs": [
+        { "name": "CSVTable", "kind": "data_table" }
+      ],
+      "outputs": [
+        { "name": "FilteredDataTable", "kind": "data_table" }
+      ],
+      "robin_path": "actions/datatable-filter/status-equals-index2.robin",
+      "sha256": "54878f58f2860e6d5151ef7690450aa878741bc65a80fad2b5f9c482fde5c2ca",
+      "capture_session": "datatable-filter-2026-09-10",
+      "native_flow_name": "RobinKnowledgeFilterDataTableFresh_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": false,
+        "added_via_search": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "RobinKnowledgeT02FilterRoundtrip2_20260910",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/filter-t02-roundtrip2-run-2.json",
+        "output_evidence": "evidence/normal-chat-t02-output-20260910.csv"
+      },
+      "known_finding": "CSVのヘッダーを列名として読み込み、列インデックス2をEqual=対象で抽出する条件付き原文を実測した。"
+    },
+    {
+      "id": "folder-get-files-all-no-subfolders",
+      "category": "ファイル",
+      "ui_name": "フォルダー内のファイルを取得",
+      "ui_automation_id": "Folder.GetFiles",
+      "variant": "all-files-no-subfolders-no-sort",
+      "settings": {
+        "フォルダー": "catalog/fixtures/files",
+        "ファイル フィルター": "*",
+        "サブフォルダーを含める": false,
+        "アクセス拒否時に失敗": true,
+        "並び替え": "なし",
+        "生成された変数": "Files"
+      },
+      "inputs": [
+        {
+          "name": "catalog/fixtures/files",
+          "kind": "folder"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Files",
+          "kind": "file_list"
+        }
+      ],
+      "robin_path": "actions/folder-get-files/all-files-no-subfolders.robin",
+      "sha256": "f6642f88007dbd5c3a012af9c2686ad921363e082067512b14a2792563e6b5d8",
+      "capture_session": "folder-get-files-all-2026-09-10",
+      "native_flow_name": "RobinKnowledgeFolderGetFilesAll2_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "folder-get-files-all-rt",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/folder-get-files-all-rt-run-1.json"
+      },
+      "known_finding": "ファイルフィルター*でtxt/csv/mdを含む合成ファイルを取得した。"
     }
   ],
   "flows": [
@@ -2464,6 +3088,82 @@
       "evidence": "evidence/file-copy-validation.json",
       "app_executor_verified": false,
       "controller_support": "not_implemented"
+    },
+    {
+      "id": "text-substring",
+      "robin_path": "flows/text-substring/roundtrip.robin",
+      "sha256": "4f1021aafc353edba483e83ea61c6dd93d3c7944ad7b4566049c50fe81e4f70c",
+      "action_ids": [
+        "text-get-subtext-mixed-index-length"
+      ],
+      "action_count": 1,
+      "native_flow_name": "RobinKnowledgeSubstringRT_20260909",
+      "native_subflow": "Main",
+      "re_pasted_from_file": true,
+      "re_copied_sha256": "4f1021aafc353edba483e83ea61c6dd93d3c7944ad7b4566049c50fe81e4f70c",
+      "executed_twice": true,
+      "expected_value": "Subtext=日本語",
+      "evidence": "evidence/text-substring-validation.json",
+      "app_executor_verified": false,
+      "controller_support": "not_implemented"
+    },
+    {
+      "id": "file-write-text",
+      "robin_path": "flows/file-write-text/roundtrip.robin",
+      "sha256": "3f31e923d6466abcb14e5f7fa864d414256158a6b5431ad9e5f126323818bb86",
+      "action_ids": [
+        "file-write-text-utf8-overwrite"
+      ],
+      "action_count": 1,
+      "native_flow_name": "RobinKnowledgeTextWriteRT_20260909",
+      "native_subflow": "Main",
+      "re_pasted_from_file": true,
+      "re_copied_sha256": "3f31e923d6466abcb14e5f7fa864d414256158a6b5431ad9e5f126323818bb86",
+      "executed_twice": true,
+      "expected_value": "UTF-8 output preserves Japanese, quotes, backslash, 100%, and target lines",
+      "evidence": "evidence/text-write-validation.json",
+      "app_executor_verified": false,
+      "controller_support": "not_implemented"
+    },
+    {
+      "id": "datatable-filter-roundtrip",
+      "robin_path": "flows/datatable-filter/roundtrip.robin",
+      "sha256": "c3027cfaa13e191b0e784fb3a6db4c573f8bfc83fb172d1a6394d7c1f5a55c29",
+      "action_ids": [
+        "csv-read-utf8-system-default-header",
+        "datatable-filter-status-equals-index2",
+        "csv-write-filtered-table-headers"
+      ],
+      "action_count": 3,
+      "native_flow_name": "RobinKnowledgeT02FilterRoundtrip2_20260910",
+      "native_subflow": "Main",
+      "re_pasted_from_file": true,
+      "re_copied_sha256": "c3027cfaa13e191b0e784fb3a6db4c573f8bfc83fb172d1a6394d7c1f5a55c29",
+      "executed_twice": true,
+      "expected_value": "Header row is retained; only Status=対象 rows are written to a new UTF-8 CSV; input fixture remains unchanged.",
+      "evidence": "evidence/filter-t02-roundtrip2-run-2.json",
+      "app_executor_verified": false,
+      "controller_support": "not_implemented"
+    },
+    {
+      "id": "datatable-filter-copilot-roundtrip",
+      "robin_path": "generated/normal-chat-t02-20260910-final-final/robin.txt",
+      "sha256": "11f370b0369f10f6506e73e99e060417f1120cf5e5488213fc6ba33618cf5168",
+      "action_ids": [
+        "csv-read-utf8-system-default-header",
+        "datatable-filter-status-equals-index2",
+        "csv-write-filtered-table-headers"
+      ],
+      "action_count": 3,
+      "native_flow_name": "RobinKnowledgeT02CopilotRoundtripFinal2_20260910",
+      "native_subflow": "Main",
+      "re_pasted_from_file": true,
+      "re_copied_sha256": "b075a7f85928bd2ecebb5d21be81e04c84d613466f3307e2e051909f85fc5aee",
+      "executed_twice": false,
+      "expected_value": "Unmodified current-bundle Copilot Robin was accepted, saved and executed; PAD normalized the empty FilterParameters literal representation. Output logical CSV matches header plus Status=対象 rows.",
+      "evidence": "evidence/normal-chat-t02-final-pad-run.json",
+      "app_executor_verified": false,
+      "controller_support": "not_implemented"
     }
   ],
   "capture_sessions": [
@@ -2562,6 +3262,34 @@
       ],
       "scope": "One synthetic local file copied to a dedicated destination folder with DoNothing on collision.",
       "evidence": "evidence/file-copy-validation.json"
+    },
+    {
+      "id": "text-substring-2026-09-09",
+      "date": "2026-09-09",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": false,
+      "native_flow_name": "RobinKnowledgeSubstring_20260909",
+      "roundtrip_flow_name": "RobinKnowledgeSubstringRT_20260909",
+      "action_ids": [
+        "text-get-subtext-mixed-index-length"
+      ],
+      "scope": "Mixed Japanese text literal; start index 1 and length 3; original and roundtrip each executed twice.",
+      "evidence": "evidence/text-substring-validation.json"
+    },
+    {
+      "id": "file-write-text-2026-09-09",
+      "date": "2026-09-09",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": false,
+      "native_flow_name": "RobinKnowledgeTextWriteValid_20260909",
+      "roundtrip_flow_name": "RobinKnowledgeTextWriteRT_20260909",
+      "action_ids": [
+        "file-write-text-utf8-overwrite"
+      ],
+      "scope": "Synthetic Japanese text with quotes, 100%% UI literal, backslash; UTF-8 overwrite with appended newline; failed literal-100-percent trial retained separately.",
+      "evidence": "evidence/text-write-validation.json"
     }
   ],
   "application_integration": {

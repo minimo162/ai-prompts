@@ -1,0 +1,75 @@
+1. 前提・対象範囲・未確認点
+
+目的
+既存 Word 文書 C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx を**編集可能（ReadOnly=False）**で開き、本文中の OfficeCatalog を T06Replaced に置換し、別名で C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx に保存します。元ファイルは変更しません。
+
+確認済み根拠
+
+Word を既存文書として開く（ReadOnly=False）: catalog/actions/word-launch/open-editable.robin。
+Word 文書内の単語を検索して置換する: word-replace/all-literal.robin。
+Word を別名保存（DocumentFormat: Word.WordFormat.FromExtension）: word-save/as-docx-extension.robin。
+Word を閉じる: word-close/no-save.robin。
+
+未確認
+
+ご指定パスの実ファイル内容そのものは未確認です。
+この回答のパスへ置き換えた組合せについては、本回答側では実行確認していません。
+ただし、使用している各アクションと設定はナレッジ内の実測原文に基づいています。
+2. PADで先に確認する設定・依存
+Wordインスタンス
+このフローは WordInstance を新規生成します。
+既存の別 Word インスタンスへの依存はありません。
+ReadOnly: False を使用します。
+入力ファイル
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+
+出力ファイル
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx
+
+保存形式
+DocumentFormat: Word.WordFormat.FromExtension
+出力拡張子 .docx に従う保存形式です。
+置換条件
+検索文字列: OfficeCatalog
+置換文字列: T06Replaced
+大文字小文字区別: False
+単語完全一致: False
+（実測の置換例と同じ設定形式）
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+2
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+3
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t06-final.docx'''
+4
+Word.CloseWord.Close Instance: WordInstance
+4. デザイナー上の確認方法
+
+確認する点:
+
+アクション数が 4個 であること。
+順序が
+Word を起動する
+Word 文書内の単語を検索して置換する
+Word を保存
+Word を閉じる の順であること。
+Word インスタンスが全アクションで WordInstance に統一されていること。
+起動アクションが ReadOnly: False になっていること。
+保存先が normal-chat-t06-final.docx になっていること。
+Robin貼付け後にデザイナー上でエラー表示が出ていないこと。
+5. 保存・実行・照合手順
+元ファイル word-catalog.docx のバックアップ有無を確認する。
+フローを保存する。
+フローを実行する。
+出力ファイル normal-chat-t06-final.docx を開く。
+本文中の OfficeCatalog が T06Replaced に置換されていることを確認する。
+指定文字列以外の本文が保持されていることを確認する。
+元ファイル word-catalog.docx を開き、OfficeCatalog が残っていることを確認する。
+再実行時は出力ファイルの上書き挙動を利用者環境で確認する。ナレッジには Word 保存時の上書き設定差分の実測は含まれていません。
