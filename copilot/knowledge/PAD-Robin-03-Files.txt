@@ -1,0 +1,61 @@
+PAD Robin ファイル・CSV
+
+ファイル操作は検証用フォルダーと合成データに限定する。実際の依頼では入力・出力先と同名ファイルの有無を確認し、採取用のパスをそのまま対象にしない。
+
+今回の追加採取: 空のデータテーブル
+- UI名: 新しいデータ テーブルを作成する、automation id: Variables.CreateNewDatatable。
+- 設定: 入力データ テーブルは0行0列（UI表示「0 行, 0 列」）、生成変数はDataTable、エラー発生時は既定。
+- 左パネルから追加してコピーした原文:
+  `Variables.CreateNewDatatable InputTable: { } DataTable=> DataTable`
+- 原文ファイル: catalog/actions/datatable-create/empty.robin（SHA-256: f3eef9ad3585b35d39c8f90d9202629d63907414e1f7601270e9d0fff7af9256）。
+- 空の別フローへファイルから貼り付け、保存、再コピーした原文は同じSHA-256。2回の実行で「DataTable: 0 行, 0 列」を確認した。
+- 証拠: catalog/evidence/datatable-create-validation.json、catalog/evidence/datatable-create-run-1.json、catalog/evidence/datatable-create-run-2.json。
+- 未確認: 行追加、セル参照、列定義を含む非空テーブル、CSV読取り／書出しとの組合せ。
+
+今回の追加採取: CSV読取りとDataTable変数参照での書出し
+- 入力fixtureは `ID,Name,Status`、日本語と二重引用符を含む3行CSV。
+- CSV読取りの原文:
+  `File.ReadFromCSVFile.ReadCSV CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\csv\\input-20260909.csv''' Encoding: File.CSVEncoding.UTF8 TrimFields: True FirstLineContainsColumnNames: False ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault CSVTable=> CSVTable`
+- 読取り結果は3行3列。FirstLineContainsColumnNames=Falseのためヘッダー行もデータ行として含む。
+- DataTableをCSVへ書き出す原文（変数欄へ%CSVTable%を設定した結果）:
+  `File.WriteToCSVFile.WriteCSV VariableToWrite: CSVTable CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\csv-read-write-output2-20260909.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: False IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault`
+- 2回実行した出力は入力と同じ3論理行で、日本語・引用符を保持した。出力ファイルはUTF-8 BOM付き（66 bytes）。証拠: catalog/evidence/csv-read-validation.json。
+- 書き込む変数欄へ文字列 `CSVTable` をそのまま入力すると、Robinは `$'''CSVTable'''` となり「エクスポートする変数は、データ テーブル、データ行、またはリストである必要があります」のランタイムエラーになった。変数参照と文字列リテラルを混同しない。
+
+失敗例: 0行0列テーブルへの空行追加
+- 「行をデータ テーブルに挿入する」でDataTable、挿入場所=データ テーブルの末尾、新しい値=[]を設定した。
+- コピー原文: `Variables.AddRowToDataTable.AppendRowToDataTable DataTable: $'''DataTable''' RowToAdd: $'''[]'''`
+- PADデザイナーは「行をデータ テーブルに挿入する, エラーあり」と表示し、実行ボタンを無効化した。原文と状態は `catalog/actions/datatable-add-row/empty-table-failed.robin` と `catalog/evidence/datatable-add-row-empty-failed.robin` に保存している。
+- これは列数0の前提不一致を示す失敗例であり、列定義・行値の正しい構文や実行成功を意味しない。元の回答を修正して成功扱いにしない。
+
+今回の追加採取: 単一ファイルのコピー
+- 入力: `catalog/fixtures/files/copy-input-20260909.txt`（日本語・引用符・100%）。出力先は専用フォルダー `catalog/evidence/file-copy-output-20260909`。
+- 設定: コピーするファイル=入力fixture、宛先フォルダー=専用出力、ファイルが存在する場合=何もしない、生成変数=CopiedFiles。
+- コピー原文:
+  `File.Copy Files: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files\\copy-input-20260909.txt''' Destination: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\file-copy-output-20260909''' IfFileExists: File.IfExists.DoNothing CopiedFiles=> CopiedFiles`
+- 別の空フローへファイルから貼り付け、保存、再コピーした原文はSHA-256 `a8fad878ee52f6fb2d8a1f74e8f145e213b7a5c63b63450969f922a53082bedc` で一致した。1回目は出力ファイルのSHA-256が入力と一致し、2回目はDoNothingにより `CopiedFiles=[]`、既存出力は不変だった。
+- 証拠: catalog/evidence/file-copy-validation.json。削除、移動、名前変更、上書きする設定は別採取。
+
+確認済みの原文
+- ファイルからテキストを読み取る（id: file-read-text-utf8、variant: utf8）
+  - UTF-8で入力ファイルを読み、出力変数 FileContents を作る。
+  - 原文: catalog/actions/file-read-text/utf8.robin
+  - コピー原文:
+    `File.ReadTextFromFile.ReadText File: $'''C:\\Temp\\AiPromptsCatalogNumbers_20260907\\input.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents`
+  - 数値変換フローで `1234.5` を読み取り、Text.ToNumberへ渡した。実行証拠: catalog/evidence/number-conversion-variables.json。
+- CSV ファイルに書き込む（id: file-write-csv-pdf-table-headers、variant: pdf-table-headers）
+  - PDF表情報の合成データをCSVへ保存するために採取した例。
+  - 原文: catalog/actions/file-write-csv/pdf-table-headers.robin
+  - コピー原文:
+    `File.WriteToCSVFile.WriteCSV VariableToWrite: PdfTablesHeaders[0].DataTable CSVFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\table-csv-probe.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: True IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.Comma`
+  - 組合せフロー: catalog/flows/pdf-table-csv/roundtrip.robin。
+
+注意
+- 読み取ったテキストと数値は型が異なる。空文字、別エンコード、桁区切り、改行の扱いは該当原文と実行証拠を確認する。
+- CSVの引用符を含む読み取り、CSV読取りアクション、フォルダー内ファイル取得、存在確認、フォルダー作成、テキスト書出し、コピー、移動、名前変更は、今回の左パネルで表示名を観測したが、`catalog/index.json` には今回条件のRobin原文・実行証拠がまだない。古い記録の名称や一般的なPAD説明からRobinを作らない。
+- ファイルを上書き・移動・削除する依頼では、対象、出力、衝突時の設定、結果確認を明示する。確認できない失敗後に後続処理や完了マーカーを作成しない。
+
+関連証拠
+- PDF表の値: catalog/evidence/pdf/table-headers-values.json、catalog/evidence/pdf/table-no-headers-values.json
+- PDFの合成入力: catalog/fixtures/pdf/README.md
+- 採取条件: docs/robin-action-catalog.md、docs/pdf-action-capture.md

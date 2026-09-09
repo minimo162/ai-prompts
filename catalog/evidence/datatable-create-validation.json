@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "action_id": "datatable-create-empty",
+  "ui_name": "新しいデータ テーブルを作成する",
+  "variant": "empty-0x0",
+  "pad_file_version": "2.71.115.26224",
+  "language": "ja-JP",
+  "power_fx": false,
+  "capture_flow": "RobinKnowledgeDataTable_20260909",
+  "roundtrip_flow": "RobinKnowledgeDataTableRT_20260909",
+  "source_robin": "catalog/actions/datatable-create/empty.robin",
+  "source_sha256": "f3eef9ad3585b35d39c8f90d9202629d63907414e1f7601270e9d0fff7af9256",
+  "roundtrip_recopy": "catalog/evidence/datatable-create-roundtrip-recopy.robin",
+  "roundtrip_recopy_sha256": "f3eef9ad3585b35d39c8f90d9202629d63907414e1f7601270e9d0fff7af9256",
+  "settings": {
+    "テーブルを作成": "0 行, 0 列",
+    "生成された変数": "DataTable",
+    "エラー発生時": "既定"
+  },
+  "stages": {
+    "left_panel_add": "PASS",
+    "settings_confirmed": "PASS",
+    "copy_to_utf8_bomless_file": "PASS",
+    "empty_flow_file_text_paste": "PASS",
+    "roundtrip_save": "PASS",
+    "roundtrip_recopy_byte_match": "PASS",
+    "run_1": "PASS",
+    "result_1_expected_match": "PASS",
+    "run_2": "PASS",
+    "result_2_expected_match": "PASS"
+  },
+  "expected_value": "DataTable is a data table with 0 rows and 0 columns",
+  "run_1_evidence": "catalog/evidence/datatable-create-run-1.json",
+  "run_2_evidence": "catalog/evidence/datatable-create-run-2.json",
+  "notes": "This verifies the empty-table mode only. Row insertion, cell access, and CSV read are separate settings and remain unverified."
+}

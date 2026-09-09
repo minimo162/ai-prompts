@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "action_id": "file-copy-single-no-overwrite",
+  "ui_name": "ファイルのコピー",
+  "variant": "single-file-do-nothing-if-exists",
+  "pad_file_version": "2.71.115.26224",
+  "language": "ja-JP",
+  "power_fx": false,
+  "capture_flow": "RobinKnowledgeFileCopy_20260909",
+  "roundtrip_flow": "RobinKnowledgeFileCopyRT_20260909",
+  "input_fixture": "catalog/fixtures/files/copy-input-20260909.txt",
+  "output_folder": "catalog/evidence/file-copy-output-20260909",
+  "source_robin": "catalog/actions/file-copy/single-no-overwrite.robin",
+  "source_sha256": "a8fad878ee52f6fb2d8a1f74e8f145e213b7a5c63b63450969f922a53082bedc",
+  "roundtrip_recopy": "catalog/evidence/file-copy-roundtrip-recopy.robin",
+  "roundtrip_recopy_sha256": "a8fad878ee52f6fb2d8a1f74e8f145e213b7a5c63b63450969f922a53082bedc",
+  "settings": {
+    "コピーするファイル": "catalog/fixtures/files/copy-input-20260909.txt",
+    "宛先フォルダー": "catalog/evidence/file-copy-output-20260909",
+    "ファイルが存在する場合": "何もしない",
+    "生成された変数": "CopiedFiles"
+  },
+  "stages": {
+    "left_panel_add": "PASS",
+    "settings_confirmed": "PASS",
+    "copy_to_utf8_bomless_file": "PASS",
+    "empty_flow_file_text_paste": "PASS",
+    "roundtrip_save": "PASS",
+    "roundtrip_recopy_byte_match": "PASS",
+    "run_1": "PASS",
+    "result_1_expected_match": "PASS",
+    "run_2": "PASS",
+    "result_2_expected_match": "PASS"
+  },
+  "run_1": {
+    "CopiedFiles_preview": "[C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\file-copy-output-20260909\\copy-input-20260909.txt]",
+    "output_exists": true,
+    "source_sha256": "c9b143da9a441652db51c7d921cbe46fa5df2bca8cc69e7ff7718f5fd300ffa5",
+    "output_sha256": "c9b143da9a441652db51c7d921cbe46fa5df2bca8cc69e7ff7718f5fd300ffa5",
+    "byte_equal": true
+  },
+  "run_2": {
+    "CopiedFiles_preview": "[]",
+    "output_unchanged": true,
+    "interpretation": "DoNothing skips the existing destination file; it is not a second copy success."
+  },
+  "notes": "Only a synthetic local file was used. Copy/move/rename variants and overwrite policies are separate settings."
+}

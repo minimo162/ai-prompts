@@ -1,0 +1,58 @@
+PAD Robin Office・PDF
+
+OfficeとPDFは、PAD 2.71.115.26224、日本語UI、合成データ、専用フローで採取した既存資産です。対象ファイル、インスタンス、保存形式、読み書き範囲を依頼ごとに明示します。採取例の再貼付け・実行証拠と、新しいCopilotエージェントでの登録試験は別です。
+
+Excel（8バリアント）
+- 起動: 新規表示、既存読取り専用
+- 操作: セル書込み、単一セル読取り（TypedValues）、使用範囲読取り、A1:B2範囲読取り、xlsx別名保存、終了
+- 原文と設定: catalog/actions/excel-*/、組合せ: catalog/flows/office-excel/default.robin、再開: catalog/flows/office-reopen/assembled.robin
+- 実行確認: A1の日本語と100%を保持、使用範囲1×1、指定範囲2×2、元文書ハッシュ不変。シート選択・データ反復の独立例は未確認。
+- 代表的なコピー原文（新規→書込み→単一セル読取り→別名保存→終了）:
+  `Excel.LaunchExcel.LaunchUnderExistingProcess Visible: True UseMachineLocale: False Instance=> ExcelInstance`
+  `Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''OfficeCatalog 日本語 100%%''' Column: $'''A''' Row: 1`
+  `Excel.ReadFromExcel.ReadCell Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues CellValue=> ExcelData`
+  `Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\excel-catalog.xlsx'''`
+  `Excel.CloseExcel.Close Instance: ExcelInstance`
+
+Word（7バリアント）
+- 起動: 新規表示、既存読取り専用
+- 操作: 文末書込み、全文読取り、全件リテラル置換、docx別名保存、保存しない終了
+- 原文: catalog/actions/word-*/、組合せ: catalog/flows/office-word/default.robin と office-reopen
+- 日本語・改行・対象外本文を照合し、元文書ハッシュ不変を確認した。表・書式・テンプレート・PDF出力は未確認。
+- 代表的なコピー原文:
+  `Word.LaunchWord.Launch Visible: True Instance=> WordInstance`
+  `Word.WriteToWord.WriteEndOfDocument Instance: WordInstance Text: $'''OfficeCatalog 日本語 100%%''' AppendNewLine: False`
+  `Word.ReadFromWord.Read Instance: WordInstance WordData=> WordData`
+  `Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\word-catalog.docx'''`
+  `Word.CloseWord.Close Instance: WordInstance`
+
+PowerPoint（7バリアント）
+- UI名は英語。新規／既存起動、末尾スライド追加、スライド番号指定書込み、全文読取り、pptx別名保存、終了。
+- `AddSlideAsLast` の SlideIndex を `WriteToSlideAtPosition` の SlidePosition へ渡す。
+- 原文: catalog/actions/powerpoint-*/、組合せ: catalog/flows/office-powerpoint/default.robin
+- スライド数1、文言、ネイティブPowerPointでの画像出力を確認。図形ID、座標、フォント指定はこの例にない。
+- 代表的なコピー原文:
+  `PowerPoint.LaunchPowerPoint.Launch Instance=> PowerPointInstance`
+  `PowerPoint.AddPowerPointSlide.AddSlideAsLast Instance: PowerPointInstance SlideIndex=> SlideIndex`
+  `PowerPoint.WriteToPowerPoint.WriteToSlideAtPosition Instance: PowerPointInstance Text: $'''OfficeCatalog 日本語 100%%''' AppendNewLine: False SlidePosition: SlideIndex`
+  `PowerPoint.ReadFromPowerPoint.Read Instance: PowerPointInstance PowerPointData=> PowerPointData`
+  `PowerPoint.SavePowerPoint.SaveAs Instance: PowerPointInstance DocumentFormat: PowerPoint.PowerPointFormat.PPTX DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\powerpoint-catalog.pptx'''`
+  `PowerPoint.ClosePowerPoint.Close Instance: PowerPointInstance`
+
+PDF（11バリアント）
+- テキスト抽出: 全ページ、2〜3ページ、2ページ、DetectLayout ON（4）。ページ境界で文字列がつながる実測がある。
+- テーブル抽出: 先頭行を列名にする／しない（2）。出力はPDFテーブル情報のリストで、先頭要素の `.DataTable` が表。
+- 画像抽出: 全ページ／1ページ（2）。合成画像160×80、`CatalogImage_0.png` の0はページ番号ではない。
+- ページ抽出: 2〜3ページ、新規出力、上書きしない（1）。
+- 統合: 2ファイル入力をA→B、B→Aで別採取（2）。この版・この入力では出力ページ順が入力リストと逆になった。3ファイル、変数リスト、別版へ一般化していない。
+- 原文: catalog/actions/pdf-*/、組合せ: catalog/flows/pdf-variants/、統合差分: catalog/flows/pdf-merge-order/roundtrip.robin
+- 代表的なコピー原文:
+  `Pdf.ExtractTextFromPDF.ExtractText PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' DetectLayout: False ExtractedText=> ExtractedPDFText`
+  `Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 3 DetectLayout: False ExtractedText=> ExtractedPDFText`
+  `Pdf.ExtractTablesFromPDF.ExtractTables PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' MultiPageTables: True SetFirstRowAsHeader: True ExtractedPDFTables=> ExtractedPDFTables`
+  `Pdf.ExtractImagesFromPDF.ExtractImagesFromPage PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' PageNumber: 1 ImagesName: $'''CatalogImage''' ImagesFolder: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\images-page1'''`
+  `Pdf.ExtractPages PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' PageSelection: $'''2-3''' ExtractedPDFPath: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\pages-2-3.pdf''' IfFileExists: Pdf.IfFileExists.DoNotModifyFiles ExtractedPDFFile=> ExtractedPDF`
+  `Pdf.MergeFiles PDFFiles: ['C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf', 'C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-b.pdf'] MergedPDFPath: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\merged-a-b.pdf''' IfFileExists: Pdf.IfFileExists.DoNotModifyFiles PasswordDelimiter: $''',''' MergedPDF=> MergedPDF`
+- 実行証拠: catalog/evidence/pdf/results.json。入力PDFの描画、抽出値、ページ順、入力ハッシュを照合した。暗号化・スキャン・フォーム・署名・複数ページ表の精度は未確認。
+
+詳細記録: docs/office-action-capture.md、docs/pdf-action-capture.md。未確認のモードを、確認済みの完成例へ混ぜない。

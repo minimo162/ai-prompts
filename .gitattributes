@@ -6,5 +6,7 @@ catalog/evidence/** -text whitespace=cr-at-eol
 catalog/generated/** -text whitespace=cr-at-eol
 # Literal model input preserves Markdown hard breaks and other source whitespace.
 catalog/generated/**/prompt.txt -whitespace
+# Copilot upload files are UTF-8 text whose line endings and backslashes are part of the artifact.
+copilot/**/*.txt -text
 index.html -text
 "業務エージェント.cmd" -text

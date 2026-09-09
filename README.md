@@ -1,4 +1,12 @@
-# 汎用業務エージェント（開発中）
+# PAD Robin Copilotエージェント用 指示文・ナレッジ
+
+このリポジトリの今回の成果物は、PADの実測Robinを根拠にMicrosoft 365 Copilotエージェントがフロー案を生成・修正するための配布物です。入口は [copilot/README.md](copilot/README.md) です。指示欄へ貼る文章は [copilot/agent-instructions.txt](copilot/agent-instructions.txt)、登録用ナレッジと手順は `copilot/knowledge/` にあります。PAD・Copilotを自動実行する新しいアプリは作りません。
+
+実測原文の正本は [catalog/index.json](catalog/index.json)、観測範囲は [catalog/coverage.json](catalog/coverage.json)、途中経過は [docs/robin-knowledge-progress.md](docs/robin-knowledge-progress.md) です。既存の採取原文・検証証拠は保全し、未観測のアクションを全機能対応とは表示しません。
+
+M365 Copilot内Agent Builderを利用先とする継続方針の訂正は [CODEX_CORRECTION_M365_AGENT_BUILDER.md](CODEX_CORRECTION_M365_AGENT_BUILDER.md) に記録しています。
+
+## 過去資産: 汎用業務エージェント（開発中）
 
 現在は実装をチェックポイントとして保存し、方式を見直す段階です。[次セッションへの引き継ぎ・社内条件・比較対象](docs/session-handoff-2026-09-07.md)を参照してください。
 
@@ -114,6 +122,6 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File .\App.ps1 -Mode Ser
 
 ## アプリ接続の追記（2026-09-08）
 
-上記の採取時点の「自動Run未接続／未検証」は、その後の実装で更新しました。Office/PDFの採取形式を検証器・出力観測・完了判定へ接続し、Office3ファイル作成とPDF各操作の2ケースをアプリ開始からDONEまで確認しました。PDF表は追加採取したCSV書出しで保存します。現在のカタログは34種類・51設定です。
+上記の採取時点の「自動Run未接続／未検証」は、その後の実装で更新しました。Office/PDFの採取形式を検証器・出力観測・完了判定へ接続し、Office3ファイル作成とPDF各操作の2ケースをアプリ開始からDONEまで確認しました。PDF表は追加採取したCSV書出しで保存します。既存51例に今回の3例（日時取得、空テーブル、行追加失敗）を加え、現在のカタログは54設定です。
 
 検証範囲・制約・先行失敗・未完了事項は [自動Run接続チェックポイント](docs/document-run-checkpoint-2026-09-08.md) を参照してください。既存Office文書の自動Run、書式・レイアウト、別PC・社内受入は未確認です。

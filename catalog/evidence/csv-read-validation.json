@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "action_id": "csv-read-utf8-system-default-no-header",
+  "ui_name": "CSV ファイルから読み取る",
+  "variant": "utf8-trim-no-header-system-default",
+  "pad_file_version": "2.71.115.26224",
+  "language": "ja-JP",
+  "power_fx": false,
+  "capture_flow": "RobinKnowledgeCsvRead_20260909",
+  "roundtrip_flow": "RobinKnowledgeCsvRoundtrip2_20260909",
+  "input_fixture": "catalog/fixtures/csv/input-20260909.csv",
+  "input_sha256": "cbd01ffc69a209db206898e05d3f20a1558a518e2d49dda5199e1ca87eaf1143",
+  "source_robin": "catalog/actions/csv-read/utf8.robin",
+  "source_sha256": "22f850aca459d4cc7b15993a96915f68eee51cf7d319b73ca43dd0fcfbd67e5d",
+  "combined_flow": "catalog/flows/csv-read-write2/roundtrip.robin",
+  "combined_flow_sha256": "1a40b35b4d0b4d52997274404ea9f035ee6590f8593982c701f07d20a4f71cae",
+  "write_action_source": "catalog/evidence/csv-read-write2-action.robin",
+  "settings": {
+    "ファイル パス": "catalog/fixtures/csv/input-20260909.csv",
+    "エンコード": "UTF-8",
+    "TrimFields": true,
+    "FirstLineContainsColumnNames": false,
+    "ColumnsSeparator": "SystemDefault",
+    "CSVTable": "CSVTable"
+  },
+  "stages": {
+    "left_panel_add": "PASS",
+    "settings_confirmed": "PASS",
+    "copy_to_utf8_bomless_file": "PASS",
+    "file_text_roundtrip_paste": "PASS",
+    "roundtrip_save": "PASS",
+    "roundtrip_recopy_byte_match": "PASS",
+    "read_run_1": "PASS",
+    "read_run_2": "PASS",
+    "write_combined_run_1": "PASS",
+    "write_combined_run_2": "PASS"
+  },
+  "observed_shape": "3 rows, 3 columns",
+  "output_fixture": "catalog/evidence/csv-read-write-output2-20260909.csv",
+  "output_sha256": "49f6cee2225709b3c2ae4ec02ddaba68c780922516d3836a343ad84f2c37cbb9",
+  "output_bytes": 66,
+  "output_lines": [
+    "ID,Name,Status",
+    "1,\"日本語 \"\"引用\"\"\",対象",
+    "2,alpha,除外"
+  ],
+  "expected": {
+    "row_count": 3,
+    "column_count": 3,
+    "japanese_and_quotes_preserved": true,
+    "input_data_rows_preserved": true
+  },
+  "notes": "The output has a UTF-8 BOM and the same three logical CSV lines as the input. IncludeColumnNames=False was used for the write action. Header-as-column-name and other delimiters are separate variants."
+}

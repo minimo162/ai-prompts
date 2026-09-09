@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-09T15:31:23+09:00",
+  "pad_file_version": "2.71.115.26224",
+  "language": "ja-JP",
+  "power_fx": false,
+  "flow_name": "RobinKnowledgeRoundtrip_20260909",
+  "action_count": 1,
+  "action_ui_name": "現在の日時を取得",
+  "automation_id": "DateTime.GetCurrentDateTime",
+  "settings": {
+    "取得": "現在の日付のみ",
+    "タイム ゾーン": "システム タイム ゾーン",
+    "生成された変数": "CurrentDateTime",
+    "エラー発生時": "既定"
+  },
+  "source_robin": "catalog/actions/datetime-get-current-date/date-only.robin",
+  "source_sha256": "df0a911a7c9185a6f7127c442d6973929fb26a3dd1a527779c0fe61844c241f5",
+  "roundtrip_evidence": "catalog/evidence/datetime-current-date-roundtrip.json",
+  "recopy_evidence": "catalog/evidence/datetime-current-date-roundtrip-recopy.robin",
+  "recopy_sha256": "df0a911a7c9185a6f7127c442d6973929fb26a3dd1a527779c0fe61844c241f5",
+  "paste_confirmed": true,
+  "save_confirmed": true,
+  "run_status": "success",
+  "observed_variables": {
+    "CurrentDateTime": "2026/09/09 0:00:00"
+  },
+  "expected": {
+    "date_only_for_local_date": "2026/09/09 0:00:00"
+  },
+  "rerun": "pending"
+}

@@ -1,0 +1,11 @@
+{
+    "schema_version":  1,
+    "observed_at":  "2026-09-09T07:55:44.8753700Z",
+    "flow_name":  "RobinKnowledgeFileCopyRT_20260909",
+    "run_status":  "success",
+    "ready_observed":  true,
+    "start_enabled_after":  true,
+    "variable_previews":  [
+                              "[C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\file-copy-output-20260909\\copy-input-20260909.txt]"
+                          ]
+}

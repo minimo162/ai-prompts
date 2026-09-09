@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-09T15:33:52+09:00",
+  "flow_name": "RobinKnowledgeRoundtrip_20260909",
+  "action_ui_name": "現在の日時を取得",
+  "settings_unchanged": true,
+  "run_status": "success",
+  "observed_variables": {
+    "CurrentDateTime": "2026/09/09 0:00:00"
+  },
+  "expected": {
+    "date_only_for_local_date": "2026/09/09 0:00:00"
+  },
+  "previous_run_evidence": "catalog/evidence/datetime-current-date-run-1.json",
+  "result_is_not_previous_artifact": true
+}

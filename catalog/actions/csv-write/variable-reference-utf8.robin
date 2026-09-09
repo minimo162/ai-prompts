@@ -1,0 +1,1 @@
+File.WriteToCSVFile.WriteCSV VariableToWrite: CSVTable CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\csv-read-write-output2-20260909.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: False IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault

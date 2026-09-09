@@ -1,0 +1,1786 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-09T17:04:04.7625775+09:00",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "captured_date": "2026-09-07"
+  },
+  "left_panel_scope": {
+    "complete": false,
+    "current_tree_inventory_complete": true,
+    "status": "observed_current_designer_tree",
+    "observed_categories": [
+      "Access",
+      "Active Directory",
+      "AWS",
+      "Azure",
+      "Bing Spell Check",
+      "CMD セッション",
+      "Computer Vision",
+      "CyberArk",
+      "EC2",
+      "Excel",
+      "Exchange Server",
+      "FTP",
+      "Google コグニティブ",
+      "HTTP",
+      "IBM コグニティブ",
+      "Local LLM",
+      "Microsoft コグニティブ",
+      "OCR",
+      "Outlook",
+      "PDF",
+      "PGP Cryptography",
+      "PowerPoint",
+      "SAP 自動化",
+      "Triggers",
+      "UI オートメーション",
+      "Web データ抽出",
+      "Web フォーム入力",
+      "Windows サービス",
+      "Word",
+      "XML",
+      "インスタンス",
+      "ウィンドウ",
+      "オブジェクト",
+      "クリップボード",
+      "グループ",
+      "システム",
+      "スクリプト",
+      "スナップショット",
+      "ターミナル エミュレーション",
+      "ディスク",
+      "データ テーブル",
+      "データベース",
+      "データ抽出",
+      "テスト",
+      "トーン分析機能",
+      "ビジョン",
+      "ファイル",
+      "フォーム入力",
+      "フォルダー",
+      "ブラウザー自動化",
+      "フロー コントロール",
+      "ボリューム",
+      "マウスとキーボード",
+      "メール",
+      "メッセージ ボックス",
+      "ユーザー",
+      "リソース グループ",
+      "ループ",
+      "ワークステーション",
+      "圧縮",
+      "暗号化",
+      "仮想マシン",
+      "言語翻訳機能",
+      "視覚認識",
+      "自然言語",
+      "詳細",
+      "条件",
+      "日時",
+      "文書変換",
+      "変数"
+    ],
+    "observed_variant_count": 57,
+    "live_node_count": 412,
+    "live_action_count": 340,
+    "live_inventory_path": "catalog/evidence/pad-action-inventory-20260909.json",
+    "note": "complete=false means this is not a complete PAD feature reference or execution allowlist. The current_tree inventory covers the expanded ActionsTreeView only; unobserved names are not inferred.",
+    "current_session_reason": "PAD Designer ActionsTreeView groups were expanded and scrolled from top to bottom in a dedicated empty flow; actions_executed=0."
+  },
+  "observed_actions": [
+    {
+      "category": "変数",
+      "ui_name": "新しいリストの作成",
+      "action_id": "variables-create-new-list",
+      "variant": "default",
+      "settings": {
+        "新しい空のリストの保存先 変数名": "CatalogList"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/variables-create-new-list/default.robin",
+      "evidence": {
+        "sha256": "d94dbf198e1cc061d5e820d49d6b58bf5361d6b941f2756f2c78d9b9a055910f",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "list-create-add"
+      }
+    },
+    {
+      "category": "変数",
+      "ui_name": "項目をリストに追加",
+      "action_id": "variables-add-item-to-list",
+      "variant": "literal-text",
+      "settings": {
+        "項目の追加": "CatalogItem",
+        "追加先リスト": "%CatalogList%"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/variables-add-item-to-list/default.robin",
+      "evidence": {
+        "sha256": "db5bac45c2865dbd8c7b471e945dd187cd5fa98c5de46504bb8c82b1eb3aae44",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "list-create-add"
+      }
+    },
+    {
+      "category": "変数",
+      "ui_name": "変数の設定",
+      "action_id": "variables-set-text",
+      "variant": "literal-text",
+      "settings": {
+        "変数": "NewVar",
+        "値:": "CatalogTextValue"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/variables-set/default.robin",
+      "evidence": {
+        "sha256": "827178aa1626c5507846c9ea3fcae61df4c59c6eb0139025f2dcf14a86559a8f",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": false,
+        "re_pasted": false,
+        "executed_in_flow": null
+      }
+    },
+    {
+      "category": "変数",
+      "ui_name": "変数の設定",
+      "action_id": "variables-set-special-text",
+      "variant": "special-text",
+      "settings": {
+        "変数": "NewVar",
+        "値:": "日本語 100%% '引用' \"二重引用\" C:\\sample"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/variables-set/special-text.robin",
+      "evidence": {
+        "sha256": "f107b3daee90e7c388ca5fcf51eb78353bff13c6446385be046cf6510ab6ef57",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "list-create-add-set"
+      }
+    },
+    {
+      "category": "テキスト",
+      "ui_name": "テキストを置換する",
+      "action_id": "text-replace-literal",
+      "variant": "literal",
+      "settings": {
+        "解析するテキスト": "%NewVar%",
+        "検索するテキスト": "日本語",
+        "検索と置換に正規表現を使う:": "Off",
+        "大文字と小文字を区別しない:": "Off",
+        "置き換え先のテキスト": "English",
+        "エスケープ シーケンスをアクティブ化:": "Off"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/text-replace/literal.robin",
+      "evidence": {
+        "sha256": "2e1b8e429847402bf9bc223505e249bf929915a5a5e1419cc95c0e5453d97084",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "text-replace-literal"
+      }
+    },
+    {
+      "category": "テキスト",
+      "ui_name": "テキストを置換する",
+      "action_id": "text-replace-regex",
+      "variant": "regex",
+      "settings": {
+        "解析するテキスト": "%NewVar%",
+        "検索するテキスト": "\\d+",
+        "検索と置換に正規表現を使う:": "On",
+        "大文字と小文字を区別しない:": "Off",
+        "置き換え先のテキスト": "NUMBER",
+        "エスケープ シーケンスをアクティブ化:": "Off"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/text-replace/regex.robin",
+      "evidence": {
+        "sha256": "3cd6b450c80439288e8afff50bd7d3b2d23c36ed98df96765e1eda0725ee2a1d",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "text-replace-regex"
+      }
+    },
+    {
+      "category": "テキスト",
+      "ui_name": "テキストの分割",
+      "action_id": "text-split-comma",
+      "variant": "custom-comma",
+      "settings": {
+        "分割するテキスト": "alpha,beta,gamma",
+        "区切り記号の種類": "カスタム",
+        "カスタム区切り記号": ",",
+        "正規表現である:": "Off"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/text-split/custom-comma.robin",
+      "evidence": {
+        "sha256": "e1cb7f758da81a972a261436399819c2c6303499a8e7d0343e6fca96c49cd9b2",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "text-split-join-comma"
+      }
+    },
+    {
+      "category": "テキスト",
+      "ui_name": "テキストの分割",
+      "action_id": "text-split-space",
+      "variant": "standard-space",
+      "settings": {
+        "分割するテキスト": "%Replaced%",
+        "区切り記号の種類": "標準",
+        "標準の区切り記号": "スペース",
+        "回数": "1"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/text-split/standard-space.robin",
+      "evidence": {
+        "sha256": "9f77859fd50f7c950719a9744be478cbccd7ae89f2537a3f1f30926cbbf36113",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "text-split-join-space"
+      }
+    },
+    {
+      "category": "テキスト",
+      "ui_name": "テキストの結合",
+      "action_id": "text-join-pipe",
+      "variant": "custom-pipe",
+      "settings": {
+        "結合するリストを指定": "%TextList%",
+        "リスト項目を区切る区切り記号": "カスタム",
+        "カスタム区切り記号": " | "
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/text-join/custom-pipe.robin",
+      "evidence": {
+        "sha256": "4b85a79644f2ac3a2d18ee21a9881190f9b4492c579a215c426827e59b5e2f2e",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "text-split-join-comma"
+      }
+    },
+    {
+      "category": "ループ",
+      "ui_name": "Loop",
+      "action_id": "loop-one-to-three",
+      "variant": "constant-range",
+      "settings": {
+        "開始値": "1",
+        "終了": "3",
+        "増分": "1"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/loop/one-to-three.robin",
+      "evidence": {
+        "sha256": "196389de7aefd0a683cd61ff507d8b83154a09312cef25b509e19b1086f85c78",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "bounded-loop-count"
+      }
+    },
+    {
+      "category": "変数",
+      "ui_name": "変数の設定",
+      "action_id": "variables-set-zero",
+      "variant": "integer-zero",
+      "settings": {
+        "変数": "NewVar2",
+        "値:": "0"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/variables-set/numeric-zero.robin",
+      "evidence": {
+        "sha256": "9df7f4bd80aac4395ad58da2319901f725562426f254c1a5e1633e008fb0a2ca",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "bounded-loop-count"
+      }
+    },
+    {
+      "category": "変数",
+      "ui_name": "変数を大きくする",
+      "action_id": "variables-increase-one",
+      "variant": "integer-one",
+      "settings": {
+        "変数名": "%NewVar2%",
+        "大きくする数値": "1"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/variables-increase/one.robin",
+      "evidence": {
+        "sha256": "06beae55ef783422555bdd50d2f0c797459c5278b8de71b16e4f44db41626417",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "bounded-loop-count"
+      }
+    },
+    {
+      "category": "変数",
+      "ui_name": "変数を大きくする",
+      "action_id": "variables-increase-index",
+      "variant": "numeric-variable",
+      "settings": {
+        "変数名": "%NewVar2%",
+        "大きくする数値": "%LoopIndex%"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/variables-increase/loop-index.robin",
+      "evidence": {
+        "sha256": "13c18537b84b2444a1b1c62bb63d9eacafd2ee5ec1d610cc8acd297903eee522",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "bounded-loop-sum"
+      }
+    },
+    {
+      "category": "ファイル",
+      "ui_name": "ファイルからテキストを読み取る",
+      "action_id": "file-read-text-utf8",
+      "variant": "utf8",
+      "settings": {
+        "ファイル パス": "C:\\Temp\\AiPromptsCatalogNumbers_20260907\\input.txt",
+        "エンコード": "UTF-8"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/file-read-text/utf8.robin",
+      "evidence": {
+        "sha256": "3d1cd834edb55c047d97bb7d3d1d82ab4df66c0eeb01d272e13fe44952511c2b",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "number-conversion"
+      }
+    },
+    {
+      "category": "テキスト",
+      "ui_name": "テキストを数値に変換",
+      "action_id": "text-to-number-decimal",
+      "variant": "numeric-literal",
+      "settings": {
+        "変換するテキスト": "12.5"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/text-to-number/decimal.robin",
+      "evidence": {
+        "sha256": "bb133582a25fd9477010a892da6889263fd07109fec4fc4643b88ae8ee55a5fc",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": false,
+        "re_pasted": false,
+        "executed_in_flow": null
+      }
+    },
+    {
+      "category": "テキスト",
+      "ui_name": "テキストを数値に変換",
+      "action_id": "text-to-number-variable",
+      "variant": "text-variable",
+      "settings": {
+        "変換するテキスト": "%FileContents%"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/text-to-number/variable.robin",
+      "evidence": {
+        "sha256": "ab234ac0f425af8fe589a72e6cf23743f58616ed466b1710f5b2307bed2bb894",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "number-conversion"
+      }
+    },
+    {
+      "category": "テキスト",
+      "ui_name": "数値をテキストに変換",
+      "action_id": "number-to-text-two-decimals",
+      "variant": "two-decimals-no-grouping",
+      "settings": {
+        "変換する数値": "%TextAsNumber%",
+        "小数点以下の桁数": "2",
+        "桁区切り記号を使う:": "Off"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/number-to-text/two-decimals.robin",
+      "evidence": {
+        "sha256": "841949028d56fb9837215c98d2d9d58a7e9cd578bb3493e059b1b72f56bfe60f",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "number-conversion"
+      }
+    },
+    {
+      "category": "Excel",
+      "ui_name": "Excel の起動",
+      "action_id": "excel-launch-new-visible",
+      "variant": "new-visible",
+      "settings": {
+        "Excel の起動": "空のドキュメントを使用",
+        "インスタンスを表示する": true
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/excel-launch/new-visible.robin",
+      "evidence": {
+        "sha256": "9407c4494fc35fb7f90e8d5dc3640c7d65362dfab6ed47e6788c94fd8ad843fe",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-excel"
+      }
+    },
+    {
+      "category": "Excel",
+      "ui_name": "Excel の起動",
+      "action_id": "excel-launch-open-readonly",
+      "variant": "open-readonly",
+      "settings": {
+        "Excel の起動": "次のドキュメントを開く",
+        "ドキュメント パス": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\excel-catalog.xlsx",
+        "読み取り専用として開く": true
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/excel-launch/open-readonly.robin",
+      "evidence": {
+        "sha256": "fb6cf6fc13e18dc9e9ad115b766b4323263dabf68faaa8b4c7b86433123b3e0d",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-reopen"
+      }
+    },
+    {
+      "category": "Excel",
+      "ui_name": "Excel ワークシートに書き込む",
+      "action_id": "excel-write-cell-a1-text",
+      "variant": "cell-a1-text",
+      "settings": {
+        "列": "A",
+        "行": 1,
+        "書き込む値": "OfficeCatalog 日本語 100%%"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/excel-write/cell-a1-text.robin",
+      "evidence": {
+        "sha256": "cfeb129a47b62455c42b5de44a9f357fa0b64c0ab6beb413605ec3057c4ec375",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-excel"
+      }
+    },
+    {
+      "category": "Excel",
+      "ui_name": "Excel ワークシートから読み取る",
+      "action_id": "excel-read-cell-a1-typed",
+      "variant": "cell-a1-typed",
+      "settings": {
+        "取得": "単一セルの値",
+        "先頭列": "A",
+        "先頭行": 1,
+        "セルの内容を取得する形式": "入力された値"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/excel-read/cell-a1-typed.robin",
+      "evidence": {
+        "sha256": "955398d363ad61b1f111b9c01c6af1b4e2672980430e23e1fafcf04fb8253a57",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-excel"
+      }
+    },
+    {
+      "category": "Excel",
+      "ui_name": "Excel ワークシートから読み取る",
+      "action_id": "excel-read-used-range",
+      "variant": "used-range",
+      "settings": {
+        "取得": "ワークシートに含まれる使用可能なすべての値"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/excel-read/used-range.robin",
+      "evidence": {
+        "sha256": "86414dfed04ea9b50b2e4d74fe9817d6e781622522367f6de804bb561a8a5ee6",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "office-reopen"
+      }
+    },
+    {
+      "category": "Excel",
+      "ui_name": "Excel ワークシートから読み取る",
+      "action_id": "excel-read-range-a1-b2",
+      "variant": "range-a1-b2",
+      "settings": {
+        "取得": "セル範囲の値",
+        "先頭列": "A",
+        "先頭行": 1,
+        "最終列": "B",
+        "最終行": 2
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/excel-read/range-a1-b2.robin",
+      "evidence": {
+        "sha256": "51e4c46a0ed91b2173886e1aad020da285092e26378ab2055d8a8fdfc380486c",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "office-reopen"
+      }
+    },
+    {
+      "category": "Excel",
+      "ui_name": "Excel の保存",
+      "action_id": "excel-save-as-xlsx",
+      "variant": "as-xlsx",
+      "settings": {
+        "保存モード": "名前を付けてドキュメントを保存",
+        "ドキュメント形式": "Excel ブック (.xlsx)",
+        "ドキュメント パス": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\excel-catalog.xlsx"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/excel-save/as-xlsx.robin",
+      "evidence": {
+        "sha256": "3d5662cff142b5d9d93ab8743fb55e57ef9c3ef76aae3824488751ef19fec127",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-excel"
+      }
+    },
+    {
+      "category": "Excel",
+      "ui_name": "Excel を閉じる",
+      "action_id": "excel-close-no-save",
+      "variant": "no-save",
+      "settings": {
+        "Excel を閉じる前": "ドキュメントを保存しない"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/excel-close/no-save.robin",
+      "evidence": {
+        "sha256": "ec175730925eda1fef8376c2f4ebb5ef65899fddd9d299e40a2eb79e744a0638",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-excel"
+      }
+    },
+    {
+      "category": "Word",
+      "ui_name": "Word を起動する",
+      "action_id": "word-launch-new-visible",
+      "variant": "new-visible",
+      "settings": {
+        "Word を起動する": "空のドキュメントを使用",
+        "インスタンスを表示する": true
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/word-launch/new-visible.robin",
+      "evidence": {
+        "sha256": "36de832ab0d97a24510a1dcf5a98852bf3851aa9ac45234d4851747c9b5ae1d0",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-word"
+      }
+    },
+    {
+      "category": "Word",
+      "ui_name": "Word を起動する",
+      "action_id": "word-launch-open-readonly",
+      "variant": "open-readonly",
+      "settings": {
+        "Word を起動する": "次のドキュメントを開く",
+        "ドキュメント パス": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\word-catalog.docx",
+        "読み取り専用として開く": true
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/word-launch/open-readonly.robin",
+      "evidence": {
+        "sha256": "6196fcce84861ae48c47399c3f38378f4ab0f23e941eb4877d553702c2a6ee90",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-reopen"
+      }
+    },
+    {
+      "category": "Word",
+      "ui_name": "Word 文書に書き込む",
+      "action_id": "word-write-end-text",
+      "variant": "end-text",
+      "settings": {
+        "書き込むテキスト": "OfficeCatalog 日本語 100%%",
+        "テキストを次に書き込む": "Word ファイルの末尾",
+        "新しい行を追加する": false
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/word-write/end-text.robin",
+      "evidence": {
+        "sha256": "d2e632d65faead30a249b472a99a9817f299f1b9521208f7edecb56916025e61",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-word"
+      }
+    },
+    {
+      "category": "Word",
+      "ui_name": "Word 文書から読み取る",
+      "action_id": "word-read-all-text",
+      "variant": "all-text",
+      "settings": {
+        "取得": "全文（コピー原文 Word.ReadFromWord.Read）"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/word-read/all-text.robin",
+      "evidence": {
+        "sha256": "1a2b6137dce2b7ad70fb112583eeec90635d5e6c933fec47686c0614aa32084a",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-word"
+      }
+    },
+    {
+      "category": "Word",
+      "ui_name": "Word 文書内の単語を検索して置換する",
+      "action_id": "word-replace-all-literal",
+      "variant": "all-literal",
+      "settings": {
+        "検索するテキスト": "OfficeCatalog",
+        "置換するテキスト": "OfficeVerified",
+        "すべての一致": true,
+        "ワイルドカードを使用する": false,
+        "単語単位で探す": false
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/word-replace/all-literal.robin",
+      "evidence": {
+        "sha256": "07358aac2a4fb631c80a3f649e5c8ea1d4f78e98a16b3b00b1e90d36c92744c3",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-reopen"
+      }
+    },
+    {
+      "category": "Word",
+      "ui_name": "Word を保存",
+      "action_id": "word-save-as-docx-extension",
+      "variant": "as-docx-extension",
+      "settings": {
+        "保存モード": "名前を付けてドキュメントを保存",
+        "ドキュメント形式": "既定 (拡張機能から)",
+        "ドキュメント パス": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\word-catalog.docx"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/word-save/as-docx-extension.robin",
+      "evidence": {
+        "sha256": "ea638ec3a903e0e09ea471b3efad9ddffaa91f3f20e4d157e9569d1b9685d2e4",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-word"
+      }
+    },
+    {
+      "category": "Word",
+      "ui_name": "Word を閉じる",
+      "action_id": "word-close-no-save",
+      "variant": "no-save",
+      "settings": {
+        "Word を閉じる前": "ドキュメントを保存しない"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/word-close/no-save.robin",
+      "evidence": {
+        "sha256": "1c0958df2f9106e9bc0978134e91d44b1e675792bc6d792344650ba04a0ab12c",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-word"
+      }
+    },
+    {
+      "category": "PowerPoint",
+      "ui_name": "Launch PowerPoint",
+      "action_id": "powerpoint-launch-new",
+      "variant": "new",
+      "settings": {
+        "Launch PowerPoint": "with a blank presentation"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/powerpoint-launch/new.robin",
+      "evidence": {
+        "sha256": "4c2d78344f62b3b9514788b3c37ca15b2a4f8f69b1935649f65545c66227023a",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-powerpoint"
+      }
+    },
+    {
+      "category": "PowerPoint",
+      "ui_name": "Launch PowerPoint",
+      "action_id": "powerpoint-launch-open",
+      "variant": "open",
+      "settings": {
+        "Launch PowerPoint": "and open the following presentation",
+        "Presentation path": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\powerpoint-catalog.pptx"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/powerpoint-launch/open.robin",
+      "evidence": {
+        "sha256": "5afd8eed23f471edb2758bdefb47f585c97a8b51afb6c5474a674c3d5caaffee",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-reopen"
+      }
+    },
+    {
+      "category": "PowerPoint",
+      "ui_name": "Add slide to PowerPoint",
+      "action_id": "powerpoint-add-slide-end",
+      "variant": "end",
+      "settings": {
+        "Add slide": "末尾（コピー原文 AddSlideAsLast）"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/powerpoint-add-slide/end.robin",
+      "evidence": {
+        "sha256": "f008ebefce01429a393007defd49d1665bad58c74c848dbf33a798d32c4f2b1e",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-powerpoint"
+      }
+    },
+    {
+      "category": "PowerPoint",
+      "ui_name": "Write to PowerPoint",
+      "action_id": "powerpoint-write-slide-index",
+      "variant": "slide-index",
+      "settings": {
+        "Text to write": "OfficeCatalog 日本語 100%%",
+        "Write text on": "slide at position",
+        "Slide position": "%SlideIndex%",
+        "Append new line": false
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/powerpoint-write/slide-index.robin",
+      "evidence": {
+        "sha256": "1f0bc35c84685a6e86c5e8d1797f11213d736efe842422284c86246764fcfa95",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-powerpoint"
+      }
+    },
+    {
+      "category": "PowerPoint",
+      "ui_name": "Read from PowerPoint",
+      "action_id": "powerpoint-read-all-text",
+      "variant": "all-text",
+      "settings": {
+        "Read mode": "全文（コピー原文 ReadFromPowerPoint.Read）"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/powerpoint-read/all-text.robin",
+      "evidence": {
+        "sha256": "6eca9bb683e0131cb9e3d7f30f3bd468b7cb4b828548960de1e4c6f656ca6990",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-powerpoint"
+      }
+    },
+    {
+      "category": "PowerPoint",
+      "ui_name": "Save PowerPoint",
+      "action_id": "powerpoint-save-as-pptx",
+      "variant": "as-pptx",
+      "settings": {
+        "Save mode": "Save presentation as",
+        "Document format": "PowerPoint Presentation (*.pptx)",
+        "Document path": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\powerpoint-catalog.pptx"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/powerpoint-save/as-pptx.robin",
+      "evidence": {
+        "sha256": "e15c9f202c2fa29e4331be50ed0a1075e5398ecb46fe2dc9ba32e88f6d5992cb",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-powerpoint"
+      }
+    },
+    {
+      "category": "PowerPoint",
+      "ui_name": "Close PowerPoint",
+      "action_id": "powerpoint-close-no-save",
+      "variant": "no-save",
+      "settings": {
+        "Before closing PowerPoint": "保存なし（コピー原文 ClosePowerPoint.Close）"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/powerpoint-close/no-save.robin",
+      "evidence": {
+        "sha256": "a6b4abbde13c367c147fce373495f912945beb3244c195e013a95487215a8894",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "office-powerpoint"
+      }
+    },
+    {
+      "category": "PDF",
+      "ui_name": "PDF からテキストを抽出",
+      "action_id": "pdf-extract-text-all-pages",
+      "variant": "all-pages",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "抽出するページ": "すべて",
+        "構造化データに最適化": false
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/pdf-extract-text/all-pages.robin",
+      "evidence": {
+        "sha256": "8817cb2b81788621264444e9556d7f3b466f3f2e03864223a791f23c47cdb038",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "pdf-variants"
+      }
+    },
+    {
+      "category": "PDF",
+      "ui_name": "PDF からテキストを抽出",
+      "action_id": "pdf-extract-text-pages-2-3",
+      "variant": "pages-2-3",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "抽出するページ": "範囲",
+        "開始ページ番号": 2,
+        "終了ページ番号": 3,
+        "構造化データに最適化": false
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/pdf-extract-text/pages-2-3.robin",
+      "evidence": {
+        "sha256": "b30ad031fc7fbd50f139b470b01f1c0ed900cc0c523f651dccbcd693a286ff0c",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "pdf-variants"
+      }
+    },
+    {
+      "category": "PDF",
+      "ui_name": "PDF からテキストを抽出",
+      "action_id": "pdf-extract-text-page-2",
+      "variant": "page-2",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "抽出するページ": "単一",
+        "単一ページ番号": 2,
+        "構造化データに最適化": false
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/pdf-extract-text/page-2.robin",
+      "evidence": {
+        "sha256": "5daeeadb6cbdf002e3bddd6ead5069a549efbfc729551ebac41412500b30e4bc",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "pdf-variants"
+      }
+    },
+    {
+      "category": "PDF",
+      "ui_name": "PDF からテキストを抽出",
+      "action_id": "pdf-extract-text-page-2-layout",
+      "variant": "page-2-layout",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "抽出するページ": "単一",
+        "単一ページ番号": 2,
+        "構造化データに最適化": true
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/pdf-extract-text/page-2-layout.robin",
+      "evidence": {
+        "sha256": "1d4315354fedc07c6303c7ddd65a46af70c0e26df19020bec305f0b263a84381",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "pdf-variants"
+      }
+    },
+    {
+      "category": "PDF",
+      "ui_name": "PDF からテーブルを抽出する",
+      "action_id": "pdf-extract-tables-with-headers",
+      "variant": "with-headers",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "抽出するページ": "すべて",
+        "ページの余白を超えるテーブルをマージする": true,
+        "最初の行に列名が含まれています": true
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/pdf-extract-tables/with-headers.robin",
+      "evidence": {
+        "sha256": "c60b716283f481defb7a426708978bb11ae1fa8f3813a560e37ee806e8eaebd0",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "pdf-variants"
+      }
+    },
+    {
+      "category": "PDF",
+      "ui_name": "PDF からテーブルを抽出する",
+      "action_id": "pdf-extract-tables-without-headers",
+      "variant": "without-headers",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "抽出するページ": "すべて",
+        "ページの余白を超えるテーブルをマージする": true,
+        "最初の行に列名が含まれています": false
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/pdf-extract-tables/without-headers.robin",
+      "evidence": {
+        "sha256": "4d41a5db1d0d21085d0bf260f14b70c6ea558f7d5450b68181998354b1dc2428",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "pdf-variants"
+      }
+    },
+    {
+      "category": "PDF",
+      "ui_name": "PDF から画像を抽出",
+      "action_id": "pdf-extract-images-all-pages",
+      "variant": "all-pages",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "抽出するページ": "すべて",
+        "画像名": "CatalogImage",
+        "画像の保存先": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\images-all"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/pdf-extract-images/all-pages.robin",
+      "evidence": {
+        "sha256": "168f810b6bb6a47b0640ba2a9748b8fe1e0dc09b71530290ac74db1aafbd0397",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "pdf-variants"
+      }
+    },
+    {
+      "category": "PDF",
+      "ui_name": "PDF から画像を抽出",
+      "action_id": "pdf-extract-images-page-1",
+      "variant": "page-1",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "抽出するページ": "単一",
+        "単一ページ番号": 1,
+        "画像名": "CatalogImage",
+        "画像の保存先": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\images-page1"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/pdf-extract-images/page-1.robin",
+      "evidence": {
+        "sha256": "50186fbe6e9d36d6104b46c6d9fcfba3dfa35a993c2fa22accb9004d10bbbf29",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "pdf-variants"
+      }
+    },
+    {
+      "category": "PDF",
+      "ui_name": "新しい PDF ファイルへの PDF ファイル ページの抽出",
+      "action_id": "pdf-extract-pages-pages-2-3-no-overwrite",
+      "variant": "pages-2-3-no-overwrite",
+      "settings": {
+        "PDF ファイル": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+        "ページ選択": "2-3",
+        "抽出された PDF ファイルのパス": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\pages-2-3.pdf",
+        "ファイルが存在する場合": "上書きしない"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/pdf-extract-pages/pages-2-3-no-overwrite.robin",
+      "evidence": {
+        "sha256": "db5286b815be81e95ffa9705324d0624a4d4411aac1624193d1c57a68914fc82",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "pdf-variants"
+      }
+    },
+    {
+      "category": "PDF",
+      "ui_name": "PDF ファイルを統合",
+      "action_id": "pdf-merge-two-files-no-overwrite",
+      "variant": "two-files-no-overwrite",
+      "settings": {
+        "PDF ファイル": [
+          "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf",
+          "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-b.pdf"
+        ],
+        "統合された PDF のパス": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\merged-a-b.pdf",
+        "ファイルが存在する場合": "上書きしない"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/pdf-merge/two-files-no-overwrite.robin",
+      "evidence": {
+        "sha256": "cc3a6685edb18c81b25d8deaca05a36699572456fbb3f1c3a4a108430c31c4fb",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "pdf-variants"
+      }
+    },
+    {
+      "category": "PDF",
+      "ui_name": "PDF ファイルを統合",
+      "action_id": "pdf-merge-two-files-b-a-no-overwrite",
+      "variant": "two-files-b-a-no-overwrite",
+      "settings": {
+        "PDF ファイル": [
+          "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-b.pdf",
+          "C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf"
+        ],
+        "統合された PDF のパス": "C:\\Temp\\AiPromptsPdfCatalog_20260907\\merged-b-a.pdf",
+        "ファイルが存在する場合": "上書きしない"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/pdf-merge/two-files-b-a-no-overwrite.robin",
+      "evidence": {
+        "sha256": "413ba81e232da7379e7a53edfb64ec789b4e2cffb7ec7314e1291548a9bc60fc",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "pdf-merge-order"
+      }
+    },
+    {
+      "category": "ファイル",
+      "ui_name": "CSV ファイルに書き込む",
+      "action_id": "file-write-csv-pdf-table-headers",
+      "variant": "pdf-table-headers",
+      "settings": {
+        "書き込む変数": "%PdfTablesHeaders[0].DataTable%",
+        "エンコード": "UTF-8",
+        "列名を含めます": true,
+        "区切り記号": "コンマ",
+        "ファイルが存在する場合": "上書き"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/file-write-csv/pdf-table-headers.robin",
+      "evidence": {
+        "sha256": "02e704f37984a87a9ffde7ad82d51d06d215b1b22e1eec170ea0ad4a4962464e",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": false,
+        "re_pasted": true,
+        "executed_in_flow": "pdf-table-csv"
+      }
+    },
+    {
+      "category": "日時",
+      "ui_name": "現在の日時を取得",
+      "action_id": "datetime-get-current-date",
+      "variant": "date-only-system-time-zone",
+      "settings": {
+        "取得": "現在の日付のみ",
+        "タイム ゾーン": "システム タイム ゾーン",
+        "生成された変数": "CurrentDateTime",
+        "エラー発生時": "既定"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/datetime-get-current-date/date-only.robin",
+      "evidence": {
+        "sha256": "df0a911a7c9185a6f7127c442d6973929fb26a3dd1a527779c0fe61844c241f5",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "datetime-current-date"
+      }
+    },
+    {
+      "category": "変数",
+      "ui_name": "新しいデータ テーブルを作成する",
+      "action_id": "datatable-create-empty",
+      "variant": "empty-0x0",
+      "settings": {
+        "テーブルを作成": "0 行, 0 列",
+        "生成された変数": "DataTable",
+        "エラー発生時": "既定"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/datatable-create/empty.robin",
+      "evidence": {
+        "sha256": "f3eef9ad3585b35d39c8f90d9202629d63907414e1f7601270e9d0fff7af9256",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "datatable-create-empty"
+      }
+    },
+    {
+      "category": "変数",
+      "ui_name": "行をデータ テーブルに挿入する",
+      "action_id": "datatable-add-row-empty-failed",
+      "variant": "empty-table-empty-row-error",
+      "settings": {
+        "データ テーブル": "DataTable",
+        "挿入場所": "データ テーブルの末尾",
+        "新しい値": "[]"
+      },
+      "status": "captured_partial_verification",
+      "reference": "actions/datatable-add-row/empty-table-failed.robin",
+      "evidence": {
+        "sha256": "34f76d85ecb09832681202c5b773e3810038e5a1cbd8113def942a9245ef78fc",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": null
+      }
+    },
+    {
+      "category": "ファイル",
+      "ui_name": "CSV ファイルに書き込む",
+      "action_id": "csv-write-variable-reference",
+      "variant": "variable-reference-no-header",
+      "settings": {
+        "書き込む変数": "CSVTable",
+        "ファイル パス": "catalog/evidence/csv-read-write-output2-20260909.csv",
+        "エンコード": "UTF-8",
+        "列名を含めます": false,
+        "ファイルが存在する場合": "上書き",
+        "区切り記号": "SystemDefault"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/csv-write/variable-reference-utf8.robin",
+      "evidence": {
+        "sha256": "3f4126c5a12eac5eb909802fd6f61444639135158cd59c1f141eaf891b58f816",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "csv-read-write2"
+      }
+    },
+    {
+      "category": "ファイル",
+      "ui_name": "CSV ファイルから読み取る",
+      "action_id": "csv-read-utf8-system-default-no-header",
+      "variant": "utf8-trim-no-header-system-default",
+      "settings": {
+        "ファイル パス": "catalog/fixtures/csv/input-20260909.csv",
+        "エンコード": "UTF-8",
+        "TrimFields": true,
+        "FirstLineContainsColumnNames": false,
+        "ColumnsSeparator": "SystemDefault",
+        "CSVTable": "CSVTable"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/csv-read/utf8.robin",
+      "evidence": {
+        "sha256": "22f850aca459d4cc7b15993a96915f68eee51cf7d319b73ca43dd0fcfbd67e5d",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "csv-read-write2"
+      }
+    },
+    {
+      "category": "ファイル",
+      "ui_name": "ファイルのコピー",
+      "action_id": "file-copy-single-no-overwrite",
+      "variant": "single-file-do-nothing-if-exists",
+      "settings": {
+        "コピーするファイル": "catalog/fixtures/files/copy-input-20260909.txt",
+        "宛先フォルダー": "catalog/evidence/file-copy-output-20260909",
+        "ファイルが存在する場合": "何もしない",
+        "生成された変数": "CopiedFiles"
+      },
+      "status": "verified_roundtrip_and_run",
+      "reference": "actions/file-copy/single-no-overwrite.robin",
+      "evidence": {
+        "sha256": "a8fad878ee52f6fb2d8a1f74e8f145e213b7a5c63b63450969f922a53082bedc",
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "file-copy-single-no-overwrite"
+      }
+    }
+  ],
+  "required_checks": [
+    {
+      "id": "A-text-number-boolean-set",
+      "area": "A",
+      "purpose": "文字列・数値・真偽値の設定",
+      "status": "partial",
+      "observed_action_ids": [
+        "variables-set-text",
+        "variables-set-zero",
+        "variables-set-special-text"
+      ],
+      "reason": "文字列と数値は観測済み。真偽値の独立採取は未確認。",
+      "reference": "catalog/index.json",
+      "live_ui_candidates": [
+        {
+          "ui_name": "変数の設定",
+          "automation_id": "LanguageConstructs.Assign",
+          "parent_id": "Variables"
+        }
+      ]
+    },
+    {
+      "id": "A-arithmetic-add-subtract",
+      "area": "A",
+      "purpose": "数値の加減算",
+      "status": "partial",
+      "observed_action_ids": [
+        "variables-increase-one",
+        "variables-increase-index"
+      ],
+      "reason": "増加（加算）例は観測済み。減算は未確認。",
+      "reference": "catalog/index.json",
+      "live_ui_candidates": [
+        {
+          "ui_name": "変数を大きくする",
+          "automation_id": "Variables.IncreaseVariable",
+          "parent_id": "Variables"
+        },
+        {
+          "ui_name": "変数を小さくする",
+          "automation_id": "Variables.DecreaseVariable",
+          "parent_id": "Variables"
+        }
+      ]
+    },
+    {
+      "id": "A-list-create-add-get",
+      "area": "A",
+      "purpose": "リスト作成・項目追加・取出し",
+      "status": "partial",
+      "observed_action_ids": [
+        "variables-create-new-list",
+        "variables-add-item-to-list"
+      ],
+      "reason": "作成と追加は観測済み。項目取出しは未確認。",
+      "reference": "catalog/index.json",
+      "live_ui_candidates": [
+        {
+          "ui_name": "リストから項目を削除",
+          "automation_id": "Variables.RemoveItemFromList",
+          "parent_id": "Variables"
+        },
+        {
+          "ui_name": "項目をリストに追加",
+          "automation_id": "Variables.AddItemToList",
+          "parent_id": "Variables"
+        },
+        {
+          "ui_name": "新しいリストの作成",
+          "automation_id": "Variables.CreateNewList",
+          "parent_id": "Variables"
+        }
+      ]
+    },
+    {
+      "id": "A-text-replace-split-join",
+      "area": "A",
+      "purpose": "文字列の置換・分割・結合",
+      "status": "observed_partial",
+      "observed_action_ids": [
+        "text-replace-literal",
+        "text-replace-regex",
+        "text-split-comma",
+        "text-split-space",
+        "text-join-pipe"
+      ],
+      "reason": "主要モードを観測済み。切出しは別チェック。",
+      "reference": "catalog/index.json",
+      "live_ui_candidates": []
+    },
+    {
+      "id": "A-text-substring",
+      "area": "A",
+      "purpose": "文字列の切出し",
+      "status": "not_observed",
+      "observed_action_ids": [],
+      "reason": "現在の実測カタログに該当アクションなし。表示名を推測していない。",
+      "reference": null,
+      "live_ui_candidates": []
+    },
+    {
+      "id": "A-number-conversion",
+      "area": "A",
+      "purpose": "数値変換",
+      "status": "observed_partial",
+      "observed_action_ids": [
+        "text-to-number-variable",
+        "text-to-number-decimal",
+        "number-to-text-two-decimals"
+      ],
+      "reason": "変換と小数2桁書式は観測済み。別地域・桁区切りは未確認。",
+      "reference": "catalog/index.json",
+      "live_ui_candidates": []
+    },
+    {
+      "id": "A-datetime",
+      "area": "A",
+      "purpose": "日時取得・書式化",
+      "status": "partial",
+      "observed_action_ids": [
+        "datetime-get-current-date"
+      ],
+      "reason": "現在の日時を取得（取得=現在の日付のみ）は今回の左パネル採取・再貼付け・実行まで確認済み。日時加算・減算と日時書式化は未確認。",
+      "reference": "catalog/index.json; catalog/evidence/datetime-current-date-validation.json",
+      "live_ui_candidates": [
+        {
+          "ui_name": "加算する日時",
+          "automation_id": "DateTime.Add",
+          "parent_id": "DateTime"
+        },
+        {
+          "ui_name": "日付の減算",
+          "automation_id": "DateTime.Subtract",
+          "parent_id": "DateTime"
+        },
+        {
+          "ui_name": "現在の日時を取得",
+          "automation_id": "DateTime.GetCurrentDateTime",
+          "parent_id": "DateTime"
+        }
+      ]
+    },
+    {
+      "id": "B-if-else",
+      "area": "B",
+      "purpose": "If／Else",
+      "status": "not_observed",
+      "observed_action_ids": [],
+      "reason": "現在の実測カタログにブロック原文なし。",
+      "reference": null,
+      "live_ui_candidates": [
+        {
+          "ui_name": "Else",
+          "automation_id": "LanguageConstructs.Else",
+          "parent_id": "LanguageConstructs.Conditionals"
+        },
+        {
+          "ui_name": "Else if",
+          "automation_id": "LanguageConstructs.ElseIf",
+          "parent_id": "LanguageConstructs.Conditionals"
+        },
+        {
+          "ui_name": "If",
+          "automation_id": "LanguageConstructs.If",
+          "parent_id": "LanguageConstructs.Conditionals"
+        }
+      ]
+    },
+    {
+      "id": "B-loop-fixed-foreach-exit",
+      "area": "B",
+      "purpose": "回数指定ループ・For each・ループ脱出",
+      "status": "partial",
+      "observed_action_ids": [
+        "loop-one-to-three"
+      ],
+      "reason": "定数範囲Loopのみ観測済み。For eachと脱出は未確認。",
+      "reference": "catalog/index.json",
+      "live_ui_candidates": [
+        {
+          "ui_name": "For each",
+          "automation_id": "LanguageConstructs.Foreach",
+          "parent_id": "LanguageConstructs.Loops"
+        },
+        {
+          "ui_name": "Loop",
+          "automation_id": "LanguageConstructs.Loop",
+          "parent_id": "LanguageConstructs.Loops"
+        },
+        {
+          "ui_name": "ループを抜ける",
+          "automation_id": "LanguageConstructs.Break",
+          "parent_id": "LanguageConstructs.Loops"
+        },
+        {
+          "ui_name": "次のループ",
+          "automation_id": "LanguageConstructs.Continue",
+          "parent_id": "LanguageConstructs.Loops"
+        }
+      ]
+    },
+    {
+      "id": "B-error-subflow",
+      "area": "B",
+      "purpose": "エラー処理・サブフロー作成／呼出し",
+      "status": "not_observed",
+      "observed_action_ids": [],
+      "reason": "今回のindexに対応する左欄原文がない。",
+      "reference": null,
+      "live_ui_candidates": [
+        {
+          "ui_name": "サブフローの実行",
+          "automation_id": "LanguageConstructs.CallFunction",
+          "parent_id": "FlowControl"
+        },
+        {
+          "ui_name": "サブフローの終了",
+          "automation_id": "LanguageConstructs.ExitFunction",
+          "parent_id": "FlowControl"
+        },
+        {
+          "ui_name": "ブロック エラー発生時",
+          "automation_id": "LanguageConstructs.Block",
+          "parent_id": "FlowControl"
+        }
+      ]
+    },
+    {
+      "id": "C-datatable",
+      "area": "C",
+      "purpose": "データテーブル作成・行追加・行反復・セル参照",
+      "status": "partial",
+      "observed_action_ids": [
+        "datatable-create-empty"
+      ],
+      "failed_action_ids": [
+        "datatable-add-row-empty-failed"
+      ],
+      "reason": "空のデータテーブル作成は今回の左パネル採取・再貼付け・実行まで確認済み。0行0列への空行追加は設計エラーとなったため失敗例として保存。列を持つテーブルの行追加・行反復・セル参照は未採取。",
+      "reference": "catalog/index.json; catalog/evidence/datatable-create-validation.json; catalog/evidence/datatable-add-row-empty-failed.robin",
+      "live_ui_candidates": [
+        {
+          "ui_name": "新しいデータ テーブルを作成する",
+          "automation_id": "Variables.CreateNewDatatable",
+          "parent_id": "Variables.DataTable"
+        },
+        {
+          "ui_name": "行をデータ テーブルに挿入する",
+          "automation_id": "Variables.AddRowToDataTable",
+          "parent_id": "Variables.DataTable"
+        },
+        {
+          "ui_name": "データ テーブル項目を更新する",
+          "automation_id": "Variables.ModifyDataTableItem",
+          "parent_id": "Variables.DataTable"
+        }
+      ]
+    },
+    {
+      "id": "C-csv-read-write",
+      "area": "C",
+      "purpose": "CSV読取り／書出し",
+      "status": "partial",
+      "observed_action_ids": [
+        "file-write-csv-pdf-table-headers",
+        "csv-read-utf8-system-default-no-header",
+        "csv-write-variable-reference"
+      ],
+      "reason": "UTF-8 CSV読取り（ヘッダーを列名にしない）と、DataTable変数参照でのCSV書出しは今回の実測で確認済み。ヘッダーを列名にする設定・別区切り・引用符境界は未確認。",
+      "reference": "catalog/index.json; catalog/evidence/csv-read-validation.json",
+      "live_ui_candidates": [
+        {
+          "ui_name": "CSV テキスト変数から読み取る",
+          "automation_id": "Variables.GenerateDataTableFromCSV",
+          "parent_id": "Variables.DataTable"
+        },
+        {
+          "ui_name": "CSV ファイルから読み取る",
+          "automation_id": "File.ReadFromCSVFile",
+          "parent_id": "File"
+        },
+        {
+          "ui_name": "CSV ファイルに書き込む",
+          "automation_id": "File.WriteToCSVFile",
+          "parent_id": "File"
+        }
+      ]
+    },
+    {
+      "id": "D-files-folders",
+      "area": "D",
+      "purpose": "ファイル取得・存在確認・フォルダー作成・テキスト読書き・コピー・移動・名前変更",
+      "status": "partial",
+      "observed_action_ids": [
+        "file-read-text-utf8",
+        "file-copy-single-no-overwrite"
+      ],
+      "reason": "UTF-8読取り、CSV読書き、単一ファイルのコピー（衝突時は何もしない）は実測済み。フォルダー内取得、存在確認、作成、テキスト書出し、移動・名前変更は未確認または別設定が必要。",
+      "reference": "catalog/index.json; catalog/evidence/file-copy-validation.json",
+      "live_ui_candidates": [
+        {
+          "ui_name": "ファイルが存在する場合",
+          "automation_id": "If.File.IfFile",
+          "parent_id": "File"
+        },
+        {
+          "ui_name": "ファイルのコピー",
+          "automation_id": "File.Copy",
+          "parent_id": "File"
+        },
+        {
+          "ui_name": "ファイルの移動",
+          "automation_id": "File.Move",
+          "parent_id": "File"
+        },
+        {
+          "ui_name": "ファイルの名前を変更する",
+          "automation_id": "File.RenameFiles",
+          "parent_id": "File"
+        },
+        {
+          "ui_name": "ファイルからテキストを読み取る",
+          "automation_id": "File.ReadTextFromFile",
+          "parent_id": "File"
+        },
+        {
+          "ui_name": "テキストをファイルに書き込む",
+          "automation_id": "File.WriteText",
+          "parent_id": "File"
+        },
+        {
+          "ui_name": "フォルダーが存在する場合",
+          "automation_id": "If.Folder.IfFolderExists",
+          "parent_id": "Folder"
+        },
+        {
+          "ui_name": "フォルダー内のファイルを取得",
+          "automation_id": "Folder.GetFiles",
+          "parent_id": "Folder"
+        },
+        {
+          "ui_name": "フォルダーの作成",
+          "automation_id": "Folder.Create",
+          "parent_id": "Folder"
+        }
+      ]
+    },
+    {
+      "id": "E-excel",
+      "area": "E",
+      "purpose": "Excel起動・セル／範囲読書き・シート・反復・別名保存・終了",
+      "status": "partial",
+      "observed_action_ids": [
+        "excel-launch-new-visible",
+        "excel-launch-open-readonly",
+        "excel-write-cell-a1-text",
+        "excel-read-cell-a1-typed",
+        "excel-read-range-a1-b2",
+        "excel-read-used-range",
+        "excel-save-as-xlsx",
+        "excel-close-no-save"
+      ],
+      "reason": "起動・セル／範囲・保存・終了は観測済み。シート選択とデータ反復の独立例は未確認。",
+      "reference": "catalog/index.json",
+      "live_ui_candidates": [
+        {
+          "ui_name": "Excel ワークシート内のセルを選択",
+          "automation_id": "Excel.SelectCellsFromExcel",
+          "parent_id": "Excel.Advanced"
+        },
+        {
+          "ui_name": "Excel から式を読み取る",
+          "automation_id": "Excel.ReadCellFormula",
+          "parent_id": "Excel.Advanced"
+        },
+        {
+          "ui_name": "Excel ワークシートのセルを追加",
+          "automation_id": "Excel.AppendCells",
+          "parent_id": "Excel.Advanced"
+        },
+        {
+          "ui_name": "新しいワークシートの追加",
+          "automation_id": "Excel.AddWorksheet",
+          "parent_id": "Excel"
+        }
+      ]
+    },
+    {
+      "id": "F-office-pdf",
+      "area": "F",
+      "purpose": "Word・PowerPoint・PDFの主要操作",
+      "status": "observed_partial",
+      "observed_action_ids": [
+        "word-launch-new-visible",
+        "word-launch-open-readonly",
+        "word-write-end-text",
+        "word-read-all-text",
+        "word-replace-all-literal",
+        "word-save-as-docx-extension",
+        "word-close-no-save",
+        "powerpoint-launch-new",
+        "powerpoint-launch-open",
+        "powerpoint-add-slide-end",
+        "powerpoint-write-slide-index",
+        "powerpoint-read-all-text",
+        "powerpoint-save-as-pptx",
+        "powerpoint-close-no-save",
+        "pdf-extract-text-all-pages",
+        "pdf-extract-text-pages-2-3",
+        "pdf-extract-text-page-2",
+        "pdf-extract-text-page-2-layout",
+        "pdf-extract-tables-with-headers",
+        "pdf-extract-tables-without-headers",
+        "pdf-extract-images-all-pages",
+        "pdf-extract-images-page-1",
+        "pdf-extract-pages-pages-2-3-no-overwrite",
+        "pdf-merge-two-files-no-overwrite",
+        "pdf-merge-two-files-b-a-no-overwrite"
+      ],
+      "reason": "既存採取と証跡を再利用する。新規エージェント登録での再利用は未確認。",
+      "reference": "docs/office-action-capture.md; docs/pdf-action-capture.md",
+      "live_ui_candidates": [
+        {
+          "ui_name": "Word を起動する",
+          "automation_id": "Word.LaunchWord",
+          "parent_id": "Word"
+        },
+        {
+          "ui_name": "PDF からテキストを抽出",
+          "automation_id": "Pdf.ExtractTextFromPDF",
+          "parent_id": "Pdf"
+        },
+        {
+          "ui_name": "PDF からテーブルを抽出する",
+          "automation_id": "Pdf.ExtractTablesFromPDF",
+          "parent_id": "Pdf"
+        }
+      ]
+    },
+    {
+      "id": "G-ui-browser",
+      "area": "G",
+      "purpose": "起動／接続・文字入力・クリック・待機・文字取得・終了",
+      "status": "blocked_pending_live_ui",
+      "observed_action_ids": [],
+      "reason": "過去のEdge起動はWeb拡張機能通信エラー。現在セッションでもPADウィンドウが観測できず、通し採取は未実施。",
+      "reference": "docs/robin-action-catalog.md; pad-robin-prompts.md",
+      "live_ui_candidates": [
+        {
+          "ui_name": "ウィンドウの UI 要素をクリック",
+          "automation_id": "UIAutomation.Click",
+          "parent_id": "UIAutomation"
+        },
+        {
+          "ui_name": "ウィンドウ内のテキスト フィールドに入力する",
+          "automation_id": "UIAutomation.PopulateTextField",
+          "parent_id": "UIAutomation.FormFilling"
+        },
+        {
+          "ui_name": "新しい Microsoft Edge を起動",
+          "automation_id": "WebAutomation.LaunchEdge",
+          "parent_id": "WebAutomation"
+        },
+        {
+          "ui_name": "Web ページに移動",
+          "automation_id": "WebAutomation.GoToWebPage",
+          "parent_id": "WebAutomation"
+        },
+        {
+          "ui_name": "Web ページのリンクをクリック",
+          "automation_id": "WebAutomation.Click",
+          "parent_id": "WebAutomation"
+        },
+        {
+          "ui_name": "Web ページで JavaScript 関数を実行",
+          "automation_id": "WebAutomation.ExecuteJavascript",
+          "parent_id": "WebAutomation"
+        },
+        {
+          "ui_name": "Web ブラウザーを閉じる",
+          "automation_id": "WebAutomation.CloseWebBrowser",
+          "parent_id": "WebAutomation"
+        }
+      ]
+    }
+  ]
+}
