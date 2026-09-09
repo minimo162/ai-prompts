@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "action_id": "datetime-get-current-date",
+  "ui_name": "現在の日時を取得",
+  "variant": "date-only-system-time-zone",
+  "pad_file_version": "2.71.115.26224",
+  "language": "ja-JP",
+  "power_fx": false,
+  "capture_flow": "RobinKnowledgeLive_20260909",
+  "roundtrip_flow": "RobinKnowledgeRoundtrip_20260909",
+  "source_robin": "catalog/actions/datetime-get-current-date/date-only.robin",
+  "source_sha256": "df0a911a7c9185a6f7127c442d6973929fb26a3dd1a527779c0fe61844c241f5",
+  "roundtrip_recopy": "catalog/evidence/datetime-current-date-roundtrip-recopy.robin",
+  "roundtrip_recopy_sha256": "df0a911a7c9185a6f7127c442d6973929fb26a3dd1a527779c0fe61844c241f5",
+  "stages": {
+    "left_panel_add": "PASS",
+    "settings_confirmed": "PASS",
+    "copy_to_utf8_bomless_file": "PASS",
+    "empty_flow_file_text_paste": "PASS",
+    "roundtrip_save": "PASS",
+    "roundtrip_recopy_byte_match": "PASS",
+    "run_1": "PASS",
+    "result_1_expected_match": "PASS",
+    "run_2": "PASS",
+    "result_2_expected_match": "PASS"
+  },
+  "settings": {
+    "取得": "現在の日付のみ",
+    "タイム ゾーン": "システム タイム ゾーン",
+    "生成された変数": "CurrentDateTime",
+    "エラー発生時": "既定"
+  },
+  "expected_value": "2026/09/09 0:00:00",
+  "run_1_evidence": "catalog/evidence/datetime-current-date-run-1.json",
+  "run_2_evidence": "catalog/evidence/datetime-current-date-run-2.json",
+  "notes": "The action has no external output file; repeat execution overwrote the same in-memory variable. Both runs returned the current local date at midnight. No production flow or personal data was used."
+}

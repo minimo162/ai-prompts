@@ -1,0 +1,45 @@
+PAD Robin 基礎（変数・テキスト・数値）
+
+採取条件: PAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データ。以下のコードは画面からコピーした原文の抜粋であり、任意の値へ一般化したテンプレートではありません。正本は記載した .robin ファイルです。
+
+変数とリスト
+- 新しいリストの作成（ui: 新しいリストの作成、id: variables-create-new-list、variant: default）
+  - 出力変数: CatalogList（list）
+  - 原文: catalog/actions/variables-create-new-list/default.robin
+  - 例: `Variables.CreateNewList List=> CatalogList`
+- 項目をリストに追加（id: variables-add-item-to-list、variant: literal-text）
+  - 入力リスト: %CatalogList%、項目: CatalogItem、出力: 既存のCatalogList
+  - 原文: catalog/actions/variables-add-item-to-list/default.robin
+  - 例: `Variables.AddItemToList Item: $'''CatalogItem''' List: CatalogList`
+  - 上記2行を実行したプレビューは `[CatalogItem]`。空のRoundtripサブフローへの再貼付けと再コピーが一致した。
+- 変数の設定（id: variables-set-special-text、variant: special-text）
+  - 入力欄の値: 日本語 100%% '引用' "二重引用" C:\sample
+  - 原文: catalog/actions/variables-set/special-text.robin
+  - 例: `SET NewVar TO $'''日本語 100%% \'引用\' \"二重引用\" C:\\sample'''`
+  - 実行後の値: 日本語 100% '引用' "二重引用" C:\sample。100%%やバックスラッシュのエスケープを他の文字列へ一律適用しない。
+- 数値0の設定は `SET NewVar2 TO 0`。文字列の引用符付き例と型が異なる。
+
+置換・分割・結合
+- 通常置換（id: text-replace-literal）: `Text.Replace.ReplaceText`、ComparisonType は `Text.TextComparisonType.CultureSensitive`。日本語→Englishを実行確認。原文: catalog/actions/text-replace/literal.robin。
+- 正規表現置換（id: text-replace-regex）: `Text.Replace.ReplaceTextWithRegex`、検索 `\\d+`、置換 `NUMBER`。入力欄ではバックスラッシュ1個。原文: catalog/actions/text-replace/regex.robin。
+- カスタムカンマ分割（id: text-split-comma）: `Text.SplitText.SplitWithDelimiter`、出力 TextList。原文: catalog/actions/text-split/custom-comma.robin。
+- 標準スペース分割（id: text-split-space）: `Text.SplitText.Split`、`Text.StandardDelimiter.Space`、回数1。原文: catalog/actions/text-split/standard-space.robin。
+- カスタム結合（id: text-join-pipe）: `Text.JoinText.JoinWithCustomDelimiter`、区切り ` | `、出力 JoinedText。原文: catalog/actions/text-join/custom-pipe.robin。
+- カンマ分割後の結合結果 `alpha | beta | gamma` を合成データで確認した。カスタム区切りに空白1文字だけを指定するとPADが入力エラーにしたため、標準スペースとは別モードとして扱う。
+
+数値変換と書式化
+- ファイルから読んだ文字列を `Text.ToNumber` で数値化し、`Text.FromNumber` の DecimalPlaces 2、UseThousandsSeparator False で `1234.50` を得た。原文: catalog/flows/number-conversion/default.robin、実行値: catalog/evidence/number-conversion-variables.json。
+- 数値リテラルの原文とファイル由来の文字列は型が異なる。`not-a-number` はランタイムエラーとして記録し、0への置換や区切り記号の推測削除はしていない。
+
+今回の追加採取: 日時取得（date-only）
+- UI名: 現在の日時を取得、automation id: DateTime.GetCurrentDateTime。
+- 設定: 取得=現在の日付のみ、タイム ゾーン=システム タイム ゾーン、生成された変数=CurrentDateTime、エラー発生時=既定。
+- 左パネルから追加してコピーした原文:
+  `DateTime.GetCurrentDateTime.Local DateTimeFormat: DateTime.DateTimeFormat.DateOnly CurrentDateTime=> CurrentDateTime`
+- 原文ファイル: catalog/actions/datetime-get-current-date/date-only.robin（SHA-256: df0a911a7c9185a6f7127c442d6973929fb26a3dd1a527779c0fe61844c241f5）。
+- 空の別フローへファイルから貼り付け、保存、再コピーした原文は同じSHA-256。2回の実行で `CurrentDateTime=2026/09/09 0:00:00` を確認した。
+- 証拠: catalog/evidence/datetime-current-date-validation.json、catalog/evidence/datetime-current-date-run-1.json、catalog/evidence/datetime-current-date-run-2.json。
+- 未確認: 取得=現在の日時、タイムゾーンの別設定、日時加算・減算、日時書式化の別アクション。
+
+未観測
+真偽値の独立設定、減算、リスト項目の取出し、文字列切出し、取得=現在の日時、日時加算・日時書式化、別地域設定・桁区切りONは、このパッケージの確認済み例ではない。

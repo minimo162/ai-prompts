@@ -1,0 +1,3310 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-09T06:17:07.1673513Z",
+    "pad_process_id":  27436,
+    "pad_file_version":  "2.71.115.26224",
+    "flow_name":  "RobinKnowledgeLive_20260909",
+    "language":  "ja-JP (observed UI labels)",
+    "power_fx":  "Off (new-flow dialog observation)",
+    "source":  "live ActionsTreeView: expanded visible groups and scrolled top to bottom",
+    "reached_bottom":  true,
+    "actions_executed":  0,
+    "nodes":  [
+                  {
+                      "ui_name":  "変数",
+                      "automation_id":  "Variables",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "データ テーブル",
+                      "automation_id":  "Variables.DataTable",
+                      "parent_id":  "Variables",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "新しいデータ テーブルを作成する",
+                      "automation_id":  "Variables.CreateNewDatatable",
+                      "parent_id":  "Variables.DataTable",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "行をデータ テーブルに挿入する",
+                      "automation_id":  "Variables.AddRowToDataTable",
+                      "parent_id":  "Variables.DataTable",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "データ テーブルから行を削除する",
+                      "automation_id":  "Variables.DeleteRowFromDataTable",
+                      "parent_id":  "Variables.DataTable",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "データ テーブル項目を更新する",
+                      "automation_id":  "Variables.ModifyDataTableItem",
+                      "parent_id":  "Variables.DataTable",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "データ テーブル内で検索または置換する",
+                      "automation_id":  "Variables.FindOrReplaceInDataTable",
+                      "parent_id":  "Variables.DataTable",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "列をデータ テーブルに挿入する",
+                      "automation_id":  "Variables.AddColumnToDataTable",
+                      "parent_id":  "Variables.DataTable",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "データ テーブルから列を削除する",
+                      "automation_id":  "Variables.DeleteColumnFromDataTable",
+                      "parent_id":  "Variables.DataTable",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "データ テーブルから空の行を削除する",
+                      "automation_id":  "Variables.DeleteEmptyRowsFromDataTable",
+                      "parent_id":  "Variables.DataTable",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "データ テーブルから重複行を削除する",
+                      "automation_id":  "Variables.DeleteDuplicateRowsFromDataTable",
+                      "parent_id":  "Variables.DataTable",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "データ テーブルを消去",
+                      "automation_id":  "Variables.ClearDataTable",
+                      "parent_id":  "Variables.DataTable",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "データ テーブルを並べ替える",
+                      "automation_id":  "Variables.SortDataTable",
+                      "parent_id":  "Variables.DataTable",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "フィルター データ テーブル",
+                      "automation_id":  "Variables.FilterDataTable",
+                      "parent_id":  "Variables.DataTable",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "データ テーブルをマージする",
+                      "automation_id":  "Variables.MergeDataTables",
+                      "parent_id":  "Variables.DataTable",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "データ テーブルを結合する",
+                      "automation_id":  "Variables.JoinDataTable",
+                      "parent_id":  "Variables.DataTable",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "CSV テキスト変数から読み取る",
+                      "automation_id":  "Variables.GenerateDataTableFromCSV",
+                      "parent_id":  "Variables.DataTable",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "データ テーブルをテキストに変換する",
+                      "automation_id":  "Variables.ConvertDataTableToCSV",
+                      "parent_id":  "Variables.DataTable",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "数値の切り捨て",
+                      "automation_id":  "Variables.TruncateNumber",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "乱数の生成",
+                      "automation_id":  "Variables.GenerateRandomNumber",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "リストのクリア",
+                      "automation_id":  "Variables.ClearList",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "リストから項目を削除",
+                      "automation_id":  "Variables.RemoveItemFromList",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "一覧の並べ替え",
+                      "automation_id":  "Variables.SortList",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "リストのシャッフル",
+                      "automation_id":  "Variables.ShuffleList",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "リストの統合",
+                      "automation_id":  "Variables.MergeLists",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "リストを逆にする",
+                      "automation_id":  "Variables.ReverseList",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "リストから重複する項目を削除",
+                      "automation_id":  "Variables.RemoveDuplicateItemsFromList",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "共通リスト項目の検索",
+                      "automation_id":  "Variables.FindCommonListItems",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "リストの内容を減らす",
+                      "automation_id":  "Variables.SubtractLists",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "データ テーブル列をリストに取得",
+                      "automation_id":  "Variables.RetrieveDataTableColumnIntoList",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "JSON をカスタム オブジェクトに変換",
+                      "automation_id":  "Variables.ConvertJsonToCustomObject",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "カスタム オブジェクトを JSON に変換",
+                      "automation_id":  "Variables.ConvertCustomObjectToJson",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "項目をリストに追加",
+                      "automation_id":  "Variables.AddItemToList",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "新しいリストの作成",
+                      "automation_id":  "Variables.CreateNewList",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "変数を大きくする",
+                      "automation_id":  "Variables.IncreaseVariable",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "変数を小さくする",
+                      "automation_id":  "Variables.DecreaseVariable",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "フィルター リスト",
+                      "automation_id":  "Variables.FilterList",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "変数の設定",
+                      "automation_id":  "LanguageConstructs.Assign",
+                      "parent_id":  "Variables",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "条件",
+                      "automation_id":  "LanguageConstructs.Conditionals",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ループ",
+                      "automation_id":  "LanguageConstructs.Loops",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "フロー コントロール",
+                      "automation_id":  "FlowControl",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Desktop フローを実行",
+                      "automation_id":  "LanguageConstructs.RunFlow",
+                      "parent_id":  "LanguageConstructs.RunFlow",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "システム",
+                      "automation_id":  "System",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Case",
+                      "automation_id":  "LanguageConstructs.Case",
+                      "parent_id":  "LanguageConstructs.Conditionals",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Default case",
+                      "automation_id":  "LanguageConstructs.CaseDefault",
+                      "parent_id":  "LanguageConstructs.Conditionals",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Else",
+                      "automation_id":  "LanguageConstructs.Else",
+                      "parent_id":  "LanguageConstructs.Conditionals",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Else if",
+                      "automation_id":  "LanguageConstructs.ElseIf",
+                      "parent_id":  "LanguageConstructs.Conditionals",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "If",
+                      "automation_id":  "LanguageConstructs.If",
+                      "parent_id":  "LanguageConstructs.Conditionals",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Switch",
+                      "automation_id":  "LanguageConstructs.Switch",
+                      "parent_id":  "LanguageConstructs.Conditionals",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ワークステーション",
+                      "automation_id":  "Workstation",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "For each",
+                      "automation_id":  "LanguageConstructs.Foreach",
+                      "parent_id":  "LanguageConstructs.Loops",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Loop",
+                      "automation_id":  "LanguageConstructs.Loop",
+                      "parent_id":  "LanguageConstructs.Loops",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ループを抜ける",
+                      "automation_id":  "LanguageConstructs.Break",
+                      "parent_id":  "LanguageConstructs.Loops",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ループ条件",
+                      "automation_id":  "LanguageConstructs.While",
+                      "parent_id":  "LanguageConstructs.Loops",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "次のループ",
+                      "automation_id":  "LanguageConstructs.Continue",
+                      "parent_id":  "LanguageConstructs.Loops",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "スクリプト",
+                      "automation_id":  "Scripting",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ファイル",
+                      "automation_id":  "File",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "フォルダー",
+                      "automation_id":  "Folder",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "カスタム エラーをスローする",
+                      "automation_id":  "FlowControl.ThrowCustomError",
+                      "parent_id":  "FlowControl",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "安全停止が要求済みかどうか",
+                      "automation_id":  "If.FlowControl.IfSafeStop",
+                      "parent_id":  "FlowControl",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "End",
+                      "automation_id":  "LanguageConstructs.End",
+                      "parent_id":  "FlowControl",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "コメント",
+                      "automation_id":  "LanguageConstructs.Comment",
+                      "parent_id":  "FlowControl",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "サブフローの実行",
+                      "automation_id":  "LanguageConstructs.CallFunction",
+                      "parent_id":  "FlowControl",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "サブフローの終了",
+                      "automation_id":  "LanguageConstructs.ExitFunction",
+                      "parent_id":  "FlowControl",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "フローを停止する",
+                      "automation_id":  "LanguageConstructs.Exit",
+                      "parent_id":  "FlowControl",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ブロック エラー発生時",
+                      "automation_id":  "LanguageConstructs.Block",
+                      "parent_id":  "FlowControl",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ラベル",
+                      "automation_id":  "LanguageConstructs.Label",
+                      "parent_id":  "FlowControl",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "リージョン",
+                      "automation_id":  "LanguageConstructs.Region",
+                      "parent_id":  "FlowControl",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "リージョンの終了",
+                      "automation_id":  "LanguageConstructs.EndRegion",
+                      "parent_id":  "FlowControl",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "最後のエラーを取得",
+                      "automation_id":  "LanguageConstructs.GetLastError",
+                      "parent_id":  "FlowControl",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "待機",
+                      "automation_id":  "LanguageConstructs.Wait",
+                      "parent_id":  "FlowControl",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "移動先",
+                      "automation_id":  "LanguageConstructs.GoTo",
+                      "parent_id":  "FlowControl",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "圧縮",
+                      "automation_id":  "Compression",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "UI オートメーション",
+                      "automation_id":  "UIAutomation",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "HTTP",
+                      "automation_id":  "Web",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ブラウザー自動化",
+                      "automation_id":  "WebAutomation",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "プロセスが次の場合",
+                      "automation_id":  "If.System.IfProcess",
+                      "parent_id":  "System",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "プロセスを待機する",
+                      "automation_id":  "Wait.System.WaitForProcess",
+                      "parent_id":  "System",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "アプリケーションの実行",
+                      "automation_id":  "System.RunApplication",
+                      "parent_id":  "System",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "プロセスを終了する",
+                      "automation_id":  "System.TerminateProcess",
+                      "parent_id":  "System",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Ping",
+                      "automation_id":  "System.Ping",
+                      "parent_id":  "System",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Windows の環境変数を設定する",
+                      "automation_id":  "System.SetEnvironmentVariable",
+                      "parent_id":  "System",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Windows 環境変数を取得",
+                      "automation_id":  "System.GetEnvironmentVariable",
+                      "parent_id":  "System",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Windows の環境変数を削除する",
+                      "automation_id":  "System.DeleteEnvironmentVariable",
+                      "parent_id":  "System",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Triggers",
+                      "automation_id":  "Triggers",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel",
+                      "automation_id":  "Excel",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Word",
+                      "automation_id":  "Word",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ドキュメントの印刷",
+                      "automation_id":  "Workstation.PrintDocument",
+                      "parent_id":  "Workstation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "既定のプリンターを取得",
+                      "automation_id":  "Workstation.GetDefaultPrinter",
+                      "parent_id":  "Workstation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "既定のプリンターを設定",
+                      "automation_id":  "Workstation.SetDefaultPrinter",
+                      "parent_id":  "Workstation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "デスクトップを表示",
+                      "automation_id":  "Workstation.ShowDesktop",
+                      "parent_id":  "Workstation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ワークステーションをロック",
+                      "automation_id":  "Workstation.LockWorkstation",
+                      "parent_id":  "Workstation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "サウンドの再生",
+                      "automation_id":  "Workstation.PlaySound",
+                      "parent_id":  "Workstation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ごみ箱を空にする",
+                      "automation_id":  "Workstation.EmptyRecycleBin",
+                      "parent_id":  "Workstation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "スクリーンショットを取得",
+                      "automation_id":  "Workstation.TakeScreenshot",
+                      "parent_id":  "Workstation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "スクリーンセーバーの制御",
+                      "automation_id":  "Workstation.ControlScreenSaver",
+                      "parent_id":  "Workstation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "画面の解像度を取得",
+                      "automation_id":  "Workstation.GetScreenResolution",
+                      "parent_id":  "Workstation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "画面の解像度を設定",
+                      "automation_id":  "Workstation.SetScreenResolution",
+                      "parent_id":  "Workstation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "コンピューターのシャットダウン",
+                      "automation_id":  "LanguageConstructs.ShutdownComputer",
+                      "parent_id":  "Workstation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ユーザーをログオフ",
+                      "automation_id":  "LanguageConstructs.LogOffUser",
+                      "parent_id":  "Workstation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "DOS コマンドの実行",
+                      "automation_id":  "Scripting.RunDOSCommand",
+                      "parent_id":  "Scripting",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "VBScript の実行",
+                      "automation_id":  "Scripting.RunVBScript",
+                      "parent_id":  "Scripting",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "JavaScript の実行",
+                      "automation_id":  "Scripting.RunJavascript",
+                      "parent_id":  "Scripting",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "PowerShell スクリプトの実行",
+                      "automation_id":  "Scripting.RunPowershellScript",
+                      "parent_id":  "Scripting",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Python スクリプトの実行",
+                      "automation_id":  "Scripting.RunPythonScript",
+                      "parent_id":  "Scripting",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  ".NET スクリプト実行",
+                      "automation_id":  "Scripting.RunDotNetScript",
+                      "parent_id":  "Scripting",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ファイルが存在する場合",
+                      "automation_id":  "If.File.IfFile",
+                      "parent_id":  "File",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ファイルを待機します",
+                      "automation_id":  "Wait.File.WaitForFile",
+                      "parent_id":  "File",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ファイルのコピー",
+                      "automation_id":  "File.Copy",
+                      "parent_id":  "File",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ファイルの移動",
+                      "automation_id":  "File.Move",
+                      "parent_id":  "File",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ファイルの削除",
+                      "automation_id":  "File.Delete",
+                      "parent_id":  "File",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ファイルの名前を変更する",
+                      "automation_id":  "File.RenameFiles",
+                      "parent_id":  "File",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ファイルからテキストを読み取る",
+                      "automation_id":  "File.ReadTextFromFile",
+                      "parent_id":  "File",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "テキストをファイルに書き込む",
+                      "automation_id":  "File.WriteText",
+                      "parent_id":  "File",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "CSV ファイルから読み取る",
+                      "automation_id":  "File.ReadFromCSVFile",
+                      "parent_id":  "File",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "CSV ファイルに書き込む",
+                      "automation_id":  "File.WriteToCSVFile",
+                      "parent_id":  "File",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ファイル パス部分を取得",
+                      "automation_id":  "File.GetPathPart",
+                      "parent_id":  "File",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "一時ファイルの取得",
+                      "automation_id":  "File.GetTempPath",
+                      "parent_id":  "File",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ファイルを Base64 に変換する",
+                      "automation_id":  "File.ConvertToBase64",
+                      "parent_id":  "File",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Base64 をファイルに変換する",
+                      "automation_id":  "File.ConvertFromBase64",
+                      "parent_id":  "File",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ファイルをバイナリ データに変換",
+                      "automation_id":  "File.ConvertToBinary",
+                      "parent_id":  "File",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "バイナリ データをファイルに変換",
+                      "automation_id":  "File.ConvertFromBinary",
+                      "parent_id":  "File",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "PowerPoint",
+                      "automation_id":  "PowerPoint",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "データベース",
+                      "automation_id":  "Database",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Access",
+                      "automation_id":  "Access",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "メール",
+                      "automation_id":  "Email",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Exchange Server",
+                      "automation_id":  "Exchange",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "フォルダーが存在する場合",
+                      "automation_id":  "If.Folder.IfFolderExists",
+                      "parent_id":  "Folder",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "フォルダー内のサブフォルダーを取得",
+                      "automation_id":  "Folder.GetSubfolders",
+                      "parent_id":  "Folder",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "フォルダー内のファイルを取得",
+                      "automation_id":  "Folder.GetFiles",
+                      "parent_id":  "Folder",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "フォルダーの作成",
+                      "automation_id":  "Folder.Create",
+                      "parent_id":  "Folder",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "フォルダーの削除",
+                      "automation_id":  "Folder.Delete",
+                      "parent_id":  "Folder",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "フォルダーを空にする",
+                      "automation_id":  "Folder.Empty",
+                      "parent_id":  "Folder",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "フォルダーをコピー",
+                      "automation_id":  "Folder.Copy",
+                      "parent_id":  "Folder",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "フォルダーを移動",
+                      "automation_id":  "Folder.Move",
+                      "parent_id":  "Folder",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "フォルダーの名前を変更",
+                      "automation_id":  "Folder.Rename",
+                      "parent_id":  "Folder",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "特別なフォルダーを取得",
+                      "automation_id":  "Folder.GetSpecialFolder",
+                      "parent_id":  "Folder",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ZIP ファイル",
+                      "automation_id":  "Compression.ZipFiles",
+                      "parent_id":  "Compression",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ファイルの解凍",
+                      "automation_id":  "Compression.UnzipFiles",
+                      "parent_id":  "Compression",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Outlook",
+                      "automation_id":  "Outlook",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "メッセージ ボックス",
+                      "automation_id":  "Display",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "マウスとキーボード",
+                      "automation_id":  "MouseAndKeyboard",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "クリップボード",
+                      "automation_id":  "Clipboard",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウ",
+                      "automation_id":  "UIAutomation.Windows",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "データ抽出",
+                      "automation_id":  "UIAutomation.DataExtraction",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "フォーム入力",
+                      "automation_id":  "UIAutomation.FormFilling",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウ コンテンツを待機",
+                      "automation_id":  "Wait.UIAutomation.WaitForWindowContent",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウが次を含む場合",
+                      "automation_id":  "If.UIAutomation.IfWindowContains",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "仮想デスクトップが使用可能な場合",
+                      "automation_id":  "If.UIAutomation.IfRemoteDesktopIsAvailable",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "仮想デスクトップを待機する",
+                      "automation_id":  "Wait.UIAutomation.WaitForRemoteDesktop",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "デスクトップを使用する",
+                      "automation_id":  "UIAutomation.UseDesktop",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "画像が存在する場合",
+                      "automation_id":  "If.UIAutomation.IfImage",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウでタブを選択",
+                      "automation_id":  "UIAutomation.SelectTab",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "画像を待機",
+                      "automation_id":  "Wait.UIAutomation.WaitForImage",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウの UI 要素の上にマウス ポインターを移動する",
+                      "automation_id":  "UIAutomation.HoverOnElement",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウの UI 要素をクリック",
+                      "automation_id":  "UIAutomation.Click",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウの取得",
+                      "automation_id":  "UIAutomation.GetWindow",
+                      "parent_id":  "UIAutomation.Windows",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウにフォーカスする",
+                      "automation_id":  "UIAutomation.FocusWindow",
+                      "parent_id":  "UIAutomation.Windows",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウの状態の設定",
+                      "automation_id":  "UIAutomation.SetWindowState",
+                      "parent_id":  "UIAutomation.Windows",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウの表示方法を設定する",
+                      "automation_id":  "UIAutomation.SetWindowVisibility",
+                      "parent_id":  "UIAutomation.Windows",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウの移動",
+                      "automation_id":  "UIAutomation.MoveWindow",
+                      "parent_id":  "UIAutomation.Windows",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウのサイズ変更",
+                      "automation_id":  "UIAutomation.ResizeWindow",
+                      "parent_id":  "UIAutomation.Windows",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウを閉じる",
+                      "automation_id":  "UIAutomation.CloseWindow",
+                      "parent_id":  "UIAutomation.Windows",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウの詳細を取得する",
+                      "automation_id":  "UIAutomation.GetWindowDetails",
+                      "parent_id":  "UIAutomation.DataExtraction",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウにある UI 要素の詳細を取得する",
+                      "automation_id":  "UIAutomation.GetElementDetails",
+                      "parent_id":  "UIAutomation.DataExtraction",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウにある選択済みチェック ボックスを取得する",
+                      "automation_id":  "UIAutomation.GetSelectedCheckboxesInWindow",
+                      "parent_id":  "UIAutomation.DataExtraction",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウにある選択済みラジオ ボタンを取得する",
+                      "automation_id":  "UIAutomation.GetSelectedRadiobuttonInWindow",
+                      "parent_id":  "UIAutomation.DataExtraction",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウからデータを抽出する",
+                      "automation_id":  "UIAutomation.ExtractDataFromWindow",
+                      "parent_id":  "UIAutomation.DataExtraction",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "UI 要素のスクリーンショットを取得する",
+                      "automation_id":  "UIAutomation.TakeScreenshotOfUIElement",
+                      "parent_id":  "UIAutomation.DataExtraction",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "テーブルからデータを抽出する",
+                      "automation_id":  "UIAutomation.ExtractDataFromTable",
+                      "parent_id":  "UIAutomation.DataExtraction",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "UI コントロールを取得",
+                      "automation_id":  "UIAutomation.GetUIControl",
+                      "parent_id":  "UIAutomation.DataExtraction",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウ内のメニュー オプションを選択",
+                      "automation_id":  "UIAutomation.SelectMenuOption",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "UI 要素をウィンドウ内にドラッグ アンド ドロップ",
+                      "automation_id":  "UIAutomation.DragAndDropElement",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウ内のテキスト フィールドをフォーカス",
+                      "automation_id":  "UIAutomation.FocusTextField",
+                      "parent_id":  "UIAutomation.FormFilling",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウ内のテキスト フィールドに入力する",
+                      "automation_id":  "UIAutomation.PopulateTextField",
+                      "parent_id":  "UIAutomation.FormFilling",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウ内のボタンを押す",
+                      "automation_id":  "UIAutomation.PressButton",
+                      "parent_id":  "UIAutomation.FormFilling",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウのラジオ ボタンをオンにする",
+                      "automation_id":  "UIAutomation.SelectRadioButton",
+                      "parent_id":  "UIAutomation.FormFilling",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウのチェック ボックスの状態を設定",
+                      "automation_id":  "UIAutomation.SetCheckboxState",
+                      "parent_id":  "UIAutomation.FormFilling",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウでドロップ ダウン リストの値を設定する",
+                      "automation_id":  "UIAutomation.SetDropDownListValueInWindow",
+                      "parent_id":  "UIAutomation.FormFilling",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウ内のツリー ノードを展開/折りたたむ",
+                      "automation_id":  "UIAutomation.ExpandCollapseTreeNode",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウが次の条件を満たす場合",
+                      "automation_id":  "If.UIAutomation.IfWindow",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ウィンドウを待機する",
+                      "automation_id":  "Wait.UIAutomation.WaitForWindow",
+                      "parent_id":  "UIAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "SOAP Web サービスを呼び出す",
+                      "automation_id":  "Web.InvokeSoapService",
+                      "parent_id":  "Web",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Web からダウンロードします",
+                      "automation_id":  "Web.DownloadFromWeb",
+                      "parent_id":  "Web",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Web サービスを呼び出します",
+                      "automation_id":  "Web.InvokeWebService",
+                      "parent_id":  "Web",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Web データ抽出",
+                      "automation_id":  "WebAutomation.DataExtraction",
+                      "parent_id":  "WebAutomation",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Web フォーム入力",
+                      "automation_id":  "WebAutomation.FormFilling",
+                      "parent_id":  "WebAutomation",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Web ページに次が含まれる場合",
+                      "automation_id":  "If.WebAutomation.IfWebPageContains",
+                      "parent_id":  "WebAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Web ページのコンテンツを待機",
+                      "automation_id":  "Wait.WebAutomation.WaitForWebPageContent",
+                      "parent_id":  "WebAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Web ページからデータを抽出する",
+                      "automation_id":  "WebAutomation.ExtractData",
+                      "parent_id":  "WebAutomation.DataExtraction",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Web ページ上の詳細を取得します",
+                      "automation_id":  "WebAutomation.GetDetailsOfWebPage",
+                      "parent_id":  "WebAutomation.DataExtraction",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Web ページ上の要素の詳細を取得します",
+                      "automation_id":  "WebAutomation.GetDetailsOfElement",
+                      "parent_id":  "WebAutomation.DataExtraction",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "新しい Internet Explorer を起動",
+                      "automation_id":  "WebAutomation.LaunchInternetExplorer",
+                      "parent_id":  "WebAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "新しい Firefox を起動する",
+                      "automation_id":  "WebAutomation.LaunchFirefox",
+                      "parent_id":  "WebAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "新しい Chrome を起動する",
+                      "automation_id":  "WebAutomation.LaunchChrome",
+                      "parent_id":  "WebAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "新しい Microsoft Edge を起動",
+                      "automation_id":  "WebAutomation.LaunchEdge",
+                      "parent_id":  "WebAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "新しいタブを作成",
+                      "automation_id":  "WebAutomation.CreateNewTab",
+                      "parent_id":  "WebAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Web ページに移動",
+                      "automation_id":  "WebAutomation.GoToWebPage",
+                      "parent_id":  "WebAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Web ページのリンクをクリック",
+                      "automation_id":  "WebAutomation.Click",
+                      "parent_id":  "WebAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Web ページのダウンロード リンクをクリック",
+                      "automation_id":  "WebAutomation.ClickDownloadLink",
+                      "parent_id":  "WebAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Web ページで JavaScript 関数を実行",
+                      "automation_id":  "WebAutomation.ExecuteJavascript",
+                      "parent_id":  "WebAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Web ページの要素にマウスをポイント",
+                      "automation_id":  "WebAutomation.HoverOverElement",
+                      "parent_id":  "WebAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Web ブラウザーを閉じる",
+                      "automation_id":  "WebAutomation.CloseWebBrowser",
+                      "parent_id":  "WebAutomation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "UI element event trigger",
+                      "automation_id":  "While.Triggers.WaitForTriggerAction",
+                      "parent_id":  "Triggers",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "詳細",
+                      "automation_id":  "Excel.Advanced",
+                      "parent_id":  "Excel",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシート内のセルを選択",
+                      "automation_id":  "Excel.SelectCellsFromExcel",
+                      "parent_id":  "Excel.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "選択したセル範囲を Excel ワークシートから取得",
+                      "automation_id":  "Excel.GetSelectedCellRange",
+                      "parent_id":  "Excel.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシートからセルをコピー",
+                      "automation_id":  "Excel.CopyCellsFromExcel",
+                      "parent_id":  "Excel.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシートにセルを貼り付け",
+                      "automation_id":  "Excel.PasteCellsToExcel",
+                      "parent_id":  "Excel.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシートから削除する",
+                      "automation_id":  "Excel.DeleteCells",
+                      "parent_id":  "Excel.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシートに行を挿入",
+                      "automation_id":  "Excel.InsertRow",
+                      "parent_id":  "Excel.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシートから行を削除",
+                      "automation_id":  "Excel.DeleteRow",
+                      "parent_id":  "Excel.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシートに列を挿入",
+                      "automation_id":  "Excel.InsertColumn",
+                      "parent_id":  "Excel.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシートから列を削除",
+                      "automation_id":  "Excel.DeleteColumn",
+                      "parent_id":  "Excel.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシート内のセルを検索して置換する",
+                      "automation_id":  "Excel.FindAndReplace",
+                      "parent_id":  "Excel.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシートから列における最初の空の行を取得",
+                      "automation_id":  "Excel.GetFirstFreeRowOnColumn",
+                      "parent_id":  "Excel.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel から式を読み取る",
+                      "automation_id":  "Excel.ReadCellFormula",
+                      "parent_id":  "Excel.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "テーブル範囲を Excel ワークシートから取得する",
+                      "automation_id":  "Excel.GetTableRange",
+                      "parent_id":  "Excel.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシート内のセルを自動入力する",
+                      "automation_id":  "Excel.AutoFillCells",
+                      "parent_id":  "Excel.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシートのセルを追加",
+                      "automation_id":  "Excel.AppendCells",
+                      "parent_id":  "Excel.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシートの検索範囲",
+                      "automation_id":  "Excel.LookupRange",
+                      "parent_id":  "Excel.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシートのセルの色を設定する",
+                      "automation_id":  "Excel.SetColor",
+                      "parent_id":  "Excel.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "新しいワークシートの追加",
+                      "automation_id":  "Excel.AddWorksheet",
+                      "parent_id":  "Excel",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシートから最初の空の列や行を取得",
+                      "automation_id":  "Excel.GetFirstFreeColumnRow",
+                      "parent_id":  "Excel",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシートの列名を取得する",
+                      "automation_id":  "Excel.GetColumnName",
+                      "parent_id":  "Excel",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシートのセルをクリアする",
+                      "automation_id":  "Excel.ClearCellsFromExcel",
+                      "parent_id":  "Excel",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシート内のセルを並べ替える",
+                      "automation_id":  "Excel.SortCellsFromExcel",
+                      "parent_id":  "Excel",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシートのセルをフィルター処理する",
+                      "automation_id":  "Excel.FilterCellsFromExcel",
+                      "parent_id":  "Excel",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Excel ワークシートのフィルターをクリアする",
+                      "automation_id":  "Excel.ClearFilterFromExcel",
+                      "parent_id":  "Excel",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "空のセルを取得",
+                      "automation_id":  "Excel.GetEmptyCellFromExcel",
+                      "parent_id":  "Excel",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Word を起動する",
+                      "automation_id":  "Word.LaunchWord",
+                      "parent_id":  "Word",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "実行中の Word に接続する",
+                      "automation_id":  "Word.Attach",
+                      "parent_id":  "Word",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Word を保存",
+                      "automation_id":  "Word.SaveWord",
+                      "parent_id":  "Word",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Word を閉じる",
+                      "automation_id":  "Word.CloseWord",
+                      "parent_id":  "Word",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Word 文書から読み取る",
+                      "automation_id":  "Word.ReadFromWord",
+                      "parent_id":  "Word",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Word 文書に書き込む",
+                      "automation_id":  "Word.WriteToWord",
+                      "parent_id":  "Word",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Word 文書に画像を挿入する",
+                      "automation_id":  "Word.InsertImageToWord",
+                      "parent_id":  "Word",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Word 文書内の単語を検索して置換する",
+                      "automation_id":  "Word.FindAndReplaceWord",
+                      "parent_id":  "Word",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "日時",
+                      "automation_id":  "DateTime",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "PDF",
+                      "automation_id":  "Pdf",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "CMD セッション",
+                      "automation_id":  "Cmd",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ターミナル エミュレーション",
+                      "automation_id":  "TerminalEmulation",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "OCR",
+                      "automation_id":  "OCR",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "暗号化",
+                      "automation_id":  "Cryptography",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Windows サービス",
+                      "automation_id":  "Services",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "XML",
+                      "automation_id":  "XML",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "FTP",
+                      "automation_id":  "FTP",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "CyberArk",
+                      "automation_id":  "CyberArk",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Active Directory",
+                      "automation_id":  "ActiveDirectory",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "AWS",
+                      "automation_id":  "AWS",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Azure",
+                      "automation_id":  "Azure",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Google コグニティブ",
+                      "automation_id":  "GoogleCognitive",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "IBM コグニティブ",
+                      "automation_id":  "IBMCognitive",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Microsoft コグニティブ",
+                      "automation_id":  "MicrosoftCognitive",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Local LLM",
+                      "automation_id":  "LLM",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "PGP Cryptography",
+                      "automation_id":  "PGP",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "加算する日時",
+                      "automation_id":  "DateTime.Add",
+                      "parent_id":  "DateTime",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "日付の減算",
+                      "automation_id":  "DateTime.Subtract",
+                      "parent_id":  "DateTime",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "現在の日時を取得",
+                      "automation_id":  "DateTime.GetCurrentDateTime",
+                      "parent_id":  "DateTime",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "PDF からテキストを抽出",
+                      "automation_id":  "Pdf.ExtractTextFromPDF",
+                      "parent_id":  "Pdf",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "PDF からテーブルを抽出する",
+                      "automation_id":  "Pdf.ExtractTablesFromPDF",
+                      "parent_id":  "Pdf",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "PDF から画像を抽出",
+                      "automation_id":  "Pdf.ExtractImagesFromPDF",
+                      "parent_id":  "Pdf",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "新しい PDF ファイルへの PDF ファイル ページの抽出",
+                      "automation_id":  "Pdf.ExtractPages",
+                      "parent_id":  "Pdf",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "PDF ファイルを統合",
+                      "automation_id":  "Pdf.MergeFiles",
+                      "parent_id":  "Pdf",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "CMD セッションを開く",
+                      "automation_id":  "Cmd.Open",
+                      "parent_id":  "Cmd",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "CMD セッションから読み取る",
+                      "automation_id":  "Cmd.ReadFromCmdSession",
+                      "parent_id":  "Cmd",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "CMD セッションに書き込む",
+                      "automation_id":  "Cmd.Write",
+                      "parent_id":  "Cmd",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "CMD セッションでテキストを待機",
+                      "automation_id":  "Cmd.WaitForText",
+                      "parent_id":  "Cmd",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "CMD セッションの終了",
+                      "automation_id":  "Cmd.Close",
+                      "parent_id":  "Cmd",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ターミナル セッションでテキストを待機",
+                      "automation_id":  "TerminalEmulation.WaitForTextOnTerminalSession",
+                      "parent_id":  "TerminalEmulation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ターミナル セッションのテキストを検索する",
+                      "automation_id":  "TerminalEmulation.FindTextFromTerminalSession",
+                      "parent_id":  "TerminalEmulation",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "SAP 自動化",
+                      "automation_id":  "SAP",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "テスト",
+                      "automation_id":  "Testing",
+                      "parent_id":  "",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "テキストが画面に表示されるまで待機 (OCR)",
+                      "automation_id":  "Wait.OCR.WaitForTextOnScreen",
+                      "parent_id":  "OCR",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "テキストが画面に表示される場合 (OCR)",
+                      "automation_id":  "If.OCR.IfTextOnScreen",
+                      "parent_id":  "OCR",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "OCR を使ってテキストを抽出",
+                      "automation_id":  "OCR.ExtractTextWithOCR",
+                      "parent_id":  "OCR",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "AES でテキストを暗号化",
+                      "automation_id":  "Cryptography.EncryptText",
+                      "parent_id":  "Cryptography",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "AES でテキストを解読する",
+                      "automation_id":  "Cryptography.DecryptText",
+                      "parent_id":  "Cryptography",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "AES でファイルから暗号化",
+                      "automation_id":  "Cryptography.EncryptFromFile",
+                      "parent_id":  "Cryptography",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "AES でファイルに解読する",
+                      "automation_id":  "Cryptography.DecryptToFile",
+                      "parent_id":  "Cryptography",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "テキストをハッシュ化します",
+                      "automation_id":  "Cryptography.HashText",
+                      "parent_id":  "Cryptography",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ファイルをハッシュ化します",
+                      "automation_id":  "Cryptography.HashFromFile",
+                      "parent_id":  "Cryptography",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "キーを使ってテキストをハッシュ化",
+                      "automation_id":  "Cryptography.HashTextWithKey",
+                      "parent_id":  "Cryptography",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "キーを使ってファイルをハッシュ化",
+                      "automation_id":  "Cryptography.HashFromFileWithKey",
+                      "parent_id":  "Cryptography",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "サービスが次の場合",
+                      "automation_id":  "If.Services.IfService",
+                      "parent_id":  "Services",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "サービスを待機",
+                      "automation_id":  "Wait.Services.WaitForService",
+                      "parent_id":  "Services",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "サービスを開始",
+                      "automation_id":  "Services.Start",
+                      "parent_id":  "Services",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "サービスを停止",
+                      "automation_id":  "Services.Stop",
+                      "parent_id":  "Services",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "サービスを一時停止",
+                      "automation_id":  "Services.Pause",
+                      "parent_id":  "Services",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "サービスを再開",
+                      "automation_id":  "Services.Resume",
+                      "parent_id":  "Services",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ファイルから XML を読み取る",
+                      "automation_id":  "XML.ReadFromFile",
+                      "parent_id":  "XML",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "XML をファイルに書き込む",
+                      "automation_id":  "XML.WriteXmlToFile",
+                      "parent_id":  "XML",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "XPath 式を実行します",
+                      "automation_id":  "XML.ExecuteXPathQuery",
+                      "parent_id":  "XML",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "XML 要素の属性を取得",
+                      "automation_id":  "XML.GetXmlElementAttribute",
+                      "parent_id":  "XML",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "XML 要素の属性を設定",
+                      "automation_id":  "XML.SetElementAttribute",
+                      "parent_id":  "XML",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "XML 要素の属性を削除",
+                      "automation_id":  "XML.RemoveElementAttribute",
+                      "parent_id":  "XML",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "XML 要素の値を取得",
+                      "automation_id":  "XML.GetXmlElementValue",
+                      "parent_id":  "XML",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "XML 要素の値を設定",
+                      "automation_id":  "XML.SetElementValue",
+                      "parent_id":  "XML",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "XML 要素を挿入します",
+                      "automation_id":  "XML.InsertElement",
+                      "parent_id":  "XML",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "XML 要素を削除します",
+                      "automation_id":  "XML.RemoveElement",
+                      "parent_id":  "XML",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "FTP 接続を開く",
+                      "automation_id":  "FTP.OpenConnection",
+                      "parent_id":  "FTP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "FTP ファイルを削除",
+                      "automation_id":  "FTP.DeleteFiles",
+                      "parent_id":  "FTP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "FTP ファイルの名前を変更する",
+                      "automation_id":  "FTP.RenameFile",
+                      "parent_id":  "FTP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "FTP ディレクトリの作成",
+                      "automation_id":  "FTP.CreateDirectory",
+                      "parent_id":  "FTP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "FTP ディレクトリを削除",
+                      "automation_id":  "FTP.DeleteDirectory",
+                      "parent_id":  "FTP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "FTP コマンドの呼び出し",
+                      "automation_id":  "FTP.InvokeCommand",
+                      "parent_id":  "FTP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ディレクトリの同期",
+                      "automation_id":  "FTP.SynchronizeDirectory",
+                      "parent_id":  "FTP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "CyberArk からパスワードを取得",
+                      "automation_id":  "CyberArk.GetPassword",
+                      "parent_id":  "CyberArk",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "オブジェクト",
+                      "automation_id":  "ActiveDirectory.Object",
+                      "parent_id":  "ActiveDirectory",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "グループ",
+                      "automation_id":  "ActiveDirectory.Group",
+                      "parent_id":  "ActiveDirectory",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ユーザー",
+                      "automation_id":  "ActiveDirectory.User",
+                      "parent_id":  "ActiveDirectory",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "サーバーに接続",
+                      "automation_id":  "ActiveDirectory.ConnectToServer",
+                      "parent_id":  "ActiveDirectory",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "接続を閉じる",
+                      "automation_id":  "ActiveDirectory.CloseConnection",
+                      "parent_id":  "ActiveDirectory",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "オブジェクトの作成",
+                      "automation_id":  "ActiveDirectory.CreateObject",
+                      "parent_id":  "ActiveDirectory.Object",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "オブジェクトを削除",
+                      "automation_id":  "ActiveDirectory.DeleteObject",
+                      "parent_id":  "ActiveDirectory.Object",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "オブジェクトを移動",
+                      "automation_id":  "ActiveDirectory.MoveObject",
+                      "parent_id":  "ActiveDirectory.Object",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "オブジェクトを名前変更",
+                      "automation_id":  "ActiveDirectory.RenameObject",
+                      "parent_id":  "ActiveDirectory.Object",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "グループの作成",
+                      "automation_id":  "ActiveDirectory.CreateGroup",
+                      "parent_id":  "ActiveDirectory.Group",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "グループ情報の取得",
+                      "automation_id":  "ActiveDirectory.GetGroupInfo",
+                      "parent_id":  "ActiveDirectory.Group",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "グループ メンバーの取得",
+                      "automation_id":  "ActiveDirectory.GetGroupMembers",
+                      "parent_id":  "ActiveDirectory.Group",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "グループの変更",
+                      "automation_id":  "ActiveDirectory.ModifyGroup",
+                      "parent_id":  "ActiveDirectory.Group",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ユーザーを作成",
+                      "automation_id":  "ActiveDirectory.CreateUser",
+                      "parent_id":  "ActiveDirectory.User",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ユーザー情報を取得",
+                      "automation_id":  "ActiveDirectory.GetUserInfo",
+                      "parent_id":  "ActiveDirectory.User",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ユーザーを変更",
+                      "automation_id":  "ActiveDirectory.ModifyUser",
+                      "parent_id":  "ActiveDirectory.User",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ユーザーをロック解除",
+                      "automation_id":  "ActiveDirectory.UnlockUser",
+                      "parent_id":  "ActiveDirectory.User",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ユーザー情報を更新",
+                      "automation_id":  "ActiveDirectory.UpdateUserInfo",
+                      "parent_id":  "ActiveDirectory.User",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "EC2",
+                      "automation_id":  "AWS.EC2",
+                      "parent_id":  "AWS",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "インスタンス",
+                      "automation_id":  "AWS.EC2.Instances",
+                      "parent_id":  "AWS.EC2",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "スナップショット",
+                      "automation_id":  "AWS.EC2.Snapshots",
+                      "parent_id":  "AWS.EC2",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "EC2 インスタンスを開始します",
+                      "automation_id":  "AWS.StartEC2Instance",
+                      "parent_id":  "AWS.EC2.Instances",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "EC2 インスタンスを停止します",
+                      "automation_id":  "AWS.StopEC2Instance",
+                      "parent_id":  "AWS.EC2.Instances",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "EC2 インスタンスを再起動します",
+                      "automation_id":  "AWS.RebootEC2Instance",
+                      "parent_id":  "AWS.EC2.Instances",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "使用可能な EC2 インスタンスを取得します",
+                      "automation_id":  "AWS.GetAvailableEC2Instances",
+                      "parent_id":  "AWS.EC2.Instances",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "インスタンスを記述します",
+                      "automation_id":  "AWS.DescribeEC2Instance",
+                      "parent_id":  "AWS.EC2.Instances",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ボリューム",
+                      "automation_id":  "AWS.EC2.Volumes",
+                      "parent_id":  "AWS.EC2",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "EC2 セッションを作成します",
+                      "automation_id":  "AWS.CreateEc2Session",
+                      "parent_id":  "AWS.EC2",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "EC2 セッションを終了します",
+                      "automation_id":  "AWS.EndEC2Session",
+                      "parent_id":  "AWS.EC2",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "スナップショットを作成します",
+                      "automation_id":  "AWS.CreateSnapshot",
+                      "parent_id":  "AWS.EC2.Snapshots",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "スナップショットを記述します",
+                      "automation_id":  "AWS.DescribeSnapshots",
+                      "parent_id":  "AWS.EC2.Snapshots",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "スナップショットを削除します",
+                      "automation_id":  "AWS.DeleteSnapshot",
+                      "parent_id":  "AWS.EC2.Snapshots",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ボリュームを作成します",
+                      "automation_id":  "AWS.CreateVolume",
+                      "parent_id":  "AWS.EC2.Volumes",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ボリュームをアタッチします",
+                      "automation_id":  "AWS.AttachVolume",
+                      "parent_id":  "AWS.EC2.Volumes",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ボリュームをデタッチします",
+                      "automation_id":  "AWS.DetachVolume",
+                      "parent_id":  "AWS.EC2.Volumes",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ボリュームを記述します",
+                      "automation_id":  "AWS.DescribeVolumes",
+                      "parent_id":  "AWS.EC2.Volumes",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ボリュームを削除します",
+                      "automation_id":  "AWS.DeleteVolume",
+                      "parent_id":  "AWS.EC2.Volumes",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "リソース グループ",
+                      "automation_id":  "Azure.ResourceGroups",
+                      "parent_id":  "Azure",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "仮想マシン",
+                      "automation_id":  "Azure.VirtualMachines",
+                      "parent_id":  "Azure",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "セッションを作成します",
+                      "automation_id":  "Azure.CreateSession",
+                      "parent_id":  "Azure",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "サブスクリプションを取得します",
+                      "automation_id":  "Azure.GetSubscriptions",
+                      "parent_id":  "Azure",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "セッションを終了します",
+                      "automation_id":  "Azure.EndSession",
+                      "parent_id":  "Azure",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "リソース グループを取得します",
+                      "automation_id":  "Azure.GetResourceGroups",
+                      "parent_id":  "Azure.ResourceGroups",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "リソース グループを作成します",
+                      "automation_id":  "Azure.CreateResourceGroup",
+                      "parent_id":  "Azure.ResourceGroups",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "リソース グループを削除します",
+                      "automation_id":  "Azure.DeleteResourceGroup",
+                      "parent_id":  "Azure.ResourceGroups",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "スナップショット",
+                      "automation_id":  "Azure.VirtualMachines.Snapshots",
+                      "parent_id":  "Azure.VirtualMachines",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ディスク",
+                      "automation_id":  "Azure.VirtualMachines.Disks",
+                      "parent_id":  "Azure.VirtualMachines",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "スナップショットを取得します",
+                      "automation_id":  "Azure.GetSnapshots",
+                      "parent_id":  "Azure.VirtualMachines.Snapshots",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "仮想マシンを取得します",
+                      "automation_id":  "Azure.GetVirtualMachines",
+                      "parent_id":  "Azure.VirtualMachines",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "仮想マシンを記述します",
+                      "automation_id":  "Azure.DescribeVirtualMachine",
+                      "parent_id":  "Azure.VirtualMachines",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "仮想マシンを起動します",
+                      "automation_id":  "Azure.StartVirtualMachine",
+                      "parent_id":  "Azure.VirtualMachines",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "仮想マシンを停止します",
+                      "automation_id":  "Azure.StopVirtualMachine",
+                      "parent_id":  "Azure.VirtualMachines",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "仮想マシンをシャットダウンします",
+                      "automation_id":  "Azure.ShutDownVirtualMachine",
+                      "parent_id":  "Azure.VirtualMachines",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "仮想マシンを再起動します",
+                      "automation_id":  "Azure.RestartVirtualMachine",
+                      "parent_id":  "Azure.VirtualMachines",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ディスクを取得します",
+                      "automation_id":  "Azure.GetDisks",
+                      "parent_id":  "Azure.VirtualMachines.Disks",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ディスクをアタッチします",
+                      "automation_id":  "Azure.AttachDisk",
+                      "parent_id":  "Azure.VirtualMachines.Disks",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ディスクをデタッチします",
+                      "automation_id":  "Azure.DetachDisk",
+                      "parent_id":  "Azure.VirtualMachines.Disks",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "マネージド ディスクを作成します",
+                      "automation_id":  "Azure.CreateManagedDisk",
+                      "parent_id":  "Azure.VirtualMachines.Disks",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ディスクを削除します",
+                      "automation_id":  "Azure.DeleteDisk",
+                      "parent_id":  "Azure.VirtualMachines.Disks",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ビジョン",
+                      "automation_id":  "GoogleCognitive.Vision",
+                      "parent_id":  "GoogleCognitive",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ラベル検出",
+                      "automation_id":  "GoogleCognitive.LabelDetectionGoogle",
+                      "parent_id":  "GoogleCognitive.Vision",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ランドマーク検出",
+                      "automation_id":  "GoogleCognitive.LandmarkDetectionGoogle",
+                      "parent_id":  "GoogleCognitive.Vision",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "テキスト検出",
+                      "automation_id":  "GoogleCognitive.TextDetectionGoogle",
+                      "parent_id":  "GoogleCognitive.Vision",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "ロゴ検出",
+                      "automation_id":  "GoogleCognitive.LogoDetectionGoogle",
+                      "parent_id":  "GoogleCognitive.Vision",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "セーフ サーチ検出",
+                      "automation_id":  "GoogleCognitive.SafeSearchDetectionGoogle",
+                      "parent_id":  "GoogleCognitive.Vision",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "画像プロパティの検出",
+                      "automation_id":  "GoogleCognitive.ImagePropertiesDetectionGoogle",
+                      "parent_id":  "GoogleCognitive.Vision",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "自然言語",
+                      "automation_id":  "GoogleCognitive.NaturalLanguage",
+                      "parent_id":  "GoogleCognitive",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "感情を分析します",
+                      "automation_id":  "GoogleCognitive.AnalyzeSentimentGoogle",
+                      "parent_id":  "GoogleCognitive.NaturalLanguage",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "エンティティ分析",
+                      "automation_id":  "GoogleCognitive.AnalyzeEntitiesGoogle",
+                      "parent_id":  "GoogleCognitive.NaturalLanguage",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "構文を解析します",
+                      "automation_id":  "GoogleCognitive.AnalyzeSyntaxGoogle",
+                      "parent_id":  "GoogleCognitive.NaturalLanguage",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "トーン分析機能",
+                      "automation_id":  "IBMCognitive.ToneAnalyzer",
+                      "parent_id":  "IBMCognitive",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "文書変換",
+                      "automation_id":  "IBMCognitive.DocumentConversion",
+                      "parent_id":  "IBMCognitive",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "トーンを分析します",
+                      "automation_id":  "IBMCognitive.AnalyzeToneIBM",
+                      "parent_id":  "IBMCognitive.ToneAnalyzer",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "視覚認識",
+                      "automation_id":  "IBMCognitive.VisualRecognition",
+                      "parent_id":  "IBMCognitive",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "言語翻訳機能",
+                      "automation_id":  "IBMCognitive.LanguageTranslator",
+                      "parent_id":  "IBMCognitive",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "文書を変換します",
+                      "automation_id":  "IBMCognitive.ConvertDocumentIBM",
+                      "parent_id":  "IBMCognitive.DocumentConversion",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "画像を分類します",
+                      "automation_id":  "IBMCognitive.ClassifyImageIBM",
+                      "parent_id":  "IBMCognitive.VisualRecognition",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "翻訳",
+                      "automation_id":  "IBMCognitive.TranslateIBM",
+                      "parent_id":  "IBMCognitive.LanguageTranslator",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "言語を特定します",
+                      "automation_id":  "IBMCognitive.IdentifyLanguageIBM",
+                      "parent_id":  "IBMCognitive.LanguageTranslator",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Bing Spell Check",
+                      "automation_id":  "MicrosoftCognitive.BingSpellCheck",
+                      "parent_id":  "MicrosoftCognitive",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Computer Vision",
+                      "automation_id":  "MicrosoftCognitive.ComputerVision",
+                      "parent_id":  "MicrosoftCognitive",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Spell Check",
+                      "automation_id":  "MicrosoftCognitive.SpellCheckMicrosoft",
+                      "parent_id":  "MicrosoftCognitive.BingSpellCheck",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "画像を分析します",
+                      "automation_id":  "MicrosoftCognitive.AnalyzeImageMicrosoft",
+                      "parent_id":  "MicrosoftCognitive.ComputerVision",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "画像を記述します",
+                      "automation_id":  "MicrosoftCognitive.DescribeImageMicrosoft",
+                      "parent_id":  "MicrosoftCognitive.ComputerVision",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "OCR",
+                      "automation_id":  "MicrosoftCognitive.OCRMicrosoft",
+                      "parent_id":  "MicrosoftCognitive.ComputerVision",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "画像をタグ付けします",
+                      "automation_id":  "MicrosoftCognitive.TagImageMicrosoft",
+                      "parent_id":  "MicrosoftCognitive.ComputerVision",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Invoke Local LLM",
+                      "automation_id":  "LLM.InvokeLLM",
+                      "parent_id":  "LLM",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Decrypt file with PGP",
+                      "automation_id":  "PGP.PgpDecryptFile",
+                      "parent_id":  "PGP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "Encrypt file with PGP",
+                      "automation_id":  "PGP.PgpEncryptFile",
+                      "parent_id":  "PGP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "詳細",
+                      "automation_id":  "SAP.Advanced",
+                      "parent_id":  "SAP",
+                      "kind":  "group",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "アタッチする",
+                      "automation_id":  "SAP.AttachToRunning",
+                      "parent_id":  "SAP.Advanced",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "SAP を起動",
+                      "automation_id":  "SAP.SapLogin",
+                      "parent_id":  "SAP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "新しい SAP セッションを作成",
+                      "automation_id":  "SAP.CreateNewSession",
+                      "parent_id":  "SAP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "SAP のナビゲーション項目を選択する",
+                      "automation_id":  "SAP.SelectNavigationBarItem",
+                      "parent_id":  "SAP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "SAP メニュー項目を選択",
+                      "automation_id":  "SAP.SapSelectMenuItem",
+                      "parent_id":  "SAP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "SAP トランザクションを開始",
+                      "automation_id":  "SAP.StartTransaction",
+                      "parent_id":  "SAP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "SAP トランザクションを終了する",
+                      "automation_id":  "SAP.EndTransaction",
+                      "parent_id":  "SAP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "SAP 接続を閉じる",
+                      "automation_id":  "SAP.CloseSapConnection",
+                      "parent_id":  "SAP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "SAP UI 要素をクリックする",
+                      "automation_id":  "SAP.ClickSapGuiElement",
+                      "parent_id":  "SAP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "SAP UI 要素の詳細を取得する",
+                      "automation_id":  "SAP.GetSapElementDetail",
+                      "parent_id":  "SAP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "SAP テキスト フィールド要素に入力する",
+                      "automation_id":  "SAP.PopulateTextField",
+                      "parent_id":  "SAP",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "アサート",
+                      "automation_id":  "Testing.Assert",
+                      "parent_id":  "Testing",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "デスクトップ フローのサブフローをテストする",
+                      "automation_id":  "LanguageConstructs.RunTestSubFlow",
+                      "parent_id":  "Testing",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  },
+                  {
+                      "ui_name":  "デスクトップ フローをテストする",
+                      "automation_id":  "LanguageConstructs.RunTestFlow",
+                      "parent_id":  "Testing",
+                      "kind":  "action",
+                      "enabled":  true,
+                      "offscreen":  false
+                  }
+              ]
+}

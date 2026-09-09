@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-09T07:29:21.6407851Z",
+    "flow_name":  "RobinKnowledgeCsvReadRT_20260909",
+    "source_robin":  "catalog\\actions\\csv-read\\utf8.robin",
+    "source_sha256":  "22f850aca459d4cc7b15993a96915f68eee51cf7d319b73ca43dd0fcfbd67e5d",
+    "source_bytes":  281,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  1,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

@@ -1739,6 +1739,235 @@
         "app_executor_verified": true,
         "app_case": "evidence/document-run/live-verification.json"
       }
+    },
+    {
+      "id": "datetime-get-current-date",
+      "category": "日時",
+      "ui_name": "現在の日時を取得",
+      "ui_automation_id": "DateTime.GetCurrentDateTime",
+      "variant": "date-only-system-time-zone",
+      "settings": {
+        "取得": "現在の日付のみ",
+        "タイム ゾーン": "システム タイム ゾーン",
+        "生成された変数": "CurrentDateTime",
+        "エラー発生時": "既定"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CurrentDateTime",
+          "kind": "datetime"
+        }
+      ],
+      "robin_path": "actions/datetime-get-current-date/date-only.robin",
+      "sha256": "df0a911a7c9185a6f7127c442d6973929fb26a3dd1a527779c0fe61844c241f5",
+      "capture_session": "datetime-2026-09-09",
+      "native_flow_name": "RobinKnowledgeLive_20260909",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "datetime-current-date",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/datetime-current-date-validation.json"
+      },
+      "known_finding": "取得=現在の日付のみ、タイムゾーン=システム タイム ゾーンでは、実行時のローカル日付が時刻00:00:00として変数に入る。"
+    },
+    {
+      "id": "datatable-create-empty",
+      "category": "変数",
+      "ui_name": "新しいデータ テーブルを作成する",
+      "ui_automation_id": "Variables.CreateNewDatatable",
+      "variant": "empty-0x0",
+      "settings": {
+        "テーブルを作成": "0 行, 0 列",
+        "生成された変数": "DataTable",
+        "エラー発生時": "既定"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DataTable",
+          "kind": "data_table"
+        }
+      ],
+      "robin_path": "actions/datatable-create/empty.robin",
+      "sha256": "f3eef9ad3585b35d39c8f90d9202629d63907414e1f7601270e9d0fff7af9256",
+      "capture_session": "datatable-2026-09-09",
+      "native_flow_name": "RobinKnowledgeDataTable_20260909",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "datatable-create-empty",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/datatable-create-validation.json"
+      },
+      "known_finding": "空の入力テーブルは0行0列のDataTableを生成する。行追加・セル参照・CSV読取りは別設定。"
+    },
+    {
+      "id": "datatable-add-row-empty-failed",
+      "category": "変数",
+      "ui_name": "行をデータ テーブルに挿入する",
+      "ui_automation_id": "Variables.AddRowToDataTable",
+      "variant": "empty-table-empty-row-error",
+      "settings": {
+        "データ テーブル": "DataTable",
+        "挿入場所": "データ テーブルの末尾",
+        "新しい値": "[]"
+      },
+      "inputs": [
+        {
+          "name": "DataTable",
+          "kind": "existing_data_table"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/datatable-add-row/empty-table-failed.robin",
+      "sha256": "34f76d85ecb09832681202c5b773e3810038e5a1cbd8113def942a9245ef78fc",
+      "capture_session": "datatable-row-2026-09-09",
+      "native_flow_name": "RobinKnowledgeDataTableRow_20260909",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": null,
+        "app_executor_verified": false,
+        "design_error": true,
+        "failure_evidence": "evidence/datatable-add-row-empty-failed.robin"
+      },
+      "known_finding": "0行0列のDataTableへ空リスト[]を追加する設定は、PADデザイナーで「エラーあり」になり実行不可。列数を持つテーブルと行値の対応は別採取が必要。"
+    },
+    {
+      "id": "csv-write-variable-reference",
+      "category": "ファイル",
+      "ui_name": "CSV ファイルに書き込む",
+      "ui_automation_id": "File.WriteToCSVFile",
+      "variant": "variable-reference-no-header",
+      "settings": {
+        "書き込む変数": "CSVTable",
+        "ファイル パス": "catalog/evidence/csv-read-write-output2-20260909.csv",
+        "エンコード": "UTF-8",
+        "列名を含めます": false,
+        "ファイルが存在する場合": "上書き",
+        "区切り記号": "SystemDefault"
+      },
+      "inputs": [
+        {
+          "name": "CSVTable",
+          "kind": "existing_data_table"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/csv-write/variable-reference-utf8.robin",
+      "sha256": "3f4126c5a12eac5eb909802fd6f61444639135158cd59c1f141eaf891b58f816",
+      "capture_session": "csv-read-write-2026-09-09",
+      "native_flow_name": "RobinKnowledgeCsvRoundtrip2_20260909",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "csv-read-write2",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/csv-read-validation.json"
+      },
+      "known_finding": "書き込む変数へ%CSVTable%を設定すると、RobinではCSVTableが未引用の変数参照になった。文字列リテラルを入れると型エラーになる。"
+    },
+    {
+      "id": "csv-read-utf8-system-default-no-header",
+      "category": "ファイル",
+      "ui_name": "CSV ファイルから読み取る",
+      "ui_automation_id": "File.ReadFromCSVFile",
+      "variant": "utf8-trim-no-header-system-default",
+      "settings": {
+        "ファイル パス": "catalog/fixtures/csv/input-20260909.csv",
+        "エンコード": "UTF-8",
+        "TrimFields": true,
+        "FirstLineContainsColumnNames": false,
+        "ColumnsSeparator": "SystemDefault",
+        "CSVTable": "CSVTable"
+      },
+      "inputs": [
+        {
+          "name": "catalog/fixtures/csv/input-20260909.csv",
+          "kind": "file"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CSVTable",
+          "kind": "data_table"
+        }
+      ],
+      "robin_path": "actions/csv-read/utf8.robin",
+      "sha256": "22f850aca459d4cc7b15993a96915f68eee51cf7d319b73ca43dd0fcfbd67e5d",
+      "capture_session": "csv-read-2026-09-09",
+      "native_flow_name": "RobinKnowledgeCsvRead_20260909",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "csv-read-write2",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/csv-read-validation.json"
+      },
+      "known_finding": "FirstLineContainsColumnNames=Falseでは、ヘッダー行を含む3行3列のDataTableになった。日本語と引用符は書出し結果でも保持された。"
+    },
+    {
+      "id": "file-copy-single-no-overwrite",
+      "category": "ファイル",
+      "ui_name": "ファイルのコピー",
+      "ui_automation_id": "File.Copy",
+      "variant": "single-file-do-nothing-if-exists",
+      "settings": {
+        "コピーするファイル": "catalog/fixtures/files/copy-input-20260909.txt",
+        "宛先フォルダー": "catalog/evidence/file-copy-output-20260909",
+        "ファイルが存在する場合": "何もしない",
+        "生成された変数": "CopiedFiles"
+      },
+      "inputs": [
+        {
+          "name": "catalog/fixtures/files/copy-input-20260909.txt",
+          "kind": "file"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CopiedFiles",
+          "kind": "file_list"
+        }
+      ],
+      "robin_path": "actions/file-copy/single-no-overwrite.robin",
+      "sha256": "a8fad878ee52f6fb2d8a1f74e8f145e213b7a5c63b63450969f922a53082bedc",
+      "capture_session": "file-copy-2026-09-09",
+      "native_flow_name": "RobinKnowledgeFileCopy_20260909",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": true,
+        "executed_in_flow": "file-copy-single-no-overwrite",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/file-copy-validation.json"
+      },
+      "known_finding": "1回目はCopiedFilesにコピー先ファイルが入り、入力と出力のSHA-256が一致。2回目は何もしない設定によりCopiedFilesが空になり、既存出力は不変。"
     }
   ],
   "flows": [
@@ -2161,6 +2390,80 @@
       "controller_support": "validated_subset",
       "app_executor_verified": true,
       "evidence": "evidence/document-run/live-verification.json"
+    },
+    {
+      "id": "datetime-current-date",
+      "robin_path": "flows/datetime-current-date/roundtrip.robin",
+      "sha256": "df0a911a7c9185a6f7127c442d6973929fb26a3dd1a527779c0fe61844c241f5",
+      "action_ids": [
+        "datetime-get-current-date"
+      ],
+      "action_count": 1,
+      "native_flow_name": "RobinKnowledgeRoundtrip_20260909",
+      "native_subflow": "Main",
+      "re_pasted_from_file": true,
+      "re_copied_sha256": "df0a911a7c9185a6f7127c442d6973929fb26a3dd1a527779c0fe61844c241f5",
+      "executed_twice": true,
+      "expected_value": "CurrentDateTime=2026/09/09 0:00:00",
+      "evidence": "evidence/datetime-current-date-validation.json",
+      "app_executor_verified": false,
+      "controller_support": "not_implemented"
+    },
+    {
+      "id": "datatable-create-empty",
+      "robin_path": "flows/datatable-create/roundtrip.robin",
+      "sha256": "f3eef9ad3585b35d39c8f90d9202629d63907414e1f7601270e9d0fff7af9256",
+      "action_ids": [
+        "datatable-create-empty"
+      ],
+      "action_count": 1,
+      "native_flow_name": "RobinKnowledgeDataTableRT_20260909",
+      "native_subflow": "Main",
+      "re_pasted_from_file": true,
+      "re_copied_sha256": "f3eef9ad3585b35d39c8f90d9202629d63907414e1f7601270e9d0fff7af9256",
+      "executed_twice": true,
+      "expected_value": "DataTable is a data table with 0 rows and 0 columns",
+      "evidence": "evidence/datatable-create-validation.json",
+      "app_executor_verified": false,
+      "controller_support": "not_implemented"
+    },
+    {
+      "id": "csv-read-write2",
+      "robin_path": "flows/csv-read-write2/roundtrip.robin",
+      "sha256": "1a40b35b4d0b4d52997274404ea9f035ee6590f8593982c701f07d20a4f71cae",
+      "action_ids": [
+        "csv-read-utf8-system-default-no-header",
+        "csv-write-variable-reference"
+      ],
+      "action_count": 2,
+      "native_flow_name": "RobinKnowledgeCsvRoundtrip2_20260909",
+      "native_subflow": "Main",
+      "re_pasted_from_file": true,
+      "re_copied_sha256": "1a40b35b4d0b4d52997274404ea9f035ee6590f8593982c701f07d20a4f71cae",
+      "executed_twice": true,
+      "expected_value": "3 rows x 3 columns; Japanese and quoted field preserved in output CSV",
+      "output_evidence": "evidence/csv-read-write-output2-20260909.csv",
+      "evidence": "evidence/csv-read-validation.json",
+      "app_executor_verified": false,
+      "controller_support": "not_implemented"
+    },
+    {
+      "id": "file-copy-single-no-overwrite",
+      "robin_path": "flows/file-copy/roundtrip.robin",
+      "sha256": "a8fad878ee52f6fb2d8a1f74e8f145e213b7a5c63b63450969f922a53082bedc",
+      "action_ids": [
+        "file-copy-single-no-overwrite"
+      ],
+      "action_count": 1,
+      "native_flow_name": "RobinKnowledgeFileCopyRT_20260909",
+      "native_subflow": "Main",
+      "re_pasted_from_file": true,
+      "re_copied_sha256": "a8fad878ee52f6fb2d8a1f74e8f145e213b7a5c63b63450969f922a53082bedc",
+      "executed_twice": true,
+      "expected_value": "First run copies one synthetic file; second DoNothing run leaves the existing destination unchanged.",
+      "evidence": "evidence/file-copy-validation.json",
+      "app_executor_verified": false,
+      "controller_support": "not_implemented"
     }
   ],
   "capture_sessions": [
@@ -2192,6 +2495,73 @@
       "native_flow_name": "test",
       "native_subflow": "DocCsvProbe",
       "evidence": "evidence/document-run/table-csv-probe.csv"
+    },
+    {
+      "id": "pad-action-inventory-2026-09-09",
+      "date": "2026-09-09",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": false,
+      "native_flow_name": "RobinKnowledgeLive_20260909",
+      "scope": "Expanded ActionsTreeView and scrolled top to bottom; 340 action nodes and 72 group nodes.",
+      "actions_executed": 0,
+      "evidence": "evidence/pad-action-inventory-20260909.json"
+    },
+    {
+      "id": "datetime-2026-09-09",
+      "date": "2026-09-09",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": false,
+      "native_flow_name": "RobinKnowledgeLive_20260909",
+      "roundtrip_flow_name": "RobinKnowledgeRoundtrip_20260909",
+      "action_ids": [
+        "datetime-get-current-date"
+      ],
+      "evidence": "evidence/datetime-current-date-validation.json"
+    },
+    {
+      "id": "datatable-2026-09-09",
+      "date": "2026-09-09",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": false,
+      "native_flow_name": "RobinKnowledgeDataTable_20260909",
+      "roundtrip_flow_name": "RobinKnowledgeDataTableRT_20260909",
+      "action_ids": [
+        "datatable-create-empty"
+      ],
+      "scope": "Empty 0-row, 0-column data table only; row insertion and cell access were not included.",
+      "evidence": "evidence/datatable-create-validation.json"
+    },
+    {
+      "id": "csv-read-write-2026-09-09",
+      "date": "2026-09-09",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": false,
+      "native_flow_name": "RobinKnowledgeCsvRead_20260909",
+      "roundtrip_flow_name": "RobinKnowledgeCsvRoundtrip2_20260909",
+      "action_ids": [
+        "csv-read-utf8-system-default-no-header",
+        "csv-write-variable-reference"
+      ],
+      "scope": "Synthetic CSV with Japanese and quotes; read 3x3 and write with variable reference.",
+      "evidence": "evidence/csv-read-validation.json"
+    },
+    {
+      "id": "file-copy-2026-09-09",
+      "date": "2026-09-09",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": false,
+      "native_flow_name": "RobinKnowledgeFileCopy_20260909",
+      "roundtrip_flow_name": "RobinKnowledgeFileCopyRT_20260909",
+      "action_ids": [
+        "file-copy-single-no-overwrite"
+      ],
+      "scope": "One synthetic local file copied to a dedicated destination folder with DoNothing on collision.",
+      "evidence": "evidence/file-copy-validation.json"
     }
   ],
   "application_integration": {

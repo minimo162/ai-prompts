@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-09T07:55:27.2263894Z",
+    "flow_name":  "RobinKnowledgeFileCopyRT_20260909",
+    "source_robin":  "catalog\\actions\\file-copy\\single-no-overwrite.robin",
+    "source_sha256":  "a8fad878ee52f6fb2d8a1f74e8f145e213b7a5c63b63450969f922a53082bedc",
+    "source_bytes":  264,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  1,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

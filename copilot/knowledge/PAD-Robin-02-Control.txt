@@ -1,0 +1,22 @@
+PAD Robin 制御・ブロック
+
+今回の左パネル再観測では、If、Else、For each、ループを抜ける、次のループ、ブロック エラー発生時、サブフローの実行、サブフローの終了、待機、Loopの表示名を確認した。Robinの設定・再貼付け・実行を完了したのは、現時点では固定範囲Loopの既存例だけである。表示名の証拠は `catalog/evidence/pad-action-inventory-20260909.json`、実測済みLoopの原文・実行値は `catalog/index.json` と `catalog/flows/bounded-loop/` に対応づけられている。
+
+固定範囲Loop
+- UI名: Loop、id: loop-one-to-three、variant: constant-range
+- 設定: 開始1、終了3、増分1、出力変数 LoopIndex
+- 原文の組合せ:
+  `SET NewVar2 TO 0`
+  `LOOP LoopIndex FROM 1 TO 3 STEP 1`
+  `    Variables.IncreaseVariable Value: NewVar2 IncrementValue: LoopIndex`
+  `END`
+- 実行結果: 固定値1を加算する例は NewVar2=3、LoopIndexを加算する例は NewVar2=6、終了後のLoopIndexは4。初期化をループ内へ置くと毎回リセットされる。
+- 検証証拠: catalog/evidence/bounded-loop-variables.json、catalog/evidence/bounded-loop-sum-variables.json。
+- 未確認: 下降ループ、可変範囲、ゼロ増分、For each、ループ脱出。
+
+変数の加算
+- `Variables.IncreaseVariable` の固定値1とループ変数の2設定を別例として収録している。数値変数を事前に定義し、型を文字列と混ぜない。
+
+未採取の制御
+- If／Else、エラー処理、For each、ループ脱出、サブフロー呼出しの今回用のRobin原文はまだない。表示名を観測できたことだけで、設定・コピー・再貼付け・実行済みとはしない。
+- 未観測のブロック終端や引数をLoop例から類推して生成しない。必要な場合は、PADで最小ブロックを追加してコピーし、開始・終了・依存・失敗経路を別項目として記録する。
