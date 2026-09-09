@@ -1,0 +1,72 @@
+1. 前提・対象範囲・未確認点
+
+目的
+合成Excel excel-catalog.xlsx を編集可能（ReadOnly=False）で開き、B2セルのみへ ASCII文字列 T05-Changed を書き込み、別名で normal-chat-t05-output.xlsx として保存します。元ファイルは上書きしません。
+
+入力
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\excel-catalog.xlsx
+
+出力
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t05-output.xlsx
+
+成功条件
+
+B2 = T05-Changed
+A1を含む他セルは変更しない
+元の入力ファイルは変更しない
+出力ファイルが別名で保存される
+
+根拠
+
+編集可能な既存Excel起動（ReadOnly=False）の実測原文あり。
+Excel ワークシートに書き込む（単一セル）の実測原文あり。
+Excel SaveAs（xlsx保存）の実測原文あり。
+Excel終了の実測原文あり。
+
+未確認
+
+この依頼の実ファイルに対する実行結果そのものは未確認。
+シート選択やデータ反復構文はナレッジ未観測のため使用していません。
+2. PADで先に確認する設定・依存
+入力ファイルが存在すること。
+出力先フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence\ が存在すること。
+Excelアクションで生成されるインスタンス名は ExcelInstance を使用。
+B2への書込みは列=B、行=2 の単一セル指定。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance
+2
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T05-Changed''' Column: $'''B''' Row: 2
+3
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-output.xlsx'''
+4
+Excel.CloseExcel.Close Instance: ExcelInstance
+4. デザイナー上の確認方法
+アクション数が 4個 であること。
+順序が以下と一致すること。
+Excel の起動（既存ファイル・ReadOnly=False）
+Excel ワークシートに書き込む
+Excel の保存（Save As）
+Excel を閉じる
+ExcelInstance が全アクションで共通利用されていること。
+書込みアクションが Column=B / Row=2 になっていること。
+SaveAs の保存先が出力ファイルになっていること。
+
+根拠となる実測済みアクションは、Excel編集可能起動、セル書込み、SaveAs、Close の各観測例です。
+
+5. 保存・実行・照合手順
+フローを保存。
+合成入力ファイルで実行。
+出力ファイル normal-chat-t05-output.xlsx を開く。
+B2セルが T05-Changed になっていることを確認。
+A1および他セルが元の内容のままであることを確認。
+元ファイル excel-catalog.xlsx を開き、B2が変更されていないことを確認。
+再実行時も入力ファイルが変化していないことを確認。
+
+確認済み範囲の根拠: PAD 2.71.115.26224、日本語UI、Power Fx OFF 環境で採取された Excel 編集可能起動（ReadOnly=False）、セル書込み、SaveAs、Close の実測原文。

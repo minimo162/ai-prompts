@@ -1,0 +1,75 @@
+1. 前提・対象範囲・未確認点
+
+目的
+UTF-8 テキストを読み込み、検索語 対象語 を通常置換で 置換後 に変更し、UTF-8 テキストとして新規出力します。
+
+入力
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+
+出力
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260909.txt
+
+変数
+
+FileContents（テキスト）
+Replaced（テキスト）
+
+置換方式
+
+通常置換（正規表現ではない）
+大文字小文字無視なし
+指定語のみ置換
+
+改行要件
+
+入力テキスト内の改行は保持
+保存時に追加改行を付与しないため AppendNewLine: False
+
+確認済み根拠
+
+「ファイルからテキストを読み取る」原文例: PAD-Robin-Knowledge-Bundle 内「PAD-Robin-03-Files」
+「テキストを置換する（通常置換）」原文例: PAD-Robin-Knowledge-Bundle 内「PAD-Robin-01-Basics」
+「テキストをファイルに書き込む（変数参照・AppendNewLine=False）」原文例: PAD-Robin-Knowledge-Bundle 内「PAD-Robin-03-Files」
+
+未確認
+
+この3アクションを今回のパスで組み合わせた実行証拠はナレッジ内にありません。各アクションの原文と設定は確認済みですが、本組合せは「貼付け・実行未確認」です。
+2. PADで先に作る設定
+
+特別な入力変数は不要です。
+
+そのままサブフローへ貼り付ける場合は、
+
+入力ファイルが存在すること
+出力先フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence\ が存在すること を確認してください。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: サブフロー内へ新規追加
+
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-20260909.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+4
+`
+4. デザイナー上の確認方法
+
+貼り付け後にアクション数が 3個 であることを確認。
+
+ファイルからテキストを読み取る
+テキストを置換する
+テキストをファイルに書き込む
+
+変数参照を確認。
+
+読取り出力: FileContents
+置換出力: Replaced
+書込み入力: Replaced
+
+保存時にデザイナーエラーが出ないことを確認。

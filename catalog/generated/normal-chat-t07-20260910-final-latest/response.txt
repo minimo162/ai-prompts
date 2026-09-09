@@ -1,0 +1,100 @@
+1. 前提・対象範囲・未確認点
+
+目的
+PDF C:\Users\yuuki\ai-prompts\catalog\fixtures\pdf\source-a.pdf の2ページのみからテキストを抽出し、UTF-8テキストとして C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt へ保存するフロー案です。
+
+対象ページ
+
+抽出対象: ページ2のみ（FromPageNumber=2、ToPageNumber=2）
+ページ境界や抽出順の整形は行わない
+入力PDFは変更しない
+
+根拠
+ナレッジに同一条件の実測済みT07があります。
+根拠: copilot/knowledge/PAD-Robin-04-Office-PDF.txt 内「T07のページ2単独抽出（リポジトリfixture）」
+
+検証状態
+
+PADからコピーした原文あり
+別フローへ再貼付け・保存確認あり
+実行確認あり
+出力内容照合あり
+実行証拠あり
+2. PADで先に作る設定・依存
+入力ファイル
+
+存在することを確認します。
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\pdf\source-a.pdf
+
+出力ファイル
+
+保存先:
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt
+
+生成される変数
+変数名	型	用途
+ExtractedPDFText	テキスト	PDFページ2から抽出したテキスト
+使用アクション
+PDF からテキストを抽出（ページ範囲指定）
+テキストをファイルに書き込む
+
+根拠: PAD-Robin-04-Office-PDF.txt のT07実測例
+
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 2 DetectLayout: False ExtractedText=> ExtractedPDFText
+2
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt''' TextToWrite: ExtractedPDFText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+根拠: catalog/generated/normal-chat-t07-20260910-final/robin.txt、SHA-256 47a33ef2067bd37009187758e16fc36daa0f5447093b51e83e984e1d8fd484c9 として記録された実測組合せ
+
+4. デザイナー上の確認方法
+アクション数
+2アクション
+順序
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange
+File.WriteText
+変数
+ExtractedPDFText が1アクション目の出力
+2アクション目で TextToWrite: ExtractedPDFText として参照
+設定確認
+
+PDF抽出:
+
+FromPageNumber = 2
+ToPageNumber = 2
+DetectLayout = False
+
+テキスト保存:
+
+AppendNewLine = False
+IfFileExists = Overwrite
+Encoding = UTF8
+
+根拠: T07実測原文
+
+5. 合成データでの保存・実行・照合手順
+空フローへ上記Robinを貼り付ける。
+保存する。
+フローを実行する。
+出力ファイルを確認する。
+
+出力ファイル:
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt
+
+期待結果
+入力PDFは変更されない。
+出力ファイルが生成または上書きされる。
+UTF-8で保存される。
+抽出対象はページ2のみ。
+出力内容に PAGE_TOKEN_A2 が含まれる。
+出力内容に PAGE_TOKEN_A1 が含まれない。
+
+これはナレッジのT07実行記録で実際に確認された期待結果です。

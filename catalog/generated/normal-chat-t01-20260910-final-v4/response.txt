@@ -1,0 +1,106 @@
+1. 前提・対象範囲・未確認点
+
+目的
+UTF-8テキストを読み込み、検索語 対象語 を置換語 置換後 へ通常置換し、結果を新しいUTF-8テキストとして保存します。
+
+入力
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+
+出力
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt
+
+成功条件
+
+対象語 のみが 置換後 に置換される。
+改行・特殊文字・対象外文字を保持する。
+UTF-8で保存する。
+入力に末尾改行が存在する場合は保持する。
+依頼されていない追加改行は付与しない。
+
+確認済み根拠
+
+通常置換: Text.Replace.ReplaceText（PAD-Robin-01-Basics）
+UTF-8テキスト読取り: File.ReadTextFromFile.ReadText（PAD-Robin-03-Files）
+UTF-8テキスト書込み（変数参照・AppendNewLine=False）: File.WriteText ... AppendNewLine: False（PAD-Robin-03-Files）
+
+未確認点はありません。今回は確認済みアクションのみで構成できます。
+
+2. PADで先に作る設定
+使用変数
+変数名	型	用途
+FileContents	テキスト	入力ファイル内容
+Replaced	テキスト	置換後文字列
+アクション構成
+
+ファイルからテキストを読み取る
+
+ファイル: C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+エンコード: UTF-8
+出力変数: FileContents
+
+テキストを置換する
+
+入力: FileContents
+検索文字列: 対象語
+置換文字列: 置換後
+通常置換（正規表現ではない）
+IgnoreCase=False
+出力: Replaced
+
+テキストをファイルに書き込む
+
+ファイル: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt
+書き込むテキスト: %Replaced%
+UTF-8
+既存内容を上書き
+新しい行を追加する=False
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-20260910.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+4. デザイナー上の確認方法
+アクション数
+
+3アクションであること。
+
+順序
+File.ReadTextFromFile.ReadText
+Text.Replace.ReplaceText
+File.WriteText
+変数型
+FileContents : テキスト
+Replaced : テキスト
+特に確認する設定
+置換アクションが Text.Replace.ReplaceText（通常置換）であること。
+IgnoreCase: False
+ActivateEscapeSequences: False
+書込みアクションが AppendNewLine: False になっていること。
+書込みアクションの TextToWrite が文字列リテラルではなく Replaced変数参照 であること。
+5. 保存・実行・出力照合手順
+空のフローへRobinを貼り付ける。
+デザイナーでエラー表示がないことを確認する。
+フローを保存する。
+合成入力ファイルを用いて実行する。
+出力ファイル C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt を開く。
+以下を照合する。
+対象語 が 置換後 に置換されている。
+他の文字列は変更されていない。
+日本語・特殊文字・引用符・バックスラッシュが保持されている。
+改行数が入力と一致する。
+末尾改行は入力状態を維持し、余分な改行が追加されていない。
+出力ファイルがUTF-8として読める。
+
+根拠
+
+UTF-8読取り: PAD-Robin-03-Files の File.ReadTextFromFile.ReadText 実測例。
+通常置換: PAD-Robin-01-Basics の Text.Replace.ReplaceText 実測例。
+追加改行なし保存: PAD-Robin-03-Files の File.WriteText ... AppendNewLine: False 実測例。

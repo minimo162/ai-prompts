@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-09T20:09:32.247Z",
+  "flow_name": "RobinKnowledgeFilterDataTableCopy2_20260910",
+  "designer_pid": 9848,
+  "action": "フィルター データ テーブル",
+  "configuration": {
+    "data_table_input": "CSVTable",
+    "column_or_index": "2",
+    "operator": "と等しい (=)",
+    "value": "対象",
+    "generated_variable": "FilteredDataTable"
+  },
+  "ui_configuration_completed": true,
+  "save_state": "designer_error_unresolved_input_dependency",
+  "robin_copy_promoted": false,
+  "result": "条件入力はPAD UI上で設定できたが、CSVTableを生成する先行アクションがない専用フローのため保存後にエラー表示となった。条件付きRobinのコピー原文は取得できず、知識へ追加していない。"
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-09T23:13:08.551Z",
+  "case": "T02",
+  "current_result": "catalog/generated/normal-chat-t02-20260910-final-latest/result.json",
+  "bundle_sha256": "660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca",
+  "instruction_sha256": "ecefa66549326aca3e0995b9c9d331da2ec9a5ec84640d8befa06b848febd6cc",
+  "model": "GPT 5.6 Think Deeper",
+  "attachment_input_mode": "preexisting_cdp_input",
+  "attachment_count": 1,
+  "body_match": true,
+  "sent": true,
+  "response_observed": true,
+  "current_robin_sha256": "76a258fd22b02a73886b82b0237de9a88f66b823520e284a15404e56ff4a6878",
+  "prior_pad_generated_robin": "catalog/generated/normal-chat-t02-20260910-final-v9/robin.txt",
+  "prior_pad_generated_robin_sha256": "76a258fd22b02a73886b82b0237de9a88f66b823520e284a15404e56ff4a6878",
+  "robin_exact_match": true,
+  "prior_pad_run_evidence": "catalog/evidence/filter-t02-copilot-final-paste.json",
+  "prior_pad_run_status": "success",
+  "prior_pad_output_evidence": "catalog/evidence/normal-chat-t02-output-20260910.csv",
+  "note": "The final-latest current-bundle chat generated the same Robin bytes as the previously PAD-run v9 chat. No code edit was applied; the PAD execution evidence is reused only because the generated Robin is byte-identical."
+}

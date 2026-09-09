@@ -1,0 +1,103 @@
+1. 前提・対象範囲・未確認点
+
+目的
+合成Word C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx を編集可能（ReadOnly=False）で開き、本文中の OfficeCatalog を T06Replaced に置換し、C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx へ別名保存する。元ファイルは変更しない。
+
+入力
+
+Word文書: C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+
+出力
+
+保存先: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx
+
+依存
+
+Wordインスタンス: WordInstance
+Wordアプリが利用可能であること
+
+確認済み根拠
+
+Word編集可能起動（ReadOnly=False）: catalog/actions/word-launch/open-editable.robin
+Word文書内の単語を検索して置換する: catalog/actions/word-replace/all-literal.robin
+Word別名保存（docx、FromExtension）: catalog/actions/word-save/as-docx-extension.robin
+Word終了: catalog/actions/word-close/no-save.robin
+
+根拠資料: copilot/knowledge/PAD-Robin-04-Office-PDF.txt
+
+未確認
+
+今回指定の入力パス・出力パスに置き換えた組合せ全体については、ナレッジ内に再貼付け・実行・期待値照合済み記録はありません。
+各アクションと構文は実測原文がありますが、この組合せを「実行済み完成例」とは扱いません。
+2. PADで先に確認する設定・依存
+
+入力Word文書が存在すること。
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+
+出力先フォルダーが存在すること。
+
+C:\Users\yuuki\ai-prompts\catalog\evidence
+
+WordアプリをPADから起動できること。
+
+保存形式
+
+DocumentFormat: Word.WordFormat.FromExtension
+出力拡張子 .docx に従う設定。
+
+終了処理
+
+保存先へ SaveAs 実行後に Word.CloseWord.Close
+元文書への上書き保存は含めない。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+2
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+3
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t06-final.docx'''
+4
+Word.CloseWord.Close Instance: WordInstance
+4. デザイナー上の確認方法
+
+アクション数: 4
+
+順序:
+
+Word を起動する（既存文書・ReadOnly=False）
+Word 文書内の単語を検索して置換する
+Word を保存（別名保存）
+Word を閉じる
+
+インスタンス名が全行で WordInstance になっていること。
+
+ReadOnly: False が設定されていること。
+
+置換文字列が
+
+検索: OfficeCatalog
+置換: T06Replaced になっていること。
+
+保存先が normal-chat-t06-final.docx になっていること。
+
+根拠: catalog/actions/word-launch/open-editable.robin、catalog/actions/word-replace/all-literal.robin、catalog/actions/word-save/as-docx-extension.robin、catalog/actions/word-close/no-save.robin
+
+5. 合成データでの保存・実行・照合手順
+元文書 word-catalog.docx のバックアップハッシュまたは更新日時を記録する。
+フローを保存して実行する。
+出力ファイル normal-chat-t06-final.docx が生成されることを確認する。
+出力ファイルを開き、
+OfficeCatalog が T06Replaced に置換されていること。
+指定文字列以外の本文が保持されていること。
+文書が開けること。 を確認する。
+元の word-catalog.docx を開き、
+元ファイルに変更が加わっていないこと。
+OfficeCatalog が残っていること。 を確認する。
+再実行時は出力ファイルの内容を再確認し、期待結果と一致することを照合する。
+
+期待結果は「入力文書の本文構造を維持したまま、OfficeCatalog のみが T06Replaced に置換された別名保存ファイルが生成され、元ファイルは変更されない」です。根拠はWord起動・置換・別名保存・終了の実測原文です。

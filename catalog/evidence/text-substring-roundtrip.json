@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-09T12:25:02.4827798Z",
+  "flow_name": "RobinKnowledgeSubstringRT_20260909",
+  "source_robin": "catalog/actions/text-substring/mixed-index-length.robin",
+  "source_sha256": "4f1021aafc353edba483e83ea61c6dd93d3c7944ad7b4566049c50fe81e4f70c",
+  "source_bytes": 110,
+  "paste_confirmed": true,
+  "action_count_after_paste": 1,
+  "saved_confirmed": true,
+  "clipboard_restored": true,
+  "execution_requested": false
+}

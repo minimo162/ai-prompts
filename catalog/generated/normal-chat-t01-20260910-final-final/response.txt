@@ -1,0 +1,80 @@
+1. 前提・対象範囲・未確認点
+
+目的
+UTF-8テキストを読み取り、検索語 対象語 を置換語 置換後 に通常置換し、結果を新規UTF-8テキストとして保存します。
+
+入力
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+
+出力
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt
+
+使用変数
+
+FileContents（テキスト）
+Replaced（テキスト）
+
+成功条件
+
+対象語 のみが 置換後 に置換される。
+特殊文字・引用符・バックスラッシュ・対象外文字を保持する。
+入力に含まれる末尾改行は保持する。
+依頼されていない追加改行は付与しない（AppendNewLine: False）。
+
+根拠
+
+「ファイルからテキストを読み取る（UTF-8）」実測原文あり。
+「テキストを置換する（通常置換）」実測原文あり。
+「テキスト変数を書き込む（UTF-8・上書き・AppendNewLine=False）」実測原文あり。
+
+未確認
+
+この3アクションを今回のT01用パスで組み合わせて再実行した証拠はナレッジ内にありません。各アクション自体は実測原文・個別検証済みです。
+2. PADで先に確認する設定・依存
+入力ファイルが存在すること。
+出力先フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence が存在すること。
+Power Fx は採取条件と同じく OFF 前提。
+「ファイルからテキストを読み取る」のエンコードを UTF-8 に設定。
+「テキストを置換する」は 通常置換 を使用し、正規表現置換を使用しない。
+「テキストをファイルに書き込む」は
+UTF-8
+上書き
+新しい行を追加する=False を設定する。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: 新規作成
+
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-20260910.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+4. デザイナー上の確認方法
+貼り付け後、アクション数が 3個 であること。
+順序が次のとおりであること。
+ファイルからテキストを読み取る
+テキストを置換する
+テキストをファイルに書き込む
+変数型が次のとおりであること。
+FileContents: テキスト
+Replaced: テキスト
+デザイナー上で赤エラーが表示されないこと。
+3つ目のアクションで
+TextToWrite: Replaced
+AppendNewLine: False が保持されていること。
+5. 保存・実行・照合手順
+フローを保存。
+合成入力ファイルで実行。
+出力ファイル C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt を開く。
+次を確認。
+対象語 が 置換後 に置換されている。
+他の文字列は変更されていない。
+日本語、引用符、特殊文字、バックスラッシュが保持されている。
+入力に存在した末尾改行は保持されている。
+追加の改行が末尾へ付与されていない。AppendNewLine: False のため、書込みアクション自身は改行を追加しない。
+再実行し、同じ出力内容になることを確認する。出力設定は上書きです。

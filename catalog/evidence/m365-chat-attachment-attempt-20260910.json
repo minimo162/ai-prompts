@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-09T21:47:53+09:00",
+  "requested_url": "https://microsoft365.com/chat",
+  "validation_target": "通常のM365 Copilotチャット",
+  "account_label_seen": "小谷 侑輝",
+  "agent_builder_opened": false,
+  "copilot_studio_opened": false,
+  "files_requested": 7,
+  "files": [
+    "copilot/knowledge/PAD-Robin-00-Index.txt",
+    "copilot/knowledge/PAD-Robin-01-Basics.txt",
+    "copilot/knowledge/PAD-Robin-02-Control.txt",
+    "copilot/knowledge/PAD-Robin-03-Files.txt",
+    "copilot/knowledge/PAD-Robin-04-Office-PDF.txt",
+    "copilot/knowledge/PAD-Robin-05-UI-Web.txt",
+    "copilot/knowledge/PAD-Robin-06-Examples.txt"
+  ],
+  "file_sha256": {
+    "PAD-Robin-00-Index.txt": "fd3142f17ecb8b12c43ed62f7303d7a1324adbd13047df08678549b0107d886d",
+    "PAD-Robin-01-Basics.txt": "f5cb339d70e05dc6fb4677e243ee9244b2e12fc5d45ff64dfb0c545dc3048c12",
+    "PAD-Robin-02-Control.txt": "64ab0c9da6cd8349b1fa218570b47df430db72e57268ec5af9c94e84ecdcc870",
+    "PAD-Robin-03-Files.txt": "de37204db78f26b309401fdba0f3b5d178d367f39f4c7bc25f410e9cd7010d16",
+    "PAD-Robin-04-Office-PDF.txt": "2f5d10ea6b73013626e40187f25293f3b1601430d3d7656b1e3397e3a5aefc5b",
+    "PAD-Robin-05-UI-Web.txt": "697bade6ae4c0e2c6faf0ab27e78ae4168dc16b6956326785114708a79e0b306",
+    "PAD-Robin-06-Examples.txt": "2ad4f50b63fd07801bbfbfe2c948a749deaaf155ea0dab7c50ea23d9e44bd900"
+  },
+  "edge_file_chooser_multiple": true,
+  "edge_set_files_result": "NOT_ALLOWED",
+  "edge_set_files_error": "Not allowed",
+  "retry_attempts": [
+    {
+      "browser": "Edge",
+      "result": "NOT_ALLOWED",
+      "error": "Not allowed",
+      "files_requested": 7,
+      "message_sent": false
+    }
+  ],
+  "iab_set_files_result": "NO_FILE_ATTACHED",
+  "iab_input_file_count_after_set_files": 0,
+  "instruction_file": "copilot/agent-instructions.txt",
+  "instruction_sha256": "ad98ddceae013fb3a1f25362a75a802765e48a9fc659ae13a0609d14a08b3e28",
+  "body_input_attempted": false,
+  "message_sent": false,
+  "t01_status": "NOT_RUN",
+  "settings_changed": false,
+  "required_user_action": "EdgeのChatGPTブラウザー拡張機能で、edge://extensions の詳細から『ファイルのURLへのアクセスを許可』を有効にする必要がある可能性がある。Codexは設定変更を行っていない。",
+  "notes": "通常チャット画面と本文入力欄は確認済み。7ファイルを実添付できることを確認できないため、本文入力・送信・回答をT01成功とは扱わない。添付制約の回避や別製品への移行は行わない。"
+}

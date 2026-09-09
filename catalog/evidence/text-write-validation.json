@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-09",
+  "pad_version": "2.71.115.26224",
+  "language": "ja-JP",
+  "power_fx": false,
+  "action_name": "テキストをファイルに書き込む",
+  "automation_id": "File.WriteText",
+  "settings": {
+    "ファイル パス": "catalog/evidence/text-write-output-valid-20260909.txt",
+    "書き込むテキスト": "日本語\\n対象語 100%%\\n'引用' \"二重引用\" C:\\sample\\n対象語",
+    "新しい行を追加する": true,
+    "ファイルが存在する場合": "既存の内容を上書きする",
+    "エンコード": "UTF-8",
+    "エラー発生時": "既定"
+  },
+  "source_robin": "catalog/actions/file-write-text/utf8-overwrite.robin",
+  "source_sha256": "3f31e923d6466abcb14e5f7fa864d414256158a6b5431ad9e5f126323818bb86",
+  "roundtrip_robin": "catalog/flows/file-write-text/roundtrip.robin",
+  "roundtrip_sha256": "3f31e923d6466abcb14e5f7fa864d414256158a6b5431ad9e5f126323818bb86",
+  "roundtrip_recopy": "catalog/evidence/text-write-roundtrip-recopy.robin",
+  "roundtrip_recopy_sha256": "3f31e923d6466abcb14e5f7fa864d414256158a6b5431ad9e5f126323818bb86",
+  "original_runs": [
+    {
+      "evidence": "catalog/evidence/text-write-run-1.json",
+      "run_status": "success",
+      "variable_previews": []
+    },
+    {
+      "evidence": "catalog/evidence/text-write-run-2.json",
+      "run_status": "success",
+      "variable_previews": []
+    }
+  ],
+  "roundtrip_runs": [
+    {
+      "evidence": "catalog/evidence/text-write-rt-run-1.json",
+      "run_status": "success",
+      "variable_previews": []
+    },
+    {
+      "evidence": "catalog/evidence/text-write-rt-run-2.json",
+      "run_status": "success",
+      "variable_previews": []
+    }
+  ],
+  "output": {
+    "path": "catalog/evidence/text-write-output-valid-20260909.txt",
+    "bytes": 73,
+    "bom": [239, 187, 191],
+    "sha256": "948d1ba7c4003435580136a84b7cb34c10991b41b13d8c396ed6c03e048007de",
+    "normalized_lines": [
+      "日本語",
+      "対象語 100%",
+      "'引用' \"二重引用\" C:\\sample",
+      "対象語"
+    ]
+  },
+  "all_checks_passed": true,
+  "notes": "UI入力では100%%とし、生成Robinでは100%%を保持した。実行後のUTF-8 BOM付き出力では100%となり、指定語だけが置換対象となる前提を保てる。"
+}

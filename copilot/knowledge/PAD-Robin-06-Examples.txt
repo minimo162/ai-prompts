@@ -19,6 +19,18 @@ PAD Robin 完成例・生成試験の参照
 生成結果に関する境界
 - 既存の生成例は、新しいCopilotエージェントへこの7ファイルを登録した証拠ではない。
 - T01〜T10（特殊文字置換、CSV、複数ファイル、Excel範囲、既存Excel、Word／PowerPoint、PDF、意図したエラー、UI画面、既存フロー修正）は、最終版のエージェントで自然文依頼→原文保存→無修正貼付け→実行→成果物照合を行い、初回失敗と修正後結果を別記録する。
+
+## T02で実測済みの3アクション組合せ
+
+以下は `RobinKnowledgeT02FilterRoundtrip2_20260910` へ再貼付け・保存・再コピー・2回実行し、出力照合まで完了した原文です。列インデックス2は合成CSVのStatus列です。未採取の列名指定や行追加構文へ置き換えません。
+
+`File.ReadFromCSVFile.ReadCSV CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\csv\\t02-input-20260910.csv''' Encoding: File.CSVEncoding.UTF8 TrimFields: True FirstLineContainsColumnNames: True ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault CSVTable=> CSVTable`
+
+`Variables.FilterDataTable DataTable: CSVTable FilterParameters: { ^['RULE', 'COLUMN', 'OPERATOR', 'VALUE'], [$'''''', 2, $'''Equal''', $'''対象'''] } MatchCase: True FilteredDataTable=> FilteredDataTable`
+
+`File.WriteToCSVFile.WriteCSV VariableToWrite: FilteredDataTable CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t02-output-20260910.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: True IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault`
+
+根拠ファイル: `catalog/flows/datatable-filter/roundtrip.robin`、`catalog/evidence/filter-t02-roundtrip2-run-2.json`。入力は変更せず、出力はUTF-8 BOM・CRLF・末尾改行なしだが、ヘッダーとStatus=対象の論理行が一致します。
 - ナレッジにないモードを要求する負例では、架空の構文ではなく不足情報と追加採取手順を返す。
 
 失敗・未確認の参照

@@ -1,0 +1,4 @@
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\text-write-output-valid-20260909.txt''' TextToWrite: $'''日本語
+対象語 100%%
+\'引用\' \"二重引用\" C:\\sample
+対象語''' AppendNewLine: True IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8

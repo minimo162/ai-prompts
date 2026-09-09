@@ -1,0 +1,120 @@
+1. 前提・対象範囲・未確認点
+
+目的
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files 内の複数ファイルを一度ずつ処理し、.txt のみ UTF-8 で内容を読み取る。
+
+入力
+
+対象フォルダー: C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+
+出力
+
+.txt ファイルごとに FileContents へ内容読取り
+.csv と .md は対象外経路
+
+確認済みの構成要素
+
+フォルダー内のファイルを取得（全ファイル取得）
+For each 構文 LOOP FOREACH CurrentItem IN Items
+ファイルパス変数から UTF-8 テキスト読取り File.ReadTextFromFile.ReadText File: CurrentFile ...
+ファイルパス文字列に .txt を含む If 条件 IF Contains(CurrentFile, $'''.txt''', False) THEN
+
+未確認
+
+Else の Robin 原文（表示名は観測済みだが Robin 原文未採取）
+.csv と .md を個別分岐する If 構文の原文
+拡張子抽出専用アクションやファイル名取得アクションの Robin 原文
+
+そのため、貼付け用 Robin は確認済み部分のみを提示します。.csv／.md の対象外経路は後述の未確認事項として分離します。
+
+2. PADで先に作る設定
+対象フォルダー
+
+実測済み例のフォルダー取得設定を次へ置換します。
+
+Folder
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+FileFilter
+*
+IncludeSubfolders
+False
+生成変数
+変数名	型	根拠
+Files	Fileリスト	Folder.GetFiles出力
+CurrentFile	File/ファイルパス	For each現在要素
+FileContents	テキスト	UTF-8読取り結果
+読取り設定
+エンコード: UTF-8
+読取り対象: .txt のみ
+3. 貼り付け用Robin
+
+検証状態:
+
+フォルダー一覧取得: 実測済み・実行済み
+For each 構文: 実測済み
+.txt 判定 If: 実測済み
+UTF-8読取り: 実測済み
+この組合せはナレッジ内に部分組合せ実行証拠あり（catalog/flows/t03-folder-foreach-read/partial.robin）
+Plain Text
+1
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+2
+LOOP FOREACH CurrentFile IN Files
+3
+    IF Contains(CurrentFile, $'''.txt''', False) THEN
+4
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+5
+    END
+6
+END
+4. デザイナー上の確認方法
+アクション数
+
+確認済み部分は計4アクション相当です。
+
+フォルダー内のファイルを取得
+For each
+If
+ファイルからテキストを読み取る
+変数型
+変数	期待型
+Files	ファイル一覧
+CurrentFile	ファイルパス
+FileContents	テキスト
+ブロック対応
+LOOP FOREACH ↔ END
+IF ... THEN ↔ END
+
+保存時にブロック不整合エラーが出ないことを確認します。
+
+5. 合成データでの確認手順
+テスト配置例
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+
+sample1.txt
+sample2.txt
+sample.csv
+sample.md
+実行確認
+フロー保存
+実行
+For each が全ファイル数だけ回ることを確認
+.txt の周回でのみ FileContents が生成されることを確認
+.csv と .md で読取りアクションに入らないことを確認
+期待結果
+sample1.txt → UTF-8で読取り
+sample2.txt → UTF-8で読取り
+sample.csv → 対象外
+sample.md → 対象外
+未確認部分の追加採取が必要
+
+依頼にある
+
+.csv 専用経路
+.md 専用経路
+Else ブロック
+拡張子取得アクション
+
+については、ナレッジ内に Robin 原文がないため生成できません。PADで最小構成の Else または 拡張子判定用 If を1アクション作成してコピー原文を採取できれば、その原文を根拠に対象外経路付きの完成版へ拡張できます。

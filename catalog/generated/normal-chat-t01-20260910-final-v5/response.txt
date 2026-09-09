@@ -1,0 +1,101 @@
+1. 前提・対象範囲・未確認点
+
+目的
+UTF-8テキストを読み込み、文字列 対象語 を 置換後 に通常置換し、UTF-8テキストとして新規出力します。
+
+入力
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+
+出力
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt
+
+使用変数
+
+FileContents（テキスト）
+Replaced（テキスト）
+
+成功条件
+
+対象語 のみが 置換後 に置換される。
+対象外文字、特殊文字、既存改行を保持する。
+UTF-8で保存する。
+入力に存在する末尾改行は保持し、PADの保存処理による追加改行は発生させない。
+
+根拠
+
+UTF-8テキスト読取り: catalog/actions/file-read-text/utf8.robin（確認済み）
+通常置換: catalog/actions/text-replace/literal.robin（実行確認済み）
+テキスト変数のUTF-8保存、追加改行なし: catalog/actions/file-write-text/variable-reference-no-append.robin（確認済み）
+
+確認状態
+
+各アクション単体はナレッジ内で確認済み。
+今回の3アクション組合せ（読取り→置換→書込み）は、ナレッジ本文中に実行証拠として掲載されていません。したがって**確認済み原文の組合せ案（貼付け・実行未確認）**として提示します。
+2. PADで先に確認する設定
+
+出力先フォルダーが存在することを確認する。
+
+C:\Users\yuuki\ai-prompts\catalog\evidence
+
+入力ファイルがUTF-8で保存されていることを確認する。
+
+出力ファイルを上書きしてよいことを確認する。
+
+本フローは File.IfFileExists.Overwrite を使用。
+
+Power Fx はナレッジ採取時と同じく OFF 前提。
+
+3. 貼り付け用Robin
+
+対象サブフロー: 置換処理用サブフロー（新規可）
+
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-20260910.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+4. デザイナー上の確認方法
+
+貼り付け後、アクション数が 3個 であることを確認する。
+
+ファイルからテキストを読み取る
+テキストを置換する
+テキストをファイルに書き込む
+
+変数型を確認する。
+
+FileContents : テキスト
+Replaced : テキスト
+
+置換アクションの設定を確認する。
+
+検索文字列: 対象語
+置換文字列: 置換後
+IgnoreCase=False
+通常置換（正規表現ではない）
+
+書込みアクションの設定を確認する。
+
+Encoding=UTF8
+IfFileExists=Overwrite
+AppendNewLine=False
+
+デザイナー上で赤いエラー表示がないことを確認する。
+
+5. 保存・実行・照合手順
+元ファイルを退避し、合成入力ファイルで実行する。
+フローを保存する。
+実行する。
+出力ファイル
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt を開く。
+次を確認する。
+対象語 が 置換後 に変わっている。
+その他の文字列は変更されていない。
+日本語、引用符、バックスラッシュ等が保持されている。
+行数が入力と一致する。
+入力にない余分な末尾改行が追加されていない。
+同じ入力で再実行し、出力内容が変化しないことを確認する。

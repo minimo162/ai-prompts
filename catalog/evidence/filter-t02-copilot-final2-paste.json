@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-09T22:43:58.832Z",
+  "flow_name": "RobinKnowledgeT02CopilotRoundtripFinal2_20260910",
+  "designer_pid": 22028,
+  "source_robin": "catalog/generated/normal-chat-t02-20260910-final-final/robin.txt",
+  "source_sha256": "11f370b0369f10f6506e73e99e060417f1120cf5e5488213fc6ba33618cf5168",
+  "source_bytes": 816,
+  "paste_unmodified": true,
+  "paste_confirmed": true,
+  "action_count_after_paste": 3,
+  "saved_confirmed": true,
+  "clipboard_restored": false,
+  "execution_requested": true,
+  "note": "The generic watcher could not parse the localized action-count status text, but direct UIA inspection confirmed 3 actions and Ready with zero errors before save and run."
+}

@@ -1,0 +1,97 @@
+1. 前提・対象範囲・未確認点
+
+目的
+C:\Users\yuuki\ai-prompts\catalog\fixtures\csv\t02-input-20260910.csv を UTF-8 で読み込み、Status 列が 対象 の行のみを抽出し、新しい CSV として
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t02-output-20260910.csv
+へ保存する。
+
+保持要件
+
+入力 CSV は変更しない
+UTF-8
+列数を保持
+日本語を保持
+カンマを含む引用フィールドを保持
+二重引用符を保持
+出力は新規 CSV
+上書き設定を明示
+
+確認済み根拠
+
+CSV読取り（ヘッダーあり）＋ Filter DataTable ＋ CSV書出しの組合せは、catalog/flows/datatable-filter/roundtrip.robin として再貼付け・実行・照合済み。
+根拠: copilot/knowledge/PAD-Robin-03-Files.txt
+フィルター条件の実測 Robin:
+Variables.FilterDataTable DataTable: CSVTable FilterParameters: { ^['RULE', 'COLUMN', 'OPERATOR', 'VALUE'], [$'''''' , 2, $'''Equal''', $'''対象'''] } MatchCase: True FilteredDataTable=> FilteredDataTable
+
+（添付ナレッジ記載の原文）
+出力結果は「ヘッダー＋Status=対象の行のみ」で照合済み。 根拠: catalog/evidence/filter-t02-roundtrip2-run-2.json
+
+未確認点
+添付ナレッジ本文には、
+
+catalog/actions/csv-read/utf8-header.robin
+catalog/flows/datatable-filter/roundtrip.robin
+
+の原文そのものが掲載されておらず、CSV読取り（ヘッダーあり）の命令行と、列名出力=True の CSV書出し命令行を直接確認できません。
+
+そのため、ナレッジに存在することは確認できますが、原文未掲出部分を推測補完すると、あなたが指定した「未採取のアクションや設定は推測しない」に反します。
+
+2. PADで確認する設定・依存
+CSV読取り
+
+確認済み条件:
+
+エンコード: UTF-8
+TrimFields: True
+FirstLineContainsColumnNames: True
+区切り: SystemDefault
+出力 DataTable: CSVTable
+フィルター
+
+確認済み条件:
+
+DataTable: CSVTable
+列/インデックス: 2
+演算子: Equal
+値: 対象
+MatchCase: True
+出力: FilteredDataTable
+
+※ 実測では列インデックス 2 が Status 列として使用されています。
+
+CSV書出し
+
+確認済み条件:
+
+書き出す変数: FilteredDataTable
+エンコード: UTF-8
+列名を含める: True
+ファイル存在時: Overwrite
+新規出力先: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t02-output-20260910.csv
+3. 貼り付け用Robin
+
+添付ナレッジには、今回必要な「ヘッダーあり CSV 読取り」と「列名を含める=True の CSV 書出し」の原文行が掲載されていません。
+
+そのため、原文未確認部分を推測して生成することはできません。
+
+規約どおり、貼り付け用Robinは提示しません。
+
+4. デザイナー上の確認方法
+エラー表示がないこと
+CSVTable の型が DataTable であること
+FilteredDataTable の型が DataTable であること
+フィルター後の行数が期待どおりであること
+CSV書出しの入力が文字列リテラルではなく DataTable 変数参照であること
+出力先が normal-chat-t02-output-20260910.csv になっていること
+上書き設定が Overwrite であること
+5. 実行後の照合
+合成 CSV を入力にして実行
+normal-chat-t02-output-20260910.csv を生成
+出力 CSV の先頭行が列名であることを確認
+Status 列が 対象 の行だけが残っていることを確認
+日本語が文字化けしていないことを確認
+カンマを含む引用フィールドが保持されていることを確認
+二重引用符が保持されていることを確認
+再実行しても同じ内容に上書きされることを確認
+
+貼り付け可能なRobinを出すには、少なくとも catalog/actions/csv-read/utf8-header.robin または catalog/flows/datatable-filter/roundtrip.robin の原文掲載部分が必要です。現在の添付ナレッジ本文だけでは、その2行を実測原文として確認できません。

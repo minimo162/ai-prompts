@@ -1,0 +1,109 @@
+1. 前提・対象範囲・未確認点
+
+目的
+C:\Users\yuuki\ai-prompts\catalog\fixtures\csv\t02-input-20260910.csv を UTF-8 で読み込み、Status 列が 対象 の行のみを抽出して、新しい CSV として保存します。
+
+入力
+
+CSV: C:\Users\yuuki\ai-prompts\catalog\fixtures\csv\t02-input-20260910.csv
+文字コード: UTF-8
+ヘッダー行: あり
+
+出力
+
+CSV: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t02-output-20260910.csv
+
+成功条件
+
+入力CSVは変更しない
+出力CSVは新規作成（既存時は上書き）
+ヘッダーを保持
+Status=対象 の行のみ出力
+日本語・カンマを含む引用フィールド・二重引用符を保持
+
+確認済み根拠
+
+CSV読取り（UTF-8、ヘッダーあり）: catalog/actions/csv-read/utf8-header.robin
+DataTableフィルター: catalog/actions/datatable-filter/status-equals-index2.robin
+Filter後DataTableのCSV書出し: catalog/flows/datatable-filter/roundtrip.robin
+2回実行・期待値照合済み: catalog/evidence/filter-t02-roundtrip2-run-2.json
+
+未確認点
+
+フィルター条件は実測例では「列インデックス=2」で採取されています。これは対象CSVの Status 列が実測データと同じ3列構成（ID, Name, Status）の場合の確認済み構文です。
+列名指定による FilterDataTable の Robin はナレッジ内に採取例がありません。そのため列名指定構文は推測できません。
+2. PADで先に確認・設定する内容
+CSV読取り
+アクション: CSV ファイルから読み取る
+ファイル: C:\Users\yuuki\ai-prompts\catalog\fixtures\csv\t02-input-20260910.csv
+Encoding: UTF-8
+TrimFields: True
+FirstLineContainsColumnNames: True
+ColumnsSeparator: SystemDefault
+出力: CSVTable
+フィルター
+アクション: データ テーブルをフィルター処理
+入力: CSVTable
+条件:
+列／インデックス: 2
+演算子: Equal
+値: 対象
+MatchCase: True
+出力: FilteredDataTable
+CSV書出し
+アクション: CSV ファイルに書き込む
+入力 DataTable: FilteredDataTable
+出力ファイル: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t02-output-20260910.csv
+Encoding: UTF-8
+IncludeColumnNames: True
+IfFileExists: Overwrite
+ColumnsSeparator: SystemDefault
+3. 貼り付け用Robin
+
+対象サブフロー: メイン
+
+Plain Text
+1
+File.ReadFromCSVFile.ReadCSV CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\csv\\t02-input-20260910.csv''' Encoding: File.CSVEncoding.UTF8 TrimFields: True FirstLineContainsColumnNames: True ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault CSVTable=> CSVTable
+2
+Variables.FilterDataTable DataTable: CSVTable FilterParameters: { ^['RULE', 'COLUMN', 'OPERATOR', 'VALUE'], [$''''', 2, $'''Equal''', $'''対象'''] } MatchCase: True FilteredDataTable=> FilteredDataTable
+3
+File.WriteToCSVFile.WriteCSV VariableToWrite: FilteredDataTable CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t02-output-20260910.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: True IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault
+4
+`
+4. デザイナー上の確認方法
+
+アクション数は 3個 です。
+
+順序:
+
+CSV ファイルから読み取る
+データ テーブルをフィルター処理
+CSV ファイルに書き込む
+
+変数型:
+
+変数	型
+CSVTable	DataTable
+FilteredDataTable	DataTable
+
+確認ポイント:
+
+CSVTable が DataTable と認識されている
+FilteredDataTable が DataTable と認識されている
+CSV書出しの入力が文字列ではなく FilteredDataTable 参照になっている
+IncludeColumnNames=True
+IfFileExists=Overwrite
+Encoding=UTF8
+デザイナーに赤エラーが表示されない
+5. 保存・実行・出力照合
+フローを保存する。
+実行する。
+出力ファイル C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t02-output-20260910.csv が生成されることを確認する。
+出力CSVを開く。
+先頭行にヘッダーが存在することを確認する。
+Status 列が 対象 の行のみ残っていることを確認する。
+日本語、カンマを含む引用フィールド、二重引用符が保持されていることを確認する。
+入力ファイル C:\Users\yuuki\ai-prompts\catalog\fixtures\csv\t02-input-20260910.csv が変更されていないことを確認する。
+
+根拠: CSV読取り（ヘッダーあり）、FilterDataTable（列インデックス2=対象）、CSV書出し（UTF-8・列名含む・上書き）の3アクション組合せは catalog/flows/datatable-filter/roundtrip.robin と catalog/evidence/filter-t02-roundtrip2-run-2.json にて再貼付け・実行・期待値照合済みです。

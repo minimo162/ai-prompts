@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T01:48:59.0003665+09:00",
+  "flow_name": "RobinKnowledgeT10Final_20260910",
+  "source_robin": "catalog\\generated\\normal-chat-t10-20260910-final\\robin.txt",
+  "source_sha256": "3285b362d5537d9beb1ee0ba317a67709e6374f6dffacad074b499f150f69eba",
+  "source_bytes": 1751,
+  "action_count": 16,
+  "paste_confirmed": true,
+  "save_confirmed": true,
+  "save_evidence": "separate tools/Save-PadFlowLive invocation",
+  "execution_evidence": "evidence/normal-chat-t10-final-run.json"
+}

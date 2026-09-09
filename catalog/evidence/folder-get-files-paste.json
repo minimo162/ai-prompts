@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-09T16:52:28.5430135Z",
+  "flow_name": "RobinKnowledgeFolderGetFilesRT_20260910",
+  "source_robin": "catalog\\actions\\folder-get-files\\txt-files.robin",
+  "source_sha256": "85bcc7fae4cb143e906e9f85bf8775658ff8b2b1c2c41269321ae528879cd06c",
+  "source_bytes": 335,
+  "paste_confirmed": true,
+  "action_count_after_paste": 1,
+  "saved_confirmed": true,
+  "clipboard_restored": true,
+  "execution_requested": false
+}

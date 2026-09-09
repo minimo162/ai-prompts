@@ -1,0 +1,153 @@
+1. 前提・対象範囲・未確認点
+
+目的
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files 内の複数ファイルを一度ずつ処理し、.txt のみ UTF-8 で読み取る。
+
+対象フォルダー
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+
+入力
+
+Files（フォルダー内ファイル一覧）
+CurrentFile（For each の現在ファイル）
+FileContents（読み取ったテキスト）
+
+出力
+
+.txt ファイルのみ内容取得
+.csv と .md は対象外経路
+
+確認済み根拠
+
+フォルダー内ファイル取得（全ファイル）
+catalog/actions/folder-get-files/all-files-no-subfolders.robin
+verified: 貼付け・保存・実行済み
+For each
+catalog/actions/foreach/items-variable.robin
+verified: 構文採取済み
+ファイルパス変数からテキスト読取り（UTF-8）
+catalog/actions/file-read-text/variable-path-utf8.robin
+verified: Folder.GetFiles→For each→ReadText の組合せ実行済み
+ファイルパスに .txt を含む判定
+catalog/actions/if/current-file-contains-txt.robin
+verified: If構文採取済み
+
+未確認
+
+Else ブロックのRobin原文（ナレッジ未採取）
+.csv 判定用If原文（未採取）
+.md 判定用If原文（未採取）
+ファイル名取得専用アクション（未採取）
+拡張子取得専用アクション（未採取）
+
+そのため、確認済みRobinとして提示できるのは「.txt を含む場合に読取る経路」までです。
+.csv と .md を別経路へ分ける Robin は根拠不足のため生成しません。
+
+2. PADで先に作る設定
+フロー内で使用する変数
+変数名	型	生成元
+Files	List	Folder.GetFiles
+CurrentFile	File	For each
+FileContents	Text	File.ReadTextFromFile.ReadText
+取得対象フォルダー
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+
+想定サンプル
+.txt → UTF-8で読取対象
+.csv → 対象外
+.md → 対象外
+3. 貼り付け用Robin
+
+対象範囲: フォルダー取得 → For each → .txt 判定 → UTF-8読取り
+
+確認状態:
+
+Folder.GetFiles: 実行確認済み
+For each: 構文採取済み
+If Contains(.txt): 構文採取済み
+UTF-8読取り: 実行確認済み
+この4アクションの完全組合せは部分実行証拠あり（catalog/flows/t03-folder-foreach-read/partial.robin）
+Plain Text
+1
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+2
+LOOP FOREACH CurrentFile IN Files
+3
+IF Contains(CurrentFile, $'''.txt''', False) THEN
+4
+File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+5
+END
+6
+END
+4. デザイナー上の確認方法
+アクション順
+フォルダー内のファイルを取得
+For each
+If
+ファイルからテキストを読み取る
+変数確認
+Files が List
+CurrentFile が For each の現在要素
+FileContents が Text
+ブロック対応
+
+開始:
+
+LOOP FOREACH
+IF
+
+終了:
+
+END（If）
+END（For each）
+エラー確認
+
+以下が出なければ構文面は採取済み範囲と一致。
+
+未定義変数
+ブロック不一致
+型エラー
+5. 合成データでの照合手順
+保存
+
+フローを保存。
+
+実行
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+
+に以下を配置して実行。
+
+sample1.txt
+sample2.txt
+sample.csv
+sample.md
+期待結果
+.txt ファイル到達時のみ
+FileContents にUTF-8内容が格納される
+.csv
+条件不成立
+.md
+条件不成立
+再実行
+
+同じ入力で再実行し、
+
+例外が出ないこと
+.txt 内容が取得されること
+.csv と .md が読取りアクションへ到達しないこと
+
+を確認します。
+
+根拠ファイル
+
+catalog/actions/folder-get-files/all-files-no-subfolders.robin
+catalog/actions/foreach/items-variable.robin
+catalog/actions/if/current-file-contains-txt.robin
+catalog/actions/file-read-text/variable-path-utf8.robin
+catalog/flows/t03-folder-foreach-read/partial.robin
+catalog/evidence/t03-partial-run-1.json
+
+なお、.csv と .md を明示的な対象外経路（Elseや別If）へ分岐するRobin原文は、ナレッジ内に Else 構文の採取結果がないため未確認です。現時点では追加採取後でないと根拠付きRobinは作成できません。

@@ -20,7 +20,9 @@ PAD Robin 基礎（変数・テキスト・数値）
 - 数値0の設定は `SET NewVar2 TO 0`。文字列の引用符付き例と型が異なる。
 
 置換・分割・結合
-- 通常置換（id: text-replace-literal）: `Text.Replace.ReplaceText`、ComparisonType は `Text.TextComparisonType.CultureSensitive`。日本語→Englishを実行確認。原文: catalog/actions/text-replace/literal.robin。
+- 通常置換（id: text-replace-literal）: `Text.Replace.ReplaceText`。設定は入力変数`NewVar`、検索=`日本語`、IgnoreCase=False、置換=`English`、ActivateEscapeSequences=False、ComparisonType=`Text.TextComparisonType.CultureSensitive`、出力=`Replaced`。日本語→Englishを実行確認した。
+  - 左パネルからコピーした完全な原文: `Text.Replace.ReplaceText Text: NewVar TextToFind: $'''日本語''' IgnoreCase: False ReplaceWith: $'''English''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced`
+  - 原文ファイル: catalog/actions/text-replace/literal.robin。実行値と設定差分を保持し、`TextToFind`・`ReplaceWith`・出力変数名を推測で置き換えない。
 - 正規表現置換（id: text-replace-regex）: `Text.Replace.ReplaceTextWithRegex`、検索 `\\d+`、置換 `NUMBER`。入力欄ではバックスラッシュ1個。原文: catalog/actions/text-replace/regex.robin。
 - カスタムカンマ分割（id: text-split-comma）: `Text.SplitText.SplitWithDelimiter`、出力 TextList。原文: catalog/actions/text-split/custom-comma.robin。
 - 標準スペース分割（id: text-split-space）: `Text.SplitText.Split`、`Text.StandardDelimiter.Space`、回数1。原文: catalog/actions/text-split/standard-space.robin。
@@ -41,5 +43,15 @@ PAD Robin 基礎（変数・テキスト・数値）
 - 証拠: catalog/evidence/datetime-current-date-validation.json、catalog/evidence/datetime-current-date-run-1.json、catalog/evidence/datetime-current-date-run-2.json。
 - 未確認: 取得=現在の日時、タイムゾーンの別設定、日時加算・減算、日時書式化の別アクション。
 
+今回の追加採取: サブテキストの取得（Unicode混在）
+- UI名: サブテキストの取得、automation id: Text.GetSubtext。
+- 設定: 元のテキスト=`A日本語BC`、開始インデックス=`1`（文字の位置）、長さ=`3`（文字数）、生成された変数=`Subtext`、エラー発生時=既定。
+- 左パネルから追加してコピーした原文:
+  `Text.GetSubtext.GetSubtext Text: $'''A日本語BC''' CharacterPosition: 1 NumberOfChars: 3 Subtext=> Subtext`
+- 原文ファイル: catalog/actions/text-substring/mixed-index-length.robin（SHA-256: 4f1021aafc353edba483e83ea61c6dd93d3c7944ad7b4566049c50fe81e4f70c）。
+- 空の別フローへファイルから貼り付け、保存、再コピーした原文は同じSHA-256。元フローとRoundtripフローを各2回実行し、`Subtext=日本語` を確認した。
+- 証拠: catalog/evidence/text-substring-validation.json、catalog/evidence/text-substring-roundtrip-recopy.robin。
+- 未確認: 別の開始インデックス、長さを末尾までにする設定、空文字・範囲外インデックスのエラー境界。
+
 未観測
-真偽値の独立設定、減算、リスト項目の取出し、文字列切出し、取得=現在の日時、日時加算・日時書式化、別地域設定・桁区切りONは、このパッケージの確認済み例ではない。
+真偽値の独立設定、減算、リスト項目の取出し、取得=現在の日時、日時加算・日時書式化、別地域設定・桁区切りONは、このパッケージの確認済み例ではない。文字列切出しは上記の1設定のみ確認済みで、別モードは未確認。

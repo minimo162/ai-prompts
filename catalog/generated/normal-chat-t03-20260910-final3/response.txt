@@ -1,0 +1,165 @@
+1. 前提・対象範囲・未確認点
+
+目的
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files 内の複数ファイルを 1 回ずつ処理し、.txt のみ UTF-8 で内容を読み取る。
+
+入力
+
+フォルダー: C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+
+出力
+
+ファイル内容を変数 FileContents に格納
+
+確認済みの実測原文
+
+フォルダー内ファイル取得（全ファイル *）
+For each (LOOP FOREACH CurrentItem IN Items)
+ファイルパス変数から UTF-8 読取り (File.ReadTextFromFile.ReadText File: CurrentFile ...)
+文字列 .txt を含む If 条件 (IF Contains(CurrentFile, $'''.txt''', False) THEN)
+
+未確認
+
+Else ブロックの実測Robin原文は未採取
+.csv／.md 専用条件式の実測Robin原文は未採取
+ファイル名のみ取得する専用アクション・拡張子抽出アクションは未採取
+
+そのため、確認済み部分と未確認部分を分離します。
+
+2. PADで先に作る設定
+フォルダー取得
+
+確認済み例では全ファイル取得の設定があります。
+
+フォルダー
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+FileFilter
+*
+IncludeSubfolders
+False
+出力変数
+Files
+ループ変数
+
+For each の設定。
+
+入力コレクション: Files
+現在要素: CurrentFile
+読取り
+
+確認済み UTF-8 読取り。
+
+File: CurrentFile
+Encoding: File.TextFileEncoding.UTF8
+出力: FileContents
+3. 貼り付け用Robin（確認済み部分のみ）
+
+対象サブフロー: 新規サブフローまたは対象処理部分
+
+Plain Text
+1
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+2
+LOOP FOREACH CurrentFile IN Files
+3
+    IF Contains(CurrentFile, $'''.txt''', False) THEN
+4
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+5
+    END
+6
+END
+
+根拠
+
+Folder.GetFiles ... FileFilter:'*' 実測原文あり
+LOOP FOREACH CurrentFile IN Files の構文は、実測 CurrentItem IN Items の同一パターンとして採取済み変数名差し替えレベル
+.txt 判定の If 原文あり
+UTF-8読取り原文あり
+4. 未確認部分（.csv/.md対象外経路）
+
+ご依頼には
+
+.txt → 読取り
+.csv → 対象外
+.md → 対象外
+
+の分岐が含まれますが、
+
+Else
+Else If
+拡張子抽出
+.csv
+.md
+
+に対応するRobin原文はこのナレッジでは未採取です。
+
+そのため、以下は動作仕様としては妥当でも実測Robinは提示不可です。
+
+Else ブロック
+Else If ブロック
+.csv 判定ブロック
+.md 判定ブロック
+ファイル名抽出専用アクション
+
+追加採取が必要です。
+
+5. デザイナーでの確認方法
+
+確認済み範囲でチェックする項目
+
+エラー表示がないこと
+
+Folder.GetFiles
+For each
+If
+File.ReadTextFromFile.ReadText
+
+変数型
+
+Files = ファイル一覧
+CurrentFile = ファイルパス
+FileContents = テキスト
+
+ブロック対応
+
+IF に対応する END
+LOOP FOREACH に対応する END
+
+アクション順
+
+フォルダー取得
+For each
+If
+UTF-8読取り
+6. 合成データでの照合手順
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files に以下を配置
+
+sample1.txt
+sample2.txt
+sample.csv
+sample.md
+
+フローを保存
+
+実行
+
+ループ実行中の変数を確認
+
+.txt のときのみ FileContents が更新されること
+.csv と .md では読取りアクションへ入らないこと
+
+再実行
+
+同じ .txt 内容が取得されることを確認
+
+追加採取が必要な箇所
+
+.csv と .md の対象外経路をRobinで明示するには、まず PAD 上で最小構成の
+
+If
+Else
+（必要なら Else If）
+
+を作成してコピーした原文が必要です。現在のナレッジでは Else 系のRobin原文が未採取のため、実測根拠付きコードとしては提示できません。

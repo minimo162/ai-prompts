@@ -1,0 +1,108 @@
+1. 前提・対象範囲・未確認点
+
+目的: UTF-8テキストを読み込み、検索語 対象語 を通常置換で 置換後 に変換し、新しいUTF-8テキストとして保存するフロー案です。
+
+入力:
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+
+出力:
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt
+
+変数:
+
+FileContents（text）
+Replaced（text）
+
+置換方式:
+
+通常置換（正規表現ではない）
+大文字小文字無視=False
+CultureSensitive
+
+上書き:
+
+出力ファイルが存在する場合は上書き
+
+末尾改行:
+
+入力内容自身の末尾改行は保持
+依頼されていない追加改行は付与しないため AppendNewLine: False
+
+未確認点:
+
+以下の各アクション原文は実測済みですが、この「読込→置換→保存」の組合せ全体については資料中に実行証拠はありません。したがって「確認済み原文の組合せによるフロー案」であり、「今回条件での実行確認済み完成フロー」ではありません。根拠は PAD-Robin-Knowledge-Bundle のファイル読込、通常置換、変数参照によるUTF-8保存の各実測例です。
+2. PADで先に確認する設定
+
+メインフローへ以下3アクションを配置
+
+ファイルからテキストを読み取る
+テキストを置換する
+テキストをファイルに書き込む
+
+出力変数
+
+読取結果 → FileContents
+置換結果 → Replaced
+
+保存アクション設定
+
+エンコード: UTF-8
+ファイルが存在する場合: 既存の内容を上書きする
+新しい行を追加する: OFF
+
+根拠:
+
+読込: File.ReadTextFromFile.ReadText ... Encoding: File.TextFileEncoding.UTF8 の実測例。
+通常置換: Text.Replace.ReplaceText の実測例。
+UTF-8保存・追加改行なし: File.WriteText ... AppendNewLine: False ... Encoding: File.FileEncoding.UTF8 の実測例。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-20260910.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+4. デザイナー上の確認方法
+
+アクション順序:
+
+File.ReadTextFromFile.ReadText
+Text.Replace.ReplaceText
+File.WriteText
+
+変数確認:
+
+FileContents が text
+Replaced が text
+TextToWrite: Replaced が変数参照であり、$'''Replaced''' の文字列リテラルになっていないこと
+
+設定確認:
+
+置換は ReplaceText（通常置換）
+ReplaceTextWithRegex（正規表現置換）になっていないこと
+AppendNewLine: False
+UTF-8指定
+5. 合成データでの照合手順
+入力ファイルをバックアップせず読み取り専用で保持。
+フローを保存。
+実行。
+出力ファイル normal-chat-t01-output-20260910.txt を確認。
+以下を照合。
+対象語 のみが 置換後 に置換されている。
+対象外文字は変化していない。
+日本語・引用符・バックスラッシュ等が保持されている。
+改行位置が入力と一致する。
+入力に末尾改行がある場合は保持されている。
+AppendNewLine: False のため追加の末尾改行が付与されていない。
+再実行し、出力ファイルが上書きされることを確認する。
+根拠
+通常置換の実測原文: catalog/actions/text-replace/literal.robin。
+UTF-8読込の実測原文: catalog/actions/file-read-text/utf8.robin。
+UTF-8保存・変数参照・追加改行なしの実測原文: catalog/actions/file-write-text/variable-reference-no-append.robin。
+PAD環境: PAD 2.71.115.26224、日本語UI、Power Fx OFF。

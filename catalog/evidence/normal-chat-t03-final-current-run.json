@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-09T23:18:42.0981157Z",
+  "flow_name": "RobinKnowledgeT03LatestFinal_20260910",
+  "designer_pid": 24648,
+  "run_requested_at": "2026-09-09T23:18:36.7496893Z",
+  "status": "success",
+  "error_count": 0,
+  "states": [
+    {
+      "observed_at": "2026-09-09T23:18:39.2707710Z",
+      "status": "running",
+      "running": true,
+      "errors": -1,
+      "errors_known": false
+    },
+    {
+      "observed_at": "2026-09-09T23:18:42.0981157Z",
+      "status": "ready",
+      "running": false,
+      "errors": 0,
+      "errors_known": true
+    }
+  ],
+  "note": "T03 final current-bundle code executed in a dedicated PAD flow. Final FileContents variable preview is captured separately from the UI.",
+  "variable_preview": {
+    "current_item_last": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files\\t03-gamma.md",
+    "file_contents": "alpha 日本語",
+    "interpretation": "The last item is .md, while FileContents remains the prior .txt value; .csv/.md did not enter the ReadText action."
+  }
+}

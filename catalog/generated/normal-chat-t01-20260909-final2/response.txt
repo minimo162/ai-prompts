@@ -1,0 +1,176 @@
+1. 前提・対象範囲・未確認点
+
+目的
+UTF-8テキストファイル内の指定語だけを置換し、新しいUTF-8テキストとして保存するPADフロー案です。
+
+処理対象
+
+入力: UTF-8テキストファイル
+置換対象: 指定語のみ
+保持するもの:
+日本語
+' と " の引用符
+100%
+バックスラッシュ \
+改行
+対象外文字列
+出力: 新しいUTF-8テキストファイル
+
+確認済み範囲
+
+テキスト読取り: 「ファイルからテキストを読み取る」確認済み。
+通常置換: Text.Replace.ReplaceText 確認済み。
+UTF-8テキスト書出し: 「テキストをファイルに書き込む」確認済み。
+
+未確認
+
+入力ファイルパス
+出力ファイルパス
+実際の検索語と置換語
+
+そのため、以下は確認済みアクションを使った貼付け用テンプレートです。ユーザー環境の実パスと置換語へ置換してください。
+
+2. PADで先に作る設定
+入力ファイル
+
+例:
+
+Plain Text
+1
+C:\Work\Input.txt
+2
+``
+出力ファイル
+
+例:
+
+Plain Text
+1
+C:\Work\Output.txt
+置換内容
+
+例:
+
+項目	値
+検索語	対象語
+置換語	変換後語
+使用変数
+変数名	型
+FileContents	テキスト
+Replaced	テキスト
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+置換範囲
+
+C:\\Work\\Input.txt
+対象語
+変換後語
+C:\\Work\\Output.txt
+
+を実環境に合わせて変更してください。
+
+Plain Text
+robin は完全にはサポートされていません。構文ハイライトは Plain Text に基づいています。
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Work\\Input.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+ 
+3
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''変換後語''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+4
+ 
+5
+File.WriteText File: $'''C:\\Work\\Output.txt''' TextToWrite: Replaced AppendNewLine: True IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+根拠
+File.ReadTextFromFile.ReadText は確認済みのUTF-8読取り例を使用。PAD-Robin-Knowledge-Bundle 内の「ファイルからテキストを読み取る」。
+Text.Replace.ReplaceText は通常置換の確認済み原文を使用。
+File.WriteText はUTF-8・上書き保存の確認済み原文を使用。
+
+検証状態
+
+使用アクションはすべて実測ナレッジ内の確認済み構文。
+この組み合わせ自体はナレッジ内に完成例として掲載されていないため、「貼付け・実行未確認」のフロー案です。
+未掲載のアクションや推測した引数は使用していません。
+4. デザイナー上の確認方法
+アクション数
+
+期待値:
+
+ファイルからテキストを読み取る
+テキストを置換する
+テキストをファイルに書き込む
+
+合計 3 アクション
+
+変数型
+変数	期待型
+FileContents	テキスト
+Replaced	テキスト
+エラー確認
+赤いエラー表示がない
+保存可能
+FileContents が読取り結果を保持
+Replaced が置換後テキストを保持
+置換設定確認
+項目	値
+IgnoreCase	False
+ActivateEscapeSequences	False
+ComparisonType	Text.TextComparisonType.CultureSensitive
+
+これらは確認済み置換例と同じ設定です。
+
+5. 合成データでの保存・実行・照合手順
+入力ファイル例
+Plain Text
+1
+日本語
+2
+対象語 100%
+3
+'引用' "二重引用"
+4
+C:\sample
+5
+対象語
+6
+対象外語
+実行
+入力ファイルを保存
+フロー実行
+Output.txt を生成
+期待結果
+Plain Text
+1
+日本語
+2
+変換後語 100%
+3
+'引用' "二重引用"
+4
+C:\sample
+5
+変換後語
+6
+対象外語
+7
+``
+照合ポイント
+「対象語」だけが置換されている
+「対象外語」は変更されていない
+日本語が保持されている
+% が欠落していない
+' と " が保持されている
+C:\sample のバックスラッシュが保持されている
+改行数が維持されている
+出力ファイルがUTF-8で保存されている
+再実行確認
+
+2回目実行後も:
+
+Output.txt が上書きされる
+同じ内容になる
+対象外文字が増減しない
+
+を確認してください。これは確認済みの File.IfFileExists.Overwrite 設定に基づく期待動作です。

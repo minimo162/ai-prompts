@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-10T01:11:48.6935256+09:00",
+  "flow_name": "RobinKnowledgeT10GeneratedV6_20260910",
+  "run_status": "success",
+  "ready_observed": true,
+  "action_count": 16,
+  "variable_previews": [
+    "T10-Changed",
+    "Excel インスタンス",
+    "CopilotOffice 246  ",
+    "PowerPoint instance",
+    "1",
+    "CopilotOffice 246 ",
+    "Word インスタンス"
+  ],
+  "outputs": [
+    {
+      "path": "catalog\\evidence\\copilot-excel-t10-v6.xlsx",
+      "bytes": 8933,
+      "sha256": "9085504b69618f246b57f36ab2376f62782831bf13991f02eef61a6dce5b470e"
+    },
+    {
+      "path": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-word.docx",
+      "bytes": 13652,
+      "sha256": "ad0aa788224000b426f5628dc56d59de90e9da548ffa608af10f3197021e201b"
+    },
+    {
+      "path": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-powerpoint.pptx",
+      "bytes": 34120,
+      "sha256": "defedc21f801311dc3ff72656279727d39e95f82232de0af9bd8a75924d489f7"
+    }
+  ],
+  "excel_a1": "T10-Changed",
+  "word_text": "CopilotOffice 246",
+  "powerpoint_text": "CopilotOffice 246",
+  "scope_check": "only Excel WriteCell literal and Excel SaveAs filename changed",
+  "execution_evidence": "manual capture after Run-PadFlowLive wait exceeded due virtualized action list"
+}

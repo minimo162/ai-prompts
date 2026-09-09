@@ -1,0 +1,65 @@
+1. 前提・対象範囲・未確認点
+
+目的
+PDFの2ページ目だけを対象にテキストを抽出し、UTF-8テキストとして保存します。
+
+入力
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\pdf\source-a.pdf
+
+出力
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-output.txt
+
+前提
+
+入力PDFは変更しません。
+抽出対象ページは 2ページのみ（FromPageNumber=2, ToPageNumber=2） とします。
+ページ境界や改行、抽出順は整形しません。PDF抽出アクションの出力をそのまま保存します。
+PDFテキスト抽出（ページ範囲指定）と、テキスト変数をUTF-8で保存する各アクションのRobin原文はナレッジに存在します。
+
+未確認
+
+この2アクションを組み合わせた完成フローの再貼付け・実行証拠は、提示ナレッジ内にはありません。
+実測済みなのは「PDFからテキスト抽出（ページ範囲指定）」と「テキスト変数を書き込む（UTF-8）」の各アクション原文です。
+2. PADで先に確認する設定・依存
+PDFアクション「PDF からテキストを抽出」が利用可能であること。
+出力変数名を ExtractedPDFText とすること。
+テキスト書込みアクションの設定
+エンコード: UTF-8
+ファイル存在時: 上書き
+新しい行を追加する: False
+出力先フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence\ が存在すること。
+3. 貼り付け用Robin
+
+対象: メインフローへ挿入
+
+Plain Text
+1
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 2 DetectLayout: False ExtractedText=> ExtractedPDFText
+2
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-output.txt''' TextToWrite: ExtractedPDFText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+4. デザイナー上の確認方法
+アクション数: 2
+順序:
+PDF からテキストを抽出
+テキストをファイルに書き込む
+変数:
+ExtractedPDFText : PDF抽出結果のテキスト
+エラー確認:
+ExtractedPDFText が未定義になっていないこと
+出力ファイルパスが赤エラー表示になっていないこと
+PDFアクションが FromPageNumber: 2、ToPageNumber: 2 になっていること
+5. 保存・実行・照合手順
+フローを保存。
+実行。
+normal-chat-t07-output.txt が生成されることを確認。
+UTF-8で開き、内容を確認。
+抽出結果にページ2の識別文字が含まれることを確認。
+出力内容がページ2由来であることを確認し、ページ1や他ページの識別文字が不要に混在していないか確認。
+再実行しても入力PDF source-a.pdf が変更されていないことを確認。
+
+根拠
+
+PDFページ範囲抽出の実測原文: Pdf.ExtractTextFromPDF.ExtractTextFromPageRange ... FromPageNumber ... ToPageNumber ...
+UTF-8・上書き・テキスト変数参照による保存の実測原文: File.WriteText ... TextToWrite: <変数> ... Encoding: File.FileEncoding.UTF8

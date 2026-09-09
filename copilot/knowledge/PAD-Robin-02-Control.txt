@@ -12,11 +12,25 @@ PAD Robin 制御・ブロック
   `END`
 - 実行結果: 固定値1を加算する例は NewVar2=3、LoopIndexを加算する例は NewVar2=6、終了後のLoopIndexは4。初期化をループ内へ置くと毎回リセットされる。
 - 検証証拠: catalog/evidence/bounded-loop-variables.json、catalog/evidence/bounded-loop-sum-variables.json。
-- 未確認: 下降ループ、可変範囲、ゼロ増分、For each、ループ脱出。
+- 未確認: 下降ループ、可変範囲、ゼロ増分、ループ脱出。
+
+For each（テキスト・Items変数）
+- UI名: For each、入力欄へ既存リスト変数`Items`、保存先変数`CurrentItem`を設定した。
+- 実測Robin: `LOOP FOREACH CurrentItem IN Items`。
+- 原文ファイル: catalog/actions/foreach/items-variable.robin（SHA-256: 38a2be31b6aa79dde80309d0a606093de36165968a7449ad487c5a4674bbfc27）。左パネルから追加し、保存後にコピーした。リスト変数の作成・要素追加を含む実行組合せは別途確認する。
+
+If（For eachのCurrentItem列値との比較）
+- UI名: If、最初のオペランドへ`%CurrentItem[Status]%`、演算子=と等しい、2番目のオペランドへ`対象`を設定した。
+- 実測Robin: `IF CurrentItem[Status] = $'''対象''' THEN`。PADが自動生成するブロック終端は、貼付け先の`END`として保持する。
+- 原文ファイル: catalog/actions/if/current-item-status-equals.robin（SHA-256: 12a2c5b7bac32d98291560ae9bd1e170f256c5efdc35d88d47b0e6ad8987a35a）。条件の構文を採取したが、CSV読取りとの組合せ実行は未確認。
+
+If（ファイルパスに拡張子文字列を含む判定）
+- 最初のオペランドへ既存ファイル変数`%CurrentFile%`、演算子「次を含む」、2番目のオペランド`.txt`、大文字小文字区別=Falseを設定した。
+- 実測Robin: `IF Contains(CurrentFile, $'''.txt''', False) THEN`。原文`catalog/actions/if/current-file-contains-txt.robin`（SHA-256: f634ff144bee7dd5d4faa9cf81f2d42ac484c1c8e2186d1436ceb79d5e27061c）。拡張子判定の開始行として採取したが、Else側の実行は未確認。
 
 変数の加算
 - `Variables.IncreaseVariable` の固定値1とループ変数の2設定を別例として収録している。数値変数を事前に定義し、型を文字列と混ぜない。
 
 未採取の制御
-- If／Else、エラー処理、For each、ループ脱出、サブフロー呼出しの今回用のRobin原文はまだない。表示名を観測できたことだけで、設定・コピー・再貼付け・実行済みとはしない。
+- Else、エラー処理、ループ脱出、サブフロー呼出しの今回用のRobin原文はまだない。For eachとIfは上記の1設定を採取したが、完全な組合せ実行は未確認。表示名を観測できたことだけで、未採取構文を補わない。
 - 未観測のブロック終端や引数をLoop例から類推して生成しない。必要な場合は、PADで最小ブロックを追加してコピーし、開始・終了・依存・失敗経路を別項目として記録する。

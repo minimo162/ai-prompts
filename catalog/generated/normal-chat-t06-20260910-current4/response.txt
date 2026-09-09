@@ -1,0 +1,78 @@
+1. 前提・対象範囲・未確認点
+
+目的
+合成Word C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx を ReadOnly=False（編集可能） で開き、本文中の OfficeCatalog を T06Replaced に置換し、C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx へ別名保存する。元ファイルは変更しない。
+
+入力
+
+Word文書: C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+
+出力
+
+Word文書: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx
+
+成功条件
+
+保存先文書では OfficeCatalog → T06Replaced に置換されている。
+指定文字列以外の本文は保持される。
+元ファイル word-catalog.docx は変更されない。
+
+根拠
+
+編集可能で既存Wordを開く: catalog/actions/word-launch/open-editable.robin（実測原文あり）
+Word文書内の検索置換: catalog/actions/word-replace/all-literal.robin
+Word別名保存: catalog/actions/word-save/as-docx-extension.robin
+Word終了: catalog/actions/word-close/no-save.robin
+これら個別アクションの実測原文は記録済み。
+今回の組合せ（ReadOnly=Falseで開く → 置換 → 別名保存 → 終了）について、貼付け・実行・期待値照合済みの証拠はナレッジ中に見当たりません。したがって「確認済み原文の組合せ案」であり、実行済み完成例とは表記しません。
+2. PADで先に確認する設定・依存
+Wordがインストールされていること。
+入力文書が存在すること。
+出力先フォルダー
+C:\Users\yuuki\ai-prompts\catalog\evidence が存在すること。
+Wordインスタンス変数
+WordInstance
+保存形式
+DocumentFormat: Word.WordFormat.FromExtension
+元ファイル保護のため、保存は必ず別名保存を使用すること。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+2
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+3
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t06-final.docx'''
+4
+Word.CloseWord.Close Instance: WordInstance
+4. デザイナー上の確認方法
+アクション数: 4
+順序:
+Word を起動する（既存文書を開く、ReadOnly=False）
+Word 文書内の単語を検索して置換する
+Word を保存（別名保存）
+Word を閉じる
+変数型:
+WordInstance = Wordインスタンス
+ブロック対応:
+開始／終了ブロックなし
+条件分岐なし
+ループなし
+デザイナー上でエラー表示がないことを確認する。
+5. 保存・実行・照合手順
+空フローへ上記Robinを貼り付ける。
+保存する。
+フローを実行する。
+出力ファイル
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx を開く。
+以下を確認する。
+OfficeCatalog が T06Replaced に置換されている。
+置換対象以外の本文が保持されている。
+元ファイル
+C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx を開き、
+OfficeCatalog のままであること
+内容が変更されていないこと を確認する。
+再実行する場合は、出力ファイルの上書き挙動を実環境で確認する。ナレッジにはWord別名保存時の衝突設定差分の実測はありません。

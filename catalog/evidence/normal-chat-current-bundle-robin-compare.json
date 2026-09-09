@@ -1,0 +1,49 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-09T19:46:19.4714307Z",
+    "current_bundle_path":  "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "current_bundle_sha256":  "5a9b9c33efa402b16d4af82e27c8e25e7ce49a9e9dd52696765279189997f1be",
+    "note":  "Current-bundle Copilot responses were regenerated. For T05-T08 the Robin text is byte-for-byte identical to the prior PAD-run Robin; PAD execution artifacts are referenced separately and were not replayed solely due to the bundle refresh.",
+    "cases":  [
+                  {
+                      "case":  "T05",
+                      "prior_pad_run_robin":  "catalog/generated/normal-chat-t05-20260910-final-v2/robin.txt",
+                      "current_bundle_robin":  "catalog/generated/normal-chat-t05-20260910-final-v3/robin.txt",
+                      "prior_robin_sha256":  "fe94c4a4bb301c03526a700475cca2cc9406703ca6ef3d454a8961aedfbd6188",
+                      "current_robin_sha256":  "fe94c4a4bb301c03526a700475cca2cc9406703ca6ef3d454a8961aedfbd6188",
+                      "exact_match":  true,
+                      "prior_robin_chars":  562,
+                      "current_robin_chars":  562
+                  },
+                  {
+                      "case":  "T06",
+                      "prior_pad_run_robin":  "catalog/generated/normal-chat-t06-20260910-final/robin.txt",
+                      "current_bundle_robin":  "catalog/generated/normal-chat-t06-20260910-current/robin.txt",
+                      "prior_robin_sha256":  "753c40c04bea2850b632f719256539d6f9a4524f0d0e67eaa84d60954a2cdeaa",
+                      "current_robin_sha256":  "753c40c04bea2850b632f719256539d6f9a4524f0d0e67eaa84d60954a2cdeaa",
+                      "exact_match":  true,
+                      "prior_robin_chars":  592,
+                      "current_robin_chars":  592
+                  },
+                  {
+                      "case":  "T07",
+                      "prior_pad_run_robin":  "catalog/generated/normal-chat-t07-20260910-final/robin.txt",
+                      "current_bundle_robin":  "catalog/generated/normal-chat-t07-20260910-current/robin.txt",
+                      "prior_robin_sha256":  "47a33ef2067bd37009187758e16fc36daa0f5447093b51e83e984e1d8fd484c9",
+                      "current_robin_sha256":  "47a33ef2067bd37009187758e16fc36daa0f5447093b51e83e984e1d8fd484c9",
+                      "exact_match":  true,
+                      "prior_robin_chars":  446,
+                      "current_robin_chars":  446
+                  },
+                  {
+                      "case":  "T08",
+                      "prior_pad_run_robin":  "catalog/generated/normal-chat-t08-20260910-final/robin.txt",
+                      "current_bundle_robin":  "catalog/generated/normal-chat-t08-20260910-current/robin.txt",
+                      "prior_robin_sha256":  "59af898c37c5db7b601c2162a89a1b1d6f698c96c76bda8471256ed5d3c161a5",
+                      "current_robin_sha256":  "59af898c37c5db7b601c2162a89a1b1d6f698c96c76bda8471256ed5d3c161a5",
+                      "exact_match":  true,
+                      "prior_robin_chars":  183,
+                      "current_robin_chars":  183
+                  }
+              ]
+}

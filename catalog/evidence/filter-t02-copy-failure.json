@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T00:44:38.4319158+09:00",
+  "flow_name": "RobinKnowledgeFilterDataTableValid_20260910",
+  "action": "Variables.FilterDataTable",
+  "configuration": {
+    "data_table": "CSVTable",
+    "operator": "と等しい (=)",
+    "column": "Status",
+    "output": "FilteredDataTable",
+    "value": "対象"
+  },
+  "copy_attempts": [
+    "Ctrl+C via SelectionItemPattern",
+    "context-menu ProgramItemContextMenuItemCopy"
+  ],
+  "copy_status": "unconfirmed",
+  "context_menu_copy_enabled": false,
+  "reason": "PAD UI exposed configured action but copy control remained disabled; no Robin raw was promoted into knowledge",
+  "next_step": "re-observe copy route or add valid filter action through a complete flow"
+}

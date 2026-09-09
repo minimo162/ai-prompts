@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-09T14:45:20.1553432Z",
+  "flow_name": "RobinKnowledgeT01Generated_20260909",
+  "source_robin": "catalog\\generated\\normal-chat-t01-20260909-gpt56-variable\\robin.txt",
+  "source_sha256": "b1f6000fa4702fb086ffb1e0077a740994bb7e3ad82d6e755a800a4bde2692dc",
+  "source_bytes": 638,
+  "paste_confirmed": true,
+  "action_count_after_paste": 3,
+  "saved_confirmed": true,
+  "clipboard_restored": true,
+  "execution_requested": false
+}

@@ -1,0 +1,95 @@
+1. 前提・対象範囲・未確認点
+
+目的
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files 内の複数ファイルを 1 回ずつ処理し、.txt のみ UTF-8 で内容を読み取るフロー案です。
+
+入力
+
+対象フォルダー: C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+対象拡張子: .txt
+対象外: .csv、.md
+
+出力
+
+読み取ったテキストを FileContents へ格納
+
+確認済み
+
+フォルダー内ファイル取得（全ファイル *）
+For each 構文 (LOOP FOREACH CurrentItem IN Items)
+ファイルパスに .txt を含む条件式 (IF Contains(...))
+UTF-8 テキスト読取り (File.ReadTextFromFile.ReadText)
+Folder.GetFiles → LOOP FOREACH → UTF-8読取り の部分組合せ実行
+
+未確認
+
+Else の Robin 原文
+If ブロック終端の採取済み原文
+For each ブロック終端の採取済み原文
+ファイル名取得専用アクション
+拡張子抽出専用アクション
+
+そのため、以下の Robin は確認済み原文だけを並べた部分フローです。.csv と .md を対象外経路へ振り分けるための Else 側はナレッジ未採取です。
+
+2. PADで先に作る設定
+使用変数
+変数	型	根拠
+Files	ファイル一覧	Folder.GetFiles 出力
+
+CurrentFile	ファイルパス	For each 現在要素
+
+FileContents	テキスト	UTF-8読取り出力
+対象フォルダー
+Plain Text
+1
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+期待する挙動
+フォルダー内の全ファイル取得
+1ファイルずつ For each
+パスに .txt を含む場合のみ読取り
+読取りエンコードは UTF-8
+.csv と .md は読取り処理へ進まない
+3. 貼り付け用Robin（確認済み原文のみ）
+
+状態: 一部実測済み原文の組合せ。
+未採取の Else・ブロック終端は含めていません。完成済みフローとしては扱いません。
+
+Plain Text
+1
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailO*AccessDenied: True SortBy1: Folder*SortBy.NoSort SortDescending1: Fal*e SortBy2: Folder.SortBy.NoSort So*tDescending2: False SortBy3: Folde*.SortBy.NoSort SortDescending3: Fa*se Files=> Files
+2
+LOOP FOREACH Curr*ntFile IN Files
+3
+IF Contains(Curren*File, $'''.txt''', False) THEN
+4
+Fil*.ReadTextFromFile.ReadText File: C*rrentFile Encoding: File.TextFileE*coding.UTF8 Content=> FileContents*
+
+根拠
+
+Folder.GetFiles 全ファイル取得:catalog/actions/folder-get-files/all-files-no-subfolders.robin
+LOOP FOREACH CurrentFile IN Files: catalog/flows/t03-folder-foreach-read/partial.robin および For each 採取原文
+.txt 判定: catalog/actions/if/current-file-contains-txt.robin
+UTF-8読取り: catalog/actions/file-read-text/variable-path-utf8.robin
+4. デザイナー上の確認方法
+Robin を貼り付ける。
+デザイナーで Files、CurrentFile、FileContents の型解決を確認する。
+For each ブロックと If ブロックが正常表示されるか確認する。
+Else 経路を作成する場合は、PAD上で最小構成の
+If
+Else
+End を作成し、コピーした Robin 原文を追加採取する。現在のナレッジでは Else 原文未確認。
+5. 合成データでの保存・実行・照合
+
+推奨確認手順:
+
+fixtures/files に
+sample1.txt
+sample2.csv
+sample3.md を配置。
+フロー保存。
+実行。
+.txt 処理時のみ FileContents に内容が入ることを確認。
+.csv と .md が読取りアクションへ到達しないことを確認。
+実行後、最後に処理された .txt の内容が FileContents に格納されていることを確認。
+
+なお、.csv と .md を明示的に対象外経路へ分岐する Else ブロックの Robin 原文は、現在の採取ナレッジには存在しません。 完全な貼付け用フローにするには、If/Else の最小サンプルを PAD で追加してコピーした原文の採取が必要です。

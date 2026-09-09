@@ -1,0 +1,158 @@
+1. 前提・対象範囲・未確認点
+
+目的: 日本語・引用符・100%・バックスラッシュを含む文字列について、指定語だけを置換し、対象外文字・改行を保持したまま新しいUTF-8テキストへ保存するフロー案です。
+
+ただし、添付されたナレッジで実測・原文確認できたのは次のみです。
+
+ファイルからテキストを読み取る（UTF-8） ✅
+テキストを置換する（通常置換） ✅
+変数の設定（特殊文字を含む文字列例） ✅
+
+一方で、
+
+テキストをファイルへ書き込む
+テキストファイル保存時のUTF-8指定
+
+については、このナレッジ結合版内にRobin原文・再貼付け・実行証拠がありません。
+そのため、保存アクションのRobinを推測生成できません。
+
+2. PADで先に確認・作成する設定
+入力
+項目	内容
+入力ファイル	UTF-8テキスト
+検索文字列	置換対象の語
+置換文字列	新しい語
+変数
+変数名	型	用途
+FileContents	文字列	読み込み結果
+ReplacedText	文字列	置換結果
+保存処理
+
+未確認。
+
+ナレッジ内には「テキストを書き込む」アクションのRobin原文が存在しないため、保存部分は追加採取が必要です。
+
+3. 貼り付け用Robin
+対象サブフロー
+
+置換処理サブフロー
+
+置換範囲
+
+ファイル読取り ～ 置換結果生成まで
+
+JSON
+robin は完全にはサポートされていません。構文ハイライトは JSON に基づいています。
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Temp\\input.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''置換対象語''' IsRegEx: False IgnoreCase: False ReplaceWithText: $'''置換後語''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> ReplacedText
+根拠
+
+ファイルからテキストを読み取る（UTF-8）
+
+catalog/actions/file-read-text/utf8.robin
+確認状態: 実行証拠あり
+
+テキストを置換する（通常置換）
+
+catalog/actions/text-replace/literal.robin
+ComparisonType = Text.TextComparisonType.CultureSensitive
+実行確認あり
+
+特殊文字を含む文字列
+
+日本語 100%% '引用' "二重引用" C:\\sample
+エスケープ保持の実測あり
+4. デザイナー上の確認方法
+
+確認済み範囲としては次を確認します。
+
+アクション数
+
+2アクション
+
+順序
+
+ファイルからテキストを読み取る
+テキストを置換する
+
+変数型
+
+FileContents : 文字列
+ReplacedText : 文字列
+
+エラー確認
+
+赤いエラー表示がないこと
+TextToFind
+ReplaceWithText
+FileContents
+ReplacedText が未定義になっていないこと
+
+実行結果
+
+FileContents に元テキスト全体が入ること
+ReplacedText に指定語のみ置換された結果が入ること
+5. 合成データでの照合手順
+
+入力例
+
+Plain Text
+1
+日本語
+2
+対象語
+3
+100%
+4
+'引用'
+5
+"二重引用"
+6
+C:\sample
+
+検索文字列
+
+Plain Text
+1
+対象語
+
+置換文字列
+
+Plain Text
+1
+変換後
+
+期待結果
+
+Plain Text
+1
+日本語
+2
+変換後
+3
+100%
+4
+'引用'
+5
+"二重引用"
+6
+C:\sample
+7
+``
+
+確認項目
+
+日本語が保持される
+100% が変化しない
+'引用' が変化しない
+"二重引用" が変化しない
+C:\sample が変化しない
+改行数が保持される
+指定語だけが置換される
+未確認・BLOCKED
+
+「新しいUTF-8テキストへ保存」のRobin原文は、添付ナレッジ内に確認済み資料がありません。したがって保存アクションのRobinは生成できません。
+
+再開条件は、PADで テキストを書き込む（または同等の保存アクション） を 1 アクションだけ追加し、そのアクションをコピーしたRobin原文を提示いただくことです。その原文を根拠に、保存まで含めた完成版フローを作成できます。

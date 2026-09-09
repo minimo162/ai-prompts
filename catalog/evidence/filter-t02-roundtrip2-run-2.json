@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-09T21:10:00.5786173Z",
+  "flow_name": "RobinKnowledgeT02FilterRoundtrip2_20260910",
+  "designer_pid": 58632,
+  "run_requested_at": "2026-09-09T21:09:52.7915456Z",
+  "started": true,
+  "status": "success",
+  "error_count": 0,
+  "output_path": "catalog/evidence/normal-chat-t02-output-20260910.csv",
+  "output_bytes": 73,
+  "output_sha256": "8f0748cc4d149228331dfacc0a5c46e117270a7e9dee564c4f631924142cf7d3",
+  "output_text": "﻿ID,Name,Status\r\n1,\"日本語,引用\",対象\r\n3,\"二重\"\"引用\",対象",
+  "expected_text": "verified separately from the fixed fixture",
+  "output_matches_expected": null,
+  "source_path": "catalog/fixtures/csv/t02-input-20260910.csv",
+  "source_sha256": "978581e03c1c9f6283ee7aec3269ef66a8105a8a596c3ebd4ba5fee7fe79a11f",
+  "states": [
+    {
+      "observed_at": "2026-09-09T21:09:59.2344865Z",
+      "status": "parsing",
+      "running": false,
+      "errors": -1,
+      "errors_known": false,
+      "output_exists": true
+    },
+    {
+      "observed_at": "2026-09-09T21:10:00.5762932Z",
+      "status": "ready",
+      "running": false,
+      "errors": 0,
+      "errors_known": true,
+      "output_exists": true
+    }
+  ],
+  "run_number": 2,
+  "output_logical_matches_expected": true,
+  "source_sha256_after_run": "978581e03c1c9f6283ee7aec3269ef66a8105a8a596c3ebd4ba5fee7fe79a11f",
+  "source_matches_fixed_fixture": true,
+  "output_encoding": "UTF-8 BOM"
+}

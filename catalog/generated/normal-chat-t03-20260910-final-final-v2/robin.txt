@@ -1,0 +1,6 @@
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+LOOP FOREACH CurrentItem IN Files
+IF Contains(CurrentItem, $'''.txt''', False) THEN
+File.ReadTextFromFile.ReadText File: CurrentItem Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+END
+END

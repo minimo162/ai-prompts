@@ -1,0 +1,52 @@
+1. 前提・対象範囲・未確認点
+
+目的
+UTF-8テキストを読み込み、検索語 対象語 を置換語 置換後 に通常置換し、UTF-8テキストとして新規保存します。
+
+入力
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+
+出力
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260909.txt
+
+変数
+
+FileContents（テキスト）
+Replaced（テキスト）
+
+前提
+
+PAD 2.71.115.26224
+日本語UI
+Power Fx OFF
+UTF-8読取り
+通常置換（正規表現ではない）
+
+未確認点
+
+この3アクションの組合せ自体は、添付ナレッジ内で「再貼付け・実行・期待値照合済み」の完成例としては掲載されていません。
+ただし、各アクションのRobin原文と設定は確認済みです。
+2. PADで先に確認する設定・依存
+読取り
+アクション: 「ファイルからテキストを読み取る」
+エンコード: UTF-8
+出力変数: FileContents
+置換
+アクション: 「テキストを置換する」
+モード: 通常置換
+検索文字列: 対象語
+置換文字列: 置換後
+IgnoreCase: False
+ActivateEscapeSequences: False
+ComparisonType: CultureSensitive
+出力変数: Replaced
+保存
+アクション: 「テキストをファイルに書き込む」
+出力先: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260909.txt
+エンコード: UTF-8
+ファイル存在時: 上書き
+AppendNewLine: False
+
+末尾改行保持と不要な

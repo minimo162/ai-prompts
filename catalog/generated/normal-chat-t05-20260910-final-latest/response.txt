@@ -1,0 +1,64 @@
+1. 前提・対象範囲・未確認点
+
+目的
+既存Excel C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx を ReadOnly=False で開き、B2セルのみ に T05-Changed を書き込み、別名で C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-final.xlsx として保存します。
+
+対象範囲
+
+編集可能な既存Excel起動
+単一セル書込み（B2）
+xlsx別名保存
+Excel終了
+
+未確認点
+
+ナレッジには「既存Excelを編集可能で開く」「セル書込み」「xlsx別名保存」「終了」の個別実測原文があります。
+この4アクションを今回のパス・セル座標で組み合わせた再貼付け／実行証跡は添付ナレッジ内にはありません。したがって、以下は確認済み原文の組合せ案であり、この入力ファイルに対する実行済み証拠ではありません。
+シート選択構文は未採取のため使用していません。観測済みのセル指定方式のみ使用しています。
+2. PADで先に確認する設定・依存
+入力ファイル
+C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx
+出力ファイル
+C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-final.xlsx
+ExcelがB2を書込み可能な状態で開けること
+出力パスへの保存権限があること
+A1やその他セルはフロー内で参照・更新しないこと
+変数は ExcelInstance のみ使用
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: 新規挿入
+
+Plain Text
+1
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance
+2
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T05-Changed''' Column: $'''B''' Row: 2
+3
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-final.xlsx'''
+4
+Excel.CloseExcel.Close Instance: ExcelInstance
+4. デザイナー上の確認方法
+
+根拠（添付ナレッジ）:
+
+編集可能な既存Excel起動: Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess ... ReadOnly: False 実測原文あり。catalog/actions/excel-launch/open-editable.robin。
+セル書込み: Excel.WriteToExcel.WriteCell 実測原文あり。
+xlsx別名保存: Excel.SaveExcel.SaveAs ... Excel.ExcelFormat.OpenXmlWorkbook 実測原文あり。
+Excel終了: Excel.CloseExcel.Close 実測原文あり。
+
+確認項目:
+
+アクション数が4個であること
+順序が「起動 → 書込み → SaveAs → Close」であること
+ExcelInstance が起動アクションで生成され、その後3アクションで参照されていること
+デザイナー上でエラー表示が付いていないこと
+5. 保存・実行・照合手順
+空フローへ上記Robinを貼り付ける。
+保存後、再コピーしてパス・セル座標・ReadOnly: False が保持されていることを確認する。
+実行する。
+C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-final.xlsx が生成されていることを確認する。
+出力ブックを開き、B2 = T05-Changed を確認する。
+A1およびその他無関係なセルが元ファイルと同じ内容であることを確認する。
+元ファイル excel-catalog.xlsx を開き、B2が変更されていないことを確認する。
+再実行時は出力ファイルの上書き挙動を実環境で確認する。ナレッジ内にはこのSaveAs経路の衝突設定採取はありません。

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-09T22:55:35.511Z",
+  "case": "T10-independent",
+  "bundle_context_sha256": "bb93fff3d910be25f7836072616d905540bcc041f78063dd4db012ffa51e7ebc",
+  "result": "catalog/generated/normal-chat-t10-20260910-independent-strict3/result.json",
+  "model": "GPT 5.6 Think Deeper",
+  "attachment_input_mode": "preexisting_cdp_input",
+  "attachment_count": 1,
+  "body_match": true,
+  "sent": true,
+  "response_observed": true,
+  "response_format": "code_only_no_fence",
+  "robin_sha256": "3285b362d5537d9beb1ee0ba317a67709e6374f6dffacad074b499f150f69eba",
+  "prior_pad_run_robin": "catalog/generated/normal-chat-t10-20260910-final-independent-v2/robin.txt",
+  "prior_pad_run_robin_sha256": "3285b362d5537d9beb1ee0ba317a67709e6374f6dffacad074b499f150f69eba",
+  "logical_robin_match": true,
+  "pad_execution_evidence": "catalog/evidence/normal-chat-t10-independent-run.json",
+  "note": "The independent final chat returned the 16 Robin lines as the entire response without a Markdown fence. The code was stored unchanged; it matches the prior independent PAD-run Robin byte-for-byte."
+}

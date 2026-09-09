@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-09",
+  "flow_name": "RobinKnowledgeTextWrite_20260909",
+  "attempt": "literal-100-percent",
+  "input_observation": "日本語・対象語・100%・引用符・バックスラッシュを入力",
+  "designer_status": "Flow_status_errors",
+  "execution_enabled": false,
+  "success": false,
+  "raw_copied": false,
+  "reason": "100%をそのまま入力した試行はPADデザイナーで設計エラーになった。失敗フローを保持し、100%%を入力する新しい専用フローで再採取した。"
+}

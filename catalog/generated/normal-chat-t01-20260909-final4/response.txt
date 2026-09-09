@@ -1,0 +1,90 @@
+1. 前提・対象範囲・未確認点
+
+目的
+UTF-8テキストを読み込み、文字列 対象語 を文字列 置換後 に通常置換し、UTF-8テキストとして新規出力するフロー案です。
+
+入力
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+
+出力
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260909.txt
+
+成功条件
+
+対象語 のみが 置換後 に置換される。
+改行・特殊文字・対象外文字は保持される。
+出力ファイルは UTF-8 で保存される。
+
+根拠
+
+「ファイルからテキストを読み取る」実測原文: PAD-Robin-03-Files.txt 内の file-read-text-utf8 例。
+「通常置換」実測原文: PAD-Robin-01-Basics.txt 内の text-replace-literal 例。
+「テキストをファイルに書き込む（UTF-8・上書き）」実測原文: PAD-Robin-03-Files.txt。
+
+検証状態
+
+各アクション単体の原文・再貼付け・実行証拠はナレッジに存在。
+今回の3アクション組合せは、添付ナレッジ内に「同一フローとして再貼付け・実行済み」の証拠は見当たりません。したがって確認済み原文の組合せ案であり、完成・実行済みとは扱いません。
+2. PADで先に確認する設定・依存
+
+入力ファイル
+C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+
+出力ファイル
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260909.txt
+
+使用変数
+
+FileContents（テキスト）
+Replaced（テキスト）
+
+置換設定
+
+検索語: 対象語
+置換語: 置換後
+通常置換
+IgnoreCase=False
+ActivateEscapeSequences=False
+ComparisonType=Text.TextComparisonType.CultureSensitive
+
+書き込み設定
+
+エンコード: UTF-8
+ファイル存在時: 上書き
+改行追加: True
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: 新規作成
+
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-20260909.txt''' TextToWrite: Replaced AppendNewLine: True IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+4. デザイナー上の確認方法
+貼り付け後、アクション数が 3個 であることを確認。
+順序が以下であることを確認。
+ファイルからテキストを読み取る
+テキストを置換する
+テキストをファイルに書き込む
+変数一覧で
+FileContents
+Replaced
+がテキストとして生成されていることを確認。
+デザイナー上で赤いエラー表示がないことを確認。
+5. 合成データでの保存・実行・照合手順
+フローを保存する。
+入力ファイルに 対象語 を含むテキストを配置する。
+フローを実行する。
+出力ファイル normal-chat-t01-output-20260909.txt を UTF-8 対応エディターで開く。
+以下を照合する。
+対象語 が 置換後 に変わっている。
+対象語 以外の文字列は変化していない。
+日本語、引用符、バックスラッシュ、特殊文字が保持されている。
+改行数が意図どおりである。
+同じ入力で再実行し、出力内容が安定していることを確認する。

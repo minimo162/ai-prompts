@@ -1,0 +1,118 @@
+1. 前提・対象範囲・未確認点
+
+目的: C:\Users\yuuki\ai-prompts\catalog\fixtures\files 配下の複数ファイルを 1 回ずつ処理し、.txt のみ UTF-8 で内容読取りを行う。
+
+入力:
+
+対象フォルダー: C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+
+出力:
+
+確認済み範囲では、読取結果を変数 FileContents へ格納
+
+確認済み:
+
+フォルダー内の全ファイル取得 (Folder.GetFiles)
+For each 開始構文
+ファイルパス文字列に .txt を含む判定 (IF Contains(...))
+UTF-8 によるテキスト読取り (File.ReadTextFromFile.ReadText)
+
+未確認:
+
+Else の Robin 原文
+END（For each / If ブロック終端）の採取済み原文
+.csv と .md を対象外経路へ分岐した後続処理
+ファイル名のみ取得する専用アクション／専用プロパティ構文
+拡張子抽出専用アクション
+
+したがって、以下は 確認済み原文のみを並べた部分フロー です。.csv と .md の対象外経路は設計意図として示せますが、Robin 原文は未採取です。
+
+根拠
+catalog/actions/folder-get-files/all-files-no-subfolders.robin
+catalog/actions/foreach/items-variable.robin
+catalog/actions/if/current-file-contains-txt.robin
+catalog/actions/file-read-text/variable-path-utf8.robin
+catalog/flows/t03-folder-foreach-read/partial.robin
+索引 D ファイル / B 制御の記載
+2. PADで先に作る設定
+
+対象フォルダーを次に設定
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+
+生成される変数
+
+Files : フォルダー内ファイル一覧
+CurrentFile : For each の現在ファイル
+FileContents : .txt 読取結果
+
+対象外ファイル
+
+.csv
+.md
+
+期待結果
+
+フォルダー内の各ファイルが 1 回ずつ CurrentFile に入る
+.txt を含むパスのみ UTF-8 読取りが実行される
+.csv と .md は読取りアクションへ進まない
+3. 貼り付け用Robin（確認済み原文のみ）
+
+対象: フォルダー取得 → For each → .txt 判定 → UTF-8読取り の確認済み部分
+
+Plain Text
+1
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+2
+LOOP FOREACH CurrentItem IN Items
+3
+IF Contains(CurrentFile, $'''.txt''', False) THEN
+4
+File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+
+注意:
+
+上記は採取済み原文のみです。
+LOOP FOREACH CurrentItem IN Items は採取済み例そのままです。
+実際に Files と CurrentFile を使う完成形の For each ブロック終端および Else 経路は未採取です。
+未採取部分を推測して完成フロー化していません。
+4. デザイナー上の確認方法
+
+確認済み範囲として次を確認してください。
+
+Folder.GetFiles の出力変数が Files
+For each の入力コレクションが Files
+ループ変数が CurrentFile
+If 条件が .txt を含む判定
+読取りアクションの
+File = CurrentFile
+Encoding = UTF-8
+Output = FileContents
+
+未採取のため、PAD が生成した For each / If の終端 Robin はナレッジに存在しません。保存後に再コピーして原文採取する必要があります。
+
+5. 合成データでの確認手順
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files に
+
+sample1.txt
+sample2.txt
+sample3.csv
+sample4.md を配置
+
+実行
+
+ループごとに CurrentFile を確認
+
+.txt のときのみ
+
+FileContents に内容が入ることを確認
+
+.csv と .md は
+
+読取り処理へ進まないことを確認
+
+保存後に Robin を再コピーし、
+
+For each 終端
+If/Else/End 構文 を採取できたら、その原文を根拠に完成版へ拡張可能です。

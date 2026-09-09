@@ -1,0 +1,77 @@
+1. 前提・対象範囲・未確認点
+
+目的
+UTF-8テキストを読み込み、検索語 対象語 を置換語 置換後 へ通常置換し、UTF-8テキストとして新規保存します。
+
+入力
+C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+
+出力
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt
+
+変数（この案で使用）
+
+FileContents : テキスト
+Replaced : テキスト
+
+成功条件
+
+対象語 のみが 置換後 へ置換される。
+対象外文字・特殊文字・改行を保持する。
+UTF-8で保存する。
+入力に末尾改行がある場合は保持し、追加改行は発生させない。
+
+根拠
+
+ファイルからテキストを読み取る（UTF-8）: catalog/actions/file-read-text/utf8.robin、確認済み例あり。
+通常置換: catalog/actions/text-replace/literal.robin、実行確認あり。
+テキスト変数を書き込み（UTF-8・上書き・AppendNewLine=False）: catalog/actions/file-write-text/variable-reference-no-append.robin、貼付け確認あり。
+
+未確認
+
+この3アクションを今回のパス・変数名で組み合わせた実行証拠はナレッジ内にありません。各アクションの原文・設定は確認済みですが、本組合せ自体は実行確認済みとして扱いません。
+2. PADで先に作る設定
+空のフローを作成。
+入力ファイルが UTF-8 で存在することを確認。
+出力先フォルダー
+C:\Users\yuuki\ai-prompts\catalog\evidence
+が存在することを確認。
+以下の変数名をそのまま使用する場合は事前作成不要です。
+FileContents
+Replaced
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-20260910.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+4. デザイナー上の確認方法
+貼り付け後にアクション数が 3個 になっていることを確認。
+順序が以下であることを確認。
+ファイルからテキストを読み取る
+テキストを置換する（通常置換）
+テキストをファイルに書き込む
+出力変数を確認。
+読取り → FileContents
+置換 → Replaced
+書込みアクション設定を確認。
+エンコード: UTF-8
+ファイルが存在する場合: 上書き
+新しい行を追加する: False
+デザイナーにエラー表示（赤いエラー）がないことを確認。
+5. 保存・実行・照合手順
+フローを保存。
+合成入力ファイルで実行。
+出力ファイル C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt を開く。
+以下を照合。
+対象語 が 置換後 に変わっている。
+対象外文字が変化していない。
+日本語・引用符・特殊文字が保持されている。
+行数が入力と一致する。
+依頼されていない末尾改行が追加されていない。
+同じ入力で再実行し、出力内容が同一であることを確認する。

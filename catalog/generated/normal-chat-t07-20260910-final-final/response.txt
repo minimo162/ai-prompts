@@ -1,0 +1,89 @@
+1. 前提・対象範囲・未確認点
+
+目的
+合成PDF C:\Users\yuuki\ai-prompts\catalog\fixtures\pdf\source-a.pdf の 2ページのみ からテキストを抽出し、UTF-8テキストとして C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt へ保存する。入力PDFは変更しない。
+
+抽出対象ページ
+
+FromPageNumber: 2
+ToPageNumber: 2
+
+根拠・検証状態
+ナレッジには、同一入力PDF・同一出力先・同一目的のT07実測済み組合せが記録されています。
+根拠: PAD-Robin-Knowledge-Bundle 内「PAD-Robin-04-Office-PDF.txt」の T07のページ2単独抽出（リポジトリfixture）。
+
+PAD 2.71.115.26224
+日本語UI
+貼り付け・保存・2回実行済み
+PAGE_TOKEN_A2 を含み、PAGE_TOKEN_A1 を含まない出力を確認済み
+組合せ原文: catalog/generated/normal-chat-t07-20260910-final/robin.txt
+証拠: catalog/evidence/normal-chat-t07-final-run-1.json ほか。
+2. PADで先に確認する設定・依存
+
+必要な事前準備:
+
+入力PDFが存在すること
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\pdf\source-a.pdf
+
+出力フォルダーが存在すること
+
+C:\Users\yuuki\ai-prompts\catalog\evidence
+
+同名ファイルが存在する場合
+
+本フローは 上書き保存
+IfFileExists: File.IfFileExists.Overwrite
+
+使用変数
+
+ExtractedPDFText（PDF抽出結果テキスト）
+3. 貼り付け用Robin
+
+対象: メインフローへ追加
+
+Plain Text
+1
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 2 DetectLayout: False ExtractedText=> ExtractedPDFText
+2
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt''' TextToWrite: ExtractedPDFText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+4. デザイナー上の確認方法
+
+貼り付け後にアクション数が 2個 であることを確認する
+
+PDF からテキストを抽出
+テキストをファイルに書き込む
+
+1個目の出力変数が
+
+ExtractedPDFText
+
+2個目の設定が
+
+書き込むテキスト = ExtractedPDFText
+エンコード = UTF-8
+ファイル存在時 = 上書き
+新しい行を追加する = False
+
+ブロック開始・終了（IF、LOOP、TRY等）が存在しないことを確認する
+
+5. 保存・実行・照合手順
+
+フローを保存する。
+
+フローを実行する。
+
+出力ファイルを開く。
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt
+
+内容を確認する。
+
+ページ2のテキストが含まれること
+PAGE_TOKEN_A2 が含まれること
+PAGE_TOKEN_A1 が含まれないこと
+抽出順やページ境界を手作業で整形していないこと
+入力PDFの更新日時や内容が変更されていないこと
+
+期待結果
+ページ2のみの抽出テキストがUTF-8で保存され、出力にページ2識別文字列 PAGE_TOKEN_A2 が含まれること。根拠: T07実測記録。

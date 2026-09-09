@@ -1,0 +1,1 @@
+IF CurrentItem[Status] = $'''対象''' THEN

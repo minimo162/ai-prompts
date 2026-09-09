@@ -7,6 +7,7 @@ Excel（8バリアント）
 - 操作: セル書込み、単一セル読取り（TypedValues）、使用範囲読取り、A1:B2範囲読取り、xlsx別名保存、終了
 - 原文と設定: catalog/actions/excel-*/、組合せ: catalog/flows/office-excel/default.robin、再開: catalog/flows/office-reopen/assembled.robin
 - 実行確認: A1の日本語と100%を保持、使用範囲1×1、指定範囲2×2、元文書ハッシュ不変。シート選択・データ反復の独立例は未確認。
+- 既存Excelを編集可能で開く追加採取: `Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance`。原文`catalog/actions/excel-launch/open-editable.robin`（SHA-256: 1b55a963e33056ae4b0b0bb65af88550476f3c31717f3129b38fc3d3c5e7b82a）。
 - 代表的なコピー原文（新規→書込み→単一セル読取り→別名保存→終了）:
   `Excel.LaunchExcel.LaunchUnderExistingProcess Visible: True UseMachineLocale: False Instance=> ExcelInstance`
   `Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''OfficeCatalog 日本語 100%%''' Column: $'''A''' Row: 1`
@@ -25,6 +26,12 @@ Word（7バリアント）
   `Word.ReadFromWord.Read Instance: WordInstance WordData=> WordData`
   `Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\word-catalog.docx'''`
   `Word.CloseWord.Close Instance: WordInstance`
+- 既存文書を開いて置換・別名保存する既存の実測原文（ReadOnly=True）:
+  `Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\word-catalog.docx''' Visible: True ReadOnly: True Instance=> WordInstance2`
+  `Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance2 TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''OfficeVerified''' MatchCase: False MatchEntireWord: False`
+  `Word.SaveWord.SaveAs Instance: WordInstance2 DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\word-catalog.docx'''`
+  `Word.CloseWord.Close Instance: WordInstance2`
+- 原文の正本は catalog/actions/word-launch/open-readonly.robin、word-replace/all-literal.robin、word-save/as-docx-extension.robin、word-close/no-save.robin。既存Wordを編集可能で開く追加採取は `Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance`、原文`catalog/actions/word-launch/open-editable.robin`（SHA-256: d92644f9dccaafeee6dc41b497120a18a301317f010ccb7a78ae8df907e86939）。
 
 PowerPoint（7バリアント）
 - UI名は英語。新規／既存起動、末尾スライド追加、スライド番号指定書込み、全文読取り、pptx別名保存、終了。
@@ -54,5 +61,11 @@ PDF（11バリアント）
   `Pdf.ExtractPages PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' PageSelection: $'''2-3''' ExtractedPDFPath: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\pages-2-3.pdf''' IfFileExists: Pdf.IfFileExists.DoNotModifyFiles ExtractedPDFFile=> ExtractedPDF`
   `Pdf.MergeFiles PDFFiles: ['C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf', 'C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-b.pdf'] MergedPDFPath: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\merged-a-b.pdf''' IfFileExists: Pdf.IfFileExists.DoNotModifyFiles PasswordDelimiter: $''',''' MergedPDF=> MergedPDF`
 - 実行証拠: catalog/evidence/pdf/results.json。入力PDFの描画、抽出値、ページ順、入力ハッシュを照合した。暗号化・スキャン・フォーム・署名・複数ページ表の精度は未確認。
+
+T07のページ2単独抽出（リポジトリfixture）
+- `RobinKnowledgeT07Final_20260910` で次の2アクションを貼り付け、保存、2回実行し、`PAGE_TOKEN_A2`を含み`PAGE_TOKEN_A1`を含まない出力を確認した。
+  `Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 2 DetectLayout: False ExtractedText=> ExtractedPDFText`
+  `File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt''' TextToWrite: ExtractedPDFText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8`
+- 組合せ原文は `catalog/generated/normal-chat-t07-20260910-final/robin.txt`、SHA-256 `47a33ef2067bd37009187758e16fc36daa0f5447093b51e83e984e1d8fd484c9`。貼付け・実行証拠は `catalog/evidence/normal-chat-t07-final-paste.json` と `normal-chat-t07-final-run-1.json`。
 
 詳細記録: docs/office-action-capture.md、docs/pdf-action-capture.md。未確認のモードを、確認済みの完成例へ混ぜない。

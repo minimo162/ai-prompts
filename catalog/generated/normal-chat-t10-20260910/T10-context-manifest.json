@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "bundle_path": "catalog/generated/normal-chat-t10-20260910/T10-Knowledge-Flow-Bundle.txt",
+  "bundle_sha256": "bb93fff3d910be25f7836072616d905540bcc041f78063dd4db012ffa51e7ebc",
+  "sources": [
+    {
+      "path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+      "sha256": "660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca"
+    },
+    {
+      "path": "catalog/generated/office-three-apps/generated.robin",
+      "sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194"
+    }
+  ]
+}

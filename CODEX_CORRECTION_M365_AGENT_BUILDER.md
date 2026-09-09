@@ -4,6 +4,8 @@
 対象: minimo162/ai-prompts
 継続する作業仕様: `CODEX_TASK_PAD_ROBIN_KNOWLEDGE.md`
 
+最新の優先仕様: `CODEX_CORRECTION_M365_CHAT_VALIDATION.md`。Agent Builder関連の入口確認・登録条件は将来の別環境での確認事項とし、今回の実機検証は通常のM365 Copilotチャットへ本文と実ファイルを供給する方式へ置き換える。
+
 このファイルは、元依頼書と食い違う利用先・再開条件を訂正する。既存成果物、採取原文、証拠は捨てずに再利用する。
 
 ## 1. 利用先
