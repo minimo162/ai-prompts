@@ -10,7 +10,7 @@
 
 - ブランチ: `codex/issue-5-acceptance-20260910b`（2026-09-10継続作業）
 - 基準main: `69fe344`（origin/mainと一致）
-- 現在の固定コミット: `2025a64`
+- 現在の固定コミット: `4dc1bcc`（日付加算probe追加前。今回のprobeは次コミットで固定）
 - origin: `https://github.com/minimo162/ai-prompts.git`
 - PR #19: squashマージ済み。今回の再開確認では新規push・PR・merge・公開を行わない。
 
@@ -30,10 +30,10 @@
 
 ## 固定した必須採取チェックリスト
 
-- A 基礎: 既存の変数・文字列・数値・リスト・置換・分割・結合・数値変換に加え、日時取得のdate-only設定とサブテキスト取得のUnicode混在1設定を実測済み。日時加算・減算・書式化、一般の数値減算、リスト取出し、サブテキストの別モードは未確認。
-- B 制御: 定数範囲LoopとFor each／Ifの原文を観測し、For each＋If＋ファイル読取りのT03組合せを実行済み。Else、ループ脱出、エラー処理、サブフロー作成・呼出しは未確認。
+- A 基礎: 既存の変数・文字列・数値・リスト・置換・分割・結合・数値変換に加え、日時取得のdate-only設定とサブテキスト取得のUnicode混在1設定を実測済み。別probeで日時加算・減算、一般の数値減算を実行確認したが、カスタム日時書式化とリスト取出しは未確認。
+- B 制御: 定数範囲LoopとFor each／Ifの原文を観測し、For each＋If＋ファイル読取りのT03組合せを実行済み。別probeでElse、EXIT LOOP、NEXT LOOP、エラー処理ブロック骨格を確認したが、Else-if・入れ子・サブフロー作成・呼出しは未確認。
 - C データ処理: 空データテーブル作成、CSV読取り、DataTable変数参照でのCSV書出しは実測済み。0行0列への空行追加は設計エラーとして記録。列を持つテーブルの行追加・行反復・セル参照は未確認。
-- D ファイル: UTF-8テキスト読取り・書出し、CSV読取り・書出し、単一ファイルのコピー、フォルダー内ファイル取得2設定、変数パス読取りは原文・別フロー貼付け・実行へ対応づけた。存在確認、フォルダー作成、移動・名前変更は未確認。
+- D ファイル: UTF-8テキスト読取り・書出し、CSV読取り・書出し、単一ファイルのコピー、フォルダー内ファイル取得2設定、変数パス読取りは原文・別フロー貼付け・実行へ対応づけた。別probeで存在確認、フォルダー作成、移動・名前変更を確認したが、false分岐と移動の再実行は未確認。
 - E Excel: 起動・セル/範囲読取り・書込み・保存・終了は観測済み。シート選択・データ反復の独立例は未確認。
 - F Word・PowerPoint・PDF: 既存採取・証跡を引き継ぐ教材化と再利用確認が必要。未採取モードを完成例へ混ぜない。
 - G UI・ブラウザー: T09でローカルEdgeの入力・ボタン・結果段落をUI要素ピッカーから捕捉し、6アクションを空フローへ貼付け・保存した。WebAutomation通し実行はブラウザー拡張経路のタイムアウトで未完了。
@@ -44,7 +44,7 @@
 
 T02のFilter DataTableは、PAD UIで列／インデックス=`2`・等価演算子・値=`対象`を設定し、先行CSV読取り・CSV書出しを含む新規フローへ無修正Robinを貼付け、保存・2回実行・CSV照合まで完了した。先行CSVTable生成がない専用フローの未解決入力試行は失敗例として分離した。
 
-旧最終bundle SHA-256は `660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca`。現作業版はナレッジ訂正後の `431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3` で、旧版のT01/T02/T03/T05/T06/T07/T08/T10実行証拠は履歴として保持し、現作業版の最終受入には再試験が必要。T04は現作業版bundleで通常チャット生成・無修正PAD貼付け・保存・2回実行・論理照合まで完了したが、独立PAD再試験は未完了。T09はUI要素捕捉・空フロー貼付け・保存まで完了したが、WebAutomation実行はタイムアウトで未完了。
+旧最終bundle SHA-256は履歴として保持する。現作業版は instruction SHA `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e` と bundle SHA `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd` で、旧版のT01/T02/T03/T05/T06/T07/T08/T10実行証拠は履歴として保持し、現作業版の最終受入には再試験が必要。T04は現作業版bundleで通常チャット生成・無修正PAD貼付け・保存・2回実行・論理照合まで完了したが、独立PAD再試験は未完了。T09はUI要素捕捉・空フロー貼付け・保存まで完了したが、WebAutomation実行はタイムアウトで未完了。
 
 ## 直前に完了した項目
 
@@ -227,8 +227,8 @@ P3の未採取項目は、coverageの `p3_blocked_items` に11件を項目単位
 現作業版ではT01〜T07の一次受入、T04/T10の一次受入、T01/T04/T10の独立再試験、知識precheck、未採取構文・UI依存のfail-closed負例を確認済みである。T08は有効なRobin fenced blockを生成しない形式失敗、T09はWebAutomation実行未完了、P3の未観測項目は未実行のままとする。これらの判定は `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` と個別受入証跡を正本とし、旧版の成功を継承しない。
 T09については、既存専用フローの待機値を一時的に1秒へ束ねたランタイムprobeで入力→クリック→`T09-clicked`取得→PAD完了を確認し、元の`WAIT 500`へ復元した。ただし現行packageの新規通常チャット生成Robinを無修正で貼付けた受入ではないため、P4のT09は未確認として保持する（`catalog/evidence/t09-runtime-probe-20260910.json`）。
 P3ではBoolean（`SET P3Bool TO True`、preview=True）と減算（10−3→7）を新規専用フローで採取・保存・実行した。いずれも現行bundleへ統合すると再ハッシュ・T01〜T10再受入が必要なため、別probeとして保持する（`catalog/evidence/p3-boolean-probe-20260910.json`、`p3-subtract-probe-20260910.json`）。
-日時の「日付の減算」は、合成2日付・単位Daysの新規専用フローで原文コピー・保存・2回実行（出力1）を確認した。日時加算・書式化は未採取で、減算probeは現行bundleへ未統合である（`catalog/evidence/p3-date-subtract-probe-20260910.json`）。
-「現在の日時を取得」のDateAndTime設定も、システムタイムゾーンの新規専用フローで原文コピー・保存・2回実行し、`2026/09/10 19:01:11`形式の出力を確認した。カスタム書式化・日時加算は未採取で、probeは現行bundleへ未統合である（`catalog/evidence/p3-date-format-probe-20260910.json`）。
+日時の「日付の減算」は、合成2日付・単位Daysの新規専用フローで原文コピー・保存・2回実行（出力1）を確認した。別probeの「加算する日時」は1日加算を2回実行し、`2026/09/11 0:00:00`を確認した。カスタム書式化は未採取で、各probeは現行bundleへ未統合である（`catalog/evidence/p3-date-subtract-probe-20260910.json`、`catalog/evidence/p3-date-add-probe-20260910.json`）。
+「現在の日時を取得」のDateAndTime設定も、システムタイムゾーンの新規専用フローで原文コピー・保存・2回実行し、`2026/09/10 19:01:11`形式の出力を確認した。カスタム書式化は未採取で、DateAndTime／加算probeは現行bundleへ未統合である（`catalog/evidence/p3-date-format-probe-20260910.json`、`catalog/evidence/p3-date-add-probe-20260910.json`）。
 Excelでは合成`excel-catalog.xlsx`を開き、`Sheet1`を名前指定でアクティブ化する2アクションを新規専用フローからコピー・保存・2回実行した。probe作成のExcel窓だけを閉じ、既存の`Book1`は保持した。データ反復は未採取で、probeは現行bundleへ未統合である（`catalog/evidence/p3-excel-sheet-probe-20260910.json`）。
 Dの「ファイルが存在する場合」は、既存の合成fixtureを対象に、`IF ... THEN` とPADが自動挿入した `END` をコピー・保存・2回実行した。false分岐・移動・名前変更は未採取で、probeは現行bundleへ未統合である（`catalog/evidence/p3-file-exists-probe-20260910.json`）。
 Dの「ファイルの移動」は、合成sourceを専用destinationへ移動する1アクションをコピー・保存・1回実行し、`MovedFiles`とdestination存在を確認した。DoNothing衝突設定のため2回目のリセット付き再実行は未実施、名前変更とfalse分岐は未採取である（`catalog/evidence/p3-file-move-probe-20260910.json`）。
@@ -236,11 +236,11 @@ Dの「ファイルの名前を変更する」は、拡張子保持・DoNothing�
 Cの列付きDataTableは5列の作成を試したが、1値だけを渡す行追加でPAD native runtime error（指定値1件／列5件の不一致）となった。行値の正しい型・行反復・セル参照を推測せず、失敗原文を別証跡へ固定した（`catalog/evidence/p3-datatable-row-failure-20260910.json`）。
 2回目のDataTable行追加試行では、ビジュアライザー上の1行3列が親ダイアログ保存後に実行時0行0列へ戻り、2値の`%RowValues%`も値数不一致で失敗した。raw copyが安定しなかった区間は未採取として別証跡に分離し、成功構文を推測していない（`catalog/evidence/p3-datatable-row-list-failure-20260910.json`）。
 If/Else/ENDは新規専用probeで正しいリテラル比較を採取し、THEN／ELSEを各1回実行した。branch side effectを追加していないため、Else-if・入れ子・分岐内アクションは未採取で、probeは現行bundleへ未統合である（`catalog/evidence/p3-else-probe-20260910.json`）。
-有限Loop 1..3へ`EXIT LOOP`を追加したprobeも、LoopIndex=1で終了することを確認した。Continue・入れ子・分岐内処理は未採取、probeは現行bundle未統合である（`catalog/evidence/p3-break-probe-20260910.json`）。
+有限Loop 1..3へ`EXIT LOOP`を追加したprobeも、LoopIndex=1で終了することを確認した。別probeの`NEXT LOOP`は2回ともLoopIndex=4で終了した。入れ子・分岐内処理・loop side effectは未採取、probeは現行bundle未統合である（`catalog/evidence/p3-break-probe-20260910.json`、`catalog/evidence/p3-continue-probe-20260910.json`）。
 同じ有限Loopへ`NEXT LOOP`を追加したprobeでは、LoopIndex=4で終了することを2回確認した。入れ子・loop side effectは未採取、probeは現行bundle未統合である（`catalog/evidence/p3-continue-probe-20260910.json`）。
 `BLOCK / ON BLOCK ERROR / THROW ERROR / END`のエラー処理骨格も新規専用probeでコピー・保存・実行した。エラーを発生させる子アクションとサブフロー作成・呼出しは未採取、probeは現行bundle未統合である（`catalog/evidence/p3-error-block-probe-20260910.json`）。
 リスト項目取得は、表示された「リストから項目を削除」を作成→追加→削除の最小probeで確認したが、削除後に項目値を返す出力変数がなく、取得構文の代用にはならなかった。推測で追加せず、未確認として保持する（`catalog/evidence/p3-list-remove-probe-20260910.json`）。
-Dの「フォルダーの作成」は合成fixture配下の新規専用フローで、原文コピー・保存・2回実行・`NewFolder`出力を確認した。現行bundleへは未統合で、存在確認・移動・名前変更は未採取のままとする（`catalog/evidence/p3-folder-create-probe-20260910.json`）。
+Dの「フォルダーの作成」は合成fixture配下の新規専用フローで、原文コピー・保存・2回実行・`NewFolder`出力を確認した。存在確認・移動・名前変更も別probeで確認済みだが、各probeは現行bundleへ未統合で、false分岐と移動の再実行は未採取のままとする（`catalog/evidence/p3-folder-create-probe-20260910.json`、`p3-file-exists-probe-20260910.json`、`p3-file-move-probe-20260910.json`、`p3-file-rename-probe-20260910.json`）。
 
 現作業版のT01〜T10／独立再試験／負例の判定表は `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` に固定した。T01〜T07、T04/T10一次受入、T04/T10独立再試験はPASS_CURRENT_REVISION、知識precheckはPASS_REFERENCE_ONLY、T08は生成形式失敗、T09はBLOCKEDとして扱う。知識precheckの回答原文は `catalog/generated/normal-chat-current-revision-knowledge-precheck-20260910/response.txt` に保存した。
 

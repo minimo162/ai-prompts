@@ -4702,6 +4702,17 @@
       "evidence": "evidence/p3-date-format-probe-20260910.json"
     },
     {
+      "id": "p3-date-add-probe-2026-09-10",
+      "date": "2026-09-10",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeP3DateCustom_20260910",
+      "ui_automation_ids": ["DateTime.Add"],
+      "scope": "Synthetic 2026-09-10 plus 1 day using DateTime.TimeUnit.Days; copied, saved, and run twice with 2026/09/11 0:00:00 preview. Current bundle unchanged.",
+      "current_package_acceptance": false,
+      "evidence": "evidence/p3-date-add-probe-20260910.json"
+    },
+    {
       "id": "p3-excel-sheet-probe-2026-09-10",
       "date": "2026-09-10",
       "pad_file_version": "2.71.115.26224",

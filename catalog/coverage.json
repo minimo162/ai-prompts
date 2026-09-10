@@ -2075,8 +2075,9 @@
       "observed_action_ids": [
         "datetime-get-current-date"
       ],
-      "reason": "現在の日時を取得（取得=現在の日付のみ）は今回の左パネル採取・再貼付け・実行まで確認済み。日時加算・減算と日時書式化は未確認。",
-      "reference": "catalog/index.json; catalog/evidence/datetime-current-date-validation.json",
+      "observed_probe_ids": ["p3-date-add-probe-2026-09-10", "p3-date-subtract-probe-2026-09-10", "p3-date-format-probe-2026-09-10"],
+      "reason": "現在の日時を取得（取得=現在の日付のみ）は今回の左パネル採取・再貼付け・実行まで確認済み。別probeで日時加算（1日後）と日付減算（1日）も2回実行して確認したが、カスタム書式化は未確認。",
+      "reference": "catalog/index.json; catalog/evidence/datetime-current-date-validation.json; catalog/evidence/p3-date-add-probe-20260910.json; catalog/evidence/p3-date-subtract-probe-20260910.json; catalog/evidence/p3-date-format-probe-20260910.json",
       "live_ui_candidates": [
         {
           "ui_name": "加算する日時",
@@ -2492,11 +2493,11 @@
   },
   {
     "id": "A-datetime",
-    "missing": "日時加算・減算・書式化",
+    "missing": "カスタム日時書式化",
     "status": "PARTIAL_PROBE_NOT_BUNDLED",
-    "reason": "日付の減算とDateAndTime取得設定は新規専用probeで原文コピー・保存・2回実行を確認した。日時加算とカスタム書式化は未採取で、probeはいずれも現行bundle未統合。",
-    "evidence": "evidence/p3-date-subtract-probe-20260910.json; evidence/p3-date-format-probe-20260910.json",
-    "resume": "日時加算・カスタム書式化を採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
+    "reason": "日付の減算、DateAndTime取得設定、日時加算は新規専用probeで原文コピー・保存・2回実行を確認した。カスタム書式化は未採取で、各probeは現行bundle未統合。",
+    "evidence": "evidence/p3-date-add-probe-20260910.json; evidence/p3-date-subtract-probe-20260910.json; evidence/p3-date-format-probe-20260910.json",
+    "resume": "カスタム日時書式化を採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
   },
   {
     "id": "B-if-else",

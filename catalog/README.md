@@ -8,7 +8,7 @@
 
 ## 履歴（現行値へ読み替えない）
 
-P3追補：Boolean、数値減算、日付減算、DateAndTime取得、フォルダー作成、Excelシート選択は別probeで採取・実行済みですが、現行bundle未統合です。T08は生成形式失敗、T09は現行package生成未確認です。
+P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、フォルダー作成、Excelシート選択は別probeで採取・実行済みですが、現行bundle未統合です。カスタム日時書式化は未確認、T08は生成形式失敗、T09は現行package生成未確認です。
 
 ファイル存在確認とファイル移動のprobeも別証跡で保持しています。false分岐・名前変更・移動の再実行は未確認です。
 ファイル名前変更の成功／衝突no-opも別証跡で保持しています。false分岐と移動の再実行は未確認です。
@@ -21,7 +21,7 @@ If/Else/ENDの構造と両分岐実行も別probeで確認しています。Else
 
 ファイル存在確認の`IF ... THEN`／`END`も別probeで2回実行しました。false分岐・移動・名前変更・データ反復等は未確認です。
 
-P3追補：Boolean、数値減算、日付減算、DateAndTime取得、フォルダー作成は別probeで採取・実行済みですが、現行bundle未統合です。T08は生成形式失敗、T09は現行package生成未確認です。
+P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、フォルダー作成は別probeで採取・実行済みですが、現行bundle未統合です。カスタム日時書式化は未確認、T08は生成形式失敗、T09は現行package生成未確認です。
 
 ```text
 Variables.CreateNewList List=> CatalogList
