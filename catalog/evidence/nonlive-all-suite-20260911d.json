@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T06:16:35+09:00",
+  "suite": "tests/Run-NonLiveTests.ps1 -Suite All",
+  "source_verification": ".work/nonlive-c09c860e2581417f91d77ad2eef7a83a/verification.json",
+  "status": "PASS",
+  "test_count": 36,
+  "failed_count": 0,
+  "candidate_unchanged": true,
+  "scope_limits": {
+    "live_m365": "NOT_RUN",
+    "native_pad": "NOT_RUN",
+    "business_quality": "NOT_RUN",
+    "other_pc": "NOT_RUN",
+    "release_approved": false
+  },
+  "included_new_gates": [
+    "Test-CurrentBundleT01Prepared.ps1",
+    "Test-Issue5CurrentStatus.ps1"
+  ],
+  "result": "All listed Windows PowerShell 5.1 non-live contract/process tests passed after adding the current-status integrity gate. This remains P5 local evidence only."
+}
