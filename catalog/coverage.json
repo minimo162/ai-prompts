@@ -2133,8 +2133,9 @@
         "loop-one-to-three",
         "foreach-items-variable"
       ],
-      "reason": "定数範囲LoopとFor eachの原文を採取し、For each＋If＋ファイル読取りのT03組合せを実行確認済み。ループ脱出・次のループは未確認。",
-      "reference": "catalog/index.json; catalog/evidence/normal-chat-t03-final-current-run.json",
+      "observed_probe_ids": ["p3-break-probe-2026-09-10", "p3-continue-probe-2026-09-10"],
+      "reason": "定数範囲LoopとFor eachの原文を採取し、For each＋If＋ファイル読取りのT03組合せを実行確認済み。別probeでEXIT LOOP（LoopIndex=1）とNEXT LOOP（LoopIndex=4、2回）も確認したが、入れ子とloop内副作用は未確認。",
+      "reference": "catalog/index.json; catalog/evidence/normal-chat-t03-final-current-run.json; catalog/evidence/p3-break-probe-20260910.json; catalog/evidence/p3-continue-probe-20260910.json",
       "live_ui_candidates": [
         {
           "ui_name": "For each",
@@ -2162,10 +2163,11 @@
       "id": "B-error-subflow",
       "area": "B",
       "purpose": "エラー処理・サブフロー作成／呼出し",
-      "status": "not_observed",
+      "status": "partial",
       "observed_action_ids": [],
-      "reason": "今回のindexに対応する左欄原文がない。",
-      "reference": null,
+      "observed_probe_ids": ["p3-error-block-probe-2026-09-10"],
+      "reason": "別probeでBLOCK／ON BLOCK ERROR／THROW ERROR／ENDの骨格をコピー・保存・実行したが、エラー発生子アクション、カスタムハンドラー、サブフロー作成・呼出しは未確認。",
+      "reference": "catalog/evidence/p3-error-block-probe-20260910.json",
       "live_ui_candidates": [
         {
           "ui_name": "サブフローの実行",

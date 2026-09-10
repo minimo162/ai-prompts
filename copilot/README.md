@@ -23,8 +23,8 @@ P3追補：Boolean、数値減算、日付減算、DateAndTime取得、フォル
 列付きDataTable行追加は値数不一致のnative runtime errorを再現し、成功するRowToAdd型・行反復・セル参照は未確認です。
 ビジュアライザー保存後の0列への戻りも別失敗として保持しています。
 If/Else/ENDの構造と両分岐実行は別probeで確認していますが、Else-if・入れ子・分岐内処理は未確認です。
-有限Loopの`EXIT LOOP`も別probeで確認していますが、Continueと入れ子は未確認です。
-有限Loopの`NEXT LOOP`も別probeで確認していますが、入れ子とloop内副作用は未確認です。
+有限Loopの`EXIT LOOP`と`NEXT LOOP`は別probeで確認しています。入れ子とloop内副作用は未確認です。
+（Loop Continue probeは現行bundleへ未統合です。）
 エラー処理ブロックの骨格も別probeで確認していますが、エラー発生子アクションとサブフローは未確認です。
 
 ファイル存在確認の`IF ... THEN`／`END`も別probeでPASSですが、false分岐・移動・名前変更・データ反復等は未確認です。
