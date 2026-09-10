@@ -39,6 +39,6 @@
 
 ## 状態
 
-現作業版の追補判定（2026-09-10）：知識precheck、T01〜T07、T04/T10一次受入、T01/T04/T10独立再試験、未採取構文・UI依存のfail-closed負例はPASS。P3のBoolean・減算・フォルダー作成probeも別証跡でPASSだがbundle未統合。T08は有効なRobin fenced blockを生成しない形式失敗、T09は既存専用フローのランタイムprobeのみ成功し、現行package Robin受入は未確認である。個別証跡とハッシュは `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` を正本とし、旧版結果は継承しない。
+現作業版の追補判定（2026-09-10）：知識precheck、T01〜T07、T04/T10一次受入、T01/T04/T10独立再試験、未採取構文・UI依存のfail-closed負例はPASS。P3のBoolean・減算・日付減算・フォルダー作成probeも別証跡でPASSだがbundle未統合。T08は有効なRobin fenced blockを生成しない形式失敗、T09は既存専用フローのランタイムprobeのみ成功し、現行package Robin受入は未確認である。個別証跡とハッシュは `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` を正本とし、旧版結果は継承しない。
 
 2026-09-10時点では、配布物の骨格、86件の観測バリアント、既存証拠、PAD左パネル観測、日時・DataTable・CSV・FilterDataTable・ファイルコピー・サブテキスト・テキスト書出し・テキスト変数書込み・For each・If・Excel/Word編集可能起動・フォルダー取得・ファイル変数読取り・PDFページ2単独抽出・T04 Excel条件抽出→別xlsx・T09ローカルUI要素捕捉の追加実測を整理しました。7ファイルの逐次添付が不安定なため、元ファイル名・区切り・SHA-256を保持したフォールバック結合版を使用します。旧版の通常チャット生成・PAD結果は `catalog/evidence/normal-chat-final-package-acceptance-20260910.json` に履歴として保持します。現作業版の正本判定は上記追補と `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` です。T04/T10の旧版差分は `catalog/evidence/normal-chat-raw-provenance-20260910.json` で発生段階を分離しています。Agent Builder／Copilot Studioの登録・権限確認は将来の別環境の確認事項であり、今回の完了条件には含めません。未確認の項目を完成扱いしません。

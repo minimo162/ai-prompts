@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-10T18:50:15+09:00",
+  "flow_name": "RobinKnowledgeP3DateSubtract_20260910",
+  "run_status": "success",
+  "ready_observed": true,
+  "start_enabled_after": true,
+  "variable_previews": ["1"]
+}

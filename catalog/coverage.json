@@ -2488,13 +2488,14 @@
     "evidence": "evidence/p3-list-remove-probe-20260910.json",
     "resume": "項目値を出力するリスト参照アクションの実表示・原文・実行結果を採取"
   },
-    {
-      "id": "A-datetime",
-      "missing": "日時加算・減算・書式化",
-      "status": "BLOCKED_EXTERNAL_UI",
-      "reason": "現在日時取得以外の設定原文と実行値が未採取。",
-      "resume": "日時アクションを1設定ずつ採取し、入力日時と出力書式を照合"
-    },
+  {
+    "id": "A-datetime",
+    "missing": "日時加算・減算・書式化",
+    "status": "PARTIAL_PROBE_NOT_BUNDLED",
+    "reason": "日付の減算は新規専用probeで原文コピー・保存・2回実行（1日）を確認した。日時加算・書式化は未採取で、減算probeも現行bundle未統合。",
+    "evidence": "evidence/p3-date-subtract-probe-20260910.json",
+    "resume": "日時加算・書式化を採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
+  },
     {
       "id": "B-if-else",
       "missing": "Else／Else if",
