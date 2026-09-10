@@ -2508,9 +2508,9 @@
       "id": "B-loop-fixed-foreach-exit",
       "missing": "ループ脱出・次のループ",
     "status": "PARTIAL_PROBE_NOT_BUNDLED",
-    "reason": "有限Loop 1..3へEXIT LOOPを追加し、原文コピー・保存・実行（LoopIndex=1）を確認した。Continue、入れ子、loop side effectは未採取、probeは現行bundle未統合。",
-    "evidence": "evidence/p3-break-probe-20260910.json",
-    "resume": "Continueと必要なside effectを採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
+    "reason": "有限Loop 1..3へEXIT LOOPとNEXT LOOPを別probeで追加し、LoopIndex=1／4の実行結果を確認した。入れ子、loop side effectは未採取、probeは現行bundle未統合。",
+    "evidence": "evidence/p3-break-probe-20260910.json; evidence/p3-continue-probe-20260910.json",
+    "resume": "入れ子・loop side effectを採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
     },
     {
       "id": "B-error-subflow",

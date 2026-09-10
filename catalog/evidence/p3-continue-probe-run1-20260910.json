@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-10T20:48:53+09:00",
+  "flow_name": "RobinKnowledgeP3Continue_20260910",
+  "run_status": "success",
+  "ready_observed": true,
+  "start_enabled_after": true,
+  "loop_range": "1..3 step 1",
+  "continue_observed": true,
+  "loop_index_preview": "4"
+}

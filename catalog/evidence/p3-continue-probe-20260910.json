@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T20:49:18+09:00",
+  "status": "pass_probe_not_bundled",
+  "missing_item": "B-loop-fixed-foreach-exit",
+  "scope": "Synthetic PAD Loop/Continue probe in a newly-created dedicated flow; current bundle unchanged.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3Continue_20260910",
+    "process_id": 57924,
+    "action_count": 3
+  },
+  "raw": {
+    "path": "catalog/evidence/p3-continue-probe-20260910.robin",
+    "sha256": "689120c897d852795ed6be2aa6ca7d919c5f8ed087cfdc89c8256054247eb5ab",
+    "captured_flow_sha256": "002c7aaed69dbf7502084ac29e67861aac786894222a6c4a481ac13f2b256c62",
+    "copy_observed": true,
+    "clipboard_restored": true
+  },
+  "structure": {
+    "loop_start": 1,
+    "loop_end": 3,
+    "step": 1,
+    "continue_action": "NEXT LOOP",
+    "end_present": true
+  },
+  "runs": [
+    {"evidence": "catalog/evidence/p3-continue-probe-run1-20260910.json", "status": "success", "loop_index_preview": "4"},
+    {"evidence": "catalog/evidence/p3-continue-probe-run2-20260910.json", "status": "success", "loop_index_preview": "4"}
+  ],
+  "package_binding": {
+    "current_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "current_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+    "included_in_current_bundle": false,
+    "reason": "Adding the block to the seven-file bundle would change the package hash and require a complete T01-T10 regression."
+  },
+  "result": "A finite Loop 1..3 with NEXT LOOP was copied, saved, and executed twice successfully; LoopIndex ended at 4. Break, Continue, and nested-loop structure are now separately evidenced, but not bundled."
+}
