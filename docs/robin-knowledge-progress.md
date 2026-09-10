@@ -249,3 +249,5 @@ P0〜P5の要件ごとの完了監査は `catalog/evidence/issue5-completion-aud
 2026-09-11の現HEAD `b411a7c`で静的ゲートを再実行した。Raw契約6 assertions、Copilot package（3,949 UTF-16／7原本／86 observed actions）、Robin catalog 84 checks、bundled DOM 898 checks、`git diff --check`はPASS。`tests/Test-Copilot.ps1`はタイムアウト履歴のため未完了扱いとし、現行パッケージのT08/T09やP3統合成功とは扱わない（`catalog/evidence/current-package-static-check-20260911.json`）。
 
 最新HEAD `1cd329c`でも同じ静的ゲートを再実行してPASSした。指示文・bundle・保護資料のSHAは不変で、`tests/Test-Copilot.ps1`のタイムアウトと現行パッケージの未完了判定を維持する（`catalog/evidence/current-package-static-check-20260911b.json`）。
+
+最新HEAD `f308d90`でも同じ静的ゲートを再実行してPASSした。既定エラーハンドラーprobeは別証跡で成功したがbundle未統合で、T08/T09と残るP3の未完了判定を維持する（`catalog/evidence/current-package-static-check-20260911c.json`）。
