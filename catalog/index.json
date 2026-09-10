@@ -4652,6 +4652,18 @@
       "scope": "Two separate synthetic PAD probes for P3 Boolean and numeric decrement. Raw Robin and run outputs are preserved, but the current seven-file bundle was not changed.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-boolean-probe-20260910.json; evidence/p3-subtract-probe-20260910.json"
+    },
+    {
+      "id": "p3-list-remove-probe-2026-09-10",
+      "date": "2026-09-10",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": false,
+      "native_flow_name": "RobinKnowledgeP3ListGet_20260910",
+      "ui_automation_ids": ["Variables.CreateNewList", "Variables.AddItemToList", "Variables.RemoveItemFromList"],
+      "scope": "Synthetic create/add/remove probe. Removal succeeded, but no removed-item output was exposed; it is not list-item retrieval evidence.",
+      "current_package_acceptance": false,
+      "evidence": "evidence/p3-list-remove-probe-20260910.json"
     }
   ],
   "application_integration": {

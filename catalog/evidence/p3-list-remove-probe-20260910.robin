@@ -1,0 +1,3 @@
+Variables.CreateNewList List=> P3List
+Variables.AddItemToList Item: $'''Item-A''' List: P3List
+Variables.RemoveItemFromList.RemoveItemFromListByIndex ItemIndex: 0 List: P3List

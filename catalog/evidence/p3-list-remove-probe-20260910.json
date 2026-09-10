@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T18:37:14+09:00",
+  "status": "probe_not_equivalent_to_list_get",
+  "missing_item": "A-list-create-add-get",
+  "scope": "Synthetic PAD UIA probe; the displayed action 'リストから項目を削除' was tested as a possible candidate but does not provide retrieval output.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3ListGet_20260910",
+    "process_id": 33884,
+    "action_count": 3
+  },
+  "raw": {
+    "path": "catalog/evidence/p3-list-remove-probe-20260910.robin",
+    "sha256": "0a720ec5f0c97506e3514647863b7d2e468ba725199ca9f07c014f3209583165",
+    "copy_observed": true,
+    "clipboard_restored": true
+  },
+  "run": {
+    "evidence": "catalog/evidence/p3-list-remove-probe-run-20260910.json",
+    "status": "success",
+    "list_preview_after_removal": "[]"
+  },
+  "result": "Removal was verified, but list-item retrieval remains unobserved; no guessed get-item syntax was added to the bundle."
+}
