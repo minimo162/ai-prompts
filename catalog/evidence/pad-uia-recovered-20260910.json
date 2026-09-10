@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "pad_file_version": "2.71.115.26224",
+  "designer_pid": 21008,
+  "flow_name": "RobinKnowledgeT04ExcelFilterRT_20260910",
+  "native_cua_bridge": "unavailable: Trusted RPC service is not configured: sky",
+  "fallback_driver": "repository UIA helpers; exact PID and Power Automate title matching",
+  "actions": [
+    "Excel launch/read-only input",
+    "Excel range read A1:C6",
+    "FilterDataTable column 0 equals 対象",
+    "DataTable to CSV",
+    "UTF-8 intermediate CSV write",
+    "Excel open CSV editable",
+    "SaveAs xlsx",
+    "close without save"
+  ],
+  "result": "T04 positive flow executed twice; output logical rows and input SHA-256 verified",
+  "evidence": "catalog/evidence/t04-positive-acceptance-20260910.json"
+}

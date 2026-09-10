@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "flow_name": "RobinKnowledgeT09LocalUI_20260910",
+  "fixture_url": "http://127.0.0.1:8765/t09-local-test.html",
+  "expected_sequence": ["input T09-input", "click 実行", "wait 500 ms", "read t09-result Own Text", "close browser"],
+  "source_run": {"started": true, "status": "running", "stopped_after_seconds": 207, "completion_observed": false, "output_variable": "AttributeValue", "output_observed": false},
+  "pasted_run": {"started": true, "status": "running", "stopped_after_seconds": 80, "completion_observed": false, "output_variable": "AttributeValue", "output_observed": false},
+  "blocker": "PAD WebAutomation did not reach ready/completed state during the monitored runs; browser-extension execution path remains unverified.",
+  "interpretation": "UI-element capture and unchanged action-line paste are proven; runtime success is not claimed.",
+  "native_cua_available": false,
+  "fallback": "strict UIA helper scripts"
+}

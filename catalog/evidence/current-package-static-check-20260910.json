@@ -3,13 +3,20 @@
   "captured_at": "2026-09-10",
   "branch": "codex/issue-5-completion-20260910",
   "checks": {
-    "Test-RobinCatalog.ps1": "PASS: 52 checks",
-    "Test-CopilotRobinPackage.ps1": "PASS: instructions_utf16=2943; knowledge_files=7; observed_actions=73",
+    "Test-RobinCatalog.ps1": "PASS: 55 checks",
+    "Test-CopilotRobinPackage.ps1": "PASS: instructions_utf16=3401; knowledge_files=7; observed_actions=86",
     "git diff --check": "PASS",
-    "bundle_source_sha256_delimiters": "PASS: all seven source hashes match bundle delimiters"
+    "bundle_source_sha256_delimiters": "PASS: all seven source hashes match bundle delimiters",
+    "t04_pad_positive": "PASS: two runs, separate xlsx workbook, input unchanged",
+    "t09_ui_capture_and_paste": "PASS: three PAD-captured local Edge elements; six action lines pasted/saved; runtime timeout recorded separately"
   },
-  "instruction_sha256": "ecefa66549326aca3e0995b9c9d331da2ec9a5ec84640d8befa06b848febd6cc",
-  "knowledge_bundle_sha256": "2a0267d4fb42b3c27b9fab8527c63ae2f126474a936339eca0ba6ebe8c7d0f12",
-  "knowledge_bundle_bytes": 49330,
-  "note": "Static/package checks only; no claim of PAD or M365 acceptance."
+  "instruction_sha256": "c8c981d2686e07c08ceeace654e70f4dbf8124e23e54122f44f27b65ad3ce9cf",
+  "knowledge_bundle_sha256": "0d09c90f8f95bd235a3d05cabd1bf76a445be3037eaa3bd5a46bbfee658bf10e",
+  "knowledge_bundle_bytes": 56187,
+  "t04_positive_evidence": "catalog/evidence/t04-positive-acceptance-20260910.json",
+  "t04_final_paste_evidence": "catalog/evidence/t04-final-paste-flow-acceptance-20260910.json",
+  "t09_capture_evidence": "catalog/evidence/t09-capture-source-20260910.json",
+  "t09_final_paste_evidence": "catalog/evidence/t09-final-paste-acceptance-20260910.json",
+  "t09_runtime_evidence": "catalog/evidence/t09-runtime-block-20260910.json",
+  "note": "Static/package checks and T04 PAD positive evidence are recorded separately; no claim of current-bundle M365 T01-T10 acceptance."
 }

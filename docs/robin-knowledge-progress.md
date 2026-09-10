@@ -17,12 +17,12 @@
 
 - 既存記録で確認済みの条件: PAD `2.71.115.26224`、日本語UI、Power Fx OFF、合成データ・専用フロー。
 - 既存記録ではPAD `2.71.115.26224`、日本語UI、Power Fx OFFを確認済み。今回の起動確認ではMicrosoft.PowerAutomateDesktop `11.2608.115.0` のPAD.Console.HostとDesignerプロセス、`RobinKnowledgeT04ExcelFilter_20260910` ウィンドウを列挙できた。
-- 現セッションのnative Computer UseをPADへバインドしようとしたが、Trusted RPC未構成（`Trusted RPC service is not configured: sky`）でUI状態を取得できなかった。したがって今回のPADクリップボード・セレクター・保存・実行は未実施で、過去のUI Automation証拠を現ターンの実測へ付け替えない。詳細は `catalog/evidence/pad-native-ui-blocked-20260910.json`。
+- 現セッションのnative Computer UseをPADへバインドしようとしたが、Trusted RPC未構成（`Trusted RPC service is not configured: sky`）だったため、既存の厳格なUIAヘルパーへ切り替えた。T04のクリップボード・保存・実行とT09のUI要素捕捉・貼付け・保存・実行試行は、このフォールバックで新規証跡化した。native CUA経路の成功とは扱わない。詳細は `catalog/evidence/pad-native-ui-blocked-20260910.json` と `catalog/evidence/pad-uia-recovered-20260910.json`。
 
 ## 既存資産の再集計
 
 - 追加前の既存 `catalog/index.json` 実測エントリ: 51件。
-- 今回の日時取得・空データテーブル・空テーブルへの行追加失敗・CSV読取り2・CSV書出し2・FilterDataTable・ファイルコピー・サブテキスト取得・テキスト書出し・テキスト変数書込み2設定・For each・If2・Excel/Word編集可能起動2設定・フォルダー取得2設定・ファイル変数読取り・PDFページ2単独抽出を追加後の `catalog/index.json`: 73件（既存51＋追加22）。
+- 今回の日時取得・空データテーブル・空テーブルへの行追加失敗・CSV読取り2・CSV書出し2・FilterDataTable・ファイルコピー・サブテキスト取得・テキスト書出し・テキスト変数書込み2設定・For each・If2・Excel/Word編集可能起動2設定・フォルダー取得2設定・ファイル変数読取り・PDFページ2単独抽出を追加後の `catalog/index.json`: 86件（既存51＋追加35）。T04のExcel読取り・FilterDataTable・CSV変換・中間CSV・別xlsx保存の7実測バリアントと、T09ブラウザー6バリアントを追加。
 - 既存カテゴリ別: 変数7、テキスト8、ループ1、ファイル2、Excel8、Word7、PowerPoint7、PDF11。今回、日時1・テキスト1・変数2（成功1、失敗1）・ファイル9（CSV読取り／書出し／コピー／テキスト書出し／テキスト変数書込み2設定／フォルダー取得2／ファイル変数読取り）・ループ1・条件2・Excel起動1・Word起動1を追加。
 - 索引のscopeは「Observed PAD action variants」であり、全アクション一覧でも実行許可集合でもない。
 - 既存の生成・実行証拠は `catalog/generated/list-and-regex/` と `catalog/generated/office-three-apps/` にあるが、新しいエージェントへの登録試験とは区別する。
@@ -35,15 +35,15 @@
 - D ファイル: UTF-8テキスト読取り・書出し、CSV読取り・書出し、単一ファイルのコピー、フォルダー内ファイル取得2設定、変数パス読取りは原文・別フロー貼付け・実行へ対応づけた。存在確認、フォルダー作成、移動・名前変更は未確認。
 - E Excel: 起動・セル/範囲読取り・書込み・保存・終了は観測済み。シート選択・データ反復の独立例は未確認。
 - F Word・PowerPoint・PDF: 既存採取・証跡を引き継ぐ教材化と再利用確認が必要。未採取モードを完成例へ混ぜない。
-- G UI・ブラウザー: 既存記録ではEdge起動が拡張機能通信エラー。起動・入力・クリック・待機・文字取得・終了の通し実測は未確認。
+- G UI・ブラウザー: T09でローカルEdgeの入力・ボタン・結果段落をUI要素ピッカーから捕捉し、6アクションを空フローへ貼付け・保存した。WebAutomation通し実行はブラウザー拡張経路のタイムアウトで未完了。
 
 ## 現在の段階
 
-採取／教材化（左パネル全体観測と追加22設定の既存実測を整理。現作業版の通常M365 CopilotチャットでGPT 5.6 Think Deeper＋結合版＋合成Excelを供給し、T04が不足構文を推測せずRobinを出さない境界を新規会話で確認した。現作業版のPAD受入、T09、T04独立PAD再試験は継続中。ナレッジ固有事前質問は現作業版で完了）。
+採取／教材化（左パネル全体観測と追加実測を整理。旧bundleでT04不足構文拒否を確認後、PAD専用フローでExcel範囲→FilterDataTable→中間CSV→別xlsx保存の正例を2回実測した。現作業版bundleでの通常チャット再生成とT04独立PAD再試験は継続中。T09はUI要素捕捉・貼付け・保存済みだがWebAutomation実行はタイムアウト。ナレッジ固有事前質問は前版で完了）。
 
 T02のFilter DataTableは、PAD UIで列／インデックス=`2`・等価演算子・値=`対象`を設定し、先行CSV読取り・CSV書出しを含む新規フローへ無修正Robinを貼付け、保存・2回実行・CSV照合まで完了した。先行CSVTable生成がない専用フローの未解決入力試行は失敗例として分離した。
 
-旧最終bundle SHA-256は `660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca`。現作業版はナレッジ訂正後の `2a0267d4fb42b3c27b9fab8527c63ae2f126474a936339eca0ba6ebe8c7d0f12` で、旧版のT01/T02/T03/T05/T06/T07/T08/T10実行証拠は履歴として保持し、現作業版の最終受入には再試験が必要。T04は現作業版で拒否境界を新規確認、T09は未実測。
+旧最終bundle SHA-256は `660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca`。現作業版はナレッジ訂正後の `0d09c90f8f95bd235a3d05cabd1bf76a445be3037eaa3bd5a46bbfee658bf10e` で、旧版のT01/T02/T03/T05/T06/T07/T08/T10実行証拠は履歴として保持し、現作業版の最終受入には再試験が必要。T04はPAD正例を実測済みだが、現作業版bundleでのCopilot再生成と独立PAD再試験が未完了。T09はUI要素捕捉・空フロー貼付け・保存まで完了したが、WebAutomation実行はタイムアウトで未完了。
 
 ## 直前に完了した項目
 
@@ -51,11 +51,11 @@ T02のFilter DataTableは、PAD UIで列／インデックス=`2`・等価演算
 - 既存索引を再集計し、51件・8カテゴリであることを確認した。
 - 作業ブランチを作成した。
 - `copilot/agent-instructions.txt` と7つの登録用 `.txt`、`copilot/README.md` を作成した。
-- `catalog/coverage.json` を生成し、観測済み73件と必須範囲A〜Gの16チェックを明示した。
+- `catalog/coverage.json` を生成し、観測済み86件と必須範囲A〜Gの16チェックを明示した。
 - T01〜T10の依頼・期待値を `catalog/generated/acceptance-t01-t10/README.md` に固定した。
 - `docs/robin-knowledge-validation.md` に静的検証、実機・CopilotのBLOCKED状態、再開手順を保存した。
-- `tests/Test-CopilotRobinPackage.ps1` がPASS（指示欄UTF-16 2,045、ナレッジ7、観測59）。
-- `tests/Test-RobinCatalog.ps1` がPASS（49 checks、PAD/Copilotを呼び出さない静的契約検査）。
+- `tests/Test-CopilotRobinPackage.ps1` がPASS（指示欄UTF-16 3,401、ナレッジ7、観測86）。
+- `tests/Test-RobinCatalog.ps1` がPASS（55 checks、PAD/Copilotを呼び出さない静的契約検査）。
 - 左パネルをActionsTreeViewで再観測し、412ノード（グループ72、アクション340）を `catalog/evidence/pad-action-inventory-20260909.json` に保存した。
 - 「現在の日時を取得」を「現在の日付のみ」で採取し、保存テキストを別の空フローへ貼付け・保存・再コピー・SHA-256一致・2回実行・期待値照合した。
 - 「新しいデータ テーブルを作成する」を0行0列設定で採取し、別の空フローへ貼付け・保存・再コピー・SHA-256一致・2回実行・0行0列期待値照合した。行追加・セル参照は未採取。
@@ -183,7 +183,7 @@ T02のFilter DataTableは、PAD UIで列／インデックス=`2`・等価演算
 
 - A〜Gの残り未採取チェック項目の1アクション×1設定採取・再貼付け・保存・実行・結果照合。coverageの対応表は既存証拠に合わせて更新したが、未採取項目は残る。
 - 通常チャットの7原本個別添付は不安定で、結合版へ切替済み。ナレッジ固有の事前確認質問は現作業版で別チャットへ添付・送信し、回答原文を保存した（`catalog/evidence/normal-chat-knowledge-precheck-20260910.json`）。
-- 現作業版T04の新規チャット境界証拠を保存したが、PAD Trusted RPC未構成のためT04/T09の貼付け・保存・実行、T04独立PAD再試験、現作業版T01〜T10再試験は未完了。旧版証拠を現作業版の合格へ付け替えない。
+- T04はPAD UIAで正例2回実行・別xlsx論理照合まで完了した。T09はUI要素3件の捕捉・6アクション貼付け・保存まで完了したがWebAutomation実行は未完了。現作業版bundleでのCopilot再生成とT01〜T10、T04独立再試験は未完了。旧版の通常チャット証拠を現作業版の合格へ付け替えない。
 
 ## 失敗した方法と分かったこと
 
@@ -196,10 +196,10 @@ T02のFilter DataTableは、PAD UIで列／インデックス=`2`・等価演算
 
 ## 人の操作が必要な項目・具体的な理由
 
-- PADプロセスと既存専用フローは列挙できるが、現セッションのnative Computer Use Trusted RPCが未構成で操作できない。再開時は専用フロー名・Designer PIDを再観測し、原文→貼付け→保存→実行を新規証拠として採取する。
+- native Computer Use Trusted RPCは未構成だが、リポジトリ既存の厳格なUIAヘルパーで専用PADフローを一意に操作でき、T04の原文→貼付け→保存→実行を実測した。T09は同じ方式でUI要素依存を再観測する。
 - 前回のM365 Copilot入口確認では個人用アカウントにAgent Builder項目がなく、`/create` とOffice Agentは指定入口ではなかった。この履歴は将来の別環境確認用に保持するが、今回の通常チャット検証をBLOCKEDにはしない。
 - 通常チャットの本文入力・添付一覧・回答原文・T01〜T10はAgent Builderの検証結果と混同しない。初回のfile chooser失敗（`Not allowed`）は履歴として保持し、再試行では既存file inputへのCDP直接添付を確認した。
 
 ## 次に行う1作業
 
-現作業版 bundle と合成Excelを通常のM365 Copilotへ実添付し、GPT 5.6 Think DeeperでT04拒否境界を確認・保存した。現作業版の受入はbundle変更後のT01〜T10再生成・無修正PAD実行・独立再試験が必要。PAD UIの再開条件はTrusted RPCを構成したセッションで専用Designerを再観測できること。Agent Builder／Copilot Studioは開かない。
+T04のPAD正例（`catalog/evidence/t04-positive-acceptance-20260910.json`）を保存した。現作業版bundle `0d09c90f8f95bd235a3d05cabd1bf76a445be3037eaa3bd5a46bbfee658bf10e` はこの正例を含むため、通常チャットT04再生成後に全T01〜T10受入と独立再試験を行う。T09はUIAヘルパーでローカル画面を捕捉・貼付けし、実行タイムアウトを証拠化した。native CUAを使う場合の再開条件はTrusted RPC構成である。Agent Builder／Copilot Studioは開かない。

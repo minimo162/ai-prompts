@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<title>T09 local PAD test</title>
+<label for="t09-input">入力</label>
+<input id="t09-input" value="">
+<button id="t09-submit" type="button">実行</button>
+<p id="t09-result" aria-live="polite">未実行</p>
+<script>
+  document.querySelector('#t09-submit').addEventListener('click', () => {
+    document.querySelector('#t09-result').textContent =
+      document.querySelector('#t09-input').value === 'T09-input' ? 'T09-clicked' : '入力不一致';
+  });
+</script>
+</html>

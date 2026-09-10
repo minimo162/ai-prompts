@@ -1,0 +1,1 @@
+WebAutomation.Click.Click BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Button \'実行\''] ClickType: WebAutomation.ClickType.LeftClick MouseClick: True WaitForPageToLoadTimeout: 60 MousePositionRelativeToElement: WebAutomation.RectangleEdgePoint.MiddleCenter OffsetX: 0 OffsetY: 0

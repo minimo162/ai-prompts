@@ -98,6 +98,7 @@ PAD Robin ファイル・CSV
 注意
 - 読み取ったテキストと数値は型が異なる。空文字、別エンコード、桁区切り、改行の扱いは該当原文と実行証拠を確認する。
 - フォルダー内ファイル取得は `*.txt` と `*` の2設定を原文保存し、別フローへ再貼付け・保存・実行した。変数パスのテキスト読取りもT03でFor each＋Ifと組み合わせて実行した。存在確認、フォルダー作成、移動、名前変更は今回の左パネルで表示名を観測しただけで、今回条件のRobin原文・実行証拠がまだない。古い記録の名称や一般的なPAD説明からRobinを作らない。CSV読取り・書出し、単一ファイルコピー、フォルダー取得、変数パス読取りは上記の原文・実行証拠を正本とする。
+- T04中間CSV書出し: FilteredDataTableを`Variables.ConvertDataTableToCSV`でSystemDefault区切り・列名なしのCSVTextへ変換し、`File.WriteText`をUTF-8・追記なし・既存内容上書きで`catalog/evidence/t04-filtered.csv`へ保存した。原文は`catalog/actions/file-write-text/t04-filtered-csv.robin`、組合せ実行は`catalog/evidence/t04-positive-flow-run-6.json`と`run-7.json`。
 - ファイルを上書き・移動・削除する依頼では、対象、出力、衝突時の設定、結果確認を明示する。確認できない失敗後に後続処理や完了マーカーを作成しない。
 
 関連証拠

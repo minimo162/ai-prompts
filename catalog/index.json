@@ -1478,10 +1478,16 @@
         "構造化データに最適化": false
       },
       "inputs": [
-        { "name": "catalog/fixtures/pdf/source-a.pdf", "kind": "file" }
+        {
+          "name": "catalog/fixtures/pdf/source-a.pdf",
+          "kind": "file"
+        }
       ],
       "outputs": [
-        { "name": "ExtractedPDFText", "kind": "text" }
+        {
+          "name": "ExtractedPDFText",
+          "kind": "text"
+        }
       ],
       "robin_path": "actions/pdf-extract-text/page-2-repo.robin",
       "sha256": "df7b51aecbfa32e99792b48e011a4e4f0b9d8d7c8824d587f9107b94466165c4",
@@ -1936,7 +1942,10 @@
         "区切り記号": "SystemDefault"
       },
       "inputs": [
-        { "name": "FilteredDataTable", "kind": "data_table" }
+        {
+          "name": "FilteredDataTable",
+          "kind": "data_table"
+        }
       ],
       "outputs": [],
       "robin_path": "actions/csv-write/filtered-table-headers.robin",
@@ -2015,10 +2024,16 @@
         "CSVTable": "CSVTable"
       },
       "inputs": [
-        { "name": "catalog/fixtures/csv/t02-input-20260910.csv", "kind": "file" }
+        {
+          "name": "catalog/fixtures/csv/t02-input-20260910.csv",
+          "kind": "file"
+        }
       ],
       "outputs": [
-        { "name": "CSVTable", "kind": "data_table" }
+        {
+          "name": "CSVTable",
+          "kind": "data_table"
+        }
       ],
       "robin_path": "actions/csv-read/utf8-header.robin",
       "sha256": "cd7e56ec2cff77b4247072c7d2dee3c6e68911e016a6ea949251bf9a46c4216b",
@@ -2527,10 +2542,16 @@
         "生成された変数": "FilteredDataTable"
       },
       "inputs": [
-        { "name": "CSVTable", "kind": "data_table" }
+        {
+          "name": "CSVTable",
+          "kind": "data_table"
+        }
       ],
       "outputs": [
-        { "name": "FilteredDataTable", "kind": "data_table" }
+        {
+          "name": "FilteredDataTable",
+          "kind": "data_table"
+        }
       ],
       "robin_path": "actions/datatable-filter/status-equals-index2.robin",
       "sha256": "54878f58f2860e6d5151ef7690450aa878741bc65a80fad2b5f9c482fde5c2ca",
@@ -2592,6 +2613,428 @@
         "execution_evidence": "evidence/folder-get-files-all-rt-run-1.json"
       },
       "known_finding": "ファイルフィルター*でtxt/csv/mdを含む合成ファイルを取得した。"
+    },
+    {
+      "id": "excel-launch-t04-open-readonly",
+      "category": "Excel",
+      "ui_name": "Excel の起動",
+      "ui_automation_id": "Excel.LaunchExcel",
+      "variant": "t04-open-readonly",
+      "settings": {
+        "Excel の起動": "次のドキュメントを開く",
+        "ドキュメント パス": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\t04-filter-input.xlsx",
+        "インスタンスを表示する": true,
+        "読み取り専用として開く": true,
+        "UseMachineLocale": false
+      },
+      "inputs": [
+        {
+          "name": "t04-filter-input.xlsx",
+          "kind": "file"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ExcelInstance",
+          "kind": "excel_instance"
+        }
+      ],
+      "robin_path": "actions/excel-launch/t04-open-readonly.robin",
+      "sha256": "673ba361d788bbfcac66ef4da3d8ba9e7f628620d9fcde10e9779412946db6e0",
+      "capture_session": "t04-excel-read-range-2026-09-10",
+      "native_flow_name": "RobinKnowledgeT04ExcelFilterRT_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "excel-t04-read-range",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/t04-excel-read-range-run-1.json"
+      },
+      "known_finding": "合成T04入力ブックを表示・読み取り専用で開く設定を採取し、範囲読取り・閉じると同一専用フローで2回実行した。"
+    },
+    {
+      "id": "excel-read-t04-range-a1-c6",
+      "category": "Excel",
+      "ui_name": "Excel ワークシートから読み取る",
+      "ui_automation_id": "Excel.ReadFromExcel",
+      "variant": "t04-range-a1-c6",
+      "settings": {
+        "Excel インスタンス": "ExcelInstance",
+        "取得": "セル範囲の値",
+        "先頭列": "A",
+        "先頭行": 1,
+        "最終列": "C",
+        "最終行": 6,
+        "GetCellContentsMode": "TypedValues",
+        "FirstLineIsHeader": false
+      },
+      "inputs": [
+        {
+          "name": "ExcelInstance",
+          "kind": "excel_instance"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ExcelData",
+          "kind": "data_table"
+        }
+      ],
+      "robin_path": "actions/excel-read/t04-range-a1-c6.robin",
+      "sha256": "fe22fa6eb884429ffa8070305e4cf60d56f73fb307a5d9104e6c25574f92b219",
+      "capture_session": "t04-excel-read-range-2026-09-10",
+      "native_flow_name": "RobinKnowledgeT04ExcelFilterRT_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "excel-t04-read-range",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/t04-excel-read-range-run-1.json",
+        "variable_preview": "6 rows, 3 columns"
+      },
+      "known_finding": "セル範囲の値でA1:C6を読み取り、実行時のExcelDataプレビューは6行・3列だった。シート名指定は未採取で、入力のアクティブDataシートに依存する。"
+    },
+    {
+      "id": "excel-close-t04-no-save",
+      "category": "Excel",
+      "ui_name": "Excel を閉じる",
+      "ui_automation_id": "Excel.CloseExcel",
+      "variant": "t04-no-save",
+      "settings": {
+        "Excel インスタンス": "ExcelInstance",
+        "Excel を閉じる前": "ドキュメントを保存しない"
+      },
+      "inputs": [
+        {
+          "name": "ExcelInstance",
+          "kind": "excel_instance"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/excel-close/t04-no-save.robin",
+      "sha256": "ec175730925eda1fef8376c2f4ebb5ef65899fddd9d299e40a2eb79e744a0638",
+      "capture_session": "t04-excel-read-range-2026-09-10",
+      "native_flow_name": "RobinKnowledgeT04ExcelFilterRT_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "excel-t04-read-range",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/t04-excel-read-range-run-1.json"
+      },
+      "known_finding": "T04読取り専用インスタンスを保存せず閉じる構文を採取し、2回のフロー実行でExcelプロセスを残さなかった。"
+    },
+    {
+      "id": "variables-convert-datatable-csv-t04",
+      "category": "変数",
+      "ui_name": "データ テーブルをテキストに変換する",
+      "ui_automation_id": "Variables.ConvertDataTableToCSV",
+      "variant": "filtered-table-system-default-no-header",
+      "settings": {
+        "データ テーブル": "FilteredDataTable",
+        "列名を含める": false,
+        "列区切り": "SystemDefault"
+      },
+      "inputs": [
+        {
+          "name": "FilteredDataTable",
+          "kind": "data_table"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CSVText",
+          "kind": "text"
+        }
+      ],
+      "robin_path": "actions/datatable-convert/t04-filtered.robin",
+      "sha256": "ce03d9523b813c6b852a800f8e468885446cdefe15bdc58d9bcd7ea7edfb7d32",
+      "capture_session": "t04-excel-filter-to-workbook-2026-09-10",
+      "native_flow_name": "RobinKnowledgeT04ExcelFilterRT_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "excel-t04-filter-to-workbook",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/t04-positive-flow-run-6.json"
+      },
+      "known_finding": "Excel範囲からFilterDataTableで抽出した3行をSystemDefault区切りのCSV文字列へ変換した。"
+    },
+    {
+      "id": "file-write-t04-filtered-csv",
+      "category": "ファイル",
+      "ui_name": "テキストをファイルに書き込む",
+      "ui_automation_id": "File.WriteText",
+      "variant": "t04-filtered-csv-utf8-no-append",
+      "settings": {
+        "ファイル パス": "catalog/evidence/t04-filtered.csv",
+        "書き込むテキスト": "CSVText",
+        "新しい行を追加する": false,
+        "ファイルが存在する場合": "既存の内容を上書きする",
+        "エンコード": "UTF-8"
+      },
+      "inputs": [
+        {
+          "name": "CSVText",
+          "kind": "text"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/file-write-text/t04-filtered-csv.robin",
+      "sha256": "aba157284f2df6a0ed0f04f8d002a9f44daed51f6e59694307fbf777f10a73d3",
+      "capture_session": "t04-excel-filter-to-workbook-2026-09-10",
+      "native_flow_name": "RobinKnowledgeT04ExcelFilterRT_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "excel-t04-filter-to-workbook",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/t04-positive-flow-run-6.json"
+      },
+      "known_finding": "抽出CSV文字列をUTF-8・追記なし・既存内容上書きで専用中間CSVへ保存した。"
+    },
+    {
+      "id": "excel-launch-t04-filtered-csv-editable",
+      "category": "Excel",
+      "ui_name": "Excel の起動",
+      "ui_automation_id": "Excel.LaunchExcel",
+      "variant": "t04-filtered-csv-editable",
+      "settings": {
+        "Excel の起動": "次のドキュメントを開く",
+        "ドキュメント パス": "catalog/evidence/t04-filtered.csv",
+        "インスタンスを表示する": true,
+        "読み取り専用として開く": false,
+        "UseMachineLocale": false
+      },
+      "inputs": [
+        {
+          "name": "t04-filtered.csv",
+          "kind": "file"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ExcelInstance2",
+          "kind": "excel_instance"
+        }
+      ],
+      "robin_path": "actions/excel-launch/t04-filtered-csv-editable.robin",
+      "sha256": "1c9c34eecb5f74fe65871464bcc9201c68cb95a5f007297d3a91fcaa068b4db0",
+      "capture_session": "t04-excel-filter-to-workbook-2026-09-10",
+      "native_flow_name": "RobinKnowledgeT04ExcelFilterRT_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "excel-t04-filter-to-workbook",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/t04-positive-flow-run-6.json"
+      },
+      "known_finding": "中間CSVを編集可能Excelとして開き、SaveAsで新規xlsxへ変換した。"
+    },
+    {
+      "id": "excel-save-t04-output-xlsx",
+      "category": "Excel",
+      "ui_name": "Excel の保存",
+      "ui_automation_id": "Excel.SaveExcel",
+      "variant": "t04-output-xlsx",
+      "settings": {
+        "Excel インスタンス": "ExcelInstance2",
+        "保存モード": "名前を付けてドキュメントを保存",
+        "ドキュメント形式": "Excel ブック (.xlsx)",
+        "ドキュメント パス": "catalog/evidence/normal-chat-t04-output.xlsx"
+      },
+      "inputs": [
+        {
+          "name": "ExcelInstance2",
+          "kind": "excel_instance"
+        }
+      ],
+      "outputs": [],
+      "robin_path": "actions/excel-save/t04-output-xlsx.robin",
+      "sha256": "74c32e732bcaf1a3b2ac82ae278e53e44000d4ca24835aca633b44fa5295ed47",
+      "capture_session": "t04-excel-filter-to-workbook-2026-09-10",
+      "native_flow_name": "RobinKnowledgeT04ExcelFilterRT_20260910",
+      "native_subflow": "Main",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "clipboard_restored": true,
+        "saved": true,
+        "re_pasted": false,
+        "executed_in_flow": "excel-t04-filter-to-workbook",
+        "app_executor_verified": false,
+        "execution_evidence": "evidence/t04-positive-flow-run-6.json"
+      },
+      "known_finding": "中間CSVをExcelブック形式（xlsx）として別名保存した。"
+    },
+    {
+      "id": "web-launch-t09-local",
+      "category": "ブラウザー自動化",
+      "ui_name": "新しい Microsoft Edge を起動",
+      "ui_automation_id": "WebAutomation.LaunchEdge",
+      "variant": "t09-local-page",
+      "settings": {
+        "URL": "http://127.0.0.1:8765/t09-local-test.html",
+        "ページ読込待機タイムアウト秒": 60
+      },
+      "inputs": [],
+      "outputs": [],
+      "robin_path": "actions/web-launch/t09-local.robin",
+      "sha256": "5d17c3c9ceab58b2595292680b3651bc8033af459cf1050822c980011e0d6ee2",
+      "capture_session": "t09-local-ui-2026-09-10",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted_in": "RobinKnowledgeT09FilterPaste_20260910",
+        "executed_in_flow": null
+      },
+      "catalog_only": true
+    },
+    {
+      "id": "web-populate-t09-input",
+      "category": "ブラウザー自動化",
+      "ui_name": "Web ページ内のテキスト フィールドに入力する",
+      "ui_automation_id": "WebAutomation.PopulateTextField",
+      "variant": "t09-input-physical-keyboard",
+      "settings": {
+        "入力値": "T09-input",
+        "UI 要素": "Input text 't09-input'",
+        "入力モード": "Replace",
+        "フォーカス解除": true
+      },
+      "inputs": [],
+      "outputs": [],
+      "robin_path": "actions/web-populate/t09-input.robin",
+      "sha256": "8a480ac13ffc432efd60b576f806f63555174f38a0ad0d9def604e8e27ea0c1c",
+      "capture_session": "t09-local-ui-2026-09-10",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted_in": "RobinKnowledgeT09FilterPaste_20260910",
+        "executed_in_flow": null
+      },
+      "catalog_only": true
+    },
+    {
+      "id": "web-click-t09-submit",
+      "category": "ブラウザー自動化",
+      "ui_name": "Web ページのリンクをクリック",
+      "ui_automation_id": "WebAutomation.Click",
+      "variant": "t09-submit-left-click",
+      "settings": {
+        "クリックの種類": "左クリック",
+        "UI 要素": "Button '実行'"
+      },
+      "inputs": [],
+      "outputs": [],
+      "robin_path": "actions/web-click/t09-submit.robin",
+      "sha256": "1bade07a0bcaf692f1096f61173e09dafcc369e4f5abcda311fccaa6bab5740d",
+      "capture_session": "t09-local-ui-2026-09-10",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted_in": "RobinKnowledgeT09FilterPaste_20260910",
+        "executed_in_flow": null
+      },
+      "catalog_only": true
+    },
+    {
+      "id": "wait-t09-500ms",
+      "category": "フロー コントロール",
+      "ui_name": "待機",
+      "ui_automation_id": "LanguageConstructs.Wait",
+      "variant": "500-ms",
+      "settings": {
+        "期間": 500
+      },
+      "inputs": [],
+      "outputs": [],
+      "robin_path": "actions/wait/t09-500ms.robin",
+      "sha256": "46830606df457ab12926dde520ef0534196a3c8361028621c4ed830763c56c30",
+      "capture_session": "t09-local-ui-2026-09-10",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted_in": "RobinKnowledgeT09FilterPaste_20260910",
+        "executed_in_flow": null
+      },
+      "catalog_only": true
+    },
+    {
+      "id": "web-get-t09-result",
+      "category": "ブラウザー自動化",
+      "ui_name": "Web ページ上の要素の詳細を取得します",
+      "ui_automation_id": "WebAutomation.GetDetailsOfElement",
+      "variant": "t09-result-own-text",
+      "settings": {
+        "出力変数": "AttributeValue",
+        "UI 要素": "Paragraph '未実行'",
+        "属性名": "Own Text"
+      },
+      "inputs": [],
+      "outputs": [],
+      "robin_path": "actions/web-get-details/t09-result-own-text.robin",
+      "sha256": "17ac68f7b5ec6bd1b6aed393633d67269ea1d3d11ed557be8d62e1a18e6f3883",
+      "capture_session": "t09-local-ui-2026-09-10",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted_in": "RobinKnowledgeT09FilterPaste_20260910",
+        "executed_in_flow": null
+      },
+      "catalog_only": true
+    },
+    {
+      "id": "web-close-t09",
+      "category": "ブラウザー自動化",
+      "ui_name": "Web ブラウザーを閉じる",
+      "ui_automation_id": "WebAutomation.CloseWebBrowser",
+      "variant": "t09-browser",
+      "settings": {
+        "ブラウザー変数": "Browser"
+      },
+      "inputs": [],
+      "outputs": [],
+      "robin_path": "actions/web-close/t09.robin",
+      "sha256": "43aaa0e64000e28863d199f159811fa438de1fb7c8052278118dfcf07c30e50b",
+      "capture_session": "t09-local-ui-2026-09-10",
+      "verification": {
+        "added_from_left_panel": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted_in": "RobinKnowledgeT09FilterPaste_20260910",
+        "executed_in_flow": null
+      },
+      "catalog_only": true
     }
   ],
   "flows": [
@@ -3164,6 +3607,109 @@
       "evidence": "evidence/normal-chat-t02-final-pad-run.json",
       "app_executor_verified": false,
       "controller_support": "not_implemented"
+    },
+    {
+      "id": "excel-t04-read-range",
+      "robin_path": "flows/excel-t04-read-range/roundtrip.robin",
+      "sha256": "67194a87210b59b9585d955433d4a96cd1e207ea0d16c3978c5df9df4de9bc8e",
+      "action_ids": [
+        "excel-launch-t04-open-readonly",
+        "excel-read-t04-range-a1-c6",
+        "excel-close-t04-no-save"
+      ],
+      "action_count": 3,
+      "native_flow_name": "RobinKnowledgeT04ExcelFilterRT_20260910",
+      "native_subflow": "Main",
+      "catalog_only": true,
+      "re_pasted_from_file": false,
+      "executed_twice": true,
+      "expected_value": "ExcelData preview is 6 rows x 3 columns; input workbook SHA-256 remains unchanged.",
+      "evidence": "evidence/t04-excel-read-range-paste.json; evidence/t04-excel-read-range-run-1.json; evidence/t04-excel-read-range-run-2.json",
+      "app_executor_verified": false,
+      "controller_support": "not_implemented",
+      "scope_note": "This is the measured Excel read/close prerequisite for T04. It does not yet filter rows or write a separate workbook."
+    },
+    {
+      "id": "excel-t04-filter-to-workbook",
+      "robin_path": "flows/excel-t04-filter-to-workbook/roundtrip.robin",
+      "sha256": "d45925fb49ae74d8518b5acc046aee1477774ad4749132801957df3d02408353",
+      "action_ids": [
+        "excel-launch-t04-open-readonly",
+        "excel-read-t04-range-a1-c6",
+        "datatable-filter-status-equals-index2",
+        "variables-convert-datatable-csv-t04",
+        "file-write-t04-filtered-csv",
+        "excel-launch-t04-filtered-csv-editable",
+        "excel-save-t04-output-xlsx",
+        "excel-close-t04-no-save",
+        "excel-close-t04-no-save"
+      ],
+      "action_count": 9,
+      "native_flow_name": "RobinKnowledgeT04ExcelFilterRT_20260910",
+      "native_subflow": "Main",
+      "catalog_only": true,
+      "re_pasted_from_file": false,
+      "re_pasted_in": "RobinKnowledgeT04FilterPaste_20260910",
+      "re_pasted_exact": true,
+      "re_paste_evidence": "evidence/t04-final-paste-flow-acceptance-20260910.json",
+      "executed_twice": true,
+      "expected_value": "Data sheet A1:C6 is read read-only; Status=対象 rows A/C/D are filtered; intermediate CSV is converted to a separate xlsx workbook with 3 rows x 3 columns; input SHA-256 remains unchanged.",
+      "input_sha256": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+      "output_sha256_run_1": "823eaaeeca727bdbd3623d56371a871fe08b82804c8b9c5e8864fca860352c1e",
+      "output_sha256_run_2": "d657cb165485cc80f3e5ab29520fc3a3e0b1f1096e663a9d70509a61dc417b0d",
+      "logical_output": {
+        "sheet": "t04-filtered",
+        "rows": [
+          [
+            "対象",
+            "A",
+            10
+          ],
+          [
+            "対象",
+            "C",
+            25
+          ],
+          [
+            "対象",
+            "D",
+            5
+          ]
+        ]
+      },
+      "failure_preserved": "evidence/normal-chat-t04-output-x000D-failure.xlsx",
+      "evidence": "evidence/t04-positive-flow-final-v4.robin; evidence/t04-positive-flow-run-6.json; evidence/t04-positive-flow-run-7.json; evidence/t04-replaced-debug.txt",
+      "app_executor_verified": false,
+      "controller_support": "not_implemented",
+      "scope_note": "The workbook is produced by writing filtered CSV through a separate Excel instance and SaveAs; no generated code was hand-edited."
+    },
+    {
+      "id": "t09-local-ui-roundtrip",
+      "robin_path": "flows/ui-t09-local-roundtrip/roundtrip.robin",
+      "sha256": "93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd",
+      "action_ids": [
+        "web-launch-t09-local",
+        "web-populate-t09-input",
+        "web-click-t09-submit",
+        "wait-t09-500ms",
+        "web-get-t09-result",
+        "web-close-t09"
+      ],
+      "action_count": 6,
+      "native_flow_name": "RobinKnowledgeT09LocalUI_20260910",
+      "roundtrip_flow_name": "RobinKnowledgeT09FilterPaste_20260910",
+      "catalog_only": true,
+      "source_sha256": "93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd",
+      "re_pasted_from_file": true,
+      "re_pasted_exact": false,
+      "action_lines_equal_on_recopy": true,
+      "re_paste_evidence": "evidence/t09-final-paste-acceptance-20260910.json",
+      "execution_attempts": 2,
+      "execution_status": "blocked_timeout_browser_extension",
+      "expected_value": "AttributeValue=T09-clicked and browser closes",
+      "evidence": "evidence/t09-capture-source-20260910.json; evidence/t09-runtime-block-20260910.json; evidence/t09-final-paste-acceptance-20260910.json",
+      "controller_support": "not_implemented",
+      "scope_note": "PAD UI picker captured real local Edge elements and the unchanged action lines were pasted into an empty flow. PAD runtime did not complete within the monitored interval; no guessed selector or success claim."
     }
   ],
   "capture_sessions": [
@@ -3290,6 +3836,86 @@
       ],
       "scope": "Synthetic Japanese text with quotes, 100%% UI literal, backslash; UTF-8 overwrite with appended newline; failed literal-100-percent trial retained separately.",
       "evidence": "evidence/text-write-validation.json"
+    },
+    {
+      "id": "t04-excel-read-range-2026-09-10",
+      "date": "2026-09-10",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": false,
+      "native_flow_name": "RobinKnowledgeT04ExcelFilterRT_20260910",
+      "roundtrip_flow_name": "RobinKnowledgeT04ExcelFilterRT_20260910",
+      "action_ids": [
+        "excel-launch-t04-open-readonly",
+        "excel-read-t04-range-a1-c6",
+        "excel-close-t04-no-save"
+      ],
+      "scope": "Synthetic t04-filter-input.xlsx, active Data sheet A1:C6, read-only launch, range read, no-save close; executed twice.",
+      "input_sha256": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+      "result_preview": "6 rows x 3 columns",
+      "input_unchanged": true,
+      "evidence": "evidence/t04-excel-read-range-paste.json; evidence/t04-excel-read-range-run-1.json; evidence/t04-excel-read-range-run-2.json"
+    },
+    {
+      "id": "t04-excel-filter-to-workbook-2026-09-10",
+      "date": "2026-09-10",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": false,
+      "native_flow_name": "RobinKnowledgeT04ExcelFilterRT_20260910",
+      "roundtrip_flow_name": "RobinKnowledgeT04ExcelFilterRT_20260910",
+      "action_ids": [
+        "excel-launch-t04-open-readonly",
+        "excel-read-t04-range-a1-c6",
+        "datatable-filter-status-equals-index2",
+        "variables-convert-datatable-csv-t04",
+        "file-write-t04-filtered-csv",
+        "excel-launch-t04-filtered-csv-editable",
+        "excel-save-t04-output-xlsx",
+        "excel-close-t04-no-save"
+      ],
+      "scope": "Synthetic t04-filter-input.xlsx, Status=対象, CSV intermediate then separate editable Excel SaveAs xlsx; no generated code edits.",
+      "input_sha256": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+      "output_rows": [
+        [
+          "対象",
+          "A",
+          10
+        ],
+        [
+          "対象",
+          "C",
+          25
+        ],
+        [
+          "対象",
+          "D",
+          5
+        ]
+      ],
+      "input_unchanged": true,
+      "executed_twice": true,
+      "evidence": "evidence/t04-positive-acceptance-20260910.json"
+    },
+    {
+      "id": "t09-local-ui-2026-09-10",
+      "date": "2026-09-10",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": false,
+      "native_flow_name": "RobinKnowledgeT09LocalUI_20260910",
+      "roundtrip_flow_name": "RobinKnowledgeT09FilterPaste_20260910",
+      "action_ids": [
+        "web-launch-t09-local",
+        "web-populate-t09-input",
+        "web-click-t09-submit",
+        "wait-t09-500ms",
+        "web-get-t09-result",
+        "web-close-t09"
+      ],
+      "scope": "Local HTTP fixture with PAD-captured input, button and result paragraph; input T09-input, click, 500 ms wait, Own Text read, browser close.",
+      "capture_method": "PAD UI 要素ピッカー via strict UIA fallback; native CUA unavailable",
+      "evidence": "evidence/t09-capture-source-20260910.json; evidence/t09-final-paste-acceptance-20260910.json; evidence/t09-runtime-block-20260910.json"
     }
   ],
   "application_integration": {

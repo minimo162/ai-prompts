@@ -36,3 +36,13 @@ PAD Robin 完成例・生成試験の参照
 失敗・未確認の参照
 - 既存の失敗や範囲は docs/robin-knowledge-progress.md、docs/robin-action-catalog.md、docs/office-action-capture.md、docs/pdf-action-capture.md に記録する。
 - 生成コードを後から手直しした場合は、元の回答と修正版を別ファイルにして無修正成功と混同しない。
+
+例4: T04 Excel条件抽出→別ブック
+- `catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin` は、Excel A1:C6読取り、FilterDataTable列0=`対象`、CSV変換・中間CSV保存、別ExcelインスタンスでCSVを開いてxlsxへSaveAsする実測組合せである。
+- `catalog/evidence/t04-positive-flow-run-6.json` と `t04-positive-flow-run-7.json` で2回のPAD実行成功、`normal-chat-t04-output.xlsx`の3行3列と入力SHA不変を照合した。
+- CSVをExcelセルへ直接書いた初回失敗（`_x000D_`混入）は`catalog/evidence/normal-chat-t04-output-x000D-failure.xlsx`へ保存した。失敗を修正コードの成功へ付け替えず、中間CSV経由の正例と分ける。
+
+例5: T09ローカルUI捕捉・貼付け（実行未完了）
+- `catalog/fixtures/ui/t09-local-test.html` をローカルEdgeで開き、PAD UI要素ピッカーから `t09-input`、`t09-submit`、`t09-result` を捕捉した。セレクターは各要素のId属性を実画面から取得しており、推測ではない。
+- `catalog/flows/ui-t09-local-roundtrip/roundtrip.robin` は、Edge起動→`T09-input`入力→実行ボタンクリック→`WAIT 500`→結果段落の`Own Text`取得→ブラウザー終了の6アクション原文である。空フロー `RobinKnowledgeT09FilterPaste_20260910` へ貼付け・保存し、再コピーのアクション行6本一致を確認した。
+- PAD WebAutomationの元フロー・貼付けフロー実行はブラウザー拡張経路で完了せず、監視後に停止した。`AttributeValue=T09-clicked` は未観測であり、T09を実行成功と表示しない。詳細は `catalog/evidence/t09-capture-source-20260910.json`、`t09-final-paste-acceptance-20260910.json`、`t09-runtime-block-20260910.json`。
