@@ -4713,6 +4713,18 @@
       "evidence": "evidence/p3-date-add-probe-20260910.json"
     },
     {
+      "id": "p3-date-format-custom-failure-2026-09-10",
+      "date": "2026-09-10",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeP3ElseIf_20260910",
+      "ui_automation_ids": ["Text.ConvertDateTimeToText"],
+      "scope": "Synthetic custom DateTime-to-text attempt; variable binding did not persist and PAD reported an empty datetime parameter. Current bundle unchanged.",
+      "current_package_acceptance": false,
+      "execution_status": "failed_probe_unconfigured_input",
+      "evidence": "evidence/p3-date-format-custom-failure-20260910.json"
+    },
+    {
       "id": "p3-excel-sheet-probe-2026-09-10",
       "date": "2026-09-10",
       "pad_file_version": "2.71.115.26224",
