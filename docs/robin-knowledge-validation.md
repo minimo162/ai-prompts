@@ -3,7 +3,7 @@
 更新日: 2026-09-10
 ブランチ: `codex/issue-5-acceptance-20260910b`
 基準main: `69fe344`
-固定コミット: `c3efbd9`（最新P3 probe反映コミット。metadata更新は後続コミット）
+固定コミット: `2731e0e`（最新P3 probe・metadata反映コミット）
 状態: partial
 
 ## 利用先の訂正
