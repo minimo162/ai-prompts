@@ -4781,6 +4781,17 @@
       "scope": "Synthetic If/Else/END block; both THEN and ELSE branches run once with no side effects. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-else-probe-20260910.json"
+    },
+    {
+      "id": "p3-break-probe-2026-09-10",
+      "date": "2026-09-10",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeP3Break_20260910",
+      "ui_automation_ids": ["LanguageConstructs.Loop", "LanguageConstructs.Break"],
+      "scope": "Synthetic finite Loop 1..3 with EXIT LOOP; copied, saved, and run successfully with LoopIndex=1. Current bundle unchanged.",
+      "current_package_acceptance": false,
+      "evidence": "evidence/p3-break-probe-20260910.json"
     }
   ],
   "application_integration": {
