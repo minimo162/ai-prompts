@@ -188,3 +188,5 @@ HEAD `b411a7c`でRaw契約6 assertions、Copilot package（指示3,949 UTF-16／
 ### P3追補統合版（2026-09-11）
 
 7原本へ、既定エラーハンドラーの2回成功、DataTable作成、ファイル／制御／Excel範囲読取りの実測根拠と、未確認・失敗境界を統合した。bundle SHA-256は `0c89e53ce84671fd4bf1da4287563bf79f5164674f22907c8a420758310b36e6`、マニフェストは `copilot/knowledge-bundle-manifest-20260911.json`。統合後の通常チャット知識precheck、T01〜T10、T01/T04/T10独立再試験は未実行で、旧bundle証跡を新bundleのPASSへ付け替えない（`catalog/evidence/current-package-status-20260911-p3-integration.json`）。
+
+P3統合版をHEAD `7b06805`で静的検査し、Raw 6、Package 3949/7/86、Catalog 84、DOM 898、`git diff --check`をPASSした。新bundleのCopilot/PAD受入はまだ未実行である（`catalog/evidence/current-package-static-check-20260911-p3.json`）。

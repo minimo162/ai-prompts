@@ -2,7 +2,7 @@
   "schema_version": 1,
   "captured_at": "2026-09-11T04:02:00+09:00",
   "status": "partial_new_bundle_requires_full_reacceptance",
-  "head_at_check": "be1a9fd",
+  "head_at_check": "7b06805",
   "branch": "codex/issue-5-acceptance-20260910b",
   "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
   "knowledge_bundle_sha256": "0c89e53ce84671fd4bf1da4287563bf79f5164674f22907c8a420758310b36e6",
