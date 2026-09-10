@@ -20,7 +20,7 @@ P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、
 
 ファイル存在確認とファイル移動（成功＋DoNothing衝突再実行）のprobeも別証跡でPASSですが、現行bundle未統合です。欠損パスのfalse分岐はrawコピー・実行完了まで確認しましたが、branch bodyのside effectは未確認です。
 ファイル名前変更も別probeでPASSですが、現行bundle未統合です。false分岐のbranch-body実行は未確認です。
-列付きDataTable行追加は値数不一致のnative runtime errorを再現し、成功するRowToAdd型・行反復・セル参照は未確認です。
+3列1行（A/10/対象）のDataTable作成は別probeで2回実行確認しています。列付き行追加は値数不一致のnative runtime errorを再現し、成功するRowToAdd型・行反復・セル参照は未確認です。
 ビジュアライザー保存後の0列への戻りも別失敗として保持しています。
 If/Else/ENDとIf/Else-if/ENDの構造と実行は別probeで確認していますが、入れ子・分岐内処理は未確認です。
 有限Loopの`EXIT LOOP`と`NEXT LOOP`は別probeで確認しています。入れ子とloop内副作用は未確認です。

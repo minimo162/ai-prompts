@@ -32,7 +32,7 @@
 
 - A 基礎: 既存の変数・文字列・数値・リスト・置換・分割・結合・数値変換に加え、日時取得のdate-only設定とサブテキスト取得のUnicode混在1設定を実測済み。別probeで日時加算・減算、一般の数値減算を実行確認したが、カスタム日時書式化とリスト取出しは未確認。
 - B 制御: 定数範囲LoopとFor each／Ifの原文を観測し、For each＋If＋ファイル読取りのT03組合せを実行済み。別probeでElse、Else-if、EXIT LOOP、NEXT LOOP、エラー処理ブロック骨格、欠損ファイル子アクションのruntime error、P3Worker作成＋MainからのCALLを確認したが、入れ子とカスタムハンドラーは未確認。
-- C データ処理: 空データテーブル作成、CSV読取り、DataTable変数参照でのCSV書出しは実測済み。0行0列への空行追加は設計エラーとして記録。列を持つテーブルの行追加・行反復・セル参照は未確認。
+- C データ処理: 空データテーブル作成、3列1行DataTable作成、CSV読取り、DataTable変数参照でのCSV書出しは実測済み。0行0列・列数不一致の行追加は失敗として記録。列付き行追加・行反復・セル参照の成功は未確認。
 - D ファイル: UTF-8テキスト読取り・書出し、CSV読取り・書出し、単一ファイルのコピー、フォルダー内ファイル取得2設定、変数パス読取りは原文・別フロー貼付け・実行へ対応づけた。別probeで存在確認、フォルダー作成、移動（成功＋DoNothing衝突再実行）、名前変更を確認した。欠損パスのfalse分岐はrawコピー・実行完了まで確認したが、branch bodyのside effectは未確認。
 - E Excel: 起動・セル/範囲読取り・書込み・保存・終了は観測済み。シート選択・データ反復の独立例は未確認。
 - F Word・PowerPoint・PDF: 既存採取・証跡を引き継ぐ教材化と再利用確認が必要。未採取モードを完成例へ混ぜない。
@@ -234,7 +234,7 @@ Dの「ファイルが存在する場合」は、既存の合成fixtureを対象
 Dの「ファイルの移動」は、合成sourceを専用destinationへ移動する1アクションをコピー・保存し、1回目の移動とsource再作成後のDoNothing衝突再実行を確認した。`MovedFiles=[]`、source／destinationハッシュ一致、false分岐は未採取である（`catalog/evidence/p3-file-move-probe-20260910.json`）。
 Dの「ファイルの名前を変更する」は、拡張子保持・DoNothing設定で合成ファイルを1回改名し、2回目は衝突no-opを確認した。false分岐は未採取、probeは現行bundleへ未統合である（`catalog/evidence/p3-file-rename-probe-20260910.json`）。
 Cの列付きDataTableは5列の作成を試したが、1値だけを渡す行追加でPAD native runtime error（指定値1件／列5件の不一致）となった。行値の正しい型・行反復・セル参照を推測せず、失敗原文を別証跡へ固定した（`catalog/evidence/p3-datatable-row-failure-20260910.json`）。
-2回目のDataTable行追加試行では、ビジュアライザー上の1行3列が親ダイアログ保存後に実行時0行0列へ戻り、2値の`%RowValues%`も値数不一致で失敗した。raw copyが安定しなかった区間は未採取として別証跡に分離し、成功構文を推測していない（`catalog/evidence/p3-datatable-row-list-failure-20260910.json`）。
+3列1行（A/10/対象）のDataTable作成を別の新規専用probeでコピー・保存・2回実行し、1行3列のpreviewを確認した。行追加の成功構文は未確認である。2回目の行追加試行では、ビジュアライザー上の1行3列が親ダイアログ保存後に実行時0行0列へ戻り、2値の`%RowValues%`も値数不一致で失敗した。raw copyが安定しなかった区間は未採取として別証跡に分離し、成功構文を推測していない（`catalog/evidence/p3-datatable-create-success-20260911.json`、`catalog/evidence/p3-datatable-row-list-failure-20260910.json`）。
 If/Else/ENDとIf/Else-if/ENDは新規専用probeで正しいリテラル比較を採取し、各構造を2回実行した。branch side effectを追加していないため、入れ子・分岐内アクションは未採取で、probeは現行bundleへ未統合である（`catalog/evidence/p3-else-probe-20260910.json`、`catalog/evidence/p3-else-if-probe-20260910.json`）。
 有限Loop 1..3へ`EXIT LOOP`を追加したprobeも、LoopIndex=1で終了することを確認した。別probeの`NEXT LOOP`は2回ともLoopIndex=4で終了した。入れ子・分岐内処理・loop side effectは未採取、probeは現行bundle未統合である（`catalog/evidence/p3-break-probe-20260910.json`、`catalog/evidence/p3-continue-probe-20260910.json`）。
 同じ有限Loopへ`NEXT LOOP`を追加したprobeでは、LoopIndex=4で終了することを2回確認した。入れ子・loop side effectは未採取、probeは現行bundle未統合である（`catalog/evidence/p3-continue-probe-20260910.json`）。

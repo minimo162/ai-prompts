@@ -2201,8 +2201,9 @@
       "failed_action_ids": [
         "datatable-add-row-empty-failed"
       ],
-      "reason": "空のデータテーブル作成、Excel範囲→FilterDataTable条件抽出、DataTableのCSV文字列化は実測済み。0行0列への空行追加は設計エラーとして保存。列を持つテーブルの行追加・行反復・セル参照は未採取。",
-      "reference": "catalog/index.json; catalog/evidence/datatable-create-validation.json; catalog/evidence/t04-positive-flow-run-6.json; catalog/evidence/filter-t02-roundtrip2-run-2.json",
+      "observed_probe_ids": ["p3-datatable-create-success-2026-09-11"],
+      "reason": "空のデータテーブル作成、3列1行（A/10/対象）のDataTable作成、Excel範囲→FilterDataTable条件抽出、DataTableのCSV文字列化は実測済み。0行0列と列数不一致の行追加失敗は保存。列付きテーブルの行追加・行反復・セル参照の成功は未採取。",
+      "reference": "catalog/index.json; catalog/evidence/datatable-create-validation.json; catalog/evidence/p3-datatable-create-success-20260911.json; catalog/evidence/t04-positive-flow-run-6.json; catalog/evidence/filter-t02-roundtrip2-run-2.json",
       "live_ui_candidates": [
         {
           "ui_name": "新しいデータ テーブルを作成する",
@@ -2528,8 +2529,8 @@
     "id": "C-datatable",
     "missing": "列付き行追加・行反復・セル参照",
     "status": "BLOCKED_EXTERNAL_UI",
-    "reason": "列付きDataTableの作成画面と行追加を試験したが、5列に1値を渡すnative runtime errorを再現した。RowToAddの正しいリスト型・行反復・セル参照は未採取し、候補構文を推測していない。",
-    "evidence": "evidence/p3-datatable-row-failure-20260910.json",
+    "reason": "3列1行DataTableの作成を新規専用probeでコピー・保存・2回実行し、A/10/対象と1行3列を確認した。一方、5列に1値を渡す行追加のnative runtime errorとビジュアライザー復帰失敗も再現している。RowToAddの正しいリスト型・行反復・セル参照の成功は未採取し、候補構文を推測していない。",
+    "evidence": "evidence/p3-datatable-create-success-20260911.json; evidence/p3-datatable-row-failure-20260910.json; evidence/p3-datatable-row-list-failure-20260910.json",
     "resume": "列数一致のRowToAdd入力型をPAD画面から採取し、再貼付け・保存・実行・行反復・セル参照まで確認"
   },
   {

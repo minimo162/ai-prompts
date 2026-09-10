@@ -165,3 +165,5 @@ P0〜P5の要件監査表は `catalog/evidence/issue5-completion-audit-20260910.
 日時加算は `DateTime.Add ... TimeUnit.Days` を新規専用フローへ追加し、原文コピー・保存・2回実行、`2026/09/11 0:00:00` を確認した（`catalog/evidence/p3-date-add-probe-20260910.json`）。
 
 サブフローは `P3Worker` を作成し、Mainから `CALL P3Worker` で呼び出した。Workerのタイムアウト付きメッセージは2回とも `ButtonPressed=OK` で完了した（`catalog/evidence/p3-subflow-probe-20260910.json`）。Error blockでは欠損ファイル子アクションを1回実行し、Main line 2のruntime errorと後続非実行を確認した（`catalog/evidence/p3-error-trigger-probe-20260910.json`）。これらのprobeは現行bundle未統合である。カスタムエラーハンドラー、入れ子、DataTable成功構文、Excel反復などは未確認のまま保持する。
+
+DataTableは3列1行（`A/10/対象`）の作成を新規専用フローでコピー・保存・2回実行し、`1 行, 3 列`を確認した。行追加・行反復・セル参照の成功構文は未確認であり、5列に1値を渡すnative runtime errorとビジュアライザー復帰失敗は別の失敗証跡として保持する（`catalog/evidence/p3-datatable-create-success-20260911.json`、`p3-datatable-row-failure-20260910.json`、`p3-datatable-row-list-failure-20260910.json`）。

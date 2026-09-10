@@ -4795,6 +4795,17 @@
       "evidence": "evidence/p3-datatable-row-failure-20260910.json"
     },
     {
+      "id": "p3-datatable-create-success-2026-09-11",
+      "date": "2026-09-11",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeP3DataTableSuccess_20260911",
+      "ui_automation_ids": ["Variables.CreateNewDatatable"],
+      "scope": "Synthetic 3-column, 1-row DataTable creation with A/10/対象; copied, saved, and run twice. Current bundle unchanged.",
+      "current_package_acceptance": false,
+      "evidence": "evidence/p3-datatable-create-success-20260911.json"
+    },
+    {
       "id": "p3-datatable-row-list-failure-2026-09-10",
       "date": "2026-09-10",
       "pad_file_version": "2.71.115.26224",
