@@ -1,8 +1,9 @@
 # Robinナレッジ検証報告（途中）
 
 更新日: 2026-09-10
-ブランチ: `codex/issue-5-completion-20260910`
-基準: `c6d1e8daa25c7c0b72ebf51a26911e1318937807`
+ブランチ: `codex/issue-5-acceptance-20260910b`
+基準main: `69fe344`
+固定コミット: `7fce17f`
 状態: partial
 
 ## 利用先の訂正
@@ -13,9 +14,10 @@
 
 ## 静的・ファイル検証
 
-- `copilot/agent-instructions.txt` はUTF-8 BOMなし、9,214バイト、Unicodeスカラー数3,585、47行。8,000文字上限以内。SHA-256は `e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1`。
+- 履歴版の `copilot/agent-instructions.txt` はUTF-8 BOMなし、9,214バイト、Unicodeスカラー数3,585、47行。SHA-256は `e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1`。現作業版はUTF-8 BOMなし、10,096バイト、UTF-16 3,949、SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`。
+- 現作業版の結合bundle SHA-256は `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd`。旧bundle `431c...` の生成・PAD結果は履歴であり、現作業版の受入には継承しない。
 - ナレッジ配布版は7つの `.txt`。指示欄と技術資料を分離し、合計9ファイル（READMEを含む）で20ファイル上限を超えない。
-- `catalog/coverage.json` は `catalog/index.json` と既存証拠を突合し、観測バリアント86件（既存51＋追加22件）と必須範囲A〜Gの16チェックを記録。For each／If／フォルダー取得の既存実行証拠を対応づけ、Else・脱出・存在確認等の未確認は残した。左側一覧は `complete=false`、未観測の名称は推測していない。
+- `catalog/coverage.json` は `catalog/index.json` と既存証拠を突合し、観測バリアント86件（既存51＋追加35件）と必須範囲A〜Gの16チェックを記録。For each／If／フォルダー取得の既存実行証拠を対応づけ、Else・脱出・存在確認等の未確認は残した。左側一覧は `complete=false`、未観測の名称は推測していない。
 - `README.md` 冒頭をCopilotエージェント用配布物の入口へ変更。旧アプリ説明は過去資産として区別した。
 - `pad-robin-prompts.md` 冒頭に編集用原稿であることと配布正本への対応を追記した。
 - `catalog/generated/acceptance-t01-t10/README.md` にT01〜T10の依頼要点・期待値・状態を固定した。
@@ -143,6 +145,6 @@ T02ではPADのFilter DataTable設定画面で列／インデックス=`2`、演
 
 最初にT04/T10の原文を比較し、差分の段階を `catalog/evidence/normal-chat-raw-provenance-20260910.json` へ保存した。T04先行成功は測定済みFilterParametersの6引用符を保持し、最終v5だけが生成時に7引用符へ変化した。T10は入力原文から許可変更の2行以外にWord/PowerPoint保存パスが変化し、PAD再コピーは`_`を除いた別段階の正規化だった。`tests/Test-RobinRawContracts.ps1` の4 assertionsはPASSであり、生成Robinを正解へ書き換えていない。
 
-指示文へT04構造化引数の逐語複写、T10添付原文の変更範囲外逐語保持を追加し、T04/T10の技術資料へ正本行と失敗段階を追記した。7原本を `tools/Build-KnowledgeBundle.ps1` で再結合し、現作業版は指示SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA-256 `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd`、UTF-16 3,949。パッケージ検査86 observed actions、カタログ73 checks、差分検査はPASS。
+指示文へT04構造化引数の逐語複写、T10添付原文の変更範囲外逐語保持を追加し、T04/T10の技術資料へ正本行と失敗段階を追記した。7原本を `tools/Build-KnowledgeBundle.ps1` で再結合し、原本対応は `copilot/knowledge-bundle-manifest-20260910b.json` に固定した。現作業版は指示SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA-256 `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd`、UTF-16 3,949。パッケージ検査86 observed actions、カタログ73 checks、差分検査はPASS。
 
 現作業版の通常M365 Copilotへの再添付は、今回のブラウザー拡張file chooserが発火せず未実行である（`catalog/evidence/m365-current-package-upload-block-20260910b.json`）。T09ローカル画面の要素と結果文字は到達性として再確認したが、PAD WebAutomation実行の証拠ではない（`catalog/evidence/t09-current-environment-20260910b.json`）。旧版 `431c...` の生成・PAD結果は履歴として保持し、現作業版T01〜T10・独立再試験・負例へ継承しない。Issue #5は `partial` を維持する。

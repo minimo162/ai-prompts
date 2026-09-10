@@ -8,8 +8,9 @@
 
 ## 作業ブランチ／基準コミット
 
-- ブランチ: `codex/issue-5-completion-20260910`（2026-09-10継続作業）
-- 基準コミット: `c6d1e8daa25c7c0b72ebf51a26911e1318937807`（mainと一致）
+- ブランチ: `codex/issue-5-acceptance-20260910b`（2026-09-10継続作業）
+- 基準main: `69fe344`（origin/mainと一致）
+- 現在の固定コミット: `7fce17f`
 - origin: `https://github.com/minimo162/ai-prompts.git`
 - PR #19: squashマージ済み。今回の再開確認では新規push・PR・merge・公開を行わない。
 
@@ -39,7 +40,7 @@
 
 ## 現在の段階
 
-採取／教材化（現最終版指示SHA `e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1` とbundle SHA `431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3` を固定。知識プレチェックとT01〜T10の通常チャット生成を保存し、T01〜T03/T05〜T08は最終版PAD貼付け・保存・2回実行まで完了。T04は引用符差分、T09はWebAutomationタイムアウト、T10はWord SaveAsエラーをpartialとして記録）。
+前回版の採取／教材化（指示SHA `e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1` とbundle SHA `431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3`）の履歴。知識プレチェックとT01〜T10の通常チャット生成を保存し、T01〜T03/T05〜T08は前回版PAD貼付け・保存・2回実行まで完了。T04は引用符差分、T09はWebAutomationタイムアウト、T10はWord SaveAsエラーをpartialとして記録した。現作業版は末尾の「現作業版の再開記録」で別管理する。
 
 T02のFilter DataTableは、PAD UIで列／インデックス=`2`・等価演算子・値=`対象`を設定し、先行CSV読取り・CSV書出しを含む新規フローへ無修正Robinを貼付け、保存・2回実行・CSV照合まで完了した。先行CSVTable生成がない専用フローの未解決入力試行は失敗例として分離した。
 
@@ -214,6 +215,6 @@ PR #21後のmain `69fe344` から作業ブランチ `codex/issue-5-acceptance-20
 
 T04先行成功・最終失敗、T10入力原文・生成・PAD再コピーの差分を `catalog/evidence/normal-chat-raw-provenance-20260910.json` に固定した。T04の6個→7個の引用符変化とT10の変更範囲外パス変化はいずれもCopilot生成時に発生し、PAD再コピーは別の下流正規化である。検出専用の `tests/Test-RobinRawContracts.ps1` は4 assertions PASSで、コードの自動修復は行わない。
 
-原文保持規則を指示文とT04/T10技術資料へ最小追加し、`tools/Build-KnowledgeBundle.ps1` で7原本を再結合した。現作業版は指示SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA-256 `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd`、指示UTF-16 3,949である。`Test-CopilotRobinPackage.ps1` 86 observed actions、`Test-RobinCatalog.ps1` 73 checks、`git diff --check` はPASSした。
+原文保持規則を指示文とT04/T10技術資料へ最小追加し、`tools/Build-KnowledgeBundle.ps1` で7原本を再結合した。原本とbundleの対応は `copilot/knowledge-bundle-manifest-20260910b.json` に固定した。現作業版は指示SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA-256 `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd`、指示UTF-16 3,949である。`Test-CopilotRobinPackage.ps1` 86 observed actions、`Test-RobinCatalog.ps1` 73 checks、`git diff --check` はPASSした。
 
 この新しい指示・bundleでのM365再添付は、ブラウザー拡張経路のfile chooserが発火せず未実行である（`catalog/evidence/m365-current-package-upload-block-20260910b.json`）。T09はローカル画面の3要素と `T09-clicked` の到達性を再確認したが、これは手動DOM状態でありPAD WebAutomation実行ではない（`catalog/evidence/t09-current-environment-20260910b.json`）。したがって旧版のT01〜T03/T05〜T08 PASSや先行T04/T10成功を現作業版へ継承せず、現作業版T01〜T10、T01/T04/T10独立再試験、負例は未完了のまま保持する。必要な人の操作は、ログイン済み通常M365 Copilotへ現作業版bundleと合成fixtureを添付できるCDP/file-input経路を用意すること、またはPADのTrusted RPCを構成してT04/T09/T10の無修正貼付け・実行を再観測することである。次の1作業は、現作業版を新規チャットへ添付してT04生成原文の引用符が6個のままか確認すること。
