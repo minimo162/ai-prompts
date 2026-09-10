@@ -1,6 +1,6 @@
 # Robinナレッジ作成 進捗
 
-更新日: 2026-09-10
+更新日: 2026-09-11
 
 ## 全体目標
 
@@ -10,7 +10,7 @@
 
 - ブランチ: `codex/issue-5-acceptance-20260910b`（2026-09-10継続作業）
 - 基準main: `69fe344`（origin/mainと一致）
-- 現在の固定コミット: `2731e0e`（日時加算・Else-if・Error child・サブフローprobeと対応文書を固定）
+- 現在の固定コミット: `d3e125c`（P3統合bundle・T09停止境界・静的検査を反映）
 - origin: `https://github.com/minimo162/ai-prompts.git`
 - PR #19: squashマージ済み。今回の再開確認では新規push・PR・merge・公開を行わない。
 
@@ -34,7 +34,7 @@
 - B 制御: 定数範囲LoopとFor each／Ifの原文を観測し、For each＋If＋ファイル読取りのT03組合せを実行済み。別probeでElse、Else-if、EXIT LOOP、NEXT LOOP、エラー処理ブロック骨格、欠損ファイル子アクションのruntime error、P3Worker作成＋MainからのCALLを確認したが、入れ子とカスタムハンドラーは未確認。
 - C データ処理: 空データテーブル作成、3列1行DataTable作成、CSV読取り、DataTable変数参照でのCSV書出しは実測済み。0行0列・列数不一致の行追加は失敗として記録。列付き行追加・行反復・セル参照の成功は未確認。
 - D ファイル: UTF-8テキスト読取り・書出し、CSV読取り・書出し、単一ファイルのコピー、フォルダー内ファイル取得2設定、変数パス読取りは原文・別フロー貼付け・実行へ対応づけた。別probeで存在確認、フォルダー作成、移動（成功＋DoNothing衝突再実行）、名前変更を確認した。欠損パスのfalse分岐はrawコピー・実行完了まで確認したが、branch bodyのside effectは未確認。
-- E Excel: 起動・セル/範囲読取り・書込み・保存・終了は観測済み。シート選択・データ反復の独立例は未確認。
+- E Excel: 起動・セル/範囲読取り・書込み・保存・終了、Sheet1選択、A1:C6読取り（6行3列プレビュー）は確認済み。データ反復の独立例は未確認。
 - F Word・PowerPoint・PDF: 既存採取・証跡を引き継ぐ教材化と再利用確認が必要。未採取モードを完成例へ混ぜない。
 - G UI・ブラウザー: T09でローカルEdgeの入力・ボタン・結果段落をUI要素ピッカーから捕捉し、6アクションを空フローへ貼付け・保存した。WebAutomation通し実行はブラウザー拡張経路のタイムアウトで未完了。
 
@@ -44,7 +44,7 @@
 
 T02のFilter DataTableは、PAD UIで列／インデックス=`2`・等価演算子・値=`対象`を設定し、先行CSV読取り・CSV書出しを含む新規フローへ無修正Robinを貼付け、保存・2回実行・CSV照合まで完了した。先行CSVTable生成がない専用フローの未解決入力試行は失敗例として分離した。
 
-旧最終bundle SHA-256は履歴として保持する。現作業版は instruction SHA `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e` と bundle SHA `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd` で、旧版のT01/T02/T03/T05/T06/T07/T08/T10実行証拠は履歴として保持し、現作業版の最終受入には再試験が必要。T04は現作業版bundleで通常チャット生成・無修正PAD貼付け・保存・2回実行・論理照合まで完了したが、独立PAD再試験は未完了。T09はUI要素捕捉・空フロー貼付け・保存まで完了したが、WebAutomation実行はタイムアウトで未完了。
+旧bundle SHA-256は履歴として保持する。P3追補統合後の現作業版は instruction SHA `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e` と bundle SHA `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644` で、旧版のT01〜T10実行証拠は新bundleの最終受入へ継承しない。T09はUI要素捕捉・空フロー貼付け・保存まで完了したが、現行6アクションのWebAutomation実行は112秒時点で停止し、未完了である。
 
 ## 直前に完了した項目
 

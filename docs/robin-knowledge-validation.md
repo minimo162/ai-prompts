@@ -1,9 +1,9 @@
 # Robinナレッジ検証報告（途中）
 
-更新日: 2026-09-10
+更新日: 2026-09-11
 ブランチ: `codex/issue-5-acceptance-20260910b`
 基準main: `69fe344`
-固定コミット: `2731e0e`（最新P3 probe・metadata反映コミット）
+固定コミット: `d3e125c`（P3統合bundle・T09停止境界・静的検査を反映）
 状態: partial
 
 ## 利用先の訂正
@@ -15,9 +15,9 @@
 ## 静的・ファイル検証
 
 - 履歴版の `copilot/agent-instructions.txt` はUTF-8 BOMなし、9,214バイト、Unicodeスカラー数3,585、47行。SHA-256は `e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1`。現作業版はUTF-8 BOMなし、10,096バイト、UTF-16 3,949、SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`。
-- 現作業版の結合bundle SHA-256は `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd`。旧bundle `431c...` の生成・PAD結果は履歴であり、現作業版の受入には継承しない。
+- 現作業版のP3追補統合結合bundle SHA-256は `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644`。旧bundle `4282...`／`431c...` の生成・PAD結果は履歴であり、新bundleの受入には継承しない。
 - ナレッジ配布版は7つの `.txt`。指示欄と技術資料を分離し、合計9ファイル（READMEを含む）で20ファイル上限を超えない。
-- `catalog/coverage.json` は `catalog/index.json` と既存証拠を突合し、観測バリアント86件（既存51＋追加35件）と必須範囲A〜Gの16チェックを記録。別probeでBoolean／減算／日時加算・減算／Else／Loop脱出・継続／ファイル操作／Excelシート／エラー骨格／サブフロー作成・呼出しを確認したが、現行bundleへは未統合。左側一覧は `complete=false`、未観測の名称は推測していない。
+- `catalog/coverage.json` は `catalog/index.json` と既存証拠を突合し、観測バリアント86件（既存51＋追加35件）と必須範囲A〜Gの16チェックを記録。P3追補のBoolean／減算／日時加算・減算／Else／Loop脱出・継続／ファイル操作／Excelシート／エラー骨格／サブフロー作成・呼出しを新bundleへ反映したが、現行packageの外部受入は未完了。左側一覧は `complete=false`、未観測の名称は推測していない。
 - `README.md` 冒頭をCopilotエージェント用配布物の入口へ変更。旧アプリ説明は過去資産として区別した。
 - `pad-robin-prompts.md` 冒頭に編集用原稿であることと配布正本への対応を追記した。
 - `catalog/generated/acceptance-t01-t10/README.md` にT01〜T10の依頼要点・期待値・状態を固定した。
