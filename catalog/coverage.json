@@ -2462,5 +2462,84 @@
         }
       ]
     }
+  ],
+  "p3_blocked_items": [
+    {
+      "id": "A-text-number-boolean-set",
+      "missing": "真偽値の独立設定",
+      "status": "BLOCKED_EXTERNAL_UI",
+      "reason": "PAD Designerでの追加・設定・コピーが必要だが、現セッションのTrusted RPCが未構成。既存の文字列・数値証跡は再利用する。",
+      "resume": "専用空フローでBoolean設定を1件採取し、再貼付け・実行・期待値照合"
+    },
+    {
+      "id": "A-arithmetic-add-subtract",
+      "missing": "減算",
+      "status": "BLOCKED_EXTERNAL_UI",
+      "reason": "PAD Designerの減算アクション原文が未採取。加算の既存証跡を減算へ拡張しない。",
+      "resume": "『変数を小さくする』を専用フローへ追加し、原文と実行値を保存"
+    },
+    {
+      "id": "A-list-create-add-get",
+      "missing": "リスト項目取出し",
+      "status": "BLOCKED_EXTERNAL_UI",
+      "reason": "取出し構文をPAD画面から採取できていない。既存の作成・追加証跡のみを再利用する。",
+      "resume": "リスト項目参照の実表示アクションを1設定採取"
+    },
+    {
+      "id": "A-datetime",
+      "missing": "日時加算・減算・書式化",
+      "status": "BLOCKED_EXTERNAL_UI",
+      "reason": "現在日時取得以外の設定原文と実行値が未採取。",
+      "resume": "日時アクションを1設定ずつ採取し、入力日時と出力書式を照合"
+    },
+    {
+      "id": "B-if-else",
+      "missing": "Else／Else if",
+      "status": "BLOCKED_EXTERNAL_UI",
+      "reason": "Ifの既存成功をElseへ拡張できない。ブロック終端をPAD画面で採取する必要がある。",
+      "resume": "ElseまたはElse ifを含む最小条件ブロックを採取・実行"
+    },
+    {
+      "id": "B-loop-fixed-foreach-exit",
+      "missing": "ループ脱出・次のループ",
+      "status": "BLOCKED_EXTERNAL_UI",
+      "reason": "Break／Continueの原文と実行値が未確認。",
+      "resume": "有限LoopへBreakまたはContinueを1つ追加して実行"
+    },
+    {
+      "id": "B-error-subflow",
+      "missing": "エラー処理・サブフロー作成／呼出し",
+      "status": "BLOCKED_EXTERNAL_UI",
+      "reason": "左パネルの候補名だけでRobinを推測しない。",
+      "resume": "エラー処理ブロックとサブフロー呼出しを最小例で採取"
+    },
+    {
+      "id": "C-datatable",
+      "missing": "列付き行追加・行反復・セル参照",
+      "status": "BLOCKED_EXTERNAL_UI",
+      "reason": "0行0列への行追加失敗は保持済みだが、成功する列定義の原文が未採取。",
+      "resume": "列付きDataTableを作成して行追加・セル参照を1周実行"
+    },
+    {
+      "id": "D-files-folders",
+      "missing": "存在確認・フォルダー作成・移動・名前変更",
+      "status": "BLOCKED_EXTERNAL_UI",
+      "reason": "列挙・コピー・読書きの証跡は再利用できるが、未採取4用途の原文・実行値がない。",
+      "resume": "検証用フォルダー内で1用途ずつ原文保存・再貼付け・実行"
+    },
+    {
+      "id": "E-excel",
+      "missing": "シート選択・データ反復",
+      "status": "BLOCKED_EXTERNAL_UI",
+      "reason": "T04はDataシートがアクティブな前提で成立しており、全シート操作の証拠ではない。",
+      "resume": "専用ブックでシート選択とデータ反復を別設定として採取"
+    },
+    {
+      "id": "G-ui-browser",
+      "missing": "PAD WebAutomation通し実行",
+      "status": "BLOCKED_RUNTIME_DEPENDENCY",
+      "reason": "ローカル画面とUI要素は到達したが、PAD WebAutomationの拡張通信は完了せず、Trusted RPCも未構成。",
+      "resume": "拡張ハンドシェイクを確認後、既存6アクションを1回だけ通し実行"
+    }
   ]
 }
