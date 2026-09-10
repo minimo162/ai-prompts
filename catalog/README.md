@@ -8,6 +8,8 @@
 
 ## 履歴（現行値へ読み替えない）
 
+P3追補：Boolean、数値減算、日付減算、DateAndTime取得、フォルダー作成は別probeで採取・実行済みですが、現行bundle未統合です。T08は生成形式失敗、T09は現行package生成未確認です。
+
 ```text
 Variables.CreateNewList List=> CatalogList
 Variables.AddItemToList Item: $'''CatalogItem''' List: CatalogList

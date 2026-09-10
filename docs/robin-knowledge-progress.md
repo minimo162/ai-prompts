@@ -228,6 +228,7 @@ P3の未採取項目は、coverageの `p3_blocked_items` に11件を項目単位
 T09については、既存専用フローの待機値を一時的に1秒へ束ねたランタイムprobeで入力→クリック→`T09-clicked`取得→PAD完了を確認し、元の`WAIT 500`へ復元した。ただし現行packageの新規通常チャット生成Robinを無修正で貼付けた受入ではないため、P4のT09は未確認として保持する（`catalog/evidence/t09-runtime-probe-20260910.json`）。
 P3ではBoolean（`SET P3Bool TO True`、preview=True）と減算（10−3→7）を新規専用フローで採取・保存・実行した。いずれも現行bundleへ統合すると再ハッシュ・T01〜T10再受入が必要なため、別probeとして保持する（`catalog/evidence/p3-boolean-probe-20260910.json`、`p3-subtract-probe-20260910.json`）。
 日時の「日付の減算」は、合成2日付・単位Daysの新規専用フローで原文コピー・保存・2回実行（出力1）を確認した。日時加算・書式化は未採取で、減算probeは現行bundleへ未統合である（`catalog/evidence/p3-date-subtract-probe-20260910.json`）。
+「現在の日時を取得」のDateAndTime設定も、システムタイムゾーンの新規専用フローで原文コピー・保存・2回実行し、`2026/09/10 19:01:11`形式の出力を確認した。カスタム書式化・日時加算は未採取で、probeは現行bundleへ未統合である（`catalog/evidence/p3-date-format-probe-20260910.json`）。
 リスト項目取得は、表示された「リストから項目を削除」を作成→追加→削除の最小probeで確認したが、削除後に項目値を返す出力変数がなく、取得構文の代用にはならなかった。推測で追加せず、未確認として保持する（`catalog/evidence/p3-list-remove-probe-20260910.json`）。
 Dの「フォルダーの作成」は合成fixture配下の新規専用フローで、原文コピー・保存・2回実行・`NewFolder`出力を確認した。現行bundleへは未統合で、存在確認・移動・名前変更は未採取のままとする（`catalog/evidence/p3-folder-create-probe-20260910.json`）。
 

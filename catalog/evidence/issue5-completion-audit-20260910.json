@@ -27,8 +27,8 @@
     {
       "phase": "P3",
       "status": "PARTIAL_ITEM_BLOCKS",
-      "evidence": ["coverage.json observed_variant_count=86", "coverage.json p3_blocked_items=11", "p3-boolean-probe-20260910.json", "p3-subtract-probe-20260910.json", "p3-date-subtract-probe-20260910.json", "p3-list-remove-probe-20260910.json", "p3-folder-create-probe-20260910.json", "existing CSV/Office/PDF evidence references"],
-      "gap": "Boolean, numeric subtract, date subtract, and folder-create are proven in separate probes but not yet bundled; date formatting and addition remain unobserved, as do list get, Else/Break/error-subflow, successful DataTable row operations, file move/rename/existence, and Excel sheet/iteration captures."
+      "evidence": ["coverage.json observed_variant_count=86", "coverage.json p3_blocked_items=11", "p3-boolean-probe-20260910.json", "p3-subtract-probe-20260910.json", "p3-date-subtract-probe-20260910.json", "p3-date-format-probe-20260910.json", "p3-list-remove-probe-20260910.json", "p3-folder-create-probe-20260910.json", "existing CSV/Office/PDF evidence references"],
+      "gap": "Boolean, numeric subtract, date subtract, DateAndTime, and folder-create are proven in separate probes but not yet bundled; date addition and custom formatting remain unobserved, as do list get, Else/Break/error-subflow, successful DataTable row operations, file move/rename/existence, and Excel sheet/iteration captures."
     },
     {
       "phase": "P4",

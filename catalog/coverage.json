@@ -2492,9 +2492,9 @@
     "id": "A-datetime",
     "missing": "日時加算・減算・書式化",
     "status": "PARTIAL_PROBE_NOT_BUNDLED",
-    "reason": "日付の減算は新規専用probeで原文コピー・保存・2回実行（1日）を確認した。日時加算・書式化は未採取で、減算probeも現行bundle未統合。",
-    "evidence": "evidence/p3-date-subtract-probe-20260910.json",
-    "resume": "日時加算・書式化を採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
+    "reason": "日付の減算とDateAndTime取得設定は新規専用probeで原文コピー・保存・2回実行を確認した。日時加算とカスタム書式化は未採取で、probeはいずれも現行bundle未統合。",
+    "evidence": "evidence/p3-date-subtract-probe-20260910.json; evidence/p3-date-format-probe-20260910.json",
+    "resume": "日時加算・カスタム書式化を採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
   },
     {
       "id": "B-if-else",

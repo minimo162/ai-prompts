@@ -4688,6 +4688,18 @@
       "scope": "Synthetic two-date subtraction probe; copied, saved, and run twice with 1-day output. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-date-subtract-probe-20260910.json"
+    },
+    {
+      "id": "p3-date-format-probe-2026-09-10",
+      "date": "2026-09-10",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": false,
+      "native_flow_name": "RobinKnowledgeP3DateFormat_20260910",
+      "ui_automation_ids": ["DateTime.GetCurrentDateTime"],
+      "scope": "Synthetic current date/time with system timezone and DateAndTime format; copied, saved, and run twice. Current bundle unchanged.",
+      "current_package_acceptance": false,
+      "evidence": "evidence/p3-date-format-probe-20260910.json"
     }
   ],
   "application_integration": {

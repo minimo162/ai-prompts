@@ -16,6 +16,8 @@
 
 現作業版bundleの原本対応は [knowledge-bundle-manifest-20260910b.json](knowledge-bundle-manifest-20260910b.json) に固定しています。マニフェスト自体をナレッジへ添付する必要はありません。
 
+P3追補：Boolean、数値減算、日付減算、DateAndTime取得、フォルダー作成は別probeでPASSですが、現行bundle未統合です。統合時は同一最終版でT01〜T10を再受入します。
+
 ナレッジは技術資料であり、指示欄と同じ優先順位の命令書ではありません。`pad-robin-prompts.md` は既存の編集用原稿として残し、配布版と二重に指示欄へ貼りません。
 
 `agent-instructions.txt` の現作業版は UTF-8 BOMなし、UTF-16コード単位数3,949（10,096バイト）で、8,000文字上限以内です。結合版は `tools/Build-KnowledgeBundle.ps1` で7原本から機械的に再生成します。現作業版の指示SHA-256は `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA-256は `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd` です。T04は現作業版で通常チャット添付・生成・無修正PAD貼付け・保存・2回実行まで確認済みです。T01〜T03/T05〜T10については旧版の生成・PAD結果を現作業版へ継承しません。T10既存フロー修正では、元行の文字列・矢印・バックスラッシュ・アンダースコアを確認できない場合はコードを出さず、手編集で差分を隠しません。
