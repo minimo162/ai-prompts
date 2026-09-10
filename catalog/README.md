@@ -10,6 +10,8 @@
 
 P3追補：Boolean、数値減算、日付減算、DateAndTime取得、フォルダー作成、Excelシート選択は別probeで採取・実行済みですが、現行bundle未統合です。T08は生成形式失敗、T09は現行package生成未確認です。
 
+ファイル存在確認の`IF ... THEN`／`END`も別probeで2回実行しました。false分岐・移動・名前変更・データ反復等は未確認です。
+
 P3追補：Boolean、数値減算、日付減算、DateAndTime取得、フォルダー作成は別probeで採取・実行済みですが、現行bundle未統合です。T08は生成形式失敗、T09は現行package生成未確認です。
 
 ```text

@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-10T19:29:35+09:00",
+  "flow_name": "RobinKnowledgeP3FileExists_20260910",
+  "run_status": "success",
+  "ready_observed": true,
+  "start_enabled_after": true,
+  "condition": "existing synthetic fixture exists",
+  "branch_actions": 0
+}

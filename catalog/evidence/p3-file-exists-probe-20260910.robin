@@ -1,0 +1,2 @@
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''') THEN
+END

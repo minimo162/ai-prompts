@@ -18,6 +18,8 @@
 
 P3追補：Boolean、数値減算、日付減算、DateAndTime取得、フォルダー作成、Excelシート選択は別probeでPASSですが、現行bundle未統合です。統合時は同一最終版でT01〜T10を再受入します。
 
+ファイル存在確認の`IF ... THEN`／`END`も別probeでPASSですが、false分岐・移動・名前変更・データ反復等は未確認です。
+
 P3追補：Boolean、数値減算、日付減算、DateAndTime取得、フォルダー作成は別probeでPASSですが、現行bundle未統合です。統合時は同一最終版でT01〜T10を再受入します。
 
 ナレッジは技術資料であり、指示欄と同じ優先順位の命令書ではありません。`pad-robin-prompts.md` は既存の編集用原稿として残し、配布版と二重に指示欄へ貼りません。
