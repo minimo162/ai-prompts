@@ -152,3 +152,5 @@ T02ではPADのFilter DataTable設定画面で列／インデックス=`2`、演
 P3残課題は `catalog/coverage.json` の `p3_blocked_items` に11件を追加し、真の外部依存（PAD Designerの追加・コピー、WebAutomation拡張ハンドシェイク、Trusted RPC）を項目ごとにBLOCKEDとしている。既存のCSV／Office／PDF等の証跡を未採取用途へ拡張せず、候補名・静的確認・手動DOM観測を実行成功に読み替えていない。
 
 現作業版のケース別判定は `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` に固定し、旧版成功を現作業版へ継承しない。
+
+P0〜P5の要件監査表は `catalog/evidence/issue5-completion-audit-20260910.json`。P4の現作業版受入は未実行である。

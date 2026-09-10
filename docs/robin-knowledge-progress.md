@@ -222,3 +222,5 @@ T04先行成功・最終失敗、T10入力原文・生成・PAD再コピーの�
 P3の未採取項目は、coverageの `p3_blocked_items` に11件を項目単位で記録した。候補名だけの構文推測はせず、既存証跡で満たせる用途と、PAD Designer／WebAutomationの実測が必要な用途を分離している。
 
 現作業版のT01〜T10／独立再試験／負例の判定表は `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` に固定した。添付が成立するまで全件を現作業版未実行として扱う。
+
+P0〜P5の要件ごとの完了監査は `catalog/evidence/issue5-completion-audit-20260910.json` に固定した。P1と静的P5は完了、P2/P3は項目別BLOCKED、P4は現作業版未実行であり、全体完了とは扱わない。

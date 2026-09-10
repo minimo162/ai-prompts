@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T16:10:00+09:00",
+  "status": "partial",
+  "branch": "codex/issue-5-acceptance-20260910b",
+  "head": "6c43ec4",
+  "issue": "https://github.com/minimo162/ai-prompts/issues/5",
+  "requirements": [
+    {
+      "phase": "P0",
+      "status": "PASS_CURRENT_CHECKS",
+      "evidence": ["main/origin synchronized at 69fe344", "no PR for work branch", "protected SHA preserved", "current PAD/Edge/Office process/version observation"],
+      "gap": "Power Fx OFF is inherited from the existing dedicated-flow record; no setting change was made."
+    },
+    {
+      "phase": "P1",
+      "status": "PASS_DIAGNOSIS_AND_MINIMAL_REVISION",
+      "evidence": ["normal-chat-raw-provenance-20260910.json", "Test-RobinRawContracts.ps1: 4 assertions PASS", "instruction and T04/T10 knowledge revisions", "bundle rebuilt from seven sources"],
+      "gap": "The revised package has not yet produced a fresh normal-chat response."
+    },
+    {
+      "phase": "P2",
+      "status": "PARTIAL_BLOCKED_RUNTIME",
+      "evidence": ["t09-current-environment-20260910b.json", "t09-runtime-block-20260910.json", "local fixture reachable with t09-input/t09-submit/t09-result"],
+      "gap": "PAD WebAutomation handshake/completion and AttributeValue=T09-clicked from PAD remain unobserved; Trusted RPC sky is unavailable."
+    },
+    {
+      "phase": "P3",
+      "status": "PARTIAL_ITEM_BLOCKS",
+      "evidence": ["coverage.json observed_variant_count=86", "coverage.json p3_blocked_items=11", "existing CSV/Office/PDF evidence references"],
+      "gap": "Boolean/subtract/list get/date formatting, Else/Break/error-subflow, successful DataTable row operations, file move/rename/existence/create, and Excel sheet/iteration captures remain unperformed."
+    },
+    {
+      "phase": "P4",
+      "status": "NOT_RUN_CURRENT_PACKAGE",
+      "evidence": ["normal-chat-final-acceptance-summary-20260910b.json", "current manifest and hashes", "old 431c/e467 batch explicitly marked historical"],
+      "gap": "Current-package upload, knowledge precheck, T01-T10, independent T01/T04/T10, and negative suite are not run."
+    },
+    {
+      "phase": "P5",
+      "status": "PASS_STATIC_PARTIAL_EXTERNAL",
+      "evidence": ["README/pad-robin-prompts/copilot README/index/coverage/progress/validation aligned", "current-package-static-check-20260910b.json", "Issue checkpoint comments"],
+      "gap": "No current-package runtime evidence or CI checks; Issue remains OPEN/partial."
+    }
+  ],
+  "completion_blockers": [
+    "Browser extension file chooser does not fire in the available CUA surface; current bundle/fixture were not transmitted.",
+    "PAD native Computer Use Trusted RPC is not configured; WebAutomation and missing P3 captures require an available UI operation path."
+  ],
+  "next_operation": "Provide a working CDP/file-input attachment path, then regenerate T04/T10 from the revised package before running PAD acceptance."
+}

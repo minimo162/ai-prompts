@@ -27,6 +27,7 @@
   },
   "negative_suite": "NOT_RUN_CURRENT_PACKAGE",
   "evidence": {
+    "completion_audit": "catalog/evidence/issue5-completion-audit-20260910.json",
     "raw_provenance": "catalog/evidence/normal-chat-raw-provenance-20260910.json",
     "upload_block": "catalog/evidence/m365-current-package-upload-block-20260910b.json",
     "t09_environment": "catalog/evidence/t09-current-environment-20260910b.json",

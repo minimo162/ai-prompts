@@ -4319,7 +4319,7 @@
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
       "cases": ["T04", "T09", "T10"],
       "scope": "Raw provenance diagnosis and minimal instruction/knowledge revision. Fresh current-package upload did not reach a file chooser, so no generation or PAD acceptance is claimed.",
-      "evidence": "evidence/normal-chat-raw-provenance-20260910.json; evidence/m365-current-package-upload-block-20260910b.json; evidence/t09-current-environment-20260910b.json; evidence/current-package-status-20260910b.json; evidence/current-package-static-check-20260910b.json; evidence/normal-chat-final-acceptance-summary-20260910b.json"
+      "evidence": "evidence/normal-chat-raw-provenance-20260910.json; evidence/m365-current-package-upload-block-20260910b.json; evidence/t09-current-environment-20260910b.json; evidence/current-package-status-20260910b.json; evidence/current-package-static-check-20260910b.json; evidence/normal-chat-final-acceptance-summary-20260910b.json; evidence/issue5-completion-audit-20260910.json"
     }
   ],
   "application_integration": {
