@@ -2423,7 +2423,7 @@
         "web-close-t09"
       ],
       "reason": "T09でローカルEdgeの3要素をUI要素ピッカーから捕捉し、6アクションを空フローへ貼付け・保存した。WebAutomation通し実行はブラウザー拡張経路のタイムアウトで未完了。未捕捉セレクターは推測していない。",
-      "reference": "docs/robin-action-catalog.md; copilot/knowledge/PAD-Robin-05-UI-Web.txt; catalog/evidence/t09-capture-source-20260910.json; catalog/evidence/t09-runtime-block-20260910.json",
+    "reference": "docs/robin-action-catalog.md; copilot/knowledge/PAD-Robin-05-UI-Web.txt; catalog/evidence/t09-capture-source-20260910.json; catalog/evidence/t09-runtime-block-20260910.json; catalog/evidence/t09-current-environment-20260910b.json",
       "live_ui_candidates": [
         {
           "ui_name": "ウィンドウの UI 要素をクリック",

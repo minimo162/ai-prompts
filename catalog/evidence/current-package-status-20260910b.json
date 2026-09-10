@@ -33,6 +33,7 @@
   },
   "raw_provenance": "catalog/evidence/normal-chat-raw-provenance-20260910.json",
   "upload_block": "catalog/evidence/m365-current-package-upload-block-20260910b.json",
+  "t09_environment": "catalog/evidence/t09-current-environment-20260910b.json",
   "static_checks": {
     "Test-RobinRawContracts.ps1": "PASS: 4 assertions",
     "Test-CopilotRobinPackage.ps1": "PASS: instructions_utf16=3949; knowledge_files=7; observed_actions=86",

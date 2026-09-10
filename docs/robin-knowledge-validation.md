@@ -145,4 +145,4 @@ T02ではPADのFilter DataTable設定画面で列／インデックス=`2`、演
 
 指示文へT04構造化引数の逐語複写、T10添付原文の変更範囲外逐語保持を追加し、T04/T10の技術資料へ正本行と失敗段階を追記した。7原本を `tools/Build-KnowledgeBundle.ps1` で再結合し、現作業版は指示SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA-256 `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd`、UTF-16 3,949。パッケージ検査86 observed actions、カタログ73 checks、差分検査はPASS。
 
-現作業版の通常M365 Copilotへの再添付は、今回のブラウザー拡張file chooserが発火せず未実行である（`catalog/evidence/m365-current-package-upload-block-20260910b.json`）。旧版 `431c...` の生成・PAD結果は履歴として保持し、現作業版T01〜T10・独立再試験・負例へ継承しない。Issue #5は `partial` を維持する。
+現作業版の通常M365 Copilotへの再添付は、今回のブラウザー拡張file chooserが発火せず未実行である（`catalog/evidence/m365-current-package-upload-block-20260910b.json`）。T09ローカル画面の要素と結果文字は到達性として再確認したが、PAD WebAutomation実行の証拠ではない（`catalog/evidence/t09-current-environment-20260910b.json`）。旧版 `431c...` の生成・PAD結果は履歴として保持し、現作業版T01〜T10・独立再試験・負例へ継承しない。Issue #5は `partial` を維持する。
