@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-09-10T18:17:22+09:00",
+  "captured_at": "2026-09-10T18:21:13+09:00",
   "status": "partial",
   "branch": "codex/issue-5-acceptance-20260910b",
-  "head": "d1c6e4e",
+  "head": "f798c7b",
   "base_main": "69fe344",
   "instruction": {
     "path": "copilot/agent-instructions.txt",

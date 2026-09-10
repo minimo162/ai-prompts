@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-09-10T18:17:22+09:00",
+  "captured_at": "2026-09-10T18:21:13+09:00",
   "status": "partial",
   "branch": "codex/issue-5-acceptance-20260910b",
-  "head": "d1c6e4e",
+  "head": "f798c7b",
   "issue": "https://github.com/minimo162/ai-prompts/issues/5",
   "requirements": [
     {
@@ -27,13 +27,13 @@
     {
       "phase": "P3",
       "status": "PARTIAL_ITEM_BLOCKS",
-      "evidence": ["coverage.json observed_variant_count=86", "coverage.json p3_blocked_items=11", "existing CSV/Office/PDF evidence references"],
-      "gap": "Boolean/subtract/list get/date formatting, Else/Break/error-subflow, successful DataTable row operations, file move/rename/existence/create, and Excel sheet/iteration captures remain unperformed."
+      "evidence": ["coverage.json observed_variant_count=86", "coverage.json p3_blocked_items=11", "p3-boolean-probe-20260910.json", "existing CSV/Office/PDF evidence references"],
+      "gap": "Boolean is proven in a separate probe but not yet bundled; subtract/list get/date formatting, Else/Break/error-subflow, successful DataTable row operations, file move/rename/existence/create, and Excel sheet/iteration captures remain unperformed."
     },
     {
       "phase": "P4",
       "status": "PARTIAL_CURRENT_PACKAGE",
-      "evidence": ["normal-chat-final-acceptance-summary-20260910b.json", "normal-chat-current-revision-knowledge-precheck-20260910.json", "t01-current-revision-acceptance-20260910.json", "t01-current-revision-independent-acceptance-20260910.json", "t02-current-revision-acceptance-20260910.json", "t03-current-revision-acceptance-20260910.json", "t04-current-revision-acceptance-20260910.json", "t04-current-revision-independent-acceptance-20260910.json", "t05-current-revision-acceptance-20260910.json", "t06-current-revision-acceptance-20260910.json", "t07-current-revision-acceptance-20260910.json", "t10-current-revision-acceptance-20260910.json", "t10-current-revision-independent-acceptance-20260910.json", "current manifest and hashes", "old 431c/e467 batch explicitly marked historical"],
+      "evidence": ["normal-chat-final-acceptance-summary-20260910b.json", "normal-chat-current-revision-knowledge-precheck-20260910.json", "t01-current-revision-acceptance-20260910.json", "t01-current-revision-independent-acceptance-20260910.json", "t02-current-revision-acceptance-20260910.json", "t03-current-revision-acceptance-20260910.json", "t04-current-revision-acceptance-20260910.json", "t04-current-revision-independent-acceptance-20260910.json", "t05-current-revision-acceptance-20260910.json", "t06-current-revision-acceptance-20260910.json", "t07-current-revision-acceptance-20260910.json", "t10-current-revision-acceptance-20260910.json", "t10-current-revision-independent-acceptance-20260910.json", "t08-current-revision-format-boundary-20260910.json", "t09-runtime-probe-20260910.json", "normal-chat-current-revision-negative-suite-20260910.json", "current manifest and hashes", "old 431c/e467 batch explicitly marked historical"],
       "gap": "T01-T07, T04/T10 current primary revisions, T01/T04/T10 independent retests, separate knowledge precheck, and fail-closed negative suite are accepted; T08 format and current-package T09 generation remain."
     },
     {
