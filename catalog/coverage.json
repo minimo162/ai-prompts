@@ -2490,7 +2490,7 @@
     "missing": "リスト項目取出し",
     "status": "BLOCKED_EXTERNAL_UI",
     "reason": "表示された『リストから項目を削除』を候補として最小probeしたが、削除後に項目値を返す出力変数はなく、リスト項目取出しの代用にならない。専用の取得構文をPAD画面から採取できていない。現行ActionsTreeViewの読取りインベントリも仮想化終端が安定せず、取得候補の不在は断定していない。",
-    "evidence": "evidence/p3-list-remove-probe-20260910.json; evidence/p3-list-get-inventory-boundary-20260911.json",
+    "evidence": "evidence/p3-list-remove-probe-20260910.json; evidence/p3-list-get-inventory-boundary-20260911.json; evidence/p3-list-get-search-boundary-20260911.json",
     "resume": "項目値を出力するリスト参照アクションの実表示・原文・実行結果を採取"
   },
   {
