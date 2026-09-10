@@ -17,7 +17,7 @@ P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、
 If/Else/ENDとIf/Else-if/ENDの構造は別probeで実行まで確認していますが、入れ子・分岐内処理は未確認です。
 有限Loopの`EXIT LOOP`も別probeでLoopIndex=1、`NEXT LOOP`も2回実行してLoopIndex=4を確認していますが、入れ子とloop内副作用は未確認です。
 （Loop Continue probeは現行bundleへ未統合です。）
-エラー処理の`BLOCK / ON BLOCK ERROR / THROW ERROR / END`骨格と、P3Worker作成＋Mainからの`CALL P3Worker`も別probeで確認していますが、エラー発生子アクションとカスタムハンドラーは未確認です。
+エラー処理の`BLOCK / ON BLOCK ERROR / THROW ERROR / END`骨格、欠損ファイル子アクションのruntime error、P3Worker作成＋Mainからの`CALL P3Worker`も別probeで確認していますが、カスタムハンドラーは未確認です。
 
 P3ではファイル存在確認の`IF ... THEN`／`END`も別probeで2回実行しました。各probeは現行bundle未統合で、残るfalse分岐・移動・名前変更・データ反復等は未確認です。
 
