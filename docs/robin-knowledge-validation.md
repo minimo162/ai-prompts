@@ -191,6 +191,8 @@ HEAD `b411a7c`でRaw契約6 assertions、Copilot package（指示3,949 UTF-16／
 
 T09の90秒再probe（112秒時点で実行中、WebAutomationエラーと`未実行`表示後に停止）をP3統合版へ追加し、bundle SHA-256を `513fe84b8bc1fe3acb9d9092f057bace4d47215fe2cb30945b23d3ff77685831`、マニフェストを `copilot/knowledge-bundle-manifest-20260911b.json` に更新した。新bundleの知識precheck、T01〜T10、独立再試験は未実行である（`catalog/evidence/current-package-status-20260911-p3b-integration.json`、`catalog/evidence/p3-t09-current-runtime-reprobe-20260911.json`）。
 
+Indexの旧版「未確認」記述をP3現行判定へ揃え、Office範囲読取りとT09再probe境界を反映したbundle SHA-256を `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644`、マニフェストを `copilot/knowledge-bundle-manifest-20260911c.json` に更新した。新bundleの知識precheck、T01〜T10、独立再試験は未実行である（`catalog/evidence/current-package-status-20260911-p3c-integration.json`）。
+
 P3統合版をHEAD `7b06805`で静的検査し、Raw 6、Package 3949/7/86、Catalog 84、DOM 898、`git diff --check`をPASSした。新bundleのCopilot/PAD受入はまだ未実行である（`catalog/evidence/current-package-static-check-20260911-p3.json`）。
 
 最新HEAD `2da9610`でもP3統合版の同じ静的ゲートを再実行してPASSした。新bundleのCopilot送信とT01〜T10受入は未実行である（`catalog/evidence/current-package-static-check-20260911-p3b.json`）。

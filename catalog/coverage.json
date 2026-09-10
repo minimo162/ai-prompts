@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-11T04:52:00+09:00",
-  "reconciled_at": "2026-09-11T04:52:00+09:00",
+  "generated_at": "2026-09-11T05:05:00+09:00",
+  "reconciled_at": "2026-09-11T05:05:00+09:00",
   "reconciliation_note": "P3 evidence references and the seven-file bundle were refreshed from the current catalog, including the T09 runtime reprobe boundary. This file is not a complete PAD feature reference or current-session execution claim; same-version Copilot/PAD acceptance remains pending.",
   "environment": {
     "pad_file_version": "2.71.115.26224",
@@ -11,9 +11,9 @@
   },
   "current_package": {
     "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-    "knowledge_bundle_sha256": "513fe84b8bc1fe3acb9d9092f057bace4d47215fe2cb30945b23d3ff77685831",
+    "knowledge_bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
     "status": "partial_p3_t09_boundary_bundle_integrated_t01_t10_pending",
-    "evidence": "evidence/current-package-status-20260911-p3b-integration.json"
+    "evidence": "evidence/current-package-status-20260911-p3c-integration.json"
   },
   "left_panel_scope": {
     "complete": false,

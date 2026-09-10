@@ -4,7 +4,7 @@
 
 通常チャットでの検証条件と禁止事項は [CODEX_CORRECTION_M365_CHAT_VALIDATION.md](CODEX_CORRECTION_M365_CHAT_VALIDATION.md) を先に確認してください。Agent Builder／Copilot Studioの登録は今回の検証先ではありません。
 
-2026-09-11のP3追補統合版は、指示文SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA-256 `513fe84b8bc1fe3acb9d9092f057bace4d47215fe2cb30945b23d3ff77685831` です。7原本へ実測済みP3成功と失敗境界を統合しましたが、新bundleでの知識precheck、T01〜T10、独立再試験は未完了です。T08は形式失敗、T09は現行package Robin未確認として維持し、旧版生成・PAD結果は新bundleへ継承していません。T04/T10の発生段階の比較は [raw provenance](catalog/evidence/normal-chat-raw-provenance-20260910.json)、結合版の再生成は [Build-KnowledgeBundle.ps1](tools/Build-KnowledgeBundle.ps1) を参照してください。
+2026-09-11のP3追補統合版は、指示文SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、最新bundle SHA-256 `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644` です。7原本へ実測済みP3成功と失敗境界を統合しましたが、新bundleでの知識precheck、T01〜T10、独立再試験は未完了です。T08は形式失敗、T09は現行package Robin未確認として維持し、旧版生成・PAD結果は新bundleへ継承していません。T04/T10の発生段階の比較は [raw provenance](catalog/evidence/normal-chat-raw-provenance-20260910.json)、結合版の再生成は [Build-KnowledgeBundle.ps1](tools/Build-KnowledgeBundle.ps1) を参照してください。
 
 実測原文の正本は [catalog/index.json](catalog/index.json)、観測範囲は [catalog/coverage.json](catalog/coverage.json)、途中経過は [docs/robin-knowledge-progress.md](docs/robin-knowledge-progress.md) です。既存の採取原文・検証証拠は保全し、未観測のアクションを全機能対応とは表示しません。
 
