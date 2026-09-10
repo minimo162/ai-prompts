@@ -10,7 +10,7 @@
 
 - ブランチ: `codex/issue-5-acceptance-20260910b`（2026-09-10継続作業）
 - 基準main: `69fe344`（origin/mainと一致）
-- 現在の固定コミット: `d3e125c`（P3統合bundle・T09停止境界・静的検査を反映）
+- 現在の固定コミット: `00a898b`（P3統合bundle・T09停止境界・完了監査・非ライブ全件検証を反映）
 - origin: `https://github.com/minimo162/ai-prompts.git`
 - PR #19: squashマージ済み。今回の再開確認では新規push・PR・merge・公開を行わない。
 
@@ -43,6 +43,8 @@
 前回版の採取／教材化（指示SHA `e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1` とbundle SHA `431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3`）の履歴。知識プレチェックとT01〜T10の通常チャット生成を保存し、T01〜T03/T05〜T08は前回版PAD貼付け・保存・2回実行まで完了。T04は引用符差分、T09はWebAutomationタイムアウト、T10はWord SaveAsエラーをpartialとして記録した。現作業版は末尾の「現作業版の再開記録」で別管理する。
 
 T02のFilter DataTableは、PAD UIで列／インデックス=`2`・等価演算子・値=`対象`を設定し、先行CSV読取り・CSV書出しを含む新規フローへ無修正Robinを貼付け、保存・2回実行・CSV照合まで完了した。先行CSVTable生成がない専用フローの未解決入力試行は失敗例として分離した。
+
+2026-09-11の非ライブ全件検証では、Windows PowerShell 5.1の34テストが34/34 PASSし、候補3ファイルのハッシュ不変を確認した（`catalog/evidence/nonlive-all-suite-20260911.json`）。この結果はP5のローカル証拠であり、ライブM365 Copilot／PAD実行／他PC／業務品質の受入を示さない。
 
 旧bundle SHA-256は履歴として保持する。P3追補統合後の現作業版は instruction SHA `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e` と bundle SHA `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644` で、旧版のT01〜T10実行証拠は新bundleの最終受入へ継承しない。T09はUI要素捕捉・空フロー貼付け・保存まで完了したが、現行6アクションのWebAutomation実行は112秒時点で停止し、未完了である。
 

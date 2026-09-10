@@ -3,7 +3,7 @@
 更新日: 2026-09-11
 ブランチ: `codex/issue-5-acceptance-20260910b`
 基準main: `69fe344`
-固定コミット: `d3e125c`（P3統合bundle・T09停止境界・静的検査を反映）
+固定コミット: `00a898b`（P3統合bundle・T09停止境界・完了監査・非ライブ全件検証を反映）
 状態: partial
 
 ## 利用先の訂正
@@ -13,6 +13,8 @@
 2026-09-09の再実測では、ログイン済みEdgeの `https://microsoft365.com/chat` は `https://m365.cloud.microsoft/chat` のMicrosoft Copilot画面へ到達した。ナビゲーションと「アプリなど」を確認したが、表示された項目はチャット、検索、ライブラリ、ノートブック、詳細等で、「エージェント」項目は画面上に現れなかった。「アプリなど」→「作成」は `/create` の作成画面へ遷移し、別タイルの「Office Agent」は `https://officeagent.microsoft.com/?srcref=officehome` のOffice Agent画面へ遷移した。後者は画面構成が指定のM365 Copilot内Agent Builderと異なるため、Agent Builderとして扱っていない。画面には「個人用アカウント」と表示され、別テナントへの切替は行っていない。この観測だけからライセンスや管理者設定の原因は推測しない。Agent Builderの正規入口が表示される組織・アカウント条件の確認が必要である。再実測値は `catalog/generated/agent-builder-m365-entry-rerun-20260909.json` に保存した。
 
 ## 静的・ファイル検証
+
+2026-09-11に `tests/Run-NonLiveTests.ps1 -Suite All` を Windows PowerShell 5.1 で実行し、34/34テストがPASS、候補3ファイルのハッシュ不変を確認した。証跡は `catalog/evidence/nonlive-all-suite-20260911.json`。これはP5のローカル検証であり、ライブM365 Copilot／PADランタイム／他PC受入／リリース承認は `NOT_RUN` のままである。
 
 - 履歴版の `copilot/agent-instructions.txt` はUTF-8 BOMなし、9,214バイト、Unicodeスカラー数3,585、47行。SHA-256は `e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1`。現作業版はUTF-8 BOMなし、10,096バイト、UTF-16 3,949、SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`。
 - 現作業版のP3追補統合結合bundle SHA-256は `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644`。旧bundle `4282...`／`431c...` の生成・PAD結果は履歴であり、新bundleの受入には継承しない。
