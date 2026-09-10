@@ -4969,6 +4969,18 @@
       "evidence": "evidence/p3-error-custom-handler-20260911.json; evidence/p3-error-custom-handler-flow-20260911.robin"
     },
     {
+      "id": "p3-error-default-handler-2026-09-11",
+      "date": "2026-09-11",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeP3ErrorBlock_20260910",
+      "ui_automation_ids": ["LanguageConstructs.Block", "RulesListBox", "ExceptionRulesContinueProcessExecutionToggleButton", "ExceptionRulesThrowErrorToggleButton"],
+      "scope": "Synthetic missing-file child under BLOCK; default all-errors variable rule continued execution and returned a true preview in two runs.",
+      "current_package_acceptance": false,
+      "execution_status": "pass_default_error_handler_two_runs",
+      "evidence": "evidence/p3-error-default-handler-20260911.json; evidence/p3-error-default-handler-flow-20260911.robin"
+    },
+    {
       "id": "p3-subflow-probe-2026-09-10",
       "date": "2026-09-10",
       "pad_file_version": "2.71.115.26224",
