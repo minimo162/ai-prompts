@@ -3,7 +3,7 @@
   "captured_at": "2026-09-10T17:23:00+09:00",
   "status": "pass_static_only",
   "branch": "codex/issue-5-acceptance-20260910b",
-  "head_at_check": "WORKTREE_PENDING_COMMIT",
+  "head_at_check": "d1c6e4e",
   "checks": [
     {"command": "pwsh -NoProfile -File tests/Test-RobinRawContracts.ps1", "result": "PASS", "details": "6 raw provenance assertions including current T04; no normalization"},
     {"command": "pwsh -NoProfile -File tests/Test-CopilotRobinPackage.ps1", "result": "PASS", "details": "instructions_utf16=3949; knowledge_files=7; observed_actions=86"},
