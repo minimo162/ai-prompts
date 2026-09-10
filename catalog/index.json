@@ -4703,6 +4703,19 @@
       "evidence": "evidence/p3-list-get-search-boundary-20260911.json"
     },
     {
+      "id": "p3-list-get-search-expanded-2026-09-11",
+      "date": "2026-09-11",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": false,
+      "native_flow_name": "RobinKnowledgeP3ListGet_20260910",
+      "ui_automation_ids": ["SearchActionsSearchBox", "ActionsTreeView"],
+      "scope": "Read-only bounded searches for リスト and 取得 in the current synthetic PAD action panel; list mutation/comparison, DataTable-column extraction, and UI/browser retrieval actions were visible, but no dedicated arbitrary list-item retrieval action was observed.",
+      "current_package_acceptance": false,
+      "execution_status": "search_boundary_no_action_executed",
+      "evidence": "evidence/p3-list-get-search-expanded-20260911.json"
+    },
+    {
       "id": "p3-folder-create-probe-2026-09-10",
       "date": "2026-09-10",
       "pad_file_version": "2.71.115.26224",

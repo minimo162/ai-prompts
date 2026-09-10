@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T05:24:00+09:00",
+  "status": "search_boundary_no_dedicated_item_retrieval_observed",
+  "missing_item": "A-list-create-add-get",
+  "scope": "Read-only bounded search in the current synthetic PAD action panel; no action was added, edited, copied, saved, or run.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3ListGet_20260910",
+    "process_id": 33884,
+    "window_title_verified": "Power Automate | RobinKnowledgeP3ListGet_20260910"
+  },
+  "searches": [
+    {
+      "term": "リスト",
+      "visible_tree_item_count": 21,
+      "visible_action_ids": [
+        "Variables.ClearList",
+        "Variables.RemoveItemFromList",
+        "Variables.ShuffleList",
+        "Variables.MergeLists",
+        "Variables.ReverseList",
+        "Variables.RemoveDuplicateItemsFromList",
+        "Variables.FindCommonListItems",
+        "Variables.SubtractLists",
+        "Variables.RetrieveDataTableColumnIntoList",
+        "Variables.AddItemToList",
+        "Variables.CreateNewList",
+        "Variables.FilterList",
+        "Display.SelectFromListDialog"
+      ],
+      "visible_names": [
+        "リストのクリア",
+        "リストから項目を削除",
+        "リストのシャッフル",
+        "リストの統合",
+        "リストを逆にする",
+        "リストから重複する項目を削除",
+        "共通リスト項目の検索",
+        "リストの内容を減らす",
+        "データ テーブル列をリストに取得",
+        "項目をリストに追加",
+        "新しいリストの作成",
+        "フィルター リスト",
+        "リストから選択ダイアログを表示"
+      ]
+    },
+    {
+      "term": "取得",
+      "visible_tree_item_count": 33,
+      "visible_action_ids": [
+        "Variables.RetrieveDataTableColumnIntoList",
+        "LanguageConstructs.GetLastError",
+        "System.GetEnvironmentVariable",
+        "File.GetPathPart",
+        "File.GetTempPath",
+        "Folder.GetSubfolders",
+        "Folder.GetFiles",
+        "Folder.GetSpecialFolder",
+        "UIAutomation.GetWindow",
+        "UIAutomation.GetWindowDetails",
+        "UIAutomation.GetElementDetails",
+        "UIAutomation.GetSelectedCheckboxesInWindow",
+        "UIAutomation.GetSelectedRadiobuttonInWindow",
+        "UIAutomation.GetUIControl",
+        "WebAutomation.GetDetailsOfWebPage",
+        "WebAutomation.GetDetailsOfElement",
+        "WebAutomation.GetWebControl"
+      ],
+      "visible_names": [
+        "データ テーブル列をリストに取得",
+        "最後のエラーを取得",
+        "Windows 環境変数を取得",
+        "ファイル パス部分を取得",
+        "一時ファイルの取得",
+        "フォルダー内のサブフォルダーを取得",
+        "フォルダー内のファイルを取得",
+        "特別なフォルダーを取得",
+        "ウィンドウの取得",
+        "ウィンドウの詳細を取得する",
+        "ウィンドウにある UI 要素の詳細を取得する",
+        "ウィンドウにある選択済みチェック ボックスを取得する",
+        "ウィンドウにある選択済みラジオ ボタンを取得する",
+        "UI コントロールを取得",
+        "Web ページ上の詳細を取得します",
+        "Web ページ上の要素の詳細を取得します",
+        "Web コントロールを取得"
+      ]
+    }
+  ],
+  "dedicated_list_item_retrieval_observed": false,
+  "actions_executed": 0,
+  "package_binding": {
+    "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
+    "included_in_current_bundle": false
+  },
+  "result": "The bounded searches exposed list mutation, list comparison, DataTable-column extraction, and UI/browser retrieval actions, but no dedicated action that returns an arbitrary list item. This does not rule out an expression or another UI mode; no guessed syntax was added and the requirement remains unverified."
+}
