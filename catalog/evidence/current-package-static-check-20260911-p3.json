@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T04:10:00+09:00",
+  "status": "pass_static_new_bundle_partial_runtime",
+  "head": "7b06805",
+  "branch": "codex/issue-5-acceptance-20260910b",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "0c89e53ce84671fd4bf1da4287563bf79f5164674f22907c8a420758310b36e6",
+  "manifest": "copilot/knowledge-bundle-manifest-20260911.json",
+  "protected_sha256": "e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699",
+  "checks": [
+    {"command": "pwsh -NoProfile -File tests/Test-RobinRawContracts.ps1", "status": "PASS", "assertions": 6},
+    {"command": "pwsh -NoProfile -File tests/Test-CopilotRobinPackage.ps1", "status": "PASS", "instructions_utf16": 3949, "knowledge_files": 7, "observed_actions": 86},
+    {"command": "pwsh -NoProfile -File tests/Test-RobinCatalog.ps1", "status": "PASS", "checks": 84},
+    {"command": "bundled node tests/Test-CopilotDom.cjs", "status": "PASS", "checks": 898},
+    {"command": "git diff --check", "status": "PASS"}
+  ],
+  "not_completed": [
+    {"command": "tests/Test-Copilot.ps1", "status": "NOT_COMPLETED_TIMEOUT", "reason": "Earlier bounded run timed out; no pass claim."},
+    {"scope": "new-bundle M365 Copilot knowledge precheck and T01-T10", "status": "NOT_RUN"},
+    {"scope": "new-bundle T08/T09, DataTable row/cell, Excel iteration, list-get, custom date format", "status": "UNPROVEN"}
+  ],
+  "result": "The new P3-integrated bundle passes local static gates. It is a new version, so all prior Copilot/PAD acceptance evidence remains historical and cannot be reused as acceptance for this hash."
+}

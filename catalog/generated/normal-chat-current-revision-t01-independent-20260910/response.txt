@@ -1,0 +1,65 @@
+1. 前提・対象範囲・未確認点
+
+目的: UTF-8テキストを読み込み、検索語「対象語」を「置換後」へ通常置換し、UTF-8テキストとして保存する。
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-current-bundle.txt
+置換: 通常置換（正規表現ではない）
+保持条件: 特殊文字・改行・対象外文字を保持、追加改行なし
+変数:
+
+FileContents (テキスト)
+Replaced (テキスト)
+
+根拠
+
+「ファイルからテキストを読み取る」UTF-8実測原文:catalog/actions/file-read-text/utf8.robin
+「テキストを置換する」通常置換実測原文:catalog/actions/text-replace/literal.robin
+「テキスト変数書込み・末尾改行を追加しない設定」実測原文: catalog/actions/file-write-text/variable-reference-no-append.robin
+
+未確認点はありません。依頼内容は確認済み原文の組合せで構成できます。ただし、この3アクションの組合せ自体について、ナレッジ内に「貼付け・実行・期待値照合済み」の記録は示されていません。各アクション原文は確認済みです。
+
+2. PADで先に作る設定
+
+不要です。空のサブフローへそのまま貼り付ける前提です。
+
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+4. デザイナー上の確認方法
+アクション数が 3個 であること。
+順序が
+ファイルからテキストを読み取る
+テキストを置換する
+テキストをファイルに書き込む の順であること。
+FileContents が読み取り結果のテキスト変数であること。
+Replaced が置換後テキスト変数であること。
+書込みアクションが
+AppendNewLine: False
+IfFileExists: File.IfFileExists.Overwrite
+Encoding: File.FileEncoding.UTF8 になっていること。
+デザイナーにエラー表示が出ていないこと。
+5. 保存・実行・照合
+
+入力例には「対象語」が2箇所あります。
+
+期待される出力内容:
+
+対象語 100% → 置換後 100%
+最終行手前の 対象語 → 置換後
+対象外語 は変化しない
+'引用'、"二重引用"、C:\\sample、改行配置は保持
+追加改行は付与されない（AppendNewLine: False）
++ 1
+
+根拠ファイル:
+
+PAD-Robin-Knowledge-Bundle 内 catalog/actions/file-read-text/utf8.robin、catalog/actions/text-replace/literal.robin、catalog/actions/file-write-text/variable-reference-no-append.robin
+入力データ t01-input-20260909

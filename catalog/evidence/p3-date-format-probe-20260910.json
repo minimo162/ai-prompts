@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T19:01:14+09:00",
+  "status": "pass_probe_not_bundled",
+  "missing_item": "A-datetime",
+  "scope": "Synthetic PAD UIA probe for the observed DateAndTime setting; not current-package acceptance because the current bundle was intentionally not changed.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3DateFormat_20260910",
+    "process_id": 66180,
+    "action_count": 1
+  },
+  "raw": {
+    "path": "catalog/evidence/p3-date-format-probe-20260910.robin",
+    "sha256": "dc981ec8f341c31c0480a9f232a48b9ccefa39170bcc6df6966f891b10890add",
+    "copy_observed": true,
+    "clipboard_restored": true
+  },
+  "configuration": {
+    "get": "現在の日時",
+    "time_zone": "システム タイム ゾーン",
+    "format": "DateAndTime",
+    "output_variable": "CurrentDateTime"
+  },
+  "runs": [
+    {"evidence": "catalog/evidence/p3-date-format-probe-run1-20260910.json", "status": "success"},
+    {"evidence": "catalog/evidence/p3-date-format-probe-run2-20260910.json", "status": "success"}
+  ],
+  "package_binding": {
+    "current_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "current_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+    "included_in_current_bundle": false,
+    "reason": "Adding this setting to the seven-file bundle would change the package hash and require a complete T01-T10 regression."
+  },
+  "result": "DateAndTime setting was copied, saved, and run twice; local date/time output was observed. Custom formatting and addition remain unobserved."
+}

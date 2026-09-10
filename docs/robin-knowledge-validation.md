@@ -1,8 +1,9 @@
 # Robinナレッジ検証報告（途中）
 
-更新日: 2026-09-10
-ブランチ: `codex/issue-5-completion-20260910`
-基準: `c6d1e8daa25c7c0b72ebf51a26911e1318937807`
+更新日: 2026-09-11
+ブランチ: `codex/issue-5-acceptance-20260910b`
+基準main: `69fe344`
+固定コミット: `00a898b`（P3統合bundle・T09停止境界・完了監査・非ライブ全件検証を反映）
 状態: partial
 
 ## 利用先の訂正
@@ -13,9 +14,12 @@
 
 ## 静的・ファイル検証
 
-- `copilot/agent-instructions.txt` はUTF-8 BOMなし、9,214バイト、Unicodeスカラー数3,585、47行。8,000文字上限以内。SHA-256は `e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1`。
+2026-09-11に `tests/Run-NonLiveTests.ps1 -Suite All` を Windows PowerShell 5.1 で実行し、35/35テストがPASS、候補3ファイルのハッシュ不変を確認した。証跡は `catalog/evidence/nonlive-all-suite-20260911b.json`。これはP5のローカル検証であり、ライブM365 Copilot／PADランタイム／他PC受入／リリース承認は `NOT_RUN` のままである。
+
+- 履歴版の `copilot/agent-instructions.txt` はUTF-8 BOMなし、9,214バイト、Unicodeスカラー数3,585、47行。SHA-256は `e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1`。現作業版はUTF-8 BOMなし、10,096バイト、UTF-16 3,949、SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`。
+- 現作業版のP3追補統合結合bundle SHA-256は `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644`。旧bundle `4282...`／`431c...` の生成・PAD結果は履歴であり、新bundleの受入には継承しない。
 - ナレッジ配布版は7つの `.txt`。指示欄と技術資料を分離し、合計9ファイル（READMEを含む）で20ファイル上限を超えない。
-- `catalog/coverage.json` は `catalog/index.json` と既存証拠を突合し、観測バリアント86件（既存51＋追加22件）と必須範囲A〜Gの16チェックを記録。For each／If／フォルダー取得の既存実行証拠を対応づけ、Else・脱出・存在確認等の未確認は残した。左側一覧は `complete=false`、未観測の名称は推測していない。
+- `catalog/coverage.json` は `catalog/index.json` と既存証拠を突合し、観測バリアント86件（既存51＋追加35件）と必須範囲A〜Gの16チェックを記録。P3追補のBoolean／減算／日時加算・減算／Else／Loop脱出・継続／ファイル操作／Excelシート／エラー骨格／サブフロー作成・呼出しを新bundleへ反映したが、現行packageの外部受入は未完了。左側一覧は `complete=false`、未観測の名称は推測していない。
 - `README.md` 冒頭をCopilotエージェント用配布物の入口へ変更。旧アプリ説明は過去資産として区別した。
 - `pad-robin-prompts.md` 冒頭に編集用原稿であることと配布正本への対応を追記した。
 - `catalog/generated/acceptance-t01-t10/README.md` にT01〜T10の依頼要点・期待値・状態を固定した。
@@ -90,12 +94,12 @@
 |ナレッジ固有質問|PASS_REFERENCE_ONLY（現行bundle 431c版）|現行bundleを別の新規通常チャットへ添付し、UTF-8書込み差分・T04 9行原文・T09捕捉と実行未完了・確認状態の分離を回答原文と照合。`catalog/evidence/normal-chat-knowledge-precheck-current-20260910.json`|
 |T01生成回答|PASS（初回修正版）|GPT 5.6 Think Deeperの新規チャットで結合版を添付し、本文3,128文字・回答全文・3行Robinを保存。`gpt56-noappend-clean2`の`robin.txt`は3アクション|
 |T01 PAD実行・成果物照合|PASS（初回修正版）|回答Robinを無修正で新規フローへ貼付け、保存、2回実行。出力UTF-8 BOM付き85 bytes、期待内容と完全一致。`normal-chat-t01-noappend-*`|
-|T02〜T03、T05〜T08|最終版PASS|最終版の新規通常チャット生成と、専用PADフローへの無修正貼付け・保存・2回実行を `catalog/evidence/normal-chat-final-package-acceptance-20260910.json` に記録|
-|T04|PARTIAL|最終生成版はFilterParameters引用符差分で貼付け未成立。完全一致要求の再試験はコードを出さず拒否。先行有効版の正例は別証拠で保持|
-|T09|PARTIAL_BLOCKED_RUNTIME|UI要素捕捉・貼付け・保存は確認済み。WebAutomation実行完了は未観測|
-|T10|PARTIAL_EXPECTED_ERROR|最終生成版は16アクションを保存したが、Word SaveAs（9行目）のパスエスケープ差分で実行時エラー。独立受入待ち|
-|T01独立再試験|旧指示版PASS|別チャット・別PAD実行は旧指示ハッシュで確認。最終指示ハッシュでの独立再試験は未完了|
-|T04独立再試験|旧指示版PASS|別チャット・別PAD実行は旧指示ハッシュで確認。最終指示ハッシュでの独立再試験は未完了|
+|T01〜T07、T10|PASS_CURRENT_REVISION|現行版の新規通常チャット生成、無修正貼付け・保存・2回実行・期待値照合を個別証跡へ記録|
+|T08|FAILED_CURRENT_REVISION_FORMAT|現行版は有効なRobin fenced blockを返さず、拒否／inline／未出力。期待エラー合格へ読み替えない|
+|T04|PASS_CURRENT_REVISION|現行版でFilterParameters原文保持、無修正貼付け・保存・2回実行・期待行照合を確認|
+|T09|BLOCKED_CURRENT_PACKAGE_GENERATION|既存runtime probeは別証跡でPASSだが、現行packageの無修正Robin生成・受入は未確認|
+|T10|PASS_CURRENT_REVISION_PRIMARY|現行版で変更範囲外行の逐語一致、無修正貼付け・保存・実行・成果物照合を確認|
+|T01/T04/T10独立再試験|PASS_CURRENT_REVISION_INDEPENDENT|別チャット・別PADフローで現行版T01/T04/T10を再試験済み|
 
 前回のCopilot Studio単体保存拒否と、M365 Copilot画面でAgent Builder項目が見えなかった事実は履歴として保持するが、今回の通常チャット検証の再開条件やBLOCKED理由にはしない。
 
@@ -119,7 +123,7 @@
 
 T04の拒否境界はbundle `2a0267d4…` 添付時に確認した。その後、PAD専用フローでExcel A1:C6→FilterDataTable→中間CSV→別xlsx保存の正例を2回実測した。正例証拠は `catalog/evidence/t04-positive-acceptance-20260910.json`、失敗出力保全は `catalog/evidence/normal-chat-t04-output-x000D-failure.xlsx`。ナレッジ正例を含む現作業版bundle `431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3` でのT04通常チャット再生成・無修正PAD貼付け・2回実行を確認。
 
-T09は `catalog/fixtures/ui/t09-local-test.html` を起動し、PAD UI要素ピッカーから入力・実行ボタン・結果段落を捕捉した。無修正6アクションを空フローへ貼付け・保存し、再コピーのアクション行一致を確認したが、元フロー・貼付けフローのWebAutomation実行は完了せず停止した。`AttributeValue=T09-clicked` は未観測である（`catalog/evidence/t09-capture-source-20260910.json`、`t09-final-paste-acceptance-20260910.json`、`t09-runtime-block-20260910.json`）。
+T09は `catalog/fixtures/ui/t09-local-test.html` を起動し、PAD UI要素ピッカーから入力・実行ボタン・結果段落を捕捉した。無修正6アクションを空フローへ貼付け・保存し、再コピーのアクション行一致を確認したが、元フロー・貼付けフローのWebAutomation実行は完了せず停止した。`AttributeValue=T09-clicked` は未観測である。現行貼付け先を90秒再probeしたところ、112秒時点でも実行中で、入力・クリック・結果取得・終了のエラー表示と`未実行`プレースホルダーが残ったため、停止ボタンを一度だけ押して準備完了へ戻した。これは既存のWAIT=1秒成功probeとは別の失敗境界である（`catalog/evidence/t09-capture-source-20260910.json`、`t09-final-paste-acceptance-20260910.json`、`t09-runtime-block-20260910.json`、`catalog/evidence/p3-t09-current-runtime-reprobe-20260911.json`）。
 
 T02ではPADのFilter DataTable設定画面で列／インデックス=`2`、演算子=`と等しい (=)`、値=`対象`を入力し、先行CSV読取りとCSV書出しを含む新規フローで保存・2回実行した。条件付きRobin原文と成果物は `catalog/actions/datatable-filter/status-equals-index2.robin`、`catalog/flows/datatable-filter/roundtrip.robin`、`catalog/evidence/normal-chat-t02-final-pad-run.json` に記録した。先行アクションなしの未解決入力試行は `catalog/evidence/filter-t02-condition-config-attempt.json` に失敗境界として分離している。
 
@@ -136,3 +140,71 @@ T02ではPADのFilter DataTable設定画面で列／インデックス=`2`、演
 2. T09のブラウザー拡張／WebAutomation実行環境を復旧し、UI要素3件の通し実行を確認する。
 3. T10は既存16行のパス・エスケープを文字単位で保持する独立生成を行い、Excel/Word/PowerPointを実行・照合する。
 4. T01・T04・T10の独立再試験を最終指示ハッシュで行い、負例とともに受入証拠へ追記する。
+
+### 現作業版の原文保持是正（2026-09-10）
+
+開始時のmainは `69fe344`、作業ブランチは `codex/issue-5-acceptance-20260910b`。PAD 2.71.115.26224、Edge 152.0.4191.66、Office 16.0.20326.20132、日本語UI、Power Fx OFF（既存採取条件）を現物／記録で突合した。Trusted RPCは `sky` 未構成のままで、UIAによる既存成功と混同していない。保護資料のSHA-256は開始前後一致。
+
+最初にT04/T10の原文を比較し、差分の段階を `catalog/evidence/normal-chat-raw-provenance-20260910.json` へ保存した。T04先行成功は測定済みFilterParametersの6引用符を保持し、最終v5だけが生成時に7引用符へ変化した。T10は入力原文から許可変更の2行以外にWord/PowerPoint保存パスが変化し、PAD再コピーは`_`を除いた別段階の正規化だった。`tests/Test-RobinRawContracts.ps1` の6 assertionsはPASSであり、生成Robinを正解へ書き換えていない。
+
+指示文へT04構造化引数の逐語複写、T10添付原文の変更範囲外逐語保持を追加し、T04/T10の技術資料へ正本行と失敗段階を追記した。7原本を `tools/Build-KnowledgeBundle.ps1` で再結合し、原本対応は `copilot/knowledge-bundle-manifest-20260910b.json` に固定した。現作業版は指示SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA-256 `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd`、UTF-16 3,949。パッケージ検査86 observed actions、カタログ77 checks、差分検査はPASS。
+
+現作業版は別CDPセッションでbundleと合成Excelを実添付し、T04生成・無修正PAD貼付け・保存・2回実行まで確認した（`catalog/evidence/t04-current-revision-acceptance-20260910.json`）。T10も現行bundleと機械的コンテキスト添付で生成し、変更範囲外行の逐語一致、無修正PAD貼付け・保存・実行、3成果物の照合まで確認した（`catalog/evidence/t10-current-revision-acceptance-20260910.json`）。別の新規チャット・新規PADフローによるT10独立再試験もPASSした（`catalog/evidence/t10-current-revision-independent-acceptance-20260910.json`）。ブラウザー拡張CUAのfile chooser失敗は `catalog/evidence/m365-current-package-upload-block-20260910b.json` に履歴として残す。T09ローカル画面の要素と結果文字は到達性として再確認したが、PAD WebAutomation実行の証拠ではない（`catalog/evidence/t09-current-environment-20260910b.json`）。旧版 `431c...` の生成・PAD結果は履歴として保持し、現作業版T01〜T03/T05〜T09・独立T01/T04・負例へ継承しない。Issue #5は `partial` を維持する。
+T10の一括2ファイル添付はbundleのみが添付され生成前に停止した。失敗証拠は `catalog/evidence/normal-chat-current-revision-t10-batch-attachment-failure-20260910.json` に保全し、単一コンテキスト添付でのT10一次受入と混同しない。
+
+P3残課題は `catalog/coverage.json` の `p3_blocked_items` に11件を追加し、真の外部依存（PAD Designerの追加・コピー、WebAutomation拡張ハンドシェイク、Trusted RPC）を項目ごとにBLOCKEDとしている。既存のCSV／Office／PDF等の証跡を未採取用途へ拡張せず、候補名・静的確認・手動DOM観測を実行成功に読み替えていない。
+
+現作業版の追補判定は、T01〜T07、T04/T10一次、T01/T04/T10独立、知識precheck、fail-closed負例を確認済み、T08を生成形式失敗、T09を現行package生成未確認とする。既存専用フローのT09ランタイムprobe（待機値1秒の一時変更・復元）は `catalog/evidence/t09-runtime-probe-20260910.json` に分離した。詳細は `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` に固定した。
+
+未採取構文・UI依存の負例（Else／ループ脱出、非空DataTable行・セル、未登録Webセレクター／WebDriver）を現行bundleの新規通常チャットで実施し、3件ともRobinコードを出さず、不足するPAD原文・設定・実行証拠と禁止すべき後続処理を回答した。証跡は `catalog/evidence/normal-chat-current-revision-negative-suite-20260910.json`。これはT08の形式失敗やT09の通し実行を合格へ変えるものではない。
+
+現作業版のケース別判定は `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` に固定し、T04/T10一次受入・T04/T10独立再試験PASS、知識precheckは参照確認PASS、その他は未実行またはBLOCKEDとして旧版成功を継承しない。
+
+P0〜P5の要件監査表は `catalog/evidence/issue5-completion-audit-20260910.json`。P4はT04/T10一次受入、T04/T10独立再試験、知識precheckを現作業版で確認済みで、残りは未実行である。T04/T10貼付け時の可視6件は仮想化による偽陰性で、Designerの総アクション数（9／16）を確認して保存・実行した。
+
+### 最新P3実測追補（2026-09-10）
+
+日時加算は `DateTime.Add ... TimeUnit.Days` を新規専用フローへ追加し、原文コピー・保存・2回実行、`2026/09/11 0:00:00` を確認した（`catalog/evidence/p3-date-add-probe-20260910.json`）。
+
+サブフローは `P3Worker` を作成し、Mainから `CALL P3Worker` で呼び出した。Workerのタイムアウト付きメッセージは2回とも `ButtonPressed=OK` で完了した（`catalog/evidence/p3-subflow-probe-20260910.json`）。Error blockでは欠損ファイル子アクションを1回実行し、Main line 2のruntime errorと後続非実行を確認した（`catalog/evidence/p3-error-trigger-probe-20260910.json`）。これらのprobeは現行bundle未統合である。カスタムエラーハンドラー、入れ子、DataTable成功構文、Excel反復などは未確認のまま保持する。
+
+DataTableは3列1行（`A/10/対象`）の作成を新規専用フローでコピー・保存・2回実行し、`1 行, 3 列`を確認した。行追加・行反復・セル参照の成功構文は未確認であり、5列に1値を渡すnative runtime errorとビジュアライザー復帰失敗は別の失敗証跡として保持する。現行失敗フローのUIではDataTable `0 行, 0 列`、RowValues `[A, B]`、2値対0列エラーを読み取り、直後の失敗Robin原文をコピーしてSHA `e0088169fdbe6490453ff926a488b9ca21c912f5632c00e47a5fc09be30db7d0`で固定した（`catalog/evidence/p3-datatable-create-success-20260911.json`、`catalog/evidence/p3-datatable-row-failure-20260910.json`、`catalog/evidence/p3-datatable-row-list-failure-20260910.json`、`catalog/evidence/p3-datatable-row-error-state-20260911.json`）。
+
+リスト項目取得は、削除アクションが取得値を返さないことを再確認した。現行の専用フローでActionsTreeViewの読取りインベントリを実行したが、仮想化スクロールが終端で揺れ続け、401ノード以上を観測した時点で停止した。検索語「項目」では追加・削除・重複削除・共通項目検索・DataTable項目更新だけが表示され、専用取得アクションは観測されなかった。ただし式参照等の別方式までは否定せず、原文・実行証拠は未確認として維持する（`catalog/evidence/p3-list-remove-probe-20260910.json`、`catalog/evidence/p3-list-get-inventory-boundary-20260911.json`、`catalog/evidence/p3-list-get-search-boundary-20260911.json`）。
+
+Excelの専用probeでは、合成`excel-catalog.xlsx`の`Sheet1`を選択し、A1:C6をTypedValuesで読み取り、Designer上で`ExcelData=6行, 3列`・エラー0を確認した。Run監視ヘルパーの完了表示は45秒以内に観測できなかったため、範囲読取りはUIプレビュー成功・完了通知未確認として分離し、Excelデータ反復は未確認のまま保持する（`catalog/evidence/p3-excel-read-range-probe-20260911.json`、`p3-excel-read-range-probe-20260911.robin`）。
+
+DateTimeカスタム書式化の専用probeでは「現在の日時／システム タイム ゾーン」選択をUIで確認したが、保存更新時にPAD内部例外 `System.InvalidOperationException: Sequence contains no matching element`（`FunctionModel.GetProgramItem`）が発生した。ダイアログ選択や例外画面は成功Robin・実行値の証拠ではないため、カスタム書式化は未確認のまま保持する（`catalog/evidence/p3-date-format-dialog-crash-20260911.json`）。
+
+エラー処理専用probeでは、名前付きカスタムエラー`FileNotFound`に変数設定ルール（`ErrorHandled=true`）を追加し、続行ON／スローOFFへ設定したが、欠損ファイル実行はなおruntime errorとなった。既定の「すべてのエラー」へ`ErrorHandledDefault=true`を設定し、続行ON／スローOFFとした別probeは2回ともtrueプレビューで完了した。名前付きルールの一致条件や他のエラーへの一般化、現行bundle統合は未確認として分離する（`catalog/evidence/p3-error-custom-handler-20260911.json`、`p3-error-custom-handler-flow-20260911.robin`、`p3-error-default-handler-20260911.json`、`p3-error-default-handler-flow-20260911.robin`）。
+Excelの専用probeでは、合成`excel-catalog.xlsx`の`Sheet1`を選択し、A1:C6をTypedValuesで読み取り、Designer上で`ExcelData=6行, 3列`・エラー0を確認した。Run監視ヘルパーの完了表示は45秒以内に観測できなかったため、範囲読取りはUIプレビュー成功・完了通知未確認として分離した。For eachの設定は保存後に消える試行と、読み取り前にループが置かれる失敗原文を別証跡へ保存し、Excelデータ反復は未確認のまま保持する（`catalog/evidence/p3-excel-read-range-probe-20260911.json`、`p3-excel-read-range-probe-20260911.robin`、`p3-excel-foreach-configuration-boundary-20260911.json`）。
+
+### 静的ゲート追補（2026-09-11）
+
+HEAD `b411a7c`でRaw契約6 assertions、Copilot package（指示3,949 UTF-16／7原本／86 observed actions）、Robin catalog 84 checks、bundled DOM 898 checks、`git diff --check`を再実行してPASSした。`tests/Test-Copilot.ps1`は30秒タイムアウト履歴のため未完了扱いとし、T08/T09の現行パッケージ受入やP3統合をPASSへ読み替えていない（`catalog/evidence/current-package-static-check-20260911.json`）。
+
+最新HEAD `1cd329c`でも同じ静的ゲートを再実行してPASSした。対象ハッシュは不変で、`tests/Test-Copilot.ps1`のタイムアウトとT08/T09・P3の未完了判定も維持する（`catalog/evidence/current-package-static-check-20260911b.json`）。
+
+最新HEAD `f308d90`でも同じ静的ゲートを再実行してPASSした。既定エラーハンドラーprobeは別証跡で成功したがbundle未統合であり、T08/T09と残るP3は未完了のままとする（`catalog/evidence/current-package-static-check-20260911c.json`）。
+
+### P3追補統合版（2026-09-11）
+
+7原本へ、既定エラーハンドラーの2回成功、DataTable作成、ファイル／制御／Excel範囲読取りの実測根拠と、未確認・失敗境界を統合した。bundle SHA-256は `0c89e53ce84671fd4bf1da4287563bf79f5164674f22907c8a420758310b36e6`、マニフェストは `copilot/knowledge-bundle-manifest-20260911.json`。統合後の通常チャット知識precheck、T01〜T10、T01/T04/T10独立再試験は未実行で、旧bundle証跡を新bundleのPASSへ付け替えない（`catalog/evidence/current-package-status-20260911-p3-integration.json`）。
+
+T09の90秒再probe（112秒時点で実行中、WebAutomationエラーと`未実行`表示後に停止）をP3統合版へ追加し、bundle SHA-256を `513fe84b8bc1fe3acb9d9092f057bace4d47215fe2cb30945b23d3ff77685831`、マニフェストを `copilot/knowledge-bundle-manifest-20260911b.json` に更新した。新bundleの知識precheck、T01〜T10、独立再試験は未実行である（`catalog/evidence/current-package-status-20260911-p3b-integration.json`、`catalog/evidence/p3-t09-current-runtime-reprobe-20260911.json`）。
+
+Indexの旧版「未確認」記述をP3現行判定へ揃え、Office範囲読取りとT09再probe境界を反映したbundle SHA-256を `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644`、マニフェストを `copilot/knowledge-bundle-manifest-20260911c.json` に更新した。新bundleの知識precheck、T01〜T10、独立再試験は未実行である（`catalog/evidence/current-package-status-20260911-p3c-integration.json`）。
+
+最新HEAD `ffaf26a`でP3統合版のRaw契約6、Package 3949/7/86、Catalog 84、Copilot契約304、DOM 898、`git diff --check`を再実行してPASSした。いずれもローカル／モック検査で、ライブM365/Edgeと新bundleのT01〜T10受入は未実行である（`catalog/evidence/current-package-static-check-20260911-integrated.json`）。
+
+現行HEAD `160ceec`は上記内容の文書整合メタデータ更新後の版であり、同静的ゲート結果を現行版へ結び付けた。ライブM365/Edgeと新bundleのT01〜T10受入は未実行である（`catalog/evidence/current-package-static-check-20260911-final.json`）。
+
+P3統合版をHEAD `7b06805`で静的検査し、Raw 6、Package 3949/7/86、Catalog 84、DOM 898、`git diff --check`をPASSした。新bundleのCopilot/PAD受入はまだ未実行である（`catalog/evidence/current-package-static-check-20260911-p3.json`）。
+
+最新HEAD `2da9610`でもP3統合版の同じ静的ゲートを再実行してPASSした。新bundleのCopilot送信とT01〜T10受入は未実行である（`catalog/evidence/current-package-static-check-20260911-p3b.json`）。
+
+最新HEAD `0ce051b`でもT09停止境界を含むbundleの同じ静的ゲートを再実行してPASSした。新bundleのCopilot送信とT01〜T10受入は未実行である（`catalog/evidence/current-package-static-check-20260911-t09.json`）。
+
+同じ現行版で`tests/Test-Copilot.ps1`も完走し、304件のオフライン／モック契約検査をPASSした。ライブM365 Copilot／Edge統合ではないため、新bundleの知識precheck・T01〜T10・T08/T09受入は未完了のままとする（`catalog/evidence/current-package-static-check-20260911-t09b.json`）。
+
+2026-09-11の現行bundle SHA `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644` で、新規通常M365 Copilotチャット（Think Deeper）へbundleを添付し、知識のみのprecheckを送信・回答取得した。回答はコードを生成せず、UTF-8設定、`FileContents`、原文／証拠パス、未確認範囲をbundle内根拠として返した。原文・DOMハッシュと送信状態は `catalog/generated/normal-chat-current-bundle-knowledge-precheck-20260911/result.json` に保存し、T01〜T10／PAD受入とは分離する。

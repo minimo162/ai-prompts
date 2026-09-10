@@ -2,7 +2,26 @@
 
 `index.json`は実際の左パネルから追加・設定・コピーした例の索引です。`.robin`はクリップボードから得た原文をUTF-8 BOMなしで保存し、改行を変換しません。Gitでもバイトを保持します。
 
-既存の変数・テキスト・ループ・ファイル読取り・Office・PDF操作に、2026-09-09/10の日時取得、空データテーブル、行追加失敗、CSV読取り・書出し、FilterDataTable、ファイルコピー、サブテキスト取得、テキスト書出し、テキスト変数書込み2設定、For each、If2、Excel/Word編集可能起動2設定、フォルダー取得2設定、ファイル変数読取り、PDFページ2単独抽出を加え、`catalog/index.json` は73設定例です。既存51例と追加例を、採取・再貼付け・実行・失敗の証拠範囲ごとに分けています。初期の専用フローは`RobinCatalog_20260907`、Officeの採取先はユーザーが用意した`test`です。コピー前のクリップボードはメモリーに保持して復元し、その内容をファイルへ記録していません。
+既存の変数・テキスト・ループ・ファイル読取り・Office・PDF操作に、2026-09-09/10の日時取得、空データテーブル、行追加失敗、CSV読取り・書出し、FilterDataTable、ファイルコピー、サブテキスト取得、テキスト書出し、テキスト変数書込み2設定、For each、If2、Excel/Word編集可能起動2設定、フォルダー取得2設定、ファイル変数読取り、PDFページ2単独抽出を加え、`catalog/index.json` は86観測バリアントです。既存51例と追加例を、採取・再貼付け・実行・失敗の証拠範囲ごとに分けています。初期の専用フローは`RobinCatalog_20260907`、Officeの採取先はユーザーが用意した`test`です。コピー前のクリップボードはメモリーに保持して復元し、その内容をファイルへ記録していません。
+
+2026-09-10の現作業版では、左パネル全体の完全対応を主張せず、`coverage.json` の `observed_variant_count=86` と `complete=false` を正本とします。T04/T10のCopilot生成時の原文変化は `evidence/normal-chat-raw-provenance-20260910.json` に保存し、現作業版T01〜T07、T04/T10一次受入、T01/T04/T10独立再試験、未採取構文・UI依存のfail-closed負例は各受入証拠へ記録しています。P3のBoolean・減算・日付減算・フォルダー作成probeは別証跡でPASSまたは境界確認ですが、現行bundle未統合です。T08は形式失敗、T09は現行package生成未確認です。現作業版の指示・bundleハッシュは `README.md` と `copilot/README.md` に記録しています。過去の73・61等の値は履歴であり、現行値へ読み替えません。
+
+## 履歴（現行値へ読み替えない）
+
+P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、フォルダー作成、Excelシート選択は別probeで採取・実行済みですが、現行bundle未統合です。カスタム日時書式化は未確認、T08は生成形式失敗、T09は現行package生成未確認です。
+
+ファイル存在確認とファイル移動（成功＋DoNothing衝突再実行）のprobeも別証跡で保持しています。欠損パスのfalse分岐はrawコピー・実行完了まで確認しましたが、branch bodyのside effectは未確認です。
+ファイル名前変更の成功／衝突no-opも別証跡で保持しています。false分岐のbranch-body実行は未確認です。
+3列1行（A/10/対象）のDataTable作成は別probeで2回実行確認しています。列付き行追加は値数不一致のnative runtime errorを再現し、成功構文を推測せず未確認として保持しています。
+ビジュアライザー保存後に0列へ戻る別失敗も記録し、成功構文を推測していません。
+If/Else/ENDとIf/Else-if/ENDの構造も別probeで確認しています。入れ子・分岐内処理は未確認です。
+有限Loopの`EXIT LOOP`と`NEXT LOOP`は別probeで確認しています。入れ子とloop内副作用は未確認です。
+（Loop Continue probeは現行bundleへ未統合です。）
+エラー処理ブロックの骨格、欠損ファイル子アクションのruntime error、P3Worker作成＋MainからのCALLも別probeで確認しています。カスタムハンドラーは未確認です。
+
+ファイル存在確認の`IF ... THEN`／`END`も別probeでtrue条件を2回、欠損パス条件を1回実行し、欠損パスのrawも取得しました。branch bodyのside effectとデータ反復等は未確認です。
+
+P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、フォルダー作成は別probeで採取・実行済みですが、現行bundle未統合です。カスタム日時書式化は未確認、T08は生成形式失敗、T09は現行package生成未確認です。
 
 ```text
 Variables.CreateNewList List=> CatalogList

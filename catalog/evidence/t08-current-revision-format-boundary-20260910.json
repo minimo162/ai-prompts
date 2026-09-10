@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T18:20:00+09:00",
+  "status": "failed_current_revision_format",
+  "scope": "Current revised package T08 attempts in new normal M365 Copilot chats; no attempt was pasted into PAD.",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+  "attempts": [
+    {
+      "id": "bundle_only_request",
+      "result": "response with explanation and inline Robin, no code fence",
+      "generated_dir": "catalog/generated/normal-chat-current-revision-t08-minimal-20260910",
+      "evidence": "catalog/evidence/t08-current-revision-format-refusal-20260910.json"
+    },
+    {
+      "id": "bundle_only_fail_closed",
+      "result": "未出力",
+      "generated_dir": "catalog/generated/normal-chat-current-revision-t08-minimal-v2-20260910",
+      "evidence": "catalog/evidence/t08-current-revision-context-format-failure-20260910.json"
+    },
+    {
+      "id": "bundle_plus_context",
+      "result": "response with explanation and inline Robin, no code fence",
+      "generated_dir": "catalog/generated/normal-chat-current-revision-t08-20260910",
+      "evidence": "catalog/evidence/t08-current-revision-generation-refusal-20260910.json"
+    },
+    {
+      "id": "bundle_plus_source_batch",
+      "result": "attachment completion unconfirmed before generation",
+      "generated_dir": "catalog/generated/normal-chat-current-revision-t08-direct-source-20260910",
+      "evidence": "generated_dir/result.json"
+    },
+    {
+      "id": "single_mechanical_context",
+      "result": "exact one-line Robin returned inline, no code fence",
+      "generated_dir": "catalog/generated/normal-chat-current-revision-t08-single-source-20260910",
+      "evidence": "generated_dir/result.json"
+    }
+  ],
+  "expected_format": "one Markdown code fence containing exactly one unmodified Robin action line",
+  "observed_robin_blocks": 0,
+  "pad_paste": "not attempted",
+  "interpretation": "The current package has not produced a pasteable T08 Robin in the required format. This is a generation-format failure, not an expected-error acceptance and not a license to hand-edit or reuse an older Robin."
+}

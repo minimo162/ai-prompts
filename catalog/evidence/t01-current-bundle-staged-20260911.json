@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T05:52:54+09:00",
+  "status": "STAGED_NOT_SENT",
+  "case": "T01",
+  "browser": "Microsoft Edge",
+  "tab_id": "1316361151",
+  "url": "https://m365.cloud.microsoft/chat?es=SSR",
+  "model_observed": "Think Deeper",
+  "attachments": [
+    {
+      "name": "PAD-Robin-Knowledge-Bundle.txt",
+      "sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644"
+    },
+    {
+      "name": "t01-input-20260909.txt",
+      "sha256": "2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f"
+    }
+  ],
+  "attachment_count": 2,
+  "upload_notice_observed": "デバイスからアップロードすると、OneDrive (個人用) にコピーが送信されます。",
+  "prompt_entered": false,
+  "sent": false,
+  "pad_execution": "NOT_RUN",
+  "result": "A fresh normal M365 Copilot chat has the current bundle and synthetic T01 input visibly attached with Think Deeper selected. The prompt and send action remain pending separate action-time confirmation."
+}

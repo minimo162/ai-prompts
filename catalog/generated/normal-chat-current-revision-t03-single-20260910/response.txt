@@ -1,0 +1,56 @@
+1. 前提・対象範囲・未確認点
+目的: C:\Users\yuuki\ai-prompts\catalog\fixtures\files 内の複数ファイルを1回ずつ処理し、.txt のみ UTF-8 で内容を読み取る。
+入力: フォルダー内ファイル一覧。
+出力: 直近の読取り内容は FileContents（text）。
+根拠:
+フォルダー内の全ファイル取得: catalog/actions/folder-get-files/all-files-no-subfolders.robin
+For each: catalog/actions/foreach/items-variable.robin
+.txt 判定: catalog/actions/if/current-file-contains-txt.robin
+UTF-8読取り: catalog/actions/file-read-text/variable-path-utf8.robin
+組合せ実行確認: catalog/flows/t03-folder-foreach-read/partial.robin、normal-chat-t03-final-current-run.json
+未確認:
+Else 構文は採取・実行確認されていません。
+.csv と .md の専用分岐は未確認です。今回の確認済み構成では、.txt以外は何も実行せず通過します。
+2. PADで先に作る設定
+追加の入力変数は不要です。
+対象フォルダー:
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+3. 貼り付け用Robin
+Plain Text
+1
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+2
+LOOP FOREACH CurrentFile IN Files
+3
+    IF Contains(CurrentFile, $'''.txt''', False) THEN
+4
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+5
+    END
+6
+END
+4. デザイナー上の確認方法
+アクション数: 4
+Folder.GetFiles
+For each
+If
+File.ReadTextFromFile.ReadText
+変数:
+Files : ファイル一覧
+CurrentFile : For each の現在ファイル
+FileContents : 読み取ったテキスト
+ブロック対応:
+LOOP FOREACH ↔ END
+IF ↔ END
+保存時にデザイナーエラーが出ないことを確認します。
+5. 合成データでの照合手順
+フローを保存。
+実行。
+Files に以下3件が含まれることを確認。
+t03-alpha.txt
+t03-beta.csv
+t03-gamma.md
+ループ中で .txt 条件に一致するのは t03-alpha.txt のみであることを確認。
+FileContents が alpha 日本語 になることを確認。
+.csv と .md は読取りアクションを実行せず通過することを確認。
+再実行して同じ結果になることを確認。

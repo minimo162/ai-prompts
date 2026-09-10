@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T08:08:49Z",
+  "status": "pass_current_revision",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+  "fixture_context": {
+    "path": "catalog/generated/normal-chat-current-revision-t03-20260910/T03-Knowledge-Fixtures-Bundle.txt",
+    "sha256": "c3be01a8bb1310e08d219baabfea1275d5db853f0d2e06accded0e43442425ab",
+    "source_count": 5
+  },
+  "generation": {
+    "result": "catalog/generated/normal-chat-current-revision-t03-single-20260910/result.json",
+    "response": "catalog/generated/normal-chat-current-revision-t03-single-20260910/response.txt",
+    "robin": "catalog/generated/normal-chat-current-revision-t03-single-20260910/robin.txt",
+    "response_sha256": "3a78e67ea303f0836229e1941bfa45c3949578e6530b38376546c4ec30c1f658",
+    "robin_sha256": "123da608af8a672efbc257da65d7038e30dab9cb5da7d0ab2dc3cae8a714fa5d",
+    "prompt_sha256": "ec55bb185663446950e1bc0114d216843900b71bfa88768c0e0a4361dabdb652",
+    "model_requested": "GPT 5.6 Think Deeper",
+    "model_observed": "GPT 5.6 Think",
+    "attachment_count": 1,
+    "body_verified": true,
+    "sent": true,
+    "response_observed": true,
+    "robin_blocks": 1
+  },
+  "pad": {
+    "flow": "RobinKnowledgeT03CurrentRevision_20260910",
+    "process_id": 33896,
+    "paste": "catalog/evidence/t03-current-revision-pad-paste-20260910.json",
+    "run1": "catalog/evidence/t03-current-revision-pad-run1-20260910.json",
+    "run2": "catalog/evidence/t03-current-revision-pad-run2-20260910.json",
+    "run_statuses": ["success", "success"],
+    "expected": "For each processes every file; only .txt enters UTF-8 read; .csv and .md do not enter the read action",
+    "observed": "Two runs completed with the .txt content preview and no runtime error; the final FileContents remains the last .txt value when .csv/.md are excluded."
+  },
+  "result": "Current revised-package T03 was generated from a single mechanical fixture context, pasted without edits, saved, and run twice. Existing fixture files were not modified."
+}

@@ -1,0 +1,1 @@
+DateTime.Subtract FromDate: $'''2026-09-10 00:00:00''' SubstractDate: $'''2026-09-09 00:00:00''' TimeUnit: DateTime.DifferenceTimeUnit.Days TimeDifference=> TimeDifference

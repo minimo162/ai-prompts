@@ -1,0 +1,25 @@
+前提・対象範囲・未確認点
+目的: PAD標準の「ファイルからテキストを読み取る」失敗を観測する最小負例。
+対象: 存在しない入力ファイル C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t08-missing-20260910.txt
+出力変数: FileContents
+使用アクション: 確認済み単体原文の「ファイルからテキストを読み取る（UTF-8）」のみ。
+後続アクション、エラー処理、ログ、完了マーカーは追加しません。
+根拠: catalog/actions/file-read-text/utf8.robin（PAD-Robin-03-Files の確認済み単体原文）。
+未確認: この存在しないパスでの実行結果そのものはナレッジ内にありません。
+PADで先に作る設定
+追加設定不要。
+空のサブフローへ貼り付けて実行してください。
+貼り付け用Robin
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+
+デザイナー上の確認方法
+アクション数: 1
+アクション順序: 上記1件のみ
+出力変数: FileContents
+ブロック開始・終了: なし
+デザイナーでエラー表示がなく保存できることを確認します。
+実行・照合手順
+空フローへ貼り付けて保存します。
+実行します。
+指定ファイルが存在しないため、「ファイルからテキストを読み取る」アクションでPAD標準の読取り失敗を観測します。
+後続処理がないため、失敗地点は当該アクションのみです。

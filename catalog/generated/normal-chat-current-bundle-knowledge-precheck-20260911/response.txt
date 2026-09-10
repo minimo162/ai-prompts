@@ -1,0 +1,9 @@
+添付の PAD-Robin-Knowledge-Bundle 内、「PAD-Robin-03-Files.txt」の「確認済みの原文」と注意事項だけを参照しました。
+
+入力パスの型：固定パスを直接指定した文字列リテラル。変数パス版では CurrentFile を使用。ナレッジ内にPAD上の厳密な型名は明記されていません。
+エンコード設定：File.TextFileEncoding.UTF8。
+出力変数の型：出力変数は FileContents。読み取ったテキストとして扱われ、数値化には別途 Text.ToNumber を使用しています。厳密な型名の明記はありません。
+原文・実行証拠：原文は catalog/actions/file-read-text/utf8.robin、実行証拠は catalog/evidence/number-conversion-variables.json。実測入力は C:\Temp\AiPromptsCatalogNumbers_20260907\input.txt で、内容 1234.5 の読取りが記録されています。
+未確認：空文字、UTF-8以外のエンコード、桁区切り、改行の扱い。
+
+参照した記載：PAD-Robin-Knowledge-Bundle 内の「今回の追加採取: ファイルパス変数からテキストを読み取る」「確認済みの原文」「注意」。T01〜T10、評価者用期待値、Issue本文、ローカルパスの実在性は根拠にしていません。

@@ -1,0 +1,41 @@
+前提・対象範囲・未確認点
+入力原文: catalog/generated/office-three-apps/generated.robin（SHA-256: d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194）
+依頼どおり、変更は以下の2か所のみです。
+Excel.WriteToExcel.WriteCell の値 CopilotOffice 246 → T10-Changed
+Excel.SaveExcel.SaveAs の保存先ファイル名 → C:\Users\yuuki\ai-prompts\catalog\evidence\copilot-excel-t10-current-bundle.xlsx
+それ以外の14行は添付原文を逐語保持しました。
+貼り付け用Robin（対象: catalog/generated/office-three-apps/generated.robin の置換後完成版）
+Plain Text
+1
+Excel.LaunchExcel.LaunchUnderExistingProcess Visible: True UseMachineLocale: False Instance=\> ExcelInstance
+2
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T10-Changed''' Column: $'''A''' Row: 1
+3
+Excel.ReadFromExcel.ReadCell Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues CellValue=\> ExcelData
+4
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\\\Users\\\\yuuki\\\\ai-prompts\\\\catalog\\\\evidence\\\\copilot-excel-t10-current-bundle.xlsx'''
+5
+Excel.CloseExcel.Close Instance: ExcelInstance
+6
+Word.LaunchWord.Launch Visible: True Instance=\> WordInstance
+7
+Word.WriteToWord.WriteEndOfDocument Instance: WordInstance Text: $'''CopilotOffice 246''' AppendNewLine: False
+8
+Word.ReadFromWord.Read Instance: WordInstance WordData=\> WordData
+9
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\\\Temp\\\\AiPromptsOfficeCatalog\_20260907\\\\copilot-word.docx'''
+10
+Word.CloseWord.Close Instance: WordInstance
+11
+PowerPoint.LaunchPowerPoint.Launch Instance=\> PowerPointInstance
+12
+PowerPoint.AddPowerPointSlide.AddSlideAsLast Instance: PowerPointInstance SlideIndex=\> SlideIndex
+13
+PowerPoint.WriteToPowerPoint.WriteToSlideAtPosition Instance: PowerPointInstance Text: $'''CopilotOffice 246''' AppendNewLine: False SlidePosition: SlideIndex
+14
+PowerPoint.ReadFromPowerPoint.Read Instance: PowerPointInstance PowerPointData=\> PowerPointData
+15
+PowerPoint.SavePowerPoint.SaveAs Instance: PowerPointInstance DocumentFormat: PowerPoint.PowerPointFormat.PPTX DocumentPath: $'''C:\\\\Temp\\\\AiPromptsOfficeCatalog\_20260907\\\\copilot-powerpoint.pptx'''
+16
+PowerPoint.ClosePowerPoint.Close Instance: PowerPointInstance
+その他の行を表示する

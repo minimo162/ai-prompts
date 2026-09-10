@@ -6,7 +6,7 @@ Excel（11バリアント）
 - 起動: 新規表示、既存読取り専用
 - 操作: セル書込み、単一セル読取り（TypedValues）、使用範囲読取り、A1:B2範囲読取り、T04のA1:C6範囲読取り、xlsx別名保存、終了
 - 原文と設定: catalog/actions/excel-*/、組合せ: catalog/flows/office-excel/default.robin、再開: catalog/flows/office-reopen/assembled.robin、T04: catalog/flows/excel-t04-read-range/roundtrip.robin
-- 実行確認: A1の日本語と100%を保持、使用範囲1×1、指定範囲2×2、T04のExcelData=6行×3列、T04入力ブックSHA-256不変。シート選択・データ反復・条件抽出・別ブック書込みの独立例は未確認。
+- 実行確認: A1の日本語と100%を保持、使用範囲1×1、指定範囲2×2、T04のExcelData=6行×3列、T04入力ブックSHA-256不変。Sheet1選択とA1:C6読取りの別P3 probeも確認済み。Excelデータ反復・条件抽出・別ブック書込みの独立例は未確認（T04の条件抽出→別xlsx正例は別記）。
 - 既存Excelを編集可能で開く追加採取: `Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance`。原文`catalog/actions/excel-launch/open-editable.robin`（SHA-256: 1b55a963e33056ae4b0b0bb65af88550476f3c31717f3129b38fc3d3c5e7b82a）。
 - T04合成ブックを読み取り専用で開く追加採取: `Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\t04-filter-input.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelInstance`。原文`catalog/actions/excel-launch/t04-open-readonly.robin`（SHA-256: 673ba361d788bbfcac66ef4da3d8ba9e7f628620d9fcde10e9779412946db6e0）。
 - T04範囲読取り: `Excel.ReadFromExcel.ReadCells Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 EndColumn: $'''C''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ExcelData`。原文`catalog/actions/excel-read/t04-range-a1-c6.robin`（SHA-256: fe22fa6eb884429ffa8070305e4cf60d56f73fb307a5d9104e6c25574f92b219）。Dataシートをアクティブにした入力で、実行プレビューは6行・3列。シート名指定引数は未採取。
@@ -28,6 +28,7 @@ Excel.CloseExcel.Close Instance: ExcelInstance
 ```
 - 原文ファイル: `catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin`（SHA-256 `d45925fb49ae74d8518b5acc046aee1477774ad4749132801957df3d02408353`）。この9行は説明用の擬似コードではなく、PADからコピーして空フローへ再貼付けした命令列である。
 - `ExcelInstance` と `ExcelInstance2` は別のExcelインスタンス。複数行CSVをセルへ直接書き込む方式は `_x000D_` 混入失敗のため採用しない。出力パスを変更する場合は、そのパスが存在し衝突時の設定が確認できることを別途確認する。
+- `FilterParameters`の構造化引数は一般化せず、上記原文の3行目を逐語複写する。`$''''''`は`$`＋単一引用符6個の実測リテラルであり、引用符数を変更した行はこの正例の原文ではない。T04の出力先を変える場合も、FilterParameters行は変更しない。
 - 代表的なコピー原文（新規→書込み→単一セル読取り→別名保存→終了）:
   `Excel.LaunchExcel.LaunchUnderExistingProcess Visible: True UseMachineLocale: False Instance=> ExcelInstance`
   `Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''OfficeCatalog 日本語 100%%''' Column: $'''A''' Row: 1`

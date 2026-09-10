@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T06:24:00+09:00",
+  "status": "blocked_upload_not_transmitted",
+  "browser": "Microsoft Edge extension",
+  "tab_id": "1316360979",
+  "url": "https://m365.cloud.microsoft/chat?es=SSR",
+  "model_selector_observed": "GPT 5.6 Think",
+  "requested_model": "GPT 5.6 Think Deeper",
+  "file_input": {
+    "count": 1,
+    "multiple": true,
+    "display": "none",
+    "accepts_txt_and_xlsx": true
+  },
+  "attempt": {
+    "menu": "画像とファイルのアップロード",
+    "chooser_event": "not fired; wait timed out",
+    "attachments_observed": 0,
+    "message_sent": false,
+    "current_package_contents_transmitted": false
+  },
+  "files_not_sent": [
+    "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "catalog/fixtures/excel/t04-filter-input.xlsx"
+  ],
+  "interpretation": "This is an upload-path blocker in the browser extension surface, not a Copilot generation result. Reuse of old CDP evidence is not allowed for the revised package.",
+  "next_human_operation": "Use a CDP/file-input session that can attach the current bundle and fixture, then start a new normal chat."
+}

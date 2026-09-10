@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T02:07:52+09:00",
+  "status": "pass_probe_preview_after_run_wait_gap",
+  "missing_item": "E-excel",
+  "scope": "Synthetic PAD Excel range-read probe in a dedicated flow; current seven-file bundle was not changed and no existing business workbook was used.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3ExcelSheetProbe2_20260910",
+    "process_id": 50760,
+    "action_count": 3
+  },
+  "raw": {
+    "path": "catalog/evidence/p3-excel-read-range-probe-20260911.robin",
+    "sha256": "0275eb78b8c790a5ab8417df55f1e26c30a2cf5a91c65de6a6306970526d5f40",
+    "bytes": 540,
+    "copy_observed": true,
+    "clipboard_restored": true
+  },
+  "configuration": {
+    "workbook": "catalog/fixtures/excel/excel-catalog.xlsx",
+    "workbook_sha256": "e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6",
+    "instance_variable": "ExcelInstance",
+    "active_sheet": "Sheet1",
+    "start_column": "A",
+    "start_row": 1,
+    "end_column": "C",
+    "end_row": 6,
+    "contents_mode": "TypedValues",
+    "first_line_is_header": false,
+    "output_variable": "ExcelData"
+  },
+  "run_observation": {
+    "run_helper": "tools/Run-PadFlowLive.ps1",
+    "completion_wait_result": "not_observed_within_45_seconds",
+    "post_wait_flow_status": "状態: 準備完了",
+    "post_wait_error_count": 0,
+    "post_wait_variable_preview": "ExcelData: 6 行, 3 列",
+    "start_enabled_after": true,
+    "interpretation": "The PAD UI showed a populated 6-by-3 ExcelData preview after the bounded run wait; the helper's completion acknowledgement was not observed, so this is not a full run-helper PASS."
+  },
+  "result": "Excel range reading from a synthetic workbook was observed with a stable 6-row, 3-column preview and no PAD error. This proves range-read setup and preview only; Excel row iteration, per-row side effects, and cell-reference extraction remain unconfirmed."
+}

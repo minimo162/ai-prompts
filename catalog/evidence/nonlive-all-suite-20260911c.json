@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T06:04:39+09:00",
+  "suite": "tests/Run-NonLiveTests.ps1 -Suite All",
+  "source_verification": ".work/nonlive-8465c32432904c64935b29feb62e660a/verification.json",
+  "status": "PASS",
+  "test_count": 35,
+  "failed_count": 0,
+  "candidate_unchanged": true,
+  "scope_limits": {
+    "live_m365": "NOT_RUN",
+    "native_pad": "NOT_RUN",
+    "business_quality": "NOT_RUN",
+    "other_pc": "NOT_RUN",
+    "release_approved": false
+  },
+  "result": "The full Windows PowerShell 5.1 non-live suite passed after the UTF-8 BOM expectation correction and included Test-CurrentBundleT01Prepared.ps1. This remains P5 local evidence only."
+}

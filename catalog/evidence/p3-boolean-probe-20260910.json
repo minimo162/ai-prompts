@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T18:17:22+09:00",
+  "status": "pass_probe_not_in_current_bundle",
+  "missing_item": "A-text-number-boolean-set",
+  "scope": "Synthetic PAD UIA probe in a newly-created dedicated flow; not current-package acceptance because the current bundle was intentionally not changed.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3Boolean_20260910",
+    "process_id": 27532,
+    "action_count": 1
+  },
+  "raw": {
+    "path": "catalog/evidence/p3-boolean-probe-20260910.robin",
+    "sha256": "e7d0321af0dc7fee337b917308164b6d5c13f7040ef69dcc657ea725db54cf0c",
+    "text": "SET P3Bool TO True",
+    "copy_observed": true,
+    "clipboard_restored": true
+  },
+  "configuration": {
+    "variable": "P3Bool",
+    "value": "True",
+    "interpretation": "PAD emitted an unquoted boolean literal in the copied Robin."
+  },
+  "run": {
+    "status": "success",
+    "evidence": "catalog/evidence/p3-boolean-probe-run-20260910.json",
+    "variable_previews": ["True"],
+    "ready_observed": true,
+    "start_enabled_after": true
+  },
+  "package_binding": {
+    "current_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "current_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+    "included_in_current_bundle": false,
+    "reason": "Adding this new knowledge entry would change the final package hash and require a new complete T01-T10 regression; this probe is retained separately until that rerun is authorized and feasible."
+  },
+  "result": "Boolean setting was captured, copied, and executed successfully in PAD. It is evidence for the P3 gap but does not close the current-package acceptance or the remaining A-G gaps."
+}

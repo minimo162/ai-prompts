@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T15:30:37+09:00",
+  "status": "environment_observed_runtime_unproven",
+  "browser": {
+    "family": "Microsoft Edge",
+    "file_version": "152.0.4191.66",
+    "tab_id": "1316360762",
+    "url": "http://127.0.0.1:8765/t09-local-test.html",
+    "dom_observed": [
+      "input#t09-input value=T09-input",
+      "button#t09-submit label=実行",
+      "paragraph#t09-result text=T09-clicked"
+    ],
+    "fixture_reachable": true
+  },
+  "fixture_server": {
+    "listen": "127.0.0.1:8765",
+    "process": "python",
+    "pid": 29828,
+    "python_path": "C:\\Users\\yuuki\\AppData\\Local\\Programs\\Python\\Python313\\python.exe"
+  },
+  "pad": {
+    "file_version": "2.71.115.26224",
+    "browser_native_message_host_processes_observed": [10380, 29972],
+    "trusted_rpc": "unavailable: Trusted RPC service is not configured: sky",
+    "prior_webautomation_runs": {
+      "source": {"stopped_after_seconds": 207, "completion_observed": false, "output_observed": false},
+      "pasted": {"stopped_after_seconds": 80, "completion_observed": false, "output_observed": false}
+    }
+  },
+  "interpretation": "The local page and captured target IDs are reachable now, but manual browser DOM state is not a PAD WebAutomation execution. The prior PAD stop point remains the item-level dependency; no rerun was started while completion state was unknown.",
+  "required_human_operation": "On the dedicated PAD flow, verify the WebAutomation extension handshake and run the existing six-action sequence once to completion, recording AttributeValue=T09-clicked and browser closure. Do not install an extension or change policy settings."
+}

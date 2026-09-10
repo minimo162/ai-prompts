@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T19:35:52+09:00",
+  "status": "pass_probe_collision_rerun_not_bundled",
+  "missing_item": "D-files-folders",
+  "scope": "Synthetic PAD File.Move probe in a newly-created dedicated flow; first move and DoNothing collision rerun; current bundle unchanged.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3FileMove_20260910",
+    "process_id": 53384,
+    "action_count": 1
+  },
+  "raw": {
+    "path": "catalog/evidence/p3-file-move-probe-20260910.robin",
+    "sha256": "359827098be622bd3cd62721a78cbdc725e643d89d3be7969e72d2118d9320e0",
+    "copy_observed": true,
+    "clipboard_restored": true
+  },
+  "configuration": {
+    "source": ".work/p3-file-move-source-20260910.txt",
+    "destination_folder": ".work/p3-file-move-dest",
+    "if_file_exists": "DoNothing",
+    "output_variable": "MovedFiles"
+  },
+  "runs": [
+    {"evidence": "catalog/evidence/p3-file-move-probe-run1-20260910.json", "status": "success"},
+    {"evidence": "catalog/evidence/p3-file-move-probe-run2-20260910.json", "status": "success", "moved_files_preview": "[]", "destination_unchanged": true}
+  ],
+  "package_binding": {
+    "current_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "current_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+    "included_in_current_bundle": false,
+    "reason": "Adding the action to the seven-file bundle would change the package hash and require a complete T01-T10 regression."
+  },
+  "result": "File.Move was copied, saved, and executed twice. The first run moved the source to the synthetic destination; after recreating the synthetic source, the second DoNothing collision run returned MovedFiles=[] with source and destination hashes equal."
+}

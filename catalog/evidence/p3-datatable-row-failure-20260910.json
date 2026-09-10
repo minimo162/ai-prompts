@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T20:20:00+09:00",
+  "status": "failed_probe_row_value_count_mismatch",
+  "missing_item": "C-datatable",
+  "scope": "Synthetic PAD DataTable row-insertion probe; no current-package acceptance claim.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3DataTable_20260910",
+    "process_id": 69712,
+    "action_count": 2
+  },
+  "raw": {
+    "path": "catalog/evidence/p3-datatable-row-failure-20260910.robin",
+    "sha256": "06318632195673705c55068dc798afba693f2062ca396a8c48d452951b6a2558",
+    "captured_flow_sha256": "eeadbbe793c6093a8d6a2084ee911a0a570061d1e722908b5f56460917586119",
+    "copy_observed": true,
+    "clipboard_restored": true
+  },
+  "configuration": {
+    "table_columns": 5,
+    "row_value_count": 1,
+    "error": "追加するために指定された値の数 (1) がデータ テーブルの列の数 (5) と一致しません。",
+    "error_line": 2,
+    "runtime_error_observed": true
+  },
+  "second_attempt": "catalog/evidence/p3-datatable-row-list-failure-20260910.json",
+  "result": "The native PAD errors prove both a five-column/one-value mismatch and a visualizer-persistence zero-column/two-value mismatch. No guessed list syntax or automatic repair was added; successful row insertion, row iteration, and cell access remain unobserved."
+}

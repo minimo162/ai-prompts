@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T07:46:10Z",
+  "status": "pass_current_revision_independent",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+  "generation": {
+    "result": "catalog/generated/normal-chat-current-revision-t04-independent-20260910/result.json",
+    "response": "catalog/generated/normal-chat-current-revision-t04-independent-20260910/response.txt",
+    "robin": "catalog/generated/normal-chat-current-revision-t04-independent-20260910/robin.txt",
+    "response_sha256": "433d636efd5a6b75c2402ca5ea0f62028b18f3b1016a675b556a26b6e8a071c3",
+    "robin_sha256": "0b2a1e3455b112dc1528090429c57530fcfeafe189be3c83d4840e183bf4ccb1",
+    "prompt_sha256": "4e67a150d6a61e9c3a1bf9ea9c15cdb75736f6488eab1de57dab27a6330d8480",
+    "model_requested": "GPT 5.6 Think Deeper",
+    "model_observed": "GPT 5.6 Think",
+    "attachments": [
+      {"name": "PAD-Robin-Knowledge-Bundle.txt", "sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd"},
+      {"name": "t04-filter-input.xlsx", "sha256": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0"}
+    ],
+    "body_verified": true,
+    "sent": true,
+    "response_observed": true,
+    "robin_blocks": 1,
+    "source_line_difference": {"lines": [5, 6, 7], "meaning": "path substitutions only; FilterParameters and action syntax unchanged"}
+  },
+  "pad": {
+    "flow": "RobinKnowledgeT04CurrentRevisionIndependent_20260910",
+    "process_id": 31656,
+    "paste_evidence": "catalog/evidence/t04-current-revision-independent-pad-paste-20260910.json",
+    "run1": "catalog/evidence/t04-current-revision-independent-pad-run1-20260910.json",
+    "run2": "catalog/evidence/t04-current-revision-independent-pad-run2-20260910.json",
+    "run_statuses": ["success", "success"],
+    "variable_previews": ["対象,A,10  対象,C,25  対象,D,5", "6 行, 3 列", "3 行, 3 列"]
+  },
+  "outputs": [
+    {"path": "catalog/evidence/t04-current-revision-independent-output.xlsx", "sha256": "d3b74879ed25b6fab2d0d80f5c6a4816ceb229da945435df5f1b58d022d21e5d", "rows": [["対象", "A", 10], ["対象", "C", 25], ["対象", "D", 5]]},
+    {"path": "catalog/evidence/t04-current-revision-independent-output-run2.xlsx", "sha256": "28bcb6cab362ed65d5e258efcfbd0823881b1e11a2b5f3b9d9d9784ff449a463", "rows": [["対象", "A", 10], ["対象", "C", 25], ["対象", "D", 5]]}
+  ],
+  "input_sha256_before": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+  "input_sha256_after": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+  "protected_outputs_restored": true,
+  "result": "A separate current-package normal chat and separate fresh PAD flow produced the fixed rows in two successful runs without hand edits."
+}

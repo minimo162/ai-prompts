@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T03:34:00+09:00",
+  "status": "pass_probe_default_error_handler_not_bundled",
+  "missing_item": "B-error-subflow",
+  "scope": "Synthetic PAD BLOCK probe only; current package and business data were not changed.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3ErrorBlock_20260910",
+    "process_id": 50316,
+    "action_count": 3
+  },
+  "configuration": {
+    "custom_error_name": "FileNotFound",
+    "custom_rule": "SET ErrorHandled TO $'''true'''",
+    "default_rule": "SET ErrorHandledDefault TO $'''true'''",
+    "default_continue_process_execution": true,
+    "default_throw_error": false,
+    "raw": {
+      "path": "catalog/evidence/p3-error-default-handler-flow-20260911.robin",
+      "sha256": "b115fda2dd861f1652ccb71cd1d65c8e10a51c4bbfebc103beee2ac5024fdc2f",
+      "bytes": 354,
+      "copy_observed": true,
+      "clipboard_restored": true
+    }
+  },
+  "runs": [
+    {
+      "evidence": "catalog/evidence/p3-error-default-handler-run-20260911.json",
+      "run_status": "success",
+      "ready_observed": true,
+      "start_enabled_after": true,
+      "variable_preview": "true"
+    },
+    {
+      "evidence": "catalog/evidence/p3-error-default-handler-run2-20260911.json",
+      "run_status": "success",
+      "ready_observed": true,
+      "start_enabled_after": true,
+      "variable_preview": "true"
+    }
+  ],
+  "result": "A default all-errors rule set ErrorHandledDefault=true while the missing-file child remained inside BLOCK/ON BLOCK ERROR. Both runs returned PAD ready with a true variable preview and no downstream runtime error, proving this bounded default-handler configuration and execution. The custom FileNotFound rule remains separately recorded as a failed match path; neither probe is in the current seven-file bundle."
+}

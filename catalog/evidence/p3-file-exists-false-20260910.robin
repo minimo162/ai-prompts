@@ -1,0 +1,2 @@
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\p3-file-exists-missing-20260910.txt''') THEN
+END

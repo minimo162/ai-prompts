@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T03:07:07+09:00",
+  "status": "blocked_pad_dialog_update_exception",
+  "missing_item": "A-datetime-format",
+  "scope": "Synthetic PAD DateTime probe only; no current package or business data was changed.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3DateFormatCustom2_20260910",
+    "process_id": 75440,
+    "window_title_verified": "Power Automate | RobinKnowledgeP3DateFormatCustom2_20260910"
+  },
+  "exception": {
+    "dialog_title": "ハンドルされないエラー",
+    "message": "Sequence contains no matching element",
+    "error_type": "System.InvalidOperationException",
+    "operation": "DesignerProgram.Functions.FunctionModel.GetProgramItem during UpdateProgramItemCommandHandler / EditActionAsync",
+    "correlation_id": "89291ea5-6d0d-473b-98f3-886ae55a7441",
+    "dialog_instances": 2,
+    "closed_instances": 2
+  },
+  "probe_state": {
+    "dialog_choices_observed_before_error": ["現在の日時", "システム タイム ゾーン"],
+    "stable_saved_robin_copy": false,
+    "custom_format_success": false,
+    "actions_executed": 0
+  },
+  "result": "The PAD designer raised an internal program-item lookup exception while updating the dedicated DateTime probe. The dialog choices are not sufficient evidence of a saved Robin or custom-format runtime success; the existing custom-format failure boundary remains authoritative."
+}

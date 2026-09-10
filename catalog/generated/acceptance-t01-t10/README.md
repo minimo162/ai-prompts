@@ -8,7 +8,7 @@
 - 入力: 各ケースで指定する合成データ、専用フォルダー、専用PADフロー。
 - 手順: 新しい会話へ依頼 → 回答原文と生成コードを保存 → 手直しせずPADへ貼付け → 設定 → 保存・実行 → 成果物と期待値を照合。
 - 失敗時: 元回答を上書きせず、原因分類と失敗位置を保存。指示・ナレッジを変更したら新しい会話で再試験。
-- 現最終版は指示文 SHA-256 `e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1`、ナレッジ結合版 SHA-256 `431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3`。最終版の通常チャット生成は知識プレチェックとT01〜T10で保存済み。PADの最終版貼付け・実行はT01〜T03、T05〜T08で確認した。T04は最終生成RobinのFilterParameters引用符差分で貼付け未成立（コード手直しなし）だが、同bundleの有効版による先行正例は `catalog/evidence/normal-chat-t04-current-v4-acceptance.json` に保持する。T09はUI要素捕捉・貼付け・保存までで、WebAutomation実行はタイムアウト。T10最終生成版はWord SaveAsのパスエスケープ差分で実行時エラーとなった。詳細は `catalog/evidence/normal-chat-final-package-acceptance-20260910.json`。
+- 以下の表は、指示文 `e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1`／bundle `431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3` の履歴受入を保全したものです。原文保持規則を強化した現作業版は、指示文 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`／bundle `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd` で、T04は現作業版の通常チャット生成・無修正PAD受入までPASSしました。旧版のT01〜T03/T05〜T10生成・PAD結果を現作業版へ継承しません。T04/T10の差分発生段階は `catalog/evidence/normal-chat-raw-provenance-20260910.json`、結合版の再生成は `tools/Build-KnowledgeBundle.ps1` です。
 
 ## 固定ケース
 
@@ -25,8 +25,26 @@
 | T09 | 安全なローカル画面で文字入力→クリック→待機→文字取得 | 対象UI要素の登録手順と取得文字を明示。未確認セレクターを出さない | PARTIAL（UI要素捕捉・貼付けPASS、WebAutomation実行タイムアウト） |
 | T10 | 動作確認済み既存フローを渡し、条件1つと出力名だけ変更 | 指定変更のみ反映し、既存の入力・変数・別処理・エラー経路を保持 | PARTIAL（最終版Word SaveAsで停止、独立再試験待ち） |
 
+上表は履歴版の判定です。現作業版ではT04をPASS_CURRENT_REVISIONとし、同じT01〜T10の残りを新規通常チャットから再生成して無修正PAD貼付け・保存・実行・成果物照合まで行う必要があります。
+
+2026-09-11現在の最終配布候補は、指示文 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`／bundle `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644` です。この版では知識のみの通常チャットprecheckを `PASS_REFERENCE_ONLY` として確認しましたが、T01〜T10、T01/T04/T10独立再試験、T08有効Robin、T09現行package通し実行は未完了です。下記の旧版PASS・失敗・未実行をこの最終配布候補へ継承しません。precheckの質問・回答・DOMハッシュは `catalog/generated/normal-chat-current-bundle-knowledge-precheck-20260911/`、P0〜P5監査は `catalog/evidence/issue5-completion-audit-20260911.json` です。
+
+現作業版の固定サマリは `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` です。
+
+現作業版の追補：T01〜T07、T04/T10一次受入、T01/T04/T10独立再試験はPASS_CURRENT_REVISION。fail-closed負例はPASS_NEGATIVE_FAIL_CLOSED。T08は生成形式失敗、T09は既存専用フローのランタイムprobeのみPASSで、現行package Robin受入は未確認です。
+
+P3追補：日時加算とサブフロー作成／呼出しは別の合成専用probeで原文コピー・保存・2回実行まで確認しましたが、現行bundle未統合です。カスタム日時書式化、エラー発生子アクション、カスタムハンドラー、DataTable成功構文などは未確認です。
+
+現作業版bundleのみを添付した知識precheckは `catalog/evidence/normal-chat-current-revision-knowledge-precheck-20260910.json` に保存し、ナレッジ固有の設定・型・依存を回答原文と照合しました。これは受入ケースの代用ではありません。
+
+現作業版T10一次受入は `catalog/evidence/t10-current-revision-acceptance-20260910.json`、別チャット／別PADフローの独立再試験は `catalog/evidence/t10-current-revision-independent-acceptance-20260910.json` に保存しています。T01独立再試験は `catalog/evidence/t01-current-revision-independent-acceptance-20260910.json`、T04独立再試験は `catalog/evidence/t04-current-revision-independent-acceptance-20260910.json` に保存しています。
+
+現作業版T10の生成・無修正PAD貼付け・保存・実行・Office成果物照合は `catalog/evidence/t10-current-revision-acceptance-20260910.json` に保存しています。独立再試験も別チャット／別PADフローでPASSしています。
+
+現作業版T04の生成・貼付け・保存・2回実行・成果物照合は `catalog/evidence/t04-current-revision-acceptance-20260910.json` と `catalog/evidence/t04-current-revision-pad-paste-20260910.json` に記録しています。貼付けヘルパーの可視6件は仮想化による偽陰性であり、Designerの「9 アクション」表示を確認しました。
+
 ## 独立再試験
 
-最終版を固定した後、T01・T04・T10をそれぞれ別の新しい会話で1回ずつ実施する。旧指示版でのT01/T04独立正例は履歴として保持するが、最終指示ハッシュでの独立受入は未完了。T10独立再試験も未完了。初回結果と最終版結果を混ぜない。
+最終版を固定した後、T01・T04・T10をそれぞれ別の新しい会話で1回ずつ実施した。T01/T04/T10独立再試験は現行版でPASS済み。初回結果と最終版結果を混ぜない。
 
 現作業版では `catalog/evidence/pad-native-ui-blocked-20260910.json` のとおり、PADプロセスは起動したがnative Computer Use Trusted RPCが未構成である。T04はUIAフォールバックで正例の2回実行まで確認した。T09は `catalog/evidence/t09-runtime-block-20260910.json` のとおりUIA捕捉・貼付け・保存は確認したが、WebAutomation実行完了は未確認である。

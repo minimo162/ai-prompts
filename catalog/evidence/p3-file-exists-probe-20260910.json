@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T19:29:35+09:00",
+  "status": "pass_probe_not_bundled",
+  "missing_item": "D-files-folders",
+  "scope": "Synthetic PAD file-existence condition probe in a newly-created dedicated flow; not current-package acceptance because the current bundle was intentionally not changed.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3FileExists_20260910",
+    "process_id": 8840,
+    "action_count": 2
+  },
+  "raw": {
+    "path": "catalog/evidence/p3-file-exists-probe-20260910.robin",
+    "sha256": "bdb56fde60047898939f6c37a3b24be57dffc2f7e0ad57c37045c7fd03a1a8db",
+    "copy_observed": true,
+    "clipboard_restored": true
+  },
+  "configuration": {
+    "condition": "File.IfFile.Exists",
+    "file_path": "catalog/fixtures/text/t01-input-20260909.txt",
+    "block_terminator": "END",
+    "branch_actions": 0
+  },
+  "runs": [
+    {"evidence": "catalog/evidence/p3-file-exists-probe-run1-20260910.json", "status": "success"},
+    {"evidence": "catalog/evidence/p3-file-exists-probe-run2-20260910.json", "status": "success"}
+  ],
+  "package_binding": {
+    "current_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "current_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+    "included_in_current_bundle": false,
+    "reason": "Adding the action to the seven-file bundle would change the package hash and require a complete T01-T10 regression."
+  },
+  "result": "File existence condition and END block were copied, saved, and executed twice against an existing synthetic fixture. Move, rename, and false-branch behavior remain unobserved."
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T07:58:19Z",
+  "status": "pass_current_revision",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+  "generation": {
+    "result": "catalog/generated/normal-chat-current-revision-t01-20260910/result.json",
+    "response": "catalog/generated/normal-chat-current-revision-t01-20260910/response.txt",
+    "robin": "catalog/generated/normal-chat-current-revision-t01-20260910/robin.txt",
+    "response_sha256": "4b16113d3108684e0bdaf2464c28b720b88de5d16ea4b92626d73013ba9ab27c",
+    "robin_sha256": "2e7bbd90f5a72f70f56092ccce33120640be4b49bdee9d350dd9c017401e97ba",
+    "prompt_sha256": "936fe2eb6606adbfd10596e4b7347eeda8a021d3b93530625851a0608d5f0312",
+    "model_requested": "GPT 5.6 Think Deeper",
+    "model_observed": "GPT 5.6 Think",
+    "attachment_count": 2,
+    "body_verified": true,
+    "sent": true,
+    "response_observed": true,
+    "robin_blocks": 1
+  },
+  "pad": {
+    "flow": "RobinKnowledgeT01CurrentRevision_20260910",
+    "process_id": 49996,
+    "paste": "catalog/evidence/t01-current-revision-pad-paste-20260910.json",
+    "run1": "catalog/evidence/t01-current-revision-pad-run1-20260910.json",
+    "run2": "catalog/evidence/t01-current-revision-pad-run2-20260910.json",
+    "run_statuses": ["success", "success"],
+    "variable_previews": [
+      "日本語  対象語 100%  '引用' \"二重引用\" C:\\sample  対象語  対象外語",
+      "日本語  置換後 100%  '引用' \"二重引用\" C:\\sample  置換後  対象外語"
+    ]
+  },
+  "outputs": [
+    {"path": "catalog/evidence/t01-current-revision-output-run1.txt", "sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2"},
+    {"path": "catalog/evidence/t01-current-revision-output-run2.txt", "sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2"}
+  ],
+  "input_sha256_before": "2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f",
+  "input_sha256_after": "2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f",
+  "protected_output_restored": true,
+  "result": "Current revised-package T01 was generated, pasted without edits, saved, run twice, and its special-character output matched the fixed case while the input remained unchanged."
+}

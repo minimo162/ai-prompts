@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-10T20:31:25+09:00",
+  "flow_name": "RobinKnowledgeP3Else_20260910",
+  "run_status": "success",
+  "condition": "yes = no",
+  "branch": "ELSE",
+  "ready_observed": true,
+  "start_enabled_after": true,
+  "branch_actions": 0
+}

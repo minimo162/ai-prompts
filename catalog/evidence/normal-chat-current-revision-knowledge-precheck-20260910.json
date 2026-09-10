@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T07:01:00Z",
+  "status": "pass_reference_only",
+  "package": {
+    "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "knowledge_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd"
+  },
+  "chat": {
+    "result": "catalog/generated/normal-chat-current-revision-knowledge-precheck-20260910/result.json",
+    "prompt_sha256": "cc8e3459b98344570ff26605a443de5fc63f4024e369ae0320d8c1a4a52a474a",
+    "prompt_utf16": 4527,
+    "response": "catalog/generated/normal-chat-current-revision-knowledge-precheck-20260910/response.txt",
+    "response_sha256": "d7b3a6816b4048e664c23134f34045d827722b19dec26181f7844fd8a7fc3b45",
+    "response_utf16": 4607,
+    "model_requested": "GPT 5.6 Think Deeper",
+    "model_observed": "GPT 5.6 Think",
+    "attachment": {"name": "PAD-Robin-Knowledge-Bundle.txt", "sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd"},
+    "body_verified": true,
+    "sent": true,
+    "response_observed": true,
+    "robin_blocks": 0
+  },
+  "verification": {
+    "question_excluded_answer_values": true,
+    "anchors_observed": [
+      "PAD-Robin-03-Files.txt UTF-8 text-write settings and source hash",
+      "PAD-Robin-04-Office-PDF.txt T04 A1:C6 / FilterDataTable / CSV intermediate / xlsx SaveAs",
+      "PAD-Robin-00-Index.txt and PAD-Robin-06-Examples.txt T09 IDs and runtime-unconfirmed status"
+    ],
+    "source_hashes_echoed": true,
+    "interpretation": "A separate fresh normal-chat answer stayed within the attached current bundle and distinguished T04 verified execution from T09 runtime unconfirmed. This is reference-only evidence, not T01-T10 acceptance."
+  }
+}

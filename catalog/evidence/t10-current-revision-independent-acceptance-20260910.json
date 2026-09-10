@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T07:37:33Z",
+  "status": "pass_current_revision_independent",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+  "generation": {
+    "result": "catalog/generated/normal-chat-current-revision-t10-independent-v3-20260910/result.json",
+    "response": "catalog/generated/normal-chat-current-revision-t10-independent-v3-20260910/response.txt",
+    "robin": "catalog/generated/normal-chat-current-revision-t10-independent-v3-20260910/robin.txt",
+    "context_attachment": "catalog/generated/normal-chat-current-revision-t10-20260910/T10-Knowledge-Flow-Bundle.txt",
+    "context_sha256": "44fd92fb55485b3dda93c1f361505316df2f81d5132b311f20202f91635c174b",
+    "robin_sha256": "d8f9ff33ed7b7963c10b2300214d378b8e0d7aab1b063b3bc84ce784539449d6",
+    "prompt_sha256": "1ff4a35ba7062ecda63dd45d633de472e99325115f068a29f5f6b346208c5541",
+    "model_requested": "GPT 5.6 Think Deeper",
+    "model_observed": "GPT 5.6 Think",
+    "attachment_count": 1,
+    "body_verified": true,
+    "sent": true,
+    "response_observed": true,
+    "source_line_difference": {"lines": [2, 4], "meaning": "the two requested Excel changes only"}
+  },
+  "pad": {
+    "flow": "RobinKnowledgeT10CurrentRevisionIndependent_20260910",
+    "process_id": 36316,
+    "paste_evidence": "catalog/evidence/t10-current-revision-independent2-pad-paste-20260910.json",
+    "run": "catalog/evidence/t10-current-revision-independent2-pad-run-20260910.json",
+    "run_status": "success",
+    "outputs": {
+      "excel": {"path": "catalog/evidence/t10-current-revision-independent-output-excel.xlsx", "sha256": "5dc593909d43d9dc49b1026f2e1daede4b8c1f5527cedfe49df083527f13e82c", "A1": "T10-Changed"},
+      "word": {"path": "catalog/evidence/t10-current-revision-independent-output-word.docx", "sha256": "6df82170417c976296cbe1fac3d5536c25441d1ace2d44cb862ed1d42f066041", "text": "CopilotOffice 246"},
+      "powerpoint": {"path": "catalog/evidence/t10-current-revision-independent-output-powerpoint.pptx", "sha256": "6f02ef984b0831a08ccfc02658ad926e250c9461b183eb0e76f68308df3d8a95", "text": "CopilotOffice 246", "slides": 1}
+    },
+    "protected_artifacts_restored": true
+  },
+  "result": "A separate current-package normal chat and separate fresh PAD flow produced the same two-line change and the expected Excel/Word/PowerPoint outputs. This closes the current-package independent T10 retest."
+}

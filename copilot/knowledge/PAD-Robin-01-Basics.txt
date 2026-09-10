@@ -53,5 +53,12 @@ PAD Robin 基礎（変数・テキスト・数値）
 - 証拠: catalog/evidence/text-substring-validation.json、catalog/evidence/text-substring-roundtrip-recopy.robin。
 - 未確認: 別の開始インデックス、長さを末尾までにする設定、空文字・範囲外インデックスのエラー境界。
 
-未観測
-真偽値の独立設定、減算、リスト項目の取出し、取得=現在の日時、日時加算・日時書式化、別地域設定・桁区切りONは、このパッケージの確認済み例ではない。文字列切出しは上記の1設定のみ確認済みで、別モードは未確認。
+初期観測時点の未観測（2026-09-09）
+真偽値の独立設定、減算、リスト項目の取出し、取得=現在の日時、日時加算・日時書式化、別地域設定・桁区切りONは、初期版の確認済み例ではなかった。追加probeの現在判定は下記を参照し、成功probeを現行bundleのT01〜T10受入へ自動継承しない。
+
+P3追加probe（現行bundleへ統合する場合は、統合後のハッシュでT01〜T10を再受入する）
+- 真偽値: `SET P3Bool TO True` を専用flowでコピー・保存・実行し、preview=Trueを確認。証拠: `catalog/evidence/p3-boolean-probe-20260910.json`。
+- 数値減算: 10−3を専用flowで2回実行し、7を確認。証拠: `catalog/evidence/p3-subtract-probe-20260910.json`。
+- 日時: `DateTime.Add` の1日加算、`DateTime.Subtract` の1日減算、`DateTime.GetCurrentDateTime` のDateAndTime／システムタイムゾーンを各専用flowでコピー・保存・2回実行した。証拠: `catalog/evidence/p3-date-add-probe-20260910.json`、`p3-date-subtract-probe-20260910.json`、`p3-date-format-probe-20260910.json`。
+- カスタム日時書式化: ダイアログ選択後のPAD内部例外 `System.InvalidOperationException: Sequence contains no matching element` が発生し、成功原文・実行値は未確認。証拠: `catalog/evidence/p3-date-format-custom-failure-20260910.json`、`p3-date-format-dialog-crash-20260911.json`。
+- リスト項目取得: 「リストから項目を削除」は取得値を返さず、現行アクション検索でも専用取得アクションは観測されなかった。式参照等の別方式は未確認。証拠: `catalog/evidence/p3-list-remove-probe-20260910.json`、`p3-list-get-search-boundary-20260911.json`。

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T21:07:28+09:00",
+  "status": "partial",
+  "package": {
+    "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "knowledge_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+    "manifest": "copilot/knowledge-bundle-manifest-20260910b.json"
+  },
+  "scope": "Current revised package only. Historical 431c/e467 acceptance is not inherited.",
+  "cases": {
+    "T01": "PASS_CURRENT_REVISION",
+    "T02": "PASS_CURRENT_REVISION",
+    "T03": "PASS_CURRENT_REVISION",
+    "T04": "PASS_CURRENT_REVISION",
+    "T05": "PASS_CURRENT_REVISION",
+    "T06": "PASS_CURRENT_REVISION",
+    "T07": "PASS_CURRENT_REVISION",
+    "T08": "FAILED_CURRENT_REVISION_FORMAT",
+    "T09": "BLOCKED_CURRENT_PACKAGE_GENERATION",
+    "T10": "PASS_CURRENT_REVISION_PRIMARY"
+  },
+  "independent": {
+    "T01": "PASS_CURRENT_REVISION_INDEPENDENT",
+    "T04": "PASS_CURRENT_REVISION_INDEPENDENT",
+    "T10": "PASS_CURRENT_REVISION_INDEPENDENT"
+  },
+  "negative_suite": "PASS_NEGATIVE_FAIL_CLOSED",
+  "knowledge_precheck": "PASS_REFERENCE_ONLY",
+  "evidence": {
+    "knowledge_precheck": "catalog/evidence/normal-chat-current-revision-knowledge-precheck-20260910.json",
+    "T04_current_revision": "catalog/evidence/t04-current-revision-acceptance-20260910.json",
+    "T10_current_revision": "catalog/evidence/t10-current-revision-acceptance-20260910.json",
+    "T10_current_revision_independent": "catalog/evidence/t10-current-revision-independent-acceptance-20260910.json",
+    "T04_current_revision_independent": "catalog/evidence/t04-current-revision-independent-acceptance-20260910.json",
+    "T01_current_revision": "catalog/evidence/t01-current-revision-acceptance-20260910.json",
+    "T01_current_revision_independent": "catalog/evidence/t01-current-revision-independent-acceptance-20260910.json",
+    "T02_current_revision": "catalog/evidence/t02-current-revision-acceptance-20260910.json",
+    "T03_current_revision": "catalog/evidence/t03-current-revision-acceptance-20260910.json",
+    "T05_current_revision": "catalog/evidence/t05-current-revision-acceptance-20260910.json",
+    "T06_current_revision": "catalog/evidence/t06-current-revision-acceptance-20260910.json",
+    "T07_current_revision": "catalog/evidence/t07-current-revision-acceptance-20260910.json",
+    "T08_current_revision_failure": "catalog/evidence/t08-current-revision-format-boundary-20260910.json",
+    "T09_runtime_probe": "catalog/evidence/t09-runtime-probe-20260910.json",
+    "negative_suite": "catalog/evidence/normal-chat-current-revision-negative-suite-20260910.json",
+    "T10_batch_attachment_failure": "catalog/evidence/normal-chat-current-revision-t10-batch-attachment-failure-20260910.json",
+    "completion_audit": "catalog/evidence/issue5-completion-audit-20260910.json",
+    "raw_provenance": "catalog/evidence/normal-chat-raw-provenance-20260910.json",
+    "upload_block": "catalog/evidence/m365-current-package-upload-block-20260910b.json",
+    "t09_environment": "catalog/evidence/t09-current-environment-20260910b.json",
+    "p3_blocked_items": "catalog/coverage.json:p3_blocked_items",
+    "static_checks": "catalog/evidence/current-package-static-check-20260910b.json"
+  },
+  "next_operation": "Keep the package partial: obtain valid unmodified T08 and current-package T09 Robins, then decide whether to integrate the separate Boolean/subtract probes under a new bundle hash with full regression."
+}

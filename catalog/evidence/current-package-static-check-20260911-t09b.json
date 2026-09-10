@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T05:34:00+09:00",
+  "status": "pass_static_contracts_partial_live_runtime",
+  "head": "0ce051b",
+  "branch": "codex/issue-5-acceptance-20260910b",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "513fe84b8bc1fe3acb9d9092f057bace4d47215fe2cb30945b23d3ff77685831",
+  "manifest": "copilot/knowledge-bundle-manifest-20260911b.json",
+  "protected_sha256": "e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699",
+  "checks": [
+    {"command": "pwsh -NoProfile -File tests/Test-RobinRawContracts.ps1", "status": "PASS", "assertions": 6},
+    {"command": "pwsh -NoProfile -File tests/Test-CopilotRobinPackage.ps1", "status": "PASS", "instructions_utf16": 3949, "knowledge_files": 7, "observed_actions": 86},
+    {"command": "pwsh -NoProfile -File tests/Test-RobinCatalog.ps1", "status": "PASS", "checks": 84},
+    {"command": "pwsh -NoProfile -File tests/Test-Copilot.ps1", "status": "PASS", "checks": 304, "scope": "offline/mock Copilot contract checks"},
+    {"command": "bundled node tests/Test-CopilotDom.cjs", "status": "PASS", "checks": 898},
+    {"command": "git diff --check", "status": "PASS"}
+  ],
+  "not_completed": [
+    {"scope": "live M365 Copilot/Edge integration", "status": "NOT_EXERCISED"},
+    {"scope": "new-bundle knowledge precheck and T01-T10", "status": "NOT_RUN"},
+    {"scope": "new-bundle T08/T09 and remaining P3 runtime gaps", "status": "UNPROVEN"}
+  ],
+  "result": "All local contract/static gates, including the 304-check Test-Copilot suite, pass for the T09-boundary P3-integrated bundle at HEAD 0ce051b. The suite does not prove live M365/Edge behavior or package acceptance."
+}

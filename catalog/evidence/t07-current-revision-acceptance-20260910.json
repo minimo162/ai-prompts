@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T08:20:57Z",
+  "status": "pass_current_revision",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+  "generation": {
+    "result": "catalog/generated/normal-chat-current-revision-t07-20260910/result.json",
+    "response": "catalog/generated/normal-chat-current-revision-t07-20260910/response.txt",
+    "robin": "catalog/generated/normal-chat-current-revision-t07-20260910/robin.txt",
+    "response_sha256": "78ad0d8d1c8ca8b1309f4aa984a82af5ebbcd47c35c4431f96af1264718753df",
+    "robin_sha256": "ae3606442e9f2bfdb6d853d4ca73d66a29ddc6e7f1b36b17476c947b4fdc1837",
+    "prompt_sha256": "b8c23ff61322d8616a3b9260794d31dee39a05ce417563c9ed870c88b0a71aba",
+    "model_requested": "GPT 5.6 Think Deeper",
+    "model_observed": "GPT 5.6 Think",
+    "attachment_count": 2,
+    "body_verified": true,
+    "sent": true,
+    "response_observed": true,
+    "robin_blocks": 1
+  },
+  "pad": {
+    "flow": "RobinKnowledgeT07CurrentRevision_20260910",
+    "process_id": 59632,
+    "paste": "catalog/evidence/t07-current-revision-pad-paste-20260910.json",
+    "run1": "catalog/evidence/t07-current-revision-pad-run1-20260910.json",
+    "run2": "catalog/evidence/t07-current-revision-pad-run2-20260910.json",
+    "run_statuses": ["success", "success"],
+    "expected": "Page 2 marker present; Page 1 marker absent"
+  },
+  "outputs": [
+    {"path": "catalog/evidence/t07-current-revision-output-run1.txt", "sha256": "f7e592cc86719c395657ddffe2bf76ec7538c7d4deeb7edb03fae7a5d90ba5fe2", "contains": ["PAGE_TOKEN_A2"], "excludes": ["PAGE_TOKEN_A1"]},
+    {"path": "catalog/evidence/t07-current-revision-output-run2.txt", "sha256": "f7e592cc86719c395657ddffe2bf76ec7538c7d4deeb7edb03fae7a5d90ba5fe2", "contains": ["PAGE_TOKEN_A2"], "excludes": ["PAGE_TOKEN_A1"]}
+  ],
+  "input_sha256_before": "f5f246849a31e2797f998e426f459ac18b7260ed76206ab987950a1bf80c348d",
+  "input_sha256_after": "f5f246849a31e2797f998e426f459ac18b7260ed76206ab987950a1bf80c348d",
+  "protected_output_restored": true,
+  "result": "Current revised-package T07 extracted only page 2, preserved the input PDF, and passed two unmodified PAD executions."
+}

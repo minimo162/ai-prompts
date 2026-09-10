@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T00:25:44+09:00",
+  "status": "partial",
+  "branch": "codex/issue-5-acceptance-20260910b",
+  "head": "e8cc780",
+  "base_main": "69fe344",
+  "instruction": {
+    "path": "copilot/agent-instructions.txt",
+    "sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "utf16_code_units": 3949,
+    "utf8_bytes": 10096
+  },
+  "knowledge": {
+    "bundle_path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+    "source_count": 7,
+    "builder": "tools/Build-KnowledgeBundle.ps1",
+    "manifest": "copilot/knowledge-bundle-manifest-20260910b.json"
+  },
+  "protected_material": {
+    "path": "docs/agent-approach-comparison-2026-09-07.md",
+    "sha256": "e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699",
+    "changed": false
+  },
+  "environment": {
+    "pad_console_file_version": "2.71.115.26224",
+    "edge_file_version": "152.0.4191.66",
+    "office_file_version": "16.0.20326.20132",
+    "language": "ja-JP",
+    "power_fx": "OFF by existing 2026-09-09 dedicated-flow record; no setting change made",
+    "t09_fixture_url": "http://127.0.0.1:8765/t09-local-test.html",
+    "t09_fixture_reachable": true,
+    "trusted_rpc": "unavailable: Trusted RPC service is not configured: sky"
+  },
+  "raw_provenance": "catalog/evidence/normal-chat-raw-provenance-20260910.json",
+  "upload_block": "catalog/evidence/m365-current-package-upload-block-20260910b.json",
+  "t09_environment": "catalog/evidence/t09-current-environment-20260910b.json",
+  "p3_blocked_items": "catalog/coverage.json:p3_blocked_items (11 item-level gaps; separate probes are not bundled)",
+  "final_summary": "catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json",
+  "completion_audit": "catalog/evidence/issue5-completion-audit-20260910.json",
+  "knowledge_precheck": "catalog/evidence/normal-chat-current-revision-knowledge-precheck-20260910.json",
+  "t04_acceptance": "catalog/evidence/t04-current-revision-acceptance-20260910.json",
+  "t04_independent_acceptance": "catalog/evidence/t04-current-revision-independent-acceptance-20260910.json",
+  "t01_acceptance": "catalog/evidence/t01-current-revision-acceptance-20260910.json",
+  "t01_independent_acceptance": "catalog/evidence/t01-current-revision-independent-acceptance-20260910.json",
+  "t02_acceptance": "catalog/evidence/t02-current-revision-acceptance-20260910.json",
+  "t03_acceptance": "catalog/evidence/t03-current-revision-acceptance-20260910.json",
+  "t05_acceptance": "catalog/evidence/t05-current-revision-acceptance-20260910.json",
+  "t06_acceptance": "catalog/evidence/t06-current-revision-acceptance-20260910.json",
+  "t07_acceptance": "catalog/evidence/t07-current-revision-acceptance-20260910.json",
+  "t10_acceptance": "catalog/evidence/t10-current-revision-acceptance-20260910.json",
+  "t10_independent_acceptance": "catalog/evidence/t10-current-revision-independent-acceptance-20260910.json",
+  "t09_runtime_probe": "catalog/evidence/t09-runtime-probe-20260910.json",
+  "negative_suite": "catalog/evidence/normal-chat-current-revision-negative-suite-20260910.json",
+  "t08_format_boundary": "catalog/evidence/t08-current-revision-format-boundary-20260910.json",
+  "t10_batch_attachment_failure": "catalog/evidence/normal-chat-current-revision-t10-batch-attachment-failure-20260910.json",
+  "static_checks": {
+    "Test-RobinRawContracts.ps1": "PASS: 6 assertions (including current T04)",
+    "Test-CopilotRobinPackage.ps1": "PASS: instructions_utf16=3949; knowledge_files=7; observed_actions=86",
+    "Test-RobinCatalog.ps1": "PASS: 84 checks (including current T01-T07/T04/T10 and independent acceptance flow contracts)",
+    "git diff --check": "PASS"
+  },
+  "current_package_acceptance": {
+    "m365_upload": "PARTIAL: CDP preexisting input attached current bundle plus direct synthetic fixtures or single mechanical contexts for accepted cases; generic CUA file chooser attempt did not fire and T08 format boundary remains",
+    "knowledge_precheck": "PASS_REFERENCE_ONLY",
+    "T01_to_T10": "PARTIAL_CURRENT_PACKAGE: T01-T07 and T10 primary pass; T08 format failure; T09 current-package Robin unproven (runtime probe separately pass)",
+    "T04": "PASS_CURRENT_REVISION",
+    "T10": "PASS_CURRENT_REVISION_PRIMARY",
+    "T01": "PASS_CURRENT_REVISION",
+    "T02": "PASS_CURRENT_REVISION",
+    "T03": "PASS_CURRENT_REVISION",
+    "T05": "PASS_CURRENT_REVISION",
+    "T06": "PASS_CURRENT_REVISION",
+    "T07": "PASS_CURRENT_REVISION",
+    "T08": "FAILED_CURRENT_REVISION_FORMAT",
+    "T09": "BLOCKED_CURRENT_PACKAGE_GENERATION: existing runtime probe pass with temporary WAIT=1; no current-package unmodified Robin",
+    "independent_T01_T04_T10": "PASS_CURRENT_REVISION_INDEPENDENT: T01/T04/T10",
+    "negative_suite": "PASS_NEGATIVE_FAIL_CLOSED: N1 Else/loop-break, N2 nonempty DataTable row/cell, N3 unregistered Web selector/driver"
+  },
+  "historical_evidence_not_inherited": [
+    "catalog/evidence/normal-chat-final-package-acceptance-20260910.json",
+    "catalog/evidence/normal-chat-t04-current-v4-acceptance.json",
+    "catalog/evidence/normal-chat-t10-current-v5-acceptance.json",
+    "catalog/evidence/t09-runtime-block-20260910.json"
+  ],
+  "remaining": [
+    "Obtain a valid unmodified Robin fenced block for current-package T08; the current chat attempts stopped at refusal/inline/未出力 format failures.",
+    "Generate a current-package T09 Robin in a new normal chat and accept it without hand editing; the existing runtime probe is separate and already passes with a temporary WAIT=1.",
+    "Integrate the separately captured Boolean, numeric/date subtract, date addition, DateAndTime, folder-create, file-exists, file-move, file-rename, Excel sheet-selection, If/Else/Else-if, Loop/Break/Continue, DataTable creation, error-block/error-path, and subflow probes only with a new bundle hash and full T01-T10 regression; complete the remaining P3 captures where PAD Designer/runtime support exists. The list-remove probe and both DataTable row-value/visualizer failures are not substitutes for missing success evidence.",
+    "Do not publish: no PR, push, merge, release, or Issue close is authorized in this task."
+  ]
+}

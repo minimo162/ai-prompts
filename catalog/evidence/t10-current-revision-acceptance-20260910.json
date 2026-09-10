@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T07:21:39Z",
+  "status": "pass_current_revision_primary",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+  "generation": {
+    "result": "catalog/generated/normal-chat-current-revision-t10-single-20260910/result.json",
+    "response": "catalog/generated/normal-chat-current-revision-t10-single-20260910/response.txt",
+    "robin": "catalog/generated/normal-chat-current-revision-t10-single-20260910/robin.txt",
+    "context_attachment": "catalog/generated/normal-chat-current-revision-t10-20260910/T10-Knowledge-Flow-Bundle.txt",
+    "context_sha256": "44fd92fb55485b3dda93c1f361505316df2f81d5132b311f20202f91635c174b",
+    "response_sha256": "651ed637e71eb915c1a4e6f6a93f0a9337fe18143a77542f766e7df1eb36edec",
+    "robin_sha256": "d8f9ff33ed7b7963c10b2300214d378b8e0d7aab1b063b3bc84ce784539449d6",
+    "prompt_sha256": "1ff4a35ba7062ecda63dd45d633de472e99325115f068a29f5f6b346208c5541",
+    "model_requested": "GPT 5.6 Think Deeper",
+    "model_observed": "GPT 5.6 Think",
+    "attachment_count": 1,
+    "body_verified": true,
+    "sent": true,
+    "response_observed": true,
+    "source_line_difference": {"lines": [2, 4], "meaning": "the two requested Excel changes only"}
+  },
+  "pad": {
+    "paste_evidence": "catalog/evidence/t10-current-revision-pad-paste-20260910.json",
+    "run": "catalog/evidence/t10-current-revision-pad-run-20260910.json",
+    "run_status": "success",
+    "variable_previews": ["T10-Changed", "CopilotOffice 246", "CopilotOffice 246"],
+    "outputs": {
+      "excel": {"path": "catalog/evidence/t10-current-revision-output-excel.xlsx", "sha256": "e7c53afa1c786c142e986dda4ef82bd3a8db641238ccccd34bc769cbdfdb6899", "A1": "T10-Changed"},
+      "word": {"path": "catalog/evidence/t10-current-revision-output-word.docx", "sha256": "41dc711acd060a71f60190d6b1d7511b36288a9244f842bd2229223ee0f6546a", "text": "CopilotOffice 246"},
+      "powerpoint": {"path": "catalog/evidence/t10-current-revision-output-powerpoint.pptx", "sha256": "364746eef73e839b29ec015e2e748342be74d31b371d0af0fc26434950b5f2b6", "text": "CopilotOffice 246", "slides": 1}
+    }
+  },
+  "independent_retest": "This is the first current-revision T10 runtime acceptance. A second separate current-revision chat/flow is still required for the P4 independent T10 retest."
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-10T21:53:29+09:00",
+  "flow_name": "RobinKnowledgeP3Subflow_20260910",
+  "run_status": "success",
+  "ready_observed": true,
+  "subflow_call_observed": true,
+  "worker_message_auto_closed": true,
+  "button_pressed_preview": "OK"
+}

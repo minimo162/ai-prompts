@@ -1,0 +1,3 @@
+IF $'''yes''' = $'''yes''' THEN
+ELSE IF $'''yes''' = $'''no''' THEN
+END

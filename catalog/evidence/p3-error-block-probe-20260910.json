@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T20:58:04+09:00",
+  "status": "pass_structure_probe_not_bundled",
+  "missing_item": "B-error-subflow",
+  "scope": "Synthetic PAD error-block structure probe in a newly-created dedicated flow; no error-triggering child action or subflow call was added.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3ErrorBlock_20260910",
+    "process_id": 50316,
+    "action_count": 2
+  },
+  "raw": {
+    "path": "catalog/evidence/p3-error-block-probe-20260910.robin",
+    "sha256": "711b106b2f90bd090b5915efc05af7b6ce8499e97cb27605b929123fd76418a6",
+    "captured_flow_sha256": "5e78db5bf7f6b11ba6977a0c7bfde39b85f5b5e3308bc1f8ad6e0474e2630668",
+    "copy_observed": true,
+    "clipboard_restored": true
+  },
+  "structure": {
+    "block_start": "BLOCK",
+    "handler": "ON BLOCK ERROR",
+    "default_rule": "THROW ERROR",
+    "end_tokens": 2
+  },
+  "run": {
+    "evidence": "catalog/evidence/p3-error-block-probe-run-20260910.json",
+    "status": "success",
+    "error_triggered": false
+  },
+  "package_binding": {
+    "current_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "current_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+    "included_in_current_bundle": false,
+    "reason": "Adding error-block syntax to the seven-file bundle would change the package hash and require a complete T01-T10 regression."
+  },
+  "result": "PAD copied, saved, and executed the error-block skeleton successfully. Error-triggering child action, custom handler, and subflow create/call remain unobserved."
+}

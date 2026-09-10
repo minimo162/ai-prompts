@@ -1,0 +1,2 @@
+Variables.CreateNewDatatable InputTable: { ^['Status', 'ID', 'Note', 'Extra1', 'Extra2'], [$'''対象''', $'''R1''', $'''日本語行''', $'''X''', $'''Y'''] } DataTable=> DataTable
+Variables.AddRowToDataTable.AppendRowToDataTable DataTable: DataTable RowToAdd: $'''$\''''

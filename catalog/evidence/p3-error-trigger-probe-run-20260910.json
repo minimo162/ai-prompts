@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-10T22:11:58+09:00",
+  "flow_name": "RobinKnowledgeP3ErrorBlock_20260910",
+  "run_status": "runtime_error",
+  "ready_observed": true,
+  "error_triggered": true,
+  "error_count": 1,
+  "error_text": "ファイル C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt が見つかりません",
+  "error_subflow": "Main",
+  "error_line": 2,
+  "downstream_actions_executed": false
+}

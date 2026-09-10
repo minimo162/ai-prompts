@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T00:25:44+09:00",
+  "status": "pass_static_only",
+  "branch": "codex/issue-5-acceptance-20260910b",
+  "head_at_check": "e8cc780",
+  "checks": [
+    {"command": "pwsh -NoProfile -File tests/Test-RobinRawContracts.ps1", "result": "PASS", "details": "6 raw provenance assertions including current T04; no normalization"},
+    {"command": "pwsh -NoProfile -File tests/Test-CopilotRobinPackage.ps1", "result": "PASS", "details": "instructions_utf16=3949; knowledge_files=7; observed_actions=86"},
+    {"command": "pwsh -NoProfile -File tests/Test-RobinCatalog.ps1", "result": "PASS", "details": "84 checks including current T01-T07/T04/T10 and independent acceptance flow contracts"},
+    {"command": "git diff --check", "result": "PASS", "details": "no whitespace errors"},
+    {"command": "bundled node tests/Test-CopilotDom.cjs", "result": "PASS", "details": "898 rendered Edge DOM checks; 7 local document fulfillments; no live Copilot or user profile"},
+    {"command": "pwsh -NoProfile -File tests/Test-Copilot.ps1", "result": "NOT_COMPLETED_TIMEOUT", "details": "No output within 30 seconds; the test processes were terminated. No pass claim is made."}
+  ],
+  "not_proven": [
+    "Current-package T08 valid Robin fenced-block generation (current attempts failed at refusal/inline/未出力 format)",
+    "Current-package T08/T09 Robin generation and unmodified paste (T09 runtime probe is separately PASS)",
+    "P3 Boolean/subtract/date-add/Else-if/File.Exists false/File.Move collision rerun/DataTable creation/error-path/subflow probes are separately PASS or boundary-evidenced, and custom-date formatting has a recorded failure boundary, but none are integrated into the seven-file bundle; remaining P3 gaps are not closed",
+    "11 item-level P3 captures requiring additional PAD Designer/runtime support",
+    "GitHub CI (no checks are configured)",
+    "Test-Copilot.ps1 did not complete within the 30-second observation window; no result was used as acceptance evidence"
+  ]
+}

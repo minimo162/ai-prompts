@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T01:48:00+09:00",
+  "status": "confirmed_zero_column_runtime_error_state",
+  "missing_item": "C-datatable",
+  "scope": "Read-only inspection of the currently-open synthetic PAD row-insertion probe after its recorded failure; no action was changed, copied, saved, or run.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3DataTableRowValid_20260910",
+    "process_id": 52664,
+    "process_start_observed": "2026-09-10T20:01:44.6794841+09:00",
+    "window_title_verified": "Power Automate | RobinKnowledgeP3DataTableRowValid_20260910"
+  },
+  "observation": {
+    "action_count": 4,
+    "selected_action": "行をデータ テーブルに挿入する, エラーあり",
+    "selected_action_fields": {
+      "data_table": "DataTable",
+      "row_to_add": "RowValues",
+      "insertion_location": "データ テーブルの末尾"
+    },
+    "flow_variable_previews": {
+      "DataTable": "0 行, 0 列",
+      "RowValues": "[A, B]"
+    },
+    "error_list": {
+      "count": 1,
+      "line": 4,
+      "text": "追加するために指定された値の数 (2) がデータ テーブルの列の数 (0) と一致しません。"
+    },
+    "flow_status": "状態: 見つかったランタイム エラー",
+    "actions_executed": 0
+  },
+  "raw": {
+    "path": "catalog/evidence/p3-datatable-row-error-state-20260911.robin",
+    "sha256": "e0088169fdbe6490453ff926a488b9ca21c912f5632c00e47a5fc09be30db7d0",
+    "bytes": 111,
+    "copy_observed": true,
+    "clipboard_restored": true
+  },
+  "result": "The current UI confirms that the failure is not evidence of a valid RowToAdd type: the table preview is 0 rows, 0 columns while RowValues previews [A, B], and PAD reports a two-values-versus-zero-columns runtime error. The successful non-empty table creation probe remains separate; row insertion, iteration, and cell access are unproven."
+}

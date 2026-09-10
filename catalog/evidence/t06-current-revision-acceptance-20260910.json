@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T08:17:28Z",
+  "status": "pass_current_revision",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+  "generation": {
+    "result": "catalog/generated/normal-chat-current-revision-t06-20260910/result.json",
+    "response": "catalog/generated/normal-chat-current-revision-t06-20260910/response.txt",
+    "robin": "catalog/generated/normal-chat-current-revision-t06-20260910/robin.txt",
+    "response_sha256": "6747894c38d96041e621e89ae1341d0be2b30ad14c13c79a767c4dae2e4094a9",
+    "robin_sha256": "0f217cf47eec05ca3da8651adbf2525636dafb2e43b4af88fd30a9e7aa500928",
+    "prompt_sha256": "25a448c6efa8da72b0b57510e135c147891dd23612fe3988babd878d77b4dff6",
+    "model_requested": "GPT 5.6 Think Deeper",
+    "model_observed": "GPT 5.6 Think",
+    "attachment_count": 2,
+    "body_verified": true,
+    "sent": true,
+    "response_observed": true,
+    "robin_blocks": 1
+  },
+  "pad": {
+    "flow": "RobinKnowledgeT06CurrentRevision_20260910",
+    "process_id": 51240,
+    "paste": "catalog/evidence/t06-current-revision-pad-paste-20260910.json",
+    "run1": "catalog/evidence/t06-current-revision-pad-run1-20260910.json",
+    "run2": "catalog/evidence/t06-current-revision-pad-run2-20260910.json",
+    "run_statuses": ["success", "success"]
+  },
+  "outputs": [
+    {"path": "catalog/evidence/t06-current-revision-output-run1.docx", "sha256": "5bb187bfde149541ad9ed67b76c0957e6a025a30fecaca2728e458e9a5ffde7", "text": "T06Replaced 日本語 100%"},
+    {"path": "catalog/evidence/t06-current-revision-output-run2.docx", "sha256": "4364c47a59fdc095be9c6d89faf2f727c19503030957f83e5daef17aa8322134", "text": "T06Replaced 日本語 100%"}
+  ],
+  "input_sha256_before": "2753855b1e6b7b8dccc857cb60ad1f9bf548908fbd10fea8dc8efa2ff8003cbd",
+  "input_sha256_after": "2753855b1e6b7b8dccc857cb60ad1f9bf548908fbd10fea8dc8efa2ff8003cbd",
+  "protected_output_restored": true,
+  "result": "Current revised-package T06 replaced only OfficeCatalog in the synthetic Word document, preserved surrounding text, and passed two unmodified PAD executions."
+}
