@@ -60,6 +60,6 @@
     {"id": "F", "status": "HISTORICAL_REUSE_ONLY", "unverified": ["new-bundle Office/PDF acceptance"]},
     {"id": "G", "status": "BLOCKED_RUNTIME", "verified": ["UI element capture/paste", "WAIT=1 dedicated probe"], "unverified": ["current-package WebAutomation runtime"]}
   ],
-  "next_one_action": "Obtain action-time confirmation, send the staged new-bundle knowledge precheck, save the response bound to bundle SHA e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644, then begin new-bundle T01-T10 acceptance.",
+  "next_one_action": "Obtain action-time confirmation for a new T01 normal-chat send, save the generated response bound to bundle SHA e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644, then perform unmodified PAD paste/save/run and output comparison.",
   "publication": {"push": false, "pull_request": false, "merge": false, "release": false, "issue_close": false}
 }
