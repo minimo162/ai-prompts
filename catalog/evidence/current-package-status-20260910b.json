@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-09-10T17:20:00+09:00",
+  "captured_at": "2026-09-10T18:17:22+09:00",
   "status": "partial",
   "branch": "codex/issue-5-acceptance-20260910b",
   "head": "d1c6e4e",
@@ -51,6 +51,9 @@
   "t07_acceptance": "catalog/evidence/t07-current-revision-acceptance-20260910.json",
   "t10_acceptance": "catalog/evidence/t10-current-revision-acceptance-20260910.json",
   "t10_independent_acceptance": "catalog/evidence/t10-current-revision-independent-acceptance-20260910.json",
+  "t09_runtime_probe": "catalog/evidence/t09-runtime-probe-20260910.json",
+  "negative_suite": "catalog/evidence/normal-chat-current-revision-negative-suite-20260910.json",
+  "t08_format_boundary": "catalog/evidence/t08-current-revision-format-boundary-20260910.json",
   "t10_batch_attachment_failure": "catalog/evidence/normal-chat-current-revision-t10-batch-attachment-failure-20260910.json",
   "static_checks": {
     "Test-RobinRawContracts.ps1": "PASS: 6 assertions (including current T04)",
@@ -61,7 +64,7 @@
   "current_package_acceptance": {
     "m365_upload": "PARTIAL: CDP preexisting input attached current bundle plus direct synthetic fixtures or single mechanical contexts for accepted cases; generic CUA file chooser attempt did not fire and T08 format boundary remains",
     "knowledge_precheck": "PASS_REFERENCE_ONLY",
-    "T01_to_T10": "PARTIAL_CURRENT_PACKAGE: T01-T07 and T10 primary pass; T08 format failure; T09 blocked",
+    "T01_to_T10": "PARTIAL_CURRENT_PACKAGE: T01-T07 and T10 primary pass; T08 format failure; T09 current-package Robin unproven (runtime probe separately pass)",
     "T04": "PASS_CURRENT_REVISION",
     "T10": "PASS_CURRENT_REVISION_PRIMARY",
     "T01": "PASS_CURRENT_REVISION",
@@ -71,8 +74,9 @@
     "T06": "PASS_CURRENT_REVISION",
     "T07": "PASS_CURRENT_REVISION",
     "T08": "FAILED_CURRENT_REVISION_FORMAT",
+    "T09": "BLOCKED_CURRENT_PACKAGE_GENERATION: existing runtime probe pass with temporary WAIT=1; no current-package unmodified Robin",
     "independent_T01_T04_T10": "PASS_CURRENT_REVISION_INDEPENDENT: T01/T04/T10",
-    "negative_suite": "NOT_RUN_CURRENT_PACKAGE"
+    "negative_suite": "PASS_NEGATIVE_FAIL_CLOSED: N1 Else/loop-break, N2 nonempty DataTable row/cell, N3 unregistered Web selector/driver"
   },
   "historical_evidence_not_inherited": [
     "catalog/evidence/normal-chat-final-package-acceptance-20260910.json",
@@ -82,8 +86,8 @@
   ],
   "remaining": [
     "Obtain a valid unmodified Robin fenced block for current-package T08; the current chat attempts stopped at refusal/inline/未出力 format failures.",
-    "Complete T09 PAD WebAutomation handshake and output observation, or keep the reproduced runtime dependency blocked.",
-    "Run the current-package negative suite and complete the 11 item-level P3 captures where PAD Designer/runtime support exists.",
+    "Generate a current-package T09 Robin in a new normal chat and accept it without hand editing; the existing runtime probe is separate and already passes with a temporary WAIT=1.",
+    "Integrate the separately captured Boolean probe only with a new bundle hash and full T01-T10 regression; complete the remaining P3 captures where PAD Designer/runtime support exists.",
     "Do not publish: no PR, push, merge, release, or Issue close is authorized in this task."
   ]
 }

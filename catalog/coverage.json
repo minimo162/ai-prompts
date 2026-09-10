@@ -2467,9 +2467,10 @@
     {
       "id": "A-text-number-boolean-set",
       "missing": "真偽値の独立設定",
-      "status": "BLOCKED_EXTERNAL_UI",
-      "reason": "PAD Designerでの追加・設定・コピーが必要だが、現セッションのTrusted RPCが未構成。既存の文字列・数値証跡は再利用する。",
-      "resume": "専用空フローでBoolean設定を1件採取し、再貼付け・実行・期待値照合"
+      "status": "PASS_PROBE_NOT_BUNDLED",
+      "reason": "新規専用フローでBoolean値を設定し、Robin原文のコピー・保存・実行（変数preview=True）を確認した。ただし現行bundleを変更していないため、配布ナレッジ上の完了には未反映。",
+      "evidence": "evidence/p3-boolean-probe-20260910.json",
+      "resume": "現行bundleへ原文と型説明を追加する場合は、ハッシュ更新後にT01-T10を同一最終版で再受入"
     },
     {
       "id": "A-arithmetic-add-subtract",
@@ -2537,9 +2538,9 @@
     {
       "id": "G-ui-browser",
       "missing": "PAD WebAutomation通し実行",
-      "status": "BLOCKED_RUNTIME_DEPENDENCY",
-      "reason": "ローカル画面とUI要素は到達したが、PAD WebAutomationの拡張通信は完了せず、Trusted RPCも未構成。",
-      "resume": "拡張ハンドシェイクを確認後、既存6アクションを1回だけ通し実行"
+      "status": "PARTIAL_RUNTIME_PROBE",
+      "reason": "既存専用フローで待機値を一時的に1秒へ束ねたランタイムprobeは成功し、入力・クリック・T09-clicked取得・PAD完了を確認した。元のWAIT 500は実行前後で復元した。現行package生成Robinの無修正貼付け・固定待機値での受入は未確認。",
+      "resume": "現行packageの新規通常チャットT09 Robinを得て、待機設定を手修正せず専用フローへ貼付け・保存・実行・取得値を照合"
     }
   ]
 }

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T18:05:00+09:00",
+  "status": "pass_negative_fail_closed",
+  "scope": "Current revised package; one new normal M365 Copilot chat with the current bundle only.",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+  "generation": {
+    "result": "catalog/generated/normal-chat-current-revision-negative-suite-20260910/result.json",
+    "prompt": "catalog/generated/normal-chat-current-revision-negative-suite-20260910/prompt.txt",
+    "response": "catalog/generated/normal-chat-current-revision-negative-suite-20260910/response.txt",
+    "prompt_sha256": "deb20ecb66aaf7d36d875ec1455ce63a589456dd54908b904a748b13bc5181f5",
+    "response_sha256": "1caff5a9594263e41567c530de6c830b7e1baf0410cc88d25bba3ee475f39ce4",
+    "model_requested": "GPT 5.6 Think Deeper",
+    "model_observed": "GPT 5.6 Think",
+    "attachment": "PAD-Robin-Knowledge-Bundle.txt",
+    "body_verified": true,
+    "sent": true,
+    "response_observed": true,
+    "robin_blocks": 0,
+    "response_chars": 1619
+  },
+  "cases": {
+    "N1_else_loop_break": "PASS_FAIL_CLOSED: no code; missing raw/configuration/re-run evidence listed",
+    "N2_datatable_row_insert_cell_reference": "PASS_FAIL_CLOSED: no code; nonempty DataTable row/cell syntax identified as unobserved",
+    "N3_unregistered_web_selector_driver": "PASS_FAIL_CLOSED: no code; selector/driver and T09 runtime dependencies identified as unobserved"
+  },
+  "result": "The current package refused to invent Robin for all three unobserved syntax/UI requests and returned concrete additional capture requirements and prohibited follow-on operations. This negative suite does not satisfy T08 or T09 runtime acceptance."
+}

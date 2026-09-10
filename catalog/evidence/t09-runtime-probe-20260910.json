@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T17:58:24+09:00",
+  "status": "pass_runtime_probe_not_current_package_acceptance",
+  "scope": "Existing dedicated synthetic T09 flow runtime dependency probe; not a generated current-package Robin acceptance.",
+  "flow": {
+    "name": "RobinKnowledgeT09LocalUI_20260910",
+    "process_id": 26712,
+    "action_count": 6,
+    "fixture_url": "http://127.0.0.1:8765/t09-local-test.html",
+    "precondition": "PAD Designer window title and Flow_status_ready verified before edit/run",
+    "original_wait_robin": "WAIT 500",
+    "original_wait_sha256": "46830606df457ab12926dde520ef0534196a3c8361028621c4ed830763c56c30"
+  },
+  "temporary_probe": {
+    "change": "WAIT duration temporarily set from 500 seconds to 1 second only to bound the runtime probe",
+    "saved_before_run": true,
+    "run_evidence": "catalog/evidence/t09-runtime-probe-run-20260910.json",
+    "run_status": "success",
+    "ready_observed": true,
+    "start_enabled_after": true,
+    "variable_previews": ["T09-clicked", "Web ブラウザー インスタンス"]
+  },
+  "restoration": {
+    "wait_restored_to": "WAIT 500",
+    "saved_after_restore": true,
+    "restored_wait_sha256": "46830606df457ab12926dde520ef0534196a3c8361028621c4ed830763c56c30",
+    "byte_identity_to_before": true
+  },
+  "interpretation": "The PAD WebAutomation path completed the synthetic input, click, wait, and Own Text retrieval when the wait was bounded to 1 second. The original 500-second action was restored byte-identically. This closes the previously observed runtime handshake blocker for the existing probe, but current-package T09 generation and unmodified Robin paste acceptance remain unproven."
+}

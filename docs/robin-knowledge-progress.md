@@ -224,7 +224,8 @@ P3の未採取項目は、coverageの `p3_blocked_items` に11件を項目単位
 
 ### 現作業版受入の追補（2026-09-10）
 
-現作業版ではT01〜T07の一次受入、T04/T10の一次受入、T01/T04/T10の独立再試験、知識precheckを確認済みである。T08は有効なRobin fenced blockを生成しない形式失敗、T09はWebAutomation実行未完了、負例とP3の未観測項目は未実行のままとする。これらの判定は `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` と個別受入証跡を正本とし、旧版の成功を継承しない。
+現作業版ではT01〜T07の一次受入、T04/T10の一次受入、T01/T04/T10の独立再試験、知識precheck、未採取構文・UI依存のfail-closed負例を確認済みである。T08は有効なRobin fenced blockを生成しない形式失敗、T09はWebAutomation実行未完了、P3の未観測項目は未実行のままとする。これらの判定は `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` と個別受入証跡を正本とし、旧版の成功を継承しない。
+T09については、既存専用フローの待機値を一時的に1秒へ束ねたランタイムprobeで入力→クリック→`T09-clicked`取得→PAD完了を確認し、元の`WAIT 500`へ復元した。ただし現行packageの新規通常チャット生成Robinを無修正で貼付けた受入ではないため、P4のT09は未確認として保持する（`catalog/evidence/t09-runtime-probe-20260910.json`）。
 
 現作業版のT01〜T10／独立再試験／負例の判定表は `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` に固定した。T01〜T07、T04/T10一次受入、T04/T10独立再試験はPASS_CURRENT_REVISION、知識precheckはPASS_REFERENCE_ONLY、T08は生成形式失敗、T09はBLOCKEDとして扱う。知識precheckの回答原文は `catalog/generated/normal-chat-current-revision-knowledge-precheck-20260910/response.txt` に保存した。
 

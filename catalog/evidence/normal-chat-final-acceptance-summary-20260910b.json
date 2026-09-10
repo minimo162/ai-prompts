@@ -17,7 +17,7 @@
     "T06": "PASS_CURRENT_REVISION",
     "T07": "PASS_CURRENT_REVISION",
     "T08": "FAILED_CURRENT_REVISION_FORMAT",
-    "T09": "BLOCKED_RUNTIME_DEPENDENCY",
+    "T09": "BLOCKED_CURRENT_PACKAGE_GENERATION",
     "T10": "PASS_CURRENT_REVISION_PRIMARY"
   },
   "independent": {
@@ -25,7 +25,7 @@
     "T04": "PASS_CURRENT_REVISION_INDEPENDENT",
     "T10": "PASS_CURRENT_REVISION_INDEPENDENT"
   },
-  "negative_suite": "NOT_RUN_CURRENT_PACKAGE",
+  "negative_suite": "PASS_NEGATIVE_FAIL_CLOSED",
   "knowledge_precheck": "PASS_REFERENCE_ONLY",
   "evidence": {
     "knowledge_precheck": "catalog/evidence/normal-chat-current-revision-knowledge-precheck-20260910.json",
@@ -40,7 +40,9 @@
     "T05_current_revision": "catalog/evidence/t05-current-revision-acceptance-20260910.json",
     "T06_current_revision": "catalog/evidence/t06-current-revision-acceptance-20260910.json",
     "T07_current_revision": "catalog/evidence/t07-current-revision-acceptance-20260910.json",
-    "T08_current_revision_failure": "catalog/evidence/t08-current-revision-context-format-failure-20260910.json",
+    "T08_current_revision_failure": "catalog/evidence/t08-current-revision-format-boundary-20260910.json",
+    "T09_runtime_probe": "catalog/evidence/t09-runtime-probe-20260910.json",
+    "negative_suite": "catalog/evidence/normal-chat-current-revision-negative-suite-20260910.json",
     "T10_batch_attachment_failure": "catalog/evidence/normal-chat-current-revision-t10-batch-attachment-failure-20260910.json",
     "completion_audit": "catalog/evidence/issue5-completion-audit-20260910.json",
     "raw_provenance": "catalog/evidence/normal-chat-raw-provenance-20260910.json",
@@ -49,5 +51,5 @@
     "p3_blocked_items": "catalog/coverage.json:p3_blocked_items",
     "static_checks": "catalog/evidence/current-package-static-check-20260910b.json"
   },
-  "next_operation": "Keep the package partial: obtain a valid unmodified T08 Robin fenced block, complete T09 WebAutomation runtime and the negative suite, and retain the current PASS/format-failure/BLOCKED boundaries."
+  "next_operation": "Keep the package partial: obtain valid unmodified T08 and current-package T09 Robins, then decide whether to integrate the separate Boolean probe under a new bundle hash with full regression."
 }

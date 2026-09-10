@@ -12,7 +12,7 @@
   ],
   "not_proven": [
     "Current-package T08 valid Robin fenced-block generation (current attempts failed at refusal/inline/未出力 format)",
-    "T09 WebAutomation completion and current-package negative suite",
+    "Current-package T09 Robin generation and unmodified paste (runtime probe is separately PASS)",
     "11 item-level P3 captures requiring additional PAD Designer/runtime support",
     "GitHub CI (no checks are configured)"
   ]

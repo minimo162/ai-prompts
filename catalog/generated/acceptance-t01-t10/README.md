@@ -29,7 +29,7 @@
 
 現作業版の固定サマリは `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` です。
 
-現作業版の追補：T01〜T07、T04/T10一次受入、T01/T04/T10独立再試験はPASS_CURRENT_REVISION。T08は生成形式失敗、T09はランタイムBLOCKED、負例は未実行です。
+現作業版の追補：T01〜T07、T04/T10一次受入、T01/T04/T10独立再試験はPASS_CURRENT_REVISION。fail-closed負例はPASS_NEGATIVE_FAIL_CLOSED。T08は生成形式失敗、T09は既存専用フローのランタイムprobeのみPASSで、現行package Robin受入は未確認です。
 
 現作業版bundleのみを添付した知識precheckは `catalog/evidence/normal-chat-current-revision-knowledge-precheck-20260910.json` に保存し、ナレッジ固有の設定・型・依存を回答原文と照合しました。これは受入ケースの代用ではありません。
 

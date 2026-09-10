@@ -4616,6 +4616,31 @@
       "pad_execution": "Separate chat and fresh PAD flow for each case; each accepted output is run twice for T01/T04 and once for T10",
       "scope": "Independent current revised package runtime acceptance.",
       "evidence": "evidence/t01-current-revision-independent-acceptance-20260910.json; evidence/t04-current-revision-independent-acceptance-20260910.json; evidence/t10-current-revision-independent-acceptance-20260910.json"
+    },
+    {
+      "id": "normal-chat-current-revision-negative-suite-2026-09-10",
+      "date": "2026-09-10",
+      "browser": "Microsoft Edge CDP",
+      "model": "GPT 5.6 Think Deeper (observed GPT 5.6 Think)",
+      "bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": ["N1_else_loop_break", "N2_datatable_row_insert_cell_reference", "N3_unregistered_web_selector_driver"],
+      "attachment_mode": "preexisting_cdp_input",
+      "scope": "Current revised package negative suite; no Robin code was accepted or executed.",
+      "result": "PASS_NEGATIVE_FAIL_CLOSED",
+      "evidence": "evidence/normal-chat-current-revision-negative-suite-20260910.json"
+    },
+    {
+      "id": "t09-runtime-probe-2026-09-10",
+      "date": "2026-09-10",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeT09LocalUI_20260910",
+      "action_ids": ["web-launch-t09-local", "web-populate-t09-input", "web-click-t09-submit", "wait-t09-500ms", "web-get-t09-result", "web-close-t09"],
+      "scope": "Existing dedicated synthetic flow runtime probe with temporary WAIT=1 second; T09-clicked retrieved and original WAIT 500 restored byte-identically.",
+      "capture_method": "strict UIA fallback; no Trusted RPC",
+      "current_package_acceptance": false,
+      "evidence": "evidence/t09-runtime-probe-20260910.json"
     }
   ],
   "application_integration": {
