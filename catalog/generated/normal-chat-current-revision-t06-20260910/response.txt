@@ -1,0 +1,57 @@
+1. 前提・対象範囲・未確認点
+
+目的
+C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx を編集可能で開き、本文中の OfficeCatalog を T06Replaced に置換し、C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-current-bundle.docx へ別名保存します。元ファイルは変更しません。
+
+入力
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+
+出力
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-current-bundle.docx
+
+確認済み根拠
+
+Word編集可能起動（ReadOnly=False）: catalog/actions/word-launch/open-editable.robin
+Word全文置換: catalog/actions/word-replace/all-literal.robin
+Word別名保存: word-save/as-docx-extension.robin 系統の実測例
+Word終了: word-close/no-save.robin 系統の実測例
+添付文書には OfficeCatalog 日本語 100% が含まれます。
+
+未確認
+
+この4アクションを今回のパス条件で組み合わせて再貼付け・実行した証拠はナレッジ内にありません。各アクション自体は実測済みですが、この組合せは静的構成です。
+2. PADで先に作る設定
+入力文書: C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+出力先: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-current-bundle.docx
+Wordインスタンス変数: WordInstance
+元ファイル上書きは行わず、SaveAsで別名保存
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+2
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+3
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t06-current-bundle.docx'''
+4
+Word.CloseWord.Close Instance: WordInstance
+4. デザイナー上の確認方法
+アクション数が 4個 であることを確認。
+順序が 起動 → 置換 → SaveAs → 閉じる になっていることを確認。
+WordInstance が起動行で生成され、後続3行で参照されていることを確認。
+エラー表示が出ていないことを確認。
+ReadOnly: False を確認。
+SaveAs の出力先が normal-chat-t06-current-bundle.docx になっていることを確認。
+5. 保存・実行・照合手順
+空フローへ貼り付け。
+保存。
+実行。
+normal-chat-t06-current-bundle.docx を開く。
+本文に T06Replaced 日本語 100% が含まれることを確認。
+元の word-catalog.docx を開き、OfficeCatalog 日本語 100% のままであることを確認。
+再実行後も元ファイルが変化していないことを確認。

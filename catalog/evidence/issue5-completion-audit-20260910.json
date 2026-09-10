@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-09-10T16:12:51+09:00",
+  "captured_at": "2026-09-10T17:20:00+09:00",
   "status": "partial",
   "branch": "codex/issue-5-acceptance-20260910b",
-  "head": "2025a64",
+  "head": "WORKTREE_PENDING_COMMIT",
   "issue": "https://github.com/minimo162/ai-prompts/issues/5",
   "requirements": [
     {
@@ -16,7 +16,7 @@
       "phase": "P1",
       "status": "PASS_DIAGNOSIS_AND_MINIMAL_REVISION",
       "evidence": ["normal-chat-raw-provenance-20260910.json", "t04-current-revision-acceptance-20260910.json", "t10-current-revision-acceptance-20260910.json", "Test-RobinRawContracts.ps1: 6 assertions PASS", "instruction and T04/T10 knowledge revisions", "bundle rebuilt from seven sources"],
-    "gap": "T04 now has a fresh current-package response and two PAD runs; T10 and the remaining cases still need fresh generation."
+      "gap": "Raw diagnosis and minimal revision are complete; current-package T08 still fails at response format and T09 remains runtime-blocked."
     },
     {
       "phase": "P2",
@@ -33,19 +33,19 @@
     {
       "phase": "P4",
       "status": "PARTIAL_CURRENT_PACKAGE",
-      "evidence": ["normal-chat-final-acceptance-summary-20260910b.json", "normal-chat-current-revision-knowledge-precheck-20260910.json", "t04-current-revision-acceptance-20260910.json", "t04-current-revision-pad-paste-20260910.json", "t10-current-revision-acceptance-20260910.json", "t10-current-revision-independent-acceptance-20260910.json", "current manifest and hashes", "old 431c/e467 batch explicitly marked historical"],
-      "gap": "T04/T10 current primary revisions, T04/T10 independent retests, and separate knowledge precheck are accepted; T01-T03/T05-T09, independent T01, and negative suite remain unrun."
+      "evidence": ["normal-chat-final-acceptance-summary-20260910b.json", "normal-chat-current-revision-knowledge-precheck-20260910.json", "t01-current-revision-acceptance-20260910.json", "t01-current-revision-independent-acceptance-20260910.json", "t02-current-revision-acceptance-20260910.json", "t03-current-revision-acceptance-20260910.json", "t04-current-revision-acceptance-20260910.json", "t04-current-revision-independent-acceptance-20260910.json", "t05-current-revision-acceptance-20260910.json", "t06-current-revision-acceptance-20260910.json", "t07-current-revision-acceptance-20260910.json", "t10-current-revision-acceptance-20260910.json", "t10-current-revision-independent-acceptance-20260910.json", "current manifest and hashes", "old 431c/e467 batch explicitly marked historical"],
+      "gap": "T01-T07, T04/T10 current primary revisions, T01/T04/T10 independent retests, and separate knowledge precheck are accepted; T08 format failure, T09 runtime, and negative suite remain."
     },
     {
       "phase": "P5",
       "status": "PASS_STATIC_PARTIAL_EXTERNAL",
       "evidence": ["README/pad-robin-prompts/copilot README/index/coverage/progress/validation aligned", "current-package-static-check-20260910b.json", "Issue checkpoint comments"],
-      "gap": "T04/T10 current-package runtime evidence exists; remaining current-package cases and independent tests are not run, and CI checks are not configured. Issue remains OPEN/partial."
+      "gap": "T01-T07, T04/T10 primary, and T01/T04/T10 independent current-package runtime evidence exists; T08 format, T09 runtime, negative suite, P3 external captures, and CI checks remain. Issue remains OPEN/partial."
     }
   ],
   "completion_blockers": [
-    "The generic CUA browser-extension file chooser does not fire reliably; the validated CDP preexisting-input path now works for T04 but the full current-package batch remains.",
+    "The generic CUA browser-extension file chooser does not fire reliably; the validated CDP preexisting-input path works for the accepted current-package cases, while T08 format and T09 runtime remain.",
     "PAD native Computer Use Trusted RPC is not configured; WebAutomation and missing P3 captures require an available UI operation path."
   ],
-  "next_operation": "Provide a working CDP/file-input attachment path, then regenerate T04/T10 from the revised package before running PAD acceptance."
+  "next_operation": "Keep Issue #5 partial and unclosed; obtain a valid current-package T08 Robin fenced block, complete T09 WebAutomation and the negative suite, then reassess P3 item-level gaps."
 }

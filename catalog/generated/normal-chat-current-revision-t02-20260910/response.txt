@@ -1,0 +1,58 @@
+前提・対象範囲・未確認点
+目的: UTF-8のCSVを読み取り、Status列が対象の行のみを新しいCSVへ保存する。
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\csv\t02-input-20260910.csv
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t02-output-current-bundle.csv
+入力CSVは変更しない。
+列数、日本語、カンマを含む引用フィールド、二重引用符を保持する。
+根拠は実測済みT02の3アクション組合せのみ。catalog/flows/datatable-filter/roundtrip.robin と catalog/evidence/filter-t02-roundtrip2-run-2.json に対応する確認済み原文です。
+添付CSVではStatus列は3列目（インデックス2）であり、実測T02原文の条件と一致します。
++ 1
+PADで先に作る設定
+事前の入力変数は不要。
+出力先フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence が存在することを確認。
+既存の出力ファイルがある場合は上書きされます（実測原文の IfFileExists: File.IfFileExists.Overwrite を使用）。
+貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: 全体
+
+Plain Text
+1
+File.ReadFromCSVFile.ReadCSV CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\csv\\t02-input-20260910.csv''' Encoding: File.CSVEncoding.UTF8 TrimFields: True FirstLineContainsColumnNames: True ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault CSVTable=> CSVTable
+2
+Variables.FilterDataTable DataTable: CSVTable FilterParameters: { ^['RULE', 'COLUMN', 'OPERATOR', 'VALUE'], [$'''''', 2, $'''Equal''', $'''対象'''] } MatchCase: True FilteredDataTable=> FilteredDataTable
+3
+File.WriteToCSVFile.WriteCSV VariableToWrite: FilteredDataTable CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t02-output-current-bundle.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: True IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault
+デザイナー上の確認方法
+アクション数が3個であること。
+順序が以下と一致すること。
+CSV ファイルから読み取る
+データ テーブルをフィルター処理
+CSV ファイルに書き込む
+生成変数:
+CSVTable（DataTable）
+FilteredDataTable（DataTable）
+FilterDataTableの条件が列インデックス2、値対象になっていること。
+デザイナー保存時にエラー表示が出ないこと。
+合成データでの照合手順
+
+フローを保存して実行。
+
+出力ファイル normal-chat-t02-output-current-bundle.csv を確認。
+
+添付入力CSVの内容から期待される論理結果は次の3行です。
++ 1
+
+ID,Name,Status
+1,"日本語,引用",対象
+3,"二重""引用",対象
+
+行数はヘッダーを含めて3行。
+
+ID=2 の行が含まれないこと。
+
+日本語、カンマを含む引用フィールド、二重引用符が保持されていること。
+
+再実行時は同名ファイルへ上書き保存されること。
+
+確認済み範囲: 実測済みT02の3アクション組合せを根拠に出力。根拠は catalog/flows/datatable-filter/roundtrip.robin と catalog/evidence/filter-t02-roundtrip2-run-2.json。再貼付け・保存・再コピー・2回実行・出力照合済みの例が存在します。

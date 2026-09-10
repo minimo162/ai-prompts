@@ -152,6 +152,8 @@ T10の一括2ファイル添付はbundleのみが添付され生成前に停止�
 
 P3残課題は `catalog/coverage.json` の `p3_blocked_items` に11件を追加し、真の外部依存（PAD Designerの追加・コピー、WebAutomation拡張ハンドシェイク、Trusted RPC）を項目ごとにBLOCKEDとしている。既存のCSV／Office／PDF等の証跡を未採取用途へ拡張せず、候補名・静的確認・手動DOM観測を実行成功に読み替えていない。
 
+現作業版の追補判定は、T01〜T07、T04/T10一次、T01/T04/T10独立、知識precheckを確認済み、T08を生成形式失敗、T09をランタイムBLOCKED、負例を未実行とする。詳細は `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` に固定した。
+
 現作業版のケース別判定は `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` に固定し、T04/T10一次受入・T04/T10独立再試験PASS、知識precheckは参照確認PASS、その他は未実行またはBLOCKEDとして旧版成功を継承しない。
 
 P0〜P5の要件監査表は `catalog/evidence/issue5-completion-audit-20260910.json`。P4はT04/T10一次受入、T04/T10独立再試験、知識precheckを現作業版で確認済みで、残りは未実行である。T04/T10貼付け時の可視6件は仮想化による偽陰性で、Designerの総アクション数（9／16）を確認して保存・実行した。

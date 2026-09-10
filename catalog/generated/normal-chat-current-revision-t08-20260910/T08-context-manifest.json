@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "bundle_path": "catalog/generated/normal-chat-current-revision-t08-20260910/T08-Knowledge-Action-Bundle.txt",
+  "bundle_sha256": "bab541baf143c7523b37845897cb65688c00e1b6d8ceb1935ac1bca2d1544931",
+  "sources": [
+    {
+      "path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+      "sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd"
+    },
+    {
+      "path": "catalog/actions/file-read-text/utf8.robin",
+      "sha256": "3d1cd834edb55c047d97bb7d3d1d82ab4df66c0eeb01d272e13fe44952511c2b"
+    }
+  ]
+}

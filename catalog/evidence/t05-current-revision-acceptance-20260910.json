@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T08:13:17Z",
+  "status": "pass_current_revision",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+  "generation": {
+    "result": "catalog/generated/normal-chat-current-revision-t05-20260910/result.json",
+    "response": "catalog/generated/normal-chat-current-revision-t05-20260910/response.txt",
+    "robin": "catalog/generated/normal-chat-current-revision-t05-20260910/robin.txt",
+    "response_sha256": "042f3bc0af78279bdd11e535595b7b4df62f2e94a41572a1aebd026f8d01d7a8",
+    "robin_sha256": "0b60086068c9849b6f726fb5484956a8c463219bc45fa8a58bd57b9b229ed24e",
+    "prompt_sha256": "c1e23cf5e066aecff896004b9a3d4acec60e2fe3c5859d399ddd59da2b0a9759",
+    "model_requested": "GPT 5.6 Think Deeper",
+    "model_observed": "GPT 5.6 Think",
+    "attachment_count": 2,
+    "body_verified": true,
+    "sent": true,
+    "response_observed": true,
+    "robin_blocks": 1
+  },
+  "pad": {
+    "flow": "RobinKnowledgeT05CurrentRevision_20260910",
+    "process_id": 58104,
+    "paste": "catalog/evidence/t05-current-revision-pad-paste-20260910.json",
+    "run1": "catalog/evidence/t05-current-revision-pad-run1-20260910.json",
+    "run2": "catalog/evidence/t05-current-revision-pad-run2-20260910.json",
+    "run_statuses": ["success", "success"]
+  },
+  "outputs": [
+    {"path": "catalog/evidence/t05-current-revision-output-run1.xlsx", "sha256": "380dc50ece004c07e4f76e4216be6201c835197d55843252bd4f424a8a544e06", "A1": "OfficeCatalog 日本語 100%", "B2": "T05-Changed"},
+    {"path": "catalog/evidence/t05-current-revision-output-run2.xlsx", "sha256": "30d49b93cb422668e3cfe4e9c0e62c871cf82a9f002d537e537d2af42d6e9164", "A1": "OfficeCatalog 日本語 100%", "B2": "T05-Changed"}
+  ],
+  "input_sha256_before": "e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6",
+  "input_sha256_after": "e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6",
+  "protected_output_restored": true,
+  "result": "Current revised-package T05 changed only B2, preserved A1 and the input workbook, and passed two unmodified PAD executions."
+}

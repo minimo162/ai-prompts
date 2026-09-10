@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-10T08:20:57.9711845Z",
+  "flow_name": "RobinKnowledgeT07CurrentRevision_20260910",
+  "run_status": "success",
+  "ready_observed": true,
+  "start_enabled_after": true,
+  "variable_previews": [
+    "PDF Catalog A - Page 2  日本語の確認 100%  PAGE_TOKEN_A2  Item Quantity Code  Alpha 12 A-01  Beta 34 B-02  Synthetic data only"
+  ]
+}

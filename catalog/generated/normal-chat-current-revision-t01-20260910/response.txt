@@ -1,0 +1,39 @@
+前提・対象範囲・未確認点
+目的: UTF-8テキストを読み取り、文字列 対象語 を 置換後 へ通常置換し、新しいUTF-8テキストとして保存する。
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-current-bundle.txt
+成功条件: 対象語 のみ置換され、特殊文字・引用符・改行・対象外語を保持し、保存時に追加改行を付与しない。
+根拠:
+UTF-8読取り: catalog/actions/file-read-text/utf8.robin
+通常置換: catalog/actions/text-replace/literal.robin
+テキスト変数のUTF-8保存（AppendNewLine=False）: catalog/actions/file-write-text/variable-reference-no-append.robin
+未確認:
+添付ナレッジ内に当該3アクションを組み合わせたT01専用実行証跡はありません。各アクション原文は確認済みですが、この組合せ自体の再貼付け・実行確認は提示資料内では確認できません。
+PADで先に作る設定
+追加の入力変数は不要です。
+保存先フォルダーが存在することを確認してください。
+フローは下記3アクション構成です。
+貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+デザイナー上の確認方法
+アクション数が3個であること。
+順序が「読取り → 置換 → 書込み」であること。
+FileContents と Replaced がテキスト変数として生成されること。
+エラー表示がないこと。
+AppendNewLine: False になっていること。
+合成データでの照合手順
+フローを保存して実行します。
+出力ファイル normal-chat-t01-output-current-bundle.txt をUTF-8で開きます。
+対象語 がすべて 置換後 に置換されていることを確認します。
+対象外語 が変更されていないことを確認します。
+引用符、100%、C:\\sample、改行数が入力と一致していることを確認します。
+再実行後も同一内容で上書きされることを確認します。

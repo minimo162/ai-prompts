@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T08:01:22Z",
+  "status": "pass_current_revision",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+  "generation": {
+    "result": "catalog/generated/normal-chat-current-revision-t02-20260910/result.json",
+    "response": "catalog/generated/normal-chat-current-revision-t02-20260910/response.txt",
+    "robin": "catalog/generated/normal-chat-current-revision-t02-20260910/robin.txt",
+    "response_sha256": "d54d9215ecb556d86c5f90a9476b2288f74d340edbf78c85daa27440e9001c96",
+    "robin_sha256": "29e177e91a902171a55a394a6577f913b80167e41090c4cc4708ad944058c23d",
+    "prompt_sha256": "3d61e563572c7d7a1255b41e02dcfd961783674e7724ba5e8d74c1ced5876b78",
+    "model_requested": "GPT 5.6 Think Deeper",
+    "model_observed": "GPT 5.6 Think",
+    "attachment_count": 2,
+    "body_verified": true,
+    "sent": true,
+    "response_observed": true,
+    "robin_blocks": 1
+  },
+  "pad": {
+    "flow": "RobinKnowledgeT02CurrentRevision_20260910",
+    "process_id": 53772,
+    "paste": "catalog/evidence/t02-current-revision-pad-paste-20260910.json",
+    "run1": "catalog/evidence/t02-current-revision-pad-run1-20260910.json",
+    "run2": "catalog/evidence/t02-current-revision-pad-run2-20260910.json",
+    "run_statuses": ["success", "success"],
+    "variable_previews": ["3 行, 3 列", "2 行, 3 列"]
+  },
+  "outputs": [
+    {"path": "catalog/evidence/t02-current-revision-output-run1.csv", "sha256": "8f0748cc4d149228331dfacc0a5c46e117270a7e9dee564c4f631924142cf7d3", "rows": [["ID", "Name", "Status"], ["1", "日本語,引用", "対象"], ["3", "二重\"引用", "対象"]]},
+    {"path": "catalog/evidence/t02-current-revision-output-run2.csv", "sha256": "8f0748cc4d149228331dfacc0a5c46e117270a7e9dee564c4f631924142cf7d3", "rows": [["ID", "Name", "Status"], ["1", "日本語,引用", "対象"], ["3", "二重\"引用", "対象"]]}
+  ],
+  "input_sha256_before": "3aededf42b8bb2be71091c7cc6ed1295f1860a8450744d8779fbc8cabf6eed28",
+  "input_sha256_after": "3aededf42b8bb2be71091c7cc6ed1295f1860a8450744d8779fbc8cabf6eed28",
+  "protected_output_restored": true,
+  "result": "Current revised-package T02 was generated, pasted without edits, saved, and run twice. Header and Status=対象 rows with commas and double quotes matched the fixed case; input remained unchanged."
+}

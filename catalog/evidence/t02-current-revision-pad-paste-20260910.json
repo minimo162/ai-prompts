@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T08:00:44.2469196Z",
+  "flow_name": "RobinKnowledgeT02CurrentRevision_20260910",
+  "source_robin": "catalog/generated/normal-chat-current-revision-t02-20260910/robin.txt",
+  "source_sha256": "29e177e91a902171a55a394a6577f913b80167e41090c4cc4708ad944058c23d",
+  "source_bytes": 822,
+  "paste_confirmed": true,
+  "action_count_after_paste": 3,
+  "saved_confirmed": true,
+  "clipboard_restored": true,
+  "execution_requested": false
+}

@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-09-10T16:12:51+09:00",
+  "captured_at": "2026-09-10T17:20:00+09:00",
   "status": "partial",
   "branch": "codex/issue-5-acceptance-20260910b",
-  "head": "2025a64",
+  "head": "WORKTREE_PENDING_COMMIT",
   "base_main": "69fe344",
   "instruction": {
     "path": "copilot/agent-instructions.txt",
@@ -41,21 +41,37 @@
   "completion_audit": "catalog/evidence/issue5-completion-audit-20260910.json",
   "knowledge_precheck": "catalog/evidence/normal-chat-current-revision-knowledge-precheck-20260910.json",
   "t04_acceptance": "catalog/evidence/t04-current-revision-acceptance-20260910.json",
+  "t04_independent_acceptance": "catalog/evidence/t04-current-revision-independent-acceptance-20260910.json",
+  "t01_acceptance": "catalog/evidence/t01-current-revision-acceptance-20260910.json",
+  "t01_independent_acceptance": "catalog/evidence/t01-current-revision-independent-acceptance-20260910.json",
+  "t02_acceptance": "catalog/evidence/t02-current-revision-acceptance-20260910.json",
+  "t03_acceptance": "catalog/evidence/t03-current-revision-acceptance-20260910.json",
+  "t05_acceptance": "catalog/evidence/t05-current-revision-acceptance-20260910.json",
+  "t06_acceptance": "catalog/evidence/t06-current-revision-acceptance-20260910.json",
+  "t07_acceptance": "catalog/evidence/t07-current-revision-acceptance-20260910.json",
   "t10_acceptance": "catalog/evidence/t10-current-revision-acceptance-20260910.json",
+  "t10_independent_acceptance": "catalog/evidence/t10-current-revision-independent-acceptance-20260910.json",
   "t10_batch_attachment_failure": "catalog/evidence/normal-chat-current-revision-t10-batch-attachment-failure-20260910.json",
   "static_checks": {
     "Test-RobinRawContracts.ps1": "PASS: 6 assertions (including current T04)",
     "Test-CopilotRobinPackage.ps1": "PASS: instructions_utf16=3949; knowledge_files=7; observed_actions=86",
-    "Test-RobinCatalog.ps1": "PASS: 77 checks (including current T04/T10 and independent acceptance flow contracts)",
+    "Test-RobinCatalog.ps1": "PASS: pending after current T01-T07 flow records are added",
     "git diff --check": "PASS"
   },
   "current_package_acceptance": {
-    "m365_upload": "PARTIAL: CDP preexisting input attached the current bundle and T04 fixture; the separate CUA file chooser attempt did not fire",
+    "m365_upload": "PARTIAL: CDP preexisting input attached current bundle plus direct synthetic fixtures or single mechanical contexts for accepted cases; generic CUA file chooser attempt did not fire and T08 format boundary remains",
     "knowledge_precheck": "PASS_REFERENCE_ONLY",
-    "T01_to_T10": "PARTIAL_CURRENT_PACKAGE: T04 and T10 primary pass; other cases not run",
+    "T01_to_T10": "PARTIAL_CURRENT_PACKAGE: T01-T07 and T10 primary pass; T08 format failure; T09 blocked",
     "T04": "PASS_CURRENT_REVISION",
     "T10": "PASS_CURRENT_REVISION_PRIMARY",
-    "independent_T01_T04_T10": "PARTIAL_CURRENT_PACKAGE: T04/T10 pass; T01 not run",
+    "T01": "PASS_CURRENT_REVISION",
+    "T02": "PASS_CURRENT_REVISION",
+    "T03": "PASS_CURRENT_REVISION",
+    "T05": "PASS_CURRENT_REVISION",
+    "T06": "PASS_CURRENT_REVISION",
+    "T07": "PASS_CURRENT_REVISION",
+    "T08": "FAILED_CURRENT_REVISION_FORMAT",
+    "independent_T01_T04_T10": "PASS_CURRENT_REVISION_INDEPENDENT: T01/T04/T10",
     "negative_suite": "NOT_RUN_CURRENT_PACKAGE"
   },
   "historical_evidence_not_inherited": [
@@ -65,9 +81,9 @@
     "catalog/evidence/t09-runtime-block-20260910.json"
   ],
   "remaining": [
-    "Attach the current bundle and synthetic fixtures in a new normal M365 Copilot chat and regenerate T04/T10.",
-    "Use a fresh PAD flow to paste, save, run, and compare T04/T10 without hand edits.",
-    "Complete T09 WebAutomation runtime or record an item-level blocked dependency with a reproduced stop point.",
-    "Complete A-G missing one-action captures, final T01-T10, independent T01/T04/T10, and negative cases."
+    "Obtain a valid unmodified Robin fenced block for current-package T08; the current chat attempts stopped at refusal/inline/未出力 format failures.",
+    "Complete T09 PAD WebAutomation handshake and output observation, or keep the reproduced runtime dependency blocked.",
+    "Run the current-package negative suite and complete the 11 item-level P3 captures where PAD Designer/runtime support exists.",
+    "Do not publish: no PR, push, merge, release, or Issue close is authorized in this task."
   ]
 }
