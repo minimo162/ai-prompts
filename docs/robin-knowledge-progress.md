@@ -220,3 +220,5 @@ T04先行成功・最終失敗、T10入力原文・生成・PAD再コピーの�
 この新しい指示・bundleでのM365再添付は、ブラウザー拡張経路のfile chooserが発火せず未実行である（`catalog/evidence/m365-current-package-upload-block-20260910b.json`）。T09はローカル画面の3要素と `T09-clicked` の到達性を再確認したが、これは手動DOM状態でありPAD WebAutomation実行ではない（`catalog/evidence/t09-current-environment-20260910b.json`）。したがって旧版のT01〜T03/T05〜T08 PASSや先行T04/T10成功を現作業版へ継承せず、現作業版T01〜T10、T01/T04/T10独立再試験、負例は未完了のまま保持する。必要な人の操作は、ログイン済み通常M365 Copilotへ現作業版bundleと合成fixtureを添付できるCDP/file-input経路を用意すること、またはPADのTrusted RPCを構成してT04/T09/T10の無修正貼付け・実行を再観測することである。次の1作業は、現作業版を新規チャットへ添付してT04生成原文の引用符が6個のままか確認すること。
 
 P3の未採取項目は、coverageの `p3_blocked_items` に11件を項目単位で記録した。候補名だけの構文推測はせず、既存証跡で満たせる用途と、PAD Designer／WebAutomationの実測が必要な用途を分離している。
+
+現作業版のT01〜T10／独立再試験／負例の判定表は `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` に固定した。添付が成立するまで全件を現作業版未実行として扱う。

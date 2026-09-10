@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T15:36:54+09:00",
+  "status": "partial",
+  "package": {
+    "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "knowledge_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+    "manifest": "copilot/knowledge-bundle-manifest-20260910b.json"
+  },
+  "scope": "Current revised package only. Historical 431c/e467 acceptance is not inherited.",
+  "cases": {
+    "T01": "NOT_RUN_CURRENT_PACKAGE",
+    "T02": "NOT_RUN_CURRENT_PACKAGE",
+    "T03": "NOT_RUN_CURRENT_PACKAGE",
+    "T04": "NOT_RUN_CURRENT_PACKAGE",
+    "T05": "NOT_RUN_CURRENT_PACKAGE",
+    "T06": "NOT_RUN_CURRENT_PACKAGE",
+    "T07": "NOT_RUN_CURRENT_PACKAGE",
+    "T08": "NOT_RUN_CURRENT_PACKAGE",
+    "T09": "BLOCKED_RUNTIME_DEPENDENCY",
+    "T10": "NOT_RUN_CURRENT_PACKAGE"
+  },
+  "independent": {
+    "T01": "NOT_RUN_CURRENT_PACKAGE",
+    "T04": "NOT_RUN_CURRENT_PACKAGE",
+    "T10": "NOT_RUN_CURRENT_PACKAGE"
+  },
+  "negative_suite": "NOT_RUN_CURRENT_PACKAGE",
+  "evidence": {
+    "raw_provenance": "catalog/evidence/normal-chat-raw-provenance-20260910.json",
+    "upload_block": "catalog/evidence/m365-current-package-upload-block-20260910b.json",
+    "t09_environment": "catalog/evidence/t09-current-environment-20260910b.json",
+    "p3_blocked_items": "catalog/coverage.json:p3_blocked_items",
+    "static_checks": "catalog/evidence/current-package-static-check-20260910b.json"
+  },
+  "next_operation": "Attach the current package and synthetic fixtures in a new normal M365 Copilot chat, then regenerate T04/T10 before any PAD acceptance claim."
+}

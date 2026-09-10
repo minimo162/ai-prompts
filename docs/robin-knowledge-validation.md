@@ -150,3 +150,5 @@ T02ではPADのFilter DataTable設定画面で列／インデックス=`2`、演
 現作業版の通常M365 Copilotへの再添付は、今回のブラウザー拡張file chooserが発火せず未実行である（`catalog/evidence/m365-current-package-upload-block-20260910b.json`）。T09ローカル画面の要素と結果文字は到達性として再確認したが、PAD WebAutomation実行の証拠ではない（`catalog/evidence/t09-current-environment-20260910b.json`）。旧版 `431c...` の生成・PAD結果は履歴として保持し、現作業版T01〜T10・独立再試験・負例へ継承しない。Issue #5は `partial` を維持する。
 
 P3残課題は `catalog/coverage.json` の `p3_blocked_items` に11件を追加し、真の外部依存（PAD Designerの追加・コピー、WebAutomation拡張ハンドシェイク、Trusted RPC）を項目ごとにBLOCKEDとしている。既存のCSV／Office／PDF等の証跡を未採取用途へ拡張せず、候補名・静的確認・手動DOM観測を実行成功に読み替えていない。
+
+現作業版のケース別判定は `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` に固定し、旧版成功を現作業版へ継承しない。
