@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T21:53:42+09:00",
+  "status": "pass_structure_probe_not_bundled",
+  "missing_item": "B-error-subflow",
+  "scope": "Synthetic PAD Main/P3Worker subflow probe; current bundle unchanged.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3Subflow_20260910",
+    "process_id": 56164,
+    "subflow_count": 2
+  },
+  "raw": {
+    "worker_path": "catalog/evidence/p3-subflow-worker-20260910.robin",
+    "worker_sha256": "475a272d9c0c8e8837e3efcffc8f05134689b342400cda6362e0e37d25829cb5",
+    "call_path": "catalog/evidence/p3-subflow-call-20260910.robin",
+    "call_sha256": "02761525859c6a4fa9625b27999abc609666779b32412c29669c9a1eb9785ba7",
+    "copy_observed": true,
+    "clipboard_restored": true
+  },
+  "structure": {
+    "main_action": "CALL P3Worker",
+    "worker_action": "Display.ShowMessageDialog.ShowMessageWithTimeout",
+    "worker_timeout_seconds": 3,
+    "worker_output_variable": "ButtonPressed"
+  },
+  "runs": [
+    {"evidence": "catalog/evidence/p3-subflow-probe-run1-20260910.json", "status": "success", "button_pressed_preview": "OK"},
+    {"evidence": "catalog/evidence/p3-subflow-call-probe-run2-20260910.json", "status": "success", "button_pressed_preview": "OK"}
+  ],
+  "package_binding": {
+    "current_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "current_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+    "included_in_current_bundle": false,
+    "reason": "Adding subflow syntax to the seven-file bundle would change the package hash and require a complete T01-T10 regression."
+  },
+  "result": "A synthetic P3Worker subflow was created, populated with a timed message action, and called from Main. Both runs completed with ButtonPressed=OK; subflow creation/call is separately evidenced but not bundled. Error-triggering child action and custom error handler remain unobserved."
+}

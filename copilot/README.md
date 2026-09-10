@@ -25,7 +25,7 @@ P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、
 If/Else/ENDの構造と両分岐実行は別probeで確認していますが、Else-if・入れ子・分岐内処理は未確認です。
 有限Loopの`EXIT LOOP`と`NEXT LOOP`は別probeで確認しています。入れ子とloop内副作用は未確認です。
 （Loop Continue probeは現行bundleへ未統合です。）
-エラー処理ブロックの骨格も別probeで確認していますが、エラー発生子アクションとサブフローは未確認です。
+エラー処理ブロックの骨格とP3Worker作成＋MainからのCALLも別probeで確認していますが、エラー発生子アクションとカスタムハンドラーは未確認です。
 
 ファイル存在確認の`IF ... THEN`／`END`も別probeでPASSですが、false分岐・移動・名前変更・データ反復等は未確認です。
 

@@ -2167,8 +2167,8 @@
       "status": "partial",
       "observed_action_ids": [],
       "observed_probe_ids": ["p3-error-block-probe-2026-09-10"],
-      "reason": "別probeでBLOCK／ON BLOCK ERROR／THROW ERROR／ENDの骨格をコピー・保存・実行したが、エラー発生子アクション、カスタムハンドラー、サブフロー作成・呼出しは未確認。",
-      "reference": "catalog/evidence/p3-error-block-probe-20260910.json",
+      "reason": "別probeでBLOCK／ON BLOCK ERROR／THROW ERROR／ENDの骨格と、P3Worker作成＋MainからのCALLをコピー・保存・実行した。エラー発生子アクションとカスタムハンドラーは未確認。",
+      "reference": "catalog/evidence/p3-error-block-probe-20260910.json; catalog/evidence/p3-subflow-probe-20260910.json",
       "live_ui_candidates": [
         {
           "ui_name": "サブフローの実行",
@@ -2519,9 +2519,9 @@
     "id": "B-error-subflow",
     "missing": "エラー処理・サブフロー作成／呼出し",
     "status": "PARTIAL_PROBE_NOT_BUNDLED",
-    "reason": "新規専用probeでBLOCK／ON BLOCK ERROR／THROW ERROR／END構造をコピー・保存・実行した。エラーを発生させる子アクション、カスタムハンドラー、サブフロー作成・呼出しは未採取、probeは現行bundle未統合。",
-    "evidence": "evidence/p3-error-block-probe-20260910.json",
-    "resume": "エラー発生子アクションとサブフロー作成・呼出しを採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
+    "reason": "新規専用probeでBLOCK／ON BLOCK ERROR／THROW ERROR／END構造と、P3Worker作成＋MainからのCALLをコピー・保存・実行した。エラーを発生させる子アクションとカスタムハンドラーは未採取、probeは現行bundle未統合。",
+    "evidence": "evidence/p3-error-block-probe-20260910.json; evidence/p3-subflow-probe-20260910.json",
+    "resume": "エラー発生子アクションとカスタムハンドラーを採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
   },
   {
     "id": "C-datatable",

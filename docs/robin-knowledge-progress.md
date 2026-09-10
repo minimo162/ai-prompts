@@ -31,7 +31,7 @@
 ## 固定した必須採取チェックリスト
 
 - A 基礎: 既存の変数・文字列・数値・リスト・置換・分割・結合・数値変換に加え、日時取得のdate-only設定とサブテキスト取得のUnicode混在1設定を実測済み。別probeで日時加算・減算、一般の数値減算を実行確認したが、カスタム日時書式化とリスト取出しは未確認。
-- B 制御: 定数範囲LoopとFor each／Ifの原文を観測し、For each＋If＋ファイル読取りのT03組合せを実行済み。別probeでElse、EXIT LOOP、NEXT LOOP、エラー処理ブロック骨格を確認したが、Else-if・入れ子・サブフロー作成・呼出しは未確認。
+- B 制御: 定数範囲LoopとFor each／Ifの原文を観測し、For each＋If＋ファイル読取りのT03組合せを実行済み。別probeでElse、EXIT LOOP、NEXT LOOP、エラー処理ブロック骨格、P3Worker作成＋MainからのCALLを確認したが、Else-if・入れ子・エラー発生子アクション・カスタムハンドラーは未確認。
 - C データ処理: 空データテーブル作成、CSV読取り、DataTable変数参照でのCSV書出しは実測済み。0行0列への空行追加は設計エラーとして記録。列を持つテーブルの行追加・行反復・セル参照は未確認。
 - D ファイル: UTF-8テキスト読取り・書出し、CSV読取り・書出し、単一ファイルのコピー、フォルダー内ファイル取得2設定、変数パス読取りは原文・別フロー貼付け・実行へ対応づけた。別probeで存在確認、フォルダー作成、移動・名前変更を確認したが、false分岐と移動の再実行は未確認。
 - E Excel: 起動・セル/範囲読取り・書込み・保存・終了は観測済み。シート選択・データ反復の独立例は未確認。
@@ -238,7 +238,7 @@ Cの列付きDataTableは5列の作成を試したが、1値だけを渡す行�
 If/Else/ENDは新規専用probeで正しいリテラル比較を採取し、THEN／ELSEを各1回実行した。branch side effectを追加していないため、Else-if・入れ子・分岐内アクションは未採取で、probeは現行bundleへ未統合である（`catalog/evidence/p3-else-probe-20260910.json`）。
 有限Loop 1..3へ`EXIT LOOP`を追加したprobeも、LoopIndex=1で終了することを確認した。別probeの`NEXT LOOP`は2回ともLoopIndex=4で終了した。入れ子・分岐内処理・loop side effectは未採取、probeは現行bundle未統合である（`catalog/evidence/p3-break-probe-20260910.json`、`catalog/evidence/p3-continue-probe-20260910.json`）。
 同じ有限Loopへ`NEXT LOOP`を追加したprobeでは、LoopIndex=4で終了することを2回確認した。入れ子・loop side effectは未採取、probeは現行bundle未統合である（`catalog/evidence/p3-continue-probe-20260910.json`）。
-`BLOCK / ON BLOCK ERROR / THROW ERROR / END`のエラー処理骨格も新規専用probeでコピー・保存・実行した。エラーを発生させる子アクションとサブフロー作成・呼出しは未採取、probeは現行bundle未統合である（`catalog/evidence/p3-error-block-probe-20260910.json`）。
+`BLOCK / ON BLOCK ERROR / THROW ERROR / END`のエラー処理骨格と、P3Worker作成＋Mainからの`CALL P3Worker`を新規専用probeでコピー・保存・実行した。エラーを発生させる子アクションとカスタムハンドラーは未採取、probeは現行bundle未統合である（`catalog/evidence/p3-error-block-probe-20260910.json`、`catalog/evidence/p3-subflow-probe-20260910.json`）。
 リスト項目取得は、表示された「リストから項目を削除」を作成→追加→削除の最小probeで確認したが、削除後に項目値を返す出力変数がなく、取得構文の代用にはならなかった。推測で追加せず、未確認として保持する（`catalog/evidence/p3-list-remove-probe-20260910.json`）。
 Dの「フォルダーの作成」は合成fixture配下の新規専用フローで、原文コピー・保存・2回実行・`NewFolder`出力を確認した。存在確認・移動・名前変更も別probeで確認済みだが、各probeは現行bundleへ未統合で、false分岐と移動の再実行は未採取のままとする（`catalog/evidence/p3-folder-create-probe-20260910.json`、`p3-file-exists-probe-20260910.json`、`p3-file-move-probe-20260910.json`、`p3-file-rename-probe-20260910.json`）。
 
