@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-09-11T00:31:00+09:00",
+  "captured_at": "2026-09-10T23:24:54+09:00",
   "status": "partial_false_branch_run_no_raw",
   "missing_item": "D-files-folders",
   "scope": "Synthetic PAD File.Exists false-branch attempt in a newly-created dedicated flow; no current-package acceptance.",
