@@ -14,7 +14,8 @@
     "bundle_path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
     "sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
     "source_count": 7,
-    "builder": "tools/Build-KnowledgeBundle.ps1"
+    "builder": "tools/Build-KnowledgeBundle.ps1",
+    "manifest": "copilot/knowledge-bundle-manifest-20260910b.json"
   },
   "protected_material": {
     "path": "docs/agent-approach-comparison-2026-09-07.md",
