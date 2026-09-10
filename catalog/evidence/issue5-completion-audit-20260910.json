@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-09-10T15:49:20+09:00",
+  "captured_at": "2026-09-10T16:12:51+09:00",
   "status": "partial",
   "branch": "codex/issue-5-acceptance-20260910b",
   "head": "08d251c",
@@ -15,8 +15,8 @@
     {
       "phase": "P1",
       "status": "PASS_DIAGNOSIS_AND_MINIMAL_REVISION",
-      "evidence": ["normal-chat-raw-provenance-20260910.json", "Test-RobinRawContracts.ps1: 4 assertions PASS", "instruction and T04/T10 knowledge revisions", "bundle rebuilt from seven sources"],
-      "gap": "The revised package has not yet produced a fresh normal-chat response."
+      "evidence": ["normal-chat-raw-provenance-20260910.json", "t04-current-revision-acceptance-20260910.json", "Test-RobinRawContracts.ps1: 6 assertions PASS", "instruction and T04/T10 knowledge revisions", "bundle rebuilt from seven sources"],
+    "gap": "T04 now has a fresh current-package response and two PAD runs; T10 and the remaining cases still need fresh generation."
     },
     {
       "phase": "P2",
@@ -32,19 +32,19 @@
     },
     {
       "phase": "P4",
-      "status": "NOT_RUN_CURRENT_PACKAGE",
-      "evidence": ["normal-chat-final-acceptance-summary-20260910b.json", "current manifest and hashes", "old 431c/e467 batch explicitly marked historical"],
-      "gap": "Current-package upload, knowledge precheck, T01-T10, independent T01/T04/T10, and negative suite are not run."
+      "status": "PARTIAL_CURRENT_PACKAGE",
+      "evidence": ["normal-chat-final-acceptance-summary-20260910b.json", "normal-chat-current-revision-knowledge-precheck-20260910.json", "t04-current-revision-acceptance-20260910.json", "t04-current-revision-pad-paste-20260910.json", "current manifest and hashes", "old 431c/e467 batch explicitly marked historical"],
+      "gap": "T04 current revision and separate knowledge precheck are accepted; T01-T03/T05-T10, independent T01/T04/T10, and negative suite remain unrun."
     },
     {
       "phase": "P5",
       "status": "PASS_STATIC_PARTIAL_EXTERNAL",
       "evidence": ["README/pad-robin-prompts/copilot README/index/coverage/progress/validation aligned", "current-package-static-check-20260910b.json", "Issue checkpoint comments"],
-      "gap": "No current-package runtime evidence or CI checks; Issue remains OPEN/partial."
+      "gap": "T04 current-package runtime evidence exists; remaining current-package cases are not run and CI checks are not configured. Issue remains OPEN/partial."
     }
   ],
   "completion_blockers": [
-    "Browser extension file chooser does not fire in the available CUA surface; current bundle/fixture were not transmitted.",
+    "The generic CUA browser-extension file chooser does not fire reliably; the validated CDP preexisting-input path now works for T04 but the full current-package batch remains.",
     "PAD native Computer Use Trusted RPC is not configured; WebAutomation and missing P3 captures require an available UI operation path."
   ],
   "next_operation": "Provide a working CDP/file-input attachment path, then regenerate T04/T10 from the revised package before running PAD acceptance."

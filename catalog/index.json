@@ -4023,6 +4023,36 @@
       "controller_support": "not_implemented",
       "execution_status": "partial_expected_error_word_saveas",
       "evidence": "evidence/normal-chat-final-package-acceptance-20260910.json"
+    },
+    {
+      "id": "normal-chat-current-revision-t04-20260910",
+      "robin_path": "generated/normal-chat-current-revision-t04-20260910/robin.txt",
+      "sha256": "90b94a98613a8450cab08f7803af184cf397e49940108ada77ef230bf118aac9",
+      "action_ids": [
+        "excel-launch-t04-open-readonly",
+        "excel-read-t04-range-a1-c6",
+        "datatable-filter-status-equals-index2",
+        "variables-convert-datatable-csv-t04",
+        "file-write-t04-filtered-csv",
+        "excel-launch-t04-filtered-csv-editable",
+        "excel-save-t04-output-xlsx",
+        "excel-close-t04-no-save"
+      ],
+      "action_count": 9,
+      "native_flow_name": "RobinKnowledgeT04FinalPackage_20260910",
+      "roundtrip_flow_name": "RobinKnowledgeT04FinalPackage_20260910",
+      "generated_result": "generated/normal-chat-current-revision-t04-20260910/result.json",
+      "re_pasted_from_file": true,
+      "executed_twice": true,
+      "execution_status": "pass_current_revision",
+      "expected_value": "対象/A/10, 対象/C/25, 対象/D/5; input unchanged",
+      "evidence": "evidence/t04-current-revision-acceptance-20260910.json; evidence/t04-current-revision-pad-paste-20260910.json",
+      "generated_from_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+      "generated_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "catalog_only": false,
+      "acceptance_scope": "current_package_runtime",
+      "controller_support": "strict UIA helper; visible list virtualized at 6 while Designer status showed 9",
+      "scope_note": "Existing dedicated failed-paste flow was verified empty before paste; tracked pre-existing outputs were backed up/restored byte-identically. New-flow creation was not performed in this roundtrip."
     }
   ],
   "capture_sessions": [
@@ -4320,6 +4350,17 @@
       "cases": ["T04", "T09", "T10"],
       "scope": "Raw provenance diagnosis and minimal instruction/knowledge revision. Fresh current-package upload did not reach a file chooser, so no generation or PAD acceptance is claimed.",
       "evidence": "evidence/normal-chat-raw-provenance-20260910.json; evidence/m365-current-package-upload-block-20260910b.json; evidence/t09-current-environment-20260910b.json; evidence/current-package-status-20260910b.json; evidence/current-package-static-check-20260910b.json; evidence/normal-chat-final-acceptance-summary-20260910b.json; evidence/issue5-completion-audit-20260910.json"
+    },
+    {
+      "id": "normal-chat-current-revision-t04-and-precheck-2026-09-10",
+      "date": "2026-09-10",
+      "browser": "Microsoft Edge CDP",
+      "model": "GPT 5.6 Think Deeper",
+      "bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": ["knowledge-precheck", "T04"],
+      "scope": "Current revised package: separate knowledge reference precheck plus T04 normal-chat generation, unmodified PAD paste/save, two runs, logical output comparison, and input invariance.",
+      "evidence": "evidence/normal-chat-current-revision-knowledge-precheck-20260910.json; evidence/t04-current-revision-acceptance-20260910.json; evidence/t04-current-revision-pad-paste-20260910.json"
     }
   ],
   "application_integration": {

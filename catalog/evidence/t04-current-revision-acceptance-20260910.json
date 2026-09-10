@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T06:58:50Z",
+  "status": "pass",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+  "generation": {
+    "result": "catalog/generated/normal-chat-current-revision-t04-20260910/result.json",
+    "response": "catalog/generated/normal-chat-current-revision-t04-20260910/response.txt",
+    "robin": "catalog/generated/normal-chat-current-revision-t04-20260910/robin.txt",
+    "response_sha256": "273210272b79daae6213b2c9131a10b1bdc2c2f5c15e8d884d707263632b6883",
+    "robin_sha256": "90b94a98613a8450cab08f7803af184cf397e49940108ada77ef230bf118aac9",
+    "prompt_sha256": "4e67a150d6a61e9c3a1bf9ea9c15cdb75736f6488eab1de57dab27a6330d8480",
+    "model_requested": "GPT 5.6 Think Deeper",
+    "model_observed": "GPT 5.6 Think",
+    "attachments": [
+      {"name": "PAD-Robin-Knowledge-Bundle.txt", "sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd"},
+      {"name": "t04-filter-input.xlsx", "sha256": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0"}
+    ],
+    "body_verified": true,
+    "sent": true,
+    "response_observed": true,
+    "robin_blocks": 1,
+    "source_line_difference": {"lines": [7], "meaning": "requested final output path only"}
+  },
+  "pad": {
+    "paste_evidence": "catalog/evidence/t04-current-revision-pad-paste-20260910.json",
+    "run1": "catalog/evidence/t04-current-revision-pad-run-1-20260910.json",
+    "run2": "catalog/evidence/t04-current-revision-pad-run-2-20260910.json",
+    "run_statuses": ["success", "success"],
+    "variable_previews": [
+      "対象,A,10  対象,C,25  対象,D,5",
+      "6 行, 3 列",
+      "3 行, 3 列"
+    ]
+  },
+  "outputs": [
+    {"path": "catalog/evidence/t04-current-revision-output.xlsx", "sha256": "6e75ca531947c985444718d35272c1f29a915ddee2e6e3e786a935d23cd762cf", "rows": [["対象", "A", 10], ["対象", "C", 25], ["対象", "D", 5]]},
+    {"path": "catalog/evidence/t04-current-revision-output-run2.xlsx", "sha256": "f90a5a72c474f6e78255f6500fe6b976ab3a9c363d114200f28e83540020ad84", "rows": [["対象", "A", 10], ["対象", "C", 25], ["対象", "D", 5]]}
+  ],
+  "input_sha256_before": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+  "input_sha256_after": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+  "result": "Current revised-package T04 generation, unmodified paste/save, two successful PAD runs, fixed rows, and input invariance are proven. The flow was an existing dedicated flow verified empty before paste; a newly-created flow was not required for this roundtrip and remains a separate strict gap if demanded."
+}

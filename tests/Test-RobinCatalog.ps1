@@ -12,6 +12,13 @@ foreach($flow in $catalog.flows){
         $checks++
         continue
     }
+    if ((Get-AgentProperty $flow 'acceptance_scope' '') -eq 'current_package_runtime') {
+        # Runtime acceptance evidence is checked by its case evidence JSON and
+        # must not be treated as a controller allowlist entry.
+        if ([string]::IsNullOrWhiteSpace($code)) { throw ('Acceptance flow is empty: ' + $flow.id) }
+        $checks++
+        continue
+    }
     if ((Get-AgentProperty $flow 'controller_support' '') -eq 'validated_subset') {
         # Scope/lifecycle contract only. Native document contents are tested separately.
         $inputs=Join-Path $root 'document-inputs';$outputs=Join-Path $root 'artifacts'

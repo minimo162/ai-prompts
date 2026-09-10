@@ -50,6 +50,7 @@ function Get-LineDiff([string[]]$A, [string[]]$B) {
 $t04SourcePath = 'catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin'
 $t04EarlyPath = 'catalog/generated/normal-chat-t04-20260910-current-v4/robin.txt'
 $t04FinalPath = 'catalog/generated/normal-chat-t04-20260910-final-v5/robin.txt'
+$t04CurrentRevisionPath = 'catalog/generated/normal-chat-current-revision-t04-20260910/robin.txt'
 $t10SourcePath = 'catalog/generated/office-three-apps/generated.robin'
 $t10GeneratedPath = 'catalog/generated/normal-chat-t10-20260910-final-v8/robin.txt'
 $t10RecopyPath = 'catalog/evidence/normal-chat-final-pad-20260910/t10-recopy.txt'
@@ -57,6 +58,7 @@ $t10RecopyPath = 'catalog/evidence/normal-chat-final-pad-20260910/t10-recopy.txt
 $t04Source = Read-Utf8Lines $t04SourcePath
 $t04Early = Read-Utf8Lines $t04EarlyPath
 $t04Final = Read-Utf8Lines $t04FinalPath
+$t04CurrentRevision = Read-Utf8Lines $t04CurrentRevisionPath
 $t10Source = Read-Utf8Lines $t10SourcePath
 $t10Generated = Read-Utf8Lines $t10GeneratedPath
 $t10Recopy = Read-Utf8Lines $t10RecopyPath
@@ -69,6 +71,7 @@ $result = [ordered]@{
         (Get-FileSummary $t04SourcePath),
         (Get-FileSummary $t04EarlyPath),
         (Get-FileSummary $t04FinalPath),
+        (Get-FileSummary $t04CurrentRevisionPath),
         (Get-FileSummary $t10SourcePath),
         (Get-FileSummary $t10GeneratedPath),
         (Get-FileSummary $t10RecopyPath)
@@ -82,6 +85,10 @@ $result = [ordered]@{
             differing_lines = @(Get-LineDiff $t04Source $t04Final)
             interpretation = 'The final-v5 generated response changed the FilterParameters empty-literal quote count during Copilot generation; PAD paste was not confirmed. Output-path substitutions are a separate requested-path change.'
         }
+        t04_source_to_current_revision = [ordered]@{
+            differing_lines = @(Get-LineDiff $t04Source $t04CurrentRevision)
+            interpretation = 'The revised-package Copilot generation kept the measured FilterParameters line and changed only the requested final output path.'
+        }
         t10_source_to_generated = [ordered]@{
             differing_lines = @(Get-LineDiff $t10Source $t10Generated)
             interpretation = 'Lines 2 and 4 are the requested changes. Lines 9 and 15 are outside the change scope and were mutated in the generated response (extra backslashes and escaped underscore).'
@@ -94,6 +101,8 @@ $result = [ordered]@{
     assertions = [ordered]@{
         t04_early_filter_line_matches_source = [string]::Equals($t04Source[2], $t04Early[2], [StringComparison]::Ordinal)
         t04_final_filter_line_differs_from_source = -not [string]::Equals($t04Source[2], $t04Final[2], [StringComparison]::Ordinal)
+        t04_current_filter_line_matches_source = [string]::Equals($t04Source[2], $t04CurrentRevision[2], [StringComparison]::Ordinal)
+        t04_current_only_requested_output_path_differs = ((@((Get-LineDiff $t04Source $t04CurrentRevision).line) -join ',') -ceq '7')
         t10_expected_changed_lines = ((@((Get-LineDiff $t10Source $t10Generated).line) -join ',') -ceq '2,4,9,15')
         t10_recopy_only_path_lines_differ = ((@((Get-LineDiff $t10Generated $t10Recopy).line) -join ',') -ceq '9,15')
     }

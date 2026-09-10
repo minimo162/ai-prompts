@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-09-10T15:36:54+09:00",
+  "captured_at": "2026-09-10T16:12:51+09:00",
   "status": "partial",
   "package": {
     "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
@@ -12,7 +12,7 @@
     "T01": "NOT_RUN_CURRENT_PACKAGE",
     "T02": "NOT_RUN_CURRENT_PACKAGE",
     "T03": "NOT_RUN_CURRENT_PACKAGE",
-    "T04": "NOT_RUN_CURRENT_PACKAGE",
+    "T04": "PASS_CURRENT_REVISION",
     "T05": "NOT_RUN_CURRENT_PACKAGE",
     "T06": "NOT_RUN_CURRENT_PACKAGE",
     "T07": "NOT_RUN_CURRENT_PACKAGE",
@@ -26,7 +26,10 @@
     "T10": "NOT_RUN_CURRENT_PACKAGE"
   },
   "negative_suite": "NOT_RUN_CURRENT_PACKAGE",
+  "knowledge_precheck": "PASS_REFERENCE_ONLY",
   "evidence": {
+    "knowledge_precheck": "catalog/evidence/normal-chat-current-revision-knowledge-precheck-20260910.json",
+    "T04_current_revision": "catalog/evidence/t04-current-revision-acceptance-20260910.json",
     "completion_audit": "catalog/evidence/issue5-completion-audit-20260910.json",
     "raw_provenance": "catalog/evidence/normal-chat-raw-provenance-20260910.json",
     "upload_block": "catalog/evidence/m365-current-package-upload-block-20260910b.json",
@@ -34,5 +37,5 @@
     "p3_blocked_items": "catalog/coverage.json:p3_blocked_items",
     "static_checks": "catalog/evidence/current-package-static-check-20260910b.json"
   },
-  "next_operation": "Attach the current package and synthetic fixtures in a new normal M365 Copilot chat, then regenerate T04/T10 before any PAD acceptance claim."
+  "next_operation": "Use the same validated CDP attachment path for the current package knowledge precheck and T10, then run the remaining current-package cases and independent tests."
 }

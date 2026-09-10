@@ -1,0 +1,328 @@
+以下は添付ナレッジの記載内容だけを整理した結果です。推測や一般的なPAD仕様は加えていません。
+
+1. PAD-Robin-03-Files.txt のUTF-8テキスト書込み
+
+根拠ファイル:
+
+copilot/knowledge/PAD-Robin-03-Files.txt
+SHA-256: e91caa1af3beff4cf2def629b4f7b18e89006f0b29b066d984aadf17fa692341
+UTF-8・上書き・AppendNewLine=True
+
+記載内容:
+
+原文ファイル: catalog/actions/file-write-text/utf8-overwrite.robin
+SHA-256: 3f31e923d6466abcb14e5f7fa864d414256158a6b5431ad9e5f126323818bb86
+設定:
+AppendNewLine: True
+IfFileExists: File.IfFileExists.Overwrite
+Encoding: File.FileEncoding.UTF8
+出力は UTF-8 BOM付き73 bytes。
+UTF-8・テキスト変数参照・AppendNewLine=True
+
+記載内容:
+
+原文ファイル: catalog/actions/file-write-text/variable-reference.robin
+SHA-256: 7d73b162b4b298a547b7c45f98eab0f116a0abf047e6ec1e65de3d426063adac
+設定:
+TextToWrite: Replaced
+AppendNewLine: True
+IfFileExists: File.IfFileExists.Overwrite
+Encoding: File.FileEncoding.UTF8
+UTF-8・テキスト変数参照・AppendNewLine=False
+
+記載内容:
+
+原文ファイル: catalog/actions/file-write-text/variable-reference-no-append.robin
+SHA-256: ca6006e287fdd4050f277f4965d6c2e8c3e1aa724dfbcbd4f3300cd3e7d2abe6
+設定:
+TextToWrite: Replaced
+AppendNewLine: False
+IfFileExists: File.IfFileExists.Overwrite
+Encoding:File.FileEncoding.UTF8
+「入力自身の末尾改行を保持し、追加改行を要求しない保存ではこの設定を使う」と記載。
+T04中間CSV保存でのテキスト書込み
+
+記載内容:
+
+FilteredDataTable → Variables.ConvertDataTableToCSV
+CSVText を File.WriteText
+UTF-8
+追記なし（AppendNewLine=False）
+既存内容上書き
+原文: catalog/actions/file-write-text/t04-filtered-csv.robin
+実行証拠:
+catalog/evidence/t04-positive-flow-run-6.json
+catalog/evidence/t04-positive-flow-run-7.json
+2. T04 Excel条件抽出→別xlsx系列
+
+根拠ファイル:
+
+copilot/knowledge/PAD-Robin-04-Office-PDF.txt
+SHA-256: 43623b565ba810555bdd7866848f9d04dd42662af7f171a0461219aa7bce7c08
+入力範囲
+
+記載内容:
+
+読み取り専用でExcelを開く
+読取範囲:
+開始列 A
+開始行 1
+終了列 C
+終了行 6
+Dataシートをアクティブにした入力で実行
+実行プレビュー:
+6行
+3列
+出力変数:
+ExcelData
+FilterDataTable条件
+
+記載内容:
+
+DataTable: ExcelData
+フィルター列:
+列0
+演算子:
+Equal
+値:
+対象
+MatchCase:
+True
+出力:
+FilteredDataTable
+CSV中間保存
+
+記載内容:
+
+Variables.ConvertDataTableToCSV
+区切り:
+SystemDefault
+列名:
+含めない (IncludeColumnNames=False)
+出力:
+CSVText
+File.WriteText
+中間ファイル:
+catalog/evidence/t04-filtered.csv
+UTF-8
+AppendNewLine=False
+上書き保存
+別Excelインスタンス
+
+記載内容:
+
+1つ目:
+ExcelInstance
+元xlsx読取り専用
+2つ目:
+ExcelInstance2
+中間CSVを編集可能で開く
+
+「ExcelInstance と ExcelInstance2 は別のExcelインスタンス」と明記。
+
+保存形式
+
+記載内容:
+
+Excel.SaveExcel.SaveAs
+DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook
+保存先:
+normal-chat-t04-output.xlsx
+
+つまり保存形式は Open XML Workbook（xlsx）。
+
+入力不変の確認
+
+記載内容:
+
+入力:
+catalog/fixtures/excel/t04-filter-input.xlsx
+入力SHA-256:
+1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0
+「入力ブックSHA-256不変」
+「入力は不変」
+2回実行成功を照合
+証拠:
+catalog/evidence/t04-positive-flow-run-6.json
+catalog/evidence/t04-positive-flow-run-7.json
+9行の貼付け用原文掲載有無
+
+掲載あり。
+
+文書中に
+
+「T04の貼付け用9アクション原文（PAD実測・2回実行）」
+
+として9行の原文が掲載されている。
+
+3. T09ローカルUI例
+
+根拠ファイル:
+
+PAD-Robin-00-Index.txt
+SHA-256: 5fa1eb897a4fb4f474c1d3ab956bc06d4dd054828f203259c2bbe92e3c81c23c
+PAD-Robin-06-Examples.txt
+SHA-256: ca1b0c8ff83fdc7a307b77aac0e8e9169e93600acab471fb8e5479f019cbb3c8
+捕捉済みUI要素
+
+記載内容:
+
+t09-input
+t09-submit
+t09-result
+
+いずれも
+
+PAD UI要素ピッカーから捕捉
+
+Id属性を実画面から取得
+
+推測ではない
+
+と記載。
+
+実測アクション順
+
+記載内容:
+
+WebAutomation.LaunchEdge
+WebAutomation.PopulateTextField
+WebAutomation.Click
+WAIT 500
+WebAutomation.GetDetailsOfElement
+WebAutomation.CloseWebBrowser
+
+取得対象は
+
+入力欄: t09-input
+ボタン: t09-submit
+結果取得: Own Text
+
+と記載。
+
+実行確認状況
+
+記載内容:
+
+貼付け
+保存
+再コピー一致
+
+は確認。
+
+一方で、
+
+WebAutomation実行は完了せず
+ブラウザー拡張経路で停止
+監視後に停止
+AttributeValue=T09-clicked 未観測
+実行成功扱いにしない
+
+と記載。
+
+未確認のセレクターやブラウザー引数
+
+PAD-Robin-05-UI-Web.txt に
+
+一般的なセレクターを生成しない
+推測したWebDriver引数を生成しない
+未確認の構文を補わない
+
+と記載。具体的な未確認セレクターやブラウザー引数の値は掲載されていない。
+
+4. 検証状態の分類と根拠
+確認済み（実行・結果照合あり）
+T04 Excel条件抽出→別xlsx
+根拠:
+PAD-Robin-04-Office-PDF.txt
+原文:
+catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin
+SHA-256:
+d45925fb49ae74d8518b5acc046aee1477774ad4749132801957df3d02408353
+状態:
+PADへ保存後2回実行
+出力照合
+入力SHA不変確認
+UTF-8テキスト書込み
+根拠:
+PAD-Robin-03-Files.txt
+原文:
+catalog/actions/file-write-text/utf8-overwrite.robin
+SHA-256:
+3f31e923d6466abcb14e5f7fa864d414256158a6b5431ad9e5f126323818bb86
+状態:
+別フロー貼付け
+保存
+再コピー
+実行確認
+採取のみ
+UI/Web表示名群
+根拠:
+PAD-Robin-05-UI-Web.txt
+状態:
+左パネル観測
+表示名確認
+実行確認なし
+貼付け・保存確認あり
+T09ローカルUI
+根拠:
+PAD-Robin-00-Index.txt
+PAD-Robin-06-Examples.txt
+原文:
+catalog/flows/ui-t09-local-roundtrip/roundtrip.robin
+SHA-256:
+93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd
+状態:
+貼付け
+保存
+再コピー一致
+実行成功なし
+実行済み
+
+索引の検証状態定義では:
+
+verified_roundtrip_and_run
+再貼付け
+保存
+実行
+期待結果の証拠あり
+
+と定義されている。
+
+T04やUTF-8テキスト書込みなどは本文記載上、この分類に該当する。
+
+未確認
+
+記載例:
+
+T09実行成功
+WebAutomation通し実行
+シート名指定引数
+Excel条件抽出の独立例
+Else
+エラー処理
+サブフロー呼出し
+UI/WebDriver推測構文
+
+など。
+
+外部依存
+T09ブラウザー実行
+
+記載内容:
+
+Web拡張経路で停止
+native CUA未構成
+ブラウザー拡張通信に依存
+
+とされている。
+
+UI/Web全般
+
+記載内容:
+
+ブラウザー拡張
+WebDriver
+UI要素
+
+など環境依存が大きいと明記。

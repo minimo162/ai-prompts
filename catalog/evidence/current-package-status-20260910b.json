@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-09-10T15:30:37+09:00",
+  "captured_at": "2026-09-10T16:12:51+09:00",
   "status": "partial",
   "branch": "codex/issue-5-acceptance-20260910b",
   "head": "08d251c",
@@ -39,16 +39,18 @@
   "p3_blocked_items": "catalog/coverage.json:p3_blocked_items (11 item-level external/runtime blockers)",
   "final_summary": "catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json",
   "completion_audit": "catalog/evidence/issue5-completion-audit-20260910.json",
+  "knowledge_precheck": "catalog/evidence/normal-chat-current-revision-knowledge-precheck-20260910.json",
   "static_checks": {
-    "Test-RobinRawContracts.ps1": "PASS: 4 assertions",
+    "Test-RobinRawContracts.ps1": "PASS: 6 assertions (including current T04)",
     "Test-CopilotRobinPackage.ps1": "PASS: instructions_utf16=3949; knowledge_files=7; observed_actions=86",
-    "Test-RobinCatalog.ps1": "PASS: 73 checks",
+    "Test-RobinCatalog.ps1": "PASS: 74 checks",
     "git diff --check": "PASS"
   },
   "current_package_acceptance": {
-    "m365_upload": "NOT_RUN: browser extension file chooser did not fire in the fresh tab; no current-package file contents were transmitted",
-    "knowledge_precheck": "NOT_RUN_CURRENT_PACKAGE",
-    "T01_to_T10": "NOT_RUN_CURRENT_PACKAGE",
+    "m365_upload": "PARTIAL: CDP preexisting input attached the current bundle and T04 fixture; the separate CUA file chooser attempt did not fire",
+    "knowledge_precheck": "PASS_REFERENCE_ONLY",
+    "T01_to_T10": "PARTIAL_CURRENT_PACKAGE: T04 pass; other cases not run",
+    "T04": "PASS_CURRENT_REVISION",
     "independent_T01_T04_T10": "NOT_RUN_CURRENT_PACKAGE",
     "negative_suite": "NOT_RUN_CURRENT_PACKAGE"
   },

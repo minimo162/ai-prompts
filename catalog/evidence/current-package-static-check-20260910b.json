@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-09-10T15:30:37+09:00",
+  "captured_at": "2026-09-10T16:12:51+09:00",
   "status": "pass_static_only",
   "branch": "codex/issue-5-acceptance-20260910b",
   "head_at_check": "08d251c",
   "checks": [
-    {"command": "pwsh -NoProfile -File tests/Test-RobinRawContracts.ps1", "result": "PASS", "details": "4 raw provenance assertions; no normalization"},
+    {"command": "pwsh -NoProfile -File tests/Test-RobinRawContracts.ps1", "result": "PASS", "details": "6 raw provenance assertions including current T04; no normalization"},
     {"command": "pwsh -NoProfile -File tests/Test-CopilotRobinPackage.ps1", "result": "PASS", "details": "instructions_utf16=3949; knowledge_files=7; observed_actions=86"},
-    {"command": "pwsh -NoProfile -File tests/Test-RobinCatalog.ps1", "result": "PASS", "details": "73 checks"},
+    {"command": "pwsh -NoProfile -File tests/Test-RobinCatalog.ps1", "result": "PASS", "details": "74 checks including current T04 acceptance flow contract"},
     {"command": "git diff --check", "result": "PASS", "details": "no whitespace errors"}
   ],
   "not_proven": [
-    "M365 Copilot generation with the current hashes",
-    "PAD paste/save/run for the current hashes",
+    "M365 Copilot generation for the remaining current-package cases and independent tests",
+    "PAD paste/save/run for remaining current-package cases; T04 is proven separately",
     "T09 WebAutomation completion",
     "GitHub CI (no checks are configured)"
   ]
