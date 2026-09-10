@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T15:30:37+09:00",
+  "status": "pass_static_only",
+  "branch": "codex/issue-5-acceptance-20260910b",
+  "head_at_check": "working-tree after raw-contract revision",
+  "checks": [
+    {"command": "pwsh -NoProfile -File tests/Test-RobinRawContracts.ps1", "result": "PASS", "details": "4 raw provenance assertions; no normalization"},
+    {"command": "pwsh -NoProfile -File tests/Test-CopilotRobinPackage.ps1", "result": "PASS", "details": "instructions_utf16=3949; knowledge_files=7; observed_actions=86"},
+    {"command": "pwsh -NoProfile -File tests/Test-RobinCatalog.ps1", "result": "PASS", "details": "73 checks"},
+    {"command": "git diff --check", "result": "PASS", "details": "no whitespace errors"}
+  ],
+  "not_proven": [
+    "M365 Copilot generation with the current hashes",
+    "PAD paste/save/run for the current hashes",
+    "T09 WebAutomation completion",
+    "GitHub CI (no checks are configured)"
+  ]
+}

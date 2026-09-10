@@ -42,7 +42,15 @@ PAD Robin 完成例・生成試験の参照
 - `catalog/evidence/t04-positive-flow-run-6.json` と `t04-positive-flow-run-7.json` で2回のPAD実行成功、`normal-chat-t04-output.xlsx`の3行3列と入力SHA不変を照合した。
 - CSVをExcelセルへ直接書いた初回失敗（`_x000D_`混入）は`catalog/evidence/normal-chat-t04-output-x000D-failure.xlsx`へ保存した。失敗を修正コードの成功へ付け替えず、中間CSV経由の正例と分ける。
 
-例5: T09ローカルUI捕捉・貼付け（実行未完了）
+例5: T10既存フロー修正の原文契約
+- 入力原文は`catalog/generated/office-three-apps/generated.robin`（SHA-256 `d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194`）。16行のうち依頼で変更できるのはExcel書込み値（2行目）とExcel保存先（4行目）の2か所だけである。
+- 変更しないWord保存行の正本は次のとおりで、パス区切りは2個のバックスラッシュ、`AiPromptsOfficeCatalog_20260907`のアンダースコア前にバックスラッシュはない。
+  `Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-word.docx'''`
+- 変更しないPowerPoint保存行も同じ原文保持条件である。
+  `PowerPoint.SavePowerPoint.SaveAs Instance: PowerPointInstance DocumentFormat: PowerPoint.PowerPointFormat.PPTX DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-powerpoint.pptx'''`
+- 現行の最終v8生成ではこの2行に余分なバックスラッシュと`_`が入り、PAD再コピーでは`_`だけが除かれた。根拠は`tests/Test-RobinRawContracts.ps1`と`catalog/evidence/normal-chat-final-pad-20260910/t10-recopy.txt`であり、PAD側の正規化は生成原文の逐語一致を証明しない。
+
+例6: T09ローカルUI捕捉・貼付け（実行未完了）
 - `catalog/fixtures/ui/t09-local-test.html` をローカルEdgeで開き、PAD UI要素ピッカーから `t09-input`、`t09-submit`、`t09-result` を捕捉した。セレクターは各要素のId属性を実画面から取得しており、推測ではない。
 - `catalog/flows/ui-t09-local-roundtrip/roundtrip.robin` は、Edge起動→`T09-input`入力→実行ボタンクリック→`WAIT 500`→結果段落の`Own Text`取得→ブラウザー終了の6アクション原文である。空フロー `RobinKnowledgeT09FilterPaste_20260910` へ貼付け・保存し、再コピーのアクション行6本一致を確認した。
 - PAD WebAutomationの元フロー・貼付けフロー実行はブラウザー拡張経路で完了せず、監視後に停止した。`AttributeValue=T09-clicked` は未観測であり、T09を実行成功と表示しない。詳細は `catalog/evidence/t09-capture-source-20260910.json`、`t09-final-paste-acceptance-20260910.json`、`t09-runtime-block-20260910.json`。

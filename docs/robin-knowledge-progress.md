@@ -207,3 +207,13 @@ T02のFilter DataTableは、PAD UIで列／インデックス=`2`・等価演算
 ## 次に行う1作業
 
 T04の先行PAD正例と最終版チャット生成を保存した。残作業はT04の正確な原文受入、T09 WebAutomation環境復旧、T10のパス保持と独立再試験、最終指示ハッシュでの独立T01/T04/T10、負例と公開ゲートである。native CUAの再開条件はTrusted RPC構成であり、現状はUIAフォールバック証拠を使用する。Agent Builder／Copilot Studioは開かない。
+
+## 現作業版の再開記録（2026-09-10）
+
+PR #21後のmain `69fe344` から作業ブランチ `codex/issue-5-acceptance-20260910b` を作成し、未追跡の保護資料 `docs/agent-approach-comparison-2026-09-07.md` はSHA-256 `e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699` のまま保持した。現物確認ではPAD 2.71.115.26224、Edge 152.0.4191.66、Office 16.0.20326.20132、日本語UI、既存ローカルfixture `http://127.0.0.1:8765/t09-local-test.html` を確認した。Power Fxは既存の2026-09-09採取条件（OFF）を継承記録として扱い、今回のUI再変更は行っていない。
+
+T04先行成功・最終失敗、T10入力原文・生成・PAD再コピーの差分を `catalog/evidence/normal-chat-raw-provenance-20260910.json` に固定した。T04の6個→7個の引用符変化とT10の変更範囲外パス変化はいずれもCopilot生成時に発生し、PAD再コピーは別の下流正規化である。検出専用の `tests/Test-RobinRawContracts.ps1` は4 assertions PASSで、コードの自動修復は行わない。
+
+原文保持規則を指示文とT04/T10技術資料へ最小追加し、`tools/Build-KnowledgeBundle.ps1` で7原本を再結合した。現作業版は指示SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA-256 `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd`、指示UTF-16 3,949である。`Test-CopilotRobinPackage.ps1` 86 observed actions、`Test-RobinCatalog.ps1` 73 checks、`git diff --check` はPASSした。
+
+この新しい指示・bundleでのM365再添付は、ブラウザー拡張経路のfile chooserが発火せず未実行である（`catalog/evidence/m365-current-package-upload-block-20260910b.json`）。したがって旧版のT01〜T03/T05〜T08 PASSや先行T04/T10成功を現作業版へ継承せず、現作業版T01〜T10、T01/T04/T10独立再試験、負例は未完了のまま保持する。必要な人の操作は、ログイン済み通常M365 Copilotへ現作業版bundleと合成fixtureを添付できるCDP/file-input経路を用意すること、またはPADのTrusted RPCを構成してT04/T09/T10の無修正貼付け・実行を再観測することである。次の1作業は、現作業版を新規チャットへ添付してT04生成原文の引用符が6個のままか確認すること。

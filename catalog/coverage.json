@@ -9,6 +9,12 @@
     "power_fx": false,
     "captured_date": "2026-09-07"
   },
+  "current_package": {
+    "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "knowledge_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+    "status": "partial_not_run_after_raw_contract_revision",
+    "evidence": "evidence/current-package-status-20260910b.json"
+  },
   "left_panel_scope": {
     "complete": false,
     "current_tree_inventory_complete": true,

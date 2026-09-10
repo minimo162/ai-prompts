@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T06:19:02Z",
+  "status": "diagnostic_complete",
+  "purpose": "Read-only provenance comparison before revising the instruction and knowledge package; no normalization or code repair was applied.",
+  "historical_package": {
+    "instruction_sha256": "e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1",
+    "knowledge_bundle_sha256": "431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3",
+    "note": "The compared Copilot generations were produced from this earlier package. The new package is recorded separately and has not yet been sent to a new chat."
+  },
+  "files": {
+    "t04_measured_source": {
+      "path": "catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin",
+      "sha256": "d45925fb49ae74d8518b5acc046aee1477774ad4749132801957df3d02408353",
+      "line_count": 9,
+      "filter_parameters_empty_literal_single_quotes": 6
+    },
+    "t04_early_success": {
+      "path": "catalog/generated/normal-chat-t04-20260910-current-v4/robin.txt",
+      "sha256": "0b2a1e3455b112dc1528090429c57530fcfeafe189be3c83d4840e183bf4ccb1",
+      "line_count": 9,
+      "filter_parameters_empty_literal_single_quotes": 6
+    },
+    "t04_final_failed_generation": {
+      "path": "catalog/generated/normal-chat-t04-20260910-final-v5/robin.txt",
+      "sha256": "dcddd20fda66f7b1faa2ff66cdbc4d3a0fe6fb1841d9bfb8eb586e4e7d70d000",
+      "line_count": 9,
+      "filter_parameters_empty_literal_single_quotes": 7
+    },
+    "t10_input_source": {
+      "path": "catalog/generated/office-three-apps/generated.robin",
+      "sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+      "line_count": 16
+    },
+    "t10_generated": {
+      "path": "catalog/generated/normal-chat-t10-20260910-final-v8/robin.txt",
+      "sha256": "855ec93cb55c92d4c0a98cdd5d33729407c2ca553ac32d4475facf84082b1c20",
+      "line_count": 16
+    },
+    "t10_pad_recopy": {
+      "path": "catalog/evidence/normal-chat-final-pad-20260910/t10-recopy.txt",
+      "sha256": "d86dc2f7f3c321f3b750a368dab30493774f2e39f193320a47e6879ee68f8bdf",
+      "line_count": 16
+    }
+  },
+  "comparisons": {
+    "t04_source_to_early": {
+      "differing_lines": [5, 6, 7],
+      "unchanged_filter_parameters_line": true,
+      "interpretation": "The early successful generation changed only the requested output paths; the measured FilterParameters row remained exact."
+    },
+    "t04_source_to_final": {
+      "differing_lines": [3, 7],
+      "filter_parameters_quote_change": "6 -> 7",
+      "interpretation": "The quote mutation occurred in Copilot generation. PAD paste was not confirmed, so no downstream mutation is attributed."
+    },
+    "t10_source_to_generated": {
+      "differing_lines": [2, 4, 9, 15],
+      "allowed_change_lines": [2, 4],
+      "out_of_scope_mutation_lines": [9, 15],
+      "interpretation": "The generated response added backslashes in Word/PowerPoint paths and escaped the underscore, outside the two requested Excel changes."
+    },
+    "t10_generated_to_pad_recopy": {
+      "differing_lines": [9, 15],
+      "pad_change": "The backslash before the underscore was removed during PAD recopy; the recopy is not byte-identical to either source.",
+      "interpretation": "This is downstream PAD rendering/normalization and does not prove generation-time raw preservation."
+    }
+  },
+  "verification": {
+    "command": "pwsh -NoProfile -File tests/Test-RobinRawContracts.ps1",
+    "result": "PASS",
+    "assertions": [
+      "t04_early_filter_line_matches_source",
+      "t04_final_filter_line_differs_from_source",
+      "t10_expected_changed_lines",
+      "t10_recopy_only_path_lines_differ"
+    ]
+  }
+}

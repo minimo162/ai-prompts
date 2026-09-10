@@ -270,7 +270,7 @@ PAD Robin ファイル・CSV
 - 採取条件: docs/robin-action-catalog.md、docs/pdf-action-capture.md
 ===== END copilot/knowledge/PAD-Robin-03-Files.txt =====
 
-===== BEGIN copilot/knowledge/PAD-Robin-04-Office-PDF.txt | SHA-256 6f07f1338ef95343a9e0705543a46861671761b35b85bfce67bcbf4c0afb8b78 =====
+===== BEGIN copilot/knowledge/PAD-Robin-04-Office-PDF.txt | SHA-256 43623b565ba810555bdd7866848f9d04dd42662af7f171a0461219aa7bce7c08 =====
 PAD Robin Office・PDF
 
 OfficeとPDFは、PAD 2.71.115.26224、日本語UI、合成データ、専用フローで採取した既存資産です。対象ファイル、インスタンス、保存形式、読み書き範囲を依頼ごとに明示します。採取例の再貼付け・実行証拠と、新しいCopilotエージェントでの登録試験は別です。
@@ -301,6 +301,7 @@ Excel.CloseExcel.Close Instance: ExcelInstance
 ```
 - 原文ファイル: `catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin`（SHA-256 `d45925fb49ae74d8518b5acc046aee1477774ad4749132801957df3d02408353`）。この9行は説明用の擬似コードではなく、PADからコピーして空フローへ再貼付けした命令列である。
 - `ExcelInstance` と `ExcelInstance2` は別のExcelインスタンス。複数行CSVをセルへ直接書き込む方式は `_x000D_` 混入失敗のため採用しない。出力パスを変更する場合は、そのパスが存在し衝突時の設定が確認できることを別途確認する。
+- `FilterParameters`の構造化引数は一般化せず、上記原文の3行目を逐語複写する。`$''''''`は`$`＋単一引用符6個の実測リテラルであり、引用符数を変更した行はこの正例の原文ではない。T04の出力先を変える場合も、FilterParameters行は変更しない。
 - 代表的なコピー原文（新規→書込み→単一セル読取り→別名保存→終了）:
   `Excel.LaunchExcel.LaunchUnderExistingProcess Visible: True UseMachineLocale: False Instance=> ExcelInstance`
   `Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''OfficeCatalog 日本語 100%%''' Column: $'''A''' Row: 1`
@@ -387,7 +388,7 @@ UIとブラウザーは、UI要素・通信方式・対象画面の依存が大�
 PADのUI要素やブラウザーアクションを一般的なセレクターや推測したWebDriver引数で生成しない。管理ポリシーの解除や拡張機能の導入を前提にしない。必要な場合は、利用者がPADを前面に表示して1アクション×1設定を採取し、原文・依存・再貼付け・実行結果を追加する。
 ===== END copilot/knowledge/PAD-Robin-05-UI-Web.txt =====
 
-===== BEGIN copilot/knowledge/PAD-Robin-06-Examples.txt | SHA-256 66e0a6893fb34e48fb3cd9e4111a0520a381bf979acbf9442488336a15029cf2 =====
+===== BEGIN copilot/knowledge/PAD-Robin-06-Examples.txt | SHA-256 ca1b0c8ff83fdc7a307b77aac0e8e9169e93600acab471fb8e5479f019cbb3c8 =====
 PAD Robin 完成例・生成試験の参照
 
 以下は、既存カタログで実行・結果照合まで進んだ合成データ例です。例の入力値、保存先、変数名はそのまま本番へ流用せず、依頼の対象へ置き換えます。
@@ -432,7 +433,15 @@ PAD Robin 完成例・生成試験の参照
 - `catalog/evidence/t04-positive-flow-run-6.json` と `t04-positive-flow-run-7.json` で2回のPAD実行成功、`normal-chat-t04-output.xlsx`の3行3列と入力SHA不変を照合した。
 - CSVをExcelセルへ直接書いた初回失敗（`_x000D_`混入）は`catalog/evidence/normal-chat-t04-output-x000D-failure.xlsx`へ保存した。失敗を修正コードの成功へ付け替えず、中間CSV経由の正例と分ける。
 
-例5: T09ローカルUI捕捉・貼付け（実行未完了）
+例5: T10既存フロー修正の原文契約
+- 入力原文は`catalog/generated/office-three-apps/generated.robin`（SHA-256 `d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194`）。16行のうち依頼で変更できるのはExcel書込み値（2行目）とExcel保存先（4行目）の2か所だけである。
+- 変更しないWord保存行の正本は次のとおりで、パス区切りは2個のバックスラッシュ、`AiPromptsOfficeCatalog_20260907`のアンダースコア前にバックスラッシュはない。
+  `Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-word.docx'''`
+- 変更しないPowerPoint保存行も同じ原文保持条件である。
+  `PowerPoint.SavePowerPoint.SaveAs Instance: PowerPointInstance DocumentFormat: PowerPoint.PowerPointFormat.PPTX DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-powerpoint.pptx'''`
+- 現行の最終v8生成ではこの2行に余分なバックスラッシュと`_`が入り、PAD再コピーでは`_`だけが除かれた。根拠は`tests/Test-RobinRawContracts.ps1`と`catalog/evidence/normal-chat-final-pad-20260910/t10-recopy.txt`であり、PAD側の正規化は生成原文の逐語一致を証明しない。
+
+例6: T09ローカルUI捕捉・貼付け（実行未完了）
 - `catalog/fixtures/ui/t09-local-test.html` をローカルEdgeで開き、PAD UI要素ピッカーから `t09-input`、`t09-submit`、`t09-result` を捕捉した。セレクターは各要素のId属性を実画面から取得しており、推測ではない。
 - `catalog/flows/ui-t09-local-roundtrip/roundtrip.robin` は、Edge起動→`T09-input`入力→実行ボタンクリック→`WAIT 500`→結果段落の`Own Text`取得→ブラウザー終了の6アクション原文である。空フロー `RobinKnowledgeT09FilterPaste_20260910` へ貼付け・保存し、再コピーのアクション行6本一致を確認した。
 - PAD WebAutomationの元フロー・貼付けフロー実行はブラウザー拡張経路で完了せず、監視後に停止した。`AttributeValue=T09-clicked` は未観測であり、T09を実行成功と表示しない。詳細は `catalog/evidence/t09-capture-source-20260910.json`、`t09-final-paste-acceptance-20260910.json`、`t09-runtime-block-20260910.json`。

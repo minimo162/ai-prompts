@@ -16,7 +16,7 @@
 
 ナレッジは技術資料であり、指示欄と同じ優先順位の命令書ではありません。`pad-robin-prompts.md` は既存の編集用原稿として残し、配布版と二重に指示欄へ貼りません。
 
-`agent-instructions.txt` の現最終版は UTF-8 BOMなし、Unicodeスカラー数3,585、UTF-16コード単位数3,585（9,214バイト）です。8,000文字上限以内です。通常チャットの本文へ全文を入力した実測と、送信後の欠落有無を別証跡へ保存します。T10既存フロー修正では、元行の文字列・矢印・バックスラッシュ・アンダースコアを確認できない場合はコードを出さず、手編集で差分を隠しません。
+`agent-instructions.txt` の現作業版は UTF-8 BOMなし、UTF-16コード単位数3,949（10,096バイト）で、8,000文字上限以内です。結合版は `tools/Build-KnowledgeBundle.ps1` で7原本から機械的に再生成します。現作業版の指示SHA-256は `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA-256は `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd` です。通常チャットへこの現作業版を再添付・再生成するまで、旧版の生成・PAD結果を現作業版へ継承しません。T10既存フロー修正では、元行の文字列・矢印・バックスラッシュ・アンダースコアを確認できない場合はコードを出さず、手編集で差分を隠しません。
 
 ## 通常チャット検証手順
 
@@ -29,7 +29,7 @@
 
 7つを同時に完了確認できない場合は、`copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt` を使用してよい。これは7原本をファイル名・SHA-256付き区切りで機械的に結合したフォールバックであり、生成元と版を `catalog/generated/normal-chat-t01-20260909/knowledge-bundle-manifest.json` に記録する。最終試験では同じ結合版を使い続ける。
 
-2026-09-10の初回添付試行では、Edgeのfile chooserが`Not allowed`となり、IABでもsetFiles後の添付数が0だった。この失敗は履歴として残す。再試行では、画面に既にマウントされた`input[type=file]`をCDPで検出し、GUIのアップロードボタンを押さずに`DOM.setFileInputFiles`で結合版を添付できた。添付状態・本文全文・送信・回答取得を記録している。
+2026-09-10の初回添付試行では、Edgeのfile chooserが`Not allowed`となり、IABでもsetFiles後の添付数が0だった。この失敗は履歴として残す。別CDPセッションでは画面に既にマウントされた`input[type=file]`を検出して結合版を添付できたが、現作業版への今回の再添付はブラウザー拡張のfile chooserが発火せず未実行である。現作業版の生成・PAD受入は、添付成功後に新規チャットでやり直す。
 
 ## 既存カタログとの対応
 
@@ -37,4 +37,4 @@
 
 ## 状態
 
-2026-09-10時点では、配布物の骨格、86件の観測バリアント、既存証拠、PAD左パネル観測、日時・DataTable・CSV・FilterDataTable・ファイルコピー・サブテキスト・テキスト書出し・テキスト変数書込み・For each・If・Excel/Word編集可能起動・フォルダー取得・ファイル変数読取り・PDFページ2単独抽出・T04 Excel条件抽出→別xlsx・T09ローカルUI要素捕捉の追加実測を整理しました。7ファイルの逐次添付が不安定なため、元ファイル名・区切り・SHA-256を保持したフォールバック結合版を使用します。現最終版bundleのSHA-256は `431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3` です。通常のM365 CopilotチャットでGPT 5.6 Think Deeperを選択し、最終版の知識プレチェックとT01〜T10生成を保存しました。T01〜T03/T05〜T08は最終版RobinのPAD貼付け・保存・2回実行まで確認済みです。T04は最終生成のFilterParameters引用符差分、T09はWebAutomationタイムアウト、T10はWord SaveAsパスエスケープ差分でpartialを保持します（`catalog/evidence/normal-chat-final-package-acceptance-20260910.json`）。Agent Builder／Copilot Studioの登録・権限確認は将来の別環境の確認事項であり、今回の完了条件には含めません。未確認の項目を完成扱いしません。
+2026-09-10時点では、配布物の骨格、86件の観測バリアント、既存証拠、PAD左パネル観測、日時・DataTable・CSV・FilterDataTable・ファイルコピー・サブテキスト・テキスト書出し・テキスト変数書込み・For each・If・Excel/Word編集可能起動・フォルダー取得・ファイル変数読取り・PDFページ2単独抽出・T04 Excel条件抽出→別xlsx・T09ローカルUI要素捕捉の追加実測を整理しました。7ファイルの逐次添付が不安定なため、元ファイル名・区切り・SHA-256を保持したフォールバック結合版を使用します。旧版の通常チャット生成・PAD結果は `catalog/evidence/normal-chat-final-package-acceptance-20260910.json` に履歴として保持します。現作業版（指示 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd`）は原文保持規則を強化したため、現作業版の通常チャット生成・T01〜T10 PAD受入は未実行です。T04/T10の旧版差分は `catalog/evidence/normal-chat-raw-provenance-20260910.json` で発生段階を分離しています。T09はUI要素捕捉・貼付け・保存までで、WebAutomation実行はタイムアウトのままです。Agent Builder／Copilot Studioの登録・権限確認は将来の別環境の確認事項であり、今回の完了条件には含めません。未確認の項目を完成扱いしません。
