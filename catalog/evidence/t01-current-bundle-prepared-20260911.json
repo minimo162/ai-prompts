@@ -17,8 +17,9 @@
   },
   "expected_output": {
     "path": "catalog/evidence/normal-chat-t01-output-current-bundle.txt",
-    "sha256": "06f1dc19424152bc911acb737b0bcf06763696881cdeadfe8b9b8881b0dbcfa4",
-    "bytes": 87,
+    "sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2",
+    "bytes": 90,
+    "utf8_bom": true,
     "line_endings": "CRLF",
     "replacement": "対象語 -> 置換後",
     "additional_newline": false

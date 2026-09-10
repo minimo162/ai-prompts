@@ -27,10 +27,16 @@ $parts = $record.expected_output.replacement -split ' -> ', 2
 Check ($parts.Count -eq 2) 'replacement contract has two terms'
 $fixtureText = [IO.File]::ReadAllText($fixturePath, [Text.Encoding]::UTF8)
 $expectedText = $fixtureText.Replace($parts[0], $parts[1])
-$expectedBytes = [Text.Encoding]::UTF8.GetBytes($expectedText)
+$contentBytes = [Text.Encoding]::UTF8.GetBytes($expectedText)
+$expectedBytes = New-Object byte[] ($contentBytes.Length + 3)
+$expectedBytes[0] = 239
+$expectedBytes[1] = 187
+$expectedBytes[2] = 191
+[Array]::Copy($contentBytes, 0, $expectedBytes, 3, $contentBytes.Length)
 $sha = [Security.Cryptography.SHA256]::Create()
 $expectedHash = (($sha.ComputeHash($expectedBytes) | ForEach-Object { $_.ToString('x2') }) -join '')
 Check ($expectedHash -ceq $record.expected_output.sha256) 'fixed expected output hash matches fixture replacement'
 Check ($expectedBytes.Length -eq $record.expected_output.bytes) 'fixed expected output byte count matches record'
+Check ($record.expected_output.utf8_bom -eq $true) 'UTF-8 output BOM contract matches measured PAD behavior'
 Check ($record.expected_output.additional_newline -eq $false) 'no additional newline contract'
 Write-Output ('PASS: ' + $checks + ' current-bundle T01 preparation contract checks; no Copilot/PAD actions.')
