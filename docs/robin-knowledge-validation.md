@@ -14,7 +14,7 @@
 
 ## 静的・ファイル検証
 
-2026-09-11に `tests/Run-NonLiveTests.ps1 -Suite All` を Windows PowerShell 5.1 で実行し、34/34テストがPASS、候補3ファイルのハッシュ不変を確認した。証跡は `catalog/evidence/nonlive-all-suite-20260911.json`。これはP5のローカル検証であり、ライブM365 Copilot／PADランタイム／他PC受入／リリース承認は `NOT_RUN` のままである。
+2026-09-11に `tests/Run-NonLiveTests.ps1 -Suite All` を Windows PowerShell 5.1 で実行し、35/35テストがPASS、候補3ファイルのハッシュ不変を確認した。証跡は `catalog/evidence/nonlive-all-suite-20260911b.json`。これはP5のローカル検証であり、ライブM365 Copilot／PADランタイム／他PC受入／リリース承認は `NOT_RUN` のままである。
 
 - 履歴版の `copilot/agent-instructions.txt` はUTF-8 BOMなし、9,214バイト、Unicodeスカラー数3,585、47行。SHA-256は `e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1`。現作業版はUTF-8 BOMなし、10,096バイト、UTF-16 3,949、SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`。
 - 現作業版のP3追補統合結合bundle SHA-256は `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644`。旧bundle `4282...`／`431c...` の生成・PAD結果は履歴であり、新bundleの受入には継承しない。
