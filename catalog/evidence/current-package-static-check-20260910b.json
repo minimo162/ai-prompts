@@ -7,7 +7,7 @@
   "checks": [
     {"command": "pwsh -NoProfile -File tests/Test-RobinRawContracts.ps1", "result": "PASS", "details": "6 raw provenance assertions including current T04; no normalization"},
     {"command": "pwsh -NoProfile -File tests/Test-CopilotRobinPackage.ps1", "result": "PASS", "details": "instructions_utf16=3949; knowledge_files=7; observed_actions=86"},
-    {"command": "pwsh -NoProfile -File tests/Test-RobinCatalog.ps1", "result": "PASS", "details": "74 checks including current T04 acceptance flow contract"},
+    {"command": "pwsh -NoProfile -File tests/Test-RobinCatalog.ps1", "result": "PASS", "details": "77 checks including current T04/T10 and independent acceptance flow contracts"},
     {"command": "git diff --check", "result": "PASS", "details": "no whitespace errors"}
   ],
   "not_proven": [

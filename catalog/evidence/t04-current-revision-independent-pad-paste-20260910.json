@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T07:44:47.6568932Z",
+  "flow_name": "RobinKnowledgeT04CurrentRevisionIndependent_20260910",
+  "process_id": 31656,
+  "source_robin": "catalog/generated/normal-chat-current-revision-t04-independent-20260910/robin.txt",
+  "source_sha256": "0b2a1e3455b112dc1528090429c57530fcfeafe189be3c83d4840e183bf4ccb1",
+  "source_bytes": 1613,
+  "empty_before_paste": true,
+  "paste_confirmed": true,
+  "visible_action_count": 5,
+  "designer_action_count": 9,
+  "designer_status": "9 アクション",
+  "virtualized_list_false_negative": true,
+  "saved_confirmed": false,
+  "execution_requested": false
+}

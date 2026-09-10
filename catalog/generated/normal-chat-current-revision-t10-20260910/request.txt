@@ -1,0 +1,4 @@
+--- T10 現行版再生成（添付原文の変更範囲外を逐語保持） ---
+添付した技術資料内の `catalog/generated/office-three-apps/generated.robin` が、動作確認済み既存PADフローの入力原文です。16行の構造を保持し、Excelの `Excel.WriteToExcel.WriteCell` の `CopilotOffice 246` だけを `T10-Changed` に変更し、Excelの `Excel.SaveExcel.SaveAs` の保存先ファイル名だけを `C:\Users\yuuki\ai-prompts\catalog\evidence\copilot-excel-t10-current-bundle.xlsx` に変更してください。WordとPowerPointの本文、入力・変数名・アクション順・保存形式・終了処理・その他のパスは変更しません。
+
+貼り付け用コードブロックは、添付原文の変更しない行を文字・記号・空白・改行まで逐語複写してください。パスのバックスラッシュは添付原文と同じ2本を保持し、4本へ増やさないでください。アンダースコアの前にMarkdown用のバックスラッシュを追加せず、`=>`を`=>`や`=\>`へ変えないでください。変更範囲外を逐語一致できない場合はコードブロックを出さず、差分と未確認理由だけを説明してください。コードブロック内へPlain Text、行番号、説明、NBSP、疑似コード、省略記号を入れないでください。

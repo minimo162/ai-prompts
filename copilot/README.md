@@ -31,7 +31,7 @@
 
 7つを同時に完了確認できない場合は、`copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt` を使用してよい。これは7原本をファイル名・SHA-256付き区切りで機械的に結合したフォールバックであり、生成元と版を `catalog/generated/normal-chat-t01-20260909/knowledge-bundle-manifest.json` に記録する。最終試験では同じ結合版を使い続ける。
 
-2026-09-10の初回添付試行では、Edgeのfile chooserが`Not allowed`となり、IABでもsetFiles後の添付数が0だった。この失敗は履歴として残す。今回の現作業版は、別CDPセッションで画面に既にマウントされた`input[type=file]`からbundleと合成Excelを添付し、T04生成・PAD受入まで完了した。ブラウザー拡張CUAの失敗は `catalog/evidence/m365-current-package-upload-block-20260910b.json` に分離し、T01〜T03/T05〜T10の現作業版受入は未実行である。
+2026-09-10の初回添付試行では、Edgeのfile chooserが`Not allowed`となり、IABでもsetFiles後の添付数が0だった。この失敗は履歴として残す。今回の現作業版は、別CDPセッションで画面に既にマウントされた`input[type=file]`からbundleと合成Excelを添付し、知識precheck、T04、T10一次受入、T10独立再試験まで完了した。ブラウザー拡張CUAの失敗は `catalog/evidence/m365-current-package-upload-block-20260910b.json` に分離し、T01〜T03/T05〜T09の現作業版受入は未実行である。
 
 ## 既存カタログとの対応
 
@@ -39,4 +39,4 @@
 
 ## 状態
 
-2026-09-10時点では、配布物の骨格、86件の観測バリアント、既存証拠、PAD左パネル観測、日時・DataTable・CSV・FilterDataTable・ファイルコピー・サブテキスト・テキスト書出し・テキスト変数書込み・For each・If・Excel/Word編集可能起動・フォルダー取得・ファイル変数読取り・PDFページ2単独抽出・T04 Excel条件抽出→別xlsx・T09ローカルUI要素捕捉の追加実測を整理しました。7ファイルの逐次添付が不安定なため、元ファイル名・区切り・SHA-256を保持したフォールバック結合版を使用します。旧版の通常チャット生成・PAD結果は `catalog/evidence/normal-chat-final-package-acceptance-20260910.json` に履歴として保持します。現作業版（指示 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd`）では知識precheckとT04の新規通常チャット生成・無修正PAD貼付け・保存・2回実行を確認済みです。T01〜T03/T05〜T10の現作業版受入は未実行です。T04/T10の旧版差分は `catalog/evidence/normal-chat-raw-provenance-20260910.json` で発生段階を分離しています。T09はUI要素捕捉・貼付け・保存までで、WebAutomation実行はタイムアウトのままです。Agent Builder／Copilot Studioの登録・権限確認は将来の別環境の確認事項であり、今回の完了条件には含めません。未確認の項目を完成扱いしません。
+2026-09-10時点では、配布物の骨格、86件の観測バリアント、既存証拠、PAD左パネル観測、日時・DataTable・CSV・FilterDataTable・ファイルコピー・サブテキスト・テキスト書出し・テキスト変数書込み・For each・If・Excel/Word編集可能起動・フォルダー取得・ファイル変数読取り・PDFページ2単独抽出・T04 Excel条件抽出→別xlsx・T09ローカルUI要素捕捉の追加実測を整理しました。7ファイルの逐次添付が不安定なため、元ファイル名・区切り・SHA-256を保持したフォールバック結合版を使用します。旧版の通常チャット生成・PAD結果は `catalog/evidence/normal-chat-final-package-acceptance-20260910.json` に履歴として保持します。現作業版（指示 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd`）では知識precheck、T04、T10一次受入の通常チャット生成・無修正PAD貼付け・保存・実行を確認済みです。T01〜T03/T05〜T09の現作業版受入は未実行です。T04/T10の旧版差分は `catalog/evidence/normal-chat-raw-provenance-20260910.json` で発生段階を分離しています。T09はUI要素捕捉・貼付け・保存までで、WebAutomation実行はタイムアウトのままです。Agent Builder／Copilot Studioの登録・権限確認は将来の別環境の確認事項であり、今回の完了条件には含めません。未確認の項目を完成扱いしません。

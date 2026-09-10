@@ -1,0 +1,8 @@
+--- T10 独立再試験 v2（逐語一致canary） ---
+添付資料内の `catalog/generated/office-three-apps/generated.robin` を原文として、Excelの値1か所とExcel保存先ファイル名1か所だけを変更してください。変更後の16行を返す前に、変更しない14行が原文と文字単位で一致しているか内部で確認してください。
+
+重要: `=>`、バックスラッシュ、アンダースコア、引用符、空白、改行をMarkdown用に変換しないでください。特にWord.SaveAs行とPowerPoint.SaveAs行は原文を逐語複写します。原文と1文字でも違う場合はRobinコードブロックを返さず、「逐語一致を保証できないため未出力」とだけ説明してください。成功時もコードブロック内はRobin命令16行だけにし、Plain Text、行番号、説明、NBSP、疑似コード、省略記号を入れないでください。
+
+許可変更:
+- 2行目の `CopilotOffice 246` → `T10-Changed`
+- 4行目のExcel保存先ファイル名 → `C:\Users\yuuki\ai-prompts\catalog\evidence\copilot-excel-t10-current-bundle.xlsx`

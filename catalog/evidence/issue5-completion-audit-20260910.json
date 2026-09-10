@@ -15,7 +15,7 @@
     {
       "phase": "P1",
       "status": "PASS_DIAGNOSIS_AND_MINIMAL_REVISION",
-      "evidence": ["normal-chat-raw-provenance-20260910.json", "t04-current-revision-acceptance-20260910.json", "Test-RobinRawContracts.ps1: 6 assertions PASS", "instruction and T04/T10 knowledge revisions", "bundle rebuilt from seven sources"],
+      "evidence": ["normal-chat-raw-provenance-20260910.json", "t04-current-revision-acceptance-20260910.json", "t10-current-revision-acceptance-20260910.json", "Test-RobinRawContracts.ps1: 6 assertions PASS", "instruction and T04/T10 knowledge revisions", "bundle rebuilt from seven sources"],
     "gap": "T04 now has a fresh current-package response and two PAD runs; T10 and the remaining cases still need fresh generation."
     },
     {
@@ -33,14 +33,14 @@
     {
       "phase": "P4",
       "status": "PARTIAL_CURRENT_PACKAGE",
-      "evidence": ["normal-chat-final-acceptance-summary-20260910b.json", "normal-chat-current-revision-knowledge-precheck-20260910.json", "t04-current-revision-acceptance-20260910.json", "t04-current-revision-pad-paste-20260910.json", "current manifest and hashes", "old 431c/e467 batch explicitly marked historical"],
-      "gap": "T04 current revision and separate knowledge precheck are accepted; T01-T03/T05-T10, independent T01/T04/T10, and negative suite remain unrun."
+      "evidence": ["normal-chat-final-acceptance-summary-20260910b.json", "normal-chat-current-revision-knowledge-precheck-20260910.json", "t04-current-revision-acceptance-20260910.json", "t04-current-revision-pad-paste-20260910.json", "t10-current-revision-acceptance-20260910.json", "t10-current-revision-independent-acceptance-20260910.json", "current manifest and hashes", "old 431c/e467 batch explicitly marked historical"],
+      "gap": "T04/T10 current primary revisions, T04/T10 independent retests, and separate knowledge precheck are accepted; T01-T03/T05-T09, independent T01, and negative suite remain unrun."
     },
     {
       "phase": "P5",
       "status": "PASS_STATIC_PARTIAL_EXTERNAL",
       "evidence": ["README/pad-robin-prompts/copilot README/index/coverage/progress/validation aligned", "current-package-static-check-20260910b.json", "Issue checkpoint comments"],
-      "gap": "T04 current-package runtime evidence exists; remaining current-package cases are not run and CI checks are not configured. Issue remains OPEN/partial."
+      "gap": "T04/T10 current-package runtime evidence exists; remaining current-package cases and independent tests are not run, and CI checks are not configured. Issue remains OPEN/partial."
     }
   ],
   "completion_blockers": [

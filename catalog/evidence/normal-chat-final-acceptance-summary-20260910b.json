@@ -18,18 +18,22 @@
     "T07": "NOT_RUN_CURRENT_PACKAGE",
     "T08": "NOT_RUN_CURRENT_PACKAGE",
     "T09": "BLOCKED_RUNTIME_DEPENDENCY",
-    "T10": "NOT_RUN_CURRENT_PACKAGE"
+    "T10": "PASS_CURRENT_REVISION_PRIMARY"
   },
   "independent": {
     "T01": "NOT_RUN_CURRENT_PACKAGE",
-    "T04": "NOT_RUN_CURRENT_PACKAGE",
-    "T10": "NOT_RUN_CURRENT_PACKAGE"
+    "T04": "PASS_CURRENT_REVISION_INDEPENDENT",
+    "T10": "PASS_CURRENT_REVISION_INDEPENDENT"
   },
   "negative_suite": "NOT_RUN_CURRENT_PACKAGE",
   "knowledge_precheck": "PASS_REFERENCE_ONLY",
   "evidence": {
     "knowledge_precheck": "catalog/evidence/normal-chat-current-revision-knowledge-precheck-20260910.json",
     "T04_current_revision": "catalog/evidence/t04-current-revision-acceptance-20260910.json",
+    "T10_current_revision": "catalog/evidence/t10-current-revision-acceptance-20260910.json",
+    "T10_current_revision_independent": "catalog/evidence/t10-current-revision-independent-acceptance-20260910.json",
+    "T04_current_revision_independent": "catalog/evidence/t04-current-revision-independent-acceptance-20260910.json",
+    "T10_batch_attachment_failure": "catalog/evidence/normal-chat-current-revision-t10-batch-attachment-failure-20260910.json",
     "completion_audit": "catalog/evidence/issue5-completion-audit-20260910.json",
     "raw_provenance": "catalog/evidence/normal-chat-raw-provenance-20260910.json",
     "upload_block": "catalog/evidence/m365-current-package-upload-block-20260910b.json",
@@ -37,5 +41,5 @@
     "p3_blocked_items": "catalog/coverage.json:p3_blocked_items",
     "static_checks": "catalog/evidence/current-package-static-check-20260910b.json"
   },
-  "next_operation": "Use the same validated CDP attachment path for the current package knowledge precheck and T10, then run the remaining current-package cases and independent tests."
+  "next_operation": "Use the same validated CDP attachment path for remaining current-package cases, then complete independent T01/T04 and the negative suite."
 }

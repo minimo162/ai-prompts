@@ -31,10 +31,14 @@
 
 現作業版bundleのみを添付した知識precheckは `catalog/evidence/normal-chat-current-revision-knowledge-precheck-20260910.json` に保存し、ナレッジ固有の設定・型・依存を回答原文と照合しました。これは受入ケースの代用ではありません。
 
+現作業版T10一次受入は `catalog/evidence/t10-current-revision-acceptance-20260910.json`、別チャット／別PADフローの独立再試験は `catalog/evidence/t10-current-revision-independent-acceptance-20260910.json` に保存しています。T01独立再試験は未完了です。
+
+現作業版T10の生成・無修正PAD貼付け・保存・実行・Office成果物照合は `catalog/evidence/t10-current-revision-acceptance-20260910.json` に保存しています。独立再試験も別チャット／別PADフローでPASSしています。
+
 現作業版T04の生成・貼付け・保存・2回実行・成果物照合は `catalog/evidence/t04-current-revision-acceptance-20260910.json` と `catalog/evidence/t04-current-revision-pad-paste-20260910.json` に記録しています。貼付けヘルパーの可視6件は仮想化による偽陰性であり、Designerの「9 アクション」表示を確認しました。
 
 ## 独立再試験
 
-最終版を固定した後、T01・T04・T10をそれぞれ別の新しい会話で1回ずつ実施する。旧指示版でのT01/T04独立正例は履歴として保持するが、最終指示ハッシュでの独立受入は未完了。T10独立再試験も未完了。初回結果と最終版結果を混ぜない。
+最終版を固定した後、T01・T04・T10をそれぞれ別の新しい会話で1回ずつ実施する。旧指示版でのT01独立正例は履歴として保持するが、現行版のT01独立受入は未完了。T04/T10独立再試験は現行版でPASS済み。初回結果と最終版結果を混ぜない。
 
 現作業版では `catalog/evidence/pad-native-ui-blocked-20260910.json` のとおり、PADプロセスは起動したがnative Computer Use Trusted RPCが未構成である。T04はUIAフォールバックで正例の2回実行まで確認した。T09は `catalog/evidence/t09-runtime-block-20260910.json` のとおりUIA捕捉・貼付け・保存は確認したが、WebAutomation実行完了は未確認である。

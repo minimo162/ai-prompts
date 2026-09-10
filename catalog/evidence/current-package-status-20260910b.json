@@ -40,18 +40,22 @@
   "final_summary": "catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json",
   "completion_audit": "catalog/evidence/issue5-completion-audit-20260910.json",
   "knowledge_precheck": "catalog/evidence/normal-chat-current-revision-knowledge-precheck-20260910.json",
+  "t04_acceptance": "catalog/evidence/t04-current-revision-acceptance-20260910.json",
+  "t10_acceptance": "catalog/evidence/t10-current-revision-acceptance-20260910.json",
+  "t10_batch_attachment_failure": "catalog/evidence/normal-chat-current-revision-t10-batch-attachment-failure-20260910.json",
   "static_checks": {
     "Test-RobinRawContracts.ps1": "PASS: 6 assertions (including current T04)",
     "Test-CopilotRobinPackage.ps1": "PASS: instructions_utf16=3949; knowledge_files=7; observed_actions=86",
-    "Test-RobinCatalog.ps1": "PASS: 74 checks",
+    "Test-RobinCatalog.ps1": "PASS: 77 checks (including current T04/T10 and independent acceptance flow contracts)",
     "git diff --check": "PASS"
   },
   "current_package_acceptance": {
     "m365_upload": "PARTIAL: CDP preexisting input attached the current bundle and T04 fixture; the separate CUA file chooser attempt did not fire",
     "knowledge_precheck": "PASS_REFERENCE_ONLY",
-    "T01_to_T10": "PARTIAL_CURRENT_PACKAGE: T04 pass; other cases not run",
+    "T01_to_T10": "PARTIAL_CURRENT_PACKAGE: T04 and T10 primary pass; other cases not run",
     "T04": "PASS_CURRENT_REVISION",
-    "independent_T01_T04_T10": "NOT_RUN_CURRENT_PACKAGE",
+    "T10": "PASS_CURRENT_REVISION_PRIMARY",
+    "independent_T01_T04_T10": "PARTIAL_CURRENT_PACKAGE: T04/T10 pass; T01 not run",
     "negative_suite": "NOT_RUN_CURRENT_PACKAGE"
   },
   "historical_evidence_not_inherited": [

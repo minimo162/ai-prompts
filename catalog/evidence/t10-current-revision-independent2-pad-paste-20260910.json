@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T07:30:21Z",
+  "status": "pass_with_virtualized_helper_false_negative",
+  "flow": {
+    "name": "RobinKnowledgeT10CurrentRevisionIndependent_20260910",
+    "process_id": 36316,
+    "pad_file_version": "2.71.115.26224",
+    "empty_before_paste": true,
+    "designer_status_after_paste": "16 アクション",
+    "visible_action_count": 6,
+    "virtualized_list_false_negative": true,
+    "paste_confirmed": true
+  },
+  "source_robin": "catalog/generated/normal-chat-current-revision-t10-independent-v3-20260910/robin.txt",
+  "source_robin_sha256": "d8f9ff33ed7b7963c10b2300214d378b8e0d7aab1b063b3bc84ce784539449d6",
+  "hand_edit_applied": false,
+  "save_before_run": "SAVED=RobinKnowledgeT10CurrentRevisionIndependent_20260910",
+  "run": "catalog/evidence/t10-current-revision-independent2-pad-run-20260910.json"
+}
