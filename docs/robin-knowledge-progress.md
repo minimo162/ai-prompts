@@ -10,7 +10,7 @@
 
 - ブランチ: `codex/issue-5-acceptance-20260910b`（2026-09-10継続作業）
 - 基準main: `69fe344`（origin/mainと一致）
-- 現在の固定コミット: `08d251c`
+- 現在の固定コミット: `2025a64`
 - origin: `https://github.com/minimo162/ai-prompts.git`
 - PR #19: squashマージ済み。今回の再開確認では新規push・PR・merge・公開を行わない。
 
