@@ -19,6 +19,7 @@
 P3追補：Boolean、数値減算、日付減算、DateAndTime取得、フォルダー作成、Excelシート選択は別probeでPASSですが、現行bundle未統合です。統合時は同一最終版でT01〜T10を再受入します。
 
 ファイル存在確認とファイル移動のprobeも別証跡でPASSですが、現行bundle未統合です。false分岐・名前変更・移動の再実行は未確認です。
+ファイル名前変更も別probeでPASSですが、現行bundle未統合です。false分岐と移動の再実行は未確認です。
 
 ファイル存在確認の`IF ... THEN`／`END`も別probeでPASSですが、false分岐・移動・名前変更・データ反復等は未確認です。
 

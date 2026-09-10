@@ -11,6 +11,7 @@
 P3追補：Boolean、数値減算、日付減算、DateAndTime取得、フォルダー作成、Excelシート選択は別の合成専用probeで採取・実行済みですが、現行7ファイルbundleには未統合です。T08は形式失敗、T09は現行package Robin未確認です。
 
 ファイル存在確認の`IF ... THEN`／`END`と、ファイル移動の1回probeも別証跡で固定しています。false分岐・名前変更・移動の再実行は未確認です。
+ファイル名前変更も成功1回とDoNothing衝突no-op 1回を別probeで固定しました。false分岐・移動の再実行は未確認です。
 
 P3ではファイル存在確認の`IF ... THEN`／`END`も別probeで2回実行しました。各probeは現行bundle未統合で、残るfalse分岐・移動・名前変更・データ反復等は未確認です。
 

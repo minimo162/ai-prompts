@@ -27,8 +27,8 @@
     {
       "phase": "P3",
       "status": "PARTIAL_ITEM_BLOCKS",
-      "evidence": ["coverage.json observed_variant_count=86", "coverage.json p3_blocked_items=11", "p3-boolean-probe-20260910.json", "p3-subtract-probe-20260910.json", "p3-date-subtract-probe-20260910.json", "p3-date-format-probe-20260910.json", "p3-list-remove-probe-20260910.json", "p3-folder-create-probe-20260910.json", "p3-file-exists-probe-20260910.json", "p3-file-move-probe-20260910.json", "p3-excel-sheet-probe-20260910.json", "existing CSV/Office/PDF evidence references"],
-      "gap": "Boolean, numeric/date subtract, DateAndTime, folder-create, file-exists, file-move (single run), and Excel sheet-selection are proven in separate probes but not yet bundled; date addition/custom formatting, false-branch behavior, rename, deterministic move rerun, and Excel data iteration remain unobserved, as do list get, Else/Break/error-subflow, and successful DataTable row operations."
+      "evidence": ["coverage.json observed_variant_count=86", "coverage.json p3_blocked_items=11", "p3-boolean-probe-20260910.json", "p3-subtract-probe-20260910.json", "p3-date-subtract-probe-20260910.json", "p3-date-format-probe-20260910.json", "p3-list-remove-probe-20260910.json", "p3-folder-create-probe-20260910.json", "p3-file-exists-probe-20260910.json", "p3-file-move-probe-20260910.json", "p3-file-rename-probe-20260910.json", "p3-excel-sheet-probe-20260910.json", "existing CSV/Office/PDF evidence references"],
+      "gap": "Boolean, numeric/date subtract, DateAndTime, folder-create, file-exists, file-move (single run), file-rename (success plus collision no-op), and Excel sheet-selection are proven in separate probes but not yet bundled; date addition/custom formatting, false-branch behavior, deterministic move rerun, and Excel data iteration remain unobserved, as do list get, Else/Break/error-subflow, and successful DataTable row operations."
     },
     {
       "phase": "P4",

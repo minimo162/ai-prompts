@@ -232,6 +232,7 @@ P3ではBoolean（`SET P3Bool TO True`、preview=True）と減算（10−3→7�
 Excelでは合成`excel-catalog.xlsx`を開き、`Sheet1`を名前指定でアクティブ化する2アクションを新規専用フローからコピー・保存・2回実行した。probe作成のExcel窓だけを閉じ、既存の`Book1`は保持した。データ反復は未採取で、probeは現行bundleへ未統合である（`catalog/evidence/p3-excel-sheet-probe-20260910.json`）。
 Dの「ファイルが存在する場合」は、既存の合成fixtureを対象に、`IF ... THEN` とPADが自動挿入した `END` をコピー・保存・2回実行した。false分岐・移動・名前変更は未採取で、probeは現行bundleへ未統合である（`catalog/evidence/p3-file-exists-probe-20260910.json`）。
 Dの「ファイルの移動」は、合成sourceを専用destinationへ移動する1アクションをコピー・保存・1回実行し、`MovedFiles`とdestination存在を確認した。DoNothing衝突設定のため2回目のリセット付き再実行は未実施、名前変更とfalse分岐は未採取である（`catalog/evidence/p3-file-move-probe-20260910.json`）。
+Dの「ファイルの名前を変更する」は、拡張子保持・DoNothing設定で合成ファイルを1回改名し、2回目は衝突no-opを確認した。false分岐と移動のリセット付き再実行は未採取、probeは現行bundleへ未統合である（`catalog/evidence/p3-file-rename-probe-20260910.json`）。
 リスト項目取得は、表示された「リストから項目を削除」を作成→追加→削除の最小probeで確認したが、削除後に項目値を返す出力変数がなく、取得構文の代用にはならなかった。推測で追加せず、未確認として保持する（`catalog/evidence/p3-list-remove-probe-20260910.json`）。
 Dの「フォルダーの作成」は合成fixture配下の新規専用フローで、原文コピー・保存・2回実行・`NewFolder`出力を確認した。現行bundleへは未統合で、存在確認・移動・名前変更は未採取のままとする（`catalog/evidence/p3-folder-create-probe-20260910.json`）。
 

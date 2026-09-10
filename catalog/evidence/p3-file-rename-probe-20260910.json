@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T19:43:36+09:00",
+  "status": "pass_probe_not_bundled",
+  "missing_item": "D-files-folders",
+  "scope": "Synthetic PAD File.RenameFiles probe in a newly-created dedicated flow; current bundle unchanged.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3FileRename_20260910",
+    "process_id": 55860,
+    "action_count": 1
+  },
+  "raw": {
+    "path": "catalog/evidence/p3-file-rename-probe-20260910.robin",
+    "sha256": "e0875904136ec8032ae05c985152ee6432cd557725ec1954d33b28db6c46340c",
+    "copy_observed": true,
+    "clipboard_restored": true
+  },
+  "configuration": {
+    "source": ".work/p3-file-rename-before-20260910.txt",
+    "new_name": "p3-file-rename-after-20260910",
+    "keep_extension": true,
+    "if_file_exists": "DoNothing",
+    "output_variable": "RenamedFiles"
+  },
+  "runs": [
+    {"evidence": "catalog/evidence/p3-file-rename-probe-run1-20260910.json", "status": "success", "renamed": true},
+    {"evidence": "catalog/evidence/p3-file-rename-probe-run2-20260910.json", "status": "success", "renamed": false, "collision_noop": true}
+  ],
+  "package_binding": {
+    "current_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "current_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+    "included_in_current_bundle": false,
+    "reason": "Adding the action to the seven-file bundle would change the package hash and require a complete T01-T10 regression."
+  },
+  "result": "File.RenameFiles renamed the synthetic file once and produced a no-op on the second run under DoNothing collision behavior."
+}

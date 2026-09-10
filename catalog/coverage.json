@@ -2528,9 +2528,9 @@
     "id": "D-files-folders",
     "missing": "存在確認・フォルダー作成・移動・名前変更",
     "status": "PARTIAL_PROBE_NOT_BUNDLED",
-    "reason": "フォルダー作成・既存ファイル存在確認・ファイル移動は新規専用probeで原文コピー・保存・実行を確認した。移動はDoNothing設定の1回のみで、2回目のリセットを伴う再実行は未実施。名前変更とfalse分岐は未採取。probe内容は現行bundle未統合。",
-    "evidence": "evidence/p3-folder-create-probe-20260910.json; evidence/p3-file-exists-probe-20260910.json; evidence/p3-file-move-probe-20260910.json",
-    "resume": "現行bundleへ原文と説明を追加する場合は、ハッシュ更新後にT01-T10を同一最終版で再受入し、名前変更・false分岐と移動の再実行を採取"
+    "reason": "フォルダー作成・既存ファイル存在確認・ファイル移動・名前変更を新規専用probeで原文コピー・保存・実行した。移動はDoNothing設定の1回、名前変更は成功1回と衝突no-op 1回で、false分岐は未採取。probe内容は現行bundle未統合。",
+    "evidence": "evidence/p3-folder-create-probe-20260910.json; evidence/p3-file-exists-probe-20260910.json; evidence/p3-file-move-probe-20260910.json; evidence/p3-file-rename-probe-20260910.json",
+    "resume": "現行bundleへ原文と説明を追加する場合は、ハッシュ更新後にT01-T10を同一最終版で再受入し、false分岐と移動の再実行を採取"
   },
   {
     "id": "E-excel",
