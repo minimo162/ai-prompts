@@ -255,3 +255,5 @@ P0〜P5の要件ごとの完了監査は `catalog/evidence/issue5-completion-aud
 2026-09-11 P3追補統合版では、7原本へ実測済みP3成功と失敗境界を反映し、bundle SHA-256を `0c89e53ce84671fd4bf1da4287563bf79f5164674f22907c8a420758310b36e6`、マニフェストを `copilot/knowledge-bundle-manifest-20260911.json` に更新した。新bundleでの知識precheck、T01〜T10、独立再試験は未実行で、旧bundleの成功証跡を継承しない。現行coverageは `catalog/evidence/current-package-status-20260911-p3-integration.json` を正本とする。
 
 P3統合版をHEAD `7b06805`で静的検査し、Raw 6、Package 3949/7/86、Catalog 84、DOM 898、`git diff --check`をPASSした。新bundleのCopilot/PAD受入は未実行である（`catalog/evidence/current-package-static-check-20260911-p3.json`）。
+
+最新HEAD `2da9610`でもP3統合版の同じ静的ゲートを再実行してPASSした。新bundleのCopilot送信とT01〜T10受入は未実行である（`catalog/evidence/current-package-static-check-20260911-p3b.json`）。
