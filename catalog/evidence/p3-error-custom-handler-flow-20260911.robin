@@ -1,0 +1,8 @@
+BLOCK 
+ON BLOCK ERROR FileNotFound IsUserDefinedErrorCode: True
+SET ErrorHandled TO $'''true'''
+ON BLOCK ERROR
+THROW ERROR
+END
+    File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+END

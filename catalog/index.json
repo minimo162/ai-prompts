@@ -4957,6 +4957,18 @@
       "evidence": "evidence/p3-error-trigger-probe-20260910.json"
     },
     {
+      "id": "p3-error-custom-handler-2026-09-11",
+      "date": "2026-09-11",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeP3ErrorBlock_20260910",
+      "ui_automation_ids": ["LanguageConstructs.Block", "ExceptionBlockNewCustomError", "RulesListBox"],
+      "scope": "Synthetic custom FileNotFound error rule setting ErrorHandled=true with continue ON/throw OFF; missing-file run still ended in runtime error.",
+      "current_package_acceptance": false,
+      "execution_status": "failed_custom_handler_runtime_still_error",
+      "evidence": "evidence/p3-error-custom-handler-20260911.json; evidence/p3-error-custom-handler-flow-20260911.robin"
+    },
+    {
       "id": "p3-subflow-probe-2026-09-10",
       "date": "2026-09-10",
       "pad_file_version": "2.71.115.26224",

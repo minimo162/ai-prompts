@@ -173,6 +173,8 @@ DataTableは3列1行（`A/10/対象`）の作成を新規専用フローでコ�
 Excelの専用probeでは、合成`excel-catalog.xlsx`の`Sheet1`を選択し、A1:C6をTypedValuesで読み取り、Designer上で`ExcelData=6行, 3列`・エラー0を確認した。Run監視ヘルパーの完了表示は45秒以内に観測できなかったため、範囲読取りはUIプレビュー成功・完了通知未確認として分離し、Excelデータ反復は未確認のまま保持する（`catalog/evidence/p3-excel-read-range-probe-20260911.json`、`p3-excel-read-range-probe-20260911.robin`）。
 
 DateTimeカスタム書式化の専用probeでは「現在の日時／システム タイム ゾーン」選択をUIで確認したが、保存更新時にPAD内部例外 `System.InvalidOperationException: Sequence contains no matching element`（`FunctionModel.GetProgramItem`）が発生した。ダイアログ選択や例外画面は成功Robin・実行値の証拠ではないため、カスタム書式化は未確認のまま保持する（`catalog/evidence/p3-date-format-dialog-crash-20260911.json`）。
+
+エラー処理専用probeでは、カスタムエラー`FileNotFound`に変数設定ルール（`ErrorHandled=true`）を追加し、続行ON／スローOFFへ設定した。コピーしたRobinには設定が現れたが、欠損ファイル実行はなおruntime errorとなり、`ErrorHandled`の値と後続完了は未観測である。カスタムハンドラー成功とは扱わない（`catalog/evidence/p3-error-custom-handler-20260911.json`、`p3-error-custom-handler-flow-20260911.robin`）。
 Excelの専用probeでは、合成`excel-catalog.xlsx`の`Sheet1`を選択し、A1:C6をTypedValuesで読み取り、Designer上で`ExcelData=6行, 3列`・エラー0を確認した。Run監視ヘルパーの完了表示は45秒以内に観測できなかったため、範囲読取りはUIプレビュー成功・完了通知未確認として分離した。For eachの設定は保存後に消える試行と、読み取り前にループが置かれる失敗原文を別証跡へ保存し、Excelデータ反復は未確認のまま保持する（`catalog/evidence/p3-excel-read-range-probe-20260911.json`、`p3-excel-read-range-probe-20260911.robin`、`p3-excel-foreach-configuration-boundary-20260911.json`）。
 
 ### 静的ゲート追補（2026-09-11）
