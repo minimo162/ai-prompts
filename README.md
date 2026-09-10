@@ -8,6 +8,8 @@
 
 実測原文の正本は [catalog/index.json](catalog/index.json)、観測範囲は [catalog/coverage.json](catalog/coverage.json)、途中経過は [docs/robin-knowledge-progress.md](docs/robin-knowledge-progress.md) です。既存の採取原文・検証証拠は保全し、未観測のアクションを全機能対応とは表示しません。
 
+P3追補：Boolean、数値減算、日付減算、DateAndTime取得、フォルダー作成、Excelシート選択は別の合成専用probeで採取・実行済みですが、現行7ファイルbundleには未統合です。T08は形式失敗、T09は現行package Robin未確認です。
+
 P3追補：Boolean、数値減算、日付減算、DateAndTime取得、フォルダー作成は別の合成専用probeで採取・実行済みですが、現行7ファイルbundleには未統合です。T08は形式失敗、T09は現行package Robin未確認です。
 
 M365 Copilot内Agent Builderを利用先とする継続方針の訂正は [CODEX_CORRECTION_M365_AGENT_BUILDER.md](CODEX_CORRECTION_M365_AGENT_BUILDER.md) に記録しています。

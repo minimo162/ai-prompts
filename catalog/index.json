@@ -4700,6 +4700,18 @@
       "scope": "Synthetic current date/time with system timezone and DateAndTime format; copied, saved, and run twice. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-date-format-probe-20260910.json"
+    },
+    {
+      "id": "p3-excel-sheet-probe-2026-09-10",
+      "date": "2026-09-10",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": false,
+      "native_flow_name": "RobinKnowledgeP3ExcelSheetProbe2_20260910",
+      "ui_automation_ids": ["Excel.LaunchExcel", "Excel.SetActiveWorksheet"],
+      "scope": "Synthetic excel-catalog.xlsx Sheet1 selection by name; copied, saved, and run twice. Probe-created Excel windows were closed afterward; current bundle unchanged.",
+      "current_package_acceptance": false,
+      "evidence": "evidence/p3-excel-sheet-probe-20260910.json"
     }
   ],
   "application_integration": {

@@ -2532,13 +2532,14 @@
     "evidence": "evidence/p3-folder-create-probe-20260910.json",
     "resume": "現行bundleへ原文と説明を追加する場合は、ハッシュ更新後にT01-T10を同一最終版で再受入し、残り3用途も採取"
   },
-    {
-      "id": "E-excel",
-      "missing": "シート選択・データ反復",
-      "status": "BLOCKED_EXTERNAL_UI",
-      "reason": "T04はDataシートがアクティブな前提で成立しており、全シート操作の証拠ではない。",
-      "resume": "専用ブックでシート選択とデータ反復を別設定として採取"
-    },
+  {
+    "id": "E-excel",
+    "missing": "シート選択・データ反復",
+    "status": "PARTIAL_PROBE_NOT_BUNDLED",
+    "reason": "新規専用probeでExcelを開き、Sheet1を名前指定でアクティブ化する2アクションをコピー・保存・2回実行した。データ反復は未採取で、probeは現行bundle未統合。",
+    "evidence": "evidence/p3-excel-sheet-probe-20260910.json",
+    "resume": "Excelデータ反復を採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
+  },
     {
       "id": "G-ui-browser",
       "missing": "PAD WebAutomation通し実行",
