@@ -4666,6 +4666,17 @@
       "evidence": "evidence/p3-list-remove-probe-20260910.json"
     },
     {
+      "id": "p3-list-get-inventory-boundary-2026-09-11",
+      "date": "2026-09-11",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": false,
+      "native_flow_name": "RobinKnowledgeP3ListGet_20260910",
+      "scope": "Read-only bounded ActionsTreeView observation; virtualized scrolling did not reach a stable completion condition after 401 or more observed nodes, and no action was executed.",
+      "current_package_acceptance": false,
+      "evidence": "evidence/p3-list-get-inventory-boundary-20260911.json"
+    },
+    {
       "id": "p3-folder-create-probe-2026-09-10",
       "date": "2026-09-10",
       "pad_file_version": "2.71.115.26224",
