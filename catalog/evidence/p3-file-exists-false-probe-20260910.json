@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T00:31:00+09:00",
+  "status": "partial_false_branch_run_no_raw",
+  "missing_item": "D-files-folders",
+  "scope": "Synthetic PAD File.Exists false-branch attempt in a newly-created dedicated flow; no current-package acceptance.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3FileExistsFalse_20260910",
+    "process_id": 52060,
+    "action_count": 2
+  },
+  "configuration": {
+    "condition": "file exists",
+    "file_path": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\p3-file-exists-missing-20260910.txt",
+    "path_exists_before_run": false,
+    "branch_body_actions": 0,
+    "terminator": "END"
+  },
+  "run": {
+    "status": "success_no_errors",
+    "flow_status_after": "状態: 準備完了",
+    "error_count": 0,
+    "false_branch_inference": "completed without an error for a known-missing path and no branch-body actions",
+    "downstream_actions_executed": false
+  },
+  "raw": {
+    "copy_observed": false,
+    "reason": "PAD UIA clipboard copy did not settle for this new flow; no Robin text was hand-written or accepted as raw."
+  },
+  "package_binding": {
+    "current_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "current_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
+    "included_in_current_bundle": false
+  },
+  "result": "A known-missing file condition completed without a PAD error and had no branch-body actions, but the raw Robin copy was not obtained. This is a partial false-branch observation, not a complete raw-contract acceptance."
+}

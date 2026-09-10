@@ -18,8 +18,8 @@
 
 P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、フォルダー作成、Excelシート選択は別probeでPASSですが、現行bundle未統合です。カスタム日時書式化は未確認で、統合時は同一最終版でT01〜T10を再受入します。
 
-ファイル存在確認とファイル移動（成功＋DoNothing衝突再実行）のprobeも別証跡でPASSですが、現行bundle未統合です。false分岐は未確認です。
-ファイル名前変更も別probeでPASSですが、現行bundle未統合です。false分岐は未確認です。
+ファイル存在確認とファイル移動（成功＋DoNothing衝突再実行）のprobeも別証跡でPASSですが、現行bundle未統合です。欠損パスのfalse分岐は実行完了まで確認しましたが、rawコピー未取得のため完全受入は未確認です。
+ファイル名前変更も別probeでPASSですが、現行bundle未統合です。false分岐はrawコピーとbranch-body実行未確認です。
 列付きDataTable行追加は値数不一致のnative runtime errorを再現し、成功するRowToAdd型・行反復・セル参照は未確認です。
 ビジュアライザー保存後の0列への戻りも別失敗として保持しています。
 If/Else/ENDとIf/Else-if/ENDの構造と実行は別probeで確認していますが、入れ子・分岐内処理は未確認です。
@@ -27,7 +27,7 @@ If/Else/ENDとIf/Else-if/ENDの構造と実行は別probeで確認していま�
 （Loop Continue probeは現行bundleへ未統合です。）
 エラー処理ブロックの骨格、欠損ファイル子アクションのruntime error、P3Worker作成＋MainからのCALLも別probeで確認していますが、カスタムハンドラーは未確認です。
 
-ファイル存在確認の`IF ... THEN`／`END`も別probeでPASSですが、false分岐・データ反復等は未確認です。
+ファイル存在確認の`IF ... THEN`／`END`も別probeでPASSですが、欠損パスprobeはrawコピー未取得で、データ反復等は未確認です。
 
 P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、フォルダー作成は別probeでPASSですが、現行bundle未統合です。カスタム日時書式化は未確認で、統合時は同一最終版でT01〜T10を再受入します。
 

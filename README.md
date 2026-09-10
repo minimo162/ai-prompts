@@ -10,8 +10,8 @@
 
 P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、フォルダー作成、Excelシート選択は別の合成専用probeで採取・実行済みですが、現行7ファイルbundleには未統合です。カスタム日時書式化は未確認、T08は形式失敗、T09は現行package Robin未確認です。
 
-ファイル存在確認の`IF ... THEN`／`END`と、ファイル移動の成功＋DoNothing衝突再実行probeも別証跡で固定しています。false分岐は未確認です。
-ファイル名前変更も成功1回とDoNothing衝突no-op 1回を別probeで固定しました。false分岐は未確認です。
+ファイル存在確認の`IF ... THEN`／`END`と、ファイル移動の成功＋DoNothing衝突再実行probeも別証跡で固定しています。欠損パスのfalse分岐は実行完了まで確認しましたが、rawコピー未取得のため完全受入は未確認です。
+ファイル名前変更も成功1回とDoNothing衝突no-op 1回を別probeで固定しました。false分岐はrawコピーとbranch-body実行未確認です。
 列付きDataTableの行追加は、値数不一致のnative runtime errorを再現し、正しいRowToAdd型を推測せず失敗証跡として保持しています。
 別試行ではビジュアライザー保存後の0列への戻りも確認し、成功構文を推測していません。
 If/Else/ENDとIf/Else-if/ENDの構造は別probeで実行まで確認していますが、入れ子・分岐内処理は未確認です。
@@ -19,7 +19,7 @@ If/Else/ENDとIf/Else-if/ENDの構造は別probeで実行まで確認してい�
 （Loop Continue probeは現行bundleへ未統合です。）
 エラー処理の`BLOCK / ON BLOCK ERROR / THROW ERROR / END`骨格、欠損ファイル子アクションのruntime error、P3Worker作成＋Mainからの`CALL P3Worker`も別probeで確認していますが、カスタムハンドラーは未確認です。
 
-P3ではファイル存在確認の`IF ... THEN`／`END`も別probeで2回実行しました。各probeは現行bundle未統合で、残るfalse分岐・データ反復等は未確認です。
+P3ではファイル存在確認の`IF ... THEN`／`END`も別probeでtrue条件を2回、欠損パス条件を1回実行しました。欠損パスprobeはrawコピー未取得で、各probeは現行bundle未統合です。データ反復等は未確認です。
 
 P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、フォルダー作成は別の合成専用probeで採取・実行済みですが、現行7ファイルbundleには未統合です。カスタム日時書式化は未確認、T08は形式失敗、T09は現行package Robin未確認です。
 
