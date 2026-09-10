@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-10T12:05:50.9351173+09:00",
-  "reconciled_at": "2026-09-10T12:05:50.9369697+09:00",
+  "generated_at": "2026-09-10T18:40:32+09:00",
+  "reconciled_at": "2026-09-10T18:40:32+09:00",
   "reconciliation_note": "Existing index/evidence mappings are generated from the current catalog. This file is not a complete PAD feature reference or current-session execution claim.",
   "environment": {
     "pad_file_version": "2.71.115.26224",
@@ -2523,13 +2523,14 @@
       "reason": "0行0列への行追加失敗は保持済みだが、成功する列定義の原文が未採取。",
       "resume": "列付きDataTableを作成して行追加・セル参照を1周実行"
     },
-    {
-      "id": "D-files-folders",
-      "missing": "存在確認・フォルダー作成・移動・名前変更",
-      "status": "BLOCKED_EXTERNAL_UI",
-      "reason": "列挙・コピー・読書きの証跡は再利用できるが、未採取4用途の原文・実行値がない。",
-      "resume": "検証用フォルダー内で1用途ずつ原文保存・再貼付け・実行"
-    },
+  {
+    "id": "D-files-folders",
+    "missing": "存在確認・フォルダー作成・移動・名前変更",
+    "status": "PARTIAL_PROBE_NOT_BUNDLED",
+    "reason": "フォルダー作成は新規専用probeで原文コピー・保存・2回実行・NewFolder出力を確認した。他の存在確認・移動・名前変更は未採取。probe内容は現行bundle未統合。",
+    "evidence": "evidence/p3-folder-create-probe-20260910.json",
+    "resume": "現行bundleへ原文と説明を追加する場合は、ハッシュ更新後にT01-T10を同一最終版で再受入し、残り3用途も採取"
+  },
     {
       "id": "E-excel",
       "missing": "シート選択・データ反復",
