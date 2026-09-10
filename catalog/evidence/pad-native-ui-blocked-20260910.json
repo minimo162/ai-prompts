@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "pad_package": "Microsoft.PowerAutomateDesktop_11.2608.115.0_x64__8wekyb3d8bbwe",
+  "pad_file_version_observed": "11.2608.115.0",
+  "launch": {
+    "method": "shell:AppsFolder\\Microsoft.PowerAutomateDesktop_8wekyb3d8bbwe!PAD.Console",
+    "result": "PAD.Console.Host and PAD.Designer processes appeared"
+  },
+  "windows_observed_by_process_enumeration": [
+    "Power Automate",
+    "Power Automate | RobinKnowledgeT04ExcelFilter_20260910"
+  ],
+  "native_computer_use": {
+    "attempted": true,
+    "result": "blocked",
+    "error": "Trusted RPC service is not configured: sky"
+  },
+  "pad_ui_actions": "NOT_RUN",
+  "reason": "The available native Computer Use bridge cannot bind a current PAD window in this session. No clipboard, selector, save, or run claim is made.",
+  "reopen_condition": "Provide a session with a working native Computer Use Trusted RPC bridge, then re-observe exactly one PAD Designer window and perform T04/T09 in dedicated flows."
+}

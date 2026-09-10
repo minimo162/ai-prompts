@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "case": "T04",
+  "model": "GPT 5.6 Think Deeper",
+  "knowledge_bundle_sha256": "660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca",
+  "attachment_count": 2,
+  "attachments": [
+    "PAD-Robin-Knowledge-Bundle.txt",
+    "t04-filter-input.xlsx"
+  ],
+  "prompt_file": "catalog/generated/normal-chat-t04-20260910-no-robin/prompt.txt",
+  "response_file": "catalog/generated/normal-chat-t04-20260910-no-robin/response.txt",
+  "response_format": "no_robin_due_to_missing_measured_excel_datatable_syntax",
+  "robin_block_count": 0,
+  "sent": true,
+  "response_observed": true,
+  "pad_execution": "NOT_RUN_BLOCKED_NO_NATIVE_UI",
+  "note": "Fresh normal M365 Copilot chat with GPT 5.6 Think Deeper observed the attached workbook values and correctly refused to invent Excel sheet/range/DataTable/output syntax. The chat used the pre-correction bundle; this is boundary evidence, not T04 PAD acceptance."
+}

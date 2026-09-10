@@ -1,6 +1,6 @@
 PAD Robin 制御・ブロック
 
-今回の左パネル再観測では、If、Else、For each、ループを抜ける、次のループ、ブロック エラー発生時、サブフローの実行、サブフローの終了、待機、Loopの表示名を確認した。Robinの設定・再貼付け・実行を完了したのは、現時点では固定範囲Loopの既存例だけである。表示名の証拠は `catalog/evidence/pad-action-inventory-20260909.json`、実測済みLoopの原文・実行値は `catalog/index.json` と `catalog/flows/bounded-loop/` に対応づけられている。
+今回の左パネル再観測では、If、Else、For each、ループを抜ける、次のループ、ブロック エラー発生時、サブフローの実行、サブフローの終了、待機、Loopの表示名を確認した。For each＋If＋ファイル読取りの組合せは、T03の通常チャット生成Robinを別フローへ無修正貼付け・保存・実行し、`.txt`だけを読み取る結果まで確認した。Else、ループ脱出、エラー処理、サブフロー呼出し自体の設定・実行は未確認である。表示名の証拠は `catalog/evidence/pad-action-inventory-20260909.json`、T03の組合せ実行は `catalog/evidence/normal-chat-t03-final-current-run.json`、固定範囲Loopの原文・実行値は `catalog/index.json` と `catalog/flows/bounded-loop/` に対応づけられている。
 
 固定範囲Loop
 - UI名: Loop、id: loop-one-to-three、variant: constant-range
@@ -32,5 +32,5 @@ If（ファイルパスに拡張子文字列を含む判定）
 - `Variables.IncreaseVariable` の固定値1とループ変数の2設定を別例として収録している。数値変数を事前に定義し、型を文字列と混ぜない。
 
 未採取の制御
-- Else、エラー処理、ループ脱出、サブフロー呼出しの今回用のRobin原文はまだない。For eachとIfは上記の1設定を採取したが、完全な組合せ実行は未確認。表示名を観測できたことだけで、未採取構文を補わない。
+- Else、エラー処理、ループ脱出、サブフロー呼出しの今回用のRobin原文はまだない。For eachとIfは単独設定を採取し、T03でファイル読取りとの組合せを実行したが、Else分岐・脱出・サブフローを含む完全な制御教材ではない。表示名を観測できたことだけで、未採取構文を補わない。
 - 未観測のブロック終端や引数をLoop例から類推して生成しない。必要な場合は、PADで最小ブロックを追加してコピーし、開始・終了・依存・失敗経路を別項目として記録する。

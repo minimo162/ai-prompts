@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "case": "T04",
+  "model": "GPT 5.6 Think Deeper",
+  "knowledge_bundle_sha256": "2a0267d4fb42b3c27b9fab8527c63ae2f126474a936339eca0ba6ebe8c7d0f12",
+  "attachments": ["PAD-Robin-Knowledge-Bundle.txt", "t04-filter-input.xlsx"],
+  "attachment_count": 2,
+  "upload_notice_observed": "デバイスからアップロードすると、OneDrive (個人用) にコピーが送信されます。",
+  "prompt_file": "catalog/generated/normal-chat-t04-20260910-current-no-robin/prompt.txt",
+  "response_file": "catalog/generated/normal-chat-t04-20260910-current-no-robin/response.txt",
+  "response_format": "no_robin_due_to_missing_measured_excel_datatable_syntax",
+  "robin_block_count": 0,
+  "sent": true,
+  "response_observed": true,
+  "pad_execution": "NOT_RUN_BLOCKED_NO_NATIVE_UI",
+  "note": "Fresh normal M365 Copilot chat used the corrected current bundle and the real synthetic workbook. It observed the workbook values and refused to invent Excel sheet/range/DataTable/output syntax. This is boundary evidence, not T04 PAD acceptance."
+}

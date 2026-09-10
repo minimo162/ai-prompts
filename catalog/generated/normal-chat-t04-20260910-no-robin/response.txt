@@ -1,0 +1,28 @@
+Copilot said:
+前提・依存・未確認点
+入力ファイル t04-filter-input の Data シートには、Status / Item / Amount の3列と、対象データ A～E が存在します。Status=「対象」の行は A(10)、C(25)、D(5) で、Amount 合計は 40 です。
+添付ナレッジには、Excel アクションとして「Excel の起動」「Excel ワークシートに書き込む」「Excel ワークシートから読み取る」「Excel の保存」「Excel を閉じる」の存在は記録されています。
+しかし、今回必要になる以下の構文は、添付ナレッジ内で実測 Robin 原文が確認できません。
+既存 Excel ファイルを開いて Data シートを指定する構文
+Data シート A1:C6 を読み取る具体的な構文
+読み取った表をデータテーブルとして取得する構文
+データテーブルを Excel ブックへ出力する構文
+新規ブック作成および保存先 C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t04-output.xlsx への保存構文
+シート名指定やシート作成に関する構文
+ナレッジには CSV 読取り、FilterDataTable、CSV 書出しの実測例はありますが、Excel⇔DataTable の変換手順および対応する Robin 原文は確認できません。
+貼り付け用Robin
+実測根拠が不足しているため、Robin は提示できません。
+不足している採取項目は次のとおりです。
+「Excel ワークシートから読み取る」の実測 Robin 原文（既存ブックを開く設定、シート指定方法、A1:C6 範囲指定方法、出力変数の型）
+「Excel ワークシートに書き込む」の実測 Robin 原文（DataTable を書き込む設定、書き込み開始セル指定、列名出力有無）
+新規ブック保存の実測 Robin 原文（新規ブック作成方法、SaveAs 相当の設定、出力パス指定方法）
+必要であればシート選択またはシート作成の実測 Robin 原文
+設定確認
+入力: t04-filter-input の Data シート A1:C6。
+抽出条件: Status = 「対象」。
+抽出結果: A / 10、C / 25、D / 5。Amount 合計: 40。
+出力先: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t04-output.xlsx。入力ブックは変更しない。
+保存・実行・照合手順
+現時点では実測 Robin が不足しているため、PAD フローの貼り付け・保存・実行手順は確定できません。
+先に Excel 既存ブック読取りアクションと Excel への書込みアクションを最小構成で作成し、Robin をコピーして原文を採取する必要があります。取得した実測原文を根拠に T04 向け Robin を組み立てます。
+ソース

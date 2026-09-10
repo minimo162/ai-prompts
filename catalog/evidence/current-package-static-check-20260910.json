@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "branch": "codex/issue-5-completion-20260910",
+  "checks": {
+    "Test-RobinCatalog.ps1": "PASS: 52 checks",
+    "Test-CopilotRobinPackage.ps1": "PASS: instructions_utf16=2943; knowledge_files=7; observed_actions=73",
+    "git diff --check": "PASS",
+    "bundle_source_sha256_delimiters": "PASS: all seven source hashes match bundle delimiters"
+  },
+  "instruction_sha256": "ecefa66549326aca3e0995b9c9d331da2ec9a5ec84640d8befa06b848febd6cc",
+  "knowledge_bundle_sha256": "2a0267d4fb42b3c27b9fab8527c63ae2f126474a936339eca0ba6ebe8c7d0f12",
+  "knowledge_bundle_bytes": 49330,
+  "note": "Static/package checks only; no claim of PAD or M365 acceptance."
+}

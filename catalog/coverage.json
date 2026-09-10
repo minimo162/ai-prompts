@@ -1,6 +1,9 @@
 {
   "schema_version": 1,
   "generated_at": "2026-09-10T07:22:50.8257321+09:00",
+  "reconciled_at": "2026-09-10T09:09:36+09:00",
+  "reconciliation_note": "Existing index/evidence mappings were reconciled on branch codex/issue-5-completion-20260910. Current PAD process presence and the native UI bridge block are recorded separately; this file does not claim a current PAD execution.",
+  "reconciliation_evidence": "catalog/evidence/pad-native-ui-blocked-20260910.json",
   "environment": {
     "pad_file_version": "2.71.115.26224",
     "language": "ja-JP",
@@ -1812,10 +1815,13 @@
       "id": "B-if-else",
       "area": "B",
       "purpose": "If／Else",
-      "status": "not_observed",
-      "observed_action_ids": [],
-      "reason": "現在の実測カタログにブロック原文なし。",
-      "reference": null,
+      "status": "partial",
+      "observed_action_ids": [
+        "if-current-item-status-equals",
+        "if-current-file-contains-txt"
+      ],
+      "reason": "If開始行を2設定採取し、For eachとの組合せはT03で実行確認済み。Else／Else ifの原文・実行は未確認。",
+      "reference": "catalog/index.json; catalog/actions/if/*.robin; catalog/evidence/normal-chat-t03-final-current-run.json",
       "live_ui_candidates": [
         {
           "ui_name": "Else",
@@ -1840,10 +1846,11 @@
       "purpose": "回数指定ループ・For each・ループ脱出",
       "status": "partial",
       "observed_action_ids": [
-        "loop-one-to-three"
+        "loop-one-to-three",
+        "foreach-items-variable"
       ],
-      "reason": "定数範囲Loopのみ観測済み。For eachと脱出は未確認。",
-      "reference": "catalog/index.json",
+      "reason": "定数範囲LoopとFor eachの原文を採取し、For each＋If＋ファイル読取りのT03組合せを実行確認済み。ループ脱出・次のループは未確認。",
+      "reference": "catalog/index.json; catalog/evidence/normal-chat-t03-final-current-run.json",
       "live_ui_candidates": [
         {
           "ui_name": "For each",
@@ -1963,11 +1970,14 @@
       "status": "partial",
       "observed_action_ids": [
         "file-read-text-utf8",
+        "file-read-text-variable-path",
         "file-write-text-utf8-overwrite",
-        "file-copy-single-no-overwrite"
+        "file-copy-single-no-overwrite",
+        "folder-get-files-txt-no-subfolders",
+        "folder-get-files-all-no-subfolders"
       ],
-      "reason": "UTF-8読取り、UTF-8書出し、単一ファイルのコピー（衝突時は何もしない）は実測済み。フォルダー内取得、存在確認、作成、移動・名前変更は未確認または別設定が必要。",
-      "reference": "catalog/index.json; catalog/evidence/text-write-validation.json; catalog/evidence/file-copy-validation.json",
+      "reason": "UTF-8読取り・変数パス読取り・UTF-8書出し・単一ファイルコピー・フォルダー内ファイル取得2設定は原文保存・別フロー貼付け・実行確認済み。存在確認、フォルダー作成、移動・名前変更は未確認。",
+      "reference": "catalog/index.json; catalog/evidence/text-write-validation.json; catalog/evidence/file-copy-validation.json; catalog/evidence/folder-get-files-rt-run-1.json; catalog/evidence/folder-get-files-all-rt-run-1.json; catalog/evidence/t03-partial-run-1.json",
       "live_ui_candidates": [
         {
           "ui_name": "ファイルが存在する場合",
@@ -2114,8 +2124,8 @@
       "purpose": "起動／接続・文字入力・クリック・待機・文字取得・終了",
       "status": "blocked_pending_live_ui",
       "observed_action_ids": [],
-      "reason": "過去のEdge起動はWeb拡張機能通信エラー。現在セッションでもPADウィンドウが観測できず、通し採取は未実施。",
-      "reference": "docs/robin-action-catalog.md; pad-robin-prompts.md",
+      "reason": "UI・ブラウザーの通し採取は未実施。PADプロセスは起動確認できたが、現セッションのnative Computer UseはTrusted RPC未構成でUI操作できず、推測セレクターを出さない。",
+      "reference": "docs/robin-action-catalog.md; copilot/knowledge/PAD-Robin-05-UI-Web.txt; catalog/evidence/pad-native-ui-blocked-20260910.json",
       "live_ui_candidates": [
         {
           "ui_name": "ウィンドウの UI 要素をクリック",
