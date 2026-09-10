@@ -31,6 +31,8 @@
 
 現作業版の追補：T01〜T07、T04/T10一次受入、T01/T04/T10独立再試験はPASS_CURRENT_REVISION。fail-closed負例はPASS_NEGATIVE_FAIL_CLOSED。T08は生成形式失敗、T09は既存専用フローのランタイムprobeのみPASSで、現行package Robin受入は未確認です。
 
+P3追補：日時加算とサブフロー作成／呼出しは別の合成専用probeで原文コピー・保存・2回実行まで確認しましたが、現行bundle未統合です。カスタム日時書式化、エラー発生子アクション、カスタムハンドラー、DataTable成功構文などは未確認です。
+
 現作業版bundleのみを添付した知識precheckは `catalog/evidence/normal-chat-current-revision-knowledge-precheck-20260910.json` に保存し、ナレッジ固有の設定・型・依存を回答原文と照合しました。これは受入ケースの代用ではありません。
 
 現作業版T10一次受入は `catalog/evidence/t10-current-revision-acceptance-20260910.json`、別チャット／別PADフローの独立再試験は `catalog/evidence/t10-current-revision-independent-acceptance-20260910.json` に保存しています。T01独立再試験は `catalog/evidence/t01-current-revision-independent-acceptance-20260910.json`、T04独立再試験は `catalog/evidence/t04-current-revision-independent-acceptance-20260910.json` に保存しています。
@@ -41,6 +43,6 @@
 
 ## 独立再試験
 
-最終版を固定した後、T01・T04・T10をそれぞれ別の新しい会話で1回ずつ実施する。旧指示版でのT01独立正例は履歴として保持するが、現行版のT01独立受入は未完了。T04/T10独立再試験は現行版でPASS済み。初回結果と最終版結果を混ぜない。
+最終版を固定した後、T01・T04・T10をそれぞれ別の新しい会話で1回ずつ実施した。T01/T04/T10独立再試験は現行版でPASS済み。初回結果と最終版結果を混ぜない。
 
 現作業版では `catalog/evidence/pad-native-ui-blocked-20260910.json` のとおり、PADプロセスは起動したがnative Computer Use Trusted RPCが未構成である。T04はUIAフォールバックで正例の2回実行まで確認した。T09は `catalog/evidence/t09-runtime-block-20260910.json` のとおりUIA捕捉・貼付け・保存は確認したが、WebAutomation実行完了は未確認である。

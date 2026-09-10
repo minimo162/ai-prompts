@@ -3,7 +3,7 @@
 更新日: 2026-09-10
 ブランチ: `codex/issue-5-acceptance-20260910b`
 基準main: `69fe344`
-固定コミット: `2025a64`
+固定コミット: `c3efbd9`（最新P3 probe反映コミット。metadata更新は後続コミット）
 状態: partial
 
 ## 利用先の訂正
@@ -17,7 +17,7 @@
 - 履歴版の `copilot/agent-instructions.txt` はUTF-8 BOMなし、9,214バイト、Unicodeスカラー数3,585、47行。SHA-256は `e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1`。現作業版はUTF-8 BOMなし、10,096バイト、UTF-16 3,949、SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`。
 - 現作業版の結合bundle SHA-256は `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd`。旧bundle `431c...` の生成・PAD結果は履歴であり、現作業版の受入には継承しない。
 - ナレッジ配布版は7つの `.txt`。指示欄と技術資料を分離し、合計9ファイル（READMEを含む）で20ファイル上限を超えない。
-- `catalog/coverage.json` は `catalog/index.json` と既存証拠を突合し、観測バリアント86件（既存51＋追加35件）と必須範囲A〜Gの16チェックを記録。For each／If／フォルダー取得の既存実行証拠を対応づけ、Else・脱出・存在確認等の未確認は残した。左側一覧は `complete=false`、未観測の名称は推測していない。
+- `catalog/coverage.json` は `catalog/index.json` と既存証拠を突合し、観測バリアント86件（既存51＋追加35件）と必須範囲A〜Gの16チェックを記録。別probeでBoolean／減算／日時加算・減算／Else／Loop脱出・継続／ファイル操作／Excelシート／エラー骨格／サブフロー作成・呼出しを確認したが、現行bundleへは未統合。左側一覧は `complete=false`、未観測の名称は推測していない。
 - `README.md` 冒頭をCopilotエージェント用配布物の入口へ変更。旧アプリ説明は過去資産として区別した。
 - `pad-robin-prompts.md` 冒頭に編集用原稿であることと配布正本への対応を追記した。
 - `catalog/generated/acceptance-t01-t10/README.md` にT01〜T10の依頼要点・期待値・状態を固定した。
@@ -92,12 +92,12 @@
 |ナレッジ固有質問|PASS_REFERENCE_ONLY（現行bundle 431c版）|現行bundleを別の新規通常チャットへ添付し、UTF-8書込み差分・T04 9行原文・T09捕捉と実行未完了・確認状態の分離を回答原文と照合。`catalog/evidence/normal-chat-knowledge-precheck-current-20260910.json`|
 |T01生成回答|PASS（初回修正版）|GPT 5.6 Think Deeperの新規チャットで結合版を添付し、本文3,128文字・回答全文・3行Robinを保存。`gpt56-noappend-clean2`の`robin.txt`は3アクション|
 |T01 PAD実行・成果物照合|PASS（初回修正版）|回答Robinを無修正で新規フローへ貼付け、保存、2回実行。出力UTF-8 BOM付き85 bytes、期待内容と完全一致。`normal-chat-t01-noappend-*`|
-|T02〜T03、T05〜T08|最終版PASS|最終版の新規通常チャット生成と、専用PADフローへの無修正貼付け・保存・2回実行を `catalog/evidence/normal-chat-final-package-acceptance-20260910.json` に記録|
-|T04|PARTIAL|最終生成版はFilterParameters引用符差分で貼付け未成立。完全一致要求の再試験はコードを出さず拒否。先行有効版の正例は別証拠で保持|
-|T09|PARTIAL_BLOCKED_RUNTIME|UI要素捕捉・貼付け・保存は確認済み。WebAutomation実行完了は未観測|
-|T10|PARTIAL_EXPECTED_ERROR|最終生成版は16アクションを保存したが、Word SaveAs（9行目）のパスエスケープ差分で実行時エラー。独立受入待ち|
-|T01独立再試験|旧指示版PASS|別チャット・別PAD実行は旧指示ハッシュで確認。最終指示ハッシュでの独立再試験は未完了|
-|T04独立再試験|旧指示版PASS|別チャット・別PAD実行は旧指示ハッシュで確認。最終指示ハッシュでの独立再試験は未完了|
+|T01〜T07、T10|PASS_CURRENT_REVISION|現行版の新規通常チャット生成、無修正貼付け・保存・2回実行・期待値照合を個別証跡へ記録|
+|T08|FAILED_CURRENT_REVISION_FORMAT|現行版は有効なRobin fenced blockを返さず、拒否／inline／未出力。期待エラー合格へ読み替えない|
+|T04|PASS_CURRENT_REVISION|現行版でFilterParameters原文保持、無修正貼付け・保存・2回実行・期待行照合を確認|
+|T09|BLOCKED_CURRENT_PACKAGE_GENERATION|既存runtime probeは別証跡でPASSだが、現行packageの無修正Robin生成・受入は未確認|
+|T10|PASS_CURRENT_REVISION_PRIMARY|現行版で変更範囲外行の逐語一致、無修正貼付け・保存・実行・成果物照合を確認|
+|T01/T04/T10独立再試験|PASS_CURRENT_REVISION_INDEPENDENT|別チャット・別PADフローで現行版T01/T04/T10を再試験済み|
 
 前回のCopilot Studio単体保存拒否と、M365 Copilot画面でAgent Builder項目が見えなかった事実は履歴として保持するが、今回の通常チャット検証の再開条件やBLOCKED理由にはしない。
 
@@ -159,3 +159,9 @@ P3残課題は `catalog/coverage.json` の `p3_blocked_items` に11件を追加�
 現作業版のケース別判定は `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` に固定し、T04/T10一次受入・T04/T10独立再試験PASS、知識precheckは参照確認PASS、その他は未実行またはBLOCKEDとして旧版成功を継承しない。
 
 P0〜P5の要件監査表は `catalog/evidence/issue5-completion-audit-20260910.json`。P4はT04/T10一次受入、T04/T10独立再試験、知識precheckを現作業版で確認済みで、残りは未実行である。T04/T10貼付け時の可視6件は仮想化による偽陰性で、Designerの総アクション数（9／16）を確認して保存・実行した。
+
+### 最新P3実測追補（2026-09-10）
+
+日時加算は `DateTime.Add ... TimeUnit.Days` を新規専用フローへ追加し、原文コピー・保存・2回実行、`2026/09/11 0:00:00` を確認した（`catalog/evidence/p3-date-add-probe-20260910.json`）。
+
+サブフローは `P3Worker` を作成し、Mainから `CALL P3Worker` で呼び出した。Workerのタイムアウト付きメッセージは2回とも `ButtonPressed=OK` で完了した（`catalog/evidence/p3-subflow-probe-20260910.json`）。Error blockの骨格と同様、これらのprobeは現行bundle未統合である。エラー発生子アクション、カスタムエラーハンドラー、Else-if・入れ子、DataTable成功構文、Excel反復などは未確認のまま保持する。

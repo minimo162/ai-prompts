@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-09-10T21:32:29+09:00",
+  "captured_at": "2026-09-10T21:56:36+09:00",
   "status": "partial",
   "branch": "codex/issue-5-acceptance-20260910b",
-  "head": "761fae8",
+  "head": "c3efbd9",
   "issue": "https://github.com/minimo162/ai-prompts/issues/5",
   "requirements": [
     {
@@ -27,8 +27,8 @@
     {
       "phase": "P3",
       "status": "PARTIAL_ITEM_BLOCKS",
-      "evidence": ["coverage.json observed_variant_count=86", "coverage.json p3_blocked_items=11", "p3-boolean-probe-20260910.json", "p3-subtract-probe-20260910.json", "p3-date-add-probe-20260910.json", "p3-date-subtract-probe-20260910.json", "p3-date-format-probe-20260910.json", "p3-list-remove-probe-20260910.json", "p3-folder-create-probe-20260910.json", "p3-file-exists-probe-20260910.json", "p3-file-move-probe-20260910.json", "p3-file-rename-probe-20260910.json", "p3-excel-sheet-probe-20260910.json", "p3-else-probe-20260910.json", "p3-break-probe-20260910.json", "p3-continue-probe-20260910.json", "p3-error-block-probe-20260910.json", "p3-datatable-row-failure-20260910.json", "p3-datatable-row-list-failure-20260910.json", "existing CSV/Office/PDF evidence references"],
-      "gap": "Boolean, numeric/date subtract, date addition, DateAndTime, folder-create, file-exists, file-move (single run), file-rename (success plus collision no-op), Excel sheet-selection, If/Else structure, Loop/Break/Continue, and error-block skeleton are proven in separate probes but not yet bundled; custom date formatting, Else-if/nested branches, false-branch side effects, deterministic move rerun, Excel data iteration, list get, error-triggering child action, subflow create/call, and successful DataTable row insertion/iteration/cell access remain unobserved."
+      "evidence": ["coverage.json observed_variant_count=86", "coverage.json p3_blocked_items=11", "p3-boolean-probe-20260910.json", "p3-subtract-probe-20260910.json", "p3-date-add-probe-20260910.json", "p3-date-subtract-probe-20260910.json", "p3-date-format-probe-20260910.json", "p3-list-remove-probe-20260910.json", "p3-folder-create-probe-20260910.json", "p3-file-exists-probe-20260910.json", "p3-file-move-probe-20260910.json", "p3-file-rename-probe-20260910.json", "p3-excel-sheet-probe-20260910.json", "p3-else-probe-20260910.json", "p3-break-probe-20260910.json", "p3-continue-probe-20260910.json", "p3-error-block-probe-20260910.json", "p3-subflow-probe-20260910.json", "p3-datatable-row-failure-20260910.json", "p3-datatable-row-list-failure-20260910.json", "existing CSV/Office/PDF evidence references"],
+      "gap": "Boolean, numeric/date subtract, date addition, DateAndTime, folder-create, file-exists, file-move (single run), file-rename (success plus collision no-op), Excel sheet-selection, If/Else structure, Loop/Break/Continue, error-block skeleton, and subflow creation/call are proven in separate probes but not yet bundled; custom date formatting, Else-if/nested branches, false-branch side effects, deterministic move rerun, Excel data iteration, list get, error-triggering child action, custom error handler, and successful DataTable row insertion/iteration/cell access remain unobserved."
     },
     {
       "phase": "P4",
