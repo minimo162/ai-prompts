@@ -51,5 +51,5 @@
     "p3_blocked_items": "catalog/coverage.json:p3_blocked_items",
     "static_checks": "catalog/evidence/current-package-static-check-20260910b.json"
   },
-  "next_operation": "Keep the package partial: obtain valid unmodified T08 and current-package T09 Robins, then decide whether to integrate the separate Boolean probe under a new bundle hash with full regression."
+  "next_operation": "Keep the package partial: obtain valid unmodified T08 and current-package T09 Robins, then decide whether to integrate the separate Boolean/subtract probes under a new bundle hash with full regression."
 }

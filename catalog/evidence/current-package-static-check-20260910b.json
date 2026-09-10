@@ -12,7 +12,8 @@
   ],
   "not_proven": [
     "Current-package T08 valid Robin fenced-block generation (current attempts failed at refusal/inline/未出力 format)",
-    "Current-package T09 Robin generation and unmodified paste (runtime probe is separately PASS)",
+    "Current-package T08/T09 Robin generation and unmodified paste (T09 runtime probe is separately PASS)",
+    "P3 Boolean/subtract probes are separately PASS but not integrated into the seven-file bundle; remaining P3 gaps are not closed",
     "11 item-level P3 captures requiring additional PAD Designer/runtime support",
     "GitHub CI (no checks are configured)"
   ]

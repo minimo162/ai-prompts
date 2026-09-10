@@ -4,7 +4,7 @@
 
 既存の変数・テキスト・ループ・ファイル読取り・Office・PDF操作に、2026-09-09/10の日時取得、空データテーブル、行追加失敗、CSV読取り・書出し、FilterDataTable、ファイルコピー、サブテキスト取得、テキスト書出し、テキスト変数書込み2設定、For each、If2、Excel/Word編集可能起動2設定、フォルダー取得2設定、ファイル変数読取り、PDFページ2単独抽出を加え、`catalog/index.json` は86観測バリアントです。既存51例と追加例を、採取・再貼付け・実行・失敗の証拠範囲ごとに分けています。初期の専用フローは`RobinCatalog_20260907`、Officeの採取先はユーザーが用意した`test`です。コピー前のクリップボードはメモリーに保持して復元し、その内容をファイルへ記録していません。
 
-2026-09-10の現作業版では、左パネル全体の完全対応を主張せず、`coverage.json` の `observed_variant_count=86` と `complete=false` を正本とします。T04/T10のCopilot生成時の原文変化は `evidence/normal-chat-raw-provenance-20260910.json` に保存し、現作業版T01〜T07、T04/T10一次受入、T01/T04/T10独立再試験、未採取構文・UI依存のfail-closed負例は各受入証拠へ記録しています。T08は形式失敗、T09はWebAutomationランタイムBLOCKEDです。現作業版の指示・bundleハッシュは `README.md` と `copilot/README.md` に記録しています。過去の73・61等の値は履歴であり、現行値へ読み替えません。
+2026-09-10の現作業版では、左パネル全体の完全対応を主張せず、`coverage.json` の `observed_variant_count=86` と `complete=false` を正本とします。T04/T10のCopilot生成時の原文変化は `evidence/normal-chat-raw-provenance-20260910.json` に保存し、現作業版T01〜T07、T04/T10一次受入、T01/T04/T10独立再試験、未採取構文・UI依存のfail-closed負例は各受入証拠へ記録しています。P3のBoolean・減算probeは別証跡でPASSですが、現行bundle未統合です。T08は形式失敗、T09は現行package生成未確認です。現作業版の指示・bundleハッシュは `README.md` と `copilot/README.md` に記録しています。過去の73・61等の値は履歴であり、現行値へ読み替えません。
 
 ## 履歴（現行値へ読み替えない）
 

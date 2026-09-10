@@ -2472,13 +2472,14 @@
       "evidence": "evidence/p3-boolean-probe-20260910.json",
       "resume": "現行bundleへ原文と型説明を追加する場合は、ハッシュ更新後にT01-T10を同一最終版で再受入"
     },
-    {
-      "id": "A-arithmetic-add-subtract",
-      "missing": "減算",
-      "status": "BLOCKED_EXTERNAL_UI",
-      "reason": "PAD Designerの減算アクション原文が未採取。加算の既存証跡を減算へ拡張しない。",
-      "resume": "『変数を小さくする』を専用フローへ追加し、原文と実行値を保存"
-    },
+  {
+    "id": "A-arithmetic-add-subtract",
+    "missing": "減算",
+    "status": "PASS_PROBE_NOT_BUNDLED",
+    "reason": "新規専用フローで10から3を減算し、Robin原文のコピー・保存・実行（preview=7）を確認した。ただし現行bundleを変更していないため、配布ナレッジ上の完了には未反映。",
+    "evidence": "evidence/p3-subtract-probe-20260910.json",
+    "resume": "現行bundleへ原文と型説明を追加する場合は、ハッシュ更新後にT01-T10を同一最終版で再受入"
+  },
     {
       "id": "A-list-create-add-get",
       "missing": "リスト項目取出し",

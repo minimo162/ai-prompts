@@ -14,7 +14,7 @@
   },
   "raw": {
     "path": "catalog/evidence/p3-boolean-probe-20260910.robin",
-    "sha256": "133b2fb5e8d4538973174159a26baa3a5e47c553de0f940420258e64cc273e6a",
+    "sha256": "e7d0321af0dc7fee337b917308164b6d5c13f7040ef69dcc657ea725db54cf0c",
     "text": "SET P3Bool TO True",
     "copy_observed": true,
     "clipboard_restored": true
