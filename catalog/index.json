@@ -5007,6 +5007,19 @@
       "evidence": "evidence/p3-error-default-handler-20260911.json; evidence/p3-error-default-handler-flow-20260911.robin"
     },
     {
+      "id": "normal-chat-current-bundle-knowledge-precheck-2026-09-11",
+      "date": "2026-09-11",
+      "browser": "Microsoft Edge extension",
+      "model": "GPT 5.6 Think Deeper",
+      "bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": ["knowledge-precheck"],
+      "scope": "Fresh normal M365 Copilot chat with the current bundle attached; knowledge-only UTF-8 file-read question, no Robin generation, and response text/hash saved.",
+      "current_package_acceptance": false,
+      "execution_status": "pass_reference_only",
+      "evidence": "generated/normal-chat-current-bundle-knowledge-precheck-20260911/result.json; generated/normal-chat-current-bundle-knowledge-precheck-20260911/prompt.txt; generated/normal-chat-current-bundle-knowledge-precheck-20260911/response.txt"
+    },
+    {
       "id": "p3-subflow-probe-2026-09-10",
       "date": "2026-09-10",
       "pad_file_version": "2.71.115.26224",

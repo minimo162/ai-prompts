@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T05:28:58+09:00",
+  "status": "PASS_REFERENCE_ONLY",
+  "chat": {
+    "browser": "Edge",
+    "tab_id": "1316361146",
+    "url": "https://m365.cloud.microsoft/chat?es=SSR",
+    "model_requested": "GPT 5.6 Think Deeper",
+    "model_observed": "Think Deeper",
+    "attachment_name": "PAD-Robin-Knowledge-Bundle.txt",
+    "attachment_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
+    "upload_notice_observed": "デバイスからアップロードすると、OneDrive (個人用) にコピーが送信されます。",
+    "sent": true,
+    "response_observed": true
+  },
+  "package": {
+    "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
+    "manifest": "copilot/knowledge-bundle-manifest-20260911c.json"
+  },
+  "prompt": {
+    "path": "catalog/generated/normal-chat-current-bundle-knowledge-precheck-20260911/prompt.txt",
+    "sha256": "0b620902752832baafecfeedb0d52e52c791725fe5dda9cdc14bc8dab0cdac38",
+    "bytes": 644,
+    "characters": 242
+  },
+  "response": {
+    "path": "catalog/generated/normal-chat-current-bundle-knowledge-precheck-20260911/response.txt",
+    "sha256": "8370cec39bd3b4105d9206a886230b823d4b308c8c2102f9497800bf2d24d300",
+    "bytes": 1274,
+    "characters": 642,
+    "robin_blocks": 0,
+    "dom_text_sha256_without_terminal_newline": "b0a24e5cc524da9663ff28ec2bbfee297a82692fe8f7db6af378d292888470e0",
+    "dom_text_characters_without_terminal_newline": 641,
+    "saved_artifact_note": "response.txt preserves the observed answer text with one terminal UTF-8 newline; the DOM answer text without that terminal newline matches the recorded DOM hash."
+  },
+  "checks": {
+    "used_only_attached_knowledge": true,
+    "reported_utf8_literal_and_variable_path": true,
+    "reported_encoding": "File.TextFileEncoding.UTF8",
+    "reported_output_variable": "FileContents",
+    "reported_source_and_evidence_paths": true,
+    "reported_unconfirmed_scope": true,
+    "excluded_t01_t10_issue_and_local_existence": true,
+    "generated_robin": false
+  },
+  "result": "Fresh normal M365 Copilot chat referenced the current bundle, answered the knowledge-only precheck, cited bundle sections, and did not generate Robin. This is reference-only evidence, not T01-T10 or PAD acceptance."
+}

@@ -13,7 +13,8 @@
     "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
     "knowledge_bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
     "status": "partial_p3_t09_boundary_bundle_integrated_t01_t10_pending",
-    "evidence": "evidence/current-package-status-20260911-p3c-integration.json"
+    "evidence": "evidence/current-package-status-20260911-p3c-integration.json",
+    "knowledge_precheck": "generated/normal-chat-current-bundle-knowledge-precheck-20260911/result.json"
   },
   "left_panel_scope": {
     "complete": false,
