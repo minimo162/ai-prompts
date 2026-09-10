@@ -47,7 +47,7 @@
     {
       "id": "P5",
       "status": "PASS_LOCAL_STATIC_PARTIAL_LIVE",
-      "evidence": ["catalog/evidence/current-package-static-check-20260911-final.json", "Raw 6", "Package 3949/7/86", "Catalog 84", "Test-Copilot 304 offline/mock", "DOM 898", "git diff --check", "catalog/evidence/nonlive-all-suite-20260911.json (34/34 PASS; candidate unchanged)", "catalog/evidence/nonlive-all-suite-20260911b.json (35/35 PASS; candidate unchanged; T01 preparation gate included)"],
+      "evidence": ["catalog/evidence/current-package-static-check-20260911-final.json", "Raw 6", "Package 3949/7/86", "Catalog 84", "Test-Copilot 304 offline/mock", "DOM 898", "git diff --check", "catalog/evidence/nonlive-all-suite-20260911.json (34/34 PASS; candidate unchanged)", "catalog/evidence/nonlive-all-suite-20260911b.json (35/35 PASS; candidate unchanged; T01 preparation gate included)", "catalog/evidence/nonlive-all-suite-20260911c.json (35/35 PASS after BOM correction; candidate unchanged)"],
       "gap": "No live M365/Edge integration claim"
     }
   ],
