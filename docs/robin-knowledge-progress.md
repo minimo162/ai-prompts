@@ -271,3 +271,5 @@ P3統合版をHEAD `7b06805`で静的検査し、Raw 6、Package 3949/7/86、Cat
 最新HEAD `0ce051b`でもT09停止境界を含むbundleの同じ静的ゲートを再実行してPASSした。新bundleのCopilot送信とT01〜T10受入は未実行である（`catalog/evidence/current-package-static-check-20260911-t09.json`）。
 
 同じ現行版で`tests/Test-Copilot.ps1`も完走し、304件のオフライン／モック契約検査をPASSした。ライブM365 Copilot／Edge統合ではないため、新bundleの知識precheck・T01〜T10・T08/T09受入は未完了のままとする（`catalog/evidence/current-package-static-check-20260911-t09b.json`）。
+
+2026-09-11の現行bundle SHA `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644` で、通常M365 Copilotの知識precheckをThink Deeperで送信し、回答原文・DOMハッシュを保存した（`catalog/generated/normal-chat-current-bundle-knowledge-precheck-20260911/result.json`）。これは参照確認のみで、Robin生成・T01〜T10・PAD受入を含まない。追加T01以降の送信は未実施。

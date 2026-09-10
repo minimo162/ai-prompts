@@ -16,7 +16,7 @@
 
 現作業版bundleの原本対応は [knowledge-bundle-manifest-20260911c.json](knowledge-bundle-manifest-20260911c.json) に固定しています。マニフェスト自体をナレッジへ添付する必要はありません。
 
-2026-09-11追補として、7原本へP3の実測根拠（真偽値・数値／日時演算、Else／Else-if／EXIT／NEXT、既定エラーハンドラー、サブフロー、DataTable作成、File.Exists／Folder.Create／Move／Rename、Excel範囲読取り、T09停止境界）を統合しました。失敗境界（カスタム日時書式、名前付きFileNotFoundルール、DataTable行追加、Excel For each、リスト取得、T09）は未確認として明記しています。最新bundle SHA-256は `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644` です。新ハッシュでの知識precheckとT01〜T10再受入が完了するまで、現行packageを受入済みとは扱いません。
+2026-09-11追補として、7原本へP3の実測根拠（真偽値・数値／日時演算、Else／Else-if／EXIT／NEXT、既定エラーハンドラー、サブフロー、DataTable作成、File.Exists／Folder.Create／Move／Rename、Excel範囲読取り、T09停止境界）を統合しました。失敗境界（カスタム日時書式、名前付きFileNotFoundルール、DataTable行追加、Excel For each、リスト取得、T09）は未確認として明記しています。最新bundle SHA-256は `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644` です。新bundleの知識precheckは参照確認PASSまで実施しましたが、T01〜T10再受入が完了するまで現行packageを受入済みとは扱いません。
 
 ナレッジは技術資料であり、指示欄と同じ優先順位の命令書ではありません。`pad-robin-prompts.md` は既存の編集用原稿として残し、配布版と二重に指示欄へ貼りません。
 

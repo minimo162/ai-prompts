@@ -40,8 +40,9 @@
     },
     {
       "id": "P4",
-      "status": "NOT_COMPLETED_NEW_BUNDLE",
-      "gap": "New-bundle knowledge precheck, T01-T10, T01/T04/T10 independent retests, T08 valid fenced Robin, T09 current-package run, and negative suite are not all run"
+      "status": "PARTIAL_NEW_BUNDLE_PRECHECK_PASS",
+      "evidence": ["catalog/generated/normal-chat-current-bundle-knowledge-precheck-20260911/result.json (PASS_REFERENCE_ONLY; no Robin generated)"],
+      "gap": "New-bundle T01-T10, T01/T04/T10 independent retests, T08 valid fenced Robin, T09 current-package run, and negative suite are not all run"
     },
     {
       "id": "P5",
