@@ -172,3 +172,7 @@ DataTableは3列1行（`A/10/対象`）の作成を新規専用フローでコ�
 
 Excelの専用probeでは、合成`excel-catalog.xlsx`の`Sheet1`を選択し、A1:C6をTypedValuesで読み取り、Designer上で`ExcelData=6行, 3列`・エラー0を確認した。Run監視ヘルパーの完了表示は45秒以内に観測できなかったため、範囲読取りはUIプレビュー成功・完了通知未確認として分離し、Excelデータ反復は未確認のまま保持する（`catalog/evidence/p3-excel-read-range-probe-20260911.json`、`p3-excel-read-range-probe-20260911.robin`）。
 Excelの専用probeでは、合成`excel-catalog.xlsx`の`Sheet1`を選択し、A1:C6をTypedValuesで読み取り、Designer上で`ExcelData=6行, 3列`・エラー0を確認した。Run監視ヘルパーの完了表示は45秒以内に観測できなかったため、範囲読取りはUIプレビュー成功・完了通知未確認として分離した。For eachの設定は保存後に消える試行と、読み取り前にループが置かれる失敗原文を別証跡へ保存し、Excelデータ反復は未確認のまま保持する（`catalog/evidence/p3-excel-read-range-probe-20260911.json`、`p3-excel-read-range-probe-20260911.robin`、`p3-excel-foreach-configuration-boundary-20260911.json`）。
+
+### 静的ゲート追補（2026-09-11）
+
+HEAD `b411a7c`でRaw契約6 assertions、Copilot package（指示3,949 UTF-16／7原本／86 observed actions）、Robin catalog 84 checks、bundled DOM 898 checks、`git diff --check`を再実行してPASSした。`tests/Test-Copilot.ps1`は30秒タイムアウト履歴のため未完了扱いとし、T08/T09の現行パッケージ受入やP3統合をPASSへ読み替えていない（`catalog/evidence/current-package-static-check-20260911.json`）。

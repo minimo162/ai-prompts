@@ -245,3 +245,5 @@ Dの「フォルダーの作成」は合成fixture配下の新規専用フロー
 現作業版のT01〜T10／独立再試験／負例の判定表は `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` に固定した。T01〜T07、T04/T10一次受入、T04/T10独立再試験はPASS_CURRENT_REVISION、知識precheckはPASS_REFERENCE_ONLY、T08は生成形式失敗、T09はBLOCKEDとして扱う。知識precheckの回答原文は `catalog/generated/normal-chat-current-revision-knowledge-precheck-20260910/response.txt` に保存した。
 
 P0〜P5の要件ごとの完了監査は `catalog/evidence/issue5-completion-audit-20260910.json` に固定した。P1と静的P5は完了、P2/P3は項目別BLOCKED、P4はT01〜T07・T04/T10一次・独立受入・知識precheckを確認済みで、T08形式失敗とT09実行依存を残すため全体完了とは扱わない。T04/T10のPAD貼付けヘルパー可視6件は仮想化による偽陰性で、Designerの9／16アクション表示と実行成功を優先した。
+
+2026-09-11の現HEAD `b411a7c`で静的ゲートを再実行した。Raw契約6 assertions、Copilot package（3,949 UTF-16／7原本／86 observed actions）、Robin catalog 84 checks、bundled DOM 898 checks、`git diff --check`はPASS。`tests/Test-Copilot.ps1`はタイムアウト履歴のため未完了扱いとし、現行パッケージのT08/T09やP3統合成功とは扱わない（`catalog/evidence/current-package-static-check-20260911.json`）。
