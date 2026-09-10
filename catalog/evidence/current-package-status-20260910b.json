@@ -3,6 +3,7 @@
   "captured_at": "2026-09-10T15:30:37+09:00",
   "status": "partial",
   "branch": "codex/issue-5-acceptance-20260910b",
+  "head": "0f1d6a4",
   "base_main": "69fe344",
   "instruction": {
     "path": "copilot/agent-instructions.txt",
