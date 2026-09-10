@@ -2497,8 +2497,8 @@
     "id": "A-datetime",
     "missing": "カスタム日時書式化",
     "status": "PARTIAL_PROBE_NOT_BUNDLED",
-    "reason": "日付の減算、DateAndTime取得設定、日時加算は新規専用probeで原文コピー・保存・2回実行を確認した。カスタム書式化は未採取で、各probeは現行bundle未統合。",
-    "evidence": "evidence/p3-date-add-probe-20260910.json; evidence/p3-date-subtract-probe-20260910.json; evidence/p3-date-format-probe-20260910.json; evidence/p3-date-format-custom-failure-20260910.json",
+    "reason": "日付の減算、DateAndTime取得設定、日時加算は新規専用probeで原文コピー・保存・2回実行を確認した。カスタム書式化は現行PAD専用probeでダイアログ選択までは到達したが、保存更新時にSequence contains no matching elementの内部例外が発生し、成功原文・実行値は未採取。各probeは現行bundle未統合。",
+    "evidence": "evidence/p3-date-add-probe-20260910.json; evidence/p3-date-subtract-probe-20260910.json; evidence/p3-date-format-probe-20260910.json; evidence/p3-date-format-custom-failure-20260910.json; evidence/p3-date-format-dialog-crash-20260911.json",
     "resume": "カスタム日時書式化を採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
   },
   {
