@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T20:35:00+09:00",
+  "status": "failed_probe_visualizer_persistence_and_value_count",
+  "missing_item": "C-datatable",
+  "scope": "Second synthetic PAD DataTable probe; no current-package acceptance claim.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3DataTableRowValid_20260910",
+    "process_id": 52664,
+    "action_count": 4
+  },
+  "configuration_attempt": {
+    "intended_table_columns": 3,
+    "intended_row_values": ["A", "B"],
+    "row_value_expression": "%RowValues%",
+    "visualizer_after_save": "1 row, 3 columns",
+    "table_at_runtime": "0 rows, 0 columns",
+    "raw_copy_observed": false,
+    "raw_copy_status": "Copied text was not stable"
+  },
+  "runtime_error": {
+    "message": "追加するために指定された値の数 (2) がデータ テーブルの列の数 (0) と一致しません。",
+    "line": 4,
+    "error_observed": true,
+    "flow_completion": false
+  },
+  "result": "The PAD visualizer showed a configured table before parent save but the runtime table reverted to zero columns. The two-value RowToAdd therefore failed; no success syntax was inferred and no generated raw Robin was accepted."
+}

@@ -4758,6 +4758,18 @@
       "current_package_acceptance": false,
       "execution_status": "failed_probe_row_value_count_mismatch",
       "evidence": "evidence/p3-datatable-row-failure-20260910.json"
+    },
+    {
+      "id": "p3-datatable-row-list-failure-2026-09-10",
+      "date": "2026-09-10",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeP3DataTableRowValid_20260910",
+      "ui_automation_ids": ["Variables.CreateNewDatatable", "Variables.AddRowToDataTable"],
+      "scope": "Synthetic visualizer/list RowToAdd attempt; visualizer configuration did not persist to runtime and no raw copy was accepted.",
+      "current_package_acceptance": false,
+      "execution_status": "failed_probe_visualizer_persistence_and_value_count",
+      "evidence": "evidence/p3-datatable-row-list-failure-20260910.json"
     }
   ],
   "application_integration": {

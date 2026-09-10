@@ -26,5 +26,6 @@
     "error_line": 2,
     "runtime_error_observed": true
   },
-  "result": "The native PAD error proves that a five-column DataTable cannot accept the one-value RowToAdd probe. No guessed list syntax or automatic repair was added; successful row insertion, row iteration, and cell access remain unobserved."
+  "second_attempt": "catalog/evidence/p3-datatable-row-list-failure-20260910.json",
+  "result": "The native PAD errors prove both a five-column/one-value mismatch and a visualizer-persistence zero-column/two-value mismatch. No guessed list syntax or automatic repair was added; successful row insertion, row iteration, and cell access remain unobserved."
 }
