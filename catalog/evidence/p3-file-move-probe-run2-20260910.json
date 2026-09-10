@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-10T23:02:44+09:00",
+  "flow_name": "RobinKnowledgeP3FileMove_20260910",
+  "run_status": "success",
+  "ready_observed": true,
+  "source_exists_after": true,
+  "destination_exists_after": true,
+  "moved_files_preview": "[]",
+  "source_sha256": "96dcdbf3ca1f183eaab387259990ac187294f067ca6692a15b8d9350ef5e248b",
+  "destination_sha256": "96dcdbf3ca1f183eaab387259990ac187294f067ca6692a15b8d9350ef5e248b",
+  "collision_behavior": "DoNothing"
+}

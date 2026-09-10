@@ -2266,8 +2266,8 @@
         "folder-get-files-all-no-subfolders",
         "file-write-t04-filtered-csv"
       ],
-      "reason": "UTF-8読取り・変数パス読取り・UTF-8書出し・単一ファイルコピー・フォルダー内ファイル取得2設定・T04中間CSV書出しは原文保存・別フロー貼付け・実行確認済み。存在確認、フォルダー作成、移動・名前変更は未確認。",
-      "reference": "catalog/index.json; catalog/evidence/text-write-validation.json; catalog/evidence/file-copy-validation.json; catalog/evidence/folder-get-files-rt-run-1.json; catalog/evidence/folder-get-files-all-rt-run-1.json; catalog/evidence/t03-partial-run-1.json; catalog/evidence/t04-positive-flow-run-6.json",
+      "reason": "UTF-8読取り・変数パス読取り・UTF-8書出し・単一ファイルコピー・フォルダー内ファイル取得2設定・T04中間CSV書出しは原文保存・別フロー貼付け・実行確認済み。別probeで存在確認、フォルダー作成、移動（成功＋DoNothing衝突再実行）、名前変更も確認したが、false分岐は未確認。",
+      "reference": "catalog/index.json; catalog/evidence/text-write-validation.json; catalog/evidence/file-copy-validation.json; catalog/evidence/folder-get-files-rt-run-1.json; catalog/evidence/folder-get-files-all-rt-run-1.json; catalog/evidence/t03-partial-run-1.json; catalog/evidence/t04-positive-flow-run-6.json; catalog/evidence/p3-file-move-probe-20260910.json; catalog/evidence/p3-file-rename-probe-20260910.json",
       "live_ui_candidates": [
         {
           "ui_name": "ファイルが存在する場合",
@@ -2536,9 +2536,9 @@
     "id": "D-files-folders",
     "missing": "存在確認・フォルダー作成・移動・名前変更",
     "status": "PARTIAL_PROBE_NOT_BUNDLED",
-    "reason": "フォルダー作成・既存ファイル存在確認・ファイル移動・名前変更を新規専用probeで原文コピー・保存・実行した。移動はDoNothing設定の1回、名前変更は成功1回と衝突no-op 1回で、false分岐は未採取。probe内容は現行bundle未統合。",
+    "reason": "フォルダー作成・既存ファイル存在確認・ファイル移動・名前変更を新規専用probeで原文コピー・保存・実行した。移動は成功1回とDoNothing衝突再実行1回、名前変更は成功1回と衝突no-op 1回で、false分岐は未採取。probe内容は現行bundle未統合。",
     "evidence": "evidence/p3-folder-create-probe-20260910.json; evidence/p3-file-exists-probe-20260910.json; evidence/p3-file-move-probe-20260910.json; evidence/p3-file-rename-probe-20260910.json",
-    "resume": "現行bundleへ原文と説明を追加する場合は、ハッシュ更新後にT01-T10を同一最終版で再受入し、false分岐と移動の再実行を採取"
+    "resume": "現行bundleへ原文と説明を追加する場合は、ハッシュ更新後にT01-T10を同一最終版で再受入し、false分岐を採取"
   },
   {
     "id": "E-excel",
