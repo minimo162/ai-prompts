@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T06:12:00+09:00",
+  "status": "STAGED_STATE_EXPIRED",
+  "case": "T01",
+  "prior_stage_evidence": "catalog/evidence/t01-current-bundle-staged-20260911.json",
+  "current_edge_observation": {
+    "browser": "Microsoft Edge",
+    "matching_t01_tab_id": null,
+    "matching_t01_tab_visible": false,
+    "old_precheck_tab_reused": false
+  },
+  "package": {
+    "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
+    "fixture_sha256": "2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f"
+  },
+  "actions_taken": [],
+  "result": "The previously staged T01 tab was not present in the fresh Edge inventory. No old tab was reused and no upload or message was sent in this observation. Recreate the stage only immediately before a separately-confirmed T01 send."
+}

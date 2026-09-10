@@ -16,7 +16,8 @@
     "evidence": "evidence/current-package-status-20260911-p3c-integration.json",
     "knowledge_precheck": "generated/normal-chat-current-bundle-knowledge-precheck-20260911/result.json",
     "t01_prepared": "evidence/t01-current-bundle-prepared-20260911.json",
-    "t01_staged": "evidence/t01-current-bundle-staged-20260911.json"
+    "t01_staged": "evidence/t01-current-bundle-staged-20260911.json",
+    "t01_stage_current": "evidence/t01-current-bundle-stage-expired-20260911.json"
   },
   "left_panel_scope": {
     "complete": false,

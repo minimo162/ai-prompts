@@ -5020,6 +5020,19 @@
       "evidence": "evidence/t01-current-bundle-prepared-20260911.json"
     },
     {
+      "id": "normal-chat-current-bundle-t01-stage-expired-2026-09-11",
+      "date": "2026-09-11",
+      "browser": "Microsoft Edge extension",
+      "model": "GPT 5.6 Think Deeper",
+      "bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": ["T01"],
+      "scope": "Fresh Edge inventory no longer contained the previously staged T01 tab; no old tab reuse, upload, prompt entry, or send was performed.",
+      "current_package_acceptance": false,
+      "execution_status": "staged_state_expired",
+      "evidence": "evidence/t01-current-bundle-stage-expired-20260911.json"
+    },
+    {
       "id": "normal-chat-current-bundle-t01-staged-2026-09-11",
       "date": "2026-09-11",
       "browser": "Microsoft Edge extension",
