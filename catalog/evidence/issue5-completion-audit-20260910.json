@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-09-10T20:34:21+09:00",
+  "captured_at": "2026-09-10T20:43:05+09:00",
   "status": "partial",
   "branch": "codex/issue-5-acceptance-20260910b",
-  "head": "6050741",
+  "head": "2e7e817",
   "issue": "https://github.com/minimo162/ai-prompts/issues/5",
   "requirements": [
     {
