@@ -1,0 +1,3 @@
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance
+Excel.ReadFromExcel.ReadCells Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 EndColumn: $'''C''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ExcelData
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelInstance Name: $'''Sheet1'''

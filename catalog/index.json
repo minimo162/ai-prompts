@@ -4761,6 +4761,30 @@
       "evidence": "evidence/p3-excel-sheet-probe-20260910.json"
     },
     {
+      "id": "p3-excel-read-range-probe-2026-09-11",
+      "date": "2026-09-11",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": false,
+      "native_flow_name": "RobinKnowledgeP3ExcelSheetProbe2_20260910",
+      "ui_automation_ids": ["Excel.LaunchExcel", "Excel.ReadFromExcel", "Excel.SetActiveWorksheet"],
+      "scope": "Synthetic excel-catalog.xlsx Sheet1 and A1:C6 TypedValues read; UI preview showed 6 rows and 3 columns, while the bounded run-helper completion acknowledgement was not observed.",
+      "current_package_acceptance": false,
+      "execution_status": "pass_probe_preview_completion_ack_unconfirmed",
+      "evidence": "evidence/p3-excel-read-range-probe-20260911.json; evidence/p3-excel-read-range-probe-20260911.robin"
+    },
+    {
+      "id": "p3-excel-foreach-configuration-boundary-2026-09-11",
+      "date": "2026-09-11",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_names": ["RobinKnowledgeP3ExcelSheet_20260910", "RobinKnowledgeP3ExcelSheetProbe2_20260910"],
+      "scope": "Dedicated synthetic For each configuration attempts; persistence and ordering failures preserved, with no iteration success claim.",
+      "current_package_acceptance": false,
+      "execution_status": "blocked_foreach_configuration_persistence",
+      "evidence": "evidence/p3-excel-foreach-configuration-boundary-20260911.json; evidence/p3-excel-foreach-flow-state-20260911.robin; evidence/p3-excel-sheet-existing-flow-state-20260911.robin"
+    },
+    {
       "id": "p3-file-exists-probe-2026-09-10",
       "date": "2026-09-10",
       "pad_file_version": "2.71.115.26224",

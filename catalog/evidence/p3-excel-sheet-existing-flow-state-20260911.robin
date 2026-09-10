@@ -1,0 +1,2 @@
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelInstance Name: $'''Sheet1'''

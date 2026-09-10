@@ -2337,8 +2337,8 @@
         "excel-close-no-save",
         "excel-close-t04-no-save"
       ],
-      "reason": "起動・セル／範囲読取り・別名保存・終了と、T04の読み取り専用範囲抽出→別CSV経由のxlsx保存を実測済み。シート選択・データ反復の独立例は未確認。",
-      "reference": "catalog/index.json; catalog/evidence/t04-positive-flow-run-6.json; catalog/evidence/t04-positive-flow-run-7.json",
+      "reason": "起動・セル／範囲読取り・別名保存・終了と、T04の読み取り専用範囲抽出→別CSV経由のxlsx保存を実測済み。別probeでSheet1選択とA1:C6の6行3列プレビューも確認したが、Excelデータ反復の独立例は未確認。",
+      "reference": "catalog/index.json; catalog/evidence/t04-positive-flow-run-6.json; catalog/evidence/t04-positive-flow-run-7.json; catalog/evidence/p3-excel-read-range-probe-20260911.json",
       "live_ui_candidates": [
         {
           "ui_name": "Excel ワークシート内のセルを選択",
@@ -2545,8 +2545,8 @@
     "id": "E-excel",
     "missing": "シート選択・データ反復",
     "status": "PARTIAL_PROBE_NOT_BUNDLED",
-    "reason": "新規専用probeでExcelを開き、Sheet1を名前指定でアクティブ化する2アクションをコピー・保存・2回実行した。データ反復は未採取で、probeは現行bundle未統合。",
-    "evidence": "evidence/p3-excel-sheet-probe-20260910.json",
+    "reason": "新規専用probeでExcelを開き、Sheet1を名前指定でアクティブ化する2アクションをコピー・保存・2回実行した。別probeでA1:C6のExcelData=6行3列プレビューを確認したが、For each設定の保存・ループ内副作用が安定せずデータ反復は未採取で、probeは現行bundle未統合。",
+    "evidence": "evidence/p3-excel-sheet-probe-20260910.json; evidence/p3-excel-read-range-probe-20260911.json; evidence/p3-excel-foreach-configuration-boundary-20260911.json",
     "resume": "Excelデータ反復を採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
   },
     {

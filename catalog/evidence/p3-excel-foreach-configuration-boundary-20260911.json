@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T02:52:05+09:00",
+  "status": "blocked_foreach_configuration_persistence",
+  "missing_item": "E-excel",
+  "scope": "Dedicated synthetic PAD flows only; no business workbook or current Copilot package was changed.",
+  "observations": [
+    {
+      "flow": "RobinKnowledgeP3ExcelSheet_20260910",
+      "process_id": 49348,
+      "attempt": "Excel.ReadFromExcel A1:C6 and For each %ExcelData%",
+      "result": "After the action dialogs closed, the list item remained generic and the flow-variable panel did not expose ExcelData; no execution was claimed."
+    },
+    {
+      "flow": "RobinKnowledgeP3ExcelSheetProbe2_20260910",
+      "process_id": 50760,
+      "raw_state": "catalog/evidence/p3-excel-foreach-flow-state-20260911.robin",
+      "raw_sha256": "ca702ebd1a04a2d3395910646800bf3b794b984911fae60c83f80c608bf0ad4c",
+      "result": "The captured state placed LOOP FOREACH before Excel.ReadFromExcel and placed IncreaseVariable outside the loop; it is an invalid sequencing probe, not iteration success."
+    }
+  ],
+  "decision": "Keep the separate A1:C6 range-read preview evidence as bounded success, but do not claim Excel data iteration. Do not repair or reorder captured Robin by hand.",
+  "result": "The next missing E-excel evidence is a PAD-persisted For each with an observed loop-body side effect and run result. The current attempts did not provide that evidence."
+}
