@@ -180,3 +180,5 @@ Excelの専用probeでは、合成`excel-catalog.xlsx`の`Sheet1`を選択し、
 ### 静的ゲート追補（2026-09-11）
 
 HEAD `b411a7c`でRaw契約6 assertions、Copilot package（指示3,949 UTF-16／7原本／86 observed actions）、Robin catalog 84 checks、bundled DOM 898 checks、`git diff --check`を再実行してPASSした。`tests/Test-Copilot.ps1`は30秒タイムアウト履歴のため未完了扱いとし、T08/T09の現行パッケージ受入やP3統合をPASSへ読み替えていない（`catalog/evidence/current-package-static-check-20260911.json`）。
+
+最新HEAD `1cd329c`でも同じ静的ゲートを再実行してPASSした。対象ハッシュは不変で、`tests/Test-Copilot.ps1`のタイムアウトとT08/T09・P3の未完了判定も維持する（`catalog/evidence/current-package-static-check-20260911b.json`）。
