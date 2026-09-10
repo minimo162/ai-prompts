@@ -1,0 +1,93 @@
+1. 前提・対象範囲・未確認点
+
+目的
+合成Excel C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\t04-filter-input.xlsx の Data シートで、実測済みの A1:C6 範囲のみを読み取り専用で読み取り、Status列が 対象 の行（A、C、D）だけを抽出し、元ブックを変更せず、別Excelブック C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t04-output-current-bundle.xlsx に保存するフロー案です。
++ 1
+
+根拠
+ナレッジの実測済み T04 正例 catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin 系列のみを根拠にしています。手順は
+
+Excel読取り専用起動
+A1:C6読取り
+FilterDataTable
+DataTable→CSV変換
+UTF-8中間CSV保存
+別ExcelでCSVを開く
+xlsx SaveAs
+Excel終了
+
+の系列です。セルへ複数行CSV文字列を直接書く失敗例（_x000D_混入）は採用していません。
+
+未確認点
+
+ナレッジには実際の Variables.ConvertDataTableToCSV 原文および CSV→Excel→SaveAs の全9アクション原文が抜粋掲載されておらず、完全なRobin行は添付資料内で取得できません。
+利用者の契約では未採取の命令名・引数名・列挙値を推測してはならないため、完全な貼付け用Robinを生成できません。
+
+そのため、コードブロックは出しません。
+
+2. PADで先に作る設定
+入力ブック
+C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\t04-filter-input.xlsx
+読み取り専用で開く
+Data シートを対象
+読み取り範囲は A1:C6 のみ。
++ 1
+中間CSV
+
+T04正例と同様に DataTable を CSV 化して UTF-8 保存する中間ファイルが必要です。ナレッジでは catalog/evidence/t04-filtered.csv を使用しています。
+
+出力ブック
+C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t04-output-current-bundle.xlsx
+
+既存ファイルを上書きするかどうかは、ナレッジ本文に SaveAs の衝突設定が掲載されていないため未確認です。
+
+3. 貼り付け用Robin
+
+出力不可。
+
+理由:
+
+依頼では「貼り付け用Robin」を要求されていますが、添付ナレッジには T04 完成フローを構成する全9アクションのRobin原文が掲載されていません。
+確認できるのは以下の一部原文のみです。
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess（読取り専用起動）
+Excel.ReadFromExcel.ReadCells（A1:C6読取り）
+Excel.CloseExcel.Close
+Variables.FilterDataTable の別実測例
+Variables.ConvertDataTableToCSV のRobin原文
+中間CSV保存に使用したT04専用 File.WriteText 原文
+CSVをExcelで開く原文
+Excel.SaveExcel.SaveAs の実際のT04保存原文
+
+が添付資料に記載されておらず、命令名や引数の推測生成は禁止条件に抵触します。
+
+4. デザイナー上の確認方法
+
+実測済みT04正例と照合する場合は以下を確認します。
+
+読取り専用で入力Excelを開いていること。
+読取り範囲が A1:C6 であること。
+FilterDataTable で 対象 のみ抽出していること。
+DataTableを直接Excelセルへ書かず、中間CSV経由であること。
+CSVを開いた別Excelから xlsx SaveAs していること。
+入力ファイルの SHA-256 が変化していないこと。
+出力が3行3列であること。
+5. 保存・実行・照合手順
+
+期待結果はナレッジのT04正例と同じです。
++ 1
+
+Status	Item	Amount
+対象	A	10
+対象	C	25
+対象	D	5
+
+確認事項:
+
+入力ブックは未変更。
+出力ブックは3行3列。
+A/C/D の3件のみ含む。
++ 1
+_x000D_ がセル内に混入していない。
+行数・セル値で照合し、出力xlsxのファイルSHAは判定に使わない。
+
+この添付ナレッジだけでは完全なT04 Robin原文が不足しています。完全な貼付け用Robinが必要な場合は、catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin の実測原文（またはその該当抜粋）を提示してください。こちらは未掲載部分を推測せず、その原文だけを根拠に完成形へ整理します。

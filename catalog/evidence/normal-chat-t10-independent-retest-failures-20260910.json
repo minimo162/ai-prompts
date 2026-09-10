@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "bundle_sha256": "431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3",
+  "attempts": [
+    {"chat_result": "catalog/generated/normal-chat-t10-20260910-current-independent-v1/result.json", "failure": "Generated Robin used escaped arrow tokens and overescaped unchanged paths; not pasted as acceptance."},
+    {"chat_result": "catalog/generated/normal-chat-t10-20260910-current-independent-v2/result.json", "failure": "Generated Robin used escaped arrow tokens; not pasted as acceptance."},
+    {"chat_result": "catalog/generated/normal-chat-t10-20260910-current-independent-v3/result.json", "failure": "Generated Robin used escaped arrow tokens; not pasted as acceptance."},
+    {"chat_result": "catalog/generated/normal-chat-t10-20260910-current-independent-v4/result.json", "failure": "Generated Robin used escaped arrow tokens; PAD paste produced no actions; no run."},
+    {"chat_result": "catalog/generated/normal-chat-t10-20260910-current-independent-v5/result.json", "failure": "Generated Robin used escaped arrow tokens; not pasted as acceptance."},
+    {"chat_result": "catalog/generated/normal-chat-t10-20260910-current-independent-v3/result.json", "pad_error": "catalog/evidence/normal-chat-t10-independent-v3-pad-error.json", "failure": "Unmodified candidate with overescaped Excel path failed at SaveAs; no output accepted."}
+  ],
+  "hand_edit_applied": false,
+  "status": "independent_retest_unproven",
+  "next_condition": "Obtain a fresh normal-chat response that preserves the original PAD tokens byte/line-wise, or retain the independent T10 blocker without editing the generated Robin."
+}

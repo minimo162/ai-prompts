@@ -1,0 +1,102 @@
+1. 前提・対象範囲・未確認点
+
+目的
+C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\t04-filter-input.xlsx の Data シートの A1:C6 を読み取り専用で読み、Status=対象 の行（A/C/D）だけを抽出し、元ブックを変更せず別ブックへ保存すること。
++ 1
+
+入力
+
+C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\t04-filter-input.xlsx
+
+出力
+
+C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t04-independent-current-bundle.xlsx
+
+根拠
+
+実測済み excel-t04-filter-to-workbook/roundtrip.robin
+読み取り専用Excel→A1:C6読取り→FilterDataTable→CSV中間保存→CSVを別Excelで開く→SaveAs(xlsx) の9アクション系列のみ使用。
+
+未確認点
+
+このナレッジではシート選択構文は未採取です。T04実測例は「Dataシートがアクティブな入力」を前提にしています。今回の添付ブックは Data シートで構成されており、依頼も同条件です。
++ 1
+2. PADで先に作る設定
+
+事前作成は不要です。
+
+このRobinは以下のインスタンス・変数を内部生成します。
+
+ExcelInstance
+ExcelInstance2
+ExcelData（DataTable）
+FilteredDataTable（DataTable）
+CSVText（Text）
+
+保存先フォルダー:
+
+C:\Users\yuuki\ai-prompts\catalog\evidence
+3. 貼り付け用Robin
+
+対象サブフロー: メイン
+
+Plain Text
+1
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\t04-filter-input.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelInstance
+2
+Excel.ReadFromExcel.ReadCells Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 EndColumn: $'''C''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ExcelData
+3
+Variables.FilterDataTable DataTable: ExcelData FilterParameters: { ^['RULE', 'COLUMN', 'OPERATOR', 'VALUE'], [$'''''' , 0, $'''Equal''', $'''対象'''] } MatchCase: True FilteredDataTable=> FilteredDataTable
+4
+Variables.ConvertDataTableToCSV.DataTableToCSVCommonSeparator DataTable: FilteredDataTable IncludeColumnNames: False ColumnsSeparator: Variables.CSVColumnsSeparator.SystemDefault CSVText=> CSVText
+5
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\t04-filtered.csv''' TextToWrite: CSVText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+6
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\t04-filtered.csv''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance2
+7
+Excel.SaveExcel.SaveAs Instance: ExcelInstance2 DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t04-independent-current-bundle.xlsx'''
+8
+Excel.CloseExcel.Close Instance: ExcelInstance2
+9
+Excel.CloseExcel.Close Instance: ExcelInstance
+その他の行を表示する
+
+根拠: catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin の実測済み9アクション系列。出力xlsxパスのみ依頼先へ変更。列0=対象 のフィルター条件と CSV 中間保存経路は実測例を保持。
+
+4. デザイナー上の確認方法
+
+確認項目:
+
+アクション数が 9 個であること。
+順序が
+Excel起動(読取専用)
+範囲読取り
+FilterDataTable
+DataTable→CSV
+テキスト保存
+CSVをExcelで開く
+SaveAs
+Close
+Close の順であること。
+FilteredDataTable の出力型が DataTable であること。
+デザイナーに赤エラーが表示されないこと。
+FilterParameters が列インデックス 0、値 対象 のままであること。
+5. 保存・実行・照合手順
+空フローへ貼り付け。
+保存。
+実行。
+次のファイルが生成されることを確認。
+C:\Users\yuuki\ai-prompts\catalog\evidence\t04-filtered.csv
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t04-independent-current-bundle.xlsx
+生成された xlsx を開く。
+行内容が以下の3行であることを確認。
+対象 / A / 10
+対象 / C / 25
+対象 / D / 5
++ 1
+元ブック t04-filter-input.xlsx が変更されていないことを確認する。T04実測例では入力ブック不変を照合済みです。
+
+確認済み範囲
+
+ナレッジ記載の catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin は、再貼付け・保存・2回実行・出力照合済み。
+今回の回答は、その実測済み系列の出力パスのみ依頼先へ変更したものです。出力先パス変更後の実行結果は本環境では未確認です。

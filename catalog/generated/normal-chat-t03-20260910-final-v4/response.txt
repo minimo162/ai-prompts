@@ -1,0 +1,52 @@
+1. 前提・対象範囲・未確認点
+目的: C:\Users\yuuki\ai-prompts\catalog\fixtures\files 内のファイルを1回ずつ処理し、.txt のみUTF-8で読み取る。
+対象外: .csv、.md。
+根拠:
+フォルダー内のファイル取得（*）: catalog/actions/folder-get-files/all-files-no-subfolders.robin
+For each: catalog/actions/foreach/items-variable.robin
+拡張子判定If（Contains）: catalog/actions/if/current-file-contains-txt.robin
+UTF-8テキスト読取り（変数パス）: catalog/actions/file-read-text/variable-path-utf8.robin
+For each＋If＋ファイル読取りのT03組合せは実行確認済み。
+未確認:
+Else構文はナレッジ未確認のため生成しません。.csv と .md は「条件不一致で何もしない経路」とします。
+2. 事前設定
+入力フォルダー:
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+生成される変数:
+Files
+CurrentFile
+FileContents
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+2
+LOOP FOREACH CurrentFile IN Files
+3
+    IF Contains(CurrentFile, $'''.txt''', False) THEN
+4
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+5
+    END
+6
+END
+4. デザイナー上の確認方法
+エラー表示がないこと。
+アクション順が以下になっていること。
+Folder.GetFiles
+For each
+If
+File.ReadTextFromFile.ReadText
+Files はファイル一覧。
+CurrentFile は現在処理中のファイルパス。
+FileContents は最後に読み取った .txt ファイル内容。
+5. 合成データでの照合手順
+catalog\fixtures\files に .txt、.csv、.md を配置。
+フローを保存。
+実行。
+For each実行中に .txt だけが File.ReadTextFromFile.ReadText を通過することを確認。
+.csv と .md は If条件不一致で読取りアクションへ入らないことを確認。
+実行後、FileContents に .txt の内容（例: alpha 日本語）が取得されることを確認。

@@ -1,0 +1,4 @@
+--- T10 現行 bundle 再生成（Robin原文エスケープ厳密確認） ---
+添付した動作確認済み既存PADフローの機械的コピー `generated-robin.txt`（内容は元の `generated.robin` とSHA-256一致）を、構造を保ったまま最小変更してください。変更は、Excelの `Excel.WriteToExcel.WriteCell` の1行だけにある `CopilotOffice 246` をASCII文字列 `T10-Changed` に変更することと、Excelの `Excel.SaveExcel.SaveAs` の保存先ファイル名だけを `C:\Users\yuuki\ai-prompts\catalog\evidence\copilot-excel-t10-current-bundle.xlsx` へ変更することの2点に限定します。WordとPowerPointにある `CopilotOffice 246` は変更しないでください。既存の入力・変数名・アクション順・保存形式・終了処理・エラー経路を保持してください。
+
+貼り付け用Robinは、添付された元フローのPADコピー形式をそのまま維持してください。WindowsパスはRobin本文でバックスラッシュを**ちょうど2本**（`C:\\Users\\...` の形式）にし、4本へ増やさないでください。アンダースコアの前にMarkdown用のバックスラッシュを追加しないでください（`AiPromptsOfficeCatalog_20260907` のまま）。コードブロック内へPlain Text、行番号、説明、NBSP、疑似コード、省略記号を入れず、実際のRobin命令だけを出してください。

@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "status": "partial",
+  "browser": "Microsoft Edge CDP",
+  "model": "GPT 5.6 Think Deeper",
+  "instruction_sha256": "e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1",
+  "knowledge_bundle_sha256": "431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3",
+  "pad_evidence_dir": "catalog/evidence/normal-chat-final-pad-20260910",
+  "cases": {
+    "T01": {
+      "status": "pass",
+      "generation": "catalog/generated/normal-chat-t01-20260910-final-v3/result.json",
+      "robin_sha256": "2e7bbd90f5a72f70f56092ccce33120640be4b49bdee9d350dd9c017401e97ba",
+      "pad": ["t01-paste.json", "t01-run1.json", "t01-run2.json"],
+      "output": "catalog/evidence/normal-chat-t01-output-current-bundle.txt",
+      "output_sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2"
+    },
+    "T02": {
+      "status": "pass",
+      "generation": "catalog/generated/normal-chat-t02-20260910-final-v3/result.json",
+      "robin_sha256": "29e177e91a902171a55a394a6577f913b80167e41090c4cc4708ad944058c23d",
+      "pad": ["t02-paste.json", "t02-run1.json", "t02-run2.json"],
+      "output": "catalog/evidence/normal-chat-t02-output-current-bundle.csv",
+      "output_sha256": "8f0748cc4d149228331dfacc0a5c46e117270a7e9dee564c4f631924142cf7d3"
+    },
+    "T03": {
+      "status": "pass",
+      "generation": "catalog/generated/normal-chat-t03-20260910-final-v4/result.json",
+      "robin_sha256": "123da608af8a672efbc257da65d7038e30dab9cb5da7d0ab2dc3cae8a714fa5d",
+      "pad": ["t03-paste.json", "t03-run1.json", "t03-run2.json"]
+    },
+    "T04": {
+      "status": "partial",
+      "generation": "catalog/generated/normal-chat-t04-20260910-final-v5/result.json",
+      "robin_sha256": "DCDDD20FDA66F7B1FAA2FF66CDBC4D3A0FE6FB1841D9BFB8EB586E4E7D70D000",
+      "failure": "Generated FilterParameters quote variant was not accepted by PAD; no hand edit was made.",
+      "failure_evidence": "catalog/evidence/normal-chat-t04-final-v5-pad-paste-failure-20260910.json",
+      "exact_copy_retest": "catalog/generated/normal-chat-t04-20260910-final-exact-v1/result.json",
+      "valid_prior_evidence": "catalog/evidence/normal-chat-t04-current-v4-acceptance.json"
+    },
+    "T05": {
+      "status": "pass",
+      "generation": "catalog/generated/normal-chat-t05-20260910-final-v3/result.json",
+      "robin_sha256": "0b60086068c9849b6f726fb5484956a8c463219bc45fa8a58bd57b9b229ed24e",
+      "pad": ["t05-paste.json", "t05-run1.json", "t05-run2.json"],
+      "output": "catalog/evidence/normal-chat-t05-current-bundle.xlsx"
+    },
+    "T06": {
+      "status": "pass",
+      "generation": "catalog/generated/normal-chat-t06-20260910-final-v3/result.json",
+      "robin_sha256": "0f217cf47eec05ca3da8651adbf2525636dafb2e43b4af88fd30a9e7aa500928",
+      "pad": ["t06-paste.json", "t06-run1.json", "t06-run2.json"],
+      "output": "catalog/evidence/normal-chat-t06-current-bundle.docx"
+    },
+    "T07": {
+      "status": "pass",
+      "generation": "catalog/generated/normal-chat-t07-20260910-final-v3/result.json",
+      "robin_sha256": "ae3606442e9f2bfdb6d853d4ca73d66a29ddc6e7f1b36b17476c947b4fdc1837",
+      "pad": ["t07-paste.json", "t07-run1.json", "t07-run2.json"],
+      "output": "catalog/evidence/normal-chat-t07-current-bundle.txt"
+    },
+    "T08": {
+      "status": "expected_error",
+      "generation": "catalog/generated/normal-chat-t08-20260910-final-v3/result.json",
+      "robin_sha256": "59af898c37c5db7b601c2162a89a1b1d6f698c96c76bda8471256ed5d3c161a5",
+      "pad": ["t08-paste.json", "t08-run-error.json"],
+      "expected": "missing-file runtime error; no downstream output"
+    },
+    "T09": {
+      "status": "partial_blocked_runtime",
+      "evidence": "catalog/evidence/t09-runtime-block-20260910.json",
+      "note": "UI elements were captured and pasted; WebAutomation runtime completion was not observed."
+    },
+    "T10": {
+      "status": "partial_expected_error",
+      "generation": "catalog/generated/normal-chat-t10-20260910-final-v8/result.json",
+      "robin_sha256": "855EC93CB55C92D4C0A98CDD5D33729407C2CA553AC32D4475FACF84082B1C20",
+      "pad": ["t10-paste-helper-failure.json", "t10-recopy.txt", "t10-run-error.json"],
+      "note": "Designer showed 16 actions, but raw recopy differed at Word/PowerPoint path escaping and execution stopped at Word SaveAs line 9."
+    }
+  },
+  "independent": {
+    "T01": {"status": "pass_pre_final_instruction", "evidence": "catalog/generated/normal-chat-t01-20260910-current-independent-v1/result.json"},
+    "T04": {"status": "pass_pre_final_instruction", "evidence": "catalog/generated/normal-chat-t04-20260910-current-independent-v1/result.json"},
+    "T10": {"status": "pending", "evidence": "catalog/evidence/normal-chat-t10-independent-retest-failures-20260910.json"}
+  },
+  "remaining": [
+    "T04 final-package exact raw acceptance",
+    "T09 WebAutomation runtime success",
+    "T10 raw contract and independent acceptance",
+    "independent T01/T04 rerun against instruction hash e467...",
+    "final T01-T10 same-package negative and package publication gates"
+  ]
+}

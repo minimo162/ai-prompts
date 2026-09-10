@@ -1,83 +1,46 @@
-1. 前提・対象範囲・未確認点
-
-目的
-合成Excelファイルを編集可能（ReadOnly=False）で開き、セル B2 のみへ ASCII文字列 T05-Changed を書き込み、別名で保存します。
-
-入力ファイル
-C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\excel-catalog.xlsx
-
-出力ファイル
-C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t05-final.xlsx
-
-成功条件
-
-B2 が T05-Changed
-A1 を含む無関係なセルは変更しない
-元ファイル excel-catalog.xlsx は変更しない
-保存先は別名ファイル
-Excelを正常終了する
-
-根拠（確認済み）
-
-Excelを既存ブックで編集可能に開く（ReadOnly=False）: catalog/actions/excel-launch/open-editable.robin
-Excelセル書込み: Excelカテゴリ実測例（Excel.WriteToExcel.WriteCell）
-Excel別名保存: Excelカテゴリ実測例（Excel.SaveExcel.SaveAs）
-Excel終了: Excelカテゴリ実測例（Excel.CloseExcel.Close）
-
-未確認範囲
-
-シート選択の独立例は未採取です。今回のフローは、実測ナレッジにあるセル書込み構文のみを使用し、既定アクティブシート前提です。
-2. PADで先に作る設定・依存
-入力ブック
-C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\excel-catalog.xlsx
-出力ブック
-C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t05-final.xlsx
-生成されるインスタンス変数
-ExcelInstance （Excelインスタンス）
-セル書込み
-列: B
-行: 2
-値: T05-Changed
-保存形式
-実測例と同じ Excel.ExcelFormat.OpenXmlWorkbook
-3. 貼り付け用Robin
-
-対象サブフロー: Main
-
+前提・対象範囲・未確認点
+目的: 合成Excel C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\excel-catalog.xlsx を編集可能で開き、セル B2 にだけ T05-Changed を書き込み、別名で C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t05-current-bundle.xlsx へ保存する。
+入力: 既存ブック excel-catalog.xlsx
+出力: normal-chat-t05-current-bundle.xlsx
+元ファイル上書き: しない（SaveAs）
+成功条件: 出力ブックの B2=T05-Changed、元ファイルは不変。
+根拠: 確認済み原文は PAD-Robin-Knowledge-Bundle 内の catalog/actions/excel-launch/open-editable.robin、Excelセル書込み例、Excel.SaveExcel.SaveAs、Excel.CloseExcel.Close。
+未確認: この依頼向けに同一フローを実行した証拠は添付ナレッジ内にないため、以下は「確認済み原文の組合せ」であり、この組合せ自体の再貼付け・実行証跡は提示されていません。
+PADで先に作る設定
+追加の入力変数不要。
+Excelインスタンス変数: ExcelInstance
+保存先フォルダー: C:\Users\yuuki\ai-prompts\catalog\evidence
+既存の excel-catalog.xlsx は開かれていない状態で実行する。
+貼り付け用Robin（対象サブフロー: Main）
 Plain Text
 1
 Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance
 2
 Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T05-Changed''' Column: $'''B''' Row: 2
 3
-Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-final.xlsx'''
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-current-bundle.xlsx'''
 4
 Excel.CloseExcel.Close Instance: ExcelInstance
-4. デザイナー上の確認方法
-貼り付け後にエラー表示がないことを確認する。
-アクション数が以下の4件であることを確認する。
+デザイナー上の確認方法
+エラー表示がないこと。
+アクション数が4個であること。
+順序が
 Excel の起動
 Excel ワークシートに書き込む
-Excel の保存（別名保存）
-Excel を閉じる
-ExcelInstance が起動アクションで生成され、後続3アクションで参照されていることを確認する。
-書込みアクションが
-Column=B
-Row=2
-Value=T05-Changed になっていることを確認する。
-保存アクションの保存先が C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t05-final.xlsx になっていることを確認する。
-5. 保存・実行・出力照合手順
-PADフローを保存する。
-実行する。
-出力ファイル C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t05-final.xlsx が作成されたことを確認する。
-元ファイル C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\excel-catalog.xlsx を開き、変更されていないことを確認する。
-出力ファイルを開く。
-セル B2 が T05-Changed であることを確認する。
-セル A1 およびその他の無関係セルが元の内容のままであることを確認する。
-同じフローを再実行し、出力ファイル内容が期待どおりであることを再確認する。
+Excel の保存（SaveAs）
+Excel を閉じる の順であること。
+ExcelInstance が全アクションで一致していること。
+ReadOnly: False になっていること。
+書込み先が Column=B, Row=2 になっていること。
+実行・照合手順
+実行前に入力ブック excel-catalog.xlsx を複製保管する。
+フロー実行後、出力 normal-chat-t05-current-bundle.xlsx を開く。
+B2 が T05-Changed であることを確認する。
+A1 を含む無関係セルが入力ブックと同じであることを確認する。
+元ファイル excel-catalog.xlsx を開き、B2 が変更されていないことを確認する。
+再実行時は出力ファイルの更新日時と B2 の値を再確認する。
 
-確認済み根拠の範囲
+根拠状態:
 
-編集可能な既存Excel起動（ReadOnly=False）: catalog/actions/excel-launch/open-editable.robin
-セル書込み、別名保存、終了のRobin構文はExcel実測カタログの確認済み例に基づいています。
-シート切替、データ反復、条件分岐は今回使用していません。未採取構文の推測も行っていません。
+各アクション原文は確認済み。
+この依頼向けの4アクション組合せについては、ナレッジ中に再貼付け・実行・期待値照合済み証跡は見当たりません。

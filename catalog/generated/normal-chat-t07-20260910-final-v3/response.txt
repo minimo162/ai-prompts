@@ -1,0 +1,50 @@
+1. 前提・対象範囲・未確認点
+目的: PDFの2ページ目だけを抽出し、その抽出テキストをUTF-8テキストとして保存する。
+入力PDF: C:\Users\yuuki\ai-prompts\catalog\fixtures\pdf\source-a.pdf
+出力テキスト: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-current-bundle.txt
+入力PDFは変更しない。
+ページ2には PAGE_TOKEN_A2 が存在することを添付PDFで確認した。
+根拠はナレッジの「T07のページ2単独抽出（リポジトリfixture）」の実測済み2アクションのみ。
+依頼の保存先ファイル名はナレッジ既存例から変更されているため、実測済み原文の保存先パスのみ差し替えた未再実行の組合せです。元の2アクション構成自体は貼付け・保存・2回実行証拠があります。
+2. PADで先に作る設定
+サブフロー: 対象サブフローへ貼り付け
+追加の入力変数: 不要
+保存先フォルダー:
+C:\Users\yuuki\ai-prompts\catalog\evidence
+出力ファイル:
+normal-chat-t07-current-bundle.txt
+既存ファイルがある場合:
+上書き (File.IfFileExists.Overwrite)
+3. 貼り付け用Robin
+
+対象サブフロー: メイン
+置換範囲: 新規配置
+
+Plain Text
+1
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 2 DetectLayout: False ExtractedText=> ExtractedPDFText
+2
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-current-bundle.txt''' TextToWrite: ExtractedPDFText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+4. デザイナー上の確認方法
+アクション数が2個であること。
+1個目が PDF からテキストを抽出 のページ範囲版であること。
+FromPageNumber: 2、ToPageNumber: 2 になっていること。
+出力変数が ExtractedPDFText であること。
+2個目が テキストをファイルに書き込む であること。
+TextToWrite: ExtractedPDFText になっていること。
+AppendNewLine: False であること。
+保存時にデザイナーのエラー表示が出ないこと。
+5. 保存・実行・照合手順
+空フローへ貼り付ける。
+保存する。
+実行する。
+normal-chat-t07-current-bundle.txt を開く。
+PAGE_TOKEN_A2 が含まれることを確認する。添付PDFの2ページ目に存在する識別子です。
+PAGE_TOKEN_A1 が含まれていないことを確認する。
+入力 PDF source-a.pdf の更新日時や内容が変更されていないことを確認する。
+再実行し、出力が同じ内容で上書きされることを確認する。
+
+根拠
+
+T07実測済みページ2単独抽出: PAD-Robin-Knowledge-Bundle 内「T07のページ2単独抽出（リポジトリfixture）」、原文 catalog/generated/normal-chat-t07-20260910-final/robin.txt、貼付け・実行証拠あり。
+入力PDFのページ2に PAGE_TOKEN_A2 を含むことを確認。

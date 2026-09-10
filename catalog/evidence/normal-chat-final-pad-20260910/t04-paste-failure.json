@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T14:08:42+09:00",
+  "flow_name": "RobinKnowledgeT04FinalPackage_20260910",
+  "source_robin": "catalog/generated/normal-chat-t04-20260910-final-v5/robin.txt",
+  "source_sha256": "DCDDD20FDA66F7B1FAA2FF66CDBC4D3A0FE6FB1841D9BFB8EB586E4E7D70D000",
+  "expected_action_count": 9,
+  "paste_confirmed": false,
+  "observed_action_count_by_helper": 0,
+  "failure": "Paste not confirmed; count=0",
+  "root_cause_observed": "The generated FilterDataTable FilterParameters row contains a quote-count variant from the measured source; no hand edit was made.",
+  "valid_prior_evidence": "catalog/evidence/normal-chat-t04-current-v4-acceptance.json",
+  "execution_requested": false
+}

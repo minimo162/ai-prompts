@@ -1,0 +1,2 @@
+--- T10 独立再試験用 ---
+添付 `generated-robin.txt` の既存16アクションをそのまま使い、ExcelのA1書込み値だけを `T10-Changed` にし、ExcelのSaveAs出力だけを `C:\Users\yuuki\ai-prompts\catalog\evidence\copilot-excel-t10-v8.xlsx` に変更してください。WordとPowerPoint、およびそれ以外の全行は元ファイルのままにしてください。貼付け用Robinは添付原文の記号を変更せず、そのまま1つのコードブロックで出してください。

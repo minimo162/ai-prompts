@@ -1,0 +1,79 @@
+1. 前提・対象範囲・未確認点
+対象: 添付正本 generated-robin の16アクション。
+指示内容:
+Excel.WriteToExcel.WriteCell の値 CopilotOffice 246 → T10-Changed
+Excel.SaveExcel.SaveAs の保存先のみ C:\Users\yuuki\ai-prompts\catalog\evidence\copilot-excel-t10-current-independent.xlsx
+Word本文・保存先、PowerPoint本文・保存先、その他の全行・変数・順序・終了処理は保持。
+根拠:
+添付正本 generated-robin。
+Excel/Word/PowerPoint 16操作の実測構成はナレッジの Office 三形式例。
+未確認:
+この変更後フローのPAD実行結果は未確認（既存正本への置換作業のみ）。
+2. 事前設定
+既存フローの該当16アクションと置換。
+保存先フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence\ が存在することを確認。
+既存ファイルとの衝突時の結果確認を実施。
+3. 貼り付け用Robin
+Plain Text
+1
+Excel.LaunchExcel.LaunchUnderExistingProcess Visible: True UseMachineLocale: False Instance=\> ExcelInstance
+2
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T10-Changed''' Column: $'''A''' Row: 1
+3
+Excel.ReadFromExcel.ReadCell Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues CellValue=\> ExcelData
+4
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\\\Users\\\\yuuki\\\\ai-prompts\\\\catalog\\\\evidence\\\\copilot-excel-t10-current-independent.xlsx'''
+5
+Excel.CloseExcel.Close Instance: ExcelInstance
+6
+Word.LaunchWord.Launch Visible: True Instance=\> WordInstance
+7
+Word.WriteToWord.WriteEndOfDocument Instance: WordInstance Text: $'''CopilotOffice 246''' AppendNewLine: False
+8
+Word.ReadFromWord.Read Instance: WordInstance WordData=\> WordData
+9
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\\\Temp\\\\AiPromptsOfficeCatalog\_20260907\\\\copilot-word.docx'''
+10
+Word.CloseWord.Close Instance: WordInstance
+11
+PowerPoint.LaunchPowerPoint.Launch Instance=\> PowerPointInstance
+12
+PowerPoint.AddPowerPointSlide.AddSlideAsLast Instance: PowerPointInstance SlideIndex=\> SlideIndex
+13
+PowerPoint.WriteToPowerPoint.WriteToSlideAtPosition Instance: PowerPointInstance Text: $'''CopilotOffice 246''' AppendNewLine: False SlidePosition: SlideIndex
+14
+PowerPoint.ReadFromPowerPoint.Read Instance: PowerPointInstance PowerPointData=\> PowerPointData
+15
+PowerPoint.SavePowerPoint.SaveAs Instance: PowerPointInstance DocumentFormat: PowerPoint.PowerPointFormat.PPTX DocumentPath: $'''C:\\\\Temp\\\\AiPromptsOfficeCatalog\_20260907\\\\copilot-powerpoint.pptx'''
+16
+PowerPoint.ClosePowerPoint.Close Instance: PowerPointInstance
+その他の行を表示する
+4. デザイナー上の確認
+アクション数が16件のままであること。
+先頭から末尾まで順序が正本と一致すること。
+変更箇所が次の2か所のみであること。
+Excel.WriteToExcel.WriteCell の Value
+Excel.SaveExcel.SaveAs の DocumentPath
+変数:
+ExcelInstance
+ExcelData
+WordInstance
+WordData
+PowerPointInstance
+SlideIndex
+PowerPointData
+が元のまま維持されていること。
+5. 実行・照合手順
+空フローまたは対象フローへ貼り付け。
+保存。
+実行。
+出力Excel
+copilot-excel-t10-current-independent.xlsx
+A1 が T10-Changed を確認。
+出力Word
+本文が CopilotOffice 246 を確認。
+出力PowerPoint
+追加スライド本文が CopilotOffice 246 を確認。
+再実行し、生成物が期待どおり更新されることを確認。
+
+根拠: 添付正本 generated-robin の2箇所のみを変更。

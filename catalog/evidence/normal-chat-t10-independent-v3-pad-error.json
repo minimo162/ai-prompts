@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T13:37:02.7542485+09:00",
+  "flow_name": "RobinKnowledgeT10CurrentIndependentV3_20260910",
+  "run_status": "expected_error",
+  "error_messages": [
+    "Excel ドキュメント 'C:\\\\Users\\\\yuuki\\\\ai-prompts\\\\catalog\\\\evidence\\\\copilot-excel-t10-current-bundle.xlsx' を保存できませんでした。",
+    "Main",
+    "4"
+  ],
+  "errors_grid_observed": true,
+  "downstream_actions": 0,
+  "output_exists": false
+}
