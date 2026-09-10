@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T04:36:00+09:00",
+  "status": "blocked_webautomation_runtime_timeout",
+  "missing_item": "G-ui-browser",
+  "scope": "Synthetic local T09 PAD flow only; no external site, account, or business data was used.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeT09FilterPaste_20260910",
+    "process_id": 8748,
+    "action_count": 6,
+    "edge_window_observed": "T09 local PAD test - 個人 - Microsoft Edge"
+  },
+  "run_attempt": {
+    "helper": "tools/Run-PadFlowLive.ps1",
+    "timeout_seconds": 90,
+    "completion_observed": false,
+    "status_before_stop": "状態 実行中 112 秒",
+    "stop_button_observed_enabled": true,
+    "stop_invoked_once": true,
+    "status_after_stop": "状態: 準備完了"
+  },
+  "observed_error_context": [
+    "Web ページ内のテキスト フィールドに入力する",
+    "Web ページのリンクをクリック",
+    "Web ページ上の要素の詳細を取得します",
+    "Webページの Button '実行' をクリックします",
+    "Web ページから要素 Paragraph '未実行' の属性 'Own Text' を取得し、  に保存します",
+    "Web ブラウザーを閉じる",
+    "Web ブラウザー インスタンス"
+  ],
+  "result": "The current six-action T09 flow remained in execution beyond the 90-second bound, with WebAutomation action errors and a placeholder result '未実行' visible. The enabled stop control was invoked once and the flow returned to ready. T09 runtime success and AttributeValue=T09-clicked remain unobserved; the stop point is separated from the prior dedicated WAIT probe success."
+}

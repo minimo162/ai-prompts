@@ -4643,6 +4643,19 @@
       "evidence": "evidence/t09-runtime-probe-20260910.json"
     },
     {
+      "id": "p3-t09-current-runtime-reprobe-2026-09-11",
+      "date": "2026-09-11",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeT09FilterPaste_20260910",
+      "action_ids": ["web-launch-t09-local", "web-populate-t09-input", "web-click-t09-submit", "wait-t09-500ms", "web-get-t09-result", "web-close-t09"],
+      "scope": "Current six-action synthetic T09 runtime reprobe; execution remained active beyond 90 seconds with WebAutomation errors and was stopped once at an enabled stop control.",
+      "capture_method": "strict UIA fallback; no Trusted RPC",
+      "current_package_acceptance": false,
+      "execution_status": "blocked_webautomation_runtime_timeout",
+      "evidence": "evidence/p3-t09-current-runtime-reprobe-20260911.json"
+    },
+    {
       "id": "p3-boolean-subtract-probes-2026-09-10",
       "date": "2026-09-10",
       "pad_file_version": "2.71.115.26224",

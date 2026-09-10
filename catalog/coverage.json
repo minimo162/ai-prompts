@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-11T04:02:00+09:00",
-  "reconciled_at": "2026-09-11T04:02:00+09:00",
-  "reconciliation_note": "P3 evidence references and the seven-file bundle were refreshed from the current catalog. This file is not a complete PAD feature reference or current-session execution claim; same-version Copilot/PAD acceptance remains pending.",
+  "generated_at": "2026-09-11T04:52:00+09:00",
+  "reconciled_at": "2026-09-11T04:52:00+09:00",
+  "reconciliation_note": "P3 evidence references and the seven-file bundle were refreshed from the current catalog, including the T09 runtime reprobe boundary. This file is not a complete PAD feature reference or current-session execution claim; same-version Copilot/PAD acceptance remains pending.",
   "environment": {
     "pad_file_version": "2.71.115.26224",
     "language": "ja-JP",
@@ -11,9 +11,9 @@
   },
   "current_package": {
     "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-    "knowledge_bundle_sha256": "0c89e53ce84671fd4bf1da4287563bf79f5164674f22907c8a420758310b36e6",
-    "status": "partial_p3_bundle_integrated_t01_t07_t04_t10_history_t08_t09_pending",
-    "evidence": "evidence/current-package-status-20260911-p3-integration.json"
+    "knowledge_bundle_sha256": "513fe84b8bc1fe3acb9d9092f057bace4d47215fe2cb30945b23d3ff77685831",
+    "status": "partial_p3_t09_boundary_bundle_integrated_t01_t10_pending",
+    "evidence": "evidence/current-package-status-20260911-p3b-integration.json"
   },
   "left_panel_scope": {
     "complete": false,
@@ -2553,7 +2553,8 @@
       "id": "G-ui-browser",
       "missing": "PAD WebAutomation通し実行",
       "status": "PARTIAL_RUNTIME_PROBE",
-      "reason": "既存専用フローで待機値を一時的に1秒へ束ねたランタイムprobeは成功し、入力・クリック・T09-clicked取得・PAD完了を確認した。元のWAIT 500は実行前後で復元した。現行package生成Robinの無修正貼付け・固定待機値での受入は未確認。",
+      "reason": "既存専用フローで待機値を一時的に1秒へ束ねたランタイムprobeは成功し、入力・クリック・T09-clicked取得・PAD完了を確認した。元のWAIT 500は実行前後で復元した。一方、現行6アクション貼付け先を90秒実行した試行は112秒時点でも実行中で、WebAutomationエラーと未実行プレースホルダーが残り、停止後に準備完了へ戻った。現行package生成Robinの無修正貼付け・固定待機値での受入は未確認。",
+      "evidence": "evidence/t09-runtime-probe-20260910.json; evidence/p3-t09-current-runtime-reprobe-20260911.json",
       "resume": "現行packageの新規通常チャットT09 Robinを得て、待機設定を手修正せず専用フローへ貼付け・保存・実行・取得値を照合"
     }
   ]

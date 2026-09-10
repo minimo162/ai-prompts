@@ -225,7 +225,7 @@ P3の未採取項目は、coverageの `p3_blocked_items` に11件を項目単位
 ### 現作業版受入の追補（2026-09-10）
 
 現作業版ではT01〜T07の一次受入、T04/T10の一次受入、T01/T04/T10の独立再試験、知識precheck、未採取構文・UI依存のfail-closed負例を確認済みである。T08は有効なRobin fenced blockを生成しない形式失敗、T09はWebAutomation実行未完了、P3の未観測項目は未実行のままとする。これらの判定は `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` と個別受入証跡を正本とし、旧版の成功を継承しない。
-T09については、既存専用フローの待機値を一時的に1秒へ束ねたランタイムprobeで入力→クリック→`T09-clicked`取得→PAD完了を確認し、元の`WAIT 500`へ復元した。ただし現行packageの新規通常チャット生成Robinを無修正で貼付けた受入ではないため、P4のT09は未確認として保持する（`catalog/evidence/t09-runtime-probe-20260910.json`）。
+T09については、既存専用フローの待機値を一時的に1秒へ束ねたランタイムprobeで入力→クリック→`T09-clicked`取得→PAD完了を確認し、元の`WAIT 500`へ復元した。ただし現行packageの新規通常チャット生成Robinを無修正で貼付けた受入ではないため、P4のT09は未確認として保持する。現行6アクション貼付け先の90秒再probeは112秒時点でも実行中で、WebAutomationエラーと`未実行`結果要素が残ったため停止した（`catalog/evidence/t09-runtime-probe-20260910.json`、`catalog/evidence/p3-t09-current-runtime-reprobe-20260911.json`）。
 P3ではBoolean（`SET P3Bool TO True`、preview=True）と減算（10−3→7）を新規専用フローで採取・保存・実行した。いずれも現行bundleへ統合すると再ハッシュ・T01〜T10再受入が必要なため、別probeとして保持する（`catalog/evidence/p3-boolean-probe-20260910.json`、`p3-subtract-probe-20260910.json`）。
 日時の「日付の減算」は、合成2日付・単位Daysの新規専用フローで原文コピー・保存・2回実行（出力1）を確認した。別probeの「加算する日時」は1日加算を2回実行し、`2026/09/11 0:00:00`を確認した。カスタム書式化は専用probeで「現在の日時／システム タイム ゾーン」選択まで到達したが、保存更新時にPAD内部例外 `Sequence contains no matching element` が発生し、成功原文・実行値は未採取である。各probeは現行bundleへ未統合である（`catalog/evidence/p3-date-subtract-probe-20260910.json`、`catalog/evidence/p3-date-add-probe-20260910.json`、`catalog/evidence/p3-date-format-dialog-crash-20260911.json`）。
 「現在の日時を取得」のDateAndTime設定も、システムタイムゾーンの新規専用フローで原文コピー・保存・2回実行し、`2026/09/10 19:01:11`形式の出力を確認した。カスタム書式化は未採取で、DateAndTime／加算probeは現行bundleへ未統合である（`catalog/evidence/p3-date-format-probe-20260910.json`、`catalog/evidence/p3-date-add-probe-20260910.json`）。
@@ -253,6 +253,8 @@ P0〜P5の要件ごとの完了監査は `catalog/evidence/issue5-completion-aud
 最新HEAD `f308d90`でも同じ静的ゲートを再実行してPASSした。既定エラーハンドラーprobeは別証跡で成功したがbundle未統合で、T08/T09と残るP3の未完了判定を維持する（`catalog/evidence/current-package-static-check-20260911c.json`）。
 
 2026-09-11 P3追補統合版では、7原本へ実測済みP3成功と失敗境界を反映し、bundle SHA-256を `0c89e53ce84671fd4bf1da4287563bf79f5164674f22907c8a420758310b36e6`、マニフェストを `copilot/knowledge-bundle-manifest-20260911.json` に更新した。新bundleでの知識precheck、T01〜T10、独立再試験は未実行で、旧bundleの成功証跡を継承しない。現行coverageは `catalog/evidence/current-package-status-20260911-p3-integration.json` を正本とする。
+
+T09停止境界をP3統合版へ追補し、bundle SHA-256を `513fe84b8bc1fe3acb9d9092f057bace4d47215fe2cb30945b23d3ff77685831`、マニフェストを `copilot/knowledge-bundle-manifest-20260911b.json` に更新した。90秒再probeは112秒時点で実行中のまま停止したため、T09成功とは扱わない。新bundleの知識precheckとT01〜T10は未実行である（`catalog/evidence/current-package-status-20260911-p3b-integration.json`）。
 
 P3統合版をHEAD `7b06805`で静的検査し、Raw 6、Package 3949/7/86、Catalog 84、DOM 898、`git diff --check`をPASSした。新bundleのCopilot/PAD受入は未実行である（`catalog/evidence/current-package-static-check-20260911-p3.json`）。
 
