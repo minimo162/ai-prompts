@@ -2529,8 +2529,8 @@
     "id": "C-datatable",
     "missing": "列付き行追加・行反復・セル参照",
     "status": "BLOCKED_EXTERNAL_UI",
-    "reason": "3列1行DataTableの作成を新規専用probeでコピー・保存・2回実行し、A/10/対象と1行3列を確認した。一方、5列に1値を渡す行追加のnative runtime errorとビジュアライザー復帰失敗も再現している。RowToAddの正しいリスト型・行反復・セル参照の成功は未採取し、候補構文を推測していない。",
-    "evidence": "evidence/p3-datatable-create-success-20260911.json; evidence/p3-datatable-row-failure-20260910.json; evidence/p3-datatable-row-list-failure-20260910.json",
+    "reason": "3列1行DataTableの作成を新規専用probeでコピー・保存・2回実行し、A/10/対象と1行3列を確認した。一方、5列に1値を渡す行追加のnative runtime errorとビジュアライザー復帰失敗も再現している。現行失敗フローのUIでもDataTableが0行0列、RowValuesが[A, B]、2値対0列エラーを確認した。RowToAddの正しいリスト型・行反復・セル参照の成功は未採取し、候補構文を推測していない。",
+    "evidence": "evidence/p3-datatable-create-success-20260911.json; evidence/p3-datatable-row-failure-20260910.json; evidence/p3-datatable-row-list-failure-20260910.json; evidence/p3-datatable-row-error-state-20260911.json",
     "resume": "列数一致のRowToAdd入力型をPAD画面から採取し、再貼付け・保存・実行・行反復・セル参照まで確認"
   },
   {
