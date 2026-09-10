@@ -35,7 +35,7 @@
     {
       "id": "P3",
       "status": "PARTIAL_ITEM_PROBES",
-      "evidence": ["p3-error-default-handler-20260911.json (two-run success)", "p3-datatable-create-success-20260911.json", "file/control/Excel/list/date boundary evidence"],
+      "evidence": ["p3-error-default-handler-20260911.json (two-run success)", "p3-datatable-create-success-20260911.json", "p3-list-get-search-expanded-20260911.json", "file/control/Excel/list/date boundary evidence"],
       "gap": "DataTable row/cell, Excel iteration, list-get, custom date format, named custom-error matching remain incomplete"
     },
     {
