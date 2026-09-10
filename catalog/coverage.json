@@ -14,7 +14,8 @@
     "knowledge_bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
     "status": "partial_p3_t09_boundary_bundle_integrated_knowledge_precheck_pass_t01_t10_pending",
     "evidence": "evidence/current-package-status-20260911-p3c-integration.json",
-    "knowledge_precheck": "generated/normal-chat-current-bundle-knowledge-precheck-20260911/result.json"
+    "knowledge_precheck": "generated/normal-chat-current-bundle-knowledge-precheck-20260911/result.json",
+    "t01_prepared": "evidence/t01-current-bundle-prepared-20260911.json"
   },
   "left_panel_scope": {
     "complete": false,
