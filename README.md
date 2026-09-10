@@ -4,7 +4,7 @@
 
 通常チャットでの検証条件と禁止事項は [CODEX_CORRECTION_M365_CHAT_VALIDATION.md](CODEX_CORRECTION_M365_CHAT_VALIDATION.md) を先に確認してください。Agent Builder／Copilot Studioの登録は今回の検証先ではありません。
 
-2026-09-10の現作業版は、原文保持の再発防止を反映した指示文SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e` と、7原本から再生成したbundle SHA-256 `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd` です。知識precheck、T01〜T07、T04/T10一次受入、T01/T04/T10独立再試験、未採取構文・UI依存のfail-closed負例を確認しました。T08は有効なRobin fenced blockを生成しない形式失敗、T09は既存専用フローのランタイムprobeは成功したものの現行package Robinが未確認です。P3ではBoolean、減算、日時加算・減算、フォルダー作成を別の合成専用probeで採取・実行しましたが、bundleには未統合です。旧版生成・PAD結果は現作業版へ継承していません。T04/T10の発生段階の比較は [raw provenance](catalog/evidence/normal-chat-raw-provenance-20260910.json)、結合版の再生成は [Build-KnowledgeBundle.ps1](tools/Build-KnowledgeBundle.ps1) を参照してください。
+2026-09-11のP3追補統合版は、指示文SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA-256 `0c89e53ce84671fd4bf1da4287563bf79f5164674f22907c8a420758310b36e6` です。7原本へ実測済みP3成功と失敗境界を統合しましたが、新bundleでの知識precheck、T01〜T10、独立再試験は未完了です。T08は形式失敗、T09は現行package Robin未確認として維持し、旧版生成・PAD結果は新bundleへ継承していません。T04/T10の発生段階の比較は [raw provenance](catalog/evidence/normal-chat-raw-provenance-20260910.json)、結合版の再生成は [Build-KnowledgeBundle.ps1](tools/Build-KnowledgeBundle.ps1) を参照してください。
 
 実測原文の正本は [catalog/index.json](catalog/index.json)、観測範囲は [catalog/coverage.json](catalog/coverage.json)、途中経過は [docs/robin-knowledge-progress.md](docs/robin-knowledge-progress.md) です。既存の採取原文・検証証拠は保全し、未観測のアクションを全機能対応とは表示しません。
 
@@ -21,7 +21,7 @@ If/Else/ENDとIf/Else-if/ENDの構造は別probeで実行まで確認してい�
 
 P3ではファイル存在確認の`IF ... THEN`／`END`も別probeでtrue条件を2回、欠損パス条件を1回実行し、欠損パスのrawも取得しました。branch bodyのside effectと各probeの現行bundle統合は未確認です。データ反復等も未確認です。
 
-P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、フォルダー作成は別の合成専用probeで採取・実行済みですが、現行7ファイルbundleには未統合です。カスタム日時書式化は未確認、T08は形式失敗、T09は現行package Robin未確認です。
+P3追補の成功・失敗境界は新bundleへ記載済みです。既定エラーハンドラーは2回成功、DataTable作成は2回成功、ファイル存在／作成／移動／名前変更、Else／Else-if、EXIT／NEXT、サブフロー、Excel範囲読取りは別probeで確認しました。DataTable行追加、Excel反復、リスト取得、カスタム日時書式、名前付きカスタムエラー、T09通し実行は未確認です。各probeの原文・実行値・未統合判定は `catalog/index.json` と `catalog/coverage.json` を参照してください。
 
 M365 Copilot内Agent Builderを利用先とする継続方針の訂正は [CODEX_CORRECTION_M365_AGENT_BUILDER.md](CODEX_CORRECTION_M365_AGENT_BUILDER.md) に記録しています。
 

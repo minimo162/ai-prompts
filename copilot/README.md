@@ -14,26 +14,13 @@
 - `knowledge/PAD-Robin-05-UI-Web.txt`
 - `knowledge/PAD-Robin-06-Examples.txt`
 
-現作業版bundleの原本対応は [knowledge-bundle-manifest-20260910b.json](knowledge-bundle-manifest-20260910b.json) に固定しています。マニフェスト自体をナレッジへ添付する必要はありません。
+現作業版bundleの原本対応は [knowledge-bundle-manifest-20260911.json](knowledge-bundle-manifest-20260911.json) に固定しています。マニフェスト自体をナレッジへ添付する必要はありません。
 
-P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、フォルダー作成、Excelシート選択は別probeでPASSですが、現行bundle未統合です。カスタム日時書式化は未確認で、統合時は同一最終版でT01〜T10を再受入します。
-
-ファイル存在確認とファイル移動（成功＋DoNothing衝突再実行）のprobeも別証跡でPASSですが、現行bundle未統合です。欠損パスのfalse分岐はrawコピー・実行完了まで確認しましたが、branch bodyのside effectは未確認です。
-ファイル名前変更も別probeでPASSですが、現行bundle未統合です。false分岐のbranch-body実行は未確認です。
-3列1行（A/10/対象）のDataTable作成は別probeで2回実行確認しています。列付き行追加は値数不一致のnative runtime errorを再現し、成功するRowToAdd型・行反復・セル参照は未確認です。
-ビジュアライザー保存後の0列への戻りも別失敗として保持しています。
-If/Else/ENDとIf/Else-if/ENDの構造と実行は別probeで確認していますが、入れ子・分岐内処理は未確認です。
-有限Loopの`EXIT LOOP`と`NEXT LOOP`は別probeで確認しています。入れ子とloop内副作用は未確認です。
-（Loop Continue probeは現行bundleへ未統合です。）
-エラー処理ブロックの骨格、欠損ファイル子アクションのruntime error、P3Worker作成＋MainからのCALLも別probeで確認していますが、カスタムハンドラーは未確認です。
-
-ファイル存在確認の`IF ... THEN`／`END`も別probeでPASSですが、欠損パスのbranch body side effectとデータ反復等は未確認です。
-
-P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、フォルダー作成は別probeでPASSですが、現行bundle未統合です。カスタム日時書式化は未確認で、統合時は同一最終版でT01〜T10を再受入します。
+2026-09-11追補として、7原本へP3の実測根拠（真偽値・数値／日時演算、Else／Else-if／EXIT／NEXT、既定エラーハンドラー、サブフロー、DataTable作成、File.Exists／Folder.Create／Move／Rename、Excel範囲読取り）を統合しました。失敗境界（カスタム日時書式、名前付きFileNotFoundルール、DataTable行追加、Excel For each、リスト取得、T09）は未確認として明記しています。統合後のbundle SHA-256は `0c89e53ce84671fd4bf1da4287563bf79f5164674f22907c8a420758310b36e6` です。新ハッシュでの知識precheckとT01〜T10再受入が完了するまで、現行packageを受入済みとは扱いません。
 
 ナレッジは技術資料であり、指示欄と同じ優先順位の命令書ではありません。`pad-robin-prompts.md` は既存の編集用原稿として残し、配布版と二重に指示欄へ貼りません。
 
-`agent-instructions.txt` の現作業版は UTF-8 BOMなし、UTF-16コード単位数3,949（10,096バイト）で、8,000文字上限以内です。結合版は `tools/Build-KnowledgeBundle.ps1` で7原本から機械的に再生成します。現作業版の指示SHA-256は `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA-256は `4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd` です。T04は現作業版で通常チャット添付・生成・無修正PAD貼付け・保存・2回実行まで確認済みです。T01〜T03/T05〜T10については旧版の生成・PAD結果を現作業版へ継承しません。T10既存フロー修正では、元行の文字列・矢印・バックスラッシュ・アンダースコアを確認できない場合はコードを出さず、手編集で差分を隠しません。
+`agent-instructions.txt` の現作業版は UTF-8 BOMなし、UTF-16コード単位数3,949（10,096バイト）で、8,000文字上限以内です。結合版は `tools/Build-KnowledgeBundle.ps1` で7原本から機械的に再生成します。現作業版の指示SHA-256は `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、P3追補統合後bundle SHA-256は `0c89e53ce84671fd4bf1da4287563bf79f5164674f22907c8a420758310b36e6` です。旧bundleの生成・PAD結果を新bundleへ継承せず、新ハッシュで知識precheckとT01〜T10を再受入します。T10既存フロー修正では、元行の文字列・矢印・バックスラッシュ・アンダースコアを確認できない場合はコードを出さず、手編集で差分を隠しません。
 
 ## 通常チャット検証手順
 
@@ -44,9 +31,9 @@ P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、
 5. T01〜T10を毎回新しい通常チャットで行う。回答全文と生成Robinを保存し、手直しせず専用PADフローへ貼り付け、保存・実行・成果物を照合する。
 6. 失敗時は元回答を上書きせず、原因をナレッジ不足・参照失敗・指示不足・依存説明不足・PAD操作失敗に分類する。ナレッジや指示を変更した場合は最新版を新しいチャットへ再添付して再試験する。
 
-7つを同時に完了確認できない場合は、`copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt` を使用してよい。これは7原本をファイル名・SHA-256付き区切りで機械的に結合したフォールバックであり、生成元と版を `catalog/generated/normal-chat-t01-20260909/knowledge-bundle-manifest.json` に記録する。最終試験では同じ結合版を使い続ける。
+7つを同時に完了確認できない場合は、`copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt` を使用してよい。これは7原本をファイル名・SHA-256付き区切りで機械的に結合したフォールバックであり、生成元と版を `copilot/knowledge-bundle-manifest-20260911.json` に固定する。新bundleの最終試験では同じ結合版を使い続ける。
 
-2026-09-10の初回添付試行では、Edgeのfile chooserが`Not allowed`となり、IABでもsetFiles後の添付数が0だった。この失敗は履歴として残す。今回の現作業版は、別CDPセッションで画面に既にマウントされた`input[type=file]`からbundleと合成Excelを添付し、知識precheck、T04、T10一次受入、T10独立再試験まで完了した。ブラウザー拡張CUAの失敗は `catalog/evidence/m365-current-package-upload-block-20260910b.json` に分離し、T01〜T03/T05〜T09の現作業版受入は未実行である。
+2026-09-10の添付・生成・PAD結果は旧bundleに結び付く履歴である。2026-09-11のP3追補統合版ではbundle SHAが変わったため、旧bundleの知識precheck、T04/T10、独立再試験、T01〜T07のPAD結果を新bundleへ継承しない。新bundleで同じ受入を再実行し、結果を別証跡へ保存する。ブラウザー拡張CUAの失敗は `catalog/evidence/m365-current-package-upload-block-20260910b.json` に分離する。
 
 ## 既存カタログとの対応
 
@@ -56,4 +43,4 @@ P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、
 
 現作業版の追補判定（2026-09-10）：知識precheck、T01〜T07、T04/T10一次受入、T01/T04/T10独立再試験、未採取構文・UI依存のfail-closed負例はPASS。P3のBoolean・減算・日付減算・フォルダー作成probeも別証跡でPASSだがbundle未統合。T08は有効なRobin fenced blockを生成しない形式失敗、T09は既存専用フローのランタイムprobeのみ成功し、現行package Robin受入は未確認である。個別証跡とハッシュは `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` を正本とし、旧版結果は継承しない。
 
-2026-09-10時点では、配布物の骨格、86件の観測バリアント、既存証拠、PAD左パネル観測、日時・DataTable・CSV・FilterDataTable・ファイルコピー・サブテキスト・テキスト書出し・テキスト変数書込み・For each・If・Excel/Word編集可能起動・フォルダー取得・ファイル変数読取り・PDFページ2単独抽出・T04 Excel条件抽出→別xlsx・T09ローカルUI要素捕捉の追加実測を整理しました。7ファイルの逐次添付が不安定なため、元ファイル名・区切り・SHA-256を保持したフォールバック結合版を使用します。旧版の通常チャット生成・PAD結果は `catalog/evidence/normal-chat-final-package-acceptance-20260910.json` に履歴として保持します。現作業版の正本判定は上記追補と `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` です。T04/T10の旧版差分は `catalog/evidence/normal-chat-raw-provenance-20260910.json` で発生段階を分離しています。Agent Builder／Copilot Studioの登録・権限確認は将来の別環境の確認事項であり、今回の完了条件には含めません。未確認の項目を完成扱いしません。
+2026-09-11のP3追補統合後は、7原本・bundle・マニフェストを新SHAで固定しました。旧版の通常チャット生成・PAD結果は履歴として保持し、新bundleへ継承しません。新ハッシュでの知識precheck、T01〜T10、独立再試験が未完了のため、配布packageの受入完了とは扱いません。T04/T10の旧版差分は `catalog/evidence/normal-chat-raw-provenance-20260910.json` で発生段階を分離し、Agent Builder／Copilot Studioは今回の検証対象外です。

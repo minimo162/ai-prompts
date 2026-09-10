@@ -184,3 +184,7 @@ HEAD `b411a7c`でRaw契約6 assertions、Copilot package（指示3,949 UTF-16／
 最新HEAD `1cd329c`でも同じ静的ゲートを再実行してPASSした。対象ハッシュは不変で、`tests/Test-Copilot.ps1`のタイムアウトとT08/T09・P3の未完了判定も維持する（`catalog/evidence/current-package-static-check-20260911b.json`）。
 
 最新HEAD `f308d90`でも同じ静的ゲートを再実行してPASSした。既定エラーハンドラーprobeは別証跡で成功したがbundle未統合であり、T08/T09と残るP3は未完了のままとする（`catalog/evidence/current-package-static-check-20260911c.json`）。
+
+### P3追補統合版（2026-09-11）
+
+7原本へ、既定エラーハンドラーの2回成功、DataTable作成、ファイル／制御／Excel範囲読取りの実測根拠と、未確認・失敗境界を統合した。bundle SHA-256は `0c89e53ce84671fd4bf1da4287563bf79f5164674f22907c8a420758310b36e6`、マニフェストは `copilot/knowledge-bundle-manifest-20260911.json`。統合後の通常チャット知識precheck、T01〜T10、T01/T04/T10独立再試験は未実行で、旧bundle証跡を新bundleのPASSへ付け替えない（`catalog/evidence/current-package-status-20260911-p3-integration.json`）。

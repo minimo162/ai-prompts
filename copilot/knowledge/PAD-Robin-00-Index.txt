@@ -49,6 +49,13 @@ PAD Robin 実測ナレッジ索引
 - F Office／PDF: 既存採取と合成データ証跡を参照可能。新エージェント登録での再利用は未確認。
 - G UI／ブラウザー: T09でローカルEdgeの入力・ボタン・結果段落をPAD UI要素ピッカーから捕捉し、6アクションを空フローへ貼付け・保存した。WebAutomation通し実行はブラウザー拡張経路のタイムアウトで未完了。未知のセレクターは生成しない。
 
+P3追補の参照範囲（各probeは現行bundle統合後の通常チャット受入とは別）
+- A: 真偽値、数値減算、日時加算・減算、DateAndTime取得は専用probeで原文・保存・実行を確認。カスタム日時書式化はPAD内部例外、リスト項目取得は専用取得アクション未観測で、いずれも未確認を維持する。証拠: `catalog/evidence/p3-boolean-probe-20260910.json`、`p3-subtract-probe-20260910.json`、`p3-date-add-probe-20260910.json`、`p3-date-subtract-probe-20260910.json`、`p3-date-format-probe-20260910.json`、`p3-date-format-dialog-crash-20260911.json`、`p3-list-get-search-boundary-20260911.json`。
+- B: Else／Else-if、EXIT LOOP／NEXT LOOP、BLOCKエラー経路、P3Worker呼出しを専用probeで確認。既定のすべてのエラーへ変数設定し続行するhandlerは2回成功、名前付きFileNotFoundルールはruntime errorのまま。証拠: `catalog/evidence/p3-else-probe-20260910.json`、`p3-else-if-probe-20260910.json`、`p3-break-probe-20260910.json`、`p3-continue-probe-20260910.json`、`p3-error-default-handler-20260911.json`、`p3-error-custom-handler-20260911.json`、`p3-subflow-probe-20260910.json`。
+- C: 3列1行DataTable作成（A/10/対象）を2回確認。行追加は0列復帰・値数不一致の失敗のみで、行反復・セル参照は未確認。証拠: `catalog/evidence/p3-datatable-create-success-20260911.json`、`p3-datatable-row-error-state-20260911.json`。
+- D: File.Exists true/false、Folder.Create、File.Move（DoNothing衝突）、File.RenameFiles（DoNothing衝突）を専用probeで確認。false分岐内side effectは未確認。証拠: `catalog/evidence/p3-file-exists-probe-20260910.json`、`p3-file-exists-false-probe-20260910.json`、`p3-folder-create-probe-20260910.json`、`p3-file-move-probe-20260910.json`、`p3-file-rename-probe-20260910.json`。
+- E: Sheet1選択とA1:C6 TypedValues読取り（6行3列プレビュー）を別probeで確認。For eachの保存・loop side effectは未確認。証拠: `catalog/evidence/p3-excel-sheet-probe-20260910.json`、`p3-excel-read-range-probe-20260911.json`、`p3-excel-foreach-configuration-boundary-20260911.json`。
+
 配布登録はこのファイルと、01〜06の7ファイルを .txt として行います。pad-robin-prompts.md は編集用の旧原稿であり、配布用ナレッジと競合する別の指示欄として登録しません。
 
 今回の追加採取: T09ローカルUI（捕捉・貼付け、実行は未完了）

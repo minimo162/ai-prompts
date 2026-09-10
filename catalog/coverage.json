@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-10T18:40:32+09:00",
-  "reconciled_at": "2026-09-10T18:40:32+09:00",
-  "reconciliation_note": "Existing index/evidence mappings are generated from the current catalog. This file is not a complete PAD feature reference or current-session execution claim.",
+  "generated_at": "2026-09-11T04:02:00+09:00",
+  "reconciled_at": "2026-09-11T04:02:00+09:00",
+  "reconciliation_note": "P3 evidence references and the seven-file bundle were refreshed from the current catalog. This file is not a complete PAD feature reference or current-session execution claim; same-version Copilot/PAD acceptance remains pending.",
   "environment": {
     "pad_file_version": "2.71.115.26224",
     "language": "ja-JP",
@@ -11,9 +11,9 @@
   },
   "current_package": {
     "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-    "knowledge_bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
-    "status": "partial_t01_t07_t04_t10_and_independent_pass_t08_format_t09_blocked",
-    "evidence": "evidence/current-package-status-20260910b.json"
+    "knowledge_bundle_sha256": "0c89e53ce84671fd4bf1da4287563bf79f5164674f22907c8a420758310b36e6",
+    "status": "partial_p3_bundle_integrated_t01_t07_t04_t10_history_t08_t09_pending",
+    "evidence": "evidence/current-package-status-20260911-p3-integration.json"
   },
   "left_panel_scope": {
     "complete": false,

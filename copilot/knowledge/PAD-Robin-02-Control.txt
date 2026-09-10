@@ -1,6 +1,6 @@
 PAD Robin 制御・ブロック
 
-今回の左パネル再観測では、If、Else、For each、ループを抜ける、次のループ、ブロック エラー発生時、サブフローの実行、サブフローの終了、待機、Loopの表示名を確認した。For each＋If＋ファイル読取りの組合せは、T03の通常チャット生成Robinを別フローへ無修正貼付け・保存・実行し、`.txt`だけを読み取る結果まで確認した。Else、ループ脱出、エラー処理、サブフロー呼出し自体の設定・実行は未確認である。表示名の証拠は `catalog/evidence/pad-action-inventory-20260909.json`、T03の組合せ実行は `catalog/evidence/normal-chat-t03-final-current-run.json`、固定範囲Loopの原文・実行値は `catalog/index.json` と `catalog/flows/bounded-loop/` に対応づけられている。
+初期観測ではIf、Else、For each、ループを抜ける、次のループ、ブロック エラー発生時、サブフローの実行、サブフローの終了、待機、Loopの表示名を確認した。For each＋If＋ファイル読取りの組合せはT03で実行確認済みである。初期版で未確認だった制御構文は、下記のP3専用probeで別途採取した。表示名の証拠は `catalog/evidence/pad-action-inventory-20260909.json`、T03の組合せ実行は `catalog/evidence/normal-chat-t03-final-current-run.json`、固定範囲Loopの原文・実行値は `catalog/index.json` と `catalog/flows/bounded-loop/` に対応づけられている。
 
 固定範囲Loop
 - UI名: Loop、id: loop-one-to-three、variant: constant-range
@@ -31,6 +31,13 @@ If（ファイルパスに拡張子文字列を含む判定）
 変数の加算
 - `Variables.IncreaseVariable` の固定値1とループ変数の2設定を別例として収録している。数値変数を事前に定義し、型を文字列と混ぜない。
 
-未採取の制御
-- Else、エラー処理、ループ脱出、サブフロー呼出しの今回用のRobin原文はまだない。For eachとIfは単独設定を採取し、T03でファイル読取りとの組合せを実行したが、Else分岐・脱出・サブフローを含む完全な制御教材ではない。表示名を観測できたことだけで、未採取構文を補わない。
-- 未観測のブロック終端や引数をLoop例から類推して生成しない。必要な場合は、PADで最小ブロックを追加してコピーし、開始・終了・依存・失敗経路を別項目として記録する。
+P3追加probe（別probeの実行根拠。新しい現行bundleでのT01〜T10受入とは分離する）
+- Else: `IF yes = yes THEN`／`ELSE`／`END` を各分岐1回実行。証拠: `catalog/evidence/p3-else-probe-20260910.json`。
+- Else-if: `IF yes = yes THEN`／`ELSE IF yes = no THEN`／`END` を2回実行。証拠: `catalog/evidence/p3-else-if-probe-20260910.json`。
+- ループ脱出／継続: `EXIT LOOP` はLoopIndex=1、`NEXT LOOP` は2回ともLoopIndex=4。証拠: `catalog/evidence/p3-break-probe-20260910.json`、`p3-continue-probe-20260910.json`。
+- エラー処理: `BLOCK / ON BLOCK ERROR / THROW ERROR / END` と欠損ファイルruntime errorを確認。既定の「すべてのエラー」へ `SET ErrorHandledDefault TO $'''true'''`、続行ON／スローOFFを設定した別probeは2回とも完了し、trueプレビューを得た。証拠: `catalog/evidence/p3-error-trigger-probe-20260910.json`、`p3-error-default-handler-20260911.json`、`p3-error-default-handler-flow-20260911.robin`。
+- サブフロー: `P3Worker` を作成し、Mainから `CALL P3Worker`。タイムアウト付きメッセージで2回ともButtonPressed=OK。証拠: `catalog/evidence/p3-subflow-probe-20260910.json`。
+- 名前付きカスタムエラー `FileNotFound` の変数設定はruntime errorが残ったため、既定エラー成功と混同しない。証拠: `catalog/evidence/p3-error-custom-handler-20260911.json`。
+
+未採取・未確認
+- 入れ子分岐、分岐内side effect、入れ子loop、カスタムエラー名の一致条件、エラー後の一般的な後続処理は未確認。未観測のブロック終端や引数をLoop例から類推して生成しない。
