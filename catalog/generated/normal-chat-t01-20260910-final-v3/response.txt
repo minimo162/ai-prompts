@@ -1,31 +1,23 @@
 1. 前提・対象範囲・未確認点
 
-目的: UTF-8テキストを読み込み、検索語「対象語」を通常置換で「置換後」に変換し、新しいUTF-8テキストとして出力します。
+目的: t01-input-20260909 を UTF-8 で読み取り、対象語 を 置換後 に通常置換し、UTF-8 テキストとして保存します。特殊文字・引用符・改行・対象外文字は保持し、追加改行は出しません。
++ 1
 
-対象:
+使用根拠:
 
-入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
-検索語: 対象語
-置換語: 置換後
-出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt
-
-根拠:
-
-「ファイルからテキストを読み取る」UTF-8例を確認済み。
-「テキストを置換する（通常置換）」を確認済み。
-「テキストをファイルに書き込む（UTF-8、変数参照、AppendNewLine=False）」を確認済み。
+UTF-8テキスト読取り: File.ReadTextFromFile.ReadText 実測原文あり。
+通常置換: Text.Replace.ReplaceText 実測原文あり。
+テキスト変数を書込み、AppendNewLine: False で追加改行なし保存: 実測原文あり。
 
 未確認点:
 
-この3アクションを連結したT01専用フローとしての再貼付け・実行証拠は添付ナレッジ内にはありません。
-ただし各アクションの原文・設定は確認済みです。
-2. PADで先に確認する設定・依存
-入力ファイルが存在すること。
-入力ファイルの文字コードがUTF-8であること。
-出力先フォルダー
-C:\Users\yuuki\ai-prompts\catalog\evidence\ が存在すること。
-出力ファイルの上書きを許可すること。
-末尾改行保持のため、保存時は AppendNewLine=False を使用すること。入力内容に末尾改行がある場合はそのまま保存し、追加改行は行いません。
+この3アクションを今回のパスで組み合わせた実行証跡はナレッジ内にありません。各アクション単体の確認済み原文を組み合わせたフロー案です。
+2. PADで先に作る設定
+
+追加の入力変数やUI要素は不要です。保存先は以下を使用します。
+
+入力: C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt
+出力: C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt
 3. 貼り付け用Robin
 
 対象サブフロー: Main
@@ -36,41 +28,24 @@ File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\
 2
 Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
 3
-File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-20260910.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
 4. デザイナー上の確認方法
-
-アクション順序:
-
-ファイルからテキストを読み取る
-テキストを置換する
-テキストをファイルに書き込む
-
-変数:
-
-変数	型	生成元
-FileContents	テキスト	読み取り
-Replaced	テキスト	置換
-
-確認ポイント:
-
-FileContents が1行目の出力変数になっている。
-2行目の Text: FileContents が変数参照になっている。
-Result=> Replaced が存在する。
-3行目の TextToWrite: Replaced が変数参照になっている。
-AppendNewLine: False になっている。
-Encoding: File.FileEncoding.UTF8 になっている。
-保存時にデザイナーエラーが表示されない。
-5. 合成データでの保存・実行・照合
-新しい専用フローを作成する。
-上記Robinを貼り付ける。
-保存する。
-実行する。
-出力ファイル C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-20260910.txt を開く。
-次を確認する。
-対象語 が 置換後 に置換されている。
-置換対象以外の文字が変化していない。
-日本語・特殊文字・引用符・バックスラッシュが保持されている。
-改行位置が入力と一致している。
-入力に末尾改行がある場合は保持されている。
-依頼されていない追加改行が末尾に付与されていない。
-同じフローを再実行し、出力内容が同一であることを確認する。
+アクション数が 3 個であること。
+順序が「テキスト読取り → 通常置換 → テキスト書込み」であること。
+FileContents を生成してから Text.Replace.ReplaceText で参照していること。
+Replaced を生成してから File.WriteText の TextToWrite で参照していること。
+AppendNewLine: False になっていること。
+デザイナーにエラー表示が出ていないこと。変数は FileContents と Replaced がテキスト型として認識されること。
+5. 保存・実行・照合手順
+空フローへ貼り付けて保存します。
+実行後、出力ファイル normal-chat-t01-output-current-bundle.txt を開きます。
+以下が保持されていることを確認します。
++ 1
+日本語 は変更なし
+対象語 のみ 置換後 に変換
+100% は変更なし
+'引用' と "二重引用" は変更なし
+C:\\sample は変更なし
+対象外語 は変更なし
+ファイル末尾に依頼していない追加改行が付与されていないことを確認します。AppendNewLine: False がその根拠です。
+再実行しても出力ファイルは上書き保存されます。

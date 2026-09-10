@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "observed_at":  "2026-09-10T00:56:42.6708756Z",
+    "flow_name":  "RobinKnowledgeT04ExcelFilterRT_20260910",
+    "run_status":  "success",
+    "ready_observed":  true,
+    "start_enabled_after":  true,
+    "variable_previews":  [
+                              "6 行, 3 列",
+                              "Excel インスタンス",
+                              "3 行, 3 列"
+                          ]
+}

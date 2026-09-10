@@ -1,0 +1,56 @@
+1. 前提・対象範囲・未確認点
+
+目的: 既存Word文書内の OfficeCatalog を T06Replaced に置換し、別名保存する。
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-current-bundle.docx
+元ファイル: 変更しない。
+成功条件: 出力docxに T06Replaced 日本語 100% が含まれ、入力docxは不変。
+
+根拠:
+
+Word編集可能起動（ReadOnly=False）確認済み。
+Word文書内の単語を検索して置換する確認済み。
+Word.SaveAs確認済み。
+入力文書本文に OfficeCatalog 日本語 100% が存在。
+2. PADで先に作る設定
+追加の入力変数は不要。
+Wordインスタンス変数: WordInstance
+保存先フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence が存在することを確認。
+実測済みWordアクションのみを使用。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+2
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+3
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t06-current-bundle.docx'''
+4
+Word.CloseWord.Close Instance: WordInstance
+4. デザイナー上の確認方法
+アクション数が4個であること。
+順序が「Word起動 → 置換 → SaveAs → Close」であること。
+WordInstance が起動アクションで生成され、後続3アクションで同じ変数を参照していること。
+デザイナー上でエラー表示が出ていないこと。
+ReadOnly: False になっていること。
+保存先が normal-chat-t06-current-bundle.docx になっていること。
+5. 保存・実行・照合手順
+空フローへ貼り付け。
+保存。
+実行。
+出力ファイル C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-current-bundle.docx を開く。
+OfficeCatalog が残っていないことを確認。
+T06Replaced 日本語 100% が含まれることを確認。
+元ファイル word-catalog.docx を開き、OfficeCatalog 日本語 100% のままであることを確認。
+
+確認済み根拠:
+
+編集可能起動: catalog/actions/word-launch/open-editable.robin。
+全件リテラル置換: catalog/actions/word-replace/all-literal.robin。
+SaveAs: catalog/actions/word-save/as-docx-extension.robin。
+Word本文の対象文字列存在: word-catalog。
+
+※ この組み合わせは、確認済みWordアクション原文を依頼パスへ適用したフロー案です。ナレッジ中にはこの入力・出力パスでの再貼付け実行証拠は掲載されていないため、「貼付け・実行済み」ではなく「確認済みアクションの組合せ」です。

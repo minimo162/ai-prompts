@@ -1,0 +1,65 @@
+1. 前提・対象範囲・未確認点
+目的: UTF-8 のCSVを読み取り、Status 列が 対象 の行のみを新しいCSVへ保存する。
+入力: t02-input-20260910（ヘッダーあり）
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t02-output-current-bundle.csv
+入力CSVは変更しない。
+列数、日本語、カンマを含む引用フィールド、二重引用符を保持する。
+根拠は実測済みの T02 3アクション構成のみ。catalog/flows/datatable-filter/roundtrip.robin と実行照合 catalog/evidence/filter-t02-roundtrip2-run-2.json が参照元です。
+確認済み範囲: ヘッダー付きCSV読取り → FilterDataTable → CSV書出し。再貼付け・保存・再コピー・2回実行・出力照合済み。
+2. PADで先に作る設定
+
+特別な入力変数は不要です。
+
+保存先のみ事前に確認してください。
+
+出力ファイル:
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t02-output-current-bundle.csv
+既存ファイルがある場合:
+上書き (File.IfFileExists.Overwrite)
+CSV:
+UTF-8
+ヘッダーあり
+区切り文字 = SystemDefault
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+File.ReadFromCSVFile.ReadCSV CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\csv\\t02-input-20260910.csv''' Encoding: File.CSVEncoding.UTF8 TrimFields: True FirstLineContainsColumnNames: True ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault CSVTable=> CSVTable
+2
+Variables.FilterDataTable DataTable: CSVTable FilterParameters: { ^['RULE', 'COLUMN', 'OPERATOR', 'VALUE'], [$'''''', 2, $'''Equal''', $'''対象'''] } MatchCase: True FilteredDataTable=> FilteredDataTable
+3
+File.WriteToCSVFile.WriteCSV VariableToWrite: FilteredDataTable CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t02-output-current-bundle.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: True IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault
+4
+`
+4. デザイナー上の確認方法
+アクション数が 3個 であること。
+順序が次のとおりであること。
+CSV ファイルから読み取る
+データ テーブルをフィルター処理
+CSV ファイルに書き込む
+変数:
+CSVTable
+FilteredDataTable
+FilterDataTable の条件が以下であること。
+列/インデックス = 2
+演算子 = Equal
+値 = 対象
+MatchCase = True
+デザインエラー表示が出ていないこと。
+5. 保存・実行・照合手順
+空フローへ貼り付け。
+保存。
+実行。
+出力ファイル normal-chat-t02-output-current-bundle.csv を確認。
+期待内容:
+ヘッダー行を含む。
+Status=対象 の行のみ出力。
+入力CSVの引用付きフィールドを保持。入力には "日本語,引用" と "二重""引用" が含まれる。
+この入力データの場合、論理的にはヘッダー＋2件（ID=1、ID=3）が出力されるはずです。入力内容は t02-input-20260910 に基づきます。
+
+根拠
+
+実測済み T02 3アクション構成（ヘッダー付きCSV読取り→FilterDataTable→CSV書出し）。再貼付け・保存・再コピー・2回実行・出力照合済み。
+根拠ファイル: catalog/flows/datatable-filter/roundtrip.robin、catalog/evidence/filter-t02-roundtrip2-run-2.json。

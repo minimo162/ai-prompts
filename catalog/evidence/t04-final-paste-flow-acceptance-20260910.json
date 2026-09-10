@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "case": "T04-final-paste-flow",
+  "source_flow": "catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin",
+  "source_sha256": "d45925fb49ae74d8518b5acc046aee1477774ad4749132801957df3d02408353",
+  "target_flow": "RobinKnowledgeT04FilterPaste_20260910",
+  "target_designer_pid": 5028,
+  "paste_attempt": {
+    "helper": "tools/Paste-PadRobinLive.ps1",
+    "reported_action_count": 6,
+    "expected_action_count": 9,
+    "reason": "PAD action list virtualization exposed six visible children even though the pasted flow contained all nine actions. The helper stopped before its false-negative count check could save evidence."
+  },
+  "paste_verification": {
+    "saved_confirmed": true,
+    "recopy_path": "catalog/evidence/t04-final-paste-flow-recopy.robin",
+    "recopy_sha256": "d45925fb49ae74d8518b5acc046aee1477774ad4749132801957df3d02408353",
+    "recopy_exact_match": true,
+    "action_lines": 9
+  },
+  "runs": [
+    {
+      "evidence": "catalog/evidence/t04-final-paste-flow-run-1.json",
+      "status": "success",
+      "output_sha256": "b87611f5dfe20449414af20cb766b255b2541900d56e5b297e83b1131bd5a4fe"
+    },
+    {
+      "evidence": "catalog/evidence/t04-final-paste-flow-run-2.json",
+      "status": "success",
+      "output_sha256": "2d24b9d9a096940e99fc78c0f01c2722f09e6a42fb30c3c9ff6895fce45ec54e"
+    }
+  ],
+  "input_sha256": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+  "input_unchanged": true,
+  "output_workbook": {
+    "path": "catalog/evidence/normal-chat-t04-output.xlsx",
+    "sheet": "t04-filtered",
+    "rows": [["対象", "A", 10], ["対象", "C", 25], ["対象", "D", 5]],
+    "row_count": 3,
+    "column_count": 3
+  },
+  "clipboard_restore": "unconfirmed_after_helper_false_negative; no user clipboard content is claimed or overwritten as evidence",
+  "status": "PASS_PAD_PASTE_AND_RUN"
+}

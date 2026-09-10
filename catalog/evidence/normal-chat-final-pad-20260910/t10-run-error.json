@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T14:17:51.5874779+09:00",
+  "flow_name": "RobinKnowledgeT10FinalPackage_20260910",
+  "run_status": "expected_error",
+  "error_messages": [
+    "型",
+    "説明",
+    "サブフロー",
+    "行",
+    "エラー",
+    "Word 文書 文書 3 を保存できませんでした。",
+    "Main",
+    "9"
+  ],
+  "errors_grid_observed": true,
+  "error_line": 9,
+  "downstream_actions": 7,
+  "output_exists": true
+}

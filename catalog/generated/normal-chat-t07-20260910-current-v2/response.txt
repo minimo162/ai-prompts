@@ -1,0 +1,48 @@
+前提・対象範囲・未確認点
+目的: 合成PDF source-a の2ページ目だけからテキストを抽出し、UTF-8テキストとして保存する。
++ 1
+入力PDF: C:\Users\yuuki\ai-prompts\catalog\fixtures\pdf\source-a.pdf
+出力ファイル: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-current-bundle.txt
+入力PDFは変更しない。
+ナレッジ内で実測済みなのは「ページ2単独抽出→UTF-8テキスト保存」の2アクション構成です。これは T07 実測例として、貼付け・保存・2回実行・内容照合済みです。
+添付PDFの2ページ目には識別文字 PAGE_TOKEN_A2 が含まれています。
+
+根拠:
+
+copilot/knowledge/PAD-Robin-04-Office-PDF.txt
+T07のページ2単独抽出（RobinKnowledgeT07Final_20260910）
+実測証拠: catalog/generated/normal-chat-t07-20260910-final/robin.txt、normal-chat-t07-final-run-1.json。
+PADで先に作る設定
+対象サブフロー: Main
+事前の変数作成は不要
+出力先フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence が存在することを確認
+既存ファイルは上書きされる設定
+貼り付け用Robin
+
+以下は、実測済みT07原文を根拠に、出力先のみ今回依頼の保存先へ変更した構成です。抽出範囲はページ2のみです。
+
+Plain Text
+1
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 2 DetectLayout: False ExtractedText=> ExtractedPDFText
+2
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-current-bundle.txt''' TextToWrite: ExtractedPDFText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+デザイナー上の確認方法
+アクション数が2個であること
+順序が
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange
+File.WriteText の順であること
+ExtractedPDFText が1行目の出力変数、2行目の入力変数になっていること
+ブロック開始・終了を伴うアクションは含まれていないこと
+保存後に再コピーし、ページ範囲が FromPageNumber: 2、ToPageNumber: 2 のまま保持されていること
+合成データでの照合手順
+フローを保存
+実行
+出力ファイル normal-chat-t07-current-bundle.txt を開く
+以下を確認する
+PAGE_TOKEN_A2 を含むこと。
+PAGE_TOKEN_A1 を含まないこと。
++ 1
+PAGE_TOKEN_A3 を含まないこと。
+再実行し、同じ内容で上書きされることを確認する
+
+確認済み範囲の根拠: PAD-Robin-Knowledge-Bundle の T07「ページ2単独抽出」。実測ではページ2のみ抽出され、PAGE_TOKEN_A2 を含み PAGE_TOKEN_A1 を含まない結果が記録されています。

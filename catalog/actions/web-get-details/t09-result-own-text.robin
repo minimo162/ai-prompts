@@ -1,0 +1,1 @@
+WebAutomation.GetDetailsOfElement BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Paragraph \'未実行\''] AttributeName: $'''Own Text''' AttributeValue=> AttributeValue

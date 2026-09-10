@@ -1,0 +1,49 @@
+1. 前提・対象範囲・未確認点
+目的: UTF-8 の CSV を読み込み、Status 列が 対象 の行のみを抽出して新しい CSV として保存。
+入力: C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\csv\\t02-input-20260910.csv
+出力: C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t02-output-current-bundle.csv
+入力 CSV は変更しない。
+列数、日本語、カンマを含む引用フィールド、二重引用符を保持。
+根拠は実測済みの T02 組合せのみ。
+確認済み原文: catalog/flows/datatable-filter/roundtrip.robin、実行照合 catalog/evidence/filter-t02-roundtrip2-run-2.json。Status 列は列インデックス 2 を使用。
+出力パスのみ依頼に合わせて変更しています。出力先パスでの再実行証拠は未確認です。
+2. PADで先に作る設定
+新しい空のサブフローへ貼り付け。
+出力先フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence が存在することを確認。
+同名ファイルが存在する場合は上書き設定です。
+3. 貼り付け用Robin
+
+対象サブフロー: 新規または空のサブフロー
+
+Plain Text
+1
+File.ReadFromCSVFile.ReadCSV CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\csv\\t02-input-20260910.csv''' Encoding: File.CSVEncoding.UTF8 TrimFields: True FirstLineContainsColumnNames: True ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault CSVTable=> CSVTable
+2
+Variables.FilterDataTable DataTable: CSVTable FilterParameters: { ^['RULE', 'COLUMN', 'OPERATOR', 'VALUE'], [$'''''', 2, $'''Equal''', $'''対象'''] } MatchCase: True FilteredDataTable=> FilteredDataTable
+3
+File.WriteToCSVFile.WriteCSV VariableToWrite: FilteredDataTable CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t02-output-current-bundle.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: True IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault
+4
+`
+4. デザイナー上の確認方法
+アクション数が3個であること。
+順序が
+CSV ファイルから読み取る
+データ テーブルをフィルター処理
+CSV ファイルに書き込む の順になっていること。
+変数型:
+CSVTable = DataTable
+FilteredDataTable = DataTable
+FilterDataTable の条件が列インデックス 2、値 対象 になっていること。
+保存後に再コピーした Robin が貼り付け内容と一致することを確認。
+5. 保存・実行・照合手順
+フローを保存。
+実行。
+出力ファイル normal-chat-t02-output-current-bundle.csv を確認。
+期待内容はヘッダー行と Status=対象 の2行です。入力 CSV の内容から、論理的には以下の行が残るはずです。
+1,"日本語,引用",対象
+3,"二重""引用",対象
+日本語、カンマを含む引用フィールド、二重引用符が保持されていることを確認。
+入力ファイル t02-input-20260910.csv が変更されていないことを確認。
+再実行しても出力ファイルが上書き更新され、同じ内容になることを確認。
+
+根拠: T02 実測済み 3 アクション組合せ（CSV読取り→FilterDataTable→CSV書出し）。再貼付け・保存・2回実行・出力照合済み。出力は UTF-8 BOM、ヘッダー保持、Status=対象 行のみ抽出。

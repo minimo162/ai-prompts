@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "chat_result": "catalog/generated/normal-chat-knowledge-precheck-20260910-current/result.json",
+  "response": "catalog/generated/normal-chat-knowledge-precheck-20260910-current/response.txt",
+  "bundle_sha256": "431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3",
+  "instruction_sha256": "c8c981d2686e07c08ceeace654e70f4dbf8124e23e54122f44f27b65ad3ce9cf",
+  "attachment_input_mode": "preexisting_cdp_input",
+  "attachments": ["PAD-Robin-Knowledge-Bundle.txt"],
+  "attachment_count": 1,
+  "body_verified": true,
+  "sent": true,
+  "model_requested": "GPT 5.6 Think Deeper",
+  "model_observed": "GPT 5.6 Think",
+  "checks": {
+    "file_write_settings_and_hashes": true,
+    "t04_range_filter_chain_and_nine_line_source_present": true,
+    "t09_captured_elements_and_order_distinguished_from_runtime_success": true,
+    "confirmed_vs_captured_vs_unconfirmed_vs_external_dependency_separated": true,
+    "answer_embedded_in_question": false
+  },
+  "result": "The separate precheck chat referenced the current bundle and distinguished T04 measured source, T09 capture/paste, and T09 runtime blocker without inventing selectors or arguments. This chat is not reused as an acceptance run."
+}

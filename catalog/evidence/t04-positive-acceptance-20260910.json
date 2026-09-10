@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "case": "T04",
+  "flow_name": "RobinKnowledgeT04ExcelFilterRT_20260910",
+  "flow_path": "catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin",
+  "flow_sha256": "d45925fb49ae74d8518b5acc046aee1477774ad4749132801957df3d02408353",
+  "pad_file_version": "2.71.115.26224",
+  "ui_driver": "repository UIA helper scripts with exact PAD process/title checks",
+  "action_count": 9,
+  "input_workbook": "catalog/fixtures/excel/t04-filter-input.xlsx",
+  "input_sha256": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+  "runs": [
+    {
+      "evidence": "catalog/evidence/t04-positive-flow-run-6.json",
+      "status": "success",
+      "output_sha256_observed": "823eaaeeca727bdbd3623d56371a871fe08b82804c8b9c5e8864fca860352c1e"
+    },
+    {
+      "evidence": "catalog/evidence/t04-positive-flow-run-7.json",
+      "status": "success",
+      "output_sha256_observed": "d657cb165485cc80f3e5ab29520fc3a3e0b1f1096e663a9d70509a61dc417b0d"
+    }
+  ],
+  "intermediate_csv": {
+    "path": "catalog/evidence/t04-filtered.csv",
+    "sha256": "b9442568996bbe8c45ce6a7efd705dd6159392cb42f24eb23341464f87a9c433",
+    "content": ["対象,A,10", "対象,C,25", "対象,D,5"]
+  },
+  "output_workbook": {
+    "path": "catalog/evidence/normal-chat-t04-output.xlsx",
+    "sha256_current": "d657cb165485cc80f3e5ab29520fc3a3e0b1f1096e663a9d70509a61dc417b0d",
+    "sheet": "t04-filtered",
+    "rows": [["対象", "A", 10], ["対象", "C", 25], ["対象", "D", 5]],
+    "row_count": 3,
+    "column_count": 3
+  },
+  "input_unchanged": true,
+  "failure_preserved": {
+    "path": "catalog/evidence/normal-chat-t04-output-x000D-failure.xlsx",
+    "sha256": "409bd0f78b92ae8de55fd79f8480c856607fb3e7f0b4dc5c7ccd0033c69c6701",
+    "finding": "ExcelセルへCRLFを直接書いた初回方式では_x000D_が残ったため正例に採用しなかった。"
+  },
+  "status": "PASS_PAD_POSITIVE",
+  "final_paste_acceptance": "catalog/evidence/t04-final-paste-flow-acceptance-20260910.json",
+  "note": "The positive flow was configured through PAD UI, saved, executed twice, and logically compared. The same final Robin was then pasted into a separate empty flow and executed twice. No generated Robin was hand-edited."
+}

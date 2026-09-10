@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T00:42:00Z",
+  "flow_name": "RobinKnowledgeT04ExcelFilterRT_20260910",
+  "source_robin": "catalog/flows/excel-t04-read-range/roundtrip.robin",
+  "action_count_after_paste": 3,
+  "saved_confirmed": true,
+  "clipboard_restored": true,
+  "execution_requested": true,
+  "note": "Three measured actions were configured in a dedicated PAD flow; launch is read-only, range is A1:C6 on the active Data sheet, and close is no-save."
+}

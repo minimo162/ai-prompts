@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "branch": "codex/issue-5-completion-20260910",
+  "checks": {
+    "Test-RobinCatalog.ps1": "PASS: 73 checks",
+    "Test-CopilotRobinPackage.ps1": "PASS: instructions_utf16=3585; knowledge_files=7; observed_actions=86",
+    "git diff --check": "PASS",
+    "bundle_source_sha256_delimiters": "PASS: all seven source hashes match bundle delimiters",
+    "t04_pad_positive": "PASS: two native PAD runs, separate xlsx workbook, input unchanged",
+    "t04_current_bundle_chat_and_pad": "PASS (prior valid run): current bundle attached with synthetic Excel; T04 Robin pasted unchanged, saved, and executed twice",
+    "final_package_chat_batch": "PASS: final instruction/bundle hashes recorded for knowledge precheck and T01-T10 fresh normal chats",
+    "final_package_pad_batch": "PARTIAL: T01-T03 and T05-T08 pasted/saved/executed; T04 exact-copy refusal/quote variant and T10 Word SaveAs runtime error recorded",
+    "t09_ui_capture_and_paste": "PASS: three PAD-captured local Edge elements; six action lines pasted/saved; runtime timeout recorded separately"
+  },
+  "instruction_sha256": "e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1",
+  "knowledge_bundle_sha256": "431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3",
+  "knowledge_bundle_bytes": 58436,
+  "t04_positive_evidence": "catalog/evidence/t04-positive-acceptance-20260910.json",
+  "t04_final_paste_evidence": "catalog/evidence/t04-final-paste-flow-acceptance-20260910.json",
+  "t04_current_bundle_acceptance_evidence": "catalog/evidence/normal-chat-t04-current-v4-acceptance.json",
+  "final_package_acceptance_evidence": "catalog/evidence/normal-chat-final-package-acceptance-20260910.json",
+  "t09_capture_evidence": "catalog/evidence/t09-capture-source-20260910.json",
+  "t09_final_paste_evidence": "catalog/evidence/t09-final-paste-acceptance-20260910.json",
+  "t09_runtime_evidence": "catalog/evidence/t09-runtime-block-20260910.json",
+  "note": "Static/package checks and T04 PAD positive evidence are recorded separately; no claim of current-bundle M365 T01-T10 acceptance."
+}

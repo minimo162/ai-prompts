@@ -1,0 +1,4 @@
+--- T10 現行 bundle 再生成（変更箇所以外は添付原文をそのまま複写） ---
+添付した `generated-robin.txt` はPADからコピーした16アクションの原文です。添付原文を行単位でそのまま複写し、Excel.WriteToExcel.WriteCell の `CopilotOffice 246` だけを `T10-Changed` に変更し、Excel.SaveExcel.SaveAs の保存先ファイル名だけを `C:\Users\yuuki\ai-prompts\catalog\evidence\copilot-excel-t10-current-bundle.xlsx` に変更してください。WordとPowerPointの本文・保存先を含む他の全行は、文字・記号・空白・改行を変更しないでください。
+
+コードブロックは実際のRobin命令だけにしてください。変更前後の説明、Plain Text、行番号、NBSP、疑似コード、省略記号は入れません。`=>` は添付原文どおり、パスのバックスラッシュも添付原文どおりに複写し、Markdown用の追加エスケープをしないでください。生成後に、Excelの指定2か所だけが差分であることを確認してから出してください。

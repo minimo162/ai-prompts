@@ -1,0 +1,31 @@
+Copilot said:
+「ファイルからテキストを読み取る」の実測済み UTF-8 設定について、ナレッジに明記された内容のみを列挙します。
+
+入力パスの型
+
+UTF-8 例（file-read-text-utf8）: ファイルパスのリテラル指定。コピー原文では File: に固定パス文字列が設定されています。
+別の実測例として、File: CurrentFile の変数パス指定（variable-path-utf8）も採取されています。
+
+エンコード設定
+
+Encoding: File.TextFileEncoding.UTF8。
+
+出力変数の型
+
+出力変数名は FileContents。型は記載されていません。ナレッジ本文では型の明示はありません。
+
+原文ファイルと実行証拠のパス
+
+原文ファイル: catalog/actions/file-read-text/utf8.robin。
+実行証拠: catalog/evidence/number-conversion-variables.json。この例では 1234.5 を読み取り、Text.ToNumber へ渡しています。
+変数パス版の原文: catalog/actions/file-read-text/variable-path-utf8.robin。
+変数パス版の組合せ実行証拠: catalog/evidence/t03-partial-paste.json、catalog/evidence/t03-partial-run-1.json。
+
+未確認の設定
+
+「空文字、別エンコード、桁区切り、改行の扱い」は、該当原文・実行証拠を確認するよう記載されており、この実測例では確認済みとはされていません。
+
+参照した記載
+
+PAD-Robin-Knowledge-Bundle 内の「PAD Robin ファイル・CSV」→「確認済みの原文」→「ファイルからテキストを読み取る（id: file-read-text-utf8、variant: utf8）」および「今回の追加採取: ファイルパス変数からテキストを読み取る」。
+ソース

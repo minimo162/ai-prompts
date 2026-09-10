@@ -1,0 +1,2 @@
+--- T06 現行 bundle 再生成 ---
+合成Word `C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx` を編集可能（ReadOnly=False）で開き、本文中の `OfficeCatalog` だけを `T06Replaced` に置換して、`C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-current-bundle.docx` へ別名保存し、元ファイルは変更しないPADフロー案を作成してください。確認済みWord操作だけを使い、貼付け用Robinのコードブロックは実際のRobin命令だけにしてください。

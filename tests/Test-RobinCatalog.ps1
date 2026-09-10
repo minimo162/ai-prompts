@@ -7,6 +7,11 @@ function Reject([string]$Text,[string]$Code){$message='';try{$null=Test-AgentRob
 $catalog=Read-AgentJson (Join-Path $PSScriptRoot '..\catalog\index.json')
 foreach($flow in $catalog.flows){
     $code=[IO.File]::ReadAllText((Join-Path $PSScriptRoot ('..\catalog\'+$flow.robin_path)));$job.target=$root
+    if ((Get-AgentProperty $flow 'catalog_only' $false)) {
+        if ([string]::IsNullOrWhiteSpace($code)) { throw ('Catalog-only flow is empty: ' + $flow.id) }
+        $checks++
+        continue
+    }
     if ((Get-AgentProperty $flow 'controller_support' '') -eq 'validated_subset') {
         # Scope/lifecycle contract only. Native document contents are tested separately.
         $inputs=Join-Path $root 'document-inputs';$outputs=Join-Path $root 'artifacts'

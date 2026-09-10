@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "page": {
+    "tab_id": "1316360766",
+    "title": "チャット | Microsoft Copilot",
+    "url": "https://m365.cloud.microsoft/chat?es=SSR",
+    "account_state": "login completed; normal chat landing page visible"
+  },
+  "target": "fresh normal M365 Copilot chat for current-package verification",
+  "current_bundle_sha256": "0d09c90f8f95bd235a3d05cabd1bf76a445be3037eaa3bd5a46bbfee658bf10e",
+  "current_bundle_path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+  "synthetic_fixture_path": "catalog/fixtures/excel/t04-filter-input.xlsx",
+  "steps_observed": [
+    "source-add menu opened; '画像とファイルのアップロード' visible",
+    "upload menu item activated via CUA semantic and coordinate clicks",
+    "browser DOM still contained one hidden multiple file input",
+    "Playwright filechooser event did not fire and no attachment chip/list appeared"
+  ],
+  "upload_confirmed": false,
+  "attachment_names_observed": [],
+  "message_sent": false,
+  "blocker": "The CUA browser extension could not expose a usable file chooser/setFiles path for the hidden M365 upload input; native file dialog was not targetable from this browser surface.",
+  "safety": "No bundle text or fixture contents were typed or transmitted; no chat message was sent.",
+  "next_reopen_condition": "Use the repository's previously validated CDP/file-input route in a separate non-CUA turn, or obtain a browser surface that exposes file chooser setFiles."
+}

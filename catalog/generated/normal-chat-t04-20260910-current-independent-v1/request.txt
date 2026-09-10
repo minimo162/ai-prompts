@@ -1,0 +1,2 @@
+--- T04 現行 bundle 独立再試験 ---
+合成Excel `C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\t04-filter-input.xlsx` の Data シートで、A1:C6 のみを読み取り専用で読み、Status 列が `対象` と等しい行（A、C、D）だけを抽出してください。元ブックを変更せず、別ブック `C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t04-independent-current-bundle.xlsx` に保存するPADフロー案を作成してください。Excelセルへ複数行CSV文字列を直接書かず、添付ナレッジの実測済み CSV中間保存→別Excel→xlsx SaveAs 系列だけを使ってください。未採取のシート選択・データ反復・別構文は推測しないでください。貼り付け用Robinのコードブロックは実際のRobin命令だけにしてください。

@@ -1,0 +1,258 @@
+1. PAD-Robin-03-Files.txt の UTF-8テキスト書込み
+確認済み原文ファイル
+用途	原文ファイル	SHA-256
+UTF-8・上書き・固定テキスト	catalog/actions/file-write-text/utf8-overwrite.robin	3f31e923d6466abcb14e5f7fa864d414256158a6b5431ad9e5f126323818bb86
+UTF-8・上書き・変数参照	catalog/actions/file-write-text/variable-reference.robin	7d73b162b4b298a547b7c45f98eab0f116a0abf047e6ec1e65de3d426063adac
+UTF-8・上書き・変数参照・追加改行なし	catalog/actions/file-write-text/variable-reference-no-append.robin	ca6006e287fdd4050f277f4965d6c2e8c3e1aa724dfbcbd4f3300cd3e7d2abe6
+設定差分
+UTF-8・上書き・固定テキスト
+AppendNewLine: True
+IfFileExists: File.IfFileExists.Overwrite
+Encoding: File.FileEncoding.UTF8
+書込み元: 固定リテラル文字列
+実行確認あり
+UTF-8・上書き・変数参照
+AppendNewLine: True
+IfFileExists: File.IfFileExists.Overwrite
+Encoding: File.FileEncoding.UTF8
+書込み元: テキスト変数 Replaced
+実行確認あり
+UTF-8・上書き・変数参照・追加改行なし
+AppendNewLine: False
+IfFileExists: File.IfFileExists.Overwrite
+Encoding: File.FileEncoding.UTF8
+書込み元: テキスト変数 Replaced
+実行確認あり
+ナレッジでは「入力自身の末尾改行を保持し、追加改行を要求しない保存ではこの設定を使う」と記載
+
+根拠: PAD-Robin-03-Files.txt 内「今回の追加採取: テキストをファイルに書き込む」「テキスト変数書込み・末尾改行を追加しない設定」
+
+2. PAD-Robin-04-Office-PDF.txt の T04 Excel条件抽出→別xlsx系列
+入力範囲
+
+読取り対象:
+
+ブック: catalog/fixtures/excel/t04-filter-input.xlsx
+開き方: 読み取り専用 (ReadOnly: True)
+読取り範囲: A1:C6
+出力変数: ExcelData
+実行確認結果: 6行×3列
+
+根拠: PAD-Robin-04-Office-PDF.txt「T04範囲読取り」
+
+FilterDataTable 条件
+
+実測条件:
+
+DataTable: ExcelData
+列: 0
+演算子: Equal
+値: 対象
+MatchCase: True
+出力: FilteredDataTable
+
+根拠: PAD-Robin-04-Office-PDF.txt「T04条件抽出→別ブック保存（実機正例）」および貼付け用原文
+
+CSV中間保存
+
+手順として記載されているもの:
+
+Variables.ConvertDataTableToCSV
+File.WriteText
+UTF-8保存
+中間CSV t04-filtered.csv
+
+保存先:
+
+catalog/evidence/t04-filtered.csv
+
+根拠: PAD-Robin-04-Office-PDF.txt「CSV変換→中間CSV保存」および9アクション原文
+
+別Excelインスタンス
+
+ナレッジ記載:
+
+元ブック: ExcelInstance
+中間CSVを開くExcel: ExcelInstance2
+明示的に「別のExcelインスタンス」と記載
+
+根拠: PAD-Robin-04-Office-PDF.txt「ExcelInstance と ExcelInstance2 は別のExcelインスタンス」
+
+保存形式
+
+SaveAs:
+
+アクション: Excel.SaveExcel.SaveAs
+Format: Excel.ExcelFormat.OpenXmlWorkbook
+出力: normal-chat-t04-output.xlsx
+
+根拠: PAD-Robin-04-Office-PDF.txt 9アクション原文
+
+入力不変の確認範囲
+
+ナレッジ記載:
+
+入力ファイル: catalog/fixtures/excel/t04-filter-input.xlsx
+SHA-256:1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0
+「入力ブックSHA-256不変」
+「入力は不変」と明記
+
+根拠: PAD-Robin-04-Office-PDF.txt「T04期待結果」
+
+9行の貼付け用原文掲載有無
+
+掲載あり。
+
+ナレッジには
+
+「T04の貼付け用9アクション原文（PAD実測・2回実行）」
+
+という見出しと、9アクションの完全な原文ブロックが掲載されている。
+
+3. T09 ローカルUI例
+捕捉済みUI要素
+
+実画面から捕捉済み:
+
+t09-input
+t09-submit
+t09-result
+
+取得元:
+
+PAD UI要素ピッカー
+Id属性
+
+根拠: PAD-Robin-00-Index.txt および PAD-Robin-06-Examples.txt
+
+実測アクション順
+
+記録されている順序:
+
+WebAutomation.LaunchEdge
+WebAutomation.PopulateTextField
+WebAutomation.Click
+WAIT 500
+WebAutomation.GetDetailsOfElement
+WebAutomation.CloseWebBrowser
+
+根拠: PAD-Robin-00-Index.txt および PAD-Robin-06-Examples.txt
+
+実行確認の有無
+確認済み
+UI要素捕捉
+Robin原文採取
+空フローへの貼付け
+保存
+再コピー
+6アクション行一致確認
+
+根拠: PAD-Robin-00-Index.txt
+
+未確認
+WebAutomation通し実行成功
+AttributeValue=T09-clicked
+結果取得成功
+ブラウザー操作完了
+
+根拠: PAD-Robin-00-Index.txt、PAD-Robin-05-UI-Web.txt、PAD-Robin-06-Examples.txt
+
+未確認のセレクター・ブラウザー引数
+
+ナレッジ記載:
+
+未知のセレクターは生成しない
+未確認のWebDriver引数を生成しない
+ブラウザー拡張経路は完了していない
+
+確認済みなのは:
+
+t09-input
+t09-submit
+t09-result
+Id属性で捕捉済み
+
+のみ。
+
+4. 検証状態の分類と根拠
+確認済み（再貼付け・実行・結果照合あり）
+対象	根拠ファイル	SHA-256
+UTF-8テキスト書込み	catalog/actions/file-write-text/utf8-overwrite.robin	3f31e923d6466abcb14e5f7fa864d414256158a6b5431ad9e5f126323818bb86
+テキスト変数書込み(no append)	catalog/actions/file-write-text/variable-reference-no-append.robin	ca6006e287fdd4050f277f4965d6c2e8c3e1aa724dfbcbd4f3300cd3e7d2abe6
+T04 フィルター→xlsx	catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin	d45925fb49ae74d8518b5acc046aee1477774ad4749132801957df3d02408353
+
+根拠: PAD-Robin-03-Files.txt、PAD-Robin-04-Office-PDF.txt
+
+採取のみ
+
+ナレッジの定義:
+
+captured_partial_verification
+左パネル追加・コピー済みだが工程の一部未確認
+
+根拠: PAD-Robin-00-Index.txt「検証状態の意味」
+
+貼付けのみ（貼付け・保存確認）
+
+T09:
+
+空フローへ貼付け
+保存
+再コピー
+アクション一致
+
+実行成功は未確認
+
+根拠:
+
+catalog/flows/ui-t09-local-roundtrip/roundtrip.robin
+SHA-256:93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd
+
+実行済み
+
+T04:
+
+PAD保存後
+2回実行
+出力内容照合
+
+根拠:
+
+catalog/evidence/t04-positive-flow-run-6.json
+catalog/evidence/t04-positive-flow-run-7.json
+
+および
+
+catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin
+SHA-256:d45925fb49ae74d8518b5acc046aee1477774ad4749132801957df3d02408353
+
+未確認
+
+ナレッジ記載:
+
+未観測アクション
+未採取構文
+T09 WebAutomation成功
+未確認セレクター
+未確認WebDriver引数
+
+根拠: PAD-Robin-00-Index.txt、PAD-Robin-05-UI-Web.txt
+
+外部依存
+
+T09:
+
+ブラウザー拡張経路
+WebAutomation実行
+native CUA構成
+
+について環境依存・未完了と記録
+
+根拠:
+
+catalog/evidence/t09-runtime-block-20260910.json
+catalog/evidence/t09-final-paste-acceptance-20260910.json
+catalog/flows/ui-t09-local-roundtrip/roundtrip.robin
+SHA-256:93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd
+
+以上は添付された結合版内に明記されている内容のみを整理したもので、未掲載の設定値や未記載の検証結果は補完していません。

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "case": "knowledge-precheck",
+  "model": "GPT 5.6 Think Deeper",
+  "knowledge_bundle_sha256": "2a0267d4fb42b3c27b9fab8527c63ae2f126474a936339eca0ba6ebe8c7d0f12",
+  "attachments": ["PAD-Robin-Knowledge-Bundle.txt"],
+  "attachment_count": 1,
+  "upload_notice_observed": "デバイスからアップロードすると、OneDrive (個人用) にコピーが送信されます。",
+  "prompt_file": "catalog/generated/normal-chat-knowledge-precheck-20260910/prompt.txt",
+  "response_file": "catalog/generated/normal-chat-knowledge-precheck-20260910/response.txt",
+  "sent": true,
+  "response_observed": true,
+  "code_generated": false,
+  "result": "PASS_REFERENCE_ONLY",
+  "checks": {
+    "used_only_knowledge": true,
+    "reported_utf8_literal_and_variable_path": true,
+    "reported_encoding": "File.TextFileEncoding.UTF8",
+    "reported_output_variable": "FileContents",
+    "reported_source_and_evidence_paths": true,
+    "reported_unconfirmed_scope": true,
+    "included_acceptance_case_or_issue_text": false
+  },
+  "note": "Separate fresh normal chat, not reused as T01-T10 acceptance. The response stayed within the attached knowledge and did not generate Robin."
+}

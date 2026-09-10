@@ -1,0 +1,2 @@
+--- T02 現行 bundle 再生成 ---
+合成CSV `C:\Users\yuuki\ai-prompts\catalog\fixtures\csv\t02-input-20260910.csv` をUTF-8で読み、Status列が `対象` の行だけを `C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t02-output-current-bundle.csv` へ新しいCSVとして保存するPADフロー案を作成してください。入力CSVは変更せず、列数・日本語・カンマを含む引用フィールド・二重引用符を保持してください。確認済み原文だけを使い、貼付け用Robinのコードブロックは実際のRobin命令だけにしてください。

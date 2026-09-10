@@ -1,0 +1,2 @@
+--- T10 現行 bundle 独立再試験 ---
+添付 `generated-robin.txt` はPADからコピーした既存16アクションの正本です。Excelの `Excel.WriteToExcel.WriteCell` の `CopilotOffice 246` だけを `T10-Changed` に変更し、Excelの `Excel.SaveExcel.SaveAs` の保存先ファイル名だけを `C:\Users\yuuki\ai-prompts\catalog\evidence\copilot-excel-t10-current-independent.xlsx` に変更してください。WordとPowerPointの本文・保存先、その他の全行・変数・順序・保存形式・終了処理・エラー経路は保持してください。貼り付け用Robinは添付正本のPAD原文記号（`=>`、バックスラッシュ、アンダースコア）をそのまま複写し、Markdown用の追加エスケープをしないでください。コードブロック内は実際のRobin命令だけにしてください。

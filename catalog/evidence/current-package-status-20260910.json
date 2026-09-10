@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "branch": "codex/issue-5-completion-20260910",
+  "head": "3f9022889f567afee6539602f6c32fca9ef6c107",
+  "instruction_sha256": "e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1",
+  "knowledge_bundle_sha256": "431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3",
+  "knowledge_bundle_bytes": 58436,
+  "package_commit_note": "Evidence captured from this head; the local commit containing these final records is created after verification.",
+  "previous_acceptance_bundle_sha256": "660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca",
+  "protected_untracked_file": "docs/agent-approach-comparison-2026-09-07.md",
+  "protected_untracked_file_sha256": "e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699",
+  "status": "partial",
+  "reason": "Final instruction/bundle normal-chat generation and PAD evidence are recorded. T01-T03 and T05-T08 passed in the final batch; T04 exact-copy/quote variant was not accepted, T09 WebAutomation runtime timed out, and T10 stopped at Word SaveAs due path escaping. Independent final-package T01/T04/T10 acceptance remains pending.",
+  "rerun_required": ["T04", "T09", "T10", "T01-independent", "T04-independent", "T10-independent", "negative-suite"],
+  "pad_ui_block": "catalog/evidence/pad-native-ui-blocked-20260910.json"
+  ,"pad_uia_recovered": "catalog/evidence/pad-uia-recovered-20260910.json"
+  ,"t04_positive_acceptance": "catalog/evidence/t04-positive-acceptance-20260910.json"
+  ,"t04_final_paste_acceptance": "catalog/evidence/t04-final-paste-flow-acceptance-20260910.json"
+  ,"t04_current_bundle_acceptance": "catalog/evidence/normal-chat-t04-current-v4-acceptance.json"
+  ,"t09_capture_source": "catalog/evidence/t09-capture-source-20260910.json"
+  ,"t09_final_paste_acceptance": "catalog/evidence/t09-final-paste-acceptance-20260910.json"
+  ,"t09_runtime_block": "catalog/evidence/t09-runtime-block-20260910.json"
+  ,"m365_current_bundle_upload_block": "catalog/evidence/m365-current-bundle-cua-upload-block-20260910.json"
+  ,"final_package_acceptance": "catalog/evidence/normal-chat-final-package-acceptance-20260910.json"
+  ,"final_pad_evidence_dir": "catalog/evidence/normal-chat-final-pad-20260910"
+  ,"t04_final_exact_copy": "catalog/generated/normal-chat-t04-20260910-final-exact-v1/result.json"
+  ,"t10_final_runtime_error": "catalog/evidence/normal-chat-final-pad-20260910/t10-run-error.json"
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "flow_name": "RobinKnowledgeT09LocalUI_20260910",
+  "capture_method": "PAD UI 要素ピッカー using strict UIA fallback; native CUA unavailable",
+  "browser_process_id": 22432,
+  "page_url": "http://127.0.0.1:8765/t09-local-test.html",
+  "fixture": "catalog/fixtures/ui/t09-local-test.html",
+  "elements": {
+    "input": {"automation_id": "t09-input", "captured_name": "Input text 't09-input'", "selector_attribute": "Id=t09-input"},
+    "submit": {"automation_id": "t09-submit", "captured_name": "Button '実行'", "selector_attribute": "Id=t09-submit"},
+    "result": {"automation_id": "t09-result", "captured_name": "Paragraph '未実行'", "selector_attribute": "Id=t09-result", "attribute_read": "Own Text"}
+  },
+  "source_robin": "flows/ui-t09-local-roundtrip/roundtrip.robin",
+  "source_sha256": "93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd",
+  "action_count": 6,
+  "action_sequence": ["WebAutomation.LaunchEdge", "WebAutomation.PopulateTextField", "WebAutomation.Click", "WAIT 500", "WebAutomation.GetDetailsOfElement", "WebAutomation.CloseWebBrowser"],
+  "no_guessed_selector": true
+}

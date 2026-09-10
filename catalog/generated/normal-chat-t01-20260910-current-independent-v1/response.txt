@@ -1,0 +1,49 @@
+前提・対象範囲・未確認点
+目的: t01-input-20260909 を UTF-8 で読み取り、文字列「対象語」を「置換後」に通常置換し、指定出力先へ UTF-8 テキストとして保存します。
++ 1
+入力: テキストファイル、出力: テキストファイル。
++ 1
+変数:
+FileContents（テキスト）
+Replaced（テキスト）
+追加改行は出さないため、確認済みの AppendNewLine: False を使用します。
+置換は確認済みの通常置換 Text.Replace.ReplaceText を使用します。正規表現置換は使いません。
+PADで先に作る設定
+空のサブフローへ貼り付け。
+事前の入力変数作成は不要。
+出力先: C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt
+同名ファイルが存在する場合は上書き。
+貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+2
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+3
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+デザイナー上の確認方法
+アクション数: 3
+順序:
+ファイルからテキストを読み取る
+テキストを置換する
+テキストをファイルに書き込む
+変数型:
+FileContents = テキスト
+Replaced = テキスト
+デザイナーに赤エラーが表示されないことを確認。
+Replaced が 2 か所の「対象語」を「置換後」へ置換していることを実行後の変数で確認。入力例には「対象語」が 2 件、「対象外語」が 1 件含まれます。
+保存・実行・照合手順
+フローを保存。
+実行。
+出力ファイル normal-chat-t01-output-current-bundle.txt を UTF-8 で開く。
+次を確認:
+「対象語」のみが「置換後」へ置換されている。
+「対象外語」は変更されていない。
+日本語・100%・引用符・C:\\sample・改行が保持されている。
+AppendNewLine: False のため、不要な末尾改行が追加されていない。
++ 1
+
+根拠: 通常置換 Text.Replace.ReplaceText、UTF-8 テキスト読取り File.ReadTextFromFile.ReadText、テキスト変数書込み＋ AppendNewLine: False は、ナレッジ内の確認済み原文を使用しています。

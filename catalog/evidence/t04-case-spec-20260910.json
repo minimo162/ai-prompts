@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "case": "T04",
+  "input_workbook": "catalog/fixtures/excel/t04-filter-input.xlsx",
+  "input_sha256": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+  "sheet": "Data",
+  "read_range": "A1:C6",
+  "header": ["Status", "Item", "Amount"],
+  "condition": {"column": "Status", "equals": "対象"},
+  "expected_rows": [["対象", "A", 10], ["対象", "C", 25], ["対象", "D", 5]],
+  "expected_amount_sum": 40,
+  "output_workbook": "catalog/evidence/normal-chat-t04-output.xlsx",
+  "output_expectation": "別ブックへ条件一致3行を保存するか、集計結果として Amount 合計40を保存する",
+  "input_must_remain_unchanged": true,
+  "pad_execution": "BLOCKED_NO_NATIVE_UI"
+}

@@ -1,8 +1,8 @@
 # Robinナレッジ検証報告（途中）
 
 更新日: 2026-09-10
-ブランチ: `codex/robin-knowledge-restart-2026-09-09`
-基準: `45275ed18c47cd91d3a8ff5ac556d2b9fdec6a19`
+ブランチ: `codex/issue-5-completion-20260910`
+基準: `c6d1e8daa25c7c0b72ebf51a26911e1318937807`
 状態: partial
 
 ## 利用先の訂正
@@ -13,9 +13,9 @@
 
 ## 静的・ファイル検証
 
-- `copilot/agent-instructions.txt` を作成。UTF-8 BOMなし、7,840バイト、Unicodeスカラー数2,943、UTF-16コード単位数2,943、47行。8,000文字上限以内。
+- `copilot/agent-instructions.txt` はUTF-8 BOMなし、9,214バイト、Unicodeスカラー数3,585、47行。8,000文字上限以内。SHA-256は `e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1`。
 - ナレッジ配布版は7つの `.txt`。指示欄と技術資料を分離し、合計9ファイル（READMEを含む）で20ファイル上限を超えない。
-- `catalog/coverage.json` は `catalog/index.json` から生成し、観測バリアント73件（既存51＋追加22件）と必須範囲A〜Gの16チェックを記録。左側一覧は `complete=false`、未観測の名称は推測していない。
+- `catalog/coverage.json` は `catalog/index.json` と既存証拠を突合し、観測バリアント86件（既存51＋追加22件）と必須範囲A〜Gの16チェックを記録。For each／If／フォルダー取得の既存実行証拠を対応づけ、Else・脱出・存在確認等の未確認は残した。左側一覧は `complete=false`、未観測の名称は推測していない。
 - `README.md` 冒頭をCopilotエージェント用配布物の入口へ変更。旧アプリ説明は過去資産として区別した。
 - `pad-robin-prompts.md` 冒頭に編集用原稿であることと配布正本への対応を追記した。
 - `catalog/generated/acceptance-t01-t10/README.md` にT01〜T10の依頼要点・期待値・状態を固定した。
@@ -35,6 +35,12 @@
 |PAD版・言語・Power Fx|PASS（条件確認）|Designer file version `2.71.115.26224`、日本語UI、作成ダイアログのPower Fx=Offを確認した|
 |左側アクション一覧|PASS（観測範囲）|ActionsTreeViewを展開して上端から下端までスクロールし、412ノード（グループ72、アクション340）を保存。全機能一覧とは表示していない|
 |A〜Gの追加・コピー・別フロー再貼付け・保存・実行|部分PASS|日時取得、空DataTable、CSV、ファイルコピー、サブテキスト取得を今回の全工程で実測。残りの未採取項目は未完了|
+
+### 2026-09-10 継続ターンの実機状態
+
+- Microsoft.PowerAutomateDesktop `11.2608.115.0` のPAD.Console.HostとDesignerプロセス、`RobinKnowledgeT04ExcelFilter_20260910` を起動・列挙できた。
+- native Computer UseでDesignerへ接続しようとしたが、Trusted RPCが未構成（`Trusted RPC service is not configured: sky`）で、現在のPAD画面のアクセシビリティ状態を取得できなかった。
+- native CUAはTrusted RPC未構成だったが、リポジトリ既存の厳格なUIAヘルパーへ切り替え、T04のクリップボード取得、別空フロー貼付け、保存、実行、成果物照合を実施した。T09はUI要素捕捉・貼付け・保存まで実施し、WebAutomationタイムアウトを分離記録した。native CUAの未接続証拠は `catalog/evidence/pad-native-ui-blocked-20260910.json`、UIA復旧とT04正例は `catalog/evidence/pad-uia-recovered-20260910.json` と `catalog/evidence/t04-positive-acceptance-20260910.json`、T09は `catalog/evidence/t09-runtime-block-20260910.json`。
 
 ### 日時取得の1設定
 
@@ -81,20 +87,23 @@
 |通常チャット到達|PASS|専用EdgeのCDPでログイン済みM365 Copilot通常チャットと本文入力欄を確認した|
 |本文全文入力|PASS|2,307文字を挿入し、contenteditable境界を正規化した全文一致を確認した|
 |7つの実ファイル添付|PARTIAL（結合版へ切替）|7件逐次添付は4件目以降の一対一保持を確認できず、7原本を機械的に結合した1ファイルを添付する方式へ切り替えた。元ファイルのSHAと区切りはmanifestへ保存した|
-|ナレッジ固有質問|NOT_RUN|実ファイル添付が確認できた後、別の事前確認用チャットで実施する|
+|ナレッジ固有質問|PASS_REFERENCE_ONLY（現行bundle 431c版）|現行bundleを別の新規通常チャットへ添付し、UTF-8書込み差分・T04 9行原文・T09捕捉と実行未完了・確認状態の分離を回答原文と照合。`catalog/evidence/normal-chat-knowledge-precheck-current-20260910.json`|
 |T01生成回答|PASS（初回修正版）|GPT 5.6 Think Deeperの新規チャットで結合版を添付し、本文3,128文字・回答全文・3行Robinを保存。`gpt56-noappend-clean2`の`robin.txt`は3アクション|
 |T01 PAD実行・成果物照合|PASS（初回修正版）|回答Robinを無修正で新規フローへ貼付け、保存、2回実行。出力UTF-8 BOM付き85 bytes、期待内容と完全一致。`normal-chat-t01-noappend-*`|
-|T02〜T10|NOT_RUN|T01と同じ版の本文・添付を新しいチャットへ供給して実施する|
-|T01独立再試験|NOT_RUN|T01初回修正版の固定版を新しい通常チャットへ再供給し、別PADフローで再実行する|
-|T04/T10独立再試験|NOT_RUN|T01〜T10最終版合格後に別チャットで実施する|
+|T02〜T03、T05〜T08|最終版PASS|最終版の新規通常チャット生成と、専用PADフローへの無修正貼付け・保存・2回実行を `catalog/evidence/normal-chat-final-package-acceptance-20260910.json` に記録|
+|T04|PARTIAL|最終生成版はFilterParameters引用符差分で貼付け未成立。完全一致要求の再試験はコードを出さず拒否。先行有効版の正例は別証拠で保持|
+|T09|PARTIAL_BLOCKED_RUNTIME|UI要素捕捉・貼付け・保存は確認済み。WebAutomation実行完了は未観測|
+|T10|PARTIAL_EXPECTED_ERROR|最終生成版は16アクションを保存したが、Word SaveAs（9行目）のパスエスケープ差分で実行時エラー。独立受入待ち|
+|T01独立再試験|旧指示版PASS|別チャット・別PAD実行は旧指示ハッシュで確認。最終指示ハッシュでの独立再試験は未完了|
+|T04独立再試験|旧指示版PASS|別チャット・別PAD実行は旧指示ハッシュで確認。最終指示ハッシュでの独立再試験は未完了|
 
 前回のCopilot Studio単体保存拒否と、M365 Copilot画面でAgent Builder項目が見えなかった事実は履歴として保持するが、今回の通常チャット検証の再開条件やBLOCKED理由にはしない。
 
 ### 受入マトリクス更新（2026-09-10）
 
-上表の初期 `NOT_RUN` 集約行は、以下の実測結果で上書きする。T01/T02/T03/T05/T06/T07/T08/T10は生成・PAD実行・成果物照合まで確認した。T04は必要構文未採取のため生成拒否境界を確認し、T09は実機経路が未完了、T04独立再試験は拒否境界のみ確認済みでPAD受入未実施である。
+上表は最終版指示ハッシュ `e467855137a1eec8655cfb6086f274e6a8e996412b3d07068f32c6912d9482c1` とbundle `431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3` の状態を示す。T01〜T03、T05〜T08は最終版PAD実行を確認した。T04は最終生成の引用符差分、T09はWebAutomationタイムアウト、T10はWord SaveAsエラーを未完了として記録する。旧bundle／旧指示版の結果は履歴であり、最終版へ自動継承しない。
 
-なお、T02/T03/T07向けの追加採取と索引更新後の最終結合版SHA-256は `660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca` である。T01/T02/T03/T05/T06/T07/T08/T10はこの版を通常チャットへ供給して生成確認した。
+なお、T02/T03/T07向けの追加採取と索引更新後の旧結合版SHA-256は `660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca` である。T01/T02/T03/T05/T06/T07/T08/T10の旧版生成・実行結果は履歴として保持する。現作業版SHA-256は `431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3`。
 
 - T05: 編集可能Excelを開き、B2だけを変更して別名保存。元ブックA1/B2不変、出力B2=`T05-Changed`。
 - T06: 編集可能Wordを開き、`OfficeCatalog`だけを`T06Replaced`へ置換して別名保存。元ファイルSHA不変。
@@ -106,22 +115,24 @@
 
 ### 現行bundleの再生成照合（2026-09-10）
 
-現行bundle SHA-256 `660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca` を添付し、GPT 5.6 Think Deeperを明示選択した通常チャットでT01/T02/T03/T05/T06/T07/T08/T10を再生成した。T05〜T08のRobin本文は既存PAD実行原文と完全一致し、T02は生成Robinの無修正貼付け・保存・実行・成果物照合まで確認した。T01/T10の独立チャットも同版で確認し、既存独立PAD実行原文との一致を記録した。比較証拠は `catalog/evidence/normal-chat-final-bundle-comparison.json`、`catalog/evidence/normal-chat-t01-independent-final-comparison.json`、`catalog/evidence/normal-chat-t10-independent-final-comparison.json`、`catalog/evidence/normal-chat-t02-final-pad-run.json`。T09は未完了である。
+旧bundleの生成・実行記録は履歴として保持する。最終版の同一bundle再生成（知識プレチェック、T01〜T10）は `catalog/generated/normal-chat-*-final-*` と `catalog/evidence/normal-chat-final-package-acceptance-20260910.json` に保存した。T01〜T03、T05〜T08は最終版PAD実行、T04は引用符差分／完全一致拒否、T10はWord SaveAsエラーまでを記録した。T09は未完了である。
 
-T04は現行bundleを新しい通常チャットへ供給し、Excel条件抽出・集計Robinを未採取構文として推測せず生成を拒否した。T04は独立チャットでも同じ境界を確認したが、PAD受入は未実施。証拠は `catalog/evidence/normal-chat-t02-t04-current-boundary.json`。
+T04の拒否境界はbundle `2a0267d4…` 添付時に確認した。その後、PAD専用フローでExcel A1:C6→FilterDataTable→中間CSV→別xlsx保存の正例を2回実測した。正例証拠は `catalog/evidence/t04-positive-acceptance-20260910.json`、失敗出力保全は `catalog/evidence/normal-chat-t04-output-x000D-failure.xlsx`。ナレッジ正例を含む現作業版bundle `431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3` でのT04通常チャット再生成・無修正PAD貼付け・2回実行を確認。
+
+T09は `catalog/fixtures/ui/t09-local-test.html` を起動し、PAD UI要素ピッカーから入力・実行ボタン・結果段落を捕捉した。無修正6アクションを空フローへ貼付け・保存し、再コピーのアクション行一致を確認したが、元フロー・貼付けフローのWebAutomation実行は完了せず停止した。`AttributeValue=T09-clicked` は未観測である（`catalog/evidence/t09-capture-source-20260910.json`、`t09-final-paste-acceptance-20260910.json`、`t09-runtime-block-20260910.json`）。
 
 T02ではPADのFilter DataTable設定画面で列／インデックス=`2`、演算子=`と等しい (=)`、値=`対象`を入力し、先行CSV読取りとCSV書出しを含む新規フローで保存・2回実行した。条件付きRobin原文と成果物は `catalog/actions/datatable-filter/status-equals-index2.robin`、`catalog/flows/datatable-filter/roundtrip.robin`、`catalog/evidence/normal-chat-t02-final-pad-run.json` に記録した。先行アクションなしの未解決入力試行は `catalog/evidence/filter-t02-condition-config-attempt.json` に失敗境界として分離している。
 
 ## 未対応・未確認
 
 - A〜Gの必須チェックには未観測項目が残る（coverage.json参照）。必須項目のBLOCKED／未確認が残るため、目標は未完了。
-- 通常チャットの7原本個別添付は一対一完了を確認できず、結合版へ切り替えた。結合版のCDP直接添付・本文送信・T01生成・PAD実行は完了した。個別7件添付とナレッジ固有質問は未確認。
+- 通常チャットの7原本個別添付は一対一完了を確認できず、結合版へ切り替えた。最終版結合版の直接添付・本文送信・知識プレチェック・T01〜T10生成と、T01〜T03/T05〜T08のPAD受入を完了した。T04/T09/T10と独立最終版受入は未完了。
 - Agent Builderの登録・検索・指示遵守・実行環境差は今回の別環境確認事項。
 - PR #19は既にsquashマージ済み。今回の再開確認では新規push・PR・merge・公開・旧アプリの機能拡張は実施していない。
 
 ## 次の再開手順
 
-1. 通常チャットの事前確認用会話で、ナレッジ固有質問と回答原文照合を行う。
-2. 固定した結合版・本文・GPT 5.6 Think DeeperでT01独立再試験を行う。
-3. T02〜T10を各新規チャットで実施し、回答を無修正でPADへ貼付け、保存・実行・成果物を照合する。
-4. 失敗原因を分類し、最新版を新しいチャットへ再添付してから追加修正とT04/T10独立再試験を実施する。
+1. T04について、生成モデルが引用符を含む9行原文を完全一致で返せるか再試験する。保証できない場合はコードを出さない現在のfail-closedを維持する。
+2. T09のブラウザー拡張／WebAutomation実行環境を復旧し、UI要素3件の通し実行を確認する。
+3. T10は既存16行のパス・エスケープを文字単位で保持する独立生成を行い、Excel/Word/PowerPointを実行・照合する。
+4. T01・T04・T10の独立再試験を最終指示ハッシュで行い、負例とともに受入証拠へ追記する。

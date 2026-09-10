@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "bundle_sha256": "431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3",
+  "instruction_sha256": "c8c981d2686e07c08ceeace654e70f4dbf8124e23e54122f44f27b65ad3ce9cf",
+  "status": "pass_pre_final_instruction",
+  "generation": {
+    "result": "catalog/generated/normal-chat-t10-20260910-current-v5/result.json",
+    "robin": "catalog/generated/normal-chat-t10-20260910-current-v5/robin.txt",
+    "robin_sha256": "6916e2d0fd6c4bdb84ec89a6b8d4e3e8bc84013964746dbb1b5b9f0adb7741f3",
+    "model_requested": "GPT 5.6 Think Deeper",
+    "model_observed": "GPT 5.6 Think",
+    "attachment_input_mode": "preexisting_cdp_input",
+    "attachments": ["PAD-Robin-Knowledge-Bundle.txt", "generated-robin.txt"],
+    "attachment_count": 2,
+    "body_verified": true,
+    "sent": true,
+    "response_observed": true,
+    "action_count": 16
+  },
+  "raw_contract_review": {
+    "unchanged_word_and_powerpoint_content": true,
+    "arrow_tokens_preserved": true,
+    "excel_output_path_uses_two_backslashes_per_separator": true,
+    "word_powerpoint_paths_have_rendering_escape_difference": true,
+    "byte_identical_to_original_generated_robin": false,
+    "hand_edit_applied": false,
+    "note": "The unmodified Copilot response was pasted as-is. PAD accepted and normalized the path representation; semantic output was verified, but byte-level raw preservation is not claimed."
+  },
+  "pad_roundtrip": {
+    "flow_name": "RobinKnowledgeT10CurrentGeneratedV5_20260910",
+    "paste_source": "catalog/generated/normal-chat-t10-20260910-current-v5/robin.txt",
+    "paste_confirmed": true,
+    "visible_action_count_helper": 6,
+    "visible_action_count_note": "PAD action list virtualization hid later actions; designer status showed 16 actions.",
+    "saved_confirmed": true,
+    "run": ".work/t10-current-v5/run.json",
+    "run_status": "success"
+  },
+  "outputs": {
+    "excel": {"path": "catalog/evidence/copilot-excel-t10-current-bundle.xlsx", "sha256": "e6dd18d7342d4115608f52d1f37d90f38f7e66cfa554174ad4c3f44eb52d1873", "A1": "T10-Changed"},
+    "word": {"path": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-word.docx", "sha256": "056cdb79ca5944b0526e6dc70e7b0fffca48a4796314554241f955ec0657c513", "text": "CopilotOffice 246"},
+    "powerpoint": {"path": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-powerpoint.pptx", "sha256": "b92d8e7066cf59fc91f7299bdd37ab6103c8758b752dbe4f456d1b052b375ecf", "text": "CopilotOffice 246"}
+  },
+  "original_flow_sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+  "independent_retest": {"status": "pending", "failed_candidate_evidence": "catalog/evidence/normal-chat-t10-independent-retest-failures-20260910.json"},
+  "result": "Primary current-bundle T10 generation, unchanged paste, PAD save/run, and semantic output checks passed. Independent current-bundle T10 retest remains incomplete."
+}

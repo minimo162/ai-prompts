@@ -1,0 +1,77 @@
+1. 前提・対象範囲・未確認点
+
+目的
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files 内の複数ファイルを 1 回ずつ処理し、.txt のみ UTF-8 で内容を読み取るフロー案です。
+
+処理対象
+
+対象フォルダー: C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+.txt → UTF-8読取り
+.csv → 対象外
+.md → 対象外
+
+使用する確認済みアクションのみ
+
+フォルダー内のファイルを取得（*）
+For each
+If（Contains(..., ".txt", False)）
+ファイルからテキストを読み取る（UTF-8、ファイルパス変数）
+
+確認済み根拠
+
+catalog/actions/folder-get-files/all-files-no-subfolders.robin
+catalog/actions/foreach/items-variable.robin
+catalog/actions/if/current-file-contains-txt.robin
+catalog/actions/file-read-text/variable-path-utf8.robin
+T03組合せ実行確認: catalog/flows/t03-folder-foreach-read/partial.robin
+実行証拠: catalog/evidence/normal-chat-t03-final-current-run.json
+
+未確認
+
+Else構文の実測Robin原文はナレッジ内で未確認です。
+そのため .csv と .md は「If条件に入らない対象外経路」として扱い、Elseブロックは生成しません。
+2. PADで先に作る設定
+
+不要です。以下のフローは確認済みの出力変数を使用します。
+
+生成される変数:
+
+Files (フォルダー取得結果)
+CurrentFile (For each 現在ファイル)
+FileContents (UTF-8読取り結果)
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+2
+LOOP FOREACH CurrentFile IN Files
+3
+    IF Contains(CurrentFile, $'''.txt''', False) THEN
+4
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+5
+    END
+6
+END
+4. デザイナー上の確認方法
+エラー表示がないことを確認します。
+アクション順が以下になっていることを確認します。
+フォルダー内のファイルを取得
+For each
+If
+ファイルからテキストを読み取る
+Files → CurrentFile → FileContents の順で変数参照されていることを確認します。
+File.ReadTextFromFile.ReadText の Encoding が File.TextFileEncoding.UTF8 になっていることを確認します。
+5. 合成データでの保存・実行・照合
+空フローへ貼り付けます。
+保存します。
+実行します。
+catalog\fixtures\files に .txt、.csv、.md を配置した状態で確認します。
+実行中、.txt ファイルでのみ FileContents が更新されることを確認します。
+.csv と .md は If 条件に一致しないため、読取りアクションへ進まないことを確認します。
+代表確認として添付の t03-alpha は内容 alpha 日本語 を保持しています。
+
+このフローは、ナレッジ内で確認済みの「フォルダー取得（*）→For each→拡張子判定→UTF-8読取り」の組合せだけで構成しています。Else分岐や未採取の拡張子取得構文は使用していません。

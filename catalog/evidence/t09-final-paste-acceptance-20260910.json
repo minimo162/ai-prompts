@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "source_flow": "RobinKnowledgeT09LocalUI_20260910",
+  "target_flow": "RobinKnowledgeT09FilterPaste_20260910",
+  "source_robin": "flows/ui-t09-local-roundtrip/roundtrip.robin",
+  "source_sha256": "93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd",
+  "source_bytes": 169042,
+  "target_recopy_sha256": "0d4849641e46b24cc1964a1d01607568cb1ff6902010d739a47aa470b267d54b",
+  "target_recopy_bytes": 169042,
+  "source_action_count": 6,
+  "target_action_count": 6,
+  "paste_confirmed": true,
+  "saved_confirmed": true,
+  "target_recopy_action_lines_equal": true,
+  "byte_identical_recopy": false,
+  "byte_difference_reason": "PAD regenerated ControlRepository InstanceId/screenshot payloads on paste; action lines remained equal.",
+  "clipboard_restored": true,
+  "execution": {
+    "source_attempted": true,
+    "source_status": "stuck_in_browser_automation_until_manually_stopped_at_207_seconds",
+    "target_attempted": true,
+    "target_status": "stuck_in_browser_automation_until_manually_stopped_at_80_seconds",
+    "completion_observed": false
+  },
+  "native_cua_available": false,
+  "fallback": "strict UIA helper scripts with foreground/window/process checks"
+}

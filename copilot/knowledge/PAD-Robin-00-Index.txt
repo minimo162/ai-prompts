@@ -7,7 +7,7 @@ PAD Robin 実測ナレッジ索引
 - UI: 日本語（PowerPointの一部アクション名は英語）
 - Power Fx: OFF（2026-09-09の専用フロー作成ダイアログで確認。既存採取例の条件は各capture_sessionを参照）
 - データ: 合成データ、専用フロー。業務ファイル・認証情報は含めない
-- 索引原本: catalog/index.json（73の観測バリアント。既存51＋日時取得1＋空データテーブル1＋行追加失敗1＋CSV読取り2＋CSV書出し2＋FilterDataTable1＋ファイルコピー1＋サブテキスト取得1＋テキスト書出し1＋テキスト変数書込み2＋For each1＋If2＋Excel/Word編集可能起動2＋フォルダー取得2＋ファイル変数読取り1＋PDFページ2単独1）
+- 索引原本: catalog/index.json（86の観測バリアント。既存51＋日時取得1＋空データテーブル1＋行追加失敗1＋CSV読取り2＋CSV書出し2＋FilterDataTable1＋ファイルコピー1＋サブテキスト取得1＋テキスト書出し1＋テキスト変数書込み2＋For each1＋If2＋Excel/Word編集可能起動2＋フォルダー取得2＋ファイル変数読取り1＋PDFページ2単独1＋T04 Excel読取り／変換／中間CSV／別名保存4＋T09ブラウザー起動／入力／クリック／待機／結果取得／終了6）
 
 2026-09-09の左パネル再観測
 - 専用の空フロー `RobinKnowledgeLive_20260909` で、ActionsTreeViewのグループを展開し、上端から下端までスクロールした。
@@ -42,11 +42,17 @@ PAD Robin 実測ナレッジ索引
 
 今回の必須範囲との対応（現時点）
 - A 基礎: 変数、リスト作成・追加、置換、分割・結合、数値変換に加え、日時取得とサブテキスト取得の各1設定を採取・実行済み。テキスト書出しはDのUTF-8設定で確認した。真偽値、減算、リスト取出し、サブテキストの別モード、日時加算・書式化は未採取。
-- B 制御: 定数範囲Loopに加え、If、Else、For each、ループ脱出、エラー処理、サブフローの表示名を再観測。Robinの設定・実行は未採取。
-- C データ処理: 空データテーブル作成、CSV読取り（ヘッダーなし／あり）、FilterDataTable条件抽出、DataTable変数参照でのCSV書出しを設定・再貼付け・実行・期待値照合済み。行追加・行反復・セル参照は未採取。空テーブルへの空行追加失敗は別証拠。
-- D ファイル: テキスト読書き、CSV読取り・書出し、UTF-8テキスト書出し、単一ファイルのコピー、移動・名前変更、フォルダー内ファイル取得・作成、存在条件の表示名を再観測。テキスト書出し・コピー・CSVの追加設定は原文と実行証拠を保存し、移動・名前変更等は未採取。
+- B 制御: 定数範囲LoopとFor each／Ifの原文を採取し、For each＋If＋ファイル読取りのT03組合せを実行確認済み。Else、ループ脱出、エラー処理、サブフローの設定・実行は未確認。
+- C データ処理: 空データテーブル作成、CSV読取り（ヘッダーなし／あり）、Excel範囲→FilterDataTable条件抽出、DataTable変数のCSV変換・書出しを設定・再貼付け・実行・期待値照合済み。列を持つテーブルの行追加・行反復・セル参照は未採取。空テーブルへの空行追加失敗は別証拠。
+- D ファイル: テキスト読書き、CSV読取り・書出し、UTF-8テキスト書出し、単一ファイルのコピー、フォルダー内ファイル取得2設定、変数パス読取りを原文・実行証拠へ対応づけた。移動・名前変更・フォルダー作成・存在条件は表示名のみで、原文・実行未確認。
 - E Excel: 起動・セル／範囲読書き・保存・終了を観測。シート選択とデータ反復は未観測。
 - F Office／PDF: 既存採取と合成データ証跡を参照可能。新エージェント登録での再利用は未確認。
-- G UI／ブラウザー: Edge拡張機能通信エラーの失敗記録のみ。通し採取は未確認。
+- G UI／ブラウザー: T09でローカルEdgeの入力・ボタン・結果段落をPAD UI要素ピッカーから捕捉し、6アクションを空フローへ貼付け・保存した。WebAutomation通し実行はブラウザー拡張経路のタイムアウトで未完了。未知のセレクターは生成しない。
 
 配布登録はこのファイルと、01〜06の7ファイルを .txt として行います。pad-robin-prompts.md は編集用の旧原稿であり、配布用ナレッジと競合する別の指示欄として登録しません。
+
+今回の追加採取: T09ローカルUI（捕捉・貼付け、実行は未完了）
+- `catalog/fixtures/ui/t09-local-test.html` を `http://127.0.0.1:8765/t09-local-test.html` で実行し、PAD UI要素ピッカーから入力欄 `t09-input`、ボタン `t09-submit`、結果段落 `t09-result` を捕捉した。セレクターは実画面から得た `Id` 属性であり、推測ではない。
+- 実測順序は `WebAutomation.LaunchEdge` → `WebAutomation.PopulateTextField`（`T09-input`）→ `WebAutomation.Click`（実行、左クリック）→ `WAIT 500` → `WebAutomation.GetDetailsOfElement`（`Own Text`）→ `WebAutomation.CloseWebBrowser`。原文フローは `catalog/flows/ui-t09-local-roundtrip/roundtrip.robin`（SHA-256: 93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd）。
+- `RobinKnowledgeT09FilterPaste_20260910` という空フローへ6アクションをファイルから貼付け、保存し、再コピーした。再コピーはアクション行6本が一致したが、PADがControlRepositoryのInstanceId／画像を再生成したため全体バイトSHAは一致しない。証拠: `catalog/evidence/t09-final-paste-acceptance-20260910.json`、再コピー `catalog/evidence/t09-final-paste-flow-recopy.robin`。
+- 元フロー・貼付けフローとも、WebAutomation実行は完了せず監視後に停止した。`AttributeValue=T09-clicked` は未観測であり、成功扱いにしない。証拠: `catalog/evidence/t09-runtime-block-20260910.json`。PADのnative CUAが未構成のため、ここでの操作は厳格なUIAフォールバックである。

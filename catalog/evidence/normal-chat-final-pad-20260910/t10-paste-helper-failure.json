@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10T14:16:00+09:00",
+  "flow_name": "RobinKnowledgeT10FinalPackage_20260910",
+  "source_robin": "catalog/generated/normal-chat-t10-20260910-final-v8/robin.txt",
+  "source_sha256": "855EC93CB55C92D4C0A98CDD5D33729407C2CA553AC32D4475FACF84082B1C20",
+  "expected_action_count": 16,
+  "paste_confirmed_by_helper": false,
+  "helper_observed_action_count": 6,
+  "designer_status_action_count": 16,
+  "saved_confirmed": true,
+  "failure": "Paste helper timed out on virtualized list; designer status confirmed 16 actions.",
+  "raw_recopy_sha256": "D86DC2F7F3C321F3B750A368DAB30493774F2E39F193320A47E6879EE68F8BDF",
+  "raw_recopy_contract": "not byte-identical: Word/PowerPoint path backslash-before-underscore differs; no hand edit made.",
+  "execution_requested": false
+}

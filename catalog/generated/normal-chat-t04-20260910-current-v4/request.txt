@@ -1,0 +1,2 @@
+--- T04 現行 bundle 再生成（独立出力先） ---
+合成Excel `C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\t04-filter-input.xlsx` の Data シートで、実測済みの A1:C6 範囲だけを読み取り専用で読み取ってください。Status 列が `対象` と等しい行（A、C、D）だけを抽出し、元ブックを変更せず、別のExcelブック `C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t04-output-copilot-20260910.xlsx` に保存するPADフロー案を作成してください。入力SHA-256は変えないでください。Excelセルへ複数行CSV文字列を直接書く方法は使わず、添付ナレッジにある T04 の CSV中間保存→別Excelで開く→xlsx SaveAs の実測系列だけを根拠にしてください。未採取のシート選択・データ反復・別の抽出構文は推測しないでください。貼り付け用Robinと設定・依存・期待値を分け、コードブロックは実際のRobin命令だけにしてください。

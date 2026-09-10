@@ -1,43 +1,44 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-09T22:22:50.006Z",
+  "generated_at": "2026-09-10",
   "bundle_path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
-  "bundle_sha256": "660ae01fd6d7636711ec6efc68417d8d97dafb064b09405df25a6127d79393ca",
+  "bundle_sha256": "431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3",
+  "bundle_bytes": 58436,
   "source_files": [
     {
-      "name": "PAD-Robin-00-Index.txt",
       "path": "copilot/knowledge/PAD-Robin-00-Index.txt",
-      "sha256": "fd98f66ac05e3ed68842894ac5637bb4e6e23f97197d92c4cef5078dfacd710e"
+      "sha256": "5fa1eb897a4fb4f474c1d3ab956bc06d4dd054828f203259c2bbe92e3c81c23c",
+      "bytes": 8757
     },
     {
-      "name": "PAD-Robin-01-Basics.txt",
       "path": "copilot/knowledge/PAD-Robin-01-Basics.txt",
-      "sha256": "484f05f1d020e0e9f1c68c2e2b97f678be491ddc95f6e9676ba7895a17c55ffb"
+      "sha256": "484f05f1d020e0e9f1c68c2e2b97f678be491ddc95f6e9676ba7895a17c55ffb",
+      "bytes": 6578
     },
     {
-      "name": "PAD-Robin-02-Control.txt",
       "path": "copilot/knowledge/PAD-Robin-02-Control.txt",
-      "sha256": "5b46629c98e6333b79c168816a4daecef18a62003f2cbd3e70b7599ee80ed159"
+      "sha256": "a20a2c66f7bdf1ae41c677c6170613f6900e807346e8f60f3839412754a80bb7",
+      "bytes": 4057
     },
     {
-      "name": "PAD-Robin-03-Files.txt",
       "path": "copilot/knowledge/PAD-Robin-03-Files.txt",
-      "sha256": "55cebdf2e7db76a04134b2e068c9bc9830f7c65c6a73de8abbe198244e2a5adb"
+      "sha256": "e91caa1af3beff4cf2def629b4f7b18e89006f0b29b066d984aadf17fa692341",
+      "bytes": 15499
     },
     {
-      "name": "PAD-Robin-04-Office-PDF.txt",
       "path": "copilot/knowledge/PAD-Robin-04-Office-PDF.txt",
-      "sha256": "d54f8ac883f065ac0c4e19dba906b4e09564f815b7bafcf67774e107c4f3981e"
+      "sha256": "6f07f1338ef95343a9e0705543a46861671761b35b85bfce67bcbf4c0afb8b78",
+      "bytes": 14073
     },
     {
-      "name": "PAD-Robin-05-UI-Web.txt",
       "path": "copilot/knowledge/PAD-Robin-05-UI-Web.txt",
-      "sha256": "697bade6ae4c0e2c6faf0ab27e78ae4168dc16b6956326785114708a79e0b306"
+      "sha256": "697bade6ae4c0e2c6faf0ab27e78ae4168dc16b6956326785114708a79e0b306",
+      "bytes": 2129
     },
     {
-      "name": "PAD-Robin-06-Examples.txt",
       "path": "copilot/knowledge/PAD-Robin-06-Examples.txt",
-      "sha256": "e01197553e9c0e4e4f98f2b427dbedec54c12fded72165d43bc23b4b81d4e16b"
+      "sha256": "66e0a6893fb34e48fb3cd9e4111a0520a381bf979acbf9442488336a15029cf2",
+      "bytes": 5782
     }
   ]
 }

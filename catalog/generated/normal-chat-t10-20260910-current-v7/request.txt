@@ -1,0 +1,7 @@
+--- T10 現行 bundle 再生成（原文の完全複写） ---
+添付 `generated-robin.txt` はPADからコピーした正本です。正本の全16行を**文字列として複写**し、次の2箇所だけ置換してください。
+1) Excel.WriteToExcel.WriteCell の `CopilotOffice 246` → `T10-Changed`
+2) Excel.SaveExcel.SaveAs の DocumentPath ファイル名 → `copilot-excel-t10-current-bundle.xlsx`
+それ以外の行は1文字も変えません。特に Word/PowerPoint の本文と保存先を変更しません。
+
+最終回答は実際の16行だけを1つのコードブロックで出してください。Markdownの説明、行番号、Plain Text、NBSP、省略記号は不要です。`=>` はASCIIの `=` と `>` を連続してそのまま出力します。添付正本のバックスラッシュとアンダースコアもそのまま複写し、Markdown表示用の追加バックスラッシュを入れません。

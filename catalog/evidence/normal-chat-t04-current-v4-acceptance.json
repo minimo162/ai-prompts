@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "bundle_sha256": "431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3",
+  "instruction_sha256": "c8c981d2686e07c08ceeace654e70f4dbf8124e23e54122f44f27b65ad3ce9cf",
+  "status": "pass_pre_final_instruction",
+  "generation": {
+    "result": "catalog/generated/normal-chat-t04-20260910-current-v4/result.json",
+    "response": "catalog/generated/normal-chat-t04-20260910-current-v4/response.txt",
+    "robin": "catalog/generated/normal-chat-t04-20260910-current-v4/robin.txt",
+    "robin_sha256": "0b2a1e3455b112dc1528090429c57530fcfeafe189be3c83d4840e183bf4ccb1",
+    "prompt_sha256": "0ffb7dd43b66ebbcd8efa6427f230fcd4cfd62ef59a069b6fdccd194cb46994b",
+    "prompt_utf16": 4037,
+    "model_requested": "GPT 5.6 Think Deeper",
+    "model_observed": "GPT 5.6 Think",
+    "attachment_input_mode": "preexisting_cdp_input",
+    "attachments": [
+      {"name": "PAD-Robin-Knowledge-Bundle.txt", "sha256": "431cdaa9c2ba34e217d848a0df0191d960608e04940674bca33f151cb1f62bc3"},
+      {"name": "t04-filter-input.xlsx", "sha256": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0"}
+    ],
+    "body_verified": true,
+    "sent": true,
+    "response_observed": true,
+    "robin_blocks": 1,
+    "action_count": 9
+  },
+  "pad_roundtrip": {
+    "flow_name": "RobinKnowledgeT04CopilotCurrent_20260910",
+    "paste_source": "catalog/generated/normal-chat-t04-20260910-current-v4/robin.txt",
+    "paste_confirmed": true,
+    "visible_action_count_helper": 6,
+    "visible_action_count_note": "PAD action list virtualization hid later actions; designer status showed 9 actions.",
+    "saved_confirmed": true,
+    "target_recopy": "catalog/evidence/normal-chat-t04-current-v4-recopy.robin",
+    "target_recopy_sha256": "2bd7882e02ac17197c00ab4ba8e0f4dc994c91c79695ab85f5e2d39fe0d5fa2a",
+    "target_recopy_action_lines_equal": true,
+    "paste_clipboard_restored": "unconfirmed_after_helper_false_negative"
+  },
+  "runs": [
+    {"evidence": ".work/t04-copilot-current/run-2-status.json", "status": "success", "variable_previews": ["対象,A,10  対象,C,25  対象,D,5", "6 行, 3 列", "3 行, 3 列"]},
+    {"evidence": ".work/t04-copilot-current/run-3-status.json", "status": "success", "variable_previews": ["対象,A,10  対象,C,25  対象,D,5", "6 行, 3 列", "3 行, 3 列"]}
+  ],
+  "outputs": [
+    {"path": "catalog/evidence/normal-chat-t04-output-copilot-20260910-run2.xlsx", "sha256": "8fd74b74d96ab1a833a780adb55f0815f1ed27c079d97a0c25d48052fd9f5f38", "rows": [["対象", "A", 10], ["対象", "C", 25], ["対象", "D", 5]]},
+    {"path": "catalog/evidence/normal-chat-t04-output-copilot-20260910-run3.xlsx", "sha256": "435be329ebd9eceb4ffa55890b6a14a42a74c3eb9471ea18bc8584010edbc9b2", "rows": [["対象", "A", 10], ["対象", "C", 25], ["対象", "D", 5]]}
+  ],
+  "input_sha256_before": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+  "input_sha256_after": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+  "result": "Current bundle generation, file attachments, body verification, unmodified PAD paste/save, and two successful executions are proven. Output cell values match the fixed case; input workbook is unchanged."
+}

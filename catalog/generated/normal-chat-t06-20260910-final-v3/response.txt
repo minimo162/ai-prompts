@@ -1,0 +1,59 @@
+1. 前提・対象範囲・未確認点
+
+目的: 合成Word文書内の OfficeCatalog を T06Replaced に置換し、別名保存する。
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-current-bundle.docx
+元ファイル: 変更しない。
+成功条件: 出力docxに T06Replaced 日本語 100% が含まれ、入力docxは不変。
+
+根拠:
+
+Word編集可能起動（ReadOnly=False）の実測原文あり。
+Word文書内の単語検索置換の実測原文あり。
+Wordの別名保存（SaveAs）の実測原文あり。
+入力文書本文に OfficeCatalog 日本語 100% を確認。
+
+未確認:
+
+この4アクションの組み合わせを、今回のパスで再貼付け・実行・期待値照合した証拠はナレッジ内にありません。
+各アクション自体は実測原文ありですが、以下は「確認済み原文の組み合わせ案」です。
+2. PADで先に作る設定
+Word が利用可能な環境で実行。
+入力ファイル: C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+出力ファイル: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-current-bundle.docx
+出力先に同名ファイルがある場合の挙動は、実測資料に保存ダイアログ設定差分がないため事前確認してください。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+2
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+3
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t06-current-bundle.docx'''
+4
+Word.CloseWord.Close Instance: WordInstance
+4. デザイナー上の確認方法
+アクション数: 4
+順序:
+Word を起動する（既存文書を編集可能で開く）
+Word 文書内の単語を検索して置換する
+Word を保存（SaveAs）
+Word を閉じる
+変数:
+WordInstance（Wordインスタンス）
+ブロック:
+開始／終了ブロックなし
+条件分岐・ループなし
+デザイナー保存時にエラー表示がないことを確認。
+5. 保存・実行・照合手順
+空フローへ貼り付け。
+保存。
+実行。
+出力ファイル normal-chat-t06-current-bundle.docx を開く。
+OfficeCatalog が存在しないことを確認。
+T06Replaced 日本語 100% が存在することを確認。
+元ファイル word-catalog.docx を開き、OfficeCatalog 日本語 100% のままであることを確認。
+再実行する場合は、出力ファイル内容が期待どおりか毎回確認する。元ファイルは置換対象にしない。
