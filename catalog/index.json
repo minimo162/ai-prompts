@@ -4755,9 +4755,9 @@
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3FileExistsFalse_20260910",
       "ui_automation_ids": ["If.File.IfFile"],
-      "scope": "Synthetic missing-path File.Exists condition; flow completed without error with no branch-body actions, but raw Robin copy was not obtained. Current bundle unchanged.",
+      "scope": "Synthetic missing-path File.Exists condition; exact raw Robin captured after the flow completed without error with no branch-body actions. Current bundle unchanged.",
       "current_package_acceptance": false,
-      "execution_status": "partial_false_branch_run_no_raw",
+      "execution_status": "pass_false_branch_raw_not_bundled",
       "evidence": "evidence/p3-file-exists-false-probe-20260910.json"
     },
     {
