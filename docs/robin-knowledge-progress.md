@@ -260,6 +260,8 @@ Indexの旧版「未確認」記述をP3現行判定へ揃え、Office範囲読�
 
 最新HEAD `ffaf26a`でP3統合版のRaw契約6、Package 3949/7/86、Catalog 84、Copilot契約304、DOM 898、`git diff --check`を再実行してPASSした。いずれもローカル／モック検査で、ライブM365/Edgeと新bundleのT01〜T10受入は未実行である（`catalog/evidence/current-package-static-check-20260911-integrated.json`）。
 
+現行HEAD `160ceec`は上記内容の文書整合メタデータ更新後の版であり、同静的ゲート結果を現行版へ結び付けた。ライブM365/Edgeと新bundleのT01〜T10受入は未実行である（`catalog/evidence/current-package-static-check-20260911-final.json`）。
+
 P3統合版をHEAD `7b06805`で静的検査し、Raw 6、Package 3949/7/86、Catalog 84、DOM 898、`git diff --check`をPASSした。新bundleのCopilot/PAD受入は未実行である（`catalog/evidence/current-package-static-check-20260911-p3.json`）。
 
 最新HEAD `2da9610`でもP3統合版の同じ静的ゲートを再実行してPASSした。新bundleのCopilot送信とT01〜T10受入は未実行である（`catalog/evidence/current-package-static-check-20260911-p3b.json`）。
