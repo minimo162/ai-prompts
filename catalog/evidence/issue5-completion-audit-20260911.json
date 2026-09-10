@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "audited_at": "2026-09-11T05:20:00+09:00",
+  "status": "partial",
+  "issue": "https://github.com/minimo162/ai-prompts/issues/5",
+  "issue_state": "OPEN",
+  "branch": "codex/issue-5-acceptance-20260910b",
+  "head": "a39edf8",
+  "main": "69fe344",
+  "origin_main": "69fe344",
+  "package": {
+    "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
+    "manifest": "copilot/knowledge-bundle-manifest-20260911c.json",
+    "protected_sha256": "e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699"
+  },
+  "requirements": [
+    {
+      "id": "P0",
+      "status": "PASS_REVALIDATED",
+      "evidence": ["current branch/main/origin checked", "tracked worktree clean except protected comparison document", "PAD/Edge/Office process conditions checked"]
+    },
+    {
+      "id": "P1",
+      "status": "PARTIAL_DIAGNOSIS_AND_PACKAGE_FIX",
+      "evidence": ["catalog/evidence/normal-chat-raw-provenance-20260910.json", "T04 quote-count generation boundary", "T10 out-of-scope path mutation boundary", "instructions and measured P3 knowledge updated"],
+      "gap": "New bundle T04/T10 normal-chat generation and no-edit PAD acceptance not rerun"
+    },
+    {
+      "id": "P2",
+      "status": "PARTIAL_RUNTIME_BOUNDARY",
+      "evidence": ["catalog/evidence/t09-runtime-probe-20260910.json", "catalog/evidence/p3-t09-current-runtime-reprobe-20260911.json"],
+      "gap": "Current six-action flow ran beyond 90 seconds with WebAutomation errors and was stopped; current-package generation/paste/run remains unproven"
+    },
+    {
+      "id": "P3",
+      "status": "PARTIAL_ITEM_PROBES",
+      "evidence": ["p3-error-default-handler-20260911.json (two-run success)", "p3-datatable-create-success-20260911.json", "file/control/Excel/list/date boundary evidence"],
+      "gap": "DataTable row/cell, Excel iteration, list-get, custom date format, named custom-error matching remain incomplete"
+    },
+    {
+      "id": "P4",
+      "status": "NOT_COMPLETED_NEW_BUNDLE",
+      "gap": "New-bundle knowledge precheck, T01-T10, T01/T04/T10 independent retests, T08 valid fenced Robin, T09 current-package run, and negative suite are not all run"
+    },
+    {
+      "id": "P5",
+      "status": "PASS_LOCAL_STATIC_PARTIAL_LIVE",
+      "evidence": ["catalog/evidence/current-package-static-check-20260911-final.json", "Raw 6", "Package 3949/7/86", "Catalog 84", "Test-Copilot 304 offline/mock", "DOM 898", "git diff --check"],
+      "gap": "No live M365/Edge integration claim"
+    }
+  ],
+  "areas": [
+    {"id": "A", "status": "PARTIAL", "verified": ["boolean", "numeric/date arithmetic", "DateAndTime"], "unverified": ["list-get", "custom-date-format"]},
+    {"id": "B", "status": "PARTIAL", "verified": ["Else/Else-if", "EXIT/NEXT", "default error handler", "subflow"], "unverified": ["nested branches", "named custom-error matching generalization"]},
+    {"id": "C", "status": "PARTIAL", "verified": ["empty and 3-column DataTable creation", "CSV/FilterDataTable roundtrip"], "unverified": ["row insertion", "row iteration", "cell reference"]},
+    {"id": "D", "status": "PARTIAL_PROBE_SUCCESS", "verified": ["File.Exists true/false", "Folder.Create", "File.Move collision", "File.RenameFiles collision"], "unverified": ["false-branch side effects"]},
+    {"id": "E", "status": "PARTIAL", "verified": ["Sheet1 selection", "A1:C6 range preview"], "unverified": ["Excel data iteration"]},
+    {"id": "F", "status": "HISTORICAL_REUSE_ONLY", "unverified": ["new-bundle Office/PDF acceptance"]},
+    {"id": "G", "status": "BLOCKED_RUNTIME", "verified": ["UI element capture/paste", "WAIT=1 dedicated probe"], "unverified": ["current-package WebAutomation runtime"]}
+  ],
+  "next_one_action": "Obtain action-time confirmation, send the staged new-bundle knowledge precheck, save the response bound to bundle SHA e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644, then begin new-bundle T01-T10 acceptance.",
+  "publication": {"push": false, "pull_request": false, "merge": false, "release": false, "issue_close": false}
+}
