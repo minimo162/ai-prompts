@@ -27,6 +27,8 @@
 
 上表は履歴版の判定です。現作業版ではT04をPASS_CURRENT_REVISIONとし、同じT01〜T10の残りを新規通常チャットから再生成して無修正PAD貼付け・保存・実行・成果物照合まで行う必要があります。
 
+2026-09-11現在の最終配布候補は、指示文 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`／bundle `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644` です。この版では知識のみの通常チャットprecheckを `PASS_REFERENCE_ONLY` として確認しましたが、T01〜T10、T01/T04/T10独立再試験、T08有効Robin、T09現行package通し実行は未完了です。下記の旧版PASS・失敗・未実行をこの最終配布候補へ継承しません。precheckの質問・回答・DOMハッシュは `catalog/generated/normal-chat-current-bundle-knowledge-precheck-20260911/`、P0〜P5監査は `catalog/evidence/issue5-completion-audit-20260911.json` です。
+
 現作業版の固定サマリは `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` です。
 
 現作業版の追補：T01〜T07、T04/T10一次受入、T01/T04/T10独立再試験はPASS_CURRENT_REVISION。fail-closed負例はPASS_NEGATIVE_FAIL_CLOSED。T08は生成形式失敗、T09は既存専用フローのランタイムprobeのみPASSで、現行package Robin受入は未確認です。
