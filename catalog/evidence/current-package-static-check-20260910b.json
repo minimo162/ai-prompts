@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-09-10T21:07:28+09:00",
+  "captured_at": "2026-09-10T21:32:29+09:00",
   "status": "pass_static_only",
   "branch": "codex/issue-5-acceptance-20260910b",
-  "head_at_check": "fcd518e",
+  "head_at_check": "761fae8",
   "checks": [
     {"command": "pwsh -NoProfile -File tests/Test-RobinRawContracts.ps1", "result": "PASS", "details": "6 raw provenance assertions including current T04; no normalization"},
     {"command": "pwsh -NoProfile -File tests/Test-CopilotRobinPackage.ps1", "result": "PASS", "details": "instructions_utf16=3949; knowledge_files=7; observed_actions=86"},
@@ -13,7 +13,7 @@
   "not_proven": [
     "Current-package T08 valid Robin fenced-block generation (current attempts failed at refusal/inline/未出力 format)",
     "Current-package T08/T09 Robin generation and unmodified paste (T09 runtime probe is separately PASS)",
-    "P3 Boolean/subtract probes are separately PASS but not integrated into the seven-file bundle; remaining P3 gaps are not closed",
+    "P3 Boolean/subtract/date-add probes are separately PASS but not integrated into the seven-file bundle; remaining P3 gaps are not closed",
     "11 item-level P3 captures requiring additional PAD Designer/runtime support",
     "GitHub CI (no checks are configured)"
   ]
