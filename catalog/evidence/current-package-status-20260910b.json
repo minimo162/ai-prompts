@@ -87,7 +87,7 @@
   "remaining": [
     "Obtain a valid unmodified Robin fenced block for current-package T08; the current chat attempts stopped at refusal/inline/未出力 format failures.",
     "Generate a current-package T09 Robin in a new normal chat and accept it without hand editing; the existing runtime probe is separate and already passes with a temporary WAIT=1.",
-    "Integrate the separately captured Boolean, numeric/date subtract, DateAndTime, folder-create, file-exists, file-move, file-rename, Excel sheet-selection, If/Else, and Loop/Break/Continue probes only with a new bundle hash and full T01-T10 regression; complete the remaining P3 captures where PAD Designer/runtime support exists. The list-remove probe and both DataTable row-value/visualizer failures are not substitutes for missing success evidence.",
+    "Integrate the separately captured Boolean, numeric/date subtract, DateAndTime, folder-create, file-exists, file-move, file-rename, Excel sheet-selection, If/Else, Loop/Break/Continue, and error-block probes only with a new bundle hash and full T01-T10 regression; complete the remaining P3 captures where PAD Designer/runtime support exists. The list-remove probe and both DataTable row-value/visualizer failures are not substitutes for missing success evidence.",
     "Do not publish: no PR, push, merge, release, or Issue close is authorized in this task."
   ]
 }

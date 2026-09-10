@@ -17,6 +17,7 @@ P3追補：Boolean、数値減算、日付減算、DateAndTime取得、フォル
 If/Else/ENDの構造は別probeで両分岐の実行まで確認していますが、Else-if・入れ子・分岐内処理は未確認です。
 有限Loopの`EXIT LOOP`も別probeでLoopIndex=1を確認していますが、Continueと入れ子は未確認です。
 有限Loopの`NEXT LOOP`も別probeでLoopIndex=4を2回確認していますが、入れ子とloop内副作用は未確認です。
+エラー処理の`BLOCK / ON BLOCK ERROR / THROW ERROR / END`骨格も別probeで確認していますが、エラー発生子アクションとサブフローは未確認です。
 
 P3ではファイル存在確認の`IF ... THEN`／`END`も別probeで2回実行しました。各probeは現行bundle未統合で、残るfalse分岐・移動・名前変更・データ反復等は未確認です。
 

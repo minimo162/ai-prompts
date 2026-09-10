@@ -2512,13 +2512,14 @@
     "evidence": "evidence/p3-break-probe-20260910.json; evidence/p3-continue-probe-20260910.json",
     "resume": "入れ子・loop side effectを採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
     },
-    {
-      "id": "B-error-subflow",
-      "missing": "エラー処理・サブフロー作成／呼出し",
-      "status": "BLOCKED_EXTERNAL_UI",
-      "reason": "左パネルの候補名だけでRobinを推測しない。",
-      "resume": "エラー処理ブロックとサブフロー呼出しを最小例で採取"
-    },
+  {
+    "id": "B-error-subflow",
+    "missing": "エラー処理・サブフロー作成／呼出し",
+    "status": "PARTIAL_PROBE_NOT_BUNDLED",
+    "reason": "新規専用probeでBLOCK／ON BLOCK ERROR／THROW ERROR／END構造をコピー・保存・実行した。エラーを発生させる子アクション、カスタムハンドラー、サブフロー作成・呼出しは未採取、probeは現行bundle未統合。",
+    "evidence": "evidence/p3-error-block-probe-20260910.json",
+    "resume": "エラー発生子アクションとサブフロー作成・呼出しを採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
+  },
   {
     "id": "C-datatable",
     "missing": "列付き行追加・行反復・セル参照",

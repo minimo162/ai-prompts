@@ -4803,6 +4803,17 @@
       "scope": "Synthetic finite Loop 1..3 with NEXT LOOP; copied, saved, and run twice with LoopIndex=4. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-continue-probe-20260910.json"
+    },
+    {
+      "id": "p3-error-block-probe-2026-09-10",
+      "date": "2026-09-10",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeP3ErrorBlock_20260910",
+      "ui_automation_ids": ["LanguageConstructs.Block"],
+      "scope": "Synthetic BLOCK/ON BLOCK ERROR/THROW ERROR/END skeleton; copied, saved, and run successfully without triggering an error. Current bundle unchanged.",
+      "current_package_acceptance": false,
+      "evidence": "evidence/p3-error-block-probe-20260910.json"
     }
   ],
   "application_integration": {

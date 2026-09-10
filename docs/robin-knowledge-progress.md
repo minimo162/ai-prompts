@@ -238,6 +238,7 @@ Cの列付きDataTableは5列の作成を試したが、1値だけを渡す行�
 If/Else/ENDは新規専用probeで正しいリテラル比較を採取し、THEN／ELSEを各1回実行した。branch side effectを追加していないため、Else-if・入れ子・分岐内アクションは未採取で、probeは現行bundleへ未統合である（`catalog/evidence/p3-else-probe-20260910.json`）。
 有限Loop 1..3へ`EXIT LOOP`を追加したprobeも、LoopIndex=1で終了することを確認した。Continue・入れ子・分岐内処理は未採取、probeは現行bundle未統合である（`catalog/evidence/p3-break-probe-20260910.json`）。
 同じ有限Loopへ`NEXT LOOP`を追加したprobeでは、LoopIndex=4で終了することを2回確認した。入れ子・loop side effectは未採取、probeは現行bundle未統合である（`catalog/evidence/p3-continue-probe-20260910.json`）。
+`BLOCK / ON BLOCK ERROR / THROW ERROR / END`のエラー処理骨格も新規専用probeでコピー・保存・実行した。エラーを発生させる子アクションとサブフロー作成・呼出しは未採取、probeは現行bundle未統合である（`catalog/evidence/p3-error-block-probe-20260910.json`）。
 リスト項目取得は、表示された「リストから項目を削除」を作成→追加→削除の最小probeで確認したが、削除後に項目値を返す出力変数がなく、取得構文の代用にはならなかった。推測で追加せず、未確認として保持する（`catalog/evidence/p3-list-remove-probe-20260910.json`）。
 Dの「フォルダーの作成」は合成fixture配下の新規専用フローで、原文コピー・保存・2回実行・`NewFolder`出力を確認した。現行bundleへは未統合で、存在確認・移動・名前変更は未採取のままとする（`catalog/evidence/p3-folder-create-probe-20260910.json`）。
 
