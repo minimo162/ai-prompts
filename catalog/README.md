@@ -14,7 +14,7 @@ P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、
 ファイル名前変更の成功／衝突no-opも別証跡で保持しています。false分岐と移動の再実行は未確認です。
 列付きDataTable行追加は値数不一致のnative runtime errorを再現し、成功構文を推測せず未確認として保持しています。
 ビジュアライザー保存後に0列へ戻る別失敗も記録し、成功構文を推測していません。
-If/Else/ENDの構造と両分岐実行も別probeで確認しています。Else-if・入れ子・分岐内処理は未確認です。
+If/Else/ENDとIf/Else-if/ENDの構造も別probeで確認しています。入れ子・分岐内処理は未確認です。
 有限Loopの`EXIT LOOP`と`NEXT LOOP`は別probeで確認しています。入れ子とloop内副作用は未確認です。
 （Loop Continue probeは現行bundleへ未統合です。）
 エラー処理ブロックの骨格とP3Worker作成＋MainからのCALLも別probeで確認しています。エラー発生子アクションとカスタムハンドラーは未確認です。

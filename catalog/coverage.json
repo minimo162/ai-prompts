@@ -2105,8 +2105,9 @@
         "if-current-item-status-equals",
         "if-current-file-contains-txt"
       ],
-      "reason": "If開始行を2設定採取し、For eachとの組合せはT03で実行確認済み。Else／Else ifの原文・実行は未確認。",
-      "reference": "catalog/index.json; catalog/actions/if/*.robin; catalog/evidence/normal-chat-t03-final-current-run.json",
+      "observed_probe_ids": ["p3-else-probe-2026-09-10", "p3-else-if-probe-2026-09-10"],
+      "reason": "If開始行を2設定採取し、For eachとの組合せはT03で実行確認済み。別probeでElseとElse-ifの原文・実行も確認したが、入れ子とbranch side effectは未確認。",
+      "reference": "catalog/index.json; catalog/actions/if/*.robin; catalog/evidence/normal-chat-t03-final-current-run.json; catalog/evidence/p3-else-probe-20260910.json; catalog/evidence/p3-else-if-probe-20260910.json",
       "live_ui_candidates": [
         {
           "ui_name": "Else",
@@ -2502,10 +2503,10 @@
   {
     "id": "B-if-else",
     "missing": "Else／Else if",
-    "status": "PARTIAL_PROBE_NOT_BUNDLED",
-    "reason": "新規専用probeでIf/Else/ENDをコピー・保存し、THENとELSEを各1回実行した。branch side effectは空で、Else-ifと入れ子は未採取、probeは現行bundle未統合。",
-    "evidence": "evidence/p3-else-probe-20260910.json",
-    "resume": "Else-if・入れ子・branch side effectを採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
+    "status": "PASS_PROBE_NOT_BUNDLED",
+    "reason": "新規専用probeでIf/Else/ENDとIf/Else-if/ENDをコピー・保存し、各構造を2回実行した。branch side effectは空で、入れ子は未採取、probeは現行bundle未統合。",
+    "evidence": "evidence/p3-else-probe-20260910.json; evidence/p3-else-if-probe-20260910.json",
+    "resume": "入れ子・branch side effectを採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
   },
     {
       "id": "B-loop-fixed-foreach-exit",
