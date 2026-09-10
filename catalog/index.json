@@ -4835,10 +4835,10 @@
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3DataTableRowValid_20260910",
       "ui_automation_ids": ["ProgramItemsListBoxActions", "ErrorPinButton", "VariablePreviewTextBlock"],
-      "scope": "Read-only inspection after the synthetic RowToAdd failure; DataTable preview was 0 rows/0 columns and RowValues preview was [A, B]. No action changed or executed.",
+      "scope": "Read-only inspection after the synthetic RowToAdd failure; DataTable preview was 0 rows/0 columns and RowValues preview was [A, B]. The failed action was then copied without editing or execution.",
       "current_package_acceptance": false,
       "execution_status": "confirmed_runtime_error_state",
-      "evidence": "evidence/p3-datatable-row-error-state-20260911.json"
+      "evidence": "evidence/p3-datatable-row-error-state-20260911.json; evidence/p3-datatable-row-error-state-20260911.robin"
     },
     {
       "id": "p3-else-probe-2026-09-10",

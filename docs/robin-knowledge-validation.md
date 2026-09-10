@@ -166,6 +166,6 @@ P0〜P5の要件監査表は `catalog/evidence/issue5-completion-audit-20260910.
 
 サブフローは `P3Worker` を作成し、Mainから `CALL P3Worker` で呼び出した。Workerのタイムアウト付きメッセージは2回とも `ButtonPressed=OK` で完了した（`catalog/evidence/p3-subflow-probe-20260910.json`）。Error blockでは欠損ファイル子アクションを1回実行し、Main line 2のruntime errorと後続非実行を確認した（`catalog/evidence/p3-error-trigger-probe-20260910.json`）。これらのprobeは現行bundle未統合である。カスタムエラーハンドラー、入れ子、DataTable成功構文、Excel反復などは未確認のまま保持する。
 
-DataTableは3列1行（`A/10/対象`）の作成を新規専用フローでコピー・保存・2回実行し、`1 行, 3 列`を確認した。行追加・行反復・セル参照の成功構文は未確認であり、5列に1値を渡すnative runtime errorとビジュアライザー復帰失敗は別の失敗証跡として保持する（`catalog/evidence/p3-datatable-create-success-20260911.json`、`p3-datatable-row-failure-20260910.json`、`p3-datatable-row-list-failure-20260910.json`）。
+DataTableは3列1行（`A/10/対象`）の作成を新規専用フローでコピー・保存・2回実行し、`1 行, 3 列`を確認した。行追加・行反復・セル参照の成功構文は未確認であり、5列に1値を渡すnative runtime errorとビジュアライザー復帰失敗は別の失敗証跡として保持する。現行失敗フローのUIではDataTable `0 行, 0 列`、RowValues `[A, B]`、2値対0列エラーを読み取り、直後の失敗Robin原文をコピーしてSHA `e0088169fdbe6490453ff926a488b9ca21c912f5632c00e47a5fc09be30db7d0`で固定した（`catalog/evidence/p3-datatable-create-success-20260911.json`、`catalog/evidence/p3-datatable-row-failure-20260910.json`、`catalog/evidence/p3-datatable-row-list-failure-20260910.json`、`catalog/evidence/p3-datatable-row-error-state-20260911.json`）。
 
 リスト項目取得は、削除アクションが取得値を返さないことを再確認した。現行の専用フローでActionsTreeViewの読取りインベントリを実行したが、仮想化スクロールが終端で揺れ続け、401ノード以上を観測した時点で停止した。リスト取得アクションの不在は断定せず、原文・実行証拠は未確認として維持する（`catalog/evidence/p3-list-remove-probe-20260910.json`、`catalog/evidence/p3-list-get-inventory-boundary-20260911.json`）。

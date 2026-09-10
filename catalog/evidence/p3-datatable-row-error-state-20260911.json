@@ -33,5 +33,12 @@
     "flow_status": "状態: 見つかったランタイム エラー",
     "actions_executed": 0
   },
+  "raw": {
+    "path": "catalog/evidence/p3-datatable-row-error-state-20260911.robin",
+    "sha256": "e0088169fdbe6490453ff926a488b9ca21c912f5632c00e47a5fc09be30db7d0",
+    "bytes": 111,
+    "copy_observed": true,
+    "clipboard_restored": true
+  },
   "result": "The current UI confirms that the failure is not evidence of a valid RowToAdd type: the table preview is 0 rows, 0 columns while RowValues previews [A, B], and PAD reports a two-values-versus-zero-columns runtime error. The successful non-empty table creation probe remains separate; row insertion, iteration, and cell access are unproven."
 }
