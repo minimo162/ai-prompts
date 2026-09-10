@@ -235,6 +235,7 @@ Dの「ファイルの移動」は、合成sourceを専用destinationへ移動�
 Dの「ファイルの名前を変更する」は、拡張子保持・DoNothing設定で合成ファイルを1回改名し、2回目は衝突no-opを確認した。false分岐と移動のリセット付き再実行は未採取、probeは現行bundleへ未統合である（`catalog/evidence/p3-file-rename-probe-20260910.json`）。
 Cの列付きDataTableは5列の作成を試したが、1値だけを渡す行追加でPAD native runtime error（指定値1件／列5件の不一致）となった。行値の正しい型・行反復・セル参照を推測せず、失敗原文を別証跡へ固定した（`catalog/evidence/p3-datatable-row-failure-20260910.json`）。
 2回目のDataTable行追加試行では、ビジュアライザー上の1行3列が親ダイアログ保存後に実行時0行0列へ戻り、2値の`%RowValues%`も値数不一致で失敗した。raw copyが安定しなかった区間は未採取として別証跡に分離し、成功構文を推測していない（`catalog/evidence/p3-datatable-row-list-failure-20260910.json`）。
+If/Else/ENDは新規専用probeで正しいリテラル比較を採取し、THEN／ELSEを各1回実行した。branch side effectを追加していないため、Else-if・入れ子・分岐内アクションは未採取で、probeは現行bundleへ未統合である（`catalog/evidence/p3-else-probe-20260910.json`）。
 リスト項目取得は、表示された「リストから項目を削除」を作成→追加→削除の最小probeで確認したが、削除後に項目値を返す出力変数がなく、取得構文の代用にはならなかった。推測で追加せず、未確認として保持する（`catalog/evidence/p3-list-remove-probe-20260910.json`）。
 Dの「フォルダーの作成」は合成fixture配下の新規専用フローで、原文コピー・保存・2回実行・`NewFolder`出力を確認した。現行bundleへは未統合で、存在確認・移動・名前変更は未採取のままとする（`catalog/evidence/p3-folder-create-probe-20260910.json`）。
 

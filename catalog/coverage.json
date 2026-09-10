@@ -2496,13 +2496,14 @@
     "evidence": "evidence/p3-date-subtract-probe-20260910.json; evidence/p3-date-format-probe-20260910.json",
     "resume": "日時加算・カスタム書式化を採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
   },
-    {
-      "id": "B-if-else",
-      "missing": "Else／Else if",
-      "status": "BLOCKED_EXTERNAL_UI",
-      "reason": "Ifの既存成功をElseへ拡張できない。ブロック終端をPAD画面で採取する必要がある。",
-      "resume": "ElseまたはElse ifを含む最小条件ブロックを採取・実行"
-    },
+  {
+    "id": "B-if-else",
+    "missing": "Else／Else if",
+    "status": "PARTIAL_PROBE_NOT_BUNDLED",
+    "reason": "新規専用probeでIf/Else/ENDをコピー・保存し、THENとELSEを各1回実行した。branch side effectは空で、Else-ifと入れ子は未採取、probeは現行bundle未統合。",
+    "evidence": "evidence/p3-else-probe-20260910.json",
+    "resume": "Else-if・入れ子・branch side effectを採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
+  },
     {
       "id": "B-loop-fixed-foreach-exit",
       "missing": "ループ脱出・次のループ",
