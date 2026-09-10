@@ -20,6 +20,7 @@ P3追補：Boolean、数値減算、日付減算、DateAndTime取得、フォル
 
 ファイル存在確認とファイル移動のprobeも別証跡でPASSですが、現行bundle未統合です。false分岐・名前変更・移動の再実行は未確認です。
 ファイル名前変更も別probeでPASSですが、現行bundle未統合です。false分岐と移動の再実行は未確認です。
+列付きDataTable行追加は値数不一致のnative runtime errorを再現し、成功するRowToAdd型・行反復・セル参照は未確認です。
 
 ファイル存在確認の`IF ... THEN`／`END`も別probeでPASSですが、false分岐・移動・名前変更・データ反復等は未確認です。
 

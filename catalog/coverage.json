@@ -2517,13 +2517,14 @@
       "reason": "左パネルの候補名だけでRobinを推測しない。",
       "resume": "エラー処理ブロックとサブフロー呼出しを最小例で採取"
     },
-    {
-      "id": "C-datatable",
-      "missing": "列付き行追加・行反復・セル参照",
-      "status": "BLOCKED_EXTERNAL_UI",
-      "reason": "0行0列への行追加失敗は保持済みだが、成功する列定義の原文が未採取。",
-      "resume": "列付きDataTableを作成して行追加・セル参照を1周実行"
-    },
+  {
+    "id": "C-datatable",
+    "missing": "列付き行追加・行反復・セル参照",
+    "status": "BLOCKED_EXTERNAL_UI",
+    "reason": "列付きDataTableの作成画面と行追加を試験したが、5列に1値を渡すnative runtime errorを再現した。RowToAddの正しいリスト型・行反復・セル参照は未採取し、候補構文を推測していない。",
+    "evidence": "evidence/p3-datatable-row-failure-20260910.json",
+    "resume": "列数一致のRowToAdd入力型をPAD画面から採取し、再貼付け・保存・実行・行反復・セル参照まで確認"
+  },
   {
     "id": "D-files-folders",
     "missing": "存在確認・フォルダー作成・移動・名前変更",

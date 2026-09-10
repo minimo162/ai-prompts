@@ -4746,6 +4746,18 @@
       "scope": "Synthetic file rename with extension kept; one successful run and one DoNothing collision no-op. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-file-rename-probe-20260910.json"
+    },
+    {
+      "id": "p3-datatable-row-failure-2026-09-10",
+      "date": "2026-09-10",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeP3DataTable_20260910",
+      "ui_automation_ids": ["Variables.CreateNewDatatable", "Variables.AddRowToDataTable"],
+      "scope": "Synthetic five-column table plus one-value RowToAdd probe; native runtime value-count error preserved. Current bundle unchanged.",
+      "current_package_acceptance": false,
+      "execution_status": "failed_probe_row_value_count_mismatch",
+      "evidence": "evidence/p3-datatable-row-failure-20260910.json"
     }
   ],
   "application_integration": {
