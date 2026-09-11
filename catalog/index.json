@@ -5731,7 +5731,7 @@
       "cases": ["knowledge_precheck", "T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T09", "T10", "independent_T01_T04_T10", "negative_suite"],
       "scope": "P3教材統合後の新bundle。Final3旧版の受入結果を継承せず、通常チャット＋PAD同一版再受入を待つ。",
       "current_package_acceptance": false,
-      "execution_status": "knowledge_precheck_pass_t01_pass_t02_t10_not_run",
+      "execution_status": "knowledge_precheck_t01_t02_pass_t03_t10_not_run",
       "manifest": "../copilot/knowledge-bundle-manifest-20260911h.json",
       "evidence": "evidence/current-bundle-p3b-precheck-pending-20260911.json; evidence/current-package-status-20260911-p3b.json; evidence/issue5-completion-audit-20260911-p3b.json"
     },

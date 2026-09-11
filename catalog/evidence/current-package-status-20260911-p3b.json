@@ -7,8 +7,8 @@
   "knowledge_bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
   "knowledge_precheck": "evidence/current-bundle-p3b-precheck-pending-20260911.json",
   "accepted_final3_cases_preserved": ["T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T10"],
-  "new_bundle_cases": "KNOWLEDGE_PRECHECK_AND_T01_PASS_T02_T10_NOT_RUN",
-  "accepted_new_bundle_cases": ["knowledge_precheck", "T01"],
+  "new_bundle_cases": "KNOWLEDGE_PRECHECK_T01_T02_PASS_T03_T10_NOT_RUN",
+  "accepted_new_bundle_cases": ["knowledge_precheck", "T01", "T02"],
   "blocked_cases": ["T09"],
   "independent_retests": "NOT_RUN_NEW_BUNDLE",
   "negative_suite": "REQUIRES_NEW_BUNDLE_RUN",
@@ -19,7 +19,7 @@
     "Excel row iteration"
   ],
   "remaining": [
-    "New-bundle T02-T10 acceptance",
+    "New-bundle T03-T10 acceptance",
     "New-bundle independent T01/T04/T10 retests and negative suite",
     "T09 separate-flow UI element registration for Input/Button/Paragraph and WebAutomation runtime",
     "P3 list-item retrieval, custom date formatting, nested/side-effect branches, named custom-error matching"

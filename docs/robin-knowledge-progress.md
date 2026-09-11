@@ -324,4 +324,4 @@ P3統合後は指示文SHA `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa
 
 T09は別空フロー`RobinKnowledgeT09Separate_20260911`を作成し、Final3 T09 Robinの6アクション貼付け・保存・再確認を実施した。UI要素ピッカーの実測ではEdgeのWindow/Paneまでしか列挙されず、`Input text 't09-input'`、`Button '実行'`、`Paragraph '未実行'`は登録できなかった。Designerエラー3件、Start無効、Run未開始を確認した。別のLaunchEdge単独フローは貼付け・保存・Run完了（Browser変数preview）まで確認したが、対象ページのWeb DOM要素やWebAutomation要求完了を示さず、T09通し成功へ拡張していない（`catalog/evidence/t09-separate-ui-registration-20260911.json`、`t09-edge-launch-paste-20260911.json`、`t09-edge-launch-run-20260911b.json`）。
 
-現状は`partial／OPEN`。新bundleのT01は全文指示＋同版bundle、無修正Robin、PAD 2回実行、成果物照合までPASSした。残りはT02〜T10→独立T01/T04/T10→負例を同一版で再受入し、T09はEdge拡張/native-hostがWeb DOM要素を返す条件で無修正6アクションを2回通し実行すること。未確認のP3はリスト項目取得、カスタム日時書式、入れ子／branch side effect、名前付きカスタムエラー一致である。
+現状は`partial／OPEN`。新bundleのT01/T02は全文指示＋同版bundle、無修正Robin、PAD 2回実行、成果物照合までPASSした。残りはT03〜T10→独立T01/T04/T10→負例を同一版で再受入し、T09はEdge拡張/native-hostがWeb DOM要素を返す条件で無修正6アクションを2回通し実行すること。未確認のP3はリスト項目取得、カスタム日時書式、入れ子／branch side effect、名前付きカスタムエラー一致である。

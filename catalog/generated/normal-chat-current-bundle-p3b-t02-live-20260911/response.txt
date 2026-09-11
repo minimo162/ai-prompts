@@ -1,0 +1,63 @@
+Copilot said:
+
+以下は、添付ナレッジに収録されたT02の実測済み3アクションを、そのまま使うPADフロー案です。合成CSVをUTF-8で読み込み、Status列が「対象」の行だけを、列名付きの新しいCSVへ上書き保存します。
+
+1. 前提・対象範囲
+入力: C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\csv\\t02-input-20260910.csv
+出力: C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t02-output-20260910.csv
+入力の扱い: 読み取りのみ。変更や削除は行いません。
+フィルター条件: 列インデックス2、つまり3列目のStatus列が、文字列対象と完全一致する行
+大文字・小文字: 区別する
+出力列名: 含める
+エンコード: UTF-8
+区切り: システム既定
+既存出力: 上書き
+変数:
+CSVTable: ヘッダー付き入力CSVを読み取ったデータテーブル
+FilteredDataTable: 条件抽出後のデータテーブル
+
+実測環境はPAD 2.71.115.26224、日本語UI、Power Fx OFFです。この3アクションは別の空フローへ再貼り付け、保存、再コピー、2回の実行、成果物の論理照合まで実施されています。根拠は、PAD-Robin-Knowledge-Bundle内のcatalog/flows/datatable-filter/roundtrip.robinとcatalog/evidence/filter-t02-roundtrip2-run-2.jsonです。
+
+2. PADで先に確認する設定
+
+このRobinでは、入力変数やUI要素を事前作成する必要はありません。貼り付け先の対象サブフローはMainなどの空のサブフローとし、既存アクションへ追加する場合は、この3アクションを連続した範囲として挿入してください。
+
+実行前に次を確認します。
+
+入力CSVが存在し、別名の複製または合成データであること。
+出力先フォルダーC:\\Users\\yuuki\\ai-prompts\\catalog\\evidenceが存在すること。
+同名出力が存在する場合、上書きしてよいこと。
+入力CSVの3列目がStatus列であること。
+Windowsのシステム既定CSV区切りが、この合成CSVの区切りと一致すること。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: 空のサブフロー全体、または挿入したい位置の連続した3アクション
+
+File.ReadFromCSVFile.ReadCSV CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\csv\\t02-input-20260910.csv''' Encoding: File.CSVEncoding.UTF8 TrimFields: True FirstLineContainsColumnNames: True ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault CSVTable=> CSVTable
+Variables.FilterDataTable DataTable: CSVTable FilterParameters: { ^['RULE', 'COLUMN', 'OPERATOR', 'VALUE'], [$'''''', 2, $'''Equal''', $'''対象'''] } MatchCase: True FilteredDataTable=> FilteredDataTable
+File.WriteToCSVFile.WriteCSV VariableToWrite: FilteredDataTable CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t02-output-20260910.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: True IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault
+
+4. デザイナー上での確認
+
+貼り付け後、次を確認してください。
+
+アクション数が3である。
+順序が「CSV読取り → データテーブルのフィルター → CSV書出し」である。
+1番目の出力がデータテーブル型のCSVTableである。
+2番目の入力が文字列ではなく、データテーブル変数CSVTableである。
+2番目の出力がFilteredDataTableである。
+3番目の書き込み対象が文字列リテラルではなく、データテーブル変数FilteredDataTableである。
+フィルター列がインデックス2、演算子がEqual、値が対象、大文字・小文字区別が有効である。
+列名を含める設定が有効である。
+ファイル存在時の設定が「上書き」である。
+3アクションすべてにデザイナーエラーがない。
+5. 合成データでの実行・照合
+
+入力CSVを別名で複製して保全するか、実行前に入力ファイルのハッシュを記録します。
+出力先に既存ファイルがある場合は、内容を確認してから退避します。
+フローを保存して1回実行します。
+出力CSVをCSV対応アプリで開き、ヘッダー、Statusが対象の行だけ、2論理行、列数、日本語、引用フィールド、二重引用符、UTF-8 BOM、CRLF、末尾改行なしを確認します。
+入力CSVが変更されていないことを確認し、もう一度実行して同じ論理CSVになることを確認します。
+
+実測証拠では、入力は変更されず、出力はヘッダーとStatus=対象の2行に一致しています。
