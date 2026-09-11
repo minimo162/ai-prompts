@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T14:23:00+09:00",
+  "case": "T10",
+  "status": "paste_blocked_invalid_generated_syntax",
+  "knowledge_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+  "copilot": "catalog/generated/normal-chat-current-bundle-final3-t10-independent-20260911/result.json",
+  "robin_sha256": "d3a6d3f79955a9f1ee2f92b6c519527ad576566b8fa27c8f6652a08b795a5a54",
+  "note": "Raw response contained escaped \\=> tokens in multiple action lines; no hand-edit was applied.",
+  "pad_flow": "RobinKnowledgeT10Final3Independent_20260911",
+  "pad_process_id": 44720,
+  "paste_attempts": 2,
+  "visible_action_count": 0,
+  "designer_status_observed": "0 アクション",
+  "run_started": false,
+  "next_action": "Retry from a fresh Copilot response without editing the raw Robin."
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T14:05:00+09:00",
+  "status":"PARTIAL_NEW_FINAL_BUNDLE_ACCEPTANCE_PENDING",
+  "instruction_sha256":"b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "instruction_utf16_code_units":3949,
+  "knowledge_bundle_sha256":"2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+  "knowledge_bundle_bytes":73551,
+  "manifest":"copilot/knowledge-bundle-manifest-20260911-final.json",
+  "knowledge_precheck":"catalog/evidence/current-bundle-final-precheck-pending.json",
+  "t01_prepared":"catalog/evidence/t01-current-bundle-prepared-20260911-final.json",
+  "prior_bundle_sha256":"61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b",
+  "remaining":["new final precheck","new final T01-T10 acceptance","T09 WebAutomation runtime","independent final T01/T04/T10 retests","negative cases"],
+  "inheritance_rule":"Prior 61f040 acceptance is historical and not inherited."
+}

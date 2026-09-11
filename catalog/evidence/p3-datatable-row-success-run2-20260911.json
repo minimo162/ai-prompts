@@ -1,0 +1,12 @@
+{
+    "schema_version":  1,
+    "observed_at":  "2026-09-10T22:54:20.9813650Z",
+    "flow_name":  "RobinKnowledgeP3DataTableRow_20260911",
+    "run_status":  "success",
+    "ready_observed":  true,
+    "start_enabled_after":  true,
+    "variable_previews":  [
+                              "2 行, 3 列",
+                              "[A, 10, 対象]"
+                          ]
+}

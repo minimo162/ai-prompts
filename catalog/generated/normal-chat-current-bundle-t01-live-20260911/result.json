@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "case": "T01",
+  "captured_on": "2026-09-11",
+  "browser": "Chrome extension",
+  "tab_id": "1910259751",
+  "chat_title": "Power Automate置換フロー案作成",
+  "url": "https://m365.cloud.microsoft/chat/conversation/31562938-b5ab-4cf6-9e30-4e7f08d6ff72",
+  "model": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
+  "prompt_source": "catalog/generated/normal-chat-current-revision-t01-20260910/prompt.txt",
+  "prompt_sha256": "936fe2eb6606adbfd10596e4b7347eeda8a021d3b93530625851a0608d5f0312",
+  "prompt_utf16": 4426,
+  "attachments": [
+    {
+      "path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+      "name": "PAD-Robin-Knowledge-Bundle.txt",
+      "sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644"
+    },
+    {
+      "path": "catalog/fixtures/text/t01-input-20260909.txt",
+      "name": "t01-input-20260909.txt",
+      "sha256": "2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f"
+    }
+  ],
+  "attachment_state": {
+    "count": 2,
+    "names": [
+      "PAD-Robin-Knowledge-Bundle.txt",
+      "t01-input-20260909.txt"
+    ],
+    "pending": false,
+    "observed_after_send": true
+  },
+  "send_state": {
+    "body_entered": true,
+    "clicked": true,
+    "response_observed": true,
+    "response_completed": true
+  },
+  "response": {
+    "path": "catalog/generated/normal-chat-current-bundle-t01-live-20260911/response.txt",
+    "sha256": "c477e4200b82441367a8721553a47c6d78595d29177ebbbad30222739993ff87",
+    "bytes": 4905,
+    "capture": "article innerText, including Copilot said wrapper and rendered response text"
+  },
+  "robin_blocks": [
+    {
+      "path": "catalog/generated/normal-chat-current-bundle-t01-live-20260911/robin.txt",
+      "sha256": "2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47",
+      "bytes": 646,
+      "count": 1,
+      "capture": "pre code textContent, including the generated block trailing LF"
+    }
+  ],
+  "pad_acceptance": {
+    "flow_name": "RobinKnowledgeT01CurrentBundleLive_20260911",
+    "paste_save_evidence": "catalog/evidence/t01-current-bundle-pad-paste-save-20260911.json",
+    "pad_recopy_before_runs": {
+      "path": "catalog/generated/normal-chat-current-bundle-t01-live-20260911/pad-recopy.robin",
+      "sha256": "d2a7f74e6b5038557a5b0eeca1bde4468f4d4fc402a9baaf95ba7fe5e91a317b",
+      "bytes": 649
+    },
+    "run1": "catalog/evidence/t01-current-bundle-pad-run1-20260911.json",
+    "run2": "catalog/evidence/t01-current-bundle-pad-run2-20260911.json",
+    "pad_recopy_after_run2": {
+      "path": "catalog/generated/normal-chat-current-bundle-t01-live-20260911/pad-recopy-after-run2.robin",
+      "sha256": "d2a7f74e6b5038557a5b0eeca1bde4468f4d4fc402a9baaf95ba7fe5e91a317b",
+      "bytes": 649
+    },
+    "normalized_source_match": true,
+    "output_comparison": "catalog/evidence/t01-current-bundle-pad-output-comparison-20260911.json",
+    "runs_completed": 2,
+    "result": "PASS_OUTPUT_AND_INPUT_INVARIANCE"
+  },
+  "result": "LIVE_COPILOT_AND_PAD_T01_ACCEPTED",
+  "notes": [
+    "The chat visibly showed two attached files and a completed response.",
+    "The generated Robin was not hand-edited; the response explicitly states that this three-action combination remains unverified in PAD.",
+    "No expected output or answer was embedded in the sent prompt."
+  ]
+}

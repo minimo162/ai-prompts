@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T14:21:20+09:00",
+  "case": "T04",
+  "status": "accepted_independent_retest",
+  "knowledge_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+  "copilot": "catalog/generated/normal-chat-current-bundle-final3-t04-independent-20260911/result.json",
+  "pad_flow": "RobinKnowledgeT04Final3Independent_20260911",
+  "pad_process_id": 48188,
+  "paste_status": "catalog/evidence/t04-current-final3-independent-pad-paste-status-20260911.json",
+  "save_confirmed": true,
+  "recopy": "catalog/evidence/t04-current-final3-independent-pad-recopy-all-20260911.robin",
+  "designer_action_count": 9,
+  "visible_action_count": 5,
+  "run1": "catalog/evidence/t04-current-final3-independent-pad-run1-20260911.json",
+  "run2": "catalog/evidence/t04-current-final3-independent-pad-run2-20260911.json",
+  "input_sha256": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+  "input_unchanged": true,
+  "output_logical_rows": ["対象 A 10", "対象 C 25", "対象 D 5"],
+  "acceptance": "accepted_2_runs_same_final_bundle_independent_flow_and_chat"
+}

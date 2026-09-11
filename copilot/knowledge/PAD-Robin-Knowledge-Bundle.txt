@@ -135,7 +135,7 @@ P3追加probe（現行bundleへ統合する場合は、統合後のハッシュ�
 - リスト項目取得: 「リストから項目を削除」は取得値を返さず、現行アクション検索でも専用取得アクションは観測されなかった。式参照等の別方式は未確認。証拠: `catalog/evidence/p3-list-remove-probe-20260910.json`、`p3-list-get-search-boundary-20260911.json`。
 ===== END copilot/knowledge/PAD-Robin-01-Basics.txt =====
 
-===== BEGIN copilot/knowledge/PAD-Robin-02-Control.txt | SHA-256 82fd3e63e14f39b109704831778a05fc28ab76d3ff8af437817d4668d08ddb46 =====
+===== BEGIN copilot/knowledge/PAD-Robin-02-Control.txt | SHA-256 143b30c2c66ce8f5427df2994868cd999ffbf5830ddef50bc56d42cd8228d76f =====
 PAD Robin 制御・ブロック
 
 初期観測ではIf、Else、For each、ループを抜ける、次のループ、ブロック エラー発生時、サブフローの実行、サブフローの終了、待機、Loopの表示名を確認した。For each＋If＋ファイル読取りの組合せはT03で実行確認済みである。初期版で未確認だった制御構文は、下記のP3専用probeで別途採取した。表示名の証拠は `catalog/evidence/pad-action-inventory-20260909.json`、T03の組合せ実行は `catalog/evidence/normal-chat-t03-final-current-run.json`、固定範囲Loopの原文・実行値は `catalog/index.json` と `catalog/flows/bounded-loop/` に対応づけられている。
@@ -175,6 +175,17 @@ P3追加probe（別probeの実行根拠。新しい現行bundleでのT01〜T10�
 - ループ脱出／継続: `EXIT LOOP` はLoopIndex=1、`NEXT LOOP` は2回ともLoopIndex=4。証拠: `catalog/evidence/p3-break-probe-20260910.json`、`p3-continue-probe-20260910.json`。
 - エラー処理: `BLOCK / ON BLOCK ERROR / THROW ERROR / END` と欠損ファイルruntime errorを確認。既定の「すべてのエラー」へ `SET ErrorHandledDefault TO $'''true'''`、続行ON／スローOFFを設定した別probeは2回とも完了し、trueプレビューを得た。証拠: `catalog/evidence/p3-error-trigger-probe-20260910.json`、`p3-error-default-handler-20260911.json`、`p3-error-default-handler-flow-20260911.robin`。
 - サブフロー: `P3Worker` を作成し、Mainから `CALL P3Worker`。タイムアウト付きメッセージで2回ともButtonPressed=OK。証拠: `catalog/evidence/p3-subflow-probe-20260910.json`。
+- `最後のエラーを取得`は専用PADフローで保存先`LastError`、エラー消去`On`を設定し、PADから無修正再コピーした原文は `ERROR => LastError Reset: True` である（`catalog/evidence/p3-get-last-error-standalone-20260911-reset.robin`）。欠損ファイルを含むエラー処理probeでは、ブロック原文とこのアクション原文を別々にPAD採取し、アクション順に組み合わせた参照例を保存した。これは単一clipboard rawの証明ではないが、クリーンな2回の実行で`true`と「ファイルが見つかりません」のLastErrorプレビューを確認した（`catalog/evidence/p3-error-handler-measured-20260911.json`）。
+- 測定済み組み合わせ参照（ブロック原文と`ERROR`アクションを別々にPAD採取し、単一clipboard rawではない）:
+BLOCK
+ON BLOCK ERROR FileNotFound IsUserDefinedErrorCode: True
+    SET ErrorHandled TO $'''true'''
+ON BLOCK ERROR
+    SET ErrorHandledDefault TO $'''true'''
+END
+    File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+END
+ERROR => LastError Reset: True
 - 名前付きカスタムエラー `FileNotFound` の変数設定はruntime errorが残ったため、既定エラー成功と混同しない。証拠: `catalog/evidence/p3-error-custom-handler-20260911.json`。
 
 未採取・未確認
@@ -399,7 +410,7 @@ T07のページ2単独抽出（リポジトリfixture）
 詳細記録: docs/office-action-capture.md、docs/pdf-action-capture.md。未確認のモードを、確認済みの完成例へ混ぜない。
 ===== END copilot/knowledge/PAD-Robin-04-Office-PDF.txt =====
 
-===== BEGIN copilot/knowledge/PAD-Robin-05-UI-Web.txt | SHA-256 66770c17a30947ecde74032276a37527f67f69d45a8ec5e2661b2b5275f083bb =====
+===== BEGIN copilot/knowledge/PAD-Robin-05-UI-Web.txt | SHA-256 6212e1705748b616d556b510d8a75308ef4b677261c28cb467ed7a63b8799009 =====
 PAD Robin UI・ブラウザー
 
 UIとブラウザーは、UI要素・通信方式・対象画面の依存が大きいため、実機の状態を確認できた範囲だけを記録する。
@@ -425,9 +436,19 @@ PADのUI要素やブラウザーアクションを一般的なセレクターや
 - `RobinKnowledgeT09FilterPaste_20260910` を90秒上限で実行したが、112秒時点でも「実行中」となり、入力・クリック・結果取得・終了のWebAutomationエラーと結果要素`未実行`が表示された。
 - 有効な停止ボタンを一度だけ押し、PADが「準備完了」へ戻った。`T09-clicked`は未観測で、これはWAIT=1秒へ一時変更した別probeの成功とは分離する。
 - 証拠: `catalog/evidence/p3-t09-current-runtime-reprobe-20260911.json`。拡張機能・WebDriver・通信方式を推測したり、既存タブを閉じたりしない。
+
+2026-09-11 T09のPAD採取済みアクション行（生成根拠として掲載）
+- `catalog/flows/ui-t09-local-roundtrip/roundtrip.robin` のアクション行は6行で、原文SHA-256 `93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd`。下記はControlRepository画像データを除いた、PADから取得した実行命令行の逐語部分である。
+WebAutomation.LaunchEdge.LaunchEdge Url: $'''http://127.0.0.1:8765/t09-local-test.html''' ClearCache: False ClearCookies: False WindowState: WebAutomation.BrowserWindowState.Normal WaitForPageToLoadTimeout: 60 Timeout: 60 PiPUserDataFolderMode: WebAutomation.PiPUserDataFolderModeEnum.AutomaticProfile TargetDesktop: $'''{\"DisplayName\":\"ローカル コンピューター\",\"Route\":{\"ServerType\":\"Local\",\"ServerAddress\":\"\"},\"DesktopType\":\"local\"}''' BrowserInstance=> Browser
+WebAutomation.PopulateTextField.PopulateTextFieldUsePhysicalKeyboard BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Input text \'t09-input\''] Text: $'''T09-input''' Mode: WebAutomation.PopulateTextMode.Replace UnfocusAfterPopulate: True WaitForPageToLoadTimeout: 60
+WebAutomation.Click.Click BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Button \'実行\''] ClickType: WebAutomation.ClickType.LeftClick MouseClick: True WaitForPageToLoadTimeout: 60 MousePositionRelativeToElement: WebAutomation.RectangleEdgePoint.MiddleCenter OffsetX: 0 OffsetY: 0
+WAIT 500
+WebAutomation.GetDetailsOfElement BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Paragraph \'未実行\''] AttributeName: $'''Own Text''' AttributeValue=> AttributeValue
+WebAutomation.CloseWebBrowser BrowserInstance: Browser
+- この掲載はPADから取得したアクション行の技術資料であり、現行bundleへの統合後も、ブラウザー拡張経路の完走・`AttributeValue=T09-clicked`・ブラウザー終了は別のライブ受入条件である。未確認のセレクターや引数を追加しない。
 ===== END copilot/knowledge/PAD-Robin-05-UI-Web.txt =====
 
-===== BEGIN copilot/knowledge/PAD-Robin-06-Examples.txt | SHA-256 ca1b0c8ff83fdc7a307b77aac0e8e9169e93600acab471fb8e5479f019cbb3c8 =====
+===== BEGIN copilot/knowledge/PAD-Robin-06-Examples.txt | SHA-256 2526b66f94305a32faff51d6359efb0765a4c994495fa742516256df29b2ba89 =====
 PAD Robin 完成例・生成試験の参照
 
 以下は、既存カタログで実行・結果照合まで進んだ合成データ例です。例の入力値、保存先、変数名はそのまま本番へ流用せず、依頼の対象へ置き換えます。
@@ -449,6 +470,16 @@ PAD Robin 完成例・生成試験の参照
 生成結果に関する境界
 - 既存の生成例は、新しいCopilotエージェントへこの7ファイルを登録した証拠ではない。
 - T01〜T10（特殊文字置換、CSV、複数ファイル、Excel範囲、既存Excel、Word／PowerPoint、PDF、意図したエラー、UI画面、既存フロー修正）は、最終版のエージェントで自然文依頼→原文保存→無修正貼付け→実行→成果物照合を行い、初回失敗と修正後結果を別記録する。
+
+## T01で実測済みの3アクション組合せ（履歴bundleの測定根拠）
+
+- `catalog/generated/normal-chat-current-bundle-t01-live-20260911/robin.txt` は、UTF-8読取り→通常置換→UTF-8書出し（AppendNewLine=False、上書き）のPADから取得した3アクション原文である。SHA-256は `2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47`。
+- 同原文を専用PADフローへ手直しせず貼り付け・保存し、2回実行した。出力はUTF-8 BOM付き90 bytes・CRLFで、固定期待SHA `2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2`、入力不変を確認した（`catalog/evidence/t01-current-bundle-live-send-20260911.json`、`t01-current-bundle-pad-output-comparison-20260911.json`）。
+- 測定済み組合せ原文:
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+- この組合せ証拠はe35fa2f4版での履歴であり、指示文またはbundleを変更した版へ自動継承しない。変更後は同じ原文・fixtureで通常チャットから再生成し、無修正PAD受入をやり直す。
 
 ## T02で実測済みの3アクション組合せ
 

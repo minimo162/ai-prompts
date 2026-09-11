@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T14:00:20+09:00",
+  "case": "T03",
+  "status": "accepted",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+  "copilot": "catalog/generated/normal-chat-current-bundle-final3-t03-live-20260911/result.json",
+  "pad_flow": "RobinKnowledgeT03Final3Live_20260911",
+  "pad_process_id": 36556,
+  "paste_save": "catalog/evidence/t03-current-final3-pad-paste-save-20260911.json",
+  "run1": "catalog/evidence/t03-current-final3-pad-run1-20260911.json",
+  "run2": "catalog/evidence/t03-current-final3-pad-run2-20260911.json",
+  "fixture": {
+    "path": "catalog/generated/normal-chat-current-bundle-final2-t03-fixtures-20260911.txt",
+    "sha256": "775fc7b9744cf84c9be131ba7526a1158adda517c4b76aa4f995864626fcf465",
+    "txt_only_read_confirmed": true,
+    "csv_and_md_read_confirmed": false
+  },
+  "observed_preview": "alpha 日本語",
+  "acceptance": "accepted_2_runs_same_final_bundle"
+}

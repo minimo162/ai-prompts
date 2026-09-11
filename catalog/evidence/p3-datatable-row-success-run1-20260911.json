@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "captured_on": "2026-09-11",
+  "status": "success_observed",
+  "flow_name": "RobinKnowledgeP3DataTableRow_20260911",
+  "run": 1,
+  "capture": {
+    "method": "screen observation after Run",
+    "screenshot": "catalog/evidence/p3-datatable-row-success-run1-20260911.png",
+    "screenshot_sha256": "ab7e0992f835115eee525db6c77cf934d423460abde0f3e1311c6f1a7ed7547f",
+    "flow_status": "状態: 準備完了",
+    "variable_previews": {
+      "DataTable": "2 行, 3 列",
+      "RowValues": "[A, 10, 対象]"
+    }
+  },
+  "execution": {
+    "run_completed": true,
+    "runtime_error": false,
+    "action_count": 6,
+    "row_inserted": true
+  },
+  "notes": [
+    "The Run-PadFlowLive helper timed out before writing a JSON file, so this first-run record preserves the direct screen observation rather than claiming helper completion.",
+    "The screenshot shows the same ready state and 2-row/3-column preview later reproduced by the completed second-run helper."
+  ]
+}

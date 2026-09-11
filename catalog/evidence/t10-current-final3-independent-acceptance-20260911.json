@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T14:31:00+09:00",
+  "case": "T10",
+  "status": "accepted_independent_retest",
+  "knowledge_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+  "t10_context_sha256": "db557d07bd734c92d6c2d56792d614fe3eac62647b9ba9153edaf68366f46595",
+  "copilot": "catalog/generated/normal-chat-current-bundle-final3-t10-independent-retry-20260911/result.json",
+  "pad_flow": "RobinKnowledgeT10Final3IndependentRetry_20260911",
+  "pad_process_id": 45492,
+  "paste_status": "catalog/evidence/t10-current-final3-independent-retry-pad-paste-status-20260911.json",
+  "save_confirmed": true,
+  "recopy": "catalog/evidence/t10-current-final3-independent-retry-pad-recopy-all-20260911.robin",
+  "designer_action_count": 16,
+  "visible_action_count": 5,
+  "run1": "catalog/evidence/t10-current-final3-independent-retry-pad-run1-20260911.json",
+  "run2": "catalog/evidence/t10-current-final3-independent-retry-pad-run2-20260911.json",
+  "integrity": {
+    "excel_A1": "T10-Changed",
+    "word_text": "CopilotOffice 246",
+    "powerpoint_text": "CopilotOffice 246",
+    "word_powerpoint_unchanged": true,
+    "runs_same_observed_values": true
+  },
+  "acceptance": "accepted_2_runs_same_final_bundle_independent_flow_and_chat_after_raw_generation_retry",
+  "prior_raw_failure": "catalog/evidence/t10-current-final3-independent-paste-failure-20260911.json"
+}

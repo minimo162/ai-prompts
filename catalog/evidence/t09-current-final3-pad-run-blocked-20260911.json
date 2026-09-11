@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T13:52:33.7971149+09:00",
+  "flow_name": "RobinKnowledgeT09Final3Live_20260911",
+  "run_status": "blocked_before_execution",
+  "error_messages": [
+    "パラメーター 'UI 要素': UI 要素 'ローカル コンピューター > Web Page 'http://127.0.0.1:8765/t09-local-test.html' > Input text 't09-input'' が見つかりません。",
+    "Main",
+    "2",
+    "パラメーター 'UI 要素': UI 要素 'ローカル コンピューター > Web Page 'http://127.0.0.1:8765/t09-local-test.html' > Button '実行'' が見つかりません。",
+    "3",
+    "パラメーター 'UI 要素': UI 要素 'ローカル コンピューター > Web Page 'http://127.0.0.1:8765/t09-local-test.html' > Paragraph '未実行'' が見つかりません。",
+    "5"
+  ],
+  "errors_grid_observed": true,
+  "start_button_enabled": false,
+  "execution_started": false,
+  "downstream_actions": 0,
+  "output_exists": false
+}

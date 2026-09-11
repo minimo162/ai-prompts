@@ -1,0 +1,113 @@
+1. 前提・対象範囲・未確認点
+
+目的: UTF-8のCSVを読み取り、Status 列が 対象 の行のみを抽出して、新しいCSVへ保存します。
+
+入力:
+
+C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\csv\\t02-input-20260910.csv
+CSV内容は確認済みで、列は ID,Name,Status です。t02-input-20260910
+
+出力:
+
+C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t02-output-20260910.csv
+
+確認済み根拠:
+
+T02実測済み3アクション組合せ（再貼付け・保存・再コピー・2回実行・出力照合済み）を使用します。PAD-Robin-Knowledge-Bundle の T02 節。
+
+未確認点:
+
+なし。依頼内容は実測済みT02と一致しています。
+2. PADで先に確認する設定・依存
+
+実測済みフローの設定内容:
+
+CSV読取り
+
+Encoding: UTF-8
+TrimFields: True
+FirstLineContainsColumnNames: True
+ColumnsSeparator: SystemDefault
+出力変数: CSVTable
+
+フィルター
+
+対象列: インデックス 2
+対応列名: Status
+演算子: Equal
+値: 対象
+MatchCase: True
+出力変数: FilteredDataTable
+
+CSV書出し
+
+VariableToWrite: FilteredDataTable
+Encoding: UTF-8
+IncludeColumnNames: True
+IfFileExists: Overwrite
+ColumnsSeparator: SystemDefault
+
+根拠:
+
+catalog/flows/datatable-filter/roundtrip.robin
+catalog/evidence/filter-t02-roundtrip2-run-2.json
+索引の「CSVヘッダー付きDataTableのFilterDataTable抽出」および「T02で実測済みの3アクション組合せ」。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: フロー全体
+
+Plain Text
+1
+File.ReadFromCSVFile.ReadCSV CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\csv\\t02-input-20260910.csv''' Encoding: File.CSVEncoding.UTF8 TrimFields: True FirstLineContainsColumnNames: True ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault CSVTable=> CSVTable
+2
+Variables.FilterDataTable DataTable: CSVTable FilterParameters: { ^['RULE', 'COLUMN', 'OPERATOR', 'VALUE'], [$'''''', 2, $'''Equal''', $'''対象'''] } MatchCase: True FilteredDataTable=> FilteredDataTable
+3
+File.WriteToCSVFile.WriteCSV VariableToWrite: FilteredDataTable CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t02-output-20260910.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: True IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault
+4
+`
+4. デザイナー上の確認方法
+
+確認項目:
+
+アクション数が3個であること。
+順序が以下と一致すること。
+CSV ファイルから読み取る
+データ テーブルをフィルター処理
+CSV ファイルに書き込む
+変数型
+CSVTable = DataTable
+FilteredDataTable = DataTable
+FilterDataTable の条件が以下と一致すること。
+COLUMN = 2
+OPERATOR = Equal
+VALUE = 対象
+CSV書出し設定
+IncludeColumnNames=True
+UTF-8
+Overwrite
+デザイナーに赤いエラー表示が出ていないこと。
+5. 保存・実行・出力照合手順
+空フローへ上記Robinを貼り付ける。
+保存する。
+実行する。
+出力ファイル
+C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t02-output-20260910.csv を開く。
+以下の論理CSVになっていることを確認する。
+Plain Text
+1
+ID,Name,Status
+2
+1,"日本語,引用",対象
+3
+3,"二重""引用",対象
+4
+ 
+
+期待結果:
+
+入力CSVは変更されない。
+ヘッダー行が保持される。
+Status=対象 の2行のみが出力される。t02-input-20260910
+日本語、カンマを含む引用フィールド、二重引用符が保持される。
+実測記録では UTF-8 BOM・CRLF・末尾追加改行なしで出力照合済みです。

@@ -1,0 +1,68 @@
+Copilot said:
+
+添付ナレッジの実測原文を基に、UTF-8読取り、通常置換、UTF-8上書き保存の3アクションで構成します。入力ファイルの特殊文字、既存改行、対象外文字はテキスト変数として受け渡し、保存時の追加改行を無効にします。
++ 1
+
+1. 前提・対象範囲・未確認点
+対象サブフロー: Main
+入力: t01-input-20260909。UTF-8テキストとして読み取ります。
+処理: 対象語 を 置換後 に、大文字小文字を区別する通常置換で全置換します。
+出力: normal-chat-t01-output-current-bundle.txt
+保存方式: UTF-8、既存ファイルは上書き、追加改行なし。
+変数:
+FileContents: テキスト
+Replaced: テキスト
+期待内容: 対象語 の2箇所だけが 置換後 になり、日本語、100%、引用符、C:\\sample、対象外語、入力にもともと含まれる改行は維持されます。入力内容には対象語が2行含まれています。
+上書き注意: 出力先に同名ファイルがある場合、その内容は置き換えられます。
+検証状態: 各アクション形式と主要設定はPAD実測原文に基づきます。AppendNewLine: False の変数書込みは別フローへの貼付け・保存まで確認されています。ただし、以下の指定パスと置換語で組み立てた今回の3アクション全体は、こちらではPADへの貼付け・実行を行っていません。
+2. PADで先に確認する設定
+Main サブフローを開きます。
+入力ファイルが指定パスに存在することを確認します。
+出力ファイルを上書きしてよいことを確認します。
+Main の貼り付け対象位置に、変数名 FileContents または Replaced と競合する既存処理がないことを確認します。
+以下の3行を、Main の置換したい範囲へそのまま貼り付けます。
+3. 貼り付け用Robin
+
+対象サブフローは Main、置換範囲はUTF-8読取りから出力保存までの3アクションです。
+
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+4. デザイナー上での確認
+
+貼り付け後、次を確認してください。
+
+アクション数が 3 である。
+順序が「ファイルからテキストを読み取る」「テキストを置換する」「テキストをファイルに書き込む」である。
+1番目の出力がテキスト変数 FileContents である。
+2番目の入力が FileContents、出力が Replaced である。
+置換方式が正規表現ではなく通常置換である。
+エスケープシーケンスが無効、大文字小文字の区別が有効相当の IgnoreCase: False である。
+3番目の「新しい行を追加する」がオフである。
+保存形式がUTF-8、既存ファイル時の処理が上書きである。
+デザイナーに赤いエラー表示がなく、変数参照が文字列リテラルへ変換されていない。特に TextToWrite は $'''Replaced''' ではなく変数 Replaced のままである。
+5. 合成データでの実行・照合
+出力先に以前の検証ファイルがある場合は、内容を確認してから退避します。
+フローを保存します。
+1回実行し、Replaced の変数プレビューを確認します。
+出力ファイルをUTF-8対応エディターで開き、内容を次のとおり照合します。
+Plain Text
+1
+日本語
+2
+置換後 100%
+3
+'引用' "二重引用" C:\\sample
+4
+置換後
+5
+対象外語
+対象語 が残っていないこと、対象外語 が変更されていないことを確認します。
+入力と出力の行数、および出力末尾の改行有無が入力と一致することを確認します。
+2回目を実行し、上書き後も同じ内容となり、余分な空行が増えていないことを確認します。
+根拠
+
+通常置換のアクション形式は catalog/actions/text-replace/literal.robin、変数参照かつ追加改行なしの保存形式は catalog/actions/file-write-text/variable-reference-no-append.robin が根拠です。実測環境はPAD 2.71.115.26224、日本語UI、Power Fx OFFです。今回の指定値へ差し替えた3アクション一式については、貼付け・実行未確認として扱います。
+
+ソース

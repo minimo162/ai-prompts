@@ -1,0 +1,123 @@
+1. 前提・対象範囲・未確認点
+
+目的
+存在しないファイル C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t08-missing-20260910.txt を「ファイルからテキストを読み取る」で処理し、エラー状態の発生と記録だけを確認するフロー案です。
+
+処理対象
+
+入力: 存在しないテキストファイル
+出力: エラー情報を変数へ取得
+後続の書込み・完了マーカー・公開処理: 実行しない
+
+根拠範囲
+
+欠損ファイルの読取り原文: catalog/evidence/p3-error-handler-measured-20260911.json 参照例、および File.ReadTextFromFile.ReadText 実測原文。
+エラー処理ブロック: p3-error-default-handler-20260911 系列。
+「最後のエラーを取得」原文: ERROR => LastError Reset: True。
+
+未確認点
+
+エラー情報をファイルへ保存する成功例は、このナレッジにはありません。したがって今回は変数取得までを確認済み範囲とします。
+名前付き FileNotFound ハンドラーはランタイムエラーが残ったため、成功例として使用しません。既定エラーハンドラーのみ根拠があります。
+2. PADで先に作る設定
+
+特別な入力変数は不要です。
+
+使用するアクションは以下です。
+
+ブロック エラー発生時
+
+既定の「すべてのエラー」ルート
+続行 ON
+スロー OFF
+
+ファイルからテキストを読み取る
+
+ファイル: C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t08-missing-20260910.txt
+エンコード: UTF-8
+出力: FileContents
+
+最後のエラーを取得
+
+出力: LastError
+エラー消去: ON
+
+成功条件:
+
+フロー全体は完了する。
+LastError に「ファイルが見つかりません」系のエラー情報が入る。
+FileContents は後続処理に使用しない。
+書込み・完了マーカー・公開処理は存在しない。
+3. 貼り付け用Robin
+
+確認済み原文を基にした参照組合せです。ブロック原文と ERROR アクション原文は別採取された実測例の組合せであり、単一 clipboard 原文としての採取は記録されていません。ナレッジ上では実行確認済み参照例です。
+
+Plain Text
+1
+BLOCK
+2
+ON BLOCK ERROR
+3
+    SET ErrorHandledDefault TO $'''true'''
+4
+END
+5
+    File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+6
+END
+7
+ERROR => LastError Reset: True
+4. デザイナー上の確認方法
+
+確認項目:
+
+アクション数が 3 つの論理構成になっていること
+
+BLOCK
+ファイルからテキストを読み取る
+最後のエラーを取得
+
+変数
+
+ErrorHandledDefault : 文字列
+FileContents
+LastError
+
+ブロック対応
+
+BLOCK と END
+ON BLOCK ERROR とその END が対応していること
+
+デザイナー保存時にエラー表示が出ないこと
+
+5. 実行・照合手順
+実行前
+
+対象ファイル
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t08-missing-20260910.txt
+
+が存在しないことを確認します。
+
+実行
+
+フローを 1 回実行します。
+
+期待結果
+File.ReadTextFromFile.ReadText は欠損ファイルでエラーになる。
+ON BLOCK ERROR 側が実行される。
+ErrorHandledDefault = true になる。
+ERROR => LastError Reset: True により LastError が取得される。
+LastError のプレビューに「ファイルが見つかりません」相当の内容が表示される。これは実測証跡で確認されています。
+実行してはいけないもの
+
+このT08案では以下を含めません。
+
+File.WriteText
+CSV出力
+完了マーカー作成
+公開処理
+送信処理
+成功ログ書込み
+
+これらは今回の確認対象外であり、ナレッジのT08要件でも後続実行を行わない設計が求められています。

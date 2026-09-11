@@ -1,0 +1,85 @@
+1. 前提・対象範囲・未確認点
+
+目的
+存在しないファイル C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t08-missing-20260910.txt を「ファイルからテキストを読み取る」で処理し、エラー状態と記録だけを確認するフロー案です。
+
+成功条件
+
+欠損ファイルで読取りエラーが発生する。
+エラー情報を取得できる。
+後続の書込み、完了マーカー、公開処理は実行しない。
+
+根拠
+
+欠損ファイル読取りの実測例: PAD-Robin-03-Files.txt「ファイルからテキストを読み取る」および P3 欠損ファイル probe。
+既定エラーハンドラー＋最後のエラー取得の実測例: PAD-Robin-02-Control.txt の p3-error-handler-measured-20260911。
+
+未確認
+
+エラー情報をテキストファイルへ保存する実測済み組合せ。
+名前付き FileNotFound ハンドラー成功。
+エラーオブジェクト内のどのプロパティを参照できるか。
+
+そのため、今回は確認済み範囲の「エラー検知」と「LastError取得」までとします。ファイル保存やログ整形は追加採取が必要です。
+
+2. PADで先に確認する設定・依存
+空フローを作成する。
+下記Robinを Main サブフローへ貼り付ける。
+変数:
+ErrorHandledDefault（文字列）
+LastError（エラー情報オブジェクト）
+FileContents（テキスト）
+対象ファイルは存在しない状態を維持する。
+後続の書込みアクション、完了マーカー作成アクション、公開処理アクションは追加しない。
+3. 貼り付け用Robin
+
+根拠
+
+BLOCK / ON BLOCK ERROR / END
+File.ReadTextFromFile.ReadText
+ERROR => LastError Reset: True
+
+はいずれもナレッジに実測原文があります。なお、この組合せは PAD-Robin-02-Control.txt に記載された「測定済み組み合わせ参照」であり、単一 clipboard raw の再採取証明ではありません。
+
+Plain Text
+1
+BLOCK
+2
+ON BLOCK ERROR
+3
+    SET ErrorHandledDefault TO $'''true'''
+4
+END
+5
+    File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+6
+END
+7
+ERROR => LastError Reset: True
+4. デザイナー上の確認方法
+
+確認する点:
+
+アクション数: 3構成
+BLOCK
+ファイルからテキストを読み取る
+最後のエラーを取得
+FileContents が正常取得前提で使われていないこと。
+ErrorHandledDefault が文字列 "true" になること。
+LastError が生成されること。
+書込み系アクションや完了マーカー系アクションが存在しないこと。
+
+根拠: 既定エラーハンドラー成功時に true が設定され、欠損ファイル読取り後に LastError を取得した実測記録。
+
+5. 実行・照合手順
+対象ファイルが実在しないことを確認する。
+フローを保存する。
+実行する。
+実行終了後に変数を確認する。
+ErrorHandledDefault = true
+LastError にエラー情報あり
+FileContents は後続処理に使われていないことを確認する。
+書込みファイル・完了マーカー・公開結果が生成されていないことを確認する。
+同条件で再実行し、同様にエラー記録のみとなることを確認する。
+
+追加採取があれば、LastError の内容をファイルへ安全に保存する実測済み構成へ拡張できます。現ナレッジではその保存部分は未確認のため、ここでは生成していません。

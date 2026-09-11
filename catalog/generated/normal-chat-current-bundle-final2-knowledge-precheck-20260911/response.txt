@@ -1,0 +1,38 @@
+参照した記載は、PAD-Robin-Knowledge-Bundle 内の copilot/knowledge/PAD-Robin-03-Files.txt の「確認済みの原文」「今回の追加採取: ファイルパス変数からテキストを読み取る」、および copilot/knowledge/PAD-Robin-00-Index.txt の「カテゴリと観測されたUI名」です。
+
+(1) 入力パスの型
+確認済み例は2種類あります。
+固定パス文字列: File: $'''C:\\Temp\\AiPromptsCatalogNumbers_20260907\\input.txt''' の例。
+ファイル変数: File: CurrentFile の例。説明では「ファイルパス変数からテキストを読み取る」と記載されています。
+入力パスのPAD上の型名までは記載されていません。
+(2) エンコード設定
+確認済み原文では Encoding: File.TextFileEncoding.UTF8 が使用されています。
+UTF-8以外の設定は、このアクションについては記載が見当たりません。
+(3) 出力変数の型
+確認済み原文の出力先は Content => FileContents です。
+実行例では「1234.5 を読み取り、Text.ToNumberへ渡した」と記載されています。ファイル内容を保持する変数であることは確認できます。
+型名（Text/String など）の明示的な記載はナレッジ内にありません。
+(4) 原文ファイルと実行証拠のパス
+
+固定パスUTF-8例
+
+原文ファイル: catalog/actions/file-read-text/utf8.robin
+実行証拠: catalog/evidence/number-conversion-variables.json
+
+ファイル変数パスUTF-8例
+
+原文ファイル: catalog/actions/file-read-text/variable-path-utf8.robin（SHA-256: 365ed2c2017f33ba31eba5c448febbaaf11e017aaf052548b4eb7f68d6b75be9）
+組合せ原文: catalog/flows/t03-folder-foreach-read/partial.robin
+実行証拠:
+catalog/evidence/t03-partial-paste.json
+catalog/evidence/t03-partial-run-1.json
+(5) 未確認の設定
+
+ナレッジで未確認として扱われている、または記載がない項目は次のとおりです。
+
+UTF-8以外のエンコード設定。
+空文字ファイルの読取り。
+別エンコードの読取り。
+改行の扱いの差分。
+Folder.GetFiles → For each → 読取りの組合せでは、拡張子判定・Else側の実行。
+入力パスや出力変数の正式なPAD型名。ナレッジ中に明示記載はありません。

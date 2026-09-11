@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T14:10:20+09:00",
+  "case": "T07",
+  "status": "accepted",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+  "copilot": "catalog/generated/normal-chat-current-bundle-final3-t07-live-20260911/result.json",
+  "pad_flow": "RobinKnowledgeT07Final3Live_20260911",
+  "pad_process_id": 42780,
+  "paste_save": "catalog/evidence/t07-current-final3-pad-paste-save-20260911.json",
+  "run1": "catalog/evidence/t07-current-final3-pad-run1-20260911.json",
+  "run2": "catalog/evidence/t07-current-final3-pad-run2-20260911.json",
+  "input": {
+    "path": "catalog/fixtures/pdf/source-a.pdf",
+    "sha256": "f5f246849a31e2797f998e426f459ac18b7260ed76206ab987950a1bf80c348d",
+    "unchanged_confirmed": true
+  },
+  "output": {
+    "path": "catalog/evidence/normal-chat-t07-final.txt",
+    "sha256": "f7e592cc86719c395657ddffe2bf76ec7538c7d4deb7edb03fae7a5d90ba5fe2",
+    "bytes": 135,
+    "contains_page2_identifier": true
+  },
+  "acceptance": "accepted_2_runs_same_final_bundle"
+}

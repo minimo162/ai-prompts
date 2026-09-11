@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-11",
+  "flow_name": "RobinKnowledgeP3DataTableForeach_20260911",
+  "status": "RUN_TIMEOUT_PAUSED_AT_BREAKPOINT",
+  "attempt": "2row-run2-initial",
+  "timeout_seconds": 30,
+  "observed_after_timeout": {
+    "start_enabled": true,
+    "stop_enabled": true,
+    "status": "状態 一時停止 1 秒",
+    "action_name": "変数の設定, ブレークポイント"
+  },
+  "diagnosis": "The flow was paused by a breakpoint on the loop-body assignment; this was not a DataTable or For each runtime failure.",
+  "recovery": "Breakpoint was removed with the PAD action-level F9 toggle, the paused run was stopped through the observed 停止 button, and the flow was saved again before retry.",
+  "preserved": true
+}

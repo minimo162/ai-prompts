@@ -1,0 +1,71 @@
+1. 前提・対象範囲・未確認点
+
+目的: C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\excel-catalog.xlsx を編集可能 (ReadOnly=False) で開き、セル B2 のみに ASCII文字列 T05-Changed を書き込み、C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t05-final.xlsx へ別名保存して終了します。
+
+確認済み根拠:
+
+編集可能な既存Excel起動: catalog/actions/excel-launch/open-editable.robin。PAD実測原文あり。
+Excel単一セル書込み: Office Excel実測例の Excel.WriteToExcel.WriteCell。PAD実測原文あり。
+Excel別名保存: Excel.SaveExcel.SaveAs。PAD実測原文あり。
+Excel終了: Excel.CloseExcel.Close。PAD実測原文あり。
+
+未確認:
+
+この4アクションを今回のT05条件で組み合わせた実行証跡はナレッジ内にありません。
+A1や他セルの実際の値照合は未実施です。
+よって以下は「確認済み原文の組合せによるフロー案」であり、今回条件での再貼付け・実行済みとは扱いません。
+2. PADで先に確認する設定・依存
+入力ファイル:
+C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\excel-catalog.xlsx
+出力ファイル:
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t05-final.xlsx
+Excel起動:
+既存ブックを開く
+ReadOnly=False
+書込み:
+列=B
+行=2
+値=T05-Changed
+保存:
+Save As を使用
+元ブックへ上書き保存しない
+終了:
+Excelインスタンスを閉じる
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance
+2
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T05-Changed''' Column: $'''B''' Row: 2
+3
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-final.xlsx'''
+4
+Excel.CloseExcel.Close Instance: ExcelInstance
+4. デザイナー上の確認方法
+アクション数: 4
+順序:
+Excel起動
+セル書込み
+Save As
+Excel終了
+変数:
+ExcelInstance が起動アクションで生成され、後続3アクションで参照されていること
+ブロック:
+開始/終了ブロックなし
+未対応の END が存在しないこと
+デザイナー保存時にエラー表示が出ないこと
+5. 保存・実行・照合手順
+元ファイル excel-catalog.xlsx を事前にバックアップする。
+空フローへ上記Robinを貼り付けて保存する。
+フローを実行する。
+normal-chat-t05-final.xlsx が作成されることを確認する。
+出力ファイルを開く。
+B2 = T05-Changed を確認する。
+A1 を含む無関係セルが変更されていないことを確認する。
+元ファイル excel-catalog.xlsx の内容が変更されていないことを確認する。
+再実行時は出力ファイルの上書き挙動を利用者環境で確認する。
+
+根拠: 編集可能起動 open-editable.robin、Excelセル書込み・SaveAs・Close のOffice実測原文、およびExcel操作カタログ。

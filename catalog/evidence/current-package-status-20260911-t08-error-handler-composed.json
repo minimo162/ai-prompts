@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T11:35:57+09:00",
+  "status": "PARTIAL_NEW_BUNDLE_LIVE_ACCEPTANCE_PENDING",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "instruction_utf16_code_units": 3949,
+  "knowledge_bundle_sha256": "d7a0a7d6d9876aa1169aa96f377032f8e30ea37b8ea5ce753d3b6fb550b42835",
+  "knowledge_bundle_bytes": 69733,
+  "manifest": "copilot/knowledge-bundle-manifest-20260911e.json",
+  "changed_source": "copilot/knowledge/PAD-Robin-02-Control.txt",
+  "change_reason": "Add the full measured-composed T08 error-handler reference after PAD-capturing the block and Get last error action separately.",
+  "prior_bundle_sha256": "38640a472186cb4d2e1f79443620112f6da7be0b4fc5834940dbdccc92da6358",
+  "prior_live_evidence": "catalog/generated/normal-chat-current-bundle-t08-error-handler-20260911/result.json",
+  "inheritance_rule": "Prior 38640a live refusal is historical and is not inherited by this d7a0a7 bundle.",
+  "live_acceptance": {"knowledge_precheck": "NOT_RUN_NEW_BUNDLE", "t01_t10": "NOT_RUN_NEW_BUNDLE", "independent_t01_t04_t10": "NOT_RUN_NEW_BUNDLE", "negative_cases": "NOT_RUN_NEW_BUNDLE"},
+  "static_verification": {"Test-RobinCatalog": "84 PASS", "Test-CopilotRobinPackage": "pending rerun after d7a0a7 rebuild", "Test-RobinRawContracts": "pending rerun after d7a0a7 rebuild", "Test-CurrentBundleT01Prepared": "pending rerun against t01-current-bundle-prepared-20260911e.json", "Test-Issue5CurrentStatus": "pending rerun against composed audit", "Run-NonLiveTests": "pending rerun after d7a0a7 rebuild"},
+  "next_action": "Send a new-bundle reference precheck, then send T08 in a new normal M365 Copilot chat and accept only a valid unmodified Robin in PAD."
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T03:40:31.1100367Z",
+  "status": "PASS_CURRENT_FINAL2_BUNDLE_T08_EXPECTED_ERROR",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b",
+  "bundle_manifest": "copilot/knowledge-bundle-manifest-20260911g.json",
+  "copilot": {"run_directory": "catalog/generated/normal-chat-current-bundle-final2-t08-live-20260911", "attachment_count": 1, "attachment_sha256": "61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b", "send_observed": true, "response_completed_observed": true, "model_selected": "GPT 5.6 Think Deeper", "response_path": "catalog/generated/normal-chat-current-bundle-final2-t08-live-20260911/response.txt", "robin_path": "catalog/generated/normal-chat-current-bundle-final2-t08-live-20260911/robin.txt", "robin_sha256": "a23719ac4f41fb8126cd02631b2111596d2682245e0d6e799d0063aa8c857c1b", "robin_block_count": 1},
+  "pad": {"flow_name": "RobinKnowledgeT08Final2Live_20260911", "process_id": 26224, "paste_save": "catalog/evidence/t08-current-bundle-final2-pad-paste-save-20260911.json", "paste_confirmed": true, "saved_confirmed": true, "recopy_path": "catalog/evidence/t08-current-bundle-final2-pad-recopy-20260911.robin", "recopy_sha256": "b9b4e75950e9f2e02acf7f998837cf0e73e8031b34995f5133f3334bc8aee436", "recopy_difference": "PAD added one trailing space to BLOCK and transported CRLF; no generated code edit.", "action_count": 4},
+  "runs": [{"path": "catalog/evidence/t08-current-bundle-final2-pad-run1-20260911.json", "run_status": "success", "variable_previews": ["true", "ファイル C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt が見つかりません"], "unhandled_error_dialog": false}, {"path": "catalog/evidence/t08-current-bundle-final2-pad-run2-20260911.json", "run_status": "success", "variable_previews": ["true", "ファイル C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt が見つかりません"], "unhandled_error_dialog": false}],
+  "expected_error": {"missing_input": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt", "missing_input_confirmed": true, "last_error_recorded": true, "downstream_write_actions_in_generated_robin": false, "completion_or_publish_actions_in_generated_robin": false},
+  "boundary": "This is the final2 61f040 bundle expected-error acceptance using the measured default all-errors handler. Named FileNotFound custom-handler matching remains unproven."
+}

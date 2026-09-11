@@ -1,0 +1,6 @@
+Variables.CreateNewDatatable InputTable: { ^['Column1', 'Column2', 'Column3'], [$'''A''', 10, $'''対象'''] } DataTable=> DataTable
+Variables.CreateNewList List=> RowValues
+Variables.AddItemToList Item: $'''A''' List: RowValues
+Variables.AddItemToList Item: 10 List: RowValues
+Variables.AddItemToList Item: $'''対象''' List: RowValues
+Variables.AddRowToDataTable.AppendRowToDataTable DataTable: $'''DataTable''' RowToAdd: RowValues

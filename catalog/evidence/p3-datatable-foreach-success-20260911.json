@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-11",
+  "pad_file_version": "2.71.115.26224",
+  "language": "ja-JP",
+  "power_fx": false,
+  "native_flow_name": "RobinKnowledgeP3DataTableForeach_20260911",
+  "status": "PASS_PROBE_ROW_ITERATION_NOT_BUNDLED",
+  "action_count": 4,
+  "raw_flow_path": "catalog/evidence/p3-datatable-foreach-success-flow-20260911-final.robin",
+  "raw_flow_sha256": "3fe9881b262941ab9150bd2d883a0cf956291296328b3503c2af4811629ea981",
+  "raw_flow": "Variables.CreateNewDatatable InputTable: { ^['Column1', 'Column2', 'Column3'], [$'''A''', 10, $'''対象'''], [$'''B''', 20, $'''対象2'''] } DataTable=> DataTable\nLOOP FOREACH CurrentItem IN DataTable\n    SET ForeachValue TO CurrentItem\nEND\n",
+  "runs": [
+    {
+      "run": 1,
+      "status": "success",
+      "evidence": "catalog/evidence/p3-datatable-foreach-success-2row-run1-20260911.json",
+      "preview": [
+        "3 列 { Column1: B, Column2: 20, Column3: 対象2 }",
+        "2 行, 3 列",
+        "3 列 { Column1: B, Column2: 20, Column3: 対象2 }"
+      ]
+    },
+    {
+      "run": 2,
+      "status": "success",
+      "evidence": "catalog/evidence/p3-datatable-foreach-success-2row-run2b-20260911.json",
+      "preview": [
+        "3 列 { Column1: B, Column2: 20, Column3: 対象2 }",
+        "2 行, 3 列",
+        "3 列 { Column1: B, Column2: 20, Column3: 対象2 }"
+      ]
+    }
+  ],
+  "observed": {
+    "data_table_rows": 2,
+    "data_table_columns": 3,
+    "loop_collection": "DataTable",
+    "body_assignment": "SET ForeachValue TO CurrentItem",
+    "last_item_observed": "B/20/対象2",
+    "runtime_error": false,
+    "breakpoint_removed_before_final_runs": true
+  },
+  "current_package_acceptance": false,
+  "note": "Dedicated PAD probe only. The measured row-iteration structure is not integrated into the current Copilot bundle; same-final-version Copilot regeneration and acceptance remain pending."
+}

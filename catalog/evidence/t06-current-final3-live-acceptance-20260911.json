@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T14:08:20+09:00",
+  "case": "T06",
+  "status": "accepted",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+  "copilot": "catalog/generated/normal-chat-current-bundle-final3-t06-live-20260911/result.json",
+  "pad_flow": "RobinKnowledgeT06Final3Live_20260911",
+  "pad_process_id": 44564,
+  "paste_save": "catalog/evidence/t06-current-final3-pad-paste-save-20260911.json",
+  "run1": "catalog/evidence/t06-current-final3-pad-run1-20260911.json",
+  "run2": "catalog/evidence/t06-current-final3-pad-run2-20260911.json",
+  "input": {
+    "path": "catalog/fixtures/word/word-catalog.docx",
+    "sha256": "2753855b1e6b7b8dccc857cb60ad1f9bf548908fbd10fea8dc8efa2ff8003cbd",
+    "unchanged_confirmed": true
+  },
+  "output": {
+    "path": "catalog/evidence/normal-chat-t06-final.docx",
+    "sha256": "1f0325d314b2f35d98ec9b2cceb2fd740a03a0a5ce64b7858e7b9a98dafc15de",
+    "bytes": 15602,
+    "contains_T06Replaced": true,
+    "contains_OfficeCatalog": false
+  },
+  "acceptance": "accepted_2_runs_same_final_bundle"
+}

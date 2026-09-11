@@ -208,3 +208,28 @@ P3統合版をHEAD `7b06805`で静的検査し、Raw 6、Package 3949/7/86、Cat
 同じ現行版で`tests/Test-Copilot.ps1`も完走し、304件のオフライン／モック契約検査をPASSした。ライブM365 Copilot／Edge統合ではないため、新bundleの知識precheck・T01〜T10・T08/T09受入は未完了のままとする（`catalog/evidence/current-package-static-check-20260911-t09b.json`）。
 
 2026-09-11の現行bundle SHA `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644` で、新規通常M365 Copilotチャット（Think Deeper）へbundleを添付し、知識のみのprecheckを送信・回答取得した。回答はコードを生成せず、UTF-8設定、`FileContents`、原文／証拠パス、未確認範囲をbundle内根拠として返した。原文・DOMハッシュと送信状態は `catalog/generated/normal-chat-current-bundle-knowledge-precheck-20260911/result.json` に保存し、T01〜T10／PAD受入とは分離する。
+
+### 2026-09-11 現行bundle・P3／T09追補
+
+現行bundle T01は新規通常M365 Copilotチャットから送信し、生成Robinを無修正で専用PADへ貼付け・保存し、2回実行した。出力・入力不変の照合は `catalog/evidence/t01-current-bundle-live-send-20260911.json`、`t01-current-bundle-pad-output-comparison-20260911.json` に保存している。T08は同じ現行bundleで送信・回答完了まで進んだが、有効なRobin fenced blockを生成せず、期待エラーPAD受入は未実施である（`catalog/evidence/t08-current-bundle-live-format-20260911.json`）。
+
+DataTable行反復は専用probeで2行3列を`LOOP FOREACH`し、ブレークポイント由来の停止を分離した後、2回とも最終行`B / 20 / 対象2`・2行3列・エラーなしを確認した。Excel行反復もA1:C6の`ExcelData`を`LOOP FOREACH`し、2回とも最終行`対象外 / E / 40`・6行3列・Excel終了・エラーなしを確認した。両者は専用probe成功であり、現行bundle未統合である（`catalog/evidence/p3-datatable-foreach-success-20260911.json`、`catalog/evidence/p3-excel-foreach-runtime-success-flow-20260911.robin`、`p3-excel-foreach-runtime-success-run1-20260911.json`、`p3-excel-foreach-runtime-success-run2-20260911.json`）。
+
+T09の読み取り専用診断では、Edge用PAD拡張とnative manifest origin・`nativeMessaging`権限は存在したが、BrowserNativeMessageHostログは起動成功のみで接続完了イベントを示さず、現在のhostプロセスはChrome用originだった。これは依存経路の境界であり、WebAutomation runtime成功や設定変更の根拠ではない（`catalog/evidence/t09-extension-handshake-boundary-20260911.json`）。
+
+現行指示文SHA `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644` は不変である。Raw契約、Catalog 84、Package 3949／7／86、Issue整合性21、非ライブ全件36/36、JSON parse、`git diff --check` はPASSしたが、T08/T09、残るP3、同一最終版全件受入・独立再試験・負例は未完了で、Issue #5はOPEN／partialを維持する。
+
+### 2026-09-11 T08エラー記録反映後の新bundle
+
+PADで採取した`ERROR => LastError Reset: True`と2回の欠損ファイルエラー記録結果をControlナレッジへ最小追加し、7原本を再結合した。新bundle SHA-256は`38640a472186cb4d2e1f79443620112f6da7be0b4fc5834940dbdccc92da6358`、マニフェストは`copilot/knowledge-bundle-manifest-20260911d.json`である。e35fa2f4版でのT01成功・T08形式失敗は履歴として保持し、新bundleの合格へ継承しない。新bundleの知識precheck、T01〜T10、T08無修正PAD受入、T09、独立再試験、負例は未実行であり、Issueはpartial／OPENを維持する。新状態は`catalog/evidence/current-package-status-20260911-t08-error-handler.json`、`catalog/evidence/issue5-completion-audit-20260911-t08.json`に保存した。
+
+### 2026-09-11 T08現行bundle期待エラー受入
+
+測定済み組み合わせ参照を含む新bundle SHA `d7a0a7d6d9876aa1169aa96f377032f8e30ea37b8ea5ce753d3b6fb550b42835`で、通常M365 Copilot Think Deeperの知識precheckとT08を新規チャットから送信した。T08は有効Robinフェンス1件を生成し、専用PADフロー `RobinKnowledgeT08ErrorHandlerComposedLive_20260911` へ無修正貼付け・保存後、2回とも`ErrorHandledDefault=true`と欠損ファイルのLastError文字列を確認し、エラーダイアログなしで準備完了へ戻った。PAD再コピーの差分は`BLOCK`末尾空白1文字とCRLFのみであり、手修正・正規化は行っていない。証跡は`catalog/evidence/t08-current-bundle-composed-live-acceptance-20260911.json`である。旧e35fa2f4／38640a版結果は新bundleへ継承しない。
+
+最終c78fd3 bundle SHA `c78fd388f6a3247772653d0c48b16444b095dd28821bf141f66946a36dcb3faf`では、ナレッジ掲載例の末尾空白警告を除いた後に知識precheckとT08を再送した。新規専用PADフロー `RobinKnowledgeT08ErrorHandlerFinalLive_20260911` へT08生成Robinを無修正で貼付け・保存し、2回とも`true`と欠損ファイルのLastError文字列、エラーダイアログなし、準備完了復帰を確認した。PAD再コピーの差分はPADが付けた`BLOCK`末尾空白1文字とCRLFのみで、生成コードは編集していない。証跡は`catalog/evidence/t08-current-bundle-final-live-acceptance-20260911.json`、新bundle監査は`catalog/evidence/issue5-completion-audit-20260911-complete-t08.json`である。T01〜T07/T09/T10、独立再試験、同一最終版負例は未完了である。
+
+最終候補61f040 bundle SHA `61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b`では、T01組合せ根拠をExamplesへ追加した。新規通常チャットの知識precheck、T01、T08を同一版で実施し、T01は`pre>code`の1ブロックを取得して新規PADへ無修正貼付け・保存・2回実行、出力90 bytes・UTF-8 BOM・CRLF・期待SHA一致・入力不変を確認した。T08も新規PADへ無修正貼付け・保存・2回実行し、`true`と欠損ファイルのLastErrorを確認した。T01証跡は`catalog/evidence/t01-current-final2-live-acceptance-20260911.json`、T08証跡は`catalog/evidence/t08-current-final2-live-acceptance-20260911.json`である。T02〜T07/T09/T10、独立再試験、同一最終版負例は未完了である。
+# Final3 fixed-version validation (2026-09-11)
+
+The fixed instruction/bundle pair is `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e` / `2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7`. Fresh normal M365 Copilot responses were preserved before PAD use. T01-T08 and T10 each have unmodified Robin paste/save and two PAD runs; T01/T04/T10 additionally have separate-chat/separate-flow retests. T09's valid six-action Robin was pasted and saved, but all three captured web controls were missing at runtime and Run was disabled. Do not substitute DOM/manual clicks or treat this as a success. The package remains `partial/OPEN`.

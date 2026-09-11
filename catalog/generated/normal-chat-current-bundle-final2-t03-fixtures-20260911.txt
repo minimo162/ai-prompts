@@ -1,0 +1,13 @@
+T03 synthetic fixture attachment bundle. This file is a mechanical context copy; original filenames, SHA-256 values, separators, and contents are preserved.
+
+===== BEGIN t03-alpha.txt | SHA-256 66401eea553ce48f5a96dcde7204b05d18ef5d19b392dfbbbc271c53973a4d92 =====
+alpha 日本語
+===== END t03-alpha.txt =====
+
+===== BEGIN t03-beta.csv | SHA-256 06b45abdfa981c3ffbcc866928d1024cb149008f3830f7d25995de3eb82356ab =====
+beta,"引用"
+===== END t03-beta.csv =====
+
+===== BEGIN t03-gamma.md | SHA-256 5c3ceca06dcac248d60af2c9f9472f115313dae759682c67d134f0fd8c5854e6 =====
+gamma
+===== END t03-gamma.md =====

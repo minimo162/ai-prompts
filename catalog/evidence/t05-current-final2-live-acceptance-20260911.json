@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T04:17:48.8396512Z",
+  "status": "PASS_CURRENT_FINAL2_BUNDLE_T05",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b",
+  "bundle_manifest": "copilot/knowledge-bundle-manifest-20260911g.json",
+  "copilot": {"run_directory": "catalog/generated/normal-chat-current-bundle-final2-t05-live-20260911", "attachment_count": 2, "attachments": [{"name": "PAD-Robin-Knowledge-Bundle.txt", "sha256": "61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b"}, {"name": "excel-catalog.xlsx", "sha256": "e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6"}], "send_observed": true, "response_completed_observed": true, "model_selected": "GPT 5.6 Think Deeper", "robin_path": "catalog/generated/normal-chat-current-bundle-final2-t05-live-20260911/robin.txt", "robin_sha256": "fe94c4a4bb301c03526a700475cca2cc9406703ca6ef3d454a8961aedfbd6188", "robin_block_count": 1},
+  "pad": {"flow_name": "RobinKnowledgeT05Final2Live_20260911", "process_id": 38440, "paste_save": "catalog/evidence/t05-current-bundle-final2-pad-paste-save-20260911.json", "paste_confirmed": true, "saved_confirmed": true, "recopy_path": "catalog/evidence/t05-current-bundle-final2-pad-recopy-20260911.robin", "recopy_sha256": "69dd699e5ff7a9edf05aa8db4a27e254bd0003a95354254b26c6a3b61f7ee696", "action_count": 4},
+  "runs": [{"path": "catalog/evidence/t05-current-bundle-final2-pad-run1-20260911.json", "run_status": "success", "variable_previews": ["Excel インスタンス"]}, {"path": "catalog/evidence/t05-current-bundle-final2-pad-run2-20260911.json", "run_status": "success", "variable_previews": ["Excel インスタンス"]}],
+  "integrity": {"input_path": "catalog/fixtures/excel/excel-catalog.xlsx", "input_sha256_before": "e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6", "input_sha256_after_run2": "e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6", "input_unchanged": true, "output_path": "catalog/evidence/normal-chat-t05-final.xlsx", "output_sha256": "e3e114e526aec6983a419a705634d2e3d9560b2deca7051728d5d5c539d0e710", "output_sheet": "Sheet1", "output_A1": "OfficeCatalog 日本語 100%", "output_B2": "T05-Changed", "unrelated_A1_unchanged": true},
+  "boundary": "T05 final2 is accepted with the specified B2-only change. The original workbook remained unchanged; no previous bundle result was inherited."
+}

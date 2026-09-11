@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "captured_on": "2026-09-11",
+  "status": "partial",
+  "issue_state": "OPEN",
+  "base_audit": "catalog/evidence/issue5-completion-audit-20260911-complete-t08.json",
+  "package": {"instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e", "bundle_sha256": "61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b", "bundle_manifest": "copilot/knowledge-bundle-manifest-20260911g.json"},
+  "p4_current_bundle": {"status": "PARTIAL_NEW_BUNDLE_LIVE_ACCEPTANCE_PENDING", "knowledge_precheck": "NOT_RUN_NEW_BUNDLE", "t01": {"status": "NOT_RUN_NEW_BUNDLE", "preparation": "catalog/evidence/t01-current-bundle-prepared-20260911g.json"}, "t08": {"status": "NOT_RUN_NEW_BUNDLE", "prior_c78_acceptance_not_inherited": "catalog/evidence/t08-current-bundle-final-live-acceptance-20260911.json", "probe_ready": "catalog/evidence/p3-error-handler-measured-20260911.json"}, "remaining": ["new-bundle precheck", "new-bundle T01-T10 acceptance", "T09 generation/paste/run", "remaining P3 gaps", "independent final-bundle T01/T04/T10 retests", "same-final-version negative cases"]},
+  "p5": {"status": "PASS_LOCAL_STATIC_PARTIAL_LIVE_RESET_FOR_NEW_BUNDLE", "live_m365": "No 61f040 live acceptance yet", "native_pad": "No 61f040 PAD acceptance yet", "issue_close": false},
+  "result": "FINAL_61F040_BUNDLE_CREATED_T08_T01_REACCEPTANCE_REQUIRED_ISSUE_REMAINS_PARTIAL_OPEN"
+}

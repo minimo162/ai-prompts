@@ -16,11 +16,13 @@
 
 現作業版bundleの原本対応は [knowledge-bundle-manifest-20260911c.json](knowledge-bundle-manifest-20260911c.json) に固定しています。マニフェスト自体をナレッジへ添付する必要はありません。
 
-2026-09-11追補として、7原本へP3の実測根拠（真偽値・数値／日時演算、Else／Else-if／EXIT／NEXT、既定エラーハンドラー、サブフロー、DataTable作成、File.Exists／Folder.Create／Move／Rename、Excel範囲読取り、T09停止境界）を統合しました。失敗境界（カスタム日時書式、名前付きFileNotFoundルール、DataTable行追加、Excel For each、リスト取得、T09）は未確認として明記しています。最新bundle SHA-256は `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644` です。新bundleの知識precheckは参照確認PASSまで実施しましたが、T01〜T10再受入が完了するまで現行packageを受入済みとは扱いません。
+2026-09-11追補として、7原本へP3の実測根拠（真偽値・数値／日時演算、Else／Else-if／EXIT／NEXT、既定エラーハンドラー、PADで採取したGet last error、サブフロー、DataTable作成、File.Exists／Folder.Create／Move／Rename、Excel範囲読取り、T09停止境界）を統合しました。失敗境界（カスタム日時書式、名前付きFileNotFoundルール、DataTable行追加、Excel For each、リスト取得、T09）は未確認として明記しています。最新bundle SHA-256は `61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b` です。最終bundleの知識precheckとT01/T08期待エラー受入は完了しましたが、T01〜T10全件・独立再試験が完了するまで現行packageを受入済みとは扱いません。
+
+Final3固定版のbundle SHA-256は `2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7` です。新規通常M365 Copilot送信と実PADでT01〜T08/T10を同版受入し、T01/T04/T10は独立再試験も完了しました。T09はUI要素捕捉・6アクション貼付け・保存・再コピーまでで、実行時のUI要素未検出によりRun開始前にブロックされています。P3未確認項目を含めて `partial／OPEN` を維持します。PAD空フロー作成権限とUIA復旧の観測手順は [docs/pad-live-setup.md](../docs/pad-live-setup.md) にまとめています。
 
 ナレッジは技術資料であり、指示欄と同じ優先順位の命令書ではありません。`pad-robin-prompts.md` は既存の編集用原稿として残し、配布版と二重に指示欄へ貼りません。
 
-`agent-instructions.txt` の現作業版は UTF-8 BOMなし、UTF-16コード単位数3,949（10,096バイト）で、8,000文字上限以内です。結合版は `tools/Build-KnowledgeBundle.ps1` で7原本から機械的に再生成します。現作業版の指示SHA-256は `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、T09停止境界を含む最新P3追補統合後bundle SHA-256は `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644` です。旧bundleの生成・PAD結果を新bundleへ継承せず、新ハッシュで知識precheckとT01〜T10を再受入します。T10既存フロー修正では、元行の文字列・矢印・バックスラッシュ・アンダースコアを確認できない場合はコードを出さず、手編集で差分を隠しません。
+`agent-instructions.txt` の現作業版は UTF-8 BOMなし、UTF-16コード単位数3,949（10,096バイト）で、8,000文字上限以内です。結合版は `tools/Build-KnowledgeBundle.ps1` で7原本から機械的に再生成します。現作業版の指示SHA-256は `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、T01測定済み組み合わせとT08エラー記録を含む最終bundle SHA-256は `61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b` です。旧bundleの生成・PAD結果を新bundleへ継承せず、新ハッシュで知識precheckとT01〜T10を再受入します。T10既存フロー修正では、元行の文字列・矢印・バックスラッシュ・アンダースコアを確認できない場合はコードを出さず、手編集で差分を隠しません。
 
 ## 通常チャット検証手順
 

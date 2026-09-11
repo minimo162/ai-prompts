@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T13:58:30+09:00",
+  "case": "T02",
+  "status": "accepted",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+  "copilot": "catalog/generated/normal-chat-current-bundle-final3-t02-live-20260911/result.json",
+  "pad_flow": "RobinKnowledgeT02Final3Live_20260911",
+  "pad_process_id": 32432,
+  "paste_save": "catalog/evidence/t02-current-final3-pad-paste-save-20260911.json",
+  "run1": "catalog/evidence/t02-current-final3-pad-run1-20260911.json",
+  "run2": "catalog/evidence/t02-current-final3-pad-run2-20260911.json",
+  "input": {
+    "path": "catalog/fixtures/csv/t02-input-20260910.csv",
+    "sha256": "3aededf42b8bb2be71091c7cc6ed1295f1860a8450744d8779fbc8cabf6eed28",
+    "bytes": 91,
+    "unchanged_confirmed": true
+  },
+  "output": {
+    "path": "catalog/evidence/normal-chat-t02-output-20260910.csv",
+    "sha256": "8f0748cc4d149228331dfacc0a5c46e117270a7e9dee564c4f631924142cf7d3",
+    "bytes": 73,
+    "expected_rows_confirmed": true,
+    "same_across_runs": true
+  },
+  "acceptance": "accepted_2_runs_same_final_bundle"
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T11:17:35+09:00",
+  "status": "NOT_RUN_NEW_BUNDLE",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "38640a472186cb4d2e1f79443620112f6da7be0b4fc5834940dbdccc92da6358",
+  "prior_precheck": "catalog/generated/normal-chat-current-bundle-knowledge-precheck-20260911/result.json",
+  "prior_precheck_bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
+  "chat": {
+    "sent": false,
+    "response_observed": false,
+    "reason": "The bundle changed after the prior e35fa2f4 reference-only precheck; a new normal-chat precheck is required."
+  },
+  "next_step": "Attach the 38640a bundle in a new normal M365 Copilot chat and complete a reference-only precheck before T08/T01-T10 generation."
+}

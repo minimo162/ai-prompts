@@ -421,3 +421,41 @@ PAD操作の追加修正は独立コードレビューで BLOCKER 0 / MUST FIX 0
 同日12:14 JST、正常Explorerから製品 `Set-AgentPadFocus` を1回呼んだ診断も、前面HWND不一致で停止した。対象HWNDは5703820、前後と2秒の読取観測で前面HWNDは0のまま。PADはready/idle/error0、固定6ファイルとownerを保持し、Copy/Delete/Paste/Save/Runは0。結果は `.work/gate45/classify-sessions/1a0355df5c9c41de861567b0ceee7fd8/focus-fixed-files-once/result-1db744b557d8416b800d5243b0ad46ab.json`（SHA `8ab479c3136bee8258fac678580e3b5000c4a39d633ade0dcdec7fcb48158fe6`）。先行の診断helperは不要な全履歴hash前処理で停止しFocus0だったため、元結果を保持して固定ファイルだけの別helperへ絞った。
 
 追加の読取専用OS確認 `.work/gate45/input-desktop-state.json` は、通常Explorer/PAD側のセッションID **1** に対しアクティブコンソールID **2**、前面HWND0、OpenInputDesktop失敗（error5）、同セッションのLogonUIありを記録した。PAD側セッションが現在アクティブでないため、ソースへ待機や再試行を追加せず、元のWindows画面への復帰・ロック解除・PAD前面表示を利用者へ依頼した。これを修正後2ACT→DONEの成功と扱わない。元分類jobは中止済み、長文診断は完了、追加PAD実行は開始していない。次の分類用session `a516583480d842ff9a3ee7ff580bd3c7` はIDを予約しただけでPrepare未実行。
+
+## 2026-09-11 現行bundle T01のPAD作成権限・UIA復旧追補
+
+PAD Consoleの `CreateNewFlowButton`、`NewFlowNameTextBox`、`OKNewFlowButton` をUIAで一意に操作し、専用フロー `RobinKnowledgeT01CurrentBundleLive_20260911` のDesignerタイトル `Power Automate | RobinKnowledgeT01CurrentBundleLive_20260911` を取得した。直接起動したDesignerが `MainWindowHandle=0`／UIAトップレベルなしになる場合、重複した作成ダイアログをCancelで0件へ戻してからConsoleの作成経路を一度だけ実行する。毎回PID・開始時刻・タイトル・HWNDを再観測し、古いPID・座標・業務フローは流用しない。この手順の詳細は [`docs/pad-live-setup.md`](pad-live-setup.md) に整理した。
+
+このUIA復旧経路で、現行bundle T01の無修正貼付け・保存・2回実行・出力（90 bytes、UTF-8 BOM、CRLF、期待SHA一致）・入力不変を確認した。証跡は `catalog/evidence/t01-current-bundle-live-send-20260911.json`、`catalog/evidence/t01-current-bundle-pad-paste-save-20260911.json`、`catalog/evidence/t01-current-bundle-pad-output-comparison-20260911.json` に分離保存している。現行P0〜P5の追補監査は `catalog/evidence/issue5-completion-audit-20260911-t01.json` で、旧監査を上書きしていない。T01は現行bundleでPASSだが、T08/T09、残るP3、独立再試験、負例を含むIssue全体はpartial/OPENのまま維持する。
+
+P3のDataTable行追加は、専用フローで3列のDataTableと3値の`RowValues`リストを作成し、`AddRowToDataTable`を末尾へ追加する構文を実測した。2回とも`DataTable=2 行, 3 列`、`RowValues=[A, 10, 対象]`、エラーなしを確認した。原文・再コピー・run1/run2は `catalog/evidence/p3-datatable-row-success-20260911.json` と関連ファイルに保存し、現行bundle未統合・行反復／セル参照未確認を維持する。
+
+P3のセル更新は、別の専用フローで `ModifyDataTableItem` を列インデックス2・行インデックス0へ設定し、値`CellChanged`を実測した。2回実行後に値ビューアーで `A`、`10`、`CellChanged` を確認し、原文・画面・実行証跡を `catalog/evidence/p3-datatable-cell-success-20260911.json` へ保存した。これはprobe成功であり、現行bundleへの統合・行反復の受入ではない。
+
+## 2026-09-11 現行bundle T08ライブ形式境界
+
+現行bundle SHA `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644` を添付した新規通常M365 Copilotチャット（Think Deeper）へ、T08欠損ファイル負例の全文を送信した。回答は完了し、指定された欠損パス、UTF-8読取り、後続処理を置かない最小構成を説明したが、エラー捕捉・記録を含む完全な実測Robin原文がbundleにないとして、コードブロックを出さなかった。これはT08の期待エラーPAD受入ではなく、現行bundle生成形式失敗として扱う。
+
+回答原文は `catalog/generated/normal-chat-current-revision-t08-20260911/response.txt`（DOM innerText観測2046文字を可視本文として保存し、段落区切りを保持したファイル2080文字、SHA `2AD70F32D73F6DC213B3D267A562FC994240798BA13242097EEAEF89BF7B1838`）に保存し、送信・完了・Robinブロック数0を `catalog/generated/normal-chat-current-revision-t08-20260911/result.json` に固定した。会話URLは `https://m365.cloud.microsoft/chat/conversation/e4b2343e-ddff-48f8-bf3e-80d62280c780` である。現行T08は有効Robinの無修正貼付け・保存・PAD期待エラー実行を行っていないため、P4とIssue全体はpartial/OPENのまま維持する。
+
+DataTable行反復は専用フロー `RobinKnowledgeP3DataTableForeach_20260911` で2行3列（A/10/対象、B/20/対象2）を用いて実測した。`LOOP FOREACH CurrentItem IN DataTable` の本体へ `SET ForeachValue TO CurrentItem` を追加し、無修正4アクションを保存・再コピーした。ブレークポイント残留による初回タイムアウトは `catalog/evidence/p3-datatable-foreach-timeout-breakpoint-20260911.json` に分離し、解除後の2回は`ForeachValue=3列 { Column1: B, Column2: 20, Column3: 対象2 }`、`DataTable=2行, 3列`、エラーなしで完了した。成功証跡は `catalog/evidence/p3-datatable-foreach-success-20260911.json` と関連raw/runファイルに保存した。現行bundle未統合のため、同一最終版の再受入は未完了である。
+Excel行反復は専用フロー `RobinKnowledgeP3ExcelForeachRuntime_20260911` で合成fixtureのA1:C6をTypedValuesとして読み取り、`LOOP FOREACH CurrentItem IN ExcelData` の本体へ `SET ExcelRowSeen TO CurrentItem` を追加した。無修正5アクションを保存・2回実行し、いずれも`ExcelData=6行, 3列`、最終行`対象外 / E / 40`、エラーなしで完了した。原文SHA-256は`db98d5bfa837ea65e0e92f2412b02f3847e3541fff653078c2645ae427939166`で、成功証跡は`catalog/evidence/p3-excel-foreach-runtime-success-flow-20260911.robin`、`p3-excel-foreach-runtime-success-run1-20260911.json`、`p3-excel-foreach-runtime-success-run2-20260911.json`に保存した。専用probe成功であり現行bundle未統合のため、同一最終版の再受入は未完了である。
+
+T09の追加読み取り専用診断では、Edge用PAD拡張（ID `kagpabjoboikccfdghpdlaaopmgpgfdc`、version `2.70.0.35`）の有効状態、`nativeMessaging`権限、native manifestの許可originを確認した。しかし利用可能なBrowserNativeMessageHostログは`application.start.success`までで接続／要求完了イベントを含まず、現在のhostプロセスはChrome用origin・parent window 0でEdge実行に一致しなかった。これは拡張・native host接続経路の境界を狭める読み取り証拠であり、T09 WebAutomation成功や設定変更の根拠ではない（`catalog/evidence/t09-extension-handshake-boundary-20260911.json`）。
+
+T08のエラー記録は、専用PADフローで`最後のエラーを取得`を保存先`LastError`、エラー消去`On`として設定し、無修正再コピーから`ERROR => LastError Reset: True`（SHA `816d164003f259523451cdd53af2832e82562f236562563775f2ae3a8a3a4213`）を取得した。欠損ファイルを含むブロックとの組合せは、ブロック原文とこのアクション原文を別々にPADから採取したうえで、PADのアクション順に組み合わせた参照例として保存している（単一のPAD clipboard rawではない）。クリーンな2回の実行は`true`と「ファイルが見つかりません」のLastErrorプレビューで完了し、エラーダイアログは出なかった（`catalog/evidence/p3-error-handler-measured-20260911.json`）。初回のDesigner内部例外は別失敗証跡へ分離した。
+
+## 2026-09-11 T08エラー記録反映後の新bundle
+
+PADで採取した`ERROR => LastError Reset: True`と2回の欠損ファイルエラー記録結果をControlナレッジへ最小追加し、7原本を再結合した。新bundle SHA-256は`38640a472186cb4d2e1f79443620112f6da7be0b4fc5834940dbdccc92da6358`、マニフェストは`copilot/knowledge-bundle-manifest-20260911d.json`である。e35fa2f4版でのT01成功・T08形式失敗は履歴として保持し、新bundleの合格へ継承しない。新bundleの知識precheck、T01〜T10、T08無修正PAD受入、T09、独立再試験、負例は未実行であり、Issueはpartial／OPENを維持する。新状態は`catalog/evidence/current-package-status-20260911-t08-error-handler.json`、`catalog/evidence/issue5-completion-audit-20260911-t08.json`に保存した。
+
+## 2026-09-11 T08現行bundle期待エラー受入
+
+測定済み組み合わせ参照を含む新bundle SHA `d7a0a7d6d9876aa1169aa96f377032f8e30ea37b8ea5ce753d3b6fb550b42835`で、通常M365 Copilot Think Deeperの知識precheckとT08を新規チャットから送信した。T08は有効Robinフェンス1件を生成し、専用PADフロー `RobinKnowledgeT08ErrorHandlerComposedLive_20260911` へ無修正貼付け・保存後、2回とも`ErrorHandledDefault=true`と欠損ファイルのLastError文字列を確認し、エラーダイアログなしで準備完了へ戻った。PAD再コピーの差分は`BLOCK`末尾空白1文字とCRLFのみであり、手修正・正規化は行っていない。証跡は`catalog/evidence/t08-current-bundle-composed-live-acceptance-20260911.json`である。旧e35fa2f4／38640a版結果は新bundleへ継承しない。
+
+最終c78fd3 bundle SHA `c78fd388f6a3247772653d0c48b16444b095dd28821bf141f66946a36dcb3faf`では、ナレッジ掲載例の末尾空白警告を除いた後に知識precheckとT08を再送した。新規専用PADフロー `RobinKnowledgeT08ErrorHandlerFinalLive_20260911` へT08生成Robinを無修正で貼付け・保存し、2回とも`true`と欠損ファイルのLastError文字列、エラーダイアログなし、準備完了復帰を確認した。PAD再コピーの差分はPADが付けた`BLOCK`末尾空白1文字とCRLFのみで、生成コードは編集していない。証跡は`catalog/evidence/t08-current-bundle-final-live-acceptance-20260911.json`、新bundle監査は`catalog/evidence/issue5-completion-audit-20260911-complete-t08.json`である。T01〜T07/T09/T10、独立再試験、同一最終版負例は未完了である。
+
+最終候補61f040 bundle SHA `61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b`では、T01組合せ根拠をExamplesへ追加した。新規通常チャットの知識precheck、T01、T08を同一版で実施し、T01は`pre>code`の1ブロックを取得して新規PADへ無修正貼付け・保存・2回実行、出力90 bytes・UTF-8 BOM・CRLF・期待SHA一致・入力不変を確認した。T08も新規PADへ無修正貼付け・保存・2回実行し、`true`と欠損ファイルのLastErrorを確認した。T01証跡は`catalog/evidence/t01-current-final2-live-acceptance-20260911.json`、T08証跡は`catalog/evidence/t08-current-final2-live-acceptance-20260911.json`である。T02〜T07/T09/T10、独立再試験、同一最終版負例は未完了である。
+# Final3 fixed-version status (2026-09-11)
+
+The current fixed package is instruction `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e` and knowledge bundle `2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7`. Fresh normal M365 Copilot chats and dedicated PAD flows accepted T01-T08 and T10 with two runs each; independent T01/T04/T10 retests are also recorded. T09 generated a valid six-action Robin and passed paste/save/re-copy, but PAD reported the captured input/button/result UI elements missing and disabled Run before execution. This is a blocked runtime path, not an expected-error pass. Keep Issue #5 `partial/OPEN`; see `catalog/evidence/current-package-status-20260911-final4.json` and `catalog/evidence/issue5-completion-audit-20260911-final4.json`.

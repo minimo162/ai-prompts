@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T14:02:20+09:00",
+  "case": "T04",
+  "status": "accepted",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+  "copilot": "catalog/generated/normal-chat-current-bundle-final3-t04-live-20260911/result.json",
+  "pad_flow": "RobinKnowledgeT04Final3Live_20260911",
+  "pad_process_id": 31500,
+  "paste_save": "catalog/evidence/t04-current-final3-pad-paste-save-status-20260911.json",
+  "save": "catalog/evidence/t04-current-final3-pad-save-20260911.json",
+  "recopy": "catalog/evidence/t04-current-final3-pad-recopy-all-20260911.robin",
+  "designer_action_count": 9,
+  "visible_action_count": 5,
+  "virtualized_list_false_negative": true,
+  "run1": "catalog/evidence/t04-current-final3-pad-run1-20260911.json",
+  "run2": "catalog/evidence/t04-current-final3-pad-run2-20260911.json",
+  "input": {
+    "path": "catalog/fixtures/excel/t04-filter-input.xlsx",
+    "sha256": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+    "unchanged_confirmed": true
+  },
+  "output": {
+    "path": "catalog/evidence/normal-chat-t04-output-copilot-20260910.xlsx",
+    "sha256": "f664bba1786161dc2e5dc610786d7676df70376f86368c3a7bd4fd3f6176f8ba",
+    "logical_rows": ["対象 A 10", "対象 C 25", "対象 D 5"],
+    "same_logical_rows_across_runs": true
+  },
+  "acceptance": "accepted_2_runs_same_final_bundle"
+}

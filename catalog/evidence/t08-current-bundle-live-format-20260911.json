@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "case": "T08",
+  "date": "2026-09-11",
+  "status": "FAILED_CURRENT_BUNDLE_GENERATION_FORMAT",
+  "issue_state": "OPEN",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/e4b2343e-ddff-48f8-bf3e-80d62280c780",
+  "model": "Think Deeper",
+  "attachment": "PAD-Robin-Knowledge-Bundle.txt",
+  "send_observed": true,
+  "response_completed_observed": true,
+  "robin_block_count": 0,
+  "response_path": "catalog/generated/normal-chat-current-revision-t08-20260911/response.txt",
+  "response_sha256": "2AD70F32D73F6DC213B3D267A562FC994240798BA13242097EEAEF89BF7B1838",
+  "response_capture_note": "DOM innerText was 2046 characters; response.txt is the captured visible response with paragraph normalization at 2080 characters, not a byte-for-byte DOM export.",
+  "pad_paste_save_run": "NOT_RUN",
+  "expected_error_acceptance": "NOT_RUN",
+  "reason": "Copilot stated that the bundle lacks the complete measured BLOCK ON BLOCK ERROR, error-recording action, and closing structure, so it emitted no valid Robin code block. Treating this refusal as an expected-error PAD pass is prohibited.",
+  "next_step": "Obtain and integrate the missing measured error-handler/recording Robin only if independently captured, then re-fix hashes and repeat same-final-version acceptance."
+}

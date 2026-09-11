@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "captured_on": "2026-09-11",
+  "status": "pass_probe_not_bundled",
+  "missing_item": "C-datatable-cell-reference",
+  "scope": "Synthetic PAD DataTable cell update/reference probe in a newly-created dedicated flow; current bundle unchanged.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3DataTableCell_20260911",
+    "process_id": 29176,
+    "window_title": "Power Automate | RobinKnowledgeP3DataTableCell_20260911",
+    "action_count": 2
+  },
+  "configuration": {
+    "create_table": "Variables.CreateNewDatatable InputTable: { ^['Column1', 'Column2', 'Column3'], [$'''A''', 10, $'''対象'''] } DataTable=> DataTable",
+    "cell_update": "Variables.ModifyDataTableItem DataTable: DataTable ColumnNameOrIndex: 2 RowIndex: 0 Value: $'''CellChanged'''",
+    "target": {
+      "column_index": 2,
+      "row_index": 0,
+      "value": "CellChanged"
+    }
+  },
+  "raw": {
+    "path": "catalog/evidence/p3-datatable-cell-success-flow-20260911.robin",
+    "sha256": "218ec97aa79d5e4cbb6d3f66d995f9e0c9248eab47c04431a2eac4c2fff8b9cd",
+    "bytes": 245,
+    "action_count": 2,
+    "clipboard_restored": true
+  },
+  "runs": [
+    {
+      "run": 1,
+      "evidence": "catalog/evidence/p3-datatable-cell-success-run1-20260911.json",
+      "status": "success",
+      "data_table_preview": "1 行, 3 列",
+      "value_observation": "DataTable value viewer showed column index 0=0, 1=A, 2=10, 3=CellChanged",
+      "screenshot": "catalog/evidence/p3-datatable-cell-success-run1.png",
+      "screenshot_sha256": "f36f37224c631de02218cd105aff3505d555a2754ca9f172e00ae74d61c7474c"
+    },
+    {
+      "run": 2,
+      "evidence": "catalog/evidence/p3-datatable-cell-success-run2-20260911.json",
+      "status": "success",
+      "data_table_preview": "1 行, 3 列",
+      "value_observation": "DataTable value viewer showed column index 0=0, 1=A, 2=10, 3=CellChanged",
+      "screenshot": "catalog/evidence/p3-datatable-cell-success-run2-values.png",
+      "screenshot_sha256": "b825cf3ad5937618d221e7291e0ded5b499b132d4dc6693520dc214befc65b41"
+    }
+  ],
+  "result": "ModifyDataTableItem updated the value at row index 0 and column index 2 to CellChanged. Both runs completed without error and the DataTable value viewer exposed the changed cell. This is a probe success, not current-bundle acceptance."
+}

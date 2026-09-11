@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "prepared_at": "2026-09-11T14:05:00+09:00",
+  "status": "READY_FOR_FRESH_CHAT_SEND",
+  "case": "T01",
+  "prompt_source": "catalog/generated/normal-chat-current-revision-t01-20260910/prompt.txt",
+  "prompt_sha256": "936fe2eb6606adbfd10596e4b7347eeda8a021d3b93530625851a0608d5f0312",
+  "prompt_utf16": 4426,
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+  "fixture": {"path":"catalog/fixtures/text/t01-input-20260909.txt","sha256":"2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f","bytes":87},
+  "expected_output": {"path":"catalog/evidence/normal-chat-t01-output-current-bundle.txt","sha256":"2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2","bytes":90,"utf8_bom":true,"line_endings":"CRLF","replacement":"対象語 -> 置換後","additional_newline":false},
+  "send_status":"NOT_SENT",
+  "result":"Final package preparation after adding the PAD-captured T09 action lines; prior bundle acceptance is historical."
+}

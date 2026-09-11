@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T14:18:40+09:00",
+  "case": "T01",
+  "status": "accepted_independent_retest",
+  "knowledge_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+  "copilot": "catalog/generated/normal-chat-current-bundle-final3-t01-independent-20260911/result.json",
+  "pad_flow": "RobinKnowledgeT01Final3Independent_20260911",
+  "pad_process_id": 45656,
+  "paste_save": "catalog/evidence/t01-current-final3-independent-pad-paste-save-20260911.json",
+  "run1": "catalog/evidence/t01-current-final3-independent-pad-run1-20260911.json",
+  "run2": "catalog/evidence/t01-current-final3-independent-pad-run2-20260911.json",
+  "output_sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2",
+  "input_unchanged": true,
+  "acceptance": "accepted_2_runs_same_final_bundle_independent_flow_and_chat"
+}

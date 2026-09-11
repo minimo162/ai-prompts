@@ -37,6 +37,17 @@ P3追加probe（別probeの実行根拠。新しい現行bundleでのT01〜T10�
 - ループ脱出／継続: `EXIT LOOP` はLoopIndex=1、`NEXT LOOP` は2回ともLoopIndex=4。証拠: `catalog/evidence/p3-break-probe-20260910.json`、`p3-continue-probe-20260910.json`。
 - エラー処理: `BLOCK / ON BLOCK ERROR / THROW ERROR / END` と欠損ファイルruntime errorを確認。既定の「すべてのエラー」へ `SET ErrorHandledDefault TO $'''true'''`、続行ON／スローOFFを設定した別probeは2回とも完了し、trueプレビューを得た。証拠: `catalog/evidence/p3-error-trigger-probe-20260910.json`、`p3-error-default-handler-20260911.json`、`p3-error-default-handler-flow-20260911.robin`。
 - サブフロー: `P3Worker` を作成し、Mainから `CALL P3Worker`。タイムアウト付きメッセージで2回ともButtonPressed=OK。証拠: `catalog/evidence/p3-subflow-probe-20260910.json`。
+- `最後のエラーを取得`は専用PADフローで保存先`LastError`、エラー消去`On`を設定し、PADから無修正再コピーした原文は `ERROR => LastError Reset: True` である（`catalog/evidence/p3-get-last-error-standalone-20260911-reset.robin`）。欠損ファイルを含むエラー処理probeでは、ブロック原文とこのアクション原文を別々にPAD採取し、アクション順に組み合わせた参照例を保存した。これは単一clipboard rawの証明ではないが、クリーンな2回の実行で`true`と「ファイルが見つかりません」のLastErrorプレビューを確認した（`catalog/evidence/p3-error-handler-measured-20260911.json`）。
+- 測定済み組み合わせ参照（ブロック原文と`ERROR`アクションを別々にPAD採取し、単一clipboard rawではない）:
+BLOCK
+ON BLOCK ERROR FileNotFound IsUserDefinedErrorCode: True
+    SET ErrorHandled TO $'''true'''
+ON BLOCK ERROR
+    SET ErrorHandledDefault TO $'''true'''
+END
+    File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+END
+ERROR => LastError Reset: True
 - 名前付きカスタムエラー `FileNotFound` の変数設定はruntime errorが残ったため、既定エラー成功と混同しない。証拠: `catalog/evidence/p3-error-custom-handler-20260911.json`。
 
 未採取・未確認

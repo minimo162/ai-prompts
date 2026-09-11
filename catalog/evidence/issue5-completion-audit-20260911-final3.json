@@ -1,0 +1,11 @@
+{
+  "schema_version":1,
+  "captured_on":"2026-09-11",
+  "status":"partial",
+  "issue_state":"OPEN",
+  "base_audit":"catalog/evidence/issue5-completion-audit-20260911-final2-live.json",
+  "package":{"instruction_sha256":"b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e","bundle_sha256":"2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7","bundle_manifest":"copilot/knowledge-bundle-manifest-20260911-final.json"},
+  "p4_current_bundle":{"status":"PARTIAL_NEW_FINAL_BUNDLE_ACCEPTANCE_PENDING","knowledge_precheck":"NOT_RUN_NEW_BUNDLE","t01":{"status":"NOT_RUN_NEW_BUNDLE","preparation":"catalog/evidence/t01-current-bundle-prepared-20260911-final.json"},"t08":{"status":"NOT_RUN_NEW_BUNDLE","prior_61f_acceptance_not_inherited":"catalog/evidence/t08-current-final2-live-acceptance-20260911.json"},"remaining":["new final precheck","new final T01-T10 acceptance","T09 runtime","independent final retests","negative cases"]},
+  "p5":{"status":"PASS_LOCAL_STATIC_PARTIAL_LIVE_RESET_FOR_NEW_FINAL_BUNDLE","issue_close":false},
+  "result":"FINAL3_BUNDLE_CREATED_T09_ACTION_LINES_ADDED_REACCEPTANCE_REQUIRED"
+}

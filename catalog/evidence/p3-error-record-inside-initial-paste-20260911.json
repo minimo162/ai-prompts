@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-11T00:53:02.0687502Z",
+    "flow_name":  "RobinKnowledgeP3ErrorRecordInside_20260911",
+    "source_robin":  "catalog/evidence/p3-error-default-handler-flow-20260911.robin",
+    "source_sha256":  "b115fda2dd861f1652ccb71cd1d65c8e10a51c4bbfebc103beee2ac5024fdc2f",
+    "source_bytes":  354,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  3,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

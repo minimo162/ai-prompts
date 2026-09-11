@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-11T02:06:00.7312543Z",
+  "flow_name": "RobinKnowledgeP3LastError_20260911",
+  "status": "FAILED_DESIGNER_INTERNAL_EXCEPTION",
+  "helper_result_preserved": "catalog/evidence/p3-last-error-handler-run1-20260911.json",
+  "helper_misclassification": "The run helper observed ready and start-enabled after a Designer exception and therefore wrote run_status=success; this correction does not overwrite that original evidence.",
+  "exception_dialog": {
+    "title": "ハンドルされないエラー",
+    "message": "このサブフローの一部のプログラム アイテム ID が見つかりません 'Main'",
+    "type": "System.InvalidOperationException",
+    "source": "MoveProgramItemsCommandHandler.Handle / FunctionModel.GetProgramItems"
+  },
+  "observed_after_closing_dialog": {
+    "action_names": [
+      "ブロック エラー発生時 , エラー処理が有効",
+      "ファイルからテキストを読み取る",
+      "終了"
+    ],
+    "last_error_action_present": false,
+    "flow_ready": true
+  },
+  "interpretation": "This was a PAD Designer selection/state exception during the first probe retry, not a runtime proof of the missing-file error handler. Later clean runs are recorded separately as the accepted probe evidence."
+}

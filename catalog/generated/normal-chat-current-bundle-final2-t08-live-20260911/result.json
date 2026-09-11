@@ -1,0 +1,451 @@
+{
+  "schema_version": 1,
+  "started_at": "2026-09-11T03:30:02.305Z",
+  "requested_url": "https://m365.cloud.microsoft/chat/",
+  "browser": "Microsoft Edge CDP",
+  "cdp_port": 9444,
+  "profile": "C:\\Users\\yuuki\\.pdf-kosei-ps\\edge-profile",
+  "attachment_mode": "mechanical_bundle",
+  "files": [
+    {
+      "path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+      "name": "PAD-Robin-Knowledge-Bundle.txt",
+      "sha256": "61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "copilot/knowledge/PAD-Robin-00-Index.txt",
+      "name": "PAD-Robin-00-Index.txt",
+      "sha256": "5ed9b0a8cfd648aebaf42337ccd1b783efe5ce30ac500e25f414687a18eb7a0e"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-01-Basics.txt",
+      "name": "PAD-Robin-01-Basics.txt",
+      "sha256": "b28624c163105139ac97f5b3d452a07439f848189544906353dec2c3f9f48777"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-02-Control.txt",
+      "name": "PAD-Robin-02-Control.txt",
+      "sha256": "143b30c2c66ce8f5427df2994868cd999ffbf5830ddef50bc56d42cd8228d76f"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-03-Files.txt",
+      "name": "PAD-Robin-03-Files.txt",
+      "sha256": "018264dd387539899d84890d513bc07ab3de34df18c176b2f1fbc39ad4cb557a"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-04-Office-PDF.txt",
+      "name": "PAD-Robin-04-Office-PDF.txt",
+      "sha256": "63942974f00d2b03350c4f874ae84862494258089182dd120d9d64ff99eebe21"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-05-UI-Web.txt",
+      "name": "PAD-Robin-05-UI-Web.txt",
+      "sha256": "66770c17a30947ecde74032276a37527f67f69d45a8ec5e2661b2b5275f083bb"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-06-Examples.txt",
+      "name": "PAD-Robin-06-Examples.txt",
+      "sha256": "2526b66f94305a32faff51d6359efb0765a4c994495fa742516256df29b2ba89"
+    }
+  ],
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "prompt_sha256": "9bafe4937c12fbbc1e871e4a1424221496e6a85c03d40573b2049bc3e4960b4e",
+  "prompt_utf16": 4427,
+  "stages": [
+    {
+      "event": "cdp_ready",
+      "observed_at": "2026-09-11T03:30:02.909Z",
+      "browser": "Edg/152.0.4191.66"
+    },
+    {
+      "event": "chat_ready",
+      "observed_at": "2026-09-11T03:30:04.059Z",
+      "origin": "https://m365.cloud.microsoft",
+      "url": "https://m365.cloud.microsoft/chat/",
+      "title": "Microsoft Copilot",
+      "editor": true
+    },
+    {
+      "event": "model_selected",
+      "observed_at": "2026-09-11T03:30:09.120Z",
+      "model": "GPT 5.6 Think"
+    },
+    {
+      "event": "sequential_attachment_start",
+      "observed_at": "2026-09-11T03:30:09.133Z",
+      "count": 1
+    },
+    {
+      "event": "file_attached_check",
+      "observed_at": "2026-09-11T03:30:12.021Z",
+      "index": 1,
+      "name": "PAD-Robin-Knowledge-Bundle.txt",
+      "input_state": {
+        "count": 1,
+        "names": [
+          {}
+        ],
+        "accept": ".doc,application/msword,.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docm,application/vnd.ms-word.document.macroEnabled.12,.xls,application/vnd.ms-excel,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.ppt,application/vnd.ms-powerpoint,.pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation,.txt,text/plain,.csv,text/csv,.pdf,application/pdf,.rtf,application/rtf,.loop,application/vnd.microsoft.loop,.fluid,application/vnd.microsoft.fluid,.tsv,text/tab-separated-values,.html,text/html,.md,text/markdown,.xml,application/xml,.c,.yaml,application/yaml,.php,.sh,application/x-sh,.dart,.css,text/css,.lua,.config,.utf8,.htm,.cpp,.yml,.log,.h,.bash,.ini,.json,application/json,.java,text/x-java-source,.pl,.rs,.js,application/javascript,.py,.tsx,.cs,.jsx,text/jscript,.sql,application/sql,.xlsm,application/vnd.ms-excel.sheet.macroEnabled.12,.ppsm,application/vnd.ms-powerpoint.slideshow.macroEnabled.12,.page,application/vnd.microsoft.page,.jpg,image/jpeg,.jpeg,.png,image/png,.bmp,image/bmp,.jfif,image/jfif,.gif,image/gif,.pjpeg,image/pjpeg,.pjp,image/pjp,.webp,image/webp,.msg,application/vnd.ms-outlook,.eml,message/rfc822"
+      },
+      "attachment_state": {
+        "url": "https://m365.cloud.microsoft/chat/",
+        "title": "チャット | Microsoft Copilot",
+        "labels": [
+          "PAD-Robin-Knowledge-Bundle.txt"
+        ],
+        "attached": [
+          true
+        ],
+        "pending": false,
+        "count": 1
+      }
+    },
+    {
+      "event": "files_attached",
+      "observed_at": "2026-09-11T03:30:12.022Z",
+      "state": {
+        "url": "https://m365.cloud.microsoft/chat/",
+        "title": "チャット | Microsoft Copilot",
+        "labels": [
+          "PAD-Robin-Knowledge-Bundle.txt"
+        ],
+        "attached": [
+          true
+        ],
+        "pending": false,
+        "count": 1
+      }
+    },
+    {
+      "event": "body_inserted_and_verified",
+      "observed_at": "2026-09-11T03:30:12.356Z",
+      "chars": 4427
+    },
+    {
+      "event": "sent",
+      "observed_at": "2026-09-11T03:30:12.427Z"
+    }
+  ],
+  "model_requested": "GPT 5.6 Think Deeper",
+  "model_menu_after_selector": [
+    {
+      "role": "BUTTON",
+      "label": "ナビゲーションの展開",
+      "expanded": "false",
+      "checked": null
+    },
+    {
+      "role": "button",
+      "label": "ノートブック",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "button",
+      "label": "詳細",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "button",
+      "label": "小谷 侑輝",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "モデル セレクター",
+      "expanded": "true",
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "一時的なチャット",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "設定など",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "ソースの追加と管理",
+      "expanded": "false",
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "ディクテーションを開始",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "新しいボイス チャットを開始します",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "学習します",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "説明します",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "リライト",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "作成する",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "menu",
+      "label": "自動考える時間の長さを決定しますクイック応答すぐに回答しますThink Deeperより良い回答のために長く考えますGPTOpenAI",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "menuitemradio",
+      "label": "自動考える時間の長さを決定します",
+      "expanded": null,
+      "checked": "true"
+    },
+    {
+      "role": "menuitemradio",
+      "label": "クイック応答すぐに回答します",
+      "expanded": null,
+      "checked": "false"
+    },
+    {
+      "role": "menuitemradio",
+      "label": "Think Deeperより良い回答のために長く考えます",
+      "expanded": null,
+      "checked": "false"
+    },
+    {
+      "role": "menuitem",
+      "label": "GPTOpenAI",
+      "expanded": "false",
+      "checked": null
+    }
+  ],
+  "model_submenu_after_provider": [
+    {
+      "role": "BUTTON",
+      "label": "ナビゲーションの展開",
+      "expanded": "false",
+      "checked": null
+    },
+    {
+      "role": "button",
+      "label": "ノートブック",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "button",
+      "label": "詳細",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "button",
+      "label": "小谷 侑輝",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "モデル セレクター",
+      "expanded": "true",
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "一時的なチャット",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "設定など",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "ソースの追加と管理",
+      "expanded": "false",
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "ディクテーションを開始",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "新しいボイス チャットを開始します",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "学習します",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "説明します",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "リライト",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "BUTTON",
+      "label": "作成する",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "menu",
+      "label": "自動考える時間の長さを決定しますクイック応答すぐに回答しますThink Deeperより良い回答のために長く考えますGPTOpenAI",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "menuitemradio",
+      "label": "自動考える時間の長さを決定します",
+      "expanded": null,
+      "checked": "true"
+    },
+    {
+      "role": "menuitemradio",
+      "label": "クイック応答すぐに回答します",
+      "expanded": null,
+      "checked": "false"
+    },
+    {
+      "role": "menuitemradio",
+      "label": "Think Deeperより良い回答のために長く考えます",
+      "expanded": null,
+      "checked": "false"
+    },
+    {
+      "role": "menuitem",
+      "label": "GPTOpenAI",
+      "expanded": "true",
+      "checked": null
+    },
+    {
+      "role": "menu",
+      "label": "GPT 5.6 Think DeeperGPT 5.5 Quick Response",
+      "expanded": null,
+      "checked": null
+    },
+    {
+      "role": "menuitemradio",
+      "label": "GPT 5.6 Think Deeper",
+      "expanded": null,
+      "checked": "false"
+    },
+    {
+      "role": "menuitemradio",
+      "label": "GPT 5.5 Quick Response",
+      "expanded": null,
+      "checked": "false"
+    }
+  ],
+  "model_selection": {
+    "selector": {
+      "found": true,
+      "label": "モデル セレクター"
+    },
+    "provider": {
+      "found": true,
+      "label": "GPTOpenAI"
+    },
+    "option": {
+      "found": true,
+      "label": "GPT 5.6 Think Deeper"
+    },
+    "evidence": {
+      "button_text": "GPT 5.6 Think",
+      "button_aria": "モデル セレクター",
+      "labels": [
+        "ナビゲーションの展開",
+        "ノートブック",
+        "詳細",
+        "小谷 侑輝",
+        "モデル セレクター",
+        "一時的なチャット",
+        "設定など",
+        "ソースの追加と管理",
+        "ディクテーションを開始",
+        "新しいボイス チャットを開始します",
+        "学習します",
+        "説明します",
+        "リライト",
+        "作成する"
+      ]
+    }
+  },
+  "attachment_input_mode": "preexisting_cdp_input",
+  "file_input_state": {
+    "count": 0,
+    "names": [],
+    "accept": ".doc,application/msword,.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docm,application/vnd.ms-word.document.macroEnabled.12,.xls,application/vnd.ms-excel,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.ppt,application/vnd.ms-powerpoint,.pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation,.txt,text/plain,.csv,text/csv,.pdf,application/pdf,.rtf,application/rtf,.loop,application/vnd.microsoft.loop,.fluid,application/vnd.microsoft.fluid,.tsv,text/tab-separated-values,.html,text/html,.md,text/markdown,.xml,application/xml,.c,.yaml,application/yaml,.php,.sh,application/x-sh,.dart,.css,text/css,.lua,.config,.utf8,.htm,.cpp,.yml,.log,.h,.bash,.ini,.json,application/json,.java,text/x-java-source,.pl,.rs,.js,application/javascript,.py,.tsx,.cs,.jsx,text/jscript,.sql,application/sql,.xlsm,application/vnd.ms-excel.sheet.macroEnabled.12,.ppsm,application/vnd.ms-powerpoint.slideshow.macroEnabled.12,.page,application/vnd.microsoft.page,.jpg,image/jpeg,.jpeg,.png,image/png,.bmp,image/bmp,.jfif,image/jfif,.gif,image/gif,.pjpeg,image/pjpeg,.pjp,image/pjp,.webp,image/webp,.msg,application/vnd.ms-outlook,.eml,message/rfc822"
+  },
+  "attachment_state": {
+    "url": "https://m365.cloud.microsoft/chat/",
+    "title": "チャット | Microsoft Copilot",
+    "labels": [
+      "PAD-Robin-Knowledge-Bundle.txt"
+    ],
+    "attached": [
+      true
+    ],
+    "pending": false,
+    "count": 1
+  },
+  "input_state": {
+    "matched": true,
+    "observed_chars": 4427,
+    "raw_observed_chars": 4429,
+    "expected_chars": 4427,
+    "reader": "editor"
+  },
+  "send_state": {
+    "clicked": true
+  },
+  "last_response_chars": 1819,
+  "response": "1. 前提・対象範囲・未確認点\n\n目的: 存在しないファイル C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt を「ファイルからテキストを読み取る」で処理し、エラー状態と記録だけを確認する。後続の書込み・完了マーカー・公開処理は実行しない。\n\n確認済み根拠:\n\n欠損ファイル読取りによる runtime error の観測あり。\n既定の「すべてのエラー」を受ける ON BLOCK ERROR で変数設定して続行する probe は2回成功。\n最後のエラーを取得 の実測原文は ERROR => LastError Reset: True。欠損ファイルとの組合せは「別々にPAD採取した原文を順序どおり組み合わせた参照例」であり、単一 clipboard raw の証明ではない。\n\n未確認:\n\nFileNotFound を名前付きで捕捉するカスタムエラー分岐は成功していません。runtime error が残った記録です。\nエラーオブジェクトの個別プロパティ参照構文はナレッジ未採取です。推測しません。\n2. PADで先に確認する設定・依存\n空フローを作成。\n下記 Robin を Main に貼り付け。\n事前に対象ファイルを作成しない。\n実行後に変数ペインで以下を確認。\nErrorHandledDefault\nLastError\nFileContents\n書込みアクション、CSV出力、完了フラグ作成、公開処理は追加しない。\n\n期待結果:\n\nFile.ReadTextFromFile.ReadText は欠損ファイルでエラー発生。\n既定エラーハンドラ側で ErrorHandledDefault=true。\nLastError に「ファイルが見つかりません」が確認できる。\n後続の書込み・完了マーカー・公開処理は存在しないため実行されない。\n3. 貼り付け用Robin\n\n根拠: PAD-Robin-02-Control の「測定済み組み合わせ参照」。これはブロック原文と ERROR アクション原文を別採取して組み合わせた参照例であり、単一 clipboard raw としては未確認です。\n\nPlain Text\n1\nBLOCK\n2\nON BLOCK ERROR\n3\n    SET ErrorHandledDefault TO $'''true'''\n4\nEND\n5\n    File.ReadTextFromFile.ReadText File: $'''C:\\\\Users\\\\yuuki\\\\ai-prompts\\\\catalog\\\\fixtures\\\\text\\\\t08-missing-20260910.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents\n6\nEND\n7\nERROR => LastError Reset: True\n4. デザイナー上の確認方法\nエラー表示のない保存ができるか確認。\nアクション順が次の並びになっていることを確認。\nBLOCK\nON BLOCK ERROR\n変数設定\nファイルからテキストを読み取る\nERROR（最後のエラーを取得）\n変数型の確認。\nErrorHandledDefault : テキスト\nLastError : エラー情報オブジェクト（詳細構造は未採取）\nFileContents : テキスト\nBLOCK と END の対応が崩れていないことを確認。\n5. 合成データでの実行・照合手順\n指定パスのファイルが存在しないことをエクスプローラーで確認。\nフローを実行。\n実行完了後に変数ペインを確認。\nErrorHandledDefault = true を確認。\nLastError に欠損ファイルのエラー内容（実測記録では「ファイルが見つかりません」）が含まれることを確認。\n出力ファイル、完了マーカー、公開結果が生成されていないことを確認。\n同条件で再実行し、同じエラー状態になることを確認。\n\n追加採取が必要な項目は、LastError から特定プロパティだけを取り出す構文や、FileNotFound 名称での成功済みカスタム分岐です。どちらも現ナレッジには成功原文がありません。",
+  "robin_blocks": [
+    "BLOCK\nON BLOCK ERROR\n    SET ErrorHandledDefault TO $'''true'''\nEND\n    File.ReadTextFromFile.ReadText File: $'''C:\\\\Users\\\\yuuki\\\\ai-prompts\\\\catalog\\\\fixtures\\\\text\\\\t08-missing-20260910.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents\nEND\nERROR => LastError Reset: True"
+  ],
+  "response_observed": true,
+  "finished_at": "2026-09-11T03:30:46.905Z"
+}

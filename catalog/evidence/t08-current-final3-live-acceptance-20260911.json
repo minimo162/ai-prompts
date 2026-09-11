@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T14:12:30+09:00",
+  "case": "T08",
+  "status": "accepted_expected_error",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+  "copilot": "catalog/generated/normal-chat-current-bundle-final3-t08-live-20260911/result.json",
+  "pad_flow": "RobinKnowledgeT08Final3Live_20260911",
+  "pad_process_id": 47616,
+  "paste_save": "catalog/evidence/t08-current-final3-pad-paste-save-20260911.json",
+  "run1": "catalog/evidence/t08-current-final3-pad-run1-20260911.json",
+  "run2": "catalog/evidence/t08-current-final3-pad-run2-20260911.json",
+  "missing_input": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt",
+  "expected_error_observed": true,
+  "last_error_reset_observed": true,
+  "unhandled_error_dialog": false,
+  "downstream_write_actions": false,
+  "named_FileNotFound_handler": false,
+  "acceptance": "accepted_2_runs_same_final_bundle_expected_error"
+}

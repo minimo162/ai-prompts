@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "captured_on": "2026-09-11",
+  "status": "pass_probe_not_bundled",
+  "missing_item": "C-datatable-row-insertion",
+  "scope": "Synthetic PAD DataTable row insertion probe in a newly-created dedicated flow; current bundle unchanged.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeP3DataTableRow_20260911",
+    "process_id": 27796,
+    "window_title": "Power Automate | RobinKnowledgeP3DataTableRow_20260911",
+    "action_count": 6
+  },
+  "configuration": {
+    "create_table": "Variables.CreateNewDatatable InputTable: { ^['Column1', 'Column2', 'Column3'], [$'''A''', 10, $'''対象'''] } DataTable=> DataTable",
+    "create_list": "Variables.CreateNewList List=> RowValues",
+    "row_values": ["A", 10, "対象"],
+    "row_add": "Variables.AddRowToDataTable.AppendRowToDataTable DataTable: DataTable RowToAdd: RowValues",
+    "insertion_location": "データ テーブルの末尾"
+  },
+  "raw": {
+    "path_before_runs": "catalog/evidence/p3-datatable-row-success-flow-20260911-fixed.robin",
+    "path_after_run2": "catalog/evidence/p3-datatable-row-success-flow-20260911-after-run2.robin",
+    "sha256": "06cad7b964fc057b0e2b6d9f0f61927fc0f8e559d3e389ac55ad6ccaceeb8a99",
+    "bytes": 434,
+    "action_count": 6,
+    "normalized_recopy_match": true,
+    "clipboard_restored": true
+  },
+  "runs": [
+    {
+      "run": 1,
+      "evidence": "catalog/evidence/p3-datatable-row-success-run1-20260911.json",
+      "status": "success_observed",
+      "data_table_preview": "2 行, 3 列",
+      "row_values_preview": "[A, 10, 対象]"
+    },
+    {
+      "run": 2,
+      "evidence": "catalog/evidence/p3-datatable-row-success-run2-20260911.json",
+      "status": "success",
+      "data_table_preview": "2 行, 3 列",
+      "row_values_preview": "[A, 10, 対象]"
+    }
+  ],
+  "result": "A three-column DataTable was initialized with one row, a three-value RowValues list was created, and AddRowToDataTable appended the list at the end. Both runs completed with 2 rows, 3 columns and no runtime error."
+}

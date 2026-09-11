@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T04:20:00+09:00",
+  "status": "PASTE_SAVE_CONFIRMED_BY_DESIGNER_STATUS",
+  "flow_name": "RobinKnowledgeT04Final2CorrectedLive_20260911",
+  "process_id": 34384,
+  "source_robin": "catalog/generated/normal-chat-current-bundle-final2-t04-corrected-live-20260911/robin.txt",
+  "source_sha256": "90b94a98613a8450cab08f7803af184cf397e49940108ada77ef230bf118aac9",
+  "source_bytes": 1579,
+  "paste_confirmed": true,
+  "helper_visible_count": 6,
+  "designer_status_action_count": 9,
+  "virtualized_list_false_negative": true,
+  "save_invoked": true,
+  "saved_confirmed": true,
+  "execution_requested": false,
+  "boundary": "The pasted Robin was not edited. Status text was used because the child list exposed only six visible items for a nine-action flow. The helper failure is preserved separately."
+}

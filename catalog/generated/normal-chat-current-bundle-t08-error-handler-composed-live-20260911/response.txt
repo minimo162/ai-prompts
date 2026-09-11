@@ -1,0 +1,86 @@
+1. 前提・対象範囲・未確認点
+
+目的
+存在しないファイル C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t08-missing-20260910.txt を「ファイルからテキストを読み取る」で処理し、エラー状態の発生と記録だけを確認します。
+
+成功条件
+
+欠損ファイル読取りでエラーが発生する。
+エラー処理側で記録用変数が設定される。
+最後のエラー情報を取得できる。
+書込み、完了マーカー、公開処理は実行しない。
+
+根拠
+
+欠損ファイルの読取り: PAD-Robin-03-Files.txt の「ファイルからテキストを読み取る」実測原文。
+ブロックエラー処理、既定エラー捕捉、最後のエラー取得: PAD-Robin-02-Control.txt の P3 エラー処理 probe。
+
+未確認
+
+名前付き FileNotFound カスタムエラー経路は runtime error が残っており成功確認されていません。
+下記は BLOCK 原文と ERROR => LastError 原文を別採取し、実行確認した組合せ参照です。単一 clipboard raw の再採取証跡ではありません。
+2. PADで先に作る設定
+
+追加作業は不要です。
+
+実行後に確認する変数:
+
+ErrorHandledDefault（テキスト）
+LastError（エラー情報オブジェクト）
+FileContents（読取り成功時のみ生成される想定だが、欠損ファイルなので正常値は期待しない）
+3. 貼り付け用Robin
+
+実測根拠: PAD-Robin-02-Control.txt の「測定済み組み合わせ参照」。
+
+Plain Text
+1
+BLOCK
+2
+ON BLOCK ERROR
+3
+    SET ErrorHandledDefault TO $'''true'''
+4
+END
+5
+    File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+6
+END
+7
+ERROR => LastError Reset: True
+4. デザイナー上の確認方法
+
+確認事項:
+
+アクション順序が以下になっていること。
+
+BLOCK
+ON BLOCK ERROR
+変数設定
+END
+ファイルからテキストを読み取る
+END
+最後のエラーを取得
+
+ErrorHandledDefault が事前定義不要でエラー表示になっていないこと。
+
+FileContents、LastError、ErrorHandledDefault の変数名が一致していること。
+
+実行後、
+
+ErrorHandledDefault = true
+LastError に「ファイルが見つかりません」相当の内容 が表示されること。
+5. 保存・実行・照合手順
+空フローへ貼り付け。
+保存。
+実行。
+フローデザイナーの変数プレビューで確認。
+ErrorHandledDefault が true
+LastError に欠損ファイルエラー
+以下が存在しないことを確認。
+テキスト書込みアクション
+CSV書込みアクション
+完了マーカー作成
+公開・送信処理
+同じ状態で再実行し、同じエラー記録結果になることを確認。
+
+この範囲は、欠損ファイル読取りと既定エラー処理の実測証跡がありますが、名前付き FileNotFound ハンドラー成功例は未採取のため採用していません。

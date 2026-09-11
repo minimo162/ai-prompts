@@ -1,0 +1,91 @@
+1. 前提・対象範囲・未確認点
+
+目的
+合成Word C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx を編集可能（ReadOnly=False）で開き、本文中の OfficeCatalog を T06Replaced に置換し、C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx へ別名保存する。
+
+入力
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+
+出力
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx
+
+成功条件
+
+出力文書本文が T06Replaced 日本語 100% になる。
+指定文字列以外の本文は保持される。
+元ファイルは変更しない。
+
+根拠
+
+Word編集可能起動: catalog/actions/word-launch/open-editable.robin
+Word全件リテラル置換: catalog/actions/word-replace/all-literal.robin
+Word別名保存: catalog/actions/word-save/as-docx-extension.robin
+Word終了: catalog/actions/word-close/no-save.robin
+これら個別アクションは採取済みです。今回の4アクション組合せそのものの再貼付け・実行証拠は、添付ナレッジ内には記載されていません。そのため確認済み原文の組合せ案として提示します。
+2. PADで先に作る設定・依存
+Word が起動可能な環境。
+保存先フォルダー
+C:\Users\yuuki\ai-prompts\catalog\evidence
+Wordインスタンス変数
+WordInstance
+保存形式は実測原文に合わせて
+DocumentFormat: Word.WordFormat.FromExtension
+元ファイル保護のため、保存は必ず SaveAs の出力先へ行う。
+3. 貼り付け用Robin
+Plain Text
+1
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+2
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+3
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t06-final.docx'''
+4
+Word.CloseWord.Close Instance: WordInstance
+4. デザイナー上の確認方法
+アクション数が 4個 であることを確認。
+順序が以下と一致することを確認。
+Word起動（編集可能）
+置換
+SaveAs
+Close
+WordInstance が起動→置換→保存→終了で一貫して参照されていることを確認。
+デザイナーに赤エラーが表示されないことを確認。
+ReadOnly: False が設定されていることを確認。
+保存先が入力ファイルと別パスであることを確認。
+5. 保存・実行・照合手順
+
+念のため元の word-catalog.docx をバックアップ。
+
+フローを保存。
+
+実行。
+
+出力ファイル
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx を開く。
+
+本文が
+
+T06Replaced 日本語 100%
+
+になっていることを確認。
+
+元ファイル C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx を開き、
+
+OfficeCatalog 日本語 100%
+
+のままであることを確認。
+
+同じフローを再実行し、出力内容が同一であることを確認。
+
+確認済み根拠の範囲
+
+編集可能起動（ReadOnly=False）: 採取済み
+Word内の文字列置換: 採取済み
+docxへのSaveAs: 採取済み
+Word終了: 採取済み
+
+未確認
+
+この依頼専用パス・置換語 (T06Replaced) を用いた組合せ全体の再貼付け・実行結果は、添付ナレッジ内には記録されていません。したがって「確認済み原文の組合せ案」として提示しています。

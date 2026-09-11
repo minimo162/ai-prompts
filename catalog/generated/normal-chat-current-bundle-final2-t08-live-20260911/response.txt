@@ -1,0 +1,72 @@
+1. 前提・対象範囲・未確認点
+
+目的: 存在しないファイル C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t08-missing-20260910.txt を「ファイルからテキストを読み取る」で処理し、エラー状態と記録だけを確認する。後続の書込み・完了マーカー・公開処理は実行しない。
+
+確認済み根拠:
+
+欠損ファイル読取りによる runtime error の観測あり。
+既定の「すべてのエラー」を受ける ON BLOCK ERROR で変数設定して続行する probe は2回成功。
+最後のエラーを取得 の実測原文は ERROR => LastError Reset: True。欠損ファイルとの組合せは「別々にPAD採取した原文を順序どおり組み合わせた参照例」であり、単一 clipboard raw の証明ではない。
+
+未確認:
+
+FileNotFound を名前付きで捕捉するカスタムエラー分岐は成功していません。runtime error が残った記録です。
+エラーオブジェクトの個別プロパティ参照構文はナレッジ未採取です。推測しません。
+2. PADで先に確認する設定・依存
+空フローを作成。
+下記 Robin を Main に貼り付け。
+事前に対象ファイルを作成しない。
+実行後に変数ペインで以下を確認。
+ErrorHandledDefault
+LastError
+FileContents
+書込みアクション、CSV出力、完了フラグ作成、公開処理は追加しない。
+
+期待結果:
+
+File.ReadTextFromFile.ReadText は欠損ファイルでエラー発生。
+既定エラーハンドラ側で ErrorHandledDefault=true。
+LastError に「ファイルが見つかりません」が確認できる。
+後続の書込み・完了マーカー・公開処理は存在しないため実行されない。
+3. 貼り付け用Robin
+
+根拠: PAD-Robin-02-Control の「測定済み組み合わせ参照」。これはブロック原文と ERROR アクション原文を別採取して組み合わせた参照例であり、単一 clipboard raw としては未確認です。
+
+Plain Text
+1
+BLOCK
+2
+ON BLOCK ERROR
+3
+    SET ErrorHandledDefault TO $'''true'''
+4
+END
+5
+    File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+6
+END
+7
+ERROR => LastError Reset: True
+4. デザイナー上の確認方法
+エラー表示のない保存ができるか確認。
+アクション順が次の並びになっていることを確認。
+BLOCK
+ON BLOCK ERROR
+変数設定
+ファイルからテキストを読み取る
+ERROR（最後のエラーを取得）
+変数型の確認。
+ErrorHandledDefault : テキスト
+LastError : エラー情報オブジェクト（詳細構造は未採取）
+FileContents : テキスト
+BLOCK と END の対応が崩れていないことを確認。
+5. 合成データでの実行・照合手順
+指定パスのファイルが存在しないことをエクスプローラーで確認。
+フローを実行。
+実行完了後に変数ペインを確認。
+ErrorHandledDefault = true を確認。
+LastError に欠損ファイルのエラー内容（実測記録では「ファイルが見つかりません」）が含まれることを確認。
+出力ファイル、完了マーカー、公開結果が生成されていないことを確認。
+同条件で再実行し、同じエラー状態になることを確認。
+
+追加採取が必要な項目は、LastError から特定プロパティだけを取り出す構文や、FileNotFound 名称での成功済みカスタム分岐です。どちらも現ナレッジには成功原文がありません。

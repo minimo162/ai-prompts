@@ -1,0 +1,103 @@
+1. 前提・対象範囲・未確認点
+
+目的
+既存Excelを編集可能（ReadOnly=False）で開き、B2セルのみへ ASCII文字列 T05-Changed を書き込み、別名で保存します。
+
+入力
+
+C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx
+
+出力
+
+C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-final.xlsx
+
+成功条件
+
+出力ブックのB2が T05-Changed
+元ファイルは変更されない
+SaveAs先のみ更新される
+A1を含む無関係セルは変更しない
+
+根拠
+
+編集可能Excel起動: catalog/actions/excel-launch/open-editable.robin（実測原文）
+セル書込み: Office Excel実測例の Excel.WriteToExcel.WriteCell
+別名保存: 実測 Excel.SaveExcel.SaveAs
+終了: 実測 Excel.CloseExcel.Close
+参照: PAD-Robin-04-Office-PDF.txt
+
+未確認
+
+この入力ファイルに対するT05専用の実行証跡はナレッジ内にありません。
+B2への書込み自体は、確認済みの単一セル書込みアクションを対象セルへ適用した組合せ案です。
+実行済みT04のような再貼付け・実行・期待値照合証跡は提示資料内にありません。
+2. PADで先に確認する設定・依存
+
+入力ファイルが存在すること
+
+C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx
+
+出力先フォルダーが存在すること
+
+C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence
+
+空フローへ貼り付けること
+
+保存先ファイル
+
+normal-chat-t05-final.xlsx
+元ファイルへの上書きではなく SaveAs を使用
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: 新規作成
+
+Plain Text
+1
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance
+2
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T05-Changed''' Column: $'''B''' Row: 2
+3
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-final.xlsx'''
+4
+Excel.CloseExcel.Close Instance: ExcelInstance
+4. デザイナー上の確認方法
+
+確認対象:
+
+アクション数: 4
+順序:
+Excel起動（既存ブック、ReadOnly=False）
+Excel ワークシートに書き込む
+Excel の保存（SaveAs）
+Excel を閉じる
+変数:
+ExcelInstance （Excelインスタンス）
+ブロック:
+開始・終了ブロックなし
+単純な直列4アクション
+
+エラー表示がないことを確認してください。
+
+5. 合成データでの照合手順
+入力ブックをバックアップせずそのまま使用する。
+フローを実行する。
+出力ファイル
+C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-final.xlsx を開く。
+B2セルが T05-Changed であることを確認する。
+元ファイル
+C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx を開き、変更されていないことを確認する。
+A1の既存値（資料では OfficeCatalog 日本語 100% が確認可能）に変更がないことを確認する。
++ 1
+
+確認済み原文の根拠
+
+catalog/actions/excel-launch/open-editable.robin
+Office Excel実測例の Excel.WriteToExcel.WriteCell
+Excel.SaveExcel.SaveAs
+Excel.CloseExcel.Close
+
+検証状態
+
+各アクションはナレッジ内に実測原文あり。
+本件の組合せ（指定入力→B2書込み→指定出力）は、添付ナレッジ内に貼付け・実行・期待値照合済み証跡は見当たらないため、静的確認ベースのフロー案です。

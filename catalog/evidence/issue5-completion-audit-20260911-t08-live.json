@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "captured_on": "2026-09-11",
+  "status": "partial",
+  "issue_state": "OPEN",
+  "base_audit": "catalog/evidence/issue5-completion-audit-20260911-t08-composed.json",
+  "package": {"instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e", "bundle_sha256": "d7a0a7d6d9876aa1169aa96f377032f8e30ea37b8ea5ce753d3b6fb550b42835", "bundle_manifest": "copilot/knowledge-bundle-manifest-20260911e.json"},
+  "p4_current_bundle": {"status": "PARTIAL_T08_PASS_LIVE_REMAINDER_PENDING", "knowledge_precheck": "PASS_REFERENCE_ONLY", "knowledge_precheck_evidence": "catalog/evidence/current-bundle-t08-error-handler-composed-precheck.json", "t08": {"status": "PASS_CURRENT_BUNDLE_T08_EXPECTED_ERROR", "evidence": "catalog/evidence/t08-current-bundle-composed-live-acceptance-20260911.json"}, "t01": {"status": "NOT_RUN_NEW_BUNDLE", "preparation": "catalog/evidence/t01-current-bundle-prepared-20260911e.json"}, "remaining": ["current-bundle T01-T07/T09/T10 acceptance", "current-package T09 generation/paste/run", "remaining P3 evidence", "independent new-bundle T01/T04/T10 retests", "negative cases on the same final version"]},
+  "p5": {"status": "PASS_LOCAL_STATIC_PARTIAL_LIVE", "latest_nonlive": "36/36 PASS", "latest_nonlive_evidence": ".work/nonlive-8db65bb04e864432b8b5f6e42b5fa2fc/verification.json", "live_m365": "d7a0a7 T08 sent and response captured", "native_pad": "d7a0a7 T08 pasted, saved, and run twice", "issue_close": false},
+  "p3_probe_updates": {"error_handler_recording": {"status": "PASS_CURRENT_BUNDLE_T08_EXPECTED_ERROR", "evidence": "catalog/evidence/t08-current-bundle-composed-live-acceptance-20260911.json"}, "t09_extension_handshake_boundary": "HANDSHAKE_COMPLETION_UNPROVEN_READ_ONLY", "remaining": ["DataTable cell reference", "named custom error matching and post-error generalization", "current bundle T01-T07/T09/T10 and same-final-version reacceptance"]},
+  "result": "T08_CURRENT_BUNDLE_ACCEPTED_ISSUE_REMAINS_PARTIAL_OPEN"
+}

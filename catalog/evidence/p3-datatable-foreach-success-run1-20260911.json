@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "observed_at":  "2026-09-11T00:32:19.3474878Z",
+    "flow_name":  "RobinKnowledgeP3DataTableForeach_20260911",
+    "run_status":  "success",
+    "ready_observed":  true,
+    "start_enabled_after":  true,
+    "variable_previews":  [
+                              "3 列 { Column1: A, Column2: 10, Column3: 対象 }",
+                              "1 行, 3 列",
+                              "3 列 { Column1: A, Column2: 10, Column3: 対象 }"
+                          ]
+}
