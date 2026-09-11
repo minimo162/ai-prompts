@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T05:00:00+09:00",
+  "status": "partial_new_bundle_t03_no_robin_t09_runtime_p3_gaps_pending",
+  "issue_state": "OPEN",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
+  "knowledge_precheck": "evidence/current-bundle-p3b-precheck-pending-20260911.json",
+  "accepted_final3_cases_preserved": ["T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T10"],
+  "new_bundle_cases": "KNOWLEDGE_PRECHECK_T01_T02_T04_T05_T06_T07_T08_T10_PASS_T03_NO_ROBIN_T09_BLOCKED",
+  "accepted_new_bundle_cases": ["knowledge_precheck", "T01", "T02", "T04", "T05", "T06", "T07", "T08", "T10"],
+  "new_bundle_nonaccepted_cases": ["T03"],
+  "blocked_cases": ["T09"],
+  "independent_retests": "T01_T04_T10_PASS_CURRENT_BUNDLE_INDEPENDENT",
+  "negative_suite": "PASS_NEGATIVE_FAIL_CLOSED_CURRENT_BUNDLE",
+  "p3_integrated": [
+    "DataTable row insertion",
+    "DataTable cell update",
+    "DataTable row iteration",
+    "Excel row iteration"
+  ],
+  "remaining": [
+    "T09 separate-flow UI element registration for Input/Button/Paragraph and WebAutomation runtime",
+    "P3 list-item retrieval, custom date formatting, nested/side-effect branches, named custom-error matching",
+    "T03 strict extension/name branch until additional PAD capture"
+  ],
+  "result": "Current bundle T01/T02/T04-T08/T10 and independent T01/T04/T10 acceptance plus fail-closed negative suite are recorded. T03 has no acceptable Robin under the current knowledge boundary; T09 remains blocked; P3 gaps remain. Final3 historical evidence is preserved and not inherited across hashes."
+}

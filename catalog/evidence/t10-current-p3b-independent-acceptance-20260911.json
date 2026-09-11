@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T01:00:00+09:00",
+  "case": "T10",
+  "status": "PASS_CURRENT_BUNDLE_INDEPENDENT",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/07cd2762-71ed-486c-b136-eaee67804f72",
+  "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
+  "generated_robin_sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12",
+  "pad_flow": "RobinKnowledgeT10P3bIndependent_20260911",
+  "pad_paste": "evidence/t10-current-p3b-independent-pad-paste-20260911.json",
+  "pad_run": "evidence/t10-current-p3b-independent-pad-run-20260911.json",
+  "outputs": { "excel_A1": "T10-Changed", "word_text": "CopilotOffice 246", "powerpoint_text": "CopilotOffice 246" },
+  "acceptance": "PASS_CURRENT_BUNDLE_INDEPENDENT"
+}

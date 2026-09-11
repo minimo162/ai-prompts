@@ -1,0 +1,58 @@
+Copilot said:
+
+以下は、指定された合成入力をUTF-8で読み込み、通常置換を行い、入力にない改行を追加せずUTF-8で保存する3アクションのフロー案です。PAD-Robin-Knowledge-Bundleに掲載されたT01の実測済み組合せと、今回の入力・検索語・置換語・出力先が完全に一致しています。
+
+1. 前提・対象範囲
+処理対象: 指定された合成テキストファイル
+入力: UTF-8テキスト
+検索語: 対象語
+置換語: 置換後
+置換方式: 通常置換、大文字と小文字を区別、エスケープシーケンス無効
+出力: 新しいUTF-8テキスト
+出力競合時: 同名ファイルが存在する場合は上書き
+追加改行: なし。入力自体にある末尾改行は保持
+変数:
+FileContents: 読み取ったテキスト
+Replaced: 置換後のテキスト
+アプリ、インスタンス、UI要素: 不要
+対象サブフロー: Mainの空の位置、または置き換える3アクションの範囲
+
+根拠環境はPAD 2.71.115.26224、日本語UI、Power Fx OFFです。この3アクション原文はPADから取得され、専用フローへの無修正貼り付け・保存・2回の実行・期待結果照合まで記録されています。ただし、今回利用するPAD環境での再実行は利用者側での確認が必要です。
+
+2. PADで先に確認する設定
+入力ファイルが指定パスに存在することを確認します。
+出力フォルダーが存在することを確認します。
+同名の出力ファイルがある場合は上書きされるため、必要なら事前に退避します。
+PADデザイナーで対象サブフローを開き、既存アクションのない位置へコード全体を貼り付けます。
+FileContentsとReplacedは各アクションの出力として生成されるため、入力変数を別途作成する必要はありません。
+3. デザイナー上の確認方法
+
+貼り付け後、次を確認してください。
+
+アクション数が3個
+順序が「テキスト読取り」「通常置換」「テキスト書込み」
+1個目の出力がテキスト変数FileContents
+2個目の入力がFileContents、出力がReplaced
+3個目の書込み値が文字列リテラルではなく、テキスト変数Replaced
+通常置換であり、正規表現置換になっていない
+エスケープシーケンスが無効
+末尾への新しい行の追加が無効
+出力競合時の処理が上書き
+各アクションに赤いエラー表示がない
+ブロック構文は使用していないため、開始・終了の対応確認は不要
+4. 合成データでの実行・照合
+元の入力ファイルを複製またはハッシュ記録し、実行前後で入力が変化していないことを確認します。
+フローを保存して1回実行します。
+出力ファイルをUTF-8対応エディターで開きます。
+すべての対象語が置換後へ変わっていることを確認します。
+特殊文字、引用符、バックスラッシュ、対象外文字、既存の改行位置が入力と一致することを確認します。
+入力に存在しなかった末尾改行が追加されていないことを確認します。
+再度実行し、同名ファイルが正常に上書きされ、内容が1回目と論理的に一致することを確認します。
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+ソース
+このフローの実行結果を確認する方法は？
+PADで貼り付けた後の確認手順は？
+出力ファイルの検証方法を教えて

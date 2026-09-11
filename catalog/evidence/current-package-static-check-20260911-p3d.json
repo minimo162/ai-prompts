@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T03:50:00+09:00",
+  "status": "PASS_LOCAL_STATIC_PARTIAL_LIVE",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
+  "checks": {
+    "Run-NonLiveTests_All": "PASS",
+    "Test-Issue5CurrentStatus": "PASS (23 checks)",
+    "Test-RobinRawContracts": "PASS (6 assertions)",
+    "Test-CopilotRobinPackage": "PASS (3949 UTF-16 / 7 files / 86 observed actions)",
+    "Test-RobinCatalog": "PASS (94 checks)",
+    "Test-CopilotDom": "PASS (898 rendered Edge DOM checks)",
+    "json_parse": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "nonlive_all_suite_evidence": ".work/nonlive-b3d84b7a8f8c475bbfa02a74b4d8bc30/verification.json",
+  "candidate_unchanged": true,
+  "live_m365": "PASS_REFERENCE_ONLY_T01_T02_T04_T05_T06_T07_T08_T10; T03_NO_ROBIN",
+  "native_pad": "T01_T02_T04_T05_T06_T07_T08_T10_PASS; T09_BLOCKED_UI_ELEMENT_REGISTRATION",
+  "unverified": ["T03 strict extension/name branch until additional PAD capture"],
+  "result": "Static/offline gates pass. Current-bundle live acceptance is partial: T01, T02, T04-T08, and T10 accepted; T03 generated no acceptable Robin; T09 remains blocked; Issue stays OPEN."
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T18:58:00+09:00",
+  "case": "T04",
+  "status": "PASS_CURRENT_BUNDLE_LOGICAL_OUTPUT",
+  "input": {
+    "path": "catalog/fixtures/excel/t04-filter-input.xlsx",
+    "sha256_before": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+    "sha256_after_run2": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+    "unchanged": true
+  },
+  "intermediate_csv": {
+    "run1": "catalog/generated/normal-chat-current-bundle-p3b-t04-live-20260911/run1-filtered.csv",
+    "run2": "catalog/generated/normal-chat-current-bundle-p3b-t04-live-20260911/run2-filtered.csv",
+    "sha256_run1": "b9442568996bbe8c45ce6a7efd705dd6159392cb42f24eb23341464f87a9c433",
+    "sha256_run2": "b9442568996bbe8c45ce6a7efd705dd6159392cb42f24eb23341464f87a9c433",
+    "logical_rows": ["対象,A,10", "対象,C,25", "対象,D,5"],
+    "same_across_runs": true
+  },
+  "xlsx_output": {
+    "run1": "catalog/generated/normal-chat-current-bundle-p3b-t04-live-20260911/run1-output.xlsx",
+    "run2": "catalog/generated/normal-chat-current-bundle-p3b-t04-live-20260911/run2-output.xlsx",
+    "sha256_run1": "44cf9a90f132077f06343c8ee52da56546d0fc7d8281f503361debfec7e7689c",
+    "sha256_run2": "4e080b9f93fe1b2741857d1a9924d48ed6b1c2673533cb28789b1db888719feb",
+    "sha256_expected_to_vary": true,
+    "logical_rows_source": "PAD VariablePreviewTextBlock: 3 行, 3 列 and 対象,A,10 対象,C,25 対象,D,5",
+    "same_logical_rows_across_runs": true
+  },
+  "protected_outputs": {
+    "restored_after_run": true,
+    "csv_sha256_restored": "b9442568996bbe8c45ce6a7efd705dd6159392cb42f24eb23341464f87a9c433",
+    "xlsx_sha256_restored": "f052161dc506125406d1af21988174108746acb359945b345e98546f046fc8aa"
+  },
+  "note": "The acceptance contract uses PAD's observed logical row preview and input immutability; Excel metadata makes output file SHA vary. A direct openpyxl read of the generated xlsx rendered the Japanese Status cell as replacement characters, so this evidence does not claim independent locale-normalized cell-text decoding.",
+  "acceptance": "PASS_CURRENT_BUNDLE_LOGICAL_OUTPUT"
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T00:50:00+09:00",
+  "status": "PASS_WITH_VIRTUALIZED_HELPER_FALSE_NEGATIVE",
+  "flow": { "name": "RobinKnowledgeT10P3bIndependent_20260911", "process_id": 29812, "empty_before_paste": true, "designer_status_after_paste": "16 アクション", "designer_action_count": 16, "visible_action_count": 6, "virtualized_list_false_negative": true },
+  "source_robin": "catalog/generated/normal-chat-current-bundle-p3b-t10-independent-20260911/robin.txt",
+  "source_sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12",
+  "saved_confirmed": true,
+  "hand_edit_applied": false
+}

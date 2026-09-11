@@ -1,0 +1,46 @@
+Copilot said:
+前提・対象範囲・未確認点
+目的: 合成Excel excel-catalog.xlsx を編集可能（ReadOnly=False）で開き、セル B2 のみを T05-Changed へ変更し、別名で normal-chat-t05-final.xlsx として保存すること。入力ブック自体は変更しない。
+入力: C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx
+出力: C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-final.xlsx
+成功条件:
+出力ブックの B2 が T05-Changed
+A1 を含む無関係なセルは入力と同値
+元ファイルは別名保存により変更されない
+根拠:
+編集可能な既存Excel起動: open-editable.robin
+Excelセル書込み: Office Excel実測例の Excel.WriteToExcel.WriteCell
+Excel別名保存: Excel.SaveExcel.SaveAs 実測例
+Excel終了: Excel.CloseExcel.Close 実測例
+未確認:
+「既存ブックを編集可能で開く → B2へ書込み → SaveAs → Close」の4アクション組合せ自体の再貼付け・実行・期待値照合済み証跡は添付ナレッジ中に見当たりません。各アクション原文は確認済みですが、この組合せは静的構成です。
+PADで先に確認する設定
+Excel がローカル環境で利用可能であること。
+出力先フォルダー C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence が存在すること。
+同名の normal-chat-t05-final.xlsx が存在する場合の挙動はナレッジ未採取のため、事前に削除または退避してから実行すること。
+サブフローへ貼り付ける場合は空のサブフローを使用すること。
+貼り付け用Robin
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T05-Changed''' Column: $'''B''' Row: 2
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-final.xlsx'''
+Excel.CloseExcel.Close Instance: ExcelInstance
+
+デザイナー上の確認方法
+アクション数が4個であること。
+順序が
+Excel起動
+セル書込み
+名前を付けて保存
+Excel終了 の順になっていること。
+ExcelInstance が起動アクションで生成され、後続3アクションが同じ ExcelInstance を参照していること。
+起動アクションの ReadOnly: False を確認すること。
+実行後の照合手順
+出力ファイル C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-final.xlsx を開く。
+B2 が T05-Changed になっていることを確認する。
+A1 および依頼対象外セルが入力ブックと同じ値であることを確認する。
+元ファイル C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx を開き、B2 が変更されていないことを確認する。
+同条件で再実行する場合は、出力ファイルの上書き挙動が未採取のため、既存出力を退避または削除してから再実行する。
+ソース
+貼り付けRobinのコードを解説して
+Excel起動アクションの詳細を教えて
+出力ファイルの確認手順を詳しく

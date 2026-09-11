@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T18:52:00+09:00",
+  "status": "PASS_WITH_VIRTUALIZED_HELPER_FALSE_NEGATIVE",
+  "flow": {
+    "name": "RobinKnowledgeT04P3bLive2_20260911",
+    "process_id": 39948,
+    "pad_file_version": "2.71.115.26224",
+    "empty_before_paste": true,
+    "designer_status_after_paste": "9 アクション",
+    "designer_action_count": 9,
+    "visible_action_count": 6,
+    "virtualized_list_false_negative": true
+  },
+  "paste": {
+    "source_robin": "catalog/generated/normal-chat-current-bundle-p3b-t04-live-20260911/robin.txt",
+    "source_sha256": "e1a7b111ce7af4eed7bea1e186f5396d364f7ec86d4f9be0e3ff2a6fc1cfc1a1",
+    "source_bytes": 1580,
+    "paste_confirmed_by_designer_status": true,
+    "helper_first_attempt": "Paste-PadRobinLive.ps1 observed six virtualized ListItems and failed its exact-count assertion; no hand edit was applied.",
+    "status_confirmation": "UI Automation later observed Flow_status_ready and '9 アクション' after the same paste."
+  },
+  "save": {
+    "command": "tools/Save-PadFlowLive.ps1",
+    "saved_confirmed": true,
+    "flow_name": "RobinKnowledgeT04P3bLive2_20260911"
+  },
+  "hand_edit_applied": false,
+  "execution_requested": false
+}

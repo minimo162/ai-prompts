@@ -1,0 +1,67 @@
+Copilot said:
+1. 前提・対象範囲・未確認点
+
+目的
+合成 Word 文書 word-catalog.docx を編集可能（ReadOnly=False）で開き、本文中の OfficeCatalog を T06Replaced に置換し、別名で normal-chat-t06-final.docx として保存します。元ファイルは変更しません。
+
+入力
+
+C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx
+
+出力
+
+C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t06-final.docx
+
+依存
+
+Word インスタンス: WordInstance
+既存文書を編集可能で開く実測原文
+Word のリテラル置換実測原文
+Word の SaveAs 実測原文
+Word の Close 実測原文
+
+未確認点
+
+ナレッジには「編集可能で開く」「検索置換」「SaveAs」「Close」の各実測原文がありますが、この4アクションを今回のパスで組み合わせて再貼付け・実行・期待値照合まで完了した証跡は掲載されていません。したがって、以下は確認済み原文の組合せ案であり、「貼付け・実行未確認の組合せ」です。
+2. PADで先に確認する設定
+Word がインストールされていること。
+入力ファイル C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx が存在すること。
+出力先フォルダー C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence が存在すること。
+元ファイルを保護するため、保存は必ず SaveAs の出力先へ行うこと。
+WordInstance は下記フロー内で生成されるため事前作成不要です。
+3. 貼り付け用Robin
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t06-final.docx'''
+Word.CloseWord.Close Instance: WordInstance
+
+4. デザイナー上の確認方法
+アクション数が 4個 であること。
+順序が次の通りであること。
+Word.LaunchWord.LaunchAndOpen
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards
+Word.SaveWord.SaveAs
+Word.CloseWord.Close
+置換アクションの検索文字列が OfficeCatalog、置換文字列が T06Replaced であること。
+LaunchAndOpen の ReadOnly: False になっていること。
+SaveAs の保存先が normal-chat-t06-final.docx になっていること。
+Word インスタンス名が全行で WordInstance のまま一致していること。
+5. 保存・実行・照合手順
+入力ファイルを複製せず、そのまま読み込みます。
+フローを保存して実行します。
+出力ファイル normal-chat-t06-final.docx を開きます。
+本文中の OfficeCatalog が T06Replaced に置換されていることを確認します。
+OfficeCatalog 以外の本文が保持されていることを確認します。
+元ファイル word-catalog.docx を開き、変更されていないことを確認します。
+再実行後も出力ファイルが生成されることを確認します。SaveAs を使用するため、期待結果は「出力ファイルのみ変更、元ファイル不変」です。
+
+根拠
+
+編集可能で開く Word 実測原文: catalog/actions/word-launch/open-editable.robin
+文字列置換実測原文: catalog/actions/word-replace/all-literal.robin
+SaveAs 実測原文: catalog/actions/word-save/as-docx-extension.robin
+Close 実測原文: catalog/actions/word-close/no-save.robin
+ソース
+貼り付け用Robinを解説して
+確認済み原文の根拠を詳しく
+実行後の確認手順を詳しく

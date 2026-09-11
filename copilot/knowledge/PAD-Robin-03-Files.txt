@@ -10,13 +10,25 @@ PAD Robin ファイル・CSV
 - 原文ファイル: catalog/actions/datatable-create/empty.robin（SHA-256: f3eef9ad3585b35d39c8f90d9202629d63907414e1f7601270e9d0fff7af9256）。
 - 空の別フローへファイルから貼り付け、保存、再コピーした原文は同じSHA-256。2回の実行で「DataTable: 0 行, 0 列」を確認した。
 - 証拠: catalog/evidence/datatable-create-validation.json、catalog/evidence/datatable-create-run-1.json、catalog/evidence/datatable-create-run-2.json。
-- 初期版で未確認だった非空テーブルの作成は、下記のP3追補で3列1行を確認した。行追加、行反復、セル参照は引き続き未確認。CSV読取り／書出しとの組合せは下記の追加採取で確認済み。
+- 初期版で未確認だった非空テーブルの作成は、下記のP3追補で3列1行を確認した。行追加・行反復・セル更新も別の専用probeで成功を確認した。CSV読取り／書出しとの組合せは下記の追加採取で確認済み。
 
 P3追補: 列付きDataTable作成（別probe）
 - 3列1行（列表示はColumn1/Column2/Column3、値は`A`、`10`、`対象`）をビジュアライザーで設定した。
 - 実測Robin: `Variables.CreateNewDatatable InputTable: { ^['Column1', 'Column2', 'Column3'], [$'''A''', 10, $'''対象'''] } DataTable=> DataTable`。
 - 原文: `catalog/evidence/p3-datatable-create-success-20260911.robin`（SHA-256 `41765e5628880f02d75bfe32129675d18aebaa1caaf742a2202dd30082123166`）。保存後2回実行し、両方で`1 行, 3 列`を確認した。証拠: `catalog/evidence/p3-datatable-create-success-20260911.json`、`p3-datatable-create-success-run1-20260911.json`、`p3-datatable-create-success-run2-20260911.json`。
 - 列付き行追加の失敗では、DataTableが`0 行, 0 列`へ戻り、`RowValues=[A, B]`に対して「指定された値の数 (2) がデータ テーブルの列の数 (0) と一致しません」となった。失敗原文は`catalog/evidence/p3-datatable-row-error-state-20260911.robin`（SHA-256 `e0088169fdbe6490453ff926a488b9ca21c912f5632c00e47a5fc09be30db7d0`）。成功構文を推測しない。
+
+P3追補: DataTable行追加・セル更新・行反復（別probe、現行bundleへ統合）
+- 行追加の成功原文は、3列1行の`DataTable`へ3値の`RowValues`リストを作り、挿入場所を既定の末尾にした5アクションである。`catalog/evidence/p3-datatable-row-success-flow-20260911-fixed.robin`（SHA-256 `06cad7b964fc057b0e2b6d9f0f61927fc0f8e559d3e389ac55ad6ccaceeb8a99`）をPADから再コピーし、2回とも`DataTable=2 行, 3 列`・エラーなしを確認した（`p3-datatable-row-success-20260911.json`、run1/run2）。`DataTable`欄へ文字列リテラルを入れず、変数参照を使う。
+- 実測Robin:
+  `Variables.CreateNewDatatable InputTable: { ^['Column1', 'Column2', 'Column3'], [$'''A''', 10, $'''対象'''] } DataTable=> DataTable`
+  `Variables.CreateNewList List=> RowValues`
+  `Variables.AddItemToList Item: $'''A''' List: RowValues`
+  `Variables.AddItemToList Item: 10 List: RowValues`
+  `Variables.AddItemToList Item: $'''対象''' List: RowValues`
+  `Variables.AddRowToDataTable.AppendRowToDataTable DataTable: DataTable RowToAdd: RowValues`
+- セル更新は`Variables.ModifyDataTableItem DataTable: DataTable ColumnNameOrIndex: 2 RowIndex: 0 Value: $'''CellChanged'''`を実測した。列インデックス2・行インデックス0で2回実行し、3列目が`CellChanged`へ変わることを確認した。原文`catalog/evidence/p3-datatable-cell-success-flow-20260911.robin`（SHA-256 `218ec97aa79d5e4cbb6d3f66d995f9e0c9248eab47c04431a2eac4c2fff8b9cd`）、証拠`p3-datatable-cell-success-20260911.json`。
+- 行反復は2行3列の`DataTable`へ`LOOP FOREACH CurrentItem IN DataTable`を置き、本体で`SET ForeachValue TO CurrentItem`を実測した。原文`catalog/evidence/p3-datatable-foreach-success-flow-20260911-final.robin`（SHA-256 `3fe9881b262941ab9150bd2d883a0cf956291296328b3503c2af4811629ea981`）を無修正で保存・再コピーし、ブレークポイントを解除した2回とも最終行`B / 20 / 対象2`、`DataTable=2行, 3列`、エラーなしで完了した。初回のタイムアウトは別証跡`p3-datatable-foreach-timeout-breakpoint-20260911.json`へ分離する。
 
 今回の追加採取: CSV読取りとDataTable変数参照での書出し
 - 入力fixtureは `ID,Name,Status`、日本語と二重引用符を含む3行CSV。

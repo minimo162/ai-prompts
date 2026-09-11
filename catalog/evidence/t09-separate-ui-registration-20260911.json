@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T16:55:00+09:00",
+  "case": "T09",
+  "status": "BLOCKED_RUNTIME_DEPENDENCY",
+  "scope": "Separate PAD flow and synthetic local Edge page only; no external site, account, or business data.",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "edge_extension_version": "2.70.0.35",
+    "fixture_url": "http://127.0.0.1:8765/t09-local-test.html",
+    "wait_robin": "WAIT 500",
+    "wait_unit_interpretation": "PADの待機アクション値。500ms実測は、UI要素解決失敗で下流へ到達しないため未確認。既存の一時WAIT=1 probeは別証跡。"
+  },
+  "separate_flow": {
+    "name": "RobinKnowledgeT09Separate_20260911",
+    "designer_process_id": 10092,
+    "source_robin": "catalog/generated/normal-chat-current-bundle-final3-t09-live-20260911/robin.txt",
+    "source_sha256": "7d391e821a5f13302b46b6bc47f30303a2ad3a59c62b7b191cef15888a27b6d9",
+    "paste_save_evidence": "evidence/t09-separate-pad-paste-save-20260911.json",
+    "action_count": 6,
+    "actions": ["LaunchEdge", "PopulateTextField", "Click", "WAIT 500", "GetDetailsOfElement Own Text", "CloseWebBrowser"]
+  },
+  "ui_element_registration": {
+    "picker_opened": true,
+    "picker_process_id": 10092,
+    "capture_attempts": 2,
+    "added_count": 1,
+    "added_element": "Window 'T09 local PAD test - 個人 - Microsoft Edge'",
+    "appmask_root_observed": true,
+    "control_repository_after": ["ローカル コンピューター > Window 'T09 local PAD test - 個人 - Microsoft Edge'"],
+    "required_elements": [
+      {"name":"Input text 't09-input'", "registered":false},
+      {"name":"Button '実行'", "registered":false},
+      {"name":"Paragraph '未実行'", "registered":false}
+    ],
+    "dom_children_observed": false,
+    "note": "UI要素ピッカーの階層にはEdgeのWindow/Paneのみが表示され、入力・ボタン・結果段落のWeb DOM要素を別要素として登録できなかった。追加したWindow要素は要求3要素の代替ではない。"
+  },
+  "designer_state": {
+    "error_count": 3,
+    "errors": [
+      "UI 要素 Input text 't09-input' が見つかりません",
+      "UI 要素 Button '実行' が見つかりません",
+      "UI 要素 Paragraph '未実行' が見つかりません"
+    ],
+    "start_enabled": false,
+    "execution_started": false
+  },
+  "edge_route_probe": {
+    "launch_flow": "RobinKnowledgeT09EdgeLaunch_20260911",
+    "launch_flow_process_id": 44324,
+    "paste_save": "evidence/t09-edge-launch-paste-20260911.json",
+    "run": "evidence/t09-edge-launch-run-20260911b.json",
+    "run_status": "success",
+    "browser_variable_preview": "Web ブラウザー インスタンス",
+    "target_page_observed_in_pad_picker": false,
+    "interpretation": "LaunchEdge単独のPAD完了は確認したが、Edge対象ページのWeb DOM要素とWebAutomation要求完了は確認できない。Launch成功をT09通し成功へ拡張しない。"
+  },
+  "acceptance": "not_accepted",
+  "next_action": "PADのEdge拡張/native-host接続が実際にWeb DOM要素を返す条件で、同じ6アクションを無修正再実行し、Input/Button/Paragraphのappmask、AttributeValue=T09-clicked、ブラウザー終了を2回記録する。設定変更やCDP代行は受入に使わない。"
+}

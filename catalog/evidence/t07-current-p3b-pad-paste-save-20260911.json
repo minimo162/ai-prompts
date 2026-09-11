@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-11T10:26:26.0641444Z",
+    "flow_name":  "RobinKnowledgeT07P3bLive_20260911",
+    "source_robin":  ".\\catalog\\generated\\normal-chat-current-bundle-p3b-t07-live-20260911\\robin.txt",
+    "source_sha256":  "07586350d86076fcacea46f6f3a6b5901bfc67a61278c96f046fd2ccc37b6bd1",
+    "source_bytes":  447,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  2,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

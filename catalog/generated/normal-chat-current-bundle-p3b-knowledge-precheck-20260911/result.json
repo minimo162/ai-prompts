@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T17:18:00+09:00",
+  "case": "knowledge_precheck",
+  "status": "PASS_REFERENCE_ONLY",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/05d11515-5209-4643-bcbc-211d96125195",
+  "browser": "Chrome normal M365 Copilot chat",
+  "model_display_before_send": "自動",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
+  "attachments": [
+    "PAD-Robin-Knowledge-Bundle.txt",
+    "agent-instructions.txt"
+  ],
+  "attachment_uploads": {
+    "bundle_uploaded": true,
+    "instruction_uploaded": true,
+    "one_drive_personal_notice_observed": true,
+    "max_files_per_upload_observed": 5,
+    "initial_seven_file_attempt": "REJECTED_LIMIT_EXCEEDED"
+  },
+  "prompt": {
+    "path": "catalog/generated/normal-chat-current-bundle-p3b-knowledge-precheck-20260911/prompt.txt",
+    "sha256": "522255254d5b605262849c5b906642e406e49fee18d0f97094ab3656b205edb3",
+    "observed_text_length": 225,
+    "full_agent_instructions_typed": false,
+    "note": "agent-instructions.txtは実ファイル添付したが、本文欄へ全文貼付けはこのrunでは未達。次の受入runで全文入力を別証跡化する。"
+  },
+  "response": {
+    "path": "catalog/generated/normal-chat-current-bundle-p3b-knowledge-precheck-20260911/response.txt",
+    "sha256": "7176be1b6fb71d30e5c09dcdc024e5a1022e7a76e87f083c1a612e000acd1164",
+    "observed_dom_text_length": 2145,
+    "saved_file_chars_with_final_newline": 2146,
+    "robin_blocks": 0,
+    "response_observed": true,
+    "knowledge_points_observed": [
+      "PAD 2.71.115.26224 / Japanese UI / Power Fx OFF",
+      "DataTable row insertion",
+      "DataTable cell update",
+      "DataTable iteration",
+      "Excel DataTable iteration",
+      "T09 Web/UI runtime remains extension-dependent and unconfirmed"
+    ]
+  },
+  "acceptance": "reference_only_not_case_acceptance"
+}

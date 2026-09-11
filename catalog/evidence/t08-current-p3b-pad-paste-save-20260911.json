@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T22:00:00+09:00",
+  "status": "PASS_EXPECTED_ERROR_WITH_UNCONFIRMED_NAMED_MATCH",
+  "flow": { "name": "RobinKnowledgeT08P3bLive_20260911", "process_id": 32840, "pad_file_version": "2.71.115.26224", "empty_before_paste": true, "designer_action_count": 4, "visible_action_count": 4, "designer_status_after_paste": "4 アクション" },
+  "paste": { "source_robin": "catalog/generated/normal-chat-current-bundle-p3b-t08-live-20260911/robin.txt", "source_sha256": "7afd570bf8800285bb784b61dcb11e61ca6a35930997bdf5c3966c635311ab88", "source_bytes": 384, "paste_confirmed": true, "saved_confirmed": true, "hand_edit_applied": false },
+  "boundary": "The named FileNotFound branch remains an unconfirmed match; the run was accepted only for the observed default error handling and LastError result.",
+  "runs": ["evidence/t08-current-p3b-pad-run1-20260911.json", "evidence/t08-current-p3b-pad-run2-20260911.json"]
+}

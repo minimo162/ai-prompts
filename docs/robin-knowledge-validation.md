@@ -233,3 +233,11 @@ PADで採取した`ERROR => LastError Reset: True`と2回の欠損ファイル�
 # Final3 fixed-version validation (2026-09-11)
 
 The fixed instruction/bundle pair is `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e` / `2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7`. Fresh normal M365 Copilot responses were preserved before PAD use. T01-T08 and T10 each have unmodified Robin paste/save and two PAD runs; T01/T04/T10 additionally have separate-chat/separate-flow retests. T09's valid six-action Robin was pasted and saved, but all three captured web controls were missing at runtime and Run was disabled. Do not substitute DOM/manual clicks or treat this as a success. The package remains `partial/OPEN`.
+
+## 2026-09-11 P3教材統合後の再受入状態
+
+DataTable行追加・セル更新・行反復とExcel行反復の専用probe成功（各2回、初回停止は分離）を7原本へ統合し、bundle `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5`、マニフェスト `copilot/knowledge-bundle-manifest-20260911h.json` を固定した。Final3 `2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7` の受入済み証跡は履歴として保全し、新bundleへ継承していない。
+
+新bundleの通常M365 Copilot知識precheck、T01〜T10、独立T01/T04/T10、負例は未実行である。T09別空フロー `RobinKnowledgeT09Separate_20260911` は6アクション貼付け・保存まで確認したが、UI要素ピッカーでEdgeのWindow/Paneしか列挙されず、Input/Button/Paragraphの登録に至らなかった。Designerエラー3件・Start無効・Run未開始を証跡化した。LaunchEdge単独フローのRun完了は、Web DOM要素・WebAutomation要求完了を示さないためT09成功へ拡張していない（`catalog/evidence/t09-separate-ui-registration-20260911.json`）。
+
+Issue #5は`partial／OPEN`。残りは新bundle同一版の通常チャット＋PAD全件受入、独立再試験、負例、T09拡張接続復旧、未確認P3（リスト取得、カスタム日時書式、入れ子／branch side effect、名前付きカスタムエラー一致）である。

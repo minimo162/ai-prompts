@@ -1,0 +1,1 @@
+合成CSV C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\csv\\t02-input-20260910.csv をUTF-8で読み、Status列が「対象」の行だけを C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t02-output-20260910.csv へ新しいCSVとして保存するPADフロー案を作成してください。入力CSVは変更せず、列数・日本語・カンマを含む引用フィールド・二重引用符を保持してください。フィルター条件とCSVの列名・区切り・上書き設定を明示し、未採取のアクションや設定は推測しないでください。貼り付け用Robinと設定・依存・期待結果を分け、Robinコードブロックは実際の命令だけにしてください。

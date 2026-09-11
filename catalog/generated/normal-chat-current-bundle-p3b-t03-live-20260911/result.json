@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T18:42:00+09:00",
+  "case": "T03",
+  "status": "NOT_ACCEPTED_CURRENT_BUNDLE_NO_ROBIN",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/d4d8efbb-a951-434a-b2e6-443447cbc889",
+  "browser": "Chrome normal M365 Copilot chat",
+  "model": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
+  "attachments_in_user_message": ["PAD-Robin-Knowledge-Bundle", "agent-instructions"],
+  "full_instruction_body_match_before_send": true,
+  "response_sha256_utf8": "ae02515efad7fbc6e781fa772ff04a5a6db5a2e5d0e92f705fd3b5aeba2a0237",
+  "response_file_sha256_utf8": "0e4e446b6ba8f90327d7899154e80f348700b55184f13927ebcc5e046500e7d0",
+  "response_chars_observed": 755,
+  "response_file_chars": 756,
+  "generated_response": "catalog/generated/normal-chat-current-bundle-p3b-t03-live-20260911/response.txt",
+  "generated_robin": { "code_blocks": 0, "path": null, "raw_unmodified": false },
+  "pad": { "status": "NOT_RUN_NO_ACCEPTABLE_ROBIN" },
+  "boundary": "Copilot explicitly marked strict extension/name retrieval, strict suffix matching, and the complete assembled flow as unconfirmed, then returned no Robin code block. Existing Final3 T03 acceptance cannot be inherited because its bundle hash differs.",
+  "acceptance": "NOT_ACCEPTED_CURRENT_BUNDLE"
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T20:20:00+09:00",
+  "case": "T06",
+  "status": "PASS_CURRENT_BUNDLE",
+  "input": {
+    "path": "catalog/fixtures/word/word-catalog.docx",
+    "sha256_before": "2753855b1e6b7b8dccc857cb60ad1f9bf548908fbd10fea8dc8efa2ff8003cbd",
+    "sha256_after_run2": "2753855b1e6b7b8dccc857cb60ad1f9bf548908fbd10fea8dc8efa2ff8003cbd",
+    "unchanged": true
+  },
+  "output": {
+    "path": "catalog/evidence/normal-chat-t06-final.docx",
+    "observed_after_run2_sha256": "a48337cfabce42439d69d41144ee3f25fecc2f53eb83d8eb9d9b98c353d2ac20",
+    "contains_T06Replaced": true,
+    "contains_OfficeCatalog": false,
+    "direct_python_docx_read": true
+  },
+  "pad_runs": ["evidence/t06-current-p3b-pad-run1-20260911.json", "evidence/t06-current-p3b-pad-run2-20260911.json"],
+  "protected_output_restored_after_run": true,
+  "acceptance": "PASS_CURRENT_BUNDLE"
+}

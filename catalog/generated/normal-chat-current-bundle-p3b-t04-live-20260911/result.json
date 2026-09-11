@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T18:55:00+09:00",
+  "case": "T04",
+  "status": "PASS_CURRENT_BUNDLE",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/c3d0bb4d-7f07-47b5-b430-1b17afca61b0",
+  "browser": "Chrome normal M365 Copilot chat",
+  "model": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
+  "attachments_in_user_message": ["PAD-Robin-Knowledge-Bundle", "agent-instructions"],
+  "full_instruction_body_match_before_send": true,
+  "generated_response": "catalog/generated/normal-chat-current-bundle-p3b-t04-live-20260911/response.txt",
+  "generated_response_observed_chars": 3617,
+  "generated_robin": {
+    "path": "catalog/generated/normal-chat-current-bundle-p3b-t04-live-20260911/robin.txt",
+    "sha256": "e1a7b111ce7af4eed7bea1e186f5396d364f7ec86d4f9be0e3ff2a6fc1cfc1a1",
+    "bytes": 1580,
+    "code_blocks": 1,
+    "action_count": 9,
+    "filter_empty_literal_quote_count": 6,
+    "raw_unmodified": true
+  },
+  "pad": {
+    "status": "PASS_CURRENT_BUNDLE_LOGICAL_OUTPUT",
+    "flow_name": "RobinKnowledgeT04P3bLive2_20260911",
+    "paste_save": "evidence/t04-current-p3b-pad-paste-save-20260911.json",
+    "run1": "evidence/t04-current-p3b-pad-run1-20260911.json",
+    "run2": "evidence/t04-current-p3b-pad-run2-20260911.json",
+    "output_comparison": "evidence/t04-current-p3b-pad-output-comparison-20260911.json"
+  },
+  "boundary": "Copilot marked sheet selection and output collision handling as unconfirmed and said this changed-output-path version was not yet pasted or run.",
+  "acceptance": "PENDING_PAD"
+}

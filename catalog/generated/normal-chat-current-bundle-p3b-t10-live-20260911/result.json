@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T22:30:00+09:00",
+  "case": "T10",
+  "status": "PASS_CURRENT_BUNDLE",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/88cbaf71-18f8-44f3-9313-1478519ea4eb",
+  "browser": "Chrome normal M365 Copilot chat",
+  "model": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
+  "context_attachment": { "name": "T10-Knowledge-Flow-Bundle.txt", "sha256": "58de8ddb24e6f1a17e887d8f3c2b421e79671e5fdc4c4d7f97eea500d2a56319", "source_bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5" },
+  "attachments_in_user_message": ["PAD-Robin-Knowledge-Bundle", "T10-Knowledge-Flow-Bundle"],
+  "full_instruction_body_match_before_send": true,
+  "generated_response": "catalog/generated/normal-chat-current-bundle-p3b-t10-live-20260911/response.txt",
+  "generated_response_observed_chars": 1829,
+  "generated_robin": { "path": "catalog/generated/normal-chat-current-bundle-p3b-t10-live-20260911/robin.txt", "sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12", "bytes": 1752, "code_blocks": 1, "action_count": 16, "raw_unmodified": true, "outside_scope_mutations": false },
+  "pad": { "status": "PASS_CURRENT_BUNDLE", "flow_name": "RobinKnowledgeT10P3bLive_20260911", "paste_save": "evidence/t10-current-p3b-pad-paste-save-20260911.json", "run1": "evidence/t10-current-p3b-pad-run1-20260911.json", "run2": "evidence/t10-current-p3b-pad-run2-20260911.json", "output_comparison": "evidence/t10-current-p3b-output-comparison-20260911.json" },
+  "acceptance": "PENDING_PAD"
+}
