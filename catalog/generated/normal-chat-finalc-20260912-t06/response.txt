@@ -1,0 +1,65 @@
+Copilot said:
+
+以下は、添付ナレッジに収録されたWord操作の実測原文だけを組み合わせたPADフロー案です。各アクション単体のRobin形式は採取済みですが、この入力パス、置換語、出力パスによる4アクションの組み合わせは貼り付け・実行未確認として扱います。
++ 1
+
+1. 前提・対象範囲・未確認点
+目的: 合成Word文書内の OfficeCatalog をすべて T06Replaced に置換し、別ファイルへ保存する。
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx
+Wordインスタンス: WordInstance
+起動設定: 表示あり、ReadOnly: False
+置換設定: ワイルドカードなし、全件置換、大文字小文字を区別しない、単語全体だけには限定しない。
+保存形式: Word.WordFormat.FromExtension。出力パスの .docx 拡張子から保存形式を決める実測設定。
+終了処理: 別名保存後、同じ WordInstance を Word.CloseWord.Close で閉じる。
+元ファイル保持: 元パスに保存せず、別の出力パスへSave Asする構成。
+
+ナレッジでは、既存Word文書の編集可能起動、リテラル全件置換、docx別名保存、保存後の終了がそれぞれ採取されています。また、既存のWord組み合わせ例では対象外本文と元文書のハッシュ不変を照合しています。表、書式、テンプレートなどを対象とした個別の保持検証は未確認です。
+
+上書き可否は未指定です。 Word.SaveWord.SaveAs の収録原文には衝突時の引数がなく、既存出力ファイルを上書きできるかはナレッジから確認できません。初回テスト前に、出力先に同名ファイルが存在しないことを確認してください。
+
+2. PADで先に確認する設定・依存
+入力文書が存在し、テスト用の合成文書であることを確認します。
+出力先フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence が存在することを確認します。
+normal-chat-t06-final.docx が既に存在する場合は、削除や上書きを自動化せず、別の安全なテスト名へ退避します。
+新しい空フローの対象サブフロー、通常は Main に、以下の4アクションをまとめて貼り付けます。
+WordInstance は事前作成しません。1行目の「Wordを起動する」がWordインスタンスとして生成し、後続3行が同じインスタンスを参照します。
+UI要素や既存Wordインスタンスへの接続は不要です。ただし、デスクトップ版WordがPADから起動可能であることが環境依存の前提です。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: 新しい空フローへ4アクションすべてを貼り付け
+
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t06-final.docx'''
+Word.CloseWord.Close Instance: WordInstance
+
+根拠は、PAD-Robin-Knowledge-Bundle内の catalog/actions/word-launch/open-editable.robin、catalog/actions/word-replace/all-literal.robin、catalog/actions/word-save/as-docx-extension.robin、catalog/actions/word-close/no-save.robin です。編集可能起動の原文はPADから採取済みですが、上記4行をこのパスと置換値で組み合わせたものは静的構成であり、別フローへの再貼り付け・実行・成果物照合は未実施です。
+
+4. PADデザイナーでの確認
+
+貼り付け直後、次を確認してください。
+
+アクション数が4件である。
+順序が「Word起動 → 検索と置換 → 別名保存 → Word終了」である。
+1行目が WordInstance を生成している。
+2～4行目がすべて同じ WordInstance を参照している。
+起動アクションの「読み取り専用」がオフになっている。
+検索と置換が「ワイルドカードなし」の全件置換になっている。
+検索文字列が OfficeCatalog、置換後が T06Replaced である。
+保存形式が「拡張子から」相当になっており、出力パスが元ファイルと異なる。
+赤いエラー表示や未定義変数がない。
+終了アクションが別名保存より後にある。
+5. 合成データでの実行・期待結果の照合
+実行前に入力ファイルを複製するか、少なくとも入力ファイルの更新日時とSHA-256を記録します。
+出力先に同名ファイルがない状態でフローを保存します。
+1回だけ実行し、4アクションすべてが完了したことを確認します。
+出力文書をWordで開き、本文中に OfficeCatalog が残っていないことを確認します。
+T06Replaced が、元文書に存在した OfficeCatalog と同じ出現箇所数だけ存在することを確認します。
+指定文字列以外の本文を入力文書と比較し、変更されていないことを確認します。
+入力ファイルのSHA-256を再取得し、実行前と一致することを確認します。
+出力文書が正常に開けることを確認してから、必要なら同じ条件で再実行します。出力が既に存在する状態での再実行は上書き挙動が未確認なので、そのまま行わないでください。
+根拠と改善点
+
+ナレッジに存在するWord命令名、引数、列挙値、インスタンス型だけを使用し、推測による上書き設定や書式保持用アクションは追加していません。元ファイルを保存対象にせず、編集可能起動した文書を明示的な別パスへ保存してから閉じることで、要求された元ファイル保持を検証できる構成にしています。

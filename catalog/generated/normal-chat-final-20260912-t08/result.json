@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T02:55:00+09:00",
+  "case": "T08",
+  "status": "PASS_FINAL_20260912_EXPECTED_ERROR",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/312bb292-9e8c-4831-b098-bb15a31bc99d",
+  "conversation_title": "PADで存在しないファイル読み取り設計",
+  "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension)",
+  "model_label_on_page": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041",
+  "attachments_in_user_message": [
+    "agent-instructions.txt",
+    "PAD-Robin-Knowledge-Bundle.txt"
+  ],
+  "body": {
+    "file": "sent-body.txt",
+    "sha256": "891ea095ae7288279ee61efde4c020a993cf510e284bdd21e516af0a56ee94b9",
+    "chars": 4306,
+    "composer_verification": "composer <p> join SHA matched before send"
+  },
+  "generated_response": "response.txt",
+  "generated_robin": {
+    "path": "robin.txt",
+    "sha256": "d712ab28e1024639825fa73d429c1b9f82ee807d7492fafbfdb1c7860df5a956",
+    "code_blocks": 1,
+    "lines": 7,
+    "per_line_lengths": [
+      5,
+      14,
+      42,
+      3,
+      187,
+      3,
+      30
+    ],
+    "markdown_escapes": 0,
+    "nbsp": 0,
+    "cr": 0,
+    "extraction": "pre.textContent read via DOM (JSON-escaped output); robin.txt written line by line from that text and the per-line lengths re-verified. Differs from the P3b answer: no named FileNotFound rule this time, only the measured default handler.",
+    "raw_unmodified": true
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT08FinalLive_20260912",
+    "designer_process_id": 31808,
+    "paste_save": "../../evidence/t08-final-20260912-pad-paste-save-20260912.json",
+    "action_count_after_paste": 4,
+    "recopy": "pad-recopy.robin",
+    "recopy_sha256": "b9b4e75950e9f2e02acf7f998837cf0e73e8031b34995f5133f3334bc8aee436",
+    "recopy_note": "PAD recopy adds a trailing space after BLOCK and CRLF; instruction lines otherwise equal",
+    "run1": "../../evidence/t08-final-20260912-pad-run1-20260912.json",
+    "run2": "../../evidence/t08-final-20260912-pad-run2-20260912.json",
+    "missing_file_exists_before_after": false,
+    "expected": {
+      "ErrorHandledDefault": "true",
+      "LastError_contains": "が見つかりません",
+      "no_write_no_marker": true
+    },
+    "observed": {
+      "run1": {
+        "ErrorHandledDefault": "true",
+        "LastError": "ファイル ...\t08-missing-20260910.txt が見つかりません"
+      },
+      "run2": {
+        "ErrorHandledDefault": "true",
+        "LastError": "ファイル ...\t08-missing-20260910.txt が見つかりません"
+      }
+    },
+    "named_FileNotFound_match": "not part of this answer; still unverified"
+  },
+  "acceptance": "PASS_FINAL_20260912_EXPECTED_ERROR"
+}

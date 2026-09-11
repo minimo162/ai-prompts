@@ -24,12 +24,25 @@ PADのUI要素やブラウザーアクションを一般的なセレクターや
 - 有効な停止ボタンを一度だけ押し、PADが「準備完了」へ戻った。`T09-clicked`は未観測で、これはWAIT=1秒へ一時変更した別probeの成功とは分離する。
 - 証拠: `catalog/evidence/p3-t09-current-runtime-reprobe-20260911.json`。拡張機能・WebDriver・通信方式を推測したり、既存タブを閉じたりしない。
 
-2026-09-11 T09のPAD採取済みアクション行（生成根拠として掲載）
-- `catalog/flows/ui-t09-local-roundtrip/roundtrip.robin` のアクション行は6行で、原文SHA-256 `93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd`。下記はControlRepository画像データを除いた、PADから取得した実行命令行の逐語部分である。
+2026-09-12 T09のPAD採取済みアクション行（生成根拠として掲載。待機は1秒）
+- `catalog/flows/ui-t09-local-roundtrip/roundtrip-wait1-20260912.robin` のアクション行は6行で、原文SHA-256 `d8913da95757f5fff4d3d7b10c40c35120d76882dc4d516356c9c3ddf06c5571`。2026-09-10採取の`roundtrip.robin`（SHA-256 `93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd`）をPADへ貼り付け、待機ダイアログ（「指定された秒数だけフローの実行を中断します」）で期間を500から1へ変更して保存・再コピーしたもので、差分は4行目の`WAIT 500`→`WAIT 1`のみ。下記はControlRepository画像データを除いた、PADから取得した実行命令行の逐語部分である。
 WebAutomation.LaunchEdge.LaunchEdge Url: $'''http://127.0.0.1:8765/t09-local-test.html''' ClearCache: False ClearCookies: False WindowState: WebAutomation.BrowserWindowState.Normal WaitForPageToLoadTimeout: 60 Timeout: 60 PiPUserDataFolderMode: WebAutomation.PiPUserDataFolderModeEnum.AutomaticProfile TargetDesktop: $'''{\"DisplayName\":\"ローカル コンピューター\",\"Route\":{\"ServerType\":\"Local\",\"ServerAddress\":\"\"},\"DesktopType\":\"local\"}''' BrowserInstance=> Browser
 WebAutomation.PopulateTextField.PopulateTextFieldUsePhysicalKeyboard BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Input text \'t09-input\''] Text: $'''T09-input''' Mode: WebAutomation.PopulateTextMode.Replace UnfocusAfterPopulate: True WaitForPageToLoadTimeout: 60
 WebAutomation.Click.Click BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Button \'実行\''] ClickType: WebAutomation.ClickType.LeftClick MouseClick: True WaitForPageToLoadTimeout: 60 MousePositionRelativeToElement: WebAutomation.RectangleEdgePoint.MiddleCenter OffsetX: 0 OffsetY: 0
-WAIT 500
+WAIT 1
 WebAutomation.GetDetailsOfElement BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Paragraph \'未実行\''] AttributeName: $'''Own Text''' AttributeValue=> AttributeValue
 WebAutomation.CloseWebBrowser BrowserInstance: Browser
 - この掲載はPADから取得したアクション行の技術資料であり、現行bundleへの統合後も、ブラウザー拡張経路の完走・`AttributeValue=T09-clicked`・ブラウザー終了は別のライブ受入条件である。未確認のセレクターや引数を追加しない。
+
+2026-09-12 T09の通し実行（採取原文＋UI要素リポジトリ、別の空フロー）
+- 新しい空フロー`RobinKnowledgeT09Repo_20260912`へ、ControlRepositoryを含む採取原文`catalog/flows/ui-t09-local-roundtrip/roundtrip.robin`（SHA-256 `93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd`）をファイルから貼り付けた。貼付けだけで`Input text 't09-input'`、`Button '実行'`、`Paragraph '未実行'`の3要素がフローへ登録され、Designerエラーは0件だった。
+- 実行すると、Edge起動→入力→クリックまで数秒で進み、4番目の`WAIT 500`で「500 秒を待機します」と表示されたまま約8分20秒待機した後、結果取得と終了まで完了した。変数プレビューは`AttributeValue=T09-clicked`、`Browser=Web ブラウザー インスタンス`。証拠: `catalog/evidence/t09-repo-run1-acceptance-20260912.json`、`t09-repo-run1-completion-20260912.json`、`t09-repo-run2-20260912.json`。
+- `WAIT n`の`n`は秒である。`WAIT 500`は500秒（8分20秒）であり、ミリ秒ではない。これまで80〜207秒で停止した実行は、待機中に監視を打ち切ったものであり、WebAutomation失敗の証拠ではない。2026-09-10採取の`WAIT 500`は500ミリ秒のつもりで設定した誤りであり、生成では使わない。クリック後の待機は`WAIT 1`（1秒）を使う（下記「2026-09-12 待機1秒での通し実行」）。
+- BrowserNativeMessageHostのログは`browserType: MicrosoftEdge`、`Negotiating`まで記録し、Edge用拡張`kagpabjoboikccfdghpdlaaopmgpgfdc`（2.70.0.35）が接続した。ChromeのPAD拡張originのhostプロセスはこの成功の根拠ではない。
+- 通常チャットが生成する6行にはControlRepository（要素のセレクター・画像）が含まれない。生成Robinを貼り付ける先のフローには、上記3要素が事前に登録されている必要がある。実測済みの登録方法は、採取原文をそのフローへ一度貼り付けて要素を取り込み、その6アクションを削除してから生成Robinを貼り付ける手順（`catalog/evidence/t09-gen-*-20260912.json`）。UI要素ピッカーでEdgeのDOM要素を新規に捕捉する経路は、2026-09-11の別フローではWindow/Paneしか返らなかった（`t09-separate-ui-registration-20260911.json`）。
+- 未確認: 別URL・別要素、`WAIT`以外の待機アクション、Edge以外のブラウザー、拡張が無効な環境での挙動。
+
+2026-09-12 待機1秒での通し実行（採取原文＋UI要素リポジトリ、別の空フロー）
+- 新しい空フロー`RobinKnowledgeT09Wait1_20260912`へ採取原文`roundtrip.robin`をファイルから貼り付け（6アクション、3要素登録）、4番目の待機アクションをダイアログで1秒に変更して保存した。再コピー原文は`catalog/flows/ui-t09-local-roundtrip/roundtrip-wait1-20260912.robin`（SHA-256 `d8913da95757f5fff4d3d7b10c40c35120d76882dc4d516356c9c3ddf06c5571`）で、4行目が`WAIT 1`、他の5行は2026-09-10採取と同一。
+- 2回実行し、いずれも120秒の監視内（数秒）で`AttributeValue=T09-clicked`、`Browser=Web ブラウザー インスタンス`、ブラウザー終了、準備完了への復帰を確認した。証拠: `catalog/evidence/t09-wait1-acceptance-20260912.json`、`t09-wait1-pad-run1-20260912.json`、`t09-wait1-pad-run2-20260912.json`。
+- T09を生成するときの待機行は`WAIT 1`とする。`WAIT 500`は履歴（誤設定）であり、生成しない。

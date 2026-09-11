@@ -1,0 +1,14 @@
+{
+ "schema_version": 1,
+ "case": "T02",
+ "status": "PASS_FIXTURE",
+ "bundle_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+ "generated_robin": {
+  "code_blocks": 1,
+  "raw_unmodified": true
+ },
+ "pad": {
+  "run1": "runs/T02-run1.json",
+  "run2": "runs/T02-run2.json"
+ }
+}

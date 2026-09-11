@@ -1,0 +1,59 @@
+Copilot said:
+
+以下は、添付の実測ナレッジに収録されたT01の3アクション構成を、そのまま使うフロー案です。対象は合成入力で、UTF-8読取り、通常置換、UTF-8上書き保存を行い、入力にない改行は追加しません。
+
+1. 前提・対象範囲
+対象サブフロー: Main
+処理対象: 指定された合成テキストファイル
+検索語: 「対象語」
+置換語: 「置換後」
+置換方式: 通常置換、大小文字を区別、エスケープシーケンス無効
+入力変数: FileContents、テキスト型として読取りアクションが生成
+出力変数: Replaced、テキスト型として置換アクションが生成
+保存方式: UTF-8、既存出力がある場合は上書き
+追加改行: なし
+前提アプリ・UI要素: 不要
+
+この3アクションの原文は、PAD-Robin-Knowledge-Bundle内の catalog/generated/normal-chat-current-bundle-t01-live-20260911/robin.txt に対応しています。記録上はPAD 2.71.115.26224、日本語UI、Power Fx OFFの環境で、無修正貼付け、保存、2回の実行、期待出力との照合まで行われています。ただし、これは収録時点の履歴bundleに対する実測であり、今回の貼り付け先環境での再実測ではありません。
+
+2. PADで先に行う設定
+PADで新しいフローを作成するか、検証用フローを複製します。
+Mainサブフローを開き、貼り付け先を空にします。
+出力先に既存ファイルがある場合は上書きされるため、必要なら事前に退避します。
+入力変数を手動作成する必要はありません。1番目のアクションがFileContentsを生成し、2番目がReplacedを生成します。
+次のコードフェンス内の3行だけをMainへ貼り付けます。
+[code block: see robin.txt]
+File.ReadTextFromFile.ReadText File: $'''C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+File.WriteText File: $'''C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+3. デザイナー上での確認
+
+貼り付け直後に、次を確認してください。
+
+アクション数が3個
+順序が読取り、置換、書込み
+1番目の生成変数がFileContents
+2番目の入力がFileContents、生成変数がReplaced
+3番目の書込み値が文字列リテラルではなく、変数Replaced
+置換が正規表現ではなく通常置換
+IgnoreCaseがFalse
+ActivateEscapeSequencesがFalse
+AppendNewLineがFalse
+既存ファイルの処理が上書き
+各アクションにデザイナーエラーが表示されていない
+
+AppendNewLine: Falseは、入力テキスト自身の末尾改行を保持しつつ、保存アクションによる追加改行を出さない実測設定です。
+
+4. 実行と結果照合
+入力ファイルを複製した合成データで実行します。
+出力ファイルが指定先に作成されたことを確認します。
+すべての「対象語」が「置換後」へ変わっていることを確認します。
+対象外の文字、日本語、引用符、特殊文字、バックスラッシュ、既存の行区切りが保持されていることを確認します。
+入力になかった末尾改行が追加されていないことを確認します。
+入力ファイルが変更されていないことを確認します。
+出力を退避してもう一度実行し、同じ論理内容になることを照合します。
+
+収録された実測では、出力はUTF-8 BOM付き、CRLF、入力不変として照合されています。ただし、今回も同じ条件になることは、貼り付け先のPADで保存・実行し、出力内容を確認した時点で確定します。
+
+ソース

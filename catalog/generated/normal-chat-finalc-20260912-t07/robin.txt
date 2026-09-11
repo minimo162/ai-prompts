@@ -1,0 +1,2 @@
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 2 DetectLayout: False ExtractedText=> ExtractedPDFText
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt''' TextToWrite: ExtractedPDFText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8

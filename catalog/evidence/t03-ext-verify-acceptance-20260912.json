@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T01:00:00+09:00",
+  "case": "T03",
+  "status": "PASS_PROBE_SEPARATE_FLOW_2_RUNS",
+  "purpose": "Verify the strict extension branch (CurrentFile.Extension = '.txt') captured from PAD settings: .txt files are read, .csv/.md take the Else path, every file is visited once, inputs unchanged.",
+  "environment": {"pad_package_version": "11.2608.115.0", "language": "ja-JP", "power_fx": false},
+  "capture_flow": {
+    "name": "RobinKnowledgeT03ExtVerify_20260912",
+    "designer_process_id": 27260,
+    "first_paste_source": "catalog/flows/t03-extension-branch/verify-source-20260912.robin",
+    "first_paste_source_sha256": "2323abe953e5c63e82beda2340a5cfd22893132b1649ee9c4448a77f59a4d6a9",
+    "first_paste_result": "13 actions pasted but Designer error list showed 2 errors (lines 8 and 11: パラメーター '変数名' は変数である必要があります). Cause: the composed lines used Variables.IncreaseVariable Value: $'''TxtCount''' (string literal) copied from the earlier boundary record p3-excel-foreach-flow-state-20260911.robin. That form is invalid.",
+    "fix_method": "Opened each 変数を大きくする dialog, cleared 変数名, selected TxtCount / OtherCount from the {x} variable picker (dialog showed %TxtCount% / %OtherCount%), saved. Error list became 0. No text-level hand edit of Robin.",
+    "raw_after_fix": "catalog/flows/t03-extension-branch/capture-pad-copy-20260912.robin",
+    "raw_after_fix_sha256": "c15a5970640f9d0bcb322b5655bffca3b7b84ad4a86f31c67e064d60fb9398e4",
+    "raw_after_fix_action_count": 13
+  },
+  "reuse_flow": {
+    "name": "RobinKnowledgeT03ExtRun_20260912",
+    "designer_process_id": 27692,
+    "created_via": "Console UIA (new empty flow)",
+    "pasted_unmodified": "catalog/flows/t03-extension-branch/capture-pad-copy-20260912.robin",
+    "paste_save": "catalog/evidence/t03-ext-run-paste-save-20260912.json",
+    "action_count_after_paste": 13,
+    "recopy": "catalog/flows/t03-extension-branch/run-pad-recopy-20260912.robin",
+    "recopy_sha256": "c15a5970640f9d0bcb322b5655bffca3b7b84ad4a86f31c67e064d60fb9398e4",
+    "recopy_equals_source": true
+  },
+  "input_fixtures": [
+    {"name": "copy-input-20260909.txt", "sha256": "2f44465e82ecddc43596681fbc5e2eacdbcbe34b5aaea49744e4c7347ee58df7"},
+    {"name": "t03-alpha.txt", "sha256": "66401eea553ce48f5a96dcde7204b05d18ef5d19b392dfbbbc271c53973a4d92"},
+    {"name": "t03-beta.csv", "sha256": "06b45abdfa981c3ffbcc866928d1024cb149008f3830f7d25995de3eb82356ab"},
+    {"name": "t03-gamma.md", "sha256": "5c3ceca06dcac248d60af2c9f9472f115313dae759682c67d134f0fd8c5854e6"}
+  ],
+  "expected_fixed_before_run": {
+    "TxtCount": "2", "OtherCount": "2",
+    "TxtSeen": "a .txt path", "OtherSeen": "a .csv or .md path",
+    "FileContents": "content of the last visited .txt file, never csv/md content",
+    "run1_equals_run2": true, "fixtures_unchanged": true
+  },
+  "runs": [
+    {"evidence": "catalog/evidence/t03-ext-run1-20260912.json", "status": "success", "TxtCount": "2", "OtherCount": "2", "TxtSeen": "...\t03-alpha.txt", "OtherSeen": "...\t03-gamma.md", "FileContents": "alpha 日本語  ", "CurrentFile_last": "...\t03-gamma.md"},
+    {"evidence": "catalog/evidence/t03-ext-run2-20260912.json", "status": "success", "TxtCount": "2", "OtherCount": "2", "TxtSeen": "...\t03-alpha.txt", "OtherSeen": "...\t03-gamma.md", "FileContents": "alpha 日本語  ", "CurrentFile_last": "...\t03-gamma.md"}
+  ],
+  "variable_preview_order_note": "Run-PadFlowLive lists VariablePreviewTextBlock values in the Designer's variable pane order: CurrentFile, FileContents, Files, OtherCount, OtherSeen, TxtCount, TxtSeen.",
+  "fixtures_unchanged_after_runs": true,
+  "interpretation": "TxtCount=2 and OtherCount=2 with 4 files show each file was visited exactly once and split strictly by extension; the enumeration order observed was copy-input-20260909.txt, t03-alpha.txt, t03-beta.csv, t03-gamma.md (last .txt = t03-alpha.txt, last other = t03-gamma.md).",
+  "not_verified": "Case-insensitive match (e.g. .TXT), names such as x.txt.bak or a parent folder containing '.txt', subfolders, and empty folders were not run. NoSort enumeration order is an observation, not a guarantee.",
+  "distinction": "This is capture + separate-flow reuse + 2 fixed-expectation runs. It is not yet knowledge-integrated and not a Copilot-generated T03 acceptance; see t03-current-<new bundle> records for that."
+}

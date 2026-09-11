@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T03:10:00+09:00",
+  "case": "T01",
+  "independent_retest": true,
+  "status": "PASS_FINAL_20260912_INDEPENDENT",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/686de6dc-28f5-4192-87f9-e596a279c406",
+  "conversation_title": "PAD用テキスト置換フロー案",
+  "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension), separate new chat",
+  "model_label_on_page": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041",
+  "attachments_in_user_message": [
+    "agent-instructions.txt",
+    "PAD-Robin-Knowledge-Bundle.txt"
+  ],
+  "body": {
+    "file": "sent-body.txt",
+    "sha256": "5707d9b35437600f18aedaefe9a7747000e543aac0ec3a89bd6611b2bdbafde9",
+    "chars": 4393,
+    "composer_verification": "composer <p> join SHA matched before send"
+  },
+  "generated_response": "response.txt",
+  "generated_robin": {
+    "path": "robin.txt",
+    "sha256": "2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47",
+    "code_blocks": 1,
+    "lines": 3,
+    "per_line_lengths": [
+      181,
+      214,
+      236
+    ],
+    "extraction": "pre.textContent content identical to the primary T01 answer (same 3 lines); robin.txt materialized from that identical text",
+    "raw_unmodified": true
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT01FinalIndep_20260912",
+    "designer_process_id": 36468,
+    "paste_save": "../../evidence/t01-final-20260912-independent-pad-paste-save-20260912.json",
+    "action_count_after_paste": 3,
+    "recopy": "pad-recopy.robin",
+    "recopy_sha256": "d2a7f74e6b5038557a5b0eeca1bde4468f4d4fc402a9baaf95ba7fe5e91a317b",
+    "run1": "../../evidence/t01-final-20260912-independent-pad-run1-20260912.json",
+    "run2": "../../evidence/t01-final-20260912-independent-pad-run2-20260912.json",
+    "input_sha256_before_after": "2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f",
+    "output": {
+      "expected_sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2",
+      "run1_sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2",
+      "run2_sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2",
+      "bytes": 90
+    },
+    "protected_output_restored": true
+  },
+  "acceptance": "PASS_FINAL_20260912_INDEPENDENT"
+}

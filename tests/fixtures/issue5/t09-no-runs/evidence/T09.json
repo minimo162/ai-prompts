@@ -1,0 +1,10 @@
+{
+ "schema_version": 1,
+ "case": "T09",
+ "status": "PASS_FIXTURE",
+ "bundle_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+ "generated_robin": {
+  "code_blocks": 1,
+  "raw_unmodified": true
+ }
+}

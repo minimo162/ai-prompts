@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T06:02:00+09:00",
+  "case": "T09",
+  "kind": "captured_source_recapture_wait_unit_fix",
+  "status": "PASS_CAPTURED_SOURCE_WAIT1",
+  "reason": "Original 2026-09-10 capture set the Wait action to 500 intending milliseconds (catalog action id wait-t09-500ms); PAD Wait takes seconds, so the teaching example waited 500 s. Reported by the user on 2026-09-12.",
+  "pad": {
+    "designer_process_id": 29140,
+    "flow_name": "RobinKnowledgeT09Wait1_20260912",
+    "source_paste": "t09-wait1-source-paste-20260912.json",
+    "source_sha256": "93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd",
+    "dialog_edit": "Wait action (待機) opened by double-click; dialog text 指定された秒数だけフローの実行を中断します; 期間 500 -> 1; 保存; Designer row shows 1 秒を待機します",
+    "saved": true,
+    "recopy": "catalog/flows/ui-t09-local-roundtrip/roundtrip-wait1-20260912.robin",
+    "recopy_sha256": "d8913da95757f5fff4d3d7b10c40c35120d76882dc4d516356c9c3ddf06c5571",
+    "recopy_action_count": 6,
+    "diff_vs_original": "only line 4: WAIT 500 -> WAIT 1; ControlRepository retained",
+    "run1": "t09-wait1-pad-run1-20260912.json",
+    "run2": "t09-wait1-pad-run2-20260912.json",
+    "run_results": [
+      {
+        "run": 1,
+        "run_status": "success",
+        "variable_previews": [
+          "T09-clicked",
+          "Web ブラウザー インスタンス"
+        ],
+        "observed_at": "2026-09-11T21:01:39.9966027Z"
+      },
+      {
+        "run": 2,
+        "run_status": "success",
+        "variable_previews": [
+          "T09-clicked",
+          "Web ブラウザー インスタンス"
+        ],
+        "observed_at": "2026-09-11T21:01:59.9488948Z"
+      }
+    ],
+    "expected": {
+      "AttributeValue": "T09-clicked",
+      "browser_closed": true,
+      "run_status": "success",
+      "completion": "within the 120 s monitor (seconds, not 8 min 20 s)"
+    },
+    "expectation_met": true
+  },
+  "fixture_server": "python http.server 127.0.0.1:8765 serving catalog/fixtures/ui/t09-local-test.html",
+  "preserved": "catalog/flows/ui-t09-local-roundtrip/roundtrip.robin and catalog/actions/wait/t09-500ms.robin unchanged (history)",
+  "next": "Integrate WAIT 1 as the listed T09 example into 00/05/06 knowledge, rebuild bundle, regenerate T09 and rerun full P4 on the new version"
+}

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-11T16:55:00+09:00",
-  "reconciled_at": "2026-09-11T16:55:00+09:00",
-  "reconciliation_note": "Final3 fixed-version Copilot/PAD evidence remains preserved. P3 measured DataTable row/cell/foreach and Excel foreach successes were integrated into the new bundle; the new bundle requires fresh normal-chat/PAD acceptance. T09 remains blocked because the separate-flow picker exposed only the Edge Window/Pane and Start remains disabled for the three required DOM elements. This file is not a complete PAD feature reference or execution allowlist.",
+  "generated_at": "2026-09-12T07:53:58+09:00",
+  "reconciled_at": "2026-09-12T07:53:58+09:00",
+  "reconciliation_note": "Final version f42f5acf (2026-09-12, finalc): the T09 teaching example WAIT 500 (500 s; a 500 ms intent from the 2026-09-10 capture) was re-captured as WAIT 1 from the PAD Wait dialog and run twice; 00-Index/05-UI-Web/06-Examples updated; bundle rebuilt. Knowledge precheck, T01-T10, independent T01/T04/T10 and the negative suite were then re-accepted on this single version in Chrome normal M365 chat + dedicated PAD flows. The 32aea456 round (all cases incl. T09 with 500 s waits) is preserved as history and marked superseded.",
   "environment": {
     "pad_file_version": "2.71.115.26224",
     "language": "ja-JP",
@@ -11,15 +11,20 @@
   },
   "current_package": {
     "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-    "knowledge_bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
-    "status": "partial_new_bundle_t03_no_robin_t09_runtime_p3_gaps_pending",
-    "evidence": "evidence/current-package-status-20260911-p3b.json",
-    "audit": "evidence/issue5-completion-audit-20260911-p3b.json",
-    "static_check": "evidence/current-package-static-check-20260911-p3d.json",
-    "knowledge_precheck": "evidence/current-bundle-p3b-precheck-pending-20260911.json",
-    "t01_prepared": "evidence/t01-current-bundle-prepared-20260911-p3b.json",
+    "knowledge_bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089",
+    "status": "complete_live_acceptance_finalc_20260912",
+    "evidence": "evidence/current-package-status-20260912-finalc.json",
+    "audit": "evidence/issue5-completion-audit-20260912-finalc.json",
+    "static_check": "evidence/current-package-static-check-20260912-finalc.json",
+    "knowledge_precheck": "evidence/current-bundle-finalc-precheck-20260912.json",
+    "t01_prepared": "evidence/t01-finalc-prepared-20260912.json",
     "t01_staged": "evidence/t01-current-bundle-staged-20260911.json",
-    "t01_stage_current": "evidence/t01-current-bundle-stage-expired-20260911.json"
+    "t01_stage_current": "evidence/t01-current-bundle-stage-expired-20260911.json",
+    "history": {
+      "final_20260912": "evidence/current-package-status-20260912-final.json",
+      "p3b": "evidence/current-package-status-20260911-p3b.json",
+      "working_20260912a": "evidence/t03-working-20260912a-live-acceptance-20260912.json"
+    }
   },
   "left_panel_scope": {
     "complete": false,
@@ -2006,13 +2011,13 @@
       "id": "A-list-create-add-get",
       "area": "A",
       "purpose": "リスト作成・項目追加・取出し",
-      "status": "partial",
+      "status": "partial_measured_index_probe",
       "observed_action_ids": [
         "variables-create-new-list",
         "variables-add-item-to-list"
       ],
-      "reason": "作成と追加は観測済み。項目取出しは未確認。",
-      "reference": "catalog/index.json",
+      "reason": "作成と追加は観測済み。項目取出しは変数ピッカーに項目入口が無く、ダイアログへ %CatalogList[0]% を入力してPADから再コピーした SET NewVar TO CatalogList[0] を2回実行で確認（先頭項目のみ）。",
+      "reference": "catalog/index.json; catalog/evidence/p3-list-get-index-probe-20260912.json",
       "live_ui_candidates": [
         {
           "ui_name": "リストから項目を削除",
@@ -2081,7 +2086,11 @@
       "observed_action_ids": [
         "datetime-get-current-date"
       ],
-      "observed_probe_ids": ["p3-date-add-probe-2026-09-10", "p3-date-subtract-probe-2026-09-10", "p3-date-format-probe-2026-09-10"],
+      "observed_probe_ids": [
+        "p3-date-add-probe-2026-09-10",
+        "p3-date-subtract-probe-2026-09-10",
+        "p3-date-format-probe-2026-09-10"
+      ],
       "reason": "現在の日時を取得（取得=現在の日付のみ）は今回の左パネル採取・再貼付け・実行まで確認済み。別probeで日時加算（1日後）と日付減算（1日）も2回実行して確認したが、カスタム書式化は未確認。",
       "reference": "catalog/index.json; catalog/evidence/datetime-current-date-validation.json; catalog/evidence/p3-date-add-probe-20260910.json; catalog/evidence/p3-date-subtract-probe-20260910.json; catalog/evidence/p3-date-format-probe-20260910.json",
       "live_ui_candidates": [
@@ -2111,9 +2120,12 @@
         "if-current-item-status-equals",
         "if-current-file-contains-txt"
       ],
-      "observed_probe_ids": ["p3-else-probe-2026-09-10", "p3-else-if-probe-2026-09-10"],
-      "reason": "If開始行を2設定採取し、For eachとの組合せはT03で実行確認済み。別probeでElseとElse-ifの原文・実行も確認したが、入れ子とbranch side effectは未確認。",
-      "reference": "catalog/index.json; catalog/actions/if/*.robin; catalog/evidence/normal-chat-t03-final-current-run.json; catalog/evidence/p3-else-probe-20260910.json; catalog/evidence/p3-else-if-probe-20260910.json",
+      "observed_probe_ids": [
+        "p3-else-probe-2026-09-10",
+        "p3-else-if-probe-2026-09-10"
+      ],
+      "reason": "If開始行を2設定採取し、For eachとの組合せはT03で実行確認済み。別probeでElseとElse-ifの原文・実行も確認したが、For each内If/Else両分岐のSET・変数加算side effectは2026-09-12のT03拡張子probeで2回実行確認。If内Ifは未確認。",
+      "reference": "catalog/index.json; catalog/actions/if/*.robin; catalog/evidence/normal-chat-t03-final-current-run.json; catalog/evidence/p3-else-probe-20260910.json; catalog/evidence/p3-else-if-probe-20260910.json; catalog/evidence/t03-ext-verify-acceptance-20260912.json",
       "live_ui_candidates": [
         {
           "ui_name": "Else",
@@ -2141,7 +2153,10 @@
         "loop-one-to-three",
         "foreach-items-variable"
       ],
-      "observed_probe_ids": ["p3-break-probe-2026-09-10", "p3-continue-probe-2026-09-10"],
+      "observed_probe_ids": [
+        "p3-break-probe-2026-09-10",
+        "p3-continue-probe-2026-09-10"
+      ],
       "reason": "定数範囲LoopとFor eachの原文を採取し、For each＋If＋ファイル読取りのT03組合せを実行確認済み。別probeでEXIT LOOP（LoopIndex=1）とNEXT LOOP（LoopIndex=4、2回）も確認したが、入れ子とloop内副作用は未確認。",
       "reference": "catalog/index.json; catalog/evidence/normal-chat-t03-final-current-run.json; catalog/evidence/p3-break-probe-20260910.json; catalog/evidence/p3-continue-probe-20260910.json",
       "live_ui_candidates": [
@@ -2173,7 +2188,9 @@
       "purpose": "エラー処理・サブフロー作成／呼出し",
       "status": "partial",
       "observed_action_ids": [],
-      "observed_probe_ids": ["p3-error-block-probe-2026-09-10"],
+      "observed_probe_ids": [
+        "p3-error-block-probe-2026-09-10"
+      ],
       "reason": "別probeでBLOCK／ON BLOCK ERROR／THROW ERROR／ENDの骨格、欠損ファイル子アクションによるruntime error、P3Worker作成＋MainからのCALLをコピー・保存・実行した。カスタムハンドラーは未確認。",
       "reference": "catalog/evidence/p3-error-block-probe-20260910.json; catalog/evidence/p3-error-trigger-probe-20260910.json; catalog/evidence/p3-subflow-probe-20260910.json",
       "live_ui_candidates": [
@@ -2207,7 +2224,9 @@
       "failed_action_ids": [
         "datatable-add-row-empty-failed"
       ],
-      "observed_probe_ids": ["p3-datatable-create-success-2026-09-11"],
+      "observed_probe_ids": [
+        "p3-datatable-create-success-2026-09-11"
+      ],
       "reason": "空のデータテーブル作成、3列1行（A/10/対象）のDataTable作成、Excel範囲→FilterDataTable条件抽出、DataTableのCSV文字列化は実測済み。0行0列と列数不一致の行追加失敗は保存。列付きテーブルの行追加・行反復・セル参照の成功は未採取。",
       "reference": "catalog/index.json; catalog/evidence/datatable-create-validation.json; catalog/evidence/p3-datatable-create-success-20260911.json; catalog/evidence/t04-positive-flow-run-6.json; catalog/evidence/filter-t02-roundtrip2-run-2.json",
       "live_ui_candidates": [
@@ -2273,8 +2292,8 @@
         "folder-get-files-all-no-subfolders",
         "file-write-t04-filtered-csv"
       ],
-      "reason": "UTF-8読取り・変数パス読取り・UTF-8書出し・単一ファイルコピー・フォルダー内ファイル取得2設定・T04中間CSV書出しは原文保存・別フロー貼付け・実行確認済み。別probeで存在確認、フォルダー作成、移動（成功＋DoNothing衝突再実行）、名前変更も確認したが、false分岐は未確認。",
-      "reference": "catalog/index.json; catalog/evidence/text-write-validation.json; catalog/evidence/file-copy-validation.json; catalog/evidence/folder-get-files-rt-run-1.json; catalog/evidence/folder-get-files-all-rt-run-1.json; catalog/evidence/t03-partial-run-1.json; catalog/evidence/t04-positive-flow-run-6.json; catalog/evidence/p3-file-move-probe-20260910.json; catalog/evidence/p3-file-rename-probe-20260910.json",
+      "reason": "UTF-8読取り・変数パス読取り・UTF-8書出し・単一ファイルコピー・フォルダー内ファイル取得2設定・T04中間CSV書出しは原文保存・別フロー貼付け・実行確認済み。別probeで存在確認、フォルダー作成、移動（成功＋DoNothing衝突再実行）、名前変更も確認したが、false分岐は未確認。 2026-09-12: ファイル変数の.Extensionが.txtと等しいかの厳密判定とElse経路を採取し、別フローで2回実行、通常チャット生成受入もPASS。",
+      "reference": "catalog/index.json; catalog/evidence/text-write-validation.json; catalog/evidence/file-copy-validation.json; catalog/evidence/folder-get-files-rt-run-1.json; catalog/evidence/folder-get-files-all-rt-run-1.json; catalog/evidence/t03-partial-run-1.json; catalog/evidence/t04-positive-flow-run-6.json; catalog/evidence/p3-file-move-probe-20260910.json; catalog/evidence/p3-file-rename-probe-20260910.json; catalog/evidence/t03-ext-probe-capture-20260912.json; catalog/evidence/t03-ext-verify-acceptance-20260912.json; catalog/evidence/t03-final-20260912-live-acceptance-20260912.json",
       "live_ui_candidates": [
         {
           "ui_name": "ファイルが存在する場合",
@@ -2424,7 +2443,7 @@
       "id": "G-ui-browser",
       "area": "G",
       "purpose": "起動／接続・文字入力・クリック・待機・文字取得・終了",
-      "status": "partial_blocked_runtime",
+      "status": "pass_runtime_measured",
       "observed_action_ids": [
         "web-launch-t09-local",
         "web-populate-t09-input",
@@ -2433,8 +2452,8 @@
         "web-get-t09-result",
         "web-close-t09"
       ],
-      "reason": "Final3の通常M365 Copilot生成Robinは6アクションで、無修正貼付け・保存・再コピーまで確認した。しかし新規PADフローでは捕捉済み t09-input／実行ボタン／未実行段落のUI要素が見つからず、StartFlowButtonが無効のままRun開始前に停止した。手動DOM操作、未捕捉セレクター、拡張や管理設定の変更は受入へ代用していない。",
-      "reference": "docs/robin-action-catalog.md; docs/pad-live-setup.md; copilot/knowledge/PAD-Robin-05-UI-Web.txt; catalog/evidence/t09-current-final3-live-acceptance-20260911.json; catalog/evidence/t09-current-final3-pad-run-blocked-20260911.json; catalog/evidence/t09-extension-handshake-boundary-20260911.json",
+      "reason": "2026-09-12: WAIT n は秒。2026-09-10採取の WAIT 500 は500ミリ秒のつもりの誤設定（利用者指摘）だったため、待機ダイアログで1秒へ直した再採取原文 roundtrip-wait1-20260912.robin を2回実行（数秒で T09-clicked）。生成6行は要素を運ばないため採取原文貼付けで3要素を取り込み削除後に貼付ける手順を実測。最終版 f42f5acf の通常チャット生成（WAIT 1）→無修正貼付け→2回実行PASS。",
+      "reference": "docs/robin-action-catalog.md; docs/pad-live-setup.md; copilot/knowledge/PAD-Robin-05-UI-Web.txt; catalog/evidence/t09-current-final3-live-acceptance-20260911.json; catalog/evidence/t09-current-final3-pad-run-blocked-20260911.json; catalog/evidence/t09-extension-handshake-boundary-20260911.json; catalog/evidence/t09-repo-run1-acceptance-20260912.json; catalog/evidence/t09-repo-run2-20260912.json; catalog/evidence/t09-gen-element-import-design-check-20260912.json; catalog/evidence/t09-gen-final3-robin-run1-acceptance-20260912.json; catalog/evidence/t09-wait1-acceptance-20260912.json; catalog/evidence/t09-finalc-20260912-live-acceptance-20260912.json",
       "live_ui_candidates": [
         {
           "ui_name": "ウィンドウの UI 要素をクリック",
@@ -2478,90 +2497,90 @@
     {
       "id": "A-text-number-boolean-set",
       "missing": "真偽値の独立設定",
-       "status": "PASS_BUNDLED_REACCEPT_REQUIRED",
-       "reason": "新規専用フローでBoolean値を設定し、Robin原文のコピー・保存・実行（変数preview=True）を確認し、P3追補として新bundleへ統合した。新bundleの通常チャット／PAD受入は未実行。",
+      "status": "PASS_BUNDLED_FINALC_20260912_REACCEPTED",
+      "reason": "新規専用フローでBoolean値を設定し、Robin原文のコピー・保存・実行（変数preview=True）を確認し、P3追補として新bundleへ統合した。新bundleの通常チャット／PAD受入は未実行。 最終版32aea456でT01〜T10・独立再試験・負例を再受入。 最終版 f42f5acf で再受入。",
       "evidence": "evidence/p3-boolean-probe-20260910.json",
-       "resume": "新bundleの知識precheck後、T01-T10を同一最終版で再受入"
+      "resume": "新bundleの知識precheck後、T01-T10を同一最終版で再受入"
     },
-  {
-    "id": "A-arithmetic-add-subtract",
-    "missing": "減算",
-    "status": "PASS_BUNDLED_REACCEPT_REQUIRED",
-    "reason": "新規専用フローで10から3を減算し、Robin原文のコピー・保存・実行（preview=7）を確認し、P3追補として新bundleへ統合した。新bundleの通常チャット／PAD受入は未実行。",
-    "evidence": "evidence/p3-subtract-probe-20260910.json",
-    "resume": "新bundleの知識precheck後、T01-T10を同一最終版で再受入"
-  },
-  {
-    "id": "A-list-create-add-get",
-    "missing": "リスト項目取出し",
-    "status": "BLOCKED_EXTERNAL_UI",
-    "reason": "表示された『リストから項目を削除』を候補として最小probeしたが、削除後に項目値を返す出力変数はなく、リスト項目取出しの代用にならない。『リスト』『取得』の追加検索でもリスト変更・比較、DataTable列取得、UI／ブラウザー取得は表示されたが、任意のリスト項目を返す専用アクションは観測できなかった。専用の取得構文をPAD画面から採取できておらず、式や別UIモードの可能性は断定していない。",
-    "evidence": "evidence/p3-list-remove-probe-20260910.json; evidence/p3-list-get-inventory-boundary-20260911.json; evidence/p3-list-get-search-boundary-20260911.json; evidence/p3-list-get-search-expanded-20260911.json",
-    "resume": "項目値を出力するリスト参照アクションの実表示・原文・実行結果を採取"
-  },
-  {
-    "id": "A-datetime",
-    "missing": "カスタム日時書式化",
+    {
+      "id": "A-arithmetic-add-subtract",
+      "missing": "減算",
+      "status": "PASS_BUNDLED_FINALC_20260912_REACCEPTED",
+      "reason": "新規専用フローで10から3を減算し、Robin原文のコピー・保存・実行（preview=7）を確認し、P3追補として新bundleへ統合した。新bundleの通常チャット／PAD受入は未実行。 最終版32aea456でT01〜T10・独立再試験・負例を再受入。 最終版 f42f5acf で再受入。",
+      "evidence": "evidence/p3-subtract-probe-20260910.json",
+      "resume": "新bundleの知識precheck後、T01-T10を同一最終版で再受入"
+    },
+    {
+      "id": "A-list-create-add-get",
+      "missing": "リスト項目取出し",
+      "status": "PASS_PROBE_TYPED_INDEX_BUNDLED",
+      "reason": "変数ピッカーは.Countのみ。ダイアログへ%CatalogList[0]%を入力しPADから再コピーした原文で先頭項目取得を2回実行確認し、01-Basicsへ統合。範囲外・末尾・別フロー再利用は未確認。",
+      "evidence": "evidence/p3-list-remove-probe-20260910.json; evidence/p3-list-get-inventory-boundary-20260911.json; evidence/p3-list-get-search-boundary-20260911.json; evidence/p3-list-get-search-expanded-20260911.json; evidence/p3-list-get-index-probe-20260912.json",
+      "resume": "インデックス0以外・別フロー再利用・取り出した値の後続利用を採取する場合だけ追加"
+    },
+    {
+      "id": "A-datetime",
+      "missing": "カスタム日時書式化",
       "status": "PASS_CURRENT_BUNDLE_T08_EXPECTED_ERROR_PARTIAL",
-    "reason": "日付の減算、DateAndTime取得設定、日時加算は新規専用probeで原文コピー・保存・2回実行を確認し、新bundleへ統合した。カスタム書式化は現行PAD専用probeでダイアログ選択までは到達したが、保存更新時にSequence contains no matching elementの内部例外が発生し、成功原文・実行値は未採取。",
-    "evidence": "evidence/p3-date-add-probe-20260910.json; evidence/p3-date-subtract-probe-20260910.json; evidence/p3-date-format-probe-20260910.json; evidence/p3-date-format-custom-failure-20260910.json; evidence/p3-date-format-dialog-crash-20260911.json",
-    "resume": "カスタム日時書式化を採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
-  },
-  {
-    "id": "B-if-else",
-    "missing": "Else／Else if",
-    "status": "PASS_BUNDLED_REACCEPT_REQUIRED",
-    "reason": "新規専用probeでIf/Else/ENDとIf/Else-if/ENDをコピー・保存し、各構造を2回実行し、新bundleへ統合した。branch side effectは空で、入れ子は未採取。新bundleの通常チャット／PAD受入は未実行。",
-    "evidence": "evidence/p3-else-probe-20260910.json; evidence/p3-else-if-probe-20260910.json",
-    "resume": "入れ子・branch side effectを採取できる場合は追加し、新bundleのT01-T10を同一最終版で再受入"
-  },
+      "reason": "日付の減算、DateAndTime取得設定、日時加算は新規専用probeで原文コピー・保存・2回実行を確認し、新bundleへ統合した。カスタム書式化は現行PAD専用probeでダイアログ選択までは到達したが、保存更新時にSequence contains no matching elementの内部例外が発生し、成功原文・実行値は未採取。",
+      "evidence": "evidence/p3-date-add-probe-20260910.json; evidence/p3-date-subtract-probe-20260910.json; evidence/p3-date-format-probe-20260910.json; evidence/p3-date-format-custom-failure-20260910.json; evidence/p3-date-format-dialog-crash-20260911.json",
+      "resume": "カスタム日時書式化を採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
+    },
+    {
+      "id": "B-if-else",
+      "missing": "Else／Else if",
+      "status": "PASS_BUNDLED_FINALC_20260912",
+      "reason": "新規専用probeでIf/Else/ENDとIf/Else-if/ENDをコピー・保存し、各構造を2回実行し、新bundleへ統合した。For each内If/Else両分岐のSET・変数加算side effectを2026-09-12に2回実行確認し統合。If内Ifは未採取。最終版でT03生成受入PASS。 最終版 f42f5acf で再受入。",
+      "evidence": "evidence/p3-else-probe-20260910.json; evidence/p3-else-if-probe-20260910.json; evidence/t03-ext-verify-acceptance-20260912.json",
+      "resume": "入れ子・branch side effectを採取できる場合は追加し、新bundleのT01-T10を同一最終版で再受入"
+    },
     {
       "id": "B-loop-fixed-foreach-exit",
       "missing": "ループ脱出・次のループ",
-    "status": "PARTIAL_BUNDLED_REACCEPT_REQUIRED",
-    "reason": "有限Loop 1..3へEXIT LOOPとNEXT LOOPを別probeで追加し、LoopIndex=1／4の実行結果を確認し、新bundleへ統合した。入れ子、loop side effectは未採取。新bundleの通常チャット／PAD受入は未実行。",
-    "evidence": "evidence/p3-break-probe-20260910.json; evidence/p3-continue-probe-20260910.json",
-    "resume": "入れ子・loop side effectを採取できる場合は追加し、新bundleのT01-T10を同一最終版で再受入"
+      "status": "PARTIAL_BUNDLED_FINALC_20260912_REACCEPTED",
+      "reason": "有限Loop 1..3へEXIT LOOPとNEXT LOOPを別probeで追加し、LoopIndex=1／4の実行結果を確認し、新bundleへ統合した。入れ子、loop side effectは未採取。新bundleの通常チャット／PAD受入は未実行。 最終版32aea456でT01〜T10・独立再試験・負例を再受入。 最終版 f42f5acf で再受入。",
+      "evidence": "evidence/p3-break-probe-20260910.json; evidence/p3-continue-probe-20260910.json",
+      "resume": "入れ子・loop side effectを採取できる場合は追加し、新bundleのT01-T10を同一最終版で再受入"
     },
-  {
-    "id": "B-error-subflow",
-    "missing": "エラー処理・サブフロー作成／呼出し",
-    "status": "PARTIAL_BUNDLED_REACCEPT_REQUIRED",
-      "reason": "新規専用probeでBLOCK／ON BLOCK ERROR／THROW ERROR／END構造、欠損ファイル子アクション、P3Worker作成＋MainからのCALLをコピー・保存・実行した。既定のすべてのエラーへErrorHandledDefault=true、最後のエラーを取得（LastError、Reset=True）も測定して新bundleへ統合した。名前付きFileNotFoundルールの一致条件と後続処理の一般化は未確認。新bundleの通常チャット／PAD受入は未実行。",
+    {
+      "id": "B-error-subflow",
+      "missing": "エラー処理・サブフロー作成／呼出し",
+      "status": "PARTIAL_BUNDLED_FINALC_20260912_REACCEPTED",
+      "reason": "新規専用probeでBLOCK／ON BLOCK ERROR／THROW ERROR／END構造、欠損ファイル子アクション、P3Worker作成＋MainからのCALLをコピー・保存・実行した。既定のすべてのエラーへErrorHandledDefault=true、最後のエラーを取得（LastError、Reset=True）も測定して新bundleへ統合した。名前付きFileNotFoundルールの一致条件と後続処理の一般化は未確認。新bundleの通常チャット／PAD受入は未実行。 最終版32aea456でT01〜T10・独立再試験・負例を再受入。 最終版 f42f5acf で再受入。",
       "evidence": "evidence/p3-error-block-probe-20260910.json; evidence/p3-error-trigger-probe-20260910.json; evidence/p3-subflow-probe-20260910.json; evidence/p3-error-custom-handler-20260911.json; evidence/p3-error-custom-handler-flow-20260911.robin; evidence/p3-error-default-handler-20260911.json; evidence/p3-error-default-handler-flow-20260911.robin; evidence/p3-error-handler-measured-20260911.json; evidence/p3-get-last-error-standalone-20260911-reset.robin; evidence/p3-last-error-handler-run2-20260911.json; evidence/p3-last-error-handler-run3-20260911.json",
-       "resume": "名前付きカスタムエラーの一致条件を採取できる場合は追加し、新bundleのT01-T10を同一最終版で再受入"
-  },
-  {
-    "id": "C-datatable",
-    "missing": "現行bundleへの統合・同一最終版再受入",
-    "status": "PASS_BUNDLED_REACCEPT_REQUIRED",
-    "reason": "3列1行DataTableの作成、列数一致のAddRowToDataTable、ModifyDataTableItemの列インデックス2・行インデックス0更新を専用probeで実測した。さらに2行3列DataTableをFor eachで反復し、loop bodyのSET ForeachValue TO CurrentItemを無修正保存・再コピーし、2回とも最終値B/20/対象2、DataTable=2行3列、エラーなしを確認して新bundleへ統合した。初回再試行のタイムアウトは残留ブレークポイントとして分離している。新bundleの通常チャット／PAD受入は未実行。",
-    "evidence": "evidence/p3-datatable-create-success-20260911.json; evidence/p3-datatable-row-success-20260911.json; evidence/p3-datatable-row-success-flow-20260911-fixed.robin; evidence/p3-datatable-row-success-run1-20260911.json; evidence/p3-datatable-row-success-run2-20260911.json; evidence/p3-datatable-cell-success-20260911.json; evidence/p3-datatable-cell-success-flow-20260911.robin; evidence/p3-datatable-foreach-success-20260911.json; evidence/p3-datatable-foreach-success-flow-20260911-final.robin; evidence/p3-datatable-foreach-success-2row-run1-20260911.json; evidence/p3-datatable-foreach-success-2row-run2b-20260911.json; evidence/p3-datatable-foreach-timeout-breakpoint-20260911.json; evidence/p3-datatable-row-failure-20260910.json; evidence/p3-datatable-row-list-failure-20260910.json; evidence/p3-datatable-row-error-state-20260911.json",
-    "resume": "新bundleの知識precheck後、T01-T10を同一最終版で再受入"
-  },
-  {
-    "id": "D-files-folders",
-    "missing": "存在確認・フォルダー作成・移動・名前変更",
-    "status": "PASS_BUNDLED_REACCEPT_REQUIRED",
-    "reason": "フォルダー作成・既存ファイル存在確認・ファイル移動・名前変更を新規専用probeで原文コピー・保存・実行した。移動は成功1回とDoNothing衝突再実行1回、名前変更は成功1回と衝突no-op 1回。欠損パスのfalse分岐もrawコピー・実行完了・エラーなしまで確認し、新bundleへ統合した（branch bodyは0アクション）。新bundleの通常チャット／PAD受入は未実行。",
-    "evidence": "evidence/p3-folder-create-probe-20260910.json; evidence/p3-file-exists-probe-20260910.json; evidence/p3-file-exists-false-probe-20260910.json; evidence/p3-file-exists-false-20260910.robin; evidence/p3-file-move-probe-20260910.json; evidence/p3-file-rename-probe-20260910.json",
-    "resume": "新bundleの知識precheck後、T01-T10を同一最終版で再受入。branch body side effectを教材化する場合だけ別アクションを採取"
-  },
-  {
-    "id": "E-excel",
-    "missing": "現行bundleへの統合・同一最終版再受入",
-    "status": "PASS_BUNDLED_REACCEPT_REQUIRED",
-    "reason": "新規専用probeでt04-filter-input.xlsxを読み取り専用で開き、A1:C6をTypedValuesとしてExcelDataへ保存した後、For each CurrentItem in ExcelDataの本体へSET ExcelRowSeen TO CurrentItemを追加した。無修正6アクションを保存・再コピーし、2回ともExcelData=6行3列、最終ExcelRowSeen=3列 { Status: 対象外, Item: E, Amount: 40 }、Excel終了、エラーなしを確認して新bundleへ統合した。Sheet1選択・A1:C6読取りの既存probeも保持する。新bundleの通常チャット／PAD受入は未実行。",
-    "evidence": "evidence/p3-excel-sheet-probe-20260910.json; evidence/p3-excel-read-range-probe-20260911.json; evidence/p3-excel-foreach-configuration-boundary-20260911.json; evidence/p3-excel-foreach-runtime-success-flow-20260911.robin; evidence/p3-excel-foreach-runtime-success-run1-20260911.json; evidence/p3-excel-foreach-runtime-success-run2-20260911.json",
-    "resume": "新bundleの知識precheck後、T01-T10を同一最終版で再受入"
-  },
+      "resume": "名前付きカスタムエラーの一致条件を採取できる場合は追加し、新bundleのT01-T10を同一最終版で再受入"
+    },
+    {
+      "id": "C-datatable",
+      "missing": "現行bundleへの統合・同一最終版再受入",
+      "status": "PASS_BUNDLED_FINALC_20260912_REACCEPTED",
+      "reason": "3列1行DataTableの作成、列数一致のAddRowToDataTable、ModifyDataTableItemの列インデックス2・行インデックス0更新を専用probeで実測した。さらに2行3列DataTableをFor eachで反復し、loop bodyのSET ForeachValue TO CurrentItemを無修正保存・再コピーし、2回とも最終値B/20/対象2、DataTable=2行3列、エラーなしを確認して新bundleへ統合した。初回再試行のタイムアウトは残留ブレークポイントとして分離している。新bundleの通常チャット／PAD受入は未実行。 最終版32aea456でT01〜T10・独立再試験・負例を再受入。 最終版 f42f5acf で再受入。",
+      "evidence": "evidence/p3-datatable-create-success-20260911.json; evidence/p3-datatable-row-success-20260911.json; evidence/p3-datatable-row-success-flow-20260911-fixed.robin; evidence/p3-datatable-row-success-run1-20260911.json; evidence/p3-datatable-row-success-run2-20260911.json; evidence/p3-datatable-cell-success-20260911.json; evidence/p3-datatable-cell-success-flow-20260911.robin; evidence/p3-datatable-foreach-success-20260911.json; evidence/p3-datatable-foreach-success-flow-20260911-final.robin; evidence/p3-datatable-foreach-success-2row-run1-20260911.json; evidence/p3-datatable-foreach-success-2row-run2b-20260911.json; evidence/p3-datatable-foreach-timeout-breakpoint-20260911.json; evidence/p3-datatable-row-failure-20260910.json; evidence/p3-datatable-row-list-failure-20260910.json; evidence/p3-datatable-row-error-state-20260911.json",
+      "resume": "新bundleの知識precheck後、T01-T10を同一最終版で再受入"
+    },
+    {
+      "id": "D-files-folders",
+      "missing": "存在確認・フォルダー作成・移動・名前変更",
+      "status": "PASS_BUNDLED_FINALC_20260912",
+      "reason": "フォルダー作成・既存ファイル存在確認・ファイル移動・名前変更を新規専用probeで原文コピー・保存・実行した。移動は成功1回とDoNothing衝突再実行1回、名前変更は成功1回と衝突no-op 1回。欠損パスのfalse分岐もrawコピー・実行完了・エラーなしまで確認し、新bundleへ統合した（branch bodyは0アクション）。2026-09-12に.Extension厳密判定＋Elseを追加採取・統合し、最終版でT03生成受入PASS。 最終版 f42f5acf で再受入。",
+      "evidence": "evidence/p3-folder-create-probe-20260910.json; evidence/p3-file-exists-probe-20260910.json; evidence/p3-file-exists-false-probe-20260910.json; evidence/p3-file-exists-false-20260910.robin; evidence/p3-file-move-probe-20260910.json; evidence/p3-file-rename-probe-20260910.json; evidence/t03-ext-verify-acceptance-20260912.json; evidence/t03-final-20260912-live-acceptance-20260912.json",
+      "resume": "新bundleの知識precheck後、T01-T10を同一最終版で再受入。branch body side effectを教材化する場合だけ別アクションを採取"
+    },
+    {
+      "id": "E-excel",
+      "missing": "現行bundleへの統合・同一最終版再受入",
+      "status": "PASS_BUNDLED_FINALC_20260912_REACCEPTED",
+      "reason": "新規専用probeでt04-filter-input.xlsxを読み取り専用で開き、A1:C6をTypedValuesとしてExcelDataへ保存した後、For each CurrentItem in ExcelDataの本体へSET ExcelRowSeen TO CurrentItemを追加した。無修正6アクションを保存・再コピーし、2回ともExcelData=6行3列、最終ExcelRowSeen=3列 { Status: 対象外, Item: E, Amount: 40 }、Excel終了、エラーなしを確認して新bundleへ統合した。Sheet1選択・A1:C6読取りの既存probeも保持する。新bundleの通常チャット／PAD受入は未実行。 最終版32aea456でT01〜T10・独立再試験・負例を再受入。 最終版 f42f5acf で再受入。",
+      "evidence": "evidence/p3-excel-sheet-probe-20260910.json; evidence/p3-excel-read-range-probe-20260911.json; evidence/p3-excel-foreach-configuration-boundary-20260911.json; evidence/p3-excel-foreach-runtime-success-flow-20260911.robin; evidence/p3-excel-foreach-runtime-success-run1-20260911.json; evidence/p3-excel-foreach-runtime-success-run2-20260911.json",
+      "resume": "新bundleの知識precheck後、T01-T10を同一最終版で再受入"
+    },
     {
       "id": "G-ui-browser",
       "missing": "PAD WebAutomation通し実行",
-      "status": "PARTIAL_RUNTIME_PROBE",
-      "reason": "既存専用フローで待機値を一時的に1秒へ束ねたランタイムprobeは成功し、入力・クリック・T09-clicked取得・PAD完了を確認した。元のWAIT 500は実行前後で復元した。一方、現行6アクション貼付け先を90秒実行した試行は112秒時点でも実行中で、WebAutomationエラーと未実行プレースホルダーが残り、停止後に準備完了へ戻った。追加の読み取り専用環境確認ではEdge拡張・native manifest・権限は存在したが、native hostログは起動成功のみで接続完了を示さず、現行プロセスもChrome originでEdge実行を証明しない。現行package生成Robinの無修正貼付け・固定待機値での受入は未確認。",
-      "evidence": "evidence/t09-runtime-probe-20260910.json; evidence/p3-t09-current-runtime-reprobe-20260911.json; evidence/t09-extension-handshake-boundary-20260911.json",
-      "resume": "現行packageの新規通常チャットT09 Robinを得て、待機設定を手修正せず専用フローへ貼付け・保存・実行・取得値を照合"
+      "status": "PASS_RUNTIME_FINALC_20260912",
+      "reason": "WAIT 500は500秒（誤設定）。待機1秒の再採取原文を2回実行し、最終版 f42f5acf でT09生成（WAIT 1）→貼付け→2回実行PASS。",
+      "evidence": "evidence/t09-repo-run1-acceptance-20260912.json; evidence/t09-repo-run2-20260912.json; evidence/t09-gen-element-import-design-check-20260912.json; evidence/t09-gen-final3-robin-run1-acceptance-20260912.json; evidence/t09-wait1-acceptance-20260912.json; evidence/t09-finalc-20260912-live-acceptance-20260912.json",
+      "resume": "別URL・別要素・拡張無効環境は未確認のまま"
     }
   ]
 }

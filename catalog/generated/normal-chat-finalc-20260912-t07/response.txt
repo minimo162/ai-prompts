@@ -1,0 +1,65 @@
+Copilot said:
+
+以下は、指定された合成PDFの2ページ目だけを対象に、抽出結果をUTF-8テキストとして保存する、実測済み2アクション構成です。ページ境界や抽出順には手を加えず、PADが返した抽出テキストをそのまま保存します。
+
+1. 前提・対象範囲
+入力PDF: C:\Users\yuuki\ai-prompts\catalog\fixtures\pdf\source-a.pdf
+抽出対象: 2ページ目のみ。開始ページと終了ページをともに 2 に設定
+レイアウト検出: False
+出力変数: ExtractedPDFText、テキスト型
+保存先: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt
+文字コード: UTF-8
+末尾への追加改行: なし
+既存ファイル: 上書き
+入力PDF: 読み取りのみで変更しない
+
+この構成は、PAD 2.71.115.26224、日本語UI、Power Fx OFFの環境で採取されたものです。PAD-Robin-Knowledge-Bundleには、同一の入力・出力パスを使用したT07が別フローへ貼り付け、保存、2回実行され、出力内容まで照合された記録があります。
+
+2. PADで先に確認する設定
+貼り付け先のサブフローを開きます。新規フローなら Main を使用できます。
+次のRobinは、対象サブフロー内の空いている位置へ2アクションまとめて貼り付けます。
+出力先に同名ファイルがある場合は上書きされます。既存ファイルを保持する必要がある場合は、実行前に退避してください。
+入力PDFと出力先フォルダーが存在することを確認します。
+PDF用インスタンス、Excelインスタンス、UI要素、入力変数の事前作成は不要です。ExtractedPDFTextは1番目のアクションが生成します。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: この処理用の2アクション全体
+
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 2 DetectLayout: False ExtractedText=> ExtractedPDFText
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt''' TextToWrite: ExtractedPDFText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+この2行は、catalog/generated/normal-chat-t07-20260910-final/robin.txtに記録されたPADコピー原文に対応し、別フローへの貼り付けと実行結果が記録されています。
+
+4. PADデザイナーでの確認
+
+貼り付け直後に、次を確認してください。
+
+アクション数が2件である。
+順序が次のとおりである。
+PDFからテキストを抽出
+テキストをファイルに書き込む
+PDF抽出アクションで次を確認する。
+開始ページ: 2
+終了ページ: 2
+レイアウト検出: オフ
+生成変数: ExtractedPDFText
+書き込みアクションで次を確認する。
+書き込むテキスト: %ExtractedPDFText%
+新しい行を追加する: オフ
+ファイルが存在する場合: 上書き
+エンコード: UTF-8
+ExtractedPDFTextが文字列リテラルではなく、1番目のアクションから生成されたテキスト変数として認識されている。
+デザイナー上に赤いエラー表示がない。
+ループや条件ブロックは使用しないため、ENDの対応確認は不要。
+5. 実行と期待結果の照合
+合成PDFの複製を使う場合は、Robin内の入力パスを変更せず、指定のfixtureをそのまま使用するのが実測条件に最も近い確認方法です。
+フローを保存して1回実行します。
+出力ファイルをUTF-8対応のエディターで開きます。
+出力にページ2の識別文字 PAGE_TOKEN_A2 が含まれることを確認します。
+ページ1の識別文字 PAGE_TOKEN_A1 が含まれないことも確認します。
+改行、ページ境界、文字の並びを手動で補正せず、抽出結果をそのまま評価します。
+入力PDFの更新日時や内容が変化していないことを確認します。
+もう一度実行し、上書き後も同じ識別条件を満たすことを確認します。
+
+実測記録では、この2アクションを2回実行し、出力にPAGE_TOKEN_A2が含まれ、PAGE_TOKEN_A1が含まれないことが確認されています。入力PDFの変更を伴わない、ページ2単独抽出の確認済み例です。

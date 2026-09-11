@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-11T20:37:33.9231275Z",
+    "flow_name":  "RobinKnowledgeT09FinalLive_20260912",
+    "source_robin":  "C:\\Users\\yuuki\\ai-prompts\\catalog\\flows\\ui-t09-local-roundtrip\\roundtrip.robin",
+    "source_sha256":  "93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd",
+    "source_bytes":  169042,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  6,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

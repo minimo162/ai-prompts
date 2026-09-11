@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T07:53:58+09:00",
+  "case": "T09",
+  "status": "PASS_FINAL_20260912_SUPERSEDED",
+  "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/4e1631a8-9b87-4687-ad3e-c5de2197f956",
+  "generated_robin": {
+    "path": "../generated/normal-chat-final-20260912-t09/robin.txt",
+    "sha256": "5c01b555e98e60ec9ad6180eb17d714ffa3f048088eda9f3eff6357ea4b0c668",
+    "code_blocks": 1,
+    "lines": 6,
+    "wait_line": "WAIT 500",
+    "raw_unmodified": true
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT09FinalLive_20260912",
+    "designer_process_id": 37460,
+    "element_import": "t09-final-20260912-element-import-paste-20260912.json",
+    "paste_save": "t09-final-20260912-pad-paste-save-20260912.json",
+    "run1": "t09-final-20260912-pad-run1-20260912.json",
+    "run2": "t09-final-20260912-pad-run2-20260912.json",
+    "observed": {
+      "run1": "T09-clicked",
+      "run2": "T09-clicked"
+    },
+    "elapsed": "about 515 s per run (WAIT 500)"
+  },
+  "note": "Completed on the superseded 32aea456 version; the 500-second wait was then corrected to WAIT 1 and the case re-accepted on f42f5acf (t09-finalc-20260912-live-acceptance-20260912.json)."
+}

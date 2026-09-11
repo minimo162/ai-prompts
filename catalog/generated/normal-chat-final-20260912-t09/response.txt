@@ -1,0 +1,52 @@
+Copilot said:
+1. 前提・対象範囲
+目的: ローカルテスト画面をEdgeで起動し、入力、クリック、結果取得、ブラウザー終了を行う。
+入力: 捕捉済み入力要素 t09-input に文字列 T09-input。
+出力: 結果要素 t09-result の Own Text をテキスト変数 AttributeValue に取得。
+ブラウザー変数: Browser（Webブラウザーインスタンス）。
+成功条件: AttributeValue=T09-clickedとなり、ブラウザーが閉じられること。
+実測環境: PAD 2.71.115.26224、日本語UI、Power Fx OFF。
+実行範囲: ControlRepository付きの採取原文は別の空フローへ再貼付けされ、2回の実行で結果取得とブラウザー終了まで確認されています。WAIT 500の単位はミリ秒ではなく秒で、待機時間は約8分20秒です。
+2. PADで先に行う設定
+
+貼り付け先フローには、次の捕捉済みUI要素が事前登録されている必要があります。
+
+Input text 't09-input'
+Button '実行'。実画面上の要素IDはt09-submit
+Paragraph '未実行'。実画面上の要素IDは t09-result
+
+生成する6行だけではControlRepositoryのセレクターや画像は移動しません。実測済みの準備方法は、ControlRepository付きの採取原文を貼り付け先へ一度貼り付けて3要素を登録し、その6アクションを削除してから、以下の6行を貼り付ける方法です。未捕捉のセレクターやWebDriver引数は追加していません。
+
+対象サブフロー: Main
+置換範囲: 空のMain、または今回のテスト専用に確保した連続範囲
+
+[code block: see robin.txt]
+WebAutomation.LaunchEdge.LaunchEdge Url: $'''http://127.0.0.1:8765/t09-local-test.html''' ClearCache: False ClearCookies: False WindowState: WebAutomation.BrowserWindowState.Normal WaitForPageToLoadTimeout: 60 Timeout: 60 PiPUserDataFolderMode: WebAutomation.PiPUserDataFolderModeEnum.AutomaticProfile TargetDesktop: $'''{\"DisplayName\":\"ローカル コンピューター\",\"Route\":{\"ServerType\":\"Local\",\"ServerAddress\":\"\"},\"DesktopType\":\"local\"}''' BrowserInstance=> Browser
+WebAutomation.PopulateTextField.PopulateTextFieldUsePhysicalKeyboard BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Input text \'t09-input\''] Text: $'''T09-input''' Mode: WebAutomation.PopulateTextMode.Replace UnfocusAfterPopulate: True WaitForPageToLoadTimeout: 60
+WebAutomation.Click.Click BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Button \'実行\''] ClickType: WebAutomation.ClickType.LeftClick MouseClick: True WaitForPageToLoadTimeout: 60 MousePositionRelativeToElement: WebAutomation.RectangleEdgePoint.MiddleCenter OffsetX: 0 OffsetY: 0
+WAIT 500
+WebAutomation.GetDetailsOfElement BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Paragraph \'未実行\''] AttributeName: $'''Own Text''' AttributeValue=> AttributeValue
+WebAutomation.CloseWebBrowser BrowserInstance: Browser
+
+3. デザイナーでの確認
+
+貼り付け直後に、以下を確認してください。
+
+アクション数が6個である。
+順序が「Edge起動 → 入力 → クリック → 待機 → Own Text取得 → 終了」である。
+2～6個目のアクションが同じブラウザーインスタンス Browser を参照している。
+結果の保存先がテキスト変数 AttributeValue である。
+3つのUI要素が未解決になっておらず、デザイナーエラーが0件である。
+WAIT 500が「500秒を待機します」と表示されることを確認する。
+4. 合成画面での実行と照合
+ローカルテストページを提供するサーバーが起動している状態にします。
+既存の業務フローではなく、複製したテスト専用フローを保存します。
+監視上限を9分以上として実行します。
+待機中に停止せず、結果取得とブラウザー終了まで待ちます。
+実行後、AttributeValueが正確に T09-clickedであることを確認します。
+Edgeが閉じ、PADが「準備完了」へ戻ったことを確認します。
+再実行でも同じ結果になることを照合します。
+
+根拠原文は catalog/flows/ui-t09-local-roundtrip/roundtrip.robin、実行証拠は catalog/evidence/t09-repo-run1-acceptance-20260912.json、t09-repo-run1-completion-20260912.json、t09-repo-run2-20260912.json です。別URL、別要素、Edge以外のブラウザー、別の待機アクション、拡張機能が無効な環境は未確認です。
+
+ソース

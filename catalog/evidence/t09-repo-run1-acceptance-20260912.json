@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T01:27:00+09:00",
+  "case": "T09",
+  "status": "PASS_DIAGNOSTIC_RUN1_CAPTURED_RAW_WITH_UI_REPOSITORY",
+  "purpose": "Isolate the Web element registration path and the WebAutomation runtime path using the PAD-captured raw that carries the ControlRepository (UI elements). This is a diagnostic with the captured raw, not a Copilot-generated acceptance.",
+  "environment": {
+    "pad_package_version": "11.2608.115.0",
+    "pad_agent_version_from_log": "2.71.00115.26224",
+    "language": "ja-JP",
+    "power_fx": false,
+    "edge_extension": {"id": "kagpabjoboikccfdghpdlaaopmgpgfdc", "version": "2.70.0.35", "location_code": 6, "disable_reasons": []},
+    "fixture_server": {"listen": "127.0.0.1:8765", "directory": "catalog/fixtures/ui", "http_check": "200, 546 bytes", "process": "python -m http.server (pid 18700)"},
+    "edge_processes_before_run": 0
+  },
+  "flow": {"name": "RobinKnowledgeT09Repo_20260912", "designer_process_id": 24872, "created_via": "Console UIA (new empty flow)"},
+  "source": {"path": "catalog/flows/ui-t09-local-roundtrip/roundtrip.robin", "sha256": "93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd", "bytes": 169042, "contains_control_repository": true, "action_lines": 6},
+  "paste_save": "catalog/evidence/t09-repo-paste-save-20260912.json",
+  "action_count_after_paste": 6,
+  "ui_elements_after_paste": "Designer showed Input text 't09-input', Button '実行', Paragraph '未実行' resolved in actions 2, 3, 5 with no design-time errors (screenshot during run: 0 errors, status 実行中).",
+  "run1": {
+    "start_pressed_by": "tools/Run-PadFlowLive.ps1 (-TimeoutSeconds 90)",
+    "helper_result": "threw 'Run completion was not observed' at 92 s; evidence file t09-repo-run1-20260912.json was therefore not written by the helper",
+    "state_at_90s": "Designer status 実行中 00:01:35, current action 4 (待機 500 秒を待機します). Actions 1-3 (LaunchEdge, PopulateTextField, Click) had completed.",
+    "wait_unit_observed": "PAD Designer renders `WAIT 500` as 「500 秒を待機します」: the unit is seconds. The earlier 90-second monitoring limits could never observe completion; this was a monitoring/unit mismatch, not an extension failure.",
+    "completion": "catalog/evidence/t09-repo-run1-completion-20260912.json (polling only, no second Start): completion_observed=true at 2026-09-12T01:26:38+09:00, variable_previews AttributeValue='T09-clicked', Browser='Web ブラウザー インスタンス'.",
+    "native_host_log": {"path": "%LOCALAPPDATA%/Microsoft/Power Automate Desktop/DataCollection/2026-09-11-16-18-BrowserNativeMessageHost.log", "browserType": "MicrosoftEdge", "events": ["application.start", "application.start.success", "browsernativemessagehost.hostservice.execution [2] Called: Negotiating"], "host_process": "28920 chrome-extension://kagpabjoboikccfdghpdlaaopmgpgfdc/"},
+    "browser_after": "One Edge window remained (title 'チャット | Microsoft Copilot - 個人 - Microsoft Edge', process started 01:18:00 by the LaunchEdge action; the profile restored its previous tabs). The automated T09 page was closed by CloseWebBrowser. The remaining user-profile window was not touched."
+  },
+  "expected_fixed_before_run": {"AttributeValue": "T09-clicked", "completion": true, "no_design_errors": true},
+  "observed": {"AttributeValue": "T09-clicked", "completion": true, "no_design_errors": true},
+  "distinctions": {
+    "vs_t09_separate_ui_registration_20260911": "That attempt pasted the Copilot-generated 6 lines (no ControlRepository) and tried to register elements with the picker; the picker returned only Window/Pane. Here the captured raw carries the repository, so the three Web elements were registered by the paste itself.",
+    "vs_prior_runtime_blocks": "Prior runs were stopped at 80-207 s while WAIT 500 (500 s) was still in progress; they did not prove a WebAutomation failure.",
+    "not_yet": "Run 2 (t09-repo-run2-20260912.json) and the Copilot-generated acceptance on the final version are separate records."
+  }
+}

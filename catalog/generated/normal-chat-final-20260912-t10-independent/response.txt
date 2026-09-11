@@ -1,0 +1,22 @@
+Copilot said:
+[code block: see robin.txt — the whole answer was a single 16-line code block with no prose (independent retest)]
+Excel.LaunchExcel.LaunchUnderExistingProcess Visible: True UseMachineLocale: False Instance=> ExcelInstance
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T10-Changed''' Column: $'''A''' Row: 1
+Excel.ReadFromExcel.ReadCell Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues CellValue=> ExcelData
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\Users\yuuki\ai-prompts\catalog\evidence\copilot-excel-t10-v6.xlsx'''
+Excel.CloseExcel.Close Instance: ExcelInstance
+Word.LaunchWord.Launch Visible: True Instance=> WordInstance
+Word.WriteToWord.WriteEndOfDocument Instance: WordInstance Text: $'''CopilotOffice 246''' AppendNewLine: False
+Word.ReadFromWord.Read Instance: WordInstance WordData=> WordData
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\Temp\AiPromptsOfficeCatalog_20260907\copilot-word.docx'''
+Word.CloseWord.Close Instance: WordInstance
+PowerPoint.LaunchPowerPoint.Launch Instance=> PowerPointInstance
+PowerPoint.AddPowerPointSlide.AddSlideAsLast Instance: PowerPointInstance SlideIndex=> SlideIndex
+PowerPoint.WriteToPowerPoint.WriteToSlideAtPosition Instance: PowerPointInstance Text: $'''CopilotOffice 246''' AppendNewLine: False SlidePosition: SlideIndex
+PowerPoint.ReadFromPowerPoint.Read Instance: PowerPointInstance PowerPointData=> PowerPointData
+PowerPoint.SavePowerPoint.SaveAs Instance: PowerPointInstance DocumentFormat: PowerPoint.PowerPointFormat.PPTX DocumentPath: $'''C:\Temp\AiPromptsOfficeCatalog_20260907\copilot-powerpoint.pptx'''
+PowerPoint.ClosePowerPoint.Close Instance: PowerPointInstance
+
+このRobinをPADデザイナーへ貼り付ける手順は？
+PADでの保存先パスの確認方法は？
+このフローの成功条件は？

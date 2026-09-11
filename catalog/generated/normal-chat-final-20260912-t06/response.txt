@@ -1,0 +1,70 @@
+Copilot said:
+
+以下は、PAD-Robin-Knowledge-Bundleに収録されたWordアクションの実測原文だけを組み合わせた案です。各アクションはPADから採取済みですが、今回のパス・置換文字列による4アクション構成は貼り付け・実行未確認として扱います。
+
+1. 前提・対象範囲・未確認点
+目的: 合成Word文書を編集可能で開き、本文中の OfficeCatalog をすべて T06Replaced に置換して別名保存する。
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx
+Wordインスタンス: WordInstance
+入力の開き方: Visible: True、ReadOnly: False
+置換設定: ワイルドカードなし、MatchCase: False、MatchEntireWord: False
+保存形式: Word.WordFormat.FromExtension。出力パスの .docx 拡張子から形式を決定する、採取済みの設定です。
+終了処理: 保存後に Word.CloseWord.Close で同じインスタンスを閉じる。
+上書き: Word.SaveWord.SaveAs の確認済み原文には、既存ファイル衝突時の設定がありません。安全のため、実行前に出力ファイルが存在しないことを確認してください。既存出力を無断で上書きする前提にはしません。
+未確認範囲: 表、ヘッダー、フッター、テキストボックス、フィールド、変更履歴、複雑な書式の保持は、このナレッジでは独立に確認されていません。確認済み記録は、日本語・改行・置換対象外本文の照合と元文書のハッシュ不変です。
+
+根拠環境はPAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データです。
+
+2. PADで先に確認する設定
+出力フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence が存在することを確認します。
+normal-chat-t06-final.docx が既に存在する場合は、今回のフローを実行せず、退避または別名への変更を先に行います。
+入力文書をWordなどで開いている場合は閉じます。特にロックや読み取り専用状態がないことを確認します。
+新しい空フローの対象サブフロー、通常は Main に、次の4アクションだけを貼り付けます。
+入力変数やUI要素の事前作成は不要です。最初のアクションがOfficeインスタンス型の WordInstance を生成し、後続3アクションが同じインスタンスを参照します。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: 空のサブフロー全体、または今回追加する連続した4アクション
+
+[code block: see robin.txt]
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx'''
+Word.CloseWord.Close Instance: WordInstance
+
+各行の根拠は、編集可能な既存Word起動 catalog/actions/word-launch/open-editable.robin、全件リテラル置換 catalog/actions/word-replace/all-literal.robin、docx拡張子による別名保存 catalog/actions/word-save/as-docx-extension.robin、保存後の終了 catalog/actions/word-close/no-save.robin です。
+
+4. PADデザイナー上での確認
+
+貼り付け直後に次を確認してください。
+
+アクション数が4
+順序が「Word起動 → 検索と置換 → 別名保存 → Word終了」
+1行目の生成変数が WordInstance
+後続3アクションのインスタンスがすべて WordInstance
+ReadOnly が False
+検索文字列が OfficeCatalog
+置換文字列が T06Replaced
+大文字と小文字を区別しない設定
+単語全体だけに限定しない設定
+保存形式が FromExtension
+入力パスと出力パスが異なる
+デザイナーに赤いエラー表示がない
+4行の後に、元ファイルへ保存する別アクションがない
+
+この置換設定は「完全一致する単語だけ」ではなく、本文中で検索文字列に一致する箇所をすべて置換する設定です。したがって、より長い文字列に含まれる OfficeCatalog も対象になり得ます。
+
+5. 合成データでの実行・照合
+入力文書を別の検証用コピーに複製し、可能なら実行前のSHA-256を記録します。
+出力先に normal-chat-t06-final.docx が存在しない状態で実行します。
+Wordが閉じられ、PADが準備完了へ戻ったことを確認します。
+出力文書を開き、本文中に OfficeCatalog が残っていないことを検索します。
+T06Replaced が期待した箇所に存在することを確認します。
+指定文字列以外の本文、日本語、段落、改行を入力文書と比較します。
+元の word-catalog.docx の更新日時とSHA-256を実行前後で比較し、不変であることを確認します。
+再実行は、生成済み出力を退避または削除した検証環境でのみ行います。既存出力がある状態での SaveAs の衝突動作は、この根拠では確認されていません。
+
+確認状態: 各アクションと設定はPAD採取済みです。Wordの既存文書について、置換・別名保存・対象外本文保持・入力不変の確認記録があります。一方、今回提示したパスと文字列による4行は、現時点では静的に組み合わせた貼り付け案であり、今回のフローとしての再貼り付け・実行・期待値照合は未確認です。
+
+ソース

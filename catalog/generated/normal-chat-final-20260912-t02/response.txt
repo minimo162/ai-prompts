@@ -1,0 +1,90 @@
+Copilot said:
+
+ご指定の処理は、添付ナレッジにあるT02の実測済み3アクション構成と、入力・出力パスを含めて一致します。以下では、PAD側の前提、貼り付け用Robin、確認方法、期待結果を分けて示します。
++ 1
+
+1. 前提・対象範囲
+目的: UTF-8の合成CSVを読み、Status列が対象と完全一致する行だけを新しいCSVへ保存
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\csv\t02-input-20260910.csv
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t02-output-20260910.csv
+入力変更: なし
+出力衝突時: 既存内容を上書き
+アプリ／UI要素: 不要
+生成変数:
+CSVTable: ヘッダー付きDataTable
+FilteredDataTable: 抽出後のDataTable
+フィルター条件:
+列インデックス: 2
+対応する列: Status
+演算子: Equal
+値: 対象
+大文字小文字を区別: True
+CSV設定:
+読み書きともUTF-8
+区切りはシステム既定
+先頭行を列名として読み取る
+出力にも列名を含める
+既存出力は上書き
+
+この構成は、PAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データの条件で、別の空フローへの再貼り付け、保存、再コピー、2回の実行、論理CSVの照合まで記録されています。根拠はcatalog/flows/datatable-filter/roundtrip.robinとcatalog/evidence/filter-t02-roundtrip2-run-2.jsonです。
+
+2. PADで先に確認する設定
+
+追加の入力変数、Excelインスタンス、UI要素は作成しません。
+
+貼り付け前に、次の2点だけ確認してください。
+
+入力CSVが指定パスに存在すること。
+出力フォルダーが既に存在し、書き込み可能であること。
+
+このフローは出力ファイルを上書きします。既存出力を残す必要がある場合は、実行前に別名で退避してください。上書き以外の衝突設定へ変更した構成としては扱いません。
+
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: 空のMain、またはこの処理用に確保した連続3アクション範囲
+
+[code block: see robin.txt]
+File.ReadFromCSVFile.ReadCSV CSVFile: $'''C:\Users\yuuki\ai-prompts\catalog\fixtures\csv\t02-input-20260910.csv''' Encoding: File.CSVEncoding.UTF8 TrimFields: True FirstLineContainsColumnNames: True ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault CSVTable=> CSVTable
+Variables.FilterDataTable DataTable: CSVTable FilterParameters: { ^['RULE', 'COLUMN', 'OPERATOR', 'VALUE'], [$'''''', 2, $'''Equal''', $'''対象'''] } MatchCase: True FilteredDataTable=> FilteredDataTable
+File.WriteToCSVFile.WriteCSV VariableToWrite: FilteredDataTable CSVFile: $'''C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t02-output-20260910.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: True IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault
+
+3行ともPADからコピーされたT02原文です。特に2行目のFilterParametersは、空文字リテラル$''''''を含め、根拠原文を変更していません。
+
+4. デザイナー上での確認
+
+貼り付け直後に、次を確認します。
+
+アクション数が3個である。
+順序が次のとおりである。
+CSVファイルから読み取る
+データテーブルをフィルター処理
+CSVファイルに書き込む
+赤いエラー表示がない。
+1番目の出力CSVTableがDataTableとして、2番目で参照されている。
+2番目の出力FilteredDataTableがDataTableとして、3番目で参照されている。
+フィルター列がインデックス2、値が対象、大文字小文字区別が有効になっている。
+読み取り側の「最初の行に列名が含まれています」が有効になっている。
+書き込み側の「列名を含める」が有効になっている。
+出力ファイルが存在する場合の設定が「上書き」になっている。
+
+CSVTableやFilteredDataTableが引用符付き文字列として表示された場合は実行しないでください。ナレッジでは、変数欄へ文字列を直接入力した形はDataTable型エラーになることが確認されています。
+
+5. 実行と期待結果の照合
+入力CSVを複製した合成データであることを確認します。
+入力ファイルの更新日時またはハッシュを実行前に記録します。
+フローを保存します。
+1回実行します。
+出力CSVをCSV対応の方法で開き、次を確認します。
+ヘッダーが出力されている
+Status列の各データ行がすべて対象
+列数が入力と一致
+日本語が文字化けしていない
+カンマを含むフィールドが別列へ分割されていない
+フィールド内の二重引用符が論理値として保持されている
+入力CSVが変更されていないことを確認します。
+もう一度実行し、既存出力が正常に上書きされ、同じ論理CSVになることを確認します。
+
+実測記録上の出力形式は、UTF-8 BOM付き、CRLF、末尾改行なしです。期待結果はバイト列や画面表示だけでなく、ヘッダーとStatus=対象の論理行、列数、引用フィールドの値で照合してください。
+
+ソース

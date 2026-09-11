@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T07:11:03+09:00",
+  "case": "T08",
+  "status": "PASS_FINALC_20260912_EXPECTED_ERROR",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/cfba1a49-6f79-4ad5-8f08-e8423533e364",
+  "conversation_title": "PADでファイル読み取りエラー処理案",
+  "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension)",
+  "model_label_on_page": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089",
+  "attachments_in_user_message": [
+    "agent-instructions.txt",
+    "PAD-Robin-Knowledge-Bundle.txt"
+  ],
+  "body": {
+    "file": "sent-body.txt",
+    "sha256": "891ea095ae7288279ee61efde4c020a993cf510e284bdd21e516af0a56ee94b9",
+    "chars": 4306,
+    "composer_verification": "SHA-256 of composer <p> textContent (aria-hidden cursor span excluded) joined by \n matched the body file before send"
+  },
+  "generated_response": "response.txt",
+  "generated_robin": {
+    "path": "robin.txt",
+    "sha256": "7afd570bf8800285bb784b61dcb11e61ca6a35930997bdf5c3966c635311ab88",
+    "code_blocks": 1,
+    "lines": 9,
+    "per_line_lengths": [
+      5,
+      56,
+      35,
+      14,
+      42,
+      3,
+      187,
+      3,
+      30
+    ],
+    "markdown_escapes": 0,
+    "nbsp": 0,
+    "cr": 0,
+    "extraction": "pre.textContent (single pre, 9 lines 5/56/35/14/42/3/187/3/30, nbsp 0, markdown escapes 0) SHA-256 57c4914a… equals the P3b T08 robin (named FileNotFound rule + default handler, the measured combined reference in 02-Control) without trailing newline; robin.txt materialized from that identical file. Differs from the final-20260912 answer (7 lines, default handler only).",
+    "raw_unmodified": true
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT08FinalC_20260912",
+    "designer_process_id": 48720,
+    "paste_save": "../../evidence/t08-finalc-20260912-pad-paste-save-20260912.json",
+    "action_count_after_paste": 4,
+    "recopy": "pad-recopy.robin",
+    "recopy_sha256": "dabbbdc234418bb3d56329ec9a53c1fc3616bc65ff50b613f4b2e4c2231a6059",
+    "recopy_note": "PAD recopy re-indents handler bodies and uses CRLF; instruction lines equal after whitespace normalization",
+    "run1": "../../evidence/t08-finalc-20260912-pad-run1-20260912.json",
+    "run2": "../../evidence/t08-finalc-20260912-pad-run2-20260912.json",
+    "missing_file_exists_before_after": false,
+    "expected": {
+      "ErrorHandledDefault": "true",
+      "LastError_contains": "が見つかりません",
+      "no_write_no_marker": true
+    },
+    "observed": {
+      "run1": {
+        "ErrorHandledDefault": "true",
+        "LastError": "ファイル ...\t08-missing-20260910.txt が見つかりません"
+      },
+      "run2": {
+        "ErrorHandledDefault": "true",
+        "LastError": "ファイル ...\t08-missing-20260910.txt が見つかりません"
+      }
+    },
+    "named_FileNotFound_match": "the named rule is present in the pasted block; the run completed via the default handler (true preview + LastError); named-rule matching itself remains unverified, as the answer states",
+    "new_files_in_evidence": "only the three t08-finalc evidence records"
+  },
+  "acceptance": "PASS_FINALC_20260912_EXPECTED_ERROR",
+  "bundle_manifest": "copilot/knowledge-bundle-manifest-20260912c.json"
+}

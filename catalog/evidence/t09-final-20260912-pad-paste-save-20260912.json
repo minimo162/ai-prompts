@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-11T20:38:24.0100639Z",
+    "flow_name":  "RobinKnowledgeT09FinalLive_20260912",
+    "source_robin":  "C:\\Users\\yuuki\\ai-prompts\\catalog\\generated\\normal-chat-final-20260912-t09\\robin.txt",
+    "source_sha256":  "5c01b555e98e60ec9ad6180eb17d714ffa3f048088eda9f3eff6357ea4b0c668",
+    "source_bytes":  1440,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  6,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

@@ -1,0 +1,21 @@
+{
+    "schema_version":  1,
+    "observed_at":  "2026-09-11T16:26:38.4043679Z",
+    "flow_name":  "RobinKnowledgeT09Repo_20260912",
+    "designer_process_id":  24872,
+    "completion_observed":  true,
+    "ready_observed":  true,
+    "start_enabled_after":  true,
+    "variable_previews":  [
+                              "T09-clicked",
+                              "Web ブラウザー インスタンス"
+                          ],
+    "status_bar":  [
+                       ""
+                   ],
+    "edge_process_count_after":  15,
+    "edge_titles":  [
+                        "チャット | Microsoft Copilot - 個人 - Microsoft​ Edge"
+                    ],
+    "note":  "Polling only; Start was pressed once by tools/Run-PadFlowLive.ps1 (t09-repo-run1 timed out at 90s while the flow was on WAIT 500 = 500 seconds)."
+}

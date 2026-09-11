@@ -62,3 +62,9 @@ P3追加probe（現行bundleへ統合する場合は、統合後のハッシュ�
 - 日時: `DateTime.Add` の1日加算、`DateTime.Subtract` の1日減算、`DateTime.GetCurrentDateTime` のDateAndTime／システムタイムゾーンを各専用flowでコピー・保存・2回実行した。証拠: `catalog/evidence/p3-date-add-probe-20260910.json`、`p3-date-subtract-probe-20260910.json`、`p3-date-format-probe-20260910.json`。
 - カスタム日時書式化: ダイアログ選択後のPAD内部例外 `System.InvalidOperationException: Sequence contains no matching element` が発生し、成功原文・実行値は未確認。証拠: `catalog/evidence/p3-date-format-custom-failure-20260910.json`、`p3-date-format-dialog-crash-20260911.json`。
 - リスト項目取得: 「リストから項目を削除」は取得値を返さず、現行アクション検索でも専用取得アクションは観測されなかった。式参照等の別方式は未確認。証拠: `catalog/evidence/p3-list-remove-probe-20260910.json`、`p3-list-get-search-boundary-20260911.json`。
+
+2026-09-12の追加採取: リスト項目の取出し（インデックス指定）
+- 専用フロー`RobinKnowledgeP3ListGet_20260912`で、採取済みの`Variables.CreateNewList List=> CatalogList`と`Variables.AddItemToList`（項目`CatalogItem`、`SecondItem`）の後に、左パネルの「変数の設定」を追加した。
+- 「変数の設定」ダイアログの変数ピッカーは、リスト変数`CatalogList`の下に`.Count`だけを表示し、項目を選ぶ入口は無い。ピッカーで`%CatalogList%`を挿入した後、閉じる`%`の前へ`[0]`を入力して`%CatalogList[0]%`とした。Designerは受理し、エラー無し。
+- PADからコピーした原文行: `SET NewVar TO CatalogList[0]`（`catalog/evidence/p3-list-get-index-probe-20260912.robin`、SHA-256 `bdb98da7bbbd77aa1c92dc7eb7f806e255373dd233125ae8ed5690459bccc75d`）。2回実行とも`CatalogList=[CatalogItem, SecondItem]`、`NewVar=CatalogItem`。証拠: `catalog/evidence/p3-list-get-index-probe-20260912.json`。
+- 確認範囲: 先頭項目（インデックス0）の取出しのみ。範囲外・負のインデックス・末尾指定、取り出した値を別アクションで使う組合せ、別フローへの再貼付けは未確認。専用の「項目を取得」アクションは左パネル検索で観測されていない（`p3-list-get-search-boundary-20260911.json`）。

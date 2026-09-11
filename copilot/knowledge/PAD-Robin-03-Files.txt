@@ -97,7 +97,27 @@ P3追補: DataTable行追加・セル更新・行反復（別probe、現行bundl
 
 今回の追加採取: ファイルパス変数からテキストを読み取る
 - `File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents` を採取した。原文`catalog/actions/file-read-text/variable-path-utf8.robin`（SHA-256: 365ed2c2017f33ba31eba5c448febbaaf11e017aaf052548b4eb7f68d6b75be9）。
-- `Folder.GetFiles`→`LOOP FOREACH CurrentFile IN Files`→この読取りを組み合わせた別フローを保存・実行し、合成`.txt`ファイルの内容を取得した。組合せ原文は`catalog/flows/t03-folder-foreach-read/partial.robin`、証拠は`catalog/evidence/t03-partial-paste.json`と`t03-partial-run-1.json`。拡張子判定・Elseは未確認。
+- `Folder.GetFiles`→`LOOP FOREACH CurrentFile IN Files`→この読取りを組み合わせた別フローを保存・実行し、合成`.txt`ファイルの内容を取得した。組合せ原文は`catalog/flows/t03-folder-foreach-read/partial.robin`、証拠は`catalog/evidence/t03-partial-paste.json`と`t03-partial-run-1.json`。拡張子の厳密判定とElseは次項で採取した。
+
+2026-09-12の追加採取: 拡張子が.txtのファイルだけを読み取り、それ以外をElseへ送る（T03の厳密判定）
+- 判定はファイル変数の`.Extension`プロパティを「と等しい」で`.txt`と比較する。設定はIfダイアログの変数ピッカーで`CurrentFile > .Extension`を選び、2番目のオペランドへ`.txt`を入力した（原文行 `IF CurrentFile.Extension = $'''.txt''' THEN`）。パスに`.txt`を含むかの`Contains`条件は厳密判定ではない。
+- 別の空フローへ原文ファイルから貼付け・保存・再コピー（SHA-256 `c15a5970640f9d0bcb322b5655bffca3b7b84ad4a86f31c67e064d60fb9398e4`一致）し、`catalog/fixtures/files`（`copy-input-20260909.txt`、`t03-alpha.txt`、`t03-beta.csv`、`t03-gamma.md`）で2回実行した。両回とも`TxtCount=2`、`OtherCount=2`、`TxtSeen=...\t03-alpha.txt`、`OtherSeen=...\t03-gamma.md`、`FileContents=alpha 日本語`、入力4ファイルのSHA不変。証拠: `catalog/evidence/t03-ext-verify-acceptance-20260912.json`、`t03-ext-run1-20260912.json`、`t03-ext-run2-20260912.json`。
+- 実行確認済みの原文（`catalog/flows/t03-extension-branch/capture-pad-copy-20260912.robin`）:
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+SET TxtCount TO 0
+SET OtherCount TO 0
+LOOP FOREACH CurrentFile IN Files
+    IF CurrentFile.Extension = $'''.txt''' THEN
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+        SET TxtSeen TO CurrentFile
+        Variables.IncreaseVariable Value: TxtCount IncrementValue: 1
+    ELSE
+        SET OtherSeen TO CurrentFile
+        Variables.IncreaseVariable Value: OtherCount IncrementValue: 1
+    END
+END
+- 件数変数を持たない最小形（取得→For each→If .Extension→UTF-8読取り→Else（空）→END→END の7行）も、同じ原文行だけで組み立てて別の空フローへ貼付け・保存・2回実行した。証拠: `catalog/evidence/t03-ext-min-acceptance-20260912.json`。Elseの中で何もしない場合は`ELSE`の後に行を置かない。
+- 未確認: `.TXT`など大文字小文字の扱い、`x.txt.bak`や親フォルダー名に`.txt`を含む名前、`.Name`／`.NameWithoutExtension`による判定、サブフォルダー、空フォルダー。列挙順（NoSort）は観測値であり保証ではない。
 
 確認済みの原文
 - ファイルからテキストを読み取る（id: file-read-text-utf8、variant: utf8）

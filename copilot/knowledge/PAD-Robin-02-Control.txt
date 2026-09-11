@@ -26,10 +26,20 @@ If（For eachのCurrentItem列値との比較）
 
 If（ファイルパスに拡張子文字列を含む判定）
 - 最初のオペランドへ既存ファイル変数`%CurrentFile%`、演算子「次を含む」、2番目のオペランド`.txt`、大文字小文字区別=Falseを設定した。
-- 実測Robin: `IF Contains(CurrentFile, $'''.txt''', False) THEN`。原文`catalog/actions/if/current-file-contains-txt.robin`（SHA-256: f634ff144bee7dd5d4faa9cf81f2d42ac484c1c8e2186d1436ceb79d5e27061c）。拡張子判定の開始行として採取したが、Else側の実行は未確認。
+- 実測Robin: `IF Contains(CurrentFile, $'''.txt''', False) THEN`。原文`catalog/actions/if/current-file-contains-txt.robin`（SHA-256: f634ff144bee7dd5d4faa9cf81f2d42ac484c1c8e2186d1436ceb79d5e27061c）。これはパス文字列に`.txt`を含むかの部分一致であり、拡張子の厳密判定ではない。厳密判定は次項の`.Extension`プロパティ比較を使う。
+
+If（ファイル変数の.Extensionプロパティが.txtと等しい判定）＋Else（2026-09-12採取・別フロー2回実行）
+- UI名: If。最初のオペランドは変数ピッカーで`フロー > CurrentFile > .Extension`を選んで`%CurrentFile.Extension%`とし、演算子「と等しい (=)」、2番目のオペランドへ`.txt`を入力した。続けて左パネルの「Else」をIfの内側へ追加した。ファイル変数のピッカーには`.CreationTime`、`.Exists`、`.FullName`、`.IsEmpty`、`.IsHidden`、`.LastModified`、`.Name`、`.RootPath`、`.Directory`、`.Extension`、`.IsArchive`などのプロパティが表示された。
+- PADからコピーした原文行（`catalog/evidence/t03-ext-probe-capture-20260912.robin`、SHA-256 `51e7a5a016859cadcdd0b9b09f9d7c81c46354ac12dfee7321273b3f547b9afe`）:
+  `IF CurrentFile.Extension = $'''.txt''' THEN`
+  `ELSE`
+  `END`
+- `Folder.GetFiles`（フィルター`*`）→`LOOP FOREACH CurrentFile IN Files`→このIf／Else→`END`／`END`の組合せは、別の空フローへ原文ファイルから貼付け・保存・再コピー（SHA一致）し、合成4ファイル（`.txt`2件、`.csv`1件、`.md`1件）で2回実行した。両回とも`.txt`側の分岐が2回、Else側が2回、入力SHA不変を確認した。原文と証拠は `catalog/flows/t03-extension-branch/capture-pad-copy-20260912.robin`、`catalog/evidence/t03-ext-verify-acceptance-20260912.json`。
+- 大文字小文字を区別するか（`.TXT`）、`x.txt.bak`のような名前、`.Name`／`.NameWithoutExtension`による判定、サブフォルダーは未確認。`Contains(CurrentFile, ...)`の部分一致を厳密判定の代わりに使わない。
 
 変数の加算
 - `Variables.IncreaseVariable` の固定値1とループ変数の2設定を別例として収録している。数値変数を事前に定義し、型を文字列と混ぜない。
+- 変数名は変数参照で書く（実測原文: `Variables.IncreaseVariable Value: TxtCount IncrementValue: 1`）。`Value: $'''TxtCount'''`のように文字列リテラルにすると、貼付け直後のDesignerで「パラメーター '変数名' は変数である必要があります」のエラーになる（2026-09-12、`catalog/evidence/t03-ext-verify-acceptance-20260912.json`の初回貼付け）。`catalog/evidence/p3-excel-foreach-flow-state-20260911.robin`にある文字列リテラル形は設定境界の記録であり、生成根拠にしない。
 
 P3追加probe（別probeの実行根拠。新しい現行bundleでのT01〜T10受入とは分離する）
 - Else: `IF yes = yes THEN`／`ELSE`／`END` を各分岐1回実行。証拠: `catalog/evidence/p3-else-probe-20260910.json`。
@@ -51,4 +61,4 @@ ERROR => LastError Reset: True
 - 名前付きカスタムエラー `FileNotFound` の変数設定はruntime errorが残ったため、既定エラー成功と混同しない。証拠: `catalog/evidence/p3-error-custom-handler-20260911.json`。
 
 未採取・未確認
-- 入れ子分岐、分岐内side effect、入れ子loop、カスタムエラー名の一致条件、エラー後の一般的な後続処理は未確認。未観測のブロック終端や引数をLoop例から類推して生成しない。
+- For eachの内側にIf／Elseを置き、両分岐で`SET`と`Variables.IncreaseVariable`を実行する組合せは2026-09-12のT03拡張子probeで2回実行した（`catalog/evidence/t03-ext-verify-acceptance-20260912.json`）。If内If、入れ子loop、カスタムエラー名の一致条件、エラー後の一般的な後続処理は未確認。未観測のブロック終端や引数をLoop例から類推して生成しない。

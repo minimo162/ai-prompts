@@ -90,3 +90,10 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools\Run-PadFlowLive.ps
 - 出力・入力の照合: `catalog/evidence/t01-current-bundle-pad-output-comparison-20260911.json`
 
 今回のT01では、アクション数3、保存完了、2回のRun完了、出力90 bytes・UTF-8 BOM・CRLF・期待SHA一致、入力87 bytes・入力SHA不変を確認した。Copilot原文Robin（646 bytes/LF）とPAD再コピー（649 bytes/CRLF）は内容を改変せず別保存し、改行を正規化した本文一致を確認した。
+
+## 2026-09-12 追記: 待機の単位、UI要素の取り込み、通常チャットの操作方法
+
+- PADの `WAIT n` は秒単位である（待機ダイアログの説明は「指定された秒数だけフローの実行を中断します」）。`WAIT 500` は8分20秒待つ。T09教材は待機ダイアログで1へ直し、PADから再コピーした `WAIT 1` を正とする。
+- 通常チャットが生成するWebAutomation行はControlRepository（UI要素）を運ばない。貼付け先フローへは、ControlRepository付きの採取原文（`catalog/flows/ui-t09-local-roundtrip/roundtrip-wait1-20260912.robin`）を `tools/Paste-PadRobinLive.ps1` でファイルから貼り付けて3要素を登録し、デザイナーでアクションを全選択（Ctrl+A）して削除してから、生成6行を同じツールで貼り付ける。
+- `Paste-PadRobinLive.ps1`／`Copy-PadFlowLive.ps1` の件数確認は、Designerのアクション一覧が仮想化されるため、対象Designerを最大化・前面化してから実行する。開いているDesignerが多いと（本セッションでは36窓）貼付けが応答しないことがあり、保存済みの不要なDesignerを閉じると回復した。
+- 通常M365 Copilotチャットは Google Chrome（Claude in Chrome拡張）で操作する。本文はクリップボード経由で貼り付け（Set-Clipboard→composerクリック→Ctrl+A/Delete/Ctrl+V）、送信前に composer の `<p>` textContent（aria-hidden のカーソル用spanを除く）を改行で連結したSHA-256を本文ファイルと照合する。貼付けはそのタブが可視・前面のときだけ成立するため、`document.title` に目印を付けてCtrl+Tabで前面化してから行う。添付は `file_upload`、モデルは「モデル セレクター」→Think Deeper、回答は `get_page_text` と `pre.textContent` の行長で照合する。

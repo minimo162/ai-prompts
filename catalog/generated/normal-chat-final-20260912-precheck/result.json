@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T01:42:00+09:00",
+  "case": "knowledge_precheck",
+  "status": "PASS_REFERENCE_ONLY",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/6e8713bf-a4a3-427a-ab76-d704e36117ce",
+  "conversation_title": "PAD Robin形式の確認済み技術要約",
+  "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension)",
+  "model_label_on_page": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041",
+  "bundle_manifest": "copilot/knowledge-bundle-manifest-20260912b.json",
+  "attachments_in_user_message": ["agent-instructions.txt", "PAD-Robin-Knowledge-Bundle.txt"],
+  "body": {"file": "sent-body.txt", "sha256": "3ef4b6b93951035a1bae90b174c27543b3083fe83538aed630a003f95885ae8a", "chars": 4251, "composer_verification": "SHA-256 of the composer's <p> children joined by \n matched before send"},
+  "prompt_file": "prompt.txt",
+  "generated_response": "response.txt",
+  "response": {"chars_after_copilot_said": 3780, "robin_blocks": 0, "pre_elements": 0},
+  "checks": {"generated_robin": false, "referenced_t03_extension_capture": true, "referenced_t09_wait_seconds_and_element_import": true, "referenced_list_index_probe": true, "unconfirmed_boundaries_listed": true},
+  "acceptance": "PASS_REFERENCE_ONLY",
+  "note": "Precheck is a knowledge-reference confirmation in a separate conversation; it is not case acceptance."
+}

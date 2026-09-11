@@ -1,0 +1,87 @@
+Copilot said:
+
+ご指定の処理は、ナレッジ内のT02実測例と入力パス、出力パス、条件、設定が一致しています。以下は、PADからコピーした原文を別フローへ無修正で再貼り付け、保存、2回実行し、論理CSVの内容まで照合した3アクション構成です。
+
+1. 前提・対象範囲
+目的: UTF-8の入力CSVを読み、Status列が「対象」の行だけを新しいCSVへ保存
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\csv\t02-input-20260910.csv
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t02-output-20260910.csv
+入力CSV: 変更しない
+フィルター対象列: 列インデックス2。実測fixtureでは3列目のStatus
+比較条件: Equal、値は「対象」、大文字小文字を区別
+区切り: 読み取り、書き出しともにSystemDefault
+出力列名: 含める
+出力エンコード: UTF-8
+既存出力がある場合: 上書き
+使用変数:
+CSVTable: ヘッダー付きDataTable
+FilteredDataTable: 抽出後のDataTable
+Officeインスタンス、UI要素: 不要
+
+実測例では、日本語、カンマを含む引用フィールド、二重引用符がCSV処理によって保持されています。出力はUTF-8 BOM付き、CRLF、末尾改行なしで、ヘッダーとStatus=対象の論理行が一致しました。
+
+2. PADで先に確認する設定
+
+貼り付け前に、次を確認してください。
+
+入力ファイルが存在し、ほかのアプリで書き換えられていないこと。
+出力先フォルダー
+C:\Users\yuuki\ai-prompts\catalog\evidence
+が存在すること。
+同名の出力CSVが存在する場合は上書きされること。
+PAD環境が実測条件と同じ、または互換であること。
+PAD: 2.71.115.26224
+表示言語: 日本語
+Power Fx: OFF
+新しい空のサブフロー、または対象サブフロー内の空いている位置へ、以下の3行をまとめて貼り付けること。
+3. 貼り付け用Robin
+
+対象サブフロー: Mainなど、CSV抽出処理を実行するサブフロー
+置換範囲: 新規フローならサブフロー全体。既存フローなら、この処理用に確保した連続範囲のみ
+
+File.ReadFromCSVFile.ReadCSV CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\csv\\t02-input-20260910.csv''' Encoding: File.CSVEncoding.UTF8 TrimFields: True FirstLineContainsColumnNames: True ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault CSVTable=> CSVTable
+Variables.FilterDataTable DataTable: CSVTable FilterParameters: { ^['RULE', 'COLUMN', 'OPERATOR', 'VALUE'], [$'''''', 2, $'''Equal''', $'''対象'''] } MatchCase: True FilteredDataTable=> FilteredDataTable
+File.WriteToCSVFile.WriteCSV VariableToWrite: FilteredDataTable CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t02-output-20260910.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: True IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault
+
+根拠は、PAD-Robin-Knowledge-Bundleに収録されたcatalog/flows/datatable-filter/roundtrip.robinと、実行・出力照合記録catalog/evidence/filter-t02-roundtrip2-run-2.jsonです。空文字リテラルを含むFilterParameters行は実測原文を保持しています。
+
+4. デザイナー上の確認
+
+貼り付け直後に、次を確認してください。
+
+アクション数が3件である。
+順序が次のとおりである。
+CSVファイルから読み取る
+データテーブルをフィルター処理
+CSVファイルに書き込む
+1件目の出力CSVTableがDataTableとして認識されている。
+2件目の入力が文字列"CSVTable"ではなく、変数CSVTableになっている。
+2件目の条件が以下になっている。
+列／インデックス: 2
+演算子: と等しい
+値: 対象
+大文字小文字を区別: 有効
+3件目の入力が文字列ではなく、DataTable変数FilteredDataTableになっている。
+3件目で以下を確認する。
+列名を含める: 有効
+エンコード: UTF-8
+ファイルが存在する場合: 上書き
+列区切り: システムの既定値
+赤いエラー表示や型エラーがない。
+ブロックアクションはないため、ENDの対応確認は不要。
+5. 合成データでの実行・照合
+念のため入力CSVを別名で複製し、その複製のSHA-256または更新日時を記録します。
+出力先に既存ファイルがある場合は、必要なら退避します。
+フローを保存して実行します。
+実行後、次を確認します。
+入力CSVの内容が変わっていない
+出力CSVの先頭行に元の列名がある
+出力の各データ行でStatus列がすべて「対象」
+Statusが「対象外」などの行が含まれない
+日本語が文字化けしていない
+カンマを含むフィールドが列分割されていない
+フィールド内の二重引用符が論理値として保持されている
+同じフローをもう一度実行し、上書き後も論理CSVが同じで、行が重複追加されていないことを確認します。
+確認範囲
+
+この構成は、実測済みの同一fixture、同一パス、同一フィルター条件による完成例です。ただし、今回この回答から利用者環境のPADへ貼り付けて再実行したものではありません。現在の根拠は、過去に行われた「再貼り付け、保存、再コピー、2回実行、出力照合」の記録です。

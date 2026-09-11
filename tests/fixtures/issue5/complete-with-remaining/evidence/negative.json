@@ -1,0 +1,8 @@
+{
+ "case": "negative_suite",
+ "status": "PASS_NEGATIVE_FAIL_CLOSED",
+ "bundle_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+ "response": {
+  "pre_elements": 0
+ }
+}

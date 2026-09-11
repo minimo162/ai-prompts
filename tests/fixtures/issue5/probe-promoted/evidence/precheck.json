@@ -1,0 +1,9 @@
+{
+ "status": "PASS_REFERENCE_ONLY",
+ "package": {
+  "bundle_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+ },
+ "response": {
+  "robin_blocks": 0
+ }
+}

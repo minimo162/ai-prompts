@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T02:47:00+09:00",
+  "case": "T07",
+  "status": "PASS_FINAL_20260912",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/55e2319b-ba8f-435c-8e4d-505c037eef12",
+  "conversation_title": "PADでPDFページ抽出フロー案作成",
+  "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension)",
+  "model_label_on_page": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041",
+  "attachments_in_user_message": [
+    "agent-instructions.txt",
+    "PAD-Robin-Knowledge-Bundle.txt"
+  ],
+  "body": {
+    "file": "sent-body.txt",
+    "sha256": "85fad6dcbce653af13197df61e7489b05d4aa05f08f5973b39071ae10f9f60c2",
+    "chars": 4340,
+    "composer_verification": "composer <p> join SHA matched before send"
+  },
+  "generated_response": "response.txt",
+  "generated_robin": {
+    "path": "robin.txt",
+    "sha256": "07586350d86076fcacea46f6f3a6b5901bfc67a61278c96f046fd2ccc37b6bd1",
+    "code_blocks": 1,
+    "lines": 2,
+    "per_line_lengths": [
+      217,
+      228
+    ],
+    "markdown_escapes": 0,
+    "nbsp": 0,
+    "cr": 0,
+    "extraction": "pre.textContent per-line lengths and content matched the P3b T07 robin byte-for-byte; robin.txt materialized from that identical file",
+    "raw_unmodified": true
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT07FinalLive_20260912",
+    "designer_process_id": 35224,
+    "paste_save": "../../evidence/t07-final-20260912-pad-paste-save-20260912.json",
+    "action_count_after_paste": 2,
+    "recopy": "pad-recopy.robin",
+    "recopy_sha256": "b8a2c15fcca33f0cbb709f00e5813bbb76627ffabf00530dcbb653d8d3e78b76",
+    "run1": "../../evidence/t07-final-20260912-pad-run1-20260912.json",
+    "run2": "../../evidence/t07-final-20260912-pad-run2-20260912.json",
+    "input_sha256_before_after": "f5f246849a31e2797f998e426f459ac18b7260ed76206ab987950a1bf80c348d",
+    "output": {
+      "expected": "contains PAGE_TOKEN_A2, not PAGE_TOKEN_A1",
+      "run1": {
+        "bytes": 135,
+        "sha256": "f7e592cc86719c395657ddffe2bf76ec7538c7d4deb7edb03fae7a5d90ba5fe2",
+        "PAGE_TOKEN_A2": true,
+        "PAGE_TOKEN_A1": false
+      },
+      "run2": {
+        "bytes": 135,
+        "sha256": "f7e592cc86719c395657ddffe2bf76ec7538c7d4deb7edb03fae7a5d90ba5fe2",
+        "PAGE_TOKEN_A2": true,
+        "PAGE_TOKEN_A1": false
+      },
+      "copies": [
+        "run1-output.txt",
+        "run2-output.txt"
+      ]
+    },
+    "protected_output_restored": true
+  },
+  "acceptance": "PASS_FINAL_20260912"
+}

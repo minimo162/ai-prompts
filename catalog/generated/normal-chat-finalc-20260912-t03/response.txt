@@ -1,0 +1,90 @@
+Copilot said:
+
+以下は、添付ナレッジに収録されたT03の実測済み13行版を、そのまま合成フォルダーへ適用する案です。全ファイルを1回ずつ列挙し、.txtだけをUTF-8で読み、.csvと.mdをElse側へ送ります。
+
+1. 前提・対象範囲・未確認点
+目的: フォルダー直下の複数ファイルをFor eachで1回ずつ処理する。
+入力フォルダー: C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+対象: CurrentFile.Extensionが厳密に.txtと等しいファイル。
+対象外: .csv、.mdなど、.txt以外のファイル。
+入力: フォルダー内の既存ファイル。入力ファイルは変更しない。
+出力: ファイルへの保存は行わず、PAD変数に結果を保持する。
+上書き: 保存処理がないため該当なし。
+サブフォルダー: 対象外。
+並び順: 並べ替えなし。最後に残るTxtSeen、OtherSeen、FileContentsのファイルは列挙順に依存する。
+未確認: .TXTなど大文字の拡張子、サブフォルダー、空フォルダー、アクセス拒否、.txt.bakなどの境界条件。
+
+実測環境はPAD 2.71.115.26224、日本語UI、Power Fx OFFです。使用する取得、For each、.Extension条件、Else、UTF-8読取り、件数加算の組合せは、別の空フローへの無修正貼付け、保存、再コピー、および2回の実行まで確認されています。合成4ファイルでは.txtが2件、その他が2件となり、入力ファイルが不変であることも照合されています。根拠はPAD-Robin-Knowledge-Bundle内のcatalog/flows/t03-extension-branch/capture-pad-copy-20260912.robinおよびcatalog/evidence/t03-ext-verify-acceptance-20260912.jsonです。
+
+2. PADで先に確認する設定
+
+新しいフローのMainサブフローへ、次のRobin全体を貼り付けます。入力変数やUI要素、アプリインスタンスを事前作成する必要はありません。
+
+生成される変数と型は次のとおりです。
+
+Files: ファイルのリスト
+CurrentFile: 現在処理中のファイルオブジェクト
+FileContents: 最後に読み取った.txtファイルのテキスト
+TxtSeen: 最後に対象経路へ入ったファイルオブジェクト
+OtherSeen: 最後に対象外経路へ入ったファイルオブジェクト
+TxtCount: 数値
+OtherCount: 数値
+
+フォルダー取得の設定は、フィルター*、サブフォルダーなし、アクセス拒否時は失敗、並べ替えなしです。.txtだけを取得する*.txtフィルターではなく、全ファイルを取得してからIf／Elseで振り分けます。
+
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: 空のMain全体、または今回追加する連続した処理範囲全体
+
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+SET TxtCount TO 0
+SET OtherCount TO 0
+LOOP FOREACH CurrentFile IN Files
+IF CurrentFile.Extension = $'''.txt''' THEN
+File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+SET TxtSeen TO CurrentFile
+Variables.IncreaseVariable Value: TxtCount IncrementValue: 1
+ELSE
+SET OtherSeen TO CurrentFile
+Variables.IncreaseVariable Value: OtherCount IncrementValue: 1
+END
+END
+
+このRobinはPADからコピーされた実測原文の構成です。.Extensionによる条件分岐を含む13行版について、別フローへの貼付け、保存、再コピー、2回の実行および期待値照合が記録されています。
+
+4. デザイナー上での確認
+
+貼り付け直後に次を確認してください。
+
+アクションが合計13個として展開される。
+「フォルダー内のファイルを取得」が先頭にある。
+TxtCountとOtherCountの初期化がFor eachより前にある。
+For eachの反復値がCurrentFile、反復対象がFilesになっている。
+Ifの左辺がCurrentFile.Extension、比較値が.txtになっている。
+UTF-8読取りがIfの対象側だけにある。
+Else側には読取りアクションがない。
+If用とFor each用の2つの終了位置が正しく対応している。
+TxtCountとOtherCountが数値変数として認識されている。
+変数の加算で、変数名が文字列ではなく変数参照になっている。
+
+特に加算アクションがValue: TxtCountおよびValue: OtherCountになっていることを確認してください。これを文字列リテラルとして設定すると、変数である必要があるというデザイナーエラーになります。
+
+5. 合成データでの実行・照合
+元の合成フォルダーを複製し、複製側をテストに使う場合は、PADデザイナーで先頭アクションのフォルダーパスを設定し直して再コピーしてください。未採取のパス置換版Robinはここでは生成していません。
+フローを保存します。
+実行前にフォルダー内へ次の4ファイルが存在することを確認します。
+copy-input-20260909.txt
+t03-alpha.txt
+t03-beta.csv
+t03-gamma.md
+フローを1回実行します。
+実行後、次を照合します。
+TxtCount = 2
+OtherCount = 2
+FileContentsに、最後に読まれた.txtファイルの内容が入っている
+.csvと.mdの内容は読み取られていない
+入力4ファイルの内容とファイル数が変化していない
+もう一度実行し、件数が再び2と2になることを確認します。件数は各実行の冒頭で0へ初期化されるため、前回値へ累積しません。
+
+実測時にはFileContents=alpha 日本語、TxtCount=2、OtherCount=2が確認されています。ただし、取得設定がNoSortであるため、最後に残るファイル変数の値そのものを固定の列挙順として保証することはできません。

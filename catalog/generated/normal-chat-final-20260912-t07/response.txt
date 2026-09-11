@@ -1,0 +1,73 @@
+Copilot said:
+
+添付ナレッジのT07実測例を根拠に、PDFの2ページ目だけを抽出し、追加改行なしのUTF-8テキストとして指定先へ上書き保存するフロー案です。対象の2アクションは、PADへの再貼り付け、保存、2回の実行、識別文字の照合まで記録されています。
+
+1. 前提・対象範囲
+入力PDF: C:\Users\yuuki\ai-prompts\catalog\fixtures\pdf\source-a.pdf
+抽出対象: 2ページ目のみ
+ページ範囲: 開始 2、終了 2
+レイアウト検出: False
+抽出結果変数: ExtractedPDFText、テキスト型
+出力先: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt
+出力形式: UTF-8
+既存出力: 上書き
+追加の末尾改行: なし
+入力PDF: 読み取り対象のみで、変更しない
+ページ境界・抽出順: 後処理で整形しない
+
+実測環境はPAD 2.71.115.26224、日本語UI、Power Fx OFFです。T07の組み合わせ原文は catalog/generated/normal-chat-t07-20260910-final/robin.txt、記録上のSHA-256は 47a33ef2067bd37009187758e16fc36daa0f5447093b51e83e984e1d8fd484c9 です。
+
+2. PADで先に確認する設定
+
+事前に入力変数、PDFインスタンス、UI要素を作成する必要はありません。次を確認してください。
+
+入力PDFが指定パスに存在する。
+出力先フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence が存在する。
+同名出力が存在する場合、上書きしてよい。
+貼り付け先は、既存処理へ影響しない空のサブフロー、または検証用フローにする。
+対象PDFが合成fixtureの複製であることを確認する。
+3. 貼り付け用Robin
+
+対象サブフロー: Main、または空の検証用サブフロー
+置換範囲: 空のサブフロー全体へ、次の2アクションをそのまま貼り付け
+
+[code block: see robin.txt]
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\Users\yuuki\ai-prompts\catalog\fixtures\pdf\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 2 DetectLayout: False ExtractedText=> ExtractedPDFText
+File.WriteText File: $'''C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt''' TextToWrite: ExtractedPDFText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+この命令列は、PDF抽出結果のテキストをそのまま保存します。ページ境界の追加、並べ替え、改行補正、トークンの挿入は行いません。AppendNewLine: Falseにより、保存アクション側から余分な末尾改行を追加しません。
+
+4. PADデザイナーでの確認
+
+貼り付け直後に、次を確認します。
+
+アクション数が2である。
+順序が次のとおりである。
+PDFからテキストを抽出
+テキストをファイルに書き込む
+1番目のアクションが ExtractedPDFText を生成している。
+2番目のアクションが文字列ではなく、変数 ExtractedPDFText を参照している。
+開始ページと終了ページが、どちらも 2 である。
+レイアウト検出が無効である。
+エンコードがUTF-8である。
+新しい行を追加する設定が無効である。
+既存ファイル時の設定が上書きである。
+デザイナーに赤いエラー表示がなく、未定義変数がない。
+5. 保存・実行・期待結果の照合
+入力PDFを検証用に複製して使う場合は、Robin内の入力パスを変更せず、指定fixtureそのものが検証対象であることを確認します。
+フローを保存します。
+実行前に、入力PDFの更新日時またはSHA-256を記録します。
+フローを1回実行します。
+出力ファイルをUTF-8テキストとして開きます。
+出力にページ2の識別文字 PAGE_TOKEN_A2 が含まれることを確認します。
+ページ1の識別文字 PAGE_TOKEN_A1 が含まれないことを確認します。
+入力PDFのSHA-256が実行前後で変わっていないことを確認します。
+同じフローを再実行し、上書き後も同じ識別条件を満たすことを確認します。
+
+添付ナレッジでは、この2アクションを2回実行し、PAGE_TOKEN_A2を含み、PAGE_TOKEN_A1を含まない出力が確認されています。貼り付け証拠は catalog/evidence/normal-chat-t07-final-paste.json、実行証拠は catalog/evidence/normal-chat-t07-final-run-1.json と記録されています。
+
+確認範囲
+
+これは添付ナレッジに記録された合成PDFと指定パスに対する実測済み例です。暗号化PDF、スキャン画像だけのPDF、レイアウト検出ON、別のPAD版、別ページ範囲での動作は、この結果から成功済みとは扱いません。
+
+ソース

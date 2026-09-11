@@ -1,0 +1,84 @@
+Copilot said:
+
+以下は、添付ナレッジに収録されたT03の実測済み13行構成を、そのまま利用するフロー案です。全ファイル取得、For each、.Extensionによる厳密判定、UTF-8読取り、.csv／.mdの対象外経路まで、別フローへの再貼付けと2回の実行・期待値照合が記録されています。
+
+1. 前提・対象範囲
+目的: 指定フォルダー直下の全ファイルを一度ずつ処理し、拡張子が .txt のファイルだけをUTF-8で読み取ります。
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+サブフォルダー: 対象外です。
+対象: .txt
+対象外経路: .csv、.mdを含む、.txt以外の全ファイル
+ファイル変更: 読取りのみです。保存、削除、移動、上書きは行いません。
+Power Automate for desktop実測環境: PAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データです。
+
+この構成では列挙順が NoSort のため、処理順は成功条件に含めません。また、.TXTの大文字拡張子、サブフォルダー、空フォルダーは未確認です。
+
+2. PAD側で先に確認する設定
+
+新しい空のフローまたは検証用サブフローへ貼り付けます。入力変数やUI要素、Officeインスタンスを事前作成する必要はありません。各変数は次のアクションから生成または初期化されます。
+
+Files: ファイルのリスト
+CurrentFile: 現在処理中のファイル
+FileContents: 最後に読み取った .txt ファイルの内容
+TxtCount: 読み取った .txt ファイル数。数値型
+OtherCount: 対象外経路へ入ったファイル数。数値型
+TxtSeen: 最後に処理した .txt ファイル
+OtherSeen: 最後に対象外経路へ入ったファイル
+
+対象フォルダーには実測時、.txtが2件、.csvが1件、.mdが1件ありました。
+
+3. 貼り付け用Robin
+
+対象サブフロー: 新しい空のサブフロー全体
+置換範囲: サブフロー内の全アクション
+
+[code block: see robin.txt — 13 lines, captured from <pre>.textContent with indentation; page innerText below shows the block without leading spaces]
+Folder.GetFiles Folder: $'''C:\Users\yuuki\ai-prompts\catalog\fixtures\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+SET TxtCount TO 0
+SET OtherCount TO 0
+LOOP FOREACH CurrentFile IN Files
+IF CurrentFile.Extension = $'''.txt''' THEN
+File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+SET TxtSeen TO CurrentFile
+Variables.IncreaseVariable Value: TxtCount IncrementValue: 1
+ELSE
+SET OtherSeen TO CurrentFile
+Variables.IncreaseVariable Value: OtherCount IncrementValue: 1
+END
+END
+
+この原文の根拠は catalog/flows/t03-extension-branch/capture-pad-copy-20260912.robin です。別の空フローへ無修正で貼り付け、保存、再コピー一致を確認したうえで、合成4ファイルに対して2回実行されています。
+
+4. デザイナー上の確認
+
+貼り付け直後に、次を確認してください。
+
+アクション数が13行相当になっていること。
+最初が「フォルダー内のファイルを取得」で、フィルターが * になっていること。
+Filesを対象とするFor eachの内側にIfがあること。
+条件がパスの部分一致ではなく、CurrentFile.Extension = ".txt"に相当する設定であること。
+True側にUTF-8の「ファイルからテキストを読み取る」があること。
+Else側には読取りアクションがなく、OtherSeenの設定とOtherCountの加算だけがあること。
+TxtCountとOtherCountがループの前で数値0に初期化されていること。
+If用とFor each用の2つの終端が対応していること。
+Variables.IncreaseVariableの対象が文字列ではなく、数値変数TxtCount／OtherCountになっていること。
+
+Value: $'''TxtCount'''のような文字列リテラルにすると、変数である必要があるというデザイナーエラーになります。上記Robinは変数参照を使用しています。
+
+5. 合成データでの実行・照合
+元の合成フォルダーを複製し、複製先で検証する場合は、最初のFolder設定だけをPAD画面で複製先へ変更します。
+入力ファイルの名前、サイズ、可能ならSHA-256を実行前に記録します。
+フローを保存して実行します。
+実行後の変数を確認します。
+TxtCount = 2
+OtherCount = 2
+FileContentsには最後に列挙された.txtファイルの内容
+TxtSeenには最後に処理された.txtファイル
+OtherSeenには最後に対象外となったファイル
+.csvと.mdの内容がFileContentsへ読み込まれていないことを確認します。
+入力4ファイルが変更されていないことを、実行前後のSHA-256または内容比較で確認します。
+もう一度実行し、件数が再び2と2になることを確認します。カウンターは毎回ループ前に0へ戻るため、前回値は累積しません。
+
+実測では2回ともTxtCount=2、OtherCount=2となり、最後の読取り内容はalpha 日本語、入力4ファイルのSHAは不変でした。ただしNoSortなので、最後に入るTxtSeen、OtherSeen、FileContentsの具体値は列挙順に依存します。
+
+ソース
