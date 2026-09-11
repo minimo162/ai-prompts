@@ -320,8 +320,8 @@ Final3固定版（bundle `2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f678
 
 DataTable行追加は3列の`DataTable`へ3値`RowValues`を渡し2回とも2行3列、セル更新は列2・行0を`CellChanged`へ更新、行反復は最終行`B / 20 / 対象2`を確認した。Excel行反復はA1:C6の`ExcelData`を反復し、最終行`対象外 / E / 40`、6行3列、Excel終了を2回確認した。初回ブレークポイント停止・0列復帰・値数不一致は成功例と分離した。
 
-P3統合後は指示文SHA `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5`である。新bundleの通常M365 Copilot知識precheck、T01〜T10、T01/T04/T10独立再試験、負例は未実行で、旧版PASSを継承しない（`catalog/evidence/current-bundle-p3b-precheck-pending-20260911.json`、`current-package-status-20260911-p3b.json`、`issue5-completion-audit-20260911-p3b.json`）。
+P3統合後は指示文SHA `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5`である。新bundleの通常M365 Copilot知識precheckは、指示全文の本文逐語一致（末尾UIマーカーのみ除外）とbundle／指示ファイル2添付を確認し、RobinなしのP3要約を取得してPASS_REFERENCE_ONLYとした。T01〜T10、T01/T04/T10独立再試験、負例は未実行で、旧版PASSを継承しない（`catalog/generated/normal-chat-current-bundle-p3b-full-precheck-20260911/`、`current-package-status-20260911-p3b.json`、`issue5-completion-audit-20260911-p3b.json`）。
 
 T09は別空フロー`RobinKnowledgeT09Separate_20260911`を作成し、Final3 T09 Robinの6アクション貼付け・保存・再確認を実施した。UI要素ピッカーの実測ではEdgeのWindow/Paneまでしか列挙されず、`Input text 't09-input'`、`Button '実行'`、`Paragraph '未実行'`は登録できなかった。Designerエラー3件、Start無効、Run未開始を確認した。別のLaunchEdge単独フローは貼付け・保存・Run完了（Browser変数preview）まで確認したが、対象ページのWeb DOM要素やWebAutomation要求完了を示さず、T09通し成功へ拡張していない（`catalog/evidence/t09-separate-ui-registration-20260911.json`、`t09-edge-launch-paste-20260911.json`、`t09-edge-launch-run-20260911b.json`）。
 
-現状は`partial／OPEN`。残りは、新bundleを通常チャットへ実添付して知識precheck→T01〜T10→独立T01/T04/T10→負例を同一版で再受入し、T09はEdge拡張/native-hostがWeb DOM要素を返す条件で無修正6アクションを2回通し実行すること。未確認のP3はリスト項目取得、カスタム日時書式、入れ子／branch side effect、名前付きカスタムエラー一致である。
+現状は`partial／OPEN`。新bundleのT01は全文指示＋同版bundle、無修正Robin、PAD 2回実行、成果物照合までPASSした。残りはT02〜T10→独立T01/T04/T10→負例を同一版で再受入し、T09はEdge拡張/native-hostがWeb DOM要素を返す条件で無修正6アクションを2回通し実行すること。未確認のP3はリスト項目取得、カスタム日時書式、入れ子／branch side effect、名前付きカスタムエラー一致である。

@@ -29,7 +29,10 @@ foreach ($field in @('knowledge_precheck','t01_prepared','t01_stage_current')) {
 if ($audit.PSObject.Properties.Name -contains 'p4_current_bundle') {
     Check ($audit.package.bundle_sha256 -ceq $bundleHash) 'new audit binds current bundle'
     Check ($audit.p4_current_bundle.status -cin @('PARTIAL_NEW_BUNDLE_LIVE_ACCEPTANCE_PENDING','PARTIAL_T08_PASS_LIVE_REMAINDER_PENDING','PARTIAL_T08_PASS_FINAL_BUNDLE_REMAINDER_PENDING','PARTIAL_T01_T08_PASS_FINAL2_BUNDLE_REMAINDER_PENDING','PARTIAL_T09_RUNTIME_P3_INDEPENDENT_NEGATIVE_PENDING')) 'new audit keeps live acceptance partial'
-    if ($audit.p4_current_bundle.status -cin @('PARTIAL_T08_PASS_LIVE_REMAINDER_PENDING','PARTIAL_T08_PASS_FINAL_BUNDLE_REMAINDER_PENDING','PARTIAL_T01_T08_PASS_FINAL2_BUNDLE_REMAINDER_PENDING','PARTIAL_T09_RUNTIME_P3_INDEPENDENT_NEGATIVE_PENDING')) {
+    if ($audit.p4_current_bundle.status -ceq 'PARTIAL_NEW_BUNDLE_LIVE_ACCEPTANCE_PENDING') {
+        Check ($audit.p4_current_bundle.knowledge_precheck -ceq 'PASS_REFERENCE_ONLY') 'new audit records new-bundle precheck pass'
+        Check ($audit.p4_current_bundle.t08.status -ceq 'NOT_RUN_NEW_BUNDLE') 'new audit keeps T08 pending'
+    } elseif ($audit.p4_current_bundle.status -cin @('PARTIAL_T08_PASS_LIVE_REMAINDER_PENDING','PARTIAL_T08_PASS_FINAL_BUNDLE_REMAINDER_PENDING','PARTIAL_T01_T08_PASS_FINAL2_BUNDLE_REMAINDER_PENDING','PARTIAL_T09_RUNTIME_P3_INDEPENDENT_NEGATIVE_PENDING')) {
         Check ($audit.p4_current_bundle.knowledge_precheck -ceq 'PASS_REFERENCE_ONLY') 'new audit records precheck pass'
         Check (($audit.p4_current_bundle.t08.status -cin @('PASS_CURRENT_BUNDLE_T08_EXPECTED_ERROR','PASS_CURRENT_FINAL_BUNDLE_T08_EXPECTED_ERROR','PASS_CURRENT_FINAL2_BUNDLE_T08_EXPECTED_ERROR')) -or ($audit.p4_current_bundle.accepted_cases -contains 'T08')) 'new audit records T08 pass'
     } else {

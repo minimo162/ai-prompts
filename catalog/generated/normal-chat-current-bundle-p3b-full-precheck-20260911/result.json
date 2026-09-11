@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T17:45:00+09:00",
+  "case": "knowledge_precheck",
+  "status": "PASS_REFERENCE_ONLY",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/fd984d00-f739-4a15-92f9-aafa0ed61fe9",
+  "browser": "Chrome normal M365 Copilot chat",
+  "model": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
+  "attachments": ["PAD-Robin-Knowledge-Bundle.txt", "agent-instructions.txt"],
+  "send_confirmed": true,
+  "response_observed": true,
+  "robin_blocks": 0,
+  "prompt_body": {
+    "source": "copilot/agent-instructions.txt",
+    "expected_chars": 3949,
+    "observed_raw_chars": 3951,
+    "marker": "U+200B U+200C",
+    "body_match_after_strict_marker_removal": true,
+    "line_feed_count": 51
+  },
+  "response": {
+    "path": "catalog/generated/normal-chat-current-bundle-p3b-full-precheck-20260911/response.txt",
+    "observed_rendered_chars": 647,
+    "saved_core_chars": 604,
+    "saved_core_sha256": "c82c300b65ff9340efd7a5c4bba92b9715beb2f08b6e963c2e4241de6ddf2d7b",
+    "robin_blocks": 0,
+    "knowledge_confirmed": ["DataTable row insertion", "DataTable cell update", "DataTable iteration", "Excel iteration", "T09 remains unconfirmed"]
+  },
+  "acceptance": "reference_only_precheck_full_instruction_and_same_bundle"
+  ,"p3_summary": {
+    "prompt_path": "catalog/generated/normal-chat-current-bundle-p3b-full-precheck-20260911/prompt-p3-summary.txt",
+    "prompt_sha256": "15164283f172851719ebcec880c8a76980df5617cafb9780fe181143be92d2be",
+    "response_path": "catalog/generated/normal-chat-current-bundle-p3b-full-precheck-20260911/response-p3-summary.txt",
+    "response_sha256": "f58ca215958a2caacaffd41284e1b520a623baaddff1ea4db5f3d55ef5546d99",
+    "response_saved_chars": 3133,
+    "response_observed_chars": 3144,
+    "conversation_url": "https://m365.cloud.microsoft/chat/conversation/fd984d00-f739-4a15-92f9-aafa0ed61fe9",
+    "sent": true,
+    "robin_blocks": 0,
+    "attachments_in_user_message": ["PAD-Robin-Knowledge-Bundle", "agent-instructions"]
+  },
+  "t01_acceptance": {
+    "status": "PASS_CURRENT_BUNDLE",
+    "conversation_url": "https://m365.cloud.microsoft/chat/conversation/d6ec9559-019e-479d-8e94-546ed8b1751d",
+    "instruction_body_match_before_send": true,
+    "attachments_in_user_message": ["PAD-Robin-Knowledge-Bundle", "agent-instructions"],
+    "robin_sha256": "2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47",
+    "pad_evidence": "catalog/evidence/t01-current-p3b-live-acceptance-20260911.json",
+    "two_runs": true,
+    "output_sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2",
+    "input_unchanged": true
+  }
+}

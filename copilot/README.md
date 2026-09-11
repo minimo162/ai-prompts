@@ -16,7 +16,7 @@
 
 現作業版bundleの原本対応は [knowledge-bundle-manifest-20260911h.json](knowledge-bundle-manifest-20260911h.json) に固定しています。マニフェスト自体をナレッジへ添付する必要はありません。
 
-2026-09-11追補として、7原本へP3の実測根拠（真偽値・数値／日時演算、Else／Else-if／EXIT／NEXT、既定エラーハンドラー、PADで採取したGet last error、サブフロー、DataTable作成・行追加・セル更新・行反復、File.Exists／Folder.Create／Move／Rename、Excel範囲読取り・行反復、T09停止境界）を統合しました。失敗境界（カスタム日時書式、名前付きFileNotFoundルール、リスト取得、T09）は未確認として明記しています。最新bundle SHA-256は `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5` です。新bundleの知識precheckとT01〜T10全件・独立再試験が完了するまで現行packageを受入済みとは扱いません。
+2026-09-11追補として、7原本へP3の実測根拠（真偽値・数値／日時演算、Else／Else-if／EXIT／NEXT、既定エラーハンドラー、PADで採取したGet last error、サブフロー、DataTable作成・行追加・セル更新・行反復、File.Exists／Folder.Create／Move／Rename、Excel範囲読取り・行反復、T09停止境界）を統合しました。失敗境界（カスタム日時書式、名前付きFileNotFoundルール、リスト取得、T09）は未確認として明記しています。最新bundle SHA-256は `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5` です。新bundleの指示全文＋同版bundleによる知識precheckはPASS_REFERENCE_ONLY、T01〜T10全件・独立再試験・負例は未完了です。
 
 Final3固定版のbundle SHA-256は `2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7` です。新規通常M365 Copilot送信と実PADでT01〜T08/T10を同版受入し、T01/T04/T10は独立再試験も完了しました。T09はUI要素捕捉・6アクション貼付け・保存・再コピーまでで、実行時のUI要素未検出によりRun開始前にブロックされています。P3未確認項目を含めて `partial／OPEN` を維持します。PAD空フロー作成権限とUIA復旧の観測手順は [docs/pad-live-setup.md](../docs/pad-live-setup.md) にまとめています。
 
@@ -43,6 +43,6 @@ Final3固定版のbundle SHA-256は `2bc3f2b4c5c709e94547ccf4b75f7084c9c42460578
 
 ## 状態
 
-現作業版の追補判定（2026-09-11）：Final3固定版のT01〜T08/T10、T01/T04/T10独立再試験、負例、T09停止境界は保全済み。P3のDataTable行追加・セル更新・行反復とExcel行反復は専用probeの無修正2回成功を教材へ統合したが、新bundleの通常チャット生成・PAD再受入は未完了である。カスタム日時書式、リスト取得、名前付きカスタムエラー一致、T09通し実行は未確認として保持する。
+現作業版の追補判定（2026-09-11）：Final3固定版のT01〜T08/T10、T01/T04/T10独立再試験、負例、T09停止境界は保全済み。P3のDataTable行追加・セル更新・行反復とExcel行反復は専用probeの無修正2回成功を教材へ統合した。新bundleは指示全文＋同版bundleの知識precheckとT01一次受入までPASSし、T02〜T10・独立再試験・負例は未完了である。カスタム日時書式、リスト取得、名前付きカスタムエラー一致、T09通し実行は未確認として保持する。
 
-2026-09-11のP3追補統合後は、7原本・bundle・マニフェストを新SHAで固定しました。旧版の通常チャット生成・PAD結果は履歴として保持し、新bundleへ継承しません。新ハッシュでの知識precheck、T01〜T10、独立再試験が未完了のため、配布packageの受入完了とは扱いません。T04/T10の旧版差分は `catalog/evidence/normal-chat-raw-provenance-20260910.json` で発生段階を分離し、Agent Builder／Copilot Studioは今回の検証対象外です。
+2026-09-11のP3追補統合後は、7原本・bundle・マニフェストを新SHAで固定しました。旧版の通常チャット生成・PAD結果は履歴として保持し、新bundleへ継承しません。新ハッシュの指示全文＋同版bundleによる知識precheckはPASS_REFERENCE_ONLYですが、T01〜T10、独立再試験、負例が未完了のため、配布packageの受入完了とは扱いません。T04/T10の旧版差分は `catalog/evidence/normal-chat-raw-provenance-20260910.json` で発生段階を分離し、Agent Builder／Copilot Studioは今回の検証対象外です。

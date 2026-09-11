@@ -17,8 +17,8 @@
   },
   "nonlive_all_suite_evidence": ".work/nonlive-cf177a53259e4bd485eddf1e1703fb6d/verification.json",
   "candidate_unchanged": true,
-  "live_m365": "PASS_REFERENCE_ONLY_FULL_INSTRUCTION_TEXT_PENDING",
+  "live_m365": "PASS_REFERENCE_ONLY_FULL_INSTRUCTION_AND_BUNDLE",
   "native_pad": "T09_BLOCKED_UI_ELEMENT_REGISTRATION",
-  "unverified": ["new-bundle T01-T10 case acceptance", "new-bundle independent T01/T04/T10", "new-bundle negative suite"],
+  "unverified": ["new-bundle T02-T10 case acceptance", "new-bundle independent T01/T04/T10", "new-bundle negative suite"],
   "result": "Static/offline gates pass. Live package acceptance remains partial and Issue stays OPEN."
 }

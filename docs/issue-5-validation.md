@@ -464,8 +464,8 @@ The current fixed package is instruction `b4a3c24f6185feeeb89ddd7562c06aeb623f8d
 
 Final3固定版の受入済みT01〜T08/T10、独立T01/T04/T10、負例、T09停止証跡は変更せず保全した。DataTable行追加・セル更新・行反復とExcel行反復の専用probe成功（無修正・2回実行）を7原本へ統合し、現行bundleを `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5`、マニフェストを `copilot/knowledge-bundle-manifest-20260911h.json` に固定した。
 
-新bundleと`agent-instructions.txt`を通常M365 Copilotへ実添付し、知識のみのプレチェックを送信した。回答はRobinを生成せず、DataTable行追加・セル更新・反復、Excel反復、T09の拡張依存境界を返した（`catalog/generated/normal-chat-current-bundle-p3b-knowledge-precheck-20260911/`）。ただし本文欄へ指示全文を貼付ける受入条件は未達であり、T01〜T10の新bundle受入へは昇格していない。
+新bundleと`agent-instructions.txt`を通常M365 Copilotへ実添付し、指示全文を本文へ入力した。本文は末尾の既知UIマーカーU+200B/U+200Cのみを除いて指示原文と逐語一致し、送信済みメッセージにも2添付が存在した。続けて知識のみのプレチェックを送信し、回答はRobinを生成せず、DataTable行追加・セル更新・反復、Excel反復、T09の拡張依存境界を返した（`catalog/generated/normal-chat-current-bundle-p3b-full-precheck-20260911/`）。これは知識プレチェックPASSであり、T01〜T10のケース受入とは分離する。
 
 T09別空フロー `RobinKnowledgeT09Separate_20260911` では6アクション貼付け・保存まで成功したが、UI要素ピッカーの実測階層はEdge Window/Paneまでで、`Input text 't09-input'`、`Button '実行'`、`Paragraph '未実行'`の登録に至らなかった。Designerエラー3件・Start無効・Run未開始を確認した。LaunchEdge単独フローのRun完了（Browser変数preview）はWeb DOM要素・WebAutomation要求完了を証明しないため、T09成功へ読み替えていない（`catalog/evidence/t09-separate-ui-registration-20260911.json`）。
 
-静的・非ライブ検査はRaw 6、Package 3949/7/86、Catalog 94、DOM 898、CurrentBundle準備14、Issue状態23、JSON、`git diff --check`、非ライブ全件PASSを確認した（`catalog/evidence/current-package-static-check-20260911-p3b.json`）。Issue #5は必須条件未達のため`partial／OPEN`を維持する。
+静的・非ライブ検査はRaw 6、Package 3949/7/86、Catalog 94、DOM 898、CurrentBundle準備14、Issue状態23、JSON、`git diff --check`、非ライブ全件PASSを確認した（`catalog/evidence/current-package-static-check-20260911-p3c.json`）。新bundleのT01も、全文指示＋2添付、無修正Robin貼付け・保存・再コピー、PAD 2回実行、入力不変・UTF-8 BOM・90 bytes・期待SHA一致までPASSした（`catalog/evidence/t01-current-p3b-live-acceptance-20260911.json`）。Issue #5はT02〜T10・独立再試験・負例・T09通し未達のため`partial／OPEN`を維持する。

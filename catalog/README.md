@@ -71,6 +71,6 @@ PDFカテゴリの5種類・11設定例を追加しました。テキスト・�
 
 ## 2026-09-11 P3統合・T09別フロー境界
 
-Final3固定版の成果を保全したうえで、DataTable行追加・セル更新・行反復とExcel行反復の専用probe成功を7原本へ統合した。新bundle SHA-256は `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5`、マニフェストは `../copilot/knowledge-bundle-manifest-20260911h.json`。新bundleの通常チャット／PAD受入は未実行で、旧版PASSは継承しない。
+Final3固定版の成果を保全したうえで、DataTable行追加・セル更新・行反復とExcel行反復の専用probe成功を7原本へ統合した。新bundle SHA-256は `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5`、マニフェストは `../copilot/knowledge-bundle-manifest-20260911h.json`。指示全文＋同版bundleの通常チャット知識precheckはPASS_REFERENCE_ONLY、T01〜T10のPAD受入は未実行で、旧版PASSは継承しない。
 
 T09別空フロー `RobinKnowledgeT09Separate_20260911` は6アクションの貼付け・保存まで成功したが、UI要素ピッカーはEdge Window/Paneしか列挙せず、入力・実行ボタン・結果段落を登録できなかった。エラー3件・Start無効・Run未開始で、LaunchEdge単独フローの完了はT09通し成功へ拡張していない。詳細は `evidence/t09-separate-ui-registration-20260911.json`。

@@ -62,7 +62,7 @@ T08 P3追補：PADの「最後のエラーを取得」を保存先`LastError`・
 
 現作業版の追補：T01〜T07、T04/T10一次受入、T01/T04/T10独立再試験はPASS_CURRENT_REVISION。fail-closed負例はPASS_NEGATIVE_FAIL_CLOSED。T08は生成形式失敗、T09は既存専用フローのランタイムprobeのみPASSで、現行package Robin受入は未確認です。
 
-P3追補：日時加算とサブフロー作成／呼出しは別の合成専用probeで原文コピー・保存・2回実行まで確認しましたが、現行bundle未統合です。カスタム日時書式化、エラー発生子アクション、カスタムハンドラー、DataTable成功構文などは未確認です。
+P3追補：日時加算とサブフロー作成／呼出しは別の合成専用probeで原文コピー・保存・2回実行まで確認しましたが、カスタム日時書式化、エラー発生子アクション、カスタムハンドラー、未採取の構文は未確認として保持します。DataTable行追加・セル更新・行反復とExcel行反復はP3教材へ統合済みです。
 
 現作業版bundleのみを添付した知識precheckは `catalog/evidence/normal-chat-current-revision-knowledge-precheck-20260910.json` に保存し、ナレッジ固有の設定・型・依存を回答原文と照合しました。これは受入ケースの代用ではありません。
 
@@ -71,6 +71,10 @@ P3追補：日時加算とサブフロー作成／呼出しは別の合成専用
 現作業版T10の生成・無修正PAD貼付け・保存・実行・Office成果物照合は `catalog/evidence/t10-current-revision-acceptance-20260910.json` に保存しています。独立再試験も別チャット／別PADフローでPASSしています。
 
 現作業版T04の生成・貼付け・保存・2回実行・成果物照合は `catalog/evidence/t04-current-revision-acceptance-20260910.json` と `catalog/evidence/t04-current-revision-pad-paste-20260910.json` に記録しています。貼付けヘルパーの可視6件は仮想化による偽陰性であり、Designerの「9 アクション」表示を確認しました。
+
+## 2026-09-11 P3b同版T01受入
+
+指示文全文（本文3949文字、末尾U+200B/U+200CのみUI付加）と同版bundle `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5`を通常M365 Copilotへ添付し、T01の3アクションRobinを生成した。Robin SHA `2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47`は無修正で専用PADフローへ貼付け・保存・再コピーし、2回実行した。入力SHA不変、出力UTF-8 BOM・90 bytes・期待SHA `2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2`一致を確認し、T01を`PASS_CURRENT_BUNDLE`とした。証拠は `catalog/evidence/t01-current-p3b-live-acceptance-20260911.json` と `t01-current-p3b-pad-output-comparison-20260911.json`。
 
 ## 独立再試験
 
