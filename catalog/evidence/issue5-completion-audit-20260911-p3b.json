@@ -13,10 +13,16 @@
     "knowledge_precheck": "PASS_REFERENCE_ONLY",
     "knowledge_precheck_evidence": "evidence/current-bundle-p3b-precheck-pending-20260911.json",
     "knowledge_precheck_p3_summary": "../generated/normal-chat-current-bundle-p3b-full-precheck-20260911/result.json",
-    "accepted_cases": ["T01", "T02"],
+    "accepted_cases": ["T01", "T02", "T04"],
     "t01": { "status": "PASS_CURRENT_BUNDLE", "evidence": "evidence/t01-current-p3b-live-acceptance-20260911.json" },
     "t02": { "status": "PASS_CURRENT_BUNDLE", "evidence": "evidence/t02-current-p3b-live-acceptance-20260911.json" },
-    "t01_t10": "T01_T02_PASS_T03_T10_NOT_RUN",
+    "t01_t10": "T01_T02_T04_PASS_T03_NO_ROBIN_T05_T10_NOT_RUN",
+    "t03": {
+      "status": "NOT_ACCEPTED_CURRENT_BUNDLE_NO_ROBIN",
+      "evidence": "../generated/normal-chat-current-bundle-p3b-t03-live-20260911/result.json",
+      "reason": "通常M365 Copilotは厳密な拡張子取得・末尾一致・完全な分岐構文を未確認として明示し、Robinコードブロックを返さなかった。PAD貼付け・実行は行っていない。"
+    },
+    "t04": { "status": "PASS_CURRENT_BUNDLE", "evidence": "evidence/t04-current-p3b-live-acceptance-20260911.json", "output_comparison": "evidence/t04-current-p3b-pad-output-comparison-20260911.json" },
     "t08": { "status": "NOT_RUN_NEW_BUNDLE" },
     "t09": { "status": "BLOCKED_RUNTIME_DEPENDENCY", "evidence": "evidence/t09-separate-ui-registration-20260911.json" },
     "independent_retests": "NOT_RUN_NEW_BUNDLE",
@@ -28,7 +34,7 @@
     "still_unconfirmed": ["list item retrieval", "custom date format", "nested/side-effect branches", "named custom error matching"]
   },
   "remaining": [
-    "Run new-bundle normal M365 Copilot precheck, T01-T10, independent T01/T04/T10, and negative suite",
+    "Run new-bundle normal M365 Copilot precheck, T05-T10 (T03 requires additional PAD capture), independent T01/T04/T10, and negative suite",
     "Resolve T09 UI element registration/extension route or preserve item-level blocker"
   ],
   "result": "P3教材を統合した新bundleは未受入。Final3旧版の受入済み成果と失敗原文は保全済み。"

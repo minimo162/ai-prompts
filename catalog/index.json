@@ -5731,9 +5731,23 @@
       "cases": ["knowledge_precheck", "T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T09", "T10", "independent_T01_T04_T10", "negative_suite"],
       "scope": "P3教材統合後の新bundle。Final3旧版の受入結果を継承せず、通常チャット＋PAD同一版再受入を待つ。",
       "current_package_acceptance": false,
-      "execution_status": "knowledge_precheck_t01_t02_pass_t03_t10_not_run",
+      "execution_status": "knowledge_precheck_t01_t02_t04_pass_t03_no_robin_t05_t10_not_run",
       "manifest": "../copilot/knowledge-bundle-manifest-20260911h.json",
       "evidence": "evidence/current-bundle-p3b-precheck-pending-20260911.json; evidence/current-package-status-20260911-p3b.json; evidence/issue5-completion-audit-20260911-p3b.json"
+    },
+    {
+      "id": "normal-chat-current-bundle-p3b-t03-2026-09-11",
+      "date": "2026-09-11",
+      "browser": "Chrome normal M365 Copilot chat",
+      "model": "GPT 5.6 Think Deeper",
+      "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": ["T03"],
+      "scope": "New-bundle T03 response was captured with both required attachments and explicitly preserved the unconfirmed strict extension/name retrieval boundary; no acceptable Robin code block was generated, so PAD acceptance was not attempted.",
+      "current_package_acceptance": false,
+      "execution_status": "not_accepted_current_bundle_no_robin",
+      "manifest": "../copilot/knowledge-bundle-manifest-20260911h.json",
+      "evidence": "../generated/normal-chat-current-bundle-p3b-t03-live-20260911/result.json"
     },
     {
       "id": "normal-chat-current-bundle-p3b-t01-2026-09-11",

@@ -77,6 +77,9 @@ P3追補：日時加算とサブフロー作成／呼出しは別の合成専用
 指示文全文（本文3949文字、末尾U+200B/U+200CのみUI付加）と同版bundle `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5`を通常M365 Copilotへ添付し、T01の3アクションRobinを生成した。Robin SHA `2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47`は無修正で専用PADフローへ貼付け・保存・再コピーし、2回実行した。入力SHA不変、出力UTF-8 BOM・90 bytes・期待SHA `2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2`一致を確認し、T01を`PASS_CURRENT_BUNDLE`とした。証拠は `catalog/evidence/t01-current-p3b-live-acceptance-20260911.json` と `t01-current-p3b-pad-output-comparison-20260911.json`。
 
 T02も同一bundle・全文指示・2添付で新規通常チャット生成を行った。Robin SHA `c3027cfaa13e191b0e784fb3a6db4c573f8bfc83fb172d1a6394d7c1f5a55c29`を無修正で専用PADフローへ貼付け・保存・再コピーし、2回実行。出力はヘッダー＋Status=対象の2論理行、UTF-8 BOM・CRLF・末尾改行なし、入力SHA不変を確認し、T02を`PASS_CURRENT_BUNDLE`とした。証拠は `catalog/evidence/t02-current-p3b-live-acceptance-20260911.json` と `t02-current-p3b-pad-output-comparison-20260911.json`。
+T03は同一bundle・全文指示・2添付で通常チャット送信したが、厳密な拡張子／ファイル名取得と末尾`.txt`一致を未確認としてRobinコードブロックを返さなかったため、`NOT_ACCEPTED_CURRENT_BUNDLE_NO_ROBIN`とした。生成物は`catalog/generated/normal-chat-current-bundle-p3b-t03-live-20260911/`に保存し、PADフローは作成・実行していない。
+
+T04は同一bundle・全文指示・2添付で9アクションRobinを生成し、無修正で専用PADフローへ貼付け・保存・再コピー、2回実行した。Designerは9アクション（ListItem可視6件は仮想化）を示し、両回ともExcelData 6行3列、FilteredDataTable 3行3列、対象/A/10・対象/C/25・対象/D/5、入力SHA不変を確認した。出力xlsxはExcelメタデータによりSHAが変動するため論理行で照合し、直接パーサーの日本語表示は未正規化として注記した。証拠は`catalog/evidence/t04-current-p3b-live-acceptance-20260911.json`と`catalog/evidence/t04-current-p3b-pad-output-comparison-20260911.json`。
 
 ## 独立再試験
 
