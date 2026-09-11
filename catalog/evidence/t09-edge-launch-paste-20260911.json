@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-11T07:24:45.2563414Z",
+    "flow_name":  "RobinKnowledgeT09EdgeLaunch_20260911",
+    "source_robin":  "catalog/actions/web-launch/t09-local.robin",
+    "source_sha256":  "5d17c3c9ceab58b2595292680b3651bc8033af459cf1050822c980011e0d6ee2",
+    "source_bytes":  494,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  1,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

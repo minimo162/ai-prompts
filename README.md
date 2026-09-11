@@ -4,7 +4,7 @@
 
 通常チャットでの検証条件と禁止事項は [CODEX_CORRECTION_M365_CHAT_VALIDATION.md](CODEX_CORRECTION_M365_CHAT_VALIDATION.md) を先に確認してください。Agent Builder／Copilot Studioの登録は今回の検証先ではありません。
 
-2026-09-11のP3追補・T08エラー記録追加版は、指示文SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、最新bundle SHA-256 `61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b` です。7原本へPADで採取した`ERROR => LastError Reset: True`とT01測定済み組み合わせ参照を追加し、最終61f040 bundleで知識precheck、T01/T08の無修正PAD受入（各2回実行）まで完了しました。T02〜T07/T09/T10、独立再試験、同一最終版の負例は未完了です。旧bundleの生成・PAD結果は新bundleへ継承していません。T09は現行package Robin未確認として維持します。T04/T10の発生段階の比較は [raw provenance](catalog/evidence/normal-chat-raw-provenance-20260910.json)、結合版の再生成は [Build-KnowledgeBundle.ps1](tools/Build-KnowledgeBundle.ps1) を参照してください。
+2026-09-11の現行P3教材統合版は、指示文SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA-256 `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5` です。DataTable行追加・セル更新・行反復とExcel行反復の専用probe成功を7原本へ統合しました。新bundleの通常チャット／PAD全件受入、独立再試験、負例は未実行で、旧Final3結果を継承しません。T04/T10の発生段階の比較は [raw provenance](catalog/evidence/normal-chat-raw-provenance-20260910.json)、結合版の再生成は [Build-KnowledgeBundle.ps1](tools/Build-KnowledgeBundle.ps1) を参照してください。
 
 実測原文の正本は [catalog/index.json](catalog/index.json)、観測範囲は [catalog/coverage.json](catalog/coverage.json)、途中経過は [docs/robin-knowledge-progress.md](docs/robin-knowledge-progress.md) です。既存の採取原文・検証証拠は保全し、未観測のアクションを全機能対応とは表示しません。
 
@@ -21,7 +21,7 @@ If/Else/ENDとIf/Else-if/ENDの構造は別probeで実行まで確認してい�
 
 P3ではファイル存在確認の`IF ... THEN`／`END`も別probeでtrue条件を2回、欠損パス条件を1回実行し、欠損パスのrawも取得しました。branch bodyのside effectと各probeの現行bundle統合は未確認です。データ反復等も未確認です。
 
-P3追補の成功・失敗境界は新bundleへ記載済みです。既定エラーハンドラーは2回成功、DataTable作成は2回成功、ファイル存在／作成／移動／名前変更、Else／Else-if、EXIT／NEXT、サブフロー、Excel範囲読取りを別probeで確認しました。DataTable行追加、Excel反復、リスト取得、カスタム日時書式、名前付きカスタムエラー、T09通し実行は未確認です。T09の90秒再probeは112秒時点で停止し、未実行プレースホルダーを伴うエラー境界を記録しました。各probeの原文・実行値・未統合判定は `catalog/index.json` と `catalog/coverage.json` を参照してください。
+P3追補の成功・失敗境界は新bundleへ記載済みです。既定エラーハンドラーは2回成功、DataTable作成・行追加・セル更新・行反復、ファイル存在／作成／移動／名前変更、Else／Else-if、EXIT／NEXT、サブフロー、Excel範囲読取り・行反復を別probeで確認しました。リスト取得、カスタム日時書式、名前付きカスタムエラー、T09通し実行は未確認です。T09の90秒再probeと別空フローUI要素登録境界は停止証跡へ分離しました。各probeの原文・実行値・再受入待ち判定は `catalog/index.json` と `catalog/coverage.json` を参照してください。
 
 M365 Copilot内Agent Builderを利用先とする継続方針の訂正は [CODEX_CORRECTION_M365_AGENT_BUILDER.md](CODEX_CORRECTION_M365_AGENT_BUILDER.md) に記録しています。
 

@@ -42,11 +42,17 @@
 
 T01のRobin原文、PAD再コピー、run1/run2は `catalog/generated/normal-chat-current-bundle-t01-live-20260911/` と `catalog/evidence/t01-current-bundle-pad-*.json` に保存しています。Copilot原文Robin（LF）とPAD再コピー（CRLF）は別ファイルとして保持し、改行を正規化した本文一致だけを確認しました。
 
-P3追補：DataTableの列数一致RowToAdd入力は `RobinKnowledgeP3DataTableRow_20260911` で実測し、2回とも2行3列のプレビューとエラーなしを確認しました。`catalog/evidence/p3-datatable-row-success-20260911.json` に保存しています。これはprobe成功であり、現行bundleへの統合・行反復・セル参照の受入ではありません。
+P3追補：DataTableの列数一致RowToAdd入力は `RobinKnowledgeP3DataTableRow_20260911` で実測し、2回とも2行3列のプレビューとエラーなしを確認しました。`catalog/evidence/p3-datatable-row-success-20260911.json` に保存し、原文・型・変数参照を新bundleへ統合しました。新bundleの通常チャット／PAD受入は別途必要です。
 
-P3追補：`RobinKnowledgeP3DataTableCell_20260911` で `ModifyDataTableItem` の列2・行0更新を2回実行し、値ビューアーで `CellChanged` を確認しました。`catalog/evidence/p3-datatable-cell-success-20260911.json` に保存しています。これはprobe成功であり、現行bundleへの統合・行反復の受入ではありません。
+P3追補：`RobinKnowledgeP3DataTableCell_20260911` で `ModifyDataTableItem` の列2・行0更新を2回実行し、値ビューアーで `CellChanged` を確認しました。`catalog/evidence/p3-datatable-cell-success-20260911.json` に保存し、新bundleへ統合しました。新bundleの通常チャット／PAD受入は別途必要です。
 
-P3追補：DataTable行反復は `RobinKnowledgeP3DataTableForeach_20260911` で2行3列を`LOOP FOREACH`し、ブレークポイント由来の初回停止を分離した後、2回とも最終行`B / 20 / 対象2`・2行3列・エラーなしを確認しました。Excel行反復も `RobinKnowledgeP3ExcelForeachRuntime_20260911` でA1:C6を`ExcelData`へ読み取り、`CurrentItem`を`ExcelRowSeen`へ設定する5アクションを2回実行し、最終行`対象外 / E / 40`・6行3列・Excel終了・エラーなしを確認しました。両probeは現行bundle未統合です。
+P3追補：DataTable行反復は `RobinKnowledgeP3DataTableForeach_20260911` で2行3列を`LOOP FOREACH`し、ブレークポイント由来の初回停止を分離した後、2回とも最終行`B / 20 / 対象2`・2行3列・エラーなしを確認しました。Excel行反復も `RobinKnowledgeP3ExcelForeachRuntime_20260911` でA1:C6を`ExcelData`へ読み取り、`CurrentItem`を`ExcelRowSeen`へ設定する5アクションを2回実行し、最終行`対象外 / E / 40`・6行3列・Excel終了・エラーなしを確認しました。原文・境界・成功条件を新bundleへ統合し、新bundleの通常チャット／PAD受入は別途必要です。
+
+## 2026-09-11 P3教材統合後の新bundle（再受入待ち）
+
+P3で測定済みだったDataTable行追加・セル更新・行反復とExcel行反復の原文・設定・境界を7原本へ統合し、bundle SHA-256を `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5`、マニフェストを `copilot/knowledge-bundle-manifest-20260911h.json` に固定しました。Final3固定版 `2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7` のT01〜T08/T10、独立T01/T04/T10、負例、T09停止証跡は履歴として保全し、新bundleへ継承しません。
+
+新bundleの知識precheck、T01〜T10、独立再試験、負例は `NOT_RUN_NEW_BUNDLE` です。P3のカスタム日時書式、リスト項目取得、入れ子／branch side effect、名前付きカスタムエラー一致は未確認です。T09は別空フロー `RobinKnowledgeT09Separate_20260911` で6アクション貼付け・保存まで確認しましたが、UI要素ピッカーはEdge Window/Paneのみを返し、`Input text 't09-input'`、`Button '実行'`、`Paragraph '未実行'`を登録できず、エラー3件・Start無効のため実行開始前に停止しました（`catalog/evidence/t09-separate-ui-registration-20260911.json`）。
 
 T09追補：Edge用PAD拡張・native manifest origin・`nativeMessaging`権限は読み取りで存在を確認しましたが、BrowserNativeMessageHostログは起動成功だけで接続完了を示さず、現在のhostプロセスはChrome用originでした。T09 WebAutomation成功の根拠ではなく、拡張接続境界の診断証跡として `catalog/evidence/t09-extension-handshake-boundary-20260911.json` に保存しています。
 

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-11T14:32:00+09:00",
-  "reconciled_at": "2026-09-11T14:32:00+09:00",
-  "reconciliation_note": "Final3 fixed-version Copilot/PAD evidence was added for T01-T08 and T10, with independent T01/T04/T10 retests and a fail-closed negative suite. T09 remains blocked before runtime because captured Web UI elements are not found; P3 gaps remain. This file is not a complete PAD feature reference or execution allowlist.",
+  "generated_at": "2026-09-11T16:55:00+09:00",
+  "reconciled_at": "2026-09-11T16:55:00+09:00",
+  "reconciliation_note": "Final3 fixed-version Copilot/PAD evidence remains preserved. P3 measured DataTable row/cell/foreach and Excel foreach successes were integrated into the new bundle; the new bundle requires fresh normal-chat/PAD acceptance. T09 remains blocked because the separate-flow picker exposed only the Edge Window/Pane and Start remains disabled for the three required DOM elements. This file is not a complete PAD feature reference or execution allowlist.",
   "environment": {
     "pad_file_version": "2.71.115.26224",
     "language": "ja-JP",
@@ -11,12 +11,13 @@
   },
   "current_package": {
     "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-    "knowledge_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+    "knowledge_bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
     "status": "partial_t09_runtime_p3_independent_negative_pending",
-    "evidence": "evidence/current-package-status-20260911-final4.json",
-    "audit": "evidence/issue5-completion-audit-20260911-final4.json",
-    "knowledge_precheck": "evidence/current-bundle-final-precheck-20260911.json",
-    "t01_prepared": "evidence/t01-current-bundle-prepared-20260911-final.json",
+    "evidence": "evidence/current-package-status-20260911-p3b.json",
+    "audit": "evidence/issue5-completion-audit-20260911-p3b.json",
+    "static_check": "evidence/current-package-static-check-20260911-p3c.json",
+    "knowledge_precheck": "evidence/current-bundle-p3b-precheck-pending-20260911.json",
+    "t01_prepared": "evidence/t01-current-bundle-prepared-20260911-p3b.json",
     "t01_staged": "evidence/t01-current-bundle-staged-20260911.json",
     "t01_stage_current": "evidence/t01-current-bundle-stage-expired-20260911.json"
   },
@@ -2477,18 +2478,18 @@
     {
       "id": "A-text-number-boolean-set",
       "missing": "真偽値の独立設定",
-      "status": "PASS_PROBE_NOT_BUNDLED",
-      "reason": "新規専用フローでBoolean値を設定し、Robin原文のコピー・保存・実行（変数preview=True）を確認した。ただし現行bundleを変更していないため、配布ナレッジ上の完了には未反映。",
+       "status": "PASS_BUNDLED_REACCEPT_REQUIRED",
+       "reason": "新規専用フローでBoolean値を設定し、Robin原文のコピー・保存・実行（変数preview=True）を確認し、P3追補として新bundleへ統合した。新bundleの通常チャット／PAD受入は未実行。",
       "evidence": "evidence/p3-boolean-probe-20260910.json",
-      "resume": "現行bundleへ原文と型説明を追加する場合は、ハッシュ更新後にT01-T10を同一最終版で再受入"
+       "resume": "新bundleの知識precheck後、T01-T10を同一最終版で再受入"
     },
   {
     "id": "A-arithmetic-add-subtract",
     "missing": "減算",
-    "status": "PASS_PROBE_NOT_BUNDLED",
-    "reason": "新規専用フローで10から3を減算し、Robin原文のコピー・保存・実行（preview=7）を確認した。ただし現行bundleを変更していないため、配布ナレッジ上の完了には未反映。",
+    "status": "PASS_BUNDLED_REACCEPT_REQUIRED",
+    "reason": "新規専用フローで10から3を減算し、Robin原文のコピー・保存・実行（preview=7）を確認し、P3追補として新bundleへ統合した。新bundleの通常チャット／PAD受入は未実行。",
     "evidence": "evidence/p3-subtract-probe-20260910.json",
-    "resume": "現行bundleへ原文と型説明を追加する場合は、ハッシュ更新後にT01-T10を同一最終版で再受入"
+    "resume": "新bundleの知識precheck後、T01-T10を同一最終版で再受入"
   },
   {
     "id": "A-list-create-add-get",
@@ -2502,57 +2503,57 @@
     "id": "A-datetime",
     "missing": "カスタム日時書式化",
       "status": "PASS_CURRENT_BUNDLE_T08_EXPECTED_ERROR_PARTIAL",
-    "reason": "日付の減算、DateAndTime取得設定、日時加算は新規専用probeで原文コピー・保存・2回実行を確認した。カスタム書式化は現行PAD専用probeでダイアログ選択までは到達したが、保存更新時にSequence contains no matching elementの内部例外が発生し、成功原文・実行値は未採取。各probeは現行bundle未統合。",
+    "reason": "日付の減算、DateAndTime取得設定、日時加算は新規専用probeで原文コピー・保存・2回実行を確認し、新bundleへ統合した。カスタム書式化は現行PAD専用probeでダイアログ選択までは到達したが、保存更新時にSequence contains no matching elementの内部例外が発生し、成功原文・実行値は未採取。",
     "evidence": "evidence/p3-date-add-probe-20260910.json; evidence/p3-date-subtract-probe-20260910.json; evidence/p3-date-format-probe-20260910.json; evidence/p3-date-format-custom-failure-20260910.json; evidence/p3-date-format-dialog-crash-20260911.json",
     "resume": "カスタム日時書式化を採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
   },
   {
     "id": "B-if-else",
     "missing": "Else／Else if",
-    "status": "PASS_PROBE_NOT_BUNDLED",
-    "reason": "新規専用probeでIf/Else/ENDとIf/Else-if/ENDをコピー・保存し、各構造を2回実行した。branch side effectは空で、入れ子は未採取、probeは現行bundle未統合。",
+    "status": "PASS_BUNDLED_REACCEPT_REQUIRED",
+    "reason": "新規専用probeでIf/Else/ENDとIf/Else-if/ENDをコピー・保存し、各構造を2回実行し、新bundleへ統合した。branch side effectは空で、入れ子は未採取。新bundleの通常チャット／PAD受入は未実行。",
     "evidence": "evidence/p3-else-probe-20260910.json; evidence/p3-else-if-probe-20260910.json",
-    "resume": "入れ子・branch side effectを採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
+    "resume": "入れ子・branch side effectを採取できる場合は追加し、新bundleのT01-T10を同一最終版で再受入"
   },
     {
       "id": "B-loop-fixed-foreach-exit",
       "missing": "ループ脱出・次のループ",
-    "status": "PARTIAL_PROBE_NOT_BUNDLED",
-    "reason": "有限Loop 1..3へEXIT LOOPとNEXT LOOPを別probeで追加し、LoopIndex=1／4の実行結果を確認した。入れ子、loop side effectは未採取、probeは現行bundle未統合。",
+    "status": "PARTIAL_BUNDLED_REACCEPT_REQUIRED",
+    "reason": "有限Loop 1..3へEXIT LOOPとNEXT LOOPを別probeで追加し、LoopIndex=1／4の実行結果を確認し、新bundleへ統合した。入れ子、loop side effectは未採取。新bundleの通常チャット／PAD受入は未実行。",
     "evidence": "evidence/p3-break-probe-20260910.json; evidence/p3-continue-probe-20260910.json",
-    "resume": "入れ子・loop side effectを採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
+    "resume": "入れ子・loop side effectを採取できる場合は追加し、新bundleのT01-T10を同一最終版で再受入"
     },
   {
     "id": "B-error-subflow",
     "missing": "エラー処理・サブフロー作成／呼出し",
-    "status": "PARTIAL_PROBE_NOT_BUNDLED",
-      "reason": "新規専用probeでBLOCK／ON BLOCK ERROR／THROW ERROR／END構造、欠損ファイル子アクション、P3Worker作成＋MainからのCALLをコピー・保存・実行した。名前付きFileNotFoundルールはruntime errorのままだったが、既定のすべてのエラーへErrorHandledDefault=true、続行ON／スローOFFを設定したprobeは2回ともtrueプレビューで完了した。さらにPADで最後のエラーを取得（LastError、Reset=True）を設定し、欠損ファイルのエラー文字列を2回取得した。新bundleへ測定済み組み合わせ参照を追加し、通常M365 Copilot生成Robinの無修正PAD貼付け・保存・2回実行でT08期待エラーを現行版受入した。名前付きカスタムルールの一致条件と後続処理の一般化は未確認。",
+    "status": "PARTIAL_BUNDLED_REACCEPT_REQUIRED",
+      "reason": "新規専用probeでBLOCK／ON BLOCK ERROR／THROW ERROR／END構造、欠損ファイル子アクション、P3Worker作成＋MainからのCALLをコピー・保存・実行した。既定のすべてのエラーへErrorHandledDefault=true、最後のエラーを取得（LastError、Reset=True）も測定して新bundleへ統合した。名前付きFileNotFoundルールの一致条件と後続処理の一般化は未確認。新bundleの通常チャット／PAD受入は未実行。",
       "evidence": "evidence/p3-error-block-probe-20260910.json; evidence/p3-error-trigger-probe-20260910.json; evidence/p3-subflow-probe-20260910.json; evidence/p3-error-custom-handler-20260911.json; evidence/p3-error-custom-handler-flow-20260911.robin; evidence/p3-error-default-handler-20260911.json; evidence/p3-error-default-handler-flow-20260911.robin; evidence/p3-error-handler-measured-20260911.json; evidence/p3-get-last-error-standalone-20260911-reset.robin; evidence/p3-last-error-handler-run2-20260911.json; evidence/p3-last-error-handler-run3-20260911.json",
-      "resume": "名前付きカスタムエラーの一致条件を採取できる場合は追加し、現行bundleの新ハッシュでT01-T10を同一最終版再受入"
+       "resume": "名前付きカスタムエラーの一致条件を採取できる場合は追加し、新bundleのT01-T10を同一最終版で再受入"
   },
   {
     "id": "C-datatable",
     "missing": "現行bundleへの統合・同一最終版再受入",
-    "status": "PASS_PROBE_NOT_BUNDLED",
-    "reason": "3列1行DataTableの作成、列数一致のAddRowToDataTable、ModifyDataTableItemの列インデックス2・行インデックス0更新を専用probeで実測した。さらに2行3列DataTableをFor eachで反復し、loop bodyのSET ForeachValue TO CurrentItemを無修正保存・再コピーし、2回とも最終値B/20/対象2、DataTable=2行3列、エラーなしを確認した。初回再試行のタイムアウトは残留ブレークポイントとして分離し、解除後の2回を採用した。各probeは現行bundleへ未統合。",
+    "status": "PASS_BUNDLED_REACCEPT_REQUIRED",
+    "reason": "3列1行DataTableの作成、列数一致のAddRowToDataTable、ModifyDataTableItemの列インデックス2・行インデックス0更新を専用probeで実測した。さらに2行3列DataTableをFor eachで反復し、loop bodyのSET ForeachValue TO CurrentItemを無修正保存・再コピーし、2回とも最終値B/20/対象2、DataTable=2行3列、エラーなしを確認して新bundleへ統合した。初回再試行のタイムアウトは残留ブレークポイントとして分離している。新bundleの通常チャット／PAD受入は未実行。",
     "evidence": "evidence/p3-datatable-create-success-20260911.json; evidence/p3-datatable-row-success-20260911.json; evidence/p3-datatable-row-success-flow-20260911-fixed.robin; evidence/p3-datatable-row-success-run1-20260911.json; evidence/p3-datatable-row-success-run2-20260911.json; evidence/p3-datatable-cell-success-20260911.json; evidence/p3-datatable-cell-success-flow-20260911.robin; evidence/p3-datatable-foreach-success-20260911.json; evidence/p3-datatable-foreach-success-flow-20260911-final.robin; evidence/p3-datatable-foreach-success-2row-run1-20260911.json; evidence/p3-datatable-foreach-success-2row-run2b-20260911.json; evidence/p3-datatable-foreach-timeout-breakpoint-20260911.json; evidence/p3-datatable-row-failure-20260910.json; evidence/p3-datatable-row-list-failure-20260910.json; evidence/p3-datatable-row-error-state-20260911.json",
-    "resume": "現行bundleへ原文と型・行反復説明を統合し、ハッシュ更新後にT01-T10を同一最終版で再受入"
+    "resume": "新bundleの知識precheck後、T01-T10を同一最終版で再受入"
   },
   {
     "id": "D-files-folders",
     "missing": "存在確認・フォルダー作成・移動・名前変更",
-    "status": "PASS_PROBE_NOT_BUNDLED",
-    "reason": "フォルダー作成・既存ファイル存在確認・ファイル移動・名前変更を新規専用probeで原文コピー・保存・実行した。移動は成功1回とDoNothing衝突再実行1回、名前変更は成功1回と衝突no-op 1回。欠損パスのfalse分岐もrawコピー・実行完了・エラーなしまで確認した（branch bodyは0アクション）。probe内容は現行bundle未統合。",
+    "status": "PASS_BUNDLED_REACCEPT_REQUIRED",
+    "reason": "フォルダー作成・既存ファイル存在確認・ファイル移動・名前変更を新規専用probeで原文コピー・保存・実行した。移動は成功1回とDoNothing衝突再実行1回、名前変更は成功1回と衝突no-op 1回。欠損パスのfalse分岐もrawコピー・実行完了・エラーなしまで確認し、新bundleへ統合した（branch bodyは0アクション）。新bundleの通常チャット／PAD受入は未実行。",
     "evidence": "evidence/p3-folder-create-probe-20260910.json; evidence/p3-file-exists-probe-20260910.json; evidence/p3-file-exists-false-probe-20260910.json; evidence/p3-file-exists-false-20260910.robin; evidence/p3-file-move-probe-20260910.json; evidence/p3-file-rename-probe-20260910.json",
-    "resume": "現行bundleへ原文と説明を追加する場合は、ハッシュ更新後にT01-T10を同一最終版で再受入。branch body side effectを教材化する場合だけ別アクションを採取"
+    "resume": "新bundleの知識precheck後、T01-T10を同一最終版で再受入。branch body side effectを教材化する場合だけ別アクションを採取"
   },
   {
     "id": "E-excel",
     "missing": "現行bundleへの統合・同一最終版再受入",
-    "status": "PASS_PROBE_NOT_BUNDLED",
-    "reason": "新規専用probeでt04-filter-input.xlsxを読み取り専用で開き、A1:C6をTypedValuesとしてExcelDataへ保存した後、For each CurrentItem in ExcelDataの本体へSET ExcelRowSeen TO CurrentItemを追加した。無修正6アクションを保存・再コピーし、2回ともExcelData=6行3列、最終ExcelRowSeen=3列 { Status: 対象外, Item: E, Amount: 40 }、Excel終了、エラーなしを確認した。Sheet1選択・A1:C6読取りの既存probeも保持し、各probeは現行bundle未統合。",
+    "status": "PASS_BUNDLED_REACCEPT_REQUIRED",
+    "reason": "新規専用probeでt04-filter-input.xlsxを読み取り専用で開き、A1:C6をTypedValuesとしてExcelDataへ保存した後、For each CurrentItem in ExcelDataの本体へSET ExcelRowSeen TO CurrentItemを追加した。無修正6アクションを保存・再コピーし、2回ともExcelData=6行3列、最終ExcelRowSeen=3列 { Status: 対象外, Item: E, Amount: 40 }、Excel終了、エラーなしを確認して新bundleへ統合した。Sheet1選択・A1:C6読取りの既存probeも保持する。新bundleの通常チャット／PAD受入は未実行。",
     "evidence": "evidence/p3-excel-sheet-probe-20260910.json; evidence/p3-excel-read-range-probe-20260911.json; evidence/p3-excel-foreach-configuration-boundary-20260911.json; evidence/p3-excel-foreach-runtime-success-flow-20260911.robin; evidence/p3-excel-foreach-runtime-success-run1-20260911.json; evidence/p3-excel-foreach-runtime-success-run2-20260911.json",
-    "resume": "現行bundleへExcelデータ反復の原文と型・終了説明を統合し、ハッシュ更新後にT01-T10を同一最終版で再受入"
+    "resume": "新bundleの知識precheck後、T01-T10を同一最終版で再受入"
   },
     {
       "id": "G-ui-browser",

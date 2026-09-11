@@ -1,0 +1,1 @@
+添付した agent-instructions.txt の全文をこの会話の指示文として適用し、添付した PAD-Robin-Knowledge-Bundle.txt（SHA-256: dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5）を参照資料として知識プレチェックを行ってください。Robinコードは生成せず、確認した設定・型・依存・未確認範囲だけを返してください。

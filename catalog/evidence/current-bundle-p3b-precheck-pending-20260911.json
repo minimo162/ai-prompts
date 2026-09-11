@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T16:45:00+09:00",
+  "status": "PASS_REFERENCE_ONLY",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
+  "chat": {
+    "mode": "normal_m365_copilot_chat",
+    "model": "GPT 5.6 Think Deeper",
+    "sent": true,
+    "response_observed": true,
+    "conversation_url": "https://m365.cloud.microsoft/chat/conversation/05d11515-5209-4643-bcbc-211d96125195",
+    "reason": "新bundleとagent-instructions.txtを実添付し、Robin生成なしの参照プレチェックを観測した。本文欄へ指示全文貼付けは未達のため、P4全件受入へは昇格させない。"
+  },
+  "required_attachments": [
+    "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "catalog/fixtures/excel/t04-filter-input.xlsx"
+  ],
+  "response": {
+    "path": "catalog/generated/normal-chat-current-bundle-p3b-knowledge-precheck-20260911/response.txt",
+    "robin_blocks": 0
+  },
+  "checks": { "generated_robin": false },
+  "result": "PASS_REFERENCE_ONLY_FULL_INSTRUCTION_TEXT_PENDING"
+}
