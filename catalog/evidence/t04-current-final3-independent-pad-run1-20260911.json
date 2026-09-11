@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-11T05:20:43.8447231Z",
+  "flow_name": "RobinKnowledgeT04Final3Independent_20260911",
+  "run_status": "success",
+  "ready_observed": true,
+  "start_enabled_after": true,
+  "variable_previews": [
+    "対象,A,10  対象,C,25  対象,D,5",
+    "6 行, 3 列",
+    "Excel インスタンス",
+    "Excel インスタンス",
+    "3 行, 3 列"
+  ]
+}

@@ -3,7 +3,12 @@ param()
 
 $ErrorActionPreference = 'Stop'
 $repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
-$recordPath = Join-Path $repo 'catalog\evidence\t01-current-bundle-prepared-20260911.json'
+$coveragePath = Join-Path $repo 'catalog\coverage.json'
+if (-not (Test-Path -LiteralPath $coveragePath -PathType Leaf)) { throw 'Missing coverage record' }
+$coverage = [IO.File]::ReadAllText($coveragePath, [Text.Encoding]::UTF8) | ConvertFrom-Json
+$recordRelative = [string]$coverage.current_package.t01_prepared
+if ([string]::IsNullOrWhiteSpace($recordRelative)) { throw 'Missing current-package T01 preparation reference' }
+$recordPath = Join-Path $repo ('catalog\' + $recordRelative.Replace('/','\'))
 if (-not (Test-Path -LiteralPath $recordPath -PathType Leaf)) { throw 'Missing T01 preparation record' }
 $record = [IO.File]::ReadAllText($recordPath, [Text.Encoding]::UTF8) | ConvertFrom-Json
 $checks = 0
@@ -16,6 +21,7 @@ $instruction = 'copilot\agent-instructions.txt'
 $bundle = 'copilot\knowledge\PAD-Robin-Knowledge-Bundle.txt'
 Check ((Hash $instruction) -ceq $record.instruction_sha256) 'instruction hash matches record'
 Check ((Hash $bundle) -ceq $record.bundle_sha256) 'bundle hash matches record'
+Check ((Hash $bundle) -ceq $coverage.current_package.knowledge_bundle_sha256) 'bundle hash matches current coverage'
 $promptPath = Join-Path $repo $record.prompt_source
 Check ((Get-FileHash -LiteralPath $promptPath -Algorithm SHA256).Hash.ToLowerInvariant() -ceq $record.prompt_sha256) 'prompt hash matches record'
 $promptText = [IO.File]::ReadAllText($promptPath, [Text.Encoding]::UTF8)

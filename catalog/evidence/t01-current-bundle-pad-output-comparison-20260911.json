@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "case": "T01",
+  "flow_name": "RobinKnowledgeT01CurrentBundleLive_20260911",
+  "runs_requested": 2,
+  "runs_completed": 2,
+  "run1": {
+    "evidence": "catalog/evidence/t01-current-bundle-pad-run1-20260911.json",
+    "output_sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2",
+    "output_bytes": 90,
+    "utf8_bom": true,
+    "line_endings": "CRLF"
+  },
+  "run2": {
+    "evidence": "catalog/evidence/t01-current-bundle-pad-run2-20260911.json",
+    "output_sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2",
+    "output_bytes": 90,
+    "utf8_bom": true,
+    "line_endings": "CRLF"
+  },
+  "output_same_across_runs": true,
+  "expected_output_sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2",
+  "expected_output_bytes": 90,
+  "input": {
+    "path": "catalog/fixtures/text/t01-input-20260909.txt",
+    "sha256_before": "2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f",
+    "sha256_after_run2": "2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f",
+    "bytes": 87,
+    "unchanged": true
+  },
+  "result": "PASS_OUTPUT_AND_INPUT_INVARIANCE"
+}

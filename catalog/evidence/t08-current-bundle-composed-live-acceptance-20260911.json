@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T02:45:35.0724591Z",
+  "status": "PASS_CURRENT_BUNDLE_T08_EXPECTED_ERROR",
+  "issue_state": "OPEN",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "d7a0a7d6d9876aa1169aa96f377032f8e30ea37b8ea5ce753d3b6fb550b42835",
+  "bundle_manifest": "copilot/knowledge-bundle-manifest-20260911e.json",
+  "copilot": {
+    "run_directory": "catalog/generated/normal-chat-current-bundle-t08-error-handler-composed-live-20260911",
+    "attachment_count": 1,
+    "attachment_name": "PAD-Robin-Knowledge-Bundle.txt",
+    "attachment_sha256": "d7a0a7d6d9876aa1169aa96f377032f8e30ea37b8ea5ce753d3b6fb550b42835",
+    "send_observed": true,
+    "response_completed_observed": true,
+    "model_selected": "GPT 5.6 Think Deeper",
+    "response_path": "catalog/generated/normal-chat-current-bundle-t08-error-handler-composed-live-20260911/response.txt",
+    "response_sha256": "ad24bb3fef5eb3412faf929367a1fb770e7aae2d0bf1e20c09ed726c668f1f7a",
+    "response_bytes": 3053,
+    "robin_path": "catalog/generated/normal-chat-current-bundle-t08-error-handler-composed-live-20260911/robin.txt",
+    "robin_sha256": "a23719ac4f41fb8126cd02631b2111596d2682245e0d6e799d0063aa8c857c1b",
+    "robin_bytes": 290,
+    "robin_block_count": 1,
+    "prompt_path": "catalog/generated/normal-chat-current-bundle-t08-error-handler-composed-live-20260911/prompt.txt",
+    "prompt_not_embedded_expected_output": true
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT08ErrorHandlerComposedLive_20260911",
+    "process_id": 27560,
+    "paste_save": "catalog/evidence/t08-current-bundle-composed-pad-paste-save-20260911.json",
+    "paste_confirmed": true,
+    "saved_confirmed": true,
+    "source_robin_sha256": "a23719ac4f41fb8126cd02631b2111596d2682245e0d6e799d0063aa8c857c1b",
+    "recopy_path": "catalog/evidence/t08-current-bundle-composed-pad-recopy-20260911.robin",
+    "recopy_sha256": "b9b4e75950e9f2e02acf7f998837cf0e73e8031b34995f5133f3334bc8aee436",
+    "recopy_bytes": 299,
+    "recopy_difference": "PAD added one trailing space to the BLOCK line and transported CRLF; no code was edited or normalized for acceptance.",
+    "action_items_observed": ["ブロック エラー発生時 , エラー処理が有効", "ファイルからテキストを読み取る", "終了", "最後のエラーを取得"]
+  },
+  "runs": [
+    {
+      "path": "catalog/evidence/t08-current-bundle-composed-pad-run1-20260911.json",
+      "run_status": "success",
+      "variable_previews": ["true", "ファイル C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt が見つかりません"],
+      "unhandled_error_dialog": false
+    },
+    {
+      "path": "catalog/evidence/t08-current-bundle-composed-pad-run2-20260911.json",
+      "run_status": "success",
+      "variable_previews": ["true", "ファイル C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt が見つかりません"],
+      "unhandled_error_dialog": false
+    }
+  ],
+  "expected_error": {
+    "missing_input": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt",
+    "missing_input_confirmed": true,
+    "last_error_recorded": true,
+    "downstream_write_actions_in_generated_robin": false,
+    "completion_or_publish_actions_in_generated_robin": false
+  },
+  "boundary": "The generated Robin is a valid current-bundle fenced block and passed unmodified PAD paste/save/two-run acceptance. The package's named FileNotFound custom-handler matching remains unproven; this T08 pass uses the measured default all-errors handler."
+}

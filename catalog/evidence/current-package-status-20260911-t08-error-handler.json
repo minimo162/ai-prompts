@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T11:17:35+09:00",
+  "status": "PARTIAL_NEW_BUNDLE_LIVE_ACCEPTANCE_PENDING",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "instruction_utf16_code_units": 3949,
+  "knowledge_bundle_sha256": "38640a472186cb4d2e1f79443620112f6da7be0b4fc5834940dbdccc92da6358",
+  "knowledge_bundle_bytes": 69204,
+  "manifest": "copilot/knowledge-bundle-manifest-20260911d.json",
+  "changed_source": "copilot/knowledge/PAD-Robin-02-Control.txt",
+  "change_reason": "Add PAD-captured Get last error syntax and two-run missing-file error-recording evidence without claiming a single raw clipboard capture.",
+  "prior_bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
+  "prior_live_evidence": "catalog/evidence/t01-current-bundle-live-send-20260911.json; catalog/evidence/t08-current-bundle-live-format-20260911.json",
+  "inheritance_rule": "Prior e35fa2f4 live PASS/FAIL is historical and is not inherited by this 38640a bundle.",
+  "live_acceptance": {
+    "knowledge_precheck": "NOT_RUN_NEW_BUNDLE",
+    "t01_t10": "NOT_RUN_NEW_BUNDLE",
+    "independent_t01_t04_t10": "NOT_RUN_NEW_BUNDLE",
+    "negative_cases": "NOT_RUN_NEW_BUNDLE"
+  },
+  "static_verification": {
+    "Test-RobinCatalog": "84 PASS",
+    "Test-CopilotRobinPackage": "3949 UTF-16 / 7 files / 86 observed actions PASS",
+    "Test-RobinRawContracts": "6 assertions PASS",
+    "Test-CurrentBundleT01Prepared": "14 PASS for current 38640a preparation",
+    "Test-Issue5CurrentStatus": "21 PASS for current 38640a pending state",
+    "Run-NonLiveTests": "36/36 PASS; evidence .work/nonlive-d9c50790b53a497d99fcbf8d9e7de9b3/verification.json"
+  },
+  "next_action": "Send T08 with this exact 38640a bundle in a new normal M365 Copilot chat, preserve any valid fenced Robin, and accept it in a dedicated PAD flow without edits."
+}

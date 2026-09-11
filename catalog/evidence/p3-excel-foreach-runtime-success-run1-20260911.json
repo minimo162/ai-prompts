@@ -1,0 +1,14 @@
+{
+    "schema_version":  1,
+    "observed_at":  "2026-09-11T01:24:32.5311260Z",
+    "flow_name":  "RobinKnowledgeP3ExcelForeachRuntime_20260911",
+    "run_status":  "success",
+    "ready_observed":  true,
+    "start_enabled_after":  true,
+    "variable_previews":  [
+                              "3 列 { Column1: 対象外, Column2: E, Column3: 40 }",
+                              "6 行, 3 列",
+                              "Excel インスタンス",
+                              "3 列 { Column1: 対象外, Column2: E, Column3: 40 }"
+                          ]
+}

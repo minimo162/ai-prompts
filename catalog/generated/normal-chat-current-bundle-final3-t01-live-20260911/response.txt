@@ -1,0 +1,32 @@
+前提・対象範囲・未確認点
+依頼内容は、UTF-8テキスト読取り → 通常置換（対象語→置換後）→ UTF-8テキスト保存です。
+入力: t01-input-20260909 の指定パス。
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-current-bundle.txt。
+追加改行は出さない条件のため、実測済み AppendNewLine: False の保存例を使用します。
+根拠はナレッジの「T01で実測済みの3アクション組合せ」です。PADから取得した3アクション原文として記録され、専用フローへの貼付け・保存・実行・出力照合の証拠があります。
+未確認点はありません。
+PADで先に作る設定手順
+新しいフローを作成します。
+入力変数、UI要素、Officeインスタンスは不要です。
+空のサブフローへ、そのまま貼り付けます。
+入力ファイルと出力フォルダーが存在することを確認します。
+出力ファイルは既存内容を上書きする設定です。
+貼り付け用Robin（根拠: catalog/generated/normal-chat-current-bundle-t01-live-20260911/robin.txt に記録された実測済み3アクション組合せ）
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+デザイナー上の確認方法
+貼付け後、アクション数が3個であることを確認します。
+順序が「読取り → 通常置換 → 書込み」であることを確認します。
+出力変数が FileContents、Replaced になっていることを確認します。
+デザイナー上でエラー表示がないことを確認します。
+置換アクションが正規表現置換ではなく通常置換であることを確認します。
+合成データでの保存・実行・照合手順
+フローを保存します。
+実行します。
+出力ファイル normal-chat-t01-output-current-bundle.txt を UTF-8 で開きます。
+元入力の特殊文字、引用符、改行、対象外語 が保持されていることを確認します。
+対象語 のみが 置換後 に変わっていることを確認します。
+同じフローを再実行し、上書き保存後も結果が変わらないことを確認します。
+ナレッジでは、この3アクション組合せについて貼付け・保存・2回実行・出力照合の証拠が記録されています。

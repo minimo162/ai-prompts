@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-11T05:05:00+09:00",
-  "reconciled_at": "2026-09-11T05:05:00+09:00",
-  "reconciliation_note": "P3 evidence references and the seven-file bundle were refreshed from the current catalog, including the T09 runtime reprobe boundary. This file is not a complete PAD feature reference or current-session execution claim; same-version Copilot/PAD acceptance remains pending.",
+  "generated_at": "2026-09-11T14:32:00+09:00",
+  "reconciled_at": "2026-09-11T14:32:00+09:00",
+  "reconciliation_note": "Final3 fixed-version Copilot/PAD evidence was added for T01-T08 and T10, with independent T01/T04/T10 retests and a fail-closed negative suite. T09 remains blocked before runtime because captured Web UI elements are not found; P3 gaps remain. This file is not a complete PAD feature reference or execution allowlist.",
   "environment": {
     "pad_file_version": "2.71.115.26224",
     "language": "ja-JP",
@@ -11,11 +11,12 @@
   },
   "current_package": {
     "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-    "knowledge_bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
-    "status": "partial_p3_t09_boundary_bundle_integrated_knowledge_precheck_pass_t01_t10_pending",
-    "evidence": "evidence/current-package-status-20260911-p3c-integration.json",
-    "knowledge_precheck": "generated/normal-chat-current-bundle-knowledge-precheck-20260911/result.json",
-    "t01_prepared": "evidence/t01-current-bundle-prepared-20260911.json",
+    "knowledge_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+    "status": "partial_t09_runtime_p3_independent_negative_pending",
+    "evidence": "evidence/current-package-status-20260911-final4.json",
+    "audit": "evidence/issue5-completion-audit-20260911-final4.json",
+    "knowledge_precheck": "evidence/current-bundle-final-precheck-20260911.json",
+    "t01_prepared": "evidence/t01-current-bundle-prepared-20260911-final.json",
     "t01_staged": "evidence/t01-current-bundle-staged-20260911.json",
     "t01_stage_current": "evidence/t01-current-bundle-stage-expired-20260911.json"
   },
@@ -2431,8 +2432,8 @@
         "web-get-t09-result",
         "web-close-t09"
       ],
-      "reason": "T09でローカルEdgeの3要素をUI要素ピッカーから捕捉し、6アクションを空フローへ貼付け・保存した。WebAutomation通し実行はブラウザー拡張経路のタイムアウトで未完了。未捕捉セレクターは推測していない。",
-    "reference": "docs/robin-action-catalog.md; copilot/knowledge/PAD-Robin-05-UI-Web.txt; catalog/evidence/t09-capture-source-20260910.json; catalog/evidence/t09-runtime-block-20260910.json; catalog/evidence/t09-current-environment-20260910b.json",
+      "reason": "Final3の通常M365 Copilot生成Robinは6アクションで、無修正貼付け・保存・再コピーまで確認した。しかし新規PADフローでは捕捉済み t09-input／実行ボタン／未実行段落のUI要素が見つからず、StartFlowButtonが無効のままRun開始前に停止した。手動DOM操作、未捕捉セレクター、拡張や管理設定の変更は受入へ代用していない。",
+      "reference": "docs/robin-action-catalog.md; docs/pad-live-setup.md; copilot/knowledge/PAD-Robin-05-UI-Web.txt; catalog/evidence/t09-current-final3-live-acceptance-20260911.json; catalog/evidence/t09-current-final3-pad-run-blocked-20260911.json; catalog/evidence/t09-extension-handshake-boundary-20260911.json",
       "live_ui_candidates": [
         {
           "ui_name": "ウィンドウの UI 要素をクリック",
@@ -2500,7 +2501,7 @@
   {
     "id": "A-datetime",
     "missing": "カスタム日時書式化",
-    "status": "PARTIAL_PROBE_NOT_BUNDLED",
+      "status": "PASS_CURRENT_BUNDLE_T08_EXPECTED_ERROR_PARTIAL",
     "reason": "日付の減算、DateAndTime取得設定、日時加算は新規専用probeで原文コピー・保存・2回実行を確認した。カスタム書式化は現行PAD専用probeでダイアログ選択までは到達したが、保存更新時にSequence contains no matching elementの内部例外が発生し、成功原文・実行値は未採取。各probeは現行bundle未統合。",
     "evidence": "evidence/p3-date-add-probe-20260910.json; evidence/p3-date-subtract-probe-20260910.json; evidence/p3-date-format-probe-20260910.json; evidence/p3-date-format-custom-failure-20260910.json; evidence/p3-date-format-dialog-crash-20260911.json",
     "resume": "カスタム日時書式化を採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
@@ -2525,17 +2526,17 @@
     "id": "B-error-subflow",
     "missing": "エラー処理・サブフロー作成／呼出し",
     "status": "PARTIAL_PROBE_NOT_BUNDLED",
-    "reason": "新規専用probeでBLOCK／ON BLOCK ERROR／THROW ERROR／END構造、欠損ファイル子アクション、P3Worker作成＋MainからのCALLをコピー・保存・実行した。名前付きFileNotFoundルールはruntime errorのままだったが、既定のすべてのエラーへErrorHandledDefault=true、続行ON／スローOFFを設定したprobeは2回ともtrueプレビューで完了した。カスタムルールの一致条件と後続処理の一般化は未確認、probeは現行bundle未統合。",
-    "evidence": "evidence/p3-error-block-probe-20260910.json; evidence/p3-error-trigger-probe-20260910.json; evidence/p3-subflow-probe-20260910.json; evidence/p3-error-custom-handler-20260911.json; evidence/p3-error-custom-handler-flow-20260911.robin; evidence/p3-error-default-handler-20260911.json; evidence/p3-error-default-handler-flow-20260911.robin",
-    "resume": "カスタムエラーハンドラーを採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
+      "reason": "新規専用probeでBLOCK／ON BLOCK ERROR／THROW ERROR／END構造、欠損ファイル子アクション、P3Worker作成＋MainからのCALLをコピー・保存・実行した。名前付きFileNotFoundルールはruntime errorのままだったが、既定のすべてのエラーへErrorHandledDefault=true、続行ON／スローOFFを設定したprobeは2回ともtrueプレビューで完了した。さらにPADで最後のエラーを取得（LastError、Reset=True）を設定し、欠損ファイルのエラー文字列を2回取得した。新bundleへ測定済み組み合わせ参照を追加し、通常M365 Copilot生成Robinの無修正PAD貼付け・保存・2回実行でT08期待エラーを現行版受入した。名前付きカスタムルールの一致条件と後続処理の一般化は未確認。",
+      "evidence": "evidence/p3-error-block-probe-20260910.json; evidence/p3-error-trigger-probe-20260910.json; evidence/p3-subflow-probe-20260910.json; evidence/p3-error-custom-handler-20260911.json; evidence/p3-error-custom-handler-flow-20260911.robin; evidence/p3-error-default-handler-20260911.json; evidence/p3-error-default-handler-flow-20260911.robin; evidence/p3-error-handler-measured-20260911.json; evidence/p3-get-last-error-standalone-20260911-reset.robin; evidence/p3-last-error-handler-run2-20260911.json; evidence/p3-last-error-handler-run3-20260911.json",
+      "resume": "名前付きカスタムエラーの一致条件を採取できる場合は追加し、現行bundleの新ハッシュでT01-T10を同一最終版再受入"
   },
   {
     "id": "C-datatable",
-    "missing": "列付き行追加・行反復・セル参照",
-    "status": "BLOCKED_EXTERNAL_UI",
-    "reason": "3列1行DataTableの作成を新規専用probeでコピー・保存・2回実行し、A/10/対象と1行3列を確認した。一方、5列に1値を渡す行追加のnative runtime errorとビジュアライザー復帰失敗も再現している。現行失敗フローのUIでもDataTableが0行0列、RowValuesが[A, B]、2値対0列エラーを確認した。RowToAddの正しいリスト型・行反復・セル参照の成功は未採取し、候補構文を推測していない。",
-    "evidence": "evidence/p3-datatable-create-success-20260911.json; evidence/p3-datatable-row-failure-20260910.json; evidence/p3-datatable-row-list-failure-20260910.json; evidence/p3-datatable-row-error-state-20260911.json",
-    "resume": "列数一致のRowToAdd入力型をPAD画面から採取し、再貼付け・保存・実行・行反復・セル参照まで確認"
+    "missing": "現行bundleへの統合・同一最終版再受入",
+    "status": "PASS_PROBE_NOT_BUNDLED",
+    "reason": "3列1行DataTableの作成、列数一致のAddRowToDataTable、ModifyDataTableItemの列インデックス2・行インデックス0更新を専用probeで実測した。さらに2行3列DataTableをFor eachで反復し、loop bodyのSET ForeachValue TO CurrentItemを無修正保存・再コピーし、2回とも最終値B/20/対象2、DataTable=2行3列、エラーなしを確認した。初回再試行のタイムアウトは残留ブレークポイントとして分離し、解除後の2回を採用した。各probeは現行bundleへ未統合。",
+    "evidence": "evidence/p3-datatable-create-success-20260911.json; evidence/p3-datatable-row-success-20260911.json; evidence/p3-datatable-row-success-flow-20260911-fixed.robin; evidence/p3-datatable-row-success-run1-20260911.json; evidence/p3-datatable-row-success-run2-20260911.json; evidence/p3-datatable-cell-success-20260911.json; evidence/p3-datatable-cell-success-flow-20260911.robin; evidence/p3-datatable-foreach-success-20260911.json; evidence/p3-datatable-foreach-success-flow-20260911-final.robin; evidence/p3-datatable-foreach-success-2row-run1-20260911.json; evidence/p3-datatable-foreach-success-2row-run2b-20260911.json; evidence/p3-datatable-foreach-timeout-breakpoint-20260911.json; evidence/p3-datatable-row-failure-20260910.json; evidence/p3-datatable-row-list-failure-20260910.json; evidence/p3-datatable-row-error-state-20260911.json",
+    "resume": "現行bundleへ原文と型・行反復説明を統合し、ハッシュ更新後にT01-T10を同一最終版で再受入"
   },
   {
     "id": "D-files-folders",
@@ -2547,18 +2548,18 @@
   },
   {
     "id": "E-excel",
-    "missing": "シート選択・データ反復",
-    "status": "PARTIAL_PROBE_NOT_BUNDLED",
-    "reason": "新規専用probeでExcelを開き、Sheet1を名前指定でアクティブ化する2アクションをコピー・保存・2回実行した。別probeでA1:C6のExcelData=6行3列プレビューを確認したが、For each設定の保存・ループ内副作用が安定せずデータ反復は未採取で、probeは現行bundle未統合。",
-    "evidence": "evidence/p3-excel-sheet-probe-20260910.json; evidence/p3-excel-read-range-probe-20260911.json; evidence/p3-excel-foreach-configuration-boundary-20260911.json",
-    "resume": "Excelデータ反復を採取し、統合時はハッシュ更新後にT01-T10を同一最終版で再受入"
+    "missing": "現行bundleへの統合・同一最終版再受入",
+    "status": "PASS_PROBE_NOT_BUNDLED",
+    "reason": "新規専用probeでt04-filter-input.xlsxを読み取り専用で開き、A1:C6をTypedValuesとしてExcelDataへ保存した後、For each CurrentItem in ExcelDataの本体へSET ExcelRowSeen TO CurrentItemを追加した。無修正6アクションを保存・再コピーし、2回ともExcelData=6行3列、最終ExcelRowSeen=3列 { Status: 対象外, Item: E, Amount: 40 }、Excel終了、エラーなしを確認した。Sheet1選択・A1:C6読取りの既存probeも保持し、各probeは現行bundle未統合。",
+    "evidence": "evidence/p3-excel-sheet-probe-20260910.json; evidence/p3-excel-read-range-probe-20260911.json; evidence/p3-excel-foreach-configuration-boundary-20260911.json; evidence/p3-excel-foreach-runtime-success-flow-20260911.robin; evidence/p3-excel-foreach-runtime-success-run1-20260911.json; evidence/p3-excel-foreach-runtime-success-run2-20260911.json",
+    "resume": "現行bundleへExcelデータ反復の原文と型・終了説明を統合し、ハッシュ更新後にT01-T10を同一最終版で再受入"
   },
     {
       "id": "G-ui-browser",
       "missing": "PAD WebAutomation通し実行",
       "status": "PARTIAL_RUNTIME_PROBE",
-      "reason": "既存専用フローで待機値を一時的に1秒へ束ねたランタイムprobeは成功し、入力・クリック・T09-clicked取得・PAD完了を確認した。元のWAIT 500は実行前後で復元した。一方、現行6アクション貼付け先を90秒実行した試行は112秒時点でも実行中で、WebAutomationエラーと未実行プレースホルダーが残り、停止後に準備完了へ戻った。現行package生成Robinの無修正貼付け・固定待機値での受入は未確認。",
-      "evidence": "evidence/t09-runtime-probe-20260910.json; evidence/p3-t09-current-runtime-reprobe-20260911.json",
+      "reason": "既存専用フローで待機値を一時的に1秒へ束ねたランタイムprobeは成功し、入力・クリック・T09-clicked取得・PAD完了を確認した。元のWAIT 500は実行前後で復元した。一方、現行6アクション貼付け先を90秒実行した試行は112秒時点でも実行中で、WebAutomationエラーと未実行プレースホルダーが残り、停止後に準備完了へ戻った。追加の読み取り専用環境確認ではEdge拡張・native manifest・権限は存在したが、native hostログは起動成功のみで接続完了を示さず、現行プロセスもChrome originでEdge実行を証明しない。現行package生成Robinの無修正貼付け・固定待機値での受入は未確認。",
+      "evidence": "evidence/t09-runtime-probe-20260910.json; evidence/p3-t09-current-runtime-reprobe-20260911.json; evidence/t09-extension-handshake-boundary-20260911.json",
       "resume": "現行packageの新規通常チャットT09 Robinを得て、待機設定を手修正せず専用フローへ貼付け・保存・実行・取得値を照合"
     }
   ]

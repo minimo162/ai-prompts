@@ -1,0 +1,102 @@
+1. 前提・対象範囲・未確認点
+
+目的
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files 内の複数ファイルを一度ずつ処理し、.txt のみ UTF-8 で内容読取りするフロー案です。
+
+入力
+
+フォルダー: C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+
+出力
+
+各 .txt の内容 → FileContents
+現在処理中のファイル → CurrentFile
+
+確認済み根拠
+
+フォルダー内ファイル取得（全ファイル *）
+catalog/actions/folder-get-files/all-files-no-subfolders.robin
+For each
+catalog/actions/foreach/items-variable.robin
+ファイルパス変数から UTF-8 読取り
+catalog/actions/file-read-text/variable-path-utf8.robin
+.txt を含む条件式
+catalog/actions/if/current-file-contains-txt.robin
+T03部分組合せ実行
+catalog/flows/t03-folder-foreach-read/partial.robin
+For each＋If＋読取りの組合せ実行証拠
+catalog/evidence/t03-partial-run-1.json
+
+未確認
+
+.csv と .md を明示的に Else 側へ振り分けて何らかの処理を行う構文
+拡張子完全一致判定
+ファイル名抽出専用アクション
+Else 分岐の実行証拠
+
+そのため、以下は確認済み原文だけで構成した .txt 対象経路です。.csv と .md は「条件不一致で読取りされない対象外経路」として扱います。
+
+2. PADで先に作る設定
+新しいフローを作成。
+下記Robinをメインサブフローへ貼り付け。
+入力フォルダーは実測例どおり
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+出力変数
+Files : フォルダー取得結果
+CurrentFile : For each の現在ファイル
+FileContents : UTF-8読取り結果
+3. 貼り付け用Robin（確認済み原文の組合せ）
+Plain Text
+1
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+2
+LOOP FOREACH CurrentFile IN Files
+3
+    IF Contains(CurrentFile, $'''.txt''', False) THEN
+4
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+5
+    END
+6
+END
+4. デザイナー上の確認方法
+
+確認するアクション順は次の4つです。
+
+フォルダー内のファイルを取得
+For each
+If
+ファイルからテキストを読み取る
+
+変数確認:
+
+Files : リスト
+CurrentFile : 現在のファイルパス
+FileContents : テキスト
+
+ブロック対応:
+
+LOOP FOREACH ↔ END
+IF ... THEN ↔ END
+
+デザイナー上でエラー表示が無いことを確認してください。
+
+5. 合成データでの照合手順
+
+添付Fixtureでは以下が含まれています。
+
+t03-alpha.txt
+t03-beta.csv
+t03-gamma.md
+
+期待結果:
+
+ファイル	判定
+t03-alpha.txt	読取り実行
+t03-beta.csv	条件不一致で読取りしない
+t03-gamma.md	条件不一致で読取りしない
+
+CurrentFile が .txt のときのみ File.ReadTextFromFile.ReadText が実行され、FileContents に alpha 日本語 が取得されることを確認します。
+
+確認済み範囲: フォルダー取得、For each、.txt 条件式、UTF-8読取り、およびそれらの組合せ実行。
+未確認範囲: Else分岐で .csv・.md を個別処理するRobin原文。該当構文はナレッジ内に実測原文がないため生成していません。

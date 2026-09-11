@@ -23,3 +23,13 @@ PADのUI要素やブラウザーアクションを一般的なセレクターや
 - `RobinKnowledgeT09FilterPaste_20260910` を90秒上限で実行したが、112秒時点でも「実行中」となり、入力・クリック・結果取得・終了のWebAutomationエラーと結果要素`未実行`が表示された。
 - 有効な停止ボタンを一度だけ押し、PADが「準備完了」へ戻った。`T09-clicked`は未観測で、これはWAIT=1秒へ一時変更した別probeの成功とは分離する。
 - 証拠: `catalog/evidence/p3-t09-current-runtime-reprobe-20260911.json`。拡張機能・WebDriver・通信方式を推測したり、既存タブを閉じたりしない。
+
+2026-09-11 T09のPAD採取済みアクション行（生成根拠として掲載）
+- `catalog/flows/ui-t09-local-roundtrip/roundtrip.robin` のアクション行は6行で、原文SHA-256 `93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd`。下記はControlRepository画像データを除いた、PADから取得した実行命令行の逐語部分である。
+WebAutomation.LaunchEdge.LaunchEdge Url: $'''http://127.0.0.1:8765/t09-local-test.html''' ClearCache: False ClearCookies: False WindowState: WebAutomation.BrowserWindowState.Normal WaitForPageToLoadTimeout: 60 Timeout: 60 PiPUserDataFolderMode: WebAutomation.PiPUserDataFolderModeEnum.AutomaticProfile TargetDesktop: $'''{\"DisplayName\":\"ローカル コンピューター\",\"Route\":{\"ServerType\":\"Local\",\"ServerAddress\":\"\"},\"DesktopType\":\"local\"}''' BrowserInstance=> Browser
+WebAutomation.PopulateTextField.PopulateTextFieldUsePhysicalKeyboard BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Input text \'t09-input\''] Text: $'''T09-input''' Mode: WebAutomation.PopulateTextMode.Replace UnfocusAfterPopulate: True WaitForPageToLoadTimeout: 60
+WebAutomation.Click.Click BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Button \'実行\''] ClickType: WebAutomation.ClickType.LeftClick MouseClick: True WaitForPageToLoadTimeout: 60 MousePositionRelativeToElement: WebAutomation.RectangleEdgePoint.MiddleCenter OffsetX: 0 OffsetY: 0
+WAIT 500
+WebAutomation.GetDetailsOfElement BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Paragraph \'未実行\''] AttributeName: $'''Own Text''' AttributeValue=> AttributeValue
+WebAutomation.CloseWebBrowser BrowserInstance: Browser
+- この掲載はPADから取得したアクション行の技術資料であり、現行bundleへの統合後も、ブラウザー拡張経路の完走・`AttributeValue=T09-clicked`・ブラウザー終了は別のライブ受入条件である。未確認のセレクターや引数を追加しない。

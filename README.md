@@ -4,7 +4,7 @@
 
 通常チャットでの検証条件と禁止事項は [CODEX_CORRECTION_M365_CHAT_VALIDATION.md](CODEX_CORRECTION_M365_CHAT_VALIDATION.md) を先に確認してください。Agent Builder／Copilot Studioの登録は今回の検証先ではありません。
 
-2026-09-11のP3追補統合版は、指示文SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、最新bundle SHA-256 `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644` です。7原本へ実測済みP3成功と失敗境界を統合しましたが、新bundleでの知識precheck、T01〜T10、独立再試験は未完了です。T08は形式失敗、T09は現行package Robin未確認として維持し、旧版生成・PAD結果は新bundleへ継承していません。T04/T10の発生段階の比較は [raw provenance](catalog/evidence/normal-chat-raw-provenance-20260910.json)、結合版の再生成は [Build-KnowledgeBundle.ps1](tools/Build-KnowledgeBundle.ps1) を参照してください。
+2026-09-11のP3追補・T08エラー記録追加版は、指示文SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、最新bundle SHA-256 `61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b` です。7原本へPADで採取した`ERROR => LastError Reset: True`とT01測定済み組み合わせ参照を追加し、最終61f040 bundleで知識precheck、T01/T08の無修正PAD受入（各2回実行）まで完了しました。T02〜T07/T09/T10、独立再試験、同一最終版の負例は未完了です。旧bundleの生成・PAD結果は新bundleへ継承していません。T09は現行package Robin未確認として維持します。T04/T10の発生段階の比較は [raw provenance](catalog/evidence/normal-chat-raw-provenance-20260910.json)、結合版の再生成は [Build-KnowledgeBundle.ps1](tools/Build-KnowledgeBundle.ps1) を参照してください。
 
 実測原文の正本は [catalog/index.json](catalog/index.json)、観測範囲は [catalog/coverage.json](catalog/coverage.json)、途中経過は [docs/robin-knowledge-progress.md](docs/robin-knowledge-progress.md) です。既存の採取原文・検証証拠は保全し、未観測のアクションを全機能対応とは表示しません。
 
@@ -60,6 +60,10 @@ index.html
 現在はPADとM365 Copilotを日本語表示で使用してください。他言語の画面は未検証です。ChatGPTのブラウザー拡張機能は不要です。
 
 PADを使う汎用依頼の準備:
+
+PADの空フロー作成権限、DesignerがUIAへ現れない場合の復旧、専用フローの一意な特定条件は、[PAD実機受入の作成権限・UIA復旧手順](docs/pad-live-setup.md)にまとめています。ここに記載したPID・HWNDは観測時の値を再利用せず、毎回再取得してください。
+
+Issue #5 Final3固定版（bundle `2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7`）は、T01〜T08/T10の通常M365 Copilot＋実PAD受入とT01/T04/T10独立再試験を完了しました。T09は捕捉済みUI要素の実行時未検出でRun開始前にブロックされ、P3未確認項目も残るため、Issueは `partial／OPEN` です。証跡は `catalog/evidence/current-package-status-20260911-final4.json` と `catalog/evidence/issue5-completion-audit-20260911-final4.json` に固定しています。
 
 1. HTML画面の「設定・接続確認」で「Copilot を開く」を押し、アプリ専用のEdgeでM365 Copilotへサインインします。既存の個人ブラウザープロファイルは流用しません。
 2. PADで、Power Fxを無効にした空の「業務エージェント専用」フローを作成して保存し、Mainデザイナーを開いたままにします。別の名前を付けた場合は、画面の設定も同じフロー名にします。既存業務フローを指定しないでください。アプリは専用フローに自分で反映したアクションだけを次回以降置き換えます。

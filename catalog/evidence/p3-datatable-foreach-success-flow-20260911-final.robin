@@ -1,0 +1,4 @@
+Variables.CreateNewDatatable InputTable: { ^['Column1', 'Column2', 'Column3'], [$'''A''', 10, $'''対象'''], [$'''B''', 20, $'''対象2'''] } DataTable=> DataTable
+LOOP FOREACH CurrentItem IN DataTable
+    SET ForeachValue TO CurrentItem
+END

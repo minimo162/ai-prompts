@@ -1,0 +1,70 @@
+対象: 「ファイルからテキストを読み取る」の実測済みUTF-8設定のみ。コードは生成しません。
+
+1. 入力パスの型
+確認済みは 文字列リテラルのファイルパス と ファイルパス変数 の2例です。
+文字列リテラル例:
+C:\\Temp\\AiPromptsCatalogNumbers_20260907\\input.txt を指定。
+変数例:
+CurrentFile を指定。For eachで取得したファイルパス変数として利用。
+
+参照箇所
+
+copilot/knowledge/PAD-Robin-03-Files.txt
+「確認済みの原文 > ファイルからテキストを読み取る（id: file-read-text-utf8、variant: utf8）」
+「今回の追加採取: ファイルパス変数からテキストを読み取る」
+2. エンコード設定
+実測済み設定:
+Encoding: File.TextFileEncoding.UTF8
+
+参照箇所
+
+copilot/knowledge/PAD-Robin-03-Files.txt
+UTF-8読取り例
+変数パス読取り例
+3. 出力変数の型
+出力変数名:
+FileContents
+ナレッジで確認できる範囲では、後続の Text.ToNumber や置換処理へ渡されており、テキスト変数として利用されていることだけが確認済みです。
+型名（String など）の明示記載はナレッジ内にありません。
+
+参照箇所
+
+copilot/knowledge/PAD-Robin-03-Files.txt
+UTF-8読取り例
+変数パス読取り例
+copilot/knowledge/PAD-Robin-06-Examples.txt
+T01実測済み3アクション組合せ（読取り→置換→書出し）
+4. 原文ファイルと実行証拠のパス
+
+原文ファイル
+
+catalog/actions/file-read-text/utf8.robin
+catalog/actions/file-read-text/variable-path-utf8.robin（変数パス版、SHA-256: 365ed2c2017f33ba31eba5c448febbaaf11e017aaf052548b4eb7f68d6b75be9）
+
+実行証拠
+
+catalog/evidence/number-conversion-variables.json
+UTF-8読取り後に数値変換へ渡した実行証拠。
+catalog/evidence/t03-partial-paste.json
+フォルダー取得→For each→変数パス読取りの貼付け証拠。
+catalog/evidence/t03-partial-run-1.json
+同組合せの実行証拠。
+
+参照箇所
+
+copilot/knowledge/PAD-Robin-03-Files.txt
+5. 未確認の設定
+
+ナレッジで未確認として読み取れるもの:
+
+UTF-8以外のエンコード。
+空文字ファイル読取り。
+改行差異の境界条件。
+エラー境界条件（読取り失敗時の詳細設定）。
+追加のエンコード関連オプションや別引数。ナレッジ中に実測記録がありません。
+参照した記載
+copilot/knowledge/PAD-Robin-03-Files.txt
+「確認済みの原文 > ファイルからテキストを読み取る（id: file-read-text-utf8、variant: utf8）」
+「今回の追加採取: ファイルパス変数からテキストを読み取る」
+copilot/knowledge/PAD-Robin-06-Examples.txt
+「T01で実測済みの3アクション組合せ」中の UTF-8読取り→置換→書出し実測例。

@@ -1,0 +1,96 @@
+1. 前提・対象範囲・未確認点
+
+目的
+合成PDF source-a の 2ページのみ からテキストを抽出し、UTF-8テキストとして C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt に保存します。
++ 1
+
+入力
+
+PDF: C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf
+
+出力
+
+テキスト: C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt
+
+変数
+
+ExtractedPDFText（PDFテキスト抽出結果）
+
+成功条件
+
+入力PDFを変更しない。
+抽出対象を 2ページ～2ページ に限定する。
+出力テキストにページ2識別文字列 PAGE_TOKEN_A2 が含まれる。
+ページ1識別文字列 PAGE_TOKEN_A1 を含まない。
++ 1
+
+根拠
+
+T07実測済み例として同一PDF・同一出力先・同一2アクション構成が記録されています。原文: catalog/generated/normal-chat-t07-20260910-final/robin.txt。貼付け・保存・実行証拠あり。
+2. PADで先に確認する設定・依存
+
+入力PDFが存在すること
+
+C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf
+
+出力先フォルダーが存在すること
+
+C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence
+
+Power Automate for desktop
+
+PAD 2.71.115.26224
+日本語UI
+Power Fx OFF環境で採取された実測例が根拠です。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 2 DetectLayout: False ExtractedText=> ExtractedPDFText
+2
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt''' TextToWrite: ExtractedPDFText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+確認済み範囲
+
+PADからコピーした原文
+空フローへの再貼付け・保存確認
+2回実行確認
+期待結果照合済み（T07実測例）
+4. デザイナー上の確認方法
+アクション数が 2件 であること。
+順序が次のとおりであること。
+PDF からテキストを抽出
+テキストをファイルに書き込む
+1つ目のアクション
+FromPageNumber = 2
+ToPageNumber = 2
+DetectLayout = False
+出力変数 = ExtractedPDFText
+2つ目のアクション
+TextToWrite = ExtractedPDFText
+AppendNewLine = False
+Encoding = UTF-8
+IfFileExists = Overwrite
+保存後にデザイナーのエラー表示がないこと。
+5. 保存・実行・照合手順
+新しい空フローへ貼り付ける。
+保存する。
+実行する。
+出力ファイル
+C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt を開く。
+次を確認する。
+PAGE_TOKEN_A2 が含まれる。
++ 1
+PAGE_TOKEN_A1 が含まれない。
++ 1
+入力PDFは変更されていない。
+再実行し、同じ内容で上書き保存されることを確認する。
+
+期待される出力内容の一部（ページ2由来）
+
+PDF Catalog A - Page 2
+PAGE_TOKEN_A2
+Alpha 12 A-01
+Beta 34 B-02

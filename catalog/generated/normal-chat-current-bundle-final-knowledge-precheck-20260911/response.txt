@@ -1,0 +1,81 @@
+1. 前提・対象範囲・未確認点
+
+対象は PAD アクション 「ファイルからテキストを読み取る」 の実測済み UTF-8 設定です。回答は添付ナレッジ内の記載のみを根拠とし、一般仕様や未掲載設定は補いません。
+
+2. 実測済み UTF-8 設定
+(1) 入力パスの型
+固定文字列パス
+原文:
+File: $'''C:\\Temp\\AiPromptsCatalogNumbers_20260907\\input.txt'''
+ファイルパス変数
+原文:
+File: CurrentFile
+根拠記載:
+PAD-Robin-03-Files.txt の「確認済みの原文」「今回の追加採取: ファイルパス変数からテキストを読み取る」
+(2) エンコード設定
+実測済み設定:
+Encoding: File.TextFileEncoding.UTF8
+根拠記載:
+PAD-Robin-03-Files.txt
+「確認済みの原文」
+「今回の追加採取: ファイルパス変数からテキストを読み取る」
+(3) 出力変数の型
+出力変数名:
+FileContents
+ナレッジで明示されている内容:
+「出力変数 FileContents を作る」
+「合成 .txt ファイルの内容を取得した」
+型:
+テキスト内容を格納する変数として実測記載あり
+根拠記載:
+PAD-Robin-03-Files.txt
+「確認済みの原文」
+「今回の追加採取: ファイルパス変数からテキストを読み取る」
+(4) 原文ファイルと実行証拠のパス
+
+固定文字列パス版
+
+原文ファイル:
+catalog/actions/file-read-text/utf8.robin
+実行証拠:
+catalog/evidence/number-conversion-variables.json
+
+ファイルパス変数版
+
+原文ファイル:
+catalog/actions/file-read-text/variable-path-utf8.robin
+組合せ原文:
+catalog/flows/t03-folder-foreach-read/partial.robin
+実行証拠:
+catalog/evidence/t03-partial-paste.json
+catalog/evidence/t03-partial-run-1.json
+
+参照箇所はいずれも PAD-Robin-03-Files.txt の
+
+「確認済みの原文」
+「今回の追加採取: ファイルパス変数からテキストを読み取る」
+
+です。
+
+(5) 未確認の設定
+
+添付ナレッジ内で、このアクションについて未確認として列挙されているものは確認できませんでした。
+
+ただし同ファイルの注意書きとして、
+
+「空文字」
+「別エンコード」
+「桁区切り」
+「改行の扱い」 は該当原文と実行証拠を確認するよう記載されています。
+
+参照箇所:
+
+PAD-Robin-03-Files.txt の「注意」
+参照した記載
+copilot/knowledge/PAD-Robin-03-Files.txt
+「確認済みの原文」
+「今回の追加採取: ファイルパス変数からテキストを読み取る」
+「注意」
+索引上のカテゴリ参照:
+copilot/knowledge/PAD-Robin-00-Index.txt
+「ファイル（6）: ファイルからテキストを読み取る」

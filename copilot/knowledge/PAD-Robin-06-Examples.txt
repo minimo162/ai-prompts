@@ -20,6 +20,16 @@ PAD Robin 完成例・生成試験の参照
 - 既存の生成例は、新しいCopilotエージェントへこの7ファイルを登録した証拠ではない。
 - T01〜T10（特殊文字置換、CSV、複数ファイル、Excel範囲、既存Excel、Word／PowerPoint、PDF、意図したエラー、UI画面、既存フロー修正）は、最終版のエージェントで自然文依頼→原文保存→無修正貼付け→実行→成果物照合を行い、初回失敗と修正後結果を別記録する。
 
+## T01で実測済みの3アクション組合せ（履歴bundleの測定根拠）
+
+- `catalog/generated/normal-chat-current-bundle-t01-live-20260911/robin.txt` は、UTF-8読取り→通常置換→UTF-8書出し（AppendNewLine=False、上書き）のPADから取得した3アクション原文である。SHA-256は `2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47`。
+- 同原文を専用PADフローへ手直しせず貼り付け・保存し、2回実行した。出力はUTF-8 BOM付き90 bytes・CRLFで、固定期待SHA `2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2`、入力不変を確認した（`catalog/evidence/t01-current-bundle-live-send-20260911.json`、`t01-current-bundle-pad-output-comparison-20260911.json`）。
+- 測定済み組合せ原文:
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+- この組合せ証拠はe35fa2f4版での履歴であり、指示文またはbundleを変更した版へ自動継承しない。変更後は同じ原文・fixtureで通常チャットから再生成し、無修正PAD受入をやり直す。
+
 ## T02で実測済みの3アクション組合せ
 
 以下は `RobinKnowledgeT02FilterRoundtrip2_20260910` へ再貼付け・保存・再コピー・2回実行し、出力照合まで完了した原文です。列インデックス2は合成CSVのStatus列です。未採取の列名指定や行追加構文へ置き換えません。

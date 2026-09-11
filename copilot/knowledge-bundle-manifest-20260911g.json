@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-11T12:25:16+09:00",
+  "bundle_path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+  "bundle_sha256": "61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b",
+  "bundle_bytes": 71425,
+  "source_files": [
+    {"path": "copilot/knowledge/PAD-Robin-00-Index.txt", "sha256": "5ed9b0a8cfd648aebaf42337ccd1b783efe5ce30ac500e25f414687a18eb7a0e", "bytes": 11028},
+    {"path": "copilot/knowledge/PAD-Robin-01-Basics.txt", "sha256": "b28624c163105139ac97f5b3d452a07439f848189544906353dec2c3f9f48777", "bytes": 8058},
+    {"path": "copilot/knowledge/PAD-Robin-02-Control.txt", "sha256": "143b30c2c66ce8f5427df2994868cd999ffbf5830ddef50bc56d42cd8228d76f", "bytes": 6215},
+    {"path": "copilot/knowledge/PAD-Robin-03-Files.txt", "sha256": "018264dd387539899d84890d513bc07ab3de34df18c176b2f1fbc39ad4cb557a", "bytes": 18468},
+    {"path": "copilot/knowledge/PAD-Robin-04-Office-PDF.txt", "sha256": "63942974f00d2b03350c4f874ae84862494258089182dd120d9d64ff99eebe21", "bytes": 14494},
+    {"path": "copilot/knowledge/PAD-Robin-05-UI-Web.txt", "sha256": "66770c17a30947ecde74032276a37527f67f69d45a8ec5e2661b2b5275f083bb", "bytes": 2788},
+    {"path": "copilot/knowledge/PAD-Robin-06-Examples.txt", "sha256": "2526b66f94305a32faff51d6359efb0765a4c994495fa742516256df29b2ba89", "bytes": 8813}
+  ],
+  "rebuild_command": "pwsh -NoProfile -File tools/Build-KnowledgeBundle.ps1"
+}

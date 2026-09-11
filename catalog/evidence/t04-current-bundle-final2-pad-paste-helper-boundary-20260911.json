@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T04:16:00+09:00",
+  "status": "PASTE_STATUS_CONFIRMED_HELPER_VISIBLE_COUNT_FALSE_NEGATIVE",
+  "flow_name": "RobinKnowledgeT04Final2CorrectedLive_20260911",
+  "process_id": 34384,
+  "source_robin": "catalog/generated/normal-chat-current-bundle-final2-t04-corrected-live-20260911/robin.txt",
+  "source_sha256": "90b94a98613a8450cab08f7803af184cf397e49940108ada77ef230bf118aac9",
+  "helper": "tools/Paste-PadRobinLive.ps1",
+  "expected_action_count": 9,
+  "helper_observed_visible_count": 6,
+  "helper_error": "Paste not confirmed; count=6",
+  "designer_status_action_count_nodes": 2,
+  "designer_status_action_count_text": "9 アクション",
+  "saved_confirmed": false,
+  "execution_requested": false,
+  "interpretation": "The paste was accepted by PAD, but the helper's child-list count was a virtualization false negative; status-based save observation is recorded separately. The source Robin was not edited."
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T10:37:14+09:00",
+  "status": "HANDSHAKE_COMPLETION_UNPROVEN_READ_ONLY",
+  "scope": "Read-only local inspection after the prior T09 WebAutomation timeout; no extension install, policy change, browser automation, or PAD run was performed.",
+  "pad": {
+    "file_version": "2.71.115.26224",
+    "native_manifest": "C:\\Program Files\\WindowsApps\\Microsoft.PowerAutomateDesktop_11.2608.115.0_x64__8wekyb3d8bbwe\\dotnet\\PAD.ChromiumManifest.json",
+    "native_manifest_sha256": "33C35741A3BF15E56D786C5E11FB6A4E92DBBEDB4E019D939D043FD79016122D",
+    "native_registry_host": "com.microsoft.pad.messagehost"
+  },
+  "edge_extension": {
+    "id": "kagpabjoboikccfdghpdlaaopmgpgfdc",
+    "version": "2.70.0.35",
+    "manifest_path": "C:\\Users\\yuuki\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Extensions\\kagpabjoboikccfdghpdlaaopmgpgfdc\\2.70.0.35_1\\manifest.json",
+    "manifest_sha256": "9F507607A0E009A585C5C191FDF8CE7A4AD17B120CFA4D59BB11C19F75CAD7A7",
+    "enabled_state_observed": true,
+    "native_messaging_permission_observed": true,
+    "host_permissions_observed": ["<all_urls>", "http://*/*", "https://*/*"],
+    "native_manifest_origin_allowed": true
+  },
+  "latest_native_host_log": {
+    "path": "C:\\Users\\yuuki\\AppData\\Local\\Microsoft\\Power Automate Desktop\\DataCollection\\2026-09-10-21-50-BrowserNativeMessageHost.log",
+    "bytes": 5748,
+    "read_status": "readable_but_hash_deferred_file_locked",
+    "events_observed": ["application.start", "application.start", "application.start.success"],
+    "messages_observed": ["application.start", "application.start Using synchronized host service", "application.start.success"],
+    "request_or_connection_completion_observed": false,
+    "reported_browser_type": "Chrome",
+    "reported_api_script_version": 5,
+    "reported_background_script_version": 4,
+    "reported_content_script_version": 2
+  },
+  "current_process_snapshot": {
+    "edge_process_count": 0,
+    "browser_native_message_host": {
+      "pid": 12388,
+      "command_line_extension_origin": "chrome-extension://ljglajjnnkapghbckkcmodicjhacbfhk/",
+      "command_line_parent_window": 0,
+      "matches_edge_extension_id": false
+    }
+  },
+  "interpretation": "The Edge extension files, permissions, and native-manifest origin are present, but the available log shows only native-host startup and the current process snapshot is a Chrome-origin host with no Edge browser process. This narrows the T09 dependency to a live Edge-extension/native-host attachment or WebAutomation request path, but does not identify a unique root cause and does not prove T09 runtime success.",
+  "required_next_evidence": "Run the existing six-action T09 flow once with a newly observed Edge target and capture native-host request/response or PAD action completion, AttributeValue=T09-clicked, and browser closure. Do not install an extension or change policy settings as part of this evidence.",
+  "prior_runtime_evidence": "catalog/evidence/p3-t09-current-runtime-reprobe-20260911.json"
+}

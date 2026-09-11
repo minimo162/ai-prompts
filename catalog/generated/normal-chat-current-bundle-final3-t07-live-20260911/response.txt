@@ -1,0 +1,92 @@
+1. 前提・対象範囲・未確認点
+
+目的
+合成PDF C:\Users\yuuki\ai-prompts\catalog\fixtures\pdf\source-a.pdf の 2ページ目のみ からテキストを抽出し、C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt へ UTF-8 テキストとして保存します。
+
+確認済み根拠
+ナレッジ内の T07のページ2単独抽出（リポジトリfixture） に、今回と同じ入力PDF・同じ出力先・同じ2アクション構成の実測済み原文があります。貼付け・保存・2回実行の証拠が記録されています。
+
+抽出対象ページ
+
+FromPageNumber: 2
+ToPageNumber: 2
+
+ページ境界や抽出結果の整形は行いません。PDF抽出アクションの出力をそのまま保存します。
+
+2. PADで先に作る設定・依存
+
+追加の入力変数は不要です。
+
+使用アクション:
+
+PDF からテキストを抽出
+テキストをファイルに書き込む
+
+保存先:
+
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt
+
+設定確認:
+
+PDF抽出: ページ範囲 2～2
+DetectLayout: False
+テキスト保存: UTF-8
+AppendNewLine: False
+既存ファイルがある場合: Overwrite
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: 全体
+
+Plain Text
+1
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 2 DetectLayout: False ExtractedText=> ExtractedPDFText
+2
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt''' TextToWrite: ExtractedPDFText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+根拠:
+
+catalog/generated/normal-chat-t07-20260910-final/robin.txt
+T07実測済みページ2単独抽出フロー
+貼付け・保存・実行証拠あり
+4. デザイナー上の確認方法
+
+アクション数:
+
+2アクション
+
+順序:
+
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange
+File.WriteText
+
+変数:
+
+ExtractedPDFText （PDF抽出結果テキスト）
+
+確認ポイント:
+
+エラー表示がないこと
+1行目が PDF 抽出アクションであること
+2行目が UTF-8 書込みであること
+FromPageNumber: 2
+ToPageNumber: 2
+AppendNewLine: False
+5. 保存・実行・照合手順
+空フローへ上記Robinを貼り付ける。
+保存する。
+フローを実行する。
+出力ファイル
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt を確認する。
+入力PDFは変更されていないことを確認する。
+出力内容に PAGE_TOKEN_A2 が含まれることを確認する。PDFの2ページ目には PAGE_TOKEN_A2 が存在します。
+出力内容に PAGE_TOKEN_A1 が含まれないことを確認する。T07実測記録でも同条件が期待結果として確認されています。
+
+期待結果
+
+出力ファイル生成成功
+UTF-8テキスト保存成功
+PAGE_TOKEN_A2 を含む
+PAGE_TOKEN_A1 を含まない
+入力PDFは不変
++ 1

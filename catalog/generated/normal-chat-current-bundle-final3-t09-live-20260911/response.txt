@@ -1,0 +1,32 @@
+前提・対象範囲・未確認点
+対象は t09-local-test の入力欄 t09-input、実行ボタン t09-submit、結果段落 t09-result です。
++ 1
+根拠は PAD-Robin-Knowledge-Bundle の T09 実測記録にある catalog/flows/ui-t09-local-roundtrip/roundtrip.robin の6アクションです。
+UI要素は PAD UI要素ピッカーで捕捉済みの要素のみを使用し、未捕捉セレクターや WebDriver 引数は追加していません。
+貼付け・保存・再コピーの受理は記録されていますが、WebAutomation の通し実行完了および AttributeValue=T09-clicked は未確認です。実行成功扱いにはできません。
+PADで先に作る設定
+URL: http://127.0.0.1:8765/t09-local-test.html
+UI要素:
+t09-input
+t09-submit
+t09-result
+出力変数:
+Browser
+AttributeValue
+貼り付け用Robin（根拠: catalog/flows/ui-t09-local-roundtrip/roundtrip.robin、実測アクション6行）
+WebAutomation.LaunchEdge.LaunchEdge Url: $'''http://127.0.0.1:8765/t09-local-test.html''' ClearCache: False ClearCookies: False WindowState: WebAutomation.BrowserWindowState.Normal WaitForPageToLoadTimeout: 60 Timeout: 60 PiPUserDataFolderMode: WebAutomation.PiPUserDataFolderModeEnum.AutomaticProfile TargetDesktop: $'''{\"DisplayName\":\"ローカル コンピューター\",\"Route\":{\"ServerType\":\"Local\",\"ServerAddress\":\"\"},\"DesktopType\":\"local\"}''' BrowserInstance=> Browser
+WebAutomation.PopulateTextField.PopulateTextFieldUsePhysicalKeyboard BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Input text \'t09-input\''] Text: $'''T09-input''' Mode: WebAutomation.PopulateTextMode.Replace UnfocusAfterPopulate: True WaitForPageToLoadTimeout: 60
+WebAutomation.Click.Click BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Button \'実行\''] ClickType: WebAutomation.ClickType.LeftClick MouseClick: True WaitForPageToLoadTimeout: 60 MousePositionRelativeToElement: WebAutomation.RectangleEdgePoint.MiddleCenter OffsetX: 0 OffsetY: 0
+WAIT 500
+WebAutomation.GetDetailsOfElement BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Paragraph \'未実行\''] AttributeName: $'''Own Text''' AttributeValue=> AttributeValue
+WebAutomation.CloseWebBrowser BrowserInstance: Browser
+
+デザイナー上の確認方法
+アクション数が6であること。
+順序が「LaunchEdge → PopulateTextField → Click → WAIT 500 → GetDetailsOfElement → CloseWebBrowser」であること。
+出力変数が Browser と AttributeValue であること。
+実行・照合手順
+ローカルで http://127.0.0.1:8765/t09-local-test.html を提供する。
+フローを保存し、PADのデザイナーエラーがないことを確認する。
+実行後に AttributeValue を確認する。
+ただし、ナレッジ記録では WebAutomation の通し実行は完了せず、T09-clicked は未観測です。現時点で確認済みなのは「UI要素捕捉」「6アクション原文」「貼付け・保存・再コピー受理」であり、「実行成功」ではありません。

@@ -1,0 +1,41 @@
+前提・対象範囲・未確認点
+
+対象は「ファイルからテキストを読み取る」の実測済みUTF-8設定です。添付の PAD-Robin-Knowledge-Bundle 内の copilot/knowledge/PAD-Robin-03-Files.txt にある「確認済みの原文」と、「今回の追加採取: ファイルパス変数からテキストを読み取る」を参照しました。
+
+未確認として記載されているのは、空文字、別エンコード、桁区切り、改行の扱いです。
+
+実測済みUTF-8設定
+(1) 入力パスの型
+固定パス版: 文字列リテラルのファイルパス。実測原文では C:\\Temp\\...\\input.txt を直接指定。
+変数版: ファイル変数 CurrentFile。Folder.GetFiles の結果を For each で受けたパス変数を入力として使用。
+(2) エンコード設定
+Encoding: File.TextFileEncoding.UTF8 が実測済み。
+(3) 出力変数の型
+出力変数名は FileContents。
+ナレッジには型名の明示記載はなく、「合成 .txt ファイルの内容を取得した」「テキストを読み取り」とのみ記載されています。文字列型であるという一般仕様の補足はナレッジ内にないため記載しません。
+(4) 原文ファイルと実行証拠のパス
+
+固定パス版:
+
+原文ファイル: catalog/actions/file-read-text/utf8.robin
+実行証拠: catalog/evidence/number-conversion-variables.json
+
+変数パス版:
+
+原文ファイル: catalog/actions/file-read-text/variable-path-utf8.robin （SHA-256: 365ed2c2017f33ba31eba5c448febbaaf11e017aaf052548b4eb7f68d6b75be9）
+組合せ原文: catalog/flows/t03-folder-foreach-read/partial.robin
+実行証拠: catalog/evidence/t03-partial-paste.json、catalog/evidence/t03-partial-run-1.json
+(5) 未確認の設定
+
+ナレッジで未確認と明記されているもの:
+
+空文字の扱い
+UTF-8以外の別エンコード
+桁区切りの扱い
+改行の扱い
+
+参照箇所:
+
+copilot/knowledge/PAD-Robin-03-Files.txt の「確認済みの原文」節
+同ファイルの「今回の追加採取: ファイルパス変数からテキストを読み取る」
+同ファイル末尾の「注意」節

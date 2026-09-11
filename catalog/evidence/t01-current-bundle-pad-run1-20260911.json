@@ -1,0 +1,26 @@
+{
+    "schema_version":  1,
+    "observed_at":  "2026-09-10T22:09:18.2096587Z",
+    "flow_name":  "RobinKnowledgeT01CurrentBundleLive_20260911",
+    "run_status":  "success",
+    "ready_observed":  true,
+    "start_enabled_after":  true,
+    "variable_previews":  [
+                              "日本語  対象語 100%  \u0027引用\u0027 \"二重引用\" C:\\sample  対象語  対象外語  ",
+                              "日本語  置換後 100%  \u0027引用\u0027 \"二重引用\" C:\\sample  置換後  対象外語  "
+                          ]
+    ,"output_observation": {
+        "path": "catalog/evidence/normal-chat-t01-output-current-bundle.txt",
+        "bytes": 90,
+        "sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2",
+        "utf8_bom": true,
+        "line_endings": "CRLF",
+        "observed_after_run": 1
+    },
+    "input_observation": {
+        "path": "catalog/fixtures/text/t01-input-20260909.txt",
+        "bytes": 87,
+        "sha256": "2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f",
+        "unchanged_from_pre_run": true
+    }
+}

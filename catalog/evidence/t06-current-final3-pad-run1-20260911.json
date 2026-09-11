@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-11T05:07:36.7293818Z",
+  "flow_name": "RobinKnowledgeT06Final3Live_20260911",
+  "run_status": "success",
+  "ready_observed": true,
+  "start_enabled_after": true,
+  "variable_previews": [
+    "Word インスタンス"
+  ]
+}

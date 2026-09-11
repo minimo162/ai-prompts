@@ -1,0 +1,33 @@
+前提・対象範囲・未確認点
+目的: UTF-8テキストを読み込み、検索語「対象語」を置換語「置換後」に通常置換し、UTF-8で新規保存します。
+根拠に使用した実測原文:
+「ファイルからテキストを読み取る（UTF-8）」: PAD-Robin-Knowledge-Bundle 内の Files 章の確認済み原文。
+「テキストを置換する（通常置換）」: PAD-Robin-Knowledge-Bundle 内の Basics 章の確認済み原文。
+「テキスト変数を書き込み（AppendNewLine=False、UTF-8、上書き）」: PAD-Robin-Knowledge-Bundle 内の Files 章の確認済み原文。
+未確認:
+この3アクションを組み合わせた T01 現行 bundle の再貼付け・実行証拠は添付ナレッジ内では確認できません。
+各アクション単体の実測原文を根拠に組み合わせています。
+PADで先に作る設定
+追加の入力変数は不要です。
+入力ファイル:
+C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+出力ファイル:
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-current-bundle.txt
+既存出力ファイルは上書き設定です。
+追加改行は行いません（AppendNewLine=False）。
+デザイナー上の確認方法
+アクション数は 3。
+順序は「読取り → 通常置換 → テキスト保存」。
+変数型:
+FileContents = テキスト
+Replaced = テキスト
+保存後にデザイナーでエラー表示が出ていないことを確認します。
+合成データでの照合手順
+フロー保存後に実行します。
+出力ファイルをUTF-8で開きます。
+「対象語」が「置換後」に変わっていることを確認します。
+「日本語」「100%」「引用符」「C:\sample」「対象外語」が保持されていることを確認します。
+末尾へ追加改行が付与されていないことを確認します。
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8

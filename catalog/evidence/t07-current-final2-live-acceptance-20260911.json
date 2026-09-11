@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T04:26:08.2893385Z",
+  "status": "PASS_CURRENT_FINAL2_BUNDLE_T07",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b",
+  "bundle_manifest": "copilot/knowledge-bundle-manifest-20260911g.json",
+  "copilot": {"run_directory": "catalog/generated/normal-chat-current-bundle-final2-t07-live-20260911", "attachment_count": 2, "attachments": [{"name": "PAD-Robin-Knowledge-Bundle.txt", "sha256": "61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b"}, {"name": "source-a.pdf", "sha256": "f5f246849a31e2797f998e426f459ac18b7260ed76206ab987950a1bf80c348d"}], "send_observed": true, "response_completed_observed": true, "model_selected": "GPT 5.6 Think Deeper", "robin_path": "catalog/generated/normal-chat-current-bundle-final2-t07-live-20260911/robin.txt", "robin_sha256": "47a33ef2067bd37009187758e16fc36daa0f5447093b51e83e984e1d8fd484c9", "robin_block_count": 1},
+  "pad": {"flow_name": "RobinKnowledgeT07Final2Live_20260911", "process_id": 39480, "paste_save": "catalog/evidence/t07-current-bundle-final2-pad-paste-save-20260911.json", "paste_confirmed": true, "saved_confirmed": true, "recopy_path": "catalog/evidence/t07-current-bundle-final2-pad-recopy-20260911.robin", "recopy_sha256": "b8a2c15fcca33f0cbb709f00e5813bbb76627ffabf00530dcbb653d8d3e78b76", "action_count": 2},
+  "runs": [{"path": "catalog/evidence/t07-current-bundle-final2-pad-run1-20260911.json", "run_status": "success", "variable_previews": ["PDF Catalog A - Page 2  日本語の確認 100%  PAGE_TOKEN_A2  Item Quantity Code  Alpha 12 A-01  Beta 34 B-02  Synthetic data only"]}, {"path": "catalog/evidence/t07-current-bundle-final2-pad-run2-20260911.json", "run_status": "success", "variable_previews": ["PDF Catalog A - Page 2  日本語の確認 100%  PAGE_TOKEN_A2  Item Quantity Code  Alpha 12 A-01  Beta 34 B-02  Synthetic data only"]}],
+  "integrity": {"input_path": "catalog/fixtures/pdf/source-a.pdf", "input_sha256_before": "f5f246849a31e2797f998e426f459ac18b7260ed76206ab987950a1bf80c348d", "input_sha256_after_run2": "f5f246849a31e2797f998e426f459ac18b7260ed76206ab987950a1bf80c348d", "input_unchanged": true, "output_path": "catalog/evidence/normal-chat-t07-final.txt", "output_sha256": "f7e592cc86719c395657ddffe2bf76ec7538c7d4deb7edb03fae7a5d90ba5fe2", "output_bytes": 135, "contains_page2_identifier": true, "output_same_across_runs": true},
+  "boundary": "T07 final2 is accepted for the specified page-2 extraction. Page boundaries were not reassembled beyond the observed extraction output."
+}

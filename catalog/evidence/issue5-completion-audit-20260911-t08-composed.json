@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "captured_on": "2026-09-11",
+  "status": "partial",
+  "issue_state": "OPEN",
+  "base_audit": "catalog/evidence/issue5-completion-audit-20260911-t08.json",
+  "package": {"instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e", "bundle_sha256": "d7a0a7d6d9876aa1169aa96f377032f8e30ea37b8ea5ce753d3b6fb550b42835", "bundle_manifest": "copilot/knowledge-bundle-manifest-20260911e.json"},
+  "p4_current_bundle": {"status": "PARTIAL_NEW_BUNDLE_LIVE_ACCEPTANCE_PENDING", "knowledge_precheck": "NOT_RUN_NEW_BUNDLE", "t01": {"status": "NOT_RUN_NEW_BUNDLE", "prior_bundle_evidence_not_inherited": ["catalog/evidence/t01-current-bundle-live-send-20260911.json"]}, "t08": {"status": "NOT_RUN_NEW_BUNDLE", "prior_bundle_failure_not_inherited": "catalog/generated/normal-chat-current-bundle-t08-error-handler-20260911/result.json", "new_probe_ready": "catalog/evidence/p3-error-handler-measured-20260911.json"}, "remaining": ["new-bundle knowledge precheck", "new-bundle T01-T10 acceptance", "valid T08 fenced Robin and expected-error PAD acceptance", "current-package T09 generation/paste/run", "remaining P3 gaps", "independent new-bundle T01/T04/T10 retests", "negative cases on the same final version"]},
+  "p5": {"status": "PASS_LOCAL_STATIC_PARTIAL_LIVE_RESET_FOR_NEW_BUNDLE", "latest_nonlive": "pending rerun after d7a0a7 rebuild", "live_m365": "No d7a0a7 live acceptance yet", "native_pad": "No d7a0a7 PAD acceptance yet", "issue_close": false},
+  "p3_probe_updates": {"error_handler_recording": {"status": "PASS_PROBE_SOURCE_IN_NEW_BUNDLE_REACCEPT_PENDING", "evidence": "catalog/evidence/p3-error-handler-measured-20260911.json"}, "t09_extension_handshake_boundary": "HANDSHAKE_COMPLETION_UNPROVEN_READ_ONLY", "remaining": ["DataTable cell reference", "named custom error matching and post-error generalization", "current bundle live acceptance and same-final-version reacceptance"]},
+  "result": "NEW_BUNDLE_CREATED_T08_COMPOSED_REFERENCE_LIVE_REACCEPTANCE_REQUIRED_ISSUE_REMAINS_PARTIAL_OPEN"
+}

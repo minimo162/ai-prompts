@@ -1,0 +1,23 @@
+前提・対象範囲・未確認点
+目的: UTF-8テキストを読み込み、検索語 対象語 を 置換後 へ通常置換し、UTF-8テキストとして新規保存します。
+入力: C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt
+出力: C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt
+根拠: T01実測済み3アクション組合せ（UTF-8読取り→通常置換→UTF-8書出し、AppendNewLine=False）として記録された原文のみを使用しています。
+確認済み範囲: ナレッジには当該T01組合せの貼付け・保存・実行・出力照合の証拠があります。
+PADで先に作る設定
+新しい空のフローを作成します。
+既存アクションは不要です。
+出力先ファイルの上書きを許可する前提です（実測原文は File.IfFileExists.Overwrite）。
+デザイナー上の確認方法
+アクション数が3個であること。
+順序が「ファイルからテキストを読み取る → テキストを置換する → テキストをファイルに書き込む」であること。
+変数が FileContents → Replaced の流れで参照されていること。
+書込みアクションの AppendNewLine が False であること。turn1search1
+合成データでの保存・実行・照合
+フローを保存します。
+実行後、出力ファイルを開きます。
+対象語 が 置換後 にのみ置換され、対象外語、引用符、特文字、改行、およびその他の文字列が保持されていることを確認します。
+再実行時も同じ出力先へ上書き保存されることを確認します。
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8

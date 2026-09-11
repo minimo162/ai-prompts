@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T02:45:35.0724591Z",
+  "status": "PARTIAL_T08_PASS_LIVE_REMAINDER_PENDING",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "instruction_utf16_code_units": 3949,
+  "knowledge_bundle_sha256": "d7a0a7d6d9876aa1169aa96f377032f8e30ea37b8ea5ce753d3b6fb550b42835",
+  "knowledge_bundle_bytes": 69733,
+  "manifest": "copilot/knowledge-bundle-manifest-20260911e.json",
+  "knowledge_precheck": "catalog/evidence/current-bundle-t08-error-handler-composed-precheck.json",
+  "t08_acceptance": "catalog/evidence/t08-current-bundle-composed-live-acceptance-20260911.json",
+  "prior_bundle_sha256": "38640a472186cb4d2e1f79443620112f6da7be0b4fc5834940dbdccc92da6358",
+  "inheritance_rule": "Only this d7a0a7 live evidence is current; prior e35fa2f4 and 38640a evidence remains historical.",
+  "remaining": ["current-bundle T01-T07/T09/T10 acceptance", "T01/T04/T10 independent retests", "T09 WebAutomation completion", "DataTable cell reference and named custom error matching", "negative cases on the same final version"],
+  "static_verification": {"Test-RobinCatalog": "84 PASS", "Test-CopilotRobinPackage": "PASS", "Test-RobinRawContracts": "PASS", "Test-CurrentBundleT01Prepared": "14 PASS", "Test-Issue5CurrentStatus": "23 PASS", "Run-NonLiveTests": "36/36 PASS", "nonlive_evidence": ".work/nonlive-8db65bb04e864432b8b5f6e42b5fa2fc/verification.json", "git_diff_check": "PASS"}
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T14:27:30+09:00",
+  "status": "pass_fail_closed",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+  "generation": {
+    "result": "catalog/generated/normal-chat-current-bundle-final3-negative-suite-20260911/result.json",
+    "prompt": "catalog/generated/normal-chat-current-bundle-final3-negative-suite-20260911/prompt.txt",
+    "response": "catalog/generated/normal-chat-current-bundle-final3-negative-suite-20260911/response.txt",
+    "prompt_sha256": "74ed56f2c7717c293721ec093fbf81408c46421824bccb4f9cb0e9cb53f41380",
+    "response_sha256": "a459ceadba9b360a3a299850978f25f47414a61b3f4dcfeb4d09f75ed1848238",
+    "response_observed": true,
+    "robin_blocks": 0
+  },
+  "cases": {
+    "N1_else_loop_break": "PASS_FAIL_CLOSED: no code; nested ELSE/EXIT LOOP/follow-on side effect remains unobserved",
+    "N2_datatable_row_insert_cell_reference": "PASS_FAIL_CLOSED: no code; nonempty row insert/cell reference/update remains unobserved",
+    "N3_unregistered_web_selector_driver": "PASS_FAIL_CLOSED: no code; selector/driver and T09 runtime dependencies remain unobserved"
+  },
+  "result": "No generated Robin was accepted for any unobserved request; this does not satisfy T09 runtime acceptance."
+}

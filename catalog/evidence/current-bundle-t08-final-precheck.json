@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T02:57:00Z",
+  "status": "PASS_REFERENCE_ONLY",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "c78fd388f6a3247772653d0c48b16444b095dd28821bf141f66946a36dcb3faf",
+  "bundle_attachment_sha256": "c78fd388f6a3247772653d0c48b16444b095dd28821bf141f66946a36dcb3faf",
+  "chat": {"sent": true, "response_observed": true, "response_contains_robin": false, "attachment_count": 1, "model": "GPT 5.6 Think Deeper"},
+  "result": "catalog/generated/normal-chat-current-bundle-final-knowledge-precheck-20260911/result.json",
+  "interpretation": "Reference-only precheck for the final c78fd3 bundle completed before T08 generation."
+}

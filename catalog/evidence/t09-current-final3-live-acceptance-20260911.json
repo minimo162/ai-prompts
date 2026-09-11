@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T13:52:33+09:00",
+  "case": "T09",
+  "status": "blocked_before_execution",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+  "copilot": {
+    "result": "catalog/generated/normal-chat-current-bundle-final3-t09-live-20260911/result.json",
+    "response": "catalog/generated/normal-chat-current-bundle-final3-t09-live-20260911/response.txt",
+    "robin": "catalog/generated/normal-chat-current-bundle-final3-t09-live-20260911/robin.txt",
+    "bundle_attachment_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+    "fixture_attachment_sha256": "53a8bdb369ce3c915c9e863bec570f519d4b5e2ad25b7554c82db6086c0027d4",
+    "send_confirmed": true,
+    "robin_action_count": 6
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT09Final3Live_20260911",
+    "process_id": 33220,
+    "paste_save": "catalog/evidence/t09-current-final3-pad-paste-save-20260911.json",
+    "recopy": "catalog/evidence/t09-current-final3-pad-recopy-20260911.robin",
+    "recopy_action_count": 6,
+    "normalized_robin_equal_ignoring_trailing_blank": true
+  },
+  "run": {
+    "attempted": true,
+    "run1": "catalog/evidence/t09-current-final3-pad-run-blocked-20260911.json",
+    "execution_started": false,
+    "start_button_enabled": false,
+    "downstream_actions": 0,
+    "expected_value_observed": false,
+    "browser_closed_observed": false,
+    "blocker": "PAD Designer error list reports captured UI elements t09-input, 実行 button, and 未実行 paragraph not found; StartFlowButton disabled."
+  },
+  "acceptance": "not_accepted"
+}

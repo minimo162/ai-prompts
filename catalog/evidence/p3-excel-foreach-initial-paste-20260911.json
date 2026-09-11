@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-11T01:01:02.4477218Z",
+    "flow_name":  "RobinKnowledgeP3ExcelForeach_20260911",
+    "source_robin":  "catalog/flows/excel-t04-read-range/roundtrip.robin",
+    "source_sha256":  "67194a87210b59b9585d955433d4a96cd1e207ea0d16c3978c5df9df4de9bc8e",
+    "source_bytes":  493,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  3,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

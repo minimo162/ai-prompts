@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T14:32:00+09:00",
+  "status": "partial_t09_runtime_p3_independent_negative_pending",
+  "issue_state": "OPEN",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "knowledge_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+  "knowledge_precheck": "evidence/current-bundle-final-precheck-20260911.json",
+  "accepted_final_bundle_cases": ["T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T10"],
+  "blocked_final_bundle_cases": ["T09"],
+  "independent_retests": ["T01", "T04", "T10"],
+  "negative_suite": "evidence/negative-suite-current-final3-20260911.json",
+  "remaining": [
+    "T09 PAD WebAutomation runtime: captured UI elements are not found in new runtime and Run is blocked before execution.",
+    "P3 unbundled gaps: DataTable cell reference, list item retrieval, custom date formatting, nested/side-effect branches, named custom error matching.",
+    "No push, PR, merge, release, or Issue close performed."
+  ],
+  "result": "CURRENT_FINAL3_FIXED_VERSION_PARTIAL_OPEN"
+}

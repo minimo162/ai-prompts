@@ -1,0 +1,12 @@
+前提・対象範囲・未確認点
+対象はローカルテスト画面 t09-local-test の入力欄 t09-input、実行ボタン t09-submit、結果段落 t09-result です。URL は http://127.0.0.1:8765/t09-local-test.html です。結果段落は初期値 未実行 で、入力値が T09-input の場合に T09-clicked へ変化します。
+ナレッジでは、実測順序として「WebAutomation.LaunchEdge → PopulateTextField → Click → WAIT 500 → GetDetailsOfElement(Own Text) → CloseWebBrowser」の6アクションが記録されています。
+ただし、貼付け・保存・再コピーは確認済みである一方、現行の通し実行は完了未確認であり、T09-clicked の観測も未確認です。成功フローとしては扱えません。
+ナレッジ本文には、6アクションのRobin原文そのものは収録されていません。catalog/flows/ui-t09-local-roundtrip/roundtrip.robin に存在すると記録されていますが、今回添付された結合版にはその命令行が掲載されていません。
+
+そのため、貼り付け用Robinを逐語一致で再現できる根拠が不足しています。ご指定の契約では、未掲載の命令名・引数・UI要素参照・インスタンス名を推測して生成できないため、今回は貼り付け用Robinコードブロックは出力しません。
+
+再開条件:
+
+catalog/flows/ui-t09-local-roundtrip/roundtrip.robin の原文、またはその6行を添付してください。
+原文を確認できれば、その内容のみを根拠として貼り付け用Robinを提示します。

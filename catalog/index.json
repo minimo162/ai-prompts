@@ -4117,7 +4117,11 @@
       "id": "normal-chat-current-revision-t01-20260910",
       "robin_path": "generated/normal-chat-current-revision-t01-20260910/robin.txt",
       "sha256": "2e7bbd90f5a72f70f56092ccce33120640be4b49bdee9d350dd9c017401e97ba",
-      "action_ids": ["file-read-text-utf8", "text-replace-literal", "file-write-text-utf8-overwrite"],
+      "action_ids": [
+        "file-read-text-utf8",
+        "text-replace-literal",
+        "file-write-text-utf8-overwrite"
+      ],
       "action_count": 3,
       "native_flow_name": "RobinKnowledgeT01CurrentRevision_20260910",
       "roundtrip_flow_name": "RobinKnowledgeT01CurrentRevision_20260910",
@@ -4138,7 +4142,11 @@
       "id": "normal-chat-current-revision-t01-independent-20260910",
       "robin_path": "generated/normal-chat-current-revision-t01-independent-20260910/robin.txt",
       "sha256": "2e7bbd90f5a72f70f56092ccce33120640be4b49bdee9d350dd9c017401e97ba",
-      "action_ids": ["file-read-text-utf8", "text-replace-literal", "file-write-text-utf8-overwrite"],
+      "action_ids": [
+        "file-read-text-utf8",
+        "text-replace-literal",
+        "file-write-text-utf8-overwrite"
+      ],
       "action_count": 3,
       "native_flow_name": "RobinKnowledgeT01CurrentRevisionIndependent_20260910",
       "roundtrip_flow_name": "RobinKnowledgeT01CurrentRevisionIndependent_20260910",
@@ -4159,7 +4167,11 @@
       "id": "normal-chat-current-revision-t02-20260910",
       "robin_path": "generated/normal-chat-current-revision-t02-20260910/robin.txt",
       "sha256": "29e177e91a902171a55a394a6577f913b80167e41090c4cc4708ad944058c23d",
-      "action_ids": ["csv-read-utf8-system-default-header", "datatable-filter-status-equals-index2", "csv-write-variable-reference"],
+      "action_ids": [
+        "csv-read-utf8-system-default-header",
+        "datatable-filter-status-equals-index2",
+        "csv-write-variable-reference"
+      ],
       "action_count": 3,
       "native_flow_name": "RobinKnowledgeT02CurrentRevision_20260910",
       "roundtrip_flow_name": "RobinKnowledgeT02CurrentRevision_20260910",
@@ -4180,7 +4192,12 @@
       "id": "normal-chat-current-revision-t03-20260910",
       "robin_path": "generated/normal-chat-current-revision-t03-single-20260910/robin.txt",
       "sha256": "123da608af8a672efbc257da65d7038e30dab9cb5da7d0ab2dc3cae8a714fa5d",
-      "action_ids": ["folder-get-files-all-no-subfolders", "foreach-items-variable", "if-current-file-contains-txt", "file-read-text-variable-path"],
+      "action_ids": [
+        "folder-get-files-all-no-subfolders",
+        "foreach-items-variable",
+        "if-current-file-contains-txt",
+        "file-read-text-variable-path"
+      ],
       "action_count": 6,
       "native_flow_name": "RobinKnowledgeT03CurrentRevision_20260910",
       "roundtrip_flow_name": "RobinKnowledgeT03CurrentRevision_20260910",
@@ -4202,7 +4219,12 @@
       "id": "normal-chat-current-revision-t05-20260910",
       "robin_path": "generated/normal-chat-current-revision-t05-20260910/robin.txt",
       "sha256": "0b60086068c9849b6f726fb5484956a8c463219bc45fa8a58bd57b9b229ed24e",
-      "action_ids": ["excel-launch-open-editable", "excel-write-cell-a1-text", "excel-save-as-xlsx", "excel-close-no-save"],
+      "action_ids": [
+        "excel-launch-open-editable",
+        "excel-write-cell-a1-text",
+        "excel-save-as-xlsx",
+        "excel-close-no-save"
+      ],
       "action_count": 4,
       "native_flow_name": "RobinKnowledgeT05CurrentRevision_20260910",
       "roundtrip_flow_name": "RobinKnowledgeT05CurrentRevision_20260910",
@@ -4223,7 +4245,12 @@
       "id": "normal-chat-current-revision-t06-20260910",
       "robin_path": "generated/normal-chat-current-revision-t06-20260910/robin.txt",
       "sha256": "0f217cf47eec05ca3da8651adbf2525636dafb2e43b4af88fd30a9e7aa500928",
-      "action_ids": ["word-launch-open-editable", "word-replace-all-literal", "word-save-as-docx-extension", "word-close-no-save"],
+      "action_ids": [
+        "word-launch-open-editable",
+        "word-replace-all-literal",
+        "word-save-as-docx-extension",
+        "word-close-no-save"
+      ],
       "action_count": 5,
       "native_flow_name": "RobinKnowledgeT06CurrentRevision_20260910",
       "roundtrip_flow_name": "RobinKnowledgeT06CurrentRevision_20260910",
@@ -4244,7 +4271,10 @@
       "id": "normal-chat-current-revision-t07-20260910",
       "robin_path": "generated/normal-chat-current-revision-t07-20260910/robin.txt",
       "sha256": "ae3606442e9f2bfdb6d853d4ca73d66a29ddc6e7f1b36b17476c947b4fdc1837",
-      "action_ids": ["pdf-extract-text-page-2", "file-write-text-utf8-overwrite"],
+      "action_ids": [
+        "pdf-extract-text-page-2",
+        "file-write-text-utf8-overwrite"
+      ],
       "action_count": 2,
       "native_flow_name": "RobinKnowledgeT07CurrentRevision_20260910",
       "roundtrip_flow_name": "RobinKnowledgeT07CurrentRevision_20260910",
@@ -4260,6 +4290,146 @@
       "acceptance_scope": "current_package_runtime",
       "controller_support": "strict UIA helper; Designer status showed 2 actions",
       "scope_note": "Current-package normal chat, unmodified paste/save, two successful runs, and input SHA invariance."
+    },
+    {
+      "action_count": 3,
+      "controller_support": "not_implemented",
+      "id": "normal-chat-final3-t01",
+      "generated_result": "generated/normal-chat-current-bundle-final3-t01-live-20260911/result.json",
+      "robin_path": "generated/normal-chat-current-bundle-final3-t01-live-20260911/robin.txt",
+      "generated_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "generated_from_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+      "execution_status": "pass",
+      "catalog_only": true,
+      "sha256": "2e7bbd90f5a72f70f56092ccce33120640be4b49bdee9d350dd9c017401e97ba",
+      "evidence": "evidence/t01-current-final3-live-acceptance-20260911.json",
+      "executed_twice": true
+    },
+    {
+      "action_count": 3,
+      "controller_support": "not_implemented",
+      "id": "normal-chat-final3-t02",
+      "generated_result": "generated/normal-chat-current-bundle-final3-t02-live-20260911/result.json",
+      "robin_path": "generated/normal-chat-current-bundle-final3-t02-live-20260911/robin.txt",
+      "generated_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "generated_from_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+      "execution_status": "pass",
+      "catalog_only": true,
+      "sha256": "11f370b0369f10f6506e73e99e060417f1120cf5e5488213fc6ba33618cf5168",
+      "evidence": "evidence/t02-current-final3-live-acceptance-20260911.json",
+      "executed_twice": true
+    },
+    {
+      "action_count": 6,
+      "controller_support": "not_implemented",
+      "id": "normal-chat-final3-t03",
+      "generated_result": "generated/normal-chat-current-bundle-final3-t03-live-20260911/result.json",
+      "robin_path": "generated/normal-chat-current-bundle-final3-t03-live-20260911/robin.txt",
+      "generated_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "generated_from_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+      "execution_status": "pass",
+      "catalog_only": true,
+      "sha256": "123da608af8a672efbc257da65d7038e30dab9cb5da7d0ab2dc3cae8a714fa5d",
+      "evidence": "evidence/t03-current-final3-live-acceptance-20260911.json",
+      "executed_twice": true
+    },
+    {
+      "action_count": 9,
+      "controller_support": "not_implemented",
+      "id": "normal-chat-final3-t04",
+      "generated_result": "generated/normal-chat-current-bundle-final3-t04-live-20260911/result.json",
+      "robin_path": "generated/normal-chat-current-bundle-final3-t04-live-20260911/robin.txt",
+      "generated_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "generated_from_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+      "execution_status": "pass",
+      "catalog_only": true,
+      "sha256": "90b94a98613a8450cab08f7803af184cf397e49940108ada77ef230bf118aac9",
+      "evidence": "evidence/t04-current-final3-live-acceptance-20260911.json",
+      "executed_twice": true
+    },
+    {
+      "action_count": 4,
+      "controller_support": "not_implemented",
+      "id": "normal-chat-final3-t05",
+      "generated_result": "generated/normal-chat-current-bundle-final3-t05-live-20260911/result.json",
+      "robin_path": "generated/normal-chat-current-bundle-final3-t05-live-20260911/robin.txt",
+      "generated_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "generated_from_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+      "execution_status": "pass",
+      "catalog_only": true,
+      "sha256": "fe94c4a4bb301c03526a700475cca2cc9406703ca6ef3d454a8961aedfbd6188",
+      "evidence": "evidence/t05-current-final3-live-acceptance-20260911.json",
+      "executed_twice": true
+    },
+    {
+      "action_count": 4,
+      "controller_support": "not_implemented",
+      "id": "normal-chat-final3-t06",
+      "generated_result": "generated/normal-chat-current-bundle-final3-t06-live-20260911/result.json",
+      "robin_path": "generated/normal-chat-current-bundle-final3-t06-live-20260911/robin.txt",
+      "generated_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "generated_from_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+      "execution_status": "pass",
+      "catalog_only": true,
+      "sha256": "753c40c04bea2850b632f719256539d6f9a4524f0d0e67eaa84d60954a2cdeaa",
+      "evidence": "evidence/t06-current-final3-live-acceptance-20260911.json",
+      "executed_twice": true
+    },
+    {
+      "action_count": 2,
+      "controller_support": "not_implemented",
+      "id": "normal-chat-final3-t07",
+      "generated_result": "generated/normal-chat-current-bundle-final3-t07-live-20260911/result.json",
+      "robin_path": "generated/normal-chat-current-bundle-final3-t07-live-20260911/robin.txt",
+      "generated_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "generated_from_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+      "execution_status": "pass",
+      "catalog_only": true,
+      "sha256": "47a33ef2067bd37009187758e16fc36daa0f5447093b51e83e984e1d8fd484c9",
+      "evidence": "evidence/t07-current-final3-live-acceptance-20260911.json",
+      "executed_twice": true
+    },
+    {
+      "action_count": 4,
+      "controller_support": "not_implemented",
+      "id": "normal-chat-final3-t08",
+      "generated_result": "generated/normal-chat-current-bundle-final3-t08-live-20260911/result.json",
+      "robin_path": "generated/normal-chat-current-bundle-final3-t08-live-20260911/robin.txt",
+      "generated_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "generated_from_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+      "execution_status": "expected_error",
+      "catalog_only": true,
+      "sha256": "a23719ac4f41fb8126cd02631b2111596d2682245e0d6e799d0063aa8c857c1b",
+      "evidence": "evidence/t08-current-final3-live-acceptance-20260911.json",
+      "executed_twice": true
+    },
+    {
+      "action_count": 6,
+      "controller_support": "not_implemented",
+      "id": "normal-chat-final3-t09",
+      "generated_result": "generated/normal-chat-current-bundle-final3-t09-live-20260911/result.json",
+      "robin_path": "generated/normal-chat-current-bundle-final3-t09-live-20260911/robin.txt",
+      "generated_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "generated_from_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+      "execution_status": "blocked_before_execution",
+      "catalog_only": true,
+      "sha256": "7d391e821a5f13302b46b6bc47f30303a2ad3a59c62b7b191cef15888a27b6d9",
+      "evidence": "evidence/t09-current-final3-live-acceptance-20260911.json",
+      "executed_twice": false
+    },
+    {
+      "action_count": 16,
+      "controller_support": "not_implemented",
+      "id": "normal-chat-final3-t10",
+      "generated_result": "generated/normal-chat-current-bundle-final3-t10-live-20260911/result.json",
+      "robin_path": "generated/normal-chat-current-bundle-final3-t10-live-20260911/robin.txt",
+      "generated_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "generated_from_bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+      "execution_status": "pass",
+      "catalog_only": true,
+      "sha256": "3285b362d5537d9beb1ee0ba317a67709e6374f6dffacad074b499f150f69eba",
+      "evidence": "evidence/t10-current-final3-live-acceptance-20260911.json",
+      "executed_twice": true
     }
   ],
   "capture_sessions": [
@@ -4554,7 +4724,11 @@
       "model": "GPT 5.6 Think Deeper (selection observed; no current-package message sent)",
       "bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-      "cases": ["T04", "T09", "T10"],
+      "cases": [
+        "T04",
+        "T09",
+        "T10"
+      ],
       "scope": "Raw provenance diagnosis and minimal instruction/knowledge revision. Fresh current-package upload did not reach a file chooser, so no generation or PAD acceptance is claimed.",
       "evidence": "evidence/normal-chat-raw-provenance-20260910.json; evidence/m365-current-package-upload-block-20260910b.json; evidence/t09-current-environment-20260910b.json; evidence/current-package-status-20260910b.json; evidence/current-package-static-check-20260910b.json; evidence/normal-chat-final-acceptance-summary-20260910b.json; evidence/issue5-completion-audit-20260910.json"
     },
@@ -4565,7 +4739,10 @@
       "model": "GPT 5.6 Think Deeper",
       "bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-      "cases": ["knowledge-precheck", "T04"],
+      "cases": [
+        "knowledge-precheck",
+        "T04"
+      ],
       "scope": "Current revised package: separate knowledge reference precheck plus T04 normal-chat generation, unmodified PAD paste/save, two runs, logical output comparison, and input invariance.",
       "evidence": "evidence/normal-chat-current-revision-knowledge-precheck-20260910.json; evidence/t04-current-revision-acceptance-20260910.json; evidence/t04-current-revision-pad-paste-20260910.json"
     },
@@ -4576,7 +4753,9 @@
       "model": "GPT 5.6 Think Deeper",
       "bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-      "cases": ["T10"],
+      "cases": [
+        "T10"
+      ],
       "scope": "Current revised package T10 generation from a single mechanical knowledge/flow attachment, unchanged-line comparison, PAD paste/save/run, and Excel/Word/PowerPoint output comparison.",
       "evidence": "evidence/normal-chat-current-revision-t10-batch-attachment-failure-20260910.json; evidence/t10-current-revision-acceptance-20260910.json; evidence/t10-current-revision-pad-paste-20260910.json"
     },
@@ -4587,7 +4766,10 @@
       "model": "GPT 5.6 Think Deeper",
       "bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-      "cases": ["T04-independent", "T10-independent"],
+      "cases": [
+        "T04-independent",
+        "T10-independent"
+      ],
       "scope": "Separate current-package chats and fresh PAD flows for independent T04/T10 retests. T01 independent retest remains pending.",
       "evidence": "evidence/t04-current-revision-independent-acceptance-20260910.json; evidence/t10-current-revision-independent-acceptance-20260910.json; evidence/t10-current-revision-independent-generation-failure-20260910.json"
     },
@@ -4598,7 +4780,14 @@
       "model": "GPT 5.6 Think Deeper (observed GPT 5.6 Think)",
       "bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-      "cases": ["T01", "T02", "T03", "T05", "T06", "T07"],
+      "cases": [
+        "T01",
+        "T02",
+        "T03",
+        "T05",
+        "T06",
+        "T07"
+      ],
       "attachment_modes": "T01/T02/T05/T06/T07 direct fixture attachments; T03 single mechanical fixture context after batch attachment failure",
       "pad_execution": "Each case pasted without edits, saved, and run twice in a dedicated UIA-controlled flow",
       "scope": "Current revised package primary runtime acceptance; no historical result inheritance.",
@@ -4611,7 +4800,11 @@
       "model": "GPT 5.6 Think Deeper (observed GPT 5.6 Think)",
       "bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-      "cases": ["T01-independent", "T04-independent", "T10-independent"],
+      "cases": [
+        "T01-independent",
+        "T04-independent",
+        "T10-independent"
+      ],
       "attachment_modes": "T01/T04 direct fixture attachments; T10 single mechanical context attachment",
       "pad_execution": "Separate chat and fresh PAD flow for each case; each accepted output is run twice for T01/T04 and once for T10",
       "scope": "Independent current revised package runtime acceptance.",
@@ -4624,7 +4817,11 @@
       "model": "GPT 5.6 Think Deeper (observed GPT 5.6 Think)",
       "bundle_sha256": "4282e4ece4f2d79ce26e85143fcab201091b185d9ee5d9defe4d8f49a4a7b2cd",
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-      "cases": ["N1_else_loop_break", "N2_datatable_row_insert_cell_reference", "N3_unregistered_web_selector_driver"],
+      "cases": [
+        "N1_else_loop_break",
+        "N2_datatable_row_insert_cell_reference",
+        "N3_unregistered_web_selector_driver"
+      ],
       "attachment_mode": "preexisting_cdp_input",
       "scope": "Current revised package negative suite; no Robin code was accepted or executed.",
       "result": "PASS_NEGATIVE_FAIL_CLOSED",
@@ -4636,7 +4833,14 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeT09LocalUI_20260910",
-      "action_ids": ["web-launch-t09-local", "web-populate-t09-input", "web-click-t09-submit", "wait-t09-500ms", "web-get-t09-result", "web-close-t09"],
+      "action_ids": [
+        "web-launch-t09-local",
+        "web-populate-t09-input",
+        "web-click-t09-submit",
+        "wait-t09-500ms",
+        "web-get-t09-result",
+        "web-close-t09"
+      ],
       "scope": "Existing dedicated synthetic flow runtime probe with temporary WAIT=1 second; T09-clicked retrieved and original WAIT 500 restored byte-identically.",
       "capture_method": "strict UIA fallback; no Trusted RPC",
       "current_package_acceptance": false,
@@ -4648,7 +4852,14 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeT09FilterPaste_20260910",
-      "action_ids": ["web-launch-t09-local", "web-populate-t09-input", "web-click-t09-submit", "wait-t09-500ms", "web-get-t09-result", "web-close-t09"],
+      "action_ids": [
+        "web-launch-t09-local",
+        "web-populate-t09-input",
+        "web-click-t09-submit",
+        "wait-t09-500ms",
+        "web-get-t09-result",
+        "web-close-t09"
+      ],
       "scope": "Current six-action synthetic T09 runtime reprobe; execution remained active beyond 90 seconds with WebAutomation errors and was stopped once at an enabled stop control.",
       "capture_method": "strict UIA fallback; no Trusted RPC",
       "current_package_acceptance": false,
@@ -4661,7 +4872,10 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "power_fx": false,
-      "native_flow_names": ["RobinKnowledgeP3Boolean_20260910", "RobinKnowledgeP3Subtract_20260910"],
+      "native_flow_names": [
+        "RobinKnowledgeP3Boolean_20260910",
+        "RobinKnowledgeP3Subtract_20260910"
+      ],
       "scope": "Two separate synthetic PAD probes for P3 Boolean and numeric decrement. Raw Robin and run outputs are preserved, but the current seven-file bundle was not changed.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-boolean-probe-20260910.json; evidence/p3-subtract-probe-20260910.json"
@@ -4673,7 +4887,11 @@
       "language": "ja-JP",
       "power_fx": false,
       "native_flow_name": "RobinKnowledgeP3ListGet_20260910",
-      "ui_automation_ids": ["Variables.CreateNewList", "Variables.AddItemToList", "Variables.RemoveItemFromList"],
+      "ui_automation_ids": [
+        "Variables.CreateNewList",
+        "Variables.AddItemToList",
+        "Variables.RemoveItemFromList"
+      ],
       "scope": "Synthetic create/add/remove probe. Removal succeeded, but no removed-item output was exposed; it is not list-item retrieval evidence.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-list-remove-probe-20260910.json"
@@ -4696,7 +4914,10 @@
       "language": "ja-JP",
       "power_fx": false,
       "native_flow_name": "RobinKnowledgeP3ListGet_20260910",
-      "ui_automation_ids": ["SearchActionsSearchBox", "ActionsTreeView"],
+      "ui_automation_ids": [
+        "SearchActionsSearchBox",
+        "ActionsTreeView"
+      ],
       "scope": "Read-only search for 項目 in the current synthetic PAD action panel; list add/remove-related actions were visible but no dedicated list-item retrieval action was observed.",
       "current_package_acceptance": false,
       "execution_status": "search_boundary_no_action_executed",
@@ -4709,7 +4930,10 @@
       "language": "ja-JP",
       "power_fx": false,
       "native_flow_name": "RobinKnowledgeP3ListGet_20260910",
-      "ui_automation_ids": ["SearchActionsSearchBox", "ActionsTreeView"],
+      "ui_automation_ids": [
+        "SearchActionsSearchBox",
+        "ActionsTreeView"
+      ],
       "scope": "Read-only bounded searches for リスト and 取得 in the current synthetic PAD action panel; list mutation/comparison, DataTable-column extraction, and UI/browser retrieval actions were visible, but no dedicated arbitrary list-item retrieval action was observed.",
       "current_package_acceptance": false,
       "execution_status": "search_boundary_no_action_executed",
@@ -4722,7 +4946,9 @@
       "language": "ja-JP",
       "power_fx": false,
       "native_flow_name": "RobinKnowledgeP3FolderCreate_20260910",
-      "action_ids": ["Folder.Create"],
+      "action_ids": [
+        "Folder.Create"
+      ],
       "scope": "Synthetic parent catalog/fixtures and folder p3-created-20260910; copied, saved, and run twice. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-folder-create-probe-20260910.json"
@@ -4734,7 +4960,9 @@
       "language": "ja-JP",
       "power_fx": false,
       "native_flow_name": "RobinKnowledgeP3DateSubtract_20260910",
-      "ui_automation_ids": ["DateTime.Subtract"],
+      "ui_automation_ids": [
+        "DateTime.Subtract"
+      ],
       "scope": "Synthetic two-date subtraction probe; copied, saved, and run twice with 1-day output. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-date-subtract-probe-20260910.json"
@@ -4746,7 +4974,9 @@
       "language": "ja-JP",
       "power_fx": false,
       "native_flow_name": "RobinKnowledgeP3DateFormat_20260910",
-      "ui_automation_ids": ["DateTime.GetCurrentDateTime"],
+      "ui_automation_ids": [
+        "DateTime.GetCurrentDateTime"
+      ],
       "scope": "Synthetic current date/time with system timezone and DateAndTime format; copied, saved, and run twice. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-date-format-probe-20260910.json"
@@ -4757,7 +4987,9 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3DateCustom_20260910",
-      "ui_automation_ids": ["DateTime.Add"],
+      "ui_automation_ids": [
+        "DateTime.Add"
+      ],
       "scope": "Synthetic 2026-09-10 plus 1 day using DateTime.TimeUnit.Days; copied, saved, and run twice with 2026/09/11 0:00:00 preview. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-date-add-probe-20260910.json"
@@ -4768,7 +5000,9 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3ElseIf_20260910",
-      "ui_automation_ids": ["Text.ConvertDateTimeToText"],
+      "ui_automation_ids": [
+        "Text.ConvertDateTimeToText"
+      ],
       "scope": "Synthetic custom DateTime-to-text attempt; variable binding did not persist and PAD reported an empty datetime parameter. Current bundle unchanged.",
       "current_package_acceptance": false,
       "execution_status": "failed_probe_unconfigured_input",
@@ -4780,7 +5014,10 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3DateFormatCustom2_20260910",
-      "ui_automation_ids": ["DateTime.GetCurrentDateTime", "DialogWindow"],
+      "ui_automation_ids": [
+        "DateTime.GetCurrentDateTime",
+        "DialogWindow"
+      ],
       "scope": "Synthetic DateTime probe dialog selections reached; PAD raised an internal program-item lookup exception during update and no custom-format action execution was claimed.",
       "current_package_acceptance": false,
       "execution_status": "blocked_pad_dialog_update_exception",
@@ -4793,7 +5030,10 @@
       "language": "ja-JP",
       "power_fx": false,
       "native_flow_name": "RobinKnowledgeP3ExcelSheetProbe2_20260910",
-      "ui_automation_ids": ["Excel.LaunchExcel", "Excel.SetActiveWorksheet"],
+      "ui_automation_ids": [
+        "Excel.LaunchExcel",
+        "Excel.SetActiveWorksheet"
+      ],
       "scope": "Synthetic excel-catalog.xlsx Sheet1 selection by name; copied, saved, and run twice. Probe-created Excel windows were closed afterward; current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-excel-sheet-probe-20260910.json"
@@ -4805,7 +5045,11 @@
       "language": "ja-JP",
       "power_fx": false,
       "native_flow_name": "RobinKnowledgeP3ExcelSheetProbe2_20260910",
-      "ui_automation_ids": ["Excel.LaunchExcel", "Excel.ReadFromExcel", "Excel.SetActiveWorksheet"],
+      "ui_automation_ids": [
+        "Excel.LaunchExcel",
+        "Excel.ReadFromExcel",
+        "Excel.SetActiveWorksheet"
+      ],
       "scope": "Synthetic excel-catalog.xlsx Sheet1 and A1:C6 TypedValues read; UI preview showed 6 rows and 3 columns, while the bounded run-helper completion acknowledgement was not observed.",
       "current_package_acceptance": false,
       "execution_status": "pass_probe_preview_completion_ack_unconfirmed",
@@ -4816,7 +5060,10 @@
       "date": "2026-09-11",
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
-      "native_flow_names": ["RobinKnowledgeP3ExcelSheet_20260910", "RobinKnowledgeP3ExcelSheetProbe2_20260910"],
+      "native_flow_names": [
+        "RobinKnowledgeP3ExcelSheet_20260910",
+        "RobinKnowledgeP3ExcelSheetProbe2_20260910"
+      ],
       "scope": "Dedicated synthetic For each configuration attempts; persistence and ordering failures preserved, with no iteration success claim.",
       "current_package_acceptance": false,
       "execution_status": "blocked_foreach_configuration_persistence",
@@ -4829,7 +5076,9 @@
       "language": "ja-JP",
       "power_fx": false,
       "native_flow_name": "RobinKnowledgeP3FileExists_20260910",
-      "ui_automation_ids": ["If.File.IfFile"],
+      "ui_automation_ids": [
+        "If.File.IfFile"
+      ],
       "scope": "Synthetic existing-file condition with native END terminator; copied, saved, and run twice. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-file-exists-probe-20260910.json"
@@ -4840,7 +5089,9 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3FileExistsFalse_20260910",
-      "ui_automation_ids": ["If.File.IfFile"],
+      "ui_automation_ids": [
+        "If.File.IfFile"
+      ],
       "scope": "Synthetic missing-path File.Exists condition; exact raw Robin captured after the flow completed without error with no branch-body actions. Current bundle unchanged.",
       "current_package_acceptance": false,
       "execution_status": "pass_false_branch_raw_not_bundled",
@@ -4852,7 +5103,9 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3FileMove_20260910",
-      "ui_automation_ids": ["File.Move"],
+      "ui_automation_ids": [
+        "File.Move"
+      ],
       "scope": "Synthetic source moved to dedicated .work destination with DoNothing collision behavior; one successful run plus one collision rerun. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-file-move-probe-20260910.json"
@@ -4863,7 +5116,9 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3FileRename_20260910",
-      "ui_automation_ids": ["File.RenameFiles"],
+      "ui_automation_ids": [
+        "File.RenameFiles"
+      ],
       "scope": "Synthetic file rename with extension kept; one successful run and one DoNothing collision no-op. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-file-rename-probe-20260910.json"
@@ -4874,7 +5129,10 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3DataTable_20260910",
-      "ui_automation_ids": ["Variables.CreateNewDatatable", "Variables.AddRowToDataTable"],
+      "ui_automation_ids": [
+        "Variables.CreateNewDatatable",
+        "Variables.AddRowToDataTable"
+      ],
       "scope": "Synthetic five-column table plus one-value RowToAdd probe; native runtime value-count error preserved. Current bundle unchanged.",
       "current_package_acceptance": false,
       "execution_status": "failed_probe_row_value_count_mismatch",
@@ -4886,7 +5144,9 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3DataTableSuccess_20260911",
-      "ui_automation_ids": ["Variables.CreateNewDatatable"],
+      "ui_automation_ids": [
+        "Variables.CreateNewDatatable"
+      ],
       "scope": "Synthetic 3-column, 1-row DataTable creation with A/10/対象; copied, saved, and run twice. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-datatable-create-success-20260911.json"
@@ -4897,7 +5157,10 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3DataTableRowValid_20260910",
-      "ui_automation_ids": ["Variables.CreateNewDatatable", "Variables.AddRowToDataTable"],
+      "ui_automation_ids": [
+        "Variables.CreateNewDatatable",
+        "Variables.AddRowToDataTable"
+      ],
       "scope": "Synthetic visualizer/list RowToAdd attempt; visualizer configuration did not persist to runtime and no raw copy was accepted.",
       "current_package_acceptance": false,
       "execution_status": "failed_probe_visualizer_persistence_and_value_count",
@@ -4909,11 +5172,79 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3DataTableRowValid_20260910",
-      "ui_automation_ids": ["ProgramItemsListBoxActions", "ErrorPinButton", "VariablePreviewTextBlock"],
+      "ui_automation_ids": [
+        "ProgramItemsListBoxActions",
+        "ErrorPinButton",
+        "VariablePreviewTextBlock"
+      ],
       "scope": "Read-only inspection after the synthetic RowToAdd failure; DataTable preview was 0 rows/0 columns and RowValues preview was [A, B]. The failed action was then copied without editing or execution.",
       "current_package_acceptance": false,
       "execution_status": "confirmed_runtime_error_state",
       "evidence": "evidence/p3-datatable-row-error-state-20260911.json; evidence/p3-datatable-row-error-state-20260911.robin"
+    },
+    {
+      "id": "p3-datatable-row-success-2026-09-11",
+      "date": "2026-09-11",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeP3DataTableRow_20260911",
+      "ui_automation_ids": [
+        "Variables.CreateNewDatatable",
+        "Variables.CreateNewList",
+        "Variables.AddItemToList",
+        "Variables.AddRowToDataTable"
+      ],
+      "scope": "Synthetic three-column DataTable plus three-value RowValues list; AddRowToDataTable appended a matching row in two runs. Current bundle unchanged.",
+      "current_package_acceptance": false,
+      "execution_status": "pass_probe_row_insertion_not_bundled",
+      "evidence": "evidence/p3-datatable-row-success-20260911.json; evidence/p3-datatable-row-success-flow-20260911-fixed.robin; evidence/p3-datatable-row-success-run1-20260911.json; evidence/p3-datatable-row-success-run2-20260911.json"
+    },
+    {
+      "id": "p3-datatable-cell-success-2026-09-11",
+      "date": "2026-09-11",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeP3DataTableCell_20260911",
+      "ui_automation_ids": [
+        "Variables.CreateNewDatatable",
+        "Variables.ModifyDataTableItem",
+        "ViewVariableValue"
+      ],
+      "scope": "Synthetic three-column DataTable; ModifyDataTableItem updated row index 0, column index 2 to CellChanged and the value viewer exposed the changed cell in two runs. Current bundle unchanged.",
+      "current_package_acceptance": false,
+      "execution_status": "pass_probe_cell_update_not_bundled",
+      "evidence": "evidence/p3-datatable-cell-success-20260911.json; evidence/p3-datatable-cell-success-flow-20260911.robin; evidence/p3-datatable-cell-success-run1-20260911.json; evidence/p3-datatable-cell-success-run2-20260911.json"
+    },
+    {
+      "id": "p3-datatable-foreach-timeout-breakpoint-2026-09-11",
+      "date": "2026-09-11",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeP3DataTableForeach_20260911",
+      "ui_automation_ids": [
+        "LanguageConstructs.Foreach",
+        "Variables.Assign"
+      ],
+      "scope": "Two-row DataTable row-iteration retry initially paused at an accidentally retained breakpoint on the loop-body assignment; this was separated from the successful retry.",
+      "current_package_acceptance": false,
+      "execution_status": "timeout_paused_breakpoint_preserved_and_removed",
+      "evidence": "evidence/p3-datatable-foreach-timeout-breakpoint-20260911.json"
+    },
+    {
+      "id": "p3-datatable-foreach-success-2026-09-11",
+      "date": "2026-09-11",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeP3DataTableForeach_20260911",
+      "ui_automation_ids": [
+        "Variables.CreateNewDatatable",
+        "LanguageConstructs.Foreach",
+        "LanguageConstructs.Assign"
+      ],
+      "scope": "Two-row three-column DataTable iterated with For each; loop body assigned CurrentItem to ForeachValue. Raw flow was copied after breakpoint removal and both runs ended with ForeachValue=B/20/対象2, DataTable=2 rows/3 columns, and no runtime error. Current bundle unchanged.",
+      "current_package_acceptance": false,
+      "execution_status": "pass_probe_row_iteration_two_runs_not_bundled",
+      "evidence": "evidence/p3-datatable-foreach-success-20260911.json; evidence/p3-datatable-foreach-success-flow-20260911-final.robin; evidence/p3-datatable-foreach-success-2row-run1-20260911.json; evidence/p3-datatable-foreach-success-2row-run2b-20260911.json"
     },
     {
       "id": "p3-else-probe-2026-09-10",
@@ -4921,7 +5252,10 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3Else_20260910",
-      "ui_automation_ids": ["LanguageConstructs.If", "LanguageConstructs.Else"],
+      "ui_automation_ids": [
+        "LanguageConstructs.If",
+        "LanguageConstructs.Else"
+      ],
       "scope": "Synthetic If/Else/END block; both THEN and ELSE branches run once with no side effects. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-else-probe-20260910.json"
@@ -4932,7 +5266,10 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3ElseIf_20260910",
-      "ui_automation_ids": ["LanguageConstructs.If", "LanguageConstructs.ElseIf"],
+      "ui_automation_ids": [
+        "LanguageConstructs.If",
+        "LanguageConstructs.ElseIf"
+      ],
       "scope": "Synthetic If/Else if/END structure; copied, saved, and run twice with no branch side effects. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-else-if-probe-20260910.json"
@@ -4943,7 +5280,10 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3Break_20260910",
-      "ui_automation_ids": ["LanguageConstructs.Loop", "LanguageConstructs.Break"],
+      "ui_automation_ids": [
+        "LanguageConstructs.Loop",
+        "LanguageConstructs.Break"
+      ],
       "scope": "Synthetic finite Loop 1..3 with EXIT LOOP; copied, saved, and run successfully with LoopIndex=1. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-break-probe-20260910.json"
@@ -4954,7 +5294,10 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3Continue_20260910",
-      "ui_automation_ids": ["LanguageConstructs.Loop", "LanguageConstructs.Continue"],
+      "ui_automation_ids": [
+        "LanguageConstructs.Loop",
+        "LanguageConstructs.Continue"
+      ],
       "scope": "Synthetic finite Loop 1..3 with NEXT LOOP; copied, saved, and run twice with LoopIndex=4. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-continue-probe-20260910.json"
@@ -4965,7 +5308,9 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3ErrorBlock_20260910",
-      "ui_automation_ids": ["LanguageConstructs.Block"],
+      "ui_automation_ids": [
+        "LanguageConstructs.Block"
+      ],
       "scope": "Synthetic BLOCK/ON BLOCK ERROR/THROW ERROR/END skeleton; copied, saved, and run successfully without triggering an error. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-error-block-probe-20260910.json"
@@ -4976,7 +5321,10 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3ErrorBlock_20260910",
-      "ui_automation_ids": ["LanguageConstructs.Block", "File.ReadTextFromFile"],
+      "ui_automation_ids": [
+        "LanguageConstructs.Block",
+        "File.ReadTextFromFile"
+      ],
       "scope": "Synthetic missing-file child action inside BLOCK/ON BLOCK ERROR; one runtime error observed and no downstream action executed. Current bundle unchanged.",
       "current_package_acceptance": false,
       "execution_status": "runtime_error_expected_probe",
@@ -4988,7 +5336,11 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3ErrorBlock_20260910",
-      "ui_automation_ids": ["LanguageConstructs.Block", "ExceptionBlockNewCustomError", "RulesListBox"],
+      "ui_automation_ids": [
+        "LanguageConstructs.Block",
+        "ExceptionBlockNewCustomError",
+        "RulesListBox"
+      ],
       "scope": "Synthetic custom FileNotFound error rule setting ErrorHandled=true with continue ON/throw OFF; missing-file run still ended in runtime error.",
       "current_package_acceptance": false,
       "execution_status": "failed_custom_handler_runtime_still_error",
@@ -5000,7 +5352,12 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3ErrorBlock_20260910",
-      "ui_automation_ids": ["LanguageConstructs.Block", "RulesListBox", "ExceptionRulesContinueProcessExecutionToggleButton", "ExceptionRulesThrowErrorToggleButton"],
+      "ui_automation_ids": [
+        "LanguageConstructs.Block",
+        "RulesListBox",
+        "ExceptionRulesContinueProcessExecutionToggleButton",
+        "ExceptionRulesThrowErrorToggleButton"
+      ],
       "scope": "Synthetic missing-file child under BLOCK; default all-errors variable rule continued execution and returned a true preview in two runs.",
       "current_package_acceptance": false,
       "execution_status": "pass_default_error_handler_two_runs",
@@ -5013,7 +5370,9 @@
       "model": "GPT 5.6 Think Deeper",
       "bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-      "cases": ["T01"],
+      "cases": [
+        "T01"
+      ],
       "scope": "Local preparation only: prompt, synthetic fixture, fixed expected output, and acceptance steps recorded; no Copilot message sent and no PAD flow changed.",
       "current_package_acceptance": false,
       "execution_status": "ready_for_fresh_chat_send",
@@ -5026,7 +5385,9 @@
       "model": "GPT 5.6 Think Deeper",
       "bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-      "cases": ["T01"],
+      "cases": [
+        "T01"
+      ],
       "scope": "Fresh Edge inventory no longer contained the previously staged T01 tab; no old tab reuse, upload, prompt entry, or send was performed.",
       "current_package_acceptance": false,
       "execution_status": "staged_state_expired",
@@ -5039,7 +5400,9 @@
       "model": "GPT 5.6 Think Deeper",
       "bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-      "cases": ["T01"],
+      "cases": [
+        "T01"
+      ],
       "scope": "Fresh normal M365 Copilot chat with current bundle and synthetic T01 input attached; prompt and send are not yet executed.",
       "current_package_acceptance": false,
       "execution_status": "staged_not_sent",
@@ -5052,11 +5415,89 @@
       "model": "GPT 5.6 Think Deeper",
       "bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-      "cases": ["knowledge-precheck"],
+      "cases": [
+        "knowledge-precheck"
+      ],
       "scope": "Fresh normal M365 Copilot chat with the current bundle attached; knowledge-only UTF-8 file-read question, no Robin generation, and response text/hash saved.",
       "current_package_acceptance": false,
       "execution_status": "pass_reference_only",
       "evidence": "generated/normal-chat-current-bundle-knowledge-precheck-20260911/result.json; generated/normal-chat-current-bundle-knowledge-precheck-20260911/prompt.txt; generated/normal-chat-current-bundle-knowledge-precheck-20260911/response.txt"
+    },
+    {
+      "id": "normal-chat-current-revision-t08-2026-09-11",
+      "date": "2026-09-11",
+      "browser": "Chrome Microsoft Copilot normal chat",
+      "model": "GPT 5.6 Think Deeper",
+      "bundle_sha256": "e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": [
+        "T08"
+      ],
+      "scope": "Current bundle sent in a fresh normal M365 Copilot conversation with the bundle attached. Copilot refused a Robin code block because the measured error-handler block and recording action were not present in the bundle.",
+      "current_package_acceptance": false,
+      "execution_status": "live_sent_generation_format_failure_no_robin_block",
+      "response_path": "generated/normal-chat-current-revision-t08-20260911/response.txt",
+      "evidence": "evidence/t08-current-bundle-live-format-20260911.json; generated/normal-chat-current-revision-t08-20260911/result.json"
+    },
+    {
+      "id": "p3-excel-foreach-runtime-success-2026-09-11",
+      "date": "2026-09-11",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeP3ExcelForeachRuntime_20260911",
+      "ui_automation_ids": [
+        "Excel.ReadFromExcel",
+        "LanguageConstructs.Foreach",
+        "LanguageConstructs.Assign",
+        "Excel.CloseExcel"
+      ],
+      "scope": "Synthetic t04-filter-input.xlsx was read as ExcelData A1:C6 and iterated; the loop body assigned CurrentItem to ExcelRowSeen. The raw contains five executable action lines plus the For each end item in the Designer; both runs ended with the E/40 row, six rows/three columns, Excel closed, and no runtime error. Current bundle unchanged.",
+      "current_package_acceptance": false,
+      "execution_status": "pass_probe_excel_row_iteration_two_runs_not_bundled",
+      "evidence": "evidence/p3-excel-foreach-runtime-success-flow-20260911.robin; evidence/p3-excel-foreach-runtime-success-run1-20260911.json; evidence/p3-excel-foreach-runtime-success-run2-20260911.json"
+    },
+    {
+      "id": "p3-get-last-error-standalone-2026-09-11",
+      "date": "2026-09-11",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeP3GetLastErrorStandalone_20260911",
+      "ui_automation_ids": [
+        "LanguageConstructs.GetLastError",
+        "ResetToggleButton",
+        "EditableText"
+      ],
+      "scope": "Standalone PAD action capture for Get last error; LastError output variable and Clear error/Reset=True were saved and copied without editing.",
+      "current_package_acceptance": false,
+      "execution_status": "syntax_capture_only",
+      "evidence": "evidence/p3-get-last-error-standalone-20260911-v2.robin; evidence/p3-get-last-error-standalone-20260911-reset.robin"
+    },
+    {
+      "id": "p3-error-handler-measured-2026-09-11",
+      "date": "2026-09-11",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeP3LastError_20260911",
+      "ui_automation_ids": [
+        "LanguageConstructs.Block",
+        "File.ReadTextFromFile",
+        "LanguageConstructs.GetLastError"
+      ],
+      "scope": "Dedicated missing-file error-handler probe. PAD-captured block and Get last error components were recorded separately; two clean runs showed the missing-file message and no unhandled-error dialog. The composed reference is not one raw clipboard export and the current bundle is unchanged.",
+      "current_package_acceptance": false,
+      "execution_status": "pass_error_recording_two_runs_not_bundled",
+      "evidence": "evidence/p3-error-handler-measured-20260911.json; evidence/p3-error-handler-measured-composed-20260911.robin; evidence/p3-last-error-handler-run2-20260911.json; evidence/p3-last-error-handler-run3-20260911.json"
+    },
+    {
+      "id": "p3-error-handler-run1-designer-exception-2026-09-11",
+      "date": "2026-09-11",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "native_flow_name": "RobinKnowledgeP3LastError_20260911",
+      "scope": "First helper retry was separated as a PAD Designer MoveProgramItemsCommandHandler exception; its misleading ready/success helper result is preserved and excluded from runtime acceptance.",
+      "current_package_acceptance": false,
+      "execution_status": "designer_internal_exception_excluded",
+      "evidence": "evidence/p3-last-error-handler-run1-20260911.json; evidence/p3-last-error-handler-run1-designer-exception-20260911.json"
     },
     {
       "id": "p3-subflow-probe-2026-09-10",
@@ -5064,10 +5505,221 @@
       "pad_file_version": "2.71.115.26224",
       "language": "ja-JP",
       "native_flow_name": "RobinKnowledgeP3Subflow_20260910",
-      "ui_automation_ids": ["LanguageConstructs.CallFunction", "Display.ShowMessageDialog"],
+      "ui_automation_ids": [
+        "LanguageConstructs.CallFunction",
+        "Display.ShowMessageDialog"
+      ],
       "scope": "Synthetic P3Worker creation and Main CALL P3Worker; timed message returned ButtonPressed=OK in two runs. Current bundle unchanged.",
       "current_package_acceptance": false,
       "evidence": "evidence/p3-subflow-probe-20260910.json"
+    },
+    {
+      "id": "normal-chat-current-bundle-t08-error-handler-2026-09-11",
+      "date": "2026-09-11",
+      "browser": "Microsoft Edge (live reacceptance pending)",
+      "model": "GPT 5.6 Think Deeper",
+      "bundle_sha256": "38640a472186cb4d2e1f79443620112f6da7be0b4fc5834940dbdccc92da6358",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": [
+        "T08"
+      ],
+      "scope": "New bundle after PAD-captured Get last error syntax was added to Control knowledge; no live Copilot send or PAD acceptance has been performed yet.",
+      "current_package_acceptance": false,
+      "execution_status": "ready_for_new_bundle_t08_live_send",
+      "manifest": "../copilot/knowledge-bundle-manifest-20260911d.json",
+      "evidence": "evidence/current-package-status-20260911-t08-error-handler.json; evidence/issue5-completion-audit-20260911-t08.json"
+    },
+    {
+      "id": "normal-chat-current-bundle-t08-error-handler-composed-2026-09-11",
+      "date": "2026-09-11",
+      "browser": "Microsoft Edge (live reacceptance pending)",
+      "model": "GPT 5.6 Think Deeper",
+      "bundle_sha256": "d7a0a7d6d9876aa1169aa96f377032f8e30ea37b8ea5ce753d3b6fb550b42835",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": [
+        "T08"
+      ],
+      "scope": "New bundle after the full measured-composed T08 error-handler reference was added; no live Copilot send or PAD acceptance has been performed yet.",
+      "current_package_acceptance": false,
+      "execution_status": "ready_for_new_bundle_t08_composed_live_send",
+      "manifest": "../copilot/knowledge-bundle-manifest-20260911e.json",
+      "evidence": "evidence/current-package-status-20260911-t08-error-handler-composed.json; evidence/issue5-completion-audit-20260911-t08-composed.json"
+    },
+    {
+      "id": "normal-chat-current-bundle-t08-error-handler-composed-live-2026-09-11",
+      "date": "2026-09-11",
+      "browser": "Microsoft Edge CDP",
+      "model": "GPT 5.6 Think Deeper",
+      "bundle_sha256": "d7a0a7d6d9876aa1169aa96f377032f8e30ea37b8ea5ce753d3b6fb550b42835",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": [
+        "T08"
+      ],
+      "scope": "Fresh normal M365 Copilot chat with the d7a0a7 bundle attached; valid Robin generated, pasted unmodified into a dedicated PAD flow, saved, and run twice for the expected missing-file error.",
+      "current_package_acceptance": true,
+      "execution_status": "pass_current_bundle_t08_expected_error_two_runs",
+      "generated_result": "generated/normal-chat-current-bundle-t08-error-handler-composed-live-20260911/result.json",
+      "evidence": "evidence/t08-current-bundle-composed-live-acceptance-20260911.json; evidence/t08-current-bundle-composed-pad-paste-save-20260911.json; evidence/t08-current-bundle-composed-pad-run1-20260911.json; evidence/t08-current-bundle-composed-pad-run2-20260911.json"
+    },
+    {
+      "id": "normal-chat-current-bundle-t08-final-reacceptance-pending-2026-09-11",
+      "date": "2026-09-11",
+      "browser": "Microsoft Edge (live reacceptance pending)",
+      "model": "GPT 5.6 Think Deeper",
+      "bundle_sha256": "c78fd388f6a3247772653d0c48b16444b095dd28821bf141f66946a36dcb3faf",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": [
+        "T08",
+        "T01"
+      ],
+      "scope": "Final c78fd3 bundle after removing a knowledge-copy trailing-space warning; d7a0a7 T08 acceptance is historical and requires fresh precheck and reacceptance.",
+      "current_package_acceptance": false,
+      "execution_status": "pending_final_bundle_precheck_and_t08_reacceptance",
+      "manifest": "../copilot/knowledge-bundle-manifest-20260911f.json",
+      "evidence": "evidence/current-package-status-20260911-t08-final.json; evidence/issue5-completion-audit-20260911-final.json"
+    },
+    {
+      "id": "normal-chat-current-bundle-t08-final-live-2026-09-11",
+      "date": "2026-09-11",
+      "browser": "Microsoft Edge CDP",
+      "model": "GPT 5.6 Think Deeper",
+      "bundle_sha256": "c78fd388f6a3247772653d0c48b16444b095dd28821bf141f66946a36dcb3faf",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": [
+        "T08"
+      ],
+      "scope": "Fresh normal M365 Copilot chat with final c78fd3 bundle; valid Robin generated, pasted unmodified into a new dedicated PAD flow, saved, and run twice for expected missing-file error.",
+      "current_package_acceptance": true,
+      "execution_status": "pass_current_final_bundle_t08_expected_error_two_runs",
+      "generated_result": "generated/normal-chat-current-bundle-t08-final-live-20260911/result.json",
+      "evidence": "evidence/t08-current-bundle-final-live-acceptance-20260911.json; evidence/t08-current-bundle-final-pad-paste-save-20260911.json; evidence/t08-current-bundle-final-pad-run1-20260911.json; evidence/t08-current-bundle-final-pad-run2-20260911.json"
+    },
+    {
+      "id": "normal-chat-current-bundle-t08-final-live-2026-09-11",
+      "date": "2026-09-11",
+      "browser": "Microsoft Edge CDP",
+      "model": "GPT 5.6 Think Deeper",
+      "bundle_sha256": "c78fd388f6a3247772653d0c48b16444b095dd28821bf141f66946a36dcb3faf",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": [
+        "T08"
+      ],
+      "scope": "Final c78fd3 bundle after whitespace-warning cleanup; fresh normal M365 Copilot generation, new dedicated PAD flow, unmodified paste/save, and two expected-error runs.",
+      "current_package_acceptance": true,
+      "execution_status": "pass_current_final_bundle_t08_expected_error_two_runs",
+      "generated_result": "generated/normal-chat-current-bundle-t08-final-live-20260911/result.json",
+      "evidence": "evidence/t08-current-bundle-final-live-acceptance-20260911.json; evidence/t08-current-bundle-final-pad-paste-save-20260911.json; evidence/t08-current-bundle-final-pad-recopy-20260911.robin; evidence/t08-current-bundle-final-pad-run1-20260911.json; evidence/t08-current-bundle-final-pad-run2-20260911.json"
+    },
+    {
+      "id": "normal-chat-current-bundle-final2-t08-t01-pending-2026-09-11",
+      "date": "2026-09-11",
+      "browser": "Microsoft Edge (live reacceptance pending)",
+      "model": "GPT 5.6 Think Deeper",
+      "bundle_sha256": "61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": [
+        "T08",
+        "T01"
+      ],
+      "scope": "Final2 bundle after adding the measured historical T01 three-action combination; c78fd3 T08 acceptance is historical and requires fresh precheck/reacceptance.",
+      "current_package_acceptance": false,
+      "execution_status": "pending_final2_precheck_and_t08_t01_acceptance",
+      "manifest": "../copilot/knowledge-bundle-manifest-20260911g.json",
+      "evidence": "evidence/current-package-status-20260911-final2.json; evidence/issue5-completion-audit-20260911-final2.json"
+    },
+    {
+      "id": "normal-chat-current-bundle-final2-t01-live-2026-09-11",
+      "date": "2026-09-11",
+      "browser": "Microsoft Edge CDP",
+      "model": "GPT 5.6 Think Deeper",
+      "bundle_sha256": "61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": [
+        "T01"
+      ],
+      "scope": "Final2 61f040 bundle; fresh normal M365 Copilot response, one DOM pre>code Robin block, new dedicated PAD flow, unmodified paste/save, and two output-invariant runs.",
+      "current_package_acceptance": true,
+      "execution_status": "pass_current_final2_bundle_t01_two_runs",
+      "generated_result": "generated/normal-chat-current-bundle-final2-t01-domfallback-v2-20260911/result.json",
+      "evidence": "evidence/t01-current-final2-live-acceptance-20260911.json; evidence/t01-current-bundle-final2-pad-paste-save-20260911.json; evidence/t01-current-bundle-final2-pad-recopy-20260911.robin; evidence/t01-current-bundle-final2-pad-run1-20260911.json; evidence/t01-current-bundle-final2-pad-run2-20260911.json"
+    },
+    {
+      "id": "normal-chat-current-bundle-final2-t08-live-2026-09-11",
+      "date": "2026-09-11",
+      "browser": "Microsoft Edge CDP",
+      "model": "GPT 5.6 Think Deeper",
+      "bundle_sha256": "61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": [
+        "T08"
+      ],
+      "scope": "Final2 61f040 bundle; fresh normal M365 Copilot response, valid Robin, new dedicated PAD flow, unmodified paste/save, and two expected-error runs.",
+      "current_package_acceptance": true,
+      "execution_status": "pass_current_final2_bundle_t08_expected_error_two_runs",
+      "generated_result": "generated/normal-chat-current-bundle-final2-t08-live-20260911/result.json",
+      "evidence": "evidence/t08-current-final2-live-acceptance-20260911.json; evidence/t08-current-bundle-final2-pad-paste-save-20260911.json; evidence/t08-current-bundle-final2-pad-recopy-20260911.robin; evidence/t08-current-bundle-final2-pad-run1-20260911.json; evidence/t08-current-bundle-final2-pad-run2-20260911.json"
+    },
+    {
+      "id": "normal-chat-current-bundle-final3-pending-2026-09-11",
+      "date": "2026-09-11",
+      "browser": "Microsoft Edge (live reacceptance pending)",
+      "model": "GPT 5.6 Think Deeper",
+      "bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10"
+      ],
+      "scope": "Final3 bundle after T09 action-line knowledge integration; all earlier final2 results are historical and require regeneration/reacceptance.",
+      "current_package_acceptance": false,
+      "execution_status": "pending_final3_precheck_and_t01_t10_acceptance",
+      "manifest": "../copilot/knowledge-bundle-manifest-20260911-final.json",
+      "evidence": "evidence/current-package-status-20260911-final3.json; evidence/issue5-completion-audit-20260911-final3.json"
+    },
+    {
+      "id": "normal-chat-current-bundle-final3-2026-09-11",
+      "date": "2026-09-11",
+      "browser": "Microsoft Edge CDP",
+      "model": "GPT 5.6 Think Deeper",
+      "bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10"
+      ],
+      "scope": "Final3 fixed bundle: fresh normal M365 Copilot chats with real attachments and dedicated PAD flows. T01-T08/T10 accepted; T09 blocked before Run due captured UI element lookup.",
+      "evidence": "evidence/current-package-status-20260911-final4.json; evidence/issue5-completion-audit-20260911-final4.json"
+    },
+    {
+      "id": "normal-chat-current-bundle-final3-independent-2026-09-11",
+      "date": "2026-09-11",
+      "browser": "Microsoft Edge CDP",
+      "model": "GPT 5.6 Think Deeper",
+      "bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": [
+        "T01",
+        "T04",
+        "T10"
+      ],
+      "scope": "Final3 fixed bundle independent retests with separate chats and PAD flows. T10 first raw-generation syntax failure was preserved before a successful retry.",
+      "evidence": "evidence/t01-current-final3-independent-acceptance-20260911.json; evidence/t04-current-final3-independent-acceptance-20260911.json; evidence/t10-current-final3-independent-acceptance-20260911.json; evidence/t10-current-final3-independent-paste-failure-20260911.json"
     }
   ],
   "application_integration": {

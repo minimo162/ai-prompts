@@ -1,0 +1,63 @@
+1. 前提・対象範囲・未確認点
+
+対象は word-catalog の本文中の OfficeCatalog を T06Replaced へ置換し、別名保存するフローです。文書内容として OfficeCatalog 日本語 100% が確認できます。
+
+確認済み根拠は、PADナレッジの Word アクション群です。
+
+編集可能で既存 Word 文書を開く: Word.LaunchWord.LaunchAndOpen ... ReadOnly: False
+Word 文書内の全件リテラル置換: Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards
+docx 形式で別名保存: Word.SaveWord.SaveAs
+Word を閉じる: Word.CloseWord.Close
+
+未確認事項:
+
+Word 保存時の追加オプション（別形式保存、PDF化、テンプレート保存等）はナレッジ範囲外です。
+2. PADで先に確認する設定・依存
+入力ファイル
+C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+出力ファイル
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx
+Word インスタンス名
+WordInstance
+起動設定
+ReadOnly: False（編集可能で開く）
+保存形式
+Word.WordFormat.FromExtension
+元ファイルは SaveAs のみを実行し、入力ファイルへ上書き保存しない
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+
+Plain Text
+1
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+2
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+3
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t06-final.docx'''
+4
+Word.CloseWord.Close Instance: WordInstance
+
+根拠:
+
+word-launch/open-editable.robin（編集可能起動）
+word-replace/all-literal.robin（全文リテラル置換）
+word-save/as-docx-extension.robin（SaveAs）
+word-close/no-save.robin（終了）
+4. デザイナー上の確認方法
+アクション数が 4 個であること。
+順序が
+Wordを開く
+検索と置換
+SaveAs
+Close の順であること。
+WordInstance が起動アクションで生成され、後続 3 アクションで同じインスタンスを参照していること。
+SaveAs の出力先が normal-chat-t06-final.docx になっていること。
+入力パスと出力パスが異なり、元ファイルへの上書きになっていないこと。
+5. 保存・実行・照合手順
+フローを保存。
+実行。
+C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx が作成されたことを確認。
+出力文書を開き、OfficeCatalog が T06Replaced に置換されていることを確認。
+それ以外の本文（日本語 100% など）が保持されていることを確認。入力文書の確認済み本文は OfficeCatalog 日本語 100% です。
+元ファイル word-catalog.docx を開き、OfficeCatalog のままで変更されていないことを確認。

@@ -1,0 +1,60 @@
+前提・対象範囲・未確認点
+依頼対象: C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\t04-filter-input.xlsx
+読み取り範囲: Data シートの A1:C6（実測済み範囲のみ）
+抽出条件: Status 列 = 対象
+期待行: A、C、D
+出力先: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t04-output-copilot-20260910.xlsx
+元ブックは変更しない（ReadOnly=True）
+根拠: catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin の実測済み9アクション系列
+未確認点: 実測ナレッジにはシート名指定アクションの採取がありません。T04正例は「Dataシートがアクティブな入力」で取得された実測のみです。そのため、下記は実測済みT04系列の範囲内で、出力パスのみ依頼内容へ変更しています。
+検証状態: 実測原文ベース。出力パス変更後の貼付け・実行は未確認。
+PADで先に作る設定
+入力ブック C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\t04-filter-input.xlsx
+Data シートをアクティブ状態で保存しておく
+出力先フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence
+中間CSV: C:\Users\yuuki\ai-prompts\catalog\evidence\t04-filtered.csv
+新規変数作成は不要（実測原文の出力変数をそのまま使用）
+貼り付け用Robin（根拠: catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin、T04実測正例）
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\t04-filter-input.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelInstance
+Excel.ReadFromExcel.ReadCells Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 EndColumn: $'''C''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ExcelData
+Variables.FilterDataTable DataTable: ExcelData FilterParameters: { ^['RULE', 'COLUMN', 'OPERATOR', 'VALUE'], [$'''''', 0, $'''Equal''', $'''対象'''] } MatchCase: True FilteredDataTable=> FilteredDataTable
+Variables.ConvertDataTableToCSV.DataTableToCSVCommonSeparator DataTable: FilteredDataTable IncludeColumnNames: False ColumnsSeparator: Variables.CSVColumnsSeparator.SystemDefault CSVText=> CSVText
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\t04-filtered.csv''' TextToWrite: CSVText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\t04-filtered.csv''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance2
+Excel.SaveExcel.SaveAs Instance: ExcelInstance2 DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t04-output-copilot-20260910.xlsx'''
+Excel.CloseExcel.Close Instance: ExcelInstance2
+Excel.CloseExcel.Close Instance: ExcelInstance
+
+デザイナー上の確認方法
+アクション数が9個であること
+順序が実測正例と一致していること
+FilteredDataTable が Variables.FilterDataTable の出力になっていること
+CSVText が Variables.ConvertDataTableToCSV の出力になっていること
+ExcelInstance と ExcelInstance2 が別インスタンスであること
+FilterParameters 行が実測原文と一致していること
+File.WriteText が AppendNewLine: False になっていること
+元ブック起動が ReadOnly: True になっていること
+複製した合成データでの照合手順
+
+空フローへ貼り付け
+
+保存
+
+実行
+
+入力ブック t04-filter-input.xlsx の SHA-256 が変化していないことを確認
+
+出力 normal-chat-t04-output-copilot-20260910.xlsx を開く
+
+論理内容として次の3行3列が含まれることを確認
+
+対象, A, 10
+対象, C, 25
+対象, D, 5
+
+_x000D_ がセル内へ混入していないことを確認
+
+再実行しても入力ブックが変更されないことを確認
+
+根拠: catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin、catalog/evidence/t04-positive-flow-run-6.json、catalog/evidence/t04-positive-flow-run-7.json に記録された実測済み T04 系列。
++ 1

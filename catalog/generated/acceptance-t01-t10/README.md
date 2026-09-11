@@ -25,9 +25,32 @@
 | T09 | 安全なローカル画面で文字入力→クリック→待機→文字取得 | 対象UI要素の登録手順と取得文字を明示。未確認セレクターを出さない | PARTIAL（UI要素捕捉・貼付けPASS、WebAutomation実行タイムアウト） |
 | T10 | 動作確認済み既存フローを渡し、条件1つと出力名だけ変更 | 指定変更のみ反映し、既存の入力・変数・別処理・エラー経路を保持 | PARTIAL（最終版Word SaveAsで停止、独立再試験待ち） |
 
-上表は履歴版の判定です。現作業版ではT04をPASS_CURRENT_REVISIONとし、同じT01〜T10の残りを新規通常チャットから再生成して無修正PAD貼付け・保存・実行・成果物照合まで行う必要があります。
+上表は履歴版の判定です。現作業版ではT04をPASS_CURRENT_REVISIONとし、最終配布候補の現行bundleではT01を追加でPASS_CURRENT_BUNDLEとして記録しています。T02〜T10の残りは新規通常チャットから再生成して無修正PAD貼付け・保存・実行・成果物照合まで行う必要があります。
 
-2026-09-11現在の最終配布候補は、指示文 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`／bundle `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644` です。この版では知識のみの通常チャットprecheckを `PASS_REFERENCE_ONLY` として確認しましたが、T01〜T10、T01/T04/T10独立再試験、T08有効Robin、T09現行package通し実行は未完了です。下記の旧版PASS・失敗・未実行をこの最終配布候補へ継承しません。precheckの質問・回答・DOMハッシュは `catalog/generated/normal-chat-current-bundle-knowledge-precheck-20260911/`、P0〜P5監査は `catalog/evidence/issue5-completion-audit-20260911.json` です。
+2026-09-11現在の新しい最終配布候補は、指示文 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`／bundle `61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b` です。T08エラー記録のPAD採取結果とT01測定済み組み合わせ参照を反映し、末尾空白の差分警告を除いた最終候補を再構築しました。前版c78fd3のT08受入は履歴として保持し、最終2版の知識precheck、T08、T01受入はこれから実施します。旧e35fa2f4／38640a／d7a0a7／c78fd3版の結果をこの候補へ継承しません。新候補の状態は `catalog/evidence/current-package-status-20260911-final2.json` と `catalog/evidence/issue5-completion-audit-20260911-final2.json` で管理します。
+
+## 現行Final3固定版（2026-09-11）
+
+指示文 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`／bundle `2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7` を同一版として固定しました。知識precheckはPASS_REFERENCE_ONLY、T01〜T08とT10は通常M365 Copilot送信→有効Robin無修正貼付け→保存→2回PAD実行→成果物照合まで受入済みです。T01/T04/T10は別チャット・別PADフローの独立再試験も受入済みです。T09は6アクションの送信・貼付け・保存・再コピーまでは確認しましたが、捕捉済みUI要素が新規PAD実行時に見つからずRun開始前に停止したため未受入です。P3の未統合・未確認項目も残るため、状態は `partial／OPEN` を維持します。詳細は `catalog/evidence/current-package-status-20260911-final4.json` と `catalog/evidence/issue5-completion-audit-20260911-final4.json` を参照してください。
+
+## 現行bundleのライブ進捗（2026-09-11）
+
+| ケース | 現行bundle判定 | 証跡 |
+| --- | --- | --- |
+| T01 | PASS_CURRENT_BUNDLE（Copilot送信、Robin原文保存、専用PAD貼付け・保存、2回実行、出力／入力照合） | `catalog/evidence/t01-current-bundle-live-send-20260911.json`、`catalog/evidence/t01-current-bundle-pad-output-comparison-20260911.json` |
+| T02〜T10 | NOT_RUN／PARTIAL（旧版結果を継承しない） | `catalog/evidence/issue5-completion-audit-20260911.json` |
+
+T01のRobin原文、PAD再コピー、run1/run2は `catalog/generated/normal-chat-current-bundle-t01-live-20260911/` と `catalog/evidence/t01-current-bundle-pad-*.json` に保存しています。Copilot原文Robin（LF）とPAD再コピー（CRLF）は別ファイルとして保持し、改行を正規化した本文一致だけを確認しました。
+
+P3追補：DataTableの列数一致RowToAdd入力は `RobinKnowledgeP3DataTableRow_20260911` で実測し、2回とも2行3列のプレビューとエラーなしを確認しました。`catalog/evidence/p3-datatable-row-success-20260911.json` に保存しています。これはprobe成功であり、現行bundleへの統合・行反復・セル参照の受入ではありません。
+
+P3追補：`RobinKnowledgeP3DataTableCell_20260911` で `ModifyDataTableItem` の列2・行0更新を2回実行し、値ビューアーで `CellChanged` を確認しました。`catalog/evidence/p3-datatable-cell-success-20260911.json` に保存しています。これはprobe成功であり、現行bundleへの統合・行反復の受入ではありません。
+
+P3追補：DataTable行反復は `RobinKnowledgeP3DataTableForeach_20260911` で2行3列を`LOOP FOREACH`し、ブレークポイント由来の初回停止を分離した後、2回とも最終行`B / 20 / 対象2`・2行3列・エラーなしを確認しました。Excel行反復も `RobinKnowledgeP3ExcelForeachRuntime_20260911` でA1:C6を`ExcelData`へ読み取り、`CurrentItem`を`ExcelRowSeen`へ設定する5アクションを2回実行し、最終行`対象外 / E / 40`・6行3列・Excel終了・エラーなしを確認しました。両probeは現行bundle未統合です。
+
+T09追補：Edge用PAD拡張・native manifest origin・`nativeMessaging`権限は読み取りで存在を確認しましたが、BrowserNativeMessageHostログは起動成功だけで接続完了を示さず、現在のhostプロセスはChrome用originでした。T09 WebAutomation成功の根拠ではなく、拡張接続境界の診断証跡として `catalog/evidence/t09-extension-handshake-boundary-20260911.json` に保存しています。
+
+T08 P3追補：PADの「最後のエラーを取得」を保存先`LastError`・エラー消去`On`で設定し、原文`ERROR => LastError Reset: True`を無修正再コピーした。欠損ファイルを含むエラー処理probeは2回とも`true`と「ファイルが見つかりません」のプレビューで完了した。ブロック原文とLastError原文は別々のPAD採取であり、組合せ参照は単一clipboard rawではない。現行bundle未統合のため、T08の通常Copilot生成・無修正PAD受入はまだ未完了です（`catalog/evidence/p3-error-handler-measured-20260911.json`）。
 
 現作業版の固定サマリは `catalog/evidence/normal-chat-final-acceptance-summary-20260910b.json` です。
 

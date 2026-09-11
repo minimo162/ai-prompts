@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T02:11:50.8704500Z",
+  "status": "PASS_PROBE_NOT_BUNDLED",
+  "flow_name": "RobinKnowledgeP3LastError_20260911",
+  "pad_file_version": "2.71.115.26224",
+  "language": "ja-JP",
+  "settings": {
+    "block_error_case": "FileNotFound / IsUserDefinedErrorCode=True",
+    "named_handler_assignment": "ErrorHandled=true",
+    "default_handler_assignment": "ErrorHandledDefault=true",
+    "continue_on_error": true,
+    "throw_error": false,
+    "get_last_error_output_variable": "LastError",
+    "get_last_error_clear_error": true,
+    "child_action": "File.ReadTextFromFile.ReadText against missing t08-missing-20260910.txt"
+  },
+  "raw_components": [
+    {
+      "kind": "PAD_captured_block",
+      "path": "catalog/evidence/p3-error-default-handler-flow-20260911.robin",
+      "sha256": "B115FDA2DD861F1652CCB71CD1D65C8E10A51C4BBFEBC103BEEE2AC5024FDC2F",
+      "bytes": 354
+    },
+    {
+      "kind": "PAD_captured_get_last_error_action",
+      "path": "catalog/evidence/p3-get-last-error-standalone-20260911-reset.robin",
+      "sha256": "816D164003F259523451CDD53AF2832E82562F236562563775F2AE3A8A3A4213",
+      "bytes": 32
+    }
+  ],
+  "composed_reference": {
+    "path": "catalog/evidence/p3-error-handler-measured-composed-20260911.robin",
+    "sha256": "5849E15561E44296599B04DDF3735B44383D8CF7713110E5B33B286F62D2DD49",
+    "bytes": 385,
+    "status": "ASSEMBLED_FROM_SEPARATE_PAD_CAPTURES_NOT_A_SINGLE_PAD_RAW_COPY"
+  },
+  "successful_runs": [
+    {
+      "path": "catalog/evidence/p3-last-error-handler-run2-20260911.json",
+      "run_status": "success",
+      "variable_previews": ["true", "ファイル C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt が見つかりません"],
+      "error_dialog": false
+    },
+    {
+      "path": "catalog/evidence/p3-last-error-handler-run3-20260911.json",
+      "run_status": "success",
+      "variable_previews": ["true", "ファイル C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt が見つかりません"],
+      "error_dialog": false
+    }
+  ],
+  "excluded_run": {
+    "path": "catalog/evidence/p3-last-error-handler-run1-designer-exception-20260911.json",
+    "reason": "The first helper attempt was a Designer internal MoveProgramItemsCommandHandler exception and was not used as runtime evidence."
+  },
+  "acceptance_boundary": "This is a dedicated PAD probe, not current-bundle Copilot generation or same-final-version acceptance. The composed reference is not claimed as one raw PAD clipboard capture."
+}

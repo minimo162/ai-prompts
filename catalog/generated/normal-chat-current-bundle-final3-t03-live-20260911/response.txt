@@ -1,0 +1,108 @@
+1. 前提・対象範囲・未確認点
+目的
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files 配下の複数ファイルを For each で1回ずつ処理し、.txt のみ UTF-8 で内容を読み取るフロー案です。
+
+入力
+フォルダー: C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+想定ファイル例（添付資料）
+t03-alpha.txt
+t03-beta.csv
+t03-gamma.md
+出力
+読み取ったテキストを FileContents へ格納
+確認済み部分
+
+根拠:
+
+フォルダー内ファイル取得（Folder.GetFiles）
+For each 構文（LOOP FOREACH CurrentFile IN Files）
+ファイルパス変数から UTF-8 読取り（File.ReadTextFromFile.ReadText File: CurrentFile ...）
+ファイルパスに .txt を含む条件式（IF Contains(CurrentFile, $'''.txt''', False) THEN）
+Folder.GetFiles → For each → UTF-8読取り の組合せ実行確認済み（T03部分実測）
+未確認部分
+.csv と .md を個別条件で分岐する実測原文はナレッジ内にありません。
+ファイル名のみ取得する専用アクションは未採取です。
+Else側の実行確認は未確認です。
+
+そのため、貼り付け用Robinは 確認済みの .txt 判定経路のみ を記載します。
+
+2. PADで先に作る設定
+フォルダー
+
+実測例の Folder.GetFiles のフォルダー引数を次へ変更して設定します。
+
+C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+
+生成変数
+変数	型	用途
+Files	List	フォルダー内ファイル一覧
+CurrentFile	Text	For eachの現在ファイル
+FileContents	Text	UTF-8読取り結果
+対象外経路
+
+.csv と .md は対象外とする要件ですが、個別分岐の実測Robinは未採取です。実運用では Else 側へ対象外処理を置く構成が考えられますが、そのRobin構文は本回答では生成しません。
+
+3. 貼り付け用Robin
+
+確認済み原文の組合せのみです。根拠:
+
+catalog/actions/folder-get-files/all-files-no-subfolders.robin
+catalog/actions/foreach/items-variable.robin
+catalog/actions/if/current-file-contains-txt.robin
+catalog/actions/file-read-text/variable-path-utf8.robin
+catalog/flows/t03-folder-foreach-read/partial.robin
+Plain Text
+1
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+2
+LOOP FOREACH CurrentFile IN Files
+3
+    IF Contains(CurrentFile, $'''.txt''', False) THEN
+4
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+5
+    END
+6
+END
+4. デザイナー上の確認方法
+アクション順
+フォルダー内のファイルを取得
+For each
+If
+ファイルからテキストを読み取る
+End (If)
+End (For each)
+変数型
+Files = リスト
+CurrentFile = テキスト
+FileContents = テキスト
+ブロック対応
+LOOP FOREACH ↔ END
+IF ... THEN ↔ END
+エラーチェック
+
+PAD保存時に以下が消えていないことを確認します。
+
+Files => Files
+CurrentFile IN Files
+Contains(CurrentFile, $'''.txt''', False)
+File: CurrentFile
+Encoding: File.TextFileEncoding.UTF8
+5. 合成データでの照合手順
+
+添付fixtureの内容は次のとおりです。
+
+t03-alpha.txt → alpha 日本語
+t03-beta.csv → beta,"引用"
+t03-gamma.md → gamma
+
+期待結果:
+
+Files は3件取得。
+For each は3回実行。
+.txt を含む t03-alpha.txt のときだけ読取り実行。
+FileContents は alpha 日本語 になる。
+.csv と .md は If 条件が偽となり、読取りアクションを通らない。これは条件式上の期待動作ですが、Else側経路の実測証拠は未確認です。
+
+未確認のElse／.csv専用分岐／.md専用分岐を含む完全フローが必要な場合は、その部分のPAD採取原文が必要です。現在のナレッジだけでは推測生成できません。

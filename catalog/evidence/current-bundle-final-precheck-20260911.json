@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T14:16:30+09:00",
+  "status": "PASS_REFERENCE_ONLY",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7",
+  "package": { "bundle_sha256": "2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7" },
+  "chat": {
+    "sent": true,
+    "response_observed": true,
+    "response": "generated/normal-chat-current-bundle-final3-knowledge-precheck-20260911/response.txt",
+    "result": "generated/normal-chat-current-bundle-final3-knowledge-precheck-20260911/result.json"
+  },
+  "response": {
+    "robin_blocks": 0,
+    "response_sha256": "a459ceadba9b360a3a299850978f25f47414a61b3f4dcfeb4d09f75ed1848238"
+  },
+  "checks": { "generated_robin": false, "references_current_bundle": true },
+  "scope": "Reference-only knowledge precheck; no PAD flow was changed."
+}
