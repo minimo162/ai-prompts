@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T02:20:00+09:00",
+  "case": "T04",
+  "attempt": 2,
+  "status": "FAIL_GENERATION_FORMAT_MARKDOWN_ESCAPES",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/1e1e1ce8-3c28-4da6-80b1-e0e9fa057fb1",
+  "conversation_title": "PAD用T04フィルター抽出フロー生成",
+  "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension, Browser 1 = Chrome per user choice)",
+  "model_label_on_page": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041",
+  "attachments_in_user_message": ["agent-instructions.txt", "PAD-Robin-Knowledge-Bundle.txt"],
+  "body_sha256": "8751295bc7ec7e5b9823c92f4564668c83fd980cfe27a9e99d183a7dc1f9bcb6",
+  "body_verified_before_send": true,
+  "observation": "Same defect as attempt 1: the code block contains `=\\>` (5 occurrences) and `\\[`/`\\]` around the FilterParameters arrays (pre.textContent esc count > 0). The answer again shows 推論が 4 ステップで完了しました and lists sandbox:/mnt/data/... files it saved. Not pasted into PAD.",
+  "pad": {"status": "NOT_RUN_FORMAT_FAILURE"},
+  "note": "Second consecutive format failure for T04 on the final bundle. No hand edit. Attempt 1: attempt1/result.json (conversation 3620024f...)."
+}

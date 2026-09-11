@@ -14,7 +14,9 @@
 - `knowledge/PAD-Robin-05-UI-Web.txt`
 - `knowledge/PAD-Robin-06-Examples.txt`
 
-現作業版bundleの原本対応は [knowledge-bundle-manifest-20260911h.json](knowledge-bundle-manifest-20260911h.json) に固定しています。マニフェスト自体をナレッジへ添付する必要はありません。
+2026-09-12の最終版（finalc）bundle SHA-256は `f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089`、原本対応は [knowledge-bundle-manifest-20260912c.json](knowledge-bundle-manifest-20260912c.json) です。直前版 `32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041` との差分はT09教材の待機値のみで、`WAIT 500`（500秒。2026-09-10採取時に500ミリ秒のつもりで設定した誤り）を、PADの待機ダイアログで1秒に直して再採取した `catalog/flows/ui-t09-local-roundtrip/roundtrip-wait1-20260912.robin` の `WAIT 1` に置き換えました（00-Index／05-UI-Web／06-Examples）。この版で、指示全文＋同版bundle添付の通常M365 Copilotチャット（Google Chrome、Think Deeper）により知識precheck、T01〜T10、独立再試験T01/T04/T10、負例N1〜N3を同一版で受入済みです。正本は `../catalog/evidence/current-package-status-20260912-finalc.json` と `../catalog/evidence/issue5-completion-audit-20260912-finalc.json`。
+
+（履歴）2026-09-11のP3統合版bundleの原本対応は [knowledge-bundle-manifest-20260911h.json](knowledge-bundle-manifest-20260911h.json) に固定しています。マニフェスト自体をナレッジへ添付する必要はありません。
 
 2026-09-11追補として、7原本へP3の実測根拠（真偽値・数値／日時演算、Else／Else-if／EXIT／NEXT、既定エラーハンドラー、PADで採取したGet last error、サブフロー、DataTable作成・行追加・セル更新・行反復、File.Exists／Folder.Create／Move／Rename、Excel範囲読取り・行反復、T09停止境界）を統合しました。失敗境界（カスタム日時書式、名前付きFileNotFoundルール、リスト取得、T09）は未確認として明記しています。最新bundle SHA-256は `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5` です。新bundleの指示全文＋同版bundleによる知識precheckはPASS_REFERENCE_ONLY、T01〜T10全件・独立再試験・負例は未完了です。
 

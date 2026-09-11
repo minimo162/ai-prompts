@@ -1,0 +1,17 @@
+{
+    "schema_version":  1,
+    "bundle_path":  "catalog/generated/normal-chat-finalc-20260912-t10-context/T10-Knowledge-Flow-Bundle.txt",
+    "bundle_sha256":  "b1330a10d3c0d69a1e435b5af7a2c040f01e6607fe02597aa5288385121b6bda",
+    "source_bundle_sha256":  "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089",
+    "source_flow_sha256":  "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+    "sources":  [
+                    {
+                        "path":  "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+                        "sha256":  "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089"
+                    },
+                    {
+                        "path":  "catalog/generated/office-three-apps/generated.robin",
+                        "sha256":  "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194"
+                    }
+                ]
+}

@@ -1,0 +1,53 @@
+Copilot said:
+
+以下は、添付された実測ナレッジに収録されているT01の3アクション原文を、そのまま提示するフロー案です。今回の環境で再実行したものではなく、既存の「別フローへの無修正貼り付け、保存、2回実行、期待値照合済み」の証拠に基づきます。
+
+1. 前提・対象範囲
+目的: UTF-8テキスト内の「対象語」だけを「置換後」へ通常置換する。
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-current-bundle.txt
+変数: FileContents と Replaced。どちらもテキスト。
+置換設定: 大文字小文字を区別し、エスケープシーケンスと正規表現を使用しない通常置換。
+保存設定: UTF-8、既存ファイルは上書き、追加改行なし。
+アプリ、インスタンス、UI要素: 不要。
+対象サブフロー: Main。
+置換範囲: 空のMain、または置換対象として確保した連続範囲全体。
+
+根拠環境はPAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データです。T01原文はUTF-8読取り、通常置換、UTF-8書出しの3アクションで、入力不変と出力内容が既存証拠で照合されています。
+
+2. PADで先に行う設定
+PADで空のフローを作成するか、既存フローのMainに貼り付け用の連続した空き範囲を用意します。
+出力先フォルダーが存在することを確認します。
+出力先に同名ファイルがある場合は上書きされます。残す必要がある既存ファイルは、貼り付け前に別の場所へ複製してください。
+入力変数やUI要素を事前作成する必要はありません。FileContentsとReplacedは各アクションの出力として生成されます。
+3. 貼り付け用Robin
+
+対象サブフローはMainです。空のMainまたは置換対象として確保した連続範囲へ、次の3行をまとめて貼り付けます。
+
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+4. デザイナー上での確認
+
+貼り付け後、次を確認します。
+
+アクション数が3である。
+順序が「ファイルからテキストを読み取る」「テキストを置換する」「テキストをファイルに書き込む」である。
+1番目の出力がテキスト変数FileContentsである。
+2番目の入力がFileContents、出力がテキスト変数Replacedである。
+置換方式が通常置換で、検索語と置換語が指定どおりである。
+3番目の書込み値が文字列リテラルではなく、変数Replacedである。
+「新しい行を追加する」がオフ、つまりAppendNewLine: Falseである。
+エンコードがUTF-8、既存ファイルの処理が上書きである。
+デザイナーに赤いエラー表示がなく、未定義変数がない。
+5. 合成データでの実行・照合
+入力ファイルを別名で複製し、必要ならその複製を照合用に保管します。
+フローを保存して実行します。
+出力ファイルをUTF-8対応エディターで開き、「対象語」が「置換後」へ置き換わっていることを確認します。
+特殊文字、引用符、バックスラッシュ、対象外の文字列、既存の改行配置が保持されていることを確認します。
+入力末尾に改行がなければ、出力にも追加の末尾改行がないことを確認します。
+入力ファイル自体が変更されていないことを確認します。
+出力を確認した後にもう一度実行し、上書き再実行でも内容が増殖せず、同じ論理内容になることを確認します。
+
+実測原文の正本は、ナレッジ内で示されたT01生成原文とその実行・出力比較証拠です。今回の提示はその既存原文の再掲であり、この回答自体をPADへ貼り付けて再実測したという意味ではありません。

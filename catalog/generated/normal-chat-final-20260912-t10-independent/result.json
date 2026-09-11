@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T03:28:00+09:00",
+  "case": "T10",
+  "independent_retest": true,
+  "status": "PASS_FINAL_20260912_INDEPENDENT",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/0acfcea4-f04e-406f-8dd2-e6ae0dd83c56",
+  "conversation_title": "PAD既存フロー最小変更指示",
+  "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension), separate new chat",
+  "model_label_on_page": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041",
+  "attachments_in_user_message": [
+    "PAD-Robin-Knowledge-Bundle.txt",
+    "T10-Knowledge-Flow-Bundle.txt"
+  ],
+  "body": {
+    "file": "sent-body.txt",
+    "sha256": "0d1a7c48827d3d690486696e5ec9a60b4c097c2a66d26708278a063eed61b0e0",
+    "chars": 4703,
+    "composer_verification": "composer <p> join SHA matched before send"
+  },
+  "generated_response": "response.txt",
+  "generated_robin": {
+    "path": "robin.txt",
+    "sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12",
+    "code_blocks": 1,
+    "lines": 16,
+    "per_line_lengths": [
+      107,
+      102,
+      167,
+      192,
+      46,
+      60,
+      110,
+      65,
+      171,
+      43,
+      64,
+      97,
+      158,
+      95,
+      198,
+      61
+    ],
+    "markdown_escapes": 0,
+    "nbsp": 0,
+    "extraction": "pre.textContent per-line lengths identical to the primary T10 answer; robin.txt materialized from that identical text",
+    "raw_unmodified": true
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT10FinalIndep_20260912",
+    "designer_process_id": 37576,
+    "paste_save": "../../evidence/t10-final-20260912-independent-pad-paste-save-20260912.json",
+    "action_count_after_paste": 16,
+    "recopy": "pad-recopy.robin",
+    "recopy_sha256": "845c54cc905e50dcb9f8b9d7e55aeba3cb639bee1b3e848a3f66f9b3ce051446",
+    "run1": "../../evidence/t10-final-20260912-independent-pad-run1-20260912.json",
+    "run2": "../../evidence/t10-final-20260912-independent-pad-run2-20260912.json",
+    "output_isolation": "three protected outputs removed before each run and restored afterwards",
+    "outputs": {
+      "run1": {
+        "excel_A1": "T10-Changed",
+        "word_contains_CopilotOffice_246": true,
+        "word_contains_T10": false,
+        "ppt_contains_CopilotOffice_246": true,
+        "ppt_contains_T10": false
+      },
+      "run2": {
+        "excel_A1": "T10-Changed",
+        "word_contains_CopilotOffice_246": true,
+        "word_contains_T10": false,
+        "ppt_contains_CopilotOffice_246": true,
+        "ppt_contains_T10": false
+      }
+    },
+    "office_processes_after": 0
+  },
+  "acceptance": "PASS_FINAL_20260912_INDEPENDENT"
+}

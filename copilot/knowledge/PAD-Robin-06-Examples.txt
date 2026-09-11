@@ -60,7 +60,22 @@ File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal
   `PowerPoint.SavePowerPoint.SaveAs Instance: PowerPointInstance DocumentFormat: PowerPoint.PowerPointFormat.PPTX DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-powerpoint.pptx'''`
 - 現行の最終v8生成ではこの2行に余分なバックスラッシュと`_`が入り、PAD再コピーでは`_`だけが除かれた。根拠は`tests/Test-RobinRawContracts.ps1`と`catalog/evidence/normal-chat-final-pad-20260910/t10-recopy.txt`であり、PAD側の正規化は生成原文の逐語一致を証明しない。
 
-例6: T09ローカルUI捕捉・貼付け（実行未完了）
+例7: T03 フォルダー内ファイルを一度ずつ処理し、拡張子が.txtのものだけUTF-8で読む（2026-09-12実測）
+- 依頼の形: 合成フォルダー `C:\Users\yuuki\ai-prompts\catalog\fixtures\files` の全ファイルをFor eachで処理し、拡張子が`.txt`のファイルだけ内容を読み取り、`.csv`／`.md`はElse（対象外経路）へ送る。
+- 判定はファイル変数の`.Extension`プロパティと`.txt`の「と等しい」比較で、PADのIfダイアログから採取した原文行 `IF CurrentFile.Extension = $'''.txt''' THEN` を使う。`Contains(CurrentFile, $'''.txt''', False)`は部分一致なので厳密判定には使わない。
+- 最小形の原文（`catalog/flows/t03-extension-branch/minimal-source-20260912.robin`。別の空フローへ貼付け・保存・2回実行、入力不変）:
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+LOOP FOREACH CurrentFile IN Files
+    IF CurrentFile.Extension = $'''.txt''' THEN
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+    ELSE
+    END
+END
+- 件数を数える13行版（両分岐に`SET`と`Variables.IncreaseVariable`）は03-Filesに掲載し、2回とも`TxtCount=2`、`OtherCount=2`だった。証拠: `catalog/evidence/t03-ext-verify-acceptance-20260912.json`、`t03-ext-min-acceptance-20260912.json`。
+- 期待結果の照合は、読み取った内容（最後の`.txt`）、Elseへ行った件数、入力ファイルのSHA不変で行う。大文字小文字、`.txt.bak`、サブフォルダーは未確認。
+
+例6: T09ローカルUI捕捉・貼付け・通し実行（2026-09-12に完走）
 - `catalog/fixtures/ui/t09-local-test.html` をローカルEdgeで開き、PAD UI要素ピッカーから `t09-input`、`t09-submit`、`t09-result` を捕捉した。セレクターは各要素のId属性を実画面から取得しており、推測ではない。
-- `catalog/flows/ui-t09-local-roundtrip/roundtrip.robin` は、Edge起動→`T09-input`入力→実行ボタンクリック→`WAIT 500`→結果段落の`Own Text`取得→ブラウザー終了の6アクション原文である。空フロー `RobinKnowledgeT09FilterPaste_20260910` へ貼付け・保存し、再コピーのアクション行6本一致を確認した。
-- PAD WebAutomationの元フロー・貼付けフロー実行はブラウザー拡張経路で完了せず、監視後に停止した。`AttributeValue=T09-clicked` は未観測であり、T09を実行成功と表示しない。詳細は `catalog/evidence/t09-capture-source-20260910.json`、`t09-final-paste-acceptance-20260910.json`、`t09-runtime-block-20260910.json`。
+- `catalog/flows/ui-t09-local-roundtrip/roundtrip.robin` は、Edge起動→`T09-input`入力→実行ボタンクリック→`WAIT 500`→結果段落の`Own Text`取得→ブラウザー終了の6アクション原文である。待機の単位は秒で、500は500ミリ秒のつもりの誤設定だったため、2026-09-12にダイアログで1秒へ直した再採取原文`roundtrip-wait1-20260912.robin`（4行目が`WAIT 1`、他は同一）を生成根拠にする。空フロー `RobinKnowledgeT09FilterPaste_20260910` へ貼付け・保存し、再コピーのアクション行6本一致を確認した。
+- 2026-09-11までの実行は`WAIT 500`（500秒）の待機中に監視を打ち切ったため未完了だった（`catalog/evidence/t09-runtime-block-20260910.json`ほか）。2026-09-12に、ControlRepository付きの採取原文を別の空フロー`RobinKnowledgeT09Repo_20260912`へ貼り付けて実行し、約8分20秒後に`AttributeValue=T09-clicked`、ブラウザー終了、準備完了への復帰を確認した（`catalog/evidence/t09-repo-run1-acceptance-20260912.json`、`t09-repo-run2-20260912.json`）。
+- 生成Robinを貼り付ける先には、`Input text 't09-input'`、`Button '実行'`、`Paragraph '未実行'`の3要素が登録されている必要がある。実測済みの手順は、採取原文を先に貼り付けて要素を取り込み、その6アクションを削除してから生成6行を貼り付ける。待機行は`WAIT 1`（1秒）を生成する。`WAIT 500`は500秒待つ履歴上の誤設定であり、生成しない。待機1秒版は2回とも数秒で`AttributeValue=T09-clicked`とブラウザー終了を確認した（`catalog/evidence/t09-wait1-acceptance-20260912.json`）。

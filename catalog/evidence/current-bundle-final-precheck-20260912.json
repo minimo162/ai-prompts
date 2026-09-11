@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T01:42:00+09:00",
+  "status": "PASS_REFERENCE_ONLY",
+  "package": {
+    "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041"
+  },
+  "chat": {
+    "mode": "normal_m365_copilot_chat",
+    "browser": "Google Chrome (Claude in Chrome extension)",
+    "model": "Think Deeper",
+    "sent": true,
+    "response_observed": true,
+    "conversation_url": "https://m365.cloud.microsoft/chat/conversation/6e8713bf-a4a3-427a-ab76-d704e36117ce",
+    "full_instruction_in_body": true,
+    "attachments": [
+      "agent-instructions.txt",
+      "PAD-Robin-Knowledge-Bundle.txt"
+    ],
+    "body_sha256": "3ef4b6b93951035a1bae90b174c27543b3083fe83538aed630a003f95885ae8a"
+  },
+  "response": {
+    "path": "catalog/generated/normal-chat-final-20260912-precheck/response.txt",
+    "robin_blocks": 0
+  },
+  "checks": {
+    "generated_robin": false,
+    "referenced_new_items": [
+      "T03 .Extension strict compare + Else",
+      "T09 WAIT 500 = 500 s + element import prerequisite",
+      "list index retrieval CatalogList[0]"
+    ]
+  },
+  "result": "PASS_REFERENCE_ONLY_FULL_INSTRUCTION_AND_BUNDLE"
+}

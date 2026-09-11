@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-11T16:01:35.3997456Z",
+    "flow_name":  "RobinKnowledgeT03ExtMin_20260912",
+    "source_robin":  "C:\\Users\\yuuki\\ai-prompts\\catalog\\flows\\t03-extension-branch\\minimal-source-20260912.robin",
+    "source_sha256":  "83f1b559c442cb79692bd36287cd86c4c31102e02fefaaeb56d16ffbf0117a4f",
+    "source_bytes":  549,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  7,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

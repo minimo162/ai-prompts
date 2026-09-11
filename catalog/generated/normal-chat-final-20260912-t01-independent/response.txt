@@ -1,0 +1,66 @@
+Copilot said:
+
+ご指定の処理は、添付ナレッジに収録されたT01の実測済み3アクション構成と一致します。以下では、PADデザイナーへの設定、確認、合成データによる検証手順を示した後、貼り付け用Robinを1つのコードフェンスで提示します。
+
+1. 前提・対象範囲
+目的: UTF-8テキストを読み込み、「対象語」を「置換後」へ通常置換して保存
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-current-bundle.txt
+変数:
+FileContents: 読み取ったテキスト
+Replaced: 置換後のテキスト
+置換設定: 大文字小文字を区別し、正規表現とエスケープシーケンスは使用しない通常置換
+保存設定: UTF-8、既存ファイルは上書き、追加改行なし
+成功条件: 指定語だけが置換され、特殊文字、既存の改行、対象外文字が保持され、保存処理による末尾改行が追加されないこと
+
+根拠環境はPAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データです。T01の同一3アクション原文は専用フローへ無修正で貼り付けて2回実行され、入力不変と期待出力の照合まで記録されています。ただし、これは添付された履歴bundleの測定結果であり、今回の環境での新たな実行を示すものではありません。
+
+2. PADでの事前設定
+PADで新しいフローを作成し、対象サブフローを Main にします。
+出力先に同名ファイルがある場合は上書きされるため、必要なら事前に退避してください。
+入力ファイルと出力先フォルダーが存在することを確認します。
+Main の置換対象範囲を空にしてから、下記3行をまとめて貼り付けます。
+入力変数やUI要素の事前作成は不要です。FileContents と Replaced は各アクションの出力として生成されます。
+
+各行の根拠は、読取りが catalog/actions/file-read-text/utf8.robin、通常置換が catalog/actions/text-replace/literal.robin、追加改行なしの変数保存が catalog/actions/file-write-text/variable-reference-no-append.robin です。組合せ原文は catalog/generated/normal-chat-current-bundle-t01-live-20260911/robin.txt に記録されています。
+
+3. 貼り付け用Robin
+
+対象サブフローは Main、置換範囲は Main 内の全アクションです。
+
+[code block: see robin.txt]
+File.ReadTextFromFile.ReadText File: $'''C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+File.WriteText File: $'''C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+4. デザイナー上の確認
+
+貼り付け後、次を確認してください。
+
+アクション数が3件
+順序が「ファイル読取り → テキスト置換 → テキスト書込み」
+1件目の出力がテキスト変数 FileContents
+2件目の入力が FileContents、出力が Replaced
+3件目の書込み内容が文字列リテラルではなく、テキスト変数 Replaced
+置換方式が通常置換で、正規表現ではない
+IgnoreCase が False
+エスケープシーケンスの有効化が False
+書込みの「新しい行を追加する」がオフ
+既存ファイルの処理が上書き
+読取りと書込みのエンコードがUTF-8
+デザイナーにエラー表示がない
+
+このフローには条件やループなどのブロックがないため、開始行と終了行の対応確認は不要です。
+
+5. 合成データでの実行・照合
+入力ファイルを複製して退避し、実行前の内容またはSHA-256を記録します。
+フローを保存して1回実行します。
+出力ファイルをテキストエディターで開き、「対象語」がすべて「置換後」になっていることを確認します。
+引用符、パーセント、バックスラッシュ、日本語、空行、対象外文字が入力どおり保持されていることを確認します。
+入力に末尾改行がなければ、出力にも追加されていないことを確認します。入力に既存の末尾改行がある場合は、その入力由来の改行は保持対象です。
+入力ファイルの内容またはSHA-256が実行前から変化していないことを確認します。
+もう一度実行し、上書き後の出力内容が1回目と同じで、余分な改行が増えていないことを確認します。
+
+添付ナレッジの過去検証では、出力はUTF-8 BOM付き、CRLF、90 bytesで、固定期待SHA-256との一致および入力不変が確認されています。今回も単にファイルが存在することではなく、置換結果、対象外文字、改行、入力不変を照合して成功判定してください。
+
+ソース

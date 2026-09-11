@@ -1,0 +1,141 @@
+{
+  "schema_version": 2,
+  "captured_on": "2026-09-12",
+  "status": "partial",
+  "issue_state": "OPEN",
+  "package": {
+    "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041",
+    "bundle_manifest": "copilot/knowledge-bundle-manifest-20260912b.json"
+  },
+  "p4_current_bundle": {
+    "status": "PARTIAL_T09_RUNS_PENDING",
+    "knowledge_precheck": "PASS_REFERENCE_ONLY",
+    "knowledge_precheck_evidence": "evidence/current-bundle-final-precheck-20260912.json",
+    "accepted_cases": [
+      "T01",
+      "T02",
+      "T03",
+      "T04",
+      "T05",
+      "T06",
+      "T07",
+      "T08",
+      "T10"
+    ],
+    "case_results": {
+      "knowledge_precheck": {
+        "status": "PASS_REFERENCE_ONLY",
+        "evidence": "evidence/current-bundle-final-precheck-20260912.json",
+        "bundle_sha256": null
+      },
+      "T01": {
+        "status": "PASS_FINAL_20260912",
+        "evidence": "evidence/t01-final-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041"
+      },
+      "T02": {
+        "status": "PASS_FINAL_20260912",
+        "evidence": "evidence/t02-final-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041"
+      },
+      "T03": {
+        "status": "PASS_FINAL_20260912",
+        "evidence": "evidence/t03-final-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041"
+      },
+      "T04": {
+        "status": "PASS_FINAL_20260912",
+        "evidence": "evidence/t04-final-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041"
+      },
+      "T05": {
+        "status": "PASS_FINAL_20260912",
+        "evidence": "evidence/t05-final-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041"
+      },
+      "T06": {
+        "status": "PASS_FINAL_20260912",
+        "evidence": "evidence/t06-final-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041"
+      },
+      "T07": {
+        "status": "PASS_FINAL_20260912",
+        "evidence": "evidence/t07-final-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041"
+      },
+      "T08": {
+        "status": "PASS_FINAL_20260912_EXPECTED_ERROR",
+        "evidence": "evidence/t08-final-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041"
+      },
+      "T09": {
+        "status": "GENERATED_ELEMENTS_IMPORTED_RUNS_PENDING",
+        "evidence": "../generated/normal-chat-final-20260912-t09/response.txt",
+        "bundle_sha256": null
+      },
+      "T10": {
+        "status": "PASS_FINAL_20260912",
+        "evidence": "evidence/t10-final-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041"
+      }
+    },
+    "independent_retests": {
+      "status": "PASS_FINAL_INDEPENDENT",
+      "cases": [
+        "T01",
+        "T04",
+        "T10"
+      ],
+      "results": {
+        "T01": "evidence/t01-final-20260912-independent-acceptance-20260912.json",
+        "T04": "evidence/t04-final-20260912-independent-acceptance-20260912.json",
+        "T10": "evidence/t10-final-20260912-independent-acceptance-20260912.json"
+      }
+    },
+    "negative_suite": {
+      "status": "PASS_NEGATIVE_FAIL_CLOSED",
+      "evidence": "../generated/normal-chat-final-20260912-negative-suite/result.json"
+    },
+    "t08": {
+      "status": "PASS_FINAL_20260912_EXPECTED_ERROR",
+      "named_FileNotFound_match": "UNCONFIRMED"
+    },
+    "t09": {
+      "status": "GENERATED_ELEMENTS_IMPORTED_RUNS_PENDING",
+      "evidence": "../generated/normal-chat-final-20260912-t09/response.txt"
+    }
+  },
+  "p5": {
+    "status": "PASS_LOCAL_STATIC_PARTIAL_LIVE",
+    "issue_close": false
+  },
+  "p3": {
+    "measured_20260912": [
+      "T03 strict extension (.Extension = .txt) + Else, 13-line and 7-line forms, 2 runs each",
+      "For each > If/Else branch side effects (SET + IncreaseVariable)",
+      "IncreaseVariable variable-reference correction",
+      "list item retrieval by typed index (CatalogList[0]), 2 runs",
+      "T09 WebAutomation end-to-end (WAIT 500 = 500 s), element import via captured repository"
+    ],
+    "still_unconfirmed": [
+      "custom date format (PAD internal exception boundary)",
+      "named custom error FileNotFound match",
+      "If inside If, nested loops",
+      "list index other than 0, separate-flow reuse of the list probe",
+      ".TXT / .txt.bak / subfolder boundaries",
+      "SaveAs collision behaviour"
+    ]
+  },
+  "remaining": [
+    "T09 final-version PAD runs",
+    "P3: custom date format, named custom error, If-inside-If, list index beyond 0, boundary names",
+    "Agent Builder registration/search/instruction adherence not verified (out of scope)"
+  ],
+  "result": "Final version 32aea456: T01-T08/T10, independent T01/T04/T10 and the negative suite are accepted; T09 generation is accepted and its PAD runs are recorded separately.",
+  "superseded_by": {
+    "bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089",
+    "record": "issue5-completion-audit-20260912-finalc.json",
+    "reason": "WAIT 500 teaching-material fix (user-reported); all cases re-accepted on f42f5acf"
+  }
+}

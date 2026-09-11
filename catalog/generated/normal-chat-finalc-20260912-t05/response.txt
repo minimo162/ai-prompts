@@ -1,0 +1,77 @@
+Copilot said:
+
+以下は、添付の実測ナレッジにある「既存Excelを編集可能で起動」「単一セル書込み」「xlsx別名保存」「Excel終了」のRobin原文を組み合わせたフロー案です。個々のアクション形式は実測済みですが、この4行と今回のパス・値の組み合わせ自体は貼付け・実行未確認です。
+
+1. 前提・対象範囲・未確認点
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\excel-catalog.xlsx
+起動設定: ReadOnly: False
+変更対象: アクティブなワークシートの B2 のみ
+書込み値: 文字列 T05-Changed
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t05-final.xlsx
+Excelインスタンス: ExcelInstance
+成功条件:
+出力ブックの B2 が T05-Changed
+A1を含む他のセルが入力ブックと一致
+元ファイルの内容が不変
+Excelが終了する
+
+ナレッジでは、編集可能な既存ブックの起動、セル書込み、Open XML Workbook形式での別名保存、保存しない終了のRobin形式が採取されています。Excelのセル／範囲読書き・保存・終了についても実行確認の記録があります。
+
+ただし、シート名を指定する引数は未採取です。このため、B2は起動時にアクティブになっているワークシートのセルを意味します。対象のシートが起動時にアクティブであることを実行前に確認してください。
+
+また、実測済みのExcel.SaveExcel.SaveAs原文には上書き指定がありません。安全のため、出力ファイルが既に存在する場合はこのフローを実行せず、既存出力を別名で退避するか、未使用の出力名へ変更してください。
+
+2. PADで先に確認する設定
+PAD 2.71.115.26224、日本語UI、Power Fx OFFの実測環境を根拠としています。異なる版・言語・Power Fx設定では、貼付け後の表示と引数を確認してください。
+入力ブックをExcelで開いていない状態にします。
+入力ブックで、変更対象となるワークシートが保存時のアクティブシートになっていることを確認します。
+catalog\evidenceフォルダーが存在することを確認します。
+normal-chat-t05-final.xlsxが存在しないことを確認します。
+元ファイルのバックアップ、またはSHA-256などの事前比較値を取得します。
+新しい空フローの対象サブフローに、次の4行全体を貼り付けます。置換範囲は対象サブフロー内の全アクションです。
+3. 貼り付け用Robin
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T05-Changed''' Column: $'''B''' Row: 2
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t05-final.xlsx'''
+Excel.CloseExcel.Close Instance: ExcelInstance
+
+4. デザイナー上での確認
+
+貼付け直後に、次を確認してください。
+
+アクション数が4件
+順序が次のとおり
+Excelの起動
+Excelワークシートに書き込む
+Excelの保存
+Excelを閉じる
+起動アクション:
+既存ドキュメントを開く
+ReadOnly=False
+生成変数がExcelInstance
+書込みアクション:
+インスタンスがExcelInstance
+値が文字列T05-Changed
+列がB
+行が数値2
+書込み対象が単一セル
+保存アクション:
+インスタンスがExcelInstance
+形式がOpen XML Workbook
+出力先がnormal-chat-t05-final.xlsx
+終了アクション:
+インスタンスがExcelInstance
+未定義変数、型エラー、赤いエラー表示がない
+範囲書込み、データ反復、ループなどの余分なアクションが追加されていない
+5. 合成データでの実行・照合
+元ファイルを複製し、比較用コピーを保存します。
+出力ファイルが存在しないことを再確認します。
+フローを保存して1回だけ実行します。
+実行完了後、元ファイルではなく出力ファイルを開きます。
+出力の対象シートで、B2がT05-Changedであることを確認します。
+A1を含む使用範囲全体を比較用コピーと照合し、B2以外に差分がないことを確認します。
+元ファイルと比較用コピーをセル単位で照合し、元ファイルが不変であることを確認します。
+Excelプロセスまたはウィンドウが残っていないことを確認します。
+再実行する場合は、既存の出力を上書きせず、出力を安全に退避してから実行します。
+
+この案では範囲操作やデータ反復構文を使用していません。今回の4アクション構成は確認済み原文からの組み合わせですが、今回指定されたファイルに対する無修正貼付け、実行、セル差分照合は利用者側での確認が必要です。

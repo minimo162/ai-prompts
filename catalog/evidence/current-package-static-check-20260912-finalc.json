@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T08:15:57+09:00",
+  "status": "PASS_LOCAL_STATIC",
+  "package": {
+    "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089",
+    "bundle_manifest": "copilot/knowledge-bundle-manifest-20260912c.json"
+  },
+  "checks": [
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/Run-NonLiveTests.ps1 -Suite All",
+      "status": "PASS",
+      "tests": 36,
+      "passed": 36,
+      "failed": [],
+      "started_utc": "2026-09-11T23:08:09.1165103Z",
+      "finished_utc": "2026-09-11T23:15:21.5237888Z",
+      "candidate_unchanged": true,
+      "note": "second full run after fixing two failures from the first run: Test-RobinCatalog (new 169 KB captured flow entry was not marked catalog_only) and Test-Issue5CurrentStatus (static-check record path did not exist yet)"
+    },
+    {
+      "command": "tests/Test-Issue5CurrentStatus.ps1 (inside the suite)",
+      "status": "PASS",
+      "note": "rewritten: semantic audit checks (evidence bundle binding, PASS requires generated robin + two run records, independent retests, negative suite, overall consistency) and 8 negative fixture sets under tests/fixtures/issue5 rejected with the expected error prefixes"
+    },
+    {
+      "command": "python json.load over catalog/**/*.json, copilot/*.json, tests/fixtures/**/*.json",
+      "status": "PASS",
+      "files": 1311,
+      "note": "two T04 attempt records of the superseded 32aea456 round had invalid \\ escapes in prose fields and were corrected (escape doubling only)"
+    },
+    {
+      "command": "git diff --check",
+      "status": "PASS_WITH_NOTE",
+      "note": "only copilot/knowledge/*.txt report CR line endings (HEAD is LF; the integration scripts wrote CRLF). Kept because the accepted bundle bytes must stay identical; normalizing to LF would change the bundle hash and require re-acceptance."
+    },
+    {
+      "command": "node tests/Test-CopilotDom.cjs",
+      "status": "NOT_RUN",
+      "note": "development Playwright module (PLAYWRIGHT_MODULE) is not configured on this machine"
+    }
+  ],
+  "live_m365": "see evidence/current-package-status-20260912-finalc.json (complete_live_acceptance_finalc_20260912)",
+  "result": "Local static checks pass on the finalc package; live acceptance is recorded separately."
+}

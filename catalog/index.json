@@ -3035,6 +3035,31 @@
         "executed_in_flow": null
       },
       "catalog_only": true
+    },
+    {
+      "id": "wait-t09-1s",
+      "category": "フロー コントロール",
+      "ui_name": "待機",
+      "ui_automation_id": "LanguageConstructs.Wait",
+      "variant": "1-second",
+      "settings": {
+        "期間": 1
+      },
+      "inputs": [],
+      "outputs": [],
+      "robin_path": "actions/wait/t09-1s.robin",
+      "sha256": "2e53d9927fef587ad3e4d22b3a79af52311ee8dd1c8bdf3c8550c75697c1ddc7",
+      "capture_session": "t09-wait1-2026-09-12",
+      "verification": {
+        "added_from_left_panel": false,
+        "edited_in_dialog": true,
+        "copied": true,
+        "saved": true,
+        "re_pasted_in": null,
+        "executed_in_flow": "RobinKnowledgeT09Wait1_20260912"
+      },
+      "catalog_only": true,
+      "note": "Wait dialog unit is seconds; wait-t09-500ms was a 500 ms intent captured as 500 s and is kept as history."
     }
   ],
   "flows": [
@@ -4430,6 +4455,91 @@
       "sha256": "3285b362d5537d9beb1ee0ba317a67709e6374f6dffacad074b499f150f69eba",
       "evidence": "evidence/t10-current-final3-live-acceptance-20260911.json",
       "executed_twice": true
+    },
+    {
+      "id": "t03-extension-branch-capture",
+      "robin_path": "flows/t03-extension-branch/capture-pad-copy-20260912.robin",
+      "sha256": "c15a5970640f9d0bcb322b5655bffca3b7b84ad4a86f31c67e064d60fb9398e4",
+      "action_ids": [
+        "folder-get-files-all-no-subfolders",
+        "file-read-text-variable-path"
+      ],
+      "action_count": 13,
+      "native_flow_name": "RobinKnowledgeT03ExtVerify_20260912",
+      "native_subflow": "Main",
+      "catalog_only": true,
+      "re_pasted_from_file": true,
+      "executed_twice": true,
+      "expected_value": "TxtCount=2, OtherCount=2, FileContents=alpha 日本語, input fixtures unchanged",
+      "evidence": "evidence/t03-ext-probe-capture-20260912.json; evidence/t03-ext-verify-acceptance-20260912.json; evidence/t03-ext-run1-20260912.json; evidence/t03-ext-run2-20260912.json",
+      "app_executor_verified": false,
+      "controller_support": "not_implemented",
+      "scope_note": "IF CurrentFile.Extension = '.txt' THEN / ELSE captured from the If dialog; IncreaseVariable uses variable references."
+    },
+    {
+      "id": "t03-extension-branch-minimal",
+      "robin_path": "flows/t03-extension-branch/minimal-source-20260912.robin",
+      "sha256": "83f1b559c442cb79692bd36287cd86c4c31102e02fefaaeb56d16ffbf0117a4f",
+      "action_ids": [
+        "folder-get-files-all-no-subfolders",
+        "file-read-text-variable-path"
+      ],
+      "action_count": 7,
+      "native_flow_name": "RobinKnowledgeT03ExtMin_20260912",
+      "native_subflow": "Main",
+      "catalog_only": true,
+      "re_pasted_from_file": true,
+      "executed_twice": true,
+      "expected_value": "FileContents=alpha 日本語, last CurrentFile t03-gamma.md, input fixtures unchanged",
+      "evidence": "evidence/t03-ext-min-acceptance-20260912.json",
+      "app_executor_verified": false,
+      "controller_support": "not_implemented",
+      "scope_note": "7-line form composed from captured lines; PAD recopy differs only by CRLF/trailing newline."
+    },
+    {
+      "id": "p3-list-get-index-probe",
+      "robin_path": "evidence/p3-list-get-index-probe-20260912.robin",
+      "sha256": "bdb98da7bbbd77aa1c92dc7eb7f806e255373dd233125ae8ed5690459bccc75d",
+      "action_ids": [
+        "variables-create-new-list",
+        "variables-add-item-to-list"
+      ],
+      "action_count": 4,
+      "native_flow_name": "RobinKnowledgeP3ListGet_20260912",
+      "native_subflow": "Main",
+      "catalog_only": true,
+      "re_pasted_from_file": false,
+      "executed_twice": true,
+      "expected_value": "NewVar=CatalogItem",
+      "evidence": "evidence/p3-list-get-index-probe-20260912.json",
+      "app_executor_verified": false,
+      "controller_support": "not_implemented",
+      "scope_note": "SET NewVar TO CatalogList[0] typed into the dialog (picker offers only .Count); copied from PAD; not reused in a separate flow."
+    },
+    {
+      "id": "t09-local-ui-roundtrip-wait1",
+      "robin_path": "flows/ui-t09-local-roundtrip/roundtrip-wait1-20260912.robin",
+      "sha256": "d8913da95757f5fff4d3d7b10c40c35120d76882dc4d516356c9c3ddf06c5571",
+      "action_ids": [
+        "web-launch-t09-local",
+        "web-populate-t09-input",
+        "web-click-t09-submit",
+        "wait-t09-1s",
+        "web-get-t09-result",
+        "web-close-t09"
+      ],
+      "action_count": 6,
+      "native_flow_name": "RobinKnowledgeT09Wait1_20260912",
+      "catalog_only": true,
+      "source_sha256": "93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd",
+      "derived_from": "t09-local-ui-roundtrip",
+      "change": "WAIT 500 -> WAIT 1 via the Wait dialog (seconds)",
+      "execution_attempts": 2,
+      "execution_status": "success_twice",
+      "expected_value": "AttributeValue=T09-clicked and browser closes",
+      "evidence": "evidence/t09-wait1-acceptance-20260912.json; evidence/t09-wait1-pad-run1-20260912.json; evidence/t09-wait1-pad-run2-20260912.json",
+      "controller_support": "not_implemented",
+      "scope_note": "Captured raw with ControlRepository (169 KB); catalog evidence only, not a controller allowlist entry. Executed twice in RobinKnowledgeT09Wait1_20260912."
     }
   ],
   "capture_sessions": [
@@ -5728,7 +5838,21 @@
       "model": "GPT 5.6 Think Deeper",
       "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-      "cases": ["knowledge_precheck", "T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T09", "T10", "independent_T01_T04_T10", "negative_suite"],
+      "cases": [
+        "knowledge_precheck",
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10",
+        "independent_T01_T04_T10",
+        "negative_suite"
+      ],
       "scope": "P3教材統合後の新bundle。Final3旧版の受入結果を継承せず、通常チャット＋PAD同一版再受入を待つ。",
       "current_package_acceptance": false,
       "execution_status": "knowledge_precheck_t01_t02_t04_t05_t06_t07_t08_t10_pass_t03_no_robin_t09_blocked",
@@ -5742,7 +5866,9 @@
       "model": "GPT 5.6 Think Deeper",
       "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-      "cases": ["negative_suite"],
+      "cases": [
+        "negative_suite"
+      ],
       "scope": "Current-bundle fail-closed negative suite for nested/side-effect loop control, DataTable column-name cell reference, and unregistered web selector/driver; no Robin code block was returned.",
       "current_package_acceptance": true,
       "execution_status": "pass_negative_fail_closed",
@@ -5756,7 +5882,9 @@
       "model": "GPT 5.6 Think Deeper",
       "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-      "cases": ["T03"],
+      "cases": [
+        "T03"
+      ],
       "scope": "New-bundle T03 response was captured with both required attachments and explicitly preserved the unconfirmed strict extension/name retrieval boundary; no acceptable Robin code block was generated, so PAD acceptance was not attempted.",
       "current_package_acceptance": false,
       "execution_status": "not_accepted_current_bundle_no_robin",
@@ -5770,7 +5898,9 @@
       "model": "GPT 5.6 Think Deeper",
       "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-      "cases": ["T01"],
+      "cases": [
+        "T01"
+      ],
       "scope": "New-bundle T01: full instruction body, same-bundle attachments, generated Robin fenced block, unmodified PAD paste/save/re-copy, two runs and output/input comparison.",
       "current_package_acceptance": true,
       "execution_status": "pass_current_bundle",
@@ -5784,12 +5914,105 @@
       "model": "GPT 5.6 Think Deeper",
       "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
-      "cases": ["knowledge_precheck", "T01", "T02", "T04", "T05", "T06", "T07", "T08", "T10", "independent_T01", "independent_T04", "independent_T10", "negative_suite"],
+      "cases": [
+        "knowledge_precheck",
+        "T01",
+        "T02",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T10",
+        "independent_T01",
+        "independent_T04",
+        "independent_T10",
+        "negative_suite"
+      ],
       "scope": "Current-bundle live acceptance and independent retests. T03 returned no acceptable Robin; T09 remains blocked before WebAutomation completion.",
       "current_package_acceptance": false,
       "execution_status": "partial_t03_no_robin_t09_blocked",
       "manifest": "../copilot/knowledge-bundle-manifest-20260911h.json",
       "evidence": "evidence/current-package-status-20260911-p3b.json; evidence/issue5-completion-audit-20260911-p3b.json; evidence/current-package-static-check-20260911-p3d.json"
+    },
+    {
+      "id": "normal-chat-final-20260912-acceptance",
+      "date": "2026-09-12",
+      "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension) plus PAD UI Automation",
+      "model": "Think Deeper",
+      "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": [
+        "knowledge_precheck",
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10",
+        "independent_T01",
+        "independent_T04",
+        "independent_T10",
+        "negative_suite"
+      ],
+      "scope": "Final-version acceptance: full instruction body + same-version bundle attachment per new chat; unmodified PAD paste, recopy, two runs, fixed expectations. T04 needed three generations (two Markdown-escape format failures kept as records).",
+      "current_package_acceptance": false,
+      "execution_status": "superseded_by_finalc_20260912_after_wait_unit_fix; T09 runs on this version completed (t09-final-20260912-live-acceptance-20260912.json)",
+      "manifest": "../copilot/knowledge-bundle-manifest-20260912b.json",
+      "evidence": "evidence/current-package-status-20260912-final.json; evidence/issue5-completion-audit-20260912-final.json"
+    },
+    {
+      "id": "t09-wait1-2026-09-12",
+      "date": "2026-09-12",
+      "pad_file_version": "2.71.115.26224",
+      "language": "ja-JP",
+      "power_fx": false,
+      "native_flow_name": "RobinKnowledgeT09Wait1_20260912",
+      "action_ids": [
+        "web-launch-t09-local",
+        "web-populate-t09-input",
+        "web-click-t09-submit",
+        "wait-t09-1s",
+        "web-get-t09-result",
+        "web-close-t09"
+      ],
+      "scope": "Captured T09 original pasted with ControlRepository into a new empty flow; Wait changed to 1 second in the PAD dialog; saved, recopied, and executed twice (T09-clicked, browser closed).",
+      "capture_method": "tools/Paste-PadRobinLive.ps1 + desktop dialog edit + tools/Copy-PadFlowLive.ps1 + tools/Run-PadFlowLive.ps1",
+      "evidence": "evidence/t09-wait1-acceptance-20260912.json"
+    },
+    {
+      "id": "normal-chat-finalc-20260912-acceptance",
+      "date": "2026-09-12",
+      "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension) plus PAD UI Automation",
+      "model": "Think Deeper",
+      "bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089",
+      "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+      "cases": [
+        "knowledge_precheck",
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10",
+        "independent_T01",
+        "independent_T04",
+        "independent_T10",
+        "negative_suite"
+      ],
+      "scope": "Final version after the WAIT unit fix: full instruction body + same-version bundle per new chat; unmodified PAD paste, recopy, two runs, fixed expectations. All cases passed first generation (T04 included).",
+      "current_package_acceptance": true,
+      "execution_status": "complete_live_acceptance_finalc_20260912",
+      "manifest": "../copilot/knowledge-bundle-manifest-20260912c.json",
+      "evidence": "evidence/current-package-status-20260912-finalc.json; evidence/issue5-completion-audit-20260912-finalc.json"
     }
   ],
   "application_integration": {

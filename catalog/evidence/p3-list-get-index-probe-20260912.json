@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T01:33:30+09:00",
+  "status": "PASS_PROBE_TYPED_INDEX_2_RUNS",
+  "missing_item": "A-list-create-add-get",
+  "scope": "Synthetic list-item retrieval probe in a newly created dedicated flow. Base actions are captured raws; the retrieval expression was typed into the 変数の設定 dialog because the variable picker offers no per-item entry.",
+  "environment": {"pad_package_version": "11.2608.115.0", "language": "ja-JP", "power_fx": false, "flow": "RobinKnowledgeP3ListGet_20260912", "designer_process_id": 32500, "action_count": 4},
+  "base": {"composed_from": ["catalog/actions/variables-create-new-list/default.robin", "catalog/actions/variables-add-item-to-list/default.robin (literal CatalogItem)", "same add action with the literal changed to SecondItem"], "pasted": true, "action_count_after_paste": 3},
+  "picker_observation": "In the 変数の設定 dialog, the {x} picker for the list variable CatalogList expanded to a single child '.Count'. No index/item entry is offered by the picker.",
+  "dialog_input": "Selected CatalogList from the picker (inserted %CatalogList%), then typed [0] before the closing % so the value read %CatalogList[0]%. Designer accepted it and displayed 変数 NewVar に値 CatalogList [0] を割り当てる with no error.",
+  "raw": {"path": "catalog/evidence/p3-list-get-index-probe-20260912.robin", "sha256": "bdb98da7bbbd77aa1c92dc7eb7f806e255373dd233125ae8ed5690459bccc75d", "copied_from_pad": true, "clipboard_restored": true, "line_of_interest": "SET NewVar TO CatalogList[0]"},
+  "expected_fixed_before_run": {"CatalogList": "[CatalogItem, SecondItem]", "NewVar": "CatalogItem"},
+  "runs": [
+    {"evidence": "catalog/evidence/p3-list-get-index-probe-run1-20260912.json", "status": "success", "CatalogList": "[CatalogItem, SecondItem]", "NewVar": "CatalogItem"},
+    {"evidence": "catalog/evidence/p3-list-get-index-probe-run2-20260912.json", "status": "success", "CatalogList": "[CatalogItem, SecondItem]", "NewVar": "CatalogItem"}
+  ],
+  "not_verified": "Out-of-range index, negative index, last-item expressions, and using the retrieved value inside other actions were not run. The index syntax was typed, not picked; PAD validated and executed it.",
+  "reuse_in_separate_flow": false,
+  "note": "Distinguish: captured (yes, copied from PAD after dialog entry) / original flow 2 runs (yes) / separate-flow reuse (no) / knowledge integration (see 01-Basics) / Copilot generation acceptance (no)."
+}

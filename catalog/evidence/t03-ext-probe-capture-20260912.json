@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T00:54:00+09:00",
+  "case": "T03",
+  "purpose": "Capture, from the PAD Designer's real If dialog, the minimal strict file-extension condition needed by the fixed T03 request (extension equals .txt), without guessing syntax.",
+  "environment": {
+    "pad_package_version": "11.2608.115.0",
+    "language": "ja-JP",
+    "power_fx": false,
+    "flow": "RobinKnowledgeT03ExtProbe_20260912",
+    "designer_process_id": 25536,
+    "created_via": "Console UIA CreateNewFlowButton -> NewFlowNameTextBox -> OKNewFlowButton (docs/pad-live-setup.md)"
+  },
+  "base_flow": {
+    "source": "composed from captured raws catalog/actions/folder-get-files/all-files-no-subfolders.robin + LOOP FOREACH CurrentFile IN Files + catalog/actions/file-read-text/variable-path-utf8.robin + END",
+    "source_sha256": "8bae3c0bc89fa19886d4aac2c36cb789d6bb7c49c09b0a4216fdf68f09e48d2f",
+    "paste_evidence": ".work/t03-ext-probe-base-paste-20260912.json (local, action_count_after_paste=4, saved)"
+  },
+  "added_via_left_panel": [
+    {
+      "action": "条件 > If",
+      "dialog_settings": {
+        "最初のオペランド": "%CurrentFile.Extension% (selected from the variable picker: フロー > CurrentFile > .Extension; not typed)",
+        "演算子": "と等しい (=)",
+        "2 番目のオペランド": ".txt (typed literal)"
+      },
+      "designer_display": "If CurrentFile .Extension = '.txt' then"
+    },
+    {"action": "条件 > Else", "dialog_settings": "none", "inserted_inside_if": true}
+  ],
+  "variable_picker_properties_observed_for_file_variable": [".CreationTime", ".Exists", ".FullName", ".IsEmpty", ".IsHidden", ".LastModified", ".Name", ".RootPath", ".Directory", ".Extension", ".IsArchive", "(list continued below the visible area)"],
+  "raw": {
+    "path": "catalog/evidence/t03-ext-probe-capture-20260912.robin",
+    "sha256": "51e7a5a016859cadcdd0b9b09f9d7c81c46354ac12dfee7321273b3f547b9afe",
+    "bytes": 553,
+    "action_count": 7,
+    "copy_observed": true,
+    "clipboard_restored": true,
+    "captured_lines_of_interest": ["IF CurrentFile.Extension = $'''.txt''' THEN", "ELSE", "END"]
+  },
+  "note": "In this capture flow the If sits after the read action (insertion point), so it is a syntax/setting capture only. Branch behaviour is verified in the separate flow RobinKnowledgeT03ExtVerify_20260912 (see t03-ext-verify-*-20260912.json).",
+  "not_captured": "Case-insensitive comparison, .Name/.NameWithoutExtension-based checks, and boundary names such as .txt.bak were not configured or run here."
+}

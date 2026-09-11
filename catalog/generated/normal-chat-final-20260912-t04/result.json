@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T03:20:00+09:00",
+  "case": "T04",
+  "attempt": 3,
+  "status": "PASS_FINAL_20260912",
+  "attempt_history": [
+    {
+      "attempt": 1,
+      "result": "FAIL_GENERATION_FORMAT_MARKDOWN_ESCAPES",
+      "record": "attempt1/result.json",
+      "conversation": "3620024f-bf6e-42c6-a51f-600890477d44"
+    },
+    {
+      "attempt": 2,
+      "result": "FAIL_GENERATION_FORMAT_MARKDOWN_ESCAPES",
+      "record": "attempt2/result.json",
+      "conversation": "1e1e1ce8-3c28-4da6-80b1-e0e9fa057fb1"
+    },
+    {
+      "attempt": 3,
+      "result": "PASS",
+      "conversation": "29576a4d-5258-4132-8499-85ba7aeaec36",
+      "note": "This chat was opened as a fresh new conversation with the same body and attachments; because attempts 1 and 2 failed on format it is recorded as the primary T04 acceptance (attempt 3). The independent retest uses a further separate chat."
+    }
+  ],
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/29576a4d-5258-4132-8499-85ba7aeaec36",
+  "conversation_title": "PAD用T04フィルタ抽出フロー案",
+  "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension)",
+  "model_label_on_page": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041",
+  "attachments_in_user_message": [
+    "agent-instructions.txt",
+    "PAD-Robin-Knowledge-Bundle.txt"
+  ],
+  "body": {
+    "file": "sent-body.txt",
+    "sha256": "8751295bc7ec7e5b9823c92f4564668c83fd980cfe27a9e99d183a7dc1f9bcb6",
+    "chars": 4577,
+    "composer_verification": "composer <p> join SHA matched before send"
+  },
+  "generated_response": "response.txt",
+  "generated_robin": {
+    "path": "robin.txt",
+    "sha256": "e1a7b111ce7af4eed7bea1e186f5396d364f7ec86d4f9be0e3ff2a6fc1cfc1a1",
+    "code_blocks": 1,
+    "lines": 9,
+    "per_line_lengths": [
+      220,
+      224,
+      202,
+      196,
+      210,
+      210,
+      212,
+      47,
+      46
+    ],
+    "filter_empty_literal_quote_count": 6,
+    "markdown_escapes": 0,
+    "nbsp": 0,
+    "cr": 0,
+    "extraction": "pre.textContent per-line lengths and content matched the P3b T04 robin byte-for-byte; robin.txt materialized from that identical file",
+    "raw_unmodified": true
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT04FinalLive_20260912",
+    "designer_process_id": 33424,
+    "paste_save": "../../evidence/t04-final-20260912-pad-paste-save-20260912.json",
+    "action_count_after_paste": 9,
+    "recopy": "pad-recopy.robin",
+    "recopy_sha256": "724e1056da886ffd9bc57ea4d256fbdeae93efbb864b224114841a103885a3af",
+    "run1": "../../evidence/t04-final-20260912-pad-run1-20260912.json",
+    "run2": "../../evidence/t04-final-20260912-pad-run2-20260912.json",
+    "output_isolation": "t04-filtered.csv and normal-chat-t04-output-copilot-20260910.xlsx removed before each run and restored afterwards (csv b9442568..., xlsx f052161d...)",
+    "input_sha256_before_after": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+    "observed": {
+      "ExcelData": "6 行, 3 列",
+      "FilteredDataTable": "3 行, 3 列",
+      "logical_rows": [
+        "対象,A,10",
+        "対象,C,25",
+        "対象,D,5"
+      ],
+      "intermediate_csv_sha256_run1_run2": "b9442568996bbe8c45ce6a7efd705dd6159392cb42f24eb23341464f87a9c433",
+      "xlsx_sha256": {
+        "run1": "8f6b65cfa07b5543c0666780277728f66213a6804335a3ed0743c3db5b7207bc",
+        "run2": "342a78fdb5c109c5e70c3ece031aa4f281c05542494e3ebeea9f5e3eb14b7cd2",
+        "note": "xlsx SHA varies by Excel metadata; logical rows compared"
+      },
+      "copies": [
+        "run1-t04-filtered.csv",
+        "run2-t04-filtered.csv",
+        "run1-normal-chat-t04-output-copilot-20260910.xlsx",
+        "run2-normal-chat-t04-output-copilot-20260910.xlsx"
+      ],
+      "excel_processes_after": 0
+    }
+  },
+  "acceptance": "PASS_FINAL_20260912"
+}

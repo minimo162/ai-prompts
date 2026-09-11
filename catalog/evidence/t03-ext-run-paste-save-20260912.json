@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-11T15:58:23.3266697Z",
+    "flow_name":  "RobinKnowledgeT03ExtRun_20260912",
+    "source_robin":  "C:\\Users\\yuuki\\ai-prompts\\catalog\\flows\\t03-extension-branch\\capture-pad-copy-20260912.robin",
+    "source_sha256":  "c15a5970640f9d0bcb322b5655bffca3b7b84ad4a86f31c67e064d60fb9398e4",
+    "source_bytes":  813,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  13,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

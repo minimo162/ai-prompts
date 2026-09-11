@@ -1,0 +1,92 @@
+Copilot said:
+
+以下は、添付ナレッジで確認された「既存Excelを編集可能で開く」「単一セルへ書き込む」「xlsx形式で別名保存」「Excelを閉じる」のRobin原文を組み合わせたフロー案です。個々のアクション形式は実測済みですが、今回の値・パスへ置換した4アクション全体は、まだPADへの貼り付け・実行・成果物照合をしていないため、実行未確認の組み合わせとして扱います。
+
+1. 前提・対象範囲・未確認点
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\excel-catalog.xlsx
+起動設定: 編集可能、ReadOnly=False
+書き込み先: B2のみ
+書き込む値: 文字列型 T05-Changed
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t05-final.xlsx
+Excelインスタンス: ExcelInstance
+成功条件:
+出力ブックのB2がT05-Changed
+A1を含むその他のセルが入力ブックと同じ
+入力ブック自体が変更されていない
+範囲読取り、DataTable、行反復は使用しません。
+保存先に同名ファイルが存在する場合の動作は、このSaveAs原文に上書き指定が含まれていないため未確認です。初回検証では出力ファイルが存在しない状態にしてください。
+ワークシート指定引数は未採取です。入力ブックを開いたときに対象シートがアクティブであることを前提にします。ナレッジでも、シート名指定引数は未採取と記録されています。
+
+根拠環境はPAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データです。編集可能な既存Excel起動、セル書込み、OpenXmlWorkbook形式の別名保存、Excel終了の原文が収録されています。
+
+2. PADで先に確認する設定
+入力ブックと出力フォルダーが存在することを確認します。
+入力ブックをExcelなどで開いている場合は閉じます。
+出力先にnormal-chat-t05-final.xlsxが既にある場合は、初回検証では別の場所へ退避します。削除や上書きは既定動作にしません。
+PADで空の検証用フローを作成します。
+Mainサブフローの空いている位置へ、下記4行全体を貼り付けます。
+入力ブックを手動で開いたとき、変更対象のシートがアクティブになることを事前確認します。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: 空のMain、または選択した連続4アクションの範囲
+
+[code block: see robin.txt]
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T05-Changed''' Column: $'''B''' Row: 2
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t05-final.xlsx'''
+Excel.CloseExcel.Close Instance: ExcelInstance
+
+根拠の対応
+1行目: catalog/actions/excel-launch/open-editable.robin
+既存Excel
+Visible: True
+ReadOnly: False
+出力はExcelインスタンス
+2行目: Excelセル書込みの実測原文
+WriteCell
+列と行を個別指定
+文字列値を渡す形式
+3行目: Excel別名保存の実測原文
+Excel.SaveExcel.SaveAs
+Excel.ExcelFormat.OpenXmlWorkbook
+4行目: Excel終了の実測原文
+Excel.CloseExcel.Close
+
+これらの形式は、PAD-Robin-Knowledge-BundleのOffice・PDF資料と完成例に収録されています。代表的なExcel組み合わせは再貼り付け・実行・内容確認済みですが、今回のB2、T05-Changed、指定された入出力パスによる4行は未実行です。
+
+4. PADデザイナーでの確認
+
+貼り付け直後に次を確認してください。
+
+アクション数が4件である
+順序が「起動 → セル書込み → 別名保存 → 終了」である
+1件目の「Excelの起動」が既存文書を開く設定になっている
+「読み取り専用」がオフになっている
+生成変数がExcelInstanceである
+書込みアクションのインスタンスがExcelInstanceである
+値が文字列T05-Changedである
+列がB、行が数値2である
+保存形式がExcel Open XMLブック、つまり.xlsxである
+保存先が入力パスではなく、指定された出力パスである
+終了対象が同じExcelInstanceである
+デザイナー上に赤いエラー表示がない
+範囲書込み、DataTable、ループなど、意図しないアクションが追加されていない
+
+ExcelInstanceは1行目で生成してから後続3行で参照するため、Officeインスタンスと文字列変数を混同しない構成です。
+
+5. 合成データでの実行・照合
+実行前に入力ブックの複製を検証用に保管します。
+入力ブックのA1、B2、および周辺セルの値を記録します。
+出力ファイルが存在しないことを確認します。
+PADフローを保存して1回実行します。
+PADが「準備完了」に戻り、4アクションすべてを通過したことを確認します。
+出力ブックだけを開き、対象シートのB2が正確にT05-Changedであることを確認します。
+出力ブックのA1とその他の無関係なセルを、実行前の入力ブックと比較します。
+元の入力ブックを開き、B2を含めて実行前と変わっていないことを確認します。
+入力ファイルの不変確認には、可能であれば実行前後のSHA-256も比較します。
+再実行試験は、既存出力への上書き挙動が未確認なので、そのまま行いません。出力を別名で退避して出力パスを空けた後、2回目を実行して同じセル結果を照合します。
+
+確認範囲: 入力ブック全体を読み取ったり反復したりせず、明示されたB2への単一セル書込みだけを行う案です。保存後の実ファイル比較が完了するまでは、「A1を含む全セルが不変」「元ファイルが不変」を成功済みとは判定しません。
+
+ソース

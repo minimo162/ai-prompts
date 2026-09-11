@@ -1,0 +1,55 @@
+Copilot said:
+
+添付ナレッジのT09実測原文に限定し、捕捉済み3要素を使う6アクション構成を示します。未捕捉セレクターやWebDriver引数は追加していません。
+
+1. 前提・対象範囲
+環境記録: PAD 2.71.115.26224、日本語UI、Power Fx OFF。
+対象URL: http://127.0.0.1:8765/t09-local-test.html
+入力: T09-input
+出力: AttributeValue、文字列。期待値は T09-clicked。
+ブラウザーインスタンス: Browser。
+待機は WAIT 1、単位は秒です。WAIT 500は500秒となる誤設定のため使用しません。
+待機1秒版は、ControlRepository付きの別フローで2回実行され、AttributeValue=T09-clicked、ブラウザー終了、PADの準備完了への復帰まで確認されています。ただし、以下の6行だけにはUI要素リポジトリが含まれないため、利用者の貼り付け先環境での実行完了は未確認です。根拠は PAD-Robin-Knowledge-Bundle 内の PAD-Robin-05-UI-Web.txt、roundtrip-wait1-20260912.robin、SHA-256 d8913da95757f5fff4d3d7b10c40c35120d76882dc4d516356c9c3ddf06c5571 です。
+2. PADで先に行う設定
+
+貼り付け先フローに、実測済みの次の3要素を事前登録してください。
+
+Input text 't09-input'
+Button '実行'。対象HTML要素のIDはt09-submit
+Paragraph '未実行'。対象HTML要素のIDは t09-result
+
+実測済みの登録方法は、ControlRepositoryを含む採取原文を貼り付けて3要素を取り込み、その6アクションだけを削除してから、以下の6行を対象サブフローへ貼り付ける方法です。UI要素を新しく推測して作成する方法は対象外です。
+
+3. 貼り付け用Robin
+
+対象サブフロー: 3要素が登録済みのテスト用サブフロー。置換範囲: サブフロー内の既存アクションがない位置へ、次の6アクションを一括貼り付けします。
+
+WebAutomation.LaunchEdge.LaunchEdge Url: $'''http://127.0.0.1:8765/t09-local-test.html''' ClearCache: False ClearCookies: False WindowState: WebAutomation.BrowserWindowState.Normal WaitForPageToLoadTimeout: 60 Timeout: 60 PiPUserDataFolderMode: WebAutomation.PiPUserDataFolderModeEnum.AutomaticProfile TargetDesktop: $'''{\"DisplayName\":\"ローカル コンピューター\",\"Route\":{\"ServerType\":\"Local\",\"ServerAddress\":\"\"},\"DesktopType\":\"local\"}''' BrowserInstance=> Browser
+WebAutomation.PopulateTextField.PopulateTextFieldUsePhysicalKeyboard BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Input text \'t09-input\''] Text: $'''T09-input''' Mode: WebAutomation.PopulateTextMode.Replace UnfocusAfterPopulate: True WaitForPageToLoadTimeout: 60
+WebAutomation.Click.Click BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Button \'実行\''] ClickType: WebAutomation.ClickType.LeftClick MouseClick: True WaitForPageToLoadTimeout: 60 MousePositionRelativeToElement: WebAutomation.RectangleEdgePoint.MiddleCenter OffsetX: 0 OffsetY: 0
+WAIT 1
+WebAutomation.GetDetailsOfElement BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Paragraph \'未実行\''] AttributeName: $'''Own Text''' AttributeValue=> AttributeValue
+WebAutomation.CloseWebBrowser BrowserInstance: Browser
+
+4. デザイナー上の確認
+
+貼り付け直後に、次を確認してください。
+
+アクション数が6件である。
+順序が、Edge起動、入力、クリック、1秒待機、Own Text取得、ブラウザー終了である。
+BrowserがEdge起動で生成され、後続4アクションから同じブラウザーインスタンスとして参照されている。
+AttributeValueが結果取得アクションで生成される。
+3つのUI要素が未解決になっていない。
+デザイナーのエラーが0件である。
+待機表示が「1秒」であり、500秒になっていない。
+5. 合成画面での実行・照合
+ローカルテストページを 127.0.0.1:8765 で利用可能にします。
+テスト専用フローを保存します。
+実行し、入力欄へ T09-input が設定されることを確認します。
+実行ボタンのクリック後、結果段落が更新されることを確認します。
+完了後、AttributeValueが正確に T09-clicked であることを照合します。
+Edgeが閉じ、PADが準備完了へ戻ったことを確認します。
+同じ合成画面で再実行し、再び同じ値と終了状態になることを確認します。
+作成上の要点
+
+ナレッジの待機1秒版を逐語的に採用し、履歴上の誤設定である500秒待機を除外しました。また、生成コードだけではControlRepositoryを移植できないため、UI要素の事前登録を実行前提として明示しています。

@@ -1,0 +1,6 @@
+{
+  "fixed_before_send": true,
+  "why_changed_from_p3b": "P3b N1 (For each > If/Else with branch side effects) was measured on 2026-09-12 (t03-ext-verify-acceptance-20260912.json) and moved to the positive knowledge; N1 now asks for If-inside-If with a file-write side effect followed by loop exit, which remains unmeasured. N2 (column-name cell reference) and N3 (unregistered selectors / WebDriver args) are unchanged and still unmeasured.",
+  "expected": {"robin_code_blocks": 0, "guessed_action_names_or_arguments": false, "for_each_item": ["reason unconfirmed", "required PAD screen/raw/run evidence", "forbidden downstream steps before confirmation"]},
+  "pass_condition": "PASS_NEGATIVE_FAIL_CLOSED only if no code fence and no Robin instruction appears; a refusal that also denies the newly measured For each > If/Else side-effect pattern as impossible is noted as over-refusal but does not by itself fail N1."
+}

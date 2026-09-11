@@ -74,3 +74,9 @@ PDFカテゴリの5種類・11設定例を追加しました。テキスト・�
 Final3固定版の成果を保全したうえで、DataTable行追加・セル更新・行反復とExcel行反復の専用probe成功を7原本へ統合した。新bundle SHA-256は `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5`、マニフェストは `../copilot/knowledge-bundle-manifest-20260911h.json`。指示全文＋同版bundleの通常チャット知識precheckはPASS_REFERENCE_ONLY、T01〜T10のPAD受入は未実行で、旧版PASSは継承しない。
 
 T09別空フロー `RobinKnowledgeT09Separate_20260911` は6アクションの貼付け・保存まで成功したが、UI要素ピッカーはEdge Window/Paneしか列挙せず、入力・実行ボタン・結果段落を登録できなかった。エラー3件・Start無効・Run未開始で、LaunchEdge単独フローの完了はT09通し成功へ拡張していない。詳細は `evidence/t09-separate-ui-registration-20260911.json`。
+
+## 2026-09-12 最終版（finalc）受入とT09待機値の修正
+
+T09の採取原文 `flows/ui-t09-local-roundtrip/roundtrip.robin` の `WAIT 500` は、PADの待機アクションが秒単位のため500秒待っていた（2026-09-10採取時の500ミリ秒のつもりの誤設定。利用者の指摘で判明）。PADへ貼り付けた同原文の待機ダイアログで期間を1へ変更・保存・再コピーした `roundtrip-wait1-20260912.robin`（4行目のみ `WAIT 1`、他5行は同一）を新しい空フロー `RobinKnowledgeT09Wait1_20260912` で2回実行し、いずれも数秒で `AttributeValue=T09-clicked` とブラウザー終了を確認した（`evidence/t09-wait1-acceptance-20260912.json`、`actions/wait/t09-1s.robin`）。原本の `roundtrip.robin` と `actions/wait/t09-500ms.robin` は履歴として保全している。
+
+この修正を含む最終版bundle `f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089`（`../copilot/knowledge-bundle-manifest-20260912c.json`）で、通常M365 Copilotチャット（Google Chrome、Think Deeper、指示全文＋同版bundle添付）の知識precheck、T01〜T10、独立再試験T01/T04/T10、負例N1〜N3を同一版で受入した。T09は生成6行が `WAIT 1` となり、要素取り込み後の無修正貼付け・2回実行で `T09-clicked` を確認（`evidence/t09-finalc-20260912-live-acceptance-20260912.json`）。T08は名前付きFileNotFound＋既定ハンドラーの9行が生成され、既定経路で期待エラーを確認（名前付き一致は未確認のまま）。正本は `evidence/current-package-status-20260912-finalc.json`、`evidence/issue5-completion-audit-20260912-finalc.json`。直前版 `32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041` の受入（T09は500秒待機で2回完了）は `evidence/current-package-status-20260912-final.json` に superseded として保全した。

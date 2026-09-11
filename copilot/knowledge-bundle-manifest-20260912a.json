@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-12T01:05:00+09:00",
+  "bundle_path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+  "bundle_sha256": "1f5c47f5d755114bb1714587eac6dface00f15b6e0ca49b35e573e110e23f620",
+  "bundle_bytes": 86659,
+  "source_files": [
+    {
+      "path": "copilot/knowledge/PAD-Robin-00-Index.txt",
+      "sha256": "174d42db4e272fe45880aa599ab9737dad971256eb0cfd41236d133bc09b41c8",
+      "bytes": 12854
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-01-Basics.txt",
+      "sha256": "b28624c163105139ac97f5b3d452a07439f848189544906353dec2c3f9f48777",
+      "bytes": 8058
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-02-Control.txt",
+      "sha256": "22f497402581189458da0a8a3394bfab52f9714d568c67bb20ae8556ceccd363",
+      "bytes": 8879
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-03-Files.txt",
+      "sha256": "92d63086c07b4ea73dd9d39141bb331e93581cf38fc4f5f1521ff6df35fffff4",
+      "bytes": 23531
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-04-Office-PDF.txt",
+      "sha256": "f7e8e09f862f8324f1d7f8805fefa3081ec148ef88e4ce397a223ca13f2d9b80",
+      "bytes": 16079
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-05-UI-Web.txt",
+      "sha256": "6212e1705748b616d556b510d8a75308ef4b677261c28cb467ed7a63b8799009",
+      "bytes": 4914
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-06-Examples.txt",
+      "sha256": "c1267f3574c01e436f23d9e116ffb11d806fe05f5ab8c8527d320103b2ef82d8",
+      "bytes": 10787
+    }
+  ],
+  "instruction_path": "copilot/agent-instructions.txt",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "change_note": "2026-09-12 local working version: T03 strict extension condition (.Extension = .txt), Else path, IncreaseVariable variable-reference correction, nested For each/If branch side effects. Instruction text unchanged. Not the final version until T09/P3 changes are settled.",
+  "rebuild_command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/Build-KnowledgeBundle.ps1 -Root C:/Users/yuuki/ai-prompts"
+}

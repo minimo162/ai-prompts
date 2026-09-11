@@ -1,5 +1,30 @@
 # 通常M365 Copilotチャット受入試験 T01〜T10（継続中）
 
+## 現行最終版（2026-09-12、finalc-20260912）
+
+指示文 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`／bundle `f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089`（マニフェスト `copilot/knowledge-bundle-manifest-20260912c.json`）を同一版として固定しました。直前版 `32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041` との差分はT09教材の待機値のみです（`WAIT 500`＝500秒は2026-09-10採取時の500ミリ秒のつもりの誤設定。待機ダイアログで1秒へ直した再採取原文 `WAIT 1` を教材にし、2回実行で数秒完了を確認）。
+
+受入はすべて、通常のM365 Copilotチャット（Google Chrome、Claude in Chrome拡張で操作、モデル表示 Think Deeper）で新規会話ごとに指示全文を本文へ入力し、同版bundleと`agent-instructions.txt`（T10はbundleとT10文脈結合版 `b1330a10…`）を実添付して行いました。本文は送信前にSHA-256で全文一致を確認しています。生成Robinは無修正で専用PADフロー（`RobinKnowledge*FinalC_20260912`）へ貼付け・保存・再コピーし、2回実行して固定期待値と照合しました。T09の依頼文だけは `WAIT 500` を指定する文言を「ナレッジで確認済みの待機（`WAIT`、単位は秒）」へ改め、期待値（`AttributeValue=T09-clicked`、ブラウザー終了）は変えていません。
+
+| ケース | 最終版判定 | 生成回数 | 証跡 |
+| --- | --- | --- | --- |
+| 知識プレチェック | PASS_REFERENCE_ONLY（Robinなし。T03拡張子、T09の待機1秒再採取と要素取り込み、リスト添字を正しく参照） | 1 | `catalog/generated/normal-chat-finalc-20260912-precheck/`、`catalog/evidence/current-bundle-finalc-precheck-20260912.json` |
+| T01 | PASS（出力90 bytes SHA `2b030f2d…`、入力不変） | 1 | `catalog/evidence/t01-finalc-20260912-live-acceptance-20260912.json` |
+| T02 | PASS（ヘッダー＋Status=対象2行、SHA `8f0748cc…`、入力不変） | 1 | `catalog/evidence/t02-finalc-20260912-live-acceptance-20260912.json` |
+| T03 | PASS（13行、`.Extension = '.txt'`、TxtCount=2／OtherCount=2、入力4件不変） | 1 | `catalog/evidence/t03-finalc-20260912-live-acceptance-20260912.json` |
+| T04 | PASS（初回生成で形式契約を満たし、3行3列・入力SHA不変） | 1 | `catalog/evidence/t04-finalc-20260912-live-acceptance-20260912.json` |
+| T05 | PASS（B2=T05-Changed、A1他不変、入力不変） | 1 | `catalog/evidence/t05-finalc-20260912-live-acceptance-20260912.json` |
+| T06 | PASS（OfficeCatalog→T06Replaced、本文他不変、入力不変） | 1 | `catalog/evidence/t06-finalc-20260912-live-acceptance-20260912.json` |
+| T07 | PASS（PAGE_TOKEN_A2あり／A1なし、入力不変） | 1 | `catalog/evidence/t07-finalc-20260912-live-acceptance-20260912.json` |
+| T08 | PASS（期待エラー：名前付きFileNotFound＋既定ハンドラーの9行。既定経路でtrue、LastError=ファイルが見つかりません。名前付き一致は未確認のまま） | 1 | `catalog/evidence/t08-finalc-20260912-live-acceptance-20260912.json` |
+| T09 | PASS（生成6行の待機は `WAIT 1`。要素取り込み後の無修正貼付け・2回実行で `T09-clicked`、ブラウザー終了） | 1 | `catalog/evidence/t09-finalc-20260912-live-acceptance-20260912.json` |
+| T10 | PASS（16行中2行のみ変更、Excel A1=T10-Changed、Word/PowerPointは`CopilotOffice 246`保持） | 1 | `catalog/evidence/t10-finalc-20260912-live-acceptance-20260912.json` |
+| 独立再試験 T01/T04/T10 | PASS（別チャット・別PADフロー） | 各1 | `catalog/evidence/t01-finalc-20260912-independent-acceptance-20260912.json`、`t04-…`、`t10-…` |
+| 負例 N1〜N3 | PASS_NEGATIVE_FAIL_CLOSED（コードフェンス0、Robin命令0、回答全文を保存） | 1 | `catalog/evidence/negative-suite-finalc-20260912-acceptance-20260912.json` |
+
+状態の正本は `catalog/evidence/current-package-status-20260912-finalc.json` と `catalog/evidence/issue5-completion-audit-20260912-finalc.json` です。以下の節は旧版（final-20260912 `32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041`、P3b `dd668166…`、Final3 `2bc3f2b4…`、それ以前）の履歴であり、この最終版へ継承していません。
+
+
 このフォルダーは、通常のMicrosoft 365 Copilotチャットへ最新版の指示文とナレッジ結合版を添付して行う受入試験の依頼文・期待値を固定する場所です。ここにある期待値は、生成回答に合わせて後から変更してはいけません。
 
 ## 実行前提

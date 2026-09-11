@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T02:40:00+09:00",
+  "case": "T06",
+  "status": "PASS_FINAL_20260912",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/4cbaa3ba-9a6f-4ea6-b6a6-8a43a72bcc79",
+  "conversation_title": "PAD用Word文字列置換フロー案作成",
+  "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension)",
+  "model_label_on_page": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041",
+  "attachments_in_user_message": [
+    "agent-instructions.txt",
+    "PAD-Robin-Knowledge-Bundle.txt"
+  ],
+  "body": {
+    "file": "sent-body.txt",
+    "sha256": "c24241f8c51e1bd14183b5be004bf372454141eebe6670689223a27f3d3d2ba8",
+    "chars": 4402,
+    "composer_verification": "composer <p> join SHA matched before send"
+  },
+  "generated_response": "response.txt",
+  "generated_robin": {
+    "path": "robin.txt",
+    "sha256": "c0940cb3e3ddbd82880d274692858ce3e2335f623acb11abe521926e642f9fd9",
+    "code_blocks": 1,
+    "lines": 4,
+    "per_line_lengths": [
+      169,
+      191,
+      186,
+      43
+    ],
+    "markdown_escapes": 0,
+    "nbsp": 0,
+    "cr": 0,
+    "extraction": "pre.textContent per-line lengths and content matched the P3b T06 robin byte-for-byte; robin.txt materialized from that identical file",
+    "raw_unmodified": true
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT06FinalLive_20260912",
+    "designer_process_id": 34356,
+    "paste_save": "../../evidence/t06-final-20260912-pad-paste-save-20260912.json",
+    "action_count_after_paste": 4,
+    "recopy": "pad-recopy.robin",
+    "recopy_sha256": "724df76ba2b1be6b602dc18300b259267a41e19eabcd7158e08ae5e722c0ca73",
+    "run1": "../../evidence/t06-final-20260912-pad-run1-20260912.json",
+    "run2": "../../evidence/t06-final-20260912-pad-run2-20260912.json",
+    "output_isolation": "protected normal-chat-t06-final.docx moved aside before each run and restored afterwards (sha 1f0325d314b2f35d98ec9b2cceb2fd740a03a0a5ce64b7858e7b9a98dafc15de)",
+    "input_sha256_before_after": "2753855b1e6b7b8dccc857cb60ad1f9bf548908fbd10fea8dc8efa2ff8003cbd",
+    "outputs": {
+      "run1": {
+        "OfficeCatalog_count": 0,
+        "T06Replaced_count": 1,
+        "equals_input_with_replacement": true,
+        "text_preview": "T06Replaced 日本語 100%",
+        "sha256": "0f9e2428f34fadf6edce21b6b97fc65f6ad79695e480fb76cb035822257bc75d"
+      },
+      "run2": {
+        "OfficeCatalog_count": 0,
+        "T06Replaced_count": 1,
+        "equals_input_with_replacement": true,
+        "text_preview": "T06Replaced 日本語 100%",
+        "sha256": "03cbd36abd53eec44b8e28246ff5167f501d51cbf5960d0ca9fdcecd4d2250b5"
+      }
+    },
+    "expected": {
+      "OfficeCatalog_count": 0,
+      "T06Replaced_count": ">=1",
+      "equals_input_with_replacement": true
+    },
+    "word_processes_after": 0
+  },
+  "acceptance": "PASS_FINAL_20260912"
+}

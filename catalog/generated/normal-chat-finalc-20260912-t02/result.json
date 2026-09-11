@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T06:22:20+09:00",
+  "case": "T02",
+  "status": "PASS_FINALC_20260912",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/7c5a68ff-8161-4fa3-8c3a-330f61d83198",
+  "conversation_title": "PADでCSVフィルター保存フロー案",
+  "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension)",
+  "model_label_on_page": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089",
+  "bundle_manifest": "copilot/knowledge-bundle-manifest-20260912c.json",
+  "attachments_in_user_message": [
+    "agent-instructions.txt",
+    "PAD-Robin-Knowledge-Bundle.txt"
+  ],
+  "body": {
+    "file": "sent-body.txt",
+    "sha256": "177ae198c232420c6fdd9ac9ecfe92962f13c7a738fa0f66f76cf41c7f8e3af7",
+    "chars": 4330,
+    "composer_verification": "SHA-256 of composer <p> textContent (aria-hidden cursor span excluded) joined by \n matched the body file before send"
+  },
+  "generated_response": "response.txt",
+  "generated_robin": {
+    "path": "robin.txt",
+    "sha256": "c3027cfaa13e191b0e784fb3a6db4c573f8bfc83fb172d1a6394d7c1f5a55c29",
+    "code_blocks": 1,
+    "lines": 3,
+    "per_line_lengths": [
+      282,
+      201,
+      327
+    ],
+    "filter_empty_literal_quote_count": 6,
+    "nbsp": 0,
+    "zero_width": 0,
+    "cr": 0,
+    "extraction": "pre.textContent (single pre, 3 lines 282/201/327, nbsp 0, markdown escapes 0) SHA-256 11f370b0… equals the final-20260912 T02 robin without trailing newline; robin.txt materialized from that identical file",
+    "raw_unmodified": true
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT02FinalC_20260912",
+    "designer_process_id": 46084,
+    "paste_save": "../../evidence/t02-finalc-20260912-pad-paste-save-20260912.json",
+    "action_count_after_paste": 3,
+    "recopy": "pad-recopy.robin",
+    "recopy_sha256": "b075a7f85928bd2ecebb5d21be81e04c84d613466f3307e2e051909f85fc5aee",
+    "run1": "../../evidence/t02-finalc-20260912-pad-run1-20260912.json",
+    "run2": "../../evidence/t02-finalc-20260912-pad-run2-20260912.json",
+    "input_sha256_before_after": "3aededf42b8bb2be71091c7cc6ed1295f1860a8450744d8779fbc8cabf6eed28",
+    "output": {
+      "expected_sha256": "8f0748cc4d149228331dfacc0a5c46e117270a7e9dee564c4f631924142cf7d3",
+      "run1_sha256": "8f0748cc4d149228331dfacc0a5c46e117270a7e9dee564c4f631924142cf7d3",
+      "run2_sha256": "8f0748cc4d149228331dfacc0a5c46e117270a7e9dee564c4f631924142cf7d3",
+      "bytes": 73,
+      "utf8_bom": true,
+      "logical_rows": [
+        "ID,Name,Status",
+        "1,\"日本語,引用\",対象",
+        "3,\"二重\"\"引用\",対象"
+      ],
+      "copies": [
+        "run1-output.csv",
+        "run2-output.csv"
+      ]
+    },
+    "protected_output_restored": true
+  },
+  "acceptance": "PASS_FINALC_20260912"
+}

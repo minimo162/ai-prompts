@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "captured_on": "2026-09-12",
+  "status": "complete_live_acceptance",
+  "issue_state": "OPEN",
+  "package": {
+    "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089",
+    "bundle_manifest": "copilot/knowledge-bundle-manifest-20260912c.json"
+  },
+  "p4_current_bundle": {
+    "status": "COMPLETE_SAME_VERSION_ACCEPTANCE",
+    "knowledge_precheck": "PASS_REFERENCE_ONLY",
+    "knowledge_precheck_evidence": "evidence/current-bundle-finalc-precheck-20260912.json",
+    "accepted_cases": [
+      "T01",
+      "T02",
+      "T03",
+      "T04",
+      "T05",
+      "T06",
+      "T07",
+      "T08",
+      "T09",
+      "T10"
+    ],
+    "case_results": {
+      "knowledge_precheck": {
+        "status": "PASS_REFERENCE_ONLY",
+        "evidence": "evidence/current-bundle-finalc-precheck-20260912.json",
+        "bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089"
+      },
+      "T01": {
+        "status": "PASS_FINALC_20260912",
+        "evidence": "evidence/t01-finalc-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089"
+      },
+      "T02": {
+        "status": "PASS_FINALC_20260912",
+        "evidence": "evidence/t02-finalc-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089"
+      },
+      "T03": {
+        "status": "PASS_FINALC_20260912",
+        "evidence": "evidence/t03-finalc-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089"
+      },
+      "T04": {
+        "status": "PASS_FINALC_20260912",
+        "evidence": "evidence/t04-finalc-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089"
+      },
+      "T05": {
+        "status": "PASS_FINALC_20260912",
+        "evidence": "evidence/t05-finalc-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089"
+      },
+      "T06": {
+        "status": "PASS_FINALC_20260912",
+        "evidence": "evidence/t06-finalc-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089"
+      },
+      "T07": {
+        "status": "PASS_FINALC_20260912",
+        "evidence": "evidence/t07-finalc-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089"
+      },
+      "T08": {
+        "status": "PASS_FINALC_20260912_EXPECTED_ERROR",
+        "evidence": "evidence/t08-finalc-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089"
+      },
+      "T09": {
+        "status": "PASS_FINALC_20260912",
+        "evidence": "evidence/t09-finalc-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089"
+      },
+      "T10": {
+        "status": "PASS_FINALC_20260912",
+        "evidence": "evidence/t10-finalc-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089"
+      }
+    },
+    "independent_retests": {
+      "status": "PASS_FINALC_INDEPENDENT",
+      "cases": [
+        "T01",
+        "T04",
+        "T10"
+      ],
+      "results": {
+        "T01": "evidence/t01-finalc-20260912-independent-acceptance-20260912.json",
+        "T04": "evidence/t04-finalc-20260912-independent-acceptance-20260912.json",
+        "T10": "evidence/t10-finalc-20260912-independent-acceptance-20260912.json"
+      }
+    },
+    "negative_suite": {
+      "status": "PASS_NEGATIVE_FAIL_CLOSED",
+      "evidence": "evidence/negative-suite-finalc-20260912-acceptance-20260912.json"
+    },
+    "t08": {
+      "status": "PASS_FINALC_20260912_EXPECTED_ERROR",
+      "named_FileNotFound_match": "UNCONFIRMED"
+    },
+    "t09": {
+      "status": "PASS_FINALC_20260912",
+      "evidence": "evidence/t09-finalc-20260912-live-acceptance-20260912.json",
+      "wait_line": "WAIT 1"
+    }
+  },
+  "p5": {
+    "status": "PASS_LOCAL_STATIC_COMPLETE_LIVE",
+    "issue_close": false,
+    "static_check": "evidence/current-package-static-check-20260912-finalc.json"
+  },
+  "p3": {
+    "measured_20260912": [
+      "T03 strict extension (.Extension = .txt) + Else, 13-line and 7-line forms, 2 runs each",
+      "For each > If/Else branch side effects (SET + IncreaseVariable)",
+      "IncreaseVariable variable-reference correction",
+      "list item retrieval by typed index (CatalogList[0]), 2 runs",
+      "T09 WebAutomation end-to-end; WAIT unit is seconds; WAIT 500 (a 500 ms intent) re-captured as WAIT 1 via the Wait dialog and run twice (t09-wait1-acceptance-20260912.json); element import via captured repository"
+    ],
+    "still_unconfirmed": [
+      "custom date format (PAD internal exception boundary)",
+      "named custom error FileNotFound match",
+      "If inside If, nested loops",
+      "list index other than 0, separate-flow reuse of the list probe",
+      ".TXT / .txt.bak / subfolder boundaries",
+      "SaveAs collision behaviour",
+      "T09 with other URLs/elements/browsers or a disabled Edge extension"
+    ]
+  },
+  "remaining": [
+    "P3: custom date format, named custom error, If-inside-If, list index beyond 0, boundary names",
+    "Agent Builder registration/search/instruction adherence not verified (out of scope)",
+    "knowledge .txt files carry CRLF in the working tree (HEAD is LF); byte-identical to the tested bundle, cosmetic"
+  ],
+  "result": "Final version f42f5acf: knowledge precheck, T01-T10, independent T01/T04/T10 and the negative suite are all accepted on the same version."
+}

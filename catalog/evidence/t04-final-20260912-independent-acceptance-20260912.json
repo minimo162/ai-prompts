@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T03:35:00+09:00",
+  "case": "T04",
+  "independent_retest": true,
+  "status": "PASS_FINAL_20260912_INDEPENDENT",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/5d0f8fac-6482-41ff-a63d-eb8bec4c38a7",
+  "conversation_title": "T04 Excel抽出フロー生成",
+  "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension), separate new chat",
+  "model_label_on_page": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041",
+  "attachments_in_user_message": [
+    "agent-instructions.txt",
+    "PAD-Robin-Knowledge-Bundle.txt"
+  ],
+  "body": {
+    "file": "sent-body.txt",
+    "sha256": "8751295bc7ec7e5b9823c92f4564668c83fd980cfe27a9e99d183a7dc1f9bcb6",
+    "chars": 4577,
+    "composer_verification": "composer <p> join SHA matched before send"
+  },
+  "generated_response": "response.txt",
+  "generated_robin": {
+    "path": "robin.txt",
+    "sha256": "e1a7b111ce7af4eed7bea1e186f5396d364f7ec86d4f9be0e3ff2a6fc1cfc1a1",
+    "code_blocks": 1,
+    "lines": 9,
+    "per_line_lengths": [
+      220,
+      224,
+      202,
+      196,
+      210,
+      210,
+      212,
+      47,
+      46
+    ],
+    "filter_empty_literal_quote_count": 6,
+    "markdown_escapes": 0,
+    "nbsp": 0,
+    "extraction": "pre.textContent per-line lengths identical to the primary T04 attempt-3 answer; robin.txt materialized from that identical text",
+    "raw_unmodified": true
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT04FinalIndep_20260912",
+    "designer_process_id": 33688,
+    "paste_save": "../../evidence/t04-final-20260912-independent-pad-paste-save-20260912.json",
+    "action_count_after_paste": 9,
+    "recopy": "pad-recopy.robin",
+    "recopy_sha256": "724e1056da886ffd9bc57ea4d256fbdeae93efbb864b224114841a103885a3af",
+    "run1": "../../evidence/t04-final-20260912-independent-pad-run1-20260912.json",
+    "run2": "../../evidence/t04-final-20260912-independent-pad-run2-20260912.json",
+    "input_sha256_before_after": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+    "observed": {
+      "ExcelData": "6 行, 3 列",
+      "FilteredDataTable": "3 行, 3 列",
+      "logical_rows": [
+        "対象,A,10",
+        "対象,C,25",
+        "対象,D,5"
+      ],
+      "intermediate_csv_sha256": "b9442568996bbe8c45ce6a7efd705dd6159392cb42f24eb23341464f87a9c433"
+    },
+    "output_isolation": "protected outputs removed before each run and restored afterwards",
+    "excel_processes_after": 0
+  },
+  "acceptance": "PASS_FINAL_20260912_INDEPENDENT"
+}

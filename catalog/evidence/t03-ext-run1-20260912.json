@@ -1,0 +1,17 @@
+{
+    "schema_version":  1,
+    "observed_at":  "2026-09-11T15:58:38.5432373Z",
+    "flow_name":  "RobinKnowledgeT03ExtRun_20260912",
+    "run_status":  "success",
+    "ready_observed":  true,
+    "start_enabled_after":  true,
+    "variable_previews":  [
+                              "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files\\t03-gamma.md",
+                              "alpha 日本語  ",
+                              "[C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files\\copy-input-20260909.txt,  ...]",
+                              "2",
+                              "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files\\t03-gamma.md",
+                              "2",
+                              "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files\\t03-alpha.txt"
+                          ]
+}

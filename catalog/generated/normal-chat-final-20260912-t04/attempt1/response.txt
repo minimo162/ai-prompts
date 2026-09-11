@@ -1,0 +1,55 @@
+Copilot said:
+推論が 4 ステップで完了しました
+
+T04現行bundle向けに、実測済み9アクション系列を保ち、出力先だけを指定名へ置換した貼り付け案です。新しい出力名での貼り付け・実行は未確認なので、過去の実測成功と今回の静的再生成を分けて記載します。
+
+1. 前提・対象範囲・未確認点
+環境根拠: PAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データです。根拠はPAD-Robin-Knowledge-Bundleの索引とT04技術資料です。
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\t04-filter-input.xlsx。読み取り専用で開き、アクティブなDataシートのA1:C6だけをTypedValuesで読み取ります。シート名を指定するRobin引数は未採取なので追加していません。
+抽出: 実測系列の列インデックス0を対象と比較します。入力範囲の列順はStatus、Item、Amountで、期待行はA、C、Dに対応する3行です。
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t04-output-copilot-20260910.xlsx。
+中間CSV: C:\Users\yuuki\ai-prompts\catalog\evidence\t04-filtered.csv。UTF-8、追記なし、既存内容を上書きします。
+入力の確認済みSHA-256: 1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0。過去の2回の実測では入力不変が確認されています。
+今回はPADを実行していません。実測済み原文から変更したのは、xlsxの最終保存先だけです。指定出力が既に存在する場合のSaveAs衝突動作は、この根拠では確認できないため、実行前に既存ファイルがないことを確認してください。
+2. PADで先に確認する設定
+貼り付け先は空のMainサブフロー、または置換対象を明確にしたサブフローにします。
+入力ブックをExcelで開き、Dataシートをアクティブにした状態で保存して閉じてください。シート選択命令は今回の9行に含めません。
+指定出力xlsxが存在しないことを確認します。既存ファイルの削除や無断上書きは、このフロー案に追加していません。
+ExcelInstance、ExcelData、FilteredDataTable、CSVText、ExcelInstance2は各先行アクションの出力として生成されるため、事前の手動変数作成は不要です。
+3. 貼り付け用Robin
+
+対象サブフロー: Main。空のMainへ全9行を貼り付けるか、既存MainのT04処理範囲だけを全置換してください。
+
+[code block as rendered on the page — contains Markdown escapes]
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\t04-filter-input.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=\> ExcelInstance
+Excel.ReadFromExcel.ReadCells Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 EndColumn: $'''C''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=\> ExcelData
+Variables.FilterDataTable DataTable: ExcelData FilterParameters: { ^\['RULE', 'COLUMN', 'OPERATOR', 'VALUE'\], \[$'''''', 0, $'''Equal''', $'''対象'''\] } MatchCase: True FilteredDataTable=\> FilteredDataTable
+Variables.ConvertDataTableToCSV.DataTableToCSVCommonSeparator DataTable: FilteredDataTable IncludeColumnNames: False ColumnsSeparator: Variables.CSVColumnsSeparator.SystemDefault CSVText=\> CSVText
+File.WriteText File: $'''C:\Users\yuuki\ai-prompts\catalog\evidence\t04-filtered.csv''' TextToWrite: CSVText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\Users\yuuki\ai-prompts\catalog\evidence\t04-filtered.csv''' Visible: True ReadOnly: False UseMachineLocale: False Instance=\> ExcelInstance2
+Excel.SaveExcel.SaveAs Instance: ExcelInstance2 DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t04-output-copilot-20260910.xlsx'''
+Excel.CloseExcel.Close Instance: ExcelInstance2
+Excel.CloseExcel.Close Instance: ExcelInstance
+
+根拠原文はcatalog/flows/excel-t04-filter-to-workbook/roundtrip.robinです。元の9アクションはPADからコピーされ、別フローへの再貼り付け後に2回実行され、3行3列の出力と入力SHA不変が照合されています。今回の最終出力名への置換版は静的確認のみです。
+
+4. デザイナー上の確認
+アクション数が9で、順序が「入力Excel起動、範囲読取り、FilterDataTable、CSV変換、中間CSV保存、CSVを別Excelで起動、xlsx SaveAs、ExcelInstance2終了、ExcelInstance終了」になっていることを確認します。
+入力Excelの起動はReadOnly=True、出力側CSVの起動はReadOnly=Falseです。
+ExcelDataとFilteredDataTableがデータテーブル、CSVTextがテキスト、ExcelInstanceとExcelInstance2が別々のExcelインスタンスとして認識されていることを確認します。
+FilterParameters行の空文字が$''''''、列が0、演算子がEqual、値が対象のままであることを確認します。
+デザイナーにエラーがある場合は実行せず、エラー全文、該当アクション、直前の変数、PAD版を記録してください。
+5. 合成データでの実行・照合
+実行直前に入力xlsxのSHA-256を記録し、上記確認済み値と一致することを確認します。
+フローを保存して実行します。
+出力ブックを開き、3行3列で、行内容が対象 / A / 10、対象 / C / 25、対象 / D / 5であることを論理照合します。xlsxのファイルSHAはメタデータ差で変わり得るため、セル値と行数で確認します。
+実行後に入力xlsxのSHA-256を再計算し、実行前と一致することを確認します。
+再実行は、既存の最終出力xlsxを退避または別名化してから行います。中間CSVは確認済み設定により上書きされます。
+
+原文を保存しました。
+
+回答全文TXT
+
+Robin原文TXT
+
+ソース

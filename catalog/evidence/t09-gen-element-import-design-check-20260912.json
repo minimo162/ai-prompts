@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T01:30:30+09:00",
+  "case": "T09",
+  "status": "PASS_DESIGN_TIME_ELEMENTS_IMPORTED_RUN_PENDING",
+  "purpose": "Verify a registration path for the three Web UI elements that a Copilot-generated Robin cannot carry: import them by pasting the captured raw (with ControlRepository), delete those actions, then paste the generated 6 lines.",
+  "flow": {"name": "RobinKnowledgeT09Gen_20260912", "designer_process_id": 30240, "created_via": "Console UIA (new empty flow)"},
+  "steps": [
+    {"step": 1, "action": "paste catalog/flows/ui-t09-local-roundtrip/roundtrip.robin (sha 93576858..., includes ControlRepository)", "evidence": "catalog/evidence/t09-gen-repo-import-paste-20260912.json", "result": "6 actions, saved"},
+    {"step": 2, "action": "select all actions (ctrl+a) and press Delete in the Designer; save", "result": "0 actions, status 準備完了, saved"},
+    {"step": 3, "action": "paste catalog/generated/normal-chat-current-bundle-final3-t09-live-20260911/robin.txt (Copilot-generated 6 lines, sha 7d391e82..., no ControlRepository)", "evidence": "catalog/evidence/t09-gen-final3-robin-paste-20260912.json", "result": "6 actions, saved, status 準備完了, no error markers on actions 2/3/5 (Input text 't09-input', Button '実行', Paragraph '未実行' resolved)"}
+  ],
+  "comparison": "In t09-separate-ui-registration-20260911.json the same generated lines pasted into a fresh flow produced 3 'UI 要素 ... が見つかりません' errors and Start disabled. After the repository import, the same lines resolve without errors.",
+  "run": "Not yet executed here; the diagnostic flow RobinKnowledgeT09Repo_20260912 was still executing its second run (Edge in use). Execution of this flow is recorded separately.",
+  "note": "The generated Robin used here is the Final3-era output (diagnostic). Acceptance on the final version uses a freshly generated answer from a new normal M365 chat."
+}

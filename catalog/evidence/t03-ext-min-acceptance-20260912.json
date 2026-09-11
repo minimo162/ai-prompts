@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T01:02:00+09:00",
+  "case": "T03",
+  "status": "PASS_PROBE_SEPARATE_FLOW_2_RUNS_MINIMAL_FORM",
+  "purpose": "Run the minimal 7-line form (GetFiles * -> FOREACH -> IF .Extension = .txt -> ReadText -> ELSE (empty) -> END -> END) composed only from PAD-captured raw lines, in a separate empty flow, twice.",
+  "flow": {"name": "RobinKnowledgeT03ExtMin_20260912", "designer_process_id": 9204, "created_via": "Console UIA (new empty flow)"},
+  "source": {"path": "catalog/flows/t03-extension-branch/minimal-source-20260912.robin", "sha256": "83f1b559c442cb79692bd36287cd86c4c31102e02fefaaeb56d16ffbf0117a4f", "bytes": 549, "line_endings": "LF", "composed_from": ["catalog/actions/folder-get-files/all-files-no-subfolders.robin", "LOOP FOREACH CurrentFile IN Files (catalog/flows/t03-folder-foreach-read/partial.robin)", "IF/ELSE/END lines from catalog/evidence/t03-ext-probe-capture-20260912.robin", "catalog/actions/file-read-text/variable-path-utf8.robin"]},
+  "paste_save": "catalog/evidence/t03-ext-min-paste-save-20260912.json",
+  "action_count_after_paste": 7,
+  "recopy": {"path": "catalog/flows/t03-extension-branch/minimal-pad-recopy-20260912.robin", "sha256": "e53c8fe55294f10a0974d2ec4c13ad242af9c3e3eefe9e5c1634ef5fe6937d50", "bytes": 557, "byte_identical_to_source": false, "line_ending_normalized_equal": true, "note": "PAD recopy uses CRLF; content is identical after CR removal. Both files are kept unmodified."},
+  "expected_fixed_before_run": {"FileContents": "alpha 日本語 (content of the last enumerated .txt)", "CurrentFile_last": "t03-gamma.md", "Files": "list starting with copy-input-20260909.txt", "no_error": true, "run1_equals_run2": true, "fixtures_unchanged": true},
+  "runs": [
+    {"evidence": "catalog/evidence/t03-ext-min-run1-20260912.json", "status": "success", "CurrentFile_last": "...\t03-gamma.md", "FileContents": "alpha 日本語  ", "Files_preview": "[...copy-input-20260909.txt,  ...]"},
+    {"evidence": "catalog/evidence/t03-ext-min-run2-20260912.json", "status": "success", "CurrentFile_last": "...\t03-gamma.md", "FileContents": "alpha 日本語  ", "Files_preview": "[...copy-input-20260909.txt,  ...]"}
+  ],
+  "fixtures_unchanged_after_runs": true,
+  "limits": "This minimal form has no per-branch counters, so branch counts are proven by the 13-line flow in t03-ext-verify-acceptance-20260912.json, not by this record alone."
+}

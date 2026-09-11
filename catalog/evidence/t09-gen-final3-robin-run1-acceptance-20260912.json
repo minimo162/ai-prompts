@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T01:45:00+09:00",
+  "case": "T09",
+  "status": "PASS_METHOD_CHECK_GENERATED_LINES_AFTER_ELEMENT_IMPORT",
+  "flow": {"name": "RobinKnowledgeT09Gen_20260912", "designer_process_id": 30240},
+  "design_check": "catalog/evidence/t09-gen-element-import-design-check-20260912.json",
+  "robin_source": {"path": "catalog/generated/normal-chat-current-bundle-final3-t09-live-20260911/robin.txt", "sha256": "7d391e821a5f13302b46b6bc47f30303a2ad3a59c62b7b191cef15888a27b6d9", "origin": "Copilot-generated (Final3 era), no ControlRepository, unmodified"},
+  "run1": {"evidence": "catalog/evidence/t09-gen-final3-robin-run1-20260912.json", "status": "success", "elapsed_seconds": 516.6, "AttributeValue": "T09-clicked", "Browser": "Web ブラウザー インスタンス"},
+  "interpretation": "A Copilot-generated 6-line T09 Robin runs to completion once the three Web UI elements have been imported into the target flow from the captured repository raw. Together with t09-repo-run1/run2 this isolates the earlier block to (a) missing UI elements in a fresh flow and (b) monitoring limits shorter than WAIT 500 seconds.",
+  "not_this": "Not the final-version generation acceptance (that uses a new normal M365 chat with the final bundle); only one run here."
+}
