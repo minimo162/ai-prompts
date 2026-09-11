@@ -16,8 +16,8 @@
   },
   "nonlive_all_suite_evidence": ".work/nonlive-01432be080494efbb983bb20defc29be/verification.json",
   "candidate_unchanged": true,
-  "live_m365": "PASS_REFERENCE_ONLY_T01_T02_T04; T03_NO_ROBIN",
-  "native_pad": "T01_T02_T04_PASS; T09_BLOCKED_UI_ELEMENT_REGISTRATION",
-  "unverified": ["new-bundle T05-T10 case acceptance", "new-bundle independent T01/T04/T10", "new-bundle negative suite", "T03 strict extension/name branch until additional PAD capture"],
-  "result": "Static/offline gates pass. Current-bundle live acceptance is partial: T01, T02, T04 accepted; T03 generated no acceptable Robin; T09 remains blocked; Issue stays OPEN."
+  "live_m365": "PASS_REFERENCE_ONLY_T01_T02_T04_T05_T06_T07_T08_T10; T03_NO_ROBIN",
+  "native_pad": "T01_T02_T04_T05_T06_T07_T08_T10_PASS; T09_BLOCKED_UI_ELEMENT_REGISTRATION",
+  "unverified": ["T03 strict extension/name branch until additional PAD capture"],
+  "result": "Static/offline gates pass. Current-bundle live acceptance is partial: T01, T02, T04-T08, and T10 accepted; T03 generated no acceptable Robin; T09 remains blocked; Issue stays OPEN."
 }

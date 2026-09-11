@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T01:20:00+09:00",
+  "case": "T01",
+  "kind": "independent_retest",
+  "status": "PASS_CURRENT_BUNDLE_INDEPENDENT",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/cf0c9e36-cd1e-441c-a443-66c6f3c790a0",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
+  "attachments_in_user_message": ["PAD-Robin-Knowledge-Bundle", "agent-instructions"],
+  "generated_robin": { "path": "catalog/generated/normal-chat-current-bundle-p3b-t01-independent-20260911/robin.txt", "sha256": "2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47", "action_count": 3 },
+  "pad": { "flow_name": "RobinKnowledgeT01P3bIndependent_20260911", "process_id": 52136, "paste": "evidence/t01-current-p3b-independent-pad-paste-20260911.json", "run": "evidence/t01-current-p3b-independent-pad-run-20260911.json" },
+  "output_comparison": { "input_sha256": "2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47", "output_sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2", "expected_sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2", "input_unchanged": true },
+  "acceptance": "PASS_CURRENT_BUNDLE_INDEPENDENT"
+}

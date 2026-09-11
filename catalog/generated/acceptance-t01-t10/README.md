@@ -25,7 +25,7 @@
 | T09 | 安全なローカル画面で文字入力→クリック→待機→文字取得 | 対象UI要素の登録手順と取得文字を明示。未確認セレクターを出さない | PARTIAL（UI要素捕捉・貼付けPASS、WebAutomation実行タイムアウト） |
 | T10 | 動作確認済み既存フローを渡し、条件1つと出力名だけ変更 | 指定変更のみ反映し、既存の入力・変数・別処理・エラー経路を保持 | PARTIAL（最終版Word SaveAsで停止、独立再試験待ち） |
 
-上表は履歴版の判定です。現作業版ではT04をPASS_CURRENT_REVISIONとし、最終配布候補の現行bundleではT01を追加でPASS_CURRENT_BUNDLEとして記録しています。T02〜T10の残りは新規通常チャットから再生成して無修正PAD貼付け・保存・実行・成果物照合まで行う必要があります。
+上表は履歴版の判定です。現行P3b bundleではknowledge precheck、T01、T02、T04〜T08、T10を`PASS_CURRENT_BUNDLE`（T08は期待エラー）として記録し、T01/T04/T10の独立再試験と負例スイートも完了しています。T03は厳密な拡張子／名前取得の原文が未採取でRobinなし、T09はUI要素登録・WebAutomation通し実行が外部依存でブロック中です。
 
 2026-09-11現在の新しい最終配布候補は、指示文 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`／bundle `61f040b900dfc90fe395f21426bc7a684c7dbf45c2ac82e38d1f00490ffc2f6b` です。T08エラー記録のPAD採取結果とT01測定済み組み合わせ参照を反映し、末尾空白の差分警告を除いた最終候補を再構築しました。前版c78fd3のT08受入は履歴として保持し、最終2版の知識precheck、T08、T01受入はこれから実施します。旧e35fa2f4／38640a／d7a0a7／c78fd3版の結果をこの候補へ継承しません。新候補の状態は `catalog/evidence/current-package-status-20260911-final2.json` と `catalog/evidence/issue5-completion-audit-20260911-final2.json` で管理します。
 
@@ -80,6 +80,12 @@ T02も同一bundle・全文指示・2添付で新規通常チャット生成を�
 T03は同一bundle・全文指示・2添付で通常チャット送信したが、厳密な拡張子／ファイル名取得と末尾`.txt`一致を未確認としてRobinコードブロックを返さなかったため、`NOT_ACCEPTED_CURRENT_BUNDLE_NO_ROBIN`とした。生成物は`catalog/generated/normal-chat-current-bundle-p3b-t03-live-20260911/`に保存し、PADフローは作成・実行していない。
 
 T04は同一bundle・全文指示・2添付で9アクションRobinを生成し、無修正で専用PADフローへ貼付け・保存・再コピー、2回実行した。Designerは9アクション（ListItem可視6件は仮想化）を示し、両回ともExcelData 6行3列、FilteredDataTable 3行3列、対象/A/10・対象/C/25・対象/D/5、入力SHA不変を確認した。出力xlsxはExcelメタデータによりSHAが変動するため論理行で照合し、直接パーサーの日本語表示は未正規化として注記した。証拠は`catalog/evidence/t04-current-p3b-live-acceptance-20260911.json`と`catalog/evidence/t04-current-p3b-pad-output-comparison-20260911.json`。
+T05は同一bundle・全文指示・2添付で4アクションRobinを生成し、無修正で専用PADフローへ貼付け・保存・2回実行した。`ReadOnly=False`で既存xlsxを開き、B2だけを`T05-Changed`へ変更して別名保存し、出力B2・入力A1一致と元入力SHA不変を直接確認した。証拠は`catalog/evidence/t05-current-p3b-live-acceptance-20260911.json`と`catalog/evidence/t05-current-p3b-output-comparison-20260911.json`。
+
+T06は同一bundle・全文指示・2添付で4アクションRobinを生成し、無修正で専用PADフローへ貼付け・保存・2回実行した。編集可能なWordで`OfficeCatalog`だけを`T06Replaced`へ置換して別名保存し、出力文書の置換結果と元入力SHA不変を直接確認した。証拠は`catalog/evidence/t06-current-p3b-live-acceptance-20260911.json`と`catalog/evidence/t06-current-p3b-output-comparison-20260911.json`。
+T07は同一bundle・全文指示・2添付で2アクションRobinを生成し、無修正で専用PADフローへ貼付け・保存・2回実行した。ページ2のみを抽出し、`PAGE_TOKEN_A2`を含み`PAGE_TOKEN_A1`を含まないUTF-8テキストと入力PDF SHA不変を確認した。証拠は`catalog/evidence/t07-current-p3b-live-acceptance-20260911.json`と`catalog/evidence/t07-current-p3b-output-comparison-20260911.json`。
+T08は同一bundle・全文指示・2添付で欠損ファイルのエラー処理Robinを生成し、無修正で専用PADフローへ貼付け・保存・2回実行した。両回とも`ErrorHandledDefault=true`と`LastError`のファイル不存在内容を確認し、書込み・公開処理は含めなかった。名前付き`FileNotFound`一致は未確認として保持した。証拠は`catalog/evidence/t08-current-p3b-live-acceptance-20260911.json`と`catalog/evidence/t08-current-p3b-output-comparison-20260911.json`。
+T10は同一bundle・全文指示・現行T10コンテキスト添付で16命令Robinを生成し、無修正で専用PADフローへ貼付け・保存・2回実行した。Excelの書込み値とSaveAs先だけが変更され、Word／PowerPointの`CopilotOffice 246`と既存処理を保持した。Excel A1、Word本文、PowerPointスライドを直接照合し、Designer 16アクション（ListItem可視6件は仮想化）を確認した。証拠は`catalog/evidence/t10-current-p3b-live-acceptance-20260911.json`と`catalog/evidence/t10-current-p3b-output-comparison-20260911.json`。
 
 ## 独立再試験
 

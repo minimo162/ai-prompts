@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T19:40:00+09:00",
+  "case": "T05",
+  "status": "PASS_CURRENT_BUNDLE",
+  "input": {
+    "path": "catalog/fixtures/excel/excel-catalog.xlsx",
+    "sha256_before": "e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6",
+    "sha256_after_run2": "e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6",
+    "unchanged": true
+  },
+  "output": {
+    "path": "catalog/evidence/normal-chat-t05-final.xlsx",
+    "sha256_observed_after_run2": "7ad8018786be078ea87f8b63c76a22eacae2cb2bfe66dcd7616dcd9fcae12b4c",
+    "B2": "T05-Changed",
+    "A1_equal_to_input": true,
+    "direct_openpyxl_read": true
+  },
+  "pad_runs": ["evidence/t05-current-p3b-pad-run1-20260911.json", "evidence/t05-current-p3b-pad-run2-20260911.json"],
+  "protected_output_restored_after_run": true,
+  "acceptance": "PASS_CURRENT_BUNDLE"
+}

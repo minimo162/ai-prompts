@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T21:15:00+09:00",
+  "case": "T07",
+  "status": "PASS_CURRENT_BUNDLE",
+  "input": { "path": "catalog/fixtures/pdf/source-a.pdf", "sha256": "f5f246849a31e2797f998e426f459ac18b7260ed76206ab987950a1bf80c348d", "unchanged": true },
+  "output": { "path": "catalog/evidence/normal-chat-t07-final.txt", "observed_after_run2_sha256": "f7e592cc86719c395657ddffe2bf76ec7538c7d4deb7edb03fae7a5d90ba5fe2", "contains_PAGE_TOKEN_A2": true, "contains_PAGE_TOKEN_A1": false, "direct_text_read": true },
+  "pad_runs": ["evidence/t07-current-p3b-pad-run1-20260911.json", "evidence/t07-current-p3b-pad-run2-20260911.json"],
+  "protected_output_restored_after_run": true,
+  "acceptance": "PASS_CURRENT_BUNDLE"
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-11T22:00:00+09:00",
+  "case": "T08",
+  "status": "PASS_CURRENT_BUNDLE_EXPECTED_ERROR",
+  "runs": {
+    "run1": { "ErrorHandledDefault": "true", "LastError_contains_missing_file": true, "write_or_publish_actions": false },
+    "run2": { "ErrorHandledDefault": "true", "LastError_contains_missing_file": true, "write_or_publish_actions": false }
+  },
+  "missing_path": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt",
+  "named_FileNotFound_match": "UNCONFIRMED",
+  "acceptance": "PASS_CURRENT_BUNDLE_EXPECTED_ERROR"
+}

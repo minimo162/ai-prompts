@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T01:00:00+09:00",
+  "case": "T10",
+  "kind": "independent_retest",
+  "status": "PASS_CURRENT_BUNDLE_INDEPENDENT",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/07cd2762-71ed-486c-b136-eaee67804f72",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
+  "attachments_in_user_message": ["PAD-Robin-Knowledge-Bundle", "T10-Knowledge-Flow-Bundle"],
+  "generated_robin": { "path": "catalog/generated/normal-chat-current-bundle-p3b-t10-independent-20260911/robin.txt", "sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12", "action_count": 16, "outside_scope_mutations": false },
+  "pad": { "flow_name": "RobinKnowledgeT10P3bIndependent_20260911", "process_id": 29812, "paste": "evidence/t10-current-p3b-independent-pad-paste-20260911.json", "run": "evidence/t10-current-p3b-independent-pad-run-20260911.json" },
+  "output_comparison": { "excel_A1": "T10-Changed", "word_contains_CopilotOffice_246": true, "powerpoint_contains_CopilotOffice_246": true, "protected_outputs_restored_after_run": true },
+  "acceptance": "PASS_CURRENT_BUNDLE_INDEPENDENT"
+}

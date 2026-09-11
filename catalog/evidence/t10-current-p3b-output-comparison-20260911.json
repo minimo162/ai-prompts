@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T00:20:00+09:00",
+  "case": "T10",
+  "status": "PASS_CURRENT_BUNDLE",
+  "outputs_after_run2": {
+    "excel": { "path": "catalog/evidence/copilot-excel-t10-v6.xlsx", "sha256": "c512f647750dc7b962e0b67262589659aebde7d63ee3fa2c69150b52068079f3", "A1": "T10-Changed" },
+    "word": { "path": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-word.docx", "sha256": "a1ef350767e519c170213ab631eeac3c24eef7e5c9d88e3093fe6dedd442afff", "contains_CopilotOffice_246": true },
+    "powerpoint": { "path": "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-powerpoint.pptx", "sha256": "186fe75afbc53ed6eb3a604ae848607c14e08faa1bbea4e5a4f05a033276fdd1", "slide_text": ["CopilotOffice 246"] }
+  },
+  "pad_runs": ["evidence/t10-current-p3b-pad-run1-20260911.json", "evidence/t10-current-p3b-pad-run2-20260911.json"],
+  "protected_outputs_restored_after_run": true,
+  "scope_check": { "excel_only_changes": true, "word_original_value_preserved": true, "powerpoint_original_value_preserved": true },
+  "acceptance": "PASS_CURRENT_BUNDLE"
+}

@@ -1,0 +1,65 @@
+Copilot said:
+1. 前提・対象範囲・未確認点
+
+目的
+合成PDF C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf の2ページのみからテキストを抽出し、UTF-8テキストとして C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt へ保存します。
+
+入力
+
+PDF: C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf
+
+出力
+
+テキスト: C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt
+
+変数
+
+ExtractedPDFText（テキスト）
+
+上書き
+
+出力ファイル存在時は上書き
+
+対象ページ
+
+ページ2のみ（FromPageNumber: 2、ToPageNumber: 2）
+
+根拠
+
+実測済みT07ページ2単独抽出例。PADからコピーした原文、別フローへ再貼付け・保存・2回実行・期待値照合済み。原文: catalog/generated/normal-chat-t07-20260910-final/robin.txt、証拠: catalog/evidence/t07-current-final-paste.json、catalog/evidence/t07-current-final-run-1.json。
+2. PADで先に作る設定
+新しいサブフローへ貼り付ける。
+入力変数は不要。
+出力先フォルダー C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\ が存在することを確認する。
+PDFファイルを開いたままにする必要はない。
+PDF抽出アクションは DetectLayout: False の実測設定を使用する。
+出力テキスト保存は UTF-8、上書き、AppendNewLine: False を使用する。
+3. 貼り付け用Robin
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 2 DetectLayout: False ExtractedText=> ExtractedPDFText
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt''' TextToWrite: ExtractedPDFText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+4. デザイナー上の確認方法
+アクション数が 2個 であること。
+順序が以下と一致すること。
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange
+File.WriteText
+ExtractedPDFText が1つ目の出力変数として生成され、2つ目で参照されていること。
+ページ範囲が 2→2 になっていること。
+保存アクションが
+AppendNewLine: False
+IfFileExists: Overwrite
+Encoding: UTF8 であること。
+5. 合成データでの保存・実行・照合手順
+フローを保存する。
+実行する。
+C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt が作成または更新されることを確認する。
+出力テキストを開いて内容を確認する。
+期待結果として、
+ページ2のテキストだけが抽出されていること
+ページ2識別文字 PAGE_TOKEN_A2 を含むこと
+ページ1識別文字 PAGE_TOKEN_A1 を含まないこと を確認する。これはT07実測証跡で確認済みの照合条件です。
+再実行し、同じ期待結果になることを確認する。出力は上書きされます。
+ソース
+貼り付け用Robinを別フローに貼る方法は？
+ページ2の識別文字を確認するには？
+DetectLayout: Trueに変更した場合は？

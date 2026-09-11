@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T02:45:00+09:00",
+  "case": "negative_suite",
+  "status": "PASS_NEGATIVE_FAIL_CLOSED",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/4a3e7211-b874-4e5f-88e9-d5da8ce288b6",
+  "browser": "Chrome normal M365 Copilot chat",
+  "model": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
+  "attachments_in_user_message": ["PAD-Robin-Knowledge-Bundle", "agent-instructions"],
+  "full_instruction_body_match_before_send": true,
+  "response_observed_chars": 1516,
+  "response_robin_blocks": 0,
+  "cases": { "N1_nested_side_effect_loop_exit": "PASS_FAIL_CLOSED", "N2_datatable_column_name_reference": "PASS_FAIL_CLOSED", "N3_unregistered_web_selector_driver": "PASS_FAIL_CLOSED" },
+  "acceptance": "PASS_NEGATIVE_FAIL_CLOSED"
+}

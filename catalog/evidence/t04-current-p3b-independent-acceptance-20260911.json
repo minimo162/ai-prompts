@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T02:20:00+09:00",
+  "case": "T04",
+  "status": "PASS_CURRENT_BUNDLE_INDEPENDENT",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/21ee1618-7951-46fc-b721-6bf2796bcf30",
+  "bundle_sha256": "dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5",
+  "generated_robin_sha256": "e1a7b111ce7af4eed7bea1e186f5396d364f7ec86d4f9be0e3ff2a6fc1cfc1a1",
+  "pad_flow": "RobinKnowledgeT04P3bIndependent_20260911",
+  "pad_paste": "evidence/t04-current-p3b-independent-pad-paste-20260911.json",
+  "pad_run": "evidence/t04-current-p3b-independent-pad-run-20260911.json",
+  "logical_rows": ["対象,A,10", "対象,C,25", "対象,D,5"],
+  "input_unchanged": true,
+  "acceptance": "PASS_CURRENT_BUNDLE_INDEPENDENT"
+}
