@@ -4,6 +4,10 @@
 
 ### 監査後の継続: finale候補（未受入・未昇格）
 
+**T04継続結果:** 固定候補6ad6f742…の指示と同じbundleを実添付し、Think Deeperで初回生成した9行を無修正で受入した。送信前固定期待値は対象/A/10、対象/C/25、対象/D/5。2回とも出力を事前退避して不在から実行し、今回更新されたCSVとxlsxを別保存した。XMLのA1:C3全9セルとCSVの3行3列が固定期待値に一致し、`_x000D_`混入なし、入力SHA1d0b3d3b…不変、終了時ready/errors0・Excelプロセス0を確認した。既存2成果物は各回後にバイト・更新時刻を復元した。
+
+生成SHAe1a7b111…は旧T04と同じだが、今回の会話・実添付・2回の実行を別採取し、旧PASSを継承していない。専用フロー`RobinKnowledgeT04FinalE_20260912`を閉じて開き直した再コピーもCRLF差だけで一致。`.work/finale-20260912/t04/acceptance.json`はPASS_FINALE_T04、原文・run・成果物・論理照合は同ディレクトリ。今回のrun時刻は05:53:34Zと05:54:21Z。新版T01〜T04が個別PASS、T05以降・独立・P3・負例・A〜G不足は残り、全体partial／PR未準備／未pushを維持する。
+
 **T03継続結果:** 同じ候補指示6ad6f742…とbundleを実添付したThink Deeper会話`364cfa95-1691-4a4d-ac50-b5002886aff2`で、初回生成から13行の計数付きRobinを取得した。元依頼・固定期待は変更せず、入力4ファイルのSHA／サイズを送信前に記録。無修正貼付け・再コピー・2回実行・保存後再オープンの再コピーを確認し、`.work/finale-20260912/t03/acceptance.json`をPASS_FINALE_T03とした。
 
 両runでTxtCount=2／OtherCount=2、TxtSeenはt03-alpha.txt、OtherSeenはt03-gamma.md、FileContents表示は`alpha 日本語  `、4入力不変、runningからready/errors0への遷移を確認した。FileContentsはUIAプレビューの表示で末尾2空白も原記録に保持し、バイト完全一致の出力ファイルとは扱わない。Filesプレビューは省略表示であり、その文字列だけから全件処理を推定しない。生成SHA63fe35ec…、再オープン再コピーとの差はCRLFのみ。旧finaldのT03初回不成立は引き続き保持する。
