@@ -4,6 +4,10 @@
 
 ### 監査後の継続: finale候補（未受入・未昇格）
 
+**独立T01継続結果:** 同じ候補指示6ad6f742…とbundleを実添付した新規Think Deeper会話`https://m365.cloud.microsoft/chat/conversation/44300e2d-8d5f-4aeb-808a-20860b3c453a`から初回3行Robinを無修正保存し、一次とは別の専用フロー`RobinKnowledgeT01FinalEIndep_20260912`で検証した。07:12:03Z／07:13:04Zの2runとも、出力不在から今回更新された90 bytes・固定SHA2b030f2d…一致、入力SHA2866f343…不変、終了ready/errors0、旧出力復元を確認。短いrunning表示は捕捉しておらず、実行要求後の出力更新と終了状態を証拠とする。
+
+保存後再オープン再コピーも生成原文とCRLF差のみ一致。`.work/finale-20260912/t01-independent/acceptance.json`はPASS_FINALE_T01_INDEPENDENT。一次／旧版の回答・runを流用せず、期待値は独立用既存条件から送信前に固定した。独立T04/T10、P3正例、負例v2、A〜G限定追跡不足、T10比較範囲を含む最終監査は残るため、全体partial／PR未準備／未push。
+
 **T10継続結果:** 同じ候補指示6ad6f742…を本文、知識bundleと既存T10文脈SHA2f77e59f…を実添付したThink Deeper会話`https://m365.cloud.microsoft/chat/conversation/b9c779d9-eb56-4044-85da-8f6193e85518`から初回16行Robinを取得。入力原文SHA d7df4295…と命令行を比較し、2行目のExcel値と4行目のExcel保存先だけの変更、残り14行の文字内容一致を確認した。原文CRLF・末尾改行なしに対し回答はLF・末尾改行ありであり、この差をsource-comparison.jsonへ明示。原バイトの範囲外一致とは表現せず、比較用処理で原ファイルを変えていない。
 
 無修正16アクションを専用フローへ貼付け、07:00:19Z／07:01:21Zの2runでExcel A1=T10-Changed、Word本文／PowerPointスライドはCopilotOffice 246を保持しT10-ChangedなしをXMLで照合。各出力は退避後の不在から新規更新を確認し、3種類の旧成果物を各回後にハッシュ一致で復元した。原入力Robin不変、running→ready/errors0、Office残存0。保存後再オープン再コピーは最初の再コピーとバイト一致し、生成との差はCRLFのみ。
