@@ -62,3 +62,69 @@ ERROR => LastError Reset: True
 
 未採取・未確認
 - For eachの内側にIf／Elseを置き、両分岐で`SET`と`Variables.IncreaseVariable`を実行する組合せは2026-09-12のT03拡張子probeで2回実行した（`catalog/evidence/t03-ext-verify-acceptance-20260912.json`）。If内If、入れ子loop、カスタムエラー名の一致条件、エラー後の一般的な後続処理は未確認。未観測のブロック終端や引数をLoop例から類推して生成しない。
+
+2026-09-12の追加採取: If内If／入れ子ループとEXIT LOOP／NEXT LOOPの作用範囲
+- 採取済みの形（`IF a = b THEN`／`ELSE`／`END`、`LOOP FOREACH`、`LOOP i FROM 1 TO 2 STEP 1`、`SET`、`Variables.IncreaseVariable`、`File.WriteText`、`EXIT LOOP`、`NEXT LOOP`）だけを組み合わせた入れ子構造を、期待値を先に固定してから新しい空フローへ貼り付け、PADの設計エラーなし・保存・再コピー・2回実行で確認した（`catalog/flows/p3-nested-control/expectations-20260912.json`）。
+- If内If＋副作用＋ループ脱出（23行、`RobinKnowledgeP3NestIf_20260912`。再コピー原文 `catalog/evidence/p3-nested-if-exit-recopy-20260912.robin`、SHA-256 `b2c65f7e9191734f780bdbe7cc1d8696974f5fc66e893473c9b91bee98f9eaaa`）:
+Variables.CreateNewList List=> CatalogList
+Variables.AddItemToList Item: $'''CatalogItem''' List: CatalogList
+Variables.AddItemToList Item: $'''SecondItem''' List: CatalogList
+Variables.AddItemToList Item: $'''ThirdItem''' List: CatalogList
+SET OuterCount TO 0
+SET InnerYes TO 0
+SET InnerNo TO 0
+SET LastSeen TO $'''none'''
+LOOP FOREACH CurrentItem IN CatalogList
+    Variables.IncreaseVariable Value: OuterCount IncrementValue: 1
+    IF CurrentItem = $'''CatalogItem''' THEN
+        Variables.IncreaseVariable Value: InnerNo IncrementValue: 1
+    ELSE
+        IF CurrentItem = $'''SecondItem''' THEN
+            Variables.IncreaseVariable Value: InnerYes IncrementValue: 1
+            SET LastSeen TO CurrentItem
+            File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\p3-nested-if-output-20260912.txt''' TextToWrite: CurrentItem AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+            EXIT LOOP
+        ELSE
+            SET LastSeen TO $'''third'''
+        END
+    END
+END
+- 2回実行とも`OuterCount=2`、`InnerNo=1`、`InnerYes=1`、`LastSeen=SecondItem`、出力ファイルは`SecondItem`（UTF-8 BOM付き）。3件目`ThirdItem`は訪問されず、内側Elseの`third`は実行されない。内側Ifの中の`EXIT LOOP`は、それを囲む最も近いループ（For each）を抜ける。別の空フロー`RobinKnowledgeP3NestIfReuse_20260912`へ再コピー原文を貼り付けても同じ結果。
+- 入れ子ループ＋NEXT LOOP（15行、`RobinKnowledgeP3NestLoop_20260912`。再コピー原文 `catalog/evidence/p3-nested-loop-next-recopy-20260912.robin`、SHA-256 `3614c2c12e3e13afcf7bad69586947323eddbc0088019802ce6fc6b95952b779`）:
+Variables.CreateNewList List=> CatalogList
+Variables.AddItemToList Item: $'''CatalogItem''' List: CatalogList
+Variables.AddItemToList Item: $'''SecondItem''' List: CatalogList
+Variables.AddItemToList Item: $'''ThirdItem''' List: CatalogList
+SET Total TO 0
+SET OuterRuns TO 0
+LOOP OuterIdx FROM 1 TO 2 STEP 1
+    Variables.IncreaseVariable Value: OuterRuns IncrementValue: 1
+    LOOP FOREACH CurrentItem IN CatalogList
+        IF CurrentItem = $'''SecondItem''' THEN
+            NEXT LOOP
+        END
+        Variables.IncreaseVariable Value: Total IncrementValue: 1
+    END
+END
+- 2回実行とも`Total=4`、`OuterRuns=2`（完了後の`OuterIdx=3`、`CurrentItem=ThirdItem`）。内側For each内の`NEXT LOOP`は内側の反復（SecondItem）だけを飛ばし、外側LOOPは2回とも完走する。別フロー`RobinKnowledgeP3NestLoopReuse_20260912`でも同じ。証拠: `catalog/evidence/p3-nested-control-acceptance-20260912.json`。
+- PADは`ELSE`と各`END`も1アクションとして数える（23行→23アクション）。貼付け後の確認はアクション数とEndの対応で行う。
+- 未確認: 3段以上の入れ子、内側ループから外側ループを抜ける形（`EXIT LOOP`は最も近いループだけを抜けた）、`LOOP WHILE`の入れ子、ループなしのIf内If。
+
+2026-09-12の追加採取: 名前付きエラーの一致（アクション単位のON ERROR）
+- 上記の測定済み組み合わせ（ブロック側の名前付き`FileNotFound`は`IsUserDefinedErrorCode: True`の利用者定義コードで、欠損ファイルのエラーには一致しない）に対し、`File.ReadTextFromFile.ReadText`自身のダイアログ「エラー発生時」で、アクションが持つエラー一覧（ディレクトリが見つかりません／ファイルが見つかりません／ファイルを読み取れません…）から「ファイルが見つかりません」を選び、ルール「変数の設定 NewVar = named」と「フロー実行を続行する」を設定した。
+- PADからコピーした原文（`catalog/evidence/p3-named-error-probe-20260912.robin`、SHA-256 `ae5bcb55035043596c48536d3366bb4a9b5f35eaebfac8414fdf9552ab543e4b`）:
+BLOCK
+ON BLOCK ERROR FileNotFound IsUserDefinedErrorCode: True
+    SET ErrorHandled TO $'''true'''
+ON BLOCK ERROR
+    SET ErrorHandledDefault TO $'''true'''
+END
+    File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+    ON ERROR FileNotFoundError
+        SET NewVar TO $'''named'''
+    END
+END
+ERROR => LastError Reset: True
+- 2回実行とも変数ペインは`LastError=ファイル … が見つかりません`と`NewVar=named`だけで、`ErrorHandled`も`ErrorHandledDefault`も設定されない。つまりアクション単位の名前付きルール`ON ERROR FileNotFoundError`が一致して続行し、ブロック側の既定ルールは発火しない（既定ハンドラーだけの合格と識別できる観測）。別フロー`RobinKnowledgeP3NamedErrReuse_20260912`へ原文ファイルから貼り付けても同じ。証拠: `catalog/evidence/p3-named-error-acceptance-20260912.json`。
+- このアクションの実際のエラーコードは`FileNotFoundError`である。ブロック側の利用者定義名`FileNotFound`とは別物で、T08の既定ハンドラー合格を名前付き一致の実証に読み替えない。
+- 未確認: ブロック側`ON BLOCK ERROR`に組込みコード`FileNotFoundError`を指定する形、他のエラーコード、「スロー エラー」モード、再試行ポリシーとの併用。

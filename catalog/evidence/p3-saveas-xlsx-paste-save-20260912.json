@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-12T00:16:00.9537967Z",
+    "flow_name":  "RobinKnowledgeP3SaveAsXlsx_20260912",
+    "source_robin":  "catalog/flows/p3-saveas-collision/excel-saveas-source-20260912.robin",
+    "source_sha256":  "5640ab495937d6b4c2c681f999f80b7b8cefda1d98f8c3c6c90dfa2c0edfc4b2",
+    "source_bytes":  570,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  4,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

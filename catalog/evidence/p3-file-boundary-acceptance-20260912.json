@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T09:47:57+09:00",
+  "status": "PASS_PROBE_FILE_BOUNDARIES_2_RUNS_EACH",
+  "missing_item": "D-files-folders (P3-3)",
+  "environment": {
+    "pad_package_version": "11.2608.115.0",
+    "language": "ja-JP",
+    "power_fx": false
+  },
+  "fixture_folder": "catalog/fixtures/files-boundary",
+  "fixture_files": [
+    "plain.txt",
+    "upper.TXT",
+    "x.txt.bak",
+    "sub.txt/inner.txt",
+    "nested/deep.txt"
+  ],
+  "fixtures_unchanged": "concat SHA 4e2fcd62ab66a9e2 before and after",
+  "expectations": "catalog/flows/p3-file-boundary/expectations-20260912.json (fixed before run; upper.TXT explicitly marked observe-and-record)",
+  "top_level": {
+    "source": "catalog/flows/p3-file-boundary/top-level-source-20260912.robin",
+    "source_sha256": "1f5fb888829f69ce91bfbc66c44fd81cdf91d09a15d614a5664d6c3a8f0920a4",
+    "derived_from": "accepted T03 capture (catalog/flows/t03-extension-branch/capture-pad-copy-20260912.robin) with only the Folder literal changed; the fixed T03 flow is untouched",
+    "flow": "RobinKnowledgeP3FileTop_20260912",
+    "designer_process_id": 29236,
+    "paste_save": "catalog/evidence/p3-file-boundary-top-paste-save-20260912.json",
+    "recopy": {
+      "path": "catalog/evidence/p3-file-boundary-top-recopy-20260912.robin",
+      "sha256": "1f5fb888829f69ce91bfbc66c44fd81cdf91d09a15d614a5664d6c3a8f0920a4",
+      "exact_match_to_source": true
+    },
+    "runs": [
+      {
+        "evidence": "catalog/evidence/p3-file-boundary-top-run1-20260912.json",
+        "status": "success",
+        "observed_at": "2026-09-12T00:13:37.4479388Z",
+        "variables": {
+          "CurrentFile": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\x.txt.bak",
+          "FileContents": "plain 日本語",
+          "Files": "[C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\plain.txt,  ...]",
+          "OtherCount": "2",
+          "OtherSeen": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\x.txt.bak",
+          "TxtCount": "1",
+          "TxtSeen": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\plain.txt"
+        }
+      },
+      {
+        "evidence": "catalog/evidence/p3-file-boundary-top-run2-20260912.json",
+        "status": "success",
+        "observed_at": "2026-09-12T00:13:49.1996224Z",
+        "variables": {
+          "CurrentFile": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\x.txt.bak",
+          "FileContents": "plain 日本語",
+          "Files": "[C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\plain.txt,  ...]",
+          "OtherCount": "2",
+          "OtherSeen": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\x.txt.bak",
+          "TxtCount": "1",
+          "TxtSeen": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\plain.txt"
+        }
+      }
+    ],
+    "observed": {
+      "Files.Count": 3,
+      "TxtCount": "1 (plain.txt)",
+      "OtherCount": "2 (upper.TXT, x.txt.bak)",
+      "subfolder_files": "not enumerated"
+    },
+    "findings": {
+      "upper.TXT": "went to Else: `CurrentFile.Extension = '.txt'` is case-sensitive (Extension is '.TXT')",
+      "x.txt.bak": "went to Else (Extension is '.bak')",
+      "IncludeSubfolders False": "sub.txt/inner.txt and nested/deep.txt not enumerated"
+    }
+  },
+  "subfolders": {
+    "source": "catalog/flows/p3-file-boundary/subfolders-source-20260912.robin",
+    "source_sha256": "e909a16591683dc1e513cb538e3040ca1bb8e1dd5ddc9465fdecd670e73aaadb",
+    "change": "IncludeSubfolders: True",
+    "flow": "RobinKnowledgeP3FileSub_20260912",
+    "designer_process_id": 26376,
+    "paste_save": "catalog/evidence/p3-file-boundary-sub-paste-save-20260912.json",
+    "recopy": {
+      "path": "catalog/evidence/p3-file-boundary-sub-recopy-20260912.robin",
+      "sha256": "e909a16591683dc1e513cb538e3040ca1bb8e1dd5ddc9465fdecd670e73aaadb",
+      "exact_match_to_source": true
+    },
+    "runs": [
+      {
+        "evidence": "catalog/evidence/p3-file-boundary-sub-run1-20260912.json",
+        "status": "success",
+        "observed_at": "2026-09-12T00:14:51.1314432Z",
+        "variables": {
+          "CurrentFile": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\sub.txt\\inner.txt",
+          "FileContents": "inner",
+          "Files": "[C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\plain.txt,  ...]",
+          "OtherCount": "2",
+          "OtherSeen": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\x.txt.bak",
+          "TxtCount": "3",
+          "TxtSeen": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\sub.txt\\inner.txt"
+        }
+      },
+      {
+        "evidence": "catalog/evidence/p3-file-boundary-sub-run2-20260912.json",
+        "status": "success",
+        "observed_at": "2026-09-12T00:15:21.0275073Z",
+        "variables": {
+          "CurrentFile": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\sub.txt\\inner.txt",
+          "FileContents": "inner",
+          "Files": "[C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\plain.txt,  ...]",
+          "OtherCount": "2",
+          "OtherSeen": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\x.txt.bak",
+          "TxtCount": "3",
+          "TxtSeen": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\sub.txt\\inner.txt"
+        }
+      }
+    ],
+    "observed": {
+      "Files.Count": 5,
+      "TxtCount": "3 (plain.txt, sub.txt/inner.txt, nested/deep.txt)",
+      "OtherCount": "2 (upper.TXT, x.txt.bak)"
+    },
+    "findings": {
+      "parent folder named sub.txt": "does not affect .Extension of inner.txt (Then)",
+      "nested/deep.txt": "enumerated and Then with IncludeSubfolders True"
+    }
+  },
+  "deterministic_expectations_met": true,
+  "case_sensitivity_recorded_not_assumed": true,
+  "not_verified": "case-insensitive comparison operators/options; other extensions; folder enumeration order (NoSort); empty folder; access denied",
+  "distinction": {
+    "captured": "T03 capture with a changed folder literal / subfolder flag, PAD-validated by paste and recopied",
+    "original_flow_probe_2_runs": true,
+    "separate_flow_reuse_2_runs": "n/a (each probe is itself a paste from a saved text into a new empty flow)",
+    "knowledge_integrated": "pending",
+    "copilot_generation_accepted": "pending"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T09:47:57+09:00",
+  "status": "PASS_PROBE_NAMED_ACTION_ERROR_DISTINGUISHED_2_RUNS",
+  "missing_item": "B-error named match (P3-6)",
+  "environment": {
+    "pad_package_version": "11.2608.115.0",
+    "language": "ja-JP",
+    "power_fx": false
+  },
+  "previous_boundary": "p3-error-custom-handler-20260911.json: ON BLOCK ERROR FileNotFound IsUserDefinedErrorCode: True never matched the missing-file error (runtime error remained). T08 acceptance passes via the default handler only.",
+  "this_probe": "new flow RobinKnowledgeP3NamedErr_20260912: the accepted T08 9-line block (named user-defined FileNotFound rule + default rule) pasted; then the ReadText action's own dialog → エラー発生時 → list of action errors (ディレクトリが見つかりません / ファイルが見つかりません / ファイルを読み取れません …) → on ファイルが見つかりません added rule 変数の設定 NewVar = named, フロー実行を続行する; saved.",
+  "flow": "RobinKnowledgeP3NamedErr_20260912",
+  "designer_process_id": 29852,
+  "action_count": 4,
+  "raw": {
+    "path": "catalog/evidence/p3-named-error-probe-20260912.robin",
+    "sha256": "ae5bcb55035043596c48536d3366bb4a9b5f35eaebfac8414fdf9552ab543e4b",
+    "copied_from_pad": true,
+    "lines_of_interest": [
+      "    ON ERROR FileNotFoundError",
+      "        SET NewVar TO $'''named'''",
+      "    END"
+    ],
+    "note": "PAD's own error code for this action is FileNotFoundError (action-level ON ERROR). The block-level user-defined name FileNotFound is a different identifier and did not match in the earlier probe."
+  },
+  "expected_fixed_before_run": {
+    "NewVar": "named (action-level named rule fires)",
+    "ErrorHandledDefault": "not set (block default rule must not fire when the action-level rule continues)",
+    "ErrorHandled": "not set (block user-defined FileNotFound rule does not match)",
+    "LastError": "ファイル … が見つかりません (Get last error still reads the error)"
+  },
+  "runs": [
+    {
+      "evidence": "catalog/evidence/p3-named-error-probe-run1-20260912.json",
+      "status": "success",
+      "observed_at": "2026-09-12T00:40:58.6575500Z",
+      "variables": {
+        "LastError": "ファイル C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt が見つかりません",
+        "NewVar": "named"
+      }
+    },
+    {
+      "evidence": "catalog/evidence/p3-named-error-probe-run2-20260912.json",
+      "status": "success",
+      "observed_at": "2026-09-12T00:42:00.0923985Z",
+      "variables": {
+        "LastError": "ファイル C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt が見つかりません",
+        "NewVar": "named"
+      }
+    }
+  ],
+  "observed": "variable pane shows only LastError and NewVar=named; ErrorHandled and ErrorHandledDefault absent in both runs",
+  "expectation_met": true,
+  "distinguishable_from_default_handler": true,
+  "t08_default_handler_acceptance_preserved": "unchanged; this probe does not claim block-level FileNotFound matching",
+  "not_verified": "block-level ON BLOCK ERROR with the built-in code FileNotFoundError (not attempted); other error codes; スロー エラー mode; rules combined with retry policy",
+  "distinction": {
+    "captured": true,
+    "original_flow_probe_2_runs": true,
+    "knowledge_integrated": "pending",
+    "copilot_generation_accepted": "pending"
+  }
+}

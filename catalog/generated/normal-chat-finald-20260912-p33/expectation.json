@@ -1,0 +1,16 @@
+{
+  "fixed_before_send": true,
+  "expected": {
+    "lines": 13,
+    "must_contain": [
+      "IncludeSubfolders: True",
+      "CurrentFile.Extension = $'''.txt'''"
+    ],
+    "pad": {
+      "TxtCount": "3",
+      "OtherCount": "2",
+      "fixtures_unchanged": true
+    }
+  },
+  "flow": "RobinKnowledgeP33FinalD_20260912"
+}

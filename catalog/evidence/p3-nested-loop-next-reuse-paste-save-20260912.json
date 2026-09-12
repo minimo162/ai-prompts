@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-12T00:09:47.3636863Z",
+    "flow_name":  "RobinKnowledgeP3NestLoopReuse_20260912",
+    "source_robin":  "catalog/evidence/p3-nested-loop-next-recopy-20260912.robin",
+    "source_sha256":  "3614c2c12e3e13afcf7bad69586947323eddbc0088019802ce6fc6b95952b779",
+    "source_bytes":  593,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  15,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "fixed_at": "2026-09-12T10:00:00+09:00",
+  "note": "P3 positive cases for the finald version. Prompts are appended to the full instruction body exactly like T01-T10; expectations are fixed here before sending and are never passed to Copilot. Generated Robin is pasted unmodified into a dedicated empty PAD flow, saved, recopied and run twice.",
+  "cases": {
+    "P3-1": {
+      "prompt": "合成リストを作り、PADの実測済みRobinだけを根拠に、リスト変数 `CatalogList` に文字列 `CatalogItem`、`SecondItem` の順で2項目を追加し、2番目の項目（添字1）を変数 `NewVar` へ取り出すPADフロー案を作成してください。専用の取得アクションを推測せず、確認済みのインデックス指定の形だけを使ってください。前提・設定・確認方法の説明の後に、貼り付け用Robinを言語ラベルなしのMarkdownコードフェンス1つだけで出してください。コードフェンス内は実際のRobin命令だけにしてください。",
+      "expected": {"lines": 4, "must_contain": ["Variables.CreateNewList List=> CatalogList", "SET NewVar TO CatalogList[1]"], "pad": {"NewVar": "SecondItem", "CatalogList": "[CatalogItem, SecondItem]"}},
+      "flow": "RobinKnowledgeP31FinalD_20260912"
+    },
+    "P3-2": {
+      "prompt": "合成リスト `CatalogList`（`CatalogItem`、`SecondItem`、`ThirdItem` の3項目）をFor eachで処理し、外側のIfで `CatalogItem` かどうかを判定し、それ以外の場合の内側のIfで `SecondItem` かどうかを判定して、一致したらその項目名を `C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\p3-nested-if-output-20260912.txt` へUTF-8で上書き保存してからループを抜けるPADフロー案を作成してください。訪問した項目数（OuterCount）、外側Ifで一致した回数（InnerNo）、内側Ifで一致した回数（InnerYes）、最後に見た項目（LastSeen）を変数で数えてください。添付ナレッジで実測済みの入れ子構造と`EXIT LOOP`の作用範囲だけを根拠にし、未確認の構文を推測しないでください。前提・設定・期待結果の説明の後に、貼り付け用Robinを言語ラベルなしのMarkdownコードフェンス1つだけで出してください。",
+      "expected": {"lines": 23, "must_contain": ["EXIT LOOP", "ELSE"], "pad": {"OuterCount": "2", "InnerNo": "1", "InnerYes": "1", "LastSeen": "SecondItem", "output_text": "SecondItem"}},
+      "flow": "RobinKnowledgeP32FinalD_20260912"
+    },
+    "P3-3": {
+      "prompt": "合成フォルダー `C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary` には `plain.txt`、`upper.TXT`、`x.txt.bak`、サブフォルダー `sub.txt\\inner.txt`、`nested\\deep.txt` があります。サブフォルダーも含めて全ファイルを取得し、拡張子が厳密に `.txt` のファイルだけをUTF-8で読み取り、それ以外をElseへ送って件数を数えるPADフロー案を作成してください。添付ナレッジで実測済みの `.Extension` 判定と、大文字の `.TXT` や `.txt.bak`、親フォルダー名が `.txt` で終わる場合の実測結果を前提・期待結果として明示し、大文字小文字を無視する比較など未採取の設定を推測しないでください。前提・設定・期待結果の説明の後に、貼り付け用Robinを言語ラベルなしのMarkdownコードフェンス1つだけで出してください。",
+      "expected": {"lines": 13, "must_contain": ["IncludeSubfolders: True", "CurrentFile.Extension = $'''.txt'''"], "pad": {"TxtCount": "3", "OtherCount": "2", "fixtures_unchanged": true}},
+      "flow": "RobinKnowledgeP33FinalD_20260912"
+    },
+    "P3-4": {
+      "prompt": "合成Excel `C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx` を編集可能で開き、`B2` に `T05-Changed` を書き込み、`C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\p3-saveas-case-20260912.xlsx` へ別名保存して閉じるPADフロー案を作成してください。この保存先に既に同名ファイルがある場合にPADのExcel別名保存がどう振る舞うか（上書き確認の有無）を、添付ナレッジの実測結果に基づいて前提・期待結果に明記し、再実行時に利用者が行うべき退避を示してください。前提・設定・期待結果の説明の後に、貼り付け用Robinを言語ラベルなしのMarkdownコードフェンス1つだけで出してください。",
+      "expected": {"lines": 4, "must_contain": ["Excel.SaveExcel.SaveAs", "p3-saveas-case-20260912.xlsx"], "answer_must_state": "existing target is overwritten without prompt (measured)", "pad": {"B2": "T05-Changed", "run2_overwrites_existing": true, "input_unchanged": true}},
+      "flow": "RobinKnowledgeP34FinalD_20260912"
+    },
+    "P3-5": {
+      "prompt": "現在の日時を取得し、それを `yyyy-MM-dd` のカスタム書式でテキストに変換して変数 `FormattedDateTime2` に入れるPADフロー案を作成してください。添付ナレッジで実測済みの日時取得とテキスト変換の原文だけを根拠にし、未確認の書式トークンを推測しないでください。前提・設定・期待結果の説明の後に、貼り付け用Robinを言語ラベルなしのMarkdownコードフェンス1つだけで出してください。",
+      "expected": {"must_contain": ["DateTime.GetCurrentDateTime.Local", "Text.ConvertDateTimeToText.FromCustomDateTime", "CustomFormat: $'''yyyy-MM-dd'''"], "pad": {"FormattedDateTime2": "2026-09-12 (execution date)"}},
+      "flow": "RobinKnowledgeP35FinalD_20260912"
+    },
+    "P3-6": {
+      "prompt": "存在しない合成ファイル `C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt` を「ファイルからテキストを読み取る」で読み、そのアクション自身の「ファイルが見つかりません」エラーだけに一致するアクション単位のエラールールで変数 `NewVar` に `named` を設定してフローを続行し、最後に「最後のエラーを取得」で `LastError` を取るPADフロー案を作成してください。添付ナレッジで実測済みの、アクション単位の名前付きエラー（実際のエラーコード名）とブロック既定ルールの違いを前提に明記し、利用者定義のエラー名で一致すると説明しないでください。後続の書込みや完了マーカーは入れないでください。前提・設定・期待結果の説明の後に、貼り付け用Robinを言語ラベルなしのMarkdownコードフェンス1つだけで出してください。",
+      "expected": {"must_contain": ["ON ERROR FileNotFoundError", "SET NewVar TO $'''named'''", "ERROR => LastError Reset: True"], "pad": {"NewVar": "named", "ErrorHandledDefault": "absent", "LastError_contains": "見つかりません"}},
+      "flow": "RobinKnowledgeP36FinalD_20260912"
+    }
+  },
+  "negative_suite_v2": {
+    "change_reason": "N1 of the finalc suite (If inside If with a file-write side effect followed by loop exit) was measured on 2026-09-12 (p3-nested-control-acceptance-20260912.json) and is now the positive case P3-2. N1 is replaced by a still-unmeasured control structure. N2 and N3 are unchanged and still unmeasured.",
+    "N1": "3段以上の入れ子（For eachの中にLOOPの中にIf）で、内側から外側のFor eachまで一度に抜ける（内側ループだけでなく外側も終了させる）Robinを1つで作る。",
+    "N2": "列定義のあるDataTableへ行を挿入し、For eachの各行で列名を使ってセル値を直接参照して書込みするRobinを作る。",
+    "N3": "Webページへ接続し、未登録のUI要素セレクターと未採取のWebDriver引数で入力・クリック・文字取得するRobinを作る。",
+    "expected": {"robin_code_blocks": 0, "guessed_action_names_or_arguments": false, "must_not_deny_measured_items": "the answer may cite the measured single-level EXIT LOOP scope and the measured If-inside-If; it must not claim those are unmeasured"}
+  }
+}

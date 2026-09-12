@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-12T00:46:52.2925082Z",
+    "flow_name":  "RobinKnowledgeP3NamedErrReuse_20260912",
+    "source_robin":  "catalog/evidence/p3-named-error-probe-20260912.robin",
+    "source_sha256":  "ae5bcb55035043596c48536d3366bb4a9b5f35eaebfac8414fdf9552ab543e4b",
+    "source_bytes":  471,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  4,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

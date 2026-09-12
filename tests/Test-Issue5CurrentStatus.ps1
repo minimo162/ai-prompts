@@ -57,19 +57,30 @@ function Test-Issue5AuditSemantics($Audit, [string]$BundleHash, [string]$Evidenc
             }
         } else { $allPass = $false }
     }
+    $auditPartial = ([string]$Audit.status -like 'partial*') -and ([string]$Audit.p4_current_bundle.status -like 'PARTIAL*')
+    $independentPending = $auditPartial -and ([string]$Audit.p4_current_bundle.independent_retests.status -like 'PENDING*')
+    if ($independentPending) { $allPass = $false }
     foreach ($case in @('T01','T04','T10')) {
         $ref = [string]$Audit.p4_current_bundle.independent_retests.results.$case
-        if ([string]::IsNullOrWhiteSpace($ref)) { throw ('AUDIT_INDEPENDENT: missing independent retest reference for ' + $case) }
+        if ([string]::IsNullOrWhiteSpace($ref)) {
+            # A partial audit may declare the same-version independent retests as explicitly pending; it can never be complete.
+            if ($independentPending) { continue }
+            throw ('AUDIT_INDEPENDENT: missing independent retest reference for ' + $case)
+        }
         $path = Resolve-EvidenceRef $EvidenceRoot $ref
         if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw ('AUDIT_INDEPENDENT: missing independent evidence ' + $ref) }
         $ev = Read-JsonAbs $path
         if ($ev.independent_retest -ne $true -or [string]$ev.bundle_sha256 -cne $BundleHash -or -not ([string]$ev.status -like 'PASS*')) { throw ('AUDIT_INDEPENDENT: ' + $case + ' independent evidence is not a same-version PASS') }
     }
     $negRef = [string]$Audit.p4_current_bundle.negative_suite.evidence
-    $negPath = Resolve-EvidenceRef $EvidenceRoot $negRef
-    if (-not (Test-Path -LiteralPath $negPath -PathType Leaf)) { throw 'AUDIT_NEGATIVE: negative suite evidence missing' }
-    $neg = Read-JsonAbs $negPath
-    if ([string]$neg.bundle_sha256 -cne $BundleHash -or [int]$neg.response.pre_elements -ne 0 -or -not ([string]$neg.status -like 'PASS_NEGATIVE*')) { throw 'AUDIT_NEGATIVE: negative suite must be a same-version fail-closed pass' }
+    $negativePending = $auditPartial -and ([string]$Audit.p4_current_bundle.negative_suite.status -like 'PENDING*') -and [string]::IsNullOrWhiteSpace($negRef)
+    if ($negativePending) { $allPass = $false }
+    if (-not $negativePending) {
+        $negPath = Resolve-EvidenceRef $EvidenceRoot $negRef
+        if (-not (Test-Path -LiteralPath $negPath -PathType Leaf)) { throw 'AUDIT_NEGATIVE: negative suite evidence missing' }
+        $neg = Read-JsonAbs $negPath
+        if ([string]$neg.bundle_sha256 -cne $BundleHash -or [int]$neg.response.pre_elements -ne 0 -or -not ([string]$neg.status -like 'PASS_NEGATIVE*')) { throw 'AUDIT_NEGATIVE: negative suite must be a same-version fail-closed pass' }
+    }
     $claimsComplete = ([string]$Audit.status -like 'complete*') -or ([string]$Audit.p4_current_bundle.status -like 'COMPLETE*')
     if ($claimsComplete -and -not $allPass) { throw 'AUDIT_OVERALL: overall completion claimed while a required case is not PASS' }
     if (-not $claimsComplete -and -not ([string]$Audit.status -like 'partial*')) { throw 'AUDIT_OVERALL: non-complete audit must be partial' }

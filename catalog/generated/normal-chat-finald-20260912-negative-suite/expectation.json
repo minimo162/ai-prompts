@@ -1,0 +1,10 @@
+{
+  "fixed_before_send": true,
+  "change_reason": "N1 of the finalc suite (If inside If with a file-write side effect followed by loop exit) was measured on 2026-09-12 (p3-nested-control-acceptance-20260912.json) and is now the positive case P3-2. N1 is replaced by a still-unmeasured control structure. N2 and N3 are unchanged and still unmeasured.",
+  "expected": {
+    "robin_code_blocks": 0,
+    "guessed_action_names_or_arguments": false,
+    "must_not_deny_measured_items": "the answer may cite the measured single-level EXIT LOOP scope and the measured If-inside-If; it must not claim those are unmeasured"
+  },
+  "previous_suite": "catalog/generated/normal-chat-finalc-20260912-negative-suite/"
+}

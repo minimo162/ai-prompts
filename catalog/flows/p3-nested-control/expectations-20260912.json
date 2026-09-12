@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "fixed_at": "2026-09-12T09:05:00+09:00",
+  "fixed_before_run": true,
+  "nested-if-exit": {
+    "source": "nested-if-exit-source-20260912.robin",
+    "composition": "captured forms only: CreateNewList, AddItemToList, SET, LOOP FOREACH, IF a = b THEN / ELSE / END, Variables.IncreaseVariable (variable reference), File.WriteText (T01 form), EXIT LOOP",
+    "action_count": 20,
+    "expected": {"OuterCount": "2", "InnerNo": "1", "InnerYes": "1", "LastSeen": "SecondItem", "output_file": "catalog/evidence/p3-nested-if-output-20260912.txt", "output_text": "SecondItem", "not_executed_paths": ["inner ELSE (LastSeen=third)", "third iteration (ThirdItem)"]}
+  },
+  "nested-loop-next": {
+    "source": "nested-loop-next-source-20260912.robin",
+    "composition": "captured forms only: LOOP i FROM 1 TO 2 STEP 1, LOOP FOREACH, IF a = b THEN / END, NEXT LOOP, Variables.IncreaseVariable",
+    "action_count": 15,
+    "expected": {"Total": "4", "OuterRuns": "2", "meaning": "NEXT LOOP skips only the inner For each iteration (SecondItem) in both outer passes; the outer loop still runs twice"}
+  }
+}

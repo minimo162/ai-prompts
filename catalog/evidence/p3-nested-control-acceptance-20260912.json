@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T09:47:57+09:00",
+  "status": "PASS_PROBE_NESTED_IF_EXIT_AND_NESTED_LOOP_NEXT",
+  "missing_item": "B-if-else / B-loop (P3-2)",
+  "environment": {
+    "pad_package_version": "11.2608.115.0",
+    "language": "ja-JP",
+    "power_fx": false
+  },
+  "expectations": "catalog/flows/p3-nested-control/expectations-20260912.json (fixed before run)",
+  "nested_if_exit": {
+    "source": "catalog/flows/p3-nested-control/nested-if-exit-source-20260912.robin",
+    "source_sha256": "3189a4c70221f3764f94fdd2c9cb48b6f3a4a661a7e84622e9c440e77fb52577",
+    "composition": "captured forms only (If/Else/End, For each, SET, IncreaseVariable variable reference, File.WriteText T01 form, EXIT LOOP); nesting composed as text, validated by PAD paste (23 rows, no designer error), recopied",
+    "flow": "RobinKnowledgeP3NestIf_20260912",
+    "designer_process_id": 7508,
+    "action_count": 23,
+    "paste_note": "Paste tool count check failed only because the virtualized list realizes at most ~20 rows; the Designer status bar showed 23 アクション and the recopy has 23 lines. Recopy taken with Ctrl+A/Ctrl+C from the foreground Designer (Copy tool has the same count limit).",
+    "recopy": {
+      "path": "catalog/evidence/p3-nested-if-exit-recopy-20260912.robin",
+      "sha256": "b2c65f7e9191734f780bdbe7cc1d8696974f5fc66e893473c9b91bee98f9eaaa",
+      "lines_equal_to_source_after_indent_normalization": true
+    },
+    "runs": [
+      {
+        "evidence": "catalog/evidence/p3-nested-if-exit-run1-20260912.json",
+        "status": "success",
+        "observed_at": "2026-09-12T00:07:58.2254943Z",
+        "variables": {
+          "CatalogList": "[CatalogItem, SecondItem, ThirdItem]",
+          "CurrentItem": "SecondItem",
+          "InnerNo": "1",
+          "InnerYes": "1",
+          "LastSeen": "SecondItem",
+          "OuterCount": "2"
+        }
+      },
+      {
+        "evidence": "catalog/evidence/p3-nested-if-exit-run2-20260912.json",
+        "status": "success",
+        "observed_at": "2026-09-12T00:08:11.2767698Z",
+        "variables": {
+          "CatalogList": "[CatalogItem, SecondItem, ThirdItem]",
+          "CurrentItem": "SecondItem",
+          "InnerNo": "1",
+          "InnerYes": "1",
+          "LastSeen": "SecondItem",
+          "OuterCount": "2"
+        }
+      }
+    ],
+    "output_file": {
+      "run1": "catalog/evidence/p3-nested-if-output-run1-20260912.txt",
+      "run2": "catalog/evidence/p3-nested-if-output-run2-20260912.txt",
+      "text": "SecondItem (UTF-8 BOM)"
+    },
+    "separate_flow_reuse": {
+      "flow": "RobinKnowledgeP3NestIfReuse_20260912",
+      "designer_process_id": 24804,
+      "source": "the recopy file above, read from disk",
+      "recopy": {
+        "path": "catalog/evidence/p3-nested-if-exit-reuse-recopy-20260912.robin",
+        "sha256": "b2c65f7e9191734f780bdbe7cc1d8696974f5fc66e893473c9b91bee98f9eaaa"
+      },
+      "runs": [
+        {
+          "evidence": "catalog/evidence/p3-nested-if-exit-reuse-run1-20260912.json",
+          "status": "success",
+          "observed_at": "2026-09-12T00:11:41.5336996Z",
+          "variables": {
+            "CatalogList": "[CatalogItem, SecondItem, ThirdItem]",
+            "CurrentItem": "SecondItem",
+            "InnerNo": "1",
+            "InnerYes": "1",
+            "LastSeen": "SecondItem",
+            "OuterCount": "2"
+          }
+        },
+        {
+          "evidence": "catalog/evidence/p3-nested-if-exit-reuse-run2-20260912.json",
+          "status": "success",
+          "observed_at": "2026-09-12T00:11:51.9532222Z",
+          "variables": {
+            "CatalogList": "[CatalogItem, SecondItem, ThirdItem]",
+            "CurrentItem": "SecondItem",
+            "InnerNo": "1",
+            "InnerYes": "1",
+            "LastSeen": "SecondItem",
+            "OuterCount": "2"
+          }
+        }
+      ],
+      "output_file": {
+        "run1": "catalog/evidence/p3-nested-if-output-reuse-run1-20260912.txt",
+        "run2": "catalog/evidence/p3-nested-if-output-reuse-run2-20260912.txt"
+      }
+    },
+    "expected": {
+      "OuterCount": "2",
+      "InnerNo": "1",
+      "InnerYes": "1",
+      "LastSeen": "SecondItem",
+      "output_text": "SecondItem"
+    },
+    "expectation_met": true,
+    "meaning": "EXIT LOOP inside the inner If (inside Else of the outer If, inside For each) leaves the For each: ThirdItem is never visited (OuterCount=2); the inner Else path (LastSeen=third) never runs; the side effect (file write) happens once."
+  },
+  "nested_loop_next": {
+    "source": "catalog/flows/p3-nested-control/nested-loop-next-source-20260912.robin",
+    "source_sha256": "6dfed2418d7d02fd8c7987db60347322c4d156a231879c3ea097ae0e01ae7e44",
+    "flow": "RobinKnowledgeP3NestLoop_20260912",
+    "designer_process_id": 27492,
+    "action_count": 15,
+    "paste_save": "catalog/evidence/p3-nested-loop-next-paste-save-20260912.json",
+    "recopy": {
+      "path": "catalog/evidence/p3-nested-loop-next-recopy-20260912.robin",
+      "sha256": "3614c2c12e3e13afcf7bad69586947323eddbc0088019802ce6fc6b95952b779",
+      "exact_match_to_source": true
+    },
+    "runs": [
+      {
+        "evidence": "catalog/evidence/p3-nested-loop-next-run1-20260912.json",
+        "status": "success",
+        "observed_at": "2026-09-12T00:05:58.2736982Z",
+        "variables": {
+          "CatalogList": "[CatalogItem, SecondItem, ThirdItem]",
+          "CurrentItem": "ThirdItem",
+          "OuterIdx": "3",
+          "OuterRuns": "2",
+          "Total": "4"
+        }
+      },
+      {
+        "evidence": "catalog/evidence/p3-nested-loop-next-run2-20260912.json",
+        "status": "success",
+        "observed_at": "2026-09-12T00:06:13.9472672Z",
+        "variables": {
+          "CatalogList": "[CatalogItem, SecondItem, ThirdItem]",
+          "CurrentItem": "ThirdItem",
+          "OuterIdx": "3",
+          "OuterRuns": "2",
+          "Total": "4"
+        }
+      }
+    ],
+    "separate_flow_reuse": {
+      "flow": "RobinKnowledgeP3NestLoopReuse_20260912",
+      "designer_process_id": 13164,
+      "paste_save": "catalog/evidence/p3-nested-loop-next-reuse-paste-save-20260912.json",
+      "recopy": {
+        "path": "catalog/evidence/p3-nested-loop-next-reuse-recopy-20260912.robin",
+        "sha256": "3614c2c12e3e13afcf7bad69586947323eddbc0088019802ce6fc6b95952b779"
+      },
+      "runs": [
+        {
+          "evidence": "catalog/evidence/p3-nested-loop-next-reuse-run1-20260912.json",
+          "status": "success",
+          "observed_at": "2026-09-12T00:10:07.8363285Z",
+          "variables": {
+            "CatalogList": "[CatalogItem, SecondItem, ThirdItem]",
+            "CurrentItem": "ThirdItem",
+            "OuterIdx": "3",
+            "OuterRuns": "2",
+            "Total": "4"
+          }
+        },
+        {
+          "evidence": "catalog/evidence/p3-nested-loop-next-reuse-run2-20260912.json",
+          "status": "success",
+          "observed_at": "2026-09-12T00:10:23.6701638Z",
+          "variables": {
+            "CatalogList": "[CatalogItem, SecondItem, ThirdItem]",
+            "CurrentItem": "ThirdItem",
+            "OuterIdx": "3",
+            "OuterRuns": "2",
+            "Total": "4"
+          }
+        }
+      ]
+    },
+    "expected": {
+      "Total": "4",
+      "OuterRuns": "2"
+    },
+    "observed_extra": {
+      "OuterIdx_after_completion": "3",
+      "CurrentItem_after_completion": "ThirdItem"
+    },
+    "expectation_met": true,
+    "meaning": "NEXT LOOP inside the inner For each skips only that inner iteration (SecondItem) in both outer passes; the outer LOOP still completes twice."
+  },
+  "not_verified": "three or more nesting levels; EXIT LOOP inside the outer loop from the inner loop (it exits the innermost loop only, per this probe's design); loops with condition (LOOP WHILE) nested; If inside If without a loop.",
+  "distinction": {
+    "captured": "composed from captured forms, PAD-validated by paste and recopied",
+    "original_flow_probe_2_runs": true,
+    "separate_flow_reuse_2_runs": true,
+    "knowledge_integrated": "pending",
+    "copilot_generation_accepted": "pending"
+  }
+}

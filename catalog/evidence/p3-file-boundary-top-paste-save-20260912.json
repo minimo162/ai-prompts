@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-12T00:13:24.3439695Z",
+    "flow_name":  "RobinKnowledgeP3FileTop_20260912",
+    "source_robin":  "catalog/flows/p3-file-boundary/top-level-source-20260912.robin",
+    "source_sha256":  "1f5fb888829f69ce91bfbc66c44fd81cdf91d09a15d614a5664d6c3a8f0920a4",
+    "source_bytes":  822,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  13,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

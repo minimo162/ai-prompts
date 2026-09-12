@@ -1,0 +1,67 @@
+{
+ "schema_version": 2,
+ "status": "complete_live_acceptance",
+ "package": {
+  "bundle_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+ },
+ "p5": {
+  "issue_close": false
+ },
+ "p4_current_bundle": {
+  "status": "COMPLETE_FIXTURE",
+  "case_results": {
+   "knowledge_precheck": {
+    "status": "PASS_REFERENCE_ONLY",
+    "evidence": "evidence/precheck.json"
+   },
+   "T01": {
+    "status": "PASS_FIXTURE",
+    "evidence": "evidence/T01.json"
+   },
+   "T02": {
+    "status": "PASS_FIXTURE",
+    "evidence": "evidence/T02.json"
+   },
+   "T03": {
+    "status": "PASS_FIXTURE",
+    "evidence": "evidence/T03.json"
+   },
+   "T04": {
+    "status": "PASS_FIXTURE",
+    "evidence": "evidence/T04.json"
+   },
+   "T05": {
+    "status": "PASS_FIXTURE",
+    "evidence": "evidence/T05.json"
+   },
+   "T06": {
+    "status": "PASS_FIXTURE",
+    "evidence": "evidence/T06.json"
+   },
+   "T07": {
+    "status": "PASS_FIXTURE",
+    "evidence": "evidence/T07.json"
+   },
+   "T08": {
+    "status": "PASS_FIXTURE",
+    "evidence": "evidence/T08.json"
+   },
+   "T09": {
+    "status": "PASS_FIXTURE",
+    "evidence": "evidence/T09.json"
+   },
+   "T10": {
+    "status": "PASS_FIXTURE",
+    "evidence": "evidence/T10.json"
+   }
+  },
+  "independent_retests": {
+   "status": "PENDING_FIXTURE",
+   "results": {}
+  },
+  "negative_suite": {
+   "status": "PENDING_FIXTURE",
+   "evidence": null
+  }
+ }
+}

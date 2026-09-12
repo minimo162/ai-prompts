@@ -1,0 +1,4 @@
+Variables.CreateNewList List=> CatalogList
+Variables.AddItemToList Item: $'''CatalogItem''' List: CatalogList
+Variables.AddItemToList Item: $'''SecondItem''' List: CatalogList
+SET NewVar TO CatalogList[1]

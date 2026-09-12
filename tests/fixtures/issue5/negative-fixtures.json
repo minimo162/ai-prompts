@@ -57,6 +57,20 @@
    "evidence_root": "negative-other-bundle",
    "bundle_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
    "expected_error_prefix": "AUDIT_NEGATIVE"
+  },
+  {
+   "name": "pending-independent-and-negative-but-complete-claimed",
+   "audit": "pending-claimed-complete/audit.json",
+   "evidence_root": "pending-claimed-complete",
+   "bundle_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "expected_error_prefix": "AUDIT_INDEPENDENT"
+  },
+  {
+   "name": "partial-with-pending-independent-and-negative",
+   "audit": "partial-pending-ok/audit.json",
+   "evidence_root": "partial-pending-ok",
+   "bundle_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "expected_error_prefix": ""
   }
  ]
 }

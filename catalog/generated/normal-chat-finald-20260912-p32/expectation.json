@@ -1,0 +1,18 @@
+{
+  "fixed_before_send": true,
+  "expected": {
+    "lines": 23,
+    "must_contain": [
+      "EXIT LOOP",
+      "ELSE"
+    ],
+    "pad": {
+      "OuterCount": "2",
+      "InnerNo": "1",
+      "InnerYes": "1",
+      "LastSeen": "SecondItem",
+      "output_text": "SecondItem"
+    }
+  },
+  "flow": "RobinKnowledgeP32FinalD_20260912"
+}

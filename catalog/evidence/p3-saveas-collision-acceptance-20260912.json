@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T09:47:57+09:00",
+  "status": "PASS_PROBE_SAVEAS_COLLISION_OBSERVED",
+  "missing_item": "E-office SaveAs collision (P3-4)",
+  "environment": {
+    "pad_package_version": "11.2608.115.0",
+    "language": "ja-JP",
+    "power_fx": false
+  },
+  "expectations": "catalog/flows/p3-saveas-collision/expectations-20260912.json (run 2 outcome intentionally not fixed; observed and recorded)",
+  "excel": {
+    "source": "catalog/flows/p3-saveas-collision/excel-saveas-source-20260912.robin",
+    "source_sha256": "5640ab495937d6b4c2c681f999f80b7b8cefda1d98f8c3c6c90dfa2c0edfc4b2",
+    "derived_from": "accepted T05 4-line flow, output name only changed",
+    "flow": "RobinKnowledgeP3SaveAsXlsx_20260912",
+    "designer_process_id": 30268,
+    "paste_save": "catalog/evidence/p3-saveas-xlsx-paste-save-20260912.json",
+    "recopy": {
+      "path": "catalog/evidence/p3-saveas-xlsx-recopy-20260912.robin",
+      "sha256": "043e230a85884b3fc91c68d5bcfb08f92ba2d8d9ab747479a7783a3554d5a02f",
+      "exact_match_to_source": true
+    },
+    "run1": {
+      "precondition": "output absent",
+      "evidence": "catalog/evidence/p3-saveas-xlsx-run1-20260912.json",
+      "status": "success",
+      "observed_at": "2026-09-12T00:17:26.2441970Z"
+    },
+    "run2": {
+      "precondition": "run-1 output present (not moved aside)",
+      "evidence": "catalog/evidence/p3-saveas-xlsx-run2-20260912.json",
+      "status": "success",
+      "observed_at": "2026-09-12T00:18:41.1049223Z",
+      "observed": "success; no prompt, no runtime error; output mtime 09:18:33 JST equals run-2 time, B2=T05-Changed",
+      "conclusion": "Excel.SaveExcel.SaveAs (OpenXmlWorkbook) overwrites an existing target silently; the raw has no overwrite argument"
+    },
+    "output": "catalog/evidence/p3-saveas-collision-20260912.xlsx"
+  },
+  "word": {
+    "source": "catalog/flows/p3-saveas-collision/word-saveas-source-20260912.robin",
+    "source_sha256": "9b982b662c7af2d3999b31b038e899ef45f03bae71132fa6a98bd149f54c12ec",
+    "derived_from": "accepted T06 4-line flow, output name only changed",
+    "flow": "RobinKnowledgeP3SaveAsDocx_20260912",
+    "designer_process_id": 28120,
+    "paste_save": "catalog/evidence/p3-saveas-docx-paste-save-20260912.json",
+    "recopy": {
+      "path": "catalog/evidence/p3-saveas-docx-recopy-20260912.robin",
+      "sha256": "261381f57963ee441c36329e9423c3d7e5ae4f8b8c069b6aae3471f2f8705c99",
+      "exact_match_to_source": true
+    },
+    "first_attempt_note": "the first two Run attempts failed inside the UIA helper (COMException / Run button unavailable) before any run started; the Designer was 準備完了 with 4 actions; runs were retried once and are the recorded run1/run2",
+    "run1": {
+      "precondition": "output absent",
+      "evidence": "catalog/evidence/p3-saveas-docx-run1-20260912.json",
+      "status": "success",
+      "observed_at": "2026-09-12T00:29:39.8404135Z",
+      "output_sha256_prefix": "557650561e319c3a",
+      "mtime": "09:29:31 JST"
+    },
+    "run2": {
+      "precondition": "run-1 output present",
+      "evidence": "catalog/evidence/p3-saveas-docx-run2-20260912.json",
+      "status": "success",
+      "observed_at": "2026-09-12T00:31:01.3086533Z",
+      "output_sha256_prefix": "01f5323cc9eb1a56",
+      "mtime": "09:30:53 JST",
+      "observed": "success; no prompt, no runtime error; file rewritten (sha and mtime changed), text OfficeCatalog->T06Replaced",
+      "conclusion": "Word.SaveWord.SaveAs (FromExtension) overwrites an existing target silently"
+    },
+    "output": "catalog/evidence/p3-saveas-collision-20260912.docx"
+  },
+  "invariants": {
+    "inputs_unchanged": "excel-catalog.xlsx e94bd14c…, word-catalog.docx 2753855b… before/after",
+    "office_processes_after": 0,
+    "unrelated_outputs": "untouched"
+  },
+  "not_verified": "PowerPoint SaveAs, PDF outputs, read-only or locked targets, targets open in another process, File.WriteText modes other than Overwrite (its IfFileExists argument is explicit)",
+  "distinction": {
+    "captured": "accepted T05/T06 forms with changed output name, PAD-validated by paste and recopied",
+    "original_flow_probe_2_runs": true,
+    "knowledge_integrated": "pending",
+    "copilot_generation_accepted": "pending"
+  }
+}

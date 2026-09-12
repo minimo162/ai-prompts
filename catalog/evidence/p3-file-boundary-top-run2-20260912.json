@@ -1,0 +1,17 @@
+{
+    "schema_version":  1,
+    "observed_at":  "2026-09-12T00:13:49.1996224Z",
+    "flow_name":  "RobinKnowledgeP3FileTop_20260912",
+    "run_status":  "success",
+    "ready_observed":  true,
+    "start_enabled_after":  true,
+    "variable_previews":  [
+                              "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\x.txt.bak",
+                              "plain 日本語",
+                              "[C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\plain.txt,  ...]",
+                              "2",
+                              "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\x.txt.bak",
+                              "1",
+                              "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\plain.txt"
+                          ]
+}

@@ -1,0 +1,23 @@
+Variables.CreateNewList List=> CatalogList
+Variables.AddItemToList Item: $'''CatalogItem''' List: CatalogList
+Variables.AddItemToList Item: $'''SecondItem''' List: CatalogList
+Variables.AddItemToList Item: $'''ThirdItem''' List: CatalogList
+SET OuterCount TO 0
+SET InnerYes TO 0
+SET InnerNo TO 0
+SET LastSeen TO $'''none'''
+LOOP FOREACH CurrentItem IN CatalogList
+    Variables.IncreaseVariable Value: OuterCount IncrementValue: 1
+    IF CurrentItem = $'''CatalogItem''' THEN
+        Variables.IncreaseVariable Value: InnerNo IncrementValue: 1
+    ELSE
+        IF CurrentItem = $'''SecondItem''' THEN
+            Variables.IncreaseVariable Value: InnerYes IncrementValue: 1
+            SET LastSeen TO CurrentItem
+            File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\p3-nested-if-output-20260912.txt''' TextToWrite: CurrentItem AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+            EXIT LOOP
+        ELSE
+            SET LastSeen TO $'''third'''
+        END
+    END
+END

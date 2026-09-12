@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-12T00:01:51.1695539Z",
+    "flow_name":  "RobinKnowledgeP3ListIdx1Reuse_20260912",
+    "source_robin":  "catalog/evidence/p3-list-idx1-probe-20260912.robin",
+    "source_sha256":  "36a8179b61739dde9e99453b7b9baf693b384b5aa9a6d16fa229f111042f8473",
+    "source_bytes":  209,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  4,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

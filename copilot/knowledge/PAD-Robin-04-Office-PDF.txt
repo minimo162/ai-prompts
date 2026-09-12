@@ -101,3 +101,10 @@ T07のページ2単独抽出（リポジトリfixture）
 - 組合せ原文は `catalog/generated/normal-chat-t07-20260910-final/robin.txt`、SHA-256 `47a33ef2067bd37009187758e16fc36daa0f5447093b51e83e984e1d8fd484c9`。貼付け・実行証拠は `catalog/evidence/normal-chat-t07-final-paste.json` と `normal-chat-t07-final-run-1.json`。
 
 詳細記録: docs/office-action-capture.md、docs/pdf-action-capture.md。未確認のモードを、確認済みの完成例へ混ぜない。
+
+2026-09-12の追加採取: 別名保存（SaveAs）と既存ファイルの衝突
+- 受入済みのT05（Excel）とT06（Word）の4行から出力名だけを`p3-saveas-collision-20260912.xlsx`／`.docx`へ変えた別probeを新しい空フローへ貼り付け（再コピー原文 `catalog/evidence/p3-saveas-xlsx-recopy-20260912.robin` SHA-256 `043e230a85884b3fc91c68d5bcfb08f92ba2d8d9ab747479a7783a3554d5a02f`、`p3-saveas-docx-recopy-20260912.robin` SHA-256 `261381f57963ee441c36329e9423c3d7e5ae4f8b8c069b6aae3471f2f8705c99`）、1回目は出力なし、2回目は1回目の出力を残したまま実行した。
+- `Excel.SaveExcel.SaveAs ... DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook`: 2回目も成功で、確認なしに既存ファイルを上書きした（更新時刻が2回目の実行時刻、B2=T05-Changed）。原文に上書き有無の引数は無い。
+- `Word.SaveWord.SaveAs ... DocumentFormat: Word.WordFormat.FromExtension`: 2回目も成功で、既存ファイルを上書きした（SHAと更新時刻が変化、本文はOfficeCatalog→T06Replaced）。
+- 元入力（excel-catalog.xlsx／word-catalog.docx）のSHAは不変、Excel／Wordプロセスは残らない。証拠: `catalog/evidence/p3-saveas-collision-acceptance-20260912.json`。
+- 生成時の扱い: 別名保存は既存出力を無警告で上書きするため、残す必要がある既存ファイルは実行前に退避するよう明示する。`File.WriteText`の`IfFileExists`のような明示引数はExcel／WordのSaveAsには無い。未確認: PowerPointのSaveAs、読み取り専用・他プロセスで開かれている出力先、PDF出力。

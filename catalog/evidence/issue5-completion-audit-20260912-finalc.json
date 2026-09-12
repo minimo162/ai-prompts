@@ -136,5 +136,10 @@
     "Agent Builder registration/search/instruction adherence not verified (out of scope)",
     "knowledge .txt files carry CRLF in the working tree (HEAD is LF); byte-identical to the tested bundle, cosmetic"
   ],
-  "result": "Final version f42f5acf: knowledge precheck, T01-T10, independent T01/T04/T10 and the negative suite are all accepted on the same version."
+  "result": "Final version f42f5acf: knowledge precheck, T01-T10, independent T01/T04/T10 and the negative suite are all accepted on the same version.",
+  "superseded_by": {
+    "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+    "record": "issue5-completion-audit-20260912-finald.json",
+    "reason": "P3-1..P3-6 integrated; finalc acceptance stays valid for f42f5acf only"
+  }
 }

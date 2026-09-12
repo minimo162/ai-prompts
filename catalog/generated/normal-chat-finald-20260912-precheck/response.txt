@@ -1,0 +1,197 @@
+Copilot said:
+
+添付された agent-instructions と PAD-Robin-Knowledge-Bundle の記載だけを根拠に、2026年9月12日の追加採取を含む最新の確認状態を整理します。過去の「未確認」記録は、後段の追加probeで確認された範囲に限って更新して扱います。
++ 1
+
+共通の実測環境
+PAD：2.71.115.26224
+表示言語：日本語
+Power Fx：OFF
+データ：専用フロー上の合成データ
+「確認済み」は、PADからの原文採取、保存、再コピー、複数回の実行、期待値照合、および記載がある場合は別フローでの再利用までを区別して判断しています。
+1. リストの2番目の項目を変数へ取り出す方法
+確認済み
+
+リストは0始まりで参照され、2番目の項目はインデックス 1 を指定して変数へ設定します。確認された原文の形は「変数の設定」でリスト式を直接参照する方法です。専用の項目取得アクションを使う方法ではありません。
+
+合成リストの内容は CatalogItem、SecondItem の順で、実行結果は次のとおりです。
+
+出力変数：NewVar
+出力型：テキスト
+実行結果：NewVar=SecondItem
+元フローで2回実行して同じ結果
+保存した原文を別の空フローへ貼り付け
+再コピーがバイト一致
+別フローでも2回実行して同じ結果
+
+根拠は catalog/evidence/p3-list-idx1-probe-20260912.robin と catalog/evidence/p3-list-idx1-acceptance-20260912.json です。
+
+UI上の確認範囲
+
+変数ピッカーでリスト変数を展開しても表示されたのは .Count だけで、項目を選択する入口はありませんでした。リスト変数を入力欄へ挿入したうえで、閉じる % の前に添字を手入力する方法がPADデザイナーに受理されています。インデックス 0 と 1 はそれぞれ実測されています。
+
+依然として未確認
+
+次は確認されていません。
+
+2件のリストに対する範囲外インデックス 2
+負のインデックス
+末尾を表す特殊指定
+インデックスを数値変数で与える形
+取り出した値を別アクションへ直接受け渡す組み合わせ
+専用の「項目を取得」アクション
+
+したがって、確認済みとして一般化できるのは、0始まりの数値リテラルによるインデックス 0 と 1 の参照までです。
+
+2. If内If／入れ子ループにおける EXIT LOOP・NEXT LOOP
+EXIT LOOP の確認結果
+
+If内IfをFor eachの中に置き、内側Ifから EXIT LOOP を実行する23アクションの構成が確認されています。EXIT LOOP はIfブロックを抜けるのではなく、その命令を囲む最も近いループであるFor eachを終了しました。
+
+3項目のリストに対する実測結果は次のとおりです。
+
+OuterCount=2
+InnerNo=1
+InnerYes=1
+LastSeen=SecondItem
+保存された出力内容：SecondItem
+3番目の ThirdItem は訪問されない
+3番目に対応する内側Elseの処理も実行されない
+
+元フローで2回、さらに別の空フローへ再利用して同じ結果が確認されています。根拠は catalog/evidence/p3-nested-if-exit-recopy-20260912.robin と catalog/evidence/p3-nested-control-acceptance-20260912.json です。
+
+NEXT LOOP の確認結果
+
+外側を定数範囲Loop、内側をFor eachとし、内側For eachのIfから NEXT LOOP を実行する15アクションの構成が確認されています。NEXT LOOP は最も近い内側For eachの現在の反復だけを飛ばしました。外側Loopの次の反復へ直接移る動作ではありません。
+
+実測では、各外側反復で SecondItem の後続処理だけが省略されました。
+
+Total=4
+OuterRuns=2
+完了後の OuterIdx=3
+最終 CurrentItem=ThirdItem
+外側Loopは2回とも完走
+
+こちらも元フローで2回、別フローでの再利用でも同じ結果が確認されています。
+
+ブロック構造の確認事項
+
+PADでは ELSE と各 END も1アクションとして数えられます。確認されたIf内If構成は23行で23アクションです。貼り付け確認では、アクション数だけでなく、それぞれの END がどのIfまたはLoopに対応しているかを確認する必要があります。
+
+依然として未確認
+3段以上の入れ子
+内側ループから外側ループを直接抜ける方法
+LOOP WHILE の入れ子
+ループを含まないIf内Ifだけの独立probe
+ラベル付きbreakや外側ループ指定に相当する構文
+
+実測から言えるのは、今回確認された構造では両命令とも最も近いループに作用した、という範囲までです。
+
+3. 拡張子判定の境界
+
+判定対象はファイルパス文字列全体ではなく、ファイル変数の .Extension プロパティです。比較対象は .txt で、演算子は完全な等価比較です。Contains を使う部分一致判定とは区別されています。
+
+.TXT
+
+.TXT は対象外のElseへ入りました。実測された等価比較は大文字と小文字を区別します。このため、確認済みの条件だけでは .TXT を .txt と同じ対象にはできません。
+
+大文字小文字を無視する別の比較設定は未採取です。
+
+.txt.bak
+
+x.txt.bak はElseへ入りました。このファイルの .Extension は .bak と評価され、途中に含まれる .txt は判定結果に影響しませんでした。
+
+親フォルダー名
+
+親フォルダー名が sub.txt でも、その中の inner.txt はファイル自身の拡張子が .txt であるため対象側へ入りました。親フォルダー名に含まれる .txt は、ファイルの .Extension 判定には影響しません。
+
+サブフォルダー
+
+サブフォルダー内のファイルを判定対象として列挙するかどうかは、フォルダー取得時の IncludeSubfolders 設定で制御されました。
+
+IncludeSubfolders: False
+列挙：3件
+.txt 側：1件、plain.txt
+Else側：2件、upper.TXT と x.txt.bak
+サブフォルダー内ファイルは列挙されない
+IncludeSubfolders: True
+列挙：5件
+.txt 側：3件、plain.txt、sub.txt\inner.txt、nested\deep.txt
+Else側：2件
+
+2つの新しい空フローで、それぞれ2回ずつ実行されています。入力5件のSHAも不変でした。根拠は catalog/evidence/p3-file-boundary-acceptance-20260912.json です。
+
+依然として未確認
+大文字小文字を無視する比較設定
+.Name や .NameWithoutExtension を使う判定
+空フォルダー
+NoSort における一般的な列挙順の保証
+他の複合拡張子に対する一般化
+4. Officeの別名保存、日付書式、名前付きエラー
+Excelの別名保存と既存ファイルの衝突
+
+ExcelのSaveAsは、同名の既存出力がある2回目の実行でも成功し、確認ダイアログなしで既存ファイルを上書きしました。
+
+保存形式：Excel.ExcelFormat.OpenXmlWorkbook
+2回目の実行時刻へ更新時刻が変化
+保存後のセル：B2=T05-Changed
+SaveAs原文には、上書き可否を指定する引数がない
+元の入力ExcelのSHAは不変
+Excelプロセスは実行後に残らない
+
+根拠は catalog/evidence/p3-saveas-collision-acceptance-20260912.json です。
+
+Wordの別名保存と既存ファイルの衝突
+
+WordのSaveAsも、同名ファイルを残した状態での2回目の実行に成功し、既存ファイルを無警告で上書きしました。
+
+保存形式：Word.WordFormat.FromExtension
+2回目にSHAと更新時刻が変化
+本文の置換結果：OfficeCatalog から T06Replaced
+元の入力Word文書のSHAは不変
+Wordプロセスは実行後に残らない
+
+Excelと同様、SaveAsに File.WriteText の IfFileExists に相当する明示的な衝突処理引数は確認されていません。既存出力を残す必要がある場合は、実行前の退避が必要です。
+
+SaveAsで依然として未確認
+PowerPointのSaveAs衝突
+出力ファイルが別プロセスで開かれている場合
+読み取り専用の出力先
+PDF形式への出力
+書込み権限がない保存先
+カスタム日付書式の採取状況
+
+カスタム日時書式は、2026年9月12日に新規追加経路で採取と実行に成功しています。
+
+入力型：DateTime
+カスタム形式：yyyy-MM-dd
+出力変数：FormattedDateTime2
+出力型：テキスト
+実行結果：2026-09-12
+元フローで2回実行
+別の空フローへ原文ファイルから貼り付けても同じ結果
+
+根拠は catalog/evidence/p3-date-format-probe-20260912.robin と catalog/evidence/p3-date-format-acceptance-20260912.json です。
+
+2026年9月11日に発生した System.InvalidOperationException: Sequence contains no matching element は、既存アクションを開き直して編集した経路での内部例外です。2026年9月12日に左パネルから変換アクションを新規追加した経路では再現しませんでした。したがって、「カスタム書式全体が未確認」ではなく、yyyy-MM-dd の新規追加経路は確認済み、既存アクションの再編集経路は依然として未確認、という境界です。
+
+未確認なのは、yyyy-MM-dd 以外の書式トークン、時刻・曜日・和暦、DateOnly入力、無効な書式文字列、タイムゾーン変更、および既存アクションを再編集する経路です。
+
+アクション単位の名前付きエラー
+
+欠損ファイルを読むアクションに対して、そのアクションのエラー一覧から「ファイルが見つかりません」を選んだ結果、アクション単位の名前付きルールは FileNotFoundError として採取されました。
+
+2回の実行結果は次のとおりです。
+
+NewVar=named が設定される
+LastError には「ファイルが見つかりません」が残る
+ブロック側の ErrorHandled は設定されない
+ブロック側の既定ルール用 ErrorHandledDefault も設定されない
+アクション単位のルールで処理され、フローは続行
+別フローへの貼り付け後も同じ結果
+
+根拠は catalog/evidence/p3-named-error-probe-20260912.robin と catalog/evidence/p3-named-error-acceptance-20260912.json です。
+
+重要な境界として、アクションが実際に返す組込みエラーコードは FileNotFoundError です。一方、ブロック側で設定していた FileNotFound は IsUserDefinedErrorCode: True の利用者定義名であり、欠損ファイルのエラーには一致しませんでした。T08の既定ハンドラー成功を、名前付きエラー一致の証拠として読み替えることもできません。
+
+名前付きエラーについて未確認なのは、ブロック側で組込みコード FileNotFoundError を直接指定する形、他のエラーコード、スローモード、再試行ポリシーとの併用です。

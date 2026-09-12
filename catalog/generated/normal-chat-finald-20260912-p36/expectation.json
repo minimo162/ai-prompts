@@ -1,0 +1,16 @@
+{
+  "fixed_before_send": true,
+  "expected": {
+    "must_contain": [
+      "ON ERROR FileNotFoundError",
+      "SET NewVar TO $'''named'''",
+      "ERROR => LastError Reset: True"
+    ],
+    "pad": {
+      "NewVar": "named",
+      "ErrorHandledDefault": "absent",
+      "LastError_contains": "見つかりません"
+    }
+  },
+  "flow": "RobinKnowledgeP36FinalD_20260912"
+}

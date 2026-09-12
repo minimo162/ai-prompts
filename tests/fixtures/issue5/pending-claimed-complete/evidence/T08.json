@@ -1,0 +1,14 @@
+{
+ "schema_version": 1,
+ "case": "T08",
+ "status": "PASS_FIXTURE",
+ "bundle_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+ "generated_robin": {
+  "code_blocks": 1,
+  "raw_unmodified": true
+ },
+ "pad": {
+  "run1": "runs/T08-run1.json",
+  "run2": "runs/T08-run2.json"
+ }
+}
