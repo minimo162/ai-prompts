@@ -4,6 +4,12 @@
 
 ### 監査後の継続: finale候補（未受入・未昇格）
 
+**14:27継続結果:** T01とT02をそれぞれ閉じてコンソールから開き直し、再コピーが生成原文とCRLFだけの差で一致した。保存永続化の不足は両件で解消。個別結果は`.work/finale-20260912/t01/acceptance.json`（PASS_FINALE_T01）と`t02/acceptance.json`（PASS_FINALE_T02）。T02会話は`242e34f0-c6ae-489d-b268-956a056c004e`、指示候補ハッシュは6ad6f742…で不変。
+
+T02は最初の実行後に`PAD_SELECTOR: status ambiguous.`で観測スクリプトが停止し、その試行をPASSに数えず`pad-run1-observation-failure.json`と出力を保持した。生成・期待値を変えず、後続run2/run3の2回を受入対象とした。run3でも一時的な観測エラーがあったが、実行を再要求せず同じフローの観測を継続してready/errors0を取得した。両回とも実行要求後の出力更新、73 bytes・固定SHA8f0748cc…一致、入力不変、CSV解析後のヘッダー＋対象2行（3列、引用フィールドを含む）一致を確認。既存出力の実バイトも試験前と同じ。全件初回成功とはしない。
+
+新版のT03〜T10・独立再試験・P3・負例の受入とA〜G不足は残る。旧finaldの受入を新版へ付け替えていないため、全体はpartial／PR提出準備未完了／未pushのまま。
+
 **14:11継続結果:** 以前のUIA経路で`NewFlowNameTextBox`を取得し、ValuePattern.SetValueで名前入力、Power Fx Off確認、専用フロー作成に成功した。利用者の手動作成は不要となり、先の「PAD操作待ち」は解消した。sky経路の失敗をPAD全体の不具合とは扱わない。
 
 T01を専用フローへ無修正貼付けし3アクション・設計エラー0を確認。保存はInvoke済みだが、貼付けhelperの`saved_confirmed=false`は保存マーカー未捕捉のため残す。再オープンによる永続化確認は未実施。Ctrl+C経路の再コピーはクリップボード旧値／単一行となり拒否し、UIAの「編集→すべて選択→コピー」で3行を取得した。`pad-recopy-verified.robin`は649 bytes、生成646 bytesとの差はCRLFだけ。最初の`pad-recopy.robin`は誤取得なので受入参照に使用しない。
