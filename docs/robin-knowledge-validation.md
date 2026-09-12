@@ -4,6 +4,12 @@
 
 ### 監査後の継続: finale候補（未受入・未昇格）
 
+**T07継続結果:** 同じ候補指示6ad6f742…とbundleを実添付したThink Deeper会話`https://m365.cloud.microsoft/chat/conversation/7f7d2662-d862-40c3-8466-cb7f2c36aa03`から初回生成の2行Robinを無修正保存。専用空フローへ貼付け、再コピー、2回実行、保存後再オープン再コピーを確認した。生成SHA07586350…、再コピー差はCRLFのみ。`.work/finale-20260912/t07/acceptance.json`はPASS_FINALE_T07。
+
+06:18:31Zと06:19:02Zの各実行前に旧出力を退避して出力不在とし、今回更新された135 bytesのUTF-8原文を別保存。両回とも固定期待PAGE_TOKEN_A2を含みPAGE_TOKEN_A1を含まず、入力PDFのSHAf5f24684…不変、終了ready/errors0、旧出力復元を確認した。実行中の観測はrun1でstatus ambiguous、run2でstatus unavailableとなったが、同じ実行の観測を継続して終了を取得した。観測エラーを消さず、実行再要求もしていない。抽出テキストの順序・空白・改行を整形せず、旧PASSを継承しない。
+
+新版個別PASSはT01〜T07。T08〜T10、独立T01/T04/T10、P3正例、負例v2、A〜G限定追跡不足、最終統合検査・PR準備は残る。今回の2回実機照合、JSON読込み、差分検査を、非ライブ全Suite・DOM NOT_RUN・GitHub CIと混同しない。全体partial／PR未準備／未push。
+
 **T05・T06継続結果:** 候補12ファイルの固定ハッシュを再照合し、同じ指示6ad6f742…とbundleで各初回回答の4行Robinを無修正保存した。T05会話は`16f9c57e-f77e-4e58-8826-228fa6f8181b`、T06会話は`c3fbb045-ab81-4b65-a15f-8ec4e8ba8d67`、いずれもThink Deeper・指示とbundleを実添付。両ケースとも専用空フローへ貼付け、再コピー、2回実行、閉じて開き直した再コピーを確認し、生成原文との差はCRLFのみ。個別記録は`.work/finale-20260912/t05/acceptance.json`と`t06/acceptance.json`、各PASS_FINALE_T05／T06。
 
 T05は06:03:31Z／06:04:04Zの2runでB2=T05-Changedとなり、元のA1（OfficeCatalog 日本語 100%）と他の値・数式が不変。T06は06:09:33Z／06:10:12Zの2runで合成本文がT06Replaced 日本語 100%となり、指定置換以外の本文を保持。各入力SHA不変、出力の実行後更新、終了時ready/errors0・Officeプロセス0、元成果物のハッシュ復元を確認した。出力は各回前に退避して不在から実行し、成果物原本を各ケースへ別保存。全件初回成功や複雑な未見文書への一般保証には拡張しない。
