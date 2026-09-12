@@ -4,6 +4,10 @@
 
 ### 監査後の継続: finale候補（未受入・未昇格）
 
+**独立T04継続結果:** 同じ候補指示6ad6f742…とbundleを実添付した新規Think Deeper会話`https://m365.cloud.microsoft/chat/conversation/85acbfc6-9cfc-46ee-96f4-bb8fc6db1a5e`から9行Robinを無修正保存。一次とは別の専用フロー`RobinKnowledgeT04FinalEIndep_20260912`で07:22:41Z／07:23:39Zの2runを実行した。送信前固定の対象/A/10、対象/C/25、対象/D/5にCSV全3行とExcel A1:C3全9セルが一致し、入力SHA1d0b3d3b…不変、出力の今回更新、ready/errors0、Excel残存0を確認した。旧成果物は各回後に復元した。
+
+保存後再オープン再コピーは最初の再コピーとバイト一致し、生成原文との差はCRLFのみ。`.work/finale-20260912/t04-independent/acceptance.json`はPASS_FINALE_T04_INDEPENDENT。一次と生成SHAが同じでも回答・runの流用はしていない。独立T10、P3正例、負例v2、A〜G限定追跡不足、T10比較範囲を含む最終統合監査が残り、全体partial／PR未準備／未pushを維持する。
+
 **独立T01継続結果:** 同じ候補指示6ad6f742…とbundleを実添付した新規Think Deeper会話`https://m365.cloud.microsoft/chat/conversation/44300e2d-8d5f-4aeb-808a-20860b3c453a`から初回3行Robinを無修正保存し、一次とは別の専用フロー`RobinKnowledgeT01FinalEIndep_20260912`で検証した。07:12:03Z／07:13:04Zの2runとも、出力不在から今回更新された90 bytes・固定SHA2b030f2d…一致、入力SHA2866f343…不変、終了ready/errors0、旧出力復元を確認。短いrunning表示は捕捉しておらず、実行要求後の出力更新と終了状態を証拠とする。
 
 保存後再オープン再コピーも生成原文とCRLF差のみ一致。`.work/finale-20260912/t01-independent/acceptance.json`はPASS_FINALE_T01_INDEPENDENT。一次／旧版の回答・runを流用せず、期待値は独立用既存条件から送信前に固定した。独立T04/T10、P3正例、負例v2、A〜G限定追跡不足、T10比較範囲を含む最終監査は残るため、全体partial／PR未準備／未push。
