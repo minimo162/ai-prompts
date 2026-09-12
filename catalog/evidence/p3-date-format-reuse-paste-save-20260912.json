@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-12T00:44:49.5693389Z",
+    "flow_name":  "RobinKnowledgeP3DateFmtReuse_20260912",
+    "source_robin":  "catalog/evidence/p3-date-format-probe-20260912.robin",
+    "source_sha256":  "a7192a3527ce60d62315465278d82bae12fd91de294324990b32119ab4483284",
+    "source_bytes":  403,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  3,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

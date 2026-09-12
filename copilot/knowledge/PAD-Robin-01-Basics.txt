@@ -60,7 +60,7 @@ P3追加probe（現行bundleへ統合する場合は、統合後のハッシュ�
 - 真偽値: `SET P3Bool TO True` を専用flowでコピー・保存・実行し、preview=Trueを確認。証拠: `catalog/evidence/p3-boolean-probe-20260910.json`。
 - 数値減算: 10−3を専用flowで2回実行し、7を確認。証拠: `catalog/evidence/p3-subtract-probe-20260910.json`。
 - 日時: `DateTime.Add` の1日加算、`DateTime.Subtract` の1日減算、`DateTime.GetCurrentDateTime` のDateAndTime／システムタイムゾーンを各専用flowでコピー・保存・2回実行した。証拠: `catalog/evidence/p3-date-add-probe-20260910.json`、`p3-date-subtract-probe-20260910.json`、`p3-date-format-probe-20260910.json`。
-- カスタム日時書式化: ダイアログ選択後のPAD内部例外 `System.InvalidOperationException: Sequence contains no matching element` が発生し、成功原文・実行値は未確認。証拠: `catalog/evidence/p3-date-format-custom-failure-20260910.json`、`p3-date-format-dialog-crash-20260911.json`。
+- カスタム日時書式化（2026-09-11まで）: ダイアログ選択後のPAD内部例外 `System.InvalidOperationException: Sequence contains no matching element` が発生し、成功原文・実行値は未確認。証拠: `catalog/evidence/p3-date-format-custom-failure-20260910.json`、`p3-date-format-dialog-crash-20260911.json`。
 - リスト項目取得: 「リストから項目を削除」は取得値を返さず、現行アクション検索でも専用取得アクションは観測されなかった。式参照等の別方式は未確認。証拠: `catalog/evidence/p3-list-remove-probe-20260910.json`、`p3-list-get-search-boundary-20260911.json`。
 
 2026-09-12の追加採取: リスト項目の取出し（インデックス指定）
@@ -68,3 +68,19 @@ P3追加probe（現行bundleへ統合する場合は、統合後のハッシュ�
 - 「変数の設定」ダイアログの変数ピッカーは、リスト変数`CatalogList`の下に`.Count`だけを表示し、項目を選ぶ入口は無い。ピッカーで`%CatalogList%`を挿入した後、閉じる`%`の前へ`[0]`を入力して`%CatalogList[0]%`とした。Designerは受理し、エラー無し。
 - PADからコピーした原文行: `SET NewVar TO CatalogList[0]`（`catalog/evidence/p3-list-get-index-probe-20260912.robin`、SHA-256 `bdb98da7bbbd77aa1c92dc7eb7f806e255373dd233125ae8ed5690459bccc75d`）。2回実行とも`CatalogList=[CatalogItem, SecondItem]`、`NewVar=CatalogItem`。証拠: `catalog/evidence/p3-list-get-index-probe-20260912.json`。
 - 確認範囲: 先頭項目（インデックス0）の取出しのみ。範囲外・負のインデックス・末尾指定、取り出した値を別アクションで使う組合せ、別フローへの再貼付けは未確認。専用の「項目を取得」アクションは左パネル検索で観測されていない（`p3-list-get-search-boundary-20260911.json`）。
+
+2026-09-12の追加採取: リスト項目の取出し（0以外の添字）
+- 上記の添字0の原文を新しい専用フロー`RobinKnowledgeP3ListIdx1_20260912`へ貼り付け、「変数の設定」ダイアログで値を`%CatalogList[0]%`から`%CatalogList[1]%`へ入力し直して保存・PADから再コピーした。ピッカーは引き続き`.Count`しか出さない。
+- PADからコピーした原文行: `SET NewVar TO CatalogList[1]`（`catalog/evidence/p3-list-idx1-probe-20260912.robin`、SHA-256 `36a8179b61739dde9e99453b7b9baf693b384b5aa9a6d16fa229f111042f8473`）。2回実行とも`CatalogList=[CatalogItem, SecondItem]`、`NewVar=SecondItem`（テキスト）。
+- 保存した原文ファイルを読み直して別の空フロー`RobinKnowledgeP3ListIdx1Reuse_20260912`へ貼り付け、再コピーはバイト一致、2回実行とも`NewVar=SecondItem`。証拠: `catalog/evidence/p3-list-idx1-acceptance-20260912.json`。
+- 生成で使ってよい形: `SET 変数 TO リスト変数[n]`（nは0始まりの数値リテラル。0と1を実測）。範囲外（2件リストの[2]）、負の添字、末尾指定、添字を変数で与える形、取り出した値を他アクションへ渡す組合せは未確認。
+
+2026-09-12の追加採取: 日時のテキスト化（標準書式とカスタム書式）
+- 専用フロー`RobinKnowledgeP3DateFmt_20260912`で、採取済みの`DateTime.GetCurrentDateTime.Local ... DateAndTime`の後に、左パネル検索「日時」→「日時の値をテキスト値に変換」を2回追加した（Enterで追加。既存アクションの編集ではなく新規追加のため、2026-09-11の内部例外は再現しなかった）。
+- 1つ目: 変換するdatetime=`%CurrentDateTime%`（入力欄へ入力）、使用する形式=標準、標準形式=短い日付形式。2つ目: 使用する形式=カスタム、カスタム形式=`yyyy-MM-dd`（ダイアログのサンプルは`2020-05-19`）。
+- PADからコピーした原文（`catalog/evidence/p3-date-format-probe-20260912.robin`、SHA-256 `a7192a3527ce60d62315465278d82bae12fd91de294324990b32119ab4483284`）:
+DateTime.GetCurrentDateTime.Local DateTimeFormat: DateTime.DateTimeFormat.DateAndTime CurrentDateTime=> CurrentDateTime
+Text.ConvertDateTimeToText.FromDateTime DateTime: CurrentDateTime StandardFormat: Text.WellKnownDateTimeFormat.ShortDate Result=> FormattedDateTime
+Text.ConvertDateTimeToText.FromCustomDateTime DateTime: CurrentDateTime CustomFormat: $'''yyyy-MM-dd''' Result=> FormattedDateTime2
+- 2回実行とも`FormattedDateTime=2026/09/12`（ja-JPの短い日付形式）、`FormattedDateTime2=2026-09-12`（実行日）。別の空フロー`RobinKnowledgeP3DateFmtReuse_20260912`へ原文ファイルから貼り付けても同じ結果。証拠: `catalog/evidence/p3-date-format-acceptance-20260912.json`。
+- 未確認: `yyyy-MM-dd`以外のカスタム書式トークン（時刻・曜日・和暦など）、DateOnly入力、無効な書式文字列、タイムゾーン変更、既存の変換アクションを開き直して編集する経路（2026-09-11に内部例外が出た経路）。

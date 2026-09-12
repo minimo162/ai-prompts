@@ -150,3 +150,10 @@ P3追補: ファイル／フォルダー操作（現行bundle統合版。通常�
 - PDF表の値: catalog/evidence/pdf/table-headers-values.json、catalog/evidence/pdf/table-no-headers-values.json
 - PDFの合成入力: catalog/fixtures/pdf/README.md
 - 採取条件: docs/robin-action-catalog.md、docs/pdf-action-capture.md
+
+2026-09-12の追加採取: 拡張子判定の境界（`.TXT`、`.txt.bak`、親フォルダー名、サブフォルダー）
+- 固定T03のフローは変更せず、採取済みT03の13行（`catalog/flows/t03-extension-branch/capture-pad-copy-20260912.robin`）のフォルダーだけを合成フォルダー`catalog/fixtures/files-boundary`（`plain.txt`、`upper.TXT`、`x.txt.bak`、`sub.txt\inner.txt`、`nested\deep.txt`）へ変えた別probeを、期待値を先に固定して2つの新しい空フローで2回ずつ実行した（再コピー原文 `catalog/evidence/p3-file-boundary-top-recopy-20260912.robin` SHA-256 `1f5fb888829f69ce91bfbc66c44fd81cdf91d09a15d614a5664d6c3a8f0920a4`、`p3-file-boundary-sub-recopy-20260912.robin` SHA-256 `e909a16591683dc1e513cb538e3040ca1bb8e1dd5ddc9465fdecd670e73aaadb`）。
+- `IncludeSubfolders: False`: `Files`は3件、`TxtCount=1`（plain.txt）、`OtherCount=2`（upper.TXT、x.txt.bak）。サブフォルダー内は列挙されない。
+- `IncludeSubfolders: True`: `Files`は5件、`TxtCount=3`（plain.txt、sub.txt\inner.txt、nested\deep.txt）、`OtherCount=2`。
+- 観測結果: `CurrentFile.Extension = $'''.txt'''`は大文字小文字を区別する（`.TXT`はElse）。`.txt.bak`の`.Extension`は`.bak`でElse。親フォルダー名が`sub.txt`でも中のファイルの`.Extension`は`.txt`でThen。これらは設定と観測の記録であり、大文字小文字を無視する比較や再帰設定の仕様を補ってはいない。入力5件のSHAは不変。証拠: `catalog/evidence/p3-file-boundary-acceptance-20260912.json`。
+- 大文字の`.TXT`も対象にしたい依頼では、確認済みの等価比較だけでは足りないことを明示し、大文字小文字を無視する比較は未採取として扱う。

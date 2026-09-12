@@ -1,6 +1,20 @@
 # 通常M365 Copilotチャット受入試験 T01〜T10（継続中）
 
-## 現行最終版（2026-09-12、finalc-20260912）
+## 作業版（2026-09-12、finald-20260912、P3統合・同一版受入は未実施）
+
+指示文 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`（不変）／bundle `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`（マニフェスト `copilot/knowledge-bundle-manifest-20260912d.json`）。直前版 finalc `f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089` との差分は、P3-1〜P3-6の実測結果（リスト添字1、If内If／入れ子ループとEXIT LOOP／NEXT LOOPの作用範囲、`.TXT`／`.txt.bak`／親フォルダー名／サブフォルダー境界、Excel／Word SaveAsの無警告上書き、カスタム日付書式 `yyyy-MM-dd`、アクション単位の名前付きエラー `ON ERROR FileNotFoundError`）を7原本へ統合したことです。各probeは専用合成フローで2回実行し、リスト・入れ子・日付・エラーは別空フローへの再利用まで確認済み（`catalog/evidence/p3-*-acceptance-20260912.json`）。
+
+この版で完了しているのは知識precheck（`catalog/evidence/current-bundle-finald-precheck-20260912.json`、Robinなし）だけです。T01〜T10、独立再試験T01/T04/T10、負例v2（N1をIf内If＋副作用＋脱出から3段入れ子・外側脱出へ差し替え。旧N1は正例P3-2へ）、P3正例P3-1〜P3-6（`catalog/generated/acceptance-p3-20260912/cases.json`）は、送信本文と専用PADフロー（`RobinKnowledge*FinalD_20260912`）を用意した段階で**未送信・未受入**です。finalcの合格はこの版へ継承しません。状態の正本は `catalog/evidence/current-package-status-20260912-finald.json`（partial）と `issue5-completion-audit-20260912-finald.json`。
+
+| 区分 | finald判定 | 証跡 |
+| --- | --- | --- |
+| 知識precheck | PASS_REFERENCE_ONLY | `catalog/generated/normal-chat-finald-20260912-precheck/` |
+| T01〜T10 | NOT_RUN（本文・フロー準備済み） | `catalog/generated/normal-chat-finald-20260912-t01`〜`t10/` |
+| 独立再試験 T01/T04/T10 | PENDING | 同上 `-independent/` |
+| 負例 v2 N1〜N3 | PENDING（期待を事前固定） | `catalog/generated/normal-chat-finald-20260912-negative-suite/expectation.json` |
+| P3正例 P3-1〜P3-6 | PENDING（期待を事前固定） | `catalog/generated/normal-chat-finald-20260912-p31`〜`p36/expectation.json` |
+
+## 直前の受入済み版（2026-09-12、finalc-20260912）
 
 指示文 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`／bundle `f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089`（マニフェスト `copilot/knowledge-bundle-manifest-20260912c.json`）を同一版として固定しました。直前版 `32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041` との差分はT09教材の待機値のみです（`WAIT 500`＝500秒は2026-09-10採取時の500ミリ秒のつもりの誤設定。待機ダイアログで1秒へ直した再採取原文 `WAIT 1` を教材にし、2回実行で数秒完了を確認）。
 

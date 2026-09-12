@@ -1,0 +1,17 @@
+{
+  "fixed_before_send": true,
+  "expected": {
+    "lines": 4,
+    "must_contain": [
+      "Excel.SaveExcel.SaveAs",
+      "p3-saveas-case-20260912.xlsx"
+    ],
+    "answer_must_state": "existing target is overwritten without prompt (measured)",
+    "pad": {
+      "B2": "T05-Changed",
+      "run2_overwrites_existing": true,
+      "input_unchanged": true
+    }
+  },
+  "flow": "RobinKnowledgeP34FinalD_20260912"
+}

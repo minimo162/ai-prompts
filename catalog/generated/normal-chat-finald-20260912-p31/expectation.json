@@ -1,0 +1,15 @@
+{
+  "fixed_before_send": true,
+  "expected": {
+    "lines": 4,
+    "must_contain": [
+      "Variables.CreateNewList List=> CatalogList",
+      "SET NewVar TO CatalogList[1]"
+    ],
+    "pad": {
+      "NewVar": "SecondItem",
+      "CatalogList": "[CatalogItem, SecondItem]"
+    }
+  },
+  "flow": "RobinKnowledgeP31FinalD_20260912"
+}

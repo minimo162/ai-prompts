@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "fixed_at": "2026-09-12T09:12:00+09:00",
+  "fixed_before_run": true,
+  "sources": "accepted T05 (Excel SaveAs OpenXmlWorkbook) and T06 (Word SaveAs FromExtension) 4-line flows with only the output file name changed to p3-saveas-collision-20260912.{xlsx,docx}; inputs excel-catalog.xlsx / word-catalog.docx are opened ReadOnly: False but never saved in place",
+  "procedure": "run 1 with no output file present (first save); run 2 with the run-1 output left in place (collision). No move-aside between runs, unlike the T05/T06 acceptance.",
+  "run1_expected": {"excel": "file created, B2=T05-Changed", "word": "file created, OfficeCatalog->T06Replaced"},
+  "run2_expected": "NOT FIXED: observe whether PAD overwrites silently, prompts, or raises a runtime error; record the Designer status/error text verbatim. Any outcome is recorded as the measured behaviour and taught as such.",
+  "invariants": ["input xlsx/docx SHA unchanged before/after", "no Excel/Word process left after each run", "unrelated outputs untouched"]
+}

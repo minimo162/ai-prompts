@@ -1,0 +1,12 @@
+{
+    "schema_version":  1,
+    "observed_at":  "2026-09-12T00:40:58.6575500Z",
+    "flow_name":  "RobinKnowledgeP3NamedErr_20260912",
+    "run_status":  "success",
+    "ready_observed":  true,
+    "start_enabled_after":  true,
+    "variable_previews":  [
+                              "ファイル C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt が見つかりません",
+                              "named"
+                          ]
+}

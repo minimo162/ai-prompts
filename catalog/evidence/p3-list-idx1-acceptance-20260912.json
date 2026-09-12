@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T09:02:50+09:00",
+  "status": "PASS_PROBE_INDEX1_ORIGINAL_2_RUNS_AND_SEPARATE_FLOW_2_RUNS",
+  "missing_item": "A-list-create-add-get (P3-1)",
+  "scope": "Synthetic list-item retrieval by a non-zero index. The captured [0] probe raw (p3-list-get-index-probe-20260912.robin) was pasted into a new dedicated flow, the 変数の設定 dialog was opened and its value changed from %CatalogList[0]% to %CatalogList[1]% (typed; the picker still offers only .Count), saved, and copied from PAD. The saved raw file was then read back and pasted into a second empty flow.",
+  "environment": {
+    "pad_package_version": "11.2608.115.0",
+    "language": "ja-JP",
+    "power_fx": false
+  },
+  "original_flow": {
+    "flow": "RobinKnowledgeP3ListIdx1_20260912",
+    "designer_process_id": 9028,
+    "base_paste": "catalog/evidence/p3-list-idx1-base-paste-20260912.json",
+    "dialog_edit": "変数の設定: 値 %CatalogList[0]% -> %CatalogList[1]%; Designer row shows 変数 NewVar に値 CatalogList [1] を割り当てる, no error",
+    "raw": {
+      "path": "catalog/evidence/p3-list-idx1-probe-20260912.robin",
+      "sha256": "36a8179b61739dde9e99453b7b9baf693b384b5aa9a6d16fa229f111042f8473",
+      "copied_from_pad": true,
+      "line_of_interest": "SET NewVar TO CatalogList[1]"
+    },
+    "runs": [
+      {
+        "evidence": "catalog/evidence/p3-list-idx1-probe-run1-20260912.json",
+        "status": "success",
+        "CatalogList": "[CatalogItem, SecondItem]",
+        "NewVar": "SecondItem"
+      },
+      {
+        "evidence": "catalog/evidence/p3-list-idx1-probe-run2-20260912.json",
+        "status": "success",
+        "CatalogList": "[CatalogItem, SecondItem]",
+        "NewVar": "SecondItem"
+      }
+    ]
+  },
+  "separate_flow_reuse": {
+    "flow": "RobinKnowledgeP3ListIdx1Reuse_20260912",
+    "designer_process_id": 25944,
+    "paste_save": "catalog/evidence/p3-list-idx1-reuse-paste-save-20260912.json",
+    "source": "the saved raw file above, read from disk",
+    "recopy": {
+      "path": "catalog/evidence/p3-list-idx1-reuse-recopy-20260912.robin",
+      "sha256": "36a8179b61739dde9e99453b7b9baf693b384b5aa9a6d16fa229f111042f8473",
+      "byte_identical_to_source": true
+    },
+    "runs": [
+      {
+        "evidence": "catalog/evidence/p3-list-idx1-reuse-run1-20260912.json",
+        "status": "success",
+        "CatalogList": "[CatalogItem, SecondItem]",
+        "NewVar": "SecondItem"
+      },
+      {
+        "evidence": "catalog/evidence/p3-list-idx1-reuse-run2-20260912.json",
+        "status": "success",
+        "CatalogList": "[CatalogItem, SecondItem]",
+        "NewVar": "SecondItem"
+      }
+    ]
+  },
+  "expected_fixed_before_run": {
+    "CatalogList": "[CatalogItem, SecondItem]",
+    "NewVar": "SecondItem",
+    "type": "text (list item)"
+  },
+  "expectation_met": true,
+  "index0_probe_preserved": "catalog/evidence/p3-list-get-index-probe-20260912.json unchanged",
+  "not_verified": "Out-of-range index (e.g. [2] on a 2-item list), negative index, last-item expressions, index from a variable, using the retrieved value inside other actions.",
+  "distinction": {
+    "captured": true,
+    "original_flow_probe_2_runs": true,
+    "separate_flow_reuse_2_runs": true,
+    "knowledge_integrated": "pending (this round)",
+    "copilot_generation_accepted": "pending (final version)"
+  }
+}

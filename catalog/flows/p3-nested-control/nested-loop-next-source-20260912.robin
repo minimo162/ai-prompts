@@ -1,0 +1,15 @@
+Variables.CreateNewList List=> CatalogList
+Variables.AddItemToList Item: $'''CatalogItem''' List: CatalogList
+Variables.AddItemToList Item: $'''SecondItem''' List: CatalogList
+Variables.AddItemToList Item: $'''ThirdItem''' List: CatalogList
+SET Total TO 0
+SET OuterRuns TO 0
+LOOP OuterIdx FROM 1 TO 2 STEP 1
+    Variables.IncreaseVariable Value: OuterRuns IncrementValue: 1
+    LOOP FOREACH CurrentItem IN CatalogList
+        IF CurrentItem = $'''SecondItem''' THEN
+            NEXT LOOP
+        END
+        Variables.IncreaseVariable Value: Total IncrementValue: 1
+    END
+END

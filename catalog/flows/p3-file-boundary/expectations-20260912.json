@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "fixed_at": "2026-09-12T09:12:00+09:00",
+  "fixed_before_run": true,
+  "fixture_folder": "catalog/fixtures/files-boundary",
+  "fixture_files": ["plain.txt", "upper.TXT", "x.txt.bak", "sub.txt/inner.txt", "nested/deep.txt"],
+  "sources": "the accepted T03 13-line capture with only the Folder literal changed (top-level) and additionally IncludeSubfolders: True (subfolders); the fixed T03 flow itself is untouched",
+  "top-level (IncludeSubfolders: False)": {
+    "deterministic_expectations": {"x.txt.bak": "Extension .bak -> Else (OtherCount)", "plain.txt": "Then (TxtCount)", "sub.txt/inner.txt and nested/deep.txt": "not enumerated (subfolders off)", "Files.Count": 3},
+    "observe_and_record": {"upper.TXT": "whether .Extension = '.txt' matches case-insensitively; the expected value is NOT fixed, the observation is recorded as the PAD behaviour"}
+  },
+  "subfolders (IncludeSubfolders: True)": {
+    "deterministic_expectations": {"Files.Count": 5, "sub.txt/inner.txt": "Then (a parent folder named *.txt does not affect .Extension)", "nested/deep.txt": "Then", "x.txt.bak": "Else"},
+    "observe_and_record": {"upper.TXT": "same as above"}
+  },
+  "invariant": "fixture files unchanged (concat SHA before/after)"
+}

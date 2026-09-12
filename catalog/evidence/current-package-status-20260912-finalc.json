@@ -212,5 +212,10 @@
   ],
   "browser_note": "Google Chrome (Claude in Chrome extension) for every chat; each case is a fresh normal M365 Copilot chat with the full instruction body pasted and the same-version bundle attached (T10: bundle + T10 context bundle b1330a10...). Think Deeper selected.",
   "pad_note": "13 dedicated empty flows (RobinKnowledge*FinalC_20260912); unmodified paste from file, save, recopy, two runs per case; protected outputs moved aside and restored; user Edge/Office windows untouched.",
-  "result": "Final version f42f5acf: knowledge precheck, T01-T10, independent T01/T04/T10 and the negative suite are all accepted on the same version."
+  "result": "Final version f42f5acf: knowledge precheck, T01-T10, independent T01/T04/T10 and the negative suite are all accepted on the same version.",
+  "superseded_by": {
+    "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+    "record": "current-package-status-20260912-finald.json",
+    "reason": "P3-1..P3-6 integrated; finalc acceptance stays valid for f42f5acf only"
+  }
 }

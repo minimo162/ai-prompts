@@ -79,3 +79,12 @@ END
 - `catalog/flows/ui-t09-local-roundtrip/roundtrip.robin` は、Edge起動→`T09-input`入力→実行ボタンクリック→`WAIT 500`→結果段落の`Own Text`取得→ブラウザー終了の6アクション原文である。待機の単位は秒で、500は500ミリ秒のつもりの誤設定だったため、2026-09-12にダイアログで1秒へ直した再採取原文`roundtrip-wait1-20260912.robin`（4行目が`WAIT 1`、他は同一）を生成根拠にする。空フロー `RobinKnowledgeT09FilterPaste_20260910` へ貼付け・保存し、再コピーのアクション行6本一致を確認した。
 - 2026-09-11までの実行は`WAIT 500`（500秒）の待機中に監視を打ち切ったため未完了だった（`catalog/evidence/t09-runtime-block-20260910.json`ほか）。2026-09-12に、ControlRepository付きの採取原文を別の空フロー`RobinKnowledgeT09Repo_20260912`へ貼り付けて実行し、約8分20秒後に`AttributeValue=T09-clicked`、ブラウザー終了、準備完了への復帰を確認した（`catalog/evidence/t09-repo-run1-acceptance-20260912.json`、`t09-repo-run2-20260912.json`）。
 - 生成Robinを貼り付ける先には、`Input text 't09-input'`、`Button '実行'`、`Paragraph '未実行'`の3要素が登録されている必要がある。実測済みの手順は、採取原文を先に貼り付けて要素を取り込み、その6アクションを削除してから生成6行を貼り付ける。待機行は`WAIT 1`（1秒）を生成する。`WAIT 500`は500秒待つ履歴上の誤設定であり、生成しない。待機1秒版は2回とも数秒で`AttributeValue=T09-clicked`とブラウザー終了を確認した（`catalog/evidence/t09-wait1-acceptance-20260912.json`）。
+
+例8: P3残課題の最小用途（2026-09-12、各2回実行・別フロー再利用済み）
+- リストの2番目の項目: `SET NewVar TO CatalogList[1]`（01-Basics）。期待値は`NewVar=SecondItem`。
+- 日時をカスタム書式でテキスト化: `Text.ConvertDateTimeToText.FromCustomDateTime DateTime: CurrentDateTime CustomFormat: $'''yyyy-MM-dd''' Result=> FormattedDateTime2`（01-Basics）。期待値は実行日の`yyyy-MM-dd`。
+- If内If＋副作用＋EXIT LOOP、入れ子ループ＋NEXT LOOP: 02-Controlの23行／15行の原文。期待値は`OuterCount=2, InnerYes=1, InnerNo=1, LastSeen=SecondItem`／`Total=4, OuterRuns=2`。
+- 拡張子境界: 03-Filesの`files-boundary`probe。`.TXT`はElse、`.txt.bak`はElse、サブフォルダーは`IncludeSubfolders`で制御。
+- 別名保存の衝突: 04-Office。Excel／WordのSaveAsは既存出力を無警告で上書きする。
+- 名前付きエラー: 02-Controlの`ON ERROR FileNotFoundError`（アクション単位）。期待値は`NewVar=named`のみ設定され、ブロック既定ルールの変数は設定されない。
+- これらは採取・元フロー2回実行・別フロー再利用まで確認済み。通常チャット生成→無修正貼付け→2回実行の受入は、この版の受入記録（`catalog/evidence/current-package-status-20260912-finald.json`）を参照する。

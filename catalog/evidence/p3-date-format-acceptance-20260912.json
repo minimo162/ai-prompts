@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T09:47:57+09:00",
+  "status": "PASS_PROBE_CUSTOM_DATE_FORMAT_2_RUNS",
+  "missing_item": "A-datetime-format (P3-5)",
+  "environment": {
+    "pad_package_version": "11.2608.115.0",
+    "language": "ja-JP",
+    "power_fx": false
+  },
+  "previous_boundary": "p3-date-format-custom-failure-20260910.json (picker binding not persisted) and p3-date-format-dialog-crash-20260911.json (PAD internal InvalidOperationException while editing an existing action)",
+  "this_probe": "new flow RobinKnowledgeP3DateFmt_20260912: captured DateTime.GetCurrentDateTime (DateAndTime) pasted; then 「日時の値をテキスト値に変換」 added twice from the left panel (search 日時, Enter). Action 2: 変換する datetime typed as %CurrentDateTime%, 使用する形式=標準, 標準形式=短い日付形式. Action 3: same input, 使用する形式=カスタム, カスタム形式=yyyy-MM-dd (sample showed 2020-05-19). Both dialogs saved without any internal exception; the earlier crash was on the edit path of an existing action and did not reproduce when adding a fresh action.",
+  "flow": "RobinKnowledgeP3DateFmt_20260912",
+  "designer_process_id": 31768,
+  "action_count": 3,
+  "raw": {
+    "path": "catalog/evidence/p3-date-format-probe-20260912.robin",
+    "sha256": "a7192a3527ce60d62315465278d82bae12fd91de294324990b32119ab4483284",
+    "copied_from_pad": true,
+    "lines_of_interest": [
+      "Text.ConvertDateTimeToText.FromDateTime DateTime: CurrentDateTime StandardFormat: Text.WellKnownDateTimeFormat.ShortDate Result=> FormattedDateTime",
+      "Text.ConvertDateTimeToText.FromCustomDateTime DateTime: CurrentDateTime CustomFormat: $'''yyyy-MM-dd''' Result=> FormattedDateTime2"
+    ]
+  },
+  "expected_fixed_before_run": {
+    "FormattedDateTime2": "today's local date as yyyy-MM-dd (2026-09-12)",
+    "FormattedDateTime": "observe and record the ja-JP short date rendering"
+  },
+  "runs": [
+    {
+      "evidence": "catalog/evidence/p3-date-format-probe-run1-20260912.json",
+      "status": "success",
+      "observed_at": "2026-09-12T00:36:39.7948720Z",
+      "variables": {
+        "CurrentDateTime": "2026/09/12 9:36:35",
+        "FormattedDateTime": "2026/09/12",
+        "FormattedDateTime2": "2026-09-12"
+      }
+    },
+    {
+      "evidence": "catalog/evidence/p3-date-format-probe-run2-20260912.json",
+      "status": "success",
+      "observed_at": "2026-09-12T00:37:01.6716606Z",
+      "variables": {
+        "CurrentDateTime": "2026/09/12 9:36:58",
+        "FormattedDateTime": "2026/09/12",
+        "FormattedDateTime2": "2026-09-12"
+      }
+    }
+  ],
+  "expectation_met": true,
+  "observed": {
+    "FormattedDateTime": "2026/09/12 (ja-JP short date)",
+    "FormattedDateTime2": "2026-09-12"
+  },
+  "separate_flow_reuse": "see p3-date-format-reuse-* (added below if run)",
+  "not_verified": "other custom tokens (HH:mm:ss, dddd, culture-specific names), DateOnly input, invalid format strings, time zone changes, editing an existing convert action (the path that crashed on 2026-09-11)",
+  "distinction": {
+    "captured": true,
+    "original_flow_probe_2_runs": true,
+    "knowledge_integrated": "pending",
+    "copilot_generation_accepted": "pending"
+  }
+}

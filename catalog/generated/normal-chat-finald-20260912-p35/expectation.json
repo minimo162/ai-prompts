@@ -1,0 +1,14 @@
+{
+  "fixed_before_send": true,
+  "expected": {
+    "must_contain": [
+      "DateTime.GetCurrentDateTime.Local",
+      "Text.ConvertDateTimeToText.FromCustomDateTime",
+      "CustomFormat: $'''yyyy-MM-dd'''"
+    ],
+    "pad": {
+      "FormattedDateTime2": "2026-09-12 (execution date)"
+    }
+  },
+  "flow": "RobinKnowledgeP35FinalD_20260912"
+}

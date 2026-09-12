@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-12T00:31:58.5774589Z",
+    "flow_name":  "RobinKnowledgeP3DateFmt_20260912",
+    "source_robin":  ".work/p3-date-base.robin",
+    "source_sha256":  "dc981ec8f341c31c0480a9f232a48b9ccefa39170bcc6df6966f891b10890add",
+    "source_bytes":  120,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  1,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

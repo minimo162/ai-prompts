@@ -1,0 +1,125 @@
+{
+  "schema_version": 2,
+  "captured_on": "2026-09-12",
+  "status": "partial",
+  "issue_state": "OPEN",
+  "package": {
+    "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+    "bundle_manifest": "copilot/knowledge-bundle-manifest-20260912d.json"
+  },
+  "p4_current_bundle": {
+    "status": "PARTIAL_ACCEPTANCE_PENDING",
+    "knowledge_precheck": "PASS_REFERENCE_ONLY",
+    "knowledge_precheck_evidence": "evidence/current-bundle-finald-precheck-20260912.json",
+    "accepted_cases": [],
+    "case_results": {
+      "knowledge_precheck": {
+        "status": "PASS_REFERENCE_ONLY",
+        "evidence": "evidence/current-bundle-finald-precheck-20260912.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+      },
+      "T01": {
+        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
+        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+      },
+      "T02": {
+        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
+        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+      },
+      "T03": {
+        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
+        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+      },
+      "T04": {
+        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
+        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+      },
+      "T05": {
+        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
+        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+      },
+      "T06": {
+        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
+        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+      },
+      "T07": {
+        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
+        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+      },
+      "T08": {
+        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
+        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+      },
+      "T09": {
+        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
+        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+      },
+      "T10": {
+        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
+        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+      }
+    },
+    "independent_retests": {
+      "status": "PENDING_FINALD_ACCEPTANCE",
+      "cases": [
+        "T01",
+        "T04",
+        "T10"
+      ],
+      "results": {}
+    },
+    "negative_suite": {
+      "status": "PENDING_FINALD_ACCEPTANCE",
+      "evidence": null
+    },
+    "t08": {
+      "status": "PENDING_FINALD_ACCEPTANCE",
+      "named_FileNotFound_match": "block-level user-defined name still unmatched; action-level ON ERROR FileNotFoundError measured (p3-named-error-acceptance-20260912.json)"
+    },
+    "t09": {
+      "status": "PENDING_FINALD_ACCEPTANCE",
+      "evidence": null
+    }
+  },
+  "p5": {
+    "status": "PASS_LOCAL_STATIC_PARTIAL_LIVE",
+    "issue_close": false,
+    "static_check": "evidence/current-package-static-check-20260912-finald.json"
+  },
+  "p3": {
+    "measured_20260912": [
+      "P3-1_list_index: evidence/p3-list-idx1-acceptance-20260912.json",
+      "P3-2_nested_control: evidence/p3-nested-control-acceptance-20260912.json",
+      "P3-3_file_boundaries: evidence/p3-file-boundary-acceptance-20260912.json",
+      "P3-4_saveas_collision: evidence/p3-saveas-collision-acceptance-20260912.json",
+      "P3-5_custom_date_format: evidence/p3-date-format-acceptance-20260912.json",
+      "P3-6_named_error: evidence/p3-named-error-acceptance-20260912.json"
+    ],
+    "still_unconfirmed": [
+      "list index beyond 1 / out of range / index from variable",
+      "3+ nesting levels, exiting an outer loop from an inner loop, LOOP WHILE nesting",
+      "case-insensitive extension comparison",
+      "PowerPoint SaveAs collision, locked targets",
+      "custom date tokens other than yyyy-MM-dd; edit path of an existing convert action",
+      "block-level ON BLOCK ERROR with the built-in code FileNotFoundError",
+      "T09 other URLs/elements/browsers"
+    ]
+  },
+  "remaining": [
+    "finald same-version acceptance: T01-T10, independent T01/T04/T10, negative suite v2, P3-1..P3-6 positive generations (bodies + PAD flows prepared)",
+    "P3 unconfirmed boundaries listed above",
+    "Agent Builder registration (out of scope)"
+  ],
+  "result": "Version 79245787: P3-1..P3-6 measured and integrated; knowledge precheck PASS; T01-T10, independent retests, negative suite v2 and P3 positive cases are not yet accepted on this version (bodies and PAD flows prepared)."
+}

@@ -68,3 +68,12 @@ P3追補の参照範囲（各probeは現行bundle統合後の通常チャット�
 - 実測順序は `WebAutomation.LaunchEdge` → `WebAutomation.PopulateTextField`（`T09-input`）→ `WebAutomation.Click`（実行、左クリック）→ `WAIT 1`（2026-09-10採取時は`WAIT 500`。単位は秒で、500は誤設定）→ `WebAutomation.GetDetailsOfElement`（`Own Text`）→ `WebAutomation.CloseWebBrowser`。原文フローは `catalog/flows/ui-t09-local-roundtrip/roundtrip.robin`（SHA-256: 93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd）、待機1秒の再採取原文は `roundtrip-wait1-20260912.robin`（SHA-256: d8913da95757f5fff4d3d7b10c40c35120d76882dc4d516356c9c3ddf06c5571）。
 - `RobinKnowledgeT09FilterPaste_20260910` という空フローへ6アクションをファイルから貼付け、保存し、再コピーした。再コピーはアクション行6本が一致したが、PADがControlRepositoryのInstanceId／画像を再生成したため全体バイトSHAは一致しない。証拠: `catalog/evidence/t09-final-paste-acceptance-20260910.json`、再コピー `catalog/evidence/t09-final-paste-flow-recopy.robin`。
 - 元フロー・貼付けフローとも、WebAutomation実行は完了せず監視後に停止した。`AttributeValue=T09-clicked` は未観測であり、成功扱いにしない。証拠: `catalog/evidence/t09-runtime-block-20260910.json`。PADのnative CUAが未構成のため、ここでの操作は厳格なUIAフォールバックである。
+
+2026-09-12の追加採取: P3残課題（P3-1〜P3-6）
+- P3-1 リスト添字: `SET NewVar TO CatalogList[1]`をダイアログ入力→PAD再コピー→別空フロー再利用、各2回実行で`NewVar=SecondItem`（01-Basics）。添字0の既存結果は維持。
+- P3-2 制御構造: If内If＋ファイル書込み＋`EXIT LOOP`（23行）と、`LOOP … STEP`内For each＋`NEXT LOOP`（15行）を期待値固定のうえ2回実行・別フロー再利用（02-Control）。`EXIT LOOP`／`NEXT LOOP`は最も近いループにだけ作用した。
+- P3-3 ファイル境界: `.TXT`はElse（等価比較は大文字小文字を区別）、`.txt.bak`はElse、親フォルダー名`sub.txt`は影響なし、サブフォルダーは`IncludeSubfolders`で制御（03-Files）。固定T03は変更していない。
+- P3-4 SaveAs衝突: Excel／WordのSaveAsは既存出力を無警告で上書き（04-Office）。
+- P3-5 日時書式: `Text.ConvertDateTimeToText.FromCustomDateTime … CustomFormat: $'''yyyy-MM-dd'''`を新規追加で採取し、2回実行で`2026-09-12`（01-Basics）。2026-09-11の内部例外は既存アクションの編集経路で、新規追加では再現しなかった。
+- P3-6 名前付きエラー: アクション単位の`ON ERROR FileNotFoundError`が一致して`NewVar=named`のみ設定され、ブロック既定ルールは発火しない（02-Control）。ブロック側の利用者定義名`FileNotFound`は一致しない。T08の既定ハンドラー合格はそのまま。
+- 証拠: `catalog/evidence/p3-list-idx1-acceptance-20260912.json`、`p3-nested-control-acceptance-20260912.json`、`p3-file-boundary-acceptance-20260912.json`、`p3-saveas-collision-acceptance-20260912.json`、`p3-date-format-acceptance-20260912.json`、`p3-named-error-acceptance-20260912.json`。

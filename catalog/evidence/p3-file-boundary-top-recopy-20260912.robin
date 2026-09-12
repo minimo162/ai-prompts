@@ -1,0 +1,13 @@
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+SET TxtCount TO 0
+SET OtherCount TO 0
+LOOP FOREACH CurrentFile IN Files
+    IF CurrentFile.Extension = $'''.txt''' THEN
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+        SET TxtSeen TO CurrentFile
+        Variables.IncreaseVariable Value: TxtCount IncrementValue: 1
+    ELSE
+        SET OtherSeen TO CurrentFile
+        Variables.IncreaseVariable Value: OtherCount IncrementValue: 1
+    END
+END
