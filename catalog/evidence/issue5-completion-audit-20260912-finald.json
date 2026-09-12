@@ -158,6 +158,7 @@
     "pr_submission_ready": false,
     "report": "docs/robin-knowledge-validation.md",
     "required_gaps": [
+      "T09 instruction line 39 still specifies WAIT 500, contradicting knowledge 05 lines 40/48 (WAIT 1). Fixing instruction bytes requires a new fixed version and same-version acceptance; do not relabel finald PASS.",
       "A/B/C/D/E: separate-empty-flow reuse trace missing for some existing probes; see report matrix. Do not infer it from T01-T10 PASS.",
       "A subtraction: knowledge claims two runs but p3-subtract-probe-20260910.json links only one run; recover independent second-run evidence before asserting two.",
       "C: saved cell probe proves indexed cell update, not a cell-value read; locate the required cell-reference evidence and distinguish optional column-name row-loop syntax."
@@ -167,6 +168,19 @@
       "T09 result/acceptance observed timestamps retain finalc times; authoritative finald run1=2026-09-12T02:33:08.6086461Z and run2=2026-09-12T02:33:25.4307357Z. This derived correction does not alter original records.",
       "T08/P3-6 recopy differs by CRLF and one trailing space on BLOCK; original bytes preserved. Not byte-identical.",
       "Complete live-acceptance status concerns the fixed finald generation cases only; it does not certify all A-G requirements or PR readiness."
-    ]
+    ],
+    "negative_response_browser_check": {
+      "status": "PASS_READ_ONLY_CORRESPONDENCE",
+      "conversation": "4eb6120d-ff97-4125-88ec-d850f00793fd",
+      "attachments": [
+        "agent-instructions",
+        "PAD-Robin-Knowledge-Bundle"
+      ],
+      "answer_chars": 1636,
+      "pre_elements": 0,
+      "code_elements": 0,
+      "new_messages_sent": 0,
+      "note": "Reopened the saved conversation in Chrome through CUA; all answer paragraphs and citation markers correspond to saved response.txt. No new generation or PAD execution."
+    }
   }
 }

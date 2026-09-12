@@ -2,7 +2,7 @@
 
 ## 2026-09-12 finald保存証跡の最終監査
 
-**判定: partial／PR提出準備未完了／未push。** 固定finaldの生成受入記録は維持する。A〜Gの全要件について必要な別空フロー再利用の追跡がそろわず、`complete_live_acceptance_finald_20260912` を親Issue全体の完了とは扱えない。これは保存済み成果の監査結果であり、T01〜T10を未実施へ戻す判定ではない。
+**判定: partial／PR提出準備未完了／未push。** 固定finaldの生成受入記録は維持する。T09指示と教材の待機値が矛盾し、A〜Gの全要件について必要な別空フロー再利用の追跡もそろわず、`complete_live_acceptance_finald_20260912` を親Issue全体の完了とは扱えない。これは保存済み成果の監査結果であり、T01〜T10を未実施へ戻す判定ではない。
 
 - 対象: `C:\Users\yuuki\ai-prompts`、origin `https://github.com/minimo162/ai-prompts.git`。
 - 対象完全SHA: `45b15d0c8531df0265f3d997b1614555561a4247`、既存ブランチ `claude/issue-27-finald-acceptance` を継続。
@@ -44,7 +44,7 @@ main→対象コミットで指示文・知識7原本・bundle・manifest・T10�
 - T08／P3-6: 原コードのアクション単位 `ON ERROR FileNotFoundError`、runプレビューのnamedとLastErrorを確認。コードに後続書込みなし。ブロック側の利用者定義名一致とは扱わない。再コピーはCRLFと先頭行`BLOCK`後の1空白が異なる。原文は保持し、バイト一致とは表示しない。
 - T09: 要素取り込み元SHAと取り込み記録、生成6行のWAIT 1、再コピー冒頭6行一致＋ControlRepository、finald各runのT09-clickedを確認。要素登録不要とはしない。元result／acceptanceのobserved_atは旧finalc時刻が転記されていた。訂正値は原run1=`2026-09-12T02:33:08.6086461Z`、run2=`2026-09-12T02:33:25.4307357Z`。原resultは変更せず、本節と派生auditで訂正。ブラウザー終了は元受入の記録とCloseWebBrowserを含むフロー完了に基づき、今回新たに観測した主張ではない。
 - P3-1／2／3／5／6: probeの原文・再コピー・別フローrun参照を照合。P3-2の入れ子は採取済み構文のテキスト合成→PAD検証であり、23行全体を左パネルから新規採取したとはしない。P3-4は既受入T05/T06形の出力名差、SaveAsの最初のprobeは2回目挙動を観測する試験。その後のP3-4生成受入は観測結果を事前期待として固定。P3-5はShortDate行を含まない2行で実行日2026-09-12。固定教材例の再利用であり、未見課題一般の汎化証明ではない。
-- 負例v2: 保存回答1,636文字、SHA `9914e3d605bf912a12cb9268b02d6724295ec9094f2f57d3992c67f3bb32b67d`。クリップボード失敗後、同会話のanswer sectionのinnerTextから再保存した記録と一致。保存本文はN1/N2/N3すべてについて不足・必要採取・禁止後続を述べ、Robinなし。画面上の引用表示`+ 1`も残す。スクリーンショットとの独立照合や今回のライブDOM再取得は未実施であり、クリップボード原文取得済みとはしない。
+- 負例v2: 保存回答1,636文字、SHA `9914e3d605bf912a12cb9268b02d6724295ec9094f2f57d3992c67f3bb32b67d`。クリップボード失敗後、同会話のanswer sectionのinnerTextから再保存した記録と一致。保存本文はN1/N2/N3すべてについて不足・必要採取・禁止後続を述べ、Robinなし。画面上の引用表示`+ 1`も残す。監査中に同会話をChromeで読み取り専用で再表示し、実添付2件、回答本文1,636文字、pre/code各0件、引用表示を含む全段落の対応を確認した（再送・再生成なし）。クリップボード原文取得済みとはしない。負例prompt自身がコード生成を禁止する固定試験であり、自律的な未採取判定の汎化テストとは表示しない。
 
 ### A〜G追跡と残る必須不足
 
@@ -63,13 +63,15 @@ main→対象コミットで指示文・知識7原本・bundle・manifest・T10�
 | F Word／PowerPoint／PDF | 既存Office/PDF flowsと各設定のevidence→04-Office→T06/T07/T10。PowerPoint保持・PDF指定ページは保存成果物で照合 | `captured_partial_verification`を全主要設定再利用済みとはしない。固定受入済み主要形とcopy-only等の表示区別を維持 |
 | G UI／ブラウザー | `ui-t09-local-roundtrip/roundtrip-wait1-20260912.robin`→要素取り込みと専用別フロー→05-UI-Web→T09 | 固定ローカル画面の追跡あり。旧WAIT 500／旧要素登録失敗は履歴として維持 |
 
-上記不足は `catalog/index.json`、`catalog/coverage.json`、関連 `catalog/evidence` と `.work` の対象名検索で追跡できなかった範囲。未実施と断定せず、**保存証跡未特定**とする。必要な次の単一作業は、まずAのBoolean／減算に限定し、別空フロー再利用と減算2回目の既存原記録を回収・照合すること。存在しなければ同じ採取原文・固定期待の専用別空フローで不足段階だけ検証する。以降B/C/D/Eの表中不足へ順次進む。全件finald生成再試験や任意拡張から始めない。
+**配布指示の未解消矛盾:** `copilot/agent-instructions.txt:39` は今もT09の順序に `WAIT 500` を指定する。一方 `copilot/knowledge/PAD-Robin-05-UI-Web.txt:40,48` は旧500秒を誤設定として生成禁止、`WAIT 1`を指定する。固定finald T09は1秒で成功したが、配布ルールの整合を証明しない。これは任意の別URL等の拡張ではなく、既存T09の版内不整合。受入済み指示のバイトを監査中に差し替えて同じPASSを使い回してはいけない。
+
+上記不足は `catalog/index.json`、`catalog/coverage.json`、関連 `catalog/evidence` と `.work` の対象名検索で追跡できなかった範囲。未実施と断定せず、**保存証跡未特定**とする。必要な次の単一作業は、T09指示文39行目の旧WAIT 500と教材WAIT 1の矛盾を解消する変更を新版として固定し、旧finaldを保全したうえで必要な同版受入を行うこと。今回のfinald監査では指示バイトを変更しておらず、新版の受入は未実施。AのBoolean／減算以下の不足は既存原記録の回収を優先し、見つからない項目だけ同じ採取原文・固定期待の専用別空フローで検証する。任意拡張は不要。
 
 ### 今回の修正・検査とPR準備
 
 current-package-statusの旧`-finald-run1/2`参照26件（一次10＋独立3の各2件）を実在する`-finald-pad-run1/2`へ訂正。各resultの相対基準で参照を照合する検査を追加し、旧状態で`STATUS_RUN_REF`失敗、訂正後PASSを確認した。従来の誤complete拒否fixture10組は変更しない。必須不足を残したPR準備済み宣言も拒否する。T09時刻や原再コピー空白は派生監査に注記し、原回答・Robin・PAD run・成果物の実バイトは変更しない。
 
-検査の実行時刻・対象・件数・非ライブ全スイートの結果は `catalog/evidence/current-package-static-check-20260912-finald.json` の `final_audit_checks` に記録する。DOMはNOT_RUN、今回のM365/PAD新規ライブ試験はNOT_RUN。GitHub mainのcheck-runs=0、Actions runs=0。未pushローカルコミットのGitHub CI成功は主張しない。
+検査の実行時刻・対象・件数・非ライブ全スイートの結果は `catalog/evidence/current-package-static-check-20260912-finald.json` の `final_audit_checks` に記録する。DOMはNOT_RUN、今回のM365/PAD新規ライブ試験はNOT_RUN（保存済み負例会話の読み取り照合だけ実施）。GitHub mainのcheck-runs=0、Actions runs=0。未pushローカルコミットのGitHub CI成功は主張しない。
 
 `git diff --check main...45b15d0`はexit 2。T08とP3-6の原再コピー先頭`BLOCK `の末尾空白2件が理由。前回static-checkの「知識CRLFのみ」という説明はこの比較では当てはまらない。監査の文書・検査変更は通常diffチェックし、原証跡2行は整形せずレビューで明示する。
 
@@ -79,11 +81,11 @@ PR本文案:
 
 > finaldの固定生成受入（T01〜T10、独立T01/T04/T10、負例v2、P3正例6件）を保存回答・Robin・PAD再コピー・run・成果物で照合し、current-package-statusに残っていた26件のrun参照を訂正する。指示・知識・試験条件・原証跡のバイトは保持する。T03初回不成立、T08期待エラー、T09要素依存と旧時刻転記を明示する。
 >
-> A〜Gの一部probeは別空フロー再利用の保存証跡が未特定で、親Issue全体の完了／PR提出準備済みとはしない。CurrentStatusの従来負例を保持し、参照切れと必須不足付きreadyの拒否を追加。今回の検査結果はfinald static-checkの監査追記を参照。DOM／新規ライブ／GitHub CIを非ライブPASSと区別する。Refs #5, #27。自動クローズ指定なし。
+> A〜Gの一部probeは別空フロー再利用の保存証跡が未特定で、指示文のWAIT 500と教材WAIT 1の矛盾も残るため、親Issue全体の完了／PR提出準備済みとはしない。CurrentStatusの従来負例を保持し、参照切れと必須不足付きreadyの拒否を追加。今回の検査結果はfinald static-checkの監査追記を参照。DOM／新規ライブ／GitHub CIを非ライブPASSと区別する。Refs #5, #27。自動クローズ指定なし。
 
 レビュー注意点: 原証跡の2空白、T03再生成、T08の通常成功との区別、T09の要素取り込みと派生時刻訂正、P3教材再利用の範囲、負例のinnerText保存、A〜G不足を確認する。
 
-クローズ根拠: **#27は不可**（最新版の最終監査／PR提出準備ゲートに必須追跡不足が残る）。**#5は不可**（元依頼書の別フロー再利用・実行証跡要件を全件確認できない）。両IssueはOPEN。任意範囲は範囲外・変数添字、3段入れ子・外側脱出、LOOP WHILE入れ子、大文字小文字無視比較、PowerPoint衝突・ロック対象、他日付書式／既存変換編集、ブロック側組込みエラーコード、T09別URL・要素・ブラウザー、DataTable列名行ループ、DOM検査。Agent Builderは対象外。push・PR作成・マージ・リリース・配布・Issue close・ブランチ削除は未実施。
+クローズ根拠: **#27は不可**（最新版の最終監査／PR提出準備ゲートにT09版内矛盾と必須追跡不足が残る）。**#5は不可**（元依頼書の別フロー再利用・実行証跡要件を全件確認できない）。両IssueはOPEN。任意範囲は範囲外・変数添字、3段入れ子・外側脱出、LOOP WHILE入れ子、大文字小文字無視比較、PowerPoint衝突・ロック対象、他日付書式／既存変換編集、ブロック側組込みエラーコード、T09別URL・要素・ブラウザー、DataTable列名行ループ、DOM検査。Agent Builderは対象外。push・PR作成・マージ・リリース・配布・Issue close・ブランチ削除は未実施。
 
 ## 2026-09-11以前の検証履歴（当時の状態を保持）
 
