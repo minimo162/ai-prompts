@@ -2,6 +2,14 @@
 
 ## 2026-09-12 finald保存証跡の最終監査
 
+### 監査後の継続: finale候補（未受入・未昇格）
+
+`b76f2d293c2a74c9c3ae565fb4b9fdfc397917ba` を起点に、`.work/finale-20260912/`へ候補を固定した。指示39行目の`WAIT 500`→`WAIT 1`だけを変更し、他の指示バイト・知識7原本・bundle・T10文脈は不変。候補指示SHAは`6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`。配布正本とfinald原証跡は変更しておらず、旧PASSを継承しない。
+
+候補指示とbundleを実添付した通常チャットの事前確認を送信し、回答原文・送信本文・実送信表示・DOMを同候補の`precheck/`へ保存した。会話は`https://m365.cloud.microsoft/chat/conversation/2958ed9b-50e9-41df-a745-b8fc71c8e59b`。送信表示に新WAIT 1があり、旧WAIT 500はない。編集欄末尾のU+200B/U+200Cはeditor-observationに記録し、表示本文と区別する。回答は見出しと引用表示を含むarticle.innerText（2,779文字）、preブロック0。これは事前確認回答の採取であり、T01〜T10等の新版生成・PAD受入はまだNOT_RUN。PADの既存専用フローはWindows操作APIで現在のウィンドウを確認できた。
+
+次はこの候補を変えず、新しい通常チャットで必要な生成受入を行う。A〜G不足も残る。候補・事前確認はローカル`.work`に保全した未昇格作業であり、finald監査のpartial判定は変わらない。
+
 **判定: partial／PR提出準備未完了／未push。** 固定finaldの生成受入記録は維持する。T09指示と教材の待機値が矛盾し、A〜Gの全要件について必要な別空フロー再利用の追跡もそろわず、`complete_live_acceptance_finald_20260912` を親Issue全体の完了とは扱えない。これは保存済み成果の監査結果であり、T01〜T10を未実施へ戻す判定ではない。
 
 - 対象: `C:\Users\yuuki\ai-prompts`、origin `https://github.com/minimo162/ai-prompts.git`。
