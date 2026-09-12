@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "status": "PASS_SEPARATE_FLOW_REUSE",
+  "recorded_at": "2026-09-12T07:59:46.809Z",
+  "scope": "A numeric subtraction: existing measured raw replay in a new empty flow",
+  "source": "../p3-subtract-probe-20260910.robin",
+  "source_sha256": "7d09d4dd8c0e7dcc60bc1d46f943eb04bd5752db4591e2ca89ea830ab82d602d",
+  "source_probe": "../p3-subtract-probe-20260910.json",
+  "knowledge": "../../../copilot/knowledge/PAD-Robin-01-Basics.txt",
+  "knowledge_sha256": "abe921c3e7aa19ce5410fe746fe4c4f5c7fc7ee3ffd18c4b6747686a41fdbf31",
+  "flow": "RobinKnowledgeSubtractReuse_20260912",
+  "power_fx": false,
+  "paste": "paste.json",
+  "original_actions": 2,
+  "paste_attempts": 1,
+  "recopy": "pad-recopy.robin",
+  "reopened_recopy": "pad-recopy-reopened.robin",
+  "recopy_sha256": "13426ef557a17cc4e6b9ad3d30939abe6fb6a9f1e530421edee250200e948677",
+  "recopy_difference": "LF -> CRLF only; no instruction-content changes",
+  "save_persistence": "closed and reopened; recopy byte-identical",
+  "expectation": "expectation.json fixed before paste",
+  "runs": [
+    {
+      "run": 1,
+      "evidence": "pad-run1.json",
+      "requested_at": "2026-09-12T07:56:51.8509349Z",
+      "expected": "7",
+      "observed": "7",
+      "status": "PASS_OBSERVED_VALUE",
+      "running_observed": false
+    },
+    {
+      "run": 2,
+      "evidence": "pad-run2.json",
+      "requested_at": "2026-09-12T07:57:28.3718765Z",
+      "expected": "7",
+      "observed": "7",
+      "status": "PASS_OBSERVED_VALUE",
+      "running_observed": false
+    }
+  ],
+  "observation_limit": "Execution requests and ready/errors0 with P3Number=7 recorded. Brief running phase was not captured; no output file is expected for this variable-only flow.",
+  "manual_edits": false,
+  "source_unchanged": true,
+  "clipboard_restore": "outer paste wrapper and recopy helper restored the original clipboard; raw paste helper field remains false",
+  "historical_boundary": "Original 2026-09-10 evidence links one run only. These two new 2026-09-12 runs do not establish a missing historic second run.",
+  "current_package_generation_acceptance": false
+}

@@ -1,0 +1,39 @@
+{
+  "flow": "Power Automate | RobinKnowledgeSubtractReuse_20260912",
+  "variables": [
+    {
+      "nodes": [
+        {
+          "id": "VariablesListItem",
+          "name": "P3Number",
+          "type": "ControlType.ListItem"
+        },
+        {
+          "id": "VariableTextBlock",
+          "name": "P3Number",
+          "type": "ControlType.Text"
+        },
+        {
+          "id": "VariablePreviewTextBlock",
+          "name": "7",
+          "type": "ControlType.Text"
+        }
+      ],
+      "variable": "P3Number"
+    }
+  ],
+  "run_requested_at": "2026-09-12T07:57:28.3718765Z",
+  "status": "RUNTIME_COMPLETE_VALUES_PENDING_AUDIT",
+  "source_sha256": "7d09d4dd8c0e7dcc60bc1d46f943eb04bd5752db4591e2ca89ea830ab82d602d",
+  "old_pass_inherited": false,
+  "states": [
+    {
+      "at": "2026-09-12T07:57:39.8013476Z",
+      "status": "ready",
+      "running": false,
+      "errors_known": true,
+      "errors": 0
+    }
+  ],
+  "observed_at": "2026-09-12T07:57:41.2219331Z"
+}

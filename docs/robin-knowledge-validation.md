@@ -4,6 +4,14 @@
 
 ### 監査後の継続: finale候補（未受入・未昇格）
 
+**A減算の不足補完:** 既存の採取原文`p3-subtract-probe-20260910.robin`（SHA7d09d4dd…、2行）を、新しい空フロー`RobinKnowledgeSubtractReuse_20260912`へ無修正で再貼付けした。Power Fx Off、2アクション、再コピー差はCRLFのみ。07:56:51Z／07:57:28Zの2回の実行要求後、固定期待値P3Number=7とready/errors0を確認。短いrunning表示は捕捉していない。保存後再オープン再コピーは保存前とバイト一致し、原文は不変だった。
+
+`catalog/evidence/a-subtract-reuse-20260912/acceptance.json`と同ディレクトリの原記録・manifestで、採取原文→別空フロー→既存01-Basics教材を結び付けた。これにより現在の減算再利用／2回実行の不足を補完した。9月10日記録のrun参照は1件のまま保全し、今回の2runを当時の2回目へ付け替えない。新しい構文採取・教材変更・同版Copilot生成受入の代替ではない。Booleanなど他のA〜G不足は残る。
+
+T10対照では、実添付bundleのフロー部分は元CRLF原文に区切りLF1個を加えたバイト列と一致した。送信本文のコピーは56改行をすべて除く形式であり、コードの改行保持を証明する対照には使えなかった。`.work/finale-20260912/t10-independent/line-ending-control-audit.json`へ範囲を限定して記録し、T10厳密保持は未証明を維持する。
+
+この補完の検査はCurrentStatus 46項目PASS、JSON1,559件読込みPASS、追加manifestの9ファイル照合PASS、監査差分チェックPASS。検査コードは30cd6ceから不変で、直前の非ライブAll36/36 PASSと今回の実機再利用を区別する。次の単一作業は既存`p3-boolean-probe-20260910.robin`の別空フロー再利用と固定期待照合。T10未証明を解消済みにはせず、独立して進められる必須不足を先に補完する。
+
 **T10厳密保持の監査追記:** 独立T10を新規Think Deeper会話`https://m365.cloud.microsoft/chat/conversation/de5a25b3-24df-4ad7-8fc8-7e2284e5f2b3`で同じ候補指示全文・bundle・T10文脈から生成した。無修正のDOM保存RobinはSHA7bd2342b…、許可された2行以外の命令内容14行は一致する。ただし入力原文はCRLF・末尾改行なし、保存回答はLF・末尾LFあり。finald一次・独立の保存Robinも実ファイルで同じSHAと確認した。
 
 指示の「改行まで保持」を満たした証明は不足する。DOM変換か元回答の差かを切り分けるため、応答のコピーをCUAで操作して45秒間クリップボードを観測したが、対応する回答を取得できず、既存クリップボードを復元した。これはコピー取得不成立であって生成内容の追加失敗を断定するものではない。`.work/finale-20260912/t10-independent/source-comparison.json`はNOT_PROVEN_STRICT_REPRODUCTION、独立T10のPAD実行はNOT_RUN。作成ダイアログはキャンセルし、フローは作成していない。
@@ -136,7 +144,7 @@ main→対象コミットで指示文・知識7原本・bundle・manifest・T10�
 
 | 範囲 | 原証跡→再利用→教材→同版受入の確認 | 必須追跡の不足 |
 | --- | --- | --- |
-| A 文字列・数値・真偽値／減算 | catalog既存変数・text flows、`p3-boolean-probe-20260910.json`、`p3-subtract-probe-20260910.json`→01-Basics。T01はtext系を受入 | Boolean／減算probeの別空フロー再利用を示す記録が未特定。減算教材の「2回」に対し参照JSONはrun1件のみ |
+| A 文字列・数値・真偽値／減算 | catalog既存変数・text flows、`p3-boolean-probe-20260910.json`、`p3-subtract-probe-20260910.json`→01-Basics。減算は`a-subtract-reuse-20260912/acceptance.json`で別空フロー・2run・再オープンを補完。T01はtext系を受入 | Booleanの別空フロー再利用記録は未特定。減算は今回2runとも7を確認したが、旧参照JSONがrun1件だけである履歴は保全 |
 | A リスト・文字列加工・数値変換・日時 | 既存list/text/number flows、`text-substring-validation.json`、`datetime-current-date-validation.json`、P3添字1／date-format acceptance→01-Basics→T01/P3-1/P3-5 | 添字1・yyyy-MM-ddの別フローと2回runあり。任意の別添字／別書式へ拡張しない |
 | B If／Loop／エラー | `p3-nested-control-acceptance-20260912.json`／`p3-named-error-acceptance-20260912.json`→別フロー→02-Control→T03/T08/P3-2/P3-6 | この固定構造の追跡あり |
 | B サブフロー | `p3-subflow-probe-20260910.json`とworker／call原文、元フロー2run→02-Control | Main/P3Workerの保存原文を別空フローへ再配置して実行した証跡未特定。T08成功で代替不可 |

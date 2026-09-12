@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T07:55:29.2787143Z",
+  "flow_name": "RobinKnowledgeSubtractReuse_20260912",
+  "source_robin": "catalog/evidence/p3-subtract-probe-20260910.robin",
+  "source_sha256": "7d09d4dd8c0e7dcc60bc1d46f943eb04bd5752db4591e2ca89ea830ab82d602d",
+  "source_bytes": 80,
+  "expected_action_count": 2,
+  "paste_confirmed": true,
+  "action_count_after_paste": 2.0,
+  "saved_confirmed": false,
+  "clipboard_restored": false,
+  "execution_requested": false
+}

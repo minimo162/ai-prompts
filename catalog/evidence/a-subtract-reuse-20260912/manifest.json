@@ -1,0 +1,40 @@
+{
+  "files": {
+    "expectation.json": {
+      "sha256": "6e3431f6b40614be2a4d357e7f27b8898fe97f1b28ab7e71ccbb0beebc07d7ee",
+      "bytes": 418
+    },
+    "paste.json": {
+      "sha256": "a89a14b3c6a4538c45ff3b979918b05e90eb99f0f991c0052637f7ea1f9f6568",
+      "bytes": 505
+    },
+    "pad-recopy.robin": {
+      "sha256": "13426ef557a17cc4e6b9ad3d30939abe6fb6a9f1e530421edee250200e948677",
+      "bytes": 82
+    },
+    "pad-recopy-reopened.robin": {
+      "sha256": "13426ef557a17cc4e6b9ad3d30939abe6fb6a9f1e530421edee250200e948677",
+      "bytes": 82
+    },
+    "pad-run1-request.json": {
+      "sha256": "c2253bf3bf5d77673173d82db9ce95fe101c97b4e97d17f40c9ef5eb12057b95",
+      "bytes": 122
+    },
+    "pad-run1.json": {
+      "sha256": "d914a30b48bb2f86dfd8d108f26c1536ac45fd8598e6ec97e647f838b900de2e",
+      "bytes": 1018
+    },
+    "pad-run2-request.json": {
+      "sha256": "e3cf823a2873b157a7a49889c644df257f07e238474b20fa74df0635bed58fe6",
+      "bytes": 122
+    },
+    "pad-run2.json": {
+      "sha256": "59052c25d4540be620be97c2c7c8d0d208dd6fb93b8d5a9f2d5c9599ebb152d7",
+      "bytes": 1018
+    },
+    "acceptance.json": {
+      "sha256": "e1844b0afe01989553f7ecb9342693b253fb1d26dc6a52a09422c7b3f4b4ea66",
+      "bytes": 2121
+    }
+  }
+}
