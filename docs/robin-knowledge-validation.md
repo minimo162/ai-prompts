@@ -4,6 +4,12 @@
 
 ### 監査後の継続: finale候補（未受入・未昇格）
 
+**T08継続結果:** 同版指示6ad6f742…とbundleを実添付したThink Deeper会話`https://m365.cloud.microsoft/chat/conversation/22fc6163-7682-4e88-a98a-5baa26894636`の初回12行Robinを無修正保存し、4アクションとして専用空フローに貼付けた。06:28:33Z／06:29:16Zの2runともNewVar=named、LastErrorに欠損入力のフルパスと「が見つかりません」、ErrorHandled／ErrorHandledDefault／FileContentsは値プレビューなしを確認。アクション単位ON ERROR FileNotFoundErrorの期待エラー経路であり、ブロック単位の独自FileNotFoundが一致したとは扱わない。
+
+両回とも入力は不在のまま、catalog/fixturesとcatalog/evidenceの1,064ファイルの追加・削除・ハッシュ変更なし。生成と再コピーには読取り・エラー処理・最終エラー取得だけがあり、後続書込み・完了マーカーなし。全マシンの副作用走査を行ったとはしない。実行中のStopFlowButton無効による一時観測エラーを保持し、同じ実行の観測継続でready/errors0を取得。手修正・実行再要求・旧PASS継承なし。
+
+PAD再コピーは原生成からCRLF、BLOCK末尾空白、ERROR=>の空白だけが追加された。各差をrecopy-comparison.jsonに原文付きで記録し、広い空白正規化で差分を隠していない。保存後再オープン再コピーは最初の再コピーとバイト一致。`.work/finale-20260912/t08/acceptance.json`はPASS_FINALE_T08_EXPECTED_ERROR。新版T01〜T08個別受入済みだが、T09/T10・独立3件・P3・負例v2・A〜G限定追跡不足・最終検査が残り、全体partial／PR未準備／未push。
+
 **T07継続結果:** 同じ候補指示6ad6f742…とbundleを実添付したThink Deeper会話`https://m365.cloud.microsoft/chat/conversation/7f7d2662-d862-40c3-8466-cb7f2c36aa03`から初回生成の2行Robinを無修正保存。専用空フローへ貼付け、再コピー、2回実行、保存後再オープン再コピーを確認した。生成SHA07586350…、再コピー差はCRLFのみ。`.work/finale-20260912/t07/acceptance.json`はPASS_FINALE_T07。
 
 06:18:31Zと06:19:02Zの各実行前に旧出力を退避して出力不在とし、今回更新された135 bytesのUTF-8原文を別保存。両回とも固定期待PAGE_TOKEN_A2を含みPAGE_TOKEN_A1を含まず、入力PDFのSHAf5f24684…不変、終了ready/errors0、旧出力復元を確認した。実行中の観測はrun1でstatus ambiguous、run2でstatus unavailableとなったが、同じ実行の観測を継続して終了を取得した。観測エラーを消さず、実行再要求もしていない。抽出テキストの順序・空白・改行を整形せず、旧PASSを継承しない。
