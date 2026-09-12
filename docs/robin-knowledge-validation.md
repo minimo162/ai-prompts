@@ -4,6 +4,12 @@
 
 ### 監査後の継続: finale候補（未受入・未昇格）
 
+**T10継続結果:** 同じ候補指示6ad6f742…を本文、知識bundleと既存T10文脈SHA2f77e59f…を実添付したThink Deeper会話`https://m365.cloud.microsoft/chat/conversation/b9c779d9-eb56-4044-85da-8f6193e85518`から初回16行Robinを取得。入力原文SHA d7df4295…と命令行を比較し、2行目のExcel値と4行目のExcel保存先だけの変更、残り14行の文字内容一致を確認した。原文CRLF・末尾改行なしに対し回答はLF・末尾改行ありであり、この差をsource-comparison.jsonへ明示。原バイトの範囲外一致とは表現せず、比較用処理で原ファイルを変えていない。
+
+無修正16アクションを専用フローへ貼付け、07:00:19Z／07:01:21Zの2runでExcel A1=T10-Changed、Word本文／PowerPointスライドはCopilotOffice 246を保持しT10-ChangedなしをXMLで照合。各出力は退避後の不在から新規更新を確認し、3種類の旧成果物を各回後にハッシュ一致で復元した。原入力Robin不変、running→ready/errors0、Office残存0。保存後再オープン再コピーは最初の再コピーとバイト一致し、生成との差はCRLFのみ。
+
+`.work/finale-20260912/t10/acceptance.json`はPASS_FINALE_T10_FUNCTIONAL。原文の改行・終端差を保持した機能受入結果であり、バイト完全保持とは区別する。旧PASS継承なし。一次T01〜T10の生成・実行成果はそろったが、独立T01/T04/T10、P3正例、負例v2、A〜G限定追跡不足、最終統合監査（T10比較範囲を含む）が残る。全体partial／PR未準備／未pushを維持する。
+
 **T09継続結果:** 同じ候補6ad6f742…の指示とbundleを実添付したThink Deeper会話`https://m365.cloud.microsoft/chat/conversation/73f69d54-219a-4dda-bf03-cebcbd4c0447`から初回の6行Robin（WAIT 1）を無修正保存。実測ControlRepository付き原文SHA d8913da9…を専用空フローへ貼付け、取り込み用6アクションを削除して0アクション・3要素（親ノード2件を別計数）を確認した後、生成6行を貼付けた。要素登録不要とはしない。ローカル試験サーバーが停止していたため同じ既存fixtureを127.0.0.1:8765で再開。fixture内容は不変。
 
 初回実行要求後、変数一覧取得がnullで観測不成立となった。準備完了/errors0と空の変数ペインを再観測し、その試行はPASSに数えずpad-run1-observation-failure.jsonへ保持。新しいGETがログにないことだけから未実行とは断定しない（ClearCache=Falseの経路）。フローを閉じて開き直すとAttributeValue／Browserが表示され、再コピーは保存前とバイト一致した。指示・生成Robin・要素を修正せず復帰した。
