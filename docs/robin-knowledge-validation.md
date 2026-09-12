@@ -4,6 +4,14 @@
 
 ### 監査後の継続: finale候補（未受入・未昇格）
 
+**T10厳密保持の監査追記:** 独立T10を新規Think Deeper会話`https://m365.cloud.microsoft/chat/conversation/de5a25b3-24df-4ad7-8fc8-7e2284e5f2b3`で同じ候補指示全文・bundle・T10文脈から生成した。無修正のDOM保存RobinはSHA7bd2342b…、許可された2行以外の命令内容14行は一致する。ただし入力原文はCRLF・末尾改行なし、保存回答はLF・末尾LFあり。finald一次・独立の保存Robinも実ファイルで同じSHAと確認した。
+
+指示の「改行まで保持」を満たした証明は不足する。DOM変換か元回答の差かを切り分けるため、応答のコピーをCUAで操作して45秒間クリップボードを観測したが、対応する回答を取得できず、既存クリップボードを復元した。これはコピー取得不成立であって生成内容の追加失敗を断定するものではない。`.work/finale-20260912/t10-independent/source-comparison.json`はNOT_PROVEN_STRICT_REPRODUCTION、独立T10のPAD実行はNOT_RUN。作成ダイアログはキャンセルし、フローは作成していない。
+
+一次T10の2run機能結果・旧finaldの実行証跡は保全するが、厳密保持を含む完全PASSには昇格しない。completion-auditへ必須不足を追加し、CurrentStatus検査は不足一覧を空にするだけではT10未証明／証明フィールド欠落のPR-readyを拒否する2負例を追加、46項目PASS。指示中の「それ以外の16行」は原文全16行・変更2行と数が整合しない点も残る。今回その実バイトや期待値は変更していない。
+
+**次の単一作業:** 保存済みT10回答のコピー／取得経路で、変更範囲外の改行・終端を含む原文保持を検証できるかを確定する。取得できない場合は当該項目を未証明のまま残し、指示の修正で解決するなら新版として固定する。生成Robinの整形や比較条件の緩和で通さない。独立T04は完了済み、独立T10・P3正例・負例v2・A〜G限定追跡不足・最終統合監査が残り、全体partial／PR未準備／未push。
+
 **独立T04継続結果:** 同じ候補指示6ad6f742…とbundleを実添付した新規Think Deeper会話`https://m365.cloud.microsoft/chat/conversation/85acbfc6-9cfc-46ee-96f4-bb8fc6db1a5e`から9行Robinを無修正保存。一次とは別の専用フロー`RobinKnowledgeT04FinalEIndep_20260912`で07:22:41Z／07:23:39Zの2runを実行した。送信前固定の対象/A/10、対象/C/25、対象/D/5にCSV全3行とExcel A1:C3全9セルが一致し、入力SHA1d0b3d3b…不変、出力の今回更新、ready/errors0、Excel残存0を確認した。旧成果物は各回後に復元した。
 
 保存後再オープン再コピーは最初の再コピーとバイト一致し、生成原文との差はCRLFのみ。`.work/finale-20260912/t04-independent/acceptance.json`はPASS_FINALE_T04_INDEPENDENT。一次と生成SHAが同じでも回答・runの流用はしていない。独立T10、P3正例、負例v2、A〜G限定追跡不足、T10比較範囲を含む最終統合監査が残り、全体partial／PR未準備／未pushを維持する。

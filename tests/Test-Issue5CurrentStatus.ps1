@@ -150,6 +150,9 @@ function Test-FinalAuditReadiness($FinalAudit) {
     if ($FinalAudit.pr_submission_ready -eq $true -and @($FinalAudit.required_gaps).Count -gt 0) {
         throw 'FINAL_AUDIT_GAPS: PR readiness cannot be claimed with required traceability gaps'
     }
+    if ($FinalAudit.pr_submission_ready -eq $true -and [string]$FinalAudit.t10_strict_preservation.status -cne 'PASS') {
+        throw 'FINAL_AUDIT_T10: PR readiness requires proof of unchanged text and line endings outside the authorized T10 changes'
+    }
 }
 Test-FinalAuditReadiness $audit.final_evidence_audit
 $checks++
@@ -157,6 +160,14 @@ $falseReady = [pscustomobject]@{ pr_submission_ready = $true; required_gaps = @(
 $readyMessage = ''
 try { Test-FinalAuditReadiness $falseReady } catch { $readyMessage = $_.Exception.Message }
 Check ($readyMessage -like 'FINAL_AUDIT_GAPS:*') 'PR readiness with a required gap is rejected'
+$unprovenT10 = [pscustomobject]@{ pr_submission_ready = $true; required_gaps = @(); t10_strict_preservation = [pscustomobject]@{ status = 'NOT_PROVEN' } }
+$t10Message = ''
+try { Test-FinalAuditReadiness $unprovenT10 } catch { $t10Message = $_.Exception.Message }
+Check ($t10Message -like 'FINAL_AUDIT_T10:*') 'PR readiness cannot bypass unproven T10 preservation by clearing the gaps list'
+$missingT10 = [pscustomobject]@{ pr_submission_ready = $true; required_gaps = @() }
+$t10Message = ''
+try { Test-FinalAuditReadiness $missingT10 } catch { $t10Message = $_.Exception.Message }
+Check ($t10Message -like 'FINAL_AUDIT_T10:*') 'PR readiness without T10 preservation evidence is rejected'
 Check ($audit.package.instruction_sha256 -ceq $instructionHash) 'audit binds current instruction'
 Check (($audit.status -like 'partial*') -or ($audit.status -like 'complete*')) 'audit status is partial or complete'
 if ($audit.status -like 'complete*') { Check ($statusRecord.status -like 'complete*') 'status record agrees with complete audit' } else { Check ($statusRecord.status -like 'partial*') 'status record agrees with partial audit' }
