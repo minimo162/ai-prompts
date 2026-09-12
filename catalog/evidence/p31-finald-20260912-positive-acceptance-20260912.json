@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T12:31:00+09:00",
+  "case": "P3-1",
+  "case_kind": "p3_positive",
+  "status": "PASS_FINALD_20260912_P3_POSITIVE",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/be339966-d59c-40c0-b04a-b129e0c61923",
+  "conversation_title": "PADでリスト操作フロー案作成",
+  "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension)",
+  "model_label_on_page": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+  "bundle_manifest": "copilot/knowledge-bundle-manifest-20260912d.json",
+  "attachments_in_user_message": [
+    "agent-instructions.txt",
+    "PAD-Robin-Knowledge-Bundle.txt"
+  ],
+  "body": {
+    "file": "sent-body.txt",
+    "sha256": "f609f02fd1b8306c7a95346bced2e780d45c0eb8adc57a3d27dcda800584cbf6",
+    "chars": 4223,
+    "composer_verification": "SHA-256 of composer <p> textContent (aria-hidden excluded, editor zero-width markers U+200B/U+200C stripped) joined by \\n matched the body file before send"
+  },
+  "prompt_file": "prompt.txt",
+  "expectation_file": "expectation.json",
+  "expectation_fixed_before_send": true,
+  "expectation_passed_to_copilot": false,
+  "generated_response": "response.txt",
+  "response_sha256": "56ea3e4e95ee5034bdca215805db168baa5f21e5185b393d8fde9b6e94625664",
+  "generated_robin": {
+    "path": "robin.txt",
+    "sha256": "fdaa3eea3fc40a2315984d09172ed1f16bf31174e3bdc8a50067afad0502bc06",
+    "code_blocks": 1,
+    "lines": 4,
+    "per_line_lengths": [
+      42,
+      66,
+      65,
+      28
+    ],
+    "nbsp": 0,
+    "zero_width": 0,
+    "cr": 0,
+    "raw_unmodified": true,
+    "extraction": "pre.textContent of the single code block (SHA-256 verified in-page against robin.txt)",
+    "measured_source": "catalog/evidence/p3-list-idx1-probe-20260912.robin",
+    "relation": "byte-identical to the measured probe"
+  },
+  "expectation_checks": {
+    "lines": {
+      "expected": 4,
+      "observed": 4,
+      "pass": true
+    },
+    "must_contain: Variables.CreateNewList List=> CatalogList": {
+      "pass": true
+    },
+    "must_contain: SET NewVar TO CatalogList[1]": {
+      "pass": true
+    }
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeP31FinalD2_20260912",
+    "designer_process_id": 32364,
+    "paste_save": "../../evidence/p31-finald-pad-paste-save-20260912.json",
+    "action_count_after_paste": 4,
+    "saved_confirmed": true,
+    "recopy": "pad-recopy.robin",
+    "recopy_sha256": "36a8179b61739dde9e99453b7b9baf693b384b5aa9a6d16fa229f111042f8473",
+    "recopy_note": "Copy-PadFlowLive.ps1; content equal to robin.txt after whitespace normalization",
+    "run1": "../../evidence/p31-finald-pad-run1-20260912.json",
+    "run2": "../../evidence/p31-finald-pad-run2-20260912.json",
+    "expected": {
+      "NewVar": "SecondItem",
+      "CatalogList": "[CatalogItem, SecondItem]"
+    },
+    "observed": {
+      "run1": {
+        "run_status": "success",
+        "variables": {
+          "CatalogList": "[CatalogItem, SecondItem]",
+          "NewVar": "SecondItem"
+        }
+      },
+      "run2": {
+        "run_status": "success",
+        "variables": {
+          "CatalogList": "[CatalogItem, SecondItem]",
+          "NewVar": "SecondItem"
+        }
+      }
+    },
+    "checks": {
+      "NewVar=SecondItem": true,
+      "CatalogList=[CatalogItem, SecondItem]": true
+    }
+  },
+  "acceptance": "PASS_FINALD_20260912_P3_POSITIVE"
+}

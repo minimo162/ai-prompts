@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "captured_on": "2026-09-12",
-  "status": "partial",
+  "status": "complete_live_acceptance",
   "issue_state": "OPEN",
   "package": {
     "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
@@ -9,10 +9,21 @@
     "bundle_manifest": "copilot/knowledge-bundle-manifest-20260912d.json"
   },
   "p4_current_bundle": {
-    "status": "PARTIAL_ACCEPTANCE_PENDING",
+    "status": "COMPLETE_SAME_VERSION_ACCEPTANCE",
     "knowledge_precheck": "PASS_REFERENCE_ONLY",
     "knowledge_precheck_evidence": "evidence/current-bundle-finald-precheck-20260912.json",
-    "accepted_cases": [],
+    "accepted_cases": [
+      "T01",
+      "T02",
+      "T03",
+      "T04",
+      "T05",
+      "T06",
+      "T07",
+      "T08",
+      "T09",
+      "T10"
+    ],
     "case_results": {
       "knowledge_precheck": {
         "status": "PASS_REFERENCE_ONLY",
@@ -20,80 +31,97 @@
         "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
       },
       "T01": {
-        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "status": "PASS_FINALD_20260912",
+        "evidence": "evidence/t01-finald-20260912-live-acceptance-20260912.json",
         "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
       },
       "T02": {
-        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "status": "PASS_FINALD_20260912",
+        "evidence": "evidence/t02-finald-20260912-live-acceptance-20260912.json",
         "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
       },
       "T03": {
-        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "status": "PASS_FINALD_20260912",
+        "evidence": "evidence/t03-finald-20260912-live-acceptance-20260912.json",
         "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
       },
       "T04": {
-        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "status": "PASS_FINALD_20260912",
+        "evidence": "evidence/t04-finald-20260912-live-acceptance-20260912.json",
         "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
       },
       "T05": {
-        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "status": "PASS_FINALD_20260912",
+        "evidence": "evidence/t05-finald-20260912-live-acceptance-20260912.json",
         "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
       },
       "T06": {
-        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "status": "PASS_FINALD_20260912",
+        "evidence": "evidence/t06-finald-20260912-live-acceptance-20260912.json",
         "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
       },
       "T07": {
-        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "status": "PASS_FINALD_20260912",
+        "evidence": "evidence/t07-finald-20260912-live-acceptance-20260912.json",
         "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
       },
       "T08": {
-        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "status": "PASS_FINALD_20260912_EXPECTED_ERROR",
+        "evidence": "evidence/t08-finald-20260912-live-acceptance-20260912.json",
         "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
       },
       "T09": {
-        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "status": "PASS_FINALD_20260912",
+        "evidence": "evidence/t09-finald-20260912-live-acceptance-20260912.json",
         "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
       },
       "T10": {
-        "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-        "evidence": "evidence/current-package-status-20260912-finald.json",
+        "status": "PASS_FINALD_20260912",
+        "evidence": "evidence/t10-finald-20260912-live-acceptance-20260912.json",
         "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
       }
     },
     "independent_retests": {
-      "status": "PENDING_FINALD_ACCEPTANCE",
+      "status": "PASS_FINALD_INDEPENDENT",
       "cases": [
         "T01",
         "T04",
         "T10"
       ],
-      "results": {}
+      "results": {
+        "T01": "evidence/t01-finald-20260912-independent-acceptance-20260912.json",
+        "T04": "evidence/t04-finald-20260912-independent-acceptance-20260912.json",
+        "T10": "evidence/t10-finald-20260912-independent-acceptance-20260912.json"
+      }
     },
     "negative_suite": {
-      "status": "PENDING_FINALD_ACCEPTANCE",
-      "evidence": null
+      "status": "PASS_NEGATIVE_FAIL_CLOSED",
+      "suite": "v2",
+      "evidence": "evidence/negative-suite-finald-20260912-acceptance-20260912.json"
+    },
+    "p3_positive_cases": {
+      "status": "PASS_FINALD_20260912_P3_POSITIVE",
+      "results": {
+        "P3-1": "evidence/p31-finald-20260912-positive-acceptance-20260912.json",
+        "P3-2": "evidence/p32-finald-20260912-positive-acceptance-20260912.json",
+        "P3-3": "evidence/p33-finald-20260912-positive-acceptance-20260912.json",
+        "P3-4": "evidence/p34-finald-20260912-positive-acceptance-20260912.json",
+        "P3-5": "evidence/p35-finald-20260912-positive-acceptance-20260912.json",
+        "P3-6": "evidence/p36-finald-20260912-positive-acceptance-20260912.json"
+      }
     },
     "t08": {
-      "status": "PENDING_FINALD_ACCEPTANCE",
-      "named_FileNotFound_match": "block-level user-defined name still unmatched; action-level ON ERROR FileNotFoundError measured (p3-named-error-acceptance-20260912.json)"
+      "status": "PASS_FINALD_20260912_EXPECTED_ERROR",
+      "named_FileNotFound_match": "action-level ON ERROR FileNotFoundError fired (P3-6 measured); block-level user-defined name FileNotFound still unmatched"
     },
     "t09": {
-      "status": "PENDING_FINALD_ACCEPTANCE",
-      "evidence": null
+      "status": "PASS_FINALD_20260912",
+      "evidence": "evidence/t09-finald-20260912-live-acceptance-20260912.json",
+      "wait_line": "WAIT 1"
     }
   },
   "p5": {
-    "status": "PASS_LOCAL_STATIC_PARTIAL_LIVE",
+    "status": "PASS_LOCAL_STATIC_COMPLETE_LIVE",
     "issue_close": false,
     "static_check": "evidence/current-package-static-check-20260912-finald.json"
   },
@@ -108,18 +136,18 @@
     ],
     "still_unconfirmed": [
       "list index beyond 1 / out of range / index from variable",
-      "3+ nesting levels, exiting an outer loop from an inner loop, LOOP WHILE nesting",
+      "3+ nesting levels, exiting an outer loop from an inner loop, LOOP WHILE nesting (negative N1 stays fail-closed)",
       "case-insensitive extension comparison",
       "PowerPoint SaveAs collision, locked targets",
       "custom date tokens other than yyyy-MM-dd; edit path of an existing convert action",
-      "block-level ON BLOCK ERROR with the built-in code FileNotFoundError",
-      "T09 other URLs/elements/browsers"
+      "block-level ON BLOCK ERROR with the built-in code FileNotFoundError; user-defined FileNotFound name still unmatched",
+      "T09 other URLs/elements/browsers; DataTable column-name access in a row loop (negative N2)"
     ]
   },
   "remaining": [
-    "finald same-version acceptance: T01-T10, independent T01/T04/T10, negative suite v2, P3-1..P3-6 positive generations (bodies + PAD flows prepared)",
-    "P3 unconfirmed boundaries listed above",
-    "Agent Builder registration (out of scope)"
+    "P3 unconfirmed boundaries listed in still_unconfirmed (outside the teaching material; optional)",
+    "Agent Builder registration (out of scope)",
+    "DOM check (tests/Test-CopilotDom.cjs) NOT_RUN: Playwright not configured"
   ],
-  "result": "Version 79245787: P3-1..P3-6 measured and integrated; knowledge precheck PASS; T01-T10, independent retests, negative suite v2 and P3 positive cases are not yet accepted on this version (bodies and PAD flows prepared)."
+  "result": "Version 79245787 (finald): knowledge precheck, T01-T10, independent T01/T04/T10, negative suite v2 and the P3-1..P3-6 positive generations are all accepted on this same version."
 }

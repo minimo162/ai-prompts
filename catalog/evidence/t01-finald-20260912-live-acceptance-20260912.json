@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T10:59:09+09:00",
+  "case": "T01",
+  "status": "PASS_FINALD_20260912",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/c49e5b51-32a1-456b-8b2f-49ae66bc2310",
+  "conversation_title": "PADでのテキスト置換フロー作成",
+  "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension)",
+  "model_label_on_page": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+  "bundle_manifest": "copilot/knowledge-bundle-manifest-20260912d.json",
+  "attachments_in_user_message": [
+    "agent-instructions.txt",
+    "PAD-Robin-Knowledge-Bundle.txt"
+  ],
+  "body": {
+    "file": "sent-body.txt",
+    "sha256": "5707d9b35437600f18aedaefe9a7747000e543aac0ec3a89bd6611b2bdbafde9",
+    "chars": 4393,
+    "composer_verification": "SHA-256 of composer <p> textContent (aria-hidden cursor span excluded) joined by \n matched the body file before send"
+  },
+  "generated_response": "response.txt",
+  "generated_robin": {
+    "path": "robin.txt",
+    "sha256": "2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47",
+    "code_blocks": 1,
+    "lines": 3,
+    "per_line_lengths": [
+      181,
+      214,
+      236
+    ],
+    "nbsp": 0,
+    "zero_width": 0,
+    "cr": 0,
+    "extraction": "pre.textContent (3 lines 181/214/236, nbsp 0, escapes 0) SHA-256 2e7bbd90… equals the finalc T01 robin; robin.txt materialized from that identical file",
+    "raw_unmodified": true
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT01FinalD2_20260912",
+    "designer_process_id": 28836,
+    "paste_save": "../../evidence/t01-finald-pad-paste-save-20260912.json",
+    "action_count_after_paste": 3,
+    "recopy": "pad-recopy.robin",
+    "recopy_sha256": "d2a7f74e6b5038557a5b0eeca1bde4468f4d4fc402a9baaf95ba7fe5e91a317b",
+    "recopy_note": "CRLF recopy; content equal after line-ending normalization",
+    "run1": "../../evidence/t01-finald-pad-run1-20260912.json",
+    "run2": "../../evidence/t01-finald-pad-run2-20260912.json",
+    "input_sha256_before_after": "2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f",
+    "output": {
+      "expected_sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2",
+      "run1_sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2",
+      "run2_sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2",
+      "bytes": 90,
+      "utf8_bom": true,
+      "copies": [
+        "run1-output.txt",
+        "run2-output.txt"
+      ]
+    },
+    "protected_output_restored": true
+  },
+  "acceptance": "PASS_FINALD_20260912",
+  "prompt_file": "prompt.txt"
+}

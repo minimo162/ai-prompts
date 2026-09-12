@@ -1,0 +1,4 @@
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t06-final.docx'''
+Word.CloseWord.Close Instance: WordInstance

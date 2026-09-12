@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T12:31:00+09:00",
+  "case": "P3-3",
+  "case_kind": "p3_positive",
+  "status": "PASS_FINALD_20260912_P3_POSITIVE",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/d76930f3-6020-4b81-907a-15eea680ea57",
+  "conversation_title": "PADフロー案作成：.txtファイル抽出",
+  "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension)",
+  "model_label_on_page": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+  "bundle_manifest": "copilot/knowledge-bundle-manifest-20260912d.json",
+  "attachments_in_user_message": [
+    "agent-instructions.txt",
+    "PAD-Robin-Knowledge-Bundle.txt"
+  ],
+  "body": {
+    "file": "sent-body.txt",
+    "sha256": "598faa6f88e4cde380f9444df9f005d0f3f22ed359eb1525bf5720c99db144be",
+    "chars": 4394,
+    "composer_verification": "SHA-256 of composer <p> textContent (aria-hidden excluded, editor zero-width markers U+200B/U+200C stripped) joined by \\n matched the body file before send"
+  },
+  "prompt_file": "prompt.txt",
+  "expectation_file": "expectation.json",
+  "expectation_fixed_before_send": true,
+  "expectation_passed_to_copilot": false,
+  "generated_response": "response.txt",
+  "response_sha256": "fea5abb509ffa907983c503ab4ce71b558e71c1b535ca000997f0647c4d54b24",
+  "generated_robin": {
+    "path": "robin.txt",
+    "sha256": "2b3494e4e8ceffd33e8ef242b19387205b8159d2307ad8a56f93aeb789e3454a",
+    "code_blocks": 1,
+    "lines": 13,
+    "per_line_lengths": [
+      337,
+      17,
+      19,
+      33,
+      47,
+      116,
+      34,
+      68,
+      8,
+      36,
+      70,
+      7,
+      3
+    ],
+    "nbsp": 0,
+    "zero_width": 0,
+    "cr": 0,
+    "raw_unmodified": true,
+    "extraction": "pre.textContent of the single code block (SHA-256 verified in-page against robin.txt)",
+    "measured_source": "catalog/evidence/p3-file-boundary-sub-recopy-20260912.robin",
+    "relation": "equal to the measured IncludeSubfolders: True recopy after CRLF normalization"
+  },
+  "expectation_checks": {
+    "lines": {
+      "expected": 13,
+      "observed": 13,
+      "pass": true
+    },
+    "must_contain: IncludeSubfolders: True": {
+      "pass": true
+    },
+    "must_contain: CurrentFile.Extension = $'''.txt'''": {
+      "pass": true
+    }
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeP33FinalD2_20260912",
+    "designer_process_id": 47344,
+    "paste_save": "../../evidence/p33-finald-pad-paste-save-20260912.json",
+    "action_count_after_paste": 13,
+    "saved_confirmed": true,
+    "recopy": "pad-recopy.robin",
+    "recopy_sha256": "e909a16591683dc1e513cb538e3040ca1bb8e1dd5ddc9465fdecd670e73aaadb",
+    "recopy_note": "Copy-PadFlowLive.ps1; content equal to robin.txt after whitespace normalization",
+    "run1": "../../evidence/p33-finald-pad-run1-20260912.json",
+    "run2": "../../evidence/p33-finald-pad-run2-20260912.json",
+    "expected": {
+      "TxtCount": "3",
+      "OtherCount": "2",
+      "fixtures_unchanged": true
+    },
+    "observed": {
+      "run1": {
+        "run_status": "success",
+        "variables": {
+          "CurrentFile": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\sub.txt\\inner.txt",
+          "FileContents": "inner",
+          "Files": "[C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\plain.txt,  ...]",
+          "OtherCount": "2",
+          "OtherSeen": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\x.txt.bak",
+          "TxtCount": "3",
+          "TxtSeen": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\sub.txt\\inner.txt"
+        }
+      },
+      "run2": {
+        "run_status": "success",
+        "variables": {
+          "CurrentFile": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\sub.txt\\inner.txt",
+          "FileContents": "inner",
+          "Files": "[C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\plain.txt,  ...]",
+          "OtherCount": "2",
+          "OtherSeen": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\x.txt.bak",
+          "TxtCount": "3",
+          "TxtSeen": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary\\sub.txt\\inner.txt"
+        }
+      }
+    },
+    "checks": {
+      "TxtCount=3": true,
+      "OtherCount=2": true,
+      "fixtures_unchanged": true
+    },
+    "fixture_hashes_before_after_equal": true
+  },
+  "acceptance": "PASS_FINALD_20260912_P3_POSITIVE"
+}

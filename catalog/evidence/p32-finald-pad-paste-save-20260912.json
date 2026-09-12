@@ -1,0 +1,18 @@
+{
+    "captured_at":  "2026-09-12T12:05:46.6446674+09:00",
+    "flow":  "RobinKnowledgeP32FinalD2_20260912",
+    "designer_process_id":  40112,
+    "status_bar_texts":  [
+                             "次のアクションを実行",
+                             "アクション",
+                             "1 選択されたアクション",
+                             "1 選択されたアクション",
+                             "23 アクション",
+                             "23 アクション"
+                         ],
+    "saved_confirmed":  true,
+    "recopy_method":  "Ctrl+A/Ctrl+C from foreground Designer (list virtualization prevents UIA count for 23 rows)",
+    "recopy_path":  "C:\\Users\\yuuki\\ai-prompts\\catalog\\generated\\normal-chat-finald-20260912-p32\\pad-recopy.robin",
+    "recopy_sha256":  "b2c65f7e9191734f780bdbe7cc1d8696974f5fc66e893473c9b91bee98f9eaaa",
+    "recopy_lines":  23
+}

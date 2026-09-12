@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T11:47:44+09:00",
+  "case": "T10",
+  "independent_retest": true,
+  "status": "PASS_FINALD_20260912_INDEPENDENT",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/fdc91517-7738-452b-8228-9b59889d7eb6",
+  "conversation_title": "PAD既存フローの最小変更依頼",
+  "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension)",
+  "model_label_on_page": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+  "attachments_in_user_message": [
+    "PAD-Robin-Knowledge-Bundle.txt",
+    "T10-Knowledge-Flow-Bundle.txt (sha 2f77e59f…)"
+  ],
+  "body": {
+    "file": "sent-body.txt",
+    "sha256": "0d1a7c48827d3d690486696e5ec9a60b4c097c2a66d26708278a063eed61b0e0",
+    "chars": 4703,
+    "composer_verification": "SHA-256 of composer <p> textContent (aria-hidden cursor span excluded) joined by \n matched the body file before send"
+  },
+  "generated_response": "response.txt",
+  "generated_robin": {
+    "path": "robin.txt",
+    "sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12",
+    "code_blocks": 1,
+    "lines": 16,
+    "per_line_lengths": [
+      107,
+      102,
+      167,
+      192,
+      46,
+      60,
+      110,
+      65,
+      171,
+      43,
+      64,
+      97,
+      158,
+      95,
+      198,
+      61
+    ],
+    "markdown_escapes": 0,
+    "nbsp": 0,
+    "extraction": "pre.textContent (16 lines) SHA-256 3285b362… identical to the primary finald T10 answer; code-only answer; robin.txt materialized from that identical file",
+    "raw_unmodified": true,
+    "cr": 0
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT10FinalD2Indep_20260912",
+    "designer_process_id": 40656,
+    "paste_save": "../../evidence/t10-independent-finald-pad-paste-save-20260912.json",
+    "action_count_after_paste": 16,
+    "recopy": "pad-recopy.robin",
+    "recopy_sha256": "845c54cc905e50dcb9f8b9d7e55aeba3cb639bee1b3e848a3f66f9b3ce051446",
+    "run1": "../../evidence/t10-independent-finald-pad-run1-20260912.json",
+    "run2": "../../evidence/t10-independent-finald-pad-run2-20260912.json",
+    "output_isolation": "three protected outputs moved aside before each run and restored afterwards",
+    "outputs": {
+      "run1": {
+        "excel_A1": "T10-Changed",
+        "word_contains_CopilotOffice_246": true,
+        "word_contains_T10": false,
+        "ppt_contains_CopilotOffice_246": true,
+        "ppt_contains_T10": false
+      },
+      "run2": {
+        "excel_A1": "T10-Changed",
+        "word_contains_CopilotOffice_246": true,
+        "word_contains_T10": false,
+        "ppt_contains_CopilotOffice_246": true,
+        "ppt_contains_T10": false
+      }
+    },
+    "office_processes_after": 0,
+    "note": "two paste attempts inside one shell invocation returned nothing; a third standalone invocation confirmed 16 actions and is the recorded paste_save evidence"
+  },
+  "acceptance": "PASS_FINALD_20260912_INDEPENDENT",
+  "bundle_manifest": "copilot/knowledge-bundle-manifest-20260912d.json",
+  "prompt_file": "prompt.txt"
+}

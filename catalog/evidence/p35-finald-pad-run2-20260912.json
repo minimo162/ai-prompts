@@ -1,0 +1,12 @@
+{
+    "schema_version":  1,
+    "observed_at":  "2026-09-12T03:24:20.8021895Z",
+    "flow_name":  "RobinKnowledgeP35FinalD2_20260912",
+    "run_status":  "success",
+    "ready_observed":  true,
+    "start_enabled_after":  true,
+    "variable_previews":  [
+                              "2026/09/12 12:24:16",
+                              "2026-09-12"
+                          ]
+}

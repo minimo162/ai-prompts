@@ -1,0 +1,60 @@
+Copilot said:
+
+以下は、添付ナレッジに収録されたWordの編集可能起動、リテラル全件置換、docx別名保存、保存しない終了の実測形式を組み合わせたPADフロー案です。合成入力を別名保存するため、元文書を直接保存する処理は含めません。
+
+1. 前提・対象範囲
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx
+検索文字列: OfficeCatalog
+置換文字列: T06Replaced
+Word起動設定: 表示あり、ReadOnly: False
+Wordインスタンス: WordInstance
+保存形式: Word.WordFormat.FromExtension。出力パスの .docx 拡張子に従います。
+終了処理: 別名保存後、WordInstanceを閉じます。
+期待結果: 出力文書内の該当文字列をすべて置換し、指定文字列以外の本文を保持します。入力文書は変更しません。
+
+根拠環境はPAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データです。Wordについては、編集可能な既存文書の起動、ワイルドカードなしの全件置換、拡張子による別名保存、終了が採取されています。また、T06系の実測では入力文書のSHA不変と本文の OfficeCatalog → T06Replaced が確認されています。
+
+注意: WordのSaveAsは、出力ファイルが既に存在すると確認なしで上書きすることが実測されています。normal-chat-t06-final.docxを残す必要がある場合は、実行前に退避してください。SaveAs原文には上書きを禁止する引数がありません。
+
+2. PADで先に確認する設定
+入力ファイルと出力先フォルダーが存在することを確認します。
+出力ファイルが既に存在する場合は、必要に応じて別名で退避します。
+新しい空のサブフロー、または置換対象のサブフローを開きます。
+既存のWordインスタンスを別途作成する必要はありません。1行目がWordInstanceを生成し、以降の3アクションが同じインスタンスを参照します。
+UI要素や入力変数は不要です。ファイルパスと置換文字列はRobin内の文字列リテラルです。
+3. 貼り付け用Robin
+
+対象: 空のサブフロー全体、またはこの4アクションを挿入する位置です。
+
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t06-final.docx'''
+Word.CloseWord.Close Instance: WordInstance
+
+
+各命令形式の根拠は、catalog/actions/word-launch/open-editable.robin、word-replace/all-literal.robin、word-save/as-docx-extension.robin、word-close/no-save.robinです。T06の置換・別名保存結果と入力不変、およびSaveAs再実行時の上書き挙動も実測記録に含まれます。
+
+4. PADデザイナーでの確認
+
+貼り付け直後に次を確認してください。
+
+アクション数が4である。
+順序が「Word起動 → 検索と置換 → 別名保存 → Word終了」である。
+4アクションすべてが同じWordInstanceを参照している。
+起動アクションがReadOnly=Falseになっている。
+置換アクションがワイルドカードなしの全件置換である。
+MatchCase=False、MatchEntireWord=Falseである。
+保存形式がWord.WordFormat.FromExtensionである。
+保存先が入力パスと異なる。
+デザイナーに赤いエラー表示がなく、未定義変数がない。
+5. 合成データでの実行・照合
+入力文書のコピーまたはハッシュを実行前に記録します。
+出力ファイルを退避または削除できる検証環境で、フローを実行します。
+Wordが終了し、PADが準備完了へ戻ったことを確認します。
+出力文書を開き、OfficeCatalogが残っておらず、該当箇所がT06Replacedになっていることを確認します。
+置換対象外の日本語、改行、その他の本文が保持されていることを確認します。
+入力文書を再確認し、本文およびファイルハッシュが実行前から変わっていないことを確認します。
+再実行する場合は、既存出力が無警告で上書きされる前提で、必要なら先に退避します。
+
+確認範囲: Word本文の置換とdocx別名保存が対象です。表、特殊な書式、ヘッダー・フッター、コメント、テンプレートなどの保持は、このナレッジでは個別に実測されていません。

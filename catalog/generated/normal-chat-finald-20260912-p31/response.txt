@@ -1,0 +1,42 @@
+以下は、PADで実測された「リスト作成」「項目追加」「インデックス指定による変数設定」だけを組み合わせた、合成データ用の4アクション構成です。専用の取得アクションは使用しません。
+
+1. 前提・対象範囲
+目的: CatalogListへ2つの文字列を順番に追加し、添字1の値をNewVarへ取得
+入力: 文字列CatalogItem、SecondItem
+出力: NewVar、テキスト型、期待値はSecondItem
+変数:
+CatalogList: リスト型。1行目で生成
+NewVar: テキスト型。4行目で生成
+保存先、ファイル、アプリ、UI要素: 不要
+成功条件: CatalogList=[CatalogItem, SecondItem]かつNewVar=SecondItem
+対象サブフロー: Mainなど、貼り付け先として選んだ空のサブフロー
+置換範囲: 選択中の4アクションを置換するか、空の位置へ4行すべてを追加
+
+根拠環境はPAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データです。リスト作成と項目追加はcatalog/actions/variables-create-new-list/default.robinおよびcatalog/actions/variables-add-item-to-list/default.robinが原文です。添字1による取得はcatalog/evidence/p3-list-idx1-probe-20260912.robinが原文で、元フローと別の空フローで各2回実行され、NewVar=SecondItemが確認されています。PAD-Robin-Knowledge-Bundle
+
+2. PADで先に行う設定
+
+新しい空のデスクトップフロー、または既存フローの空いている位置を開いてください。入力変数、アプリインスタンス、UI要素、保存先の事前作成は不要です。4行全体をコピーし、対象サブフローの空いている位置へ貼り付けます。
+
+3. デザイナー上の確認
+
+貼り付け直後に、次を確認してください。
+
+アクション数が4
+順序が「新しいリストの作成」→「項目追加」→「項目追加」→「変数の設定」
+CatalogListがリスト型
+追加項目が順にCatalogItem、SecondItem
+最後の値欄が %CatalogList[1]% として認識されている
+デザイナーエラーが表示されていない
+ループや条件ブロックはないため、ENDの対応確認は不要
+
+添字は0始まりです。確認済みなのは数値リテラル0と1であり、負数、範囲外、変数による添字指定、末尾指定はこの案の対象外です。PAD-Robin-Knowledge-Bundle
+
+4. 合成データでの実行・照合
+
+まずフローを複製して合成データ専用のコピーを作り、保存してから実行してください。実行後、変数ペインでCatalogListの並びがCatalogItem、SecondItemであることと、NewVarがSecondItemであることを確認します。もう一度実行し、同じ結果になることを照合してください。
+
+Variables.CreateNewList List=> CatalogList
+Variables.AddItemToList Item: $'''CatalogItem''' List: CatalogList
+Variables.AddItemToList Item: $'''SecondItem''' List: CatalogList
+SET NewVar TO CatalogList[1]

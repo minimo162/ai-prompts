@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-12T02:30:13.6941315Z",
+    "flow_name":  "RobinKnowledgeT09FinalD2_20260912",
+    "source_robin":  "catalog/flows/ui-t09-local-roundtrip/roundtrip-wait1-20260912.robin",
+    "source_sha256":  "d8913da95757f5fff4d3d7b10c40c35120d76882dc4d516356c9c3ddf06c5571",
+    "source_bytes":  169040,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  6,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

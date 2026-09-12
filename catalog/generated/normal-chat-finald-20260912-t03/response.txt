@@ -1,0 +1,90 @@
+Copilot said:
+
+添付の実測ナレッジにあるT03の13アクション構成を、そのままPADへ貼り付けられる形で提示します。ファイル名取得や条件式は推測せず、確認済みの CurrentFile.Extension を使います。
+
+1. 前提・対象範囲
+目的: 指定フォルダー直下の全ファイルを一度ずつ列挙し、拡張子が小文字の .txt と等しいファイルだけをUTF-8で読み取ります。
+入力フォルダー: C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+対象ファイル: copy-input-20260909.txt、t03-alpha.txt
+対象外経路: t03-beta.csv、t03-gamma.md
+サブフォルダー: 対象外です。
+出力: ファイルへの保存は行いません。読み取った内容を FileContents に保持します。
+上書き: 保存処理がないため発生しません。
+成功条件: TxtCount=2、OtherCount=2 となり、入力4ファイルが変更されないことです。
+
+この構成は、PAD 2.71.115.26224、日本語UI、Power Fx OFFの環境で、別の空フローへの無修正貼り付け、保存、再コピー、2回の実行、入力不変まで確認されています。根拠原文は catalog/flows/t03-extension-branch/capture-pad-copy-20260912.robin、実行証拠は catalog/evidence/t03-ext-verify-acceptance-20260912.json です。
+
+未確認・環境依存
+.TXT は今回の条件では対象外になります。後続の境界試験でも、大文字の .TXT はElseへ進むことが確認されています。
+.txt.bak は拡張子が .bak となるため対象外です。
+NoSort のため、処理順序は保証しません。
+FileContents、TxtSeen、OtherSeen は反復ごとに上書きされ、終了後には最後に処理された該当ファイルの値が残ります。
+読み取った全ファイルの内容をリストへ蓄積する処理は、この実測原文には含まれていません。
+2. PADで先に確認する設定
+
+新しい空フローの Mainサブフロー を開き、既存アクションがある場合は置き換えず、安全のため複製したフローで試してください。入力変数、UI要素、Officeインスタンスの事前作成は不要です。
+
+貼り付け後に生成される変数は次のとおりです。
+
+Files: ファイルオブジェクトのリスト
+CurrentFile: For eachの現在のファイルオブジェクト
+FileContents: 読み取ったテキスト
+TxtCount: 数値
+OtherCount: 数値
+TxtSeen: 最後に対象経路を通ったファイル
+OtherSeen: 最後に対象外経路を通ったファイル
+
+フォルダー取得は、フィルター *、サブフォルダーを含めない、アクセス拒否時は失敗、並べ替えなしという実測設定です。UTF-8読取りはファイル変数 CurrentFile を直接渡す確認済み構成です。
+
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: 複製した検証用Mainサブフローの全アクション
+
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+SET TxtCount TO 0
+SET OtherCount TO 0
+LOOP FOREACH CurrentFile IN Files
+    IF CurrentFile.Extension = $'''.txt''' THEN
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+        SET TxtSeen TO CurrentFile
+        Variables.IncreaseVariable Value: TxtCount IncrementValue: 1
+    ELSE
+        SET OtherSeen TO CurrentFile
+        Variables.IncreaseVariable Value: OtherCount IncrementValue: 1
+    END
+END
+
+
+これは PAD-Robin-Knowledge-Bundle に掲載された13行の実測原文です。.csv と .md は空の分岐ではなく、Else内で OtherSeen の更新と OtherCount の加算を行う明示的な対象外経路になっています。
+
+4. デザイナー上の確認
+
+貼り付け直後に、次を確認してください。
+
+アクション数が13である。
+順序が「フォルダー取得 → 数値初期化2件 → For each → If → UTF-8読取り → Else」の順である。
+外側のFor eachと内側のIfに、それぞれ対応する END がある。
+Ifの左辺が文字列化されたファイル名ではなく、CurrentFile.Extension になっている。
+.txt が小文字で、演算子が完全一致の = になっている。
+TxtCount と OtherCount が数値の 0 で初期化されている。
+Variables.IncreaseVariable の Value が文字列リテラルではなく変数参照になっている。
+読取りアクションのエンコードがUTF-8になっている。
+デザイナーに赤いエラー表示がない。
+
+PADでは ELSE と各 END もアクションとして数えます。また、変数加算の対象を $'''TxtCount''' のような文字列にすると設計エラーになることが実測されています。
+
+5. 合成データでの実行・照合
+元の合成フォルダーを検証用フォルダーへ複製するか、入力4ファイルのハッシュを記録します。
+フローを保存します。
+1回実行し、次を確認します。
+Files の件数: 4
+TxtCount: 2
+OtherCount: 2
+FileContents: 読み取られた最後の .txt ファイルの内容
+入力ファイルの内容、件数、名前が不変
+.csv と .md が読取りアクションを通らず、Else側で数えられたことを確認します。
+同じ入力でもう一度実行し、TxtCount=2、OtherCount=2 が再現することを確認します。初期化はFor eachの外側にあるため、前回値は累積しません。
+TxtSeen や OtherSeen の最終ファイル名だけで成功判定しないでください。並べ替えなしのため、処理順序には依存しない件数と入力不変を主な判定にします。
+
+実測では2回とも .txt 2件、その他2件となり、読み取った内容と入力4ファイルの不変が照合されています。

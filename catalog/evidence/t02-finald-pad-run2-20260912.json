@@ -1,0 +1,12 @@
+{
+    "schema_version":  1,
+    "observed_at":  "2026-09-12T01:58:34.8051719Z",
+    "flow_name":  "RobinKnowledgeT02FinalD2_20260912",
+    "run_status":  "success",
+    "ready_observed":  true,
+    "start_enabled_after":  true,
+    "variable_previews":  [
+                              "3 行, 3 列",
+                              "2 行, 3 列"
+                          ]
+}
