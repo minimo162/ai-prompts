@@ -159,7 +159,7 @@
     "report": "docs/robin-knowledge-validation.md",
     "required_gaps": [
       "T09 instruction line 39 still specifies WAIT 500, contradicting knowledge 05 lines 40/48 (WAIT 1). Fixing instruction bytes requires a new fixed version and same-version acceptance; do not relabel finald PASS.",
-      "A/B/C/D/E: separate-empty-flow reuse trace missing for some existing probes; see report matrix. Do not infer it from T01-T10 PASS.",
+      "B/C/D/E: separate-empty-flow reuse trace missing for some existing probes; see report matrix. A boolean/subtraction and D folder creation were supplemented with new reuse evidence; do not infer the other items from T01-T10 PASS.",
       "C: saved cell probe proves indexed cell update, not a cell-value read; locate the required cell-reference evidence and distinguish optional column-name row-loop syntax.",
       "T10: saved finald and finale DOM Robin has LF plus a final newline while the fixed input has CRLF and no final newline. Fourteen unchanged instruction contents match, but strict preservation outside the two authorized changes is not proven. Keep functional run results; do not promote them to full T10 acceptance."
     ],
@@ -190,6 +190,8 @@
       "original_records_preserved": true
     },
     "corrections": [
+      "A boolean: evidence/a-boolean-reuse-20260912/acceptance.json links the unchanged measured raw to a new empty flow, two True observations and reopened recopy. Both runs preserve transient ambiguous status observations; no run was resent.",
+      "D folder creation: evidence/d-folder-create-reuse-20260912/acceptance.json proves two creations from an absent target, expected NewFolder path, original empty-folder restoration and reopened recopy. A run2 preparation failure occurred before any execution request and is retained.",
       "A subtraction: new separate-empty-flow reuse on 2026-09-12 confirms the unmodified measured raw with two P3Number=7 observations and reopened recopy. See evidence/a-subtract-reuse-20260912/acceptance.json. This resolves current reuse/two-run coverage only; the original 2026-09-10 record still links one run and is preserved.",
       "26 stale current-package-status PAD run links corrected; original per-case acceptance/result and PAD records preserved.",
       "T09 result/acceptance observed timestamps retain finalc times; authoritative finald run1=2026-09-12T02:33:08.6086461Z and run2=2026-09-12T02:33:25.4307357Z. This derived correction does not alter original records.",

@@ -1,0 +1,47 @@
+{
+  "source_sha256": "34658c14b463d438b6cac03c060e2e44f7cb8719baa48db5b44236c650dc2bd2",
+  "states": [
+    {
+      "at": "2026-09-12T08:17:51.9359617Z",
+      "observation_error": "PAD_SELECTOR: status ambiguous."
+    },
+    {
+      "running": false,
+      "errors_known": true,
+      "at": "2026-09-12T08:18:03.3076103Z",
+      "status": "ready",
+      "errors": 0
+    }
+  ],
+  "flow": "Power Automate | RobinKnowledgeFolderCreateReuse_20260912",
+  "status": "RUNTIME_COMPLETE_VALUES_PENDING_AUDIT",
+  "target": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\p3-created-20260910",
+  "fresh_directory": true,
+  "old_pass_inherited": false,
+  "observed_at": "2026-09-12T08:18:04.6203653Z",
+  "created_utc": "2026-09-12T08:17:51.3648686Z",
+  "original_directory_restored": true,
+  "variables": [
+    {
+      "nodes": [
+        {
+          "type": "ControlType.ListItem",
+          "name": "NewFolder",
+          "id": "VariablesListItem"
+        },
+        {
+          "type": "ControlType.Text",
+          "name": "NewFolder",
+          "id": "VariableTextBlock"
+        },
+        {
+          "type": "ControlType.Text",
+          "name": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\p3-created-20260910",
+          "id": "VariablePreviewTextBlock"
+        }
+      ],
+      "variable": "NewFolder"
+    }
+  ],
+  "run_requested_at": "2026-09-12T08:17:49.1006933Z"
+}

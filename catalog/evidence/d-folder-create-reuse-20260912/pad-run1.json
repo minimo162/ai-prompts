@@ -1,0 +1,43 @@
+{
+  "observed_at": "2026-09-12T08:13:29.8707009Z",
+  "status": "RUNTIME_COMPLETE_VALUES_PENDING_AUDIT",
+  "original_directory_restored": true,
+  "old_pass_inherited": false,
+  "created_utc": "2026-09-12T08:13:19.1238211Z",
+  "target": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\p3-created-20260910",
+  "flow": "Power Automate | RobinKnowledgeFolderCreateReuse_20260912",
+  "states": [
+    {
+      "running": false,
+      "status": "ready",
+      "errors": 0,
+      "at": "2026-09-12T08:13:28.4915145Z",
+      "errors_known": true
+    }
+  ],
+  "variables": [
+    {
+      "nodes": [
+        {
+          "type": "ControlType.ListItem",
+          "id": "VariablesListItem",
+          "name": "NewFolder"
+        },
+        {
+          "type": "ControlType.Text",
+          "id": "VariableTextBlock",
+          "name": "NewFolder"
+        },
+        {
+          "type": "ControlType.Text",
+          "id": "VariablePreviewTextBlock",
+          "name": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\p3-created-20260910"
+        }
+      ],
+      "variable": "NewFolder"
+    }
+  ],
+  "fresh_directory": true,
+  "source_sha256": "34658c14b463d438b6cac03c060e2e44f7cb8719baa48db5b44236c650dc2bd2",
+  "run_requested_at": "2026-09-12T08:13:17.0232104Z"
+}

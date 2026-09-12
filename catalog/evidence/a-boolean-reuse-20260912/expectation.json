@@ -1,0 +1,10 @@
+{
+  "expected_preview": "True",
+  "fixed_before_paste": "2026-09-12T08:03:53.5225109Z",
+  "expected_variable": "P3Bool",
+  "manual_edits_allowed": false,
+  "source_sha256": "e7d0321af0dc7fee337b917308164b6d5c13f7040ef69dcc657ea725db54cf0c",
+  "runs_required": 2,
+  "source": "catalog/evidence/p3-boolean-probe-20260910.robin",
+  "scope": "existing probe separate-empty-flow reuse; no new Copilot generation"
+}

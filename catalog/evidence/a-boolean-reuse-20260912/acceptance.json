@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "status": "PASS_SEPARATE_FLOW_REUSE",
+  "recorded_at": "2026-09-12T08:09:48.826Z",
+  "scope": "A boolean literal: existing measured raw replay in a new empty flow",
+  "source": "../p3-boolean-probe-20260910.robin",
+  "source_sha256": "e7d0321af0dc7fee337b917308164b6d5c13f7040ef69dcc657ea725db54cf0c",
+  "source_probe": "../p3-boolean-probe-20260910.json",
+  "knowledge": "../../../copilot/knowledge/PAD-Robin-01-Basics.txt",
+  "knowledge_sha256": "abe921c3e7aa19ce5410fe746fe4c4f5c7fc7ee3ffd18c4b6747686a41fdbf31",
+  "flow": "RobinKnowledgeBooleanReuse_20260912",
+  "power_fx": false,
+  "paste": "paste.json",
+  "original_actions": 1,
+  "paste_attempts": 1,
+  "recopy": "pad-recopy.robin",
+  "reopened_recopy": "pad-recopy-reopened.robin",
+  "recopy_sha256": "133b2fb5e8d4538973174159a26baa3a5e47c553de0f940420258e64cc273e6a",
+  "recopy_difference": "LF -> CRLF only",
+  "save_persistence": "closed and reopened; recopy byte-identical",
+  "expectation": "expectation.json fixed before paste",
+  "runs": [
+    {
+      "run": 1,
+      "evidence": "pad-run1.json",
+      "requested_at": "2026-09-12T08:06:15.2921027Z",
+      "expected": "True",
+      "observed": "True",
+      "status": "PASS_OBSERVED_VALUE",
+      "running_observed": false,
+      "observation_errors": [
+        "PAD_SELECTOR: status ambiguous."
+      ]
+    },
+    {
+      "run": 2,
+      "evidence": "pad-run2.json",
+      "requested_at": "2026-09-12T08:06:57.5255004Z",
+      "expected": "True",
+      "observed": "True",
+      "status": "PASS_OBSERVED_VALUE",
+      "running_observed": false,
+      "observation_errors": [
+        "PAD_SELECTOR: status ambiguous."
+      ]
+    }
+  ],
+  "observation_limit": "Both runs had transient status ambiguous; observation continued without another run request. Brief running phase not captured; ready/errors0 and True preview recorded.",
+  "manual_edits": false,
+  "source_unchanged": true,
+  "clipboard_restore": "outer paste wrapper and recopy helper restored clipboard; raw paste helper field remains false",
+  "historical_boundary": "New reuse runs are not reassigned to the original 2026-09-10 probe.",
+  "current_package_generation_acceptance": false
+}

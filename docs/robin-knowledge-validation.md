@@ -4,6 +4,14 @@
 
 ### 監査後の継続: finale候補（未受入・未昇格）
 
+**A真偽値・Dフォルダー作成の不足補完:** 既存採取原文をそれぞれ新しい空フローへ無修正で貼付け、2回の固定期待照合と保存後再オープン再コピーを確認した。`a-boolean-reuse-20260912/acceptance.json`はP3Bool=Trueを08:06:15Z／08:06:57Zの2runで確認。両回のstatus ambiguousは同じ実行の観測継続でready/errors0へ到達し、再実行要求なし。短いrunning表示は未捕捉として残す。
+
+`d-folder-create-reuse-20260912/acceptance.json`は08:13:17Z／08:17:49Zの2runで対象不在からの新規作成、実行要求後の作成時刻、NewFolderの指定パス、ready/errors0を確認した。元の合成空フォルダーは各回前に退避し、各回後に元の作成時刻を保持して復元。2回目の最初の準備確認ではready表示でもStartが無効で、実行要求前に停止した。保存フローを開き直して再コピー不変を確認後に2回目を実行し、準備不成立と後続観測エラーを保全した。
+
+両件の原文ハッシュは不変、再コピー差はCRLFのみ。元probe／現在の教材ハッシュ／新規再利用runを各acceptanceから追跡できる。過去runへの付け替えや新版Copilot生成受入の代替は行わない。次の単一作業は既存のサブフローMain/P3Workerの別空フロー再利用。T10、C、Dの存在確認・移動・名前変更、Eの反復等の残件は維持する。
+
+今回の追加検査は2つのmanifestにある19ファイルのハッシュ／サイズ一致、JSON1,576件読込み、CurrentStatus46項目、差分検査。検査コードと配布正本は不変であり、直前の非ライブAll36件PASSを今回の実機再利用と区別する。保護資料はSHA e0ea487e…で不変。全体partial／PR未準備／未pushを維持する。
+
 **A減算の不足補完:** 既存の採取原文`p3-subtract-probe-20260910.robin`（SHA7d09d4dd…、2行）を、新しい空フロー`RobinKnowledgeSubtractReuse_20260912`へ無修正で再貼付けした。Power Fx Off、2アクション、再コピー差はCRLFのみ。07:56:51Z／07:57:28Zの2回の実行要求後、固定期待値P3Number=7とready/errors0を確認。短いrunning表示は捕捉していない。保存後再オープン再コピーは保存前とバイト一致し、原文は不変だった。
 
 `catalog/evidence/a-subtract-reuse-20260912/acceptance.json`と同ディレクトリの原記録・manifestで、採取原文→別空フロー→既存01-Basics教材を結び付けた。これにより現在の減算再利用／2回実行の不足を補完した。9月10日記録のrun参照は1件のまま保全し、今回の2runを当時の2回目へ付け替えない。新しい構文採取・教材変更・同版Copilot生成受入の代替ではない。Booleanなど他のA〜G不足は残る。
@@ -144,13 +152,13 @@ main→対象コミットで指示文・知識7原本・bundle・manifest・T10�
 
 | 範囲 | 原証跡→再利用→教材→同版受入の確認 | 必須追跡の不足 |
 | --- | --- | --- |
-| A 文字列・数値・真偽値／減算 | catalog既存変数・text flows、`p3-boolean-probe-20260910.json`、`p3-subtract-probe-20260910.json`→01-Basics。減算は`a-subtract-reuse-20260912/acceptance.json`で別空フロー・2run・再オープンを補完。T01はtext系を受入 | Booleanの別空フロー再利用記録は未特定。減算は今回2runとも7を確認したが、旧参照JSONがrun1件だけである履歴は保全 |
+| A 文字列・数値・真偽値／減算 | catalog既存変数・text flows、boolean/subtract probe→01-Basics。`a-boolean-reuse-20260912/acceptance.json`と`a-subtract-reuse-20260912/acceptance.json`で別空フロー・各2run・再オープンを補完。T01はtext系を受入 | 今回はTrue／7を確認。旧参照JSONが各run1件だけである履歴は保全し、今回runを過去へ付け替えない |
 | A リスト・文字列加工・数値変換・日時 | 既存list/text/number flows、`text-substring-validation.json`、`datetime-current-date-validation.json`、P3添字1／date-format acceptance→01-Basics→T01/P3-1/P3-5 | 添字1・yyyy-MM-ddの別フローと2回runあり。任意の別添字／別書式へ拡張しない |
 | B If／Loop／エラー | `p3-nested-control-acceptance-20260912.json`／`p3-named-error-acceptance-20260912.json`→別フロー→02-Control→T03/T08/P3-2/P3-6 | この固定構造の追跡あり |
 | B サブフロー | `p3-subflow-probe-20260910.json`とworker／call原文、元フロー2run→02-Control | Main/P3Workerの保存原文を別空フローへ再配置して実行した証跡未特定。T08成功で代替不可 |
 | C DataTable | `p3-datatable-row-success-20260911.json`／cell-success／foreach-success、各raw・run→03-Files。T02/T04はCSV／フィルター受入 | 行追加／セル更新／行反復の別空フロー再利用証跡未特定。セル更新は確認できるが、セル値取出しを要求のセル参照と対応づける原証跡は未特定。列名による行ループの負例は任意範囲のまま |
 | C CSV | `csv-read-validation.json`、`filter-t02-roundtrip2-run*.json`→03-Files→T02/T04 | 論理行・引用符・日本語を含む固定範囲は確認 |
-| D ファイル | file-copy／text-write／T03-extension-branch／P3-file-boundaryの別フロー→03-Files→T01/T03/P3-3 | `p3-folder-create`／`p3-file-exists`／`p3-file-move`／`p3-file-rename`各probeは原採取・元フロー実行あり。保存原文の別空フロー再利用証跡が未特定 |
+| D ファイル | file-copy／text-write／T03-extension-branch／P3-file-boundaryの別フロー→03-Files→T01/T03/P3-3。フォルダー作成は`d-folder-create-reuse-20260912/acceptance.json`で補完 | `p3-file-exists`／`p3-file-move`／`p3-file-rename`各probeは原採取・元フロー実行あり。これらの保存原文の別空フロー再利用証跡は未特定 |
 | E Excel | 既存Excel read/write/save flows、P3 SaveAs、`p3-excel-foreach-runtime-success-*`→04-Office→T04/T05/T10/P3-4 | Excel反復probeは元フローの2回runあり。完成した反復rawを別空フローで再利用した証跡は未特定（initial-pasteは前段の範囲読取り形） |
 | F Word／PowerPoint／PDF | 既存Office/PDF flowsと各設定のevidence→04-Office→T06/T07/T10。PowerPoint保持・PDF指定ページは保存成果物で照合 | `captured_partial_verification`を全主要設定再利用済みとはしない。固定受入済み主要形とcopy-only等の表示区別を維持 |
 | G UI／ブラウザー | `ui-t09-local-roundtrip/roundtrip-wait1-20260912.robin`→要素取り込みと専用別フロー→05-UI-Web→T09 | 固定ローカル画面の追跡あり。旧WAIT 500／旧要素登録失敗は履歴として維持 |

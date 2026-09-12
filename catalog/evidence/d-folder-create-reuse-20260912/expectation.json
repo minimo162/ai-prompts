@@ -1,0 +1,10 @@
+{
+  "fixed_before_paste": "2026-09-12T08:10:38.6127696Z",
+  "manual_edits_allowed": false,
+  "source_sha256": "34658c14b463d438b6cac03c060e2e44f7cb8719baa48db5b44236c650dc2bd2",
+  "source": "catalog/evidence/p3-folder-create-probe-20260910.robin",
+  "runs_required": 2,
+  "expected_variable": "NewFolder",
+  "expected_path": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\p3-created-20260910",
+  "fresh_directory_required": true
+}
