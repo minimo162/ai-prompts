@@ -10,7 +10,11 @@
 
 一次T10の2run機能結果・旧finaldの実行証跡は保全するが、厳密保持を含む完全PASSには昇格しない。completion-auditへ必須不足を追加し、CurrentStatus検査は不足一覧を空にするだけではT10未証明／証明フィールド欠落のPR-readyを拒否する2負例を追加、46項目PASS。指示中の「それ以外の16行」は原文全16行・変更2行と数が整合しない点も残る。今回その実バイトや期待値は変更していない。
 
-**次の単一作業:** 保存済みT10回答のコピー／取得経路で、変更範囲外の改行・終端を含む原文保持を検証できるかを確定する。取得できない場合は当該項目を未証明のまま残し、指示の修正で解決するなら新版として固定する。生成Robinの整形や比較条件の緩和で通さない。独立T04は完了済み、独立T10・P3正例・負例v2・A〜G限定追跡不足・最終統合監査が残り、全体partial／PR未準備／未push。
+**コピー取得の後続確認:** ブラウザー専用の`tab.clipboard.readText`で非同期完了後に公式コピー本文を取得できた。`response-browser-clipboard.txt`は1,751 bytes・SHA3285b362…、LF区切り15個・末尾改行なし。DOM保存原文との差は末尾LF1個だけと無修正ファイル同士で確認した。native clipboardの45秒観測不成立は保全するが、ブラウザーのコピー失敗とは断定しない。ブラウザー側の元の空クリップボードも復元した。CRLF原文との改行コード差は引き続き未証明で、完全PASSへは昇格していない。
+
+今回の検査コードコミットは`30cd6ceb4453f74d9601b0eb42aedabf7708779d`。非ライブAllは07:39:38Z〜07:47:09Z、36/36 PASS、CurrentStatus 46項目PASS。JSON1,551件読込み、候補12ファイル／保護資料のハッシュ不変、監査差分`git diff --check` PASS。mainからの全差分は原証跡2行の末尾空白でexit 2を維持する。詳細は既存static-checkの`t10_strict_audit_followup`。基準main de5efc1a…はリモートと一致し、対象ブランチのPRなし、mainのcheck-runs／Actionsは0件。DOM NOT_RUN、未pushコミットのGitHub CI NOT_RUNであり、非ライブPASSを実機受入へ付け替えない。
+
+**次の単一作業:** 取得したT10公式コピーと添付原文の改行コード差が取得経路によるものか、同じ表示・コピー経路の対照で確定し、既存の変更範囲外保持条件に照らして判定する。証明できない場合は当該項目を未証明のまま残し、指示の修正で解決するなら新版として固定する。生成Robinの整形や比較条件の緩和で通さない。独立T04は完了済み、独立T10・P3正例・負例v2・A〜G限定追跡不足・最終統合監査が残り、全体partial／PR未準備／未push。
 
 **独立T04継続結果:** 同じ候補指示6ad6f742…とbundleを実添付した新規Think Deeper会話`https://m365.cloud.microsoft/chat/conversation/85acbfc6-9cfc-46ee-96f4-bb8fc6db1a5e`から9行Robinを無修正保存。一次とは別の専用フロー`RobinKnowledgeT04FinalEIndep_20260912`で07:22:41Z／07:23:39Zの2runを実行した。送信前固定の対象/A/10、対象/C/25、対象/D/5にCSV全3行とExcel A1:C3全9セルが一致し、入力SHA1d0b3d3b…不変、出力の今回更新、ready/errors0、Excel残存0を確認した。旧成果物は各回後に復元した。
 
@@ -155,17 +159,17 @@ current-package-statusの旧`-finald-run1/2`参照26件（一次10＋独立3の�
 
 `git diff --check main...45b15d0`はexit 2。T08とP3-6の原再コピー先頭`BLOCK `の末尾空白2件が理由。前回static-checkの「知識CRLFのみ」という説明はこの比較では当てはまらない。監査の文書・検査変更は通常diffチェックし、原証跡2行は整形せずレビューで明示する。
 
-PRタイトル案: **Issue #5/#27: audit finald acceptance evidence and record remaining A–G traceability gaps**
+PRタイトル案: **Issue #5/#27: audit finald evidence and reject readiness with unresolved acceptance gaps**
 
 PR本文案:
 
-> finaldの固定生成受入（T01〜T10、独立T01/T04/T10、負例v2、P3正例6件）を保存回答・Robin・PAD再コピー・run・成果物で照合し、current-package-statusに残っていた26件のrun参照を訂正する。指示・知識・試験条件・原証跡のバイトは保持する。T03初回不成立、T08期待エラー、T09要素依存と旧時刻転記を明示する。
+> finaldの保存回答・Robin・PAD再コピー・run・成果物を監査し、current-package-statusに残っていた26件のrun参照を訂正する。配布正本と原証跡は保全し、T03初回不成立、T08期待エラー、T09要素依存と旧時刻転記、T10の改行・終端保持が未証明であることを明示する。実行結果の一致だけをT10の完全受入へ拡張しない。
 >
-> A〜Gの一部probeは別空フロー再利用の保存証跡が未特定で、指示文のWAIT 500と教材WAIT 1の矛盾も残るため、親Issue全体の完了／PR提出準備済みとはしない。CurrentStatusの従来負例を保持し、参照切れと必須不足付きreadyの拒否を追加。今回の検査結果はfinald static-checkの監査追記を参照。DOM／新規ライブ／GitHub CIを非ライブPASSと区別する。Refs #5, #27。自動クローズ指定なし。
+> A〜Gの一部probeは別空フロー再利用の保存証跡が未特定。WAIT 500→WAIT 1だけを直したローカル隔離候補finaleの個別受入は進めたが、全体受入と配布正本への昇格は未完了である。CurrentStatusの従来負例を保持し、参照切れ・必須不足付きready・T10保持未証明のreadyを拒否する。検査結果はfinald static-checkの監査追記を参照。非ライブ検査・新版の実機結果・DOM NOT_RUN・GitHub CIを区別する。これは提出前の本文案で、PR準備完了やIssue全体完了を宣言しない。Refs #5, #27。自動クローズ指定なし。
 
-レビュー注意点: 原証跡の2空白、T03再生成、T08の通常成功との区別、T09の要素取り込みと派生時刻訂正、P3教材再利用の範囲、負例のinnerText保存、A〜G不足を確認する。
+レビュー注意点: 原証跡の2空白、T03再生成、T08の通常成功との区別、T09の要素取り込みと派生時刻訂正、T10の14行の命令内容一致と改行・終端の未証明の区別、P3教材再利用の範囲、負例のinnerText保存、A〜G不足を確認する。finaleの未昇格証跡はローカル.work内であり、現時点のPR案だけで遠隔レビュー可能としない。
 
-クローズ根拠: **#27は不可**（最新版の最終監査／PR提出準備ゲートにT09版内矛盾と必須追跡不足が残る）。**#5は不可**（元依頼書の別フロー再利用・実行証跡要件を全件確認できない）。両IssueはOPEN。任意範囲は範囲外・変数添字、3段入れ子・外側脱出、LOOP WHILE入れ子、大文字小文字無視比較、PowerPoint衝突・ロック対象、他日付書式／既存変換編集、ブロック側組込みエラーコード、T09別URL・要素・ブラウザー、DataTable列名行ループ、DOM検査。Agent Builderは対象外。push・PR作成・マージ・リリース・配布・Issue close・ブランチ削除は未実施。
+クローズ根拠: **#27は不可**（T09矛盾修正候補の全体受入・昇格未完了、T10厳密保持未証明、必須追跡不足が残る）。**#5は不可**（元依頼書の別フロー再利用・実行証跡要件を全件確認できない）。両IssueはOPEN。任意範囲は範囲外・変数添字、3段入れ子・外側脱出、LOOP WHILE入れ子、大文字小文字無視比較、PowerPoint衝突・ロック対象、他日付書式／既存変換編集、ブロック側組込みエラーコード、T09別URL・要素・ブラウザー、DataTable列名行ループ、DOM検査。Agent Builderは対象外。push・PR作成・マージ・リリース・配布・Issue close・ブランチ削除は未実施。
 
 ## 2026-09-11以前の検証履歴（当時の状態を保持）
 

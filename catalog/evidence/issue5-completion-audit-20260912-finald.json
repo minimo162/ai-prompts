@@ -179,6 +179,15 @@
       "candidate_independent_conversation": "https://m365.cloud.microsoft/chat/conversation/de5a25b3-24df-4ad7-8fc8-7e2284e5f2b3",
       "candidate_independent_status": "GENERATED_NOT_ACCEPTED; no PAD run requested because strict preservation is not proven",
       "copy_attempt": "CUA response-copy button invoked; native clipboard observation did not obtain a matching response within 45 seconds; original clipboard restored",
+      "browser_clipboard_followup": {
+        "status": "CAPTURED",
+        "method": "CUA response-copy button then tab.clipboard.readText after asynchronous completion",
+        "sha256": "3285b362d5537d9beb1ee0ba317a67709e6374f6dffacad074b499f150f69eba",
+        "serialization": "15 LF separators, no final newline; DOM save adds one final LF",
+        "local_evidence": ".work/finale-20260912/t10-independent/browser-clipboard-observation.json",
+        "strict_source_crlf_preservation": "NOT_PROVEN",
+        "note": "The native-clipboard observation failure is preserved but does not mean the browser copy operation failed. No code or expected values were edited."
+      },
       "original_records_preserved": true
     },
     "corrections": [

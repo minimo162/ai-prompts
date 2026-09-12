@@ -135,5 +135,56 @@
     },
     "protected_untracked_sha256": "e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699",
     "final_audit_result": "PARTIAL: T09 instruction WAIT 500 conflicts with knowledge WAIT 1; A-G reuse/count/cell-reference evidence gaps listed in completion-audit and validation report; not PR-ready."
+  },
+  "t10_strict_audit_followup": {
+    "recorded_at": "2026-09-12T07:49:45.510Z",
+    "verification_code_commit": "30cd6ceb4453f74d9601b0eb42aedabf7708779d",
+    "baseline_main": "de5efc1a525db0d49b4af9aa6cd6ec674ef9b4e8",
+    "tree_note": "Full suite ran after the 46-check code commit. Only report text was edited during the run; subsequent audit metadata and this verification record were added after completion. Original distribution and raw acceptance files were not edited.",
+    "current_status": {
+      "status": "PASS",
+      "checks": 46,
+      "test_sha256": "ad9f3d8c562b650ff0be553d4106e41bdcdf23acbd46cbeab3c012a5f08e8f33",
+      "additional_negative_cases": [
+        "T10 NOT_PROVEN with an empty required_gaps list cannot be PR-ready",
+        "Missing T10 proof cannot be PR-ready"
+      ]
+    },
+    "nonlive_all": {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/Run-NonLiveTests.ps1 -Suite All",
+      "status": "PASS",
+      "tests": 36,
+      "failed": [],
+      "started_utc": "2026-09-12T07:39:38.5716722Z",
+      "finished_utc": "2026-09-12T07:47:09.3971808Z",
+      "candidate_unchanged": true,
+      "raw_local_record": ".work/nonlive-0cfc83a1081b43e8b620c98d5671fc86/verification.json",
+      "raw_sha256": "3f0529a9bbcb23b81e8cff4c588d64095b9c304feba215e01c659ace20c33aba"
+    },
+    "json_parse": {
+      "status": "PASS",
+      "files": 1551,
+      "scope": "catalog/**/*.json, copilot/*.json, tests/fixtures/**/*.json"
+    },
+    "candidate": {
+      "files_checked": 12,
+      "status": "UNCHANGED",
+      "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+      "promotion": "NOT_DONE"
+    },
+    "diff_check": {
+      "audit_delta": "PASS",
+      "main_to_head": "EXIT_2: two original BLOCK trailing spaces in T08/P3-6 preserved"
+    },
+    "dom_test": "NOT_RUN",
+    "live_followup": "Independent T10 generated once; browser clipboard captured separately from DOM; strict CRLF preservation NOT_PROVEN, PAD NOT_RUN. Independent T04 accepted in preceding commit f4680553dcc743e7fd277450021471f183f6f7a0.",
+    "github_ci": {
+      "main_check_runs": 0,
+      "main_action_runs": 0,
+      "target_branch_prs": 0,
+      "local_unpushed_commit": "NOT_RUN"
+    },
+    "protected_untracked_sha256": "e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699",
+    "final_audit_result": "PARTIAL_REQUIRED_GAPS; PR_NOT_READY"
   }
 }
