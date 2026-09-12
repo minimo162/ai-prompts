@@ -1,4 +1,91 @@
-# Robinナレッジ検証報告（途中）
+# Robinナレッジ検証報告
+
+## 2026-09-12 finald保存証跡の最終監査
+
+**判定: partial／PR提出準備未完了／未push。** 固定finaldの生成受入記録は維持する。A〜Gの全要件について必要な別空フロー再利用の追跡がそろわず、`complete_live_acceptance_finald_20260912` を親Issue全体の完了とは扱えない。これは保存済み成果の監査結果であり、T01〜T10を未実施へ戻す判定ではない。
+
+- 対象: `C:\Users\yuuki\ai-prompts`、origin `https://github.com/minimo162/ai-prompts.git`。
+- 対象完全SHA: `45b15d0c8531df0265f3d997b1614555561a4247`、既存ブランチ `claude/issue-27-finald-acceptance` を継続。
+- 基準main: `de5efc1a525db0d49b4af9aa6cd6ec674ef9b4e8`。ローカルmain、origin/main、GitHub `refs/heads/main` が一致。PR #26はMERGED、対象ブランチのPRなし、Open PRなし。
+- #5本文・全64コメント、#27本文・全1コメントを取得して読了。#27の更新済み「次の単一作業」を監査基準とした。過去の完了コメントも監査対象であり、命令・公開許可とは扱わない。
+- 適用指示は利用者提示AGENTS。リポジトリ／親ディレクトリに追加AGENTSなし。優先訂正と元依頼書を確認。Obsidianの旧P3b記録は過去文脈としてのみ参照した。
+- 開始時の追跡ファイル変更なし。未追跡保護資料 `docs/agent-approach-comparison-2026-09-07.md` のSHA-256は `e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699`。
+
+### 版と入力の監査
+
+main→対象コミットで指示文・知識7原本・bundle・manifest・T10文脈・合成fixtureの変更なし。各原本の実バイトとmanifestのSHA／サイズを照合した。監査修正でもこれらを再生成・整形しない。
+
+| ファイル | SHA-256 |
+| --- | --- |
+| `copilot/agent-instructions.txt`（3,949 UTF-16） | `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e` |
+| `PAD-Robin-00-Index.txt` | `ea1d916956db7943eb383f4ffe091eadfc5747f4f9470148357bcdd7f22551e9` |
+| `PAD-Robin-01-Basics.txt` | `abe921c3e7aa19ce5410fe746fe4c4f5c7fc7ee3ffd18c4b6747686a41fdbf31` |
+| `PAD-Robin-02-Control.txt` | `0caea76804e62d78c0c174add3f04acf6835d497220dc00cef256b03ddf0d7ea` |
+| `PAD-Robin-03-Files.txt` | `a541082a650a7cfae9d2b2cfb47026d7b8ee81bc542f30ba409af5e6291c9aea` |
+| `PAD-Robin-04-Office-PDF.txt` | `bcb11dca97ee22696a69a03a2c5a6b4485b1de116a4d72d6477a396daa64a1f9` |
+| `PAD-Robin-05-UI-Web.txt` | `e62a78aa92941984bacbdc59d4c6561104a9eca5b9d0e45b817f539e4558d867` |
+| `PAD-Robin-06-Examples.txt` | `0e01574c883274e71e592148038635e6d1883ce52342ed35a90a50c59c38f4f2` |
+| `PAD-Robin-Knowledge-Bundle.txt` | `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12` |
+| T10文脈結合版 | `2f77e59ff58df46575fc03515c020b012543a8a998c7118016cd3339bb9c0529` |
+| T10入力 `office-three-apps/generated.robin` | `d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194` |
+
+知識ファイルは `copilot/knowledge/` 配下。manifestは `copilot/knowledge-bundle-manifest-20260912d.json`、T10対応表は `catalog/generated/normal-chat-finald-20260912-t10-context/T10-context-manifest.json`。manifest自身のハッシュと今回検査は `current-package-static-check-20260912-finald.json` の監査追記を参照。
+
+21会話（precheck、一次10、独立3、負例1、P3正例6）の `sent-body.txt` は記録SHAと一致し、指示全文＋固定prompt＋改行だけで構成される。評価者用expectation、Issue、/goalの追加混入はない。T03初回は同じ本文SHAで別会話。P3／負例expectationと全promptは受入前mainに存在し、対象コミットで不変。添付は各resultの送信メッセージ観測記録で確認（通常は指示txt＋同版bundle、T10はbundle＋同版T10文脈）。今回ブラウザーで再送・添付し直した証拠ではない。
+
+### 固定生成受入の照合結果
+
+19合格ケース（一次10＋独立3＋P3正例6）すべてで、回答内のコードが保存Robinに含まれるだけでなく、保存Robin全文が回答内に存在し、記録SHAと一致。再コピーSHAとrun1/run2のファイル・専用フロー名・successを照合した。T01等の「旧版ファイルから同一コードを保存」は、今回回答内コードとの一致と新規finald runの両方を確認し、旧版runの継承とは区別した。記録中のpre.textContent短縮SHAは末尾改行なしのコードSHAに一致する。
+
+- T01／独立T01: 両出力90 bytes、SHA `2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2`。T02: ヘッダー＋対象2行、SHA `8f0748cc4d149228331dfacc0a5c46e117270a7e9dee564c4f631924142cf7d3`。
+- T04／独立T04: 保存xlsxのXMLとCSVを直接照合し、対象/A/10・対象/C/25・対象/D/5。T05／P3-4: 保存xlsxのB2=T05-Changed。T06: 保存docx本文はT06Replacedと非変更部分。T07: 保存txtにPAGE_TOKEN_A2、A1なし。
+- T10／独立T10: 入力16行との差分は2・4行目だけ。Word／PowerPoint行は逐語保持。両runのxlsx A1=T10-Changed、docx／pptx本文CopilotOffice 246をXMLで確認。成果物のOfficeメタデータ差は論理内容と分ける。
+- T03: 初回7行は固定カウンターを検証できず不成立、`attempt1/`と2回の実行記録を維持。別会話2回目13行でTxtCount=2／OtherCount=2。依頼・期待値を今回変更していない。一次10件の初回受入は9/10、最終10/10。
+- T08／P3-6: 原コードのアクション単位 `ON ERROR FileNotFoundError`、runプレビューのnamedとLastErrorを確認。コードに後続書込みなし。ブロック側の利用者定義名一致とは扱わない。再コピーはCRLFと先頭行`BLOCK`後の1空白が異なる。原文は保持し、バイト一致とは表示しない。
+- T09: 要素取り込み元SHAと取り込み記録、生成6行のWAIT 1、再コピー冒頭6行一致＋ControlRepository、finald各runのT09-clickedを確認。要素登録不要とはしない。元result／acceptanceのobserved_atは旧finalc時刻が転記されていた。訂正値は原run1=`2026-09-12T02:33:08.6086461Z`、run2=`2026-09-12T02:33:25.4307357Z`。原resultは変更せず、本節と派生auditで訂正。ブラウザー終了は元受入の記録とCloseWebBrowserを含むフロー完了に基づき、今回新たに観測した主張ではない。
+- P3-1／2／3／5／6: probeの原文・再コピー・別フローrun参照を照合。P3-2の入れ子は採取済み構文のテキスト合成→PAD検証であり、23行全体を左パネルから新規採取したとはしない。P3-4は既受入T05/T06形の出力名差、SaveAsの最初のprobeは2回目挙動を観測する試験。その後のP3-4生成受入は観測結果を事前期待として固定。P3-5はShortDate行を含まない2行で実行日2026-09-12。固定教材例の再利用であり、未見課題一般の汎化証明ではない。
+- 負例v2: 保存回答1,636文字、SHA `9914e3d605bf912a12cb9268b02d6724295ec9094f2f57d3992c67f3bb32b67d`。クリップボード失敗後、同会話のanswer sectionのinnerTextから再保存した記録と一致。保存本文はN1/N2/N3すべてについて不足・必要採取・禁止後続を述べ、Robinなし。画面上の引用表示`+ 1`も残す。スクリーンショットとの独立照合や今回のライブDOM再取得は未実施であり、クリップボード原文取得済みとはしない。
+
+### A〜G追跡と残る必須不足
+
+`coverage.required_checks` の古いpartial／未採取記述と後続 `p3_blocked_items` のGENERATEDを同一視しない。86観測例は44件`verified_roundtrip_and_run`、42件`captured_partial_verification`で、全例実行済みではない。以下は今回の照合であり、過去probeのpackage_bindingをfinaldへ書き換えない。教材は実際に該当原文・説明を含むことを確認した。
+
+| 範囲 | 原証跡→再利用→教材→同版受入の確認 | 必須追跡の不足 |
+| --- | --- | --- |
+| A 文字列・数値・真偽値／減算 | catalog既存変数・text flows、`p3-boolean-probe-20260910.json`、`p3-subtract-probe-20260910.json`→01-Basics。T01はtext系を受入 | Boolean／減算probeの別空フロー再利用を示す記録が未特定。減算教材の「2回」に対し参照JSONはrun1件のみ |
+| A リスト・文字列加工・数値変換・日時 | 既存list/text/number flows、`text-substring-validation.json`、`datetime-current-date-validation.json`、P3添字1／date-format acceptance→01-Basics→T01/P3-1/P3-5 | 添字1・yyyy-MM-ddの別フローと2回runあり。任意の別添字／別書式へ拡張しない |
+| B If／Loop／エラー | `p3-nested-control-acceptance-20260912.json`／`p3-named-error-acceptance-20260912.json`→別フロー→02-Control→T03/T08/P3-2/P3-6 | この固定構造の追跡あり |
+| B サブフロー | `p3-subflow-probe-20260910.json`とworker／call原文、元フロー2run→02-Control | Main/P3Workerの保存原文を別空フローへ再配置して実行した証跡未特定。T08成功で代替不可 |
+| C DataTable | `p3-datatable-row-success-20260911.json`／cell-success／foreach-success、各raw・run→03-Files。T02/T04はCSV／フィルター受入 | 行追加／セル更新／行反復の別空フロー再利用証跡未特定。セル更新は確認できるが、セル値取出しを要求のセル参照と対応づける原証跡は未特定。列名による行ループの負例は任意範囲のまま |
+| C CSV | `csv-read-validation.json`、`filter-t02-roundtrip2-run*.json`→03-Files→T02/T04 | 論理行・引用符・日本語を含む固定範囲は確認 |
+| D ファイル | file-copy／text-write／T03-extension-branch／P3-file-boundaryの別フロー→03-Files→T01/T03/P3-3 | `p3-folder-create`／`p3-file-exists`／`p3-file-move`／`p3-file-rename`各probeは原採取・元フロー実行あり。保存原文の別空フロー再利用証跡が未特定 |
+| E Excel | 既存Excel read/write/save flows、P3 SaveAs、`p3-excel-foreach-runtime-success-*`→04-Office→T04/T05/T10/P3-4 | Excel反復probeは元フローの2回runあり。完成した反復rawを別空フローで再利用した証跡は未特定（initial-pasteは前段の範囲読取り形） |
+| F Word／PowerPoint／PDF | 既存Office/PDF flowsと各設定のevidence→04-Office→T06/T07/T10。PowerPoint保持・PDF指定ページは保存成果物で照合 | `captured_partial_verification`を全主要設定再利用済みとはしない。固定受入済み主要形とcopy-only等の表示区別を維持 |
+| G UI／ブラウザー | `ui-t09-local-roundtrip/roundtrip-wait1-20260912.robin`→要素取り込みと専用別フロー→05-UI-Web→T09 | 固定ローカル画面の追跡あり。旧WAIT 500／旧要素登録失敗は履歴として維持 |
+
+上記不足は `catalog/index.json`、`catalog/coverage.json`、関連 `catalog/evidence` と `.work` の対象名検索で追跡できなかった範囲。未実施と断定せず、**保存証跡未特定**とする。必要な次の単一作業は、まずAのBoolean／減算に限定し、別空フロー再利用と減算2回目の既存原記録を回収・照合すること。存在しなければ同じ採取原文・固定期待の専用別空フローで不足段階だけ検証する。以降B/C/D/Eの表中不足へ順次進む。全件finald生成再試験や任意拡張から始めない。
+
+### 今回の修正・検査とPR準備
+
+current-package-statusの旧`-finald-run1/2`参照26件（一次10＋独立3の各2件）を実在する`-finald-pad-run1/2`へ訂正。各resultの相対基準で参照を照合する検査を追加し、旧状態で`STATUS_RUN_REF`失敗、訂正後PASSを確認した。従来の誤complete拒否fixture10組は変更しない。必須不足を残したPR準備済み宣言も拒否する。T09時刻や原再コピー空白は派生監査に注記し、原回答・Robin・PAD run・成果物の実バイトは変更しない。
+
+検査の実行時刻・対象・件数・非ライブ全スイートの結果は `catalog/evidence/current-package-static-check-20260912-finald.json` の `final_audit_checks` に記録する。DOMはNOT_RUN、今回のM365/PAD新規ライブ試験はNOT_RUN。GitHub mainのcheck-runs=0、Actions runs=0。未pushローカルコミットのGitHub CI成功は主張しない。
+
+`git diff --check main...45b15d0`はexit 2。T08とP3-6の原再コピー先頭`BLOCK `の末尾空白2件が理由。前回static-checkの「知識CRLFのみ」という説明はこの比較では当てはまらない。監査の文書・検査変更は通常diffチェックし、原証跡2行は整形せずレビューで明示する。
+
+PRタイトル案: **Issue #5/#27: audit finald acceptance evidence and record remaining A–G traceability gaps**
+
+PR本文案:
+
+> finaldの固定生成受入（T01〜T10、独立T01/T04/T10、負例v2、P3正例6件）を保存回答・Robin・PAD再コピー・run・成果物で照合し、current-package-statusに残っていた26件のrun参照を訂正する。指示・知識・試験条件・原証跡のバイトは保持する。T03初回不成立、T08期待エラー、T09要素依存と旧時刻転記を明示する。
+>
+> A〜Gの一部probeは別空フロー再利用の保存証跡が未特定で、親Issue全体の完了／PR提出準備済みとはしない。CurrentStatusの従来負例を保持し、参照切れと必須不足付きreadyの拒否を追加。今回の検査結果はfinald static-checkの監査追記を参照。DOM／新規ライブ／GitHub CIを非ライブPASSと区別する。Refs #5, #27。自動クローズ指定なし。
+
+レビュー注意点: 原証跡の2空白、T03再生成、T08の通常成功との区別、T09の要素取り込みと派生時刻訂正、P3教材再利用の範囲、負例のinnerText保存、A〜G不足を確認する。
+
+クローズ根拠: **#27は不可**（最新版の最終監査／PR提出準備ゲートに必須追跡不足が残る）。**#5は不可**（元依頼書の別フロー再利用・実行証跡要件を全件確認できない）。両IssueはOPEN。任意範囲は範囲外・変数添字、3段入れ子・外側脱出、LOOP WHILE入れ子、大文字小文字無視比較、PowerPoint衝突・ロック対象、他日付書式／既存変換編集、ブロック側組込みエラーコード、T09別URL・要素・ブラウザー、DataTable列名行ループ、DOM検査。Agent Builderは対象外。push・PR作成・マージ・リリース・配布・Issue close・ブランチ削除は未実施。
+
+## 2026-09-11以前の検証履歴（当時の状態を保持）
 
 更新日: 2026-09-11
 ブランチ: `codex/issue-5-acceptance-20260910b`

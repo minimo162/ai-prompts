@@ -1,5 +1,10 @@
 {
   "schema_version": 1,
+  "final_evidence_audit": {
+    "status": "PARTIAL_REQUIRED_TRACEABILITY_GAPS",
+    "report": "docs/robin-knowledge-validation.md",
+    "note": "current_package.status records fixed finald generation acceptance only; required_checks and some probe reuse traces do not establish complete A-G acceptance. Historical per-probe statuses are preserved."
+  },
   "generated_at": "2026-09-12T12:33:13+09:00",
   "reconciled_at": "2026-09-12T12:33:13+09:00",
   "reconciliation_note": "Version 79245787 (2026-09-12, finald): P3-1..P3-6 measured on dedicated synthetic PAD flows and integrated into the knowledge; then knowledge precheck, T01-T10, independent T01/T04/T10, negative suite v2 and the six P3 positive generations were accepted on this single version in Chrome normal M365 chat + dedicated PAD flows (unmodified paste, two runs, fixed expectations). finalc (f42f5acf) acceptance is preserved as history.",

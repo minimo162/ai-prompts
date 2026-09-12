@@ -107,8 +107,56 @@ Check ($statusRecord.version.knowledge_bundle_sha256 -ceq $bundleHash) 'status r
 Check ($statusRecord.status -ceq $coverage.current_package.status) 'coverage status equals status record'
 Check ($statusRecord.issue_state -ceq 'OPEN') 'status record keeps issue open'
 
+# Summary run references are relative to the linked result.json directory.
+# A valid acceptance record must not hide stale/missing links in the current index.
+function Test-StatusRunReferences($Record, [string]$StatusDirectory) {
+    $groups = @($Record.cases, $Record.independent_retests, $Record.p3_positive_cases.cases)
+    foreach ($group in $groups) {
+        if ($null -eq $group) { continue }
+        foreach ($property in $group.PSObject.Properties) {
+            $entry = $property.Value
+            if ($null -eq $entry.pad_runs) { continue }
+            $resultPath = [IO.Path]::GetFullPath((Join-Path $StatusDirectory ([string]$entry.result)))
+            $result = Read-JsonAbs $resultPath
+            if (@($entry.pad_runs).Count -ne 2) { throw 'STATUS_RUN_REF: expected two runs' }
+            for ($i = 0; $i -lt 2; $i++) {
+                $ref = [string]$entry.pad_runs[$i]
+                $expectedRef = [string]$result.pad.('run' + ($i + 1))
+                $runPath = [IO.Path]::GetFullPath((Join-Path (Split-Path -Parent $resultPath) $ref))
+                if ($ref -cne $expectedRef -or -not (Test-Path -LiteralPath $runPath -PathType Leaf)) {
+                    throw ('STATUS_RUN_REF: ' + $property.Name + ' stale or missing run reference: ' + $ref)
+                }
+                $run = Read-JsonAbs $runPath
+                if ([string]$run.flow_name -cne [string]$result.pad.flow_name -or [string]$run.run_status -cne 'success') {
+                    throw ('STATUS_RUN_REF: wrong flow or unsuccessful run: ' + $ref)
+                }
+            }
+        }
+    }
+}
+$statusDirectory = Split-Path -Parent (Join-Path (Join-Path $repo 'catalog') ([string]$coverage.current_package.evidence))
+Test-StatusRunReferences $statusRecord $statusDirectory
+$checks++
+$staleSummary = $statusRecord | ConvertTo-Json -Depth 40 | ConvertFrom-Json
+$staleSummary.cases.T01.pad_runs[0] = '../../evidence/nonexistent-finald-run1.json'
+$staleMessage = ''
+try { Test-StatusRunReferences $staleSummary $statusDirectory } catch { $staleMessage = $_.Exception.Message }
+Check ($staleMessage -like 'STATUS_RUN_REF:*') 'stale summary run reference is rejected'
+
 Test-Issue5AuditSemantics $audit $bundleHash (Join-Path $repo 'catalog')
 $checks += 1
+function Test-FinalAuditReadiness($FinalAudit) {
+    if ($null -eq $FinalAudit) { return }
+    if ($FinalAudit.pr_submission_ready -eq $true -and @($FinalAudit.required_gaps).Count -gt 0) {
+        throw 'FINAL_AUDIT_GAPS: PR readiness cannot be claimed with required traceability gaps'
+    }
+}
+Test-FinalAuditReadiness $audit.final_evidence_audit
+$checks++
+$falseReady = [pscustomobject]@{ pr_submission_ready = $true; required_gaps = @('missing separate-flow evidence') }
+$readyMessage = ''
+try { Test-FinalAuditReadiness $falseReady } catch { $readyMessage = $_.Exception.Message }
+Check ($readyMessage -like 'FINAL_AUDIT_GAPS:*') 'PR readiness with a required gap is rejected'
 Check ($audit.package.instruction_sha256 -ceq $instructionHash) 'audit binds current instruction'
 Check (($audit.status -like 'partial*') -or ($audit.status -like 'complete*')) 'audit status is partial or complete'
 if ($audit.status -like 'complete*') { Check ($statusRecord.status -like 'complete*') 'status record agrees with complete audit' } else { Check ($statusRecord.status -like 'partial*') 'status record agrees with partial audit' }

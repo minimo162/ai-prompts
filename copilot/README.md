@@ -1,5 +1,7 @@
 # Copilotエージェント用PAD Robin配布物
 
+> 2026-09-12 最終監査: 固定finaldの生成受入は維持。A〜Gの一部の追跡証跡不足によりPR提出準備は未完了です。[監査結果](../docs/robin-knowledge-validation.md)。指示文・知識の受入済みバイトは変更していません。
+
 このディレクトリは、通常のMicrosoft 365 Copilotチャットへ本文入力と実ファイル添付で渡す、PAD Robinの検証用配布物です。公式入口は `https://microsoft365.com/chat` です。Agent Builder／Copilot Studioの作成・権限調査は今回の検証対象にしません。PADやCopilotを自動実行するアプリではありません。PADの画面から得た原文、設定、型、依存、実行結果を根拠に、利用者がデザイナーへ貼り付けるRobinを生成・修正します。
 
 ## 登録するファイル

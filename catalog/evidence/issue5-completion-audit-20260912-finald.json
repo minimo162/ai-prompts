@@ -149,5 +149,24 @@
     "Agent Builder registration (out of scope)",
     "DOM check (tests/Test-CopilotDom.cjs) NOT_RUN: Playwright not configured"
   ],
-  "result": "Version 79245787 (finald): knowledge precheck, T01-T10, independent T01/T04/T10, negative suite v2 and the P3-1..P3-6 positive generations are all accepted on this same version."
+  "result": "Version 79245787 (finald): knowledge precheck, T01-T10, independent T01/T04/T10, negative suite v2 and the P3-1..P3-6 positive generations are all accepted on this same version.",
+  "final_evidence_audit": {
+    "status": "PARTIAL_REQUIRED_TRACEABILITY_GAPS",
+    "target_commit": "45b15d0c8531df0265f3d997b1614555561a4247",
+    "baseline_main": "de5efc1a525db0d49b4af9aa6cd6ec674ef9b4e8",
+    "live_acceptance_preserved": true,
+    "pr_submission_ready": false,
+    "report": "docs/robin-knowledge-validation.md",
+    "required_gaps": [
+      "A/B/C/D/E: separate-empty-flow reuse trace missing for some existing probes; see report matrix. Do not infer it from T01-T10 PASS.",
+      "A subtraction: knowledge claims two runs but p3-subtract-probe-20260910.json links only one run; recover independent second-run evidence before asserting two.",
+      "C: saved cell probe proves indexed cell update, not a cell-value read; locate the required cell-reference evidence and distinguish optional column-name row-loop syntax."
+    ],
+    "corrections": [
+      "26 stale current-package-status PAD run links corrected; original per-case acceptance/result and PAD records preserved.",
+      "T09 result/acceptance observed timestamps retain finalc times; authoritative finald run1=2026-09-12T02:33:08.6086461Z and run2=2026-09-12T02:33:25.4307357Z. This derived correction does not alter original records.",
+      "T08/P3-6 recopy differs by CRLF and one trailing space on BLOCK; original bytes preserved. Not byte-identical.",
+      "Complete live-acceptance status concerns the fixed finald generation cases only; it does not certify all A-G requirements or PR readiness."
+    ]
+  }
 }

@@ -31,8 +31,8 @@
       "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
       "robin_sha256": "2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47",
       "pad_runs": [
-        "../../evidence/t01-finald-run1-20260912.json",
-        "../../evidence/t01-finald-run2-20260912.json"
+        "../../evidence/t01-finald-pad-run1-20260912.json",
+        "../../evidence/t01-finald-pad-run2-20260912.json"
       ]
     },
     "T02": {
@@ -43,8 +43,8 @@
       "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
       "robin_sha256": "c3027cfaa13e191b0e784fb3a6db4c573f8bfc83fb172d1a6394d7c1f5a55c29",
       "pad_runs": [
-        "../../evidence/t02-finald-run1-20260912.json",
-        "../../evidence/t02-finald-run2-20260912.json"
+        "../../evidence/t02-finald-pad-run1-20260912.json",
+        "../../evidence/t02-finald-pad-run2-20260912.json"
       ]
     },
     "T03": {
@@ -55,8 +55,8 @@
       "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
       "robin_sha256": "63fe35ec8619387f08c5dd270eb226bbd944457b410e09cc2425023ff9396572",
       "pad_runs": [
-        "../../evidence/t03-finald-run1-20260912.json",
-        "../../evidence/t03-finald-run2-20260912.json"
+        "../../evidence/t03-finald-pad-run1-20260912.json",
+        "../../evidence/t03-finald-pad-run2-20260912.json"
       ],
       "generation_note": "attempt 1 (fresh chat) produced a 7-line minimal form without counters, recorded in t03/attempt1/ as not fully verifiable; attempt 2 in a new chat produced the 13-line form and passed on RobinKnowledgeT03FinalD2b_20260912"
     },
@@ -68,8 +68,8 @@
       "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
       "robin_sha256": "e1a7b111ce7af4eed7bea1e186f5396d364f7ec86d4f9be0e3ff2a6fc1cfc1a1",
       "pad_runs": [
-        "../../evidence/t04-finald-run1-20260912.json",
-        "../../evidence/t04-finald-run2-20260912.json"
+        "../../evidence/t04-finald-pad-run1-20260912.json",
+        "../../evidence/t04-finald-pad-run2-20260912.json"
       ]
     },
     "T05": {
@@ -80,8 +80,8 @@
       "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
       "robin_sha256": "be40e6b337620f1c76ba650b202f316d4b80b339de1c859fe1cb55a9f2714911",
       "pad_runs": [
-        "../../evidence/t05-finald-run1-20260912.json",
-        "../../evidence/t05-finald-run2-20260912.json"
+        "../../evidence/t05-finald-pad-run1-20260912.json",
+        "../../evidence/t05-finald-pad-run2-20260912.json"
       ]
     },
     "T06": {
@@ -92,8 +92,8 @@
       "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
       "robin_sha256": "c0940cb3e3ddbd82880d274692858ce3e2335f623acb11abe521926e642f9fd9",
       "pad_runs": [
-        "../../evidence/t06-finald-run1-20260912.json",
-        "../../evidence/t06-finald-run2-20260912.json"
+        "../../evidence/t06-finald-pad-run1-20260912.json",
+        "../../evidence/t06-finald-pad-run2-20260912.json"
       ]
     },
     "T07": {
@@ -104,8 +104,8 @@
       "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
       "robin_sha256": "07586350d86076fcacea46f6f3a6b5901bfc67a61278c96f046fd2ccc37b6bd1",
       "pad_runs": [
-        "../../evidence/t07-finald-run1-20260912.json",
-        "../../evidence/t07-finald-run2-20260912.json"
+        "../../evidence/t07-finald-pad-run1-20260912.json",
+        "../../evidence/t07-finald-pad-run2-20260912.json"
       ]
     },
     "T08": {
@@ -116,8 +116,8 @@
       "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
       "robin_sha256": "a1544f086aa83eb58d87978db3215d5f0e59093ec0c1e70c62aa0b7b59697aa5",
       "pad_runs": [
-        "../../evidence/t08-finald-run1-20260912.json",
-        "../../evidence/t08-finald-run2-20260912.json"
+        "../../evidence/t08-finald-pad-run1-20260912.json",
+        "../../evidence/t08-finald-pad-run2-20260912.json"
       ],
       "named_FileNotFound_match": "the generated block carries the action-level ON ERROR FileNotFoundError (measured P3-6) which fired and continued (NewVar=named, LastError=file not found, block rules not fired); the block-level user-defined FileNotFound name remains unmatched"
     },
@@ -129,8 +129,8 @@
       "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
       "robin_sha256": "7c576b499dab61a5d5228b16d4bd9589dcdd537e96a658f2b5386e936c946a44",
       "pad_runs": [
-        "../../evidence/t09-finald-run1-20260912.json",
-        "../../evidence/t09-finald-run2-20260912.json"
+        "../../evidence/t09-finald-pad-run1-20260912.json",
+        "../../evidence/t09-finald-pad-run2-20260912.json"
       ],
       "element_import": "captured element repository imported first, generated 6 lines pasted unmodified; WAIT 1"
     },
@@ -142,8 +142,8 @@
       "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
       "robin_sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12",
       "pad_runs": [
-        "../../evidence/t10-finald-run1-20260912.json",
-        "../../evidence/t10-finald-run2-20260912.json"
+        "../../evidence/t10-finald-pad-run1-20260912.json",
+        "../../evidence/t10-finald-pad-run2-20260912.json"
       ]
     }
   },
@@ -156,8 +156,8 @@
       "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
       "robin_sha256": "2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47",
       "pad_runs": [
-        "../../evidence/t01-independent-finald-run1-20260912.json",
-        "../../evidence/t01-independent-finald-run2-20260912.json"
+        "../../evidence/t01-independent-finald-pad-run1-20260912.json",
+        "../../evidence/t01-independent-finald-pad-run2-20260912.json"
       ]
     },
     "T04": {
@@ -168,8 +168,8 @@
       "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
       "robin_sha256": "e1a7b111ce7af4eed7bea1e186f5396d364f7ec86d4f9be0e3ff2a6fc1cfc1a1",
       "pad_runs": [
-        "../../evidence/t04-independent-finald-run1-20260912.json",
-        "../../evidence/t04-independent-finald-run2-20260912.json"
+        "../../evidence/t04-independent-finald-pad-run1-20260912.json",
+        "../../evidence/t04-independent-finald-pad-run2-20260912.json"
       ]
     },
     "T10": {
@@ -180,8 +180,8 @@
       "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
       "robin_sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12",
       "pad_runs": [
-        "../../evidence/t10-independent-finald-run1-20260912.json",
-        "../../evidence/t10-independent-finald-run2-20260912.json"
+        "../../evidence/t10-independent-finald-pad-run1-20260912.json",
+        "../../evidence/t10-independent-finald-pad-run2-20260912.json"
       ]
     }
   },
