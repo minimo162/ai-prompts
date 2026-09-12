@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-09-12T10:36:13+09:00",
+  "captured_at": "2026-09-12T12:48:39+09:00",
   "status": "PASS_LOCAL_STATIC",
   "package": {
     "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
@@ -9,36 +9,182 @@
   },
   "checks": [
     {
-      "command": "tests/Run-NonLiveTests.ps1 -Suite All",
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/Run-NonLiveTests.ps1 -Suite All",
       "status": "PASS",
       "tests": 36,
       "passed": 36,
       "failed": [],
-      "started_utc": "2026-09-12T01:27:44.4906827Z",
-      "finished_utc": "2026-09-12T01:35:43.5065594Z",
-      "candidate_unchanged": true
+      "started_utc": "2026-09-12T03:41:07.7216808Z",
+      "finished_utc": "2026-09-12T03:48:16.6695106Z",
+      "candidate_unchanged": true,
+      "note": "second full run after the finald acceptance records were completed; the first run failed only Test-Issue5CurrentStatus because 13 T-case result records referenced PAD run evidence as -finald-run1 while the files are named -finald-pad-run1 (paths corrected, evidence copies refreshed)"
     },
     {
-      "command": "tests/Test-Issue5CurrentStatus.ps1",
+      "command": "tests/Test-Issue5CurrentStatus.ps1 (inside the suite)",
       "status": "PASS",
       "checks": 40,
-      "note": "semantic audit now accepts a partial audit whose independent retests / negative suite are explicitly PENDING (never complete); two fixtures added (complete-claimed-with-pending must fail; partial-with-pending must pass)"
+      "note": "complete audit on 79245787: every case PASS with unmodified generated Robin and two success run records; independent T01/T04/T10 same-version PASS; negative suite v2 fail-closed; 10 negative fixture sets rejected"
     },
     {
       "command": "python json.load over catalog/**/*.json, copilot/*.json, tests/fixtures/**/*.json",
-      "status": "PASS"
+      "status": "PASS",
+      "files": 1551,
+      "invalid": []
     },
     {
       "command": "git diff --check",
       "status": "PASS_WITH_NOTE",
-      "note": "only copilot/knowledge/*.txt (CRLF lines, same convention as finalc) reported"
+      "note": "only copilot/knowledge/*.txt report CR line endings (HEAD is LF; integration scripts wrote CRLF). Kept because the accepted bundle bytes must stay identical."
     },
     {
       "command": "node tests/Test-CopilotDom.cjs",
       "status": "NOT_RUN",
-      "note": "PLAYWRIGHT_MODULE not configured"
+      "note": "development Playwright module (PLAYWRIGHT_MODULE) is not configured on this machine"
     }
   ],
-  "live_m365": "knowledge precheck only; see evidence/current-package-status-20260912-finald.json (partial)",
-  "result": "Local static checks pass on the finald package; same-version live acceptance is pending."
+  "live_m365": "see evidence/current-package-status-20260912-finald.json (complete_live_acceptance_finald_20260912)",
+  "result": "Local static checks pass on the finald package; live acceptance is recorded separately.",
+  "final_audit_checks": {
+    "recorded_at": "2026-09-12T13:43:08.376214+09:00",
+    "acceptance_commit": "45b15d0c8531df0265f3d997b1614555561a4247",
+    "verification_code_commit": "cf2cace050a32d6b951b308739651c414fa097a9",
+    "baseline_main": "de5efc1a525db0d49b4af9aa6cd6ec674ef9b4e8",
+    "tree_note": "Full suite ran against cf2cace code plus audit/report-only follow-up edits. Test implementation and all accepted instruction/knowledge/Robin/run/artifact bytes remained unchanged during this final run. This record is committed afterwards.",
+    "status": "PASS_NONLIVE_WITH_PARTIAL_EVIDENCE_AUDIT",
+    "current_status": {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/Test-Issue5CurrentStatus.ps1",
+      "status": "PASS",
+      "checks": 44,
+      "test_sha256": "4ea106d24d9ae43091f5db5df79bf21e66b12d9ad2a9ca07f9234138c0b26b69",
+      "previous_checks": 40,
+      "previous_negative_fixture_sets": 10,
+      "new_regressions": [
+        "stale summary PAD run ref rejected (reproduced failure before correction)",
+        "PR-ready with required gap rejected"
+      ]
+    },
+    "nonlive_all": {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/Run-NonLiveTests.ps1 -Suite All",
+      "status": "PASS",
+      "tests": 36,
+      "passed": 36,
+      "failed": [],
+      "started_utc": "2026-09-12T04:32:31.7150826Z",
+      "finished_utc": "2026-09-12T04:40:16.0312639Z",
+      "candidate_unchanged": true,
+      "raw_local_record": ".work/nonlive-8d0ab37676324fc692005d85abd31812/verification.json",
+      "raw_record_sha256": "3f7c5ec49fa6755e477122926f20847b54bf511e05f46cc65898a4e784c90cc6",
+      "raw_logs_note": "Raw per-test logs are retained under .work locally; not newly published."
+    },
+    "initial_nonlive": {
+      "status": "PASS",
+      "tests": 36,
+      "raw_local_record": ".work/nonlive-50c5ddce44a34c9b8344cc74a8a75700/verification.json",
+      "note": "Started at 45b15d0; current-status guard and metadata were edited during execution. Final 44-check gate ran after those changes. Final run above is the stable test-code verification."
+    },
+    "json_parse": {
+      "status": "PASS",
+      "files": 1551,
+      "scope": "catalog/**/*.json, copilot/*.json, tests/fixtures/**/*.json"
+    },
+    "package": {
+      "status": "PASS",
+      "seven_source_hashes_and_sizes_match_manifest": true,
+      "bundle_mechanical_rebuild_in_memory_matches": true,
+      "instruction_utf16": 3949,
+      "manifest_sha256": "fc73a6d9b9e8b82bdfa6e26406f30c353356a00cfd5496dd21a454c0714a17da",
+      "t10_context_manifest_sha256": "0bb0aaee998f3e225f3dbaf074597fa0b07c99990dadfa008e0298f40d8da0ad",
+      "instruction_knowledge_conditions_changed": false
+    },
+    "saved_chain": {
+      "sent_bodies_hash_matched": 21,
+      "accepted_generated_cases": 19,
+      "accepted_pad_run_records": 38,
+      "t03_attempt1_preserved": true,
+      "t10_changed_lines": [
+        2,
+        4
+      ],
+      "robin_recopy_exceptions": [
+        "T09: first six action lines match, PAD ControlRepository appended",
+        "T08/P3-6: CRLF plus a trailing space on BLOCK; raw preserved"
+      ],
+      "negative_browser_read_only_check": "Same stored conversation, two attachments, 1636 answer characters, pre/code=0, no send"
+    },
+    "diff_check": {
+      "audit_delta": "PASS: git diff --check 45b15d0 (audit changes only)",
+      "main_to_candidate": "EXIT_2_RAW_EVIDENCE_WHITESPACE",
+      "preserved_warnings": [
+        "catalog/generated/normal-chat-finald-20260912-t08/pad-recopy.robin:1 BLOCK trailing space",
+        "catalog/generated/normal-chat-finald-20260912-p36/pad-recopy.robin:1 BLOCK trailing space"
+      ],
+      "previous_note_correction": "The original static record described knowledge CRLF warnings; current main...45b15d0 has only these two raw BLOCK-space warnings."
+    },
+    "secret_pattern_scan": {
+      "status": "NO_MATCH",
+      "scope": "main...45b15d0 changed files; private-key and common API-token patterns; manual synthetic-content review",
+      "limitation": "Pattern checks alone do not prove absence of every possible secret."
+    },
+    "dom_test": "NOT_RUN: no IncludeUi/Playwright configuration used; saved-chat reading is not Test-CopilotDom",
+    "new_live_m365_generation": "NOT_RUN",
+    "new_native_pad_execution": "NOT_RUN",
+    "github_ci": {
+      "main_check_runs": 0,
+      "repository_action_runs": 0,
+      "local_unpushed_commit": "NOT_RUN"
+    },
+    "protected_untracked_sha256": "e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699",
+    "final_audit_result": "PARTIAL: T09 instruction WAIT 500 conflicts with knowledge WAIT 1; A-G reuse/count/cell-reference evidence gaps listed in completion-audit and validation report; not PR-ready."
+  },
+  "t10_strict_audit_followup": {
+    "recorded_at": "2026-09-12T07:49:45.510Z",
+    "verification_code_commit": "30cd6ceb4453f74d9601b0eb42aedabf7708779d",
+    "baseline_main": "de5efc1a525db0d49b4af9aa6cd6ec674ef9b4e8",
+    "tree_note": "Full suite ran after the 46-check code commit. Only report text was edited during the run; subsequent audit metadata and this verification record were added after completion. Original distribution and raw acceptance files were not edited.",
+    "current_status": {
+      "status": "PASS",
+      "checks": 46,
+      "test_sha256": "ad9f3d8c562b650ff0be553d4106e41bdcdf23acbd46cbeab3c012a5f08e8f33",
+      "additional_negative_cases": [
+        "T10 NOT_PROVEN with an empty required_gaps list cannot be PR-ready",
+        "Missing T10 proof cannot be PR-ready"
+      ]
+    },
+    "nonlive_all": {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/Run-NonLiveTests.ps1 -Suite All",
+      "status": "PASS",
+      "tests": 36,
+      "failed": [],
+      "started_utc": "2026-09-12T07:39:38.5716722Z",
+      "finished_utc": "2026-09-12T07:47:09.3971808Z",
+      "candidate_unchanged": true,
+      "raw_local_record": ".work/nonlive-0cfc83a1081b43e8b620c98d5671fc86/verification.json",
+      "raw_sha256": "3f0529a9bbcb23b81e8cff4c588d64095b9c304feba215e01c659ace20c33aba"
+    },
+    "json_parse": {
+      "status": "PASS",
+      "files": 1551,
+      "scope": "catalog/**/*.json, copilot/*.json, tests/fixtures/**/*.json"
+    },
+    "candidate": {
+      "files_checked": 12,
+      "status": "UNCHANGED",
+      "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+      "promotion": "NOT_DONE"
+    },
+    "diff_check": {
+      "audit_delta": "PASS",
+      "main_to_head": "EXIT_2: two original BLOCK trailing spaces in T08/P3-6 preserved"
+    },
+    "dom_test": "NOT_RUN",
+    "live_followup": "Independent T10 generated once; browser clipboard captured separately from DOM; strict CRLF preservation NOT_PROVEN, PAD NOT_RUN. Independent T04 accepted in preceding commit f4680553dcc743e7fd277450021471f183f6f7a0.",
+    "github_ci": {
+      "main_check_runs": 0,
+      "main_action_runs": 0,
+      "target_branch_prs": 0,
+      "local_unpushed_commit": "NOT_RUN"
+    },
+    "protected_untracked_sha256": "e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699",
+    "final_audit_result": "PARTIAL_REQUIRED_GAPS; PR_NOT_READY"
+  }
 }

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T08:05:04.1616826Z",
+  "flow_name": "RobinKnowledgeBooleanReuse_20260912",
+  "source_robin": "catalog/evidence/p3-boolean-probe-20260910.robin",
+  "source_sha256": "e7d0321af0dc7fee337b917308164b6d5c13f7040ef69dcc657ea725db54cf0c",
+  "source_bytes": 19,
+  "expected_action_count": 1,
+  "paste_confirmed": true,
+  "action_count_after_paste": 1.0,
+  "saved_confirmed": false,
+  "clipboard_restored": false,
+  "execution_requested": false
+}

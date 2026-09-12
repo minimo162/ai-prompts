@@ -1,0 +1,10 @@
+{
+  "scope": "existing probe separate-empty-flow reuse; no new Copilot generation",
+  "source_sha256": "7d09d4dd8c0e7dcc60bc1d46f943eb04bd5752db4591e2ca89ea830ab82d602d",
+  "runs_required": 2,
+  "source": "catalog/evidence/p3-subtract-probe-20260910.robin",
+  "fixed_before_paste": "2026-09-12T07:54:26.6680855Z",
+  "expected_variable": "P3Number",
+  "manual_edits_allowed": false,
+  "expected_preview": "7"
+}

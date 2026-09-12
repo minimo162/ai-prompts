@@ -1,0 +1,112 @@
+Copilot said:
+
+添付ナレッジのT03実測例に基づき、指定フォルダー内の全ファイルを一度ずつ列挙し、.txtだけをUTF-8で読み、.csvと.mdをElse経路へ送る最小フローを提示します。ファイル名抽出や名前文字列による判定は使わず、実測済みのファイル変数 .Extension を利用します。PAD-Robin-Knowledge-Bundle
+
+1. 前提・対象範囲
+目的: フォルダー直下の複数ファイルをFor eachで一度ずつ処理し、拡張子が小文字の.txtであるファイルだけを読み取る。
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+出力: 各.txtファイルの内容を、その反復時のテキスト変数FileContentsへ格納する。
+保存処理: なし。入力ファイルの更新、移動、削除、上書きは行わない。
+サブフォルダー: 対象外。IncludeSubfolders: False。
+列挙順: 並び替えなし。処理順は成功条件に含めない。
+対象外経路: .csvと.mdはElseへ入るが、Else内では何も実行しない。
+成功条件: フォルダー直下の4ファイルを列挙し、.txtの2件だけをUTF-8で読み、.csvと.mdの2件はElseへ送る。入力ファイルは変更されない。
+
+根拠環境はPAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データです。13行の計数版では、別フローへの再貼付け、保存、再コピー、2回実行によりTxtCount=2、OtherCount=2、最終読取り内容alpha 日本語、入力4ファイルのSHA不変が確認されています。下記の7アクション最小形も別の空フローで2回実行されています。PAD-Robin-Knowledge-Bundle
+
+未確認または境界条件
+.Extension = '.txt'は大文字小文字を区別します。.TXTは対象外になります。
+x.txt.bakは拡張子が.bakなので対象外です。
+サブフォルダー内のファイルは今回列挙しません。
+空フォルダーでの今回の完成フロー実行は、掲載されたT03実測範囲には含まれていません。
+各ファイルの内容を蓄積するリスト、ファイル名を別変数へ取得する処理、読み取った内容の保存処理は今回の範囲外です。
+ファイル名取得命令は追加していません。対象判定には、PADの変数ピッカーから採取されたCurrentFile.Extensionだけを使用します。
+2. PADで先に行う設定
+PADで新しいフローを作成し、Power FxがOFFであることを確認します。
+Mainサブフローを開きます。
+入力変数、UI要素、Officeインスタンスは作成不要です。
+貼り付け前に、Main内で置換する範囲を空にします。
+次のコード全体を、Mainサブフローの全アクションとして貼り付けます。
+
+生成される変数は次のとおりです。
+
+Files: ファイルのリスト
+CurrentFile: For eachの現在のファイル
+FileContents: 現在処理中の.txtファイルから読んだテキスト
+
+FileContentsは各対象ファイルの反復で更新されます。この最小形では、実行終了後に残るのは最後に列挙された.txtファイルの内容です。
+
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: Mainサブフロー内の全アクション
+
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+LOOP FOREACH CurrentFile IN Files
+    IF CurrentFile.Extension = $'''.txt''' THEN
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+    ELSE
+    END
+END
+
+
+この命令列の構成要素は、フォルダー全ファイル取得、For each、.Extensionの厳密比較、Else、UTF-8読取りを含め、PADから採取された原文に基づきます。最小形は別の空フローへ貼り付け、保存し、2回実行されています。PAD-Robin-Knowledge-Bundle
+
+4. デザイナー上の確認
+
+貼り付け直後に、次を確認してください。
+
+アクション数が7件
+
+フォルダー内のファイルを取得
+For each
+If
+ファイルからテキストを読み取る
+Else
+Ifに対応するEnd
+For eachに対応するEnd
+
+ブロック構造
+
+ファイルからテキストを読み取るがIf側に入っている。
+Elseの本体が空である。
+1つ目のEndがIf、2つ目のEndがFor eachを閉じている。
+
+変数と型
+
+Filesがファイルのリストとして生成される。
+CurrentFileがFor eachの現在の項目になっている。
+Ifの左辺が文字列化されたCurrentFileではなく、CurrentFile.Extensionになっている。
+FileContentsがテキスト読取りアクションの出力になっている。
+
+設定
+
+ファイルフィルターが*。
+サブフォルダーを含めるがOFF。
+エンコードがUTF-8。
+.txt判定が「次を含む」ではなく「と等しい」。
+デザイナーに赤いエラー表示がない。
+
+Contains(CurrentFile, '.txt', False)はパス中の部分一致であり、今回の厳密な拡張子判定には使用していません。PAD-Robin-Knowledge-Bundle
+
+5. 合成データでの実行・照合
+元の合成フォルダーを別の検証用フォルダーへ複製します。
+複製先に次の構成があることを確認します。
+.txt 2件
+.csv 1件
+.md 1件
+複製先を使う場合は、PADデザイナーで「フォルダー内のファイルを取得」のフォルダ設定だけを変更し、そのアクションをPADから再コピーして実測原文を保存してください。未採取のパス置換結果を、元の確認済みRobinと同一扱いにはしません。
+フローを保存して実行します。
+実行中にCurrentFile.Extensionを確認し、次の分岐になることを照合します。
+.txt: 読取り側
+.csv: Else側
+.md: Else側
+実行後、FileContentsが.txtファイル由来の内容であることを確認します。
+入力4ファイルの内容、サイズ、更新日時、可能ならSHA-256が実行前後で変わっていないことを確認します。
+もう一度実行し、同じ分岐結果になり、入力ファイルが引き続き不変であることを確認します。
+根拠区分
+PADからコピーした原文: catalog/flows/t03-extension-branch/minimal-source-20260912.robin
+別フローへ再貼付け・保存・2回実行済み: 7アクション最小形
+結果証拠: catalog/evidence/t03-ext-min-acceptance-20260912.json
+件数と対象外経路の追加証拠: catalog/evidence/t03-ext-verify-acceptance-20260912.json
+今回の回答自体: このチャットから利用者環境のPADへ貼り付け・実行したものではないため、利用者環境では未確認です。PAD-Robin-Knowledge-Bundle

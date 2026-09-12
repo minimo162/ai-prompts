@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T11:29:15+09:00",
+  "case": "T08",
+  "status": "PASS_FINALD_20260912_EXPECTED_ERROR",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/809b6c88-52e8-4a44-8560-b0064b7f213e",
+  "conversation_title": "PADでファイル読み取りエラー処理案",
+  "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension)",
+  "model_label_on_page": "Think Deeper",
+  "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+  "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+  "attachments_in_user_message": [
+    "agent-instructions.txt",
+    "PAD-Robin-Knowledge-Bundle.txt"
+  ],
+  "body": {
+    "file": "sent-body.txt",
+    "sha256": "891ea095ae7288279ee61efde4c020a993cf510e284bdd21e516af0a56ee94b9",
+    "chars": 4306,
+    "composer_verification": "SHA-256 of composer <p> textContent (aria-hidden cursor span excluded) joined by \n matched the body file before send"
+  },
+  "generated_response": "response.txt",
+  "generated_robin": {
+    "path": "robin.txt",
+    "sha256": "a1544f086aa83eb58d87978db3215d5f0e59093ec0c1e70c62aa0b7b59697aa5",
+    "code_blocks": 1,
+    "lines": 12,
+    "per_line_lengths": [
+      5,
+      56,
+      35,
+      14,
+      42,
+      3,
+      187,
+      30,
+      34,
+      7,
+      3,
+      30
+    ],
+    "markdown_escapes": 0,
+    "nbsp": 0,
+    "cr": 0,
+    "extraction": "pre.textContent (12 lines 5/56/35/14/42/3/187/30/34/7/3/30, nbsp 0, escapes 0) SHA-256 d4a6b697…; content equals the P3-6 measured action-level named-error form (p3-named-error-probe-20260912.robin) except the trailing space after BLOCK that PAD emits; robin.txt written line by line from pre.textContent (JSON-escaped output re-verified by line lengths)",
+    "raw_unmodified": true
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT08FinalD2_20260912",
+    "designer_process_id": 12596,
+    "paste_save": "../../evidence/t08-finald-pad-paste-save-20260912.json",
+    "action_count_after_paste": 4,
+    "recopy": "pad-recopy.robin",
+    "recopy_sha256": "ae5bcb55035043596c48536d3366bb4a9b5f35eaebfac8414fdf9552ab543e4b",
+    "recopy_note": "PAD recopy adds a trailing space after BLOCK and re-indents; instruction lines equal after whitespace normalization",
+    "run1": "../../evidence/t08-finald-pad-run1-20260912.json",
+    "run2": "../../evidence/t08-finald-pad-run2-20260912.json",
+    "missing_file_exists_before_after": false,
+    "expected": {
+      "ErrorHandledDefault": "true",
+      "LastError_contains": "が見つかりません",
+      "no_write_no_marker": true
+    },
+    "observed": {
+      "run1": {
+        "NewVar": "named",
+        "LastError": "ファイル ...\t08-missing-20260910.txt が見つかりません",
+        "ErrorHandledDefault": "absent",
+        "ErrorHandled": "absent"
+      },
+      "run2": {
+        "NewVar": "named",
+        "LastError": "ファイル ...\t08-missing-20260910.txt が見つかりません",
+        "ErrorHandledDefault": "absent",
+        "ErrorHandled": "absent"
+      }
+    },
+    "named_FileNotFound_match": "the block-level user-defined FileNotFound rule still does not match; the answer relies on the measured action-level ON ERROR FileNotFoundError (P3-6), which fires and continues",
+    "new_files_in_evidence": "only the three t08-finalc evidence records"
+  },
+  "acceptance": "PASS_FINALD_20260912_EXPECTED_ERROR",
+  "bundle_manifest": "copilot/knowledge-bundle-manifest-20260912d.json",
+  "prompt_file": "prompt.txt",
+  "fixed_expectation_check": "fixed T08 expectation is: the expected error path is taken and recorded, and no dependent downstream step runs. Met: the missing-file error is handled (NewVar=named), LastError is recorded, no write/marker exists. The handling path differs from finalc (default handler) because the finald knowledge now contains the measured action-level rule; ErrorHandledDefault is absent by that measured behaviour, not by expectation change."
+}

@@ -1,0 +1,44 @@
+Copilot said:
+
+添付のPAD-Robin-Knowledge-Bundleに記録された、待機1秒版の実測原文を使用します。対象はローカルテスト画面のみで、入力は文字列T09-input、出力はテキスト変数AttributeValue、保存処理や上書き処理はありません。
+
+1. 前提と確認範囲
+PAD環境の記録は、バージョン 2.71.115.26224、日本語UI、Power Fx OFFです。
+貼り付け先には、捕捉済みの次の3要素が登録されている必要があります。
+Input text 't09-input'
+Button '実行'。実画面で捕捉された要素IDはt09-submit
+Paragraph '未実行'。実画面で捕捉された要素IDはt09-result
+生成するRobinにはControlRepositoryのセレクターや画像データは含まれません。未捕捉セレクターやWebDriver引数は追加していません。
+WAIT 1の単位は秒です。待機1秒版は、別の空フローで2回実行され、AttributeValue=T09-clicked、ブラウザー終了、PADの準備完了への復帰まで確認されています。
+2. PADで先に行う設定
+
+貼り付け先フローに3要素がない場合は、ControlRepositoryを含む採取原文を一度貼り付けて要素を取り込み、その6アクションを削除してから、以下の6行を貼り付けます。これは添付ナレッジに記録された実測済みの登録方法です。
+
+対象サブフローはMain、置換範囲はテスト用サブフロー内の6アクション全体です。
+
+WebAutomation.LaunchEdge.LaunchEdge Url: $'''http://127.0.0.1:8765/t09-local-test.html''' ClearCache: False ClearCookies: False WindowState: WebAutomation.BrowserWindowState.Normal WaitForPageToLoadTimeout: 60 Timeout: 60 PiPUserDataFolderMode: WebAutomation.PiPUserDataFolderModeEnum.AutomaticProfile TargetDesktop: $'''{\"DisplayName\":\"ローカル コンピューター\",\"Route\":{\"ServerType\":\"Local\",\"ServerAddress\":\"\"},\"DesktopType\":\"local\"}''' BrowserInstance=> Browser
+WebAutomation.PopulateTextField.PopulateTextFieldUsePhysicalKeyboard BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Input text \'t09-input\''] Text: $'''T09-input''' Mode: WebAutomation.PopulateTextMode.Replace UnfocusAfterPopulate: True WaitForPageToLoadTimeout: 60
+WebAutomation.Click.Click BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Button \'実行\''] ClickType: WebAutomation.ClickType.LeftClick MouseClick: True WaitForPageToLoadTimeout: 60 MousePositionRelativeToElement: WebAutomation.RectangleEdgePoint.MiddleCenter OffsetX: 0 OffsetY: 0
+WAIT 1
+WebAutomation.GetDetailsOfElement BrowserInstance: Browser Control: appmask['Web Page \'http://127.0.0.1:8765/t09-local-test.html\'']['Paragraph \'未実行\''] AttributeName: $'''Own Text''' AttributeValue=> AttributeValue
+WebAutomation.CloseWebBrowser BrowserInstance: Browser
+
+3. デザイナーでの確認
+
+貼り付け直後に、次を確認してください。
+
+アクション数が6件であること。
+順序がEdge起動、入力、クリック、1秒待機、Own Text取得、ブラウザー終了であること。
+BrowserがWebブラウザーインスタンスとして生成され、後続5アクションから参照されていること。
+取得結果のAttributeValueがテキスト変数として生成されること。
+3つのWeb UI要素に未解決エラーがないこと。
+待機画面が「1秒を待機します」となり、500秒になっていないこと。
+4. 合成画面での実行照合
+ローカルテスト画面を配信している状態で、複製したテスト用フローを保存します。
+実行前の画面で結果が未実行であることを確認します。
+フローを実行し、入力欄がT09-inputになったことを確認します。
+実行後、変数ペインでAttributeValueがT09-clickedになったことを照合します。
+Edgeが閉じ、PADが準備完了へ戻ったことを確認します。
+画面を初期状態へ戻して再実行し、同じ結果になることを確認します。
+
+根拠原文はcatalog/flows/ui-t09-local-roundtrip/roundtrip-wait1-20260912.robin、SHA-256はd8913da95757f5fff4d3d7b10c40c35120d76882dc4d516356c9c3ddf06c5571です。待機1秒版について、PADからの再コピーと2回の通し実行が記録されています。

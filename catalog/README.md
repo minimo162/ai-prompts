@@ -1,5 +1,7 @@
 # PAD実アクションのRobinカタログ
 
+> 2026-09-12 最終監査: 固定finaldの生成受入は維持。A〜Gの一部の別空フロー再利用等の保存証跡が未特定で、PR提出準備は未完了です。[原証跡の対応表と不足](../docs/robin-knowledge-validation.md)を確認してください。
+
 `index.json`は実際の左パネルから追加・設定・コピーした例の索引です。`.robin`はクリップボードから得た原文をUTF-8 BOMなしで保存し、改行を変換しません。Gitでもバイトを保持します。
 
 既存の変数・テキスト・ループ・ファイル読取り・Office・PDF操作に、2026-09-09/10の日時取得、空データテーブル、行追加失敗、CSV読取り・書出し、FilterDataTable、ファイルコピー、サブテキスト取得、テキスト書出し、テキスト変数書込み2設定、For each、If2、Excel/Word編集可能起動2設定、フォルダー取得2設定、ファイル変数読取り、PDFページ2単独抽出を加え、`catalog/index.json` は86観測バリアントです。既存51例と追加例を、採取・再貼付け・実行・失敗の証拠範囲ごとに分けています。初期の専用フローは`RobinCatalog_20260907`、Officeの採取先はユーザーが用意した`test`です。コピー前のクリップボードはメモリーに保持して復元し、その内容をファイルへ記録していません。
@@ -85,4 +87,4 @@ T09の採取原文 `flows/ui-t09-local-roundtrip/roundtrip.robin` の `WAIT 500`
 
 Issue #5のP3残課題を専用合成フローで採取した。P3-1 `SET NewVar TO CatalogList[1]`（ダイアログ入力→再コピー→別空フロー再利用、各2回で`SecondItem`）、P3-2 If内If＋ファイル書込み＋`EXIT LOOP`（23行）と`LOOP…STEP`内For each＋`NEXT LOOP`（15行、期待値は`flows/p3-nested-control/expectations-20260912.json`で事前固定）、P3-3 `fixtures/files-boundary`（`.TXT`はElse＝等価比較は大文字小文字を区別、`.txt.bak`はElse、親フォルダー名`sub.txt`は影響なし、`IncludeSubfolders`で再帰制御。固定T03は不変）、P3-4 Excel／Word SaveAsは既存出力を無警告で上書き、P3-5 `FromCustomDateTime yyyy-MM-dd`（新規追加経路で採取。2026-09-11の内部例外は既存アクション編集経路）、P3-6 アクション単位 `ON ERROR FileNotFoundError` が一致し`NewVar=named`のみ設定（ブロック既定ルール非発火。ブロック側利用者定義名`FileNotFound`は不一致のまま）。証拠: `evidence/p3-list-idx1-acceptance-20260912.json`、`p3-nested-control-…`、`p3-file-boundary-…`、`p3-saveas-collision-…`、`p3-date-format-…`、`p3-named-error-…`。
 
-統合後のbundle `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`（`../copilot/knowledge-bundle-manifest-20260912d.json`）では知識precheckのみPASS。T01〜T10・独立再試験・負例v2・P3正例は `generated/normal-chat-finald-20260912-*/` に本文と期待値を用意し、PADフロー `RobinKnowledge*FinalD_20260912` を作成済みだが未送信。`evidence/current-package-status-20260912-finald.json` は partial。
+統合後のbundle `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`（`../copilot/knowledge-bundle-manifest-20260912d.json`）で、知識precheck、T01〜T10（T03は2回目生成）、独立再試験T01/T04/T10、負例v2、P3正例P3-1〜P3-6を同一版で受入した（`generated/normal-chat-finald-20260912-*/`、PADフロー `RobinKnowledge*FinalD2_20260912`、証跡 `evidence/*-finald-20260912-*-acceptance-20260912.json`）。P3正例の生成Robinはいずれも実測原文と同一（P3-4は出力名、P3-5はShortDate行の有無のみ差）。`evidence/current-package-status-20260912-finald.json` は complete_live_acceptance_finald_20260912。

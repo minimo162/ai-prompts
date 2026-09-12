@@ -1,0 +1,32 @@
+現在のシステム日時を取得し、実測済みのカスタム書式 yyyy-MM-dd でテキストへ変換して、変数 FormattedDateTime2 に格納する2アクションのフロー案です。
+
+前提・対象範囲
+対象サブフロー: Main
+貼り付け範囲: 空のサブフロー全体、または日時を取得したい位置
+入力: なし
+中間変数: CurrentDateTime、日時型
+出力変数: FormattedDateTime2、テキスト型
+保存先、ファイル、アプリ、UI要素: 不要
+タイムゾーン: システムタイムゾーン
+PAD採取環境: PAD 2.71.115.26224、日本語UI、Power Fx OFF
+未確認範囲: yyyy-MM-dd 以外の書式トークン、タイムゾーン変更、無効な書式、既存の変換アクションを開き直して編集する経路
+
+根拠は、PAD-Robin-Knowledge-Bundle 内の catalog/evidence/p3-date-format-probe-20260912.robin です。PADからコピーした原文を別の空フローへ再貼り付け、2回実行して FormattedDateTime2=2026-09-12 を確認した記録があります。今回使用する日時取得行とカスタム変換行は、その実測原文から抜き出したものです。2行だけの組み合わせについては、今回あらためてPADへ貼り付け・実行したものではありません。
+
+PADでの設定と期待結果
+
+事前に入力変数を作成する必要はありません。貼り付けると、1つ目のアクションが CurrentDateTime を生成し、2つ目のアクションがそれを yyyy-MM-dd 形式へ変換して FormattedDateTime2 を生成します。
+
+貼り付け後は、デザイナーで次を確認してください。
+
+アクション数が2件で、日時取得から日時変換の順になっている
+1件目の出力が CurrentDateTime
+2件目の入力が CurrentDateTime
+2件目の出力が FormattedDateTime2
+カスタム形式が正確に yyyy-MM-dd
+デザイナー上に入力エラーがない
+
+複製したテスト用フローで保存して実行し、FormattedDateTime2 が実行日の年月日になっていることを確認します。たとえば、2026年9月12日に実行した実測結果は 2026-09-12 です。日付が変わる前後での再実行では、その実行時点のシステム日付と照合してください。
+
+DateTime.GetCurrentDateTime.Local DateTimeFormat: DateTime.DateTimeFormat.DateAndTime CurrentDateTime=> CurrentDateTime
+Text.ConvertDateTimeToText.FromCustomDateTime DateTime: CurrentDateTime CustomFormat: $'''yyyy-MM-dd''' Result=> FormattedDateTime2

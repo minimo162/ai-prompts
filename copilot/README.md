@@ -1,5 +1,7 @@
 # Copilotエージェント用PAD Robin配布物
 
+> 2026-09-12 最終監査: 固定finaldの生成受入は維持。A〜Gの一部の追跡証跡不足によりPR提出準備は未完了です。[監査結果](../docs/robin-knowledge-validation.md)。指示文・知識の受入済みバイトは変更していません。
+
 このディレクトリは、通常のMicrosoft 365 Copilotチャットへ本文入力と実ファイル添付で渡す、PAD Robinの検証用配布物です。公式入口は `https://microsoft365.com/chat` です。Agent Builder／Copilot Studioの作成・権限調査は今回の検証対象にしません。PADやCopilotを自動実行するアプリではありません。PADの画面から得た原文、設定、型、依存、実行結果を根拠に、利用者がデザイナーへ貼り付けるRobinを生成・修正します。
 
 ## 登録するファイル
@@ -14,7 +16,7 @@
 - `knowledge/PAD-Robin-05-UI-Web.txt`
 - `knowledge/PAD-Robin-06-Examples.txt`
 
-2026-09-12の作業版（finald）bundle SHA-256は `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、原本対応は [knowledge-bundle-manifest-20260912d.json](knowledge-bundle-manifest-20260912d.json) です。finalcとの差分はP3-1〜P3-6の実測統合（01-Basics: `SET NewVar TO CatalogList[1]`、`Text.ConvertDateTimeToText.FromCustomDateTime`／02-Control: If内If・入れ子ループ、`ON ERROR FileNotFoundError`／03-Files: 拡張子境界／04-Office: SaveAs上書き／06: 例8／00: 索引）。この版は知識precheckのみ受入済みで、T01〜T10等の同一版受入は未実施（partial）。
+2026-09-12の最終版（finald）bundle SHA-256は `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、原本対応は [knowledge-bundle-manifest-20260912d.json](knowledge-bundle-manifest-20260912d.json) です。finalcとの差分はP3-1〜P3-6の実測統合（01-Basics: `SET NewVar TO CatalogList[1]`、`Text.ConvertDateTimeToText.FromCustomDateTime`／02-Control: If内If・入れ子ループ、`ON ERROR FileNotFoundError`／03-Files: 拡張子境界／04-Office: SaveAs上書き／06: 例8／00: 索引）。この版で知識precheck・T01〜T10・独立再試験・負例v2・P3正例P3-1〜P3-6を同一版受入済み（complete_live_acceptance_finald_20260912）。
 
 （直前版）2026-09-12のfinalc bundle SHA-256は `f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089`、原本対応は [knowledge-bundle-manifest-20260912c.json](knowledge-bundle-manifest-20260912c.json) です。直前版 `32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041` との差分はT09教材の待機値のみで、`WAIT 500`（500秒。2026-09-10採取時に500ミリ秒のつもりで設定した誤り）を、PADの待機ダイアログで1秒に直して再採取した `catalog/flows/ui-t09-local-roundtrip/roundtrip-wait1-20260912.robin` の `WAIT 1` に置き換えました（00-Index／05-UI-Web／06-Examples）。この版で、指示全文＋同版bundle添付の通常M365 Copilotチャット（Google Chrome、Think Deeper）により知識precheck、T01〜T10、独立再試験T01/T04/T10、負例N1〜N3を同一版で受入済みです。正本は `../catalog/evidence/current-package-status-20260912-finalc.json` と `../catalog/evidence/issue5-completion-audit-20260912-finalc.json`。
 

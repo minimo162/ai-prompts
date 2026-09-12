@@ -1,0 +1,7 @@
+﻿PDF Catalog A - Page 2
+日本語の確認 100%
+PAGE_TOKEN_A2
+Item Quantity Code
+Alpha 12 A-01
+Beta 34 B-02
+Synthetic data only

@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-12T03:12:55.7736339Z",
+    "flow_name":  "RobinKnowledgeP34FinalD2_20260912",
+    "source_robin":  "catalog/generated/normal-chat-finald-20260912-p34/robin.txt",
+    "source_sha256":  "d67dba359ed2a23790e52df236da7bdc2543ec3beeaa360fcea528a811a1e9e4",
+    "source_bytes":  565,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  4,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

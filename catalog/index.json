@@ -6177,20 +6177,40 @@
       "evidence": "evidence/p3-list-idx1-acceptance-20260912.json; evidence/p3-nested-control-acceptance-20260912.json; evidence/p3-file-boundary-acceptance-20260912.json; evidence/p3-saveas-collision-acceptance-20260912.json; evidence/p3-date-format-acceptance-20260912.json; evidence/p3-named-error-acceptance-20260912.json"
     },
     {
-      "id": "normal-chat-finald-20260912-pending",
+      "id": "normal-chat-finald-20260912-acceptance",
       "date": "2026-09-12",
       "browser": "Google Chrome normal M365 Copilot chat (Claude in Chrome extension)",
       "model": "Think Deeper",
       "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
       "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
       "cases": [
-        "knowledge_precheck"
+        "knowledge_precheck",
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10",
+        "independent_T01",
+        "independent_T04",
+        "independent_T10",
+        "negative_suite_v2",
+        "P3-1",
+        "P3-2",
+        "P3-3",
+        "P3-4",
+        "P3-5",
+        "P3-6"
       ],
-      "scope": "finald: knowledge precheck passed; T01-T10, independent retests, negative suite v2 and P3 positive cases pending on this version.",
-      "current_package_acceptance": false,
-      "execution_status": "partial_finald_20260912_acceptance_pending",
+      "scope": "finald: full instruction body + same-version bundle per new chat; unmodified PAD paste, recopy, two runs, fixed expectations. T03 needed a second generation (attempt 1 minimal form recorded); all other cases passed first generation. P3-1..P3-6 positive generations matched the measured forms.",
+      "current_package_acceptance": true,
+      "execution_status": "complete_live_acceptance_finald_20260912",
       "manifest": "../copilot/knowledge-bundle-manifest-20260912d.json",
-      "evidence": "evidence/current-package-status-20260912-finald.json"
+      "evidence": "evidence/current-package-status-20260912-finald.json; evidence/issue5-completion-audit-20260912-finald.json"
     }
   ],
   "application_integration": {

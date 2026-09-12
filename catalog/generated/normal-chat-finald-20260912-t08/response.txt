@@ -1,0 +1,85 @@
+Copilot said:
+
+以下は、実測済みのアクション単位エラー処理をそのまま使い、欠損ファイルのエラーを変数へ記録する検証用フロー案です。ファイル書込み、完了マーカー、送信、公開は含めません。
+
+1. 前提・対象範囲
+目的: 存在しない合成入力をUTF-8で読み取り、FileNotFoundError が発生することを確認する。
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t08-missing-20260910.txt
+出力:
+NewVar、テキスト。名前付きエラー処理が実行されたことを示すnamed
+LastError、PADのエラー情報
+副作用: なし。ファイル作成、上書き、完了マーカー、公開処理は行わない。
+実測環境: PAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データ。
+成功条件: フローが続行して終了し、NewVar=named、LastErrorに「ファイルが見つかりません」に相当するエラーが入り、ErrorHandledとErrorHandledDefaultは設定されないこと。
+
+この構成は、アクション単位の ON ERROR FileNotFoundError をPADからコピーし、元フローと別フローで各2回実行した確認済み原文です。ブロック側の利用者定義名 FileNotFound は一致せず、アクション単位の名前付きルールだけが発火しました。根拠は catalog/evidence/p3-named-error-probe-20260912.robin と catalog/evidence/p3-named-error-acceptance-20260912.json です。
+
+2. PADで先に確認する設定
+新しい検証専用フローを作成します。
+対象サブフローは Main とします。
+入力変数、アプリインスタンス、UI要素、保存先の事前作成は不要です。
+指定パスにファイルが存在しないことをエクスプローラーなどで確認します。意図した欠損入力なので、同名ファイルを作成しないでください。
+以下のRobinで、Main の全アクションを置き換えます。
+永続ログファイルは作りません。「記録」は実行後の変数 NewVar と LastError の確認に限定します。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: Main 内の全アクション
+
+BLOCK
+ON BLOCK ERROR FileNotFound IsUserDefinedErrorCode: True
+    SET ErrorHandled TO $'''true'''
+ON BLOCK ERROR
+    SET ErrorHandledDefault TO $'''true'''
+END
+    File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+    ON ERROR FileNotFoundError
+        SET NewVar TO $'''named'''
+    END
+END
+ERROR => LastError Reset: True
+
+
+このRobinは確認済み原文の組合せです。ERROR => LastError Reset: True は「最後のエラーを取得」で、保存先を LastError、エラー消去をオンにした採取済み設定です。
+
+4. デザイナー上の確認
+
+貼り付け直後に、次を確認してください。
+
+アクション数が12であること。
+インデントとブロック対応が次の構造になっていること。
+BLOCK
+名前付きの ON BLOCK ERROR
+既定の ON BLOCK ERROR
+ハンドラー定義部の END
+読取りアクション
+読取りアクション内の ON ERROR FileNotFoundError
+SET NewVar
+アクションエラー処理の END
+ブロック本体の END
+最後のエラー取得
+読取りエンコードがUTF-8であること。
+読取りアクションのエラー設定が FileNotFoundError、変数設定、フロー続行になっていること。
+デザイナーに赤いエラー表示がないこと。
+Content の出力先が FileContents、エラー記録先が LastError であること。
+
+なお、ブロック側の FileNotFound は利用者定義コードであり、今回の組込みエラーコード FileNotFoundError とは別です。ブロック側へ組込みコードを直接指定する構文は未確認なので、書き換えません。
+
+5. 実行と期待結果の照合
+フローを保存します。
+変数ペインを表示して実行します。
+実行後、次を照合します。
+NewVar が named
+LastError に欠損パスと「ファイルが見つかりません」に相当する内容がある
+ErrorHandled が未設定
+ErrorHandledDefault が未設定
+FileContentsを後続処理で使用していない
+新しいファイル、完了マーカー、公開物が作られていない
+同名の欠損ファイルを作らずに、もう一度実行します。
+2回目も同じ変数状態になり、外部成果物が増えていないことを確認します。
+
+実測証拠では、この構成を2回実行し、LastErrorとNewVar=namedだけが観測され、ブロック側の2変数は設定されませんでした。
+
+未確認範囲
+
+他のエラーコード、再試行、再スロー、ブロック側への組込み FileNotFoundError 指定、エラー内容の安全な永続ログ化は、この例の確認範囲外です。永続記録が必要になった場合は、エラー後の値を確認してから、専用の合成出力先を使う書込みアクションを別途1設定ずつ採取する必要があります。

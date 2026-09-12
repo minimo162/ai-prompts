@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "status": "PASS_SEPARATE_FLOW_REUSE",
+  "recorded_at": "2026-09-12T08:19:07.185Z",
+  "scope": "D folder creation: existing measured raw replay in a new empty flow",
+  "source": "../p3-folder-create-probe-20260910.robin",
+  "source_sha256": "34658c14b463d438b6cac03c060e2e44f7cb8719baa48db5b44236c650dc2bd2",
+  "source_probe": "../p3-folder-create-probe-20260910.json",
+  "knowledge": "../../../copilot/knowledge/PAD-Robin-03-Files.txt",
+  "knowledge_sha256": "a541082a650a7cfae9d2b2cfb47026d7b8ee81bc542f30ba409af5e6291c9aea",
+  "flow": "RobinKnowledgeFolderCreateReuse_20260912",
+  "power_fx": false,
+  "paste": "paste.json",
+  "original_actions": 1,
+  "paste_attempts": 1,
+  "recopy": "pad-recopy.robin",
+  "reopened_recopy": "pad-recopy-reopened.robin",
+  "recopy_sha256": "9610bd9f2e1759f50a95c68546eef4379466960eb2ff2a2960f7d056497fafc1",
+  "recopy_difference": "LF -> CRLF only",
+  "save_persistence": "closed and reopened before run2; recopy byte-identical",
+  "expectation": "expectation.json fixed before paste",
+  "runs": [
+    {
+      "run": 1,
+      "evidence": "pad-run1.json",
+      "request": "pad-run1-request.json",
+      "requested_at": "2026-09-12T08:13:17.0232104Z",
+      "created_at": "2026-09-12T08:13:19.1238211Z",
+      "observed_path": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\p3-created-20260910",
+      "status": "PASS_FRESH_DIRECTORY_AND_VALUE",
+      "original_directory_restored": true,
+      "running_observed": false
+    },
+    {
+      "run": 2,
+      "evidence": "pad-run2.json",
+      "request": "pad-run2-request.json",
+      "requested_at": "2026-09-12T08:17:49.1006933Z",
+      "created_at": "2026-09-12T08:17:51.3648686Z",
+      "observed_path": "C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\p3-created-20260910",
+      "status": "PASS_FRESH_DIRECTORY_AND_VALUE",
+      "original_directory_restored": true,
+      "running_observed": false
+    }
+  ],
+  "preparation_failure": "run2-preparation-failure.json; no execution request sent on this failed precheck",
+  "observation_limit": "Brief running phase not captured; fresh directory creation after each request, expected NewFolder preview and ready/errors0 recorded. Run2 had a transient ambiguous observation, then continued without resending.",
+  "manual_edits": false,
+  "source_unchanged": true,
+  "original_directory": "empty synthetic directory moved aside and restored after each run, preserving original creation timestamp",
+  "clipboard_restore": "outer paste wrapper and recopy helper restored clipboard; raw paste helper field remains false",
+  "current_package_generation_acceptance": false
+}

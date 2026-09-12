@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-12T08:11:14.2390161Z",
+  "flow_name": "RobinKnowledgeFolderCreateReuse_20260912",
+  "source_robin": "catalog/evidence/p3-folder-create-probe-20260910.robin",
+  "source_sha256": "34658c14b463d438b6cac03c060e2e44f7cb8719baa48db5b44236c650dc2bd2",
+  "source_bytes": 139,
+  "expected_action_count": 1,
+  "paste_confirmed": true,
+  "action_count_after_paste": 1.0,
+  "saved_confirmed": false,
+  "clipboard_restored": false,
+  "execution_requested": false
+}

@@ -1,0 +1,43 @@
+{
+  "observed_at": "2026-09-12T08:06:30.7949084Z",
+  "source_sha256": "e7d0321af0dc7fee337b917308164b6d5c13f7040ef69dcc657ea725db54cf0c",
+  "old_pass_inherited": false,
+  "flow": "Power Automate | RobinKnowledgeBooleanReuse_20260912",
+  "states": [
+    {
+      "at": "2026-09-12T08:06:17.9875772Z",
+      "observation_error": "PAD_SELECTOR: status ambiguous."
+    },
+    {
+      "errors_known": true,
+      "running": false,
+      "status": "ready",
+      "at": "2026-09-12T08:06:29.4418130Z",
+      "errors": 0
+    }
+  ],
+  "status": "RUNTIME_COMPLETE_VALUES_PENDING_AUDIT",
+  "variables": [
+    {
+      "nodes": [
+        {
+          "name": "P3Bool",
+          "type": "ControlType.ListItem",
+          "id": "VariablesListItem"
+        },
+        {
+          "name": "P3Bool",
+          "type": "ControlType.Text",
+          "id": "VariableTextBlock"
+        },
+        {
+          "name": "True",
+          "type": "ControlType.Text",
+          "id": "VariablePreviewTextBlock"
+        }
+      ],
+      "variable": "P3Bool"
+    }
+  ],
+  "run_requested_at": "2026-09-12T08:06:15.2921027Z"
+}

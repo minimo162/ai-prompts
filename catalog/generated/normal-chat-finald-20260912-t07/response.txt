@@ -1,0 +1,63 @@
+Copilot said:
+
+以下は、添付ナレッジのT07実測原文に基づく、PDFの2ページ目だけを抽出してUTF-8テキストへ保存するPADフロー案です。PDF抽出とファイル保存の2アクションは、別フローへの再貼付け、保存、2回の実行、期待値照合まで記録されています。
+
+1. 前提・対象範囲
+入力PDF: C:\Users\yuuki\ai-prompts\catalog\fixtures\pdf\source-a.pdf
+抽出対象: 2ページ目のみ
+開始ページ: 2
+終了ページ: 2
+出力ファイル: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt
+出力形式: UTF-8テキスト
+既存出力がある場合: 上書き
+末尾への追加改行: なし
+レイアウト検出: OFF
+入力PDF: 読み取り対象のみで、変更・保存・上書きは行わない
+ページ境界・抽出順: PADが返した抽出テキストをそのまま保存し、追加の整形や並べ替えは行わない
+出力変数: ExtractedPDFText、テキスト型
+
+実測環境はPAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データです。根拠原文は catalog/generated/normal-chat-t07-20260910-final/robin.txt、実行証拠は catalog/evidence/normal-chat-t07-final-paste.json と catalog/evidence/normal-chat-t07-final-run-1.json です。
+
+2. PADで先に確認する設定
+入力PDFが指定パスに存在することを確認します。
+出力先フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence が存在することを確認します。
+既存の normal-chat-t07-final.txt を保持する必要がある場合は、実行前に退避します。このフローは既存ファイルを上書きします。
+PADで空のサブフロー、または貼り付け対象のサブフローを開きます。
+以下の2アクションを、ほかのアクションを選択していない位置へ貼り付けます。入力変数、PDFインスタンス、UI要素の事前作成は不要です。
+3. 貼り付け用Robin
+
+対象サブフロー: Main、またはPDF抽出処理を置く任意のサブフロー
+置換範囲: この処理専用の2アクション全体
+
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 2 DetectLayout: False ExtractedText=> ExtractedPDFText
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt''' TextToWrite: ExtractedPDFText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+
+この2行は、PAD-Robin-Knowledge-Bundleに収録されたT07の組合せ原文に対応しています。実測では、貼り付け、保存、2回の実行、および抽出内容の照合が行われています。
+
+4. PADデザイナー上の確認
+
+貼り付け直後に、次を確認してください。
+
+アクション数が2である。
+順序が次のとおりである。
+PDFからページ範囲を指定してテキストを抽出
+テキストをファイルに書き込む
+1番目のアクションで、開始ページと終了ページがともに2になっている。
+DetectLayoutがFalseになっている。
+1番目の出力がテキスト変数ExtractedPDFTextになっている。
+2番目の書き込み値が文字列リテラルではなく、変数ExtractedPDFTextになっている。
+文字コードがUTF-8になっている。
+「新しい行を追加する」が無効、つまりAppendNewLine: Falseになっている。
+既存ファイルの処理が上書きになっている。
+デザイナーに赤いエラー表示がなく、各パスがコード記載どおりである。
+5. 実行と期待結果の照合
+入力PDFを複製する必要はありませんが、入力を変更しないことを確認する場合は、実行前後でファイルサイズまたはハッシュを比較します。
+フローを保存して実行します。
+normal-chat-t07-final.txtが作成または上書きされたことを確認します。
+出力をUTF-8として開き、ページ2の識別文字 PAGE_TOKEN_A2 が含まれることを確認します。
+ページ1の識別文字 PAGE_TOKEN_A1 が含まれないことも確認します。
+改行、ページ境界、文字の連結状態は推測で修正せず、PADから得た内容のまま評価します。
+同じ条件でもう一度実行し、上書き後の出力内容が同じ期待条件を満たすことを確認します。
+
+実測記録では、出力にPAGE_TOKEN_A2が含まれ、PAGE_TOKEN_A1が含まれないことが確認されています。入力PDFの変更を伴うアクションは含まれていません。

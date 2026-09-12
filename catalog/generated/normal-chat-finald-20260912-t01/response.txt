@@ -1,0 +1,49 @@
+Copilot said:
+
+以下は、添付のPAD-Robin-Knowledge-Bundleに収録されたT01の実測済み3アクション原文を、そのまま使用するフロー案です。PAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データ環境で、無修正貼り付け、保存、2回実行、期待結果照合まで記録されています。
+
+1. 前提・対象範囲
+目的: UTF-8テキストを読み取り、「対象語」を「置換後」へ通常置換して別ファイルへ保存
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-current-bundle.txt
+変数:
+FileContents: 読み取ったテキスト
+Replaced: 置換後のテキスト
+置換設定: 大文字小文字を区別、正規表現およびエスケープシーケンスは不使用
+保存設定: UTF-8、既存ファイルは上書き、追加改行なし
+成功条件: 指定語のみが置換され、特殊文字、既存の改行、対象外文字が保持され、保存処理による末尾改行が追加されないこと
+
+出力先に同名ファイルがある場合は上書きされます。残す必要がある既存ファイルは、実行前に別名で退避してください。
+
+2. PADでの準備と貼り付け
+PADで空のフローを作成し、Power FxがOFFであることを確認します。
+Mainサブフローを開きます。
+入力ファイルが指定パスに存在することを確認します。
+出力先フォルダーが存在することを確認します。
+下のRobin全体をコピーし、Mainの空いている位置へそのまま貼り付けます。
+変数を手動で事前作成する必要はありません。1番目と2番目のアクションが、それぞれFileContentsとReplacedを生成します。
+3. デザイナー上の確認
+
+貼り付け後、アクションが次の順序で3件作成されていることを確認します。
+
+UTF-8でファイルからテキストを読み取る
+通常のテキスト置換
+UTF-8でテキストをファイルへ書き込む
+
+さらに、赤いエラー表示がないこと、2番目の入力がFileContents、3番目の入力がReplacedという変数参照になっていることを確認します。文字列リテラルとして扱われている場合は実行しないでください。
+
+4. 合成データでの実行確認
+入力ファイルを複製して保全するか、実行前後のハッシュを比較できる状態にします。
+フローを保存して実行します。
+出力ファイルをテキストエディターで開き、「対象語」が残らず「置換後」へ置き換わっていることを確認します。
+引用符、パーセント、バックスラッシュ、日本語、既存の行区切り、対象外文字が維持されていることを確認します。
+入力に末尾改行がない場合、出力にも追加されていないことを確認します。AppendNewLine: Falseは追加改行を抑止しますが、入力テキスト自身が持つ末尾改行は保持されます。
+同じ条件でもう一度実行し、上書き後の内容が同じであることを確認します。
+
+根拠原文はcatalog/generated/normal-chat-current-bundle-t01-live-20260911/robin.txtで、同じ3アクションを無修正で貼り付け、2回実行し、入力不変と出力内容を照合した記録があります。これは今回このチャットからPADへ貼り付けた結果の再実測ではないため、今回の環境では上記手順による確認が必要です。
+
+対象サブフローはMain、置換範囲は下記3アクション全体です。
+
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8

@@ -1,0 +1,68 @@
+添付の実測ナレッジに限定し、合成フォルダーを再帰列挙して .Extension が厳密に .txt のファイルだけをUTF-8で読み、その他をElseで数えるフローを示します。PAD 2.71.115.26224、日本語UI、Power Fx OFFで採取された原文と、同じ files-boundary を使った実行証拠が根拠です。
+
+1. 前提・対象範囲・期待結果
+対象サブフロー: Main 全体、または空のサブフローへ貼り付けます。
+入力フォルダー: C:\Users\yuuki\ai-prompts\catalog\fixtures\files-boundary
+列挙設定: フィルター *、IncludeSubfolders: True、並べ替えなし、アクセス拒否時は失敗。
+入力: Files はファイル変数のリスト、CurrentFile は各ファイル変数です。
+出力:
+TxtCount: 厳密に .txt と一致した件数、数値
+OtherCount: Elseへ進んだ件数、数値
+TxtSeen: 最後にThen側を通ったファイル
+OtherSeen: 最後にElse側を通ったファイル
+FileContents: 最後に読み取られた .txt ファイルの内容、テキスト
+保存・上書き: ファイルへの書込みは行わないため、保存先と上書き動作はありません。
+期待結果:
+Files.Count = 5
+TxtCount = 3: plain.txt、sub.txt\inner.txt、nested\deep.txt
+OtherCount = 2: upper.TXT、x.txt.bak
+.TXT は大文字小文字を区別する等価比較によりElseへ進みます。
+x.txt.bak の .Extension は .bak なのでElseへ進みます。
+親フォルダー名が sub.txt で終わっていても、inner.txt 自身の .Extension は .txt なのでThenへ進みます。
+入力5ファイルは変更されません。これらは IncludeSubfolders: True の境界probeで2回ずつ実行・照合済みです。
+
+大文字小文字を無視する比較は使用していません。その設定は今回の実測原文として採取されておらず、.TXT を対象へ含めるような推測はしていません。列挙順は NoSort のため保証されず、TxtSeen、OtherSeen、FileContents の最終値は件数の成功判定には使わないでください。
+
+2. PADで先に行う設定
+PADで空のフローまたは空のサブフローを開きます。
+入力変数、UI要素、Officeインスタンスは作成不要です。
+下記の全行をまとめて貼り付けます。各変数はフロー内で生成または初期化されます。
+実行前に合成フォルダーを複製して使う場合は、上記5ファイルと2つのサブフォルダー構造が維持されていることを確認してください。ただし、パスを変えたRobinは今回の実測原文との逐語一致対象外になります。
+3. 貼り付け用Robin
+
+対象はMainまたは空のサブフロー全体です。以下は、実測済み13行構成について、境界probeで確認された対象フォルダーとIncludeSubfolders: Trueを反映した命令列です。
+
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary''' FileFilter: $'''*''' IncludeSubfolders: True FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+SET TxtCount TO 0
+SET OtherCount TO 0
+LOOP FOREACH CurrentFile IN Files
+    IF CurrentFile.Extension = $'''.txt''' THEN
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+        SET TxtSeen TO CurrentFile
+        Variables.IncreaseVariable Value: TxtCount IncrementValue: 1
+    ELSE
+        SET OtherSeen TO CurrentFile
+        Variables.IncreaseVariable Value: OtherCount IncrementValue: 1
+    END
+END
+
+4. デザイナー上の確認
+
+貼り付け後、次を確認してください。
+
+アクション数が13であること。PADはELSEと各ENDもアクションとして数えます。
+順序が、フォルダー取得、2変数の初期化、For each、If、読取りと加算、Else、加算、2つの終了、になっていること。
+外側のENDがFor each、内側のENDがIfに対応していること。
+TxtCountとOtherCountが数値0で初期化されていること。
+Variables.IncreaseVariableのValueが文字列ではなく、変数参照になっていること。
+条件がCurrentFile.Extensionと.txtの等価比較であり、Containsや大文字小文字無視の条件へ変わっていないこと。
+FileContentsがテキスト、Filesがファイル変数のリスト、CurrentFileがファイル変数として認識されていること。
+デザイナーに赤いエラー表示がないこと。
+5. 合成データでの実行確認
+元の合成フォルダーを必要に応じて複製し、実行前の5ファイルについて名前、内容、サイズまたはSHA-256を記録します。
+フローを保存して1回実行します。
+変数ペインでFilesが5件、TxtCountが3、OtherCountが2であることを確認します。
+upper.TXTとx.txt.bakが読み取られず、Else側へ進んだことをステップ実行またはブレークポイントで確認します。
+sub.txt\inner.txtとnested\deep.txtが列挙され、Then側でUTF-8読取りされたことを確認します。
+実行後に入力5ファイルの内容またはSHA-256が実行前と一致することを照合します。
+もう一度実行し、件数が再び3と2になることを確認します。NoSortなので最後に残るTxtSeen、OtherSeen、FileContentsの値や順番は固定の期待値にしません。

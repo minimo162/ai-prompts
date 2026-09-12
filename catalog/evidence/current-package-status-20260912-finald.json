@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "captured_at": "2026-09-12T10:25:24+09:00",
-  "status": "partial_finald_20260912_acceptance_pending",
+  "captured_at": "2026-09-12T12:33:13+09:00",
+  "status": "complete_live_acceptance_finald_20260912",
   "issue_state": "OPEN",
   "version": {
     "label": "finald-20260912",
@@ -15,7 +15,7 @@
     "finalc_20260912": "f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089",
     "final_20260912": "32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041"
   },
-  "finalc_acceptance_preserved": "evidence/current-package-status-20260912-finalc.json (complete on f42f5acf; not inherited by this version)",
+  "finalc_acceptance_preserved": "evidence/current-package-status-20260912-finalc.json (complete on f42f5acf; history only, not inherited)",
   "cases": {
     "knowledge_precheck": {
       "status": "PASS_REFERENCE_ONLY",
@@ -24,126 +24,338 @@
       "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
     },
     "T01": {
-      "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-      "result": null,
-      "evidence": null,
-      "note": "prepared body in catalog/generated/normal-chat-finald-20260912-t01/ ; PAD flow created; not sent"
+      "status": "PASS_FINALD_20260912",
+      "result": "../generated/normal-chat-finald-20260912-t01/result.json",
+      "evidence": "evidence/t01-finald-20260912-live-acceptance-20260912.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/c49e5b51-32a1-456b-8b2f-49ae66bc2310",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "robin_sha256": "2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47",
+      "pad_runs": [
+        "../../evidence/t01-finald-pad-run1-20260912.json",
+        "../../evidence/t01-finald-pad-run2-20260912.json"
+      ]
     },
     "T02": {
-      "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-      "result": null,
-      "evidence": null,
-      "note": "prepared body in catalog/generated/normal-chat-finald-20260912-t02/ ; PAD flow created; not sent"
+      "status": "PASS_FINALD_20260912",
+      "result": "../generated/normal-chat-finald-20260912-t02/result.json",
+      "evidence": "evidence/t02-finald-20260912-live-acceptance-20260912.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/41accee4-d9c5-4a5b-96f3-a6671dfd48f7",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "robin_sha256": "c3027cfaa13e191b0e784fb3a6db4c573f8bfc83fb172d1a6394d7c1f5a55c29",
+      "pad_runs": [
+        "../../evidence/t02-finald-pad-run1-20260912.json",
+        "../../evidence/t02-finald-pad-run2-20260912.json"
+      ]
     },
     "T03": {
-      "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-      "result": null,
-      "evidence": null,
-      "note": "prepared body in catalog/generated/normal-chat-finald-20260912-t03/ ; PAD flow created; not sent"
+      "status": "PASS_FINALD_20260912",
+      "result": "../generated/normal-chat-finald-20260912-t03/result.json",
+      "evidence": "evidence/t03-finald-20260912-live-acceptance-20260912.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/3195deaa-8848-4e86-a9f1-9a98fe78ba44",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "robin_sha256": "63fe35ec8619387f08c5dd270eb226bbd944457b410e09cc2425023ff9396572",
+      "pad_runs": [
+        "../../evidence/t03-finald-pad-run1-20260912.json",
+        "../../evidence/t03-finald-pad-run2-20260912.json"
+      ],
+      "generation_note": "attempt 1 (fresh chat) produced a 7-line minimal form without counters, recorded in t03/attempt1/ as not fully verifiable; attempt 2 in a new chat produced the 13-line form and passed on RobinKnowledgeT03FinalD2b_20260912"
     },
     "T04": {
-      "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-      "result": null,
-      "evidence": null,
-      "note": "prepared body in catalog/generated/normal-chat-finald-20260912-t04/ ; PAD flow created; not sent"
+      "status": "PASS_FINALD_20260912",
+      "result": "../generated/normal-chat-finald-20260912-t04/result.json",
+      "evidence": "evidence/t04-finald-20260912-live-acceptance-20260912.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/5d0ac798-283e-43ad-b4d1-95c6b9a1eebb",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "robin_sha256": "e1a7b111ce7af4eed7bea1e186f5396d364f7ec86d4f9be0e3ff2a6fc1cfc1a1",
+      "pad_runs": [
+        "../../evidence/t04-finald-pad-run1-20260912.json",
+        "../../evidence/t04-finald-pad-run2-20260912.json"
+      ]
     },
     "T05": {
-      "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-      "result": null,
-      "evidence": null,
-      "note": "prepared body in catalog/generated/normal-chat-finald-20260912-t05/ ; PAD flow created; not sent"
+      "status": "PASS_FINALD_20260912",
+      "result": "../generated/normal-chat-finald-20260912-t05/result.json",
+      "evidence": "evidence/t05-finald-20260912-live-acceptance-20260912.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/2fab935b-010c-475b-b253-ab8aa780d9b6",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "robin_sha256": "be40e6b337620f1c76ba650b202f316d4b80b339de1c859fe1cb55a9f2714911",
+      "pad_runs": [
+        "../../evidence/t05-finald-pad-run1-20260912.json",
+        "../../evidence/t05-finald-pad-run2-20260912.json"
+      ]
     },
     "T06": {
-      "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-      "result": null,
-      "evidence": null,
-      "note": "prepared body in catalog/generated/normal-chat-finald-20260912-t06/ ; PAD flow created; not sent"
+      "status": "PASS_FINALD_20260912",
+      "result": "../generated/normal-chat-finald-20260912-t06/result.json",
+      "evidence": "evidence/t06-finald-20260912-live-acceptance-20260912.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/6196cb86-cb45-400a-8819-01be9fb3b3f6",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "robin_sha256": "c0940cb3e3ddbd82880d274692858ce3e2335f623acb11abe521926e642f9fd9",
+      "pad_runs": [
+        "../../evidence/t06-finald-pad-run1-20260912.json",
+        "../../evidence/t06-finald-pad-run2-20260912.json"
+      ]
     },
     "T07": {
-      "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-      "result": null,
-      "evidence": null,
-      "note": "prepared body in catalog/generated/normal-chat-finald-20260912-t07/ ; PAD flow created; not sent"
+      "status": "PASS_FINALD_20260912",
+      "result": "../generated/normal-chat-finald-20260912-t07/result.json",
+      "evidence": "evidence/t07-finald-20260912-live-acceptance-20260912.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/843d49d4-b2e6-452c-884b-5a44d646a4e2",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "robin_sha256": "07586350d86076fcacea46f6f3a6b5901bfc67a61278c96f046fd2ccc37b6bd1",
+      "pad_runs": [
+        "../../evidence/t07-finald-pad-run1-20260912.json",
+        "../../evidence/t07-finald-pad-run2-20260912.json"
+      ]
     },
     "T08": {
-      "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-      "result": null,
-      "evidence": null,
-      "note": "prepared body in catalog/generated/normal-chat-finald-20260912-t08/ ; PAD flow created; not sent"
+      "status": "PASS_FINALD_20260912_EXPECTED_ERROR",
+      "result": "../generated/normal-chat-finald-20260912-t08/result.json",
+      "evidence": "evidence/t08-finald-20260912-live-acceptance-20260912.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/809b6c88-52e8-4a44-8560-b0064b7f213e",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "robin_sha256": "a1544f086aa83eb58d87978db3215d5f0e59093ec0c1e70c62aa0b7b59697aa5",
+      "pad_runs": [
+        "../../evidence/t08-finald-pad-run1-20260912.json",
+        "../../evidence/t08-finald-pad-run2-20260912.json"
+      ],
+      "named_FileNotFound_match": "the generated block carries the action-level ON ERROR FileNotFoundError (measured P3-6) which fired and continued (NewVar=named, LastError=file not found, block rules not fired); the block-level user-defined FileNotFound name remains unmatched"
     },
     "T09": {
-      "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-      "result": null,
-      "evidence": null,
-      "note": "prepared body in catalog/generated/normal-chat-finald-20260912-t09/ ; PAD flow created; not sent"
+      "status": "PASS_FINALD_20260912",
+      "result": "../generated/normal-chat-finald-20260912-t09/result.json",
+      "evidence": "evidence/t09-finald-20260912-live-acceptance-20260912.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/550f27d8-ea6d-4142-a553-512977d5749c",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "robin_sha256": "7c576b499dab61a5d5228b16d4bd9589dcdd537e96a658f2b5386e936c946a44",
+      "pad_runs": [
+        "../../evidence/t09-finald-pad-run1-20260912.json",
+        "../../evidence/t09-finald-pad-run2-20260912.json"
+      ],
+      "element_import": "captured element repository imported first, generated 6 lines pasted unmodified; WAIT 1"
     },
     "T10": {
-      "status": "NOT_RUN_FINALD_ACCEPTANCE_PENDING",
-      "result": null,
-      "evidence": null,
-      "note": "prepared body in catalog/generated/normal-chat-finald-20260912-t10/ ; PAD flow created; not sent"
+      "status": "PASS_FINALD_20260912",
+      "result": "../generated/normal-chat-finald-20260912-t10/result.json",
+      "evidence": "evidence/t10-finald-20260912-live-acceptance-20260912.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/fc6f545c-936e-40c3-b823-a1bfc8211c60",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "robin_sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12",
+      "pad_runs": [
+        "../../evidence/t10-finald-pad-run1-20260912.json",
+        "../../evidence/t10-finald-pad-run2-20260912.json"
+      ]
+    }
+  },
+  "independent_retests": {
+    "T01": {
+      "status": "PASS_FINALD_20260912_INDEPENDENT",
+      "result": "../generated/normal-chat-finald-20260912-t01-independent/result.json",
+      "evidence": "evidence/t01-finald-20260912-independent-acceptance-20260912.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/3947f105-616c-4696-aeb7-58176aad5a23",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "robin_sha256": "2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47",
+      "pad_runs": [
+        "../../evidence/t01-independent-finald-pad-run1-20260912.json",
+        "../../evidence/t01-independent-finald-pad-run2-20260912.json"
+      ]
+    },
+    "T04": {
+      "status": "PASS_FINALD_20260912_INDEPENDENT",
+      "result": "../generated/normal-chat-finald-20260912-t04-independent/result.json",
+      "evidence": "evidence/t04-finald-20260912-independent-acceptance-20260912.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/e091376d-c0a8-42ad-a968-856587cbfef0",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "robin_sha256": "e1a7b111ce7af4eed7bea1e186f5396d364f7ec86d4f9be0e3ff2a6fc1cfc1a1",
+      "pad_runs": [
+        "../../evidence/t04-independent-finald-pad-run1-20260912.json",
+        "../../evidence/t04-independent-finald-pad-run2-20260912.json"
+      ]
+    },
+    "T10": {
+      "status": "PASS_FINALD_20260912_INDEPENDENT",
+      "result": "../generated/normal-chat-finald-20260912-t10-independent/result.json",
+      "evidence": "evidence/t10-finald-20260912-independent-acceptance-20260912.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/fdc91517-7738-452b-8228-9b59889d7eb6",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "robin_sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12",
+      "pad_runs": [
+        "../../evidence/t10-independent-finald-pad-run1-20260912.json",
+        "../../evidence/t10-independent-finald-pad-run2-20260912.json"
+      ]
+    }
+  },
+  "negative_suite": {
+    "status": "PASS_NEGATIVE_FAIL_CLOSED",
+    "suite": "v2",
+    "result": "../generated/normal-chat-finald-20260912-negative-suite/result.json",
+    "evidence": "evidence/negative-suite-finald-20260912-acceptance-20260912.json",
+    "cases": [
+      "N1_three_level_nesting_exit_outer_loop",
+      "N2_datatable_column_name_reference",
+      "N3_unregistered_web_selector_driver"
+    ],
+    "change": "N1 (If-inside-If + side effect + loop exit) became positive case P3-2 after measurement; new N1 = 3-level nesting exiting the outer loop (unmeasured)"
+  },
+  "p3_positive_cases": {
+    "status": "PASS_FINALD_20260912_P3_POSITIVE",
+    "definition": "../generated/acceptance-p3-20260912/cases.json",
+    "cases": {
+      "P3-1": {
+        "status": "PASS_FINALD_20260912_P3_POSITIVE",
+        "result": "../generated/normal-chat-finald-20260912-p31/result.json",
+        "evidence": "evidence/p31-finald-20260912-positive-acceptance-20260912.json",
+        "conversation": "https://m365.cloud.microsoft/chat/conversation/be339966-d59c-40c0-b04a-b129e0c61923",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "robin_sha256": "fdaa3eea3fc40a2315984d09172ed1f16bf31174e3bdc8a50067afad0502bc06",
+        "pad_runs": [
+          "../../evidence/p31-finald-pad-run1-20260912.json",
+          "../../evidence/p31-finald-pad-run2-20260912.json"
+        ],
+        "expectation_checks_all_pass": true,
+        "pad_checks": {
+          "NewVar=SecondItem": true,
+          "CatalogList=[CatalogItem, SecondItem]": true
+        },
+        "probe_evidence": "evidence/p3-list-idx1-acceptance-20260912.json"
+      },
+      "P3-2": {
+        "status": "PASS_FINALD_20260912_P3_POSITIVE",
+        "result": "../generated/normal-chat-finald-20260912-p32/result.json",
+        "evidence": "evidence/p32-finald-20260912-positive-acceptance-20260912.json",
+        "conversation": "https://m365.cloud.microsoft/chat/conversation/d9647cde-2fe0-4556-a532-84dc41048927",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "robin_sha256": "3189a4c70221f3764f94fdd2c9cb48b6f3a4a661a7e84622e9c440e77fb52577",
+        "pad_runs": [
+          "../../evidence/p32-finald-pad-run1-20260912.json",
+          "../../evidence/p32-finald-pad-run2-20260912.json"
+        ],
+        "expectation_checks_all_pass": true,
+        "pad_checks": {
+          "OuterCount=2": true,
+          "InnerNo=1": true,
+          "InnerYes=1": true,
+          "LastSeen=SecondItem": true,
+          "output_text=SecondItem": true,
+          "ThirdItem_not_visited": true
+        },
+        "probe_evidence": "evidence/p3-nested-control-acceptance-20260912.json"
+      },
+      "P3-3": {
+        "status": "PASS_FINALD_20260912_P3_POSITIVE",
+        "result": "../generated/normal-chat-finald-20260912-p33/result.json",
+        "evidence": "evidence/p33-finald-20260912-positive-acceptance-20260912.json",
+        "conversation": "https://m365.cloud.microsoft/chat/conversation/d76930f3-6020-4b81-907a-15eea680ea57",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "robin_sha256": "2b3494e4e8ceffd33e8ef242b19387205b8159d2307ad8a56f93aeb789e3454a",
+        "pad_runs": [
+          "../../evidence/p33-finald-pad-run1-20260912.json",
+          "../../evidence/p33-finald-pad-run2-20260912.json"
+        ],
+        "expectation_checks_all_pass": true,
+        "pad_checks": {
+          "TxtCount=3": true,
+          "OtherCount=2": true,
+          "fixtures_unchanged": true
+        },
+        "probe_evidence": "evidence/p3-file-boundary-acceptance-20260912.json"
+      },
+      "P3-4": {
+        "status": "PASS_FINALD_20260912_P3_POSITIVE",
+        "result": "../generated/normal-chat-finald-20260912-p34/result.json",
+        "evidence": "evidence/p34-finald-20260912-positive-acceptance-20260912.json",
+        "conversation": "https://m365.cloud.microsoft/chat/conversation/dfe3bd00-b406-4386-b2c0-f6337d5a8bf7",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "robin_sha256": "d67dba359ed2a23790e52df236da7bdc2543ec3beeaa360fcea528a811a1e9e4",
+        "pad_runs": [
+          "../../evidence/p34-finald-pad-run1-20260912.json",
+          "../../evidence/p34-finald-pad-run2-20260912.json"
+        ],
+        "expectation_checks_all_pass": true,
+        "pad_checks": {
+          "B2=T05-Changed": true,
+          "run2_overwrites_existing": true,
+          "input_unchanged": true,
+          "answer_states_silent_overwrite": true,
+          "no_office_process_left": true
+        },
+        "probe_evidence": "evidence/p3-saveas-collision-acceptance-20260912.json"
+      },
+      "P3-5": {
+        "status": "PASS_FINALD_20260912_P3_POSITIVE",
+        "result": "../generated/normal-chat-finald-20260912-p35/result.json",
+        "evidence": "evidence/p35-finald-20260912-positive-acceptance-20260912.json",
+        "conversation": "https://m365.cloud.microsoft/chat/conversation/4ce29b1e-eb98-4bf0-ac99-f458f32f403f",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "robin_sha256": "004ef2f334a01a869461c1db0f2b91f00412480436acde004394383a95d99413",
+        "pad_runs": [
+          "../../evidence/p35-finald-pad-run1-20260912.json",
+          "../../evidence/p35-finald-pad-run2-20260912.json"
+        ],
+        "expectation_checks_all_pass": true,
+        "pad_checks": {
+          "FormattedDateTime2=2026-09-12": true
+        },
+        "probe_evidence": "evidence/p3-date-format-acceptance-20260912.json"
+      },
+      "P3-6": {
+        "status": "PASS_FINALD_20260912_P3_POSITIVE",
+        "result": "../generated/normal-chat-finald-20260912-p36/result.json",
+        "evidence": "evidence/p36-finald-20260912-positive-acceptance-20260912.json",
+        "conversation": "https://m365.cloud.microsoft/chat/conversation/c4f68f0e-e3b6-487e-a89d-0d0ea556f0f8",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "robin_sha256": "a1544f086aa83eb58d87978db3215d5f0e59093ec0c1e70c62aa0b7b59697aa5",
+        "pad_runs": [
+          "../../evidence/p36-finald-pad-run1-20260912.json",
+          "../../evidence/p36-finald-pad-run2-20260912.json"
+        ],
+        "expectation_checks_all_pass": true,
+        "pad_checks": {
+          "NewVar=named": true,
+          "LastError_contains_見つかりません": true,
+          "ErrorHandledDefault_absent": true,
+          "missing_file_absent": true
+        },
+        "probe_evidence": "evidence/p3-named-error-acceptance-20260912.json"
+      }
     }
   },
   "p3_probes": {
     "P3-1_list_index": {
-      "status": "PASS_PROBE_INTEGRATED_GENERATION_PENDING",
-      "evidence": "evidence/p3-list-idx1-acceptance-20260912.json",
-      "separate_flow_reuse": true
+      "status": "PASS_PROBE_INTEGRATED_AND_GENERATED",
+      "evidence": "evidence/p3-list-idx1-acceptance-20260912.json"
     },
     "P3-2_nested_control": {
-      "status": "PASS_PROBE_INTEGRATED_GENERATION_PENDING",
-      "evidence": "evidence/p3-nested-control-acceptance-20260912.json",
-      "separate_flow_reuse": true
+      "status": "PASS_PROBE_INTEGRATED_AND_GENERATED",
+      "evidence": "evidence/p3-nested-control-acceptance-20260912.json"
     },
     "P3-3_file_boundaries": {
-      "status": "PASS_PROBE_INTEGRATED_GENERATION_PENDING",
-      "evidence": "evidence/p3-file-boundary-acceptance-20260912.json",
-      "separate_flow_reuse": "n/a (paste from saved text into new flows)"
+      "status": "PASS_PROBE_INTEGRATED_AND_GENERATED",
+      "evidence": "evidence/p3-file-boundary-acceptance-20260912.json"
     },
     "P3-4_saveas_collision": {
-      "status": "PASS_PROBE_INTEGRATED_GENERATION_PENDING",
-      "evidence": "evidence/p3-saveas-collision-acceptance-20260912.json",
-      "separate_flow_reuse": "n/a"
+      "status": "PASS_PROBE_INTEGRATED_AND_GENERATED",
+      "evidence": "evidence/p3-saveas-collision-acceptance-20260912.json"
     },
     "P3-5_custom_date_format": {
-      "status": "PASS_PROBE_INTEGRATED_GENERATION_PENDING",
-      "evidence": "evidence/p3-date-format-acceptance-20260912.json",
-      "separate_flow_reuse": true
+      "status": "PASS_PROBE_INTEGRATED_AND_GENERATED",
+      "evidence": "evidence/p3-date-format-acceptance-20260912.json"
     },
     "P3-6_named_error": {
-      "status": "PASS_PROBE_INTEGRATED_GENERATION_PENDING",
-      "evidence": "evidence/p3-named-error-acceptance-20260912.json",
-      "separate_flow_reuse": true
+      "status": "PASS_PROBE_INTEGRATED_AND_GENERATED",
+      "evidence": "evidence/p3-named-error-acceptance-20260912.json"
     }
-  },
-  "independent_retests": {
-    "status": "PENDING_FINALD_ACCEPTANCE",
-    "cases": [
-      "T01",
-      "T04",
-      "T10"
-    ]
-  },
-  "negative_suite": {
-    "status": "PENDING_FINALD_ACCEPTANCE",
-    "suite": "v2",
-    "prompt": "../generated/normal-chat-finald-20260912-negative-suite/prompt.txt",
-    "expectation": "../generated/normal-chat-finald-20260912-negative-suite/expectation.json",
-    "change": "N1 (If-inside-If + side effect + loop exit) moved to positive case P3-2; new N1 = 3-level nesting exiting the outer loop"
-  },
-  "p3_positive_cases": {
-    "status": "PENDING_FINALD_ACCEPTANCE",
-    "definition": "../generated/acceptance-p3-20260912/cases.json",
-    "bodies": "catalog/generated/normal-chat-finald-20260912-p31..p36/"
   },
   "still_unconfirmed": [
     "list index beyond 1 / out of range / index from variable",
-    "3+ nesting levels, exiting an outer loop from an inner loop, LOOP WHILE nesting",
+    "3+ nesting levels, exiting an outer loop from an inner loop, LOOP WHILE nesting (negative N1 stays fail-closed)",
     "case-insensitive extension comparison",
     "PowerPoint SaveAs collision, locked targets",
     "custom date tokens other than yyyy-MM-dd; edit path of an existing convert action",
-    "block-level ON BLOCK ERROR with the built-in code FileNotFoundError",
-    "T09 other URLs/elements/browsers"
+    "block-level ON BLOCK ERROR with the built-in code FileNotFoundError; user-defined FileNotFound name still unmatched",
+    "T09 other URLs/elements/browsers; DataTable column-name access in a row loop (negative N2)"
   ],
-  "result": "Version 79245787: P3-1..P3-6 measured and integrated; knowledge precheck PASS; T01-T10, independent retests, negative suite v2 and P3 positive cases are not yet accepted on this version (bodies and PAD flows prepared)."
+  "browser_note": "Google Chrome (Claude in Chrome extension) for every chat; each case is a fresh normal M365 Copilot chat with the full instruction body pasted (SHA-256 verified in the composer) and the same-version bundle + agent-instructions.txt attached (T10: bundle + T10 context bundle 2f77e59f...). Think Deeper selected. Fixed expectations were never sent.",
+  "pad_note": "20 dedicated empty flows (RobinKnowledge*FinalD2_20260912, created after a PAD restart; T03 attempt 2 on T03FinalD2b); unmodified paste from file, save, recopy (Ctrl+A/C for the 23-row P3-2 flow), two runs per case; protected outputs moved aside and restored; user Edge/Office windows untouched.",
+  "result": "Version 79245787 (finald): knowledge precheck, T01-T10, independent T01/T04/T10, negative suite v2 and the P3-1..P3-6 positive generations are all accepted on this same version."
 }

@@ -1,0 +1,37 @@
+以下は、合成Excelを編集可能で開き、B2を書き換えて別名保存し、Excelを閉じる4アクションのフロー案です。各アクションと同じ組合せは、PAD 2.71.115.26224、日本語UI、Power Fx OFFで採取、再貼り付け、2回実行、成果物照合まで確認されています。ただし、今回指定された保存名での実行自体は未確認です。
+
+前提・対象範囲・期待結果
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\excel-catalog.xlsx
+入力の開き方: 表示あり、編集可能、ReadOnly: False
+処理: アクティブなワークシートのB2へテキスト値 T05-Changed を書き込み
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\p3-saveas-case-20260912.xlsx
+保存形式: Open XML Workbook、.xlsx
+Excelインスタンス: ExcelInstance
+成功条件: 出力ブックのB2が T05-Changed であり、処理終了後にExcelプロセスが残っていないこと
+入力保護: 実測では、別名保存後も元の入力ブックのSHA-256は変化しませんでした。
+同名ファイルが存在する場合
+
+実測では、Excel.SaveExcel.SaveAs は保存先に同名ファイルがあっても確認画面を出さずに上書きしました。RobinのSaveAs行には、上書き可否を指定する独立した引数はありません。2回目の実行でも正常終了し、出力ファイルの更新時刻とB2の内容が更新されました。
+
+したがって、再実行前に既存出力を残す必要がある場合は、エクスプローラーなどで p3-saveas-case-20260912.xlsx を別名へ変更するか、別フォルダーへ退避してください。退避せずに再実行すると、既存出力は無警告で置き換わることを期待結果とします。
+
+PADでの設定と確認
+
+貼り付け先は対象サブフローの空の領域です。既存アクションを置換する場合は、置換対象をこの4アクションだけに限定してください。入力変数やUI要素の事前作成は不要で、最初のアクションがExcelインスタンスを生成します。
+
+貼り付け後、次を確認してください。
+
+アクション数が4で、順序が「Excel起動」「セル書き込み」「別名保存」「Excel終了」になっている。
+ExcelInstanceがExcelインスタンス型として生成され、後続3アクションが同じインスタンスを参照している。
+書き込み先が列B、行2で、値が文字列 T05-Changed になっている。
+起動アクションがReadOnly: Falseになっている。
+保存形式がOpenXmlWorkbookで、保存先の拡張子が.xlsxになっている。
+デザイナーに赤いエラー表示がない。
+保存先ファイルをExcelなど別プロセスで開いたままにしない。この競合状態の挙動は添付ナレッジでは未確認です。
+
+実行後は出力ブックを開いてB2を照合してください。再実行試験を行う場合は、最初の出力を退避してから実行し、新しい出力のB2を再度確認します。ファイルの存在だけではなく、セル値とExcelプロセスの終了まで確認してください。
+
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T05-Changed''' Column: $'''B''' Row: 2
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\p3-saveas-case-20260912.xlsx'''
+Excel.CloseExcel.Close Instance: ExcelInstance

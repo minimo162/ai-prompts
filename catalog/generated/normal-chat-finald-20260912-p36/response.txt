@@ -1,0 +1,47 @@
+以下は、添付ナレッジの実測済み原文をそのまま使用したフロー案です。対象は合成された欠損ファイルの読取りだけで、書込み、送信、削除、完了マーカーは含めません。
+
+前提・対象範囲
+環境: PAD 2.71.115.26224、日本語UI、Power Fx OFF。
+入力: 存在しない合成ファイル C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t08-missing-20260910.txt
+読取り方式: UTF-8。
+成功条件:
+読取りアクション自身の組込みエラーコード FileNotFoundError に一致する。
+テキスト変数 NewVar に named が設定される。
+フローが続行される。
+最後に LastError が取得され、その内容に「ファイルが見つかりません」が含まれる。
+ErrorHandled と ErrorHandledDefault は設定されない。
+FileContents は読取り成功時の出力変数ですが、今回は意図的に読取りが失敗するため、後続処理では参照しません。
+
+この組合せは、元フローで2回実行され、さらに別フローへ再貼付けして同じ結果が確認されています。根拠原文は catalog/evidence/p3-named-error-probe-20260912.robin、結果証拠は catalog/evidence/p3-named-error-acceptance-20260912.json です。
+
+エラールールの違い
+ON ERROR FileNotFoundError は、「ファイルからテキストを読み取る」アクション自身が持つ組込みエラーコードに対するアクション単位ルールです。
+ON BLOCK ERROR FileNotFound IsUserDefinedErrorCode: True の FileNotFound は利用者定義のエラー名です。欠損ファイルから発生する組込みの FileNotFoundError とは別物であり、今回のエラーには一致しません。
+引数なしの ON BLOCK ERROR はブロックの既定ルールですが、今回のエラーは内側のアクション単位ルールで処理されるため発火しません。
+実測では NewVar=named と LastError=ファイル…が見つかりません が確認され、ブロック側の ErrorHandled と ErrorHandledDefault は作成されませんでした。利用者定義名による一致としては扱いません。
+PADでの貼り付けと確認
+
+対象サブフローは Main、置換範囲はサブフロー内の全アクションです。貼り付け後、次を確認してください。
+
+デザイナーにエラーが表示されていないこと。
+読取りアクション内に ON ERROR FileNotFoundError が入り、その内側に NewVar = named があること。
+アクション単位ルールが「フロー実行を続行する」の設定になっていること。
+ブロック側の利用者定義ルール、ブロック既定ルール、読取りアクション側ルールの入れ子と各 END が崩れていないこと。
+実行後、変数ペインで NewVar がテキスト型の named、LastError がエラー情報になっていること。
+ErrorHandled と ErrorHandledDefault が変数ペインに作成されていないこと。
+再実行前にも対象ファイルが存在しないこと。存在すると意図したエラー経路を検証できません。
+
+ERROR => LastError Reset: True は、実測済みの「最後のエラーを取得」で、取得後に最後のエラーを消去する設定です。欠損ファイルとの組合せでも、クリーンな2回の実行でエラー内容の取得が確認されています。
+
+BLOCK
+ON BLOCK ERROR FileNotFound IsUserDefinedErrorCode: True
+    SET ErrorHandled TO $'''true'''
+ON BLOCK ERROR
+    SET ErrorHandledDefault TO $'''true'''
+END
+    File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+    ON ERROR FileNotFoundError
+        SET NewVar TO $'''named'''
+    END
+END
+ERROR => LastError Reset: True

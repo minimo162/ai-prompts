@@ -1,0 +1,13 @@
+{
+  "source_or_expectation_changed": false,
+  "error": "Not ready",
+  "run2_request_file_exists": false,
+  "next_action": "reopen saved idle flow and recopy before retrying run2",
+  "recorded_at": "2026-09-12T08:16:19.4148628Z",
+  "stop_button_enabled": false,
+  "errors": 0,
+  "flow": "RobinKnowledgeFolderCreateReuse_20260912",
+  "start_enabled": false,
+  "observed_status": "ready",
+  "status": "NOT_RUN_PREPARATION_FAILED"
+}

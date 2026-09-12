@@ -1,0 +1,78 @@
+添付ナレッジ内の実測済み23アクション構成を、そのまま貼り付けられる形で提示します。入れ子のIf、UTF-8上書き保存、EXIT LOOPの作用範囲まで、別フローへの再貼り付けと2回の実行で確認された原文です。
+
+1. 前提・対象範囲
+目的: CatalogListの各項目をFor eachで確認し、外側IfでCatalogItem、内側IfでSecondItemを判定します。
+入力: CatalogItem、SecondItem、ThirdItemの3つの合成テキスト。
+出力: SecondItem一致時、その文字列を指定ファイルへUTF-8で上書き保存します。
+保存先: C:\Users\yuuki\ai-prompts\catalog\evidence\p3-nested-if-output-20260912.txt
+上書き: 許可。File.IfFileExists.Overwriteを使用します。
+末尾改行: 追加しません。AppendNewLine: Falseです。
+UI要素／アプリインスタンス: 不要です。
+環境記録: PAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データによる専用フローです。
+事前条件: 保存先の親フォルダーが存在し、書き込み可能であることを確認してください。既存の同名ファイルは上書きされます。
+2. 変数と期待結果
+
+変数はRobin内で作成・初期化されるため、PADの入力変数として事前作成する必要はありません。
+
+CatalogList: リスト
+CurrentItem: For eachの現在項目、テキスト
+OuterCount: 訪問した項目数、数値
+InnerNo: 外側IfでCatalogItemに一致した回数、数値
+InnerYes: 内側IfでSecondItemに一致した回数、数値
+LastSeen: 最後に記録した項目、テキスト
+
+実測された期待結果は、OuterCount=2、InnerNo=1、InnerYes=1、LastSeen=SecondItemです。出力ファイルの内容はSecondItemで、3件目のThirdItemは訪問されません。内側IfにあるEXIT LOOPは、それを囲む最も近いループであるFor eachを抜けます。
+
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+置換範囲: 空のMainサブフロー全体、または選択した既存アクション範囲
+
+Variables.CreateNewList List=> CatalogList
+Variables.AddItemToList Item: $'''CatalogItem''' List: CatalogList
+Variables.AddItemToList Item: $'''SecondItem''' List: CatalogList
+Variables.AddItemToList Item: $'''ThirdItem''' List: CatalogList
+SET OuterCount TO 0
+SET InnerYes TO 0
+SET InnerNo TO 0
+SET LastSeen TO $'''none'''
+LOOP FOREACH CurrentItem IN CatalogList
+    Variables.IncreaseVariable Value: OuterCount IncrementValue: 1
+    IF CurrentItem = $'''CatalogItem''' THEN
+        Variables.IncreaseVariable Value: InnerNo IncrementValue: 1
+    ELSE
+        IF CurrentItem = $'''SecondItem''' THEN
+            Variables.IncreaseVariable Value: InnerYes IncrementValue: 1
+            SET LastSeen TO CurrentItem
+            File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\p3-nested-if-output-20260912.txt''' TextToWrite: CurrentItem AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+            EXIT LOOP
+        ELSE
+            SET LastSeen TO $'''third'''
+        END
+    END
+END
+
+4. PADデザイナーでの確認
+
+貼り付け後、次を確認してください。
+
+アクション数が23件であること。PADはELSEと各ENDも1アクションとして数えます。
+外側のFor eachに対応する最後のENDが1つあること。
+外側Ifと内側Ifに、それぞれ対応するENDがあること。
+EXIT LOOPが内側Ifの一致側にあり、ファイル書き込みより後にあること。
+OuterCount、InnerNo、InnerYesが数値として初期化されていること。
+CatalogListがリスト、CurrentItemとLastSeenがテキストとして扱われていること。
+デザイナーに赤いエラー表示がなく、保存できること。
+5. 合成データでの実行確認
+既存の出力を残す必要がある場合は、実行前に別名で退避します。
+フローを複製し、複製側で実行します。
+実行後の変数を確認します。
+OuterCount = 2
+InnerNo = 1
+InnerYes = 1
+LastSeen = SecondItem
+CurrentItem = SecondItem
+出力ファイルをテキストエディターで開き、内容が余計な改行なしのSecondItemであることを確認します。
+もう一度実行し、同じ結果になり、既存ファイルが同じ内容で上書きされることを確認します。
+
+根拠原文はcatalog/evidence/p3-nested-if-exit-recopy-20260912.robin、実行・別フロー再利用の証拠はcatalog/evidence/p3-nested-control-acceptance-20260912.jsonです。添付のPAD-Robin-Knowledge-Bundleでは、元フローと別フローの双方で2回実行し、変数値と出力内容を照合済みと記録されています。

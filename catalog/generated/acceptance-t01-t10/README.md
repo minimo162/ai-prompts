@@ -1,18 +1,34 @@
 # 通常M365 Copilotチャット受入試験 T01〜T10（継続中）
 
-## 作業版（2026-09-12、finald-20260912、P3統合・同一版受入は未実施）
+## 現行最終版（2026-09-12、finald-20260912）
 
-指示文 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`（不変）／bundle `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`（マニフェスト `copilot/knowledge-bundle-manifest-20260912d.json`）。直前版 finalc `f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089` との差分は、P3-1〜P3-6の実測結果（リスト添字1、If内If／入れ子ループとEXIT LOOP／NEXT LOOPの作用範囲、`.TXT`／`.txt.bak`／親フォルダー名／サブフォルダー境界、Excel／Word SaveAsの無警告上書き、カスタム日付書式 `yyyy-MM-dd`、アクション単位の名前付きエラー `ON ERROR FileNotFoundError`）を7原本へ統合したことです。各probeは専用合成フローで2回実行し、リスト・入れ子・日付・エラーは別空フローへの再利用まで確認済み（`catalog/evidence/p3-*-acceptance-20260912.json`）。
+指示文 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`（不変）／bundle `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`（マニフェスト `copilot/knowledge-bundle-manifest-20260912d.json`）を同一版として固定しました。直前版 finalc `f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089` との差分は、P3-1〜P3-6の実測結果（リスト添字1、If内If／入れ子ループとEXIT LOOP／NEXT LOOPの作用範囲、`.TXT`／`.txt.bak`／親フォルダー名／サブフォルダー境界、Excel／Word SaveAsの無警告上書き、カスタム日付書式 `yyyy-MM-dd`、アクション単位の名前付きエラー `ON ERROR FileNotFoundError`）を7原本へ統合したことです（各probeは専用合成フローで2回実行、`catalog/evidence/p3-*-acceptance-20260912.json`）。
 
-この版で完了しているのは知識precheck（`catalog/evidence/current-bundle-finald-precheck-20260912.json`、Robinなし）だけです。T01〜T10、独立再試験T01/T04/T10、負例v2（N1をIf内If＋副作用＋脱出から3段入れ子・外側脱出へ差し替え。旧N1は正例P3-2へ）、P3正例P3-1〜P3-6（`catalog/generated/acceptance-p3-20260912/cases.json`）は、送信本文と専用PADフロー（`RobinKnowledge*FinalD_20260912`）を用意した段階で**未送信・未受入**です。finalcの合格はこの版へ継承しません。状態の正本は `catalog/evidence/current-package-status-20260912-finald.json`（partial）と `issue5-completion-audit-20260912-finald.json`。
+受入はすべて、通常のM365 Copilotチャット（Google Chrome、Claude in Chrome拡張で操作、モデル表示 Think Deeper）で新規会話ごとに指示全文を本文へ入力し（送信前にSHA-256で全文一致を確認）、同版bundleと`agent-instructions.txt`（T10はbundleとT10文脈結合版 `2f77e59f…`）を実添付して行いました。生成Robinは無修正で専用PADフロー（`RobinKnowledge*FinalD2_20260912`）へ貼付け・保存・再コピーし、2回実行して事前固定の期待値と照合しました。期待値・正解コードはCopilotへ渡していません。finalcの合格はこの版へ継承せず、全件をこの版で取り直しています。
 
-| 区分 | finald判定 | 証跡 |
-| --- | --- | --- |
-| 知識precheck | PASS_REFERENCE_ONLY | `catalog/generated/normal-chat-finald-20260912-precheck/` |
-| T01〜T10 | NOT_RUN（本文・フロー準備済み） | `catalog/generated/normal-chat-finald-20260912-t01`〜`t10/` |
-| 独立再試験 T01/T04/T10 | PENDING | 同上 `-independent/` |
-| 負例 v2 N1〜N3 | PENDING（期待を事前固定） | `catalog/generated/normal-chat-finald-20260912-negative-suite/expectation.json` |
-| P3正例 P3-1〜P3-6 | PENDING（期待を事前固定） | `catalog/generated/normal-chat-finald-20260912-p31`〜`p36/expectation.json` |
+| 区分 | finald判定 | 生成回数 | 証跡 |
+| --- | --- | --- | --- |
+| 知識precheck | PASS_REFERENCE_ONLY（Robinなし。P3新項目4点を正しく参照） | 1 | `catalog/evidence/current-bundle-finald-precheck-20260912.json` |
+| T01 | PASS（出力90 bytes SHA `2b030f2d…`、入力不変） | 1 | `catalog/evidence/t01-finald-20260912-live-acceptance-20260912.json` |
+| T02 | PASS（ヘッダー＋Status=対象2行、入力不変） | 1 | `catalog/evidence/t02-finald-20260912-live-acceptance-20260912.json` |
+| T03 | PASS（2回目生成。1回目は7行の最小形でカウンターなし＝固定期待を検証不能として `t03/attempt1/` に記録。2回目は13行、TxtCount=2／OtherCount=2、入力不変。フロー `T03FinalD2b`） | 2 | `catalog/evidence/t03-finald-20260912-live-acceptance-20260912.json` |
+| T04 | PASS（3行3列、入力SHA不変） | 1 | `catalog/evidence/t04-finald-20260912-live-acceptance-20260912.json` |
+| T05 | PASS（B2=T05-Changed、他不変、入力不変） | 1 | `catalog/evidence/t05-finald-20260912-live-acceptance-20260912.json` |
+| T06 | PASS（OfficeCatalog→T06Replaced、入力不変） | 1 | `catalog/evidence/t06-finald-20260912-live-acceptance-20260912.json` |
+| T07 | PASS（PAGE_TOKEN_A2あり／A1なし、入力不変） | 1 | `catalog/evidence/t07-finald-20260912-live-acceptance-20260912.json` |
+| T08 | PASS（期待エラー：生成12行はアクション単位 `ON ERROR FileNotFoundError` 形。NewVar=named、LastError=ファイルが見つかりません、既定ハンドラー非発火、後続なし。固定期待「エラー経路を通り記録、後続なし」を満たす。ブロック側利用者定義名の一致は未確認のまま） | 1 | `catalog/evidence/t08-finald-20260912-live-acceptance-20260912.json` |
+| T09 | PASS（要素取り込み後の無修正貼付け、`WAIT 1`、2回実行で `T09-clicked`、ブラウザー終了） | 1 | `catalog/evidence/t09-finald-20260912-live-acceptance-20260912.json` |
+| T10 | PASS（Excel A1=T10-Changed、Word/PowerPointは`CopilotOffice 246`保持） | 1 | `catalog/evidence/t10-finald-20260912-live-acceptance-20260912.json` |
+| 独立再試験 T01/T04/T10 | PASS（別チャット・別PADフロー） | 各1 | `catalog/evidence/t01-finald-20260912-independent-acceptance-20260912.json`、`t04-…`、`t10-…` |
+| 負例 v2 N1〜N3 | PASS_NEGATIVE_FAIL_CLOSED（コードフェンス0、Robin命令0。N1は3段入れ子・外側脱出へ差し替え、旧N1は正例P3-2へ） | 1 | `catalog/evidence/negative-suite-finald-20260912-acceptance-20260912.json` |
+| P3-1 リスト添字1 | PASS（4行、実測probeと同一。NewVar=SecondItem） | 1 | `catalog/evidence/p31-finald-20260912-positive-acceptance-20260912.json` |
+| P3-2 If内If＋EXIT LOOP | PASS（23行、実測原文と同一。OuterCount=2／InnerNo=1／InnerYes=1／LastSeen=SecondItem、出力 SecondItem、3件目未訪問） | 1 | `catalog/evidence/p32-finald-20260912-positive-acceptance-20260912.json` |
+| P3-3 拡張子境界 | PASS（13行、`IncludeSubfolders: True`、TxtCount=3／OtherCount=2、`.TXT`と`.txt.bak`はElse、入力5件不変） | 1 | `catalog/evidence/p33-finald-20260912-positive-acceptance-20260912.json` |
+| P3-4 SaveAs衝突 | PASS（4行、回答が無警告上書き（実測）と退避手順を明記。2回目は既存出力ありで無警告上書き、B2=T05-Changed、入力不変） | 1 | `catalog/evidence/p34-finald-20260912-positive-acceptance-20260912.json` |
+| P3-5 日時書式 | PASS（2行、`FromCustomDateTime yyyy-MM-dd`、FormattedDateTime2=2026-09-12） | 1 | `catalog/evidence/p35-finald-20260912-positive-acceptance-20260912.json` |
+| P3-6 名前付きエラー | PASS（12行、アクション単位 `ON ERROR FileNotFoundError`。NewVar=named、LastError取得、ブロック規則非発火） | 1 | `catalog/evidence/p36-finald-20260912-positive-acceptance-20260912.json` |
+
+状態の正本は `catalog/evidence/current-package-status-20260912-finald.json`（complete_live_acceptance_finald_20260912）と `catalog/evidence/issue5-completion-audit-20260912-finald.json` です。教材外の未確認境界（範囲外添字、3段以上の入れ子と外側脱出、大文字小文字無視の比較、PowerPointのSaveAs衝突、他の書式トークン、ブロック側 `FileNotFoundError`、T09の別URL等）は残ります。以下の節は直前版以前の履歴です。
 
 ## 直前の受入済み版（2026-09-12、finalc-20260912）
 
