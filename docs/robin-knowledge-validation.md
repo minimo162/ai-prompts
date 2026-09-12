@@ -8,7 +8,9 @@
 
 候補指示とbundleを実添付した通常チャットの事前確認を送信し、回答原文・送信本文・実送信表示・DOMを同候補の`precheck/`へ保存した。会話は`https://m365.cloud.microsoft/chat/conversation/2958ed9b-50e9-41df-a745-b8fc71c8e59b`。送信表示に新WAIT 1があり、旧WAIT 500はない。編集欄末尾のU+200B/U+200Cはeditor-observationに記録し、表示本文と区別する。回答は見出しと引用表示を含むarticle.innerText（2,779文字）、preブロック0。これは事前確認回答の採取であり、T01〜T10等の新版生成・PAD受入はまだNOT_RUN。PADの既存専用フローはWindows操作APIで現在のウィンドウを確認できた。
 
-次はこの候補を変えず、新しい通常チャットで必要な生成受入を行う。A〜G不足も残る。候補・事前確認はローカル`.work`に保全した未昇格作業であり、finald監査のpartial判定は変わらない。
+続いてT01をThink Deeperの新規会話`70595971-6018-4517-b4d2-de3e57e4abf5`で生成した。実添付2件、指示全文と固定依頼、送信前期待SHA・入力SHA、回答article原文、pre.textContentの3行Robinを`.work/finale-20260912/t01/`へ保存。コードの手修正・末尾改行追加なし。状態は`GENERATED_PAD_NOT_RUN`であり、受入PASSではない。
+
+PADでは新しいフローの作成ダイアログを開けたが、skyのtype_textで親ウィンドウへフォーカスが戻り、名前が入力されなかった。入力欄を明示クリックして再試行しても空欄のまま、accessibilityはnull。既存フローへ上書きして代替せず停止した。専用空フロー`RobinKnowledgeT01FinalE_20260912`の作成が現在の操作上の再開条件。次は保存生成Robinを無修正で貼付け、再コピー、2回実行、固定期待照合を行う。A〜G不足も残る。候補・生成回答はローカル`.work`に保全した未昇格作業であり、finald監査のpartial判定は変わらない。
 
 **判定: partial／PR提出準備未完了／未push。** 固定finaldの生成受入記録は維持する。T09指示と教材の待機値が矛盾し、A〜Gの全要件について必要な別空フロー再利用の追跡もそろわず、`complete_live_acceptance_finald_20260912` を親Issue全体の完了とは扱えない。これは保存済み成果の監査結果であり、T01〜T10を未実施へ戻す判定ではない。
 
