@@ -4,6 +4,12 @@
 
 ### 監査後の継続: finale候補（未受入・未昇格）
 
+**T03継続結果:** 同じ候補指示6ad6f742…とbundleを実添付したThink Deeper会話`364cfa95-1691-4a4d-ac50-b5002886aff2`で、初回生成から13行の計数付きRobinを取得した。元依頼・固定期待は変更せず、入力4ファイルのSHA／サイズを送信前に記録。無修正貼付け・再コピー・2回実行・保存後再オープンの再コピーを確認し、`.work/finale-20260912/t03/acceptance.json`をPASS_FINALE_T03とした。
+
+両runでTxtCount=2／OtherCount=2、TxtSeenはt03-alpha.txt、OtherSeenはt03-gamma.md、FileContents表示は`alpha 日本語  `、4入力不変、runningからready/errors0への遷移を確認した。FileContentsはUIAプレビューの表示で末尾2空白も原記録に保持し、バイト完全一致の出力ファイルとは扱わない。Filesプレビューは省略表示であり、その文字列だけから全件処理を推定しない。生成SHA63fe35ec…、再オープン再コピーとの差はCRLFのみ。旧finaldのT03初回不成立は引き続き保持する。
+
+新版個別受入済みはT01〜T03。T04以降・独立・P3・負例・A〜G不足は残り、全体のpartial判定は変わらない。
+
 **14:27継続結果:** T01とT02をそれぞれ閉じてコンソールから開き直し、再コピーが生成原文とCRLFだけの差で一致した。保存永続化の不足は両件で解消。個別結果は`.work/finale-20260912/t01/acceptance.json`（PASS_FINALE_T01）と`t02/acceptance.json`（PASS_FINALE_T02）。T02会話は`242e34f0-c6ae-489d-b268-956a056c004e`、指示候補ハッシュは6ad6f742…で不変。
 
 T02は最初の実行後に`PAD_SELECTOR: status ambiguous.`で観測スクリプトが停止し、その試行をPASSに数えず`pad-run1-observation-failure.json`と出力を保持した。生成・期待値を変えず、後続run2/run3の2回を受入対象とした。run3でも一時的な観測エラーがあったが、実行を再要求せず同じフローの観測を継続してready/errors0を取得した。両回とも実行要求後の出力更新、73 bytes・固定SHA8f0748cc…一致、入力不変、CSV解析後のヘッダー＋対象2行（3列、引用フィールドを含む）一致を確認。既存出力の実バイトも試験前と同じ。全件初回成功とはしない。
