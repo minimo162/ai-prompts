@@ -4,6 +4,14 @@
 
 ### 監査後の継続: finale候補（未受入・未昇格）
 
+**T09継続結果:** 同じ候補6ad6f742…の指示とbundleを実添付したThink Deeper会話`https://m365.cloud.microsoft/chat/conversation/73f69d54-219a-4dda-bf03-cebcbd4c0447`から初回の6行Robin（WAIT 1）を無修正保存。実測ControlRepository付き原文SHA d8913da9…を専用空フローへ貼付け、取り込み用6アクションを削除して0アクション・3要素（親ノード2件を別計数）を確認した後、生成6行を貼付けた。要素登録不要とはしない。ローカル試験サーバーが停止していたため同じ既存fixtureを127.0.0.1:8765で再開。fixture内容は不変。
+
+初回実行要求後、変数一覧取得がnullで観測不成立となった。準備完了/errors0と空の変数ペインを再観測し、その試行はPASSに数えずpad-run1-observation-failure.jsonへ保持。新しいGETがログにないことだけから未実行とは断定しない（ClearCache=Falseの経路）。フローを閉じて開き直すとAttributeValue／Browserが表示され、再コピーは保存前とバイト一致した。指示・生成Robin・要素を修正せず復帰した。
+
+後続run2（06:48:58Z）／run3（06:50:02Z）は両回AttributeValue=T09-clicked、running観測からready/errors0、約29秒で90秒以内、fixture SHA53a8bdb3…不変、追加Edgeウィンドウ残存なしを確認した。生成6行の最終CloseWebBrowserまで終了し、既存ウィンドウは保持。受入記録は`.work/finale-20260912/t09/acceptance.json`（PASS_FINALE_T09）。ControlRepositoryを含む再コピーと生成先頭6行を分離照合した。
+
+新版個別受入済みはT01〜T09。T10・独立T01/T04/T10・P3正例・負例v2・A〜G限定追跡不足・最終統合検査が残り、全体partial／PR未準備／未pushを維持。今回の実機受入を非ライブ全Suite・DOM NOT_RUN・GitHub CIへ付け替えない。
+
 **T08継続結果:** 同版指示6ad6f742…とbundleを実添付したThink Deeper会話`https://m365.cloud.microsoft/chat/conversation/22fc6163-7682-4e88-a98a-5baa26894636`の初回12行Robinを無修正保存し、4アクションとして専用空フローに貼付けた。06:28:33Z／06:29:16Zの2runともNewVar=named、LastErrorに欠損入力のフルパスと「が見つかりません」、ErrorHandled／ErrorHandledDefault／FileContentsは値プレビューなしを確認。アクション単位ON ERROR FileNotFoundErrorの期待エラー経路であり、ブロック単位の独自FileNotFoundが一致したとは扱わない。
 
 両回とも入力は不在のまま、catalog/fixturesとcatalog/evidenceの1,064ファイルの追加・削除・ハッシュ変更なし。生成と再コピーには読取り・エラー処理・最終エラー取得だけがあり、後続書込み・完了マーカーなし。全マシンの副作用走査を行ったとはしない。実行中のStopFlowButton無効による一時観測エラーを保持し、同じ実行の観測継続でready/errors0を取得。手修正・実行再要求・旧PASS継承なし。
