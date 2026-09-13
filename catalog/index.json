@@ -5771,9 +5771,9 @@
         "LanguageConstructs.CallFunction",
         "Display.ShowMessageDialog"
       ],
-      "scope": "Synthetic P3Worker creation and Main CALL P3Worker; timed message returned ButtonPressed=OK in two runs. Current bundle unchanged.",
+      "scope": "Synthetic P3Worker creation and Main CALL P3Worker; timed message returned ButtonPressed=OK in two runs on the original probe flow. Separate Main/P3Worker reuse remains an independent acceptance step; current bundle unchanged.",
       "current_package_acceptance": false,
-      "evidence": "evidence/p3-subflow-probe-20260910.json"
+      "evidence": "evidence/p3-subflow-probe-20260910.json; evidence/p3-subflow-reuse-observer-20260913.json"
     },
     {
       "id": "normal-chat-current-bundle-t08-error-handler-2026-09-11",

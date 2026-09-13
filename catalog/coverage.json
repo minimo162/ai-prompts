@@ -2550,10 +2550,10 @@
     {
       "id": "B-error-subflow",
       "missing": "エラー処理・サブフロー作成／呼出し",
-      "status": "PASS_PROBE_NAMED_ACTION_ERROR_BUNDLED_FINALD_20260912_GENERATED",
-      "reason": "新規専用probeでBLOCK／ON BLOCK ERROR／THROW ERROR／END構造、欠損ファイル子アクション、P3Worker作成＋MainからのCALLをコピー・保存・実行した。既定のすべてのエラーへErrorHandledDefault=true、最後のエラーを取得（LastError、Reset=True）も測定して新bundleへ統合した。名前付きFileNotFoundルールの一致条件と後続処理の一般化は未確認。新bundleの通常チャット／PAD受入は未実行。 最終版32aea456でT01〜T10・独立再試験・負例を再受入。 最終版 f42f5acf で再受入。 2026-09-12 P3: アクション単位 ON ERROR FileNotFoundError が一致しNewVar=namedのみ設定（既定ルール非発火）。ブロック側利用者定義名FileNotFoundは不一致のまま。 finald同一版の通常チャット生成（P3正例）→無修正貼付け→2回実行でPASS。",
-      "evidence": "evidence/p3-error-block-probe-20260910.json; evidence/p3-error-trigger-probe-20260910.json; evidence/p3-subflow-probe-20260910.json; evidence/p3-error-custom-handler-20260911.json; evidence/p3-error-custom-handler-flow-20260911.robin; evidence/p3-error-default-handler-20260911.json; evidence/p3-error-default-handler-flow-20260911.robin; evidence/p3-error-handler-measured-20260911.json; evidence/p3-get-last-error-standalone-20260911-reset.robin; evidence/p3-last-error-handler-run2-20260911.json; evidence/p3-last-error-handler-run3-20260911.json; evidence/p3-named-error-acceptance-20260912.json",
-      "resume": "教材外の未確認境界のみ（任意）"
+      "status": "PARTIAL_BUNDLED_FINALD_REUSE_UNRUN_20260913",
+      "reason": "新規専用probeでBLOCK／ON BLOCK ERROR／THROW ERROR／END構造、欠損ファイル子アクション、P3Worker作成＋MainからのCALLをコピー・保存・実行した。既定のすべてのエラーへErrorHandledDefault=true、最後のエラーを取得（LastError、Reset=True）も測定して新bundleへ統合した。名前付きFileNotFoundルールの一致条件と後続処理の一般化は未確認。finald同一版の通常チャット生成（P3正例）→無修正貼付け→2回実行でPASSしたが、これは元の採取probeであり、別空フローへ保存原文を再配置したBの2回Runではない。2026-09-13に固定Main/P3Workerだけを許可する観測器を補完したが、現ホストにPAD.Designer/CUAネイティブ対象がなく、別空フローのRun要求・ButtonPressed=OK・保存後再コピーは未実行。",
+      "evidence": "evidence/p3-error-block-probe-20260910.json; evidence/p3-error-trigger-probe-20260910.json; evidence/p3-subflow-probe-20260910.json; evidence/p3-subflow-reuse-observer-20260913.json; evidence/p3-error-custom-handler-20260911.json; evidence/p3-error-custom-handler-flow-20260911.robin; evidence/p3-error-default-handler-20260911.json; evidence/p3-error-default-handler-flow-20260911.robin; evidence/p3-error-handler-measured-20260911.json; evidence/p3-get-last-error-standalone-20260911-reset.robin; evidence/p3-last-error-handler-run2-20260911.json; evidence/p3-last-error-handler-run3-20260911.json; evidence/p3-named-error-acceptance-20260912.json",
+      "resume": "対象PAD.Designerを一意に取得後、保存原文無修正でMainからRun 1/2を行い、ButtonPressed=OK、保存→再オープン→Main/P3Worker再コピーを別証跡へ保存する"
     },
     {
       "id": "C-datatable",

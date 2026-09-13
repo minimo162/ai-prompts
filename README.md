@@ -27,7 +27,7 @@ If/Else/ENDとIf/Else-if/ENDの構造は別probeで実行まで確認してい�
 
 P3ではファイル存在確認の`IF ... THEN`／`END`も別probeでtrue条件を2回、欠損パス条件を1回実行し、欠損パスのrawも取得しました。branch bodyのside effectと各probeの現行bundle統合は未確認です。データ反復等も未確認です。
 
-P3追補の成功・失敗境界は新bundleへ記載済みです。既定エラーハンドラーは2回成功、DataTable作成・行追加・セル更新・行反復、ファイル存在／作成／移動／名前変更、Else／Else-if、EXIT／NEXT、サブフロー、Excel範囲読取り・行反復を別probeで確認しました。リスト取得、カスタム日時書式、名前付きカスタムエラー、T09通し実行は未確認です。T09の90秒再probeと別空フローUI要素登録境界は停止証跡へ分離しました。各probeの原文・実行値・再受入待ち判定は `catalog/index.json` と `catalog/coverage.json` を参照してください。
+P3追補の成功・失敗境界は新bundleへ記載済みです。既定エラーハンドラーは2回成功、DataTable作成・行追加・セル更新・行反復、ファイル存在／作成／移動／名前変更、Else／Else-if、EXIT／NEXT、元probeのサブフロー、Excel範囲読取り・行反復を別probeで確認しました。Main/P3Worker保存原文の別空フロー再利用は、観測器補完までで実行要求・2run・保存後再コピー未実施です。リスト取得、カスタム日時書式、名前付きカスタムエラー、T09通し実行は未確認です。T09の90秒再probeと別空フローUI要素登録境界は停止証跡へ分離しました。各probeの原文・実行値・再受入待ち判定は `catalog/index.json` と `catalog/coverage.json` を参照してください。
 
 M365 Copilot内Agent Builderを利用先とする継続方針の訂正は [CODEX_CORRECTION_M365_AGENT_BUILDER.md](CODEX_CORRECTION_M365_AGENT_BUILDER.md) に記録しています。
 

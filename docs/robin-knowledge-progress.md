@@ -327,3 +327,11 @@ P3統合後は指示文SHA `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa
 T09は別空フロー`RobinKnowledgeT09Separate_20260911`を作成し、Final3 T09 Robinの6アクション貼付け・保存・再確認を実施した。UI要素ピッカーの実測ではEdgeのWindow/Paneまでしか列挙されず、`Input text 't09-input'`、`Button '実行'`、`Paragraph '未実行'`は登録できなかった。Designerエラー3件、Start無効、Run未開始を確認した。別のLaunchEdge単独フローは貼付け・保存・Run完了（Browser変数preview）まで確認したが、対象ページのWeb DOM要素やWebAutomation要求完了を示さず、T09通し成功へ拡張していない（`catalog/evidence/t09-separate-ui-registration-20260911.json`、`t09-edge-launch-paste-20260911.json`、`t09-edge-launch-run-20260911b.json`）。
 
 現状は`partial／OPEN`。新bundleのT01/T02は全文指示＋同版bundle、無修正Robin、PAD 2回実行、成果物照合までPASSした。残りはT03〜T10→独立T01/T04/T10→負例を同一版で再受入し、T09はEdge拡張/native-hostがWeb DOM要素を返す条件で無修正6アクションを2回通し実行すること。未確認のP3はリスト項目取得、カスタム日時書式、入れ子／branch side effect、名前付きカスタムエラー一致である。
+
+## 2026-09-13 Bサブフロー再利用の観測器補完
+
+Issue #5/#27の最新本文と指定コメント（`5650828099`／`5650826208`）を確認し、main `fef38bdb580fad55d1fa2ce837e5aa3007b9e4f1`から作業ブランチ `issue-5-b-subflow-reuse-20260913` を作成した。保護資料 `docs/agent-approach-comparison-2026-09-07.md` は開始時SHA `e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699` と照合し、`.work/finale-20260912/` は削除・上書きしていない。
+
+前回のB停止条件を再現確認した。`Get-AgentPadSnapshot`の既定契約が`SubflowTabControl`のMain 1個を要求し、`Run-Subflow-Reuse.ps1`の固定2サブフロー実行前に`PAD_SUBFLOW: exactly one Main subflow is required.`で準備拒否となる境界を特定した。既定契約は維持したまま、明示された`ExpectedSubflowNames @('Main','P3Worker')`だけを受理する`Get-AgentPadSubflowTabs`と、対象PID／タイトル／HWND、Main選択、Ready・エラー0、実行後running→idle、`ButtonPressed=OK`プレビュー、原文SHA不変を分離記録する`tools/Run-PadSubflowReuseLive.ps1`を追加した。未知の名前、重複、誤入口、未選択Main、実行後観測不成立はfail-closedとし、実行要求後に再Runしない。
+
+回帰確認として`tests/Test-Pad.ps1`は340件PASS（実PAD/UIA／クリップボード／フロー実行は未実施）。現ホストの`PAD.Designer`プロセスとCUAネイティブアプリは観測できず、BのMainからの2回実行・保存→閉じる→再オープン→両サブフロー再コピーはまだ開始していない。この限定停止とソース原文のSHAは`catalog/evidence/p3-subflow-reuse-observer-20260913.json`へ保存し、既存の`catalog/evidence/p3-subflow-probe-20260910.json`および`.work/finale-20260912/b-subflow-reuse/`の実行前失敗を上書きしない。IssueはOPEN／partialのまま、次の単一作業は対象PAD.Designerの一意なUIAウィンドウ取得後に同ヘルパーでRun 1を開始し、running→idleと`ButtonPressed=OK`を原証跡へ保存することとする。

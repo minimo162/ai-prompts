@@ -22,7 +22,7 @@
 
 （履歴）2026-09-11のP3統合版bundleの原本対応は [knowledge-bundle-manifest-20260911h.json](knowledge-bundle-manifest-20260911h.json) に固定しています。マニフェスト自体をナレッジへ添付する必要はありません。
 
-2026-09-11追補として、7原本へP3の実測根拠（真偽値・数値／日時演算、Else／Else-if／EXIT／NEXT、既定エラーハンドラー、PADで採取したGet last error、サブフロー、DataTable作成・行追加・セル更新・行反復、File.Exists／Folder.Create／Move／Rename、Excel範囲読取り・行反復、T09停止境界）を統合しました。失敗境界（カスタム日時書式、名前付きFileNotFoundルール、リスト取得、T09）は未確認として明記しています。最新bundle SHA-256は `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5` です。新bundleの指示全文＋同版bundleによる知識precheckはPASS_REFERENCE_ONLY、T01〜T10全件・独立再試験・負例は未完了です。
+2026-09-11追補として、7原本へP3の実測根拠（真偽値・数値／日時演算、Else／Else-if／EXIT／NEXT、既定エラーハンドラー、PADで採取したGet last error、元probeのサブフロー、DataTable作成・行追加・セル更新・行反復、File.Exists／Folder.Create／Move／Rename、Excel範囲読取り・行反復、T09停止境界）を統合しました。Main/P3Worker保存原文の別空フロー再利用は、観測器補完までで実行要求・2run・保存後再コピー未実施です。失敗境界（カスタム日時書式、名前付きFileNotFoundルール、リスト取得、T09）は未確認として明記しています。最新bundle SHA-256は `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5` です。新bundleの指示全文＋同版bundleによる知識precheckはPASS_REFERENCE_ONLY、T01〜T10全件・独立再試験・負例は未完了です。
 
 Final3固定版のbundle SHA-256は `2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7` です。新規通常M365 Copilot送信と実PADでT01〜T08/T10を同版受入し、T01/T04/T10は独立再試験も完了しました。T09はUI要素捕捉・6アクション貼付け・保存・再コピーまでで、実行時のUI要素未検出によりRun開始前にブロックされています。P3未確認項目を含めて `partial／OPEN` を維持します。PAD空フロー作成権限とUIA復旧の観測手順は [docs/pad-live-setup.md](../docs/pad-live-setup.md) にまとめています。
 

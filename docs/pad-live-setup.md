@@ -42,6 +42,20 @@ Issue #5 の合成データ受入で、PADの空フローを作成し、Designer
 
 Designerが一意に取得できた後だけ、次の既存ヘルパーを使う。
 
+### Main/P3Worker 別空フロー再利用の観測器
+
+通常の `Get-AgentPadSnapshot` は、業務フローの誤入口を避けるため既定で `Main` 1個だけを受理する。`Main/P3Worker` の専用再利用試験では、対象名を固定した `tools/Run-PadSubflowReuseLive.ps1` を使う。このヘルパーは、対象PID・タイトル・HWNDを完全一致で確認し、`Main` と `P3Worker` が各1個であること、Mainが選択されていること、実行前にReadyかつエラー0であることを要求する。別名、重複、未知のサブフロー、Main以外の入口は拒否する。原文Robinへの計測アクション追加や、単一サブフローガードの削除は行わない。
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools\Run-PadSubflowReuseLive.ps1 `
+  -TargetProcessId <観測したPAD.Designer PID> `
+  -FlowName '<画面で完全一致した専用フロー名>' `
+  -ExpectationPath '<保存したBのexpectation.json>' `
+  -EvidencePath '<新規run1.json>' -RunNumber 1
+```
+
+`run1-request.json`／`run1.json`（Run2も同様）は、Run要求前の準備失敗、実行要求後の実行失敗、観測失敗を別状態で保存する。Run要求後にrunningを捕捉できない場合も、未実行とみなして再Runしない。完了PASSは、running→idleの観測、エラー0、`ButtonPressed=OK` の変数プレビュー、実行前後の原文SHA不変を同時に満たす場合だけである。
+
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools\Paste-PadRobinLive.ps1 `
   -TargetProcessId <観測したPAD.Designer PID> `

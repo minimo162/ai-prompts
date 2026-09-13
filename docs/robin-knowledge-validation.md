@@ -164,7 +164,7 @@ main→対象コミットで指示文・知識7原本・bundle・manifest・T10�
 | A 文字列・数値・真偽値／減算 | catalog既存変数・text flows、boolean/subtract probe→01-Basics。`a-boolean-reuse-20260912/acceptance.json`と`a-subtract-reuse-20260912/acceptance.json`で別空フロー・各2run・再オープンを補完。T01はtext系を受入 | 今回はTrue／7を確認。旧参照JSONが各run1件だけである履歴は保全し、今回runを過去へ付け替えない |
 | A リスト・文字列加工・数値変換・日時 | 既存list/text/number flows、`text-substring-validation.json`、`datetime-current-date-validation.json`、P3添字1／date-format acceptance→01-Basics→T01/P3-1/P3-5 | 添字1・yyyy-MM-ddの別フローと2回runあり。任意の別添字／別書式へ拡張しない |
 | B If／Loop／エラー | `p3-nested-control-acceptance-20260912.json`／`p3-named-error-acceptance-20260912.json`→別フロー→02-Control→T03/T08/P3-2/P3-6 | この固定構造の追跡あり |
-| B サブフロー | `p3-subflow-probe-20260910.json`とworker／call原文、元フロー2run→02-Control | Main/P3Workerの保存原文を別空フローへ再配置して実行した証跡未特定。T08成功で代替不可 |
+| B サブフロー | `p3-subflow-probe-20260910.json`とworker／call原文、元フロー2run→02-Control。`p3-subflow-reuse-observer-20260913.json`で別空フロー観測器の拒否条件と補完ヘルパーを追跡 | Main/P3Workerの保存原文を別空フローへ再配置した実行要求・2run・ButtonPressed=OK・保存後再コピーは未実行。現ホストにPAD.Designer/CUAネイティブ対象なし。T08成功で代替不可 |
 | C DataTable | `p3-datatable-row-success-20260911.json`／cell-success／foreach-success、各raw・run→03-Files。T02/T04はCSV／フィルター受入 | 行追加／セル更新／行反復の別空フロー再利用証跡未特定。セル更新は確認できるが、セル値取出しを要求のセル参照と対応づける原証跡は未特定。列名による行ループの負例は任意範囲のまま |
 | C CSV | `csv-read-validation.json`、`filter-t02-roundtrip2-run*.json`→03-Files→T02/T04 | 論理行・引用符・日本語を含む固定範囲は確認 |
 | D ファイル | file-copy／text-write／T03-extension-branch／P3-file-boundaryの別フロー→03-Files→T01/T03/P3-3。フォルダー作成は`d-folder-create-reuse-20260912/acceptance.json`で補完 | `p3-file-exists`／`p3-file-move`／`p3-file-rename`各probeは原採取・元フロー実行あり。これらの保存原文の別空フロー再利用証跡は未特定 |
@@ -218,6 +218,12 @@ PR本文案:
 - 現作業版のP3追補統合結合bundle SHA-256は `e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644`。旧bundle `4282...`／`431c...` の生成・PAD結果は履歴であり、新bundleの受入には継承しない。
 - ナレッジ配布版は7つの `.txt`。指示欄と技術資料を分離し、合計9ファイル（READMEを含む）で20ファイル上限を超えない。
 - `catalog/coverage.json` は `catalog/index.json` と既存証拠を突合し、観測バリアント86件（既存51＋追加35件）と必須範囲A〜Gの16チェックを記録。P3追補のBoolean／減算／日時加算・減算／Else／Loop脱出・継続／ファイル操作／Excelシート／エラー骨格／サブフロー作成・呼出しを新bundleへ反映したが、現行packageの外部受入は未完了。左側一覧は `complete=false`、未観測の名称は推測していない。
+
+## 2026-09-13 B別空フロー再利用の再開境界
+
+Issue #5/#27の最新本文と指定コメントを確認した。`Get-AgentPadSnapshot`の既定Main単一ガードが、Main/P3Workerを含む別空フローの実行要求前に`PAD_SUBFLOW: exactly one Main subflow is required.`を返していたため、既定契約を変更せず、`ExpectedSubflowNames @('Main','P3Worker')`を明示した場合だけ固定2サブフローを受理する`Get-AgentPadSubflowTabs`と`tools/Run-PadSubflowReuseLive.ps1`を追加した。未知の名前・重複・誤入口・未選択Main・実行後の観測不成立は受理しない。
+
+現ホストでは`PAD.Designer`の対象PID/HWNDもCUAネイティブアプリも得られず、別空フローへの貼付け後のMain Run 1/2、`ButtonPressed=OK`、保存→閉じる→再オープン→両サブフロー再コピーは未実行である。これは対象発見段階の限定停止であり、PAD本体故障や手動操作必須の断定ではない。原文の現行SHAはcall `cb547e2b3f9a35d5baaf2c18ff7192b54c085cf2b68e33ac01864c233e4a3256`／worker `917929450097e7c1fec2a483b0b748c937f1aae6805e1f1c420c6c6a99d741b6`（CRLF宣言値は既存reconciliationどおり別保持）。保護資料SHAは開始・終了とも`e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699`で、既存`.work/finale-20260912/`は変更していない。証跡は`catalog/evidence/p3-subflow-reuse-observer-20260913.json`、回帰は`tests/Test-Pad.ps1` 340件PASS（ローカルmockのみ）である。
 - `README.md` 冒頭をCopilotエージェント用配布物の入口へ変更。旧アプリ説明は過去資産として区別した。
 - `pad-robin-prompts.md` 冒頭に編集用原稿であることと配布正本への対応を追記した。
 - `catalog/generated/acceptance-t01-t10/README.md` にT01〜T10の依頼要点・期待値・状態を固定した。
