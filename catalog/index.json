@@ -6328,11 +6328,11 @@
       "cases": [
         "T05"
       ],
-      "scope": "Frozen finale-20260912 candidate: exact instruction body and same-version bundle attachments; first raw generation had a literal backslash before => and was preserved, same-conversation retry produced a clean 4-action candidate without hand-editing. PAD paste/save/run/recopy could not be attempted because Computer Use was stopped by the physical Escape key.",
+      "scope": "Frozen finale-20260912 candidate: exact instruction body and same-version bundle attachments; first raw generation had a literal backslash before => and was preserved, same-conversation retry produced a clean 4-action candidate without hand-editing. The clean candidate was then pasted and saved unmodified in a dedicated PAD flow, executed twice, checked against the source/output workbook, and recopied.",
       "current_package_acceptance": false,
-      "execution_status": "generated_retry_clean_not_pasted_computer_use_stopped",
+      "execution_status": "generated_retry_clean_pasted_saved_two_runs_output_checked_recopied",
       "candidate_status": "../.work/finale-20260912/candidate-status.json",
-      "evidence": "evidence/t05-copilot-live-generation-20260913-attempt1.json; evidence/t05-copilot-live-generation-20260913-attempt1.robin; evidence/t05-copilot-live-generation-20260913.json; evidence/t05-copilot-live-generation-20260913.robin"
+      "evidence": "evidence/t05-copilot-live-generation-20260913-attempt1.json; evidence/t05-copilot-live-generation-20260913-attempt1.robin; evidence/t05-copilot-live-generation-20260913.json; evidence/t05-copilot-live-generation-20260913.robin; evidence/t05-copilot-live-generation-20260913-pad-paste.json; evidence/t05-copilot-live-generation-20260913-pad-run-1.json; evidence/t05-copilot-live-generation-20260913-pad-run-2.json; evidence/t05-copilot-live-generation-20260913-pad-recopy.robin; evidence/t05-copilot-live-generation-20260913-pad-recopy-after-run2.robin; evidence/normal-chat-t05-output-comparison-20260913.json; evidence/t05-copilot-live-generation-20260913-pad-acceptance.json"
     }
   ],
   "application_integration": {

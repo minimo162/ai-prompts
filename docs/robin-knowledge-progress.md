@@ -386,3 +386,13 @@ Issue #5/#27の最新本文と指定コメント（`5650828099`／`5650826208`�
 候補と同じ指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、Think Deeper、2添付でT05（合成ExcelのB2単一セル書込み→別名保存）を通常M365 Copilotへ送信した。会話URLは`https://m365.cloud.microsoft/chat/conversation/e360f2ad-f623-4290-8e92-7f68e999c9e2?es=SSR`。初回応答は1コードブロック・4行・564 bytes・SHA `299628c3cb205aa8219d23f005b4a7fe99ac76518ce688f497368ccfd87524ca`で、`Instance=\> ExcelInstance`のliteralバックスラッシュを含んだため、原文をそのまま不受入保存した。
 
 同一会話の再試行は1コードブロック・4行・563 bytes・SHA `be40e6b337620f1c76ba650b202f316d4b80b339de1c859fe1cb55a9f2714911`で、`Instance=> ExcelInstance`の矢印、4アクション、入力・出力パス、B2／T05-Changed指定が確認できるクリーンな候補となった。生成原文は手修正せず`catalog/evidence/t05-copilot-live-generation-20260913.robin`へ保存したが、物理EscapeでComputer Useが停止されたため、専用PADへの貼付け・保存・2回実行・再コピーは未実施である。初回原文は`...-attempt1.robin`、両メタデータは`...-attempt1.json`／`...json`に固定し、既存finaldのT05成功を今回候補へ付け替えない。候補statusは`FROZEN_CANDIDATE_NOT_ACCEPTED`、Issue #5/#27はOPEN／partialを維持する。
+
+## 2026-09-13 T05候補のPAD貼付け・2回実行・再コピー
+
+上記のクリーンな4行Robin（SHA `be40e6b337620f1c76ba650b202f316d4b80b339de1c859fe1cb55a9f2714911`）を、PADコンソールから新規作成した空フロー`無題 (2)`へ無修正で貼付けた。作成ダイアログの名前欄はComputer Useの入力APIでは設定できなかったため自動名の新規フローを使用し、既存フローの再利用や候補コードの編集は行っていない。Designerで4アクション、`ReadOnly=False`、B2／`T05-Changed`、別名保存先、Closeの順序を確認し保存した。
+
+同じフローを2回実行し、両回ともPADの準備完了復帰と開始再有効化を確認した。実行後のExcel出力はB2=`T05-Changed`、A1は入力と同値、元入力`excel-catalog.xlsx`のSHA `e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6`は不変だった。ExcelのOOXMLメタデータ差により出力バイトSHAはrun1 `44940c8d1a940a5ead0494a533a4461a97b2522d935e90c9ec66ee23fe08c6e9`（9005 bytes）、最終確認run2 `2d7f921b1bafb1dd36d5de691cf37d2016ed3a6ceb47b50e01f3ac7a2c285358`（9006 bytes）となったが、セル値と対象セル限定の期待は両回で一致した。
+
+run1/run2は`catalog/evidence/t05-copilot-live-generation-20260913-pad-run-1.json`／`...-run-2.json`、セル値・入力不変の照合は`catalog/evidence/normal-chat-t05-output-comparison-20260913.json`に固定した。run2後のPAD再コピーは`...-pad-recopy-after-run2.robin`へ保存し、生成原文・再コピーとも4行563 bytes・SHA `be40e6b337620f1c76ba650b202f316d4b80b339de1c859fe1cb55a9f2714911`でbyte一致した。統合証跡は`catalog/evidence/t05-copilot-live-generation-20260913-pad-acceptance.json`である。
+
+これはT05候補単体の生成・無修正貼付け・保存・2run・期待値照合・再コピーを満たす実機証跡である。ただし保護された`candidate-status.json`は変更せず、T03/T04/T06〜T09、独立・負例、全体監査は未完了のため、Issue #5/#27と候補statusは`OPEN／partial`・`FROZEN_CANDIDATE_NOT_ACCEPTED`のまま保持する。

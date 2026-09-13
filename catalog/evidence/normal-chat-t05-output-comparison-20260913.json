@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T19:34:41+09:00",
+  "input": {
+    "path": "catalog/fixtures/excel/excel-catalog.xlsx",
+    "sha256": "e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6",
+    "bytes": 8954,
+    "values": {"A1": "OfficeCatalog ���{�� 100%"}
+  },
+  "output": {
+    "path": "catalog/evidence/normal-chat-t05-final.xlsx",
+    "sha256": "2d7f921b1bafb1dd36d5de691cf37d2016ed3a6ceb47b50e01f3ac7a2c285358",
+    "bytes": 9006,
+    "values": {"A1": "OfficeCatalog ���{�� 100%", "B2": "T05-Changed"}
+  },
+  "checks": {
+    "target_cell_only": true,
+    "A1_unchanged": true,
+    "input_sha_unchanged_after_runs": true,
+    "run_count_observed": 2
+  }
+}

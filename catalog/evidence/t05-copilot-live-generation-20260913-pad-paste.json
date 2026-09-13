@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T19:29:00+09:00",
+  "flow_name": "無題 (2)",
+  "pad_window_id": 1248718,
+  "paste_confirmed": true,
+  "saved_confirmed": true,
+  "action_count": 4,
+  "clipboard_source": "catalog/evidence/t05-copilot-live-generation-20260913.robin",
+  "clipboard_restored": false,
+  "clipboard_restore_observed": false,
+  "note": "The clean retry Robin was pasted without code edits; the clipboard was used as the paste source and restoration was not observed."
+}
