@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T09:04:00+09:00",
+  "flow_name": "RobinKnowledgeT01CurrentBundle_20260913",
+  "pad_process_id": 15844,
+  "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+  "knowledge_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+  "copilot_response_sha256": "2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47",
+  "paste": {
+    "evidence": "catalog/evidence/t01-copilot-live-generation-20260913-pad-paste.json",
+    "evidence_sha256": "a3affbd0102ae21ba7605129eb05a9ba72973c24a1bd6b298ef4aa1e99544f69",
+    "paste_confirmed": true,
+    "saved_confirmed": true,
+    "action_count": 3,
+    "clipboard_restored": true
+  },
+  "runs": [
+    {
+      "evidence": "catalog/evidence/t01-copilot-live-generation-20260913-pad-run-1.json",
+      "evidence_sha256": "e60c093e9e8c2e0030b6377f05b1ea533bc94341c3cadbc2ff75e7361388cb6a",
+      "run_status": "success",
+      "ready_observed": true,
+      "start_enabled_after": true,
+      "expected_replaced_preview_observed": true
+    },
+    {
+      "evidence": "catalog/evidence/t01-copilot-live-generation-20260913-pad-run-2.json",
+      "evidence_sha256": "22d735edb4da1689b0d3a885067a0b865491ab4f7a927d00fa579982a36518f8",
+      "run_status": "success",
+      "ready_observed": true,
+      "start_enabled_after": true,
+      "expected_replaced_preview_observed": true
+    }
+  ],
+  "input": {
+    "path": "catalog/fixtures/text/t01-input-20260909.txt",
+    "sha256_after_runs": "2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f",
+    "bytes_after_runs": 87,
+    "unchanged_required": true
+  },
+  "output": {
+    "path": "catalog/evidence/normal-chat-t01-output-current-bundle.txt",
+    "sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2",
+    "bytes": 90,
+    "expected_sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2",
+    "expected_match": true,
+    "extra_trailing_newline": false
+  },
+  "recopy": {
+    "path": "catalog/evidence/t01-copilot-live-generation-20260913-pad-recopy.robin",
+    "sha256": "d2a7f74e6b5038557a5b0eeca1bde4468f4d4fc402a9baaf95ba7fe5e91a317b",
+    "bytes": 649,
+    "ordinal_equal_after_crlf_normalization": true
+  },
+  "status": "current_candidate_t01_live_generation_pad_two_runs_output_match",
+  "current_package_acceptance": false,
+  "acceptance_note": "T01 candidate evidence is complete for this case; the protected finale candidate status and full T01-T10 package audit remain unchanged."
+}

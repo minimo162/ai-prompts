@@ -465,3 +465,9 @@ Issue #5は`partial／OPEN`。残りは新bundle同一版の通常チャット�
 候補Robinを専用PADフロー`無題`へ貼付け・保存し、同一フローを2回実行した。可視ListItem数は仮想化で5〜6件となったが、Designerの`16 アクション`表示、保存完了、run1/run2のReady復帰と変数プレビューを確認した。run1/run2証跡は`catalog/evidence/t10-copilot-live-generation-20260913-pad-run-1.json`／`...-run-2.json`、統合証跡は`catalog/evidence/t10-copilot-live-generation-20260913-pad-acceptance.json`である。
 
 PAD再コピーはrun2後も同一SHA `845c54cc905e50dcb9f8b9d7e55aeba3cb639bee1b3e848a3f66f9b3ce051446`（1,768 bytes）で、生成原文との差はCRLFだけだった。CRLF正規化後の16行・値一致により、今回生成からの無修正貼付け・保存・2run・再コピー再現を`PROVEN`とする。さらに実測T10原文との比較では差分は許可された2行（Excel A1値、Excel SaveAs出力先）のみで、許可範囲外は0件だった（`t10-copilot-live-generation-20260913-pad-acceptance.json`の`change_scope_comparison`）。Excel/Word/PowerPointの出力値も実ファイルで確認した。ただし候補statusファイルは`FROZEN_CANDIDATE_NOT_ACCEPTED`のままなので、パッケージ受入フラグはfalse、Issue #5/#27はOPEN／partialである。
+
+## 2026-09-13 T01候補の同版生成・PAD受入
+
+候補指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`とbundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`を2添付したThink Deeperの新規通常チャット（`https://m365.cloud.microsoft/chat/conversation/0cf5181b-b371-43c9-9c4f-410d9464e419?es=SSR`）へT01依頼を送信した。応答は1コードブロック・3行、無修正Robin SHA `2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47`として保存した。
+
+専用フロー`RobinKnowledgeT01CurrentBundle_20260913`へ貼付け・保存し、2回ともReady復帰・エラーなし、置換前後の変数プレビューを確認した。入力SHAは実行前後で不変、出力90 bytes・SHA `2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2`が固定期待と一致した。再コピーは649 bytes・SHA `d2a7f74e6b5038557a5b0eeca1bde4468f4d4fc402a9baaf95ba7fe5e91a317b`で、原文との差はPADのCRLFのみだった。証跡は`catalog/evidence/t01-copilot-live-generation-20260913-pad-acceptance.json`。T01単体の候補同版受入は成立したが、全T01-T10の同版受入、T09、独立再試験、負例v2、候補statusの昇格は未完了である。

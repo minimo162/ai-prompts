@@ -357,3 +357,9 @@ Issue #5/#27の最新本文と指定コメント（`5650828099`／`5650826208`�
 実行後のPAD再コピーは両回とも16アクション、1,768 bytes、SHA `845c54cc905e50dcb9f8b9d7e55aeba3cb639bee1b3e848a3f66f9b3ce051446`で一致した。生成原文（LF）との差はPADが付与したCRLFのみで、CRLFをLFへ戻した比較は16行・値のordinal一致となった。Excel出力は`T10-Changed`、Word/PowerPoint出力は`CopilotOffice 246`を実ファイルから確認した。統合証跡は`catalog/evidence/t10-copilot-live-generation-20260913-pad-acceptance.json`。これは候補の現行生成・PAD再現証跡を満たすが、候補statusファイルが未受入のため`current_package_acceptance=false`、Issue #5/#27はOPEN／partialを維持する。
 
 候補生成物を実測T10原文`catalog/generated/office-three-apps/generated.robin`と行単位で比較した結果、差分は許可変更の2行（Excel A1値、Excel SaveAs出力先）のみで、許可範囲外の差分は0件だった。この比較はPAD再コピーの改行差を含む厳密再現判定とは分離して`change_scope_comparison`へ固定している。
+
+## 2026-09-13 T01候補の同版生成・PAD実行
+
+候補と同じ指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、Think Deeper、2添付でT01を新規通常チャットへ送信した。生成Robinは3行・646 bytes・SHA `2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47`で、無修正保存した。
+
+専用PADフロー`RobinKnowledgeT01CurrentBundle_20260913`（PID 15844）へ無修正貼付け・保存後、2回実行した。両runともReady復帰・エラーなしで、置換前後の変数プレビューを確認した。入力SHAは `2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47` のまま、出力は90 bytes・SHA `2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2`で固定期待と一致した。保存後再コピーはCRLF差のみで原文と内容一致した。証跡は`catalog/evidence/t01-copilot-live-generation-20260913-pad-acceptance.json`。T01単体は候補同版の生成・PAD受入を満たすが、全T01-T10の同版受入と保護候補statusの昇格は未完了で、Issue #5/#27はOPEN／partialを維持する。
