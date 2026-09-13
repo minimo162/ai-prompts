@@ -1,11 +1,19 @@
 # Robinナレッジ検証報告
+## 2026-09-14 T08現行版生成・PAD受入
+
+現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を新規通常M365 Copilotチャット（Think Deeper、同版指示＋bundle実添付、会話 `https://m365.cloud.microsoft/chat/conversation/4b3b4dfc-8fb9-4d0c-a5de-3427be8a00eb`）へ送信した。固定依頼SHAは `79070940…`、送信本文SHAは `72b55f32…`。回答原文2,635文字（SHA `60191af3…`）と単一12行Robin（末尾LF除外SHA `d4a6b697…`）を無修正で保存した。生成回答の形式はT04の矢印エスケープとは異なり、DOM `pre.textContent` と一致した。
+
+Robinを新規専用空フロー `RobinKnowledgeT08CurrentBundleLive20260914e`（Designer PID 35772、4アクション）へ無修正貼付け・保存・再コピーし、2回Runとも成功した。両回ともアクション単位 `ON ERROR FileNotFoundError` で `NewVar=named`、`LastError` に欠損メッセージ、ブロック側 `ErrorHandled`／`ErrorHandledDefault` は未設定。欠損入力は前後とも不在で、書込み・完了マーカー・公開処理は発生しなかった。再コピーのBLOCK末尾空白差は原記録のまま保持し、正規化後一致だけを確認した。ブロック側利用者定義 `FileNotFound` の一致はNOT_PROVENであり、アクション単位の実測から一般化していない。証跡は `catalog/evidence/t08-current-bundle-live-acceptance-20260914e.json`、`catalog/evidence/t08-current-bundle-output-comparison-20260914e.json`。
+
+旧finald PASSは現行版へ付け替えていない。現行版受入済みはT01/T02/T03（修正版依頼）/T05/T06/T07/T08/T09。T04形式不受入、T10厳密バイト保持 `NOT_PROVEN`、独立再試験、P3正例、負例v2、A〜G全体監査は残り、Issue #5/#27はOPEN / partialとする。
+
 ## 2026-09-14 T06現行版生成・PAD受入
 
 20260913e正本（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）をThink Deeperの通常M365 Copilot新規会話 `https://m365.cloud.microsoft/chat/conversation/efc8983a-0075-4040-833a-8f06183823b4`へ、指示全文とbundleの実添付で送信した。生成された4行Robin（SHA `c0940cb3e3ddbd82880d274692858ce3e2335f623acb11abe521926e642f9fd9`、593 bytes）は無修正で新規専用空フロー `RobinKnowledgeT06CurrentBundleLive20260914e`（Designer PID 34264、HWND 397164）へ貼付け・保存・再コピーした。PAD再コピーはCRLF（597 bytes）だが、生成原文との改行正規化後一致を確認した。
 
 同フローを2回Runし、両回ともReady復帰・Start有効・エラーなし・`Word インスタンス`プレビューを確認した。合成Word本文は入力 `OfficeCatalog 日本語 100%` から出力 `T06Replaced 日本語 100%` となり、`OfficeCatalog` 0件、`T06Replaced` 1件、指定置換以外の本文一致、入力SHA `2753855b…` 不変、Wordプロセス0を直接照合した。Run 1/2のdocxパッケージSHAは異なるため、本文結果の受入であり厳密な入力→生成→PADバイト保持は主張しない。既存の同名出力は各Run前に退避し、Run後に元SHAで復元した。証跡は`catalog/evidence/t06-copilot-live-generation-20260914e.json`、`catalog/evidence/t06-copilot-live-generation-20260914e-pad-acceptance.json`、`catalog/evidence/t06-20260914e-output-comparison.json`。
 
-旧finaldのT06 PASSは履歴として保持し、今回の現行版受入へ移していない。T04の生成形式不受入、T07/T08/T10、独立再試験、P3正例、負例v2、A〜G全体監査は残り、Issue #5/#27はOPEN / partialとする。
+旧finaldのT06 PASSは履歴として保持し、今回の現行版受入へ移していない。T04の生成形式不受入、T10厳密バイト保持、独立再試験、P3正例、負例v2、A〜G全体監査は残り、Issue #5/#27はOPEN / partialとする。
 
 ## 2026-09-14 T05現行版追跡昇格（新規自動名フロー）
 
