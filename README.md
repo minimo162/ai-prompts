@@ -1,6 +1,6 @@
 # PAD Robin Copilotエージェント用 指示文・ナレッジ
 
-> 2026-09-13e追補: 正本は指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`／bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`。同版T01/T02/T09は実機PAD受入済み（T01は専用空フローで3アクション・2回Run・出力/入力不変、T02は3アクション・保存・再コピー・2回Run・CSV出力一致／入力不変）、T04は新規会話の1回追加でも`=>`前バックスラッシュがDOMと保存Robinに一致して現れたため生成回答由来の形式不受入、T10は機能実行と許可2行の内容範囲を別証跡で保全したが厳密バイト保持はNOT_PROVEN（[派生監査](catalog/evidence/t10-strict-preservation-audit-20260913.json)、[回帰テスト](tests/Test-T10StrictPreservation.ps1)）です。旧finald PASSは新版本へ継承せず、Issue #5/#27はOPEN / partialです。
+> 2026-09-13e追補: 正本は指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`／bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`。同版T01/T02/T09は実機PAD受入済み（T01は専用空フローで3アクション・2回Run・出力/入力不変、T02は3アクション・保存・再コピー・2回Run・CSV出力一致／入力不変）。T03は依頼本文へカウンター要件を明示した修正版依頼に限り、13アクション・2回Run（TxtCount=2／OtherCount=2）を現行版へ追跡しました。元依頼の3試行は不受入のままです。T04は新規会話の1回追加でも`=>`前バックスラッシュがDOMと保存Robinに一致して現れたため生成回答由来の形式不受入、T10は機能実行と許可2行の内容範囲を別証跡で保全したが厳密バイト保持はNOT_PROVEN（[派生監査](catalog/evidence/t10-strict-preservation-audit-20260913.json)、[回帰テスト](tests/Test-T10StrictPreservation.ps1)）です。旧finald PASSは新版本へ継承せず、Issue #5/#27はOPEN / partialです。
 
 > 2026-09-12 最終監査: 固定finaldの生成受入は維持。A〜Gの一部に別空フロー再利用等の保存証跡未特定があり、親Issue全体はpartial、PR提出準備は未完了です。[監査結果・不足・PR案](docs/robin-knowledge-validation.md)。
 

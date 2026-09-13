@@ -12,7 +12,9 @@ T10については、既存の2回RunとOffice成果物照合を機能実行の�
 
 同版T02は、通常チャット生成（会話 `fa568da0-7bab-43cf-9559-e061d2bfed76`、生成Robin SHA `c3027cfaa13e191b0e784fb3a6db4c573f8bfc83fb172d1a6394d7c1f5a55c29`）後、専用空フロー `RobinKnowledgeT02CurrentBundle_20260913` へ3アクションを無修正貼付け・保存・再コピーし、2回Run、CSV出力一致・入力不変まで確認しました（`catalog/evidence/t02-copilot-live-generation-20260913e-pad-acceptance.json`）。既存の候補原記録を現行版へ追跡昇格した派生証跡であり、新たなRunや期待値変更はありません。
 
-同版T09は、通常チャット生成（会話 `ad60fa85-140a-40d9-8546-09e0a2c4c54b`、生成Robin SHA `7c576b499dab61a5d5228b16d4bd9589dcdd537e96a658f2b5386e936c946a44`）後、専用空フロー `RobinKnowledgeT09CurrentBundleLive20260913e` でControlRepository登録→6アクション削除→無修正6行貼付け・保存→再コピー→2回Run（いずれも`T09-clicked`、Ready、エラーなし）まで受入しました（`catalog/evidence/t09-20260913e-pad-acceptance.json`）。初回30秒ヘルパー試行は実行中のまま証跡を出さず、完了後も受入Runには数えず、重複Runを避けて状態確定後に2回を取り直しています。T01/T02/T09以外は新版本未受入です。
+同版T03は、固定期待のカウンター要件を依頼本文へ明示した修正版依頼に限り、同版指示・bundleを使った生成Robin（13行、SHA `63fe35ec8619387f08c5dd270eb226bbd944457b410e09cc2425023ff9396572`）を専用空フロー `RobinKnowledgeT03Revised20260913` へ無修正貼付け・保存し、2回Runで `TxtCount=2`／`OtherCount=2`、4入力fixture不変、再コピーのCRLF正規化後一致を確認しました（`catalog/evidence/t03-copilot-live-generation-20260913e-pad-acceptance.json`）。これは入力契約を補正した依頼の現行版追跡であり、元のカウンター要件が見えない3試行や元依頼の合格を示しません。旧finald PASSも移していません。
+
+同版T09は、通常チャット生成（会話 `ad60fa85-140a-40d9-8546-09e0a2c4c54b`、生成Robin SHA `7c576b499dab61a5d5228b16d4bd9589dcdd537e96a658f2b5386e936c946a44`）後、専用空フロー `RobinKnowledgeT09CurrentBundleLive20260913e` でControlRepository登録→6アクション削除→無修正6行貼付け・保存→再コピー→2回Run（いずれも`T09-clicked`、Ready、エラーなし）まで受入しました（`catalog/evidence/t09-20260913e-pad-acceptance.json`）。初回30秒ヘルパー試行は実行中のまま証跡を出さず、完了後も受入Runには数えず、重複Runを避けて状態確定後に2回を取り直しています。T04〜T08以外は新版本未受入です。
 
 9/13のT03補正依頼は、固定期待に含まれていた`TxtCount`／`OtherCount`を依頼本文へ明示しただけで、知識・指示・fixture・期待値は変更していません。実際に添付・送信した版は保全済み`finale-20260912`候補（指示SHA `6ad6f742…`、bundle SHA `79245787…`）です。生成Robin（13行、無修正）を専用PADフロー`RobinKnowledgeT03Revised20260913`へ貼付け・保存し、保存後再コピーと2回の実行で`TxtCount=2`／`OtherCount=2`、fixture不変を確認しました（`catalog/evidence/t03-revised-input-live-acceptance-20260913.json`）。PAD再コピーはCRLF、生成原文はLFのため、原バイトSHAは一致とせず、CRLF正規化後一致だけを別記録しています。閉じて再オープン後の再コピーは未実施です。これは補正依頼の生成受入であり、20260913eの全ケース受入完了ではありません。
 

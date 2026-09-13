@@ -1,4 +1,12 @@
 # Robinナレッジ検証報告
+## 2026-09-14 T03現行版追跡昇格（修正版依頼のみ）
+
+20260913e正本（instruction SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）と一致するT03候補証跡を、現行版の修正版依頼受入として追跡した。依頼本文へ固定期待の`TxtCount`／`OtherCount`要件を明示しただけで、指示・知識・fixture・期待値・既存3試行原記録は変更していない。Copilotへ期待数値は渡していない。
+
+生成Robin（13行、SHA `63fe35ec8619387f08c5dd270eb226bbd944457b410e09cc2425023ff9396572`）は無修正で専用空フロー `RobinKnowledgeT03Revised20260913` へ貼付け・保存し、2回Runとも成功。`TxtCount=2`／`OtherCount=2`、`FileContents=alpha 日本語`、4入力fixture不変、PAD再コピーのCRLF正規化後一致を確認した。閉じて再オープン後の再コピーは未実施として残す。派生証跡は `catalog/evidence/t03-copilot-live-generation-20260913e-pad-acceptance.json`。
+
+これは修正版依頼に限る現行版追跡であり、元依頼（カウンター要件が本文から観測できない）や元3試行のPASSではない。T03の旧finald PASSは移していない。T04の応答由来literalバックスラッシュ不受入、T10厳密保持`NOT_PROVEN`、T04〜T08の残る同版受入、独立再試験、P3、負例、A〜G全体監査は維持し、Issue #5/#27はOPEN / partialとする。
+
 ## 2026-09-13e T01生成追跡
 
 現行正本の保存済み固定本文（`.work/finale-20260912/t01/sent-body.txt`、4,393文字／11,022 bytes、WAIT 1=1、WAIT 500=0）を新規通常M365 Copilotチャット`https://m365.cloud.microsoft/chat/conversation/f5106564-f9a6-4665-9b09-bd0eca6e6d01`へ送信し、回答全文2,309文字と1つのRobinコードブロック（646 bytes）を無修正で採取した。生成Robinを専用空フロー `RobinKnowledgeT01CurrentBundleLive_20260913e` へ無修正貼付け・保存・再コピーし、2回Run（成功、出力SHA一致、入力SHA不変）まで現行版で受入した。証跡は`catalog/evidence/t01-copilot-live-generation-20260913e.json`、`catalog/evidence/t01-copilot-live-generation-20260913e-pad-acceptance.json`、`catalog/evidence/t01-copilot-live-generation-20260913e-pad-output-comparison.json`。PAD再コピーはLF→CRLFの正規化一致として記録し、生成元からPADまでの厳密バイト一致は主張していない。
