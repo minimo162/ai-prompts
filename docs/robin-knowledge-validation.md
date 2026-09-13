@@ -1,4 +1,12 @@
 # Robinナレッジ検証報告
+## 2026-09-14 T05現行版追跡昇格（新規自動名フロー）
+
+20260913e正本（instruction SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`）でT05生成を追跡した。初回回答の矢印前literalバックスラッシュは原記録として不受入保存し、同じ会話の許可済み1回リトライで取得した4行Robin（SHA `be40e6b337620f1c76ba650b202f316d4b80b339de1c859fe1cb55a9f2714911`）だけを無修正で使用した。指示・bundle実添付、依頼SHA、失敗原文は `catalog/evidence/t05-copilot-live-generation-20260913.json` から追跡できる。
+
+PADでは新規空フローへ貼付け・保存・再コピーし、2回Runとも成功。合成ExcelのB2=`T05-Changed`、A1不変、入力SHA `e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6` 不変、出力比較PASSを確認した（`catalog/evidence/t05-copilot-live-generation-20260913e-pad-acceptance.json`）。作成ダイアログの名前入力が利用可能UI経路で設定できず、フロー名は自動名 `無題 (2)` となった。新規作成・既存フロー非再利用は記録したが、明示的な人手命名を受入条件とする場合は、同じ生成Robinを編集せず、新しい一意名の空フローでPAD貼付け・2runだけを再実施する。
+
+旧finald PASSは移していない。T04生成形式不受入、T06〜T08/T10同版、独立再試験、P3、負例、T10厳密保持`NOT_PROVEN`、A〜G全体監査は残し、Issue #5/#27はOPEN / partialとする。
+
 ## 2026-09-14 T03現行版追跡昇格（修正版依頼のみ）
 
 20260913e正本（instruction SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）と一致するT03候補証跡を、現行版の修正版依頼受入として追跡した。依頼本文へ固定期待の`TxtCount`／`OtherCount`要件を明示しただけで、指示・知識・fixture・期待値・既存3試行原記録は変更していない。Copilotへ期待数値は渡していない。
