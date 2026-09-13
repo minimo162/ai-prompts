@@ -5,7 +5,7 @@
 
 生成Robin `catalog/generated/normal-chat-20260914e-p31-current-live/generated-robin.txt`（205 bytes、SHA `fdaa3eea…`）を、Console UIAで作成した専用空フロー `RobinKnowledgeP31CurrentBundleLive20260914e`（Designer PID 11016）へ無修正貼付け・保存・再コピーした。PAD再コピーは209 bytes／CRLF（SHA `36a8179b…`）で、改行正規化後のみ一致し、生バイト差を隠していない。2回Runとも成功し、各回の変数プレビューで`CatalogList=[CatalogItem, SecondItem]`、`NewVar=SecondItem`を確認した。原回答・依頼・PAD貼付け保存・Run記録は `catalog/evidence/p31-current-bundle-live-20260914e.json` と同参照ファイルへ分離保存した。
 
-これは現行版P3-1だけの受入記録であり、旧版P3-1 PASSを現行版へ移していない。続くP3-2は別節で現行版受入を記録する。P3-3〜P3-6、負例v2、T10厳密保持、最終A〜G監査は未完了のため、Issue #5/#27をOPEN / partialのまま維持する。
+これは現行版P3-1だけの受入記録であり、旧版P3-1 PASSを現行版へ移していない。続くP3-2、P3-3は別節で現行版受入を記録する。P3-4〜P3-6、負例v2、T10厳密保持、最終A〜G監査は未完了のため、Issue #5/#27をOPEN / partialのまま維持する。
 
 ## 2026-09-14 現行版P3-2の送信・実機PAD受入
 
@@ -15,7 +15,15 @@
 
 PADを2回Runし、両回とも変数プレビュー`[CatalogItem, SecondItem, ThirdItem]`、`SecondItem`、`1`、`1`、`SecondItem`、`2`を確認した。指定出力は13 bytesのUTF-8 BOM付き`SecondItem`（SHA `e9b8ede4…`）で、`OuterCount=2`、`InnerNo=1`、`InnerYes=1`、`LastSeen=SecondItem`、ThirdItem未訪問の期待と一致する。run1はDesigner PID 39172、run2は再オープン後PID 23188で、各Runの原JSONを保存した。
 
-この受入は現行版P3-2だけを対象とし、旧20260912 P3-2 PASSを移していない。P3-3〜P3-6、負例v2、T10厳密保持、最終A〜G監査は残件で、Issue #5/#27はOPEN / partialを維持する。詳細は`catalog/evidence/p32-current-bundle-live-20260914e.json`および同参照のpaste/run証跡を参照。
+この受入は現行版P3-2だけを対象とし、旧20260912 P3-2 PASSを移していない。P3-4〜P3-6、負例v2、T10厳密保持、最終A〜G監査は残件で、Issue #5/#27はOPEN / partialを維持する。詳細は`catalog/evidence/p32-current-bundle-live-20260914e.json`および同参照のpaste/run証跡を参照する。P3-3は次節で別途現行版受入を記録する。
+
+## 2026-09-14 現行版P3-3の送信・実機PAD受入
+
+現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を通常M365 Copilotの新規会話 `https://m365.cloud.microsoft/chat/conversation/8e3e9a69-098f-41ce-82df-47b581c6bbad`へ同版指示全文とbundleを実添付してThink Deeperで1回送信した。評価者用正解コード・固定件数・期待値・Issue本文は渡していない。応答DOM単一`pre`から13行Robinを無修正で保存し、生成SHAは`2b3494e4e8ceffd33e8ef242b19387205b8159d2307ad8a56f93aeb789e3454a`である。
+
+生成Robin `catalog/generated/normal-chat-20260914e-p33-current-live/generated-robin.txt`（808 bytes）を、Console UIAで作成した専用空フロー `RobinKnowledgeP33CurrentBundleLive20260914e`（Designer PID 38136）へ無修正貼付け・保存・再コピーした。貼付け後のListItem 7件は仮想化表示で、Designerの権威サマリー`13 選択されたアクション`を正とした。PAD再コピー `pad-recopy.robin` は821 bytes・CRLF（SHA `e909a165…`）で、生成原文とは生バイトが異なるが改行正規化後は一致する。貼付けヘルパーの初回JSONはプロセス終了までに出力されなかったが、同じ1回の貼付け状態を独立UIAで確認し、重複貼付けは行っていない。
+
+PADを2回Runし、両回とも`TxtCount=3`、`OtherCount=2`、`CurrentFile=...\\sub.txt\\inner.txt`、`OtherSeen=...\\x.txt.bak`、`FileContents=inner`を確認した。5入力fixture（plain.txt、upper.TXT、x.txt.bak、sub.txt/inner.txt、nested/deep.txt）の各SHAは両Run後も不変で、`.TXT`は厳密な`.txt`比較のElse、`.txt.bak`もElse、親フォルダー名`sub.txt`は拡張子判定へ影響しないことを実測した。これは現行版P3-3の生成・無修正PAD貼付け・保存・2回機能受入であり、厳密な生成→PAD生バイト保持、NoSort順序、閉じて再オープン後の再コピーまでは証明していない。旧P3-3 PASSは移転せず、P3-4〜P3-6、負例v2、T10厳密保持、最終A〜G監査は残件で、Issue #5/#27はOPEN / partialを維持する。詳細は `catalog/evidence/p33-current-bundle-live-20260914e.json` とpaste/run証跡。
 
 ## 2026-09-14 独立T10現行版の機能受入
 
@@ -39,7 +47,7 @@ Run1のxlsxスナップショットはRun2前に取得できず、追加3回目�
 
 Robinを新規専用空フロー `RobinKnowledgeT08CurrentBundleLive20260914e`（Designer PID 35772、4アクション）へ無修正貼付け・保存・再コピーし、2回Runとも成功した。両回ともアクション単位 `ON ERROR FileNotFoundError` で `NewVar=named`、`LastError` に欠損メッセージ、ブロック側 `ErrorHandled`／`ErrorHandledDefault` は未設定。欠損入力は前後とも不在で、書込み・完了マーカー・公開処理は発生しなかった。再コピーのBLOCK末尾空白差は原記録のまま保持し、正規化後一致だけを確認した。ブロック側利用者定義 `FileNotFound` の一致はNOT_PROVENであり、アクション単位の実測から一般化していない。証跡は `catalog/evidence/t08-current-bundle-live-acceptance-20260914e.json`、`catalog/evidence/t08-current-bundle-output-comparison-20260914e.json`。
 
-旧finald PASSは現行版へ付け替えていない。現行版受入済みはT01/T02/T03（修正版依頼）/T05/T06/T07/T08/T09、独立T01、独立T10の機能／許可範囲。T04形式不受入、T10厳密バイト保持 `NOT_PROVEN`、P3正例、負例v2、A〜G全体監査は残り、Issue #5/#27はOPEN / partialとする。
+旧finald PASSは現行版へ付け替えていない。現行版受入済みはT01/T02/T03（修正版依頼）/T05/T06/T07/T08/T09、P3-1/P3-2/P3-3、独立T01、独立T10の機能／許可範囲。T04形式不受入、T10厳密バイト保持 `NOT_PROVEN`、独立T04、P3-4〜P3-6、負例v2、A〜G全体監査は残り、Issue #5/#27はOPEN / partialとする。
 
 ## 2026-09-14 T06現行版生成・PAD受入
 

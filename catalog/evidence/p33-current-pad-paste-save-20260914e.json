@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T05:48:43+09:00",
+  "flow_name": "RobinKnowledgeP33CurrentBundleLive20260914e",
+  "process_id": 38136,
+  "designer_title": "Power Automate | RobinKnowledgeP33CurrentBundleLive20260914e",
+  "source_robin": "catalog/generated/normal-chat-20260914e-p33-current-live/generated-robin.txt",
+  "source_sha256": "2b3494e4e8ceffd33e8ef242b19387205b8159d2307ad8a56f93aeb789e3454a",
+  "source_bytes": 808,
+  "empty_before_paste": true,
+  "paste_confirmed": true,
+  "designer_action_count": 13,
+  "visible_action_count": 7,
+  "designer_status": "13 選択されたアクション",
+  "virtualized_list_false_negative": true,
+  "saved_confirmed": true,
+  "manual_edit": false,
+  "automatic_unescape": false,
+  "initial_helper_observation": "The first status-based paste helper did not emit a JSON file before its process ended; the same single paste was independently observed at the authoritative 13-action status and was not repeated.",
+  "execution_requested": false,
+  "notes": "The later Save-PadFlowLive and Copy-PadFlowLiveByStatus calls used the same PID and flow title. The seven realized ListItems are treated as virtualization, not a generation truncation."
+}

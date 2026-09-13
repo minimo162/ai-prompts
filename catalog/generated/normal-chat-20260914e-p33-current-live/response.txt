@@ -1,0 +1,65 @@
+Copilot said: 以下は、添付ナレッジの実測済み構文だけを組み合わせたPADフロー案です。対象フォルダーと再帰設定は、境界試験で実行済みの条件に一致します。
+前提・設定
+
+実測環境: PAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データです。根拠はPAD-Robin-Knowledge-Bundleです。
+対象フォルダー: C:\Users\yuuki\ai-prompts\catalog\fixtures\files-boundary
+ファイル取得:
+
+フィルターは *
+IncludeSubfolders: True
+サブフォルダー内を含む5ファイルを取得
+並び替えは NoSort のため、処理順は前提にしません。
+
+
+初期変数:
+
+TxtCount = 0
+OtherCount = 0
+
+
+判定: CurrentFile.Extension = '.txt'
+
+ファイル変数の .Extension プロパティを .txt と「と等しい」で比較します。
+パス全体に .txt が含まれるかを調べる部分一致ではありません。
+
+
+Then処理:
+
+UTF-8で内容を FileContents に読み取ります。
+TxtSeenへ現在のファイルを設定します。
+TxtCountを1増やします。
+
+
+Else処理:
+
+内容は読み取りません。
+OtherSeenへ現在のファイルを設定します。
+OtherCountを1増やします。
+
+
+
+実測済みの判定境界と期待結果
+添付ナレッジの同一フォルダーを使った再帰ありの実測では、Filesは5件、TxtCountは3、OtherCountは2でした。入力5件のSHAも不変です。
+
+plain.txt: .Extensionは.txtとなり、Thenで読み取られます。
+upper.TXT: この実測済み等価比較は大文字小文字を区別するため、Elseへ進みます。
+x.txt.bak: .Extensionは.bakとなるため、Elseへ進みます。
+sub.txt\inner.txt: 親フォルダー名が.txtで終わっていても判定には影響せず、ファイル自身の.Extensionが.txtなのでThenへ進みます。
+nested\deep.txt: .Extensionが.txtなのでThenへ進みます。
+
+したがって期待値は、Files.Count = 5、TxtCount = 3、OtherCount = 2です。TxtSeen、OtherSeen、FileContentsは各分岐で最後に処理されたファイルの値になりますが、NoSortの列挙順は保証されていないため、特定のファイル名や内容を固定期待値にはしません。大文字小文字を無視する比較は未採取なので、この案では使用も推測もしていません。
+以下はMainサブフロー全体へ貼り付ける13アクションです。採取済みT03の構成に、境界試験で実測済みの対象パスとIncludeSubfolders: Trueを適用しています。
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files-boundary''' FileFilter: $'''*''' IncludeSubfolders: True FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+SET TxtCount TO 0
+SET OtherCount TO 0
+LOOP FOREACH CurrentFile IN Files
+    IF CurrentFile.Extension = $'''.txt''' THEN
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+        SET TxtSeen TO CurrentFile
+        Variables.IncreaseVariable Value: TxtCount IncrementValue: 1
+    ELSE
+        SET OtherSeen TO CurrentFile
+        Variables.IncreaseVariable Value: OtherCount IncrementValue: 1
+    END
+END
+BizChat ついてフィードバックするソース
