@@ -10,13 +10,13 @@
     "version_label": "20260913e"
   },
   "p4_current_bundle": {
-    "status": "PARTIAL_20260913E_PRECHECK_PLUS_T01_T09_ACCEPTED_HISTORICAL_FINALD_PRESERVED",
+    "status": "PARTIAL_20260913E_PRECHECK_PLUS_T01_T02_T09_ACCEPTED_HISTORICAL_FINALD_PRESERVED",
     "knowledge_precheck": "PASS_REFERENCE_ONLY_20260913E",
     "knowledge_precheck_evidence": "evidence/current-bundle-20260913e-precheck.json",
     "historical_acceptance_not_transferred": true,
     "accepted_cases_scope": "historical_finald_20260912_only",
-    "current_version_accepted_cases": ["T01", "T09"],
-    "remaining_current_version_cases": ["T02", "T03", "T04", "T05", "T06", "T07", "T08", "T10"],
+    "current_version_accepted_cases": ["T01", "T02", "T09"],
+    "remaining_current_version_cases": ["T03", "T04", "T05", "T06", "T07", "T08", "T10"],
       "accepted_cases": [
       "T01",
       "T02",
@@ -49,8 +49,17 @@
       },
       "T02": {
         "status": "PASS_FINALD_20260912",
+        "current_version_status": "PASS_CURRENT_20260913E_PAD_ACCEPTED",
         "evidence": "evidence/t02-finald-20260912-live-acceptance-20260912.json",
-        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "current_version_generation": "evidence/t02-copilot-live-generation-20260913.json",
+        "current_version_pad": "evidence/t02-copilot-live-generation-20260913e-pad-acceptance.json",
+        "current_version_conversation": "https://m365.cloud.microsoft/chat/conversation/fa568da0-7bab-43cf-9559-e061d2bfed76?es=SSR",
+        "current_version_instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+        "current_version_robin_sha256": "c3027cfaa13e191b0e784fb3a6db4c573f8bfc83fb172d1a6394d7c1f5a55c29",
+        "current_version_runs": 2,
+        "current_version_input_unchanged": true,
+        "current_version_output_match": true
       },
       "T03": {
         "status": "PASS_FINALD_20260912",
@@ -200,7 +209,7 @@
     "Agent Builder registration (out of scope)",
     "DOM check (tests/Test-CopilotDom.cjs) NOT_RUN: Playwright not configured"
   ],
-  "result": "Historical finald 79245787 acceptance is preserved. Current canonical package 20260913e aligns instruction and knowledge at WAIT 1, has a live reference-only precheck, and has fresh T09 PAD acceptance; T03 revised-request evidence remains separately classified, T04 remains not accepted. T10 functional execution and the authorized two-line content scope are proven separately, while strict raw-byte preservation remains NOT_PROVEN; fresh acceptance for the remaining cases is still pending.",
+  "result": "Historical finald 79245787 acceptance is preserved. Current canonical package 20260913e aligns instruction and knowledge at WAIT 1, has a live reference-only precheck, and has fresh T01, T02, and T09 PAD acceptance; T03 revised-request evidence remains separately classified, T04 remains not accepted. T10 functional execution and the authorized two-line content scope are proven separately, while strict raw-byte preservation remains NOT_PROVEN; fresh acceptance for the remaining cases is still pending.",
   "final_evidence_audit": {
     "status": "PARTIAL_REQUIRED_TRACEABILITY_GAPS",
     "target_commit": "e295387b525492f87e890bc0fb8a74aaf2396c2f",
