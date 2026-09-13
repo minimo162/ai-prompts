@@ -1,5 +1,9 @@
 # PAD実アクションのRobinカタログ
 
+### 2026-09-14 現行版P3-1追跡
+
+現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を通常M365 Copilot新規会話へ2実添付して1回送信し、4行Robinを無修正で採取した。専用空フロー `RobinKnowledgeP31CurrentBundleLive20260914e`（Designer PID 11016）で貼付け・保存・再コピー・2回Runを行い、`CatalogList=[CatalogItem, SecondItem]`、`NewVar=SecondItem`を確認した。証跡は `evidence/p31-current-bundle-live-20260914e.json`。旧20260912 P3-1 PASSを現行版へ移していない。P3-2〜P3-6・負例v2・T10厳密保持・A〜G監査は未完了で、Issue #5/#27はOPEN / partial。
+
 ### 2026-09-14 独立T04の現行版候補
 
 ### 2026-09-14 独立T10の現行版機能受入（厳密保持は未証明）

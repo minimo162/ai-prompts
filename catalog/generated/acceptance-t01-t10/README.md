@@ -1,5 +1,9 @@
 # 通常M365 Copilotチャット受入試験 T01〜T10（継続中）
 
+### 2026-09-14 現行版P3-1送信・PAD受入
+
+現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を通常M365 Copilot新規会話 `https://m365.cloud.microsoft/chat/conversation/2167fd22-b6fb-4101-9379-8f4e760a518a`へThink Deeper・2実添付で1回送信した。評価者用正解コード・期待値・Issue本文は送らず、回答の4行Robinを無修正保存した。専用空フロー `RobinKnowledgeP31CurrentBundleLive20260914e`（Designer PID 11016）へ貼付け・保存・再コピーし、2回Runとも成功。`CatalogList=[CatalogItem, SecondItem]`、`NewVar=SecondItem`を確認した。生成SHA `fdaa3eea…`、PAD再コピーはCRLF SHA `36a8179b…`で正規化後一致のみを記録する。証跡は `catalog/evidence/p31-current-bundle-live-20260914e.json`。旧20260912 P3-1 PASSは現行版へ移さず、P3-2〜P3-6、負例v2、T10厳密保持、A〜G監査は残る。Issue #5/#27はOPEN / partial。
+
 ### 2026-09-14 独立T04（現行版・候補partial）
 
 現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を新規Think Deeper通常チャットへ実添付し、件数・期待値を依頼本文から除外した独立依頼を1回送信した。公式応答（末尾LF除外SHA `a932e7e7…`）とDOM単一`pre`（SHA `dd4f39f0…43569d`、9行、plain `=>` 5、escaped `\\=>` 0）を無修正保存した。
@@ -73,7 +77,7 @@ T10については、既存の2回RunとOffice成果物照合を機能実行の�
 | T10 | PASS（Excel A1=T10-Changed、Word/PowerPointは`CopilotOffice 246`保持） | 1 | `catalog/evidence/t10-finald-20260912-live-acceptance-20260912.json` |
 | 独立再試験 T01/T04/T10 | PASS（別チャット・別PADフロー） | 各1 | `catalog/evidence/t01-finald-20260912-independent-acceptance-20260912.json`、`t04-…`、`t10-…` |
 | 負例 v2 N1〜N3 | PASS_NEGATIVE_FAIL_CLOSED（コードフェンス0、Robin命令0。N1は3段入れ子・外側脱出へ差し替え、旧N1は正例P3-2へ） | 1 | `catalog/evidence/negative-suite-finald-20260912-acceptance-20260912.json` |
-| P3-1 リスト添字1 | PASS（4行、実測probeと同一。NewVar=SecondItem） | 1 | `catalog/evidence/p31-finald-20260912-positive-acceptance-20260912.json` |
+| P3-1 リスト添字1 | historical finald PASS（4行、実測probeと同一。NewVar=SecondItem）／現行20260913eは別途P3-1受入済み | 1 + current 1 | `catalog/evidence/p31-finald-20260912-positive-acceptance-20260912.json`、`catalog/evidence/p31-current-bundle-live-20260914e.json` |
 | P3-2 If内If＋EXIT LOOP | PASS（23行、実測原文と同一。OuterCount=2／InnerNo=1／InnerYes=1／LastSeen=SecondItem、出力 SecondItem、3件目未訪問） | 1 | `catalog/evidence/p32-finald-20260912-positive-acceptance-20260912.json` |
 | P3-3 拡張子境界 | PASS（13行、`IncludeSubfolders: True`、TxtCount=3／OtherCount=2、`.TXT`と`.txt.bak`はElse、入力5件不変） | 1 | `catalog/evidence/p33-finald-20260912-positive-acceptance-20260912.json` |
 | P3-4 SaveAs衝突 | PASS（4行、回答が無警告上書き（実測）と退避手順を明記。2回目は既存出力ありで無警告上書き、B2=T05-Changed、入力不変） | 1 | `catalog/evidence/p34-finald-20260912-positive-acceptance-20260912.json` |

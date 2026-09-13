@@ -1,5 +1,11 @@
 # Robinナレッジ作成 進捗
 
+## 2026-09-14 現行版P3-1送信・PAD受入
+
+現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を通常M365 Copilotの新規会話 `https://m365.cloud.microsoft/chat/conversation/2167fd22-b6fb-4101-9379-8f4e760a518a`へThink Deeperで1回送信した。指示全文＋bundleを実添付し、評価者用正解コード・期待値・Issue本文は渡していない。Copilotの回答は4行のRobin（`Variables.CreateNewList`、2項目追加、`SET NewVar TO CatalogList[1]`）を1つのコードブロックで返し、生成原文を無修正保存した。
+
+専用空フロー `RobinKnowledgeP31CurrentBundleLive20260914e`（Designer PID 11016）へ無修正貼付け・保存・再コピーを行った。生成Robin SHA `fdaa3eea…`（205 bytes）、PAD再コピーSHA `36a8179b…`（209 bytes、CRLF）で、改行正規化後の内容一致を確認した。2回Runとも成功し、`CatalogList=[CatalogItem, SecondItem]`、`NewVar=SecondItem`を確認した。証跡は `catalog/evidence/p31-current-bundle-live-20260914e.json` と `catalog/evidence/p31-current-pad-{paste-save,run1,run2}-20260914e.json`。旧P3-1の20260912 PASSは現行版へ移さず、P3-2〜P3-6・負例v2・最終A〜G監査は引き続きOPEN / partial。Issue #5/#27もOPEN / partial。
+
 ## 2026-09-14 独立T10の現行版機能受入
 
 現行正本20260913e（instruction `6ad6f742…`／bundle `79245787…`）を通常M365 Copilotの新規会話 `6edc277b-b005-4d56-8bb7-ba64668ea636`へ3実添付・Think Deeperで1回送信し、応答DOM単一preの16行Robin（SHA `2bcb5512…`）を無修正保存した。元入力との差は許可範囲のExcel A1値とSaveAs先の2行のみ（正規化後の範囲外差分0）。専用フロー `RobinKnowledgeT10IndependentCurrentBundleLive20260914e`（Designer PID 20008）へ貼付け・保存・再コピーし、集計16アクションを確認。2回Runとも成功し、各回の新規出力スナップショットでExcel A1=`T10-Changed`、Word/PPT本文=`CopilotOffice 246`を確認、既存出力は復元した。初回貼付けヘルパーは60秒時点で6件のためタイムアウトしたが、同じ貼付けの後続状態で16件集計が現れたため再送していない。生成→PADはCRLF正規化後のみ一致し、元入力→生成と生バイトの厳密保持は`NOT_PROVEN`のまま。詳細は`catalog/evidence/t10-independent-current-generation-20260914e.json`。独立T10の機能／許可範囲は受入へ追加するが、厳密保持PASSへは昇格しない。Issue #5/#27はOPEN / partial。

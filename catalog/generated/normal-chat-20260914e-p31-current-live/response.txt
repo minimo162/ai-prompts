@@ -1,0 +1,39 @@
+合成データだけを使い、CatalogListを作成して2項目を順番に追加し、実測済みの添字指定CatalogList[1]で2番目の文字列をNewVarへ取り出す案です。専用の取得アクションや未確認の引数は使用しません。
+
+1. 前提・対象範囲
+環境条件: PAD 2.71.115.26224、日本語UI、Power Fx OFF。
+入力: 固定の合成文字列CatalogItemとSecondItem。
+出力: NewVar、型はテキスト、期待値はSecondItem。
+保存先・上書き: ファイル操作を行わないため該当なし。
+アプリ・UI要素: 不要。
+対象サブフロー: Main。
+置換範囲: 空のMainサブフロー全体。既存処理がある場合は、影響を避けるため複製したテスト用サブフローへ貼り付けます。
+
+リスト作成、2項目の追加、CatalogList[1]による取得は、PADからコピーした原文を別の空フローへ再貼り付けし、再コピーのバイト一致と各2回の実行で確認されています。実行結果はCatalogList=[CatalogItem, SecondItem]、NewVar=SecondItemです。根拠はcatalog/evidence/p3-list-idx1-probe-20260912.robinおよびcatalog/evidence/p3-list-idx1-acceptance-20260912.jsonです。PAD-Robin-Knowledge-Bundle
+
+2. PADで先に行う設定
+テスト用の空フローを作成します。
+Mainサブフローを開き、貼り付け位置を空にします。
+入力変数を事前作成する必要はありません。
+1行目でリスト型のCatalogListが生成されます。
+4行目でテキスト型のNewVarが生成されます。
+次のRobinをMainへそのまま貼り付けます。
+3. 貼り付け用Robin
+Variables.CreateNewList List=> CatalogList
+Variables.AddItemToList Item: $'''CatalogItem''' List: CatalogList
+Variables.AddItemToList Item: $'''SecondItem''' List: CatalogList
+SET NewVar TO CatalogList[1]
+
+4. デザイナー上の確認
+アクション数が4個であることを確認します。
+順序が「リスト作成 → 1項目目追加 → 2項目目追加 → 変数設定」になっていることを確認します。
+赤いエラー表示や未設定パラメーターがないことを確認します。
+CatalogListがリスト型として扱われ、NewVarが設定アクションから生成されていることを確認します。
+4番目のアクションを開いた場合、設定値が%CatalogList[1]%に相当することを確認します。添字は0始まりで、実測済みの1だけを使用しています。範囲外、負数、変数による添字指定はこの案の確認範囲外です。PAD-Robin-Knowledge-Bundle
+5. 合成データでの実行確認
+フローを保存します。
+実行し、変数ペインで次を照合します。
+CatalogListが[CatalogItem, SecondItem]
+NewVarがSecondItem
+もう一度実行し、同じ結果になることを確認します。
+実データへ変更する場合は、まず複製したフローで文字列だけを置き換え、アクション順とCatalogList[1]は変更せず再確認します。

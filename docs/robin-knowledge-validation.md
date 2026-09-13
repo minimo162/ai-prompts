@@ -1,4 +1,12 @@
 # Robinナレッジ検証報告
+## 2026-09-14 現行版P3-1の送信・実機PAD受入
+
+現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を、通常M365 Copilotの新規会話 `https://m365.cloud.microsoft/chat/conversation/2167fd22-b6fb-4101-9379-8f4e760a518a`へ同版指示全文とbundleを実添付してThink Deeperで1回送信した。評価者用正解コード・期待値・Issue本文は送っていない。回答DOMの単一コードブロックから4行Robinを無修正保存した。
+
+生成Robin `catalog/generated/normal-chat-20260914e-p31-current-live/generated-robin.txt`（205 bytes、SHA `fdaa3eea…`）を、Console UIAで作成した専用空フロー `RobinKnowledgeP31CurrentBundleLive20260914e`（Designer PID 11016）へ無修正貼付け・保存・再コピーした。PAD再コピーは209 bytes／CRLF（SHA `36a8179b…`）で、改行正規化後のみ一致し、生バイト差を隠していない。2回Runとも成功し、各回の変数プレビューで`CatalogList=[CatalogItem, SecondItem]`、`NewVar=SecondItem`を確認した。原回答・依頼・PAD貼付け保存・Run記録は `catalog/evidence/p31-current-bundle-live-20260914e.json` と同参照ファイルへ分離保存した。
+
+これは現行版P3-1だけの受入であり、旧版P3-1 PASSを現行版へ移していない。P3-2〜P3-6、負例v2、T10厳密保持、最終A〜G監査は未完了のため、Issue #5/#27をOPEN / partialのまま維持する。
+
 ## 2026-09-14 独立T10現行版の機能受入
 
 現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を通常M365 Copilotの新規会話 `https://m365.cloud.microsoft/chat/conversation/6edc277b-b005-4d56-8bb7-ba64668ea636`へ、同版指示全文とbundle・生成元Robinの3実添付でThink Deeper送信した。送信は1回で、評価者用正解コード／期待値／Issue本文は渡していない。応答DOMは単一16行Robin（`catalog/generated/normal-chat-20260914e-t10-independent-live/dom-robin.txt`、SHA `2bcb5512…`）で、生成元との差は許可したExcel A1値とSaveAs先の2行だけ（改行を除く範囲外差分0）。
