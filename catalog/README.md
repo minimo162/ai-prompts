@@ -2,7 +2,11 @@
 
 ### 2026-09-14 現行版P3-1追跡
 
-現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を通常M365 Copilot新規会話へ2実添付して1回送信し、4行Robinを無修正で採取した。専用空フロー `RobinKnowledgeP31CurrentBundleLive20260914e`（Designer PID 11016）で貼付け・保存・再コピー・2回Runを行い、`CatalogList=[CatalogItem, SecondItem]`、`NewVar=SecondItem`を確認した。証跡は `evidence/p31-current-bundle-live-20260914e.json`。旧20260912 P3-1 PASSを現行版へ移していない。P3-2〜P3-6・負例v2・T10厳密保持・A〜G監査は未完了で、Issue #5/#27はOPEN / partial。
+現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を通常M365 Copilot新規会話へ2実添付して1回送信し、4行Robinを無修正で採取した。専用空フロー `RobinKnowledgeP31CurrentBundleLive20260914e`（Designer PID 11016）で貼付け・保存・再コピー・2回Runを行い、`CatalogList=[CatalogItem, SecondItem]`、`NewVar=SecondItem`を確認した。証跡は `evidence/p31-current-bundle-live-20260914e.json`。旧20260912 P3-1 PASSを現行版へ移していない。P3-3〜P3-6・負例v2・T10厳密保持・A〜G監査は未完了で、Issue #5/#27はOPEN / partial。
+
+### 2026-09-14 現行版P3-2追跡
+
+同版指示全文＋bundleを通常M365 Copilot新規会話 `cc53abdf-077f-40eb-873e-f0ef92056be4`へThink Deeperで1回送信し、23行の入れ子If／EXIT LOOP Robinを無修正で採取した。専用空フロー `RobinKnowledgeP32CurrentBundleLive20260914e`（Designer PID 39172→23188）へ貼付け・保存・再コピーし、Designerの権威サマリー`23 アクション`を確認した（ListItem 6件表示は仮想化による偽陰性）。2回Runとも`CatalogList=[CatalogItem, SecondItem, ThirdItem]`、`OuterCount=2`、`InnerNo=1`、`InnerYes=1`、`LastSeen=SecondItem`、出力`SecondItem`を確認した。生成Robin SHA `3189a4c7…`、再コピーSHA `b2c65f7e…`はCRLF差のみで正規化一致。証跡は`evidence/p32-current-bundle-live-20260914e.json`と同参照のpaste/run記録。旧版P3-2 PASSは現行版へ移していない。P3-3〜P3-6・負例v2・T10厳密保持・A〜G監査は未完了で、Issue #5/#27はOPEN / partial。
 
 ### 2026-09-14 独立T04の現行版候補
 

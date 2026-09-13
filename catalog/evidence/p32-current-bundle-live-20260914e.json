@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T20:12:18.8944915Z",
+  "case": "P3-2",
+  "variant": "current_bundle_20260914e",
+  "status": "PASS_CURRENT_BUNDLE_P3_POSITIVE",
+  "normal_chat": {
+    "provider": "Google Chrome normal M365 Copilot chat",
+    "conversation_url": "https://m365.cloud.microsoft/chat/conversation/cc53abdf-077f-40eb-873e-f0ef92056be4",
+    "think_deeper": true,
+    "send_count": 1,
+    "evaluator_keys_or_expected_counts_sent": false,
+    "instruction_path": "copilot/agent-instructions.txt",
+    "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+    "instruction_utf16_code_units": 3947,
+    "bundle_path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+    "request_path": "catalog/generated/normal-chat-20260914e-p32-current-live/request.txt",
+    "request_sha256": "e64270666f55b55cfd9d051d3892b9c54609ea71dc0750d6edac13dcee26e281",
+    "request_chars": 493,
+    "sent_body_capture": {
+      "captured_from": "sent user message DOM",
+      "display_chars_approx": 4508,
+      "note": "The contenteditable display inserts paragraph spacing; canonical instruction and request files remain the authoritative version binding."
+    },
+    "attachments": [
+      {"name": "agent-instructions.txt", "path": "copilot/agent-instructions.txt", "sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c"},
+      {"name": "PAD-Robin-Knowledge-Bundle.txt", "path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt", "sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"}
+    ],
+    "response_path": "catalog/generated/normal-chat-20260914e-p32-current-live/response.txt",
+    "response_bytes": 4788,
+    "response_sha256": "1c07bdbb4444760dcc51feb32793a45bcf987f9986f17f1ac5d9481b4b04fcc7",
+    "response_dom_pre": {
+      "pre_count": 1,
+      "line_count": 23,
+      "path": "catalog/generated/normal-chat-20260914e-p32-current-live/generated-robin.txt",
+      "bytes": 1057,
+      "final_newline": true,
+      "sha256": "3189a4c70221f3764f94fdd2c9cb48b6f3a4a661a7e84622e9c440e77fb52577"
+    }
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeP32CurrentBundleLive20260914e",
+    "designer_pids": [39172, 23188],
+    "paste_evidence": "catalog/evidence/p32-current-pad-paste-save-20260914e.json",
+    "source_robin": "catalog/generated/normal-chat-20260914e-p32-current-live/generated-robin.txt",
+    "source_sha256": "3189a4c70221f3764f94fdd2c9cb48b6f3a4a661a7e84622e9c440e77fb52577",
+    "recopy_path": "catalog/generated/normal-chat-20260914e-p32-current-live/pad-recopy.robin",
+    "recopy_sha256": "b2c65f7e9191734f780bdbe7cc1d8696974f5fc66e893473c9b91bee98f9eaaa",
+    "action_count": 23,
+    "visible_action_count_during_copy": 6,
+    "designer_status_during_copy": "23 選択されたアクション",
+    "normalized_generation_to_pad_equal": true,
+    "raw_generation_to_pad_equal": false,
+    "raw_difference": "PAD recopy is CRLF with final newline; generation is LF with final newline.",
+    "run1_evidence": "catalog/evidence/p32-current-pad-run1-20260914e.json",
+    "run2_evidence": "catalog/evidence/p32-current-pad-run2-20260914e.json",
+    "run_statuses": ["success", "success"],
+    "variable_previews_both_runs": ["[CatalogItem, SecondItem, ThirdItem]", "SecondItem", "1", "1", "SecondItem", "2"],
+    "output_path": "catalog/evidence/p3-nested-if-output-20260912.txt",
+    "output_sha256": "e9b8ede43ae9035e790355accce03d00170b23011b4caf1895e0c84e3aef5142",
+    "output_bytes": 13,
+    "output_utf8_bom_text": "SecondItem",
+    "output_expected_match": true
+  },
+  "judgment": "Current-version P3-2 was sent once with the two actual attachments. Copilot produced one 23-line Robin block without manual repair. Dedicated PAD paste/save, status-confirmed 23-action structure, CRLF-only recopy difference, and two successful runs produced the expected counters, early EXIT LOOP behavior, and UTF-8 output. This is separate from the old 20260912 P3 PASS and does not migrate old evidence."
+}

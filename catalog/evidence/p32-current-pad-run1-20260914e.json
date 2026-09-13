@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-13T20:03:39.2361575Z",
+  "flow_name": "RobinKnowledgeP32CurrentBundleLive20260914e",
+  "run_status": "success",
+  "ready_observed": true,
+  "start_enabled_after": true,
+  "variable_previews": [
+    "[CatalogItem, SecondItem, ThirdItem]",
+    "SecondItem",
+    "1",
+    "1",
+    "SecondItem",
+    "2"
+  ]
+}

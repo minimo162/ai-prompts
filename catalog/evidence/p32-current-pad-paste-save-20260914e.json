@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T20:03:02.8082816Z",
+  "flow_name": "RobinKnowledgeP32CurrentBundleLive20260914e",
+  "pad_process_id": 39172,
+  "pad_file_version": "2.71.115.26224",
+  "inventory_evidence": "catalog/evidence/p32-current-pad-inventory-20260914e.json",
+  "source_robin": "catalog/generated/normal-chat-20260914e-p32-current-live/generated-robin.txt",
+  "source_sha256": "3189a4c70221f3764f94fdd2c9cb48b6f3a4a661a7e84622e9c440e77fb52577",
+  "source_bytes": 1057,
+  "paste_confirmed": true,
+  "paste_confirmation": {
+    "designer_status": "23 選択されたアクション",
+    "designer_action_count": 23,
+    "visible_action_count": 6,
+    "virtualized_list_false_negative": true,
+    "initial_exact_count_script": "Paste-PadRobinLive.ps1 expected=23 reported=6; status-based confirmation then observed the authoritative 23-action summary",
+    "retries": 0,
+    "generated_robin_modified": false
+  },
+  "saved_confirmed": true,
+  "clipboard_restored": true,
+  "execution_requested": false,
+  "pad_recopy": {
+    "path": "catalog/generated/normal-chat-20260914e-p32-current-live/pad-recopy.robin",
+    "sha256": "b2c65f7e9191734f780bdbe7cc1d8696974f5fc66e893473c9b91bee98f9eaaa",
+    "bytes": 1080,
+    "raw_equal_to_generated": false,
+    "crlf_normalized_equal_to_generated": true,
+    "recopy_crlf_lines": 23,
+    "generated_ends_with_lf": true,
+    "recopy_ends_with_lf": true
+  }
+}

@@ -4,6 +4,10 @@
 
 現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を通常M365 Copilot新規会話 `https://m365.cloud.microsoft/chat/conversation/2167fd22-b6fb-4101-9379-8f4e760a518a`へThink Deeper・2実添付で1回送信した。評価者用正解コード・期待値・Issue本文は送らず、回答の4行Robinを無修正保存した。専用空フロー `RobinKnowledgeP31CurrentBundleLive20260914e`（Designer PID 11016）へ貼付け・保存・再コピーし、2回Runとも成功。`CatalogList=[CatalogItem, SecondItem]`、`NewVar=SecondItem`を確認した。生成SHA `fdaa3eea…`、PAD再コピーはCRLF SHA `36a8179b…`で正規化後一致のみを記録する。証跡は `catalog/evidence/p31-current-bundle-live-20260914e.json`。旧20260912 P3-1 PASSは現行版へ移さず、P3-2〜P3-6、負例v2、T10厳密保持、A〜G監査は残る。Issue #5/#27はOPEN / partial。
 
+### 2026-09-14 現行版P3-2送信・PAD受入
+
+同版指示全文＋bundleを通常M365 Copilot新規会話 `cc53abdf-077f-40eb-873e-f0ef92056be4`へThink Deeper・1回送信し、評価者用期待値を渡さず23行の入れ子If／EXIT LOOP Robinを無修正保存した。専用フロー `RobinKnowledgeP32CurrentBundleLive20260914e`（Designer PID 39172→23188）へ貼付け・保存・再コピーし、Designerの`23 アクション`を確認した。ListItem 6件表示は仮想化のため件数不受入とは扱わない。2回Runとも`[CatalogItem, SecondItem, ThirdItem]`、`OuterCount=2`、`InnerNo=1`、`InnerYes=1`、`LastSeen=SecondItem`、出力`SecondItem`を確認した。生成SHA `3189a4c7…`とPAD再コピーSHA `b2c65f7e…`はCRLF差のみで正規化一致。詳細は`catalog/evidence/p32-current-bundle-live-20260914e.json`およびpaste/run証跡。旧P3-2 PASSは現行版へ移さず、P3-3〜P3-6・負例v2・T10厳密保持・A〜G監査は残る。Issue #5/#27はOPEN / partial。
+
 ### 2026-09-14 独立T04（現行版・候補partial）
 
 現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を新規Think Deeper通常チャットへ実添付し、件数・期待値を依頼本文から除外した独立依頼を1回送信した。公式応答（末尾LF除外SHA `a932e7e7…`）とDOM単一`pre`（SHA `dd4f39f0…43569d`、9行、plain `=>` 5、escaped `\\=>` 0）を無修正保存した。

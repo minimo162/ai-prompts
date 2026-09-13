@@ -5,7 +5,17 @@
 
 生成Robin `catalog/generated/normal-chat-20260914e-p31-current-live/generated-robin.txt`（205 bytes、SHA `fdaa3eea…`）を、Console UIAで作成した専用空フロー `RobinKnowledgeP31CurrentBundleLive20260914e`（Designer PID 11016）へ無修正貼付け・保存・再コピーした。PAD再コピーは209 bytes／CRLF（SHA `36a8179b…`）で、改行正規化後のみ一致し、生バイト差を隠していない。2回Runとも成功し、各回の変数プレビューで`CatalogList=[CatalogItem, SecondItem]`、`NewVar=SecondItem`を確認した。原回答・依頼・PAD貼付け保存・Run記録は `catalog/evidence/p31-current-bundle-live-20260914e.json` と同参照ファイルへ分離保存した。
 
-これは現行版P3-1だけの受入であり、旧版P3-1 PASSを現行版へ移していない。P3-2〜P3-6、負例v2、T10厳密保持、最終A〜G監査は未完了のため、Issue #5/#27をOPEN / partialのまま維持する。
+これは現行版P3-1だけの受入記録であり、旧版P3-1 PASSを現行版へ移していない。続くP3-2は別節で現行版受入を記録する。P3-3〜P3-6、負例v2、T10厳密保持、最終A〜G監査は未完了のため、Issue #5/#27をOPEN / partialのまま維持する。
+
+## 2026-09-14 現行版P3-2の送信・実機PAD受入
+
+現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`）を通常M365 Copilot新規会話 `https://m365.cloud.microsoft/chat/conversation/cc53abdf-077f-40eb-873e-f0ef92056be4`へ同版指示全文＋bundleを実添付し、Think Deeperで1回送信した。評価者用正解コード・固定期待値・Issue本文は渡していない。応答DOMの単一`pre`から23行Robinを無修正保存した。
+
+生成Robin `catalog/generated/normal-chat-20260914e-p32-current-live/generated-robin.txt`（1057 bytes、SHA `3189a4c7…`）を専用空フロー `RobinKnowledgeP32CurrentBundleLive20260914e`へ貼付け・保存した。貼付け直後のListItem 6件は仮想化表示で、Designerの権威サマリー`23 アクション`を確認した。再コピー `pad-recopy.robin`（1080 bytes、CRLF、SHA `b2c65f7e…`）は生成原文と生バイトは異なるが、改行正規化後は一致する。生成コードの手直し・unescape・後付け期待値は行っていない。
+
+PADを2回Runし、両回とも変数プレビュー`[CatalogItem, SecondItem, ThirdItem]`、`SecondItem`、`1`、`1`、`SecondItem`、`2`を確認した。指定出力は13 bytesのUTF-8 BOM付き`SecondItem`（SHA `e9b8ede4…`）で、`OuterCount=2`、`InnerNo=1`、`InnerYes=1`、`LastSeen=SecondItem`、ThirdItem未訪問の期待と一致する。run1はDesigner PID 39172、run2は再オープン後PID 23188で、各Runの原JSONを保存した。
+
+この受入は現行版P3-2だけを対象とし、旧20260912 P3-2 PASSを移していない。P3-3〜P3-6、負例v2、T10厳密保持、最終A〜G監査は残件で、Issue #5/#27はOPEN / partialを維持する。詳細は`catalog/evidence/p32-current-bundle-live-20260914e.json`および同参照のpaste/run証跡を参照。
 
 ## 2026-09-14 独立T10現行版の機能受入
 
