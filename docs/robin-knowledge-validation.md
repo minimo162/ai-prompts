@@ -607,6 +607,16 @@ run2後のPAD再コピー`catalog/evidence/t05-copilot-live-generation-20260913-
 
 現行正本20260913e（instruction `6ad6f742…`／bundle `79245787…`）を通常M365 Copilot新規会話 `https://m365.cloud.microsoft/chat/conversation/a505b6cc-1517-4959-8978-63f495d900c6`へThink Deeper・同版2実添付で1回送信した。評価者用期待値は渡さず、応答DOMの単一preから2行Robinを無修正で保存した。専用空フロー `RobinKnowledgeP35CurrentBundleLive20260914e`（Designer PID 34916）へ貼付け・保存・再コピーし、権威サマリー`2 選択されたアクション`を確認した。2回Runとも成功し、変数プレビューで`FormattedDateTime2=2026-09-14`を確認した。生成SHA `004ef2f3…`、PAD再コピーSHA `19cf8878…`はCRLFシリアライズ差のみで正規化一致し、生バイト一致は主張しない。要求本文は実行日の日付を検証する同版入力であり、`yyyy-MM-dd`以外の書式トークン、既存変換アクション編集経路、元入力から生成への厳密保持は未証明である。paste helperはタイムアウトしたが、同じ1回貼付けのDesigner状態をUIAで独立確認し、再貼付けはしていない。証跡は`catalog/evidence/p35-current-bundle-live-20260914e.json`、`p35-current-pad-paste-save-20260914e.json`、`p35-current-pad-run1-20260914e.json`、`p35-current-pad-run2-20260914e.json`。旧P3-5 PASSは現行版へ移していない。P3-6、T04形式、T10厳密保持、負例v2、A〜G監査は残件で、Issue #5/#27はOPEN / partialを維持する。
 
+## 2026-09-14 現行版P3-6の送信・実機PAD受入
+
+現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を、通常M365 Copilot新規会話 `https://m365.cloud.microsoft/chat/conversation/724624ae-3f2d-4c82-92a6-f4e40a51f64d`へThink Deeperで1回送信した。指示全文は本文へ含め、同版bundleを実添付した。評価者用正解コード・期待値・Issue本文は渡していない。固定P3-6依頼（依頼SHA `b328ce94…`、末尾LFを除く意味SHA `972c80a0…`）を全文で含むcomposer本文の意味SHAは `bd47ec51…`、送信回数は1回だった。
+
+応答DOMの単一`pre`から12行のエラー処理Robinを無修正で保存した（生成SHA `a1544f08…`、458 bytes）。`ON ERROR FileNotFoundError`のアクション単位処理で`NewVar=named`と欠損LastErrorを得る構造を含み、ブロック側利用者定義`FileNotFound`の一致や`ErrorHandled`／`ErrorHandledDefault`設定は実測で成立していない。生成回答・DOM・依頼・添付ハッシュは `catalog/evidence/p36-current-bundle-live-20260914e.json` と `catalog/generated/normal-chat-20260914e-p36-current-live/` に原記録を保全した。
+
+専用空フロー `RobinKnowledgeP36CurrentBundleLive20260914e`（Designer PID 19332）へ生成Robinを無修正で1回貼付け・保存・再コピーした。Designer権威集計は`4 アクション`で、再コピーは先頭`BLOCK`末尾空白とCRLFの差を含む471 bytes（SHA `ae5bcb55…`）だった。最初のpaste helperには12行をアクション数として渡してタイムアウトしたが、これは入力パラメータの不整合であり生成失敗ではない。空フロー確認後の同一1回貼付けをUIAで確認して保存し、重複貼付け・自動unescape・手修正は行っていない。
+
+PADを2回Runし、両回とも成功、`NewVar=named`、`LastError`に`見つかりません`を確認した。欠損fixtureはRun前後とも不在で、ブロック側ルール一致・生成からPADまでの生バイト厳密一致は`NOT_PROVEN`のまま残す。P3-6は現行版の生成・無修正貼付け・保存・2回機能受入へ追加するが、T04形式、T10厳密保持、負例v2、最終A〜G監査は未完了で、Issue #5/#27はOPEN / partialを維持する。
+
 ## 2026-09-14 T01現行版独立再試験
 
 現行正本20260913e（instruction SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を、通常M365 Copilotの新規会話 `f0af1bd2-f257-4ba4-9b22-c3da0cce9ef9`（Think Deeper、指示＋bundle実添付）で独立T01依頼へ適用した。公式「応答のコピー」で得た応答は2321文字、DOM上の`pre`は1件・3行・646 bytes（SHA `2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47`）で、生成Robinは無修正で保存した。公式コピー本文SHA（末尾LFなし）は`3e50575fc8bb7406e248140b1d7f47639faa185ceec0f21a3ef04cfb576659cc`として、DOM原文・ローカル保存の末尾LF差と分離記録している。

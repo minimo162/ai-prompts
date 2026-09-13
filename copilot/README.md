@@ -6,7 +6,11 @@
 
 ### 2026-09-14 現行版P3-4 / P3-5
 
-現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`）を新規Think Deeper通常チャットへ同版指示＋bundle実添付で各1回送信し、評価者用件数・期待値を含めず回答Robinを無修正で採取した。P3-4は4行SaveAs Robinを`RobinKnowledgeP34CurrentBundleLive20260914e`（PID 30620）へ貼付け・保存・再コピー、2回Runし、Run1/Run2のxlsxでB2=`T05-Changed`、入力不変、Run2上書きと出力SHA変化を確認した（[P3-4証跡](../catalog/evidence/p34-current-bundle-live-20260914e.json)）。P3-5は2行日時書式Robinを`RobinKnowledgeP35CurrentBundleLive20260914e`（PID 34916）へ貼付け・保存・再コピー、2回Runし、両回`FormattedDateTime2=2026-09-14`を確認した（[P3-5証跡](../catalog/evidence/p35-current-bundle-live-20260914e.json)）。いずれも生成Robinの手修正・自動unescapeは行わず、PAD再コピーはCRLF正規化一致のみを記録する。P3-6、T04形式、T10厳密保持、負例v2、A〜G監査は残り、Issue #5/#27はOPEN / partial。
+現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`）を新規Think Deeper通常チャットへ同版指示＋bundle実添付で各1回送信し、評価者用件数・期待値を含めず回答Robinを無修正で採取した。P3-4は4行SaveAs Robinを`RobinKnowledgeP34CurrentBundleLive20260914e`（PID 30620）へ貼付け・保存・再コピー、2回Runし、Run1/Run2のxlsxでB2=`T05-Changed`、入力不変、Run2上書きと出力SHA変化を確認した（[P3-4証跡](../catalog/evidence/p34-current-bundle-live-20260914e.json)）。P3-5は2行日時書式Robinを`RobinKnowledgeP35CurrentBundleLive20260914e`（PID 34916）へ貼付け・保存・再コピー、2回Runし、両回`FormattedDateTime2=2026-09-14`を確認した（[P3-5証跡](../catalog/evidence/p35-current-bundle-live-20260914e.json)）。いずれも生成Robinの手修正・自動unescapeは行わず、PAD再コピーはCRLF正規化一致のみを記録する。P3-6も下記の通り現行版受入済みで、T04形式、T10厳密保持、負例v2、A〜G監査は残り、Issue #5/#27はOPEN / partial。
+
+### 2026-09-14 現行版P3-6
+
+現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`）を通常M365 Copilot新規会話 `724624ae-3f2d-4c82-92a6-f4e40a51f64d`へ、指示全文を本文へ含め、同版bundleを実添付してThink Deeperで1回送信した。12行のエラー処理RobinをDOM単一`pre`から無修正保存し、専用空フロー `RobinKnowledgeP36CurrentBundleLive20260914e`（Designer PID 19332、権威4アクション）へ貼付け・保存・再コピー、2回Runまで完了した。両回`NewVar=named`と`LastError`の欠損メッセージを確認した。最初のhelperは12行をアクション数として渡したためタイムアウトしたが、入力パラメータの不整合として原記録し、同じ1回の貼付け状態をUIAで確認して重複貼付けは行っていない。生成SHA `a1544f08…`、再コピーSHA `ae5bcb55…`は先頭行末尾空白／CRLF差を含むため生バイト一致を主張しない。ブロック側利用者定義`FileNotFound`一致と厳密生成保持は`NOT_PROVEN`。詳細は [P3-6証跡](../catalog/evidence/p36-current-bundle-live-20260914e.json)、[PAD貼付け](../catalog/evidence/p36-current-pad-paste-save-20260914e.json)、[生成原文](../catalog/generated/normal-chat-20260914e-p36-current-live/)。T04形式、T10厳密保持、負例v2、A〜G監査は残り、Issue #5/#27はOPEN / partial。
 
 ### 2026-09-14 現行版P3-3
 

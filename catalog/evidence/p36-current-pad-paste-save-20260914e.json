@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T06:54:00+09:00",
+  "case": "P3-6 current PAD paste/save",
+  "status": "PASS_CURRENT_PASTE_SAVE_WITH_PARAMETER_CORRECTION",
+  "flow_name": "RobinKnowledgeP36CurrentBundleLive20260914e",
+  "process_id": 19332,
+  "designer_title": "Power Automate | RobinKnowledgeP36CurrentBundleLive20260914e",
+  "source_robin": "catalog/generated/normal-chat-20260914e-p36-current-live/generated-robin.txt",
+  "source_sha256": "a1544f086aa83eb58d87978db3215d5f0e59093ec0c1e70c62aa0b7b59697aa5",
+  "source_bytes": 458,
+  "empty_before_paste": true,
+  "empty_before_paste_basis": "The status-based helper completed its empty-list check before its timeout; the new flow had no actions before the single paste.",
+  "paste_confirmed": true,
+  "designer_action_count": 4,
+  "visible_action_count": 4,
+  "designer_status": "4 選択されたアクション",
+  "virtualized_list_false_negative": false,
+  "saved_confirmed": true,
+  "initial_helper_parameter": {
+    "expected_action_count": 12,
+    "outcome": "TIMEOUT_NO_EVIDENCE",
+    "cause": "The 12 Robin lines were incorrectly passed as an action count. PAD's authoritative top-level count is 4 (BLOCK, File.ReadTextFromFile, END, ERROR=>LastError).",
+    "generation_failure": false,
+    "follow_up": "The same single paste was observed at 4 actions; no duplicate paste or generated-code edit was issued. Save and recopy used the corrected authoritative count."
+  },
+  "recopy": {
+    "path": "catalog/generated/normal-chat-20260914e-p36-current-live/pad-recopy.robin",
+    "sha256": "ae5bcb55035043596c48536d3366bb4a9b5f35eaebfac8414fdf9552ab543e4b",
+    "bytes": 471,
+    "raw_byte_equal": false,
+    "difference": "PAD adds one trailing space to the BLOCK line; line endings are CRLF.",
+    "normalized_content_equal_after_trailing_block_space_removal": true
+  },
+  "manual_edit": false,
+  "automatic_unescape": false,
+  "execution_requested": false,
+  "notes": "The generated 12-line Robin was pasted from file without repair. The historical P3-6 acceptance also records 4 actions for this 12-line Robin; line count and PAD action count are not interchangeable."
+}

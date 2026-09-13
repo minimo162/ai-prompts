@@ -1,0 +1,12 @@
+{
+    "schema_version":  1,
+    "observed_at":  "2026-09-13T21:54:04.9603043Z",
+    "flow_name":  "RobinKnowledgeP36CurrentBundleLive20260914e",
+    "run_status":  "success",
+    "ready_observed":  true,
+    "start_enabled_after":  true,
+    "variable_previews":  [
+                              "ファイル C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt が見つかりません",
+                              "named"
+                          ]
+}

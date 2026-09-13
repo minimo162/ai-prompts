@@ -26,6 +26,10 @@
 
 現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を新規Think Deeper通常M365 Copilot会話 `a505b6cc-1517-4959-8978-63f495d900c6`へ同版指示＋bundle実添付し、件数・期待値を渡さず2行の日時書式Robinを無修正保存した。専用空フロー `RobinKnowledgeP35CurrentBundleLive20260914e`（Designer PID 34916）へ貼付け・保存・再コピーし、Designerの`2 アクション`を確認した。2回Runとも成功し、`FormattedDateTime2=2026-09-14`を確認した。生成SHA `004ef2f3…`、PAD再コピーSHA `19cf8878…`はCRLF差のみで正規化後一致、生バイト一致は主張しない。`yyyy-MM-dd`以外の書式トークンと既存変換アクション編集経路はNOT_PROVEN。詳細は`catalog/evidence/p35-current-bundle-live-20260914e.json`およびpaste/run証跡。P3-6、T04形式、T10厳密保持、負例v2、A〜G全体監査は残り、Issue #5/#27はOPEN / partial。
 
+### 2026-09-14 P3-6現行版生成・PAD受入
+
+現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）の全文を本文へ置き、同版bundleと指示ファイルを新規Think Deeper通常M365 Copilot会話 `724624ae-3f2d-4c82-92a6-f4e40a51f64d`へ実添付し1回送信した。評価者用件数・期待値を渡さず、12行のエラー処理Robinを無修正保存した。専用空フロー `RobinKnowledgeP36CurrentBundleLive20260914e`（Designer PID 19332）へ貼付け・保存・再コピーし、Designerの権威サマリー`4 アクション`を確認した。初回paste helperはRobin行数12をアクション数として渡した入力ミスでタイムアウトしたが、同一1回貼付け後の4アクション状態をUIAで独立確認し、重複貼付けはしていない。2回Runとも成功し、`NewVar=named`、`LastError`に`見つかりません`を確認した。生成SHA `a1544f08…`、PAD再コピーSHA `ae5bcb55…`は`BLOCK`末尾空白とCRLF差のみで正規化比較し、生バイト一致は主張しない。ブロック側利用者定義`FileNotFound`一致と厳密保持はNOT_PROVEN。詳細は`catalog/evidence/p36-current-bundle-live-20260914e.json`およびpaste/run証跡。P3-5の別書式トークン、T04形式、T10厳密保持、負例v2、A〜G全体監査は残り、Issue #5/#27はOPEN / partial。
+
 ### 2026-09-14 T01現行版独立再試験
 
 現行正本20260913e（instruction SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を、通常M365 Copilotの新規会話 `f0af1bd2-f257-4ba4-9b22-c3da0cce9ef9`（Think Deeper、指示＋bundle実添付）で独立T01依頼へ適用した。公式「応答のコピー」で得た応答は2321文字、DOM上の`pre`は1件・3行・646 bytes（SHA `2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47`）で、生成Robinは無修正で保存した。公式コピー本文SHA（末尾LFなし）は`3e50575fc8bb7406e248140b1d7f47639faa185ceec0f21a3ef04cfb576659cc`として、DOM原文・ローカル保存の末尾LF差と分離記録している。
