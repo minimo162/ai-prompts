@@ -2,6 +2,8 @@
 
 > 2026-09-12 最終監査: 固定finaldの生成受入は維持。A〜Gの一部の追跡証跡不足によりPR提出準備は未完了です。[監査結果](../docs/robin-knowledge-validation.md)。指示文・知識の受入済みバイトは変更していません。
 
+> 2026-09-13e追補: T09の指示行を、知識原文・`docs/pad-live-setup.md` と一致する `WAIT 1` へ最小修正しました。現行正本は指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、[manifest](knowledge-bundle-manifest-20260913e.json) です。同版の通常M365 Copilot知識precheckは `PASS_REFERENCE_ONLY`（[証跡](../catalog/evidence/current-bundle-20260913e-precheck.json)）まで実施し、T09は新規通常チャット生成→専用空フローでControlRepository登録・削除→無修正6行貼付け・保存・再コピー→2回Run（`T09-clicked`）まで受入しました（[受入証跡](../catalog/evidence/t09-20260913e-pad-acceptance.json)）。T01〜T08/T10・独立再試験・P3正例・負例v2は未実施のため、旧finald PASSを新版本へ継承せず、状態はOPEN / partialです。T03候補受入とT04形式不受入、T10厳密保持NOT_PROVENは別証跡で保全しています。
+
 このディレクトリは、通常のMicrosoft 365 Copilotチャットへ本文入力と実ファイル添付で渡す、PAD Robinの検証用配布物です。公式入口は `https://microsoft365.com/chat` です。Agent Builder／Copilot Studioの作成・権限調査は今回の検証対象にしません。PADやCopilotを自動実行するアプリではありません。PADの画面から得た原文、設定、型、依存、実行結果を根拠に、利用者がデザイナーへ貼り付けるRobinを生成・修正します。
 
 ## 登録するファイル
@@ -28,7 +30,7 @@ Final3固定版のbundle SHA-256は `2bc3f2b4c5c709e94547ccf4b75f7084c9c42460578
 
 ナレッジは技術資料であり、指示欄と同じ優先順位の命令書ではありません。`pad-robin-prompts.md` は既存の編集用原稿として残し、配布版と二重に指示欄へ貼りません。
 
-`agent-instructions.txt` の現作業版は UTF-8 BOMなし、UTF-16コード単位数3,949（10,096バイト）で、8,000文字上限以内です。結合版は `tools/Build-KnowledgeBundle.ps1` で7原本から機械的に再生成します。現作業版の指示SHA-256は `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、P3追補を含むbundle SHA-256は `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5` です。旧bundleの生成・PAD結果を新bundleへ継承せず、新ハッシュで知識precheckとT01〜T10を再受入します。T10既存フロー修正では、元行の文字列・矢印・バックスラッシュ・アンダースコアを確認できない場合はコードを出さず、手編集で差分を隠しません。
+`agent-instructions.txt` の現作業版は UTF-8 BOMなし、UTF-16コード単位数3,947（10,094バイト）で、8,000文字上限以内です。結合版は `tools/Build-KnowledgeBundle.ps1` で7原本から機械的に再生成します。現作業版の指示SHA-256は `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA-256は `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12` です。旧bundleの生成・PAD結果を新bundleへ継承せず、新ハッシュで知識precheckとT01〜T10を再受入します。T10既存フロー修正では、元行の文字列・矢印・バックスラッシュ・アンダースコアを確認できない場合はコードを出さず、手編集で差分を隠しません。
 
 ## 通常チャット検証手順
 

@@ -7,6 +7,14 @@
 
 `.work/finale-20260912/`の候補・回答・実行原記録はローカル限定で保全し、今回のPRには含めない。本文中の同パス参照はリモートレビュー可能な原証跡ではなく、候補の受入昇格には必要な原記録の選別・ハッシュ照合・追跡追加が必要。次の単一作業はMain/P3Workerの別空フロー再利用。貼付け・各1アクションの再コピーまで取得したが、単一Main専用観測器が2サブフローを拒否し実行要求前に停止。run記録はなく、PASSには数えない。PAD全体の故障とは扱わない。
 
+## 2026-09-13e 正本固定と実機precheck
+
+T09の配布指示行39に残っていた`WAIT 500`（秒）を、実測知識と`docs/pad-live-setup.md`の単位に合わせて`WAIT 1`へ最小修正した。変更後の正本は指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`である。旧finaldの指示SHA `b4a3c24f…`に対する生成・PAD受入は履歴として保持し、新版本へ移していない。
+
+同版の通常M365 Copilotチャット（Google Chrome、Think Deeper、指示全文＋bundle実添付）を新規会話`https://m365.cloud.microsoft/chat/conversation/f1efa8e2-0c54-4797-81d5-fcb45e1c0302`で送信した。回答は参照要約のみ（Robinコード0ブロック、回答DOM 4,460文字、SHA `8cc646cce609a3b4fcdffc317b2c4a908c783ecf3948b595c56c4cda4a43b420`）で、リスト添字1、EXIT/NEXTの最近接ループ、拡張子境界、SaveAs上書き、`yyyy-MM-dd`、アクション単位`FileNotFoundError`と未確認境界を引用した。証跡は`catalog/evidence/current-bundle-20260913e-precheck.json`。これは`PASS_REFERENCE_ONLY`であり、生成Robin／PAD貼付け／実行の受入ではない。
+
+指示バイトが変わったため、20260913eのT01〜T08／T10、独立T01/T04/T10、P3正例、負例v2は未実施として残す。T09は同版の通常チャット生成後、専用空フロー`RobinKnowledgeT09CurrentBundleLive20260913e`でControlRepository登録→登録6アクション削除→生成6行の無修正貼付け・保存→再コピー→2回Runを実施し、両回`T09-clicked`、Ready、エラーなし、PAD起動Edge残存なしを確認した（`catalog/evidence/t09-20260913e-pad-acceptance.json`）。初回30秒ヘルパー試行は実行中のまま証跡を出さず、完了後も受入回へ数えず、状態確定後に2回を取り直した。T03補正依頼の2run成功は同一SHAの候補追跡として保持し、T04の応答由来エスケープ不受入、T10厳密保持`NOT_PROVEN`も維持する。Issue #5/#27はOPEN／partialのままとする。
+
 今回の提出前確認：CurrentStatus46項目PASS。検査コード不変の直前非ライブAll36/36 PASSを再利用し、今回の再実行とはしない。監査修正差分のdiff --checkはPASS、基準mainからの全差分では原証跡2行の末尾空白を保全する。DOMはNOT_RUN、GitHub CIはPRの実際の状態を別途確認する。保護未追跡資料はSHA e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699のまま保持する。
 
 ## 2026-09-13 PAD別空フロー再利用（B/C/D/E）

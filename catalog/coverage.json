@@ -6,8 +6,8 @@
     "note": "current_package.status records the partial 2026-09-13 follow-up while historical finald generation acceptance remains linked separately; required_checks and some probe reuse traces do not establish complete A-G acceptance. Historical per-probe statuses are preserved."
   },
   "generated_at": "2026-09-13T21:20:00+09:00",
-  "reconciled_at": "2026-09-13T21:20:00+09:00",
-  "reconciliation_note": "Finald 79245787 evidence and PR #29 limited reuse are preserved. On 2026-09-13, T03 received a request-only correction against the frozen finale candidate (instruction 6ad6f742, WAIT 1) and passed two unmodified PAD runs; T04 response-origin escaping remains not accepted. The candidate is not promoted over the canonical distribution instruction b4a3c24f (WAIT 500), so package status remains OPEN / partial.",
+  "reconciled_at": "2026-09-13T22:16:41+09:00",
+  "reconciliation_note": "Finald 79245787 evidence and PR #29 limited reuse are preserved. The canonical instruction was minimally corrected from WAIT 500 to WAIT 1 to match the measured knowledge and is fixed as version 20260913e (instruction 6ad6f742). A live same-version knowledge precheck is PASS_REFERENCE_ONLY and T09 has fresh normal-chat/PAD acceptance; T03 revised-request evidence remains separately classified, T04 response-origin escaping remains not accepted, and historical finald PASS is not transferred. Package status remains OPEN / partial.",
   "environment": {
     "pad_file_version": "2.71.115.26224",
     "language": "ja-JP",
@@ -15,15 +15,16 @@
     "captured_date": "2026-09-07"
   },
   "current_package": {
-    "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
     "knowledge_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
-    "status": "partial_current_package_followup_20260913",
+    "status": "partial_current_package_20260913e_T09_accepted",
     "evidence": "evidence/current-package-status-20260913.json",
     "audit": "evidence/issue5-completion-audit-20260913.json",
     "historical_finald": "evidence/current-package-status-20260912-finald.json",
     "static_check": "evidence/current-package-static-check-20260912-finald.json",
-    "knowledge_precheck": "evidence/current-bundle-finald-precheck-20260912.json",
-    "t01_prepared": "evidence/t01-finald-prepared-20260912.json",
+    "knowledge_precheck": "evidence/current-bundle-20260913e-precheck.json",
+    "version": "20260913e",
+    "t01_prepared": "evidence/t01-20260913e-prepared.json",
     "t01_staged": "evidence/t01-current-bundle-staged-20260911.json",
     "t01_stage_current": "evidence/t01-current-bundle-stage-expired-20260911.json",
     "history": {
@@ -34,9 +35,9 @@
     "candidate_generation_20260913": {
       "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
       "knowledge_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
-      "status": "T01_T02_T05_T10_PAD_PASTED_SAVED_TWO_RUNS_RECOPIED_PROVEN_T03_REVISED_REQUEST_CANDIDATE_ACCEPTED_T04_GENERATION_NOT_ACCEPTED",
-      "evidence": "evidence/t01-copilot-live-generation-20260913-pad-acceptance.json; evidence/t02-copilot-live-generation-20260913-pad-acceptance.json; evidence/t05-copilot-live-generation-20260913-pad-acceptance.json; evidence/t03-copilot-live-generation-20260913-attempt1.json; evidence/t03-copilot-live-generation-20260913-attempt2.json; evidence/t03-copilot-live-generation-20260913-attempt3.json; evidence/t04-copilot-live-generation-20260913-attempt1.json; evidence/t04-copilot-live-generation-20260913-attempt2.json; evidence/t05-copilot-live-generation-20260913-attempt1.json; evidence/t05-copilot-live-generation-20260913.json; evidence/t10-copilot-live-generation-20260913-pad-acceptance.json",
-      "note": "Frozen finale-20260912 candidate has current-version T01, T02, T05, and T10 generation/PAD evidence from fresh normal Copilot chats with same-version attachments, unmodified paste/save, two runs, output checks where applicable, and recopy. The three original T03 attempts remain raw and not accepted because the fixed counter expectation was not observable from the original request; a request-only correction against the same candidate instruction/bundle produced a 13-line Robin and two successful PAD runs, with post-save recopy recorded separately. T04 was generated twice with the same prompt/version/attachments; attempt 2 has response-origin backslashes before => and attempt 1 bracket provenance remains unproven, so neither is accepted. The candidate is not promoted; T04, strict T10, and the remaining package audit remain outstanding."
+      "status": "T01_T02_T05_T09_T10_PAD_PASTED_SAVED_TWO_RUNS_RECOPIED_PROVEN_T03_REVISED_REQUEST_CANDIDATE_ACCEPTED_T04_GENERATION_NOT_ACCEPTED",
+      "evidence": "evidence/t01-copilot-live-generation-20260913-pad-acceptance.json; evidence/t02-copilot-live-generation-20260913-pad-acceptance.json; evidence/t05-copilot-live-generation-20260913-pad-acceptance.json; evidence/t09-20260913e-pad-acceptance.json; evidence/t03-copilot-live-generation-20260913-attempt1.json; evidence/t03-copilot-live-generation-20260913-attempt2.json; evidence/t03-copilot-live-generation-20260913-attempt3.json; evidence/t04-copilot-live-generation-20260913-attempt1.json; evidence/t04-copilot-live-generation-20260913-attempt2.json; evidence/t05-copilot-live-generation-20260913-attempt1.json; evidence/t05-copilot-live-generation-20260913.json; evidence/t10-copilot-live-generation-20260913-pad-acceptance.json",
+      "note": "Frozen finale-20260912 candidate has current-version T01, T02, T05, and T10 generation/PAD evidence from fresh normal Copilot chats with same-version attachments, unmodified paste/save, two runs, output checks where applicable, and recopy. The 20260913e package adds a fresh normal-chat T09 generation and dedicated empty-flow PAD acceptance (ControlRepository registration, deletion, generated six-action paste, recopy, two runs with T09-clicked). The three original T03 attempts remain raw and not accepted because the fixed counter expectation was not observable from the original request; a request-only correction against the same candidate instruction/bundle produced a 13-line Robin and two successful PAD runs, with post-save recopy recorded separately. T04 was generated twice with the same prompt/version/attachments; attempt 2 has response-origin backslashes before => and attempt 1 bracket provenance remains unproven, so neither is accepted. The candidate is not promoted; T04, strict T10, and the remaining package audit remain outstanding."
     }
   },
   "left_panel_scope": {
@@ -2591,8 +2592,8 @@
       "id": "G-ui-browser",
       "missing": "PAD WebAutomation通し実行",
       "status": "PASS_RUNTIME_FINALC_20260912",
-      "reason": "WAIT 500は500秒（誤設定）。待機1秒の再採取原文を2回実行し、最終版 f42f5acf でT09生成（WAIT 1）→貼付け→2回実行PASS。 finald 79245787 でT01〜T10・独立再試験を同一版再受入。",
-      "evidence": "evidence/t09-repo-run1-acceptance-20260912.json; evidence/t09-repo-run2-20260912.json; evidence/t09-gen-element-import-design-check-20260912.json; evidence/t09-gen-final3-robin-run1-acceptance-20260912.json; evidence/t09-wait1-acceptance-20260912.json; evidence/t09-finalc-20260912-live-acceptance-20260912.json",
+      "reason": "WAIT 500は500秒（誤設定）。待機1秒の再採取原文を2回実行し、最終版 f42f5acf でT09生成（WAIT 1）→貼付け→2回実行PASS。 finald 79245787 でT01〜T10・独立再試験を同一版再受入。さらに20260913eの正本WAIT 1でT09を別専用空フローへ再生成→ControlRepository登録→6アクション貼付け→再コピー→2回実行PASS。",
+      "evidence": "evidence/t09-repo-run1-acceptance-20260912.json; evidence/t09-repo-run2-20260912.json; evidence/t09-gen-element-import-design-check-20260912.json; evidence/t09-gen-final3-robin-run1-acceptance-20260912.json; evidence/t09-wait1-acceptance-20260912.json; evidence/t09-finalc-20260912-live-acceptance-20260912.json; evidence/t09-20260913e-pad-acceptance.json",
       "resume": "別URL・別要素・拡張無効環境は未確認のまま"
     }
   ]

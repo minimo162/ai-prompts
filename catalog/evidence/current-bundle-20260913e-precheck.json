@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T21:52:00+09:00",
+  "status": "PASS_REFERENCE_ONLY",
+  "package": {
+    "label": "20260913e",
+    "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+    "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+    "bundle_manifest": "copilot/knowledge-bundle-manifest-20260913e.json"
+  },
+  "chat": {
+    "mode": "normal_m365_copilot_chat",
+    "browser": "Google Chrome",
+    "model": "Think Deeper",
+    "sent": true,
+    "response_observed": true,
+    "conversation_url": "https://m365.cloud.microsoft/chat/conversation/f1efa8e2-0c54-4797-81d5-fcb45e1c0302",
+    "conversation_title": "PAD Robin形式の確認済み範囲要約",
+    "full_instruction_in_body": true,
+    "attachments": [
+      "agent-instructions.txt",
+      "PAD-Robin-Knowledge-Bundle.txt"
+    ],
+    "attachment_sha256": {
+      "agent-instructions.txt": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+      "PAD-Robin-Knowledge-Bundle.txt": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+    },
+    "body": {
+      "composed_text_sha256": "9423c8a1e68f0f8c1d5d0af1c6ad6d64d394d4cea94ed0fb1e88c1c8f7f973eb",
+      "composed_text_chars": 4320,
+      "composer_inner_text_chars": 4338,
+      "wait_1_count": 1,
+      "wait_500_count": 0,
+      "verification": "Instruction text was composed from the current candidate instruction message (WAIT 1) plus the fixed precheck request; the rendered composer adds browser whitespace and is recorded separately."
+    }
+  },
+  "response": {
+    "raw_preserved": true,
+    "raw_location": "M365 Copilot conversation URL above; no generated Robin was copied or edited",
+    "dom_inner_text_sha256": "8cc646cce609a3b4fcdffc317b2c4a908c783ecf3948b595c56c4cda4a43b420",
+    "chars": 4460,
+    "robin_blocks": 0,
+    "pre_elements": 0,
+    "capture": "Completed response read from the Copilot answer DOM; response-copy button was invoked."
+  },
+  "checks": {
+    "generated_robin": false,
+    "referenced_list_index_1": true,
+    "referenced_exit_next_loop_scope": true,
+    "referenced_extension_boundaries": true,
+    "referenced_saveas_overwrite_date_format_named_error": true,
+    "unconfirmed_boundaries_listed": true
+  },
+  "acceptance": "PASS_REFERENCE_ONLY",
+  "note": "This precheck is for the new fixed 20260913e package and is separate from case acceptance. It records the live normal-chat send and reference-only answer; no Robin generation, PAD paste, or run was performed. Historical finald evidence is not transferred."
+}

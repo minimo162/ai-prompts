@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T22:03:00+09:00",
+  "case": "T09",
+  "status": "GENERATED_RAW_NOT_PAD_ACCEPTED",
+  "package_label": "20260913e",
+  "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+  "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+  "bundle_manifest": "copilot/knowledge-bundle-manifest-20260913e.json",
+  "prompt": {
+    "source": "historical T09 prompt tail extracted from the preserved finald conversation; no expected values or evaluator code were added",
+    "request_sha256": "6a859e4a5df51bf9534ba5e8c98a42e7edd664a02b442ed5aa617f1108922167",
+    "request_chars": 566,
+    "body_chars_before_browser_serialization": 4527,
+    "wait_1_count": 1,
+    "wait_500_count": 0
+  },
+  "chat": {
+    "mode": "normal_m365_copilot_chat",
+    "browser": "Google Chrome",
+    "model": "Think Deeper",
+    "sent": true,
+    "response_observed": true,
+    "conversation_url": "https://m365.cloud.microsoft/chat/conversation/ad60fa85-140a-40d9-8546-09e0a2c4c54b",
+    "attachments": [
+      "agent-instructions.txt",
+      "PAD-Robin-Knowledge-Bundle.txt"
+    ],
+    "attachment_sha256": {
+      "agent-instructions.txt": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+      "PAD-Robin-Knowledge-Bundle.txt": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+    }
+  },
+  "generated_robin": {
+    "raw_unmodified": true,
+    "code_blocks": 1,
+    "action_count": 6,
+    "path": "catalog/generated/normal-chat-20260913e-t09/robin.txt",
+    "sha256": "7c576b499dab61a5d5228b16d4bd9589dcdd537e96a658f2b5386e936c946a44",
+    "chars": 1406,
+    "utf8_bytes": 1438,
+    "line_count": 7,
+    "wait_1_count": 1,
+    "wait_500_count": 0,
+    "backslash_count": 30
+  },
+  "pad": {
+    "status": "PASS_CURRENT_20260913E",
+    "paste_register": "catalog/evidence/t09-20260913e-pad-paste-register.json",
+    "paste_generated": "catalog/evidence/t09-20260913e-pad-paste-generated.json",
+    "run1": "catalog/evidence/t09-20260913e-pad-run1.json",
+    "run2": "catalog/evidence/t09-20260913e-pad-run2.json",
+    "recopy": "catalog/evidence/t09-20260913e-pad-recopy.robin",
+    "acceptance_evidence": "catalog/evidence/t09-20260913e-pad-acceptance.json",
+    "flow_name": "RobinKnowledgeT09CurrentBundleLive20260913e",
+    "designer_process_id": 37604,
+    "observed": {
+      "action_count": 6,
+      "wait_1_count": 1,
+      "wait_500_count": 0,
+      "run1_attribute_value": "T09-clicked",
+      "run2_attribute_value": "T09-clicked",
+      "browser_closed_check": "no PAD-launched t09 URL process remained after either run"
+    },
+    "initial_attempt": "A first 30s helper request remained running beyond the timeout and emitted no evidence; PAD later reached Ready with T09-clicked. It is preserved as non-accepted and was not retried until state was known.",
+    "initial_attempt_evidence": "catalog/evidence/t09-20260913e-pad-run0-timeout.json",
+    "reason": "Fresh same-version PAD paste/save/recopy and two accepted runs completed after the raw generation was captured."
+  },
+  "raw_response": {
+    "preserved_in_conversation": true,
+    "dom_inner_text_sha256": "a3763e7546d600851d6726172c0bfe57c186b6c5ceb2884b7900fd84bbbbd056",
+    "chars": 2596,
+    "response_path": "M365 conversation URL above; generated Robin was separately saved without editing"
+  },
+  "acceptance": "PASS_CURRENT_20260913E",
+  "note": "This is a new 20260913e generation. The code block was captured as produced and pasted without unescape or hand-edit. The T09 acceptance is current-version only; no historical PASS was transferred to other cases."
+}

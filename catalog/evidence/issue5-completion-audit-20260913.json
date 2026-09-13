@@ -4,14 +4,18 @@
   "status": "partial_current_package_followup",
   "issue_state": "OPEN",
   "package": {
-    "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
+    "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
     "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
-    "bundle_manifest": "copilot/knowledge-bundle-manifest-20260912d.json"
+    "bundle_manifest": "copilot/knowledge-bundle-manifest-20260913e.json",
+    "version_label": "20260913e"
   },
   "p4_current_bundle": {
-    "status": "PARTIAL_SAME_VERSION_ACCEPTANCE_WITH_CANDIDATE_FOLLOWUP",
-    "knowledge_precheck": "PASS_REFERENCE_ONLY",
-    "knowledge_precheck_evidence": "evidence/current-bundle-finald-precheck-20260912.json",
+    "status": "PARTIAL_20260913E_PRECHECK_PLUS_T09_ACCEPTED_HISTORICAL_FINALD_PRESERVED",
+    "knowledge_precheck": "PASS_REFERENCE_ONLY_20260913E",
+    "knowledge_precheck_evidence": "evidence/current-bundle-20260913e-precheck.json",
+    "historical_acceptance_not_transferred": true,
+    "current_version_accepted_cases": ["T09"],
+    "remaining_current_version_cases": ["T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T10"],
       "accepted_cases": [
       "T01",
       "T02",
@@ -27,7 +31,8 @@
     "case_results": {
       "knowledge_precheck": {
         "status": "PASS_REFERENCE_ONLY",
-        "evidence": "evidence/current-bundle-finald-precheck-20260912.json",
+        "evidence": "evidence/current-bundle-20260913e-precheck.json",
+        "version": "20260913e",
         "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
       },
       "T01": {
@@ -71,8 +76,9 @@
         "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
       },
       "T09": {
-        "status": "PASS_FINALD_20260912",
-        "evidence": "evidence/t09-finald-20260912-live-acceptance-20260912.json",
+        "status": "PASS_CURRENT_20260913E",
+        "evidence": "evidence/t09-20260913e-pad-acceptance.json",
+        "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
         "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
       },
       "T10": {
@@ -115,9 +121,10 @@
       "named_FileNotFound_match": "action-level ON ERROR FileNotFoundError fired (P3-6 measured); block-level user-defined name FileNotFound still unmatched"
     },
     "t09": {
-      "status": "PASS_FINALD_20260912",
-      "evidence": "evidence/t09-finald-20260912-live-acceptance-20260912.json",
-      "wait_line": "WAIT 1"
+      "status": "PASS_CURRENT_20260913E",
+      "evidence": "evidence/t09-20260913e-pad-acceptance.json",
+      "wait_line": "WAIT 1",
+      "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c"
     }
   },
   "p5": {
@@ -138,7 +145,9 @@
       "evidence": "evidence/t04-copilot-live-generation-20260913-diagnosis.json"
     },
     "promotion": "NOT_DONE",
-    "canonical_distribution_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e"
+    "canonical_distribution_instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+    "canonical_distribution_version": "20260913e",
+    "promotion_note": "The former candidate instruction is now the canonical source after the minimal WAIT 500→WAIT 1 correction. Fresh same-version T09 acceptance is recorded; this does not promote historical finald PASS for other cases, and the new version still requires the remaining fresh case acceptance."
   },
   "p3": {
     "measured_20260912": [
@@ -166,7 +175,7 @@
     "Agent Builder registration (out of scope)",
     "DOM check (tests/Test-CopilotDom.cjs) NOT_RUN: Playwright not configured"
   ],
-  "result": "Historical finald 79245787 acceptance is preserved. Current package remains partial: the 2026-09-13 T03 request-only candidate follow-up passed two PAD runs, T04 remains not accepted, and the candidate is not promoted over the canonical WAIT 500 instruction.",
+  "result": "Historical finald 79245787 acceptance is preserved. Current canonical package 20260913e aligns instruction and knowledge at WAIT 1, has a live reference-only precheck, and has fresh T09 PAD acceptance; T03 revised-request evidence remains separately classified, T04 remains not accepted, T10 strict preservation is NOT_PROVEN, and fresh acceptance for the remaining cases is still pending.",
   "final_evidence_audit": {
     "status": "PARTIAL_REQUIRED_TRACEABILITY_GAPS",
     "target_commit": "e295387b525492f87e890bc0fb8a74aaf2396c2f",
@@ -175,7 +184,7 @@
     "pr_submission_ready": false,
     "report": "docs/robin-knowledge-validation.md",
     "required_gaps": [
-      "T09 instruction line 39 still specifies WAIT 500, contradicting knowledge 05 lines 40/48 (WAIT 1). Fixing instruction bytes requires a new fixed version and same-version acceptance; do not relabel finald PASS.",
+      "The canonical instruction WAIT 500→WAIT 1 correction is fixed in 20260913e. Because instruction bytes changed, fresh same-version acceptance is required; do not relabel historical finald PASS as 20260913e.",
       "T03 2026-09-13 request-only correction passed on the frozen candidate; no canonical distribution promotion or full new-version acceptance was performed.",
       "T04 2026-09-13 raw generations remain format-not-accepted; no unescape or repair was applied.",
       "B/C/D/E: separate-empty-flow reuse trace missing for some existing probes; see report matrix. A boolean/subtraction and D folder creation were supplemented with new reuse evidence; do not infer the other items from T01-T10 PASS.",
