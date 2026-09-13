@@ -36,6 +36,7 @@
     "negative_suite_historical_finald": "evidence/negative-suite-finald-20260912-acceptance-20260912.json",
     "negative_suite_current_status": "PASS_NEGATIVE_CURRENT_20260914E_FAIL_CLOSED_HISTORICAL_FINALD_PRESERVED",
     "p3_sha_correction": "evidence/p3-current-sha-correction-20260914e.json",
+    "issue_update_20260914e": "evidence/issue-update-20260914e.json",
     "version": "20260913e",
     "current_version_accepted_cases": ["T01", "T02", "T03", "T05", "T06", "T07", "T08", "T09", "P3-1", "P3-2", "P3-3", "P3-4", "P3-5", "P3-6", "independent-T01", "independent-T10-functional-scope"],
     "t01_prepared": "evidence/t01-20260913e-prepared.json",

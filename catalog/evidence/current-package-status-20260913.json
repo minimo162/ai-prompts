@@ -2,6 +2,7 @@
   "schema_version": 2,
   "captured_at": "2026-09-14T06:54:00+09:00",
   "reconciled_at": "2026-09-14T08:23:25+09:00",
+  "issue_update": "evidence/issue-update-20260914e.json",
   "status": "partial_current_package_20260913e_T01_T02_T03_T05_T06_T07_T08_T09_P31_P32_P33_P34_P35_P36_accepted_T01_independent_20260914e_T10_independent_functional_scope_accepted_20260914e_T04_independent_candidate_partial_20260914e_strict_T10_not_proven",
   "issue_state": "OPEN",
   "version": {
