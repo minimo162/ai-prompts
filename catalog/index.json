@@ -6324,9 +6324,20 @@
       ],
       "scope": "Frozen finale-20260912 candidate: exact instruction body and same-version bundle attachments in a fresh normal Copilot chat; response captured without hand-editing.",
       "current_package_acceptance": false,
-      "execution_status": "generated_response_observed_pad_pasted_saved_two_runs_strict_reproduction_proven",
+      "execution_status": "generated_response_observed_pad_pasted_saved_two_runs_functional_proven_strict_raw_bytes_not_proven",
       "candidate_status": "../.work/finale-20260912/candidate-status.json",
-      "evidence": "evidence/t10-copilot-live-generation-20260913.json; evidence/t10-copilot-live-generation-20260913.robin; evidence/t10-copilot-live-generation-20260913-pad-acceptance.json; evidence/t10-copilot-live-generation-20260913-pad-run-1.json; evidence/t10-copilot-live-generation-20260913-pad-run-2.json; evidence/t10-copilot-live-generation-20260913-pad-recopy.robin; evidence/t10-copilot-live-generation-20260913-pad-recopy-after-run2.robin"
+      "evidence": "evidence/t10-copilot-live-generation-20260913.json; evidence/t10-copilot-live-generation-20260913.robin; evidence/t10-copilot-live-generation-20260913-pad-acceptance.json; evidence/t10-copilot-live-generation-20260913-pad-run-1.json; evidence/t10-copilot-live-generation-20260913-pad-run-2.json; evidence/t10-copilot-live-generation-20260913-pad-recopy.robin; evidence/t10-copilot-live-generation-20260913-pad-recopy-after-run2.robin; evidence/t10-strict-preservation-audit-20260913.json"
+    },
+    {
+      "id": "t10-strict-preservation-audit-2026-09-13",
+      "date": "2026-09-13",
+      "browser": "Local read-only derivation from preserved source, DOM Robin, and PAD recopy",
+      "cases": ["T10"],
+      "scope": "Separates functional two-run execution, authorized content changes on lines 2 and 4, normalized generation-to-recopy equality, and raw-byte preservation; no source repair or normalization-for-pass.",
+      "current_package_acceptance": false,
+      "execution_status": "functional_proven_authorized_scope_proven_strict_raw_bytes_not_proven",
+      "evidence": "evidence/t10-strict-preservation-audit-20260913.json",
+      "regression_test": "../tests/Test-T10StrictPreservation.ps1"
     },
     {
       "id": "normal-chat-t02-candidate-live-generation-2026-09-13",

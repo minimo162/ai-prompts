@@ -91,7 +91,10 @@
       "T10": {
         "status": "PASS_FINALD_20260912",
         "evidence": "evidence/t10-finald-20260912-live-acceptance-20260912.json",
-        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "derived_audit": "evidence/t10-strict-preservation-audit-20260913.json",
+        "functional_execution": "PROVEN_SEPARATELY",
+        "strict_byte_preservation": "NOT_PROVEN"
       }
     },
     "independent_retests": {
@@ -156,6 +159,16 @@
       "stop_condition_reached": true,
       "dom_arrow_provenance": "response_origin"
     },
+    "T10": {
+      "status": "FUNCTIONAL_PROVEN_STRICT_NOT_PROVEN",
+      "derived_audit": "evidence/t10-strict-preservation-audit-20260913.json",
+      "regression_test": "../tests/Test-T10StrictPreservation.ps1",
+      "functional_runs": 2,
+      "authorized_change_lines": [2, 4],
+      "outside_allowed_change_count": 0,
+      "generation_to_pad_recopy": "PROVEN_NORMALIZED_CONTENT_ONLY",
+      "strict_source_to_generation": "NOT_PROVEN"
+    },
     "promotion": "NOT_DONE",
     "canonical_distribution_instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
     "canonical_distribution_version": "20260913e",
@@ -187,7 +200,7 @@
     "Agent Builder registration (out of scope)",
     "DOM check (tests/Test-CopilotDom.cjs) NOT_RUN: Playwright not configured"
   ],
-  "result": "Historical finald 79245787 acceptance is preserved. Current canonical package 20260913e aligns instruction and knowledge at WAIT 1, has a live reference-only precheck, and has fresh T09 PAD acceptance; T03 revised-request evidence remains separately classified, T04 remains not accepted, T10 strict preservation is NOT_PROVEN, and fresh acceptance for the remaining cases is still pending.",
+  "result": "Historical finald 79245787 acceptance is preserved. Current canonical package 20260913e aligns instruction and knowledge at WAIT 1, has a live reference-only precheck, and has fresh T09 PAD acceptance; T03 revised-request evidence remains separately classified, T04 remains not accepted. T10 functional execution and the authorized two-line content scope are proven separately, while strict raw-byte preservation remains NOT_PROVEN; fresh acceptance for the remaining cases is still pending.",
   "final_evidence_audit": {
     "status": "PARTIAL_REQUIRED_TRACEABILITY_GAPS",
     "target_commit": "e295387b525492f87e890bc0fb8a74aaf2396c2f",
@@ -201,7 +214,7 @@
       "T04 2026-09-13 raw generations remain format-not-accepted; fresh-conversation attempt-3 confirms response-origin arrow escapes, and no unescape or repair was applied.",
       "B/C/D/E: separate-empty-flow reuse trace missing for some existing probes; see report matrix. A boolean/subtraction and D folder creation were supplemented with new reuse evidence; do not infer the other items from T01-T10 PASS.",
       "C: saved cell probe proves indexed cell update, not a cell-value read; locate the required cell-reference evidence and distinguish optional column-name row-loop syntax.",
-      "T10: saved finald and finale DOM Robin has LF plus a final newline while the fixed input has CRLF and no final newline. Fourteen unchanged instruction contents match, but strict preservation outside the two authorized changes is not proven. Keep functional run results; do not promote them to full T10 acceptance."
+      "T10: derived audit evidence/t10-strict-preservation-audit-20260913.json proves functional execution separately and proves normalized content scope (only lines 2 and 4 changed; zero outside-line changes), but raw source-to-generation/source-to-recopy byte equality is false because source is CRLF/no-final-LF and generated/recopied forms differ. Keep strict preservation NOT_PROVEN and do not promote functional runs to full T10 acceptance."
     ],
     "t10_strict_preservation": {
       "status": "NOT_PROVEN",

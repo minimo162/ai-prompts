@@ -3,6 +3,12 @@
 
 現行正本の保存済み固定本文（`.work/finale-20260912/t01/sent-body.txt`、4,393文字／11,022 bytes、WAIT 1=1、WAIT 500=0）を新規通常M365 Copilotチャット`https://m365.cloud.microsoft/chat/conversation/f5106564-f9a6-4665-9b09-bd0eca6e6d01`へ送信し、回答全文2,309文字と1つのRobinコードブロック（646 bytes）を無修正で採取した。生成Robinを専用空フロー `RobinKnowledgeT01CurrentBundleLive_20260913e` へ無修正貼付け・保存・再コピーし、2回Run（成功、出力SHA一致、入力SHA不変）まで現行版で受入した。証跡は`catalog/evidence/t01-copilot-live-generation-20260913e.json`、`catalog/evidence/t01-copilot-live-generation-20260913e-pad-acceptance.json`、`catalog/evidence/t01-copilot-live-generation-20260913e-pad-output-comparison.json`。PAD再コピーはLF→CRLFの正規化一致として記録し、生成元からPADまでの厳密バイト一致は主張していない。
 
+## 2026-09-13 T10機能実行・厳密保持の派生監査
+
+既存のT10原記録（入力 `catalog/generated/office-three-apps/generated.robin`、生成DOM Robin、PAD再コピー、2回Run）を変更せず、`catalog/evidence/t10-strict-preservation-audit-20260913.json` と `tests/Test-T10StrictPreservation.ps1` で判定を分離した。機能実行は既存の2回RunとOffice成果物照合により `PROVEN_SEPARATELY`、命令内容の差分は許可された2行目（Excel A1）と4行目（SaveAs先）だけで、変更範囲外の14行は正規化後の内容として一致した。
+
+一方、入力はCRLF・末尾改行なし、生成RobinはLF・末尾改行あり、PAD再コピーはCRLF・末尾改行ありで、source→generation、source→recopy、generation→recopyの生バイトSHAは一致しない。generation→recopyはCRLF正規化後の内容一致に限定して `PROVEN_NORMALIZED_CONTENT_ONLY` と記録し、入力から生成への厳密バイト保持は `NOT_PROVEN` のまま昇格していない。回帰テストは `PASS_REGRESSION_WITH_STRICT_NOT_PROVEN`（ソース修正・自動unescape・期待値変更なし）である。従来の受入JSONにある`strict_reproduction=PROVEN`はこの正規化後再コピーの意味を超えて解釈しない。
+
 ## 2026-09-12 進捗成果のmain反映
 
 利用者の別途明示指示により、ここまでのコミット済み成果を進捗PRとして提出・squashマージする。対象は `7c26038a4daf0907c9692b788c780674cc618373` までの成果と本追記、基準mainは `de5efc1a525db0d49b4af9aa6cd6ec674ef9b4e8`。以下の「未push／PR未準備」は各時点の履歴であり、完全受入の不足判定は維持する。マージ結果はPRとIssue #5/#27に記録する。

@@ -24,7 +24,13 @@
     "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
     "T03_evidence": "evidence/t03-revised-input-live-acceptance-20260913.json",
     "T04_evidence": "evidence/t04-copilot-live-generation-20260913-diagnosis.json",
-    "T10_strict": "NOT_PROVEN"
+    "T10_strict": "NOT_PROVEN",
+    "T10_functional_audit": "evidence/t10-strict-preservation-audit-20260913.json",
+    "T10_regression_test": "../tests/Test-T10StrictPreservation.ps1",
+    "T10_functional_status": "PROVEN_SEPARATELY_TWO_PAD_RUNS",
+    "T10_authorized_change_scope": "PROVEN_CONTENT_SCOPE_ONLY_LINES_2_AND_4",
+    "T10_generation_to_pad_recopy": "PROVEN_NORMALIZED_CONTENT_ONLY",
+    "T10_raw_source_to_generation": "NOT_PROVEN"
   },
   "cases": {
     "knowledge_precheck": {
@@ -419,7 +425,7 @@
       "t01_acceptance": "evidence/t01-copilot-live-generation-20260913e-pad-acceptance.json",
     "candidate_followup": "evidence/t03-revised-input-live-acceptance-20260913.json; evidence/t04-copilot-live-generation-20260913-diagnosis.json",
     "strict_t10": "NOT_PROVEN",
-    "required_next": "Run missing fresh 20260913e normal-chat generation and unmodified PAD acceptance for T02-T03 and T05-T08 and T10; T04 generation is stopped after the fresh-origin failure and requires a version change or separately authorized origin test before any new send; then independent T01/T04/T10, P3 positive cases, and negative suite v2; do not reuse historical finald PASS."
+    "required_next": "Run missing fresh 20260913e normal-chat generation and unmodified PAD acceptance for T02-T03 and T05-T08 and T10; T04 generation is stopped after the fresh-origin failure and requires a version change or separately authorized origin test before any new send; then independent T01/T04/T10, P3 positive cases, and negative suite v2; do not reuse historical finald PASS. T10 strict raw-byte preservation remains a separate NOT_PROVEN gate."
   },
-    "result": "Current canonical package is 20260913e with WAIT 1/WAIT 1 alignment, a live reference-only precheck, and fresh T09 PAD acceptance. Historical finald 79245787 acceptance is preserved but not transferred; full same-version case acceptance remains OPEN / partial."
+    "result": "Current canonical package is 20260913e with WAIT 1/WAIT 1 alignment, a live reference-only precheck, and fresh T09 PAD acceptance. Historical finald 79245787 acceptance is preserved but not transferred; T10 functional execution and the authorized two-line content scope are proven separately while strict raw-byte preservation remains NOT_PROVEN; full same-version case acceptance remains OPEN / partial."
 }

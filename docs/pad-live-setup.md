@@ -113,6 +113,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools\Run-PadFlowLive.ps
 
 PAD再コピーは生成RobinのLF（646 bytes）からCRLF（649 bytes）へ変換されるため、`t01-copilot-live-generation-20260913e-pad-output-comparison.json` ではCRLF正規化後の一致を記録する。生成元からPADまでの厳密バイト一致や、T10の厳密保持をこのT01結果から推論しない。貼付け・保存・Runの原記録は `catalog/evidence/t01-copilot-live-generation-20260913e-pad-*.json`、再コピーは `catalog/generated/normal-chat-20260913e-t01/pad-recopy-after-save.robin` と `pad-recopy-after-run2.robin` に保存した。
 
+T10の判定は同じ規則をより厳密に適用する。`catalog/evidence/t10-strict-preservation-audit-20260913.json` は機能2run、許可された2行（2・4）の内容範囲、生成→PAD再コピーの正規化後一致、生バイト不一致を別フィールドで保持し、`tests/Test-T10StrictPreservation.ps1` で回帰確認する。改行正規化や非変更行の復元で厳密保持をPASSへ変えず、現行は `NOT_PROVEN` とする。
+
 T04の20260913e追跡では、同版指示・bundle・Think Deeper・2実添付を維持した新規通常チャットへ1回だけ送信した。応答DOMの`pre code`と保存Robinは同一SHA（1,585 bytes）で、5箇所の`=\>`がDOM段階から存在したため生成回答由来の形式不履行と判定した。生成回答の手修正、auto-unescape、PAD貼付け・保存・実行は行わず、同じ方法の追加送信を停止する（`catalog/evidence/t04-copilot-live-generation-20260913-attempt3.json`、`t04-next-hypothesis-20260913e.json`）。
 
 ## 2026-09-12 追記: 待機の単位、UI要素の取り込み、通常チャットの操作方法
