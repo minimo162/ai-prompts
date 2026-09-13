@@ -248,6 +248,22 @@
       "generation_to_pad_recopy": "PROVEN_NORMALIZED_CONTENT_ONLY",
       "strict_source_to_generation": "NOT_PROVEN"
     },
+    "T01_independent_20260914e": {
+      "status": "PASS_CURRENT_20260914E_INDEPENDENT_PAD_ACCEPTED",
+      "result": "../generated/normal-chat-20260914e-t01-independent-live/result.json",
+      "evidence": "evidence/t01-independent-current-output-comparison-20260914e.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/f0af1bd2-f257-4ba4-9b22-c3da0cce9ef9",
+      "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "flow_name": "RobinKnowledgeT01IndependentCurrentBundleLive20260914e",
+      "designer_pid": 31848,
+      "runs_completed": 2,
+      "input_unchanged": true,
+      "output_expected_match": true,
+      "recopy_crlf_normalized_equal": true,
+      "strict_source_to_generation": "NOT_ASSESSED",
+      "raw_unmodified": true
+    },
     "promotion": "T03_CURRENT_TRACE_ADDED;_ORIGINAL_REQUEST_NOT_PROMOTED",
     "canonical_distribution_instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
     "canonical_distribution_version": "20260913e",
@@ -283,7 +299,7 @@
     "Agent Builder registration (out of scope)",
     "DOM check (tests/Test-CopilotDom.cjs) NOT_RUN: Playwright not configured"
   ],
-  "result": "Historical finald 79245787 acceptance is preserved. Current canonical package 20260913e aligns instruction and knowledge at WAIT 1, has a live reference-only precheck, and has current-version T01, T02, T03 (explicit corrected request), T05, T06, T07, T08 (measured action-level expected error), and T09 PAD acceptance; T04 remains not accepted. T10 functional execution and the authorized two-line content scope are proven separately, while strict raw-byte preservation remains NOT_PROVEN; independent retests, P3 positives, negative suite v2, and final audit are still pending.",
+  "result": "Historical finald 79245787 acceptance is preserved. Current canonical package 20260913e aligns instruction and knowledge at WAIT 1, has a live reference-only precheck, current-version T01, T02, T03 (explicit corrected request), T05, T06, T07, T08 (measured action-level expected error), and T09 PAD acceptance, plus current-version independent T01 acceptance; T04 remains not accepted. T10 functional execution and the authorized two-line content scope are proven separately, while strict raw-byte preservation remains NOT_PROVEN; independent T04/T10, P3 positives, negative suite v2, and final audit are still pending.",
   "final_evidence_audit": {
     "status": "PARTIAL_REQUIRED_TRACEABILITY_GAPS",
     "target_commit": "e295387b525492f87e890bc0fb8a74aaf2396c2f",

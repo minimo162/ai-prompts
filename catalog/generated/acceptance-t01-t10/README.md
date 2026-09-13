@@ -1,5 +1,13 @@
 # 通常M365 Copilotチャット受入試験 T01〜T10（継続中）
 
+### 2026-09-14 T01現行版独立再試験
+
+現行正本20260913e（instruction SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を、通常M365 Copilotの新規会話 `f0af1bd2-f257-4ba4-9b22-c3da0cce9ef9`（Think Deeper、指示＋bundle実添付）で独立T01依頼へ適用した。公式「応答のコピー」で得た応答は2321文字、DOM上の`pre`は1件・3行・646 bytes（SHA `2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47`）で、生成Robinは無修正で保存した。公式コピー本文SHA（末尾LFなし）は`3e50575fc8bb7406e248140b1d7f47639faa185ceec0f21a3ef04cfb576659cc`として、DOM原文・ローカル保存の末尾LF差と分離記録している。
+
+生成Robinを新規専用空フロー `RobinKnowledgeT01IndependentCurrentBundleLive20260914e`（Designer PID 31848）へ無修正貼付け・保存・再コピーし、3アクションを確認した。PAD再コピーは649 bytes・CRLF（SHA `d2a7f74e6b5038557a5b0eeca1bde4468f4d4fc402a9baaf95ba7fe5e91a317b`）で、生成原文との差はCRLFのみ（正規化後一致）だった。2回Runとも準備完了復帰し、出力は各90 bytes・SHA `2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2`、入力SHA `2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f`は不変。既存出力はRun前後に退避・同一SHAで復元した。証跡は `catalog/evidence/t01-independent-current-output-comparison-20260914e.json`、paste/save、recopy、run1/run2、生成ディレクトリ `catalog/generated/normal-chat-20260914e-t01-independent-live/`。
+
+この独立T01は現行版で`PASS_CURRENT_20260914E_INDEPENDENT_PAD_ACCEPTED`とするが、生成元→PADの厳密バイト保持は評価していない（CRLF正規化後一致のみ）。T04形式不受入、T10厳密バイト保持、独立T04/T10、P3正例、負例v2、A〜G全体監査は残り、Issue #5/#27はOPEN / partialを維持する。
+
 ### 2026-09-14 T08現行版生成・PAD受入
 
 現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を新規通常M365 Copilotチャット（会話 `4b3b4dfc-8fb9-4d0c-a5de-3427be8a00eb`、Think Deeper、同版2添付）へ送信した。固定欠損パス依頼の送信本文SHAは `72b55f32…`、依頼SHAは `79070940…`（完全値は受入JSON）。回答全文と単一12行Robinを無修正で保存した。

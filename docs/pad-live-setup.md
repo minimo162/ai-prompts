@@ -117,6 +117,10 @@ T10の判定は同じ規則をより厳密に適用する。`catalog/evidence/t1
 
 T04の20260913e追跡では、同版指示・bundle・Think Deeper・2実添付を維持した新規通常チャットへ1回だけ送信した。応答DOMの`pre code`と保存Robinは同一SHA（1,585 bytes）で、5箇所の`=\>`がDOM段階から存在したため生成回答由来の形式不履行と判定した。生成回答の手修正、auto-unescape、PAD貼付け・保存・実行は行わず、同じ方法の追加送信を停止する（`catalog/evidence/t04-copilot-live-generation-20260913-attempt3.json`、`t04-next-hypothesis-20260913e.json`）。
 
+## 2026-09-14 現行版T01独立再試験
+
+同じ20260913eの指示／bundle（SHA `6ad6f742…`／`79245787…`）を通常Chrome M365 Copilotの新規会話 `f0af1bd2-f257-4ba4-9b22-c3da0cce9ef9`へ実添付し、Think Deeperで1回送信した。公式応答コピーは2321文字、DOM上の`pre`は1件・3行・646 bytes（SHA `2209d9ce…`）で、生成Robinを無修正保存した。新規PADフロー `RobinKnowledgeT01IndependentCurrentBundleLive20260914e`（PID 31848）へ貼付け・保存・再コピーし、再コピーはCRLF差のみで正規化後一致。2回Runで各出力90 bytes・期待SHA `2b030f2d…`一致、入力SHA `2866f343…`不変、既存出力の同一SHA復元まで確認した（`catalog/evidence/t01-independent-current-output-comparison-20260914e.json`）。生成元→PAD厳密バイト保持は未評価で、T04／T10厳密保持等の残件判定は変更しない。
+
 ## 2026-09-12 追記: 待機の単位、UI要素の取り込み、通常チャットの操作方法
 
 - PADの `WAIT n` は秒単位である（待機ダイアログの説明は「指定された秒数だけフローの実行を中断します」）。`WAIT 500` は8分20秒待つ。T09教材は待機ダイアログで1へ直し、PADから再コピーした `WAIT 1` を正とする。

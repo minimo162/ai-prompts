@@ -6517,6 +6517,28 @@
       "flow_name": "RobinKnowledgeT08CurrentBundleLive20260914e",
       "strict_source_to_pad_bytes": "NOT_CLAIMED",
       "block_level_user_defined_FileNotFound_match": "NOT_PROVEN"
+    },
+    {
+      "id": "normal-chat-t01-independent-current-package-live-2026-09-14",
+      "date": "2026-09-14",
+      "browser": "Google Chrome normal M365 Copilot chat",
+      "model": "Think Deeper",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+      "request_sha256": "5ee9e6f38026afcedcea77d67292568985d3ece09cdea568fcfb9a1c2a0dc3e3",
+      "cases": ["T01", "independent"],
+      "scope": "Fresh current-package independent T01 generation with full instruction and bundle attachments; official response copy and DOM pre preserved, generated Robin unmodified, pasted into a newly-created empty PAD flow, saved, recopied, run twice, expected output and input invariance checked, protected output restored.",
+      "current_package_acceptance": true,
+      "execution_status": "generated_pasted_saved_recopied_two_runs_output_checked_input_unchanged",
+      "manifest": "../copilot/knowledge-bundle-manifest-20260913e.json",
+      "generated": "generated/normal-chat-20260914e-t01-independent-live/robin.txt",
+      "response": "generated/normal-chat-20260914e-t01-independent-live/response.txt",
+      "evidence": "evidence/t01-independent-current-output-comparison-20260914e.json; evidence/t01-independent-current-pad-paste-save-20260914e.json; evidence/t01-independent-current-pad-recopy-20260914e.robin; evidence/t01-independent-current-pad-run1-20260914e.json; evidence/t01-independent-current-pad-run2-20260914e.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/f0af1bd2-f257-4ba4-9b22-c3da0cce9ef9",
+      "flow_name": "RobinKnowledgeT01IndependentCurrentBundleLive20260914e",
+      "designer_pid": 31848,
+      "strict_source_to_pad_bytes": "NOT_CLAIMED",
+      "strict_source_to_generation": "NOT_ASSESSED"
     }
   ],
   "application_integration": {
