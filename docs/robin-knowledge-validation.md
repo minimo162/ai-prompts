@@ -501,6 +501,8 @@ PAD再コピーはrun2後も同一SHA `845c54cc905e50dcb9f8b9d7e55aeba3cb639bee1
 
 同一会話の「再試行」も1コードブロック・9行・1,585 bytes・SHA `feea538a6dd9018554d162400f50d4cd07abe90ed43ef6cca864812ac626be1e`で、矢印の literal バックスラッシュを保持した。生成結果は手修正せず、2試行とも `generated_format_not_accepted`、PAD貼付け・保存・実行なしと判定した（`catalog/evidence/t04-copilot-live-generation-20260913-attempt1.json`、`attempt2.json`）。既存finaldのT04成功を今回候補へ付け替えず、候補statusは`FROZEN_CANDIDATE_NOT_ACCEPTED`、Issue #5/#27はOPEN／partialを維持する。
 
+追加仮説として、同じ指示SHA・bundle SHA・Think Deeper・2添付を維持した新規会話（`https://m365.cloud.microsoft/chat/conversation/fd0a3c67-b305-46a4-92f9-80109bd11611`）へ1回だけ送信した。応答は1コードブロック・9行・1,585 bytes・SHA `feea538a6dd9018554d162400f50d4cd07abe90ed43ef6cca864812ac626be1e`で、DOMの`pre code`文字列にも5箇所の`=\>`が現れ、保存RobinとDOM SHAが一致した。新規会話でも同じ矢印エスケープが再現したため、既存会話・ローカル保存経路に限定された現象ではなく、生成回答由来の形式不履行と切り分けた。入力／出力パスの変更は依頼本文で明示した範囲のみであり、生成Robinは無修正保全、PAD貼付け・保存・実行は行っていない。証跡は`catalog/evidence/t04-copilot-live-generation-20260913-attempt3.json`、`.robin`、`.response.txt`、`.sent-body.txt`、`catalog/evidence/t04-next-hypothesis-20260913e.json`。
+
 ## 2026-09-13 T05候補の同版生成・再試行
 
 候補と同じ指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、Think Deeper、2添付でT05（合成ExcelのB2単一セル書込み→別名保存）を通常M365 Copilotへ送信した。会話URLは`https://m365.cloud.microsoft/chat/conversation/e360f2ad-f623-4290-8e92-7f68e999c9e2?es=SSR`。初回応答は1コードブロック・4行・564 bytes・SHA `299628c3cb205aa8219d23f005b4a7fe99ac76518ce688f497368ccfd87524ca`で、`Instance=\> ExcelInstance`のliteralバックスラッシュを含んだため、原文をそのまま不受入保存した。

@@ -149,7 +149,12 @@
     },
     "T04": {
       "status": "NOT_ACCEPTED_RESPONSE_ORIGIN_ESCAPES",
-      "evidence": "evidence/t04-copilot-live-generation-20260913-diagnosis.json"
+      "evidence": "evidence/t04-copilot-live-generation-20260913-diagnosis.json",
+      "fresh_attempt": "evidence/t04-copilot-live-generation-20260913-attempt3.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/fd0a3c67-b305-46a4-92f9-80109bd11611",
+      "hypothesis": "evidence/t04-next-hypothesis-20260913e.json",
+      "stop_condition_reached": true,
+      "dom_arrow_provenance": "response_origin"
     },
     "promotion": "NOT_DONE",
     "canonical_distribution_instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
@@ -177,7 +182,7 @@
   },
   "remaining": [
     "T03 corrected request is accepted only against the frozen finale candidate; it is not canonical distribution acceptance.",
-    "T04 2026-09-13 generation format remains not accepted; attempt-1 bracket provenance is unproven and attempt-2 arrow escaping is response-origin.",
+    "T04 2026-09-13 generation format remains not accepted; fresh attempt-3 reproduces the response-origin arrow escaping in a new conversation, while attempt-1 bracket provenance remains unproven.",
     "P3 unconfirmed boundaries listed in still_unconfirmed (outside the teaching material; optional)",
     "Agent Builder registration (out of scope)",
     "DOM check (tests/Test-CopilotDom.cjs) NOT_RUN: Playwright not configured"
@@ -193,7 +198,7 @@
     "required_gaps": [
       "The canonical instruction WAIT 500→WAIT 1 correction is fixed in 20260913e. Because instruction bytes changed, fresh same-version acceptance is required; do not relabel historical finald PASS as 20260913e.",
       "T03 2026-09-13 request-only correction passed on the frozen candidate; no canonical distribution promotion or full new-version acceptance was performed.",
-      "T04 2026-09-13 raw generations remain format-not-accepted; no unescape or repair was applied.",
+      "T04 2026-09-13 raw generations remain format-not-accepted; fresh-conversation attempt-3 confirms response-origin arrow escapes, and no unescape or repair was applied.",
       "B/C/D/E: separate-empty-flow reuse trace missing for some existing probes; see report matrix. A boolean/subtraction and D folder creation were supplemented with new reuse evidence; do not infer the other items from T01-T10 PASS.",
       "C: saved cell probe proves indexed cell update, not a cell-value read; locate the required cell-reference evidence and distinguish optional column-name row-loop syntax.",
       "T10: saved finald and finale DOM Robin has LF plus a final newline while the fixed input has CRLF and no final newline. Fourteen unchanged instruction contents match, but strict preservation outside the two authorized changes is not proven. Keep functional run results; do not promote them to full T10 acceptance."

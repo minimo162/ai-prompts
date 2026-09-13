@@ -12,7 +12,7 @@
 
 9/13のT03補正依頼は、固定期待に含まれていた`TxtCount`／`OtherCount`を依頼本文へ明示しただけで、知識・指示・fixture・期待値は変更していません。実際に添付・送信した版は保全済み`finale-20260912`候補（指示SHA `6ad6f742…`、bundle SHA `79245787…`）です。生成Robin（13行、無修正）を専用PADフロー`RobinKnowledgeT03Revised20260913`へ貼付け・保存し、保存後再コピーと2回の実行で`TxtCount=2`／`OtherCount=2`、fixture不変を確認しました（`catalog/evidence/t03-revised-input-live-acceptance-20260913.json`）。PAD再コピーはCRLF、生成原文はLFのため、原バイトSHAは一致とせず、CRLF正規化後一致だけを別記録しています。閉じて再オープン後の再コピーは未実施です。これは補正依頼の生成受入であり、20260913eの全ケース受入完了ではありません。
 
-同日T03の元依頼3試行とT04の2試行は原記録を維持し、T03元依頼は固定カウンター要件が本文から観測できなかった入力契約不整合、T03試行2は追加のリテラルバックスラッシュ形式不具合として分類しました。T04はDOMと保存Robinの対照で、試行2の`=>`前バックスラッシュを生成回答由来と確認し、試行1のFilterParameters括弧の由来は未証明です。自動unescape・生成回答の手修正は行っていません（`catalog/evidence/t03-copilot-live-generation-20260913-diagnosis.json`、`t04-copilot-live-generation-20260913-diagnosis.json`）。既存finald T04の機能受入は履歴として保持します。
+同日T03の元依頼3試行とT04の原記録は維持し、T03元依頼は固定カウンター要件が本文から観測できなかった入力契約不整合、T03試行2は追加のリテラルバックスラッシュ形式不具合として分類しました。T04はDOMと保存Robinの対照で、試行2の`=>`前バックスラッシュを生成回答由来と確認し、試行1のFilterParameters括弧の由来は未証明です。さらに同版・同添付の新規会話へ1回だけ送信した試行3でも同じ5箇所の矢印エスケープがDOMと保存Robinの双方に現れ、会話／保存経路ではなく生成回答由来と確定しました。自動unescape・生成回答の手修正は行っていません（`catalog/evidence/t03-copilot-live-generation-20260913-diagnosis.json`、`t04-copilot-live-generation-20260913-diagnosis.json`、`t04-copilot-live-generation-20260913-attempt3.json`）。既存finald T04の機能受入は履歴として保持します。
 
 ## 現行最終版（2026-09-12、finald-20260912）
 
