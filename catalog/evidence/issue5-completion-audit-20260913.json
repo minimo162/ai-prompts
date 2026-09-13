@@ -14,6 +14,7 @@
     "knowledge_precheck": "PASS_REFERENCE_ONLY_20260913E",
     "knowledge_precheck_evidence": "evidence/current-bundle-20260913e-precheck.json",
     "historical_acceptance_not_transferred": true,
+    "accepted_cases_scope": "historical_finald_20260912_only",
     "current_version_accepted_cases": ["T09"],
     "remaining_current_version_cases": ["T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T10"],
       "accepted_cases": [
