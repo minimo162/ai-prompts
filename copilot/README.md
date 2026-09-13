@@ -4,6 +4,10 @@
 
 20260913e正本（instruction SHA `6ad6f742…`、bundle SHA `79245787…`）を新規Think Deeper通常チャットへ同版指示＋bundle実添付し、評価者用件数・期待値を含めない補正版依頼を1回送信した。公式応答とDOM単一`pre`から得た9行Robinは無修正で保存され、`=>` 5箇所、`\\=>` 0箇所だった。新規空フロー `RobinKnowledgeT04IndependentCurrentBundleLive20260914eD`へ貼付け・保存・再コピーし、2回Runとも成功。Run2のxlsxは3行3列（対象/A/10、対象/C/25、対象/D/5）、入力SHA不変、既存成果物復元を確認した。Run1のxlsxスナップショットが未採取のため `candidate_partial` とし、元T04の応答由来literalバックスラッシュ不受入は保持・非昇格。3回目のRunは行わない。詳細は [独立T04比較](../catalog/evidence/t04-independent-current-output-comparison-20260914e.json)、[生成原文](../catalog/generated/normal-chat-20260914e-t04-independent-live/)。
 
+### 2026-09-14 現行版P3-4 / P3-5
+
+現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`）を新規Think Deeper通常チャットへ同版指示＋bundle実添付で各1回送信し、評価者用件数・期待値を含めず回答Robinを無修正で採取した。P3-4は4行SaveAs Robinを`RobinKnowledgeP34CurrentBundleLive20260914e`（PID 30620）へ貼付け・保存・再コピー、2回Runし、Run1/Run2のxlsxでB2=`T05-Changed`、入力不変、Run2上書きと出力SHA変化を確認した（[P3-4証跡](../catalog/evidence/p34-current-bundle-live-20260914e.json)）。P3-5は2行日時書式Robinを`RobinKnowledgeP35CurrentBundleLive20260914e`（PID 34916）へ貼付け・保存・再コピー、2回Runし、両回`FormattedDateTime2=2026-09-14`を確認した（[P3-5証跡](../catalog/evidence/p35-current-bundle-live-20260914e.json)）。いずれも生成Robinの手修正・自動unescapeは行わず、PAD再コピーはCRLF正規化一致のみを記録する。P3-6、T04形式、T10厳密保持、負例v2、A〜G監査は残り、Issue #5/#27はOPEN / partial。
+
 ### 2026-09-14 現行版P3-3
 
 20260913e正本（instruction SHA `6ad6f742…`、bundle SHA `79245787…`）を新規Think Deeper通常チャット `8e3e9a69-098f-41ce-82df-47b581c6bbad`へ同版指示＋bundle実添付し、評価者用件数・期待値を含めない依頼を1回送信した。応答DOM単一`pre`から得た13行Robinを無修正保存し、`RobinKnowledgeP33CurrentBundleLive20260914e`へ貼付け・保存・再コピー、2回Runまで完了した。Designer集計は`13 アクション`（ListItem 7件表示は仮想化による偽陰性）、Run値は`TxtCount=3`／`OtherCount=2`で、5入力fixtureのSHA不変を確認した。生成SHA `2b3494e4…`、PAD再コピーSHA `e909a165…`はCRLF正規化後のみ一致し、生バイト一致は主張しない。詳細は [P3-3受入](../catalog/evidence/p33-current-bundle-live-20260914e.json) と [生成原文](../catalog/generated/normal-chat-20260914e-p33-current-live/)。P3-4〜P3-6、負例v2、T10厳密保持・A〜G監査は残り、Issue #5/#27はOPEN / partial。

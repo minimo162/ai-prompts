@@ -603,6 +603,10 @@ PAD再コピーはrun2後も同一SHA `845c54cc905e50dcb9f8b9d7e55aeba3cb639bee1
 
 run2後のPAD再コピー`catalog/evidence/t05-copilot-live-generation-20260913-pad-recopy-after-run2.robin`（および初回再コピー）は、生成原文とbyte一致（4行563 bytes、SHA `be40e6b337620f1c76ba650b202f316d4b80b339de1c859fe1cb55a9f2714911`）した。統合証跡は`catalog/evidence/t05-copilot-live-generation-20260913-pad-acceptance.json`。T05候補単体は生成・無修正貼付け・保存・2run・期待値照合・再コピーまで`PROVEN`とするが、保護候補statusは更新せず、T03/T04/T06〜T09、独立・負例・全体監査は未完了である。従って候補statusは`FROZEN_CANDIDATE_NOT_ACCEPTED`、Issue #5/#27は`OPEN／partial`を維持する。
 
+## 2026-09-14 現行版P3-5生成・PAD受入
+
+現行正本20260913e（instruction `6ad6f742…`／bundle `79245787…`）を通常M365 Copilot新規会話 `https://m365.cloud.microsoft/chat/conversation/a505b6cc-1517-4959-8978-63f495d900c6`へThink Deeper・同版2実添付で1回送信した。評価者用期待値は渡さず、応答DOMの単一preから2行Robinを無修正で保存した。専用空フロー `RobinKnowledgeP35CurrentBundleLive20260914e`（Designer PID 34916）へ貼付け・保存・再コピーし、権威サマリー`2 選択されたアクション`を確認した。2回Runとも成功し、変数プレビューで`FormattedDateTime2=2026-09-14`を確認した。生成SHA `004ef2f3…`、PAD再コピーSHA `19cf8878…`はCRLFシリアライズ差のみで正規化一致し、生バイト一致は主張しない。要求本文は実行日の日付を検証する同版入力であり、`yyyy-MM-dd`以外の書式トークン、既存変換アクション編集経路、元入力から生成への厳密保持は未証明である。paste helperはタイムアウトしたが、同じ1回貼付けのDesigner状態をUIAで独立確認し、再貼付けはしていない。証跡は`catalog/evidence/p35-current-bundle-live-20260914e.json`、`p35-current-pad-paste-save-20260914e.json`、`p35-current-pad-run1-20260914e.json`、`p35-current-pad-run2-20260914e.json`。旧P3-5 PASSは現行版へ移していない。P3-6、T04形式、T10厳密保持、負例v2、A〜G監査は残件で、Issue #5/#27はOPEN / partialを維持する。
+
 ## 2026-09-14 T01現行版独立再試験
 
 現行正本20260913e（instruction SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を、通常M365 Copilotの新規会話 `f0af1bd2-f257-4ba4-9b22-c3da0cce9ef9`（Think Deeper、指示＋bundle実添付）で独立T01依頼へ適用した。公式「応答のコピー」で得た応答は2321文字、DOM上の`pre`は1件・3行・646 bytes（SHA `2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47`）で、生成Robinは無修正で保存した。公式コピー本文SHA（末尾LFなし）は`3e50575fc8bb7406e248140b1d7f47639faa185ceec0f21a3ef04cfb576659cc`として、DOM原文・ローカル保存の末尾LF差と分離記録している。
