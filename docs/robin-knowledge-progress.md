@@ -343,3 +343,15 @@ Issue #5/#27の最新本文と指定コメント（`5650828099`／`5650826208`�
 前回のB停止条件を再現確認した。`Get-AgentPadSnapshot`の既定契約が`SubflowTabControl`のMain 1個を要求し、`Run-Subflow-Reuse.ps1`の固定2サブフロー実行前に`PAD_SUBFLOW: exactly one Main subflow is required.`で準備拒否となる境界を特定した。既定契約は維持したまま、明示された`ExpectedSubflowNames @('Main','P3Worker')`だけを受理する`Get-AgentPadSubflowTabs`と、対象PID／タイトル／HWND、Main選択、Ready・エラー0、実行後running→idle、`ButtonPressed=OK`プレビュー、原文SHA不変を分離記録する`tools/Run-PadSubflowReuseLive.ps1`を追加した。未知の名前、重複、誤入口、未選択Main、実行後観測不成立はfail-closedとし、実行要求後に再Runしない。
 
 回帰確認として`tests/Test-Pad.ps1`は340件PASS（実PAD/UIA／クリップボード／フロー実行は未実施）。現ホストの`PAD.Designer`プロセスとCUAネイティブアプリは観測できず、BのMainからの2回実行・保存→閉じる→再オープン→両サブフロー再コピーはまだ開始していない。この限定停止とソース原文のSHAは`catalog/evidence/p3-subflow-reuse-observer-20260913.json`へ保存し、既存の`catalog/evidence/p3-subflow-probe-20260910.json`および`.work/finale-20260912/b-subflow-reuse/`の実行前失敗を上書きしない。IssueはOPEN／partialのまま、次の単一作業は対象PAD.Designerの一意なUIAウィンドウ取得後に同ヘルパーでRun 1を開始し、running→idleと`ButtonPressed=OK`を原証跡へ保存することとする。
+
+## 2026-09-13 T10候補の同版通常Copilot生成
+
+候補 `finale-20260912` の指示（`agent-instructions.txt`、10,094 bytes、SHA-256 `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`）と同版ナレッジ2添付（bundle `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、T10 context `2f77e59ff58df46575fc03515c020b012543a8a998c7118016cd3339bb9c0529`）を、通常のログイン済みMicrosoft 365 Copilotチャット（Think Deeper）へ送信した。本文は `t10-independent/sent-body.txt` の4703文字・11,520 bytesを57段落のtextContent結合で照合し、パス行は6個のバックスラッシュを保持した。会話は `https://m365.cloud.microsoft/chat/conversation/367eb593-1366-451c-9015-23221a30e259?es=SSR` である。
+
+応答は1つのコード要素、16行、末尾LFあり、1,752 bytes、SHA-256 `7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12`としてDOMから無修正保存した（`catalog/evidence/t10-copilot-live-generation-20260913.robin`／`.json`）。これは候補版の生成観測であり、現在生成物のPAD貼付け・保存・run1/run2・厳密な非変更行再現は未実施／NOT_PROVENのまま。過去finaldのPAD成功や既存応答を今回候補へ付け替えず、Issue #5/#27はOPEN／partialを維持する。
+
+## 2026-09-13 T10候補のPAD貼付け・2回実行
+
+上記同一候補Robinを専用PADフロー`無題`（PID 22988、Power Fx off）へ無修正貼付けし、保存後に2回実行した。通常の可視ListItemは仮想化により5〜6件しか返さなかったが、Designer表示は`16 アクション`で一致し、保存完了、run1/run2ともReady復帰・`T10-Changed`・`CopilotOffice 246`等の変数プレビュー・エラーなしを確認した。各runの完了証跡は`catalog/evidence/t10-copilot-live-generation-20260913-pad-run-1.json`／`...-run-2.json`。
+
+実行後のPAD再コピーは両回とも16アクション、1,768 bytes、SHA `845c54cc905e50dcb9f8b9d7e55aeba3cb639bee1b3e848a3f66f9b3ce051446`で一致した。生成原文（LF）との差はPADが付与したCRLFのみで、CRLFをLFへ戻した比較は16行・値のordinal一致となった。Excel出力は`T10-Changed`、Word/PowerPoint出力は`CopilotOffice 246`を実ファイルから確認した。統合証跡は`catalog/evidence/t10-copilot-live-generation-20260913-pad-acceptance.json`。これは候補の現行生成・PAD再現証跡を満たすが、候補statusファイルが未受入のため`current_package_acceptance=false`、Issue #5/#27はOPEN／partialを維持する。

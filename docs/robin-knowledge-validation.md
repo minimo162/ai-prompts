@@ -453,3 +453,15 @@ DataTable行追加・セル更新・行反復とExcel行反復の専用probe成�
 新bundleの通常M365 Copilot知識precheck、T01〜T10、独立T01/T04/T10、負例は未実行である。T09別空フロー `RobinKnowledgeT09Separate_20260911` は6アクション貼付け・保存まで確認したが、UI要素ピッカーでEdgeのWindow/Paneしか列挙されず、Input/Button/Paragraphの登録に至らなかった。Designerエラー3件・Start無効・Run未開始を証跡化した。LaunchEdge単独フローのRun完了は、Web DOM要素・WebAutomation要求完了を示さないためT09成功へ拡張していない（`catalog/evidence/t09-separate-ui-registration-20260911.json`）。
 
 Issue #5は`partial／OPEN`。残りは新bundle同一版の通常チャット＋PAD全件受入、独立再試験、負例、T09拡張接続復旧、未確認P3（リスト取得、カスタム日時書式、入れ子／branch side effect、名前付きカスタムエラー一致）である。
+
+## 2026-09-13 T10候補の同版生成証跡
+
+候補 `finale-20260912` の指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c` とbundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、T10 context SHA `2f77e59ff58df46575fc03515c020b012543a8a998c7118016cd3339bb9c0529`を確認した。通常のログイン済みMicrosoft 365 Copilot（Think Deeper）の新規会話へ、本文11,520 bytesと2添付を送信し、生成応答をDOMのcode要素から無修正取得した。会話URLは `https://m365.cloud.microsoft/chat/conversation/367eb593-1366-451c-9015-23221a30e259?es=SSR`。
+
+生成Robinは16行・末尾LFあり・1,752 bytes・SHA `7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12`で、1コードブロック相当のcode要素、Markdown追加エスケープ0、NBSP 0だった。本文の段落結合と添付名・モデル表示は `catalog/evidence/t10-copilot-live-generation-20260913.json`、応答原文は同名`.robin`へ保存した。これは候補版の生成観測のみであり、今回生成物のPAD貼付け・保存・run1/run2・厳密な非変更行再現は未実施／NOT_PROVEN。既存finaldのPAD成功証跡を候補へ付け替えず、Issue #5/#27はOPEN／partialを維持する。
+
+## 2026-09-13 T10候補のPAD実行証跡
+
+候補Robinを専用PADフロー`無題`へ貼付け・保存し、同一フローを2回実行した。可視ListItem数は仮想化で5〜6件となったが、Designerの`16 アクション`表示、保存完了、run1/run2のReady復帰と変数プレビューを確認した。run1/run2証跡は`catalog/evidence/t10-copilot-live-generation-20260913-pad-run-1.json`／`...-run-2.json`、統合証跡は`catalog/evidence/t10-copilot-live-generation-20260913-pad-acceptance.json`である。
+
+PAD再コピーはrun2後も同一SHA `845c54cc905e50dcb9f8b9d7e55aeba3cb639bee1b3e848a3f66f9b3ce051446`（1,768 bytes）で、生成原文との差はCRLFだけだった。CRLF正規化後の16行・値一致により、今回生成からの無修正貼付け・保存・2run・再コピー再現を`PROVEN`とする。Excel/Word/PowerPointの出力値も実ファイルで確認した。ただし候補statusファイルは`FROZEN_CANDIDATE_NOT_ACCEPTED`のままなので、パッケージ受入フラグはfalse、Issue #5/#27はOPEN／partialである。

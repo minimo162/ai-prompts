@@ -29,7 +29,14 @@
       "finalc_20260912": "evidence/current-package-status-20260912-finalc.json",
       "final_20260912": "evidence/current-package-status-20260912-final.json"
     },
-    "p3_positive": "evidence/p31-finald-20260912-positive-acceptance-20260912.json .. p36-…"
+    "p3_positive": "evidence/p31-finald-20260912-positive-acceptance-20260912.json .. p36-…",
+    "candidate_generation_20260913": {
+      "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+      "knowledge_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "status": "PAD_PASTED_SAVED_TWO_RUNS_RECOPIED_STRICT_REPRODUCTION_PROVEN",
+      "evidence": "evidence/t10-copilot-live-generation-20260913-pad-acceptance.json",
+      "note": "Frozen finale-20260912 candidate was generated in fresh normal Copilot chat, pasted without code edits into dedicated PAD flow 無題, saved, run twice successfully, and recopied after run2. Package acceptance remains false because candidate-status.json is still FROZEN_CANDIDATE_NOT_ACCEPTED."
+    }
   },
   "left_panel_scope": {
     "complete": false,
