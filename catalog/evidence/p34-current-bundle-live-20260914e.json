@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T06:17:48+09:00",
+  "case": "P3-4 current bundle live generation and PAD acceptance",
+  "status": "PASS_CURRENT_GENERATION_AND_PAD_2_RUNS",
+  "instruction": {
+    "path": "copilot/agent-instructions.txt",
+    "sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f5081241e79c",
+    "utf16_code_units": 3947
+  },
+  "bundle": {
+    "path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+    "file_count": 7
+  },
+  "request": {
+    "path": "catalog/generated/normal-chat-20260914e-p34-current-live/request.txt",
+    "sha256": "2f49caafcddf6bfa5d35c7d360190d5bb254622649138cf93a3bc732bbdcdab9",
+    "bytes": 966,
+    "utf16_code_units": 454,
+    "evaluator_expected_counts_sent": false
+  },
+  "m365_copilot": {
+    "browser": "Google Chrome",
+    "surface": "normal M365 Copilot chat",
+    "mode": "Think Deeper",
+    "conversation_url": "https://m365.cloud.microsoft/chat/conversation/b9376b28-b208-4f56-a79d-05758849de9f",
+    "send_count": 1,
+    "attachments": [
+      {
+        "name": "agent-instructions.txt",
+        "source": "copilot/agent-instructions.txt",
+        "sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f5081241e79c",
+        "upload_status": "attached"
+      },
+      {
+        "name": "PAD-Robin-Knowledge-Bundle.txt",
+        "source": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+        "sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "upload_status": "attached"
+      }
+    ],
+    "request_body_visible_text_exact": true,
+    "response_raw_source": "single response article innerText from the sent conversation",
+    "response_raw_chars": 1434,
+    "response_raw_sha256": "d6a644f435c4b0bc558af262172517c3aee43c0bb08cbe015bdbdccebda94811",
+    "generated_robin": {
+      "path": "catalog/generated/normal-chat-20260914e-p34-current-live/generated-robin.txt",
+      "sha256": "d67dba359ed2a23790e52df236da7bdc2543ec3beeaa360fcea528a811a1e9e4",
+      "bytes": 565,
+      "lines": 4,
+      "dom_pre_count": 1,
+      "manual_edit": false,
+      "automatic_unescape": false
+    }
+  },
+  "fixture": {
+    "input_path": "catalog/fixtures/excel/excel-catalog.xlsx",
+    "input_sha256_before_and_after": "e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6",
+    "input_bytes": 8954,
+    "output_path": "catalog/evidence/p3-saveas-case-20260912.xlsx",
+    "run1_output_snapshot": "catalog/generated/normal-chat-20260914e-p34-current-live/run1-output.xlsx",
+    "run1_output_sha256": "5342fa57241279ddab534c021bc756407910d04fd3dc3de646ee791e3e15391d",
+    "run1_output_b2": "T05-Changed",
+    "run2_output_snapshot": "catalog/generated/normal-chat-20260914e-p34-current-live/run2-output.xlsx",
+    "run2_output_sha256": "4b41bd3642a55706ed147b09f0fc77fe89c257cc91359362893375bcfaa60870",
+    "run2_output_b2": "T05-Changed",
+    "run2_overwrote_existing_target": true,
+    "target_existed_before_run1": false,
+    "target_existed_before_run2": true,
+    "output_sha_changed_between_runs": true
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeP34CurrentBundleLive20260914e",
+    "designer_process_id": 30620,
+    "designer_title": "Power Automate | RobinKnowledgeP34CurrentBundleLive20260914e",
+    "source_robin": "catalog/generated/normal-chat-20260914e-p34-current-live/generated-robin.txt",
+    "paste_save": "catalog/evidence/p34-current-pad-paste-save-20260914e.json",
+    "recopy": {
+      "path": "catalog/generated/normal-chat-20260914e-p34-current-live/pad-recopy.robin",
+      "sha256": "f10a25186665e9295c2b7c9bdb19158f481536cc6bb0c6dbc2523c2dc39c902c",
+      "bytes": 569,
+      "lines": 4,
+      "designer_action_count": 4,
+      "visible_action_count": 4,
+      "designer_status": "4 選択されたアクション",
+      "virtualized_list_false_negative": false,
+      "raw_byte_equal": false,
+      "crlf_normalized_equal": true
+    },
+    "runs": [
+      {
+        "run_number": 1,
+        "evidence": "catalog/evidence/p34-current-pad-run1-20260914e.json",
+        "status": "success",
+        "B2": "T05-Changed",
+        "target_existed_before_run": false
+      },
+      {
+        "run_number": 2,
+        "evidence": "catalog/evidence/p34-current-pad-run2-20260914e.json",
+        "status": "success",
+        "B2": "T05-Changed",
+        "target_existed_before_run": true,
+        "target_overwrite_observed": true
+      }
+    ]
+  },
+  "interpretation": {
+    "accepted": [
+      "current instruction and seven-file bundle were attached to normal M365 Copilot",
+      "one sent request produced one DOM pre and a 4-line Robin",
+      "Robin was pasted into a new dedicated empty PAD flow without hand editing",
+      "Designer status and saved flow were observed",
+      "two PAD runs succeeded and both output workbooks have B2=T05-Changed",
+      "run 2 started with the run 1 output already present and silently overwrote it; input workbook SHA remained unchanged"
+    ],
+    "not_proven": [
+      "raw Copilot generation bytes equal PAD recopy bytes (CRLF serialization only)",
+      "close and reopen recopy after this acceptance"
+    ],
+    "preserved_failures": [
+      "historical P3-4 positive acceptance and its original request/Robin remain unchanged",
+      "historical T03/T04 generation failures are not overwritten or promoted by this case"
+    ]
+  }
+}

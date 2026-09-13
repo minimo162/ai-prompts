@@ -25,6 +25,12 @@ PADを2回Runし、両回とも変数プレビュー`[CatalogItem, SecondItem, T
 
 PADを2回Runし、両回とも`TxtCount=3`、`OtherCount=2`、`CurrentFile=...\\sub.txt\\inner.txt`、`OtherSeen=...\\x.txt.bak`、`FileContents=inner`を確認した。5入力fixture（plain.txt、upper.TXT、x.txt.bak、sub.txt/inner.txt、nested/deep.txt）の各SHAは両Run後も不変で、`.TXT`は厳密な`.txt`比較のElse、`.txt.bak`もElse、親フォルダー名`sub.txt`は拡張子判定へ影響しないことを実測した。これは現行版P3-3の生成・無修正PAD貼付け・保存・2回機能受入であり、厳密な生成→PAD生バイト保持、NoSort順序、閉じて再オープン後の再コピーまでは証明していない。旧P3-3 PASSは移転せず、P3-4〜P3-6、負例v2、T10厳密保持、最終A〜G監査は残件で、Issue #5/#27はOPEN / partialを維持する。詳細は `catalog/evidence/p33-current-bundle-live-20260914e.json` とpaste/run証跡。
 
+## 2026-09-14 現行版P3-4の送信・実機PAD受入
+
+現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を通常M365 Copilot新規会話 `b9376b28-b208-4f56-a79d-05758849de9f`へThink Deeper・2実添付で1回送信した。評価者用件数・期待値は渡さず、DOM単一`pre`から4行のExcel SaveAs Robinを無修正保存した。専用空フロー `RobinKnowledgeP34CurrentBundleLive20260914e`（Designer PID 30620）へ貼付け・保存・再コピーし、権威サマリー`4 選択されたアクション`を確認した。再コピーはCRLF正規化後のみ一致し、生バイト一致は主張しない。
+
+Run1/Run2とも成功し、各xlsxスナップショットのB2=`T05-Changed`を確認した。Run1前の出力は不在、Run2前にはRun1出力が存在し、Run2後に出力SHAが`5342fa57…`から`4b41bd36…`へ変化したため既存ターゲットの無警告上書きを実測した。入力`excel-catalog.xlsx`のSHA `e94bd14c…`は前後不変。生成・貼付け・2回実行の原記録は `catalog/evidence/p34-current-bundle-live-20260914e.json`、paste/run各JSON、`catalog/generated/normal-chat-20260914e-p34-current-live/`に保全した。P3-4は現行版受入へ追加するが、P3-5/P3-6、T04形式、T10厳密保持、負例v2、A〜G監査は未完了で、Issue #5/#27はOPEN / partialを維持する。
+
 ## 2026-09-14 独立T10現行版の機能受入
 
 現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を通常M365 Copilotの新規会話 `https://m365.cloud.microsoft/chat/conversation/6edc277b-b005-4d56-8bb7-ba64668ea636`へ、同版指示全文とbundle・生成元Robinの3実添付でThink Deeper送信した。送信は1回で、評価者用正解コード／期待値／Issue本文は渡していない。応答DOMは単一16行Robin（`catalog/generated/normal-chat-20260914e-t10-independent-live/dom-robin.txt`、SHA `2bcb5512…`）で、生成元との差は許可したExcel A1値とSaveAs先の2行だけ（改行を除く範囲外差分0）。

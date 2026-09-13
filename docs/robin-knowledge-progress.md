@@ -14,6 +14,10 @@
 
 現行正本20260913e（instruction `6ad6f742…`／bundle `79245787…`）を通常M365 Copilot新規会話 `8e3e9a69-098f-41ce-82df-47b581c6bbad`へThink Deeperで1回送信した。評価者用件数・期待値は渡さず、13行の拡張子境界Robinを無修正保存した。専用空フロー `RobinKnowledgeP33CurrentBundleLive20260914e`（Designer PID 38136）へ貼付け・保存・再コピーし、Designerの権威サマリー`13 アクション`を確認した（ListItem 7件は仮想化による偽陰性）。2回Runとも`TxtCount=3`／`OtherCount=2`、5入力fixtureのSHA不変を確認した。生成SHA `2b3494e4…`、PAD再コピーSHA `e909a165…`はCRLF差のみで正規化一致し、生バイト一致は主張しない。証跡は `catalog/evidence/p33-current-bundle-live-20260914e.json` とpaste/run各JSON。旧P3-3 PASSは現行版へ移さず、P3-4〜P3-6、負例v2、T10厳密保持、A〜G監査はOPEN / partialのまま。
 
+## 2026-09-14 現行版P3-4送信・PAD受入
+
+現行正本20260913e（instruction `6ad6f742…`／bundle `79245787…`）を通常M365 Copilot新規会話 `b9376b28-b208-4f56-a79d-05758849de9f`へThink Deeperで1回送信し、評価者用件数・期待値を渡さず4行のExcel SaveAs Robinを無修正保存した。専用空フロー `RobinKnowledgeP34CurrentBundleLive20260914e`（Designer PID 30620）へ貼付け・保存・再コピーし、Designerの`4 選択されたアクション`を確認した。2回Runとも成功し、Run1/Run2のxlsxスナップショットでB2=`T05-Changed`を確認。Run2はRun1出力が存在する状態から実行して出力SHAが変化し、入力Excel SHAは不変だった。生成SHA `d67dba35…`、PAD再コピーSHA `f10a2518…`はCRLF差のみで正規化一致、生バイト一致は主張しない。証跡は `catalog/evidence/p34-current-bundle-live-20260914e.json` とpaste/run各JSON。P3-5/P3-6、独立T04候補、T10厳密保持、負例v2、A〜G監査はOPEN / partialのまま。
+
 ## 2026-09-14 独立T10の現行版機能受入
 
 現行正本20260913e（instruction `6ad6f742…`／bundle `79245787…`）を通常M365 Copilotの新規会話 `6edc277b-b005-4d56-8bb7-ba64668ea636`へ3実添付・Think Deeperで1回送信し、応答DOM単一preの16行Robin（SHA `2bcb5512…`）を無修正保存した。元入力との差は許可範囲のExcel A1値とSaveAs先の2行のみ（正規化後の範囲外差分0）。専用フロー `RobinKnowledgeT10IndependentCurrentBundleLive20260914e`（Designer PID 20008）へ貼付け・保存・再コピーし、集計16アクションを確認。2回Runとも成功し、各回の新規出力スナップショットでExcel A1=`T10-Changed`、Word/PPT本文=`CopilotOffice 246`を確認、既存出力は復元した。初回貼付けヘルパーは60秒時点で6件のためタイムアウトしたが、同じ貼付けの後続状態で16件集計が現れたため再送していない。生成→PADはCRLF正規化後のみ一致し、元入力→生成と生バイトの厳密保持は`NOT_PROVEN`のまま。詳細は`catalog/evidence/t10-independent-current-generation-20260914e.json`。独立T10の機能／許可範囲は受入へ追加するが、厳密保持PASSへは昇格しない。Issue #5/#27はOPEN / partial。

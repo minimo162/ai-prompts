@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "captured_at": "2026-09-14T05:12:18+09:00",
-  "status": "partial_current_package_20260913e_T01_T02_T03_T05_T06_T07_T08_T09_P31_P32_P33_accepted_T01_independent_20260914e_T10_independent_functional_scope_accepted_20260914e_T04_independent_candidate_partial_20260914e_strict_T10_not_proven",
+  "captured_at": "2026-09-14T06:17:48+09:00",
+  "status": "partial_current_package_20260913e_T01_T02_T03_T05_T06_T07_T08_T09_P31_P32_P33_P34_accepted_T01_independent_20260914e_T10_independent_functional_scope_accepted_20260914e_T04_independent_candidate_partial_20260914e_strict_T10_not_proven",
   "issue_state": "OPEN",
   "version": {
     "label": "20260913e",
@@ -10,7 +10,7 @@
     "bundle_manifest": "copilot/knowledge-bundle-manifest-20260913e.json",
     "instruction_utf16": 3947,
     "change_vs_finalc_20260912": "Canonical T09 instruction line 39 was corrected from WAIT 500 to WAIT 1 to match the measured knowledge. Historical finald acceptance is preserved but not inherited by 20260913e. T03/T04 follow-up evidence remains separately classified.",
-    "canonical_distribution_status": "WAIT_1_INSTRUCTION_AND_WAIT_1_KNOWLEDGE_MATCH;_T01_T02_T03_T05_T06_T07_T08_T09_AND_P3-1_P3-2_P3-3_AND_INDEPENDENT_T01_ACCEPTED;_INDEPENDENT_T10_FUNCTIONAL_AND_AUTHORIZED_SCOPE_ACCEPTED;_STRICT_T10_NOT_PROVEN;_T04_AND_INDEPENDENT_T04_PARTIAL;_P3-4_TO_P3-6_REMAIN",
+    "canonical_distribution_status": "WAIT_1_INSTRUCTION_AND_WAIT_1_KNOWLEDGE_MATCH;_T01_T02_T03_T05_T06_T07_T08_T09_AND_P3-1_P3-2_P3-3_P3-4_AND_INDEPENDENT_T01_ACCEPTED;_INDEPENDENT_T10_FUNCTIONAL_AND_AUTHORIZED_SCOPE_ACCEPTED;_STRICT_T10_NOT_PROVEN;_T04_AND_INDEPENDENT_T04_PARTIAL;_P3-5_TO_P3-6_REMAIN",
     "previous_canonical_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e"
   },
   "superseded_versions": {
@@ -611,7 +611,31 @@
           "answer_states_silent_overwrite": true,
           "no_office_process_left": true
         },
-        "probe_evidence": "evidence/p3-saveas-collision-acceptance-20260912.json"
+        "probe_evidence": "evidence/p3-saveas-collision-acceptance-20260912.json",
+        "current_version_20260914e": {
+          "status": "PASS_CURRENT_20260914E_P3_POSITIVE",
+          "evidence": "evidence/p34-current-bundle-live-20260914e.json",
+          "paste_evidence": "evidence/p34-current-pad-paste-save-20260914e.json",
+          "run_evidence": [
+            "evidence/p34-current-pad-run1-20260914e.json",
+            "evidence/p34-current-pad-run2-20260914e.json"
+          ],
+          "conversation": "https://m365.cloud.microsoft/chat/conversation/b9376b28-b208-4f56-a79d-05758849de9f",
+          "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f5081241e79c",
+          "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+          "request_sha256": "2f49caafcddf6bfa5d35c7d360190d5bb254622649138cf93a3bc732bbdcdab9",
+          "response_raw_sha256": "d6a644f435c4b0bc558af262172517c3aee43c0bb08cbe015bdbdccebda94811",
+          "robin_sha256": "d67dba359ed2a23790e52df236da7bdc2543ec3beeaa360fcea528a811a1e9e4",
+          "flow_name": "RobinKnowledgeP34CurrentBundleLive20260914e",
+          "designer_pid": 30620,
+          "runs_completed": 2,
+          "B2": "T05-Changed",
+          "input_unchanged": true,
+          "run1_output_snapshot": true,
+          "run2_overwrote_existing": true,
+          "recopy_crlf_normalized_equal": true,
+          "raw_generation_to_pad_bytes": "NOT_EQUAL_CRLF_SERIALIZATION"
+        }
       },
       "P3-5": {
         "status": "PASS_FINALD_20260912_P3_POSITIVE",
@@ -668,8 +692,9 @@
       "current_version_20260914e": "evidence/p33-current-bundle-live-20260914e.json"
     },
     "P3-4_saveas_collision": {
-      "status": "PASS_PROBE_INTEGRATED_AND_GENERATED",
-      "evidence": "evidence/p3-saveas-collision-acceptance-20260912.json"
+      "status": "PASS_PROBE_INTEGRATED_AND_CURRENT_GENERATED",
+      "evidence": "evidence/p3-saveas-collision-acceptance-20260912.json",
+      "current_version_20260914e": "evidence/p34-current-bundle-live-20260914e.json"
     },
     "P3-5_custom_date_format": {
       "status": "PASS_PROBE_INTEGRATED_AND_GENERATED",
@@ -699,8 +724,8 @@
     "evidence": "evidence/current-package-status-20260912-finald.json"
   },
     "new_version_acceptance": {
-    "status": "PRECHECK_PLUS_T01_T02_T03_T05_T06_T07_T08_T09_P3-1_P3-2_P3-3_AND_INDEPENDENT_T01_PAD_ACCEPTED;_INDEPENDENT_T10_FUNCTIONAL_SCOPE_ACCEPTED_STRICT_NOT_PROVEN;_INDEPENDENT_T04_CANDIDATE_PARTIAL;_T04_STRICT_T10_P3-4_TO_P3-6_NEGATIVE_A-G_NOT_COMPLETE",
-    "accepted_current_version_cases": ["T01", "T02", "T03", "T05", "T06", "T07", "T08", "T09", "P3-1", "P3-2", "P3-3", "independent-T01"],
+    "status": "PRECHECK_PLUS_T01_T02_T03_T05_T06_T07_T08_T09_P3-1_P3-2_P3-3_P3-4_AND_INDEPENDENT_T01_PAD_ACCEPTED;_INDEPENDENT_T10_FUNCTIONAL_SCOPE_ACCEPTED_STRICT_NOT_PROVEN;_INDEPENDENT_T04_CANDIDATE_PARTIAL;_T04_STRICT_T10_P3-5_P3-6_NEGATIVE_A-G_NOT_COMPLETE",
+    "accepted_current_version_cases": ["T01", "T02", "T03", "T05", "T06", "T07", "T08", "T09", "P3-1", "P3-2", "P3-3", "P3-4", "independent-T01"],
       "precheck": "evidence/current-bundle-20260913e-precheck.json",
       "t09_acceptance": "evidence/t09-20260913e-pad-acceptance.json",
       "t01_generation": "evidence/t01-copilot-live-generation-20260913e.json",
@@ -724,8 +749,9 @@
       "p31_current_acceptance": "evidence/p31-current-bundle-live-20260914e.json; evidence/p31-current-pad-paste-save-20260914e.json; evidence/p31-current-pad-run1-20260914e.json; evidence/p31-current-pad-run2-20260914e.json",
     "p32_current_acceptance": "evidence/p32-current-bundle-live-20260914e.json; evidence/p32-current-pad-paste-save-20260914e.json; evidence/p32-current-pad-run1-20260914e.json; evidence/p32-current-pad-run2-20260914e.json",
     "p33_current_acceptance": "evidence/p33-current-bundle-live-20260914e.json; evidence/p33-current-pad-paste-save-20260914e.json; evidence/p33-current-pad-run1-20260914e.json; evidence/p33-current-pad-run2-20260914e.json",
+    "p34_current_acceptance": "evidence/p34-current-bundle-live-20260914e.json; evidence/p34-current-pad-paste-save-20260914e.json; evidence/p34-current-pad-run1-20260914e.json; evidence/p34-current-pad-run2-20260914e.json",
       "strict_t10": "NOT_PROVEN",
-      "required_next": "P3-3 current-version normal-chat generation and dedicated PAD acceptance are complete (unmodified 13-line Robin, status-confirmed 13 actions, two successful runs, TxtCount=3 and OtherCount=2). P3-4 through P3-6 remain historical-only. Independent T04 remains partial because run1 output was not snapshotted; strict T10 remains NOT_PROVEN. Remaining work is strict T10 if provable without normalization, P3-4 through P3-6, negative suite v2, and final A-G audit/coverage reconciliation."
+      "required_next": "P3-3 and P3-4 current-version normal-chat generation and dedicated PAD acceptance are complete (P3-4 unmodified 4-line Robin, status-confirmed 4 actions, two successful runs with run1/run2 output snapshots, B2=T05-Changed, input SHA unchanged, and run2 overwrite observed). P3-5 and P3-6 remain historical-only. Independent T04 remains partial because its run1 output was not snapshotted; strict T10 remains NOT_PROVEN. Remaining work is strict T10 if provable without normalization, P3-5/P3-6, negative suite v2, and final A-G audit/coverage reconciliation."
     },
-  "result": "Current canonical package is 20260913e with WAIT 1/WAIT 1 alignment, a live reference-only precheck, current-version T01, T02, T03 (explicit corrected request), T05, T06, T07, T08 (measured action-level expected error), T09 PAD acceptance, current P3-1, P3-2, and P3-3 acceptance, plus fresh current-version independent T01 acceptance, independent T10 functional/scope acceptance with strict raw bytes NOT_PROVEN, and a partial independent T04 candidate (clean response-origin format, unmodified paste/save/recopy, two PAD runs, run2 cell values verified). Historical finald 79245787 acceptance is preserved but not transferred; original T04 remains not accepted, independent T04 is not promoted to full acceptance because run1 output was not snapshotted, and strict T10 remains open. P3-4 through P3-6, negative suite v2, final A-G audit, and coverage/index/manifest reconciliation remain OPEN / partial."
+  "result": "Current canonical package is 20260913e with WAIT 1/WAIT 1 alignment, a live reference-only precheck, current-version T01, T02, T03 (explicit corrected request), T05, T06, T07, T08 (measured action-level expected error), T09 PAD acceptance, current P3-1 through P3-4 acceptance, plus fresh current-version independent T01 acceptance, independent T10 functional/scope acceptance with strict raw bytes NOT_PROVEN, and a partial independent T04 candidate (clean response-origin format, unmodified paste/save/recopy, two PAD runs, run2 cell values verified). Historical finald 79245787 acceptance is preserved but not transferred; original T04 remains not accepted, independent T04 is not promoted to full acceptance because run1 output was not snapshotted, and strict T10 remains open. P3-5/P3-6, negative suite v2, final A-G audit, and coverage/index/manifest reconciliation remain OPEN / partial."
 }
