@@ -6315,6 +6315,24 @@
       "execution_status": "generated_two_attempts_format_not_accepted_no_pad_run",
       "candidate_status": "../.work/finale-20260912/candidate-status.json",
       "evidence": "evidence/t04-copilot-live-generation-20260913-attempt1.json; evidence/t04-copilot-live-generation-20260913-attempt1.robin; evidence/t04-copilot-live-generation-20260913-attempt2.json; evidence/t04-copilot-live-generation-20260913-attempt2.robin"
+    },
+    {
+      "id": "normal-chat-t05-candidate-live-generation-2026-09-13",
+      "date": "2026-09-13",
+      "browser": "Codex In-app Browser normal Microsoft 365 Copilot chat",
+      "model": "Think Deeper",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+      "prompt_source": "../.work/finale-20260912/t05/sent-body.txt#tail-request",
+      "prompt_sha256": "a1b44012770627593532566ac0117494fd951485b256df9a94dcb44b748441e5",
+      "cases": [
+        "T05"
+      ],
+      "scope": "Frozen finale-20260912 candidate: exact instruction body and same-version bundle attachments; first raw generation had a literal backslash before => and was preserved, same-conversation retry produced a clean 4-action candidate without hand-editing. PAD paste/save/run/recopy could not be attempted because Computer Use was stopped by the physical Escape key.",
+      "current_package_acceptance": false,
+      "execution_status": "generated_retry_clean_not_pasted_computer_use_stopped",
+      "candidate_status": "../.work/finale-20260912/candidate-status.json",
+      "evidence": "evidence/t05-copilot-live-generation-20260913-attempt1.json; evidence/t05-copilot-live-generation-20260913-attempt1.robin; evidence/t05-copilot-live-generation-20260913.json; evidence/t05-copilot-live-generation-20260913.robin"
     }
   ],
   "application_integration": {

@@ -488,3 +488,9 @@ PAD再コピーはrun2後も同一SHA `845c54cc905e50dcb9f8b9d7e55aeba3cb639bee1
 候補と同じ指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、Think Deeper、2添付でT04を通常M365 Copilotから生成した。新規会話（`https://m365.cloud.microsoft/chat/conversation/7fc929a2-2d3f-4988-9d84-7b91e34809dd?es=SSR`）の初回応答は1コードブロック・9行・UTF-8 1,589 bytes・SHA `0356955358d35bdaabc31475332ebd03328323a890a4da072b0c3da967fb9f1c`だった。T04の実測9命令系列と同じアクション順ですが、`=>`矢印と`FilterParameters`括弧へ literal なバックスラッシュが残る原文のため、無修正貼付け候補として不受入にした。
 
 同一会話の「再試行」も1コードブロック・9行・1,585 bytes・SHA `feea538a6dd9018554d162400f50d4cd07abe90ed43ef6cca864812ac626be1e`で、矢印の literal バックスラッシュを保持した。生成結果は手修正せず、2試行とも `generated_format_not_accepted`、PAD貼付け・保存・実行なしと判定した（`catalog/evidence/t04-copilot-live-generation-20260913-attempt1.json`、`attempt2.json`）。既存finaldのT04成功を今回候補へ付け替えず、候補statusは`FROZEN_CANDIDATE_NOT_ACCEPTED`、Issue #5/#27はOPEN／partialを維持する。
+
+## 2026-09-13 T05候補の同版生成・再試行
+
+候補と同じ指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、Think Deeper、2添付でT05（合成ExcelのB2単一セル書込み→別名保存）を通常M365 Copilotへ送信した。会話URLは`https://m365.cloud.microsoft/chat/conversation/e360f2ad-f623-4290-8e92-7f68e999c9e2?es=SSR`。初回応答は1コードブロック・4行・564 bytes・SHA `299628c3cb205aa8219d23f005b4a7fe99ac76518ce688f497368ccfd87524ca`で、`Instance=\> ExcelInstance`のliteralバックスラッシュを含んだため、原文をそのまま不受入保存した。
+
+同一会話の再試行は1コードブロック・4行・563 bytes・SHA `be40e6b337620f1c76ba650b202f316d4b80b339de1c859fe1cb55a9f2714911`で、`Instance=> ExcelInstance`の矢印、4アクション、入力・出力パス、B2／T05-Changed指定が確認できるクリーンな候補となった。生成原文は手修正せず`catalog/evidence/t05-copilot-live-generation-20260913.robin`へ保存したが、物理EscapeでComputer Useが停止されたため、専用PADへの貼付け・保存・2回実行・再コピーは未実施である。初回原文は`...-attempt1.robin`、両メタデータは`...-attempt1.json`／`...json`に固定し、既存finaldのT05成功を今回候補へ付け替えない。候補statusは`FROZEN_CANDIDATE_NOT_ACCEPTED`、Issue #5/#27はOPEN／partialを維持する。
