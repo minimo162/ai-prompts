@@ -49,6 +49,21 @@
     "comparison": "ordinal_equal_after_crlf_normalization",
     "raw_sha256_diff_explained": "PAD recopy uses CRLF; source uses LF; all 16 Robin lines and values otherwise match."
   },
+  "change_scope_comparison": {
+    "baseline_path": "catalog/generated/office-three-apps/generated.robin",
+    "baseline_sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+    "candidate_path": "catalog/evidence/t10-copilot-live-generation-20260913.robin",
+    "candidate_sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12",
+    "baseline_line_count": 16,
+    "candidate_line_count": 16,
+    "allowed_change_lines": [2, 4],
+    "differences": [
+      {"line": 2, "classification": "allowed_change", "reason": "Excel A1 value"},
+      {"line": 4, "classification": "allowed_change", "reason": "Excel SaveAs output path"}
+    ],
+    "outside_allowed_change_count": 0,
+    "result": "candidate differs from measured T10 baseline only on the two explicitly allowed lines"
+  },
   "observed_outputs": [
     {
       "path": "catalog/evidence/copilot-excel-t10-v6.xlsx",

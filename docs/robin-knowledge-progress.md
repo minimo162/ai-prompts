@@ -355,3 +355,5 @@ Issue #5/#27の最新本文と指定コメント（`5650828099`／`5650826208`�
 上記同一候補Robinを専用PADフロー`無題`（PID 22988、Power Fx off）へ無修正貼付けし、保存後に2回実行した。通常の可視ListItemは仮想化により5〜6件しか返さなかったが、Designer表示は`16 アクション`で一致し、保存完了、run1/run2ともReady復帰・`T10-Changed`・`CopilotOffice 246`等の変数プレビュー・エラーなしを確認した。各runの完了証跡は`catalog/evidence/t10-copilot-live-generation-20260913-pad-run-1.json`／`...-run-2.json`。
 
 実行後のPAD再コピーは両回とも16アクション、1,768 bytes、SHA `845c54cc905e50dcb9f8b9d7e55aeba3cb639bee1b3e848a3f66f9b3ce051446`で一致した。生成原文（LF）との差はPADが付与したCRLFのみで、CRLFをLFへ戻した比較は16行・値のordinal一致となった。Excel出力は`T10-Changed`、Word/PowerPoint出力は`CopilotOffice 246`を実ファイルから確認した。統合証跡は`catalog/evidence/t10-copilot-live-generation-20260913-pad-acceptance.json`。これは候補の現行生成・PAD再現証跡を満たすが、候補statusファイルが未受入のため`current_package_acceptance=false`、Issue #5/#27はOPEN／partialを維持する。
+
+候補生成物を実測T10原文`catalog/generated/office-three-apps/generated.robin`と行単位で比較した結果、差分は許可変更の2行（Excel A1値、Excel SaveAs出力先）のみで、許可範囲外の差分は0件だった。この比較はPAD再コピーの改行差を含む厳密再現判定とは分離して`change_scope_comparison`へ固定している。
