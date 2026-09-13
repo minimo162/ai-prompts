@@ -3,11 +3,11 @@
   "final_evidence_audit": {
     "status": "PARTIAL_REQUIRED_TRACEABILITY_GAPS",
     "report": "docs/robin-knowledge-validation.md",
-    "note": "current_package.status records fixed finald generation acceptance only; required_checks and some probe reuse traces do not establish complete A-G acceptance. Historical per-probe statuses are preserved."
+    "note": "current_package.status records the partial 2026-09-13 follow-up while historical finald generation acceptance remains linked separately; required_checks and some probe reuse traces do not establish complete A-G acceptance. Historical per-probe statuses are preserved."
   },
-  "generated_at": "2026-09-12T12:33:13+09:00",
-  "reconciled_at": "2026-09-12T12:33:13+09:00",
-  "reconciliation_note": "Version 79245787 (2026-09-12, finald): P3-1..P3-6 measured on dedicated synthetic PAD flows and integrated into the knowledge; then knowledge precheck, T01-T10, independent T01/T04/T10, negative suite v2 and the six P3 positive generations were accepted on this single version in Chrome normal M365 chat + dedicated PAD flows (unmodified paste, two runs, fixed expectations). finalc (f42f5acf) acceptance is preserved as history.",
+  "generated_at": "2026-09-13T21:20:00+09:00",
+  "reconciled_at": "2026-09-13T21:20:00+09:00",
+  "reconciliation_note": "Finald 79245787 evidence and PR #29 limited reuse are preserved. On 2026-09-13, T03 received a request-only correction against the frozen finale candidate (instruction 6ad6f742, WAIT 1) and passed two unmodified PAD runs; T04 response-origin escaping remains not accepted. The candidate is not promoted over the canonical distribution instruction b4a3c24f (WAIT 500), so package status remains OPEN / partial.",
   "environment": {
     "pad_file_version": "2.71.115.26224",
     "language": "ja-JP",
@@ -17,9 +17,10 @@
   "current_package": {
     "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
     "knowledge_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
-    "status": "complete_live_acceptance_finald_20260912",
-    "evidence": "evidence/current-package-status-20260912-finald.json",
-    "audit": "evidence/issue5-completion-audit-20260912-finald.json",
+    "status": "partial_current_package_followup_20260913",
+    "evidence": "evidence/current-package-status-20260913.json",
+    "audit": "evidence/issue5-completion-audit-20260913.json",
+    "historical_finald": "evidence/current-package-status-20260912-finald.json",
     "static_check": "evidence/current-package-static-check-20260912-finald.json",
     "knowledge_precheck": "evidence/current-bundle-finald-precheck-20260912.json",
     "t01_prepared": "evidence/t01-finald-prepared-20260912.json",
@@ -33,9 +34,9 @@
     "candidate_generation_20260913": {
       "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
       "knowledge_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
-      "status": "T01_T02_T05_T10_PAD_PASTED_SAVED_TWO_RUNS_RECOPIED_PROVEN_T03_T04_GENERATION_NOT_ACCEPTED",
+      "status": "T01_T02_T05_T10_PAD_PASTED_SAVED_TWO_RUNS_RECOPIED_PROVEN_T03_REVISED_REQUEST_CANDIDATE_ACCEPTED_T04_GENERATION_NOT_ACCEPTED",
       "evidence": "evidence/t01-copilot-live-generation-20260913-pad-acceptance.json; evidence/t02-copilot-live-generation-20260913-pad-acceptance.json; evidence/t05-copilot-live-generation-20260913-pad-acceptance.json; evidence/t03-copilot-live-generation-20260913-attempt1.json; evidence/t03-copilot-live-generation-20260913-attempt2.json; evidence/t03-copilot-live-generation-20260913-attempt3.json; evidence/t04-copilot-live-generation-20260913-attempt1.json; evidence/t04-copilot-live-generation-20260913-attempt2.json; evidence/t05-copilot-live-generation-20260913-attempt1.json; evidence/t05-copilot-live-generation-20260913.json; evidence/t10-copilot-live-generation-20260913-pad-acceptance.json",
-      "note": "Frozen finale-20260912 candidate has current-version T01, T02, T05, and T10 generation/PAD evidence from fresh normal Copilot chats with same-version attachments, unmodified paste/save, two runs, output checks where applicable, and recopy. T03 was generated three times with the same prompt/version/attachments; all raw responses were the 7-line minimum branch and omitted the expected TxtCount/OtherCount counters, so T03 has no PAD paste or run evidence. T04 was generated twice with the same prompt/version/attachments; both raw responses retained literal backslash escapes before =>, so T04 has no PAD paste or run evidence. T05 first generation retained a literal backslash before =>; same-conversation retry produced a clean 4-action Robin, then dedicated PAD paste/save, two runs, workbook checks, and recopy were completed without editing the candidate. Package acceptance remains false because candidate-status.json is still FROZEN_CANDIDATE_NOT_ACCEPTED; T03-T09 and the independent/negative package audit remain outstanding."
+      "note": "Frozen finale-20260912 candidate has current-version T01, T02, T05, and T10 generation/PAD evidence from fresh normal Copilot chats with same-version attachments, unmodified paste/save, two runs, output checks where applicable, and recopy. The three original T03 attempts remain raw and not accepted because the fixed counter expectation was not observable from the original request; a request-only correction against the same candidate instruction/bundle produced a 13-line Robin and two successful PAD runs, with post-save recopy recorded separately. T04 was generated twice with the same prompt/version/attachments; attempt 2 has response-origin backslashes before => and attempt 1 bracket provenance remains unproven, so neither is accepted. The candidate is not promoted; T04, strict T10, and the remaining package audit remain outstanding."
     }
   },
   "left_panel_scope": {

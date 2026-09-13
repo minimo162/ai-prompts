@@ -1,0 +1,110 @@
+以下は、添付ナレッジに収録されたT03の13アクション実測原文を、そのまま貼り付け用として提示するフロー案です。新規に構文を推測せず、ファイル一覧取得、For each、.Extensionによる厳密判定、UTF-8読取り、If／Else別の件数集計を含む確認済み範囲だけを使用します。
+
+1. 前提・対象範囲・確認状態
+目的: 合成フォルダー直下の全ファイルを一度ずつ列挙し、拡張子が小文字の.txtと完全一致するファイルだけをUTF-8で読み取ります。
+入力フォルダー: C:\Users\yuuki\ai-prompts\catalog\fixtures\files
+サブフォルダー: 対象外です。IncludeSubfolders: Falseです。
+入力ファイル: 実測時は.txtが2件、.csvが1件、.mdが1件の合計4件です。
+出力ファイル: 作成しません。入力も変更しません。
+上書き: ファイル保存を行わないため、該当しません。
+成功条件:
+Filesが4件
+TxtCountが2
+OtherCountが2
+.txtだけがUTF-8読取りへ到達
+.csvと.mdがElseへ到達
+入力4ファイルが変更されていない
+確認済み状態: PAD 2.71.115.26224、日本語UI、Power Fx OFFで、別の空フローへ無修正で貼り付け、保存、再コピー、2回実行し、両回とも期待値と入力不変を照合済みです。原文はcatalog/flows/t03-extension-branch/capture-pad-copy-20260912.robin、実行証拠はcatalog/evidence/t03-ext-verify-acceptance-20260912.jsonです。
+未確認／境界: 列挙順はNoSortなので保証されません。空フォルダー、アクセス拒否、大文字小文字を無視する判定はこのフローの確認範囲外です。追加境界試験では.TXTと.txt.bakはElseへ到達しています。
+2. PADで先に行う設定
+
+新しい空のPADフローの対象サブフローを開き、既存処理がない位置へ、次のRobin全体を貼り付けます。
+
+入力変数やUI要素の事前作成は不要です。貼り付けた処理が次の変数を生成または初期化します。
+
+Files: ファイルオブジェクトのリスト
+CurrentFile: 現在処理中のファイルオブジェクト
+FileContents: 最後に読み取られた.txtファイルのテキスト
+TxtCount: If側へ到達した件数を表す数値
+OtherCount: Else側へ到達した件数を表す数値
+TxtSeen: 最後にIf側へ到達したファイル
+OtherSeen: 最後にElse側へ到達したファイル
+
+TxtSeenとOtherSeenは、それぞれ最後に到達したファイルだけを保持します。全ファイル名の履歴リストを作る処理は、この13アクションの実測原文には含まれません。
+
+3. 貼り付け用Robin
+
+対象サブフロー: Mainなど、今回の処理を実行するサブフロー
+置換範囲: 対象サブフロー内で、この処理として使用する範囲全体
+
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+SET TxtCount TO 0
+SET OtherCount TO 0
+LOOP FOREACH CurrentFile IN Files
+    IF CurrentFile.Extension = $'''.txt''' THEN
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+        SET TxtSeen TO CurrentFile
+        Variables.IncreaseVariable Value: TxtCount IncrementValue: 1
+    ELSE
+        SET OtherSeen TO CurrentFile
+        Variables.IncreaseVariable Value: OtherCount IncrementValue: 1
+    END
+END
+
+
+この命令列は、.txtのときだけFile.ReadTextFromFile.ReadTextを実行します。.csvと.mdはElse側でOtherCountだけを増加させ、内容を読み取りません。部分一致のContainsではなく、採取済みのCurrentFile.Extension = '.txt'を使用しています。
+
+4. デザイナー上での確認
+
+貼り付け直後、次を確認してください。
+
+アクション数が13件
+Elseと各Endも1アクションとして数えます。
+順序
+フォルダー取得
+TxtCount初期化
+OtherCount初期化
+For each
+If
+UTF-8読取り
+TxtSeen設定
+TxtCount加算
+Else
+OtherSeen設定
+OtherCount加算
+IfのEnd
+For eachのEnd
+ブロック対応
+Ifに対するElseとEndが各1つ
+For eachに対する外側のEndが1つ
+変数型
+TxtCountとOtherCountが数値の0で初期化されている
+加算アクションの対象が文字列ではなく変数参照になっている
+CurrentFileがファイルオブジェクトとして扱われ、.Extensionが表示される
+読取り設定
+エンコードがUTF-8
+読取り対象がリテラル文字列ではなくCurrentFile
+設計エラー
+赤いエラー表示が0件
+特に加算アクションで「変数名は変数である必要があります」が出ていない
+5. 合成データでの実行・照合
+元の合成フォルダーを複製し、必要ならRobinのフォルダーパスだけを複製先へ変更します。ただし、パス変更版は元の原文との逐語一致対象外です。
+実行前に複製先のファイル名、件数、可能ならSHA-256を記録します。
+PADフローを保存して実行します。
+実行完了後、変数ペインで次を確認します。
+Files.Count = 4
+TxtCount = 2
+OtherCount = 2
+TxtCount + OtherCount = Files.Count
+FileContents = alpha 日本語
+TxtSeenが.txtファイル
+OtherSeenが.csvまたは.mdファイル
+TxtCount + OtherCount = Files.Countにより、列挙された各ファイルがIfまたはElseのどちらか一方へ到達したことを確認します。
+実行前後でファイル件数、内容、SHA-256を比較し、入力が変更されていないことを確認します。
+もう一度実行し、再びTxtCount = 2、OtherCount = 2になることを確認します。カウンターは毎回ループ前に0へ初期化されるため、前回値は累積されません。
+
+期待結果の根拠: 実測ではcopy-input-20260909.txtとt03-alpha.txtがIf側、t03-beta.csvとt03-gamma.mdがElse側へ到達し、2回ともTxtCount=2、OtherCount=2、入力4ファイルのSHA不変が確認されています。列挙順は保証されないため、TxtSeenとOtherSeenの最終ファイル名だけを固定の成功条件にはしません。
+
+改善点と判断理由
+
+未採取構文を追加せず、実測済みの13アクションをそのまま使用しました。また、最後に到達したファイルだけを保持するTxtSeen／OtherSeenと、全件処理を検証する件数条件を分け、ファイル名履歴まで確認できるフローであるかのような表現を避けています。

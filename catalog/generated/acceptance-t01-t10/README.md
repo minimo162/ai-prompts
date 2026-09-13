@@ -1,5 +1,11 @@
 # 通常M365 Copilotチャット受入試験 T01〜T10（継続中）
 
+## 2026-09-13 追跡：T03依頼補正とT04形式診断（候補限定）
+
+9/13のT03補正依頼は、固定期待に含まれていた`TxtCount`／`OtherCount`を依頼本文へ明示しただけで、知識・指示・fixture・期待値は変更していません。実際に添付・送信した版は保全済み`finale-20260912`候補（指示SHA `6ad6f742…`、bundle SHA `79245787…`）です。生成Robin（13行、無修正）を専用PADフロー`RobinKnowledgeT03Revised20260913`へ貼付け・保存し、保存後再コピーと2回の実行で`TxtCount=2`／`OtherCount=2`、fixture不変を確認しました（`catalog/evidence/t03-revised-input-live-acceptance-20260913.json`）。PAD再コピーはCRLF、生成原文はLFのため、原バイトSHAは一致とせず、CRLF正規化後一致だけを別記録しています。閉じて再オープン後の再コピーは未実施です。これは候補の依頼受入であり、配布正本（指示SHA `b4a3c24f…`、WAIT 500）への昇格ではありません。
+
+同日T03の元依頼3試行とT04の2試行は原記録を維持し、T03元依頼は固定カウンター要件が本文から観測できなかった入力契約不整合、T03試行2は追加のリテラルバックスラッシュ形式不具合として分類しました。T04はDOMと保存Robinの対照で、試行2の`=>`前バックスラッシュを生成回答由来と確認し、試行1のFilterParameters括弧の由来は未証明です。自動unescape・生成回答の手修正は行っていません（`catalog/evidence/t03-copilot-live-generation-20260913-diagnosis.json`、`t04-copilot-live-generation-20260913-diagnosis.json`）。既存finald T04の機能受入は履歴として保持します。
+
 ## 現行最終版（2026-09-12、finald-20260912）
 
 指示文 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`（不変）／bundle `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`（マニフェスト `copilot/knowledge-bundle-manifest-20260912d.json`）を同一版として固定しました。直前版 finalc `f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089` との差分は、P3-1〜P3-6の実測結果（リスト添字1、If内If／入れ子ループとEXIT LOOP／NEXT LOOPの作用範囲、`.TXT`／`.txt.bak`／親フォルダー名／サブフォルダー境界、Excel／Word SaveAsの無警告上書き、カスタム日付書式 `yyyy-MM-dd`、アクション単位の名前付きエラー `ON ERROR FileNotFoundError`）を7原本へ統合したことです（各probeは専用合成フローで2回実行、`catalog/evidence/p3-*-acceptance-20260912.json`）。
