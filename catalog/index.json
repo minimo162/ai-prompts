@@ -6481,8 +6481,8 @@
        "execution_status": "generated_pasted_saved_recopied_two_runs_output_body_checked_input_unchanged",
        "evidence": "evidence/t06-copilot-live-generation-20260914e.json; evidence/t06-copilot-live-generation-20260914e-pad-acceptance.json; evidence/t06-20260914e-pad-paste-save.json; evidence/t06-20260914e-pad-run1.json; evidence/t06-20260914e-pad-run2.json; evidence/t06-20260914e-output-comparison.json; generated/normal-chat-20260914e-t06-live/robin.txt; generated/normal-chat-20260914e-t06-live/pad-recopy-after-save.robin; generated/normal-chat-20260914e-t06-live/pad-recopy-after-run2.robin"
      },
-     {
-       "id": "normal-chat-t07-current-package-live-2026-09-14",
+    {
+      "id": "normal-chat-t07-current-package-live-2026-09-14",
        "date": "2026-09-14",
        "browser": "Codex In-app Browser normal Microsoft 365 Copilot chat",
        "model": "Think Deeper",
@@ -6496,8 +6496,28 @@
        "evidence": "evidence/t07-current-bundle-live-acceptance-20260914e.json; evidence/t07-current-bundle-output-comparison-20260914e.json; evidence/t07-current-bundle-pad-paste-save-20260914e.json; evidence/t07-current-bundle-pad-run1-20260914e.json; evidence/t07-current-bundle-pad-run2-20260914e.json; evidence/t07-current-bundle-pad-recopy-20260914e.robin; evidence/t07-current-bundle-pad-recopy-after-run2-20260914e.robin; generated/normal-chat-20260914e-t07-live/robin.txt",
        "conversation": "https://m365.cloud.microsoft/chat/conversation/977c8a85-70bf-45e4-bcb5-8d9f0c3775b9",
        "flow_name": "RobinKnowledgeT07CurrentBundleLive20260914e",
-       "strict_source_to_pad_bytes": "NOT_CLAIMED"
-     }
+      "strict_source_to_pad_bytes": "NOT_CLAIMED"
+    },
+    {
+      "id": "normal-chat-t08-current-package-live-2026-09-14",
+      "date": "2026-09-14",
+      "browser": "Google Chrome normal M365 Copilot chat",
+      "model": "Think Deeper",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+      "request_sha256": "79070940eae3c1c7277a77c164af71d0221290c0e963fd75904931c200bb3e15",
+      "cases": ["T08"],
+      "scope": "Fresh current-package T08 generation with full instruction and bundle attachments; raw response and one code block preserved, unmodified 4-action paste/save/recopy in a newly-created named PAD flow, and two expected-error runs with no downstream writes or markers.",
+      "current_package_acceptance": true,
+      "execution_status": "generated_pasted_saved_recopied_two_runs_action_level_FileNotFoundError_expected",
+      "manifest": "../copilot/knowledge-bundle-manifest-20260913e.json",
+      "generated": "generated/normal-chat-20260914e-t08-live/robin.txt",
+      "evidence": "evidence/t08-current-bundle-live-acceptance-20260914e.json; evidence/t08-current-bundle-output-comparison-20260914e.json; evidence/t08-current-bundle-pad-paste-save-20260914e.json; evidence/t08-current-bundle-pad-run1-20260914e.json; evidence/t08-current-bundle-pad-run2-20260914e.json; evidence/t08-current-bundle-pad-recopy-20260914e.robin",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/4b3b4dfc-8fb9-4d0c-a5de-3427be8a00eb",
+      "flow_name": "RobinKnowledgeT08CurrentBundleLive20260914e",
+      "strict_source_to_pad_bytes": "NOT_CLAIMED",
+      "block_level_user_defined_FileNotFound_match": "NOT_PROVEN"
+    }
   ],
   "application_integration": {
     "scope": "Guarded captured formats; live verification covers only the listed cases, not every variant.",

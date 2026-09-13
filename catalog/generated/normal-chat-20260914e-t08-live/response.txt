@@ -1,0 +1,87 @@
+以下は、添付ナレッジにある欠損ファイルの実測例をそのまま使い、エラー状態を変数へ記録した時点で終了する案です。ファイル書込み、完了マーカー、送信、公開、削除は含めません。
+
+1. 前提・対象範囲
+目的: 存在しない合成テキストファイルを意図的に読み取り、欠損エラーと記録結果だけを確認する。
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t08-missing-20260910.txt
+文字コード: UTF-8。
+出力変数:
+FileContents: 読取り成功時のテキスト。ただし今回は生成されない想定。
+NewVar: 名前付きエラー処理が実行されたことを示すテキスト named。
+LastError: 「最後のエラーを取得」で取得するエラー情報。
+ErrorHandled、ErrorHandledDefault: 外側ブロックのハンドラー確認用。ただし実測では設定されない。
+成功条件: NewVar=named、LastErrorにファイルが見つからない旨が入り、フローがそこで安全に終了すること。
+保存先・上書き: なし。
+Officeインスタンス・UI要素: 不要。
+
+根拠環境はPAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データです。次の構成はPADからコピーされ、2回実行され、さらに別フローへ再貼付けして同じ結果が確認されています。実際のエラーコードは FileNotFoundError です。
+
+2. PADで先に確認する設定
+空のテスト用フローを作成します。
+指定パスのファイルが本当に存在しないことをエクスプローラーで確認します。
+メインサブフローへ、次のRobin全体を貼り付けます。
+読取りアクションの「エラー発生時」で、名前付きルールが次の状態になっていることを確認します。
+対象: 「ファイルが見つかりません」
+エラーコード: FileNotFoundError
+処理: NewVarへnamedを設定
+フロー実行を続行する
+「最後のエラーを取得」は保存先がLastError、エラー消去がオンであることを確認します。
+
+外側のON BLOCK ERROR FileNotFoundは利用者定義エラー名であり、組込みのFileNotFoundErrorとは別です。実測ではアクション単位の名前付きルールが先に一致するため、外側ブロックの2つの記録変数は設定されません。
+
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+ 置換範囲: Mainの既存アクションをすべて削除した空の範囲へ、全体を貼り付け
+
+BLOCK
+ON BLOCK ERROR FileNotFound IsUserDefinedErrorCode: True
+    SET ErrorHandled TO $'''true'''
+ON BLOCK ERROR
+    SET ErrorHandledDefault TO $'''true'''
+END
+    File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t08-missing-20260910.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+    ON ERROR FileNotFoundError
+        SET NewVar TO $'''named'''
+    END
+END
+ERROR => LastError Reset: True
+
+
+このRobinは、PAD-Robin-Knowledge-Bundle.txtに収録されたcatalog/evidence/p3-named-error-probe-20260912.robinの実測原文です。元フローで2回、別フローへ原文ファイルから再貼付けした構成でも同じ結果が確認されています。
+
+4. デザイナー上の確認
+
+貼り付け直後に、次を確認してください。
+
+Robin命令が12行の構成で取り込まれている。
+BLOCKに対応する最後のENDがある。
+読取りアクション内のON ERRORにも対応するENDがある。
+ファイルパスの各区切りが、Robin表示で二重バックスラッシュになっている。
+NewVarへ設定する値が文字列型のnamedになっている。
+LastErrorがエラー情報を受け取る変数になっている。
+デザイナーに赤いエラー表示や未設定パラメーターがない。
+読取り後にファイル書込み、完了マーカー、通知、公開などのアクションが存在しない。
+5. 実行と期待結果の照合
+フローを複製し、複製側だけを実行します。
+実行後の変数ペインで次を確認します。
+NewVar:named
+LastError: 指定ファイルが見つからない旨のエラー情報
+ErrorHandled: 未設定
+ErrorHandledDefault: 未設定
+FileContents: 読取り結果として利用可能な値が生成されていない
+指定パスや周辺フォルダーに、新しいファイルや完了マーカーが作成されていないことを確認します。
+同じ複製フローをもう一度実行し、同じ変数状態になり、副作用がないことを確認します。
+
+実測証拠では、2回ともNewVar=namedと「ファイルが見つかりません」のLastErrorだけが確認され、ブロック側のErrorHandledとErrorHandledDefaultは設定されませんでした。
+
+未確認・追加採取が必要な範囲
+
+次の構成は、この案では採用していません。
+
+ブロック側へ組込みコードFileNotFoundErrorを直接指定する構文
+別のエラーコードを個別処理する構文
+スローエラーとの併用
+再試行ポリシー
+エラー情報の個別プロパティをテキストログへ展開する構文
+
+これらはナレッジ上で未確認です。必要になった場合は、PADで対象アクションを1つ追加し、設定後にコピーし、別の空フローへ再貼付けして、合成欠損ファイルで実行結果を確認する追加採取が必要です。

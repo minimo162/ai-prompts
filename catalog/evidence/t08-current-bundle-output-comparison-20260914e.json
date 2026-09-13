@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T01:50:29+09:00",
+  "case": "T08",
+  "status": "PASS_CURRENT_20260914E_EXPECTED_ERROR",
+  "flow_name": "RobinKnowledgeT08CurrentBundleLive20260914e",
+  "input": {
+    "path": "catalog/fixtures/text/t08-missing-20260910.txt",
+    "exists_before": false,
+    "exists_after_run2": false,
+    "unchanged": true
+  },
+  "runs": [
+    {"run": 1, "evidence": "catalog/evidence/t08-current-bundle-pad-run1-20260914e.json", "status": "success", "NewVar": "named", "LastError_contains": "が見つかりません", "ErrorHandled": "absent", "ErrorHandledDefault": "absent"},
+    {"run": 2, "evidence": "catalog/evidence/t08-current-bundle-pad-run2-20260914e.json", "status": "success", "NewVar": "named", "LastError_contains": "が見つかりません", "ErrorHandled": "absent", "ErrorHandledDefault": "absent"}
+  ],
+  "downstream_outputs": {"writes": 0, "completion_markers": 0, "publication": 0},
+  "same_expected_result_across_runs": true,
+  "action_level_error_only": true,
+  "block_level_user_defined_FileNotFound_match": "NOT_PROVEN",
+  "acceptance": "PASS_CURRENT_20260914E_EXPECTED_ERROR"
+}

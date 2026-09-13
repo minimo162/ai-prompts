@@ -10,13 +10,13 @@
     "version_label": "20260913e"
   },
   "p4_current_bundle": {
-    "status": "PARTIAL_20260913E_PRECHECK_PLUS_T01_T02_T03_T05_T06_T09_ACCEPTED_HISTORICAL_FINALD_PRESERVED",
+    "status": "PARTIAL_20260913E_PRECHECK_PLUS_T01_T02_T03_T05_T06_T07_T08_T09_ACCEPTED_HISTORICAL_FINALD_PRESERVED",
     "knowledge_precheck": "PASS_REFERENCE_ONLY_20260913E",
     "knowledge_precheck_evidence": "evidence/current-bundle-20260913e-precheck.json",
     "historical_acceptance_not_transferred": true,
     "accepted_cases_scope": "historical_finald_20260912_only",
-    "current_version_accepted_cases": ["T01", "T02", "T03", "T05", "T06", "T09"],
-    "remaining_current_version_cases": ["T04", "T07", "T08", "T10"],
+    "current_version_accepted_cases": ["T01", "T02", "T03", "T05", "T06", "T07", "T08", "T09"],
+    "remaining_current_version_cases": ["T04", "T10"],
       "accepted_cases": [
       "T01",
       "T02",
@@ -126,12 +126,31 @@
       "T07": {
         "status": "PASS_FINALD_20260912",
         "evidence": "evidence/t07-finald-20260912-live-acceptance-20260912.json",
-        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "current_version_status": "PASS_CURRENT_20260914E_PAD_ACCEPTED",
+        "current_version_acceptance": "evidence/t07-current-bundle-live-acceptance-20260914e.json",
+        "current_version_output_comparison": "evidence/t07-current-bundle-output-comparison-20260914e.json"
       },
       "T08": {
         "status": "PASS_FINALD_20260912_EXPECTED_ERROR",
         "evidence": "evidence/t08-finald-20260912-live-acceptance-20260912.json",
-        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "current_version_status": "PASS_CURRENT_20260914E_EXPECTED_ERROR",
+        "current_version_generation": "evidence/t08-current-bundle-live-acceptance-20260914e.json",
+        "current_version_acceptance": "evidence/t08-current-bundle-live-acceptance-20260914e.json",
+        "current_version_output_comparison": "evidence/t08-current-bundle-output-comparison-20260914e.json",
+        "current_version_conversation": "https://m365.cloud.microsoft/chat/conversation/4b3b4dfc-8fb9-4d0c-a5de-3427be8a00eb",
+        "current_version_instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+        "current_version_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "current_version_request_sha256": "79070940eae3c1c7277a77c164af71d0221290c0e963fd75904931c200bb3e15",
+        "current_version_robin_sha256": "d4a6b697189ef9d234bd0575be9c216bd460325f5c6737d0456991c779c21c52",
+        "current_version_flow": "RobinKnowledgeT08CurrentBundleLive20260914e",
+        "current_version_runs": 2,
+        "current_version_NewVar": "named on both runs",
+        "current_version_LastError": "missing-file message on both runs",
+        "current_version_block_FileNotFound_match": "NOT_PROVEN",
+        "current_version_input_unchanged": true,
+        "current_version_downstream_writes_markers_publication": "none"
       },
       "T09": {
         "status": "PASS_CURRENT_20260913E",
@@ -258,11 +277,13 @@
     "T05 2026-09-13 fresh retry generation and two PAD runs are traced to current 20260913e; the new flow was auto-named 無題 (2), so an explicitly named-flow gate remains a bounded caveat.",
     "T04 2026-09-13 generation format remains not accepted; fresh attempt-3 reproduces the response-origin arrow escaping in a new conversation, while attempt-1 bracket provenance remains unproven.",
     "T06 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after CRLF normalization, Word body comparison passed, and the pre-existing output was moved aside and restored.",
+    "T07 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after CRLF normalization, PAGE_TOKEN_A2 was present without PAGE_TOKEN_A1, input PDF was unchanged, and the pre-existing output was restored.",
+    "T08 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after explicit whitespace normalization, action-level FileNotFoundError set NewVar=named and LastError on both runs, block-level user-defined FileNotFound remains NOT_PROVEN, and no downstream write/marker/publication occurred.",
     "P3 unconfirmed boundaries listed in still_unconfirmed (outside the teaching material; optional)",
     "Agent Builder registration (out of scope)",
     "DOM check (tests/Test-CopilotDom.cjs) NOT_RUN: Playwright not configured"
   ],
-  "result": "Historical finald 79245787 acceptance is preserved. Current canonical package 20260913e aligns instruction and knowledge at WAIT 1, has a live reference-only precheck, and has current-version T01, T02, T03 (explicit corrected request), T05, T06, and T09 PAD acceptance; T04 remains not accepted. T10 functional execution and the authorized two-line content scope are proven separately, while strict raw-byte preservation remains NOT_PROVEN; fresh acceptance for the remaining cases is still pending.",
+  "result": "Historical finald 79245787 acceptance is preserved. Current canonical package 20260913e aligns instruction and knowledge at WAIT 1, has a live reference-only precheck, and has current-version T01, T02, T03 (explicit corrected request), T05, T06, T07, T08 (measured action-level expected error), and T09 PAD acceptance; T04 remains not accepted. T10 functional execution and the authorized two-line content scope are proven separately, while strict raw-byte preservation remains NOT_PROVEN; independent retests, P3 positives, negative suite v2, and final audit are still pending.",
   "final_evidence_audit": {
     "status": "PARTIAL_REQUIRED_TRACEABILITY_GAPS",
     "target_commit": "e295387b525492f87e890bc0fb8a74aaf2396c2f",
