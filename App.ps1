@@ -1,5 +1,5 @@
 ﻿# App-Version: 0.1.0
-# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6IjkwM2IwMWE5ZDAzMzVhOGE1NjQzMjZjY2E1ZGYwZTU3IiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiJlZWU3YjljNmRhMjM3ZmRkOWNkYTgxZDc4NzE3MGY1OGFhM2Y3ZDYyNjQ0MDI2YjBmMjA4OGEyNzE5YmQ3MTk0IiwiaHRtbF9zaGEyNTYiOiIwYzllODhhNjNiOWM0MGNiMWIyMGU5NmU5ZDM3NTZiNjZhNzRmNDY4ZTJhZjdkYjNiMDIyZDU2Y2QxMjlkMjgwIiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
+# Release-Binding: eyJzY2hlbWFfdmVyc2lvbiI6MSwicmVsZWFzZV9pZCI6IjNhOTU5NmIzMjFiMjFjMTczOTU2OGMxMjVjZWEzM2EzIiwiY2hhbm5lbCI6ImNhbmRpZGF0ZSIsInN0YXRlX2NvbnRyYWN0IjoyLCJhcHBfcGF5bG9hZF9zaGEyNTYiOiJiMWRlMzJmZDM5ZGUxNGRkZDk3OGNhODQzYzQwYmE3NWU1MWEwZmUyMjM0MWEwM2M1MGZhYjcyZTRlMjI0NWQ5IiwiaHRtbF9zaGEyNTYiOiIwYzllODhhNjNiOWM0MGNiMWIyMGU5NmU5ZDM3NTZiNjZhNzRmNDY4ZTJhZjdkYjNiMDIyZDU2Y2QxMjlkMjgwIiwiY21kX3NoYTI1NiI6IjU2N2M1MDU3M2UzZTNjMTdhOGVkMDc1YjA3ZjY0ZGQ2Y2EyNzlhM2Q0MWFlODM3N2E2MTFmMmZkYzM0ZTUzZTcifQ==
 # State-Contract: 2
 [CmdletBinding()]
 param(
@@ -3841,6 +3841,55 @@ function Get-AgentPadStatus {
     return [pscustomobject]@{id=[string]$match.Current.AutomationId;state=[string]$states[[string]$match.Current.AutomationId];name=$name;status_bar=$statusBar}
 }
 
+function Get-AgentPadSubflowTabs {
+    param($Window,[string[]]$ExpectedNames,[string]$Status)
+    $expected=@($ExpectedNames)
+    if($expected.Count -lt 1 -or -not($expected -contains 'Main')) {throw 'PAD_SUBFLOW: expected subflow contract must include Main.'}
+    for($i=0;$i -lt $expected.Count;$i++) {
+        if([string]::IsNullOrWhiteSpace($expected[$i])) {throw 'PAD_SUBFLOW: expected subflow name is empty.'}
+        for($j=$i+1;$j -lt $expected.Count;$j++) {if($expected[$i] -ceq $expected[$j]) {throw 'PAD_SUBFLOW: expected subflow names are not unique.'}}
+    }
+    $tabs=Get-AgentPadElement $Window @('SubflowTabControl')
+    $tabCondition=New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::ControlTypeProperty,[Windows.Automation.ControlType]::TabItem)
+    $tabItems=@($tabs.FindAll([Windows.Automation.TreeScope]::Descendants,$tabCondition))
+    if($tabItems.Count -ne $expected.Count) {throw ('PAD_SUBFLOW: expected '+$expected.Count+' fixed subflows; observed '+$tabItems.Count+'.')}
+    $rawNames=@($tabItems | ForEach-Object {[string]$_.Current.Name})
+    $canonicalNames=@($rawNames | ForEach-Object {if($_ -ceq 'Main, エラーあり,'){'Main'}else{$_}})
+    foreach($name in $expected) {
+        if(@($canonicalNames | Where-Object {$_ -ceq $name}).Count -ne 1) {throw 'PAD_SUBFLOW: fixed subflow names do not match the observed flow.'}
+    }
+    foreach($name in $canonicalNames) {
+        if(@($expected | Where-Object {$_ -ceq $name}).Count -ne 1) {throw 'PAD_SUBFLOW: an unexpected subflow name was observed.'}
+    }
+    $mainTabs=@($tabItems | Where-Object {[string]$_.Current.Name -ceq 'Main'})
+    if($mainTabs.Count -eq 0 -and $Status -ceq 'runtime_error') {
+        $mainTabs=@($tabItems | Where-Object {[string]$_.Current.Name -ceq 'Main, エラーあり,'})
+        if($mainTabs.Count -eq 1) {
+            $directChildren=@($mainTabs[0].FindAll([Windows.Automation.TreeScope]::Children,[Windows.Automation.Condition]::TrueCondition))
+            if($directChildren.Count -ne 2) {throw 'PAD_SUBFLOW: runtime-error Main identity is not the observed shape.'}
+            $mainText=@($directChildren | Where-Object {
+                [string]$_.Current.AutomationId -ceq '' -and
+                [string]$_.Current.Name -ceq 'Main' -and
+                $_.Current.ControlType -eq [Windows.Automation.ControlType]::Text -and
+                [string]$_.Current.ClassName -ceq 'TextBlock'
+            })
+            $functionView=@($directChildren | Where-Object {
+                [string]$_.Current.AutomationId -ceq '' -and
+                [string]$_.Current.Name -ceq '' -and
+                $_.Current.ControlType -eq [Windows.Automation.ControlType]::Custom -and
+                [string]$_.Current.ClassName -ceq 'FunctionView'
+            })
+            if($mainText.Count -ne 1 -or $functionView.Count -ne 1) {throw 'PAD_SUBFLOW: runtime-error Main identity is not the observed shape.'}
+        }
+    }
+    if($mainTabs.Count -ne 1) {throw 'PAD_SUBFLOW: Main subflow is not uniquely identified.'}
+    $main=$mainTabs[0]
+    try {
+        if(-not $main.GetCurrentPattern([Windows.Automation.SelectionItemPattern]::Pattern).Current.IsSelected) {throw 'not selected'}
+    } catch {throw 'PAD_SUBFLOW: Main is not selected.'}
+    return [pscustomobject]@{tabs=$tabItems;main=$main;actual_names=$rawNames;names=$canonicalNames}
+}
+
 function Get-AgentPadErrorState {
     param($Window,[bool]$Running,[bool]$Idle,$StatusBar=$null)
     if($null -eq $StatusBar) {$StatusBar=Get-AgentPadStatusBar $Window}
@@ -3903,7 +3952,7 @@ function Get-AgentPadWindow {
 }
 
 function Get-AgentPadSnapshot {
-    param($Window,[switch]$AllowErrors)
+    param($Window,[switch]$AllowErrors,[string[]]$ExpectedSubflowNames=@('Main'))
     $status=Get-AgentPadStatus $Window
     # PAD intentionally collapses StartFlowButton for these ApplicationState
     # IsRunning states. Its absence is permitted only while the observed
@@ -3927,42 +3976,15 @@ function Get-AgentPadSnapshot {
     if(-not $executionObserved) {$save=Get-AgentPadInvokableButton $Window 'SaveFlowButton' '保存' -Wrapped}
     $workspace=Get-AgentPadElement $Window @('ProgramItemsListBoxActions')
     if($workspace.Current.ControlType -ne [Windows.Automation.ControlType]::List) {throw 'PAD_SELECTOR: action workspace is not the observed PAD list.'}
-    $tabs=Get-AgentPadElement $Window @('SubflowTabControl')
-    $tabCondition=New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::ControlTypeProperty,[Windows.Automation.ControlType]::TabItem)
-    $tabItems=$tabs.FindAll([Windows.Automation.TreeScope]::Descendants,$tabCondition)
-    if($tabItems.Count -ne 1) {throw 'PAD_SUBFLOW: exactly one Main subflow is required.'}
-    $mainTab=$tabItems[0]
-    $mainTabName=[string]$mainTab.Current.Name
-    if($mainTabName -cne 'Main') {
-        # Runtime errors decorate the selected outer TabItem name.  Keep the
-        # exception exact and prove the stable direct-child identity observed
-        # in the live designer before accepting it.  This branch is deliberately
-        # status-scoped; no localized prefix or fuzzy name match is permitted.
-        if($status.state -cne 'runtime_error' -or $mainTabName -cne 'Main, エラーあり,') {throw 'PAD_SUBFLOW: exactly one Main subflow is required.'}
-        $directChildren=@($mainTab.FindAll([Windows.Automation.TreeScope]::Children,[Windows.Automation.Condition]::TrueCondition))
-        if($directChildren.Count -ne 2) {throw 'PAD_SUBFLOW: exactly one Main subflow is required.'}
-        $mainText=@($directChildren | Where-Object {
-            [string]$_.Current.AutomationId -ceq '' -and
-            [string]$_.Current.Name -ceq 'Main' -and
-            $_.Current.ControlType -eq [Windows.Automation.ControlType]::Text -and
-            [string]$_.Current.ClassName -ceq 'TextBlock'
-        })
-        $functionView=@($directChildren | Where-Object {
-            [string]$_.Current.AutomationId -ceq '' -and
-            [string]$_.Current.Name -ceq '' -and
-            $_.Current.ControlType -eq [Windows.Automation.ControlType]::Custom -and
-            [string]$_.Current.ClassName -ceq 'FunctionView'
-        })
-        if($mainText.Count -ne 1 -or $functionView.Count -ne 1) {throw 'PAD_SUBFLOW: exactly one Main subflow is required.'}
-    }
-    if(-not $mainTab.GetCurrentPattern([Windows.Automation.SelectionItemPattern]::Pattern).Current.IsSelected) {throw 'PAD_SUBFLOW: Main is not selected.'}
+    $subflows=Get-AgentPadSubflowTabs -Window $Window -ExpectedNames $ExpectedSubflowNames -Status $status.state
+    $mainTab=$subflows.main
     $startEnabled=if($null -ne $start){[bool]$start.Current.IsEnabled}else{$false}
     $saveEnabled=if($null -ne $save){[bool]$save.Current.IsEnabled}else{$false}
     $provisional=New-AgentPadSnapshotState -StartEnabled $startEnabled -StopEnabled ([bool]$stop.Current.IsEnabled) -SaveEnabled $saveEnabled -Status $status.state -ErrorCount -1 -ErrorsKnown $false
     $errorState=Get-AgentPadErrorState -Window $Window -Running $provisional.running -Idle $provisional.idle -StatusBar $status.status_bar
     $state=New-AgentPadSnapshotState -StartEnabled $startEnabled -StopEnabled ([bool]$stop.Current.IsEnabled) -SaveEnabled $saveEnabled -Status $status.state -ErrorCount $errorState.count -ErrorsKnown $errorState.known
     if(-not $AllowErrors -and (-not $state.errors_known -or $state.errors -ne 0)) {throw 'PAD_ERRORS: designer error state is not a confirmed zero.'}
-    [pscustomobject]@{start=$start;stop=$stop;save=$save;workspace=$workspace;status=$status.state;status_id=$status.id;status_name=$status.name;window=$Window;running=$state.running;execution_observed=$executionObserved;idle=$state.idle;editable=$state.editable;can_run=$state.can_run;ready=$state.ready;errors=$state.errors;errors_known=$state.errors_known}
+    [pscustomobject]@{start=$start;stop=$stop;save=$save;workspace=$workspace;subflows=$subflows.names;actual_subflows=$subflows.actual_names;status=$status.state;status_id=$status.id;status_name=$status.name;window=$Window;running=$state.running;execution_observed=$executionObserved;idle=$state.idle;editable=$state.editable;can_run=$state.can_run;ready=$state.ready;errors=$state.errors;errors_known=$state.errors_known}
 }
 
 function Set-AgentPadFocus {

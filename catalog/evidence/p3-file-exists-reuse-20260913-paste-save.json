@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T07:03:30.8067628Z",
+  "flow_name": "RobinKnowledgeDFileExistsReuse_20260913_Retry",
+  "source_robin": "catalog/evidence/p3-file-exists-probe-20260910.robin",
+  "source_sha256": "bdb56fde60047898939f6c37a3b24be57dffc2f7e0ad57c37045c7fd03a1a8db",
+  "source_bytes": 124,
+  "paste_confirmed": true,
+  "action_count_after_paste": 2,
+  "saved_confirmed": true,
+  "clipboard_restored": true,
+  "execution_requested": false
+}

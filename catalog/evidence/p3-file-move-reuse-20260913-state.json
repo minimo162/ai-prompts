@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T07:06:42+00:00",
+  "flow_name": "RobinKnowledgeDFileMoveReuse_20260913",
+  "source_path": ".work/p3-file-move-source-20260910.txt",
+  "destination_path": ".work/p3-file-move-dest/p3-file-move-source-20260910.txt",
+  "run1": {
+    "evidence": "catalog/evidence/p3-file-move-reuse-20260913-run1.json",
+    "run_status": "success",
+    "moved_files_preview": ["C:\\Users\\yuuki\\ai-prompts\\.work\\p3-file-move-dest\\p3-file-move-source-20260910.txt"]
+  },
+  "recreated_source_before_run2": {
+    "method": "copied destination bytes back to source; destination retained",
+    "source_sha256": "96dcdbf3ca1f183eaab387259990ac187294f067ca6692a15b8d9350ef5e248b",
+    "destination_sha256": "96dcdbf3ca1f183eaab387259990ac187294f067ca6692a15b8d9350ef5e248b"
+  },
+  "run2": {
+    "evidence": "catalog/evidence/p3-file-move-reuse-20260913-run2.json",
+    "run_status": "success",
+    "moved_files_preview": [],
+    "collision_behavior": "DoNothing",
+    "source_exists": true,
+    "destination_exists": true
+  },
+  "fixture_restore": {
+    "destination_backup": ".work/p3-file-move-dest/p3-file-move-source-20260910.before-live.bak",
+    "restore_pending": true
+  }
+}

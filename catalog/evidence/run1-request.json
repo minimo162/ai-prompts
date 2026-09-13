@@ -1,0 +1,23 @@
+{
+    "schema_version":  1,
+    "requested_at":  "2026-09-13T06:35:53.2272192Z",
+    "run_number":  1,
+    "flow_name":  "RobinKnowledgeSubflowReuse_20260913_1534",
+    "process_id":  24512,
+    "hwnd":  264282,
+    "selected_subflow":  "Main",
+    "expected_subflows":  [
+                              "Main",
+                              "P3Worker"
+                          ],
+    "source_hashes":  {
+                          "call":  "cb547e2b3f9a35d5baaf2c18ff7192b54c085cf2b68e33ac01864c233e4a3256",
+                          "worker":  "917929450097e7c1fec2a483b0b748c937f1aae6805e1f1c420c6c6a99d741b6"
+                      },
+    "source_bytes":  {
+                         "call":  14,
+                         "worker":  246
+                     },
+    "expected_variable":  "ButtonPressed",
+    "expected_preview":  "OK"
+}

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T08:47:48.0718145Z",
+  "flow_name": "RobinKnowledgeSubflowReuse_20260913_1534",
+  "previous_run_process_id": 24512,
+  "previous_run_hwnd": 264282,
+  "reopened_process_id": 27424,
+  "reopened_hwnd": 1313702,
+  "power_fx": false,
+  "subflows": ["Main", "P3Worker"],
+  "selected_before_recopy": "Main",
+  "reopened_status": "ready",
+  "reopened_errors": 0,
+  "source_hashes": {
+    "call": "cb547e2b3f9a35d5baaf2c18ff7192b54c085cf2b68e33ac01864c233e4a3256",
+    "worker": "917929450097e7c1fec2a483b0b748c937f1aae6805e1f1c420c6c6a99d741b6"
+  },
+  "recopy_after_reopen": {
+    "Main": {
+      "path": "catalog/evidence/p3-subflow-reuse-20260913-main-recopy-after-reopen.robin",
+      "sha256": "02761525859c6a4fa9625b27999abc609666779b32412c29669c9a1eb9785ba7",
+      "bytes": 15,
+      "matches_previous_recopy": true
+    },
+    "P3Worker": {
+      "path": "catalog/evidence/p3-subflow-reuse-20260913-worker-recopy-after-reopen.robin",
+      "sha256": "475a272d9c0c8e8837e3efcffc8f05134689b342400cda6362e0e37d25829cb5",
+      "bytes": 247,
+      "matches_previous_recopy": true
+    }
+  },
+  "post_reopen_run_requested": false,
+  "result": "saved_close_reopened_main_and_p3worker_recopied_without_source_change"
+}

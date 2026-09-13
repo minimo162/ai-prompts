@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-13T06:52:47.3258531Z",
+    "flow_name":  "RobinKnowledgeCDataTableCellReuse_20260913",
+    "source_robin":  "catalog/evidence/p3-datatable-cell-success-flow-20260911.robin",
+    "source_sha256":  "218ec97aa79d5e4cbb6d3f66d995f9e0c9248eab47c04431a2eac4c2fff8b9cd",
+    "source_bytes":  245,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  2,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

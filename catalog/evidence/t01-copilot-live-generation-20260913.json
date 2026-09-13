@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T09:02:00+09:00",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/0cf5181b-b371-43c9-9c4f-410d9464e419?es=SSR",
+  "model": "Think Deeper",
+  "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+  "knowledge_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+  "prompt_source": ".work/finale-20260912/t01/prompt.txt",
+  "prompt_source_sha256": "52853ac788c584a1c2b33b6b64abc6e4a3f489412ca61a75286907cc0e57a94a",
+  "attachments": ["agent-instructions.txt", "PAD-Robin-Knowledge-Bundle.txt"],
+  "response": {
+    "code_block_count": 1,
+    "robin_path": "catalog/evidence/t01-copilot-live-generation-20260913.robin",
+    "robin_sha256": "2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47",
+    "robin_bytes": 646,
+    "robin_lines": 3,
+    "trailing_lf": true,
+    "markdown_language_label": false
+  },
+  "status": "generated_response_observed_pad_pasted_saved_two_runs_recopied",
+  "pad_execution": "proven",
+  "pad_acceptance_evidence": "catalog/evidence/t01-copilot-live-generation-20260913-pad-acceptance.json"
+}

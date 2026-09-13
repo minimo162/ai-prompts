@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T06:16:12.1378428Z",
+  "status": "NOT_RUN_TARGET_UNAVAILABLE",
+  "scope": "B Main/P3Worker separate empty-flow reuse observer correction; no Robin source or PAD flow mutation.",
+  "execution_started": false,
+  "blocker": {
+    "stage": "target_discovery",
+    "process_check": "No PAD.Designer process was returned on the current host.",
+    "cua_check": "The active CUA state returned apps=[] and no native PAD window.",
+    "error": "A targetable PAD.Designer PID/HWND and exact flow title were unavailable.",
+    "resume_condition": "Open the dedicated Power Automate Desktop flow in the same interactive session, then re-observe one PAD.Designer PID, nonzero HWND, and exact Power Automate | RobinKnowledgeSubflowReuse_20260912 title before any paste or Run."
+  },
+  "git": {
+    "head": "fef38bdb580fad55d1fa2ce837e5aa3007b9e4f1",
+    "branch": "issue-5-b-subflow-reuse-20260913",
+    "main": "fef38bdb580fad55d1fa2ce837e5aa3007b9e4f1",
+    "origin_main": "fef38bdb580fad55d1fa2ce837e5aa3007b9e4f1"
+  },
+  "protected_materials": {
+    "approach_comparison_sha256_start": "e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699",
+    "approach_comparison_sha256_end": "e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699",
+    "finale_directory_file_count_end": 408,
+    "finale_directory_manifest_sha256_end": "c6e1af2929ca3976025880246aac45cdd4e5dad66f7d45ce0c47be528e53c8cd",
+    "finale_b_subflow_files_unchanged": true
+  },
+  "source_raw": {
+    "call": {
+      "path": "catalog/evidence/p3-subflow-call-20260910.robin",
+      "sha256_current": "cb547e2b3f9a35d5baaf2c18ff7192b54c085cf2b68e33ac01864c233e4a3256",
+      "sha256_original_declared_crlf": "02761525859c6a4fa9625b27999abc609666779b32412c29669c9a1eb9785ba7",
+      "bytes_current": 14,
+      "edited": false
+    },
+    "worker": {
+      "path": "catalog/evidence/p3-subflow-worker-20260910.robin",
+      "sha256_current": "917929450097e7c1fec2a483b0b748c937f1aae6805e1f1c420c6c6a99d741b6",
+      "sha256_original_declared_crlf": "475a272d9c0c8e8837e3efcffc8f05134689b342400cda6362e0e37d25829cb5",
+      "bytes_current": 246,
+      "edited": false
+    }
+  },
+  "observer_change": {
+    "production_function": "Get-AgentPadSnapshot",
+    "new_contract_function": "Get-AgentPadSubflowTabs",
+    "allowed_contract": ["Main", "P3Worker"],
+    "default_contract_preserved": ["Main"],
+    "rejection_conditions": ["unexpected or duplicate names", "wrong count", "unselected Main", "wrong runtime-error Main shape"],
+    "run_helper": "tools/Run-PadSubflowReuseLive.ps1"
+  },
+  "verification": {
+    "tests_Test-Pad": "PASS: 340 PAD contract/local mock checks; no live PAD/UIA/clipboard/flow execution",
+    "parse": "PASS: App.ps1, tools/Run-PadSubflowReuseLive.ps1, tests/Test-Pad.ps1",
+    "live_run1": "NOT_RUN",
+    "live_run2": "NOT_RUN",
+    "save_reopen_recopy": "NOT_RUN"
+  }
+}

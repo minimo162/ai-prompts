@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T19:29:50+09:00",
+  "flow_name": "無題 (2)",
+  "pad_window_id": 1248718,
+  "run_status": "success",
+  "ready_observed": true,
+  "start_enabled_after": true,
+  "excel_window_after": true,
+  "output": {
+    "path": "catalog/evidence/normal-chat-t05-final.xlsx",
+    "sha256": "44940c8d1a940a5ead0494a533a4461a97b2522d935e90c9ec66ee23fe08c6e9",
+    "bytes": 9005,
+    "B2": "T05-Changed",
+    "A1_unchanged_from_input": true
+  },
+  "input": {
+    "path": "catalog/fixtures/excel/excel-catalog.xlsx",
+    "sha256": "e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6",
+    "unchanged_required": true
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T07:05:37.7851017Z",
+  "flow_name": "RobinKnowledgeDFileMoveReuse_20260913",
+  "source_robin": "catalog/evidence/p3-file-move-probe-20260910.robin",
+  "source_sha256": "359827098be622bd3cd62721a78cbdc725e643d89d3be7969e72d2118d9320e0",
+  "source_bytes": 231,
+  "paste_confirmed": true,
+  "action_count_after_paste": 1,
+  "saved_confirmed": true,
+  "clipboard_restored": true,
+  "execution_requested": false
+}

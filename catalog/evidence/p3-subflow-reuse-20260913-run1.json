@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "captured_at": "2026-09-13T06:39:20Z",
+  "status": "success",
+  "run_number": 1,
+  "flow_name": "RobinKnowledgeSubflowReuse_20260913_1534",
+  "process_id": 24512,
+  "hwnd": 264282,
+  "expected_subflows": ["Main", "P3Worker"],
+  "selected_subflow_before": "Main",
+  "selected_subflow_after": "P3Worker",
+  "execution_requested": true,
+  "execution_invoked_at": "2026-09-13T06:35:53.2272192Z",
+  "running_observed": true,
+  "completion_observed": true,
+  "final_status": "ready",
+  "final_error_count": 0,
+  "variable_previews": ["OK"],
+  "button_pressed_match": true,
+  "expected_variable": "ButtonPressed",
+  "expected_preview": "OK",
+  "source_hashes_before": {
+    "call": "cb547e2b3f9a35d5baaf2c18ff7192b54c085cf2b68e33ac01864c233e4a3256",
+    "worker": "917929450097e7c1fec2a483b0b748c937f1aae6805e1f1c420c6c6a99d741b6"
+  },
+  "source_hashes_after": {
+    "call": "cb547e2b3f9a35d5baaf2c18ff7192b54c085cf2b68e33ac01864c233e4a3256",
+    "worker": "917929450097e7c1fec2a483b0b748c937f1aae6805e1f1c420c6c6a99d741b6"
+  },
+  "source_unchanged": true,
+  "runtime_evidence": {
+    "path": "%LOCALAPPDATA%/Microsoft/Power Automate Desktop/DataCollection/2026-09-13-06-35-RobinRobot.log",
+    "run_id": "ada888d0-e9be-4508-b9fb-622fb729e050",
+    "flow_id": "7c4bebeb-9cb0-4576-a99b-4c3e957c5db6",
+    "events": [
+      {"event": "robot.execution.statechanged", "message": "robot.execution.statechanged Running", "event_timestamp": "2026-09-13T06:35:54.9335943Z"},
+      {"event": "robot.execution.statechanged", "message": "robot.execution.statechanged Ready", "event_timestamp": "2026-09-13T06:35:58.6538246Z"},
+      {"event": "robin.execution.success", "duration_ms": 3703, "event_timestamp": "2026-09-13T06:35:58.6582222Z"},
+      {"event": "robot.execution.completion", "event_timestamp": "2026-09-13T06:35:58.6590745Z"}
+    ]
+  },
+  "observation_note": "The helper process was tool-timeout terminated before writing its result. This record is reconstructed from the pre-written run1-request.json, the same-run PAD RobinRobot log runId, and post-run UIA observation; no second Run was issued."
+}

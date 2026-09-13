@@ -1,0 +1,17 @@
+{
+    "schema_version":  1,
+    "observed_at":  "2026-09-13T08:35:25.2422505Z",
+    "flow_name":  "無題",
+    "run_status":  "success",
+    "ready_observed":  true,
+    "start_enabled_after":  true,
+    "variable_previews":  [
+                              "T10-Changed",
+                              "Excel インスタンス",
+                              "CopilotOffice 246  ",
+                              "PowerPoint instance",
+                              "1",
+                              "CopilotOffice 246 ",
+                              "Word インスタンス"
+                          ]
+}

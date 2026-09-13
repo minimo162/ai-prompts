@@ -1,0 +1,1 @@
+File.RenameFiles.Rename Files: $'''C:\\Users\\yuuki\\ai-prompts\\.work\\p3-file-rename-before-20260910.txt''' NewName: $'''p3-file-rename-after-20260910''' KeepExtension: True IfFileExists: File.IfExists.DoNothing RenamedFiles=> RenamedFiles

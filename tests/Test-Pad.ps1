@@ -20,7 +20,7 @@ foreach($sourceFile in $sourceFiles) {
         if(-not $definitions.ContainsKey($definition.Name)){$definitions[$definition.Name]=$definition}
     }
 }
-$wanted=@('Test-AgentId','Assert-AgentId','Read-AgentJson','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','Get-AgentTextHash','Get-AgentPlannerRules','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Read-AgentAiCallTemplates','Test-AgentRobin','ConvertTo-AgentRobinInteger','Get-AgentRobinVariableReferences','ConvertTo-AgentComparableRobin','Get-AgentAiCallTemplate','New-AgentAiCallTemplates','Get-AgentPadAiResults','Test-AgentPadWindowTitle','Get-AgentPadElement','Test-AgentPadRetryableSelectorFailure','Get-AgentPadInvokableButton','Get-AgentPadStatusBar','Get-AgentPadStatus','Get-AgentPadErrorState','New-AgentPadSnapshotState','Get-AgentPadSnapshot','Get-AgentPadObservationLossSeconds','Invoke-AgentPadStopIfConfirmed','Wait-AgentPadEditable','Invoke-AgentPad','Invoke-AgentPadCore','Get-AgentPadOwnerPath','New-AgentPadRecoveryBackup','Set-AgentPadRecoveryPhase','Test-AgentPadClipboardLease')
+$wanted=@('Test-AgentId','Assert-AgentId','Read-AgentJson','Write-AgentJson','Get-AgentProperty','Get-AgentFullPath','Assert-AgentPathUnder','Assert-AgentNoReparse','Get-AgentHash','Get-AgentVerifiedPriorArtifacts','Get-AgentTextHash','Get-AgentPlannerRules','ConvertTo-AgentRobinLiteral','ConvertFrom-AgentRobinLiteral','Assert-AgentPadPath','Read-AgentAiCallTemplates','Test-AgentRobin','ConvertTo-AgentRobinInteger','Get-AgentRobinVariableReferences','ConvertTo-AgentComparableRobin','Get-AgentAiCallTemplate','New-AgentAiCallTemplates','Get-AgentPadAiResults','Test-AgentPadWindowTitle','Get-AgentPadElement','Test-AgentPadRetryableSelectorFailure','Get-AgentPadInvokableButton','Get-AgentPadStatusBar','Get-AgentPadStatus','Get-AgentPadSubflowTabs','Get-AgentPadErrorState','New-AgentPadSnapshotState','Get-AgentPadSnapshot','Get-AgentPadObservationLossSeconds','Invoke-AgentPadStopIfConfirmed','Wait-AgentPadEditable','Invoke-AgentPad','Invoke-AgentPadCore','Get-AgentPadOwnerPath','New-AgentPadRecoveryBackup','Set-AgentPadRecoveryPhase','Test-AgentPadClipboardLease')
 $wanted += @('Get-AgentDocumentPlannerRules','Get-AgentDocumentAction','Test-AgentDocumentAction','Assert-AgentDocumentRead','Add-AgentDocumentWrite','New-AgentDocumentInspection','Get-AgentDocumentExecutionRobin','Assert-AgentSourcesUnchanged','Get-AgentInspectedSource','Get-AgentDocumentContent','Get-AgentXmlText','Read-AgentZipXml')
 foreach($name in $wanted) {
     if(-not $definitions.ContainsKey($name)){throw ('Missing production function: '+$name)}
@@ -99,7 +99,7 @@ function New-PadResolverElement([string]$Id,[string]$Name,[Windows.Automation.Co
     $element.Current.ClassName=''
     return $element
 }
-function New-PadResolverLayout([string]$StatusId='Flow_status_ready',[bool]$StartEnabled=$false,[bool]$StopEnabled=$false,[bool]$SaveEnabled=$true,[object]$ErrorText=$null,[bool]$SelectedMain=$true,[bool]$WorkspaceIsList=$true,[bool]$IncludeProgramDetails=$true,[bool]$OmitStart=$false,[string]$MainName='Main',[switch]$RuntimeErrorMainShape) {
+function New-PadResolverLayout([string]$StatusId='Flow_status_ready',[bool]$StartEnabled=$false,[bool]$StopEnabled=$false,[bool]$SaveEnabled=$true,[object]$ErrorText=$null,[bool]$SelectedMain=$true,[bool]$WorkspaceIsList=$true,[bool]$IncludeProgramDetails=$true,[bool]$OmitStart=$false,[string]$MainName='Main',[switch]$RuntimeErrorMainShape,[string[]]$SubflowNames=@('Main')) {
     $root=New-PadResolverElement 'Root' 'mock root' ([Windows.Automation.ControlType]::Window)
     $start=New-PadResolverElement 'StartFlowButton' 'Run' ([Windows.Automation.ControlType]::Button) $StartEnabled $true
     $stopWrapper=New-PadResolverElement 'StopFlowButton' 'stop wrapper' ([Windows.Automation.ControlType]::Custom) $true $false
@@ -109,19 +109,28 @@ function New-PadResolverLayout([string]$StatusId='Flow_status_ready',[bool]$Star
     $workspaceType=if($WorkspaceIsList){[Windows.Automation.ControlType]::List}else{[Windows.Automation.ControlType]::Pane}
     $workspace=New-PadResolverElement 'ProgramItemsListBoxActions' 'workspace' $workspaceType
     $tabs=New-PadResolverElement 'SubflowTabControl' 'tabs' ([Windows.Automation.ControlType]::Tab)
-    $main=New-PadResolverElement 'MainTab' $MainName ([Windows.Automation.ControlType]::TabItem) $true $true $SelectedMain
-    if($RuntimeErrorMainShape) {
-        $mainText=New-PadResolverElement '' 'Main' ([Windows.Automation.ControlType]::Text)
-        $mainText.Current.ClassName='TextBlock'
-        $functionView=New-PadResolverElement '' '' ([Windows.Automation.ControlType]::Custom)
-        $functionView.Current.ClassName='FunctionView'
-        $main.AddChild($mainText); $main.AddChild($functionView)
+    $main=$null
+    foreach($subflowName in $SubflowNames) {
+        $baseName=if($subflowName -ceq 'Main'){$MainName}else{$subflowName}
+        $displayName=if($subflowName -ceq 'Main' -and $RuntimeErrorMainShape -and $baseName -ceq 'Main'){'Main, エラーあり,'}else{$baseName}
+        $tab=New-PadResolverElement ('Tab-'+$subflowName) $displayName ([Windows.Automation.ControlType]::TabItem) $true $true ($subflowName -ceq 'Main' -and $SelectedMain)
+        if($subflowName -ceq 'Main') {
+            $main=$tab
+            if($RuntimeErrorMainShape) {
+                $mainText=New-PadResolverElement '' 'Main' ([Windows.Automation.ControlType]::Text)
+                $mainText.Current.ClassName='TextBlock'
+                $functionView=New-PadResolverElement '' '' ([Windows.Automation.ControlType]::Custom)
+                $functionView.Current.ClassName='FunctionView'
+                $main.AddChild($mainText); $main.AddChild($functionView)
+            }
+        }
+        $tabs.AddChild($tab)
     }
     $statusBar=New-PadResolverElement 'DesignerStatusBar' 'status bar' ([Windows.Automation.ControlType]::StatusBar)
     $normalStatus=New-PadResolverElement 'NormalStatusBarItem' 'normal status' ([Windows.Automation.ControlType]::Pane)
     $programDetails=New-PadResolverElement 'ProgramDetailsStatusBarItem' 'program details' ([Windows.Automation.ControlType]::Pane)
     $status=New-PadResolverElement $StatusId '状態: mock' ([Windows.Automation.ControlType]::Text) $true $false
-    $stopWrapper.AddChild($stop); $saveWrapper.AddChild($save); $tabs.AddChild($main); $normalStatus.AddChild($status); $statusBar.AddChild($normalStatus); if($IncludeProgramDetails){$statusBar.AddChild($programDetails)}
+    $stopWrapper.AddChild($stop); $saveWrapper.AddChild($save); $normalStatus.AddChild($status); $statusBar.AddChild($normalStatus); if($IncludeProgramDetails){$statusBar.AddChild($programDetails)}
     $rootChildren=@($stopWrapper,$saveWrapper,$workspace,$tabs,$statusBar)
     if(-not $OmitStart){$rootChildren=@($start)+$rootChildren}
     foreach($element in $rootChildren) {$root.AddChild($element)}
@@ -267,6 +276,17 @@ $badMain=New-PadResolverLayout -SelectedMain:$false
 Assert-Rejected {Get-AgentPadSnapshot $badMain.root} 'PAD_SUBFLOW' 'Full snapshot requires the only Main subflow to be selected'
 $twoMain=New-PadResolverLayout; $twoMain.tabs.AddChild((New-PadResolverElement 'OtherMainTab' 'Main' ([Windows.Automation.ControlType]::TabItem) $true $true $true))
 Assert-Rejected {Get-AgentPadSnapshot $twoMain.root} 'PAD_SUBFLOW' 'Full snapshot rejects multiple Main subflow tabs'
+$twoSubflows=New-PadResolverLayout -SubflowNames @('Main','P3Worker')
+$twoSubflowSnapshot=Get-AgentPadSnapshot $twoSubflows.root -AllowErrors -ExpectedSubflowNames @('Main','P3Worker')
+Assert-Case ($twoSubflowSnapshot.subflows.Count -eq 2 -and (@($twoSubflowSnapshot.subflows | Where-Object {$_ -ceq 'Main'}).Count -eq 1) -and (@($twoSubflowSnapshot.subflows | Where-Object {$_ -ceq 'P3Worker'}).Count -eq 1)) 'Explicit fixed Main/P3Worker contract accepts exactly the observed two-subflow layout'
+Assert-Rejected {Get-AgentPadSnapshot $twoSubflows.root -AllowErrors} 'PAD_SUBFLOW' 'Default single-Main contract rejects a two-subflow layout'
+$twoWrongName=New-PadResolverLayout -SubflowNames @('Main','OtherWorker')
+Assert-Rejected {Get-AgentPadSnapshot $twoWrongName.root -AllowErrors -ExpectedSubflowNames @('Main','P3Worker')} 'PAD_SUBFLOW' 'Fixed Main/P3Worker contract rejects an unexpected worker name'
+$twoDuplicateExpected=New-PadResolverLayout -SubflowNames @('Main','P3Worker')
+Assert-Rejected {Get-AgentPadSnapshot $twoDuplicateExpected.root -AllowErrors -ExpectedSubflowNames @('Main','Main')} 'PAD_SUBFLOW' 'Fixed subflow contract rejects duplicate expected names'
+$twoRuntime=New-PadResolverLayout -StatusId 'Flow_status_runtime_error' -RuntimeErrorMainShape -SubflowNames @('Main','P3Worker')
+$twoRuntimeSnapshot=Get-AgentPadSnapshot $twoRuntime.root -AllowErrors -ExpectedSubflowNames @('Main','P3Worker')
+Assert-Case ($twoRuntimeSnapshot.subflows.Count -eq 2 -and $twoRuntimeSnapshot.actual_subflows[0] -ceq 'Main, エラーあり,') 'Fixed Main/P3Worker contract preserves the observed decorated Main runtime-error identity'
 $wrongWorkspace=New-PadResolverLayout -WorkspaceIsList:$false
 Assert-Rejected {Get-AgentPadSnapshot $wrongWorkspace.root} 'PAD_SELECTOR' 'Full snapshot rejects a workspace outside the observed List control type'
 
