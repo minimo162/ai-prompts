@@ -7,14 +7,16 @@
     "5": {
       "title": "PAD Robin指示文・ナレッジ：T01/T02/T03/T05/T06/T07/T08/T09同版受入／独立T01受入・独立T04候補partial／T04形式・T10厳密保持残件",
       "state": "OPEN",
-      "comment_count_after_send": 88,
-      "tracking_comment": "https://github.com/minimo162/ai-prompts/issues/5#issuecomment-5655479376"
+      "comment_count_after_send": 89,
+      "tracking_comment": "https://github.com/minimo162/ai-prompts/issues/5#issuecomment-5655479376",
+      "final_commit_correction_comment": "https://github.com/minimo162/ai-prompts/issues/5#issuecomment-5655485956"
     },
     "27": {
       "title": "PAD Robin残件受入：T01/T02/T03/T05/T06/T07/T08/T09同版受入／独立T01受入・独立T04候補partial／T04形式・T10厳密保持残件",
       "state": "OPEN",
-      "comment_count_after_send": 24,
-      "tracking_comment": "https://github.com/minimo162/ai-prompts/issues/27#issuecomment-5655480685"
+      "comment_count_after_send": 25,
+      "tracking_comment": "https://github.com/minimo162/ai-prompts/issues/27#issuecomment-5655480685",
+      "final_commit_correction_comment": "https://github.com/minimo162/ai-prompts/issues/27#issuecomment-5655486041"
     }
   },
   "reported": {
