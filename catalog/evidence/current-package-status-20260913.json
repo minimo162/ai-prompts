@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "captured_at": "2026-09-13T22:16:41+09:00",
-  "status": "partial_current_package_20260913e_T09_accepted",
+  "status": "partial_current_package_20260913e_T01_T09_accepted",
   "issue_state": "OPEN",
   "version": {
     "label": "20260913e",
@@ -10,7 +10,7 @@
     "bundle_manifest": "copilot/knowledge-bundle-manifest-20260913e.json",
     "instruction_utf16": 3947,
     "change_vs_finalc_20260912": "Canonical T09 instruction line 39 was corrected from WAIT 500 to WAIT 1 to match the measured knowledge. Historical finald acceptance is preserved but not inherited by 20260913e. T03/T04 follow-up evidence remains separately classified.",
-      "canonical_distribution_status": "WAIT_1_INSTRUCTION_AND_WAIT_1_KNOWLEDGE_MATCH;_T09_ACCEPTED_ONLY;_NEW_VERSION_CASE_ACCEPTANCE_PENDING",
+      "canonical_distribution_status": "WAIT_1_INSTRUCTION_AND_WAIT_1_KNOWLEDGE_MATCH;_T01_T09_ACCEPTED;_NEW_VERSION_CASE_ACCEPTANCE_PENDING",
     "previous_canonical_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e"
   },
   "superseded_versions": {
@@ -44,6 +44,18 @@
         "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
         "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
         "pad_acceptance": "NOT_RUN"
+      },
+      "current_version_pad": {
+        "status": "PASS_CURRENT_20260913E_PAD_ACCEPTED",
+        "evidence": "evidence/t01-copilot-live-generation-20260913e-pad-acceptance.json",
+        "output_comparison": "evidence/t01-copilot-live-generation-20260913e-pad-output-comparison.json",
+        "flow_name": "RobinKnowledgeT01CurrentBundleLive_20260913e",
+        "designer_pid": 5288,
+        "designer_hwnd": 461824,
+        "action_count": 3,
+        "runs_completed": 2,
+        "source_to_pad_crlf_normalized": "PROVEN",
+        "strict_source_to_generation": "NOT_ASSESSED"
       },
       "result": "../generated/normal-chat-finald-20260912-t01/result.json",
       "evidence": "evidence/t01-finald-20260912-live-acceptance-20260912.json",
@@ -387,14 +399,15 @@
     "evidence": "evidence/current-package-status-20260912-finald.json"
   },
     "new_version_acceptance": {
-      "status": "PRECHECK_PLUS_T09_PAD_ACCEPTED;_T01_GENERATION_ONLY_PAD_PENDING;_T02_T08_T10_INDEPENDENT_P3_NEGATIVE_NOT_RUN",
-      "accepted_current_version_cases": ["T09"],
+      "status": "PRECHECK_PLUS_T01_T09_PAD_ACCEPTED;_T02_T08_T10_INDEPENDENT_P3_NEGATIVE_NOT_RUN",
+      "accepted_current_version_cases": ["T01", "T09"],
       "precheck": "evidence/current-bundle-20260913e-precheck.json",
       "t09_acceptance": "evidence/t09-20260913e-pad-acceptance.json",
       "t01_generation": "evidence/t01-copilot-live-generation-20260913e.json",
+      "t01_acceptance": "evidence/t01-copilot-live-generation-20260913e-pad-acceptance.json",
     "candidate_followup": "evidence/t03-revised-input-live-acceptance-20260913.json; evidence/t04-copilot-live-generation-20260913-diagnosis.json",
     "strict_t10": "NOT_PROVEN",
-    "required_next": "Run fresh 20260913e normal-chat generation and unmodified PAD acceptance for T01-T10, independent T01/T04/T10, P3 positive cases, and negative suite v2; do not reuse historical finald PASS."
+    "required_next": "Run missing fresh 20260913e normal-chat generation and unmodified PAD acceptance for T02-T08 and T10, then independent T01/T04/T10, P3 positive cases, and negative suite v2; do not reuse historical finald PASS."
   },
     "result": "Current canonical package is 20260913e with WAIT 1/WAIT 1 alignment, a live reference-only precheck, and fresh T09 PAD acceptance. Historical finald 79245787 acceptance is preserved but not transferred; full same-version case acceptance remains OPEN / partial."
 }

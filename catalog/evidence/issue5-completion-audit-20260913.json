@@ -10,13 +10,13 @@
     "version_label": "20260913e"
   },
   "p4_current_bundle": {
-    "status": "PARTIAL_20260913E_PRECHECK_PLUS_T09_ACCEPTED_HISTORICAL_FINALD_PRESERVED",
+    "status": "PARTIAL_20260913E_PRECHECK_PLUS_T01_T09_ACCEPTED_HISTORICAL_FINALD_PRESERVED",
     "knowledge_precheck": "PASS_REFERENCE_ONLY_20260913E",
     "knowledge_precheck_evidence": "evidence/current-bundle-20260913e-precheck.json",
     "historical_acceptance_not_transferred": true,
     "accepted_cases_scope": "historical_finald_20260912_only",
-    "current_version_accepted_cases": ["T09"],
-    "remaining_current_version_cases": ["T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T10"],
+    "current_version_accepted_cases": ["T01", "T09"],
+    "remaining_current_version_cases": ["T02", "T03", "T04", "T05", "T06", "T07", "T08", "T10"],
       "accepted_cases": [
       "T01",
       "T02",
@@ -38,11 +38,14 @@
       },
       "T01": {
         "status": "PASS_FINALD_20260912",
+        "current_version_status": "PASS_CURRENT_20260913E_PAD_ACCEPTED",
         "evidence": "evidence/t01-finald-20260912-live-acceptance-20260912.json",
         "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
         "current_version_generation": "PASS_CURRENT_20260913E_GENERATION_ONLY",
         "current_version_generation_evidence": "evidence/t01-copilot-live-generation-20260913e.json",
-        "current_version_pad": "NOT_RUN"
+        "current_version_pad": "PASS_CURRENT_20260913E_PAD_ACCEPTED",
+        "current_version_pad_evidence": "evidence/t01-copilot-live-generation-20260913e-pad-acceptance.json",
+        "current_version_output_comparison": "evidence/t01-copilot-live-generation-20260913e-pad-output-comparison.json"
       },
       "T02": {
         "status": "PASS_FINALD_20260912",
@@ -173,7 +176,6 @@
     ]
   },
   "remaining": [
-    "T01 20260913e generation is freshly observed with same-version attachments, but PAD paste/save/run acceptance is still pending; historical finald PASS is not transferred.",
     "T03 corrected request is accepted only against the frozen finale candidate; it is not canonical distribution acceptance.",
     "T04 2026-09-13 generation format remains not accepted; attempt-1 bracket provenance is unproven and attempt-2 arrow escaping is response-origin.",
     "P3 unconfirmed boundaries listed in still_unconfirmed (outside the teaching material; optional)",

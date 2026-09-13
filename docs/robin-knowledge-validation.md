@@ -1,7 +1,7 @@
 # Robinナレッジ検証報告
 ## 2026-09-13e T01生成追跡
 
-現行正本の保存済み固定本文（`.work/finale-20260912/t01/sent-body.txt`、4,393文字／11,022 bytes、WAIT 1=1、WAIT 500=0）を新規通常M365 Copilotチャット`https://m365.cloud.microsoft/chat/conversation/f5106564-f9a6-4665-9b09-bd0eca6e6d01`へ送信し、回答全文2,309文字と1つのRobinコードブロック（646 bytes）を無修正で採取した。証跡は`catalog/evidence/t01-copilot-live-generation-20260913e.json`および`catalog/generated/normal-chat-20260913e-t01/`。PAD貼付け・保存・再コピー・2回Runは未実施で、旧finald T01 PASSを新版本へ継承していない。
+現行正本の保存済み固定本文（`.work/finale-20260912/t01/sent-body.txt`、4,393文字／11,022 bytes、WAIT 1=1、WAIT 500=0）を新規通常M365 Copilotチャット`https://m365.cloud.microsoft/chat/conversation/f5106564-f9a6-4665-9b09-bd0eca6e6d01`へ送信し、回答全文2,309文字と1つのRobinコードブロック（646 bytes）を無修正で採取した。生成Robinを専用空フロー `RobinKnowledgeT01CurrentBundleLive_20260913e` へ無修正貼付け・保存・再コピーし、2回Run（成功、出力SHA一致、入力SHA不変）まで現行版で受入した。証跡は`catalog/evidence/t01-copilot-live-generation-20260913e.json`、`catalog/evidence/t01-copilot-live-generation-20260913e-pad-acceptance.json`、`catalog/evidence/t01-copilot-live-generation-20260913e-pad-output-comparison.json`。PAD再コピーはLF→CRLFの正規化一致として記録し、生成元からPADまでの厳密バイト一致は主張していない。
 
 ## 2026-09-12 進捗成果のmain反映
 
@@ -17,7 +17,7 @@ T09の配布指示行39に残っていた`WAIT 500`（秒）を、実測知識�
 
 同版の通常M365 Copilotチャット（Google Chrome、Think Deeper、指示全文＋bundle実添付）を新規会話`https://m365.cloud.microsoft/chat/conversation/f1efa8e2-0c54-4797-81d5-fcb45e1c0302`で送信した。回答は参照要約のみ（Robinコード0ブロック、回答DOM 4,460文字、SHA `8cc646cce609a3b4fcdffc317b2c4a908c783ecf3948b595c56c4cda4a43b420`）で、リスト添字1、EXIT/NEXTの最近接ループ、拡張子境界、SaveAs上書き、`yyyy-MM-dd`、アクション単位`FileNotFoundError`と未確認境界を引用した。証跡は`catalog/evidence/current-bundle-20260913e-precheck.json`。これは`PASS_REFERENCE_ONLY`であり、生成Robin／PAD貼付け／実行の受入ではない。
 
-指示バイトが変わったため、20260913eのT01〜T08／T10、独立T01/T04/T10、P3正例、負例v2は未実施として残す。T09は同版の通常チャット生成後、専用空フロー`RobinKnowledgeT09CurrentBundleLive20260913e`でControlRepository登録→登録6アクション削除→生成6行の無修正貼付け・保存→再コピー→2回Runを実施し、両回`T09-clicked`、Ready、エラーなし、PAD起動Edge残存なしを確認した（`catalog/evidence/t09-20260913e-pad-acceptance.json`）。初回30秒ヘルパー試行は実行中のまま証跡を出さず、完了後も受入回へ数えず、状態確定後に2回を取り直した。T03補正依頼の2run成功は同一SHAの候補追跡として保持し、T04の応答由来エスケープ不受入、T10厳密保持`NOT_PROVEN`も維持する。Issue #5/#27はOPEN／partialのままとする。
+指示バイトが変わったため、20260913eのT02/T04〜T08／T10、独立T01/T04/T10、P3正例、負例v2は未実施として残す。T01は同版通常チャット生成後、専用空フロー`RobinKnowledgeT01CurrentBundleLive_20260913e`へ無修正3行貼付け・保存・再コピー→2回Runを実施し、出力SHA一致・入力SHA不変まで確認した（`catalog/evidence/t01-copilot-live-generation-20260913e-pad-acceptance.json`）。T09は同版の通常チャット生成後、専用空フロー`RobinKnowledgeT09CurrentBundleLive20260913e`でControlRepository登録→登録6アクション削除→生成6行の無修正貼付け・保存→再コピー→2回Runを実施し、両回`T09-clicked`、Ready、エラーなし、PAD起動Edge残存なしを確認した（`catalog/evidence/t09-20260913e-pad-acceptance.json`）。初回30秒ヘルパー試行は実行中のまま証跡を出さず、完了後も受入回へ数えず、状態確定後に2回を取り直した。T03補正依頼の2run成功は同一SHAの候補追跡として保持し元依頼の受入へ付け替えず、T04の応答由来エスケープ不受入、T10厳密保持`NOT_PROVEN`も維持する。Issue #5/#27はOPEN／partialのままとする。
 
 今回の提出前確認：CurrentStatus46項目PASS。検査コード不変の直前非ライブAll36/36 PASSを再利用し、今回の再実行とはしない。監査修正差分のdiff --checkはPASS、基準mainからの全差分では原証跡2行の末尾空白を保全する。DOMはNOT_RUN、GitHub CIはPRの実際の状態を別途確認する。保護未追跡資料はSHA e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699のまま保持する。
 

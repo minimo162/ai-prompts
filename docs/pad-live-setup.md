@@ -107,6 +107,12 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools\Run-PadFlowLive.ps
 
 今回のT01では、アクション数3、保存完了、2回のRun完了、出力90 bytes・UTF-8 BOM・CRLF・期待SHA一致、入力87 bytes・入力SHA不変を確認した。Copilot原文Robin（646 bytes/LF）とPAD再コピー（649 bytes/CRLF）は内容を改変せず別保存し、改行を正規化した本文一致を確認した。
 
+## 2026-09-13e 追記: 現行版T01の貼付け・保存・再実行
+
+現行正本（instruction SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`）の通常チャット生成Robin（646 bytes、SHA `2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47`）を、Consoleから作成した専用空フロー `RobinKnowledgeT01CurrentBundleLive_20260913e`（Designer PID 5288、HWND 461824、タイトル完全一致1件）へ無修正で貼り付けた。3アクション、保存完了、保存後再コピーを確認し、2回Runとも成功、出力90 bytesのSHA一致・入力87 bytesのSHA不変を確認した。
+
+PAD再コピーは生成RobinのLF（646 bytes）からCRLF（649 bytes）へ変換されるため、`t01-copilot-live-generation-20260913e-pad-output-comparison.json` ではCRLF正規化後の一致を記録する。生成元からPADまでの厳密バイト一致や、T10の厳密保持をこのT01結果から推論しない。貼付け・保存・Runの原記録は `catalog/evidence/t01-copilot-live-generation-20260913e-pad-*.json`、再コピーは `catalog/generated/normal-chat-20260913e-t01/pad-recopy-after-save.robin` と `pad-recopy-after-run2.robin` に保存した。
+
 ## 2026-09-12 追記: 待機の単位、UI要素の取り込み、通常チャットの操作方法
 
 - PADの `WAIT n` は秒単位である（待機ダイアログの説明は「指定された秒数だけフローの実行を中断します」）。`WAIT 500` は8分20秒待つ。T09教材は待機ダイアログで1へ直し、PADから再コピーした `WAIT 1` を正とする。

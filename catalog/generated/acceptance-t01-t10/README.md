@@ -2,7 +2,7 @@
 
 ### 2026-09-13e T01生成追跡
 
-同版T01は、通常チャット（会話 `f5106564-f9a6-4665-9b09-bd0eca6e6d01`、Think Deeper、同版指示＋bundle添付）へ保存済みの固定本文を送信し、回答全文と1つのRobinコードブロックを無修正で採取しました（生成Robin 646 bytes、`catalog/evidence/t01-copilot-live-generation-20260913e.json`）。PADへの貼付け・保存・再コピー・2回Runはまだ未実施であり、旧finald T01のPASSを新版本へ移していません。
+同版T01は、通常チャット（会話 `f5106564-f9a6-4665-9b09-bd0eca6e6d01`、Think Deeper、同版指示＋bundle添付）へ保存済みの固定本文を送信し、回答全文と1つのRobinコードブロックを無修正で採取しました（生成Robin 646 bytes、`catalog/evidence/t01-copilot-live-generation-20260913e.json`）。その生成Robinを専用空フロー `RobinKnowledgeT01CurrentBundleLive_20260913e` へ無修正貼付け・保存し、再コピー後に2回Run、出力・入力不変まで受入しました（`catalog/evidence/t01-copilot-live-generation-20260913e-pad-acceptance.json`）。PAD再コピーはLF→CRLFの差を含むため正規化一致として記録し、生成元からPADまでの厳密バイト一致は主張していません。
 
 ## 2026-09-13 追跡：T03依頼補正とT04形式診断（候補限定）
 
