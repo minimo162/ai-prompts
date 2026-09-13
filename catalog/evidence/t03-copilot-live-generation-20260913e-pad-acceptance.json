@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "case_id": "T03",
+  "version": "20260913e",
+  "status": "PASS_CURRENT_20260913E_REVISED_REQUEST_PAD_ACCEPTED",
+  "promoted_from_candidate": true,
+  "promoted_at": "2026-09-14T00:18:44+09:00",
+  "source_candidate": "evidence/t03-revised-input-live-acceptance-20260913.json",
+  "source_candidate_pad_paste": "evidence/t03-revised-input-pad-paste-save-20260913.json",
+  "source_candidate_pad_run1": "evidence/t03-revised-input-pad-run1-20260913.json",
+  "source_candidate_pad_run2": "evidence/t03-revised-input-pad-run2-20260913.json",
+  "source_candidate_pad_recopy": "evidence/t03-revised-input-pad-recopy-20260913.robin",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/a1d3b5ce-863a-4ee9-a6de-8e10f7a0a9c7?fromcode=cmmytyyffxy&es=UnauthClick&login_hint=yuukikod%40gmail.com",
+  "model": "Think Deeper",
+  "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+  "knowledge_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+  "bundle_manifest": "../copilot/knowledge-bundle-manifest-20260913e.json",
+  "prompt_source": "catalog/generated/normal-chat-current-bundle-t03-revised-20260913/prompt.txt",
+  "prompt_source_sha256": "9b93ae90df34511cfbb67cc21aa148c797511a058bfa0bfad5f7d8cead51b6dd",
+  "prompt_change_type": "test-request-correction-only",
+  "expected_values_disclosed_to_copilot": false,
+  "attachments": [
+    "agent-instructions.txt",
+    "PAD-Robin-Knowledge-Bundle.txt"
+  ],
+  "generated_robin": {
+    "path": "catalog/generated/normal-chat-current-bundle-t03-revised-20260913/robin.txt",
+    "sha256": "63fe35ec8619387f08c5dd270eb226bbd944457b410e09cc2425023ff9396572",
+    "bytes": 800,
+    "code_blocks": 1,
+    "action_count": 13,
+    "raw_unmodified": true,
+    "contains_counter_actions": true
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT03Revised20260913",
+    "designer_process_id": 20000,
+    "designer_window_title": "Power Automate | RobinKnowledgeT03Revised20260913",
+    "designer_hwnd": 592088,
+    "paste_save_evidence": "evidence/t03-revised-input-pad-paste-save-20260913.json",
+    "action_count_after_paste": 13,
+    "unmodified_paste_saved": true,
+    "run1": "evidence/t03-revised-input-pad-run1-20260913.json",
+    "run2": "evidence/t03-revised-input-pad-run2-20260913.json",
+    "runs_completed": 2,
+    "run_statuses": ["success", "success"],
+    "observed_expected": {
+      "TxtCount": "2",
+      "OtherCount": "2",
+      "FileContents": "alpha 日本語",
+      "fixtures_unchanged": true
+    },
+    "input_fixtures_unchanged": true,
+    "recopy": {
+      "path": "evidence/t03-revised-input-pad-recopy-20260913.robin",
+      "sha256": "c15a5970640f9d0bcb322b5655bffca3b7b84ad4a86f31c67e064d60fb9398e4",
+      "raw_equal_to_generated": false,
+      "crlf_normalized_equal_to_generated": true
+    },
+    "reopen_recopy": "NOT_RUN"
+  },
+  "request_boundary": "The added counter requirement is an explicit test-request correction; the original prompt and its three raw attempts remain preserved and are not relabeled as passing.",
+  "historical_finald_not_transferred": true,
+  "note": "Current canonical instruction and bundle bytes equal the evidence hashes. This derived record adds current-version traceability for the corrected request only; no new UI run, expected-value change, Robin edit, or old PASS transfer was performed. It does not claim that the original request without an observable counter requirement passed."
+}

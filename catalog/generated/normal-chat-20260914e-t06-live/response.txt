@@ -1,0 +1,53 @@
+以下は、添付ナレッジのWord編集可能起動、リテラル全件置換、docx別名保存、Word終了の実測原文だけを組み合わせたPADフロー案です。この回答での組み合わせは未実行ですが、同じT06構成は合成データで保存・実行・本文照合・入力不変まで確認されています。
+
+1. 前提・対象範囲
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\word\word-catalog.docx
+検索文字列: OfficeCatalog
+置換文字列: T06Replaced
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t06-final.docx
+入力は ReadOnly=False で開きますが、元ファイルへ上書き保存せず、別パスへSaveAsします。
+置換設定は、実測済みの「大文字小文字を区別しない」「単語全体との一致を要求しない」「ワイルドカードなし」「一致箇所をすべて置換」です。
+SaveAsは出力先に既存ファイルがあると、確認なしで上書きすることが実測されています。既存の出力を残す必要がある場合は、実行前に退避してください。
+2. PADで先に確認する設定・依存
+
+入力変数やUI要素の事前作成は不要です。
+
+最初の「Wordを起動する」アクションが、Wordインスタンス型の WordInstance を生成します。後続の置換、保存、終了は、すべて同じ WordInstance に依存します。外部で事前作成したWordインスタンスには依存しません。
+
+保存形式は Word.WordFormat.FromExtension です。出力パスの .docx 拡張子から形式を決定する、実測済みの設定です。終了処理は、別名保存の完了後に同じインスタンスを Word.CloseWord.Close で閉じます。
+
+対象サブフローは Main、貼り付け範囲は空の領域または置換対象となる連続した4アクションです。
+
+3. 貼り付け用Robin
+Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\word\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance
+Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''T06Replaced''' MatchCase: False MatchEntireWord: False
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t06-final.docx'''
+Word.CloseWord.Close Instance: WordInstance
+
+
+各命令形式の根拠は、catalog/actions/word-launch/open-editable.robin、word-replace/all-literal.robin、word-save/as-docx-extension.robin、word-close/no-save.robinです。Wordの同構成では、OfficeCatalogからT06Replacedへの置換、別名保存、入力文書の不変、Wordプロセスが残らないことまで実測されています。
+
+4. PADデザイナー上の確認
+
+貼り付け直後に、次を確認してください。
+
+アクション数が4で、順序が「起動、置換、別名保存、終了」になっている。
+1番目の生成変数が WordInstance である。
+2番目から4番目までのインスタンスが、すべて変数 WordInstance を参照している。
+入力パスと出力パスが異なる。
+起動設定が ReadOnly=False になっている。
+置換がワイルドカードなしの全件置換で、MatchCase=False、MatchEntireWord=False になっている。
+保存形式が FromExtension、保存先拡張子が .docx になっている。
+赤いエラー表示や未定義変数がない。
+出力ファイルがすでに存在する場合、上書きしてよいかを実行前に確認する。
+5. 実行と期待結果の照合
+元の入力文書を複製し、複製側でも同じ処理を一度試します。
+実行前に、入力文書の更新日時またはハッシュを記録します。
+PADフローを保存して実行します。
+出力文書をWordで開き、本文中のすべての OfficeCatalog が T06Replaced になっていることを確認します。
+検索対象外の日本語、改行、その他の本文が保持されていることを、元文書と比較します。
+元の入力文書の更新日時またはハッシュが変わっていないことを確認します。
+Wordプロセスが終了していることを確認します。
+再実行する場合は、既存出力が無警告で上書きされる前提で、必要なら先に出力を退避します。
+
+ナレッジでは本文、日本語、改行、対象外テキスト、入力文書のハッシュ不変が照合されています。一方、表、詳細な書式、テンプレートなどの保持は確認対象外なので、それらを含む文書では追加の目視比較が必要です。

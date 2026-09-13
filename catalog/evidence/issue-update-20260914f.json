@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T04:43:00+09:00",
+  "repository": "minimo162/ai-prompts",
+  "updates": [
+    {
+      "issue": 5,
+      "state": "OPEN",
+      "title": "PAD Robin指示文・ナレッジ：T01/T02/T03/T05/T06/T07/T08/T09同版受入／独立T01受入・独立T04候補partial／T04形式・T10厳密保持残件",
+      "comment_url": "https://github.com/minimo162/ai-prompts/issues/5#issuecomment-5655615921",
+      "commit": "1d69850"
+    },
+    {
+      "issue": 27,
+      "state": "OPEN",
+      "title": "PAD Robin残件受入：T01/T02/T03/T05/T06/T07/T08/T09同版受入／独立T01受入・独立T04候補partial／T04形式・T10厳密保持残件",
+      "comment_url": "https://github.com/minimo162/ai-prompts/issues/27#issuecomment-5655616030",
+      "commit": "1d69850"
+    }
+  ],
+  "note": "P3-1 current-version evidence was reported without closing either issue. P3-2 through P3-6, negative suite v2, strict T10 preservation, and final A-G reconciliation remain open."
+  ,"body_update": {
+    "current_head": "02bc804c7c86fd6a3b189fde888747ccedc5ec19",
+    "synced_at": "2026-09-14T05:02:00+09:00",
+    "state_after_update": "OPEN",
+    "p3_1_added_to_current_status": true
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T23:45:00+09:00",
+  "case": "T10",
+  "purpose": "Separate functional execution, authorized two-line change scope, and raw byte preservation without changing any original record.",
+  "source": {
+    "path": "catalog/generated/office-three-apps/generated.robin",
+    "sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+    "bytes": 1759,
+    "serialization": "CRLF between 16 commands; no final LF"
+  },
+  "generated_response": {
+    "path": "catalog/evidence/t10-copilot-live-generation-20260913.robin",
+    "sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12",
+    "bytes": 1752,
+    "serialization": "LF between 16 commands; final LF present"
+  },
+  "pad_recopy_after_run2": {
+    "path": "catalog/evidence/t10-copilot-live-generation-20260913-pad-recopy-after-run2.robin",
+    "sha256": "845c54cc905e50dcb9f8b9d7e55aeba3cb639bee1b3e848a3f66f9b3ce051446",
+    "bytes": 1768,
+    "serialization": "CRLF between 16 commands; final LF present"
+  },
+  "functional_execution": {
+    "status": "PROVEN_SEPARATELY",
+    "acceptance_evidence": "catalog/evidence/t10-copilot-live-generation-20260913-pad-acceptance.json",
+    "runs": [
+      "catalog/evidence/t10-copilot-live-generation-20260913-pad-run-1.json",
+      "catalog/evidence/t10-copilot-live-generation-20260913-pad-run-2.json"
+    ],
+    "run_statuses": ["success", "success"],
+    "observed_outputs": [
+      "catalog/evidence/copilot-excel-t10-v6.xlsx",
+      "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-word.docx",
+      "C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-powerpoint.pptx"
+    ],
+    "functional_result_preserved": true
+  },
+  "authorized_change_scope": {
+    "allowed_lines": [2, 4],
+    "source_to_generation_normalized_changed_lines": [2, 4],
+    "source_to_recopy_normalized_changed_lines": [2, 4],
+    "source_to_generation_outside_allowed_count": 0,
+    "source_to_recopy_outside_allowed_count": 0,
+    "status": "PROVEN_CONTENT_SCOPE_ONLY",
+    "line_2": "Excel A1 value change (CopilotOffice 246 -> T10-Changed)",
+    "line_4": "Excel SaveAs output path change (requested candidate path)"
+  },
+  "generation_to_pad_recopy": {
+    "raw_bytes_equal": false,
+    "normalized_content_equal": true,
+    "status": "PROVEN_NORMALIZED_CONTENT_ONLY",
+    "interpretation": "PAD recopy changes LF to CRLF and adds a final LF; this proves normalized content reproduction, not raw byte identity."
+  },
+  "strict_byte_preservation": {
+    "source_to_generation_raw_bytes_equal": false,
+    "source_to_recopy_raw_bytes_equal": false,
+    "status": "NOT_PROVEN",
+    "reason": "The fixed source uses CRLF with no final LF, while the generated response uses LF with a final LF. Normalization cannot prove preservation of the original line-ending and trailing-byte contract."
+  },
+  "regression_check": {
+    "test": "tests/Test-T10StrictPreservation.ps1",
+    "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/Test-T10StrictPreservation.ps1 -Root C:\\Users\\yuuki\\ai-prompts",
+    "status": "PASS_REGRESSION_WITH_STRICT_NOT_PROVEN",
+    "assertions": {
+      "source_crlf_15_no_final_lf": true,
+      "generation_lf_16_final_lf": true,
+      "recopy_crlf_16_final_lf": true,
+      "source_generation_outside_allowed_zero": true,
+      "generation_recopy_normalized_equal": true,
+      "strict_raw_source_generation_not_equal": true
+    },
+    "source_repair_or_normalization_for_pass": false
+  },
+  "conclusion": "T10 functional success remains valid; only the two requested content changes are proven after line-ending normalization. Strict source-to-generation byte preservation is NOT_PROVEN and is not promoted to PASS."
+}

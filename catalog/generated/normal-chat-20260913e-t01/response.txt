@@ -1,0 +1,58 @@
+以下は、添付された実測ナレッジにあるT01の3アクション原文を、そのまま使うPADフロー案です。履歴上は無修正貼り付け、保存、2回実行、出力内容と入力不変の照合まで確認されていますが、今回の環境での再実行結果ではありません。
+
+1. 前提・対象範囲
+目的: UTF-8テキストを読み、「対象語」を「置換後」へ通常置換してUTF-8で保存
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-current-bundle.txt
+変数
+FileContents: 読み取ったテキスト
+Replaced: 置換後のテキスト
+置換設定: 大文字小文字を区別、エスケープシーケンス無効、通常のカルチャ依存比較
+保存設定: UTF-8、追加改行なし、同名ファイルがあれば上書き
+アプリ、インスタンス、UI要素: 不要
+成功条件: 指定語だけが置換され、特殊文字、既存の改行、対象外文字が保持され、保存処理による末尾改行が追加されないこと
+
+この構成は、PAD-Robin-Knowledge-Bundleに掲載されたT01実測原文と一致します。記録上の環境はPAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データです。
+
+2. PADで先に確認する設定
+PADで空のフローを開き、貼り付け先のサブフローを選びます。想定は Main の空の領域です。
+入力ファイルと出力先フォルダーが存在することを確認します。
+出力先に同名ファイルがある場合、このフローは確認なしで上書きします。残す必要があれば、実行前に別名で退避してください。
+入力変数を手動作成する必要はありません。1番目のアクションが FileContents、2番目が Replaced を生成します。
+対象サブフローの空の位置へ、次の3行全体を一度に貼り付けます。
+3. 貼り付け用Robin
+
+対象サブフローは Main、置換範囲は新規の空領域です。
+
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+4. デザイナー上の確認
+
+貼り付け後、次を確認してください。
+
+アクション数が3である
+順序が「ファイルからテキストを読み取る」→「テキストを置換する」→「テキストをファイルに書き込む」である
+1番目の生成変数がテキスト型の FileContents
+2番目の入力が FileContents、生成変数がテキスト型の Replaced
+置換が正規表現ではなく通常置換
+3番目の書込み値が文字列リテラルではなく変数Replaced
+「新しい行を追加する」がオフ
+既存ファイルの処理が上書き
+エンコードがUTF-8
+デザイナーに赤いエラー表示がない
+
+AppendNewLine: False は入力テキスト自身の末尾改行を保持しつつ、保存アクションによる追加改行を避けるための確認済み設定です。
+
+5. 合成データでの実行・照合
+入力ファイルを複製し、複製側で「対象語」、日本語、引用符、パーセント、バックスラッシュ、複数行、対象外文字を含むことを確認します。
+出力ファイルが既にある場合は退避します。
+PADフローを保存して実行します。
+出力をUTF-8対応エディターで開き、すべての「対象語」が「置換後」になっていることを確認します。
+それ以外の文字、引用符、パーセント、バックスラッシュ、空行、行順が入力と一致することを確認します。
+入力と出力の末尾改行状態を比較し、保存処理による改行が追加されていないことを確認します。
+入力ファイルが変更されていないことを確認します。
+出力を残したまま再実行し、上書き後も同じ内容になることを確認します。
+
+ナレッジに記録された同一原文の検証では、入力不変、指定置換、UTF-8保存、追加改行なしが2回の実行で照合されています。

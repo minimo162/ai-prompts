@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T21:35:00+09:00",
+  "repository": "minimo162/ai-prompts",
+  "issues": {
+    "5": {
+      "title": "PAD Robin指示文・ナレッジ：PR #29統合済み／T03候補受入・T04形式診断・T10厳密保持残件",
+      "state": "OPEN",
+      "comment_count_at_body_update": 70,
+      "current_comment_count": 71,
+      "tracking_comment_id": 5653312984,
+      "body_first_heading": "2026-09-13：PR #29後の現在地／OPEN・partial"
+    },
+    "27": {
+      "title": "PAD Robin残件受入：PR #29統合済み／T03候補受入・T04形式不受入・T10厳密保持",
+      "state": "OPEN",
+      "comment_count_at_body_update": 7,
+      "current_comment_count": 8,
+      "tracking_comment_id": 5653313080,
+      "body_first_heading": "2026-09-13：PR #29後の現在地／OPEN・partial"
+    }
+  },
+  "preservation": "Bodies were updated by prepending a current-status section; all comments existing at body-update time remain. A new 2026-09-13 tracking report was then appended to each issue (comment IDs recorded above); no existing comment was edited or deleted.",
+  "next_single_task": "Resolve the canonical WAIT mismatch and, only if the distribution version changes, run the required new-version precheck and acceptance set; otherwise authorize a separate T04 origin/format test."
+}

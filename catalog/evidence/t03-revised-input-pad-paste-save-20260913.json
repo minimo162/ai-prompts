@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T21:01:14+09:00",
+  "case": "T03",
+  "flow_name": "RobinKnowledgeT03Revised20260913",
+  "designer_process_id": 20000,
+  "designer_title": "Power Automate | RobinKnowledgeT03Revised20260913",
+  "designer_hwnd": 592088,
+  "source_robin": "catalog/generated/normal-chat-current-bundle-t03-revised-20260913/robin.txt",
+  "source_sha256": "63fe35ec8619387f08c5dd270eb226bbd944457b410e09cc2425023ff9396572",
+  "source_bytes": 800,
+  "paste_confirmed": true,
+  "action_count_after_paste": 13,
+  "visible_direct_list_items": 7,
+  "virtualization_note": "The live Designer exposes a 13 アクション summary while only 7 direct ListItem nodes are materialized (nested/collapsed actions are virtualized). The initial helper's direct-child count=7 was not treated as a paste failure.",
+  "saved_confirmed": true,
+  "execution_requested": false,
+  "raw_robin_edited": false,
+  "next_gate": "RUN_TWICE_WITH_PRE_RUN_INPUT_HASH_AND_VARIABLE_PREVIEWS"
+}

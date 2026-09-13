@@ -1,0 +1,16 @@
+Excel.LaunchExcel.LaunchUnderExistingProcess Visible: True UseMachineLocale: False Instance=> ExcelInstance
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''CopilotOffice 246''' Column: $'''A''' Row: 1
+Excel.ReadFromExcel.ReadCell Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues CellValue=> ExcelData
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-excel.xlsx'''
+Excel.CloseExcel.Close Instance: ExcelInstance
+Word.LaunchWord.Launch Visible: True Instance=> WordInstance
+Word.WriteToWord.WriteEndOfDocument Instance: WordInstance Text: $'''CopilotOffice 246''' AppendNewLine: False
+Word.ReadFromWord.Read Instance: WordInstance WordData=> WordData
+Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-word.docx'''
+Word.CloseWord.Close Instance: WordInstance
+PowerPoint.LaunchPowerPoint.Launch Instance=> PowerPointInstance
+PowerPoint.AddPowerPointSlide.AddSlideAsLast Instance: PowerPointInstance SlideIndex=> SlideIndex
+PowerPoint.WriteToPowerPoint.WriteToSlideAtPosition Instance: PowerPointInstance Text: $'''CopilotOffice 246''' AppendNewLine: False SlidePosition: SlideIndex
+PowerPoint.ReadFromPowerPoint.Read Instance: PowerPointInstance PowerPointData=> PowerPointData
+PowerPoint.SavePowerPoint.SaveAs Instance: PowerPointInstance DocumentFormat: PowerPoint.PowerPointFormat.PPTX DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-powerpoint.pptx'''
+PowerPoint.ClosePowerPoint.Close Instance: PowerPointInstance

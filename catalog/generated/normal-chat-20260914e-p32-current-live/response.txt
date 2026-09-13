@@ -1,0 +1,80 @@
+以下は、添付のPAD-Robin-Knowledge-Bundleに収録された、実測済みの23アクション構成をそのまま使用する案です。PAD 2.71.115.26224、日本語UI、Power Fx OFFの環境で、PADからの再コピー、別フローへの再貼り付け、各2回の実行、期待値照合まで確認されています。
+
+1. 前提・対象範囲
+目的: CatalogListの項目を順番に処理し、SecondItemに一致した時点で項目名をUTF-8で上書き保存して、For eachを終了します。
+入力: 合成リスト CatalogList
+CatalogItem、SecondItem、ThirdItem
+出力先: C:\Users\yuuki\ai-prompts\catalog\evidence\p3-nested-if-output-20260912.txt
+既存ファイル: 上書きします。
+事前条件: 出力先の親フォルダーが存在し、PAD実行ユーザーに書き込み権限が必要です。
+アプリ／UI要素: 不要です。
+対象サブフロー: Main
+置換範囲: Mainの全アクション。既存処理へ追加する場合は、対象位置へ23アクションすべてをまとめて貼り付けます。
+今回のライブ実行: こちらからPADは実行していません。下記は添付ナレッジ内の実測済み原文です。
+2. 変数と期待される型
+
+変数は貼り付けたアクションによって生成されるため、PAD側で入力変数を事前作成する必要はありません。
+
+CatalogList: リスト
+CurrentItem: テキストとして処理される現在項目
+OuterCount: 数値、訪問した項目数
+InnerNo: 数値、外側IfでCatalogItemに一致した回数
+InnerYes: 数値、内側IfでSecondItemに一致した回数
+LastSeen: テキスト、最後に記録した項目
+
+この実測原文では、LastSeenは初期値noneから、SecondItem一致時にCurrentItemへ更新されます。ThirdItemまで到達した場合だけ内側Elseでthirdになります。
+
+3. 貼り付け用Robin
+Variables.CreateNewList List=> CatalogList
+Variables.AddItemToList Item: $'''CatalogItem''' List: CatalogList
+Variables.AddItemToList Item: $'''SecondItem''' List: CatalogList
+Variables.AddItemToList Item: $'''ThirdItem''' List: CatalogList
+SET OuterCount TO 0
+SET InnerYes TO 0
+SET InnerNo TO 0
+SET LastSeen TO $'''none'''
+LOOP FOREACH CurrentItem IN CatalogList
+    Variables.IncreaseVariable Value: OuterCount IncrementValue: 1
+    IF CurrentItem = $'''CatalogItem''' THEN
+        Variables.IncreaseVariable Value: InnerNo IncrementValue: 1
+    ELSE
+        IF CurrentItem = $'''SecondItem''' THEN
+            Variables.IncreaseVariable Value: InnerYes IncrementValue: 1
+            SET LastSeen TO CurrentItem
+            File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\p3-nested-if-output-20260912.txt''' TextToWrite: CurrentItem AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+            EXIT LOOP
+        ELSE
+            SET LastSeen TO $'''third'''
+        END
+    END
+END
+
+4. PADデザイナーでの確認
+貼り付け直後に、23アクションとして認識されることを確認します。
+赤いエラー表示や「パラメーターは変数である必要があります」がないことを確認します。
+ブロック構造が次の対応になっていることを確認します。
+外側For eachに対する最後のEND
+外側Ifに対する後ろから2番目のEND
+内側Ifに対する最初のEND
+OuterCount、InnerNo、InnerYesが数値の0で初期化され、引用符付き文字列になっていないことを確認します。
+TextToWriteが文字列リテラルではなく、変数参照CurrentItemになっていることを確認します。
+AppendNewLine: False、上書き、UTF-8になっていることを確認します。
+EXIT LOOPが内側Ifの中、ファイル書き込みの直後にあることを確認します。
+
+ナレッジの実測では、内側If内のEXIT LOOPは、それを囲む最も近いループであるFor eachだけを終了しました。
+
+5. 合成データでの実行・照合
+
+初回実行前に、出力ファイルが既に存在する場合は、必要に応じて別名で退避してください。このフローは確認なしで内容を上書きします。
+
+実行後の期待結果は次のとおりです。
+
+OuterCount = 2
+InnerNo = 1
+InnerYes = 1
+LastSeen = SecondItem
+出力ファイルの内容はSecondItem
+追加の末尾改行なし
+ThirdItemは訪問されない
+
+同じ条件で再実行した場合も、ファイルはSecondItemで上書きされ、各カウンターは冒頭で初期化されるため同じ結果になります。添付ナレッジでは、元フローと別の空フローの双方で各2回実行し、この期待結果とUTF-8 BOM付きの出力が確認されています。

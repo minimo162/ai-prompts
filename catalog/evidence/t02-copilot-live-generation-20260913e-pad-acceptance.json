@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "case_id": "T02",
+  "version": "20260913e",
+  "status": "PASS_CURRENT_20260913E",
+  "promoted_from_candidate": true,
+  "promoted_at": "2026-09-14T00:01:36+09:00",
+  "source_candidate_generation": "evidence/t02-copilot-live-generation-20260913.json",
+  "source_candidate_pad_acceptance": "evidence/t02-copilot-live-generation-20260913-pad-acceptance.json",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/fa568da0-7bab-43cf-9559-e061d2bfed76?es=SSR",
+  "model": "Think Deeper",
+  "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+  "knowledge_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+  "bundle_manifest": "../copilot/knowledge-bundle-manifest-20260913e.json",
+  "prompt_source": ".work/finale-20260912/t02/prompt.txt",
+  "prompt_source_sha256": "30302861c9ba0c434284be07e137d92066c3d125c71a46fdfef8c3e8af8668f84",
+  "attachments": [
+    "agent-instructions.txt",
+    "PAD-Robin-Knowledge-Bundle.txt"
+  ],
+  "generated_robin": {
+    "path": "evidence/t02-copilot-live-generation-20260913.robin",
+    "sha256": "c3027cfaa13e191b0e784fb3a6db4c573f8bfc83fb172d1a6394d7c1f5a55c29",
+    "bytes": 817,
+    "code_blocks": 1,
+    "action_count": 3,
+    "raw_unmodified": true
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT02CurrentBundle_20260913",
+    "paste": "evidence/t02-copilot-live-generation-20260913-pad-paste.json",
+    "run1": "evidence/t02-copilot-live-generation-20260913-pad-run-1.json",
+    "run2": "evidence/t02-copilot-live-generation-20260913-pad-run-2.json",
+    "recopy": "evidence/t02-copilot-live-generation-20260913-pad-recopy.robin",
+    "runs_completed": 2,
+    "unmodified_paste_saved": true,
+    "recopy_crlf_normalized_equal": true
+  },
+  "input": {
+    "path": "catalog/fixtures/csv/t02-input-20260910.csv",
+    "sha256_before_expected": "3aededf42b8bb2be71091c7cc6ed1295f1860a8450744d8779fbc8cabf6eed28",
+    "sha256_after_runs": "3aededf42b8bb2be71091c7cc6ed1295f1860a8450744d8779fbc8cabf6eed28",
+    "unchanged_proven": true
+  },
+  "output": {
+    "path": "catalog/evidence/normal-chat-t02-output-20260910.csv",
+    "sha256": "8f0748cc4d149228331dfacc0a5c46e117270a7e9dee564c4f631924142cf7d3",
+    "expected_match": true,
+    "logical_rows": 2,
+    "columns": [
+      "ID",
+      "Name",
+      "Status"
+    ]
+  },
+  "historical_finald_not_transferred": true,
+  "note": "Existing 2026-09-13 same-version candidate evidence already contains a fresh normal Copilot conversation, actual instruction and bundle attachments, unmodified Robin paste/save, two successful PAD runs, input invariance, output comparison, and recopy. This derived record adds current-version traceability only; no new UI run, expected-value change, Robin edit, or old PASS transfer was performed."
+}

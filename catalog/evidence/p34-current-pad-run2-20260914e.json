@@ -1,0 +1,11 @@
+{
+    "schema_version":  1,
+    "observed_at":  "2026-09-13T21:16:53.6963117Z",
+    "flow_name":  "RobinKnowledgeP34CurrentBundleLive20260914e",
+    "run_status":  "success",
+    "ready_observed":  true,
+    "start_enabled_after":  true,
+    "variable_previews":  [
+                              "Excel インスタンス"
+                          ]
+}

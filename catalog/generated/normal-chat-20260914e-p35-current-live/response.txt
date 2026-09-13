@@ -1,0 +1,20 @@
+前提
+
+添付ナレッジでは、日時取得として「現在の日時を取得（DateAndTime）」と、日時をカスタム書式 yyyy-MM-dd でテキスト化する「日時の値をテキスト値に変換」が実測・再貼付け・実行確認済みです。
+カスタム書式として確認済みなのは yyyy-MM-dd のみです。未確認の書式トークンは使用しません。
+
+設定
+
+出力日時変数: CurrentDateTime
+出力テキスト変数: FormattedDateTime2
+日時取得: 現在の日時（DateAndTime）
+変換形式: カスタム
+カスタム形式: yyyy-MM-dd
+
+期待結果
+
+実行時の現在日時が取得されます。
+FormattedDateTime2 に yyyy-MM-dd 形式の文字列が入ります。
+ナレッジの実測例では FormattedDateTime2=2026-09-12 となることを確認しています。実際の値は実行日の日付です。
+DateTime.GetCurrentDateTime.Local DateTimeFormat: DateTime.DateTimeFormat.DateAndTime CurrentDateTime=> CurrentDateTime
+Text.ConvertDateTimeToText.FromCustomDateTime DateTime: CurrentDateTime CustomFormat: $'''yyyy-MM-dd''' Result=> FormattedDateTime2

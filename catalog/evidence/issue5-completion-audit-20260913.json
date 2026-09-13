@@ -1,0 +1,415 @@
+{
+  "schema_version": 2,
+  "captured_on": "2026-09-14",
+  "status": "partial_current_package_followup",
+  "issue_state": "OPEN",
+  "package": {
+    "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+    "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+    "bundle_manifest": "copilot/knowledge-bundle-manifest-20260913e.json",
+    "version_label": "20260913e"
+  },
+  "p4_current_bundle": {
+    "status": "PARTIAL_20260913E_PRECHECK_PLUS_T01_T02_T03_T05_T06_T07_T08_T09_AND_INDEPENDENT_T01_ACCEPTED_INDEPENDENT_T10_FUNCTIONAL_SCOPE_ACCEPTED_STRICT_NOT_PROVEN_HISTORICAL_FINALD_PRESERVED",
+    "knowledge_precheck": "PASS_REFERENCE_ONLY_20260913E",
+    "knowledge_precheck_evidence": "evidence/current-bundle-20260913e-precheck.json",
+    "historical_acceptance_not_transferred": true,
+    "accepted_cases_scope": "historical_finald_20260912_only",
+    "current_version_accepted_cases": ["T01", "T02", "T03", "T05", "T06", "T07", "T08", "T09", "independent-T01", "independent-T10-functional-scope"],
+  "remaining_current_version_cases": ["T04", "T10-strict-raw-preservation"],
+      "accepted_cases": [
+      "T01",
+      "T02",
+      "T03",
+      "T04",
+      "T05",
+      "T06",
+      "T07",
+      "T08",
+      "T09",
+      "T10"
+    ],
+    "case_results": {
+      "knowledge_precheck": {
+        "status": "PASS_REFERENCE_ONLY",
+        "evidence": "evidence/current-bundle-20260913e-precheck.json",
+        "version": "20260913e",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+      },
+      "T01": {
+        "status": "PASS_FINALD_20260912",
+        "current_version_status": "PASS_CURRENT_20260913E_PAD_ACCEPTED",
+        "evidence": "evidence/t01-finald-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "current_version_generation": "PASS_CURRENT_20260913E_GENERATION_ONLY",
+        "current_version_generation_evidence": "evidence/t01-copilot-live-generation-20260913e.json",
+        "current_version_pad": "PASS_CURRENT_20260913E_PAD_ACCEPTED",
+        "current_version_pad_evidence": "evidence/t01-copilot-live-generation-20260913e-pad-acceptance.json",
+        "current_version_output_comparison": "evidence/t01-copilot-live-generation-20260913e-pad-output-comparison.json"
+      },
+      "T02": {
+        "status": "PASS_FINALD_20260912",
+        "current_version_status": "PASS_CURRENT_20260913E_PAD_ACCEPTED",
+        "evidence": "evidence/t02-finald-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "current_version_generation": "evidence/t02-copilot-live-generation-20260913.json",
+        "current_version_pad": "evidence/t02-copilot-live-generation-20260913e-pad-acceptance.json",
+        "current_version_conversation": "https://m365.cloud.microsoft/chat/conversation/fa568da0-7bab-43cf-9559-e061d2bfed76?es=SSR",
+        "current_version_instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+        "current_version_robin_sha256": "c3027cfaa13e191b0e784fb3a6db4c573f8bfc83fb172d1a6394d7c1f5a55c29",
+        "current_version_runs": 2,
+        "current_version_input_unchanged": true,
+        "current_version_output_match": true
+      },
+      "T03": {
+        "status": "PASS_FINALD_20260912",
+        "evidence": "evidence/t03-finald-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "current_version_status": "PASS_CURRENT_20260913E_REVISED_REQUEST_PAD_ACCEPTED",
+        "current_version_generation": "evidence/t03-revised-input-live-acceptance-20260913.json",
+        "current_version_acceptance": "evidence/t03-copilot-live-generation-20260913e-pad-acceptance.json",
+        "current_version_conversation": "https://m365.cloud.microsoft/chat/conversation/a1d3b5ce-863a-4ee9-a6de-8e10f7a0a9c7?fromcode=cmmytyyffxy&es=UnauthClick&login_hint=yuukikod%40gmail.com",
+        "current_version_instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+        "current_version_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "current_version_prompt_sha256": "9b93ae90df34511cfbb67cc21aa148c797511a058bfa0bfad5f7d8cead51b6dd",
+        "current_version_robin_sha256": "63fe35ec8619387f08c5dd270eb226bbd944457b410e09cc2425023ff9396572",
+        "current_version_runs": 2,
+        "current_version_txt_count": 2,
+        "current_version_other_count": 2,
+        "current_version_input_unchanged": true,
+        "current_version_recopy_crlf_normalized_equal": true,
+        "current_version_request_scope": "corrected_request_only; original_prompt_without_explicit_counters_remains_not_accepted"
+      },
+      "T04": {
+        "status": "PASS_FINALD_20260912",
+        "evidence": "evidence/t04-finald-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+      },
+      "T05": {
+        "status": "PASS_FINALD_20260912",
+        "evidence": "evidence/t05-finald-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "current_version_status": "PASS_CURRENT_20260913E_PAD_ACCEPTED_AUTO_NAMED_NEW_FLOW",
+        "current_version_generation": "evidence/t05-copilot-live-generation-20260913.json",
+        "current_version_acceptance": "evidence/t05-copilot-live-generation-20260913e-pad-acceptance.json",
+        "current_version_conversation_initial": "https://m365.cloud.microsoft/chat/conversation/e360f2ad-f623-4290-8e92-7f68e999c9e2?es=SSR",
+        "current_version_conversation_after_retry": "https://m365.cloud.microsoft/chat/conversation/7fc929a2-2d3f-4988-9d84-7b91e34809dd?es=SSR",
+        "current_version_instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+        "current_version_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "current_version_prompt_sha256": "a1b44012770627593532566ac0117494fd951485b256df9a94dcb44b748441e5",
+        "current_version_robin_sha256": "be40e6b337620f1c76ba650b202f316d4b80b339de1c859fe1cb55a9f2714911",
+        "current_version_runs": 2,
+        "current_version_B2": "T05-Changed",
+        "current_version_input_unchanged": true,
+        "current_version_new_flow": true,
+        "current_version_flow_name": "無題 (2)",
+        "current_version_unique_name_caveat": true
+      },
+      "T06": {
+        "status": "PASS_FINALD_20260912",
+        "current_version_status": "PASS_CURRENT_20260914E_PAD_ACCEPTED",
+        "current_version_generation": "evidence/t06-copilot-live-generation-20260914e.json",
+        "current_version_acceptance": "evidence/t06-copilot-live-generation-20260914e-pad-acceptance.json",
+        "current_version_conversation": "https://m365.cloud.microsoft/chat/conversation/efc8983a-0075-4040-833a-8f06183823b4",
+        "current_version_instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+        "current_version_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529cadadb7d3b7963e036e12",
+        "current_version_prompt_sha256": "9b93ae90df34511cfbb67cc21aa148c797511a058bfa0bfad5f7d8cead51b6dd",
+        "current_version_robin_sha256": "c0940cb3e3ddbd82880d274692858ce3e2335f623acb11abe521926e642f9fd9",
+        "current_version_runs": 2,
+        "current_version_input_unchanged": true,
+        "current_version_output_expected_match": true,
+        "current_version_recopy_crlf_normalized_equal": true,
+        "current_version_strict_source_to_pad_bytes": "NOT_CLAIMED",
+        "evidence": "evidence/t06-finald-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+      },
+      "T07": {
+        "status": "PASS_FINALD_20260912",
+        "evidence": "evidence/t07-finald-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "current_version_status": "PASS_CURRENT_20260914E_PAD_ACCEPTED",
+        "current_version_acceptance": "evidence/t07-current-bundle-live-acceptance-20260914e.json",
+        "current_version_output_comparison": "evidence/t07-current-bundle-output-comparison-20260914e.json"
+      },
+      "T08": {
+        "status": "PASS_FINALD_20260912_EXPECTED_ERROR",
+        "evidence": "evidence/t08-finald-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "current_version_status": "PASS_CURRENT_20260914E_EXPECTED_ERROR",
+        "current_version_generation": "evidence/t08-current-bundle-live-acceptance-20260914e.json",
+        "current_version_acceptance": "evidence/t08-current-bundle-live-acceptance-20260914e.json",
+        "current_version_output_comparison": "evidence/t08-current-bundle-output-comparison-20260914e.json",
+        "current_version_conversation": "https://m365.cloud.microsoft/chat/conversation/4b3b4dfc-8fb9-4d0c-a5de-3427be8a00eb",
+        "current_version_instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+        "current_version_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "current_version_request_sha256": "79070940eae3c1c7277a77c164af71d0221290c0e963fd75904931c200bb3e15",
+        "current_version_robin_sha256": "d4a6b697189ef9d234bd0575be9c216bd460325f5c6737d0456991c779c21c52",
+        "current_version_flow": "RobinKnowledgeT08CurrentBundleLive20260914e",
+        "current_version_runs": 2,
+        "current_version_NewVar": "named on both runs",
+        "current_version_LastError": "missing-file message on both runs",
+        "current_version_block_FileNotFound_match": "NOT_PROVEN",
+        "current_version_input_unchanged": true,
+        "current_version_downstream_writes_markers_publication": "none"
+      },
+      "T09": {
+        "status": "PASS_CURRENT_20260913E",
+        "evidence": "evidence/t09-20260913e-pad-acceptance.json",
+        "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+      },
+      "T10": {
+        "status": "PASS_FINALD_20260912",
+        "evidence": "evidence/t10-finald-20260912-live-acceptance-20260912.json",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "derived_audit": "evidence/t10-strict-preservation-audit-20260913.json",
+        "functional_execution": "PROVEN_SEPARATELY",
+        "strict_byte_preservation": "NOT_PROVEN"
+      }
+    },
+    "independent_retests": {
+      "status": "PASS_FINALD_INDEPENDENT",
+      "cases": [
+        "T01",
+        "T04",
+        "T10"
+      ],
+      "results": {
+        "T01": "evidence/t01-finald-20260912-independent-acceptance-20260912.json",
+        "T04": "evidence/t04-finald-20260912-independent-acceptance-20260912.json",
+        "T10": "evidence/t10-finald-20260912-independent-acceptance-20260912.json"
+      }
+    },
+    "negative_suite": {
+      "status": "PASS_NEGATIVE_FAIL_CLOSED",
+      "suite": "v2",
+      "evidence": "evidence/negative-suite-finald-20260912-acceptance-20260912.json"
+    },
+    "p3_positive_cases": {
+      "status": "PASS_FINALD_20260912_P3_POSITIVE",
+      "results": {
+        "P3-1": "evidence/p31-finald-20260912-positive-acceptance-20260912.json",
+        "P3-2": "evidence/p32-finald-20260912-positive-acceptance-20260912.json",
+        "P3-3": "evidence/p33-finald-20260912-positive-acceptance-20260912.json",
+        "P3-4": "evidence/p34-finald-20260912-positive-acceptance-20260912.json",
+        "P3-5": "evidence/p35-finald-20260912-positive-acceptance-20260912.json",
+        "P3-6": "evidence/p36-finald-20260912-positive-acceptance-20260912.json"
+      }
+    },
+    "t08": {
+      "status": "PASS_FINALD_20260912_EXPECTED_ERROR",
+      "named_FileNotFound_match": "action-level ON ERROR FileNotFoundError fired (P3-6 measured); block-level user-defined name FileNotFound still unmatched"
+    },
+    "t09": {
+      "status": "PASS_CURRENT_20260913E",
+      "evidence": "evidence/t09-20260913e-pad-acceptance.json",
+      "wait_line": "WAIT 1",
+      "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c"
+    }
+  },
+  "p5": {
+    "status": "PASS_LOCAL_STATIC_PARTIAL_LIVE",
+    "issue_close": false,
+    "static_check": "evidence/current-package-static-check-20260912-finald.json"
+  },
+  "candidate_followup_20260913": {
+    "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+    "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+    "T03": {
+      "status": "PASS_REVISED_REQUEST_CANDIDATE_ONLY",
+      "evidence": "evidence/t03-revised-input-live-acceptance-20260913.json",
+      "pad_runs": 2,
+      "current_trace": "evidence/t03-copilot-live-generation-20260913e-pad-acceptance.json"
+    },
+    "T05": {
+      "status": "PASS_CURRENT_20260913E_PAD_ACCEPTED_AUTO_NAMED_NEW_FLOW",
+      "generation": "evidence/t05-copilot-live-generation-20260913.json",
+      "acceptance": "evidence/t05-copilot-live-generation-20260913e-pad-acceptance.json",
+      "pad_runs": 2,
+      "flow_name": "無題 (2)",
+      "unique_name_caveat": true
+    },
+    "T04": {
+      "status": "NOT_ACCEPTED_RESPONSE_ORIGIN_ESCAPES",
+      "evidence": "evidence/t04-copilot-live-generation-20260913-diagnosis.json",
+      "fresh_attempt": "evidence/t04-copilot-live-generation-20260913-attempt3.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/fd0a3c67-b305-46a4-92f9-80109bd11611",
+      "hypothesis": "evidence/t04-next-hypothesis-20260913e.json",
+      "stop_condition_reached": true,
+      "dom_arrow_provenance": "response_origin"
+    },
+    "T10": {
+      "status": "FUNCTIONAL_PROVEN_STRICT_NOT_PROVEN",
+      "derived_audit": "evidence/t10-strict-preservation-audit-20260913.json",
+      "regression_test": "../tests/Test-T10StrictPreservation.ps1",
+      "functional_runs": 2,
+      "authorized_change_lines": [2, 4],
+      "outside_allowed_change_count": 0,
+      "generation_to_pad_recopy": "PROVEN_NORMALIZED_CONTENT_ONLY",
+      "strict_source_to_generation": "NOT_PROVEN"
+    },
+    "T01_independent_20260914e": {
+      "status": "PASS_CURRENT_20260914E_INDEPENDENT_PAD_ACCEPTED",
+      "result": "../generated/normal-chat-20260914e-t01-independent-live/result.json",
+      "evidence": "evidence/t01-independent-current-output-comparison-20260914e.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/f0af1bd2-f257-4ba4-9b22-c3da0cce9ef9",
+      "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "flow_name": "RobinKnowledgeT01IndependentCurrentBundleLive20260914e",
+      "designer_pid": 31848,
+      "runs_completed": 2,
+      "input_unchanged": true,
+      "output_expected_match": true,
+      "recopy_crlf_normalized_equal": true,
+      "strict_source_to_generation": "NOT_ASSESSED",
+      "raw_unmodified": true
+    },
+    "T04_independent_20260914e": {
+      "status": "PASS_CURRENT_20260914E_INDEPENDENT_T04_GENERATION_PAD_TWO_RUNS_PARTIAL",
+      "result": "../generated/normal-chat-20260914e-t04-independent-live/result.json",
+      "evidence": "evidence/t04-independent-current-output-comparison-20260914e.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/e06e99be-8eb9-4d1b-9d9f-1c39e34060e9",
+      "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "request_sha256_without_lf": "020cb33802814321042c27cf094c340fcfeac2ed338d2819be32ca26e8db47b4",
+      "response_sha256_without_trailing_lf": "a932e7e7e4579e557a385f2c72ca7bdc98ce60c403061b77386761fdea67b21c",
+      "robin_sha256": "dd4f39f0700cfb5a9275dfc9912c89bd8d886d72972c9eb74223acf30343569d",
+      "flow_name": "RobinKnowledgeT04IndependentCurrentBundleLive20260914eD",
+      "designer_pid": 29660,
+      "runs_completed": 2,
+      "input_unchanged": true,
+      "run2_output_values_verified": true,
+      "run1_output_snapshot": "NOT_CAPTURED",
+      "recopy_crlf_normalized_equal": true,
+      "response_origin_backslash_arrow_count": 0,
+      "strict_source_to_generation": "NOT_ASSESSED",
+      "acceptance_scope": "candidate_partial",
+      "raw_unmodified": true
+    },
+    "promotion": "T03_CURRENT_TRACE_ADDED;_ORIGINAL_REQUEST_NOT_PROMOTED",
+    "canonical_distribution_instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+    "canonical_distribution_version": "20260913e",
+    "promotion_note": "The former candidate instruction is now the canonical source after the minimal WAIT 500→WAIT 1 correction. T03's corrected-request evidence and T05's fresh generation/PAD evidence are now traced to the current canonical hashes without old PASS transfer; the original T03 request without explicit counter requirements remains outside this acceptance. T05 used a newly-created flow that retained the UI auto-name 無題 (2); an explicitly named-flow requirement would require a fresh PAD-only gate. A same-version independent T04 request withheld evaluator counts and produced a clean response-origin Robin, which was pasted, saved, recopied, and run twice; run2 cell values are verified, but run1's xlsx snapshot was not captured, so it remains a partial candidate and does not promote the original T04 failure. Independent T10 and the remaining new-version cases still require their own evidence."
+  },
+  "p3": {
+    "measured_20260912": [
+      "P3-1_list_index: evidence/p3-list-idx1-acceptance-20260912.json",
+      "P3-2_nested_control: evidence/p3-nested-control-acceptance-20260912.json",
+      "P3-3_file_boundaries: evidence/p3-file-boundary-acceptance-20260912.json",
+      "P3-4_saveas_collision: evidence/p3-saveas-collision-acceptance-20260912.json",
+      "P3-5_custom_date_format: evidence/p3-date-format-acceptance-20260912.json",
+      "P3-6_named_error: evidence/p3-named-error-acceptance-20260912.json"
+    ],
+    "still_unconfirmed": [
+      "list index beyond 1 / out of range / index from variable",
+      "3+ nesting levels, exiting an outer loop from an inner loop, LOOP WHILE nesting (negative N1 stays fail-closed)",
+      "case-insensitive extension comparison",
+      "PowerPoint SaveAs collision, locked targets",
+      "custom date tokens other than yyyy-MM-dd; edit path of an existing convert action",
+      "block-level ON BLOCK ERROR with the built-in code FileNotFoundError; user-defined FileNotFound name still unmatched",
+      "T09 other URLs/elements/browsers; DataTable column-name access in a row loop (negative N2)"
+    ]
+  },
+  "independent_t10_20260914e": {
+    "status": "PASS_CURRENT_20260914E_INDEPENDENT_FUNCTIONAL_SCOPE_ACCEPTED_STRICT_RAW_NOT_PROVEN",
+    "evidence": "evidence/t10-independent-current-generation-20260914e.json",
+    "conversation": "https://m365.cloud.microsoft/chat/conversation/6edc277b-b005-4d56-8bb7-ba64668ea636",
+    "flow_name": "RobinKnowledgeT10IndependentCurrentBundleLive20260914e",
+    "designer_pid": 20008,
+    "runs_completed": 2,
+    "output_snapshots": ".work/t10-independent-20260914e/run1; .work/t10-independent-20260914e/run2",
+    "authorized_scope_only_lines_2_and_4": true,
+    "strict_raw_preservation": "NOT_PROVEN"
+  },
+  "remaining": [
+    "T03 corrected request is traced to the current canonical 20260913e hashes and PAD acceptance; this is not a pass for the original request without an observable counter requirement.",
+    "T05 2026-09-13 fresh retry generation and two PAD runs are traced to current 20260913e; the new flow was auto-named 無題 (2), so an explicitly named-flow gate remains a bounded caveat.",
+    "T04 2026-09-13 generation format remains not accepted; fresh attempt-3 reproduces the response-origin arrow escaping in a new conversation, while attempt-1 bracket provenance remains unproven. A separate current-version independent request produced a clean 9-line Robin and two PAD runs, but run1's xlsx snapshot was not captured, so it remains a partial candidate and is not promoted.",
+    "Independent T10 current-version functional execution and authorized line-2/line-4 scope are now proven by two PAD runs and fresh run1/run2 output snapshots; source-to-generation and raw generation-to-PAD byte preservation remain NOT_PROVEN because serialization differs.",
+    "T06 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after CRLF normalization, Word body comparison passed, and the pre-existing output was moved aside and restored.",
+    "T07 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after CRLF normalization, PAGE_TOKEN_A2 was present without PAGE_TOKEN_A1, input PDF was unchanged, and the pre-existing output was restored.",
+    "T08 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after explicit whitespace normalization, action-level FileNotFoundError set NewVar=named and LastError on both runs, block-level user-defined FileNotFound remains NOT_PROVEN, and no downstream write/marker/publication occurred.",
+    "P3 unconfirmed boundaries listed in still_unconfirmed (outside the teaching material; optional)",
+    "Agent Builder registration (out of scope)",
+    "DOM check (tests/Test-CopilotDom.cjs) NOT_RUN: Playwright not configured"
+  ],
+  "result": "Historical finald 79245787 acceptance is preserved. Current canonical package 20260913e aligns instruction and knowledge at WAIT 1, has a live reference-only precheck, current-version T01, T02, T03 (explicit corrected request), T05, T06, T07, T08 (measured action-level expected error), and T09 PAD acceptance, plus current-version independent T01 acceptance, independent T10 functional/scope acceptance with strict raw bytes NOT_PROVEN, and a partial independent T04 candidate; original T04 remains not accepted. P3 positives, negative suite v2, and the final A-G audit/coverage reconciliation remain pending, so Issue #5 stays OPEN / partial.",
+  "final_evidence_audit": {
+    "status": "PARTIAL_REQUIRED_TRACEABILITY_GAPS",
+    "target_commit": "e295387b525492f87e890bc0fb8a74aaf2396c2f",
+    "baseline_main": "de5efc1a525db0d49b4af9aa6cd6ec674ef9b4e8",
+    "live_acceptance_preserved": true,
+    "pr_submission_ready": false,
+    "report": "docs/robin-knowledge-validation.md",
+    "required_gaps": [
+      "The canonical instruction WAIT 500→WAIT 1 correction is fixed in 20260913e. Because instruction bytes changed, fresh same-version acceptance is required; do not relabel historical finald PASS as 20260913e.",
+      "T03 2026-09-13 request-only correction is traced to current canonical 20260913e and PAD accepted; it does not certify the original request without explicit counters, and no historical finald PASS was transferred.",
+      "T04 2026-09-13 raw generations remain format-not-accepted; fresh-conversation attempt-3 confirms response-origin arrow escapes, and no unescape or repair was applied. Independent 20260914e generation has clean arrows and two PAD runs, but lacks a run1 xlsx snapshot and remains candidate_partial.",
+      "B/C/D/E: separate-empty-flow reuse trace missing for some existing probes; see report matrix. A boolean/subtraction and D folder creation were supplemented with new reuse evidence; do not infer the other items from T01-T10 PASS.",
+      "C: saved cell probe proves indexed cell update, not a cell-value read; locate the required cell-reference evidence and distinguish optional column-name row-loop syntax.",
+      "T10: derived audit evidence/t10-strict-preservation-audit-20260913.json proves functional execution separately and proves normalized content scope (only lines 2 and 4 changed; zero outside-line changes), but raw source-to-generation/source-to-recopy byte equality is false because source is CRLF/no-final-LF and generated/recopied forms differ. The independent 20260914e run adds fresh chat/PAD/output evidence but has the same serialization boundary. Keep strict preservation NOT_PROVEN and do not promote functional runs to full T10 strict acceptance."
+    ],
+    "t10_strict_preservation": {
+      "status": "NOT_PROVEN",
+      "source": "generated/office-three-apps/generated.robin",
+      "source_sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+      "finald_primary": "generated/normal-chat-finald-20260912-t10/robin.txt",
+      "finald_independent": "generated/normal-chat-finald-20260912-t10-independent/robin.txt",
+      "saved_response_sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12",
+      "source_serialization": "CRLF between 16 commands; no final newline",
+      "saved_response_serialization": "LF between 16 commands; final LF present",
+      "unchanged_instruction_line_contents": 14,
+      "raw_byte_equality_outside_allowed_changes": false,
+      "interpretation": "DOM serialization and original model output have not been independently distinguished. This is insufficient evidence for the explicit line-ending preservation requirement, not proof that the runtime behavior failed.",
+      "candidate_independent_conversation": "https://m365.cloud.microsoft/chat/conversation/de5a25b3-24df-4ad7-8fc8-7e2284e5f2b3",
+      "candidate_independent_status": "GENERATED_NOT_ACCEPTED; no PAD run requested because strict preservation is not proven",
+      "copy_attempt": "CUA response-copy button invoked; native clipboard observation did not obtain a matching response within 45 seconds; original clipboard restored",
+      "browser_clipboard_followup": {
+        "status": "CAPTURED",
+        "method": "CUA response-copy button then tab.clipboard.readText after asynchronous completion",
+        "sha256": "3285b362d5537d9beb1ee0ba317a67709e6374f6dffacad074b499f150f69eba",
+        "serialization": "15 LF separators, no final newline; DOM save adds one final LF",
+        "local_evidence": ".work/finale-20260912/t10-independent/browser-clipboard-observation.json",
+        "strict_source_crlf_preservation": "NOT_PROVEN",
+        "note": "The native-clipboard observation failure is preserved but does not mean the browser copy operation failed. No code or expected values were edited."
+      },
+    "independent_20260914e": {
+      "status": "FUNCTIONAL_SCOPE_PROVEN_STRICT_RAW_NOT_PROVEN",
+      "evidence": "evidence/t10-independent-current-generation-20260914e.json",
+      "generated_robin_sha256": "2bcb5512adc3d238251ea7da2f82c047a5ddfbf4ae4ce343b437aef27eb3284a",
+      "flow_name": "RobinKnowledgeT10IndependentCurrentBundleLive20260914e",
+      "designer_pid": 20008,
+      "runs_completed": 2,
+      "output_snapshots": ".work/t10-independent-20260914e/run1; .work/t10-independent-20260914e/run2",
+      "source_serialization": "CRLF/no-final-LF",
+      "generated_serialization": "LF/final-LF",
+      "generation_to_pad_serialization": "CRLF/final-LF",
+      "normalized_content_equal": true,
+      "raw_byte_equal": false
+    },
+    "original_records_preserved": true
+    },
+    "corrections": [
+      "A boolean: evidence/a-boolean-reuse-20260912/acceptance.json links the unchanged measured raw to a new empty flow, two True observations and reopened recopy. Both runs preserve transient ambiguous status observations; no run was resent.",
+      "D folder creation: evidence/d-folder-create-reuse-20260912/acceptance.json proves two creations from an absent target, expected NewFolder path, original empty-folder restoration and reopened recopy. A run2 preparation failure occurred before any execution request and is retained.",
+      "A subtraction: new separate-empty-flow reuse on 2026-09-12 confirms the unmodified measured raw with two P3Number=7 observations and reopened recopy. See evidence/a-subtract-reuse-20260912/acceptance.json. This resolves current reuse/two-run coverage only; the original 2026-09-10 record still links one run and is preserved.",
+      "26 stale current-package-status PAD run links corrected; original per-case acceptance/result and PAD records preserved.",
+      "T09 result/acceptance observed timestamps retain finalc times; authoritative finald run1=2026-09-12T02:33:08.6086461Z and run2=2026-09-12T02:33:25.4307357Z. This derived correction does not alter original records.",
+      "T08/P3-6 recopy differs by CRLF and one trailing space on BLOCK; original bytes preserved. Not byte-identical.",
+      "Complete live-acceptance status concerns the fixed finald generation cases only; it does not certify all A-G requirements or PR readiness."
+    ],
+    "negative_response_browser_check": {
+      "status": "PASS_READ_ONLY_CORRESPONDENCE",
+      "conversation": "4eb6120d-ff97-4125-88ec-d850f00793fd",
+      "attachments": [
+        "agent-instructions",
+        "PAD-Robin-Knowledge-Bundle"
+      ],
+      "answer_chars": 1636,
+      "pre_elements": 0,
+      "code_elements": 0,
+      "new_messages_sent": 0,
+      "note": "Reopened the saved conversation in Chrome through CUA; all answer paragraphs and citation markers correspond to saved response.txt. No new generation or PAD execution."
+    }
+  }
+}

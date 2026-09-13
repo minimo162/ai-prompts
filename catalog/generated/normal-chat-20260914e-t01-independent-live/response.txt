@@ -1,0 +1,42 @@
+以下は、添付ナレッジに収録されたT01の実測済み3アクション原文を、そのままPADへ貼り付けるフロー案です。今回この場でPADを再実行したものではなく、登録済み証拠に基づく再掲です。
+
+1. 前提・対象範囲
+目的: UTF-8テキストを読み、「対象語」だけを「置換後」へ通常置換し、新しいUTF-8テキストとして保存します。
+入力: C:\Users\yuuki\ai-prompts\catalog\fixtures\text\t01-input-20260909.txt
+出力: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t01-output-current-bundle.txt
+変数と型:
+FileContents: 読み取ったテキスト
+Replaced: 置換後のテキスト
+置換条件: 大文字小文字を区別し、エスケープシーケンスを有効化しない通常置換です。
+保存条件: UTF-8、既存ファイルは上書き、追加改行なしです。入力テキスト自身に末尾改行がある場合、その内容は保持されます。
+成功条件: 指定語だけが置換され、特殊文字、既存の改行、対象外文字が保持され、保存処理による末尾改行が追加されないことです。
+
+根拠は、PAD-Robin-Knowledge-Bundle.txt内のT01測定済み組合せです。PAD 2.71.115.26224、日本語UI、Power Fx OFF、合成データ環境で採取され、専用フローへの無修正貼り付け、保存、2回の実行、出力内容および入力不変の照合が記録されています。ただし、その検証は履歴bundleに対するものであり、今回の回答自体を再実測したものではありません。
+
+2. PADで先に確認する設定
+PADで空のフロー、または貼り付け先の対象サブフローを開きます。
+出力フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence が存在することを確認します。
+同名の出力ファイルが存在する場合、このフローは確認なしで上書きします。残す必要があるファイルは実行前に退避してください。
+入力変数、Officeインスタンス、UI要素の事前作成は不要です。FileContentsとReplacedは各アクションの出力として生成されます。
+対象サブフローの既存アクションを置換する場合は、置換対象の範囲だけを選択して貼り付けます。
+3. 貼り付け後のデザイナー確認
+アクション数が3であることを確認します。
+順序が「UTF-8読取り」「通常置換」「UTF-8書込み」であることを確認します。
+1番目の出力がテキスト変数FileContents、2番目の出力がテキスト変数Replacedであることを確認します。
+3番目の書込みテキストが文字列リテラルではなく、変数Replacedへの参照になっていることを確認します。
+書込み設定が追加改行なし、既存内容を上書き、UTF-8になっていることを確認します。
+デザイナーにエラー表示がなく、3アクションすべてが認識されていることを確認してから保存します。
+4. 合成データでの実行・照合
+入力ファイルを複製して保全するか、実行前のハッシュを記録します。
+フローを保存して1回実行します。
+出力をテキストエディターで開き、「対象語」が「置換後」へ置き換わっていることを確認します。
+特殊文字、引用符、パーセント、バックスラッシュ、既存の行構成、対象外文字が変化していないことを確認します。
+入力末尾に改行がない場合、出力にも余分な末尾改行が追加されていないことを確認します。
+入力ファイルが変更されていないことを確認します。
+同じ入力で再実行し、出力内容が同じであることを確認します。失敗した場合は、エラー全文、該当アクション、直前の変数値、PAD版、表示言語、Power Fx状態を記録してください。
+
+以下はMainまたは対象サブフローへ貼り付ける3アクション全体です。
+
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8

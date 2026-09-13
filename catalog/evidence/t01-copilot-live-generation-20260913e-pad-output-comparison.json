@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "case_id": "T01",
+  "version": "20260913e",
+  "flow_name": "RobinKnowledgeT01CurrentBundleLive_20260913e",
+  "observed_at": "2026-09-13T14:02:58.3337345Z",
+  "source_robin": {
+    "path": "catalog/generated/normal-chat-20260913e-t01/robin.txt",
+    "sha256": "2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47",
+    "bytes": 646,
+    "line_endings": "LF"
+  },
+  "pad_recopy_after_save": {
+    "path": "catalog/generated/normal-chat-20260913e-t01/pad-recopy-after-save.robin",
+    "sha256": "d2a7f74e6b5038557a5b0eeca1bde4468f4d4fc402a9baaf95ba7fe5e91a317b",
+    "bytes": 649,
+    "line_endings": "CRLF",
+    "action_count": 3
+  },
+  "pad_recopy_after_run2": {
+    "path": "catalog/generated/normal-chat-20260913e-t01/pad-recopy-after-run2.robin",
+    "sha256": "d2a7f74e6b5038557a5b0eeca1bde4468f4d4fc402a9baaf95ba7fe5e91a317b",
+    "bytes": 649,
+    "line_endings": "CRLF",
+    "action_count": 3
+  },
+  "roundtrip": {
+    "source_to_pad_after_save_ordinal_equal_after_crlf_normalization": true,
+    "source_to_pad_after_run2_ordinal_equal_after_crlf_normalization": true,
+    "pad_after_save_equals_pad_after_run2_bytewise": true,
+    "strict_source_to_generation": "NOT_ASSESSED",
+    "interpretation": "PAD recopy is proven equivalent to the captured generated Robin after CRLF normalization only; source-to-generation strict byte identity is not claimed."
+  },
+  "input": {
+    "path": "catalog/fixtures/text/t01-input-20260909.txt",
+    "sha256": "2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f",
+    "bytes": 87,
+    "unchanged_after_run2": true,
+    "line_endings": "CRLF"
+  },
+  "output": {
+    "path": "catalog/evidence/normal-chat-t01-output-current-bundle.txt",
+    "sha256_run1": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2",
+    "sha256_run2": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2",
+    "bytes": 90,
+    "utf8_bom": true,
+    "line_endings": "CRLF",
+    "same_across_runs": true,
+    "expected_output_match": true
+  },
+  "result": "PASS_CURRENT_20260913E_PAD_PASTE_SAVE_TWO_RUNS_OUTPUT_AND_INPUT_INVARIANCE"
+}

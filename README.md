@@ -1,5 +1,13 @@
 # PAD Robin Copilotエージェント用 指示文・ナレッジ
 
+### 2026-09-14 独立T04候補（現行版）
+
+現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を新規Think Deeper通常チャットへ同版指示＋bundle実添付し、件数・期待値を依頼本文から除外したT04補正版依頼を1回送信した。公式応答とDOM単一`pre`から得た9行Robin（plain `=>` 5、escaped `\\=>` 0）を無修正で新規空フローへ貼付け・保存・再コピーし、2回Runとも成功。Run2のxlsx 3行3列値と入力fixture不変、既存CSV/xlsx復元を確認したが、Run1のxlsxスナップショット未採取のため候補`partial`であり、受入済み一覧へ昇格していない。元T04の応答由来形式不受入と厳密バイト保持NOT_PROVENは維持する（[比較証跡](catalog/evidence/t04-independent-current-output-comparison-20260914e.json)）。
+
+> 2026-09-14追補: 現行正本（instruction SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`）でT06/T07/T08を新規通常M365 Copilotチャットへ同版指示＋bundle実添付して生成し、無修正で専用空フローへ貼付け・保存・再コピー・2回Runまで実施しました。T07は`RobinKnowledgeT07CurrentBundleLive20260914e`で両回`PAGE_TOKEN_A2`のみ、入力PDF不変、既存出力復元を確認しました（[T07受入](catalog/evidence/t07-current-bundle-live-acceptance-20260914e.json)、[比較](catalog/evidence/t07-current-bundle-output-comparison-20260914e.json)）。T08はアクション単位FileNotFoundErrorの期待経路を2回確認しました。現行版受入済みはT01/T02/T03（修正版依頼）/T05/T06/T07/T08/T09と独立T01、T04形式不受入・独立T04候補・T10厳密バイト保持・独立T10・P3正例・負例v2・A〜G監査は残り、独立T04候補はRun1出力未採取のためpartial、T10厳密バイト保持はNOT_PROVEN、Issue #5/#27はOPEN / partialです。
+
+> 2026-09-13e追補: 正本は指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`／bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`。同版T01/T02/T09は実機PAD受入済み（T01は専用空フローで3アクション・2回Run・出力/入力不変、T02は3アクション・保存・再コピー・2回Run・CSV出力一致／入力不変）。T03は依頼本文へカウンター要件を明示した修正版依頼に限り、13アクション・2回Run（TxtCount=2／OtherCount=2）を現行版へ追跡しました。元依頼の3試行は不受入のままです。T04は新規会話の1回追加でも`=>`前バックスラッシュがDOMと保存Robinに一致して現れたため生成回答由来の形式不受入、T10は機能実行と許可2行の内容範囲を別証跡で保全したが厳密バイト保持はNOT_PROVEN（[派生監査](catalog/evidence/t10-strict-preservation-audit-20260913.json)、[回帰テスト](tests/Test-T10StrictPreservation.ps1)）です。旧finald PASSは新版本へ継承せず、Issue #5/#27はOPEN / partialです。
+
 > 2026-09-12 最終監査: 固定finaldの生成受入は維持。A〜Gの一部に別空フロー再利用等の保存証跡未特定があり、親Issue全体はpartial、PR提出準備は未完了です。[監査結果・不足・PR案](docs/robin-knowledge-validation.md)。
 
 このリポジトリの今回の成果物は、PADの実測Robinを根拠にMicrosoft 365 Copilotエージェントがフロー案を生成・修正するための配布物です。入口は [copilot/README.md](copilot/README.md) です。指示欄へ貼る文章は [copilot/agent-instructions.txt](copilot/agent-instructions.txt)、登録用ナレッジと手順は `copilot/knowledge/` にあります。PAD・Copilotを自動実行する新しいアプリは作りません。

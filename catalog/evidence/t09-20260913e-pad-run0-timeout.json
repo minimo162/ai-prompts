@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-09-13T22:16:41+09:00",
+  "case": "T09",
+  "status": "NOT_ACCEPTED_TIMEOUT_INCOMPLETE",
+  "package_label": "20260913e",
+  "flow_name": "RobinKnowledgeT09CurrentBundleLive20260913e",
+  "designer_process_id": 37604,
+  "request_method": "tools/Run-PadFlowLive.ps1",
+  "timeout_seconds": 30,
+  "observed": {
+    "helper_evidence_emitted": false,
+    "state_after_timeout": "running",
+    "later_read_only_state": "Ready",
+    "later_variable_preview": "T09-clicked"
+  },
+  "classification": "The first request is retained as an incomplete/non-accepted attempt. The later Ready/T09-clicked observation does not backfill a success record. No duplicate run was requested while the state was unknown; two fresh accepted runs were performed only after Ready was observed.",
+  "raw_generation_or_pad_source_was_not_modified": true
+}

@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T06:37:15+09:00",
+  "case": "P3-5 current bundle live generation and PAD acceptance",
+  "status": "PASS_CURRENT_GENERATION_AND_PAD_2_RUNS",
+  "instruction": {
+    "path": "copilot/agent-instructions.txt",
+    "sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f5081241e79c",
+    "utf16_code_units": 3947
+  },
+  "bundle": {
+    "path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+    "file_count": 7
+  },
+  "request": {
+    "path": "catalog/generated/normal-chat-20260914e-p35-current-live/request.txt",
+    "sha256": "86bef2f15d2937b2e6770904d221ba0cd6e1342ab4b91e200c43fdea6213fef9",
+    "bytes": 518,
+    "utf16_code_units": 206,
+    "evaluator_expected_counts_sent": false
+  },
+  "m365_copilot": {
+    "browser": "Google Chrome",
+    "surface": "normal M365 Copilot chat",
+    "mode": "Think Deeper",
+    "conversation_url": "https://m365.cloud.microsoft/chat/conversation/a505b6cc-1517-4959-8978-63f495d900c6",
+    "send_count": 1,
+    "attachments": [
+      {
+        "name": "agent-instructions.txt",
+        "source": "copilot/agent-instructions.txt",
+        "sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f5081241e79c",
+        "upload_status": "attached"
+      },
+      {
+        "name": "PAD-Robin-Knowledge-Bundle.txt",
+        "source": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+        "sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "upload_status": "attached"
+      }
+    ],
+    "request_body_visible_text_exact": true,
+    "response_raw_source": "single response article innerText from the sent conversation",
+    "response_raw_chars": 664,
+    "response_raw_sha256": "d300bd7ffa373de3f54b5c5b24a1f42df4591c1cabad896848a1edc500f6ed70",
+    "generated_robin": {
+      "path": "catalog/generated/normal-chat-20260914e-p35-current-live/generated-robin.txt",
+      "sha256": "004ef2f334a01a869461c1db0f2b91f00412480436acde004394383a95d99413",
+      "bytes": 252,
+      "lines": 2,
+      "dom_pre_count": 1,
+      "manual_edit": false,
+      "automatic_unescape": false
+    }
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeP35CurrentBundleLive20260914e",
+    "designer_process_id": 34916,
+    "designer_title": "Power Automate | RobinKnowledgeP35CurrentBundleLive20260914e",
+    "source_robin": "catalog/generated/normal-chat-20260914e-p35-current-live/generated-robin.txt",
+    "paste_save": "catalog/evidence/p35-current-pad-paste-save-20260914e.json",
+    "recopy": {
+      "path": "catalog/generated/normal-chat-20260914e-p35-current-live/pad-recopy.robin",
+      "sha256": "19cf8878c3317f96bbcdf10b3381d8420e469120eb07e040ed6d3acebf0fdee6",
+      "bytes": 254,
+      "lines": 2,
+      "designer_action_count": 2,
+      "visible_action_count": 2,
+      "designer_status": "2 選択されたアクション",
+      "virtualized_list_false_negative": false,
+      "raw_byte_equal": false,
+      "crlf_normalized_equal": true
+    },
+    "runs": [
+      {
+        "run_number": 1,
+        "evidence": "catalog/evidence/p35-current-pad-run1-20260914e.json",
+        "status": "success",
+        "FormattedDateTime2": "2026-09-14"
+      },
+      {
+        "run_number": 2,
+        "evidence": "catalog/evidence/p35-current-pad-run2-20260914e.json",
+        "status": "success",
+        "FormattedDateTime2": "2026-09-14"
+      }
+    ]
+  },
+  "interpretation": {
+    "accepted": [
+      "current instruction and seven-file bundle were attached to normal M365 Copilot",
+      "one sent request produced one DOM pre and a 2-line Robin",
+      "Robin was pasted into a new dedicated empty PAD flow without hand editing",
+      "Designer status and saved flow were observed",
+      "two PAD runs succeeded and both returned FormattedDateTime2=2026-09-14"
+    ],
+    "not_proven": [
+      "raw Copilot generation bytes equal PAD recopy bytes (CRLF serialization only)",
+      "custom date tokens other than yyyy-MM-dd",
+      "editing an existing convert action path"
+    ],
+    "preserved_failures": [
+      "historical P3-5 positive acceptance and its original request/Robin remain unchanged",
+      "historical T03/T04 generation failures are not overwritten or promoted by this case"
+    ]
+  }
+}

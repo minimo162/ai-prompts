@@ -1,0 +1,28 @@
+前提
+
+根拠は、既存Excelを編集可能で開く実測原文、Excelセル書込み、Excel SaveAs、Excelを閉じる実測原文です。
+保存元: C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\excel-catalog.xlsx
+保存先: C:\Users\yuuki\ai-prompts\catalog\evidence\p3-saveas-case-20260912.xlsx
+変更内容: セル B2 に T05-Changed を書き込む。
+既存ブックは編集可能 (ReadOnly: False) で開きます。
+
+設定
+
+Excelインスタンス名は実測例に合わせて ExcelInstance を使用します。
+保存は Excel.SaveExcel.SaveAs を使用します。実測例に存在する DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook のみ使用します。
+
+期待結果
+
+入力ファイル excel-catalog.xlsx は別名保存のため変更対象ではなく、出力として p3-saveas-case-20260912.xlsx が作成されます。
+出力ブックの B2 = T05-Changed になります。SaveAs衝突実測では保存後のセル値確認として B2=T05-Changed が記録されています。
+添付ナレッジの実測では、Excel.SaveExcel.SaveAs は同名ファイルが既に存在していても確認ダイアログなしで上書きしました。Robin原文にも上書き有無を制御する引数は確認されていません。
+そのため再実行前に既存の C:\Users\yuuki\ai-prompts\catalog\evidence\p3-saveas-case-20260912.xlsx を残したい場合は、利用者が事前に別名へリネームするか別フォルダーへ退避してください。実測では既存ファイルは無警告で上書きされました。
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''T05-Changed''' Column: $'''B''' Row: 2
+Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\p3-saveas-case-20260912.xlsx'''
+Excel.CloseExcel.Close Instance: ExcelInstance
+
+ソース
+保存先に同名ファイルがある場合の挙動は？
+Robin構文の詳細な説明をして
+上書き確認なしで保存する方法は？

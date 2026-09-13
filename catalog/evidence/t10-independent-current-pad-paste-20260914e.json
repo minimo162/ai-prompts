@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T18:54:16.3447542Z",
+  "flow_name": "RobinKnowledgeT10IndependentCurrentBundleLive20260914e",
+  "process_id": 20008,
+  "source_robin": "catalog/generated/normal-chat-20260914e-t10-independent-live/dom-robin.txt",
+  "source_sha256": "2bcb5512adc3d238251ea7da2f82c047a5ddfbf4ae4ce343b437aef27eb3284a",
+  "source_bytes": 1771,
+  "empty_before_paste": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "helper": "tools/Paste-PadRobinLiveByStatus.ps1",
+      "result": "TIMEOUT_STATUS_NOT_OBSERVED",
+      "bounded_wait_seconds": 60,
+      "visible_action_count_at_timeout": 6,
+      "expected_action_count": 16,
+      "error": "Paste not confirmed by Designer status; visible_count=6"
+    },
+    {
+      "attempt": 2,
+      "helper": "tools/Paste-PadRobinLiveByStatus.ps1",
+      "result": "REJECTED_NON_EMPTY",
+      "note": "A second paste was not performed; the dedicated flow had already received the first paste. It was cleared once before the bounded retry, then the retry was stopped because the first paste had settled in the Designer."
+    }
+  ],
+  "settled_observation": {
+    "observed_at": "2026-09-13T18:56:02Z",
+    "designer_status": "16 アクション",
+    "visible_action_count": 6,
+    "virtualized_list_false_negative": true,
+    "action_summary": [
+      "Excel の起動",
+      "Excel ワークシートに書き込む",
+      "Excel ワークシートから読み取る",
+      "Excel の保存",
+      "Excel を閉じる",
+      "Word を起動する"
+    ],
+    "note": "The status summary later exposed the authoritative 16-action count; the six realized ListItems are a virtualization view and are not treated as a paste failure. No third paste was issued."
+  },
+  "paste_confirmed": "SETTLED_AFTER_HELPER_TIMEOUT",
+  "saved_confirmed": true,
+  "save_observation": {
+    "observed_at": "2026-09-13T18:56:10Z",
+    "helper": "tools/Save-PadFlowLive.ps1",
+    "result": "SAVED=RobinKnowledgeT10IndependentCurrentBundleLive20260914e"
+  },
+  "execution_requested": false
+}

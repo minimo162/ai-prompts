@@ -1,4 +1,94 @@
 # Robinナレッジ検証報告
+## 2026-09-14 現行版P3-1の送信・実機PAD受入
+
+現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を、通常M365 Copilotの新規会話 `https://m365.cloud.microsoft/chat/conversation/2167fd22-b6fb-4101-9379-8f4e760a518a`へ同版指示全文とbundleを実添付してThink Deeperで1回送信した。評価者用正解コード・期待値・Issue本文は送っていない。回答DOMの単一コードブロックから4行Robinを無修正保存した。
+
+生成Robin `catalog/generated/normal-chat-20260914e-p31-current-live/generated-robin.txt`（205 bytes、SHA `fdaa3eea…`）を、Console UIAで作成した専用空フロー `RobinKnowledgeP31CurrentBundleLive20260914e`（Designer PID 11016）へ無修正貼付け・保存・再コピーした。PAD再コピーは209 bytes／CRLF（SHA `36a8179b…`）で、改行正規化後のみ一致し、生バイト差を隠していない。2回Runとも成功し、各回の変数プレビューで`CatalogList=[CatalogItem, SecondItem]`、`NewVar=SecondItem`を確認した。原回答・依頼・PAD貼付け保存・Run記録は `catalog/evidence/p31-current-bundle-live-20260914e.json` と同参照ファイルへ分離保存した。
+
+これは現行版P3-1だけの受入記録であり、旧版P3-1 PASSを現行版へ移していない。続くP3-2、P3-3は別節で現行版受入を記録する。P3-4〜P3-6、負例v2、T10厳密保持、最終A〜G監査は未完了のため、Issue #5/#27をOPEN / partialのまま維持する。
+
+## 2026-09-14 現行版P3-2の送信・実機PAD受入
+
+現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`）を通常M365 Copilot新規会話 `https://m365.cloud.microsoft/chat/conversation/cc53abdf-077f-40eb-873e-f0ef92056be4`へ同版指示全文＋bundleを実添付し、Think Deeperで1回送信した。評価者用正解コード・固定期待値・Issue本文は渡していない。応答DOMの単一`pre`から23行Robinを無修正保存した。
+
+生成Robin `catalog/generated/normal-chat-20260914e-p32-current-live/generated-robin.txt`（1057 bytes、SHA `3189a4c7…`）を専用空フロー `RobinKnowledgeP32CurrentBundleLive20260914e`へ貼付け・保存した。貼付け直後のListItem 6件は仮想化表示で、Designerの権威サマリー`23 アクション`を確認した。再コピー `pad-recopy.robin`（1080 bytes、CRLF、SHA `b2c65f7e…`）は生成原文と生バイトは異なるが、改行正規化後は一致する。生成コードの手直し・unescape・後付け期待値は行っていない。
+
+PADを2回Runし、両回とも変数プレビュー`[CatalogItem, SecondItem, ThirdItem]`、`SecondItem`、`1`、`1`、`SecondItem`、`2`を確認した。指定出力は13 bytesのUTF-8 BOM付き`SecondItem`（SHA `e9b8ede4…`）で、`OuterCount=2`、`InnerNo=1`、`InnerYes=1`、`LastSeen=SecondItem`、ThirdItem未訪問の期待と一致する。run1はDesigner PID 39172、run2は再オープン後PID 23188で、各Runの原JSONを保存した。
+
+この受入は現行版P3-2だけを対象とし、旧20260912 P3-2 PASSを移していない。P3-4〜P3-6、負例v2、T10厳密保持、最終A〜G監査は残件で、Issue #5/#27はOPEN / partialを維持する。詳細は`catalog/evidence/p32-current-bundle-live-20260914e.json`および同参照のpaste/run証跡を参照する。P3-3は次節で別途現行版受入を記録する。
+
+## 2026-09-14 現行版P3-3の送信・実機PAD受入
+
+現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を通常M365 Copilotの新規会話 `https://m365.cloud.microsoft/chat/conversation/8e3e9a69-098f-41ce-82df-47b581c6bbad`へ同版指示全文とbundleを実添付してThink Deeperで1回送信した。評価者用正解コード・固定件数・期待値・Issue本文は渡していない。応答DOM単一`pre`から13行Robinを無修正で保存し、生成SHAは`2b3494e4e8ceffd33e8ef242b19387205b8159d2307ad8a56f93aeb789e3454a`である。
+
+生成Robin `catalog/generated/normal-chat-20260914e-p33-current-live/generated-robin.txt`（808 bytes）を、Console UIAで作成した専用空フロー `RobinKnowledgeP33CurrentBundleLive20260914e`（Designer PID 38136）へ無修正貼付け・保存・再コピーした。貼付け後のListItem 7件は仮想化表示で、Designerの権威サマリー`13 選択されたアクション`を正とした。PAD再コピー `pad-recopy.robin` は821 bytes・CRLF（SHA `e909a165…`）で、生成原文とは生バイトが異なるが改行正規化後は一致する。貼付けヘルパーの初回JSONはプロセス終了までに出力されなかったが、同じ1回の貼付け状態を独立UIAで確認し、重複貼付けは行っていない。
+
+PADを2回Runし、両回とも`TxtCount=3`、`OtherCount=2`、`CurrentFile=...\\sub.txt\\inner.txt`、`OtherSeen=...\\x.txt.bak`、`FileContents=inner`を確認した。5入力fixture（plain.txt、upper.TXT、x.txt.bak、sub.txt/inner.txt、nested/deep.txt）の各SHAは両Run後も不変で、`.TXT`は厳密な`.txt`比較のElse、`.txt.bak`もElse、親フォルダー名`sub.txt`は拡張子判定へ影響しないことを実測した。これは現行版P3-3の生成・無修正PAD貼付け・保存・2回機能受入であり、厳密な生成→PAD生バイト保持、NoSort順序、閉じて再オープン後の再コピーまでは証明していない。旧P3-3 PASSは移転せず、P3-4〜P3-6、負例v2、T10厳密保持、最終A〜G監査は残件で、Issue #5/#27はOPEN / partialを維持する。詳細は `catalog/evidence/p33-current-bundle-live-20260914e.json` とpaste/run証跡。
+
+## 2026-09-14 現行版P3-4の送信・実機PAD受入
+
+現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を通常M365 Copilot新規会話 `b9376b28-b208-4f56-a79d-05758849de9f`へThink Deeper・2実添付で1回送信した。評価者用件数・期待値は渡さず、DOM単一`pre`から4行のExcel SaveAs Robinを無修正保存した。専用空フロー `RobinKnowledgeP34CurrentBundleLive20260914e`（Designer PID 30620）へ貼付け・保存・再コピーし、権威サマリー`4 選択されたアクション`を確認した。再コピーはCRLF正規化後のみ一致し、生バイト一致は主張しない。
+
+Run1/Run2とも成功し、各xlsxスナップショットのB2=`T05-Changed`を確認した。Run1前の出力は不在、Run2前にはRun1出力が存在し、Run2後に出力SHAが`5342fa57…`から`4b41bd36…`へ変化したため既存ターゲットの無警告上書きを実測した。入力`excel-catalog.xlsx`のSHA `e94bd14c…`は前後不変。生成・貼付け・2回実行の原記録は `catalog/evidence/p34-current-bundle-live-20260914e.json`、paste/run各JSON、`catalog/generated/normal-chat-20260914e-p34-current-live/`に保全した。P3-4は現行版受入へ追加するが、P3-5/P3-6、T04形式、T10厳密保持、負例v2、A〜G監査は未完了で、Issue #5/#27はOPEN / partialを維持する。
+
+## 2026-09-14 独立T10現行版の機能受入
+
+現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を通常M365 Copilotの新規会話 `https://m365.cloud.microsoft/chat/conversation/6edc277b-b005-4d56-8bb7-ba64668ea636`へ、同版指示全文とbundle・生成元Robinの3実添付でThink Deeper送信した。送信は1回で、評価者用正解コード／期待値／Issue本文は渡していない。応答DOMは単一16行Robin（`catalog/generated/normal-chat-20260914e-t10-independent-live/dom-robin.txt`、SHA `2bcb5512…`）で、生成元との差は許可したExcel A1値とSaveAs先の2行だけ（改行を除く範囲外差分0）。
+
+Console UIAの新規フロー経路で `RobinKnowledgeT10IndependentCurrentBundleLive20260914e`（Designer PID 20008、タイトル完全一致）を作成し、DOM Robinを無修正で貼付け・保存・再コピーした。初回貼付けヘルパーは60秒時点でListItem 6件のためタイムアウトしたが、同じ貼付けの後続状態でDesigner集計 `16 アクション` が現れたため再送しなかった。保存後／Run2後の再コピーは同一SHA（CRLF・末尾LF）で、生成Robinとは正規化後のみ一致する。
+
+2回Runとも成功し、各Run前に出力を専用`.work`へスナップショットした。Run1/2ともExcel A1=`T10-Changed`、Word本文=`CopilotOffice 246`、PowerPoint本文=`CopilotOffice 246`を確認し、元のExcel/Word/PowerPoint出力はバックアップSHAへ復元した。これはT10の機能実行と許可内容範囲の受入である。入力元（CRLF・末尾LFなし）→生成（LF・末尾LFあり）→PAD再コピー（CRLF・末尾LFあり）の生バイト一致は成立せず、改行正規化や復元による厳密PASS化は行わない。厳密保持は`NOT_PROVEN`として残し、詳細は`catalog/evidence/t10-independent-current-generation-20260914e.json`、`catalog/evidence/t10-independent-current-pad-*.json`、`.work/t10-independent-20260914e/run1`／`run2`。Issue #5/#27はOPEN / partial。
+
+## 2026-09-14 独立T04の生成形式補正候補
+
+T04の元試行3でDOMと保存Robinに`=>`前literalバックスラッシュが現れた原因を生成回答由来として保持したまま、同版の別仮説を検証した。現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`）を新規Think Deeper通常チャットへ同版指示＋bundle実添付し、評価者用の件数・期待値を依頼本文へ渡さない補正版依頼を1回だけ送信した。公式応答（SHA `a932e7e7…`）とDOM単一`pre`（Robin SHA `dd4f39f0…43569d`、9行、plain `=>` 5、escaped `\\=>` 0）を無修正で保存した。
+
+新規空フロー `RobinKnowledgeT04IndependentCurrentBundleLive20260914eD`（PID 29660）へ貼付け・保存・再コピーした。アクション一覧は仮想化で表示6件だったが、Designer集計 `9 選択されたアクション` と再コピー9行を正としたため、`tools/Paste-PadRobinLiveByStatus.ps1` をローカライズされた集計ラベルと60秒待機へ最小修正した。無修正貼付け・保存後再コピー（CRLF正規化後一致）を確認し、2回Runとも成功。Run2 xlsxは3行3列（対象/A/10、対象/C/25、対象/D/5）で、入力fixture SHAは不変、元のT04 CSV/xlsxは復元した。
+
+Run1のxlsxスナップショットはRun2前に取得できず、追加3回目は行わなかった。したがって本件は `PASS_CURRENT_20260914E_INDEPENDENT_T04_GENERATION_PAD_TWO_RUNS_PARTIAL`／`candidate_partial` に限定し、独立T04の完全受入や元T04の昇格とはしない。厳密な入力→生成バイト保持も`NOT_ASSESSED`。詳細証跡は `catalog/generated/normal-chat-20260914e-t04-independent-live/`、`catalog/evidence/t04-independent-current-output-comparison-20260914e.json`、paste/save、recopy、run1/run2各JSON。
+
+## 2026-09-14 T08現行版生成・PAD受入
+
+現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を新規通常M365 Copilotチャット（Think Deeper、同版指示＋bundle実添付、会話 `https://m365.cloud.microsoft/chat/conversation/4b3b4dfc-8fb9-4d0c-a5de-3427be8a00eb`）へ送信した。固定依頼SHAは `79070940…`、送信本文SHAは `72b55f32…`。回答原文2,635文字（SHA `60191af3…`）と単一12行Robin（末尾LF除外SHA `d4a6b697…`）を無修正で保存した。生成回答の形式はT04の矢印エスケープとは異なり、DOM `pre.textContent` と一致した。
+
+Robinを新規専用空フロー `RobinKnowledgeT08CurrentBundleLive20260914e`（Designer PID 35772、4アクション）へ無修正貼付け・保存・再コピーし、2回Runとも成功した。両回ともアクション単位 `ON ERROR FileNotFoundError` で `NewVar=named`、`LastError` に欠損メッセージ、ブロック側 `ErrorHandled`／`ErrorHandledDefault` は未設定。欠損入力は前後とも不在で、書込み・完了マーカー・公開処理は発生しなかった。再コピーのBLOCK末尾空白差は原記録のまま保持し、正規化後一致だけを確認した。ブロック側利用者定義 `FileNotFound` の一致はNOT_PROVENであり、アクション単位の実測から一般化していない。証跡は `catalog/evidence/t08-current-bundle-live-acceptance-20260914e.json`、`catalog/evidence/t08-current-bundle-output-comparison-20260914e.json`。
+
+旧finald PASSは現行版へ付け替えていない。現行版受入済みはT01/T02/T03（修正版依頼）/T05/T06/T07/T08/T09、P3-1/P3-2/P3-3、独立T01、独立T10の機能／許可範囲。T04形式不受入、T10厳密バイト保持 `NOT_PROVEN`、独立T04、P3-4〜P3-6、負例v2、A〜G全体監査は残り、Issue #5/#27はOPEN / partialとする。
+
+## 2026-09-14 T06現行版生成・PAD受入
+
+20260913e正本（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）をThink Deeperの通常M365 Copilot新規会話 `https://m365.cloud.microsoft/chat/conversation/efc8983a-0075-4040-833a-8f06183823b4`へ、指示全文とbundleの実添付で送信した。生成された4行Robin（SHA `c0940cb3e3ddbd82880d274692858ce3e2335f623acb11abe521926e642f9fd9`、593 bytes）は無修正で新規専用空フロー `RobinKnowledgeT06CurrentBundleLive20260914e`（Designer PID 34264、HWND 397164）へ貼付け・保存・再コピーした。PAD再コピーはCRLF（597 bytes）だが、生成原文との改行正規化後一致を確認した。
+
+同フローを2回Runし、両回ともReady復帰・Start有効・エラーなし・`Word インスタンス`プレビューを確認した。合成Word本文は入力 `OfficeCatalog 日本語 100%` から出力 `T06Replaced 日本語 100%` となり、`OfficeCatalog` 0件、`T06Replaced` 1件、指定置換以外の本文一致、入力SHA `2753855b…` 不変、Wordプロセス0を直接照合した。Run 1/2のdocxパッケージSHAは異なるため、本文結果の受入であり厳密な入力→生成→PADバイト保持は主張しない。既存の同名出力は各Run前に退避し、Run後に元SHAで復元した。証跡は`catalog/evidence/t06-copilot-live-generation-20260914e.json`、`catalog/evidence/t06-copilot-live-generation-20260914e-pad-acceptance.json`、`catalog/evidence/t06-20260914e-output-comparison.json`。
+
+旧finaldのT06 PASSは履歴として保持し、今回の現行版受入へ移していない。T04の生成形式不受入、T10厳密バイト保持、独立再試験、P3正例、負例v2、A〜G全体監査は残り、Issue #5/#27はOPEN / partialとする。
+
+## 2026-09-14 T05現行版追跡昇格（新規自動名フロー）
+
+20260913e正本（instruction SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`）でT05生成を追跡した。初回回答の矢印前literalバックスラッシュは原記録として不受入保存し、同じ会話の許可済み1回リトライで取得した4行Robin（SHA `be40e6b337620f1c76ba650b202f316d4b80b339de1c859fe1cb55a9f2714911`）だけを無修正で使用した。指示・bundle実添付、依頼SHA、失敗原文は `catalog/evidence/t05-copilot-live-generation-20260913.json` から追跡できる。
+
+PADでは新規空フローへ貼付け・保存・再コピーし、2回Runとも成功。合成ExcelのB2=`T05-Changed`、A1不変、入力SHA `e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6` 不変、出力比較PASSを確認した（`catalog/evidence/t05-copilot-live-generation-20260913e-pad-acceptance.json`）。作成ダイアログの名前入力が利用可能UI経路で設定できず、フロー名は自動名 `無題 (2)` となった。新規作成・既存フロー非再利用は記録したが、明示的な人手命名を受入条件とする場合は、同じ生成Robinを編集せず、新しい一意名の空フローでPAD貼付け・2runだけを再実施する。
+
+旧finald PASSは移していない。T04生成形式不受入、T10厳密保持`NOT_PROVEN`、P3、負例、A〜G全体監査は残し、独立T10の機能／許可範囲のみ現行版へ追加した。Issue #5/#27はOPEN / partialとする。
+
+## 2026-09-14 T03現行版追跡昇格（修正版依頼のみ）
+
+20260913e正本（instruction SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）と一致するT03候補証跡を、現行版の修正版依頼受入として追跡した。依頼本文へ固定期待の`TxtCount`／`OtherCount`要件を明示しただけで、指示・知識・fixture・期待値・既存3試行原記録は変更していない。Copilotへ期待数値は渡していない。
+
+生成Robin（13行、SHA `63fe35ec8619387f08c5dd270eb226bbd944457b410e09cc2425023ff9396572`）は無修正で専用空フロー `RobinKnowledgeT03Revised20260913` へ貼付け・保存し、2回Runとも成功。`TxtCount=2`／`OtherCount=2`、`FileContents=alpha 日本語`、4入力fixture不変、PAD再コピーのCRLF正規化後一致を確認した。閉じて再オープン後の再コピーは未実施として残す。派生証跡は `catalog/evidence/t03-copilot-live-generation-20260913e-pad-acceptance.json`。
+
+これは修正版依頼に限る現行版追跡であり、元依頼（カウンター要件が本文から観測できない）や元3試行のPASSではない。T03の旧finald PASSは移していない。T04の応答由来literalバックスラッシュ不受入、T10厳密保持`NOT_PROVEN`、P3、負例、A〜G全体監査は維持し、独立T10の機能／許可範囲は別証跡で受入した。Issue #5/#27はOPEN / partialとする。
+
+## 2026-09-13e T01生成追跡
+
+現行正本の保存済み固定本文（`.work/finale-20260912/t01/sent-body.txt`、4,393文字／11,022 bytes、WAIT 1=1、WAIT 500=0）を新規通常M365 Copilotチャット`https://m365.cloud.microsoft/chat/conversation/f5106564-f9a6-4665-9b09-bd0eca6e6d01`へ送信し、回答全文2,309文字と1つのRobinコードブロック（646 bytes）を無修正で採取した。生成Robinを専用空フロー `RobinKnowledgeT01CurrentBundleLive_20260913e` へ無修正貼付け・保存・再コピーし、2回Run（成功、出力SHA一致、入力SHA不変）まで現行版で受入した。証跡は`catalog/evidence/t01-copilot-live-generation-20260913e.json`、`catalog/evidence/t01-copilot-live-generation-20260913e-pad-acceptance.json`、`catalog/evidence/t01-copilot-live-generation-20260913e-pad-output-comparison.json`。PAD再コピーはLF→CRLFの正規化一致として記録し、生成元からPADまでの厳密バイト一致は主張していない。
+
+## 2026-09-13 T10機能実行・厳密保持の派生監査
+
+既存のT10原記録（入力 `catalog/generated/office-three-apps/generated.robin`、生成DOM Robin、PAD再コピー、2回Run）を変更せず、`catalog/evidence/t10-strict-preservation-audit-20260913.json` と `tests/Test-T10StrictPreservation.ps1` で判定を分離した。機能実行は既存の2回RunとOffice成果物照合により `PROVEN_SEPARATELY`、命令内容の差分は許可された2行目（Excel A1）と4行目（SaveAs先）だけで、変更範囲外の14行は正規化後の内容として一致した。
+
+一方、入力はCRLF・末尾改行なし、生成RobinはLF・末尾改行あり、PAD再コピーはCRLF・末尾改行ありで、source→generation、source→recopy、generation→recopyの生バイトSHAは一致しない。generation→recopyはCRLF正規化後の内容一致に限定して `PROVEN_NORMALIZED_CONTENT_ONLY` と記録し、入力から生成への厳密バイト保持は `NOT_PROVEN` のまま昇格していない。回帰テストは `PASS_REGRESSION_WITH_STRICT_NOT_PROVEN`（ソース修正・自動unescape・期待値変更なし）である。従来の受入JSONにある`strict_reproduction=PROVEN`はこの正規化後再コピーの意味を超えて解釈しない。
+
 ## 2026-09-12 進捗成果のmain反映
 
 利用者の別途明示指示により、ここまでのコミット済み成果を進捗PRとして提出・squashマージする。対象は `7c26038a4daf0907c9692b788c780674cc618373` までの成果と本追記、基準mainは `de5efc1a525db0d49b4af9aa6cd6ec674ef9b4e8`。以下の「未push／PR未準備」は各時点の履歴であり、完全受入の不足判定は維持する。マージ結果はPRとIssue #5/#27に記録する。
@@ -6,6 +96,14 @@
 これはfinald最終監査の完全合格やfinale配布版への昇格を意味しない。配布正本・旧版PASSは据え置き、T10厳密保持、B/C/D/Eの限定追跡不足、finale独立T10・P3正例・負例v2・最終統合監査は未完了。両Issueはクローズしない。
 
 `.work/finale-20260912/`の候補・回答・実行原記録はローカル限定で保全し、今回のPRには含めない。本文中の同パス参照はリモートレビュー可能な原証跡ではなく、候補の受入昇格には必要な原記録の選別・ハッシュ照合・追跡追加が必要。次の単一作業はMain/P3Workerの別空フロー再利用。貼付け・各1アクションの再コピーまで取得したが、単一Main専用観測器が2サブフローを拒否し実行要求前に停止。run記録はなく、PASSには数えない。PAD全体の故障とは扱わない。
+
+## 2026-09-13e 正本固定と実機precheck
+
+T09の配布指示行39に残っていた`WAIT 500`（秒）を、実測知識と`docs/pad-live-setup.md`の単位に合わせて`WAIT 1`へ最小修正した。変更後の正本は指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`である。旧finaldの指示SHA `b4a3c24f…`に対する生成・PAD受入は履歴として保持し、新版本へ移していない。
+
+同版の通常M365 Copilotチャット（Google Chrome、Think Deeper、指示全文＋bundle実添付）を新規会話`https://m365.cloud.microsoft/chat/conversation/f1efa8e2-0c54-4797-81d5-fcb45e1c0302`で送信した。回答は参照要約のみ（Robinコード0ブロック、回答DOM 4,460文字、SHA `8cc646cce609a3b4fcdffc317b2c4a908c783ecf3948b595c56c4cda4a43b420`）で、リスト添字1、EXIT/NEXTの最近接ループ、拡張子境界、SaveAs上書き、`yyyy-MM-dd`、アクション単位`FileNotFoundError`と未確認境界を引用した。証跡は`catalog/evidence/current-bundle-20260913e-precheck.json`。これは`PASS_REFERENCE_ONLY`であり、生成Robin／PAD貼付け／実行の受入ではない。
+
+指示バイトが変わったため、20260913eのT03〜T08／T10、独立T01/T04/T10、P3正例、負例v2は未実施として残す。T01は同版通常チャット生成後、専用空フロー`RobinKnowledgeT01CurrentBundleLive_20260913e`へ無修正3行貼付け・保存・再コピー→2回Runを実施し、出力SHA一致・入力SHA不変まで確認した（`catalog/evidence/t01-copilot-live-generation-20260913e-pad-acceptance.json`）。T02は同版通常チャット生成後、専用空フロー`RobinKnowledgeT02CurrentBundle_20260913`へ3行を無修正貼付け・保存・再コピー→2回Runを実施し、CSV出力一致・入力SHA不変を確認した。これは9/13に取得済みの候補原記録を現行版へ追跡昇格した派生証跡であり、再送・再Run・期待値変更は行っていない（`catalog/evidence/t02-copilot-live-generation-20260913e-pad-acceptance.json`）。T09は同版の通常チャット生成後、専用空フロー`RobinKnowledgeT09CurrentBundleLive20260913e`でControlRepository登録→登録6アクション削除→生成6行の無修正貼付け・保存→再コピー→2回Runを実施し、両回`T09-clicked`、Ready、エラーなし、PAD起動Edge残存なしを確認した（`catalog/evidence/t09-20260913e-pad-acceptance.json`）。初回30秒ヘルパー試行は実行中のまま証跡を出さず、完了後も受入回へ数えず、状態確定後に2回を取り直した。T03補正依頼の2run成功は同一SHAの候補追跡として保持し元依頼の受入へ付け替えず、T04の応答由来エスケープ不受入、T10厳密保持`NOT_PROVEN`も維持する。Issue #5/#27はOPEN／partialのままとする。
 
 今回の提出前確認：CurrentStatus46項目PASS。検査コード不変の直前非ライブAll36/36 PASSを再利用し、今回の再実行とはしない。監査修正差分のdiff --checkはPASS、基準mainからの全差分では原証跡2行の末尾空白を保全する。DOMはNOT_RUN、GitHub CIはPRの実際の状態を別途確認する。保護未追跡資料はSHA e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699のまま保持する。
 
@@ -489,6 +587,8 @@ PAD再コピーはrun2後も同一SHA `845c54cc905e50dcb9f8b9d7e55aeba3cb639bee1
 
 同一会話の「再試行」も1コードブロック・9行・1,585 bytes・SHA `feea538a6dd9018554d162400f50d4cd07abe90ed43ef6cca864812ac626be1e`で、矢印の literal バックスラッシュを保持した。生成結果は手修正せず、2試行とも `generated_format_not_accepted`、PAD貼付け・保存・実行なしと判定した（`catalog/evidence/t04-copilot-live-generation-20260913-attempt1.json`、`attempt2.json`）。既存finaldのT04成功を今回候補へ付け替えず、候補statusは`FROZEN_CANDIDATE_NOT_ACCEPTED`、Issue #5/#27はOPEN／partialを維持する。
 
+追加仮説として、同じ指示SHA・bundle SHA・Think Deeper・2添付を維持した新規会話（`https://m365.cloud.microsoft/chat/conversation/fd0a3c67-b305-46a4-92f9-80109bd11611`）へ1回だけ送信した。応答は1コードブロック・9行・1,585 bytes・SHA `feea538a6dd9018554d162400f50d4cd07abe90ed43ef6cca864812ac626be1e`で、DOMの`pre code`文字列にも5箇所の`=\>`が現れ、保存RobinとDOM SHAが一致した。新規会話でも同じ矢印エスケープが再現したため、既存会話・ローカル保存経路に限定された現象ではなく、生成回答由来の形式不履行と切り分けた。入力／出力パスの変更は依頼本文で明示した範囲のみであり、生成Robinは無修正保全、PAD貼付け・保存・実行は行っていない。証跡は`catalog/evidence/t04-copilot-live-generation-20260913-attempt3.json`、`.robin`、`.response.txt`、`.sent-body.txt`、`catalog/evidence/t04-next-hypothesis-20260913e.json`。
+
 ## 2026-09-13 T05候補の同版生成・再試行
 
 候補と同じ指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、Think Deeper、2添付でT05（合成ExcelのB2単一セル書込み→別名保存）を通常M365 Copilotへ送信した。会話URLは`https://m365.cloud.microsoft/chat/conversation/e360f2ad-f623-4290-8e92-7f68e999c9e2?es=SSR`。初回応答は1コードブロック・4行・564 bytes・SHA `299628c3cb205aa8219d23f005b4a7fe99ac76518ce688f497368ccfd87524ca`で、`Instance=\> ExcelInstance`のliteralバックスラッシュを含んだため、原文をそのまま不受入保存した。
@@ -502,3 +602,25 @@ PAD再コピーはrun2後も同一SHA `845c54cc905e50dcb9f8b9d7e55aeba3cb639bee1
 2回のRunはともに準備完了復帰・開始再有効化を確認した。出力`catalog/evidence/normal-chat-t05-final.xlsx`は両回でB2=`T05-Changed`、A1は入力と同値、入力SHA `e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6`は不変だった。Excelが保存時に更新するOOXMLメタデータのため出力SHAはrun1 `44940c8d1a940a5ead0494a533a4461a97b2522d935e90c9ec66ee23fe08c6e9`（9005 bytes）からrun2 `2d7f921b1bafb1dd36d5de691cf37d2016ed3a6ceb47b50e01f3ac7a2c285358`（9006 bytes）へ変化したが、セル値と「B2だけを変更」の照合は一致した。詳細は`catalog/evidence/t05-copilot-live-generation-20260913-pad-run-1.json`、`...-run-2.json`、`catalog/evidence/normal-chat-t05-output-comparison-20260913.json`。
 
 run2後のPAD再コピー`catalog/evidence/t05-copilot-live-generation-20260913-pad-recopy-after-run2.robin`（および初回再コピー）は、生成原文とbyte一致（4行563 bytes、SHA `be40e6b337620f1c76ba650b202f316d4b80b339de1c859fe1cb55a9f2714911`）した。統合証跡は`catalog/evidence/t05-copilot-live-generation-20260913-pad-acceptance.json`。T05候補単体は生成・無修正貼付け・保存・2run・期待値照合・再コピーまで`PROVEN`とするが、保護候補statusは更新せず、T03/T04/T06〜T09、独立・負例・全体監査は未完了である。従って候補statusは`FROZEN_CANDIDATE_NOT_ACCEPTED`、Issue #5/#27は`OPEN／partial`を維持する。
+
+## 2026-09-14 現行版P3-5生成・PAD受入
+
+現行正本20260913e（instruction `6ad6f742…`／bundle `79245787…`）を通常M365 Copilot新規会話 `https://m365.cloud.microsoft/chat/conversation/a505b6cc-1517-4959-8978-63f495d900c6`へThink Deeper・同版2実添付で1回送信した。評価者用期待値は渡さず、応答DOMの単一preから2行Robinを無修正で保存した。専用空フロー `RobinKnowledgeP35CurrentBundleLive20260914e`（Designer PID 34916）へ貼付け・保存・再コピーし、権威サマリー`2 選択されたアクション`を確認した。2回Runとも成功し、変数プレビューで`FormattedDateTime2=2026-09-14`を確認した。生成SHA `004ef2f3…`、PAD再コピーSHA `19cf8878…`はCRLFシリアライズ差のみで正規化一致し、生バイト一致は主張しない。要求本文は実行日の日付を検証する同版入力であり、`yyyy-MM-dd`以外の書式トークン、既存変換アクション編集経路、元入力から生成への厳密保持は未証明である。paste helperはタイムアウトしたが、同じ1回貼付けのDesigner状態をUIAで独立確認し、再貼付けはしていない。証跡は`catalog/evidence/p35-current-bundle-live-20260914e.json`、`p35-current-pad-paste-save-20260914e.json`、`p35-current-pad-run1-20260914e.json`、`p35-current-pad-run2-20260914e.json`。旧P3-5 PASSは現行版へ移していない。P3-6、T04形式、T10厳密保持、負例v2、A〜G監査は残件で、Issue #5/#27はOPEN / partialを維持する。
+
+## 2026-09-14 現行版P3-6の送信・実機PAD受入
+
+現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を、通常M365 Copilot新規会話 `https://m365.cloud.microsoft/chat/conversation/724624ae-3f2d-4c82-92a6-f4e40a51f64d`へThink Deeperで1回送信した。指示全文は本文へ含め、同版bundleを実添付した。評価者用正解コード・期待値・Issue本文は渡していない。固定P3-6依頼（依頼SHA `b328ce94…`、末尾LFを除く意味SHA `972c80a0…`）を全文で含むcomposer本文の意味SHAは `bd47ec51…`、送信回数は1回だった。
+
+応答DOMの単一`pre`から12行のエラー処理Robinを無修正で保存した（生成SHA `a1544f08…`、458 bytes）。`ON ERROR FileNotFoundError`のアクション単位処理で`NewVar=named`と欠損LastErrorを得る構造を含み、ブロック側利用者定義`FileNotFound`の一致や`ErrorHandled`／`ErrorHandledDefault`設定は実測で成立していない。生成回答・DOM・依頼・添付ハッシュは `catalog/evidence/p36-current-bundle-live-20260914e.json` と `catalog/generated/normal-chat-20260914e-p36-current-live/` に原記録を保全した。
+
+専用空フロー `RobinKnowledgeP36CurrentBundleLive20260914e`（Designer PID 19332）へ生成Robinを無修正で1回貼付け・保存・再コピーした。Designer権威集計は`4 アクション`で、再コピーは先頭`BLOCK`末尾空白とCRLFの差を含む471 bytes（SHA `ae5bcb55…`）だった。最初のpaste helperには12行をアクション数として渡してタイムアウトしたが、これは入力パラメータの不整合であり生成失敗ではない。空フロー確認後の同一1回貼付けをUIAで確認して保存し、重複貼付け・自動unescape・手修正は行っていない。
+
+PADを2回Runし、両回とも成功、`NewVar=named`、`LastError`に`見つかりません`を確認した。欠損fixtureはRun前後とも不在で、ブロック側ルール一致・生成からPADまでの生バイト厳密一致は`NOT_PROVEN`のまま残す。P3-6は現行版の生成・無修正貼付け・保存・2回機能受入へ追加するが、T04形式、T10厳密保持、負例v2、最終A〜G監査は未完了で、Issue #5/#27はOPEN / partialを維持する。
+
+## 2026-09-14 T01現行版独立再試験
+
+現行正本20260913e（instruction SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を、通常M365 Copilotの新規会話 `f0af1bd2-f257-4ba4-9b22-c3da0cce9ef9`（Think Deeper、指示＋bundle実添付）で独立T01依頼へ適用した。公式「応答のコピー」で得た応答は2321文字、DOM上の`pre`は1件・3行・646 bytes（SHA `2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47`）で、生成Robinは無修正で保存した。公式コピー本文SHA（末尾LFなし）は`3e50575fc8bb7406e248140b1d7f47639faa185ceec0f21a3ef04cfb576659cc`として、DOM原文・ローカル保存の末尾LF差と分離記録している。
+
+生成Robinを新規専用空フロー `RobinKnowledgeT01IndependentCurrentBundleLive20260914e`（Designer PID 31848）へ無修正貼付け・保存・再コピーし、3アクションを確認した。PAD再コピーは649 bytes・CRLF（SHA `d2a7f74e6b5038557a5b0eeca1bde4468f4d4fc402a9baaf95ba7fe5e91a317b`）で、生成原文との差はCRLFのみ（正規化後一致）だった。2回Runとも準備完了復帰し、出力は各90 bytes・SHA `2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2`、入力SHA `2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f`は不変。既存出力はRun前後に退避・同一SHAで復元した。証跡は `catalog/evidence/t01-independent-current-output-comparison-20260914e.json`、paste/save、recopy、run1/run2、生成ディレクトリ `catalog/generated/normal-chat-20260914e-t01-independent-live/`。
+
+この独立T01は現行版で`PASS_CURRENT_20260914E_INDEPENDENT_PAD_ACCEPTED`とするが、生成元→PADの厳密バイト保持は評価していない（CRLF正規化後一致のみ）。T04形式不受入、T10厳密バイト保持、独立T04/T10、P3正例、負例v2、A〜G全体監査は残り、Issue #5/#27はOPEN / partialを維持する。

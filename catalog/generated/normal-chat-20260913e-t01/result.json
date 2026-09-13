@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "case_id": "T01",
+  "version": "20260913e",
+  "status": "pad_accepted_current_version",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/f5106564-f9a6-4665-9b09-bd0eca6e6d01",
+  "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+  "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+  "response_path": "response.txt",
+  "robin_path": "robin.txt",
+  "response_chars": 2309,
+  "robin_bytes": 646,
+  "robin_sha256": "2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47",
+  "code_block_count": 1,
+  "raw_unmodified": true,
+  "pad_acceptance": "PASS_CURRENT_20260913E_PAD_ACCEPTED",
+  "pad_flow_name": "RobinKnowledgeT01CurrentBundleLive_20260913e",
+  "pad_acceptance_evidence": "../../evidence/t01-copilot-live-generation-20260913e-pad-acceptance.json",
+  "pad_output_comparison": "../../evidence/t01-copilot-live-generation-20260913e-pad-output-comparison.json",
+  "pad_runs": 2,
+  "pad_recopy_after_save": "pad-recopy-after-save.robin",
+  "pad_recopy_after_run2": "pad-recopy-after-run2.robin",
+  "notes": [
+    "Normal M365 Copilot chat; current instruction and knowledge bundle were attached.",
+    "Think Deeper was selected.",
+    "The saved request body source was .work/finale-20260912/t01/sent-body.txt; composer display adds editor paragraph separators and invisible caret markers, so source SHA is recorded separately from the rendered composer DOM.",
+    "No generated Robin hand-edit or auto-unescape was performed."
+  ]
+}

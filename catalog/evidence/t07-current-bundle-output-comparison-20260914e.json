@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T01:26:42+09:00",
+  "case": "T07",
+  "status": "PASS_CURRENT_20260914E",
+  "flow_name": "RobinKnowledgeT07CurrentBundleLive20260914e",
+  "input": {
+    "path": "catalog/fixtures/pdf/source-a.pdf",
+    "sha256_before": "f5f246849a31e2797f998e426f459ac18b7260ed76206ab987950a1bf80c348d",
+    "sha256_after_run2": "f5f246849a31e2797f998e426f459ac18b7260ed76206ab987950a1bf80c348d",
+    "unchanged": true
+  },
+  "protected_output": {
+    "path": "catalog/evidence/normal-chat-t07-final.txt",
+    "before_sha256": "f7e592cc86719c395657ddffe2bf76ec7538c7d4deb7edb03fae7a5d90ba5fe2",
+    "restored_after_run2_sha256": "f7e592cc86719c395657ddffe2bf76ec7538c7d4deb7edb03fae7a5d90ba5fe2",
+    "restored": true,
+    "backup": "catalog/generated/normal-chat-20260914e-t07-live/protected-output-before.txt"
+  },
+  "outputs": [
+    {
+      "run": 1,
+      "path": "catalog/generated/normal-chat-20260914e-t07-live/output-run1.txt",
+      "sha256": "f7e592cc86719c395657ddffe2bf76ec7538c7d4deb7edb03fae7a5d90ba5fe2",
+      "bytes": 135,
+      "contains_PAGE_TOKEN_A2": true,
+      "contains_PAGE_TOKEN_A1": false
+    },
+    {
+      "run": 2,
+      "path": "catalog/generated/normal-chat-20260914e-t07-live/output-run2.txt",
+      "sha256": "f7e592cc86719c395657ddffe2bf76ec7538c7d4deb7edb03fae7a5d90ba5fe2",
+      "bytes": 135,
+      "contains_PAGE_TOKEN_A2": true,
+      "contains_PAGE_TOKEN_A1": false
+    }
+  ],
+  "same_output_across_runs": true,
+  "acceptance": "PASS_CURRENT_20260914E"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T06:17:48+09:00",
+  "flow_name": "RobinKnowledgeP34CurrentBundleLive20260914e",
+  "process_id": 30620,
+  "designer_title": "Power Automate | RobinKnowledgeP34CurrentBundleLive20260914e",
+  "source_robin": "catalog/generated/normal-chat-20260914e-p34-current-live/generated-robin.txt",
+  "source_sha256": "d67dba359ed2a23790e52df236da7bdc2543ec3beeaa360fcea528a811a1e9e4",
+  "source_bytes": 565,
+  "empty_before_paste": true,
+  "paste_confirmed": true,
+  "designer_action_count": 4,
+  "visible_action_count": 4,
+  "designer_status": "4 選択されたアクション",
+  "virtualized_list_false_negative": false,
+  "saved_confirmed": true,
+  "manual_edit": false,
+  "automatic_unescape": false,
+  "initial_helper_observation": "The status-based paste helper did not emit JSON before its timeout; the same single paste was independently observed at the authoritative 4-action status and was not repeated.",
+  "recopy": {
+    "path": "catalog/generated/normal-chat-20260914e-p34-current-live/pad-recopy.robin",
+    "sha256": "f10a25186665e9295c2b7c9bdb19158f481536cc6bb0c6dbc2523c2dc39c902c",
+    "bytes": 569,
+    "raw_byte_equal": false,
+    "crlf_normalized_equal": true
+  },
+  "execution_requested": false,
+  "notes": "Save-PadFlowLive completed on the same PID and flow title. PAD recopy is CRLF-serialized; no generated Robin text was hand edited or automatically unescaped."
+}
