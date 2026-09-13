@@ -1,0 +1,55 @@
+以下は、合成PDFの2ページ目だけを抽出し、UTF-8テキストとして保存する2アクション構成です。PAD 2.71.115.26224、日本語UI、Power Fx OFFの環境で、同じ入力・出力パスによる貼り付け、保存、2回の実行、期待値照合まで確認された原文を使用しています。根拠は PAD-Robin-Knowledge-Bundle.txt 内の catalog/generated/normal-chat-t07-20260910-final/robin.txt です。
+
+1. 前提・対象範囲
+入力PDF: C:\Users\yuuki\ai-prompts\catalog\fixtures\pdf\source-a.pdf
+抽出対象: 2ページ目のみ
+ページ指定: FromPageNumber: 2、ToPageNumber: 2
+レイアウト検出: False
+抽出結果変数: ExtractedPDFText、テキスト型
+出力先: C:\Users\yuuki\ai-prompts\catalog\evidence\normal-chat-t07-final.txt
+出力形式: UTF-8
+追加改行: なし。抽出結果自体の改行やページ境界を推測で整形しません。
+入力PDFは読み取り対象であり、変更・保存しません。
+出力ファイルがすでに存在する場合は、Overwrite により上書きします。残す必要がある既存出力は実行前に退避してください。
+
+この構成では、ページ2の識別文字 PAGE_TOKEN_A2 を含み、ページ1の識別文字 PAGE_TOKEN_A1 を含まないことが、過去の2回の実行で確認されています。
+
+2. PADで先に確認する設定・依存
+入力PDFが指定パスに存在し、別の同名ファイルへ置き換えられていないことを確認します。
+出力フォルダー C:\Users\yuuki\ai-prompts\catalog\evidence が存在することを確認します。
+PADの対象サブフローを開き、置換したいアクション範囲を選択します。新規フローの場合はMainの空白部分へ貼り付けます。
+PDFインスタンス、Officeインスタンス、UI要素は不要です。
+出力先に同名ファイルがある場合、今回の設定では確認ダイアログなしに内容を置き換える前提です。
+3. 貼り付け用Robin
+
+対象サブフロー: Main
+ 置換範囲: PDF抽出とテキスト保存を行う2アクション。新規フローではMainの先頭へ貼り付けます。
+
+Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 2 DetectLayout: False ExtractedText=> ExtractedPDFText
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt''' TextToWrite: ExtractedPDFText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+4. デザイナー上での確認
+
+貼り付け直後に、次を確認してください。
+
+アクション数が2である。
+1番目が「PDF からテキストを抽出」で、ページ範囲が開始2、終了2になっている。
+1番目の生成変数が ExtractedPDFText である。
+2番目が「テキストをファイルに書き込む」である。
+「書き込むテキスト」が文字列リテラルではなく、変数 ExtractedPDFText の参照になっている。
+エンコードがUTF-8である。
+「新しい行を追加する」がオフ、つまり AppendNewLine: False である。
+「ファイルが存在する場合」が上書きである。
+デザイナーに赤いエラー表示がなく、2アクションの順番が入れ替わっていない。
+ループや条件ブロックはないため、END の対応確認は不要。
+5. 実行と期待結果の照合
+入力PDFを複製する必要がある場合は、別名の合成データとして複製し、Robin内の入力パスをPAD画面から設定し直して再コピーしてください。今回は指定された既存fixtureをそのまま読む実測原文です。
+出力ファイルを残したい場合は、既存の normal-chat-t07-final.txt を事前に退避します。
+フローを保存して実行します。
+実行後、ExtractedPDFText がテキスト変数として生成されていることを確認します。
+出力ファイルをUTF-8対応のエディターで開き、PAGE_TOKEN_A2 が含まれることを確認します。
+PAGE_TOKEN_A1 が含まれていないことも確認します。
+ページ境界、改行、抽出順を人手で整形せず、PADが返した抽出テキストと保存内容をそのまま照合します。
+再実行すると同じ出力先を上書きします。再実行後も識別文字による内容照合を行い、ファイルが存在するだけで成功とは判定しません。
+
+この原文の記録SHA-256は 47a33ef2067bd37009187758e16fc36daa0f5447093b51e83e984e1d8fd484c9 で、貼り付け証拠と実行証拠はそれぞれ catalog/evidence/normal-chat-t07-final-paste.json、catalog/evidence/normal-chat-t07-final-run-1.json に対応しています。

@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "captured_at": "2026-09-14T00:26:31+09:00",
-  "status": "partial_current_package_20260913e_T01_T02_T03_T05_T06_T09_accepted",
+  "status": "partial_current_package_20260913e_T01_T02_T03_T05_T06_T07_T09_accepted",
   "issue_state": "OPEN",
   "version": {
     "label": "20260913e",
@@ -236,6 +236,31 @@
     },
     "T07": {
       "status": "PASS_FINALD_20260912",
+      "current_version_generation": {
+        "status": "PASS_CURRENT_20260914E_GENERATION",
+        "result": "../generated/normal-chat-20260914e-t07-live/result.json",
+        "evidence": "evidence/t07-current-bundle-live-acceptance-20260914e.json",
+        "conversation": "https://m365.cloud.microsoft/chat/conversation/977c8a85-70bf-45e4-bcb5-8d9f0c3775b9",
+        "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "prompt_sha256": "d23350b198b9499cb95a42da30104cad6bd5e1419adf928bf400189583438942",
+        "robin_sha256_without_trailing_lf": "47a33ef2067bd37009187758e16fc36daa0f5447093b51e83e984e1d8fd484c9",
+        "raw_unmodified": true
+      },
+      "current_version_pad": {
+        "status": "PASS_CURRENT_20260914E_PAD_ACCEPTED",
+        "evidence": "evidence/t07-current-bundle-live-acceptance-20260914e.json",
+        "output_comparison": "evidence/t07-current-bundle-output-comparison-20260914e.json",
+        "flow_name": "RobinKnowledgeT07CurrentBundleLive20260914e",
+        "designer_pid": 32864,
+        "action_count": 2,
+        "runs_completed": 2,
+        "input_unchanged": true,
+        "output_expected_match": true,
+        "recopy_crlf_normalized_equal": true,
+        "strict_source_to_pad_bytes": "NOT_CLAIMED",
+        "protected_output_restored": true
+      },
       "result": "../generated/normal-chat-finald-20260912-t07/result.json",
       "evidence": "evidence/t07-finald-20260912-live-acceptance-20260912.json",
       "conversation": "https://m365.cloud.microsoft/chat/conversation/843d49d4-b2e6-452c-884b-5a44d646a4e2",
@@ -505,8 +530,8 @@
     "evidence": "evidence/current-package-status-20260912-finald.json"
   },
     "new_version_acceptance": {
-      "status": "PRECHECK_PLUS_T01_T02_T03_T05_T06_T09_PAD_ACCEPTED;_T04_T07_T08_T10_INDEPENDENT_P3_NEGATIVE_NOT_RUN",
-      "accepted_current_version_cases": ["T01", "T02", "T03", "T05", "T06", "T09"],
+      "status": "PRECHECK_PLUS_T01_T02_T03_T05_T06_T07_T09_PAD_ACCEPTED;_T04_T08_T10_INDEPENDENT_P3_NEGATIVE_NOT_RUN",
+      "accepted_current_version_cases": ["T01", "T02", "T03", "T05", "T06", "T07", "T09"],
       "precheck": "evidence/current-bundle-20260913e-precheck.json",
       "t09_acceptance": "evidence/t09-20260913e-pad-acceptance.json",
       "t01_generation": "evidence/t01-copilot-live-generation-20260913e.json",
@@ -519,9 +544,11 @@
       "t05_acceptance": "evidence/t05-copilot-live-generation-20260913e-pad-acceptance.json",
       "t06_generation": "evidence/t06-copilot-live-generation-20260914e.json",
       "t06_acceptance": "evidence/t06-copilot-live-generation-20260914e-pad-acceptance.json",
+      "t07_generation": "evidence/t07-current-bundle-live-acceptance-20260914e.json",
+      "t07_acceptance": "evidence/t07-current-bundle-live-acceptance-20260914e.json",
       "candidate_followup": "evidence/t03-revised-input-live-acceptance-20260913.json; evidence/t04-copilot-live-generation-20260913-diagnosis.json",
       "strict_t10": "NOT_PROVEN",
-      "required_next": "Run missing fresh 20260913e normal-chat generation and unmodified PAD acceptance for T07, T08 and T10; T04 generation is stopped after the fresh-origin failure and requires a version change or separately authorized origin test before any new send; then independent T01/T04/T10, P3 positive cases, and negative suite v2; do not reuse historical finald PASS. T03 is accepted only for the explicit corrected request and is not a pass for the original request without observable counters. T05 uses a newly-created but auto-named flow; if an explicitly named-flow gate is required, repeat only its PAD gate in a fresh uniquely named flow. T10 strict raw-byte preservation remains a separate NOT_PROVEN gate."
+      "required_next": "Run missing fresh 20260913e normal-chat generation and unmodified PAD acceptance for T08 and T10; T04 generation is stopped after the fresh-origin failure and requires a version change or separately authorized origin test before any new send; then independent T01/T04/T10, P3 positive cases, and negative suite v2; do not reuse historical finald PASS. T03 is accepted only for the explicit corrected request and is not a pass for the original request without observable counters. T05 uses a newly-created but auto-named flow; if an explicitly named-flow gate is required, repeat only its PAD gate in a fresh uniquely named flow. T10 strict raw-byte preservation remains a separate NOT_PROVEN gate."
     },
-    "result": "Current canonical package is 20260913e with WAIT 1/WAIT 1 alignment, a live reference-only precheck, and current-version T01, T02, T03 (explicit corrected request), T05, T06, and T09 PAD acceptance. Historical finald 79245787 acceptance is preserved but not transferred; T04 remains not accepted, T10 functional execution and the authorized two-line content scope are proven separately while strict raw-byte preservation remains NOT_PROVEN; full same-version case acceptance remains OPEN / partial."
+    "result": "Current canonical package is 20260913e with WAIT 1/WAIT 1 alignment, a live reference-only precheck, and current-version T01, T02, T03 (explicit corrected request), T05, T06, T07, and T09 PAD acceptance. Historical finald 79245787 acceptance is preserved but not transferred; T04 remains not accepted, T10 functional execution and the authorized two-line content scope are proven separately while strict raw-byte preservation remains NOT_PROVEN; full same-version case acceptance remains OPEN / partial."
 }
