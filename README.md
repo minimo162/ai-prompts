@@ -1,5 +1,7 @@
 # PAD Robin Copilotエージェント用 指示文・ナレッジ
 
+> 2026-09-13e追補: 正本は指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`／bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`。同版T09は実機PAD受入済み、T01は通常チャット生成を採取済みだがPAD受入待ちです。旧finald PASSは新版本へ継承せず、Issue #5/#27はOPEN / partialを維持します。
+
 > 2026-09-12 最終監査: 固定finaldの生成受入は維持。A〜Gの一部に別空フロー再利用等の保存証跡未特定があり、親Issue全体はpartial、PR提出準備は未完了です。[監査結果・不足・PR案](docs/robin-knowledge-validation.md)。
 
 このリポジトリの今回の成果物は、PADの実測Robinを根拠にMicrosoft 365 Copilotエージェントがフロー案を生成・修正するための配布物です。入口は [copilot/README.md](copilot/README.md) です。指示欄へ貼る文章は [copilot/agent-instructions.txt](copilot/agent-instructions.txt)、登録用ナレッジと手順は `copilot/knowledge/` にあります。PAD・Copilotを自動実行する新しいアプリは作りません。

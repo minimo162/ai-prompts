@@ -36,6 +36,15 @@
     },
     "T01": {
       "status": "PASS_FINALD_20260912",
+      "current_version_generation": {
+        "status": "PASS_CURRENT_20260913E_GENERATION_ONLY",
+        "result": "../generated/normal-chat-20260913e-t01/result.json",
+        "evidence": "evidence/t01-copilot-live-generation-20260913e.json",
+        "conversation": "https://m365.cloud.microsoft/chat/conversation/f5106564-f9a6-4665-9b09-bd0eca6e6d01",
+        "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "pad_acceptance": "NOT_RUN"
+      },
       "result": "../generated/normal-chat-finald-20260912-t01/result.json",
       "evidence": "evidence/t01-finald-20260912-live-acceptance-20260912.json",
       "conversation": "https://m365.cloud.microsoft/chat/conversation/c49e5b51-32a1-456b-8b2f-49ae66bc2310",
@@ -378,10 +387,11 @@
     "evidence": "evidence/current-package-status-20260912-finald.json"
   },
     "new_version_acceptance": {
-      "status": "PRECHECK_PLUS_T09_PAD_ACCEPTED;_T01_T08_T10_INDEPENDENT_P3_NEGATIVE_NOT_RUN",
+      "status": "PRECHECK_PLUS_T09_PAD_ACCEPTED;_T01_GENERATION_ONLY_PAD_PENDING;_T02_T08_T10_INDEPENDENT_P3_NEGATIVE_NOT_RUN",
       "accepted_current_version_cases": ["T09"],
       "precheck": "evidence/current-bundle-20260913e-precheck.json",
       "t09_acceptance": "evidence/t09-20260913e-pad-acceptance.json",
+      "t01_generation": "evidence/t01-copilot-live-generation-20260913e.json",
     "candidate_followup": "evidence/t03-revised-input-live-acceptance-20260913.json; evidence/t04-copilot-live-generation-20260913-diagnosis.json",
     "strict_t10": "NOT_PROVEN",
     "required_next": "Run fresh 20260913e normal-chat generation and unmodified PAD acceptance for T01-T10, independent T01/T04/T10, P3 positive cases, and negative suite v2; do not reuse historical finald PASS."

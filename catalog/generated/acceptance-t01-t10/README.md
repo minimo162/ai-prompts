@@ -1,5 +1,9 @@
 # 通常M365 Copilotチャット受入試験 T01〜T10（継続中）
 
+### 2026-09-13e T01生成追跡
+
+同版T01は、通常チャット（会話 `f5106564-f9a6-4665-9b09-bd0eca6e6d01`、Think Deeper、同版指示＋bundle添付）へ保存済みの固定本文を送信し、回答全文と1つのRobinコードブロックを無修正で採取しました（生成Robin 646 bytes、`catalog/evidence/t01-copilot-live-generation-20260913e.json`）。PADへの貼付け・保存・再コピー・2回Runはまだ未実施であり、旧finald T01のPASSを新版本へ移していません。
+
 ## 2026-09-13 追跡：T03依頼補正とT04形式診断（候補限定）
 
 2026-09-13eの正本は、T09指示の`WAIT 500`を知識原文と一致する`WAIT 1`へ最小修正したものです（指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）。同版の通常M365 Copilot知識precheckは`PASS_REFERENCE_ONLY`まで実機確認済みです（`catalog/evidence/current-bundle-20260913e-precheck.json`）。指示バイトが変わったため、旧finaldのT01〜T10・独立再試験・P3正例・負例v2のPASSは新版本へ移していません。

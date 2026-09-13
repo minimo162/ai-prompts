@@ -1,4 +1,8 @@
 # Robinナレッジ検証報告
+## 2026-09-13e T01生成追跡
+
+現行正本の保存済み固定本文（`.work/finale-20260912/t01/sent-body.txt`、4,393文字／11,022 bytes、WAIT 1=1、WAIT 500=0）を新規通常M365 Copilotチャット`https://m365.cloud.microsoft/chat/conversation/f5106564-f9a6-4665-9b09-bd0eca6e6d01`へ送信し、回答全文2,309文字と1つのRobinコードブロック（646 bytes）を無修正で採取した。証跡は`catalog/evidence/t01-copilot-live-generation-20260913e.json`および`catalog/generated/normal-chat-20260913e-t01/`。PAD貼付け・保存・再コピー・2回Runは未実施で、旧finald T01 PASSを新版本へ継承していない。
+
 ## 2026-09-12 進捗成果のmain反映
 
 利用者の別途明示指示により、ここまでのコミット済み成果を進捗PRとして提出・squashマージする。対象は `7c26038a4daf0907c9692b788c780674cc618373` までの成果と本追記、基準mainは `de5efc1a525db0d49b4af9aa6cd6ec674ef9b4e8`。以下の「未push／PR未準備」は各時点の履歴であり、完全受入の不足判定は維持する。マージ結果はPRとIssue #5/#27に記録する。

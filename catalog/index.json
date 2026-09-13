@@ -6265,6 +6265,22 @@
       "conversation": "https://m365.cloud.microsoft/chat/conversation/ad60fa85-140a-40d9-8546-09e0a2c4c54b"
     },
     {
+      "id": "normal-chat-20260913e-t01",
+      "date": "2026-09-13",
+      "browser": "Google Chrome normal M365 Copilot chat",
+      "model": "Think Deeper",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+      "cases": ["T01"],
+      "scope": "20260913e canonical package: fresh normal chat generation with same-version instruction and knowledge attachments; raw response and one Robin code block captured without hand-editing. PAD acceptance remains pending.",
+      "current_package_acceptance": false,
+      "execution_status": "pass_current_20260913e_generation_only_pad_pending",
+      "manifest": "../copilot/knowledge-bundle-manifest-20260913e.json",
+      "generated": "generated/normal-chat-20260913e-t01/result.json",
+      "evidence": "evidence/t01-copilot-live-generation-20260913e.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/f5106564-f9a6-4665-9b09-bd0eca6e6d01"
+    },
+    {
       "id": "normal-chat-t01-candidate-live-generation-2026-09-13",
       "date": "2026-09-13",
       "browser": "Codex In-app Browser normal Microsoft 365 Copilot chat",
