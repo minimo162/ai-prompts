@@ -334,7 +334,7 @@ PADを実機で起動し、Bの専用フロー`RobinKnowledgeSubflowReuse_202609
 
 Cは行追加・セル更新・行反復、DはFile.Exists・File.Move・File.RenameFiles、EはExcel foreachを各専用別空フローへ無修正貼付けした。各フローで保存、2run、再コピーを完了した。C行は2行3列と`B / 20 / 対象2`、セルは列2／行0→`CellChanged`と1行3列、foreachは2行3列の最終行を両runで確認。D File.Move／RenameFilesはsourceを復元して2回目を衝突条件にし、DoNothingで出力`[]`、同一ハッシュを確認した。D File.Existsでは最初の誤ったaction-count期待値（IF＋ENDを1と想定）を成功証跡に付け替えず、正しい2項目で再試行フローを作成して採取した。EはA1:C6をTypedValuesで読み、`ExcelData=6行, 3列`、最終行`対象外 / E / 40`、Excel終了を両runで確認した。合成ファイルは各実行後に元の存在状態へ復元し、作成した退避は`.work`内に保持した。
 
-新規証跡は`catalog/evidence/*reuse-20260913-*`、索引は`catalog/index.json`、カバレッジは`catalog/coverage.json`へ追記した。別空フローprobeの成功であり、現行bundle同一版のCopilot/T01-T10再受入、T10厳密改行保持、B名前付きFileNotFoundルール一般化、G/T09の残件を完了扱いにはしない。Issue #5/#27はOPEN／partial、push・PR・mergeは未実施である。
+新規証跡は`catalog/evidence/*reuse-20260913-*`、索引は`catalog/index.json`、カバレッジは`catalog/coverage.json`へ追記した。Bは保存後に一度閉じ、Console検索から再オープンした新PID 27424/HWND 1313702でMain/P3Workerを再観測し、両rawを再コピーして元再コピーとSHA一致した（`catalog/evidence/p3-subflow-reuse-20260913-reopen-recopy.json`）。別空フローprobeの成功であり、現行bundle同一版のCopilot/T01-T10再受入、T10厳密改行保持、B名前付きFileNotFoundルール一般化、G/T09の残件を完了扱いにはしない。Issue #5/#27はOPEN／partial、push・PR・mergeは未実施である。
 
 ## 2026-09-13 Bサブフロー再利用の観測器補完（開始時記録）
 

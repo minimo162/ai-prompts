@@ -11,7 +11,7 @@
 
 ## 2026-09-13 PAD別空フロー再利用（B/C/D/E）
 
-PADを実機で起動し、固定した別空フローへ既存のraw Robinを無修正で貼付け、保存、2回実行、保存後再コピーまで進めた。Bは`RobinKnowledgeSubflowReuse_20260913_1534`でMain／P3Workerを再配置し、両runとも`ButtonPressed=OK`、Ready、errors=0を確認した。終了後に再オープンしてMain／P3Workerの各1アクションを再観測し、再コピーを取得した。観測器はP3Worker選択後もRun状態を読むよう補完し、1回目・2回目ともPAD DataCollectionの`robin.execution.success`と`OK`プレビューを別々に記録した。実行結果JSONは`catalog/evidence/p3-subflow-reuse-20260913-run1.json`／`run2.json`に固定している。
+PADを実機で起動し、固定した別空フローへ既存のraw Robinを無修正で貼付け、保存、2回実行、保存後再コピーまで進めた。Bは`RobinKnowledgeSubflowReuse_20260913_1534`でMain／P3Workerを再配置し、両runとも`ButtonPressed=OK`、Ready、errors=0を確認した。終了後にConsoleから再オープンした新PIDでMain／P3Workerの各1アクションを再観測し、再コピーを取得した（`catalog/evidence/p3-subflow-reuse-20260913-reopen-recopy.json`）。観測器はP3Worker選択後もRun状態を読むよう補完し、1回目・2回目ともPAD DataCollectionの`robin.execution.success`と`OK`プレビューを別々に記録した。実行結果JSONは`catalog/evidence/p3-subflow-reuse-20260913-run1.json`／`run2.json`に固定している。
 
 Cは行追加・セル更新・行反復、Dは存在確認・移動・名前変更、EはExcel行反復をそれぞれ専用別空フローで実行した。C行は2行3列と最終`B / 20 / 対象2`、Cセルは列2／行0の`CellChanged`とDataTable=1行3列、C反復は2行3列の最終行を両runで確認した。D移動・名前変更は初回成功後にsourceを復元し、2回目の`DoNothing`で出力リスト`[]`、source／destination（またはtarget）同一ハッシュを確認した。Dの合成入力は各run後に元の存在状態へ復元した。Eは`ExcelData=6行, 3列`、最終行`対象外 / E / 40`、Excelインスタンス終了を両runで確認した。各raw再コピーはPADのCRLF化のみで、LF原文との差を内容一致として正規化していない。
 
