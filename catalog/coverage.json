@@ -33,9 +33,9 @@
     "candidate_generation_20260913": {
       "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
       "knowledge_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
-      "status": "T01_T02_T10_PAD_PASTED_SAVED_TWO_RUNS_RECOPIED_PROVEN",
-      "evidence": "evidence/t01-copilot-live-generation-20260913-pad-acceptance.json; evidence/t02-copilot-live-generation-20260913-pad-acceptance.json; evidence/t10-copilot-live-generation-20260913-pad-acceptance.json",
-      "note": "Frozen finale-20260912 candidate has current-version T01, T02, and T10 generation/PAD evidence from fresh normal Copilot chats with same-version attachments, unmodified paste/save, two runs, and recopy. Package acceptance remains false because candidate-status.json is still FROZEN_CANDIDATE_NOT_ACCEPTED; T03-T09 and the independent/negative package audit remain outstanding."
+      "status": "T01_T02_T10_PAD_PASTED_SAVED_TWO_RUNS_RECOPIED_PROVEN_T03_GENERATION_NOT_ACCEPTED",
+      "evidence": "evidence/t01-copilot-live-generation-20260913-pad-acceptance.json; evidence/t02-copilot-live-generation-20260913-pad-acceptance.json; evidence/t10-copilot-live-generation-20260913-pad-acceptance.json; evidence/t03-copilot-live-generation-20260913-attempt1.json; evidence/t03-copilot-live-generation-20260913-attempt2.json; evidence/t03-copilot-live-generation-20260913-attempt3.json",
+      "note": "Frozen finale-20260912 candidate has current-version T01, T02, and T10 generation/PAD evidence from fresh normal Copilot chats with same-version attachments, unmodified paste/save, two runs, and recopy. T03 was generated three times with the same prompt/version/attachments; all raw responses were the 7-line minimum branch and omitted the expected TxtCount/OtherCount counters, so T03 has no PAD paste or run evidence. Package acceptance remains false because candidate-status.json is still FROZEN_CANDIDATE_NOT_ACCEPTED; T03-T09 and the independent/negative package audit remain outstanding."
     }
   },
   "left_panel_scope": {

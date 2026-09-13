@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T18:55:00+09:00",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/dc9a9979-7203-41dc-94fb-3183f06760eb?es=SSR",
+  "model": "Think Deeper",
+  "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+  "knowledge_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+  "prompt_source": ".work/finale-20260912/t03/prompt.txt",
+  "prompt_source_sha256": "4725b8f4154bba79770ead1fcffffdb8562e780b2461a8ffa36e112408f1bf6e",
+  "attachments": ["agent-instructions.txt", "PAD-Robin-Knowledge-Bundle.txt"],
+  "response": {
+    "code_block_count": 1,
+    "robin_path": "catalog/evidence/t03-copilot-live-generation-20260913-attempt2.robin",
+    "robin_sha256": "b86a9a9fd18d64a47c40b991b434d99ae5a49afa5c758d504bdce7b89f8ee26a",
+    "robin_bytes": 538,
+    "robin_lines": 7,
+    "trailing_lf": true,
+    "raw_unmodified": true
+  },
+  "status": "generated_minimal_not_accepted",
+  "not_accepted_reason": "The response again omits the expected TxtCount and OtherCount counter actions and its rendered Robin contains literal backslash escapes before * and =>; no PAD paste or run was performed.",
+  "retry_policy": "A further same-conversation retry was observed separately; do not edit this raw response."
+}
