@@ -358,6 +358,12 @@ Issue #5/#27の最新本文と指定コメント（`5650828099`／`5650826208`�
 
 候補生成物を実測T10原文`catalog/generated/office-three-apps/generated.robin`と行単位で比較した結果、差分は許可変更の2行（Excel A1値、Excel SaveAs出力先）のみで、許可範囲外の差分は0件だった。この比較はPAD再コピーの改行差を含む厳密再現判定とは分離して`change_scope_comparison`へ固定している。
 
+## 2026-09-13 T02候補の同版生成・PAD実行
+
+候補と同じ指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、Think Deeper、2添付でT02を新規通常M365 Copilotチャットへ送信した。会話URLは`https://m365.cloud.microsoft/chat/conversation/fa568da0-7bab-43cf-9559-e061d2bfed76?es=SSR`。生成Robinは3行・817 bytes・SHA `c3027cfaa13e191b0e784fb3a6db4c573f8bfc83fb172d1a6394d7c1f5a55c29`で、回答から無修正保存した。
+
+専用PADフロー`RobinKnowledgeT02CurrentBundle_20260913`（PID 30584、Power Fx OFF）へ原文を無修正貼付け・保存し、2回ともReady復帰、開始ボタン再有効化、3行3列→2行3列の変数プレビューを確認した。入力CSVは91 bytes・SHA `3aededf42b8bb2be71091c7cc6ed1295f1860a8450744d8779fbc8cabf6eed28`で不変、出力CSVはUTF-8 BOM付き73 bytes・SHA `8f0748cc4d149228331dfacc0a5c46e117270a7e9dee564c4f631924142cf7d3`で固定期待と一致した。保存後再コピーは820 bytes・SHA `b075a7f85928bd2ecebb5d21be81e04c84d613466f3307e2e051909f85fc5aee`で、原文との差はPADのCRLFのみ（正規化後ordinal一致）。統合証跡は`catalog/evidence/t02-copilot-live-generation-20260913-pad-acceptance.json`。T02単体の候補同版受入は成立したが、候補statusの昇格、T03〜T10・独立再試験・負例v2・T09・A〜G全体監査は未完了で、Issue #5/#27はOPEN／partialを維持する。なお作成ダイアログ操作の再試行で同名`(2)`フローも残っているが、受入対象は完全一致名の専用フローに限定し、未使用フローは削除していない。
+
 ## 2026-09-13 T01候補の同版生成・PAD実行
 
 候補と同じ指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、Think Deeper、2添付でT01を新規通常チャットへ送信した。生成Robinは3行・646 bytes・SHA `2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47`で、無修正保存した。

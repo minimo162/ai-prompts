@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T18:22:30+09:00",
+  "flow_name": "RobinKnowledgeT02CurrentBundle_20260913",
+  "pad_process_id": 30584,
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/fa568da0-7bab-43cf-9559-e061d2bfed76?es=SSR",
+  "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+  "knowledge_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+  "prompt_source": ".work/finale-20260912/t02/prompt.txt",
+  "prompt_source_sha256": "30302861c9ba0c434284be07e137d92066c3d125c71a46fdfef8c3e8af8668f84",
+  "copilot_response": {
+    "robin_path": "catalog/evidence/t02-copilot-live-generation-20260913.robin",
+    "robin_sha256": "c3027cfaa13e191b0e784fb3a6db4c573f8bfc83fb172d1a6394d7c1f5a55c29",
+    "robin_bytes": 817,
+    "robin_lines": 3,
+    "raw_unmodified": true
+  },
+  "paste": {
+    "evidence": "catalog/evidence/t02-copilot-live-generation-20260913-pad-paste.json",
+    "evidence_sha256": "c0670e9694e45bcf73985dc26861611857d7b456c4ddfbb1b8d61c0fcc611b73",
+    "paste_confirmed": true,
+    "saved_confirmed": true,
+    "action_count": 3,
+    "clipboard_restored": true
+  },
+  "runs": [
+    {
+      "evidence": "catalog/evidence/t02-copilot-live-generation-20260913-pad-run-1.json",
+      "evidence_sha256": "d5870674a08e8f7a51ef159fbc4f5140c28cf8c267590a3a681dc5e590d824a1",
+      "run_status": "success",
+      "ready_observed": true,
+      "start_enabled_after": true,
+      "variable_previews": ["3 行, 3 列", "2 行, 3 列"]
+    },
+    {
+      "evidence": "catalog/evidence/t02-copilot-live-generation-20260913-pad-run-2.json",
+      "evidence_sha256": "2998ae500e8b99f4172acd0d67240785c3117e4992247fd83574d8d4db8f4b26",
+      "run_status": "success",
+      "ready_observed": true,
+      "start_enabled_after": true,
+      "variable_previews": ["3 行, 3 列", "2 行, 3 列"]
+    }
+  ],
+  "input": {
+    "path": "catalog/fixtures/csv/t02-input-20260910.csv",
+    "sha256_before_expected": "3aededf42b8bb2be71091c7cc6ed1295f1860a8450744d8779fbc8cabf6eed28",
+    "sha256_after_runs": "3aededf42b8bb2be71091c7cc6ed1295f1860a8450744d8779fbc8cabf6eed28",
+    "bytes_after_runs": 91,
+    "unchanged_required": true,
+    "unchanged_proven": true
+  },
+  "output": {
+    "path": "catalog/evidence/normal-chat-t02-output-20260910.csv",
+    "sha256": "8f0748cc4d149228331dfacc0a5c46e117270a7e9dee564c4f631924142cf7d3",
+    "expected_sha256": "8f0748cc4d149228331dfacc0a5c46e117270a7e9dee564c4f631924142cf7d3",
+    "bytes": 73,
+    "expected_match": true,
+    "utf8_bom": true,
+    "logical_rows": 2,
+    "columns": ["ID", "Name", "Status"]
+  },
+  "recopy": {
+    "path": "catalog/evidence/t02-copilot-live-generation-20260913-pad-recopy.robin",
+    "sha256": "b075a7f85928bd2ecebb5d21be81e04c84d613466f3307e2e051909f85fc5aee",
+    "bytes": 820,
+    "action_count": 3,
+    "ordinal_equal_after_crlf_normalization": true,
+    "source_sha256": "c3027cfaa13e191b0e784fb3a6db4c573f8bfc83fb172d1a6394d7c1f5a55c29"
+  },
+  "status": "current_candidate_t02_live_generation_pad_two_runs_output_match",
+  "current_package_acceptance": false,
+  "acceptance_note": "T02 candidate evidence is complete for this case; the protected finale candidate status and full T01-T10 package audit remain unchanged."
+}

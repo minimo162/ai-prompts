@@ -466,6 +466,12 @@ Issue #5は`partial／OPEN`。残りは新bundle同一版の通常チャット�
 
 PAD再コピーはrun2後も同一SHA `845c54cc905e50dcb9f8b9d7e55aeba3cb639bee1b3e848a3f66f9b3ce051446`（1,768 bytes）で、生成原文との差はCRLFだけだった。CRLF正規化後の16行・値一致により、今回生成からの無修正貼付け・保存・2run・再コピー再現を`PROVEN`とする。さらに実測T10原文との比較では差分は許可された2行（Excel A1値、Excel SaveAs出力先）のみで、許可範囲外は0件だった（`t10-copilot-live-generation-20260913-pad-acceptance.json`の`change_scope_comparison`）。Excel/Word/PowerPointの出力値も実ファイルで確認した。ただし候補statusファイルは`FROZEN_CANDIDATE_NOT_ACCEPTED`のままなので、パッケージ受入フラグはfalse、Issue #5/#27はOPEN／partialである。
 
+## 2026-09-13 T02候補の同版生成・PAD受入
+
+候補指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、Think Deeper、2添付でT02を通常M365 Copilotの新規会話へ送信した。会話URLは`https://m365.cloud.microsoft/chat/conversation/fa568da0-7bab-43cf-9559-e061d2bfed76?es=SSR`。応答のRobinは1コードブロック・3行・817 bytes・SHA `c3027cfaa13e191b0e784fb3a6db4c573f8bfc83fb172d1a6394d7c1f5a55c29`で、生成原文を手修正せず保存した（`catalog/evidence/t02-copilot-live-generation-20260913.json`／`.robin`）。
+
+専用PADフロー`RobinKnowledgeT02CurrentBundle_20260913`（PID 30584、Power Fx OFF）へ無修正貼付け・保存し、2回の独立RunでReady復帰・開始再有効化・変数プレビュー`3 行, 3 列`→`2 行, 3 列`を確認した。入力CSVは91 bytes・SHA `3aededf42b8bb2be71091c7cc6ed1295f1860a8450744d8779fbc8cabf6eed28`で実行前期待と一致し、出力はUTF-8 BOM付き73 bytes・SHA `8f0748cc4d149228331dfacc0a5c46e117270a7e9dee564c4f631924142cf7d3`で期待値と一致した。再コピーは820 bytes・SHA `b075a7f85928bd2ecebb5d21be81e04c84d613466f3307e2e051909f85fc5aee`、生成原文との差はCRLFのみで正規化後の内容はordinal一致した。全証跡は`catalog/evidence/t02-copilot-live-generation-20260913-pad-acceptance.json`からpaste／run1／run2／recopyへ追跡できる。T02単体の候補同版生成・PAD受入は成立したが、protected candidate statusは`FROZEN_CANDIDATE_NOT_ACCEPTED`のまま、T03〜T10、独立再試験、負例v2、T09、A〜G全体監査は未完了で、Issue #5/#27はOPEN／partialを維持する。作成ダイアログの再試行で同名`(2)`フローが残ったが、受入対象は完全一致名の専用フローに限定し、削除は行っていない。
+
 ## 2026-09-13 T01候補の同版生成・PAD受入
 
 候補指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`とbundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`を2添付したThink Deeperの新規通常チャット（`https://m365.cloud.microsoft/chat/conversation/0cf5181b-b371-43c9-9c4f-410d9464e419?es=SSR`）へT01依頼を送信した。応答は1コードブロック・3行、無修正Robin SHA `2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47`として保存した。
