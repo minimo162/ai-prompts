@@ -11,7 +11,8 @@
       "prior_comment_count_after_send": 89,
       "prior_tracking_comment": "https://github.com/minimo162/ai-prompts/issues/5#issuecomment-5655479376",
       "prior_final_commit_correction_comment": "https://github.com/minimo162/ai-prompts/issues/5#issuecomment-5655485956",
-      "comment_url": "https://github.com/minimo162/ai-prompts/issues/5#issuecomment-5657013263"
+      "comment_url": "https://github.com/minimo162/ai-prompts/issues/5#issuecomment-5657013263",
+      "current_comment_count_after_update": 101
     },
     "27": {
       "state_after": "OPEN",
@@ -19,7 +20,8 @@
       "prior_comment_count_after_send": 25,
       "prior_tracking_comment": "https://github.com/minimo162/ai-prompts/issues/27#issuecomment-5655480685",
       "prior_final_commit_correction_comment": "https://github.com/minimo162/ai-prompts/issues/27#issuecomment-5655486041",
-      "comment_url": "https://github.com/minimo162/ai-prompts/issues/27#issuecomment-5657013481"
+      "comment_url": "https://github.com/minimo162/ai-prompts/issues/27#issuecomment-5657013481",
+      "current_comment_count_after_update": 37
     }
   },
   "body_source": ".work/issue-comment-20260914e.md",
