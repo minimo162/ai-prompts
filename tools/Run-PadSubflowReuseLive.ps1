@@ -49,6 +49,28 @@ function Get-SubflowVariablePreviews($Window) {
     return @($Window.FindAll([Windows.Automation.TreeScope]::Descendants, $condition) | ForEach-Object { [string]$_.Current.Name })
 }
 
+function Get-SubflowRunSample($Window) {
+    # After a subflow call completes, PAD may select the called child tab.
+    # Run-state observation must therefore not require Main to remain selected.
+    $status = Get-AgentPadStatus $Window
+    $stop = Get-AgentPadInvokableButton $Window 'StopFlowButton' '停止' -Wrapped
+    $stopEnabled = [bool]$stop.Current.IsEnabled
+    $runningStatus = ($status.state -cin @('running', 'stepping', 'stepping_over', 'stepping_out', 'running_flow'))
+    if ($runningStatus -and -not $stopEnabled) {
+        throw 'PAD_SELECTOR: StopFlowButton is not enabled during the observed execution state.'
+    }
+    $idle = (-not $stopEnabled -and $status.state -cin @('ready', 'saved'))
+    $errorState = Get-AgentPadErrorState -Window $Window -Running $stopEnabled -Idle $idle -StatusBar $status.status_bar
+    return [pscustomobject]@{
+        status = $status.state
+        running = $stopEnabled
+        execution_observed = ($runningStatus -or ($status.state -ceq 'saved' -and $stopEnabled))
+        idle = $idle
+        errors = $errorState.count
+        errors_known = $errorState.known
+    }
+}
+
 $fixedAt = [DateTime]::UtcNow
 $expectation = $null
 $sourceHashes = [ordered]@{}
@@ -134,7 +156,7 @@ try {
     $deadline = $invokedAt.AddSeconds($TimeoutSeconds)
     while ([DateTime]::UtcNow -lt $deadline) {
         try {
-            $sample = Get-AgentPadSnapshot -Window $window -AllowErrors -ExpectedSubflowNames $expectedSubflows
+            $sample = Get-SubflowRunSample -Window $window
             if ($sample.running -or $sample.execution_observed) { $runningObserved = $true }
             $states.Add([ordered]@{ at = [DateTime]::UtcNow.ToString('o'); status = $sample.status; running = $sample.running; idle = $sample.idle; errors = $sample.errors; errors_known = $sample.errors_known })
             $last = $sample

@@ -46,6 +46,8 @@ Designerが一意に取得できた後だけ、次の既存ヘルパーを使う
 
 通常の `Get-AgentPadSnapshot` は、業務フローの誤入口を避けるため既定で `Main` 1個だけを受理する。`Main/P3Worker` の専用再利用試験では、対象名を固定した `tools/Run-PadSubflowReuseLive.ps1` を使う。このヘルパーは、対象PID・タイトル・HWNDを完全一致で確認し、`Main` と `P3Worker` が各1個であること、Mainが選択されていること、実行前にReadyかつエラー0であることを要求する。別名、重複、未知のサブフロー、Main以外の入口は拒否する。原文Robinへの計測アクション追加や、単一サブフローガードの削除は行わない。
 
+サブフロー呼出し完了後はPADが`P3Worker`タブを選択したままになるため、実行中のポーリングはMain選択を再要求せず、`StopFlowButton`・状態バー・エラー状態を読み取る。完了後の最終スナップショットだけでMain/P3Worker固定契約と`ButtonPressed`プレビューを照合する。
+
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools\Run-PadSubflowReuseLive.ps1 `
   -TargetProcessId <観測したPAD.Designer PID> `

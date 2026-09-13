@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T07:09:03.2196788Z",
+  "flow_name": "RobinKnowledgeDFileRenameReuse_20260913",
+  "source_robin": "catalog/evidence/p3-file-rename-probe-20260910.robin",
+  "source_sha256": "e0875904136ec8032ae05c985152ee6432cd557725ec1954d33b28db6c46340c",
+  "source_bytes": 242,
+  "paste_confirmed": true,
+  "action_count_after_paste": 1,
+  "saved_confirmed": true,
+  "clipboard_restored": true,
+  "execution_requested": false
+}

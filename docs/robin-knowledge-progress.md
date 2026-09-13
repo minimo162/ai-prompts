@@ -328,7 +328,15 @@ T09は別空フロー`RobinKnowledgeT09Separate_20260911`を作成し、Final3 T
 
 現状は`partial／OPEN`。新bundleのT01/T02は全文指示＋同版bundle、無修正Robin、PAD 2回実行、成果物照合までPASSした。残りはT03〜T10→独立T01/T04/T10→負例を同一版で再受入し、T09はEdge拡張/native-hostがWeb DOM要素を返す条件で無修正6アクションを2回通し実行すること。未確認のP3はリスト項目取得、カスタム日時書式、入れ子／branch side effect、名前付きカスタムエラー一致である。
 
-## 2026-09-13 Bサブフロー再利用の観測器補完
+## 2026-09-13 B/C/D/E別空フロー再利用の実機進展
+
+PADを実機で起動し、Bの専用フロー`RobinKnowledgeSubflowReuse_20260913_1534`へMain／P3Worker原文を貼付け・保存した。Mainからの2runは、P3Worker選択後もRun状態を読む補完観測器で追跡し、いずれもPADログの`robin.execution.success`、Ready、errors=0、`VariablePreviewTextBlock=OK`を確認した。保存後にフローを閉じ、Consoleから再オープンしてMain／P3Workerのタブ、各1アクション、Readyを再観測し、両rawを再コピーした。run1はhelperの外側タイムアウトで結果JSONが生成される前に停止したが、PADログとUIA後観測を原記録へ固定しており、同runの再実行はしていない。run2も同じ手順で別ログ・別証跡に分離した。再コピーはPADのCRLF化によるバイト差だけで、LF原文との差を正規化してPASSにはしていない。
+
+Cは行追加・セル更新・行反復、DはFile.Exists・File.Move・File.RenameFiles、EはExcel foreachを各専用別空フローへ無修正貼付けした。各フローで保存、2run、再コピーを完了した。C行は2行3列と`B / 20 / 対象2`、セルは列2／行0→`CellChanged`と1行3列、foreachは2行3列の最終行を両runで確認。D File.Move／RenameFilesはsourceを復元して2回目を衝突条件にし、DoNothingで出力`[]`、同一ハッシュを確認した。D File.Existsでは最初の誤ったaction-count期待値（IF＋ENDを1と想定）を成功証跡に付け替えず、正しい2項目で再試行フローを作成して採取した。EはA1:C6をTypedValuesで読み、`ExcelData=6行, 3列`、最終行`対象外 / E / 40`、Excel終了を両runで確認した。合成ファイルは各実行後に元の存在状態へ復元し、作成した退避は`.work`内に保持した。
+
+新規証跡は`catalog/evidence/*reuse-20260913-*`、索引は`catalog/index.json`、カバレッジは`catalog/coverage.json`へ追記した。別空フローprobeの成功であり、現行bundle同一版のCopilot/T01-T10再受入、T10厳密改行保持、B名前付きFileNotFoundルール一般化、G/T09の残件を完了扱いにはしない。Issue #5/#27はOPEN／partial、push・PR・mergeは未実施である。
+
+## 2026-09-13 Bサブフロー再利用の観測器補完（開始時記録）
 
 Issue #5/#27の最新本文と指定コメント（`5650828099`／`5650826208`）を確認し、main `fef38bdb580fad55d1fa2ce837e5aa3007b9e4f1`から作業ブランチ `issue-5-b-subflow-reuse-20260913` を作成した。保護資料 `docs/agent-approach-comparison-2026-09-07.md` は開始時SHA `e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699` と照合し、`.work/finale-20260912/` は削除・上書きしていない。
 

@@ -9,6 +9,14 @@
 
 今回の提出前確認：CurrentStatus46項目PASS。検査コード不変の直前非ライブAll36/36 PASSを再利用し、今回の再実行とはしない。監査修正差分のdiff --checkはPASS、基準mainからの全差分では原証跡2行の末尾空白を保全する。DOMはNOT_RUN、GitHub CIはPRの実際の状態を別途確認する。保護未追跡資料はSHA e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699のまま保持する。
 
+## 2026-09-13 PAD別空フロー再利用（B/C/D/E）
+
+PADを実機で起動し、固定した別空フローへ既存のraw Robinを無修正で貼付け、保存、2回実行、保存後再コピーまで進めた。Bは`RobinKnowledgeSubflowReuse_20260913_1534`でMain／P3Workerを再配置し、両runとも`ButtonPressed=OK`、Ready、errors=0を確認した。終了後に再オープンしてMain／P3Workerの各1アクションを再観測し、再コピーを取得した。観測器はP3Worker選択後もRun状態を読むよう補完し、1回目・2回目ともPAD DataCollectionの`robin.execution.success`と`OK`プレビューを別々に記録した。実行結果JSONは`catalog/evidence/p3-subflow-reuse-20260913-run1.json`／`run2.json`に固定している。
+
+Cは行追加・セル更新・行反復、Dは存在確認・移動・名前変更、EはExcel行反復をそれぞれ専用別空フローで実行した。C行は2行3列と最終`B / 20 / 対象2`、Cセルは列2／行0の`CellChanged`とDataTable=1行3列、C反復は2行3列の最終行を両runで確認した。D移動・名前変更は初回成功後にsourceを復元し、2回目の`DoNothing`で出力リスト`[]`、source／destination（またはtarget）同一ハッシュを確認した。Dの合成入力は各run後に元の存在状態へ復元した。Eは`ExcelData=6行, 3列`、最終行`対象外 / E / 40`、Excelインスタンス終了を両runで確認した。各raw再コピーはPADのCRLF化のみで、LF原文との差を内容一致として正規化していない。
+
+対応するpaste/save、run1／run2、recopy、衝突状態の証跡は`catalog/evidence/p3-*-reuse-20260913-*`に固定し、`catalog/index.json`と`catalog/coverage.json`から追跡できる。これは別空フローprobeの前進であり、現行bundleの同一版Copilot/T01-T10再受入、T10厳密改行保持、Bの名前付きFileNotFoundルール一般化、G/T09の残件を完了扱いにはしない。D File.Existsでは初回にアクション数期待値を1とした試行が2項目（IF＋END）で停止したため、再試行フローで正しい2項目を貼付けて採取し、失敗試行を成功証跡へ付け替えていない。
+
 ## 2026-09-12 finald保存証跡の最終監査
 
 ### 監査後の継続: finale候補（未受入・未昇格）
@@ -164,11 +172,11 @@ main→対象コミットで指示文・知識7原本・bundle・manifest・T10�
 | A 文字列・数値・真偽値／減算 | catalog既存変数・text flows、boolean/subtract probe→01-Basics。`a-boolean-reuse-20260912/acceptance.json`と`a-subtract-reuse-20260912/acceptance.json`で別空フロー・各2run・再オープンを補完。T01はtext系を受入 | 今回はTrue／7を確認。旧参照JSONが各run1件だけである履歴は保全し、今回runを過去へ付け替えない |
 | A リスト・文字列加工・数値変換・日時 | 既存list/text/number flows、`text-substring-validation.json`、`datetime-current-date-validation.json`、P3添字1／date-format acceptance→01-Basics→T01/P3-1/P3-5 | 添字1・yyyy-MM-ddの別フローと2回runあり。任意の別添字／別書式へ拡張しない |
 | B If／Loop／エラー | `p3-nested-control-acceptance-20260912.json`／`p3-named-error-acceptance-20260912.json`→別フロー→02-Control→T03/T08/P3-2/P3-6 | この固定構造の追跡あり |
-| B サブフロー | `p3-subflow-probe-20260910.json`とworker／call原文、元フロー2run→02-Control。`p3-subflow-reuse-observer-20260913.json`で別空フロー観測器の拒否条件と補完ヘルパーを追跡 | Main/P3Workerの保存原文を別空フローへ再配置した実行要求・2run・ButtonPressed=OK・保存後再コピーは未実行。現ホストにPAD.Designer/CUAネイティブ対象なし。T08成功で代替不可 |
-| C DataTable | `p3-datatable-row-success-20260911.json`／cell-success／foreach-success、各raw・run→03-Files。T02/T04はCSV／フィルター受入 | 行追加／セル更新／行反復の別空フロー再利用証跡未特定。セル更新は確認できるが、セル値取出しを要求のセル参照と対応づける原証跡は未特定。列名による行ループの負例は任意範囲のまま |
+| B サブフロー | `p3-subflow-probe-20260910.json`とworker／call原文、`p3-subflow-reuse-20260913-*`→02-Control。別空フローでMain/P3Workerを各2run、ButtonPressed=OK、Ready/errors=0、保存後再オープン再コピーまで確認 | 名前付きFileNotFoundルールの一致条件・後続処理、現行bundle同一版受入は未完了 |
+| C DataTable | `p3-datatable-row/cell/foreach-reuse-20260913-*`→03-Files。行追加・セル更新・行反復を各別空フローで貼付け／保存／2run／再コピー。セル更新は列2／行0→CellChangedとDataTable=1行3列を再確認し、値ビューアー原証跡は既存probeを保持 | 現行bundle同一版再受入は未実行。列名による行ループの負例は任意範囲のまま |
 | C CSV | `csv-read-validation.json`、`filter-t02-roundtrip2-run*.json`→03-Files→T02/T04 | 論理行・引用符・日本語を含む固定範囲は確認 |
-| D ファイル | file-copy／text-write／T03-extension-branch／P3-file-boundaryの別フロー→03-Files→T01/T03/P3-3。フォルダー作成は`d-folder-create-reuse-20260912/acceptance.json`で補完 | `p3-file-exists`／`p3-file-move`／`p3-file-rename`各probeは原採取・元フロー実行あり。これらの保存原文の別空フロー再利用証跡は未特定 |
-| E Excel | 既存Excel read/write/save flows、P3 SaveAs、`p3-excel-foreach-runtime-success-*`→04-Office→T04/T05/T10/P3-4 | Excel反復probeは元フローの2回runあり。完成した反復rawを別空フローで再利用した証跡は未特定（initial-pasteは前段の範囲読取り形） |
+| D ファイル | file-copy／text-write／T03-extension-branch／P3-file-boundaryの別フロー→03-Files→T01/T03/P3-3。`p3-file-exists/move/rename-reuse-20260913-*`で各別空フローの2runと再コピーを確認。移動／名前変更はDoNothing衝突で出力`[]`、ハッシュ一致、入力復元まで記録 | 現行bundle同一版再受入は未実行。false分岐body side effectは未確認 |
+| E Excel | 既存Excel read/write/save flows、P3 SaveAs、`p3-excel-foreach-reuse-20260913-*`→04-Office→T04/T05/T10/P3-4。別空フローでA1:C6 TypedValuesを2run、最終行・終了・再コピーを確認 | 現行bundle同一版再受入は未実行 |
 | F Word／PowerPoint／PDF | 既存Office/PDF flowsと各設定のevidence→04-Office→T06/T07/T10。PowerPoint保持・PDF指定ページは保存成果物で照合 | `captured_partial_verification`を全主要設定再利用済みとはしない。固定受入済み主要形とcopy-only等の表示区別を維持 |
 | G UI／ブラウザー | `ui-t09-local-roundtrip/roundtrip-wait1-20260912.robin`→要素取り込みと専用別フロー→05-UI-Web→T09 | 固定ローカル画面の追跡あり。旧WAIT 500／旧要素登録失敗は履歴として維持 |
 

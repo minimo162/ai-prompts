@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T07:11:24.7285822Z",
+  "flow_name": "RobinKnowledgeEExcelForeachReuse_20260913",
+  "source_robin": "catalog/evidence/p3-excel-foreach-runtime-success-flow-20260911.robin",
+  "source_sha256": "db98d5bfa837ea65e0e92f2412b02f3847e3541fff653078c2645ae427939166",
+  "source_bytes": 577,
+  "paste_confirmed": true,
+  "action_count_after_paste": 6,
+  "saved_confirmed": true,
+  "clipboard_restored": true,
+  "execution_requested": false
+}

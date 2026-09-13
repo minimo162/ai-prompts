@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T07:09:54+00:00",
+  "flow_name": "RobinKnowledgeDFileRenameReuse_20260913",
+  "source_path": ".work/p3-file-rename-before-20260910.txt",
+  "target_path": ".work/p3-file-rename-after-20260910.txt",
+  "run1": {
+    "evidence": "catalog/evidence/p3-file-rename-reuse-20260913-run1.json",
+    "run_status": "success",
+    "renamed_files_preview": ["C:\\Users\\yuuki\\ai-prompts\\.work\\p3-file-rename-after-20260910.txt"]
+  },
+  "recreated_source_before_run2": {
+    "method": "copied target bytes back to source; target retained",
+    "source_sha256": "3992bbfebbd442af9e3fe1435cebd7a8dbab478321972ad1e1e7ebdaa6d01cb3",
+    "target_sha256": "3992bbfebbd442af9e3fe1435cebd7a8dbab478321972ad1e1e7ebdaa6d01cb3"
+  },
+  "run2": {
+    "evidence": "catalog/evidence/p3-file-rename-reuse-20260913-run2.json",
+    "run_status": "success",
+    "renamed_files_preview": [],
+    "collision_behavior": "DoNothing",
+    "source_exists": true,
+    "target_exists": true
+  },
+  "fixture_restore": {
+    "target_backup": ".work/p3-file-rename-after-20260910.before-live.bak",
+    "restore_pending": true
+  }
+}

@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-13T06:35:28.5085613Z",
+    "flow_name":  "RobinKnowledgeSubflowReuse_20260913_1534",
+    "source_robin":  "catalog/evidence/p3-subflow-call-20260910.robin",
+    "source_sha256":  "cb547e2b3f9a35d5baaf2c18ff7192b54c085cf2b68e33ac01864c233e4a3256",
+    "source_bytes":  14,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  1,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}
