@@ -20,7 +20,8 @@
   ],
   "note": "P3-1 current-version evidence was reported without closing either issue. P3-2 through P3-6, negative suite v2, strict T10 preservation, and final A-G reconciliation remain open."
   ,"body_update": {
-    "current_head": "9a5d9459b07a7e002bafd7d0aaf7c51a4503aa60",
+    "current_head": "02bc804c7c86fd6a3b189fde888747ccedc5ec19",
+    "synced_at": "2026-09-14T05:02:00+09:00",
     "state_after_update": "OPEN",
     "p3_1_added_to_current_status": true
   }
