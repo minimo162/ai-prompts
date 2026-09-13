@@ -1,5 +1,9 @@
 # 通常M365 Copilotチャット受入試験 T01〜T10（継続中）
 
+## 2026-09-14 現行集約訂正・負例v2
+
+P3-1〜P3-6は現行20260913eの個別証跡に基づき受入済みとして集約した（旧「P3-4〜P3-6残り」記載は履歴）。固定負例v2は通常M365 Copilotへ1回送信し、N1〜N3の未確認回答を無修正保存した。コードフェンス・Robin命令・疑似コード・未採取引数の推測はなく、PAD貼付け／Run／未登録Web操作は未実施。旧finald負例PASSは履歴として分離している。訂正根拠は`catalog/evidence/p3-current-sha-correction-20260914e.json`、現行負例証跡は`catalog/evidence/negative-suite-current-20260914e-acceptance.json`。T04形式・独立T04候補partial、T10厳密保持NOT_PROVEN、A〜G監査は継続中で、Issue #5/#27はOPEN / partial。
+
 ### 2026-09-14 現行版P3-1送信・PAD受入
 
 現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を通常M365 Copilot新規会話 `https://m365.cloud.microsoft/chat/conversation/2167fd22-b6fb-4101-9379-8f4e760a518a`へThink Deeper・2実添付で1回送信した。評価者用正解コード・期待値・Issue本文は送らず、回答の4行Robinを無修正保存した。専用空フロー `RobinKnowledgeP31CurrentBundleLive20260914e`（Designer PID 11016）へ貼付け・保存・再コピーし、2回Runとも成功。`CatalogList=[CatalogItem, SecondItem]`、`NewVar=SecondItem`を確認した。生成SHA `fdaa3eea…`、PAD再コピーはCRLF SHA `36a8179b…`で正規化後一致のみを記録する。証跡は `catalog/evidence/p31-current-bundle-live-20260914e.json`。旧20260912 P3-1 PASSは現行版へ移さず、P3-2〜P3-6、負例v2、T10厳密保持、A〜G監査は残る。Issue #5/#27はOPEN / partial。
@@ -36,7 +40,7 @@
 
 生成Robinを新規専用空フロー `RobinKnowledgeT01IndependentCurrentBundleLive20260914e`（Designer PID 31848）へ無修正貼付け・保存・再コピーし、3アクションを確認した。PAD再コピーは649 bytes・CRLF（SHA `d2a7f74e6b5038557a5b0eeca1bde4468f4d4fc402a9baaf95ba7fe5e91a317b`）で、生成原文との差はCRLFのみ（正規化後一致）だった。2回Runとも準備完了復帰し、出力は各90 bytes・SHA `2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2`、入力SHA `2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f`は不変。既存出力はRun前後に退避・同一SHAで復元した。証跡は `catalog/evidence/t01-independent-current-output-comparison-20260914e.json`、paste/save、recopy、run1/run2、生成ディレクトリ `catalog/generated/normal-chat-20260914e-t01-independent-live/`。
 
-この独立T01は現行版で`PASS_CURRENT_20260914E_INDEPENDENT_PAD_ACCEPTED`とするが、生成元→PADの厳密バイト保持は評価していない（CRLF正規化後一致のみ）。T04形式不受入、T10厳密バイト保持、独立T04/T10、P3-4〜P3-6、負例v2、A〜G全体監査は残り、Issue #5/#27はOPEN / partialを維持する。
+この独立T01は現行版で`PASS_CURRENT_20260914E_INDEPENDENT_PAD_ACCEPTED`とするが、生成元→PADの厳密バイト保持は評価していない（CRLF正規化後一致のみ）。P3-1〜P3-6は別証跡で現行版受入済み。T04形式不受入、T10厳密バイト保持、独立T04/T10、A〜G全体監査は残り、Issue #5/#27はOPEN / partialを維持する。
 
 ### 2026-09-14 T08現行版生成・PAD受入
 
@@ -44,7 +48,7 @@
 
 Robin（生成SHA `d4a6b697…`、保存ファイルSHA `a1544f08…`）を新規専用空フロー `RobinKnowledgeT08CurrentBundleLive20260914e`（4アクション）へ無修正貼付け・保存・再コピーし、2回Runとも成功した。両回ともアクション単位 `ON ERROR FileNotFoundError` で `NewVar=named`、`LastError` は欠損ファイルメッセージ、ブロック側 `ErrorHandled`／`ErrorHandledDefault` は未設定。欠損入力は前後とも不在で、書込み・完了マーカー・公開処理は発生しなかった。PAD再コピーのBLOCK末尾空白差は原記録のまま保存し、正規化後一致だけを確認した。ブロック側利用者定義 `FileNotFound` の一致はNOT_PROVENであり、アクション単位の結果から一般化していない。証跡は `catalog/evidence/t08-current-bundle-live-acceptance-20260914e.json`、`catalog/evidence/t08-current-bundle-output-comparison-20260914e.json`。
 
-現行版受入済みはT01/T02/T03（修正版依頼）/T05/T06/T07/T08/T09、P3-1/P3-2/P3-3、独立T01、独立T10機能・許可範囲。T04形式不受入、T10厳密バイト保持、独立T04、P3-4〜P3-6、負例v2、A〜G全体監査は残り、Issue #5/#27はOPEN / partialを維持する。
+現行版受入済みはT01/T02/T03（修正版依頼）/T05/T06/T07/T08/T09、P3-1〜P3-6、独立T01、独立T10機能・許可範囲、負例v2（未確認受入）。T04形式不受入、T10厳密バイト保持、独立T04、A〜G全体監査は残り、Issue #5/#27はOPEN / partialを維持する。
 
 ### 2026-09-14 T06現行版生成・PAD受入
 
@@ -52,7 +56,7 @@ Robin（生成SHA `d4a6b697…`、保存ファイルSHA `a1544f08…`）を新�
 
 20260913e正本（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、Think Deeper、指示＋bundle実添付）を新規通常M365 Copilot会話 `efc8983a-0075-4040-833a-8f06183823b4` へ送信した。生成4行Robin（SHA `c0940cb3e3ddbd82880d274692858ce3e2335f623acb11abe521926e642f9fd9`）を無修正で新規専用空フロー `RobinKnowledgeT06CurrentBundleLive20260914e` へ貼付け・保存・再コピーし、2回Runとも成功した。出力Word本文は `T06Replaced 日本語 100%`、`OfficeCatalog` 0件、入力SHA `2753855b…` 不変、Wordプロセス0を直接照合した。Run 1/2のdocxパッケージSHAは異なるため、本文結果の受入であり厳密バイト保持は主張しない。既存同名出力は各Run前に退避し、Run後に復元した。証跡は `catalog/evidence/t06-copilot-live-generation-20260914e-pad-acceptance.json`、`catalog/evidence/t06-20260914e-output-comparison.json`。
 
-現行版受入済みはT01/T02/T03（修正版依頼）/T05/T06/T07/T08/T09、P3-1/P3-2/P3-3、独立T01、独立T10機能・許可範囲。T04形式、T10厳密保持、独立T04、P3-4〜P3-6、負例v2、A〜G全体監査は未完了で、Issue #5/#27はOPEN / partialを維持する。
+現行版受入済みはT01/T02/T03（修正版依頼）/T05/T06/T07/T08/T09、P3-1〜P3-6、独立T01、独立T10機能・許可範囲、負例v2（未確認受入）。T04形式、T10厳密保持、独立T04、A〜G全体監査は未完了で、Issue #5/#27はOPEN / partialを維持する。
 
 ### 2026-09-13e T01生成追跡
 

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-09-14",
+  "status": "PRE_SEND_RECORDED",
+  "version_label": "20260913e",
+  "manifest": "copilot/knowledge-bundle-manifest-20260913e.json",
+  "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+  "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+  "fixed_prompt": "catalog/generated/normal-chat-finald-20260912-negative-suite/prompt.txt",
+  "fixed_prompt_sha256": "8db8800671e3fc4b6ba45acefba28db25709bcdf83153fe4ee04ee0cf90b3ca8",
+  "fixed_expectation": "catalog/generated/normal-chat-finald-20260912-negative-suite/expectation.json",
+  "fixed_expectation_sha256": "a4dae7718183621fcd41e5149c2b79746108ceca91ca49d09c5644bf52d5c11a",
+  "requested_body_sha256_utf8": "5779edc597e47c141765c1c5186b045f5552f4f02879de6662a724a5b2386da8",
+  "requested_body_chars": 4413,
+  "sent_body_file": "catalog/generated/normal-chat-20260914e-negative-suite/sent-body.txt",
+  "send_limit": 1,
+  "success_conditions": [
+    "N1-N3 each explicitly remain unconfirmed with reason, additional evidence, and prohibited follow-up",
+    "no Markdown code fence, Robin command, pseudocode, or guessed unmeasured action/argument",
+    "measured items are not over-refused"
+  ],
+  "stop_conditions": [
+    "one send only; do not resend on wait or retrieval uncertainty",
+    "do not paste the response into PAD and do not run PAD or unregistered web operations"
+  ],
+  "attachments_verified_before_send": [
+    "copilot/agent-instructions.txt",
+    "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt"
+  ],
+  "attachment_sha256": {
+    "copilot/agent-instructions.txt": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+    "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+  }
+}

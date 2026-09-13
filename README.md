@@ -1,5 +1,9 @@
 # PAD Robin Copilotエージェント用 指示文・ナレッジ
 
+## 2026-09-14 現行版集約訂正・負例v2受入
+
+現行20260913eのP3-1〜P3-6個別証跡を照合し、P3-4〜P3-6の派生「未受入」表示を訂正した（原送信・回答記録は不変）。固定負例v2は通常M365 Copilotへ1回送信し、N1〜N3を未確認受入として無修正保存した。コードフェンス・Robin命令・疑似コード・未採取引数の推測はなく、PAD貼付け／Run／未登録Web操作は未実施。旧finald負例PASSは履歴として分離した。訂正根拠は [P3 SHA補足](catalog/evidence/p3-current-sha-correction-20260914e.json)、現行負例証跡は [negative-suite-current-20260914e](catalog/evidence/negative-suite-current-20260914e-acceptance.json)。T04形式不受入・独立T04候補partial、T10厳密保持NOT_PROVEN、A〜G監査は継続し、Issue #5/#27はOPEN / partial。
+
 ### 2026-09-14 独立T04候補（現行版）
 
 現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を新規Think Deeper通常チャットへ同版指示＋bundle実添付し、件数・期待値を依頼本文から除外したT04補正版依頼を1回送信した。公式応答とDOM単一`pre`から得た9行Robin（plain `=>` 5、escaped `\\=>` 0）を無修正で新規空フローへ貼付け・保存・再コピーし、2回Runとも成功。Run2のxlsx 3行3列値と入力fixture不変、既存CSV/xlsx復元を確認したが、Run1のxlsxスナップショット未採取のため候補`partial`であり、受入済み一覧へ昇格していない。元T04の応答由来形式不受入と厳密バイト保持NOT_PROVENは維持する（[比較証跡](catalog/evidence/t04-independent-current-output-comparison-20260914e.json)）。

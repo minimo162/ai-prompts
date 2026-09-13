@@ -178,6 +178,68 @@ Check ($precheck.chat.full_instruction_in_body -eq $true) 'precheck used the ful
 Check ([string]$precheck.package.bundle_sha256 -ceq $bundleHash) 'precheck binds current bundle'
 Check ($precheck.response.robin_blocks -eq 0 -and $precheck.checks.generated_robin -eq $false) 'precheck generated no Robin'
 
+function Assert-Sha256([string]$Value, [string]$Name) {
+    if ($Value -notmatch '^[0-9a-f]{64}$') { throw ('SHA256_FORMAT: ' + $Name) }
+}
+
+function Test-CurrentP3State($Record, [string]$InstructionHash, [string]$BundleHash, [string]$CorrectionPath) {
+    $p3 = $Record.p3_positive_cases
+    if ($null -eq $p3 -or [string]$p3.status -notlike 'PASS_CURRENT*P3_1*P3_2*P3_3*P3_4*P3_5*P3_6*') { throw 'P3_STATE: aggregate does not accept all current P3 cases' }
+    $expected = @('P3-1','P3-2','P3-3','P3-4','P3-5','P3-6')
+    foreach ($name in $expected) {
+        $entry = $p3.cases.$name
+        if ($null -eq $entry -or [string]$entry.current_version_20260914e.status -notlike 'PASS_CURRENT*' -or [string]$entry.current_version_20260914e.instruction_sha256 -cne $InstructionHash -or [string]$entry.current_version_20260914e.bundle_sha256 -cne $BundleHash) {
+            throw ('P3_STATE: current evidence mismatch ' + $name)
+        }
+    }
+    if (-not (Test-Path -LiteralPath $CorrectionPath -PathType Leaf)) { throw 'P3_STATE: correction supplement missing' }
+}
+
+function Test-NegativeVersionBinding($Record, [string]$CurrentResultPath, [string]$InstructionHash, [string]$BundleHash) {
+    $neg = $Record.negative_suite
+    if ($null -eq $neg -or [string]$neg.status -notlike 'PASS_NEGATIVE_CURRENT*') { throw 'NEGATIVE_INHERIT: current negative status missing' }
+    if ([string]$neg.result -cne $CurrentResultPath -or [string]::IsNullOrWhiteSpace([string]$neg.historical_result)) { throw 'NEGATIVE_INHERIT: current and historical result references are not separated' }
+    $current = Read-JsonAbs ([IO.Path]::GetFullPath((Join-Path (Join-Path $repo 'catalog\evidence') $CurrentResultPath.Replace('/','\'))))
+    if ([string]$current.instruction_sha256 -cne $InstructionHash -or [string]$current.bundle_sha256 -cne $BundleHash -or [int]$current.request.send_count -ne 1 -or $current.execution.response_executed -ne $false) { throw 'NEGATIVE_INHERIT: current negative result is not bound to this version or execution scope' }
+    $responsePath = if ([string]$current.response.path -like 'catalog/*') { [IO.Path]::GetFullPath((Join-Path $repo ([string]$current.response.path.Replace('/','\')))) } else { [IO.Path]::GetFullPath((Join-Path (Join-Path $repo 'catalog\evidence') ([string]$current.response.path.Replace('/','\')))) }
+    $responseText = [IO.File]::ReadAllText($responsePath, $utf8)
+    $responseHash = (Get-FileHash -LiteralPath $responsePath -Algorithm SHA256).Hash.ToLowerInvariant()
+    if ($responseHash -cne [string]$current.response.sha256 -or $responseText.Length -ne [int]$current.response.chars) { throw 'NEGATIVE_INHERIT: current raw response hash or length does not match the recorded result' }
+    $sentBodyPath = [IO.Path]::GetFullPath((Join-Path $repo ([string]$current.request.sent_body_file)))
+    $sentBodyHash = (Get-FileHash -LiteralPath $sentBodyPath -Algorithm SHA256).Hash.ToLowerInvariant()
+    if ($sentBodyHash -cne [string]$current.request.requested_body_sha256_utf8 -or ([IO.File]::ReadAllText($sentBodyPath, $utf8)).Length -ne 4413) { throw 'NEGATIVE_INHERIT: sent body does not match the pre-send hash' }
+    $historical = Read-JsonAbs ([IO.Path]::GetFullPath((Join-Path (Join-Path $repo 'catalog\evidence') ([string]$neg.historical_result).Replace('/','\'))))
+    if ([string]$historical.instruction_sha256 -ceq $InstructionHash) { throw 'NEGATIVE_INHERIT: historical result was incorrectly promoted' }
+}
+
+$correctionPath = Join-Path $repo 'catalog\evidence\p3-current-sha-correction-20260914e.json'
+$correction = Read-JsonAbs $correctionPath
+Assert-Sha256 $instructionHash 'source instruction hash'
+Assert-Sha256 $bundleHash 'source bundle hash'
+Check ($correction.canonical.instruction_sha256 -ceq $instructionHash -and $correction.canonical.bundle_sha256 -ceq $bundleHash) 'correction supplement binds canonical source and bundle'
+Check ([string]$correction.observed_malformed_value.Length -eq 63) 'correction supplement records the 63-character transcription'
+Check (@($correction.raw_records_preserved).Count -eq 3 -and @($correction.derived_records_corrected).Count -ge 3) 'correction supplement separates raw records from derived corrections'
+Check ((@($correction.raw_records_preserved) | Where-Object { $_.unchanged -eq $true }).Count -eq 3) 'raw P3-4/P3-5/P3-6 records remain unchanged'
+Test-CurrentP3State $statusRecord $instructionHash $bundleHash $correctionPath
+$checks++
+Check ($coverage.current_package.p3_sha_correction -eq 'evidence/p3-current-sha-correction-20260914e.json') 'coverage points to the P3 correction supplement'
+Check ($coverage.current_package.negative_suite_current -eq 'evidence/negative-suite-current-20260914e-acceptance.json') 'coverage points to current negative evidence'
+Test-NegativeVersionBinding $statusRecord '../generated/normal-chat-20260914e-negative-suite/result.json' $instructionHash $bundleHash
+$checks++
+$badP3 = $statusRecord | ConvertTo-Json -Depth 80 | ConvertFrom-Json
+$badP3.p3_positive_cases.status = 'PARTIAL_CURRENT_20260914E_P3_1_P3_2_P3_3_ACCEPTED_HISTORICAL_P3_4_TO_P3_6_NOT_REACCEPTED'
+$p3Message = ''
+try { Test-CurrentP3State $badP3 $instructionHash $bundleHash $correctionPath } catch { $p3Message = $_.Exception.Message }
+Check ($p3Message -like 'P3_STATE:*') 'regression rejects stale P3 aggregate status'
+$badNegative = $statusRecord | ConvertTo-Json -Depth 80 | ConvertFrom-Json
+$badNegative.negative_suite.result = '../generated/normal-chat-finald-20260912-negative-suite/result.json'
+$negMessage = ''
+try { Test-NegativeVersionBinding $badNegative '../generated/normal-chat-20260914e-negative-suite/result.json' $instructionHash $bundleHash } catch { $negMessage = $_.Exception.Message }
+Check ($negMessage -like 'NEGATIVE_INHERIT:*') 'regression rejects inherited historical negative PASS'
+$badShaMessage = ''
+try { Assert-Sha256 '6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f5081241e79c' 'synthetic malformed hash' } catch { $badShaMessage = $_.Exception.Message }
+Check ($badShaMessage -like 'SHA256_FORMAT:*') 'regression rejects non-64-character SHA'
+
 Check ($stageExpired.status -ceq 'STAGED_STATE_EXPIRED') 'expired stage is explicit'
 Check ($null -eq $stageExpired.current_edge_observation.matching_t01_tab_id -and $stageExpired.current_edge_observation.matching_t01_tab_visible -eq $false) 'expired stage is not treated as current'
 Check ($stageExpired.actions_taken.Count -eq 0) 'expired-stage observation made no UI actions'

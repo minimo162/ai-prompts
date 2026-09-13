@@ -1,5 +1,9 @@
 # Robinナレッジ作成 進捗
 
+## 2026-09-14 集約訂正・現行負例v2受入
+
+現行20260913eのP3-1〜P3-6個別証跡を照合し、派生集約のP3-4〜P3-6未受入表示を訂正した。原送信・回答記録は変更せず、63桁instruction SHAの訂正根拠を`catalog/evidence/p3-current-sha-correction-20260914e.json`へ記録している。固定負例v2は通常M365 Copilotへ1回だけ送信し、回答を無修正保存した。N1〜N3はいずれも未確認受入で、理由・追加証拠・確認前に禁止する後続処理を含み、コードフェンス／Robin命令／疑似コード／未採取引数の推測はなかった。PAD貼付け・Run・未登録Web操作は未実施。旧finald負例PASSは履歴として保持し、現行版へ継承していない。残件はT04形式・独立T04候補partial、T10厳密保持、最終A〜G監査で、Issue #5/#27はOPEN / partial。
+
 ## 2026-09-14 現行版P3-1送信・PAD受入
 
 現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を通常M365 Copilotの新規会話 `https://m365.cloud.microsoft/chat/conversation/2167fd22-b6fb-4101-9379-8f4e760a518a`へThink Deeperで1回送信した。指示全文＋bundleを実添付し、評価者用正解コード・期待値・Issue本文は渡していない。Copilotの回答は4行のRobin（`Variables.CreateNewList`、2項目追加、`SET NewVar TO CatalogList[1]`）を1つのコードブロックで返し、生成原文を無修正保存した。
