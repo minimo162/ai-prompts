@@ -1,0 +1,8 @@
+添付した動作確認済み既存PADフロー generated.robin を、構造を保ったまま最小変更してください。変更は次の2点だけです。
+
+1. Excel の Excel.WriteToExcel.WriteCell にある値 CopilotOffice 246 を T10-Changed に変更する。
+2. Excel の Excel.SaveExcel.SaveAs の保存先を C:\Users\yuuki\ai-prompts\catalog\evidence\copilot-excel-t10-independent-20260914e.xlsx に変更する。
+
+Word の Word.WriteToWord.WriteEndOfDocument と PowerPoint の PowerPoint.WriteToPowerPoint.WriteToSlideAtPosition にある CopilotOffice 246 は変更しないでください。既存の入力、変数名、16行のアクション順、Word／PowerPoint処理、保存形式、終了処理、エラー経路は保持してください。添付 generated.robin の実測済みRobin以外の構文を推測しないでください。
+
+貼り付け用Robinは、添付 generated.robin の16実測命令をそのまま並べた1つのコードブロックだけにしてください。コードブロック内に説明、見出し、行番号、Plain Text表示、空行の代替記号、省略記号、疑似コードを入れないでください。WindowsパスのバックスラッシュはPAD原文どおり2個を維持し、アンダースコアの前へMarkdown用のバックスラッシュを追加しないでください。=> は2文字のまま出力し、\=> や =\> にしないでください。

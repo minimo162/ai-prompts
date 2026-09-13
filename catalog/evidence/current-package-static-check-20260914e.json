@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-09-14T02:06:00+09:00",
+  "captured_at": "2026-09-14T04:03:01+09:00",
   "status": "PASS_LOCAL_STATIC_CURRENT_PACKAGE",
   "package": {
     "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
@@ -8,17 +8,18 @@
     "bundle_manifest": "copilot/knowledge-bundle-manifest-20260913e.json"
   },
   "checks": [
-    {"command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/Run-NonLiveTests.ps1 -Suite All", "status": "PASS", "tests": 36, "passed": 36, "failed": [], "raw_local_record": ".work/nonlive-936e955bcf7d468882f128e52872aee3/verification.json", "note": "Windows PowerShell 5.1 run completed after current-package T08 evidence and state updates."},
+    {"command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/Run-NonLiveTests.ps1 -Suite All", "status": "PASS", "tests": 36, "passed": 36, "failed": [], "raw_local_record": ".work/nonlive-583c5a1f8b89418b91296faf796831eb/verification.json", "note": "Windows PowerShell 5.1 run completed after independent T10 evidence and state updates."},
     {"command": "tests/Test-Issue5CurrentStatus.ps1", "status": "PASS", "checks": 46, "note": "Current status/audit/README semantics, current T08 trace, historical preservation, and negative fixtures all passed."},
-    {"command": "tests/Test-RobinRawContracts.ps1", "status": "PASS", "note": "Raw generated and recopy contracts remain preserved; no repair or unescape applied."},
-    {"command": "tests/Test-T10StrictPreservation.ps1", "status": "PASS_REGRESSION_WITH_STRICT_NOT_PROVEN", "note": "T10 functional and scope regression passes; strict source-to-generation byte preservation remains NOT_PROVEN."},
+    {"command": "tests/Test-RobinRawContracts.ps1 -Root .", "status": "PASS", "note": "Raw generated and recopy contracts remain preserved; no repair or unescape applied."},
+    {"command": "tests/Test-T10StrictPreservation.ps1 -Root .", "status": "PASS_REGRESSION_WITH_STRICT_NOT_PROVEN", "note": "T10 functional and scope regression passes; strict source-to-generation byte preservation remains NOT_PROVEN."},
     {"command": "tests/Test-RobinCatalog.ps1", "status": "PASS", "checks": 107},
     {"command": "tests/Test-CurrentBundleT01Prepared.ps1", "status": "PASS", "checks": 14},
     {"command": "tests/Test-DocumentObservation.ps1", "status": "PASS", "checks": 25},
+    {"command": "independent T10 20260914e evidence and output comparison", "status": "PASS_FUNCTIONAL_SCOPE_STRICT_NOT_PROVEN", "evidence": "evidence/t10-independent-current-generation-20260914e.json", "note": "Fresh normal-chat response, named empty flow, save/recopy, two PAD runs, run1/run2 Office snapshots; Excel A1 and Word/PPT values match; raw serialization remains unproven."},
     {"command": "JSON parse over updated catalog/evidence/index/coverage files", "status": "PASS", "invalid": []},
     {"command": "git diff --check", "status": "PASS_WITH_LINE_ENDING_WARNINGS", "note": "Only expected repository line-ending warnings; raw Robin evidence remains unmodified."},
     {"command": "node tests/Test-CopilotDom.cjs", "status": "NOT_RUN", "note": "Development Playwright module is not configured; live browser evidence is recorded separately."}
   ],
   "live_m365": "evidence/t08-current-bundle-live-acceptance-20260914e.json",
-  "result": "Current-package static and semantic checks pass; T10 strict raw-byte gate and remaining independent/P3/negative/A-G work remain open."
+  "result": "Current-package static and semantic checks pass; independent T10 functional execution and authorized scope are now evidenced, while the strict raw-byte gate, P3 positives, negative suite v2, and final A-G audit remain open."
 }

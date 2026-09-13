@@ -6571,6 +6571,32 @@
       "strict_source_to_generation": "NOT_ASSESSED"
     }
   ],
+  "independent_t10_current_20260914e": {
+      "id": "normal-chat-t10-independent-current-package-2026-09-14",
+      "date": "2026-09-14",
+      "browser": "Google Chrome normal M365 Copilot chat plus PAD UI Automation",
+      "model": "Think Deeper",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+      "cases": ["T10", "independent"],
+      "scope": "20260913e canonical package independent T10: one fresh normal chat with actual three attachments and no evaluator counts; one unmodified 16-line response-origin Robin; dedicated named empty PAD flow; paste/save/recopy; two successful runs; fresh run1/run2 Office output snapshots; authorized content scope lines 2 and 4 only. Existing outputs were backed up and restored.",
+      "current_package_acceptance": true,
+      "acceptance_scope": "functional_execution_and_authorized_content_scope_only",
+      "strict_raw_preservation": "NOT_PROVEN",
+      "execution_status": "pass_two_pad_runs_output_snapshots_scope_proven_strict_raw_not_proven",
+      "manifest": "../copilot/knowledge-bundle-manifest-20260913e.json",
+      "generated": "generated/normal-chat-20260914e-t10-independent-live/response.txt; generated/normal-chat-20260914e-t10-independent-live/dom-robin.txt",
+      "evidence": "evidence/t10-independent-current-generation-20260914e.json; evidence/t10-independent-current-pad-paste-20260914e.json; evidence/t10-independent-current-pad-run1-20260914e.json; evidence/t10-independent-current-pad-run2-20260914e.json; generated/normal-chat-20260914e-t10-independent-live/pad-recopy-after-save.robin; generated/normal-chat-20260914e-t10-independent-live/pad-recopy-after-run2.robin",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/6edc277b-b005-4d56-8bb7-ba64668ea636",
+      "flow_name": "RobinKnowledgeT10IndependentCurrentBundleLive20260914e",
+      "designer_pid": 20008,
+      "designer_action_count": 16,
+      "generated_robin_sha256": "2bcb5512adc3d238251ea7da2f82c047a5ddfbf4ae4ce343b437aef27eb3284a",
+      "runs_completed": 2,
+      "output_snapshots": ".work/t10-independent-20260914e/run1; .work/t10-independent-20260914e/run2",
+      "recopy_crlf_normalized_equal": true,
+      "strict_source_to_generation": "NOT_PROVEN"
+  },
   "application_integration": {
     "scope": "Guarded captured formats; live verification covers only the listed cases, not every variant.",
     "record": "evidence/document-run/live-verification.json",

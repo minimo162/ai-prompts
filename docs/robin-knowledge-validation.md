@@ -1,4 +1,12 @@
 # Robinナレッジ検証報告
+## 2026-09-14 独立T10現行版の機能受入
+
+現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を通常M365 Copilotの新規会話 `https://m365.cloud.microsoft/chat/conversation/6edc277b-b005-4d56-8bb7-ba64668ea636`へ、同版指示全文とbundle・生成元Robinの3実添付でThink Deeper送信した。送信は1回で、評価者用正解コード／期待値／Issue本文は渡していない。応答DOMは単一16行Robin（`catalog/generated/normal-chat-20260914e-t10-independent-live/dom-robin.txt`、SHA `2bcb5512…`）で、生成元との差は許可したExcel A1値とSaveAs先の2行だけ（改行を除く範囲外差分0）。
+
+Console UIAの新規フロー経路で `RobinKnowledgeT10IndependentCurrentBundleLive20260914e`（Designer PID 20008、タイトル完全一致）を作成し、DOM Robinを無修正で貼付け・保存・再コピーした。初回貼付けヘルパーは60秒時点でListItem 6件のためタイムアウトしたが、同じ貼付けの後続状態でDesigner集計 `16 アクション` が現れたため再送しなかった。保存後／Run2後の再コピーは同一SHA（CRLF・末尾LF）で、生成Robinとは正規化後のみ一致する。
+
+2回Runとも成功し、各Run前に出力を専用`.work`へスナップショットした。Run1/2ともExcel A1=`T10-Changed`、Word本文=`CopilotOffice 246`、PowerPoint本文=`CopilotOffice 246`を確認し、元のExcel/Word/PowerPoint出力はバックアップSHAへ復元した。これはT10の機能実行と許可内容範囲の受入である。入力元（CRLF・末尾LFなし）→生成（LF・末尾LFあり）→PAD再コピー（CRLF・末尾LFあり）の生バイト一致は成立せず、改行正規化や復元による厳密PASS化は行わない。厳密保持は`NOT_PROVEN`として残し、詳細は`catalog/evidence/t10-independent-current-generation-20260914e.json`、`catalog/evidence/t10-independent-current-pad-*.json`、`.work/t10-independent-20260914e/run1`／`run2`。Issue #5/#27はOPEN / partial。
+
 ## 2026-09-14 独立T04の生成形式補正候補
 
 T04の元試行3でDOMと保存Robinに`=>`前literalバックスラッシュが現れた原因を生成回答由来として保持したまま、同版の別仮説を検証した。現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`）を新規Think Deeper通常チャットへ同版指示＋bundle実添付し、評価者用の件数・期待値を依頼本文へ渡さない補正版依頼を1回だけ送信した。公式応答（SHA `a932e7e7…`）とDOM単一`pre`（Robin SHA `dd4f39f0…43569d`、9行、plain `=>` 5、escaped `\\=>` 0）を無修正で保存した。
@@ -13,7 +21,7 @@ Run1のxlsxスナップショットはRun2前に取得できず、追加3回目�
 
 Robinを新規専用空フロー `RobinKnowledgeT08CurrentBundleLive20260914e`（Designer PID 35772、4アクション）へ無修正貼付け・保存・再コピーし、2回Runとも成功した。両回ともアクション単位 `ON ERROR FileNotFoundError` で `NewVar=named`、`LastError` に欠損メッセージ、ブロック側 `ErrorHandled`／`ErrorHandledDefault` は未設定。欠損入力は前後とも不在で、書込み・完了マーカー・公開処理は発生しなかった。再コピーのBLOCK末尾空白差は原記録のまま保持し、正規化後一致だけを確認した。ブロック側利用者定義 `FileNotFound` の一致はNOT_PROVENであり、アクション単位の実測から一般化していない。証跡は `catalog/evidence/t08-current-bundle-live-acceptance-20260914e.json`、`catalog/evidence/t08-current-bundle-output-comparison-20260914e.json`。
 
-旧finald PASSは現行版へ付け替えていない。現行版受入済みはT01/T02/T03（修正版依頼）/T05/T06/T07/T08/T09。T04形式不受入、T10厳密バイト保持 `NOT_PROVEN`、独立再試験、P3正例、負例v2、A〜G全体監査は残り、Issue #5/#27はOPEN / partialとする。
+旧finald PASSは現行版へ付け替えていない。現行版受入済みはT01/T02/T03（修正版依頼）/T05/T06/T07/T08/T09、独立T01、独立T10の機能／許可範囲。T04形式不受入、T10厳密バイト保持 `NOT_PROVEN`、P3正例、負例v2、A〜G全体監査は残り、Issue #5/#27はOPEN / partialとする。
 
 ## 2026-09-14 T06現行版生成・PAD受入
 
@@ -29,7 +37,7 @@ Robinを新規専用空フロー `RobinKnowledgeT08CurrentBundleLive20260914e`�
 
 PADでは新規空フローへ貼付け・保存・再コピーし、2回Runとも成功。合成ExcelのB2=`T05-Changed`、A1不変、入力SHA `e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6` 不変、出力比較PASSを確認した（`catalog/evidence/t05-copilot-live-generation-20260913e-pad-acceptance.json`）。作成ダイアログの名前入力が利用可能UI経路で設定できず、フロー名は自動名 `無題 (2)` となった。新規作成・既存フロー非再利用は記録したが、明示的な人手命名を受入条件とする場合は、同じ生成Robinを編集せず、新しい一意名の空フローでPAD貼付け・2runだけを再実施する。
 
-旧finald PASSは移していない。T04生成形式不受入、T07/T08/T10同版、独立再試験、P3、負例、T10厳密保持`NOT_PROVEN`、A〜G全体監査は残し、Issue #5/#27はOPEN / partialとする。
+旧finald PASSは移していない。T04生成形式不受入、T10厳密保持`NOT_PROVEN`、P3、負例、A〜G全体監査は残し、独立T10の機能／許可範囲のみ現行版へ追加した。Issue #5/#27はOPEN / partialとする。
 
 ## 2026-09-14 T03現行版追跡昇格（修正版依頼のみ）
 
@@ -37,7 +45,7 @@ PADでは新規空フローへ貼付け・保存・再コピーし、2回Runと�
 
 生成Robin（13行、SHA `63fe35ec8619387f08c5dd270eb226bbd944457b410e09cc2425023ff9396572`）は無修正で専用空フロー `RobinKnowledgeT03Revised20260913` へ貼付け・保存し、2回Runとも成功。`TxtCount=2`／`OtherCount=2`、`FileContents=alpha 日本語`、4入力fixture不変、PAD再コピーのCRLF正規化後一致を確認した。閉じて再オープン後の再コピーは未実施として残す。派生証跡は `catalog/evidence/t03-copilot-live-generation-20260913e-pad-acceptance.json`。
 
-これは修正版依頼に限る現行版追跡であり、元依頼（カウンター要件が本文から観測できない）や元3試行のPASSではない。T03の旧finald PASSは移していない。T04の応答由来literalバックスラッシュ不受入、T10厳密保持`NOT_PROVEN`、T04〜T08の残る同版受入、独立再試験、P3、負例、A〜G全体監査は維持し、Issue #5/#27はOPEN / partialとする。
+これは修正版依頼に限る現行版追跡であり、元依頼（カウンター要件が本文から観測できない）や元3試行のPASSではない。T03の旧finald PASSは移していない。T04の応答由来literalバックスラッシュ不受入、T10厳密保持`NOT_PROVEN`、P3、負例、A〜G全体監査は維持し、独立T10の機能／許可範囲は別証跡で受入した。Issue #5/#27はOPEN / partialとする。
 
 ## 2026-09-13e T01生成追跡
 

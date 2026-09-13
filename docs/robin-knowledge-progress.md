@@ -1,5 +1,9 @@
 # Robinナレッジ作成 進捗
 
+## 2026-09-14 独立T10の現行版機能受入
+
+現行正本20260913e（instruction `6ad6f742…`／bundle `79245787…`）を通常M365 Copilotの新規会話 `6edc277b-b005-4d56-8bb7-ba64668ea636`へ3実添付・Think Deeperで1回送信し、応答DOM単一preの16行Robin（SHA `2bcb5512…`）を無修正保存した。元入力との差は許可範囲のExcel A1値とSaveAs先の2行のみ（正規化後の範囲外差分0）。専用フロー `RobinKnowledgeT10IndependentCurrentBundleLive20260914e`（Designer PID 20008）へ貼付け・保存・再コピーし、集計16アクションを確認。2回Runとも成功し、各回の新規出力スナップショットでExcel A1=`T10-Changed`、Word/PPT本文=`CopilotOffice 246`を確認、既存出力は復元した。初回貼付けヘルパーは60秒時点で6件のためタイムアウトしたが、同じ貼付けの後続状態で16件集計が現れたため再送していない。生成→PADはCRLF正規化後のみ一致し、元入力→生成と生バイトの厳密保持は`NOT_PROVEN`のまま。詳細は`catalog/evidence/t10-independent-current-generation-20260914e.json`。独立T10の機能／許可範囲は受入へ追加するが、厳密保持PASSへは昇格しない。Issue #5/#27はOPEN / partial。
+
 ## 2026-09-14 独立T04の原因切り分けと候補実行
 
 現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を、同版指示＋bundle実添付の新規Think Deeper通常チャットへ送信した。T03/T04の生成不受入を混同しないため、T04は評価者用件数・期待値を依頼本文へ渡さず、出力先だけを独立化した補正版依頼とした。公式応答（SHA `a932e7e7…`）とDOM単一`pre`のRobin（SHA `dd4f39f0…43569d`、9行、plain `=>` 5、escaped `\\=>` 0）は無修正で保存した。

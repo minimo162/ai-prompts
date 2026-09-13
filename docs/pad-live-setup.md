@@ -121,6 +121,10 @@ PAD再コピーは生成RobinのLF（646 bytes）からCRLF（649 bytes）へ変
 
 T10の判定は同じ規則をより厳密に適用する。`catalog/evidence/t10-strict-preservation-audit-20260913.json` は機能2run、許可された2行（2・4）の内容範囲、生成→PAD再コピーの正規化後一致、生バイト不一致を別フィールドで保持し、`tests/Test-T10StrictPreservation.ps1` で回帰確認する。改行正規化や非変更行の復元で厳密保持をPASSへ変えず、現行は `NOT_PROVEN` とする。
 
+## 2026-09-14 独立T10現行版追補
+
+20260913e正本（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を通常M365 Copilot新規会話 `6edc277b-b005-4d56-8bb7-ba64668ea636`へ3実添付して1回送信し、単一16行の応答Robinを無修正保存した。Console UIAで専用空フロー `RobinKnowledgeT10IndependentCurrentBundleLive20260914e` を作成し（Designer PID 20008、タイトル完全一致）、`dom-robin.txt` を貼り付けた。初回の60秒ヘルパー観測ではListItem 6件でタイムアウトしたが、同じ貼付けが後続で集計`16 アクション`へ収束したため再送しなかった。集計16件、保存、再コピー、2回Runを確認し、各回の出力スナップショットでExcel A1=`T10-Changed`、Word/PPT本文=`CopilotOffice 246`を確認した。既存Office出力はバックアップから復元した。生成→PADはCRLF正規化後のみ一致し、元入力→生成および生バイトの厳密保持は`NOT_PROVEN`のまま。原記録・結果は`catalog/evidence/t10-independent-current-generation-20260914e.json`と`catalog/evidence/t10-independent-current-pad-*.json`に分離保存する。
+
 T04の20260913e追跡では、同版指示・bundle・Think Deeper・2実添付を維持した新規通常チャットへ1回だけ送信した。応答DOMの`pre code`と保存Robinは同一SHA（1,585 bytes）で、5箇所の`=\>`がDOM段階から存在したため生成回答由来の形式不履行と判定した。生成回答の手修正、auto-unescape、PAD貼付け・保存・実行は行わず、同じ方法の追加送信を停止する（`catalog/evidence/t04-copilot-live-generation-20260913-attempt3.json`、`t04-next-hypothesis-20260913e.json`）。
 
 ## 2026-09-14 現行版T01独立再試験
