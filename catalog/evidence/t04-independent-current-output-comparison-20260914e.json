@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T03:06:45+09:00",
+  "case": "T04",
+  "status": "PASS_CURRENT_20260914E_INDEPENDENT_T04_GENERATION_PAD_TWO_RUNS_PARTIAL",
+  "acceptance_scope": "candidate_partial",
+  "version": {
+    "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+    "knowledge_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+    "manifest": "copilot/knowledge-bundle-manifest-20260913e.json",
+    "request_sha256_without_lf": "020cb33802814321042c27cf094c340fcfeac2ed338d2819be32ca26e8db47b4"
+  },
+  "generation": {
+    "conversation_url": "https://m365.cloud.microsoft/chat/conversation/e06e99be-8eb9-4d1b-9d9f-1c39e34060e9",
+    "model": "Think Deeper",
+    "attachments": ["agent-instructions.txt", "PAD-Robin-Knowledge-Bundle.txt"],
+    "official_response_copy": {
+      "path": "catalog/generated/normal-chat-20260914e-t04-independent-live/response.txt",
+      "sha256_without_trailing_lf": "a932e7e7e4579e557a385f2c72ca7bdc98ce60c403061b77386761fdea67b21c",
+      "chars_without_trailing_lf": 1954,
+      "raw_unmodified": true
+    },
+    "dom_code": {
+      "selector": "pre",
+      "count": 1,
+      "path": "catalog/generated/normal-chat-20260914e-t04-independent-live/robin.txt",
+      "sha256": "dd4f39f0700cfb5a9275dfc9912c89bd8d886d72972c9eb74223acf30343569d",
+      "bytes": 1585,
+      "lines": 9,
+      "line_ending": "LF",
+      "arrow_tokens": 5,
+      "arrow_tokens_with_backslash": 0,
+      "empty_literal_tokens": 1,
+      "raw_unmodified": true
+    }
+  },
+  "pad": {
+    "flow_name": "RobinKnowledgeT04IndependentCurrentBundleLive20260914eD",
+    "designer_pid": 29660,
+    "paste_save_evidence": "evidence/t04-independent-current-pad-paste-save-20260914e.json",
+    "recopy_path": "evidence/t04-independent-current-pad-recopy-20260914e.robin",
+    "recopy_sha256": "1f78c54d5cfedffdf75026d3014f51c0ddd49dd1c4af9a28602ad59665417649",
+    "recopy_bytes": 1594,
+    "recopy_line_ending": "CRLF",
+    "recopy_arrow_tokens_with_backslash": 0,
+    "source_to_recopy_crlf_normalized_equal": true,
+    "source_to_recopy_strict_bytes": false,
+    "hand_edit_applied": false,
+    "run1": "evidence/t04-independent-current-pad-run1-20260914e.json",
+    "run2": "evidence/t04-independent-current-pad-run2-20260914e.json",
+    "runs_completed": 2
+  },
+  "execution": {
+    "input_path": "catalog/fixtures/excel/t04-filter-input.xlsx",
+    "input_sha256_before": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+    "input_sha256_after": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+    "input_unchanged": true,
+    "run1": {
+      "status": "success",
+      "semantic_preview": ["対象,A,10  対象,C,25  対象,D,5", "6 行, 3 列", "3 行, 3 列"],
+      "output_snapshot": "NOT_CAPTURED"
+    },
+    "run2": {
+      "status": "success",
+      "output_snapshot": "catalog/evidence/t04-independent-current-output-run2-20260914e.xlsx",
+      "output_sha256": "c9255b368bcc2a935fa5acf76329ea61a7b3d4ec7620c0ac80c2b25ead0e813b",
+      "output_bytes": 10285,
+      "sheet": "t04-filtered",
+      "cell_values": [["対象", "A", 10], ["対象", "C", 25], ["対象", "D", 5]],
+      "input_and_existing_output_restored": true
+    }
+  },
+  "strict_source_to_generation": "NOT_ASSESSED",
+  "not_accepted_reason": "Both PAD runs completed and run2 cell values are verified, but a separate run1 xlsx snapshot was not captured before run2 overwrote the live output. No third run was started; this remains a partial candidate rather than a full independent T04 acceptance."
+}

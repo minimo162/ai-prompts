@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "captured_at": "2026-09-14T02:31:30+09:00",
-  "status": "partial_current_package_20260913e_T01_T02_T03_T05_T06_T07_T08_T09_accepted_T01_independent_20260914e",
+  "captured_at": "2026-09-14T03:06:45+09:00",
+  "status": "partial_current_package_20260913e_T01_T02_T03_T05_T06_T07_T08_T09_accepted_T01_independent_20260914e_T04_independent_candidate_partial_20260914e",
   "issue_state": "OPEN",
   "version": {
     "label": "20260913e",
@@ -169,6 +169,30 @@
         "robin_sha256": "feea538a6dd9018554d162400f50d4cd07abe90ed43ef6cca864812ac626be1e",
         "pad_acceptance": "NOT_RUN",
         "stop_reason": "Fresh-origin hypothesis reproduced response-origin =\\> escapes; no repair or PAD paste/run."
+      },
+      "current_version_independent": {
+        "status": "PASS_CURRENT_20260914E_INDEPENDENT_T04_GENERATION_PAD_TWO_RUNS_PARTIAL",
+        "result": "../generated/normal-chat-20260914e-t04-independent-live/result.json",
+        "output_comparison": "evidence/t04-independent-current-output-comparison-20260914e.json",
+        "paste_save": "evidence/t04-independent-current-pad-paste-save-20260914e.json",
+        "recopy": "evidence/t04-independent-current-pad-recopy-20260914e.robin",
+        "conversation": "https://m365.cloud.microsoft/chat/conversation/e06e99be-8eb9-4d1b-9d9f-1c39e34060e9",
+        "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+        "request_sha256_without_lf": "020cb33802814321042c27cf094c340fcfeac2ed338d2819be32ca26e8db47b4",
+        "response_sha256_without_trailing_lf": "a932e7e7e4579e557a385f2c72ca7bdc98ce60c403061b77386761fdea67b21c",
+        "robin_sha256": "dd4f39f0700cfb5a9275dfc9912c89bd8d886d72972c9eb74223acf30343569d",
+        "flow_name": "RobinKnowledgeT04IndependentCurrentBundleLive20260914eD",
+        "designer_pid": 29660,
+        "runs_completed": 2,
+        "input_unchanged": true,
+        "run2_output_values_verified": true,
+        "run1_output_snapshot": "NOT_CAPTURED",
+        "recopy_crlf_normalized_equal": true,
+        "response_origin_backslash_arrow_count": 0,
+        "strict_source_to_generation": "NOT_ASSESSED",
+        "acceptance_scope": "candidate_partial",
+        "not_accepted_reason": "Run1 output snapshot was not captured before run2; no third run was started."
       },
       "result": "../generated/normal-chat-finald-20260912-t04/result.json",
       "evidence": "evidence/t04-finald-20260912-live-acceptance-20260912.json",
@@ -581,7 +605,7 @@
     "T09 other URLs/elements/browsers; DataTable column-name access in a row loop (negative N2)"
   ],
   "browser_note": "Google Chrome normal M365 Copilot chat; the 20260913e precheck used the full WAIT 1 instruction and same-version bundle attachments with Think Deeper. Historical finald cases remain linked below by their own version and are not transferred to 20260913e. Fixed expectations were never sent.",
-   "pad_note": "20 dedicated empty flows (RobinKnowledge*FinalD2_20260912, created after a PAD restart; T03 attempt 2 on T03FinalD2b) plus current 20260913e T02 flow RobinKnowledgeT02CurrentBundle_20260913, T03 flow RobinKnowledgeT03Revised20260913, T05 newly-created auto-named flow 無題 (2), T06 flow RobinKnowledgeT06CurrentBundleLive20260914e, T09 flow RobinKnowledgeT09CurrentBundleLive20260913e, and independent T01 flow RobinKnowledgeT01IndependentCurrentBundleLive20260914e (PID 31848); unmodified paste from file, save, recopy (Ctrl+A/C for the 23-row P3-2 flow), two runs per accepted case; protected outputs moved aside and restored; user Edge/Office windows untouched. T05's human-readable flow name could not be set through the available UI path and is retained as a bounded caveat, not hidden.",
+   "pad_note": "20 dedicated empty flows (RobinKnowledge*FinalD2_20260912, created after a PAD restart; T03 attempt 2 on T03FinalD2b) plus current 20260913e T02 flow RobinKnowledgeT02CurrentBundle_20260913, T03 flow RobinKnowledgeT03Revised20260913, T05 newly-created auto-named flow 無題 (2), T06 flow RobinKnowledgeT06CurrentBundleLive20260914e, T09 flow RobinKnowledgeT09CurrentBundleLive20260913e, independent T01 flow RobinKnowledgeT01IndependentCurrentBundleLive20260914e (PID 31848), and independent T04 flow RobinKnowledgeT04IndependentCurrentBundleLive20260914eD (PID 29660); unmodified paste from file, save, recopy (Ctrl+A/C for virtualized action lists), two runs per accepted case or candidate; protected outputs moved aside and restored; user Edge/Office windows untouched. T05's human-readable flow name could not be set through the available UI path and is retained as a bounded caveat, not hidden.",
   "historical_finald_scope": {
     "status": "PRESERVED_NOT_TRANSFERRED",
     "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e",
@@ -589,7 +613,7 @@
     "evidence": "evidence/current-package-status-20260912-finald.json"
   },
     "new_version_acceptance": {
-      "status": "PRECHECK_PLUS_T01_T02_T03_T05_T06_T07_T08_T09_AND_INDEPENDENT_T01_PAD_ACCEPTED;_T04_T10_INDEPENDENT_T04_T10_P3_NEGATIVE_NOT_RUN",
+      "status": "PRECHECK_PLUS_T01_T02_T03_T05_T06_T07_T08_T09_AND_INDEPENDENT_T01_PAD_ACCEPTED;_INDEPENDENT_T04_CANDIDATE_PARTIAL;_T04_T10_INDEPENDENT_T10_P3_NEGATIVE_NOT_RUN",
       "accepted_current_version_cases": ["T01", "T02", "T03", "T05", "T06", "T07", "T08", "T09", "independent-T01"],
       "precheck": "evidence/current-bundle-20260913e-precheck.json",
       "t09_acceptance": "evidence/t09-20260913e-pad-acceptance.json",
@@ -608,9 +632,10 @@
       "t08_generation": "evidence/t08-current-bundle-live-acceptance-20260914e.json",
       "t08_acceptance": "evidence/t08-current-bundle-live-acceptance-20260914e.json",
       "t01_independent_acceptance": "evidence/t01-independent-current-output-comparison-20260914e.json",
-      "candidate_followup": "evidence/t03-revised-input-live-acceptance-20260913.json; evidence/t04-copilot-live-generation-20260913-diagnosis.json",
+      "t04_independent_candidate": "evidence/t04-independent-current-output-comparison-20260914e.json; evidence/t04-independent-current-pad-paste-save-20260914e.json; evidence/t04-independent-current-pad-recopy-20260914e.robin; evidence/t04-independent-current-pad-run1-20260914e.json; evidence/t04-independent-current-pad-run2-20260914e.json; evidence/t04-independent-current-output-run2-20260914e.xlsx",
+      "candidate_followup": "evidence/t03-revised-input-live-acceptance-20260913.json; evidence/t04-copilot-live-generation-20260913-diagnosis.json; evidence/t04-independent-current-output-comparison-20260914e.json",
       "strict_t10": "NOT_PROVEN",
-      "required_next": "T04 generation remains stopped after the fresh-origin response-format failure and requires a version change or separately authorized origin test before any new send; T10 functional/authorized-scope audit is proven but strict raw-byte preservation remains NOT_PROVEN; then independent T04/T10, P3 positive cases, and negative suite v2; do not reuse historical finald PASS. T03 is accepted only for the explicit corrected request and is not a pass for the original request without observable counters. T08 is accepted only for the measured action-level FileNotFoundError path; block-level user-defined FileNotFound matching remains NOT_PROVEN. T05 uses a newly-created but auto-named flow; if an explicitly named-flow gate is required, repeat only its PAD gate in a fresh uniquely named flow. Independent T01 is now accepted on current 20260913e hashes with a fresh chat and flow; source-to-generation strict bytes remain not assessed."
+      "required_next": "The same-version independent T04 origin test now produced a clean 9-line Robin with plain => and completed two PAD runs; it remains a partial candidate because run1's xlsx snapshot was not captured before run2. Do not start a third run solely to backfill that snapshot unless separately authorized. The original T04 generation failure remains preserved and not promoted. T10 functional/authorized-scope audit is proven but strict raw-byte preservation remains NOT_PROVEN; then independent T10, P3 positive cases, negative suite v2, and final audit. Do not reuse historical finald PASS. T03 is accepted only for the explicit corrected request and is not a pass for the original request without observable counters. T08 is accepted only for the measured action-level FileNotFoundError path; block-level user-defined FileNotFound matching remains NOT_PROVEN. T05 uses a newly-created but auto-named flow; if an explicitly named-flow gate is required, repeat only its PAD gate in a fresh uniquely named flow. Independent T01 is accepted on current 20260913e hashes with a fresh chat and flow; source-to-generation strict bytes remain not assessed."
     },
-    "result": "Current canonical package is 20260913e with WAIT 1/WAIT 1 alignment, a live reference-only precheck, current-version T01, T02, T03 (explicit corrected request), T05, T06, T07, T08 (measured action-level expected error), and T09 PAD acceptance, plus a fresh current-version independent T01 acceptance. Historical finald 79245787 acceptance is preserved but not transferred; T04 remains not accepted, T10 functional execution and the authorized two-line content scope are proven separately while strict raw-byte preservation remains NOT_PROVEN; independent T04/T10, P3 positive cases, negative suite v2, and final audit remain OPEN / partial."
+    "result": "Current canonical package is 20260913e with WAIT 1/WAIT 1 alignment, a live reference-only precheck, current-version T01, T02, T03 (explicit corrected request), T05, T06, T07, T08 (measured action-level expected error), and T09 PAD acceptance, plus fresh current-version independent T01 acceptance and a partial independent T04 candidate (clean response-origin format, unmodified paste/save/recopy, two PAD runs, run2 cell values verified). Historical finald 79245787 acceptance is preserved but not transferred; original T04 remains not accepted, independent T04 is not promoted to full acceptance because run1 output was not snapshotted, and T10 functional execution and the authorized two-line content scope are proven separately while strict raw-byte preservation remains NOT_PROVEN; independent T10, P3 positive cases, negative suite v2, and final audit remain OPEN / partial."
 }

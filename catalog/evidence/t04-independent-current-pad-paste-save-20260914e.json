@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T03:06:45+09:00",
+  "case": "T04",
+  "status": "PASS_CURRENT_20260914E_INDEPENDENT_T04_PAD_PASTE_SAVE",
+  "version": {
+    "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+    "knowledge_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+    "request_path": "catalog/generated/normal-chat-20260914e-t04-independent-live/request.txt",
+    "request_sha256_with_lf": "13e79aea647fbb3d2abbce9da5f603635afeb719597881f54ac87006c6724ec5",
+    "request_sha256_without_lf": "020cb33802814321042c27cf094c340fcfeac2ed338d2819be32ca26e8db47b4",
+    "attachments": [
+      {"name": "agent-instructions.txt", "source": "copilot/agent-instructions.txt", "sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c", "upload_status": "attached"},
+      {"name": "PAD-Robin-Knowledge-Bundle.txt", "source": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt", "sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12", "upload_status": "attached"}
+    ]
+  },
+  "flow": {
+    "name": "RobinKnowledgeT04IndependentCurrentBundleLive20260914eD",
+    "designer_pid": 29660,
+    "empty_before_paste": true,
+    "source_robin": "catalog/generated/normal-chat-20260914e-t04-independent-live/robin.txt",
+    "source_sha256": "dd4f39f0700cfb5a9275dfc9912c89bd8d886d72972c9eb74223acf30343569d",
+    "source_bytes": 1585,
+    "paste_confirmed": true,
+    "designer_status": "9 選択されたアクション",
+    "designer_action_count": 9,
+    "visible_action_count": 6,
+    "virtualized_list_false_negative": true,
+    "saved_confirmed": true,
+    "save_method": "tools/Save-PadFlowLive.ps1",
+    "hand_edit_applied": false,
+    "existing_inputs_and_outputs_restored": true
+  },
+  "helper_observation": {
+    "direct_list_helper": "Paste-PadRobinLive.ps1 initially observed 6 realized ListItems and rejected the paste; no edit or execution followed.",
+    "status_confirmation": "Copy-PadFlowLiveByStatus.ps1 observed the authoritative 9-action Designer summary and recopy after save.",
+    "script_change": "Paste-PadRobinLiveByStatus.ps1 now accepts localized action-summary labels and waits for the Designer status instead of relying on the virtualized direct-child count."
+  }
+}

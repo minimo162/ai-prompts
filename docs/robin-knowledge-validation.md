@@ -1,4 +1,12 @@
 # Robinナレッジ検証報告
+## 2026-09-14 独立T04の生成形式補正候補
+
+T04の元試行3でDOMと保存Robinに`=>`前literalバックスラッシュが現れた原因を生成回答由来として保持したまま、同版の別仮説を検証した。現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`）を新規Think Deeper通常チャットへ同版指示＋bundle実添付し、評価者用の件数・期待値を依頼本文へ渡さない補正版依頼を1回だけ送信した。公式応答（SHA `a932e7e7…`）とDOM単一`pre`（Robin SHA `dd4f39f0…43569d`、9行、plain `=>` 5、escaped `\\=>` 0）を無修正で保存した。
+
+新規空フロー `RobinKnowledgeT04IndependentCurrentBundleLive20260914eD`（PID 29660）へ貼付け・保存・再コピーした。アクション一覧は仮想化で表示6件だったが、Designer集計 `9 選択されたアクション` と再コピー9行を正としたため、`tools/Paste-PadRobinLiveByStatus.ps1` をローカライズされた集計ラベルと60秒待機へ最小修正した。無修正貼付け・保存後再コピー（CRLF正規化後一致）を確認し、2回Runとも成功。Run2 xlsxは3行3列（対象/A/10、対象/C/25、対象/D/5）で、入力fixture SHAは不変、元のT04 CSV/xlsxは復元した。
+
+Run1のxlsxスナップショットはRun2前に取得できず、追加3回目は行わなかった。したがって本件は `PASS_CURRENT_20260914E_INDEPENDENT_T04_GENERATION_PAD_TWO_RUNS_PARTIAL`／`candidate_partial` に限定し、独立T04の完全受入や元T04の昇格とはしない。厳密な入力→生成バイト保持も`NOT_ASSESSED`。詳細証跡は `catalog/generated/normal-chat-20260914e-t04-independent-live/`、`catalog/evidence/t04-independent-current-output-comparison-20260914e.json`、paste/save、recopy、run1/run2各JSON。
+
 ## 2026-09-14 T08現行版生成・PAD受入
 
 現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を新規通常M365 Copilotチャット（Think Deeper、同版指示＋bundle実添付、会話 `https://m365.cloud.microsoft/chat/conversation/4b3b4dfc-8fb9-4d0c-a5de-3427be8a00eb`）へ送信した。固定依頼SHAは `79070940…`、送信本文SHAは `72b55f32…`。回答原文2,635文字（SHA `60191af3…`）と単一12行Robin（末尾LF除外SHA `d4a6b697…`）を無修正で保存した。生成回答の形式はT04の矢印エスケープとは異なり、DOM `pre.textContent` と一致した。

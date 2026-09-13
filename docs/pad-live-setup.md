@@ -97,6 +97,12 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools\Run-PadFlowLive.ps
 
 この場合は、UIAの観測証跡だけを残し、貼付け・保存・Runを実行しない。Trusted RPCが利用可能になった場合も、UIAの成功結果へ遡って置き換えず、その経路を別の証跡として扱う。
 
+## 2026-09-14 T04でのアクション数仮想化対策
+
+独立T04の新規空フローでは、実際に貼り付けた9アクションに対し、UIAのListItemとして実体化されたノードは6件だけだった。これは一覧仮想化による観測不足であり、貼付け失敗や生成Robinの欠落とは扱わない。Designerの集計ラベル `9 選択されたアクション`／`9 アクション`、保存後再コピーの9行、原文とのCRLF正規化後一致を併せて正とする。
+
+この条件を固定するため、`tools/Paste-PadRobinLiveByStatus.ps1` はローカライズされた集計ラベル（`^9\\s+.*アクション`）を待つ方式へ最小修正した。直接ListItem件数だけを根拠に再送・再貼付けしない。集計ラベルが現れない場合、フロー名・PID・HWNDが一意でない場合、または保存確認が取れない場合は停止する。今回のT04はこの補助で保存後再コピーを取得し、2回Runまで実施したが、Run1のxlsxスナップショットは未採取のため受入へ昇格せず候補partialに限定した。
+
 ## 今回のT01での実測証跡
 
 - Copilot送信・回答・Robin原文: `catalog/evidence/t01-current-bundle-live-send-20260911.json`

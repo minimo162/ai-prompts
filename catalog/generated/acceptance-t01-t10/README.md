@@ -1,5 +1,11 @@
 # 通常M365 Copilotチャット受入試験 T01〜T10（継続中）
 
+### 2026-09-14 独立T04（現行版・候補partial）
+
+現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を新規Think Deeper通常チャットへ実添付し、件数・期待値を依頼本文から除外した独立依頼を1回送信した。公式応答（末尾LF除外SHA `a932e7e7…`）とDOM単一`pre`（SHA `dd4f39f0…43569d`、9行、plain `=>` 5、escaped `\\=>` 0）を無修正保存した。
+
+生成Robinを新規空フロー `RobinKnowledgeT04IndependentCurrentBundleLive20260914eD`（PID 29660）へ貼付け・保存・再コピーし、仮想化された表示ListItem 6件に対してDesigner集計 `9 選択されたアクション` を正とした。再コピーはCRLF正規化後のみ一致。2回Runとも成功し、Run2の保存xlsx（SHA `c9255b36…`）は`対象/A/10`、`対象/C/25`、`対象/D/5`の3行3列、入力fixture SHA `1d0b3d3b…`不変、旧T04成果物復元を確認した。Run1のxlsxはRun2前にスナップショット未採取のため、生成・PAD 2run候補は `candidate_partial` とする。追加Runは行わず、元T04の応答由来形式不受入とT10厳密保持NOT_PROVENを維持する。詳細は `catalog/evidence/t04-independent-current-output-comparison-20260914e.json` と `catalog/generated/normal-chat-20260914e-t04-independent-live/`。
+
 ### 2026-09-14 T01現行版独立再試験
 
 現行正本20260913e（instruction SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を、通常M365 Copilotの新規会話 `f0af1bd2-f257-4ba4-9b22-c3da0cce9ef9`（Think Deeper、指示＋bundle実添付）で独立T01依頼へ適用した。公式「応答のコピー」で得た応答は2321文字、DOM上の`pre`は1件・3行・646 bytes（SHA `2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47`）で、生成Robinは無修正で保存した。公式コピー本文SHA（末尾LFなし）は`3e50575fc8bb7406e248140b1d7f47639faa185ceec0f21a3ef04cfb576659cc`として、DOM原文・ローカル保存の末尾LF差と分離記録している。

@@ -1,5 +1,9 @@
 # PAD実アクションのRobinカタログ
 
+### 2026-09-14 独立T04の現行版候補
+
+現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を同版指示＋bundle実添付の新規Think Deeper通常チャットへ送信した。評価者用の件数・期待値を本文へ渡さない補正版依頼で、公式応答（SHA `a932e7e7…`）とDOM単一`pre`のRobin（SHA `dd4f39f0…43569d`、9行、`=>` 5箇所、`\\=>` 0箇所）を無修正保存した。`RobinKnowledgeT04IndependentCurrentBundleLive20260914eD`へ貼付け・保存・再コピーし、再コピーはCRLF正規化後のみ一致（生バイト一致は主張しない）。2回Runは成功し、Run2のxlsxは3行3列（対象/A/10、対象/C/25、対象/D/5）、入力fixture SHAは不変、既存出力と中間CSVは復元した。Run1のxlsxスナップショットはRun2前に採取できなかったため候補`partial`であり、追加3回目は行わず、元T04の応答由来形式不受入を上書き・昇格していない。詳細は`evidence/t04-independent-current-output-comparison-20260914e.json`。Issue #5/#27はOPEN / partialを維持する。
+
 > 2026-09-14追補: 20260913e正本（instruction `6ad6f742…`／bundle `79245787…`）でT06/T07/T08を新規通常M365 Copilot会話へ送信し、Think Deeper・同版指示＋bundle実添付を確認。T06は4行Robinを無修正で新規専用空フローへ貼付け・保存・再コピー・2回Runし、Word本文置換・入力SHA不変を照合。T07は2行Robin（SHA `47a33ef2…`）を`RobinKnowledgeT07CurrentBundleLive20260914e`へ無修正貼付け・保存・再コピー、2回Runを完了し、合成PDF出力は両回とも`PAGE_TOKEN_A2`のみ、入力PDF SHA不変、既存出力復元を確認した（`evidence/t07-current-bundle-live-acceptance-20260914e.json`、`evidence/t07-current-bundle-output-comparison-20260914e.json`）。T08は12行Robin（SHA `d4a6b697…`）を`RobinKnowledgeT08CurrentBundleLive20260914e`へ無修正貼付け・保存・再コピー、2回Runし、アクション単位`FileNotFoundError`で`NewVar=named`、欠損LastError、ブロック側`FileNotFound`一致NOT_PROVEN、入力不在・後続書込み／マーカー／公開なしを確認した（`evidence/t08-current-bundle-live-acceptance-20260914e.json`、`evidence/t08-current-bundle-output-comparison-20260914e.json`）。独立T01も新規通常チャット／新規空フローへ無修正3行を貼付け・保存・再コピーし、2回Runで出力SHA `2b030f2d…`・入力SHA不変を確認した（`evidence/t01-independent-current-output-comparison-20260914e.json`）。厳密バイト保持は各再コピーの正規化一致を超えて主張しない。現行版受入済みはT01/T02/T03（修正版依頼）/T05/T06/T07/T08/T09と独立T01、T04形式・T10厳密保持・独立T04/T10・P3・負例・A〜G監査は残り、Issue #5/#27はOPEN / partial。
 
 > 2026-09-12 最終監査: 固定finaldの生成受入は維持。A〜Gの一部の別空フロー再利用等の保存証跡が未特定で、PR提出準備は未完了です。[原証跡の対応表と不足](../docs/robin-knowledge-validation.md)を確認してください。

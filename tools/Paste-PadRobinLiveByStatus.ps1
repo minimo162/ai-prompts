@@ -38,11 +38,21 @@ try {
     [Windows.Forms.Clipboard]::SetText($text)
     $pasteSequence = Get-AgentPadClipboardSequence
     [Windows.Forms.SendKeys]::SendWait('^v')
-    $deadline = [DateTime]::UtcNow.AddSeconds(25)
+    # Excel actions can take longer than the list virtualization update.  Keep
+    # waiting for the Designer's status summary (rather than treating the
+    # six realized ListItems as a paste failure).
+    $deadline = [DateTime]::UtcNow.AddSeconds(60)
     do {
         Start-Sleep -Milliseconds 200
         $visibleCount = $list.FindAll([Windows.Automation.TreeScope]::Children, $itemCondition).Count
-        $statusNodes = @($window.FindAll([Windows.Automation.TreeScope]::Descendants, (New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::NameProperty, ($ExpectedActionCount.ToString() + ' アクション')))))
+        # PAD localizes/qualifies this summary differently across builds (for
+        # example, "9 アクション" and "9 選択されたアクション").  The
+        # direct ListItem collection is virtualized, so use the authoritative
+        # numeric prefix plus the action word instead of an exact label.
+        $allNodes = @($window.FindAll([Windows.Automation.TreeScope]::Descendants, [Windows.Automation.Condition]::TrueCondition))
+        $statusNodes = @($allNodes | Where-Object {
+            try { $_.Current.Name -match ('^' + [regex]::Escape($ExpectedActionCount.ToString()) + '\s+.*アクション') } catch { $false }
+        })
         if ($statusNodes.Count -gt 0) { $statusName = $statusNodes[0].Current.Name }
     } while ($null -eq $statusName -and [DateTime]::UtcNow -lt $deadline)
     if ($null -eq $statusName) { throw ('Paste not confirmed by Designer status; visible_count=' + $visibleCount) }

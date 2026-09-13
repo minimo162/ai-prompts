@@ -264,10 +264,32 @@
       "strict_source_to_generation": "NOT_ASSESSED",
       "raw_unmodified": true
     },
+    "T04_independent_20260914e": {
+      "status": "PASS_CURRENT_20260914E_INDEPENDENT_T04_GENERATION_PAD_TWO_RUNS_PARTIAL",
+      "result": "../generated/normal-chat-20260914e-t04-independent-live/result.json",
+      "evidence": "evidence/t04-independent-current-output-comparison-20260914e.json",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/e06e99be-8eb9-4d1b-9d9f-1c39e34060e9",
+      "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+      "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "request_sha256_without_lf": "020cb33802814321042c27cf094c340fcfeac2ed338d2819be32ca26e8db47b4",
+      "response_sha256_without_trailing_lf": "a932e7e7e4579e557a385f2c72ca7bdc98ce60c403061b77386761fdea67b21c",
+      "robin_sha256": "dd4f39f0700cfb5a9275dfc9912c89bd8d886d72972c9eb74223acf30343569d",
+      "flow_name": "RobinKnowledgeT04IndependentCurrentBundleLive20260914eD",
+      "designer_pid": 29660,
+      "runs_completed": 2,
+      "input_unchanged": true,
+      "run2_output_values_verified": true,
+      "run1_output_snapshot": "NOT_CAPTURED",
+      "recopy_crlf_normalized_equal": true,
+      "response_origin_backslash_arrow_count": 0,
+      "strict_source_to_generation": "NOT_ASSESSED",
+      "acceptance_scope": "candidate_partial",
+      "raw_unmodified": true
+    },
     "promotion": "T03_CURRENT_TRACE_ADDED;_ORIGINAL_REQUEST_NOT_PROMOTED",
     "canonical_distribution_instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
     "canonical_distribution_version": "20260913e",
-    "promotion_note": "The former candidate instruction is now the canonical source after the minimal WAIT 500→WAIT 1 correction. T03's corrected-request evidence and T05's fresh generation/PAD evidence are now traced to the current canonical hashes without old PASS transfer; the original T03 request without explicit counter requirements remains outside this acceptance. T05 used a newly-created flow that retained the UI auto-name 無題 (2); an explicitly named-flow requirement would require a fresh PAD-only gate. T04 and the remaining new-version cases still require their own evidence."
+    "promotion_note": "The former candidate instruction is now the canonical source after the minimal WAIT 500→WAIT 1 correction. T03's corrected-request evidence and T05's fresh generation/PAD evidence are now traced to the current canonical hashes without old PASS transfer; the original T03 request without explicit counter requirements remains outside this acceptance. T05 used a newly-created flow that retained the UI auto-name 無題 (2); an explicitly named-flow requirement would require a fresh PAD-only gate. A same-version independent T04 request withheld evaluator counts and produced a clean response-origin Robin, which was pasted, saved, recopied, and run twice; run2 cell values are verified, but run1's xlsx snapshot was not captured, so it remains a partial candidate and does not promote the original T04 failure. Independent T10 and the remaining new-version cases still require their own evidence."
   },
   "p3": {
     "measured_20260912": [
@@ -291,7 +313,7 @@
   "remaining": [
     "T03 corrected request is traced to the current canonical 20260913e hashes and PAD acceptance; this is not a pass for the original request without an observable counter requirement.",
     "T05 2026-09-13 fresh retry generation and two PAD runs are traced to current 20260913e; the new flow was auto-named 無題 (2), so an explicitly named-flow gate remains a bounded caveat.",
-    "T04 2026-09-13 generation format remains not accepted; fresh attempt-3 reproduces the response-origin arrow escaping in a new conversation, while attempt-1 bracket provenance remains unproven.",
+    "T04 2026-09-13 generation format remains not accepted; fresh attempt-3 reproduces the response-origin arrow escaping in a new conversation, while attempt-1 bracket provenance remains unproven. A separate current-version independent request produced a clean 9-line Robin and two PAD runs, but run1's xlsx snapshot was not captured, so it remains a partial candidate and is not promoted.",
     "T06 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after CRLF normalization, Word body comparison passed, and the pre-existing output was moved aside and restored.",
     "T07 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after CRLF normalization, PAGE_TOKEN_A2 was present without PAGE_TOKEN_A1, input PDF was unchanged, and the pre-existing output was restored.",
     "T08 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after explicit whitespace normalization, action-level FileNotFoundError set NewVar=named and LastError on both runs, block-level user-defined FileNotFound remains NOT_PROVEN, and no downstream write/marker/publication occurred.",
@@ -299,7 +321,7 @@
     "Agent Builder registration (out of scope)",
     "DOM check (tests/Test-CopilotDom.cjs) NOT_RUN: Playwright not configured"
   ],
-  "result": "Historical finald 79245787 acceptance is preserved. Current canonical package 20260913e aligns instruction and knowledge at WAIT 1, has a live reference-only precheck, current-version T01, T02, T03 (explicit corrected request), T05, T06, T07, T08 (measured action-level expected error), and T09 PAD acceptance, plus current-version independent T01 acceptance; T04 remains not accepted. T10 functional execution and the authorized two-line content scope are proven separately, while strict raw-byte preservation remains NOT_PROVEN; independent T04/T10, P3 positives, negative suite v2, and final audit are still pending.",
+  "result": "Historical finald 79245787 acceptance is preserved. Current canonical package 20260913e aligns instruction and knowledge at WAIT 1, has a live reference-only precheck, current-version T01, T02, T03 (explicit corrected request), T05, T06, T07, T08 (measured action-level expected error), and T09 PAD acceptance, plus current-version independent T01 acceptance and a partial independent T04 candidate; original T04 remains not accepted. T10 functional execution and the authorized two-line content scope are proven separately, while strict raw-byte preservation remains NOT_PROVEN; independent T10, P3 positives, negative suite v2, and final audit are still pending.",
   "final_evidence_audit": {
     "status": "PARTIAL_REQUIRED_TRACEABILITY_GAPS",
     "target_commit": "e295387b525492f87e890bc0fb8a74aaf2396c2f",
@@ -310,7 +332,7 @@
     "required_gaps": [
       "The canonical instruction WAIT 500→WAIT 1 correction is fixed in 20260913e. Because instruction bytes changed, fresh same-version acceptance is required; do not relabel historical finald PASS as 20260913e.",
       "T03 2026-09-13 request-only correction is traced to current canonical 20260913e and PAD accepted; it does not certify the original request without explicit counters, and no historical finald PASS was transferred.",
-      "T04 2026-09-13 raw generations remain format-not-accepted; fresh-conversation attempt-3 confirms response-origin arrow escapes, and no unescape or repair was applied.",
+      "T04 2026-09-13 raw generations remain format-not-accepted; fresh-conversation attempt-3 confirms response-origin arrow escapes, and no unescape or repair was applied. Independent 20260914e generation has clean arrows and two PAD runs, but lacks a run1 xlsx snapshot and remains candidate_partial.",
       "B/C/D/E: separate-empty-flow reuse trace missing for some existing probes; see report matrix. A boolean/subtraction and D folder creation were supplemented with new reuse evidence; do not infer the other items from T01-T10 PASS.",
       "C: saved cell probe proves indexed cell update, not a cell-value read; locate the required cell-reference evidence and distinguish optional column-name row-loop syntax.",
       "T10: derived audit evidence/t10-strict-preservation-audit-20260913.json proves functional execution separately and proves normalized content scope (only lines 2 and 4 changed; zero outside-line changes), but raw source-to-generation/source-to-recopy byte equality is false because source is CRLF/no-final-LF and generated/recopied forms differ. Keep strict preservation NOT_PROVEN and do not promote functional runs to full T10 acceptance."
