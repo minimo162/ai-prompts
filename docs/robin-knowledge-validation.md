@@ -1,11 +1,19 @@
 # Robinナレッジ検証報告
+## 2026-09-14 T06現行版生成・PAD受入
+
+20260913e正本（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）をThink Deeperの通常M365 Copilot新規会話 `https://m365.cloud.microsoft/chat/conversation/efc8983a-0075-4040-833a-8f06183823b4`へ、指示全文とbundleの実添付で送信した。生成された4行Robin（SHA `c0940cb3e3ddbd82880d274692858ce3e2335f623acb11abe521926e642f9fd9`、593 bytes）は無修正で新規専用空フロー `RobinKnowledgeT06CurrentBundleLive20260914e`（Designer PID 34264、HWND 397164）へ貼付け・保存・再コピーした。PAD再コピーはCRLF（597 bytes）だが、生成原文との改行正規化後一致を確認した。
+
+同フローを2回Runし、両回ともReady復帰・Start有効・エラーなし・`Word インスタンス`プレビューを確認した。合成Word本文は入力 `OfficeCatalog 日本語 100%` から出力 `T06Replaced 日本語 100%` となり、`OfficeCatalog` 0件、`T06Replaced` 1件、指定置換以外の本文一致、入力SHA `2753855b…` 不変、Wordプロセス0を直接照合した。Run 1/2のdocxパッケージSHAは異なるため、本文結果の受入であり厳密な入力→生成→PADバイト保持は主張しない。既存の同名出力は各Run前に退避し、Run後に元SHAで復元した。証跡は`catalog/evidence/t06-copilot-live-generation-20260914e.json`、`catalog/evidence/t06-copilot-live-generation-20260914e-pad-acceptance.json`、`catalog/evidence/t06-20260914e-output-comparison.json`。
+
+旧finaldのT06 PASSは履歴として保持し、今回の現行版受入へ移していない。T04の生成形式不受入、T07/T08/T10、独立再試験、P3正例、負例v2、A〜G全体監査は残り、Issue #5/#27はOPEN / partialとする。
+
 ## 2026-09-14 T05現行版追跡昇格（新規自動名フロー）
 
 20260913e正本（instruction SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`）でT05生成を追跡した。初回回答の矢印前literalバックスラッシュは原記録として不受入保存し、同じ会話の許可済み1回リトライで取得した4行Robin（SHA `be40e6b337620f1c76ba650b202f316d4b80b339de1c859fe1cb55a9f2714911`）だけを無修正で使用した。指示・bundle実添付、依頼SHA、失敗原文は `catalog/evidence/t05-copilot-live-generation-20260913.json` から追跡できる。
 
 PADでは新規空フローへ貼付け・保存・再コピーし、2回Runとも成功。合成ExcelのB2=`T05-Changed`、A1不変、入力SHA `e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6` 不変、出力比較PASSを確認した（`catalog/evidence/t05-copilot-live-generation-20260913e-pad-acceptance.json`）。作成ダイアログの名前入力が利用可能UI経路で設定できず、フロー名は自動名 `無題 (2)` となった。新規作成・既存フロー非再利用は記録したが、明示的な人手命名を受入条件とする場合は、同じ生成Robinを編集せず、新しい一意名の空フローでPAD貼付け・2runだけを再実施する。
 
-旧finald PASSは移していない。T04生成形式不受入、T06〜T08/T10同版、独立再試験、P3、負例、T10厳密保持`NOT_PROVEN`、A〜G全体監査は残し、Issue #5/#27はOPEN / partialとする。
+旧finald PASSは移していない。T04生成形式不受入、T07/T08/T10同版、独立再試験、P3、負例、T10厳密保持`NOT_PROVEN`、A〜G全体監査は残し、Issue #5/#27はOPEN / partialとする。
 
 ## 2026-09-14 T03現行版追跡昇格（修正版依頼のみ）
 

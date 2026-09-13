@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T00:56:30+09:00",
+  "case": "T06",
+  "input": {
+    "path": "catalog/fixtures/word/word-catalog.docx",
+    "sha256": "2753855b1e6b7b8dccc857cb60ad1f9bf548908fbd10fea8dc8efa2ff8003cbd",
+    "text": "OfficeCatalog 日本語 100%",
+    "unchanged_after_run1": true,
+    "unchanged_after_run2": true
+  },
+  "expected": {
+    "replacement": "OfficeCatalog -> T06Replaced",
+    "text": "T06Replaced 日本語 100%",
+    "rest_of_text_unchanged": true,
+    "runs_required": 2
+  },
+  "run1": {
+    "output_path": "../generated/normal-chat-20260914e-t06-live/output-run1.docx",
+    "sha256": "ca11d2b302c8800d9c5b4762444ec73b8d32d29fb8f407f09884b4733af0c85c",
+    "bytes": 15601,
+    "text": "T06Replaced 日本語 100%",
+    "OfficeCatalog_count": 0,
+    "T06Replaced_count": 1,
+    "equals_input_with_replacement": true,
+    "word_processes_after": 0
+  },
+  "run2": {
+    "output_path": "../generated/normal-chat-20260914e-t06-live/output-run2.docx",
+    "sha256": "4fbe4260a3f4637cb4280d290ce1619ecbbe84913b94cc44c3ab8b5e3a24f287",
+    "bytes": 15597,
+    "text": "T06Replaced 日本語 100%",
+    "OfficeCatalog_count": 0,
+    "T06Replaced_count": 1,
+    "equals_input_with_replacement": true,
+    "word_processes_after": 0
+  },
+  "run_texts_equal": true,
+  "run_package_bytes_equal": false,
+  "recopy": {
+    "after_save": {
+      "path": "../generated/normal-chat-20260914e-t06-live/pad-recopy-after-save.robin",
+      "sha256": "724df76ba2b1be6b602dc18300b259267a41e19eabcd7158e08ae5e722c0ca73",
+      "bytes": 597,
+      "cr": 4,
+      "normalized_equal_to_generated": true
+    },
+    "after_run2": {
+      "path": "../generated/normal-chat-20260914e-t06-live/pad-recopy-after-run2.robin",
+      "sha256": "724df76ba2b1be6b602dc18300b259267a41e19eabcd7158e08ae5e722c0ca73",
+      "bytes": 597,
+      "cr": 4,
+      "normalized_equal_to_generated": true
+    }
+  },
+  "comparison_scope": "ZIP package hashes differ between PAD runs, so acceptance is based on extracted Word body text and input SHA invariance; this is not a byte-preservation claim."
+}
