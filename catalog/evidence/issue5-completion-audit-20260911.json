@@ -71,5 +71,30 @@
     "independent_strict": "NOT_PROVEN",
     "additional_real_acquisitions": 0,
     "reason": "Historical Add File saving appends LF in one same-operation synthetic control. Browser inventory timed out; no real recapture. Existing real candidates fail outside the exact two literal-content intervals. C and independent T04 new pair remain accepted; only strict T10 remains required."
+  },
+  "t10_existing_response_recapture": {
+    "evidence": "catalog/evidence/t10-strict-20260914x-recapture-results.json",
+    "verification": "catalog/evidence/t10-strict-20260914x-recapture-verification.json",
+    "browser_prerequisite_requests": 1,
+    "browser_prerequisite_completed": 1,
+    "primary": {
+      "requests": 1,
+      "completed": 1,
+      "remaining": 0,
+      "save_equal": true,
+      "authorized_contents": true,
+      "outside_bytes": false,
+      "strict": "NOT_PROVEN"
+    },
+    "independent": {
+      "requests": 1,
+      "completed": 1,
+      "remaining": 0,
+      "save_equal": true,
+      "authorized_contents": true,
+      "outside_bytes": false,
+      "strict": "NOT_PROVEN"
+    },
+    "next": "Original acquisition budgets exhausted. No repeat, new send or PAD Run authorized; distinct upstream hypothesis and explicit new limits required."
   }
 }

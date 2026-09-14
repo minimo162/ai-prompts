@@ -1,0 +1,246 @@
+{
+  "scope_id": "T10-STRICT-20260914X",
+  "base_commit": "a262b16476c008d0dd6ccacdf35f754130d39274",
+  "captured_at": "2026-09-14T15:21:25.132Z",
+  "browser_prerequisite": {
+    "requests": 1,
+    "completed": 1,
+    "status": "AVAILABLE",
+    "method": "cua.getState()",
+    "target_tabs_initially_open": false
+  },
+  "actual": [
+    {
+      "id": "primary",
+      "request": "catalog/evidence/t10-strict-20260914x-recapture-primary-request.json",
+      "capture": "catalog/evidence/t10-strict-20260914x-recapture-primary-string.json",
+      "saved": "catalog/evidence/t10-strict-20260914x-recapture-primary.robin",
+      "transport": {
+        "source": "current cua_repl JSON tool output; copied as data, not reconstructed from old Robin",
+        "call_id": "call_Zxir2EbMylDC5AQn6ZlBSiep",
+        "tool_output_sha256": "602a6bc1f3e966dd95c2a4434b10f6265f3338535ab00d158a804d78c6f9effd"
+      },
+      "saving": {
+        "bytes": 1752,
+        "sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12",
+        "utf16_code_units": 1752,
+        "code_points": 1752,
+        "encoding": "UTF-8, no added BOM or newline; U+FEFF retained if present",
+        "utf16_source_sha256": "156797b2117dd75e66d9ac47fad91b1a41e8571ff0019a290105ed7c5fe950d6",
+        "saved_equal_encoded_capture": true,
+        "source_file_raw_bytes_directly_observed": false
+      },
+      "comparison": {
+        "status": "FAIL",
+        "authorized_contents": true,
+        "outside_bytes": false,
+        "source_sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+        "candidate_sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12",
+        "source_bytes": 1759,
+        "candidate_bytes": 1752,
+        "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+        "edits": [
+          {
+            "source": {
+              "start": 173,
+              "end": 190,
+              "line": 2
+            },
+            "candidate": {
+              "start": 172,
+              "end": 183,
+              "line": 2
+            },
+            "shift": -1,
+            "requested_value_equal": true,
+            "requested_line_equal": true
+          },
+          {
+            "source": {
+              "start": 503,
+              "end": 564,
+              "line": 4
+            },
+            "candidate": {
+              "start": 494,
+              "end": 568,
+              "line": 4
+            },
+            "shift": -9,
+            "requested_value_equal": true,
+            "requested_line_equal": true
+          }
+        ],
+        "gaps": [
+          {
+            "source_start": 0,
+            "source_end": 173,
+            "candidate_start": 0,
+            "candidate_end": 172,
+            "shift": 0,
+            "equal": false,
+            "first_difference": {
+              "source_offset": 107,
+              "candidate_offset": 107
+            }
+          },
+          {
+            "source_start": 190,
+            "source_end": 503,
+            "candidate_start": 183,
+            "candidate_end": 494,
+            "shift": -7,
+            "equal": false,
+            "first_difference": {
+              "source_offset": 217,
+              "candidate_offset": 210
+            }
+          },
+          {
+            "source_start": 564,
+            "source_end": 1759,
+            "candidate_start": 568,
+            "candidate_end": 1752,
+            "shift": 4,
+            "equal": false,
+            "first_difference": {
+              "source_offset": 567,
+              "candidate_offset": 571
+            }
+          }
+        ]
+      },
+      "strict": "NOT_PROVEN",
+      "requests": 1,
+      "completed": 1,
+      "remaining": 0,
+      "serialization": {
+        "cr": 0,
+        "lf": 16,
+        "final_lf": true,
+        "bom": false
+      }
+    },
+    {
+      "id": "independent",
+      "request": "catalog/evidence/t10-strict-20260914x-recapture-independent-request.json",
+      "capture": "catalog/evidence/t10-strict-20260914x-recapture-independent-string.json",
+      "saved": "catalog/evidence/t10-strict-20260914x-recapture-independent.robin",
+      "transport": {
+        "source": "current cua_repl JSON tool output; copied as data, not reconstructed from old Robin",
+        "call_id": "call_pWXbgIFeMFBxQAS3AnyIQVZ9",
+        "tool_output_sha256": "2ff9e6f461368b4a930a23e655d49b0618387f802c6c7bc8645aa0ca92e32461"
+      },
+      "saving": {
+        "bytes": 1771,
+        "sha256": "2bcb5512adc3d238251ea7da2f82c047a5ddfbf4ae4ce343b437aef27eb3284a",
+        "utf16_code_units": 1771,
+        "code_points": 1771,
+        "encoding": "UTF-8, no added BOM or newline; U+FEFF retained if present",
+        "utf16_source_sha256": "dbd56109864bb75b1f3e1e579466fa6b0c5b9c2592d5e24397a5dec0f7b425e7",
+        "saved_equal_encoded_capture": true,
+        "source_file_raw_bytes_directly_observed": false
+      },
+      "comparison": {
+        "status": "FAIL",
+        "authorized_contents": true,
+        "outside_bytes": false,
+        "source_sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+        "candidate_sha256": "2bcb5512adc3d238251ea7da2f82c047a5ddfbf4ae4ce343b437aef27eb3284a",
+        "source_bytes": 1759,
+        "candidate_bytes": 1771,
+        "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+        "edits": [
+          {
+            "source": {
+              "start": 173,
+              "end": 190,
+              "line": 2
+            },
+            "candidate": {
+              "start": 172,
+              "end": 183,
+              "line": 2
+            },
+            "shift": -1,
+            "requested_value_equal": true,
+            "requested_line_equal": true
+          },
+          {
+            "source": {
+              "start": 503,
+              "end": 564,
+              "line": 4
+            },
+            "candidate": {
+              "start": 494,
+              "end": 587,
+              "line": 4
+            },
+            "shift": -9,
+            "requested_value_equal": true,
+            "requested_line_equal": true
+          }
+        ],
+        "gaps": [
+          {
+            "source_start": 0,
+            "source_end": 173,
+            "candidate_start": 0,
+            "candidate_end": 172,
+            "shift": 0,
+            "equal": false,
+            "first_difference": {
+              "source_offset": 107,
+              "candidate_offset": 107
+            }
+          },
+          {
+            "source_start": 190,
+            "source_end": 503,
+            "candidate_start": 183,
+            "candidate_end": 494,
+            "shift": -7,
+            "equal": false,
+            "first_difference": {
+              "source_offset": 217,
+              "candidate_offset": 210
+            }
+          },
+          {
+            "source_start": 564,
+            "source_end": 1759,
+            "candidate_start": 587,
+            "candidate_end": 1771,
+            "shift": 23,
+            "equal": false,
+            "first_difference": {
+              "source_offset": 567,
+              "candidate_offset": 590
+            }
+          }
+        ]
+      },
+      "strict": "NOT_PROVEN",
+      "requests": 1,
+      "completed": 1,
+      "remaining": 0,
+      "serialization": {
+        "cr": 0,
+        "lf": 16,
+        "final_lf": true,
+        "bom": false
+      }
+    }
+  ],
+  "pad_runs": 0,
+  "copilot_sends": 0,
+  "clipboard_changes": 0,
+  "previous_local_control": "REUSED_NOT_RERUN",
+  "interpretation": "Both direct DOM strings saved identically with the existing helper. Each real response fails the fixed outside-content byte contract. The saver did not create the CRLF-to-LF or final-LF differences observed in these DOM strings. Model/server/rendering origins remain unobserved.",
+  "stop": "Both original one-acquisition budgets exhausted; no repeat permitted. New IDs do not reset these budgets.",
+  "next_condition": "Both DOM acquisition budgets are exhausted. Do not retry these nodes under a new ID. A distinct possible hypothesis is that an official existing-response export, if the service exposes one, preserves serialization that the rendered DOM does not. Such a feature/path is NOT_VERIFIED. Resume only after that supported read-only capability is identified and the user explicitly authorizes its scope and fresh limits. Bind any future observation to the same conversation, source/request/version, record the exported raw file before comparison, allow at most one request per explicitly authorized target, and stop on missing/ambiguous/mismatching evidence. No new chat send, hidden API, authentication change or PAD Run is authorized.",
+  "transport_note": "Primary acquisition was first emitted as an object, then the same in-memory capture was emitted as JSON without reading the response again. The file-transfer parser initially expected text blocks and found zero JSON captures; accepting the actual input_text tool-result envelope recovered both current capture records. No content edits, normalization or browser retry occurred.",
+  "issue5": "OPEN / partial",
+  "issue27": "OPEN / partial"
+}

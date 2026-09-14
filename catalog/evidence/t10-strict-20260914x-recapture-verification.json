@@ -1,0 +1,335 @@
+{
+  "schema_version": 1,
+  "scope_id": "T10-STRICT-20260914X",
+  "base_commit": "a262b16476c008d0dd6ccacdf35f754130d39274",
+  "status": "PASS_VERIFICATION_BOTH_STRICT_NOT_PROVEN",
+  "verified_at": "2026-09-14T15:25:20.951Z",
+  "issue_reads": [
+    {
+      "number": 5,
+      "state": "OPEN",
+      "body_sha256": "1e55491f04a7958485001eed5793f6f4a498c0a8a9f5268a1b30f51952715f7a",
+      "last_comment_url": "https://github.com/minimo162/ai-prompts/issues/5#issuecomment-5666044882",
+      "last_comment_sha256": "787ea0939bf4a8e6cec163324624b532da1904eab04bfc63881afa294a414b97"
+    },
+    {
+      "number": 27,
+      "state": "OPEN",
+      "body_sha256": "dae14387dd76949eb8d6dccee1b8d27e3005af33775fd9def5b4655af4da6779",
+      "last_comment_url": "https://github.com/minimo162/ai-prompts/issues/27#issuecomment-5666048674",
+      "last_comment_sha256": "787ea0939bf4a8e6cec163324624b532da1904eab04bfc63881afa294a414b97"
+    }
+  ],
+  "chronology": [
+    {
+      "id": "primary",
+      "request_fixed_at": "2026-09-14T15:17:18.159Z",
+      "capture_string_recorded_at": "2026-09-14T15:17:48.900Z",
+      "request_call_id": "call_DdOGVBeVa1zAgoCW4cQFqis7",
+      "acquisition_call_id": "call_gt2uqeM0V2ydvdZp9iS2TfWK",
+      "json_transport_call_id": "call_Zxir2EbMylDC5AQn6ZlBSiep",
+      "request_precedes_capture": true,
+      "preservation_precedes_capture": true
+    },
+    {
+      "id": "independent",
+      "request_fixed_at": "2026-09-14T15:19:23.663Z",
+      "capture_string_recorded_at": "2026-09-14T15:19:36.032Z",
+      "request_call_id": "call_RfCvDoBl8ug7YYgCQt5IRzEp",
+      "acquisition_call_id": "call_pWXbgIFeMFBxQAS3AnyIQVZ9",
+      "json_transport_call_id": "call_pWXbgIFeMFBxQAS3AnyIQVZ9",
+      "request_precedes_capture": true,
+      "preservation_precedes_capture": true
+    }
+  ],
+  "preservation": {
+    "before": {
+      "at": "2026-09-14T15:17:47.294Z",
+      "protected": 409,
+      "originals": 807,
+      "all_raw_bytes_equal": true,
+      "package_unchanged": true,
+      "previous_8_artifacts_unchanged": true
+    },
+    "after": {
+      "at": "2026-09-14T15:24:26.598Z",
+      "protected": 409,
+      "originals": 807,
+      "all_raw_bytes_equal": true,
+      "package_unchanged": true,
+      "previous_8_artifacts_unchanged": true
+    }
+  },
+  "nonlive": {
+    "path": ".work/nonlive-73ede9578ce04be1805489e4fe26ee57/verification.json",
+    "sha256": "9a7051920e8f5c655c795816e44da0cd73d01e832f9615f323505281a8944845",
+    "status": "PASS",
+    "baseline": 38,
+    "current": 38,
+    "added_to_All": 0,
+    "standalone_added_test": {
+      "status": "PASS",
+      "live_capture_artifacts_checked": 2,
+      "negative_record_checks": 4,
+      "browser_or_clipboard_calls": 0,
+      "strict": "NOT_PROVEN_BOTH"
+    },
+    "tests": [
+      {
+        "test": "Test-CsvContracts.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-CsvBatch.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-CsvLifecycle.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-CsvTypedPlan.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-CsvReview.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-CsvLateResponse.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-QualityDraft.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-OfflineDiagnostic.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-ConversationScope.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-ConnectionContract.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-AcceptanceGate.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-App.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-Pad.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-PadRunArtifactSnapshot.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-RobinCatalog.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-BoundedRobinLoop.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-RobinNumberConversion.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-GeneralJobStart.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-GeneralArtifactOpen.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-CompletionDecision.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-PadRecovery.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-Copilot.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-CopilotPlannerV2.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-PlannerV2Transport.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-Http.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-Launcher.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-ReleaseBinding.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-PublishAgentSource.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-PublishCrash.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-AiCallProcess.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-AiCallProviderFailure.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-ClipboardSnapshot.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-DocumentRobin.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-DocumentObservation.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-ClipboardReadRetry.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-CurrentBundleT01Prepared.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-Issue5CurrentStatus.ps1",
+        "status": "PASS"
+      },
+      {
+        "test": "Test-T10ByteComparator.ps1",
+        "status": "PASS"
+      }
+    ]
+  },
+  "other_checks": {
+    "CurrentStatus": 57,
+    "RobinCatalog": 107,
+    "CopilotPackage": {
+      "utf16": 3947,
+      "knowledge_files": 7,
+      "observed_actions": 87
+    },
+    "RawContracts": 6,
+    "T10Historical": "PASS_REGRESSION_WITH_STRICT_NOT_PROVEN",
+    "JSON": 1438,
+    "new_request_references": 6,
+    "privacy": "PASS synthetic capture content only; no clipboard content, credentials or business data saved",
+    "diff": "PASS; repository CRLF checkout warnings only"
+  },
+  "artifacts": [
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-recapture-primary-request.json",
+      "bytes": 1579,
+      "sha256": "428a52c4075fe53b2c7f52245b0c77a333c2fe72c1d9efefa304f652c28b7e38"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-recapture-primary-string.json",
+      "bytes": 5130,
+      "sha256": "602a6bc1f3e966dd95c2a4434b10f6265f3338535ab00d158a804d78c6f9effd"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-recapture-primary.robin",
+      "bytes": 1752,
+      "sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-recapture-independent-request.json",
+      "bytes": 1785,
+      "sha256": "6f97ce09950998ea1674e47a64c83d904f61dfbe0209ff9d0bee813086928c6f"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-recapture-independent-string.json",
+      "bytes": 5175,
+      "sha256": "2ff9e6f461368b4a930a23e655d49b0618387f802c6c7bc8645aa0ca92e32461"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-recapture-independent.robin",
+      "bytes": 1771,
+      "sha256": "2bcb5512adc3d238251ea7da2f82c047a5ddfbf4ae4ce343b437aef27eb3284a"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-recapture-results.json",
+      "bytes": 9216,
+      "sha256": "7c831040fee5c5a17a19a68a7629446a25c725c946a3884928e3a722338cc8c2"
+    },
+    {
+      "path": "tests/Test-T10Recapture.mjs",
+      "bytes": 3701,
+      "sha256": "d9a0951f5fa032469c9660489b1b642a518fc12a182b5fde3fe222519a92f9e5"
+    }
+  ],
+  "browser_prerequisite": {
+    "requests": 1,
+    "completed": 1,
+    "status": "AVAILABLE",
+    "method": "cua.getState()",
+    "target_tabs_initially_open": false
+  },
+  "counts": [
+    {
+      "id": "primary",
+      "requests": 1,
+      "completed": 1,
+      "remaining": 0
+    },
+    {
+      "id": "independent",
+      "requests": 1,
+      "completed": 1,
+      "remaining": 0
+    }
+  ],
+  "pad_runs": 0,
+  "copilot_sends": 0,
+  "clipboard_changes": 0,
+  "not_run": [
+    "new model generation",
+    "PAD native execution",
+    "clipboard operations",
+    "old apply_patch synthetic control rerun",
+    "GitHub CI",
+    "push",
+    "PR",
+    "merge",
+    "release",
+    "distribution",
+    "Issue close",
+    "branch deletion"
+  ],
+  "outcome": "Direct existing-response DOM captures and new-file saves completed once each. Saved bytes match captured strings; allowed contents match requests; outside bytes fail. Both strict remain NOT_PROVEN. Original acquisition limits exhausted.",
+  "limitations": [
+    "Rendered-request newline-to-space matching was used only for message identity. Response bytes were never normalized.",
+    "Attachment names were observed live; server attachment raw bytes were not redownloaded; hashes bind historical uploads and preserved local files.",
+    "DOM/Playwright acquisition was live; full upstream serialization is unobserved.",
+    "Source/saver tools and historical regression unchanged.",
+    "All clipboard formats raw equality remains unassessed."
+  ]
+}
