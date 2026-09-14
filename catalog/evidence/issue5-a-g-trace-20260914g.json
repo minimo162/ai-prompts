@@ -6,19 +6,26 @@
     "issues": ["#5", "#27"],
     "issue_state": "OPEN",
     "pr_31": "MERGED",
+    "pr_32": "MERGED",
     "baseline_main": "c52f954164eb75fcaa37116a44c7454bca3a5073",
+    "current_main": "7cc2c18b2a7f521f770c47c48cbbf4715d228979",
     "package_version": "20260913e",
     "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
     "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
     "manifest_sha256": "dc597d10bba19de00b1c32d161d5b8eb82d7503b2eea27b81e73456ad48f5008"
   },
-  "live_issue_read": "catalog/evidence/issue-live-read-20260914l.json",
+  "live_issue_read": "catalog/evidence/issue-live-read-20260914m.json",
   "method": {
     "rule": "Each A-G requirement is linked to the exact knowledge source, raw probe/reuse evidence, and current-package live evidence where available. A missing link remains NOT_PROVEN; historical PASS is not transferred to 20260913e.",
     "raw_preservation": true,
     "same_version_generation_resend": false,
     "pad_run_claims_require": ["paste_or_reuse_record", "save_record", "run1_and_run2_records", "fixed_expectation_comparison", "input_invariant_or_restore_record"],
-    "strict_t10_bytes": "NOT_PROVEN"
+    "strict_t10_bytes": "NOT_PROVEN",
+    "classification_contract": {
+      "required_evidence_gap": "A required stage is missing; it cannot be marked complete from a related probe or normalized comparison.",
+      "optional_unconfirmed": "An explicit boundary outside the minimum A-G requirement; it must not block the required decision.",
+      "external_blocked": "A required stage is blocked by an unavailable live UI or bridge; it remains open and is not reclassified as optional."
+    }
   },
   "categories": {
     "A": {
@@ -97,12 +104,139 @@
       "gaps": ["other URLs/elements/browsers and extension-disabled environment remain unconfirmed", "generated six-line Robin does not transport registered UI elements; the element-import route is separately evidenced", "DOM/Playwright test is NOT_RUN"]
     }
   },
+  "requirement_decisions": [
+    {
+      "category": "A",
+      "required_status": "SATISFIED_MEASURED_SUBSET",
+      "required_evidence_gaps": [],
+      "optional_unconfirmed": [
+        "list out-of-range/negative/variable index",
+        "additional number locale/grouping modes",
+        "substring boundary variants",
+        "custom date tokens beyond yyyy-MM-dd and existing-action edit path"
+      ],
+      "external_blocked": []
+    },
+    {
+      "category": "B",
+      "required_status": "SATISFIED_MEASURED_SUBSET",
+      "required_evidence_gaps": [],
+      "optional_unconfirmed": [
+        "3+ nesting and outer-loop exit",
+        "LOOP WHILE nesting",
+        "generalized block-level user-defined FileNotFound match",
+        "some separate-empty-flow reuse remains probe-only rather than current-package reacceptance"
+      ],
+      "external_blocked": []
+    },
+    {
+      "category": "C",
+      "required_status": "PARTIAL_REQUIRED_EVIDENCE_GAP",
+      "required_evidence_gaps": [
+        {
+          "id": "C-datatable-cell-value-read",
+          "missing_stage": "runtime read evidence",
+          "references_checked": [
+            "catalog/evidence/p3-datatable-cell-success-20260911.json",
+            "catalog/evidence/p3-datatable-cell-reuse-20260913-run1.json",
+            "catalog/evidence/p3-datatable-cell-reuse-20260913-run2.json"
+          ],
+          "next_minimum_operation": "Use one synthetic dedicated flow to read a DataTable cell, save/reopen/recopy it, and record Run1 and Run2 values.",
+          "live_dependency": true
+        }
+      ],
+      "optional_unconfirmed": [
+        "DataTable column-name access in a row loop remains NOT_PROVEN",
+        "additional CSV delimiter/quote modes remain unconfirmed",
+        "probe reuse is not current-package same-version reacceptance"
+      ],
+      "external_blocked": []
+    },
+    {
+      "category": "D",
+      "required_status": "SATISFIED_MEASURED_SUBSET",
+      "required_evidence_gaps": [],
+      "optional_unconfirmed": [
+        "case-insensitive extension comparison remains explicitly unconfirmed",
+        "some false-branch and separate reuse paths are not current-package reacceptance",
+        "do not infer unlisted file/folder variants"
+      ],
+      "external_blocked": []
+    },
+    {
+      "category": "E",
+      "required_status": "PARTIAL_EXTERNAL_BLOCKED",
+      "required_evidence_gaps": [
+        {
+          "id": "E-independent-t04-run1-artifact",
+          "missing_stage": "Run1 xlsx snapshot and per-run artifact gate",
+          "references_checked": [
+            "catalog/evidence/t04-independent-current-output-comparison-20260914e.json",
+            "catalog/evidence/t04-independent-current-pad-run1-20260914e.json",
+            "catalog/evidence/t04-independent-current-pad-run2-20260914e.json"
+          ],
+          "next_minimum_operation": "After an observable Designer is available, start the fixed pair, save and verify Run1 xlsx before starting Run2, then restore existing outputs.",
+          "live_dependency": true
+        }
+      ],
+      "optional_unconfirmed": [
+        "some separate probe reuse is not same-version current-package reacceptance",
+        "PowerPoint SaveAs collision/locked targets are outside this Excel evidence"
+      ],
+      "external_blocked": [
+        {
+          "id": "E-pad-designer-observation",
+          "condition": "current PAD.Designer has HWND 0, empty title, and UIA root 0",
+          "evidence": "catalog/evidence/t04-independent-current-pad-window-observation-20260914t.json",
+          "reopen_condition": "stable nonzero HWND, owner PID/process, SessionId, and target-flow correspondence"
+        }
+      ]
+    },
+    {
+      "category": "F",
+      "required_status": "PARTIAL_REQUIRED_EVIDENCE_GAP",
+      "required_evidence_gaps": [
+        {
+          "id": "F-t10-strict-raw-bytes",
+          "missing_stage": "raw source-to-generation and source-to-PAD byte equality",
+          "references_checked": [
+            "catalog/evidence/t10-strict-preservation-audit-20260913.json",
+            "catalog/evidence/t10-independent-current-generation-20260914e.json"
+          ],
+          "next_minimum_operation": "Keep the source, response-origin copy, and PAD recopy byte snapshots separate; only a verified raw-byte comparison may change NOT_PROVEN.",
+          "live_dependency": true
+        }
+      ],
+      "optional_unconfirmed": [
+        "broad Office/PDF variant coverage is not claimed",
+        "new agent registration reuse is not proven"
+      ],
+      "external_blocked": []
+    },
+    {
+      "category": "G",
+      "required_status": "SATISFIED_MEASURED_ROUTE",
+      "required_evidence_gaps": [],
+      "optional_unconfirmed": [
+        "other URLs/elements/browsers and extension-disabled environment remain unconfirmed",
+        "generated six-line Robin does not transport registered UI elements; the element-import route is separately evidenced"
+      ],
+      "external_blocked": [
+        {
+          "id": "G-dom-playwright",
+          "condition": "DOM/Playwright test is NOT_RUN because Playwright is not configured",
+          "evidence": "tests/Test-CopilotDom.cjs",
+          "reopen_condition": "configure the approved Playwright runtime and run the existing test without changing the acceptance expectation"
+        }
+      ]
+    }
+  ],
   "current_t04_trace": {
     "status": "CANDIDATE_PARTIAL_PRESERVED",
     "comparison": "catalog/evidence/t04-independent-current-output-comparison-20260914e.json",
     "reconciliation": "catalog/evidence/t04-independent-current-evidence-reconciliation-20260914e.json",
     "window_observation": "catalog/evidence/t04-independent-current-pad-window-observation-20260914f.json",
-  "latest_window_observation": "catalog/evidence/t04-independent-current-pad-window-diagnostic-20260914r.json",
+  "latest_window_observation": "catalog/evidence/t04-independent-current-pad-window-observation-20260914t.json",
   "window_diagnostic": "catalog/evidence/t04-independent-current-pad-window-diagnostic-20260914r.json",
   "session_diagnostic": "catalog/evidence/t04-independent-current-pad-session-diagnostic-20260914s.json",
   "robin_sha256": "dd4f39f0700cfb5a9275dfc9912c89bd8d886d72972c9eb74223acf30343569d",

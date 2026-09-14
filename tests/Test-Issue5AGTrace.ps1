@@ -28,13 +28,15 @@ $coverage = Read-Json 'catalog/coverage.json'
 $index = Read-Json 'catalog/index.json'
 $audit = Read-Json 'catalog/evidence/issue5-completion-audit-20260913.json'
 $package = Read-Json 'catalog/evidence/current-package-status-20260913.json'
-$liveRead = Read-Json 'catalog/evidence/issue-live-read-20260914l.json'
+$liveRead = Read-Json 'catalog/evidence/issue-live-read-20260914m.json'
 
 Check ($trace.schema_version -eq 1) 'trace schema version'
 Check ($trace.status -eq 'PARTIAL_REQUIRED_TRACEABILITY_GAPS') 'trace remains partial'
 Check ($trace.issue_scope.issue_state -eq 'OPEN') 'issue remains open'
 Check ($trace.issue_scope.pr_31 -eq 'MERGED') 'PR #31 merge preserved'
+Check ($trace.issue_scope.pr_32 -eq 'MERGED') 'PR #32 merge preserved'
 Check ($trace.issue_scope.baseline_main -eq 'c52f954164eb75fcaa37116a44c7454bca3a5073') 'main commit preserved'
+Check ($trace.issue_scope.current_main -eq '7cc2c18b2a7f521f770c47c48cbbf4715d228979') 'current main commit recorded'
 Check ($trace.issue_scope.package_version -eq '20260913e') 'package version'
 Check ($trace.issue_scope.instruction_sha256 -eq '6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c') 'instruction hash'
 Check ($trace.issue_scope.bundle_sha256 -eq '79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12') 'bundle hash'
@@ -42,9 +44,13 @@ Check ($trace.issue_scope.manifest_sha256 -eq 'dc597d10bba19de00b1c32d161d5b8eb8
 Check ($trace.method.raw_preservation -eq $true) 'raw preservation enabled'
 Check ($trace.method.same_version_generation_resend -eq $false) 'no same-version resend'
 Check ($trace.method.strict_t10_bytes -eq 'NOT_PROVEN') 'T10 strict remains not proven'
-Check ($trace.live_issue_read -eq 'catalog/evidence/issue-live-read-20260914l.json') 'trace registers live issue read'
+Check ($trace.live_issue_read -eq 'catalog/evidence/issue-live-read-20260914m.json') 'trace registers current live issue read'
+Check (Test-Path -LiteralPath (FullPath $trace.live_issue_read) -PathType Leaf) 'current live issue read exists'
+Check ($trace.method.classification_contract.required_evidence_gap -and $trace.method.classification_contract.optional_unconfirmed -and $trace.method.classification_contract.external_blocked) 'gap classification contract exists'
 Check ($liveRead.issues.'5'.state -eq 'OPEN' -and $liveRead.issues.'27'.state -eq 'OPEN') 'live Issue #5/#27 remain open'
 Check ($liveRead.pull_requests.'31'.state -eq 'MERGED' -and $liveRead.pull_requests.'31'.merge_commit -eq 'c52f954164eb75fcaa37116a44c7454bca3a5073') 'live PR #31 merge is preserved'
+Check ($liveRead.pull_requests.'32'.state -eq 'MERGED' -and $liveRead.pull_requests.'32'.merge_commit -eq '7cc2c18b2a7f521f770c47c48cbbf4715d228979') 'live PR #32 merge is current'
+Check ($liveRead.current_main.local_head -eq $trace.issue_scope.current_main -and $liveRead.current_main.origin_main -eq $trace.issue_scope.current_main -and $liveRead.current_main.synchronized -eq $true) 'live read binds synchronized current main'
 Check ($liveRead.write_actions.issue_comments_posted -eq $false -and $liveRead.write_actions.issue_bodies_changed -eq $false -and $liveRead.write_actions.push_performed -eq $false) 'live read performed without external writes'
 
 $categoryNames = @($trace.categories.PSObject.Properties.Name | Sort-Object)
@@ -69,10 +75,36 @@ foreach ($categoryProperty in $trace.categories.PSObject.Properties) {
     }
 }
 
+$decisions = @($trace.requirement_decisions)
+Check ($decisions.Count -eq 7) 'exactly one requirement decision per A-G category'
+Check ((@($decisions | ForEach-Object { $_.category } | Sort-Object) -join ',') -eq 'A,B,C,D,E,F,G') 'requirement decisions cover A-G'
+foreach ($decision in $decisions) {
+    Check (-not [string]::IsNullOrWhiteSpace([string]$decision.required_status)) ('required status is explicit: ' + $decision.category)
+    Check ($null -ne $decision.required_evidence_gaps -and $null -ne $decision.optional_unconfirmed -and $null -ne $decision.external_blocked) ('gap classes are explicit: ' + $decision.category)
+    $requiredText = (@($decision.required_evidence_gaps | ForEach-Object { if ($_.id) { $_.id } else { $_ } }) -join ' | ')
+    foreach ($optional in @($decision.optional_unconfirmed)) {
+        Check (-not ($requiredText -like ('*' + [string]$optional + '*'))) ('optional boundary is not promoted to required: ' + $decision.category)
+    }
+}
+$cDecision = @($decisions | Where-Object category -eq 'C')[0]
+Check (@($cDecision.required_evidence_gaps | Where-Object id -eq 'C-datatable-cell-value-read').Count -eq 1) 'required C cell-value read gap stays required'
+$eDecision = @($decisions | Where-Object category -eq 'E')[0]
+Check (@($eDecision.required_evidence_gaps | Where-Object id -eq 'E-independent-t04-run1-artifact').Count -eq 1) 'required E Run1 artifact gap stays required'
+Check (@($eDecision.external_blocked | Where-Object id -eq 'E-pad-designer-observation').Count -eq 1) 'E live Designer dependency stays externally blocked'
+$fDecision = @($decisions | Where-Object category -eq 'F')[0]
+Check (@($fDecision.required_evidence_gaps | Where-Object id -eq 'F-t10-strict-raw-bytes').Count -eq 1) 'required F T10 byte gap stays required'
+
 Check ($coverage.final_a_g_trace -eq $tracePath.Replace('catalog/', '')) 'coverage registers A-G trace'
 Check ($index.final_a_g_trace -eq $tracePath.Replace('catalog/', '')) 'index registers A-G trace'
 Check ($audit.final_a_g_trace -eq $tracePath.Replace('catalog/', '')) 'completion audit registers A-G trace'
 Check ($package.final_a_g_trace -eq $tracePath.Replace('catalog/', '')) 'current package registers A-G trace'
+Check ($coverage.a_g_requirement_decisions -eq 'evidence/issue5-a-g-trace-20260914g.json#requirement_decisions' -and $index.a_g_requirement_decisions -eq $coverage.a_g_requirement_decisions) 'coverage/index register requirement decision section'
+Check ($audit.a_g_requirement_decisions -eq $coverage.a_g_requirement_decisions -and $package.a_g_requirement_decisions -eq $coverage.a_g_requirement_decisions) 'audit/status register requirement decision section'
+Check ($coverage.live_issue_read -eq 'evidence/issue-live-read-20260914m.json') 'coverage registers current live issue read'
+Check ($index.live_issue_read -eq 'evidence/issue-live-read-20260914m.json') 'index registers current live issue read'
+Check ($audit.live_issue_read -eq 'evidence/issue-live-read-20260914m.json') 'completion audit registers current live issue read'
+Check ($package.live_issue_read -eq 'evidence/issue-live-read-20260914m.json') 'current package registers current live issue read'
+Check ($package.current_main_commit -eq '7cc2c18b2a7f521f770c47c48cbbf4715d228979' -and $audit.current_main_commit -eq $package.current_main_commit) 'aggregate current main commit agrees'
 foreach ($aggregate in @('catalog/coverage.json', 'catalog/index.json', 'catalog/evidence/current-package-status-20260913.json', 'catalog/evidence/issue5-completion-audit-20260913.json')) {
     $aggregateText = [IO.File]::ReadAllText((FullPath $aggregate), $utf8)
     Check ($aggregateText.Contains('evidence/t04-independent-current-pad-session-diagnostic-20260914s.json')) ('aggregate registers T04 session diagnostic: ' + $aggregate)
@@ -136,6 +168,14 @@ if ($latestWindow.result -eq 'READ_ONLY_PAD_WINDOW_DIAGNOSTIC_CASE_A') {
     Check (@($latestWindow.process_snapshot | Where-Object {$_.responding -eq $true -and $_.main_window_handle -eq 0 -and $_.main_window_title -eq ''}).Count -eq 2) 'T04 relaunched PAD processes remain hidden after CUA reinit'
     Check (@($latestWindow.source_observations).Count -eq 2) 'T04 CUA recheck retains prior UIA and CUA sources'
     Check ($latestWindow.flow_and_run_actions.paste_save_run_invoked -eq $false -and $latestWindow.flow_and_run_actions.third_run_started -eq $false) 'T04 CUA recheck did not invoke flow or run actions'
+} elseif ($latestWindow.result -eq 'READ_ONLY_PAD_WINDOW_DIAGNOSTIC_CASE_B') {
+    Check ($latestWindow.classification.case -eq 'B') 'T04 latest diagnostic classified as case B'
+    Check ($latestWindow.top_level_window_counts.visible -gt 0) 'T04 case B has normal visible windows'
+    $designerTarget = @($latestWindow.target_process_snapshot_after_refresh | Where-Object { $_.process -eq 'PAD.Designer' })[0]
+    Check ($null -ne $designerTarget -and $designerTarget.main_window_handle -eq 0 -and $designerTarget.main_window_title -eq '') 'T04 case B Designer remains without stable HWND/title'
+    $designerUia = @($latestWindow.uia_snapshot | Where-Object { $_.pid -eq $designerTarget.pid })[0]
+    Check ($null -ne $designerUia -and $designerUia.root_children_count -eq 0) 'T04 case B Designer UIA root remains empty'
+    Check ($latestWindow.mutation_guard.process_refresh_only -eq $true -and $latestWindow.mutation_guard.window_input_or_click -eq $false -and $latestWindow.mutation_guard.flow_binding_or_run -eq $false) 'T04 case B remains read-only'
 } else {
     Check ($latestWindow.result -eq 'BLOCKED_CURRENT_PAD_WINDOW_UNOBSERVABLE_CUA_NO_NATIVE_APP_BINDING') 'T04 latest window result is blocked without native binding'
     Check (@($latestWindow.pad_process_snapshot | Where-Object {$_.main_window_handle -ne 0 -or $_.main_window_title -ne ''}).Count -eq 0) 'T04 latest PAD processes have no visible HWND/title'

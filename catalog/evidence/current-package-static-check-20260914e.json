@@ -1,7 +1,16 @@
 {
   "schema_version": 1,
   "captured_at": "2026-09-14T04:03:01+09:00",
+  "reconciled_at": "2026-09-14T20:45:00+09:00",
   "status": "PASS_LOCAL_STATIC_CURRENT_PACKAGE",
+  "current_main_commit": "7cc2c18b2a7f521f770c47c48cbbf4715d228979",
+  "pr_32": {
+    "state": "MERGED",
+    "merge_commit": "7cc2c18b2a7f521f770c47c48cbbf4715d228979"
+  },
+  "a_g_requirement_decisions": "evidence/issue5-a-g-trace-20260914g.json#requirement_decisions",
+  "latest_t04_window_observation": "evidence/t04-independent-current-pad-window-observation-20260914t.json",
+  "latest_nonlive_run": ".work/nonlive-506605fd89454b51bc714491dd10250c/verification.json",
   "package": {
     "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
     "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
@@ -19,7 +28,11 @@
     {"command": "JSON parse over updated catalog/evidence/index/coverage files", "status": "PASS", "invalid": []},
     {"command": "git diff --check", "status": "PASS_WITH_LINE_ENDING_WARNINGS", "note": "Only expected repository line-ending warnings; raw Robin evidence remains unmodified."},
     {"command": "node tests/Test-CopilotDom.cjs", "status": "NOT_RUN", "note": "Development Playwright module is not configured; live browser evidence is recorded separately."}
+    ,{"command": "tests/Test-Issue5AGTrace.ps1 -Root .", "status": "PASS", "checks": 292, "note": "A-G required evidence gaps, optional boundaries, external blockers, current PR #32/main, and latest T04 CASE_B observation are reconciled."}
+    ,{"command": "tests/Test-T04IndependentEvidence.ps1 -Root .", "status": "PASS", "checks": 70, "note": "Run1 NOT_CAPTURED and candidate_partial remain unchanged; no new PAD run was started."}
+    ,{"command": "tests/Test-PadWindowDiagnostic.ps1 -Root .", "status": "PASS", "checks": 38, "note": "Historical CASE_A diagnostic remains protected; current CASE_B check is read-only."}
+    ,{"command": "tests/Test-PadRunArtifactSnapshot.ps1 -Root .", "status": "PASS", "checks": 11, "note": "Run1 output gate still forbids Run2 without a captured artifact; no PAD or Copilot was invoked."}
   ],
   "live_m365": "evidence/t08-current-bundle-live-acceptance-20260914e.json",
-  "result": "Current-package static and semantic checks pass; independent T10 functional execution and authorized scope are now evidenced, while the strict raw-byte gate, P3 positives, negative suite v2, and final A-G audit remain open."
+  "result": "Current-package static and semantic checks pass on main 7cc2c18b2a7f521f770c47c48cbbf4715d228979 after PR #32. Required A-G evidence gaps, optional boundaries, and external blockers are separated; independent T04 Run1 artifact and strict T10 raw-byte gates remain open."
 }

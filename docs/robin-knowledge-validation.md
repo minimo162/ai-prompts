@@ -641,11 +641,15 @@ PADを2回Runし、両回とも成功、`NewVar=named`、`LastError`に`見つ�
 
 Issue #5/#27の必須A〜Gを、教材正本・原probe／別空フロー再利用・現行版live evidenceへ対応付けた機械可読台帳を追加した。台帳は各チェックの証跡ファイル存在、測定範囲、未証明境界を分離し、過去版のPASSを20260913eへ付け替えない。A〜G全体のstatusは`PARTIAL_REQUIRED_TRACEABILITY_GAPS`、`a_to_g_complete=false`、IssueはOPENのままである。独立T04は比較・再調整・PAD窓観測をリンクしたが、Run1 xlsxは`NOT_CAPTURED`、新しい2-run pairは不可視DesignerかつComputer Useネイティブアプリバインディングなしのため未開始である。T10は機能／許可範囲と厳密生バイト保持を分離し、後者は`NOT_PROVEN`を維持する。
 
-対応付けの正本: `catalog/evidence/issue5-a-g-trace-20260914g.json`。`catalog/index.json` と `catalog/coverage.json` の `final_a_g_trace` から辿れる。検査は `tests/Test-Issue5AGTrace.ps1` で、A〜Gの全リンク、現行版ハッシュ、T04候補partial、Run1未取得、最新PAD窓観測、T10厳密未証明、Issue OPEN／PR #31 MERGEDを固定する。
+対応付けの正本: `catalog/evidence/issue5-a-g-trace-20260914g.json`。`catalog/index.json` と `catalog/coverage.json` の `final_a_g_trace` から辿れる。検査は `tests/Test-Issue5AGTrace.ps1` で、A〜Gの全リンク、必須証跡不足／任意未確認／外部停止の区分、現行版ハッシュ、T04候補partial、Run1未取得、最新PAD窓観測、T10厳密未証明、Issue OPEN／PR #31・#32 MERGEDを固定する。
 
 ## 2026-09-14 T04 Designerプロトコル起動の追加観測
 
 `ms-powerautomatedesigner:` の登録プロトコルを1回だけ起動観測したが、`ACCESS_DENIED`で新規プロセス・可視窓は生成されなかった。既存のPAD.Console.Host／PAD.Designerは応答中でもHWND 0・タイトル空のままで、Computer Useのネイティブアプリ一覧も空だった。貼付け・保存・Run・Copilot再送・Robin編集・第3回Runは行わず、現行T04の`candidate_partial`、Run1 `NOT_CAPTURED`、新規pair未開始を維持する。原証跡は `catalog/evidence/t04-independent-current-pad-window-observation-20260914i.json` で、A〜G台帳と各集約の`latest_window_observation`から参照できる。
+
+## 2026-09-14 T04窓状態の読取専用再確認
+
+現行PADプロセスを再取得して一度だけ `Refresh()` 後のWin32／UIA観測を行った。通常の `PAD.Console.Host` は `Power Automate` の可視HWNDを持ったが、対象 `PAD.Designer` はHWND 0・タイトル空・UIA root 0のままで、Computer Useのnative app bindingも利用できなかった。前回の全窓0（CASE_A）から「通常窓は見えるがDesigner窓なし」（CASE_B）へ変化した状態差分として保存し、過去のr証跡は上書きしていない。Designerの安定HWND・所有PID／SessionId・対象フロー対応がないため、T04の貼付け・保存・Runは再開せず、新規pairは未開始のままとする。原証跡は `catalog/evidence/t04-independent-current-pad-window-observation-20260914t.json`、最新Issue／PR読取は `catalog/evidence/issue-live-read-20260914m.json` である。
 
 その後、既存`explorer.exe`経由でPAD ConsoleのAppsFolder起動を15秒観測したが、新しいPADプロセス・可視窓は発生しなかった（`catalog/evidence/t04-independent-current-pad-window-observation-20260914j.json`）。さらにComputer Useの最新スナップショットでもネイティブアプリは空だった（`catalog/evidence/t04-independent-current-pad-window-observation-20260914k.json`）。したがってDesignerの一意なPID／タイトル／HWND／UIAは依然取得できず、実行ペアは開始していない。
 

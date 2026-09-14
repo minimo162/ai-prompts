@@ -6,6 +6,14 @@
 
 不足を埋めるためRun1/Run2の最大2回を事前固定した新規空フロー`RobinKnowledgeT04IndependentCurrentOutputComparison20260914eR1`は作成できたが、Designer PID 44316はHWND 0・完全一致タイトル未観測でUIA rootを取得できなかった。このため貼付け・実行は開始せず、保存済みRobinの再送・手修正・第3回Runも行っていない。空フローは削除せず、次回は正確な非0 HWND／タイトルを観測してからのみ無修正貼付けと各Run前のxlsx捕捉を行う。Issue #5/#27、T10厳密保持、A〜G監査はOPEN / partialのまま。
 
+## 2026-09-14 現行main／Issue／T04状態の再照合
+
+現行`main`と`origin/main`はPR #32 squash merge commit `7cc2c18b2a7f521f770c47c48cbbf4715d228979`で一致している。GitHub read-only確認ではIssue #5/#27はOPEN、最新コメントはそれぞれ`#issuecomment-5663017599`／`#issuecomment-5663019522`、PR #31/#32はMERGEDだった。原記録を上書きせず、最新読取を`catalog/evidence/issue-live-read-20260914m.json`へ保存した。
+
+現行PADプロセスを一度だけ`Refresh()`後に再観測した結果、通常の`Power Automate`窓は可視だが`PAD.Designer`はHWND 0・タイトル空・UIA root 0で、T04再開条件は未達（CASE_B）だった。過去のCASE_A診断rは保全し、貼付け・保存・Run・再送は行っていない。差分は`catalog/evidence/t04-independent-current-pad-window-observation-20260914t.json`へ保存した。
+
+A〜G台帳に必須証跡不足／任意未確認／外部停止を用途単位で分離し、Cセル値読取り、独立T04 Run1成果物、T10厳密生バイトだけを必須残件として保持した。任意境界の必須昇格と必須不足のcomplete化を`tests/Test-Issue5AGTrace.ps1`へ回帰追加した。Issue #5/#27はOPEN / partialを維持する。
+
 ## 2026-09-14 集約訂正・現行負例v2受入
 
 現行20260913eのP3-1〜P3-6個別証跡を照合し、派生集約のP3-4〜P3-6未受入表示を訂正した。原送信・回答記録は変更せず、63桁instruction SHAの訂正根拠を`catalog/evidence/p3-current-sha-correction-20260914e.json`へ記録している。固定負例v2は通常M365 Copilotへ1回だけ送信し、回答を無修正保存した。N1〜N3はいずれも未確認受入で、理由・追加証拠・確認前に禁止する後続処理を含み、コードフェンス／Robin命令／疑似コード／未採取引数の推測はなかった。PAD貼付け・Run・未登録Web操作は未実施。旧finald負例PASSは履歴として保持し、現行版へ継承していない。残件はT04形式・独立T04候補partial、T10厳密保持、最終A〜G監査で、Issue #5/#27はOPEN / partial。

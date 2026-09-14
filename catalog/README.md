@@ -14,7 +14,7 @@
 
 ### 2026-09-14 独立T04の現行版候補
 
-窓の可視性を壊さない読取専用診断として、対象PIDの`Refresh()`後に全トップレベル窓をWin32 `EnumWindows`で列挙し、前景窓・所有PID・SessionId・UIA・Computer Useを比較した。通常の窓0、前景窓0、PAD Designer UIA 0、Computer Use `apps=[]`でCASE_A（対話デスクトップ／操作ブリッジ障害）と分類し、PAD実行失敗とは判定していない。T04のcandidate_partial、Run1 `NOT_CAPTURED`、新規pair未開始を維持する。証跡は`evidence/t04-independent-current-pad-window-diagnostic-20260914r.json`。
+窓の可視性を壊さない読取専用診断として、対象PIDの`Refresh()`後に全トップレベル窓をWin32 `EnumWindows`で列挙し、前景窓・所有PID・SessionId・UIA・Computer Useを比較した。過去の全窓0／CASE_Aは`evidence/t04-independent-current-pad-window-diagnostic-20260914r.json`として保全し、最新再確認では通常の`Power Automate`窓のみ可視、PAD DesignerはHWND 0・タイトル空・UIA 0のCASE_Bとなった。PAD実行失敗とは判定せず、T04のcandidate_partial、Run1 `NOT_CAPTURED`、新規pair未開始を維持する。最新証跡は`evidence/t04-independent-current-pad-window-observation-20260914t.json`。
 追加の`quser`読取ではSession 1が`console / Active`で、PowerShellとPAD両PIDもSession 1だったため、Windowsセッション不一致は未成立とした。`Win32_ComputerSystem`は`ACCESS_DENIED`として未確認のまま補足証跡`evidence/t04-independent-current-pad-session-diagnostic-20260914s.json`へ記録した。
 
 ### 2026-09-14 現行版P3-3追跡
