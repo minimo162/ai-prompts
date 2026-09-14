@@ -56,6 +56,12 @@ $exitCode2 = $gate2.exit_code
 Check ($exitCode2 -ne 0) 'existing snapshot blocks the next gate'
 Check (-not (Test-Path -LiteralPath $evidence2 -PathType Leaf) -and [IO.File]::ReadAllText($snapshot2) -ceq 'existing') 'blocked destination leaves existing evidence and snapshot untouched'
 
+$artifactCollision = Join-Path $temp 'collision.xlsx'
+$collisionPath = Join-Path $temp 'collision-target'
+[IO.File]::WriteAllBytes($artifactCollision, [byte[]](17, 18))
+$collisionOutput = Invoke-Gate @('-ArtifactPath', $artifactCollision, '-SnapshotPath', $collisionPath, '-EvidencePath', $collisionPath, '-RunNumber', '1')
+Check ($collisionOutput.exit_code -ne 0 -and -not (Test-Path -LiteralPath $collisionPath)) 'snapshot and evidence path collision blocks before copy'
+
 $artifact3 = Join-Path $temp 'run3.xlsx'
 $snapshot3 = Join-Path $temp 'run3-snapshot.xlsx'
 $evidence3 = Join-Path $temp 'run3-evidence.json'

@@ -36,6 +36,7 @@ $source = Resolve-ExistingFile $ArtifactPath 'artifact'
 $snapshot = Resolve-NewFile $SnapshotPath 'snapshot'
 $evidence = Resolve-NewFile $EvidencePath 'evidence'
 if ([StringComparer]::OrdinalIgnoreCase.Equals($source, $snapshot)) { throw 'PAD_ARTIFACT_GATE: artifact and snapshot must differ' }
+if ([StringComparer]::OrdinalIgnoreCase.Equals($snapshot, $evidence)) { throw 'PAD_ARTIFACT_GATE: snapshot and evidence must differ' }
 
 $inputProvided = (-not [string]::IsNullOrWhiteSpace($InputPath)) -or (-not [string]::IsNullOrWhiteSpace($ExpectedInputSha256))
 if ($inputProvided -and ([string]::IsNullOrWhiteSpace($InputPath) -or [string]::IsNullOrWhiteSpace($ExpectedInputSha256))) {
