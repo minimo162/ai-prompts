@@ -1,0 +1,14 @@
+{
+  "id": "T10-STRICT-20260914X",
+  "scope": "nonlive comparator and one local saver boundary; never full normal-chat acceptance",
+  "parent_commit": "3ef2a9c3d7483db055e60078d2923a2ddbeb146d",
+  "reused_review": "catalog/evidence/t10-saved-evidence-review-20260914w.json",
+  "hypothesis": "The historical apply_patch Add File serialization appends LF to a string with no final newline. This can explain the saved official-copy endpoint discrepancy, but cannot explain upstream CRLF loss.",
+  "historical_call": {"session": "01a09a8e-a840-74a2-bcd0-061980b40865", "line": 17039, "function": "tools.apply_patch", "operation": "Add File"},
+  "control": {"input_string": "SYNTHETIC-T10X\nEND", "input_utf8_hex": "53594e5448455449432d543130580a454e44", "input_utf16_code_units": 18, "input_final_newline": false, "output_path": "catalog/evidence/t10-strict-20260914x-control.txt", "max_calls": 1, "observations": ["known input string", "exact patch argument", "saved file raw bytes"], "success": "Observe whether output equals input bytes or input plus LF", "stop": "After one call; unexpected other differences remain unexplained"},
+  "fixtures_before_execution": ["authorized edits only", "outside one byte", "CRLF to LF", "EOF newline added", "EOF newline deleted from newline-terminated source", "BOM added", "BOM deleted from BOM source", "missing line", "extra line", "wrong authorized value", "unauthorized suffix on allowed line", "source hash mismatch"],
+  "recapture": {"condition": "only after local saver defect is observed", "primary_max": 1, "independent_max": 1, "method": "read-only locator('pre').allTextContents; UTF-16 string captured, UTF-8 encoded without newline addition; no clipboard change", "stop": "wrong conversation, missing/ambiguous code block, access refusal or mismatch; no retry, send or UI response editing"},
+  "pad_run_limit": 0,
+  "copilot_send_limit": 0,
+  "clipboard_mutations": 0
+}

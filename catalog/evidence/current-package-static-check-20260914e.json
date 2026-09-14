@@ -10,7 +10,7 @@
   },
   "a_g_requirement_decisions": "evidence/issue5-a-g-trace-20260914g.json#requirement_decisions",
   "latest_t04_window_observation": "evidence/t04-independent-current-pad-window-observation-20260914t.json",
-  "latest_nonlive_run": ".work/nonlive-506605fd89454b51bc714491dd10250c/verification.json",
+  "latest_nonlive_run": ".work/nonlive-82360887d925434ea1c45ae3c83dbd46/verification.json",
   "package": {
     "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
     "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
@@ -34,5 +34,15 @@
     ,{"command": "tests/Test-PadRunArtifactSnapshot.ps1 -Root .", "status": "PASS", "checks": 11, "note": "Run1 output gate still forbids Run2 without a captured artifact; no PAD or Copilot was invoked."}
   ],
   "live_m365": "evidence/t08-current-bundle-live-acceptance-20260914e.json",
-  "result": "Current-package static and semantic checks pass on main 7cc2c18b2a7f521f770c47c48cbbf4715d228979 after PR #32. Required A-G evidence gaps, optional boundaries, and external blockers are separated; independent T04 Run1 artifact and strict T10 raw-byte gates remain open."
+  "result": "Local 20260914x checks pass with 38 non-live tests (37 existing plus one strict comparator entry). C and the new independent T04 pair remain accepted. Primary and independent T10 strict raw-byte preservation remain NOT_PROVEN; local saver control is not full chat-path proof. GitHub main remains 7cc2c18b2a7f521f770c47c48cbbf4715d228979; these local additions are unpushed.",
+  "t10_strict_boundary_audit": {
+    "verification": "catalog/evidence/t10-strict-20260914x-verification.json",
+    "evidence": "catalog/evidence/t10-strict-20260914x-audit.json",
+    "comparator": "PASS_NONLIVE_SYNTHETIC",
+    "local_control": "DEFECT_REPRODUCED_LOCAL_ONLY",
+    "primary_strict": "NOT_PROVEN",
+    "independent_strict": "NOT_PROVEN",
+    "additional_real_acquisitions": 0,
+    "reason": "Historical Add File saving appends LF in one same-operation synthetic control. Browser inventory timed out; no real recapture. Existing real candidates fail outside the exact two literal-content intervals. C and independent T04 new pair remain accepted; only strict T10 remains required."
+  }
 }

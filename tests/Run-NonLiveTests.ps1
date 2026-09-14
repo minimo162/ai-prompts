@@ -20,6 +20,7 @@ if ($Suite -ceq 'All') { $names += @('Test-ConversationScope.ps1','Test-Connecti
 if ($Suite -ceq 'All') { $names += @('Test-DocumentRobin.ps1','Test-DocumentObservation.ps1','Test-ClipboardReadRetry.ps1') }
 if ($Suite -ceq 'All') { $names += @('Test-CurrentBundleT01Prepared.ps1') }
 if ($Suite -ceq 'All') { $names += @('Test-Issue5CurrentStatus.ps1') }
+if ($Suite -ceq 'All') { $names += @('Test-T10ByteComparator.ps1') }
 $results = @(); $started = [DateTime]::UtcNow.ToString('o')
 foreach ($name in $names) {
     $log = Join-Path $output ($name + '.log')

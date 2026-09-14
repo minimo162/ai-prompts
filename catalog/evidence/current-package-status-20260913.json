@@ -852,5 +852,15 @@
       "F-t10-strict-raw-bytes"
     ],
     "t10_saved_review": "catalog/evidence/t10-saved-evidence-review-20260914w.json"
+  },
+  "t10_strict_boundary_audit": {
+    "verification": "catalog/evidence/t10-strict-20260914x-verification.json",
+    "evidence": "catalog/evidence/t10-strict-20260914x-audit.json",
+    "comparator": "PASS_NONLIVE_SYNTHETIC",
+    "local_control": "DEFECT_REPRODUCED_LOCAL_ONLY",
+    "primary_strict": "NOT_PROVEN",
+    "independent_strict": "NOT_PROVEN",
+    "additional_real_acquisitions": 0,
+    "reason": "Historical Add File saving appends LF in one same-operation synthetic control. Browser inventory timed out; no real recapture. Existing real candidates fail outside the exact two literal-content intervals. C and independent T04 new pair remain accepted; only strict T10 remains required."
   }
 }

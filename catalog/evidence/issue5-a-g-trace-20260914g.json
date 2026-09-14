@@ -252,5 +252,15 @@
     "evidence": "catalog/evidence/t04-independent-pair-20260914w/acceptance.json",
     "status": "PASS_INDEPENDENT_T04_NEW_PAIR",
     "summary": "Independent T04 new pair 20260914w passed both per-run CSV/xlsx snapshots and fixed 3x3 values; Run1 verified before Run2. Old candidate and old Run1 NOT_CAPTURED remain historical. Original primary T04 remains not accepted and is not double-counted. Required remaining: T10 strict raw-byte preservation NOT_PROVEN. Issues remain OPEN / partial. Paste-observer failure required native clipboard history restoration; text equality and original formats were verified, full-format byte equality was not assessed."
+  },
+  "t10_strict_boundary_audit": {
+    "verification": "catalog/evidence/t10-strict-20260914x-verification.json",
+    "evidence": "catalog/evidence/t10-strict-20260914x-audit.json",
+    "comparator": "PASS_NONLIVE_SYNTHETIC",
+    "local_control": "DEFECT_REPRODUCED_LOCAL_ONLY",
+    "primary_strict": "NOT_PROVEN",
+    "independent_strict": "NOT_PROVEN",
+    "additional_real_acquisitions": 0,
+    "reason": "Historical Add File saving appends LF in one same-operation synthetic control. Browser inventory timed out; no real recapture. Existing real candidates fail outside the exact two literal-content intervals. C and independent T04 new pair remain accepted; only strict T10 remains required."
   }
 }

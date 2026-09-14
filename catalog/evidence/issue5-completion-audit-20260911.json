@@ -61,5 +61,15 @@
     {"id": "G", "status": "BLOCKED_RUNTIME", "verified": ["UI element capture/paste", "WAIT=1 dedicated probe"], "unverified": ["current-package WebAutomation runtime"]}
   ],
   "next_one_action": "Obtain action-time confirmation for a new T01 normal-chat send, save the generated response bound to bundle SHA e35fa2f4a960841603cc876ad2e1e8af254ff66afc97b297224ffb3c44d08644, then perform unmodified PAD paste/save/run and output comparison.",
-  "publication": {"push": false, "pull_request": false, "merge": false, "release": false, "issue_close": false}
+  "publication": {"push": false, "pull_request": false, "merge": false, "release": false, "issue_close": false},
+  "t10_strict_boundary_audit": {
+    "verification": "catalog/evidence/t10-strict-20260914x-verification.json",
+    "evidence": "catalog/evidence/t10-strict-20260914x-audit.json",
+    "comparator": "PASS_NONLIVE_SYNTHETIC",
+    "local_control": "DEFECT_REPRODUCED_LOCAL_ONLY",
+    "primary_strict": "NOT_PROVEN",
+    "independent_strict": "NOT_PROVEN",
+    "additional_real_acquisitions": 0,
+    "reason": "Historical Add File saving appends LF in one same-operation synthetic control. Browser inventory timed out; no real recapture. Existing real candidates fail outside the exact two literal-content intervals. C and independent T04 new pair remain accepted; only strict T10 remains required."
+  }
 }
