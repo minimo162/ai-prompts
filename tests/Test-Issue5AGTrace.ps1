@@ -90,6 +90,12 @@ Check (Test-Path -LiteralPath (FullPath $t04.comparison) -PathType Leaf) 'T04 co
 Check (Test-Path -LiteralPath (FullPath $t04.reconciliation) -PathType Leaf) 'T04 reconciliation evidence exists'
 Check (Test-Path -LiteralPath (FullPath $t04.window_observation) -PathType Leaf) 'T04 window observation exists'
 Check (Test-Path -LiteralPath (FullPath $t04.latest_window_observation) -PathType Leaf) 'T04 latest window observation exists'
+Check (Test-Path -LiteralPath (FullPath $t04.session_diagnostic) -PathType Leaf) 'T04 session diagnostic exists'
+$sessionDiagnostic = Read-Json $t04.session_diagnostic
+Check ($sessionDiagnostic.quser.session_id -eq 1 -and $sessionDiagnostic.quser.session_name -eq 'console' -and $sessionDiagnostic.quser.state -eq 'Active') 'T04 session diagnostic confirms active console session'
+Check (@($sessionDiagnostic.target_processes_after_refresh | Where-Object { $_.pid -in @(25804,31664) -and $_.session_id -eq 1 -and $_.responding -eq $true -and $_.main_window_handle -eq 0 -and $_.main_window_title -eq '' }).Count -eq 2) 'T04 session diagnostic preserves both hidden PAD targets'
+Check ($sessionDiagnostic.computer_system_query.status -eq 'ACCESS_DENIED' -and $sessionDiagnostic.computer_system_query.user_name -eq 'NOT_CAPTURED') 'T04 session diagnostic labels inaccessible computer-system query'
+Check ($sessionDiagnostic.mutation_guard.read_only -eq $true -and $sessionDiagnostic.mutation_guard.process_kill_or_restart -eq $false -and $sessionDiagnostic.mutation_guard.flow_binding_or_run -eq $false) 'T04 session diagnostic remains read-only'
 $latestWindow = Read-Json ($t04.latest_window_observation)
 if ($latestWindow.computer_use_snapshot.PSObject.Properties.Name -contains 'apps') {
     Check (@($latestWindow.computer_use_snapshot.apps).Count -eq 0) 'T04 latest Computer Use native app list is empty'
