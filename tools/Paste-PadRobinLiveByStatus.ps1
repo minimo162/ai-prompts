@@ -25,9 +25,12 @@ if ($beforeCount -ne 0) { throw 'Roundtrip flow is not empty' }
 $input = [IO.Path]::GetFullPath($InputPath)
 $text = [IO.File]::ReadAllText($input, (New-Object Text.UTF8Encoding($false)))
 if ([string]::IsNullOrWhiteSpace($text)) { throw 'Input Robin is empty' }
-$beforeClipboard = Get-AgentPadClipboard
-$beforeSequence = Get-AgentPadClipboardSequence
-$pasteSequence = $null
+if (-not ('PadClipboard.Lease' -as [type])) {
+    Add-Type -Path (Join-Path $PSScriptRoot 'PadClipboardLease.cs') -ReferencedAssemblies System.Windows.Forms
+}
+$nativeClipboard = New-Object PadClipboard.NativeClipboard
+$clipboardLease = $null
+$clipboardRestoration = 'not_changed'
 $settled = $false
 $visibleCount = $beforeCount
 $statusName = $null
@@ -35,8 +38,7 @@ try {
     [void][AgentPadNative]::SetForegroundWindow($window.Current.NativeWindowHandle)
     $list.SetFocus()
     if ([AgentPadNative]::GetForegroundWindow() -ne $window.Current.NativeWindowHandle) { throw 'Foreground changed' }
-    [Windows.Forms.Clipboard]::SetText($text)
-    $pasteSequence = Get-AgentPadClipboardSequence
+    $clipboardLease = [PadClipboard.Lease]::Begin($nativeClipboard, $text)
     [Windows.Forms.SendKeys]::SendWait('^v')
     # Excel actions can take longer than the list virtualization update.  Keep
     # waiting for the Designer's status summary (rather than treating the
@@ -59,9 +61,11 @@ try {
     $settled = $true
 }
 finally {
-    # Observation failure must not discard the clipboard snapshot. Restore only
-    # while this paste still owns both the sequence and exact text.
-    if ($null -ne $pasteSequence -and (Get-AgentPadClipboardSequence) -eq $pasteSequence -and (Get-AgentPadClipboardText) -ceq $text -and (Get-AgentPadClipboardSequence) -eq $pasteSequence) { Restore-AgentPadClipboard $beforeClipboard }
+    # The native open interval covers ownership verification AND restoration.
+    # Also run on observation failure; never retry Paste or Run.
+    try {
+        if ($null -ne $clipboardLease) { $clipboardRestoration = $clipboardLease.Restore() }
+    } finally { $nativeClipboard.Dispose() }
 }
 $evidence = [ordered]@{
     schema_version = 1
@@ -79,6 +83,8 @@ $evidence = [ordered]@{
     virtualized_list_false_negative = ($visibleCount -ne $ExpectedActionCount)
     saved_confirmed = $false
     execution_requested = $false
+    clipboard_restoration = $clipboardRestoration
+    clipboard_all_format_raw_equality = 'NOT_ASSESSED'
 }
 $out = [IO.Path]::GetFullPath($EvidencePath)
 if (Test-Path -LiteralPath $out) { throw 'Evidence exists' }
