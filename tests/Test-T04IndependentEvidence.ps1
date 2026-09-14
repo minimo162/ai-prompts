@@ -92,6 +92,7 @@ $paste = Read-Json 'catalog/evidence/t04-independent-current-pad-paste-save-2026
 $run1 = Read-Json 'catalog/evidence/t04-independent-current-pad-run1-20260914e.json'
 $run2 = Read-Json 'catalog/evidence/t04-independent-current-pad-run2-20260914e.json'
 $result = Read-Json 'catalog/generated/normal-chat-20260914e-t04-independent-live/result.json'
+$windowObservation = Read-Json 'catalog/evidence/t04-independent-current-pad-window-observation-20260914f.json'
 
 $instruction = 'copilot/agent-instructions.txt'
 $bundle = 'copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt'
@@ -173,5 +174,14 @@ $run1Xlsx = @(Get-ChildItem -LiteralPath $candidateDir -File | Where-Object { $_
 Check ($run1Xlsx.Count -eq 0) 'no fabricated Run1 xlsx exists'
 Check ([string]$comparison.execution.run1.output_snapshot -ceq 'NOT_CAPTURED') 'Run1 remains unmeasured'
 Check ([int]$comparison.pad.runs_completed -eq 2 -and [int]$result.runs_completed -eq 2) 'no third run was added'
+
+Check ([string]$windowObservation.result -ceq 'BLOCKED_CURRENT_PAD_WINDOW_UNOBSERVABLE') 'fresh pair window observation is explicit'
+Check ([string]$windowObservation.source_log.sha256 -ceq '3435c1aeb5c0441620c259eea4775d81175d8c110c1480d31c49298e843a4a34') 'fresh pair source log hash'
+Check ([int]$windowObservation.source_log.bytes -eq 165328) 'fresh pair source log size'
+Check ([int]$windowObservation.uia_snapshot.root_children_count -eq 0 -and @($windowObservation.uia_snapshot.matching_top_level_windows).Count -eq 0) 'fresh pair UIA has no top-level window'
+Check ([int]$windowObservation.process_snapshot[2].pid -eq 44316 -and [int]$windowObservation.process_snapshot[2].main_window_handle -eq 0 -and [string]$windowObservation.process_snapshot[2].main_window_title -ceq '') 'fresh pair PID has no HWND or title'
+Check ([string]$windowObservation.designer_log_facts.flow_id -ceq '00000000-0000-0000-0000-000000000000' -and $windowObservation.designer_log_facts.is_hidden_instance -eq $true) 'fresh pair log identifies hidden unbound Designer'
+Check ($windowObservation.designer_log_facts.environment_can_create_flow -eq $false -and $windowObservation.designer_log_facts.environment_can_read_flow -eq $true -and $windowObservation.designer_log_facts.environment_can_write_flow -eq $true) 'fresh pair environment permissions are preserved'
+Check ($windowObservation.fresh_pair.paste_save_run_invoked -eq $false -and $windowObservation.fresh_pair.copilot_resend -eq $false -and $windowObservation.fresh_pair.third_run_started -eq $false) 'fresh pair did not invoke unsafe follow-up actions'
 
 Write-Output ('PASS: ' + $checks + ' T04 independent evidence checks; candidate_partial preserved and Run1 output remains NOT_CAPTURED.')

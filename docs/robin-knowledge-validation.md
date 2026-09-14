@@ -9,6 +9,8 @@ P3-1〜P3-6の現行版個別証跡はすべて同版指示・bundleに結び付
 
 Run1/Run2はともに成功したが、Run1のxlsxは`NOT_CAPTURED`であり、Run2の3行（対象/A/10、対象/C/25、対象/D/5）をRun1の結果へ付け替えていない。最大2回を事前固定した新規空フロー `RobinKnowledgeT04IndependentCurrentOutputComparison20260914eR1` は作成できたものの、Designer PID 44316はHWND 0・完全一致タイトル未観測でUIA rootを取得できなかったため、貼付け・実行を開始していない。保存済みRobinの再送・手修正・第3回Run・空フロー削除は行わず、候補は`candidate_partial`、Issue #5/#27はOPEN / partialのままとする。次回は正確な非0 HWND／タイトルを観測した場合のみ、無修正Robinを使って各Run前にxlsxを捕捉する。
 
+その後の再確認（`2026-09-14T14:07:13+09:00`）も、同じPID 44316が応答中ながらHWND 0・タイトル空、UIAトップレベル0件であることを確認した。Designerログ（SHA `3435c1aeb5c0441620c259eea4775d81175d8c110c1480d31c49298e843a4a34`、165328 bytes）には`flowId`／`scriptId`がall-zero、`isHiddenInstance=true`、`canCreateFlow=false`が記録されている。これは `catalog/evidence/t04-independent-current-pad-window-observation-20260914f.json` に原ログ参照とともに保存し、不可視・未バインドDesignerに対して貼付け・保存・Runを呼び出していないことを検証テストへ追加した（70 checks）。
+
 ## 2026-09-14 現行版P3-1の送信・実機PAD受入
 
 現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を、通常M365 Copilotの新規会話 `https://m365.cloud.microsoft/chat/conversation/2167fd22-b6fb-4101-9379-8f4e760a518a`へ同版指示全文とbundleを実添付してThink Deeperで1回送信した。評価者用正解コード・期待値・Issue本文は送っていない。回答DOMの単一コードブロックから4行Robinを無修正保存した。

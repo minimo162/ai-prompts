@@ -298,6 +298,7 @@
       "strict_source_to_generation": "NOT_ASSESSED",
       "acceptance_scope": "candidate_partial",
       "evidence_reconciliation": "evidence/t04-independent-current-evidence-reconciliation-20260914e.json",
+      "window_observation": "evidence/t04-independent-current-pad-window-observation-20260914f.json",
       "new_pair_status": "NOT_STARTED_CURRENT_PAD_DESIGNER_WINDOW_UNOBSERVABLE",
       "raw_unmodified": true
     },
