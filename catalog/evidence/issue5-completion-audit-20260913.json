@@ -300,7 +300,8 @@
       "acceptance_scope": "candidate_partial",
       "evidence_reconciliation": "evidence/t04-independent-current-evidence-reconciliation-20260914e.json",
       "window_observation": "evidence/t04-independent-current-pad-window-observation-20260914f.json",
-      "new_pair_status": "NOT_STARTED_CURRENT_PAD_DESIGNER_WINDOW_UNOBSERVABLE",
+      "latest_window_observation": "evidence/t04-independent-current-pad-window-observation-20260914h.json",
+      "new_pair_status": "NOT_STARTED_CURRENT_PAD_DESIGNER_WINDOW_UNOBSERVABLE_CUA_NO_NATIVE_APP_BINDING",
       "raw_unmodified": true
     },
     "promotion": "T03_CURRENT_TRACE_ADDED;_ORIGINAL_REQUEST_NOT_PROMOTED",

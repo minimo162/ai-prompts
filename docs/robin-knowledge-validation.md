@@ -639,6 +639,6 @@ PADを2回Runし、両回とも成功、`NewVar=named`、`LastError`に`見つ�
 
 ## 2026-09-14 A〜G必須要件の原証跡対応付け
 
-Issue #5/#27の必須A〜Gを、教材正本・原probe／別空フロー再利用・現行版live evidenceへ対応付けた機械可読台帳を追加した。台帳は各チェックの証跡ファイル存在、測定範囲、未証明境界を分離し、過去版のPASSを20260913eへ付け替えない。A〜G全体のstatusは`PARTIAL_REQUIRED_TRACEABILITY_GAPS`、`a_to_g_complete=false`、IssueはOPENのままである。独立T04は比較・再調整・PAD窓観測をリンクしたが、Run1 xlsxは`NOT_CAPTURED`、新しい2-run pairは不可視Designerのため未開始である。T10は機能／許可範囲と厳密生バイト保持を分離し、後者は`NOT_PROVEN`を維持する。
+Issue #5/#27の必須A〜Gを、教材正本・原probe／別空フロー再利用・現行版live evidenceへ対応付けた機械可読台帳を追加した。台帳は各チェックの証跡ファイル存在、測定範囲、未証明境界を分離し、過去版のPASSを20260913eへ付け替えない。A〜G全体のstatusは`PARTIAL_REQUIRED_TRACEABILITY_GAPS`、`a_to_g_complete=false`、IssueはOPENのままである。独立T04は比較・再調整・PAD窓観測をリンクしたが、Run1 xlsxは`NOT_CAPTURED`、新しい2-run pairは不可視DesignerかつComputer Useネイティブアプリバインディングなしのため未開始である。T10は機能／許可範囲と厳密生バイト保持を分離し、後者は`NOT_PROVEN`を維持する。
 
-対応付けの正本: `catalog/evidence/issue5-a-g-trace-20260914g.json`。`catalog/index.json` と `catalog/coverage.json` の `final_a_g_trace` から辿れる。検査は `tests/Test-Issue5AGTrace.ps1` で、A〜Gの全リンク、現行版ハッシュ、T04候補partial、Run1未取得、T10厳密未証明、Issue OPEN／PR #31 MERGEDを固定する。
+対応付けの正本: `catalog/evidence/issue5-a-g-trace-20260914g.json`。`catalog/index.json` と `catalog/coverage.json` の `final_a_g_trace` から辿れる。検査は `tests/Test-Issue5AGTrace.ps1` で、A〜Gの全リンク、現行版ハッシュ、T04候補partial、Run1未取得、最新PAD窓観測、T10厳密未証明、Issue OPEN／PR #31 MERGEDを固定する。

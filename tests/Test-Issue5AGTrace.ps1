@@ -76,7 +76,7 @@ Check ($t04.status -eq 'CANDIDATE_PARTIAL_PRESERVED') 'T04 candidate status pres
 Check ($t04.robin_sha256 -eq 'dd4f39f0700cfb5a9275dfc9912c89bd8d886d72972c9eb74223acf30343569d') 'T04 Robin hash preserved'
 Check ($t04.run1_output -eq 'NOT_CAPTURED') 'T04 Run1 remains not captured'
 Check ($t04.run2_values -eq 'VERIFIED') 'T04 Run2 values verified'
-Check ($t04.new_pair -eq 'NOT_STARTED_CURRENT_PAD_DESIGNER_WINDOW_UNOBSERVABLE') 'T04 new pair not started while window unobservable'
+Check ($t04.new_pair -eq 'NOT_STARTED_CURRENT_PAD_DESIGNER_WINDOW_UNOBSERVABLE_CUA_NO_NATIVE_APP_BINDING') 'T04 new pair not started while window unobservable'
 $t04Comparison = Read-Json ($t04.comparison)
 Check ($t04Comparison.status -eq 'PASS_CURRENT_20260914E_INDEPENDENT_T04_GENERATION_PAD_TWO_RUNS_PARTIAL') 'T04 comparison remains partial'
 Check ($t04Comparison.generation.dom_code.sha256 -eq $t04.robin_sha256) 'T04 Robin hash agrees with comparison'
@@ -84,6 +84,11 @@ Check ($t04Comparison.execution.run1.output_snapshot -eq 'NOT_CAPTURED') 'T04 co
 Check (Test-Path -LiteralPath (FullPath $t04.comparison) -PathType Leaf) 'T04 comparison evidence exists'
 Check (Test-Path -LiteralPath (FullPath $t04.reconciliation) -PathType Leaf) 'T04 reconciliation evidence exists'
 Check (Test-Path -LiteralPath (FullPath $t04.window_observation) -PathType Leaf) 'T04 window observation exists'
+Check (Test-Path -LiteralPath (FullPath $t04.latest_window_observation) -PathType Leaf) 'T04 latest window observation exists'
+$latestWindow = Read-Json ($t04.latest_window_observation)
+Check ($latestWindow.result -eq 'BLOCKED_CURRENT_PAD_WINDOW_UNOBSERVABLE_CUA_NO_NATIVE_APP_BINDING') 'T04 latest window result is blocked without native binding'
+Check (@($latestWindow.computer_use_snapshot.apps).Count -eq 0) 'T04 latest Computer Use native app list is empty'
+Check (@($latestWindow.pad_process_snapshot | Where-Object {$_.main_window_handle -ne 0 -or $_.main_window_title -ne ''}).Count -eq 0) 'T04 latest PAD processes have no visible HWND/title'
 
 Check ($trace.decision.a_to_g_complete -eq $false) 'A-G complete flag remains false'
 Check ($trace.decision.issue_close_authorized -eq $false) 'issue close remains unauthorized'

@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T14:45:24+09:00",
+  "verification_id": "T04-INDEPENDENT-CURRENT-20260914E-TRACE-3",
+  "case": "T04",
+  "scope": "fresh_pair_pad_window_revalidation",
+  "pad_process_snapshot": [
+    {
+      "pid": 13332,
+      "process": "PAD.Console.Host",
+      "start_time": "2026-09-13T15:27:34.0023051+09:00",
+      "responding": true,
+      "main_window_handle": 0,
+      "main_window_title": ""
+    },
+    {
+      "pid": 31324,
+      "process": "PAD.Designer",
+      "start_time": "2026-09-14T06:51:10.7127337+09:00",
+      "responding": true,
+      "main_window_handle": 0,
+      "main_window_title": ""
+    },
+    {
+      "pid": 44316,
+      "process": "PAD.Designer",
+      "start_time": "2026-09-14T13:42:00.5180852+09:00",
+      "responding": true,
+      "main_window_handle": 0,
+      "main_window_title": ""
+    }
+  ],
+  "computer_use_snapshot": {
+    "apps": [],
+    "native_app_binding": "UNAVAILABLE",
+    "browser_inventory_present": true,
+    "pad_window_observed": false
+  },
+  "session_inventory": {
+    "shell_user": "CodexSandboxOffline",
+    "session_name": null,
+    "client_name": null,
+    "interactive": true,
+    "qwinsta_console": {
+      "username": "yuuki",
+      "session_id": 1,
+      "state": "Active"
+    },
+    "rdp_session": "none_observed"
+  },
+  "launch_attempts": [
+    {
+      "method": "direct_pad_console_host_exe",
+      "path": "C:/Program Files/WindowsApps/Microsoft.PowerAutomateDesktop_11.2608.115.0_x64__8wekyb3d8bbwe/dotnet/PAD.Console.Host.exe",
+      "result": "ACCESS_DENIED",
+      "process_count_before": 1,
+      "process_count_after": 1
+    },
+    {
+      "method": "registered_apps_folder_pad_console",
+      "application_id": "Microsoft.PowerAutomateDesktop_11.2608.115.0_x64__8wekyb3d8bbwe!PAD.Console",
+      "result": "NO_NEW_VISIBLE_PROCESS",
+      "process_count_after": 1
+    }
+  ],
+  "flow_and_run_actions": {
+    "flow_binding_observed": false,
+    "exact_pid_title_hwnd_uia_verified": false,
+    "paste_save_run_invoked": false,
+    "copilot_resend": false,
+    "saved_robin_edited": false,
+    "third_run_started": false
+  },
+  "result": "BLOCKED_CURRENT_PAD_WINDOW_UNOBSERVABLE_CUA_NO_NATIVE_APP_BINDING",
+  "reason": "The PAD processes remain responding but have no nonzero HWND or title, Computer Use exposes no native app binding, and the active yuuki console is not targetable from the CodexSandboxOffline shell. No flow binding or run is claimed; the existing T04 candidate and Run1 NOT_CAPTURED status remain unchanged.",
+  "source_observation": "catalog/evidence/t04-independent-current-pad-window-observation-20260914f.json"
+}
