@@ -94,6 +94,7 @@ $latestWindow = Read-Json ($t04.latest_window_observation)
 Check ($latestWindow.result -eq 'BLOCKED_CURRENT_PAD_WINDOW_UNOBSERVABLE_CUA_NO_NATIVE_APP_BINDING') 'T04 latest window result is blocked without native binding'
 Check (@($latestWindow.computer_use_snapshot.apps).Count -eq 0) 'T04 latest Computer Use native app list is empty'
 Check (@($latestWindow.pad_process_snapshot | Where-Object {$_.main_window_handle -ne 0 -or $_.main_window_title -ne ''}).Count -eq 0) 'T04 latest PAD processes have no visible HWND/title'
+Check (@($latestWindow.launch_attempts | Where-Object {$_.method -eq 'registered_designer_protocol' -and $_.result -eq 'ACCESS_DENIED' -and $_.visible_window_created -eq $false}).Count -eq 1) 'T04 latest protocol launch was denied without visible window'
 
 Check ($trace.decision.a_to_g_complete -eq $false) 'A-G complete flag remains false'
 Check ($trace.decision.issue_close_authorized -eq $false) 'issue close remains unauthorized'
