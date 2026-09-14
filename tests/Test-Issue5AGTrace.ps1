@@ -103,6 +103,12 @@ if ($latestWindow.result -eq 'PAD_CLOSED_AND_RELAUNCHED_NEW_PROCESS') {
     Check (@($latestWindow.process_snapshot | Where-Object {$_.pid -in @(25804,31664) -and $_.responding -eq $true}).Count -eq 2) 'T04 relaunched PAD processes remain responding'
     Check (@($latestWindow.process_snapshot | Where-Object {$_.main_window_handle -ne 0 -or $_.main_window_title -ne ''}).Count -eq 0) 'T04 recheck has no stable visible HWND/title'
     Check ($latestWindow.flow_and_run_actions.paste_save_run_invoked -eq $false -and $latestWindow.flow_and_run_actions.third_run_started -eq $false) 'T04 recheck did not invoke flow or run actions'
+} elseif ($latestWindow.result -eq 'BLOCKED_CURRENT_PAD_UIA_ROOT_EMPTY_AFTER_RELAUNCH') {
+    Check ($latestWindow.source_observation -eq 'catalog/evidence/t04-independent-current-pad-window-observation-20260914o.json') 'T04 UIA recheck links the prior Computer Use recheck'
+    Check ($latestWindow.uia_snapshot.root_children_count_by_pid.'25804' -eq 0 -and $latestWindow.uia_snapshot.root_children_count_by_pid.'31664' -eq 0) 'T04 relaunched PAD processes have zero UIA root windows'
+    Check (@($latestWindow.uia_snapshot.matching_top_level_windows).Count -eq 0) 'T04 UIA recheck has no matching top-level windows'
+    Check (@($latestWindow.process_snapshot | Where-Object {$_.main_window_handle -ne 0 -or $_.main_window_title -ne ''}).Count -eq 0) 'T04 UIA recheck processes have no visible HWND/title'
+    Check ($latestWindow.flow_and_run_actions.paste_save_run_invoked -eq $false -and $latestWindow.flow_and_run_actions.third_run_started -eq $false) 'T04 UIA recheck did not invoke flow or run actions'
 } else {
     Check ($latestWindow.result -eq 'BLOCKED_CURRENT_PAD_WINDOW_UNOBSERVABLE_CUA_NO_NATIVE_APP_BINDING') 'T04 latest window result is blocked without native binding'
     Check (@($latestWindow.pad_process_snapshot | Where-Object {$_.main_window_handle -ne 0 -or $_.main_window_title -ne ''}).Count -eq 0) 'T04 latest PAD processes have no visible HWND/title'
