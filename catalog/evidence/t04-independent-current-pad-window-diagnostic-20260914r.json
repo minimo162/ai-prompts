@@ -114,6 +114,11 @@
                                          "Computer Use apps=[]"
                                      ]
                        },
+    "reopen_conditions":  [
+                               "interactive desktop or Computer Use native app binding exposes a visible PAD Designer window",
+                               "PAD Designer has a stable nonzero HWND, owner PID/process, SessionId, and target-flow correspondence",
+                               "only then evaluate the saved Robin with a new verification ID; preserve the Run1 output gate before any Run2"
+                           ],
     "mutation_guard":  {
                            "process_refresh_only":  true,
                            "process_kill_or_restart":  false,

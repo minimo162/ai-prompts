@@ -63,6 +63,7 @@ Check ($diagnostic.top_level_windows.Count -eq 0) 'captured window list is empty
 Check ($diagnostic.foreground_window.hwnd -eq 0 -and $diagnostic.foreground_window.owner_pid -eq 0) 'captured no foreground window'
 Check (@($diagnostic.session_comparison.unique_session_ids).Count -eq 1 -and $diagnostic.session_comparison.unique_session_ids[0] -eq 1) 'captured comparable SessionId'
 Check ($diagnostic.computer_use_snapshot.apps_count -eq 0 -and $diagnostic.computer_use_snapshot.native_app_binding -eq 'UNAVAILABLE') 'captured Computer Use apps empty'
+Check (@($diagnostic.reopen_conditions).Count -eq 3 -and $diagnostic.reopen_conditions[0] -match 'interactive desktop|Computer Use' -and $diagnostic.reopen_conditions[1] -match 'nonzero HWND' -and $diagnostic.reopen_conditions[2] -match 'Run1 output gate') 'captured bounded reopen conditions'
 Check ($diagnostic.mutation_guard.process_refresh_only -and -not $diagnostic.mutation_guard.process_kill_or_restart -and -not $diagnostic.mutation_guard.window_input_or_click -and -not $diagnostic.mutation_guard.flow_binding_or_run) 'captured read-only mutation guard'
 
 Write-Output ('PASS: ' + $checks + ' PAD window diagnostic contract checks; A-D branches and read-only guard preserved.')

@@ -101,6 +101,7 @@ if ($latestWindow.result -eq 'READ_ONLY_PAD_WINDOW_DIAGNOSTIC_CASE_A') {
     Check ($latestWindow.top_level_window_counts.all -eq 0 -and $latestWindow.top_level_window_counts.visible -eq 0) 'T04 diagnostic found no top-level windows'
     Check ($latestWindow.foreground_window.hwnd -eq 0 -and $latestWindow.foreground_window.owner_pid -eq 0) 'T04 diagnostic found no foreground window'
     Check (@($latestWindow.session_comparison.unique_session_ids).Count -eq 1 -and $latestWindow.session_comparison.unique_session_ids[0] -eq 1) 'T04 diagnostic sessions are comparable and all session 1'
+    Check (@($latestWindow.reopen_conditions).Count -eq 3 -and $latestWindow.reopen_conditions[1] -match 'nonzero HWND') 'T04 diagnostic keeps bounded reopen conditions'
     Check ($latestWindow.mutation_guard.process_refresh_only -eq $true -and $latestWindow.mutation_guard.process_kill_or_restart -eq $false -and $latestWindow.mutation_guard.flow_binding_or_run -eq $false) 'T04 diagnostic is read-only with no PAD mutation'
 } elseif ($latestWindow.result -eq 'PAD_CLOSED_AND_RELAUNCHED_NEW_PROCESS') {
     Check ($latestWindow.close_and_relaunch.old_processes_after_close.Count -eq 0) 'T04 prior PAD processes are absent after explicit close'
