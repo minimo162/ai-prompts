@@ -6605,7 +6605,7 @@
       "manifest": "../copilot/knowledge-bundle-manifest-20260913e.json",
       "generated": "generated/normal-chat-20260914e-t04-independent-live/robin.txt",
       "response": "generated/normal-chat-20260914e-t04-independent-live/response.txt",
-      "evidence": "evidence/t04-independent-current-output-comparison-20260914e.json; evidence/t04-independent-current-pad-paste-save-20260914e.json; evidence/t04-independent-current-pad-recopy-20260914e.robin; evidence/t04-independent-current-pad-run1-20260914e.json; evidence/t04-independent-current-pad-run2-20260914e.json; evidence/t04-independent-current-output-run2-20260914e.xlsx; evidence/t04-independent-current-evidence-reconciliation-20260914e.json; evidence/t04-independent-current-pad-window-observation-20260914f.json; evidence/t04-independent-current-pad-window-observation-20260914h.json; evidence/t04-independent-current-pad-window-observation-20260914i.json",
+      "evidence": "evidence/t04-independent-current-output-comparison-20260914e.json; evidence/t04-independent-current-pad-paste-save-20260914e.json; evidence/t04-independent-current-pad-recopy-20260914e.robin; evidence/t04-independent-current-pad-run1-20260914e.json; evidence/t04-independent-current-pad-run2-20260914e.json; evidence/t04-independent-current-output-run2-20260914e.xlsx; evidence/t04-independent-current-evidence-reconciliation-20260914e.json; evidence/t04-independent-current-pad-window-observation-20260914f.json; evidence/t04-independent-current-pad-window-observation-20260914h.json; evidence/t04-independent-current-pad-window-observation-20260914i.json; evidence/t04-independent-current-pad-window-observation-20260914j.json",
       "conversation": "https://m365.cloud.microsoft/chat/conversation/e06e99be-8eb9-4d1b-9d9f-1c39e34060e9",
       "flow_name": "RobinKnowledgeT04IndependentCurrentBundleLive20260914eD",
       "designer_pid": 29660,
@@ -6622,7 +6622,7 @@
       "evidence_reconciliation": "evidence/t04-independent-current-evidence-reconciliation-20260914e.json",
       "evidence_reconciliation_status": "candidate_partial_preserved_run1_snapshot_missing_new_pair_not_started",
       "window_observation": "evidence/t04-independent-current-pad-window-observation-20260914f.json",
-      "latest_window_observation": "evidence/t04-independent-current-pad-window-observation-20260914i.json"
+      "latest_window_observation": "evidence/t04-independent-current-pad-window-observation-20260914j.json"
     },
     {
       "id": "normal-chat-p34-current-package-live-2026-09-14",

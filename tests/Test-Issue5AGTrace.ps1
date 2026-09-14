@@ -95,6 +95,7 @@ Check ($latestWindow.result -eq 'BLOCKED_CURRENT_PAD_WINDOW_UNOBSERVABLE_CUA_NO_
 Check (@($latestWindow.computer_use_snapshot.apps).Count -eq 0) 'T04 latest Computer Use native app list is empty'
 Check (@($latestWindow.pad_process_snapshot | Where-Object {$_.main_window_handle -ne 0 -or $_.main_window_title -ne ''}).Count -eq 0) 'T04 latest PAD processes have no visible HWND/title'
 Check (@($latestWindow.launch_attempts | Where-Object {$_.method -eq 'registered_designer_protocol' -and $_.result -eq 'ACCESS_DENIED' -and $_.visible_window_created -eq $false}).Count -eq 1) 'T04 latest protocol launch was denied without visible window'
+Check ($latestWindow.launch_attempt.method -eq 'explorer_shell_apps_folder_console' -and $latestWindow.launch_attempt.visible_window_created -eq $false -and $latestWindow.launch_attempt.result -eq 'NO_NEW_VISIBLE_PAD_PROCESS') 'T04 latest explorer launch produced no visible PAD process'
 
 Check ($trace.decision.a_to_g_complete -eq $false) 'A-G complete flag remains false'
 Check ($trace.decision.issue_close_authorized -eq $false) 'issue close remains unauthorized'

@@ -646,3 +646,5 @@ Issue #5/#27の必須A〜Gを、教材正本・原probe／別空フロー再利�
 ## 2026-09-14 T04 Designerプロトコル起動の追加観測
 
 `ms-powerautomatedesigner:` の登録プロトコルを1回だけ起動観測したが、`ACCESS_DENIED`で新規プロセス・可視窓は生成されなかった。既存のPAD.Console.Host／PAD.Designerは応答中でもHWND 0・タイトル空のままで、Computer Useのネイティブアプリ一覧も空だった。貼付け・保存・Run・Copilot再送・Robin編集・第3回Runは行わず、現行T04の`candidate_partial`、Run1 `NOT_CAPTURED`、新規pair未開始を維持する。原証跡は `catalog/evidence/t04-independent-current-pad-window-observation-20260914i.json` で、A〜G台帳と各集約の`latest_window_observation`から参照できる。
+
+その後、既存`explorer.exe`経由でPAD ConsoleのAppsFolder起動を15秒観測したが、新しいPADプロセス・可視窓は発生しなかった（`catalog/evidence/t04-independent-current-pad-window-observation-20260914j.json`）。したがってDesignerの一意なPID／タイトル／HWND／UIAは依然取得できず、実行ペアは開始していない。
