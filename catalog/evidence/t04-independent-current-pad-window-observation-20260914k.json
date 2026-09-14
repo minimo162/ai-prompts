@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T15:00:29+09:00",
+  "verification_id": "T04-INDEPENDENT-CURRENT-20260914E-TRACE-6",
+  "case": "T04",
+  "scope": "fresh_pair_computer_use_post_explorer_launch_observation",
+  "computer_use_snapshot": {
+    "apps": [],
+    "native_app_binding": "UNAVAILABLE",
+    "browser_inventory_present": true,
+    "pad_window_observed": false
+  },
+  "pad_process_snapshot": [
+    {
+      "pid": 13332,
+      "process": "PAD.Console.Host",
+      "session_id": 1,
+      "responding": true,
+      "main_window_handle": 0,
+      "main_window_title": ""
+    },
+    {
+      "pid": 31324,
+      "process": "PAD.Designer",
+      "session_id": 1,
+      "responding": true,
+      "main_window_handle": 0,
+      "main_window_title": ""
+    },
+    {
+      "pid": 44316,
+      "process": "PAD.Designer",
+      "session_id": 1,
+      "responding": true,
+      "main_window_handle": 0,
+      "main_window_title": ""
+    }
+  ],
+  "session_inventory": {
+    "shell_user": "CodexSandboxOffline",
+    "qwinsta_console": {
+      "username": "yuuki",
+      "session_id": 1,
+      "state": "Active"
+    },
+    "rdp_session": "none_observed"
+  },
+  "launch_attempts": [
+    {
+      "method": "registered_designer_protocol",
+      "uri": "ms-powerautomatedesigner:",
+      "result": "ACCESS_DENIED",
+      "visible_window_created": false
+    },
+    {
+      "method": "explorer_shell_apps_folder_console",
+      "application_id": "Microsoft.PowerAutomateDesktop_11.2608.115.0_x64__8wekyb3d8bbwe!PAD.Console",
+      "result": "NO_NEW_VISIBLE_PAD_PROCESS",
+      "visible_window_created": false
+    }
+  ],
+  "launch_attempt": {
+    "method": "explorer_shell_apps_folder_console",
+    "result": "NO_NEW_VISIBLE_PAD_PROCESS",
+    "visible_window_created": false
+  },
+  "flow_and_run_actions": {
+    "flow_binding_observed": false,
+    "exact_pid_title_hwnd_uia_verified": false,
+    "paste_save_run_invoked": false,
+    "copilot_resend": false,
+    "saved_robin_edited": false,
+    "third_run_started": false
+  },
+  "result": "BLOCKED_CURRENT_PAD_WINDOW_UNOBSERVABLE_CUA_NO_NATIVE_APP_BINDING",
+  "reason": "After the explorer-based PAD Console launch observation, a fresh Computer Use snapshot still exposed no native apps. The three responding PAD processes remain without a nonzero HWND or title, so no flow binding or run is claimed.",
+  "source_observation": "catalog/evidence/t04-independent-current-pad-window-observation-20260914j.json"
+}
