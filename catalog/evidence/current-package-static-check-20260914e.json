@@ -1,4 +1,6 @@
 {
+  "current_acceptance_verification": "catalog/evidence/final-content-verification-20260915.json",
+  "historical_sections_note": "Current decision is current_acceptance. Retained candidate_followup, p4_current_bundle, p5, cases without a current-version qualifier, current_main_commit/live_issue_read, dated diagnostics and test runs describe historical stages; they are not current completion blockers or new execution evidence.",
   "schema_version": 1,
   "captured_at": "2026-09-14T04:03:01+09:00",
   "reconciled_at": "2026-09-14T20:45:00+09:00",
@@ -34,7 +36,7 @@
     ,{"command": "tests/Test-PadRunArtifactSnapshot.ps1 -Root .", "status": "PASS", "checks": 11, "note": "Run1 output gate still forbids Run2 without a captured artifact; no PAD or Copilot was invoked."}
   ],
   "live_m365": "evidence/t08-current-bundle-live-acceptance-20260914e.json",
-  "result": "Local 20260914x checks pass with 38 non-live tests (37 existing plus one strict comparator entry). C and the new independent T04 pair remain accepted. Primary and independent T10 strict raw-byte preservation remain NOT_PROVEN; local saver control is not full chat-path proof. GitHub main remains 7cc2c18b2a7f521f770c47c48cbbf4715d228979; these local additions are unpushed.",
+  "result": "Historical static checks below remain dated evidence. Current classification follows final-content-acceptance-20260915.json; fresh validation is recorded separately before publication.",
   "t10_strict_boundary_audit": {
     "verification": "catalog/evidence/t10-strict-20260914x-verification.json",
     "evidence": "catalog/evidence/t10-strict-20260914x-audit.json",
@@ -43,7 +45,7 @@
     "primary_strict": "NOT_PROVEN",
     "independent_strict": "NOT_PROVEN",
     "additional_real_acquisitions": 0,
-    "reason": "Historical Add File saving appends LF in one same-operation synthetic control. Browser inventory timed out; no real recapture. Existing real candidates fail outside the exact two literal-content intervals. C and independent T04 new pair remain accepted; only strict T10 remains required."
+    "reason": "Historical strict boundary audit: NOT_PROVEN and outside bytes FAIL unchanged. Under the explicit 2026-09-15 user decision this transport limitation is non-blocking; see current_acceptance."
   },
   "t10_existing_response_recapture": {
     "evidence": "catalog/evidence/t10-strict-20260914x-recapture-results.json",
@@ -69,5 +71,23 @@
       "strict": "NOT_PROVEN"
     },
     "next": "Original acquisition budgets exhausted. No repeat, new send or PAD Run authorized; distinct upstream hypothesis and explicit new limits required."
+  }
+,
+  "historical_pre_content_decision": {
+    "as_of": "Before explicit user decision on 2026-09-15",
+    "baseline_commit": "f4fa9a2e61bfd2a2be0414eccd9e42b2d4a5e35e",
+    "t10_strict_boundary_audit.reason": "Historical Add File saving appends LF in one same-operation synthetic control. Browser inventory timed out; no real recapture. Existing real candidates fail outside the exact two literal-content intervals. C and independent T04 new pair remain accepted; only strict T10 remains required.",
+    "result": "Local 20260914x checks pass with 38 non-live tests (37 existing plus one strict comparator entry). C and the new independent T04 pair remain accepted. Primary and independent T10 strict raw-byte preservation remain NOT_PROVEN; local saver control is not full chat-path proof. GitHub main remains 7cc2c18b2a7f521f770c47c48cbbf4715d228979; these local additions are unpushed."
+  }
+,
+  "current_acceptance": {
+    "evidence": "catalog/evidence/final-content-acceptance-20260915.json",
+    "status": "TECHNICAL_ACCEPTANCE_PASS",
+    "contract": "EXPLICIT_USER_COMPLETION_CONTRACT_CHANGE",
+    "required_gaps": [],
+    "t10_content": "PASS",
+    "t10_transport": "NOT_PROVEN",
+    "transport_blocking": false,
+    "close_gate": "After fresh checks and main integration only"
   }
 }

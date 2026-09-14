@@ -1,0 +1,2534 @@
+{
+  "schema_version": 1,
+  "id": "FINAL-CONTENT-ACCEPTANCE-20260915",
+  "created_at": "2026-09-14T22:05:22.852Z",
+  "status": "TECHNICAL_ACCEPTANCE_PASS_CLOSE_AFTER_MAIN",
+  "baseline_main": "f4fa9a2e61bfd2a2be0414eccd9e42b2d4a5e35e",
+  "prior_provenance_commit": "b12f5fb7aa9cad37b256705131929d061dce0bdc",
+  "authority": {
+    "kind": "EXPLICIT_USER_COMPLETION_CONTRACT_CHANGE",
+    "decision_date": "2026-09-15",
+    "required": "指定された変更だけを反映し、それ以外の既存命令・入力・変数・処理・エラー経路の内容を保持すること",
+    "non_blocking": "CRLF/LF、EOF、BOM等を含むtransport-level raw-byte完全保持",
+    "provenance": "catalog/evidence/t10-final-provenance-audit-20260915.md",
+    "prior_case": "B",
+    "classification": "CASE_B_RESOLVED_BY_EXPLICIT_USER_DECISION_NOT_RETROACTIVE_CASE_A",
+    "reason": "The original request and fixed T10 content condition precede explicit later strict audits. Those later mandatory conditions were real (prior CASE B); the user now explicitly changes completion conditions. No historical strict PASS is inferred."
+  },
+  "package": {
+    "version": "20260913e",
+    "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+    "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+    "manifest": "copilot/knowledge-bundle-manifest-20260913e.json"
+  },
+  "t10": {
+    "primary": {
+      "functional_execution": "PASS",
+      "requested_changes_only": "PASS",
+      "unchanged_command_content": "PASS",
+      "transport_raw_byte_preservation": "NOT_PROVEN",
+      "transport_blocking": false,
+      "outside_raw_bytes": "FAIL",
+      "requests": 1,
+      "completed": 1,
+      "remaining": 0,
+      "source": "catalog/generated/office-three-apps/generated.robin",
+      "response": "catalog/evidence/t10-strict-20260914x-recapture-primary.robin",
+      "command_count": 16,
+      "changed_lines": [
+        2,
+        4
+      ],
+      "unchanged_commands": 14
+    },
+    "independent": {
+      "functional_execution": "PASS",
+      "requested_changes_only": "PASS",
+      "unchanged_command_content": "PASS",
+      "transport_raw_byte_preservation": "NOT_PROVEN",
+      "transport_blocking": false,
+      "outside_raw_bytes": "FAIL",
+      "requests": 1,
+      "completed": 1,
+      "remaining": 0,
+      "source": "catalog/generated/office-three-apps/generated.robin",
+      "response": "catalog/evidence/t10-strict-20260914x-recapture-independent.robin",
+      "command_count": 16,
+      "changed_lines": [
+        2,
+        4
+      ],
+      "unchanged_commands": 14
+    }
+  },
+  "issue5": {
+    "status": "TECHNICAL_ACCEPTANCE_PASS",
+    "required_gaps": [],
+    "a_g": {
+      "A": {
+        "status": "SATISFIED_MEASURED_REQUIRED_SCOPE",
+        "source": "CODEX_TASK_PAD_ROBIN_KNOWLEDGE.md#4",
+        "knowledge": [
+          "copilot/knowledge/PAD-Robin-01-Basics.txt",
+          "copilot/knowledge/PAD-Robin-00-Index.txt"
+        ],
+        "checks": [
+          {
+            "id": "A-text-number-boolean-set",
+            "evidence": [
+              "catalog/evidence/p3-boolean-probe-20260910.json",
+              "catalog/evidence/a-boolean-reuse-20260912/acceptance.json",
+              "catalog/evidence/number-conversion-variables.json"
+            ]
+          },
+          {
+            "id": "A-arithmetic-add-subtract",
+            "evidence": [
+              "catalog/evidence/bounded-loop-sum-variables.json",
+              "catalog/evidence/p3-subtract-probe-20260910.json",
+              "catalog/evidence/a-subtract-reuse-20260912/acceptance.json"
+            ]
+          },
+          {
+            "id": "A-list-create-add-get",
+            "evidence": [
+              "catalog/evidence/list-create-add.png",
+              "catalog/evidence/p3-list-idx1-acceptance-20260912.json",
+              "catalog/evidence/p3-list-get-index-probe-20260912.json"
+            ]
+          },
+          {
+            "id": "A-text-replace-split-join",
+            "evidence": [
+              "catalog/evidence/text-replace-literal-variables.json",
+              "catalog/evidence/text-replace-regex-variables.json",
+              "catalog/evidence/text-split-join-space-final.json",
+              "catalog/evidence/text-split-join-variables.json"
+            ]
+          },
+          {
+            "id": "A-text-substring",
+            "evidence": [
+              "catalog/evidence/text-substring-validation.json",
+              "catalog/evidence/text-substring-roundtrip.json"
+            ]
+          },
+          {
+            "id": "A-number-conversion",
+            "evidence": [
+              "catalog/evidence/number-conversion-variables.json",
+              "catalog/evidence/number-conversion-invalid.json"
+            ]
+          },
+          {
+            "id": "A-datetime",
+            "evidence": [
+              "catalog/evidence/datetime-current-date-validation.json",
+              "catalog/evidence/p3-date-add-probe-20260910.json",
+              "catalog/evidence/p3-date-subtract-probe-20260910.json",
+              "catalog/evidence/p3-date-format-acceptance-20260912.json"
+            ]
+          }
+        ],
+        "required_gaps": [],
+        "limitations": [
+          "list out-of-range/negative/variable index",
+          "additional number locale/grouping modes",
+          "substring boundary variants",
+          "custom date tokens beyond yyyy-MM-dd and existing-action edit path"
+        ]
+      },
+      "B": {
+        "status": "SATISFIED_MEASURED_REQUIRED_SCOPE",
+        "source": "CODEX_TASK_PAD_ROBIN_KNOWLEDGE.md#4",
+        "knowledge": [
+          "copilot/knowledge/PAD-Robin-02-Control.txt"
+        ],
+        "checks": [
+          {
+            "id": "B-if-else",
+            "evidence": [
+              "catalog/evidence/p3-else-probe-20260910.json",
+              "catalog/evidence/p3-else-if-probe-20260910.json",
+              "catalog/evidence/p3-nested-control-acceptance-20260912.json",
+              "catalog/evidence/t03-ext-verify-acceptance-20260912.json"
+            ]
+          },
+          {
+            "id": "B-loop-fixed-foreach-exit",
+            "evidence": [
+              "catalog/evidence/p3-break-probe-20260910.json",
+              "catalog/evidence/p3-continue-probe-20260910.json",
+              "catalog/evidence/p3-nested-control-acceptance-20260912.json"
+            ]
+          },
+          {
+            "id": "B-error-subflow",
+            "evidence": [
+              "catalog/evidence/p3-error-block-probe-20260910.json",
+              "catalog/evidence/p3-error-trigger-probe-20260910.json",
+              "catalog/evidence/p3-subflow-probe-20260910.json",
+              "catalog/evidence/p3-subflow-reuse-observer-20260913.json",
+              "catalog/evidence/p3-named-error-acceptance-20260912.json",
+              "catalog/evidence/p36-current-bundle-live-20260914e.json"
+            ]
+          },
+          {
+            "id": "B-subflow-completed-reuse",
+            "evidence": [
+              "catalog/evidence/p3-subflow-reuse-20260913-worker-paste-save.json",
+              "catalog/evidence/p3-subflow-reuse-20260913-main-paste-save.json",
+              "catalog/evidence/p3-subflow-reuse-20260913-run1.json",
+              "catalog/evidence/p3-subflow-reuse-20260913-run2.json",
+              "catalog/evidence/p3-subflow-reuse-20260913-reopen-recopy.json"
+            ]
+          }
+        ],
+        "required_gaps": [],
+        "limitations": [
+          "3+ nesting and outer-loop exit",
+          "LOOP WHILE nesting",
+          "generalized block-level user-defined FileNotFound match",
+          "some separate-empty-flow reuse remains probe-only rather than current-package reacceptance"
+        ]
+      },
+      "C": {
+        "status": "SATISFIED_MEASURED_REQUIRED_SCOPE",
+        "source": "CODEX_TASK_PAD_ROBIN_KNOWLEDGE.md#4",
+        "knowledge": [
+          "copilot/knowledge/PAD-Robin-01-Basics.txt",
+          "copilot/knowledge/PAD-Robin-03-Files.txt"
+        ],
+        "checks": [
+          {
+            "id": "C-datatable",
+            "evidence": [
+              "catalog/evidence/datatable-create-validation.json",
+              "catalog/evidence/p3-datatable-create-success-20260911.json",
+              "catalog/evidence/p3-datatable-row-reuse-20260913-paste-save.json",
+              "catalog/evidence/p3-datatable-row-reuse-20260913-run1.json",
+              "catalog/evidence/p3-datatable-row-reuse-20260913-run2.json",
+              "catalog/evidence/p3-datatable-cell-reuse-20260913-paste-save.json",
+              "catalog/evidence/p3-datatable-cell-reuse-20260913-run1.json",
+              "catalog/evidence/p3-datatable-cell-reuse-20260913-run2.json",
+              "catalog/evidence/p3-datatable-foreach-reuse-20260913-paste-save.json",
+              "catalog/evidence/p3-datatable-foreach-reuse-20260913-run1.json",
+              "catalog/evidence/p3-datatable-foreach-reuse-20260913-run2.json"
+            ]
+          },
+          {
+            "id": "C-csv-read-write",
+            "evidence": [
+              "catalog/evidence/csv-read-validation.json",
+              "catalog/evidence/csv-read-roundtrip.json",
+              "catalog/evidence/csv-read-write2-run-1.json",
+              "catalog/evidence/csv-read-write2-run-2.json",
+              "catalog/evidence/filter-t02-roundtrip2-run-2.json"
+            ]
+          },
+          {
+            "id": "C-datatable-cell-value-read",
+            "evidence": [
+              "catalog/evidence/c-cell-read-20260914v/acceptance.json",
+              "catalog/evidence/c-cell-read-20260914v/captured.robin",
+              "catalog/evidence/c-cell-read-20260914v/reuse-paste.json",
+              "catalog/evidence/c-cell-read-20260914v/reuse-save.txt",
+              "catalog/evidence/c-cell-read-20260914v/reuse-reopened-recopy.robin",
+              "catalog/evidence/c-cell-read-20260914v/run1-observed-values.json",
+              "catalog/evidence/c-cell-read-20260914v/run2-observer-recovery.json"
+            ]
+          }
+        ],
+        "required_gaps": [],
+        "limitations": [
+          "DataTable column-name access in a row loop remains NOT_PROVEN",
+          "additional CSV delimiter/quote modes remain unconfirmed",
+          "probe reuse is not current-package same-version reacceptance"
+        ]
+      },
+      "D": {
+        "status": "SATISFIED_MEASURED_REQUIRED_SCOPE",
+        "source": "CODEX_TASK_PAD_ROBIN_KNOWLEDGE.md#4",
+        "knowledge": [
+          "copilot/knowledge/PAD-Robin-03-Files.txt"
+        ],
+        "checks": [
+          {
+            "id": "D-files-folders",
+            "evidence": [
+              "catalog/evidence/p3-folder-create-probe-20260910.json",
+              "catalog/evidence/d-folder-create-reuse-20260912/acceptance.json",
+              "catalog/evidence/p3-file-exists-probe-20260910.json",
+              "catalog/evidence/p3-file-exists-reuse-20260913-paste-save.json",
+              "catalog/evidence/p3-file-move-reuse-20260913-paste-save.json",
+              "catalog/evidence/p3-file-move-reuse-20260913-state.json",
+              "catalog/evidence/p3-file-rename-reuse-20260913-paste-save.json",
+              "catalog/evidence/p3-file-rename-reuse-20260913-state.json",
+              "catalog/evidence/file-copy-validation.json",
+              "catalog/evidence/folder-get-files-rt-run-1.json",
+              "catalog/evidence/folder-get-files-all-rt-run-1.json",
+              "catalog/evidence/p3-file-boundary-acceptance-20260912.json"
+            ]
+          }
+        ],
+        "required_gaps": [],
+        "limitations": [
+          "case-insensitive extension comparison remains explicitly unconfirmed",
+          "some false-branch and separate reuse paths are not current-package reacceptance",
+          "do not infer unlisted file/folder variants"
+        ]
+      },
+      "E": {
+        "status": "SATISFIED_MEASURED_REQUIRED_SCOPE",
+        "source": "CODEX_TASK_PAD_ROBIN_KNOWLEDGE.md#4",
+        "knowledge": [
+          "copilot/knowledge/PAD-Robin-01-Basics.txt",
+          "copilot/knowledge/PAD-Robin-06-Examples.txt"
+        ],
+        "checks": [
+          {
+            "id": "E-excel",
+            "evidence": [
+              "catalog/evidence/p3-excel-sheet-probe-20260910.json",
+              "catalog/evidence/p3-excel-read-range-probe-20260911.json",
+              "catalog/evidence/p3-excel-foreach-reuse-20260913-paste-save.json",
+              "catalog/evidence/p3-excel-foreach-reuse-20260913-run1.json",
+              "catalog/evidence/p3-excel-foreach-reuse-20260913-run2.json",
+              "catalog/evidence/p3-saveas-collision-acceptance-20260912.json",
+              "catalog/evidence/t06-20260914e-output-comparison.json",
+              "catalog/evidence/t04-independent-current-output-comparison-20260914e.json"
+            ]
+          },
+          {
+            "id": "E-current-independent-pair",
+            "evidence": [
+              "catalog/evidence/t04-independent-pair-20260914w/acceptance.json"
+            ]
+          }
+        ],
+        "required_gaps": [],
+        "limitations": [
+          "some separate probe reuse is not same-version current-package reacceptance",
+          "PowerPoint SaveAs collision/locked targets are outside this Excel evidence"
+        ]
+      },
+      "F": {
+        "status": "SATISFIED_MEASURED_REQUIRED_SCOPE",
+        "source": "CODEX_TASK_PAD_ROBIN_KNOWLEDGE.md#4",
+        "knowledge": [
+          "copilot/knowledge/PAD-Robin-04-Office-PDF.txt"
+        ],
+        "checks": [
+          {
+            "id": "F-office-pdf",
+            "evidence": [
+              "catalog/evidence/office/verification.json",
+              "catalog/evidence/office/catalog-artifacts.json",
+              "catalog/evidence/office/powerpoint-actions.json",
+              "catalog/evidence/office/word-variables.json",
+              "catalog/evidence/office/reopen-variables.json",
+              "catalog/evidence/t06-20260914e-output-comparison.json",
+              "catalog/evidence/t07-current-bundle-output-comparison-20260914e.json",
+              "catalog/evidence/t10-independent-current-generation-20260914e.json"
+            ]
+          },
+          {
+            "id": "F-T10-content-contract",
+            "evidence": [
+              "catalog/evidence/t10-copilot-live-generation-20260913-pad-acceptance.json",
+              "catalog/evidence/t10-strict-preservation-audit-20260913.json",
+              "catalog/evidence/t10-independent-current-generation-20260914e.json"
+            ]
+          }
+        ],
+        "required_gaps": [],
+        "limitations": [
+          "broad Office/PDF variant coverage is not claimed",
+          "new agent registration reuse is not proven"
+        ]
+      },
+      "G": {
+        "status": "SATISFIED_MEASURED_REQUIRED_SCOPE",
+        "source": "CODEX_TASK_PAD_ROBIN_KNOWLEDGE.md#4",
+        "knowledge": [
+          "copilot/knowledge/PAD-Robin-05-UI-Web.txt"
+        ],
+        "checks": [
+          {
+            "id": "G-ui-browser",
+            "evidence": [
+              "catalog/evidence/t09-20260913e-pad-acceptance.json",
+              "catalog/evidence/t09-separate-ui-registration-20260911.json",
+              "catalog/evidence/t09-extension-handshake-boundary-20260911.json",
+              "catalog/evidence/t09-wait1-acceptance-20260912.json",
+              "catalog/evidence/t09-repo-run1-acceptance-20260912.json",
+              "catalog/evidence/t09-repo-run2-20260912.json"
+            ]
+          }
+        ],
+        "required_gaps": [],
+        "limitations": [
+          "other URLs/elements/browsers and extension-disabled environment remain unconfirmed",
+          "generated six-line Robin does not transport registered UI elements; the element-import route is separately evidenced"
+        ]
+      }
+    }
+  },
+  "issue27": {
+    "status": "TECHNICAL_ACCEPTANCE_PASS",
+    "required_gaps": [],
+    "cases": {
+      "T01": {
+        "status": "PASS",
+        "generation": "catalog/evidence/t01-copilot-live-generation-20260913e.json",
+        "acceptance": "catalog/evidence/t01-copilot-live-generation-20260913e-pad-acceptance.json",
+        "scope": "Current 20260913e measured request only",
+        "comparison": "catalog/evidence/t01-copilot-live-generation-20260913e-pad-output-comparison.json"
+      },
+      "T02": {
+        "status": "PASS",
+        "generation": "catalog/evidence/t02-copilot-live-generation-20260913.json",
+        "acceptance": "catalog/evidence/t02-copilot-live-generation-20260913e-pad-acceptance.json",
+        "scope": "Current 20260913e measured request only"
+      },
+      "T03": {
+        "status": "PASS",
+        "generation": "catalog/evidence/t03-revised-input-live-acceptance-20260913.json",
+        "acceptance": "catalog/evidence/t03-copilot-live-generation-20260913e-pad-acceptance.json",
+        "scope": "Corrected request only; original request is not accepted"
+      },
+      "T05": {
+        "status": "PASS",
+        "generation": "catalog/evidence/t05-copilot-live-generation-20260913.json",
+        "acceptance": "catalog/evidence/t05-copilot-live-generation-20260913e-pad-acceptance.json",
+        "scope": "Current 20260913e measured request only"
+      },
+      "T06": {
+        "status": "PASS",
+        "generation": "catalog/evidence/t06-copilot-live-generation-20260914e.json",
+        "acceptance": "catalog/evidence/t06-copilot-live-generation-20260914e-pad-acceptance.json",
+        "scope": "Current 20260913e measured request only",
+        "comparison": "catalog/evidence/t06-20260914e-output-comparison.json"
+      },
+      "T07": {
+        "status": "PASS",
+        "generation": "catalog/evidence/t07-current-bundle-live-acceptance-20260914e.json",
+        "acceptance": "catalog/evidence/t07-current-bundle-live-acceptance-20260914e.json",
+        "scope": "Current 20260913e measured request only",
+        "comparison": "catalog/evidence/t07-current-bundle-output-comparison-20260914e.json"
+      },
+      "T08": {
+        "status": "PASS",
+        "generation": "catalog/evidence/t08-current-bundle-live-acceptance-20260914e.json",
+        "acceptance": "catalog/evidence/t08-current-bundle-live-acceptance-20260914e.json",
+        "scope": "Current 20260913e measured request only",
+        "comparison": "catalog/evidence/t08-current-bundle-output-comparison-20260914e.json"
+      },
+      "T09": {
+        "status": "PASS",
+        "generation": "catalog/evidence/t09-20260913e-pad-acceptance.json",
+        "acceptance": "catalog/evidence/t09-20260913e-pad-acceptance.json",
+        "scope": "Local fixture and separately imported UI repository only"
+      },
+      "independent_T01": {
+        "status": "PASS",
+        "acceptance": "catalog/evidence/t01-independent-current-output-comparison-20260914e.json"
+      },
+      "independent_T04_new_pair": {
+        "status": "PASS",
+        "acceptance": "catalog/evidence/t04-independent-pair-20260914w/acceptance.json",
+        "scope": "New pair only. Original primary T04 NOT_ACCEPTED, old candidate_partial and old Run1 NOT_CAPTURED remain unchanged; no double counting."
+      },
+      "T10": {
+        "status": "PASS_CONTENT_CONTRACT",
+        "acceptance": "catalog/evidence/t10-copilot-live-generation-20260913-pad-acceptance.json",
+        "scope": "catalog/evidence/t10-strict-preservation-audit-20260913.json"
+      },
+      "independent_T10": {
+        "status": "PASS_CONTENT_CONTRACT",
+        "acceptance": "catalog/evidence/t10-independent-current-generation-20260914e.json"
+      },
+      "P3-1": {
+        "status": "PASS",
+        "acceptance": "catalog/evidence/p31-current-bundle-live-20260914e.json"
+      },
+      "P3-2": {
+        "status": "PASS",
+        "acceptance": "catalog/evidence/p32-current-bundle-live-20260914e.json"
+      },
+      "P3-3": {
+        "status": "PASS",
+        "acceptance": "catalog/evidence/p33-current-bundle-live-20260914e.json"
+      },
+      "P3-4": {
+        "status": "PASS",
+        "acceptance": "catalog/evidence/p34-current-bundle-live-20260914e.json"
+      },
+      "P3-5": {
+        "status": "PASS",
+        "acceptance": "catalog/evidence/p35-current-bundle-live-20260914e.json"
+      },
+      "P3-6": {
+        "status": "PASS",
+        "acceptance": "catalog/evidence/p36-current-bundle-live-20260914e.json"
+      },
+      "negative_v2": {
+        "status": "PASS",
+        "acceptance": "catalog/evidence/negative-suite-current-20260914e-acceptance.json"
+      },
+      "knowledge_precheck": {
+        "status": "PASS_REFERENCE_ONLY",
+        "acceptance": "catalog/evidence/current-bundle-20260913e-precheck.json"
+      }
+    }
+  },
+  "content_comparison_method": "Read-only comparison of 16 command contents. CRLF/LF separators and one terminal separator are distinguished from command content; no trimming, unescaping, rewriting, or file normalization. Exact fixed literal replacements on lines 2 and 4, all other 14 command strings identical. This is never strict byte PASS.",
+  "metadata_reconciliation": [
+    {
+      "case": "T06",
+      "issue": "Original T06 generation and PAD acceptance metadata transcribes cadadb in place of dacadb. Original records preserved; current derived package references corrected through their explicit manifest.",
+      "authority": "Their explicit manifest reference is copilot/knowledge-bundle-manifest-20260913e.json, whose 64-character SHA is verified from the unchanged bundle. Both records bind the current instruction and the same conversation/Robin. This reconciles recorded package identity; it is not a new claim of direct upload-byte observation.",
+      "original_recorded_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529cadadb7d3b7963e036e12",
+      "canonical_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+      "derived_records_corrected": [
+        "catalog/index.json",
+        "catalog/evidence/current-package-status-20260913.json",
+        "catalog/evidence/issue5-completion-audit-20260913.json"
+      ]
+    },
+    {
+      "case": "B",
+      "issue": "The trace referenced the earlier NOT_RUN observer record without the later completed Main runs.",
+      "authority": "Later two Main runs have distinct runtime run IDs, OK values, unchanged sources, and saved/reopened copies of Main and P3Worker. The old NOT_RUN record remains unchanged."
+    },
+    {
+      "case": "P3-4/P3-5/P3-6",
+      "issue": "Recorded instruction SHA omits c in 508124c1e; original JSON preserved.",
+      "authority": "Current package summaries contain the full SHA. Original records name the canonical instruction path/version, measured length 3947, current bundle hash, dedicated conversations and requests. Reconcile transcription only; no new live attachment-byte observation.",
+      "existing_correction": "catalog/evidence/p3-current-sha-correction-20260914e.json"
+    }
+  ],
+  "limitations": [
+    "Normal M365 Copilot Chat plus PAD measured cases only; no Agent Builder, all-PAD-function, organizational deployment or general byte-preserving transport completion.",
+    "T03 corrected request only; T04 old primary failure, old Run1 NOT_CAPTURED and candidate_partial preserved.",
+    "DOM/Playwright NOT_RUN remains optional external validation; no promotion to a new mandatory gap.",
+    "T10 source CRLF15/no-final-LF; DOM CR0/LF16/final LF. Transport strict remains NOT_PROVEN and outside raw bytes FAIL."
+  ],
+  "live_operations": {
+    "copilot_send": 0,
+    "dom_acquisition": 0,
+    "copilot_export_api": 0,
+    "pad_run": 0,
+    "clipboard_change": 0
+  },
+  "publication_gate": {
+    "required": "Fresh non-live checks PASS, protected originals unchanged, review diff, commit/PR merged into main before final issue comments and close.",
+    "issue_close_before_main": false
+  },
+  "evidence_manifest": [
+    {
+      "path": "CODEX_CORRECTION_M365_CHAT_VALIDATION.md",
+      "sha256": "300333dabdf6966c8e42e214ad098a9c23dea8ade3167a4aa93f0301656e133c"
+    },
+    {
+      "path": "CODEX_TASK_PAD_ROBIN_KNOWLEDGE.md",
+      "sha256": "c4a740c400212612e74b18e8e6639f9e3f221334907394829e2071a98a8182c1"
+    },
+    {
+      "path": "catalog/actions/csv-read/utf8.robin",
+      "sha256": "22f850aca459d4cc7b15993a96915f68eee51cf7d319b73ca43dd0fcfbd67e5d"
+    },
+    {
+      "path": "catalog/actions/datatable-create/empty.robin",
+      "sha256": "f3eef9ad3585b35d39c8f90d9202629d63907414e1f7601270e9d0fff7af9256"
+    },
+    {
+      "path": "catalog/actions/datetime-get-current-date/date-only.robin",
+      "sha256": "df0a911a7c9185a6f7127c442d6973929fb26a3dd1a527779c0fe61844c241f5"
+    },
+    {
+      "path": "catalog/actions/file-copy/single-no-overwrite.robin",
+      "sha256": "a8fad878ee52f6fb2d8a1f74e8f145e213b7a5c63b63450969f922a53082bedc"
+    },
+    {
+      "path": "catalog/actions/file-write-csv/pdf-table-headers.robin",
+      "sha256": "02e704f37984a87a9ffde7ad82d51d06d215b1b22e1eec170ea0ad4a4962464e"
+    },
+    {
+      "path": "catalog/actions/if/current-item-status-equals.robin",
+      "sha256": "12a2c5b7bac32d98291560ae9bd1e170f256c5efdc35d88d47b0e6ad8987a35a"
+    },
+    {
+      "path": "catalog/actions/text-substring/mixed-index-length.robin",
+      "sha256": "4f1021aafc353edba483e83ea61c6dd93d3c7944ad7b4566049c50fe81e4f70c"
+    },
+    {
+      "path": "catalog/actions/variables-create-new-list/default.robin",
+      "sha256": "d94dbf198e1cc061d5e820d49d6b58bf5361d6b941f2756f2c78d9b9a055910f"
+    },
+    {
+      "path": "catalog/coverage.json",
+      "sha256": "13f1a19916d6fb849f0b707afd3aca1de1044e4f2b92e87ae05f52ff1d811d73",
+      "historical_at": "f4fa9a2e61bfd2a2be0414eccd9e42b2d4a5e35e",
+      "pre_change_checkout_sha256": "0732db313619c781a9b03d3d75b1116b4f4f6458f4494cba53274dbafb2d8ebe"
+    },
+    {
+      "path": "catalog/evidence/a-boolean-reuse-20260912/acceptance.json",
+      "sha256": "07c4e6d9d3b0a048642b5ec9da5b7cd50a5a49c63db3a4ff03054704e61b9308"
+    },
+    {
+      "path": "catalog/evidence/a-subtract-reuse-20260912/acceptance.json",
+      "sha256": "e1844b0afe01989553f7ecb9342693b253fb1d26dc6a52a09422c7b3f4b4ea66"
+    },
+    {
+      "path": "catalog/evidence/bounded-loop-sum-variables.json",
+      "sha256": "d6029fe4512585ee7c3efd00fc209688c8f6408f07ebcd09ad9e2172af2981f0"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/acceptance.json",
+      "sha256": "e99f820b4b2dc4b6cee24d0a8c38adc667bf8fe483808dbf5212d238494ba74f"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/capture-copy.json",
+      "sha256": "322a3e08fd8df31b0710bd717e92e358c1bf442f7f6fcf1e6f60d771a65b2926"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/captured.robin",
+      "sha256": "aacd4c595c7226d4445125074bbb6c71dd7d329d4fd4b752c5b61c1d55fd08c3"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/cell-read-settings.png",
+      "sha256": "490f2dbf0e85a45f30d8fa9cea2630576983f0c223ae485d28531931deec1711"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/expectation.json",
+      "sha256": "65c38e495e8ea2be59cc729ffde7f5e68ed05a5f4d6a98da9b75a8981c5c2791"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-after-run2-copy.json",
+      "sha256": "283d680b9670ca13e2c251469d5ea46943519ffe75287a7630e38db8f738616a"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-after-run2.robin",
+      "sha256": "aacd4c595c7226d4445125074bbb6c71dd7d329d4fd4b752c5b61c1d55fd08c3"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-before-reopen.json",
+      "sha256": "aa95b67a4f4aa9dd84d082b1f20f0447473125c80ca03b75a5f36885d648ddc4"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-copy.json",
+      "sha256": "d9dfcbd10677e08c6d8e2f32e5dd95217a7cec3ffc28a7e876b98d8f7e774e94"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-empty.png",
+      "sha256": "421e7b0e7faae78e99a0d61a81c9d711bd5bdb921cd161c0e7c473e88e6d6e4b"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-paste.json",
+      "sha256": "71cdf7f29bae11feea2a6baf109f16eb8c8557278d0670390c9c892717e658cc"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-recopy.robin",
+      "sha256": "aacd4c595c7226d4445125074bbb6c71dd7d329d4fd4b752c5b61c1d55fd08c3"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-reopened-copy.json",
+      "sha256": "a3a72c050e94d476c7fa3e6c8e9f9858cb74c0a9a4cb1a02b2c5e8eae1aed6f5"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-reopened-recopy.robin",
+      "sha256": "aacd4c595c7226d4445125074bbb6c71dd7d329d4fd4b752c5b61c1d55fd08c3"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-save.txt",
+      "sha256": "a48c04474d81d52617e3b12ac8f09ed93b41d81d92b9839022f2ec088521018f"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run1-before.json",
+      "sha256": "a03064cf02277a6205d1f7213501f2f9cb391c1eecb97cb19174f65a16b97e99"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run1-observed-values.json",
+      "sha256": "5e1b2b4bbb37f03ba37cbd220fe2f0ca057a100212bfbd77b3e5eea7af8a2e55"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run1-request.json",
+      "sha256": "6ae5a13025ee335e41988ca9ec9bdf00de6e6c5dbbcb64858c750c299b121341"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run1-variable-uia.json",
+      "sha256": "fe79e4a450b9b5e11ba60f390cac532d59413d5507aeead269b73dfb997ea525"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run1.json",
+      "sha256": "1ca85be59c60a9e252f0e29e3de8dd6fa4dfd8c6ebed32a846e7a37ad405db3e"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run1.png",
+      "sha256": "ab54dc81ad4ce1a1a98079722345ddee69e5db5ccebb14cea2e7f819dafa2bff"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run2-before.json",
+      "sha256": "1e0a02a171eac78538736acc7af50aef307d5872bf4d8a0b4fc6c32894d7a6f5"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run2-before.png",
+      "sha256": "7432dab06fc2559fe9e0082c03954518c6f1a281cf466bfd0b0e816d693242ef"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run2-observer-recovery.json",
+      "sha256": "f4865d4b288457332395117969067b763ed765e46dc50a6c7dc84f35ba64f092"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run2-request.json",
+      "sha256": "f703e1ca7fabaf9366c997b1d458d9b418796da73caeeedadb44ae58cfb9fdbd"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run2.png",
+      "sha256": "43f46f30d85ce73a8ad497be535022f16e5282fb8d735b7663796844b09d528c"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/table-settings.png",
+      "sha256": "2b7e13d263f0dae99cce0052eb26bea6265090c93d1d47611f59f59a4e814cb9"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-create-input-unapplied-20260914u.png",
+      "sha256": "32fb8004cb6a24cff553a43f3dd282024f25a5e12d9f194c5f130f7e86ffc607"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-empty-final-20260914u.png",
+      "sha256": "baad6585199126ed7890df26dbd0f046525b39ddbf06204343a9ad5e363e3007"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-existing-evidence-audit-20260914u.json",
+      "sha256": "dc9ce49031f6012e5395b19270363c1002a90710e45ca46409be2a5e9fa858eb"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-left-panel-20260914u.png",
+      "sha256": "ddffe0bc174f55f4ac6c29aa5db878ab0fa5e86dd1a99e2e98788375e92b0621"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-table-input-unapplied-20260914u.png",
+      "sha256": "60fb677c4c4190a5fdccbc3c6c0b49657fcee24c6b4e9199c0150edc8e5101f5"
+    },
+    {
+      "path": "catalog/evidence/copilot-excel-t10-independent-20260914e.xlsx",
+      "sha256": "0ece11a8face853bea97ffacffa9c739992d9eb7166abfce29a1d0617c1da0c7"
+    },
+    {
+      "path": "catalog/evidence/copilot-excel-t10-v6.xlsx",
+      "sha256": "9086a5c26f94ae7c692b92a234e0ad1d1061b98be2750477b7e4146dc0572c61"
+    },
+    {
+      "path": "catalog/evidence/csv-read-roundtrip.json",
+      "sha256": "08382648585bfaa78420d8ab1495ad2dfc297b6b0a6b322ebcd30d63d381ff50"
+    },
+    {
+      "path": "catalog/evidence/csv-read-validation.json",
+      "sha256": "b75bd58f2dd56af4e4b23678c9712d1e8a130d5c45df757a02344e37bc60feec"
+    },
+    {
+      "path": "catalog/evidence/csv-read-write-output2-20260909.csv",
+      "sha256": "49f6cee2225709b3c2ae4ec02ddaba68c780922516d3836a343ad84f2c37cbb9"
+    },
+    {
+      "path": "catalog/evidence/csv-read-write2-action.robin",
+      "sha256": "3f4126c5a12eac5eb909802fd6f61444639135158cd59c1f141eaf891b58f816"
+    },
+    {
+      "path": "catalog/evidence/csv-read-write2-run-1.json",
+      "sha256": "7137a089a129b92ca176f9c655867886ec4c4a220045ea7ccaee0dc445812571"
+    },
+    {
+      "path": "catalog/evidence/csv-read-write2-run-2.json",
+      "sha256": "6fd91f7c9f64246d6dd0448499e9ab75afa1ba4acedd4d8aeacc298782bff43a"
+    },
+    {
+      "path": "catalog/evidence/current-bundle-20260913e-precheck.json",
+      "sha256": "3e7a59e1b2987af17358021a57d23c8e33387812ae7af69570275435296998b1"
+    },
+    {
+      "path": "catalog/evidence/d-folder-create-reuse-20260912/acceptance.json",
+      "sha256": "3b21fcd550fe59e33165275e80269ec92e7e1943e644552a090792fe21a4dd24"
+    },
+    {
+      "path": "catalog/evidence/datatable-create-roundtrip-recopy.robin",
+      "sha256": "f3eef9ad3585b35d39c8f90d9202629d63907414e1f7601270e9d0fff7af9256"
+    },
+    {
+      "path": "catalog/evidence/datatable-create-run-1.json",
+      "sha256": "1f53e132ad2ed9dd20b1d5f5dbf52e34663a6dcb689d8606ec5318283b058262"
+    },
+    {
+      "path": "catalog/evidence/datatable-create-run-2.json",
+      "sha256": "202be0c187d2191560aa67b8c955cda6d055be10dc0c474fd980a5b543d40a22"
+    },
+    {
+      "path": "catalog/evidence/datatable-create-validation.json",
+      "sha256": "d4df9c533b053fc6d6a607b4e4953c8e81debf8e2f1d6eef06638de34187c77e"
+    },
+    {
+      "path": "catalog/evidence/datetime-current-date-roundtrip-recopy.robin",
+      "sha256": "df0a911a7c9185a6f7127c442d6973929fb26a3dd1a527779c0fe61844c241f5"
+    },
+    {
+      "path": "catalog/evidence/datetime-current-date-roundtrip.json",
+      "sha256": "e008d7eb54f52fe186ee2a6e3d7fe886de3b4306213e80f5498dca68293fe834"
+    },
+    {
+      "path": "catalog/evidence/datetime-current-date-run-1.json",
+      "sha256": "1a515bd05c46c148989a3e6190d874dbe4182adf2aa4f3ca5bf191877ad7d056"
+    },
+    {
+      "path": "catalog/evidence/datetime-current-date-run-2.json",
+      "sha256": "8192bcd6d8215650e2666c654db760290531cd0338a937e1bf7ada40c6a75612"
+    },
+    {
+      "path": "catalog/evidence/datetime-current-date-validation.json",
+      "sha256": "ac3af5fba8305ba15e5f701e38512583afaa7af62369f8e3a70141002ba7574f"
+    },
+    {
+      "path": "catalog/evidence/file-copy-roundtrip-recopy.robin",
+      "sha256": "a8fad878ee52f6fb2d8a1f74e8f145e213b7a5c63b63450969f922a53082bedc"
+    },
+    {
+      "path": "catalog/evidence/file-copy-validation.json",
+      "sha256": "7d66d4067f1d248815e266fc5138d4d783cfd2cdbce8c935cf07bdc4a152a08e"
+    },
+    {
+      "path": "catalog/evidence/filter-t02-roundtrip2-run-2.json",
+      "sha256": "e66f38a5ee686bd7aaa4d431d50275d9a82c437436dd085f7a6f107c136da0c1"
+    },
+    {
+      "path": "catalog/evidence/folder-get-files-all-rt-run-1.json",
+      "sha256": "570e2e9e182fb164706de4319a2671197f026169e02b3b6958d7bd710918328a"
+    },
+    {
+      "path": "catalog/evidence/folder-get-files-rt-run-1.json",
+      "sha256": "d5068528401bedec0dd55336198a2a957af9af260b10713c46accaef6f77053b"
+    },
+    {
+      "path": "catalog/evidence/list-create-add.png",
+      "sha256": "fb45f878c656c160d9977ff36f8883a031d5558338ff5a6c563536c502faf890"
+    },
+    {
+      "path": "catalog/evidence/negative-suite-current-20260914e-acceptance.json",
+      "sha256": "7f0eef5854eb0ff9ffb9a1fde76c7b7f5ce20f8f28c7db82e9919e362e869a24"
+    },
+    {
+      "path": "catalog/evidence/normal-chat-t01-output-current-bundle.txt",
+      "sha256": "2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2"
+    },
+    {
+      "path": "catalog/evidence/normal-chat-t02-output-20260910.csv",
+      "sha256": "8f0748cc4d149228331dfacc0a5c46e117270a7e9dee564c4f631924142cf7d3"
+    },
+    {
+      "path": "catalog/evidence/normal-chat-t04-output.xlsx",
+      "sha256": "2d24b9d9a096940e99fc78c0f01c2722f09e6a42fb30c3c9ff6895fce45ec54e"
+    },
+    {
+      "path": "catalog/evidence/normal-chat-t05-final.xlsx",
+      "sha256": "2d7f921b1bafb1dd36d5de691cf37d2016ed3a6ceb47b50e01f3ac7a2c285358"
+    },
+    {
+      "path": "catalog/evidence/normal-chat-t07-final.txt",
+      "sha256": "f7e592cc86719c395657ddffe2bf76ec7538c7d4deb7edb03fae7a5d90ba5fe2"
+    },
+    {
+      "path": "catalog/evidence/number-conversion-invalid.json",
+      "sha256": "a966616f55feb8dc7a217b8ea2d2afe74226e6c09c819d74b26df693148fa42b"
+    },
+    {
+      "path": "catalog/evidence/number-conversion-variables.json",
+      "sha256": "5b2c60f994c4f463572611394abac54da49317d3175e144eca60bbc85f25c853"
+    },
+    {
+      "path": "catalog/evidence/office/catalog-artifacts.json",
+      "sha256": "4f6a107f56a317482633309dc567d868bb26ff9e57c25137a12fe1307f3a0d80"
+    },
+    {
+      "path": "catalog/evidence/office/powerpoint-actions.json",
+      "sha256": "e044df7545db405e4c96d4988295877fdaf42a3039c5f5cc5d097a8013918891"
+    },
+    {
+      "path": "catalog/evidence/office/reopen-variables.json",
+      "sha256": "43868945641f6b90e6033168ba368d334caf3182026dd5149c76975458a85156"
+    },
+    {
+      "path": "catalog/evidence/office/verification.json",
+      "sha256": "f47acd00d9eb0a1ee1faf0df902e47a1e0ec8a8bf3f35040115159e7eeb04ac2"
+    },
+    {
+      "path": "catalog/evidence/office/word-variables.json",
+      "sha256": "4215b67b6a1ac05091b0e73fd7c1af036b5c59e0a9f2aa2c25b9601a38b99b3a"
+    },
+    {
+      "path": "catalog/evidence/p3-boolean-probe-20260910.json",
+      "sha256": "a780b8c9a0bbe827dfa4e21df5c9734d36f935714e34c7ff74fda8ecb8cb4f9f"
+    },
+    {
+      "path": "catalog/evidence/p3-boolean-probe-20260910.robin",
+      "sha256": "e7d0321af0dc7fee337b917308164b6d5c13f7040ef69dcc657ea725db54cf0c"
+    },
+    {
+      "path": "catalog/evidence/p3-boolean-probe-run-20260910.json",
+      "sha256": "585d6b4eaf4adbb959326f1907baa5eadeeb4a0d56175aeaaab147b6eb4b0a2d"
+    },
+    {
+      "path": "catalog/evidence/p3-break-probe-20260910.json",
+      "sha256": "c2a73db6aa6efa047e34c8cf3d56c7d78cb1cf80a9360fc82eb29680a14b426b"
+    },
+    {
+      "path": "catalog/evidence/p3-break-probe-20260910.robin",
+      "sha256": "0bdaba424233b5530b7285093caaff392a7e86ce1761eb6d9e490e981a046a43"
+    },
+    {
+      "path": "catalog/evidence/p3-break-probe-run-20260910.json",
+      "sha256": "a43b224d699aa18d56e6d2a4c355ea1f42947f31ebfcff589dfdb39f24e0bb3a"
+    },
+    {
+      "path": "catalog/evidence/p3-continue-probe-20260910.json",
+      "sha256": "b5b7db2195b35a20425d278ad3c8e3cb352207810f5d1f2d7f58cb4ba11d651d"
+    },
+    {
+      "path": "catalog/evidence/p3-continue-probe-20260910.robin",
+      "sha256": "689120c897d852795ed6be2aa6ca7d919c5f8ed087cfdc89c8256054247eb5ab"
+    },
+    {
+      "path": "catalog/evidence/p3-continue-probe-run1-20260910.json",
+      "sha256": "32775b264096f9bc8e6b6ea1df5ba3a7c01452e88031ef2e40cb36244317b853"
+    },
+    {
+      "path": "catalog/evidence/p3-continue-probe-run2-20260910.json",
+      "sha256": "3d9851131ea5841aeb23bf672b134f98f200c313e849de3b888d3a108af1fbbd"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-cell-reuse-20260913-paste-save.json",
+      "sha256": "ec661498caa2463cd53ef640635fa120b8508d1e7ea2f853037f4ee9f1509509"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-cell-reuse-20260913-recopy.robin",
+      "sha256": "218ec97aa79d5e4cbb6d3f66d995f9e0c9248eab47c04431a2eac4c2fff8b9cd"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-cell-reuse-20260913-run1.json",
+      "sha256": "601b7b42adc813482135046bfc013af6f6ec89503f946b02ac48cd81183ddf5a"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-cell-reuse-20260913-run2.json",
+      "sha256": "b1e070092ac2c6081b218a29ad97229b4d04d6bfc214212650aed19e3f5d1304"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-cell-success-20260911.json",
+      "sha256": "a35df2c42f4058e2e01e83af7f0857e24435a67fb2cbe5610cca6dbabd236db5"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-cell-success-flow-20260911.robin",
+      "sha256": "218ec97aa79d5e4cbb6d3f66d995f9e0c9248eab47c04431a2eac4c2fff8b9cd"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-cell-success-run1-20260911.json",
+      "sha256": "eac3db7e39d99a9663403c3e2eb67567a31eb1ddbeeae3460fd0bbcad45b9622"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-cell-success-run1.png",
+      "sha256": "f36f37224c631de02218cd105aff3505d555a2754ca9f172e00ae74d61c7474c"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-cell-success-run2-20260911.json",
+      "sha256": "ce74a64a32fb80240fc6b238afa4d26d22d06757dbf8d2c619706ab22152e17e"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-cell-success-run2-values.png",
+      "sha256": "b825cf3ad5937618d221e7291e0ded5b499b132d4dc6693520dc214befc65b41"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-create-success-20260911.json",
+      "sha256": "86fa21fceace0e0b87f259e593c6fe3021b3802f4fad1cc2b958b00fef80cf5b"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-create-success-20260911.robin",
+      "sha256": "41765e5628880f02d75bfe32129675d18aebaa1caaf742a2202dd30082123166"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-create-success-run1-20260911.json",
+      "sha256": "b25176f6bd325a475e6a07395e54f09b9e9ea65ecc552b671a1f083d8ffc252b"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-create-success-run2-20260911.json",
+      "sha256": "387290d82067425fd648d2f3c03af0b1b3a56c311a471303ff2fd50fc0aab623"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-foreach-reuse-20260913-paste-save.json",
+      "sha256": "debceeb6512ed9515cf6f4dfb01fdeb95bd3ffaff21ca60fcf247a2b7f76b312"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-foreach-reuse-20260913-recopy.robin",
+      "sha256": "3fe9881b262941ab9150bd2d883a0cf956291296328b3503c2af4811629ea981"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-foreach-reuse-20260913-run1.json",
+      "sha256": "61b76c0e0028396974e538f7c82d6c44a382bc7d5af62328aac3b805f9605651"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-foreach-reuse-20260913-run2.json",
+      "sha256": "d45851de6c4f70853ff2bf95625e1cf1958a3d3129ee1a44d99c6b8ea1ae0ec7"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-foreach-success-20260911.json",
+      "sha256": "e558ae9e508cdd01ced52d24b6e1b6c5038f3e66af1bd21a3e8487e594fa01a4"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-foreach-success-2row-run1-20260911.json",
+      "sha256": "5faa801afae4983f6f9e89bf9d33e1dded4b44a1485dfb6cec83ab16dd7f9233"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-foreach-success-2row-run2b-20260911.json",
+      "sha256": "eb9179bd982f091b12eb4883319830120d1a5461e49f687b49018f7cd8516572"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-foreach-success-flow-20260911-2row.robin",
+      "sha256": "3fe9881b262941ab9150bd2d883a0cf956291296328b3503c2af4811629ea981"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-foreach-success-flow-20260911-final.robin",
+      "sha256": "3fe9881b262941ab9150bd2d883a0cf956291296328b3503c2af4811629ea981"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-row-reuse-20260913-paste-save.json",
+      "sha256": "23e1e4b2f29a5a363325faa361e5df5eccbbfd3a1197877273fff6e0f9857690"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-row-reuse-20260913-run1.json",
+      "sha256": "da7c787bf9485eda5292b51eef499e378c2fa63dd5c8b6206e6c163974388ab1"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-row-reuse-20260913-run2.json",
+      "sha256": "7433c2f54bd6a52fdc15857d46df2238696151c1578038a28cd721d3501e1a85"
+    },
+    {
+      "path": "catalog/evidence/p3-datatable-row-success-flow-20260911-fixed.robin",
+      "sha256": "06cad7b964fc057b0e2b6d9f0f61927fc0f8e559d3e389ac55ad6ccaceeb8a99"
+    },
+    {
+      "path": "catalog/evidence/p3-date-add-probe-20260910.json",
+      "sha256": "8f7b94d3095a13aad48206da2b72161ffcefd704bd7bd9f64fe5b297234eeae6"
+    },
+    {
+      "path": "catalog/evidence/p3-date-add-probe-20260910.robin",
+      "sha256": "5cb09c522b94cf730db29c1c3e37bbbeb5154693a17da093173462ad42a41f36"
+    },
+    {
+      "path": "catalog/evidence/p3-date-add-probe-run1-20260910.json",
+      "sha256": "29891312316cc8ebb966149f17779e1817a24fe3b66b8dff092153412ede9807"
+    },
+    {
+      "path": "catalog/evidence/p3-date-add-probe-run2-20260910.json",
+      "sha256": "f35f50470bdfc610bbcae50642e4ceafd5ee7160b20cb799b815fb77b3a1c9be"
+    },
+    {
+      "path": "catalog/evidence/p3-date-format-acceptance-20260912.json",
+      "sha256": "02ddb30a8450d67387d03f86d1e2e03903620dfef985999809d85b2e2c80cadf"
+    },
+    {
+      "path": "catalog/evidence/p3-date-format-probe-20260912.robin",
+      "sha256": "a7192a3527ce60d62315465278d82bae12fd91de294324990b32119ab4483284"
+    },
+    {
+      "path": "catalog/evidence/p3-date-format-probe-run1-20260912.json",
+      "sha256": "40b01a9002c066a101df3e1e971acab34dca91bd260a30c2d6b2dc5441d58089"
+    },
+    {
+      "path": "catalog/evidence/p3-date-format-probe-run2-20260912.json",
+      "sha256": "a6b37ced6fa012b404e3c3d4c67f95fbc7b7b50b900f0a2371965d218e262676"
+    },
+    {
+      "path": "catalog/evidence/p3-date-subtract-probe-20260910.json",
+      "sha256": "c7409111eca827607577c35fbc9c84d3e2438b54e0f756b6a36cbe952d55eb78"
+    },
+    {
+      "path": "catalog/evidence/p3-date-subtract-probe-20260910.robin",
+      "sha256": "410af42a2e54f4718f735682a4db4fab9b0384761f4f1c02101305031a5866c3"
+    },
+    {
+      "path": "catalog/evidence/p3-date-subtract-probe-run1-20260910.json",
+      "sha256": "db4eab954ca9e001ea9b169e2e81a06ee4da71ec773b202d82b9455e002719eb"
+    },
+    {
+      "path": "catalog/evidence/p3-date-subtract-probe-run2-20260910.json",
+      "sha256": "438da1c499ea75237a29337143b0ea50b0a27ab130544de665d98b13f28026d0"
+    },
+    {
+      "path": "catalog/evidence/p3-else-if-probe-20260910.json",
+      "sha256": "6f75d0de8cb72c971181ace376653e519c82bc9d48913037317bd24219ae4811"
+    },
+    {
+      "path": "catalog/evidence/p3-else-if-probe-20260910.robin",
+      "sha256": "27d662e9da5765263a82d078b17ed7d7e8060bf6d68173629fc54b17dcd6c41b"
+    },
+    {
+      "path": "catalog/evidence/p3-else-if-probe-run1-20260910.json",
+      "sha256": "4e33bef92c3550a916c9a3a9cd6e41e91a5a307876260be25709699e85ff087f"
+    },
+    {
+      "path": "catalog/evidence/p3-else-if-probe-run2-20260910.json",
+      "sha256": "28ec69911aad1aa24cff7723f171e56b5a5b08992998d4718b7bf7b60cda8341"
+    },
+    {
+      "path": "catalog/evidence/p3-else-probe-20260910.json",
+      "sha256": "6b31df0ec22fb63cb54c1444bf31fb530f121139d8ef6fb9584bb9ec5800df59"
+    },
+    {
+      "path": "catalog/evidence/p3-else-probe-20260910.robin",
+      "sha256": "67493e751460577afa7f2f96772da61fd92b09bbb970e4def6bdc18051e923fa"
+    },
+    {
+      "path": "catalog/evidence/p3-else-probe-run-false-20260910.json",
+      "sha256": "a45a030d4a5b8d5c1b4fcecdab4b6eec1027e65c031d880dddd27c416a8b4dc2"
+    },
+    {
+      "path": "catalog/evidence/p3-else-probe-run-true-20260910.json",
+      "sha256": "1393010f03d1d6127c49dfe8fbb2ec86fbb9518daff304581cc1b67a7e1145a4"
+    },
+    {
+      "path": "catalog/evidence/p3-error-block-probe-20260910.json",
+      "sha256": "e09059e1eae45088347b4428af831ad374d66c14fc32ae06763a832272fd95c2"
+    },
+    {
+      "path": "catalog/evidence/p3-error-block-probe-20260910.robin",
+      "sha256": "711b106b2f90bd090b5915efc05af7b6ce8499e97cb27605b929123fd76418a6"
+    },
+    {
+      "path": "catalog/evidence/p3-error-block-probe-run-20260910.json",
+      "sha256": "d530c899e1f07d3b1ebe063797b67cdc97726089a9a4356d1facd2b5723cb581"
+    },
+    {
+      "path": "catalog/evidence/p3-error-trigger-probe-20260910.json",
+      "sha256": "f568df9f03123364979feb40b66b1bef802f92e772c23cf692e86c76a9158019"
+    },
+    {
+      "path": "catalog/evidence/p3-error-trigger-probe-20260910.robin",
+      "sha256": "c3a10df871bec2534e4974dca09a66fd3680bf11f11c55322ad62ec7211b4974"
+    },
+    {
+      "path": "catalog/evidence/p3-error-trigger-probe-run-20260910.json",
+      "sha256": "6fff5016d7f0e713cdc2d2b4b2607d0878ff0c5d2267ce35da286c1eeabeec25"
+    },
+    {
+      "path": "catalog/evidence/p3-excel-foreach-reuse-20260913-paste-save.json",
+      "sha256": "11454ca42e304dfdaf9c6027bdc1e366d75d5171c454376b7c4f79111a261996"
+    },
+    {
+      "path": "catalog/evidence/p3-excel-foreach-reuse-20260913-run1.json",
+      "sha256": "30218112346b8ae49dad439f6f7bf3a9ed242e7160ecbb03e0e69f7382ec23c4"
+    },
+    {
+      "path": "catalog/evidence/p3-excel-foreach-reuse-20260913-run2.json",
+      "sha256": "ece50456eaa0327789dec3f60c5c9f1cccb5cfaa3a7e722ea6a8d3b471985985"
+    },
+    {
+      "path": "catalog/evidence/p3-excel-foreach-runtime-success-flow-20260911.robin",
+      "sha256": "db98d5bfa837ea65e0e92f2412b02f3847e3541fff653078c2645ae427939166"
+    },
+    {
+      "path": "catalog/evidence/p3-excel-read-range-probe-20260911.json",
+      "sha256": "75211a63c1ac1851dcb6c4e88cee8e2119d6847a4dec3728d44274276ad928be"
+    },
+    {
+      "path": "catalog/evidence/p3-excel-read-range-probe-20260911.robin",
+      "sha256": "0275eb78b8c790a5ab8417df55f1e26c30a2cf5a91c65de6a6306970526d5f40"
+    },
+    {
+      "path": "catalog/evidence/p3-excel-sheet-probe-20260910.json",
+      "sha256": "af1362ccd5378fca89d630546e8ca2276935aa7cd925458f665ad9ea14eec161"
+    },
+    {
+      "path": "catalog/evidence/p3-excel-sheet-probe-20260910.robin",
+      "sha256": "c7f3fa0408463de8ee36bf5b865720c64799f4a92cbf2a3b7efee4cfa1907c29"
+    },
+    {
+      "path": "catalog/evidence/p3-excel-sheet-probe-run1-20260910.json",
+      "sha256": "c221fe0dfa00876ac43594d17def7633396aaede328151a02bd085ce8aaf94e2"
+    },
+    {
+      "path": "catalog/evidence/p3-excel-sheet-probe-run2-20260910.json",
+      "sha256": "7279183b4693fc5d4b96bc73d0be5fa4e3caaa461ec36ee9b85d726e6b6bebe5"
+    },
+    {
+      "path": "catalog/evidence/p3-file-boundary-acceptance-20260912.json",
+      "sha256": "6f3b427a9ad8817950ad65d7ce84376fdbab8af559c0fd7d62024862bafe6567"
+    },
+    {
+      "path": "catalog/evidence/p3-file-boundary-sub-paste-save-20260912.json",
+      "sha256": "ad33a45f94572d73a7fb6d802f3dd8d702b1dca031e2255cfe6c083df38b2005"
+    },
+    {
+      "path": "catalog/evidence/p3-file-boundary-sub-recopy-20260912.robin",
+      "sha256": "e909a16591683dc1e513cb538e3040ca1bb8e1dd5ddc9465fdecd670e73aaadb"
+    },
+    {
+      "path": "catalog/evidence/p3-file-boundary-sub-run1-20260912.json",
+      "sha256": "57094278fd2f42ff4de350319c1c31b40cd407d98e2f0f49eae5b5127ea26810"
+    },
+    {
+      "path": "catalog/evidence/p3-file-boundary-sub-run2-20260912.json",
+      "sha256": "bc79d3bb52a4234795ad4bb3395a883aaefc9dcf93a9812e66e2db1a15d6227a"
+    },
+    {
+      "path": "catalog/evidence/p3-file-boundary-top-paste-save-20260912.json",
+      "sha256": "c1de1dd81e6413fc310a75ebbf31015b9b7c73110ec252110190a302bf1922cb"
+    },
+    {
+      "path": "catalog/evidence/p3-file-boundary-top-recopy-20260912.robin",
+      "sha256": "1f5fb888829f69ce91bfbc66c44fd81cdf91d09a15d614a5664d6c3a8f0920a4"
+    },
+    {
+      "path": "catalog/evidence/p3-file-boundary-top-run1-20260912.json",
+      "sha256": "8674fcfae3bca5da94552ffe9b8432e596a09671459ab73bd94819258f63c292"
+    },
+    {
+      "path": "catalog/evidence/p3-file-boundary-top-run2-20260912.json",
+      "sha256": "7980aa488446bbd2b5801a333a92b457897fcd1f170cf7e15983340848dab21d"
+    },
+    {
+      "path": "catalog/evidence/p3-file-exists-probe-20260910.json",
+      "sha256": "0b57bd49b700a4d322e79151a19e099ee3f25c0eeb5156c4f75fadaeee629836"
+    },
+    {
+      "path": "catalog/evidence/p3-file-exists-probe-20260910.robin",
+      "sha256": "bdb56fde60047898939f6c37a3b24be57dffc2f7e0ad57c37045c7fd03a1a8db"
+    },
+    {
+      "path": "catalog/evidence/p3-file-exists-probe-run1-20260910.json",
+      "sha256": "62eb4c8c9358217c0845d0b65c9f03fdbfe533bdabf14557a74158acacd6ea97"
+    },
+    {
+      "path": "catalog/evidence/p3-file-exists-probe-run2-20260910.json",
+      "sha256": "c184db97d2191d41e5d1915951ff4c64c11ee93029a0c05ceda62af4f9d999d7"
+    },
+    {
+      "path": "catalog/evidence/p3-file-exists-reuse-20260913-paste-save.json",
+      "sha256": "99b47ae86e59091a83d7c1eb2818232676b43c11bc4baae361a182405fe9f527"
+    },
+    {
+      "path": "catalog/evidence/p3-file-move-probe-20260910.robin",
+      "sha256": "359827098be622bd3cd62721a78cbdc725e643d89d3be7969e72d2118d9320e0"
+    },
+    {
+      "path": "catalog/evidence/p3-file-move-reuse-20260913-paste-save.json",
+      "sha256": "fb2589109e42c586c14c7fd77b3c2a373a0c3f713243b5d0decf048e2f63dda1"
+    },
+    {
+      "path": "catalog/evidence/p3-file-move-reuse-20260913-run1.json",
+      "sha256": "4eb0d2e02d21bf20fa5482c271b42a15d5db7f5572cfb55debbfbe1752668bf7"
+    },
+    {
+      "path": "catalog/evidence/p3-file-move-reuse-20260913-run2.json",
+      "sha256": "0f8265af26831895e58fd69ab6b870de56adca75cd0fbad3d253f16402d3ff36"
+    },
+    {
+      "path": "catalog/evidence/p3-file-move-reuse-20260913-state.json",
+      "sha256": "6629f277f0b4dbc5d0c78773565d364bf8fde877717d28d9b1b1af9e27733d0f"
+    },
+    {
+      "path": "catalog/evidence/p3-file-rename-probe-20260910.robin",
+      "sha256": "e0875904136ec8032ae05c985152ee6432cd557725ec1954d33b28db6c46340c"
+    },
+    {
+      "path": "catalog/evidence/p3-file-rename-reuse-20260913-paste-save.json",
+      "sha256": "627fba071f51038d324b6f413bdf33cc44b7950840d0d249247a66108c656da6"
+    },
+    {
+      "path": "catalog/evidence/p3-file-rename-reuse-20260913-run1.json",
+      "sha256": "ba06fe5878443c8a0c1d463255e7d7689991a5ab312b76b634eecb15cca11cff"
+    },
+    {
+      "path": "catalog/evidence/p3-file-rename-reuse-20260913-run2.json",
+      "sha256": "151bdedf73bff28f30c5640d1e6e3f876e1ffec4770d9bda8cd99bf4bfd79aef"
+    },
+    {
+      "path": "catalog/evidence/p3-file-rename-reuse-20260913-state.json",
+      "sha256": "71a6513c752e28e4574f4c30a0c7a8d136fe7d511b659e3d2c8fa229b165be7f"
+    },
+    {
+      "path": "catalog/evidence/p3-folder-create-probe-20260910.json",
+      "sha256": "afc2d6c98ea27d6c49662ed058668d9d9d58d6df717c879ec0795bf0d079c08d"
+    },
+    {
+      "path": "catalog/evidence/p3-folder-create-probe-20260910.robin",
+      "sha256": "34658c14b463d438b6cac03c060e2e44f7cb8719baa48db5b44236c650dc2bd2"
+    },
+    {
+      "path": "catalog/evidence/p3-folder-create-probe-run1-20260910.json",
+      "sha256": "c8fa9a5d22e777380b7bd4330c040d6d22dedeadc16cebd4f3c29c385738c921"
+    },
+    {
+      "path": "catalog/evidence/p3-folder-create-probe-run2-20260910.json",
+      "sha256": "30678c8d174c77d294f9967166eb58f9e1183020c693c4fbc515afb4477c0df8"
+    },
+    {
+      "path": "catalog/evidence/p3-list-get-index-probe-20260912.json",
+      "sha256": "7240b3f6c4bc6f9048d77f17f83903fe79078fa19e75bcb0f20da6872393202c"
+    },
+    {
+      "path": "catalog/evidence/p3-list-get-index-probe-20260912.robin",
+      "sha256": "bdb98da7bbbd77aa1c92dc7eb7f806e255373dd233125ae8ed5690459bccc75d"
+    },
+    {
+      "path": "catalog/evidence/p3-list-get-index-probe-run1-20260912.json",
+      "sha256": "f1f7de74fcacbc4a96c665e26ba8cb76cf1bcae041d19a6f589c6f10077b56c3"
+    },
+    {
+      "path": "catalog/evidence/p3-list-get-index-probe-run2-20260912.json",
+      "sha256": "a46e9eaf6870a2e03468b5045e4217444e5130cdd96c7ae88ac629a6482b9c43"
+    },
+    {
+      "path": "catalog/evidence/p3-list-idx1-acceptance-20260912.json",
+      "sha256": "460413744e9c9ad5f0fdc62b76bb1390f96672c229637bddf0f5b58b10d07234"
+    },
+    {
+      "path": "catalog/evidence/p3-list-idx1-base-paste-20260912.json",
+      "sha256": "f454f56010084e9088a8f305326311dc040b18895cb697558003be54e3a15eb6"
+    },
+    {
+      "path": "catalog/evidence/p3-list-idx1-probe-20260912.robin",
+      "sha256": "36a8179b61739dde9e99453b7b9baf693b384b5aa9a6d16fa229f111042f8473"
+    },
+    {
+      "path": "catalog/evidence/p3-list-idx1-probe-run1-20260912.json",
+      "sha256": "4b1798ab392357c1f6e1b733d853023a0fa91d78b331e6860d8ba8b801978e87"
+    },
+    {
+      "path": "catalog/evidence/p3-list-idx1-probe-run2-20260912.json",
+      "sha256": "da4141f8bf2199a188fe3dc1db9f01278143cbb02c0b3adb93601fd3ae31d02f"
+    },
+    {
+      "path": "catalog/evidence/p3-list-idx1-reuse-paste-save-20260912.json",
+      "sha256": "eea61351c098e72551b4d310bb702870f6ad355979c69bda2312895354a5f051"
+    },
+    {
+      "path": "catalog/evidence/p3-list-idx1-reuse-recopy-20260912.robin",
+      "sha256": "36a8179b61739dde9e99453b7b9baf693b384b5aa9a6d16fa229f111042f8473"
+    },
+    {
+      "path": "catalog/evidence/p3-list-idx1-reuse-run1-20260912.json",
+      "sha256": "f862cd140ee175b81804264a0d82644c895a9e597939776c36e2c94ef9816dc8"
+    },
+    {
+      "path": "catalog/evidence/p3-list-idx1-reuse-run2-20260912.json",
+      "sha256": "b3dc0927fdf01a8a33db43adcab21d1f973c44d52fa9e6a8088b0f380b2c195f"
+    },
+    {
+      "path": "catalog/evidence/p3-named-error-acceptance-20260912.json",
+      "sha256": "aab1f66783171c19ce5afa58f52ae403fa6d0790d253325b4a358b099561cb74"
+    },
+    {
+      "path": "catalog/evidence/p3-named-error-probe-20260912.robin",
+      "sha256": "ae5bcb55035043596c48536d3366bb4a9b5f35eaebfac8414fdf9552ab543e4b"
+    },
+    {
+      "path": "catalog/evidence/p3-named-error-probe-run1-20260912.json",
+      "sha256": "e58531d82b6f61e0a8ceb224796f123025105949597a256ccedbc132ccdc34f3"
+    },
+    {
+      "path": "catalog/evidence/p3-named-error-probe-run2-20260912.json",
+      "sha256": "a85cfc1b32f00dafbac415d501e4ed8d29cfd7e5323223e947bf9fcc785de984"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-control-acceptance-20260912.json",
+      "sha256": "447900ec98fd52d18f53da20cb973c8b76c900749497784eb88d398b2ed8f2ab"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-if-exit-recopy-20260912.robin",
+      "sha256": "b2c65f7e9191734f780bdbe7cc1d8696974f5fc66e893473c9b91bee98f9eaaa"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-if-exit-reuse-recopy-20260912.robin",
+      "sha256": "b2c65f7e9191734f780bdbe7cc1d8696974f5fc66e893473c9b91bee98f9eaaa"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-if-exit-reuse-run1-20260912.json",
+      "sha256": "d93e91cd5f5d71dfbc932d2fe8d49691b63808f6448daead6fbf90ab7be2c29c"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-if-exit-reuse-run2-20260912.json",
+      "sha256": "23b368a7f116bdd620d1d6af8da7f6911f97ea7fe98422a23c40d463b2df6d57"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-if-exit-run1-20260912.json",
+      "sha256": "7daa1be5db71187f4919be5d759922cfaf74348592aca8f4f52713db15dbf769"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-if-exit-run2-20260912.json",
+      "sha256": "75843e8d241ffc8f4e8754da0d8168027f7db3238f0a9b5536c06d69c90ae733"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-if-output-20260912.txt",
+      "sha256": "e9b8ede43ae9035e790355accce03d00170b23011b4caf1895e0c84e3aef5142"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-if-output-reuse-run1-20260912.txt",
+      "sha256": "e9b8ede43ae9035e790355accce03d00170b23011b4caf1895e0c84e3aef5142"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-if-output-reuse-run2-20260912.txt",
+      "sha256": "e9b8ede43ae9035e790355accce03d00170b23011b4caf1895e0c84e3aef5142"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-if-output-run1-20260912.txt",
+      "sha256": "e9b8ede43ae9035e790355accce03d00170b23011b4caf1895e0c84e3aef5142"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-if-output-run2-20260912.txt",
+      "sha256": "e9b8ede43ae9035e790355accce03d00170b23011b4caf1895e0c84e3aef5142"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-loop-next-paste-save-20260912.json",
+      "sha256": "5d02c94a495d7f95c4411da534abfa2885a589c9979bd13a7f20af338273363d"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-loop-next-recopy-20260912.robin",
+      "sha256": "3614c2c12e3e13afcf7bad69586947323eddbc0088019802ce6fc6b95952b779"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-loop-next-reuse-paste-save-20260912.json",
+      "sha256": "355471af036dbe97df56dbea8ba0cbb0267883006466fa52db6b546b5f1386a4"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-loop-next-reuse-recopy-20260912.robin",
+      "sha256": "3614c2c12e3e13afcf7bad69586947323eddbc0088019802ce6fc6b95952b779"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-loop-next-reuse-run1-20260912.json",
+      "sha256": "d5c283041d343f1a7862bbe8f9374a287fc239d668a9220ee42bf2b670f3f213"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-loop-next-reuse-run2-20260912.json",
+      "sha256": "2f63f5138d4809dd53b2c22420fbde79a6db7c97a4e10883824a72a014cce320"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-loop-next-run1-20260912.json",
+      "sha256": "3f474826b6a5567bce9fefd8df3a03f315275dbc5fe7b57ac10ec48596d8607c"
+    },
+    {
+      "path": "catalog/evidence/p3-nested-loop-next-run2-20260912.json",
+      "sha256": "9a2484b017f8e8e7be1be89db8a1091a4b4ae627a7ec802c158c5c3f31676f4d"
+    },
+    {
+      "path": "catalog/evidence/p3-saveas-case-20260912.xlsx",
+      "sha256": "4b41bd3642a55706ed147b09f0fc77fe89c257cc91359362893375bcfaa60870"
+    },
+    {
+      "path": "catalog/evidence/p3-saveas-collision-20260912.docx",
+      "sha256": "01f5323cc9eb1a560263420434d78228b767972b10dca52ced6ec9807f03a88f"
+    },
+    {
+      "path": "catalog/evidence/p3-saveas-collision-20260912.xlsx",
+      "sha256": "a901a8e76a6c6d9463d53237c9ead9c166879a6d2f31c3998a013ecdff37de48"
+    },
+    {
+      "path": "catalog/evidence/p3-saveas-collision-acceptance-20260912.json",
+      "sha256": "792199a4e75034d64e955511155884bfdb5a6c164d77dc0a7a4704db44438af2"
+    },
+    {
+      "path": "catalog/evidence/p3-saveas-docx-paste-save-20260912.json",
+      "sha256": "c370f4e5bc2e1630962f434691085d13c5fbffcdf86b3d2917924700cc18a0fa"
+    },
+    {
+      "path": "catalog/evidence/p3-saveas-docx-recopy-20260912.robin",
+      "sha256": "261381f57963ee441c36329e9423c3d7e5ae4f8b8c069b6aae3471f2f8705c99"
+    },
+    {
+      "path": "catalog/evidence/p3-saveas-docx-run1-20260912.json",
+      "sha256": "a1cb359da3259150714fc8a47fdd8efb04812ebdfd2820e55b63302dfbbbfe29"
+    },
+    {
+      "path": "catalog/evidence/p3-saveas-docx-run2-20260912.json",
+      "sha256": "7ab2ff9a8a4898548bac568f66f26c9a0a39702633de23c475818f408cdf757b"
+    },
+    {
+      "path": "catalog/evidence/p3-saveas-xlsx-paste-save-20260912.json",
+      "sha256": "340e166b88df91f4edb61ebe4e968ef9f3e30879262e089b7ab38dca8cee25f8"
+    },
+    {
+      "path": "catalog/evidence/p3-saveas-xlsx-recopy-20260912.robin",
+      "sha256": "043e230a85884b3fc91c68d5bcfb08f92ba2d8d9ab747479a7783a3554d5a02f"
+    },
+    {
+      "path": "catalog/evidence/p3-saveas-xlsx-run1-20260912.json",
+      "sha256": "1227d8db78b759922220d39cc7ddacf4cf8ec5ee7d65193d020c9e1842e8c47a"
+    },
+    {
+      "path": "catalog/evidence/p3-saveas-xlsx-run2-20260912.json",
+      "sha256": "43be85ce3a77b1b868f39680c3182e7510995a801aebbb86d3a111e6e5187204"
+    },
+    {
+      "path": "catalog/evidence/p3-subflow-call-20260910.robin",
+      "sha256": "cb547e2b3f9a35d5baaf2c18ff7192b54c085cf2b68e33ac01864c233e4a3256"
+    },
+    {
+      "path": "catalog/evidence/p3-subflow-call-probe-run2-20260910.json",
+      "sha256": "ecee6e1315edbc664c48cd2d849ecf47cdb1e288be32c082d6ef5a6c84aafcf0"
+    },
+    {
+      "path": "catalog/evidence/p3-subflow-probe-20260910.json",
+      "sha256": "d1966e29e2092db4a31dcde0f49f8ecadd1f3cb003f348535391be66f25e96d1"
+    },
+    {
+      "path": "catalog/evidence/p3-subflow-probe-run1-20260910.json",
+      "sha256": "9c79fe5075c46daa52154c311cd38ebaf8839ec0fb5c460cfa6c35ae0d087d14"
+    },
+    {
+      "path": "catalog/evidence/p3-subflow-reuse-20260913-main-paste-save.json",
+      "sha256": "7e834c7aa48323095148aaf95afa4de6217fdda4eb9497f13afa6b18f3c233bb"
+    },
+    {
+      "path": "catalog/evidence/p3-subflow-reuse-20260913-main-recopy-after-reopen.robin",
+      "sha256": "02761525859c6a4fa9625b27999abc609666779b32412c29669c9a1eb9785ba7"
+    },
+    {
+      "path": "catalog/evidence/p3-subflow-reuse-20260913-reopen-recopy.json",
+      "sha256": "06062b7c76851d53fcdfbfea6b909de2d681321d709cec70610afd5eb86e8140"
+    },
+    {
+      "path": "catalog/evidence/p3-subflow-reuse-20260913-run1.json",
+      "sha256": "0cc99775aef18c524976b683a4230e319a0fb370e21a1cd24461138b9532708a"
+    },
+    {
+      "path": "catalog/evidence/p3-subflow-reuse-20260913-run2.json",
+      "sha256": "5be5dcf9e578542eb58e67bb371c8f0975256fbf06f2dcd37bfd5c2334f1cfe6"
+    },
+    {
+      "path": "catalog/evidence/p3-subflow-reuse-20260913-worker-paste-save.json",
+      "sha256": "08746911451a8c6c451995aa47af3c5bac76f48a633166809f5d1aa50428b2cb"
+    },
+    {
+      "path": "catalog/evidence/p3-subflow-reuse-20260913-worker-recopy-after-reopen.robin",
+      "sha256": "475a272d9c0c8e8837e3efcffc8f05134689b342400cda6362e0e37d25829cb5"
+    },
+    {
+      "path": "catalog/evidence/p3-subflow-reuse-observer-20260913.json",
+      "sha256": "f4134e78b5248dc1f81e14b5f5a67c54ef47ccd0b72301bdf1988977e004e195"
+    },
+    {
+      "path": "catalog/evidence/p3-subflow-worker-20260910.robin",
+      "sha256": "917929450097e7c1fec2a483b0b748c937f1aae6805e1f1c420c6c6a99d741b6"
+    },
+    {
+      "path": "catalog/evidence/p3-subtract-probe-20260910.json",
+      "sha256": "c4ce88c487879f418f994cf57a4706c49efca134a8128c29fc5b10968fb82305"
+    },
+    {
+      "path": "catalog/evidence/p3-subtract-probe-20260910.robin",
+      "sha256": "7d09d4dd8c0e7dcc60bc1d46f943eb04bd5752db4591e2ca89ea830ab82d602d"
+    },
+    {
+      "path": "catalog/evidence/p3-subtract-probe-run-20260910.json",
+      "sha256": "a92a5601fd8a8d3340fc6161592575317f3822f75967ba0363921fa64388c9b4"
+    },
+    {
+      "path": "catalog/evidence/p3-t09-current-runtime-reprobe-20260911.json",
+      "sha256": "8ceac59e2659081cd5c998f40587b0aa7c8b9d5e4af138948e7aedd6965f1f1d"
+    },
+    {
+      "path": "catalog/evidence/p31-current-bundle-live-20260914e.json",
+      "sha256": "291e0c787a2a14d0e98bbfa6717acacb2050fe06aaa03171b56293f3e61c4747"
+    },
+    {
+      "path": "catalog/evidence/p31-current-pad-paste-save-20260914e.json",
+      "sha256": "e11c0da2bb55cee9f5c1f361210b4c5670c656c117a66cd93c6fad07e6076d8a"
+    },
+    {
+      "path": "catalog/evidence/p31-current-pad-run1-20260914e.json",
+      "sha256": "c910071636d7d86e5863a1504735a6614c8875dac76f6b8afd9cd31553d6b663"
+    },
+    {
+      "path": "catalog/evidence/p31-current-pad-run2-20260914e.json",
+      "sha256": "46081b6a8537db7693e7cf41edc4283a074df2966c4ca3c1beee9ad3b39a7819"
+    },
+    {
+      "path": "catalog/evidence/p32-current-bundle-live-20260914e.json",
+      "sha256": "2954efd323530f6ce4edfe18be7c6969dc22ec2a9fbf16f395e69409a3ec743e"
+    },
+    {
+      "path": "catalog/evidence/p32-current-pad-inventory-20260914e.json",
+      "sha256": "5f1954ada17ce7bcd7bd875e7a91aaa0962290d1ebae9874da1409e17fbf70ae"
+    },
+    {
+      "path": "catalog/evidence/p32-current-pad-paste-save-20260914e.json",
+      "sha256": "27bb11814b41cae6bcb9380b8c598c1f29feb8d09e56a971d5e3d2f93b82349c"
+    },
+    {
+      "path": "catalog/evidence/p32-current-pad-run1-20260914e.json",
+      "sha256": "951ac30a6380230d70f962cf7fcd32df564cbccc97759ed33cd7fb981d99e555"
+    },
+    {
+      "path": "catalog/evidence/p32-current-pad-run2-20260914e.json",
+      "sha256": "310aea65cda4ab910029a6f56a0aa3f933f9b28fe81e13a0bd8796299bec6d72"
+    },
+    {
+      "path": "catalog/evidence/p33-current-bundle-live-20260914e.json",
+      "sha256": "1337f580ae1a318f3eb415e3deca0eb061b7dc7666b47abd943d810a0bee10f9"
+    },
+    {
+      "path": "catalog/evidence/p33-current-pad-paste-save-20260914e.json",
+      "sha256": "a3c7b3608420fc7c13d93035ff7a952d591cfaf7dd6f3959f15086cd664f71b6"
+    },
+    {
+      "path": "catalog/evidence/p33-current-pad-run1-20260914e.json",
+      "sha256": "87535e94341a01a2f49db7eb35a5547c8a252f1a2c83ffadef9d15570b091ad0"
+    },
+    {
+      "path": "catalog/evidence/p33-current-pad-run2-20260914e.json",
+      "sha256": "4c7533daa1dd6928ece9c34bfaff3af1c1b6b1e5eebea9dfe9a3bcf369ae2b14"
+    },
+    {
+      "path": "catalog/evidence/p34-current-bundle-live-20260914e.json",
+      "sha256": "6b5540a9c436c4a800b13567cceff93b64c2265bdcd42d5e21816b4318beaef4"
+    },
+    {
+      "path": "catalog/evidence/p34-current-pad-paste-save-20260914e.json",
+      "sha256": "1ce40726b504ff40679198712499b5e346e836ba321a6e03c6ef32d421415df9"
+    },
+    {
+      "path": "catalog/evidence/p34-current-pad-run1-20260914e.json",
+      "sha256": "c753247b4d726bc74996a73995cd88caa8c943548257fcfb15e4700664c54e73"
+    },
+    {
+      "path": "catalog/evidence/p34-current-pad-run2-20260914e.json",
+      "sha256": "a4138316c2199293b73f0d97770f3f3ddfbe38297512c4124d30c0054221b442"
+    },
+    {
+      "path": "catalog/evidence/p35-current-bundle-live-20260914e.json",
+      "sha256": "95254c682f6b5bfac883bf509ae6dadf64394e98cc27c3f2b99ace2a581bb9dd"
+    },
+    {
+      "path": "catalog/evidence/p35-current-pad-paste-save-20260914e.json",
+      "sha256": "fdaa8608d2c88aba97c9b8ad342360ad793a1b515f45fee4632863899550a039"
+    },
+    {
+      "path": "catalog/evidence/p35-current-pad-run1-20260914e.json",
+      "sha256": "8703519829f79af1a8556c0ceca7949a37c01e36b7538f7cd5bbd9c57d22214a"
+    },
+    {
+      "path": "catalog/evidence/p35-current-pad-run2-20260914e.json",
+      "sha256": "dced97494f876042d4d231a18969a3e1e7398d36160f64cbae19998acb3b2b8c"
+    },
+    {
+      "path": "catalog/evidence/p36-current-bundle-live-20260914e.json",
+      "sha256": "be0f95aebfa3d2cef81a5410750f1176380bd875090c6cb7e41e5074160f1fe0"
+    },
+    {
+      "path": "catalog/evidence/pad-action-inventory-20260909.json",
+      "sha256": "dd9eb8466a94d06993f189df89c379ae98edded766eef2ed0b531a8c717276de"
+    },
+    {
+      "path": "catalog/evidence/t01-copilot-live-generation-20260913e-pad-acceptance.json",
+      "sha256": "0762fce0c818d2fd47d392915d823e86b72e615c5a5a29349146b9dce65a9164"
+    },
+    {
+      "path": "catalog/evidence/t01-copilot-live-generation-20260913e-pad-output-comparison.json",
+      "sha256": "0a571dba291f6ba2ed45213af061d5b1c14b41d14d27b46a8d2f88889cec3315"
+    },
+    {
+      "path": "catalog/evidence/t01-copilot-live-generation-20260913e.json",
+      "sha256": "3d0e256622be22055ceaa32827148c3032d1c550e30c078d7aa91d2c86439771"
+    },
+    {
+      "path": "catalog/evidence/t01-independent-current-output-comparison-20260914e.json",
+      "sha256": "6b358fbcff2562e5dc85e1d8d4a78c55d8c1755d0b12613c23c9c439c6ca706b"
+    },
+    {
+      "path": "catalog/evidence/t02-copilot-live-generation-20260913-pad-acceptance.json",
+      "sha256": "30b2614b063133b9bf9e4ebd5349aef1f48147ce6ad7d2a8df0759de855e9e49"
+    },
+    {
+      "path": "catalog/evidence/t02-copilot-live-generation-20260913-pad-paste.json",
+      "sha256": "c0670e9694e45bcf73985dc26861611857d7b456c4ddfbb1b8d61c0fcc611b73"
+    },
+    {
+      "path": "catalog/evidence/t02-copilot-live-generation-20260913-pad-recopy.robin",
+      "sha256": "b075a7f85928bd2ecebb5d21be81e04c84d613466f3307e2e051909f85fc5aee"
+    },
+    {
+      "path": "catalog/evidence/t02-copilot-live-generation-20260913-pad-run-1.json",
+      "sha256": "d5870674a08e8f7a51ef159fbc4f5140c28cf8c267590a3a681dc5e590d824a1"
+    },
+    {
+      "path": "catalog/evidence/t02-copilot-live-generation-20260913-pad-run-2.json",
+      "sha256": "2998ae500e8b99f4172acd0d67240785c3117e4992247fd83574d8d4db8f4b26"
+    },
+    {
+      "path": "catalog/evidence/t02-copilot-live-generation-20260913.json",
+      "sha256": "3cfd2220d17095608524aefe33983e3ecad741ef00722bf2028751dc2be649c3"
+    },
+    {
+      "path": "catalog/evidence/t02-copilot-live-generation-20260913.robin",
+      "sha256": "c3027cfaa13e191b0e784fb3a6db4c573f8bfc83fb172d1a6394d7c1f5a55c29"
+    },
+    {
+      "path": "catalog/evidence/t02-copilot-live-generation-20260913e-pad-acceptance.json",
+      "sha256": "9aed3d42985d7a5648a148370782701b0ae27ae4594c13c9a8947573d4fd21fc"
+    },
+    {
+      "path": "catalog/evidence/t03-copilot-live-generation-20260913-attempt1.json",
+      "sha256": "14e92a688ea4775b7a6159bd2be8486eb2e00fc5e947ecc0591eb33fb43fba8b"
+    },
+    {
+      "path": "catalog/evidence/t03-copilot-live-generation-20260913-attempt1.robin",
+      "sha256": "33302fc08266b3c698e18f1086ffc2db1dfd1e6037d10afb4ff524fad6a33a9c"
+    },
+    {
+      "path": "catalog/evidence/t03-copilot-live-generation-20260913-attempt2.json",
+      "sha256": "48306893d92c81949596325f99bd5a743a84ae62b906cbcd1ca856a2b1810d57"
+    },
+    {
+      "path": "catalog/evidence/t03-copilot-live-generation-20260913-attempt2.robin",
+      "sha256": "b86a9a9fd18d64a47c40b991b434d99ae5a49afa5c758d504bdce7b89f8ee26a"
+    },
+    {
+      "path": "catalog/evidence/t03-copilot-live-generation-20260913-attempt3.json",
+      "sha256": "e26663f19b4cff32ee6cfc03c89952a7146cf8ef8c07700a3b7edf1ba6252281"
+    },
+    {
+      "path": "catalog/evidence/t03-copilot-live-generation-20260913-attempt3.robin",
+      "sha256": "33302fc08266b3c698e18f1086ffc2db1dfd1e6037d10afb4ff524fad6a33a9c"
+    },
+    {
+      "path": "catalog/evidence/t03-copilot-live-generation-20260913-diagnosis.json",
+      "sha256": "7cefd730e30f2e120eeb5037f35d5c3d1a0c396cc70cdc323b692a0a70931653"
+    },
+    {
+      "path": "catalog/evidence/t03-copilot-live-generation-20260913e-pad-acceptance.json",
+      "sha256": "4d42e066900d0af77e703a8a3d695911cd4ddb76a154412b1a383eb42a7bcd0f"
+    },
+    {
+      "path": "catalog/evidence/t03-ext-run-paste-save-20260912.json",
+      "sha256": "851af622cd2db3fb9b798f4908bff5bb6185633fb16ad360a1f6763558efe492"
+    },
+    {
+      "path": "catalog/evidence/t03-ext-run1-20260912.json",
+      "sha256": "13c8659a5fc476971446ee7db5f483412d6c8cbe99497e0a97da470ee2f9cda8"
+    },
+    {
+      "path": "catalog/evidence/t03-ext-run2-20260912.json",
+      "sha256": "7302d79368c87fdfca4538238167c1996382e205d71ef7c588effd1ce453ec4b"
+    },
+    {
+      "path": "catalog/evidence/t03-ext-verify-acceptance-20260912.json",
+      "sha256": "0bc7f55e23cd0d992d952de15715544bfe17cfce8285b229423e841a5bfc1240"
+    },
+    {
+      "path": "catalog/evidence/t03-revised-input-live-acceptance-20260913.json",
+      "sha256": "b49516aad2729adbaa9cf1960cf5d7823339eb9f0d90245142123412d95deb06"
+    },
+    {
+      "path": "catalog/evidence/t03-revised-input-pad-paste-save-20260913.json",
+      "sha256": "73fd2529c94b87dc0b27ebb8d04a3ee0a39d435f88dfe3f45e0fc7dabf7d60ee"
+    },
+    {
+      "path": "catalog/evidence/t03-revised-input-pad-recopy-20260913.robin",
+      "sha256": "c15a5970640f9d0bcb322b5655bffca3b7b84ad4a86f31c67e064d60fb9398e4"
+    },
+    {
+      "path": "catalog/evidence/t03-revised-input-pad-run1-20260913.json",
+      "sha256": "e4058ea0a3bafbb6ca5af2734e225168a643eaa6cd39e03a8e92d66e664307a6"
+    },
+    {
+      "path": "catalog/evidence/t03-revised-input-pad-run2-20260913.json",
+      "sha256": "68ca47ed53f7d37542219ace337b349fddf211bdda26f7b69a3fecab2ebdb5b4"
+    },
+    {
+      "path": "catalog/evidence/t04-filtered.csv",
+      "sha256": "b9442568996bbe8c45ce6a7efd705dd6159392cb42f24eb23341464f87a9c433"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-current-output-comparison-20260914e.json",
+      "sha256": "a1735ba603c73a535c078d871b1a817b1ea1a71ab08f450c3c0750ab57f4967b"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-current-output-run2-20260914e.xlsx",
+      "sha256": "c9255b368bcc2a935fa5acf76329ea61a7b3d4ec7620c0ac80c2b25ead0e813b"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/acceptance.json",
+      "sha256": "ae7c2b0ce893310919a41a693f25d02b4351ec5e34e518646c8f5c15ab1e2280"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/after-run2-copy.json",
+      "sha256": "bbf32f4c67925da09404ba0d709a51f0f804574686da058995ebc38af41c2d92"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/after-run2.robin",
+      "sha256": "1f78c54d5cfedffdf75026d3014f51c0ddd49dd1c4af9a28602ad59665417649"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/backup/t04-filtered.csv",
+      "sha256": "b9442568996bbe8c45ce6a7efd705dd6159392cb42f24eb23341464f87a9c433"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/clipboard-history-restoration-verification.json",
+      "sha256": "248bc4b2381d9187603f3e4f9ee1bf902325085c6d9c9008d64536be49020583"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/clipboard-history-restoration.json",
+      "sha256": "2f57bf373d6723c1a618ea7235abbadcb3c6aea42bf6ae8a3f895df95873f95e"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/copy.json",
+      "sha256": "0f63ca9b2b9e2a2e190222684b0a80ae486e8cbb49ca412d7b21753ca3d9646f"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/environment-preservation.json",
+      "sha256": "9691c93fff571c0f25cd401411245e8de87a91e535c693887d5fa1ad966df105"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/output-backup.json",
+      "sha256": "73accb1b3ba21ad54bfdcdd69a5a76a68ccf72b87db5989b5d6e7f1cd35649de"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/plan.json",
+      "sha256": "57e382e52c3ffc1e010b4ffbd5c788cf3ab9cd5744a410cb6a18698c6c478764"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/preparation.json",
+      "sha256": "164f0b79bff004bba981401f542898177af3ce0ea61d4d673fe2908bba2dbd24"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/prepared-stable.png",
+      "sha256": "8e092587c5ae46b479ed423ad0c534e630794aaf4ac6e83ee98a51de9d37fcdb"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/prepared.png",
+      "sha256": "e0fc8e5943c1d4e3b8cf9e266d9ddce546a36dc47dea6cf43f7e4c1a5ee0a907"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/recopy.robin",
+      "sha256": "1f78c54d5cfedffdf75026d3014f51c0ddd49dd1c4af9a28602ad59665417649"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/restoration.json",
+      "sha256": "218e11427f4a5cea80384385b768af4e9d029a67a3f7c493fca698dfa615d87a"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run1-observation.json",
+      "sha256": "0e8eb5dd3131aaa5ad0091aa0f34f31d45ee3178852a35b0b6f5fd293c653c6b"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run1-request.json",
+      "sha256": "a0653b8ed353f062bf5f6b08f5c75717a7f85283b047136c1350c77bd3824109"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run1/normal-chat-t04-output-independent-20260914e.xlsx",
+      "sha256": "2388696b0909e694d4c940fbc50a5537589a9f36e15239717b693c4e9dcb5b7e"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run1/normal-chat-t04-output-independent-20260914e.xlsx.gate.json",
+      "sha256": "db3559032cbbefdf45731313018d226ac33878f96464d876e2ff01eb6808ccfd"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run1/stopped.png",
+      "sha256": "d6208f020d44d363704fbf2b526b2239afe02c45c3fab632547f8cb4dde9ea2b"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run1/t04-filtered.csv",
+      "sha256": "b9442568996bbe8c45ce6a7efd705dd6159392cb42f24eb23341464f87a9c433"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run1/t04-filtered.csv.gate.json",
+      "sha256": "32248bdfc6ccf0471e02ffdbf043188de74b708f0f6aa7312306788311158614"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run1/values.json",
+      "sha256": "27b75bac79ffea380fb50c647f3a17266c7424e31a9f4f92eb49791c0ceab9ad"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run2-observation.json",
+      "sha256": "6f7d1ec192b2508a88a9167ba6c95987b630b48382e3f48343cd970ef4f10fd4"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run2-request.json",
+      "sha256": "d7949b77a995d80df5f23cb5c1c44820de80a56cd636f3d11f53ae91a767bcaf"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run2/normal-chat-t04-output-independent-20260914e.xlsx",
+      "sha256": "b9e799051192cb0fc8d4c2c193d3ae3f237e8d9479bef7e7b90f06188e28aafb"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run2/normal-chat-t04-output-independent-20260914e.xlsx.gate.json",
+      "sha256": "f3fbf451e341b57fca7e6b066718abe16cfabed586cc75db755877a36cf81ac2"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run2/stopped.png",
+      "sha256": "18feb173c3e5969871a60a30aeaa956f14ad49c4e2d7afa5d820fe05fc2a1f69"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run2/t04-filtered.csv",
+      "sha256": "b9442568996bbe8c45ce6a7efd705dd6159392cb42f24eb23341464f87a9c433"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run2/t04-filtered.csv.gate.json",
+      "sha256": "9a1129e9be3e4dc89a6171c00e98c19994b3b49c5b543d40bbb09021d8a2a00c"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run2/values.json",
+      "sha256": "8105326905a1b9c5301da4651f5c3dc4b3f658ce80454ce9e36b05127e3bd38d"
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/save.txt",
+      "sha256": "13f664a0313b0a8a35003581fb60c3d148fa7e31782755844c732f89a3528f01"
+    },
+    {
+      "path": "catalog/evidence/t05-copilot-live-generation-20260913-attempt1.json",
+      "sha256": "c14e63e52d7b0b1de19f38c06e52104e4f45ee69fdfc23c73f81e62276a7bf44"
+    },
+    {
+      "path": "catalog/evidence/t05-copilot-live-generation-20260913-attempt1.robin",
+      "sha256": "299628c3cb205aa8219d23f005b4a7fe99ac76518ce688f497368ccfd87524ca"
+    },
+    {
+      "path": "catalog/evidence/t05-copilot-live-generation-20260913.json",
+      "sha256": "ef2321f7165288d6bb6920eed7101751b0dacc5d193b5330e9ac826306ec5b75"
+    },
+    {
+      "path": "catalog/evidence/t05-copilot-live-generation-20260913.robin",
+      "sha256": "be40e6b337620f1c76ba650b202f316d4b80b339de1c859fe1cb55a9f2714911"
+    },
+    {
+      "path": "catalog/evidence/t05-copilot-live-generation-20260913e-pad-acceptance.json",
+      "sha256": "3aa84055dd1c9341d3b6460edd3724e526aa15ded661c58c83a37ac3b6961076"
+    },
+    {
+      "path": "catalog/evidence/t06-20260914e-output-comparison.json",
+      "sha256": "1e5c91fc9a10b3dd5fa01f6c2bb2880fca573f141dc5ffed1db4c05f508a8915"
+    },
+    {
+      "path": "catalog/evidence/t06-copilot-live-generation-20260914e-pad-acceptance.json",
+      "sha256": "289ca13dc64a2ad4245660dbadbe30d51a890d558e6072608f708269406f4879"
+    },
+    {
+      "path": "catalog/evidence/t06-copilot-live-generation-20260914e.json",
+      "sha256": "d7cf63c04f6bdbf0afd41fc8da71b58ac9fd3fc36b7d9f914351e94877fe23ac"
+    },
+    {
+      "path": "catalog/evidence/t07-current-bundle-live-acceptance-20260914e.json",
+      "sha256": "e50da3e6f2c9b4b72ea23e20213bf6141e6347fa74de5b1fbc837b354726b67c"
+    },
+    {
+      "path": "catalog/evidence/t07-current-bundle-output-comparison-20260914e.json",
+      "sha256": "c9bf951d9d8e6d95c68a7db658f7176fbb4dece450ec63840b40be76d5d39364"
+    },
+    {
+      "path": "catalog/evidence/t07-current-bundle-pad-paste-save-20260914e.json",
+      "sha256": "5b499becaa06289b4bbabc37417dfaa16515c257d9e99252a4a7d5c0d9566421"
+    },
+    {
+      "path": "catalog/evidence/t07-current-bundle-pad-recopy-20260914e.robin",
+      "sha256": "b8a2c15fcca33f0cbb709f00e5813bbb76627ffabf00530dcbb653d8d3e78b76"
+    },
+    {
+      "path": "catalog/evidence/t07-current-bundle-pad-recopy-after-run2-20260914e.robin",
+      "sha256": "b8a2c15fcca33f0cbb709f00e5813bbb76627ffabf00530dcbb653d8d3e78b76"
+    },
+    {
+      "path": "catalog/evidence/t07-current-bundle-pad-run1-20260914e.json",
+      "sha256": "ff50b3285e6b5ae245dd6bd06f08e03985b6415bf5adcc74875a2064511ef4fe"
+    },
+    {
+      "path": "catalog/evidence/t07-current-bundle-pad-run2-20260914e.json",
+      "sha256": "48635386f457a2061b10845165e2577b92854475a72edcf9e9c04d2d41d3e4d1"
+    },
+    {
+      "path": "catalog/evidence/t08-current-bundle-live-acceptance-20260914e.json",
+      "sha256": "6ab33170d869de36aaf448dbaac2e2d136e6254fae035d85aefaa4112814029b"
+    },
+    {
+      "path": "catalog/evidence/t08-current-bundle-output-comparison-20260914e.json",
+      "sha256": "699f7af9da94b3412d74c7464acd06bacb91c60eb562ad6f9ebf6bc593d7ed6b"
+    },
+    {
+      "path": "catalog/evidence/t08-current-bundle-pad-run1-20260914e.json",
+      "sha256": "e507372c7018e13fc73a89bebc7203fc079b7f415bc24e9b81c74f16171d4d93"
+    },
+    {
+      "path": "catalog/evidence/t08-current-bundle-pad-run2-20260914e.json",
+      "sha256": "f9ffa36b9b116286ad5d41538dc535ba103da4aeff635dfcfe8d0ca141ca7921"
+    },
+    {
+      "path": "catalog/evidence/t09-20260913e-pad-acceptance.json",
+      "sha256": "f9ca6539d2268e23e91d134051009a8c9b54bdb0be002b0067ce5f183eae6c31"
+    },
+    {
+      "path": "catalog/evidence/t09-20260913e-pad-paste-generated.json",
+      "sha256": "0f5dc05196a39388ba0195788689a028aa94196d94205087c8ac34da816e75e0"
+    },
+    {
+      "path": "catalog/evidence/t09-20260913e-pad-paste-register.json",
+      "sha256": "6477167259b9448f8decd27d75cc187207c06768e8564980dc6b7cfba3603e18"
+    },
+    {
+      "path": "catalog/evidence/t09-20260913e-pad-recopy.robin",
+      "sha256": "d1c21e5bf0c1ee099d35261aa75e5d8c9edad6e92ddaf7655674281bf04dd8e2"
+    },
+    {
+      "path": "catalog/evidence/t09-20260913e-pad-run0-timeout.json",
+      "sha256": "7b6dfb312973499b34d1e898465c4a9a65d6ac47ed29638bf3dd3b6b48b975e6"
+    },
+    {
+      "path": "catalog/evidence/t09-20260913e-pad-run1.json",
+      "sha256": "7e8ea2763d7f891829daa0d1f9b05fbed58b91aecc7dc214d2c20767414137fb"
+    },
+    {
+      "path": "catalog/evidence/t09-20260913e-pad-run2.json",
+      "sha256": "967434ab89279e94513e39ecbc292533830fff19b3d198eb5d76faff33eab91f"
+    },
+    {
+      "path": "catalog/evidence/t09-extension-handshake-boundary-20260911.json",
+      "sha256": "0f645ade95dc4e74f518c2f5ee44511793719b04f99315e3f35b8560c4510746"
+    },
+    {
+      "path": "catalog/evidence/t09-repo-paste-save-20260912.json",
+      "sha256": "48fb203bfee8acfdb22ba3285fbb1f08dd18d3a1c146f272cd872b156a3746c8"
+    },
+    {
+      "path": "catalog/evidence/t09-repo-run1-acceptance-20260912.json",
+      "sha256": "fcb7d3be3b2c774b2036f118383b21327cee299ea3d44c4e1c497653182ed2fa"
+    },
+    {
+      "path": "catalog/evidence/t09-repo-run2-20260912.json",
+      "sha256": "639058a6a1d0fc9dfc894a68fd9af58df463b357e64de9625bc2402dabeffb7f"
+    },
+    {
+      "path": "catalog/evidence/t09-separate-ui-registration-20260911.json",
+      "sha256": "6439917699aef9aec397ab7007ac6941dab9f65160ecc28d51ef8190b61129d3"
+    },
+    {
+      "path": "catalog/evidence/t09-wait1-acceptance-20260912.json",
+      "sha256": "cb621d7b89c305dec908e10c6b812fdbc7edf1ddcf5ffa442b946d5821f316c8"
+    },
+    {
+      "path": "catalog/evidence/t10-copilot-live-generation-20260913-pad-acceptance.json",
+      "sha256": "0fca33af1e7bd68bdbdbba1d95c4b312eddd3be4b290e47541d57c267c68a97f"
+    },
+    {
+      "path": "catalog/evidence/t10-copilot-live-generation-20260913-pad-recopy-after-run2.robin",
+      "sha256": "845c54cc905e50dcb9f8b9d7e55aeba3cb639bee1b3e848a3f66f9b3ce051446"
+    },
+    {
+      "path": "catalog/evidence/t10-copilot-live-generation-20260913-pad-recopy.robin",
+      "sha256": "845c54cc905e50dcb9f8b9d7e55aeba3cb639bee1b3e848a3f66f9b3ce051446"
+    },
+    {
+      "path": "catalog/evidence/t10-copilot-live-generation-20260913-pad-run-1.json",
+      "sha256": "456eb916884d6d2fce29cb2e2deb5afd466a66c333cd50ad9e735e46d1c54c96"
+    },
+    {
+      "path": "catalog/evidence/t10-copilot-live-generation-20260913-pad-run-2.json",
+      "sha256": "0b01c463ef6c25c5199f7687fe32eadee8c30e16169ffd31cd1d681247de9a5c"
+    },
+    {
+      "path": "catalog/evidence/t10-copilot-live-generation-20260913.json",
+      "sha256": "f8218efc078e6480b04883a98255ae81798095a343101116dbebff596369392a"
+    },
+    {
+      "path": "catalog/evidence/t10-copilot-live-generation-20260913.robin",
+      "sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12"
+    },
+    {
+      "path": "catalog/evidence/t10-final-provenance-audit-20260915.md",
+      "sha256": "b3c80ba020be2c5adeb7d4d713a471352aa352727d4a0e179992bdb57fc410b3"
+    },
+    {
+      "path": "catalog/evidence/t10-independent-current-generation-20260914e.json",
+      "sha256": "368f3dbc7526ae6b7dd57a0033b7e9d167fea6de42c6d07db7c164f0f60a68dd"
+    },
+    {
+      "path": "catalog/evidence/t10-independent-current-pad-paste-20260914e.json",
+      "sha256": "9e38463bfe5e3535860f9652642a404f4e438a3c006cc9d4e9dee18a87e89795"
+    },
+    {
+      "path": "catalog/evidence/t10-independent-current-pad-run1-20260914e.json",
+      "sha256": "d0ef5e9c71be4190efc862cf57f148ebe613b6cbff32697b7b1228a6e31db689"
+    },
+    {
+      "path": "catalog/evidence/t10-independent-current-pad-run2-20260914e.json",
+      "sha256": "d8ab2377e106776ceefbbe17a737e87df523a383bd3140922f6aa3934efcfd5d"
+    },
+    {
+      "path": "catalog/evidence/t10-saved-evidence-review-20260914w.json",
+      "sha256": "31cae82a7aa616dc5352de423adbb91b7af00e80d312fe2b8609321bf32cebb3"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-audit.json",
+      "sha256": "5423956daebf257a9dca132c3c80c922f05e4a3af25af8ccad0cb9fa2f4bfd11"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-control-fixed.txt",
+      "sha256": "836ccec7b2a8ee71bcd890cbcbf245de23538334445c31cc0faec43d0e7e7cc6"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-control.txt",
+      "sha256": "c5bae509d2fbb3279246fd71d7963aee0539e94ba523201d4cc605f746cd6d72"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-plan.json",
+      "sha256": "51f44e7f86e972d2379bb006dd3ef03b380c8af13f368b2762dc5d61c48fe0f0"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-recapture-independent-request.json",
+      "sha256": "6f97ce09950998ea1674e47a64c83d904f61dfbe0209ff9d0bee813086928c6f"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-recapture-independent-string.json",
+      "sha256": "2ff9e6f461368b4a930a23e655d49b0618387f802c6c7bc8645aa0ca92e32461"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-recapture-independent.robin",
+      "sha256": "2bcb5512adc3d238251ea7da2f82c047a5ddfbf4ae4ce343b437aef27eb3284a"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-recapture-primary-request.json",
+      "sha256": "428a52c4075fe53b2c7f52245b0c77a333c2fe72c1d9efefa304f652c28b7e38"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-recapture-primary-string.json",
+      "sha256": "602a6bc1f3e966dd95c2a4434b10f6265f3338535ab00d158a804d78c6f9effd"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-recapture-primary.robin",
+      "sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-recapture-results.json",
+      "sha256": "7c831040fee5c5a17a19a68a7629446a25c725c946a3884928e3a722338cc8c2"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-recapture-verification.json",
+      "sha256": "28aa295d9f89e23148fcc57ba1306b482cbacacb9bac12ed2e1a2df4582d1e76"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-verification.json",
+      "sha256": "74573bc4752e487b0b2a6325990eebb4c2f730bc60cdf19965cb696b1ff35250"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-preservation-audit-20260913.json",
+      "sha256": "d8259afab237ae56334c4dc8267447c9654bc3064b3d74463ccef06046717982"
+    },
+    {
+      "path": "catalog/evidence/text-replace-literal-variables.json",
+      "sha256": "ae332bd7b0db5be954bf6a4597454d59543cdabf740f385b9fd0371f02e1e5dd"
+    },
+    {
+      "path": "catalog/evidence/text-replace-regex-variables.json",
+      "sha256": "cc714f09943e8f69a957b817dadc7332c5c41386874f76ece08620ad9fea4035"
+    },
+    {
+      "path": "catalog/evidence/text-split-join-space-final.json",
+      "sha256": "10cbfbf556fa638abbccb90b81985c2f1ce8dd207b8ca643fa942dcd1df2234b"
+    },
+    {
+      "path": "catalog/evidence/text-split-join-variables.json",
+      "sha256": "616eca0f57b088e9eb66cb039e4140ec5e3d9e5bf604fc614e47c19c7e507bd2"
+    },
+    {
+      "path": "catalog/evidence/text-substring-roundtrip-recopy.robin",
+      "sha256": "4f1021aafc353edba483e83ea61c6dd93d3c7944ad7b4566049c50fe81e4f70c"
+    },
+    {
+      "path": "catalog/evidence/text-substring-roundtrip.json",
+      "sha256": "d0004f9967af8286e6c8bcb582520e03c822380e8c347c410208d220749cc686"
+    },
+    {
+      "path": "catalog/evidence/text-substring-rt-run-1.json",
+      "sha256": "4b3bd206cbb49185371684c9b905a4da76b1e7519d0b45399bdf2a8e351a9051"
+    },
+    {
+      "path": "catalog/evidence/text-substring-rt-run-2.json",
+      "sha256": "5ca376133dfcd8b1e974e49612795869525ccab76ffe110d770c48fd4dfc891b"
+    },
+    {
+      "path": "catalog/evidence/text-substring-run-1.json",
+      "sha256": "9f721ed9eb75942bc187665f256235501a88eeb4468b8c338cfd435a50af6773"
+    },
+    {
+      "path": "catalog/evidence/text-substring-run-2.json",
+      "sha256": "da66b256fe4e7fef1ca407c0944abb762e533f6f7b61cfcb40ddb3b50c11d777"
+    },
+    {
+      "path": "catalog/evidence/text-substring-validation.json",
+      "sha256": "beb4a1b360224e145e3c786c393f21287260e690fdaf9202852fad0a902dfeb5"
+    },
+    {
+      "path": "catalog/evidence/text-write-output-valid-20260909.txt",
+      "sha256": "948d1ba7c4003435580136a84b7cb34c10991b41b13d8c396ed6c03e048007de"
+    },
+    {
+      "path": "catalog/fixtures/csv/input-20260909.csv",
+      "sha256": "2f9db12150bb8d0145079d0552207cccd344731ff63757eadd45cc2641d69066"
+    },
+    {
+      "path": "catalog/fixtures/csv/t02-input-20260910.csv",
+      "sha256": "3aededf42b8bb2be71091c7cc6ed1295f1860a8450744d8779fbc8cabf6eed28"
+    },
+    {
+      "path": "catalog/fixtures/excel/excel-catalog.xlsx",
+      "sha256": "e94bd14c919375c76e7114f63031a18a7317a1ce15b55ce99e487fac9ddbbad6"
+    },
+    {
+      "path": "catalog/fixtures/excel/t04-filter-input.xlsx",
+      "sha256": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0"
+    },
+    {
+      "path": "catalog/fixtures/files-boundary/sub.txt/inner.txt",
+      "sha256": "33bf6fbd7cd8379785a21e233d8e09f824e7bab459168a96312c1c882c1d7e1f"
+    },
+    {
+      "path": "catalog/fixtures/files-boundary/x.txt.bak",
+      "sha256": "54d00d867758cef816bc4685f58e327b949712b07ebd17c3485f3ffc9e9f5133"
+    },
+    {
+      "path": "catalog/fixtures/files/copy-input-20260909.txt",
+      "sha256": "2f44465e82ecddc43596681fbc5e2eacdbcbe34b5aaea49744e4c7347ee58df7"
+    },
+    {
+      "path": "catalog/fixtures/pdf/source-a.pdf",
+      "sha256": "f5f246849a31e2797f998e426f459ac18b7260ed76206ab987950a1bf80c348d"
+    },
+    {
+      "path": "catalog/fixtures/text/t01-input-20260909.txt",
+      "sha256": "2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f"
+    },
+    {
+      "path": "catalog/fixtures/word/word-catalog.docx",
+      "sha256": "2753855b1e6b7b8dccc857cb60ad1f9bf548908fbd10fea8dc8efa2ff8003cbd"
+    },
+    {
+      "path": "catalog/flows/csv-read-write2/roundtrip.robin",
+      "sha256": "1a40b35b4d0b4d52997274404ea9f035ee6590f8593982c701f07d20a4f71cae"
+    },
+    {
+      "path": "catalog/flows/datatable-filter/roundtrip.robin",
+      "sha256": "c3027cfaa13e191b0e784fb3a6db4c573f8bfc83fb172d1a6394d7c1f5a55c29"
+    },
+    {
+      "path": "catalog/flows/p3-file-boundary/subfolders-source-20260912.robin",
+      "sha256": "e909a16591683dc1e513cb538e3040ca1bb8e1dd5ddc9465fdecd670e73aaadb"
+    },
+    {
+      "path": "catalog/flows/p3-file-boundary/top-level-source-20260912.robin",
+      "sha256": "1f5fb888829f69ce91bfbc66c44fd81cdf91d09a15d614a5664d6c3a8f0920a4"
+    },
+    {
+      "path": "catalog/flows/p3-nested-control/nested-if-exit-source-20260912.robin",
+      "sha256": "3189a4c70221f3764f94fdd2c9cb48b6f3a4a661a7e84622e9c440e77fb52577"
+    },
+    {
+      "path": "catalog/flows/p3-nested-control/nested-loop-next-source-20260912.robin",
+      "sha256": "6dfed2418d7d02fd8c7987db60347322c4d156a231879c3ea097ae0e01ae7e44"
+    },
+    {
+      "path": "catalog/flows/p3-saveas-collision/excel-saveas-source-20260912.robin",
+      "sha256": "5640ab495937d6b4c2c681f999f80b7b8cefda1d98f8c3c6c90dfa2c0edfc4b2"
+    },
+    {
+      "path": "catalog/flows/p3-saveas-collision/word-saveas-source-20260912.robin",
+      "sha256": "9b982b662c7af2d3999b31b038e899ef45f03bae71132fa6a98bd149f54c12ec"
+    },
+    {
+      "path": "catalog/flows/pdf-table-csv/roundtrip.robin",
+      "sha256": "9d062670f2385e832e20b0c31607dc9d5ca257e9fa9184e96acc93be483d7ce0"
+    },
+    {
+      "path": "catalog/flows/t03-extension-branch/capture-pad-copy-20260912.robin",
+      "sha256": "c15a5970640f9d0bcb322b5655bffca3b7b84ad4a86f31c67e064d60fb9398e4"
+    },
+    {
+      "path": "catalog/flows/t03-extension-branch/run-pad-recopy-20260912.robin",
+      "sha256": "c15a5970640f9d0bcb322b5655bffca3b7b84ad4a86f31c67e064d60fb9398e4"
+    },
+    {
+      "path": "catalog/flows/t03-extension-branch/verify-source-20260912.robin",
+      "sha256": "2323abe953e5c63e82beda2340a5cfd22893132b1649ee9c4448a77f59a4d6a9"
+    },
+    {
+      "path": "catalog/flows/text-substring/roundtrip.robin",
+      "sha256": "4f1021aafc353edba483e83ea61c6dd93d3c7944ad7b4566049c50fe81e4f70c"
+    },
+    {
+      "path": "catalog/flows/ui-t09-local-roundtrip/roundtrip-wait1-20260912.robin",
+      "sha256": "d8913da95757f5fff4d3d7b10c40c35120d76882dc4d516356c9c3ddf06c5571"
+    },
+    {
+      "path": "catalog/flows/ui-t09-local-roundtrip/roundtrip.robin",
+      "sha256": "93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260913e-t01/pad-recopy-after-run2.robin",
+      "sha256": "d2a7f74e6b5038557a5b0eeca1bde4468f4d4fc402a9baaf95ba7fe5e91a317b"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260913e-t01/pad-recopy-after-save.robin",
+      "sha256": "d2a7f74e6b5038557a5b0eeca1bde4468f4d4fc402a9baaf95ba7fe5e91a317b"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260913e-t01/robin.txt",
+      "sha256": "2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260913e-t09/robin.txt",
+      "sha256": "7c576b499dab61a5d5228b16d4bd9589dcdd537e96a658f2b5386e936c946a44"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p31-current-live/generated-robin.txt",
+      "sha256": "fdaa3eea3fc40a2315984d09172ed1f16bf31174e3bdc8a50067afad0502bc06"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p31-current-live/pad-recopy.robin",
+      "sha256": "36a8179b61739dde9e99453b7b9baf693b384b5aa9a6d16fa229f111042f8473"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p31-current-live/request.txt",
+      "sha256": "4c090f1755792a90736aff6c261e64c3a7802df4e34760e7b51d2470e8f3a41e"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p31-current-live/response.txt",
+      "sha256": "6c1be521264e2fdbbd04dba9be715af3182e9ae1ea547f1adce7f97f534263e7"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p32-current-live/generated-robin.txt",
+      "sha256": "3189a4c70221f3764f94fdd2c9cb48b6f3a4a661a7e84622e9c440e77fb52577"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p32-current-live/pad-recopy.robin",
+      "sha256": "b2c65f7e9191734f780bdbe7cc1d8696974f5fc66e893473c9b91bee98f9eaaa"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p32-current-live/request.txt",
+      "sha256": "e64270666f55b55cfd9d051d3892b9c54609ea71dc0750d6edac13dcee26e281"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p32-current-live/response.txt",
+      "sha256": "1c07bdbb4444760dcc51feb32793a45bcf987f9986f17f1ac5d9481b4b04fcc7"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p33-current-live/generated-robin.txt",
+      "sha256": "2b3494e4e8ceffd33e8ef242b19387205b8159d2307ad8a56f93aeb789e3454a"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p33-current-live/pad-recopy.robin",
+      "sha256": "e909a16591683dc1e513cb538e3040ca1bb8e1dd5ddc9465fdecd670e73aaadb"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p33-current-live/request.txt",
+      "sha256": "0830b3d22c82bf13a8988099a0131eb663f608527c5f3032bee09e138d4d575b"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p34-current-live/generated-robin.txt",
+      "sha256": "d67dba359ed2a23790e52df236da7bdc2543ec3beeaa360fcea528a811a1e9e4"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p34-current-live/pad-recopy.robin",
+      "sha256": "f10a25186665e9295c2b7c9bdb19158f481536cc6bb0c6dbc2523c2dc39c902c"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p34-current-live/request.txt",
+      "sha256": "2f49caafcddf6bfa5d35c7d360190d5bb254622649138cf93a3bc732bbdcdab9"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p34-current-live/run1-output.xlsx",
+      "sha256": "5342fa57241279ddab534c021bc756407910d04fd3dc3de646ee791e3e15391d"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p34-current-live/run2-output.xlsx",
+      "sha256": "4b41bd3642a55706ed147b09f0fc77fe89c257cc91359362893375bcfaa60870"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p35-current-live/generated-robin.txt",
+      "sha256": "004ef2f334a01a869461c1db0f2b91f00412480436acde004394383a95d99413"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p35-current-live/pad-recopy.robin",
+      "sha256": "19cf8878c3317f96bbcdf10b3381d8420e469120eb07e040ed6d3acebf0fdee6"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p35-current-live/request.txt",
+      "sha256": "86bef2f15d2937b2e6770904d221ba0cd6e1342ab4b91e200c43fdea6213fef9"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p36-current-live/generated-robin.txt",
+      "sha256": "a1544f086aa83eb58d87978db3215d5f0e59093ec0c1e70c62aa0b7b59697aa5"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p36-current-live/pad-recopy.robin",
+      "sha256": "ae5bcb55035043596c48536d3366bb4a9b5f35eaebfac8414fdf9552ab543e4b"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-p36-current-live/request.txt",
+      "sha256": "b328ce94a9e640654828033f07a09eb4af560727d6c6b122d8571b4126820629"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-t04-independent-live/response.txt",
+      "sha256": "f7fda57aae227f14da5e80d9d45fc78fe517fdc877bf01bb70bb76ec98cc8700"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-t04-independent-live/robin.txt",
+      "sha256": "dd4f39f0700cfb5a9275dfc9912c89bd8d886d72972c9eb74223acf30343569d"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-t06-live/robin.txt",
+      "sha256": "c0940cb3e3ddbd82880d274692858ce3e2335f623acb11abe521926e642f9fd9"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-t07-live/output-run1.txt",
+      "sha256": "f7e592cc86719c395657ddffe2bf76ec7538c7d4deb7edb03fae7a5d90ba5fe2"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-t07-live/output-run2.txt",
+      "sha256": "f7e592cc86719c395657ddffe2bf76ec7538c7d4deb7edb03fae7a5d90ba5fe2"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-t07-live/protected-output-before.txt",
+      "sha256": "f7e592cc86719c395657ddffe2bf76ec7538c7d4deb7edb03fae7a5d90ba5fe2"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-t07-live/response.txt",
+      "sha256": "00a77742ae663ee2cc2ea17554c5458276398997796180801f5a9d3297ec2fb3"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-t07-live/robin.txt",
+      "sha256": "07586350d86076fcacea46f6f3a6b5901bfc67a61278c96f046fd2ccc37b6bd1"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-t08-live/response.txt",
+      "sha256": "a08ced848c2bdced457c3c8176f5a6f00070fe0a536032be43195835753a28f0"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-t08-live/robin.txt",
+      "sha256": "a1544f086aa83eb58d87978db3215d5f0e59093ec0c1e70c62aa0b7b59697aa5"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-t10-independent-live/dom-robin.txt",
+      "sha256": "2bcb5512adc3d238251ea7da2f82c047a5ddfbf4ae4ce343b437aef27eb3284a"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-t10-independent-live/generated-robin.txt",
+      "sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-t10-independent-live/pad-recopy-after-run2.robin",
+      "sha256": "8bf9b03fdc7ecb3a549670411cd7d72cb7c3e4a44152a3f2f9a231727bdea0ab"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-t10-independent-live/pad-recopy-after-save.robin",
+      "sha256": "8bf9b03fdc7ecb3a549670411cd7d72cb7c3e4a44152a3f2f9a231727bdea0ab"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-t10-independent-live/request.txt",
+      "sha256": "b36fc9925aabec165c10732c7890d076ba07798f9a012fa447c0b64fda414a03"
+    },
+    {
+      "path": "catalog/generated/normal-chat-20260914e-t10-independent-live/response.txt",
+      "sha256": "2bcb5512adc3d238251ea7da2f82c047a5ddfbf4ae4ce343b437aef27eb3284a"
+    },
+    {
+      "path": "catalog/generated/normal-chat-current-bundle-final3-t09-live-20260911/robin.txt",
+      "sha256": "7d391e821a5f13302b46b6bc47f30303a2ad3a59c62b7b191cef15888a27b6d9"
+    },
+    {
+      "path": "catalog/generated/normal-chat-current-bundle-t03-revised-20260913/assistant-response.txt",
+      "sha256": "4edc545f3c5bbe3ed3e63277076e3beb0e92b3139196b6610315048b93f853d6"
+    },
+    {
+      "path": "catalog/generated/normal-chat-current-bundle-t03-revised-20260913/prompt.txt",
+      "sha256": "9b93ae90df34511cfbb67cc21aa148c797511a058bfa0bfad5f7d8cead51b6dd"
+    },
+    {
+      "path": "catalog/generated/normal-chat-current-bundle-t03-revised-20260913/response-dom.txt",
+      "sha256": "9d2025163ebd0805565b16e4da9daa6543511aeae24224515cb88b98266bc2a1"
+    },
+    {
+      "path": "catalog/generated/normal-chat-current-bundle-t03-revised-20260913/robin.txt",
+      "sha256": "63fe35ec8619387f08c5dd270eb226bbd944457b410e09cc2425023ff9396572"
+    },
+    {
+      "path": "catalog/generated/normal-chat-current-bundle-t03-revised-20260913/sent-body.txt",
+      "sha256": "4eeab4d218d58b5227bc74ef414ce363ed66593e7aca8a9a43505435cf70abe5"
+    },
+    {
+      "path": "catalog/generated/normal-chat-finald-20260912-negative-suite/expectation.json",
+      "sha256": "a4dae7718183621fcd41e5149c2b79746108ceca91ca49d09c5644bf52d5c11a"
+    },
+    {
+      "path": "catalog/generated/normal-chat-finald-20260912-negative-suite/prompt.txt",
+      "sha256": "8db8800671e3fc4b6ba45acefba28db25709bcdf83153fe4ee04ee0cf90b3ca1"
+    },
+    {
+      "path": "catalog/generated/office-three-apps/generated.robin",
+      "sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194"
+    },
+    {
+      "path": "catalog/index.json",
+      "sha256": "8a6ef58274f431c9f496c036ae09bc75c43add4a93d05d83488ca496ca23ac6a",
+      "historical_at": "f4fa9a2e61bfd2a2be0414eccd9e42b2d4a5e35e",
+      "pre_change_checkout_sha256": "8a6ef58274f431c9f496c036ae09bc75c43add4a93d05d83488ca496ca23ac6a"
+    },
+    {
+      "path": "copilot/agent-instructions.txt",
+      "sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c"
+    },
+    {
+      "path": "copilot/knowledge-bundle-manifest-20260912b.json",
+      "sha256": "23b337a9cce5dc92bbd7886437a3f2a820c54e3e9fc6034d7b1079f6b98c1d65"
+    },
+    {
+      "path": "copilot/knowledge-bundle-manifest-20260912c.json",
+      "sha256": "ca88a736040ac77eda8990606cbef243cf0b21870479b2694ac254fca03d47a9"
+    },
+    {
+      "path": "copilot/knowledge-bundle-manifest-20260912d.json",
+      "sha256": "fc73a6d9b9e8b82bdfa6e26406f30c353356a00cfd5496dd21a454c0714a17da"
+    },
+    {
+      "path": "copilot/knowledge-bundle-manifest-20260913e.json",
+      "sha256": "dc597d10bba19de00b1c32d161d5b8eb82d7503b2eea27b81e73456ad48f5008"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-00-Index.txt",
+      "sha256": "ea1d916956db7943eb383f4ffe091eadfc5747f4f9470148357bcdd7f22551e9"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-01-Basics.txt",
+      "sha256": "abe921c3e7aa19ce5410fe746fe4c4f5c7fc7ee3ffd18c4b6747686a41fdbf31"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-02-Control.txt",
+      "sha256": "0caea76804e62d78c0c174add3f04acf6835d497220dc00cef256b03ddf0d7ea"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-03-Files.txt",
+      "sha256": "a541082a650a7cfae9d2b2cfb47026d7b8ee81bc542f30ba409af5e6291c9aea"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-04-Office-PDF.txt",
+      "sha256": "bcb11dca97ee22696a69a03a2c5a6b4485b1de116a4d72d6477a396daa64a1f9"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-05-UI-Web.txt",
+      "sha256": "e62a78aa92941984bacbdc59d4c6561104a9eca5b9d0e45b817f539e4558d867"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-06-Examples.txt",
+      "sha256": "0e01574c883274e71e592148038635e6d1883ce52342ed35a90a50c59c38f4f2"
+    },
+    {
+      "path": "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+      "sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12"
+    },
+    {
+      "path": "catalog/evidence/p3-current-sha-correction-20260914e.json",
+      "sha256": "cf25397d81c94eb70f955fe2fa7e2e73d1303b317a9247caa819959dae5f813e"
+    }
+  ]
+}

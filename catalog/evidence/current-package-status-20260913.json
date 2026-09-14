@@ -1,4 +1,7 @@
 {
+  "current_acceptance_verification": "catalog/evidence/final-content-verification-20260915.json",
+  "historical_new_version_acceptance": {"status":"PRECHECK_PLUS_T01_T02_T03_T05_T06_T07_T08_T09_P3-1_P3-2_P3-3_P3-4_P3-5_P3-6_AND_NEGATIVE_V2_ACCEPTED;_INDEPENDENT_T01_PAD_ACCEPTED;_INDEPENDENT_T10_FUNCTIONAL_SCOPE_ACCEPTED_STRICT_NOT_PROVEN;_INDEPENDENT_T04_CANDIDATE_PARTIAL;_T04_STRICT_T10_A-G_NOT_COMPLETE","accepted_current_version_cases":["T01","T02","T03","T05","T06","T07","T08","T09","P3-1","P3-2","P3-3","P3-4","P3-5","P3-6","independent-T01"],"precheck":"evidence/current-bundle-20260913e-precheck.json","t09_acceptance":"evidence/t09-20260913e-pad-acceptance.json","t01_generation":"evidence/t01-copilot-live-generation-20260913e.json","t01_acceptance":"evidence/t01-copilot-live-generation-20260913e-pad-acceptance.json","t02_generation":"evidence/t02-copilot-live-generation-20260913.json","t02_acceptance":"evidence/t02-copilot-live-generation-20260913e-pad-acceptance.json","t03_generation":"evidence/t03-revised-input-live-acceptance-20260913.json","t03_acceptance":"evidence/t03-copilot-live-generation-20260913e-pad-acceptance.json","t05_generation":"evidence/t05-copilot-live-generation-20260913.json","t05_acceptance":"evidence/t05-copilot-live-generation-20260913e-pad-acceptance.json","t06_generation":"evidence/t06-copilot-live-generation-20260914e.json","t06_acceptance":"evidence/t06-copilot-live-generation-20260914e-pad-acceptance.json","t07_generation":"evidence/t07-current-bundle-live-acceptance-20260914e.json","t07_acceptance":"evidence/t07-current-bundle-live-acceptance-20260914e.json","t08_generation":"evidence/t08-current-bundle-live-acceptance-20260914e.json","t08_acceptance":"evidence/t08-current-bundle-live-acceptance-20260914e.json","t01_independent_acceptance":"evidence/t01-independent-current-output-comparison-20260914e.json","t04_independent_candidate":"evidence/t04-independent-current-output-comparison-20260914e.json; evidence/t04-independent-current-pad-paste-save-20260914e.json; evidence/t04-independent-current-pad-recopy-20260914e.robin; evidence/t04-independent-current-pad-run1-20260914e.json; evidence/t04-independent-current-pad-run2-20260914e.json; evidence/t04-independent-current-output-run2-20260914e.xlsx; evidence/t04-independent-current-pad-window-observation-20260914f.json","t10_independent_functional_scope":"evidence/t10-independent-current-generation-20260914e.json; evidence/t10-independent-current-pad-paste-20260914e.json; evidence/t10-independent-current-pad-run1-20260914e.json; evidence/t10-independent-current-pad-run2-20260914e.json","candidate_followup":"evidence/t03-revised-input-live-acceptance-20260913.json; evidence/t04-copilot-live-generation-20260913-diagnosis.json; evidence/t04-independent-current-output-comparison-20260914e.json","p31_current_acceptance":"evidence/p31-current-bundle-live-20260914e.json; evidence/p31-current-pad-paste-save-20260914e.json; evidence/p31-current-pad-run1-20260914e.json; evidence/p31-current-pad-run2-20260914e.json","p32_current_acceptance":"evidence/p32-current-bundle-live-20260914e.json; evidence/p32-current-pad-paste-save-20260914e.json; evidence/p32-current-pad-run1-20260914e.json; evidence/p32-current-pad-run2-20260914e.json","p33_current_acceptance":"evidence/p33-current-bundle-live-20260914e.json; evidence/p33-current-pad-paste-save-20260914e.json; evidence/p33-current-pad-run1-20260914e.json; evidence/p33-current-pad-run2-20260914e.json","p34_current_acceptance":"evidence/p34-current-bundle-live-20260914e.json; evidence/p34-current-pad-paste-save-20260914e.json; evidence/p34-current-pad-run1-20260914e.json; evidence/p34-current-pad-run2-20260914e.json","p35_current_acceptance":"evidence/p35-current-bundle-live-20260914e.json; evidence/p35-current-pad-paste-save-20260914e.json; evidence/p35-current-pad-run1-20260914e.json; evidence/p35-current-pad-run2-20260914e.json","p36_current_acceptance":"evidence/p36-current-bundle-live-20260914e.json; evidence/p36-current-pad-paste-save-20260914e.json; evidence/p36-current-pad-run1-20260914e.json; evidence/p36-current-pad-run2-20260914e.json","strict_t10":"NOT_PROVEN","required_next":"Current P3-1 through P3-6 and negative suite v2 are accepted with separate same-version evidence. Old independent T04 remains historical partial; new 20260914w pair passed both artifact gates. Remaining required work is T10 strict raw-byte proof with a valid same-path control; no repeat functional run."},
+  "historical_sections_note": "Current decision is current_acceptance. Retained candidate_followup, p4_current_bundle, p5, cases without a current-version qualifier, current_main_commit/live_issue_read, dated diagnostics and test runs describe historical stages; they are not current completion blockers or new execution evidence.",
   "schema_version": 2,
   "captured_at": "2026-09-14T06:54:00+09:00",
   "reconciled_at": "2026-09-14T20:45:00+09:00",
@@ -11,7 +14,7 @@
     "state": "MERGED",
     "merge_commit": "7cc2c18b2a7f521f770c47c48cbbf4715d228979"
   },
-  "status": "partial_current_20260913e_independent_T04_new_pair_accepted_T10_strict_NOT_PROVEN",
+  "status": "complete_current_20260913e_content_contract_transport_NOT_PROVEN",
   "issue_state": "OPEN",
   "version": {
     "label": "20260913e",
@@ -20,7 +23,7 @@
     "bundle_manifest": "copilot/knowledge-bundle-manifest-20260913e.json",
     "instruction_utf16": 3947,
     "change_vs_finalc_20260912": "Canonical T09 instruction line 39 was corrected from WAIT 500 to WAIT 1 to match the measured knowledge. Historical finald acceptance is preserved but not inherited by 20260913e. T03/T04 follow-up evidence remains separately classified.",
-    "canonical_distribution_status": "WAIT_1_INSTRUCTION_AND_WAIT_1_KNOWLEDGE_MATCH;_T01_T02_T03_T05_T06_T07_T08_T09_AND_P3-1_P3-2_P3-3_P3-4_P3-5_P3-6_AND_INDEPENDENT_T01_ACCEPTED;_INDEPENDENT_T10_FUNCTIONAL_AND_AUTHORIZED_SCOPE_ACCEPTED;_STRICT_T10_NOT_PROVEN;_T04_AND_INDEPENDENT_T04_PARTIAL",
+    "canonical_distribution_status": "COMPLETE_MEASURED_CONTENT_CONTRACT_TRANSPORT_NOT_PROVEN",
     "previous_canonical_instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e"
   },
   "superseded_versions": {
@@ -266,7 +269,7 @@
         "evidence": "evidence/t06-copilot-live-generation-20260914e.json",
         "conversation": "https://m365.cloud.microsoft/chat/conversation/efc8983a-0075-4040-833a-8f06183823b4",
         "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
-        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529cadadb7d3b7963e036e12",
+        "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
         "prompt_sha256": "9b93ae90df34511cfbb67cc21aa148c797511a058bfa0bfad5f7d8cead51b6dd",
         "robin_sha256": "c0940cb3e3ddbd82880d274692858ce3e2335f623acb11abe521926e642f9fd9",
         "raw_unmodified": true
@@ -802,8 +805,8 @@
     "evidence": "evidence/current-package-status-20260912-finald.json"
   },
     "new_version_acceptance": {
-    "status": "PRECHECK_PLUS_T01_T02_T03_T05_T06_T07_T08_T09_P3-1_P3-2_P3-3_P3-4_P3-5_P3-6_AND_NEGATIVE_V2_ACCEPTED;_INDEPENDENT_T01_PAD_ACCEPTED;_INDEPENDENT_T10_FUNCTIONAL_SCOPE_ACCEPTED_STRICT_NOT_PROVEN;_INDEPENDENT_T04_CANDIDATE_PARTIAL;_T04_STRICT_T10_A-G_NOT_COMPLETE",
-    "accepted_current_version_cases": ["T01", "T02", "T03", "T05", "T06", "T07", "T08", "T09", "P3-1", "P3-2", "P3-3", "P3-4", "P3-5", "P3-6", "independent-T01"],
+    "status": "COMPLETE_REQUIRED_CURRENT_20260913E_CONTENT_CONTRACT_TRANSPORT_NOT_PROVEN",
+    "accepted_current_version_cases": ["T01","T02","T03","T05","T06","T07","T08","T09","P3-1","P3-2","P3-3","P3-4","P3-5","P3-6","independent-T01","T10-content","independent-T10-content","independent-T04-new-pair"],
       "precheck": "evidence/current-bundle-20260913e-precheck.json",
       "t09_acceptance": "evidence/t09-20260913e-pad-acceptance.json",
       "t01_generation": "evidence/t01-copilot-live-generation-20260913e.json",
@@ -831,26 +834,22 @@
       "p35_current_acceptance": "evidence/p35-current-bundle-live-20260914e.json; evidence/p35-current-pad-paste-save-20260914e.json; evidence/p35-current-pad-run1-20260914e.json; evidence/p35-current-pad-run2-20260914e.json",
       "p36_current_acceptance": "evidence/p36-current-bundle-live-20260914e.json; evidence/p36-current-pad-paste-save-20260914e.json; evidence/p36-current-pad-run1-20260914e.json; evidence/p36-current-pad-run2-20260914e.json",
       "strict_t10": "NOT_PROVEN",
-      "required_next": "Current P3-1 through P3-6 and negative suite v2 are accepted with separate same-version evidence. Old independent T04 remains historical partial; new 20260914w pair passed both artifact gates. Remaining required work is T10 strict raw-byte proof with a valid same-path control; no repeat functional run."
+      "required_next": "No mandatory technical gaps. Fresh checks and main integration precede issue close. Transport NOT_PROVEN remains non-blocking."
     },
-  "result": "Independent T04 new pair 20260914w passed both per-run CSV/xlsx snapshots and fixed 3x3 values; Run1 verified before Run2. Old candidate and old Run1 NOT_CAPTURED remain historical. Original primary T04 remains not accepted and is not double-counted. Required remaining: T10 strict raw-byte preservation NOT_PROVEN. Issues remain OPEN / partial. Paste-observer failure required native clipboard history restoration; text equality and original formats were verified, full-format byte equality was not assessed.",
+  "result": "Required acceptance for normal M365 Copilot Chat + PAD 20260913e is technically satisfied under the explicit 2026-09-15 user completion contract. T10 functional execution, requested changes only, and unchanged command/content preservation PASS; transport raw-byte preservation remains NOT_PROVEN (non-blocking limitation), outside raw bytes FAIL, requests/completed/remaining 1/1/0 for each response. Prior T04 failures and partial observations remain history. Close only after fresh checks and main integration.",
   "c_cell_value_read_supplement": {
     "evidence": "catalog/evidence/c-cell-read-20260914v/acceptance.json",
     "status": "PASS_REQUIRED_CELL_READ_NATIVE_REUSE",
     "scope": "numeric row 0 / column 0, Text; native reuse only",
     "pad_runs": 2,
     "copilot_sends": 0,
-    "remaining_required": [
-      "F-t10-strict-raw-bytes"
-    ]
+    "remaining_required": []
   },
   "t04_new_pair": {
     "evidence": "catalog/evidence/t04-independent-pair-20260914w/acceptance.json",
     "status": "PASS_INDEPENDENT_T04_NEW_PAIR",
-    "summary": "Independent T04 new pair 20260914w passed both per-run CSV/xlsx snapshots and fixed 3x3 values; Run1 verified before Run2. Old candidate and old Run1 NOT_CAPTURED remain historical. Original primary T04 remains not accepted and is not double-counted. Required remaining: T10 strict raw-byte preservation NOT_PROVEN. Issues remain OPEN / partial. Paste-observer failure required native clipboard history restoration; text equality and original formats were verified, full-format byte equality was not assessed.",
-    "remaining_required": [
-      "F-t10-strict-raw-bytes"
-    ],
+    "summary": "New independent T04 pair accepted separately; old primary failure/candidate_partial/Run1 NOT_CAPTURED preserved. Required acceptance for normal M365 Copilot Chat + PAD 20260913e is technically satisfied under the explicit 2026-09-15 user completion contract. T10 functional execution, requested changes only, and unchanged command/content preservation PASS; transport raw-byte preservation remains NOT_PROVEN (non-blocking limitation), outside raw bytes FAIL, requests/completed/remaining 1/1/0 for each response. Prior T04 failures and partial observations remain history. Close only after fresh checks and main integration.",
+    "remaining_required": [],
     "t10_saved_review": "catalog/evidence/t10-saved-evidence-review-20260914w.json"
   },
   "t10_strict_boundary_audit": {
@@ -861,7 +860,7 @@
     "primary_strict": "NOT_PROVEN",
     "independent_strict": "NOT_PROVEN",
     "additional_real_acquisitions": 0,
-    "reason": "Historical Add File saving appends LF in one same-operation synthetic control. Browser inventory timed out; no real recapture. Existing real candidates fail outside the exact two literal-content intervals. C and independent T04 new pair remain accepted; only strict T10 remains required."
+    "reason": "Historical strict boundary audit: NOT_PROVEN and outside bytes FAIL unchanged. Under the explicit 2026-09-15 user decision this transport limitation is non-blocking; see current_acceptance."
   },
   "t10_existing_response_recapture": {
     "evidence": "catalog/evidence/t10-strict-20260914x-recapture-results.json",
@@ -887,5 +886,33 @@
       "strict": "NOT_PROVEN"
     },
     "next": "Original acquisition budgets exhausted. No repeat, new send or PAD Run authorized; distinct upstream hypothesis and explicit new limits required."
+  }
+,
+  "historical_pre_content_decision": {
+    "as_of": "Before explicit user decision on 2026-09-15",
+    "baseline_commit": "f4fa9a2e61bfd2a2be0414eccd9e42b2d4a5e35e",
+    "c_cell_value_read_supplement.remaining_required": [
+      "F-t10-strict-raw-bytes"
+    ],
+    "t04_new_pair.remaining_required": [
+      "F-t10-strict-raw-bytes"
+    ],
+    "t04_new_pair.summary": "Independent T04 new pair 20260914w passed both per-run CSV/xlsx snapshots and fixed 3x3 values; Run1 verified before Run2. Old candidate and old Run1 NOT_CAPTURED remain historical. Original primary T04 remains not accepted and is not double-counted. Required remaining: T10 strict raw-byte preservation NOT_PROVEN. Issues remain OPEN / partial. Paste-observer failure required native clipboard history restoration; text equality and original formats were verified, full-format byte equality was not assessed.",
+    "t10_strict_boundary_audit.reason": "Historical Add File saving appends LF in one same-operation synthetic control. Browser inventory timed out; no real recapture. Existing real candidates fail outside the exact two literal-content intervals. C and independent T04 new pair remain accepted; only strict T10 remains required.",
+    "status": "partial_current_20260913e_independent_T04_new_pair_accepted_T10_strict_NOT_PROVEN",
+    "result": "Independent T04 new pair 20260914w passed both per-run CSV/xlsx snapshots and fixed 3x3 values; Run1 verified before Run2. Old candidate and old Run1 NOT_CAPTURED remain historical. Original primary T04 remains not accepted and is not double-counted. Required remaining: T10 strict raw-byte preservation NOT_PROVEN. Issues remain OPEN / partial. Paste-observer failure required native clipboard history restoration; text equality and original formats were verified, full-format byte equality was not assessed.",
+    "version.canonical_distribution_status": "WAIT_1_INSTRUCTION_AND_WAIT_1_KNOWLEDGE_MATCH;_T01_T02_T03_T05_T06_T07_T08_T09_AND_P3-1_P3-2_P3-3_P3-4_P3-5_P3-6_AND_INDEPENDENT_T01_ACCEPTED;_INDEPENDENT_T10_FUNCTIONAL_AND_AUTHORIZED_SCOPE_ACCEPTED;_STRICT_T10_NOT_PROVEN;_T04_AND_INDEPENDENT_T04_PARTIAL",
+    "new_version_acceptance.required_next": "Current P3-1 through P3-6 and negative suite v2 are accepted with separate same-version evidence. Old independent T04 remains historical partial; new 20260914w pair passed both artifact gates. Remaining required work is T10 strict raw-byte proof with a valid same-path control; no repeat functional run."
+  }
+,
+  "current_acceptance": {
+    "evidence": "catalog/evidence/final-content-acceptance-20260915.json",
+    "status": "TECHNICAL_ACCEPTANCE_PASS",
+    "contract": "EXPLICIT_USER_COMPLETION_CONTRACT_CHANGE",
+    "required_gaps": [],
+    "t10_content": "PASS",
+    "t10_transport": "NOT_PROVEN",
+    "transport_blocking": false,
+    "close_gate": "After fresh checks and main integration only"
   }
 }
