@@ -102,7 +102,7 @@
     "comparison": "catalog/evidence/t04-independent-current-output-comparison-20260914e.json",
     "reconciliation": "catalog/evidence/t04-independent-current-evidence-reconciliation-20260914e.json",
     "window_observation": "catalog/evidence/t04-independent-current-pad-window-observation-20260914f.json",
-    "latest_window_observation": "catalog/evidence/t04-independent-current-pad-window-observation-20260914p.json",
+    "latest_window_observation": "catalog/evidence/t04-independent-current-pad-window-observation-20260914q.json",
     "robin_sha256": "dd4f39f0700cfb5a9275dfc9912c89bd8d886d72972c9eb74223acf30343569d",
     "run1_output": "NOT_CAPTURED",
     "run2_values": "VERIFIED",

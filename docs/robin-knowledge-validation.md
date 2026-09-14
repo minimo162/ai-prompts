@@ -656,3 +656,5 @@ Issue #5/#27の必須A〜Gを、教材正本・原probe／別空フロー再利�
 15:46:53に再度プロセスとComputer Useを確認したところ、新PID 25804／31664は応答中のままだが、HWND 0／タイトル空、Computer Use `apps=[]`で変化はなかった。状態不明のDesignerに対する貼付け・保存・Runは行わず、再確認の原証跡を`catalog/evidence/t04-independent-current-pad-window-observation-20260914o.json`として追加した。
 
 15:53:05に同じ新PIDを直接Windows UI Automationでも再確認し、各PIDのRootElement直下トップレベル窓が0件であることを確認した。プロセスは応答中でもHWND 0／タイトル空のままで、UIAの一意識別ゲートを満たさないため、貼付け・保存・Runは行っていない。原証跡は`catalog/evidence/t04-independent-current-pad-window-observation-20260914p.json`。
+
+Computer Useランタイムを再初期化して15:55:34に再確認しても、ネイティブアプリ一覧は`apps=[]`のままで、新PIDのHWND／タイトルも空だった。UIAとComputer Useの両経路が同じ再起動後状態を示すため、Designer同一性を推測せずRunを開始していない。原証跡は`catalog/evidence/t04-independent-current-pad-window-observation-20260914q.json`。

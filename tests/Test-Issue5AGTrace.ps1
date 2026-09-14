@@ -109,6 +109,12 @@ if ($latestWindow.result -eq 'PAD_CLOSED_AND_RELAUNCHED_NEW_PROCESS') {
     Check (@($latestWindow.uia_snapshot.matching_top_level_windows).Count -eq 0) 'T04 UIA recheck has no matching top-level windows'
     Check (@($latestWindow.process_snapshot | Where-Object {$_.main_window_handle -ne 0 -or $_.main_window_title -ne ''}).Count -eq 0) 'T04 UIA recheck processes have no visible HWND/title'
     Check ($latestWindow.flow_and_run_actions.paste_save_run_invoked -eq $false -and $latestWindow.flow_and_run_actions.third_run_started -eq $false) 'T04 UIA recheck did not invoke flow or run actions'
+} elseif ($latestWindow.result -eq 'BLOCKED_CURRENT_PAD_CUA_NO_NATIVE_APP_AFTER_REINIT') {
+    Check ($latestWindow.computer_use_snapshot.runtime -eq 'reinitialized') 'T04 CUA runtime was reinitialized before recheck'
+    Check (@($latestWindow.computer_use_snapshot.apps).Count -eq 0 -and $latestWindow.computer_use_snapshot.native_app_binding -eq 'UNAVAILABLE') 'T04 CUA remains without native app binding after reinit'
+    Check (@($latestWindow.process_snapshot | Where-Object {$_.responding -eq $true -and $_.main_window_handle -eq 0 -and $_.main_window_title -eq ''}).Count -eq 2) 'T04 relaunched PAD processes remain hidden after CUA reinit'
+    Check (@($latestWindow.source_observations).Count -eq 2) 'T04 CUA recheck retains prior UIA and CUA sources'
+    Check ($latestWindow.flow_and_run_actions.paste_save_run_invoked -eq $false -and $latestWindow.flow_and_run_actions.third_run_started -eq $false) 'T04 CUA recheck did not invoke flow or run actions'
 } else {
     Check ($latestWindow.result -eq 'BLOCKED_CURRENT_PAD_WINDOW_UNOBSERVABLE_CUA_NO_NATIVE_APP_BINDING') 'T04 latest window result is blocked without native binding'
     Check (@($latestWindow.pad_process_snapshot | Where-Object {$_.main_window_handle -ne 0 -or $_.main_window_title -ne ''}).Count -eq 0) 'T04 latest PAD processes have no visible HWND/title'
