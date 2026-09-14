@@ -28,6 +28,7 @@ $coverage = Read-Json 'catalog/coverage.json'
 $index = Read-Json 'catalog/index.json'
 $audit = Read-Json 'catalog/evidence/issue5-completion-audit-20260913.json'
 $package = Read-Json 'catalog/evidence/current-package-status-20260913.json'
+$liveRead = Read-Json 'catalog/evidence/issue-live-read-20260914h.json'
 
 Check ($trace.schema_version -eq 1) 'trace schema version'
 Check ($trace.status -eq 'PARTIAL_REQUIRED_TRACEABILITY_GAPS') 'trace remains partial'
@@ -41,6 +42,10 @@ Check ($trace.issue_scope.manifest_sha256 -eq 'dc597d10bba19de00b1c32d161d5b8eb8
 Check ($trace.method.raw_preservation -eq $true) 'raw preservation enabled'
 Check ($trace.method.same_version_generation_resend -eq $false) 'no same-version resend'
 Check ($trace.method.strict_t10_bytes -eq 'NOT_PROVEN') 'T10 strict remains not proven'
+Check ($trace.live_issue_read -eq 'catalog/evidence/issue-live-read-20260914h.json') 'trace registers live issue read'
+Check ($liveRead.issues.'5'.state -eq 'OPEN' -and $liveRead.issues.'27'.state -eq 'OPEN') 'live Issue #5/#27 remain open'
+Check ($liveRead.pull_requests.'31'.state -eq 'MERGED' -and $liveRead.pull_requests.'31'.merge_commit -eq 'c52f954164eb75fcaa37116a44c7454bca3a5073') 'live PR #31 merge is preserved'
+Check ($liveRead.write_actions.issue_comments_posted -eq $false -and $liveRead.write_actions.issue_bodies_changed -eq $false -and $liveRead.write_actions.push_performed -eq $false) 'live read performed without external writes'
 
 $categoryNames = @($trace.categories.PSObject.Properties.Name | Sort-Object)
 Check (($categoryNames -join ',') -eq 'A,B,C,D,E,F,G') 'exact A-G category set'

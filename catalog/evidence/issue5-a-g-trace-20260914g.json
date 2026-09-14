@@ -12,6 +12,7 @@
     "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
     "manifest_sha256": "dc597d10bba19de00b1c32d161d5b8eb82d7503b2eea27b81e73456ad48f5008"
   },
+  "live_issue_read": "catalog/evidence/issue-live-read-20260914h.json",
   "method": {
     "rule": "Each A-G requirement is linked to the exact knowledge source, raw probe/reuse evidence, and current-package live evidence where available. A missing link remains NOT_PROVEN; historical PASS is not transferred to 20260913e.",
     "raw_preservation": true,
