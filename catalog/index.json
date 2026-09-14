@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "scope": "Observed PAD action variants; not a complete action reference or execution allowlist",
+  "final_a_g_trace": "evidence/issue5-a-g-trace-20260914g.json",
   "environment": {
     "pad_file_version": "2.71.115.26224",
     "language": "ja-JP",

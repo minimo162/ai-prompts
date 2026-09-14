@@ -2,6 +2,7 @@
   "schema_version": 2,
   "captured_on": "2026-09-14",
   "status": "partial_current_package_followup",
+  "final_a_g_trace": "evidence/issue5-a-g-trace-20260914g.json",
   "issue_state": "OPEN",
   "package": {
     "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
