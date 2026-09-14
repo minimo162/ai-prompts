@@ -91,11 +91,25 @@ Check (Test-Path -LiteralPath (FullPath $t04.reconciliation) -PathType Leaf) 'T0
 Check (Test-Path -LiteralPath (FullPath $t04.window_observation) -PathType Leaf) 'T04 window observation exists'
 Check (Test-Path -LiteralPath (FullPath $t04.latest_window_observation) -PathType Leaf) 'T04 latest window observation exists'
 $latestWindow = Read-Json ($t04.latest_window_observation)
-Check ($latestWindow.result -eq 'BLOCKED_CURRENT_PAD_WINDOW_UNOBSERVABLE_CUA_NO_NATIVE_APP_BINDING') 'T04 latest window result is blocked without native binding'
 Check (@($latestWindow.computer_use_snapshot.apps).Count -eq 0) 'T04 latest Computer Use native app list is empty'
-Check (@($latestWindow.pad_process_snapshot | Where-Object {$_.main_window_handle -ne 0 -or $_.main_window_title -ne ''}).Count -eq 0) 'T04 latest PAD processes have no visible HWND/title'
-Check (@($latestWindow.launch_attempts | Where-Object {$_.method -eq 'registered_designer_protocol' -and $_.result -eq 'ACCESS_DENIED' -and $_.visible_window_created -eq $false}).Count -eq 1) 'T04 latest protocol launch was denied without visible window'
-Check ($latestWindow.launch_attempt.method -eq 'explorer_shell_apps_folder_console' -and $latestWindow.launch_attempt.visible_window_created -eq $false -and $latestWindow.launch_attempt.result -eq 'NO_NEW_VISIBLE_PAD_PROCESS') 'T04 latest explorer launch produced no visible PAD process'
+if ($latestWindow.result -eq 'PAD_CLOSED_AND_RELAUNCHED_NEW_PROCESS') {
+    Check ($latestWindow.close_and_relaunch.old_processes_after_close.Count -eq 0) 'T04 prior PAD processes are absent after explicit close'
+    Check ($latestWindow.close_and_relaunch.new_process_recheck.new_pids_present -eq $true) 'T04 new PAD processes remain present after launch'
+    Check ($latestWindow.close_and_relaunch.new_processes_initial[0].main_window_title -eq 'Power Automate') 'T04 new Console title was observed at launch'
+    Check ($latestWindow.close_and_relaunch.new_processes_initial[0].main_window_handle -ne 0) 'T04 new Console nonzero HWND was observed at launch'
+    Check ($latestWindow.flow_and_run_actions.paste_save_run_invoked -eq $false -and $latestWindow.flow_and_run_actions.third_run_started -eq $false) 'T04 close/relaunch did not invoke flow or run actions'
+} elseif ($latestWindow.result -eq 'BLOCKED_CURRENT_PAD_WINDOW_UNOBSERVABLE_AFTER_RELAUNCH') {
+    Check ($latestWindow.relaunch_reference -eq 'catalog/evidence/t04-independent-current-pad-window-observation-20260914n.json') 'T04 recheck links the explicit close/relaunch evidence'
+    Check (@($latestWindow.process_snapshot | Where-Object {$_.pid -in @(25804,31664) -and $_.responding -eq $true}).Count -eq 2) 'T04 relaunched PAD processes remain responding'
+    Check (@($latestWindow.process_snapshot | Where-Object {$_.main_window_handle -ne 0 -or $_.main_window_title -ne ''}).Count -eq 0) 'T04 recheck has no stable visible HWND/title'
+    Check ($latestWindow.flow_and_run_actions.paste_save_run_invoked -eq $false -and $latestWindow.flow_and_run_actions.third_run_started -eq $false) 'T04 recheck did not invoke flow or run actions'
+} else {
+    Check ($latestWindow.result -eq 'BLOCKED_CURRENT_PAD_WINDOW_UNOBSERVABLE_CUA_NO_NATIVE_APP_BINDING') 'T04 latest window result is blocked without native binding'
+    Check (@($latestWindow.pad_process_snapshot | Where-Object {$_.main_window_handle -ne 0 -or $_.main_window_title -ne ''}).Count -eq 0) 'T04 latest PAD processes have no visible HWND/title'
+    Check (@($latestWindow.launch_attempts | Where-Object {$_.method -eq 'registered_designer_protocol' -and $_.result -eq 'ACCESS_DENIED' -and $_.visible_window_created -eq $false}).Count -eq 1) 'T04 latest protocol launch was denied without visible window'
+    Check ($latestWindow.launch_attempt.method -eq 'explorer_shell_apps_folder_console' -and $latestWindow.launch_attempt.visible_window_created -eq $false -and $latestWindow.launch_attempt.result -eq 'NO_NEW_VISIBLE_PAD_PROCESS') 'T04 latest explorer launch produced no visible PAD process'
+    Check ($latestWindow.uia_snapshot.root_children_count -eq 0 -and @($latestWindow.uia_snapshot.matching_top_level_windows).Count -eq 0) 'T04 latest UIA has no top-level window'
+}
 
 Check ($trace.decision.a_to_g_complete -eq $false) 'A-G complete flag remains false'
 Check ($trace.decision.issue_close_authorized -eq $false) 'issue close remains unauthorized'

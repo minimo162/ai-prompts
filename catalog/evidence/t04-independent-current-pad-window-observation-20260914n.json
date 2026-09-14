@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T15:38:37+09:00",
+  "verification_id": "T04-INDEPENDENT-CURRENT-20260914E-PAD-CLOSE-RELAUNCH-8",
+  "case": "T04",
+  "scope": "explicit_user_requested_pad_close_and_new_launch",
+  "close_and_relaunch": {
+    "old_processes_before": [
+      {"pid": 13332, "process": "PAD.Console.Host", "session_id": 1, "responding": true},
+      {"pid": 31324, "process": "PAD.Designer", "session_id": 1, "responding": true},
+      {"pid": 44316, "process": "PAD.Designer", "session_id": 1, "responding": true}
+    ],
+    "close_method": "Stop-Process -Force on the three exact PAD PIDs",
+    "old_processes_after_close": [],
+    "launch_method": "explorer.exe shell:AppsFolder\\Microsoft.PowerAutomateDesktop_8wekyb3d8bbwe!PAD.Console",
+    "new_processes_initial": [
+      {
+        "pid": 25804,
+        "process": "PAD.Console.Host",
+        "session_id": 1,
+        "responding": true,
+        "main_window_handle": 332034,
+        "main_window_title": "Power Automate",
+        "start_time": "2026-09-14T15:37:38.6038999+09:00"
+      },
+      {
+        "pid": 31664,
+        "process": "PAD.Designer",
+        "session_id": 1,
+        "responding": true,
+        "main_window_handle": 0,
+        "main_window_title": "",
+        "start_time": "2026-09-14T15:37:49.0262479+09:00"
+      }
+    ],
+    "new_process_recheck": {
+      "captured_at": "2026-09-14T15:38:37+09:00",
+      "old_pids_still_present": false,
+      "new_pids_present": true,
+      "console_window_handle": 0,
+      "console_window_title": "",
+      "designer_window_handle": 0,
+      "designer_window_title": ""
+    }
+  },
+  "computer_use_snapshot": {
+    "apps": [],
+    "native_app_binding": "UNAVAILABLE",
+    "browser_inventory_present": true,
+    "pad_window_observed": false
+  },
+  "flow_and_run_actions": {
+    "flow_binding_observed": false,
+    "exact_pid_title_hwnd_uia_verified": false,
+    "paste_save_run_invoked": false,
+    "copilot_resend": false,
+    "saved_robin_edited": false,
+    "third_run_started": false
+  },
+  "result": "PAD_CLOSED_AND_RELAUNCHED_NEW_PROCESS",
+  "reason": "The three previously observed PAD processes were explicitly closed. AppsFolder launch created new PAD.Console.Host and PAD.Designer processes; the console title and nonzero handle were observed immediately after launch, but a later recheck and Computer Use inventory exposed no stable native app binding or visible window. No flow or T04 run action was performed.",
+  "protected_scope": ["saved Robin text", "Copilot conversation", "Excel input/output files"]
+}

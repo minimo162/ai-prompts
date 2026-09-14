@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T15:46:53+09:00",
+  "verification_id": "T04-INDEPENDENT-CURRENT-20260914E-PAD-RELAUNCH-RECHECK-9",
+  "case": "T04",
+  "scope": "post_relaunch_visibility_recheck",
+  "process_snapshot": [
+    {
+      "pid": 25804,
+      "process": "PAD.Console.Host",
+      "session_id": 1,
+      "responding": true,
+      "start_time": "2026-09-14T15:37:38.6038999+09:00",
+      "main_window_handle": 0,
+      "main_window_title": ""
+    },
+    {
+      "pid": 31664,
+      "process": "PAD.Designer",
+      "session_id": 1,
+      "responding": true,
+      "start_time": "2026-09-14T15:37:49.0262479+09:00",
+      "main_window_handle": 0,
+      "main_window_title": ""
+    }
+  ],
+  "relaunch_reference": "catalog/evidence/t04-independent-current-pad-window-observation-20260914n.json",
+  "computer_use_snapshot": {
+    "apps": [],
+    "native_app_binding": "UNAVAILABLE",
+    "browser_inventory_present": true,
+    "pad_window_observed": false
+  },
+  "flow_and_run_actions": {
+    "flow_binding_observed": false,
+    "paste_save_run_invoked": false,
+    "copilot_resend": false,
+    "saved_robin_edited": false,
+    "third_run_started": false
+  },
+  "result": "BLOCKED_CURRENT_PAD_WINDOW_UNOBSERVABLE_AFTER_RELAUNCH",
+  "reason": "A fresh process and Computer Use recheck confirms the new PAD PIDs remain responding, but both have HWND 0 and an empty title and Computer Use still exposes no native app binding. The state is not sufficient to identify a dedicated Designer, so no flow binding, paste, save, or Run was attempted.",
+  "protected_scope": ["saved Robin text", "Copilot conversation", "Excel input/output files"]
+}
