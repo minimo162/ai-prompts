@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T15:30:55+09:00",
+  "method": "gh read-only",
+  "repository": "minimo162/ai-prompts",
+  "issues": {
+    "5": {
+      "number": 5,
+      "state": "OPEN",
+      "title": "PAD Robin必須A〜G：PR #31統合済み／次は独立T04の実行証跡補完→最終監査／OPEN・partial",
+      "updated_at": "2026-09-14T03:03:21Z",
+      "comment_count": 102,
+      "last_comment_summary": "2026-09-14 PR #31 squashマージ・main同期後の記録"
+    },
+    "27": {
+      "number": 27,
+      "state": "OPEN",
+      "title": "PAD Robin最終版受入：PR #31統合済み／次は独立T04の成果物証跡補完／T10厳密保持はNOT_PROVEN",
+      "updated_at": "2026-09-14T03:07:30Z",
+      "comment_count": 38,
+      "last_comment_summary": "2026-09-14 PR #31 squashマージ・main同期後の記録"
+    }
+  },
+  "pull_requests": {
+    "31": {
+      "number": 31,
+      "state": "MERGED",
+      "title": "現行20260913e負例v2受入と版証跡整合",
+      "merged_at": "2026-09-14T02:53:47Z",
+      "merge_commit": "c52f954164eb75fcaa37116a44c7454bca3a5073",
+      "base": "main",
+      "head": "codex/negative-v2-current-20260914"
+    }
+  },
+  "write_actions": {
+    "issue_comments_posted": false,
+    "issue_bodies_changed": false,
+    "push_performed": false,
+    "reason": "read-only confirmation only; no GitHub write was attempted"
+  }
+}
