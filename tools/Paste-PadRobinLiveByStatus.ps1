@@ -61,7 +61,7 @@ try {
 finally {
     # Observation failure must not discard the clipboard snapshot. Restore only
     # while this paste still owns both the sequence and exact text.
-    if ($null -ne $pasteSequence -and (Get-AgentPadClipboardSequence) -eq $pasteSequence -and (Get-AgentPadClipboardText) -ceq $text) { Restore-AgentPadClipboard $beforeClipboard }
+    if ($null -ne $pasteSequence -and (Get-AgentPadClipboardSequence) -eq $pasteSequence -and (Get-AgentPadClipboardText) -ceq $text -and (Get-AgentPadClipboardSequence) -eq $pasteSequence) { Restore-AgentPadClipboard $beforeClipboard }
 }
 $evidence = [ordered]@{
     schema_version = 1

@@ -8,7 +8,7 @@ $block=@($ast.FindAll({param($n) $n -is [Management.Automation.Language.TryState
 $code=$block.Extent.Text.Trim();$code=$code.Substring(1,$code.Length-2)
 $script:restores=0;$script:seq=10;$script:clip='owned'
 function Get-AgentPadClipboardSequence {return $script:seq}
-function Get-AgentPadClipboardText {return $script:clip}
+function Get-AgentPadClipboardText {if($script:changeDuringRead){$script:seq++};return $script:clip}
 function Restore-AgentPadClipboard($Snapshot){if($Snapshot -cne 'original'){throw 'Wrong snapshot'};$script:restores++}
 $text='owned';$beforeClipboard='original';$pasteSequence=10;$settled=$false
 . ([scriptblock]::Create($code))
@@ -22,6 +22,9 @@ if($script:restores -ne 1){throw 'Must preserve changed clipboard text'}
 $pasteSequence=$null;$script:clip='owned'
 . ([scriptblock]::Create($code))
 if($script:restores -ne 1){throw 'No paste ownership, no restoration'}
+$pasteSequence=10;$script:seq=10;$script:changeDuringRead=$true
+. ([scriptblock]::Create($code))
+if($script:restores -ne 1){throw 'Must preserve a sequence changed during text read'}
 $b=[IO.File]::ReadAllBytes($path)
 if($b[0] -ne 239 -or $b[1] -ne 187 -or $b[2] -ne 191){throw 'PS5 localized status matching needs UTF8 BOM'}
-'PASS: 5 paste clipboard/encoding checks; native clipboard not accessed'
+'PASS: 6 paste clipboard/encoding checks; native clipboard not accessed'

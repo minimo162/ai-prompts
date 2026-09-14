@@ -40,4 +40,20 @@ Check $refused 'duplicate request refused before native import'
 $refused=$false
 try{& (Join-Path $Root 'tools/Run-PadArtifactPairLive.ps1') -PlanPath "$sandbox/plan.json" -RunNumber 3}catch{$refused=$true}
 Check $refused 'third run rejected by parameter contract'
+# Extract the actual Run2 preflight only; stubs never import App or touch UI.
+$parseErrors=$null
+$ast=[Management.Automation.Language.Parser]::ParseFile((Join-Path $Root 'tools/Run-PadArtifactPairLive.ps1'),[ref]$null,[ref]$parseErrors)
+Check ($parseErrors.Count -eq 0) 'runner parses'
+$guard=@($ast.FindAll({param($n) $n -is [Management.Automation.Language.IfStatementAst] -and $n.Clauses[0].Item1.Extent.Text -eq '$RunNumber -eq 2'},$true))[0].Clauses[0].Item2.Extent.Text
+$guard=$guard.Substring(1,$guard.Length-2)
+$plan=ReadJson "$dir/plan.json"
+$script:gateForTest=ReadJson "$dir/run1/values.json"
+$root=$Root
+function Get-Content { $script:gateForTest | ConvertTo-Json -Depth 12 }
+. ([scriptblock]::Create($guard))
+Check $true 'actual Run2 gate accepts saved distinct artifact pair'
+$script:gateForTest.artifacts=@($script:gateForTest.artifacts[0],$script:gateForTest.artifacts[0])
+$refused=$false
+try{. ([scriptblock]::Create($guard))}catch{$refused=$_.Exception.Message -match 'identities mismatch'}
+Check $refused 'Run2 refuses duplicated artifact with matching hash and count'
 'PASS: '+$checks+' T04 new-pair evidence checks; no native Run or clipboard calls'

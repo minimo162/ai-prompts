@@ -10,7 +10,7 @@ assert module.verify(root, source, 1)['status'] == 'PASS'
 assert module.verify(root, source, 2)['status'] == 'PASS'
 work = root / '.work' / ('test-t04-artifacts-' + uuid.uuid4().hex)
 work.mkdir()
-for case in ['missing_xlsx', 'wrong_run', 'changed_sha', 'wrong_expectation', 'not_completed']:
+for case in ['duplicate_csv', 'missing_xlsx', 'wrong_run', 'changed_sha', 'wrong_expectation', 'not_completed']:
     target = work / case
     target.mkdir()
     shutil.copy2(source / 'plan.json', target / 'plan.json')
@@ -22,9 +22,10 @@ for case in ['missing_xlsx', 'wrong_run', 'changed_sha', 'wrong_expectation', 'n
         assert p.resolve().is_relative_to(work.resolve())
         p.rename(p.with_suffix('.withheld'))
     else:
-        if case == 'wrong_expectation': file = target / 'plan.json'
+        if case in ('wrong_expectation', 'duplicate_csv'): file = target / 'plan.json'
         if case == 'not_completed': file = target / 'run1-observation.json'
         data = json.loads(file.read_text(encoding='utf-8-sig'))
+        if case == 'duplicate_csv': data['outputs'] = [data['outputs'][0]] * 2
         if case == 'wrong_run': data['run_number'] = 2
         if case == 'changed_sha': data['snapshot_sha256'] = '0' * 64
         if case == 'wrong_expectation': data['expected_cells'][0][2] = 99
@@ -36,4 +37,4 @@ for case in ['missing_xlsx', 'wrong_run', 'changed_sha', 'wrong_expectation', 'n
         pass
     else:
         raise AssertionError('Accepted negative control: ' + case)
-print('PASS: 2 live-snapshot reads and 5 artifact rejection controls; no workbook edits or native calls')
+print('PASS: 2 saved-snapshot reads and 6 artifact rejection controls; no workbook edits or native calls')

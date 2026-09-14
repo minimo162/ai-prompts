@@ -12,6 +12,8 @@ $request=Join-Path $dir ('run'+$RunNumber+'-request.json')
 $result=Join-Path $dir ('run'+$RunNumber+'-observation.json')
 if($plan.max_run_starts -ne 2 -or (Test-Path -LiteralPath $request) -or (Test-Path -LiteralPath $result)){throw 'PAD_PAIR: invalid limit or already requested; do not repeat Run'}
 if($RunNumber -eq 1 -and (Test-Path (Join-Path $dir 'run2-request.json'))){throw 'PAD_PAIR: pair already advanced'}
+$extensions=@($plan.outputs | ForEach-Object {[IO.Path]::GetExtension($_)} | Sort-Object -Unique)
+if(@($plan.outputs).Count -ne 2 -or ($extensions -join ',') -cne '.csv,.xlsx'){throw 'PAD_PAIR: distinct CSV and xlsx outputs required'}
 if($RunNumber -eq 2){
     $gate=Get-Content -LiteralPath (Join-Path $dir 'run1/values.json') -Raw -Encoding UTF8 | ConvertFrom-Json
     if($gate.status -cne 'PASS' -or $gate.verification_id -cne $plan.verification_id -or $gate.run_number -ne 1){throw 'PAD_PAIR: Run1 artifact/value gate required'}
@@ -19,6 +21,9 @@ if($RunNumber -eq 2){
         if((Get-FileHash -LiteralPath (Join-Path $root $file.path)).Hash.ToLowerInvariant() -cne $file.sha256){throw 'PAD_PAIR: Run1 snapshot changed'}
     }
     if(@($gate.artifacts).Count -ne @($plan.outputs).Count){throw 'PAD_PAIR: missing Run1 artifact'}
+    $expectedPaths=@($plan.outputs | ForEach-Object {[IO.Path]::GetFullPath((Join-Path $dir ('run1/'+[IO.Path]::GetFileName($_))))} | Sort-Object)
+    $actualPaths=@($gate.artifacts | ForEach-Object {[IO.Path]::GetFullPath((Join-Path $root $_.path))} | Sort-Object)
+    if(($actualPaths -join "`n") -cne ($expectedPaths -join "`n")){throw 'PAD_PAIR: Run1 artifact identities mismatch'}
 }
 foreach($name in $plan.outputs){if(Test-Path -LiteralPath (Join-Path $root $name)){throw 'PAD_PAIR: output must be absent before this Run'}}
 if((Get-FileHash -LiteralPath (Join-Path $root $plan.input)).Hash.ToLowerInvariant() -cne $plan.input_sha256){throw 'PAD_PAIR: input changed'}

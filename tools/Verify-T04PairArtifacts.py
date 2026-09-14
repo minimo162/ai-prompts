@@ -9,6 +9,8 @@ def verify(root, directory, number):
     plan = json.loads((directory / 'plan.json').read_text(encoding='utf-8-sig'))
     observation = json.loads((directory / f'run{number}-observation.json').read_text(encoding='utf-8-sig'))
     assert number in (1, 2) and plan['max_run_starts'] == 2
+    outputs = plan['outputs']
+    assert len(outputs) == 2 and {pathlib.Path(p).suffix for p in outputs} == {'.csv', '.xlsx'}, 'CSV and xlsx are both required'
     assert observation['verification_id'] == plan['verification_id']
     assert observation['run_number'] == number and observation['completion_observed']
     assert observation['running_observed'] and not observation['additional_run_requested']

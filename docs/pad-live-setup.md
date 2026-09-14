@@ -6,7 +6,7 @@
 
 `tools/Run-PadArtifactPairLive.ps1` は、対象の停止・エラー0・入出力前提を確認し、Invoke前にCreateNewでRun要求を保存します。要求記録があるRunは再実行せず、Run2はRun1の値判定とスナップショットSHAを要求します。実行中の一時的なUIA例外は同じRunの観測として保持します。各回の停止後に `Save-PadRunArtifactSnapshot.ps1` でCSV/xlsxを保存し、`Verify-T04PairArtifacts.py` で実値を照合してから次へ進みます。検査中のファイルは読み取り専用です。
 
-このペアは既に2回実行済みです。保存済みplanで追加Runしません。新規ペアを行う場合も別途の作業指示が必要です。今回のWindows UIA補助はPowerShell 7で実行し、Windows PowerShell 5.1で日本語集計を読む `Paste-PadRobinLiveByStatus.ps1` にはUTF-8 BOMを付けました。同補助は観測失敗でも、貼付け時のsequenceとtextを所有している場合だけ元のクリップボードを復元します。新しい利用者のクリップボード内容は上書きしません。
+このペアは既に2回実行済みです。保存済みplanで追加Runしません。新規ペアを行う場合も別途の作業指示が必要です。今回のWindows UIA補助はPowerShell 7で実行し、Windows PowerShell 5.1で日本語集計を読む `Paste-PadRobinLiveByStatus.ps1` にはUTF-8 BOMを付けました。同補助は観測失敗でも、貼付け時のsequenceとtextを照合し、Text読取り後にもsequenceを再確認してから復元します。ただし最終確認と復元書込みは原子的ではなく、その間に別操作が更新したクリップボードを上書きする競合は未解決です。新しい利用者の内容を必ず保全する保証はなく、この補助の再利用前に修正が必要です。Text一致は全形式の生バイト復元を証明しません。
 
 Issue #5 の合成データ受入で、PADの空フローを作成し、Designerを一意に特定してからRobinを貼り付けるための再開メモです。既存の業務フローは対象にせず、作成した専用フローだけを使います。これは配布bundleのナレッジではなく、検証者向けの運用記録です。
 
