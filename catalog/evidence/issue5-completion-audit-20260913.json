@@ -2,6 +2,8 @@
   "schema_version": 2,
   "captured_on": "2026-09-14",
   "status": "partial_current_package_followup",
+  "final_a_g_trace": "evidence/issue5-a-g-trace-20260914g.json",
+  "live_issue_read": "evidence/issue-live-read-20260914l.json",
   "issue_state": "OPEN",
   "package": {
     "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
@@ -297,6 +299,12 @@
       "response_origin_backslash_arrow_count": 0,
       "strict_source_to_generation": "NOT_ASSESSED",
       "acceptance_scope": "candidate_partial",
+      "evidence_reconciliation": "evidence/t04-independent-current-evidence-reconciliation-20260914e.json",
+      "window_observation": "evidence/t04-independent-current-pad-window-observation-20260914f.json",
+      "latest_window_observation": "evidence/t04-independent-current-pad-window-diagnostic-20260914r.json",
+      "window_diagnostic": "evidence/t04-independent-current-pad-window-diagnostic-20260914r.json",
+      "session_diagnostic": "evidence/t04-independent-current-pad-session-diagnostic-20260914s.json",
+      "new_pair_status": "NOT_STARTED_CURRENT_PAD_DESIGNER_WINDOW_UNOBSERVABLE_CUA_NO_NATIVE_APP_BINDING",
       "raw_unmodified": true
     },
     "promotion": "T03_CURRENT_TRACE_ADDED;_ORIGINAL_REQUEST_NOT_PROMOTED",

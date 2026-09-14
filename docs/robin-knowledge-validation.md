@@ -3,6 +3,14 @@
 
 P3-1〜P3-6の現行版個別証跡はすべて同版指示・bundleに結び付き、派生集約のP3-4〜P3-6未受入表示を訂正した。63桁SHAの原記録は変更せず、訂正根拠と参照を`catalog/evidence/p3-current-sha-correction-20260914e.json`へ残した。固定負例v2（N1〜N3）は通常M365 Copilot新規会話へ1回送信し、回答原文を無修正保存した。三項目とも未確認受入で、理由・必要証拠・禁止後続処理を満たし、コードフェンス・Robin命令・疑似コード・未採取アクション名／引数の推測はない。PAD貼付け・Run・未登録Web操作は行っていない。旧finald負例PASSは履歴のまま現行版へ移していない。残件はT04形式不受入・独立T04候補partial、T10厳密保持NOT_PROVEN、A〜G監査であり、Issue #5/#27はOPEN / partialを維持する。
 
+## 2026-09-14 独立T04候補の実行別証跡追跡補完
+
+独立T04候補の既存ファイルを上書きせず、生成・貼付け保存・再コピー・Run1/Run2・Run2 xlsxの各SHAと参照を`catalog/evidence/t04-independent-current-evidence-reconciliation-20260914e.json`へ集約した。現行指示／bundle／manifestへの結び付き、生成Robin `dd4f39f0…43569d`（plain `=>` 5、escaped `\\=>` 0）、PAD権威9アクション（ListItem 6件は仮想化表示）、入力SHA不変を機械テスト `tests/Test-T04IndependentEvidence.ps1`（61 checks）で確認した。
+
+Run1/Run2はともに成功したが、Run1のxlsxは`NOT_CAPTURED`であり、Run2の3行（対象/A/10、対象/C/25、対象/D/5）をRun1の結果へ付け替えていない。最大2回を事前固定した新規空フロー `RobinKnowledgeT04IndependentCurrentOutputComparison20260914eR1` は作成できたものの、Designer PID 44316はHWND 0・完全一致タイトル未観測でUIA rootを取得できなかったため、貼付け・実行を開始していない。保存済みRobinの再送・手修正・第3回Run・空フロー削除は行わず、候補は`candidate_partial`、Issue #5/#27はOPEN / partialのままとする。次回は正確な非0 HWND／タイトルを観測した場合のみ、無修正Robinを使って各Run前にxlsxを捕捉する。
+
+その後の再確認（`2026-09-14T14:07:13+09:00`）も、同じPID 44316が応答中ながらHWND 0・タイトル空、UIAトップレベル0件であることを確認した。Designerログ（SHA `3435c1aeb5c0441620c259eea4775d81175d8c110c1480d31c49298e843a4a34`、165328 bytes）には`flowId`／`scriptId`がall-zero、`isHiddenInstance=true`、`canCreateFlow=false`が記録されている。これは `catalog/evidence/t04-independent-current-pad-window-observation-20260914f.json` に原ログ参照とともに保存し、不可視・未バインドDesignerに対して貼付け・保存・Runを呼び出していないことを検証テストへ追加した（70 checks）。
+
 ## 2026-09-14 現行版P3-1の送信・実機PAD受入
 
 現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を、通常M365 Copilotの新規会話 `https://m365.cloud.microsoft/chat/conversation/2167fd22-b6fb-4101-9379-8f4e760a518a`へ同版指示全文とbundleを実添付してThink Deeperで1回送信した。評価者用正解コード・期待値・Issue本文は送っていない。回答DOMの単一コードブロックから4行Robinを無修正保存した。
@@ -628,3 +636,27 @@ PADを2回Runし、両回とも成功、`NewVar=named`、`LastError`に`見つ�
 生成Robinを新規専用空フロー `RobinKnowledgeT01IndependentCurrentBundleLive20260914e`（Designer PID 31848）へ無修正貼付け・保存・再コピーし、3アクションを確認した。PAD再コピーは649 bytes・CRLF（SHA `d2a7f74e6b5038557a5b0eeca1bde4468f4d4fc402a9baaf95ba7fe5e91a317b`）で、生成原文との差はCRLFのみ（正規化後一致）だった。2回Runとも準備完了復帰し、出力は各90 bytes・SHA `2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2`、入力SHA `2866f343e2cc6997d936914c2dfd1baa070eea5b813e14bdd4cde9d70cfbe47f`は不変。既存出力はRun前後に退避・同一SHAで復元した。証跡は `catalog/evidence/t01-independent-current-output-comparison-20260914e.json`、paste/save、recopy、run1/run2、生成ディレクトリ `catalog/generated/normal-chat-20260914e-t01-independent-live/`。
 
 この独立T01は現行版で`PASS_CURRENT_20260914E_INDEPENDENT_PAD_ACCEPTED`とするが、生成元→PADの厳密バイト保持は評価していない（CRLF正規化後一致のみ）。T04形式不受入、T10厳密バイト保持、独立T04/T10、P3正例、負例v2、A〜G全体監査は残り、Issue #5/#27はOPEN / partialを維持する。
+
+## 2026-09-14 A〜G必須要件の原証跡対応付け
+
+Issue #5/#27の必須A〜Gを、教材正本・原probe／別空フロー再利用・現行版live evidenceへ対応付けた機械可読台帳を追加した。台帳は各チェックの証跡ファイル存在、測定範囲、未証明境界を分離し、過去版のPASSを20260913eへ付け替えない。A〜G全体のstatusは`PARTIAL_REQUIRED_TRACEABILITY_GAPS`、`a_to_g_complete=false`、IssueはOPENのままである。独立T04は比較・再調整・PAD窓観測をリンクしたが、Run1 xlsxは`NOT_CAPTURED`、新しい2-run pairは不可視DesignerかつComputer Useネイティブアプリバインディングなしのため未開始である。T10は機能／許可範囲と厳密生バイト保持を分離し、後者は`NOT_PROVEN`を維持する。
+
+対応付けの正本: `catalog/evidence/issue5-a-g-trace-20260914g.json`。`catalog/index.json` と `catalog/coverage.json` の `final_a_g_trace` から辿れる。検査は `tests/Test-Issue5AGTrace.ps1` で、A〜Gの全リンク、現行版ハッシュ、T04候補partial、Run1未取得、最新PAD窓観測、T10厳密未証明、Issue OPEN／PR #31 MERGEDを固定する。
+
+## 2026-09-14 T04 Designerプロトコル起動の追加観測
+
+`ms-powerautomatedesigner:` の登録プロトコルを1回だけ起動観測したが、`ACCESS_DENIED`で新規プロセス・可視窓は生成されなかった。既存のPAD.Console.Host／PAD.Designerは応答中でもHWND 0・タイトル空のままで、Computer Useのネイティブアプリ一覧も空だった。貼付け・保存・Run・Copilot再送・Robin編集・第3回Runは行わず、現行T04の`candidate_partial`、Run1 `NOT_CAPTURED`、新規pair未開始を維持する。原証跡は `catalog/evidence/t04-independent-current-pad-window-observation-20260914i.json` で、A〜G台帳と各集約の`latest_window_observation`から参照できる。
+
+その後、既存`explorer.exe`経由でPAD ConsoleのAppsFolder起動を15秒観測したが、新しいPADプロセス・可視窓は発生しなかった（`catalog/evidence/t04-independent-current-pad-window-observation-20260914j.json`）。さらにComputer Useの最新スナップショットでもネイティブアプリは空だった（`catalog/evidence/t04-independent-current-pad-window-observation-20260914k.json`）。したがってDesignerの一意なPID／タイトル／HWND／UIAは依然取得できず、実行ペアは開始していない。
+
+## 2026-09-14 PADの明示終了と新規起動
+
+ユーザー依頼により、既存の`PAD.Console.Host`（PID 13332）と`PAD.Designer`（PID 31324、44316）だけを終了し、`shell:AppsFolder\\Microsoft.PowerAutomateDesktop_8wekyb3d8bbwe!PAD.Console`から起動した。旧3 PIDは終了後に不在となり、新しいConsole PID 25804とDesigner PID 31664が生成された。起動直後にはConsoleのタイトル`Power Automate`と非ゼロHWNDを観測したが、15:38:37の再確認では両方ともHWND 0／タイトル空、Computer Useのネイティブアプリ一覧も空だった。したがって「新しいPADプロセスの起動」は確認済みだが、安定したDesigner窓の取得・フロー結付け・貼付け・保存・Runは行っていない。原証跡は`catalog/evidence/t04-independent-current-pad-window-observation-20260914n.json`で、既存T04候補の`candidate_partial`とRun1 `NOT_CAPTURED`は維持する。
+
+15:46:53に再度プロセスとComputer Useを確認したところ、新PID 25804／31664は応答中のままだが、HWND 0／タイトル空、Computer Use `apps=[]`で変化はなかった。状態不明のDesignerに対する貼付け・保存・Runは行わず、再確認の原証跡を`catalog/evidence/t04-independent-current-pad-window-observation-20260914o.json`として追加した。
+
+15:53:05に同じ新PIDを直接Windows UI Automationでも再確認し、各PIDのRootElement直下トップレベル窓が0件であることを確認した。プロセスは応答中でもHWND 0／タイトル空のままで、UIAの一意識別ゲートを満たさないため、貼付け・保存・Runは行っていない。原証跡は`catalog/evidence/t04-independent-current-pad-window-observation-20260914p.json`。
+
+Computer Useランタイムを再初期化して15:55:34に再確認しても、ネイティブアプリ一覧は`apps=[]`のままで、新PIDのHWND／タイトルも空だった。UIAとComputer Useの両経路が同じ再起動後状態を示すため、Designer同一性を推測せずRunを開始していない。原証跡は`catalog/evidence/t04-independent-current-pad-window-observation-20260914q.json`。
+
+その後、対象PIDをRefreshしてからWin32 `EnumWindows`、`IsWindowVisible`、タイトル、ClassName、所有PID、SessionId、`GetForegroundWindow`を読取専用で一括採取した。PowerShell／Explorer／PADはすべてSessionId 1だが、全トップレベル窓0件、前景窓0、PAD Designer UIA RootElement 0件、Computer Use apps 0件だった。これはPAD実行失敗とは判定せず、対話デスクトップまたは操作ブリッジへのアクセス障害（ケースA）としてT04ライブ実行だけをBLOCKEDにする。原証跡は`catalog/evidence/t04-independent-current-pad-window-diagnostic-20260914r.json`であり、Refresh以外のkill/restart、クリック、入力、貼付け、保存、Runは行っていない。

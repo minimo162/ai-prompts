@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T15:34:15+09:00",
+  "verification_id": "T04-INDEPENDENT-CURRENT-20260914E-TRACE-7",
+  "case": "T04",
+  "scope": "fresh_pair_final_pre_run_visibility_revalidation",
+  "pad_process_snapshot": [
+    {
+      "pid": 13332,
+      "process": "PAD.Console.Host",
+      "session_id": 1,
+      "start_time": "2026-09-13T15:27:34.0023051+09:00",
+      "responding": true,
+      "main_window_handle": 0,
+      "main_window_title": ""
+    },
+    {
+      "pid": 31324,
+      "process": "PAD.Designer",
+      "session_id": 1,
+      "start_time": "2026-09-14T06:51:10.7127337+09:00",
+      "responding": true,
+      "main_window_handle": 0,
+      "main_window_title": ""
+    },
+    {
+      "pid": 44316,
+      "process": "PAD.Designer",
+      "session_id": 1,
+      "start_time": "2026-09-14T13:42:00.5180852+09:00",
+      "responding": true,
+      "main_window_handle": 0,
+      "main_window_title": ""
+    }
+  ],
+  "computer_use_snapshot": {
+    "apps": [],
+    "native_app_binding": "UNAVAILABLE",
+    "browser_inventory_present": true,
+    "pad_window_observed": false
+  },
+  "uia_snapshot": {
+    "root_children_count": 0,
+    "matching_top_level_windows": []
+  },
+  "session_inventory": {
+    "shell_user": "CodexSandboxOffline",
+    "qwinsta_console": {
+      "username": "yuuki",
+      "session_id": 1,
+      "state": "Active"
+    },
+    "rdp_session": "none_observed"
+  },
+  "launch_attempts": [
+    {
+      "method": "registered_designer_protocol",
+      "uri": "ms-powerautomatedesigner:",
+      "result": "ACCESS_DENIED",
+      "visible_window_created": false
+    },
+    {
+      "method": "explorer_shell_apps_folder_console",
+      "result": "NO_NEW_VISIBLE_PAD_PROCESS",
+      "visible_window_created": false
+    }
+  ],
+  "launch_attempt": {
+    "method": "explorer_shell_apps_folder_console",
+    "result": "NO_NEW_VISIBLE_PAD_PROCESS",
+    "visible_window_created": false
+  },
+  "flow_and_run_actions": {
+    "flow_binding_observed": false,
+    "exact_pid_title_hwnd_uia_verified": false,
+    "paste_save_run_invoked": false,
+    "copilot_resend": false,
+    "saved_robin_edited": false,
+    "third_run_started": false
+  },
+  "result": "BLOCKED_CURRENT_PAD_WINDOW_UNOBSERVABLE_CUA_NO_NATIVE_APP_BINDING",
+  "reason": "A final pre-run revalidation found no visible PAD target through process properties, UIA, or Computer Use. The responding process state is insufficient to identify the dedicated Designer, so the saved Robin was not pasted or run.",
+  "source_observation": "catalog/evidence/t04-independent-current-pad-window-observation-20260914k.json"
+}

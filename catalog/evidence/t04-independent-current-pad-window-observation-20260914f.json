@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T14:07:13+09:00",
+  "verification_id": "T04-INDEPENDENT-CURRENT-20260914E-TRACE-2",
+  "case": "T04",
+  "scope": "fresh_pair_pad_window_observation",
+  "source_log": {
+    "path": "C:/Users/yuuki/AppData/Local/Microsoft/Power Automate Desktop/DataCollection/e65208de-f85d-46bf-8892-d325ae1d4d402026-09-14-04-42-PadDesigner.log",
+    "sha256": "3435c1aeb5c0441620c259eea4775d81175d8c110c1480d31c49298e843a4a34",
+    "bytes": 165328,
+    "read_mode": "shared_read_while_process_holds_log"
+  },
+  "process_snapshot": [
+    {
+      "pid": 13332,
+      "process": "PAD.Console.Host",
+      "start_time": "2026-09-13T15:27:34.0023051+09:00",
+      "responding": true,
+      "main_window_handle": 0,
+      "main_window_title": ""
+    },
+    {
+      "pid": 31324,
+      "process": "PAD.Designer",
+      "start_time": "2026-09-14T06:51:10.7127337+09:00",
+      "responding": true,
+      "main_window_handle": 0,
+      "main_window_title": ""
+    },
+    {
+      "pid": 44316,
+      "process": "PAD.Designer",
+      "start_time": "2026-09-14T13:42:00.5180852+09:00",
+      "responding": true,
+      "main_window_handle": 0,
+      "main_window_title": ""
+    }
+  ],
+  "uia_snapshot": {
+    "root_children_count": 0,
+    "matching_process_ids": [13332, 31324, 44316],
+    "matching_top_level_windows": []
+  },
+  "designer_log_facts": {
+    "process_unique_id": "44316-2026-09-14T13:42:00.5180852+09:00",
+    "application_designer_start_success_utc": "2026-09-14T04:42:06.2791423Z",
+    "designer_engine_init_success_utc": "2026-09-14T04:42:06.1558539Z",
+    "designer_flow_load_success_utc": "2026-09-14T04:42:06.2743565Z",
+    "flow_id": "00000000-0000-0000-0000-000000000000",
+    "script_id": "00000000-0000-0000-0000-000000000000",
+    "flow_schema": "V2",
+    "script_type": "Robin",
+    "is_hidden_instance": true,
+    "environment_can_create_flow": false,
+    "environment_can_read_flow": true,
+    "environment_can_write_flow": true,
+    "raw_event_filters": [
+      "designer.engine.init.success",
+      "designer.flow.load.success",
+      "application.designer.start.success"
+    ]
+  },
+  "fresh_pair": {
+    "flow_name_requested": "RobinKnowledgeT04IndependentCurrentOutputComparison20260914eR1",
+    "create_script": ".work/Create-PadFlowLive.ps1",
+    "script_reported_created": true,
+    "flow_binding_observed": false,
+    "exact_pid_title_hwnd_verified": false,
+    "paste_save_run_invoked": false,
+    "copilot_resend": false,
+    "saved_robin_edited": false,
+    "third_run_started": false
+  },
+  "result": "BLOCKED_CURRENT_PAD_WINDOW_UNOBSERVABLE",
+  "reason": "PID 44316 remains a responding but hidden/unbound Designer instance with no nonzero HWND, no title, no UIA top-level window, and all-zero flow identifiers. The strict helpers therefore were not invoked and no run is claimed."
+}

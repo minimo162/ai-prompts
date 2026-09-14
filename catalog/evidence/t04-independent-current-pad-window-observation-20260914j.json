@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T14:58:08+09:00",
+  "verification_id": "T04-INDEPENDENT-CURRENT-20260914E-TRACE-5",
+  "case": "T04",
+  "scope": "fresh_pair_pad_window_explorer_launch_revalidation",
+  "pad_process_snapshot": [
+    {
+      "pid": 13332,
+      "process": "PAD.Console.Host",
+      "session_id": 1,
+      "start_time": "2026-09-13T15:27:34.0023051+09:00",
+      "responding": true,
+      "main_window_handle": 0,
+      "main_window_title": ""
+    },
+    {
+      "pid": 31324,
+      "process": "PAD.Designer",
+      "session_id": 1,
+      "start_time": "2026-09-14T06:51:10.7127337+09:00",
+      "responding": true,
+      "main_window_handle": 0,
+      "main_window_title": ""
+    },
+    {
+      "pid": 44316,
+      "process": "PAD.Designer",
+      "session_id": 1,
+      "start_time": "2026-09-14T13:42:00.5180852+09:00",
+      "responding": true,
+      "main_window_handle": 0,
+      "main_window_title": ""
+    }
+  ],
+  "computer_use_snapshot": {
+    "apps": [],
+    "native_app_binding": "UNAVAILABLE",
+    "browser_inventory_present": true,
+    "pad_window_observed": false
+  },
+  "session_inventory": {
+    "shell_user": "CodexSandboxOffline",
+    "session_name": null,
+    "client_name": null,
+    "interactive": true,
+    "qwinsta_console": {
+      "username": "yuuki",
+      "session_id": 1,
+      "state": "Active"
+    },
+    "rdp_session": "none_observed"
+  },
+  "launch_attempts": [
+    {
+      "method": "registered_designer_protocol",
+      "uri": "ms-powerautomatedesigner:",
+      "result": "ACCESS_DENIED",
+      "visible_window_created": false
+    },
+    {
+      "method": "explorer_shell_apps_folder_console",
+      "application_id": "Microsoft.PowerAutomateDesktop_11.2608.115.0_x64__8wekyb3d8bbwe!PAD.Console",
+      "result": "NO_NEW_VISIBLE_PAD_PROCESS",
+      "visible_window_created": false
+    }
+  ],
+  "launch_attempt": {
+    "method": "explorer_shell_apps_folder_console",
+    "application_id": "Microsoft.PowerAutomateDesktop_11.2608.115.0_x64__8wekyb3d8bbwe!PAD.Console",
+    "explorer_start_process_returned_pid": 36492,
+    "process_count_before": {
+      "pad_console_host": 1,
+      "pad_designer": 2
+    },
+    "process_count_after_5_seconds": {
+      "pad_console_host": 1,
+      "pad_designer": 2
+    },
+    "process_count_after_15_seconds": {
+      "pad_console_host": 1,
+      "pad_designer": 2
+    },
+    "visible_window_created": false,
+    "result": "NO_NEW_VISIBLE_PAD_PROCESS"
+  },
+  "window_observation": {
+    "all_pad_processes_have_nonzero_hwnd": false,
+    "all_pad_processes_have_nonempty_title": false,
+    "computer_use_native_app_binding": "UNAVAILABLE"
+  },
+  "flow_and_run_actions": {
+    "flow_binding_observed": false,
+    "exact_pid_title_hwnd_uia_verified": false,
+    "paste_save_run_invoked": false,
+    "copilot_resend": false,
+    "saved_robin_edited": false,
+    "third_run_started": false
+  },
+  "result": "BLOCKED_CURRENT_PAD_WINDOW_UNOBSERVABLE_CUA_NO_NATIVE_APP_BINDING",
+  "reason": "Launching the registered PAD console through the existing explorer shell returned without error but produced no new PAD process or visible window after 15 seconds. Existing responding PAD processes remain HWND 0 with empty titles and cannot be bound by Computer Use; no flow binding or run is claimed.",
+  "source_observation": "catalog/evidence/t04-independent-current-pad-window-observation-20260914i.json"
+}

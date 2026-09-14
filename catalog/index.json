@@ -1,6 +1,8 @@
 {
   "schema_version": 1,
   "scope": "Observed PAD action variants; not a complete action reference or execution allowlist",
+  "final_a_g_trace": "evidence/issue5-a-g-trace-20260914g.json",
+  "live_issue_read": "evidence/issue-live-read-20260914l.json",
   "environment": {
     "pad_file_version": "2.71.115.26224",
     "language": "ja-JP",
@@ -6603,7 +6605,7 @@
       "manifest": "../copilot/knowledge-bundle-manifest-20260913e.json",
       "generated": "generated/normal-chat-20260914e-t04-independent-live/robin.txt",
       "response": "generated/normal-chat-20260914e-t04-independent-live/response.txt",
-      "evidence": "evidence/t04-independent-current-output-comparison-20260914e.json; evidence/t04-independent-current-pad-paste-save-20260914e.json; evidence/t04-independent-current-pad-recopy-20260914e.robin; evidence/t04-independent-current-pad-run1-20260914e.json; evidence/t04-independent-current-pad-run2-20260914e.json; evidence/t04-independent-current-output-run2-20260914e.xlsx",
+      "evidence": "evidence/t04-independent-current-output-comparison-20260914e.json; evidence/t04-independent-current-pad-paste-save-20260914e.json; evidence/t04-independent-current-pad-recopy-20260914e.robin; evidence/t04-independent-current-pad-run1-20260914e.json; evidence/t04-independent-current-pad-run2-20260914e.json; evidence/t04-independent-current-output-run2-20260914e.xlsx; evidence/t04-independent-current-evidence-reconciliation-20260914e.json; evidence/t04-independent-current-pad-window-observation-20260914f.json; evidence/t04-independent-current-pad-window-observation-20260914h.json; evidence/t04-independent-current-pad-window-observation-20260914i.json; evidence/t04-independent-current-pad-window-observation-20260914j.json; evidence/t04-independent-current-pad-window-observation-20260914k.json",
       "conversation": "https://m365.cloud.microsoft/chat/conversation/e06e99be-8eb9-4d1b-9d9f-1c39e34060e9",
       "flow_name": "RobinKnowledgeT04IndependentCurrentBundleLive20260914eD",
       "designer_pid": 29660,
@@ -6616,7 +6618,13 @@
       "run1_output_snapshot": "NOT_CAPTURED",
       "input_unchanged": true,
       "strict_source_to_pad_bytes": "NOT_CLAIMED",
-      "strict_source_to_generation": "NOT_ASSESSED"
+      "strict_source_to_generation": "NOT_ASSESSED",
+      "evidence_reconciliation": "evidence/t04-independent-current-evidence-reconciliation-20260914e.json",
+      "evidence_reconciliation_status": "candidate_partial_preserved_run1_snapshot_missing_new_pair_not_started",
+      "window_observation": "evidence/t04-independent-current-pad-window-observation-20260914f.json",
+      "latest_window_observation": "evidence/t04-independent-current-pad-window-diagnostic-20260914r.json",
+      "window_diagnostic": "evidence/t04-independent-current-pad-window-diagnostic-20260914r.json",
+      "session_diagnostic": "evidence/t04-independent-current-pad-session-diagnostic-20260914s.json"
     },
     {
       "id": "normal-chat-p34-current-package-live-2026-09-14",

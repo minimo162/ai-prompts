@@ -14,6 +14,9 @@
 
 ### 2026-09-14 独立T04の現行版候補
 
+窓の可視性を壊さない読取専用診断として、対象PIDの`Refresh()`後に全トップレベル窓をWin32 `EnumWindows`で列挙し、前景窓・所有PID・SessionId・UIA・Computer Useを比較した。通常の窓0、前景窓0、PAD Designer UIA 0、Computer Use `apps=[]`でCASE_A（対話デスクトップ／操作ブリッジ障害）と分類し、PAD実行失敗とは判定していない。T04のcandidate_partial、Run1 `NOT_CAPTURED`、新規pair未開始を維持する。証跡は`evidence/t04-independent-current-pad-window-diagnostic-20260914r.json`。
+追加の`quser`読取ではSession 1が`console / Active`で、PowerShellとPAD両PIDもSession 1だったため、Windowsセッション不一致は未成立とした。`Win32_ComputerSystem`は`ACCESS_DENIED`として未確認のまま補足証跡`evidence/t04-independent-current-pad-session-diagnostic-20260914s.json`へ記録した。
+
 ### 2026-09-14 現行版P3-3追跡
 
 同版指示全文＋bundleを通常M365 Copilot新規会話 `8e3e9a69-098f-41ce-82df-47b581c6bbad`へThink Deeperで1回送信し、評価者用件数・期待値を渡さず13行の拡張子境界Robinを無修正で採取した。専用空フロー `RobinKnowledgeP33CurrentBundleLive20260914e`（Designer PID 38136）へ貼付け・保存・再コピーし、Designerの権威サマリー`13 アクション`を確認した（ListItem 7件表示は仮想化による偽陰性）。2回Runとも`TxtCount=3`、`OtherCount=2`、対象5ファイルのSHA不変を確認した。生成Robin SHA `2b3494e4…`、PAD再コピーはCRLF SHA `e909a165…`で正規化後一致、生バイト一致は主張しない。証跡は`evidence/p33-current-bundle-live-20260914e.json`と同参照のpaste/run記録。旧版P3-3 PASSは現行版へ移していない。P3-4〜P3-6、負例v2、T10厳密保持・A〜G監査は未完了で、Issue #5/#27はOPEN / partial。
@@ -28,7 +31,7 @@
 
 ### 2026-09-14 現行版P3-6追跡
 
-現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）の全文を本文へ置き、同版bundleと指示ファイルを通常M365 Copilot新規会話 `724624ae-3f2d-4c82-92a6-f4e40a51f64d`へThink Deeperで1回送信した。評価者用件数・期待値は渡さず、12行のエラー処理Robinを無修正で採取した。専用空フロー `RobinKnowledgeP36CurrentBundleLive20260914e`（Designer PID 19332）へ貼付け・保存・再コピーし、権威サマリー`4 アクション`を確認した。初回paste helperは12行をアクション数として渡した入力ミスでタイムアウトしたが、同一貼付け後の4アクション状態をUIAで確認し、再貼付けはしていない。2回Runとも成功し、`NewVar=named`、`LastError`に`見つかりません`を確認した。生成SHA `a1544f08…`、PAD再コピーSHA `ae5bcb55…`は`BLOCK`末尾空白とCRLF差があり、生バイト一致は主張しない。ブロック側利用者定義`FileNotFound`一致と厳密保持は未証明のまま。証跡は`evidence/p36-current-bundle-live-20260914e.json`およびpaste/run各JSON。P3-6以外の残件（T04形式、T10厳密保持、負例v2、A〜G監査）は継続し、Issue #5/#27はOPEN / partial。
+現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）の全文を本文へ置き、同版bundleと指示ファイルを通常M365 Copilot新規会話 `724624ae-3f2d-4c82-92a6-f4e40a51f64d`へThink Deeperで1回送信した。評価者用件数・期待値は渡さず、12行のエラー処理Robinを無修正で採取した。専用空フロー `RobinKnowledgeP36CurrentBundleLive20260914e`（Designer PID 19332）へ貼付け・保存・再コピーし、権威サマリー`4 アクション`を確認した。初回paste helperは12行をアクション数として渡した入力ミスでタイムアウトしたが、同一貼付け後の4アクション状態をUIAで確認し、再貼付けはしていない。2回Runとも成功し、`NewVar=named`、`LastError`に`見つかりません`を確認した。生成SHA `a1544f08…`、PAD再コピーSHA `ae5bcb55…`は`BLOCK`末尾空白とCRLF差があり、生バイト一致は主張しない。ブロック側利用者定義`FileNotFound`一致と厳密保持は未証明のまま。証跡は`evidence/p36-current-bundle-live-20260914e.json`およびpaste/run各JSON。独立T04候補の実行別照合と新規補完ペアの準備／未実行境界は `evidence/t04-independent-current-evidence-reconciliation-20260914e.json` に記録した。P3-6以外の残件（T04形式、T10厳密保持、負例v2、A〜G監査）は継続し、Issue #5/#27はOPEN / partial。
 
 ### 2026-09-14 独立T10の現行版機能受入（厳密保持は未証明）
 

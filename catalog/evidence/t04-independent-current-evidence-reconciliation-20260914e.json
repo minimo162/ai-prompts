@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T13:50:39+09:00",
+  "verification_id": "T04-INDEPENDENT-CURRENT-20260914E-TRACE-1",
+  "case": "T04",
+  "scope": "current_version_independent_candidate_traceability",
+  "base_main_commit": "c52f954164eb75fcaa37116a44c7454bca3a5073",
+  "branch": "codex/issue-5-t04-evidence-20260914e",
+  "current_package": {
+    "manifest": "copilot/knowledge-bundle-manifest-20260913e.json",
+    "manifest_sha256": "dc597d10bba19de00b1c32d161d5b8eb82d7503b2eea27b81e73456ad48f5008",
+    "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+    "knowledge_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+    "no_same_version_copilot_resend": true
+  },
+  "existing_candidate": {
+    "status": "PASS_CURRENT_20260914E_INDEPENDENT_T04_GENERATION_PAD_TWO_RUNS_PARTIAL",
+    "acceptance_scope": "candidate_partial",
+    "comparison": {
+      "path": "catalog/evidence/t04-independent-current-output-comparison-20260914e.json",
+      "sha256": "a1735ba603c73a535c078d871b1a817b1ea1a71ab08f450c3c0750ab57f4967b",
+      "status_unchanged": true
+    },
+    "generated": {
+      "directory": "catalog/generated/normal-chat-20260914e-t04-independent-live",
+      "request_sha256": "13e79aea647fbb3d2abbce9da5f603635afeb719597881f54ac87006c6724ec5",
+      "response_sha256": "f7fda57aae227f14da5e80d9d45fc78fe517fdc877bf01bb70bb76ec98cc8700",
+      "robin_path": "catalog/generated/normal-chat-20260914e-t04-independent-live/robin.txt",
+      "robin_sha256": "dd4f39f0700cfb5a9275dfc9912c89bd8d886d72972c9eb74223acf30343569d",
+      "robin_bytes": 1585,
+      "raw_unmodified": true,
+      "plain_arrow_tokens": 5,
+      "escaped_arrow_tokens": 0
+    },
+    "pad": {
+      "flow_name": "RobinKnowledgeT04IndependentCurrentBundleLive20260914eD",
+      "paste_save_path": "catalog/evidence/t04-independent-current-pad-paste-save-20260914e.json",
+      "paste_save_sha256": "2d5444e05ef96ad30e85f1f7f14efddf00556bb42315392432a5c719573e334d",
+      "recopy_path": "catalog/evidence/t04-independent-current-pad-recopy-20260914e.robin",
+      "recopy_sha256": "1f78c54d5cfedffdf75026d3014f51c0ddd49dd1c4af9a28602ad59665417649",
+      "authoritative_action_count": 9,
+      "visible_action_count": 6,
+      "virtualized_visible_count_false_negative": true,
+      "saved": true,
+      "hand_edit_applied": false
+    },
+    "runs": {
+      "pre_fixed_run_limit": 2,
+      "run1": {
+        "evidence_path": "catalog/evidence/t04-independent-current-pad-run1-20260914e.json",
+        "evidence_sha256": "d032a58c3db67656109fdfb5212801cb2b1e889b7df39857705dc2000422ae7b",
+        "status": "success",
+        "output_snapshot": "NOT_CAPTURED",
+        "acceptance_effect": "candidate_partial_remains",
+        "run_again": false
+      },
+      "run2": {
+        "evidence_path": "catalog/evidence/t04-independent-current-pad-run2-20260914e.json",
+        "evidence_sha256": "a464393f7f5233aa5f1b92ccd3dcf787d43c1a3f3863c2e3ae2e3edfa76b9840",
+        "status": "success",
+        "output_snapshot": "catalog/evidence/t04-independent-current-output-run2-20260914e.xlsx",
+        "output_sha256": "c9255b368bcc2a935fa5acf76329ea61a7b3d4ec7620c0ac80c2b25ead0e813b",
+        "output_bytes": 10285,
+        "sheet": "t04-filtered",
+        "cell_values": [["対象", "A", 10], ["対象", "C", 25], ["対象", "D", 5]],
+        "acceptance_effect": "run2_only_output_verified",
+        "run_again": false
+      }
+    },
+    "input": {
+      "path": "catalog/fixtures/excel/t04-filter-input.xlsx",
+      "sha256_before": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+      "sha256_after": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+      "unchanged": true,
+      "existing_outputs_restored": true
+    },
+    "strict_source_to_generation": "NOT_ASSESSED"
+  },
+  "new_pair_attempt": {
+    "pre_fixed_run_limit": 2,
+    "run_slots": ["Run1", "Run2"],
+    "fixed_expectation": {
+      "input_sha256": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+      "output_sheet": "t04-filtered",
+      "output_cell_values": [["対象", "A", 10], ["対象", "C", 25], ["対象", "D", 5]],
+      "capture_each_output_before_next_run": true,
+      "restore_existing_outputs_after_pair": true
+    },
+    "prep": {
+      "status": "flow_created_but_designer_unobservable",
+      "flow_name": "RobinKnowledgeT04IndependentCurrentOutputComparison20260914eR1",
+      "create_script": ".work/Create-PadFlowLive.ps1",
+      "created": true,
+      "paste_started": false
+    },
+    "execution": {
+      "status": "NOT_STARTED",
+      "runs_started": 0,
+      "copilot_resend": false,
+      "saved_robin_reused_unmodified": true
+    },
+    "observation": {
+      "status": "BLOCKED_CURRENT_PAD_WINDOW_UNOBSERVABLE",
+      "designer_pid": 44316,
+      "main_window_handle": 0,
+      "window_title": null,
+      "exact_pid_title_hwnd_verified": false,
+      "uia_root_observed": false,
+      "reason": "The newly-created Designer process remained without a nonzero HWND and exact title, so the strict PAD helpers were not invoked."
+    },
+    "retries": 0,
+    "destructive_cleanup": false
+  },
+  "preservation": {
+    "protected_document": "docs/agent-approach-comparison-2026-09-07.md",
+    "protected_document_sha256": "e0ea487e66b2f62303097cd580c9caeeffd80a3da08954ce35608b6a043e2699",
+    "finale_directory": ".work/finale-20260912",
+    "finale_file_count": 408,
+    "target_comparison_untouched": true,
+    "prior_attempts_and_pass_histories_preserved": true
+  },
+  "conclusion": "The existing independent T04 candidate is fully traceable as two successful PAD runs with only Run2 output measured; Run1 remains NOT_CAPTURED and is not backfilled from Run2. A fresh two-run pair was fixed in advance but not started because the current Designer window could not be observed with an exact nonzero HWND/title. No generated Robin was edited, no same-version Copilot resend was made, and no third run was started. Candidate acceptance remains partial; strict T10 and final A-G audit remain open."
+}

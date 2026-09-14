@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T15:55:34+09:00",
+  "verification_id": "T04-INDEPENDENT-CURRENT-20260914E-CUA-REINIT-11",
+  "case": "T04",
+  "scope": "computer_use_runtime_reinitialization_recheck",
+  "process_snapshot": [
+    {
+      "pid": 25804,
+      "process": "PAD.Console.Host",
+      "session_id": 1,
+      "responding": true,
+      "start_time": "2026-09-14T15:37:38.6038999+09:00",
+      "main_window_handle": 0,
+      "main_window_title": ""
+    },
+    {
+      "pid": 31664,
+      "process": "PAD.Designer",
+      "session_id": 1,
+      "responding": true,
+      "start_time": "2026-09-14T15:37:49.0262479+09:00",
+      "main_window_handle": 0,
+      "main_window_title": ""
+    }
+  ],
+  "computer_use_snapshot": {
+    "runtime": "reinitialized",
+    "apps": [],
+    "native_app_binding": "UNAVAILABLE",
+    "browser_inventory_present": true,
+    "pad_window_observed": false
+  },
+  "source_observations": [
+    "catalog/evidence/t04-independent-current-pad-window-observation-20260914o.json",
+    "catalog/evidence/t04-independent-current-pad-window-observation-20260914p.json"
+  ],
+  "flow_and_run_actions": {
+    "flow_binding_observed": false,
+    "paste_save_run_invoked": false,
+    "copilot_resend": false,
+    "saved_robin_edited": false,
+    "third_run_started": false
+  },
+  "result": "BLOCKED_CURRENT_PAD_CUA_NO_NATIVE_APP_AFTER_REINIT",
+  "reason": "After reinitializing the Computer Use runtime, the native app inventory remains empty while the new PAD processes remain responding with no window handle or title. This does not establish a Designer identity, so no flow or Run action was attempted.",
+  "protected_scope": ["saved Robin text", "Copilot conversation", "Excel input/output files"]
+}

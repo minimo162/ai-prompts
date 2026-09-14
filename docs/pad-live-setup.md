@@ -85,6 +85,20 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools\Run-PadFlowLive.ps
   -TimeoutSeconds 30
 ```
 
+各Runの完了後、次のRunを開始する前に成果物を別名スナップショットへ保存する。`Save-PadRunArtifactSnapshot.ps1`は既存の保存先を拒否し、成果物のSHA／サイズ安定性と入力SHAを検証する。失敗時は終了コード2と`DO_NOT_START_NEXT_RUN`を記録するため、次Runへ進まない。
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools\Save-PadRunArtifactSnapshot.ps1 `
+  -ArtifactPath '<Run1が生成した契約上のxlsx/csv>' `
+  -SnapshotPath '<Run1専用の新規スナップショット>' `
+  -EvidencePath '<Run1成果物ゲート証跡>' `
+  -RunNumber 1 `
+  -InputPath '<固定入力>' `
+  -ExpectedInputSha256 '<Run前に固定した入力SHA256>'
+```
+
+Run1のゲートが`READY_FOR_NEXT_RUN`になった場合だけRun2を実行し、Run2も同じ手順で別名保存する。既存のRun1欠落証跡へ後付けで成果物を割り当てず、各Runのスナップショットとゲート証跡を個別に保存する。
+
 貼付け前に入力RobinのSHAを固定し、貼付け後にアクション数・保存完了・PAD再コピーを確認する。実行は合成入力と専用出力だけに限定し、各回の出力バイト列・BOM・改行・ハッシュと入力不変を別々に記録する。PAD再コピーが改行をLFからCRLFへ変換しても、元のCopilot原文とPAD再コピーを上書きせず、改行を明示した正規化比較だけを行う。
 
 ## 失敗時の停止条件

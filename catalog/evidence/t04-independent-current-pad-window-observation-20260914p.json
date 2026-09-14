@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T15:53:05+09:00",
+  "verification_id": "T04-INDEPENDENT-CURRENT-20260914E-PAD-UIA-RECHECK-10",
+  "case": "T04",
+  "scope": "post_relaunch_uia_visibility_recheck",
+  "process_snapshot": [
+    {
+      "pid": 25804,
+      "process": "PAD.Console.Host",
+      "session_id": 1,
+      "responding": true,
+      "start_time": "2026-09-14T15:37:38.6038999+09:00",
+      "main_window_handle": 0,
+      "main_window_title": ""
+    },
+    {
+      "pid": 31664,
+      "process": "PAD.Designer",
+      "session_id": 1,
+      "responding": true,
+      "start_time": "2026-09-14T15:37:49.0262479+09:00",
+      "main_window_handle": 0,
+      "main_window_title": ""
+    }
+  ],
+  "uia_snapshot": {
+    "root_children_count_by_pid": {
+      "25804": 0,
+      "31664": 0
+    },
+    "matching_top_level_windows": []
+  },
+  "computer_use_snapshot": {
+    "captured_at": "2026-09-14T15:46:53+09:00",
+    "apps": [],
+    "native_app_binding": "UNAVAILABLE",
+    "browser_inventory_present": true,
+    "pad_window_observed": false,
+    "source_observation": "catalog/evidence/t04-independent-current-pad-window-observation-20260914o.json"
+  },
+  "source_observation": "catalog/evidence/t04-independent-current-pad-window-observation-20260914o.json",
+  "flow_and_run_actions": {
+    "flow_binding_observed": false,
+    "paste_save_run_invoked": false,
+    "copilot_resend": false,
+    "saved_robin_edited": false,
+    "third_run_started": false
+  },
+  "result": "BLOCKED_CURRENT_PAD_UIA_ROOT_EMPTY_AFTER_RELAUNCH",
+  "reason": "A direct Windows UI Automation recheck found zero top-level windows for both responding relaunched PAD processes. MainWindowHandle and title are also empty, so the historical PID/title/HWND/UIA identity gate cannot be satisfied and no flow or Run action is safe.",
+  "protected_scope": ["saved Robin text", "Copilot conversation", "Excel input/output files"]
+}

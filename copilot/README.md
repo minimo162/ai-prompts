@@ -2,7 +2,7 @@
 
 ### 2026-09-14 独立T04候補（現行版）
 
-20260913e正本（instruction SHA `6ad6f742…`、bundle SHA `79245787…`）を新規Think Deeper通常チャットへ同版指示＋bundle実添付し、評価者用件数・期待値を含めない補正版依頼を1回送信した。公式応答とDOM単一`pre`から得た9行Robinは無修正で保存され、`=>` 5箇所、`\\=>` 0箇所だった。新規空フロー `RobinKnowledgeT04IndependentCurrentBundleLive20260914eD`へ貼付け・保存・再コピーし、2回Runとも成功。Run2のxlsxは3行3列（対象/A/10、対象/C/25、対象/D/5）、入力SHA不変、既存成果物復元を確認した。Run1のxlsxスナップショットが未採取のため `candidate_partial` とし、元T04の応答由来literalバックスラッシュ不受入は保持・非昇格。3回目のRunは行わない。詳細は [独立T04比較](../catalog/evidence/t04-independent-current-output-comparison-20260914e.json)、[生成原文](../catalog/generated/normal-chat-20260914e-t04-independent-live/)。
+20260913e正本（instruction SHA `6ad6f742…`、bundle SHA `79245787…`）を新規Think Deeper通常チャットへ同版指示＋bundle実添付し、評価者用件数・期待値を含めない補正版依頼を1回送信した。公式応答とDOM単一`pre`から得た9行Robinは無修正で保存され、`=>` 5箇所、`\\=>` 0箇所だった。新規空フロー `RobinKnowledgeT04IndependentCurrentBundleLive20260914eD`へ貼付け・保存・再コピーし、2回Runとも成功。Run2のxlsxは3行3列（対象/A/10、対象/C/25、対象/D/5）、入力SHA不変、既存成果物復元を確認した。Run1のxlsxスナップショットが未採取のため `candidate_partial` とし、元T04の応答由来literalバックスラッシュ不受入は保持・非昇格。3回目のRunは行わない。実行別照合と新規補完ペアの準備／未実行境界は [reconciliation](../catalog/evidence/t04-independent-current-evidence-reconciliation-20260914e.json) に分離している。詳細は [独立T04比較](../catalog/evidence/t04-independent-current-output-comparison-20260914e.json)、[生成原文](../catalog/generated/normal-chat-20260914e-t04-independent-live/)。
 
 ### 2026-09-14 現行版P3-4 / P3-5
 

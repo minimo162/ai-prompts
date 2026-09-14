@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T15:10:00+09:00",
+  "status": "PARTIAL_REQUIRED_TRACEABILITY_GAPS",
+  "issue_scope": {
+    "issues": ["#5", "#27"],
+    "issue_state": "OPEN",
+    "pr_31": "MERGED",
+    "baseline_main": "c52f954164eb75fcaa37116a44c7454bca3a5073",
+    "package_version": "20260913e",
+    "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+    "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+    "manifest_sha256": "dc597d10bba19de00b1c32d161d5b8eb82d7503b2eea27b81e73456ad48f5008"
+  },
+  "live_issue_read": "catalog/evidence/issue-live-read-20260914l.json",
+  "method": {
+    "rule": "Each A-G requirement is linked to the exact knowledge source, raw probe/reuse evidence, and current-package live evidence where available. A missing link remains NOT_PROVEN; historical PASS is not transferred to 20260913e.",
+    "raw_preservation": true,
+    "same_version_generation_resend": false,
+    "pad_run_claims_require": ["paste_or_reuse_record", "save_record", "run1_and_run2_records", "fixed_expectation_comparison", "input_invariant_or_restore_record"],
+    "strict_t10_bytes": "NOT_PROVEN"
+  },
+  "categories": {
+    "A": {
+      "title": "Basics: variables, arithmetic, lists, text, numbers, date/time",
+      "status": "PARTIAL_MEASURED_SUBSET",
+      "knowledge_sources": [
+        "copilot/knowledge/PAD-Robin-01-Basics.txt",
+        "copilot/knowledge/PAD-Robin-00-Index.txt"
+      ],
+      "checks": [
+        {"id": "A-text-number-boolean-set", "status": "PROVEN_MEASURED_SUBSET", "evidence": ["catalog/evidence/p3-boolean-probe-20260910.json", "catalog/evidence/a-boolean-reuse-20260912/acceptance.json", "catalog/evidence/number-conversion-variables.json"]},
+        {"id": "A-arithmetic-add-subtract", "status": "PROVEN_MEASURED_SUBSET", "evidence": ["catalog/evidence/bounded-loop-sum-variables.json", "catalog/evidence/p3-subtract-probe-20260910.json", "catalog/evidence/a-subtract-reuse-20260912/acceptance.json"]},
+        {"id": "A-list-create-add-get", "status": "PROVEN_INDEXED_SUBSET", "evidence": ["catalog/evidence/list-create-add.png", "catalog/evidence/p3-list-idx1-acceptance-20260912.json", "catalog/evidence/p3-list-get-index-probe-20260912.json"]},
+        {"id": "A-text-replace-split-join", "status": "PROVEN_MEASURED_MODES", "evidence": ["catalog/evidence/text-replace-literal-variables.json", "catalog/evidence/text-replace-regex-variables.json", "catalog/evidence/text-split-join-space-final.json", "catalog/evidence/text-split-join-variables.json"]},
+        {"id": "A-text-substring", "status": "PROVEN_ONE_INDEX_LENGTH_MODE", "evidence": ["catalog/evidence/text-substring-validation.json", "catalog/evidence/text-substring-roundtrip.json"]},
+        {"id": "A-number-conversion", "status": "PROVEN_MEASURED_MODES", "evidence": ["catalog/evidence/number-conversion-variables.json", "catalog/evidence/number-conversion-invalid.json"]},
+        {"id": "A-datetime", "status": "PROVEN_FORMAT_SUBSET", "evidence": ["catalog/evidence/datetime-current-date-validation.json", "catalog/evidence/p3-date-add-probe-20260910.json", "catalog/evidence/p3-date-subtract-probe-20260910.json", "catalog/evidence/p3-date-format-acceptance-20260912.json"]}
+      ],
+      "gaps": ["list out-of-range/negative/variable index", "additional number locale/grouping modes", "substring boundary variants", "custom date tokens beyond yyyy-MM-dd and existing-action edit path"]
+    },
+    "B": {
+      "title": "Control: If/Else, loops, errors, subflows",
+      "status": "PARTIAL_MEASURED_SUBSET",
+      "knowledge_sources": ["copilot/knowledge/PAD-Robin-02-Control.txt"],
+      "checks": [
+        {"id": "B-if-else", "status": "PROVEN_NESTED_SUBSET", "evidence": ["catalog/evidence/p3-else-probe-20260910.json", "catalog/evidence/p3-else-if-probe-20260910.json", "catalog/evidence/p3-nested-control-acceptance-20260912.json", "catalog/evidence/t03-ext-verify-acceptance-20260912.json"]},
+        {"id": "B-loop-fixed-foreach-exit", "status": "PROVEN_MEASURED_SUBSET", "evidence": ["catalog/evidence/p3-break-probe-20260910.json", "catalog/evidence/p3-continue-probe-20260910.json", "catalog/evidence/p3-nested-control-acceptance-20260912.json"]},
+        {"id": "B-error-subflow", "status": "PROVEN_ACTION_AND_SUBFLOW_SUBSET", "evidence": ["catalog/evidence/p3-error-block-probe-20260910.json", "catalog/evidence/p3-error-trigger-probe-20260910.json", "catalog/evidence/p3-subflow-probe-20260910.json", "catalog/evidence/p3-subflow-reuse-observer-20260913.json", "catalog/evidence/p3-named-error-acceptance-20260912.json", "catalog/evidence/p36-current-bundle-live-20260914e.json"]}
+      ],
+      "gaps": ["3+ nesting and outer-loop exit", "LOOP WHILE nesting", "generalized block-level user-defined FileNotFound match", "some separate-empty-flow reuse remains probe-only rather than current-package reacceptance"]
+    },
+    "C": {
+      "title": "Data: DataTable and CSV",
+      "status": "PARTIAL_MEASURED_SUBSET",
+      "knowledge_sources": ["copilot/knowledge/PAD-Robin-01-Basics.txt", "copilot/knowledge/PAD-Robin-03-Files.txt"],
+      "checks": [
+        {"id": "C-datatable", "status": "PROVEN_CREATE_ROW_LOOP_INDEXED_UPDATE", "evidence": ["catalog/evidence/datatable-create-validation.json", "catalog/evidence/p3-datatable-create-success-20260911.json", "catalog/evidence/p3-datatable-row-reuse-20260913-paste-save.json", "catalog/evidence/p3-datatable-row-reuse-20260913-run1.json", "catalog/evidence/p3-datatable-row-reuse-20260913-run2.json", "catalog/evidence/p3-datatable-cell-reuse-20260913-paste-save.json", "catalog/evidence/p3-datatable-cell-reuse-20260913-run1.json", "catalog/evidence/p3-datatable-cell-reuse-20260913-run2.json", "catalog/evidence/p3-datatable-foreach-reuse-20260913-paste-save.json", "catalog/evidence/p3-datatable-foreach-reuse-20260913-run1.json", "catalog/evidence/p3-datatable-foreach-reuse-20260913-run2.json"]},
+        {"id": "C-csv-read-write", "status": "PROVEN_UTF8_MEASURED_MODES", "evidence": ["catalog/evidence/csv-read-validation.json", "catalog/evidence/csv-read-roundtrip.json", "catalog/evidence/csv-read-write2-run-1.json", "catalog/evidence/csv-read-write2-run-2.json", "catalog/evidence/filter-t02-roundtrip2-run-2.json"]}
+      ],
+      "gaps": ["cell evidence proves indexed update, not a cell-value read", "DataTable column-name access in a row loop remains NOT_PROVEN", "additional CSV delimiter/quote modes remain unconfirmed", "probe reuse is not current-package same-version reacceptance"]
+    },
+    "D": {
+      "title": "Files and folders",
+      "status": "PROVEN_MEASURED_SUBSET_WITH_BOUNDARIES",
+      "knowledge_sources": ["copilot/knowledge/PAD-Robin-03-Files.txt"],
+      "checks": [
+        {"id": "D-files-folders", "status": "PROVEN_MEASURED_MODES", "evidence": ["catalog/evidence/p3-folder-create-probe-20260910.json", "catalog/evidence/d-folder-create-reuse-20260912/acceptance.json", "catalog/evidence/p3-file-exists-probe-20260910.json", "catalog/evidence/p3-file-exists-reuse-20260913-paste-save.json", "catalog/evidence/p3-file-move-reuse-20260913-paste-save.json", "catalog/evidence/p3-file-move-reuse-20260913-state.json", "catalog/evidence/p3-file-rename-reuse-20260913-paste-save.json", "catalog/evidence/p3-file-rename-reuse-20260913-state.json", "catalog/evidence/file-copy-validation.json", "catalog/evidence/folder-get-files-rt-run-1.json", "catalog/evidence/folder-get-files-all-rt-run-1.json", "catalog/evidence/p3-file-boundary-acceptance-20260912.json"]}
+      ],
+      "gaps": ["case-insensitive extension comparison remains explicitly unconfirmed", "some false-branch and separate reuse paths are not current-package reacceptance", "do not infer unlisted file/folder variants"]
+    },
+    "E": {
+      "title": "Excel",
+      "status": "PROVEN_MEASURED_SUBSET_WITH_BOUNDARIES",
+      "knowledge_sources": ["copilot/knowledge/PAD-Robin-01-Basics.txt", "copilot/knowledge/PAD-Robin-06-Examples.txt"],
+      "checks": [
+        {"id": "E-excel", "status": "PROVEN_LAUNCH_READ_RANGE_LOOP_SAVEAS_SUBSET", "evidence": ["catalog/evidence/p3-excel-sheet-probe-20260910.json", "catalog/evidence/p3-excel-read-range-probe-20260911.json", "catalog/evidence/p3-excel-foreach-reuse-20260913-paste-save.json", "catalog/evidence/p3-excel-foreach-reuse-20260913-run1.json", "catalog/evidence/p3-excel-foreach-reuse-20260913-run2.json", "catalog/evidence/p3-saveas-collision-acceptance-20260912.json", "catalog/evidence/t06-20260914e-output-comparison.json", "catalog/evidence/t04-independent-current-output-comparison-20260914e.json"]}
+      ],
+      "gaps": ["some separate probe reuse is not same-version current-package reacceptance", "T04 independent Run1 xlsx snapshot is NOT_CAPTURED", "PowerPoint SaveAs collision/locked targets are outside this Excel evidence"]
+    },
+    "F": {
+      "title": "Word, PowerPoint, PDF",
+      "status": "PARTIAL_MEASURED_SUBSET",
+      "knowledge_sources": ["copilot/knowledge/PAD-Robin-04-Office-PDF.txt"],
+      "checks": [
+        {"id": "F-office-pdf", "status": "PROVEN_CAPTURED_FORMAT_SUBSET", "evidence": ["catalog/evidence/office/verification.json", "catalog/evidence/office/catalog-artifacts.json", "catalog/evidence/office/powerpoint-actions.json", "catalog/evidence/office/word-variables.json", "catalog/evidence/office/reopen-variables.json", "catalog/evidence/t06-20260914e-output-comparison.json", "catalog/evidence/t07-current-bundle-output-comparison-20260914e.json", "catalog/evidence/t10-independent-current-generation-20260914e.json"]}
+      ],
+      "gaps": ["broad Office/PDF variant coverage is not claimed", "T10 functional/scope evidence is separate from strict raw-byte preservation, which remains NOT_PROVEN", "new agent registration reuse is not proven"]
+    },
+    "G": {
+      "title": "UI automation and browser",
+      "status": "PROVEN_T09_ROUTE_WITH_BOUNDARIES",
+      "knowledge_sources": ["copilot/knowledge/PAD-Robin-05-UI-Web.txt"],
+      "checks": [
+        {"id": "G-ui-browser", "status": "PROVEN_T09_MEASURED_ROUTE", "evidence": ["catalog/evidence/t09-20260913e-pad-acceptance.json", "catalog/evidence/t09-separate-ui-registration-20260911.json", "catalog/evidence/t09-extension-handshake-boundary-20260911.json", "catalog/evidence/t09-wait1-acceptance-20260912.json", "catalog/evidence/t09-repo-run1-acceptance-20260912.json", "catalog/evidence/t09-repo-run2-20260912.json"]}
+      ],
+      "gaps": ["other URLs/elements/browsers and extension-disabled environment remain unconfirmed", "generated six-line Robin does not transport registered UI elements; the element-import route is separately evidenced", "DOM/Playwright test is NOT_RUN"]
+    }
+  },
+  "current_t04_trace": {
+    "status": "CANDIDATE_PARTIAL_PRESERVED",
+    "comparison": "catalog/evidence/t04-independent-current-output-comparison-20260914e.json",
+    "reconciliation": "catalog/evidence/t04-independent-current-evidence-reconciliation-20260914e.json",
+    "window_observation": "catalog/evidence/t04-independent-current-pad-window-observation-20260914f.json",
+  "latest_window_observation": "catalog/evidence/t04-independent-current-pad-window-diagnostic-20260914r.json",
+  "window_diagnostic": "catalog/evidence/t04-independent-current-pad-window-diagnostic-20260914r.json",
+  "session_diagnostic": "catalog/evidence/t04-independent-current-pad-session-diagnostic-20260914s.json",
+  "robin_sha256": "dd4f39f0700cfb5a9275dfc9912c89bd8d886d72972c9eb74223acf30343569d",
+    "run1_output": "NOT_CAPTURED",
+    "run2_values": "VERIFIED",
+    "new_pair": "NOT_STARTED_CURRENT_PAD_DESIGNER_WINDOW_UNOBSERVABLE_CUA_NO_NATIVE_APP_BINDING"
+  },
+  "decision": {
+    "a_to_g_complete": false,
+    "issue_close_authorized": false,
+    "pr_ready": false,
+    "next_evidence": ["obtain an observable PAD Designer window before any new T04 run", "if a new pair starts, capture Run1 xlsx before Run2", "keep T10 strict raw bytes and listed A-G gaps open"]
+  }
+}
