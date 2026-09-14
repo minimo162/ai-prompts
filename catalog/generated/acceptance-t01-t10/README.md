@@ -16,7 +16,7 @@ P3-1〜P3-6は現行20260913eの個別証跡に基づき受入済みとして集
 
 現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を新規Think Deeper通常チャットへ実添付し、件数・期待値を依頼本文から除外した独立依頼を1回送信した。公式応答（末尾LF除外SHA `a932e7e7…`）とDOM単一`pre`（SHA `dd4f39f0…43569d`、9行、plain `=>` 5、escaped `\\=>` 0）を無修正保存した。
 
-生成Robinを新規空フロー `RobinKnowledgeT04IndependentCurrentBundleLive20260914eD`（PID 29660）へ貼付け・保存・再コピーし、仮想化された表示ListItem 6件に対してDesigner集計 `9 選択されたアクション` を正とした。再コピーはCRLF正規化後のみ一致。2回Runとも成功し、Run2の保存xlsx（SHA `c9255b36…`）は`対象/A/10`、`対象/C/25`、`対象/D/5`の3行3列、入力fixture SHA `1d0b3d3b…`不変、旧T04成果物復元を確認した。Run1のxlsxはRun2前にスナップショット未採取のため、生成・PAD 2run候補は `candidate_partial` とする。追加Runは行わず、元T04の応答由来形式不受入とT10厳密保持NOT_PROVENを維持する。詳細は `catalog/evidence/t04-independent-current-output-comparison-20260914e.json` と `catalog/generated/normal-chat-20260914e-t04-independent-live/`。
+生成Robinを新規空フロー `RobinKnowledgeT04IndependentCurrentBundleLive20260914eD`（PID 29660）へ貼付け・保存・再コピーし、仮想化された表示ListItem 6件に対してDesigner集計 `9 選択されたアクション` を正とした。再コピーはCRLF正規化後のみ一致。2回Runとも成功し、Run2の保存xlsx（SHA `c9255b36…`）は`対象/A/10`、`対象/C/25`、`対象/D/5`の3行3列、入力fixture SHA `1d0b3d3b…`不変、旧T04成果物復元を確認した。Run1のxlsxはRun2前にスナップショット未採取のため、生成・PAD 2run候補は `candidate_partial` とする。追加Runは行わず、元T04の応答由来形式不受入とT10厳密保持NOT_PROVENを維持する。実行別SHA・Run1未捕捉・新規補完ペアの準備失敗（Designer PID 44316／HWND 0／タイトル未観測）は `catalog/evidence/t04-independent-current-evidence-reconciliation-20260914e.json` に分離している。詳細は `catalog/evidence/t04-independent-current-output-comparison-20260914e.json` と `catalog/generated/normal-chat-20260914e-t04-independent-live/`。
 
 ### 2026-09-14 現行版P3-3送信・PAD受入
 

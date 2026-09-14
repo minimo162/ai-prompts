@@ -28,7 +28,7 @@
 
 ### 2026-09-14 現行版P3-6追跡
 
-現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）の全文を本文へ置き、同版bundleと指示ファイルを通常M365 Copilot新規会話 `724624ae-3f2d-4c82-92a6-f4e40a51f64d`へThink Deeperで1回送信した。評価者用件数・期待値は渡さず、12行のエラー処理Robinを無修正で採取した。専用空フロー `RobinKnowledgeP36CurrentBundleLive20260914e`（Designer PID 19332）へ貼付け・保存・再コピーし、権威サマリー`4 アクション`を確認した。初回paste helperは12行をアクション数として渡した入力ミスでタイムアウトしたが、同一貼付け後の4アクション状態をUIAで確認し、再貼付けはしていない。2回Runとも成功し、`NewVar=named`、`LastError`に`見つかりません`を確認した。生成SHA `a1544f08…`、PAD再コピーSHA `ae5bcb55…`は`BLOCK`末尾空白とCRLF差があり、生バイト一致は主張しない。ブロック側利用者定義`FileNotFound`一致と厳密保持は未証明のまま。証跡は`evidence/p36-current-bundle-live-20260914e.json`およびpaste/run各JSON。P3-6以外の残件（T04形式、T10厳密保持、負例v2、A〜G監査）は継続し、Issue #5/#27はOPEN / partial。
+現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）の全文を本文へ置き、同版bundleと指示ファイルを通常M365 Copilot新規会話 `724624ae-3f2d-4c82-92a6-f4e40a51f64d`へThink Deeperで1回送信した。評価者用件数・期待値は渡さず、12行のエラー処理Robinを無修正で採取した。専用空フロー `RobinKnowledgeP36CurrentBundleLive20260914e`（Designer PID 19332）へ貼付け・保存・再コピーし、権威サマリー`4 アクション`を確認した。初回paste helperは12行をアクション数として渡した入力ミスでタイムアウトしたが、同一貼付け後の4アクション状態をUIAで確認し、再貼付けはしていない。2回Runとも成功し、`NewVar=named`、`LastError`に`見つかりません`を確認した。生成SHA `a1544f08…`、PAD再コピーSHA `ae5bcb55…`は`BLOCK`末尾空白とCRLF差があり、生バイト一致は主張しない。ブロック側利用者定義`FileNotFound`一致と厳密保持は未証明のまま。証跡は`evidence/p36-current-bundle-live-20260914e.json`およびpaste/run各JSON。独立T04候補の実行別照合と新規補完ペアの準備／未実行境界は `evidence/t04-independent-current-evidence-reconciliation-20260914e.json` に記録した。P3-6以外の残件（T04形式、T10厳密保持、負例v2、A〜G監査）は継続し、Issue #5/#27はOPEN / partial。
 
 ### 2026-09-14 独立T10の現行版機能受入（厳密保持は未証明）
 
