@@ -1,5 +1,15 @@
 # Robinナレッジ作成 進捗
 
+## 2026-09-14 Cセル値読取りの既存証跡照合と専用フロー準備
+
+未pushのHEAD `dbc98c3d47794aebc0f5666235ff52d49bd022d5`とPR #32統合main `7cc2c18b2a7f521f770c47c48cbbf4715d228979`を現物確認し、現行20260913eと原証跡を保全した。`c-cell-read-existing-evidence-audit-20260914u.json`に既存原文→別空フロー貼付け・保存・再コピー→Run1/Run2実値の照合を記録した。セル更新は`ModifyDataTableItem`、行反復は`SET ForeachValue TO CurrentItem`であり、セル値の取出しを証明しない。`CurrentItem[Status]`はコピー・保存のみで組合せ実行の証跡がない。CSV/filterの表出力もセル値読取りへ読み替えない。既存証跡だけではCはNOT_PROVEN。
+
+C専用空フローをPADの自動命名で1件作成し「無題 (2)」を確認した。Designer HWND 397676／PID 31664／Session 1、0アクション、Power Fx OFFを観測し、左パネルの「新しいデータ テーブルを作成する」から設定を開いた。検索入力は反映したが、モーダル内のセル入力はtext/keyの両経路で反映されず、未確定編集をキャンセルして0アクションへ戻した。新規フローは保全し、Robin採取・貼付け・Runは未実施。原画面4件を保存した。これはCの準備段階の入力障害であり、PAD Run失敗ではない。
+
+今回のPAD Run開始0、Copilot送信0。独立T04のCASE_B原記録、旧Run1 NOT_CAPTURED、T10 strict NOT_PROVENは不変。新しい非0 HWNDはCフローに対応し、T04対象フローの復旧証明ではない。必須残件はCセル値読取り・独立T04 Run1成果物・T10厳密raw-byteの3件を維持する。current-package-status／completion audit／coverage／indexの判定は変わらないため変更しない。
+
+次は既存C専用フローの同一性と空状態を再確認し、同じ入力試行を反復せずモーダルを正しく対象指定できる別の既存操作手段を確認する。入力が成立した後、1方式だけを原文コピー→UTF-8無修正保存→別空フロー貼付け→保存・再コピー→Run1実値→Run2実値まで通す。列名構文や添字境界の総当たり、Copilot再送、新版化は不要。
+
 ## 2026-09-14 独立T04候補の実行別証跡追跡補完
 
 独立T04候補の既存証跡を再照合し、現行instruction SHA `6ad6f742…`／bundle SHA `79245787…`、生成Robin SHA `dd4f39f0…43569d`、PAD 9アクション（ListItem 6件は仮想化表示）を固定した。Run1/Run2の実行JSONはともに成功だが、Run1のxlsxは`NOT_CAPTURED`であり、Run2（対象/A/10、対象/C/25、対象/D/5）の結果をRun1へ付け替えていない。`catalog/evidence/t04-independent-current-evidence-reconciliation-20260914e.json`と`tests/Test-T04IndependentEvidence.ps1`で、各証跡のSHA、入力不変、再コピー、出力境界、候補partialを機械検証できるようにした。

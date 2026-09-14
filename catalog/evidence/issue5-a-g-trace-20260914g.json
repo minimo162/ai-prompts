@@ -137,6 +137,7 @@
           "id": "C-datatable-cell-value-read",
           "missing_stage": "runtime read evidence",
           "references_checked": [
+            "catalog/evidence/c-cell-read-existing-evidence-audit-20260914u.json",
             "catalog/evidence/p3-datatable-cell-success-20260911.json",
             "catalog/evidence/p3-datatable-cell-reuse-20260913-run1.json",
             "catalog/evidence/p3-datatable-cell-reuse-20260913-run2.json"

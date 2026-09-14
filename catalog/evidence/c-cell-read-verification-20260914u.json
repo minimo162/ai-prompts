@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "at": "2026-09-14T22:07:05.148835+09:00",
+  "base_head": "dbc98c3d47794aebc0f5666235ff52d49bd022d5",
+  "status": "PASS_STATIC_ONLY",
+  "json_parsed": 1391,
+  "reference_and_hash_checks": 21,
+  "package_manifest_sources_checked": 7,
+  "instruction_bundle_unchanged": true,
+  "existing_tracked_raw_unchanged": true,
+  "protected_file_hashes_unchanged": 409,
+  "protected_baseline_timing": "Captured after C UI preparation, before tests; not claimed as a pre-UI byte snapshot. UI work did not target these files.",
+  "finale_file_count": 408,
+  "tests": {
+    "Issue5AGTrace": 292,
+    "CurrentStatus": 57,
+    "RobinCatalog": 107,
+    "RawContracts": "PASS",
+    "CopilotPackage": "PASS 3947 UTF-16 / 7 sources / 87 actions",
+    "T10": "PASS_REGRESSION_WITH_STRICT_NOT_PROVEN"
+  },
+  "initial_test_invocation_failure": "Issue5AGTrace, RawContracts and T10 failed before assertions: PSScriptRoot empty in default parameter on powershell -File. Reran same files with explicit -Root; passed. Tests were not edited.",
+  "pad_run_starts": 0,
+  "copilot_sends": 0,
+  "native_ui": "C preparation attempted, scalar input not applied; no Run",
+  "github_ci": "NOT_RUN",
+  "dom_playwright": "NOT_RUN",
+  "nonlive_all": {
+    "status": "PASS",
+    "count": 37,
+    "passed": 37,
+    "source": ".work/nonlive-5e67f47942944f998d1993cecf39df3e/verification.json",
+    "source_sha256": "a9e05862e6cd6f1df99482627751abfaf318585e9de39573eb012e43e90029cc",
+    "tests": [
+      {
+        "test": "Test-CsvContracts.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-CsvBatch.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-CsvLifecycle.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-CsvTypedPlan.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-CsvReview.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-CsvLateResponse.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-QualityDraft.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-OfflineDiagnostic.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-ConversationScope.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-ConnectionContract.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-AcceptanceGate.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-App.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-Pad.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-PadRunArtifactSnapshot.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-RobinCatalog.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-BoundedRobinLoop.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-RobinNumberConversion.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-GeneralJobStart.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-GeneralArtifactOpen.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-CompletionDecision.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-PadRecovery.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-Copilot.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-CopilotPlannerV2.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-PlannerV2Transport.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-Http.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-Launcher.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-ReleaseBinding.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-PublishAgentSource.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-PublishCrash.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-AiCallProcess.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-AiCallProviderFailure.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-ClipboardSnapshot.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-DocumentRobin.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-DocumentObservation.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-ClipboardReadRetry.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-CurrentBundleT01Prepared.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-Issue5CurrentStatus.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      }
+    ]
+  },
+  "privacy_review": "PASS: four native screenshots visually inspected; no account header or private work data retained; credential-pattern scan found no matches in new JSON"
+}

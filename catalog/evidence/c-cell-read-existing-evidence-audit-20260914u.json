@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "verification_id": "C-CELL-READ-20260914U",
+  "captured_at": "2026-09-14T12:58:07.256355+00:00",
+  "status": "NOT_PROVEN_PREPARATION_INPUT_BLOCKED",
+  "existing_evidence_sufficient": false,
+  "requirement": {
+    "source": "CODEX_TASK_PAD_ROBIN_KNOWLEDGE.md",
+    "line": 141,
+    "text": "C. データ処理：データテーブルの作成・行追加・行の繰返し・セル参照、CSV読取り／書出し。"
+  },
+  "start_state": {
+    "head": "dbc98c3d47794aebc0f5666235ff52d49bd022d5",
+    "branch": "codex/issue-5-current-audit-20260914",
+    "main": "7cc2c18b2a7f521f770c47c48cbbf4715d228979",
+    "github_main": "7cc2c18b2a7f521f770c47c48cbbf4715d228979",
+    "tracked_worktree_clean_at_start": true,
+    "untracked_preserved": [
+      "%SystemDrive%/",
+      "docs/agent-approach-comparison-2026-09-07.md"
+    ],
+    "ignored_preserved": [
+      ".work/"
+    ],
+    "ignored_inventory_limit": "git inventory reported two Filename too long warnings under .work/gate1/archive; no cleanup performed",
+    "applicable_instructions": "User-provided global AGENTS; no AGENTS.md found at repository/ancestor paths or tracked nested paths"
+  },
+  "github_read": {
+    "issues": {
+      "5": {
+        "state": "OPEN",
+        "latest_comment": "https://github.com/minimo162/ai-prompts/issues/5#issuecomment-5664138915"
+      },
+      "27": {
+        "state": "OPEN",
+        "latest_comment": "https://github.com/minimo162/ai-prompts/issues/27#issuecomment-5664143128"
+      }
+    },
+    "pr32": {
+      "state": "MERGED",
+      "comments": 0,
+      "merge_commit": "7cc2c18b2a7f521f770c47c48cbbf4715d228979"
+    }
+  },
+  "search": {
+    "roots": [
+      "catalog/evidence",
+      "catalog/actions",
+      "catalog/flows",
+      "catalog/generated",
+      "copilot/knowledge",
+      "catalog/index.json",
+      "catalog/coverage.json"
+    ],
+    "text_files": 2708,
+    "inventory_digest_sha256": "ca93059568caca9994d204f2ffd797a5c91bc43059d51e6037cf1b34c8618cab",
+    "raw_index_expression_candidates_excluding_list_and_ui_selectors": [
+      {
+        "path": "catalog/actions/file-write-csv/pdf-table-headers.robin",
+        "line": 1,
+        "raw_line": "File.WriteToCSVFile.WriteCSV VariableToWrite: PdfTablesHeaders[0].DataTable CSVFile: $'''C:\\\\Temp\\\\AiPromptsPdfCatalog_20260907\\\\table-csv-probe.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: True IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.Comma"
+      },
+      {
+        "path": "catalog/actions/if/current-item-status-equals.robin",
+        "line": 1,
+        "raw_line": "IF CurrentItem[Status] = $'''対象''' THEN"
+      },
+      {
+        "path": "catalog/flows/pdf-table-csv/roundtrip.robin",
+        "line": 2,
+        "raw_line": "File.WriteToCSVFile.WriteCSV VariableToWrite: PdfTablesHeaders[0].DataTable CSVFile: $'''C:\\\\Temp\\\\AiPromptsPdfCatalog_20260907\\\\table-csv-probe.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: True IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.Comma"
+      }
+    ],
+    "limitation": "Search locates candidates; acceptance comes from raw instructions and linked stage evidence, not absence of a keyword. No ignored logs were promoted to raw run evidence.",
+    "other_index_candidate": "PdfTablesHeaders[0].DataTable indexes the extracted-table list and exports a whole DataTable; it does not extract a DataTable cell."
+  },
+  "chains": {
+    "indexed_update": [
+      {
+        "path": "catalog/evidence/p3-datatable-cell-success-20260911.json",
+        "sha256": "a35df2c42f4058e2e01e83af7f0857e24435a67fb2cbe5610cca6dbabd236db5"
+      },
+      {
+        "path": "catalog/evidence/p3-datatable-cell-success-flow-20260911.robin",
+        "sha256": "218ec97aa79d5e4cbb6d3f66d995f9e0c9248eab47c04431a2eac4c2fff8b9cd"
+      },
+      {
+        "path": "catalog/evidence/p3-datatable-cell-reuse-20260913-paste-save.json",
+        "sha256": "ec661498caa2463cd53ef640635fa120b8508d1e7ea2f853037f4ee9f1509509"
+      },
+      {
+        "path": "catalog/evidence/p3-datatable-cell-reuse-20260913-recopy.robin",
+        "sha256": "218ec97aa79d5e4cbb6d3f66d995f9e0c9248eab47c04431a2eac4c2fff8b9cd"
+      },
+      {
+        "path": "catalog/evidence/p3-datatable-cell-reuse-20260913-run1.json",
+        "sha256": "601b7b42adc813482135046bfc013af6f6ec89503f946b02ac48cd81183ddf5a"
+      },
+      {
+        "path": "catalog/evidence/p3-datatable-cell-reuse-20260913-run2.json",
+        "sha256": "b1e070092ac2c6081b218a29ad97229b4d04d6bfc214212650aed19e3f5d1304"
+      }
+    ],
+    "whole_row_assignment": [
+      {
+        "path": "catalog/evidence/p3-datatable-foreach-success-20260911.json",
+        "sha256": "e558ae9e508cdd01ced52d24b6e1b6c5038f3e66af1bd21a3e8487e594fa01a4"
+      },
+      {
+        "path": "catalog/evidence/p3-datatable-foreach-success-flow-20260911-2row.robin",
+        "sha256": "3fe9881b262941ab9150bd2d883a0cf956291296328b3503c2af4811629ea981"
+      },
+      {
+        "path": "catalog/evidence/p3-datatable-foreach-reuse-20260913-paste-save.json",
+        "sha256": "debceeb6512ed9515cf6f4dfb01fdeb95bd3ffaff21ca60fcf247a2b7f76b312"
+      },
+      {
+        "path": "catalog/evidence/p3-datatable-foreach-reuse-20260913-recopy.robin",
+        "sha256": "3fe9881b262941ab9150bd2d883a0cf956291296328b3503c2af4811629ea981"
+      },
+      {
+        "path": "catalog/evidence/p3-datatable-foreach-reuse-20260913-run1.json",
+        "sha256": "61b76c0e0028396974e538f7c82d6c44a382bc7d5af62328aac3b805f9605651"
+      },
+      {
+        "path": "catalog/evidence/p3-datatable-foreach-reuse-20260913-run2.json",
+        "sha256": "d45851de6c4f70853ff2bf95625e1cf1958a3d3129ee1a44d99c6b8ea1ae0ec7"
+      }
+    ],
+    "copy_only_cell_reference": [
+      {
+        "path": "catalog/actions/if/current-item-status-equals.robin",
+        "sha256": "12a2c5b7bac32d98291560ae9bd1e170f256c5efdc35d88d47b0e6ad8987a35a"
+      },
+      {
+        "path": "catalog/index.json",
+        "sha256": "efd10a0082cdd74fdd123765e2b3e5e05aaafded3fa48f85a569a9b01b84f35c"
+      },
+      {
+        "path": "copilot/knowledge/PAD-Robin-02-Control.txt",
+        "sha256": "0caea76804e62d78c0c174add3f04acf6835d497220dc00cef256b03ddf0d7ea"
+      }
+    ],
+    "whole_table_filter_csv": [
+      {
+        "path": "catalog/flows/datatable-filter/roundtrip.robin",
+        "sha256": "c3027cfaa13e191b0e784fb3a6db4c573f8bfc83fb172d1a6394d7c1f5a55c29"
+      },
+      {
+        "path": "catalog/evidence/filter-t02-roundtrip2-run-2.json",
+        "sha256": "e66f38a5ee686bd7aaa4d431d50275d9a82c437436dd085f7a6f107c136da0c1"
+      }
+    ]
+  },
+  "findings": [
+    {
+      "chain": "indexed_update",
+      "instruction": "Variables.ModifyDataTableItem DataTable: DataTable ColumnNameOrIndex: 2 RowIndex: 0 Value: CellChanged",
+      "observation": "Original probe value viewer: A/10/CellChanged. Separate reuse Run1/Run2: 1 row, 3 columns.",
+      "decision": "Cell mutation and viewer inspection do not execute a cell-value read into downstream flow state."
+    },
+    {
+      "chain": "whole_row_assignment",
+      "instruction": "SET ForeachValue TO CurrentItem",
+      "observation": "Separate reuse both runs: 3 columns { Column1: B, Column2: 20, Column3: 対象2 }; 2-row table.",
+      "decision": "DataRow assignment is proven; scalar cell extraction is not."
+    },
+    {
+      "chain": "copy_only_cell_reference",
+      "instruction": "IF CurrentItem[Status] = $'''対象''' THEN",
+      "observation": "index: copied/saved true; re_pasted false; executed_in_flow and execution_evidence null.",
+      "decision": "No complete predecessor, separate-flow reuse, run, or branch-result observation. Keep column-name route optional unconfirmed."
+    },
+    {
+      "chain": "whole_table_filter_csv",
+      "instruction": "Variables.FilterDataTable -> File.WriteToCSVFile.WriteCSV",
+      "observation": "Selected rows exported as a table.",
+      "decision": "Existing CSV/filter acceptance remains valid; do not relabel whole-table filtering as scalar cell-read acceptance."
+    }
+  ],
+  "live_attempt": {
+    "flow": "無題 (2)",
+    "purpose": "C-only synthetic capture source, automatically named by PAD",
+    "power_fx_enabled": false,
+    "new_flow_create_clicks": 1,
+    "new_flows_created": 1,
+    "designer": {
+      "pid": 31664,
+      "session_id": 1,
+      "hwnd": 397676,
+      "title": "Power Automate | 無題 (2)",
+      "accessibility": null
+    },
+    "left_panel_action": "新しいデータ テーブルを作成する",
+    "root_search_input_applied": true,
+    "flow_name_type_text_attempts": 2,
+    "flow_name_input_applied": false,
+    "table_cell_type_text_attempts": 1,
+    "table_cell_direct_key_attempts": 1,
+    "table_cell_input_applied": false,
+    "result": "Creation succeeded with automatic naming. DataTable settings input failed to persist visually with both text and key APIs. Table edit and pending action were cancelled; final canvas shows 0 actions.",
+    "raw_robin_captured": false,
+    "saved_recopy": false,
+    "run1": "NOT_RUN",
+    "run2": "NOT_RUN",
+    "final_action_count": 0,
+    "final_ui": "C Designer open, no dialog, ready; empty flow preserved"
+  },
+  "counts": {
+    "pad_run_starts": 0,
+    "copilot_sends": 0,
+    "robin_pastes": 0,
+    "new_flow_creations": 1,
+    "t04_runs": 0,
+    "t10_runs": 0
+  },
+  "screenshots": [
+    {
+      "path": "catalog/evidence/c-cell-read-create-input-unapplied-20260914u.png",
+      "sha256": "32fb8004cb6a24cff553a43f3dd282024f25a5e12d9f194c5f130f7e86ffc607"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-empty-final-20260914u.png",
+      "sha256": "baad6585199126ed7890df26dbd0f046525b39ddbf06204343a9ad5e363e3007"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-left-panel-20260914u.png",
+      "sha256": "ddffe0bc174f55f4ac6c29aa5db878ab0fa5e86dd1a99e2e98788375e92b0621"
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-table-input-unapplied-20260914u.png",
+      "sha256": "60fb677c4c4190a5fdccbc3c6c0b49657fcee24c6b4e9199c0150edc8e5101f5"
+    }
+  ],
+  "boundaries": {
+    "c_cell_value_read": "NOT_PROVEN",
+    "required_remaining": [
+      "C-datatable-cell-value-read",
+      "E-independent-t04-run1-artifact",
+      "F-t10-strict-raw-bytes"
+    ],
+    "t04_case_b": "Historical observation preserved; new nonzero Designer belongs to C, not proof of T04 target correspondence. T04 not resumed.",
+    "t04_old_run1": "NOT_CAPTURED",
+    "t10_strict": "NOT_PROVEN",
+    "package": "20260913e unchanged",
+    "new_mandatory_column_name_or_index_boundaries": false
+  },
+  "next_operation": "Revalidate the existing C-only empty flow by title, PID/session and empty canvas. Resolve modal input targeting with a supported alternative in a separate turn; do not repeat the same text/key sequence. Then collect one minimal measured cell-read route, raw copy, UTF-8 file, separate empty reuse, save/recopy, and two observed runs. Do not create another flow just because this one is unnamed.",
+  "derived_records": "Only the A-G trace reference and progress log change: C remains unproven, so current-package-status, completion audit, coverage/index, instruction and knowledge stay unchanged."
+}
