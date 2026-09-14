@@ -73,6 +73,10 @@ Check ($coverage.final_a_g_trace -eq $tracePath.Replace('catalog/', '')) 'covera
 Check ($index.final_a_g_trace -eq $tracePath.Replace('catalog/', '')) 'index registers A-G trace'
 Check ($audit.final_a_g_trace -eq $tracePath.Replace('catalog/', '')) 'completion audit registers A-G trace'
 Check ($package.final_a_g_trace -eq $tracePath.Replace('catalog/', '')) 'current package registers A-G trace'
+foreach ($aggregate in @('catalog/coverage.json', 'catalog/index.json', 'catalog/evidence/current-package-status-20260913.json', 'catalog/evidence/issue5-completion-audit-20260913.json')) {
+    $aggregateText = [IO.File]::ReadAllText((FullPath $aggregate), $utf8)
+    Check ($aggregateText.Contains('evidence/t04-independent-current-pad-session-diagnostic-20260914s.json')) ('aggregate registers T04 session diagnostic: ' + $aggregate)
+}
 Check ($audit.final_evidence_audit.status -eq 'PARTIAL_REQUIRED_TRACEABILITY_GAPS') 'completion audit remains partial'
 Check (@($audit.final_evidence_audit.required_gaps).Count -gt 0) 'completion audit keeps required gaps'
 

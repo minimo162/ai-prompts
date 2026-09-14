@@ -6623,7 +6623,8 @@
       "evidence_reconciliation_status": "candidate_partial_preserved_run1_snapshot_missing_new_pair_not_started",
       "window_observation": "evidence/t04-independent-current-pad-window-observation-20260914f.json",
       "latest_window_observation": "evidence/t04-independent-current-pad-window-diagnostic-20260914r.json",
-      "window_diagnostic": "evidence/t04-independent-current-pad-window-diagnostic-20260914r.json"
+      "window_diagnostic": "evidence/t04-independent-current-pad-window-diagnostic-20260914r.json",
+      "session_diagnostic": "evidence/t04-independent-current-pad-session-diagnostic-20260914s.json"
     },
     {
       "id": "normal-chat-p34-current-package-live-2026-09-14",
