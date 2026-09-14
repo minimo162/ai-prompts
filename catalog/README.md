@@ -1,5 +1,9 @@
 # PAD実アクションのRobinカタログ
 
+## 2026-09-14 現行版集約訂正・負例v2受入
+
+集約状態を現行個別証跡へ整合させた。P3-1〜P3-6はすべて20260913eの同版指示・bundleで生成、無修正貼付け、保存・再コピー、2回Runまで確認済みで、P3-4〜P3-6の旧「未受入」表示は派生表示の残りとして訂正した。63桁のinstruction SHAは原送信・回答記録を変更せず、`evidence/p3-current-sha-correction-20260914e.json`へ訂正根拠と参照を記録した。負例v2は固定依頼を通常M365 Copilotへ1回送信し、N1〜N3を項目別に未確認受入（理由・必要証拠・禁止後続処理あり）とした。回答は無修正保存し、コードフェンス・Robin命令・疑似コード・未採取引数の推測はなく、PAD貼付け／Run／未登録Web操作は行っていない。旧finald負例PASSは履歴として保持し現行版へ継承していない。残件はT04形式不受入・独立T04候補partial、T10厳密保持NOT_PROVEN、最終A〜G監査であり、Issue #5/#27はOPEN / partialを維持する。
+
 ### 2026-09-14 現行版P3-1追跡
 
 現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を通常M365 Copilot新規会話へ2実添付して1回送信し、4行Robinを無修正で採取した。専用空フロー `RobinKnowledgeP31CurrentBundleLive20260914e`（Designer PID 11016）で貼付け・保存・再コピー・2回Runを行い、`CatalogList=[CatalogItem, SecondItem]`、`NewVar=SecondItem`を確認した。証跡は `evidence/p31-current-bundle-live-20260914e.json`。旧20260912 P3-1 PASSを現行版へ移していない。P3-4〜P3-6・負例v2・T10厳密保持・A〜G監査は未完了で、Issue #5/#27はOPEN / partial。

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14",
+  "case": "negative_suite",
+  "suite": "v2",
+  "status": "PASS_NEGATIVE_CURRENT_20260914E_FAIL_CLOSED",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/36bf552c-e02c-4b49-a4ac-7d42926f079f",
+  "browser": "Google Chrome normal M365 Copilot chat",
+  "model_label_on_page": "Think Deeper",
+  "version_label": "20260913e",
+  "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+  "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+  "bundle_manifest": "copilot/knowledge-bundle-manifest-20260913e.json",
+  "attachments_in_user_message": ["agent-instructions.txt", "PAD-Robin-Knowledge-Bundle.txt"],
+  "send_count": 1,
+  "body": {
+    "sent_body_file": "../generated/normal-chat-20260914e-negative-suite/sent-body.txt",
+    "fixed_prompt": "catalog/generated/normal-chat-finald-20260912-negative-suite/prompt.txt",
+    "fixed_expectation": "catalog/generated/normal-chat-finald-20260912-negative-suite/expectation.json",
+    "requested_sha256_utf8": "5779edc597e47c141765c1c5186b045f5552f4f02879de6662a724a5b2386da8",
+    "composer_body_verified": true
+  },
+  "generated_response": "../generated/normal-chat-20260914e-negative-suite/response.txt",
+  "result": "../generated/normal-chat-20260914e-negative-suite/result.json",
+  "response": {
+    "chars": 1677,
+    "sha256": "139cde5709688d70d64b245924f13c9c4fb954f42b2d1892d5b1cdf8952d6dba",
+    "pre_elements": 0,
+    "code_elements": 0,
+    "robin_token_matches": 0,
+    "raw_unmodified": true,
+    "captured_via": "Copilot response content container innerText after one normal-chat send"
+  },
+  "per_item": {
+    "N1": "unconfirmed; 3+ nesting and exiting the outer For each remain unmeasured; evidence and prohibited downstream actions are listed",
+    "N2": "unconfirmed; measured DataTable pieces are distinguished from the unmeasured column-name direct-reference combination",
+    "N3": "unconfirmed; only the measured local page/captured elements are accepted; unregistered selectors and WebDriver arguments remain unmeasured"
+  },
+  "acceptance": "PASS_NEGATIVE_CURRENT_20260914E_FAIL_CLOSED",
+  "over_refusal_of_measured_items": false,
+  "pad_run": false,
+  "unregistered_web_operations": false,
+  "historical_finald": {
+    "status": "PRESERVED_HISTORICAL_NOT_TRANSFERRED",
+    "evidence": "evidence/negative-suite-finald-20260912-acceptance-20260912.json",
+    "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e"
+  }
+}

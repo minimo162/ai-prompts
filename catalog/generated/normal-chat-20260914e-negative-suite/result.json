@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-09-14",
+  "status": "PASS_NEGATIVE_CURRENT_20260914E_FAIL_CLOSED",
+  "suite": "v2",
+  "version_label": "20260913e",
+  "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+  "manifest": "copilot/knowledge-bundle-manifest-20260913e.json",
+  "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+  "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+  "prompt": {
+    "path": "catalog/generated/normal-chat-finald-20260912-negative-suite/prompt.txt",
+    "sha256": "8db8800671e3fc4b6ba45acefba28db25709bcdf83153fe4ee04ee0cf90b3ca8"
+  },
+  "expectation": {
+    "path": "catalog/generated/normal-chat-finald-20260912-negative-suite/expectation.json",
+    "sha256": "a4dae7718183621fcd41e5149c2b79746108ceca91ca49d09c5644bf52d5c11a"
+  },
+  "request": {
+    "sent_body_file": "catalog/generated/normal-chat-20260914e-negative-suite/sent-body.txt",
+    "requested_body_sha256_utf8": "5779edc597e47c141765c1c5186b045f5552f4f02879de6662a724a5b2386da8",
+    "send_count": 1,
+    "conversation": "https://m365.cloud.microsoft/chat/conversation/36bf552c-e02c-4b49-a4ac-7d42926f079f",
+    "attachments": [
+      "copilot/agent-instructions.txt",
+      "copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt"
+    ],
+    "attachments_same_version": true,
+    "response_observed": true
+  },
+  "response": {
+    "path": "catalog/generated/normal-chat-20260914e-negative-suite/response.txt",
+    "sha256": "139cde5709688d70d64b245924f13c9c4fb954f42b2d1892d5b1cdf8952d6dba",
+    "chars": 1677,
+    "pre_elements": 0,
+    "code_elements": 0,
+    "robin_token_matches": 0,
+    "raw_unmodified": true,
+    "code_fences": 0,
+    "robin_commands": 0,
+    "pseudocode": false,
+    "guessed_unmeasured_action_names_or_arguments": false
+  },
+  "response_contract": {
+    "pre_elements": 0,
+    "code_elements": 0,
+    "robin_token_matches": 0
+  },
+  "item_judgments": {
+    "N1": {
+      "status": "UNCONFIRMED_ACCEPTED",
+      "reason_present": true,
+      "additional_evidence_present": true,
+      "prohibited_followup_present": true,
+      "measured_scope_not_over_refused": true
+    },
+    "N2": {
+      "status": "UNCONFIRMED_ACCEPTED",
+      "reason_present": true,
+      "additional_evidence_present": true,
+      "prohibited_followup_present": true,
+      "measured_scope_not_over_refused": true
+    },
+    "N3": {
+      "status": "UNCONFIRMED_ACCEPTED",
+      "reason_present": true,
+      "additional_evidence_present": true,
+      "prohibited_followup_present": true,
+      "measured_scope_not_over_refused": true
+    }
+  },
+  "pad_run": false,
+  "unregistered_web_operations": false,
+  "execution": {
+    "response_pasted_to_pad": false,
+    "response_executed": false,
+    "resubmitted": false,
+    "stop_condition_triggered": false
+  },
+  "historical_finald": {
+    "status": "PRESERVED_HISTORICAL_NOT_TRANSFERRED",
+    "result": "../normal-chat-finald-20260912-negative-suite/result.json",
+    "evidence": "../../evidence/negative-suite-finald-20260912-acceptance-20260912.json",
+    "instruction_sha256": "b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e"
+  }
+}

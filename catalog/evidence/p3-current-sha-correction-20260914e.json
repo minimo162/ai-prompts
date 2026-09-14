@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-09-14",
+  "status": "CORRECTION_SUPPLEMENT_DERIVED_STATE_ONLY",
+  "scope": "20260913e instruction SHA transcription",
+  "canonical": {
+    "source": "copilot/agent-instructions.txt",
+    "manifest": "copilot/knowledge-bundle-manifest-20260913e.json",
+    "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+    "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+    "source_hash_recomputed": true,
+    "manifest_hash_matches_source": true
+  },
+  "observed_malformed_value": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f5081241e79c",
+  "raw_records_preserved": [
+    {
+      "path": "catalog/evidence/p34-current-bundle-live-20260914e.json",
+      "fields": ["package.instruction.sha256", "attachments[0].sha256"],
+      "unchanged": true
+    },
+    {
+      "path": "catalog/evidence/p35-current-bundle-live-20260914e.json",
+      "fields": ["package.instruction.sha256", "attachments[0].sha256"],
+      "unchanged": true
+    },
+    {
+      "path": "catalog/evidence/p36-current-bundle-live-20260914e.json",
+      "fields": ["instruction_sha256", "attachments[0].sha256"],
+      "unchanged": true
+    }
+  ],
+  "derived_records_corrected": [
+    {
+      "path": "catalog/evidence/current-package-status-20260913.json",
+      "fields": ["p3_positive_cases.cases.P3-4.current_version_20260914e.instruction_sha256", "p3_positive_cases.cases.P3-5.current_version_20260914e.instruction_sha256", "p3_positive_cases.cases.P3-6.current_version_20260914e.instruction_sha256"],
+      "from": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f5081241e79c",
+      "to": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c"
+    },
+    {
+      "path": "catalog/coverage.json",
+      "fields": ["current_package.instruction_sha256", "candidate_generation_20260913.instruction_sha256", "candidate_generation_20260913.p34_current_20260914e.instruction_sha256", "candidate_generation_20260913.p35_current_20260914e.instruction_sha256", "candidate_generation_20260913.p36_current_20260914e.instruction_sha256"],
+      "from": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f5081241e79c",
+      "to": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c"
+    },
+    {
+      "path": "catalog/index.json",
+      "fields": ["current P3-4/P3-5/P3-6 instruction_sha256 entries"],
+      "from": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f5081241e79c",
+      "to": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c"
+    }
+  ],
+  "rationale": "The canonical source hash was recomputed from copilot/agent-instructions.txt and the manifest was checked as the binding version record. The malformed value is 63 hex characters and cannot prove same-version identity. Original P3-4/P3-5/P3-6 live send/response records are retained byte-for-byte; only derived aggregate/index/coverage references are corrected.",
+  "issue_history_note": "Issue #5 and #27 bodies/comments contain historical 63-character transcriptions; those Issue records are not treated as source evidence and are left unchanged.",
+  "identity_proven": ["P3-4", "P3-5", "P3-6"],
+  "not_proven": []
+}
