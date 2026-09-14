@@ -1,4 +1,11 @@
 # Robinナレッジ検証報告
+
+## 2026-09-14 Cセル値読取りの補完（20260914v）
+
+実アクションから採取した `SET CellReadValue TO DataTable[0][0]` を、別空フローへ無修正貼付け・保存・再オープン後に2回実行し、Text値 `CRead-20260914v` と一致しました。前段は1行2列の合成DataTableです。4回の原文コピーは174 bytesで一致し、Run2前には値をクリアしています。Run2の観測補助例外は、追加Runせず同一実行を読み取り直して確認しました。
+
+[原証跡・期待値・段階別判定](../catalog/evidence/c-cell-read-20260914v/acceptance.json)。Copilot送信0回、PAD Run 2回。数値添字0/0のネイティブ再利用証跡であり、新しいCopilot生成合格や列名構文の保証ではありません。20260913e instruction/bundleは変更していません。必須残件は独立T04 Run1成果物とT10 strict raw-byte保持の2件で、Issue #5/#27はOPEN / partialを維持します。過去の不成立・未採取記録は以下に保存しています。
+
 ## 2026-09-14 集約訂正・現行負例v2受入
 
 P3-1〜P3-6の現行版個別証跡はすべて同版指示・bundleに結び付き、派生集約のP3-4〜P3-6未受入表示を訂正した。63桁SHAの原記録は変更せず、訂正根拠と参照を`catalog/evidence/p3-current-sha-correction-20260914e.json`へ残した。固定負例v2（N1〜N3）は通常M365 Copilot新規会話へ1回送信し、回答原文を無修正保存した。三項目とも未確認受入で、理由・必要証拠・禁止後続処理を満たし、コードフェンス・Robin命令・疑似コード・未採取アクション名／引数の推測はない。PAD貼付け・Run・未登録Web操作は行っていない。旧finald負例PASSは履歴のまま現行版へ移していない。残件はT04形式不受入・独立T04候補partial、T10厳密保持NOT_PROVEN、A〜G監査であり、Issue #5/#27はOPEN / partialを維持する。

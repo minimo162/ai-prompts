@@ -357,7 +357,7 @@
     "T06 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after CRLF normalization, Word body comparison passed, and the pre-existing output was moved aside and restored.",
     "T07 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after CRLF normalization, PAGE_TOKEN_A2 was present without PAGE_TOKEN_A1, input PDF was unchanged, and the pre-existing output was restored.",
     "T08 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after explicit whitespace normalization, action-level FileNotFoundError set NewVar=named and LastError on both runs, block-level user-defined FileNotFound remains NOT_PROVEN, and no downstream write/marker/publication occurred.",
-    "A-G required trace is still partial: C cell-value read, independent T04 Run1 artifact gate, and strict T10 raw-byte preservation remain unproven.",
+    "C cell-value read is proven by native numeric [0][0] text read in a separate empty reuse flow, two runs with fixed expected value; Run2 observation recovered without another run. Required remaining work: independent T04 Run1 artifact and T10 strict raw-byte preservation. Issues #5/#27 remain OPEN / partial; canonical 20260913e and generation acceptance are unchanged.",
     "T04 live continuation is blocked until a stable observable PAD Designer window and target-flow correspondence are available."
   ],
   "optional_unconfirmed": [
@@ -380,7 +380,7 @@
       "condition": "separate source, response-origin, and PAD recopy byte snapshots are required"
     }
   ],
-  "result": "Historical finald 79245787 acceptance is preserved. Current canonical package 20260913e is reconciled on main 7cc2c18b2a7f521f770c47c48cbbf4715d228979 after PR #32. Required A-G evidence gaps, optional unconfirmed boundaries, and external blockers are separated; C cell-value read, independent T04 Run1 artifact, and strict T10 raw bytes remain open. Issue #5/#27 stay OPEN / partial.",
+  "result": "C cell-value read is proven by native numeric [0][0] text read in a separate empty reuse flow, two runs with fixed expected value; Run2 observation recovered without another run. Required remaining work: independent T04 Run1 artifact and T10 strict raw-byte preservation. Issues #5/#27 remain OPEN / partial; canonical 20260913e and generation acceptance are unchanged.",
   "final_evidence_audit": {
     "status": "PARTIAL_REQUIRED_TRACEABILITY_GAPS",
     "current_main_commit": "7cc2c18b2a7f521f770c47c48cbbf4715d228979",
@@ -390,10 +390,7 @@
     "pr_submission_ready": false,
     "report": "docs/robin-knowledge-validation.md",
     "required_gaps": [
-      "The canonical instruction WAIT 500→WAIT 1 correction is fixed in 20260913e. Because instruction bytes changed, fresh same-version acceptance is required; do not relabel historical finald PASS as 20260913e.",
-      "T03 2026-09-13 request-only correction is traced to current canonical 20260913e and PAD accepted; it does not certify the original request without explicit counters, and no historical finald PASS was transferred.",
       "T04 2026-09-13 raw generations remain format-not-accepted; fresh-conversation attempt-3 confirms response-origin arrow escapes, and no unescape or repair was applied. Independent 20260914e generation has clean arrows and two PAD runs, but lacks a run1 xlsx snapshot and remains candidate_partial.",
-      "C: saved cell probe proves indexed cell update, not a cell-value read; a dedicated runtime cell-value read record is still required. Column-name row-loop syntax is an optional boundary and is not promoted to a blocker.",
       "T10: derived audit evidence/t10-strict-preservation-audit-20260913.json proves functional execution separately and proves normalized content scope (only lines 2 and 4 changed; zero outside-line changes), but raw source-to-generation/source-to-recopy byte equality is false because source is CRLF/no-final-LF and generated/recopied forms differ. The independent 20260914e run adds fresh chat/PAD/output evidence but has the same serialization boundary. Keep strict preservation NOT_PROVEN and do not promote functional runs to full T10 strict acceptance."
     ],
     "t10_strict_preservation": {
@@ -457,6 +454,28 @@
       "code_elements": 0,
       "new_messages_sent": 0,
       "note": "Reopened the saved conversation in Chrome through CUA; all answer paragraphs and citation markers correspond to saved response.txt. No new generation or PAD execution."
-    }
+    },
+    "accepted_scope_notes": [
+      "The canonical instruction WAIT 500→WAIT 1 correction is fixed in 20260913e. Because instruction bytes changed, fresh same-version acceptance is required; do not relabel historical finald PASS as 20260913e.",
+      "T03 2026-09-13 request-only correction is traced to current canonical 20260913e and PAD accepted; it does not certify the original request without explicit counters, and no historical finald PASS was transferred."
+    ],
+    "resolved_required_gaps": [
+      {
+        "previous_statement": "C: saved cell probe proves indexed cell update, not a cell-value read; a dedicated runtime cell-value read record is still required. Column-name row-loop syntax is an optional boundary and is not promoted to a blocker.",
+        "resolution": "C cell-value read is proven by native numeric [0][0] text read in a separate empty reuse flow, two runs with fixed expected value; Run2 observation recovered without another run. Required remaining work: independent T04 Run1 artifact and T10 strict raw-byte preservation. Issues #5/#27 remain OPEN / partial; canonical 20260913e and generation acceptance are unchanged.",
+        "evidence": "catalog/evidence/c-cell-read-20260914v/acceptance.json"
+      }
+    ]
+  },
+  "c_cell_value_read_supplement": {
+    "evidence": "catalog/evidence/c-cell-read-20260914v/acceptance.json",
+    "status": "PASS_REQUIRED_CELL_READ_NATIVE_REUSE",
+    "scope": "numeric row 0 / column 0, Text; native reuse only",
+    "pad_runs": 2,
+    "copilot_sends": 0,
+    "remaining_required": [
+      "E-independent-t04-run1-artifact",
+      "F-t10-strict-raw-bytes"
+    ]
   }
 }

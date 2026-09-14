@@ -1,0 +1,494 @@
+{
+  "start": {
+    "Cached": {
+      "ControlType": null,
+      "LocalizedControlType": null,
+      "Name": null,
+      "AcceleratorKey": null,
+      "AccessKey": null,
+      "HasKeyboardFocus": null,
+      "IsKeyboardFocusable": null,
+      "IsEnabled": null,
+      "BoundingRectangle": null,
+      "HelpText": null,
+      "IsControlElement": null,
+      "IsContentElement": null,
+      "LabeledBy": null,
+      "AutomationId": null,
+      "ItemType": null,
+      "IsPassword": null,
+      "ClassName": null,
+      "NativeWindowHandle": null,
+      "ProcessId": null,
+      "IsOffscreen": null,
+      "Orientation": null,
+      "FrameworkId": null,
+      "IsRequiredForForm": null,
+      "ItemStatus": null
+    },
+    "Current": {
+      "ControlType": {
+        "LocalizedControlType": "button",
+        "Id": 50000,
+        "ProgrammaticName": "ControlType.Button"
+      },
+      "LocalizedControlType": "ボタン",
+      "Name": "実行",
+      "AcceleratorKey": "",
+      "AccessKey": "",
+      "HasKeyboardFocus": false,
+      "IsKeyboardFocusable": true,
+      "IsEnabled": true,
+      "BoundingRectangle": {
+        "IsEmpty": false,
+        "Location": {
+          "X": 439.0,
+          "Y": 60.0
+        },
+        "Size": {
+          "IsEmpty": false,
+          "Width": 51.0,
+          "Height": 51.0
+        },
+        "X": 439.0,
+        "Y": 60.0,
+        "Width": 51.0,
+        "Height": 51.0,
+        "Left": 439.0,
+        "Top": 60.0,
+        "Right": 490.0,
+        "Bottom": 111.0,
+        "TopLeft": {
+          "X": 439.0,
+          "Y": 60.0
+        },
+        "TopRight": {
+          "X": 490.0,
+          "Y": 60.0
+        },
+        "BottomLeft": {
+          "X": 439.0,
+          "Y": 111.0
+        },
+        "BottomRight": {
+          "X": 490.0,
+          "Y": 111.0
+        }
+      },
+      "HelpText": "実行",
+      "IsControlElement": true,
+      "IsContentElement": true,
+      "LabeledBy": null,
+      "AutomationId": "StartFlowButton",
+      "ItemType": "",
+      "IsPassword": false,
+      "ClassName": "Button",
+      "NativeWindowHandle": 0,
+      "ProcessId": 16616,
+      "IsOffscreen": false,
+      "Orientation": 0,
+      "FrameworkId": "WPF",
+      "IsRequiredForForm": false,
+      "ItemStatus": ""
+    },
+    "CachedParent": null,
+    "CachedChildren": null
+  },
+  "stop": {
+    "Cached": {
+      "ControlType": null,
+      "LocalizedControlType": null,
+      "Name": null,
+      "AcceleratorKey": null,
+      "AccessKey": null,
+      "HasKeyboardFocus": null,
+      "IsKeyboardFocusable": null,
+      "IsEnabled": null,
+      "BoundingRectangle": null,
+      "HelpText": null,
+      "IsControlElement": null,
+      "IsContentElement": null,
+      "LabeledBy": null,
+      "AutomationId": null,
+      "ItemType": null,
+      "IsPassword": null,
+      "ClassName": null,
+      "NativeWindowHandle": null,
+      "ProcessId": null,
+      "IsOffscreen": null,
+      "Orientation": null,
+      "FrameworkId": null,
+      "IsRequiredForForm": null,
+      "ItemStatus": null
+    },
+    "Current": {
+      "ControlType": {
+        "LocalizedControlType": "button",
+        "Id": 50000,
+        "ProgrammaticName": "ControlType.Button"
+      },
+      "LocalizedControlType": "ボタン",
+      "Name": "停止",
+      "AcceleratorKey": "",
+      "AccessKey": "",
+      "HasKeyboardFocus": false,
+      "IsKeyboardFocusable": false,
+      "IsEnabled": false,
+      "BoundingRectangle": {
+        "IsEmpty": false,
+        "Location": {
+          "X": 490.0,
+          "Y": 60.0
+        },
+        "Size": {
+          "IsEmpty": false,
+          "Width": 51.0,
+          "Height": 51.0
+        },
+        "X": 490.0,
+        "Y": 60.0,
+        "Width": 51.0,
+        "Height": 51.0,
+        "Left": 490.0,
+        "Top": 60.0,
+        "Right": 541.0,
+        "Bottom": 111.0,
+        "TopLeft": {
+          "X": 490.0,
+          "Y": 60.0
+        },
+        "TopRight": {
+          "X": 541.0,
+          "Y": 60.0
+        },
+        "BottomLeft": {
+          "X": 490.0,
+          "Y": 111.0
+        },
+        "BottomRight": {
+          "X": 541.0,
+          "Y": 111.0
+        }
+      },
+      "HelpText": "停止",
+      "IsControlElement": true,
+      "IsContentElement": true,
+      "LabeledBy": null,
+      "AutomationId": "Button",
+      "ItemType": "",
+      "IsPassword": false,
+      "ClassName": "Button",
+      "NativeWindowHandle": 0,
+      "ProcessId": 16616,
+      "IsOffscreen": false,
+      "Orientation": 0,
+      "FrameworkId": "WPF",
+      "IsRequiredForForm": false,
+      "ItemStatus": ""
+    },
+    "CachedParent": null,
+    "CachedChildren": null
+  },
+  "save": {
+    "Cached": {
+      "ControlType": null,
+      "LocalizedControlType": null,
+      "Name": null,
+      "AcceleratorKey": null,
+      "AccessKey": null,
+      "HasKeyboardFocus": null,
+      "IsKeyboardFocusable": null,
+      "IsEnabled": null,
+      "BoundingRectangle": null,
+      "HelpText": null,
+      "IsControlElement": null,
+      "IsContentElement": null,
+      "LabeledBy": null,
+      "AutomationId": null,
+      "ItemType": null,
+      "IsPassword": null,
+      "ClassName": null,
+      "NativeWindowHandle": null,
+      "ProcessId": null,
+      "IsOffscreen": null,
+      "Orientation": null,
+      "FrameworkId": null,
+      "IsRequiredForForm": null,
+      "ItemStatus": null
+    },
+    "Current": {
+      "ControlType": {
+        "LocalizedControlType": "button",
+        "Id": 50000,
+        "ProgrammaticName": "ControlType.Button"
+      },
+      "LocalizedControlType": "ボタン",
+      "Name": "保存",
+      "AcceleratorKey": "",
+      "AccessKey": "",
+      "HasKeyboardFocus": false,
+      "IsKeyboardFocusable": true,
+      "IsEnabled": true,
+      "BoundingRectangle": {
+        "IsEmpty": false,
+        "Location": {
+          "X": 388.0,
+          "Y": 60.0
+        },
+        "Size": {
+          "IsEmpty": false,
+          "Width": 51.0,
+          "Height": 51.0
+        },
+        "X": 388.0,
+        "Y": 60.0,
+        "Width": 51.0,
+        "Height": 51.0,
+        "Left": 388.0,
+        "Top": 60.0,
+        "Right": 439.0,
+        "Bottom": 111.0,
+        "TopLeft": {
+          "X": 388.0,
+          "Y": 60.0
+        },
+        "TopRight": {
+          "X": 439.0,
+          "Y": 60.0
+        },
+        "BottomLeft": {
+          "X": 388.0,
+          "Y": 111.0
+        },
+        "BottomRight": {
+          "X": 439.0,
+          "Y": 111.0
+        }
+      },
+      "HelpText": "保存",
+      "IsControlElement": true,
+      "IsContentElement": true,
+      "LabeledBy": null,
+      "AutomationId": "Button",
+      "ItemType": "",
+      "IsPassword": false,
+      "ClassName": "Button",
+      "NativeWindowHandle": 0,
+      "ProcessId": 16616,
+      "IsOffscreen": false,
+      "Orientation": 0,
+      "FrameworkId": "WPF",
+      "IsRequiredForForm": false,
+      "ItemStatus": ""
+    },
+    "CachedParent": null,
+    "CachedChildren": null
+  },
+  "workspace": {
+    "Cached": {
+      "ControlType": null,
+      "LocalizedControlType": null,
+      "Name": null,
+      "AcceleratorKey": null,
+      "AccessKey": null,
+      "HasKeyboardFocus": null,
+      "IsKeyboardFocusable": null,
+      "IsEnabled": null,
+      "BoundingRectangle": null,
+      "HelpText": null,
+      "IsControlElement": null,
+      "IsContentElement": null,
+      "LabeledBy": null,
+      "AutomationId": null,
+      "ItemType": null,
+      "IsPassword": null,
+      "ClassName": null,
+      "NativeWindowHandle": null,
+      "ProcessId": null,
+      "IsOffscreen": null,
+      "Orientation": null,
+      "FrameworkId": null,
+      "IsRequiredForForm": null,
+      "ItemStatus": null
+    },
+    "Current": {
+      "ControlType": {
+        "LocalizedControlType": "list view",
+        "Id": 50008,
+        "ProgrammaticName": "ControlType.List"
+      },
+      "LocalizedControlType": "リスト ビュー",
+      "Name": "アクション",
+      "AcceleratorKey": "",
+      "AccessKey": "",
+      "HasKeyboardFocus": false,
+      "IsKeyboardFocusable": true,
+      "IsEnabled": true,
+      "BoundingRectangle": {
+        "IsEmpty": true,
+        "Location": {
+          "X": "Infinity",
+          "Y": "Infinity"
+        },
+        "Size": {
+          "IsEmpty": true,
+          "Width": "-Infinity",
+          "Height": "-Infinity"
+        },
+        "X": "Infinity",
+        "Y": "Infinity",
+        "Width": "-Infinity",
+        "Height": "-Infinity",
+        "Left": "Infinity",
+        "Top": "Infinity",
+        "Right": "-Infinity",
+        "Bottom": "-Infinity",
+        "TopLeft": {
+          "X": "Infinity",
+          "Y": "Infinity"
+        },
+        "TopRight": {
+          "X": "-Infinity",
+          "Y": "Infinity"
+        },
+        "BottomLeft": {
+          "X": "Infinity",
+          "Y": "-Infinity"
+        },
+        "BottomRight": {
+          "X": "-Infinity",
+          "Y": "-Infinity"
+        }
+      },
+      "HelpText": "",
+      "IsControlElement": true,
+      "IsContentElement": true,
+      "LabeledBy": null,
+      "AutomationId": "ProgramItemsListBoxActions",
+      "ItemType": "",
+      "IsPassword": false,
+      "ClassName": "ListBox",
+      "NativeWindowHandle": 0,
+      "ProcessId": 16616,
+      "IsOffscreen": false,
+      "Orientation": 0,
+      "FrameworkId": "WPF",
+      "IsRequiredForForm": false,
+      "ItemStatus": ""
+    },
+    "CachedParent": null,
+    "CachedChildren": null
+  },
+  "subflows": [
+    "Main"
+  ],
+  "actual_subflows": [
+    "Main"
+  ],
+  "status": "ready",
+  "status_id": "Flow_status_ready",
+  "status_name": "状態: 準備完了",
+  "window": {
+    "Cached": {
+      "ControlType": null,
+      "LocalizedControlType": null,
+      "Name": null,
+      "AcceleratorKey": null,
+      "AccessKey": null,
+      "HasKeyboardFocus": null,
+      "IsKeyboardFocusable": null,
+      "IsEnabled": null,
+      "BoundingRectangle": null,
+      "HelpText": null,
+      "IsControlElement": null,
+      "IsContentElement": null,
+      "LabeledBy": null,
+      "AutomationId": null,
+      "ItemType": null,
+      "IsPassword": null,
+      "ClassName": null,
+      "NativeWindowHandle": null,
+      "ProcessId": null,
+      "IsOffscreen": null,
+      "Orientation": null,
+      "FrameworkId": null,
+      "IsRequiredForForm": null,
+      "ItemStatus": null
+    },
+    "Current": {
+      "ControlType": {
+        "LocalizedControlType": "window",
+        "Id": 50032,
+        "ProgrammaticName": "ControlType.Window"
+      },
+      "LocalizedControlType": "ウィンドウ",
+      "Name": "Power Automate | RobinKnowledgeCCellReadReuse_20260914v",
+      "AcceleratorKey": "",
+      "AccessKey": "",
+      "HasKeyboardFocus": false,
+      "IsKeyboardFocusable": true,
+      "IsEnabled": true,
+      "BoundingRectangle": {
+        "IsEmpty": false,
+        "Location": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Size": {
+          "IsEmpty": false,
+          "Width": 900.0,
+          "Height": 677.0
+        },
+        "X": 0.0,
+        "Y": 0.0,
+        "Width": 900.0,
+        "Height": 677.0,
+        "Left": 0.0,
+        "Top": 0.0,
+        "Right": 900.0,
+        "Bottom": 677.0,
+        "TopLeft": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "TopRight": {
+          "X": 900.0,
+          "Y": 0.0
+        },
+        "BottomLeft": {
+          "X": 0.0,
+          "Y": 677.0
+        },
+        "BottomRight": {
+          "X": 900.0,
+          "Y": 677.0
+        }
+      },
+      "HelpText": "",
+      "IsControlElement": true,
+      "IsContentElement": true,
+      "LabeledBy": null,
+      "AutomationId": "DesignerMainWindow",
+      "ItemType": "",
+      "IsPassword": false,
+      "ClassName": "WinAutomationWindow",
+      "NativeWindowHandle": 395278,
+      "ProcessId": 16616,
+      "IsOffscreen": false,
+      "Orientation": 0,
+      "FrameworkId": "WPF",
+      "IsRequiredForForm": false,
+      "ItemStatus": ""
+    },
+    "CachedParent": null,
+    "CachedChildren": null
+  },
+  "running": false,
+  "execution_observed": false,
+  "idle": true,
+  "editable": true,
+  "can_run": true,
+  "ready": true,
+  "errors": 0,
+  "errors_known": true
+}

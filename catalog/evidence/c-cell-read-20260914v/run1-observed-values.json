@@ -1,0 +1,26 @@
+{
+  "observed_at": "2026-09-14T13:20:44.3074205Z",
+  "flow": "Power Automate | RobinKnowledgeCCellReadReuse_20260914v",
+  "run": 1,
+  "status": "ready",
+  "running": false,
+  "errors": 0,
+  "errors_known": true,
+  "variables": [
+    {
+      "variable": "CellReadValue",
+      "preview": "CRead-20260914v",
+      "item_type": "",
+      "help": ""
+    },
+    {
+      "variable": "DataTable",
+      "preview": "1 行, 2 列",
+      "item_type": "",
+      "help": ""
+    }
+  ],
+  "expected_scalar_matched": true,
+  "value_type_visual": "Text icon T in run1.png",
+  "source_sha256": "aacd4c595c7226d4445125074bbb6c71dd7d329d4fd4b752c5b61c1d55fd08c3"
+}

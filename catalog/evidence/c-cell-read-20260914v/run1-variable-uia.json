@@ -1,0 +1,17 @@
+[
+  {
+    "name": "変数   に値  [0][0] を割り当てる",
+    "id": "ProgramItemTemplateSummaryTextBlock",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "CellReadValue",
+    "id": "",
+    "type": "ControlType.Text"
+  },
+  {
+    "name": "DataTable",
+    "id": "",
+    "type": "ControlType.Text"
+  }
+]

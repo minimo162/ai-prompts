@@ -29,6 +29,11 @@ $index = Read-Json 'catalog/index.json'
 $audit = Read-Json 'catalog/evidence/issue5-completion-audit-20260913.json'
 $package = Read-Json 'catalog/evidence/current-package-status-20260913.json'
 $liveRead = Read-Json 'catalog/evidence/issue-live-read-20260914m.json'
+foreach ($record in @($coverage, $index, $audit, $package)) {
+    Check ($record.c_cell_value_read_supplement.evidence -eq 'catalog/evidence/c-cell-read-20260914v/acceptance.json') 'current aggregate points to C scalar proof'
+    Check (@($record.c_cell_value_read_supplement.remaining_required).Count -eq 2) 'current aggregate retains two required gaps'
+}
+Check (@($audit.final_evidence_audit.required_gaps).Count -eq 2) 'completion audit has only T04 and T10 required gaps'
 
 Check ($trace.schema_version -eq 1) 'trace schema version'
 Check ($trace.status -eq 'PARTIAL_REQUIRED_TRACEABILITY_GAPS') 'trace remains partial'
@@ -87,7 +92,10 @@ foreach ($decision in $decisions) {
     }
 }
 $cDecision = @($decisions | Where-Object category -eq 'C')[0]
-Check (@($cDecision.required_evidence_gaps | Where-Object id -eq 'C-datatable-cell-value-read').Count -eq 1) 'required C cell-value read gap stays required'
+Check (@($cDecision.required_evidence_gaps).Count -eq 0 -and $cDecision.required_status -eq 'SATISFIED_MEASURED_SUBSET') 'required C is satisfied only by the measured supplement'
+$cResolved = @($cDecision.resolved_requirements | Where-Object id -eq 'C-datatable-cell-value-read')
+Check ($cResolved.Count -eq 1 -and $cResolved[0].evidence -eq 'catalog/evidence/c-cell-read-20260914v/acceptance.json') 'C resolution points to native cell-read evidence'
+& (Join-Path $PSScriptRoot 'Test-CDataTableCellRead.ps1') -Root $Root
 $eDecision = @($decisions | Where-Object category -eq 'E')[0]
 Check (@($eDecision.required_evidence_gaps | Where-Object id -eq 'E-independent-t04-run1-artifact').Count -eq 1) 'required E Run1 artifact gap stays required'
 Check (@($eDecision.external_blocked | Where-Object id -eq 'E-pad-designer-observation').Count -eq 1) 'E live Designer dependency stays externally blocked'

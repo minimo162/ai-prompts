@@ -1,0 +1,2 @@
+Variables.CreateNewDatatable InputTable: { ^['Column1', 'Column2'], [$'''CRead-20260914v''', $'''OtherCell'''] } DataTable=> DataTable
+SET CellReadValue TO DataTable[0][0]

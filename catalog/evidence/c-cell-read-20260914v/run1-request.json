@@ -1,0 +1,12 @@
+{
+  "verification_id": "C-CELL-READ-20260914V",
+  "run": 1,
+  "requested_at": "2026-09-14T13:19:20.1750167Z",
+  "flow_name": "RobinKnowledgeCCellReadReuse_20260914v",
+  "pid": 32304,
+  "source_sha256": "aacd4c595c7226d4445125074bbb6c71dd7d329d4fd4b752c5b61c1d55fd08c3",
+  "expectation_sha256": "65c38e495e8ea2be59cc729ffde7f5e68ed05a5f4d6a98da9b75a8981c5c2791",
+  "before_evidence": "run1-before.json",
+  "request_count": 1,
+  "note": "run1-before.action_count=1 was the PowerShell object Count, not an action count. Authoritative Designer summary and three byte-identical Robin copies prove 2 actions."
+}

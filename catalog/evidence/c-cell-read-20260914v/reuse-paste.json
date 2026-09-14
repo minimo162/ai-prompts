@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-14T13:15:11.3552827Z",
+  "flow_name": "RobinKnowledgeCCellReadReuse_20260914v",
+  "process_id": 16616,
+  "source_robin": "catalog/evidence/c-cell-read-20260914v/captured.robin",
+  "source_sha256": "aacd4c595c7226d4445125074bbb6c71dd7d329d4fd4b752c5b61c1d55fd08c3",
+  "source_bytes": 174,
+  "empty_before_paste": true,
+  "paste_confirmed": true,
+  "visible_action_count": 2,
+  "designer_action_count": 2,
+  "designer_status": "2 選択されたアクション",
+  "virtualized_list_false_negative": false,
+  "saved_confirmed": false,
+  "execution_requested": false
+}

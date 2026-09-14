@@ -59,13 +59,14 @@
     },
     "C": {
       "title": "Data: DataTable and CSV",
-      "status": "PARTIAL_MEASURED_SUBSET",
+      "status": "PROVEN_MEASURED_SUBSET_WITH_BOUNDARIES",
       "knowledge_sources": ["copilot/knowledge/PAD-Robin-01-Basics.txt", "copilot/knowledge/PAD-Robin-03-Files.txt"],
       "checks": [
         {"id": "C-datatable", "status": "PROVEN_CREATE_ROW_LOOP_INDEXED_UPDATE", "evidence": ["catalog/evidence/datatable-create-validation.json", "catalog/evidence/p3-datatable-create-success-20260911.json", "catalog/evidence/p3-datatable-row-reuse-20260913-paste-save.json", "catalog/evidence/p3-datatable-row-reuse-20260913-run1.json", "catalog/evidence/p3-datatable-row-reuse-20260913-run2.json", "catalog/evidence/p3-datatable-cell-reuse-20260913-paste-save.json", "catalog/evidence/p3-datatable-cell-reuse-20260913-run1.json", "catalog/evidence/p3-datatable-cell-reuse-20260913-run2.json", "catalog/evidence/p3-datatable-foreach-reuse-20260913-paste-save.json", "catalog/evidence/p3-datatable-foreach-reuse-20260913-run1.json", "catalog/evidence/p3-datatable-foreach-reuse-20260913-run2.json"]},
-        {"id": "C-csv-read-write", "status": "PROVEN_UTF8_MEASURED_MODES", "evidence": ["catalog/evidence/csv-read-validation.json", "catalog/evidence/csv-read-roundtrip.json", "catalog/evidence/csv-read-write2-run-1.json", "catalog/evidence/csv-read-write2-run-2.json", "catalog/evidence/filter-t02-roundtrip2-run-2.json"]}
+        {"id": "C-csv-read-write", "status": "PROVEN_UTF8_MEASURED_MODES", "evidence": ["catalog/evidence/csv-read-validation.json", "catalog/evidence/csv-read-roundtrip.json", "catalog/evidence/csv-read-write2-run-1.json", "catalog/evidence/csv-read-write2-run-2.json", "catalog/evidence/filter-t02-roundtrip2-run-2.json"]},
+        {"id": "C-datatable-cell-value-read", "status": "PROVEN_INDEX_0_0_TEXT_NATIVE_REUSE", "evidence": ["catalog/evidence/c-cell-read-20260914v/acceptance.json", "catalog/evidence/c-cell-read-20260914v/captured.robin", "catalog/evidence/c-cell-read-20260914v/reuse-paste.json", "catalog/evidence/c-cell-read-20260914v/reuse-save.txt", "catalog/evidence/c-cell-read-20260914v/reuse-reopened-recopy.robin", "catalog/evidence/c-cell-read-20260914v/run1-observed-values.json", "catalog/evidence/c-cell-read-20260914v/run2-observer-recovery.json"]}
       ],
-      "gaps": ["cell evidence proves indexed update, not a cell-value read", "DataTable column-name access in a row loop remains NOT_PROVEN", "additional CSV delimiter/quote modes remain unconfirmed", "probe reuse is not current-package same-version reacceptance"]
+      "gaps": ["DataTable column-name access in a row loop remains NOT_PROVEN", "additional CSV delimiter/quote modes remain unconfirmed", "numeric cell read beyond row 0/column 0 text remains unconfirmed", "native supplement is not new Copilot generation acceptance; 20260913e instruction/bundle unchanged"]
     },
     "D": {
       "title": "Files and folders",
@@ -131,19 +132,17 @@
     },
     {
       "category": "C",
-      "required_status": "PARTIAL_REQUIRED_EVIDENCE_GAP",
-      "required_evidence_gaps": [
+      "required_status": "SATISFIED_MEASURED_SUBSET",
+      "required_evidence_gaps": [],
+      "resolved_requirements": [
         {
           "id": "C-datatable-cell-value-read",
-          "missing_stage": "runtime read evidence",
-          "references_checked": [
-            "catalog/evidence/c-cell-read-existing-evidence-audit-20260914u.json",
-            "catalog/evidence/p3-datatable-cell-success-20260911.json",
-            "catalog/evidence/p3-datatable-cell-reuse-20260913-run1.json",
-            "catalog/evidence/p3-datatable-cell-reuse-20260913-run2.json"
-          ],
-          "next_minimum_operation": "Use one synthetic dedicated flow to read a DataTable cell, save/reopen/recopy it, and record Run1 and Run2 values.",
-          "live_dependency": true
+          "status": "PROVEN_INDEX_0_0_TEXT_NATIVE_REUSE",
+          "prior_insufficiency": "catalog/evidence/c-cell-read-existing-evidence-audit-20260914u.json",
+          "evidence": "catalog/evidence/c-cell-read-20260914v/acceptance.json",
+          "instruction": "SET CellReadValue TO DataTable[0][0]",
+          "observed_scalar_both_runs": "CRead-20260914v",
+          "scope": "Native UI capture, UTF-8 file, separate empty-flow paste/save/reopen/recopy, two runs. Run2 observer recovered without another Run. Not new Copilot generation acceptance."
         }
       ],
       "optional_unconfirmed": [

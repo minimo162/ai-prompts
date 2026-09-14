@@ -6777,5 +6777,16 @@
     "scope": "Guarded captured formats; live verification covers only the listed cases, not every variant.",
     "record": "evidence/document-run/live-verification.json",
     "limitations": "docs/document-run-checkpoint-2026-09-08.md"
+  },
+  "c_cell_value_read_supplement": {
+    "evidence": "catalog/evidence/c-cell-read-20260914v/acceptance.json",
+    "status": "PASS_REQUIRED_CELL_READ_NATIVE_REUSE",
+    "scope": "numeric row 0 / column 0, Text; native reuse only",
+    "pad_runs": 2,
+    "copilot_sends": 0,
+    "remaining_required": [
+      "E-independent-t04-run1-artifact",
+      "F-t10-strict-raw-bytes"
+    ]
   }
 }

@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "verification_id": "C-CELL-READ-20260914V",
+  "captured_at": "2026-09-14T13:24:10.627290+00:00",
+  "status": "PASS_REQUIRED_CELL_READ_NATIVE_REUSE",
+  "scope": "Mandatory C scalar DataTable cell reading via numeric row/column 0/0; native PAD proof only, not new Copilot generation acceptance.",
+  "requirement_source": "CODEX_TASK_PAD_ROBIN_KNOWLEDGE.md:141",
+  "prior_insufficiency": "catalog/evidence/c-cell-read-existing-evidence-audit-20260914u.json",
+  "package": {
+    "version": "20260913e",
+    "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+    "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+    "instruction_knowledge_bundle_changed": false,
+    "new_generation_claimed": false
+  },
+  "source": {
+    "flow_name": "無題 (2)",
+    "provenance": "C-only empty flow created and recorded in 20260914u; not identified by name alone. Current PID/HWND, zero-action screenshot and continuous UI configuration bind this capture. Other historical auto-named flows are not reused as evidence.",
+    "pid": 31664,
+    "hwnd": 397676,
+    "session_id": 1,
+    "power_fx": false,
+    "ui_actions": [
+      "Variables.CreateNewDatatable",
+      "LanguageConstructs.Assign"
+    ],
+    "table_configuration": "GridPattern 1 row / 2 columns; ValuePattern set CRead-20260914v and OtherCell.",
+    "read_configuration": {
+      "ui_name": "変数の設定",
+      "variable": "CellReadValue",
+      "value_expression": "%DataTable[0][0]%",
+      "method": "Explicitly entered in the actual action dialog and saved; the Robin below was subsequently copied from PAD, not synthesized as capture."
+    },
+    "saved": true,
+    "raw": "captured.robin",
+    "raw_sha256": "aacd4c595c7226d4445125074bbb6c71dd7d329d4fd4b752c5b61c1d55fd08c3",
+    "bytes": 174,
+    "robin_read_instruction": "SET CellReadValue TO DataTable[0][0]"
+  },
+  "reuse": {
+    "flow_name": "RobinKnowledgeCCellReadReuse_20260914v",
+    "created_this_turn": true,
+    "power_fx": false,
+    "initial_pid": 16616,
+    "initial_hwnd": 395278,
+    "reopened_pid": 32304,
+    "reopened_hwnd": 524694,
+    "session_id": 1,
+    "empty_before_paste": true,
+    "source_file_pasted_without_edit": true,
+    "paste_record": "reuse-paste.json",
+    "save_record": "reuse-save.txt",
+    "saved_then_closed_and_reopened": true,
+    "reopen_method": "WindowPattern.Close after ready/zero-error snapshot; exact console flow row EditFlowButton.Invoke. The preceding center-row double click did not reopen and was not counted as successful.",
+    "copies": [
+      "captured.robin",
+      "reuse-recopy.robin",
+      "reuse-reopened-recopy.robin",
+      "reuse-after-run2.robin"
+    ],
+    "all_raw_bytes_equal": true,
+    "action_count": 2
+  },
+  "runs": [
+    {
+      "number": 1,
+      "request": "run1-request.json",
+      "before": "run1-before.json",
+      "run_record": "run1.json",
+      "observed_values": "run1-observed-values.json",
+      "screenshot": "run1.png",
+      "status": "PASS_SCALAR_READ",
+      "actual_variable": "CellReadValue",
+      "actual_type": "Text",
+      "actual_value": "CRead-20260914v"
+    },
+    {
+      "number": 2,
+      "request": "run2-request.json",
+      "before": "run2-before.json",
+      "run_record": "run2-observer-recovery.json",
+      "observed_values": "run2-observer-recovery.json",
+      "screenshot": "run2.png",
+      "status": "PASS_SCALAR_READ_OBSERVER_RECOVERED",
+      "actual_variable": "CellReadValue",
+      "actual_type": "Text",
+      "actual_value": "CRead-20260914v",
+      "runtime_values_cleared_before_run": true,
+      "helper_exception_preserved": true,
+      "same_execution_observed_without_restart": true
+    }
+  ],
+  "observation_boundaries": [
+    "Run2 helper raised a Current property error after the single Run request; no run2.json was produced. The same execution was observed read-only to ready/zero errors/new scalar output after previews had been cleared. No third Run was started.",
+    "run1-before.json action_count=1 is an erroneous PowerShell scalar-object Count, not a Designer action count; preserve it as a reporting error. All four PAD copies and Designer status prove 2 actions.",
+    "run1-variable-uia.json captured the action summary instead of the value panel; runtime acceptance uses run1-observed-values.json and run1.png. A later stale picker-id lookup returned null and was not used as proof.",
+    "The first variable-name ValuePattern call was read-only. Double-click exposed the actual editable name field; no Robin was manually repaired.",
+    "Saved state had returned to ready during the initial close guard, so that attempt did not close. A subsequent ready/zero-error snapshot permitted closing the already-saved flow."
+  ],
+  "counts": {
+    "pad_run_starts": 2,
+    "copilot_sends": 0,
+    "source_flow_runs": 0,
+    "reuse_flow_runs": 2,
+    "new_flows_this_turn": 1,
+    "new_flows_including_previous_preparation": 2,
+    "robin_pastes": 1,
+    "extra_run_after_observer_error": 0
+  },
+  "optional_unconfirmed": [
+    "column-name access",
+    "negative/out-of-range/variable indexes",
+    "other row/column indexes or data types",
+    "Copilot generation using this supplemental example"
+  ],
+  "remaining_required": [
+    "E-independent-t04-run1-artifact",
+    "F-t10-strict-raw-bytes"
+  ],
+  "preserved": {
+    "t04_case_b": "unchanged historical observation; current C window does not establish T04 flow correspondence",
+    "t04_old_run1": "NOT_CAPTURED",
+    "t10_strict_raw_bytes": "NOT_PROVEN",
+    "issue_state": "OPEN / partial"
+  },
+  "files": [
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/capture-copy.json",
+      "sha256": "322a3e08fd8df31b0710bd717e92e358c1bf442f7f6fcf1e6f60d771a65b2926",
+      "bytes": 375
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/captured.robin",
+      "sha256": "aacd4c595c7226d4445125074bbb6c71dd7d329d4fd4b752c5b61c1d55fd08c3",
+      "bytes": 174
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/cell-read-settings.png",
+      "sha256": "490f2dbf0e85a45f30d8fa9cea2630576983f0c223ae485d28531931deec1711",
+      "bytes": 159947
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/expectation.json",
+      "sha256": "65c38e495e8ea2be59cc729ffde7f5e68ed05a5f4d6a98da9b75a8981c5c2791",
+      "bytes": 699
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-after-run2-copy.json",
+      "sha256": "283d680b9670ca13e2c251469d5ea46943519ffe75287a7630e38db8f738616a",
+      "bytes": 398
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-after-run2.robin",
+      "sha256": "aacd4c595c7226d4445125074bbb6c71dd7d329d4fd4b752c5b61c1d55fd08c3",
+      "bytes": 174
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-before-reopen.json",
+      "sha256": "aa95b67a4f4aa9dd84d082b1f20f0447473125c80ca03b75a5f36885d648ddc4",
+      "bytes": 12567
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-copy.json",
+      "sha256": "d9dfcbd10677e08c6d8e2f32e5dd95217a7cec3ffc28a7e876b98d8f7e774e94",
+      "bytes": 394
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-empty.png",
+      "sha256": "421e7b0e7faae78e99a0d61a81c9d711bd5bdb921cd161c0e7c473e88e6d6e4b",
+      "bytes": 85423
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-paste.json",
+      "sha256": "71cdf7f29bae11feea2a6baf109f16eb8c8557278d0670390c9c892717e658cc",
+      "bytes": 632
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-recopy.robin",
+      "sha256": "aacd4c595c7226d4445125074bbb6c71dd7d329d4fd4b752c5b61c1d55fd08c3",
+      "bytes": 174
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-reopened-copy.json",
+      "sha256": "a3a72c050e94d476c7fa3e6c8e9f9858cb74c0a9a4cb1a02b2c5e8eae1aed6f5",
+      "bytes": 388
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-reopened-recopy.robin",
+      "sha256": "aacd4c595c7226d4445125074bbb6c71dd7d329d4fd4b752c5b61c1d55fd08c3",
+      "bytes": 174
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/reuse-save.txt",
+      "sha256": "a48c04474d81d52617e3b12ac8f09ed93b41d81d92b9839022f2ec088521018f",
+      "bytes": 46
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run1-before.json",
+      "sha256": "a03064cf02277a6205d1f7213501f2f9cb391c1eecb97cb19174f65a16b97e99",
+      "bytes": 328
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run1-observed-values.json",
+      "sha256": "5e1b2b4bbb37f03ba37cbd220fe2f0ca057a100212bfbd77b3e5eea7af8a2e55",
+      "bytes": 673
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run1-request.json",
+      "sha256": "6ae5a13025ee335e41988ca9ec9bdf00de6e6c5dbbcb64858c750c299b121341",
+      "bytes": 618
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run1-variable-uia.json",
+      "sha256": "fe79e4a450b9b5e11ba60f390cac532d59413d5507aeead269b73dfb997ea525",
+      "bytes": 329
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run1.json",
+      "sha256": "1ca85be59c60a9e252f0e29e3de8dd6fa4dfd8c6ebed32a846e7a37ad405db3e",
+      "bytes": 298
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run1.png",
+      "sha256": "ab54dc81ad4ce1a1a98079722345ddee69e5db5ccebb14cea2e7f819dafa2bff",
+      "bytes": 165718
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run2-before.json",
+      "sha256": "1e0a02a171eac78538736acc7af50aef307d5872bf4d8a0b4fc6c32894d7a6f5",
+      "bytes": 303
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run2-before.png",
+      "sha256": "7432dab06fc2559fe9e0082c03954518c6f1a281cf466bfd0b0e816d693242ef",
+      "bytes": 167639
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run2-observer-recovery.json",
+      "sha256": "f4865d4b288457332395117969067b763ed765e46dc50a6c7dc84f35ba64f092",
+      "bytes": 537
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run2-request.json",
+      "sha256": "f703e1ca7fabaf9366c997b1d458d9b418796da73caeeedadb44ae58cfb9fdbd",
+      "bytes": 539
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/run2.png",
+      "sha256": "43f46f30d85ce73a8ad497be535022f16e5282fb8d735b7663796844b09d528c",
+      "bytes": 165851
+    },
+    {
+      "path": "catalog/evidence/c-cell-read-20260914v/table-settings.png",
+      "sha256": "2b7e13d263f0dae99cce0052eb26bea6265090c93d1d47611f59f59a4e814cb9",
+      "bytes": 193466
+    }
+  ]
+}

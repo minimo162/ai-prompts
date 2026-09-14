@@ -1,5 +1,11 @@
 # Robinナレッジ作成 進捗
 
+## 2026-09-14 Cセル値読取りの補完（20260914v）
+
+実アクションから採取した `SET CellReadValue TO DataTable[0][0]` を、別空フローへ無修正貼付け・保存・再オープン後に2回実行し、Text値 `CRead-20260914v` と一致しました。前段は1行2列の合成DataTableです。4回の原文コピーは174 bytesで一致し、Run2前には値をクリアしています。Run2の観測補助例外は、追加Runせず同一実行を読み取り直して確認しました。
+
+[原証跡・期待値・段階別判定](../catalog/evidence/c-cell-read-20260914v/acceptance.json)。Copilot送信0回、PAD Run 2回。数値添字0/0のネイティブ再利用証跡であり、新しいCopilot生成合格や列名構文の保証ではありません。20260913e instruction/bundleは変更していません。必須残件は独立T04 Run1成果物とT10 strict raw-byte保持の2件で、Issue #5/#27はOPEN / partialを維持します。過去の不成立・未採取記録は以下に保存しています。
+
 ## 2026-09-14 Cセル値読取りの既存証跡照合と専用フロー準備
 
 未pushのHEAD `dbc98c3d47794aebc0f5666235ff52d49bd022d5`とPR #32統合main `7cc2c18b2a7f521f770c47c48cbbf4715d228979`を現物確認し、現行20260913eと原証跡を保全した。`c-cell-read-existing-evidence-audit-20260914u.json`に既存原文→別空フロー貼付け・保存・再コピー→Run1/Run2実値の照合を記録した。セル更新は`ModifyDataTableItem`、行反復は`SET ForeachValue TO CurrentItem`であり、セル値の取出しを証明しない。`CurrentItem[Status]`はコピー・保存のみで組合せ実行の証跡がない。CSV/filterの表出力もセル値読取りへ読み替えない。既存証跡だけではCはNOT_PROVEN。
