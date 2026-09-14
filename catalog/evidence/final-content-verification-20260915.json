@@ -1,0 +1,323 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-14T22:19:41.285Z",
+  "status": "PASS_NONLIVE_FINAL_CONTENT_ACCEPTANCE",
+  "baseline_main": "f4fa9a2e61bfd2a2be0414eccd9e42b2d4a5e35e",
+  "prior_provenance_commit": "b12f5fb7aa9cad37b256705131929d061dce0bdc",
+  "acceptance": "catalog/evidence/final-content-acceptance-20260915.json",
+  "nonlive_all": {
+    "source": ".work/nonlive-c36a36efce334dcabed6a130585a1f8b/verification.json",
+    "sha256": "8b423d6729d75863d12261d82e3c784c173857b7d79f57388599c114860aea05",
+    "started_utc": "2026-09-14T22:11:35.4142843Z",
+    "finished_utc": "2026-09-14T22:18:48.6062140Z",
+    "status": "PASS",
+    "test_count": 38,
+    "tests": [
+      {
+        "test": "Test-CsvContracts.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 1353
+      },
+      {
+        "test": "Test-CsvBatch.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 937
+      },
+      {
+        "test": "Test-CsvLifecycle.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 3590
+      },
+      {
+        "test": "Test-CsvTypedPlan.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 2137
+      },
+      {
+        "test": "Test-CsvReview.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 1995
+      },
+      {
+        "test": "Test-CsvLateResponse.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 1487
+      },
+      {
+        "test": "Test-QualityDraft.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 821
+      },
+      {
+        "test": "Test-OfflineDiagnostic.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 1408
+      },
+      {
+        "test": "Test-ConversationScope.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 514
+      },
+      {
+        "test": "Test-ConnectionContract.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 579
+      },
+      {
+        "test": "Test-AcceptanceGate.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 968
+      },
+      {
+        "test": "Test-App.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 15056
+      },
+      {
+        "test": "Test-Pad.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 22676
+      },
+      {
+        "test": "Test-PadRunArtifactSnapshot.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 1717
+      },
+      {
+        "test": "Test-RobinCatalog.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 1265
+      },
+      {
+        "test": "Test-BoundedRobinLoop.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 590
+      },
+      {
+        "test": "Test-RobinNumberConversion.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 551
+      },
+      {
+        "test": "Test-GeneralJobStart.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 783
+      },
+      {
+        "test": "Test-GeneralArtifactOpen.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 812
+      },
+      {
+        "test": "Test-CompletionDecision.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 2338
+      },
+      {
+        "test": "Test-PadRecovery.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 3897
+      },
+      {
+        "test": "Test-Copilot.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 169369
+      },
+      {
+        "test": "Test-CopilotPlannerV2.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 2153
+      },
+      {
+        "test": "Test-PlannerV2Transport.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 154765
+      },
+      {
+        "test": "Test-Http.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 13148
+      },
+      {
+        "test": "Test-Launcher.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 4307
+      },
+      {
+        "test": "Test-ReleaseBinding.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 8472
+      },
+      {
+        "test": "Test-PublishAgentSource.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 1019
+      },
+      {
+        "test": "Test-PublishCrash.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 1654
+      },
+      {
+        "test": "Test-AiCallProcess.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 3093
+      },
+      {
+        "test": "Test-AiCallProviderFailure.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 3506
+      },
+      {
+        "test": "Test-ClipboardSnapshot.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 430
+      },
+      {
+        "test": "Test-DocumentRobin.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 1220
+      },
+      {
+        "test": "Test-DocumentObservation.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 1096
+      },
+      {
+        "test": "Test-ClipboardReadRetry.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 1667
+      },
+      {
+        "test": "Test-CurrentBundleT01Prepared.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 367
+      },
+      {
+        "test": "Test-Issue5CurrentStatus.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 1052
+      },
+      {
+        "test": "Test-T10ByteComparator.ps1",
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 275
+      }
+    ]
+  },
+  "targeted": [
+    {
+      "name": "CurrentStatus",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "AGTrace",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "RobinCatalog",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "RawContracts",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "CopilotPackage",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "T10Strict",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "tests/Test-T10Recapture.mjs",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "tests/Test-FinalContentAcceptance.mjs",
+      "status": "PASS",
+      "exit_code": 0
+    }
+  ],
+  "preservation": {
+    "at": "2026-09-14T22:12:46.835Z",
+    "protected": 409,
+    "originals": 807,
+    "all_raw_bytes_equal": true,
+    "package_unchanged": true
+  },
+  "manifest_reference": {
+    "status": "PASS",
+    "evidence_hashes": 500,
+    "existing_run_records_read": 34,
+    "t04_pair_artifact_runs": 2,
+    "package_manifest_sources": 7
+  },
+  "json_parse": {
+    "status": "PASS",
+    "scope": "All tracked JSON plus new audit JSON; final verification JSON also parsed before commit",
+    "count_before_this_verification_file": 1802
+  },
+  "diff_and_secrets": {
+    "status": "PASS",
+    "code_or_package_changes": false,
+    "allowed": "Current derived decisions, additive audit evidence, content-contract regression and current-status tests only",
+    "new_secret_pattern_matches": 0,
+    "prior_failures_unchanged": true
+  },
+  "live_operations": {
+    "copilot_send": 0,
+    "dom_acquisition": 0,
+    "copilot_export_api": 0,
+    "pad_run": 0,
+    "clipboard_change": 0
+  },
+  "github_checks": "No workflow configured; local evidence is not GitHub CI",
+  "publication": "Record exact candidate SHA in PR and exact integrated main SHA in final issue comments; close only after main integration."
+}

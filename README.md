@@ -1,5 +1,13 @@
 # PAD Robin Copilotエージェント用 指示文・ナレッジ
 
+## 現在の受入判定（2026-09-15・明示的な完了条件変更）
+
+通常M365 Copilot Chat＋PADの現行20260913eについて、#5の必須A〜Gと#27の指定受入ケースは技術的受入完了。今回のユーザー判断により、T10の必須条件を「指定変更のみ・既存の命令内容保持」とし、transport-level raw-byte完全保持を非ブロッカーとした。過去のCASE B判断を遡ってCASE Aへ変更したものではない。
+
+T10の機能・許可変更範囲・非変更命令内容保持はPASS。一次・独立ともraw-byte strictはNOT_PROVENのまま、許可区間外raw bytesはFAIL、取得要求／完了／残枠は各1／1／0。原文・失敗証跡・固定期待値は変更していない。T03は修正版依頼限定。独立T04は新pairのみ受入れ、元T04失敗・旧Run1 NOT_CAPTURED・旧candidate_partialは履歴として保持する。
+
+[現在判定と証跡対応表](catalog/evidence/final-content-acceptance-20260915.json)を参照。Issue closeは必要な非ライブ検査とmain統合の後に限る。Agent Builder、全PAD機能、組織展開、一般的なbyte-preserving transportは完了範囲に含めない。この下の日付付き記録のpartial／必須残件／OPEN表記は各時点の履歴であり、現在判定を上書きしない。
+
 ## 2026-09-15 T10既存応答の限定再取得
 
 T10-STRICT-20260914Xの残枠を使い、固定一次・独立会話の既存応答を各1回要求・1回完了しました。ブラウザー前提確認は1回成功。UTF-16LE／UTF-8のSHAを取得時に固定し、既存保存補助で新規保存した1752／1771 bytesは取得文字列と一致しました。許可2か所の内容も依頼一致ですが、どちらもLF16個・末尾LFありで、固定入力のCRLF・末尾改行なしと区間外bytesが異なるため、両strictは `NOT_PROVEN`です。[取得原文・区間比較・回数](catalog/evidence/t10-strict-20260914x-recapture-results.json)。

@@ -143,14 +143,25 @@ $staleMessage = ''
 try { Test-StatusRunReferences $staleSummary $statusDirectory } catch { $staleMessage = $_.Exception.Message }
 Check ($staleMessage -like 'STATUS_RUN_REF:*') 'stale summary run reference is rejected'
 
-Test-Issue5AuditSemantics $audit $bundleHash (Join-Path $repo 'catalog')
+# Keep the old p4 snapshot under its original historical status; validate current acceptance independently.
+$historicalAudit = $audit | ConvertTo-Json -Depth 100 | ConvertFrom-Json
+$historicalAudit.status = $audit.historical_pre_content_decision.status
+Test-Issue5AuditSemantics $historicalAudit $bundleHash (Join-Path $repo 'catalog')
+& node (Join-Path $PSScriptRoot 'Test-FinalContentAcceptance.mjs')
+if ($LASTEXITCODE -ne 0) { throw 'FINAL_CONTENT: acceptance evidence failed' }
 $checks += 1
 function Test-FinalAuditReadiness($FinalAudit) {
     if ($null -eq $FinalAudit) { return }
     if ($FinalAudit.pr_submission_ready -eq $true -and @($FinalAudit.required_gaps).Count -gt 0) {
         throw 'FINAL_AUDIT_GAPS: PR readiness cannot be claimed with required traceability gaps'
     }
-    if ($FinalAudit.pr_submission_ready -eq $true -and [string]$FinalAudit.t10_strict_preservation.status -cne 'PASS') {
+    $explicitContentDecision = $null -ne $FinalAudit.current_acceptance -and
+        $FinalAudit.current_acceptance.contract -ceq 'EXPLICIT_USER_COMPLETION_CONTRACT_CHANGE' -and
+        $FinalAudit.current_acceptance.evidence -ceq 'catalog/evidence/final-content-acceptance-20260915.json' -and
+        $FinalAudit.current_acceptance.t10_content -ceq 'PASS' -and
+        $FinalAudit.current_acceptance.t10_transport -ceq 'NOT_PROVEN' -and
+        $FinalAudit.current_acceptance.transport_blocking -eq $false
+    if ($FinalAudit.pr_submission_ready -eq $true -and -not $explicitContentDecision -and [string]$FinalAudit.t10_strict_preservation.status -cne 'PASS') {
         throw 'FINAL_AUDIT_T10: PR readiness requires proof of unchanged text and line endings outside the authorized T10 changes'
     }
 }

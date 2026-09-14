@@ -1,7 +1,8 @@
 {
+  "current_acceptance_verification": "catalog/evidence/final-content-verification-20260915.json",
   "schema_version": 1,
   "captured_at": "2026-09-14T15:10:00+09:00",
-  "status": "PARTIAL_REQUIRED_TRACEABILITY_GAPS",
+  "status": "COMPLETE_REQUIRED_CONTENT_CONTRACT",
   "issue_scope": {
     "issues": ["#5", "#27"],
     "issue_state": "OPEN",
@@ -191,24 +192,18 @@
     },
     {
       "category": "F",
-      "required_status": "PARTIAL_REQUIRED_EVIDENCE_GAP",
-      "required_evidence_gaps": [
-        {
-          "id": "F-t10-strict-raw-bytes",
-          "missing_stage": "raw source-to-generation and source-to-PAD byte equality",
-          "references_checked": [
-            "catalog/evidence/t10-strict-preservation-audit-20260913.json",
-            "catalog/evidence/t10-independent-current-generation-20260914e.json"
-          ],
-          "next_minimum_operation": "Keep the source, response-origin copy, and PAD recopy byte snapshots separate; only a verified raw-byte comparison may change NOT_PROVEN.",
-          "live_dependency": true
-        }
-      ],
+      "required_status": "SATISFIED_MEASURED_CONTENT_CONTRACT",
+      "required_evidence_gaps": [],
       "optional_unconfirmed": [
         "broad Office/PDF variant coverage is not claimed",
         "new agent registration reuse is not proven"
       ],
-      "external_blocked": []
+      "external_blocked": [],
+      "transport_quality_boundary": {
+        "status": "NOT_PROVEN",
+        "blocking": false,
+        "authority": "catalog/evidence/final-content-acceptance-20260915.json"
+      }
     },
     {
       "category": "G",
@@ -243,15 +238,17 @@
     "new_pair_evidence": "catalog/evidence/t04-independent-pair-20260914w/acceptance.json"
   },
   "decision": {
-    "a_to_g_complete": false,
-    "issue_close_authorized": false,
-    "pr_ready": false,
-    "next_evidence": ["Review a valid same normal-chat path byte-preservation control before any new T10 generation; keep strict NOT_PROVEN meanwhile"]
+    "a_to_g_complete": true,
+    "issue_close_authorized": true,
+    "pr_ready": true,
+    "next_evidence": [],
+    "close_gate": "Only after fresh verification and main integration",
+    "authority": "catalog/evidence/final-content-acceptance-20260915.json"
   },
   "t04_new_pair": {
     "evidence": "catalog/evidence/t04-independent-pair-20260914w/acceptance.json",
     "status": "PASS_INDEPENDENT_T04_NEW_PAIR",
-    "summary": "Independent T04 new pair 20260914w passed both per-run CSV/xlsx snapshots and fixed 3x3 values; Run1 verified before Run2. Old candidate and old Run1 NOT_CAPTURED remain historical. Original primary T04 remains not accepted and is not double-counted. Required remaining: T10 strict raw-byte preservation NOT_PROVEN. Issues remain OPEN / partial. Paste-observer failure required native clipboard history restoration; text equality and original formats were verified, full-format byte equality was not assessed."
+    "summary": "New independent T04 pair accepted separately; old primary failure/candidate_partial/Run1 NOT_CAPTURED preserved. Required acceptance for normal M365 Copilot Chat + PAD 20260913e is technically satisfied under the explicit 2026-09-15 user completion contract. T10 functional execution, requested changes only, and unchanged command/content preservation PASS; transport raw-byte preservation remains NOT_PROVEN (non-blocking limitation), outside raw bytes FAIL, requests/completed/remaining 1/1/0 for each response. Prior T04 failures and partial observations remain history. Close only after fresh checks and main integration."
   },
   "t10_strict_boundary_audit": {
     "verification": "catalog/evidence/t10-strict-20260914x-verification.json",
@@ -261,7 +258,7 @@
     "primary_strict": "NOT_PROVEN",
     "independent_strict": "NOT_PROVEN",
     "additional_real_acquisitions": 0,
-    "reason": "Historical Add File saving appends LF in one same-operation synthetic control. Browser inventory timed out; no real recapture. Existing real candidates fail outside the exact two literal-content intervals. C and independent T04 new pair remain accepted; only strict T10 remains required."
+    "reason": "Historical strict boundary audit: NOT_PROVEN and outside bytes FAIL unchanged. Under the explicit 2026-09-15 user decision this transport limitation is non-blocking; see current_acceptance."
   },
   "t10_existing_response_recapture": {
     "evidence": "catalog/evidence/t10-strict-20260914x-recapture-results.json",
@@ -287,5 +284,170 @@
       "strict": "NOT_PROVEN"
     },
     "next": "Original acquisition budgets exhausted. No repeat, new send or PAD Run authorized; distinct upstream hypothesis and explicit new limits required."
+  }
+,
+  "historical_pre_content_decision": {
+    "as_of": "Before explicit user decision on 2026-09-15",
+    "baseline_commit": "f4fa9a2e61bfd2a2be0414eccd9e42b2d4a5e35e",
+    "t04_new_pair.summary": "Independent T04 new pair 20260914w passed both per-run CSV/xlsx snapshots and fixed 3x3 values; Run1 verified before Run2. Old candidate and old Run1 NOT_CAPTURED remain historical. Original primary T04 remains not accepted and is not double-counted. Required remaining: T10 strict raw-byte preservation NOT_PROVEN. Issues remain OPEN / partial. Paste-observer failure required native clipboard history restoration; text equality and original formats were verified, full-format byte equality was not assessed.",
+    "t10_strict_boundary_audit.reason": "Historical Add File saving appends LF in one same-operation synthetic control. Browser inventory timed out; no real recapture. Existing real candidates fail outside the exact two literal-content intervals. C and independent T04 new pair remain accepted; only strict T10 remains required.",
+    "status": "PARTIAL_REQUIRED_TRACEABILITY_GAPS",
+    "F_required_gap": {
+      "category": "F",
+      "required_status": "PARTIAL_REQUIRED_EVIDENCE_GAP",
+      "required_evidence_gaps": [
+        {
+          "id": "F-t10-strict-raw-bytes",
+          "missing_stage": "raw source-to-generation and source-to-PAD byte equality",
+          "references_checked": [
+            "catalog/evidence/t10-strict-preservation-audit-20260913.json",
+            "catalog/evidence/t10-independent-current-generation-20260914e.json"
+          ],
+          "next_minimum_operation": "Keep the source, response-origin copy, and PAD recopy byte snapshots separate; only a verified raw-byte comparison may change NOT_PROVEN.",
+          "live_dependency": true
+        }
+      ],
+      "optional_unconfirmed": [
+        "broad Office/PDF variant coverage is not claimed",
+        "new agent registration reuse is not proven"
+      ],
+      "external_blocked": []
+    },
+    "requirement_decisions": [
+      {
+        "category": "A",
+        "required_status": "SATISFIED_MEASURED_SUBSET",
+        "required_evidence_gaps": [],
+        "optional_unconfirmed": [
+          "list out-of-range/negative/variable index",
+          "additional number locale/grouping modes",
+          "substring boundary variants",
+          "custom date tokens beyond yyyy-MM-dd and existing-action edit path"
+        ],
+        "external_blocked": []
+      },
+      {
+        "category": "B",
+        "required_status": "SATISFIED_MEASURED_SUBSET",
+        "required_evidence_gaps": [],
+        "optional_unconfirmed": [
+          "3+ nesting and outer-loop exit",
+          "LOOP WHILE nesting",
+          "generalized block-level user-defined FileNotFound match",
+          "some separate-empty-flow reuse remains probe-only rather than current-package reacceptance"
+        ],
+        "external_blocked": []
+      },
+      {
+        "category": "C",
+        "required_status": "SATISFIED_MEASURED_SUBSET",
+        "required_evidence_gaps": [],
+        "resolved_requirements": [
+          {
+            "id": "C-datatable-cell-value-read",
+            "status": "PROVEN_INDEX_0_0_TEXT_NATIVE_REUSE",
+            "prior_insufficiency": "catalog/evidence/c-cell-read-existing-evidence-audit-20260914u.json",
+            "evidence": "catalog/evidence/c-cell-read-20260914v/acceptance.json",
+            "instruction": "SET CellReadValue TO DataTable[0][0]",
+            "observed_scalar_both_runs": "CRead-20260914v",
+            "scope": "Native UI capture, UTF-8 file, separate empty-flow paste/save/reopen/recopy, two runs. Run2 observer recovered without another Run. Not new Copilot generation acceptance."
+          }
+        ],
+        "optional_unconfirmed": [
+          "DataTable column-name access in a row loop remains NOT_PROVEN",
+          "additional CSV delimiter/quote modes remain unconfirmed",
+          "probe reuse is not current-package same-version reacceptance"
+        ],
+        "external_blocked": []
+      },
+      {
+        "category": "D",
+        "required_status": "SATISFIED_MEASURED_SUBSET",
+        "required_evidence_gaps": [],
+        "optional_unconfirmed": [
+          "case-insensitive extension comparison remains explicitly unconfirmed",
+          "some false-branch and separate reuse paths are not current-package reacceptance",
+          "do not infer unlisted file/folder variants"
+        ],
+        "external_blocked": []
+      },
+      {
+        "category": "E",
+        "required_status": "SATISFIED_NEW_INDEPENDENT_PAIR",
+        "required_evidence_gaps": [],
+        "optional_unconfirmed": [
+          "some separate probe reuse is not same-version current-package reacceptance",
+          "PowerPoint SaveAs collision/locked targets are outside this Excel evidence"
+        ],
+        "resolved_requirements": [
+          {
+            "id": "E-independent-t04-run1-artifact",
+            "evidence": "catalog/evidence/t04-independent-pair-20260914w/acceptance.json",
+            "old_run1": "NOT_CAPTURED",
+            "old_candidate": "candidate_partial"
+          }
+        ],
+        "resolved_external": [
+          {
+            "id": "E-pad-designer-observation",
+            "condition": "current PAD.Designer has HWND 0, empty title, and UIA root 0",
+            "evidence": "catalog/evidence/t04-independent-current-pad-window-observation-20260914t.json",
+            "reopen_condition": "stable nonzero HWND, owner PID/process, SessionId, and target-flow correspondence"
+          }
+        ],
+        "external_blocked": []
+      },
+      {
+        "category": "F",
+        "required_status": "SATISFIED_MEASURED_CONTENT_CONTRACT",
+        "required_evidence_gaps": [],
+        "optional_unconfirmed": [
+          "broad Office/PDF variant coverage is not claimed",
+          "new agent registration reuse is not proven"
+        ],
+        "external_blocked": [],
+        "transport_quality_boundary": {
+          "status": "NOT_PROVEN",
+          "blocking": false,
+          "authority": "catalog/evidence/final-content-acceptance-20260915.json"
+        }
+      },
+      {
+        "category": "G",
+        "required_status": "SATISFIED_MEASURED_ROUTE",
+        "required_evidence_gaps": [],
+        "optional_unconfirmed": [
+          "other URLs/elements/browsers and extension-disabled environment remain unconfirmed",
+          "generated six-line Robin does not transport registered UI elements; the element-import route is separately evidenced"
+        ],
+        "external_blocked": [
+          {
+            "id": "G-dom-playwright",
+            "condition": "DOM/Playwright test is NOT_RUN because Playwright is not configured",
+            "evidence": "tests/Test-CopilotDom.cjs",
+            "reopen_condition": "configure the approved Playwright runtime and run the existing test without changing the acceptance expectation"
+          }
+        ]
+      }
+    ],
+    "decision": {
+      "a_to_g_complete": false,
+      "issue_close_authorized": false,
+      "pr_ready": false,
+      "next_evidence": [
+        "Review a valid same normal-chat path byte-preservation control before any new T10 generation; keep strict NOT_PROVEN meanwhile"
+      ]
+    }
+  }
+,
+  "current_acceptance": {
+    "evidence": "catalog/evidence/final-content-acceptance-20260915.json",
+    "status": "TECHNICAL_ACCEPTANCE_PASS",
+    "contract": "EXPLICIT_USER_COMPLETION_CONTRACT_CHANGE",
+    "required_gaps": [],
+    "t10_content": "PASS",
+    "t10_transport": "NOT_PROVEN",
+    "transport_blocking": false,
+    "close_gate": "After fresh checks and main integration only"
   }
 }

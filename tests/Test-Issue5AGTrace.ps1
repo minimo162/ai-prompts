@@ -31,13 +31,13 @@ $package = Read-Json 'catalog/evidence/current-package-status-20260913.json'
 $liveRead = Read-Json 'catalog/evidence/issue-live-read-20260914m.json'
 foreach ($record in @($coverage, $index, $audit, $package)) {
     Check ($record.c_cell_value_read_supplement.evidence -eq 'catalog/evidence/c-cell-read-20260914v/acceptance.json') 'current aggregate points to C scalar proof'
-    Check (@($record.c_cell_value_read_supplement.remaining_required).Count -eq 1) 'current aggregate retains T10 required gap'
+    Check (@($record.c_cell_value_read_supplement.remaining_required).Count -eq 0) 'current aggregate has no remaining required gap under explicit content contract'
     Check ($record.t04_new_pair.evidence -eq 'catalog/evidence/t04-independent-pair-20260914w/acceptance.json') 'current aggregate registers new T04 pair'
 }
-Check (@($audit.final_evidence_audit.required_gaps).Count -eq 1) 'completion audit has only T10 required gap'
+Check (@($audit.final_evidence_audit.required_gaps).Count -eq 0) 'completion audit has no required gap'
 
 Check ($trace.schema_version -eq 1) 'trace schema version'
-Check ($trace.status -eq 'PARTIAL_REQUIRED_TRACEABILITY_GAPS') 'trace remains partial'
+Check ($trace.status -eq 'COMPLETE_REQUIRED_CONTENT_CONTRACT') 'trace accepts measured content contract'
 Check ($trace.issue_scope.issue_state -eq 'OPEN') 'issue remains open'
 Check ($trace.issue_scope.pr_31 -eq 'MERGED') 'PR #31 merge preserved'
 Check ($trace.issue_scope.pr_32 -eq 'MERGED') 'PR #32 merge preserved'
@@ -102,7 +102,7 @@ Check (@($eDecision.required_evidence_gaps).Count -eq 0 -and $eDecision.required
 Check (@($eDecision.external_blocked).Count -eq 0 -and @($eDecision.resolved_external).Count -eq 1) 'E past Designer block retained as resolved history'
 & (Join-Path $PSScriptRoot 'Test-T04PairEvidence.ps1') -Root $Root
 $fDecision = @($decisions | Where-Object category -eq 'F')[0]
-Check (@($fDecision.required_evidence_gaps | Where-Object id -eq 'F-t10-strict-raw-bytes').Count -eq 1) 'required F T10 byte gap stays required'
+Check (@($fDecision.required_evidence_gaps).Count -eq 0 -and $fDecision.transport_quality_boundary.status -eq 'NOT_PROVEN' -and $fDecision.transport_quality_boundary.blocking -eq $false) 'F content accepted while transport remains NOT_PROVEN non-blocking'
 
 Check ($coverage.final_a_g_trace -eq $tracePath.Replace('catalog/', '')) 'coverage registers A-G trace'
 Check ($index.final_a_g_trace -eq $tracePath.Replace('catalog/', '')) 'index registers A-G trace'
@@ -119,8 +119,8 @@ foreach ($aggregate in @('catalog/coverage.json', 'catalog/index.json', 'catalog
     $aggregateText = [IO.File]::ReadAllText((FullPath $aggregate), $utf8)
     Check ($aggregateText.Contains('evidence/t04-independent-current-pad-session-diagnostic-20260914s.json')) ('aggregate registers T04 session diagnostic: ' + $aggregate)
 }
-Check ($audit.final_evidence_audit.status -eq 'PARTIAL_REQUIRED_TRACEABILITY_GAPS') 'completion audit remains partial'
-Check (@($audit.final_evidence_audit.required_gaps).Count -gt 0) 'completion audit keeps required gaps'
+Check ($audit.final_evidence_audit.status -eq 'COMPLETE_REQUIRED_CONTENT_CONTRACT') 'completion audit accepts measured content contract'
+Check (@($audit.final_evidence_audit.required_gaps).Count -eq 0) 'completion audit has no required gaps'
 
 $t04 = $trace.current_t04_trace
 Check ($t04.status -eq 'CANDIDATE_PARTIAL_PRESERVED') 'T04 candidate status preserved'
@@ -194,8 +194,10 @@ if ($latestWindow.result -eq 'READ_ONLY_PAD_WINDOW_DIAGNOSTIC_CASE_A') {
     Check ($latestWindow.uia_snapshot.root_children_count -eq 0 -and @($latestWindow.uia_snapshot.matching_top_level_windows).Count -eq 0) 'T04 latest UIA has no top-level window'
 }
 
-Check ($trace.decision.a_to_g_complete -eq $false) 'A-G complete flag remains false'
-Check ($trace.decision.issue_close_authorized -eq $false) 'issue close remains unauthorized'
-Check ($trace.decision.pr_ready -eq $false) 'PR readiness remains false'
+Check ($trace.decision.a_to_g_complete -eq $true) 'A-G measured requirements complete'
+Check ($trace.decision.issue_close_authorized -eq $true -and $trace.decision.close_gate -eq 'Only after fresh verification and main integration') 'conditional issue close authorized by user'
+Check ($trace.decision.pr_ready -eq $true) 'PR readiness follows current explicit contract'
 
-Write-Output ('PASS: ' + $checks + ' Issue #5 A-G trace checks; partial/open, T04 Run1 NOT_CAPTURED, and T10 strict NOT_PROVEN preserved.')
+& node (Join-Path $PSScriptRoot 'Test-FinalContentAcceptance.mjs')
+if ($LASTEXITCODE -ne 0) { throw 'FINAL_CONTENT: acceptance evidence failed' }
+Write-Output ('PASS: ' + $checks + ' Issue #5 A-G trace checks; required scope accepted, historical T04 Run1 NOT_CAPTURED and T10 strict NOT_PROVEN preserved.')

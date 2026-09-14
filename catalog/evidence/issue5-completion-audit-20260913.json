@@ -1,8 +1,10 @@
 {
+  "current_acceptance_verification": "catalog/evidence/final-content-verification-20260915.json",
+  "historical_sections_note": "Current decision is current_acceptance. Retained candidate_followup, p4_current_bundle, p5, cases without a current-version qualifier, current_main_commit/live_issue_read, dated diagnostics and test runs describe historical stages; they are not current completion blockers or new execution evidence.",
   "schema_version": 2,
   "captured_on": "2026-09-14",
   "reconciled_at": "2026-09-14T20:45:00+09:00",
-  "status": "partial_current_package_followup",
+  "status": "complete_required_content_contract_transport_NOT_PROVEN",
   "final_a_g_trace": "evidence/issue5-a-g-trace-20260914g.json",
   "a_g_requirement_decisions": "evidence/issue5-a-g-trace-20260914g.json#requirement_decisions",
   "live_issue_read": "evidence/issue-live-read-20260914m.json",
@@ -121,7 +123,7 @@
         "current_version_acceptance": "evidence/t06-copilot-live-generation-20260914e-pad-acceptance.json",
         "current_version_conversation": "https://m365.cloud.microsoft/chat/conversation/efc8983a-0075-4040-833a-8f06183823b4",
         "current_version_instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
-        "current_version_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529cadadb7d3b7963e036e12",
+        "current_version_bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
         "current_version_prompt_sha256": "9b93ae90df34511cfbb67cc21aa148c797511a058bfa0bfad5f7d8cead51b6dd",
         "current_version_robin_sha256": "c0940cb3e3ddbd82880d274692858ce3e2335f623acb11abe521926e642f9fd9",
         "current_version_runs": 2,
@@ -349,49 +351,24 @@
     "authorized_scope_only_lines_2_and_4": true,
     "strict_raw_preservation": "NOT_PROVEN"
   },
-  "remaining": [
-    "T03 corrected request is traced to the current canonical 20260913e hashes and PAD acceptance; this is not a pass for the original request without an observable counter requirement.",
-    "T05 2026-09-13 fresh retry generation and two PAD runs are traced to current 20260913e; the new flow was auto-named 無題 (2), so an explicitly named-flow gate remains a bounded caveat.",
-    "T04 2026-09-13 generation format remains not accepted; fresh attempt-3 reproduces the response-origin arrow escaping in a new conversation, while attempt-1 bracket provenance remains unproven. A separate current-version independent request produced a clean 9-line Robin and two PAD runs, but run1's xlsx snapshot was not captured, so it remains a partial candidate and is not promoted.",
-    "Independent T10 current-version functional execution and authorized line-2/line-4 scope are now proven by two PAD runs and fresh run1/run2 output snapshots; source-to-generation and raw generation-to-PAD byte preservation remain NOT_PROVEN because serialization differs.",
-    "T06 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after CRLF normalization, Word body comparison passed, and the pre-existing output was moved aside and restored.",
-    "T07 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after CRLF normalization, PAGE_TOKEN_A2 was present without PAGE_TOKEN_A1, input PDF was unchanged, and the pre-existing output was restored.",
-    "T08 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after explicit whitespace normalization, action-level FileNotFoundError set NewVar=named and LastError on both runs, block-level user-defined FileNotFound remains NOT_PROVEN, and no downstream write/marker/publication occurred.",
-    "Independent T04 new pair 20260914w passed both per-run CSV/xlsx snapshots and fixed 3x3 values; Run1 verified before Run2. Old candidate and old Run1 NOT_CAPTURED remain historical. Original primary T04 remains not accepted and is not double-counted. Required remaining: T10 strict raw-byte preservation NOT_PROVEN. Issues remain OPEN / partial. Paste-observer failure required native clipboard history restoration; text equality and original formats were verified, full-format byte equality was not assessed.",
-    "Historical T04 Designer block resolved for new pair 20260914w; old window observations remain unchanged."
-  ],
+  "remaining": [],
   "optional_unconfirmed": [
     "P3 boundaries listed in p3.still_unconfirmed (outside the minimum A-G teaching material)",
     "Agent Builder registration (out of scope for normal M365 Copilot chat validation)",
     "DOM check (tests/Test-CopilotDom.cjs) NOT_RUN because Playwright is not configured",
     "Other URLs/elements/browsers, additional CSV or date-format modes, and PowerPoint collision variants"
   ],
-  "external_blockers": [
-    {
-      "id": "T04-pad-designer-window",
-      "status": "BLOCKED",
-      "evidence": "evidence/t04-independent-current-pad-window-observation-20260914t.json",
-      "condition": "PAD.Designer HWND 0, empty title, UIA root 0; do not start the fixed pair"
-    },
-    {
-      "id": "T10-raw-byte-channel",
-      "status": "NOT_PROVEN",
-      "evidence": "evidence/t10-independent-current-generation-20260914e.json",
-      "condition": "separate source, response-origin, and PAD recopy byte snapshots are required"
-    }
-  ],
-  "result": "Independent T04 new pair 20260914w passed both per-run CSV/xlsx snapshots and fixed 3x3 values; Run1 verified before Run2. Old candidate and old Run1 NOT_CAPTURED remain historical. Original primary T04 remains not accepted and is not double-counted. Required remaining: T10 strict raw-byte preservation NOT_PROVEN. Issues remain OPEN / partial. Paste-observer failure required native clipboard history restoration; text equality and original formats were verified, full-format byte equality was not assessed.",
+  "external_blockers": [],
+  "result": "Required acceptance for normal M365 Copilot Chat + PAD 20260913e is technically satisfied under the explicit 2026-09-15 user completion contract. T10 functional execution, requested changes only, and unchanged command/content preservation PASS; transport raw-byte preservation remains NOT_PROVEN (non-blocking limitation), outside raw bytes FAIL, requests/completed/remaining 1/1/0 for each response. Prior T04 failures and partial observations remain history. Close only after fresh checks and main integration.",
   "final_evidence_audit": {
-    "status": "PARTIAL_REQUIRED_TRACEABILITY_GAPS",
+    "status": "COMPLETE_REQUIRED_CONTENT_CONTRACT",
     "current_main_commit": "7cc2c18b2a7f521f770c47c48cbbf4715d228979",
     "target_commit": "e295387b525492f87e890bc0fb8a74aaf2396c2f",
     "baseline_main": "de5efc1a525db0d49b4af9aa6cd6ec674ef9b4e8",
     "live_acceptance_preserved": true,
-    "pr_submission_ready": false,
+    "pr_submission_ready": true,
     "report": "docs/robin-knowledge-validation.md",
-    "required_gaps": [
-      "T10: derived audit evidence/t10-strict-preservation-audit-20260913.json proves functional execution separately and proves normalized content scope (only lines 2 and 4 changed; zero outside-line changes), but raw source-to-generation/source-to-recopy byte equality is false because source is CRLF/no-final-LF and generated/recopied forms differ. The independent 20260914e run adds fresh chat/PAD/output evidence but has the same serialization boundary. Keep strict preservation NOT_PROVEN and do not promote functional runs to full T10 strict acceptance."
-    ],
+    "required_gaps": [],
     "t10_strict_preservation": {
       "status": "NOT_PROVEN",
       "source": "generated/office-three-apps/generated.robin",
@@ -416,21 +393,21 @@
         "strict_source_crlf_preservation": "NOT_PROVEN",
         "note": "The native-clipboard observation failure is preserved but does not mean the browser copy operation failed. No code or expected values were edited."
       },
-    "independent_20260914e": {
-      "status": "FUNCTIONAL_SCOPE_PROVEN_STRICT_RAW_NOT_PROVEN",
-      "evidence": "evidence/t10-independent-current-generation-20260914e.json",
-      "generated_robin_sha256": "2bcb5512adc3d238251ea7da2f82c047a5ddfbf4ae4ce343b437aef27eb3284a",
-      "flow_name": "RobinKnowledgeT10IndependentCurrentBundleLive20260914e",
-      "designer_pid": 20008,
-      "runs_completed": 2,
-      "output_snapshots": ".work/t10-independent-20260914e/run1; .work/t10-independent-20260914e/run2",
-      "source_serialization": "CRLF/no-final-LF",
-      "generated_serialization": "LF/final-LF",
-      "generation_to_pad_serialization": "CRLF/final-LF",
-      "normalized_content_equal": true,
-      "raw_byte_equal": false
-    },
-    "original_records_preserved": true
+      "independent_20260914e": {
+        "status": "FUNCTIONAL_SCOPE_PROVEN_STRICT_RAW_NOT_PROVEN",
+        "evidence": "evidence/t10-independent-current-generation-20260914e.json",
+        "generated_robin_sha256": "2bcb5512adc3d238251ea7da2f82c047a5ddfbf4ae4ce343b437aef27eb3284a",
+        "flow_name": "RobinKnowledgeT10IndependentCurrentBundleLive20260914e",
+        "designer_pid": 20008,
+        "runs_completed": 2,
+        "output_snapshots": ".work/t10-independent-20260914e/run1; .work/t10-independent-20260914e/run2",
+        "source_serialization": "CRLF/no-final-LF",
+        "generated_serialization": "LF/final-LF",
+        "generation_to_pad_serialization": "CRLF/final-LF",
+        "normalized_content_equal": true,
+        "raw_byte_equal": false
+      },
+      "original_records_preserved": true
     },
     "corrections": [
       "A boolean: evidence/a-boolean-reuse-20260912/acceptance.json links the unchanged measured raw to a new empty flow, two True observations and reopened recopy. Both runs preserve transient ambiguous status observations; no run was resent.",
@@ -464,7 +441,17 @@
         "resolution": "C cell-value read is proven by native numeric [0][0] text read in a separate empty reuse flow, two runs with fixed expected value; Run2 observation recovered without another run. Required remaining work: independent T04 Run1 artifact and T10 strict raw-byte preservation. Issues #5/#27 remain OPEN / partial; canonical 20260913e and generation acceptance are unchanged.",
         "evidence": "catalog/evidence/c-cell-read-20260914v/acceptance.json"
       }
-    ]
+    ],
+    "current_acceptance": {
+      "evidence": "catalog/evidence/final-content-acceptance-20260915.json",
+      "status": "TECHNICAL_ACCEPTANCE_PASS",
+      "contract": "EXPLICIT_USER_COMPLETION_CONTRACT_CHANGE",
+      "required_gaps": [],
+      "t10_content": "PASS",
+      "t10_transport": "NOT_PROVEN",
+      "transport_blocking": false,
+      "close_gate": "After fresh checks and main integration only"
+    }
   },
   "c_cell_value_read_supplement": {
     "evidence": "catalog/evidence/c-cell-read-20260914v/acceptance.json",
@@ -472,17 +459,148 @@
     "scope": "numeric row 0 / column 0, Text; native reuse only",
     "pad_runs": 2,
     "copilot_sends": 0,
-    "remaining_required": [
-      "F-t10-strict-raw-bytes"
-    ]
+    "remaining_required": []
   },
   "t04_new_pair": {
     "evidence": "catalog/evidence/t04-independent-pair-20260914w/acceptance.json",
     "status": "PASS_INDEPENDENT_T04_NEW_PAIR",
-    "summary": "Independent T04 new pair 20260914w passed both per-run CSV/xlsx snapshots and fixed 3x3 values; Run1 verified before Run2. Old candidate and old Run1 NOT_CAPTURED remain historical. Original primary T04 remains not accepted and is not double-counted. Required remaining: T10 strict raw-byte preservation NOT_PROVEN. Issues remain OPEN / partial. Paste-observer failure required native clipboard history restoration; text equality and original formats were verified, full-format byte equality was not assessed.",
-    "remaining_required": [
+    "summary": "New independent T04 pair accepted separately; old primary failure/candidate_partial/Run1 NOT_CAPTURED preserved. Required acceptance for normal M365 Copilot Chat + PAD 20260913e is technically satisfied under the explicit 2026-09-15 user completion contract. T10 functional execution, requested changes only, and unchanged command/content preservation PASS; transport raw-byte preservation remains NOT_PROVEN (non-blocking limitation), outside raw bytes FAIL, requests/completed/remaining 1/1/0 for each response. Prior T04 failures and partial observations remain history. Close only after fresh checks and main integration.",
+    "remaining_required": [],
+    "t10_saved_review": "catalog/evidence/t10-saved-evidence-review-20260914w.json"
+  }
+,
+  "historical_pre_content_decision": {
+    "as_of": "Before explicit user decision on 2026-09-15",
+    "baseline_commit": "f4fa9a2e61bfd2a2be0414eccd9e42b2d4a5e35e",
+    "c_cell_value_read_supplement.remaining_required": [
       "F-t10-strict-raw-bytes"
     ],
-    "t10_saved_review": "catalog/evidence/t10-saved-evidence-review-20260914w.json"
+    "t04_new_pair.remaining_required": [
+      "F-t10-strict-raw-bytes"
+    ],
+    "t04_new_pair.summary": "Independent T04 new pair 20260914w passed both per-run CSV/xlsx snapshots and fixed 3x3 values; Run1 verified before Run2. Old candidate and old Run1 NOT_CAPTURED remain historical. Original primary T04 remains not accepted and is not double-counted. Required remaining: T10 strict raw-byte preservation NOT_PROVEN. Issues remain OPEN / partial. Paste-observer failure required native clipboard history restoration; text equality and original formats were verified, full-format byte equality was not assessed.",
+    "status": "partial_current_package_followup",
+    "result": "Independent T04 new pair 20260914w passed both per-run CSV/xlsx snapshots and fixed 3x3 values; Run1 verified before Run2. Old candidate and old Run1 NOT_CAPTURED remain historical. Original primary T04 remains not accepted and is not double-counted. Required remaining: T10 strict raw-byte preservation NOT_PROVEN. Issues remain OPEN / partial. Paste-observer failure required native clipboard history restoration; text equality and original formats were verified, full-format byte equality was not assessed.",
+    "remaining": [
+      "T03 corrected request is traced to the current canonical 20260913e hashes and PAD acceptance; this is not a pass for the original request without an observable counter requirement.",
+      "T05 2026-09-13 fresh retry generation and two PAD runs are traced to current 20260913e; the new flow was auto-named 無題 (2), so an explicitly named-flow gate remains a bounded caveat.",
+      "T04 2026-09-13 generation format remains not accepted; fresh attempt-3 reproduces the response-origin arrow escaping in a new conversation, while attempt-1 bracket provenance remains unproven. A separate current-version independent request produced a clean 9-line Robin and two PAD runs, but run1's xlsx snapshot was not captured, so it remains a partial candidate and is not promoted.",
+      "Independent T10 current-version functional execution and authorized line-2/line-4 scope are now proven by two PAD runs and fresh run1/run2 output snapshots; source-to-generation and raw generation-to-PAD byte preservation remain NOT_PROVEN because serialization differs.",
+      "T06 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after CRLF normalization, Word body comparison passed, and the pre-existing output was moved aside and restored.",
+      "T07 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after CRLF normalization, PAGE_TOKEN_A2 was present without PAGE_TOKEN_A1, input PDF was unchanged, and the pre-existing output was restored.",
+      "T08 2026-09-14 fresh generation and two PAD runs are traced to current 20260913e; generated Robin was unmodified, recopy matched after explicit whitespace normalization, action-level FileNotFoundError set NewVar=named and LastError on both runs, block-level user-defined FileNotFound remains NOT_PROVEN, and no downstream write/marker/publication occurred.",
+      "Independent T04 new pair 20260914w passed both per-run CSV/xlsx snapshots and fixed 3x3 values; Run1 verified before Run2. Old candidate and old Run1 NOT_CAPTURED remain historical. Original primary T04 remains not accepted and is not double-counted. Required remaining: T10 strict raw-byte preservation NOT_PROVEN. Issues remain OPEN / partial. Paste-observer failure required native clipboard history restoration; text equality and original formats were verified, full-format byte equality was not assessed.",
+      "Historical T04 Designer block resolved for new pair 20260914w; old window observations remain unchanged."
+    ],
+    "external_blockers": [
+      {
+        "id": "T04-pad-designer-window",
+        "status": "BLOCKED",
+        "evidence": "evidence/t04-independent-current-pad-window-observation-20260914t.json",
+        "condition": "PAD.Designer HWND 0, empty title, UIA root 0; do not start the fixed pair"
+      },
+      {
+        "id": "T10-raw-byte-channel",
+        "status": "NOT_PROVEN",
+        "evidence": "evidence/t10-independent-current-generation-20260914e.json",
+        "condition": "separate source, response-origin, and PAD recopy byte snapshots are required"
+      }
+    ],
+    "final_evidence_audit": {
+      "status": "PARTIAL_REQUIRED_TRACEABILITY_GAPS",
+      "current_main_commit": "7cc2c18b2a7f521f770c47c48cbbf4715d228979",
+      "target_commit": "e295387b525492f87e890bc0fb8a74aaf2396c2f",
+      "baseline_main": "de5efc1a525db0d49b4af9aa6cd6ec674ef9b4e8",
+      "live_acceptance_preserved": true,
+      "pr_submission_ready": false,
+      "report": "docs/robin-knowledge-validation.md",
+      "required_gaps": [
+        "T10: derived audit evidence/t10-strict-preservation-audit-20260913.json proves functional execution separately and proves normalized content scope (only lines 2 and 4 changed; zero outside-line changes), but raw source-to-generation/source-to-recopy byte equality is false because source is CRLF/no-final-LF and generated/recopied forms differ. The independent 20260914e run adds fresh chat/PAD/output evidence but has the same serialization boundary. Keep strict preservation NOT_PROVEN and do not promote functional runs to full T10 strict acceptance."
+      ],
+      "t10_strict_preservation": {
+        "status": "NOT_PROVEN",
+        "source": "generated/office-three-apps/generated.robin",
+        "source_sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+        "finald_primary": "generated/normal-chat-finald-20260912-t10/robin.txt",
+        "finald_independent": "generated/normal-chat-finald-20260912-t10-independent/robin.txt",
+        "saved_response_sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12",
+        "source_serialization": "CRLF between 16 commands; no final newline",
+        "saved_response_serialization": "LF between 16 commands; final LF present",
+        "unchanged_instruction_line_contents": 14,
+        "raw_byte_equality_outside_allowed_changes": false,
+        "interpretation": "DOM serialization and original model output have not been independently distinguished. This is insufficient evidence for the explicit line-ending preservation requirement, not proof that the runtime behavior failed.",
+        "candidate_independent_conversation": "https://m365.cloud.microsoft/chat/conversation/de5a25b3-24df-4ad7-8fc8-7e2284e5f2b3",
+        "candidate_independent_status": "GENERATED_NOT_ACCEPTED; no PAD run requested because strict preservation is not proven",
+        "copy_attempt": "CUA response-copy button invoked; native clipboard observation did not obtain a matching response within 45 seconds; original clipboard restored",
+        "browser_clipboard_followup": {
+          "status": "CAPTURED",
+          "method": "CUA response-copy button then tab.clipboard.readText after asynchronous completion",
+          "sha256": "3285b362d5537d9beb1ee0ba317a67709e6374f6dffacad074b499f150f69eba",
+          "serialization": "15 LF separators, no final newline; DOM save adds one final LF",
+          "local_evidence": ".work/finale-20260912/t10-independent/browser-clipboard-observation.json",
+          "strict_source_crlf_preservation": "NOT_PROVEN",
+          "note": "The native-clipboard observation failure is preserved but does not mean the browser copy operation failed. No code or expected values were edited."
+        },
+        "independent_20260914e": {
+          "status": "FUNCTIONAL_SCOPE_PROVEN_STRICT_RAW_NOT_PROVEN",
+          "evidence": "evidence/t10-independent-current-generation-20260914e.json",
+          "generated_robin_sha256": "2bcb5512adc3d238251ea7da2f82c047a5ddfbf4ae4ce343b437aef27eb3284a",
+          "flow_name": "RobinKnowledgeT10IndependentCurrentBundleLive20260914e",
+          "designer_pid": 20008,
+          "runs_completed": 2,
+          "output_snapshots": ".work/t10-independent-20260914e/run1; .work/t10-independent-20260914e/run2",
+          "source_serialization": "CRLF/no-final-LF",
+          "generated_serialization": "LF/final-LF",
+          "generation_to_pad_serialization": "CRLF/final-LF",
+          "normalized_content_equal": true,
+          "raw_byte_equal": false
+        },
+        "original_records_preserved": true
+      },
+      "corrections": [
+        "A boolean: evidence/a-boolean-reuse-20260912/acceptance.json links the unchanged measured raw to a new empty flow, two True observations and reopened recopy. Both runs preserve transient ambiguous status observations; no run was resent.",
+        "D folder creation: evidence/d-folder-create-reuse-20260912/acceptance.json proves two creations from an absent target, expected NewFolder path, original empty-folder restoration and reopened recopy. A run2 preparation failure occurred before any execution request and is retained.",
+        "A subtraction: new separate-empty-flow reuse on 2026-09-12 confirms the unmodified measured raw with two P3Number=7 observations and reopened recopy. See evidence/a-subtract-reuse-20260912/acceptance.json. This resolves current reuse/two-run coverage only; the original 2026-09-10 record still links one run and is preserved.",
+        "26 stale current-package-status PAD run links corrected; original per-case acceptance/result and PAD records preserved.",
+        "T09 result/acceptance observed timestamps retain finalc times; authoritative finald run1=2026-09-12T02:33:08.6086461Z and run2=2026-09-12T02:33:25.4307357Z. This derived correction does not alter original records.",
+        "T08/P3-6 recopy differs by CRLF and one trailing space on BLOCK; original bytes preserved. Not byte-identical.",
+        "Complete live-acceptance status concerns the fixed finald generation cases only; it does not certify all A-G requirements or PR readiness."
+      ],
+      "negative_response_browser_check": {
+        "status": "PASS_READ_ONLY_CORRESPONDENCE",
+        "conversation": "4eb6120d-ff97-4125-88ec-d850f00793fd",
+        "attachments": [
+          "agent-instructions",
+          "PAD-Robin-Knowledge-Bundle"
+        ],
+        "answer_chars": 1636,
+        "pre_elements": 0,
+        "code_elements": 0,
+        "new_messages_sent": 0,
+        "note": "Reopened the saved conversation in Chrome through CUA; all answer paragraphs and citation markers correspond to saved response.txt. No new generation or PAD execution."
+      },
+      "accepted_scope_notes": [
+        "The canonical instruction WAIT 500→WAIT 1 correction is fixed in 20260913e. Because instruction bytes changed, fresh same-version acceptance is required; do not relabel historical finald PASS as 20260913e.",
+        "T03 2026-09-13 request-only correction is traced to current canonical 20260913e and PAD accepted; it does not certify the original request without explicit counters, and no historical finald PASS was transferred."
+      ],
+      "resolved_required_gaps": [
+        {
+          "previous_statement": "C: saved cell probe proves indexed cell update, not a cell-value read; a dedicated runtime cell-value read record is still required. Column-name row-loop syntax is an optional boundary and is not promoted to a blocker.",
+          "resolution": "C cell-value read is proven by native numeric [0][0] text read in a separate empty reuse flow, two runs with fixed expected value; Run2 observation recovered without another run. Required remaining work: independent T04 Run1 artifact and T10 strict raw-byte preservation. Issues #5/#27 remain OPEN / partial; canonical 20260913e and generation acceptance are unchanged.",
+          "evidence": "catalog/evidence/c-cell-read-20260914v/acceptance.json"
+        }
+      ]
+    }
+  }
+,
+  "current_acceptance": {
+    "evidence": "catalog/evidence/final-content-acceptance-20260915.json",
+    "status": "TECHNICAL_ACCEPTANCE_PASS",
+    "contract": "EXPLICIT_USER_COMPLETION_CONTRACT_CHANGE",
+    "required_gaps": [],
+    "t10_content": "PASS",
+    "t10_transport": "NOT_PROVEN",
+    "transport_blocking": false,
+    "close_gate": "After fresh checks and main integration only"
   }
 }
