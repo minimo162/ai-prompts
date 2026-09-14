@@ -83,7 +83,10 @@
         "recopy_crlf_normalized_equal": true,
         "response_origin_backslash_arrow_count": 0,
         "strict_source_to_generation": "NOT_ASSESSED",
-        "acceptance_scope": "candidate_partial"
+        "acceptance_scope": "candidate_partial",
+        "evidence_reconciliation": "evidence/t04-independent-current-evidence-reconciliation-20260914e.json",
+        "new_pair_status": "NOT_STARTED_CURRENT_PAD_DESIGNER_WINDOW_UNOBSERVABLE",
+        "run1_output_snapshot": "NOT_CAPTURED"
       },
       "independent_t10_20260914e": {
         "status": "PASS_CURRENT_20260914E_INDEPENDENT_FUNCTIONAL_SCOPE_ACCEPTED_STRICT_RAW_NOT_PROVEN",

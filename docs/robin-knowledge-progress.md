@@ -1,5 +1,11 @@
 # Robinナレッジ作成 進捗
 
+## 2026-09-14 独立T04候補の実行別証跡追跡補完
+
+独立T04候補の既存証跡を再照合し、現行instruction SHA `6ad6f742…`／bundle SHA `79245787…`、生成Robin SHA `dd4f39f0…43569d`、PAD 9アクション（ListItem 6件は仮想化表示）を固定した。Run1/Run2の実行JSONはともに成功だが、Run1のxlsxは`NOT_CAPTURED`であり、Run2（対象/A/10、対象/C/25、対象/D/5）の結果をRun1へ付け替えていない。`catalog/evidence/t04-independent-current-evidence-reconciliation-20260914e.json`と`tests/Test-T04IndependentEvidence.ps1`で、各証跡のSHA、入力不変、再コピー、出力境界、候補partialを機械検証できるようにした。
+
+不足を埋めるためRun1/Run2の最大2回を事前固定した新規空フロー`RobinKnowledgeT04IndependentCurrentOutputComparison20260914eR1`は作成できたが、Designer PID 44316はHWND 0・完全一致タイトル未観測でUIA rootを取得できなかった。このため貼付け・実行は開始せず、保存済みRobinの再送・手修正・第3回Runも行っていない。空フローは削除せず、次回は正確な非0 HWND／タイトルを観測してからのみ無修正貼付けと各Run前のxlsx捕捉を行う。Issue #5/#27、T10厳密保持、A〜G監査はOPEN / partialのまま。
+
 ## 2026-09-14 集約訂正・現行負例v2受入
 
 現行20260913eのP3-1〜P3-6個別証跡を照合し、派生集約のP3-4〜P3-6未受入表示を訂正した。原送信・回答記録は変更せず、63桁instruction SHAの訂正根拠を`catalog/evidence/p3-current-sha-correction-20260914e.json`へ記録している。固定負例v2は通常M365 Copilotへ1回だけ送信し、回答を無修正保存した。N1〜N3はいずれも未確認受入で、理由・追加証拠・確認前に禁止する後続処理を含み、コードフェンス／Robin命令／疑似コード／未採取引数の推測はなかった。PAD貼付け・Run・未登録Web操作は未実施。旧finald負例PASSは履歴として保持し、現行版へ継承していない。残件はT04形式・独立T04候補partial、T10厳密保持、最終A〜G監査で、Issue #5/#27はOPEN / partial。

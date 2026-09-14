@@ -3,6 +3,12 @@
 
 P3-1〜P3-6の現行版個別証跡はすべて同版指示・bundleに結び付き、派生集約のP3-4〜P3-6未受入表示を訂正した。63桁SHAの原記録は変更せず、訂正根拠と参照を`catalog/evidence/p3-current-sha-correction-20260914e.json`へ残した。固定負例v2（N1〜N3）は通常M365 Copilot新規会話へ1回送信し、回答原文を無修正保存した。三項目とも未確認受入で、理由・必要証拠・禁止後続処理を満たし、コードフェンス・Robin命令・疑似コード・未採取アクション名／引数の推測はない。PAD貼付け・Run・未登録Web操作は行っていない。旧finald負例PASSは履歴のまま現行版へ移していない。残件はT04形式不受入・独立T04候補partial、T10厳密保持NOT_PROVEN、A〜G監査であり、Issue #5/#27はOPEN / partialを維持する。
 
+## 2026-09-14 独立T04候補の実行別証跡追跡補完
+
+独立T04候補の既存ファイルを上書きせず、生成・貼付け保存・再コピー・Run1/Run2・Run2 xlsxの各SHAと参照を`catalog/evidence/t04-independent-current-evidence-reconciliation-20260914e.json`へ集約した。現行指示／bundle／manifestへの結び付き、生成Robin `dd4f39f0…43569d`（plain `=>` 5、escaped `\\=>` 0）、PAD権威9アクション（ListItem 6件は仮想化表示）、入力SHA不変を機械テスト `tests/Test-T04IndependentEvidence.ps1`（61 checks）で確認した。
+
+Run1/Run2はともに成功したが、Run1のxlsxは`NOT_CAPTURED`であり、Run2の3行（対象/A/10、対象/C/25、対象/D/5）をRun1の結果へ付け替えていない。最大2回を事前固定した新規空フロー `RobinKnowledgeT04IndependentCurrentOutputComparison20260914eR1` は作成できたものの、Designer PID 44316はHWND 0・完全一致タイトル未観測でUIA rootを取得できなかったため、貼付け・実行を開始していない。保存済みRobinの再送・手修正・第3回Run・空フロー削除は行わず、候補は`candidate_partial`、Issue #5/#27はOPEN / partialのままとする。次回は正確な非0 HWND／タイトルを観測した場合のみ、無修正Robinを使って各Run前にxlsxを捕捉する。
+
 ## 2026-09-14 現行版P3-1の送信・実機PAD受入
 
 現行正本20260913e（instruction SHA `6ad6f742…`、bundle SHA `79245787…`、manifest `copilot/knowledge-bundle-manifest-20260913e.json`）を、通常M365 Copilotの新規会話 `https://m365.cloud.microsoft/chat/conversation/2167fd22-b6fb-4101-9379-8f4e760a518a`へ同版指示全文とbundleを実添付してThink Deeperで1回送信した。評価者用正解コード・期待値・Issue本文は送っていない。回答DOMの単一コードブロックから4行Robinを無修正保存した。
