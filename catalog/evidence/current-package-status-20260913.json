@@ -11,7 +11,7 @@
     "state": "MERGED",
     "merge_commit": "7cc2c18b2a7f521f770c47c48cbbf4715d228979"
   },
-  "status": "partial_current_package_20260913e_T01_T02_T03_T05_T06_T07_T08_T09_P31_P32_P33_P34_P35_P36_accepted_T01_independent_20260914e_T10_independent_functional_scope_accepted_20260914e_T04_independent_candidate_partial_20260914e_strict_T10_not_proven",
+  "status": "partial_current_20260913e_independent_T04_new_pair_accepted_T10_strict_NOT_PROVEN",
   "issue_state": "OPEN",
   "version": {
     "label": "20260913e",
@@ -210,7 +210,8 @@
         "latest_window_observation": "evidence/t04-independent-current-pad-window-observation-20260914t.json",
         "window_diagnostic": "evidence/t04-independent-current-pad-window-diagnostic-20260914r.json",
         "session_diagnostic": "evidence/t04-independent-current-pad-session-diagnostic-20260914s.json",
-        "new_pair_status": "NOT_STARTED_CURRENT_PAD_DESIGNER_WINDOW_UNOBSERVABLE",
+        "new_pair_status": "PASS_INDEPENDENT_T04_NEW_PAIR",
+        "new_pair_evidence": "catalog/evidence/t04-independent-pair-20260914w/acceptance.json",
         "not_accepted_reason": "Run1 output snapshot was not captured before run2; no third run was started."
       },
       "result": "../generated/normal-chat-finald-20260912-t04/result.json",
@@ -830,9 +831,9 @@
       "p35_current_acceptance": "evidence/p35-current-bundle-live-20260914e.json; evidence/p35-current-pad-paste-save-20260914e.json; evidence/p35-current-pad-run1-20260914e.json; evidence/p35-current-pad-run2-20260914e.json",
       "p36_current_acceptance": "evidence/p36-current-bundle-live-20260914e.json; evidence/p36-current-pad-paste-save-20260914e.json; evidence/p36-current-pad-run1-20260914e.json; evidence/p36-current-pad-run2-20260914e.json",
       "strict_t10": "NOT_PROVEN",
-      "required_next": "Current P3-1 through P3-6 and negative suite v2 are accepted with separate same-version evidence. Independent T04 remains partial because its run1 output was not snapshotted; strict T10 remains NOT_PROVEN. Remaining work is strict T10 if provable without normalization and final A-G audit/coverage reconciliation."
+      "required_next": "Current P3-1 through P3-6 and negative suite v2 are accepted with separate same-version evidence. Old independent T04 remains historical partial; new 20260914w pair passed both artifact gates. Remaining required work is T10 strict raw-byte proof with a valid same-path control; no repeat functional run."
     },
-  "result": "Current canonical package is 20260913e with WAIT 1/WAIT 1 alignment, a live reference-only precheck, current-version T01, T02, T03 (explicit corrected request), T05, T06, T07, T08 (measured action-level expected error), T09 PAD acceptance, current P3-1 through P3-6 acceptance, and current negative suite v2 fail-closed acceptance, plus fresh current-version independent T01 acceptance, independent T10 functional/scope acceptance with strict raw bytes NOT_PROVEN, and a partial independent T04 candidate (clean response-origin format, unmodified paste/save/recopy, two PAD runs, run2 cell values verified). Historical finald acceptance is preserved but not transferred; original T04 remains not accepted, independent T04 is not promoted to full acceptance because run1 output was not snapshotted, and strict T10 remains open. The A-G requirement decision fragment and coverage/index/status pointers are reconciled on current main, C native scalar read is now proven by 20260914v; required E/F gaps keep the final A-G audit OPEN / partial.",
+  "result": "Independent T04 new pair 20260914w passed both per-run CSV/xlsx snapshots and fixed 3x3 values; Run1 verified before Run2. Old candidate and old Run1 NOT_CAPTURED remain historical. Original primary T04 remains not accepted and is not double-counted. Required remaining: T10 strict raw-byte preservation NOT_PROVEN. Issues remain OPEN / partial. Paste-observer failure required native clipboard history restoration; text equality and original formats were verified, full-format byte equality was not assessed.",
   "c_cell_value_read_supplement": {
     "evidence": "catalog/evidence/c-cell-read-20260914v/acceptance.json",
     "status": "PASS_REQUIRED_CELL_READ_NATIVE_REUSE",
@@ -840,8 +841,16 @@
     "pad_runs": 2,
     "copilot_sends": 0,
     "remaining_required": [
-      "E-independent-t04-run1-artifact",
       "F-t10-strict-raw-bytes"
     ]
+  },
+  "t04_new_pair": {
+    "evidence": "catalog/evidence/t04-independent-pair-20260914w/acceptance.json",
+    "status": "PASS_INDEPENDENT_T04_NEW_PAIR",
+    "summary": "Independent T04 new pair 20260914w passed both per-run CSV/xlsx snapshots and fixed 3x3 values; Run1 verified before Run2. Old candidate and old Run1 NOT_CAPTURED remain historical. Original primary T04 remains not accepted and is not double-counted. Required remaining: T10 strict raw-byte preservation NOT_PROVEN. Issues remain OPEN / partial. Paste-observer failure required native clipboard history restoration; text equality and original formats were verified, full-format byte equality was not assessed.",
+    "remaining_required": [
+      "F-t10-strict-raw-bytes"
+    ],
+    "t10_saved_review": "catalog/evidence/t10-saved-evidence-review-20260914w.json"
   }
 }

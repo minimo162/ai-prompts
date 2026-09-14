@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)][int]$TargetProcessId,
     [Parameter(Mandatory = $true)][string]$FlowName,
@@ -59,7 +59,9 @@ try {
     $settled = $true
 }
 finally {
-    if ($settled -and $null -ne $pasteSequence -and (Get-AgentPadClipboardSequence) -eq $pasteSequence -and (Get-AgentPadClipboardText) -ceq $text) { Restore-AgentPadClipboard $beforeClipboard }
+    # Observation failure must not discard the clipboard snapshot. Restore only
+    # while this paste still owns both the sequence and exact text.
+    if ($null -ne $pasteSequence -and (Get-AgentPadClipboardSequence) -eq $pasteSequence -and (Get-AgentPadClipboardText) -ceq $text) { Restore-AgentPadClipboard $beforeClipboard }
 }
 $evidence = [ordered]@{
     schema_version = 1

@@ -1,0 +1,74 @@
+{
+  "status": "PASS",
+  "verification_id": "T04-INDEPENDENT-PAIR-20260914W",
+  "run_number": 1,
+  "verified_at": "2026-09-14T14:06:32.316439+00:00",
+  "expected": [
+    [
+      "対象",
+      "A",
+      10
+    ],
+    [
+      "対象",
+      "C",
+      25
+    ],
+    [
+      "対象",
+      "D",
+      5
+    ]
+  ],
+  "observed": {
+    ".csv": [
+      [
+        "対象",
+        "A",
+        "10"
+      ],
+      [
+        "対象",
+        "C",
+        "25"
+      ],
+      [
+        "対象",
+        "D",
+        "5"
+      ]
+    ],
+    "sheet": "t04-filtered",
+    ".xlsx": [
+      [
+        "対象",
+        "A",
+        10
+      ],
+      [
+        "対象",
+        "C",
+        25
+      ],
+      [
+        "対象",
+        "D",
+        5
+      ]
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run1/t04-filtered.csv",
+      "sha256": "b9442568996bbe8c45ce6a7efd705dd6159392cb42f24eb23341464f87a9c433",
+      "bytes": 39
+    },
+    {
+      "path": "catalog/evidence/t04-independent-pair-20260914w/run1/normal-chat-t04-output-independent-20260914e.xlsx",
+      "sha256": "2388696b0909e694d4c940fbc50a5537589a9f36e15239717b693c4e9dcb5b7e",
+      "bytes": 10284
+    }
+  ],
+  "input_unchanged": true,
+  "gate": "READY_FOR_NEXT_RUN"
+}

@@ -1,0 +1,342 @@
+{
+  "schema_version": 1,
+  "status": "PASS_T04_NEW_PAIR_WITH_PRESERVED_T10_BOUNDARY",
+  "verified_at": "2026-09-14T14:22:52.572241+00:00",
+  "base_local_commit": "9e606c3c09cac63a28aaa00da089e93c3cc4bc8a",
+  "github_main": "7cc2c18b2a7f521f770c47c48cbbf4715d228979",
+  "issue_read": [
+    {
+      "number": 5,
+      "state": "OPEN",
+      "url": "https://github.com/minimo162/ai-prompts/issues/5",
+      "body_sha256": "4e93f1e40bd57b80cf2fbe49bf256f6b28f617242487e6376b3c574f7937a01b",
+      "last_read_comment_url": "https://github.com/minimo162/ai-prompts/issues/5#issuecomment-5664903441",
+      "body_scope": "C completed report; T04 bounded pair next; strict T10 separate; no publication"
+    },
+    {
+      "number": 27,
+      "state": "OPEN",
+      "url": "https://github.com/minimo162/ai-prompts/issues/27",
+      "body_sha256": "3961eb26e4fe2b83963ac01fb5ba8870b8e2ad1ccc9d1244c567e7c813fe3d38",
+      "last_read_comment_url": "https://github.com/minimo162/ai-prompts/issues/27#issuecomment-5664903741",
+      "body_scope": "C completed report; T04 bounded pair next; strict T10 separate; no publication"
+    }
+  ],
+  "live": {
+    "evidence": "catalog/evidence/t04-independent-pair-20260914w/acceptance.json",
+    "T04_Run": 2,
+    "new_flow": 1,
+    "paste": 1,
+    "Copilot_sends": 0,
+    "C_Run": 0,
+    "T10_Run": 0,
+    "third_Run": 0,
+    "run1_values_before_run2": true,
+    "existing_outputs_restored": true
+  },
+  "fresh_tests": {
+    "CDataTableCellRead": 82,
+    "T04PairEvidence": 87,
+    "Issue5AGTrace": 316,
+    "T04IndependentHistoricalEvidence": 70,
+    "PadWindowDiagnostic": 38,
+    "PadRunArtifactSnapshot": 11,
+    "PadPasteClipboardFinally": 5,
+    "T04PairArtifacts": {
+      "positive_snapshot_reads": 2,
+      "negative_controls": 5
+    },
+    "Issue5CurrentStatus": 57,
+    "RobinCatalog": 107,
+    "RawContracts": {
+      "assertions": 6,
+      "all_true": true
+    },
+    "CopilotPackage": {
+      "instructions_utf16": 3947,
+      "knowledge_files": 7,
+      "observed_actions": 87
+    },
+    "T10StrictPreservation": "PASS_REGRESSION_WITH_STRICT_NOT_PROVEN",
+    "NonLiveAll": {
+      "count": 37,
+      "status": "PASS",
+      "original_record": ".work/nonlive-1b2d100f4fa34391993b5f395dd6f16c/verification.json",
+      "original_record_sha256": "55558f8a5759df6c769790a548ad52cf71384f3103b80001d6e3eb7dc2556b44",
+      "candidate_unchanged": true,
+      "tests": [
+        {
+          "name": "Test-CsvContracts.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-CsvBatch.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-CsvLifecycle.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-CsvTypedPlan.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-CsvReview.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-CsvLateResponse.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-QualityDraft.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-OfflineDiagnostic.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-ConversationScope.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-ConnectionContract.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-AcceptanceGate.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-App.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-Pad.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-PadRunArtifactSnapshot.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-RobinCatalog.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-BoundedRobinLoop.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-RobinNumberConversion.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-GeneralJobStart.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-GeneralArtifactOpen.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-CompletionDecision.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-PadRecovery.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-Copilot.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-CopilotPlannerV2.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-PlannerV2Transport.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-Http.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-Launcher.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-ReleaseBinding.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-PublishAgentSource.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-PublishCrash.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-AiCallProcess.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-AiCallProviderFailure.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-ClipboardSnapshot.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-DocumentRobin.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-DocumentObservation.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-ClipboardReadRetry.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-CurrentBundleT01Prepared.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "name": "Test-Issue5CurrentStatus.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        }
+      ]
+    }
+  },
+  "integrity": {
+    "catalog_json_count": 1414,
+    "copilot_json_count": 15,
+    "instruction_bundle_and_7_sources_unchanged": true,
+    "protected_unchanged": 409,
+    "C_committed_originals_unchanged": true,
+    "remaining_required": [
+      "F-t10-strict-raw-bytes"
+    ],
+    "new_original_files_verified": 31,
+    "prior_output_states_restored": true,
+    "new_markdown_references": "PASS",
+    "historical_raw_files_modified": false,
+    "changed_tracked_files": [
+      "README.md",
+      "catalog/README.md",
+      "catalog/coverage.json",
+      "catalog/evidence/current-package-status-20260913.json",
+      "catalog/evidence/issue5-a-g-trace-20260914g.json",
+      "catalog/evidence/issue5-completion-audit-20260913.json",
+      "catalog/generated/acceptance-t01-t10/README.md",
+      "catalog/index.json",
+      "docs/pad-live-setup.md",
+      "docs/robin-knowledge-progress.md",
+      "docs/robin-knowledge-validation.md",
+      "tests/Test-Issue5AGTrace.ps1",
+      "tools/Paste-PadRobinLiveByStatus.ps1"
+    ]
+  },
+  "failures_and_recovery": [
+    {
+      "stage": "paste observation",
+      "failure": "PS5 status helper timed out with four realized items",
+      "recovery": "No duplicate paste; authoritative nine actions, save and recopy observed via PS7. Added UTF8 BOM for localized matching."
+    },
+    {
+      "stage": "run observations",
+      "failure": "Start/Stop selectors transiently missing or inconsistent",
+      "recovery": "Same Run polling continued to running then ready/errors0; no extra Invoke."
+    },
+    {
+      "stage": "clipboard",
+      "failure": "Old helper only restored clipboard on successful observation",
+      "recovery": "Fixed ownership-guarded finally and tests. Restored latest history item before source paste, checked native Success and matching Text with original formats. Exact whole-format bytes not assessed; transient history metadata equality/id probes preserved as failed observations."
+    },
+    {
+      "stage": "CurrentStatus test",
+      "failure": "coverage/status aggregate mismatch",
+      "recovery": "Aligned derived coverage status to current status; rerun PASS. No guard weakened."
+    },
+    {
+      "stage": "Office inventory",
+      "failure": "No matching processes produced no original JSON; attempted move of nonexistent inventory file failed",
+      "recovery": "No Office process was killed; explicit environment-preservation record replaces no claim about missing JSON."
+    }
+  ],
+  "not_run": [
+    "new Copilot generation",
+    "C live rerun",
+    "T10 live rerun",
+    "DOM/Playwright",
+    "GitHub CI",
+    "push",
+    "PR",
+    "merge",
+    "release",
+    "distribution",
+    "Issue close",
+    "branch deletion"
+  ],
+  "past_evidence_reused": [
+    "20260913e T04 independent normal-chat generation",
+    "old T04 candidate with Run1 NOT_CAPTURED",
+    "C native acceptance",
+    "T10 primary/independent functional runs"
+  ],
+  "T10_saved_review": "catalog/evidence/t10-saved-evidence-review-20260914w.json",
+  "remaining_required": [
+    "F-t10-strict-raw-bytes"
+  ],
+  "review": {
+    "diff_check": "PASS",
+    "sensitive_text_scan": "No matches in new public pair JSON/text",
+    "screenshots": "Prepared narrow, settled maximized and both stopped screenshots inspected. Maximization transition showing background account UI retained only in ignored local work.",
+    "native_vs_static": "Nonlive PASS is not live proof; new native artifacts are separate."
+  }
+}

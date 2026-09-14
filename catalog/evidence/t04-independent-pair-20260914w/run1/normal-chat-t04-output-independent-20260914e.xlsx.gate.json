@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "kind": "pad_run_artifact_snapshot",
+  "observed_at": "2026-09-14T14:05:48.1240318Z",
+  "run_number": 1,
+  "artifact_path": "catalog/evidence/normal-chat-t04-output-independent-20260914e.xlsx",
+  "snapshot_path": "catalog/evidence/t04-independent-pair-20260914w/run1/normal-chat-t04-output-independent-20260914e.xlsx",
+  "artifact_bytes_before": 10284,
+  "artifact_sha256_before": "2388696b0909e694d4c940fbc50a5537589a9f36e15239717b693c4e9dcb5b7e",
+  "artifact_sha256_after": "2388696b0909e694d4c940fbc50a5537589a9f36e15239717b693c4e9dcb5b7e",
+  "snapshot_bytes": 10284,
+  "snapshot_sha256": "2388696b0909e694d4c940fbc50a5537589a9f36e15239717b693c4e9dcb5b7e",
+  "artifact_stable": true,
+  "snapshot_matches_artifact": true,
+  "minimum_bytes": 1,
+  "input_path": "catalog/fixtures/excel/t04-filter-input.xlsx",
+  "expected_input_sha256": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+  "input_sha256_after": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+  "input_unchanged": true,
+  "status": "PASS",
+  "gate": "READY_FOR_NEXT_RUN",
+  "reason": "snapshot verified before the next run"
+}

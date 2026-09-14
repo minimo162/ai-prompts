@@ -1,0 +1,11 @@
+{
+  "before_office_query": "No matching process output; original JSON was not created",
+  "after_office_processes": 0,
+  "existing_office_process_kill": false,
+  "browser_operations": 0,
+  "new_flow_count": 1,
+  "new_run_starts": 2,
+  "new_copilot_sends": 0,
+  "restoration_verified": true,
+  "clipboard_start_preservation": "NOT_PROVEN_AFTER_PASTE_OBSERVER_FAILURE"
+}

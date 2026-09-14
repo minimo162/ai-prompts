@@ -1,5 +1,11 @@
 # 通常M365 Copilotチャット受入試験 T01〜T10（継続中）
 
+## 2026-09-14 独立T04の新Runペア（20260914w）
+
+保存済み20260913e独立生成を無修正で専用空フローへ配置し、9アクションを保存・再コピーして最大2 Runを実施しました。Run1のCSV/xlsxを独立保存し、3行3列（対象/A/10、対象/C/25、対象/D/5）と入力SHA不変を検証してからRun2を開始し、Run2も一致しました。[新pair原証跡](../../evidence/t04-independent-pair-20260914w/acceptance.json)。旧Run1 `NOT_CAPTURED`・旧候補 `candidate_partial`・元T04不成立は保全し、同じ独立生成を一次T04へ二重計上しません。
+
+今回PAD 2 Run・Copilot送信0・C/T10再Run0。20260913eと保護409ファイルは不変です。必須技術残件はT10 strict raw-byte保持 `NOT_PROVEN`。同経路対照がないため再送・機能Runは行わず、[保存証跡の比較](../../evidence/t10-saved-evidence-review-20260914w.json)を分離しました。貼付け観測失敗で未復元となったクリップボードは、貼付け直前のWindows履歴項目を復元し、Text一致と元形式の存在を確認しました。全形式の生バイト同一は未評価です。補助の失敗時復元とPS5文字コードも修正しました。Issue #5/#27はOPEN / partial。
+
 ## 2026-09-14 現行集約訂正・負例v2
 
 P3-1〜P3-6は現行20260913eの個別証跡に基づき受入済みとして集約した（旧「P3-4〜P3-6残り」記載は履歴）。固定負例v2は通常M365 Copilotへ1回送信し、N1〜N3の未確認回答を無修正保存した。コードフェンス・Robin命令・疑似コード・未採取引数の推測はなく、PAD貼付け／Run／未登録Web操作は未実施。旧finald負例PASSは履歴として分離している。訂正根拠は`catalog/evidence/p3-current-sha-correction-20260914e.json`、現行負例証跡は`catalog/evidence/negative-suite-current-20260914e-acceptance.json`。T04形式・独立T04候補partial、T10厳密保持NOT_PROVEN、A〜G監査は継続中で、Issue #5/#27はOPEN / partial。

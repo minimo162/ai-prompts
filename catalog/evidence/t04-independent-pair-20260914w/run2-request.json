@@ -1,0 +1,20 @@
+{
+  "verification_id": "T04-INDEPENDENT-PAIR-20260914W",
+  "run_number": 2,
+  "pid": 23256,
+  "hwnd": 854012,
+  "session_id": 1,
+  "flow_name": "RobinKnowledgeT04Pair_20260914w",
+  "requested_at": "2026-09-14T14:06:58.4368455Z",
+  "plan_sha256": "57e382e52c3ffc1e010b4ffbd5c788cf3ab9cd5744a410cb6a18698c6c478764",
+  "source_sha256": "dd4f39f0700cfb5a9275dfc9912c89bd8d886d72972c9eb74223acf30343569d",
+  "input_sha256": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+  "outputs_absent": true,
+  "before": {
+    "errors_known": true,
+    "ready": true,
+    "errors": 0,
+    "running": false
+  },
+  "request_count": 1
+}

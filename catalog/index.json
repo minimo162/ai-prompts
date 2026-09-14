@@ -6785,8 +6785,16 @@
     "pad_runs": 2,
     "copilot_sends": 0,
     "remaining_required": [
-      "E-independent-t04-run1-artifact",
       "F-t10-strict-raw-bytes"
     ]
+  },
+  "t04_new_pair": {
+    "evidence": "catalog/evidence/t04-independent-pair-20260914w/acceptance.json",
+    "status": "PASS_INDEPENDENT_T04_NEW_PAIR",
+    "summary": "Independent T04 new pair 20260914w passed both per-run CSV/xlsx snapshots and fixed 3x3 values; Run1 verified before Run2. Old candidate and old Run1 NOT_CAPTURED remain historical. Original primary T04 remains not accepted and is not double-counted. Required remaining: T10 strict raw-byte preservation NOT_PROVEN. Issues remain OPEN / partial. Paste-observer failure required native clipboard history restoration; text equality and original formats were verified, full-format byte equality was not assessed.",
+    "remaining_required": [
+      "F-t10-strict-raw-bytes"
+    ],
+    "t10_saved_review": "catalog/evidence/t10-saved-evidence-review-20260914w.json"
   }
 }

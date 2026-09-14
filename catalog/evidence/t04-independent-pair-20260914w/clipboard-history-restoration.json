@@ -1,0 +1,18 @@
+﻿{
+    "observed_at":  "2026-09-14T14:17:02.6356095Z",
+    "status":  "RESTORE_VERIFICATION_FAILED",
+    "paste_item_matched_saved_robin":  true,
+    "paste_timestamp":  "2026-09-14T23:00:38.9161096+09:00",
+    "restored_item_timestamp":  "2026-09-14T22:56:59.8918554+09:00",
+    "latest_item_before_paste":  true,
+    "current_owned_text_checked_before_restore":  true,
+    "native_restore_result":  "Success",
+    "restored_text_equal":  true,
+    "available_formats_equal":  false,
+    "formats":  [
+                    "Locale",
+                    "Text"
+                ],
+    "content_exposed_or_saved":  false,
+    "limitation":  "Native history item restored with its available formats; no original full-format snapshot existed before paste."
+}

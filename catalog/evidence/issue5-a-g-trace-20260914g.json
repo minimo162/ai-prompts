@@ -84,7 +84,7 @@
       "checks": [
         {"id": "E-excel", "status": "PROVEN_LAUNCH_READ_RANGE_LOOP_SAVEAS_SUBSET", "evidence": ["catalog/evidence/p3-excel-sheet-probe-20260910.json", "catalog/evidence/p3-excel-read-range-probe-20260911.json", "catalog/evidence/p3-excel-foreach-reuse-20260913-paste-save.json", "catalog/evidence/p3-excel-foreach-reuse-20260913-run1.json", "catalog/evidence/p3-excel-foreach-reuse-20260913-run2.json", "catalog/evidence/p3-saveas-collision-acceptance-20260912.json", "catalog/evidence/t06-20260914e-output-comparison.json", "catalog/evidence/t04-independent-current-output-comparison-20260914e.json"]}
       ],
-      "gaps": ["some separate probe reuse is not same-version current-package reacceptance", "T04 independent Run1 xlsx snapshot is NOT_CAPTURED", "PowerPoint SaveAs collision/locked targets are outside this Excel evidence"]
+      "gaps": ["some separate probe reuse is not same-version current-package reacceptance", "Old T04 Run1 remains NOT_CAPTURED; new 20260914w pair has independent snapshots", "PowerPoint SaveAs collision/locked targets are outside this Excel evidence"]
     },
     "F": {
       "title": "Word, PowerPoint, PDF",
@@ -165,32 +165,29 @@
     },
     {
       "category": "E",
-      "required_status": "PARTIAL_EXTERNAL_BLOCKED",
-      "required_evidence_gaps": [
-        {
-          "id": "E-independent-t04-run1-artifact",
-          "missing_stage": "Run1 xlsx snapshot and per-run artifact gate",
-          "references_checked": [
-            "catalog/evidence/t04-independent-current-output-comparison-20260914e.json",
-            "catalog/evidence/t04-independent-current-pad-run1-20260914e.json",
-            "catalog/evidence/t04-independent-current-pad-run2-20260914e.json"
-          ],
-          "next_minimum_operation": "After an observable Designer is available, start the fixed pair, save and verify Run1 xlsx before starting Run2, then restore existing outputs.",
-          "live_dependency": true
-        }
-      ],
+      "required_status": "SATISFIED_NEW_INDEPENDENT_PAIR",
+      "required_evidence_gaps": [],
       "optional_unconfirmed": [
         "some separate probe reuse is not same-version current-package reacceptance",
         "PowerPoint SaveAs collision/locked targets are outside this Excel evidence"
       ],
-      "external_blocked": [
+      "resolved_requirements": [
+        {
+          "id": "E-independent-t04-run1-artifact",
+          "evidence": "catalog/evidence/t04-independent-pair-20260914w/acceptance.json",
+          "old_run1": "NOT_CAPTURED",
+          "old_candidate": "candidate_partial"
+        }
+      ],
+      "resolved_external": [
         {
           "id": "E-pad-designer-observation",
           "condition": "current PAD.Designer has HWND 0, empty title, and UIA root 0",
           "evidence": "catalog/evidence/t04-independent-current-pad-window-observation-20260914t.json",
           "reopen_condition": "stable nonzero HWND, owner PID/process, SessionId, and target-flow correspondence"
         }
-      ]
+      ],
+      "external_blocked": []
     },
     {
       "category": "F",
@@ -242,12 +239,18 @@
   "robin_sha256": "dd4f39f0700cfb5a9275dfc9912c89bd8d886d72972c9eb74223acf30343569d",
     "run1_output": "NOT_CAPTURED",
     "run2_values": "VERIFIED",
-    "new_pair": "NOT_STARTED_CURRENT_PAD_DESIGNER_WINDOW_UNOBSERVABLE_CUA_NO_NATIVE_APP_BINDING"
+    "new_pair": "PASS_INDEPENDENT_T04_NEW_PAIR",
+    "new_pair_evidence": "catalog/evidence/t04-independent-pair-20260914w/acceptance.json"
   },
   "decision": {
     "a_to_g_complete": false,
     "issue_close_authorized": false,
     "pr_ready": false,
-    "next_evidence": ["obtain an observable PAD Designer window before any new T04 run", "if a new pair starts, capture Run1 xlsx before Run2", "keep T10 strict raw bytes and listed A-G gaps open"]
+    "next_evidence": ["Review a valid same normal-chat path byte-preservation control before any new T10 generation; keep strict NOT_PROVEN meanwhile"]
+  },
+  "t04_new_pair": {
+    "evidence": "catalog/evidence/t04-independent-pair-20260914w/acceptance.json",
+    "status": "PASS_INDEPENDENT_T04_NEW_PAIR",
+    "summary": "Independent T04 new pair 20260914w passed both per-run CSV/xlsx snapshots and fixed 3x3 values; Run1 verified before Run2. Old candidate and old Run1 NOT_CAPTURED remain historical. Original primary T04 remains not accepted and is not double-counted. Required remaining: T10 strict raw-byte preservation NOT_PROVEN. Issues remain OPEN / partial. Paste-observer failure required native clipboard history restoration; text equality and original formats were verified, full-format byte equality was not assessed."
   }
 }

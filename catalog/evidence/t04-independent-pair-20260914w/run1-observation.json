@@ -1,0 +1,48 @@
+{
+  "verification_id": "T04-INDEPENDENT-PAIR-20260914W",
+  "run_number": 1,
+  "execution_requested": true,
+  "additional_run_requested": false,
+  "invoke_error": null,
+  "running_observed": true,
+  "completion_observed": true,
+  "status": "STOPPED_ERROR_FREE_REQUIRES_ARTIFACT_GATE",
+  "samples": [
+    {
+      "observer_error": "PAD_SELECTOR: control unavailable: StartFlowButton",
+      "at": "2026-09-14T14:05:03.7247933Z"
+    },
+    {
+      "running": true,
+      "status": "running",
+      "errors_known": false,
+      "errors": -1,
+      "ready": false,
+      "at": "2026-09-14T14:05:06.1487624Z"
+    },
+    {
+      "running": true,
+      "status": "running",
+      "errors_known": false,
+      "errors": -1,
+      "ready": false,
+      "at": "2026-09-14T14:05:08.4564504Z"
+    },
+    {
+      "running": false,
+      "status": "running",
+      "errors_known": false,
+      "errors": -1,
+      "ready": false,
+      "at": "2026-09-14T14:05:11.0523525Z"
+    },
+    {
+      "running": false,
+      "status": "ready",
+      "errors_known": true,
+      "errors": 0,
+      "ready": true,
+      "at": "2026-09-14T14:05:12.4769116Z"
+    }
+  ]
+}

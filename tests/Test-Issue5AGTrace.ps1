@@ -31,9 +31,10 @@ $package = Read-Json 'catalog/evidence/current-package-status-20260913.json'
 $liveRead = Read-Json 'catalog/evidence/issue-live-read-20260914m.json'
 foreach ($record in @($coverage, $index, $audit, $package)) {
     Check ($record.c_cell_value_read_supplement.evidence -eq 'catalog/evidence/c-cell-read-20260914v/acceptance.json') 'current aggregate points to C scalar proof'
-    Check (@($record.c_cell_value_read_supplement.remaining_required).Count -eq 2) 'current aggregate retains two required gaps'
+    Check (@($record.c_cell_value_read_supplement.remaining_required).Count -eq 1) 'current aggregate retains T10 required gap'
+    Check ($record.t04_new_pair.evidence -eq 'catalog/evidence/t04-independent-pair-20260914w/acceptance.json') 'current aggregate registers new T04 pair'
 }
-Check (@($audit.final_evidence_audit.required_gaps).Count -eq 2) 'completion audit has only T04 and T10 required gaps'
+Check (@($audit.final_evidence_audit.required_gaps).Count -eq 1) 'completion audit has only T10 required gap'
 
 Check ($trace.schema_version -eq 1) 'trace schema version'
 Check ($trace.status -eq 'PARTIAL_REQUIRED_TRACEABILITY_GAPS') 'trace remains partial'
@@ -97,8 +98,9 @@ $cResolved = @($cDecision.resolved_requirements | Where-Object id -eq 'C-datatab
 Check ($cResolved.Count -eq 1 -and $cResolved[0].evidence -eq 'catalog/evidence/c-cell-read-20260914v/acceptance.json') 'C resolution points to native cell-read evidence'
 & (Join-Path $PSScriptRoot 'Test-CDataTableCellRead.ps1') -Root $Root
 $eDecision = @($decisions | Where-Object category -eq 'E')[0]
-Check (@($eDecision.required_evidence_gaps | Where-Object id -eq 'E-independent-t04-run1-artifact').Count -eq 1) 'required E Run1 artifact gap stays required'
-Check (@($eDecision.external_blocked | Where-Object id -eq 'E-pad-designer-observation').Count -eq 1) 'E live Designer dependency stays externally blocked'
+Check (@($eDecision.required_evidence_gaps).Count -eq 0 -and $eDecision.required_status -eq 'SATISFIED_NEW_INDEPENDENT_PAIR') 'E satisfied by separate new pair'
+Check (@($eDecision.external_blocked).Count -eq 0 -and @($eDecision.resolved_external).Count -eq 1) 'E past Designer block retained as resolved history'
+& (Join-Path $PSScriptRoot 'Test-T04PairEvidence.ps1') -Root $Root
 $fDecision = @($decisions | Where-Object category -eq 'F')[0]
 Check (@($fDecision.required_evidence_gaps | Where-Object id -eq 'F-t10-strict-raw-bytes').Count -eq 1) 'required F T10 byte gap stays required'
 
@@ -125,7 +127,7 @@ Check ($t04.status -eq 'CANDIDATE_PARTIAL_PRESERVED') 'T04 candidate status pres
 Check ($t04.robin_sha256 -eq 'dd4f39f0700cfb5a9275dfc9912c89bd8d886d72972c9eb74223acf30343569d') 'T04 Robin hash preserved'
 Check ($t04.run1_output -eq 'NOT_CAPTURED') 'T04 Run1 remains not captured'
 Check ($t04.run2_values -eq 'VERIFIED') 'T04 Run2 values verified'
-Check ($t04.new_pair -eq 'NOT_STARTED_CURRENT_PAD_DESIGNER_WINDOW_UNOBSERVABLE_CUA_NO_NATIVE_APP_BINDING') 'T04 new pair not started while window unobservable'
+Check ($t04.new_pair -eq 'PASS_INDEPENDENT_T04_NEW_PAIR' -and $t04.new_pair_evidence -eq 'catalog/evidence/t04-independent-pair-20260914w/acceptance.json') 'new T04 pair proven separately from old candidate'
 $t04Comparison = Read-Json ($t04.comparison)
 Check ($t04Comparison.status -eq 'PASS_CURRENT_20260914E_INDEPENDENT_T04_GENERATION_PAD_TWO_RUNS_PARTIAL') 'T04 comparison remains partial'
 Check ($t04Comparison.generation.dom_code.sha256 -eq $t04.robin_sha256) 'T04 Robin hash agrees with comparison'
