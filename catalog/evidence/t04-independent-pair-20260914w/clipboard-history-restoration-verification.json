@@ -1,0 +1,13 @@
+﻿{
+    "status":  "NOT_PROVEN",
+    "read_only":  true,
+    "text_equal":  true,
+    "original_formats_present":  true,
+    "restored_history_id_matches":  false,
+    "additional_native_history_metadata":  [
+
+                                           ],
+    "content_logged":  false,
+    "prior_failure_explained":  "The first verification required exact format-set equality; native restoration adds monitor/history metadata, while original Locale/Text remain present.",
+    "prior_record":  "clipboard-history-restoration.json"
+}

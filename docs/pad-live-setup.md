@@ -1,5 +1,13 @@
 # PAD実機受入の作成権限・UIA復旧手順
 
+## 2026-09-14 独立T04の実行別成果物ゲート
+
+`catalog/evidence/t04-independent-pair-20260914w/plan.json` は、対象PID/HWND/SessionId、固定原文SHA、入力SHA、2出力、期待3行3列、最大2 Runを実行前に固定した記録です。旧T04専用名はConsole検索で見つからず、新しい専用空フロー1件へ同じ原文を配置しました。旧窓診断・旧Run1欠落は上書きしていません。
+
+`tools/Run-PadArtifactPairLive.ps1` は、対象の停止・エラー0・入出力前提を確認し、Invoke前にCreateNewでRun要求を保存します。要求記録があるRunは再実行せず、Run2はRun1の値判定とスナップショットSHAを要求します。実行中の一時的なUIA例外は同じRunの観測として保持します。各回の停止後に `Save-PadRunArtifactSnapshot.ps1` でCSV/xlsxを保存し、`Verify-T04PairArtifacts.py` で実値を照合してから次へ進みます。検査中のファイルは読み取り専用です。
+
+このペアは既に2回実行済みです。保存済みplanで追加Runしません。新規ペアを行う場合も別途の作業指示が必要です。今回のWindows UIA補助はPowerShell 7で実行し、Windows PowerShell 5.1で日本語集計を読む `Paste-PadRobinLiveByStatus.ps1` にはUTF-8 BOMを付けました。同補助は `PadClipboardLease.cs` を使い、OpenClipboardの排他区間内でsequence・UnicodeTextを確認し、そのまま復元書込みまで行います。観測失敗時も同じ経路を通り、所有変更時は書き込まず終了します。保存対象は対応するHGLOBAL形式と限定した登録テキスト形式です。GDI・OLE/private等の未対応形式や読取り不能があれば、形式を捨てず貼付け前に拒否します。ロック取得・復元書込みの失敗は成功扱いせず、貼付けやRunを再試行しません。復元書込み途中のOSエラーでは不完全な復元が残る可能性があります。非ライブ検査では排他区間と競合拒否を確認し、実クリップボードでの動作は未実施です。Text一致やこの修正は、過去証跡の全形式生バイト復元やT10 strict保持の証明には転用しません。
+
 Issue #5 の合成データ受入で、PADの空フローを作成し、Designerを一意に特定してからRobinを貼り付けるための再開メモです。既存の業務フローは対象にせず、作成した専用フローだけを使います。これは配布bundleのナレッジではなく、検証者向けの運用記録です。
 
 ## 今回確認した環境

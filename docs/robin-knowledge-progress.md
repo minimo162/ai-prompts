@@ -1,10 +1,54 @@
 # Robinナレッジ作成 進捗
 
+## 2026-09-15 T10既存応答の限定再取得
+
+T10-STRICT-20260914Xの残枠を使い、固定一次・独立会話の既存応答を各1回要求・1回完了しました。ブラウザー前提確認は1回成功。UTF-16LE／UTF-8のSHAを取得時に固定し、既存保存補助で新規保存した1752／1771 bytesは取得文字列と一致しました。許可2か所の内容も依頼一致ですが、どちらもLF16個・末尾LFありで、固定入力のCRLF・末尾改行なしと区間外bytesが異なるため、両strictは `NOT_PROVEN`です。[取得原文・区間比較・回数](../catalog/evidence/t10-strict-20260914x-recapture-results.json)。
+
+これはDOM文字列から保存ファイルまでの観測であり、モデル内部や通信上の元バイトの証明ではありません。保存器の追加改行を直しても今回の差は解消していません。PAD Run・新規送信・クリップボード変更は0回。元の各1回枠は消化済みで、新IDによる再取得はしません。再開には、未観測の上流を区別する別仮説と新たな明示的上限が必要です。C・独立T04新pair受入と旧原証跡を保ち、#5全体と#27最終版は別判定でOPEN / partialです。
+
+## 2026-09-14 T10厳密比較と保存経路の限定検証（20260914x）
+
+許可された2/4行目の値・保存先の内容区間だけを除外し、その前後すべての生バイトを位置ずれ付きで比較する判定器を追加しました。合成正例2件・負例12件と元SHA拒否、保存器4検査は非ライブPASSです。過去のNOT_PROVEN回帰は保持しています。
+
+過去に使ったファイル追加パッチと同じ処理へ既知の18 bytesを1回通すと、末尾LFが追加され19 bytesになりました。文字列を直接UTF-8保存する補助では18 bytesのままです。この局所対照は通常チャット全経路の証明ではありません。ブラウザー一覧取得がタイムアウトし、実応答の追加取得は一次0・独立0。既存保存回答は依頼内容一致、許可区間外のバイト不一致で、両方strict `NOT_PROVEN`です。PAD Run・Copilot送信・クリップボード変更はいずれも0回。クリップボード全形式の生バイト同一は未評価のままです。
+
+[比較器・対照・取得境界・再開条件](../catalog/evidence/t10-strict-20260914x-audit.json)。次はブラウザーの読み取りが利用可能な時に、固定した既存2会話の応答を各最大1回、文字列段階のSHAと新保存ファイルへ対応付けます。新規送信は不要・未許可とし、不一致なら保持します。C・独立T04新pairの受入を保ち、#5全体追跡と#27最終版受入はともにOPEN / partialです。
+
+## 2026-09-14 独立T04の新Runペア（20260914w）
+
+保存済み20260913e独立生成を無修正で専用空フローへ配置し、9アクションを保存・再コピーして最大2 Runを実施しました。Run1のCSV/xlsxを独立保存し、3行3列（対象/A/10、対象/C/25、対象/D/5）と入力SHA不変を検証してからRun2を開始し、Run2も一致しました。[新pair原証跡](../catalog/evidence/t04-independent-pair-20260914w/acceptance.json)。旧Run1 `NOT_CAPTURED`・旧候補 `candidate_partial`・元T04不成立は保全し、同じ独立生成を一次T04へ二重計上しません。
+
+今回PAD 2 Run・Copilot送信0・C/T10再Run0。20260913eと保護409ファイルは不変です。必須技術残件はT10 strict raw-byte保持 `NOT_PROVEN`。同経路対照がないため再送・機能Runは行わず、[保存証跡の比較](../catalog/evidence/t10-saved-evidence-review-20260914w.json)を分離しました。貼付け観測失敗で未復元となったクリップボードは、貼付け直前のWindows履歴項目を復元し、Text一致と元形式の存在を確認しました。全形式の生バイト同一は未評価です。補助の失敗時復元とPS5文字コードも修正しました。Issue #5/#27はOPEN / partial。
+
+## 2026-09-14 Cセル値読取りの補完（20260914v）
+
+実アクションから採取した `SET CellReadValue TO DataTable[0][0]` を、別空フローへ無修正貼付け・保存・再オープン後に2回実行し、Text値 `CRead-20260914v` と一致しました。前段は1行2列の合成DataTableです。4回の原文コピーは174 bytesで一致し、Run2前には値をクリアしています。Run2の観測補助例外は、追加Runせず同一実行を読み取り直して確認しました。
+
+[原証跡・期待値・段階別判定](../catalog/evidence/c-cell-read-20260914v/acceptance.json)。Copilot送信0回、PAD Run 2回。数値添字0/0のネイティブ再利用証跡であり、新しいCopilot生成合格や列名構文の保証ではありません。20260913e instruction/bundleは変更していません。必須残件は独立T04 Run1成果物とT10 strict raw-byte保持の2件で、Issue #5/#27はOPEN / partialを維持します。過去の不成立・未採取記録は以下に保存しています。
+
+## 2026-09-14 Cセル値読取りの既存証跡照合と専用フロー準備
+
+未pushのHEAD `dbc98c3d47794aebc0f5666235ff52d49bd022d5`とPR #32統合main `7cc2c18b2a7f521f770c47c48cbbf4715d228979`を現物確認し、現行20260913eと原証跡を保全した。`c-cell-read-existing-evidence-audit-20260914u.json`に既存原文→別空フロー貼付け・保存・再コピー→Run1/Run2実値の照合を記録した。セル更新は`ModifyDataTableItem`、行反復は`SET ForeachValue TO CurrentItem`であり、セル値の取出しを証明しない。`CurrentItem[Status]`はコピー・保存のみで組合せ実行の証跡がない。CSV/filterの表出力もセル値読取りへ読み替えない。既存証跡だけではCはNOT_PROVEN。
+
+C専用空フローをPADの自動命名で1件作成し「無題 (2)」を確認した。Designer HWND 397676／PID 31664／Session 1、0アクション、Power Fx OFFを観測し、左パネルの「新しいデータ テーブルを作成する」から設定を開いた。検索入力は反映したが、モーダル内のセル入力はtext/keyの両経路で反映されず、未確定編集をキャンセルして0アクションへ戻した。新規フローは保全し、Robin採取・貼付け・Runは未実施。原画面4件を保存した。これはCの準備段階の入力障害であり、PAD Run失敗ではない。
+
+今回のPAD Run開始0、Copilot送信0。独立T04のCASE_B原記録、旧Run1 NOT_CAPTURED、T10 strict NOT_PROVENは不変。新しい非0 HWNDはCフローに対応し、T04対象フローの復旧証明ではない。必須残件はCセル値読取り・独立T04 Run1成果物・T10厳密raw-byteの3件を維持する。current-package-status／completion audit／coverage／indexの判定は変わらないため変更しない。
+
+次は既存C専用フローの同一性と空状態を再確認し、同じ入力試行を反復せずモーダルを正しく対象指定できる別の既存操作手段を確認する。入力が成立した後、1方式だけを原文コピー→UTF-8無修正保存→別空フロー貼付け→保存・再コピー→Run1実値→Run2実値まで通す。列名構文や添字境界の総当たり、Copilot再送、新版化は不要。
+
 ## 2026-09-14 独立T04候補の実行別証跡追跡補完
 
 独立T04候補の既存証跡を再照合し、現行instruction SHA `6ad6f742…`／bundle SHA `79245787…`、生成Robin SHA `dd4f39f0…43569d`、PAD 9アクション（ListItem 6件は仮想化表示）を固定した。Run1/Run2の実行JSONはともに成功だが、Run1のxlsxは`NOT_CAPTURED`であり、Run2（対象/A/10、対象/C/25、対象/D/5）の結果をRun1へ付け替えていない。`catalog/evidence/t04-independent-current-evidence-reconciliation-20260914e.json`と`tests/Test-T04IndependentEvidence.ps1`で、各証跡のSHA、入力不変、再コピー、出力境界、候補partialを機械検証できるようにした。
 
 不足を埋めるためRun1/Run2の最大2回を事前固定した新規空フロー`RobinKnowledgeT04IndependentCurrentOutputComparison20260914eR1`は作成できたが、Designer PID 44316はHWND 0・完全一致タイトル未観測でUIA rootを取得できなかった。このため貼付け・実行は開始せず、保存済みRobinの再送・手修正・第3回Runも行っていない。空フローは削除せず、次回は正確な非0 HWND／タイトルを観測してからのみ無修正貼付けと各Run前のxlsx捕捉を行う。Issue #5/#27、T10厳密保持、A〜G監査はOPEN / partialのまま。
+
+## 2026-09-14 現行main／Issue／T04状態の再照合
+
+現行`main`と`origin/main`はPR #32 squash merge commit `7cc2c18b2a7f521f770c47c48cbbf4715d228979`で一致している。GitHub read-only確認ではIssue #5/#27はOPEN、最新コメントはそれぞれ`#issuecomment-5663017599`／`#issuecomment-5663019522`、PR #31/#32はMERGEDだった。原記録を上書きせず、最新読取を`catalog/evidence/issue-live-read-20260914m.json`へ保存した。
+
+現行PADプロセスを一度だけ`Refresh()`後に再観測した結果、通常の`Power Automate`窓は可視だが`PAD.Designer`はHWND 0・タイトル空・UIA root 0で、T04再開条件は未達（CASE_B）だった。過去のCASE_A診断rは保全し、貼付け・保存・Run・再送は行っていない。差分は`catalog/evidence/t04-independent-current-pad-window-observation-20260914t.json`へ保存した。
+
+A〜G台帳に必須証跡不足／任意未確認／外部停止を用途単位で分離し、Cセル値読取り、独立T04 Run1成果物、T10厳密生バイトだけを必須残件として保持した。任意境界の必須昇格と必須不足のcomplete化を`tests/Test-Issue5AGTrace.ps1`へ回帰追加した。Issue #5/#27はOPEN / partialを維持する。
 
 ## 2026-09-14 集約訂正・現行負例v2受入
 

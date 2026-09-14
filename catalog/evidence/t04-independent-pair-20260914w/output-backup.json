@@ -1,0 +1,14 @@
+[
+  {
+    "path": "catalog/evidence/t04-filtered.csv",
+    "existed": true,
+    "sha256": "b9442568996bbe8c45ce6a7efd705dd6159392cb42f24eb23341464f87a9c433",
+    "backup": "C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\t04-independent-pair-20260914w\\backup\\t04-filtered.csv"
+  },
+  {
+    "path": "catalog/evidence/normal-chat-t04-output-independent-20260914e.xlsx",
+    "existed": false,
+    "sha256": null,
+    "backup": "C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\t04-independent-pair-20260914w\\backup\\normal-chat-t04-output-independent-20260914e.xlsx"
+  }
+]

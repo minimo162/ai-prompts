@@ -1,0 +1,22 @@
+{
+  "observed_at": "2026-09-14T13:21:39.7113818Z",
+  "run": 2,
+  "status": "ready",
+  "running": false,
+  "ready": true,
+  "errors": 0,
+  "errors_known": true,
+  "variables": [
+    {
+      "variable": "CellReadValue",
+      "preview": "CRead-20260914v"
+    },
+    {
+      "variable": "DataTable",
+      "preview": "1 行, 2 列"
+    }
+  ],
+  "observation_only": true,
+  "additional_run_requested": false,
+  "helper_error": "The property 'Current' cannot be found on this object. Verify that the property exists."
+}

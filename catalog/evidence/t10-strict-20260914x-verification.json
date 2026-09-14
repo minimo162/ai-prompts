@@ -1,0 +1,327 @@
+{
+  "schema_version": 1,
+  "status": "PASS_BOUNDED_VERIFICATION_STRICT_NOT_PROVEN",
+  "verification_notes": "The first whole-JSON parse rejected a historical UTF-8 BOM. The read-only JSON parser was corrected to accept that encoding marker, then all checks passed; no source or historical evidence bytes were changed.",
+  "verified_at": "2026-09-14T14:59:51.720Z",
+  "base_commit": "3ef2a9c3d7483db055e60078d2923a2ddbeb146d",
+  "github_main": "7cc2c18b2a7f521f770c47c48cbbf4715d228979",
+  "issue_reads": [
+    {
+      "number": 5,
+      "state": "OPEN",
+      "body_sha256": "ee3f69f7f0abc11f6aa671e5da7591774e8aa8c6f5d8ff937cde8b1ea2d01698",
+      "body_read": true,
+      "latest_comment_url": "https://github.com/minimo162/ai-prompts/issues/5#issuecomment-5665535201",
+      "latest_comment_sha256": "ed71f7855876a6c4c1e71da36f79d8847057b024cfb96641751961f6740223a4"
+    },
+    {
+      "number": 27,
+      "state": "OPEN",
+      "body_sha256": null,
+      "body_read": false,
+      "latest_comment_url": "https://github.com/minimo162/ai-prompts/issues/27#issuecomment-5665535522",
+      "latest_comment_sha256": "ed71f7855876a6c4c1e71da36f79d8847057b024cfb96641751961f6740223a4"
+    }
+  ],
+  "protection": {
+    "count": 409,
+    "all_sha_equal": true,
+    "baseline_sha256": "084609383d3b74790df366ad0b554a3e2bb85fa1a02cef87bd7796c2eb2976b6",
+    "tracked_C_T04_T10_raw_originals": 807,
+    "all_equal_base_git_blob": true,
+    "package_instruction_bundle_7_originals_unchanged": true
+  },
+  "checks": {
+    "comparator_synthetic_cases": 14,
+    "source_hash_rejection": true,
+    "saver_checks": 4,
+    "saved_evidence_checks": 5,
+    "CurrentStatus": 57,
+    "RobinCatalog": 107,
+    "CopilotPackage": {
+      "utf16": 3947,
+      "knowledge": 7,
+      "actions": 87
+    },
+    "RawContracts": 6,
+    "T10Regression": "PASS_REGRESSION_WITH_STRICT_NOT_PROVEN",
+    "Issue5AGTrace": 316,
+    "CDataTable": 82,
+    "T04NewPair": 87,
+    "T04Historical": 70,
+    "json_files_parsed": 1432,
+    "new_reference_checks": 30,
+    "privacy_pattern_scan": "PASS; new evidence contains synthetic data and code only; no clipboard original saved",
+    "diff_check": "PASS; repository CRLF checkout warnings only"
+  },
+  "nonlive": {
+    "evidence": ".work/nonlive-82360887d925434ea1c45ae3c83dbd46/verification.json",
+    "sha256": "74d8d096e8e48cc8b52192a93dc8f51cdd221ac83515f5c190595895f7529150",
+    "status": "PASS",
+    "tests": [
+      {
+        "test": "Test-CsvContracts.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-CsvBatch.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-CsvLifecycle.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-CsvTypedPlan.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-CsvReview.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-CsvLateResponse.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-QualityDraft.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-OfflineDiagnostic.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-ConversationScope.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-ConnectionContract.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-AcceptanceGate.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-App.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-Pad.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-PadRunArtifactSnapshot.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-RobinCatalog.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-BoundedRobinLoop.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-RobinNumberConversion.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-GeneralJobStart.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-GeneralArtifactOpen.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-CompletionDecision.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-PadRecovery.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-Copilot.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-CopilotPlannerV2.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-PlannerV2Transport.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-Http.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-Launcher.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-ReleaseBinding.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-PublishAgentSource.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-PublishCrash.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-AiCallProcess.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-AiCallProviderFailure.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-ClipboardSnapshot.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-DocumentRobin.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-DocumentObservation.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-ClipboardReadRetry.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-CurrentBundleT01Prepared.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-Issue5CurrentStatus.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      },
+      {
+        "test": "Test-T10ByteComparator.ps1",
+        "status": "PASS",
+        "exit_code": 0
+      }
+    ],
+    "previous_count": 37,
+    "current_count": 38,
+    "added": [
+      "Test-T10ByteComparator.ps1"
+    ]
+  },
+  "audit": "catalog/evidence/t10-strict-20260914x-audit.json",
+  "evidence_manifest": [
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-audit.json",
+      "bytes": 54300,
+      "sha256": "5423956daebf257a9dca132c3c80c922f05e4a3af25af8ccad0cb9fa2f4bfd11"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-plan.json",
+      "bytes": 1919,
+      "sha256": "51f44e7f86e972d2379bb006dd3ef03b380c8af13f368b2762dc5d61c48fe0f0"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-control.txt",
+      "bytes": 19,
+      "sha256": "c5bae509d2fbb3279246fd71d7963aee0539e94ba523201d4cc605f746cd6d72"
+    },
+    {
+      "path": "catalog/evidence/t10-strict-20260914x-control-fixed.txt",
+      "bytes": 18,
+      "sha256": "836ccec7b2a8ee71bcd890cbcbf245de23538334445c31cc0faec43d0e7e7cc6"
+    },
+    {
+      "path": "tools/Compare-T10Bytes.mjs",
+      "bytes": 3516,
+      "sha256": "39e358cc5638ee7a524ed67ffe2f43275c8fbddfcde8a14b817c265221e220b6"
+    },
+    {
+      "path": "tools/Save-T10Capture.mjs",
+      "bytes": 1435,
+      "sha256": "9e8d728af24829b1cede6c4deb3798bd21c985118b9d823c4c4f8cf5622220d0"
+    },
+    {
+      "path": "tests/Test-T10ByteComparator.mjs",
+      "bytes": 4767,
+      "sha256": "3e533e7b3f13a28216f0ee8a65fcaf80b1a91d0ddb2d423c089f443b539bb2ff"
+    },
+    {
+      "path": "tests/Test-T10ByteComparator.ps1",
+      "bytes": 185,
+      "sha256": "d5bb674613ebef62a678ae19dc2996fe6f731a7fa5a9c9e8a11604eda6544894"
+    }
+  ],
+  "counts": {
+    "pad_runs": 0,
+    "copilot_sends": 0,
+    "primary_additional_acquisitions": 0,
+    "independent_additional_acquisitions": 0,
+    "clipboard_mutations": 0,
+    "browser_inventory_attempts": 1,
+    "local_old_saver_control_calls": 1
+  },
+  "not_run": [
+    "actual response recapture",
+    "new normal-chat send",
+    "PAD Run",
+    "clipboard mutation",
+    "Playwright DOM acquisition (inventory timed out)",
+    "GitHub CI",
+    "push",
+    "PR",
+    "merge",
+    "release",
+    "distribution",
+    "Issue close",
+    "branch deletion"
+  ],
+  "remaining": "T10 strict source preservation NOT_PROVEN separately for primary and independent; exact existing response access required, then at most one acquisition each; no new send needed for this next step."
+}

@@ -1,0 +1,44 @@
+{
+  "verification_id": "T04-INDEPENDENT-PAIR-20260914W",
+  "run_number": 2,
+  "execution_requested": true,
+  "additional_run_requested": false,
+  "invoke_error": null,
+  "running_observed": true,
+  "completion_observed": true,
+  "status": "STOPPED_ERROR_FREE_REQUIRES_ARTIFACT_GATE",
+  "samples": [
+    {
+      "at": "2026-09-14T14:06:59.2210122Z",
+      "observer_error": "PAD_SELECTOR: control unavailable: StartFlowButton"
+    },
+    {
+      "running": true,
+      "status": "running",
+      "errors_known": false,
+      "ready": false,
+      "at": "2026-09-14T14:07:01.6263458Z",
+      "errors": -1
+    },
+    {
+      "running": true,
+      "status": "running",
+      "errors_known": false,
+      "ready": false,
+      "at": "2026-09-14T14:07:03.4281650Z",
+      "errors": -1
+    },
+    {
+      "at": "2026-09-14T14:07:04.8967387Z",
+      "observer_error": "PAD_SELECTOR: StopFlowButton is not enabled during the observed execution state."
+    },
+    {
+      "running": false,
+      "status": "ready",
+      "errors_known": true,
+      "ready": true,
+      "at": "2026-09-14T14:07:06.6217649Z",
+      "errors": 0
+    }
+  ]
+}

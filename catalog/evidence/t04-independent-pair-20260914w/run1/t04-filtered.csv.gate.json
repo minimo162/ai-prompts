@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "kind": "pad_run_artifact_snapshot",
+  "observed_at": "2026-09-14T14:05:48.1009427Z",
+  "run_number": 1,
+  "artifact_path": "catalog/evidence/t04-filtered.csv",
+  "snapshot_path": "catalog/evidence/t04-independent-pair-20260914w/run1/t04-filtered.csv",
+  "artifact_bytes_before": 39,
+  "artifact_sha256_before": "b9442568996bbe8c45ce6a7efd705dd6159392cb42f24eb23341464f87a9c433",
+  "artifact_sha256_after": "b9442568996bbe8c45ce6a7efd705dd6159392cb42f24eb23341464f87a9c433",
+  "snapshot_bytes": 39,
+  "snapshot_sha256": "b9442568996bbe8c45ce6a7efd705dd6159392cb42f24eb23341464f87a9c433",
+  "artifact_stable": true,
+  "snapshot_matches_artifact": true,
+  "minimum_bytes": 1,
+  "input_path": "catalog/fixtures/excel/t04-filter-input.xlsx",
+  "expected_input_sha256": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+  "input_sha256_after": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+  "input_unchanged": true,
+  "status": "PASS",
+  "gate": "READY_FOR_NEXT_RUN",
+  "reason": "snapshot verified before the next run"
+}

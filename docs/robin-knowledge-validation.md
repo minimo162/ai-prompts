@@ -1,4 +1,31 @@
 # Robinナレッジ検証報告
+
+## 2026-09-15 T10既存応答の限定再取得
+
+T10-STRICT-20260914Xの残枠を使い、固定一次・独立会話の既存応答を各1回要求・1回完了しました。ブラウザー前提確認は1回成功。UTF-16LE／UTF-8のSHAを取得時に固定し、既存保存補助で新規保存した1752／1771 bytesは取得文字列と一致しました。許可2か所の内容も依頼一致ですが、どちらもLF16個・末尾LFありで、固定入力のCRLF・末尾改行なしと区間外bytesが異なるため、両strictは `NOT_PROVEN`です。[取得原文・区間比較・回数](../catalog/evidence/t10-strict-20260914x-recapture-results.json)。
+
+これはDOM文字列から保存ファイルまでの観測であり、モデル内部や通信上の元バイトの証明ではありません。保存器の追加改行を直しても今回の差は解消していません。PAD Run・新規送信・クリップボード変更は0回。元の各1回枠は消化済みで、新IDによる再取得はしません。再開には、未観測の上流を区別する別仮説と新たな明示的上限が必要です。C・独立T04新pair受入と旧原証跡を保ち、#5全体と#27最終版は別判定でOPEN / partialです。
+
+## 2026-09-14 T10厳密比較と保存経路の限定検証（20260914x）
+
+許可された2/4行目の値・保存先の内容区間だけを除外し、その前後すべての生バイトを位置ずれ付きで比較する判定器を追加しました。合成正例2件・負例12件と元SHA拒否、保存器4検査は非ライブPASSです。過去のNOT_PROVEN回帰は保持しています。
+
+過去に使ったファイル追加パッチと同じ処理へ既知の18 bytesを1回通すと、末尾LFが追加され19 bytesになりました。文字列を直接UTF-8保存する補助では18 bytesのままです。この局所対照は通常チャット全経路の証明ではありません。ブラウザー一覧取得がタイムアウトし、実応答の追加取得は一次0・独立0。既存保存回答は依頼内容一致、許可区間外のバイト不一致で、両方strict `NOT_PROVEN`です。PAD Run・Copilot送信・クリップボード変更はいずれも0回。クリップボード全形式の生バイト同一は未評価のままです。
+
+[比較器・対照・取得境界・再開条件](../catalog/evidence/t10-strict-20260914x-audit.json)。次はブラウザーの読み取りが利用可能な時に、固定した既存2会話の応答を各最大1回、文字列段階のSHAと新保存ファイルへ対応付けます。新規送信は不要・未許可とし、不一致なら保持します。C・独立T04新pairの受入を保ち、#5全体追跡と#27最終版受入はともにOPEN / partialです。
+
+## 2026-09-14 独立T04の新Runペア（20260914w）
+
+保存済み20260913e独立生成を無修正で専用空フローへ配置し、9アクションを保存・再コピーして最大2 Runを実施しました。Run1のCSV/xlsxを独立保存し、3行3列（対象/A/10、対象/C/25、対象/D/5）と入力SHA不変を検証してからRun2を開始し、Run2も一致しました。[新pair原証跡](../catalog/evidence/t04-independent-pair-20260914w/acceptance.json)。旧Run1 `NOT_CAPTURED`・旧候補 `candidate_partial`・元T04不成立は保全し、同じ独立生成を一次T04へ二重計上しません。
+
+今回PAD 2 Run・Copilot送信0・C/T10再Run0。20260913eと保護409ファイルは不変です。必須技術残件はT10 strict raw-byte保持 `NOT_PROVEN`。同経路対照がないため再送・機能Runは行わず、[保存証跡の比較](../catalog/evidence/t10-saved-evidence-review-20260914w.json)を分離しました。貼付け観測失敗で未復元となったクリップボードは、貼付け直前のWindows履歴項目を復元し、Text一致と元形式の存在を確認しました。全形式の生バイト同一は未評価です。補助の失敗時復元とPS5文字コードも修正しました。Issue #5/#27はOPEN / partial。
+
+## 2026-09-14 Cセル値読取りの補完（20260914v）
+
+実アクションから採取した `SET CellReadValue TO DataTable[0][0]` を、別空フローへ無修正貼付け・保存・再オープン後に2回実行し、Text値 `CRead-20260914v` と一致しました。前段は1行2列の合成DataTableです。4回の原文コピーは174 bytesで一致し、Run2前には値をクリアしています。Run2の観測補助例外は、追加Runせず同一実行を読み取り直して確認しました。
+
+[原証跡・期待値・段階別判定](../catalog/evidence/c-cell-read-20260914v/acceptance.json)。Copilot送信0回、PAD Run 2回。数値添字0/0のネイティブ再利用証跡であり、新しいCopilot生成合格や列名構文の保証ではありません。20260913e instruction/bundleは変更していません。必須残件は独立T04 Run1成果物とT10 strict raw-byte保持の2件で、Issue #5/#27はOPEN / partialを維持します。過去の不成立・未採取記録は以下に保存しています。
+
 ## 2026-09-14 集約訂正・現行負例v2受入
 
 P3-1〜P3-6の現行版個別証跡はすべて同版指示・bundleに結び付き、派生集約のP3-4〜P3-6未受入表示を訂正した。63桁SHAの原記録は変更せず、訂正根拠と参照を`catalog/evidence/p3-current-sha-correction-20260914e.json`へ残した。固定負例v2（N1〜N3）は通常M365 Copilot新規会話へ1回送信し、回答原文を無修正保存した。三項目とも未確認受入で、理由・必要証拠・禁止後続処理を満たし、コードフェンス・Robin命令・疑似コード・未採取アクション名／引数の推測はない。PAD貼付け・Run・未登録Web操作は行っていない。旧finald負例PASSは履歴のまま現行版へ移していない。残件はT04形式不受入・独立T04候補partial、T10厳密保持NOT_PROVEN、A〜G監査であり、Issue #5/#27はOPEN / partialを維持する。
@@ -641,11 +668,15 @@ PADを2回Runし、両回とも成功、`NewVar=named`、`LastError`に`見つ�
 
 Issue #5/#27の必須A〜Gを、教材正本・原probe／別空フロー再利用・現行版live evidenceへ対応付けた機械可読台帳を追加した。台帳は各チェックの証跡ファイル存在、測定範囲、未証明境界を分離し、過去版のPASSを20260913eへ付け替えない。A〜G全体のstatusは`PARTIAL_REQUIRED_TRACEABILITY_GAPS`、`a_to_g_complete=false`、IssueはOPENのままである。独立T04は比較・再調整・PAD窓観測をリンクしたが、Run1 xlsxは`NOT_CAPTURED`、新しい2-run pairは不可視DesignerかつComputer Useネイティブアプリバインディングなしのため未開始である。T10は機能／許可範囲と厳密生バイト保持を分離し、後者は`NOT_PROVEN`を維持する。
 
-対応付けの正本: `catalog/evidence/issue5-a-g-trace-20260914g.json`。`catalog/index.json` と `catalog/coverage.json` の `final_a_g_trace` から辿れる。検査は `tests/Test-Issue5AGTrace.ps1` で、A〜Gの全リンク、現行版ハッシュ、T04候補partial、Run1未取得、最新PAD窓観測、T10厳密未証明、Issue OPEN／PR #31 MERGEDを固定する。
+対応付けの正本: `catalog/evidence/issue5-a-g-trace-20260914g.json`。`catalog/index.json` と `catalog/coverage.json` の `final_a_g_trace` から辿れる。検査は `tests/Test-Issue5AGTrace.ps1` で、A〜Gの全リンク、必須証跡不足／任意未確認／外部停止の区分、現行版ハッシュ、T04候補partial、Run1未取得、最新PAD窓観測、T10厳密未証明、Issue OPEN／PR #31・#32 MERGEDを固定する。
 
 ## 2026-09-14 T04 Designerプロトコル起動の追加観測
 
 `ms-powerautomatedesigner:` の登録プロトコルを1回だけ起動観測したが、`ACCESS_DENIED`で新規プロセス・可視窓は生成されなかった。既存のPAD.Console.Host／PAD.Designerは応答中でもHWND 0・タイトル空のままで、Computer Useのネイティブアプリ一覧も空だった。貼付け・保存・Run・Copilot再送・Robin編集・第3回Runは行わず、現行T04の`candidate_partial`、Run1 `NOT_CAPTURED`、新規pair未開始を維持する。原証跡は `catalog/evidence/t04-independent-current-pad-window-observation-20260914i.json` で、A〜G台帳と各集約の`latest_window_observation`から参照できる。
+
+## 2026-09-14 T04窓状態の読取専用再確認
+
+現行PADプロセスを再取得して一度だけ `Refresh()` 後のWin32／UIA観測を行った。通常の `PAD.Console.Host` は `Power Automate` の可視HWNDを持ったが、対象 `PAD.Designer` はHWND 0・タイトル空・UIA root 0のままで、Computer Useのnative app bindingも利用できなかった。前回の全窓0（CASE_A）から「通常窓は見えるがDesigner窓なし」（CASE_B）へ変化した状態差分として保存し、過去のr証跡は上書きしていない。Designerの安定HWND・所有PID／SessionId・対象フロー対応がないため、T04の貼付け・保存・Runは再開せず、新規pairは未開始のままとする。原証跡は `catalog/evidence/t04-independent-current-pad-window-observation-20260914t.json`、最新Issue／PR読取は `catalog/evidence/issue-live-read-20260914m.json` である。
 
 その後、既存`explorer.exe`経由でPAD ConsoleのAppsFolder起動を15秒観測したが、新しいPADプロセス・可視窓は発生しなかった（`catalog/evidence/t04-independent-current-pad-window-observation-20260914j.json`）。さらにComputer Useの最新スナップショットでもネイティブアプリは空だった（`catalog/evidence/t04-independent-current-pad-window-observation-20260914k.json`）。したがってDesignerの一意なPID／タイトル／HWND／UIAは依然取得できず、実行ペアは開始していない。
 

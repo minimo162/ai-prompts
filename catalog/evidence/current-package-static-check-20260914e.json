@@ -1,7 +1,16 @@
 {
   "schema_version": 1,
   "captured_at": "2026-09-14T04:03:01+09:00",
+  "reconciled_at": "2026-09-14T20:45:00+09:00",
   "status": "PASS_LOCAL_STATIC_CURRENT_PACKAGE",
+  "current_main_commit": "7cc2c18b2a7f521f770c47c48cbbf4715d228979",
+  "pr_32": {
+    "state": "MERGED",
+    "merge_commit": "7cc2c18b2a7f521f770c47c48cbbf4715d228979"
+  },
+  "a_g_requirement_decisions": "evidence/issue5-a-g-trace-20260914g.json#requirement_decisions",
+  "latest_t04_window_observation": "evidence/t04-independent-current-pad-window-observation-20260914t.json",
+  "latest_nonlive_run": ".work/nonlive-73ede9578ce04be1805489e4fe26ee57/verification.json",
   "package": {
     "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
     "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
@@ -19,7 +28,46 @@
     {"command": "JSON parse over updated catalog/evidence/index/coverage files", "status": "PASS", "invalid": []},
     {"command": "git diff --check", "status": "PASS_WITH_LINE_ENDING_WARNINGS", "note": "Only expected repository line-ending warnings; raw Robin evidence remains unmodified."},
     {"command": "node tests/Test-CopilotDom.cjs", "status": "NOT_RUN", "note": "Development Playwright module is not configured; live browser evidence is recorded separately."}
+    ,{"command": "tests/Test-Issue5AGTrace.ps1 -Root .", "status": "PASS", "checks": 292, "note": "A-G required evidence gaps, optional boundaries, external blockers, current PR #32/main, and latest T04 CASE_B observation are reconciled."}
+    ,{"command": "tests/Test-T04IndependentEvidence.ps1 -Root .", "status": "PASS", "checks": 70, "note": "Run1 NOT_CAPTURED and candidate_partial remain unchanged; no new PAD run was started."}
+    ,{"command": "tests/Test-PadWindowDiagnostic.ps1 -Root .", "status": "PASS", "checks": 38, "note": "Historical CASE_A diagnostic remains protected; current CASE_B check is read-only."}
+    ,{"command": "tests/Test-PadRunArtifactSnapshot.ps1 -Root .", "status": "PASS", "checks": 11, "note": "Run1 output gate still forbids Run2 without a captured artifact; no PAD or Copilot was invoked."}
   ],
   "live_m365": "evidence/t08-current-bundle-live-acceptance-20260914e.json",
-  "result": "Current-package static and semantic checks pass; independent T10 functional execution and authorized scope are now evidenced, while the strict raw-byte gate, P3 positives, negative suite v2, and final A-G audit remain open."
+  "result": "Local 20260914x checks pass with 38 non-live tests (37 existing plus one strict comparator entry). C and the new independent T04 pair remain accepted. Primary and independent T10 strict raw-byte preservation remain NOT_PROVEN; local saver control is not full chat-path proof. GitHub main remains 7cc2c18b2a7f521f770c47c48cbbf4715d228979; these local additions are unpushed.",
+  "t10_strict_boundary_audit": {
+    "verification": "catalog/evidence/t10-strict-20260914x-verification.json",
+    "evidence": "catalog/evidence/t10-strict-20260914x-audit.json",
+    "comparator": "PASS_NONLIVE_SYNTHETIC",
+    "local_control": "DEFECT_REPRODUCED_LOCAL_ONLY",
+    "primary_strict": "NOT_PROVEN",
+    "independent_strict": "NOT_PROVEN",
+    "additional_real_acquisitions": 0,
+    "reason": "Historical Add File saving appends LF in one same-operation synthetic control. Browser inventory timed out; no real recapture. Existing real candidates fail outside the exact two literal-content intervals. C and independent T04 new pair remain accepted; only strict T10 remains required."
+  },
+  "t10_existing_response_recapture": {
+    "evidence": "catalog/evidence/t10-strict-20260914x-recapture-results.json",
+    "verification": "catalog/evidence/t10-strict-20260914x-recapture-verification.json",
+    "browser_prerequisite_requests": 1,
+    "browser_prerequisite_completed": 1,
+    "primary": {
+      "requests": 1,
+      "completed": 1,
+      "remaining": 0,
+      "save_equal": true,
+      "authorized_contents": true,
+      "outside_bytes": false,
+      "strict": "NOT_PROVEN"
+    },
+    "independent": {
+      "requests": 1,
+      "completed": 1,
+      "remaining": 0,
+      "save_equal": true,
+      "authorized_contents": true,
+      "outside_bytes": false,
+      "strict": "NOT_PROVEN"
+    },
+    "next": "Original acquisition budgets exhausted. No repeat, new send or PAD Run authorized; distinct upstream hypothesis and explicit new limits required."
+  }
 }

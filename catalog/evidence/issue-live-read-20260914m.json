@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "captured_at": "2026-09-14T20:42:00+09:00",
+  "method": "gh read-only",
+  "repository": "minimo162/ai-prompts",
+  "current_main": {
+    "local_head": "7cc2c18b2a7f521f770c47c48cbbf4715d228979",
+    "origin_main": "7cc2c18b2a7f521f770c47c48cbbf4715d228979",
+    "synchronized": true
+  },
+  "issues": {
+    "5": {
+      "number": 5,
+      "state": "OPEN",
+      "title": "PAD Robin必須A〜G：PR #31統合済み／次は独立T04の実行証跡補完→最終監査／OPEN・partial",
+      "updated_at": "2026-09-14T11:10:21Z",
+      "comment_count": 103,
+      "last_comment_created_at": "2026-09-14T11:10:20Z",
+      "last_comment_url": "https://github.com/minimo162/ai-prompts/issues/5#issuecomment-5663017599",
+      "last_comment_summary": "2026-09-14 PR #32 squashマージ・main同期後の更新"
+    },
+    "27": {
+      "number": 27,
+      "state": "OPEN",
+      "title": "PAD Robin最終版受入：PR #31統合済み／次は独立T04の成果物証跡補完／T10厳密保持はNOT_PROVEN",
+      "updated_at": "2026-09-14T11:10:31Z",
+      "comment_count": 39,
+      "last_comment_created_at": "2026-09-14T11:10:30Z",
+      "last_comment_url": "https://github.com/minimo162/ai-prompts/issues/27#issuecomment-5663019522",
+      "last_comment_summary": "2026-09-14 PR #32 squashマージ・main同期後の更新"
+    }
+  },
+  "pull_requests": {
+    "31": {
+      "number": 31,
+      "state": "MERGED",
+      "title": "現行20260913e負例v2受入と版証跡整合",
+      "merged_at": "2026-09-14T02:53:47Z",
+      "merge_commit": "c52f954164eb75fcaa37116a44c7454bca3a5073",
+      "base": "main",
+      "head": "codex/negative-v2-current-20260914",
+      "url": "https://github.com/minimo162/ai-prompts/pull/31"
+    },
+    "32": {
+      "number": 32,
+      "state": "MERGED",
+      "title": "T04 PAD Designer窓検出の読取専用診断と証跡整合",
+      "merged_at": "2026-09-14T11:09:35Z",
+      "merge_commit": "7cc2c18b2a7f521f770c47c48cbbf4715d228979",
+      "base": "main",
+      "head": "codex/issue-5-t04-evidence-20260914e",
+      "url": "https://github.com/minimo162/ai-prompts/pull/32"
+    }
+  },
+  "write_actions": {
+    "issue_comments_posted": false,
+    "issue_bodies_changed": false,
+    "push_performed": false,
+    "reason": "read-only confirmation only; no GitHub write was attempted"
+  }
+}

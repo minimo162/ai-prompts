@@ -1,0 +1,12 @@
+{
+  "verification_id": "C-CELL-READ-20260914V",
+  "run": 2,
+  "requested_at": "2026-09-14T13:21:11.1800106Z",
+  "flow_name": "RobinKnowledgeCCellReadReuse_20260914v",
+  "pid": 32304,
+  "source_sha256": "aacd4c595c7226d4445125074bbb6c71dd7d329d4fd4b752c5b61c1d55fd08c3",
+  "expectation_sha256": "65c38e495e8ea2be59cc729ffde7f5e68ed05a5f4d6a98da9b75a8981c5c2791",
+  "run1_values_evidence_sha256": "5e1b2b4bbb37f03ba37cbd220fe2f0ca057a100212bfbd77b3e5eea7af8a2e55",
+  "request_count": 1,
+  "before_evidence": "run2-before.json"
+}

@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-09-14T13:39:31.112877+00:00",
+  "status": "PASS_C_NATIVE_SUPPLEMENT_REQUIRED_REMAINDER_PARTIAL",
+  "live_evidence": "catalog/evidence/c-cell-read-20260914v/acceptance.json",
+  "tests": {
+    "CDataTableCellRead": {
+      "status": "PASS",
+      "checks": 82,
+      "negative_controls": 4
+    },
+    "Issue5AGTrace": {
+      "status": "PASS",
+      "checks": 312
+    },
+    "Issue5CurrentStatus": {
+      "status": "PASS",
+      "checks": 57
+    },
+    "RobinCatalog": {
+      "status": "PASS",
+      "checks": 107
+    },
+    "RobinRawContracts": {
+      "status": "PASS_ASSERTIONS",
+      "assertions": {
+        "t04_early_filter_line_matches_source": true,
+        "t04_final_filter_line_differs_from_source": true,
+        "t04_current_filter_line_matches_source": true,
+        "t04_current_only_requested_output_path_differs": true,
+        "t10_expected_changed_lines": true,
+        "t10_recopy_only_path_lines_differ": true
+      }
+    },
+    "CopilotRobinPackage": {
+      "status": "PASS",
+      "instructions_utf16": 3947,
+      "knowledge_files": 7,
+      "observed_actions": 87
+    },
+    "T10StrictPreservation": {
+      "status": "PASS_REGRESSION_WITH_STRICT_NOT_PROVEN",
+      "strict": "NOT_PROVEN"
+    },
+    "NonLiveAll": {
+      "status": "PASS",
+      "count": 37,
+      "candidate_unchanged": true,
+      "original_record": ".work/nonlive-028b7ba6cc194d009694eb320a60db17/verification.json",
+      "original_record_sha256": "9b8cff84db21994050c5ebb2caebbd83571f919d244433c57ef9bddf86cc0784",
+      "tests": [
+        {
+          "test": "Test-CsvContracts.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-CsvBatch.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-CsvLifecycle.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-CsvTypedPlan.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-CsvReview.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-CsvLateResponse.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-QualityDraft.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-OfflineDiagnostic.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-ConversationScope.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-ConnectionContract.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-AcceptanceGate.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-App.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-Pad.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-PadRunArtifactSnapshot.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-RobinCatalog.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-BoundedRobinLoop.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-RobinNumberConversion.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-GeneralJobStart.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-GeneralArtifactOpen.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-CompletionDecision.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-PadRecovery.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-Copilot.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-CopilotPlannerV2.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-PlannerV2Transport.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-Http.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-Launcher.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-ReleaseBinding.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-PublishAgentSource.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-PublishCrash.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-AiCallProcess.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-AiCallProviderFailure.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-ClipboardSnapshot.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-DocumentRobin.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-DocumentObservation.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-ClipboardReadRetry.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-CurrentBundleT01Prepared.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        },
+        {
+          "test": "Test-Issue5CurrentStatus.ps1",
+          "status": "PASS",
+          "exit_code": 0
+        }
+      ]
+    }
+  },
+  "integrity": {
+    "catalog_json_parsed": 1392,
+    "copilot_json_parsed": 15,
+    "manifest_sources_unchanged": 7,
+    "instruction_bundle_unchanged": true,
+    "protected_files_unchanged": 409,
+    "remaining_required": [
+      "E-independent-t04-run1-artifact",
+      "F-t10-strict-raw-bytes"
+    ],
+    "new_markdown_references": "PASS",
+    "tracked_changes_only_authorized_derived_and_test": true,
+    "original_raw_tracked_files_changed": false
+  },
+  "preflight_failures": [
+    {
+      "command": "Test-Issue5CurrentStatus.ps1 -Root ...",
+      "error": "NamedParameterNotFound: Root",
+      "resolution": "Reran using supported no-argument signature; 57 checks passed."
+    },
+    {
+      "command": "Test-RobinRawContracts.ps1 without Root",
+      "error": "Split-Path empty PSScriptRoot in parameter default",
+      "resolution": "Reran with explicit Root; six raw provenance assertions true."
+    }
+  ],
+  "review": {
+    "diff_check": "PASS",
+    "new_screenshots": "Inspected table settings, scalar read settings, empty reuse, Run1, cleared values before Run2 and Run2; no account header included.",
+    "sensitive_text_scan": "Only UIA IsPassword property metadata matched; no credentials/account text found in new evidence.",
+    "historical_raw_evidence": "UNCHANGED",
+    "native_run2_observer_exception": "Preserved; same-run read-only recovery; no duplicate Run.",
+    "new_native_runs": 2,
+    "new_copilot_sends": 0,
+    "nonlive_is_not_native_proof": true,
+    "dom_playwright": "NOT_RUN"
+  },
+  "publication": {
+    "local_commit_planned": true,
+    "push": false,
+    "pr": false,
+    "merge": false,
+    "release": false,
+    "issue_close": false
+  },
+  "scope": "C numeric row 0/column 0 Text read proven. Original T04 Run1 NOT_CAPTURED and T10 strict NOT_PROVEN remain; Issue #5/#27 OPEN / partial."
+}

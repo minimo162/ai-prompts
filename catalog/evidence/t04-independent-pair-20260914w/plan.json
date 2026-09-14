@@ -1,0 +1,54 @@
+{
+  "verification_id": "T04-INDEPENDENT-PAIR-20260914W",
+  "fixed_at": "2026-09-14T14:01:11.517244+00:00",
+  "max_run_starts": 2,
+  "new_copilot_sends": 0,
+  "flow_name": "RobinKnowledgeT04Pair_20260914w",
+  "pid": 23256,
+  "hwnd": 854012,
+  "session_id": 1,
+  "source": "catalog/generated/normal-chat-20260914e-t04-independent-live/robin.txt",
+  "source_sha256": "dd4f39f0700cfb5a9275dfc9912c89bd8d886d72972c9eb74223acf30343569d",
+  "input": "catalog/fixtures/excel/t04-filter-input.xlsx",
+  "input_sha256": "1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0",
+  "outputs": [
+    "catalog/evidence/t04-filtered.csv",
+    "catalog/evidence/normal-chat-t04-output-independent-20260914e.xlsx"
+  ],
+  "expected_cells": [
+    [
+      "対象",
+      "A",
+      10
+    ],
+    [
+      "対象",
+      "C",
+      25
+    ],
+    [
+      "対象",
+      "D",
+      5
+    ]
+  ],
+  "expected_rows": 3,
+  "expected_columns": 3,
+  "run_paths": {
+    "1": "run1",
+    "2": "run2"
+  },
+  "require_run1_artifact_and_values_before_run2": true,
+  "stop_conditions": [
+    "identity/idle/input/source mismatch",
+    "existing request marker",
+    "missing CSV or xlsx",
+    "any unexpected cell or dimension",
+    "input changed",
+    "unresolved running/observer failure"
+  ],
+  "old_run1": "NOT_CAPTURED",
+  "old_candidate": "candidate_partial",
+  "generation_scope": "Reuse the existing independent generation only; never primary T04 acceptance too.",
+  "protected_files_verified": 409
+}

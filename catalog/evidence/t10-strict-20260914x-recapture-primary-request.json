@@ -1,0 +1,23 @@
+{
+  "scope_id": "T10-STRICT-20260914X",
+  "event": "PRIMARY_CAPTURE_REQUEST_FIXED_BEFORE_CALL",
+  "original_budget": 1,
+  "prior_requests": 0,
+  "this_request": 1,
+  "base_commit": "a262b16476c008d0dd6ccacdf35f754130d39274",
+  "contract_from": "catalog/evidence/t10-strict-20260914x-audit.json#actual/0/contract",
+  "conversation": "https://m365.cloud.microsoft/chat/conversation/367eb593-1366-451c-9015-23221a30e259?es=SSR",
+  "browser": "iab",
+  "tab_id_observed_now": "1",
+  "selector": "[id=\"response-id_r_34_\"] pre",
+  "node_count_observed": 1,
+  "function": "playwright.locator(selector).allTextContents({timeoutMs:5000})",
+  "request_sha256": "f426277d018eecf0df3a838f3a9a8089309e2d3a35b0f5d661cc9c78029a126c",
+  "source_sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+  "version": "20260913e",
+  "identity": {"user_dom_utf16_units":4703,"user_dom_utf8_sha256":"a01627374ea4c24dcaab2e9a6fe45a119aa9ca63d5639a4e2bf5fdfb6a89a526","rendered_request_match":"saved request LF-to-space SHA matches user DOM; identity only, not raw preservation","attachments_observed":["PAD-Robin-Knowledge-Bundle","T10-Knowledge-Flow-Bundle"],"remote_attachment_bytes":"NOT_REDOWNLOADED; linked to historical upload record and unchanged local hashes"},
+  "capture_path": "catalog/evidence/t10-strict-20260914x-recapture-primary-string.json",
+  "save_path": "catalog/evidence/t10-strict-20260914x-recapture-primary.robin",
+  "stop": "one request only, including timeout; no repeat or original-byte repair",
+  "pad_runs":0,"copilot_sends":0,"clipboard_changes":0
+}

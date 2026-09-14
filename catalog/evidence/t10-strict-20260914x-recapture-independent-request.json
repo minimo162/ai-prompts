@@ -1,0 +1,21 @@
+{
+  "scope_id":"T10-STRICT-20260914X",
+  "event":"INDEPENDENT_CAPTURE_REQUEST_FIXED_BEFORE_CALL",
+  "original_budget":1,"prior_requests":0,"this_request":1,
+  "base_commit":"a262b16476c008d0dd6ccacdf35f754130d39274",
+  "contract_from":"catalog/evidence/t10-strict-20260914x-audit.json#actual/1/contract",
+  "conversation":"https://m365.cloud.microsoft/chat/conversation/6edc277b-b005-4d56-8bb7-ba64668ea636",
+  "browser":"Chrome extension 2",
+  "tab_id_observed_now":"1910260936",
+  "selector":"[id=\"response-id_r_58_\"] pre",
+  "node_count_observed":1,
+  "function":"playwright.locator(selector).allTextContents({timeoutMs:5000})",
+  "request_sha256":"b36fc9925aabec165c10732c7890d076ba07798f9a012fa447c0b64fda414a03",
+  "source_sha256":"d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+  "version":"20260913e",
+  "identity":{"sent_body_sha256":"dd2cb5cf10000957a9d4190f3b7ab66545565d08d2317601e92735987332a571","user_dom_utf16_units":4732,"user_dom_utf8_sha256":"a09d26491ce3330ba6414a081ab440bf27b6b4074f3712e1b2dc9bf984e74ece","rendered_request_match":"instruction + CRLFCRLF + saved request matches historical sent-body SHA; CRLF to LF then LF to space matches rendered user DOM SHA. Identity only; not applied to response or strict comparison.","attachments_observed":["PAD-Robin-Knowledge-Bundle","agent-instructions","generated-robin"],"remote_attachment_bytes":"NOT_REDOWNLOADED; linked to historical upload record and unchanged local hashes"},
+  "capture_path":"catalog/evidence/t10-strict-20260914x-recapture-independent-string.json",
+  "save_path":"catalog/evidence/t10-strict-20260914x-recapture-independent.robin",
+  "stop":"one request only including timeout; no repeat or source-byte repair",
+  "pad_runs":0,"copilot_sends":0,"clipboard_changes":0
+}

@@ -1,0 +1,1671 @@
+{
+  "schema_version": 1,
+  "id": "T10-STRICT-20260914X",
+  "parent_commit": "3ef2a9c3d7483db055e60078d2923a2ddbeb146d",
+  "created_at": "2026-09-14T14:53:46.916Z",
+  "status": "BOUNDED_AUDIT_COMPLETE_STRICT_NOT_PROVEN",
+  "plan": "catalog/evidence/t10-strict-20260914x-plan.json",
+  "reused_review": "catalog/evidence/t10-saved-evidence-review-20260914w.json",
+  "comparator": {
+    "tool": "tools/Compare-T10Bytes.mjs",
+    "test": "tests/Test-T10ByteComparator.mjs",
+    "status": "PASS",
+    "kind": "NON_LIVE_SYNTHETIC_ONLY",
+    "cases": 14,
+    "source_hash_rejection": true,
+    "saver_checks": 4,
+    "results": [
+      {
+        "id": "positive",
+        "expected": "PASS",
+        "result": {
+          "status": "PASS",
+          "authorized_contents": true,
+          "outside_bytes": true,
+          "source_sha256": "355f9ed79f5ee5cdf23e1134ec9f13a67c0634193c111f5a71fe991f63d846dc",
+          "candidate_sha256": "dd176a61807aea0c7ad318b673e1dada884e568506bc631fbb52c52daa317e77",
+          "source_bytes": 133,
+          "candidate_bytes": 134,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 47,
+                "end": 50,
+                "line": 2
+              },
+              "candidate": {
+                "start": 47,
+                "end": 55,
+                "line": 2
+              },
+              "shift": 0,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 111,
+                "end": 116,
+                "line": 4
+              },
+              "candidate": {
+                "start": 116,
+                "end": 117,
+                "line": 4
+              },
+              "shift": 5,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 47,
+              "candidate_start": 0,
+              "candidate_end": 47,
+              "shift": 0,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 50,
+              "source_end": 111,
+              "candidate_start": 55,
+              "candidate_end": 116,
+              "shift": 5,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 116,
+              "source_end": 133,
+              "candidate_start": 117,
+              "candidate_end": 134,
+              "shift": 1,
+              "equal": true,
+              "first_difference": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "outside-one-byte",
+        "expected": "FAIL",
+        "result": {
+          "status": "FAIL",
+          "authorized_contents": true,
+          "outside_bytes": false,
+          "source_sha256": "355f9ed79f5ee5cdf23e1134ec9f13a67c0634193c111f5a71fe991f63d846dc",
+          "candidate_sha256": "9c796d0a1ebf73117088e88045de98713af084308885688988999bff0b31a285",
+          "source_bytes": 133,
+          "candidate_bytes": 134,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 47,
+                "end": 50,
+                "line": 2
+              },
+              "candidate": {
+                "start": 47,
+                "end": 55,
+                "line": 2
+              },
+              "shift": 0,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 111,
+                "end": 116,
+                "line": 4
+              },
+              "candidate": {
+                "start": 116,
+                "end": 117,
+                "line": 4
+              },
+              "shift": 5,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 47,
+              "candidate_start": 0,
+              "candidate_end": 47,
+              "shift": 0,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 50,
+              "source_end": 111,
+              "candidate_start": 55,
+              "candidate_end": 116,
+              "shift": 5,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 64,
+                "candidate_offset": 69
+              }
+            },
+            {
+              "source_start": 116,
+              "source_end": 133,
+              "candidate_start": 117,
+              "candidate_end": 134,
+              "shift": 1,
+              "equal": true,
+              "first_difference": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "CRLF-to-LF",
+        "expected": "FAIL",
+        "result": {
+          "status": "FAIL",
+          "authorized_contents": true,
+          "outside_bytes": false,
+          "source_sha256": "355f9ed79f5ee5cdf23e1134ec9f13a67c0634193c111f5a71fe991f63d846dc",
+          "candidate_sha256": "b6c76f717a68482fe13fb4b434a6cef57b500f378dd0b379b346c3ffb01a1a1f",
+          "source_bytes": 133,
+          "candidate_bytes": 130,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 47,
+                "end": 50,
+                "line": 2
+              },
+              "candidate": {
+                "start": 46,
+                "end": 54,
+                "line": 2
+              },
+              "shift": -1,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 111,
+                "end": 116,
+                "line": 4
+              },
+              "candidate": {
+                "start": 113,
+                "end": 114,
+                "line": 4
+              },
+              "shift": 2,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 47,
+              "candidate_start": 0,
+              "candidate_end": 46,
+              "shift": 0,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 5,
+                "candidate_offset": 5
+              }
+            },
+            {
+              "source_start": 50,
+              "source_end": 111,
+              "candidate_start": 54,
+              "candidate_end": 113,
+              "shift": 4,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 61,
+                "candidate_offset": 65
+              }
+            },
+            {
+              "source_start": 116,
+              "source_end": 133,
+              "candidate_start": 114,
+              "candidate_end": 130,
+              "shift": -2,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 127,
+                "candidate_offset": 125
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "EOF-added",
+        "expected": "FAIL",
+        "result": {
+          "status": "FAIL",
+          "authorized_contents": true,
+          "outside_bytes": false,
+          "source_sha256": "355f9ed79f5ee5cdf23e1134ec9f13a67c0634193c111f5a71fe991f63d846dc",
+          "candidate_sha256": "91f4d2b7bf081d15a76bc45215807400bc4cacae9946e3cb7a34f1c43d7e0228",
+          "source_bytes": 133,
+          "candidate_bytes": 136,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 47,
+                "end": 50,
+                "line": 2
+              },
+              "candidate": {
+                "start": 47,
+                "end": 55,
+                "line": 2
+              },
+              "shift": 0,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 111,
+                "end": 116,
+                "line": 4
+              },
+              "candidate": {
+                "start": 116,
+                "end": 117,
+                "line": 4
+              },
+              "shift": 5,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 47,
+              "candidate_start": 0,
+              "candidate_end": 47,
+              "shift": 0,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 50,
+              "source_end": 111,
+              "candidate_start": 55,
+              "candidate_end": 116,
+              "shift": 5,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 116,
+              "source_end": 133,
+              "candidate_start": 117,
+              "candidate_end": 136,
+              "shift": 1,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 133,
+                "candidate_offset": 134
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "EOF-deleted",
+        "expected": "FAIL",
+        "result": {
+          "status": "FAIL",
+          "authorized_contents": true,
+          "outside_bytes": false,
+          "source_sha256": "b7791cca89e8440bb3e07e71b19a734b6d1cd0bff34ef08b6f111ef5122f6e83",
+          "candidate_sha256": "dd176a61807aea0c7ad318b673e1dada884e568506bc631fbb52c52daa317e77",
+          "source_bytes": 135,
+          "candidate_bytes": 134,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 47,
+                "end": 50,
+                "line": 2
+              },
+              "candidate": {
+                "start": 47,
+                "end": 55,
+                "line": 2
+              },
+              "shift": 0,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 111,
+                "end": 116,
+                "line": 4
+              },
+              "candidate": {
+                "start": 116,
+                "end": 117,
+                "line": 4
+              },
+              "shift": 5,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 47,
+              "candidate_start": 0,
+              "candidate_end": 47,
+              "shift": 0,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 50,
+              "source_end": 111,
+              "candidate_start": 55,
+              "candidate_end": 116,
+              "shift": 5,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 116,
+              "source_end": 135,
+              "candidate_start": 117,
+              "candidate_end": 134,
+              "shift": 1,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 133,
+                "candidate_offset": 134
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "BOM-added",
+        "expected": "FAIL",
+        "result": {
+          "status": "FAIL",
+          "authorized_contents": true,
+          "outside_bytes": false,
+          "source_sha256": "355f9ed79f5ee5cdf23e1134ec9f13a67c0634193c111f5a71fe991f63d846dc",
+          "candidate_sha256": "54ba19d4988d3726b9bdead4d23e5800c4d9e19f3e16be2deca498c68300a988",
+          "source_bytes": 133,
+          "candidate_bytes": 137,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 47,
+                "end": 50,
+                "line": 2
+              },
+              "candidate": {
+                "start": 50,
+                "end": 58,
+                "line": 2
+              },
+              "shift": 3,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 111,
+                "end": 116,
+                "line": 4
+              },
+              "candidate": {
+                "start": 119,
+                "end": 120,
+                "line": 4
+              },
+              "shift": 8,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 47,
+              "candidate_start": 0,
+              "candidate_end": 50,
+              "shift": 0,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 0,
+                "candidate_offset": 0
+              }
+            },
+            {
+              "source_start": 50,
+              "source_end": 111,
+              "candidate_start": 58,
+              "candidate_end": 119,
+              "shift": 8,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 116,
+              "source_end": 133,
+              "candidate_start": 120,
+              "candidate_end": 137,
+              "shift": 4,
+              "equal": true,
+              "first_difference": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "BOM-deleted",
+        "expected": "FAIL",
+        "result": {
+          "status": "FAIL",
+          "authorized_contents": true,
+          "outside_bytes": false,
+          "source_sha256": "d983ef9ced24f092df4752d97a954f15e9f64e9da80c57b952ee6650efcdc5f9",
+          "candidate_sha256": "dd176a61807aea0c7ad318b673e1dada884e568506bc631fbb52c52daa317e77",
+          "source_bytes": 136,
+          "candidate_bytes": 134,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 50,
+                "end": 53,
+                "line": 2
+              },
+              "candidate": {
+                "start": 47,
+                "end": 55,
+                "line": 2
+              },
+              "shift": -3,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 114,
+                "end": 119,
+                "line": 4
+              },
+              "candidate": {
+                "start": 116,
+                "end": 117,
+                "line": 4
+              },
+              "shift": 2,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 50,
+              "candidate_start": 0,
+              "candidate_end": 47,
+              "shift": 0,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 0,
+                "candidate_offset": 0
+              }
+            },
+            {
+              "source_start": 53,
+              "source_end": 114,
+              "candidate_start": 55,
+              "candidate_end": 116,
+              "shift": 2,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 119,
+              "source_end": 136,
+              "candidate_start": 117,
+              "candidate_end": 134,
+              "shift": -2,
+              "equal": true,
+              "first_difference": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "line-missing",
+        "expected": "FAIL",
+        "result": {
+          "status": "FAIL",
+          "authorized_contents": false,
+          "outside_bytes": false,
+          "source_sha256": "355f9ed79f5ee5cdf23e1134ec9f13a67c0634193c111f5a71fe991f63d846dc",
+          "candidate_sha256": "7ab0e8f5c3513b7a8795bb6e311bfb10cb8f0c670129535a8522eb964b1c439b",
+          "source_bytes": 133,
+          "candidate_bytes": 127,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 47,
+                "end": 50,
+                "line": 2
+              },
+              "candidate": {
+                "start": 47,
+                "end": 55,
+                "line": 2
+              },
+              "shift": 0,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 111,
+                "end": 116,
+                "line": 4
+              },
+              "candidate": {
+                "start": 109,
+                "end": 110,
+                "line": 3
+              },
+              "shift": -2,
+              "requested_value_equal": true,
+              "requested_line_equal": false
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 47,
+              "candidate_start": 0,
+              "candidate_end": 47,
+              "shift": 0,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 50,
+              "source_end": 111,
+              "candidate_start": 55,
+              "candidate_end": 109,
+              "shift": 5,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 63,
+                "candidate_offset": 68
+              }
+            },
+            {
+              "source_start": 116,
+              "source_end": 133,
+              "candidate_start": 110,
+              "candidate_end": 127,
+              "shift": -6,
+              "equal": true,
+              "first_difference": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "line-extra",
+        "expected": "FAIL",
+        "result": {
+          "status": "FAIL",
+          "authorized_contents": true,
+          "outside_bytes": false,
+          "source_sha256": "355f9ed79f5ee5cdf23e1134ec9f13a67c0634193c111f5a71fe991f63d846dc",
+          "candidate_sha256": "0d2ca2a7913145607454d77104d1d2d3742dfea8298dc0901e2b9acd3d23b6ee",
+          "source_bytes": 133,
+          "candidate_bytes": 141,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 47,
+                "end": 50,
+                "line": 2
+              },
+              "candidate": {
+                "start": 47,
+                "end": 55,
+                "line": 2
+              },
+              "shift": 0,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 111,
+                "end": 116,
+                "line": 4
+              },
+              "candidate": {
+                "start": 116,
+                "end": 117,
+                "line": 4
+              },
+              "shift": 5,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 47,
+              "candidate_start": 0,
+              "candidate_end": 47,
+              "shift": 0,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 50,
+              "source_end": 111,
+              "candidate_start": 55,
+              "candidate_end": 116,
+              "shift": 5,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 116,
+              "source_end": 133,
+              "candidate_start": 117,
+              "candidate_end": 141,
+              "shift": 1,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 133,
+                "candidate_offset": 134
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "wrong-value",
+        "expected": "FAIL",
+        "result": {
+          "status": "FAIL",
+          "authorized_contents": false,
+          "outside_bytes": true,
+          "source_sha256": "355f9ed79f5ee5cdf23e1134ec9f13a67c0634193c111f5a71fe991f63d846dc",
+          "candidate_sha256": "159f4f1cb72093afc17ed2b12d731d6d47c300bd4a6d6f65df877000e6716aec",
+          "source_bytes": 133,
+          "candidate_bytes": 131,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 47,
+                "end": 50,
+                "line": 2
+              },
+              "candidate": {
+                "start": 47,
+                "end": 52,
+                "line": 2
+              },
+              "shift": 0,
+              "requested_value_equal": false,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 111,
+                "end": 116,
+                "line": 4
+              },
+              "candidate": {
+                "start": 113,
+                "end": 114,
+                "line": 4
+              },
+              "shift": 2,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 47,
+              "candidate_start": 0,
+              "candidate_end": 47,
+              "shift": 0,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 50,
+              "source_end": 111,
+              "candidate_start": 52,
+              "candidate_end": 113,
+              "shift": 2,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 116,
+              "source_end": 133,
+              "candidate_start": 114,
+              "candidate_end": 131,
+              "shift": -2,
+              "equal": true,
+              "first_difference": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "allowed-line-suffix",
+        "expected": "FAIL",
+        "result": {
+          "status": "FAIL",
+          "authorized_contents": true,
+          "outside_bytes": false,
+          "source_sha256": "355f9ed79f5ee5cdf23e1134ec9f13a67c0634193c111f5a71fe991f63d846dc",
+          "candidate_sha256": "86c474cdce1dc1b1e4b9a15695bf88c6bd4bd9f9e3e0aba4b6de421472d88166",
+          "source_bytes": 133,
+          "candidate_bytes": 134,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 47,
+                "end": 50,
+                "line": 2
+              },
+              "candidate": {
+                "start": 47,
+                "end": 55,
+                "line": 2
+              },
+              "shift": 0,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 111,
+                "end": 116,
+                "line": 4
+              },
+              "candidate": {
+                "start": 116,
+                "end": 117,
+                "line": 4
+              },
+              "shift": 5,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 47,
+              "candidate_start": 0,
+              "candidate_end": 47,
+              "shift": 0,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 50,
+              "source_end": 111,
+              "candidate_start": 55,
+              "candidate_end": 116,
+              "shift": 5,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 60,
+                "candidate_offset": 65
+              }
+            },
+            {
+              "source_start": 116,
+              "source_end": 133,
+              "candidate_start": 117,
+              "candidate_end": 134,
+              "shift": 1,
+              "equal": true,
+              "first_difference": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "allowed-line-prefix",
+        "expected": "FAIL",
+        "result": {
+          "status": "FAIL",
+          "authorized_contents": false,
+          "outside_bytes": false,
+          "mapping_status": "FIELD_MISSING_OR_AMBIGUOUS",
+          "source_sha256": "355f9ed79f5ee5cdf23e1134ec9f13a67c0634193c111f5a71fe991f63d846dc",
+          "candidate_sha256": "7b175f9184c48c3cf6bf7f6d59ecd9fc99b83cddf1be8aa35864d0e45515a5f5"
+        }
+      },
+      {
+        "id": "unchanged-values",
+        "expected": "FAIL",
+        "result": {
+          "status": "FAIL",
+          "authorized_contents": false,
+          "outside_bytes": true,
+          "source_sha256": "355f9ed79f5ee5cdf23e1134ec9f13a67c0634193c111f5a71fe991f63d846dc",
+          "candidate_sha256": "355f9ed79f5ee5cdf23e1134ec9f13a67c0634193c111f5a71fe991f63d846dc",
+          "source_bytes": 133,
+          "candidate_bytes": 133,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 47,
+                "end": 50,
+                "line": 2
+              },
+              "candidate": {
+                "start": 47,
+                "end": 50,
+                "line": 2
+              },
+              "shift": 0,
+              "requested_value_equal": false,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 111,
+                "end": 116,
+                "line": 4
+              },
+              "candidate": {
+                "start": 111,
+                "end": 116,
+                "line": 4
+              },
+              "shift": 0,
+              "requested_value_equal": false,
+              "requested_line_equal": true
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 47,
+              "candidate_start": 0,
+              "candidate_end": 47,
+              "shift": 0,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 50,
+              "source_end": 111,
+              "candidate_start": 50,
+              "candidate_end": 111,
+              "shift": 0,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 116,
+              "source_end": 133,
+              "candidate_start": 116,
+              "candidate_end": 133,
+              "shift": 0,
+              "equal": true,
+              "first_difference": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "positive-with-BOM-and-EOF",
+        "expected": "PASS",
+        "result": {
+          "status": "PASS",
+          "authorized_contents": true,
+          "outside_bytes": true,
+          "source_sha256": "93caca126a1688b26b091792957bdb09ef3e06bfd7223c76a8f0db75d7649b11",
+          "candidate_sha256": "6284e0bc44837ff3bb70894a47ad9fd3af64e52effe094382bad6a6945860eee",
+          "source_bytes": 138,
+          "candidate_bytes": 139,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 50,
+                "end": 53,
+                "line": 2
+              },
+              "candidate": {
+                "start": 50,
+                "end": 58,
+                "line": 2
+              },
+              "shift": 0,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 114,
+                "end": 119,
+                "line": 4
+              },
+              "candidate": {
+                "start": 119,
+                "end": 120,
+                "line": 4
+              },
+              "shift": 5,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 50,
+              "candidate_start": 0,
+              "candidate_end": 50,
+              "shift": 0,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 53,
+              "source_end": 114,
+              "candidate_start": 58,
+              "candidate_end": 119,
+              "shift": 5,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 119,
+              "source_end": 138,
+              "candidate_start": 120,
+              "candidate_end": 139,
+              "shift": 1,
+              "equal": true,
+              "first_difference": null
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "local_control": {
+    "status": "DEFECT_REPRODUCED_LOCAL_ONLY",
+    "boundary": "apply_patch Add File text serialization only",
+    "input": {
+      "bytes": 18,
+      "sha256": "836ccec7b2a8ee71bcd890cbcbf245de23538334445c31cc0faec43d0e7e7cc6",
+      "utf16_code_units": 18,
+      "code_points": 18,
+      "final_newline": false
+    },
+    "output": {
+      "path": "catalog/evidence/t10-strict-20260914x-control.txt",
+      "bytes": 19,
+      "sha256": "c5bae509d2fbb3279246fd71d7963aee0539e94ba523201d4cc605f746cd6d72",
+      "final_newline": true
+    },
+    "difference": "one appended LF (0A); one primary control call",
+    "fixed_output": {
+      "path": "catalog/evidence/t10-strict-20260914x-control-fixed.txt",
+      "bytes": 18,
+      "sha256": "836ccec7b2a8ee71bcd890cbcbf245de23538334445c31cc0faec43d0e7e7cc6",
+      "utf16_code_units": 18,
+      "code_points": 18,
+      "encoding": "UTF-8, no added BOM or newline; U+FEFF retained if present",
+      "utf16_source_sha256": "cf0a45f7d90315b8500f4c0cdc785c7f6d71f1e7d8d4d4805985082d6cefbddf",
+      "saved_equal_encoded_capture": true,
+      "source_file_raw_bytes_directly_observed": false
+    },
+    "fix": "Use Save-T10Capture.mjs for direct acquired string serialization; do not transcribe answers into Add File patches.",
+    "upstream_model_ui_cause": "NOT_PROVEN",
+    "full_normal_chat_path": "NOT_PROVEN"
+  },
+  "acquisition_map": [
+    {
+      "stage": "primary attachment",
+      "evidence": "catalog/evidence/t10-copilot-live-generation-20260913.json",
+      "function": "historical attachment upload; T10-Knowledge-Flow-Bundle.txt embeds flow; not bare source upload",
+      "observed": "local bundle SHA and UI attachment names",
+      "unobserved": "server parser bytes/model input"
+    },
+    {
+      "stage": "independent attachment",
+      "evidence": "catalog/evidence/t10-independent-current-generation-20260914e.json",
+      "function": "Copy-Item source to generated-robin.txt; fileChooser.setFiles",
+      "historical_session": "01a09a8e-a840-74a2-bcd0-061980b40865",
+      "log_lines": [
+        16335,
+        16356
+      ],
+      "observed": "byte-identical local attachment and UI upload",
+      "unobserved": "server parser bytes/model input"
+    },
+    {
+      "stage": "primary response DOM",
+      "evidence": "catalog/evidence/t10-copilot-live-generation-20260913.json",
+      "function": "code element textContent, per historical record",
+      "observed": "UTF-16 DOM string serialized to UTF-8; not original source bytes",
+      "unobserved": "raw generated response and historical saver implementation"
+    },
+    {
+      "stage": "independent response DOM",
+      "evidence": "catalog/evidence/t10-independent-current-generation-20260914e.json",
+      "function": "tabT10c.playwright.locator('pre').allTextContents({timeoutMs:5000})",
+      "log_line": 16988,
+      "observed": "UTF-16 string, LF including final LF",
+      "unobserved": "pre-render response serialization"
+    },
+    {
+      "stage": "independent official copy",
+      "evidence": "catalog/evidence/t10-independent-current-generation-20260914e.json",
+      "function": "getByRole('button',{name:'応答のコピー',exact:true}).click(); tabT10c.clipboard.readText()",
+      "log_lines": [
+        17002,
+        17016
+      ],
+      "observed": "browser clipboard text string; recorded 1770 UTF-8 bytes/no EOF newline",
+      "unobserved": "clipboard all-format raw bytes; model output"
+    },
+    {
+      "stage": "independent Windows clipboard",
+      "function": "Get-Clipboard -Raw; UTF8.GetBytes for SHA",
+      "log_line": 17009,
+      "observed": "historical native Text hash; not raw clipboard formats",
+      "unobserved": "all-format raw equality"
+    },
+    {
+      "stage": "independent saving",
+      "function": "tools.apply_patch Add File",
+      "log_line": 17039,
+      "observed": "both response.txt and dom-robin.txt authored in same patch; 1771 bytes",
+      "diagnosis": "local same-operation control confirms EOF addition; old official-copy file does not faithfully establish the recorded no-EOF string"
+    },
+    {
+      "stage": "existing PAD recopy",
+      "function": "Copy-PadFlowLiveByStatus.ps1 -> Get-AgentPadClipboardText -> IO.File.WriteAllText UTF8Encoding(false)",
+      "evidence": "tools/Copy-PadFlowLiveByStatus.ps1",
+      "observed": "saved CRLF/final-CRLF text; past function runs only",
+      "unobserved": "source file raw bytes and all clipboard formats"
+    }
+  ],
+  "browser_observation": {
+    "function": "cua.getState()",
+    "attempts": 1,
+    "status": "TIMEOUT_KERNEL_RESET",
+    "message": "js execution timed out; kernel reset, rerun your request",
+    "recapture_started": false,
+    "no_retry": true,
+    "reason": "No usable browser/tab inventory; fixed conversation identity and unique response cannot be verified. Stop condition applied."
+  },
+  "actual": [
+    {
+      "id": "primary",
+      "request": ".work/finale-20260912/t10-independent/sent-body.txt",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/367eb593-1366-451c-9015-23221a30e259?es=SSR",
+      "target": "copilot-excel-t10-v6.xlsx",
+      "metadata": "catalog/evidence/t10-copilot-live-generation-20260913.json",
+      "files": [
+        "catalog/evidence/t10-copilot-live-generation-20260913.robin",
+        "catalog/evidence/t10-copilot-live-generation-20260913-pad-recopy-after-run2.robin"
+      ],
+      "request_sha256": "f426277d018eecf0df3a838f3a9a8089309e2d3a35b0f5d661cc9c78029a126c",
+      "contract": {
+        "source_path": "catalog/generated/office-three-apps/generated.robin",
+        "source_sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+        "fields": [
+          {
+            "line": 2,
+            "prefix": "Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''",
+            "before": "CopilotOffice 246",
+            "after": "T10-Changed"
+          },
+          {
+            "line": 4,
+            "prefix": "Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''",
+            "before": "C:\\\\Temp\\\\AiPromptsOfficeCatalog_20260907\\\\copilot-excel.xlsx",
+            "after": "C:\\\\Users\\\\yuuki\\\\ai-prompts\\\\catalog\\\\evidence\\\\copilot-excel-t10-v6.xlsx"
+          }
+        ]
+      },
+      "saved_evidence_comparisons": [
+        {
+          "path": "catalog/evidence/t10-copilot-live-generation-20260913.robin",
+          "status": "FAIL",
+          "authorized_contents": true,
+          "outside_bytes": false,
+          "source_sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+          "candidate_sha256": "7bd2342b7a6bbe187faaf683ba3540346e996dd485a5a654b80e26ad959ffe12",
+          "source_bytes": 1759,
+          "candidate_bytes": 1752,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 173,
+                "end": 190,
+                "line": 2
+              },
+              "candidate": {
+                "start": 172,
+                "end": 183,
+                "line": 2
+              },
+              "shift": -1,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 503,
+                "end": 564,
+                "line": 4
+              },
+              "candidate": {
+                "start": 494,
+                "end": 568,
+                "line": 4
+              },
+              "shift": -9,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 173,
+              "candidate_start": 0,
+              "candidate_end": 172,
+              "shift": 0,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 107,
+                "candidate_offset": 107
+              }
+            },
+            {
+              "source_start": 190,
+              "source_end": 503,
+              "candidate_start": 183,
+              "candidate_end": 494,
+              "shift": -7,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 217,
+                "candidate_offset": 210
+              }
+            },
+            {
+              "source_start": 564,
+              "source_end": 1759,
+              "candidate_start": 568,
+              "candidate_end": 1752,
+              "shift": 4,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 567,
+                "candidate_offset": 571
+              }
+            }
+          ]
+        },
+        {
+          "path": "catalog/evidence/t10-copilot-live-generation-20260913-pad-recopy-after-run2.robin",
+          "status": "FAIL",
+          "authorized_contents": true,
+          "outside_bytes": false,
+          "source_sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+          "candidate_sha256": "845c54cc905e50dcb9f8b9d7e55aeba3cb639bee1b3e848a3f66f9b3ce051446",
+          "source_bytes": 1759,
+          "candidate_bytes": 1768,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 173,
+                "end": 190,
+                "line": 2
+              },
+              "candidate": {
+                "start": 173,
+                "end": 184,
+                "line": 2
+              },
+              "shift": 0,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 503,
+                "end": 564,
+                "line": 4
+              },
+              "candidate": {
+                "start": 497,
+                "end": 571,
+                "line": 4
+              },
+              "shift": -6,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 173,
+              "candidate_start": 0,
+              "candidate_end": 173,
+              "shift": 0,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 190,
+              "source_end": 503,
+              "candidate_start": 184,
+              "candidate_end": 497,
+              "shift": -6,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 564,
+              "source_end": 1759,
+              "candidate_start": 571,
+              "candidate_end": 1768,
+              "shift": 7,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 1759,
+                "candidate_offset": 1766
+              }
+            }
+          ]
+        }
+      ],
+      "live_recapture": {
+        "status": "NOT_RUN_OBSERVATION_UNAVAILABLE",
+        "count": 0
+      },
+      "strict": "NOT_PROVEN",
+      "functional": "REUSED_PAST_ACCEPTANCE_NOT_RERUN"
+    },
+    {
+      "id": "independent",
+      "request": "catalog/generated/normal-chat-20260914e-t10-independent-live/request.txt",
+      "conversation": "https://m365.cloud.microsoft/chat/conversation/6edc277b-b005-4d56-8bb7-ba64668ea636",
+      "target": "copilot-excel-t10-independent-20260914e.xlsx",
+      "metadata": "catalog/evidence/t10-independent-current-generation-20260914e.json",
+      "files": [
+        "catalog/generated/normal-chat-20260914e-t10-independent-live/response.txt",
+        "catalog/generated/normal-chat-20260914e-t10-independent-live/dom-robin.txt",
+        "catalog/generated/normal-chat-20260914e-t10-independent-live/pad-recopy-after-run2.robin"
+      ],
+      "request_sha256": "b36fc9925aabec165c10732c7890d076ba07798f9a012fa447c0b64fda414a03",
+      "contract": {
+        "source_path": "catalog/generated/office-three-apps/generated.robin",
+        "source_sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+        "fields": [
+          {
+            "line": 2,
+            "prefix": "Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''",
+            "before": "CopilotOffice 246",
+            "after": "T10-Changed"
+          },
+          {
+            "line": 4,
+            "prefix": "Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''",
+            "before": "C:\\\\Temp\\\\AiPromptsOfficeCatalog_20260907\\\\copilot-excel.xlsx",
+            "after": "C:\\\\Users\\\\yuuki\\\\ai-prompts\\\\catalog\\\\evidence\\\\copilot-excel-t10-independent-20260914e.xlsx"
+          }
+        ]
+      },
+      "saved_evidence_comparisons": [
+        {
+          "path": "catalog/generated/normal-chat-20260914e-t10-independent-live/response.txt",
+          "status": "FAIL",
+          "authorized_contents": true,
+          "outside_bytes": false,
+          "source_sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+          "candidate_sha256": "2bcb5512adc3d238251ea7da2f82c047a5ddfbf4ae4ce343b437aef27eb3284a",
+          "source_bytes": 1759,
+          "candidate_bytes": 1771,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 173,
+                "end": 190,
+                "line": 2
+              },
+              "candidate": {
+                "start": 172,
+                "end": 183,
+                "line": 2
+              },
+              "shift": -1,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 503,
+                "end": 564,
+                "line": 4
+              },
+              "candidate": {
+                "start": 494,
+                "end": 587,
+                "line": 4
+              },
+              "shift": -9,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 173,
+              "candidate_start": 0,
+              "candidate_end": 172,
+              "shift": 0,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 107,
+                "candidate_offset": 107
+              }
+            },
+            {
+              "source_start": 190,
+              "source_end": 503,
+              "candidate_start": 183,
+              "candidate_end": 494,
+              "shift": -7,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 217,
+                "candidate_offset": 210
+              }
+            },
+            {
+              "source_start": 564,
+              "source_end": 1759,
+              "candidate_start": 587,
+              "candidate_end": 1771,
+              "shift": 23,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 567,
+                "candidate_offset": 590
+              }
+            }
+          ]
+        },
+        {
+          "path": "catalog/generated/normal-chat-20260914e-t10-independent-live/dom-robin.txt",
+          "status": "FAIL",
+          "authorized_contents": true,
+          "outside_bytes": false,
+          "source_sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+          "candidate_sha256": "2bcb5512adc3d238251ea7da2f82c047a5ddfbf4ae4ce343b437aef27eb3284a",
+          "source_bytes": 1759,
+          "candidate_bytes": 1771,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 173,
+                "end": 190,
+                "line": 2
+              },
+              "candidate": {
+                "start": 172,
+                "end": 183,
+                "line": 2
+              },
+              "shift": -1,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 503,
+                "end": 564,
+                "line": 4
+              },
+              "candidate": {
+                "start": 494,
+                "end": 587,
+                "line": 4
+              },
+              "shift": -9,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 173,
+              "candidate_start": 0,
+              "candidate_end": 172,
+              "shift": 0,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 107,
+                "candidate_offset": 107
+              }
+            },
+            {
+              "source_start": 190,
+              "source_end": 503,
+              "candidate_start": 183,
+              "candidate_end": 494,
+              "shift": -7,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 217,
+                "candidate_offset": 210
+              }
+            },
+            {
+              "source_start": 564,
+              "source_end": 1759,
+              "candidate_start": 587,
+              "candidate_end": 1771,
+              "shift": 23,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 567,
+                "candidate_offset": 590
+              }
+            }
+          ]
+        },
+        {
+          "path": "catalog/generated/normal-chat-20260914e-t10-independent-live/pad-recopy-after-run2.robin",
+          "status": "FAIL",
+          "authorized_contents": true,
+          "outside_bytes": false,
+          "source_sha256": "d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194",
+          "candidate_sha256": "8bf9b03fdc7ecb3a549670411cd7d72cb7c3e4a44152a3f2f9a231727bdea0ab",
+          "source_bytes": 1759,
+          "candidate_bytes": 1787,
+          "offset_convention": "zero-based half-open raw byte intervals; BOM, line endings and EOF remain in gaps",
+          "edits": [
+            {
+              "source": {
+                "start": 173,
+                "end": 190,
+                "line": 2
+              },
+              "candidate": {
+                "start": 173,
+                "end": 184,
+                "line": 2
+              },
+              "shift": 0,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            },
+            {
+              "source": {
+                "start": 503,
+                "end": 564,
+                "line": 4
+              },
+              "candidate": {
+                "start": 497,
+                "end": 590,
+                "line": 4
+              },
+              "shift": -6,
+              "requested_value_equal": true,
+              "requested_line_equal": true
+            }
+          ],
+          "gaps": [
+            {
+              "source_start": 0,
+              "source_end": 173,
+              "candidate_start": 0,
+              "candidate_end": 173,
+              "shift": 0,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 190,
+              "source_end": 503,
+              "candidate_start": 184,
+              "candidate_end": 497,
+              "shift": -6,
+              "equal": true,
+              "first_difference": null
+            },
+            {
+              "source_start": 564,
+              "source_end": 1759,
+              "candidate_start": 590,
+              "candidate_end": 1787,
+              "shift": 26,
+              "equal": false,
+              "first_difference": {
+                "source_offset": 1759,
+                "candidate_offset": 1785
+              }
+            }
+          ]
+        }
+      ],
+      "live_recapture": {
+        "status": "NOT_RUN_OBSERVATION_UNAVAILABLE",
+        "count": 0
+      },
+      "strict": "NOT_PROVEN",
+      "functional": "REUSED_PAST_ACCEPTANCE_NOT_RERUN"
+    }
+  ],
+  "counts": {
+    "pad_runs": 0,
+    "copilot_sends": 0,
+    "primary_additional_acquisitions": 0,
+    "independent_additional_acquisitions": 0,
+    "clipboard_mutations": 0,
+    "browser_inventory_attempts": 1,
+    "local_old_saver_control_calls": 1
+  },
+  "issue5": "OPEN_partial_F_t10_strict_raw_bytes",
+  "issue27": "OPEN_partial_final_version_acceptance",
+  "clipboard_full_format_raw_equality": "UNASSESSED",
+  "next_single_task": {
+    "hypothesis": "After browser access returns, directly captured pre/code UTF-16 string may separate render serialization from the corrected saver; it cannot recover unseen source CRLF.",
+    "version": "20260913e",
+    "instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
+    "bundle_sha256": "79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12",
+    "prerequisite": "Read-only browser inventory and exact existing conversation identity available",
+    "targets": [
+      {
+        "id": "primary",
+        "url": "https://m365.cloud.microsoft/chat/conversation/367eb593-1366-451c-9015-23221a30e259?es=SSR",
+        "max_acquisitions": 1,
+        "request_sha256": "f426277d018eecf0df3a838f3a9a8089309e2d3a35b0f5d661cc9c78029a126c"
+      },
+      {
+        "id": "independent",
+        "url": "https://m365.cloud.microsoft/chat/conversation/6edc277b-b005-4d56-8bb7-ba64668ea636",
+        "max_acquisitions": 1,
+        "request_sha256": "b36fc9925aabec165c10732c7890d076ba07798f9a012fa447c0b64fda414a03"
+      }
+    ],
+    "observations": [
+      "unique existing response node",
+      "direct UTF-16LE capture with UTF-8 SHA before saving",
+      "exclusive new file raw bytes",
+      "exact interval comparator"
+    ],
+    "success": "Both saved real captures satisfy their fixed contracts; no fixture injected",
+    "stop": "Any inaccessible/ambiguous response or mismatch: NOT_PROVEN; no normalization, send, PAD run, clipboard mutation or repeat",
+    "new_send_required": false,
+    "new_send_authorized": false
+  },
+  "limitations": [
+    "Synthetic comparator PASS is not Copilot acceptance.",
+    "Local saver control does not prove full chat-path preservation.",
+    "No new real response was acquired. Existing saved files fail outside allowed content intervals.",
+    "Endpoint differences alone do not prove model/UI origin.",
+    "Primary T10 used an embedded flow bundle, independent used a byte-identical separate attachment; these inputs are not conflated."
+  ]
+}

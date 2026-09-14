@@ -1,5 +1,31 @@
 # PAD実アクションのRobinカタログ
 
+## 2026-09-15 T10既存応答の限定再取得
+
+T10-STRICT-20260914Xの残枠を使い、固定一次・独立会話の既存応答を各1回要求・1回完了しました。ブラウザー前提確認は1回成功。UTF-16LE／UTF-8のSHAを取得時に固定し、既存保存補助で新規保存した1752／1771 bytesは取得文字列と一致しました。許可2か所の内容も依頼一致ですが、どちらもLF16個・末尾LFありで、固定入力のCRLF・末尾改行なしと区間外bytesが異なるため、両strictは `NOT_PROVEN`です。[取得原文・区間比較・回数](evidence/t10-strict-20260914x-recapture-results.json)。
+
+これはDOM文字列から保存ファイルまでの観測であり、モデル内部や通信上の元バイトの証明ではありません。保存器の追加改行を直しても今回の差は解消していません。PAD Run・新規送信・クリップボード変更は0回。元の各1回枠は消化済みで、新IDによる再取得はしません。再開には、未観測の上流を区別する別仮説と新たな明示的上限が必要です。C・独立T04新pair受入と旧原証跡を保ち、#5全体と#27最終版は別判定でOPEN / partialです。
+
+## 2026-09-14 T10厳密比較と保存経路の限定検証（20260914x）
+
+許可された2/4行目の値・保存先の内容区間だけを除外し、その前後すべての生バイトを位置ずれ付きで比較する判定器を追加しました。合成正例2件・負例12件と元SHA拒否、保存器4検査は非ライブPASSです。過去のNOT_PROVEN回帰は保持しています。
+
+過去に使ったファイル追加パッチと同じ処理へ既知の18 bytesを1回通すと、末尾LFが追加され19 bytesになりました。文字列を直接UTF-8保存する補助では18 bytesのままです。この局所対照は通常チャット全経路の証明ではありません。ブラウザー一覧取得がタイムアウトし、実応答の追加取得は一次0・独立0。既存保存回答は依頼内容一致、許可区間外のバイト不一致で、両方strict `NOT_PROVEN`です。PAD Run・Copilot送信・クリップボード変更はいずれも0回。クリップボード全形式の生バイト同一は未評価のままです。
+
+[比較器・対照・取得境界・再開条件](evidence/t10-strict-20260914x-audit.json)。次はブラウザーの読み取りが利用可能な時に、固定した既存2会話の応答を各最大1回、文字列段階のSHAと新保存ファイルへ対応付けます。新規送信は不要・未許可とし、不一致なら保持します。C・独立T04新pairの受入を保ち、#5全体追跡と#27最終版受入はともにOPEN / partialです。
+
+## 2026-09-14 独立T04の新Runペア（20260914w）
+
+保存済み20260913e独立生成を無修正で専用空フローへ配置し、9アクションを保存・再コピーして最大2 Runを実施しました。Run1のCSV/xlsxを独立保存し、3行3列（対象/A/10、対象/C/25、対象/D/5）と入力SHA不変を検証してからRun2を開始し、Run2も一致しました。[新pair原証跡](evidence/t04-independent-pair-20260914w/acceptance.json)。旧Run1 `NOT_CAPTURED`・旧候補 `candidate_partial`・元T04不成立は保全し、同じ独立生成を一次T04へ二重計上しません。
+
+今回PAD 2 Run・Copilot送信0・C/T10再Run0。20260913eと保護409ファイルは不変です。必須技術残件はT10 strict raw-byte保持 `NOT_PROVEN`。同経路対照がないため再送・機能Runは行わず、[保存証跡の比較](evidence/t10-saved-evidence-review-20260914w.json)を分離しました。貼付け観測失敗で未復元となったクリップボードは、貼付け直前のWindows履歴項目を復元し、Text一致と元形式の存在を確認しました。全形式の生バイト同一は未評価です。補助の失敗時復元とPS5文字コードも修正しました。Issue #5/#27はOPEN / partial。
+
+## 2026-09-14 Cセル値読取りの補完（20260914v）
+
+実アクションから採取した `SET CellReadValue TO DataTable[0][0]` を、別空フローへ無修正貼付け・保存・再オープン後に2回実行し、Text値 `CRead-20260914v` と一致しました。前段は1行2列の合成DataTableです。4回の原文コピーは174 bytesで一致し、Run2前には値をクリアしています。Run2の観測補助例外は、追加Runせず同一実行を読み取り直して確認しました。
+
+[原証跡・期待値・段階別判定](evidence/c-cell-read-20260914v/acceptance.json)。Copilot送信0回、PAD Run 2回。数値添字0/0のネイティブ再利用証跡であり、新しいCopilot生成合格や列名構文の保証ではありません。20260913e instruction/bundleは変更していません。必須残件は独立T04 Run1成果物とT10 strict raw-byte保持の2件で、Issue #5/#27はOPEN / partialを維持します。過去の不成立・未採取記録は以下に保存しています。
+
 ## 2026-09-14 現行版集約訂正・負例v2受入
 
 集約状態を現行個別証跡へ整合させた。P3-1〜P3-6はすべて20260913eの同版指示・bundleで生成、無修正貼付け、保存・再コピー、2回Runまで確認済みで、P3-4〜P3-6の旧「未受入」表示は派生表示の残りとして訂正した。63桁のinstruction SHAは原送信・回答記録を変更せず、`evidence/p3-current-sha-correction-20260914e.json`へ訂正根拠と参照を記録した。負例v2は固定依頼を通常M365 Copilotへ1回送信し、N1〜N3を項目別に未確認受入（理由・必要証拠・禁止後続処理あり）とした。回答は無修正保存し、コードフェンス・Robin命令・疑似コード・未採取引数の推測はなく、PAD貼付け／Run／未登録Web操作は行っていない。旧finald負例PASSは履歴として保持し現行版へ継承していない。残件はT04形式不受入・独立T04候補partial、T10厳密保持NOT_PROVEN、最終A〜G監査であり、Issue #5/#27はOPEN / partialを維持する。
@@ -14,7 +40,7 @@
 
 ### 2026-09-14 独立T04の現行版候補
 
-窓の可視性を壊さない読取専用診断として、対象PIDの`Refresh()`後に全トップレベル窓をWin32 `EnumWindows`で列挙し、前景窓・所有PID・SessionId・UIA・Computer Useを比較した。通常の窓0、前景窓0、PAD Designer UIA 0、Computer Use `apps=[]`でCASE_A（対話デスクトップ／操作ブリッジ障害）と分類し、PAD実行失敗とは判定していない。T04のcandidate_partial、Run1 `NOT_CAPTURED`、新規pair未開始を維持する。証跡は`evidence/t04-independent-current-pad-window-diagnostic-20260914r.json`。
+窓の可視性を壊さない読取専用診断として、対象PIDの`Refresh()`後に全トップレベル窓をWin32 `EnumWindows`で列挙し、前景窓・所有PID・SessionId・UIA・Computer Useを比較した。過去の全窓0／CASE_Aは`evidence/t04-independent-current-pad-window-diagnostic-20260914r.json`として保全し、最新再確認では通常の`Power Automate`窓のみ可視、PAD DesignerはHWND 0・タイトル空・UIA 0のCASE_Bとなった。PAD実行失敗とは判定せず、T04のcandidate_partial、Run1 `NOT_CAPTURED`、新規pair未開始を維持する。最新証跡は`evidence/t04-independent-current-pad-window-observation-20260914t.json`。
 追加の`quser`読取ではSession 1が`console / Active`で、PowerShellとPAD両PIDもSession 1だったため、Windowsセッション不一致は未成立とした。`Win32_ComputerSystem`は`ACCESS_DENIED`として未確認のまま補足証跡`evidence/t04-independent-current-pad-session-diagnostic-20260914s.json`へ記録した。
 
 ### 2026-09-14 現行版P3-3追跡

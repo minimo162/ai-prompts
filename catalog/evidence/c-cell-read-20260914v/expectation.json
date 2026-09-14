@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "verification_id": "C-CELL-READ-20260914V",
+  "scope": "One synthetic DataTable scalar cell read; no column-name or index-boundary sweep",
+  "fixed_before_configuration_and_run": true,
+  "input": {"columns": ["Column1", "Column2"], "rows": [["CRead-20260914v", "OtherCell"]]},
+  "target": {"row_index": 0, "column_index": 0},
+  "expected_output": {"variable": "CellReadValue", "type": "Text", "value": "CRead-20260914v"},
+  "required_reuse_runs": 2,
+  "acceptance": "Each run must execute the file-pasted saved flow and expose CellReadValue as the expected scalar text. A DataTable or DataRow preview, ready state, or cell update is insufficient.",
+  "copilot_sends": 0
+}
