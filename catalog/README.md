@@ -14,6 +14,8 @@
 
 ### 2026-09-14 独立T04の現行版候補
 
+窓の可視性を壊さない読取専用診断として、対象PIDの`Refresh()`後に全トップレベル窓をWin32 `EnumWindows`で列挙し、前景窓・所有PID・SessionId・UIA・Computer Useを比較した。通常の窓0、前景窓0、PAD Designer UIA 0、Computer Use `apps=[]`でCASE_A（対話デスクトップ／操作ブリッジ障害）と分類し、PAD実行失敗とは判定していない。T04のcandidate_partial、Run1 `NOT_CAPTURED`、新規pair未開始を維持する。証跡は`evidence/t04-independent-current-pad-window-diagnostic-20260914r.json`。
+
 ### 2026-09-14 現行版P3-3追跡
 
 同版指示全文＋bundleを通常M365 Copilot新規会話 `8e3e9a69-098f-41ce-82df-47b581c6bbad`へThink Deeperで1回送信し、評価者用件数・期待値を渡さず13行の拡張子境界Robinを無修正で採取した。専用空フロー `RobinKnowledgeP33CurrentBundleLive20260914e`（Designer PID 38136）へ貼付け・保存・再コピーし、Designerの権威サマリー`13 アクション`を確認した（ListItem 7件表示は仮想化による偽陰性）。2回Runとも`TxtCount=3`、`OtherCount=2`、対象5ファイルのSHA不変を確認した。生成Robin SHA `2b3494e4…`、PAD再コピーはCRLF SHA `e909a165…`で正規化後一致、生バイト一致は主張しない。証跡は`evidence/p33-current-bundle-live-20260914e.json`と同参照のpaste/run記録。旧版P3-3 PASSは現行版へ移していない。P3-4〜P3-6、負例v2、T10厳密保持・A〜G監査は未完了で、Issue #5/#27はOPEN / partial。
