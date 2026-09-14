@@ -91,8 +91,18 @@ Check (Test-Path -LiteralPath (FullPath $t04.reconciliation) -PathType Leaf) 'T0
 Check (Test-Path -LiteralPath (FullPath $t04.window_observation) -PathType Leaf) 'T04 window observation exists'
 Check (Test-Path -LiteralPath (FullPath $t04.latest_window_observation) -PathType Leaf) 'T04 latest window observation exists'
 $latestWindow = Read-Json ($t04.latest_window_observation)
-Check (@($latestWindow.computer_use_snapshot.apps).Count -eq 0) 'T04 latest Computer Use native app list is empty'
-if ($latestWindow.result -eq 'PAD_CLOSED_AND_RELAUNCHED_NEW_PROCESS') {
+if ($latestWindow.computer_use_snapshot.PSObject.Properties.Name -contains 'apps') {
+    Check (@($latestWindow.computer_use_snapshot.apps).Count -eq 0) 'T04 latest Computer Use native app list is empty'
+} else {
+    Check ($latestWindow.computer_use_snapshot.apps_count -eq 0 -and $latestWindow.computer_use_snapshot.native_app_binding -eq 'UNAVAILABLE') 'T04 latest diagnostic Computer Use native app list is empty'
+}
+if ($latestWindow.result -eq 'READ_ONLY_PAD_WINDOW_DIAGNOSTIC_CASE_A') {
+    Check ($latestWindow.classification.case -eq 'A') 'T04 diagnostic classified as case A'
+    Check ($latestWindow.top_level_window_counts.all -eq 0 -and $latestWindow.top_level_window_counts.visible -eq 0) 'T04 diagnostic found no top-level windows'
+    Check ($latestWindow.foreground_window.hwnd -eq 0 -and $latestWindow.foreground_window.owner_pid -eq 0) 'T04 diagnostic found no foreground window'
+    Check (@($latestWindow.session_comparison.unique_session_ids).Count -eq 1 -and $latestWindow.session_comparison.unique_session_ids[0] -eq 1) 'T04 diagnostic sessions are comparable and all session 1'
+    Check ($latestWindow.mutation_guard.process_refresh_only -eq $true -and $latestWindow.mutation_guard.process_kill_or_restart -eq $false -and $latestWindow.mutation_guard.flow_binding_or_run -eq $false) 'T04 diagnostic is read-only with no PAD mutation'
+} elseif ($latestWindow.result -eq 'PAD_CLOSED_AND_RELAUNCHED_NEW_PROCESS') {
     Check ($latestWindow.close_and_relaunch.old_processes_after_close.Count -eq 0) 'T04 prior PAD processes are absent after explicit close'
     Check ($latestWindow.close_and_relaunch.new_process_recheck.new_pids_present -eq $true) 'T04 new PAD processes remain present after launch'
     Check ($latestWindow.close_and_relaunch.new_processes_initial[0].main_window_title -eq 'Power Automate') 'T04 new Console title was observed at launch'

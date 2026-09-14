@@ -658,3 +658,5 @@ Issue #5/#27の必須A〜Gを、教材正本・原probe／別空フロー再利�
 15:53:05に同じ新PIDを直接Windows UI Automationでも再確認し、各PIDのRootElement直下トップレベル窓が0件であることを確認した。プロセスは応答中でもHWND 0／タイトル空のままで、UIAの一意識別ゲートを満たさないため、貼付け・保存・Runは行っていない。原証跡は`catalog/evidence/t04-independent-current-pad-window-observation-20260914p.json`。
 
 Computer Useランタイムを再初期化して15:55:34に再確認しても、ネイティブアプリ一覧は`apps=[]`のままで、新PIDのHWND／タイトルも空だった。UIAとComputer Useの両経路が同じ再起動後状態を示すため、Designer同一性を推測せずRunを開始していない。原証跡は`catalog/evidence/t04-independent-current-pad-window-observation-20260914q.json`。
+
+その後、対象PIDをRefreshしてからWin32 `EnumWindows`、`IsWindowVisible`、タイトル、ClassName、所有PID、SessionId、`GetForegroundWindow`を読取専用で一括採取した。PowerShell／Explorer／PADはすべてSessionId 1だが、全トップレベル窓0件、前景窓0、PAD Designer UIA RootElement 0件、Computer Use apps 0件だった。これはPAD実行失敗とは判定せず、対話デスクトップまたは操作ブリッジへのアクセス障害（ケースA）としてT04ライブ実行だけをBLOCKEDにする。原証跡は`catalog/evidence/t04-independent-current-pad-window-diagnostic-20260914r.json`であり、Refresh以外のkill/restart、クリック、入力、貼付け、保存、Runは行っていない。
