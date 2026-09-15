@@ -24,6 +24,9 @@ builder = load('builder', 'tools/Build-Issue38Ex02Candidate.py')
 r5_builder = load('r5_builder', 'tools/Build-Issue38Ex02CandidateR5.py')
 typed_transfer = load('typed_transfer', 'tools/Verify-Issue38Ex02TypedTransfer.py')
 negative_builder = load('negative_builder', 'tools/Build-Issue38Ex02TypeNegative.py')
+format_classifier = load(
+    'format_classifier', 'tools/Classify-Issue38Ex02FormatDifferences.py'
+)
 
 
 class Ex02Tests(unittest.TestCase):
@@ -303,6 +306,69 @@ class Ex02Tests(unittest.TestCase):
             rebuilt = negative_builder.build(cycle / 'run2/result.xlsx', destination)
             self.assertEqual(rebuilt['semantic_delta_count'], 1)
             self.assertEqual(rebuilt['fixed_change']['after'], ['text', '12.5'])
+
+    def test_r5_g2_legacy_558_are_classified_without_rewriting_old_fail(self):
+        cycle = ROOT / 'catalog/acceptance/issue38/cycles/EX02-r5-G2'
+        reconciliation = cycle / 'format-reconciliation'
+        result = json.loads((reconciliation / 'classification.json').read_bytes())
+        old_acceptance = json.loads((cycle / 'acceptance-status.json').read_bytes())
+        self.assertFalse(old_acceptance['overall']['accepted'])
+        self.assertEqual(old_acceptance['legacy_558']['status'], 'UNRESOLVED_AND_VISIBLE')
+        self.assertEqual(result['old_fail_preserved']['sha256'],
+                         hashlib.sha256((cycle / 'acceptance-status.json').read_bytes()).hexdigest())
+        self.assertEqual(result['legacy_failure_counts'], {
+            'cell_style': 480,
+            'column_dimension': 30,
+            'row_dimension': 48,
+        })
+        self.assertEqual(result['classification_counts'], {
+            'SERIALIZATION_OR_COMPARISON_METHOD_ONLY': 558,
+        })
+        self.assertEqual(len(result['entries']), 558)
+        self.assertTrue(all(item['raw_change_reproduced_by_noop_and_run2']
+                            for item in result['entries']))
+        self.assertTrue(all(item['effective_before_sha256'] == item['effective_after_sha256']
+                            for item in result['entries']))
+        self.assertTrue(all(item['effective_changed_attributes'] == []
+                            for item in result['entries']))
+        self.assertEqual(result['decision']['actual_effective_changes_in_positive_outputs'], 0)
+        self.assertEqual(result['decision']['unresolved_legacy_failures'], 0)
+        self.assertEqual(result['decision']['functional_g2_status_preserved'],
+                         'PASS_FIXED_EX02_TEXT_NUMBER_SCOPE')
+        self.assertEqual(result['decision']['existing_output_guard_live_check'],
+                         'NOT_RUN_REMAINS_OPEN')
+        self.assertEqual(result['negative_detection']['status'],
+                         'PASS_EXACT_THREE_EFFECTIVE_CHANGES')
+        negative_differences = result['negative_detection']['effective_differences']
+        self.assertEqual(
+            {(item['category'], item['sheet'], str(item['location']), item['attribute'])
+             for item in negative_differences},
+            {
+                ('cell_style', 'Target A', 'C4', 'fill'),
+                ('row_dimension', 'Target A', '2', 'height'),
+                ('column_dimension', 'Target A', '2', 'width'),
+            },
+        )
+        self.assertEqual(
+            typed_transfer.verify_output(
+                reconciliation / 'negative-format-dimensions.xlsx', 'format-negative'
+            )['status'],
+            'MATCH_FIXED_EX02_TEXT_NUMBER_SCOPE',
+        )
+        positive_snapshot_hashes = set()
+        for name in ['noop-effective.json', 'run1-effective.json', 'run2-effective.json']:
+            native = json.loads((reconciliation / name).read_bytes())
+            self.assertEqual(native['status'], 'MATCH_EFFECTIVE_FORMAT')
+            self.assertEqual(native['differences'], [])
+            self.assertEqual(native['snapshot_sha256']['reference'],
+                             native['snapshot_sha256']['output'])
+            positive_snapshot_hashes.add(native['snapshot_sha256']['reference'])
+        self.assertEqual(positive_snapshot_hashes,
+                         {result['positive_effective_snapshot_sha256']})
+        with tempfile.TemporaryDirectory() as directory:
+            rerun = format_classifier.classify(Path(directory) / 'classification.json')
+            self.assertEqual(rerun['decision']['status'],
+                             'PASS_558_CLASSIFIED_AS_NON_EFFECTIVE_NORMALIZATION')
 
 
 if __name__ == '__main__':

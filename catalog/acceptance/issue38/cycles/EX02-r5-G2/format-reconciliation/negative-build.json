@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "EX02_FORMAT_DIMENSION_NEGATIVE_BUILD",
+  "source": {
+    "path": "catalog/acceptance/issue38/cycles/EX02-r5-G2/run2/result.xlsx",
+    "sha256": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9"
+  },
+  "output": {
+    "path": "catalog/acceptance/issue38/cycles/EX02-r5-G2/format-reconciliation/negative-format-dimensions.xlsx",
+    "sha256": "4ebf7b15d34b67c59dcc36c4c4b58a332354c7cfdc9ed2111a870416001212ea"
+  },
+  "authoring": {
+    "engine": "@oai/artifact-tool 2.8.58+",
+    "artifact_operation_marker": "EDIT_STARTED_ONCE",
+    "expected_xlsx_outputs": 1,
+    "process_exit_code": 1,
+    "process_result": "OUTPUTS_WRITTEN_BUT_EXIT_1_NOT_USED_AS_PASS",
+    "independent_saved_file_validation_required": true
+  },
+  "intended_changes": [
+    {
+      "category": "cell_style",
+      "location": "Target A!C4",
+      "authoring_change": "fill #FFF2CC to #FF0000",
+      "excel_effective_before": {
+        "color": 13431551.0,
+        "color_index": 19
+      },
+      "excel_effective_after": {
+        "color": 255.0,
+        "color_index": 3
+      }
+    },
+    {
+      "category": "row_dimension",
+      "location": "Target A!2",
+      "excel_effective_before": 14.7,
+      "excel_effective_after": 30.0
+    },
+    {
+      "category": "column_dimension",
+      "location": "Target A!B",
+      "excel_effective_before": 19.42,
+      "excel_effective_after": 23.42
+    }
+  ],
+  "preservation": {
+    "other_excel_effective_format_or_dimension_differences": 0,
+    "target_value_type_position_mismatches": 0,
+    "outside_value_type_formula_mismatches": 0,
+    "formula_error_scan_matches": 0,
+    "positive_run2_unchanged": true
+  },
+  "render": {
+    "baseline_path": "catalog/acceptance/issue38/cycles/EX02-r5-G2/format-reconciliation/run2-before-negative.png",
+    "baseline_sha256": "9b641e89d4be916bc0d386bc62c1f8c0a8920d88578b4a0dd61b880462a96370",
+    "saved_output_path": "catalog/acceptance/issue38/cycles/EX02-r5-G2/format-reconciliation/negative-saved-render.png",
+    "saved_output_sha256": "33c02ef709686d0ff623f28b389d94b61e9125cfca9287946f0d87140f372887",
+    "saved_output_matches_pre_export_render": true,
+    "visual_review": "PASS_RED_FILL_ROW_HEIGHT_AND_COLUMN_WIDTH_VISIBLE"
+  },
+  "acceptance_evidence": {
+    "excel_effective_comparison": "negative-effective.json",
+    "legacy_comparison": "negative-legacy.json",
+    "status": "PASS_EXACT_THREE_EFFECTIVE_CHANGES_DETECTED"
+  }
+}
