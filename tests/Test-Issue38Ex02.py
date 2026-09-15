@@ -182,6 +182,46 @@ class Ex02Tests(unittest.TestCase):
         self.assertTrue(runtime['work_matches_template'])
         self.assertFalse(result.exists())
 
+    def test_r5_g2_is_separate_unused_cycle_with_identical_fixed_inputs(self):
+        cycle = ROOT / 'catalog/acceptance/issue38/cycles/EX02-r5-G2'
+        plan = json.loads((cycle / 'plan.json').read_bytes())
+        preflight = json.loads((cycle / 'preflight.json').read_bytes())
+        self.assertEqual(plan['cycle_id'], 'EX02-R5-G2')
+        self.assertEqual(plan['predecessor']['cycle_id'], 'EX02-R5-G1')
+        self.assertEqual(plan['predecessor']['max_generation_requests'], 1)
+        self.assertEqual(plan['predecessor']['generation_requests_used'], 1)
+        self.assertEqual(plan['limits']['max_generation_requests'], 1)
+        self.assertTrue(plan['limits']['no_retry_or_regeneration_after_failure'])
+        self.assertFalse(plan['fixed_inputs']['grader_only_expected']['send_to_copilot'])
+        self.assertTrue(plan['submission']['completed_robin_excluded'])
+        for item in [plan['candidate']['instruction_path'], plan['candidate']['bundle_path'],
+                     plan['candidate']['manifest_path'], plan['submission']['body_path']]:
+            self.assertTrue((ROOT / item).is_file(), item)
+        hash_records = [
+            plan['fixed_inputs']['request'], plan['fixed_inputs']['spec'],
+            plan['fixed_inputs']['grader_only_expected'], plan['fixed_inputs']['input_a'],
+            plan['fixed_inputs']['input_b'], plan['fixed_inputs']['template'],
+            plan['fixed_inputs']['work'],
+        ]
+        for record in hash_records:
+            self.assertEqual(hashlib.sha256((ROOT / record['path']).read_bytes()).hexdigest(), record['sha256'])
+        self.assertEqual(
+            hashlib.sha256((ROOT / plan['candidate']['instruction_path']).read_bytes()).hexdigest(),
+            plan['candidate']['instruction_sha256'],
+        )
+        self.assertEqual(
+            hashlib.sha256((ROOT / plan['candidate']['bundle_path']).read_bytes()).hexdigest(),
+            plan['candidate']['bundle_sha256'],
+        )
+        self.assertEqual(
+            hashlib.sha256((ROOT / plan['submission']['body_path']).read_bytes()).hexdigest(),
+            plan['submission']['body_sha256'],
+        )
+        self.assertFalse((ROOT / plan['fixed_inputs']['result']['path']).exists())
+        self.assertTrue(preflight['fixed_input_checks']['all_plan_hashes_match_current_files'])
+        self.assertFalse(preflight['fixed_input_checks']['fixed_input_problem_requiring_stop'])
+        self.assertTrue(preflight['decision']['safe_to_consume_one_new_generation_request'])
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

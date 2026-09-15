@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX02-R5-G2",
+  "checked_at": "2026-09-16T04:23:01.8580090+09:00",
+  "repository": {
+    "expected_head": "b991285d9ba174e55515bb732d30d0628add80f2",
+    "actual_head": "b991285d9ba174e55515bb732d30d0628add80f2",
+    "branch": "codex/issue38-type-probe-20260915",
+    "worktree_clean_before_new_cycle_files": true
+  },
+  "prior_cycle_integrity": {
+    "plan_sha256": "451355877d799e1a4d8331a748544932563e10b6b09d2c0000c11d33abe88795",
+    "acceptance_status_sha256": "1cc5962d9cad4e5bd3e9d8b86fcfdcd84afcde4bf57157aa10ed93e69388aa9f",
+    "response_full_sha256": "7bcd30b764e2003dea89681718dfb523275dfb6b6ca260559ae7f1c49066f42b",
+    "generated_robin_sha256": "c26b5c6cf42b66fecb1272222b64c2ab7aaa38921802945d9a58d7636c6a7dec",
+    "pad_paste_attempt_sha256": "8e91a73f6321f7654878f9d9c93f9da439b4ec6f45663cedb428d069c9e2cd03",
+    "continuation_recheck_sha256": "3dc150c2f2cbbc0fd325fa9d7a71590fafa67b406fb4405a772c943dda1856b8",
+    "old_max_generation_requests": 1,
+    "old_generation_requests_used": 1,
+    "old_result_xlsx_absent": true,
+    "old_evidence_modified": false
+  },
+  "prior_zero_action_observation": {
+    "sequence": "new Power Fx OFF flow with empty Main -> one Main canvas context-menu Paste of the preserved code-copy text -> six-second wait -> zero actions",
+    "error_dialog_observed": false,
+    "error_text_observed": false,
+    "confirmed": "the M365 rendered code editor and preserved code copy contain a standalone backtick after END; PAD imported zero actions after the one paste",
+    "not_confirmed": "PAD exposed no parser error or causal diagnostic, so generation, copy transport and PAD parser responsibility are not assigned conclusively",
+    "generated_code_repaired": false,
+    "pad_run_started": false
+  },
+  "fixed_input_checks": {
+    "all_plan_hashes_match_current_files": true,
+    "spec_and_expected_match_freeze": true,
+    "work_matches_template": true,
+    "result_xlsx_absent": true,
+    "r5_non_live_tests": "PASS_13_OF_13",
+    "r5_package_test": "PASS_NON_LIVE_PACKAGE",
+    "fixed_input_problem_requiring_stop": false
+  },
+  "decision": {
+    "safe_to_consume_one_new_generation_request": true,
+    "reason": "The separately authorized cycle is unused and all unchanged candidate, request, fixture, expected, work and predecessor evidence hashes match."
+  }
+}
