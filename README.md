@@ -1,104 +1,130 @@
-# PAD Robin Copilotエージェント用 指示文・ナレッジ
+# PAD Robin Copilot ナレッジ
 
-## 現在の受入判定（2026-09-15・明示的な完了条件変更）
+Power Automate for desktop（PAD）の**実測済みRobin**を根拠に、Microsoft 365 Copilotへ日本語で依頼し、PADへ貼り付けて確認できるフロー案を作るためのリポジトリです。
 
-通常M365 Copilot Chat＋PADの現行20260913eについて、#5の必須A〜Gと#27の指定受入ケースは技術的受入完了。今回のユーザー判断により、T10の必須条件を「指定変更のみ・既存の命令内容保持」とし、transport-level raw-byte完全保持を非ブロッカーとした。過去のCASE B判断を遡ってCASE Aへ変更したものではない。
+現在の主成果物は [`copilot/`](copilot/) 配下です。`App.ps1` / `index.html` / `業務エージェント.cmd` は過去に開発した汎用業務エージェントの資産で、現在の推奨入口ではありません。
 
-T10の機能・許可変更範囲・非変更命令内容保持はPASS。一次・独立ともraw-byte strictはNOT_PROVENのまま、許可区間外raw bytesはFAIL、取得要求／完了／残枠は各1／1／0。原文・失敗証跡・固定期待値は変更していない。T03は修正版依頼限定。独立T04は新pairのみ受入れ、元T04失敗・旧Run1 NOT_CAPTURED・旧candidate_partialは履歴として保持する。
+> **現在の受入状態（2026-09-15）**  
+> 現行 `20260913e` は、通常の Microsoft 365 Copilot Chat + PAD で指定受入を完了しています。Issue [#5](https://github.com/minimo162/ai-prompts/issues/5) / [#27](https://github.com/minimo162/ai-prompts/issues/27) は CLOSED / COMPLETED です。T10の transport-level raw-byte strict は `NOT_PROVEN` のままですが、現在の必須完了条件では非ブロッカーです。詳細は [最終受入監査](catalog/evidence/final-content-acceptance-20260915.md) を参照してください。
 
-[現在判定と証跡対応表](catalog/evidence/final-content-acceptance-20260915.json)を参照。Issue closeは必要な非ライブ検査とmain統合の後に限る。Agent Builder、全PAD機能、組織展開、一般的なbyte-preserving transportは完了範囲に含めない。この下の日付付き記録のpartial／必須残件／OPEN表記は各時点の履歴であり、現在判定を上書きしない。
+## まず使う
 
-## 2026-09-15 T10既存応答の限定再取得
+### 必要なもの
 
-T10-STRICT-20260914Xの残枠を使い、固定一次・独立会話の既存応答を各1回要求・1回完了しました。ブラウザー前提確認は1回成功。UTF-16LE／UTF-8のSHAを取得時に固定し、既存保存補助で新規保存した1752／1771 bytesは取得文字列と一致しました。許可2か所の内容も依頼一致ですが、どちらもLF16個・末尾LFありで、固定入力のCRLF・末尾改行なしと区間外bytesが異なるため、両strictは `NOT_PROVEN`です。[取得原文・区間比較・回数](catalog/evidence/t10-strict-20260914x-recapture-results.json)。
+- Microsoft 365 Copilotを利用できるアカウント
+- Power Automate for desktop（PAD）
+- 現在の検証条件に合わせる場合は、通常のM365 Copilot Chatと日本語表示のPAD
 
-これはDOM文字列から保存ファイルまでの観測であり、モデル内部や通信上の元バイトの証明ではありません。保存器の追加改行を直しても今回の差は解消していません。PAD Run・新規送信・クリップボード変更は0回。元の各1回枠は消化済みで、新IDによる再取得はしません。再開には、未観測の上流を区別する別仮説と新たな明示的上限が必要です。C・独立T04新pair受入と旧原証跡を保ち、#5全体と#27最終版は別判定でOPEN / partialです。
+Agent Builder / Copilot Studioではなく、**通常のM365 Copilot Chat** が現行受入の対象です。
 
-## 2026-09-14 T10厳密比較と保存経路の限定検証（20260914x）
+### 5分で始める
 
-許可された2/4行目の値・保存先の内容区間だけを除外し、その前後すべての生バイトを位置ずれ付きで比較する判定器を追加しました。合成正例2件・負例12件と元SHA拒否、保存器4検査は非ライブPASSです。過去のNOT_PROVEN回帰は保持しています。
+1. Microsoft 365 Copilotで新しい通常チャットを開きます。
+2. [`copilot/agent-instructions.txt`](copilot/agent-instructions.txt) の全文をメッセージ本文へ貼ります。
+3. [`copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt`](copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt) を添付します。
+4. 続けて、やりたい処理を日本語で依頼します。
+5. Copilotが返した貼り付け用Robinを、原則として手直しせずPADの空フローへ貼り付けます。
+6. 保存後、まず複製したテストデータで実行し、出力内容まで確認します。
 
-過去に使ったファイル追加パッチと同じ処理へ既知の18 bytesを1回通すと、末尾LFが追加され19 bytesになりました。文字列を直接UTF-8保存する補助では18 bytesのままです。この局所対照は通常チャット全経路の証明ではありません。ブラウザー一覧取得がタイムアウトし、実応答の追加取得は一次0・独立0。既存保存回答は依頼内容一致、許可区間外のバイト不一致で、両方strict `NOT_PROVEN`です。PAD Run・Copilot送信・クリップボード変更はいずれも0回。クリップボード全形式の生バイト同一は未評価のままです。
+7つのナレッジ原本を個別添付する方法や、通常チャットでの検証手順は [`copilot/README.md`](copilot/README.md) を参照してください。
 
-[比較器・対照・取得境界・再開条件](catalog/evidence/t10-strict-20260914x-audit.json)。次はブラウザーの読み取りが利用可能な時に、固定した既存2会話の応答を各最大1回、文字列段階のSHAと新保存ファイルへ対応付けます。新規送信は不要・未許可とし、不一致なら保持します。C・独立T04新pairの受入を保ち、#5全体追跡と#27最終版受入はともにOPEN / partialです。
+### 依頼例
 
-## 2026-09-14 独立T04の新Runペア（20260914w）
+```text
+添付したPAD Robinナレッジを参照してください。
 
-保存済み20260913e独立生成を無修正で専用空フローへ配置し、9アクションを保存・再コピーして最大2 Runを実施しました。Run1のCSV/xlsxを独立保存し、3行3列（対象/A/10、対象/C/25、対象/D/5）と入力SHA不変を検証してからRun2を開始し、Run2も一致しました。[新pair原証跡](catalog/evidence/t04-independent-pair-20260914w/acceptance.json)。旧Run1 `NOT_CAPTURED`・旧候補 `candidate_partial`・元T04不成立は保全し、同じ独立生成を一次T04へ二重計上しません。
+C:\Work\input.csv を読み込み、A列が「対象」の行だけを抽出して、
+C:\Work\output.xlsx へ保存するPADフローを作ってください。
+既存のoutput.xlsxは上書きして構いません。
+```
 
-今回PAD 2 Run・Copilot送信0・C/T10再Run0。20260913eと保護409ファイルは不変です。必須技術残件はT10 strict raw-byte保持 `NOT_PROVEN`。同経路対照がないため再送・機能Runは行わず、[保存証跡の比較](catalog/evidence/t10-saved-evidence-review-20260914w.json)を分離しました。貼付け観測失敗で未復元となったクリップボードは、貼付け直前のWindows履歴項目を復元し、Text一致と元形式の存在を確認しました。全形式の生バイト同一は未評価です。補助の失敗時復元とPS5文字コードも修正しました。Issue #5/#27はOPEN / partial。
+生成結果は、説明文ではなく**PADへ貼り付けるRobin部分**を対象に確認してください。未採取の命令名・引数・UI要素などは推測で補わないことを、`agent-instructions.txt` で要求しています。
 
-## 2026-09-14 Cセル値読取りの補完（20260914v）
+## このリポジトリでできること
 
-実アクションから採取した `SET CellReadValue TO DataTable[0][0]` を、別空フローへ無修正貼付け・保存・再オープン後に2回実行し、Text値 `CRead-20260914v` と一致しました。前段は1行2列の合成DataTableです。4回の原文コピーは174 bytesで一致し、Run2前には値をクリアしています。Run2の観測補助例外は、追加Runせず同一実行を読み取り直して確認しました。
+- 日本語の依頼から、実測済みPAD Robinを組み合わせたフロー案を作る
+- Excel / CSV / ファイル / フォルダー / 制御 / 一部Office・PDF・UI操作など、採取済みの範囲を再利用する
+- 既存Robinの限定修正で、指定箇所以外の命令内容を保持する
+- 生成したRobinをPADへ貼り付け、保存・実行・成果物まで照合するための検証資料を参照する
 
-[原証跡・期待値・段階別判定](catalog/evidence/c-cell-read-20260914v/acceptance.json)。Copilot送信0回、PAD Run 2回。数値添字0/0のネイティブ再利用証跡であり、新しいCopilot生成合格や列名構文の保証ではありません。20260913e instruction/bundleは変更していません。必須残件は独立T04 Run1成果物とT10 strict raw-byte保持の2件で、Issue #5/#27はOPEN / partialを維持します。過去の不成立・未採取記録は以下に保存しています。
+**PAD全機能に対応しているわけではありません。** 実測範囲の正本は [`catalog/index.json`](catalog/index.json)、観測範囲は [`catalog/coverage.json`](catalog/coverage.json) です。
 
-## 2026-09-14 現行版集約訂正・負例v2受入
+## 現在の固定版
 
-現行20260913eのP3-1〜P3-6個別証跡を照合し、P3-4〜P3-6の派生「未受入」表示を訂正した（原送信・回答記録は不変）。固定負例v2は通常M365 Copilotへ1回送信し、N1〜N3を未確認受入として無修正保存した。コードフェンス・Robin命令・疑似コード・未採取引数の推測はなく、PAD貼付け／Run／未登録Web操作は未実施。旧finald負例PASSは履歴として分離した。訂正根拠は [P3 SHA補足](catalog/evidence/p3-current-sha-correction-20260914e.json)、現行負例証跡は [negative-suite-current-20260914e](catalog/evidence/negative-suite-current-20260914e-acceptance.json)。T04形式不受入・独立T04候補partial、T10厳密保持NOT_PROVEN、A〜G監査は継続し、Issue #5/#27はOPEN / partial。
+| 項目 | 現在値 |
+|---|---|
+| version | `20260913e` |
+| instruction | [`copilot/agent-instructions.txt`](copilot/agent-instructions.txt) |
+| instruction SHA-256 | `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c` |
+| knowledge bundle | [`copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt`](copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt) |
+| bundle SHA-256 | `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12` |
+| manifest | [`copilot/knowledge-bundle-manifest-20260913e.json`](copilot/knowledge-bundle-manifest-20260913e.json) |
+| 最終受入 | [`catalog/evidence/final-content-acceptance-20260915.md`](catalog/evidence/final-content-acceptance-20260915.md) |
+| 検証記録 | [`catalog/evidence/final-content-verification-20260915.json`](catalog/evidence/final-content-verification-20260915.json) |
+| 統合 | PR [#34](https://github.com/minimo162/ai-prompts/pull/34) / main `c434e99511ae7a2a28a08eabbb6ad0b120dec9f3` |
 
-### 2026-09-14 独立T04候補（現行版）
+### T10について
 
-現行正本20260913e（instruction SHA `6ad6f742…`／bundle SHA `79245787…`）を新規Think Deeper通常チャットへ同版指示＋bundle実添付し、件数・期待値を依頼本文から除外したT04補正版依頼を1回送信した。公式応答とDOM単一`pre`から得た9行Robin（plain `=>` 5、escaped `\\=>` 0）を無修正で新規空フローへ貼付け・保存・再コピーし、2回Runとも成功。Run2のxlsx 3行3列値と入力fixture不変、既存CSV/xlsx復元を確認したが、Run1のxlsxスナップショット未採取のため候補`partial`であり、受入済み一覧へ昇格していない。元T04の応答由来形式不受入と厳密バイト保持NOT_PROVENは維持する（[比較証跡](catalog/evidence/t04-independent-current-output-comparison-20260914e.json)）。
+現在の必須条件は、**指定された変更だけを反映し、それ以外の既存命令・入力・変数・処理・エラー経路の内容を保持すること**です。この条件は一次・独立ともPASSしています。
 
-> 2026-09-14窓診断追補: 対象PIDを`Refresh()`後にWin32 `EnumWindows`、前景窓、SessionId、UIA、Computer Useを読取専用で比較した結果、通常のトップレベル窓0、前景窓0、PAD Designer UIA 0、Computer Use `apps=[]`でCASE_A（対話デスクトップ／操作ブリッジ障害）と判定した。これはPAD実行失敗を示さず、T04ライブ実行だけをBLOCKEDとして再開条件を限定している（[診断証跡](catalog/evidence/t04-independent-current-pad-window-diagnostic-20260914r.json)）。
-> 2026-09-14窓状態再確認: 現行プロセスの読取専用再確認では、通常の`Power Automate`窓は見えるが`PAD.Designer`はHWND 0・タイトル空・UIA 0で、CASE_B（Designer窓未観測）へ変化した。rのCASE_A証跡は保全し、T04貼付け・保存・Runは再開していない（[現行差分](catalog/evidence/t04-independent-current-pad-window-observation-20260914t.json)）。
+一方、CRLF/LF・EOF・BOM等を含む transport-level raw-byte 完全保持は一次・独立とも `NOT_PROVEN` で、許可区間外raw bytesの厳密比較はFAILです。これは現在の必須受入をブロックしない品質境界として履歴を保持しています。過去の失敗証跡を成功へ書き換えてはいません。
 
-> 2026-09-14追補: 現行正本（instruction SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`、bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`）でT06/T07/T08を新規通常M365 Copilotチャットへ同版指示＋bundle実添付して生成し、無修正で専用空フローへ貼付け・保存・再コピー・2回Runまで実施しました。T07は`RobinKnowledgeT07CurrentBundleLive20260914e`で両回`PAGE_TOKEN_A2`のみ、入力PDF不変、既存出力復元を確認しました（[T07受入](catalog/evidence/t07-current-bundle-live-acceptance-20260914e.json)、[比較](catalog/evidence/t07-current-bundle-output-comparison-20260914e.json)）。T08はアクション単位FileNotFoundErrorの期待経路を2回確認しました。現行版受入済みはT01/T02/T03（修正版依頼）/T05/T06/T07/T08/T09と独立T01、T04形式不受入・独立T04候補・T10厳密バイト保持・独立T10・P3正例・負例v2・A〜G監査は残り、独立T04候補はRun1出力未採取のためpartial、T10厳密バイト保持はNOT_PROVEN、Issue #5/#27はOPEN / partialです。
+## リポジトリ構成
 
-> 2026-09-13e追補: 正本は指示SHA `6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c`／bundle SHA `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`。同版T01/T02/T09は実機PAD受入済み（T01は専用空フローで3アクション・2回Run・出力/入力不変、T02は3アクション・保存・再コピー・2回Run・CSV出力一致／入力不変）。T03は依頼本文へカウンター要件を明示した修正版依頼に限り、13アクション・2回Run（TxtCount=2／OtherCount=2）を現行版へ追跡しました。元依頼の3試行は不受入のままです。T04は新規会話の1回追加でも`=>`前バックスラッシュがDOMと保存Robinに一致して現れたため生成回答由来の形式不受入、T10は機能実行と許可2行の内容範囲を別証跡で保全したが厳密バイト保持はNOT_PROVEN（[派生監査](catalog/evidence/t10-strict-preservation-audit-20260913.json)、[回帰テスト](tests/Test-T10StrictPreservation.ps1)）です。旧finald PASSは新版本へ継承せず、Issue #5/#27はOPEN / partialです。
+| パス | 役割 |
+|---|---|
+| [`copilot/`](copilot/) | 現在の主成果物。Copilot向け指示、ナレッジ、配布手順 |
+| [`copilot/agent-instructions.txt`](copilot/agent-instructions.txt) | Copilotへ渡す指示文 |
+| [`copilot/knowledge/`](copilot/knowledge/) | PAD Robinの技術ナレッジ7原本と結合版 |
+| [`catalog/`](catalog/) | PADから採取したRobin、生成物、受入証跡、coverage |
+| [`docs/`](docs/) | 採取方法、検証、復旧、過去方式などの詳細資料 |
+| [`tests/`](tests/) | 検査・回帰テスト |
+| [`tools/`](tools/) | bundle生成、比較、保存、リリース補助など |
+| [`pad-robin-prompts.md`](pad-robin-prompts.md) | 編集・採取用の過去原稿。現行指示欄へ二重投入しない |
+| `App.ps1` / `index.html` / `業務エージェント.cmd` | 過去資産の汎用業務エージェント |
 
-> 2026-09-12 最終監査: 固定finaldの生成受入は維持。A〜Gの一部に別空フロー再利用等の保存証跡未特定があり、親Issue全体はpartial、PR提出準備は未完了です。[監査結果・不足・PR案](docs/robin-knowledge-validation.md)。
+## ナレッジの構成
 
-このリポジトリの今回の成果物は、PADの実測Robinを根拠にMicrosoft 365 Copilotエージェントがフロー案を生成・修正するための配布物です。入口は [copilot/README.md](copilot/README.md) です。指示欄へ貼る文章は [copilot/agent-instructions.txt](copilot/agent-instructions.txt)、登録用ナレッジと手順は `copilot/knowledge/` にあります。PAD・Copilotを自動実行する新しいアプリは作りません。
+通常は結合版 [`PAD-Robin-Knowledge-Bundle.txt`](copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt) を1ファイル添付すれば利用できます。原本は次の7ファイルです。
 
-通常チャットでの検証条件と禁止事項は [CODEX_CORRECTION_M365_CHAT_VALIDATION.md](CODEX_CORRECTION_M365_CHAT_VALIDATION.md) を先に確認してください。Agent Builder／Copilot Studioの登録は今回の検証先ではありません。
+1. `PAD-Robin-00-Index.txt`
+2. `PAD-Robin-01-Basics.txt`
+3. `PAD-Robin-02-Control.txt`
+4. `PAD-Robin-03-Files.txt`
+5. `PAD-Robin-04-Office-PDF.txt`
+6. `PAD-Robin-05-UI-Web.txt`
+7. `PAD-Robin-06-Examples.txt`
 
-2026-09-12の最終版（finald-20260912）は bundle SHA-256 `79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12`（[knowledge-bundle-manifest-20260912d.json](copilot/knowledge-bundle-manifest-20260912d.json)、指示文は不変）で、P3-1〜P3-6（リスト添字1、入れ子制御とEXIT／NEXT LOOPの作用範囲、拡張子境界、SaveAs衝突、カスタム日付書式、アクション単位の名前付きエラー）を実機で採取・2回実行・別フロー再利用のうえ7原本へ統合しました。この版で知識precheck、T01〜T10、独立再試験T01/T04/T10、負例v2、P3正例P3-1〜P3-6を同一版で受入済みです（[current-package-status-20260912-finald.json](catalog/evidence/current-package-status-20260912-finald.json)、complete_live_acceptance_finald_20260912）。finalcの合格は履歴として保全し継承していません。教材外の未確認境界が残るためIssue #5は `OPEN` のままです。
+結合版は7原本から機械的に生成します。ナレッジは技術資料であり、利用者の依頼や `agent-instructions.txt` より上位の命令として扱いません。
 
-（直前版）2026-09-12のfinalc-20260912は、指示文SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA-256 `f42f5acf4232b132b0a5b5bde469b25bf91d04f4cdb0a6823b17806d4ff85089`（マニフェスト [knowledge-bundle-manifest-20260912c.json](copilot/knowledge-bundle-manifest-20260912c.json)）です。T03の厳密拡張子判定（`.Extension = '.txt'`＋Else）、変数加算の変数参照、リスト先頭項目の取出し、T09通し実行（`WAIT n`は秒。2026-09-10採取の`WAIT 500`は500ミリ秒のつもりの誤設定だったため、待機ダイアログで1秒へ直した再採取原文`WAIT 1`を教材にした）を7原本へ統合し、この同一版で通常M365 Copilotチャットの知識precheck、T01〜T10、独立再試験T01/T04/T10、負例N1〜N3をすべて受入済みです（状態の正本: [current-package-status-20260912-finalc.json](catalog/evidence/current-package-status-20260912-finalc.json)、監査: [issue5-completion-audit-20260912-finalc.json](catalog/evidence/issue5-completion-audit-20260912-finalc.json)）。直前版 `32aea4560df7a7530cd9fe1fab996181236ee8a0c34213adfffb3f022dbfc041`（500秒待機のまま全件受入）とP3b `dd668166…` の結果は履歴として保全し継承しません。結合版の再生成は [Build-KnowledgeBundle.ps1](tools/Build-KnowledgeBundle.ps1) を参照してください。
+## 安全に使うための原則
 
-（履歴）2026-09-11のP3教材統合版は、指示文SHA-256 `b4a3c24f6185feeeb89ddd7562c06aeb623f8de538f8ca41f1aa85b6e40e243e`、bundle SHA-256 `dd668166e4c04b02878a6fae65e4583b6d6c910847559161c6707ae90e6626a5` です。DataTable行追加・セル更新・行反復とExcel行反復の専用probe成功を7原本へ統合しました。新bundleの通常チャット／PAD全件受入、独立再試験、負例は未実行で、旧Final3結果を継承しません。T04/T10の発生段階の比較は [raw provenance](catalog/evidence/normal-chat-raw-provenance-20260910.json)、結合版の再生成は [Build-KnowledgeBundle.ps1](tools/Build-KnowledgeBundle.ps1) を参照してください。
+- 未採取のPAD命令名・引数名・列挙値・UI要素・出力型を推測しない
+- 実行ボタンを押せたことや、エラーが表示されないことだけで成功扱いにしない
+- 生成Robinを手修正して失敗証跡を隠さない
+- 既存フローの修正では、依頼された範囲以外を勝手に変更しない
+- 最初は本番ファイルではなく、複製した合成・テストデータで確認する
+- 削除、無断上書き、送信、公開、本番更新を既定動作にしない
+- 個人情報、認証情報、社内データを例・証跡・公開リポジトリへ入れない
 
-実測原文の正本は [catalog/index.json](catalog/index.json)、観測範囲は [catalog/coverage.json](catalog/coverage.json)、途中経過は [docs/robin-knowledge-progress.md](docs/robin-knowledge-progress.md) です。既存の採取原文・検証証拠は保全し、未観測のアクションを全機能対応とは表示しません。
+詳しい生成ルールは [`copilot/agent-instructions.txt`](copilot/agent-instructions.txt) にあります。
 
-P3追補：Boolean、数値減算、日時加算・減算、DateAndTime取得、フォルダー作成、Excelシート選択は別の合成専用probeで採取・実行済みですが、現行7ファイルbundleには未統合です。カスタム日時書式化は未確認、T08は形式失敗、T09は現行package Robin未確認です。
+## 開発・検証する場合
 
-ファイル存在確認の`IF ... THEN`／`END`と、ファイル移動の成功＋DoNothing衝突再実行probeも別証跡で固定しています。欠損パスのfalse分岐はrawコピー・実行完了まで確認しましたが、branch bodyのside effectは未確認です。
-ファイル名前変更も成功1回とDoNothing衝突no-op 1回を別probeで固定しました。false分岐のbranch-body実行は未確認です。
-3列1行（A/10/対象）のDataTable作成は別probeで2回実行確認しました。列付き行追加は値数不一致のnative runtime errorを再現し、正しいRowToAdd型を推測せず失敗証跡として保持しています。
-別試行ではビジュアライザー保存後の0列への戻りも確認し、成功構文を推測していません。
-If/Else/ENDとIf/Else-if/ENDの構造は別probeで実行まで確認していますが、入れ子・分岐内処理は未確認です。
-有限Loopの`EXIT LOOP`も別probeでLoopIndex=1、`NEXT LOOP`も2回実行してLoopIndex=4を確認していますが、入れ子とloop内副作用は未確認です。
-（Loop Continue probeは現行bundleへ未統合です。）
-エラー処理の`BLOCK / ON BLOCK ERROR / THROW ERROR / END`骨格、欠損ファイル子アクションのruntime error、P3Worker作成＋Mainからの`CALL P3Worker`も別probeで確認していますが、カスタムハンドラーは未確認です。
+ナレッジを変更した場合は、旧版のPASSを新しいbundleへそのまま継承しません。新しいSHAでbundleを固定し、必要な受入をやり直します。
 
-P3ではファイル存在確認の`IF ... THEN`／`END`も別probeでtrue条件を2回、欠損パス条件を1回実行し、欠損パスのrawも取得しました。branch bodyのside effectと各probeの現行bundle統合は未確認です。データ反復等も未確認です。
+主な確認先:
 
-P3追補の成功・失敗境界は新bundleへ記載済みです。既定エラーハンドラーは2回成功、DataTable作成・行追加・セル更新・行反復、ファイル存在／作成／移動／名前変更、Else／Else-if、EXIT／NEXT、元probeのサブフロー、Excel範囲読取り・行反復を別probeで確認しました。Main/P3Worker保存原文の別空フロー再利用は、観測器補完までで実行要求・2run・保存後再コピー未実施です。リスト取得、カスタム日時書式、名前付きカスタムエラー、T09通し実行は未確認です。T09の90秒再probeと別空フローUI要素登録境界は停止証跡へ分離しました。各probeの原文・実行値・再受入待ち判定は `catalog/index.json` と `catalog/coverage.json` を参照してください。
+- [`copilot/README.md`](copilot/README.md) — 配布物と通常チャット検証手順
+- [`CODEX_CORRECTION_M365_CHAT_VALIDATION.md`](CODEX_CORRECTION_M365_CHAT_VALIDATION.md) — 通常M365 Copilot Chatでの検証条件
+- [`CODEX_TASK_PAD_ROBIN_KNOWLEDGE.md`](CODEX_TASK_PAD_ROBIN_KNOWLEDGE.md) — 採取・教材化の作業記録
+- [`docs/pad-live-setup.md`](docs/pad-live-setup.md) — PAD実機検証の準備・復旧
+- [`docs/robin-knowledge-validation.md`](docs/robin-knowledge-validation.md) — 受入監査
+- [`catalog/evidence/`](catalog/evidence/) — 個別の原証跡・比較・検査結果
 
-M365 Copilot内Agent Builderを利用先とする継続方針の訂正は [CODEX_CORRECTION_M365_AGENT_BUILDER.md](CODEX_CORRECTION_M365_AGENT_BUILDER.md) に記録しています。
+## 過去資産: 汎用業務エージェント
 
-## 過去資産: 汎用業務エージェント（開発中）
-
-現在は実装をチェックポイントとして保存し、方式を見直す段階です。[次セッションへの引き継ぎ・社内条件・比較対象](docs/session-handoff-2026-09-07.md)を参照してください。
-
-CMDからローカルへ同期して起動する、Windows PowerShell + HTML の業務エージェントです。M365 Copilotが作業を計画し、Power Automate Desktop (PAD) が実行し、必要な箇所で同じ `App.ps1` の `AiCall` を呼びます。
-
-**開発中です。Issue #5 の実機ゲートは未完了です。** ローカルの契約検証と、実際のCopilot/PAD/共有フォルダー/別PCでの検証を区別します。[検証記録](docs/issue-5-validation.md)を参照してください。
-
-画面は「やりたいこと」と「作業対象」から依頼する構成です。PAD左パネルから採取した[Robinカタログ](catalog/README.md)を根拠に、プロンプトと検証器を広げています。現在の追加対応はリスト作成・文字列項目追加、テキスト置換・分割・結合、数値変換・書式化・有限ループです。未定義変数や分岐後の不確かな型は実行前に拒否します。正規表現置換を含む1ケースでは、新UI→実M365→PAD実行1回→入力/出力を比較する完了判断→DONEまで約80秒で確認しました。[実機記録と未完了範囲](docs/general-agent-live-2026-09-07.md)を参照してください。他の操作や複数業務全般の受入は継続中です。
-
-Office用の[Robin生成プロンプト](pad-robin-prompts.md)には、PAD左欄から採取したExcel・Word・PowerPointの17種類・22設定例を収録しました。採取形式をアプリの検証器・成果物観測へ接続し、新規3形式の作成は画面から開始してDONEまで確認しています。[現在の接続範囲と実機結果](docs/document-run-checkpoint-2026-09-08.md)を参照してください。
-
-PDFの5種類・11設定例も同じプロンプトに収録しました。テキスト・表・画像の抽出とページ抽出・統合を実機で検査しています。この環境では2ファイルの統合が入力リストと逆順になる挙動があり、[PDF採取記録](docs/pdf-action-capture.md)に条件と結果を記載しています。
-
-CSV分類は「CSVの定型分類」を開いて使う補助機能です。対象・列・文字コード・分類条件・送信範囲を確認して開始します。CSV処理にはPADは不要です。過去の実装と未完了の受入は[実装状況](docs/issues-8-14-progress.md)、新しい汎用化の範囲は[採取・接続の方針](docs/robin-action-catalog.md)を参照してください。Office・PDFは限定した形式で自動Runへ接続しました。ブラウザー等と、既存文書・他環境での受入は継続中です。
-
-## 配布と起動
-
-共有フォルダーへ配置するアプリ本体は次の3ファイルです。
+リポジトリ直下の次の3ファイルは、Windows PowerShell + HTMLでM365 CopilotとPADを接続する**過去の汎用業務エージェント**です。
 
 ```text
 業務エージェント.cmd
@@ -106,101 +132,25 @@ App.ps1
 index.html
 ```
 
-`業務エージェント.cmd` をダブルクリックします。通常の処理は `%LOCALAPPDATA%\AiPromptsAgent` で行います。利用者のデータやログを共有フォルダーへ書き戻しません。
+この方式は実装をチェックポイントとして保存し、現在は主経路を `copilot/` の指示・ナレッジ方式へ移しています。新しく利用を始める場合は、上記3ファイルではなく「[まず使う](#まず使う)」の手順から始めてください。
 
-必要な環境は Windows、Windows PowerShell 5.1、Microsoft Edge、PAD、M365 Copilotを利用できるアカウントです。Node、Python、独自EXE、常駐サービスは配布に不要です。認証は利用者が行います。組織で禁止されている接続・実行をアプリが解除することはありません。ランチャーは自分のPowerShellプロセスだけに実行ポリシー引数を指定し、永続設定やグループポリシーを変更しません。
+過去方式の詳細は以下に残しています。
 
-配布の想定経路は **GitHub → 社内PC → 社内の共有フォルダー → 利用者ローカル** です。社内PCで受け取った同じ版の上記3ファイルを、配布担当者が実際の共有フォルダーへ配置します。リポジトリのテスト・開発用補助・`.work` は利用者への配布に含めません。更新中は起動を控え、3ファイルの配置完了後に利用を再開してください。開発PC上の `\\localhost\AiPromptsAgentPoC$` は作り替え可能な検証用共有で、実際の配布先ではありません。社内PCからの導入・更新・実行は別途確認が必要です。
+- [`docs/session-handoff-2026-09-07.md`](docs/session-handoff-2026-09-07.md)
+- [`docs/issue-5-validation.md`](docs/issue-5-validation.md)
+- [`docs/general-agent-live-2026-09-07.md`](docs/general-agent-live-2026-09-07.md)
+- [`docs/document-run-checkpoint-2026-09-08.md`](docs/document-run-checkpoint-2026-09-08.md)
+- [`docs/release-operations.md`](docs/release-operations.md)
 
-現在はPADとM365 Copilotを日本語表示で使用してください。他言語の画面は未検証です。ChatGPTのブラウザー拡張機能は不要です。
+## 検証履歴を見る
 
-PADを使う汎用依頼の準備:
+ルートREADMEには日ごとの詳細ログを積み上げず、**現在地と使い方だけ**を置きます。詳細な検証履歴・失敗境界・旧判定は次を正本として参照してください。
 
-PADの空フロー作成権限、DesignerがUIAへ現れない場合の復旧、専用フローの一意な特定条件は、[PAD実機受入の作成権限・UIA復旧手順](docs/pad-live-setup.md)にまとめています。ここに記載したPID・HWNDは観測時の値を再利用せず、毎回再取得してください。
+- [Issue #5](https://github.com/minimo162/ai-prompts/issues/5) — 必須A〜Gの受入と履歴
+- [Issue #27](https://github.com/minimo162/ai-prompts/issues/27) — 現行最終版の受入と履歴
+- [`catalog/evidence/final-content-acceptance-20260915.md`](catalog/evidence/final-content-acceptance-20260915.md) — 最終受入監査
+- [`catalog/evidence/final-content-acceptance-20260915.json`](catalog/evidence/final-content-acceptance-20260915.json) — 機械可読の判定
+- [`catalog/evidence/final-content-verification-20260915.json`](catalog/evidence/final-content-verification-20260915.json) — 最終検証記録
+- [`catalog/evidence/`](catalog/evidence/) — 過去の成功・失敗・NOT_PROVENを含む原証跡
 
-Issue #5 Final3固定版（bundle `2bc3f2b4c5c709e94547ccf4b75f7084c9c424605781e01414f6783a1fd026a7`）は、T01〜T08/T10の通常M365 Copilot＋実PAD受入とT01/T04/T10独立再試験を完了しました。T09は捕捉済みUI要素の実行時未検出でRun開始前にブロックされ、P3未確認項目も残るため、Issueは `partial／OPEN` です。証跡は `catalog/evidence/current-package-status-20260911-final4.json` と `catalog/evidence/issue5-completion-audit-20260911-final4.json` に固定しています。
-
-1. HTML画面の「設定・接続確認」で「Copilot を開く」を押し、アプリ専用のEdgeでM365 Copilotへサインインします。既存の個人ブラウザープロファイルは流用しません。
-2. PADで、Power Fxを無効にした空の「業務エージェント専用」フローを作成して保存し、Mainデザイナーを開いたままにします。別の名前を付けた場合は、画面の設定も同じフロー名にします。既存業務フローを指定しないでください。アプリは専用フローに自分で反映したアクションだけを次回以降置き換えます。
-3. 「自己診断する」で接続状態を確認します。操作対象が見つからない場合、PADの反映や実行へ進みません。
-4. やりたいことと対象を入力して開始します。質問があれば画面で回答します。画面を閉じても処理は停止しません。CMDで開き直すと同じ状態へ接続します。停止には画面の「停止する」を使います。
-
-PAD経路の自動実行は、UTF-8テキストの読み取り、新しい成果物ファイルへの書き出し、文字列・リスト・数値変換、変数、IF分岐、有限ループ・待機、固定AiCallテンプレートなど、検証済みの構文に限定しています。翻訳、要約、分類、抽出、判断を呼び出せます。Excel/ブラウザー/任意アプリ操作は、この版の検証済みアクション集合に含まれません。未対応の目的を完了扱いにはしません。元の業務ファイルの削除・上書き、送信、公開、本番更新は実行しません。
-
-PADのMain編集が途中で止まった場合は、元Mainと所有記録を保全し、新しい依頼を止めます。「保全・復旧」から、停止・同じ対象・内容の一致を確認した場合だけ元Mainを戻して保存できます。元処理のRunは行いません。クリップボードの復元失敗と未確認の途中ファイルも表示します。[復旧条件と未検証範囲](docs/pad-recovery.md)を参照してください。
-
-CSVの送信後に結果不明となった場合は、「送信済みの既存回答を照合する」で同じ要求IDの完全な回答だけを読み取れます。再送信はしません。照合済みの結果を保って未送信分を新しい候補へ引き継ぐ場合は、改めて送信範囲を確認します。形式や終端が欠けた回答は補完しません。[実Copilot測定の経過](docs/live-benchmark-2026-09-07.md)を参照してください。
-
-## 更新の扱い
-
-新しい汎用依頼の成果物は、画面からID検証付きで開く要求を送れます。「実行時に確認した内容」で観測時のテキストも表示できます。関連付けのない端末や古い履歴の扱いは[成果物の確認方法](docs/general-artifacts.md)を参照してください。
-
-アプリは `app/<版>-<内容のSHA256>/` に保存します。初回・内容変更時だけ一時ディレクトリへコピーし、3ファイルと版・ハッシュを検査してから `app/current.json` を切り替えます。起動中の版を上書きせず、ジョブは開始時のPS1を使い続けます。状態、設定、認証プロファイル、履歴、成果物は `data/` です。
-
-配布時はAppの `# App-Version` とHTMLの `app-version` を合わせ、`tools/Seal-AgentRelease.ps1`でApp・HTML・CMDの組合せを封入してから検証・公開します。版番号が同じでも、対応するハッシュが異なる組合せはCMD起動前に拒否します。Appを編集すると封入は無効になるため、検証前に再封入が必要です。App.ps1のUTF-8 BOMありを維持してください。[凍結・持込み・公開・復旧の手順](docs/release-operations.md)を参照してください。共有パスが利用不可で、検証できるローカル版がある場合だけ、その旨を表示して継続します。共有フォルダー自体が開けない場合、そこにあるCMDもダブルクリックできないため、既に同期したローカル版のCMDから起動してください。
-
-以前の版を自動削除しません。保存済みの古いCMDも現在のローカル版を開く入口です。通常は低い共有版への更新を拒否しますが、「配布版・旧版への復帰」から互換性を確認した保存済みの版を明示選択できます。入力・成果物・履歴を保ったまま旧版に固定し、CMDから開き直します。固定解除後は共有側のCMDで更新できます。未封入の従来キャッシュは、元のハッシュが一致するときだけ新しい共有版への更新用に読取り照合し、旧版候補にはしません。実行中のジョブは開始版を使い続けます。CSVの続行も記録した開始版のPS1とハッシュを照合します。
-
-## 実行の契約
-
-- `Run`: `ACT` / `DONE` / `ASK_USER` / `BLOCKED` をJSONで判定します。通常文章の「完了」では判定しません。最大往復数・回答待ち・Copilot・PADの各待機には期限があります。
-- `ACT`: Robinを有限の許可構文と対象範囲で検証し、PADへ反映、全文コピー戻し、保存状態、保存後の全文一致を確認してから一度だけ実行します。今回固有の開始・終了記録と成果物を照合します。結果不明なら再実行しません。
-- `AiCall`: `job_id/run_id/ai_call_id` で要求と結果を対応付けます。要求は実行中ジョブ配下の `calls/<ID>/request.json`、結果は同じ場所の `result.json` だけです。任意パスの結果書き込みや全体Runの再帰起動はしません。
-- AiCallはUTF-8入力256KB以内、メタデータを含むJSON化後のプロンプト180,000文字以内、待機5〜240秒です。容量・文字数の上限超過は切り詰めず、送信前に `input_too_large` として失敗させます。
-- AiCallの `success/needs_review/failed/cancelled` は全体のDONEとは別です。入力件数・出力件数も照合します。成功した本文は `result.txt`、状態は `status.txt` に返します。Robinは直後にこの順で読みます。失敗時に結果本文を用意して後続を続けることはありません。
-- 初版では1つのPAD実行中に最大3回のAiCallを直列実行できます。外側RunはPAD待機中にCopilotの排他を保持しません。
-- 宣言したAiCallはすべて実行する必要があります。IFの条件によりAiCall自体をスキップする構成は未対応です。AI結果を読んだ後の分類・状態による分岐は利用できます。
-- `DONE`: そのジョブで実際に観測した成果物が存在し、観測時のハッシュと一致することを確認します。入力ファイルを成果物として流用しません。
-
-次の計画には成果物の実際のUTF-8本文、ハッシュ、件数、切り詰め状態を渡します。本文全体を確認できていない成果物を根拠にDONEにはしません。前の実行の成果物を再利用する場合も、同じジョブで観測した正確なパスと現在のハッシュを照合します。質問ごとのIDと回答の一度だけの受付により、複数画面から回答を上書きしたり、古い質問への回答を次の質問へ流用したりしません。
-
-計画の応答は、1つのコードブロック内にメタデータJSONとRobin本文を明示的な目印で区切って受け取ります（Planner V2）。従来の2ブロック形式の読取りも維持しています。Robinは最大64000 UTF-16文字・250行で、コードの引用符、バックスラッシュ、空白をそのまま保持します。画面上で空行と特殊な空白を混同しないよう、空行だけは今回の要求IDを含む専用の目印で送り、完全一致した目印を空行へ復号します。メタデータと復元後の最終JSONは、それぞれ最大1048576文字です。PAD内のAiCallは従来の番号付きJSON断片（1断片最大8192文字、最大256ブロック、連結後最大1048576文字）を使います。
-
-どちらも要求ID・順序・欠落・重複・終端を検査し、応答IDとブロック境界を含む全文が3回連続で一致し、生成が終了したことを確認します。折りたたみ表示でも、既知の構造に全行が存在し、この検査を通った応答だけを取得します。不完全なJSONやRobinの修復、正当なバックスラッシュの削除は行いません。ファイル本文やAIの業務結果はデータとして扱います。Planner V2の実機での通し確認は進行中です。
-
-確定した失敗は次の判断へ返します。同じ失敗手順を新しい実行IDに置き換えただけのACTは拒否します。比較時にだけアプリ発行のパス・IDを置き換え、実行するRobin本文は変更しません。結果不明・中止はそのまま終了します。
-
-Copilotへ送信するタブはジョブごとに新規作成し、同じジョブの計画とAiCallで使います。サインイン用や以前のジョブのタブは送信先に流用しません。最初の送信前に過去の回答や下書きが見つかれば停止します。ジョブごとのタブ分離は実M365で確認済みです。
-
-ローカルHTTP APIは `127.0.0.1` に限定します。ページの起動トークン、Host、Originを検査し、任意ファイル配信APIは設けません。画面の表示文字列はDOMのテキストとして描画します。
-
-## 開発と検証
-
-Appのロジックは1つのPS1内の関数です。`-Mode Library` は関数を読み込むだけで、サービス起動やCopilot/PAD操作は行いません。テスト・説明書は配布ファイルには含めません。
-
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools\Seal-AgentRelease.ps1 -Directory "$PWD" -Channel candidate
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-App.ps1 -AppSourcePath "$PWD\App.ps1"
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Copilot.ps1
-powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File tests\Test-CopilotPlannerV2.ps1
-powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File tests\Test-PlannerV2Transport.ps1
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Pad.ps1
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Http.ps1
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-Launcher.ps1
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-PublishAgentSource.ps1
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-AiCallProcess.ps1
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\Test-AiCallProviderFailure.ps1
-powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File tests\Test-ClipboardSnapshot.ps1
-```
-
-`Test-AiCallProviderFailure.ps1` は、実AiCall子プロセスのプロバイダー関数だけを差し替え、拒否・空回答・期限・応答時中止の受信処理を検査します。実M365の応答やPADフローの異常系検証とは区別します。
-
-開発用の状態領域を分ける場合:
-
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File .\App.ps1 -Mode Serve -HomePath "$PWD\.local"
-```
-
-テスト結果を他PC対応の証明として使わないでください。PAD 2.71の日本語デザイナーで固定A/Bの貼り付け・保存・置換・実行・結果判定と、実Copilotによる分類からPAD2回、最終ファイル保存、完了表示までの通し検証が通りました。長文生成の安定性、失敗条件の実機検証、他PCでの確認は残っています。
-
-仕様: [Issue #5](https://github.com/minimo162/ai-prompts/issues/5)。Robinの元プロンプト: [pad-robin-prompts.md](pad-robin-prompts.md)。
-
-一般仕様の確認先: [PADデザイナーのコピー・保存](https://learn.microsoft.com/en-us/power-automate/desktop-flows/designer-workspace)、[スクリプト実行アクション](https://learn.microsoft.com/en-us/power-automate/desktop-flows/actions-reference/scripting)、[Edge DevTools Protocol](https://learn.microsoft.com/en-us/microsoft-edge/devtools/protocol/)。これらは本アプリの実機合格証拠ではありません。
-
-
-## アプリ接続の追記（2026-09-08）
-
-上記の採取時点の「自動Run未接続／未検証」は、その後の実装で更新しました。Office/PDFの採取形式を検証器・出力観測・完了判定へ接続し、Office3ファイル作成とPDF各操作の2ケースをアプリ開始からDONEまで確認しました。PDF表は追加採取したCSV書出しで保存します。既存51例に今回の18例（日時取得、空テーブル、行追加失敗、CSV読取り、CSV書出し、ファイルコピー、サブテキスト取得、テキスト書出し、テキスト変数書込み2設定、For each、If2、Excel/Word編集可能起動2設定、フォルダー取得2設定、ファイル変数読取り）を加え、現在のカタログは69設定です。
-
-検証範囲・制約・先行失敗・未完了事項は [自動Run接続チェックポイント](docs/document-run-checkpoint-2026-09-08.md) を参照してください。既存Office文書の自動Run、書式・レイアウト、別PC・社内受入は未確認です。
-現在の観測カタログは `catalog/index.json` の73設定です。追加のFilterDataTable、CSVヘッダー付き読取り・書出し、PDFページ2単独抽出を含みます。
+README整理前の長い時系列説明はGit履歴にも残ります。現在の判定は、古い `OPEN / partial` 表記ではなく上記の最終受入を優先してください。
