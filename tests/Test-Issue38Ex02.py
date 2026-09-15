@@ -194,6 +194,7 @@ class Ex02Tests(unittest.TestCase):
         self.assertTrue(plan['limits']['no_retry_or_regeneration_after_failure'])
         self.assertFalse(plan['fixed_inputs']['grader_only_expected']['send_to_copilot'])
         self.assertTrue(plan['submission']['completed_robin_excluded'])
+        self.assertEqual(plan['submission']['model'], 'Think Deeper')
         for item in [plan['candidate']['instruction_path'], plan['candidate']['bundle_path'],
                      plan['candidate']['manifest_path'], plan['submission']['body_path']]:
             self.assertTrue((ROOT / item).is_file(), item)

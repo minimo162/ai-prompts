@@ -69,6 +69,7 @@
     "attachment_path": "copilot/versions/20260915-excel-r5/knowledge/PAD-Robin-Knowledge-Bundle.txt",
     "attachment_sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3",
     "normal_m365_new_chat": true,
+    "model": "Think Deeper",
     "grader_only_expected_excluded": true,
     "completed_robin_excluded": true
   },
