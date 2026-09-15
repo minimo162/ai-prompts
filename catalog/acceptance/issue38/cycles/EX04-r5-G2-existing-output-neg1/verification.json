@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE38_EX04_EXISTING_OUTPUT_LIVE_VERIFICATION",
+  "test_id": "EX04-R5-G2-EXISTING-OUTPUT-NEG1",
+  "verified_at": "2026-09-15T23:00:56.9849581Z",
+  "base_commit": "a6662d86e9c2da4f8126964330d48ecdaa5ab1cc",
+  "flow": {
+    "title": "Power Automate | 無題 (4)",
+    "subflow": "Main",
+    "robin_sha256": "0829526420158a61146e5d3fde7c4a5cc035228e2ab98be96d9697aa64d457bd",
+    "actions": 87,
+    "unmodified": true
+  },
+  "live_result": {
+    "pad_runs_used": 1,
+    "pad_run_limit": 1,
+    "retry_used": false,
+    "guard_value_directly_observed": "OUTPUT_EXISTS_NO_WRITE",
+    "terminal_state_directly_observed": "Ready; Run enabled; Stop disabled",
+    "write_or_save_branch_entered": false,
+    "runtime_error_observed": false,
+    "excel_process_count_before": 0,
+    "excel_process_count_after": 0,
+    "status": "PASS_EXISTING_OUTPUT_GUARD_FIXED_G2_FLOW"
+  },
+  "sha_invariants": {
+    "existing_output_before": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9",
+    "existing_output_after": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9",
+    "input_a_before_after": "f655b62c82750fc07f4e54bcfd098e8e7c0b771c9422c4321cc413a4d6d07fa9",
+    "input_b_before_after": "69627e161747fedad0f7c3b410c1d625b29a553786be0c145e83aaf43d1b105a",
+    "template_before_after": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+    "work_before_after": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+    "all_unchanged": true
+  },
+  "evidence_sha256": {
+    "plan.json": "04714fce704ecb82e1d464539e795ad38560decd633567ace724fccf9f0a416c",
+    "preflight.json": "f23c0d76636d27f56842be2421a35dac26f01cf10f9776eb54fca8ce01e373a0",
+    "fixture-staged.json": "251a4c17d22715439cc0b6488c877f29cead021327bab8801ed4ce405b91789e",
+    "pad-run-observation.json": "1d37f0480961290187a7446f56896fe9ee2fa341bdd3993b145befba89cedb62",
+    "hashes-after-live-run.json": "cc5f2f12093de07fe576284dbfa506e2fdc52dba6d77cf9cbb7a36dbd8c39cbd",
+    "cleanup.json": "a527c3ff6815bc7f5d9b2b4868118e70a687109947dd0244bd49e5331714d62b",
+    "protected-files-after.json": "b30926dbe78349fa1988f1b5a2ce721b51fe55fb33645a71cc0a6833cce22427",
+    "review.md": "a2721625525613c937e98805242946186c703ffd548e29ea73ddc8e5228f4242",
+    "existing-output-before.xlsx": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9",
+    "existing-output-after.xlsx": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9",
+    "pad-before-run.jpg": "74e819ea033b8a73639cb821d1c966b9b299ea6414ba4b2d29395b1791bf2a81",
+    "pad-after-run-overview.jpg": "42babeeb0ce3e6207642dcf3c2c7e0b2c055e1341f0a3ee092bde8c5a1b42ccc",
+    "pad-after-run-transferstate.jpg": "8ce2fdd7dc362635fb4e6ac159b44f21e9b1df79ebc57f5dbcfb7c1a6de1e6e5",
+    "tests/Test-Issue38Ex04ExistingOutput.py": "64825c7270ae547db8fde564bff082b711d78317f2973479a062dfa3727c6cc9"
+  },
+  "validation": [
+    {
+      "command": "python -B tests/Test-Issue38Ex04ExistingOutput.py",
+      "result": "PASS_4_OF_4"
+    },
+    {
+      "command": "python -B tests/Test-Issue38Ex02.py",
+      "result": "PASS_18_OF_18"
+    },
+    {
+      "command": "python -B tests/Test-Issue38Excel.py",
+      "result": "PASS_13_OF_13"
+    },
+    {
+      "command": "node tests/Test-Issue38Package.mjs 20260915-excel-r5",
+      "result": "PASS_NON_LIVE_PACKAGE"
+    },
+    {
+      "command": "pwsh -NoProfile -File tests/Test-RobinCatalog.ps1",
+      "result": "PASS_107"
+    },
+    {
+      "command": "pwsh -NoProfile -File tests/Test-CopilotRobinPackage.ps1",
+      "result": "PASS"
+    }
+  ],
+  "preservation": {
+    "g2_positive_evidence_unchanged": true,
+    "a6662d8_format_reconciliation_unchanged": true,
+    "copilot_regenerated": false,
+    "robin_or_pad_flow_modified": false,
+    "candidate_version_changed": false,
+    "github_write": false,
+    "runtime_state_restored": true
+  },
+  "scope_separation": {
+    "ex02": "The functional fixed text/number result and a6662d8 format adjudication remain separate and unchanged.",
+    "ex04": "This PASS covers only the existing-output collision branch of the unchanged G2 flow in this PAD environment.",
+    "issue38_overall": "NOT_DECLARED_COMPLETE"
+  }
+}

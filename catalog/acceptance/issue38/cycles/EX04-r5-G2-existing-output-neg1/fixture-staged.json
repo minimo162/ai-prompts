@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "test_id": "EX04-R5-G2-EXISTING-OUTPUT-NEG1",
+  "staged_at": "2026-09-15T22:51:51.6672335Z",
+  "method": "Exclusive copies from the preserved synthetic G2 Run2 output; no existing destination was overwritten.",
+  "source": {
+    "path": "catalog/acceptance/issue38/cycles/EX02-r5-G2/run2/result.xlsx",
+    "sha256": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9",
+    "length": 11217
+  },
+  "runtime_existing_output": {
+    "path": "catalog/acceptance/issue38/runs/EX02-attempt1/result.xlsx",
+    "exists": true,
+    "sha256": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9",
+    "length": 11217
+  },
+  "before_archive": {
+    "path": "catalog/acceptance/issue38/cycles/EX04-r5-G2-existing-output-neg1/existing-output-before.xlsx",
+    "sha256": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9",
+    "length": 11217
+  },
+  "other_pre_run_sha256": {
+    "work": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+    "input_a": "f655b62c82750fc07f4e54bcfd098e8e7c0b771c9422c4321cc413a4d6d07fa9",
+    "input_b": "69627e161747fedad0f7c3b410c1d625b29a553786be0c145e83aaf43d1b105a",
+    "template": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457"
+  },
+  "excel_process_count": 0,
+  "pad_runs_used": 0,
+  "status": "READY_FOR_ONE_LIVE_PAD_RUN"
+}

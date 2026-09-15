@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "test_id": "EX04-R5-G2-EXISTING-OUTPUT-NEG1",
+  "checked_at": "2026-09-15T22:50:30.2000365Z",
+  "repository": {
+    "head": "a6662d86e9c2da4f8126964330d48ecdaa5ab1cc",
+    "branch": "codex/issue38-type-probe-20260915",
+    "worktree_clean_before_new_cycle_files": true,
+    "protected_scope_matches_head": true
+  },
+  "pad_initial_observation": {
+    "window_title": "Power Automate | 無題 (4)",
+    "window_count_for_exact_title": 1,
+    "status": "Ready",
+    "action_count_visible": 87,
+    "excel_process_count": 0,
+    "run_not_started": true
+  },
+  "protected_sha256": {
+    "generated_robin": "0829526420158a61146e5d3fde7c4a5cc035228e2ab98be96d9697aa64d457bd",
+    "g2_pad_import_and_recopy": "00656f74d81469be15add5fe6927e88fa0032f1d896d73bd70b02216b6bfa7ad",
+    "g2_acceptance_status": "634298a3619039ff2e2fad0028e407e71b29ced8749bbbe6788176476b257292",
+    "g2_protected_files_after": "50151692f35c5b62bd2f7e36e8f7855103f0cfc6812e3b7f3b38917cf5bf8cbc",
+    "g2_run1_result": "c678ae701725716d62aa945d73e341e0122db7e37a4ad35bc670108aeab68325",
+    "g2_run2_result": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9",
+    "g2_format_verification": "cc1cdf4d23007fd30d23fc33e9e526e2af5522e97e0c0af4977373367098075c",
+    "candidate_instruction": "fe57e45c170fcdfe8f94d8e23f9cb58f00d5b54ae4abe35a43189767032b5aaa",
+    "candidate_bundle": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3",
+    "candidate_manifest": "1ffacd9f478346fb38b146f135e19fd743d2b9a0ce1ab85d8b6b452899dcfd89",
+    "input_a": "f655b62c82750fc07f4e54bcfd098e8e7c0b771c9422c4321cc413a4d6d07fa9",
+    "input_b": "69627e161747fedad0f7c3b410c1d625b29a553786be0c145e83aaf43d1b105a",
+    "template": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+    "work": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457"
+  },
+  "runtime_before_fixture_staging": {
+    "result_exists": false,
+    "work_matches_template": true,
+    "excel_process_count": 0
+  },
+  "decision": {
+    "safe_to_stage_synthetic_existing_output": true,
+    "safe_to_consume_single_pad_run_after_staging_and_final_observation": true,
+    "reason": "The unchanged G2 flow and protected evidence match a6662d8, the dedicated negative ID is new, the runtime output is absent, and no Excel process is open."
+  }
+}
