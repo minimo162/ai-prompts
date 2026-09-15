@@ -9,7 +9,7 @@ Power Automate for desktop（PAD）の**実測済みRobin**を根拠に、Micros
 
 ## まず使う
 
-**コピー用コードブロックの改善版 `20260915-copyable` を追加しました。** 下の手順は改善版を使います。指示の静的検査とMarkdown形式の検査は行っていますが、実Copilotのボタン表示・クリック・PAD貼付けは未検証です。上記の基準版の受入結果を改善版へ継承しません。[改善内容・検証範囲](copilot/copyable-output.md)を確認してください。
+**コピー用コードブロック改善版は `20260915-copyable-r2` です。** 初版では実Copilot上でコピーボタンの表示までは確認できましたが、閉じMarkdownフェンスがコピー対象へ混入し、PADでエラーになる実機結果がありました。r2はその漏れを防ぐ指示へ修正した静的検査版で、実Copilot/PADでの再試験はこれからです。基準版の受入結果をr2へ継承しません。[改善内容・検証範囲](copilot/copyable-output.md)を確認してください。
 
 ### 必要なもの
 
@@ -25,10 +25,11 @@ Agent Builder / Copilot Studioではなく、**通常のM365 Copilot Chat** が�
 2. [`copilot/agent-instructions-copyable.txt`](copilot/agent-instructions-copyable.txt) の全文をメッセージ本文へ貼ります。旧 `agent-instructions.txt` と二重に貼らないでください。
 3. [`copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt`](copilot/knowledge/PAD-Robin-Knowledge-Bundle.txt) を添付します。
 4. 続けて、やりたい処理を日本語で依頼します。
-5. Robinのコードブロックにコピー機能が表示されていれば、それでコード部分だけをコピーし、PADの空フローへ貼り付けます。説明文や囲みのバッククォートは貼り付けません。
-6. 保存後、まず複製したテストデータで実行し、出力内容まで確認します。
+5. Robinのコードブロックにコピー機能が表示されていても、コードブロック内部に独立したバッククォート3個の行が見えていないことを確認します。見えている場合はコピーせず、その回答を不受入にします。
+6. コピー後、先頭行と最終の非空行がどちらもPAD命令であり、`text`・`Plain Text`・Markdownフェンスが混入していないことを確認してからPADの空フローへ貼り付けます。
+7. 保存後、まず複製したテストデータで実行し、出力内容まで確認します。
 
-コピー機能が見えない場合の再表示依頼は [コピー用出力ガイド](copilot/copyable-output.md) にあります。既存のチャットには新版が自動反映されないため、新しいチャットで指示全文とナレッジを渡してください。
+コピー時の確認方法は [コピー用出力ガイド](copilot/copyable-output.md) にあります。既存のチャットにはr2が自動反映されないため、新しいチャットで指示全文とナレッジを渡してください。
 
 受入済み基準版で7つのナレッジ原本を個別添付する方法や、通常チャットでの検証手順は [`copilot/README.md`](copilot/README.md) を参照してください。
 
@@ -57,10 +58,10 @@ C:\Work\output.xlsx へ保存するPADフローを作ってください。
 
 | 指示文 | 用途・状態 |
 |---|---|
-| [`agent-instructions-copyable.txt`](copilot/agent-instructions-copyable.txt) | `20260915-copyable`。コピー用フェンスを明示した改善版。静的検査済み、実Copilot・PAD受入は未検証 |
+| [`agent-instructions-copyable.txt`](copilot/agent-instructions-copyable.txt) | `20260915-copyable-r2`。閉じフェンスのコピー対象混入を禁止した改善版。静的検査後、実Copilot/PAD再試験待ち |
 | [`agent-instructions.txt`](copilot/agent-instructions.txt) | `20260913e`。受入済み基準版。原文と既存テスト・証跡を保持 |
 
-改善版のSHA・基準版との対応は [版情報](copilot/copyable-output-20260915.json) にあります。共通のナレッジ7原本・結合版は変更していません。以下の固定値・受入は**基準版のみ**に適用します。
+改善版のSHA・基準版との対応・初版の実機失敗境界は [版情報](copilot/copyable-output-20260915.json) にあります。共通のナレッジ7原本・結合版は変更していません。以下の固定値・受入は**基準版のみ**に適用します。
 
 | 項目 | 基準版の固定値 |
 |---|---|
@@ -85,7 +86,7 @@ C:\Work\output.xlsx へ保存するPADフローを作ってください。
 | パス | 役割 |
 |---|---|
 | [`copilot/`](copilot/) | 現在の主成果物。Copilot向け指示、ナレッジ、配布手順 |
-| [`copilot/agent-instructions-copyable.txt`](copilot/agent-instructions-copyable.txt) | コピー用コードブロックを明示した改善版の指示文 |
+| [`copilot/agent-instructions-copyable.txt`](copilot/agent-instructions-copyable.txt) | コピー内容へMarkdownフェンスを混入させない改善版の指示文 |
 | [`copilot/agent-instructions.txt`](copilot/agent-instructions.txt) | 受入済み基準版の指示文 |
 | [`copilot/knowledge/`](copilot/knowledge/) | PAD Robinの技術ナレッジ7原本と結合版 |
 | [`catalog/`](catalog/) | PADから採取したRobin、生成物、受入証跡、coverage |
@@ -125,7 +126,7 @@ C:\Work\output.xlsx へ保存するPADフローを作ってください。
 
 指示文やナレッジを変更した場合は、旧版のPASSを新しい組合せへそのまま継承しません。新しいSHAでbundleを固定し、必要な受入をやり直します。
 
-改善版の静的回帰テストは `node tests/Test-CopyableRobinPrompt.mjs` で実行できます。これは実Copilotの生成・コピー操作・PAD受入を証明するものではありません。
+改善版の静的回帰テストは `node tests/Test-CopyableRobinPrompt.mjs` で実行できます。これはr2の実Copilot生成・コピー内容・PAD再受入を証明するものではありません。
 
 主な確認先:
 

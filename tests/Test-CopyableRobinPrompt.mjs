@@ -13,6 +13,7 @@ const text = p => new TextDecoder('utf-8', { fatal: true }).decode(read(p));
 const sha = b => crypto.createHash('sha256').update(b).digest('hex');
 const baseHash = '6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c';
 const bundleHash = '79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12';
+const candidateHash = 'c533fc5d23861902626985c04ed48c2c9a82eb054885133ddf5889983ffd91fa';
 const baseline = text('copilot/agent-instructions.txt');
 const candidate = text('copilot/agent-instructions-copyable.txt');
 const manifest = JSON.parse(text('copilot/copyable-output-20260915.json'));
@@ -26,24 +27,33 @@ function checkContract(s) {
   assert.equal(s.split(begin).length, 2, 'one new format section');
   const start = s.indexOf(begin), stop = s.indexOf(end, start);
   assert.ok(stop > start, 'the existing output contract remains');
-  // Removing only the added formatting section and clarification must recover all baseline text.
   const restored = (s.slice(0, start) + s.slice(stop)).replace(newPlacement, oldPlacement);
   assert.equal(restored, baseline, 'generation, safety and literal-preservation rules unchanged');
   const section = s.slice(start, stop);
-  assert.deepEqual(s.split('\n').filter(line => /^\s*```/.test(line)), ['```text', '```']);
-  assert.equal((section.match(/^```text\nWAIT 1\n```$/gm) || []).length, 1, 'one top-level fence example');
+  assert.equal(section.includes('```'), false, 'prompt must not contain a literal fenced example');
   for (const required of [
-    'チャット本文にMarkdownのフェンス付きコードブロックを1つだけ',
-    '箇条書き・表・引用の中へ入れません',
-    'textは開始フェンスの言語指定であり、Robin本文ではありません',
-    'コードブロック内には貼り付ける完全なRobinだけ',
+    'Markdownのコードブロックを1つだけ使い、言語指定は `text`',
+    'バッククォート3個の並びを本文として絶対に出力しません',
+    '先頭行と最終の非空行はどちらも実際のPAD命令',
+    '行番号付きでバッククォート3個が見える状態は失敗',
+    'コードブロックを作り直します',
+    'それでもRobinだけのコピー内容にできない場合は、コードを出さず',
     '画面幅に合わせた実際の改行を加えず',
-    'コードを出さず理由を説明します',
     'プロンプトだけでは保証できません',
     'HTML/JavaScriptや偽のコピーボタンを生成せず',
-    '直前のRobinの内容を変更せずフェンスだけを整えます',
-    'この例を別ブロックで再掲したり、不要なWAITを追加したりしません'
+    '直前のRobin本文を変更せず'
   ]) assert.ok(section.includes(required), 'missing format rule: ' + required);
+}
+
+function checkCopiedPayload(payload) {
+  assert.equal(payload.includes('```'), false, 'Markdown fence leaked into copied payload');
+  const lines = payload.split(/\r?\n/);
+  const nonEmpty = lines.filter(x => x.length > 0);
+  assert.ok(nonEmpty.length > 0, 'payload has a PAD instruction');
+  for (const line of [nonEmpty[0], nonEmpty.at(-1)]) {
+    assert.doesNotMatch(line, /^\s*(text|Plain Text|JSON)\s*$/i);
+    assert.doesNotMatch(line, /^\s*#+\s/);
+  }
 }
 
 test('accepted instruction and manifest are still the frozen baseline', () => {
@@ -52,15 +62,16 @@ test('accepted instruction and manifest are still the frozen baseline', () => {
   assert.equal(oldManifest.bundle_sha256, bundleHash);
   assert.equal(oldManifest.source_files.length, 7);
 });
-test('copyable instruction is strict UTF-8 without BOM and below both length bounds', () => {
+test('copyable r2 instruction is strict UTF-8 without BOM and below both length bounds', () => {
   const b = read('copilot/agent-instructions-copyable.txt');
   assert.notDeepEqual([...b.subarray(0, 3)], [239, 187, 191]);
   assert.equal(Buffer.from(candidate, 'utf8').compare(b), 0);
+  assert.equal(sha(b), candidateHash);
   assert.ok(candidate.length <= 7000);
   assert.ok(candidate.length <= 8000);
 });
-test('version metadata binds the new instruction without claiming live acceptance', () => {
-  assert.equal(manifest.version, '20260915-copyable');
+test('version metadata binds r2 and records the observed r1 live failure', () => {
+  assert.equal(manifest.version, '20260915-copyable-r2');
   assert.equal(manifest.instruction_path, 'copilot/agent-instructions-copyable.txt');
   assert.equal(sha(read(manifest.instruction_path)), manifest.instruction_sha256);
   assert.equal(candidate.length, manifest.instruction_utf16);
@@ -70,37 +81,44 @@ test('version metadata binds the new instruction without claiming live acceptanc
   assert.equal(manifest.knowledge_manifest, 'copilot/knowledge-bundle-manifest-20260913e.json');
   assert.equal(manifest.bundle_path, oldManifest.bundle_path);
   assert.equal(manifest.bundle_sha256, bundleHash);
-  assert.equal(manifest.status, 'STATIC_CHECKED_LIVE_UNVERIFIED');
-  for (const k of ['knowledge_changed', 'inherits_live_acceptance', 'copy_button_guaranteed']) assert.equal(manifest[k], false);
-  for (const k of ['copilot_live_test', 'pad_live_test']) assert.equal(manifest[k], 'NOT_RUN');
+  assert.equal(manifest.status, 'STATIC_CHECKED_AFTER_LIVE_FENCE_LEAK_RETEST_REQUIRED');
+  assert.equal(manifest.knowledge_changed, false);
+  assert.equal(manifest.inherits_live_acceptance, false);
+  assert.equal(manifest.copy_button_guaranteed, false);
+  assert.equal(manifest.r1_live_observation.copy_button_displayed, true);
+  assert.equal(manifest.r1_live_observation.closing_fence_visible_inside_code_block, true);
+  assert.equal(manifest.r1_live_observation.copied_payload_valid_for_pad, false);
+  assert.equal(manifest.r1_live_observation.pad_result, 'ERROR_DUE_TO_TRAILING_MARKDOWN_FENCE');
+  assert.equal(manifest.copilot_live_retest, 'NOT_RUN_AFTER_R2');
+  assert.equal(manifest.pad_live_retest, 'NOT_RUN_AFTER_R2');
 });
-test('single text-fence contract preserves every unrelated instruction', () => checkContract(candidate));
-test('README routes the quick start to the full new instruction, not both versions', () => {
-  const r = text('README.md');
-  assert.ok(r.includes('2. [`copilot/agent-instructions-copyable.txt`]'));
-  assert.ok(r.includes('二重に貼らない'));
-  assert.ok(r.includes('基準版のみ'));
-  assert.ok(r.includes('実Copilot・PAD受入は未検証'));
-  assert.ok(r.includes('(copilot/copyable-output.md)'));
+test('r2 copy contract preserves every unrelated accepted instruction', () => checkContract(candidate));
+test('safe copied payload accepts Robin without Markdown fence content', () => {
+  checkCopiedPayload("Pdf.MergeFiles PDFFiles: ['C:\\\\a.pdf', 'C:\\\\b.pdf'] MergedPDFPath: $'''C:\\\\out.pdf''' IfFileExists: Pdf.IfFileExists.DoNotModifyFiles PasswordDelimiter: $''',''' MergedPDF=> MergedPDF");
 });
-test('usage guide distinguishes native copy from whole-answer copy and states the limit', () => {
+test('copied payload rejects the exact trailing fence failure observed live', () => {
+  assert.throws(() => checkCopiedPayload('Pdf.MergeFiles ...\n```'));
+});
+test('usage guide records r1 failure and r2 retest boundary', () => {
   const g = text('copilot/copyable-output.md');
-  for (const required of ['回答全体のコピーボタンとは区別', 'プロンプトだけでは保証できません',
-    '原文を確認できない場合', '実行は未検証', '既存のWindows PowerShell全テストは今回再実行していません']) {
-    assert.ok(g.includes(required), required);
-  }
+  for (const required of [
+    '`20260915-copyable-r2`',
+    '閉じフェンスがコピー対象へ混入',
+    'PADへ貼り付けるとエラー',
+    'バッククォート3個の並びを入れない',
+    '最終の非空行もPAD命令',
+    'r2の実Copilotでの再生成',
+    'まだ再試験前'
+  ]) assert.ok(g.includes(required), required);
 });
-// These are synthetic mutations of the documented contract, not tests of model compliance.
+// Synthetic mutations of the documented contract, not tests of model compliance.
 const mutations = [
-  ['unsupported language tag', s => s.replace('\n```text\n', '\n```robin\n')],
-  ['indented fence', s => s.replace('\n```text\n', '\n    ```text\n')],
-  ['quoted fence', s => s.replace('\n```text\n', '\n> ```text\n')],
-  ['label inside code', s => s.replace('\nWAIT 1\n', '\nPlain Text\nWAIT 1\n')],
-  ['missing closing fence', s => s.replace('\n```\n', '\n')],
-  ['duplicate block', s => s.replace('\n```\n', '\n```\n\n```text\nWAIT 1\n```\n')],
-  ['changed example instruction', s => s.replace('\nWAIT 1\n', '\nWAIT 500\n')],
+  ['literal fence example reintroduced', s => s.replace('Markdownのコードブロックを1つだけ使い', '```text\nWAIT 1\n```\nMarkdownのコードブロックを1つだけ使い')],
+  ['payload fence prohibition removed', s => s.replace('バッククォート3個の並びを本文として絶対に出力しません', 'バッククォートを本文へ出しても構いません')],
+  ['last-line guard removed', s => s.replace('先頭行と最終の非空行はどちらも実際のPAD命令', '先頭行だけ実際のPAD命令')],
+  ['visible numbered fence accepted', s => s.replace('行番号付きでバッククォート3個が見える状態は失敗', '行番号付きフェンスは許容')],
   ['removed UI limitation', s => s.replace('プロンプトだけでは保証できません', '常にコピーできます')],
   ['unrelated generation change', s => s.replace('AppendNewLine: False', 'AppendNewLine: True')],
-  ['removed safe refusal', s => s.replace('コードを出さず理由を説明します', '推測でコードを生成します')]
+  ['removed safe refusal', s => s.replace('それでもRobinだけのコピー内容にできない場合は、コードを出さず', 'それでも推測してコードを出し')]
 ];
 for (const [name, mutate] of mutations) test('rejects ' + name, () => assert.throws(() => checkContract(mutate(candidate))));

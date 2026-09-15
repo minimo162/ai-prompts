@@ -1,12 +1,12 @@
 {
-  "schema_version": 1,
-  "version": "20260915-copyable",
-  "status": "STATIC_CHECKED_LIVE_UNVERIFIED",
+  "schema_version": 2,
+  "version": "20260915-copyable-r2",
+  "status": "STATIC_CHECKED_AFTER_LIVE_FENCE_LEAK_RETEST_REQUIRED",
   "instruction_path": "copilot/agent-instructions-copyable.txt",
-  "instruction_sha256": "a988adac2b11126ee341e4b0230453c2547d5e77aafc8904acb8a557c4239443",
-  "instruction_utf16": 5033,
-  "instruction_utf8_bytes": 12980,
-  "base_commit": "764beed493c41a7f0e4c089075d67dd865a2f654",
+  "instruction_sha256": "c533fc5d23861902626985c04ed48c2c9a82eb054885133ddf5889983ffd91fa",
+  "instruction_utf16": 4935,
+  "instruction_utf8_bytes": 12742,
+  "base_commit": "8bffbd2ca345b74b39d645bd254ce02e9f1d730b",
   "base_instruction_path": "copilot/agent-instructions.txt",
   "base_instruction_sha256": "6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c",
   "knowledge_manifest": "copilot/knowledge-bundle-manifest-20260913e.json",
@@ -15,8 +15,20 @@
   "knowledge_changed": false,
   "inherits_live_acceptance": false,
   "copy_button_guaranteed": false,
-  "copilot_live_test": "NOT_RUN",
-  "pad_live_test": "NOT_RUN",
+  "r1_live_observation": {
+    "copy_button_displayed": true,
+    "closing_fence_visible_inside_code_block": true,
+    "copied_payload_valid_for_pad": false,
+    "pad_result": "ERROR_DUE_TO_TRAILING_MARKDOWN_FENCE"
+  },
+  "r2_changes": [
+    "Remove the literal fenced example from the instruction prompt.",
+    "Forbid any triple-backtick sequence inside the copied Robin payload.",
+    "Require the first and last non-empty copied lines to be actual PAD instructions.",
+    "Treat a numbered closing fence visible inside the code block as a failed response that must be regenerated or refused."
+  ],
+  "copilot_live_retest": "NOT_RUN_AFTER_R2",
+  "pad_live_retest": "NOT_RUN_AFTER_R2",
   "static_test_command": "node tests/Test-CopyableRobinPrompt.mjs",
-  "change_scope": "Explicit top-level single text fence and copy guidance only; preserve the accepted baseline, generation rules and all existing evidence."
+  "change_scope": "Fence-leak guard for copy payload only; preserve the accepted baseline, generation rules, knowledge bundle and historical evidence."
 }
