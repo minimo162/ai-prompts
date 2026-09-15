@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "version": "20260915-excel-r3",
-  "status": "PARTIAL_EX02_EX03_NOT_ACCEPTED",
+  "version": "20260915-excel-r4",
+  "status": "PARTIAL_EX02_R4_REFUSED_STRICT_TYPE_MISSING",
   "issue_complete": false,
   "inherits_legacy_pass": false,
   "environment": {
@@ -33,13 +33,15 @@
       "scope_result": "2 runs match specified-sheet rectangle; individual runtime cell types not directly observed"
     },
     "EX02": {
-      "generation": "REFUSED_MISSING_STOP_AND_READBACK_COMPARISON_COMPOSITION",
+      "generation": "REFUSED_STRICT_TYPE_PRIMITIVE_MISSING",
       "copy_ui": "NO_CODE_BLOCK",
       "copy_payload": "NOT_APPLICABLE_NO_CODE",
       "paste_save_recopy": "NOT_RUN_NO_CODE",
       "run1": "NOT_RUN_NO_CODE",
       "run2": "NOT_RUN_NO_CODE",
-      "non_live": "12 target cells; oracle simulations and mutation tests only"
+      "non_live": "r4 package and deterministic rebuild; EX02 diagnostics with negative mutations; previous 558 FAIL preserved",
+      "scope_result": "NOT_ACCEPTED",
+      "evidence": "cycles/EX02-r4/generation-result.json"
     },
     "EX03": {
       "generation": "FAIL_UNCAPTURED_EXIT_AND_MISSING_COMPARISON",
@@ -63,9 +65,10 @@
     }
   },
   "remaining": [
-    "Integrate measured guard and readback comparison into a separately frozen candidate; strict type comparison remains unproven",
-    "EX02-EX03 same-version Copilot generation and unmodified PAD two-run full acceptance",
-    "Preserve XML oracle FAIL; resolve style representation acceptance without changing frozen expectations"
+    "Capture and verify strict type distinction inside a PAD flow using an available permitted route; equality is insufficient",
+    "Freeze another version after any material improvement; EX02 Copilot generation and unmodified PAD two-run acceptance remain outstanding",
+    "Style preservation acceptance remains unresolved: original 558 FAIL and native limited match both preserved; no-op Excel save reproduces differences",
+    "EX03 onward not retested in this cycle"
   ],
   "primitive_probe": {
     "generated_by": "implementation AI assembly, not Copilot",
@@ -84,6 +87,27 @@
   "candidate_history": {
     "20260915-excel-r1": "PRESERVED",
     "20260915-excel-r2": "INVALID_UTF16_MANIFEST_5911_VS_5844; never sent or run",
-    "20260915-excel-r3": "PASS_NON_LIVE_PACKAGE; EX01 two runs display match; EX02 refused; EX03 uncaptured EXIT; four EX04 generation stops; EX05 scope distinction"
+    "20260915-excel-r3": "PASS_NON_LIVE_PACKAGE; EX01 two runs display match; EX02 refused; EX03 uncaptured EXIT; four EX04 generation stops; EX05 scope distinction",
+    "20260915-excel-r4": "PASS_NON_LIVE_PACKAGE; 1 real Copilot request refused strict type gap; no code/PAD runs; no-op Excel control reproduces 558 style/dimension differences"
+  },
+  "prior_status_snapshot": "cycles/EX02-r4/prior-status.json",
+  "case_versions": {
+    "EX01": "20260915-excel-r3",
+    "EX02": "20260915-excel-r4",
+    "EX03": "20260915-excel-r3",
+    "EX04": "20260915-excel-r3",
+    "EX05": "20260915-excel-r3"
+  },
+  "environment_version": "20260915-excel-r3 historical; current EX02 cycle below",
+  "current_cycle": {
+    "id": "EX02-R4-G1",
+    "evidence": "cycles/EX02-r4/",
+    "copilot_generation_requests": 1,
+    "actual_bundle_uploads": 1,
+    "pad_create_attempts": 1,
+    "pad_created_flows": 0,
+    "pad_run_requests": 0,
+    "pad_route": "sky new-flow name not reflected; cancelled; no direct UIA mixed this turn",
+    "github_writes": 0
   }
 }

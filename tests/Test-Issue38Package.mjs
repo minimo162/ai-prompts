@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const requestedVersion=process.argv[2] ?? '20260915-excel-r1';
-assert.ok(['20260915-excel-r1','20260915-excel-r2','20260915-excel-r3'].includes(requestedVersion));
+assert.ok(['20260915-excel-r1','20260915-excel-r2','20260915-excel-r3','20260915-excel-r4'].includes(requestedVersion));
 const version=path.join(root,'copilot/versions',requestedVersion);
 const read=p=>fs.readFileSync(p);
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
@@ -44,9 +44,24 @@ if(requestedVersion!=='20260915-excel-r1'){
   for(const n of ['00-Index','04-Office-PDF','06-Examples']){
     const content=text(path.join(version,`knowledge/PAD-Robin-${n}.txt`));
     assert.ok(content.includes(write.toString('utf8').trimEnd()));
-    assert.ok(content.includes('Run2未開始'));
-    assert.ok(content.includes('全域ファイル比較は書式・寸法差分でFAIL'));
+    if(requestedVersion==='20260915-excel-r4') {
+      assert.ok(content.includes('型識別アクション・厳密型比較のPAD原文は未採取'));
+      assert.ok(content.includes('書式・寸法558差分のFAIL'));
+      assert.ok(content.includes('2Run終了を観測済み'));
+    } else {
+      assert.ok(content.includes('Run2未開始'));
+      assert.ok(content.includes('全域ファイル比較は書式・寸法差分でFAIL'));
+    }
   }
+}
+if(requestedVersion==='20260915-excel-r4') {
+  for(const [p,h] of Object.entries(manifest.evidence_inputs)) assert.equal(sha(read(path.join(root,p))),h,p);
+  for(const p of ['output-guard/captured-uia.robin','scalar-compare/captured-full.robin','matrix-write/assembled-probe-rev2.robin']) {
+    const raw=text(path.join(root,'catalog/acceptance/issue38/probes',p)).trimEnd();
+    assert.ok(bundle.toString('utf8').includes(raw),'full measured primitive included: '+p);
+  }
+  assert.equal(manifest.evidence.type_comparison,'NOT_CAPTURED_NOT_PROVEN');
+  assert.equal(manifest.status,'FROZEN_CANDIDATE_TYPE_GAP_NOT_ACCEPTED');
 }
 assert.equal(sha(read(frozen)),manifest.acceptance_freeze_sha256);
 for(const [p,h] of Object.entries(JSON.parse(read(frozen)).files)) assert.equal(sha(read(path.join(path.dirname(frozen),p))),h,p);

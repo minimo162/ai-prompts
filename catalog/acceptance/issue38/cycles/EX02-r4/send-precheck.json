@@ -1,0 +1,12 @@
+{
+  "test_id": "EX02-R4-G1",
+  "nonempty_lines_equal": true,
+  "line_count": 62,
+  "editor_difference": "Blank paragraph spacing and trailing U+200B/U+200C; not a byte identity claim",
+  "bundle_uploaded": true,
+  "bundle_sha256": "aa1fb5aff28c1cbb5ffc51d78459a51af846823a2ab168d6f32ed8bbef2096dd",
+  "mode": "Think Deeper",
+  "work_sha_match": true,
+  "output_absent": true,
+  "at": "2026-09-15T09:55:04.004Z"
+}

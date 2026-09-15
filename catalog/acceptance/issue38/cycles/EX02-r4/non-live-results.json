@@ -1,0 +1,96 @@
+{
+  "at": "2026-09-15T09:55:35.764372+00:00",
+  "commands": [
+    {
+      "command": [
+        "node",
+        "tests/Test-Issue38Package.mjs",
+        "20260915-excel-r4"
+      ],
+      "exit_code": 0,
+      "log": "checks/01.txt",
+      "log_sha256": "e8cb32fc1caf54558dd034e5df52786fdb3d5386470602fda0bf881a1cbc2706"
+    },
+    {
+      "command": [
+        "node",
+        "tests/Test-Issue38Package.mjs",
+        "20260915-excel-r3"
+      ],
+      "exit_code": 0,
+      "log": "checks/02.txt",
+      "log_sha256": "a2a5943a9de1122031862dbef91543e1100a39337a6c45424fd5b8b22d486e02"
+    },
+    {
+      "command": [
+        "node",
+        "tests/Test-CopyableRobinPrompt.mjs"
+      ],
+      "exit_code": 0,
+      "log": "checks/03.txt",
+      "log_sha256": "13144738331901f0c2db4a36dcb01e975924cf048659b152d0c3f09d6333f034"
+    },
+    {
+      "command": [
+        "python",
+        "tests/Test-Issue38Excel.py"
+      ],
+      "exit_code": 0,
+      "log": "checks/04.txt",
+      "log_sha256": "0af0454bd839388e6acb6b32130f007a957bcf57928ef9208d549ac385de0a80"
+    },
+    {
+      "command": [
+        "python",
+        "tests/Test-Issue38Ex02.py"
+      ],
+      "exit_code": 0,
+      "log": "checks/05.txt",
+      "log_sha256": "ed0581480f7e17898ec8427151ac44754a31cbe288a668daf2ae4c89c93e57b2"
+    },
+    {
+      "command": [
+        "pwsh",
+        "-NoProfile",
+        "-File",
+        "tests/Test-CopilotRobinPackage.ps1"
+      ],
+      "exit_code": 0,
+      "log": "checks/06.txt",
+      "log_sha256": "4b7122f1b9c9b4b93aed702f3f0bcd606a4af3833a0f17c382b27b3c47962dd1"
+    },
+    {
+      "command": [
+        "pwsh",
+        "-NoProfile",
+        "-File",
+        "tests/Test-RobinRawContracts.ps1"
+      ],
+      "exit_code": 0,
+      "log": "checks/07.txt",
+      "log_sha256": "6647723231288c2287f0a0ea36420b81687c2bac79975ecd4b717d4a8bc0be88"
+    },
+    {
+      "command": [
+        "pwsh",
+        "-NoProfile",
+        "-File",
+        "tests/Test-RobinCatalog.ps1"
+      ],
+      "exit_code": 0,
+      "log": "checks/08.txt",
+      "log_sha256": "a9b4f5ed2708e0dcad9c30fbcb3da728aa9e21f8053f7d0a786e6b5134ae0de2"
+    },
+    {
+      "command": [
+        "node",
+        "tests/Test-FinalContentAcceptance.mjs"
+      ],
+      "exit_code": 0,
+      "log": "checks/09.txt",
+      "log_sha256": "6899dd147e375fe598b66d0c284acfa1f357d1f6f5cc89aee9dd231b6de6bfca"
+    }
+  ],
+  "status": "PASS",
+  "initial_test_failure": "Wrong-position negative initially created duplicate J4 XML cells; corrected injection to a valid single moved cell, no assertion weakened; second run 9/9 pass"
+}

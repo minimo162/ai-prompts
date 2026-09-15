@@ -9,7 +9,7 @@ Power Automate for desktop（PAD）の**実測済みRobin**を根拠に、Micros
 
 ## まず使う
 
-**Issue #38のExcel拡張は `20260915-excel-r3` 候補です（実機未受入）。** [候補指示](copilot/versions/20260915-excel-r3/agent-instructions.txt)の全文と、[同版bundle](copilot/versions/20260915-excel-r3/knowledge/PAD-Robin-Knowledge-Bundle.txt)の実添付をセットで使います。シート切替原文を収録しましたが、DataTable矩形書込み原文を追加採取し、12セルの値・型・位置一致まで観測しました。終了未確認・書式照合FAILが残り、EX01〜EX05の実Copilot/PAD受入は未実施です。[差分・結果・再開条件](catalog/acceptance/issue38/report.md)を確認してください。受入済み20260913eおよび既存r2は保持しています。
+**Issue #38のEX02向け入口は `20260915-excel-r4` 候補です（実生成を実施したが未達）。** [候補指示](copilot/versions/20260915-excel-r4/agent-instructions.txt)の全文と、[同版bundle](copilot/versions/20260915-excel-r4/knowledge/PAD-Robin-Knowledge-Bundle.txt)の実添付をセットで使います。採取済み出力ガード・矩形転記・保存/再読取り・等価比較を本文に統合しました。通常Copilotは既知工程を認識しましたが、フロー内の厳密な型照合原文が不足しコード生成を拒否しました。r4のPAD貼付け・Run1/2はコードなしで未実施です。書式558差分FAILは保持しています。[今回の差分・観測結果](catalog/acceptance/issue38/cycles/EX02-r4/review.md)を参照してください。旧r3のEX01等の実施結果と受入済み20260913eは別版の履歴として保持しています。
 
 **コピー用コードブロック改善版は `20260915-copyable-r2` です。** 初版では実Copilot上でコピーボタンの表示までは確認できましたが、閉じMarkdownフェンスがコピー対象へ混入し、PADでエラーになる実機結果がありました。r2はその漏れを防ぐ指示へ修正した静的検査版で、実Copilot/PADでの再試験はこれからです。基準版の受入結果をr2へ継承しません。[改善内容・検証範囲](copilot/copyable-output.md)を確認してください。
 
