@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "test_id": "EX02-R5-G2",
+  "recorded_at": "2026-09-15T20:29:32.1979436Z",
+  "normal_m365": {
+    "browser": "Microsoft Edge",
+    "conversation_url": "https://m365.cloud.microsoft/chat/conversation/0d5645d6-efc7-4a85-9f28-359557869aa0?es=SSR",
+    "conversation_title": "Power Automate Desktop Excel転記フロー",
+    "model": "Think Deeper",
+    "new_chat": true,
+    "generation_requests_used": 1,
+    "generation_request_limit": 1,
+    "retry_or_regeneration": false
+  },
+  "submission": {
+    "body_path": "catalog/acceptance/issue38/cycles/EX02-r5-G2/submitted-body.txt",
+    "body_sha256": "03caf7342e8b5cb33264c4c4ad1fc01f8ae8e5553e151d8c2800ffeed0d153d5",
+    "same_as_predecessor_fixed_body": true,
+    "attachment_count": 1,
+    "attachment_name": "PAD-Robin-Knowledge-Bundle.txt",
+    "attachment_path": "copilot/versions/20260915-excel-r5/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "attachment_sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3",
+    "grader_only_expected_sent": false,
+    "completed_robin_sent": false
+  },
+  "same_version": {
+    "version": "20260915-excel-r5",
+    "instruction_sha256": "fe57e45c170fcdfe8f94d8e23f9cb58f00d5b54ae4abe35a43189767032b5aaa",
+    "bundle_sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3",
+    "manifest_sha256": "1ffacd9f478346fb38b146f135e19fd743d2b9a0ce1ab85d8b6b452899dcfd89",
+    "fixed_request_sha256": "39ef21927f5ce454bc9a407c54bec21125816bcb9a2d902074521111e1fada39",
+    "fixed_spec_sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+    "grader_only_expected_sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d"
+  },
+  "evidence": {
+    "response_and_code_visible_in_current_conversation": true,
+    "one_user_message_and_one_completed_copilot_response_observed": true,
+    "attachment_observed_in_user_message": true,
+    "screenshot": "catalog/acceptance/issue38/cycles/EX02-r5-G2/m365-conversation-fullpage.png"
+  },
+  "github_write": false
+}

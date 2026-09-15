@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "test_id": "EX02-R5-G2-RUN1",
+  "result_last_write_utc": "2026-09-15T19:55:19.9060181Z",
+  "pad": {
+    "run_requests_used": 1,
+    "ready_observed_after_run": true,
+    "run_button_reenabled": true,
+    "data1_shape": "2 rows x 3 columns",
+    "data2_shape": "3 rows x 2 columns",
+    "readback1_shape": "2 rows x 3 columns",
+    "readback2_shape": "3 rows x 2 columns",
+    "value_type_match_variables_true": 12,
+    "value_type_match_variables_false": 0,
+    "transfer_state_visible_prefix": "SAVED_REOPENE...",
+    "transfer_state_full_value_in_unmodified_action_86": "SAVED_REOPENED_12_JSON_COMPARISONS_READY",
+    "transfer_state_full_value_directly_visible": false,
+    "excel_process_count_after": 0
+  },
+  "artifacts": {
+    "result": "catalog/acceptance/issue38/cycles/EX02-r5-G2/run1/result.xlsx",
+    "result_sha256": "c678ae701725716d62aa945d73e341e0122db7e37a4ad35bc670108aeab68325",
+    "runtime_result_archive": "catalog/acceptance/issue38/cycles/EX02-r5-G2/run1/runtime-result.xlsx",
+    "work": "catalog/acceptance/issue38/cycles/EX02-r5-G2/run1/work.xlsx",
+    "work_sha256": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+    "work_matches_template": true,
+    "preserved_before_run2": true
+  },
+  "checks": {
+    "typed_transfer": "MATCH_FIXED_EX02_TEXT_NUMBER_SCOPE_12_OF_12",
+    "target_values_types_positions": "MATCH_SAVED_XLSX_ONLY_12_OF_12",
+    "outside_values_types_formulas": "MATCH_SAVED_XLSX_ONLY_468_OF_468",
+    "legacy_oracle": "FAIL_558_UNRESOLVED",
+    "legacy_failure_counts": {
+      "row_dimensions": 48,
+      "column_dimensions": 30,
+      "styles": 480
+    },
+    "native_styles": "MATCH_WITHIN_RECORDED_SCOPE_480",
+    "native_styles_acceptance": "NOT_PROVEN; excludes values, types, formulas, other sheet metadata, PAD completion and Copilot"
+  },
+  "screenshots": [
+    "catalog/acceptance/issue38/cycles/EX02-r5-G2/run1/pad-terminal-overview.jpg",
+    "catalog/acceptance/issue38/cycles/EX02-r5-G2/run1/pad-variables-top.jpg",
+    "catalog/acceptance/issue38/cycles/EX02-r5-G2/run1/pad-variables-middle.jpg",
+    "catalog/acceptance/issue38/cycles/EX02-r5-G2/run1/pad-variables-bottom.jpg"
+  ],
+  "status": "PASS_POSITIVE_RUN_WITHIN_FIXED_TEXT_NUMBER_SCOPE_558_REMAINS"
+}

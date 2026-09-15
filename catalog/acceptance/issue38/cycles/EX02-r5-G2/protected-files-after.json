@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "test_id": "EX02-R5-G2",
+  "recorded_at": "2026-09-15T20:29:32.1979436Z",
+  "fixed_originals": [
+    {
+      "path": "catalog/acceptance/issue38/fixtures/EX02/input-a.xlsx",
+      "sha256": "f655b62c82750fc07f4e54bcfd098e8e7c0b771c9422c4321cc413a4d6d07fa9"
+    },
+    {
+      "path": "catalog/acceptance/issue38/fixtures/EX02/input-b.xlsx",
+      "sha256": "69627e161747fedad0f7c3b410c1d625b29a553786be0c145e83aaf43d1b105a"
+    },
+    {
+      "path": "catalog/acceptance/issue38/fixtures/EX02/template.xlsx",
+      "sha256": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457"
+    }
+  ],
+  "runtime_after": {
+    "work_path": "catalog/acceptance/issue38/runs/EX02-attempt1/work.xlsx",
+    "work_sha256": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+    "work_matches_template": true,
+    "result_path": "catalog/acceptance/issue38/runs/EX02-attempt1/result.xlsx",
+    "result_exists": false,
+    "excel_process_count": 0
+  },
+  "predecessor_preservation": {
+    "base_commit": "b991285d9ba174e55515bb732d30d0628add80f2",
+    "r4_changed_since_base": false,
+    "r5_g1_changed_since_base": false,
+    "g1_generation_limit": 1,
+    "g1_generation_used": 1,
+    "g1_pad_actions": 0,
+    "g1_xlsx_generated": false,
+    "g1_acceptance_unchanged": true
+  },
+  "status": "PASS_PROTECTED_FILES_AND_PREDECESSOR_CYCLES_PRESERVED"
+}

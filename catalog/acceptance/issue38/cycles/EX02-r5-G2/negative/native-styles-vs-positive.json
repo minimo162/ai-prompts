@@ -1,0 +1,24 @@
+{
+    "kind":  "SUPPLEMENTAL_NATIVE_STYLE_COMPARISON",
+    "observed_at":  "2026-09-15T20:25:33.9870530Z",
+    "paths":  [
+                  "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\cycles\\EX02-r5-G2\\run2\\result.xlsx",
+                  "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\cycles\\EX02-r5-G2\\negative\\result-one-type-changed.xlsx"
+              ],
+    "sha_before":  [
+                       "826D09AB3B5818326FA0DEDAC0AF8A87F74057F4431E29E8A59C72CA7E08FDA9",
+                       "776EBD082B750F6952E8F6BCF83566BDA0DDB6CAC7908B9E50DA78542613857B"
+                   ],
+    "sha_after":  [
+                      "826D09AB3B5818326FA0DEDAC0AF8A87F74057F4431E29E8A59C72CA7E08FDA9",
+                      "776EBD082B750F6952E8F6BCF83566BDA0DDB6CAC7908B9E50DA78542613857B"
+                  ],
+    "checked_cells":  480,
+    "bounds":  "Each existing sheet A1:J16",
+    "attributes":  "font,fill,number format,alignment,protection,merge,borders,row/column size and hidden",
+    "differences":  [
+
+                    ],
+    "status":  "MATCH_WITHIN_RECORDED_SCOPE",
+    "acceptance":  "NOT_PROVEN; excludes values, types, formulas, other sheet metadata, PAD completion and Copilot"
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "test_id": "EX02-R5-G2",
+  "generation_artifact_written_at": "2026-09-15T19:42:06.7565184Z",
+  "conversation": {
+    "url": "https://m365.cloud.microsoft/chat/conversation/0d5645d6-efc7-4a85-9f28-359557869aa0?es=SSR",
+    "title": "Power Automate Desktop Excel転記フロー",
+    "model": "Think Deeper"
+  },
+  "response_copy": {
+    "path": "catalog/acceptance/issue38/cycles/EX02-r5-G2/response-full.txt",
+    "chars": 10358,
+    "lines": 171,
+    "final_lf": false,
+    "sha256": "a2265f743a06d95e826ca1e3f22b50a598a3c0e856bd8948c11b49c59e53610c",
+    "capture_method": "completed response's Response Copy control followed by browser clipboard read"
+  },
+  "rendered_dom_inner_text": {
+    "path": "catalog/acceptance/issue38/cycles/EX02-r5-G2/response-dom-innerText.txt",
+    "chars": 10627,
+    "lines": 259,
+    "final_lf": false,
+    "sha256": "36f38e9818fea75d53d65f1743ad55f5da10ecfb17298dc222208af9c8eb87ae",
+    "note": "Includes rendered Plain Text label and editor line numbers; retained separately from Response Copy."
+  },
+  "code_copy": {
+    "path": "catalog/acceptance/issue38/cycles/EX02-r5-G2/code-copy-raw.robin",
+    "chars": 7314,
+    "lines": 87,
+    "crlf_count": 0,
+    "final_lf": false,
+    "sha256": "3b74f7646737b0df09612605360f28c5e4cc744bf7f4fd7f860bf6a97b9ada0a",
+    "first_line": "SET TransferState TO $'''NOT_STARTED'''",
+    "last_line": "END",
+    "markdown_fence_or_extra_token": false,
+    "capture_method": "sole visible Code Copy control followed by browser clipboard read"
+  },
+  "repository_text_copy": {
+    "path": "catalog/acceptance/issue38/cycles/EX02-r5-G2/generated.robin",
+    "chars": 7315,
+    "lines": 87,
+    "final_lf": true,
+    "sha256": "0829526420158a61146e5d3fde7c4a5cc035228e2ab98be96d9697aa64d457bd",
+    "exact_relation": "code-copy-raw.robin plus one conventional final LF",
+    "equals_frozen_r5_assembled_example": true,
+    "generated_text_edited": false
+  },
+  "generation_requests_used": 1,
+  "generation_request_limit": 1,
+  "regeneration_requested": false,
+  "interpretation": "Live normal-M365 generation passed the raw Code Copy gate. PAD import and runs are proved separately."
+}

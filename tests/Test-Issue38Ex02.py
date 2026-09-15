@@ -22,6 +22,8 @@ old_tests = load('old_tests', 'tests/Test-Issue38Excel.py')
 new = load('diagnostic', 'tools/Compare-Issue38Ex02.py')
 builder = load('builder', 'tools/Build-Issue38Ex02Candidate.py')
 r5_builder = load('r5_builder', 'tools/Build-Issue38Ex02CandidateR5.py')
+typed_transfer = load('typed_transfer', 'tools/Verify-Issue38Ex02TypedTransfer.py')
+negative_builder = load('negative_builder', 'tools/Build-Issue38Ex02TypeNegative.py')
 
 
 class Ex02Tests(unittest.TestCase):
@@ -182,7 +184,7 @@ class Ex02Tests(unittest.TestCase):
         self.assertTrue(runtime['work_matches_template'])
         self.assertFalse(result.exists())
 
-    def test_r5_g2_is_separate_unused_cycle_with_identical_fixed_inputs(self):
+    def test_r5_g2_is_separate_cycle_with_identical_fixed_inputs(self):
         cycle = ROOT / 'catalog/acceptance/issue38/cycles/EX02-r5-G2'
         plan = json.loads((cycle / 'plan.json').read_bytes())
         preflight = json.loads((cycle / 'preflight.json').read_bytes())
@@ -222,6 +224,85 @@ class Ex02Tests(unittest.TestCase):
         self.assertTrue(preflight['fixed_input_checks']['all_plan_hashes_match_current_files'])
         self.assertFalse(preflight['fixed_input_checks']['fixed_input_problem_requiring_stop'])
         self.assertTrue(preflight['decision']['safe_to_consume_one_new_generation_request'])
+
+    def test_r5_g2_live_generation_and_unmodified_pad_evidence(self):
+        cycle = ROOT / 'catalog/acceptance/issue38/cycles/EX02-r5-G2'
+        generation = json.loads((cycle / 'generation-result.json').read_bytes())
+        pad = json.loads((cycle / 'pad-import-and-recopy.json').read_bytes())
+        acceptance = json.loads((cycle / 'acceptance-status.json').read_bytes())
+        raw = (cycle / 'code-copy-raw.robin').read_bytes()
+        generated = (cycle / 'generated.robin').read_bytes()
+        self.assertEqual(hashlib.sha256(raw).hexdigest(), generation['code_copy']['sha256'])
+        self.assertFalse(raw.endswith(b'\n'))
+        self.assertEqual(raw + b'\n', generated)
+        self.assertEqual(generated, r5_builder.assembled_example().encode('utf-8'))
+        self.assertEqual(pad['import']['final_action_count'], 87)
+        self.assertFalse(pad['import']['manual_edit'])
+        self.assertTrue(pad['recopy_after_save']['lf_normalized_exact_generated_robin'])
+        self.assertEqual(acceptance['overall']['generation_requests_used'], 1)
+        self.assertEqual(acceptance['overall']['pad_runs_used'], 2)
+        self.assertEqual(acceptance['overall']['functional_generated_pad_path'],
+                         'PASS_FIXED_EX02_TEXT_NUMBER_SCOPE')
+        self.assertFalse(acceptance['overall']['accepted'])
+        self.assertEqual(acceptance['legacy_558']['count'], 558)
+        self.assertFalse(acceptance['scope']['generalized_to_unconfirmed_types'])
+        self.assertFalse(acceptance['scope']['probe_success_used_as_generated_flow_success'])
+        self.assertFalse(acceptance['overall']['github_write'])
+
+    def test_r5_g2_two_positive_runs_match_fixed_typed_contract(self):
+        cycle = ROOT / 'catalog/acceptance/issue38/cycles/EX02-r5-G2'
+        results = []
+        for run in ['run1', 'run2']:
+            with self.subTest(run=run):
+                result = typed_transfer.verify_output(cycle / run / 'result.xlsx', run)
+                self.assertEqual(result['status'], 'MATCH_FIXED_EX02_TEXT_NUMBER_SCOPE')
+                self.assertEqual(len(result['mappings']), 12)
+                self.assertEqual(result['mismatches'], [])
+                self.assertTrue(result['output']['unchanged_by_verifier'])
+                self.assertTrue(result['originals_unchanged_by_verifier'])
+                self.assertTrue(all(item['source_matches_target'] for item in result['mappings']))
+                self.assertTrue(all(item['target_actual'][0] in {'text', 'number'}
+                                    for item in result['mappings']))
+                results.append(result)
+        two_run = typed_transfer.compare_runs(
+            cycle / 'run1/result.xlsx', cycle / 'run2/result.xlsx'
+        )
+        self.assertEqual(two_run['status'], 'MATCH')
+        self.assertTrue(two_run['semantic_equal'])
+        self.assertFalse(two_run['binary_sha_equal'])
+        self.assertEqual(two_run['checked_cells'], 480)
+
+    def test_r5_g2_one_cell_type_negative_is_detected_without_hiding_558(self):
+        cycle = ROOT / 'catalog/acceptance/issue38/cycles/EX02-r5-G2'
+        negative = cycle / 'negative/result-one-type-changed.xlsx'
+        build = json.loads((cycle / 'negative/build-evidence.json').read_bytes())
+        comparison = new.compare(negative)
+        typed = typed_transfer.verify_output(negative, 'negative')
+        native = json.loads((cycle / 'negative/native-styles-vs-positive.json').read_bytes())
+        render = json.loads((cycle / 'negative/render-equivalence.json').read_bytes())
+        self.assertEqual(build['semantic_delta_count'], 1)
+        self.assertEqual(build['fixed_change']['sheet'], 'Target A')
+        self.assertEqual(build['fixed_change']['cell'], 'D4')
+        self.assertEqual(build['fixed_change']['before'], ['number', 12.5])
+        self.assertEqual(build['fixed_change']['after'], ['text', '12.5'])
+        self.assertTrue(build['fixed_change']['same_display_text'])
+        self.assertTrue(build['fixed_change']['style_unchanged'])
+        self.assertEqual(build['package_payload']['changed_members'], ['xl/worksheets/sheet2.xml'])
+        self.assertEqual(comparison['failure_counts']['values_types_positions'], 1)
+        self.assertEqual(comparison['failure_counts']['styles'], 480)
+        self.assertEqual(comparison['failure_counts']['row_dimensions'], 48)
+        self.assertEqual(comparison['failure_counts']['column_dimensions'], 30)
+        self.assertEqual(len(comparison['legacy']['failures']), 559)
+        self.assertEqual(comparison['checks']['outside_values_types_formulas']['mismatches'], [])
+        self.assertEqual(len(typed['mismatches']), 1)
+        self.assertEqual(typed['mismatches'][0]['target_cell'], 'D4')
+        self.assertEqual(native['status'], 'MATCH_WITHIN_RECORDED_SCOPE')
+        self.assertTrue(render['render_bytes_equal'])
+        with tempfile.TemporaryDirectory() as directory:
+            destination = Path(directory) / 'negative.xlsx'
+            rebuilt = negative_builder.build(cycle / 'run2/result.xlsx', destination)
+            self.assertEqual(rebuilt['semantic_delta_count'], 1)
+            self.assertEqual(rebuilt['fixed_change']['after'], ['text', '12.5'])
 
 
 if __name__ == '__main__':
