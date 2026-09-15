@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "probe": "issue38-ex02-datatable-type-identity",
+  "flow_name": "RobinIssue38DataTableType20260915A",
+  "scope": "Apply the dd505d8 JSON identity method to unconverted cells read from Excel into a PAD DataTable; this is not full EX02 acceptance.",
+  "base_commit": "dd505d8c31b8788ab95a3fd39f373bbe294473d9",
+  "scalar_probe_recollection": false,
+  "assembled_candidate": {
+    "path": "catalog/acceptance/issue38/probes/datatable-type-identity/assembled-candidate.robin",
+    "sha256": "26dba0fd7b26db883027e10f401e04c9afef98b511412690515bdcf7f6262812",
+    "action_count": 17,
+    "status": "assembled from previously captured action syntax; not PAD-captured evidence"
+  },
+  "workbook": {
+    "path": "catalog/acceptance/issue38/probes/datatable-type-identity/synthetic.xlsx",
+    "sheet": "TypeProbe",
+    "range": "A2:B2",
+    "cells": [
+      {
+        "address": "A2",
+        "stored_value": 1,
+        "stored_type": "number",
+        "datatable_expression": "ExcelData[0][0]"
+      },
+      {
+        "address": "B2",
+        "stored_value": "1",
+        "stored_type": "string",
+        "datatable_expression": "ExcelData[0][1]"
+      }
+    ]
+  },
+  "read_settings": {
+    "open": "LaunchAndOpenUnderExistingProcess",
+    "read_only": true,
+    "worksheet_selection": "ActivateWorksheetByName",
+    "get_cell_contents_mode": "Excel.GetCellContentsMode.TypedValues",
+    "first_line_is_header": false,
+    "close_without_save": true
+  },
+  "captured_source_reuse": [
+    "catalog/acceptance/issue38/copilot/EX01/recopy.robin",
+    "catalog/evidence/c-cell-read-20260914v/captured.robin",
+    "catalog/acceptance/issue38/probes/type-identity/captured-full.robin"
+  ],
+  "json_method": {
+    "conversion": "Variables.ConvertCustomObjectToJson",
+    "wrapper": "{ 'probe': value }",
+    "type_conversion_before_json": false
+  },
+  "fixed_expectations": {
+    "positive_excel_number_vs_known_number": true,
+    "positive_excel_text_vs_known_text": true,
+    "negative_excel_number_vs_known_text": false,
+    "negative_excel_text_vs_known_number": false,
+    "known_number_json": "{\"probe\":1.0}",
+    "known_text_json": "{\"probe\":\"1\"}"
+  },
+  "runs": 2,
+  "run2_gate": "Run1 must be saved and reconciled before Run2.",
+  "type_loss_rule": "If A2 and B2 produce the same JSON type after range read, do not claim match success. Record the current probe as failed and isolate any changed read setting in a separate probe with before/after Robin and results.",
+  "prohibited": [
+    "modify r4 or earlier evidence",
+    "create a new knowledge version",
+    "rerun full EX02",
+    "write to GitHub"
+  ]
+}

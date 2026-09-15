@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-15T21:37:37.3148776+09:00",
+  "workbook": "synthetic.xlsx",
+  "sha256": "ed9d53f558242b9e3691f18f3f3b073b712a5fdbf6d0e0f6a9cc76dda0c2d493",
+  "bytes": 3860,
+  "sheet": "TypeProbe",
+  "pad_read_range": "A2:B2",
+  "artifact_tool_import_readback": [
+    {
+      "address": "A2",
+      "value": 1,
+      "javascript_type": "number"
+    },
+    {
+      "address": "B2",
+      "value": "1",
+      "javascript_type": "string"
+    }
+  ],
+  "openxml_cells": [
+    {
+      "address": "A2",
+      "cell_type_attribute": "n",
+      "stored_value": "1",
+      "number_format": "0"
+    },
+    {
+      "address": "B2",
+      "cell_type_attribute": "str",
+      "stored_value": "1",
+      "number_format": "@"
+    }
+  ],
+  "visual_check": {
+    "rendered_range": "TypeProbe!A1:B2",
+    "result": "PASS",
+    "notes": "Headers and both displayed values are visible without clipping. Display equality is not used as the type oracle."
+  },
+  "authoring_observation": {
+    "artifact_tool_inspect": "A1:B2 read back as [[\"数値セル\",\"文字列セル\"],[1,\"1\"]].",
+    "initial_combined_build_render_exit_code": 1,
+    "initial_exit_note": "The initial process returned nonzero only after inspect, render, and XLSX output were emitted. The produced XLSX was independently reopened with Artifact Tool and inspected as Open XML; those independent readbacks are the acceptance evidence for the committed fixture.",
+    "committed_builder_verification": {
+      "observed_at": "2026-09-15T13:13:17Z",
+      "render_step_separated": true,
+      "exit_code": 0,
+      "generated_xlsx_bytes": 3862,
+      "openxml_a2": "n:1",
+      "openxml_b2": "str:1",
+      "note": "XLSX archive bytes are not asserted deterministic; cell storage types are. The already committed fixture was not replaced."
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-15T13:00:07.3488023Z",
+  "flow_name": "RobinIssue38DataTableType20260915A",
+  "run": 1,
+  "status": "ready",
+  "status_id": "Flow_status_ready",
+  "stop_enabled": false,
+  "start_enabled": true,
+  "excel_processes_after": [],
+  "run1_evidence_saved_and_reconciled": true
+}

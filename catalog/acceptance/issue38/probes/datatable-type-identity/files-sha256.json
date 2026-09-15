@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-15T13:10:46.9701455Z",
+  "algorithm": "SHA-256",
+  "files": {
+    "acceptance.json": "a28570756df23d32a509877f0940701e792de9dfe43b9b584413e7c8d336aabc",
+    "assembled-candidate.robin": "26dba0fd7b26db883027e10f401e04c9afef98b511412690515bdcf7f6262812",
+    "Build-SyntheticWorkbook.mjs": "4f10c00d1629bdb140daed7a455a99b7d48c621141a6cb632f62b86b4de642d4",
+    "capture-integrity.json": "2eb7167ace82202a046565034f5c1dd90bbd231a74b5b1d7281f2a203e069165",
+    "captured-final.robin": "02d664b5ae246bd57e2b44d454a5cd3cb01991a78b6fff8548d208759f1b1fb6",
+    "captured-preorder-not-run.robin": "e24616a39386aaf03a7654ec06f6e2490de6f92b55652b83869e3994dc1a6c36",
+    "flow-construction.json": "47c93654f0d2a5711a6afb2f39c1eeb2b84f68cbd193cffc5bcfe4af44a53e32",
+    "plan.json": "275670241ff5a9e59daefbb3cab561f53b5e2a322c35a2885e9f8b84afebbfef",
+    "pre-run1-state.json": "298a96a28d20899d4e57ef5a260ee62d9f28d534f5fb6c9933b6d9c7bcc1f00e",
+    "pre-run2-state.json": "383a3274209c9a3f17e9648c23db9d686ad44e77c343ac02f367f4196722cce5",
+    "recopy-after-run1.robin": "02d664b5ae246bd57e2b44d454a5cd3cb01991a78b6fff8548d208759f1b1fb6",
+    "recopy-after-run2.robin": "02d664b5ae246bd57e2b44d454a5cd3cb01991a78b6fff8548d208759f1b1fb6",
+    "report.md": "672170f3cb6d8ba3803985ce141dbab271c1f4b0b50bb2c2f77a167dd2dfdacd",
+    "run1-reconciliation.json": "043b64434786289de98e67e93aba2df46fbdad7880027afcb7459554abc3d5eb",
+    "run1-terminal-state.json": "0397804064960022c00cfc38950559da2263d0bbe8d7c2f515aca0b9b6adc6d2",
+    "run1-variables.json": "aa8de83dad0e563c9343f55e04d0ec205af2708d9b47777c0e0007bc397691e6",
+    "run1.json": "099ea931d5e02b6c63b5cc1ed67c77b5e085cd4102806f796c7508d0c463e4de",
+    "run2-reconciliation.json": "f090fb2d2ef7986baa7fe1b072397e133da3b49936c6dc1b11f89f1bf2bfbba4",
+    "run2-terminal-state.json": "81efba865b28b21f286eb0632efd685446eb962baab9ba98c074ab14f2ba0ae4",
+    "run2-variables.json": "56b8b235c149d3919f136a66bb48f9ba160d52a22e61526b249b1d479242d20c",
+    "run2.json": "8808b9879f4bc89814796f6f2221026f476c40010f96f551922e9b15812ce540",
+    "synthetic.xlsx": "ed9d53f558242b9e3691f18f3f3b073b712a5fdbf6d0e0f6a9cc76dda0c2d493",
+    "synthetic.xlsx.inspect.ndjson": "034f0ac866cbb3f2a4a6ccdc589fd5a40140dc0de3a2c318b7dee358e954f58f",
+    "verification.json": "563c9cb19fc9edc586e5a3b0c904df5a023b25e5be99caf1883bcd464c0dfb58",
+    "workbook-source-types.json": "2de089f8ef3cb1755fec78c41710fedf18424957980642f9b1734fee102a2a89"
+  }
+}

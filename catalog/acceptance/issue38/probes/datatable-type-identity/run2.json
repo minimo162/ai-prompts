@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-15T13:01:03.3363644Z",
+  "flow_name": "RobinIssue38DataTableType20260915A",
+  "run_status": "success",
+  "timeout_seconds": 60,
+  "ready_observed": true,
+  "start_enabled_after": true,
+  "variable_previews": [
+    "DATATABLE_TYPE_PROBE_FINISHED",
+    "1 行, 2 列",
+    "Excel インスタンス"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-15T12:59:12.3426973Z",
+  "flow_name": "RobinIssue38DataTableType20260915A",
+  "run": 1,
+  "source": "PAD Variables panel filtered by each exact variable name; VariablePreviewTextBlock name and help text agreed",
+  "variables": {
+    "ExcelInstance": "Excel インスタンス",
+    "ExcelData": "1 行, 2 列",
+    "ExcelNumber": "1",
+    "ExcelText": "1",
+    "KnownNumber": "1",
+    "KnownText": "1",
+    "ExcelNumberJson": "{\"probe\":1.0}",
+    "ExcelTextJson": "{\"probe\":\"1\"}",
+    "KnownNumberJson": "{\"probe\":1.0}",
+    "KnownTextJson": "{\"probe\":\"1\"}",
+    "PositiveExcelNumber": "True",
+    "PositiveExcelText": "True",
+    "NegativeExcelNumberText": "False",
+    "NegativeExcelTextNumber": "False",
+    "DataTableProbeCompleted": "DATATABLE_TYPE_PROBE_FINISHED"
+  }
+}

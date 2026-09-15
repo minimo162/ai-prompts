@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "flow_name": "RobinIssue38DataTableType20260915A",
+  "pad_process_id": 33720,
+  "pad_file_version": "2.71.115.26224",
+  "power_fx": "Off",
+  "events": [
+    {
+      "at": "2026-09-15T12:42:51Z",
+      "event": "new dedicated flow creation requested once from the PAD console"
+    },
+    {
+      "at": "2026-09-15T12:47:32Z",
+      "event": "Excel launch/open action saved with synthetic.xlsx, Visible=True, ReadOnly=True, UseMachineLocale=False"
+    },
+    {
+      "at": "2026-09-15T12:48:36Z",
+      "event": "ActivateWorksheetByName action saved for TypeProbe"
+    },
+    {
+      "event": "guarded bulk paste attempt stopped before clipboard mutation or paste",
+      "observation": "PAD_CLIPBOARD: unsupported native format; paste refused"
+    },
+    {
+      "at": "2026-09-15T12:55:09.0501705Z",
+      "event": "after explicit user direction that original clipboard content need not be retained, the remaining 15 lines were pasted once after the selected second action"
+    },
+    {
+      "event": "PAD inserted the pasted block before the selected action; the resulting wrong-order Robin was captured and never run",
+      "evidence": "captured-preorder-not-run.robin",
+      "sha256": "e24616a39386aaf03a7654ec06f6e2490de6f92b55652b83869e3994dc1a6c36"
+    },
+    {
+      "at": "2026-09-15T12:56:34.8342850Z",
+      "event": "all actions in this new dedicated probe flow were deleted once; no other flow was targeted"
+    },
+    {
+      "at": "2026-09-15T12:56:57.6985961Z",
+      "event": "the full fixed 17-line candidate was pasted once into the now-empty dedicated flow"
+    },
+    {
+      "event": "the corrected flow was saved and copied from PAD before execution",
+      "evidence": "captured-final.robin",
+      "sha256": "02d664b5ae246bd57e2b44d454a5cd3cb01991a78b6fff8548d208759f1b1fb6"
+    }
+  ],
+  "clipboard": {
+    "original_content_preserved": false,
+    "reason": "explicit user direction for this task",
+    "shared_clipboard_guard_modified": false,
+    "acceptance_dependency": false
+  },
+  "wrong_order_flow_executions": 0,
+  "corrected_flow_executions": 2,
+  "other_pad_flows_modified_or_run": 0
+}
