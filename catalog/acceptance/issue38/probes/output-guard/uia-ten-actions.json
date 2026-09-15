@@ -1,0 +1,47 @@
+{
+  "actions": [
+    {
+      "Name": "ファイルが存在する場合",
+      "Text": "ファイルが存在する場合 ファイル 'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\output-guard\\existing.txt'が存在する場合"
+    },
+    {
+      "Name": "変数の設定",
+      "Text": "変数の設定 変数   に値 'STOP' を割り当てる ExistingDecision"
+    },
+    {
+      "Name": "Else",
+      "Text": "Else"
+    },
+    {
+      "Name": "変数の設定",
+      "Text": "変数の設定 変数   に値 'WRITE' を割り当てる ExistingDecision"
+    },
+    {
+      "Name": "終了",
+      "Text": "End 終了"
+    },
+    {
+      "Name": "ファイルが存在する場合",
+      "Text": "ファイルが存在する場合 ファイル 'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\output-guard\\must-remain-absent.txt'が存在する場合"
+    },
+    {
+      "Name": "変数の設定",
+      "Text": "変数の設定 変数   に値 'STOP' を割り当てる MissingDecision"
+    },
+    {
+      "Name": "Else",
+      "Text": "Else"
+    },
+    {
+      "Name": "変数の設定",
+      "Text": "変数の設定 変数   に値 'WRITE' を割り当てる MissingDecision"
+    },
+    {
+      "Name": "終了",
+      "Text": "End 終了"
+    }
+  ],
+  "runs": 0,
+  "remaining": "two UNSET initializers from frozen plan, recopy, two runs",
+  "status": "PARTIAL_TEN_ACTIONS_NOT_RUN"
+}

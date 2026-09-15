@@ -1,0 +1,37 @@
+{
+  "status": "TWO_RUNS_MATCH_DISPLAY_VALUES_AND_POSITIONS",
+  "scope": "EX01 specified-sheet read only, not Issue38 full transfer acceptance",
+  "runs": 2,
+  "actuals": [
+    [
+      [
+        "Alpha",
+        "12.5",
+        "0"
+      ],
+      [
+        "Beta",
+        "-3",
+        "100"
+      ]
+    ],
+    [
+      [
+        "Alpha",
+        "12.5",
+        "0"
+      ],
+      [
+        "Beta",
+        "-3",
+        "100"
+      ]
+    ]
+  ],
+  "source_sha256": "f655b62c82750fc07f4e54bcfd098e8e7c0b771c9422c4321cc413a4d6d07fa9",
+  "source_sha_unchanged": true,
+  "run1_saved_before_run2": true,
+  "runtime_previews_cleared_before_run2": true,
+  "individual_cell_types": "NOT_DIRECTLY_OBSERVED",
+  "raw_byte_roundtrip": "DIFFERENT_LINE_ENDINGS; instruction lines equal; no manual edit"
+}

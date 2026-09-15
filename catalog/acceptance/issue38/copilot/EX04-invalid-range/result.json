@@ -1,0 +1,10 @@
+{
+  "case": "EX04-invalid-range",
+  "version": "20260915-excel-r3",
+  "generation": "PASS_GENERATION_STOP_ONLY",
+  "pad": "NOT_APPLICABLE_NO_CODE",
+  "code_buttons": 0,
+  "url": "https://m365.cloud.microsoft/chat/conversation/8ddaf119-3d6b-447f-9427-b68e1dc9bb4d?es=SSR",
+  "reason": "D3:B2 refused without correction. Response proposes additional capture; runtime behavior not measured.",
+  "response_utf16": 1118
+}

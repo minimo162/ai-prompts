@@ -1,0 +1,12 @@
+SET ExistingDecision TO $'''UNSET'''
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\output-guard\\existing.txt''') THEN
+    SET ExistingDecision TO $'''STOP'''
+ELSE
+    SET ExistingDecision TO $'''WRITE'''
+END
+SET MissingDecision TO $'''UNSET'''
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\output-guard\\must-remain-absent.txt''') THEN
+    SET MissingDecision TO $'''STOP'''
+ELSE
+    SET MissingDecision TO $'''WRITE'''
+END

@@ -1,0 +1,13 @@
+{
+  "version": "20260915-excel-r3",
+  "on_unknown": "Observe same request; no resend or rerun",
+  "request_sha256": "C951798EA6A951B7783EADD86F1DB8D23F4AE3A6A4C00C3CC9D3AB83FFD75480",
+  "max_generation_requests": 1,
+  "case": "EX01",
+  "max_pad_runs": 2,
+  "generation_timeout_seconds": 180,
+  "status": "PREPARED",
+  "instruction_sha256": "7615CE87F047A6870E9AC2BBF6997F0032D39085909F4E65B6576DF22AB632D6",
+  "bundle_sha256": "A7885BB4233A95816DBA4974804974532A13BCC750B63484BD331EE6E12FA930",
+  "run2_gate": "Run1 evidence preserved and reconciled"
+}

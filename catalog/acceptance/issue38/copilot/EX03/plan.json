@@ -1,0 +1,9 @@
+{
+  "case": "EX03",
+  "version": "20260915-excel-r3",
+  "max_requests": 1,
+  "timeout_seconds": 180,
+  "max_pad_runs": 2,
+  "run2_gate": "Run1 evidence saved and reconciled",
+  "on_unknown": "observe same request; no resend"
+}

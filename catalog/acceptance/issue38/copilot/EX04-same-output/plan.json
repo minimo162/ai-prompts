@@ -1,0 +1,7 @@
+{
+  "case": "EX04-same-output",
+  "version": "20260915-excel-r3",
+  "max_requests": 1,
+  "timeout_seconds": 180,
+  "expected": "stop conflicting input overwrite; no code means PAD NOT_APPLICABLE"
+}

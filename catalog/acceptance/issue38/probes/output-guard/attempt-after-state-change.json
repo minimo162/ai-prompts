@@ -1,0 +1,8 @@
+{
+  "status": "PASTE_REFUSED_BEFORE_INPUT",
+  "attempt": 2,
+  "cause": "PAD_CLIPBOARD unsupported native format",
+  "new_state_observation": "Copilot clipboard operations occurred since first refusal; preservation still refused",
+  "runs": 0,
+  "further_identical_retries": false
+}

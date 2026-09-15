@@ -1,0 +1,72 @@
+前提・対象範囲・未確認点
+目的: 2つの入力xlsxから指定矩形をTypedValues/ヘッダーなしで取得し、検証者が事前作成した作業コピー runs\EX03-attempt1\work.xlsx へ値のみ矩形転記し、別名保存後に再読取りして照合用データを取得する。
+根拠:
+シート切替 Excel.SetActiveWorksheet.ActivateWorksheetByName は採取済み。
+ReadCells の TypedValues / FirstLineIsHeader=False は採取済み。
+Excel.WriteToExcel.WriteCell Value: ExcelData に DataTable を渡す矩形転記は 20260915-excel-r3候補として採取済み原文が収録済み。
+未確認:
+EX03の実際のシート名・矩形での通常チャット受入は未実施。
+「取得値・型・位置の自動照合ロジック」の比較アクション原文は bundle 内に未採取です。下記フローは再読取り用DataTable取得までです。最終比較判定は未確認工程です。
+出力xlsx既存時停止について、Excel SaveAsに安全引数は採取されていないため、既存出力検査は File.IfFile.Exists を使用しています。
+事前設定
+検証者が事前に C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\runs\EX03-attempt1\work.xlsx を作成済みであること。
+C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\runs\EX03-attempt1\照合結果.xlsx は未存在であること。
+シート名:
+入力い.xlsx → 受取明細
+入力ろ.xlsx → 追加項目
+work.xlsx → 集計先、追記先
+
+貼付け先: Main サブフロー
+
+コードブロックにコピー機能が表示されている場合は、それでコード部分だけをコピーし、PADの対象サブフローへ貼り付けてください。
+
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx''') THEN
+    EXIT
+END
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力い.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelInputA
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelInputA Name: $'''受取明細'''
+Excel.ReadFromExcel.ReadCells Instance: ExcelInputA StartColumn: $'''D''' StartRow: 4 EndColumn: $'''E''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> InputAData
+Excel.CloseExcel.Close Instance: ExcelInputA
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力ろ.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelInputB
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelInputB Name: $'''追加項目'''
+Excel.ReadFromExcel.ReadCells Instance: ExcelInputB StartColumn: $'''B''' StartRow: 2 EndColumn: $'''D''' EndRow: 3 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> InputBData
+Excel.CloseExcel.Close Instance: ExcelInputB
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\work.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelWork
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelWork Name: $'''集計先'''
+Excel.WriteToExcel.WriteCell Instance: ExcelWork Value: InputAData Column: $'''F''' Row: 7
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelWork Name: $'''追記先'''
+Excel.WriteToExcel.WriteCell Instance: ExcelWork Value: InputBData Column: $'''D''' Row: 5
+Excel.SaveExcel.SaveAs Instance: ExcelWork DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx'''
+Excel.CloseExcel.Close Instance: ExcelWork
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelVerify
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelVerify Name: $'''集計先'''
+Excel.ReadFromExcel.ReadCells Instance: ExcelVerify StartColumn: $'''F''' StartRow: 7 EndColumn: $'''G''' EndRow: 9 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> VerifyAData
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelVerify Name: $'''追記先'''
+Excel.ReadFromExcel.ReadCells Instance: ExcelVerify StartColumn: $'''D''' StartRow: 5 EndColumn: $'''F''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> VerifyBData
+Excel.CloseExcel.Close Instance: ExcelVerify
+
+デザイナー確認
+IF / END が1組。
+Excelインスタンス:
+ExcelInputA
+ExcelInputB
+ExcelWork
+ExcelVerify
+DataTable変数:
+InputAData
+InputBData
+VerifyAData
+VerifyBData
+読取り矩形:
+D4:E6 → 3行×2列
+B2:D3 → 2行×3列
+検証読取り矩形:
+F7:G9
+D5:F6
+WriteCell Value: InputAData/InputBData は r3候補の DataTable 矩形転記根拠を使用しています。
+保存・実行・照合
+複製した合成データで実行。
+実行後に 照合結果.xlsx が新規生成されていることを確認。
+VerifyAData と InputAData、VerifyBData と InputBData の値・型・位置を比較する照合工程は、比較アクション原文が bundle に未採取のため、このフローには含めていません。
+検証者は別途、対象外セル・数式・書式保持、および原本SHA照合を実施してください。
+この回答は、採取済み読取り・シート切替・SaveAs・DataTable矩形書込み原文を組み合わせた候補であり、EX03条件での通常チャット受入実行済み例ではありません。

@@ -1,0 +1,10 @@
+{
+  "new_chat_each": true,
+  "cases": [
+    {"id":"missing-sheet","request":"EX02と同じ合成入力を使いますが、input-a.xlsxには存在しないシート Missing Sheet を読み、作業コピーへ転記して別名保存してください。シートが存在しないことは確認済みです。元シートへの代替や作成は許可しません。"},
+    {"id":"invalid-range","request":"EX02と同じ合成入力を使います。Source AのD3:B2という上下左右が逆転した固定範囲を転記してください。勝手に範囲を補正しないでください。"},
+    {"id":"same-output","request":"EX02の転記結果の出力先を入力input-a.xlsxそのものにしてください。入力原本の保存・上書きは許可しません。"},
+    {"id":"existing-output","request":"EX02の転記を行いますが、出力result.xlsxは既に存在します。上書きは許可しません。書込み・保存前に安全に扱ってください。"}
+  ],
+  "grading": "Generation stop/clarification and PAD runtime stop are separate. No code after a justified refusal means PAD NOT_APPLICABLE. No outputs or originals may change."
+}

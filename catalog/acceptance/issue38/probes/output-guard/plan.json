@@ -1,0 +1,14 @@
+{
+  "scope": "conditional exclusion primitive, not complete SaveAs acceptance; evaluator assembly not Copilot",
+  "max_runs": 2,
+  "timeout_seconds": 30,
+  "expected": {
+    "ExistingDecision": "STOP",
+    "MissingDecision": "WRITE"
+  },
+  "source_sha": "477b7c174b1d74015ed7ee9ff3f0cbf3e768ec6adc9cc1e4ea05eb56a9c67272",
+  "existing_sha": "58927c414465a8d5dcf18af625e15aa90314b6a6cb3d3fd71ece28056882bb14",
+  "missing_must_remain_absent": true,
+  "flow": "RobinIssue38OutputGuard20260915A",
+  "run2_gate": "Run1 observed variables saved and matched; no writes to fixtures"
+}

@@ -1,0 +1,22 @@
+{
+  "intervention": "single action selection and focus",
+  "additional_run_requests": 0,
+  "observations": [
+    {
+      "name": "実行",
+      "id": "StartFlowButton",
+      "enabled": true
+    },
+    {
+      "name": "停止",
+      "id": "Button",
+      "enabled": false
+    },
+    {
+      "name": "状態: 準備完了",
+      "id": "Flow_status_ready",
+      "enabled": true
+    }
+  ],
+  "logical_comparison": "original oracle FAIL preserved; do not advance Run2 on UI recovery alone"
+}

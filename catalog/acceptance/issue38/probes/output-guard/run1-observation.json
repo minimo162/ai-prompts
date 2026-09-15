@@ -1,0 +1,21 @@
+{
+  "start_enabled": false,
+  "run2": "NOT_STARTED",
+  "missing_absent": true,
+  "variables": [
+    {
+      "name": "ExistingDecision",
+      "preview": "STOP"
+    },
+    {
+      "name": "MissingDecision",
+      "preview": "WRITE"
+    }
+  ],
+  "raw_sha": "477b7c174b1d74015ed7ee9ff3f0cbf3e768ec6adc9cc1e4ea05eb56a9c67272",
+  "stop_button_enabled": false,
+  "status": "RUN1_VALUES_MATCH_COMPLETION_UNCONFIRMED",
+  "timeout_seconds": 30,
+  "existing_sha": "58927c414465a8d5dcf18af625e15aa90314b6a6cb3d3fd71ece28056882bb14",
+  "ready_label": true
+}

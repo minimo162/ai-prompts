@@ -1,0 +1,7 @@
+{
+  "status": "TWO_RUNS_FIXED_EXPECTATIONS_MATCH",
+  "source": "PAD GUI primitive, not Copilot acceptance",
+  "limits": "Equality coerces numeric/text values; strict type comparison unproven. Two indexes only. Separate paste reuse not tested.",
+  "runs": 2,
+  "raw_sha256": "0b13b8aed3130022535b32020647b7b8e69dd3e7c1d498c342877567271e71d2"
+}

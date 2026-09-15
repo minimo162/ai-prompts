@@ -1,0 +1,247 @@
+{
+  "kind": "READ_ONLY_NATIVE_REPRESENTATIVE_COMPARISON_NOT_ACCEPTANCE",
+  "books": [
+    {
+      "sha_before": "0E3CF3B1C9E6E73E835C324B71602B50F708DF689944A3760E4B411959F3B457",
+      "path": "catalog/acceptance/issue38/fixtures/EX02/template.xlsx",
+      "sheets": [
+        {
+          "row1_height": 14.7,
+          "columnA_width": 19.42,
+          "cells": [
+            {
+              "fill": 16777215.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "DO NOT READ THIS SHEET",
+              "size": 11.0,
+              "number_format": "G/標準",
+              "address": "A1",
+              "value": "DO NOT READ THIS SHEET"
+            },
+            {
+              "fill": 16777215.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "",
+              "size": 11.0,
+              "number_format": "G/標準",
+              "address": "B15",
+              "value": null
+            },
+            {
+              "fill": 16777215.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "WRONG_SHEET",
+              "size": 11.0,
+              "number_format": "G/標準",
+              "address": "C4",
+              "value": "WRONG_SHEET"
+            }
+          ],
+          "row15_height": 14.7,
+          "sheet": "Decoy"
+        },
+        {
+          "row1_height": 14.7,
+          "columnA_width": 19.42,
+          "cells": [
+            {
+              "fill": 16777215.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "KEEP TEMPLATE",
+              "size": 11.0,
+              "number_format": "G/標準",
+              "address": "A1",
+              "value": "KEEP TEMPLATE"
+            },
+            {
+              "fill": 16247773.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "=2+3",
+              "size": 11.0,
+              "number_format": "0.00",
+              "address": "B15",
+              "value": 5.0
+            },
+            {
+              "fill": 13431551.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "",
+              "size": 11.0,
+              "number_format": "G/標準",
+              "address": "C4",
+              "value": null
+            }
+          ],
+          "row15_height": 14.7,
+          "sheet": "Target A"
+        },
+        {
+          "row1_height": 14.7,
+          "columnA_width": 19.42,
+          "cells": [
+            {
+              "fill": 16777215.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "KEEP TEMPLATE",
+              "size": 11.0,
+              "number_format": "G/標準",
+              "address": "A1",
+              "value": "KEEP TEMPLATE"
+            },
+            {
+              "fill": 16247773.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "=2+3",
+              "size": 11.0,
+              "number_format": "0.00",
+              "address": "B15",
+              "value": 5.0
+            },
+            {
+              "fill": 13431551.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "",
+              "size": 11.0,
+              "number_format": "G/標準",
+              "address": "C4",
+              "value": null
+            }
+          ],
+          "row15_height": 14.7,
+          "sheet": "Target B"
+        }
+      ],
+      "sha_after": "0E3CF3B1C9E6E73E835C324B71602B50F708DF689944A3760E4B411959F3B457"
+    },
+    {
+      "sha_before": "6488DF60AAEB75A3F873062F495310B3C69CDEA10DA02C111BC3AFE798408EDC",
+      "path": "catalog/acceptance/issue38/probes/matrix-write/run1/result.xlsx",
+      "sheets": [
+        {
+          "row1_height": 14.7,
+          "columnA_width": 19.42,
+          "cells": [
+            {
+              "fill": 16777215.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "DO NOT READ THIS SHEET",
+              "size": 11.0,
+              "number_format": "G/標準",
+              "address": "A1",
+              "value": "DO NOT READ THIS SHEET"
+            },
+            {
+              "fill": 16777215.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "",
+              "size": 11.0,
+              "number_format": "G/標準",
+              "address": "B15",
+              "value": null
+            },
+            {
+              "fill": 16777215.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "WRONG_SHEET",
+              "size": 11.0,
+              "number_format": "G/標準",
+              "address": "C4",
+              "value": "WRONG_SHEET"
+            }
+          ],
+          "row15_height": 14.7,
+          "sheet": "Decoy"
+        },
+        {
+          "row1_height": 14.7,
+          "columnA_width": 19.42,
+          "cells": [
+            {
+              "fill": 16777215.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "KEEP TEMPLATE",
+              "size": 11.0,
+              "number_format": "G/標準",
+              "address": "A1",
+              "value": "KEEP TEMPLATE"
+            },
+            {
+              "fill": 16247773.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "=2+3",
+              "size": 11.0,
+              "number_format": "0.00",
+              "address": "B15",
+              "value": 5.0
+            },
+            {
+              "fill": 13431551.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "Alpha",
+              "size": 11.0,
+              "number_format": "G/標準",
+              "address": "C4",
+              "value": "Alpha"
+            }
+          ],
+          "row15_height": 14.7,
+          "sheet": "Target A"
+        },
+        {
+          "row1_height": 14.7,
+          "columnA_width": 19.42,
+          "cells": [
+            {
+              "fill": 16777215.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "KEEP TEMPLATE",
+              "size": 11.0,
+              "number_format": "G/標準",
+              "address": "A1",
+              "value": "KEEP TEMPLATE"
+            },
+            {
+              "fill": 16247773.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "=2+3",
+              "size": 11.0,
+              "number_format": "0.00",
+              "address": "B15",
+              "value": 5.0
+            },
+            {
+              "fill": 13431551.0,
+              "bold": false,
+              "font": "Yu Gothic",
+              "formula": "8",
+              "size": 11.0,
+              "number_format": "G/標準",
+              "address": "C4",
+              "value": 8.0
+            }
+          ],
+          "row15_height": 14.7,
+          "sheet": "Target B"
+        }
+      ],
+      "sha_after": "6488DF60AAEB75A3F873062F495310B3C69CDEA10DA02C111BC3AFE798408EDC"
+    }
+  ]
+}

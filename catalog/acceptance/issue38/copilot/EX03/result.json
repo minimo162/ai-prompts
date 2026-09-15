@@ -1,0 +1,11 @@
+{
+  "status": "FAIL_UNCAPTURED_EXIT_AND_MISSING_COMPARISON",
+  "requests": 1,
+  "version": "20260915-excel-r3",
+  "parameter_following": "Japanese filenames/sheets, rectangles and destination positions represented",
+  "partial_flow": true,
+  "uncaptured_command": "EXIT",
+  "pad": "NOT_RUN_UNVERIFIED_COMMAND",
+  "code_length": 3097,
+  "url": "https://m365.cloud.microsoft/chat/conversation/175edfb1-d41a-401d-a900-84d967a81ea8?es=SSR"
+}

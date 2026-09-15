@@ -1,0 +1,13 @@
+{
+  "stop_button_enabled": false,
+  "ready_label": true,
+  "start_enabled": false,
+  "foreground_refresh": "no change",
+  "next": "Need authoritative PAD run-end state; do not infer completion from previews",
+  "additional_run_requests": 0,
+  "modal_windows_observed": 0,
+  "pid": 24772,
+  "save_enabled": false,
+  "status": "COMPLETION_STILL_UNCONFIRMED",
+  "responding": true
+}

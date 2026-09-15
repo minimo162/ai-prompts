@@ -1,0 +1,13 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-15T09:11:09.8078912Z",
+    "flow_name":  "RobinIssue38ScalarCompare20260915A",
+    "source_robin":  "catalog/acceptance/issue38/probes/scalar-compare/read-base.robin",
+    "source_sha256":  "72f2d38011212512652d926831f98a68562f686392d54a875967db2ff2cde8b4",
+    "source_bytes":  606,
+    "paste_confirmed":  true,
+    "action_count_after_paste":  4,
+    "saved_confirmed":  true,
+    "clipboard_restored":  true,
+    "execution_requested":  false
+}

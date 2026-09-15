@@ -1,0 +1,127 @@
+PAD Robin Office・PDF
+
+OfficeとPDFは、PAD 2.71.115.26224、日本語UI、合成データ、専用フローで採取した既存資産です。対象ファイル、インスタンス、保存形式、読み書き範囲を依頼ごとに明示します。採取例の再貼付け・実行証拠と、新しいCopilotエージェントでの登録試験は別です。
+
+Excel（11バリアント）
+- 起動: 新規表示、既存読取り専用
+- 操作: セル書込み、単一セル読取り（TypedValues）、使用範囲読取り、A1:B2範囲読取り、T04のA1:C6範囲読取り、xlsx別名保存、終了
+- 原文と設定: catalog/actions/excel-*/、組合せ: catalog/flows/office-excel/default.robin、再開: catalog/flows/office-reopen/assembled.robin、T04: catalog/flows/excel-t04-read-range/roundtrip.robin
+- 実行確認: A1の日本語と100%を保持、使用範囲1×1、指定範囲2×2、T04のExcelData=6行×3列、T04入力ブックSHA-256不変。Sheet1選択とA1:C6読取りの別P3 probeも確認済み。Excelデータ反復も別probeで2回成功を確認した。条件抽出・別ブック書込みの独立例は未確認（T04の条件抽出→別xlsx正例は別記）。
+- 既存Excelを編集可能で開く追加採取: `Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\excel-catalog.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance`。原文`catalog/actions/excel-launch/open-editable.robin`（SHA-256: 1b55a963e33056ae4b0b0bb65af88550476f3c31717f3129b38fc3d3c5e7b82a）。
+- T04合成ブックを読み取り専用で開く追加採取: `Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\t04-filter-input.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelInstance`。原文`catalog/actions/excel-launch/t04-open-readonly.robin`（SHA-256: 673ba361d788bbfcac66ef4da3d8ba9e7f628620d9fcde10e9779412946db6e0）。
+- T04範囲読取り: `Excel.ReadFromExcel.ReadCells Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 EndColumn: $'''C''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ExcelData`。原文`catalog/actions/excel-read/t04-range-a1-c6.robin`（SHA-256: fe22fa6eb884429ffa8070305e4cf60d56f73fb307a5d9104e6c25574f92b219）。Dataシートをアクティブにした入力で、実行プレビューは6行・3列。シート名指定引数は未採取。
+- T04終了: `Excel.CloseExcel.Close Instance: ExcelInstance`。原文`catalog/actions/excel-close/t04-no-save.robin`（SHA-256: ec175730925eda1fef8376c2f4ebb5ef65899fddd9d299e40a2eb79e744a0638）。`catalog/flows/excel-t04-read-range/roundtrip.robin`へ組み合わせ、保存後に2回実行した。証拠は`catalog/evidence/t04-excel-read-range-run-1.json`、`t04-excel-read-range-run-2.json`。
+- T04条件抽出→別ブック保存（実機正例）: `catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin` は、読み取り専用でDataシートA1:C6を読み、`Variables.FilterDataTable` の列0=`対象`で抽出し、`Variables.ConvertDataTableToCSV`→`File.WriteText`で専用中間CSVへ保存した後、そのCSVを編集可能Excelで開き、`Excel.SaveExcel.SaveAs`で`normal-chat-t04-output.xlsx`へ別名保存して閉じる9アクション構成である。PADへ原文を設定し保存後、2回実行した。
+- T04期待結果: 入力`catalog/fixtures/excel/t04-filter-input.xlsx`（SHA-256 `1d0b3d3bfcc83b104b493cd5f3e6b74f5ec3de5cd51a27da6e103a1541678ce0`）は不変。出力シート`t04-filtered`は3行3列で、`対象/A/10`、`対象/C/25`、`対象/D/5`を含む。出力の実行ごとのファイルSHAはメタデータ差で変わるため、セル値・行数を論理照合する。初回のセル直接書込みで`_x000D_`が残った失敗出力は`catalog/evidence/normal-chat-t04-output-x000D-failure.xlsx`へ保全し、正例と混同しない。
+
+T04の貼付け用9アクション原文（PAD実測・2回実行）
+```text
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\t04-filter-input.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelInstance
+Excel.ReadFromExcel.ReadCells Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 EndColumn: $'''C''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ExcelData
+Variables.FilterDataTable DataTable: ExcelData FilterParameters: { ^['RULE', 'COLUMN', 'OPERATOR', 'VALUE'], [$'''''', 0, $'''Equal''', $'''対象'''] } MatchCase: True FilteredDataTable=> FilteredDataTable
+Variables.ConvertDataTableToCSV.DataTableToCSVCommonSeparator DataTable: FilteredDataTable IncludeColumnNames: False ColumnsSeparator: Variables.CSVColumnsSeparator.SystemDefault CSVText=> CSVText
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\t04-filtered.csv''' TextToWrite: CSVText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\t04-filtered.csv''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelInstance2
+Excel.SaveExcel.SaveAs Instance: ExcelInstance2 DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t04-output.xlsx'''
+Excel.CloseExcel.Close Instance: ExcelInstance2
+Excel.CloseExcel.Close Instance: ExcelInstance
+```
+- 原文ファイル: `catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin`（SHA-256 `d45925fb49ae74d8518b5acc046aee1477774ad4749132801957df3d02408353`）。この9行は説明用の擬似コードではなく、PADからコピーして空フローへ再貼付けした命令列である。
+- `ExcelInstance` と `ExcelInstance2` は別のExcelインスタンス。複数行CSVをセルへ直接書き込む方式は `_x000D_` 混入失敗のため採用しない。出力パスを変更する場合は、そのパスが存在し衝突時の設定が確認できることを別途確認する。
+
+P3追補: Excelデータ反復（別probe、現行bundleへ統合）
+- `t04-filter-input.xlsx` を読み取り専用で開き、A1:C6を`TypedValues`で`ExcelData`へ取得した後、`LOOP FOREACH CurrentItem IN ExcelData`の本体で`SET ExcelRowSeen TO CurrentItem`を実測した。原文`catalog/evidence/p3-excel-foreach-runtime-success-flow-20260911.robin`（SHA-256 `db98d5bfa837ea65e0e92f2412b02f3847e3541fff653078c2645ae427939166`）を無修正で保存・再コピーし、2回とも`ExcelData=6行, 3列`、最終`ExcelRowSeen=3列 { Status: 対象外, Item: E, Amount: 40 }`、Excel終了、エラーなしを確認した（`p3-excel-foreach-runtime-success-run1-20260911.json`、`run2-20260911.json`）。
+- 実測Robin:
+  `Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\Users\yuuki\ai-prompts\catalog\fixtures\excel\t04-filter-input.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelInstance`
+  `Excel.ReadFromExcel.ReadCells Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 EndColumn: $'''C''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ExcelData`
+  `LOOP FOREACH CurrentItem IN ExcelData`
+  `    SET ExcelRowSeen TO CurrentItem`
+  `END`
+  `Excel.CloseExcel.Close Instance: ExcelInstance`
+- 初回のループ設定境界と残留ブレークポイントによるタイムアウトは成功証跡へ混ぜず、`p3-excel-foreach-configuration-boundary-20260911.json` と実行別証跡に分離している。
+- `FilterParameters`の構造化引数は一般化せず、上記原文の3行目を逐語複写する。`$''''''`は`$`＋単一引用符6個の実測リテラルであり、引用符数を変更した行はこの正例の原文ではない。T04の出力先を変える場合も、FilterParameters行は変更しない。
+- 代表的なコピー原文（新規→書込み→単一セル読取り→別名保存→終了）:
+  `Excel.LaunchExcel.LaunchUnderExistingProcess Visible: True UseMachineLocale: False Instance=> ExcelInstance`
+  `Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: $'''OfficeCatalog 日本語 100%%''' Column: $'''A''' Row: 1`
+  `Excel.ReadFromExcel.ReadCell Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues CellValue=> ExcelData`
+  `Excel.SaveExcel.SaveAs Instance: ExcelInstance DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\excel-catalog.xlsx'''`
+  `Excel.CloseExcel.Close Instance: ExcelInstance`
+
+Word（7バリアント）
+- 起動: 新規表示、既存読取り専用
+- 操作: 文末書込み、全文読取り、全件リテラル置換、docx別名保存、保存しない終了
+- 原文: catalog/actions/word-*/、組合せ: catalog/flows/office-word/default.robin と office-reopen
+- 日本語・改行・対象外本文を照合し、元文書ハッシュ不変を確認した。表・書式・テンプレート・PDF出力は未確認。
+- 代表的なコピー原文:
+  `Word.LaunchWord.Launch Visible: True Instance=> WordInstance`
+  `Word.WriteToWord.WriteEndOfDocument Instance: WordInstance Text: $'''OfficeCatalog 日本語 100%%''' AppendNewLine: False`
+  `Word.ReadFromWord.Read Instance: WordInstance WordData=> WordData`
+  `Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\word-catalog.docx'''`
+  `Word.CloseWord.Close Instance: WordInstance`
+- 既存文書を開いて置換・別名保存する既存の実測原文（ReadOnly=True）:
+  `Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\word-catalog.docx''' Visible: True ReadOnly: True Instance=> WordInstance2`
+  `Word.FindAndReplaceWord.FindAndReplaceAllWithoutWildcards Instance: WordInstance2 TextToFind: $'''OfficeCatalog''' TextToReplaceWith: $'''OfficeVerified''' MatchCase: False MatchEntireWord: False`
+  `Word.SaveWord.SaveAs Instance: WordInstance2 DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\word-catalog.docx'''`
+  `Word.CloseWord.Close Instance: WordInstance2`
+- 原文の正本は catalog/actions/word-launch/open-readonly.robin、word-replace/all-literal.robin、word-save/as-docx-extension.robin、word-close/no-save.robin。既存Wordを編集可能で開く追加採取は `Word.LaunchWord.LaunchAndOpen Path: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\word-catalog.docx''' Visible: True ReadOnly: False Instance=> WordInstance`、原文`catalog/actions/word-launch/open-editable.robin`（SHA-256: d92644f9dccaafeee6dc41b497120a18a301317f010ccb7a78ae8df907e86939）。
+
+PowerPoint（7バリアント）
+- UI名は英語。新規／既存起動、末尾スライド追加、スライド番号指定書込み、全文読取り、pptx別名保存、終了。
+- `AddSlideAsLast` の SlideIndex を `WriteToSlideAtPosition` の SlidePosition へ渡す。
+- 原文: catalog/actions/powerpoint-*/、組合せ: catalog/flows/office-powerpoint/default.robin
+- スライド数1、文言、ネイティブPowerPointでの画像出力を確認。図形ID、座標、フォント指定はこの例にない。
+- 代表的なコピー原文:
+  `PowerPoint.LaunchPowerPoint.Launch Instance=> PowerPointInstance`
+  `PowerPoint.AddPowerPointSlide.AddSlideAsLast Instance: PowerPointInstance SlideIndex=> SlideIndex`
+  `PowerPoint.WriteToPowerPoint.WriteToSlideAtPosition Instance: PowerPointInstance Text: $'''OfficeCatalog 日本語 100%%''' AppendNewLine: False SlidePosition: SlideIndex`
+  `PowerPoint.ReadFromPowerPoint.Read Instance: PowerPointInstance PowerPointData=> PowerPointData`
+  `PowerPoint.SavePowerPoint.SaveAs Instance: PowerPointInstance DocumentFormat: PowerPoint.PowerPointFormat.PPTX DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\powerpoint-catalog.pptx'''`
+  `PowerPoint.ClosePowerPoint.Close Instance: PowerPointInstance`
+
+PDF（11バリアント）
+- テキスト抽出: 全ページ、2〜3ページ、2ページ、DetectLayout ON（4）。ページ境界で文字列がつながる実測がある。
+- テーブル抽出: 先頭行を列名にする／しない（2）。出力はPDFテーブル情報のリストで、先頭要素の `.DataTable` が表。
+- 画像抽出: 全ページ／1ページ（2）。合成画像160×80、`CatalogImage_0.png` の0はページ番号ではない。
+- ページ抽出: 2〜3ページ、新規出力、上書きしない（1）。
+- 統合: 2ファイル入力をA→B、B→Aで別採取（2）。この版・この入力では出力ページ順が入力リストと逆になった。3ファイル、変数リスト、別版へ一般化していない。
+- 原文: catalog/actions/pdf-*/、組合せ: catalog/flows/pdf-variants/、統合差分: catalog/flows/pdf-merge-order/roundtrip.robin
+- 代表的なコピー原文:
+  `Pdf.ExtractTextFromPDF.ExtractText PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' DetectLayout: False ExtractedText=> ExtractedPDFText`
+  `Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 3 DetectLayout: False ExtractedText=> ExtractedPDFText`
+  `Pdf.ExtractTablesFromPDF.ExtractTables PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' MultiPageTables: True SetFirstRowAsHeader: True ExtractedPDFTables=> ExtractedPDFTables`
+  `Pdf.ExtractImagesFromPDF.ExtractImagesFromPage PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' PageNumber: 1 ImagesName: $'''CatalogImage''' ImagesFolder: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\images-page1'''`
+  `Pdf.ExtractPages PDFFile: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf''' PageSelection: $'''2-3''' ExtractedPDFPath: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\pages-2-3.pdf''' IfFileExists: Pdf.IfFileExists.DoNotModifyFiles ExtractedPDFFile=> ExtractedPDF`
+  `Pdf.MergeFiles PDFFiles: ['C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-a.pdf', 'C:\\Temp\\AiPromptsPdfCatalog_20260907\\source-b.pdf'] MergedPDFPath: $'''C:\\Temp\\AiPromptsPdfCatalog_20260907\\merged-a-b.pdf''' IfFileExists: Pdf.IfFileExists.DoNotModifyFiles PasswordDelimiter: $''',''' MergedPDF=> MergedPDF`
+- 実行証拠: catalog/evidence/pdf/results.json。入力PDFの描画、抽出値、ページ順、入力ハッシュを照合した。暗号化・スキャン・フォーム・署名・複数ページ表の精度は未確認。
+
+T07のページ2単独抽出（リポジトリfixture）
+- `RobinKnowledgeT07Final_20260910` で次の2アクションを貼り付け、保存、2回実行し、`PAGE_TOKEN_A2`を含み`PAGE_TOKEN_A1`を含まない出力を確認した。
+  `Pdf.ExtractTextFromPDF.ExtractTextFromPageRange PDFFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\pdf\\source-a.pdf''' FromPageNumber: 2 ToPageNumber: 2 DetectLayout: False ExtractedText=> ExtractedPDFText`
+  `File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t07-final.txt''' TextToWrite: ExtractedPDFText AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8`
+- 組合せ原文は `catalog/generated/normal-chat-t07-20260910-final/robin.txt`、SHA-256 `47a33ef2067bd37009187758e16fc36daa0f5447093b51e83e984e1d8fd484c9`。貼付け・実行証拠は `catalog/evidence/normal-chat-t07-final-paste.json` と `normal-chat-t07-final-run-1.json`。
+
+詳細記録: docs/office-action-capture.md、docs/pdf-action-capture.md。未確認のモードを、確認済みの完成例へ混ぜない。
+
+2026-09-12の追加採取: 別名保存（SaveAs）と既存ファイルの衝突
+- 受入済みのT05（Excel）とT06（Word）の4行から出力名だけを`p3-saveas-collision-20260912.xlsx`／`.docx`へ変えた別probeを新しい空フローへ貼り付け（再コピー原文 `catalog/evidence/p3-saveas-xlsx-recopy-20260912.robin` SHA-256 `043e230a85884b3fc91c68d5bcfb08f92ba2d8d9ab747479a7783a3554d5a02f`、`p3-saveas-docx-recopy-20260912.robin` SHA-256 `261381f57963ee441c36329e9423c3d7e5ae4f8b8c069b6aae3471f2f8705c99`）、1回目は出力なし、2回目は1回目の出力を残したまま実行した。
+- `Excel.SaveExcel.SaveAs ... DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook`: 2回目も成功で、確認なしに既存ファイルを上書きした（更新時刻が2回目の実行時刻、B2=T05-Changed）。原文に上書き有無の引数は無い。
+- `Word.SaveWord.SaveAs ... DocumentFormat: Word.WordFormat.FromExtension`: 2回目も成功で、既存ファイルを上書きした（SHAと更新時刻が変化、本文はOfficeCatalog→T06Replaced）。
+- 元入力（excel-catalog.xlsx／word-catalog.docx）のSHAは不変、Excel／Wordプロセスは残らない。証拠: `catalog/evidence/p3-saveas-collision-acceptance-20260912.json`。
+- 生成時の扱い: 別名保存は既存出力を無警告で上書きするため、残す必要がある既存ファイルは実行前に退避するよう明示する。`File.WriteText`の`IfFileExists`のような明示引数はExcel／WordのSaveAsには無い。未確認: PowerPointのSaveAs、読み取り専用・他プロセスで開かれている出力先、PDF出力。
+
+
+Issue #38 Excel追補 / 20260915-excel-r1（候補、通常Copilot生成・PAD実行NOT_RUN）
+本追補の現在の能力と過去のT04/P3履歴を分離する。過去の「読取りにシート名指定引数は未採取」は、別アクションのシート切替が未採取という意味ではない。
+採取済み完全原文（入力インスタンスExcelInstance、存在するシート名Sheet1）:
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelInstance Name: $'''Sheet1'''
+原文根拠: catalog/evidence/p3-excel-sheet-probe-20260910.robin、SHA-256 c7f3fa0408463de8ee36bf5b865720c64799f4a92cbf2a3b7efee4cfa1907c29。対応JSONおよびrun1/run2はPAD 2.71.115.26224、日本語、Power Fx OFF、編集可能で開いたexcel-catalog.xlsxのSheet1選択を保存・2回実行した別probe。JSONのpass_probe_not_bundledは当時の記録であり、本候補では上記全文を収録した。
+前提: 先にExcel起動で取得したインスタンス、既存ワークシート。原本の初期選択を変えて保存する準備は不要。ReadCellsの直前にこの独立アクションを配置する。
+未確認境界: 読取り専用＋別シート初期表示、日本語別名、今回の複数ブック転記全体はEX01〜EX03で未実施。旧probeのPASSをこの条件へ転記しない。以下の変更可能箇所は候補のパラメーター契約であり一般化済み実測ではない。
+固定構造: Excel.SetActiveWorksheet.ActivateWorksheetByName / Instance / Name、文字列リテラルの引用規則。変更可能データ: 先に定義したインスタンスと既存シート名。未知モード・未採取引数を追加しない。
+Excel.ReadFromExcel.ReadCellsのStartColumn/EndColumnは文字列、StartRow/EndRowは正の整数。TypedValues、FirstLineIsHeader: FalseとRangeValueのDataTable型を維持する。範囲は上下左右順・Excel限界内・有限件数、転記先も矩形が収まることを確認する。
+入出力パスはローカル合成xlsxのみ、引用符・パーセント・エスケープを含む新しい特殊条件、結合セル、保護シート、マクロ、日付・空白・真偽値の転記は本fixture外で未確認。EX02/03の値は日本語を含むテキストと数値（0、負数、小数）。数式の計算結果取得も今回の入力fixtureには含めない。
+原本は入力2ブックとテンプレート。作業用コピーを先に新規作成し、パスをフローへ渡す。作業コピーへ値のみ転記し、別の未存在xlsxへ保存後、閉じて読取り専用で再開し対象シートを再選択して照合する。
+不足工程: 既存のExcel.WriteToExcel.WriteCellは文字列リテラルの単一セルだけを実測。DataTableをValueへ渡す矩形展開、数値/テキストを保つ変数書込み、有限行列反復の添字・型・座標は未採取/未実測。単一セル原文を根拠に矩形転記済みとは扱わない。
+追加採取: 新規専用PADフローで「Excelワークシートに書き込む」のValueへ取得DataTable、指定シートと開始セルを設定し、コピー原文・設定・保存再コピー・全対象セル/型を実測する。範囲展開が使えない場合だけ有限行列反復と型付きセル書込みを採取・2回検証する。未採取のWriteRange等を捏造しない。
+値転記と完全コピーを区別し、元数式・書式・コメント・画像を運ぶ操作は対象外。転記先の書式や対象外セル/数式の保全検査は必要であり、完全コピー機能とは別。
+SaveAsは既存ファイルを無警告で上書きした過去実測がある。未存在の専用出力、原本/作業コピーとの非同一、既存衝突時停止を事前確認し、未確認のDoNotOverwrite引数を追加しない。原本SHA、作業コピーの由来、Run別成果物を検証者が照合する。

@@ -1,0 +1,19 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-15T07:14:06.0010038Z",
+    "flow_name":  "RobinIssue38MatrixRuntime20260915A",
+    "process_id":  1576,
+    "source_robin":  "catalog/acceptance/issue38/probes/matrix-write/assembled-probe-rev2.robin",
+    "source_sha256":  "46ca4731a2c83c8b5a9e0ad069a1da72f11a7e6030a45a2352c37d11812a57aa",
+    "source_bytes":  2891,
+    "empty_before_paste":  true,
+    "paste_confirmed":  true,
+    "visible_action_count":  7,
+    "designer_action_count":  21,
+    "designer_status":  "21 選択されたアクション",
+    "virtualized_list_false_negative":  true,
+    "saved_confirmed":  false,
+    "execution_requested":  false,
+    "clipboard_restoration":  "newer_clipboard_preserved",
+    "clipboard_all_format_raw_equality":  "NOT_ASSESSED"
+}

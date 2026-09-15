@@ -1,0 +1,15 @@
+{
+  "empty_flow_saved": true,
+  "hwnd": 3803424,
+  "pid": 24772,
+  "status": "PASTE_REFUSED_BEFORE_INPUT",
+  "recopy": "NOT_CREATED; action list empty",
+  "flow": "RobinIssue38OutputGuard20260915A",
+  "actions": 0,
+  "source": "assembled.robin",
+  "run_requests": 0,
+  "message": "PAD_CLIPBOARD: unsupported native format; paste refused",
+  "clipboard_overwritten": false,
+  "expected_plan": "plan.json",
+  "remaining": "Use a clipboard state the existing preservation helper supports, or a supported UI configuration path; do not bypass preservation"
+}

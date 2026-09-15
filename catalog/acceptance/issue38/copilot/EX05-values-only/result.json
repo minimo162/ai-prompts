@@ -1,0 +1,11 @@
+{
+  "case": "EX05-values-only",
+  "version": "20260915-excel-r3",
+  "generation_scope": "PASS_SCOPE_ONLY_NO_ADVANCED_OPERATIONS_REQUIRED",
+  "full_flow": "NOT_ACHIEVED_MISSING_GUARD_AND_COMPARISON",
+  "pad": "NOT_APPLICABLE_NO_CODE",
+  "code_buttons": 0,
+  "url": "https://m365.cloud.microsoft/chat/conversation/c154dcc6-8bea-4259-a08b-c6a15d6c15b4?es=SSR",
+  "reason": "Recognizes values-only; does not require full-copy/table expansion/row deletion. Refuses because guard and compare composition missing.",
+  "response_utf16": 1258
+}

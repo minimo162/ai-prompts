@@ -1,0 +1,30 @@
+{
+  "guard": {
+    "composition": "NOT_MEASURED",
+    "branch": "catalog/evidence/p3-else-probe-20260910.robin",
+    "exists": "catalog/evidence/p3-file-exists-probe-20260910.robin"
+  },
+  "status": "PARTIAL_EVIDENCE_AUDIT",
+  "scalar_read": {
+    "raw": "catalog/evidence/c-cell-read-20260914v/captured.robin",
+    "in_r3_bundle": false,
+    "instruction": "SET CellReadValue TO DataTable[0][0]",
+    "sha256": "aacd4c595c7226d4445125074bbb6c71dd7d329d4fd4b752c5b61c1d55fd08c3",
+    "historical_scope": "row0 column0 Text; saved reopened recopied and two runs; variable indexes other types unconfirmed"
+  },
+  "current_native": {
+    "accessibility": "null",
+    "runs": 0,
+    "window_enumeration": "PAD Console and two dedicated designers returned",
+    "typing": "one type_text request; requested name not visible on followup",
+    "route": "computer-use sky",
+    "new_flow_dialog": "opened; PowerFx OFF observed; create not clicked",
+    "screenshot": "available"
+  },
+  "remaining": [
+    "Capture and measure safe conditional branch",
+    "Measure comparison indexes and type behavior",
+    "EX01 generated code native acceptance",
+    "EX03-EX05 generation"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "status": "COMPLETION_UNCONFIRMED",
+  "designer": "ready",
+  "additional_run_requests": 0,
+  "next": "Runtime must expose authoritative completion and available Run before Run2; no restart or rerun solely from timeout",
+  "console": "currently editing",
+  "debug_commands": {
+    "run": false,
+    "stop": false,
+    "pause": false
+  }
+}

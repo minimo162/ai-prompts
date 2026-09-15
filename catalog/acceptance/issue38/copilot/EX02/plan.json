@@ -1,0 +1,9 @@
+{
+  "case": "EX02",
+  "version": "20260915-excel-r3",
+  "max_requests": 1,
+  "timeout_seconds": 180,
+  "unknown_result": "observe same request; no resend",
+  "max_pad_runs": 2,
+  "run2": "only after Run1 saved/reconciled"
+}

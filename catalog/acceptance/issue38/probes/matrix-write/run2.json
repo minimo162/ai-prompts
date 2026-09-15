@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-15T09:05:17.9086570Z",
+  "flow_name": "RobinIssue38MatrixRuntime20260915A",
+  "run_status": "success",
+  "timeout_seconds": 120,
+  "ready_observed": true,
+  "start_enabled_after": true,
+  "variable_previews": [
+    "2 行, 3 列",
+    "3 行, 2 列",
+    "Excel インスタンス",
+    "Excel インスタンス",
+    "2 行, 3 列",
+    "3 行, 2 列",
+    "Excel インスタンス",
+    "Excel インスタンス"
+  ]
+}

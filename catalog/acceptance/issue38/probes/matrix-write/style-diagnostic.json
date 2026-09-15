@@ -1,0 +1,170 @@
+{
+  "Decoy": {
+    "A1": {
+      "font": {
+        "template": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=None, family=None, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None",
+        "output": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=128, family=3.0, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None"
+      },
+      "border": {
+        "template": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=None, right=None, top=None, bottom=None, diagonal=None, vertical=None, horizontal=None",
+        "output": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, right=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, top=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, bottom=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, diagonal=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, vertical=None, horizontal=None"
+      }
+    },
+    "B15": {
+      "font": {
+        "template": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=None, family=None, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None",
+        "output": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=128, family=3.0, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None"
+      },
+      "border": {
+        "template": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=None, right=None, top=None, bottom=None, diagonal=None, vertical=None, horizontal=None",
+        "output": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, right=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, top=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, bottom=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, diagonal=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, vertical=None, horizontal=None"
+      }
+    },
+    "C4": {
+      "font": {
+        "template": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=None, family=None, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None",
+        "output": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=128, family=3.0, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None"
+      },
+      "border": {
+        "template": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=None, right=None, top=None, bottom=None, diagonal=None, vertical=None, horizontal=None",
+        "output": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, right=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, top=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, bottom=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, diagonal=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, vertical=None, horizontal=None"
+      }
+    },
+    "row1": {
+      "template": {
+        "ht": "22",
+        "customHeight": "1"
+      },
+      "output": {
+        "ht": "14.65",
+        "customHeight": "1"
+      }
+    },
+    "columnA": {
+      "template": {
+        "width": "20",
+        "customWidth": "1",
+        "min": "1",
+        "max": "1"
+      },
+      "output": {
+        "width": "20",
+        "customWidth": "1",
+        "min": "1",
+        "max": "10"
+      }
+    }
+  },
+  "Target A": {
+    "A1": {
+      "font": {
+        "template": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=None, family=None, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None",
+        "output": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=128, family=3.0, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None"
+      },
+      "border": {
+        "template": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=None, right=None, top=None, bottom=None, diagonal=None, vertical=None, horizontal=None",
+        "output": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, right=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, top=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, bottom=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, diagonal=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, vertical=None, horizontal=None"
+      }
+    },
+    "B15": {
+      "font": {
+        "template": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=None, family=None, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None",
+        "output": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=128, family=3.0, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None"
+      },
+      "border": {
+        "template": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=None, right=None, top=None, bottom=None, diagonal=None, vertical=None, horizontal=None",
+        "output": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, right=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, top=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, bottom=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, diagonal=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, vertical=None, horizontal=None"
+      }
+    },
+    "C4": {
+      "font": {
+        "template": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=None, family=None, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None",
+        "output": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=128, family=3.0, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None"
+      },
+      "border": {
+        "template": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=None, right=None, top=None, bottom=None, diagonal=None, vertical=None, horizontal=None",
+        "output": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, right=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, top=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, bottom=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, diagonal=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, vertical=None, horizontal=None"
+      }
+    },
+    "row1": {
+      "template": {
+        "ht": "22",
+        "customHeight": "1"
+      },
+      "output": {
+        "ht": "14.65",
+        "customHeight": "1"
+      }
+    },
+    "columnA": {
+      "template": {
+        "width": "20",
+        "customWidth": "1",
+        "min": "1",
+        "max": "1"
+      },
+      "output": {
+        "width": "20",
+        "customWidth": "1",
+        "min": "1",
+        "max": "10"
+      }
+    }
+  },
+  "Target B": {
+    "A1": {
+      "font": {
+        "template": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=None, family=None, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None",
+        "output": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=128, family=3.0, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None"
+      },
+      "border": {
+        "template": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=None, right=None, top=None, bottom=None, diagonal=None, vertical=None, horizontal=None",
+        "output": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, right=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, top=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, bottom=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, diagonal=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, vertical=None, horizontal=None"
+      }
+    },
+    "B15": {
+      "font": {
+        "template": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=None, family=None, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None",
+        "output": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=128, family=3.0, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None"
+      },
+      "border": {
+        "template": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=None, right=None, top=None, bottom=None, diagonal=None, vertical=None, horizontal=None",
+        "output": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, right=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, top=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, bottom=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, diagonal=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, vertical=None, horizontal=None"
+      }
+    },
+    "C4": {
+      "font": {
+        "template": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=None, family=None, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None",
+        "output": "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=128, family=3.0, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None"
+      },
+      "border": {
+        "template": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=None, right=None, top=None, bottom=None, diagonal=None, vertical=None, horizontal=None",
+        "output": "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, right=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, top=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, bottom=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, diagonal=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, vertical=None, horizontal=None"
+      }
+    },
+    "row1": {
+      "template": {
+        "ht": "22",
+        "customHeight": "1"
+      },
+      "output": {
+        "ht": "14.65",
+        "customHeight": "1"
+      }
+    },
+    "columnA": {
+      "template": {
+        "width": "20",
+        "customWidth": "1",
+        "min": "1",
+        "max": "1"
+      },
+      "output": {
+        "width": "20",
+        "customWidth": "1",
+        "min": "1",
+        "max": "10"
+      }
+    }
+  }
+}

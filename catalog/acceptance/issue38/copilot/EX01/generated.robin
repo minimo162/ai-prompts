@@ -1,0 +1,55 @@
+前提・対象範囲・未確認点
+目的: input-a.xlsx を読取り専用で開き、初期表示シートに依存せず Source A シートへ明示切替後、B2:D3 を TypedValues・ヘッダーなしで読み取り、ExcelData に保持して保存せず閉じる。
+入力ファイル: C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\fixtures\EX02\input-a.xlsx
+出力: ExcelData（DataTable）
+Power Fx: OFF 前提。
+根拠:
+Excel読取り専用起動: PAD-Robin-04-Office-PDF の Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess ... ReadOnly: True
+シート切替: Excel.SetActiveWorksheet.ActivateWorksheetByName
+範囲読取り: Excel.ReadFromExcel.ReadCells ... TypedValues ... FirstLineIsHeader: False
+保存せず終了: Excel.CloseExcel.Close
+未確認:
+Source A というシート名自体の実在は依頼前提。
+このEX02 fixtureでの実行結果は未採取。
+組合せは既存の採取済みアクションを利用した候補であり、このEX02条件でのPAD実行証跡はナレッジにありません。
+PADで先に作る設定
+事前作成不要。
+使用変数:
+ExcelInstance（Excelインスタンス）
+ExcelData（DataTable）
+入力ブックは読取り専用で開きます。
+初期表示シートは利用せず、Source A を明示選択します。
+
+対象サブフロー: Main
+ 置換範囲: 新規貼付け
+
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX02\\input-a.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelInstance
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelInstance Name: $'''Source A'''
+Excel.ReadFromExcel.ReadCells Instance: ExcelInstance StartColumn: $'''B''' StartRow: 2 EndColumn: $'''D''' EndRow: 3 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ExcelData
+Excel.CloseExcel.Close Instance: ExcelInstance
+
+
+コードブロックにコピー機能が表示されている場合は、それでコード部分だけをコピーし、PADの対象サブフローへ貼り付けてください。
+
+デザイナー上の確認方法
+アクション数が4個であることを確認。
+順序が以下と一致することを確認。
+Excel起動（読取り専用）
+シート切替（Source A）
+範囲読取り（B2:D3）
+Excel終了
+ExcelData の型が DataTable として認識されることを確認。
+貼付け後に Designer エラーが出ていないことを確認。
+合成データでの実行・照合
+input-a.xlsx を事前に開かず実行。
+フロー実行後、変数ペインで ExcelData を確認。
+期待値は Source A シートの B2:D3 の2行×3列が取得されていること。
+入力ファイルは読取り専用で開かれ、保存処理は実行されないこと。
+再実行後も入力ファイルの更新日時や内容が変化していないことを確認。
+
+確認済み原文根拠:
+
+シート切替: catalog/evidence/p3-excel-sheet-probe-20260910.robin
+読取り専用起動: catalog/actions/excel-launch/t04-open-readonly.robin
+ReadCells(TypedValues, FirstLineIsHeader=False): catalog/actions/excel-read/t04-range-a1-c6.robin
+保存せず終了: catalog/actions/excel-close/t04-no-save.robin

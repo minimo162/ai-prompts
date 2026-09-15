@@ -1,0 +1,19 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-15T07:47:13.1398425Z",
+    "flow_name":  "RobinIssue38EX01Copilot20260915A",
+    "process_id":  12576,
+    "source_robin":  "catalog/acceptance/issue38/copilot/EX01/code-copy-completed.robin",
+    "source_sha256":  "72f2d38011212512652d926831f98a68562f686392d54a875967db2ff2cde8b4",
+    "source_bytes":  606,
+    "empty_before_paste":  true,
+    "paste_confirmed":  true,
+    "visible_action_count":  4,
+    "designer_action_count":  4,
+    "designer_status":  "4 選択されたアクション",
+    "virtualized_list_false_negative":  false,
+    "saved_confirmed":  false,
+    "execution_requested":  false,
+    "clipboard_restoration":  "newer_clipboard_preserved",
+    "clipboard_all_format_raw_equality":  "NOT_ASSESSED"
+}

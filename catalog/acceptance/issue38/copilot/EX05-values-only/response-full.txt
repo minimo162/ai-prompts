@@ -1,0 +1,50 @@
+前提・対象範囲・未確認点
+
+依頼内容は理解しました。
+
+入力A: fixtures\EX02\input-a.xlsx の Source A シート B2:D3 を TypedValues / ヘッダーなしで取得
+入力B: fixtures\EX02\input-b.xlsx の Source B シート A3:B5 を TypedValues / ヘッダーなしで取得
+作業コピー: runs\EX02-attempt1\work.xlsx
+転記先:
+Target A シート C4
+Target B シート B3
+出力: runs\EX02-attempt1\result.xlsx
+値のみ転記
+入力は読取り専用
+出力が既に存在する場合は保存前ではなく、書込み・保存前に停止
+保存後に再読取りして値・型・位置照合
+
+ただし、今回の bundle に含まれる実測根拠では、
+
+Excel.SetActiveWorksheet.ActivateWorksheetByName は採取済み
+Excel.ReadFromExcel.ReadCells の TypedValues 読取りは採取済み
+Excel.WriteToExcel.WriteCell へ DataTable を渡す矩形転記は Issue #38 の r3 追補として採取済み候補・組合せ実測記録あり
+Excel.SaveExcel.SaveAs は採取済み
+
+一方で、依頼完了に必要な次の工程について、今回の bundle では貼付け用完成フローとして組み立てるための実測原文が不足しています。
+
+出力 result.xlsx の存在確認後に安全停止する完成パターン
+値・型・位置を自動比較して不一致時に停止する完成パターン
+EX02 用 21 アクション実測組合せの原文そのもの
+出力非存在確認 → 書込み停止 → SaveAs 抑止までを含む完成原文
+
+ナレッジ自身も、Issue #38 r3 を「通常Copilot生成・EX01〜EX05受入 NOT_RUN」「転記全体が検証済みとは記載しない」と区別しています。
+
+そのため、この依頼に対しては貼付け用 Robin を生成できません。
+
+追加採取が必要な内容
+
+次のいずれかを提示してください。
+
+EX02 実測済み 21 アクション原文（または generated.robin）
+catalog/acceptance/issue38/probes/matrix-write/ 一式
+EX02 受入で使用した完全 Robin 原文
+出力存在時停止と再読取り照合を含む採取済みフロー原文
+現時点の判定
+値取得: 根拠あり
+シート切替: 根拠あり
+DataTable 矩形転記: r3追補の採取記録あり
+出力衝突時停止: 完成原文不足
+保存後の値・型・位置照合: 完成原文不足
+
+そのため、要求された完了条件を満たす貼付け用 Robin は未確認として保留します。コードブロックは返しません。

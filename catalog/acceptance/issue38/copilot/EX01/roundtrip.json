@@ -1,0 +1,10 @@
+{
+  "raw_bytes_equal": false,
+  "source_bytes": 606,
+  "recopy_bytes": 611,
+  "source_crlf": 0,
+  "recopy_crlf": 4,
+  "instruction_lines_equal": true,
+  "manual_changes": false,
+  "saved": true
+}
