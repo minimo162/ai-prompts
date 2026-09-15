@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const requestedVersion=process.argv[2] ?? '20260915-excel-r1';
-assert.ok(['20260915-excel-r1','20260915-excel-r2','20260915-excel-r3','20260915-excel-r4'].includes(requestedVersion));
+assert.ok(['20260915-excel-r1','20260915-excel-r2','20260915-excel-r3','20260915-excel-r4','20260915-excel-r5'].includes(requestedVersion));
 const version=path.join(root,'copilot/versions',requestedVersion);
 const read=p=>fs.readFileSync(p);
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
@@ -44,7 +44,7 @@ if(requestedVersion!=='20260915-excel-r1'){
   for(const n of ['00-Index','04-Office-PDF','06-Examples']){
     const content=text(path.join(version,`knowledge/PAD-Robin-${n}.txt`));
     assert.ok(content.includes(write.toString('utf8').trimEnd()));
-    if(requestedVersion==='20260915-excel-r4') {
+    if(['20260915-excel-r4','20260915-excel-r5'].includes(requestedVersion)) {
       assert.ok(content.includes('型識別アクション・厳密型比較のPAD原文は未採取'));
       assert.ok(content.includes('書式・寸法558差分のFAIL'));
       assert.ok(content.includes('2Run終了を観測済み'));
@@ -62,6 +62,23 @@ if(requestedVersion==='20260915-excel-r4') {
   }
   assert.equal(manifest.evidence.type_comparison,'NOT_CAPTURED_NOT_PROVEN');
   assert.equal(manifest.status,'FROZEN_CANDIDATE_TYPE_GAP_NOT_ACCEPTED');
+}
+if(requestedVersion==='20260915-excel-r5') {
+  for(const [p,h] of Object.entries(manifest.evidence_inputs)) assert.equal(sha(read(path.join(root,p))),h,p);
+  const typeRaw=read(path.join(root,'catalog/acceptance/issue38/probes/datatable-type-identity/captured-final.robin'));
+  assert.equal(sha(typeRaw),'02d664b5ae246bd57e2b44d454a5cd3cb01991a78b6fff8548d208759f1b1fb6');
+  assert.ok(bundle.toString('utf8').includes(typeRaw.toString('utf8').trimEnd()),'full measured DataTable type primitive included');
+  assert.ok(instruction.includes('確認済みなのはTypeProbe!A2:B2の数値1と文字列"1"'));
+  assert.ok(instruction.includes('日付、空白、真偽値、エラー、数式結果、任意オブジェクト、他PC/PAD版へ一般化しません'));
+  assert.ok(!instruction.includes('GetType('));
+  const examples=text(path.join(version,'knowledge/PAD-Robin-06-Examples.txt'));
+  assert.equal((examples.match(/_ValueTypeMatch TO SourceCellJson = SavedCellJson/g) ?? []).length,12);
+  assert.ok(examples.includes('書式・寸法558差分FAILを保持'));
+  assert.equal(manifest.evidence.type_comparison,'DATATABLE_NUMBER_TEXT_JSON_IDENTITY_TWO_RUNS_SCOPED');
+  assert.equal(manifest.evidence.type_comparison_sha256,sha(typeRaw));
+  assert.equal(manifest.status,'FROZEN_CANDIDATE_SCOPED_TYPE_IDENTITY_NOT_LIVE_ACCEPTED');
+  assert.equal(manifest.base_candidate,'20260915-excel-r4');
+  assert.equal(manifest.base_commit,'78ccbcf10551542d7891ac25af6a2445a3381443');
 }
 assert.equal(sha(read(frozen)),manifest.acceptance_freeze_sha256);
 for(const [p,h] of Object.entries(JSON.parse(read(frozen)).files)) assert.equal(sha(read(path.join(path.dirname(frozen),p))),h,p);

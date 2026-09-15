@@ -1,0 +1,52 @@
+# Issue #38 / EX02 r5 実受入レビュー
+
+結論は **不受入** です。通常 M365 Copilot Chat への同版指示全文＋bundle実添付と1回の生成・原文採取までは完了しましたが、コードコピー原文の末尾に単独のバッククォート1行が追加されました。生成物は修正せず、Power Fx OFF の専用空フローへ1回だけ貼り付けました。PADはアクションを取り込まず、0件のままでした。このため保存・再コピー・2Run・12セル照合・1セル型負例は実施していません。
+
+## 固定版
+
+- 版: `20260915-excel-r5`
+- base commit: `78ccbcf10551542d7891ac25af6a2445a3381443`
+- 指示 SHA-256: `fe57e45c170fcdfe8f94d8e23f9cb58f00d5b54ae4abe35a43189767032b5aaa`
+- bundle SHA-256: `2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3`
+- 送信本文 SHA-256: `03caf7342e8b5cb33264c4c4ad1fc01f8ae8e5553e151d8c2800ffeed0d153d5`
+- Copilotコードコピー SHA-256: `c26b5c6cf42b66fecb1272222b64c2ab7aaa38921802945d9a58d7636c6a7dec`
+
+r4、固定EX02依頼、grader-only期待値、spec、3 fixture、78ccbcfの型probe原文・受入証跡は作業後も作業前SHAと一致しています。成功済みprobeの再採取はしていません。
+
+## 実Copilot
+
+- 通常 M365 Copilot Chat、Think Deeper。
+- 同版bundle `PAD-Robin-Knowledge-Bundle.txt` を実添付。
+- 本文は同版指示全文＋未変更EX02依頼。`expected.json` は送っていません。
+- 会話: <https://m365.cloud.microsoft/chat/conversation/40ad4cdc-012b-45bb-a13f-97b768d921ba?es=SSR>
+- 生成要求は固定上限どおり1回だけです。
+- 応答は安定後に全文と唯一のコードコピーを保存しました。Copilot応答自体も「貼付け・実行未確認」と558差分を明記しています。
+
+## 主要差分
+
+凍結済み87行構成との差分は末尾1行だけです。
+
+```diff
+     SET TargetB_C5_ValueTypeMatch TO SourceCellJson = SavedCellJson
+     SET TransferState TO $'''SAVED_REOPENED_12_JSON_COMPARISONS_READY'''
+ END
++`
+```
+
+この1行を削れば凍結構成と一致しますが、それは生成物の手直しになるため実施していません。出力存在ガード、ELSE内の全Excel処理、入力読取り専用、1 SaveAs、2書込み、24 JSON化、12結果変数、削除・shell・Web操作なしは静的に確認しました。これは副作用範囲の確認であり、構文受入や実行成功ではありません。
+
+## PAD
+
+- 新規の Power Fx OFF フロー `無題 (3)`、Main、開始時0アクション。
+- M365の唯一の「コードをコピー」から得た原文と保存済み `generated.robin` が同一SHAであることを確認。
+- Mainのコンテキストメニューから1回だけ無修正貼り付け。
+- 6秒後も0アクション。エラーダイアログやエラー文は表示されませんでした。
+- 単独バッククォートが最有力原因ですが、PADのエラー文がないため原因確定とはしません。
+
+0アクションのため、保存・再コピーや実行を行っても生成フローの受入にはならず、そこで停止しました。既存probeや外部比較の成功は転用していません。
+
+## 受入と残件
+
+受入可否は `NOT_ACCEPTED_GENERATED_ROBIN_NOT_IMPORTABLE_UNMODIFIED` です。Run1/Run2、保存・クローズ・読取り専用再読込、12セルの値・型・位置・固定期待値照合、正例出力からの1セル型負例はいずれも `NOT_RUN` です。正例出力がないため、手組み出力で負例を代用していません。
+
+旧matrix-writeの558書式・寸法差分は未解決のまま保持し、全体PASSへ読み替えていません。次に進むには、今回の原文を修正せず、別途許可された新しい生成サイクルで余分な末尾トークンのないコードコピーを得る必要があります。

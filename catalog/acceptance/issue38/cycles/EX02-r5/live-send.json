@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "test_id": "EX02-R5-G1",
+  "sent_at": "2026-09-15T14:01:39.592Z",
+  "browser": "Microsoft Edge CDP",
+  "target": {
+    "id": "387E49D0D15E4E647B6C0B7E9009E169",
+    "url_before_send": "https://m365.cloud.microsoft/chat/?es=SSR",
+    "title_before_send": "チャット | Microsoft Copilot"
+  },
+  "local_precheck_immediately_before_send": {
+    "instruction_sha256": "fe57e45c170fcdfe8f94d8e23f9cb58f00d5b54ae4abe35a43189767032b5aaa",
+    "bundle_sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3",
+    "submitted_body_sha256": "03caf7342e8b5cb33264c4c4ad1fc01f8ae8e5553e151d8c2800ffeed0d153d5",
+    "template_sha256": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+    "work_sha256": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+    "result_exists": false
+  },
+  "ui_gate": {
+    "ok": true,
+    "body_match": true,
+    "attachment": true,
+    "pending": false,
+    "model": [
+      "Think Deeper"
+    ],
+    "send_button_count": 1
+  },
+  "click": {
+    "clicked": true
+  },
+  "after_send": {
+    "url": "https://m365.cloud.microsoft/chat/?es=SSR",
+    "title": "チャット | Microsoft Copilot",
+    "editor_count": 1,
+    "editor_raw_chars": 1,
+    "editor_normalized_chars": 1,
+    "editor_empty": false,
+    "file_input_count": 1,
+    "file_input_names": [
+      []
+    ],
+    "file_input_accept": [
+      ".doc,application/msword,.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docm,application/vnd.ms-word.document.macroEnabled.12,.xls,application/vnd.ms-excel,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.ppt,application/vnd.ms-powerpoint,.pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation,.txt,text/plain,.csv,text/csv,.pdf,application/pdf,.rtf,application/rtf,.loop,application/vnd.microsoft.loop,.fluid,application/vnd.microsoft.fluid,.tsv,text/tab-separated-values,.html,text/html,.md,text/markdown,.xml,application/xml,.c,.yaml,application/yaml,.php,.sh,application/x-sh,.dart,.css,text/css,.lua,.config,.utf8,.htm,.cpp,.yml,.log,.h,.bash,.ini,.json,application/json,.java,text/x-java-source,.pl,.rs,.js,application/javascript,.py,.tsx,.cs,.jsx,text/jscript,.sql,application/sql,.xlsm,application/vnd.ms-excel.sheet.macroEnabled.12,.ppsm,application/vnd.ms-powerpoint.slideshow.macroEnabled.12,.page,application/vnd.microsoft.page,.jpg,image/jpeg,.jpeg,.png,image/png,.bmp,image/bmp,.jfif,image/jfif,.gif,image/gif,.pjpeg,image/pjpeg,.pjp,image/pjp,.webp,image/webp,.msg,application/vnd.ms-outlook,.eml,message/rfc822"
+    ],
+    "model_labels": [
+      "モデル セレクター"
+    ],
+    "model_button_text": [
+      "Think Deeper"
+    ],
+    "attachment_labels": [],
+    "attachment_observed": false,
+    "pending_observed": false,
+    "send_button_count": 0,
+    "send_button_disabled": []
+  },
+  "duplicate_send_guard": "send record created after exactly one verified click; rerun refuses"
+}

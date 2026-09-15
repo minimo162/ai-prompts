@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "test_id": "EX02-R5-G1",
+  "captured_at": "2026-09-15T14:05:25.232Z",
+  "browser": "Microsoft Edge CDP",
+  "conversation": {
+    "id": "387E49D0D15E4E647B6C0B7E9009E169",
+    "url": "https://m365.cloud.microsoft/chat/conversation/40ad4cdc-012b-45bb-a13f-97b768d921ba?es=SSR",
+    "title": "Power Automate Desktop Excel転記フロー"
+  },
+  "same_version": {
+    "version": "20260915-excel-r5",
+    "instruction_sha256": "fe57e45c170fcdfe8f94d8e23f9cb58f00d5b54ae4abe35a43189767032b5aaa",
+    "bundle_sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3",
+    "submitted_body_sha256": "03caf7342e8b5cb33264c4c4ad1fc01f8ae8e5553e151d8c2800ffeed0d153d5"
+  },
+  "response": {
+    "path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\cycles\\EX02-r5\\response-full.txt",
+    "chars": 9944,
+    "sha256": "7bcd30b764e2003dea89681718dfb523275dfb6b6ca260559ae7f1c49066f42b",
+    "stable_across_ms": 1500
+  },
+  "robin": {
+    "path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\cycles\\EX02-r5\\generated.robin",
+    "chars": 7403,
+    "lines": 88,
+    "sha256": "c26b5c6cf42b66fecb1272222b64c2ab7aaa38921802945d9a58d7636c6a7dec",
+    "capture_method": "the sole visible Code Copy control followed by same-page Clipboard API read under the CDP user gesture"
+  },
+  "code_block_count": 1,
+  "stop_buttons": [],
+  "copy_buttons": [
+    "コードをコピー",
+    "応答のコピー"
+  ],
+  "interpretation": "Live normal-M365 Copilot generation captured. PAD paste/save/run acceptance remains separate and is not inherited here."
+}

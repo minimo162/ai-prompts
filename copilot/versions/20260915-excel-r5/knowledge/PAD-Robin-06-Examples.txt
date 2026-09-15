@@ -1,0 +1,400 @@
+PAD Robin 完成例・生成試験の参照
+
+以下は、既存カタログで実行・結果照合まで進んだ合成データ例です。例の入力値、保存先、変数名はそのまま本番へ流用せず、依頼の対象へ置き換えます。
+
+例1: リストと正規表現置換
+- 依頼、生成回答、生成Robin、貼付け先、再コピー、実行値を `catalog/generated/list-and-regex/` に保存。
+- 別の変数名・入力値で生成したコードを手直しせずPADへ貼付け、再コピー一致、保存、実行、期待値一致を確認した。
+- `verification.json` と `variables.json` が実行結果の根拠。未掲載のアクションを組み合わせた証拠ではない。
+
+例2: Office三形式
+- `catalog/generated/office-three-apps/` に新しい本文・保存名を指定した生成回答、Robin、再貼付け、レビュー、検証を保存。
+- Excel、Word、PowerPointの16操作を手直しせず貼付け・実行し、3成果物の内容を確認した。
+- PADが改行・末尾改行を正規化したため、再コピーは命令行と設定の一致で評価した。アプリの自動Run経路や新規エージェント登録の試験ではない。
+
+例3: PDF採取フロー
+- `catalog/flows/pdf-variants/` と `catalog/evidence/pdf/results.json`。テキスト、表、画像、ページ抽出、統合の結果とページ順を照合した。
+- 統合の入力順と出力ページ順が一致しない実測があるため、依頼ごとに出力ページ内容を確認する。
+
+生成結果に関する境界
+- 既存の生成例は、新しいCopilotエージェントへこの7ファイルを登録した証拠ではない。
+- T01〜T10（特殊文字置換、CSV、複数ファイル、Excel範囲、既存Excel、Word／PowerPoint、PDF、意図したエラー、UI画面、既存フロー修正）は、最終版のエージェントで自然文依頼→原文保存→無修正貼付け→実行→成果物照合を行い、初回失敗と修正後結果を別記録する。
+
+## T01で実測済みの3アクション組合せ（履歴bundleの測定根拠）
+
+- `catalog/generated/normal-chat-current-bundle-t01-live-20260911/robin.txt` は、UTF-8読取り→通常置換→UTF-8書出し（AppendNewLine=False、上書き）のPADから取得した3アクション原文である。SHA-256は `2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47`。
+- 同原文を専用PADフローへ手直しせず貼り付け・保存し、2回実行した。出力はUTF-8 BOM付き90 bytes・CRLFで、固定期待SHA `2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2`、入力不変を確認した（`catalog/evidence/t01-current-bundle-live-send-20260911.json`、`t01-current-bundle-pad-output-comparison-20260911.json`）。
+- 測定済み組合せ原文:
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+- この組合せ証拠はe35fa2f4版での履歴であり、指示文またはbundleを変更した版へ自動継承しない。変更後は同じ原文・fixtureで通常チャットから再生成し、無修正PAD受入をやり直す。
+
+## T02で実測済みの3アクション組合せ
+
+以下は `RobinKnowledgeT02FilterRoundtrip2_20260910` へ再貼付け・保存・再コピー・2回実行し、出力照合まで完了した原文です。列インデックス2は合成CSVのStatus列です。未採取の列名指定や行追加構文へ置き換えません。
+
+`File.ReadFromCSVFile.ReadCSV CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\csv\\t02-input-20260910.csv''' Encoding: File.CSVEncoding.UTF8 TrimFields: True FirstLineContainsColumnNames: True ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault CSVTable=> CSVTable`
+
+`Variables.FilterDataTable DataTable: CSVTable FilterParameters: { ^['RULE', 'COLUMN', 'OPERATOR', 'VALUE'], [$'''''', 2, $'''Equal''', $'''対象'''] } MatchCase: True FilteredDataTable=> FilteredDataTable`
+
+`File.WriteToCSVFile.WriteCSV VariableToWrite: FilteredDataTable CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t02-output-20260910.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: True IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault`
+
+根拠ファイル: `catalog/flows/datatable-filter/roundtrip.robin`、`catalog/evidence/filter-t02-roundtrip2-run-2.json`。入力は変更せず、出力はUTF-8 BOM・CRLF・末尾改行なしだが、ヘッダーとStatus=対象の論理行が一致します。
+- ナレッジにないモードを要求する負例では、架空の構文ではなく不足情報と追加採取手順を返す。
+
+失敗・未確認の参照
+- 既存の失敗や範囲は docs/robin-knowledge-progress.md、docs/robin-action-catalog.md、docs/office-action-capture.md、docs/pdf-action-capture.md に記録する。
+- 生成コードを後から手直しした場合は、元の回答と修正版を別ファイルにして無修正成功と混同しない。
+
+例4: T04 Excel条件抽出→別ブック
+- `catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin` は、Excel A1:C6読取り、FilterDataTable列0=`対象`、CSV変換・中間CSV保存、別ExcelインスタンスでCSVを開いてxlsxへSaveAsする実測組合せである。
+- `catalog/evidence/t04-positive-flow-run-6.json` と `t04-positive-flow-run-7.json` で2回のPAD実行成功、`normal-chat-t04-output.xlsx`の3行3列と入力SHA不変を照合した。
+- CSVをExcelセルへ直接書いた初回失敗（`_x000D_`混入）は`catalog/evidence/normal-chat-t04-output-x000D-failure.xlsx`へ保存した。失敗を修正コードの成功へ付け替えず、中間CSV経由の正例と分ける。
+
+例5: T10既存フロー修正の原文契約
+- 入力原文は`catalog/generated/office-three-apps/generated.robin`（SHA-256 `d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194`）。16行のうち依頼で変更できるのはExcel書込み値（2行目）とExcel保存先（4行目）の2か所だけである。
+- 変更しないWord保存行の正本は次のとおりで、パス区切りは2個のバックスラッシュ、`AiPromptsOfficeCatalog_20260907`のアンダースコア前にバックスラッシュはない。
+  `Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-word.docx'''`
+- 変更しないPowerPoint保存行も同じ原文保持条件である。
+  `PowerPoint.SavePowerPoint.SaveAs Instance: PowerPointInstance DocumentFormat: PowerPoint.PowerPointFormat.PPTX DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-powerpoint.pptx'''`
+- 現行の最終v8生成ではこの2行に余分なバックスラッシュと`_`が入り、PAD再コピーでは`_`だけが除かれた。根拠は`tests/Test-RobinRawContracts.ps1`と`catalog/evidence/normal-chat-final-pad-20260910/t10-recopy.txt`であり、PAD側の正規化は生成原文の逐語一致を証明しない。
+
+例7: T03 フォルダー内ファイルを一度ずつ処理し、拡張子が.txtのものだけUTF-8で読む（2026-09-12実測）
+- 依頼の形: 合成フォルダー `C:\Users\yuuki\ai-prompts\catalog\fixtures\files` の全ファイルをFor eachで処理し、拡張子が`.txt`のファイルだけ内容を読み取り、`.csv`／`.md`はElse（対象外経路）へ送る。
+- 判定はファイル変数の`.Extension`プロパティと`.txt`の「と等しい」比較で、PADのIfダイアログから採取した原文行 `IF CurrentFile.Extension = $'''.txt''' THEN` を使う。`Contains(CurrentFile, $'''.txt''', False)`は部分一致なので厳密判定には使わない。
+- 最小形の原文（`catalog/flows/t03-extension-branch/minimal-source-20260912.robin`。別の空フローへ貼付け・保存・2回実行、入力不変）:
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+LOOP FOREACH CurrentFile IN Files
+    IF CurrentFile.Extension = $'''.txt''' THEN
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+    ELSE
+    END
+END
+- 件数を数える13行版（両分岐に`SET`と`Variables.IncreaseVariable`）は03-Filesに掲載し、2回とも`TxtCount=2`、`OtherCount=2`だった。証拠: `catalog/evidence/t03-ext-verify-acceptance-20260912.json`、`t03-ext-min-acceptance-20260912.json`。
+- 期待結果の照合は、読み取った内容（最後の`.txt`）、Elseへ行った件数、入力ファイルのSHA不変で行う。大文字小文字、`.txt.bak`、サブフォルダーは未確認。
+
+例6: T09ローカルUI捕捉・貼付け・通し実行（2026-09-12に完走）
+- `catalog/fixtures/ui/t09-local-test.html` をローカルEdgeで開き、PAD UI要素ピッカーから `t09-input`、`t09-submit`、`t09-result` を捕捉した。セレクターは各要素のId属性を実画面から取得しており、推測ではない。
+- `catalog/flows/ui-t09-local-roundtrip/roundtrip.robin` は、Edge起動→`T09-input`入力→実行ボタンクリック→`WAIT 500`→結果段落の`Own Text`取得→ブラウザー終了の6アクション原文である。待機の単位は秒で、500は500ミリ秒のつもりの誤設定だったため、2026-09-12にダイアログで1秒へ直した再採取原文`roundtrip-wait1-20260912.robin`（4行目が`WAIT 1`、他は同一）を生成根拠にする。空フロー `RobinKnowledgeT09FilterPaste_20260910` へ貼付け・保存し、再コピーのアクション行6本一致を確認した。
+- 2026-09-11までの実行は`WAIT 500`（500秒）の待機中に監視を打ち切ったため未完了だった（`catalog/evidence/t09-runtime-block-20260910.json`ほか）。2026-09-12に、ControlRepository付きの採取原文を別の空フロー`RobinKnowledgeT09Repo_20260912`へ貼り付けて実行し、約8分20秒後に`AttributeValue=T09-clicked`、ブラウザー終了、準備完了への復帰を確認した（`catalog/evidence/t09-repo-run1-acceptance-20260912.json`、`t09-repo-run2-20260912.json`）。
+- 生成Robinを貼り付ける先には、`Input text 't09-input'`、`Button '実行'`、`Paragraph '未実行'`の3要素が登録されている必要がある。実測済みの手順は、採取原文を先に貼り付けて要素を取り込み、その6アクションを削除してから生成6行を貼り付ける。待機行は`WAIT 1`（1秒）を生成する。`WAIT 500`は500秒待つ履歴上の誤設定であり、生成しない。待機1秒版は2回とも数秒で`AttributeValue=T09-clicked`とブラウザー終了を確認した（`catalog/evidence/t09-wait1-acceptance-20260912.json`）。
+
+例8: P3残課題の最小用途（2026-09-12、各2回実行・別フロー再利用済み）
+- リストの2番目の項目: `SET NewVar TO CatalogList[1]`（01-Basics）。期待値は`NewVar=SecondItem`。
+- 日時をカスタム書式でテキスト化: `Text.ConvertDateTimeToText.FromCustomDateTime DateTime: CurrentDateTime CustomFormat: $'''yyyy-MM-dd''' Result=> FormattedDateTime2`（01-Basics）。期待値は実行日の`yyyy-MM-dd`。
+- If内If＋副作用＋EXIT LOOP、入れ子ループ＋NEXT LOOP: 02-Controlの23行／15行の原文。期待値は`OuterCount=2, InnerYes=1, InnerNo=1, LastSeen=SecondItem`／`Total=4, OuterRuns=2`。
+- 拡張子境界: 03-Filesの`files-boundary`probe。`.TXT`はElse、`.txt.bak`はElse、サブフォルダーは`IncludeSubfolders`で制御。
+- 別名保存の衝突: 04-Office。Excel／WordのSaveAsは既存出力を無警告で上書きする。
+- 名前付きエラー: 02-Controlの`ON ERROR FileNotFoundError`（アクション単位）。期待値は`NewVar=named`のみ設定され、ブロック既定ルールの変数は設定されない。
+- これらは採取・元フロー2回実行・別フロー再利用まで確認済み。通常チャット生成→無修正貼付け→2回実行の受入は、この版の受入記録（`catalog/evidence/current-package-status-20260912-finald.json`）を参照する。
+
+Issue #38 EX02 / 20260915-excel-r4 候補の現在の範囲
+これは既知命令を組み合わせる教材で、実装者probeとCopilot生成物の受入は別判定です。r1/r3の途中時点の不足・Run2未開始記録は旧版内に保存されています。この版では以下の現在の採取範囲を使います。
+1. File.IfFile.Exists + ELSE/END は既存/未存在パスの各分岐を2Run確認済み。既存側は状態変数の設定だけ、ELSE内に全てのExcel起動・転記・保存・再読取り・比較を置けば、既存時に書込み経路へ入らない構成候補を作れます。END後に書込みを置きません。単独EXITや未採取の停止命令は不要です。probe自体はExcel書込みを含まず、この統合形の安全性は別に確認します。
+2. DataTableをWriteCellのValueへそのまま渡す矩形転記→SaveAs→Close→読取り専用再開→各シート再選択/ReadCells→Closeの21アクションは2Run終了を観測済みです。両Runの対象12セルの保存値・保存型・位置は一致。保存ファイル480セルの旧比較には書式・寸法558差分のFAILが残り、Excelネイティブの記録属性のみの一致を全体PASSに読み替えません。
+3. DataTable[0][0]のテキストと[1][1]の数値の取出し、IFの一致・不一致は2Run確認済み。数値-3と引用テキストの等価比較もMATCHでした。数値1と文字列"1"についても同じ型混同を避ける必要がありますが、このprobeで直接実測した値は-3です。等価比較は厳密な型検証ではありません。
+4. 全12セルへの定数添字展開と取得値/再読取り値の変数同士の比較は既知のSET/IFを使う構成候補です。直接実測した添字は[0][0]と[1][1]のみです。行列数に合わせた添字の変更は値の置換として構成できますが、別の添字の実行済み証明を付けません。変数添字や型プロパティを発明しません。
+5. 型識別アクション・厳密型比較のPAD原文は未採取です。TypedValuesで取得したという設定、等価比較、一致件数、外部openpyxlの型一致だけで、生成フロー自身が型照合したとは表示しません。型照合を要求する固定EX02でこの工程が欠ければ未達です。型不足は型不足として示し、既知の転記・保存まで一律未採取と言わず、独立して提示できる構成と区別します。依頼を読取りだけへ縮小しません。
+固定する構造: 各命令名、引数名、モード、列挙値、TypedValues、FirstLineIsHeader: False、DataTable型、文字列引用/パスエスケープ、IF/ELSE/ENDと依存順。Excelインスタンスは取得元ごとに区別します。
+変更可能なデータ: ローカル合成xlsxパス、存在するシート名、有限矩形の列文字列/正の行数、転記先の列/行、未存在の出力名、定義と全参照を一貫させた変数名。既存シートやパスが例と異なるだけで拒否しません。日本語別シート・別矩形のEX03全体は実行未確認です。
+前提: 入力/テンプレート原本は編集せず、作業コピーは検証者がフロー前に準備。入力/テンプレート/作業コピー/出力は別パス。既存シート、有限範囲、対象矩形を準備時に確認。シート不存在などの未採取検査や未知の引数を作りません。既存出力チェックはフローにも置きます。同時書込み競合は未検証です。
+要求の範囲: 値の矩形転記であり、数式・書式・コメント・画像の完全コピー機能を追加条件にしません。転記先の対象外セル・数式・代表書式の保持は必要です。追加機能を理由に値転記全体を拒否しません。結合/保護セル、日付/空白/真偽値の転記は今回の固定fixture外です。
+観測を分ける: フロー内は再読取り変数と各セル等価比較（型は未証明）。独立検証は保存xlsxを閉じた状態でopenpyxlの値+型タグ+座標、対象外セル/数式/コメント、旧書式比較、Excelネイティブ属性、入力2冊/テンプレートのSHAを別々に報告。外部検査は未実装のフロー工程を代替しません。
+採取済み独立シート選択:
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelInstance Name: $'''Sheet1'''
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: ExcelData Column: $'''C''' Row: 4
+
+
+EX02補助probeの完全原文（実装者/PAD UI由来、Copilot由来ではない）
+完全原文: catalog/acceptance/issue38/probes/output-guard/captured-uia.robin / SHA-256 477b7c174b1d74015ed7ee9ff3f0cbf3e768ec6adc9cc1e4ea05eb56a9c67272
+SET ExistingDecision TO $'''UNSET'''
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\output-guard\\existing.txt''') THEN
+    SET ExistingDecision TO $'''STOP'''
+ELSE
+    SET ExistingDecision TO $'''WRITE'''
+END
+SET MissingDecision TO $'''UNSET'''
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\output-guard\\must-remain-absent.txt''') THEN
+    SET MissingDecision TO $'''STOP'''
+ELSE
+    SET MissingDecision TO $'''WRITE'''
+END
+完全原文: catalog/acceptance/issue38/probes/scalar-compare/captured-full.robin / SHA-256 0b13b8aed3130022535b32020647b7b8e69dd3e7c1d498c342877567271e71d2
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX02\\input-a.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelInstance
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelInstance Name: $'''Source A'''
+Excel.ReadFromExcel.ReadCells Instance: ExcelInstance StartColumn: $'''B''' StartRow: 2 EndColumn: $'''D''' EndRow: 3 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ExcelData
+Excel.CloseExcel.Close Instance: ExcelInstance
+SET TextCell TO ExcelData[0][0]
+SET NumberCell TO ExcelData[1][1]
+IF NumberCell = (-3) THEN
+    SET EqualNumber TO $'''MATCH'''
+END
+IF NumberCell = (-4) THEN
+    SET UnequalNumber TO $'''MATCH'''
+ELSE
+    SET UnequalNumber TO $'''DIFFERENT'''
+END
+IF NumberCell = $'''%'-3'%''' THEN
+    SET CoercionObserved TO $'''MATCH'''
+ELSE
+    SET CoercionObserved TO $'''DIFFERENT'''
+END
+分岐は書込み経路をELSEに閉じ込める参照用。等価比較は型識別ではありません。
+
+EX02統合構成例（実装者による組立、未実行。採取原文ではない）
+出力存在分岐内へ上記21アクションを配置し、12セルの値・位置を等価比較します。型検査を含まないため固定EX02の完成例ではありません。パスは実測probeのものなので実依頼に合わせて一貫して置換します。型不足を隠す完了マーカーは置きません。
+SET TransferState TO $'''NOT_STARTED'''
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\probe-matrix-A\\result.xlsx''') THEN
+    SET TransferState TO $'''OUTPUT_EXISTS_NO_WRITE'''
+ELSE
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX02\\input-a.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Input1
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Input1 Name: $'''Source A'''
+    Excel.ReadFromExcel.ReadCells Instance: Input1 StartColumn: $'''B''' StartRow: 2 EndColumn: $'''D''' EndRow: 3 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Data1
+    Excel.CloseExcel.Close Instance: Input1
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX02\\input-b.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Input2
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Input2 Name: $'''Source B'''
+    Excel.ReadFromExcel.ReadCells Instance: Input2 StartColumn: $'''A''' StartRow: 3 EndColumn: $'''B''' EndRow: 5 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Data2
+    Excel.CloseExcel.Close Instance: Input2
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\probe-matrix-A\\work.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> Work
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''Target A'''
+    Excel.WriteToExcel.WriteCell Instance: Work Value: Data1 Column: $'''C''' Row: 4
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''Target B'''
+    Excel.WriteToExcel.WriteCell Instance: Work Value: Data2 Column: $'''B''' Row: 3
+    Excel.SaveExcel.SaveAs Instance: Work DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\probe-matrix-A\\result.xlsx'''
+    Excel.CloseExcel.Close Instance: Work
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\probe-matrix-A\\result.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Reopened
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''Target A'''
+    Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''C''' StartRow: 4 EndColumn: $'''E''' EndRow: 5 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback1
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''Target B'''
+    Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''B''' StartRow: 3 EndColumn: $'''C''' EndRow: 5 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback2
+    Excel.CloseExcel.Close Instance: Reopened
+    SET ValuePositionState TO $'''MATCH'''
+    SET TypeState TO $'''NOT_PROVEN'''
+    SET ComparedCells TO 0
+    SET SourceCell TO Data1[0][0]
+    SET SavedCell TO Readback1[0][0]
+    IF SourceCell = SavedCell THEN
+        Variables.IncreaseVariable Value: ComparedCells IncrementValue: 1
+    ELSE
+        SET ValuePositionState TO $'''DIFFERENT'''
+    END
+    SET SourceCell TO Data1[0][1]
+    SET SavedCell TO Readback1[0][1]
+    IF SourceCell = SavedCell THEN
+        Variables.IncreaseVariable Value: ComparedCells IncrementValue: 1
+    ELSE
+        SET ValuePositionState TO $'''DIFFERENT'''
+    END
+    SET SourceCell TO Data1[0][2]
+    SET SavedCell TO Readback1[0][2]
+    IF SourceCell = SavedCell THEN
+        Variables.IncreaseVariable Value: ComparedCells IncrementValue: 1
+    ELSE
+        SET ValuePositionState TO $'''DIFFERENT'''
+    END
+    SET SourceCell TO Data1[1][0]
+    SET SavedCell TO Readback1[1][0]
+    IF SourceCell = SavedCell THEN
+        Variables.IncreaseVariable Value: ComparedCells IncrementValue: 1
+    ELSE
+        SET ValuePositionState TO $'''DIFFERENT'''
+    END
+    SET SourceCell TO Data1[1][1]
+    SET SavedCell TO Readback1[1][1]
+    IF SourceCell = SavedCell THEN
+        Variables.IncreaseVariable Value: ComparedCells IncrementValue: 1
+    ELSE
+        SET ValuePositionState TO $'''DIFFERENT'''
+    END
+    SET SourceCell TO Data1[1][2]
+    SET SavedCell TO Readback1[1][2]
+    IF SourceCell = SavedCell THEN
+        Variables.IncreaseVariable Value: ComparedCells IncrementValue: 1
+    ELSE
+        SET ValuePositionState TO $'''DIFFERENT'''
+    END
+    SET SourceCell TO Data2[0][0]
+    SET SavedCell TO Readback2[0][0]
+    IF SourceCell = SavedCell THEN
+        Variables.IncreaseVariable Value: ComparedCells IncrementValue: 1
+    ELSE
+        SET ValuePositionState TO $'''DIFFERENT'''
+    END
+    SET SourceCell TO Data2[0][1]
+    SET SavedCell TO Readback2[0][1]
+    IF SourceCell = SavedCell THEN
+        Variables.IncreaseVariable Value: ComparedCells IncrementValue: 1
+    ELSE
+        SET ValuePositionState TO $'''DIFFERENT'''
+    END
+    SET SourceCell TO Data2[1][0]
+    SET SavedCell TO Readback2[1][0]
+    IF SourceCell = SavedCell THEN
+        Variables.IncreaseVariable Value: ComparedCells IncrementValue: 1
+    ELSE
+        SET ValuePositionState TO $'''DIFFERENT'''
+    END
+    SET SourceCell TO Data2[1][1]
+    SET SavedCell TO Readback2[1][1]
+    IF SourceCell = SavedCell THEN
+        Variables.IncreaseVariable Value: ComparedCells IncrementValue: 1
+    ELSE
+        SET ValuePositionState TO $'''DIFFERENT'''
+    END
+    SET SourceCell TO Data2[2][0]
+    SET SavedCell TO Readback2[2][0]
+    IF SourceCell = SavedCell THEN
+        Variables.IncreaseVariable Value: ComparedCells IncrementValue: 1
+    ELSE
+        SET ValuePositionState TO $'''DIFFERENT'''
+    END
+    SET SourceCell TO Data2[2][1]
+    SET SavedCell TO Readback2[2][1]
+    IF SourceCell = SavedCell THEN
+        Variables.IncreaseVariable Value: ComparedCells IncrementValue: 1
+    ELSE
+        SET ValuePositionState TO $'''DIFFERENT'''
+    END
+    SET TransferState TO $'''SAVED_REOPENED_TYPE_NOT_PROVEN'''
+END
+
+Issue #38 EX02 / 20260915-excel-r5 候補の現在の範囲
+この節はr4の型不足節を限定的に更新する。r4本体・r4実生成拒否・成功済み単体probeは変更も再採取もしない。実装者probeと、今回のCopilot生成物を無修正でPAD受入する結果は別判定である。
+1. r4で確認済みの出力存在分岐、21アクション矩形転記、保存・クローズ・読取り専用再開、12セルの定数添字対応を保持する。入力/テンプレート原本は編集せず、未存在の別出力だけを作る。既存出力側では状態変数だけを設定し、ELSE内に全Excel書込み経路を閉じ込める。
+2. 78ccbcfで採取したDataTable JSON identity原文により、同じ表示の数値1と文字列"1"を2Runで区別できた。確認したセル・設定・値・PAD環境だけが単体probeのPASSであり、EX02全体の成功ではない。
+3. 固定EX02 fixtureの対象12セルは文字列または数値だけである。各source/readbackセルを変換せず同じprobeキーのカスタムオブジェクトへ包み、採取済みConvertCustomObjectToJson原文でJSON化し、対応するJSON同士を個別比較する構成候補を使う。12組すべてを定数添字で明示し、結果変数を個別に残す。
+4. 日付、空白、真偽値、エラー、数式結果、任意オブジェクト、他PC/PAD版へ一般化しない。未確認型へGetTypeなどを捏造しない。12セルへの接続自体はこのr5で初めて実Copilot生成・無修正PAD 2Run・保存後再読込を受入する対象である。
+5. 固定期待値は検証者だけが保持し、Copilot本文やbundleへ正解として混ぜない。フロー内ではsource/readbackの値・JSON型・定数位置を比較し、検証者が閉じた保存xlsxを固定期待値、原本SHA、対象外全セル、数式、コメント、書式・寸法に対して独立照合する。
+6. 480セルの旧比較に残る書式・寸法558差分FAILを保持する。480セルの値/型/数式一致やExcelネイティブ限定属性一致を、書式保持の全体PASSに読み替えない。負例は正例出力の別コピー1セルだけを同表示の別型へ変え、少なくとも対象セルの型不一致を検出する。正例Run2の代用にはしない。
+固定する構造: 各命令名、引数名、モード、列挙値、TypedValues、FirstLineIsHeader: False、DataTable型、JSONのprobeキー、文字列引用/パスエスケープ、IF/ELSE/ENDと依存順、保存→閉じる→読取り専用再開→両対象矩形再読取り→12組比較→閉じる。
+変更可能なデータ: 固定依頼に示されたローカル合成xlsxパス、既存シート名、有限矩形、転記先、未存在出力名、および全参照を一貫させた変数名。型やアクション設定を変更可能データにしない。
+観測を分ける: 単体probe、Copilot応答原文、コードコピー原文、PAD貼付け/保存/再コピー、各Run終了、12結果変数、保存xlsx独立検査、負例検出を別証跡にする。手組みprobeや外部検査の成功をCopilot生成フローの成功へ転用しない。
+固定EX02の12セル位置対応（完成フローでは各組を定数添字で個別比較）:
+- Data1[0][0] -> Readback1[0][0] -> Target A!C4 -> TargetA_C4_ValueTypeMatch
+- Data1[0][1] -> Readback1[0][1] -> Target A!D4 -> TargetA_D4_ValueTypeMatch
+- Data1[0][2] -> Readback1[0][2] -> Target A!E4 -> TargetA_E4_ValueTypeMatch
+- Data1[1][0] -> Readback1[1][0] -> Target A!C5 -> TargetA_C5_ValueTypeMatch
+- Data1[1][1] -> Readback1[1][1] -> Target A!D5 -> TargetA_D5_ValueTypeMatch
+- Data1[1][2] -> Readback1[1][2] -> Target A!E5 -> TargetA_E5_ValueTypeMatch
+- Data2[0][0] -> Readback2[0][0] -> Target B!B3 -> TargetB_B3_ValueTypeMatch
+- Data2[0][1] -> Readback2[0][1] -> Target B!C3 -> TargetB_C3_ValueTypeMatch
+- Data2[1][0] -> Readback2[1][0] -> Target B!B4 -> TargetB_B4_ValueTypeMatch
+- Data2[1][1] -> Readback2[1][1] -> Target B!C4 -> TargetB_C4_ValueTypeMatch
+- Data2[2][0] -> Readback2[2][0] -> Target B!B5 -> TargetB_B5_ValueTypeMatch
+- Data2[2][1] -> Readback2[2][1] -> Target B!C5 -> TargetB_C5_ValueTypeMatch
+上記12組の値は固定fixture内では文字列または数値だけ。probe済みなのは数値1/文字列"1"の識別構文であり、他の具体値を含む12組への接続はこのr5で初めて受入する組合せである。
+各SourceCell/SavedCellを同じprobeキーでJSON化して文字列を比較する。PADの緩い直接等価比較だけを型一致としない。位置は上記の定数添字と固定転記先の対応で検査する。変数添字、ループ、GetType、未知の変換を発明しない。
+固定期待値は検証者側expected.jsonから独立照合し、Copilotへ正解として渡さない。フロー内の照合は同じRunで取得したsourceと保存・クローズ・読取り専用再読込後targetの12組に限る。
+
+78ccbcfで採取済みのDataTable型identity原文（Copilot生成物ではない）
+完全原文: catalog/acceptance/issue38/probes/datatable-type-identity/captured-final.robin / SHA-256 02d664b5ae246bd57e2b44d454a5cd3cb01991a78b6fff8548d208759f1b1fb6
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\datatable-type-identity\\synthetic.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelInstance
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelInstance Name: $'''TypeProbe'''
+Excel.ReadFromExcel.ReadCells Instance: ExcelInstance StartColumn: $'''A''' StartRow: 2 EndColumn: $'''B''' EndRow: 2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ExcelData
+Excel.CloseExcel.Close Instance: ExcelInstance
+SET ExcelNumber TO ExcelData[0][0]
+SET ExcelText TO ExcelData[0][1]
+SET KnownNumber TO 1
+SET KnownText TO $'''%'1'%'''
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': ExcelNumber } Json=> ExcelNumberJson
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': ExcelText } Json=> ExcelTextJson
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': KnownNumber } Json=> KnownNumberJson
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': KnownText } Json=> KnownTextJson
+SET PositiveExcelNumber TO ExcelNumberJson = KnownNumberJson
+SET PositiveExcelText TO ExcelTextJson = KnownTextJson
+SET NegativeExcelNumberText TO ExcelNumberJson = KnownTextJson
+SET NegativeExcelTextNumber TO ExcelTextJson = KnownNumberJson
+SET DataTableProbeCompleted TO $'''DATATABLE_TYPE_PROBE_FINISHED'''
+確認済み範囲: synthetic.xlsx の TypeProbe!A2:B2 を TypedValues/ヘッダーなしでDataTableへ取得し、DataTable[0][0]の数値1とDataTable[0][1]の文字列"1"を変換せず同じprobeキーのカスタムオブジェクトへ包み、JSON化した。Run1/Run2とも数値は {"probe":1.0}、文字列は {"probe":"1"}。同型正例2件はTrue、交差型負例2件はFalse。これはExcel DataTableセルの限定probeであり、EX02全体の生成・貼付け・保存・再読込受入ではない。
+未確認: 日付、空白、真偽値、エラー、数式結果、カスタムオブジェクト、他PC/PAD版、任意型の一般GetType。これらへ適用範囲を広げず、未知の型が要求された場合は追加採取を求める。
+
+EX02 r5統合構成例（実装者による組立、未実行・未受入。固定期待値は含まない）
+r4の出力ガードと21アクションへ、上記の採取済みJSON identity構文を12個の定数位置に接続した例。Copilotは固定依頼に従う一つのRobinブロックとして出し、現版のPAD受入前に完成・実行済みと表示しない。
+SET TransferState TO $'''NOT_STARTED'''
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX02-attempt1\\result.xlsx''') THEN
+    SET TransferState TO $'''OUTPUT_EXISTS_NO_WRITE'''
+ELSE
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX02\\input-a.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Input1
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Input1 Name: $'''Source A'''
+    Excel.ReadFromExcel.ReadCells Instance: Input1 StartColumn: $'''B''' StartRow: 2 EndColumn: $'''D''' EndRow: 3 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Data1
+    Excel.CloseExcel.Close Instance: Input1
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX02\\input-b.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Input2
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Input2 Name: $'''Source B'''
+    Excel.ReadFromExcel.ReadCells Instance: Input2 StartColumn: $'''A''' StartRow: 3 EndColumn: $'''B''' EndRow: 5 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Data2
+    Excel.CloseExcel.Close Instance: Input2
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX02-attempt1\\work.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> Work
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''Target A'''
+    Excel.WriteToExcel.WriteCell Instance: Work Value: Data1 Column: $'''C''' Row: 4
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''Target B'''
+    Excel.WriteToExcel.WriteCell Instance: Work Value: Data2 Column: $'''B''' Row: 3
+    Excel.SaveExcel.SaveAs Instance: Work DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX02-attempt1\\result.xlsx'''
+    Excel.CloseExcel.Close Instance: Work
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX02-attempt1\\result.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Reopened
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''Target A'''
+    Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''C''' StartRow: 4 EndColumn: $'''E''' EndRow: 5 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback1
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''Target B'''
+    Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''B''' StartRow: 3 EndColumn: $'''C''' EndRow: 5 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback2
+    Excel.CloseExcel.Close Instance: Reopened
+    SET SourceCell TO Data1[0][0]
+    SET SavedCell TO Readback1[0][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET TargetA_C4_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data1[0][1]
+    SET SavedCell TO Readback1[0][1]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET TargetA_D4_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data1[0][2]
+    SET SavedCell TO Readback1[0][2]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET TargetA_E4_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data1[1][0]
+    SET SavedCell TO Readback1[1][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET TargetA_C5_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data1[1][1]
+    SET SavedCell TO Readback1[1][1]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET TargetA_D5_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data1[1][2]
+    SET SavedCell TO Readback1[1][2]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET TargetA_E5_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data2[0][0]
+    SET SavedCell TO Readback2[0][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET TargetB_B3_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data2[0][1]
+    SET SavedCell TO Readback2[0][1]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET TargetB_C3_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data2[1][0]
+    SET SavedCell TO Readback2[1][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET TargetB_B4_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data2[1][1]
+    SET SavedCell TO Readback2[1][1]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET TargetB_C4_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data2[2][0]
+    SET SavedCell TO Readback2[2][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET TargetB_B5_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data2[2][1]
+    SET SavedCell TO Readback2[2][1]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET TargetB_C5_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET TransferState TO $'''SAVED_REOPENED_12_JSON_COMPARISONS_READY'''
+END
