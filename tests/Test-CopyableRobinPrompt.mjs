@@ -13,7 +13,7 @@ const text = p => new TextDecoder('utf-8', { fatal: true }).decode(read(p));
 const sha = b => crypto.createHash('sha256').update(b).digest('hex');
 const baseHash = '6ad6f742f0eea335aeb523aba36c4f32cb9207fb418680b7d87f508124c1e79c';
 const bundleHash = '79245787fd34885592c2d1059297ccd215f046fa529dacadb7d3b7963e036e12';
-const candidateHash = '66402a04a175b831d4ac16ae2514519205ccc844adf90be67bc33d020969614f';
+const candidateHash = 'c533fc5d23861902626985c04ed48c2c9a82eb054885133ddf5889983ffd91fa';
 const baseline = text('copilot/agent-instructions.txt');
 const candidate = text('copilot/agent-instructions-copyable.txt');
 const manifest = JSON.parse(text('copilot/copyable-output-20260915.json'));
