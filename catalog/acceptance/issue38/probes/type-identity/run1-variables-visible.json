@@ -1,0 +1,167 @@
+[
+  {
+    "name": "CustomObjectAsJson",
+    "parts": [
+      {
+        "name": "CustomObjectAsJson",
+        "id": "VariableTextBlock",
+        "help": ""
+      },
+      {
+        "name": "{\"probe\":1.0}",
+        "id": "VariablePreviewTextBlock",
+        "help": "{\"probe\":1.0}"
+      }
+    ]
+  },
+  {
+    "name": "CustomObjectAsJson2",
+    "parts": [
+      {
+        "name": "CustomObjectAsJson2",
+        "id": "VariableTextBlock",
+        "help": ""
+      },
+      {
+        "name": "{\"probe\":\"1\"}",
+        "id": "VariablePreviewTextBlock",
+        "help": "{\"probe\":\"1\"}"
+      }
+    ]
+  },
+  {
+    "name": "CustomObjectAsJson3",
+    "parts": [
+      {
+        "name": "CustomObjectAsJson3",
+        "id": "VariableTextBlock",
+        "help": ""
+      },
+      {
+        "name": "{\"probe\":1.0}",
+        "id": "VariablePreviewTextBlock",
+        "help": "{\"probe\":1.0}"
+      }
+    ]
+  },
+  {
+    "name": "CustomObjectAsJson4",
+    "parts": [
+      {
+        "name": "CustomObjectAsJson4",
+        "id": "VariableTextBlock",
+        "help": ""
+      },
+      {
+        "name": "{\"probe\":\"1\"}",
+        "id": "VariablePreviewTextBlock",
+        "help": "{\"probe\":\"1\"}"
+      }
+    ]
+  },
+  {
+    "name": "NegativeNumberText",
+    "parts": [
+      {
+        "name": "NegativeNumberText",
+        "id": "VariableTextBlock",
+        "help": ""
+      },
+      {
+        "name": "False",
+        "id": "VariablePreviewTextBlock",
+        "help": "False"
+      }
+    ]
+  },
+  {
+    "name": "NegativeTextNumber",
+    "parts": [
+      {
+        "name": "NegativeTextNumber",
+        "id": "VariableTextBlock",
+        "help": ""
+      },
+      {
+        "name": "False",
+        "id": "VariablePreviewTextBlock",
+        "help": "False"
+      }
+    ]
+  },
+  {
+    "name": "NumberOne",
+    "parts": [
+      {
+        "name": "NumberOne",
+        "id": "VariableTextBlock",
+        "help": ""
+      },
+      {
+        "name": "1",
+        "id": "VariablePreviewTextBlock",
+        "help": "1"
+      }
+    ]
+  },
+  {
+    "name": "NumberOneCopy",
+    "parts": [
+      {
+        "name": "NumberOneCopy",
+        "id": "VariableTextBlock",
+        "help": ""
+      },
+      {
+        "name": "1",
+        "id": "VariablePreviewTextBlock",
+        "help": "1"
+      }
+    ]
+  },
+  {
+    "name": "PositiveNumber",
+    "parts": [
+      {
+        "name": "PositiveNumber",
+        "id": "VariableTextBlock",
+        "help": ""
+      },
+      {
+        "name": "True",
+        "id": "VariablePreviewTextBlock",
+        "help": "True"
+      }
+    ]
+  },
+  {
+    "name": "PositiveText",
+    "parts": [
+      {
+        "name": "PositiveText",
+        "id": "VariableTextBlock",
+        "help": ""
+      },
+      {
+        "name": "True",
+        "id": "VariablePreviewTextBlock",
+        "help": "True"
+      }
+    ]
+  },
+  {
+    "name": "ProbeCompleted",
+    "parts": [
+      {
+        "name": "ProbeCompleted",
+        "id": "VariableTextBlock",
+        "help": ""
+      },
+      {
+        "name": "TYPE_PROBE_FINISHED",
+        "id": "VariablePreviewTextBlock",
+        "help": "TYPE_PROBE_FINISHED"
+      }
+    ]
+  }
+]

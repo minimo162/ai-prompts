@@ -1,0 +1,19 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-15T11:13:33.0801660Z",
+    "flow_name":  "RobinIssue38TypeIdentity20260915C",
+    "process_id":  25524,
+    "source_robin":  "catalog\\acceptance\\issue38\\probes\\type-identity\\assembled-inputs.robin",
+    "source_sha256":  "6c7e032e142520ab7d66c432cc5ed6da3004c6913048e0b05b30053247a32975",
+    "source_bytes":  102,
+    "empty_before_paste":  true,
+    "paste_confirmed":  true,
+    "visible_action_count":  4,
+    "designer_action_count":  4,
+    "designer_status":  "4 選択されたアクション",
+    "virtualized_list_false_negative":  false,
+    "saved_confirmed":  false,
+    "execution_requested":  false,
+    "clipboard_restoration":  "newer_clipboard_preserved",
+    "clipboard_all_format_raw_equality":  "NOT_ASSESSED"
+}

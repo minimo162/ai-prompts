@@ -1,0 +1,30 @@
+SET NumberJson TO CustomObjectAsJson
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextOne } Json=> TextJson
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': NumberOneCopy } Json=> NumberCopyJson
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextOneCopy } Json=> TextCopyJson
+IF NumberOne = TextOne THEN
+    SET ScalarEquality TO $'''MATCH'''
+ELSE
+    SET ScalarEquality TO $'''DIFFERENT'''
+END
+IF NumberJson = NumberCopyJson THEN
+    SET PositiveNumber TO $'''MATCH'''
+ELSE
+    SET PositiveNumber TO $'''DIFFERENT'''
+END
+IF TextJson = TextCopyJson THEN
+    SET PositiveText TO $'''MATCH'''
+ELSE
+    SET PositiveText TO $'''DIFFERENT'''
+END
+IF NumberJson = TextJson THEN
+    SET NegativeNumberText TO $'''MATCH'''
+ELSE
+    SET NegativeNumberText TO $'''DIFFERENT'''
+END
+IF TextJson = NumberJson THEN
+    SET NegativeTextNumber TO $'''MATCH'''
+ELSE
+    SET NegativeTextNumber TO $'''DIFFERENT'''
+END
+SET ProbeCompleted TO $'''TYPE_PROBE_FINISHED'''

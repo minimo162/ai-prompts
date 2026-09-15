@@ -1,0 +1,14 @@
+{
+    "at":  "2026-09-15T11:18:02.2946605Z",
+    "flow":  "RobinIssue38TypeIdentity20260915C",
+    "processId":  25524,
+    "beforeActions":  5,
+    "expectedAfterActions":  35,
+    "pasteRequested":  false,
+    "observedStatus":  [
+
+                       ],
+    "clipboardRestoration":  "not_changed",
+    "sourceSha256":  "91837f0d36a75c1c01ec44334f8017aa0fc7aa26d24d101f521322d08bdcfeff",
+    "scope":  "Assembled from captured action syntax; not yet runtime evidence"
+}

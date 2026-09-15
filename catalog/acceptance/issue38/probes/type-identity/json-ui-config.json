@@ -1,0 +1,7 @@
+{
+  "time": "2026-09-15T11:15:42.1930264Z",
+  "action": "カスタム オブジェクトを JSON に変換",
+  "input": "%{ 'probe': NumberOne }%",
+  "output": "CustomObjectAsJson",
+  "status": "CONFIGURED_NOT_YET_SAVED"
+}

@@ -1,0 +1,112 @@
+[
+  {
+    "name": "CustomObjectAsJson",
+    "parts": [
+      {
+        "id": "VariableTextBlock",
+        "help": "",
+        "name": "CustomObjectAsJson"
+      }
+    ]
+  },
+  {
+    "name": "CustomObjectAsJson2",
+    "parts": [
+      {
+        "id": "VariableTextBlock",
+        "help": "",
+        "name": "CustomObjectAsJson2"
+      }
+    ]
+  },
+  {
+    "name": "CustomObjectAsJson3",
+    "parts": [
+      {
+        "id": "VariableTextBlock",
+        "help": "",
+        "name": "CustomObjectAsJson3"
+      }
+    ]
+  },
+  {
+    "name": "CustomObjectAsJson4",
+    "parts": [
+      {
+        "id": "VariableTextBlock",
+        "help": "",
+        "name": "CustomObjectAsJson4"
+      }
+    ]
+  },
+  {
+    "name": "NegativeNumberText",
+    "parts": [
+      {
+        "id": "VariableTextBlock",
+        "help": "",
+        "name": "NegativeNumberText"
+      }
+    ]
+  },
+  {
+    "name": "NegativeTextNumber",
+    "parts": [
+      {
+        "id": "VariableTextBlock",
+        "help": "",
+        "name": "NegativeTextNumber"
+      }
+    ]
+  },
+  {
+    "name": "NumberOne",
+    "parts": [
+      {
+        "id": "VariableTextBlock",
+        "help": "",
+        "name": "NumberOne"
+      }
+    ]
+  },
+  {
+    "name": "NumberOneCopy",
+    "parts": [
+      {
+        "id": "VariableTextBlock",
+        "help": "",
+        "name": "NumberOneCopy"
+      }
+    ]
+  },
+  {
+    "name": "PositiveNumber",
+    "parts": [
+      {
+        "id": "VariableTextBlock",
+        "help": "",
+        "name": "PositiveNumber"
+      }
+    ]
+  },
+  {
+    "name": "PositiveText",
+    "parts": [
+      {
+        "id": "VariableTextBlock",
+        "help": "",
+        "name": "PositiveText"
+      }
+    ]
+  },
+  {
+    "name": "ProbeCompleted",
+    "parts": [
+      {
+        "id": "VariableTextBlock",
+        "help": "",
+        "name": "ProbeCompleted"
+      }
+    ]
+  }
+]

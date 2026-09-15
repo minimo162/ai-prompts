@@ -1,0 +1,20 @@
+{
+  "at": "2026-09-15T11:34:07.5202253Z",
+  "status": "PASS_PRESERVATION",
+  "startBaselineFiles": 233,
+  "changedExistingFiles": [],
+  "r4Files": 10,
+  "r4Changed": [],
+  "previousR4ProtectedFiles": 192,
+  "previousR4ProtectedChanged": [],
+  "previousR4ProtectedIgnoredRunPaths": [
+    "catalog/acceptance/issue38/runs/.gitignore",
+    "catalog/acceptance/issue38/runs/EX02-attempt1/preparation.json",
+    "catalog/acceptance/issue38/runs/EX02-attempt1/work.xlsx",
+    "catalog/acceptance/issue38/runs/EX03-attempt1/preparation.json",
+    "catalog/acceptance/issue38/runs/EX03-attempt1/work.xlsx",
+    "catalog/acceptance/issue38/runs/probe-matrix-A/preparation.json",
+    "catalog/acceptance/issue38/runs/probe-matrix-A/result.xlsx",
+    "catalog/acceptance/issue38/runs/probe-matrix-A/work.xlsx"
+  ]
+}

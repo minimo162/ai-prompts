@@ -1,0 +1,14 @@
+SET NumberOne TO 1
+SET TextOne TO $'''%'1'%'''
+SET NumberOneCopy TO 1
+SET TextOneCopy TO $'''%'1'%'''
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': NumberOne } Json=> CustomObjectAsJson
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextOne } Json=> CustomObjectAsJson2
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': NumberOneCopy } Json=> CustomObjectAsJson3
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextOneCopy } Json=> CustomObjectAsJson4
+SET PositiveNumber TO CustomObjectAsJson = CustomObjectAsJson3
+SET PositiveText TO CustomObjectAsJson2 = CustomObjectAsJson4
+SET NegativeNumberText TO CustomObjectAsJson = CustomObjectAsJson2
+SET NegativeTextNumber TO CustomObjectAsJson2 = CustomObjectAsJson
+SET ScalarEquality TO NumberOne = TextOne
+SET ProbeCompleted TO $'''TYPE_PROBE_FINISHED'''

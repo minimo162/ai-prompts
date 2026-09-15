@@ -1,0 +1,59 @@
+[
+  {
+    "filter": "ScalarEquality",
+    "variables": [
+      {
+        "name": "ScalarEquality",
+        "parts": [
+          {
+            "name": "ScalarEquality",
+            "id": "VariableTextBlock",
+            "help": ""
+          },
+          {
+            "name": "True",
+            "id": "VariablePreviewTextBlock",
+            "help": "True"
+          }
+        ]
+      }
+    ],
+    "at": "2026-09-15T11:26:16.3316505Z"
+  },
+  {
+    "filter": "TextOne",
+    "variables": [
+      {
+        "name": "TextOne",
+        "parts": [
+          {
+            "name": "TextOne",
+            "id": "VariableTextBlock",
+            "help": ""
+          },
+          {
+            "name": "1",
+            "id": "VariablePreviewTextBlock",
+            "help": "1"
+          }
+        ]
+      },
+      {
+        "name": "TextOneCopy",
+        "parts": [
+          {
+            "name": "TextOneCopy",
+            "id": "VariableTextBlock",
+            "help": ""
+          },
+          {
+            "name": "1",
+            "id": "VariablePreviewTextBlock",
+            "help": "1"
+          }
+        ]
+      }
+    ],
+    "at": "2026-09-15T11:26:16.8738467Z"
+  }
+]

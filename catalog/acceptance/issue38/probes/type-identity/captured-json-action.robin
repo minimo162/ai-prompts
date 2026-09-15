@@ -1,0 +1,1 @@
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': NumberOne } Json=> CustomObjectAsJson

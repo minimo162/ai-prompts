@@ -1,0 +1,37 @@
+{
+  "at": "2026-09-15T11:35:15.6544499Z",
+  "status": "PASS_TYPE_PROBE_EVIDENCE_AUDIT",
+  "checks": {
+    "rawFull14Actions": true,
+    "raw869Bytes": true,
+    "rawCRLFOnlyWithFinalNewline": true,
+    "rawNoBom": true,
+    "firstFiveActionsBytesPreserved": true,
+    "run1RawByteEquality": true,
+    "run1FourPADComparisonsAndTerminator": true,
+    "run1TerminalKnownZeroErrors": true,
+    "run1FrozenPlanHash": true,
+    "run1FrozenRawHash": true,
+    "run2RawByteEquality": true,
+    "run2FourPADComparisonsAndTerminator": true,
+    "run2TerminalKnownZeroErrors": true,
+    "run2FrozenPlanHash": true,
+    "run2FrozenRawHash": true,
+    "run1SavedAndReconciledBeforeRun2": true,
+    "reportContainsFullRobinDisplay": true,
+    "preservationVerified": true
+  },
+  "failed": [],
+  "scope": "Audit stored PAD UI/run evidence and raw bytes. Does not execute an external numeric/text comparison oracle.",
+  "visualReview": [
+    "run1-pad-window.png",
+    "run1-input-types.png",
+    "run2-cases.png"
+  ],
+  "notProven": [
+    "Excel/DataTable cell integration",
+    "all EX02 acceptance",
+    "arbitrary data types"
+  ],
+  "localCommit": "Pending; commit SHA is reported in final response and Obsidian log"
+}
