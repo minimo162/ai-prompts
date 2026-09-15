@@ -1,0 +1,30 @@
+test_correct_ex02_simulation (__main__.ExcelOracleTests.test_correct_ex02_simulation) ... ok
+test_correct_ex03_simulation (__main__.ExcelOracleTests.test_correct_ex03_simulation) ... ok
+test_existing_output_unchanged (__main__.ExcelOracleTests.test_existing_output_unchanged) ... ok
+test_frozen_inputs_and_initial_sheet (__main__.ExcelOracleTests.test_frozen_inputs_and_initial_sheet) ... ok
+test_invalid_range (__main__.ExcelOracleTests.test_invalid_range) ... ok
+test_missing_sheet (__main__.ExcelOracleTests.test_missing_sheet) ... ok
+test_number_as_text (__main__.ExcelOracleTests.test_number_as_text) ... ok
+test_outside_formula_changed (__main__.ExcelOracleTests.test_outside_formula_changed) ... ok
+test_preparation_preserves_template_and_refuses_repeat (__main__.ExcelOracleTests.test_preparation_preserves_template_and_refuses_repeat) ... ok
+test_same_output (__main__.ExcelOracleTests.test_same_output) ... ok
+test_style_changed (__main__.ExcelOracleTests.test_style_changed) ... ok
+test_wrong_position (__main__.ExcelOracleTests.test_wrong_position) ... ok
+test_wrong_value (__main__.ExcelOracleTests.test_wrong_value) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.296s
+
+OK
+{
+  "case": "EX02",
+  "originals": {
+    "fixtures\\EX02\\input-a.xlsx": "f655b62c82750fc07f4e54bcfd098e8e7c0b771c9422c4321cc413a4d6d07fa9",
+    "fixtures\\EX02\\input-b.xlsx": "69627e161747fedad0f7c3b410c1d625b29a553786be0c145e83aaf43d1b105a",
+    "fixtures\\EX02\\template.xlsx": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457"
+  },
+  "work": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\tmpj876r2m2\\case\\work.xlsx",
+  "work_sha256": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+  "output": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\tmpj876r2m2\\case\\result.xlsx",
+  "pad_requested": false
+}

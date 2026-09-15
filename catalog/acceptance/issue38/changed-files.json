@@ -1,0 +1,1040 @@
+{
+  "files": [
+    {
+      "sha256": "c0d2fe4e7f3efd40eee2c3d568a7d68513fba93a555c996707006f7a161d3651",
+      "bytes": 764,
+      "path": ".gitattributes"
+    },
+    {
+      "sha256": "f55bca283b9cf2cf89332048fca11e6a12f937960587d4e9dddad985deb0becf",
+      "bytes": 66,
+      "path": "catalog/acceptance/issue38/checks/candidate-rebuild.log"
+    },
+    {
+      "sha256": "a9b4f5ed2708e0dcad9c30fbcb3da728aa9e21f8053f7d0a786e6b5134ae0de2",
+      "bytes": 57,
+      "path": "catalog/acceptance/issue38/checks/catalog.log"
+    },
+    {
+      "sha256": "319b942d00fc056d5c4aa0c70f8b6a157634221444332e28835d8574caaf504a",
+      "bytes": 1059,
+      "path": "catalog/acceptance/issue38/checks/copyable.log"
+    },
+    {
+      "sha256": "5317581eab94ab500c034448e3d4aff4eb23e48f576054da29c33c8d51ef576d",
+      "bytes": 339,
+      "path": "catalog/acceptance/issue38/checks/diff-check.log"
+    },
+    {
+      "sha256": "740f4d16dd1e1d86ee92c5376b4da17fbd359c09ffa5e1cbfa3577d4272f220c",
+      "bytes": 1968,
+      "path": "catalog/acceptance/issue38/checks/excel-oracle.log"
+    },
+    {
+      "sha256": "15d20bc97bcb0b54d50141472bad0e051de2d6fba159910dd903d6ff4795ca35",
+      "bytes": 164,
+      "path": "catalog/acceptance/issue38/checks/final-acceptance.log"
+    },
+    {
+      "sha256": "4b7122f1b9c9b4b93aed702f3f0bcd606a4af3833a0f17c382b27b3c47962dd1",
+      "bytes": 94,
+      "path": "catalog/acceptance/issue38/checks/legacy-package.log"
+    },
+    {
+      "sha256": "c9eb9556d57df3765ca349541c579ea56d326af711f4f70fb4bd0ad6ee82f490",
+      "bytes": 66,
+      "path": "catalog/acceptance/issue38/checks/legacy-rebuild.log"
+    },
+    {
+      "sha256": "c8bbe049d665c856588573851a5da95d984e9fdb723af2bb41df762008458f79",
+      "bytes": 125,
+      "path": "catalog/acceptance/issue38/checks/package.log"
+    },
+    {
+      "sha256": "00f79347a15c4cfb94c7a5c8773c041585783175712aadcf1264211f2bd2d5b1",
+      "bytes": 467,
+      "path": "catalog/acceptance/issue38/checks/post-pad-probe.json"
+    },
+    {
+      "sha256": "fc34f051b7070ef6a628618972391743bbfa14ba7f922fc9ef97be23e744804c",
+      "bytes": 14976,
+      "path": "catalog/acceptance/issue38/checks/publication-checks.log"
+    },
+    {
+      "sha256": "2c689fe7c6a62792ae1b69f13d806447142c2ce6d7629ea22be1a68c046e77d1",
+      "bytes": 11383,
+      "path": "catalog/acceptance/issue38/checks/raw-contracts.log"
+    },
+    {
+      "sha256": "a10ce93c90a61a526519150449f31497f374fb5cd5807d74dab4f6be81ee2ad8",
+      "bytes": 406,
+      "path": "catalog/acceptance/issue38/checks/write-candidate.json"
+    },
+    {
+      "sha256": "72f2d38011212512652d926831f98a68562f686392d54a875967db2ff2cde8b4",
+      "bytes": 606,
+      "path": "catalog/acceptance/issue38/copilot/EX01/code-copy-completed.robin"
+    },
+    {
+      "sha256": "c5fd9951536cee4c7dead4f1ed932d559ab5f569ef0215732f374852d103826f",
+      "bytes": 343,
+      "path": "catalog/acceptance/issue38/copilot/EX01/copy-observation.json"
+    },
+    {
+      "sha256": "c0ae6ed67274b8587ace61b90f7806fb7c78ad732c284ca2b316c5e1f2239de2",
+      "bytes": 3314,
+      "path": "catalog/acceptance/issue38/copilot/EX01/generated.robin"
+    },
+    {
+      "sha256": "0b0c07b8f1cd3c74526a57b2568260906f06d182eb205eed65aaae03b9acc722",
+      "bytes": 802,
+      "path": "catalog/acceptance/issue38/copilot/EX01/paste.json"
+    },
+    {
+      "sha256": "e6c338cd398d9de98660684f96d8d9acb4f42cd465495bb289d1fc4bb7986749",
+      "bytes": 566,
+      "path": "catalog/acceptance/issue38/copilot/EX01/plan.json"
+    },
+    {
+      "sha256": "f2e3f61d025584e333e671b88acecac7e09e2be27802eabb34b3aa4e966856b2",
+      "bytes": 611,
+      "path": "catalog/acceptance/issue38/copilot/EX01/recopy.robin"
+    },
+    {
+      "sha256": "c0ae6ed67274b8587ace61b90f7806fb7c78ad732c284ca2b316c5e1f2239de2",
+      "bytes": 3314,
+      "path": "catalog/acceptance/issue38/copilot/EX01/response-copy-completed.txt"
+    },
+    {
+      "sha256": "85d99fc1f8000a4f88248a93e7388cc8588ddd228cef54de64bc47b222d29ddd",
+      "bytes": 15864,
+      "path": "catalog/acceptance/issue38/copilot/EX01/response-full.txt"
+    },
+    {
+      "sha256": "f04e9c7e141b9ee2de9c24b55ab3cb545096eb025d35cf8919a2aadbbc32c614",
+      "bytes": 204,
+      "path": "catalog/acceptance/issue38/copilot/EX01/roundtrip.json"
+    },
+    {
+      "sha256": "42cd5c5d325c559bfab2774a0045efe0969c21a764eeaa1d3d67e2536898032f",
+      "bytes": 357,
+      "path": "catalog/acceptance/issue38/copilot/EX01/run1-comparison.json"
+    },
+    {
+      "sha256": "d90b5b3abe0417852907c448b01397a5d6f72e25371756a847f559a4d5833c08",
+      "bytes": 1649,
+      "path": "catalog/acceptance/issue38/copilot/EX01/run1-grid.json"
+    },
+    {
+      "sha256": "8c531866c1158d55285630a564dacf7e39570ca88ba292b56a8b11219f32efa5",
+      "bytes": 378,
+      "path": "catalog/acceptance/issue38/copilot/EX01/run1-request.json"
+    },
+    {
+      "sha256": "688d74124813bf8ac4b207df6b02909853c1008d5a247cf22275bafd82db5c8b",
+      "bytes": 301,
+      "path": "catalog/acceptance/issue38/copilot/EX01/run1.json"
+    },
+    {
+      "sha256": "72488680d64ffbfe20b0f6b48ca0f14afcefa065ed9629a96810082cca67d9d3",
+      "bytes": 81,
+      "path": "catalog/acceptance/issue38/copilot/EX01/run2-before.json"
+    },
+    {
+      "sha256": "71d4a49c3f617b1e225c193508c4016a86875c11d7335577c8cb9836d34f93ac",
+      "bytes": 211,
+      "path": "catalog/acceptance/issue38/copilot/EX01/run2-cleared-before.json"
+    },
+    {
+      "sha256": "949c0f36ebb8d59319136d60a76c6a9d8ca05cf92c84cb97c36eae9aa570cbd1",
+      "bytes": 644,
+      "path": "catalog/acceptance/issue38/copilot/EX01/run2-grid.json"
+    },
+    {
+      "sha256": "4b844c68b14054023134eacb3dc17efd95f5faa45c94a11699632d1c6985f680",
+      "bytes": 103,
+      "path": "catalog/acceptance/issue38/copilot/EX01/run2-request.json"
+    },
+    {
+      "sha256": "6f4bd127cd4f80cc1dbd32286ec253bfa091f454b1ad9cfea08949f81a2a0205",
+      "bytes": 301,
+      "path": "catalog/acceptance/issue38/copilot/EX01/run2.json"
+    },
+    {
+      "sha256": "fcc806f0d59513e5a3c33adafa880b1fee852a173f4d695f0d4450c927cd3cdf",
+      "bytes": 222,
+      "path": "catalog/acceptance/issue38/copilot/EX01/send-attempt.json"
+    },
+    {
+      "sha256": "df7803bbc5d2294dbcf101a26b1035f34a88c32e81be0fc8af0111c34cfe11e5",
+      "bytes": 149,
+      "path": "catalog/acceptance/issue38/copilot/EX01/static-copy-check.json"
+    },
+    {
+      "sha256": "85d99fc1f8000a4f88248a93e7388cc8588ddd228cef54de64bc47b222d29ddd",
+      "bytes": 15864,
+      "path": "catalog/acceptance/issue38/copilot/EX01/submitted-body.txt"
+    },
+    {
+      "sha256": "d1b248f7b512b9ae93bc6da614b0d06ed725fe81d497fb27175e292de7af3daa",
+      "bytes": 791,
+      "path": "catalog/acceptance/issue38/copilot/EX01/two-run-comparison.json"
+    },
+    {
+      "sha256": "3f0aef7bec619a38588ed02812683ac04f7ec3d40f06cd741d4c4bf409aa3869",
+      "bytes": 223,
+      "path": "catalog/acceptance/issue38/copilot/EX02/plan.json"
+    },
+    {
+      "sha256": "5ae4e414c12e3f8d5c0f617edd840c3689bcadc8319f8f326805c77eae982969",
+      "bytes": 2430,
+      "path": "catalog/acceptance/issue38/copilot/EX02/response-full.txt"
+    },
+    {
+      "sha256": "c648f82eb398caad7d270cf74537c475155cd9341e12fca34531a6d578322234",
+      "bytes": 9260,
+      "path": "catalog/acceptance/issue38/copilot/EX02/response-ui.txt"
+    },
+    {
+      "sha256": "817fb5015c1990180dfb5a58aa55474be26e72f36bffa0ccf4dfa6a6f510cc5b",
+      "bytes": 374,
+      "path": "catalog/acceptance/issue38/copilot/EX02/result.json"
+    },
+    {
+      "sha256": "a2e58be2ee10301228cfe03e2f3fe78e7a13b0be07badd3ddebb9f407062d79b",
+      "bytes": 151,
+      "path": "catalog/acceptance/issue38/copilot/EX02/send-attempt.json"
+    },
+    {
+      "sha256": "147c01c9a65f0f9403ba0e9f4d926cecc01858043f18efd1f7d6981db30b1f17",
+      "bytes": 16931,
+      "path": "catalog/acceptance/issue38/copilot/EX02/submitted-body.txt"
+    },
+    {
+      "sha256": "4d9b8a6982440109507ab560587a537359ff2034a3cb132e99aa5dc70a61efa6",
+      "bytes": 3173,
+      "path": "catalog/acceptance/issue38/copilot/EX03/code-copy.robin"
+    },
+    {
+      "sha256": "dc52ee8df08495e6affef6bc8082a9fad920f8d3ce8d089bd326f111c312a072",
+      "bytes": 226,
+      "path": "catalog/acceptance/issue38/copilot/EX03/plan.json"
+    },
+    {
+      "sha256": "0151a738a3d0ee19afe15310550190b310c3b8084495a4581ada1bfb4142687e",
+      "bytes": 5998,
+      "path": "catalog/acceptance/issue38/copilot/EX03/response-full.txt"
+    },
+    {
+      "sha256": "0c163dfefb71cfdd81201347526d00c9a18a6c7f6ea15c8a853eda362a20cd11",
+      "bytes": 437,
+      "path": "catalog/acceptance/issue38/copilot/EX03/result.json"
+    },
+    {
+      "sha256": "7c4fe805f3bbb2aac86b9c8a2cfa8d5b8997c2b4522eaa0c1e52bd680c8025ca",
+      "bytes": 122,
+      "path": "catalog/acceptance/issue38/copilot/EX03/send-attempt.json"
+    },
+    {
+      "sha256": "05a505f5a3aa8ca5bda4005adeccd4c3ae85db025e82fce654cd953082002027",
+      "bytes": 16814,
+      "path": "catalog/acceptance/issue38/copilot/EX03/submitted-body.txt"
+    },
+    {
+      "sha256": "3e20969b8f614f33f474de0b0b7f6a59d57d65e56376638e50d1df2e2179d3ef",
+      "bytes": 243,
+      "path": "catalog/acceptance/issue38/copilot/EX04-existing-output/plan.json"
+    },
+    {
+      "sha256": "80f1797143fb62bd472e9d59510c72862dfeee8279e51cf95ef1f1fc9b949135",
+      "bytes": 3659,
+      "path": "catalog/acceptance/issue38/copilot/EX04-existing-output/response-full.txt"
+    },
+    {
+      "sha256": "a006036fda62648c3b64f507850143287c518dd731045af5cf273f08e54b4c56",
+      "bytes": 531,
+      "path": "catalog/acceptance/issue38/copilot/EX04-existing-output/result.json"
+    },
+    {
+      "sha256": "6575db39cbf1f6722a79385ddd6b75611b3e970e0918f81b3e4de8e33a3bed70",
+      "bytes": 152,
+      "path": "catalog/acceptance/issue38/copilot/EX04-existing-output/send-attempt.json"
+    },
+    {
+      "sha256": "a88abc924f9ad653585015e177ac047a5234e76cc6f7c23b7b62be659a192faa",
+      "bytes": 17124,
+      "path": "catalog/acceptance/issue38/copilot/EX04-existing-output/submitted-body.txt"
+    },
+    {
+      "sha256": "18907e8bf2c0648a78b0ebfcd77144968ca1779984cce62e99d2d634a1a60af9",
+      "bytes": 212,
+      "path": "catalog/acceptance/issue38/copilot/EX04-invalid-range/plan.json"
+    },
+    {
+      "sha256": "ab582ffaf7f818fa1f604c1f0af56d011db184c1de9549265807fd6971361f76",
+      "bytes": 2330,
+      "path": "catalog/acceptance/issue38/copilot/EX04-invalid-range/response-full.txt"
+    },
+    {
+      "sha256": "ef7f712717f8fc11d3501448a718f2f7a182ff1525a86259f513449f8465b780",
+      "bytes": 416,
+      "path": "catalog/acceptance/issue38/copilot/EX04-invalid-range/result.json"
+    },
+    {
+      "sha256": "1c7de05c205e59efc85cba830f72a2ea3737ede2bd88cff1b81bf6ac62afcada",
+      "bytes": 245,
+      "path": "catalog/acceptance/issue38/copilot/EX04-invalid-range/send-attempt.json"
+    },
+    {
+      "sha256": "75c9853be020a7518b196caf057b3808bb3dfb08706740ae089f996687cfd8fa",
+      "bytes": 17144,
+      "path": "catalog/acceptance/issue38/copilot/EX04-invalid-range/submitted-body.txt"
+    },
+    {
+      "sha256": "3e6da31f50757fc3fdcff9ab07c15d7ad3d3171b4363e794d878bec2a92f162a",
+      "bytes": 243,
+      "path": "catalog/acceptance/issue38/copilot/EX04-missing-sheet/plan.json"
+    },
+    {
+      "sha256": "45e2f5bdbb41eec990ada665e45e023911905a4f98f693fb0cac20b8c6b6b5d5",
+      "bytes": 2848,
+      "path": "catalog/acceptance/issue38/copilot/EX04-missing-sheet/response-full.txt"
+    },
+    {
+      "sha256": "a3e931cee1d40a64066f9a4443951fb794fc619ddeed3e92f6944dc8f0e0929e",
+      "bytes": 347,
+      "path": "catalog/acceptance/issue38/copilot/EX04-missing-sheet/result.json"
+    },
+    {
+      "sha256": "a0178d4deb0f863b139199daa18dfbea154b4c743b8eaf8f4cef189a9ca1beb8",
+      "bytes": 122,
+      "path": "catalog/acceptance/issue38/copilot/EX04-missing-sheet/send-attempt.json"
+    },
+    {
+      "sha256": "7aedd012257d2fc902be246dd3c972bec9aee96cac374085c85fef84db3735fc",
+      "bytes": 17248,
+      "path": "catalog/acceptance/issue38/copilot/EX04-missing-sheet/submitted-body.txt"
+    },
+    {
+      "sha256": "0b8184bfe34e57a67713506b6ff880c0b06dda53b737da005146da815cbff6ba",
+      "bytes": 197,
+      "path": "catalog/acceptance/issue38/copilot/EX04-same-output/plan.json"
+    },
+    {
+      "sha256": "930c1263109aa72501b4ba9310894af43ab82b76115009fcd70c6e235a17ade6",
+      "bytes": 2189,
+      "path": "catalog/acceptance/issue38/copilot/EX04-same-output/response-full.txt"
+    },
+    {
+      "sha256": "007a0f16921753d3f34cfe59948037ebdd7ac08877396a80bfb74caa98bf1acb",
+      "bytes": 545,
+      "path": "catalog/acceptance/issue38/copilot/EX04-same-output/result.json"
+    },
+    {
+      "sha256": "b85552dc4cbe6b28d3ec794c8f0d0c21f05ee6e76faefe58d7400fd618fa9ce5",
+      "bytes": 152,
+      "path": "catalog/acceptance/issue38/copilot/EX04-same-output/send-attempt.json"
+    },
+    {
+      "sha256": "2753d2ce308bac1f6be5c61a93611c84476ddf4bf98a4567dee290e51a500994",
+      "bytes": 17101,
+      "path": "catalog/acceptance/issue38/copilot/EX04-same-output/submitted-body.txt"
+    },
+    {
+      "sha256": "2025231235efdb10b8963646d3830e281ecd0f9de52f7139793da0db344af0bc",
+      "bytes": 220,
+      "path": "catalog/acceptance/issue38/copilot/EX05-full-copy/plan.json"
+    },
+    {
+      "sha256": "55d4748ed09553a64184f38d73ee8a1192d4772c150c520617bf68a4eadf7fee",
+      "bytes": 3137,
+      "path": "catalog/acceptance/issue38/copilot/EX05-full-copy/response-full.txt"
+    },
+    {
+      "sha256": "4431ce9ab522eeb440d2959141b07c12200ca72482a70b4ea97d465488c4e31d",
+      "bytes": 600,
+      "path": "catalog/acceptance/issue38/copilot/EX05-full-copy/result.json"
+    },
+    {
+      "sha256": "2772ffef3e987fc0e2aad0c3dba411d6ce7c8c111764225a4ef1c57026e21af2",
+      "bytes": 152,
+      "path": "catalog/acceptance/issue38/copilot/EX05-full-copy/send-attempt.json"
+    },
+    {
+      "sha256": "8bc3f166a1fb884aa955dac7410cd0ced3af1490df0484d66f377fbb713c086e",
+      "bytes": 17194,
+      "path": "catalog/acceptance/issue38/copilot/EX05-full-copy/submitted-body.txt"
+    },
+    {
+      "sha256": "08888d665a34e7dab6c86ad0034006c670fdd84237473f5da81ef6f5c759ee99",
+      "bytes": 245,
+      "path": "catalog/acceptance/issue38/copilot/EX05-values-only/plan.json"
+    },
+    {
+      "sha256": "c634d009a13ced5e6a2d0b393ddb327d711012f3d03ccae89cac8de5e9901b80",
+      "bytes": 2502,
+      "path": "catalog/acceptance/issue38/copilot/EX05-values-only/response-full.txt"
+    },
+    {
+      "sha256": "fcb00805f53a513dc5d8b1773f2465de182991d6a7f4845f3d39f6b76786eb23",
+      "bytes": 535,
+      "path": "catalog/acceptance/issue38/copilot/EX05-values-only/result.json"
+    },
+    {
+      "sha256": "8ee90ec5d740d65306463eaf78319ff762abf77269314cec68c92bcf8638029b",
+      "bytes": 152,
+      "path": "catalog/acceptance/issue38/copilot/EX05-values-only/send-attempt.json"
+    },
+    {
+      "sha256": "ff131946f37c85c50069aed9e15f733fa8289ccd0a77d68f8fb3143e665cd8eb",
+      "bytes": 17156,
+      "path": "catalog/acceptance/issue38/copilot/EX05-values-only/submitted-body.txt"
+    },
+    {
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+      "bytes": 777,
+      "path": "catalog/acceptance/issue38/expected.json"
+    },
+    {
+      "sha256": "f655b62c82750fc07f4e54bcfd098e8e7c0b771c9422c4321cc413a4d6d07fa9",
+      "bytes": 4978,
+      "path": "catalog/acceptance/issue38/fixtures/EX02/input-a.xlsx"
+    },
+    {
+      "sha256": "69627e161747fedad0f7c3b410c1d625b29a553786be0c145e83aaf43d1b105a",
+      "bytes": 4980,
+      "path": "catalog/acceptance/issue38/fixtures/EX02/input-b.xlsx"
+    },
+    {
+      "sha256": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+      "bytes": 6099,
+      "path": "catalog/acceptance/issue38/fixtures/EX02/template.xlsx"
+    },
+    {
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "bytes": 6115,
+      "path": "catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx"
+    },
+    {
+      "sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+      "bytes": 5015,
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力い.xlsx"
+    },
+    {
+      "sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725",
+      "bytes": 5046,
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力ろ.xlsx"
+    },
+    {
+      "sha256": "ac94fb92d2db99eab4f3b7abd18befa13c5e78572377de068368d7cabc3c79f0",
+      "bytes": 1570,
+      "path": "catalog/acceptance/issue38/freeze.json"
+    },
+    {
+      "sha256": "22c2953abe5b59d3336164b1c5baf084189c60f19009f3f0d90e604a0d3cab83",
+      "bytes": 3420,
+      "path": "catalog/acceptance/issue38/plan.md"
+    },
+    {
+      "sha256": "1c877e8a502bc4b2f8eb9722838d05d8c5b049e42e19997fe0e30884d1b3e155",
+      "bytes": 1203,
+      "path": "catalog/acceptance/issue38/probes/comparison-prerequisites.json"
+    },
+    {
+      "sha256": "46ca4731a2c83c8b5a9e0ad069a1da72f11a7e6030a45a2352c37d11812a57aa",
+      "bytes": 2891,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/assembled-probe-rev2.robin"
+    },
+    {
+      "sha256": "cb876fc5968b941f0bf8e00f66e48f1f91f808ae1b4184ff06478147fe68f5ca",
+      "bytes": 4807,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/assembled-probe.robin"
+    },
+    {
+      "sha256": "39ceb68d225f61cf87e8c4c173fe3993699d52ff9e23b0457cb614945e423207",
+      "bytes": 95,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/captured-action.robin"
+    },
+    {
+      "sha256": "0e15aae04c3001de58608fe3e4fad41c1682405b53c42589aa6f4905e6dfc08b",
+      "bytes": 514,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/native-diagnostic-summary.json"
+    },
+    {
+      "sha256": "458ec56c014d3e1dd4b72b18f43d6f7e1bf800365cb28f4f250dabcd59f50951",
+      "bytes": 1039,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/native-full-styles.json"
+    },
+    {
+      "sha256": "9baedffbacb87b6741ca256d6a34562251cb7fc8ed03b90d7daaa419f3c569f2",
+      "bytes": 7375,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/native-representative-comparison.json"
+    },
+    {
+      "sha256": "99b128eaedc948c24b58b7e48a26f73a2bcd800d5a8fd03e33b0e1745a702777",
+      "bytes": 998,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/outcome.json"
+    },
+    {
+      "sha256": "a6e7cd0ac6f53bce953cbc1296b359aa089947e82ddec813f113029b6be47165",
+      "bytes": 813,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/paste-save.json"
+    },
+    {
+      "sha256": "1077e536e98155b4595ae9bf5b61860b1566d0a1ae9ea65df21df094411606a8",
+      "bytes": 933,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/plan-rev2.json"
+    },
+    {
+      "sha256": "97e0bc98e17da36bd8914025c774726d343a195ac4690a0ddcd744305efe75b1",
+      "bytes": 839,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/plan.json"
+    },
+    {
+      "sha256": "46ca4731a2c83c8b5a9e0ad069a1da72f11a7e6030a45a2352c37d11812a57aa",
+      "bytes": 2891,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/recopy-after-run2.robin"
+    },
+    {
+      "sha256": "46ca4731a2c83c8b5a9e0ad069a1da72f11a7e6030a45a2352c37d11812a57aa",
+      "bytes": 2891,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/recopy.robin"
+    },
+    {
+      "sha256": "15a47667ae925435c4d1cdf6863ac69a713411fadd6407627b40eaa15f19df26",
+      "bytes": 512,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/run1-focus-recovery.json"
+    },
+    {
+      "sha256": "e86a3084a98d3dab8f1008fd975935049cafb772eb5d84f583187fb50bea7318",
+      "bytes": 1334,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/run1-followup-observation.json"
+    },
+    {
+      "sha256": "eb24b06398d289d9880f90824f48634787de3d8ee064a7daa386c1c8583ebbab",
+      "bytes": 19495,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/run1-provisional-values.json"
+    },
+    {
+      "sha256": "13265147fe0bbd2e9cf0bf4f85e375edd093d078ec4bdf8bb20b13016c5e6087",
+      "bytes": 254,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/run1-request.json"
+    },
+    {
+      "sha256": "84ba7fb36937b03c80403d52a8282ac55c936a42f13618389522ba772a06456e",
+      "bytes": 959,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/run1/artifact.json"
+    },
+    {
+      "sha256": "d26984c4739652f4ab14005bb3b60fc16131e7c346e5dc805429644069ac134a",
+      "bytes": 527,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/run1/owned-originals/gate.json"
+    },
+    {
+      "sha256": "6488df60aaeb75a3f873062f495310b3c69cdea10da02c111bc3afe798408edc",
+      "bytes": 11218,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/run1/owned-originals/result.xlsx"
+    },
+    {
+      "sha256": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+      "bytes": 6099,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/run1/owned-originals/work.xlsx"
+    },
+    {
+      "sha256": "6488df60aaeb75a3f873062f495310b3c69cdea10da02c111bc3afe798408edc",
+      "bytes": 11218,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/run1/result.xlsx"
+    },
+    {
+      "sha256": "70130745842369e04675b9c98bf93261e3642e0d5604f959f69b2d810e8312af",
+      "bytes": 147,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/run2-request.json"
+    },
+    {
+      "sha256": "88cfa54f48266e0029b74ad8a361934f66605c716773f60cbd98546974449fc7",
+      "bytes": 492,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/run2.json"
+    },
+    {
+      "sha256": "e79ca9b6d9288a1acc8210adcb21c728d8e1be67b7c57259d9be004b5f91662c",
+      "bytes": 19495,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/run2/comparison.json"
+    },
+    {
+      "sha256": "743026eea91e33961dcab6c5e9b00f1755b8cfac846ad415689f7736a3c8f348",
+      "bytes": 1039,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/run2/native-styles.json"
+    },
+    {
+      "sha256": "cba7cebd63e22f75b10202fbad0a208bcd72931c860951a1bb6bdf10411b7336",
+      "bytes": 11220,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/run2/result.xlsx"
+    },
+    {
+      "sha256": "915d8d99bedb6aa45c1e1d4c0a089b2137cc9e01254df950a7fef0dc62c927a1",
+      "bytes": 72372,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/runtime-window-diagnostic.json"
+    },
+    {
+      "sha256": "43e09447167f371ac39d530011a6f53824c272347777e99cc2ef1a1f30dd9df6",
+      "bytes": 14316,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/style-diagnostic.json"
+    },
+    {
+      "sha256": "012c857182ac506166faaf9d2bd4a49f62405e3944f20cb2639c9e53f3009a4e",
+      "bytes": 944,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/template-native-readonly.json"
+    },
+    {
+      "sha256": "3f292fc60c2a4f50733e49a3b6e204a4fb568c73a0708ec1112fc73781766bbc",
+      "bytes": 782,
+      "path": "catalog/acceptance/issue38/probes/matrix-write/two-run-result.json"
+    },
+    {
+      "sha256": "477b7c174b1d74015ed7ee9ff3f0cbf3e768ec6adc9cc1e4ea05eb56a9c67272",
+      "bytes": 563,
+      "path": "catalog/acceptance/issue38/probes/output-guard/assembled.robin"
+    },
+    {
+      "sha256": "471d0e4c039d3ecceaf9f37f8d36fc018226c633301df5ea06f00046e886ece7",
+      "bytes": 281,
+      "path": "catalog/acceptance/issue38/probes/output-guard/attempt-after-state-change.json"
+    },
+    {
+      "sha256": "d1c5ff94f7a1e549efab004cb835fe1313cf98b6c6ee82ab776a6681346b740c",
+      "bytes": 569,
+      "path": "catalog/acceptance/issue38/probes/output-guard/attempt.json"
+    },
+    {
+      "sha256": "477b7c174b1d74015ed7ee9ff3f0cbf3e768ec6adc9cc1e4ea05eb56a9c67272",
+      "bytes": 563,
+      "path": "catalog/acceptance/issue38/probes/output-guard/captured-uia.robin"
+    },
+    {
+      "sha256": "58927c414465a8d5dcf18af625e15aa90314b6a6cb3d3fd71ece28056882bb14",
+      "bytes": 32,
+      "path": "catalog/acceptance/issue38/probes/output-guard/existing.txt"
+    },
+    {
+      "sha256": "e29df83cc9d9ba51c3d0e9c8b1f82c2bfa13a170c91bb7bbc0e6a684a69198f4",
+      "bytes": 575,
+      "path": "catalog/acceptance/issue38/probes/output-guard/plan.json"
+    },
+    {
+      "sha256": "477b7c174b1d74015ed7ee9ff3f0cbf3e768ec6adc9cc1e4ea05eb56a9c67272",
+      "bytes": 563,
+      "path": "catalog/acceptance/issue38/probes/output-guard/recopy-after-run2.robin"
+    },
+    {
+      "sha256": "80adde62d9836361454cf51b4b3edffe48ad6ead8ff2e96c90bac08a31dfc7ae",
+      "bytes": 352,
+      "path": "catalog/acceptance/issue38/probes/output-guard/run1-console-followup.json"
+    },
+    {
+      "sha256": "281f26253227f88e7970899a5f2cea11a0ef556ec8ab96cc2fa329122fb6cfbb",
+      "bytes": 681,
+      "path": "catalog/acceptance/issue38/probes/output-guard/run1-focus-recovery.json"
+    },
+    {
+      "sha256": "d615e528682e41bb669d95f3ff750d306c16b836de41951061eda0fe2d6ae365",
+      "bytes": 391,
+      "path": "catalog/acceptance/issue38/probes/output-guard/run1-followup.json"
+    },
+    {
+      "sha256": "51d9fa803aa2db8ab34b430ae2dd840f06e5aac88ca36053eddadab5947761f6",
+      "bytes": 565,
+      "path": "catalog/acceptance/issue38/probes/output-guard/run1-observation.json"
+    },
+    {
+      "sha256": "d2781d965bff81394e5bd95cac044a80a8ec7e21a2f6d0d9446fbe06bf8a33c6",
+      "bytes": 144,
+      "path": "catalog/acceptance/issue38/probes/output-guard/run1-request.json"
+    },
+    {
+      "sha256": "4533bf3370629a6f7cb2bf1799e993658b0f7d79a4117a1544d739a1a3386acc",
+      "bytes": 413,
+      "path": "catalog/acceptance/issue38/probes/output-guard/run2-comparison.json"
+    },
+    {
+      "sha256": "46cf63281a8b8ebac43a5554caccb8a0771cfc14dc733f6a578e4b4f19956487",
+      "bytes": 88,
+      "path": "catalog/acceptance/issue38/probes/output-guard/run2-request.json"
+    },
+    {
+      "sha256": "3a17e8f214aace56d7839abaaaf00d13baab49fed4dc9edc3055d8bd81f514b4",
+      "bytes": 300,
+      "path": "catalog/acceptance/issue38/probes/output-guard/run2.json"
+    },
+    {
+      "sha256": "949abed31c0b369e9f5d7f523962037f83810e99d57c9650060df362ac393f2d",
+      "bytes": 659,
+      "path": "catalog/acceptance/issue38/probes/output-guard/sky-dialog-observation.json"
+    },
+    {
+      "sha256": "2c6c9332e6cfbfb740475f637f6292210c587efab70a1b815611a338a120d501",
+      "bytes": 722,
+      "path": "catalog/acceptance/issue38/probes/output-guard/two-run-result.json"
+    },
+    {
+      "sha256": "fc0d548fa3fcfadda3faa3d8d65c940730302805f6beafed3fe873790a85a10f",
+      "bytes": 531,
+      "path": "catalog/acceptance/issue38/probes/output-guard/uia-partial-configuration.json"
+    },
+    {
+      "sha256": "6e2b693054c63bd2d46c744ef9514d02d6d34b5b9db9a8f1ad9f92f04bbf7202",
+      "bytes": 1503,
+      "path": "catalog/acceptance/issue38/probes/output-guard/uia-ten-actions.json"
+    },
+    {
+      "sha256": "4d5d895685233123ed51aeb16da8aa40a7b309113c55e26b11145e80410109f5",
+      "bytes": 748,
+      "path": "catalog/acceptance/issue38/probes/scalar-compare/captured-equality.robin"
+    },
+    {
+      "sha256": "0b13b8aed3130022535b32020647b7b8e69dd3e7c1d498c342877567271e71d2",
+      "bytes": 1003,
+      "path": "catalog/acceptance/issue38/probes/scalar-compare/captured-full.robin"
+    },
+    {
+      "sha256": "758d03d1b47f7a45a1f57052f53a0d7216a72b9b971da0749c248f09386a36ad",
+      "bytes": 679,
+      "path": "catalog/acceptance/issue38/probes/scalar-compare/captured-six-actions.robin"
+    },
+    {
+      "sha256": "8c50b7698810149a3fd68e8296dfa6a41389de7b4e0a818d2ea32379c967f877",
+      "bytes": 356,
+      "path": "catalog/acceptance/issue38/probes/scalar-compare/created.json"
+    },
+    {
+      "sha256": "a986f9c4b804c017a62cc7f12ed3c55d9b18dd62d26a4a6abf926804748ce109",
+      "bytes": 517,
+      "path": "catalog/acceptance/issue38/probes/scalar-compare/paste-base.json"
+    },
+    {
+      "sha256": "c400ade57004e6a510f4ec5dec455bfb71a4ea7e3cb626b2fdb0aff41eeee17e",
+      "bytes": 755,
+      "path": "catalog/acceptance/issue38/probes/scalar-compare/plan.json"
+    },
+    {
+      "sha256": "72f2d38011212512652d926831f98a68562f686392d54a875967db2ff2cde8b4",
+      "bytes": 606,
+      "path": "catalog/acceptance/issue38/probes/scalar-compare/read-base.robin"
+    },
+    {
+      "sha256": "0b13b8aed3130022535b32020647b7b8e69dd3e7c1d498c342877567271e71d2",
+      "bytes": 1003,
+      "path": "catalog/acceptance/issue38/probes/scalar-compare/recopy-after-run2.robin"
+    },
+    {
+      "sha256": "3b2925694818a9f9bb4d0ea33c1a1bdba249bcb2a41f1987e00859c30df482cb",
+      "bytes": 842,
+      "path": "catalog/acceptance/issue38/probes/scalar-compare/run1-comparison.json"
+    },
+    {
+      "sha256": "ab233eaeb9098711331d427b57a1461dd1bc0ba6181b3e23e5949d1f37760bf4",
+      "bytes": 264,
+      "path": "catalog/acceptance/issue38/probes/scalar-compare/run1-request.json"
+    },
+    {
+      "sha256": "7aaf042a3ca5b379c161acdb073d8df3016284671b69ac748235c01a7359d9ab",
+      "bytes": 417,
+      "path": "catalog/acceptance/issue38/probes/scalar-compare/run1.json"
+    },
+    {
+      "sha256": "c69f756f65a7106c1d928aa73fda924320b679610550751ccb99be20d46e92d8",
+      "bytes": 746,
+      "path": "catalog/acceptance/issue38/probes/scalar-compare/run2-comparison.json"
+    },
+    {
+      "sha256": "d1699465cd2732fe0067289a3d37349e9212991102f642992ec60b3e6e131d3e",
+      "bytes": 88,
+      "path": "catalog/acceptance/issue38/probes/scalar-compare/run2-request.json"
+    },
+    {
+      "sha256": "1bca3099860ca5057e57aaeecbfd7351716bfc87436025572d8c90c0b172ee42",
+      "bytes": 400,
+      "path": "catalog/acceptance/issue38/probes/scalar-compare/run2.json"
+    },
+    {
+      "sha256": "7c4e8d23a00d88017a5284dcb72cc63baf38364c956bd555911abd5f22f1636c",
+      "bytes": 350,
+      "path": "catalog/acceptance/issue38/probes/scalar-compare/two-run-result.json"
+    },
+    {
+      "sha256": "add1ce6290d99f4cbbf8a82a28658a7661c58b68a8126466b0a0be5ae3db8b29",
+      "bytes": 20276,
+      "path": "catalog/acceptance/issue38/report.md"
+    },
+    {
+      "sha256": "c951798ea6a951b7783eadd86f1db8d23f4ae3a6a4c00c3cc9d3ab83ffd75480",
+      "bytes": 697,
+      "path": "catalog/acceptance/issue38/requests/EX01.txt"
+    },
+    {
+      "sha256": "39ef21927f5ce454bc9a407c54bec21125816bcb9a2d902074521111e1fada39",
+      "bytes": 1764,
+      "path": "catalog/acceptance/issue38/requests/EX02.txt"
+    },
+    {
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+      "bytes": 1647,
+      "path": "catalog/acceptance/issue38/requests/EX03.txt"
+    },
+    {
+      "sha256": "06b26871b1f08d156ce6cc3bea9325f922b2d7883fc988e299d5459210a7d5af",
+      "bytes": 1179,
+      "path": "catalog/acceptance/issue38/requests/EX04.json"
+    },
+    {
+      "sha256": "6aa928b949bd52134f0bbb270056fdcbfd72a710995ac47ff5f29559af4b696c",
+      "bytes": 718,
+      "path": "catalog/acceptance/issue38/requests/EX05.json"
+    },
+    {
+      "sha256": "240a3e0d37d2e86b614063f5347eb02d4f99ca6c254de6b82871ff8d95532a7d",
+      "bytes": 14,
+      "path": "catalog/acceptance/issue38/runs/.gitignore"
+    },
+    {
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+      "bytes": 1192,
+      "path": "catalog/acceptance/issue38/spec.json"
+    },
+    {
+      "sha256": "d027aa99fae21b68f170bf2c048da384d52f21f0398c5258464ef673e4eb4cf5",
+      "bytes": 5291,
+      "path": "catalog/acceptance/issue38/status.json"
+    },
+    {
+      "sha256": "4ee7d9c6eadf0fb2d47e26b607e462af992a800b7d8dd3be89072714a0256fe3",
+      "bytes": 19140,
+      "path": "copilot/README-history-before-issue38.md"
+    },
+    {
+      "sha256": "7ea9f51602400612b236a29dd47c258df1a260afdbd7d690800a9aad982e2060",
+      "bytes": 3310,
+      "path": "copilot/README.md"
+    },
+    {
+      "sha256": "2f43830f142fcf32bf74f58c7883dbe4f5691dd4cd112d2806c67ac26d25a6e0",
+      "bytes": 14998,
+      "path": "copilot/versions/20260915-excel-r1/agent-instructions.txt"
+    },
+    {
+      "sha256": "14d0c4472a7a5deb1972ca2292052701562e028b5a0d9c44a08057db67c60a45",
+      "bytes": 19695,
+      "path": "copilot/versions/20260915-excel-r1/knowledge/PAD-Robin-00-Index.txt"
+    },
+    {
+      "sha256": "abe921c3e7aa19ce5410fe746fe4c4f5c7fc7ee3ffd18c4b6747686a41fdbf31",
+      "bytes": 12741,
+      "path": "copilot/versions/20260915-excel-r1/knowledge/PAD-Robin-01-Basics.txt"
+    },
+    {
+      "sha256": "0caea76804e62d78c0c174add3f04acf6835d497220dc00cef256b03ddf0d7ea",
+      "bytes": 15200,
+      "path": "copilot/versions/20260915-excel-r1/knowledge/PAD-Robin-02-Control.txt"
+    },
+    {
+      "sha256": "a541082a650a7cfae9d2b2cfb47026d7b8ee81bc542f30ba409af5e6291c9aea",
+      "bytes": 25350,
+      "path": "copilot/versions/20260915-excel-r1/knowledge/PAD-Robin-03-Files.txt"
+    },
+    {
+      "sha256": "6be6831c804bde7932513d0e78961a217e5ced864be56b6b1d2249c8edc3ee7e",
+      "bytes": 21739,
+      "path": "copilot/versions/20260915-excel-r1/knowledge/PAD-Robin-04-Office-PDF.txt"
+    },
+    {
+      "sha256": "e62a78aa92941984bacbdc59d4c6561104a9eca5b9d0e45b817f539e4558d867",
+      "bytes": 8995,
+      "path": "copilot/versions/20260915-excel-r1/knowledge/PAD-Robin-05-UI-Web.txt"
+    },
+    {
+      "sha256": "b9749b3cb31a242d2f66e30f659dc8be4e37f9d1299b0360453c89923278601e",
+      "bytes": 19269,
+      "path": "copilot/versions/20260915-excel-r1/knowledge/PAD-Robin-06-Examples.txt"
+    },
+    {
+      "sha256": "e8a967e418f14bdaf0197e46a60f2e1b94658fb5aa37c402666ae960203d82e4",
+      "bytes": 124434,
+      "path": "copilot/versions/20260915-excel-r1/knowledge/PAD-Robin-Knowledge-Bundle.txt"
+    },
+    {
+      "sha256": "02654909d937a221ef27640dfec7b204139d13854cdfcdffee4a7b6f7f35bfe0",
+      "bytes": 2224,
+      "path": "copilot/versions/20260915-excel-r1/manifest.json"
+    },
+    {
+      "sha256": "5374e7a93f547e9f6193649a3498dfea29d832cdf034f7ddd13db18e81f3379c",
+      "bytes": 15232,
+      "path": "copilot/versions/20260915-excel-r2/agent-instructions.txt"
+    },
+    {
+      "sha256": "dcfc9e49d072bb23652bbd829209b1ae1835de68ce345ea8a6532628837570e2",
+      "bytes": 23323,
+      "path": "copilot/versions/20260915-excel-r2/knowledge/PAD-Robin-00-Index.txt"
+    },
+    {
+      "sha256": "abe921c3e7aa19ce5410fe746fe4c4f5c7fc7ee3ffd18c4b6747686a41fdbf31",
+      "bytes": 12741,
+      "path": "copilot/versions/20260915-excel-r2/knowledge/PAD-Robin-01-Basics.txt"
+    },
+    {
+      "sha256": "0caea76804e62d78c0c174add3f04acf6835d497220dc00cef256b03ddf0d7ea",
+      "bytes": 15200,
+      "path": "copilot/versions/20260915-excel-r2/knowledge/PAD-Robin-02-Control.txt"
+    },
+    {
+      "sha256": "a541082a650a7cfae9d2b2cfb47026d7b8ee81bc542f30ba409af5e6291c9aea",
+      "bytes": 25350,
+      "path": "copilot/versions/20260915-excel-r2/knowledge/PAD-Robin-03-Files.txt"
+    },
+    {
+      "sha256": "0d75f24a4ce8a63eb205406ee924b894f5bc7543d8197f6d992f26261a792918",
+      "bytes": 25477,
+      "path": "copilot/versions/20260915-excel-r2/knowledge/PAD-Robin-04-Office-PDF.txt"
+    },
+    {
+      "sha256": "e62a78aa92941984bacbdc59d4c6561104a9eca5b9d0e45b817f539e4558d867",
+      "bytes": 8995,
+      "path": "copilot/versions/20260915-excel-r2/knowledge/PAD-Robin-05-UI-Web.txt"
+    },
+    {
+      "sha256": "9be01dec50d2773d93098fac5e7e4c251751a3955d07592c2e3d4af2a7ece3cb",
+      "bytes": 22907,
+      "path": "copilot/versions/20260915-excel-r2/knowledge/PAD-Robin-06-Examples.txt"
+    },
+    {
+      "sha256": "e33b7aa064b1ac376d938e71e4f73f99555c43416f914ca02e56ff2d0295ebaa",
+      "bytes": 135435,
+      "path": "copilot/versions/20260915-excel-r2/knowledge/PAD-Robin-Knowledge-Bundle.txt"
+    },
+    {
+      "sha256": "662ae142fa7af7ee41b44ab86da0a41af55c54d21d637489800a8b46feb453e6",
+      "bytes": 2498,
+      "path": "copilot/versions/20260915-excel-r2/manifest.json"
+    },
+    {
+      "sha256": "7615ce87f047a6870e9ac2bbf6997f0032d39085909f4e65b6576df22ab632d6",
+      "bytes": 15165,
+      "path": "copilot/versions/20260915-excel-r3/agent-instructions.txt"
+    },
+    {
+      "sha256": "20dc811f7c4690a67b76bcb274a6ad54f4a1eb63cb616bed73b3392b84d2fe35",
+      "bytes": 23294,
+      "path": "copilot/versions/20260915-excel-r3/knowledge/PAD-Robin-00-Index.txt"
+    },
+    {
+      "sha256": "abe921c3e7aa19ce5410fe746fe4c4f5c7fc7ee3ffd18c4b6747686a41fdbf31",
+      "bytes": 12741,
+      "path": "copilot/versions/20260915-excel-r3/knowledge/PAD-Robin-01-Basics.txt"
+    },
+    {
+      "sha256": "0caea76804e62d78c0c174add3f04acf6835d497220dc00cef256b03ddf0d7ea",
+      "bytes": 15200,
+      "path": "copilot/versions/20260915-excel-r3/knowledge/PAD-Robin-02-Control.txt"
+    },
+    {
+      "sha256": "a541082a650a7cfae9d2b2cfb47026d7b8ee81bc542f30ba409af5e6291c9aea",
+      "bytes": 25350,
+      "path": "copilot/versions/20260915-excel-r3/knowledge/PAD-Robin-03-Files.txt"
+    },
+    {
+      "sha256": "8b8c550eb4ef64468ee4e5454f549ed52d3fbe6244ba133947147809743aaf29",
+      "bytes": 25338,
+      "path": "copilot/versions/20260915-excel-r3/knowledge/PAD-Robin-04-Office-PDF.txt"
+    },
+    {
+      "sha256": "e62a78aa92941984bacbdc59d4c6561104a9eca5b9d0e45b817f539e4558d867",
+      "bytes": 8995,
+      "path": "copilot/versions/20260915-excel-r3/knowledge/PAD-Robin-05-UI-Web.txt"
+    },
+    {
+      "sha256": "a703df076255a8246279f3a5f8269fe0a3533eaf0acecd244873e0b37cc8c336",
+      "bytes": 22868,
+      "path": "copilot/versions/20260915-excel-r3/knowledge/PAD-Robin-06-Examples.txt"
+    },
+    {
+      "sha256": "a7885bb4233a95816dba4974804974532a13bcc750b63484bd331ee6e12fa930",
+      "bytes": 135231,
+      "path": "copilot/versions/20260915-excel-r3/knowledge/PAD-Robin-Knowledge-Bundle.txt"
+    },
+    {
+      "sha256": "dddc8af83e630a6b7aeadaaf35457ecfc7b3ec3d27c3f6d1ec1a7f8b078ed837",
+      "bytes": 2498,
+      "path": "copilot/versions/20260915-excel-r3/manifest.json"
+    },
+    {
+      "sha256": "92ef6f97540bc4d8423e89e9b93ffd9d9701fda4f339adb1eb6d81e68483dab2",
+      "bytes": 14854,
+      "path": "docs/pad-copilot-operation-guide.md"
+    },
+    {
+      "sha256": "a4e43fb49b22a69620d573f47d61a3ac847165765f26a8f5a5398c7da3b495c0",
+      "bytes": 19797,
+      "path": "docs/pad-live-setup.md"
+    },
+    {
+      "sha256": "84433b4a53eabdfe93a6da639e07d9b59fde8b2f552181c679c974635e9b3e2f",
+      "bytes": 13965,
+      "path": "README.md"
+    },
+    {
+      "sha256": "3a854efbe8c285a0c88844786a40d49beb693eb35c07ed753232c30aafc567b4",
+      "bytes": 5738,
+      "path": "tests/Test-Issue38Excel.py"
+    },
+    {
+      "sha256": "1777a4494ede0b7a279660a0ade42de9b83f86756d6bb8201690c25cfbba6a5b",
+      "bytes": 4183,
+      "path": "tests/Test-Issue38Package.mjs"
+    },
+    {
+      "sha256": "eedc2d234912a2f7aef2aecc316991af68dca5e0b9559f136e4fdfbd4e4922f6",
+      "bytes": 11744,
+      "path": "tools/Build-Issue38Candidate.ps1"
+    },
+    {
+      "sha256": "28ad42adad3e5947eaaf9499b83507601fb0a969a88de02a44225e4fead1817b",
+      "bytes": 3953,
+      "path": "tools/Build-Issue38MatrixProbe.mjs"
+    },
+    {
+      "sha256": "600f1c5ba60fd926c4c057f9245289262629d827ead9d7578a07b450db34132c",
+      "bytes": 6964,
+      "path": "tools/Build-Issue38WriteCandidate.py"
+    },
+    {
+      "sha256": "0acf79817e7594d08e29f23b7e07feb2a5af72364f2c23ba300faaccf0ba3beb",
+      "bytes": 1879,
+      "path": "tools/Build-KnowledgeBundle.ps1"
+    },
+    {
+      "sha256": "fae5ae55bc7d12b898e28291ce1bb967e1fc911c3c27f415d076c123ea80373b",
+      "bytes": 4268,
+      "path": "tools/Compare-Issue38NativeStyles.ps1"
+    },
+    {
+      "sha256": "f9ec1356c276830e4bb88fdbf69bda187a4f1fc31020fe2d0ebdfc4bcc68695f",
+      "bytes": 3873,
+      "path": "tools/New-Issue38Fixtures.mjs"
+    },
+    {
+      "sha256": "2019a9cb0083864119c29a78611a0b1d0172bf3e4901836f115114f8ea52a1c0",
+      "bytes": 1712,
+      "path": "tools/Prepare-Issue38Run.py"
+    },
+    {
+      "sha256": "d0d58f7f5830b737073c1818c3808d8c1b159ee4e44f33bd77b1379fbe334efd",
+      "bytes": 3382,
+      "path": "tools/Run-PadFlowLive.ps1"
+    },
+    {
+      "sha256": "bd8c9742f78b5af71d8fa4c663046a501245061c66dde7b1a9621cd4d5ac3d35",
+      "bytes": 8872,
+      "path": "tools/Verify-Issue38Excel.py"
+    }
+  ],
+  "base_commit": "c60251d65afe30160bcb33b08a988a46028b783c"
+}

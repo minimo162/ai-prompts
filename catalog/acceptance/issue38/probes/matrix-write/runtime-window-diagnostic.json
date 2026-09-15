@@ -1,0 +1,2650 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-15T16:13:08+09:00",
+  "verification_id": "T04-INDEPENDENT-CURRENT-20260914E-WINDOW-DIAGNOSTIC-12",
+  "case": "T04",
+  "scope": "read_only_pad_window_visibility_diagnostic",
+  "target_process_ids": [
+    1576,
+    12576
+  ],
+  "target_process_snapshot_after_refresh": [
+    {
+      "pid": 1576,
+      "process": "PAD.Designer",
+      "session_id": 2,
+      "responding": true,
+      "start_time": "2026-09-15T16:07:20.4305969+09:00",
+      "main_window_handle": 1442672,
+      "main_window_title": "",
+      "present": true
+    },
+    {
+      "pid": 12576,
+      "process": "PAD.Designer",
+      "session_id": 2,
+      "responding": true,
+      "start_time": "2026-09-15T16:11:52.9780255+09:00",
+      "main_window_handle": 0,
+      "main_window_title": "",
+      "present": true
+    }
+  ],
+  "session_comparison": {
+    "powershell": {
+      "pid": 13560,
+      "process": "pwsh",
+      "session_id": 2,
+      "responding": true,
+      "start_time": "2026-09-15T16:13:06.3545127+09:00",
+      "main_window_handle": 0,
+      "main_window_title": ""
+    },
+    "explorer": [
+      {
+        "pid": 11548,
+        "process": "explorer",
+        "session_id": 2,
+        "responding": true,
+        "start_time": "2026-09-15T14:18:37.1890185+09:00",
+        "main_window_handle": 65808,
+        "main_window_title": ""
+      }
+    ],
+    "pad_targets": [
+      {
+        "pid": 1576,
+        "process": "PAD.Designer",
+        "session_id": 2,
+        "responding": true,
+        "start_time": "2026-09-15T16:07:20.4305969+09:00",
+        "main_window_handle": 1442672,
+        "main_window_title": "",
+        "present": true
+      },
+      {
+        "pid": 12576,
+        "process": "PAD.Designer",
+        "session_id": 2,
+        "responding": true,
+        "start_time": "2026-09-15T16:11:52.9780255+09:00",
+        "main_window_handle": 0,
+        "main_window_title": "",
+        "present": true
+      }
+    ],
+    "unique_session_ids": [
+      2
+    ]
+  },
+  "top_level_windows": [
+    {
+      "hwnd": 131844,
+      "is_window_visible": false,
+      "title": "GDI+ Window (TabTip.exe)",
+      "class_name": "GDI+ Hook Window Class",
+      "owner_pid": 17796,
+      "owner_process": "TabTip",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 131940,
+      "is_window_visible": false,
+      "title": "Shell Handwriting Canvas",
+      "class_name": "ShellHandwritingCanvas {18E91349-E229-4995-8049-7437243BBCC3}",
+      "owner_pid": 17796,
+      "owner_process": "TabTip",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 131108,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "{11AD28A8-838B-4781-BCA9-4CE43C38818F}",
+      "owner_pid": 11316,
+      "owner_process": "tposd",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 131110,
+      "is_window_visible": true,
+      "title": "",
+      "class_name": "{5FE47C2E-F34F-4E4A-935A-B615546D8A33}",
+      "owner_pid": 11316,
+      "owner_process": "tposd",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 131120,
+      "is_window_visible": false,
+      "title": "GDI+ Window (TPOSD.EXE)",
+      "class_name": "GDI+ Hook Window Class",
+      "owner_pid": 11316,
+      "owner_process": "tposd",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66002,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "ForegroundStaging",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65942,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "ForegroundStaging",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 1442672,
+      "is_window_visible": true,
+      "title": "",
+      "class_name": "HwndWrapper[PAD.Designer;;b91359e0-1c35-4585-8bb1-aef1129a6b68]",
+      "owner_pid": 1576,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65846,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "tooltips_class32",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65808,
+      "is_window_visible": true,
+      "title": "",
+      "class_name": "Shell_TrayWnd",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 393986,
+      "is_window_visible": false,
+      "title": "M365 Copilot クイック ビュー",
+      "class_name": "Microsoft 365 Copilot Host",
+      "owner_pid": 22272,
+      "owner_process": "M365Copilot",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 393730,
+      "is_window_visible": true,
+      "title": "クリックで実行",
+      "class_name": "IslandWindow",
+      "owner_pid": 12664,
+      "owner_process": "ClickToDo",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66006,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "ScreenrayOwnerWindow",
+      "owner_pid": 12664,
+      "owner_process": "ClickToDo",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66882,
+      "is_window_visible": false,
+      "title": "ChatGPT is using your computer. Esc to cancel",
+      "class_name": "CodexComputerUseSwiftOverlay",
+      "owner_pid": 21324,
+      "owner_process": "codex-computer-use-swift",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 458954,
+      "is_window_visible": false,
+      "title": "GDI+ Window (PAD.AutomationServer.exe)",
+      "class_name": "GDI+ Hook Window Class",
+      "owner_pid": 11376,
+      "owner_process": "PAD.AutomationServer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 329782,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "HwndWrapper[PAD.Designer;;d6f38e89-0273-4db6-bef0-1987d21ebf76]",
+      "owner_pid": 12576,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 1114348,
+      "is_window_visible": false,
+      "title": "Power Automate | ",
+      "class_name": "HwndWrapper[PAD.Designer;;deea778c-df08-4fb5-bff3-64a59d4d8c78]",
+      "owner_pid": 12576,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 329434,
+      "is_window_visible": false,
+      "title": "MediaContextNotificationWindow",
+      "class_name": "HwndWrapper[PAD.Designer;;a799bdad-1c43-43fb-8eb6-c6da30f70e63]",
+      "owner_pid": 12576,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 1114718,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "HwndWrapper[PAD.Designer;;5ca134ba-a9c9-4c3e-b745-8e266d2902a5]",
+      "owner_pid": 12576,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 263906,
+      "is_window_visible": false,
+      "title": "SystemResourceNotifyWindow",
+      "class_name": "HwndWrapper[PAD.Designer;;4767348e-51fc-4de0-979e-e23fa49ce636]",
+      "owner_pid": 12576,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 198680,
+      "is_window_visible": true,
+      "title": "Power Automate | RobinIssue38MatrixRuntime20260915A",
+      "class_name": "HwndWrapper[PAD.Designer;;a3371ee9-1a70-4345-9036-c84ed63bd402]",
+      "owner_pid": 1576,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 524730,
+      "is_window_visible": true,
+      "title": "Power Automate",
+      "class_name": "HwndWrapper[PAD.Console.Host;;0b15ca2e-80c1-4c65-9c48-03bec76b789a]",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 198118,
+      "is_window_visible": true,
+      "title": "Power Automate | RobinIssue38MatrixProbe20260915A",
+      "class_name": "HwndWrapper[PAD.Designer;;f80008fc-7b26-454d-98f6-d60a688493fb]",
+      "owner_pid": 3516,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 657136,
+      "is_window_visible": false,
+      "title": ".NET-BroadcastEventWindow.197b23.0",
+      "class_name": ".NET-BroadcastEventWindow.197b23.0",
+      "owner_pid": 3516,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67688,
+      "is_window_visible": false,
+      "title": "GDI+ Window (PAD.AutomationServer.exe)",
+      "class_name": "GDI+ Hook Window Class",
+      "owner_pid": 12800,
+      "owner_process": "PAD.AutomationServer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67610,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "HwndWrapper[PAD.Designer;;659d7093-9b1c-4600-92f8-c87e646d1028]",
+      "owner_pid": 1576,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 1704590,
+      "is_window_visible": false,
+      "title": "MediaContextNotificationWindow",
+      "class_name": "HwndWrapper[PAD.Designer;;df5e6637-89a4-4c22-9ee3-9e4fa67c18a3]",
+      "owner_pid": 1576,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67790,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "PersonalizationThemeChangeListener",
+      "owner_pid": 17620,
+      "owner_process": "SystemSettings",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 723098,
+      "is_window_visible": true,
+      "title": "設定",
+      "class_name": "Windows.UI.Core.CoreWindow",
+      "owner_pid": 17620,
+      "owner_process": "SystemSettings",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67742,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WorkerW",
+      "owner_pid": 17620,
+      "owner_process": "SystemSettings",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67694,
+      "is_window_visible": true,
+      "title": "設定",
+      "class_name": "ApplicationFrameWindow",
+      "owner_pid": 15424,
+      "owner_process": "ApplicationFrameHost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 329498,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "HwndWrapper[PAD.Designer;;879921e1-5e2c-431b-b056-f12611294a6b]",
+      "owner_pid": 1576,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 262512,
+      "is_window_visible": false,
+      "title": "SystemResourceNotifyWindow",
+      "class_name": "HwndWrapper[PAD.Designer;;2137d2c6-ef6d-4140-9250-320b468d4491]",
+      "owner_pid": 1576,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67604,
+      "is_window_visible": false,
+      "title": ".NET-BroadcastEventWindow.4.0.0.0.232467a.0",
+      "class_name": ".NET-BroadcastEventWindow.4.0.0.0.232467a.0",
+      "owner_pid": 1804,
+      "owner_process": "SenaryAudioApp",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67598,
+      "is_window_visible": false,
+      "title": "MediaContextNotificationWindow",
+      "class_name": "HwndWrapper[SenaryAudioApp.exe;;0f3986dc-3a46-42a6-8c0f-4442e554de80]",
+      "owner_pid": 1804,
+      "owner_process": "SenaryAudioApp",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132862,
+      "is_window_visible": false,
+      "title": "SystemResourceNotifyWindow",
+      "class_name": "HwndWrapper[SenaryAudioApp.exe;;1ef3c07b-4c9a-4c09-8520-166aba916f8f]",
+      "owner_pid": 1804,
+      "owner_process": "SenaryAudioApp",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 524882,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WindowsForms10.Window.0.app.0.232467a_r10_ad1",
+      "owner_pid": 1804,
+      "owner_process": "SenaryAudioApp",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 262336,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "HwndWrapper[SenaryAudioApp.exe;;42c0510b-d727-4026-a3d5-5e7fea753f59]",
+      "owner_pid": 1804,
+      "owner_process": "SenaryAudioApp",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67594,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WindowsForms10.Window.0.app.0.141b42a_r6_ad1",
+      "owner_pid": 100,
+      "owner_process": "SenaryAdvancedFeaturesApp",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132920,
+      "is_window_visible": false,
+      "title": "GDI+ Window (SenaryAdvancedFeaturesApp.exe)",
+      "class_name": "GDI+ Hook Window Class",
+      "owner_pid": 100,
+      "owner_process": "SenaryAdvancedFeaturesApp",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 262392,
+      "is_window_visible": false,
+      "title": "Logi_Devio_MainWindow",
+      "class_name": "Logi_Devio_MainWindow",
+      "owner_pid": 19344,
+      "owner_process": "LogiPluginServiceExt",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 262522,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "TabletModeCoverWindow",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132996,
+      "is_window_visible": true,
+      "title": "",
+      "class_name": "EdgeUiInputTopWndClass",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 196702,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "tooltips_class32",
+      "owner_pid": 22948,
+      "owner_process": "tailscale-ipn",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67380,
+      "is_window_visible": false,
+      "title": "GDI+ Window (PAD.AutomationServer.exe)",
+      "class_name": "GDI+ Hook Window Class",
+      "owner_pid": 22416,
+      "owner_process": "PAD.AutomationServer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 263494,
+      "is_window_visible": false,
+      "title": "WISPTIS",
+      "class_name": "TabletPenServiceHelperClass",
+      "owner_pid": 3516,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 263678,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "HwndWrapper[PAD.Designer;;6ff83c8d-8e4c-4112-8131-5439fb25a9d0]",
+      "owner_pid": 3516,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 328124,
+      "is_window_visible": false,
+      "title": "MediaContextNotificationWindow",
+      "class_name": "HwndWrapper[PAD.Designer;;3bef28c9-42dc-4f3d-893e-37231024748c]",
+      "owner_pid": 3516,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 1769654,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "HwndWrapper[PAD.Designer;;41fe382c-26ff-44c4-aa7d-a3db9627d944]",
+      "owner_pid": 3516,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 1574536,
+      "is_window_visible": false,
+      "title": "SystemResourceNotifyWindow",
+      "class_name": "HwndWrapper[PAD.Designer;;707ebcd4-0f8a-4dfd-b565-5c240bf50f95]",
+      "owner_pid": 3516,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 656236,
+      "is_window_visible": false,
+      "title": "GDI+ Window (PAD.AutomationServer.exe)",
+      "class_name": "GDI+ Hook Window Class",
+      "owner_pid": 10624,
+      "owner_process": "PAD.AutomationServer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 524734,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WindowsForms10.Window.0.app.0.211bec8_r3_ad1",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 393512,
+      "is_window_visible": false,
+      "title": "GDI+ Window (PAD.Console.Host.exe)",
+      "class_name": "GDI+ Hook Window Class",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 524878,
+      "is_window_visible": false,
+      "title": ".NET-BroadcastEventWindow.211bec8.0",
+      "class_name": ".NET-BroadcastEventWindow.211bec8.0",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 590248,
+      "is_window_visible": false,
+      "title": "DDE Server Window",
+      "class_name": "OleDdeWndClass",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 1049026,
+      "is_window_visible": false,
+      "title": "WISPTIS",
+      "class_name": "TabletPenServiceHelperClass",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 721788,
+      "is_window_visible": false,
+      "title": "MediaContextNotificationWindow",
+      "class_name": "HwndWrapper[PAD.Console.Host;;45914644-0d64-4c22-94b6-c9f90f15fa4a]",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 721360,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "HwndWrapper[PAD.Console.Host;;8a59a3c0-b2a3-4dd0-9236-8ab2a182818e]",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 1246514,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "HwndWrapper[PAD.Console.Host;;3ad37733-dd4a-4890-8911-2fcbcc991a1f]",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 3342938,
+      "is_window_visible": false,
+      "title": "SystemResourceNotifyWindow",
+      "class_name": "HwndWrapper[PAD.Console.Host;;e2b4d990-dd05-454c-ab7f-008f43826dbc]",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132046,
+      "is_window_visible": true,
+      "title": "ChatGPT",
+      "class_name": "Chrome_WidgetWin_1",
+      "owner_pid": 1768,
+      "owner_process": "ChatGPT",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 329230,
+      "is_window_visible": false,
+      "title": "DDE Server Window",
+      "class_name": "OleDdeWndClass",
+      "owner_pid": 1768,
+      "owner_process": "ChatGPT",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 590840,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Chrome_WidgetWin_0",
+      "owner_pid": 10632,
+      "owner_process": "msedgewebview2",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 198374,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Chrome_WidgetWin_0",
+      "owner_pid": 1768,
+      "owner_process": "ChatGPT",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 787212,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "InputSiteWindowClass",
+      "owner_pid": 22272,
+      "owner_process": "M365Copilot",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 1246542,
+      "is_window_visible": false,
+      "title": "ChatGPT",
+      "class_name": "Chrome_WidgetWin_1",
+      "owner_pid": 1768,
+      "owner_process": "ChatGPT",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66872,
+      "is_window_visible": false,
+      "title": "Flyout window",
+      "class_name": "Flyout window class",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 263042,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WindowsForms10.Window.8.app.0.2979f9b_r3_ad1",
+      "owner_pid": 15164,
+      "owner_process": "LogiPluginService",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66566,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Wnd_StartFeed",
+      "owner_pid": 16784,
+      "owner_process": "MicrosoftStartFeedProvider",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66010,
+      "is_window_visible": false,
+      "title": "TrackMonitorsListenerWindow",
+      "class_name": "TrackMonitorsListenerWindowClass",
+      "owner_pid": 12664,
+      "owner_process": "ClickToDo",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65874,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "tooltips_class32",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 329554,
+      "is_window_visible": false,
+      "title": "ITS_USER_WINDOW",
+      "class_name": "CLASS_ITS_USER_WINDOW",
+      "owner_pid": 15548,
+      "owner_process": "LITSSvc",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 525326,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "HelperWndClass",
+      "owner_pid": 17836,
+      "owner_process": "ipf_helper",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 1115472,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Chrome_WidgetWin_0",
+      "owner_pid": 17128,
+      "owner_process": "ChatGPT",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132062,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Chrome_WidgetWin_0",
+      "owner_pid": 17128,
+      "owner_process": "ChatGPT",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 197728,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Chrome_WidgetWin_1",
+      "owner_pid": 1768,
+      "owner_process": "ChatGPT",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132772,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WalkNotifyIconSink",
+      "owner_pid": 22948,
+      "owner_process": "tailscale-ipn",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 853664,
+      "is_window_visible": false,
+      "title": "Tailscale 1.102.2",
+      "class_name": "\\o/ Walk_MainWindow_Class \\o/",
+      "owner_pid": 22948,
+      "owner_process": "tailscale-ipn",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132764,
+      "is_window_visible": false,
+      "title": "GDI+ Window (tailscale-ipn.exe)",
+      "class_name": "GDI+ Hook Window Class",
+      "owner_pid": 22948,
+      "owner_process": "tailscale-ipn",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 1312150,
+      "is_window_visible": false,
+      "title": "GDI+ Window (PhoneExperienceHost.exe)",
+      "class_name": "GDI+ Hook Window Class",
+      "owner_pid": 24288,
+      "owner_process": "PhoneExperienceHost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 197678,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "YourPhoneTrayIconWindow",
+      "owner_pid": 24288,
+      "owner_process": "PhoneExperienceHost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 1705466,
+      "is_window_visible": false,
+      "title": ".NET-BroadcastEventWindow.bf7771.0",
+      "class_name": ".NET-BroadcastEventWindow.bf7771.0",
+      "owner_pid": 24288,
+      "owner_process": "PhoneExperienceHost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67188,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Chrome_WidgetWin_0",
+      "owner_pid": 12836,
+      "owner_process": "msedgewebview2",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132652,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Chrome_WidgetWin_0",
+      "owner_pid": 10632,
+      "owner_process": "msedgewebview2",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67174,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Base_PowerMessageWindow",
+      "owner_pid": 10632,
+      "owner_process": "msedgewebview2",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67162,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "crashpad_SessionEndWatcher",
+      "owner_pid": 11468,
+      "owner_process": "msedgewebview2",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67106,
+      "is_window_visible": false,
+      "title": "Microsoft 365 Copilot",
+      "class_name": "Microsoft 365 Copilot Host",
+      "owner_pid": 22272,
+      "owner_process": "M365Copilot",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67100,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Microsoft 365 Copilot Staging Area",
+      "owner_pid": 22272,
+      "owner_process": "M365Copilot",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67092,
+      "is_window_visible": false,
+      "title": "GDI+ Window (M365Copilot.exe)",
+      "class_name": "GDI+ Hook Window Class",
+      "owner_pid": 22272,
+      "owner_process": "M365Copilot",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67078,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "MixedRealityLink",
+      "owner_pid": 21896,
+      "owner_process": "MixedRealityPairingHelper",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 591328,
+      "is_window_visible": false,
+      "title": "GDI+ Window (OneDrive.exe)",
+      "class_name": "GDI+ Hook Window Class",
+      "owner_pid": 13016,
+      "owner_process": "OneDrive",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67072,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "SkyDrive Class Name {026CC316-C268-4EAC-B8FB-AA51BFE323E2}",
+      "owner_pid": 13016,
+      "owner_process": "OneDrive",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67028,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Chrome_WidgetWin_0",
+      "owner_pid": 19200,
+      "owner_process": "msedgewebview2",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67022,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Chrome_WidgetWin_0",
+      "owner_pid": 19200,
+      "owner_process": "msedgewebview2",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132552,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Chrome_WidgetWin_0",
+      "owner_pid": 20608,
+      "owner_process": "msedgewebview2",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67002,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Chrome_WidgetWin_0",
+      "owner_pid": 20608,
+      "owner_process": "msedgewebview2",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66998,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Base_PowerMessageWindow",
+      "owner_pid": 20608,
+      "owner_process": "msedgewebview2",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66990,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "crashpad_SessionEndWatcher",
+      "owner_pid": 9720,
+      "owner_process": "msedgewebview2",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 263566,
+      "is_window_visible": false,
+      "title": " - 個人用Empty WebView2",
+      "class_name": "WebView2",
+      "owner_pid": 13016,
+      "owner_process": "OneDrive",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132486,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "ContextSwitcherImpl",
+      "owner_pid": 13016,
+      "owner_process": "OneDrive",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66942,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "ATL:00007FFF160EC0C0",
+      "owner_pid": 13016,
+      "owner_process": "OneDrive",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66934,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "ATL:00007FFF160EC0C0",
+      "owner_pid": 13016,
+      "owner_process": "OneDrive",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 787808,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "ATL:00007FFF160EC0C0",
+      "owner_pid": 13016,
+      "owner_process": "OneDrive",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 196994,
+      "is_window_visible": false,
+      "title": "OneDrive - 個人用",
+      "class_name": "SkyDrive Class Name {090B42FF-7B26-4416-99B6-CB17896CF07C}-Personal",
+      "owner_pid": 13016,
+      "owner_process": "OneDrive",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 197174,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "ATL:00007FFF160EC0C0",
+      "owner_pid": 13016,
+      "owner_process": "OneDrive",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 131282,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "ATL:00007FFF1AA8F000",
+      "owner_pid": 20592,
+      "owner_process": "SecurityHealthSystray",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 2557274,
+      "is_window_visible": false,
+      "title": "SecurityHealthSystray",
+      "class_name": "SecHealth Window Class",
+      "owner_pid": 20592,
+      "owner_process": "SecurityHealthSystray",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 131710,
+      "is_window_visible": false,
+      "title": "PwrMgrBkGndWindow",
+      "class_name": "PwrMgrBkGndWindow",
+      "owner_pid": 11912,
+      "owner_process": "PowerMgr",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132412,
+      "is_window_visible": false,
+      "title": "Windows PowerShell",
+      "class_name": "ConsoleWindowClass",
+      "owner_pid": 20776,
+      "owner_process": "cmd",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132406,
+      "is_window_visible": false,
+      "title": "Logi Plugin Service",
+      "class_name": "WindowsForms10.Window.8.app.0.2979f9b_r3_ad1",
+      "owner_pid": 15164,
+      "owner_process": "LogiPluginService",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 197774,
+      "is_window_visible": true,
+      "title": "Windows 入力エクスペリエンス",
+      "class_name": "Windows.UI.Core.CoreWindow",
+      "owner_pid": 16404,
+      "owner_process": "TextInputHost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66690,
+      "is_window_visible": false,
+      "title": "Loupedeck2ExtWin",
+      "class_name": "Loupedeck2ExtWindowClass",
+      "owner_pid": 19344,
+      "owner_process": "LogiPluginServiceExt",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66686,
+      "is_window_visible": false,
+      "title": "C:\\Program Files\\Logi\\LogiPluginService\\LogiPluginServiceExt.exe",
+      "class_name": "ConsoleWindowClass",
+      "owner_pid": 19344,
+      "owner_process": "LogiPluginServiceExt",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66678,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WindowsForms10.Window.0.app.0.2979f9b_r3_ad1",
+      "owner_pid": 15164,
+      "owner_process": "LogiPluginService",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66672,
+      "is_window_visible": false,
+      "title": ".NET-BroadcastEventWindow.2979f9b.0",
+      "class_name": ".NET-BroadcastEventWindow.2979f9b.0",
+      "owner_pid": 15164,
+      "owner_process": "LogiPluginService",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66668,
+      "is_window_visible": false,
+      "title": "GDI+ Window (LogiPluginService.exe)",
+      "class_name": "GDI+ Hook Window Class",
+      "owner_pid": 15164,
+      "owner_process": "LogiPluginService",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132184,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Chrome_WidgetWin_0",
+      "owner_pid": 17128,
+      "owner_process": "ChatGPT",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66630,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "OwlElectron_NotifyIconHostWindow",
+      "owner_pid": 1768,
+      "owner_process": "ChatGPT",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66582,
+      "is_window_visible": false,
+      "title": "t",
+      "class_name": "thekogans_util_SystemRunLoop_Window_class",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 131190,
+      "is_window_visible": false,
+      "title": "t",
+      "class_name": "thekogans_util_SystemRunLoop_Window_class",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 262258,
+      "is_window_visible": false,
+      "title": "t",
+      "class_name": "thekogans_util_SystemRunLoop_Window_class",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 131860,
+      "is_window_visible": false,
+      "title": "DesktopWindowXamlSource",
+      "class_name": "Windows.UI.Core.CoreWindow",
+      "owner_pid": 17796,
+      "owner_process": "TabTip",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132106,
+      "is_window_visible": false,
+      "title": "t",
+      "class_name": "thekogans_util_SystemRunLoop_Window_class",
+      "owner_pid": 17540,
+      "owner_process": "logioptionsplus_appbroker",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132098,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "LOGI_APPBROKER",
+      "owner_pid": 17540,
+      "owner_process": "logioptionsplus_appbroker",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66542,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "crashpad_SessionEndWatcher",
+      "owner_pid": 16436,
+      "owner_process": "logi_crashpad_handler",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66502,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WSH-Timer",
+      "owner_pid": 11932,
+      "owner_process": "wscript",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66496,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Chrome_StatusTrayWindow",
+      "owner_pid": 1768,
+      "owner_process": "ChatGPT",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66486,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Base_PowerMessageWindow",
+      "owner_pid": 1768,
+      "owner_process": "ChatGPT",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 131198,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "{4F3005DC-C85B-4BC8-B150-87A1BC24B244}",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66472,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "{F2F3CC73-3736-49EB-8776-196F63A73824}",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66466,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "{D1A53642-E87C-4F0D-9B06-B74FD67A2A30}",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66462,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Chrome_WidgetWin_0",
+      "owner_pid": 1768,
+      "owner_process": "ChatGPT",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 458860,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "crashpad_SessionEndWatcher",
+      "owner_pid": 14984,
+      "owner_process": "ChatGPT",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 394112,
+      "is_window_visible": false,
+      "title": "Logi_Devio_MainWindow",
+      "class_name": "Logi_Devio_MainWindow",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 196694,
+      "is_window_visible": false,
+      "title": "t",
+      "class_name": "thekogans_util_SystemRunLoop_Window_class",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66382,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WorkerW",
+      "owner_pid": 13848,
+      "owner_process": "RuntimeBroker",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 131880,
+      "is_window_visible": false,
+      "title": "BluetoothNotificationAreaIconWindowClass",
+      "class_name": "BluetoothNotificationAreaIconWindowClass",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66352,
+      "is_window_visible": false,
+      "title": "EXPLORER",
+      "class_name": "TabletPenServiceHelperClass",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66332,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "b66d17d1-7d83-4e8f-b5cb-c3e931d4eaa9",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66326,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "0ad1de64-421c-4a88-ab4e-ea5a0a6458f2",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66282,
+      "is_window_visible": false,
+      "title": "MiracastConnectionWindow",
+      "class_name": "MiracastConnectionWindow",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66280,
+      "is_window_visible": false,
+      "title": "MS_WebcheckMonitor",
+      "class_name": "MS_WebcheckMonitor",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66276,
+      "is_window_visible": false,
+      "title": "EndSessionListener",
+      "class_name": "EndSessionListenerClass",
+      "owner_pid": 12648,
+      "owner_process": "AIXHost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66238,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WorkerW",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66222,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "ATL:00007FFF07DBA050",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66166,
+      "is_window_visible": false,
+      "title": "バッテリ メーター",
+      "class_name": "SystemTray_Main",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66160,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WorkerW",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 131680,
+      "is_window_visible": false,
+      "title": ".NET-BroadcastEventWindow.3d893c.0",
+      "class_name": ".NET-BroadcastEventWindow.3d893c.0",
+      "owner_pid": 13108,
+      "owner_process": "CrossDeviceService",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66074,
+      "is_window_visible": false,
+      "title": "C2DEndSessionListener",
+      "class_name": "C2DEndSessionListenerClass",
+      "owner_pid": 12664,
+      "owner_process": "ClickToDo",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65964,
+      "is_window_visible": false,
+      "title": "CrossDeviceResumeWindow",
+      "class_name": "CrossDeviceResumeWindowClass",
+      "owner_pid": 12640,
+      "owner_process": "CrossDeviceResume",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65962,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "Postures Broadcast Listener Class",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66082,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WorkerW",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66084,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WorkerW",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65992,
+      "is_window_visible": true,
+      "title": "",
+      "class_name": "DummyDWMListenerWindow",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65952,
+      "is_window_visible": true,
+      "title": "",
+      "class_name": "DummyDWMListenerWindow",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65950,
+      "is_window_visible": true,
+      "title": "",
+      "class_name": "DummyDWMListenerWindow",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65948,
+      "is_window_visible": true,
+      "title": "",
+      "class_name": "DummyDWMListenerWindow",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65946,
+      "is_window_visible": true,
+      "title": "",
+      "class_name": "DummyDWMListenerWindow",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65936,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "GamingFallbackWindow",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65894,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "ApplicationManager_DesktopShellWindow",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65890,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WorkerW",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65888,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WorkerW",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65878,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WorkerW",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65858,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WorkerW",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65856,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WorkerW",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65762,
+      "is_window_visible": false,
+      "title": "DesktopWindowXamlSource",
+      "class_name": "Windows.UI.Core.CoreWindow",
+      "owner_pid": 12040,
+      "owner_process": "ShellHost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65752,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "DDEMLEvent",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65748,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "DDEMLMom",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65742,
+      "is_window_visible": false,
+      "title": "Windows Push Notifications Platform",
+      "class_name": "PushNotificationsPowerManagement",
+      "owner_pid": 11720,
+      "owner_process": "svchost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65710,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "{EE79C473-8AFB-40a5-9E35-0F66CF6B4A8E}",
+      "owner_pid": 11748,
+      "owner_process": "shtctky",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65714,
+      "is_window_visible": false,
+      "title": "Task Host Window",
+      "class_name": "COMTASKSWINDOWCLASS",
+      "owner_pid": 11840,
+      "owner_process": "taskhostw",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65700,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "WA_DisplaySettingsMonitor",
+      "owner_pid": 10904,
+      "owner_process": "uihost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65596,
+      "is_window_visible": false,
+      "title": "DWM Notification Window",
+      "class_name": "Dwm",
+      "owner_pid": 8424,
+      "owner_process": "dwm",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 197300,
+      "is_window_visible": false,
+      "title": "",
+      "class_name": "CicLoaderWndClass",
+      "owner_pid": 17768,
+      "owner_process": "ctfmon",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65864,
+      "is_window_visible": true,
+      "title": "Program Manager",
+      "class_name": "Progman",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 131926,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 17796,
+      "owner_process": "TabTip",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66004,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 264358,
+      "is_window_visible": false,
+      "title": "CiceroUIWndFrame",
+      "class_name": "CiceroUIWndFrame",
+      "owner_pid": 1576,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 198552,
+      "is_window_visible": false,
+      "title": "CiceroUIWndFrame",
+      "class_name": "CiceroUIWndFrame",
+      "owner_pid": 3516,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65854,
+      "is_window_visible": false,
+      "title": "MSCTFIME UI",
+      "class_name": "MSCTFIME UI",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65810,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 197132,
+      "is_window_visible": false,
+      "title": "MSCTFIME UI",
+      "class_name": "MSCTFIME UI",
+      "owner_pid": 22272,
+      "owner_process": "M365Copilot",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67102,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 22272,
+      "owner_process": "M365Copilot",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 131464,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 12664,
+      "owner_process": "ClickToDo",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 198120,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 11376,
+      "owner_process": "PAD.AutomationServer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 722578,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 12576,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 526158,
+      "is_window_visible": false,
+      "title": "MSCTFIME UI",
+      "class_name": "MSCTFIME UI",
+      "owner_pid": 1576,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 133128,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 1576,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 524736,
+      "is_window_visible": false,
+      "title": "MSCTFIME UI",
+      "class_name": "MSCTFIME UI",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 591438,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 133136,
+      "is_window_visible": false,
+      "title": "MSCTFIME UI",
+      "class_name": "MSCTFIME UI",
+      "owner_pid": 3516,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 393906,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 3516,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 2229634,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 3516,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67690,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 12800,
+      "owner_process": "PAD.AutomationServer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67792,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 17620,
+      "owner_process": "SystemSettings",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67746,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 17620,
+      "owner_process": "SystemSettings",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67744,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 17620,
+      "owner_process": "SystemSettings",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67696,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 15424,
+      "owner_process": "ApplicationFrameHost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67724,
+      "is_window_visible": false,
+      "title": "MSCTFIME UI",
+      "class_name": "MSCTFIME UI",
+      "owner_pid": 15424,
+      "owner_process": "ApplicationFrameHost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 262342,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 1804,
+      "owner_process": "SenaryAudioApp",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67596,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 100,
+      "owner_process": "SenaryAdvancedFeaturesApp",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 591878,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 100,
+      "owner_process": "SenaryAdvancedFeaturesApp",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 393300,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 19344,
+      "owner_process": "LogiPluginServiceExt",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 591330,
+      "is_window_visible": false,
+      "title": "CiceroUIWndFrame",
+      "class_name": "CiceroUIWndFrame",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 459146,
+      "is_window_visible": false,
+      "title": "CiceroUIWndFrame",
+      "class_name": "CiceroUIWndFrame",
+      "owner_pid": 1576,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 198514,
+      "is_window_visible": false,
+      "title": "CiceroUIWndFrame",
+      "class_name": "CiceroUIWndFrame",
+      "owner_pid": 3516,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65910,
+      "is_window_visible": false,
+      "title": "MSCTFIME UI",
+      "class_name": "MSCTFIME UI",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65750,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67382,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 22416,
+      "owner_process": "PAD.AutomationServer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 198368,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 3516,
+      "owner_process": "PAD.Designer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 656584,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 10624,
+      "owner_process": "PAD.AutomationServer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 524528,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 1312102,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 393912,
+      "is_window_visible": false,
+      "title": "CiceroUIWndFrame",
+      "class_name": "CiceroUIWndFrame",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 524690,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132168,
+      "is_window_visible": false,
+      "title": "MSCTFIME UI",
+      "class_name": "MSCTFIME UI",
+      "owner_pid": 1768,
+      "owner_process": "ChatGPT",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66464,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 1768,
+      "owner_process": "ChatGPT",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66884,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 21324,
+      "owner_process": "codex-computer-use-swift",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66874,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66676,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 15164,
+      "owner_process": "LogiPluginService",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66568,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 16784,
+      "owner_process": "MicrosoftStartFeedProvider",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 656446,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 15548,
+      "owner_process": "LITSSvc",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 198518,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 17836,
+      "owner_process": "ipf_helper",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 196708,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 22948,
+      "owner_process": "tailscale-ipn",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 1050002,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 24288,
+      "owner_process": "PhoneExperienceHost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 198294,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 24288,
+      "owner_process": "PhoneExperienceHost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132774,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 24288,
+      "owner_process": "PhoneExperienceHost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67190,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 12836,
+      "owner_process": "msedgewebview2",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67176,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 10632,
+      "owner_process": "msedgewebview2",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67166,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 11468,
+      "owner_process": "msedgewebview2",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67094,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 22272,
+      "owner_process": "M365Copilot",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67080,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 21896,
+      "owner_process": "MixedRealityPairingHelper",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67074,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 13016,
+      "owner_process": "OneDrive",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67024,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 19200,
+      "owner_process": "msedgewebview2",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 67000,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 20608,
+      "owner_process": "msedgewebview2",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66994,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 9720,
+      "owner_process": "msedgewebview2",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66944,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 13016,
+      "owner_process": "OneDrive",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66936,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 13016,
+      "owner_process": "OneDrive",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 198000,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 13016,
+      "owner_process": "OneDrive",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 460072,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 13016,
+      "owner_process": "OneDrive",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 196784,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 20592,
+      "owner_process": "SecurityHealthSystray",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 131652,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 11912,
+      "owner_process": "PowerMgr",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66878,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 20924,
+      "owner_process": "conhost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132240,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 16404,
+      "owner_process": "TextInputHost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66692,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 19344,
+      "owner_process": "LogiPluginServiceExt",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66688,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 19396,
+      "owner_process": "conhost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66674,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 15164,
+      "owner_process": "LogiPluginService",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66670,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 15164,
+      "owner_process": "LogiPluginService",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132182,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 17128,
+      "owner_process": "ChatGPT",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66584,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66580,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 131188,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 131928,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 17796,
+      "owner_process": "TabTip",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66576,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 17540,
+      "owner_process": "logioptionsplus_appbroker",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 132096,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 17540,
+      "owner_process": "logioptionsplus_appbroker",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66550,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 16436,
+      "owner_process": "logi_crashpad_handler",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66504,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 11932,
+      "owner_process": "wscript",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66484,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66474,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66468,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 458862,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 14984,
+      "owner_process": "ChatGPT",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 263034,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 131902,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66384,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 13848,
+      "owner_process": "RuntimeBroker",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66356,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66334,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66330,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 12076,
+      "owner_process": "logioptionsplus_agent",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66278,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 12648,
+      "owner_process": "AIXHost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66240,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66224,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66162,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 66150,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 13108,
+      "owner_process": "CrossDeviceService",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65966,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 12640,
+      "owner_process": "CrossDeviceResume",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65892,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65860,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 11548,
+      "owner_process": "explorer",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65744,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 11720,
+      "owner_process": "svchost",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65716,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 11748,
+      "owner_process": "shtctky",
+      "owner_session_id": 2
+    },
+    {
+      "hwnd": 65702,
+      "is_window_visible": false,
+      "title": "Default IME",
+      "class_name": "IME",
+      "owner_pid": 10904,
+      "owner_process": "uihost",
+      "owner_session_id": 2
+    }
+  ],
+  "top_level_window_counts": {
+    "all": 278,
+    "visible": 18,
+    "visible_nonempty_title": 9
+  },
+  "foreground_window": {
+    "hwnd": 524730,
+    "owner_pid": 15416,
+    "details": {
+      "hwnd": 524730,
+      "is_window_visible": true,
+      "title": "Power Automate",
+      "class_name": "HwndWrapper[PAD.Console.Host;;0b15ca2e-80c1-4c65-9c48-03bec76b789a]",
+      "owner_pid": 15416,
+      "owner_process": "PAD.Console.Host",
+      "owner_session_id": 2
+    }
+  },
+  "uia_snapshot": [
+    {
+      "pid": 1576,
+      "root_children_count": 2,
+      "windows": [
+        {
+          "name": "",
+          "automation_id": "",
+          "control_type": "ControlType.Window",
+          "native_window_handle": 1442672
+        },
+        {
+          "name": "Power Automate | RobinIssue38MatrixRuntime20260915A",
+          "automation_id": "DesignerMainWindow",
+          "control_type": "ControlType.Window",
+          "native_window_handle": 198680
+        }
+      ]
+    },
+    {
+      "pid": 12576,
+      "root_children_count": 0,
+      "windows": []
+    }
+  ],
+  "computer_use_snapshot": {
+    "apps_count": -1,
+    "native_app_binding": "NOT_CAPTURED",
+    "source": ""
+  },
+  "result": "READ_ONLY_PAD_WINDOW_DIAGNOSTIC_CASE_C",
+  "classification": {
+    "case": "C",
+    "basis": [
+      "PAD-like visible title/class owned by another PID"
+    ]
+  },
+  "reopen_conditions": [
+    "interactive desktop or Computer Use native app binding exposes a visible PAD Designer window",
+    "PAD Designer has a stable nonzero HWND, owner PID/process, SessionId, and target-flow correspondence",
+    "only then evaluate the saved Robin with a new verification ID; preserve the Run1 output gate before any Run2"
+  ],
+  "mutation_guard": {
+    "process_refresh_only": true,
+    "process_kill_or_restart": false,
+    "window_input_or_click": false,
+    "flow_binding_or_run": false
+  }
+}

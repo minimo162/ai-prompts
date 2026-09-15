@@ -1,0 +1,21 @@
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX02\\input-a.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Input1
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Input1 Name: $'''Source A'''
+Excel.ReadFromExcel.ReadCells Instance: Input1 StartColumn: $'''B''' StartRow: 2 EndColumn: $'''D''' EndRow: 3 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Data1
+Excel.CloseExcel.Close Instance: Input1
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX02\\input-b.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Input2
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Input2 Name: $'''Source B'''
+Excel.ReadFromExcel.ReadCells Instance: Input2 StartColumn: $'''A''' StartRow: 3 EndColumn: $'''B''' EndRow: 5 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Data2
+Excel.CloseExcel.Close Instance: Input2
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\probe-matrix-A\\work.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> Work
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''Target A'''
+Excel.WriteToExcel.WriteCell Instance: Work Value: Data1 Column: $'''C''' Row: 4
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''Target B'''
+Excel.WriteToExcel.WriteCell Instance: Work Value: Data2 Column: $'''B''' Row: 3
+Excel.SaveExcel.SaveAs Instance: Work DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\probe-matrix-A\\result.xlsx'''
+Excel.CloseExcel.Close Instance: Work
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\probe-matrix-A\\result.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Reopened
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''Target A'''
+Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''C''' StartRow: 4 EndColumn: $'''E''' EndRow: 5 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback1
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''Target B'''
+Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''B''' StartRow: 3 EndColumn: $'''C''' EndRow: 5 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback2
+Excel.CloseExcel.Close Instance: Reopened

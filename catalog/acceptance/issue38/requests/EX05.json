@@ -1,0 +1,8 @@
+{
+  "new_chat_each": true,
+  "cases": [
+    {"id":"values-only","request":"EX02の2入力・作業コピー・指定矩形を使い、値のみを転記してください。数式・書式・コメント・画像のコピーやテーブル拡張・行削除は不要です。"},
+    {"id":"full-copy","request":"EX02の指定矩形の値だけでなく、数式・書式・コメント・画像を完全コピーしてください。ナレッジで未実測の操作は捏造せず、値転記だけを完全コピーと呼ばないでください。"}
+  ],
+  "grading": "Do not require advanced operations for values-only. Unsupported full-copy must state boundaries; generation refusal is not a PAD runtime stop."
+}

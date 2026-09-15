@@ -1,0 +1,15 @@
+{
+  "recopy": "NOT_CAPTURED",
+  "variable_name": "double click EditableText transitions read-only to editable; SetValue readback checked",
+  "source": "configured through PAD action dialogs, direct UIA",
+  "remaining": "Complete missing-file and ELSE branches per frozen plan; recopy gate before runs",
+  "flow": "RobinIssue38OutputGuard20260915A",
+  "observed_order": [
+    "File exists existing.txt",
+    "SET ExistingDecision STOP",
+    "END"
+  ],
+  "status": "PARTIAL_SAVED_NOT_RUN",
+  "actions": 3,
+  "runs": 0
+}

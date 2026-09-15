@@ -1,0 +1,61 @@
+1. 前提・対象範囲・未確認点
+
+目的
+
+input-a.xlsx の Source A から値取得
+input-b.xlsx の Source B から値取得
+作業コピー work.xlsx へ値のみ転記
+result.xlsx として別名保存
+保存後に再読取りして照合
+
+今回の変更条件
+
+Source A の範囲は D3:B2
+利用者指示どおり、上下左右が逆転した固定範囲
+指示文にある「勝手に範囲を補正しない」を優先
+
+未確認点（コード生成を止める理由）
+
+添付ナレッジでは、実測済み Excel.ReadFromExcel.ReadCells の範囲指定は
+StartColumn <= EndColumn
+StartRow <= EndRow の正方向範囲しか確認されていません。
+D3:B2 のような逆転範囲を ReadCells が受理する実測原文・実行証拠は添付ナレッジ内にありません。
+依頼では「補正しない」と明示されているため、B2:D3 に直して生成することはできません。
+また、逆転範囲を実現するための別アクション、引数、モード、反転読取り手順もナレッジにありません。
+
+そのため、この条件では 貼付け用Robinを出力できません。
+
+2. 追加採取が必要な内容
+
+次のいずれかの実測原文が必要です。
+
+Excel.ReadFromExcel.ReadCells に対して
+StartColumn=D
+StartRow=3
+EndColumn=B
+EndRow=2 を設定したPADコピー原文
+
+または
+
+逆転矩形を取得するための別の実測済み手順
+使用アクション
+コピー原文
+保存後再コピー結果
+実行結果
+3. 根拠
+シート切替 Excel.SetActiveWorksheet.ActivateWorksheetByName は採取済み。
+TypedValues + FirstLineIsHeader=False の矩形読取りは採取済みだが、正方向範囲のみ確認されています。
+DataTable を Excel.WriteToExcel.WriteCell の Value に渡す矩形転記は、Issue #38 の実測候補として収録されています。
+しかし 逆転範囲 D3:B2 の読取り成功例は収録されていません。
+4. 再開条件
+
+PADで逆転範囲設定を行ったアクションを1個だけコピーし、そのRobin原文を提示してください。
+
+その原文が確認できれば、
+
+EX02全体フロー
+出力衝突停止条件
+SaveAs
+再読取り照合
+
+を含めた貼付け用Robinを、確認済み範囲と未確認範囲を分離して作成します。

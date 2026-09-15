@@ -1,0 +1,14 @@
+{
+  "openpyxl_status": "FAIL_PRESERVED",
+  "remaining": "Copilot generation composition guard and automated comparison, EX02/03 live acceptance",
+  "status": "TWO_RUNS_COMPLETED_VALUES_MATCH_NATIVE_STYLES_MATCH_XML_ORACLE_FAIL",
+  "run_count": 2,
+  "raw_sha_before_after": "46ca4731a2c83c8b5a9e0ad069a1da72f11a7e6030a45a2352c37d11812a57aa",
+  "openpyxl_failures_each": 558,
+  "scope": "evaluator primitive, not real Copilot acceptance",
+  "interpretation": "XML font and dimension representation changes repeat; native Excel style comparison matches. No promotion of original oracle to PASS.",
+  "checked_cells_each": 480,
+  "native_style_status_each": "MATCH_WITHIN_RECORDED_SCOPE",
+  "target_cells_each": 12,
+  "value_type_position_formula_comment_failures_each": 0
+}

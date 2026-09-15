@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "EX02",
+      "inputs": [
+        {
+          "file": "fixtures/EX02/input-a.xlsx",
+          "sheet": "Source A",
+          "range": "B2:D3",
+          "target_sheet": "Target A",
+          "target_start": "C4"
+        },
+        {
+          "file": "fixtures/EX02/input-b.xlsx",
+          "sheet": "Source B",
+          "range": "A3:B5",
+          "target_sheet": "Target B",
+          "target_start": "B3"
+        }
+      ],
+      "template": "fixtures/EX02/template.xlsx",
+      "output": "result.xlsx",
+      "initial_sheet": "Decoy"
+    },
+    {
+      "id": "EX03",
+      "inputs": [
+        {
+          "file": "fixtures/EX03/入力い.xlsx",
+          "sheet": "受取明細",
+          "range": "D4:E6",
+          "target_sheet": "集計先",
+          "target_start": "F7"
+        },
+        {
+          "file": "fixtures/EX03/入力ろ.xlsx",
+          "sheet": "追加項目",
+          "range": "B2:D3",
+          "target_sheet": "追記先",
+          "target_start": "D5"
+        }
+      ],
+      "template": "fixtures/EX03/ひな形.xlsx",
+      "output": "照合結果.xlsx",
+      "initial_sheet": "Decoy"
+    }
+  ]
+}

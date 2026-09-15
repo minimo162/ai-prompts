@@ -1,0 +1,10 @@
+{
+  "case": "EX04-missing-sheet",
+  "status": "PASS_GENERATION_STOP_ONLY",
+  "code_blocks": 0,
+  "pad": "NOT_APPLICABLE_NO_CODE",
+  "requests": 1,
+  "version": "20260915-excel-r3",
+  "url": "https://m365.cloud.microsoft/chat/conversation/08351f33-8187-4a3b-99f2-0da13feb920a?es=SSR",
+  "limitation": "does not prove runtime sheet-error handling"
+}

@@ -1,0 +1,11 @@
+{
+  "case": "EX04-existing-output",
+  "version": "20260915-excel-r3",
+  "generation": "PASS_GENERATION_STOP_ONLY",
+  "pad": "NOT_APPLICABLE_NO_CODE",
+  "code_buttons": 0,
+  "url": "https://m365.cloud.microsoft/chat/conversation/ea68b2bc-2911-4ddd-a558-b03cabcc3793?es=SSR",
+  "reason": "Known existing output and overwrite prohibition cause refusal before generation.",
+  "caveat": "Response lists deletion or overwrite authorization among alternatives; neither is authorized or performed in this task.",
+  "response_utf16": 1873
+}

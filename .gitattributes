@@ -10,3 +10,7 @@ catalog/generated/**/prompt.txt -whitespace
 copilot/**/*.txt -text
 index.html -text
 "業務エージェント.cmd" -text
+
+# Issue38 frozen fixtures, raw responses, evidence and manifests preserve exact bytes.
+catalog/acceptance/** -text -whitespace
+copilot/versions/** -text whitespace=cr-at-eol

@@ -1,5 +1,7 @@
 # PAD実機受入の作成権限・UIA復旧手順
 
+**再開時は先に[PAD・Copilotの操作入口](pad-copilot-operation-guide.md)を読む。** このページは過去の逐次記録を含む。通常Chromeとin-app browser、直接UIAとComputer Useの結果を混同せず、使う経路と現在の接続を確認する。
+
 ## 2026-09-14 独立T04の実行別成果物ゲート
 
 `catalog/evidence/t04-independent-pair-20260914w/plan.json` は、対象PID/HWND/SessionId、固定原文SHA、入力SHA、2出力、期待3行3列、最大2 Runを実行前に固定した記録です。旧T04専用名はConsole検索で見つからず、新しい専用空フロー1件へ同じ原文を配置しました。旧窓診断・旧Run1欠落は上書きしていません。

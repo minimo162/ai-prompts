@@ -1,0 +1,19 @@
+{
+  "status": "MATCH_DISPLAY_VALUES_AND_POSITIONS_ONLY",
+  "actual": [
+    [
+      "Alpha",
+      "12.5",
+      "0"
+    ],
+    [
+      "Beta",
+      "-3",
+      "100"
+    ]
+  ],
+  "source_sha_preserved": true,
+  "individual_cell_types": "NOT_DIRECTLY_OBSERVED",
+  "run2": "NOT_STARTED",
+  "grid_column_zero": "row index, not source data"
+}

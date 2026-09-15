@@ -1,0 +1,78 @@
+{
+  "columns": 4,
+  "rows": 2,
+  "cells": [
+    {
+      "name": "項目: System.Data.DataRowView、列表示インデックス: 0",
+      "row": 0,
+      "column": 0,
+      "value": "0",
+      "texts": [
+        "0"
+      ]
+    },
+    {
+      "name": "項目: System.Data.DataRowView、列表示インデックス: 1",
+      "row": 0,
+      "column": 1,
+      "value": "Alpha",
+      "texts": [
+        "Alpha"
+      ]
+    },
+    {
+      "name": "項目: System.Data.DataRowView、列表示インデックス: 2",
+      "row": 0,
+      "column": 2,
+      "value": "12.5",
+      "texts": [
+        "12.5"
+      ]
+    },
+    {
+      "name": "項目: System.Data.DataRowView、列表示インデックス: 3",
+      "row": 0,
+      "column": 3,
+      "value": "0",
+      "texts": [
+        "0"
+      ]
+    },
+    {
+      "name": "項目: System.Data.DataRowView、列表示インデックス: 0",
+      "row": 1,
+      "column": 0,
+      "value": "1",
+      "texts": [
+        "1"
+      ]
+    },
+    {
+      "name": "項目: System.Data.DataRowView、列表示インデックス: 1",
+      "row": 1,
+      "column": 1,
+      "value": "Beta",
+      "texts": [
+        "Beta"
+      ]
+    },
+    {
+      "name": "項目: System.Data.DataRowView、列表示インデックス: 2",
+      "row": 1,
+      "column": 2,
+      "value": "-3",
+      "texts": [
+        "-3"
+      ]
+    },
+    {
+      "name": "項目: System.Data.DataRowView、列表示インデックス: 3",
+      "row": 1,
+      "column": 3,
+      "value": "100",
+      "texts": [
+        "100"
+      ]
+    }
+  ]
+}

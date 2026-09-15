@@ -1,0 +1,117 @@
+PAD Robin 完成例・生成試験の参照
+
+以下は、既存カタログで実行・結果照合まで進んだ合成データ例です。例の入力値、保存先、変数名はそのまま本番へ流用せず、依頼の対象へ置き換えます。
+
+例1: リストと正規表現置換
+- 依頼、生成回答、生成Robin、貼付け先、再コピー、実行値を `catalog/generated/list-and-regex/` に保存。
+- 別の変数名・入力値で生成したコードを手直しせずPADへ貼付け、再コピー一致、保存、実行、期待値一致を確認した。
+- `verification.json` と `variables.json` が実行結果の根拠。未掲載のアクションを組み合わせた証拠ではない。
+
+例2: Office三形式
+- `catalog/generated/office-three-apps/` に新しい本文・保存名を指定した生成回答、Robin、再貼付け、レビュー、検証を保存。
+- Excel、Word、PowerPointの16操作を手直しせず貼付け・実行し、3成果物の内容を確認した。
+- PADが改行・末尾改行を正規化したため、再コピーは命令行と設定の一致で評価した。アプリの自動Run経路や新規エージェント登録の試験ではない。
+
+例3: PDF採取フロー
+- `catalog/flows/pdf-variants/` と `catalog/evidence/pdf/results.json`。テキスト、表、画像、ページ抽出、統合の結果とページ順を照合した。
+- 統合の入力順と出力ページ順が一致しない実測があるため、依頼ごとに出力ページ内容を確認する。
+
+生成結果に関する境界
+- 既存の生成例は、新しいCopilotエージェントへこの7ファイルを登録した証拠ではない。
+- T01〜T10（特殊文字置換、CSV、複数ファイル、Excel範囲、既存Excel、Word／PowerPoint、PDF、意図したエラー、UI画面、既存フロー修正）は、最終版のエージェントで自然文依頼→原文保存→無修正貼付け→実行→成果物照合を行い、初回失敗と修正後結果を別記録する。
+
+## T01で実測済みの3アクション組合せ（履歴bundleの測定根拠）
+
+- `catalog/generated/normal-chat-current-bundle-t01-live-20260911/robin.txt` は、UTF-8読取り→通常置換→UTF-8書出し（AppendNewLine=False、上書き）のPADから取得した3アクション原文である。SHA-256は `2209d9ce9437c141345c3f01a0cfd12bd6d6ed4dd0668cf0a78ae17479c5ee47`。
+- 同原文を専用PADフローへ手直しせず貼り付け・保存し、2回実行した。出力はUTF-8 BOM付き90 bytes・CRLFで、固定期待SHA `2b030f2d6d937aa11885509ebc60a55e40261087a2464dcc5ddd6cca8ad81bd2`、入力不変を確認した（`catalog/evidence/t01-current-bundle-live-send-20260911.json`、`t01-current-bundle-pad-output-comparison-20260911.json`）。
+- 測定済み組合せ原文:
+File.ReadTextFromFile.ReadText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\text\\t01-input-20260909.txt''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+Text.Replace.ReplaceText Text: FileContents TextToFind: $'''対象語''' IgnoreCase: False ReplaceWith: $'''置換後''' ActivateEscapeSequences: False ComparisonType: Text.TextComparisonType.CultureSensitive Result=> Replaced
+File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t01-output-current-bundle.txt''' TextToWrite: Replaced AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+- この組合せ証拠はe35fa2f4版での履歴であり、指示文またはbundleを変更した版へ自動継承しない。変更後は同じ原文・fixtureで通常チャットから再生成し、無修正PAD受入をやり直す。
+
+## T02で実測済みの3アクション組合せ
+
+以下は `RobinKnowledgeT02FilterRoundtrip2_20260910` へ再貼付け・保存・再コピー・2回実行し、出力照合まで完了した原文です。列インデックス2は合成CSVのStatus列です。未採取の列名指定や行追加構文へ置き換えません。
+
+`File.ReadFromCSVFile.ReadCSV CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\csv\\t02-input-20260910.csv''' Encoding: File.CSVEncoding.UTF8 TrimFields: True FirstLineContainsColumnNames: True ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault CSVTable=> CSVTable`
+
+`Variables.FilterDataTable DataTable: CSVTable FilterParameters: { ^['RULE', 'COLUMN', 'OPERATOR', 'VALUE'], [$'''''', 2, $'''Equal''', $'''対象'''] } MatchCase: True FilteredDataTable=> FilteredDataTable`
+
+`File.WriteToCSVFile.WriteCSV VariableToWrite: FilteredDataTable CSVFile: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\evidence\\normal-chat-t02-output-20260910.csv''' CsvFileEncoding: File.CSVEncoding.UTF8 IncludeColumnNames: True IfFileExists: File.IfFileExists.Overwrite ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault`
+
+根拠ファイル: `catalog/flows/datatable-filter/roundtrip.robin`、`catalog/evidence/filter-t02-roundtrip2-run-2.json`。入力は変更せず、出力はUTF-8 BOM・CRLF・末尾改行なしだが、ヘッダーとStatus=対象の論理行が一致します。
+- ナレッジにないモードを要求する負例では、架空の構文ではなく不足情報と追加採取手順を返す。
+
+失敗・未確認の参照
+- 既存の失敗や範囲は docs/robin-knowledge-progress.md、docs/robin-action-catalog.md、docs/office-action-capture.md、docs/pdf-action-capture.md に記録する。
+- 生成コードを後から手直しした場合は、元の回答と修正版を別ファイルにして無修正成功と混同しない。
+
+例4: T04 Excel条件抽出→別ブック
+- `catalog/flows/excel-t04-filter-to-workbook/roundtrip.robin` は、Excel A1:C6読取り、FilterDataTable列0=`対象`、CSV変換・中間CSV保存、別ExcelインスタンスでCSVを開いてxlsxへSaveAsする実測組合せである。
+- `catalog/evidence/t04-positive-flow-run-6.json` と `t04-positive-flow-run-7.json` で2回のPAD実行成功、`normal-chat-t04-output.xlsx`の3行3列と入力SHA不変を照合した。
+- CSVをExcelセルへ直接書いた初回失敗（`_x000D_`混入）は`catalog/evidence/normal-chat-t04-output-x000D-failure.xlsx`へ保存した。失敗を修正コードの成功へ付け替えず、中間CSV経由の正例と分ける。
+
+例5: T10既存フロー修正の原文契約
+- 入力原文は`catalog/generated/office-three-apps/generated.robin`（SHA-256 `d7df429559bf2bbcb1d46f29cd923b393c7ea17cf4a0a3bf13267f7663b33194`）。16行のうち依頼で変更できるのはExcel書込み値（2行目）とExcel保存先（4行目）の2か所だけである。
+- 変更しないWord保存行の正本は次のとおりで、パス区切りは2個のバックスラッシュ、`AiPromptsOfficeCatalog_20260907`のアンダースコア前にバックスラッシュはない。
+  `Word.SaveWord.SaveAs Instance: WordInstance DocumentFormat: Word.WordFormat.FromExtension DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-word.docx'''`
+- 変更しないPowerPoint保存行も同じ原文保持条件である。
+  `PowerPoint.SavePowerPoint.SaveAs Instance: PowerPointInstance DocumentFormat: PowerPoint.PowerPointFormat.PPTX DocumentPath: $'''C:\\Temp\\AiPromptsOfficeCatalog_20260907\\copilot-powerpoint.pptx'''`
+- 現行の最終v8生成ではこの2行に余分なバックスラッシュと`_`が入り、PAD再コピーでは`_`だけが除かれた。根拠は`tests/Test-RobinRawContracts.ps1`と`catalog/evidence/normal-chat-final-pad-20260910/t10-recopy.txt`であり、PAD側の正規化は生成原文の逐語一致を証明しない。
+
+例7: T03 フォルダー内ファイルを一度ずつ処理し、拡張子が.txtのものだけUTF-8で読む（2026-09-12実測）
+- 依頼の形: 合成フォルダー `C:\Users\yuuki\ai-prompts\catalog\fixtures\files` の全ファイルをFor eachで処理し、拡張子が`.txt`のファイルだけ内容を読み取り、`.csv`／`.md`はElse（対象外経路）へ送る。
+- 判定はファイル変数の`.Extension`プロパティと`.txt`の「と等しい」比較で、PADのIfダイアログから採取した原文行 `IF CurrentFile.Extension = $'''.txt''' THEN` を使う。`Contains(CurrentFile, $'''.txt''', False)`は部分一致なので厳密判定には使わない。
+- 最小形の原文（`catalog/flows/t03-extension-branch/minimal-source-20260912.robin`。別の空フローへ貼付け・保存・2回実行、入力不変）:
+Folder.GetFiles Folder: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\files''' FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.NoSort SortDescending1: False SortBy2: Folder.SortBy.NoSort SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+LOOP FOREACH CurrentFile IN Files
+    IF CurrentFile.Extension = $'''.txt''' THEN
+        File.ReadTextFromFile.ReadText File: CurrentFile Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+    ELSE
+    END
+END
+- 件数を数える13行版（両分岐に`SET`と`Variables.IncreaseVariable`）は03-Filesに掲載し、2回とも`TxtCount=2`、`OtherCount=2`だった。証拠: `catalog/evidence/t03-ext-verify-acceptance-20260912.json`、`t03-ext-min-acceptance-20260912.json`。
+- 期待結果の照合は、読み取った内容（最後の`.txt`）、Elseへ行った件数、入力ファイルのSHA不変で行う。大文字小文字、`.txt.bak`、サブフォルダーは未確認。
+
+例6: T09ローカルUI捕捉・貼付け・通し実行（2026-09-12に完走）
+- `catalog/fixtures/ui/t09-local-test.html` をローカルEdgeで開き、PAD UI要素ピッカーから `t09-input`、`t09-submit`、`t09-result` を捕捉した。セレクターは各要素のId属性を実画面から取得しており、推測ではない。
+- `catalog/flows/ui-t09-local-roundtrip/roundtrip.robin` は、Edge起動→`T09-input`入力→実行ボタンクリック→`WAIT 500`→結果段落の`Own Text`取得→ブラウザー終了の6アクション原文である。待機の単位は秒で、500は500ミリ秒のつもりの誤設定だったため、2026-09-12にダイアログで1秒へ直した再採取原文`roundtrip-wait1-20260912.robin`（4行目が`WAIT 1`、他は同一）を生成根拠にする。空フロー `RobinKnowledgeT09FilterPaste_20260910` へ貼付け・保存し、再コピーのアクション行6本一致を確認した。
+- 2026-09-11までの実行は`WAIT 500`（500秒）の待機中に監視を打ち切ったため未完了だった（`catalog/evidence/t09-runtime-block-20260910.json`ほか）。2026-09-12に、ControlRepository付きの採取原文を別の空フロー`RobinKnowledgeT09Repo_20260912`へ貼り付けて実行し、約8分20秒後に`AttributeValue=T09-clicked`、ブラウザー終了、準備完了への復帰を確認した（`catalog/evidence/t09-repo-run1-acceptance-20260912.json`、`t09-repo-run2-20260912.json`）。
+- 生成Robinを貼り付ける先には、`Input text 't09-input'`、`Button '実行'`、`Paragraph '未実行'`の3要素が登録されている必要がある。実測済みの手順は、採取原文を先に貼り付けて要素を取り込み、その6アクションを削除してから生成6行を貼り付ける。待機行は`WAIT 1`（1秒）を生成する。`WAIT 500`は500秒待つ履歴上の誤設定であり、生成しない。待機1秒版は2回とも数秒で`AttributeValue=T09-clicked`とブラウザー終了を確認した（`catalog/evidence/t09-wait1-acceptance-20260912.json`）。
+
+例8: P3残課題の最小用途（2026-09-12、各2回実行・別フロー再利用済み）
+- リストの2番目の項目: `SET NewVar TO CatalogList[1]`（01-Basics）。期待値は`NewVar=SecondItem`。
+- 日時をカスタム書式でテキスト化: `Text.ConvertDateTimeToText.FromCustomDateTime DateTime: CurrentDateTime CustomFormat: $'''yyyy-MM-dd''' Result=> FormattedDateTime2`（01-Basics）。期待値は実行日の`yyyy-MM-dd`。
+- If内If＋副作用＋EXIT LOOP、入れ子ループ＋NEXT LOOP: 02-Controlの23行／15行の原文。期待値は`OuterCount=2, InnerYes=1, InnerNo=1, LastSeen=SecondItem`／`Total=4, OuterRuns=2`。
+- 拡張子境界: 03-Filesの`files-boundary`probe。`.TXT`はElse、`.txt.bak`はElse、サブフォルダーは`IncludeSubfolders`で制御。
+- 別名保存の衝突: 04-Office。Excel／WordのSaveAsは既存出力を無警告で上書きする。
+- 名前付きエラー: 02-Controlの`ON ERROR FileNotFoundError`（アクション単位）。期待値は`NewVar=named`のみ設定され、ブロック既定ルールの変数は設定されない。
+- これらは採取・元フロー2回実行・別フロー再利用まで確認済み。通常チャット生成→無修正貼付け→2回実行の受入は、この版の受入記録（`catalog/evidence/current-package-status-20260912-finald.json`）を参照する。
+
+
+Issue #38 Excel追補 / 20260915-excel-r1（候補、通常Copilot生成・PAD実行NOT_RUN）
+本追補の現在の能力と過去のT04/P3履歴を分離する。過去の「読取りにシート名指定引数は未採取」は、別アクションのシート切替が未採取という意味ではない。
+採取済み完全原文（入力インスタンスExcelInstance、存在するシート名Sheet1）:
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelInstance Name: $'''Sheet1'''
+原文根拠: catalog/evidence/p3-excel-sheet-probe-20260910.robin、SHA-256 c7f3fa0408463de8ee36bf5b865720c64799f4a92cbf2a3b7efee4cfa1907c29。対応JSONおよびrun1/run2はPAD 2.71.115.26224、日本語、Power Fx OFF、編集可能で開いたexcel-catalog.xlsxのSheet1選択を保存・2回実行した別probe。JSONのpass_probe_not_bundledは当時の記録であり、本候補では上記全文を収録した。
+前提: 先にExcel起動で取得したインスタンス、既存ワークシート。原本の初期選択を変えて保存する準備は不要。ReadCellsの直前にこの独立アクションを配置する。
+未確認境界: 読取り専用＋別シート初期表示、日本語別名、今回の複数ブック転記全体はEX01〜EX03で未実施。旧probeのPASSをこの条件へ転記しない。以下の変更可能箇所は候補のパラメーター契約であり一般化済み実測ではない。
+固定構造: Excel.SetActiveWorksheet.ActivateWorksheetByName / Instance / Name、文字列リテラルの引用規則。変更可能データ: 先に定義したインスタンスと既存シート名。未知モード・未採取引数を追加しない。
+Excel.ReadFromExcel.ReadCellsのStartColumn/EndColumnは文字列、StartRow/EndRowは正の整数。TypedValues、FirstLineIsHeader: FalseとRangeValueのDataTable型を維持する。範囲は上下左右順・Excel限界内・有限件数、転記先も矩形が収まることを確認する。
+入出力パスはローカル合成xlsxのみ、引用符・パーセント・エスケープを含む新しい特殊条件、結合セル、保護シート、マクロ、日付・空白・真偽値の転記は本fixture外で未確認。EX02/03の値は日本語を含むテキストと数値（0、負数、小数）。数式の計算結果取得も今回の入力fixtureには含めない。
+原本は入力2ブックとテンプレート。作業用コピーを先に新規作成し、パスをフローへ渡す。作業コピーへ値のみ転記し、別の未存在xlsxへ保存後、閉じて読取り専用で再開し対象シートを再選択して照合する。
+不足工程: 既存のExcel.WriteToExcel.WriteCellは文字列リテラルの単一セルだけを実測。DataTableをValueへ渡す矩形展開、数値/テキストを保つ変数書込み、有限行列反復の添字・型・座標は未採取/未実測。単一セル原文を根拠に矩形転記済みとは扱わない。
+追加採取: 新規専用PADフローで「Excelワークシートに書き込む」のValueへ取得DataTable、指定シートと開始セルを設定し、コピー原文・設定・保存再コピー・全対象セル/型を実測する。範囲展開が使えない場合だけ有限行列反復と型付きセル書込みを採取・2回検証する。未採取のWriteRange等を捏造しない。
+値転記と完全コピーを区別し、元数式・書式・コメント・画像を運ぶ操作は対象外。転記先の書式や対象外セル/数式の保全検査は必要であり、完全コピー機能とは別。
+SaveAsは既存ファイルを無警告で上書きした過去実測がある。未存在の専用出力、原本/作業コピーとの非同一、既存衝突時停止を事前確認し、未確認のDoNotOverwrite引数を追加しない。原本SHA、作業コピーの由来、Run別成果物を検証者が照合する。
+
+例9: 指定シートからの読取り→値転記→別名保存（組合せ設計、実行未確認）
+既知の読取り原文と採取済みシート切替を組み合わせる。各行は00/04の型・前提を参照し、ブックごとにインスタンスを区別する。次は採取済み切替行のNameだけを入力に存在するDataへ置換した候補部分列（この組合せのPAD実行未確認）。
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts\\catalog\\fixtures\\excel\\t04-filter-input.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelInstance
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelInstance Name: $'''Data'''
+Excel.ReadFromExcel.ReadCells Instance: ExcelInstance StartColumn: $'''A''' StartRow: 1 EndColumn: $'''C''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ExcelData
+Excel.CloseExcel.Close Instance: ExcelInstance
+これはデータ値を置換した参照用部分列であり完成フローではない。切替の採取原文Sheet1は上の追補に完全収録済み。この列を実測済みの組合せとしない。実依頼では存在するシート名・パス・固定矩形を一貫して指定する。
+全体の依存順: 安全事前確認→テンプレート作業コピー準備→入力A読取り専用起動/シート選択/矩形読取り→入力Bも同様→作業コピー編集可能起動/転記先シート選択→型を保持した矩形値転記（追加採取待ち）→新規xlsx SaveAs→全インスタンスを保存せず閉じる→出力読取り専用再開/両シート再選択/全対象セル照合→終了→原本SHAと対象外部分の独立照合。
+転記原文・比較手順のPAD実測が欠ける現時点では、この部分列を依頼全体の完了として返さない。安全確認も生成停止と実行時停止を区別する。照合器だけのPASSはCopilot生成やPAD RunのPASSではない。

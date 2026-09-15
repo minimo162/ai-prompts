@@ -1,0 +1,22 @@
+{
+  "run2_gate": "READY",
+  "variables": [
+    {
+      "name": "ExistingDecision",
+      "value": "STOP"
+    },
+    {
+      "name": "MissingDecision",
+      "value": "WRITE"
+    }
+  ],
+  "missing_absent": true,
+  "start_enabled": true,
+  "observed_at": "2026-09-15T08:59:31.0235597Z",
+  "intervention": "Close diagnostic menu; select one action and focus it",
+  "status": "RUN1_COMPLETION_OBSERVED_AFTER_FOCUS_RECOVERY",
+  "additional_run_requests": 0,
+  "existing_sha": "58927c414465a8d5dcf18af625e15aa90314b6a6cb3d3fd71ece28056882bb14",
+  "ready": true,
+  "causal_limit": "Menu closure and action selection/focus were combined; exact subcause not isolated"
+}

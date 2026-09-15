@@ -1,0 +1,17 @@
+{
+  "status": "PASS_CONDITIONAL_PRIMITIVE_WITHIN_SCOPE",
+  "missing_path_remains_absent": true,
+  "raw_matches_before_and_after": true,
+  "raw_sha": "477b7c174b1d74015ed7ee9ff3f0cbf3e768ec6adc9cc1e4ea05eb56a9c67272",
+  "runs": 2,
+  "limitations": [
+    "No Excel writes in this primitive",
+    "Does not prove runtime exception termination",
+    "No new separately pasted reuse flow yet"
+  ],
+  "source": "PAD GUI configured, evaluator plan; not Copilot",
+  "run1": "completion observed after focus recovery; values match",
+  "run2": "completion observed and values match after preview clear",
+  "scope": "two file-existence branches only; not Excel transfer acceptance",
+  "existing_sha_unchanged": true
+}

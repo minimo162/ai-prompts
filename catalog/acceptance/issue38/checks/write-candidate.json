@@ -1,0 +1,17 @@
+{
+  "r2": {
+    "command": "node tests/Test-Issue38Package.mjs 20260915-excel-r2",
+    "status": "FAIL",
+    "actual_utf16": 5911,
+    "manifest_utf16": 5844,
+    "sent": false,
+    "run": false
+  },
+  "r3": {
+    "command": "node tests/Test-Issue38Package.mjs 20260915-excel-r3",
+    "status": "PASS_NON_LIVE_PACKAGE",
+    "utf16": 5844,
+    "sources": 7
+  },
+  "r1_regression": "PASS_NON_LIVE_PACKAGE"
+}

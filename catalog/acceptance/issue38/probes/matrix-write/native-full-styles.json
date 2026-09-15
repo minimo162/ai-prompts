@@ -1,0 +1,22 @@
+{
+  "kind": "SUPPLEMENTAL_NATIVE_STYLE_COMPARISON",
+  "observed_at": "2026-09-15T07:30:51.7606003Z",
+  "paths": [
+    "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX02\\template.xlsx",
+    "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\matrix-write\\run1\\result.xlsx"
+  ],
+  "sha_before": [
+    "0E3CF3B1C9E6E73E835C324B71602B50F708DF689944A3760E4B411959F3B457",
+    "6488DF60AAEB75A3F873062F495310B3C69CDEA10DA02C111BC3AFE798408EDC"
+  ],
+  "sha_after": [
+    "0E3CF3B1C9E6E73E835C324B71602B50F708DF689944A3760E4B411959F3B457",
+    "6488DF60AAEB75A3F873062F495310B3C69CDEA10DA02C111BC3AFE798408EDC"
+  ],
+  "checked_cells": 480,
+  "bounds": "Each existing sheet A1:J16",
+  "attributes": "font,fill,number format,alignment,protection,merge,borders,row/column size and hidden",
+  "differences": [],
+  "status": "MATCH_WITHIN_RECORDED_SCOPE",
+  "acceptance": "NOT_PROVEN; excludes values, types, formulas, other sheet metadata, PAD completion and Copilot"
+}

@@ -1,0 +1,19 @@
+{
+  "sheet": "Source A",
+  "input": "fixtures/EX02/input-a.xlsx",
+  "scope": "DataTable scalar indexing and equality primitive, not Copilot",
+  "expected": {
+    "NumberCell": -3,
+    "UnequalNumber": "DIFFERENT",
+    "EqualNumber": "MATCH",
+    "TextCell": "Alpha"
+  },
+  "type_coercion": "Observe numeric -3 vs text -3 separately, no type-equivalence assumption",
+  "run2_gate": "Run1 values saved and fixed expectations matched; original SHA unchanged",
+  "max_runs": 2,
+  "input_sha": "f655b62c82750fc07f4e54bcfd098e8e7c0b771c9422c4321cc413a4d6d07fa9",
+  "range": "B2:D3",
+  "timeout_seconds": 30,
+  "flow": "RobinIssue38ScalarCompare20260915A",
+  "provenance": "Create through PAD UI; reuse known read-only sheet range primitives"
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-15T09:21:22.4383348Z",
+  "flow_name": "RobinIssue38ScalarCompare20260915A",
+  "run_status": "completion_not_observed",
+  "timeout_seconds": 30,
+  "ready_observed": true,
+  "start_enabled_after": false,
+  "variable_previews": [
+    "MATCH",
+    "MATCH",
+    "2 行, 3 列",
+    "Excel インスタンス",
+    "-3",
+    "Alpha",
+    "DIFFERENT"
+  ]
+}

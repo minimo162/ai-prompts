@@ -1,0 +1,66 @@
+前提・対象範囲・未確認点
+目的: EX02の値のみ転記（Source A:B2:D3 → Target A:C4、Source B:A3:B5 → Target B:B3）。
+入力:
+C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\fixtures\EX02\input-a.xlsx
+C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\fixtures\EX02\input-b.xlsx
+作業コピー:
+C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\runs\EX02-attempt1\work.xlsx
+出力:
+C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\runs\EX02-attempt1\result.xlsx
+条件:
+入力は読取り専用。
+work.xlsx は検証者が事前準備済み。
+result.xlsx は既に存在する。
+上書き禁止。
+参照可能な実測根拠:
+読取り専用Excel起動、シート切替、TypedValues読取りは採取済み。
+DataTableを Excel.WriteToExcel.WriteCell へ渡す矩形値転記の issue38-r3 候補は記録あり。
+未確認であり、この依頼の完了フロー生成を阻害する点:
+「result.xlsx が既に存在する場合に、安全停止して以降の書込み・SaveAsを行わない」ために必要なファイル存在確認＋分岐＋停止の完全な実測Robin原文が bundle 内に収録されていません。存在確認IFの実測はありますが、今回必要な「既存 result.xlsx を検出したら以降工程を実行しない完成フロー」の実測組合せ原文はありません。
+再読取り後の「値・型・位置照合」を自動で行う比較アクション群の実測原文が bundle にありません。再読取り自体は根拠がありますが、比較工程は未採取です。
+先に作る設定
+work.xlsx を事前準備済みにする。
+Source A / Target A / Source B / Target B シートが存在することを事前確認する。
+result.xlsx が既に存在するため、今回の条件では書込み・SaveAsへ進めません。
+出力名を未存在の新規ファイル名へ変更するか、既存 result.xlsx を退避する必要があります。
+貼り付け用Robin
+
+今回の依頼条件ではコードを出しません。
+
+理由:
+
+ユーザー条件は「result.xlsxは既に存在する」「上書き禁止」「書込み・保存前に安全に扱う」です。
+bundle の実測では Excel SaveAs が既存ファイルを無警告で上書きすることが確認されています。
+したがって result.xlsx が既に存在する状態で保存工程を含む完成フローを返すと、安全条件に反します。
+また、既存 result.xlsx 検出時に安全停止する完成済み組合せRobinは bundle 内に実測原文がありません。
+デザイナー上の確認方法
+
+今回は生成停止が正しい結果です。
+
+確認事項:
+
+result.xlsx が存在すること。
+SaveAs の出力先が result.xlsx になっていること。
+上書きを許可していないこと。
+
+上記が成立するため、書込みと SaveAs を含むフローは返却しません。
+
+次の再開条件
+
+以下のいずれかが満たされたら再開できます。
+
+出力名を未存在の新規ファイルへ変更する。
+例: result-run2.xlsx
+または既存 result.xlsx を検証者が退避・削除し、出力先が未存在であることを確認する。
+または「既存 result.xlsx へ上書きしてよい」と明示する。
+
+その時点で、bundle の issue38-r3 候補で記録された以下の実測構成を根拠として、
+
+Source A B2:D3 読取り
+Target A C4 への DataTable 矩形転記
+Source B A3:B5 読取り
+Target B B3 への DataTable 矩形転記
+新規 xlsx SaveAs
+再読取り
+
+のフロー候補を作成できます。

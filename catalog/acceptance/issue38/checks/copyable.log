@@ -1,0 +1,22 @@
+✔ accepted instruction and manifest are still the frozen baseline (1.348ms)
+✔ copyable r2 instruction is strict UTF-8 without BOM and below both length bounds (1.6154ms)
+✔ version metadata binds r2 and records the observed r1 live failure (0.5057ms)
+✔ r2 copy contract preserves every unrelated accepted instruction (0.2371ms)
+✔ safe copied payload accepts Robin without Markdown fence content (0.3913ms)
+✔ copied payload rejects the exact trailing fence failure observed live (0.7323ms)
+✔ usage guide records r1 failure and r2 retest boundary (0.3824ms)
+✔ rejects literal fence example reintroduced (0.2724ms)
+✔ rejects payload fence prohibition removed (0.3326ms)
+✔ rejects last-line guard removed (0.2865ms)
+✔ rejects visible numbered fence accepted (0.1765ms)
+✔ rejects removed UI limitation (0.139ms)
+✔ rejects unrelated generation change (0.984ms)
+✔ rejects removed safe refusal (0.1981ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 13.118

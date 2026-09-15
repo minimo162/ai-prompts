@@ -1,0 +1,6 @@
+{
+  "source_sha": "0b13b8aed3130022535b32020647b7b8e69dd3e7c1d498c342877567271e71d2",
+  "at": "2026-09-15T09:20:51.6976369Z",
+  "count": 1,
+  "coercion": "observation only; second operand raw contains quoted interpolation, inspect interpretation separately"
+}

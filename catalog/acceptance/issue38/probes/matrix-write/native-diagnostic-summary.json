@@ -1,0 +1,8 @@
+{
+  "kind": "SUPPLEMENTAL_REPRESENTATIVE_DIAGNOSTIC_NOT_ACCEPTANCE",
+  "read_only": true,
+  "sha_preserved": true,
+  "representative_style_dimension_differences": [],
+  "limitations": "9 representative cells, selected rows and column A only; does not replace frozen full oracle or prove PAD completion",
+  "interpretation": "Native Excel reads identical representative dimensions/styles before and after; XML height 22 is already interpreted as 14.7 on original read-only load. Original FAIL preserved."
+}

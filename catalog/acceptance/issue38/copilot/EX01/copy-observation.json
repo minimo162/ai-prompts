@@ -1,0 +1,11 @@
+{
+  "status": "CAPTURED_AFTER_ASYNC_COMPLETION",
+  "first_reads": "stale clipboard from preceding action; retained, not used",
+  "response_file": "response-copy-completed.txt",
+  "code_file": "code-copy-completed.robin",
+  "code_length": 606,
+  "requests": 1,
+  "source": "actual code copy button",
+  "model_ui": "自動",
+  "pad": "NOT_RUN"
+}

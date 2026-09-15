@@ -1,0 +1,24 @@
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx''') THEN
+    EXIT
+END
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力い.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelInputA
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelInputA Name: $'''受取明細'''
+Excel.ReadFromExcel.ReadCells Instance: ExcelInputA StartColumn: $'''D''' StartRow: 4 EndColumn: $'''E''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> InputAData
+Excel.CloseExcel.Close Instance: ExcelInputA
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力ろ.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelInputB
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelInputB Name: $'''追加項目'''
+Excel.ReadFromExcel.ReadCells Instance: ExcelInputB StartColumn: $'''B''' StartRow: 2 EndColumn: $'''D''' EndRow: 3 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> InputBData
+Excel.CloseExcel.Close Instance: ExcelInputB
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\work.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> ExcelWork
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelWork Name: $'''集計先'''
+Excel.WriteToExcel.WriteCell Instance: ExcelWork Value: InputAData Column: $'''F''' Row: 7
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelWork Name: $'''追記先'''
+Excel.WriteToExcel.WriteCell Instance: ExcelWork Value: InputBData Column: $'''D''' Row: 5
+Excel.SaveExcel.SaveAs Instance: ExcelWork DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx'''
+Excel.CloseExcel.Close Instance: ExcelWork
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelVerify
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelVerify Name: $'''集計先'''
+Excel.ReadFromExcel.ReadCells Instance: ExcelVerify StartColumn: $'''F''' StartRow: 7 EndColumn: $'''G''' EndRow: 9 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> VerifyAData
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelVerify Name: $'''追記先'''
+Excel.ReadFromExcel.ReadCells Instance: ExcelVerify StartColumn: $'''D''' StartRow: 5 EndColumn: $'''F''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> VerifyBData
+Excel.CloseExcel.Close Instance: ExcelVerify

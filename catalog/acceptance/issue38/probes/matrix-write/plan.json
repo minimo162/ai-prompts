@@ -1,0 +1,13 @@
+{
+  "kind": "EVALUATOR_PRIMITIVE_PROBE_NOT_COPILOT",
+  "flow_name": "RobinIssue38MatrixRuntime20260915A",
+  "max_runs": 2,
+  "timeout_seconds": 120,
+  "source_sha256": "cb876fc5968b941f0bf8e00f66e48f1f91f808ae1b4184ff06478147fe68f5ca",
+  "action_count": 21,
+  "freeze_sha256": "ac94fb92d2db99eab4f3b7abd18befa13c5e78572377de068368d7cabc3c79f0",
+  "captured_write_sha256": "39ceb68d225f61cf87e8c4c173fe3993699d52ff9e23b0457cb614945e423207",
+  "output": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\probe-matrix-A\\result.xlsx",
+  "work": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\probe-matrix-A\\work.xlsx",
+  "run2_gate": "Run1 snapshot plus logical comparison saved; move only owned result/work into Run1 evidence, prepare fresh work; no unresolved run or output collision"
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-15T09:00:40.7922788Z",
+  "flow_name": "RobinIssue38OutputGuard20260915A",
+  "run_status": "success",
+  "timeout_seconds": 30,
+  "ready_observed": true,
+  "start_enabled_after": true,
+  "variable_previews": [
+    "STOP",
+    "WRITE"
+  ]
+}

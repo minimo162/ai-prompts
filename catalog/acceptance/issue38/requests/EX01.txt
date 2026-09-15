@@ -1,0 +1,3 @@
+添付した同版bundleと本文の指示全文を根拠に、通常のPAD（Power Fx OFF）へ貼付けるRobinを生成してください。
+合成入力 catalog/acceptance/issue38/fixtures/EX02/input-a.xlsx を読取り専用で開き、初期表示シートに依存せず存在する「Source A」へ明示的に切り替え、B2:D3をTypedValues、ヘッダー扱いなしで読み、ExcelDataへ保持して保存せず閉じてください。フルパスの基点は C:\Users\yuuki\ai-prompts-issue38 です。
+入力の事前シート選択・保存はしません。このケースはシート読取り単体の検証であり、Issue全体の値転記・保存完了とは別です。

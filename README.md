@@ -9,9 +9,13 @@ Power Automate for desktop（PAD）の**実測済みRobin**を根拠に、Micros
 
 ## まず使う
 
+**Issue #38のExcel拡張は `20260915-excel-r3` 候補です（実機未受入）。** [候補指示](copilot/versions/20260915-excel-r3/agent-instructions.txt)の全文と、[同版bundle](copilot/versions/20260915-excel-r3/knowledge/PAD-Robin-Knowledge-Bundle.txt)の実添付をセットで使います。シート切替原文を収録しましたが、DataTable矩形書込み原文を追加採取し、12セルの値・型・位置一致まで観測しました。終了未確認・書式照合FAILが残り、EX01〜EX05の実Copilot/PAD受入は未実施です。[差分・結果・再開条件](catalog/acceptance/issue38/report.md)を確認してください。受入済み20260913eおよび既存r2は保持しています。
+
 **コピー用コードブロック改善版は `20260915-copyable-r2` です。** 初版では実Copilot上でコピーボタンの表示までは確認できましたが、閉じMarkdownフェンスがコピー対象へ混入し、PADでエラーになる実機結果がありました。r2はその漏れを防ぐ指示へ修正した静的検査版で、実Copilot/PADでの再試験はこれからです。基準版の受入結果をr2へ継承しません。[改善内容・検証範囲](copilot/copyable-output.md)を確認してください。
 
 ### 必要なもの
+
+起動・接続・貼付けで困った場合は、[PAD・Copilotの操作入口](docs/pad-copilot-operation-guide.md)を参照してください。過去の成功経路と、今回の環境で確認すべき条件をまとめています。
 
 - Microsoft 365 Copilotを利用できるアカウント
 - Power Automate for desktop（PAD）
@@ -31,7 +35,7 @@ Agent Builder / Copilot Studioではなく、**通常のM365 Copilot Chat** が�
 
 コピー時の確認方法は [コピー用出力ガイド](copilot/copyable-output.md) にあります。既存のチャットにはr2が自動反映されないため、新しいチャットで指示全文とナレッジを渡してください。
 
-受入済み基準版で7つのナレッジ原本を個別添付する方法や、通常チャットでの検証手順は [`copilot/README.md`](copilot/README.md) を参照してください。
+版別の指示・bundle対応と通常チャットでの検証手順は [`copilot/README.md`](copilot/README.md) を参照してください。標準入力は同版の指示全文＋bundle実添付です。
 
 ### 依頼例
 

@@ -1,0 +1,10 @@
+{
+  "power_fx": "OFF before creation",
+  "pid": 20504,
+  "runs": 0,
+  "limitations": "Existing text [0][0] proof is not numeric indexing or type-coercion proof",
+  "existing_reference": "catalog/evidence/c-cell-read-20260914v/captured.robin",
+  "hwnd": 395680,
+  "status": "CREATED_NOT_CONFIGURED",
+  "flow": "RobinIssue38ScalarCompare20260915A"
+}

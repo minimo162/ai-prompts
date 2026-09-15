@@ -1,0 +1,22 @@
+{
+  "status": "PARTIAL_NOT_ACCEPTED",
+  "scope": "primitive probe; not EX02 Copilot acceptance",
+  "run_requests": 1,
+  "run1_completion": "NOT_OBSERVED",
+  "helper_exit": 1,
+  "helper_message": "Run completion was not observed",
+  "timeout_seconds": 120,
+  "output_snapshot": "run1/result.xlsx",
+  "output_sha256": "6488df60aaeb75a3f873062f495310b3c69cdea10da02c111bc3afe798408edc",
+  "oracle": "run1-provisional-values.json",
+  "logical_status": "FAIL",
+  "target_value_type_position_mismatches": 0,
+  "target_cells": 12,
+  "style_and_dimension_failures": 558,
+  "diagnostic": "style-diagnostic.json",
+  "representative_actual_difference": "Decoy row 1 height: 22 -> 14.65; font charset/family filled; columns grouped",
+  "snapshot_helper_gate_interpretation": "READY_FOR_NEXT_RUN means artifact snapshot only; overridden by logical FAIL and unconfirmed completion",
+  "run2": "NOT_STARTED",
+  "originals_sha_check": "PASS via frozen oracle",
+  "candidate_changed": false
+}

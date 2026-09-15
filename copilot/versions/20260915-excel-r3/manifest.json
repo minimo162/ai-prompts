@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "version": "20260915-excel-r3",
+  "status": "CANDIDATE_PRIMITIVE_CAPTURED_ACCEPTANCE_NOT_RUN",
+  "inherits_live_acceptance": false,
+  "base_commit": "c60251d65afe30160bcb33b08a988a46028b783c",
+  "base_version": "20260913e",
+  "copy_rule_version": "20260915-copyable-r2",
+  "instruction_path": "agent-instructions.txt",
+  "instruction_sha256": "7615ce87f047a6870e9ac2bbf6997f0032d39085909f4e65b6576df22ab632d6",
+  "instruction_utf16": 5844,
+  "bundle_path": "knowledge/PAD-Robin-Knowledge-Bundle.txt",
+  "bundle_sha256": "a7885bb4233a95816dba4974804974532a13bcc750b63484bd331ee6e12fa930",
+  "source_files": [
+    {
+      "bytes": 23294,
+      "sha256": "20dc811f7c4690a67b76bcb274a6ad54f4a1eb63cb616bed73b3392b84d2fe35",
+      "path": "knowledge/PAD-Robin-00-Index.txt"
+    },
+    {
+      "bytes": 12741,
+      "sha256": "abe921c3e7aa19ce5410fe746fe4c4f5c7fc7ee3ffd18c4b6747686a41fdbf31",
+      "path": "knowledge/PAD-Robin-01-Basics.txt"
+    },
+    {
+      "bytes": 15200,
+      "sha256": "0caea76804e62d78c0c174add3f04acf6835d497220dc00cef256b03ddf0d7ea",
+      "path": "knowledge/PAD-Robin-02-Control.txt"
+    },
+    {
+      "bytes": 25350,
+      "sha256": "a541082a650a7cfae9d2b2cfb47026d7b8ee81bc542f30ba409af5e6291c9aea",
+      "path": "knowledge/PAD-Robin-03-Files.txt"
+    },
+    {
+      "bytes": 25338,
+      "sha256": "8b8c550eb4ef64468ee4e5454f549ed52d3fbe6244ba133947147809743aaf29",
+      "path": "knowledge/PAD-Robin-04-Office-PDF.txt"
+    },
+    {
+      "bytes": 8995,
+      "sha256": "e62a78aa92941984bacbdc59d4c6561104a9eca5b9d0e45b817f539e4558d867",
+      "path": "knowledge/PAD-Robin-05-UI-Web.txt"
+    },
+    {
+      "bytes": 22868,
+      "sha256": "a703df076255a8246279f3a5f8269fe0a3533eaf0acecd244873e0b37cc8c336",
+      "path": "knowledge/PAD-Robin-06-Examples.txt"
+    }
+  ],
+  "acceptance_freeze_sha256": "ac94fb92d2db99eab4f3b7abd18befa13c5e78572377de068368d7cabc3c79f0",
+  "evidence": {
+    "copilot": "NOT_RUN",
+    "pad": "PRIMITIVE_ONLY_NOT_ACCEPTANCE",
+    "sheet_probe_scope": "Historical editable Sheet1 only",
+    "sheet_probe_sha256": "c7f3fa0408463de8ee36bf5b865720c64799f4a92cbf2a3b7efee4cfa1907c29",
+    "matrix_write": "CAPTURED; 12 target values/types/positions match; completion unconfirmed; full oracle FAIL; Run2 not started",
+    "matrix_write_sha256": "39ceb68d225f61cf87e8c4c173fe3993699d52ff9e23b0457cb614945e423207"
+  },
+  "base_candidate": "20260915-excel-r1"
+}

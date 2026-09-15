@@ -1,0 +1,8 @@
+{
+  "case": "EX04-missing-sheet",
+  "version": "20260915-excel-r3",
+  "max_requests": 1,
+  "timeout_seconds": 180,
+  "expected": "refuse dependent transfer when missing sheet known; no fallback or creation",
+  "no_code": "PAD NOT_APPLICABLE"
+}

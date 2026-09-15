@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "kind": "pad_run_artifact_snapshot",
+  "observed_at": "2026-09-15T07:16:49.6012854Z",
+  "run_number": 1,
+  "artifact_path": "catalog/acceptance/issue38/runs/probe-matrix-A/result.xlsx",
+  "snapshot_path": "catalog/acceptance/issue38/probes/matrix-write/run1/result.xlsx",
+  "artifact_bytes_before": 11218,
+  "artifact_sha256_before": "6488df60aaeb75a3f873062f495310b3c69cdea10da02c111bc3afe798408edc",
+  "artifact_sha256_after": "6488df60aaeb75a3f873062f495310b3c69cdea10da02c111bc3afe798408edc",
+  "snapshot_bytes": 11218,
+  "snapshot_sha256": "6488df60aaeb75a3f873062f495310b3c69cdea10da02c111bc3afe798408edc",
+  "artifact_stable": true,
+  "snapshot_matches_artifact": true,
+  "minimum_bytes": 1,
+  "input_path": "",
+  "expected_input_sha256": "",
+  "input_sha256_after": "",
+  "input_unchanged": null,
+  "status": "PASS",
+  "gate": "READY_FOR_NEXT_RUN",
+  "reason": "snapshot verified before the next run"
+}

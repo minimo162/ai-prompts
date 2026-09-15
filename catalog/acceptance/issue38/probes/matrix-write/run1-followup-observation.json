@@ -1,0 +1,61 @@
+{
+  "nodes": [
+    {
+      "enabled": false,
+      "name": "実行",
+      "id": "StartFlowButton"
+    },
+    {
+      "enabled": true,
+      "name": "",
+      "id": "StopFlowButton"
+    },
+    {
+      "enabled": true,
+      "name": "2 行, 3 列",
+      "id": "VariablePreviewTextBlock"
+    },
+    {
+      "enabled": true,
+      "name": "3 行, 2 列",
+      "id": "VariablePreviewTextBlock"
+    },
+    {
+      "enabled": true,
+      "name": "Excel インスタンス",
+      "id": "VariablePreviewTextBlock"
+    },
+    {
+      "enabled": true,
+      "name": "Excel インスタンス",
+      "id": "VariablePreviewTextBlock"
+    },
+    {
+      "enabled": true,
+      "name": "2 行, 3 列",
+      "id": "VariablePreviewTextBlock"
+    },
+    {
+      "enabled": true,
+      "name": "3 行, 2 列",
+      "id": "VariablePreviewTextBlock"
+    },
+    {
+      "enabled": true,
+      "name": "Excel インスタンス",
+      "id": "VariablePreviewTextBlock"
+    },
+    {
+      "enabled": true,
+      "name": "Excel インスタンス",
+      "id": "VariablePreviewTextBlock"
+    },
+    {
+      "enabled": true,
+      "name": "状態: 準備完了",
+      "id": "Flow_status_ready"
+    }
+  ],
+  "handle": 198680,
+  "name": "Power Automate | RobinIssue38MatrixRuntime20260915A"
+}

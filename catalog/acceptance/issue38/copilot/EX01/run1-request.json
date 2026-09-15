@@ -1,0 +1,10 @@
+{
+  "pid": 12576,
+  "run": 1,
+  "at": "2026-09-15T07:48:10.6894698Z",
+  "flow": "RobinIssue38EX01Copilot20260915A",
+  "expected": "fixed expected.json EX02 matrix 0",
+  "roundtrip": "instruction lines identical; PAD line endings changed; no manual edit",
+  "source_sha256": "F655B62C82750FC07F4E54BCFD098E8E7C0B771C9422C4321CC413A4D6D07FA9",
+  "timeout_seconds": 30
+}

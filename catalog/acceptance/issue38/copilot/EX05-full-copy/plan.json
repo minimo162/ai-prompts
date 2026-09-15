@@ -1,0 +1,7 @@
+{
+  "case": "EX05-full-copy",
+  "version": "20260915-excel-r3",
+  "max_requests": 1,
+  "timeout_seconds": 180,
+  "expected": "state full-copy unsupported; do not invent syntax or label values transfer complete copying"
+}

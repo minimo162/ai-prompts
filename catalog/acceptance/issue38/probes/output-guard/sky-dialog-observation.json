@@ -1,0 +1,17 @@
+{
+  "status": "CONFIGURATION_DIALOG_OPEN_NOT_SAVED",
+  "flow": "RobinIssue38OutputGuard20260915A",
+  "hwnd": 3803424,
+  "route": "computer-use sky",
+  "actions": [
+    "Expanded File category",
+    "Opened File exists action",
+    "Focused path field",
+    "One type_text request; path remained visually empty"
+  ],
+  "accessibility": "null",
+  "modal_discovery": "list_windows returned parent only; dialog not independently targetable",
+  "run_requests": 0,
+  "clipboard_bypass": false,
+  "next": "Use a separate turn with existing direct UIA route to inspect and configure this exact dedicated dialog; do not repeat sky typing into parent"
+}

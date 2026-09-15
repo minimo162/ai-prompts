@@ -1,0 +1,11 @@
+{
+  "case": "EX05-full-copy",
+  "version": "20260915-excel-r3",
+  "generation_scope": "PASS_SCOPE_BOUNDARY_ONLY",
+  "pad": "NOT_APPLICABLE_NO_CODE",
+  "code_buttons": 0,
+  "url": "https://m365.cloud.microsoft/chat/conversation/061c5099-adc4-4c00-b4c6-0581f02ccdd1?es=SSR",
+  "reason": "Explicitly distinguishes values transfer from formula/style/comment/image full copy; declines code for unsupported full copy.",
+  "caveat": "Lists readback comparison as known; automatic comparison composition is actually still missing. Scope result does not establish that capability.",
+  "response_utf16": 1375
+}

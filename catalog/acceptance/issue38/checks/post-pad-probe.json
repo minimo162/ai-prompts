@@ -1,0 +1,20 @@
+{
+  "kind": "NON_LIVE",
+  "checks": [
+    {
+      "command": "node tests/Test-Issue38Package.mjs",
+      "exit_code": 0,
+      "result": "PASS_NON_LIVE_PACKAGE 5775 UTF16 / 7 sources"
+    },
+    {
+      "command": "python -B tests/Test-Issue38Excel.py",
+      "exit_code": 0,
+      "result": "13 tests OK"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "No whitespace errors; LF/CRLF warnings"
+    }
+  ]
+}

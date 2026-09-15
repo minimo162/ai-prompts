@@ -1,0 +1,16 @@
+{
+  "status": "PASS_PRIMITIVE_VALUES_ONLY",
+  "scope": "conditional branch only, not full Excel safety or Copilot acceptance",
+  "existing_sha": "58927c414465a8d5dcf18af625e15aa90314b6a6cb3d3fd71ece28056882bb14",
+  "variables": [
+    {
+      "name": "ExistingDecision",
+      "value": "STOP"
+    },
+    {
+      "name": "MissingDecision",
+      "value": "WRITE"
+    }
+  ],
+  "missing_absent": true
+}

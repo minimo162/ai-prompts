@@ -1,0 +1,35 @@
+{
+  "limits": "Equality is not strict type comparison; two measured indexes only",
+  "variables": [
+    {
+      "name": "CoercionObserved",
+      "value": "MATCH"
+    },
+    {
+      "name": "EqualNumber",
+      "value": "MATCH"
+    },
+    {
+      "name": "ExcelData",
+      "value": "2 行, 3 列"
+    },
+    {
+      "name": "ExcelInstance",
+      "value": "Excel インスタンス"
+    },
+    {
+      "name": "NumberCell",
+      "value": "-3"
+    },
+    {
+      "name": "TextCell",
+      "value": "Alpha"
+    },
+    {
+      "name": "UnequalNumber",
+      "value": "DIFFERENT"
+    }
+  ],
+  "status": "FIXED_EXPECTATIONS_MATCH",
+  "input_sha": "F655B62C82750FC07F4E54BCFD098E8E7C0B771C9422C4321CC413A4D6D07FA9"
+}

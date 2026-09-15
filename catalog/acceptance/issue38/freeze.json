@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-09-15T14:27:19.9421848+09:00",
+  "files": {
+    "expected.json": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+    "fixtures/EX02/input-a.xlsx": "f655b62c82750fc07f4e54bcfd098e8e7c0b771c9422c4321cc413a4d6d07fa9",
+    "fixtures/EX02/input-b.xlsx": "69627e161747fedad0f7c3b410c1d625b29a553786be0c145e83aaf43d1b105a",
+    "fixtures/EX02/template.xlsx": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+    "fixtures/EX03/ひな形.xlsx": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "fixtures/EX03/入力い.xlsx": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "fixtures/EX03/入力ろ.xlsx": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725",
+    "plan.md": "22c2953abe5b59d3336164b1c5baf084189c60f19009f3f0d90e604a0d3cab83",
+    "requests/EX01.txt": "c951798ea6a951b7783eadd86f1db8d23f4ae3a6a4c00c3cc9d3ab83ffd75480",
+    "requests/EX02.txt": "39ef21927f5ce454bc9a407c54bec21125816bcb9a2d902074521111e1fada39",
+    "requests/EX03.txt": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+    "requests/EX04.json": "06b26871b1f08d156ce6cc3bea9325f922b2d7883fc988e299d5459210a7d5af",
+    "requests/EX05.json": "6aa928b949bd52134f0bbb270056fdcbfd72a710995ac47ff5f29559af4b696c",
+    "spec.json": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380"
+  },
+  "policy": "Do not alter fixture/spec/expected/request hashes after generation. No generation performed yet."
+}

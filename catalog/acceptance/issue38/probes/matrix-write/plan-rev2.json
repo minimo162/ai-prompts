@@ -1,0 +1,14 @@
+{
+  "kind": "EVALUATOR_PRIMITIVE_PROBE_NOT_COPILOT",
+  "supersedes": "plan.json; builder replacement-token defect caught before paste, zero runs",
+  "flow_name": "RobinIssue38MatrixRuntime20260915A",
+  "max_runs": 2,
+  "timeout_seconds": 120,
+  "source_sha256": "46ca4731a2c83c8b5a9e0ad069a1da72f11a7e6030a45a2352c37d11812a57aa",
+  "action_count": 21,
+  "freeze_sha256": "ac94fb92d2db99eab4f3b7abd18befa13c5e78572377de068368d7cabc3c79f0",
+  "captured_write_sha256": "39ceb68d225f61cf87e8c4c173fe3993699d52ff9e23b0457cb614945e423207",
+  "output": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\probe-matrix-A\\result.xlsx",
+  "work": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\probe-matrix-A\\work.xlsx",
+  "run2_gate": "Run1 snapshot plus logical comparison saved; move only owned result/work into Run1 evidence, prepare fresh work; no unresolved run or output collision"
+}
