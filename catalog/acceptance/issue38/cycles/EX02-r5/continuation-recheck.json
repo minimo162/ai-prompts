@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "test_id": "EX02-R5-G1-CONTINUATION-1",
+  "recorded_at": "2026-09-15T23:34:29.1257455+09:00",
+  "source_commit": "23a424c314d45a9b4daef3820e67c8c2b73ae123",
+  "normal_m365_existing_response": {
+    "conversation": "https://m365.cloud.microsoft/chat/conversation/40ad4cdc-012b-45bb-a13f-97b768d921ba?es=SSR",
+    "response_title": "Power Automate Desktop Excel転記フロー",
+    "code_editor_count": 1,
+    "code_editor": {
+      "tag": "DIV",
+      "role": "textbox",
+      "aria_label": "コード エディター",
+      "dom_text_content_chars_including_line_numbers": 7396,
+      "displayed_line_count": 88,
+      "last_numbered_entries": [
+        {
+          "line": 87,
+          "text": "END"
+        },
+        {
+          "line": 88,
+          "text": "`"
+        }
+      ]
+    },
+    "preserved_code_copy_sha256": "c26b5c6cf42b66fecb1272222b64c2ab7aaa38921802945d9a58d7636c6a7dec",
+    "interpretation": "The standalone final backtick is present as line 88 in the existing rendered M365 code editor. It is not explained by clipboard-only capture normalization.",
+    "response_copy_diagnostic": {
+      "button_count": 1,
+      "clicked_once": true,
+      "browser_connector_clipboard_items": 0,
+      "used_as_content_evidence": false,
+      "reason": "The connector returned no clipboard item, so this diagnostic neither proves nor disproves the response-copy payload."
+    }
+  },
+  "existing_pad_flow": {
+    "app": "Power Automate for desktop designer",
+    "window_title": "Power Automate | 無題 (3)",
+    "window_id_observation_only": 263140,
+    "subflow": "Main",
+    "visible_subflow_count": 1,
+    "visible_action_count": 0,
+    "visible_selected_action_count": 0,
+    "visible_global_variable_count": 0,
+    "canvas_message": "ここにはまだアクションがありません",
+    "status": "準備完了",
+    "screenshot_inspected_live": true,
+    "screenshot_persisted": false
+  },
+  "controls": {
+    "new_message_sent": false,
+    "regeneration_requested": false,
+    "generated_robin_edited": false,
+    "pad_paste_retried": false,
+    "pad_flow_saved": false,
+    "pad_run_started": false,
+    "github_write": false
+  },
+  "decision": {
+    "previous_failure_affirmed": true,
+    "status": "STILL_NOT_ACCEPTED_RENDERED_EXTRA_TOKEN_AND_ZERO_PAD_ACTIONS",
+    "additional_generation_authorization_required": true
+  }
+}

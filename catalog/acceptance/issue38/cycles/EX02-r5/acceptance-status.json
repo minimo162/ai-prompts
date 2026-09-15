@@ -15,7 +15,9 @@
     "normal_m365_same_version_attachment": "PASS",
     "normal_m365_single_generation": "PASS_RESPONSE_CAPTURED",
     "copilot_code_copy_integrity": "FAIL_EXTRA_FINAL_BACKTICK",
+    "rendered_code_editor_dom_recheck": "FAIL_TRAILING_BACKTICK_CONFIRMED_IN_EXISTING_RESPONSE",
     "unmodified_pad_paste": "FAIL_ZERO_ACTIONS_IMPORTED",
+    "pad_zero_action_recheck": "FAIL_ZERO_ACTIONS_STILL_PRESENT",
     "pad_save_recopy": "NOT_RUN",
     "positive_run1": "NOT_RUN",
     "positive_run2": "NOT_RUN",
@@ -37,6 +39,12 @@
     "generalized_to_unconfirmed_types": false,
     "probe_success_used_as_copilot_flow_success": false,
     "external_checker_used_as_copilot_flow_success": false
+  },
+  "continuation_evidence": {
+    "path": "catalog/acceptance/issue38/cycles/EX02-r5/continuation-recheck.json",
+    "browser_dom_extra_token_confirmed": true,
+    "pad_zero_actions_confirmed": true,
+    "additional_generation_requests": 0
   },
   "overall": {
     "accepted": false,

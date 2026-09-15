@@ -146,6 +146,7 @@ class Ex02Tests(unittest.TestCase):
         audit = json.loads((cycle / 'generation-safety-audit.json').read_bytes())
         paste = json.loads((cycle / 'pad-paste-attempt.json').read_bytes())
         acceptance = json.loads((cycle / 'acceptance-status.json').read_bytes())
+        recheck = json.loads((cycle / 'continuation-recheck.json').read_bytes())
         self.assertEqual(audit['decision']['status'], 'FAIL_UNMODIFIED_CODE_COPY_EXTRA_BACKTICK')
         self.assertFalse(audit['comparison']['repair_applied'])
         self.assertEqual(paste['operation']['final_action_count'], 0)
@@ -153,6 +154,17 @@ class Ex02Tests(unittest.TestCase):
         self.assertEqual(paste['result']['run2'], 'NOT_RUN')
         self.assertFalse(acceptance['overall']['accepted'])
         self.assertEqual(acceptance['legacy_558']['count'], 558)
+        self.assertEqual(recheck['normal_m365_existing_response']['code_editor_count'], 1)
+        self.assertEqual(
+            recheck['normal_m365_existing_response']['code_editor']['last_numbered_entries'],
+            [{'line': 87, 'text': 'END'}, {'line': 88, 'text': '`'}],
+        )
+        self.assertEqual(recheck['existing_pad_flow']['visible_action_count'], 0)
+        self.assertFalse(recheck['controls']['regeneration_requested'])
+        self.assertFalse(recheck['controls']['generated_robin_edited'])
+        self.assertFalse(recheck['controls']['pad_run_started'])
+        self.assertTrue(recheck['decision']['previous_failure_affirmed'])
+        self.assertEqual(acceptance['continuation_evidence']['additional_generation_requests'], 0)
 
     def test_r5_protected_files_and_unrun_workbook_state_are_preserved(self):
         cycle = ROOT / 'catalog/acceptance/issue38/cycles/EX02-r5'
