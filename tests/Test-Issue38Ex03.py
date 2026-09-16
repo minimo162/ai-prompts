@@ -596,15 +596,87 @@ class Ex03Tests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             rebuilt = Path(directory) / 'cycle'
             r9_acceptance.prepare(rebuilt, verify_head=False)
-            for frozen in cycle.rglob('*'):
-                if frozen.is_file():
-                    self.assertEqual(
-                        frozen.read_bytes(),
-                        (rebuilt / frozen.relative_to(cycle)).read_bytes(),
-                        str(frozen),
-                    )
+            checkpoint_names = (
+                'plan.json',
+                'preflight.json',
+                'protected-files-before.json',
+                'submitted-body.txt',
+            )
+            for name in checkpoint_names:
+                self.assertEqual(
+                    (cycle / name).read_bytes(),
+                    (rebuilt / name).read_bytes(),
+                    name,
+                )
+            self.assertFalse((rebuilt / 'browser-staging-stop.json').exists())
             with self.assertRaisesRegex(ValueError, 'refusing overwrite'):
                 r9_acceptance.prepare(rebuilt, verify_head=False)
+
+    def test_r9_g1_preserves_pre_send_computer_use_stop(self):
+        cycle = ROOT / 'catalog/acceptance/issue38/cycles/EX03-r9-G1'
+        evidence = json.loads(
+            (cycle / 'browser-staging-stop.json').read_text(encoding='utf-8')
+        )
+
+        self.assertEqual(evidence['schema_version'], 1)
+        self.assertEqual(evidence['cycle_id'], 'EX03-R9-G1')
+        self.assertEqual(
+            evidence['checkpoint']['head'],
+            '5bc0460010247b8de00fcc4594c9d36020c72e69',
+        )
+        self.assertEqual(evidence['checkpoint']['action_time_verifier'], 'PASS')
+        self.assertEqual(
+            evidence['checkpoint']['submitted_body_sha256'],
+            r9_acceptance.sha(cycle / 'submitted-body.txt'),
+        )
+        self.assertEqual(
+            evidence['checkpoint']['bundle_sha256'],
+            r9_acceptance.sha(
+                ROOT
+                / 'copilot/versions/20260917-excel-r9/knowledge/'
+                'PAD-Robin-Knowledge-Bundle.txt'
+            ),
+        )
+        self.assertEqual(
+            evidence['destination'],
+            {
+                'service': 'Microsoft 365 Copilot Chat',
+                'url': 'https://m365.cloud.microsoft/chat?es=SSR',
+                'title': '\u30c1\u30e3\u30c3\u30c8 | Microsoft Copilot',
+                'normal_chat': True,
+                'model_selected': 'Think Deeper',
+            },
+        )
+        self.assertEqual(
+            evidence['staging'],
+            {
+                'browser_opened': True,
+                'blank_editor_confirmed': True,
+                'model_selected': True,
+                'body_staged': False,
+                'attachment_staged': False,
+                'send_clicked': False,
+                'generation_started': False,
+            },
+        )
+        self.assertEqual(
+            evidence['pad'],
+            {
+                'flow_created': False,
+                'robin_pasted': False,
+                'recopy_performed': False,
+                'run1': 'NOT_RUN',
+                'run2': 'NOT_RUN',
+                'pad_runs_used': 0,
+            },
+        )
+        self.assertEqual(
+            evidence['stop']['status'],
+            'STOPPED_BEFORE_BODY_OR_ATTACHMENT_STAGING',
+        )
+        self.assertFalse(evidence['stop']['same_turn_ui_retry'])
+        self.assertFalse(evidence['stop']['send_authorization_consumed'])
+        self.assertFalse(evidence['github_write'])
 
     def test_r9_g1_action_time_verifier_is_read_only_and_fail_closed(self):
         result = r9_checkpoint.verify()
