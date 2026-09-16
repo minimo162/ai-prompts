@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const requestedVersion=process.argv[2] ?? '20260915-excel-r1';
-assert.ok(['20260915-excel-r1','20260915-excel-r2','20260915-excel-r3','20260915-excel-r4','20260915-excel-r5','20260916-excel-r6'].includes(requestedVersion));
+assert.ok(['20260915-excel-r1','20260915-excel-r2','20260915-excel-r3','20260915-excel-r4','20260915-excel-r5','20260916-excel-r6','20260916-excel-r7'].includes(requestedVersion));
 const version=path.join(root,'copilot/versions',requestedVersion);
 const read=p=>fs.readFileSync(p);
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
@@ -44,7 +44,7 @@ if(requestedVersion!=='20260915-excel-r1'){
   for(const n of ['00-Index','04-Office-PDF','06-Examples']){
     const content=text(path.join(version,`knowledge/PAD-Robin-${n}.txt`));
     assert.ok(content.includes(write.toString('utf8').trimEnd()));
-    if(['20260915-excel-r4','20260915-excel-r5','20260916-excel-r6'].includes(requestedVersion)) {
+    if(['20260915-excel-r4','20260915-excel-r5','20260916-excel-r6','20260916-excel-r7'].includes(requestedVersion)) {
       assert.ok(content.includes('型識別アクション・厳密型比較のPAD原文は未採取'));
       assert.ok(content.includes('書式・寸法558差分のFAIL'));
       assert.ok(content.includes('2Run終了を観測済み'));
@@ -127,6 +127,79 @@ if(requestedVersion==='20260916-excel-r6') {
   assert.equal(manifest.status,'FROZEN_CANDIDATE_EX03_PERCENT_TEXT_INTEGRATED_NOT_LIVE_ACCEPTED');
   assert.equal(manifest.base_candidate,'20260915-excel-r5');
   assert.equal(manifest.base_commit,'1701d8dd3ca88c2c60de443205e54a764e578fc9');
+}
+if(requestedVersion==='20260916-excel-r7') {
+  for(const [p,h] of Object.entries(manifest.evidence_inputs)) assert.equal(sha(read(path.join(root,p))),h,p);
+  const r6=path.join(root,'copilot/versions/20260916-excel-r6');
+  for(const name of ['PAD-Robin-01-Basics.txt','PAD-Robin-02-Control.txt','PAD-Robin-03-Files.txt','PAD-Robin-05-UI-Web.txt']) {
+    assert.deepEqual(
+      read(path.join(version,'knowledge',name)),
+      read(path.join(r6,'knowledge',name)),
+      'unchanged r6 knowledge retained byte-for-byte: '+name,
+    );
+  }
+  assert.equal(manifest.support_files.length,2);
+  for(const record of manifest.support_files) {
+    const support=read(path.join(version,record.path));
+    assert.equal(support.length,record.bytes);
+    assert.equal(sha(support),record.sha256);
+  }
+  const scriptRecord=manifest.support_files.find(record=>record.path.endsWith('.ps1.txt'));
+  const robinRecord=manifest.support_files.find(record=>record.path.endsWith('.robin'));
+  assert.ok(scriptRecord); assert.ok(robinRecord);
+  assert.equal(scriptRecord.sha256,'d0a5df36516fcf4e27f6d789300ee5a03789aba8176571b1ab86fe84f15fba1a');
+  assert.equal(robinRecord.sha256,'529d66dd598c395c6313a6f6d6b44c80049effb79de96b675a37f7dc99596d89');
+  const captureRoot=path.join(root,'catalog/acceptance/issue38/probes/ex03-r7-robin-source');
+  const candidate=text(path.join(captureRoot,'candidate-full.robin'));
+  const recopyBytes=read(path.join(captureRoot,'pad-recopy-full.robin'));
+  const recopy=recopyBytes.toString('utf8');
+  const versionRecopy=read(path.join(version,robinRecord.path));
+  assert.deepEqual(versionRecopy,recopyBytes,'authoritative PAD re-copy retained byte-for-byte');
+  const normalizeRobin=value=>value.replace(/\r\n/g,'\n').replace(/\n+$/,'');
+  assert.equal(normalizeRobin(candidate),normalizeRobin(recopy));
+  assert.equal((recopy.match(/\r\n/g) ?? []).length,110);
+  assert.equal((recopy.replace(/\r\n/g,'').match(/\n/g) ?? []).length,87);
+  assert.ok(bundle.toString('utf8').includes(recopy.trimEnd()),'complete PAD re-copy included in r7 bundle');
+  const sentR6Bundle=text(path.join(r6,'knowledge/PAD-Robin-Knowledge-Bundle.txt'));
+  for(const escaped of ['=\\>','\\_','\\[']) assert.ok(!sentR6Bundle.includes(escaped),'claimed escape absent from actual sent r6 bundle: '+escaped);
+  for(const raw of ['=>','_ValueTypeMatch','Data1[0][0]']) assert.ok(sentR6Bundle.includes(raw),'raw token present in actual sent r6 bundle: '+raw);
+  assert.deepEqual(manifest.evidence.actual_sent_bundle_claimed_escape_counts,{'=\\>':0,'\\_':0,'\\[':0});
+  assert.deepEqual(manifest.evidence.actual_sent_bundle_raw_token_counts,{'=>':184,'_ValueTypeMatch':60,'Data1[0][0]':12});
+  assert.equal(manifest.evidence.source_lf_normalized_exact,true);
+  assert.equal(manifest.evidence.source_action_decodes_to_script,true);
+  assert.equal(manifest.evidence.existing_output_guard,'STATIC_ONLY_NOT_LIVE_TESTED');
+  assert.ok(instruction.includes('実送信bundleのバイト監査では `=\\>`、`\\_`、`\\[` は0件です'));
+  assert.ok(instruction.includes('PADで実行していない状態は実行済みと表示しないための区分であり、この固定原文の出力を拒む理由にはしません'));
+  assert.ok(instruction.includes('通常M365 Copilot生成、無修正PAD Run1/Run2、成果物照合、既存出力ガード実機経路は未実施です'));
+  const examples=text(path.join(version,'knowledge/PAD-Robin-06-Examples.txt'));
+  const marker='EX03 r7 PAD保存・再コピー完全原文（固定EX03生成用。未実行・未受入）';
+  const section=examples.split(marker,2)[1];
+  assert.ok(section,'r7 PAD re-copy marker');
+  const raw=section.slice(section.indexOf("SET TransferState TO $'''NOT_STARTED'''"));
+  assert.equal(normalizeRobin(raw),normalizeRobin(recopy));
+  assert.equal((raw.match(/_ValueTypeMatch TO SourceCellJson = SavedCellJson/g) ?? []).length,12);
+  assert.equal((raw.match(/Scripting\.RunPowershellScript\.RunScript/g) ?? []).length,1);
+  assert.equal((raw.match(/Excel\.WriteToExcel\.WriteCell Instance: Work Value: NumberSource/g) ?? []).length,5);
+  assert.equal((raw.match(/Json=> TextSource\dJson/g) ?? []).length,7);
+  for(const escaped of ['=\\>','\\_','\\[']) assert.ok(!raw.includes(escaped),'PAD-recopied raw has no explanatory escape: '+escaped);
+  const rootCause=JSON.parse(read(path.join(captureRoot,'root-cause.json')));
+  for(const record of Object.values(rootCause.inputs)) assert.equal(sha(read(path.join(root,record.path))),record.sha256,record.path);
+  assert.equal(rootCause.successor.version,manifest.version);
+  assert.equal(rootCause.successor.instruction_sha256,manifest.instruction_sha256);
+  assert.equal(rootCause.successor.bundle_sha256,manifest.bundle_sha256);
+  assert.equal(rootCause.successor.manifest_sha256,sha(read(path.join(version,'manifest.json'))));
+  for(const [relative,expected] of Object.entries({
+    'catalog/acceptance/issue38/requests/EX03.txt':'b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370',
+    'catalog/acceptance/issue38/spec.json':'a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380',
+    'catalog/acceptance/issue38/expected.json':'49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d',
+    'catalog/acceptance/issue38/fixtures/EX03/入力い.xlsx':'c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9',
+    'catalog/acceptance/issue38/fixtures/EX03/入力ろ.xlsx':'01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725',
+    'catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx':'881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21',
+    'catalog/acceptance/issue38/runs/EX03-attempt1/work.xlsx':'881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21',
+  })) assert.equal(sha(read(path.join(root,relative))),expected,relative);
+  assert.equal(manifest.status,'FROZEN_CANDIDATE_EX03_PAD_RECOPIED_SOURCE_NOT_COPILOT_OR_RUNTIME_ACCEPTED');
+  assert.equal(manifest.base_candidate,'20260916-excel-r6');
+  assert.equal(manifest.base_commit,'7470c7cadc147f31d1803034fa9f4ab90a6b32c8');
 }
 assert.equal(sha(read(frozen)),manifest.acceptance_freeze_sha256);
 for(const [p,h] of Object.entries(JSON.parse(read(frozen)).files)) assert.equal(sha(read(path.join(path.dirname(frozen),p))),h,p);
