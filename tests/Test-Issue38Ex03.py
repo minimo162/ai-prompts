@@ -47,6 +47,13 @@ r9_acceptance = load(
 r9_checkpoint = load(
     'issue38_ex03_r9_checkpoint', 'tools/Verify-Issue38Ex03R9Checkpoint.py'
 )
+r10_analysis = load(
+    'issue38_ex03_r10_analysis',
+    'tools/Analyze-Issue38Ex03R9StructuralFidelity.py',
+)
+r10_builder = load(
+    'issue38_ex03_r10_builder', 'tools/Build-Issue38Ex03CandidateR10.py'
+)
 
 
 class Ex03Tests(unittest.TestCase):
@@ -929,6 +936,152 @@ class Ex03Tests(unittest.TestCase):
             )
             with self.assertRaisesRegex(ValueError, 'Checkpoint hash mismatch'):
                 r9_checkpoint.verify(changed, verify_commit=False)
+
+    def test_r10_structural_audit_proves_response_boundary_without_repair(self):
+        audit_root = (
+            ROOT / 'catalog/acceptance/issue38/probes/ex03-r10-structural-fidelity'
+        )
+        analysis = json.loads((audit_root / 'analysis.json').read_text(encoding='utf-8'))
+        comparison = analysis['r9_comparison']
+        boundary = analysis['response_boundary']
+
+        self.assertEqual(
+            analysis['decision'],
+            'PASS_R9_STRUCTURAL_FAILURE_BOUNDARY_READY_FOR_UNSENT_R10',
+        )
+        self.assertEqual(comparison['expected_vs_generated_differing_line_count'], 2)
+        self.assertEqual(
+            [item['line'] for item in comparison['differing_lines']], [50, 90]
+        )
+        self.assertEqual(comparison['backslash_open_bracket_count'], 0)
+        self.assertEqual(comparison['backslash_close_bracket_count'], 0)
+        self.assertTrue(boundary['dom_equals_raw_clipboard'])
+        self.assertFalse(boundary['copy_or_pad_introduced_the_two_corruptions'])
+        self.assertEqual(
+            boundary['dom_sha256'],
+            'dce9d6f01de53252050b53de46283563f56226b1635a2ccdcbd71d2dfd2636bf',
+        )
+        mismatched = [
+            token
+            for token, record in comparison['token_inventory'].items()
+            if not record['matches_expected']
+        ]
+        self.assertEqual(
+            mismatched,
+            [
+                '[string]',
+                '[StringComparison]',
+                '::GetFullPath(',
+                '::OrdinalIgnoreCase',
+                '::IsNullOrEmpty(',
+            ],
+        )
+        self.assertTrue(
+            all(
+                item['teaching_count'] == 1 and item['generated_count'] == 0
+                for item in comparison['fragment_inventory']['required']
+            )
+        )
+        self.assertTrue(
+            all(
+                item['teaching_count'] == 0 and item['generated_count'] == 1
+                for item in comparison['fragment_inventory']['forbidden']
+            )
+        )
+        self.assertFalse(analysis['classification']['manual_repair'])
+        self.assertEqual(analysis['scope']['copilot_send'], 0)
+        self.assertEqual(analysis['scope']['pad_run'], 0)
+
+        with tempfile.TemporaryDirectory() as directory:
+            rebuilt = Path(directory) / 'audit'
+            r10_analysis.analyze(rebuilt)
+            self.assertEqual(
+                (audit_root / 'analysis.json').read_bytes(),
+                (rebuilt / 'analysis.json').read_bytes(),
+            )
+            self.assertEqual(
+                (audit_root / 'report.md').read_bytes(),
+                (rebuilt / 'report.md').read_bytes(),
+            )
+
+    def test_r10_keeps_independent_source_and_adds_structural_gate_only(self):
+        version = ROOT / 'copilot/versions/20260917-excel-r10'
+        r9 = ROOT / 'copilot/versions/20260917-excel-r9'
+        manifest = json.loads((version / 'manifest.json').read_text(encoding='utf-8'))
+        instruction = (version / 'agent-instructions.txt').read_text(encoding='utf-8')
+        bundle = (version / 'knowledge/PAD-Robin-Knowledge-Bundle.txt').read_text(
+            encoding='utf-8'
+        )
+        robin = (version / r10_builder.ROBIN_SUPPORT).read_text(encoding='utf-8')
+        script = (version / r10_builder.SCRIPT_SUPPORT).read_bytes()
+        contract = (version / r10_builder.FIDELITY_SUPPORT).read_text(encoding='utf-8')
+
+        self.assertEqual(
+            (version / r10_builder.ROBIN_SUPPORT).read_bytes(),
+            (r9 / 'support/EX03-R9-Independent-PAD-Recopy.robin').read_bytes(),
+        )
+        self.assertEqual(
+            script,
+            (r9 / 'support/EX03-R9-Independent-FormatSandwich.ps1.txt').read_bytes(),
+        )
+        for token, count in r10_builder.TOKEN_COUNTS.items():
+            self.assertEqual(robin.count(token), count, token)
+        for fragment in r10_builder.REQUIRED_INVARIANT_FRAGMENTS:
+            self.assertEqual(robin.count(fragment), 1, fragment)
+            self.assertIn(fragment, contract)
+        for fragment in r10_builder.FORBIDDEN_CORRUPTION_FRAGMENTS:
+            self.assertEqual(robin.count(fragment), 0, fragment)
+            self.assertIn(fragment, contract)
+        self.assertEqual(robin.count(r'\['), 0)
+        self.assertEqual(robin.count(r'\]'), 0)
+        self.assertIn('Do only the listed data-slot substitutions', contract)
+        self.assertIn('source-derived exact token counts', contract)
+        self.assertIn('EX03 text mapping', instruction)
+        self.assertIn('EX03 text source', instruction)
+        for term in r10_builder.FIXED_COMPLETION_TERMS + r10_builder.UNIQUE_GRADER_STRINGS:
+            self.assertNotIn(term, instruction)
+            self.assertNotIn(term, bundle)
+            self.assertNotIn(term, robin)
+        self.assertNotIn(r10_builder.EXPECTED_TEXT, instruction)
+        self.assertNotIn(r10_builder.EXPECTED_TEXT, robin)
+
+        self.assertEqual(
+            manifest['status'],
+            'FROZEN_CANDIDATE_EX03_STRUCTURAL_FIDELITY_GATE_NOT_COPILOT_OR_RUNTIME_ACCEPTED',
+        )
+        self.assertEqual(manifest['base_candidate'], '20260917-excel-r9')
+        self.assertEqual(manifest['base_commit'], r10_builder.BASE_COMMIT)
+        self.assertFalse(manifest['inherits_live_acceptance'])
+        self.assertEqual(
+            manifest['evidence']['teaching_test_independence'],
+            'PASS_R10_FIXED_EX03_COMPLETE_ANSWER_ABSENT_FROM_CURRENT_INSTRUCTION_BUNDLE_AND_SUPPORT',
+        )
+        self.assertTrue(manifest['evidence']['r9_response_dom_equals_raw_clipboard'])
+        self.assertEqual(manifest['evidence']['expected_vs_generated_differing_lines'], 2)
+        self.assertEqual(
+            manifest['evidence']['expected_vs_generated_differing_line_numbers'], [50, 90]
+        )
+        self.assertTrue(manifest['evidence']['source_reused_exact_bytes'])
+        self.assertFalse(manifest['evidence']['source_new_pad_capture_required'])
+        self.assertTrue(manifest['evidence']['legacy_558_failure_preserved'])
+        self.assertEqual(
+            manifest['evidence']['existing_output_guard'], 'STATIC_ONLY_NOT_LIVE_TESTED'
+        )
+
+    def test_r10_rebuild_is_byte_identical_and_existing_destination_refused(self):
+        with tempfile.TemporaryDirectory() as directory:
+            destination = Path(directory) / 'r10'
+            r10_builder.build(destination)
+            frozen = ROOT / 'copilot/versions' / r10_builder.VERSION
+            for path in frozen.rglob('*'):
+                if path.is_file():
+                    self.assertEqual(
+                        path.read_bytes(),
+                        (destination / path.relative_to(frozen)).read_bytes(),
+                        str(path),
+                    )
+            with self.assertRaisesRegex(ValueError, 'sealed'):
+                r10_builder.build(destination)
 
     def test_r8_rebuild_is_byte_identical_and_existing_destination_refused(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -1,0 +1,371 @@
+{
+  "schema_version": 1,
+  "probe_id": "EX03-R10-STRUCTURAL-FIDELITY",
+  "purpose": "Prove the r9 structural corruption boundary and define the minimal unsent successor gate without repairing or executing the generated Robin",
+  "inputs": {
+    "r9_manifest": {
+      "path": "copilot/versions/20260917-excel-r9/manifest.json",
+      "sha256": "1b64005c85aee3215160c9381d956a64531863b5d838d9091009fded5007f540"
+    },
+    "r9_instruction": {
+      "path": "copilot/versions/20260917-excel-r9/agent-instructions.txt",
+      "sha256": "a699dd910a4b0529fc71c9b8045b845bf49b8a407df9da88027a0ca0ab0f51fa"
+    },
+    "r9_bundle": {
+      "path": "copilot/versions/20260917-excel-r9/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+      "sha256": "b402a6c78fb39cb68dd4111590122b9f9be3364609358fd58a9ad3880d29b993"
+    },
+    "r9_teaching_robin": {
+      "path": "copilot/versions/20260917-excel-r9/support/EX03-R9-Independent-PAD-Recopy.robin",
+      "sha256": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb"
+    },
+    "r9_teaching_script": {
+      "path": "copilot/versions/20260917-excel-r9/support/EX03-R9-Independent-FormatSandwich.ps1.txt",
+      "sha256": "65b86b0e5be4ec2da30e57a6bd858e395d1103da2d05ab2e7607362772d1dfd9"
+    },
+    "r8_source_tool": {
+      "path": "tools/Prepare-Issue38Ex03R8IndependentSource.py",
+      "sha256": "9c8f2cab7e154e38351251327c4f31fe6b53ff0fc5665c8bc8f6504c14545746"
+    },
+    "raw_clipboard_base64": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r9-G1/generated-robin.clipboard.utf8.b64",
+      "sha256": "42a03537c81e2300834a240932fde5a1de4bde23cf0bdcdf4bb611fbf773d894"
+    },
+    "generated": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r9-G1/generated.robin",
+      "sha256": "7a02ea0d073adde698578b8fa578f5701c728114ee55fbf20aa0ecdaaa32cb14"
+    },
+    "live_send": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r9-G1/live-send.json",
+      "sha256": "9d096d6c84bdcf056d838c7b813249494426aec7e380c15a29cfdb89b236e7f2"
+    },
+    "generation_result": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r9-G1/generation-result.json",
+      "sha256": "2051065a60419e7c6f2c7ec0ef36302f3364489f114874f277f48b299f03914e"
+    },
+    "safety_audit": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r9-G1/generation-safety-audit.json",
+      "sha256": "375e225bcd494e9204a31a633b719dd6915e4d4d4ad01be89ee44cf05c1fa8c1"
+    },
+    "acceptance_status": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r9-G1/acceptance-status.json",
+      "sha256": "d3677a6e026e1a20b5cf109795a848036568182014c0f87bc4e0c119dd373d9b"
+    },
+    "dom_confirmation": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r10-structural-fidelity/r9-dom-code-confirmation.json",
+      "sha256": "a78e4cf2f309b733ae8e9c6d6c268de16206ca8df17d2863d07f512cbcefb34f"
+    },
+    "fixed_request": {
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370"
+    },
+    "fixed_spec": {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380"
+    },
+    "grader_expected": {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d"
+    }
+  },
+  "expected_derivation": {
+    "source": "copilot/versions/20260917-excel-r9/support/EX03-R9-Independent-PAD-Recopy.robin",
+    "method": "reverse only the recorded independent data-slot substitutions in memory; use exact EX03 error labels",
+    "written_as_complete_robin": false,
+    "replacement_counts": [
+      {
+        "label": "error_type",
+        "source_count": 1,
+        "replacement_kind": "fixed error label"
+      },
+      {
+        "label": "error_scope",
+        "source_count": 1,
+        "replacement_kind": "fixed error label"
+      },
+      {
+        "label": "target_two_text_4",
+        "source_count": 3,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "target_two_number_2",
+        "source_count": 1,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "target_two_text_3",
+        "source_count": 3,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "target_two_text_2",
+        "source_count": 3,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "target_two_number_1",
+        "source_count": 1,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "target_two_text_1",
+        "source_count": 3,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "target_one_number_3",
+        "source_count": 1,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "target_one_text_3",
+        "source_count": 3,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "target_one_number_2",
+        "source_count": 1,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "target_one_text_2",
+        "source_count": 3,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "target_one_number_1",
+        "source_count": 1,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "target_one_text_1",
+        "source_count": 3,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "target_two_sheet",
+        "source_count": 13,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "target_one_sheet",
+        "source_count": 12,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "source_two_sheet",
+        "source_count": 1,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "source_one_sheet",
+        "source_count": 1,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "readback_two_range",
+        "source_count": 1,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "readback_one_range",
+        "source_count": 1,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "source_two_range",
+        "source_count": 1,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "source_one_range",
+        "source_count": 1,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "work_path",
+        "source_count": 2,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "source_two_path",
+        "source_count": 1,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "source_one_path",
+        "source_count": 1,
+        "replacement_kind": "fixed-request data"
+      },
+      {
+        "label": "output_path",
+        "source_count": 3,
+        "replacement_kind": "fixed-request data"
+      }
+    ],
+    "line_count": 197
+  },
+  "r9_comparison": {
+    "expected_vs_generated_differing_line_count": 2,
+    "differing_lines": [
+      {
+        "line": 50,
+        "expected": "            if ([string]::Equals([IO.Path]::GetFullPath([string]$candidate.FullName), $targetPath, [StringComparison]::OrdinalIgnoreCase)) {",
+        "actual": "            if ([string]::Equals([IO.Path]::GetFulling]$candidate.FullName), $targetPath, :OrdinalIgnoreCase)) {"
+      },
+      {
+        "line": 90,
+        "expected": "                if ($afterPrefixCharacter -cne $beforePrefixCharacter -or -not [string]::IsNullOrEmpty($afterPrefixCharacter)) { throw (\\'Prefix character changed or remained: \\' + $sheetName + \\'!\\' + $cellAddress) }",
+        "actual": "                if ($afterPrefixCharacter -cne $beforePrefixCharacter -or -not :IsNullOrEmpty($afterPrefixCharacter)) { throw (\\'Prefix character changed or remained: \\' + $sheetName + \\'!\\' + $cellAddress) }"
+      }
+    ],
+    "backslash_open_bracket_count": 0,
+    "backslash_close_bracket_count": 0,
+    "token_inventory": {
+      "[ordered]": {
+        "expected_count": 8,
+        "teaching_count": 8,
+        "generated_count": 8,
+        "matches_expected": true
+      },
+      "[string]": {
+        "expected_count": 14,
+        "teaching_count": 14,
+        "generated_count": 12,
+        "matches_expected": false
+      },
+      "[bool]": {
+        "expected_count": 2,
+        "teaching_count": 2,
+        "generated_count": 2,
+        "matches_expected": true
+      },
+      "[void]": {
+        "expected_count": 5,
+        "teaching_count": 5,
+        "generated_count": 5,
+        "matches_expected": true
+      },
+      "[Runtime.InteropServices.Marshal]": {
+        "expected_count": 6,
+        "teaching_count": 6,
+        "generated_count": 6,
+        "matches_expected": true
+      },
+      "[IO.Path]": {
+        "expected_count": 1,
+        "teaching_count": 1,
+        "generated_count": 1,
+        "matches_expected": true
+      },
+      "[StringComparison]": {
+        "expected_count": 1,
+        "teaching_count": 1,
+        "generated_count": 0,
+        "matches_expected": false
+      },
+      "::GetFullPath(": {
+        "expected_count": 1,
+        "teaching_count": 1,
+        "generated_count": 0,
+        "matches_expected": false
+      },
+      "::OrdinalIgnoreCase": {
+        "expected_count": 1,
+        "teaching_count": 1,
+        "generated_count": 0,
+        "matches_expected": false
+      },
+      "::IsNullOrEmpty(": {
+        "expected_count": 1,
+        "teaching_count": 1,
+        "generated_count": 0,
+        "matches_expected": false
+      },
+      "$matches[0]": {
+        "expected_count": 1,
+        "teaching_count": 1,
+        "generated_count": 1,
+        "matches_expected": true
+      },
+      "$allowedTargets[$sheetName]": {
+        "expected_count": 1,
+        "teaching_count": 1,
+        "generated_count": 1,
+        "matches_expected": true
+      }
+    },
+    "fragment_inventory": {
+      "required": [
+        {
+          "fragment": "[string]::Equals([IO.Path]::GetFullPath([string]$candidate.FullName), $targetPath, [StringComparison]::OrdinalIgnoreCase)",
+          "teaching_count": 1,
+          "generated_count": 0
+        },
+        {
+          "fragment": "[string]::IsNullOrEmpty($afterPrefixCharacter)",
+          "teaching_count": 1,
+          "generated_count": 0
+        }
+      ],
+      "forbidden": [
+        {
+          "fragment": "[IO.Path]::GetFulling]",
+          "teaching_count": 0,
+          "generated_count": 1
+        },
+        {
+          "fragment": ", :OrdinalIgnoreCase",
+          "teaching_count": 0,
+          "generated_count": 1
+        },
+        {
+          "fragment": "-not :IsNullOrEmpty(",
+          "teaching_count": 0,
+          "generated_count": 1
+        }
+      ]
+    }
+  },
+  "response_boundary": {
+    "dom_line_count": 197,
+    "dom_utf8_bytes": 14471,
+    "dom_sha256": "dce9d6f01de53252050b53de46283563f56226b1635a2ccdcbd71d2dfd2636bf",
+    "raw_clipboard_sha256": "dce9d6f01de53252050b53de46283563f56226b1635a2ccdcbd71d2dfd2636bf",
+    "dom_equals_raw_clipboard": true,
+    "copy_or_pad_introduced_the_two_corruptions": false,
+    "hidden_model_or_service_cause": "UNKNOWN_NOT_CLAIMED"
+  },
+  "classification": {
+    "confirmed": "The exact requested adaptation differs only at Robin lines 50 and 90. Both defects already exist in the rendered code DOM, whose full CRLF serialization exactly matches the preserved system clipboard payload.",
+    "r9_gate_limit": "The zero bracket-backslash gate passed but did not verify required type/member tokens or the two invariant PowerShell expressions.",
+    "runtime_effect": "NOT_EXECUTED_BY_FIXED_STOP_RULE",
+    "manual_repair": false
+  },
+  "minimum_successor_change": {
+    "fixed_request_or_expected_change": false,
+    "teaching_robin_change": false,
+    "embedded_script_change": false,
+    "new_pad_capture_required": false,
+    "instruction_and_bundle_contract": [
+      "retain the r9 zero bracket-backslash gate",
+      "require the source-derived structural token counts exactly",
+      "require each invariant expression fragment exactly once",
+      "forbid the three observed corruption fragments",
+      "derive output only by listed data-slot substitution, not paraphrase or rewrite",
+      "emit no Robin when any count or fragment gate fails"
+    ],
+    "reason_no_new_capture": "The independent teaching Robin and embedded script remain byte-identical to the already PAD paste/save/re-copy verified source."
+  },
+  "scope": {
+    "copilot_send": 0,
+    "copilot_regeneration": 0,
+    "pad_import": 0,
+    "pad_run": 0,
+    "github_write": 0,
+    "legacy_558_failure_preserved": true,
+    "existing_output_guard_live_path": "REMAINS_UNCONFIRMED"
+  },
+  "decision": "PASS_R9_STRUCTURAL_FAILURE_BOUNDARY_READY_FOR_UNSENT_R10"
+}

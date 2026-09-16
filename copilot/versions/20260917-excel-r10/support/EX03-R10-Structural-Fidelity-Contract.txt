@@ -1,0 +1,10 @@
+EX03 r10 generation structural-fidelity contract
+This contract applies to the one raw Robin text code block derived from the independent PAD-recopied source.
+1. Do only the listed data-slot substitutions. Do not paraphrase, shorten, repair, optimize, or rewrite any other character of the source.
+2. A text code block is raw Robin text. Do not apply Markdown escaping. The exact substring counts for backslash-open-bracket and backslash-close-bracket must both be zero.
+3. After substitution, require these source-derived exact token counts: `[ordered]` 8; `[string]` 14; `[bool]` 2; `[void]` 5; `[Runtime.InteropServices.Marshal]` 6; `[IO.Path]` 1; `[StringComparison]` 1; `::GetFullPath(` 1; `::OrdinalIgnoreCase` 1; `::IsNullOrEmpty(` 1; `$matches[0]` 1; `$allowedTargets[$sheetName]` 1.
+4. Require each invariant fragment exactly once: `[string]::Equals([IO.Path]::GetFullPath([string]$candidate.FullName), $targetPath, [StringComparison]::OrdinalIgnoreCase)`; `[string]::IsNullOrEmpty($afterPrefixCharacter)`.
+5. Require each observed corruption fragment zero times: `[IO.Path]::GetFulling]`; `, :OrdinalIgnoreCase`; `-not :IsNullOrEmpty(`.
+6. Replace every independent-example data slot consistently, including paths, sheet names, ranges, target cells, allowed-target entries, and teaching-only error labels. The adapted error labels must be exactly `EX03 text mapping` and `EX03 text source`; no teaching-only label may remain.
+7. If any count, fragment, data-slot, or label check fails, emit no Robin and report the failed check. Do not repair after output. A refusal or no-code result is not a runtime PASS.
+8. This narrow gate addresses only the r9 structural corruption already confirmed in the rendered Copilot response. It does not prove execution, types outside text/number, other shapes, another PAD version, or another PC.
