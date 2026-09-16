@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R10-G1",
+  "recorded_at": "2026-09-17T08:20:38.8419741+09:00",
+  "candidate": {
+    "version": "20260917-excel-r10",
+    "candidate_commit": "06aa0a572c58a09357ac1ac27a0a04eeaa4d680d",
+    "checkpoint_commit": "d510252b481a9ec4aa93b8db23961ab6da3e7771",
+    "instruction_sha256": "9434c976457b2fec14ad24d8ee57a3400e7eb092ba38259e3f8f728139c20681",
+    "bundle_sha256": "0c53d6ce82fc5e23363332420b59c34470decbb123f804b2e628d26d58928ec6",
+    "manifest_sha256": "7807e31e8177b05dc89d235496ee1b5978502f7406586dff2621d769981d6cbe",
+    "submitted_body_sha256": "751252c0ca263be62c01dce3dc83b10d733579bc395bc4bea01903d543be6247"
+  },
+  "predecessor_context": {
+    "r9_result_previously_unshared": "ONE_SEND_COMPLETED_NO_REFUSAL_STOPPED_BEFORE_PAD_GENERATED_ROBIN_SAFETY_FAILURE",
+    "r9_commit": "e8fc12c2a916df7a708536b652017d12c81f2714",
+    "r9_generated_raw_sha256": "dce9d6f01de53252050b53de46283563f56226b1635a2ccdcbd71d2dfd2636bf",
+    "r9_generated_repository_sha256": "7a02ea0d073adde698578b8fa578f5701c728114ee55fbf20aa0ecdaaa32cb14",
+    "r9_parser_error_count": 22,
+    "r9_pad_runs_used": 0,
+    "r10_change_reason": "r9 corrupted two source-derived PowerShell invariants in the rendered response before copy or PAD; r10 added exact token, invariant-fragment, forbidden-fragment and label gates without changing the independent teaching Robin or embedded script",
+    "r10_package_delta": "instruction and bundle structural-fidelity contract only",
+    "teaching_robin_and_script_byte_identical": true,
+    "fixed_request_and_expected_unchanged": true
+  },
+  "generation": {
+    "normal_m365_send_count": 1,
+    "resend_count": 0,
+    "completed": true,
+    "refusal": false,
+    "generated_raw_clipboard_utf8_sha256": "4946431c9ce47f986b841115fbfd328036356c4e12ae7cbe912c2bf06e2b1ed3",
+    "generated_robin_sha256": "4946431c9ce47f986b841115fbfd328036356c4e12ae7cbe912c2bf06e2b1ed3",
+    "response_reported_sha256": "e14b1ae8dd2652eccc6d0537705c01de977f4657536c338580c8b681e020356c",
+    "response_reported_sha_matches_capture": false,
+    "safety_audit": "FAIL_R10_STRUCTURAL_FIDELITY_STOP_BEFORE_PAD",
+    "differing_expected_lines": [
+      50,
+      90
+    ],
+    "embedded_powershell_parser_errors": 19
+  },
+  "pad_import": {
+    "dedicated_flow_opened": false,
+    "unmodified_paste_count": 0,
+    "saved": false,
+    "recopy": "NOT_RUN_GENERATED_ROBIN_FAILED_PRE_IMPORT_SAFETY_GATE",
+    "recopy_match": "NOT_RUN",
+    "manual_repair": false
+  },
+  "runs": {
+    "run1": "NOT_RUN_STOPPED_BEFORE_PAD_IMPORT",
+    "run2": "NOT_RUN_RUN1_WAS_NOT_AUTHORIZED_OR_COMPLETED",
+    "pad_runs_used": 0,
+    "pad_run_limit": 2
+  },
+  "comparisons": {
+    "run1_artifact": "NOT_CREATED",
+    "run1_fixed_value_type_position_comparison": "NOT_RUN",
+    "run1_original_outside_formula_format_comparison": "NOT_RUN",
+    "run2_artifact": "NOT_CREATED",
+    "run2_fixed_value_type_position_comparison": "NOT_RUN",
+    "run2_original_outside_formula_format_comparison": "NOT_RUN",
+    "reason": "No PAD save, re-copy, execution, or output was allowed after the unmodified generation failed the fixed safety gate."
+  },
+  "artifacts": {
+    "runtime_output_exists": false,
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "template_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_matches_template": true,
+    "protected_file_count": 264,
+    "protected_file_mismatch_count": 0,
+    "fixed_request_sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+    "grader_only_expected_sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+    "fixed_expected_changed": false,
+    "legacy_558_failure_preserved": true
+  },
+  "scope": {
+    "other_case_or_probe_pass_inherited": false,
+    "unconfirmed_types_or_shapes_generalized": false,
+    "existing_output_guard_live_path": "REMAINS_UNCONFIRMED",
+    "format_and_dimension_558_difference": "REMAINS_FAIL_NOT_HIDDEN"
+  },
+  "decision": {
+    "accepted": false,
+    "status": "STOPPED_BEFORE_PAD_R10_GENERATION_SAFETY_FAILURE",
+    "reason": "The single r10 generation completed, but line 50 and line 90 omit required PowerShell type qualifiers, two forbidden corruption fragments are present, the embedded script has 19 parser errors, and the copied code SHA differs from the response-reported SHA. Per the fixed conditions, PAD import, save, re-copy, Run1, and Run2 were not performed."
+  },
+  "github_write": false
+}

@@ -29,6 +29,7 @@ FORBIDDEN_PRE_SEND_FILES = [
     "live-send.json",
     "generation-result.json",
     "generation-safety-audit.json",
+    "copilot-response.clipboard.utf8.b64",
     "generated-robin.clipboard.utf8.b64",
     "generated.robin",
     "pad-flow-created.json",

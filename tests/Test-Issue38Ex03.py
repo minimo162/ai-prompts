@@ -60,6 +60,10 @@ r10_acceptance = load(
 r10_checkpoint = load(
     'issue38_ex03_r10_checkpoint', 'tools/Verify-Issue38Ex03R10Checkpoint.py'
 )
+r10_generation_audit = load(
+    'issue38_ex03_r10_generation_audit',
+    'tools/Analyze-Issue38Ex03R10Generation.py',
+)
 
 
 class Ex03Tests(unittest.TestCase):
@@ -1152,12 +1156,17 @@ class Ex03Tests(unittest.TestCase):
                 record['path'],
             )
         for name in [
-            'm365-ready-to-send.json',
             'live-send.json',
+            'generation-result.json',
+            'generation-safety-audit.json',
+            'generated-robin.clipboard.utf8.b64',
             'generated.robin',
-            'pad-import-and-recopy.json',
             'acceptance-status.json',
+            'protected-files-after.json',
+            'review.md',
         ]:
+            self.assertTrue((cycle / name).exists(), name)
+        for name in ['m365-ready-to-send.json', 'pad-import-and-recopy.json']:
             self.assertFalse((cycle / name).exists(), name)
 
         with tempfile.TemporaryDirectory() as directory:
@@ -1178,7 +1187,18 @@ class Ex03Tests(unittest.TestCase):
                 r10_acceptance.prepare(rebuilt, verify_head=False)
 
     def test_r10_g1_action_time_verifier_is_read_only_and_fail_closed(self):
-        result = r10_checkpoint.verify()
+        with self.assertRaisesRegex(ValueError, 'sealed pre-send state'):
+            r10_checkpoint.verify()
+
+        frozen = ROOT / 'catalog/acceptance/issue38/cycles/EX03-r10-G1'
+        with tempfile.TemporaryDirectory() as directory:
+            clean = Path(directory) / 'cycle'
+            shutil.copytree(frozen, clean)
+            for name in r10_checkpoint.FORBIDDEN_PRE_SEND_FILES:
+                path = clean / name
+                if path.exists():
+                    path.unlink()
+            result = r10_checkpoint.verify(clean, verify_commit=False)
         self.assertEqual(
             result['status'],
             'READY_LOCAL_CHECKPOINT_AWAITING_EXPLICIT_AUTHORIZATION',
@@ -1201,10 +1221,13 @@ class Ex03Tests(unittest.TestCase):
             },
         )
 
-        frozen = ROOT / 'catalog/acceptance/issue38/cycles/EX03-r10-G1'
         with tempfile.TemporaryDirectory() as directory:
             changed = Path(directory) / 'cycle'
             shutil.copytree(frozen, changed)
+            for name in r10_checkpoint.FORBIDDEN_PRE_SEND_FILES:
+                path = changed / name
+                if path.exists():
+                    path.unlink()
             (changed / 'submitted-body.txt').write_bytes(
                 (changed / 'submitted-body.txt').read_bytes() + b'changed'
             )
@@ -1214,9 +1237,171 @@ class Ex03Tests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             changed = Path(directory) / 'cycle'
             shutil.copytree(frozen, changed)
+            for name in r10_checkpoint.FORBIDDEN_PRE_SEND_FILES:
+                path = changed / name
+                if path.exists():
+                    path.unlink()
             (changed / 'generated.robin').write_text('not allowed', encoding='utf-8')
             with self.assertRaisesRegex(ValueError, 'sealed pre-send state'):
                 r10_checkpoint.verify(changed, verify_commit=False)
+
+    def test_r10_g1_live_cycle_stops_before_pad_on_structural_failure(self):
+        cycle = ROOT / 'catalog/acceptance/issue38/cycles/EX03-r10-G1'
+        live = json.loads((cycle / 'live-send.json').read_text(encoding='utf-8'))
+        generation = json.loads(
+            (cycle / 'generation-result.json').read_text(encoding='utf-8')
+        )
+        audit = json.loads(
+            (cycle / 'generation-safety-audit.json').read_text(encoding='utf-8')
+        )
+        status = json.loads(
+            (cycle / 'acceptance-status.json').read_text(encoding='utf-8')
+        )
+        protected = json.loads(
+            (cycle / 'protected-files-after.json').read_text(encoding='utf-8')
+        )
+
+        self.assertEqual(live['candidate']['version'], '20260917-excel-r10')
+        self.assertTrue(live['independence']['teaching_and_test_independence_confirmed'])
+        self.assertEqual(live['actions']['normal_m365_send'], 1)
+        self.assertEqual(live['actions']['resend'], 0)
+        self.assertEqual(live['actions']['pad_import'], 0)
+        self.assertEqual(live['actions']['pad_save'], 0)
+        self.assertEqual(live['actions']['pad_recopy'], 0)
+        self.assertEqual(live['actions']['pad_run'], 0)
+        self.assertTrue(live['body']['visible_editor_serialization_exact'])
+        self.assertEqual(
+            live['body']['sha256'], r10_acceptance.sha(cycle / 'submitted-body.txt')
+        )
+        self.assertEqual(
+            live['attachment']['sha256'],
+            r10_acceptance.sha(ROOT / live['attachment']['path']),
+        )
+
+        raw = base64.b64decode(
+            (cycle / 'generated-robin.clipboard.utf8.b64').read_text(
+                encoding='ascii'
+            )
+        )
+        generated = (cycle / 'generated.robin').read_bytes()
+        self.assertEqual(raw, generated)
+        self.assertEqual(
+            hashlib.sha256(raw).hexdigest(),
+            '4946431c9ce47f986b841115fbfd328036356c4e12ae7cbe912c2bf06e2b1ed3',
+        )
+        self.assertEqual(len(raw), 14275)
+        self.assertEqual(raw.count(b'\n'), 196)
+        self.assertEqual(raw.count(b'\r\n'), 0)
+        self.assertFalse(raw.endswith(b'\n'))
+        self.assertEqual(len(raw.decode('utf-8').splitlines()), 197)
+
+        response_raw = base64.b64decode(
+            (cycle / 'copilot-response.clipboard.utf8.b64').read_text(
+                encoding='ascii'
+            )
+        )
+        self.assertEqual(
+            hashlib.sha256(response_raw).hexdigest(),
+            '870a7e04562d558a2c3574e8c4b5ab21ae566d7487ffc50e34e28c41dd08f376',
+        )
+        response_text = response_raw.decode('utf-8')
+        self.assertIn('if (:Equals([IO.Path]::GetFullPath', response_text)
+        self.assertIn('-not :IsNullOrEmpty(', response_text)
+        self.assertIn(
+            'e14b1ae8dd2652eccc6d0537705c01de977f4657536c338580c8b681e020356c',
+            response_text,
+        )
+
+        self.assertEqual(
+            [record['line'] for record in audit['comparison']['differing_lines']],
+            [50, 90],
+        )
+        mismatched = [
+            token
+            for token, record in audit['fidelity']['token_inventory'].items()
+            if not record['matches_expected']
+        ]
+        self.assertEqual(
+            mismatched,
+            ['[string]', '[StringComparison]', '::OrdinalIgnoreCase', '::IsNullOrEmpty('],
+        )
+        self.assertTrue(
+            all(
+                record['generated_count'] == 0
+                for record in audit['fidelity']['required_invariant_fragments']
+            )
+        )
+        forbidden_counts = {
+            record['fragment']: record['generated_count']
+            for record in audit['fidelity']['forbidden_corruption_fragments']
+        }
+        self.assertEqual(forbidden_counts['[IO.Path]::GetFulling]'], 0)
+        self.assertEqual(forbidden_counts[', :OrdinalIgnoreCase'], 1)
+        self.assertEqual(forbidden_counts['-not :IsNullOrEmpty('], 1)
+        self.assertFalse(audit['fidelity']['self_reported_sha256_matches_code_copy'])
+        self.assertEqual(
+            audit['powershell_parser']['generated_embedded_script_error_count'], 19
+        )
+        self.assertEqual(
+            audit['powershell_parser']['independent_teaching_script_error_count'], 0
+        )
+        self.assertEqual(
+            audit['decision']['status'],
+            'FAIL_R10_STRUCTURAL_FIDELITY_STOP_BEFORE_PAD',
+        )
+        self.assertFalse(audit['decision']['pad_import_authorized'])
+        self.assertFalse(audit['decision']['runtime_authorized'])
+
+        self.assertFalse(generation['rendered_response']['refusal'])
+        self.assertFalse(
+            generation['rendered_response']['self_reported_sha_matches_code_copy']
+        )
+        self.assertEqual(status['pad_import']['unmodified_paste_count'], 0)
+        self.assertEqual(status['pad_import']['recopy_match'], 'NOT_RUN')
+        self.assertEqual(status['runs']['pad_runs_used'], 0)
+        self.assertEqual(status['runs']['run1'], 'NOT_RUN_STOPPED_BEFORE_PAD_IMPORT')
+        self.assertEqual(
+            status['runs']['run2'],
+            'NOT_RUN_RUN1_WAS_NOT_AUTHORIZED_OR_COMPLETED',
+        )
+        self.assertFalse(status['decision']['accepted'])
+        self.assertTrue(status['artifacts']['legacy_558_failure_preserved'])
+        self.assertEqual(
+            status['scope']['existing_output_guard_live_path'],
+            'REMAINS_UNCONFIRMED',
+        )
+        self.assertEqual(protected['protected_file_count'], 264)
+        self.assertEqual(protected['protected_file_mismatch_count'], 0)
+        self.assertEqual(len(protected['files']), 264)
+        for record in protected['files']:
+            self.assertTrue(record['matches'], record['path'])
+            self.assertEqual(record['before_sha256'], record['after_sha256'])
+            self.assertEqual(
+                r10_acceptance.sha(ROOT / record['path']),
+                record['after_sha256'],
+                record['path'],
+            )
+        self.assertFalse(
+            ROOT.joinpath(
+                'catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx'
+            ).exists()
+        )
+
+        with tempfile.TemporaryDirectory() as directory:
+            rebuilt = Path(directory) / 'generation-safety-audit.json'
+            rebuilt_result = r10_generation_audit.audit(rebuilt)
+        self.assertEqual(
+            rebuilt_result['inputs']['generated_robin']['sha256'],
+            audit['inputs']['generated_robin']['sha256'],
+        )
+        self.assertEqual(
+            rebuilt_result['comparison']['differing_lines'],
+            audit['comparison']['differing_lines'],
+        )
+        self.assertEqual(
+            rebuilt_result['powershell_parser']['generated_embedded_script_error_count'],
+            audit['powershell_parser']['generated_embedded_script_error_count'],
+        )
 
     def test_r8_rebuild_is_byte_identical_and_existing_destination_refused(self):
         with tempfile.TemporaryDirectory() as directory:

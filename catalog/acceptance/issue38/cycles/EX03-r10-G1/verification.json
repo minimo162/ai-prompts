@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R10-G1",
+  "recorded_at": "2026-09-17T08:20:38.8419741+09:00",
+  "results": [
+    {
+      "command": "python tests/Test-Issue38Ex03.py",
+      "status": "PASS",
+      "tests_run": 26,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "run each tests/Test-Issue38*.py",
+      "status": "PASS",
+      "tests_run": 61,
+      "failures": 0,
+      "errors": 0,
+      "breakdown": {
+        "Test-Issue38Ex02.py": 18,
+        "Test-Issue38Ex03.py": 26,
+        "Test-Issue38Ex04ExistingOutput.py": 4,
+        "Test-Issue38Excel.py": 13
+      }
+    },
+    {
+      "command": "node tests/Test-Issue38Package.mjs",
+      "status": "PASS_NON_LIVE_PACKAGE",
+      "scope": "legacy package regression only; not r10 live acceptance"
+    },
+    {
+      "command": "git diff --check",
+      "status": "PASS_WITH_LINE_ENDING_WARNINGS",
+      "meaning": "no whitespace errors; Git warned that two Python working-tree files use LF and may be checked out as CRLF"
+    },
+    {
+      "command": "python tools/Verify-Issue38Ex03R10Checkpoint.py",
+      "status": "EXPECTED_FAIL_CLOSED_POST_SEND_EVIDENCE_PRESENT",
+      "meaning": "the read-only pre-send verifier correctly refuses to describe the completed one-send cycle as a sealed pre-send state"
+    },
+    {
+      "command": "replay tools/Analyze-Issue38Ex03R10Generation.py to a temporary output from the EX03 regression test",
+      "status": "PASS_REPRODUCIBLE_FINDINGS",
+      "meaning": "generated SHA, the exact two differing lines and the 19-error parser result reproduced without executing the generated script"
+    }
+  ],
+  "live_acceptance": {
+    "copilot_generation": "COMPLETED_ONCE_NO_REFUSAL",
+    "generated_robin_safety": "FAIL_LINES_50_90_MISSING_TYPE_QUALIFIERS_AND_19_AST_ERRORS",
+    "reported_sha_match": false,
+    "pad_import": "NOT_RUN",
+    "pad_save": "NOT_RUN",
+    "pad_recopy": "NOT_RUN",
+    "run1": "NOT_RUN",
+    "run2": "NOT_RUN",
+    "accepted": false
+  },
+  "preservation": {
+    "protected_files": 264,
+    "protected_mismatches": 0,
+    "work_matches_template": true,
+    "output_absent": true,
+    "fixed_request_and_expected_unchanged": true,
+    "legacy_558_failure_preserved": true,
+    "existing_output_guard_live_path": "REMAINS_UNCONFIRMED",
+    "github_write": false
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R10-G1",
+  "recorded_at": "2026-09-17T08:20:38.8419741+09:00",
+  "authorization": {
+    "request": "one new r10 normal-M365 trial from the prepared checkpoint",
+    "explicit_action_time_authorization_received": true,
+    "max_generation_requests": 1,
+    "max_pad_runs": 2,
+    "no_resend": true,
+    "no_additional_run": true,
+    "no_fixed_condition_change": true,
+    "no_automatic_successor_trial": true
+  },
+  "checkpoint": {
+    "frozen_r10_checkpoint_commit": "d510252b481a9ec4aa93b8db23961ab6da3e7771",
+    "candidate_commit": "06aa0a572c58a09357ac1ac27a0a04eeaa4d680d",
+    "action_time_starting_head": "9935d88ea282611e91ab50d3acda3af0f4bea435",
+    "preflight_verifier": "PASS_BEFORE_BROWSER_STAGING",
+    "r9_mismatch_and_stop_evidence_preserved": true,
+    "protected_file_count": 264,
+    "protected_mismatch_count_before_send": 0,
+    "work_matches_template_before_send": true,
+    "output_absent_before_send": true
+  },
+  "candidate": {
+    "version": "20260917-excel-r10",
+    "instruction_sha256": "9434c976457b2fec14ad24d8ee57a3400e7eb092ba38259e3f8f728139c20681",
+    "bundle_sha256": "0c53d6ce82fc5e23363332420b59c34470decbb123f804b2e628d26d58928ec6",
+    "manifest_sha256": "7807e31e8177b05dc89d235496ee1b5978502f7406586dff2621d769981d6cbe",
+    "teaching_robin_sha256": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb",
+    "structural_fidelity_contract_sha256": "4b704ade5343b1a28bc0101080d5756107e02210be40445082de3ab30315079d"
+  },
+  "independence": {
+    "frozen_preflight_check": "PASS",
+    "teaching_and_test_independence_confirmed": true,
+    "grader_only_expected_sent_to_copilot": false,
+    "fixed_completed_robin_sent_to_copilot": false,
+    "independent_teaching_robin_in_bundle": true,
+    "teaching_robin_and_embedded_script_byte_identical_to_r9": true,
+    "no_old_or_other_case_pass_inherited": true
+  },
+  "destination": {
+    "service": "Microsoft 365 Copilot Chat",
+    "normal_chat": true,
+    "url": "https://m365.cloud.microsoft/chat/conversation/b0df40da-e1a7-4a85-a107-ff963d94d307?es=SSR",
+    "title": "Power Automate貼付け用フロー生成",
+    "model": "Think Deeper"
+  },
+  "attachment": {
+    "path": "copilot/versions/20260917-excel-r10/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "ui_label": "PAD-Robin-Knowledge-Bundle",
+    "sha256": "0c53d6ce82fc5e23363332420b59c34470decbb123f804b2e628d26d58928ec6",
+    "upload_count": 1,
+    "ui_chip_visible_before_send": true,
+    "same_version_as_body": true
+  },
+  "body": {
+    "path": "catalog/acceptance/issue38/cycles/EX03-r10-G1/submitted-body.txt",
+    "sha256": "751252c0ca263be62c01dce3dc83b10d733579bc395bc4bea01903d543be6247",
+    "utf16_units": 8093,
+    "utf8_bytes": 18802,
+    "lf_count": 83,
+    "exact_contract": "unchanged full r10 instructions followed by unchanged fixed EX03 request",
+    "visible_editor_serialization_exact": true,
+    "visible_editor_sha256": "751252c0ca263be62c01dce3dc83b10d733579bc395bc4bea01903d543be6247",
+    "r9_marker_count": 0,
+    "r10_marker_count": 1
+  },
+  "editor_verification": {
+    "stale_system_clipboard_draft_observed_during_initial_staging": true,
+    "send_clicked_while_stale_or_mismatched": false,
+    "editor_cleared_before_exact_body_insertion": true,
+    "exact_body_inserted_as_plain_text": true,
+    "raw_editor_copy_extra_codepoints": [
+      "U+200B",
+      "U+200C"
+    ],
+    "extra_codepoint_count": 2,
+    "extra_codepoints_aria_hidden": true,
+    "visible_serialization_excluded_only_known_hidden_ui_marker": true,
+    "visible_serialization_exact_r10_body": true
+  },
+  "actions": {
+    "browser_staging": 1,
+    "bundle_upload": 1,
+    "normal_m365_send": 1,
+    "resend": 0,
+    "generation_requests": 1,
+    "code_copy": 1,
+    "response_copy": 1,
+    "pad_import": 0,
+    "pad_save": 0,
+    "pad_recopy": 0,
+    "pad_run": 0,
+    "github_write": 0
+  },
+  "result": {
+    "send_clicked_once": true,
+    "generation_completed": true,
+    "reasoning_steps_reported": 19,
+    "refusal": false,
+    "code_block_count": 1,
+    "stopped_before_pad": true,
+    "stop_reason": "unmodified code-copy payload failed the fixed r10 structural-fidelity and parser gates"
+  }
+}
