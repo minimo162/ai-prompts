@@ -29,6 +29,7 @@ EXPECTED_CYCLE_HASHES = {
 }
 
 FORBIDDEN_PRE_SEND_FILES = [
+    "browser-staging-body-mismatch.json",
     "m365-ready-to-send.json",
     "live-send.json",
     "generation-result.json",

@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R9-G1",
+  "recorded_at": "2026-09-17T06:37:59.7457605+09:00",
+  "starting_head": "898f923c5537b8dc87ff4240106feb3335878ec2",
+  "preflight": {
+    "status": "PASS_BEFORE_BROWSER_STAGING",
+    "submitted_body_sha256": "f6c6e59d719548ba54d6207fc6d6499a9ae7c699339ac855e3d4ea4a6f26aee4",
+    "bundle_sha256": "b402a6c78fb39cb68dd4111590122b9f9be3364609358fd58a9ad3880d29b993",
+    "protected_file_count": 233,
+    "protected_mismatch_count": 0,
+    "work_matches_template": true,
+    "output_absent": true
+  },
+  "browser": {
+    "service": "Microsoft 365 Copilot Chat",
+    "url": "https://m365.cloud.microsoft/chat?es=SSR",
+    "title": "\u30c1\u30e3\u30c3\u30c8 | Microsoft Copilot",
+    "normal_chat": true,
+    "model_selected": "Think Deeper",
+    "initial_editor_blank": true,
+    "attachment": {
+      "path": "copilot/versions/20260917-excel-r9/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+      "filename": "PAD-Robin-Knowledge-Bundle.txt",
+      "sha256": "b402a6c78fb39cb68dd4111590122b9f9be3364609358fd58a9ad3880d29b993",
+      "ui_chip_visible": true,
+      "upload_notice_visible": true,
+      "upload_count": 1
+    }
+  },
+  "body_staging": {
+    "fixed_r9_source": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r9-G1/submitted-body.txt",
+      "utf16_units": 7548,
+      "utf8_bytes": 18029,
+      "sha256": "f6c6e59d719548ba54d6207fc6d6499a9ae7c699339ac855e3d4ea4a6f26aee4"
+    },
+    "os_clipboard_readback": {
+      "utf16_units": 7548,
+      "utf8_bytes": 18029,
+      "sha256": "f6c6e59d719548ba54d6207fc6d6499a9ae7c699339ac855e3d4ea4a6f26aee4",
+      "exact_r9": true
+    },
+    "browser_clipboard_before_paste": {
+      "utf16_units": 7393,
+      "sha256": "f72116c80fa0b57bac4987db43f3f04f305c85e12ae35a6a0437cc6c73a88c39",
+      "matches_path": "catalog/acceptance/issue38/cycles/EX03-r8-G1/submitted-body.txt",
+      "exact_r8": true,
+      "exact_r9": false
+    },
+    "set_value_from_browser_clipboard": "ABORTED_BEFORE_INPUT_ON_HASH_MISMATCH",
+    "os_clipboard_keyboard_paste_attempted": true,
+    "editor_after_paste": {
+      "inner_text_utf16_units": 7495,
+      "inner_text_utf8_bytes": 18054,
+      "inner_text_sha256": "3e0cb8ef24e9e164073652d81efe4a50b2dff49e88f8610c3be1eb666c7a1946",
+      "contains_r8_marker": true,
+      "contains_r9_marker": false,
+      "exact_r8_bytes": "NOT_PROVEN_WEB_EDITOR_RENDERING_CHANGED_WHITESPACE"
+    },
+    "post_mismatch_correction_attempted": false
+  },
+  "actions": {
+    "browser_staging": 1,
+    "bundle_upload": 1,
+    "normal_m365_send": 0,
+    "resend": 0,
+    "generation": 0,
+    "pad_import": 0,
+    "pad_run": 0,
+    "github_write": 0
+  },
+  "pad": {
+    "status": "NOT_STARTED",
+    "windows_control": "UNAVAILABLE_TRUSTED_RPC_NOT_CONFIGURED",
+    "recopy": "NOT_RUN",
+    "run1": "NOT_RUN",
+    "run2": "NOT_RUN"
+  },
+  "filesystem": {
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "template_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_matches_template": true,
+    "output_exists": false
+  },
+  "decision": {
+    "status": "STOPPED_BEFORE_SEND_STALE_BROWSER_CLIPBOARD_R8_BODY",
+    "reason": "The staged editor contained the r8 marker and no r9 marker after the browser path supplied stale r8 clipboard content.",
+    "send_clicked": false,
+    "send_authorization_consumed": false,
+    "fixed_conditions_changed": false,
+    "same_turn_retry_after_editor_mismatch": false
+  }
+}

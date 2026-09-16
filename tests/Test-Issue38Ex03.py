@@ -609,6 +609,9 @@ class Ex03Tests(unittest.TestCase):
                     name,
                 )
             self.assertFalse((rebuilt / 'browser-staging-stop.json').exists())
+            self.assertFalse(
+                (rebuilt / 'browser-staging-body-mismatch.json').exists()
+            )
             with self.assertRaisesRegex(ValueError, 'refusing overwrite'):
                 r9_acceptance.prepare(rebuilt, verify_head=False)
 
@@ -678,8 +681,111 @@ class Ex03Tests(unittest.TestCase):
         self.assertFalse(evidence['stop']['send_authorization_consumed'])
         self.assertFalse(evidence['github_write'])
 
+    def test_r9_g1_stops_before_send_on_stale_browser_clipboard(self):
+        cycle = ROOT / 'catalog/acceptance/issue38/cycles/EX03-r9-G1'
+        evidence = json.loads(
+            (cycle / 'browser-staging-body-mismatch.json').read_text(
+                encoding='utf-8'
+            )
+        )
+
+        self.assertEqual(evidence['cycle_id'], 'EX03-R9-G1')
+        self.assertEqual(
+            evidence['starting_head'],
+            '898f923c5537b8dc87ff4240106feb3335878ec2',
+        )
+        self.assertEqual(evidence['preflight']['status'], 'PASS_BEFORE_BROWSER_STAGING')
+        self.assertEqual(evidence['preflight']['protected_file_count'], 233)
+        self.assertEqual(evidence['preflight']['protected_mismatch_count'], 0)
+        self.assertTrue(evidence['preflight']['work_matches_template'])
+        self.assertTrue(evidence['preflight']['output_absent'])
+        self.assertEqual(evidence['browser']['model_selected'], 'Think Deeper')
+        self.assertTrue(evidence['browser']['initial_editor_blank'])
+        self.assertEqual(evidence['browser']['attachment']['upload_count'], 1)
+        self.assertTrue(evidence['browser']['attachment']['ui_chip_visible'])
+        self.assertEqual(
+            evidence['browser']['attachment']['sha256'],
+            r9_acceptance.sha(
+                ROOT / evidence['browser']['attachment']['path']
+            ),
+        )
+        self.assertEqual(
+            evidence['body_staging']['fixed_r9_source']['sha256'],
+            r9_acceptance.sha(
+                ROOT / evidence['body_staging']['fixed_r9_source']['path']
+            ),
+        )
+        self.assertTrue(evidence['body_staging']['os_clipboard_readback']['exact_r9'])
+        browser_clipboard = evidence['body_staging']['browser_clipboard_before_paste']
+        self.assertEqual(
+            browser_clipboard['sha256'],
+            r9_acceptance.sha(ROOT / browser_clipboard['matches_path']),
+        )
+        self.assertTrue(browser_clipboard['exact_r8'])
+        self.assertFalse(browser_clipboard['exact_r9'])
+        self.assertEqual(
+            evidence['body_staging']['set_value_from_browser_clipboard'],
+            'ABORTED_BEFORE_INPUT_ON_HASH_MISMATCH',
+        )
+        self.assertTrue(
+            evidence['body_staging']['os_clipboard_keyboard_paste_attempted']
+        )
+        editor = evidence['body_staging']['editor_after_paste']
+        self.assertTrue(editor['contains_r8_marker'])
+        self.assertFalse(editor['contains_r9_marker'])
+        self.assertEqual(
+            editor['exact_r8_bytes'],
+            'NOT_PROVEN_WEB_EDITOR_RENDERING_CHANGED_WHITESPACE',
+        )
+        self.assertFalse(evidence['body_staging']['post_mismatch_correction_attempted'])
+        self.assertEqual(
+            evidence['actions'],
+            {
+                'browser_staging': 1,
+                'bundle_upload': 1,
+                'normal_m365_send': 0,
+                'resend': 0,
+                'generation': 0,
+                'pad_import': 0,
+                'pad_run': 0,
+                'github_write': 0,
+            },
+        )
+        self.assertEqual(evidence['pad']['status'], 'NOT_STARTED')
+        self.assertEqual(evidence['pad']['run1'], 'NOT_RUN')
+        self.assertEqual(evidence['pad']['run2'], 'NOT_RUN')
+        self.assertEqual(
+            evidence['filesystem']['work_sha256'],
+            r9_acceptance.sha(
+                ROOT / 'catalog/acceptance/issue38/runs/EX03-attempt1/work.xlsx'
+            ),
+        )
+        self.assertEqual(
+            evidence['filesystem']['template_sha256'],
+            r9_acceptance.sha(
+                ROOT / 'catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx'
+            ),
+        )
+        self.assertFalse(evidence['filesystem']['output_exists'])
+        self.assertEqual(
+            evidence['decision']['status'],
+            'STOPPED_BEFORE_SEND_STALE_BROWSER_CLIPBOARD_R8_BODY',
+        )
+        self.assertFalse(evidence['decision']['send_clicked'])
+        self.assertFalse(evidence['decision']['send_authorization_consumed'])
+        self.assertFalse(evidence['decision']['fixed_conditions_changed'])
+        self.assertFalse(evidence['decision']['same_turn_retry_after_editor_mismatch'])
+
     def test_r9_g1_action_time_verifier_is_read_only_and_fail_closed(self):
-        result = r9_checkpoint.verify()
+        with self.assertRaisesRegex(ValueError, 'sealed pre-send state'):
+            r9_checkpoint.verify()
+
+        frozen = ROOT / 'catalog/acceptance/issue38/cycles/EX03-r9-G1'
+        with tempfile.TemporaryDirectory() as directory:
+            clean = Path(directory) / 'cycle'
+            shutil.copytree(frozen, clean)
+            (clean / 'browser-staging-body-mismatch.json').unlink()
+            result = r9_checkpoint.verify(clean, verify_commit=False)
         self.assertEqual(
             result['status'],
             'READY_LOCAL_CHECKPOINT_AWAITING_EXPLICIT_AUTHORIZATION',
@@ -702,10 +808,10 @@ class Ex03Tests(unittest.TestCase):
             },
         )
 
-        frozen = ROOT / 'catalog/acceptance/issue38/cycles/EX03-r9-G1'
         with tempfile.TemporaryDirectory() as directory:
             changed = Path(directory) / 'cycle'
             shutil.copytree(frozen, changed)
+            (changed / 'browser-staging-body-mismatch.json').unlink()
             (changed / 'submitted-body.txt').write_bytes(
                 (changed / 'submitted-body.txt').read_bytes() + b'changed'
             )
