@@ -20,11 +20,11 @@ def dimension(failure):
     return 'structure'
 
 
-def compare(output):
+def compare(output, case_id='EX02'):
     output = Path(output)
     before = legacy.sha(output)
-    old = legacy.compare('EX02', output)
-    spec = legacy.case_spec('EX02')
+    old = legacy.compare(case_id, output)
+    spec = legacy.case_spec(case_id)
     expected = legacy.targets(spec)
     template = legacy.load_workbook(legacy.BASE / spec['template'], data_only=False)
     actual = legacy.load_workbook(output, data_only=False)
@@ -75,7 +75,7 @@ def compare(output):
         failures = [c for c in subset if not c['match']]
         groups[name] = {'checked': len(subset), 'mismatches': failures,
                         'status': 'MATCH_SAVED_XLSX_ONLY' if not failures and subset else 'FAIL'}
-    return {'status': old['status'], 'kind': 'EX02_INDEPENDENT_DIAGNOSTIC',
+    return {'status': old['status'], 'kind': f'{case_id}_INDEPENDENT_DIAGNOSTIC',
             'legacy': old, 'failure_counts': counts, 'checks': groups,
             'style_attribute_difference_counts': dict(style_attributes),
             'dimension_differences': dimensions, 'cells': cells,
@@ -89,12 +89,13 @@ def compare(output):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('--case', choices=['EX02', 'EX03'], default='EX02')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--evidence', type=Path, required=True)
     args = parser.parse_args()
     if args.evidence.exists():
         raise SystemExit('Evidence exists; refusing overwrite')
-    result = compare(args.output)
+    result = compare(args.output, args.case)
     with args.evidence.open('x', encoding='utf-8', newline='\n') as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
     print(json.dumps({k: result[k] for k in ['status', 'failure_counts', 'checks', 'style_attribute_difference_counts']}, ensure_ascii=False))

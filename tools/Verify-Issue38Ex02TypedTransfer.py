@@ -1,4 +1,4 @@
-"""Verify EX02's fixed text/number source-to-target contract without widening it."""
+"""Verify a fixed Issue38 text/number source-to-target contract without widening it."""
 import argparse
 import hashlib
 import importlib.util
@@ -29,15 +29,17 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def fixed_mappings():
-    spec = legacy.case_spec('EX02')
-    matrices = json.loads((BASE / 'expected.json').read_text(encoding='utf-8'))['matrices']['EX02']
+def fixed_mappings(case_id='EX02'):
+    spec = legacy.case_spec(case_id)
+    matrices = json.loads((BASE / 'expected.json').read_text(encoding='utf-8'))['matrices'][case_id]
     if len(matrices) != len(spec['inputs']):
-        raise ValueError('Fixed EX02 input and expected-matrix counts differ')
+        raise ValueError(f'Fixed {case_id} input and expected-matrix counts differ')
     mappings = []
+    expected_count = 0
     for item, expected_matrix in zip(spec['inputs'], matrices):
         source_c1, source_r1, source_c2, source_r2 = legacy.rectangle(item['range'])
         target_r1, target_c1 = coordinate_to_tuple(item['target_start'])
+        expected_count += (source_r2 - source_r1 + 1) * (source_c2 - source_c1 + 1)
         if len(expected_matrix) != source_r2 - source_r1 + 1:
             raise ValueError('Fixed expected row shape mismatch')
         for row_offset, expected_row in enumerate(expected_matrix):
@@ -57,27 +59,35 @@ def fixed_mappings():
                     'target_cell': target_cell,
                     'grader_expected': expected_typed,
                 })
-    if len(mappings) != 12:
-        raise ValueError(f'EX02 must have exactly 12 fixed mappings, found {len(mappings)}')
+    if len(mappings) != expected_count:
+        raise ValueError(
+            f'{case_id} mapping count must match its fixed rectangles: '
+            f'expected {expected_count}, found {len(mappings)}'
+        )
     return mappings
 
 
-def typed_cell(sheet, address):
+def typed_cell(sheet, address, case_id='EX02'):
     cell = sheet[address]
     if cell.data_type == 'f':
-        raise ValueError(f'Formula is outside the verified EX02 target-type scope: {sheet.title}!{address}')
+        raise ValueError(
+            f'Formula is outside the verified {case_id} target-type scope: '
+            f'{sheet.title}!{address}'
+        )
     value = legacy.typed(cell.value)
     if value[0] not in ALLOWED_KINDS:
-        raise ValueError(f'Unverified EX02 target type {value[0]}: {sheet.title}!{address}')
+        raise ValueError(
+            f'Unverified {case_id} target type {value[0]}: {sheet.title}!{address}'
+        )
     return value
 
 
-def verify_output(output, run_label):
+def verify_output(output, run_label, case_id='EX02'):
     output = Path(output)
     if not output.is_file() or output.suffix.lower() != '.xlsx':
-        raise ValueError('A saved EX02 xlsx output is required')
+        raise ValueError(f'A saved {case_id} xlsx output is required')
     legacy.check_frozen()
-    mappings = fixed_mappings()
+    mappings = fixed_mappings(case_id)
     original_paths = sorted({m['source_path'] for m in mappings})
     original_hashes_before = {path: sha(BASE / path) for path in original_paths}
     output_sha_before = sha(output)
@@ -89,9 +99,13 @@ def verify_output(output, run_label):
         results = []
         for mapping in mappings:
             source_value = typed_cell(
-                sources[mapping['source_path']][mapping['source_sheet']], mapping['source_cell']
+                sources[mapping['source_path']][mapping['source_sheet']],
+                mapping['source_cell'],
+                case_id,
             )
-            target_value = typed_cell(target[mapping['target_sheet']], mapping['target_cell'])
+            target_value = typed_cell(
+                target[mapping['target_sheet']], mapping['target_cell'], case_id
+            )
             expected = mapping['grader_expected']
             results.append({
                 **mapping,
@@ -115,9 +129,9 @@ def verify_output(output, run_label):
     ]
     immutable = original_hashes_before == original_hashes_after and output_sha_before == output_sha_after
     return {
-        'kind': 'EX02_FIXED_TEXT_NUMBER_TYPED_TRANSFER',
+        'kind': f'{case_id}_FIXED_TEXT_NUMBER_TYPED_TRANSFER',
         'run_label': run_label,
-        'status': 'MATCH_FIXED_EX02_TEXT_NUMBER_SCOPE' if not mismatches and immutable else 'FAIL',
+        'status': f'MATCH_FIXED_{case_id}_TEXT_NUMBER_SCOPE' if not mismatches and immutable else 'FAIL',
         'scope': {
             'allowed_types': sorted(ALLOWED_KINDS),
             'explicitly_not_generalized_to': EXCLUDED_KINDS,
@@ -175,13 +189,13 @@ def workbook_semantics(path):
         workbook.close()
 
 
-def compare_runs(run1, run2):
+def compare_runs(run1, run2, case_id='EX02'):
     run1, run2 = Path(run1), Path(run2)
     before = {'run1': sha(run1), 'run2': sha(run2)}
     semantic1, semantic2 = workbook_semantics(run1), workbook_semantics(run2)
     after = {'run1': sha(run1), 'run2': sha(run2)}
     return {
-        'kind': 'EX02_TWO_POSITIVE_RUN_SEMANTIC_COMPARISON',
+        'kind': f'{case_id}_TWO_POSITIVE_RUN_SEMANTIC_COMPARISON',
         'status': 'MATCH' if semantic1 == semantic2 and before == after else 'FAIL',
         'run1': {'path': str(run1.resolve()), 'sha256_before': before['run1'], 'sha256_after': after['run1']},
         'run2': {'path': str(run2.resolve()), 'sha256_before': before['run2'], 'sha256_after': after['run2']},
@@ -189,7 +203,10 @@ def compare_runs(run1, run2):
         'semantic_equal': semantic1 == semantic2,
         'scope': 'all used cells, typed values/formulas, semantic styles, comments, merges, row and column dimensions',
         'checked_cells': sum(len(sheet['cells']) for sheet in semantic1),
-        'note': 'Binary archive equality is not required; each run is independently checked against the fixed EX02 oracle.',
+        'note': (
+            'Binary archive equality is not required; each run is independently checked '
+            f'against the fixed {case_id} oracle.'
+        ),
     }
 
 
@@ -205,6 +222,7 @@ def write_new_json(path, value):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('--case', choices=['EX02', 'EX03'], default='EX02')
     parser.add_argument('--output', type=Path)
     parser.add_argument('--run-label')
     parser.add_argument('--run1', type=Path)
@@ -214,11 +232,11 @@ if __name__ == '__main__':
     if args.output:
         if args.run1 or args.run2 or not args.run_label:
             parser.error('--output requires --run-label and excludes --run1/--run2')
-        result = verify_output(args.output, args.run_label)
+        result = verify_output(args.output, args.run_label, args.case)
     else:
         if not args.run1 or not args.run2 or args.run_label:
             parser.error('--run1 and --run2 are required together')
-        result = compare_runs(args.run1, args.run2)
+        result = compare_runs(args.run1, args.run2, args.case)
     write_new_json(args.evidence, result)
     print(json.dumps({
         'kind': result['kind'],
@@ -226,4 +244,6 @@ if __name__ == '__main__':
         'mismatch_count': len(result.get('mismatches', [])),
         'checked_cells': result.get('checked_cells'),
     }, ensure_ascii=False))
-    raise SystemExit(0 if result['status'] in {'MATCH_FIXED_EX02_TEXT_NUMBER_SCOPE', 'MATCH'} else 1)
+    raise SystemExit(
+        0 if result['status'] in {f'MATCH_FIXED_{args.case}_TEXT_NUMBER_SCOPE', 'MATCH'} else 1
+    )
