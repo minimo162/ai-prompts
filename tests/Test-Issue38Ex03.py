@@ -1,4 +1,6 @@
 """EX03 fixed-parameter comparator regression; synthetic outputs are not PAD evidence."""
+import base64
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -591,7 +593,7 @@ class Ex03Tests(unittest.TestCase):
                 r9_acceptance.sha(ROOT / record['path']), record['sha256'], record['path']
             )
         self.assertFalse((cycle / 'm365-ready-to-send.json').exists())
-        self.assertFalse((cycle / 'generated.robin').exists())
+        self.assertTrue((cycle / 'generated.robin').exists())
 
         with tempfile.TemporaryDirectory() as directory:
             rebuilt = Path(directory) / 'cycle'
@@ -776,6 +778,110 @@ class Ex03Tests(unittest.TestCase):
         self.assertFalse(evidence['decision']['fixed_conditions_changed'])
         self.assertFalse(evidence['decision']['same_turn_retry_after_editor_mismatch'])
 
+    def test_r9_g1_one_send_stops_before_pad_on_generation_safety_failure(self):
+        cycle = ROOT / 'catalog/acceptance/issue38/cycles/EX03-r9-G1'
+        live = json.loads((cycle / 'live-send.json').read_text(encoding='utf-8'))
+        generation = json.loads(
+            (cycle / 'generation-result.json').read_text(encoding='utf-8')
+        )
+        audit = json.loads(
+            (cycle / 'generation-safety-audit.json').read_text(encoding='utf-8')
+        )
+        status = json.loads(
+            (cycle / 'acceptance-status.json').read_text(encoding='utf-8')
+        )
+        verification = json.loads(
+            (cycle / 'verification.json').read_text(encoding='utf-8')
+        )
+        protected = json.loads(
+            (cycle / 'protected-files-after.json').read_text(encoding='utf-8')
+        )
+
+        self.assertEqual(live['candidate']['version'], '20260917-excel-r9')
+        self.assertTrue(live['independence']['teaching_and_test_independence_confirmed'])
+        self.assertEqual(live['actions']['normal_m365_send'], 1)
+        self.assertEqual(live['actions']['resend'], 0)
+        self.assertEqual(live['actions']['pad_import'], 0)
+        self.assertEqual(live['actions']['pad_run'], 0)
+        self.assertTrue(live['body']['visible_editor_serialization_exact'])
+        self.assertEqual(
+            live['body']['sha256'], r9_acceptance.sha(cycle / 'submitted-body.txt')
+        )
+        self.assertEqual(
+            live['attachment']['sha256'],
+            r9_acceptance.sha(ROOT / live['attachment']['path']),
+        )
+
+        raw = base64.b64decode(
+            (cycle / 'generated-robin.clipboard.utf8.b64').read_text(
+                encoding='ascii'
+            )
+        )
+        self.assertEqual(
+            hashlib.sha256(raw).hexdigest(),
+            'dce9d6f01de53252050b53de46283563f56226b1635a2ccdcbd71d2dfd2636bf',
+        )
+        self.assertEqual(len(raw), 14471)
+        self.assertFalse(raw.endswith(b'\r\n'))
+        self.assertEqual(raw.count(b'\r\n'), 196)
+        generated = (cycle / 'generated.robin').read_bytes()
+        self.assertEqual(generated, raw.replace(b'\r\n', b'\n') + b'\n')
+        self.assertEqual(
+            hashlib.sha256(generated).hexdigest(),
+            generation['code_capture']['repository_sha256'],
+        )
+
+        lines = raw.decode('utf-8').splitlines()
+        self.assertEqual(len(lines), 197)
+        self.assertEqual(lines[0], "SET TransferState TO $'''NOT_STARTED'''")
+        self.assertEqual(lines[-1], 'END')
+        self.assertNotIn(r'\[', raw.decode('utf-8'))
+        self.assertNotIn(r'\]', raw.decode('utf-8'))
+        self.assertIn(audit['defects'][0]['generated_fragment'], lines[49])
+        self.assertIn(audit['defects'][1]['generated_fragment'], lines[89])
+        self.assertEqual(audit['comparison']['unexpected_corruption_lines'], [50, 90])
+        self.assertEqual(audit['comparison']['expected_r9_label_change_lines'], [63, 66])
+        self.assertEqual(audit['powershell_parser']['generated_embedded_script_error_count'], 22)
+        self.assertEqual(audit['powershell_parser']['independent_r9_support_script_error_count'], 0)
+        self.assertFalse(audit['decision']['pad_import_authorized'])
+        self.assertEqual(
+            audit['decision']['status'],
+            'FAIL_GENERATED_ROBIN_SYNTAX_CORRUPTION_STOP_BEFORE_PAD',
+        )
+
+        self.assertEqual(status['pad_import']['unmodified_paste_count'], 0)
+        self.assertEqual(status['pad_import']['recopy_match'], 'NOT_RUN')
+        self.assertEqual(status['runs']['pad_runs_used'], 0)
+        self.assertEqual(status['runs']['run1'], 'NOT_RUN_STOPPED_BEFORE_PAD_IMPORT')
+        self.assertEqual(
+            status['runs']['run2'], 'NOT_RUN_RUN1_WAS_NOT_AUTHORIZED'
+        )
+        self.assertFalse(status['decision']['accepted'])
+        self.assertEqual(verification['results'][1]['tests_run'], 55)
+        self.assertEqual(verification['results'][1]['status'], 'PASS')
+        self.assertFalse(verification['live_acceptance']['accepted'])
+        self.assertTrue(status['artifacts']['legacy_558_failure_preserved'])
+        self.assertEqual(
+            status['scope']['existing_output_guard_live_path'],
+            'REMAINS_UNCONFIRMED',
+        )
+        self.assertFalse(
+            ROOT.joinpath(
+                'catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx'
+            ).exists()
+        )
+        self.assertEqual(protected['protected_file_count'], 233)
+        self.assertEqual(protected['protected_file_mismatch_count'], 0)
+        self.assertEqual(len(protected['files']), 233)
+        for record in protected['files']:
+            self.assertTrue(record['matches'], record['path'])
+            self.assertEqual(record['before_sha256'], record['after_sha256'])
+            self.assertEqual(
+                r9_acceptance.sha(ROOT / record['path']),
+                record['after_sha256'],
+                record['path'],
+            )
+
     def test_r9_g1_action_time_verifier_is_read_only_and_fail_closed(self):
         with self.assertRaisesRegex(ValueError, 'sealed pre-send state'):
             r9_checkpoint.verify()
@@ -784,7 +890,10 @@ class Ex03Tests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             clean = Path(directory) / 'cycle'
             shutil.copytree(frozen, clean)
-            (clean / 'browser-staging-body-mismatch.json').unlink()
+            for name in r9_checkpoint.FORBIDDEN_PRE_SEND_FILES:
+                path = clean / name
+                if path.exists():
+                    path.unlink()
             result = r9_checkpoint.verify(clean, verify_commit=False)
         self.assertEqual(
             result['status'],
@@ -811,7 +920,10 @@ class Ex03Tests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             changed = Path(directory) / 'cycle'
             shutil.copytree(frozen, changed)
-            (changed / 'browser-staging-body-mismatch.json').unlink()
+            for name in r9_checkpoint.FORBIDDEN_PRE_SEND_FILES:
+                path = changed / name
+                if path.exists():
+                    path.unlink()
             (changed / 'submitted-body.txt').write_bytes(
                 (changed / 'submitted-body.txt').read_bytes() + b'changed'
             )

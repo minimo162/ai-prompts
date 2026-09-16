@@ -34,10 +34,14 @@ FORBIDDEN_PRE_SEND_FILES = [
     "live-send.json",
     "generation-result.json",
     "generation-safety-audit.json",
+    "generated-robin.clipboard.utf8.b64",
     "generated.robin",
     "pad-flow-created.json",
     "pad-import-and-recopy.json",
     "acceptance-status.json",
+    "protected-files-after.json",
+    "review.md",
+    "verification.json",
 ]
 
 

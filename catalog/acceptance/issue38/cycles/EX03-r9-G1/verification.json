@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R9-G1",
+  "recorded_at": "2026-09-17T07:17:50.9810691+09:00",
+  "results": [
+    {
+      "command": "python tests/Test-Issue38Ex03.py",
+      "status": "PASS",
+      "tests_run": 20,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "command": "run each tests/Test-Issue38*.py",
+      "status": "PASS",
+      "tests_run": 55,
+      "failures": 0,
+      "errors": 0,
+      "breakdown": {
+        "Test-Issue38Ex02.py": 18,
+        "Test-Issue38Ex03.py": 20,
+        "Test-Issue38Ex04ExistingOutput.py": 4,
+        "Test-Issue38Excel.py": 13
+      }
+    },
+    {
+      "command": "node tests/Test-Issue38Package.mjs",
+      "status": "PASS_NON_LIVE_PACKAGE",
+      "scope": "legacy package regression only; not r9 live acceptance"
+    },
+    {
+      "command": "git diff --check",
+      "status": "PASS"
+    },
+    {
+      "command": "python tools/Verify-Issue38Ex03R9Checkpoint.py",
+      "status": "EXPECTED_FAIL_CLOSED_POST_SEND_EVIDENCE_PRESENT",
+      "meaning": "the read-only pre-send verifier correctly refuses to describe this completed one-send cycle as sealed pre-send state"
+    }
+  ],
+  "live_acceptance": {
+    "copilot_generation": "COMPLETED_ONCE_NO_REFUSAL",
+    "generated_robin_safety": "FAIL_TWO_STRUCTURAL_TOKEN_CORRUPTIONS",
+    "pad_import": "NOT_RUN",
+    "pad_recopy": "NOT_RUN",
+    "run1": "NOT_RUN",
+    "run2": "NOT_RUN",
+    "accepted": false
+  },
+  "preservation": {
+    "protected_files": 233,
+    "protected_mismatches": 0,
+    "work_matches_template": true,
+    "output_absent": true,
+    "legacy_558_failure_preserved": true,
+    "github_write": false
+  }
+}

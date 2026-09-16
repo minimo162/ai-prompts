@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R9-G1",
+  "recorded_at": "2026-09-17T07:09:12.4414397+09:00",
+  "checkpoint": {
+    "user_named_head": "5bc0460010247b8de00fcc4594c9d36020c72e69",
+    "action_time_starting_head": "3d12f071c737380eb13234355074a50523650e95"
+  },
+  "candidate": {
+    "version": "20260917-excel-r9",
+    "base_commit": "969a64e41638cc1e0ffca64ef7b6ed1668b80027",
+    "instruction_sha256": "a699dd910a4b0529fc71c9b8045b845bf49b8a407df9da88027a0ca0ab0f51fa",
+    "bundle_sha256": "b402a6c78fb39cb68dd4111590122b9f9be3364609358fd58a9ad3880d29b993",
+    "manifest_sha256": "1b64005c85aee3215160c9381d956a64531863b5d838d9091009fded5007f540"
+  },
+  "conversation": {
+    "service": "Microsoft 365 Copilot Chat",
+    "normal_chat": true,
+    "url": "https://m365.cloud.microsoft/chat/conversation/b4fb07d7-41ce-4a2d-97c3-17b8145f32a4?es=SSR",
+    "title": "Power Automate for Desktopフロー生成指示",
+    "model": "Think Deeper"
+  },
+  "rendered_response": {
+    "completed": true,
+    "refusal": false,
+    "code_block_count": 1,
+    "response_copy_utf16_units": 15684,
+    "response_copy_utf8_bytes": 17846,
+    "response_copy_sha256": "925174f3e170e0977c1f9c50af3eae21f7c355ff93d228b6e7b04c3c08b8f316",
+    "self_reported_fidelity_gate_pass": true,
+    "self_reported_backslash_bracket_escape_count": 0,
+    "self_report_not_used_as_safety_evidence": true
+  },
+  "code_capture": {
+    "raw_clipboard_base64_path": "catalog/acceptance/issue38/cycles/EX03-r9-G1/generated-robin.clipboard.utf8.b64",
+    "raw_clipboard_base64_file_sha256": "42a03537c81e2300834a240932fde5a1de4bde23cf0bdcdf4bb611fbf773d894",
+    "raw_clipboard_utf8_sha256": "dce9d6f01de53252050b53de46283563f56226b1635a2ccdcbd71d2dfd2636bf",
+    "raw_clipboard_utf8_bytes": 14471,
+    "raw_clipboard_utf16_units": 14269,
+    "raw_clipboard_line_count": 197,
+    "raw_clipboard_line_ending": "CRLF",
+    "raw_clipboard_final_newline": false,
+    "repository_path": "catalog/acceptance/issue38/cycles/EX03-r9-G1/generated.robin",
+    "repository_sha256": "7a02ea0d073adde698578b8fa578f5701c728114ee55fbf20aa0ecdaaa32cb14",
+    "repository_utf8_bytes": 14276,
+    "repository_line_count": 197,
+    "repository_line_ending": "LF",
+    "repository_final_lf": true,
+    "exact_relation": "repository copy is the decoded raw clipboard with CRLF normalized to LF and one conventional final LF",
+    "capture_method": "the sole Code Copy control was invoked once; the Windows system clipboard held the generated Robin and was preserved byte-for-byte as Base64",
+    "code_copy_invocations": 1,
+    "code_copy_retry": false,
+    "browser_virtual_clipboard_result": "STALE_EXACT_R9_SUBMITTED_BODY",
+    "system_clipboard_result": "EXACT_GENERATED_ROBIN_CAPTURED",
+    "first_line": "SET TransferState TO $'''NOT_STARTED'''",
+    "last_line": "END",
+    "markdown_fence_count": 0,
+    "nbsp_count": 0,
+    "ellipsis_count": 0,
+    "generated_text_edited": false
+  },
+  "generation_requests_used": 1,
+  "generation_request_limit": 1,
+  "regeneration_requested": false,
+  "interpretation": "The one authorized normal-M365 generation completed without refusal, but its unmodified Robin is not safe to import because two generated PowerShell type/member tokens are corrupted."
+}
