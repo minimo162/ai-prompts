@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const requestedVersion=process.argv[2] ?? '20260915-excel-r1';
-assert.ok(['20260915-excel-r1','20260915-excel-r2','20260915-excel-r3','20260915-excel-r4','20260915-excel-r5','20260916-excel-r6','20260916-excel-r7'].includes(requestedVersion));
+assert.ok(['20260915-excel-r1','20260915-excel-r2','20260915-excel-r3','20260915-excel-r4','20260915-excel-r5','20260916-excel-r6','20260916-excel-r7','20260916-excel-r8'].includes(requestedVersion));
 const version=path.join(root,'copilot/versions',requestedVersion);
 const read=p=>fs.readFileSync(p);
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
@@ -44,7 +44,7 @@ if(requestedVersion!=='20260915-excel-r1'){
   for(const n of ['00-Index','04-Office-PDF','06-Examples']){
     const content=text(path.join(version,`knowledge/PAD-Robin-${n}.txt`));
     assert.ok(content.includes(write.toString('utf8').trimEnd()));
-    if(['20260915-excel-r4','20260915-excel-r5','20260916-excel-r6','20260916-excel-r7'].includes(requestedVersion)) {
+    if(['20260915-excel-r4','20260915-excel-r5','20260916-excel-r6','20260916-excel-r7','20260916-excel-r8'].includes(requestedVersion)) {
       assert.ok(content.includes('型識別アクション・厳密型比較のPAD原文は未採取'));
       assert.ok(content.includes('書式・寸法558差分のFAIL'));
       assert.ok(content.includes('2Run終了を観測済み'));
@@ -200,6 +200,59 @@ if(requestedVersion==='20260916-excel-r7') {
   assert.equal(manifest.status,'FROZEN_CANDIDATE_EX03_PAD_RECOPIED_SOURCE_NOT_COPILOT_OR_RUNTIME_ACCEPTED');
   assert.equal(manifest.base_candidate,'20260916-excel-r6');
   assert.equal(manifest.base_commit,'7470c7cadc147f31d1803034fa9f4ab90a6b32c8');
+}
+if(requestedVersion==='20260916-excel-r8') {
+  for(const [p,h] of Object.entries(manifest.evidence_inputs)) assert.equal(sha(read(path.join(root,p))),h,p);
+  const r7=path.join(root,'copilot/versions/20260916-excel-r7');
+  for(const name of ['PAD-Robin-01-Basics.txt','PAD-Robin-02-Control.txt','PAD-Robin-03-Files.txt','PAD-Robin-05-UI-Web.txt']) {
+    assert.deepEqual(
+      read(path.join(version,'knowledge',name)),
+      read(path.join(r7,'knowledge',name)),
+      'unchanged r7 knowledge retained byte-for-byte: '+name,
+    );
+  }
+  assert.equal(manifest.support_files.length,2);
+  for(const record of manifest.support_files) {
+    const support=read(path.join(version,record.path));
+    assert.equal(support.length,record.bytes);
+    assert.equal(sha(support),record.sha256);
+  }
+  const captureRoot=path.join(root,'catalog/acceptance/issue38/probes/ex03-r8-independent-source');
+  const candidate=read(path.join(captureRoot,'candidate-full.robin'));
+  const recopy=read(path.join(captureRoot,'pad-recopy-full.robin'));
+  const versionRecopy=read(path.join(version,'support/EX03-R8-Independent-PAD-Recopy.robin'));
+  assert.deepEqual(candidate,recopy,'PAD re-copy retains exact prepared bytes');
+  assert.deepEqual(versionRecopy,recopy,'authoritative independent PAD re-copy retained byte-for-byte');
+  assert.equal(sha(recopy),'6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb');
+  assert.equal((recopy.toString('utf8').match(/\r\n/g) ?? []).length,110);
+  assert.equal((recopy.toString('utf8').replace(/\r\n/g,'').match(/\n/g) ?? []).length,87);
+  assert.ok(bundle.toString('utf8').includes(recopy.toString('utf8').trimEnd()),'complete independent PAD re-copy included in r8 bundle');
+  const fixedTerms=[
+    String.raw`C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力い.xlsx`,
+    String.raw`C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力ろ.xlsx`,
+    String.raw`C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\work.xlsx`,
+    String.raw`C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx`,
+    '受取明細','追加項目','集計先','追記先',
+  ];
+  const uniqueGraderStrings=['春','夏','秋','項目甲','項目乙'];
+  for(const value of [instruction,bundle.toString('utf8'),recopy.toString('utf8')]) {
+    for(const term of [...fixedTerms,...uniqueGraderStrings]) assert.ok(!value.includes(term),'fixed answer absent: '+term);
+  }
+  assert.ok(!instruction.includes('100%'));
+  assert.ok(!recopy.toString('utf8').includes('100%'));
+  assert.equal((recopy.toString('utf8').match(/Scripting\.RunPowershellScript\.RunScript/g) ?? []).length,1);
+  assert.equal((recopy.toString('utf8').match(/Excel\.WriteToExcel\.WriteCell Instance: Work Value: NumberSource/g) ?? []).length,5);
+  assert.equal((recopy.toString('utf8').match(/_ValueTypeMatch TO SourceCellJson = SavedCellJson/g) ?? []).length,12);
+  const sentR6Bundle=text(path.join(root,'copilot/versions/20260916-excel-r6/knowledge/PAD-Robin-Knowledge-Bundle.txt'));
+  for(const term of fixedTerms) assert.ok(sentR6Bundle.includes(term),'actual sent r6 bundle contained fixed answer term: '+term);
+  for(const escaped of ['=\\>','\\_','\\[']) assert.ok(!sentR6Bundle.includes(escaped),'claimed refusal escape absent from actual sent r6 bundle: '+escaped);
+  assert.equal(manifest.evidence.teaching_test_independence,'PASS_R8_FIXED_EX03_COMPLETE_ANSWER_ABSENT_FROM_CURRENT_INSTRUCTION_BUNDLE_AND_SUPPORT');
+  assert.equal(manifest.evidence.prior_refusal_internal_cause,'UNRESOLVED_REFUSAL_ESCAPE_CLAIM_NOT_SUPPORTED_BY_ACTUAL_SENT_BUNDLE_BYTES');
+  assert.equal(manifest.evidence.confirmed_package_issue,'R6_R7_COMPLETE_FIXED_ANSWER_COUPLING_REMOVED_FROM_R8_TEACHING_SOURCE');
+  assert.equal(manifest.evidence.existing_output_guard,'STATIC_ONLY_NOT_LIVE_TESTED');
+  assert.equal(manifest.status,'FROZEN_CANDIDATE_EX03_INDEPENDENT_TEACHING_PAD_RECOPIED_NOT_COPILOT_OR_RUNTIME_ACCEPTED');
+  assert.equal(manifest.base_candidate,'20260916-excel-r7');
+  assert.equal(manifest.base_commit,'806e4095a926fa0c7e020811c09770b5e5292841');
 }
 assert.equal(sha(read(frozen)),manifest.acceptance_freeze_sha256);
 for(const [p,h] of Object.entries(JSON.parse(read(frozen)).files)) assert.equal(sha(read(path.join(path.dirname(frozen),p))),h,p);

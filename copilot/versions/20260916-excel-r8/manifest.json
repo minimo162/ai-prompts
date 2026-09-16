@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "version": "20260916-excel-r8",
+  "status": "FROZEN_CANDIDATE_EX03_INDEPENDENT_TEACHING_PAD_RECOPIED_NOT_COPILOT_OR_RUNTIME_ACCEPTED",
+  "inherits_live_acceptance": false,
+  "base_commit": "806e4095a926fa0c7e020811c09770b5e5292841",
+  "base_version": "20260913e",
+  "copy_rule_version": "20260915-copyable-r2",
+  "instruction_path": "agent-instructions.txt",
+  "instruction_sha256": "57f0cdb656e919f8fd83252a6adcd4d12788dac9bf6833db2f2e942eada23bcb",
+  "instruction_utf16": 6696,
+  "bundle_path": "knowledge/PAD-Robin-Knowledge-Bundle.txt",
+  "bundle_sha256": "164c99e59204efd863f4fe283e8f84ce2902ee760ab90e45cf7c5336631aaddb",
+  "source_files": [
+    {
+      "bytes": 28907,
+      "sha256": "7ddd82053529ed8936918db9b0d2fe53a4932298dec0a9bb2c333baec60b42b6",
+      "path": "knowledge/PAD-Robin-00-Index.txt"
+    },
+    {
+      "bytes": 12741,
+      "sha256": "abe921c3e7aa19ce5410fe746fe4c4f5c7fc7ee3ffd18c4b6747686a41fdbf31",
+      "path": "knowledge/PAD-Robin-01-Basics.txt"
+    },
+    {
+      "bytes": 17275,
+      "sha256": "19f8698fba5702a42dfd0322ce90be0f26c3fd4ae048f13bbff35705bd4397fe",
+      "path": "knowledge/PAD-Robin-02-Control.txt"
+    },
+    {
+      "bytes": 25350,
+      "sha256": "a541082a650a7cfae9d2b2cfb47026d7b8ee81bc542f30ba409af5e6291c9aea",
+      "path": "knowledge/PAD-Robin-03-Files.txt"
+    },
+    {
+      "bytes": 43809,
+      "sha256": "c71d8a659fac95ef7cd884014f6bb3e8de94c5e6d55a602c8ddab8f2d1d62019",
+      "path": "knowledge/PAD-Robin-04-Office-PDF.txt"
+    },
+    {
+      "bytes": 8995,
+      "sha256": "e62a78aa92941984bacbdc59d4c6561104a9eca5b9d0e45b817f539e4558d867",
+      "path": "knowledge/PAD-Robin-05-UI-Web.txt"
+    },
+    {
+      "bytes": 60412,
+      "sha256": "4a5046b5810192be8b250adb9fcbf84d0ff8cdc51a2677cce95fa45dc5aa06f8",
+      "path": "knowledge/PAD-Robin-06-Examples.txt"
+    }
+  ],
+  "acceptance_freeze_sha256": "ac94fb92d2db99eab4f3b7abd18befa13c5e78572377de068368d7cabc3c79f0",
+  "evidence": {
+    "copilot": "R6_REFUSAL_PRESERVED_R8_NOT_SENT",
+    "pad": "R8_INDEPENDENT_SOURCE_PASTE_SAVE_RECOPY_ONLY_NO_EXECUTION",
+    "sheet_probe_scope": "Historical editable Sheet1 only",
+    "sheet_probe_sha256": "c7f3fa0408463de8ee36bf5b865720c64799f4a92cbf2a3b7efee4cfa1907c29",
+    "matrix_write": "Two prior probe runs completed; 12 target cells match; 558 XML differences retained",
+    "matrix_write_sha256": "39ceb68d225f61cf87e8c4c173fe3993699d52ff9e23b0457cb614945e423207",
+    "type_comparison": "DATATABLE_NUMBER_TEXT_JSON_IDENTITY_TWO_RUNS_SCOPED",
+    "type_comparison_sha256": "02d664b5ae246bd57e2b44d454a5cd3cb01991a78b6fff8548d208759f1b1fb6",
+    "type_comparison_scope": "TypeProbe!A2:B2 number 1 versus text 1 only; full EX02 connection requires r5 live acceptance",
+    "percent_text_write": "PAD_TWO_RUN_FIXED_100_PERCENT_TEXT_AND_NUMERIC_SCOPE",
+    "percent_text_flow_sha256": "0b86dd150dac532e2c73f5a407a7c396b4153bbc3052e03a65a8c84c6dab6f46",
+    "percent_text_action_sha256": "aae8f3d12b458e7bba0bf7759ad0f2c15720bbc803f032e5c86e3621edc16538",
+    "percent_text_script_sha256": "748c7e512353cc487d572fe81fc6487ece910f8538a2bd55b1f8d535b0c799ee",
+    "percent_text_scope": "Synthetic text 100% and numeric 42.5 only; r6 seven-cell adaptation requires same-version live acceptance",
+    "candidate_adaptation": "INDEPENDENT_TEACHING_SOURCE_PAD_SAVED_RECOPY_NOT_RUNTIME_ACCEPTED",
+    "candidate_script_sha256": "65b86b0e5be4ec2da30e57a6bd858e395d1103da2d05ab2e7607362772d1dfd9",
+    "source_chain": "R6_REFUSAL_AND_SENT_BUNDLE_AUDITED_R8_PAD_RECOPY_MECHANICALLY_MATCHED",
+    "source_candidate_sha256": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb",
+    "source_pad_recopy_sha256": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb",
+    "source_lf_normalized_exact": true,
+    "source_candidate_crlf_count": 110,
+    "source_candidate_lf_only_count": 87,
+    "source_recopy_crlf_count": 110,
+    "source_recopy_lf_only_count": 87,
+    "source_action_decodes_to_script": true,
+    "actual_sent_bundle_claimed_escape_counts": {
+      "=\\>": 0,
+      "\\_": 0,
+      "\\[": 0
+    },
+    "actual_sent_bundle_raw_token_counts": {
+      "=>": 184,
+      "_ValueTypeMatch": 60,
+      "Data1[0][0]": 12
+    },
+    "existing_output_guard": "STATIC_ONLY_NOT_LIVE_TESTED",
+    "candidate_robin_sha256": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb",
+    "teaching_test_independence": "PASS_R8_FIXED_EX03_COMPLETE_ANSWER_ABSENT_FROM_CURRENT_INSTRUCTION_BUNDLE_AND_SUPPORT",
+    "prior_refusal_internal_cause": "UNRESOLVED_REFUSAL_ESCAPE_CLAIM_NOT_SUPPORTED_BY_ACTUAL_SENT_BUNDLE_BYTES",
+    "confirmed_package_issue": "R6_R7_COMPLETE_FIXED_ANSWER_COUPLING_REMOVED_FROM_R8_TEACHING_SOURCE",
+    "source_exact_bytes": true,
+    "fixed_request_spec_expected_hashes_preserved": true,
+    "fixed_completion_terms_absent_from_independent_source": true,
+    "unique_grader_strings_absent_from_independent_source": true,
+    "expected_string_100_percent_absent_from_independent_source": true
+  },
+  "base_candidate": "20260916-excel-r7",
+  "evidence_inputs": {
+    "catalog/acceptance/issue38/probes/output-guard/captured-uia.robin": "477b7c174b1d74015ed7ee9ff3f0cbf3e768ec6adc9cc1e4ea05eb56a9c67272",
+    "catalog/acceptance/issue38/probes/scalar-compare/captured-full.robin": "0b13b8aed3130022535b32020647b7b8e69dd3e7c1d498c342877567271e71d2",
+    "catalog/acceptance/issue38/probes/matrix-write/assembled-probe-rev2.robin": "46ca4731a2c83c8b5a9e0ad069a1da72f11a7e6030a45a2352c37d11812a57aa",
+    "catalog/acceptance/issue38/probes/output-guard/two-run-result.json": "2c6c9332e6cfbfb740475f637f6292210c587efab70a1b815611a338a120d501",
+    "catalog/acceptance/issue38/probes/scalar-compare/two-run-result.json": "7c4e8d23a00d88017a5284dcb72cc63baf38364c956bd555911abd5f22f1636c",
+    "catalog/acceptance/issue38/probes/matrix-write/two-run-result.json": "3f292fc60c2a4f50733e49a3b6e204a4fb568c73a0708ec1112fc73781766bbc",
+    "catalog/acceptance/issue38/probes/datatable-type-identity/captured-final.robin": "02d664b5ae246bd57e2b44d454a5cd3cb01991a78b6fff8548d208759f1b1fb6",
+    "catalog/acceptance/issue38/probes/datatable-type-identity/acceptance.json": "a28570756df23d32a509877f0940701e792de9dfe43b9b584413e7c8d336aabc",
+    "catalog/acceptance/issue38/probes/datatable-type-identity/capture-integrity.json": "2eb7167ace82202a046565034f5c1dd90bbd231a74b5b1d7281f2a203e069165",
+    "catalog/acceptance/issue38/probes/datatable-type-identity/verification.json": "563c9cb19fc9edc586e5a3b0c904df5a023b25e5be99caf1883bcd464c0dfb58",
+    "catalog/acceptance/issue38/probes/datatable-type-identity/run1-reconciliation.json": "043b64434786289de98e67e93aba2df46fbdad7880027afcb7459554abc3d5eb",
+    "catalog/acceptance/issue38/probes/datatable-type-identity/run2-reconciliation.json": "f090fb2d2ef7986baa7fe1b072397e133da3b49936c6dc1b11f89f1bf2bfbba4",
+    "catalog/acceptance/issue38/probes/percent-text-write/captured-final.robin": "0b86dd150dac532e2c73f5a407a7c396b4153bbc3052e03a65a8c84c6dab6f46",
+    "catalog/acceptance/issue38/probes/percent-text-write/captured-powershell-format-action-v2.robin": "aae8f3d12b458e7bba0bf7759ad0f2c15720bbc803f032e5c86e3621edc16538",
+    "catalog/acceptance/issue38/probes/percent-text-write/active-excel-format-sandwich.ps1.txt": "748c7e512353cc487d572fe81fc6487ece910f8538a2bd55b1f8d535b0c799ee",
+    "catalog/acceptance/issue38/probes/percent-text-write/acceptance.json": "948688ef0c21ece63b140d78a08a7b32e144957d1b563ec3f80521b1e7863155",
+    "catalog/acceptance/issue38/probes/percent-text-write/two-run-result.json": "3bc333dfe08b540e64d0e56e81736f69610061173eaba7d30eef5aa4d09e5896",
+    "catalog/acceptance/issue38/probes/percent-text-write/verification.json": "488f9cbd68108f40e389c3bcc6e115c8d78325336f290e28e032ed5a67790b0d",
+    "catalog/acceptance/issue38/probes/percent-text-write/report.md": "a98461642968d5c80811bb2ab38c6ce320619c58ed0b3fd59d6c3bc57be16f8a",
+    "catalog/acceptance/issue38/cycles/EX03-r6-G1/submitted-body.txt": "a9051689e227e74a904c20fb860f89935b5c393164629869bebbcc923e93903e",
+    "catalog/acceptance/issue38/cycles/EX03-r6-G1/response-rendered.txt": "7c6f30590b3ee7905038f142c1974d7639c4579c44a6f445ae0a9ea22f58b342",
+    "catalog/acceptance/issue38/cycles/EX03-r6-G1/live-send.json": "c9f00f1a9a4ab48fd1c11f86438fd8c903a3af2a52f25e8e4d25df81a565b9e5",
+    "catalog/acceptance/issue38/probes/ex03-r7-robin-source/preflight.json": "c3ee76b7e8a9950157a0a27dc212bcfd4daf85904ca9b1a9205c7a204ba333db",
+    "catalog/acceptance/issue38/probes/ex03-r7-robin-source/pad-capture.json": "7429b5dc228325ff91a95fff2d17d3305e6b330b50845a9089ec2081f3e2cc18",
+    "catalog/acceptance/issue38/probes/ex03-r7-robin-source/candidate-full.robin": "1f6ea14ea59242d7351d01ef75cd9571eb90676ab3845ffd2a842f01d84c771b",
+    "catalog/acceptance/issue38/probes/ex03-r7-robin-source/candidate-action.robin": "1356bf8bb8021700fc75cd88edcb5b58a94cbf99c96a141e9008f62a68ced024",
+    "catalog/acceptance/issue38/probes/ex03-r7-robin-source/pad-recopy-full.robin": "529d66dd598c395c6313a6f6d6b44c80049effb79de96b675a37f7dc99596d89",
+    "copilot/versions/20260916-excel-r7/manifest.json": "38517f37be934b1bcf37c0e12f9f33c9e803fa174af15e41579ccdd612dc4e3f",
+    "copilot/versions/20260916-excel-r7/knowledge/PAD-Robin-Knowledge-Bundle.txt": "228329f60f17192f87878fb6393abf22520d051a1225d9905f2f71354216f1ed",
+    "copilot/versions/20260916-excel-r7/agent-instructions.txt": "b888b7497c2c5a7fb79860c22da6be4b62f013731ab920e87dbb503ef1f0d7fa",
+    "copilot/versions/20260916-excel-r6/knowledge/PAD-Robin-Knowledge-Bundle.txt": "9c566e7f85a431f1869302c6a40985e2f81237f17ac4fbbdc9a73e62a646b580",
+    "catalog/acceptance/issue38/probes/ex03-r8-independent-source/independence-before.json": "5088b61512fd9418804e1b3f2427732bb179521bbdd05aa1c6f06ed16aa6e7cf",
+    "catalog/acceptance/issue38/probes/ex03-r8-independent-source/preflight.json": "61d9af47c8b88ec073ee89f6ad79bd5e952aa0ece5338b850a1ca1ebd87dc3f8",
+    "catalog/acceptance/issue38/probes/ex03-r8-independent-source/pad-capture.json": "70ef473d86462fe09ab7c498eef97744c92f04d2d5304c41f61e42f45a7e17c0",
+    "catalog/acceptance/issue38/probes/ex03-r8-independent-source/candidate-full.robin": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb",
+    "catalog/acceptance/issue38/probes/ex03-r8-independent-source/candidate-action.robin": "283dca2c49814aa842e820b30b1a6ab269a693723af7f3d84517950c140a2d2b",
+    "catalog/acceptance/issue38/probes/ex03-r8-independent-source/candidate-script.ps1.txt": "65b86b0e5be4ec2da30e57a6bd858e395d1103da2d05ab2e7607362772d1dfd9",
+    "catalog/acceptance/issue38/probes/ex03-r8-independent-source/pad-recopy-full.robin": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb",
+    "catalog/acceptance/issue38/requests/EX03.txt": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+    "catalog/acceptance/issue38/spec.json": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+    "catalog/acceptance/issue38/expected.json": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d"
+  },
+  "builder": "tools/Build-Issue38Ex03CandidateR8.py",
+  "support_files": [
+    {
+      "path": "support/EX03-R8-Independent-FormatSandwich.ps1.txt",
+      "sha256": "65b86b0e5be4ec2da30e57a6bd858e395d1103da2d05ab2e7607362772d1dfd9",
+      "bytes": 5012,
+      "runtime": "embedded_in_robin_not_loaded_from_disk"
+    },
+    {
+      "path": "support/EX03-R8-Independent-PAD-Recopy.robin",
+      "sha256": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb",
+      "bytes": 14545,
+      "runtime": "authoritative_independent_teaching_source_not_executed"
+    }
+  ]
+}

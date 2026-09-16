@@ -26,6 +26,12 @@ typed_transfer = load(
 r7_builder = load(
     'issue38_ex03_r7_builder', 'tools/Build-Issue38Ex03CandidateR7.py'
 )
+r8_builder = load(
+    'issue38_ex03_r8_builder', 'tools/Build-Issue38Ex03CandidateR8.py'
+)
+r8_source = load(
+    'issue38_ex03_r8_source', 'tools/Prepare-Issue38Ex03R8IndependentSource.py'
+)
 
 
 class Ex03Tests(unittest.TestCase):
@@ -229,6 +235,134 @@ class Ex03Tests(unittest.TestCase):
                     )
             with self.assertRaisesRegex(ValueError, 'sealed'):
                 r7_builder.build(destination)
+
+    def test_r8_removes_fixed_answer_and_preserves_independent_pad_source(self):
+        version = ROOT / 'copilot/versions/20260916-excel-r8'
+        r7 = ROOT / 'copilot/versions/20260916-excel-r7'
+        capture = ROOT / 'catalog/acceptance/issue38/probes/ex03-r8-independent-source'
+        manifest = json.loads((version / 'manifest.json').read_text(encoding='utf-8'))
+        independence = json.loads(
+            (capture / 'independence-before.json').read_text(encoding='utf-8')
+        )
+        pad_capture = json.loads((capture / 'pad-capture.json').read_text(encoding='utf-8'))
+        def exact(path):
+            with path.open(encoding='utf-8', newline='') as handle:
+                return handle.read()
+
+        candidate = exact(capture / 'candidate-full.robin')
+        recopy = exact(capture / 'pad-recopy-full.robin')
+        support = exact(version / 'support/EX03-R8-Independent-PAD-Recopy.robin')
+        script = exact(version / 'support/EX03-R8-Independent-FormatSandwich.ps1.txt')
+        instruction = (version / 'agent-instructions.txt').read_text(encoding='utf-8')
+        bundle = (version / 'knowledge/PAD-Robin-Knowledge-Bundle.txt').read_text(
+            encoding='utf-8'
+        )
+
+        self.assertEqual(
+            independence['decision'], 'FAIL_R7_CONTAINS_FIXED_EX03_COMPLETE_ANSWER'
+        )
+        self.assertEqual(
+            pad_capture['result'],
+            'PASS_PAD_DESIGNER_SAVE_RECOPY_INDEPENDENT_SOURCE_NO_EXECUTION',
+        )
+        self.assertTrue(pad_capture['comparison']['exact_bytes'])
+        self.assertFalse(pad_capture['scope']['executed'])
+        self.assertFalse(pad_capture['scope']['copilot_send'])
+        self.assertFalse(pad_capture['scope']['integrated_ex03_run'])
+        self.assertEqual(candidate, recopy)
+        self.assertEqual(recopy, support)
+
+        normalize = lambda value: value.replace('\r\n', '\n').rstrip('\n')
+        reversed_candidate = candidate
+        for old, new, _ in reversed(r8_source.REPLACEMENTS):
+            reversed_candidate = reversed_candidate.replace(new, old)
+        r7_robin = exact(r7 / 'support/EX03-R7-PAD-Recopy.robin')
+        self.assertEqual(normalize(reversed_candidate), normalize(r7_robin))
+
+        for name in [
+            'PAD-Robin-01-Basics.txt',
+            'PAD-Robin-02-Control.txt',
+            'PAD-Robin-03-Files.txt',
+            'PAD-Robin-05-UI-Web.txt',
+        ]:
+            self.assertEqual(
+                (version / 'knowledge' / name).read_bytes(),
+                (r7 / 'knowledge' / name).read_bytes(),
+                name,
+            )
+
+        for value in [candidate, instruction, bundle]:
+            for term in r8_builder.FIXED_COMPLETION_TERMS:
+                self.assertNotIn(term, value)
+            for term in r8_builder.UNIQUE_GRADER_STRINGS:
+                self.assertNotIn(term, value)
+        self.assertNotIn('100%', candidate)
+        self.assertNotIn('100%', instruction)
+        self.assertNotIn('F6', candidate)
+
+        action = r8_builder.extract_action(recopy)
+        decoded = r8_builder.decode_robin_string(r8_builder.action_payload(action))
+        self.assertEqual(normalize(decoded), normalize(script))
+        self.assertEqual(recopy.count('Scripting.RunPowershellScript.RunScript'), 1)
+        self.assertEqual(
+            recopy.count('Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource'), 5
+        )
+        self.assertEqual(
+            recopy.count('_ValueTypeMatch TO SourceCellJson = SavedCellJson'), 12
+        )
+        self.assertEqual(len(re.findall(r'Json=> TextSource\dJson', recopy)), 7)
+
+        self.assertEqual(
+            manifest['status'],
+            'FROZEN_CANDIDATE_EX03_INDEPENDENT_TEACHING_PAD_RECOPIED_NOT_COPILOT_OR_RUNTIME_ACCEPTED',
+        )
+        self.assertEqual(manifest['base_candidate'], '20260916-excel-r7')
+        self.assertEqual(manifest['base_commit'], '806e4095a926fa0c7e020811c09770b5e5292841')
+        self.assertFalse(manifest['inherits_live_acceptance'])
+        self.assertEqual(
+            manifest['evidence']['teaching_test_independence'],
+            'PASS_R8_FIXED_EX03_COMPLETE_ANSWER_ABSENT_FROM_CURRENT_INSTRUCTION_BUNDLE_AND_SUPPORT',
+        )
+        self.assertEqual(
+            manifest['evidence']['prior_refusal_internal_cause'],
+            'UNRESOLVED_REFUSAL_ESCAPE_CLAIM_NOT_SUPPORTED_BY_ACTUAL_SENT_BUNDLE_BYTES',
+        )
+        for key in ['fixed_request', 'fixed_spec', 'grader_expected']:
+            self.assertEqual(r8_builder.sha256(r8_builder.INPUTS[key]), r8_builder.EXPECTED[key])
+
+    def test_r8_cause_audit_separates_refusal_from_teaching_coupling(self):
+        sent_bundle = r8_builder.INPUTS['actually_sent_r6_bundle'].read_text(encoding='utf-8')
+        refusal = r8_builder.INPUTS['r6_refusal'].read_text(encoding='utf-8')
+        r8_bundle = (
+            ROOT / 'copilot/versions/20260916-excel-r8/knowledge/PAD-Robin-Knowledge-Bundle.txt'
+        ).read_text(encoding='utf-8')
+
+        for claimed in [r'=\>', r'\_', r'\[']:
+            self.assertNotIn(claimed, sent_bundle)
+        self.assertIn(r'=\>', refusal)
+        self.assertIn(r'\_', refusal)
+        self.assertIn('DataTable添字', refusal)
+        for term in r8_builder.FIXED_COMPLETION_TERMS:
+            self.assertIn(term, sent_bundle)
+            self.assertNotIn(term, r8_bundle)
+        self.assertEqual(sent_bundle.count('=>'), 184)
+        self.assertEqual(sent_bundle.count('_ValueTypeMatch'), 60)
+        self.assertEqual(sent_bundle.count('Data1[0][0]'), 12)
+
+    def test_r8_rebuild_is_byte_identical_and_existing_destination_refused(self):
+        with tempfile.TemporaryDirectory() as directory:
+            destination = Path(directory) / 'r8'
+            r8_builder.build(destination)
+            frozen = ROOT / 'copilot/versions' / r8_builder.VERSION
+            for path in frozen.rglob('*'):
+                if path.is_file():
+                    self.assertEqual(
+                        path.read_bytes(),
+                        (destination / path.relative_to(frozen)).read_bytes(),
+                        str(path),
+                    )
+            with self.assertRaisesRegex(ValueError, 'sealed'):
+                r8_builder.build(destination)
 
 
 if __name__ == '__main__':

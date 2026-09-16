@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "capture_id": "EX03-R8-INDEPENDENT-SOURCE",
+  "captured_utc": "2026-09-16T12:35:04.9784847Z",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": "OFF",
+    "flow_name": "無題 (6)",
+    "subflow": "Main"
+  },
+  "scope": {
+    "purpose": "Dedicated PAD Designer paste, save, and re-copy of the independent r8 teaching example",
+    "executed": false,
+    "copilot_send": false,
+    "integrated_ex03_run": false,
+    "github_write": false
+  },
+  "observation": {
+    "initial_actions": 0,
+    "paste_invocations": 1,
+    "selected_actions_after_paste": 110,
+    "actions_after_paste": 110,
+    "variables_after_paste": 45,
+    "save_invocations": 1,
+    "recopy_invocations": 1,
+    "designer_status_after_save": "READY",
+    "designer_error_observed": false
+  },
+  "comparison": {
+    "candidate_path": "catalog/acceptance/issue38/probes/ex03-r8-independent-source/candidate-full.robin",
+    "candidate_sha256": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb",
+    "candidate_chars": 14275,
+    "recopy_path": "catalog/acceptance/issue38/probes/ex03-r8-independent-source/pad-recopy-full.robin",
+    "recopy_sha256": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb",
+    "recopy_chars": 14275,
+    "exact_bytes": true,
+    "lf_normalized_exact": true,
+    "candidate_crlf_count": 110,
+    "candidate_lf_only_count": 87,
+    "recopy_crlf_count": 110,
+    "recopy_lf_only_count": 87,
+    "fixed_ex03_identifiers_absent": true,
+    "independent_example_identifiers_present": true
+  },
+  "result": "PASS_PAD_DESIGNER_SAVE_RECOPY_INDEPENDENT_SOURCE_NO_EXECUTION"
+}
