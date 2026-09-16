@@ -57,6 +57,9 @@ r10_builder = load(
 r10_acceptance = load(
     'issue38_ex03_r10_acceptance', 'tools/Prepare-Issue38Ex03R10Acceptance.py'
 )
+r10_checkpoint = load(
+    'issue38_ex03_r10_checkpoint', 'tools/Verify-Issue38Ex03R10Checkpoint.py'
+)
 
 
 class Ex03Tests(unittest.TestCase):
@@ -1173,6 +1176,47 @@ class Ex03Tests(unittest.TestCase):
                 )
             with self.assertRaisesRegex(ValueError, 'refusing overwrite'):
                 r10_acceptance.prepare(rebuilt, verify_head=False)
+
+    def test_r10_g1_action_time_verifier_is_read_only_and_fail_closed(self):
+        result = r10_checkpoint.verify()
+        self.assertEqual(
+            result['status'],
+            'READY_LOCAL_CHECKPOINT_AWAITING_EXPLICIT_AUTHORIZATION',
+        )
+        self.assertEqual(result['checkpoint_commit'], r10_checkpoint.CHECKPOINT_COMMIT)
+        self.assertEqual(result['protected_file_count'], 264)
+        self.assertEqual(result['protected_mismatch_count'], 0)
+        self.assertTrue(result['work_matches_checkpoint'])
+        self.assertTrue(result['output_absent'])
+        self.assertFalse(result['live_browser_or_pad_state_inspected'])
+        self.assertFalse(result['send_authorized_by_this_verification'])
+        self.assertEqual(
+            result['recorded_external_actions'],
+            {
+                'browser_staging': 0,
+                'copilot_send': 0,
+                'pad_import': 0,
+                'pad_run': 0,
+                'github_write': 0,
+            },
+        )
+
+        frozen = ROOT / 'catalog/acceptance/issue38/cycles/EX03-r10-G1'
+        with tempfile.TemporaryDirectory() as directory:
+            changed = Path(directory) / 'cycle'
+            shutil.copytree(frozen, changed)
+            (changed / 'submitted-body.txt').write_bytes(
+                (changed / 'submitted-body.txt').read_bytes() + b'changed'
+            )
+            with self.assertRaisesRegex(ValueError, 'Checkpoint hash mismatch'):
+                r10_checkpoint.verify(changed, verify_commit=False)
+
+        with tempfile.TemporaryDirectory() as directory:
+            changed = Path(directory) / 'cycle'
+            shutil.copytree(frozen, changed)
+            (changed / 'generated.robin').write_text('not allowed', encoding='utf-8')
+            with self.assertRaisesRegex(ValueError, 'sealed pre-send state'):
+                r10_checkpoint.verify(changed, verify_commit=False)
 
     def test_r8_rebuild_is_byte_identical_and_existing_destination_refused(self):
         with tempfile.TemporaryDirectory() as directory:
