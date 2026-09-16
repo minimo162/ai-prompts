@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-16T07:19:53.5684582Z",
+  "flow_name": "RobinIssue38EX03R5G1_20260916A",
+  "process_id": 33224,
+  "filter_method": "VariablesPanelSearchVariablesSearchBox ValuePattern with exact per-variable name",
+  "execution_requested": false,
+  "status": "OBSERVED_EXACT_FILTERED_VARIABLES",
+  "variables": {
+    "TransferState": {
+      "preview": "SAVED_REOPENED_12_JSON_COMPARISONS_READY",
+      "help_text": "SAVED_REOPENED_12_JSON_COMPARISONS_READY",
+      "preview_help_exact": true
+    },
+    "集計先_F7_ValueTypeMatch": {
+      "preview": "True",
+      "help_text": "True",
+      "preview_help_exact": true
+    },
+    "集計先_G7_ValueTypeMatch": {
+      "preview": "True",
+      "help_text": "True",
+      "preview_help_exact": true
+    },
+    "集計先_F8_ValueTypeMatch": {
+      "preview": "True",
+      "help_text": "True",
+      "preview_help_exact": true
+    },
+    "集計先_G8_ValueTypeMatch": {
+      "preview": "True",
+      "help_text": "True",
+      "preview_help_exact": true
+    },
+    "集計先_F9_ValueTypeMatch": {
+      "preview": "True",
+      "help_text": "True",
+      "preview_help_exact": true
+    },
+    "集計先_G9_ValueTypeMatch": {
+      "preview": "True",
+      "help_text": "True",
+      "preview_help_exact": true
+    },
+    "追記先_D5_ValueTypeMatch": {
+      "preview": "True",
+      "help_text": "True",
+      "preview_help_exact": true
+    },
+    "追記先_E5_ValueTypeMatch": {
+      "preview": "True",
+      "help_text": "True",
+      "preview_help_exact": true
+    },
+    "追記先_F5_ValueTypeMatch": {
+      "preview": "True",
+      "help_text": "True",
+      "preview_help_exact": true
+    },
+    "追記先_D6_ValueTypeMatch": {
+      "preview": "True",
+      "help_text": "True",
+      "preview_help_exact": true
+    },
+    "追記先_E6_ValueTypeMatch": {
+      "preview": "True",
+      "help_text": "True",
+      "preview_help_exact": true
+    },
+    "追記先_F6_ValueTypeMatch": {
+      "preview": "False",
+      "help_text": "False",
+      "preview_help_exact": true
+    }
+  },
+  "error": null
+}

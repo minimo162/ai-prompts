@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R5-G1-RUN1",
+  "checked_at": "2026-09-16T07:13:46.9586811Z",
+  "fixed_files": {
+    "input_a_sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "input_b_sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725",
+    "template_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_equals_template": true
+  },
+  "output_absent": true,
+  "excel_process_count": 0,
+  "pad": {
+    "flow_name": "RobinIssue38EX03R5G1_20260916A",
+    "process_id": 33224,
+    "status": "ready",
+    "errors_known": true,
+    "errors": 0,
+    "can_run": true,
+    "unmodified_saved_recopy_exact_after_lf_normalization": true
+  },
+  "fixture_readback_only": "PASS",
+  "pad_run_requested": false,
+  "decision": "PASS_READY_FOR_ONE_RUN1_INVOCATION"
+}

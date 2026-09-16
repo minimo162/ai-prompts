@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R5-G1",
+  "checked_at": "2026-09-16T07:26:23.6989535Z",
+  "source": "protected-files-before.json",
+  "all_match": true,
+  "files": [
+    {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+      "match": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+      "match": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/freeze.json",
+      "sha256": "ac94fb92d2db99eab4f3b7abd18befa13c5e78572377de068368d7cabc3c79f0",
+      "match": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+      "match": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力い.xlsx",
+      "sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+      "match": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力ろ.xlsx",
+      "sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725",
+      "match": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "match": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/copilot/EX03/plan.json",
+      "sha256": "dc52ee8df08495e6affef6bc8082a9fad920f8d3ce8d089bd326f111c312a072",
+      "match": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/copilot/EX03/send-attempt.json",
+      "sha256": "7c4fe805f3bbb2aac86b9c8a2cfa8d5b8997c2b4522eaa0c1e52bd680c8025ca",
+      "match": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/copilot/EX03/result.json",
+      "sha256": "0c163dfefb71cfdd81201347526d00c9a18a6c7f6ea15c8a853eda362a20cd11",
+      "match": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/copilot/EX03/response-full.txt",
+      "sha256": "0151a738a3d0ee19afe15310550190b310c3b8084495a4581ada1bfb4142687e",
+      "match": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/copilot/EX03/code-copy.robin",
+      "sha256": "4d9b8a6982440109507ab560587a537359ff2034a3cb132e99aa5dc70a61efa6",
+      "match": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX02-r5-G2/generated.robin",
+      "sha256": "0829526420158a61146e5d3fde7c4a5cc035228e2ab98be96d9697aa64d457bd",
+      "match": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX02-r5-G2/acceptance-status.json",
+      "sha256": "634298a3619039ff2e2fad0028e407e71b29ced8749bbbe6788176476b257292",
+      "match": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX02-r5-G2/run1/result.xlsx",
+      "sha256": "c678ae701725716d62aa945d73e341e0122db7e37a4ad35bc670108aeab68325",
+      "match": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX02-r5-G2/run2/result.xlsx",
+      "sha256": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9",
+      "match": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX04-r5-G2-existing-output-neg1/verification.json",
+      "sha256": "af4faab4f0b216a01d4ac1a7e1de2930bff41d6a5a67c7b176a08148a5c009a1",
+      "match": true
+    },
+    {
+      "path": "copilot/versions/20260915-excel-r5/agent-instructions.txt",
+      "sha256": "fe57e45c170fcdfe8f94d8e23f9cb58f00d5b54ae4abe35a43189767032b5aaa",
+      "match": true
+    },
+    {
+      "path": "copilot/versions/20260915-excel-r5/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+      "sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3",
+      "match": true
+    },
+    {
+      "path": "copilot/versions/20260915-excel-r5/manifest.json",
+      "sha256": "1ffacd9f478346fb38b146f135e19fd743d2b9a0ce1ab85d8b6b452899dcfd89",
+      "match": true
+    }
+  ]
+}

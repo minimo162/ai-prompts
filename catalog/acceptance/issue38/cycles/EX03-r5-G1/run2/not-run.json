@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R5-G1-RUN2",
+  "decided_at": "2026-09-16T07:22:50.1223356Z",
+  "status": "NOT_RUN_STOP_RULE_TRIGGERED",
+  "pad_run_invocations": 0,
+  "work_restored_for_run2": false,
+  "runtime_output_removed_or_renamed": false,
+  "reason": "Run1 completion control was initially not observed and the same-run read-only evidence then confirmed a fixed expected type mismatch at 追記先!F6. The user required no rerun when the result is unknown or unsafe, so no Run2 was requested.",
+  "generation_or_request_changed": false
+}

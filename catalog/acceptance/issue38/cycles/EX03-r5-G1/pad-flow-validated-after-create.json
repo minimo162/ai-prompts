@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R5-G1",
+  "observed_at": "2026-09-16T07:11:00Z",
+  "flow_name": "RobinIssue38EX03R5G1_20260916A",
+  "creation_attempts": 1,
+  "creation_dialog": {
+    "dialog_count_before": 0,
+    "dialog_count_after_create": 1,
+    "create_invocations": 1,
+    "ok_invocations": 1,
+    "power_fx_before": "Off",
+    "power_fx_toggle_invocations": 0,
+    "power_fx_after": "Off"
+  },
+  "initial_helper_result": {
+    "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/pad-flow-created.json",
+    "status": "FAILED_STOP_NO_RETRY",
+    "reason": "The first helper version rejected any pre-existing Designer PID after the new-flow dialog completed. PAD legitimately reused the previously hidden, untitled PID 33224.",
+    "preserved": true,
+    "creation_retried": false
+  },
+  "pre_create_process_observation": {
+    "process_id": 33224,
+    "start_time_local": "2026-09-16T04:49:50",
+    "main_window_handle": 0,
+    "main_window_title": ""
+  },
+  "post_create_read_only_validation": {
+    "target_uia_window_count": 1,
+    "console_flow_row_count": 1,
+    "process_name": "PAD.Designer",
+    "process_id": 33224,
+    "session_id": 2,
+    "main_window_handle": 594220,
+    "main_window_title": "Power Automate | RobinIssue38EX03R5G1_20260916A",
+    "automation_id": "DesignerMainWindow",
+    "action_list_count": 1,
+    "visible_action_count": 0
+  },
+  "decision": "PASS_CREATED_DEDICATED_EMPTY_POWER_FX_OFF_WITH_DOCUMENTED_DORMANT_PROCESS_REUSE"
+}

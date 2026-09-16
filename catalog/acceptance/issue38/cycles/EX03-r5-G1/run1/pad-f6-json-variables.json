@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-16T07:22:38.7287287Z",
+  "flow_name": "RobinIssue38EX03R5G1_20260916A",
+  "process_id": 33224,
+  "filter_method": "VariablesPanelSearchVariablesSearchBox ValuePattern with exact per-variable name",
+  "execution_requested": false,
+  "status": "OBSERVED_EXACT_FILTERED_VARIABLES",
+  "variables": {
+    "SourceCell": {
+      "preview": "100%",
+      "help_text": "100%",
+      "preview_help_exact": true
+    },
+    "SavedCell": {
+      "preview": "1",
+      "help_text": "1",
+      "preview_help_exact": true
+    },
+    "SourceCellJson": {
+      "preview": "{\"probe\":\"100%\"}",
+      "help_text": "{\"probe\":\"100%\"}",
+      "preview_help_exact": true
+    },
+    "SavedCellJson": {
+      "preview": "{\"probe\":1.0}",
+      "help_text": "{\"probe\":1.0}",
+      "preview_help_exact": true
+    }
+  },
+  "error": null
+}

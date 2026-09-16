@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R5-G1",
+  "decided_at": "2026-09-16T07:22:50.1223356Z",
+  "version": {
+    "name": "20260915-excel-r5",
+    "instruction_sha256": "fe57e45c170fcdfe8f94d8e23f9cb58f00d5b54ae4abe35a43189767032b5aaa",
+    "bundle_sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3",
+    "manifest_sha256": "1ffacd9f478346fb38b146f135e19fd743d2b9a0ce1ab85d8b6b452899dcfd89",
+    "submitted_body_sha256": "277ee66f9765e57aa2d8b4c48b680b2a573cd37628284420d147322f85c0a9ca",
+    "fixed_request_sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+    "candidate_changed": false,
+    "request_or_expected_changed": false
+  },
+  "stages": {
+    "normal_m365_same_version_attachment": "PASS_ONE_REAL_ATTACHMENT",
+    "normal_m365_single_generation": "PASS_1_OF_1",
+    "copilot_code_integrity": "PASS_87_LINES_NO_EXTRA_TOKEN",
+    "generation_safety": "PASS_FIXED_EX03_TEXT_NUMBER_SCOPE",
+    "dedicated_power_fx_off_flow": "PASS_ONE_NEW_FLOW",
+    "unmodified_pad_import": "PASS_87_ACTIONS_ONE_PASTE",
+    "pad_save_recopy": "PASS_LF_NORMALIZED_EXACT",
+    "run1_control_completion": "NOT_OBSERVED_START_REENABLE_TIMEOUT",
+    "run1_final_transfer_state": "OBSERVED_SAVED_REOPENED_12_JSON_COMPARISONS_READY",
+    "run1_pad_internal_value_type_checks": "FAIL_11_TRUE_1_FALSE",
+    "run1_fixed_expected_checks": "FAIL_11_OF_12_MATCH",
+    "run1_outside_values_types_formulas": "PASS_468_OF_468",
+    "run1_excel_effective_styles_dimensions": "FAIL_ONE_CELL_STYLE_DIFFERENCE_NO_DIMENSION_DIFFERENCE",
+    "legacy_style_dimension_gate": "FAIL_558_PRESERVED_PLUS_ONE_VALUE_TYPE_POSITION_FAILURE",
+    "run2": "NOT_RUN_STOP_RULE_TRIGGERED"
+  },
+  "failure": {
+    "source": "入力ろ.xlsx / 追加項目!D3",
+    "target": "追記先!F6",
+    "expected_source_json": "{\"probe\":\"100%\"}",
+    "saved_target_json": "{\"probe\":1.0}",
+    "expected_type_value": [
+      "text",
+      "100%"
+    ],
+    "actual_type_value": [
+      "number",
+      1
+    ],
+    "format_before": "G/標準",
+    "format_after": "0%",
+    "pad_detected": true,
+    "independent_comparator_detected": true
+  },
+  "scope": {
+    "confirmed_generation_scope": "fixed EX03 12 cells containing text or number only",
+    "generalized_to_unconfirmed_types": false,
+    "probe_success_used_as_generated_flow_success": false,
+    "external_checker_used_as_generated_flow_success": false,
+    "manual_generated_robin_repair": false
+  },
+  "overall": {
+    "accepted": false,
+    "status": "NOT_ACCEPTED_RUN1_FIXED_EXPECTED_TYPE_AND_FORMAT_FAILURE",
+    "generation_requests_used": 1,
+    "generation_request_limit": 1,
+    "pad_runs_used": 1,
+    "pad_run_limit": 2,
+    "resend_or_rerun_after_stop_condition": false,
+    "github_write": false
+  },
+  "remaining": [
+    "Determine and implement the smallest candidate-level change that writes percent-like text without Excel auto-converting it to numeric percent; do not change the fixed expected value.",
+    "After a new candidate is frozen, repeat normal-M365 generation and PAD acceptance without inheriting this result.",
+    "Run2 remains unexecuted for this unchanged candidate because the stop condition was triggered.",
+    "The existing-output guard branch remains statically reviewed but not executed in this EX03 cycle.",
+    "Do not generalize beyond the fixed EX03 text/number set or to other PAD versions or PCs."
+  ]
+}

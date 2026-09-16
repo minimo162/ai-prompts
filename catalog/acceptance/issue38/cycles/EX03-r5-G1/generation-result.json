@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R5-G1",
+  "recorded_at": "2026-09-16T07:06:10.6838726Z",
+  "conversation": {
+    "url": "https://m365.cloud.microsoft/chat/conversation/1e64e2ae-44c4-420c-8868-155cc9f76783?es=SSR",
+    "title": "Power Automate貼付け用フロー生成",
+    "model": "Think Deeper"
+  },
+  "rendered_response": {
+    "visible_text_chars": 10074,
+    "completed": true,
+    "refusal": false,
+    "note": "The completed response remained visible in the fixed conversation. The generated Robin itself is preserved separately as exact editor text."
+  },
+  "code_capture": {
+    "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/generated.robin",
+    "capture_method": "sole Code Copy control invoked once; browser clipboard read returned empty, so the same completed response's sole code editor DOM was read as 87 alternating line-number/code pairs without invoking Copy again",
+    "code_copy_invocations": 1,
+    "code_copy_retry": false,
+    "editor_count": 1,
+    "editor_child_count": 174,
+    "raw_dom_chars": 7224,
+    "raw_dom_utf8_bytes": 7372,
+    "raw_dom_final_lf": false,
+    "raw_dom_sha256": "1927de913f0331b3f703d366cad583bdff7d60d22697dd3f885c13b82602775f",
+    "repository_chars": 7225,
+    "repository_utf8_bytes": 7373,
+    "repository_final_lf": true,
+    "repository_sha256": "4ab085c52ba6f40fc52a55d910459eb917cb7ea3f4174737879d8bb4e5361f7e",
+    "exact_relation": "repository copy is raw editor text plus one conventional final LF",
+    "lines": 87,
+    "first_line": "SET TransferState TO $'''NOT_STARTED'''",
+    "last_line": "END",
+    "markdown_fence_or_extra_token": false,
+    "generated_text_edited": false
+  },
+  "generation_requests_used": 1,
+  "generation_request_limit": 1,
+  "regeneration_requested": false,
+  "interpretation": "The single normal-M365 response produced a complete 87-line candidate. PAD import and runs remain separate claims."
+}
