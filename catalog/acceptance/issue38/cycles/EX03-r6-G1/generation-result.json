@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R6-G1",
+  "recorded_at": "2026-09-16T10:38:16.5892068Z",
+  "conversation": {
+    "url": "https://m365.cloud.microsoft/chat/conversation/2181a545-7f34-4909-8fe9-aaa90bad056d?es=SSR",
+    "title": "Power Automate貼付け用フロー生成",
+    "model": "Think Deeper"
+  },
+  "rendered_response": {
+    "completed": true,
+    "terminal": true,
+    "refusal": true,
+    "classification": "REFUSAL_NO_ROBIN",
+    "raw_dom_chars": 2070,
+    "raw_dom_final_lf": false,
+    "repository_path": "catalog/acceptance/issue38/cycles/EX03-r6-G1/response-rendered.txt",
+    "repository_chars": 2071,
+    "repository_utf8_bytes": 4903,
+    "repository_final_lf": true,
+    "repository_sha256": "7c6f30590b3ee7905038f142c1974d7639c4579c44a6f445ae0a9ea22f58b342",
+    "exact_relation": "repository copy is the completed DOM message body plus one conventional final LF"
+  },
+  "code_capture": {
+    "generated_robin_present": false,
+    "code_block_count": 0,
+    "code_copy_control_count": 0,
+    "generated_text_edited": false,
+    "manual_reconstruction_attempted": false,
+    "reason_summary": "Copilot said it could not establish byte-exact Robin from the escaped technical material and would not emit a code block."
+  },
+  "generation_requests_used": 1,
+  "generation_request_limit": 1,
+  "regeneration_requested": false,
+  "interpretation": "The sole normal-M365 request ended in an explicit no-code refusal. There is no unmodified generated Robin eligible for PAD import."
+}

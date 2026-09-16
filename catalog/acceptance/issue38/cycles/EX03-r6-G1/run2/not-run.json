@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R6-G1-RUN2",
+  "decided_at": "2026-09-16T10:38:16.5892068Z",
+  "status": "NOT_RUN_STOP_RULE_TRIGGERED",
+  "pad_run_invocations": 0,
+  "run1_terminal_and_artifact_prerequisite_met": false,
+  "work_restored_for_run2": false,
+  "runtime_output_removed_or_renamed": false,
+  "reason": "Run1 was not started because the sole Copilot response produced no Robin. Run2 therefore remained prohibited, and no resend or rerun was attempted.",
+  "generation_or_request_changed": false
+}

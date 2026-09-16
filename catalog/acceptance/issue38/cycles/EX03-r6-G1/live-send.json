@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R6-G1",
+  "recorded_at": "2026-09-16T10:38:16.5892068Z",
+  "normal_m365": {
+    "browser": "Google Chrome",
+    "conversation_url": "https://m365.cloud.microsoft/chat/conversation/2181a545-7f34-4909-8fe9-aaa90bad056d?es=SSR",
+    "conversation_title": "Power Automate貼付け用フロー生成",
+    "model": "Think Deeper",
+    "new_chat": true,
+    "action_time_user_confirmation": true,
+    "generation_requests_used": 1,
+    "generation_request_limit": 1,
+    "retry_or_regeneration": false
+  },
+  "pre_send_revalidation": {
+    "destination": "normal Microsoft 365 Copilot Chat",
+    "url": "https://m365.cloud.microsoft/chat?es=SSR",
+    "attachment_count": 1,
+    "attachment_name": "PAD-Robin-Knowledge-Bundle.txt",
+    "canonical_body_utf16_code_units": 7242,
+    "canonical_body_utf8_bytes": 18003,
+    "canonical_body_sha256": "a9051689e227e74a904c20fb860f89935b5c393164629869bebbcc923e93903e",
+    "screen_paragraph_reconstruction_matches_source": true,
+    "send_button_unique_and_enabled": true
+  },
+  "submission": {
+    "body_path": "catalog/acceptance/issue38/cycles/EX03-r6-G1/submitted-body.txt",
+    "body_sha256": "a9051689e227e74a904c20fb860f89935b5c393164629869bebbcc923e93903e",
+    "same_as_prepared_fixed_body": true,
+    "attachment_path": "copilot/versions/20260916-excel-r6/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "attachment_sha256": "9c566e7f85a431f1869302c6a40985e2f81237f17ac4fbbdc9a73e62a646b580",
+    "grader_only_expected_sent": false,
+    "completed_robin_sent": false
+  },
+  "same_version": {
+    "version": "20260916-excel-r6",
+    "instruction_sha256": "1211ee45f80427a474d15d92dbfda3b7c90d2a78b9b7520aadb76f5f22c82fe4",
+    "bundle_sha256": "9c566e7f85a431f1869302c6a40985e2f81237f17ac4fbbdc9a73e62a646b580",
+    "manifest_sha256": "207dfa10f34f0eb7c09a3a39ecfb25c24f870fb5e639b87a0fbce0683cbc9f89",
+    "support_sha256": "d0a5df36516fcf4e27f6d789300ee5a03789aba8176571b1ab86fe84f15fba1a",
+    "fixed_request_sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+    "fixed_spec_sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+    "grader_only_expected_sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d"
+  },
+  "observed_result": {
+    "one_user_message": true,
+    "one_completed_copilot_response": true,
+    "terminal_response": true,
+    "refusal": true,
+    "explicitly_no_code_block": true,
+    "response_pre_count": 0,
+    "response_code_copy_control_count": 0,
+    "response_inline_code_count": 20,
+    "response_dom_chars_without_final_lf": 2070,
+    "resend_or_regeneration": false
+  },
+  "response_capture": {
+    "response_copy_invocations": 1,
+    "response_copy_retry": false,
+    "browser_clipboard_result": "STALE_SUBMITTED_BODY_7242_CHARS",
+    "authoritative_capture": "completed assistant message body DOM",
+    "path": "catalog/acceptance/issue38/cycles/EX03-r6-G1/response-rendered.txt",
+    "repository_sha256": "7c6f30590b3ee7905038f142c1974d7639c4579c44a6f445ae0a9ea22f58b342"
+  },
+  "github_write": false
+}

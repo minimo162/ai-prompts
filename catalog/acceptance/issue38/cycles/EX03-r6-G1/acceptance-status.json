@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R6-G1",
+  "decided_at": "2026-09-16T10:38:16.5892068Z",
+  "version": {
+    "name": "20260916-excel-r6",
+    "instruction_sha256": "1211ee45f80427a474d15d92dbfda3b7c90d2a78b9b7520aadb76f5f22c82fe4",
+    "bundle_sha256": "9c566e7f85a431f1869302c6a40985e2f81237f17ac4fbbdc9a73e62a646b580",
+    "manifest_sha256": "207dfa10f34f0eb7c09a3a39ecfb25c24f870fb5e639b87a0fbce0683cbc9f89",
+    "support_sha256": "d0a5df36516fcf4e27f6d789300ee5a03789aba8176571b1ab86fe84f15fba1a",
+    "submitted_body_sha256": "a9051689e227e74a904c20fb860f89935b5c393164629869bebbcc923e93903e",
+    "fixed_request_sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+    "candidate_changed_after_freeze": false,
+    "request_or_expected_changed": false
+  },
+  "stages": {
+    "candidate_freeze": "PASS_CHECKPOINT_726C522",
+    "non_live_checks": "PASS_NON_LIVE_ONLY",
+    "normal_m365_same_version_attachment": "PASS_ONE_REAL_ATTACHMENT",
+    "normal_m365_single_generation": "TERMINAL_REFUSAL_1_OF_1",
+    "copilot_code_integrity": "FAIL_NO_ROBIN_CODE_BLOCK",
+    "generation_safety": "STOP_NO_GENERATED_ARTIFACT_TO_AUDIT",
+    "dedicated_power_fx_off_flow": "NOT_RUN",
+    "unmodified_pad_import": "NOT_RUN",
+    "pad_save_recopy": "NOT_RUN",
+    "run1_control_completion": "NOT_RUN",
+    "run1_artifact_preservation": "NOT_RUN_NO_ARTIFACT",
+    "run1_all_target_outside_formula_style_checks": "NOT_RUN",
+    "run2": "NOT_RUN_STOP_RULE_TRIGGERED",
+    "two_run_comparison": "NOT_RUN",
+    "protected_originals": "PASS_150_OF_150_SHA256_UNCHANGED"
+  },
+  "scope": {
+    "confirmed_generation_scope": null,
+    "generalized_to_unconfirmed_types": false,
+    "probe_success_used_as_generated_flow_success": false,
+    "external_checker_used_as_generated_flow_success": false,
+    "manual_generated_robin_repair": false,
+    "r5_or_other_case_pass_inherited": false
+  },
+  "overall": {
+    "accepted": false,
+    "status": "NOT_ACCEPTED_COPILOT_REFUSAL_NO_ROBIN",
+    "generation_requests_used": 1,
+    "generation_request_limit": 1,
+    "pad_runs_used": 0,
+    "pad_run_limit": 2,
+    "resend_or_rerun_after_stop_condition": false,
+    "github_write": false
+  },
+  "remaining": [
+    "This r6 live cycle is terminal and must not be resumed by resending or reconstructing the refused response.",
+    "A separately authorized successor would need a PAD-recopied complete Robin source whose exact raw text can be supplied without explanatory escaping; the fixed request and expected values must remain unchanged.",
+    "The existing-output guard remains statically reviewed but not executed on real PAD in this cycle.",
+    "Do not generalize beyond the fixed EX03 text/number set or to other PAD versions or PCs."
+  ]
+}
