@@ -3,6 +3,7 @@ import importlib.util
 import json
 from pathlib import Path
 import re
+import shutil
 import tempfile
 import unittest
 import xml.etree.ElementTree as ET
@@ -40,6 +41,9 @@ r9_builder = load(
 )
 r9_acceptance = load(
     'issue38_ex03_r9_acceptance', 'tools/Prepare-Issue38Ex03R9Acceptance.py'
+)
+r9_checkpoint = load(
+    'issue38_ex03_r9_checkpoint', 'tools/Verify-Issue38Ex03R9Checkpoint.py'
 )
 
 
@@ -601,6 +605,40 @@ class Ex03Tests(unittest.TestCase):
                     )
             with self.assertRaisesRegex(ValueError, 'refusing overwrite'):
                 r9_acceptance.prepare(rebuilt, verify_head=False)
+
+    def test_r9_g1_action_time_verifier_is_read_only_and_fail_closed(self):
+        result = r9_checkpoint.verify()
+        self.assertEqual(
+            result['status'],
+            'READY_LOCAL_CHECKPOINT_AWAITING_EXPLICIT_AUTHORIZATION',
+        )
+        self.assertEqual(result['checkpoint_commit'], r9_checkpoint.CHECKPOINT_COMMIT)
+        self.assertEqual(result['protected_file_count'], 233)
+        self.assertEqual(result['protected_mismatch_count'], 0)
+        self.assertTrue(result['work_matches_checkpoint'])
+        self.assertTrue(result['output_absent'])
+        self.assertFalse(result['live_browser_or_pad_state_inspected'])
+        self.assertFalse(result['send_authorized_by_this_verification'])
+        self.assertEqual(
+            result['recorded_external_actions'],
+            {
+                'browser_staging': 0,
+                'copilot_send': 0,
+                'pad_import': 0,
+                'pad_run': 0,
+                'github_write': 0,
+            },
+        )
+
+        frozen = ROOT / 'catalog/acceptance/issue38/cycles/EX03-r9-G1'
+        with tempfile.TemporaryDirectory() as directory:
+            changed = Path(directory) / 'cycle'
+            shutil.copytree(frozen, changed)
+            (changed / 'submitted-body.txt').write_bytes(
+                (changed / 'submitted-body.txt').read_bytes() + b'changed'
+            )
+            with self.assertRaisesRegex(ValueError, 'Checkpoint hash mismatch'):
+                r9_checkpoint.verify(changed, verify_commit=False)
 
     def test_r8_rebuild_is_byte_identical_and_existing_destination_refused(self):
         with tempfile.TemporaryDirectory() as directory:
