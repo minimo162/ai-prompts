@@ -32,6 +32,12 @@ r8_builder = load(
 r8_source = load(
     'issue38_ex03_r8_source', 'tools/Prepare-Issue38Ex03R8IndependentSource.py'
 )
+r9_analysis = load(
+    'issue38_ex03_r9_analysis', 'tools/Analyze-Issue38Ex03R8Escape.py'
+)
+r9_builder = load(
+    'issue38_ex03_r9_builder', 'tools/Build-Issue38Ex03CandidateR9.py'
+)
 
 
 class Ex03Tests(unittest.TestCase):
@@ -402,6 +408,120 @@ class Ex03Tests(unittest.TestCase):
         self.assertEqual(protected['protected_file_count'], 199)
         self.assertEqual(protected['mismatch_count'], 0)
         self.assertEqual(protected['status'], 'PASS_UNCHANGED')
+
+    def test_r9_escape_audit_fixes_the_failure_boundary_without_repair(self):
+        audit_root = ROOT / 'catalog/acceptance/issue38/probes/ex03-r9-escape-fidelity'
+        analysis = json.loads((audit_root / 'analysis.json').read_text(encoding='utf-8'))
+        generation = analysis['generation_comparison']
+        pad = analysis['pad_comparison']
+
+        self.assertEqual(
+            analysis['decision'], 'PASS_ROOT_CAUSE_BOUNDARY_READY_FOR_UNSENT_SUCCESSOR'
+        )
+        self.assertEqual(generation['expected_vs_generated_differing_lines'], 31)
+        self.assertEqual(generation['generated_backslash_open_bracket_count'], 53)
+        self.assertEqual(generation['generated_backslash_close_bracket_count'], 53)
+        self.assertEqual(generation['authoritative_teaching_backslash_open_bracket_count'], 0)
+        self.assertEqual(generation['authoritative_teaching_backslash_close_bracket_count'], 0)
+        self.assertEqual(generation['stale_teaching_scope_label_count'], 1)
+        self.assertEqual(generation['stale_teaching_type_label_count'], 1)
+        self.assertTrue(generation['bounded_diagnostic_normalization_equals_expected'])
+        self.assertFalse(generation['diagnostic_normalization_applied_to_evidence'])
+        self.assertEqual(pad['generated_vs_pad_recopy_differing_lines'], 30)
+        self.assertTrue(pad['all_differences_are_bracket_backslash_doubling'])
+        self.assertEqual(pad['pad_runs'], 0)
+        self.assertFalse(analysis['classification']['manual_repair'])
+        self.assertEqual(analysis['scope']['copilot_send'], 0)
+        self.assertEqual(analysis['scope']['pad_import'], 0)
+        self.assertEqual(analysis['scope']['pad_run'], 0)
+        self.assertFalse(
+            analysis['minimum_successor_change']['fixed_request_or_expected_change']
+        )
+        self.assertFalse(analysis['minimum_successor_change']['teaching_robin_change'])
+
+        with tempfile.TemporaryDirectory() as directory:
+            rebuilt = Path(directory) / 'audit'
+            result = r9_analysis.analyze(rebuilt)
+            self.assertEqual(
+                result['analysis_sha256'], r9_builder.sha256(audit_root / 'analysis.json')
+            )
+            self.assertEqual(
+                result['report_sha256'], r9_builder.sha256(audit_root / 'report.md')
+            )
+
+    def test_r9_keeps_independent_pad_source_and_adds_fidelity_gate_only(self):
+        version = ROOT / 'copilot/versions/20260917-excel-r9'
+        r8 = ROOT / 'copilot/versions/20260916-excel-r8'
+        manifest = json.loads((version / 'manifest.json').read_text(encoding='utf-8'))
+        instruction = (version / 'agent-instructions.txt').read_text(encoding='utf-8')
+        bundle = (version / 'knowledge/PAD-Robin-Knowledge-Bundle.txt').read_text(
+            encoding='utf-8'
+        )
+        robin = (version / 'support/EX03-R9-Independent-PAD-Recopy.robin').read_bytes()
+        script = (
+            version / 'support/EX03-R9-Independent-FormatSandwich.ps1.txt'
+        ).read_bytes()
+        contract = (
+            version / 'support/EX03-R9-Escape-Fidelity-Contract.txt'
+        ).read_text(encoding='utf-8')
+
+        self.assertEqual(
+            robin, (r8 / 'support/EX03-R8-Independent-PAD-Recopy.robin').read_bytes()
+        )
+        self.assertEqual(
+            script, (r8 / 'support/EX03-R8-Independent-FormatSandwich.ps1.txt').read_bytes()
+        )
+        self.assertEqual(robin.count(b'\\['), 0)
+        self.assertEqual(robin.count(b'\\]'), 0)
+        self.assertIn('Never prefix them with a backslash', contract)
+        self.assertIn('Both counts must be zero', contract)
+        self.assertIn('No teaching-only label may remain', contract)
+        self.assertIn('backslash-open-bracket', instruction)
+        self.assertIn('backslash-close-bracket', instruction)
+        self.assertIn('error label', instruction)
+        for term in r9_builder.FIXED_COMPLETION_TERMS + r9_builder.UNIQUE_GRADER_STRINGS:
+            self.assertNotIn(term, instruction)
+            self.assertNotIn(term, bundle)
+            self.assertNotIn(term.encode('utf-8'), robin)
+        self.assertNotIn(r9_builder.EXPECTED_TEXT, instruction)
+        self.assertNotIn(r9_builder.EXPECTED_TEXT.encode('utf-8'), robin)
+
+        self.assertEqual(
+            manifest['status'],
+            'FROZEN_CANDIDATE_EX03_ESCAPE_FIDELITY_GATE_NOT_COPILOT_OR_RUNTIME_ACCEPTED',
+        )
+        self.assertEqual(manifest['base_candidate'], '20260916-excel-r8')
+        self.assertEqual(manifest['base_commit'], r9_builder.BASE_COMMIT)
+        self.assertFalse(manifest['inherits_live_acceptance'])
+        self.assertEqual(
+            manifest['evidence']['teaching_test_independence'],
+            'PASS_R9_FIXED_EX03_COMPLETE_ANSWER_ABSENT_FROM_CURRENT_INSTRUCTION_BUNDLE_AND_SUPPORT',
+        )
+        self.assertEqual(
+            manifest['evidence']['escape_failure_boundary'],
+            'CONFIRMED_NORMAL_M365_GENERATED_TEXT_BEFORE_PAD_IMPORT',
+        )
+        self.assertEqual(manifest['evidence']['escape_failure_hidden_model_cause'], 'UNKNOWN_NOT_CLAIMED')
+        self.assertEqual(manifest['evidence']['generated_backslash_open_bracket_count'], 53)
+        self.assertEqual(manifest['evidence']['teaching_backslash_open_bracket_count'], 0)
+        self.assertTrue(manifest['evidence']['source_reused_exact_bytes'])
+        self.assertFalse(manifest['evidence']['source_new_pad_capture_required'])
+        self.assertEqual(manifest['evidence']['existing_output_guard'], 'STATIC_ONLY_NOT_LIVE_TESTED')
+
+    def test_r9_rebuild_is_byte_identical_and_existing_destination_refused(self):
+        with tempfile.TemporaryDirectory() as directory:
+            destination = Path(directory) / 'r9'
+            r9_builder.build(destination)
+            frozen = ROOT / 'copilot/versions' / r9_builder.VERSION
+            for path in frozen.rglob('*'):
+                if path.is_file():
+                    self.assertEqual(
+                        path.read_bytes(),
+                        (destination / path.relative_to(frozen)).read_bytes(),
+                        str(path),
+                    )
+            with self.assertRaisesRegex(ValueError, 'sealed'):
+                r9_builder.build(destination)
 
     def test_r8_rebuild_is_byte_identical_and_existing_destination_refused(self):
         with tempfile.TemporaryDirectory() as directory:

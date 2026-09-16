@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const requestedVersion=process.argv[2] ?? '20260915-excel-r1';
-assert.ok(['20260915-excel-r1','20260915-excel-r2','20260915-excel-r3','20260915-excel-r4','20260915-excel-r5','20260916-excel-r6','20260916-excel-r7','20260916-excel-r8'].includes(requestedVersion));
+assert.ok(['20260915-excel-r1','20260915-excel-r2','20260915-excel-r3','20260915-excel-r4','20260915-excel-r5','20260916-excel-r6','20260916-excel-r7','20260916-excel-r8','20260917-excel-r9'].includes(requestedVersion));
 const version=path.join(root,'copilot/versions',requestedVersion);
 const read=p=>fs.readFileSync(p);
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
@@ -44,7 +44,7 @@ if(requestedVersion!=='20260915-excel-r1'){
   for(const n of ['00-Index','04-Office-PDF','06-Examples']){
     const content=text(path.join(version,`knowledge/PAD-Robin-${n}.txt`));
     assert.ok(content.includes(write.toString('utf8').trimEnd()));
-    if(['20260915-excel-r4','20260915-excel-r5','20260916-excel-r6','20260916-excel-r7','20260916-excel-r8'].includes(requestedVersion)) {
+    if(['20260915-excel-r4','20260915-excel-r5','20260916-excel-r6','20260916-excel-r7','20260916-excel-r8','20260917-excel-r9'].includes(requestedVersion)) {
       assert.ok(content.includes('型識別アクション・厳密型比較のPAD原文は未採取'));
       assert.ok(content.includes('書式・寸法558差分のFAIL'));
       assert.ok(content.includes('2Run終了を観測済み'));
@@ -253,6 +253,72 @@ if(requestedVersion==='20260916-excel-r8') {
   assert.equal(manifest.status,'FROZEN_CANDIDATE_EX03_INDEPENDENT_TEACHING_PAD_RECOPIED_NOT_COPILOT_OR_RUNTIME_ACCEPTED');
   assert.equal(manifest.base_candidate,'20260916-excel-r7');
   assert.equal(manifest.base_commit,'806e4095a926fa0c7e020811c09770b5e5292841');
+}
+if(requestedVersion==='20260917-excel-r9') {
+  for(const [p,h] of Object.entries(manifest.evidence_inputs)) assert.equal(sha(read(path.join(root,p))),h,p);
+  const r8=path.join(root,'copilot/versions/20260916-excel-r8');
+  for(const name of ['PAD-Robin-01-Basics.txt','PAD-Robin-02-Control.txt','PAD-Robin-03-Files.txt','PAD-Robin-05-UI-Web.txt']) {
+    assert.deepEqual(
+      read(path.join(version,'knowledge',name)),
+      read(path.join(r8,'knowledge',name)),
+      'unchanged r8 knowledge retained byte-for-byte: '+name,
+    );
+  }
+  assert.equal(manifest.support_files.length,3);
+  for(const record of manifest.support_files) {
+    const support=read(path.join(version,record.path));
+    assert.equal(support.length,record.bytes);
+    assert.equal(sha(support),record.sha256);
+  }
+  const robin=read(path.join(version,'support/EX03-R9-Independent-PAD-Recopy.robin'));
+  const script=read(path.join(version,'support/EX03-R9-Independent-FormatSandwich.ps1.txt'));
+  const contract=text(path.join(version,'support/EX03-R9-Escape-Fidelity-Contract.txt'));
+  assert.deepEqual(robin,read(path.join(r8,'support/EX03-R8-Independent-PAD-Recopy.robin')),'r8 independent teaching source retained byte-for-byte');
+  assert.deepEqual(script,read(path.join(r8,'support/EX03-R8-Independent-FormatSandwich.ps1.txt')),'r8 embedded script retained byte-for-byte');
+  assert.equal(sha(robin),'6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb');
+  assert.equal(sha(script),'65b86b0e5be4ec2da30e57a6bd858e395d1103da2d05ab2e7607362772d1dfd9');
+  assert.equal(sha(Buffer.from(contract)),'321ee7f2ac09c7a4410fcc2680f4b87fb8a6e1fed6d1074f0c6a7b23cefd912c');
+  assert.equal((robin.toString('utf8').match(/\\\[/g) ?? []).length,0);
+  assert.equal((robin.toString('utf8').match(/\\\]/g) ?? []).length,0);
+  for(const required of ['Never prefix them with a backslash','Both counts must be zero','No teaching-only label may remain']) assert.ok(contract.includes(required),required);
+  for(const required of ['backslash-open-bracket','backslash-close-bracket','error label']) assert.ok(instruction.includes(required),required);
+  const fixedTerms=[
+    String.raw`C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力い.xlsx`,
+    String.raw`C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力ろ.xlsx`,
+    String.raw`C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\work.xlsx`,
+    String.raw`C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx`,
+    '受取明細','追加項目','集計先','追記先',
+  ];
+  const uniqueGraderStrings=['春','夏','秋','項目甲','項目乙'];
+  for(const value of [instruction,bundle.toString('utf8'),robin.toString('utf8')]) {
+    for(const term of [...fixedTerms,...uniqueGraderStrings]) assert.ok(!value.includes(term),'fixed answer absent: '+term);
+  }
+  assert.ok(!instruction.includes('100%'));
+  assert.ok(!robin.toString('utf8').includes('100%'));
+  const audit=JSON.parse(read(path.join(root,'catalog/acceptance/issue38/probes/ex03-r9-escape-fidelity/analysis.json')));
+  assert.equal(audit.decision,'PASS_ROOT_CAUSE_BOUNDARY_READY_FOR_UNSENT_SUCCESSOR');
+  assert.equal(audit.generation_comparison.generated_backslash_open_bracket_count,53);
+  assert.equal(audit.generation_comparison.generated_backslash_close_bracket_count,53);
+  assert.equal(audit.generation_comparison.authoritative_teaching_backslash_open_bracket_count,0);
+  assert.equal(audit.generation_comparison.authoritative_teaching_backslash_close_bracket_count,0);
+  assert.equal(audit.generation_comparison.expected_vs_generated_differing_lines,31);
+  assert.equal(audit.pad_comparison.generated_vs_pad_recopy_differing_lines,30);
+  assert.equal(audit.pad_comparison.all_differences_are_bracket_backslash_doubling,true);
+  assert.equal(audit.generation_comparison.bounded_diagnostic_normalization_equals_expected,true);
+  assert.equal(audit.generation_comparison.diagnostic_normalization_applied_to_evidence,false);
+  assert.equal(audit.scope.copilot_send,0);
+  assert.equal(audit.scope.pad_import,0);
+  assert.equal(audit.scope.pad_run,0);
+  assert.equal(manifest.evidence.teaching_test_independence,'PASS_R9_FIXED_EX03_COMPLETE_ANSWER_ABSENT_FROM_CURRENT_INSTRUCTION_BUNDLE_AND_SUPPORT');
+  assert.equal(manifest.evidence.escape_failure_boundary,'CONFIRMED_NORMAL_M365_GENERATED_TEXT_BEFORE_PAD_IMPORT');
+  assert.equal(manifest.evidence.escape_failure_hidden_model_cause,'UNKNOWN_NOT_CLAIMED');
+  assert.equal(manifest.evidence.source_reused_exact_bytes,true);
+  assert.equal(manifest.evidence.source_new_pad_capture_required,false);
+  assert.equal(manifest.evidence.existing_output_guard,'STATIC_ONLY_NOT_LIVE_TESTED');
+  assert.equal(manifest.evidence.diagnostic_normalization_applied_to_evidence,false);
+  assert.equal(manifest.status,'FROZEN_CANDIDATE_EX03_ESCAPE_FIDELITY_GATE_NOT_COPILOT_OR_RUNTIME_ACCEPTED');
+  assert.equal(manifest.base_candidate,'20260916-excel-r8');
+  assert.equal(manifest.base_commit,'8e9dfc6baefba6d39d9b3d54d9adfceebdb12836');
 }
 assert.equal(sha(read(frozen)),manifest.acceptance_freeze_sha256);
 for(const [p,h] of Object.entries(JSON.parse(read(frozen)).files)) assert.equal(sha(read(path.join(path.dirname(frozen),p))),h,p);

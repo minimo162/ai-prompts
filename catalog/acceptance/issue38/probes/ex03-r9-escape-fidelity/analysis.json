@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "probe_id": "EX03-R9-ESCAPE-FIDELITY",
+  "purpose": "Determine the exact r8 G1 generation/PAD re-copy mismatch without repairing or executing it",
+  "inputs": {
+    "r8_manifest": {
+      "path": "copilot/versions/20260916-excel-r8/manifest.json",
+      "sha256": "9025c8869b84d27e4f39512ce157a114a5231041e641ae12ef36c061eae29d3e"
+    },
+    "r8_instruction": {
+      "path": "copilot/versions/20260916-excel-r8/agent-instructions.txt",
+      "sha256": "57f0cdb656e919f8fd83252a6adcd4d12788dac9bf6833db2f2e942eada23bcb"
+    },
+    "r8_bundle": {
+      "path": "copilot/versions/20260916-excel-r8/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+      "sha256": "164c99e59204efd863f4fe283e8f84ce2902ee760ab90e45cf7c5336631aaddb"
+    },
+    "r8_teaching_robin": {
+      "path": "copilot/versions/20260916-excel-r8/support/EX03-R8-Independent-PAD-Recopy.robin",
+      "sha256": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb"
+    },
+    "generated": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r8-G1/generated.robin",
+      "sha256": "711bd5b3a5eb1cba48f6872cd5aa8f718ab3534de4d0e069d5fd1eb7b9d1ed89"
+    },
+    "pad_recopy": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r8-G1/pad-recopy-before-run1.robin",
+      "sha256": "3340cd988d6ed76dc249edc833be33869c530d0b37ddf223807ac86eaef9329f"
+    },
+    "pad_recopy_diff": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r8-G1/pad-recopy-diff.json",
+      "sha256": "a0e81e09e8d2cf57bdeac50be9151ae736877d8c413c87667737f089e8d93dd0"
+    },
+    "generation_result": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r8-G1/generation-result.json",
+      "sha256": "69129ae79bf2f6c67f21afac7f008bfc5240b2148e2d6fcf7eac7445acffa760"
+    },
+    "pad_import": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r8-G1/pad-import-and-recopy.json",
+      "sha256": "6449f83d403e0a7a77a0ad518f29cd59609a1a7ba3300e630766a5b2df08e24f"
+    },
+    "acceptance_status": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r8-G1/acceptance-status.json",
+      "sha256": "2f9a7dea1319496ff955bd19cf116fde67f90822021e20eca1c1016a6076a53d"
+    },
+    "fixed_request": {
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370"
+    },
+    "fixed_spec": {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380"
+    },
+    "grader_expected": {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d"
+    }
+  },
+  "expected_derivation": {
+    "source": "copilot/versions/20260916-excel-r8/support/EX03-R8-Independent-PAD-Recopy.robin",
+    "method": "reverse only the recorded r8 independent data-slot substitutions in memory",
+    "written_as_complete_robin": false,
+    "replacement_counts": [
+      {
+        "label": "error_type",
+        "count": 1
+      },
+      {
+        "label": "error_scope",
+        "count": 1
+      },
+      {
+        "label": "target_two_text_4",
+        "count": 3
+      },
+      {
+        "label": "target_two_number_2",
+        "count": 1
+      },
+      {
+        "label": "target_two_text_3",
+        "count": 3
+      },
+      {
+        "label": "target_two_text_2",
+        "count": 3
+      },
+      {
+        "label": "target_two_number_1",
+        "count": 1
+      },
+      {
+        "label": "target_two_text_1",
+        "count": 3
+      },
+      {
+        "label": "target_one_number_3",
+        "count": 1
+      },
+      {
+        "label": "target_one_text_3",
+        "count": 3
+      },
+      {
+        "label": "target_one_number_2",
+        "count": 1
+      },
+      {
+        "label": "target_one_text_2",
+        "count": 3
+      },
+      {
+        "label": "target_one_number_1",
+        "count": 1
+      },
+      {
+        "label": "target_one_text_1",
+        "count": 3
+      },
+      {
+        "label": "target_two_sheet",
+        "count": 13
+      },
+      {
+        "label": "target_one_sheet",
+        "count": 12
+      },
+      {
+        "label": "source_two_sheet",
+        "count": 1
+      },
+      {
+        "label": "source_one_sheet",
+        "count": 1
+      },
+      {
+        "label": "readback_two_range",
+        "count": 1
+      },
+      {
+        "label": "readback_one_range",
+        "count": 1
+      },
+      {
+        "label": "source_two_range",
+        "count": 1
+      },
+      {
+        "label": "source_one_range",
+        "count": 1
+      },
+      {
+        "label": "work_path",
+        "count": 2
+      },
+      {
+        "label": "source_two_path",
+        "count": 1
+      },
+      {
+        "label": "source_one_path",
+        "count": 1
+      },
+      {
+        "label": "output_path",
+        "count": 3
+      }
+    ],
+    "line_count": 197
+  },
+  "generation_comparison": {
+    "expected_vs_generated_differing_lines": 31,
+    "differing_line_numbers": [
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      43,
+      50,
+      54,
+      58,
+      60,
+      61,
+      62,
+      63,
+      65,
+      66,
+      72,
+      75,
+      76,
+      79,
+      86,
+      87,
+      88,
+      90,
+      91,
+      92,
+      106,
+      107,
+      113,
+      114
+    ],
+    "generated_backslash_open_bracket_count": 53,
+    "generated_backslash_close_bracket_count": 53,
+    "authoritative_teaching_backslash_open_bracket_count": 0,
+    "authoritative_teaching_backslash_close_bracket_count": 0,
+    "stale_teaching_scope_label_count": 1,
+    "stale_teaching_type_label_count": 1,
+    "bounded_diagnostic_normalization_equals_expected": true,
+    "diagnostic_normalization_applied_to_evidence": false
+  },
+  "pad_comparison": {
+    "generated_vs_pad_recopy_differing_lines": 30,
+    "differing_line_numbers": [
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      43,
+      50,
+      54,
+      58,
+      60,
+      61,
+      62,
+      65,
+      66,
+      72,
+      75,
+      76,
+      79,
+      86,
+      87,
+      88,
+      90,
+      91,
+      92,
+      106,
+      107,
+      113,
+      114
+    ],
+    "all_differences_are_bracket_backslash_doubling": true,
+    "designer_action_count": 110,
+    "designer_variable_count": 45,
+    "saved": true,
+    "pad_runs": 0
+  },
+  "classification": {
+    "confirmed": "The normal-M365 generated code introduced literal backslashes before PowerShell square brackets and retained two teaching-only error labels. PAD did not originate those backslashes; its save/re-copy doubled them to preserve the literal characters.",
+    "not_claimed": "The model's hidden internal reason for adding the characters is not known.",
+    "runtime_effect": "NOT_EXECUTED_BY_FIXED_STOP_RULE",
+    "manual_repair": false
+  },
+  "minimum_successor_change": {
+    "fixed_request_or_expected_change": false,
+    "teaching_robin_change": false,
+    "instruction_and_bundle_contract": [
+      "PowerShell square brackets inside the text code block must remain raw [ and ] characters",
+      "backslash-open-bracket and backslash-close-bracket counts must both be zero before output",
+      "teaching-only labels must be replaced consistently with the request data slots",
+      "if any check fails, return no Robin instead of emitting a repairable candidate"
+    ],
+    "new_pad_capture_required": false,
+    "reason_no_new_capture": "The authoritative bracket-only independent teaching Robin is unchanged and already has exact PAD paste/save/re-copy evidence."
+  },
+  "scope": {
+    "copilot_send": 0,
+    "pad_import": 0,
+    "pad_run": 0,
+    "github_write": 0,
+    "legacy_558_failure_preserved": true,
+    "existing_output_guard_live_path": "REMAINS_UNCONFIRMED"
+  },
+  "decision": "PASS_ROOT_CAUSE_BOUNDARY_READY_FOR_UNSENT_SUCCESSOR"
+}
