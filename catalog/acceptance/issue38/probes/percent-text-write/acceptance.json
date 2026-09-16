@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "audited_at": "2026-09-16T08:36:06.0494583Z",
+  "status": "PASS_LOCAL_PROBE_ONLY",
+  "baseline_commit": "f134afe1958d3acc1601e2861cec4139d2b13310",
+  "cause": "Excel.WriteToExcel.WriteCell applies Excel input interpretation to the text token 100% immediately, converting it to numeric 1 and changing General to 0%; save/reopen only persists the already-converted state.",
+  "adopted_method": "For the verified text cell only, attach to the exact active workbook, temporarily set the destination NumberFormat to @, assign the string Value2, restore the previously captured NumberFormat immediately, and reject any non-string value, format mismatch, or PrefixCharacter. Numeric cells retain the ordinary numeric WriteCell path.",
+  "checks": {
+    "baseline_commit_is_ancestor": true,
+    "source_fixture_sha_fixed": true,
+    "template_fixture_sha_fixed": true,
+    "scalar_direct_converts_immediately": true,
+    "scalar_direct_changes_number_format": true,
+    "prefix_candidate_rejected_for_residual": true,
+    "final_robin_stable_across_two_runs": true,
+    "run1_pad_values_and_types_match": true,
+    "run2_pad_values_and_types_match": true,
+    "two_run_pad_variables_semantically_equal": true,
+    "run1_terminal_confirmed": true,
+    "run2_terminal_confirmed": true,
+    "run1_saved_reopened_verification_pass": true,
+    "run2_saved_reopened_verification_pass": true,
+    "run1_effective_style_match": true,
+    "run2_effective_style_match": true,
+    "no_formula_or_prefix_residual_in_both_runs": true,
+    "source_and_template_unchanged_by_verifiers": true,
+    "r5_unchanged_from_base": true,
+    "prior_ex03_evidence_unchanged_from_base": true,
+    "prior_ex03_run_uncertainty_still_recorded": true,
+    "new_version_created": false,
+    "copilot_resent": false,
+    "full_ex03_rerun": false,
+    "github_write": false
+  },
+  "hashes": {
+    "source_xlsx": "dda07aac129a7f2f55bbd40067eda426b4b8f4f997254e7e9f69059803ac5874",
+    "template_xlsx": "13855dcaf2fa8a9dd8d282197fd74c2f138d9ebc5552debbedbc5886296d2bde",
+    "captured_action_v2": "aae8f3d12b458e7bba0bf7759ad0f2c15720bbc803f032e5c86e3621edc16538",
+    "captured_final_robin": "0b86dd150dac532e2c73f5a407a7c396b4153bbc3052e03a65a8c84c6dab6f46",
+    "run1_result": "b980e1060896dcbc78c0cf10f2e1738a8ebc5c6658d98f045a17b306e828b1a3",
+    "run2_result": "2c9d138133d4f999f4e7d96486995bb1e8726032379feadba5f76f4186e8d39c"
+  },
+  "limits": [
+    "Verified only for the fixed synthetic Source!A2:B2 values: text 100% and numeric 42.5.",
+    "The PowerShell action is bound to the exact probe workbook, sheet, and cell and is not yet integrated into EX03 or the r5 bundle.",
+    "Blank, boolean, date, error, formula-result, object, other text tokens, other PAD versions, and other computers remain unverified.",
+    "The earlier EX03-r5-G1 Run completion observation uncertainty remains a separate unresolved item."
+  ]
+}

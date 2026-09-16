@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "kind": "pad_run_artifact_snapshot",
+  "observed_at": "2026-09-16T08:21:39.8156178Z",
+  "run_number": 1,
+  "artifact_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\percent-text-write\\runtime\\result.xlsx",
+  "snapshot_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\percent-text-write\\run1\\result.xlsx",
+  "artifact_bytes_before": 8014,
+  "artifact_sha256_before": "b980e1060896dcbc78c0cf10f2e1738a8ebc5c6658d98f045a17b306e828b1a3",
+  "artifact_sha256_after": "b980e1060896dcbc78c0cf10f2e1738a8ebc5c6658d98f045a17b306e828b1a3",
+  "snapshot_bytes": 8014,
+  "snapshot_sha256": "b980e1060896dcbc78c0cf10f2e1738a8ebc5c6658d98f045a17b306e828b1a3",
+  "artifact_stable": true,
+  "snapshot_matches_artifact": true,
+  "minimum_bytes": 1,
+  "input_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\percent-text-write\\source.xlsx",
+  "expected_input_sha256": "dda07aac129a7f2f55bbd40067eda426b4b8f4f997254e7e9f69059803ac5874",
+  "input_sha256_after": "dda07aac129a7f2f55bbd40067eda426b4b8f4f997254e7e9f69059803ac5874",
+  "input_unchanged": true,
+  "status": "PASS",
+  "gate": "READY_FOR_NEXT_RUN",
+  "reason": "snapshot verified before the next run"
+}

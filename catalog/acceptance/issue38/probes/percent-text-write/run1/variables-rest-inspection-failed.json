@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-16T08:17:50.0468423Z",
+  "flow_name": "RobinIssue38PercentTextWrite20260916A",
+  "process_id": 3168,
+  "filter_method": "VariablesPanelSearchVariablesSearchBox ValuePattern with exact per-variable name",
+  "execution_requested": false,
+  "status": "INSPECTION_FAILED_NO_RUN_RETRY",
+  "variables": {
+    "ImmediateTextJson": {
+      "preview": "{\"probe\":\"100%\"}",
+      "help_text": "{\"probe\":\"100%\"}",
+      "preview_help_exact": true
+    },
+    "ImmediateNumberJson": {
+      "preview": "{\"probe\":42.5}",
+      "help_text": "{\"probe\":42.5}",
+      "preview_help_exact": true
+    },
+    "ReopenedTextJson": {
+      "preview": "{\"probe\":\"100%\"}",
+      "help_text": "{\"probe\":\"100%\"}",
+      "preview_help_exact": true
+    }
+  },
+  "error": "Variable is not uniquely visible: ReopenedNumberJson"
+}

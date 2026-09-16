@@ -1,0 +1,59 @@
+Scripting.RunPowershellScript.RunScript Script: $'''$ErrorActionPreference = \'Stop\'
+$targetPath = \'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\percent-text-write\\runtime\\work.xlsx\'
+$textValue = \"%SourceText%\"
+$excel = [Runtime.InteropServices.Marshal]::GetActiveObject(\'Excel.Application\')
+$workbook = $null
+$worksheet = $null
+$cell = $null
+try {
+    $matches = @()
+    for ($index = 1; $index -le $excel.Workbooks.Count; $index++) {
+        $candidate = $excel.Workbooks.Item($index)
+        if ([string]::Equals([IO.Path]::GetFullPath([string]$candidate.FullName), $targetPath, [StringComparison]::OrdinalIgnoreCase)) {
+            $matches += $candidate
+        }
+        else {
+            [void][Runtime.InteropServices.Marshal]::ReleaseComObject($candidate)
+        }
+    }
+    if ($matches.Count -ne 1) { throw (\'Expected one exact target workbook, found \' + $matches.Count) }
+    $workbook = $matches[0]
+    $worksheet = $workbook.Worksheets.Item(\'Target\')
+    $cell = $worksheet.Range(\'A2\')
+    $beforeValue = $cell.Value2
+    $beforeValueType = if ($null -eq $beforeValue) { \'null\' } else { $beforeValue.GetType().FullName }
+    $beforeNumberFormat = [string]$cell.NumberFormat
+    $beforePrefixCharacter = [string]$cell.PrefixCharacter
+    $cell.NumberFormat = \'@\'
+    $cell.Value2 = [string]$textValue
+    $cell.NumberFormat = $beforeNumberFormat
+    $afterValue = $cell.Value2
+    $afterValueType = if ($null -eq $afterValue) { \'null\' } else { $afterValue.GetType().FullName }
+    $afterNumberFormat = [string]$cell.NumberFormat
+    $afterPrefixCharacter = [string]$cell.PrefixCharacter
+    if ($afterValue -isnot [string] -or $afterValue -cne $textValue) { throw \'Text value/type was not preserved immediately after write\' }
+    if ($afterNumberFormat -cne $beforeNumberFormat) { throw \'Original number format was not restored immediately after write\' }
+    if (-not [string]::IsNullOrEmpty($afterPrefixCharacter)) { throw \'A prefix character remained immediately after write\' }
+    [ordered]@{
+        method = \'temporary_text_number_format_then_restore\'
+        target_path = $targetPath
+        target_sheet = \'Target\'
+        target_cell = \'A2\'
+        source_variable = \'SourceText\'
+        before_value = $beforeValue
+        before_value_type = $beforeValueType
+        before_number_format = $beforeNumberFormat
+        before_prefix_character = $beforePrefixCharacter
+        after_value = $afterValue
+        after_value_type = $afterValueType
+        after_number_format = $afterNumberFormat
+        after_prefix_character = $afterPrefixCharacter
+    } | ConvertTo-Json -Compress
+}
+finally {
+    if ($null -ne $cell) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($cell) }
+    if ($null -ne $worksheet) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($worksheet) }
+    if ($null -ne $workbook) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($workbook) }
+    if ($null -ne $excel) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($excel) }
+}
+''' ScriptOutput=> PowershellOutput

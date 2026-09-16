@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-16T07:49:09.0589032Z",
+  "flow_name": "RobinIssue38PercentTextWrite20260916A",
+  "process_id": 3168,
+  "source_robin": ".\\catalog\\acceptance\\issue38\\probes\\percent-text-write\\candidate-scalar-direct.robin",
+  "source_sha256": "a86c84bc3199f160e58fb4d547af121879df312730230fba99b82b3ee7aa80a4",
+  "source_bytes": 4025,
+  "empty_before_paste": true,
+  "paste_confirmed": true,
+  "visible_action_count": 4,
+  "designer_action_count": 40,
+  "designer_status": "40 選択されたアクション",
+  "virtualized_list_false_negative": true,
+  "saved_confirmed": false,
+  "execution_requested": false,
+  "clipboard_restoration": "user_authorized_not_preserved",
+  "clipboard_restore_skipped_by_explicit_user_direction": true,
+  "clipboard_all_format_raw_equality": "NOT_ASSESSED"
+}

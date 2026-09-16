@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-16T08:22:30.9166137Z",
+  "flow_name": "RobinIssue38PercentTextWrite20260916A",
+  "run_status": "success",
+  "timeout_seconds": 240,
+  "ready_observed": true,
+  "start_enabled_after": true,
+  "variable_previews": [
+    "FORMAT_SANDWICH_FINISHED"
+  ]
+}

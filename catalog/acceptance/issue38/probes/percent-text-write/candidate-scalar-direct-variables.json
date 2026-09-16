@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-16T07:51:04.4029633Z",
+  "flow_name": "RobinIssue38PercentTextWrite20260916A",
+  "process_id": 3168,
+  "filter_method": "VariablesPanelSearchVariablesSearchBox ValuePattern with exact per-variable name",
+  "execution_requested": false,
+  "status": "OBSERVED_EXACT_FILTERED_VARIABLES",
+  "variables": {
+    "SourceTextJson": {
+      "preview": "{\"probe\":\"100%\"}",
+      "help_text": "{\"probe\":\"100%\"}",
+      "preview_help_exact": true
+    },
+    "SourceNumberJson": {
+      "preview": "{\"probe\":42.5}",
+      "help_text": "{\"probe\":42.5}",
+      "preview_help_exact": true
+    },
+    "BeforeTextJson": {
+      "preview": "{\"probe\":\"BEFORE_TEXT\"}",
+      "help_text": "{\"probe\":\"BEFORE_TEXT\"}",
+      "preview_help_exact": true
+    },
+    "BeforeNumberJson": {
+      "preview": "{\"probe\":7.0}",
+      "help_text": "{\"probe\":7.0}",
+      "preview_help_exact": true
+    },
+    "ImmediateTextJson": {
+      "preview": "{\"probe\":1.0}",
+      "help_text": "{\"probe\":1.0}",
+      "preview_help_exact": true
+    },
+    "ImmediateNumberJson": {
+      "preview": "{\"probe\":42.5}",
+      "help_text": "{\"probe\":42.5}",
+      "preview_help_exact": true
+    },
+    "ReopenedTextJson": {
+      "preview": "{\"probe\":1.0}",
+      "help_text": "{\"probe\":1.0}",
+      "preview_help_exact": true
+    },
+    "ReopenedNumberJson": {
+      "preview": "{\"probe\":42.5}",
+      "help_text": "{\"probe\":42.5}",
+      "preview_help_exact": true
+    },
+    "SourceVsImmediateText": {
+      "preview": "False",
+      "help_text": "False",
+      "preview_help_exact": true
+    },
+    "SourceVsImmediateNumber": {
+      "preview": "True",
+      "help_text": "True",
+      "preview_help_exact": true
+    },
+    "SourceVsReopenedText": {
+      "preview": "False",
+      "help_text": "False",
+      "preview_help_exact": true
+    },
+    "SourceVsReopenedNumber": {
+      "preview": "True",
+      "help_text": "True",
+      "preview_help_exact": true
+    },
+    "ImmediateVsReopenedText": {
+      "preview": "True",
+      "help_text": "True",
+      "preview_help_exact": true
+    },
+    "ImmediateVsReopenedNumber": {
+      "preview": "True",
+      "help_text": "True",
+      "preview_help_exact": true
+    },
+    "ProbeState": {
+      "preview": "SCALAR_DIRECT_FINISHED",
+      "help_text": "SCALAR_DIRECT_FINISHED",
+      "preview_help_exact": true
+    }
+  },
+  "error": null
+}

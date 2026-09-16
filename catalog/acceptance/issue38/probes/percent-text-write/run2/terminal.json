@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE38_PERCENT_TEXT_PAD_TERMINAL",
+  "observed_at": "2026-09-16T08:22:56.7952725Z",
+  "flow_name": "RobinIssue38PercentTextWrite20260916A",
+  "process_id": 3168,
+  "execution_requested": false,
+  "status": "TERMINAL_CONFIRMED",
+  "ui": {
+    "ready": [
+      {
+        "name": "状態: 準備完了",
+        "enabled": true,
+        "offscreen": false
+      }
+    ],
+    "start": [
+      {
+        "name": "実行",
+        "enabled": true,
+        "offscreen": false
+      }
+    ],
+    "running_count": 0,
+    "error_count": 0
+  },
+  "variables": {
+    "ProbeState": {
+      "preview": "FORMAT_SANDWICH_FINISHED",
+      "help_text": "FORMAT_SANDWICH_FINISHED",
+      "raw_exact": true,
+      "trimmed_exact": true
+    },
+    "PowershellOutput": {
+      "preview": "{\"m\":\"fmt\",\"b\":\"BEFORE_TEXT\",\"bt\":\"System.String\",\"bf\":\"G/標準\",\"bp\":\"\",\"a\":\"100%\",\"at\":\"System.String\",\"af\":\"G/標準\",\"ap\":\"\"}  ",
+      "help_text": "{\"m\":\"fmt\",\"b\":\"BEFORE_TEXT\",\"bt\":\"System.String\",\"bf\":\"G/標準\",\"bp\":\"\",\"a\":\"100%\",\"at\":\"System.String\",\"af\":\"G/標準\",\"ap\":\"\"}\r\n",
+      "raw_exact": false,
+      "trimmed_exact": true
+    },
+    "parsed_powershell_output": {
+      "m": "fmt",
+      "b": "BEFORE_TEXT",
+      "bt": "System.String",
+      "bf": "G/標準",
+      "bp": "",
+      "a": "100%",
+      "at": "System.String",
+      "af": "G/標準",
+      "ap": ""
+    }
+  },
+  "result": {
+    "path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\percent-text-write\\runtime\\result.xlsx",
+    "bytes": 8016,
+    "sha256": "2c9d138133d4f999f4e7d96486995bb1e8726032379feadba5f76f4186e8d39c"
+  },
+  "checks": {
+    "ready_visible": true,
+    "start_enabled": true,
+    "running_absent": true,
+    "error_status_absent": true,
+    "final_marker": true,
+    "powershell_output_trimmed_exact": true,
+    "immediate_before_text": true,
+    "immediate_after_text": true,
+    "immediate_number_format_restored": true,
+    "immediate_prefix_absent": true,
+    "no_excel_process": true,
+    "result_exists": true
+  }
+}

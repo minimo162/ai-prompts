@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE38_PERCENT_TEXT_WRITE_VERIFICATION",
+  "observed_at": "2026-09-16T08:10:03.4645906Z",
+  "run_label": "PROVISIONAL_FORMAT_SANDWICH_RUN",
+  "status": "PASS",
+  "paths": {
+    "source": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\percent-text-write\\source.xlsx",
+    "template": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\percent-text-write\\template.xlsx",
+    "output": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\percent-text-write\\runtime\\result.xlsx"
+  },
+  "sha256_before": {
+    "source": "dda07aac129a7f2f55bbd40067eda426b4b8f4f997254e7e9f69059803ac5874",
+    "template": "13855dcaf2fa8a9dd8d282197fd74c2f138d9ebc5552debbedbc5886296d2bde",
+    "output": "47816f3b4021b7296257d02bf25d781eb1b6d20e446d399021d910d46c7f0ea2"
+  },
+  "sha256_after": {
+    "source": "dda07aac129a7f2f55bbd40067eda426b4b8f4f997254e7e9f69059803ac5874",
+    "template": "13855dcaf2fa8a9dd8d282197fd74c2f138d9ebc5552debbedbc5886296d2bde",
+    "output": "47816f3b4021b7296257d02bf25d781eb1b6d20e446d399021d910d46c7f0ea2"
+  },
+  "source": {
+    "A2": {
+      "value": "100%",
+      "value_kind": "text",
+      "clr_type": "System.String",
+      "formula": "100%",
+      "has_formula": false,
+      "number_format": "@",
+      "number_format_local": "@",
+      "prefix_character": "",
+      "style_name": "Normal"
+    },
+    "B2": {
+      "value": 42.5,
+      "value_kind": "number",
+      "clr_type": "System.Double",
+      "formula": "42.5",
+      "has_formula": false,
+      "number_format": "0.0",
+      "number_format_local": "0.0",
+      "prefix_character": "",
+      "style_name": "Normal"
+    }
+  },
+  "template_before": {
+    "A2": {
+      "value": "BEFORE_TEXT",
+      "value_kind": "text",
+      "clr_type": "System.String",
+      "formula": "BEFORE_TEXT",
+      "has_formula": false,
+      "number_format": "G/標準",
+      "number_format_local": "G/標準",
+      "prefix_character": "",
+      "style_name": "Normal"
+    },
+    "B2": {
+      "value": 7.0,
+      "value_kind": "number",
+      "clr_type": "System.Double",
+      "formula": "7",
+      "has_formula": false,
+      "number_format": "0.00",
+      "number_format_local": "0.00",
+      "prefix_character": "",
+      "style_name": "Normal"
+    }
+  },
+  "output_after_reopen": {
+    "A2": {
+      "value": "100%",
+      "value_kind": "text",
+      "clr_type": "System.String",
+      "formula": "100%",
+      "has_formula": false,
+      "number_format": "G/標準",
+      "number_format_local": "G/標準",
+      "prefix_character": "",
+      "style_name": "Normal"
+    },
+    "B2": {
+      "value": 42.5,
+      "value_kind": "number",
+      "clr_type": "System.Double",
+      "formula": "42.5",
+      "has_formula": false,
+      "number_format": "0.00",
+      "number_format_local": "0.00",
+      "prefix_character": "",
+      "style_name": "Normal"
+    }
+  },
+  "checks": {
+    "hashes_unchanged_by_verifier": true,
+    "source_text_fixed": true,
+    "source_number_fixed": true,
+    "target_text_value_and_type": true,
+    "target_number_value_and_type": true,
+    "text_number_format_preserved": true,
+    "number_number_format_preserved": true,
+    "text_prefix_character_preserved": true,
+    "number_prefix_character_preserved": true,
+    "no_formula_substitution": true,
+    "no_residual_extra_character": true
+  },
+  "limits": [
+    "Fixed Source!A2:B2 and Target!A2:B2 only",
+    "Text 100% and numeric 42.5 only"
+  ]
+}

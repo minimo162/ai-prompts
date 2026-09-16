@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-16T07:53:42.1048592Z",
+  "flow_name": "RobinIssue38PercentPrefixCapture20260916A",
+  "process_id": 5732,
+  "source_robin": ".\\catalog\\actions\\variables-set\\special-text.robin",
+  "source_sha256": "f107b3daee90e7c388ca5fcf51eb78353bff13c6446385be046cf6510ab6ef57",
+  "source_bytes": 77,
+  "empty_before_paste": true,
+  "paste_confirmed": true,
+  "visible_action_count": 1,
+  "designer_action_count": 1,
+  "designer_status": "1 選択されたアクション",
+  "virtualized_list_false_negative": false,
+  "saved_confirmed": false,
+  "execution_requested": false,
+  "clipboard_restoration": "user_authorized_not_preserved",
+  "clipboard_restore_skipped_by_explicit_user_direction": true,
+  "clipboard_all_format_raw_equality": "NOT_ASSESSED"
+}

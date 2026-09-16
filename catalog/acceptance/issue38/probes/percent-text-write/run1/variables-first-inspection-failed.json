@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-16T08:17:28.9289725Z",
+  "flow_name": "RobinIssue38PercentTextWrite20260916A",
+  "process_id": 3168,
+  "filter_method": "VariablesPanelSearchVariablesSearchBox ValuePattern with exact per-variable name",
+  "execution_requested": false,
+  "status": "INSPECTION_FAILED_NO_RUN_RETRY",
+  "variables": {
+    "SourceTextJson": {
+      "preview": "{\"probe\":\"100%\"}",
+      "help_text": "{\"probe\":\"100%\"}",
+      "preview_help_exact": true
+    },
+    "SourceNumberJson": {
+      "preview": "{\"probe\":42.5}",
+      "help_text": "{\"probe\":42.5}",
+      "preview_help_exact": true
+    },
+    "BeforeTextJson": {
+      "preview": "{\"probe\":\"BEFORE_TEXT\"}",
+      "help_text": "{\"probe\":\"BEFORE_TEXT\"}",
+      "preview_help_exact": true
+    },
+    "BeforeNumberJson": {
+      "preview": "{\"probe\":7.0}",
+      "help_text": "{\"probe\":7.0}",
+      "preview_help_exact": true
+    }
+  },
+  "error": "Variable preview/help mismatch: PowershellOutput"
+}

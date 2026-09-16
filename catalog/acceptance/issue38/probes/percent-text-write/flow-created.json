@@ -1,0 +1,25 @@
+{
+  "dialog_count_before": 0,
+  "status": "CREATED_EMPTY_POWER_FX_OFF",
+  "console_process_id": 15416,
+  "power_fx_before": "Off",
+  "designer_session_id": 2,
+  "designer_process_reused": true,
+  "designer_precreate_hwnd": {
+    "value": 0
+  },
+  "designer_precreate_title": "",
+  "dialog_count_after_create": 1,
+  "main_action_count": 0,
+  "requested_at": "2026-09-16T07:42:01.6030491Z",
+  "schema_version": 1,
+  "designer_hwnd": 9898638,
+  "power_fx_toggle_invocations": 0,
+  "flow_name": "RobinIssue38PercentTextWrite20260916A",
+  "power_fx_after": "Off",
+  "ok_invocations": 1,
+  "designer_title": "Power Automate | RobinIssue38PercentTextWrite20260916A",
+  "create_invocations": 1,
+  "designer_process_id": 3168,
+  "error": null
+}

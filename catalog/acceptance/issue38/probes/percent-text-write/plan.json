@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "objective": "Isolate the PAD write step that converts Excel-read text 100% into numeric 1 and capture the smallest write method that preserves source value/type and the destination's original effective formatting through save, close, and reopen.",
+  "baseline_commit": "f134afe1958d3acc1601e2861cec4139d2b13310",
+  "scope": "Dedicated two-cell synthetic Excel range: text 100% and one numeric value. Local PAD probe only.",
+  "fixed_expectations": {
+    "source_text": "100%",
+    "source_text_json": "{\"probe\":\"100%\"}",
+    "source_number": 42.5,
+    "source_number_json": "{\"probe\":42.5}",
+    "destination_original_number_formats": [
+      "General",
+      "0.00"
+    ]
+  },
+  "required_phases": [
+    "before_write",
+    "immediately_after_write",
+    "saved_closed_reopened"
+  ],
+  "acceptance": {
+    "same_saved_flow_runs": 2,
+    "source_datatable_unchanged": true,
+    "text_value_type_preserved": true,
+    "numeric_value_type_preserved": true,
+    "destination_original_effective_format_preserved": true,
+    "no_formula_substitution": true,
+    "no_residual_extra_character": true,
+    "no_f6_specific_repair": true
+  },
+  "out_of_scope": [
+    "new instruction or bundle version",
+    "Copilot resend",
+    "full EX03 rerun",
+    "types other than the fixed text and numeric cells",
+    "GitHub writes"
+  ]
+}
