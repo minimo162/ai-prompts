@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R10-G1",
+  "base_commit": "06aa0a572c58a09357ac1ac27a0a04eeaa4d680d",
+  "purpose": "Prepare one future normal-M365 generation and at-most-two unmodified PAD runs for fixed EX03 using the r10 structural-fidelity gate",
+  "candidate": {
+    "version": "20260917-excel-r10",
+    "instruction_path": "copilot/versions/20260917-excel-r10/agent-instructions.txt",
+    "instruction_sha256": "9434c976457b2fec14ad24d8ee57a3400e7eb092ba38259e3f8f728139c20681",
+    "bundle_path": "copilot/versions/20260917-excel-r10/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "bundle_sha256": "0c53d6ce82fc5e23363332420b59c34470decbb123f804b2e628d26d58928ec6",
+    "manifest_path": "copilot/versions/20260917-excel-r10/manifest.json",
+    "manifest_sha256": "7807e31e8177b05dc89d235496ee1b5978502f7406586dff2621d769981d6cbe",
+    "robin_support_path": "copilot/versions/20260917-excel-r10/support/EX03-R10-Independent-PAD-Recopy.robin",
+    "robin_support_sha256": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb",
+    "script_support_path": "copilot/versions/20260917-excel-r10/support/EX03-R10-Independent-FormatSandwich.ps1.txt",
+    "script_support_sha256": "65b86b0e5be4ec2da30e57a6bd858e395d1103da2d05ab2e7607362772d1dfd9",
+    "fidelity_support_path": "copilot/versions/20260917-excel-r10/support/EX03-R10-Structural-Fidelity-Contract.txt",
+    "fidelity_support_sha256": "4b704ade5343b1a28bc0101080d5756107e02210be40445082de3ab30315079d",
+    "inherits_live_acceptance": false
+  },
+  "fixed_inputs": {
+    "request": {
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370"
+    },
+    "spec": {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380"
+    },
+    "grader_only_expected": {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+      "send_to_copilot": false
+    },
+    "input_a": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力い.xlsx",
+      "sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9"
+    },
+    "input_b": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力ろ.xlsx",
+      "sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+    },
+    "template": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+    },
+    "work": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/work.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "must_match_template_before_each_run": true
+    },
+    "output": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx",
+      "must_be_absent_before_each_run": true
+    }
+  },
+  "submission": {
+    "body_path": "catalog/acceptance/issue38/cycles/EX03-r10-G1/submitted-body.txt",
+    "body_sha256": "751252c0ca263be62c01dce3dc83b10d733579bc395bc4bea01903d543be6247",
+    "body_contract": "unchanged full r10 instructions followed by unchanged fixed EX03 request",
+    "attachment_path": "copilot/versions/20260917-excel-r10/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "attachment_sha256": "0c53d6ce82fc5e23363332420b59c34470decbb123f804b2e628d26d58928ec6",
+    "normal_m365_new_chat": true,
+    "model": "Think Deeper",
+    "grader_only_expected_excluded": true,
+    "fixed_completed_robin_excluded": true,
+    "independent_teaching_robin_in_bundle": true
+  },
+  "authorization": {
+    "r9_authorized_send_consumed": true,
+    "r9_normal_m365_send_count": 1,
+    "r9_resend_count": 0,
+    "r9_stop_before_pad_preserved": true,
+    "r10_normal_m365_send_count": 0,
+    "r10_browser_staged": false,
+    "r10_action_time_confirmation_required_before_staging_or_send": true
+  },
+  "limits": {
+    "max_generation_requests": 1,
+    "max_pad_runs": 2,
+    "no_regeneration_or_manual_robin_repair": true,
+    "stop_on_refusal_safety_issue_mismatch_or_unknown_result": true,
+    "run2_requires_run1_terminal_comparison_and_artifact_preserved": true
+  },
+  "acceptance": {
+    "scope": "fixed EX03 text/number case and r10 package only",
+    "required": [
+      "one normal-M365 send with exact full body and actual same-version bundle",
+      "unmodified generated Robin in a new dedicated Power Fx OFF flow",
+      "PAD save and exact re-copy before Run1",
+      "Run1 terminal confirmation, full comparison and artifact preservation before Run2",
+      "two runs with all twelve source/readback JSON type comparisons",
+      "all fixed values, types, positions, outside cells, formulas and effective formats",
+      "F6 exact System.String 100%, original format, empty prefix and no formula",
+      "all protected input/template SHA values unchanged"
+    ],
+    "no_old_or_other_case_pass_inheritance": true,
+    "no_unconfirmed_type_or_shape_generalization": true,
+    "legacy_558_failure_preserved": true,
+    "existing_output_guard_live_path_still_required": true
+  },
+  "external_actions": {
+    "browser_staging": 0,
+    "copilot_send": 0,
+    "pad_import": 0,
+    "pad_run": 0,
+    "github_write": 0
+  },
+  "status": "READY_FOR_NEW_ACTION_TIME_CONFIRMATION_NOT_STAGED_NOT_SENT"
+}

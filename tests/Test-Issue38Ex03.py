@@ -54,6 +54,9 @@ r10_analysis = load(
 r10_builder = load(
     'issue38_ex03_r10_builder', 'tools/Build-Issue38Ex03CandidateR10.py'
 )
+r10_acceptance = load(
+    'issue38_ex03_r10_acceptance', 'tools/Prepare-Issue38Ex03R10Acceptance.py'
+)
 
 
 class Ex03Tests(unittest.TestCase):
@@ -1082,6 +1085,94 @@ class Ex03Tests(unittest.TestCase):
                     )
             with self.assertRaisesRegex(ValueError, 'sealed'):
                 r10_builder.build(destination)
+
+    def test_r10_g1_checkpoint_is_exact_local_only_and_reproducible(self):
+        cycle = ROOT / 'catalog/acceptance/issue38/cycles/EX03-r10-G1'
+        body = (cycle / 'submitted-body.txt').read_bytes()
+        instruction = (
+            ROOT / 'copilot/versions/20260917-excel-r10/agent-instructions.txt'
+        ).read_bytes()
+        request = (ROOT / 'catalog/acceptance/issue38/requests/EX03.txt').read_bytes()
+        plan = json.loads((cycle / 'plan.json').read_text(encoding='utf-8'))
+        preflight = json.loads((cycle / 'preflight.json').read_text(encoding='utf-8'))
+        protected = json.loads(
+            (cycle / 'protected-files-before.json').read_text(encoding='utf-8')
+        )
+
+        self.assertEqual(body, instruction + b'\n' + request + b'\n')
+        self.assertEqual(
+            r10_acceptance.sha(cycle / 'submitted-body.txt'),
+            '751252c0ca263be62c01dce3dc83b10d733579bc395bc4bea01903d543be6247',
+        )
+        self.assertEqual(plan['candidate']['version'], '20260917-excel-r10')
+        self.assertFalse(plan['candidate']['inherits_live_acceptance'])
+        self.assertTrue(plan['authorization']['r9_authorized_send_consumed'])
+        self.assertEqual(plan['authorization']['r9_normal_m365_send_count'], 1)
+        self.assertEqual(plan['authorization']['r9_resend_count'], 0)
+        self.assertTrue(plan['authorization']['r9_stop_before_pad_preserved'])
+        self.assertEqual(plan['authorization']['r10_normal_m365_send_count'], 0)
+        self.assertFalse(plan['authorization']['r10_browser_staged'])
+        self.assertTrue(
+            plan['authorization'][
+                'r10_action_time_confirmation_required_before_staging_or_send'
+            ]
+        )
+        self.assertEqual(
+            plan['external_actions'],
+            {
+                'browser_staging': 0,
+                'copilot_send': 0,
+                'pad_import': 0,
+                'pad_run': 0,
+                'github_write': 0,
+            },
+        )
+        self.assertEqual(
+            plan['status'], 'READY_FOR_NEW_ACTION_TIME_CONFIRMATION_NOT_STAGED_NOT_SENT'
+        )
+        self.assertEqual(preflight['decision']['local_checkpoint'], 'PASS')
+        self.assertEqual(
+            preflight['decision']['send'],
+            'NOT_SENT_REQUIRES_NEW_ACTION_TIME_CONFIRMATION',
+        )
+        self.assertTrue(all(preflight['checks'].values()))
+        self.assertEqual(preflight['counts']['protected_files'], 264)
+        self.assertEqual(preflight['counts']['submitted_body_utf16_units'], 8093)
+        self.assertEqual(preflight['counts']['teaching_backslash_open_bracket'], 0)
+        self.assertEqual(preflight['counts']['teaching_backslash_close_bracket'], 0)
+        self.assertEqual(preflight['counts']['structural_tokens'], r10_acceptance.TOKEN_COUNTS)
+        self.assertEqual(len(protected['files']), 264)
+        for record in protected['files']:
+            self.assertEqual(
+                r10_acceptance.sha(ROOT / record['path']),
+                record['sha256'],
+                record['path'],
+            )
+        for name in [
+            'm365-ready-to-send.json',
+            'live-send.json',
+            'generated.robin',
+            'pad-import-and-recopy.json',
+            'acceptance-status.json',
+        ]:
+            self.assertFalse((cycle / name).exists(), name)
+
+        with tempfile.TemporaryDirectory() as directory:
+            rebuilt = Path(directory) / 'cycle'
+            r10_acceptance.prepare(rebuilt, verify_head=False)
+            for name in (
+                'plan.json',
+                'preflight.json',
+                'protected-files-before.json',
+                'submitted-body.txt',
+            ):
+                self.assertEqual(
+                    (cycle / name).read_bytes(),
+                    (rebuilt / name).read_bytes(),
+                    name,
+                )
+            with self.assertRaisesRegex(ValueError, 'refusing overwrite'):
+                r10_acceptance.prepare(rebuilt, verify_head=False)
 
     def test_r8_rebuild_is_byte_identical_and_existing_destination_refused(self):
         with tempfile.TemporaryDirectory() as directory:
