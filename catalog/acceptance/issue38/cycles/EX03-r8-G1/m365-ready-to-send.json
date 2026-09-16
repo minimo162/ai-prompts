@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R8-G1",
+  "observed_at": "2026-09-16T22:03:06.6594733+09:00",
+  "destination": {
+    "service": "Microsoft 365 Copilot Chat",
+    "url": "https://m365.cloud.microsoft/chat?es=SSR",
+    "title": "チャット | Microsoft Copilot",
+    "new_blank_chat_before_staging": true,
+    "model": "Think Deeper"
+  },
+  "body": {
+    "source_path": "catalog/acceptance/issue38/cycles/EX03-r8-G1/submitted-body.txt",
+    "source_sha256": "f72116c80fa0b57bac4987db43f3f04f305c85e12ae35a6a0437cc6c73a88c39",
+    "source_utf16_units": 7393,
+    "source_line_count": 83,
+    "editor_child_paragraph_count": 83,
+    "screen_paragraph_reconstruction_sha256": "f72116c80fa0b57bac4987db43f3f04f305c85e12ae35a6a0437cc6c73a88c39",
+    "screen_paragraph_reconstruction_utf16_units": 7393,
+    "screen_paragraph_reconstruction_matches_source": true,
+    "reconstruction_method": "join each editor child paragraph with LF while excluding the editor-owned aria-hidden U+200B/U+200C caret marker",
+    "editor_owned_aria_hidden_marker_codepoints": [
+      "U+200B",
+      "U+200C"
+    ]
+  },
+  "attachment": {
+    "local_path": "copilot/versions/20260916-excel-r8/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "display_name": "PAD-Robin-Knowledge-Bundle.txt",
+    "local_sha256": "164c99e59204efd863f4fe283e8f84ce2902ee760ab90e45cf7c5336631aaddb",
+    "displayed_attachment_count": 1,
+    "displayed_remove_control_count": 1,
+    "visible": true
+  },
+  "send_control": {
+    "exact_name": "送信",
+    "count": 1,
+    "visible": true,
+    "enabled": true,
+    "clicked": false
+  },
+  "local_integrity": {
+    "protected_file_count": 199,
+    "protected_file_mismatch_count": 0,
+    "submitted_body_hash_matches": true,
+    "bundle_hash_matches": true
+  },
+  "decision": {
+    "staging": "PASS",
+    "send": "NOT_SENT_REQUIRES_ACTION_TIME_CONFIRMATION",
+    "generation": "NOT_STARTED",
+    "pad_run1": "NOT_STARTED",
+    "pad_run2": "NOT_STARTED"
+  }
+}

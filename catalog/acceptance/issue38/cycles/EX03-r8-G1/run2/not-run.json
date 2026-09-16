@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R8-G1-RUN2",
+  "recorded_at": "2026-09-17T05:34:21.0650289+09:00",
+  "pad_run_invocations": 0,
+  "status": "NOT_RUN_RUN1_WAS_NOT_AUTHORIZED",
+  "reason": "Run2 requires a terminal, compared and preserved Run1. Run1 was stopped before execution by the save/re-copy mismatch."
+}

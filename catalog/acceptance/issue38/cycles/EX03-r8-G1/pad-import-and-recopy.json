@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R8-G1",
+  "recorded_at": "2026-09-17T05:34:21.0650289+09:00",
+  "pad": {
+    "surface": "Power Automate for desktop designer",
+    "flow_title": "Power Automate | 無題 (7)",
+    "subflow": "Main",
+    "power_fx": "OFF",
+    "dedicated_new_flow": true,
+    "other_flows_modified_or_run": 0
+  },
+  "import": {
+    "source": "completed normal-M365 response sole code editor DOM",
+    "source_path": "catalog/acceptance/issue38/cycles/EX03-r8-G1/generated.robin",
+    "source_sha256": "711bd5b3a5eb1cba48f6872cd5aa8f718ab3534de4d0e069d5fd1eb7b9d1ed89",
+    "paste_attempts": 1,
+    "initial_action_count": 0,
+    "designer_action_count": 110,
+    "designer_variable_count": 45,
+    "visible_import_error_count": 0,
+    "designer_status_after_save": "準備完了",
+    "manual_edit": false,
+    "saved": true,
+    "execution_requested": false
+  },
+  "clipboard": {
+    "original_content_preserved": false,
+    "reason": "explicit user direction for this task",
+    "shared_default_restore_guard_preserved": true
+  },
+  "recopy_after_save_before_run1": {
+    "selected_action_count": 110,
+    "shortcut_copy_attempts": 1,
+    "shortcut_copy_result": "NO_CLIPBOARD_MUTATION_STALE_SUBMITTED_BODY",
+    "edit_menu_copy_invocations": 1,
+    "clipboard_utf16_units": 14453,
+    "clipboard_utf8_bytes": 14655,
+    "clipboard_crlf_count": 110,
+    "clipboard_lone_lf_count": 87,
+    "clipboard_final_lf": true,
+    "clipboard_raw_sha256": "1707abd1a159bba8365d675582e6ee36578b8b50ccd482c6cc6d9157f6d259f6",
+    "lf_normalized_path": "catalog/acceptance/issue38/cycles/EX03-r8-G1/pad-recopy-before-run1.robin",
+    "lf_normalized_utf16_units": 14343,
+    "lf_normalized_utf8_bytes": 14545,
+    "lf_normalized_sha256": "3340cd988d6ed76dc249edc833be33869c530d0b37ddf223807ac86eaef9329f",
+    "lf_normalized_exact_generated_robin": false,
+    "differing_line_count": 30,
+    "difference_evidence": "catalog/acceptance/issue38/cycles/EX03-r8-G1/pad-recopy-diff.json",
+    "classification": "Every changed line is inside the RunScript payload. PAD reserialized each generated single backslash before a square bracket as a doubled backslash, preserving the backslash as literal script content rather than the authoritative bracket-only PowerShell source."
+  },
+  "decision": {
+    "status": "FAIL_UNMODIFIED_IMPORT_SAVE_RECOPY_MISMATCH",
+    "run1_authorized": false,
+    "reason": "The saved PAD flow did not re-copy to the unmodified generated Robin. Thirty RunScript lines changed, including [ordered], type literals, array indexing and COM release expressions. The fixed stop rule therefore applies before execution."
+  }
+}

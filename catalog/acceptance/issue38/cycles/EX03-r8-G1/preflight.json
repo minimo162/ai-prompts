@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R8-G1",
+  "base_commit": "eb8693c5157563bbc69d47d8410093ca30565a30",
+  "checks": {
+    "base_commit_matches_frozen_r8": true,
+    "fixed_fixture_spec_request_expected_hashes_match": true,
+    "r8_instruction_bundle_manifest_support_hashes_match": true,
+    "r8_all_evidence_input_hashes_match": true,
+    "r8_teaching_test_independence_pass": true,
+    "fixed_complete_answer_absent_from_r8_bundle": true,
+    "grader_only_values_absent_from_submitted_body": true,
+    "independent_example_data_absent_from_submitted_body": true,
+    "work_exists_and_matches_template": true,
+    "output_absent": true
+  },
+  "hashes": {
+    "submitted_body": "f72116c80fa0b57bac4987db43f3f04f305c85e12ae35a6a0437cc6c73a88c39",
+    "instruction": "57f0cdb656e919f8fd83252a6adcd4d12788dac9bf6833db2f2e942eada23bcb",
+    "bundle": "164c99e59204efd863f4fe283e8f84ce2902ee760ab90e45cf7c5336631aaddb",
+    "manifest": "9025c8869b84d27e4f39512ce157a114a5231041e641ae12ef36c061eae29d3e",
+    "robin_support": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb",
+    "script_support": "65b86b0e5be4ec2da30e57a6bd858e395d1103da2d05ab2e7607362772d1dfd9",
+    "work_and_template": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "input_a": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "input_b": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+  },
+  "counts": {
+    "protected_files": 199,
+    "submitted_body_utf16_units": 7393,
+    "submitted_body_utf8_bytes": 17948
+  },
+  "decision": {
+    "browser_staging": "READY",
+    "send": "REQUIRES_ACTION_TIME_CONFIRMATION",
+    "copilot_generation": "NOT_STARTED",
+    "pad_run1": "NOT_STARTED",
+    "pad_run2": "NOT_STARTED"
+  }
+}

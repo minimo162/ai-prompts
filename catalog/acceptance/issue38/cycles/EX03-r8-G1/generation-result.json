@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R8-G1",
+  "recorded_at": "2026-09-17T05:21:26.6131163+09:00",
+  "conversation": {
+    "url": "https://m365.cloud.microsoft/chat/conversation/9beb0a20-7f37-4e30-be33-f8b7f8ad076c?es=SSR",
+    "title": "Power Automate for Desktop転記フロー生成",
+    "model": "Think Deeper"
+  },
+  "rendered_response": {
+    "visible_text_utf16_units": 17155,
+    "completed": true,
+    "refusal": false,
+    "code_block_count": 1
+  },
+  "code_capture": {
+    "path": "catalog/acceptance/issue38/cycles/EX03-r8-G1/generated.robin",
+    "capture_method": "sole Code Copy control invoked once; browser clipboard still contained the exact submitted body, so the same completed response's sole code editor was reconstructed from its 197 sequential data-line-index DOM nodes without invoking Copy again",
+    "code_copy_invocations": 1,
+    "code_copy_retry": false,
+    "browser_clipboard_result": "STALE_SUBMITTED_BODY",
+    "browser_clipboard_sha256": "f72116c80fa0b57bac4987db43f3f04f305c85e12ae35a6a0437cc6c73a88c39",
+    "editor_count": 1,
+    "dom_line_node_count": 197,
+    "dom_line_indices": "0..196",
+    "raw_dom_utf16_units": 14236,
+    "raw_dom_final_lf": false,
+    "raw_dom_sha256": "df24e3d3f96089d4baf69e5289652322ba4b1e95dc56ca5609f78a70272161f8",
+    "repository_utf16_units": 14237,
+    "repository_utf8_bytes": 14439,
+    "repository_final_lf": true,
+    "repository_sha256": "711bd5b3a5eb1cba48f6872cd5aa8f718ab3534de4d0e069d5fd1eb7b9d1ed89",
+    "exact_relation": "repository copy is raw editor text plus one conventional final LF",
+    "lines": 197,
+    "first_line": "SET TransferState TO $'''NOT_STARTED'''",
+    "last_line": "END",
+    "markdown_fence_count": 0,
+    "nbsp_count": 0,
+    "ellipsis_count": 0,
+    "generated_text_edited": false
+  },
+  "generation_requests_used": 1,
+  "generation_request_limit": 1,
+  "regeneration_requested": false,
+  "interpretation": "The single normal-M365 response produced one complete 197-line candidate. PAD import, save/re-copy, and execution remain separate claims."
+}

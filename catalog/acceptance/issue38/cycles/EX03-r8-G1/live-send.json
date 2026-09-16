@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R8-G1",
+  "recorded_at": "2026-09-17T05:21:26.6131163+09:00",
+  "authorization": {
+    "action_time_confirmation_received": true,
+    "confirmation_text": "今、Microsoft 365 Copilotへ1回送信してよい。",
+    "generation_request_limit": 1
+  },
+  "pre_send_revalidation": {
+    "base_commit": "eb8693c5157563bbc69d47d8410093ca30565a30",
+    "destination": "normal Microsoft 365 Copilot Chat",
+    "url": "https://m365.cloud.microsoft/chat?es=SSR",
+    "title": "チャット | Microsoft Copilot",
+    "model": "Think Deeper",
+    "body_path": "catalog/acceptance/issue38/cycles/EX03-r8-G1/submitted-body.txt",
+    "body_sha256": "f72116c80fa0b57bac4987db43f3f04f305c85e12ae35a6a0437cc6c73a88c39",
+    "body_utf16_units": 7393,
+    "body_line_count": 83,
+    "screen_reconstruction_matches_body": true,
+    "attachment_path": "copilot/versions/20260916-excel-r8/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "attachment_display_name": "PAD-Robin-Knowledge-Bundle.txt",
+    "attachment_sha256": "164c99e59204efd863f4fe283e8f84ce2902ee760ab90e45cf7c5336631aaddb",
+    "displayed_attachment_count": 1,
+    "protected_file_count": 199,
+    "protected_file_mismatch_count": 0,
+    "output_absent": true
+  },
+  "send": {
+    "send_control_count": 1,
+    "send_control_enabled": true,
+    "click_invocations": 1,
+    "input_cleared_after_click": true,
+    "generation_in_progress_observed": true,
+    "resend_or_regeneration_invocations": 0
+  },
+  "completed_conversation": {
+    "url": "https://m365.cloud.microsoft/chat/conversation/9beb0a20-7f37-4e30-be33-f8b7f8ad076c?es=SSR",
+    "title": "Power Automate for Desktop転記フロー生成",
+    "response_completed": true,
+    "refusal": false,
+    "visible_response_utf16_units": 17155,
+    "code_block_count": 1
+  },
+  "decision": "ONE_SEND_COMPLETED_NO_RESEND"
+}

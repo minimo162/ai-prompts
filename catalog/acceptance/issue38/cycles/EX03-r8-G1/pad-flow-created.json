@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R8-G1",
+  "recorded_at": "2026-09-17T05:34:21.0650289+09:00",
+  "pad": {
+    "surface": "Power Automate for desktop designer",
+    "flow_title": "Power Automate | 無題 (7)",
+    "window_id_observed": 136120,
+    "subflow": "Main",
+    "power_fx": "OFF",
+    "dedicated_new_flow": true,
+    "other_flows_modified_or_run": 0
+  },
+  "creation": {
+    "new_flow_invocations": 1,
+    "create_invocations": 1,
+    "creation_retry": false,
+    "name_entry_attempts_that_changed_value": 0,
+    "auto_generated_name_used": true,
+    "reason": "Computer Use literal input did not change the PAD name field; PAD's documented blank-name path assigned the next new local flow name without reusing an existing flow.",
+    "power_fx_toggle_invocations": 0,
+    "initial_action_count": 0,
+    "unique_designer_window_count": 1
+  },
+  "status": "PASS_CREATED_DEDICATED_EMPTY_POWER_FX_OFF"
+}

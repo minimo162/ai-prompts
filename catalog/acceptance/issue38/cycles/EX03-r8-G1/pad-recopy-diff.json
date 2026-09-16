@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R8-G1",
+  "generated_path": "catalog/acceptance/issue38/cycles/EX03-r8-G1/generated.robin",
+  "generated_sha256": "711bd5b3a5eb1cba48f6872cd5aa8f718ab3534de4d0e069d5fd1eb7b9d1ed89",
+  "pad_recopy_lf_normalized_path": "catalog/acceptance/issue38/cycles/EX03-r8-G1/pad-recopy-before-run1.robin",
+  "pad_recopy_lf_normalized_sha256": "3340cd988d6ed76dc249edc833be33869c530d0b37ddf223807ac86eaef9329f",
+  "generated_lines": 197,
+  "pad_recopy_lines": 197,
+  "differing_line_count": 30,
+  "differing_lines": [
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    43,
+    50,
+    54,
+    58,
+    60,
+    61,
+    62,
+    65,
+    66,
+    72,
+    75,
+    76,
+    79,
+    86,
+    87,
+    88,
+    90,
+    91,
+    92,
+    106,
+    107,
+    113,
+    114
+  ],
+  "classification": "PAD_DESIGNER_RESERIALIZED_LITERAL_BACKSLASH_BEFORE_SQUARE_BRACKETS",
+  "differences": [
+    {
+      "line": 31,
+      "generated": "        \\[ordered\\]@{ Source = \\'Data1\\[0\\]\\[0\\]\\'; Sheet = \\'集計先\\'; Cell = \\'F7\\'; Json = \\'%TextSource1Json%\\' },",
+      "pad_recopy": "        \\\\[ordered\\\\]@{ Source = \\'Data1\\\\[0\\\\]\\\\[0\\\\]\\'; Sheet = \\'集計先\\'; Cell = \\'F7\\'; Json = \\'%TextSource1Json%\\' },"
+    },
+    {
+      "line": 32,
+      "generated": "        \\[ordered\\]@{ Source = \\'Data1\\[1\\]\\[0\\]\\'; Sheet = \\'集計先\\'; Cell = \\'F8\\'; Json = \\'%TextSource2Json%\\' },",
+      "pad_recopy": "        \\\\[ordered\\\\]@{ Source = \\'Data1\\\\[1\\\\]\\\\[0\\\\]\\'; Sheet = \\'集計先\\'; Cell = \\'F8\\'; Json = \\'%TextSource2Json%\\' },"
+    },
+    {
+      "line": 33,
+      "generated": "        \\[ordered\\]@{ Source = \\'Data1\\[2\\]\\[0\\]\\'; Sheet = \\'集計先\\'; Cell = \\'F9\\'; Json = \\'%TextSource3Json%\\' },",
+      "pad_recopy": "        \\\\[ordered\\\\]@{ Source = \\'Data1\\\\[2\\\\]\\\\[0\\\\]\\'; Sheet = \\'集計先\\'; Cell = \\'F9\\'; Json = \\'%TextSource3Json%\\' },"
+    },
+    {
+      "line": 34,
+      "generated": "        \\[ordered\\]@{ Source = \\'Data2\\[0\\]\\[0\\]\\'; Sheet = \\'追記先\\'; Cell = \\'D5\\'; Json = \\'%TextSource4Json%\\' },",
+      "pad_recopy": "        \\\\[ordered\\\\]@{ Source = \\'Data2\\\\[0\\\\]\\\\[0\\\\]\\'; Sheet = \\'追記先\\'; Cell = \\'D5\\'; Json = \\'%TextSource4Json%\\' },"
+    },
+    {
+      "line": 35,
+      "generated": "        \\[ordered\\]@{ Source = \\'Data2\\[1\\]\\[0\\]\\'; Sheet = \\'追記先\\'; Cell = \\'D6\\'; Json = \\'%TextSource5Json%\\' },",
+      "pad_recopy": "        \\\\[ordered\\\\]@{ Source = \\'Data2\\\\[1\\\\]\\\\[0\\\\]\\'; Sheet = \\'追記先\\'; Cell = \\'D6\\'; Json = \\'%TextSource5Json%\\' },"
+    },
+    {
+      "line": 36,
+      "generated": "        \\[ordered\\]@{ Source = \\'Data2\\[0\\]\\[2\\]\\'; Sheet = \\'追記先\\'; Cell = \\'F5\\'; Json = \\'%TextSource6Json%\\' },",
+      "pad_recopy": "        \\\\[ordered\\\\]@{ Source = \\'Data2\\\\[0\\\\]\\\\[2\\\\]\\'; Sheet = \\'追記先\\'; Cell = \\'F5\\'; Json = \\'%TextSource6Json%\\' },"
+    },
+    {
+      "line": 37,
+      "generated": "        \\[ordered\\]@{ Source = \\'Data2\\[1\\]\\[2\\]\\'; Sheet = \\'追記先\\'; Cell = \\'F6\\'; Json = \\'%TextSource7Json%\\' }",
+      "pad_recopy": "        \\\\[ordered\\\\]@{ Source = \\'Data2\\\\[1\\\\]\\\\[2\\\\]\\'; Sheet = \\'追記先\\'; Cell = \\'F6\\'; Json = \\'%TextSource7Json%\\' }"
+    },
+    {
+      "line": 43,
+      "generated": "    $excel = \\[Runtime.InteropServices.Marshal\\]::GetActiveObject(\\'Excel.Application\\')",
+      "pad_recopy": "    $excel = \\\\[Runtime.InteropServices.Marshal\\\\]::GetActiveObject(\\'Excel.Application\\')"
+    },
+    {
+      "line": 50,
+      "generated": "            if (\\[string\\]::Equals(\\[IO.Path\\]::GetFullPath(\\[string\\]$candidate.FullName), $targetPath, \\[StringComparison\\]::OrdinalIgnoreCase)) {",
+      "pad_recopy": "            if (\\\\[string\\\\]::Equals(\\\\[IO.Path\\\\]::GetFullPath(\\\\[string\\\\]$candidate.FullName), $targetPath, \\\\[StringComparison\\\\]::OrdinalIgnoreCase)) {"
+    },
+    {
+      "line": 54,
+      "generated": "                \\[void\\]\\[Runtime.InteropServices.Marshal\\]::ReleaseComObject($candidate)",
+      "pad_recopy": "                \\\\[void\\\\]\\\\[Runtime.InteropServices.Marshal\\\\]::ReleaseComObject($candidate)"
+    },
+    {
+      "line": 58,
+      "generated": "        $workbook = $matches\\[0\\]",
+      "pad_recopy": "        $workbook = $matches\\\\[0\\\\]"
+    },
+    {
+      "line": 60,
+      "generated": "            $sheetName = \\[string\\]$write.Sheet",
+      "pad_recopy": "            $sheetName = \\\\[string\\\\]$write.Sheet"
+    },
+    {
+      "line": 61,
+      "generated": "            $cellAddress = \\[string\\]$write.Cell",
+      "pad_recopy": "            $cellAddress = \\\\[string\\\\]$write.Cell"
+    },
+    {
+      "line": 62,
+      "generated": "            if (-not $allowedTargets.ContainsKey($sheetName) -or $allowedTargets\\[$sheetName\\] -cnotcontains $cellAddress) {",
+      "pad_recopy": "            if (-not $allowedTargets.ContainsKey($sheetName) -or $allowedTargets\\\\[$sheetName\\\\] -cnotcontains $cellAddress) {"
+    },
+    {
+      "line": 65,
+      "generated": "            $payload = \\[string\\]$write.Json | ConvertFrom-Json",
+      "pad_recopy": "            $payload = \\\\[string\\\\]$write.Json | ConvertFrom-Json"
+    },
+    {
+      "line": 66,
+      "generated": "            if ($payload.probe -isnot \\[string\\]) { throw (\\'Teaching text source is not a string: \\' + $write.Source) }",
+      "pad_recopy": "            if ($payload.probe -isnot \\\\[string\\\\]) { throw (\\'Teaching text source is not a string: \\' + $write.Source) }"
+    },
+    {
+      "line": 72,
+      "generated": "                if (\\[bool\\]$cell.HasFormula) { throw (\\'Refusing to replace a formula cell: \\' + $sheetName + \\'!\\' + $cellAddress) }",
+      "pad_recopy": "                if (\\\\[bool\\\\]$cell.HasFormula) { throw (\\'Refusing to replace a formula cell: \\' + $sheetName + \\'!\\' + $cellAddress) }"
+    },
+    {
+      "line": 75,
+      "generated": "                $beforeNumberFormat = \\[string\\]$cell.NumberFormat",
+      "pad_recopy": "                $beforeNumberFormat = \\\\[string\\\\]$cell.NumberFormat"
+    },
+    {
+      "line": 76,
+      "generated": "                $beforePrefixCharacter = \\[string\\]$cell.PrefixCharacter",
+      "pad_recopy": "                $beforePrefixCharacter = \\\\[string\\\\]$cell.PrefixCharacter"
+    },
+    {
+      "line": 79,
+      "generated": "                    $cell.Value2 = \\[string\\]$payload.probe",
+      "pad_recopy": "                    $cell.Value2 = \\\\[string\\\\]$payload.probe"
+    },
+    {
+      "line": 86,
+      "generated": "                $afterNumberFormat = \\[string\\]$cell.NumberFormat",
+      "pad_recopy": "                $afterNumberFormat = \\\\[string\\\\]$cell.NumberFormat"
+    },
+    {
+      "line": 87,
+      "generated": "                $afterPrefixCharacter = \\[string\\]$cell.PrefixCharacter",
+      "pad_recopy": "                $afterPrefixCharacter = \\\\[string\\\\]$cell.PrefixCharacter"
+    },
+    {
+      "line": 88,
+      "generated": "                if ($afterValue -isnot \\[string\\] -or $afterValue -cne \\[string\\]$payload.probe) { throw (\\'Text value/type was not preserved: \\' + $sheetName + \\'!\\' + $cellAddress) }",
+      "pad_recopy": "                if ($afterValue -isnot \\\\[string\\\\] -or $afterValue -cne \\\\[string\\\\]$payload.probe) { throw (\\'Text value/type was not preserved: \\' + $sheetName + \\'!\\' + $cellAddress) }"
+    },
+    {
+      "line": 90,
+      "generated": "                if ($afterPrefixCharacter -cne $beforePrefixCharacter -or -not \\[string\\]::IsNullOrEmpty($afterPrefixCharacter)) { throw (\\'Prefix character changed or remained: \\' + $sheetName + \\'!\\' + $cellAddress) }",
+      "pad_recopy": "                if ($afterPrefixCharacter -cne $beforePrefixCharacter -or -not \\\\[string\\\\]::IsNullOrEmpty($afterPrefixCharacter)) { throw (\\'Prefix character changed or remained: \\' + $sheetName + \\'!\\' + $cellAddress) }"
+    },
+    {
+      "line": 91,
+      "generated": "                if (\\[bool\\]$cell.HasFormula) { throw (\\'A formula remained after text write: \\' + $sheetName + \\'!\\' + $cellAddress) }",
+      "pad_recopy": "                if (\\\\[bool\\\\]$cell.HasFormula) { throw (\\'A formula remained after text write: \\' + $sheetName + \\'!\\' + $cellAddress) }"
+    },
+    {
+      "line": 92,
+      "generated": "                $audit += \\[ordered\\]@{",
+      "pad_recopy": "                $audit += \\\\[ordered\\\\]@{"
+    },
+    {
+      "line": 106,
+      "generated": "                if ($null -ne $cell) { \\[void\\]\\[Runtime.InteropServices.Marshal\\]::ReleaseComObject($cell) }",
+      "pad_recopy": "                if ($null -ne $cell) { \\\\[void\\\\]\\\\[Runtime.InteropServices.Marshal\\\\]::ReleaseComObject($cell) }"
+    },
+    {
+      "line": 107,
+      "generated": "                if ($null -ne $worksheet) { \\[void\\]\\[Runtime.InteropServices.Marshal\\]::ReleaseComObject($worksheet) }",
+      "pad_recopy": "                if ($null -ne $worksheet) { \\\\[void\\\\]\\\\[Runtime.InteropServices.Marshal\\\\]::ReleaseComObject($worksheet) }"
+    },
+    {
+      "line": 113,
+      "generated": "        if ($null -ne $workbook) { \\[void\\]\\[Runtime.InteropServices.Marshal\\]::ReleaseComObject($workbook) }",
+      "pad_recopy": "        if ($null -ne $workbook) { \\\\[void\\\\]\\\\[Runtime.InteropServices.Marshal\\\\]::ReleaseComObject($workbook) }"
+    },
+    {
+      "line": 114,
+      "generated": "        if ($null -ne $excel) { \\[void\\]\\[Runtime.InteropServices.Marshal\\]::ReleaseComObject($excel) }",
+      "pad_recopy": "        if ($null -ne $excel) { \\\\[void\\\\]\\\\[Runtime.InteropServices.Marshal\\\\]::ReleaseComObject($excel) }"
+    }
+  ],
+  "decision": "STOP_BEFORE_RUN1_UNMODIFIED_RECOPY_MISMATCH"
+}

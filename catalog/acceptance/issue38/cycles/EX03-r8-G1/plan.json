@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R8-G1",
+  "base_commit": "eb8693c5157563bbc69d47d8410093ca30565a30",
+  "purpose": "One normal-M365 generation and at-most-two unmodified PAD runs for fixed EX03 after teaching/test separation",
+  "candidate": {
+    "version": "20260916-excel-r8",
+    "instruction_path": "copilot/versions/20260916-excel-r8/agent-instructions.txt",
+    "instruction_sha256": "57f0cdb656e919f8fd83252a6adcd4d12788dac9bf6833db2f2e942eada23bcb",
+    "bundle_path": "copilot/versions/20260916-excel-r8/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "bundle_sha256": "164c99e59204efd863f4fe283e8f84ce2902ee760ab90e45cf7c5336631aaddb",
+    "manifest_path": "copilot/versions/20260916-excel-r8/manifest.json",
+    "manifest_sha256": "9025c8869b84d27e4f39512ce157a114a5231041e641ae12ef36c061eae29d3e",
+    "robin_support_path": "copilot/versions/20260916-excel-r8/support/EX03-R8-Independent-PAD-Recopy.robin",
+    "robin_support_sha256": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb",
+    "script_support_path": "copilot/versions/20260916-excel-r8/support/EX03-R8-Independent-FormatSandwich.ps1.txt",
+    "script_support_sha256": "65b86b0e5be4ec2da30e57a6bd858e395d1103da2d05ab2e7607362772d1dfd9",
+    "inherits_live_acceptance": false
+  },
+  "fixed_inputs": {
+    "request": {
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370"
+    },
+    "spec": {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380"
+    },
+    "grader_only_expected": {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+      "send_to_copilot": false
+    },
+    "input_a": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力い.xlsx",
+      "sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9"
+    },
+    "input_b": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力ろ.xlsx",
+      "sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+    },
+    "template": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+    },
+    "work": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/work.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "must_match_template_before_each_run": true
+    },
+    "output": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx",
+      "must_be_absent_before_each_run": true
+    }
+  },
+  "submission": {
+    "body_path": "catalog/acceptance/issue38/cycles/EX03-r8-G1/submitted-body.txt",
+    "body_sha256": "f72116c80fa0b57bac4987db43f3f04f305c85e12ae35a6a0437cc6c73a88c39",
+    "body_contract": "unchanged full r8 instructions followed by unchanged fixed EX03 request",
+    "attachment_path": "copilot/versions/20260916-excel-r8/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "attachment_sha256": "164c99e59204efd863f4fe283e8f84ce2902ee760ab90e45cf7c5336631aaddb",
+    "normal_m365_new_chat": true,
+    "model": "Think Deeper",
+    "grader_only_expected_excluded": true,
+    "fixed_completed_robin_excluded": true,
+    "independent_teaching_robin_in_bundle": true,
+    "action_time_confirmation_required_before_send": true
+  },
+  "limits": {
+    "max_generation_requests": 1,
+    "max_pad_runs": 2,
+    "no_regeneration_or_manual_robin_repair": true,
+    "stop_on_refusal_safety_issue_mismatch_or_unknown_result": true,
+    "run2_requires_run1_terminal_and_artifact_preserved": true
+  },
+  "acceptance": {
+    "scope": "fixed EX03 text/number case and r8 package only",
+    "required": [
+      "one normal-M365 send with exact full body and actual same-version bundle",
+      "unmodified generated Robin in a new dedicated Power Fx OFF flow",
+      "PAD save and re-copy before Run1",
+      "Run1 terminal confirmation and full artifact preservation before Run2",
+      "two runs with all twelve source/readback JSON type comparisons",
+      "all fixed values, types, positions, outside cells, formulas and effective formats",
+      "F6 exact System.String 100%, original format, empty prefix and no formula",
+      "all protected input/template SHA values unchanged"
+    ],
+    "no_old_or_other_case_pass_inheritance": true,
+    "no_unconfirmed_type_or_shape_generalization": true,
+    "legacy_558_failure_preserved": true,
+    "existing_output_guard_live_path_still_required": true
+  },
+  "github_write": false,
+  "status": "READY_FOR_BROWSER_STAGING_ONLY"
+}

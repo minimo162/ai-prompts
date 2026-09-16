@@ -349,6 +349,60 @@ class Ex03Tests(unittest.TestCase):
         self.assertEqual(sent_bundle.count('_ValueTypeMatch'), 60)
         self.assertEqual(sent_bundle.count('Data1[0][0]'), 12)
 
+    def test_r8_g1_live_cycle_stops_before_run1_on_pad_recopy_mismatch(self):
+        cycle = ROOT / 'catalog/acceptance/issue38/cycles/EX03-r8-G1'
+        generated = (cycle / 'generated.robin').read_text(encoding='utf-8')
+        recopy = (cycle / 'pad-recopy-before-run1.robin').read_text(encoding='utf-8')
+        diff = json.loads((cycle / 'pad-recopy-diff.json').read_text(encoding='utf-8'))
+        pad = json.loads(
+            (cycle / 'pad-import-and-recopy.json').read_text(encoding='utf-8')
+        )
+        status = json.loads(
+            (cycle / 'acceptance-status.json').read_text(encoding='utf-8')
+        )
+        protected = json.loads(
+            (cycle / 'protected-files-after.json').read_text(encoding='utf-8')
+        )
+        run1 = json.loads((cycle / 'run1/not-run.json').read_text(encoding='utf-8'))
+        run2 = json.loads((cycle / 'run2/not-run.json').read_text(encoding='utf-8'))
+
+        self.assertEqual(
+            r8_builder.sha256(cycle / 'generated.robin'),
+            '711bd5b3a5eb1cba48f6872cd5aa8f718ab3534de4d0e069d5fd1eb7b9d1ed89',
+        )
+        self.assertEqual(
+            r8_builder.sha256(cycle / 'pad-recopy-before-run1.robin'),
+            '3340cd988d6ed76dc249edc833be33869c530d0b37ddf223807ac86eaef9329f',
+        )
+        self.assertNotEqual(generated, recopy)
+        self.assertEqual(diff['differing_line_count'], 30)
+        self.assertEqual(diff['differing_lines'][0], 31)
+        self.assertEqual(diff['differing_lines'][-1], 114)
+        for record in diff['differences']:
+            expected = record['generated'].replace(r'\[', r'\\[').replace(r'\]', r'\\]')
+            self.assertEqual(record['pad_recopy'], expected, record['line'])
+
+        self.assertEqual(pad['import']['designer_action_count'], 110)
+        self.assertEqual(pad['import']['designer_variable_count'], 45)
+        self.assertTrue(pad['import']['saved'])
+        self.assertFalse(pad['import']['execution_requested'])
+        self.assertFalse(
+            pad['recopy_after_save_before_run1']['lf_normalized_exact_generated_robin']
+        )
+        self.assertEqual(
+            pad['decision']['status'], 'FAIL_UNMODIFIED_IMPORT_SAVE_RECOPY_MISMATCH'
+        )
+        self.assertEqual(status['generation']['normal_m365_send_count'], 1)
+        self.assertEqual(status['generation']['resend_count'], 0)
+        self.assertFalse(status['decision']['accepted'])
+        self.assertEqual(status['runs']['pad_runs_used'], 0)
+        self.assertEqual(run1['pad_run_invocations'], 0)
+        self.assertEqual(run2['pad_run_invocations'], 0)
+        self.assertFalse(run1['runtime_output_exists'])
+        self.assertEqual(protected['protected_file_count'], 199)
+        self.assertEqual(protected['mismatch_count'], 0)
+        self.assertEqual(protected['status'], 'PASS_UNCHANGED')
+
     def test_r8_rebuild_is_byte_identical_and_existing_destination_refused(self):
         with tempfile.TemporaryDirectory() as directory:
             destination = Path(directory) / 'r8'

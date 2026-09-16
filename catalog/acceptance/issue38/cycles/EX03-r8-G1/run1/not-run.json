@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R8-G1-RUN1",
+  "recorded_at": "2026-09-17T05:34:21.0650289+09:00",
+  "pad_run_invocations": 0,
+  "status": "NOT_RUN_STOP_RULE_TRIGGERED_PRE_RUN_RECOPY_MISMATCH",
+  "reason": "The saved dedicated flow's 110-action re-copy differed from the unmodified Copilot generation on 30 RunScript lines. Execution was not requested.",
+  "runtime_output_exists": false,
+  "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+  "template_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+}
