@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R9-G1",
+  "base_commit": "969a64e41638cc1e0ffca64ef7b6ed1668b80027",
+  "checks": {
+    "base_commit_matches_frozen_r9": true,
+    "fixed_fixture_spec_request_expected_hashes_match": true,
+    "r9_instruction_bundle_manifest_support_hashes_match": true,
+    "r9_all_evidence_input_hashes_match": true,
+    "r9_teaching_test_independence_pass": true,
+    "r9_teaching_robin_and_script_byte_identical_to_r8": true,
+    "r9_teaching_robin_bracket_backslashes_zero": true,
+    "r9_fidelity_contract_in_bundle": true,
+    "fixed_complete_answer_absent_from_r9_bundle": true,
+    "grader_only_values_absent_from_submitted_body": true,
+    "independent_example_data_absent_from_submitted_body": true,
+    "independent_source_forbidden_runtime_actions_absent": true,
+    "r8_one_send_consumed_and_no_resend": true,
+    "r8_stop_before_run1_preserved": true,
+    "work_exists_and_matches_template": true,
+    "output_absent": true
+  },
+  "hashes": {
+    "submitted_body": "f6c6e59d719548ba54d6207fc6d6499a9ae7c699339ac855e3d4ea4a6f26aee4",
+    "instruction": "a699dd910a4b0529fc71c9b8045b845bf49b8a407df9da88027a0ca0ab0f51fa",
+    "bundle": "b402a6c78fb39cb68dd4111590122b9f9be3364609358fd58a9ad3880d29b993",
+    "manifest": "1b64005c85aee3215160c9381d956a64531863b5d838d9091009fded5007f540",
+    "robin_support": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb",
+    "script_support": "65b86b0e5be4ec2da30e57a6bd858e395d1103da2d05ab2e7607362772d1dfd9",
+    "fidelity_support": "321ee7f2ac09c7a4410fcc2680f4b87fb8a6e1fed6d1074f0c6a7b23cefd912c",
+    "work_and_template": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "input_a": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "input_b": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+  },
+  "counts": {
+    "protected_files": 233,
+    "submitted_body_utf16_units": 7548,
+    "submitted_body_utf8_bytes": 18029,
+    "submitted_body_lines": 82,
+    "teaching_backslash_open_bracket": 0,
+    "teaching_backslash_close_bracket": 0
+  },
+  "decision": {
+    "local_checkpoint": "PASS",
+    "browser_staging": "NOT_STARTED_REQUIRES_NEW_ACTION_TIME_CONFIRMATION",
+    "send": "NOT_SENT_REQUIRES_NEW_ACTION_TIME_CONFIRMATION",
+    "copilot_generation": "NOT_STARTED",
+    "pad_run1": "NOT_STARTED",
+    "pad_run2": "NOT_STARTED"
+  }
+}
