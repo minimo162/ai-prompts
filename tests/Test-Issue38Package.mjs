@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const requestedVersion=process.argv[2] ?? '20260915-excel-r1';
-assert.ok(['20260915-excel-r1','20260915-excel-r2','20260915-excel-r3','20260915-excel-r4','20260915-excel-r5'].includes(requestedVersion));
+assert.ok(['20260915-excel-r1','20260915-excel-r2','20260915-excel-r3','20260915-excel-r4','20260915-excel-r5','20260916-excel-r6'].includes(requestedVersion));
 const version=path.join(root,'copilot/versions',requestedVersion);
 const read=p=>fs.readFileSync(p);
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
@@ -44,7 +44,7 @@ if(requestedVersion!=='20260915-excel-r1'){
   for(const n of ['00-Index','04-Office-PDF','06-Examples']){
     const content=text(path.join(version,`knowledge/PAD-Robin-${n}.txt`));
     assert.ok(content.includes(write.toString('utf8').trimEnd()));
-    if(['20260915-excel-r4','20260915-excel-r5'].includes(requestedVersion)) {
+    if(['20260915-excel-r4','20260915-excel-r5','20260916-excel-r6'].includes(requestedVersion)) {
       assert.ok(content.includes('型識別アクション・厳密型比較のPAD原文は未採取'));
       assert.ok(content.includes('書式・寸法558差分のFAIL'));
       assert.ok(content.includes('2Run終了を観測済み'));
@@ -79,6 +79,54 @@ if(requestedVersion==='20260915-excel-r5') {
   assert.equal(manifest.status,'FROZEN_CANDIDATE_SCOPED_TYPE_IDENTITY_NOT_LIVE_ACCEPTED');
   assert.equal(manifest.base_candidate,'20260915-excel-r4');
   assert.equal(manifest.base_commit,'78ccbcf10551542d7891ac25af6a2445a3381443');
+}
+if(requestedVersion==='20260916-excel-r6') {
+  for(const [p,h] of Object.entries(manifest.evidence_inputs)) assert.equal(sha(read(path.join(root,p))),h,p);
+  const r5=path.join(root,'copilot/versions/20260915-excel-r5');
+  for(const name of ['PAD-Robin-01-Basics.txt','PAD-Robin-02-Control.txt','PAD-Robin-03-Files.txt','PAD-Robin-05-UI-Web.txt']) {
+    assert.deepEqual(
+      read(path.join(version,'knowledge',name)),
+      read(path.join(r5,'knowledge',name)),
+      'unchanged r5 knowledge retained byte-for-byte: '+name,
+    );
+  }
+  assert.equal(manifest.support_files.length,1);
+  const supportRecord=manifest.support_files[0];
+  const supportPath=path.join(version,supportRecord.path);
+  const support=read(supportPath);
+  assert.equal(support.length,supportRecord.bytes);
+  assert.equal(sha(support),supportRecord.sha256);
+  assert.equal(supportRecord.runtime,'embedded_in_robin_not_loaded_from_disk');
+  assert.equal(manifest.evidence.candidate_script_sha256,sha(support));
+  const probeRoot=path.join(root,'catalog/acceptance/issue38/probes/percent-text-write');
+  for(const name of ['captured-final.robin','captured-powershell-format-action-v2.robin','active-excel-format-sandwich.ps1.txt']) {
+    const raw=read(path.join(probeRoot,name));
+    assert.ok(bundle.toString('utf8').includes(raw.toString('utf8').trimEnd()),'measured percent-text evidence included: '+name);
+  }
+  assert.ok(bundle.toString('utf8').includes(support.toString('utf8').trimEnd()),'complete r6 embedded script included');
+  assert.ok(instruction.includes('F6や100%だけを後から修正しません'));
+  assert.ok(instruction.includes('finallyで元NumberFormatへ復元します'));
+  assert.ok(instruction.includes('集計先F7/F8/F9、追記先D5/D6/F5/F6'));
+  assert.ok(!instruction.includes('GetType('));
+  for(const hiddenValue of ['春','夏','秋','項目甲','項目乙','-4.5','6.25']) assert.ok(!instruction.includes(hiddenValue));
+  const examples=text(path.join(version,'knowledge/PAD-Robin-06-Examples.txt'));
+  const r6Example=examples.split('EX03 r6統合構成例（実装者候補。Copilot生成・PAD実行前は未受入）')[1];
+  assert.ok(r6Example,'r6 example marker');
+  assert.equal((r6Example.match(/_ValueTypeMatch TO SourceCellJson = SavedCellJson/g) ?? []).length,12);
+  assert.equal((r6Example.match(/Scripting\.RunPowershellScript\.RunScript/g) ?? []).length,1);
+  assert.equal((r6Example.match(/Excel\.WriteToExcel\.WriteCell Instance: Work Value: NumberSource/g) ?? []).length,5);
+  assert.equal((r6Example.match(/Json=> TextSource\dJson/g) ?? []).length,7);
+  assert.ok(!r6Example.includes('Excel.WriteToExcel.WriteCell Instance: Work Value: Data1'));
+  assert.ok(!r6Example.includes('Excel.WriteToExcel.WriteCell Instance: Work Value: Data2'));
+  const supportText=support.toString('utf8');
+  assert.ok(/try \{\s*\$cell\.NumberFormat = '@'[\s\S]*?finally \{\s*\$cell\.NumberFormat = \$beforeNumberFormat/.test(supportText));
+  assert.ok(supportText.includes("if ($matches.Count -ne 1)"));
+  assert.ok(supportText.includes("$allowedTargets[$sheetName] -cnotcontains $cellAddress"));
+  assert.equal(manifest.evidence.percent_text_flow_sha256,'0b86dd150dac532e2c73f5a407a7c396b4153bbc3052e03a65a8c84c6dab6f46');
+  assert.equal(manifest.evidence.percent_text_action_sha256,'aae8f3d12b458e7bba0bf7759ad0f2c15720bbc803f032e5c86e3621edc16538');
+  assert.equal(manifest.status,'FROZEN_CANDIDATE_EX03_PERCENT_TEXT_INTEGRATED_NOT_LIVE_ACCEPTED');
+  assert.equal(manifest.base_candidate,'20260915-excel-r5');
+  assert.equal(manifest.base_commit,'1701d8dd3ca88c2c60de443205e54a764e578fc9');
 }
 assert.equal(sha(read(frozen)),manifest.acceptance_freeze_sha256);
 for(const [p,h] of Object.entries(JSON.parse(read(frozen)).files)) assert.equal(sha(read(path.join(path.dirname(frozen),p))),h,p);

@@ -1,0 +1,88 @@
+$ErrorActionPreference = 'Stop'
+$targetPath = 'C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\runs\EX03-attempt1\work.xlsx'
+$writes = @(
+    [ordered]@{ Source = 'Data1[0][0]'; Sheet = '集計先'; Cell = 'F7'; Json = '%TextSource1Json%' },
+    [ordered]@{ Source = 'Data1[1][0]'; Sheet = '集計先'; Cell = 'F8'; Json = '%TextSource2Json%' },
+    [ordered]@{ Source = 'Data1[2][0]'; Sheet = '集計先'; Cell = 'F9'; Json = '%TextSource3Json%' },
+    [ordered]@{ Source = 'Data2[0][0]'; Sheet = '追記先'; Cell = 'D5'; Json = '%TextSource4Json%' },
+    [ordered]@{ Source = 'Data2[1][0]'; Sheet = '追記先'; Cell = 'D6'; Json = '%TextSource5Json%' },
+    [ordered]@{ Source = 'Data2[0][2]'; Sheet = '追記先'; Cell = 'F5'; Json = '%TextSource6Json%' },
+    [ordered]@{ Source = 'Data2[1][2]'; Sheet = '追記先'; Cell = 'F6'; Json = '%TextSource7Json%' }
+)
+$allowedTargets = @{
+    '集計先' = @('F7', 'F8', 'F9')
+    '追記先' = @('D5', 'D6', 'F5', 'F6')
+}
+$excel = [Runtime.InteropServices.Marshal]::GetActiveObject('Excel.Application')
+$workbook = $null
+$audit = @()
+try {
+    $matches = @()
+    for ($index = 1; $index -le $excel.Workbooks.Count; $index++) {
+        $candidate = $excel.Workbooks.Item($index)
+        if ([string]::Equals([IO.Path]::GetFullPath([string]$candidate.FullName), $targetPath, [StringComparison]::OrdinalIgnoreCase)) {
+            $matches += $candidate
+        }
+        else {
+            [void][Runtime.InteropServices.Marshal]::ReleaseComObject($candidate)
+        }
+    }
+    if ($matches.Count -ne 1) { throw ('Expected one exact target workbook, found ' + $matches.Count) }
+    $workbook = $matches[0]
+    foreach ($write in $writes) {
+        $sheetName = [string]$write.Sheet
+        $cellAddress = [string]$write.Cell
+        if (-not $allowedTargets.ContainsKey($sheetName) -or $allowedTargets[$sheetName] -cnotcontains $cellAddress) {
+            throw ('Target is outside the fixed EX03 text mapping: ' + $sheetName + '!' + $cellAddress)
+        }
+        $payload = [string]$write.Json | ConvertFrom-Json
+        if ($payload.probe -isnot [string]) { throw ('Fixed text source is not a string: ' + $write.Source) }
+        $worksheet = $null
+        $cell = $null
+        try {
+            $worksheet = $workbook.Worksheets.Item($sheetName)
+            $cell = $worksheet.Range($cellAddress)
+            if ([bool]$cell.HasFormula) { throw ('Refusing to replace a formula cell: ' + $sheetName + '!' + $cellAddress) }
+            $beforeValue = $cell.Value2
+            $beforeValueType = if ($null -eq $beforeValue) { 'null' } else { $beforeValue.GetType().FullName }
+            $beforeNumberFormat = [string]$cell.NumberFormat
+            $beforePrefixCharacter = [string]$cell.PrefixCharacter
+            try {
+                $cell.NumberFormat = '@'
+                $cell.Value2 = [string]$payload.probe
+            }
+            finally {
+                $cell.NumberFormat = $beforeNumberFormat
+            }
+            $afterValue = $cell.Value2
+            $afterValueType = if ($null -eq $afterValue) { 'null' } else { $afterValue.GetType().FullName }
+            $afterNumberFormat = [string]$cell.NumberFormat
+            $afterPrefixCharacter = [string]$cell.PrefixCharacter
+            if ($afterValue -isnot [string] -or $afterValue -cne [string]$payload.probe) { throw ('Text value/type was not preserved: ' + $sheetName + '!' + $cellAddress) }
+            if ($afterNumberFormat -cne $beforeNumberFormat) { throw ('Original number format was not restored: ' + $sheetName + '!' + $cellAddress) }
+            if ($afterPrefixCharacter -cne $beforePrefixCharacter -or -not [string]::IsNullOrEmpty($afterPrefixCharacter)) { throw ('Prefix character changed or remained: ' + $sheetName + '!' + $cellAddress) }
+            if ([bool]$cell.HasFormula) { throw ('A formula remained after text write: ' + $sheetName + '!' + $cellAddress) }
+            $audit += [ordered]@{
+                source = $write.Source
+                target = $sheetName + '!' + $cellAddress
+                before = $beforeValue
+                beforeType = $beforeValueType
+                beforeFormat = $beforeNumberFormat
+                beforePrefix = $beforePrefixCharacter
+                after = $afterValue
+                afterType = $afterValueType
+                afterFormat = $afterNumberFormat
+                afterPrefix = $afterPrefixCharacter
+            }
+        }
+        finally {
+            if ($null -ne $cell) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($cell) }
+            if ($null -ne $worksheet) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($worksheet) }
+        }
+    }
+    $audit | ConvertTo-Json -Compress
+}
+finally {
+    if ($null -ne $workbook) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($workbook) }
+    if ($null -ne $excel) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($excel) }
+}

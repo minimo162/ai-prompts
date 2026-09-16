@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "version": "20260916-excel-r6",
+  "status": "FROZEN_CANDIDATE_EX03_PERCENT_TEXT_INTEGRATED_NOT_LIVE_ACCEPTED",
+  "inherits_live_acceptance": false,
+  "base_commit": "1701d8dd3ca88c2c60de443205e54a764e578fc9",
+  "base_version": "20260913e",
+  "copy_rule_version": "20260915-copyable-r2",
+  "instruction_path": "agent-instructions.txt",
+  "instruction_sha256": "1211ee45f80427a474d15d92dbfda3b7c90d2a78b9b7520aadb76f5f22c82fe4",
+  "instruction_utf16": 6545,
+  "bundle_path": "knowledge/PAD-Robin-Knowledge-Bundle.txt",
+  "bundle_sha256": "9c566e7f85a431f1869302c6a40985e2f81237f17ac4fbbdc9a73e62a646b580",
+  "source_files": [
+    {
+      "bytes": 29720,
+      "sha256": "62e0855ce2ee57e80475b92f47644ede08d50dd1d3085c04776fc7366424639f",
+      "path": "knowledge/PAD-Robin-00-Index.txt"
+    },
+    {
+      "bytes": 12741,
+      "sha256": "abe921c3e7aa19ce5410fe746fe4c4f5c7fc7ee3ffd18c4b6747686a41fdbf31",
+      "path": "knowledge/PAD-Robin-01-Basics.txt"
+    },
+    {
+      "bytes": 17275,
+      "sha256": "19f8698fba5702a42dfd0322ce90be0f26c3fd4ae048f13bbff35705bd4397fe",
+      "path": "knowledge/PAD-Robin-02-Control.txt"
+    },
+    {
+      "bytes": 25350,
+      "sha256": "a541082a650a7cfae9d2b2cfb47026d7b8ee81bc542f30ba409af5e6291c9aea",
+      "path": "knowledge/PAD-Robin-03-Files.txt"
+    },
+    {
+      "bytes": 56434,
+      "sha256": "433c292c290b1936db1b2b42ff9f74cbc97069124e44641e46e71ed057251ab9",
+      "path": "knowledge/PAD-Robin-04-Office-PDF.txt"
+    },
+    {
+      "bytes": 8995,
+      "sha256": "e62a78aa92941984bacbdc59d4c6561104a9eca5b9d0e45b817f539e4558d867",
+      "path": "knowledge/PAD-Robin-05-UI-Web.txt"
+    },
+    {
+      "bytes": 60921,
+      "sha256": "5932375e212826ca3b54a1c4cc24fc8253a636003ff6aeebca2a4b1685893805",
+      "path": "knowledge/PAD-Robin-06-Examples.txt"
+    }
+  ],
+  "acceptance_freeze_sha256": "ac94fb92d2db99eab4f3b7abd18befa13c5e78572377de068368d7cabc3c79f0",
+  "evidence": {
+    "copilot": "NOT_RUN_AT_FREEZE",
+    "pad": "R6_CANDIDATE_NOT_RUN_PROBE_NOT_INHERITED",
+    "sheet_probe_scope": "Historical editable Sheet1 only",
+    "sheet_probe_sha256": "c7f3fa0408463de8ee36bf5b865720c64799f4a92cbf2a3b7efee4cfa1907c29",
+    "matrix_write": "Two prior probe runs completed; 12 target cells match; 558 XML differences retained",
+    "matrix_write_sha256": "39ceb68d225f61cf87e8c4c173fe3993699d52ff9e23b0457cb614945e423207",
+    "type_comparison": "DATATABLE_NUMBER_TEXT_JSON_IDENTITY_TWO_RUNS_SCOPED",
+    "type_comparison_sha256": "02d664b5ae246bd57e2b44d454a5cd3cb01991a78b6fff8548d208759f1b1fb6",
+    "type_comparison_scope": "TypeProbe!A2:B2 number 1 versus text 1 only; full EX02 connection requires r5 live acceptance",
+    "percent_text_write": "PAD_TWO_RUN_FIXED_100_PERCENT_TEXT_AND_NUMERIC_SCOPE",
+    "percent_text_flow_sha256": "0b86dd150dac532e2c73f5a407a7c396b4153bbc3052e03a65a8c84c6dab6f46",
+    "percent_text_action_sha256": "aae8f3d12b458e7bba0bf7759ad0f2c15720bbc803f032e5c86e3621edc16538",
+    "percent_text_script_sha256": "748c7e512353cc487d572fe81fc6487ece910f8538a2bd55b1f8d535b0c799ee",
+    "percent_text_scope": "Synthetic text 100% and numeric 42.5 only; r6 seven-cell adaptation requires same-version live acceptance",
+    "candidate_adaptation": "EXCEPTION_SAFE_FIXED_EX03_SEVEN_TEXT_POSITIONS_NOT_LIVE_ACCEPTED",
+    "candidate_script_sha256": "d0a5df36516fcf4e27f6d789300ee5a03789aba8176571b1ab86fe84f15fba1a"
+  },
+  "base_candidate": "20260915-excel-r5",
+  "evidence_inputs": {
+    "catalog/acceptance/issue38/probes/output-guard/captured-uia.robin": "477b7c174b1d74015ed7ee9ff3f0cbf3e768ec6adc9cc1e4ea05eb56a9c67272",
+    "catalog/acceptance/issue38/probes/scalar-compare/captured-full.robin": "0b13b8aed3130022535b32020647b7b8e69dd3e7c1d498c342877567271e71d2",
+    "catalog/acceptance/issue38/probes/matrix-write/assembled-probe-rev2.robin": "46ca4731a2c83c8b5a9e0ad069a1da72f11a7e6030a45a2352c37d11812a57aa",
+    "catalog/acceptance/issue38/probes/output-guard/two-run-result.json": "2c6c9332e6cfbfb740475f637f6292210c587efab70a1b815611a338a120d501",
+    "catalog/acceptance/issue38/probes/scalar-compare/two-run-result.json": "7c4e8d23a00d88017a5284dcb72cc63baf38364c956bd555911abd5f22f1636c",
+    "catalog/acceptance/issue38/probes/matrix-write/two-run-result.json": "3f292fc60c2a4f50733e49a3b6e204a4fb568c73a0708ec1112fc73781766bbc",
+    "catalog/acceptance/issue38/probes/datatable-type-identity/captured-final.robin": "02d664b5ae246bd57e2b44d454a5cd3cb01991a78b6fff8548d208759f1b1fb6",
+    "catalog/acceptance/issue38/probes/datatable-type-identity/acceptance.json": "a28570756df23d32a509877f0940701e792de9dfe43b9b584413e7c8d336aabc",
+    "catalog/acceptance/issue38/probes/datatable-type-identity/capture-integrity.json": "2eb7167ace82202a046565034f5c1dd90bbd231a74b5b1d7281f2a203e069165",
+    "catalog/acceptance/issue38/probes/datatable-type-identity/verification.json": "563c9cb19fc9edc586e5a3b0c904df5a023b25e5be99caf1883bcd464c0dfb58",
+    "catalog/acceptance/issue38/probes/datatable-type-identity/run1-reconciliation.json": "043b64434786289de98e67e93aba2df46fbdad7880027afcb7459554abc3d5eb",
+    "catalog/acceptance/issue38/probes/datatable-type-identity/run2-reconciliation.json": "f090fb2d2ef7986baa7fe1b072397e133da3b49936c6dc1b11f89f1bf2bfbba4",
+    "catalog/acceptance/issue38/probes/percent-text-write/captured-final.robin": "0b86dd150dac532e2c73f5a407a7c396b4153bbc3052e03a65a8c84c6dab6f46",
+    "catalog/acceptance/issue38/probes/percent-text-write/captured-powershell-format-action-v2.robin": "aae8f3d12b458e7bba0bf7759ad0f2c15720bbc803f032e5c86e3621edc16538",
+    "catalog/acceptance/issue38/probes/percent-text-write/active-excel-format-sandwich.ps1.txt": "748c7e512353cc487d572fe81fc6487ece910f8538a2bd55b1f8d535b0c799ee",
+    "catalog/acceptance/issue38/probes/percent-text-write/acceptance.json": "948688ef0c21ece63b140d78a08a7b32e144957d1b563ec3f80521b1e7863155",
+    "catalog/acceptance/issue38/probes/percent-text-write/two-run-result.json": "3bc333dfe08b540e64d0e56e81736f69610061173eaba7d30eef5aa4d09e5896",
+    "catalog/acceptance/issue38/probes/percent-text-write/verification.json": "488f9cbd68108f40e389c3bcc6e115c8d78325336f290e28e032ed5a67790b0d",
+    "catalog/acceptance/issue38/probes/percent-text-write/report.md": "a98461642968d5c80811bb2ab38c6ce320619c58ed0b3fd59d6c3bc57be16f8a"
+  },
+  "builder": "tools/Build-Issue38Ex03CandidateR6.py",
+  "support_files": [
+    {
+      "path": "support/EX03-TextWrite-FormatSandwich.ps1.txt",
+      "sha256": "d0a5df36516fcf4e27f6d789300ee5a03789aba8176571b1ab86fe84f15fba1a",
+      "bytes": 4944,
+      "runtime": "embedded_in_robin_not_loaded_from_disk"
+    }
+  ]
+}

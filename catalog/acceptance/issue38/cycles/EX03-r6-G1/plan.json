@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R6-G1",
+  "base_commit": "1701d8dd3ca88c2c60de443205e54a764e578fc9",
+  "purpose": "Same-version live acceptance of the fixed EX03 percent-text successor",
+  "candidate": {
+    "version": "20260916-excel-r6",
+    "instruction_path": "copilot/versions/20260916-excel-r6/agent-instructions.txt",
+    "instruction_sha256": "1211ee45f80427a474d15d92dbfda3b7c90d2a78b9b7520aadb76f5f22c82fe4",
+    "bundle_path": "copilot/versions/20260916-excel-r6/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "bundle_sha256": "9c566e7f85a431f1869302c6a40985e2f81237f17ac4fbbdc9a73e62a646b580",
+    "manifest_path": "copilot/versions/20260916-excel-r6/manifest.json",
+    "manifest_sha256": "207dfa10f34f0eb7c09a3a39ecfb25c24f870fb5e639b87a0fbce0683cbc9f89",
+    "support_path": "copilot/versions/20260916-excel-r6/support/EX03-TextWrite-FormatSandwich.ps1.txt",
+    "support_sha256": "d0a5df36516fcf4e27f6d789300ee5a03789aba8176571b1ab86fe84f15fba1a",
+    "inherits_live_acceptance": false
+  },
+  "fixed_inputs": {
+    "request": {
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370"
+    },
+    "spec": {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380"
+    },
+    "grader_only_expected": {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+      "send_to_copilot": false
+    },
+    "input_a": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力い.xlsx",
+      "sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9"
+    },
+    "input_b": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力ろ.xlsx",
+      "sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+    },
+    "template": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+    },
+    "work": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/work.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "must_match_template_before_each_run": true
+    },
+    "output": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx",
+      "must_be_absent_before_each_run": true
+    }
+  },
+  "integration": {
+    "text_sources": 7,
+    "numeric_sources": 5,
+    "text_write": "one embedded PowerShell action before SaveAs; each fixed text target written once",
+    "numeric_write": "five ordinary numeric WriteCell actions",
+    "workbook_guard": "exact absolute FullName and exactly one matching active workbook",
+    "cell_guard": "seven fixed EX03 text target pairs only; formula targets refused",
+    "format_restore": "per-cell inner finally restores captured NumberFormat before validation",
+    "post_fix": false,
+    "external_runtime_file": false
+  },
+  "submission": {
+    "body_path": "catalog/acceptance/issue38/cycles/EX03-r6-G1/submitted-body.txt",
+    "body_sha256": "a9051689e227e74a904c20fb860f89935b5c393164629869bebbcc923e93903e",
+    "body_contract": "unchanged full r6 instructions followed by unchanged EX03 request",
+    "attachment_path": "copilot/versions/20260916-excel-r6/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "attachment_sha256": "9c566e7f85a431f1869302c6a40985e2f81237f17ac4fbbdc9a73e62a646b580",
+    "normal_m365_new_chat": true,
+    "model": "Think Deeper",
+    "grader_only_expected_excluded": true,
+    "completed_robin_excluded": true
+  },
+  "limits": {
+    "max_generation_requests": 1,
+    "max_pad_runs": 2,
+    "no_regeneration_or_manual_robin_repair": true,
+    "stop_on_refusal_safety_issue_mismatch_or_unknown_result": true,
+    "run2_requires_run1_terminal_and_artifact_preserved": true
+  },
+  "pad": {
+    "new_dedicated_flow": true,
+    "power_fx": "OFF",
+    "unmodified_code_copy_only": true,
+    "save_and_recopy_before_run1": true,
+    "preserve_run1_before_run2": true,
+    "restore_work_from_frozen_template_before_run2": true,
+    "output_absent_before_run2": true
+  },
+  "acceptance": {
+    "scope": "fixed EX03 text/number case and r6 package only",
+    "required": [
+      "one normal-M365 send with exact full body and actual same-version bundle",
+      "unmodified generated Robin, dedicated-flow paste/save/recopy",
+      "Run1 terminal confirmation before Run2",
+      "two PAD runs with 12 source/readback JSON type checks",
+      "all 12 fixed expected values, types, and positions after save/reopen",
+      "F6 text 100%, original effective format, empty prefix, and no formula",
+      "all outside cells, formulas, effective formats and dimensions unchanged",
+      "all input/template original SHA values unchanged"
+    ],
+    "no_old_pass_inheritance": true,
+    "no_other_case_or_unconfirmed_type_generalization": true
+  },
+  "github_write": false,
+  "status": "READY_AFTER_NON_LIVE_CHECKS"
+}

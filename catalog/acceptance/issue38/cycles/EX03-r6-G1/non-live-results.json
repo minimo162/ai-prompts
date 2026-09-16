@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R6-G1",
+  "finished_utc": "2026-09-16T09:30:45.0532876Z",
+  "status": "PASS_NON_LIVE_ONLY",
+  "candidate": {
+    "version": "20260916-excel-r6",
+    "instruction_sha256": "1211ee45f80427a474d15d92dbfda3b7c90d2a78b9b7520aadb76f5f22c82fe4",
+    "bundle_sha256": "9c566e7f85a431f1869302c6a40985e2f81237f17ac4fbbdc9a73e62a646b580",
+    "manifest_sha256": "207dfa10f34f0eb7c09a3a39ecfb25c24f870fb5e639b87a0fbce0683cbc9f89",
+    "support_sha256": "d0a5df36516fcf4e27f6d789300ee5a03789aba8176571b1ab86fe84f15fba1a"
+  },
+  "checks": [
+    {
+      "name": "r6 package identity and scope",
+      "command": "node tests/Test-Issue38Package.mjs 20260916-excel-r6",
+      "result": "PASS_NON_LIVE_PACKAGE",
+      "count": 1
+    },
+    {
+      "name": "r5 retained regression",
+      "command": "node tests/Test-Issue38Package.mjs 20260915-excel-r5",
+      "result": "PASS_NON_LIVE_PACKAGE",
+      "count": 1
+    },
+    {
+      "name": "EX03 comparator and r6 guards",
+      "command": "python -m unittest tests/Test-Issue38Ex03.py",
+      "result": "PASS",
+      "count": 5
+    },
+    {
+      "name": "existing EX02, Excel oracle, and EX04 output-guard regression",
+      "command": "python -m unittest tests/Test-Issue38Ex02.py tests/Test-Issue38Excel.py tests/Test-Issue38Ex04ExistingOutput.py",
+      "result": "PASS",
+      "count": 35
+    },
+    {
+      "name": "deterministic r6 rebuild",
+      "result": "PASS_BYTE_IDENTICAL",
+      "count": 11
+    },
+    {
+      "name": "embedded PowerShell parse",
+      "result": "PASS"
+    }
+  ],
+  "static_scope_checks": {
+    "exact_workbook_fullname_and_exactly_one_match": true,
+    "fixed_seven_text_targets_only": true,
+    "formula_target_refusal": true,
+    "inner_finally_restores_original_number_format": true,
+    "empty_unchanged_prefix_required": true,
+    "no_external_runtime_script": true,
+    "no_network_delete_permission_or_settings_change": true,
+    "r5_unmodified_knowledge_files_byte_identical": true,
+    "specific_f6_or_100_percent_post_fix_absent": true
+  },
+  "live": {
+    "m365_copilot_generation": "NOT_STARTED",
+    "pad_run1": "NOT_STARTED",
+    "pad_run2": "NOT_STARTED"
+  }
+}

@@ -1,6 +1,8 @@
 """EX03 fixed-parameter comparator regression; synthetic outputs are not PAD evidence."""
 import importlib.util
+import json
 from pathlib import Path
+import re
 import tempfile
 import unittest
 import xml.etree.ElementTree as ET
@@ -76,6 +78,51 @@ class Ex03Tests(unittest.TestCase):
         self.assertEqual(typed_result['mismatches'][0]['target_cell'], 'G7')
         self.assertEqual(typed_result['mismatches'][0]['grader_expected'], ['number', 21])
         self.assertEqual(typed_result['mismatches'][0]['target_actual'], ['text', '21'])
+
+    def test_r6_text_write_support_is_bounded_and_exception_safe(self):
+        version = ROOT / 'copilot/versions/20260916-excel-r6'
+        manifest = json.loads((version / 'manifest.json').read_text(encoding='utf-8'))
+        support = (version / manifest['support_files'][0]['path']).read_text(encoding='utf-8')
+        self.assertIn(
+            r"C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\runs\EX03-attempt1\work.xlsx",
+            support,
+        )
+        self.assertIn("if ($matches.Count -ne 1)", support)
+        self.assertIn("$allowedTargets[$sheetName] -cnotcontains $cellAddress", support)
+        for target in ['F7', 'F8', 'F9', 'D5', 'D6', 'F5', 'F6']:
+            self.assertIn(f"'{target}'", support)
+        self.assertEqual(len(re.findall(r"Json = '%TextSource\dJson%'", support)), 7)
+        self.assertRegex(
+            support,
+            re.compile(
+                r"try \{\s*\$cell\.NumberFormat = '@'.*?finally \{\s*"
+                r"\$cell\.NumberFormat = \$beforeNumberFormat",
+                re.S,
+            ),
+        )
+        self.assertIn('Refusing to replace a formula cell', support)
+        self.assertIn('Prefix character changed or remained', support)
+        self.assertNotIn('Start-Process', support)
+        self.assertNotIn('Invoke-Expression', support)
+
+    def test_r6_example_is_prewrite_integration_not_f6_postfix(self):
+        examples = (
+            ROOT / 'copilot/versions/20260916-excel-r6/knowledge/PAD-Robin-06-Examples.txt'
+        ).read_text(encoding='utf-8')
+        marker = 'EX03 r6統合構成例（実装者候補。Copilot生成・PAD実行前は未受入）'
+        r6 = examples.split(marker, 1)[1]
+        script_at = r6.index('Scripting.RunPowershellScript.RunScript')
+        first_numeric_at = r6.index('Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource')
+        save_at = r6.index('Excel.SaveExcel.SaveAs')
+        self.assertLess(script_at, first_numeric_at)
+        self.assertLess(first_numeric_at, save_at)
+        self.assertEqual(r6.count('Scripting.RunPowershellScript.RunScript'), 1)
+        self.assertEqual(
+            r6.count('Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource'), 5
+        )
+        self.assertEqual(r6.count('_ValueTypeMatch TO SourceCellJson = SavedCellJson'), 12)
+        self.assertNotIn('Excel.WriteToExcel.WriteCell Instance: Work Value: Data1', r6)
+        self.assertNotIn('Excel.WriteToExcel.WriteCell Instance: Work Value: Data2', r6)
 
 
 if __name__ == '__main__':

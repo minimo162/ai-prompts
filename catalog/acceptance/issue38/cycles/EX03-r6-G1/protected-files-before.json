@@ -1,0 +1,607 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R6-G1",
+  "base_commit": "1701d8dd3ca88c2c60de443205e54a764e578fc9",
+  "files": [
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/acceptance-status.json",
+      "sha256": "08991e61d78fd2dfe512084a27f4b0f45a7d683bb678f1f6b43fb4af630891ca"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/generated.robin",
+      "sha256": "4ab085c52ba6f40fc52a55d910459eb917cb7ea3f4174737879d8bb4e5361f7e"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/generation-result.json",
+      "sha256": "ae94ea24e0f88319a593a9da1810ae1248fc9b5692ac525599f5cab5117209f4"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/generation-safety-audit.json",
+      "sha256": "3881fdf4fb613376adf01d0c5fc6452592e6bda6a71f070f669078cc77312f34"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/live-send.json",
+      "sha256": "65c8d89ac61379fde0c7c6c22f695b639fa67453168289273f098879d1bf8dc2"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/m365-attachment-block.json",
+      "sha256": "762b3a6b2e33b22821ac7f7ae204aac1e61b1abf78f553a28bbdfec48d38e6a8"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/m365-ready-to-send.json",
+      "sha256": "914127dbd70ae00d18756e8631f7a21886541ffcbb0e4a7c1db64e44e5763a8d"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/m365-send-confirmation-blocked.json",
+      "sha256": "e7a234ac9e86da6b287e93f9fa7b27566932f2ee569066cbaeac04f7c5d8d2e6"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/pad-flow-created.json",
+      "sha256": "cf5046fd71695d356d7aa976d4b7d59e82d5ac7986e2b57fe913cd85e46c6ef8"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/pad-flow-validated-after-create.json",
+      "sha256": "8572d714e0dc294ecee7eaeb8dd69217c79b28e20a8df6ae272a704eb545e8f4"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/pad-import-and-recopy.json",
+      "sha256": "4b5d6586c87716554490a82644efbd387286234b938d2b03022735a88ed7bee3"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/pad-paste.json",
+      "sha256": "bb0a5801718b25a958d190c52af167ee029c23147eff182975b10ca293dfaf6e"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/pad-recopy-before-run1.robin",
+      "sha256": "66a77eb39a8695bd8acd02538775705b06b520eadd968fd86fd1096cf45c2393"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/plan.json",
+      "sha256": "1791dd034eef4afc10568e16814f9bcc589671733408963691dd6b7a475fdb83"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/preflight.json",
+      "sha256": "6aacbf4ee5ece1b6b73236ce3269cc7f1883f4366951340b4b8b1be149a064a4"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/protected-files-after.json",
+      "sha256": "f0ea24de74551e33f4c51526cf8575b7fec2c6bb4bb92a4bcfdc5366501ef768"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/protected-files-before.json",
+      "sha256": "9ce9b182abdc68b9c2250d971c1ce74673170ecf1522ff94fffd7c1586bee777"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/review.md",
+      "sha256": "6fbb69f45174641ff410ee34b3b20fd7cba46f208b77514456bc1400958cce2f"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/comparison.json",
+      "sha256": "39b36b421a5b55e7fff14369fb9dc6c2b9efeaa882ed59c8cfdc8bcbdf51ac77"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/native-styles.json",
+      "sha256": "01b4d278023f151db3afae6058c81b5dfceb94b6c20499111ba1fbd1d990a68b"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/pad-f6-json-variables.json",
+      "sha256": "4cc25a2867fa83fbe0ca23e9efe770d0583c5f2b32111da69c764ace502b0494"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/pad-run.json",
+      "sha256": "b8d30de92f2d30a53dc6dd0944df23a9351ce0b3ecfe94893f0e89d01daaeaf7"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/pad-variables.json",
+      "sha256": "d1a299a17333be436b85c28bb7d84f5d91deca86b72299ed7c16b8eb7dc21e83"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/preflight.json",
+      "sha256": "a0775a9766e15e22265effffb974679ed662396ced4119204908ec9c50f781e4"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/result.xlsx",
+      "sha256": "726e2a0bea07e690f8945bc099b3e39aea6bf9d33755440d9245ec0dedb83475"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/typed-transfer.json",
+      "sha256": "6d0bc329c853380e666695aa606c72be73b3479072284aaa41bcf2fe2bd02f0f"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/verification.json",
+      "sha256": "d6cb5552c843b49dadef7222d7d6173022d7bee3043ba03ddbb1f94121aad1b5"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/work.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/run2/not-run.json",
+      "sha256": "efe3d824ace8cb48a6303f62b2da117b1ee8b9f45bdf671851cc9b62e3f42686"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/submitted-body.txt",
+      "sha256": "277ee66f9765e57aa2d8b4c48b680b2a573cd37628284420d147322f85c0a9ca"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/two-run-comparison.json",
+      "sha256": "90aab2ad5aefdf122004a2b86fd827b03f72d922088ea8dda0db2110df82d612"
+    },
+    {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d"
+    },
+    {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+    },
+    {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力い.xlsx",
+      "sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9"
+    },
+    {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力ろ.xlsx",
+      "sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+    },
+    {
+      "path": "catalog/acceptance/issue38/freeze.json",
+      "sha256": "ac94fb92d2db99eab4f3b7abd18befa13c5e78572377de068368d7cabc3c79f0"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/acceptance.json",
+      "sha256": "948688ef0c21ece63b140d78a08a7b32e144957d1b563ec3f80521b1e7863155"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/action-inventory.json",
+      "sha256": "36f12818ec2b7098c4eff1f3706ca63eace6c1377d77a2931fd19407e67a6e0b"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/active-excel-format-sandwich.ps1.txt",
+      "sha256": "748c7e512353cc487d572fe81fc6487ece910f8538a2bd55b1f8d535b0c799ee"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/Build-Acceptance.ps1",
+      "sha256": "ab92ba94634eb39cc08ca1ab1435f4c03fad692d1d86d07112ddda297acf543a"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/Build-FormatSandwichCandidate.ps1",
+      "sha256": "55ab45f8d36aedc7c4fdb434f46086edaff3c361976b4ff3d324a4905aaeb972"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/Build-SyntheticProbe.mjs",
+      "sha256": "4b52f39d723f44bce0a12f3340e5f2f7375f09455302501e5043186cc671810e"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-format-sandwich-v2.robin",
+      "sha256": "48700166d91dd3ac5082df91048e4e50dd21ad2933f4dfb4155cde3063bedd18"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-format-sandwich.robin",
+      "sha256": "f9d5679195e86de7790a30cf23cfcd7cf1404f0e3268491ff72e0eaf9cf0e418"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-prefix-text.robin",
+      "sha256": "e91fec0cd24dca7844569eef83a66cfae8f36c8071586355bd4b2ab09ec364c3"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-prefix-text/artifact.json",
+      "sha256": "0efb6a2e119aa49e8d21436fb726e2c17922678bd3b82a80b75b7c8604329b89"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-prefix-text/captured-pre-run.robin",
+      "sha256": "9b3d667e0737561b0783a61a5c4ef95e3f5a4cba7ac8847302cafe4a90a36181"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-prefix-text/pad-run.json",
+      "sha256": "559dea19818268ccf7c5014b280be7d0cec3fa96e2229929ad5a9dd85e495a5a"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-prefix-text/paste.json",
+      "sha256": "f707b575f091d3cf139b64c9fc338d9e9e33c757ab2e92d65a70998a1425af64"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-prefix-text/result.xlsx",
+      "sha256": "74542386fa2db812634885a834787e4e368957afb5fa86debf80e5dbc70baf04"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-prefix-text/runtime-result.xlsx",
+      "sha256": "74542386fa2db812634885a834787e4e368957afb5fa86debf80e5dbc70baf04"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-prefix-text/style.json",
+      "sha256": "a6bc28aeecdc601e626ce01326ddb28db6922eb2f3c36d25c64e9b5159ad771f"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-prefix-text/variables.json",
+      "sha256": "b04f1dc408d29c98dbd7bbe9d1115c74c144a74f868d08018a5238e112b37a6a"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-prefix-text/verification.json",
+      "sha256": "7569de2228eeb34dabbfa451da29c0fd3543b304b2c4da0f34d61ad6e73e911d"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-prefix-text/work.xlsx",
+      "sha256": "13855dcaf2fa8a9dd8d282197fd74c2f138d9ebc5552debbedbc5886296d2bde"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-scalar-direct-paste.json",
+      "sha256": "a54418285a0deb0a359e23fd25a85f79cf2615e0c0a3700e4686759567dc7ffc"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-scalar-direct-run.json",
+      "sha256": "2a07a4b5d80028cb7cf2680ef8b0ad5e54661267d25821f522d1f3ae9f32bfc7"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-scalar-direct-style.json",
+      "sha256": "79899d10567a15f9bcb3fb96659022b426cb6266d435c72b07608daaeb269c3b"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-scalar-direct-variables.json",
+      "sha256": "975d44b7094764627ecdaca631fd938f1da7474162d5bb5645366663f10c9bd1"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-scalar-direct.robin",
+      "sha256": "a86c84bc3199f160e58fb4d547af121879df312730230fba99b82b3ee7aa80a4"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-scalar-direct/artifact.json",
+      "sha256": "8a2d14f357022f876b8df63327a4bd93f52ff420f151b248e5220eef032e9fdb"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-scalar-direct/result.xlsx",
+      "sha256": "4c132d498bb282497db60a99e1c721e6a8025e7dd93b34de12c12c478a426264"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-scalar-direct/runtime-result.xlsx",
+      "sha256": "4c132d498bb282497db60a99e1c721e6a8025e7dd93b34de12c12c478a426264"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/candidate-scalar-direct/work.xlsx",
+      "sha256": "13855dcaf2fa8a9dd8d282197fd74c2f138d9ebc5552debbedbc5886296d2bde"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/Capture-PadProbeTerminal.ps1",
+      "sha256": "69ea48c384d00db27f2581600ed550fbd3678e098ea31c369a1364e89051c58a"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/captured-final.robin",
+      "sha256": "0b86dd150dac532e2c73f5a407a7c396b4153bbc3052e03a65a8c84c6dab6f46"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/captured-powershell-format-action-v2.robin",
+      "sha256": "aae8f3d12b458e7bba0bf7759ad0f2c15720bbc803f032e5c86e3621edc16538"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/captured-powershell-format-action.robin",
+      "sha256": "026c41bc49952ad504bf8e83160af66eb835b446a97f8a1607b8fe4b4d451b93"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/captured-prefix-set.robin",
+      "sha256": "723f197bcf124d04246779c647cbe066e74ec70fa2853298877b1aaa1d05f8a3"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/captured-scalar-direct-pre-run.robin",
+      "sha256": "41a7bfb7bc28c03ff973c06573fa3f3276758e71929e9899affef0cb2e67cf09"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/exploratory-write-action-paste.json",
+      "sha256": "e383b1b3cfe7bd04e8551d32e85a6ebe71ac7f089123259adfa669533b0b0bde"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/files-sha256.json",
+      "sha256": "08d39329de57c520b660c9a0d7398338e97435da5ab5a1701bbdeeda886b5f75"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/final-paste.json",
+      "sha256": "853dd4399327bf83d772e6bd2f0326effec4b25d5c33299b8df186dad915d07d"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/flow-created.json",
+      "sha256": "9fe2d2cb9b70c60b3446cc4f6e2c35b4f0bdabc120a6720f8788b18987643c3a"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/plan.json",
+      "sha256": "d93d8457967fad50551a628a5bb878d3f5046bc082688f22d9eda83fc18d5e52"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/prefix-capture-flow-created.json",
+      "sha256": "fb79b6b3475f7f995d0d8942623b3196af766c9b467b631abeb9025f48ffe9c9"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/prefix-capture-seed-paste.json",
+      "sha256": "b8397449bf579daf30b720689a44ef282bff479ae8676870b55b898ebec7447a"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/provisional-format-sandwich/artifact.json",
+      "sha256": "4511ac567b769cb34e8d59dc3c55c8769be60292b23d61d3430f3c9f90c30007"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/provisional-format-sandwich/captured-pre-run.robin",
+      "sha256": "6baeebd30f679caf3f05e063e553a2b8cd1a22a151a6c313381691a77516c05b"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/provisional-format-sandwich/pad-run.json",
+      "sha256": "236260eb124cf17978c954962f999a158813ad4ae44757a244e211c41c5f3293"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/provisional-format-sandwich/paste.json",
+      "sha256": "7118500be4666ecf4aa225fab41358d88726a535f016413ae9a05cb9809803b7"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/provisional-format-sandwich/powershell-variables-inspection-failed.json",
+      "sha256": "6ea043c60e03f919566f71fdf43681b5e414dd7a2408d43095bd8232fa74bc82"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/provisional-format-sandwich/result.xlsx",
+      "sha256": "47816f3b4021b7296257d02bf25d781eb1b6d20e446d399021d910d46c7f0ea2"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/provisional-format-sandwich/runtime-result.xlsx",
+      "sha256": "47816f3b4021b7296257d02bf25d781eb1b6d20e446d399021d910d46c7f0ea2"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/provisional-format-sandwich/style.json",
+      "sha256": "5a2747f147cf8ba8b79c1ad764ceebc6d35cac7b1e057501236425acccda7e0e"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/provisional-format-sandwich/variables.json",
+      "sha256": "9646893f3220b2ad256f45bc3d799004dab6f133cc36a1f8a82785d2f1f2a552"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/provisional-format-sandwich/verification.json",
+      "sha256": "08ef5e1339c06109452df6bcef31873e6e1d224ebfb709aa06dcdd8a81e48057"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/provisional-format-sandwich/work.xlsx",
+      "sha256": "13855dcaf2fa8a9dd8d282197fd74c2f138d9ebc5552debbedbc5886296d2bde"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/Render-ProbeOutputs.mjs",
+      "sha256": "1982129b1f585ec21038ce703ae4c058872e9e8a181773526f04623761b017d1"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/report.md",
+      "sha256": "a98461642968d5c80811bb2ab38c6ce320619c58ed0b3fd59d6c3bc57be16f8a"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run1/artifact.json",
+      "sha256": "6b3ab3b7734472507fc1492dc0d3646cc88c0c6e4f4b2426aa1657e88eb07223"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run1/pad-run-timeout.json",
+      "sha256": "49211b197afb918a2b963e985a0991a257b4008bcf518932ac711962a517a3f6"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run1/powershell-output-strict-inspection-failed.json",
+      "sha256": "d8bb5532091bc6b700b641f29d7f004e88c1eb2e3bdf0a6cf00671a7d362f3b4"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run1/probe-state.json",
+      "sha256": "0f27afc88c7acadc24a07c0e098e5efe0ba79888db76cfd4f6262c689b5d7757"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run1/recopy.robin",
+      "sha256": "0b86dd150dac532e2c73f5a407a7c396b4153bbc3052e03a65a8c84c6dab6f46"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run1/result-preview.png",
+      "sha256": "3b2865f584649f9a89696538bbe32701ee14bd36f5f29d96848d2bf335c38d4a"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run1/result.inspect.ndjson",
+      "sha256": "db1678c60ceb89cbd644c56beb08de40667a7e2d0d20d64a9e4b44b1546944e6"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run1/result.xlsx",
+      "sha256": "b980e1060896dcbc78c0cf10f2e1738a8ebc5c6658d98f045a17b306e828b1a3"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run1/runtime-result.xlsx",
+      "sha256": "b980e1060896dcbc78c0cf10f2e1738a8ebc5c6658d98f045a17b306e828b1a3"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run1/style.json",
+      "sha256": "df65c26dc0966cf3f30931360d71e17f0de9561b9fefb2ba4485ea83225098a1"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run1/terminal.json",
+      "sha256": "36d7681a7f8d5a1a2742c97594e1a913ce5c7758f6b101bc9cf4f0f235354f6e"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run1/variables-first-inspection-failed.json",
+      "sha256": "b517082648609fd5f7fde8a4cc7704a96806e0a0d20dbaf635c2ecd34d7ec504"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run1/variables-rest-inspection-failed.json",
+      "sha256": "f42e114dd0823bc7ee163aeefcb91a3639b3c4eae9b08402421d647482bcb7a6"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run1/variables.json",
+      "sha256": "ea327d6c49fe252b1181f85ce3bb60e16117ff3bd5f9250e093b374996e7682a"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run1/verification.json",
+      "sha256": "85616c57552faac3e53ce7e633b4dd2a94ff1ed65936efd9f3763764041e69b2"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run1/work.xlsx",
+      "sha256": "13855dcaf2fa8a9dd8d282197fd74c2f138d9ebc5552debbedbc5886296d2bde"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run2/artifact.json",
+      "sha256": "a4d7beaef2ad102585949eef72df4d91f5ae4f0e2567335bfe92e991883ecbbb"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run2/pad-run.json",
+      "sha256": "c4de987719de354b620ab4bfe572f5e5c06ca394670b7adfcb11c29b2bd37c63"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run2/recopy.robin",
+      "sha256": "0b86dd150dac532e2c73f5a407a7c396b4153bbc3052e03a65a8c84c6dab6f46"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run2/result-preview.png",
+      "sha256": "3b2865f584649f9a89696538bbe32701ee14bd36f5f29d96848d2bf335c38d4a"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run2/result.inspect.ndjson",
+      "sha256": "db1678c60ceb89cbd644c56beb08de40667a7e2d0d20d64a9e4b44b1546944e6"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run2/result.xlsx",
+      "sha256": "2c9d138133d4f999f4e7d96486995bb1e8726032379feadba5f76f4186e8d39c"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run2/runtime-result.xlsx",
+      "sha256": "2c9d138133d4f999f4e7d96486995bb1e8726032379feadba5f76f4186e8d39c"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run2/style.json",
+      "sha256": "bc90e5811ac076dd228fcae14bc22523bbfea00ddf7970627fec17786dda51db"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run2/terminal.json",
+      "sha256": "0ad8a15bb4b81bfa59d324f0d1fdb298ac4950ba9cfab171dea266994d191294"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run2/variables.json",
+      "sha256": "d36b6328f7d50c6fe812fd93a23547840f6721cebbf7aecc460a87d769039c4c"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run2/verification.json",
+      "sha256": "f6df463bef1a329da37c096dbf86e155f3a4b6af066800d489fbadf3226a4525"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/run2/work.xlsx",
+      "sha256": "13855dcaf2fa8a9dd8d282197fd74c2f138d9ebc5552debbedbc5886296d2bde"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/source-preview.png",
+      "sha256": "e14124fb69b9e0d7a65a36e3bcdf05c1a8e62a58fca038375692df74731499cd"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/source.xlsx",
+      "sha256": "dda07aac129a7f2f55bbd40067eda426b4b8f4f997254e7e9f69059803ac5874"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/source.xlsx.inspect.ndjson",
+      "sha256": "dd91ce4dcf2ec8f8bed91f26514d8f810a27d4ee8b342cba3766bfa6b794966e"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/template-preview.png",
+      "sha256": "0200007bde25cfc3df3c07b90877b699ffc53a5f5f9e0963b190a6cf0374f4d0"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/template.xlsx",
+      "sha256": "13855dcaf2fa8a9dd8d282197fd74c2f138d9ebc5552debbedbc5886296d2bde"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/template.xlsx.inspect.ndjson",
+      "sha256": "5c313f4d89d404166fff29b674a5d01fe8e3c0d3c644a4d362308e06507ce82e"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/two-run-result.json",
+      "sha256": "3bc333dfe08b540e64d0e56e81736f69610061173eaba7d30eef5aa4d09e5896"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/verification.json",
+      "sha256": "488f9cbd68108f40e389c3bcc6e115c8d78325336f290e28e032ed5a67790b0d"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/percent-text-write/Verify-PercentTextWrite.ps1",
+      "sha256": "7a38d46272426f80067d3d4f7b3f4dfd44733a4cbadaedfabc3e6bc4d80aaa3e"
+    },
+    {
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370"
+    },
+    {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380"
+    },
+    {
+      "path": "copilot/versions/20260915-excel-r5/agent-instructions.txt",
+      "sha256": "fe57e45c170fcdfe8f94d8e23f9cb58f00d5b54ae4abe35a43189767032b5aaa"
+    },
+    {
+      "path": "copilot/versions/20260915-excel-r5/knowledge/PAD-Robin-00-Index.txt",
+      "sha256": "503ddbd6acf6caa4e80faec482e5eb1e04d7e244b52b805991a414cc7b9e7a30"
+    },
+    {
+      "path": "copilot/versions/20260915-excel-r5/knowledge/PAD-Robin-01-Basics.txt",
+      "sha256": "abe921c3e7aa19ce5410fe746fe4c4f5c7fc7ee3ffd18c4b6747686a41fdbf31"
+    },
+    {
+      "path": "copilot/versions/20260915-excel-r5/knowledge/PAD-Robin-02-Control.txt",
+      "sha256": "19f8698fba5702a42dfd0322ce90be0f26c3fd4ae048f13bbff35705bd4397fe"
+    },
+    {
+      "path": "copilot/versions/20260915-excel-r5/knowledge/PAD-Robin-03-Files.txt",
+      "sha256": "a541082a650a7cfae9d2b2cfb47026d7b8ee81bc542f30ba409af5e6291c9aea"
+    },
+    {
+      "path": "copilot/versions/20260915-excel-r5/knowledge/PAD-Robin-04-Office-PDF.txt",
+      "sha256": "634bb02fd6acbdd53eed63df1ec1fbf22f4f17f2164623ef0ec79f2d3f1271f7"
+    },
+    {
+      "path": "copilot/versions/20260915-excel-r5/knowledge/PAD-Robin-05-UI-Web.txt",
+      "sha256": "e62a78aa92941984bacbdc59d4c6561104a9eca5b9d0e45b817f539e4558d867"
+    },
+    {
+      "path": "copilot/versions/20260915-excel-r5/knowledge/PAD-Robin-06-Examples.txt",
+      "sha256": "29bcdbeea432133947e0f309bc5a1bb588de3a90701516192c82e450a7de21e3"
+    },
+    {
+      "path": "copilot/versions/20260915-excel-r5/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+      "sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3"
+    },
+    {
+      "path": "copilot/versions/20260915-excel-r5/manifest.json",
+      "sha256": "1ffacd9f478346fb38b146f135e19fd743d2b9a0ce1ab85d8b6b452899dcfd89"
+    },
+    {
+      "path": "copilot/versions/20260916-excel-r6/agent-instructions.txt",
+      "sha256": "1211ee45f80427a474d15d92dbfda3b7c90d2a78b9b7520aadb76f5f22c82fe4"
+    },
+    {
+      "path": "copilot/versions/20260916-excel-r6/knowledge/PAD-Robin-00-Index.txt",
+      "sha256": "62e0855ce2ee57e80475b92f47644ede08d50dd1d3085c04776fc7366424639f"
+    },
+    {
+      "path": "copilot/versions/20260916-excel-r6/knowledge/PAD-Robin-01-Basics.txt",
+      "sha256": "abe921c3e7aa19ce5410fe746fe4c4f5c7fc7ee3ffd18c4b6747686a41fdbf31"
+    },
+    {
+      "path": "copilot/versions/20260916-excel-r6/knowledge/PAD-Robin-02-Control.txt",
+      "sha256": "19f8698fba5702a42dfd0322ce90be0f26c3fd4ae048f13bbff35705bd4397fe"
+    },
+    {
+      "path": "copilot/versions/20260916-excel-r6/knowledge/PAD-Robin-03-Files.txt",
+      "sha256": "a541082a650a7cfae9d2b2cfb47026d7b8ee81bc542f30ba409af5e6291c9aea"
+    },
+    {
+      "path": "copilot/versions/20260916-excel-r6/knowledge/PAD-Robin-04-Office-PDF.txt",
+      "sha256": "433c292c290b1936db1b2b42ff9f74cbc97069124e44641e46e71ed057251ab9"
+    },
+    {
+      "path": "copilot/versions/20260916-excel-r6/knowledge/PAD-Robin-05-UI-Web.txt",
+      "sha256": "e62a78aa92941984bacbdc59d4c6561104a9eca5b9d0e45b817f539e4558d867"
+    },
+    {
+      "path": "copilot/versions/20260916-excel-r6/knowledge/PAD-Robin-06-Examples.txt",
+      "sha256": "5932375e212826ca3b54a1c4cc24fc8253a636003ff6aeebca2a4b1685893805"
+    },
+    {
+      "path": "copilot/versions/20260916-excel-r6/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+      "sha256": "9c566e7f85a431f1869302c6a40985e2f81237f17ac4fbbdc9a73e62a646b580"
+    },
+    {
+      "path": "copilot/versions/20260916-excel-r6/manifest.json",
+      "sha256": "207dfa10f34f0eb7c09a3a39ecfb25c24f870fb5e639b87a0fbce0683cbc9f89"
+    },
+    {
+      "path": "copilot/versions/20260916-excel-r6/support/EX03-TextWrite-FormatSandwich.ps1.txt",
+      "sha256": "d0a5df36516fcf4e27f6d789300ee5a03789aba8176571b1ab86fe84f15fba1a"
+    }
+  ]
+}
