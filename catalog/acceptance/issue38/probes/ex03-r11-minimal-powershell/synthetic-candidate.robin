@@ -1,0 +1,80 @@
+SET ProbeState TO $'''NOT_STARTED'''
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r11-minimal-powershell\\source.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> SourceBook
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: SourceBook Name: $'''Source'''
+Excel.ReadFromExcel.ReadCells Instance: SourceBook StartColumn: $'''A''' StartRow: 2 EndColumn: $'''B''' EndRow: 2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> SourceData
+SET SourceText TO SourceData[0][0]
+SET SourceNumber TO SourceData[0][1]
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceText } Json=> SourceTextJson
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceNumber } Json=> SourceNumberJson
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r11-minimal-powershell\\runtime\\work.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> Work
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''Target'''
+Excel.ReadFromExcel.ReadCells Instance: Work StartColumn: $'''A''' StartRow: 2 EndColumn: $'''B''' EndRow: 2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> BeforeData
+SET BeforeText TO BeforeData[0][0]
+SET BeforeNumber TO BeforeData[0][1]
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': BeforeText } Json=> BeforeTextJson
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': BeforeNumber } Json=> BeforeNumberJson
+Scripting.RunPowershellScript.RunScript Script: $'''$ErrorActionPreference = \'Stop\'
+    $targetPath = \'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r11-minimal-powershell\\runtime\\work.xlsx\'
+    $payload = [string]\'%SourceTextJson%\' | ConvertFrom-Json
+    if ($payload.probe -isnot [string]) { throw \'Synthetic source is not a string\' }
+    $targetPath = [IO.Path]::GetFullPath($targetPath)
+    $excel = [Runtime.InteropServices.Marshal]::GetActiveObject(\'Excel.Application\')
+    $workbook = $null
+    $worksheet = $null
+    $cell = $null
+    try {
+        $matches = @()
+        for ($index = 1; $index -le $excel.Workbooks.Count; $index++) {
+            $candidate = $excel.Workbooks.Item($index)
+            if ([IO.Path]::GetFullPath([string]$candidate.FullName) -ieq $targetPath) { $matches += $candidate }
+            else { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($candidate) }
+        }
+        if ($matches.Count -ne 1) {
+            foreach ($match in $matches) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($match) }
+            throw (\'Expected one exact target workbook, found \' + $matches.Count)
+        }
+        $workbook = $matches[0]
+        $worksheet = $workbook.Worksheets.Item(\'Target\')
+        $cell = $worksheet.Range(\'A2\')
+        if ([bool]$cell.HasFormula) { throw \'Refusing to replace a formula cell\' }
+        $beforeNumberFormat = [string]$cell.NumberFormat
+        try {
+            $cell.NumberFormat = \'@\'
+            $cell.Value2 = [string]$payload.probe
+        }
+        finally { $cell.NumberFormat = $beforeNumberFormat }
+        if ($cell.Value2 -isnot [string] -or [string]$cell.Value2 -cne [string]$payload.probe) { throw \'Text value/type was not preserved\' }
+        if ([string]$cell.NumberFormat -cne $beforeNumberFormat) { throw \'Original number format was not restored\' }
+        if ([string]$cell.PrefixCharacter -cne \'\') { throw \'Prefix character changed or remained\' }
+        if ([bool]$cell.HasFormula) { throw \'A formula remained after text write\' }
+    }
+    finally {
+        if ($null -ne $cell) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($cell) }
+        if ($null -ne $worksheet) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($worksheet) }
+        if ($null -ne $workbook) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($workbook) }
+        if ($null -ne $excel) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($excel) }
+    }''' ScriptOutput=> PowershellOutput
+Excel.CloseExcel.Close Instance: SourceBook
+Excel.WriteToExcel.WriteCell Instance: Work Value: SourceNumber Column: $'''B''' Row: 2
+Excel.ReadFromExcel.ReadCells Instance: Work StartColumn: $'''A''' StartRow: 2 EndColumn: $'''B''' EndRow: 2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ImmediateData
+SET ImmediateText TO ImmediateData[0][0]
+SET ImmediateNumber TO ImmediateData[0][1]
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': ImmediateText } Json=> ImmediateTextJson
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': ImmediateNumber } Json=> ImmediateNumberJson
+SET SourceVsImmediateText TO SourceTextJson = ImmediateTextJson
+SET SourceVsImmediateNumber TO SourceNumberJson = ImmediateNumberJson
+Excel.SaveExcel.SaveAs Instance: Work DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r11-minimal-powershell\\runtime\\result.xlsx'''
+Excel.CloseExcel.Close Instance: Work
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r11-minimal-powershell\\runtime\\result.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Reopened
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''Target'''
+Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''A''' StartRow: 2 EndColumn: $'''B''' EndRow: 2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ReopenedData
+Excel.CloseExcel.Close Instance: Reopened
+SET ReopenedText TO ReopenedData[0][0]
+SET ReopenedNumber TO ReopenedData[0][1]
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': ReopenedText } Json=> ReopenedTextJson
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': ReopenedNumber } Json=> ReopenedNumberJson
+SET SourceVsReopenedText TO SourceTextJson = ReopenedTextJson
+SET SourceVsReopenedNumber TO SourceNumberJson = ReopenedNumberJson
+SET ImmediateVsReopenedText TO ImmediateTextJson = ReopenedTextJson
+SET ImmediateVsReopenedNumber TO ImmediateNumberJson = ReopenedNumberJson
+SET ProbeState TO $'''R11_MINIMAL_FINISHED'''

@@ -1,0 +1,132 @@
+{
+    "schema_version":  1,
+    "kind":  "ISSUE38_EX03_R11_MINIMAL_POWERSHELL_SYNTHETIC_VERIFICATION",
+    "observed_at":  "2026-09-17T00:12:57.0607609Z",
+    "status":  "PASS_EXTERNAL_ARTIFACT_CHECK_FOR_DEDICATED_PAD_PROBE",
+    "paths":  {
+                  "source":  "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r11-minimal-powershell\\source.xlsx",
+                  "template":  "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r11-minimal-powershell\\template.xlsx",
+                  "work":  "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r11-minimal-powershell\\runtime\\work.xlsx",
+                  "output":  "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r11-minimal-powershell\\runtime\\result.xlsx"
+              },
+    "sha256_before":  {
+                          "source":  "dda07aac129a7f2f55bbd40067eda426b4b8f4f997254e7e9f69059803ac5874",
+                          "template":  "13855dcaf2fa8a9dd8d282197fd74c2f138d9ebc5552debbedbc5886296d2bde",
+                          "work":  "13855dcaf2fa8a9dd8d282197fd74c2f138d9ebc5552debbedbc5886296d2bde",
+                          "output":  "3f10c3ee8ca916f525bdcf881a959e3d5bd8f22d2275dbae6af60b7b7a8e52ee"
+                      },
+    "sha256_after":  {
+                         "source":  "dda07aac129a7f2f55bbd40067eda426b4b8f4f997254e7e9f69059803ac5874",
+                         "template":  "13855dcaf2fa8a9dd8d282197fd74c2f138d9ebc5552debbedbc5886296d2bde",
+                         "work":  "13855dcaf2fa8a9dd8d282197fd74c2f138d9ebc5552debbedbc5886296d2bde",
+                         "output":  "3f10c3ee8ca916f525bdcf881a959e3d5bd8f22d2275dbae6af60b7b7a8e52ee"
+                     },
+    "source":  {
+                   "A2":  {
+                              "value":  "100%",
+                              "value_kind":  "text",
+                              "clr_type":  "System.String",
+                              "formula":  "100%",
+                              "has_formula":  false,
+                              "number_format":  "@",
+                              "number_format_local":  "@",
+                              "prefix_character":  ""
+                          },
+                   "B2":  {
+                              "value":  42.5,
+                              "value_kind":  "number",
+                              "clr_type":  "System.Double",
+                              "formula":  "42.5",
+                              "has_formula":  false,
+                              "number_format":  "0.0",
+                              "number_format_local":  "0.0",
+                              "prefix_character":  ""
+                          }
+               },
+    "template":  {
+                     "A2":  {
+                                "value":  "BEFORE_TEXT",
+                                "value_kind":  "text",
+                                "clr_type":  "System.String",
+                                "formula":  "BEFORE_TEXT",
+                                "has_formula":  false,
+                                "number_format":  "G/標準",
+                                "number_format_local":  "G/標準",
+                                "prefix_character":  ""
+                            },
+                     "B2":  {
+                                "value":  7,
+                                "value_kind":  "number",
+                                "clr_type":  "System.Double",
+                                "formula":  "7",
+                                "has_formula":  false,
+                                "number_format":  "0.00",
+                                "number_format_local":  "0.00",
+                                "prefix_character":  ""
+                            }
+                 },
+    "work":  {
+                 "A2":  {
+                            "value":  "BEFORE_TEXT",
+                            "value_kind":  "text",
+                            "clr_type":  "System.String",
+                            "formula":  "BEFORE_TEXT",
+                            "has_formula":  false,
+                            "number_format":  "G/標準",
+                            "number_format_local":  "G/標準",
+                            "prefix_character":  ""
+                        },
+                 "B2":  {
+                            "value":  7,
+                            "value_kind":  "number",
+                            "clr_type":  "System.Double",
+                            "formula":  "7",
+                            "has_formula":  false,
+                            "number_format":  "0.00",
+                            "number_format_local":  "0.00",
+                            "prefix_character":  ""
+                        }
+             },
+    "output":  {
+                   "A2":  {
+                              "value":  "100%",
+                              "value_kind":  "text",
+                              "clr_type":  "System.String",
+                              "formula":  "100%",
+                              "has_formula":  false,
+                              "number_format":  "G/標準",
+                              "number_format_local":  "G/標準",
+                              "prefix_character":  ""
+                          },
+                   "B2":  {
+                              "value":  42.5,
+                              "value_kind":  "number",
+                              "clr_type":  "System.Double",
+                              "formula":  "42.5",
+                              "has_formula":  false,
+                              "number_format":  "0.00",
+                              "number_format_local":  "0.00",
+                              "prefix_character":  ""
+                          }
+               },
+    "checks":  {
+                   "verifier_is_read_only":  true,
+                   "source_fixture_sha_fixed":  true,
+                   "template_fixture_sha_fixed":  true,
+                   "work_copy_stayed_original":  true,
+                   "source_text_fixed":  true,
+                   "source_number_fixed":  true,
+                   "output_text_value_and_type":  true,
+                   "output_number_value_and_type":  true,
+                   "output_text_format_preserved":  true,
+                   "output_number_format_preserved":  true,
+                   "output_prefix_empty":  true,
+                   "no_formula_substitution":  true,
+                   "source_workbook_not_modified":  true
+               },
+    "limits":  [
+                   "This verifies the dedicated synthetic output artifact, not EX03 integrated acceptance.",
+                   "The fixed scope is text 100% and number 42.5 at Source/Target A2:B2 only.",
+                   "PAD terminal state and PAD variables require separate UI evidence."
+               ]
+}

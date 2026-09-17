@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "prepared_at": "2026-09-17T00:10:08.7426141Z",
+  "status": "PASS_READY_FOR_ONE_DEDICATED_SYNTHETIC_PAD_RUN",
+  "probe": "EX03-R11-MINIMAL-POWERSHELL",
+  "flow_name": "無題 (9)",
+  "paths": {
+    "source": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r11-minimal-powershell\\source.xlsx",
+    "template": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r11-minimal-powershell\\template.xlsx",
+    "work": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r11-minimal-powershell\\runtime\\work.xlsx",
+    "output": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r11-minimal-powershell\\runtime\\result.xlsx"
+  },
+  "checks": {
+    "head_is_r10_checkpoint": true,
+    "source_sha_fixed": true,
+    "template_sha_fixed": true,
+    "work_is_exact_template_copy": true,
+    "output_absent": true,
+    "source_pad_recopy_pass": true,
+    "synthetic_pad_recopy_pass": true,
+    "good_decode_parser_zero": true,
+    "negative_decode_detected": true,
+    "local_script_parser_zero": true,
+    "fragile_static_member_fragments_avoided": true,
+    "no_excel_process_before_run": true,
+    "r9_generated_preserved": true,
+    "r10_generated_preserved": true
+  },
+  "authorization_boundary": {
+    "dedicated_synthetic_pad_run_max": 1,
+    "copilot_send": 0,
+    "integrated_ex03_run": 0,
+    "github_write": 0
+  }
+}

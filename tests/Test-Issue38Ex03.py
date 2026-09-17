@@ -64,6 +64,14 @@ r10_generation_audit = load(
     'issue38_ex03_r10_generation_audit',
     'tools/Analyze-Issue38Ex03R10Generation.py',
 )
+r11_local = load(
+    'issue38_ex03_r11_local',
+    'tools/Prepare-Issue38Ex03R11Local.py',
+)
+r11_builder = load(
+    'issue38_ex03_r11_builder',
+    'tools/Build-Issue38Ex03CandidateR11.py',
+)
 
 
 class Ex03Tests(unittest.TestCase):
@@ -1417,6 +1425,316 @@ class Ex03Tests(unittest.TestCase):
                     )
             with self.assertRaisesRegex(ValueError, 'sealed'):
                 r8_builder.build(destination)
+
+    def test_r11_pipeline_boundary_and_extraction_negative_are_reproducible(self):
+        probe = (
+            ROOT
+            / 'catalog/acceptance/issue38/probes/ex03-r11-minimal-powershell'
+        )
+        analysis = json.loads((probe / 'analysis.json').read_text(encoding='utf-8'))
+        self.assertEqual(
+            analysis['pipeline_boundary']['classification'],
+            'ACQUISITION_COPY_SAVE_EXTRACTION_DECODE_NOT_CAUSAL',
+        )
+        self.assertEqual(
+            analysis['pipeline_boundary']['r9']['earliest_confirmed_missing_stage'],
+            'rendered_response_code_dom',
+        )
+        self.assertEqual(
+            analysis['pipeline_boundary']['r10']['earliest_confirmed_missing_stage'],
+            'copied_full_response',
+        )
+        self.assertTrue(
+            analysis['pipeline_boundary']['r9']['response_equals_code_copy']
+        )
+        self.assertTrue(
+            analysis['pipeline_boundary']['r10']['response_contains_exact_code_copy']
+        )
+        self.assertTrue(
+            analysis['extraction_decode_tests']['good'][
+                'decoded_equals_support_script'
+            ]
+        )
+        self.assertEqual(
+            analysis['extraction_decode_tests']['good']['parser_error_count'], 0
+        )
+        negative = analysis['extraction_decode_tests']['intentional_negative']
+        self.assertTrue(negative['mutations_preserved_exactly'])
+        self.assertGreater(negative['parser_error_count'], 0)
+        self.assertFalse(negative['executed'])
+
+        with tempfile.TemporaryDirectory() as directory:
+            rebuilt = Path(directory) / 'probe'
+            rebuilt_result = r11_local.prepare(rebuilt)
+            for name in [
+                'independent-minimal-format-sandwich.ps1.txt',
+                'independent-candidate.robin',
+                'broken-extraction-negative.robin',
+                'source.xlsx',
+                'template.xlsx',
+                'runtime/work.xlsx',
+            ]:
+                self.assertEqual(
+                    (probe / name).read_bytes(),
+                    (rebuilt / name).read_bytes(),
+                    name,
+                )
+            rebuilt_synthetic = (
+                rebuilt / 'synthetic-minimal-format-sandwich.ps1.txt'
+            ).read_text(encoding='utf-8')
+            self.assertIn(str((rebuilt / 'runtime/work.xlsx').resolve()), rebuilt_synthetic)
+            self.assertNotIn('[string]::Equals(', rebuilt_synthetic)
+            self.assertNotIn('[string]::IsNullOrEmpty(', rebuilt_synthetic)
+            self.assertEqual(rebuilt_result['negative_parser_errors'], 19)
+
+    def test_r11_changes_the_script_and_preserves_the_bounded_contracts(self):
+        probe = (
+            ROOT
+            / 'catalog/acceptance/issue38/probes/ex03-r11-minimal-powershell'
+        )
+        analysis = json.loads((probe / 'analysis.json').read_text(encoding='utf-8'))
+        script = (probe / 'independent-minimal-format-sandwich.ps1.txt').read_text(
+            encoding='utf-8'
+        )
+        successor = analysis['local_successor']
+        self.assertEqual(successor['version_id'], '20260917-excel-r11')
+        self.assertEqual(successor['old_script_lines'], 88)
+        self.assertEqual(successor['new_script_lines'], 58)
+        self.assertGreater(successor['byte_reduction'], 1500)
+        self.assertEqual(successor['parser_error_count'], 0)
+        for fragment in successor['avoided_fragments']:
+            self.assertNotIn(fragment, script)
+        self.assertIn(
+            "if ([IO.Path]::GetFullPath([string]$candidate.FullName) -ieq $targetPath)",
+            script,
+        )
+        self.assertIn("if ($payload.probe -isnot [string])", script)
+        self.assertIn("$cell.Value2 -isnot [string]", script)
+        self.assertIn("if ([string]$cell.PrefixCharacter -cne '')", script)
+        self.assertRegex(
+            script,
+            re.compile(
+                r"try \{\s*\$cell\.NumberFormat = '@'.*?finally \{ "
+                r"\$cell\.NumberFormat = \$beforeNumberFormat \}",
+                re.S,
+            ),
+        )
+        self.assertEqual(script.count("[Runtime.InteropServices.Marshal]::GetActiveObject"), 1)
+        self.assertEqual(script.count("$cell.Value2 = [string]$payload.probe"), 1)
+        self.assertEqual(script.count("'%TextSource"), 7)
+        self.assertFalse(analysis['scope']['r9_r10_generated_outputs_modified'])
+        self.assertEqual(analysis['scope']['copilot_send'], 0)
+        self.assertEqual(analysis['scope']['integrated_ex03_run'], 0)
+        self.assertTrue(analysis['scope']['legacy_558_failure_preserved'])
+
+    def test_r11_synthetic_probe_keeps_a_decoy_open_for_exact_selection(self):
+        probe = (
+            ROOT
+            / 'catalog/acceptance/issue38/probes/ex03-r11-minimal-powershell'
+        )
+        flow = (probe / 'synthetic-candidate.robin').read_text(encoding='utf-8')
+        script_at = flow.index('Scripting.RunPowershellScript.RunScript')
+        close_source_at = flow.index('Excel.CloseExcel.Close Instance: SourceBook')
+        save_at = flow.index('Excel.SaveExcel.SaveAs')
+        self.assertLess(script_at, close_source_at)
+        self.assertLess(close_source_at, save_at)
+        self.assertIn("%SourceTextJson%", flow)
+        self.assertIn("SET ProbeState TO $'''R11_MINIMAL_FINISHED'''", flow)
+        self.assertIn(
+            'ex03-r11-minimal-powershell\\\\runtime\\\\work.xlsx', flow
+        )
+        self.assertIn(
+            'ex03-r11-minimal-powershell\\\\runtime\\\\result.xlsx', flow
+        )
+        self.assertEqual(
+            hashlib.sha256((probe / 'source.xlsx').read_bytes()).hexdigest(),
+            'dda07aac129a7f2f55bbd40067eda426b4b8f4f997254e7e9f69059803ac5874',
+        )
+        self.assertEqual(
+            hashlib.sha256((probe / 'template.xlsx').read_bytes()).hexdigest(),
+            '13855dcaf2fa8a9dd8d282197fd74c2f138d9ebc5552debbedbc5886296d2bde',
+        )
+        self.assertEqual(
+            (probe / 'template.xlsx').read_bytes(),
+            (probe / 'runtime/work.xlsx').read_bytes(),
+        )
+
+    def test_r11_pad_recopy_and_one_synthetic_run_are_bounded(self):
+        probe = (
+            ROOT
+            / 'catalog/acceptance/issue38/probes/ex03-r11-minimal-powershell'
+        )
+        source_capture = json.loads(
+            (probe / 'independent-pad-capture.json').read_text(encoding='utf-8')
+        )
+        synthetic_capture = json.loads(
+            (probe / 'synthetic-pad-capture.json').read_text(encoding='utf-8')
+        )
+        run = json.loads(
+            (probe / 'synthetic-pad-run.json').read_text(encoding='utf-8')
+        )
+        artifact = json.loads(
+            (probe / 'synthetic-artifact-verification.json').read_text(
+                encoding='utf-8-sig'
+            )
+        )
+        self.assertEqual(
+            source_capture['result'], 'PASS_PAD_DESIGNER_SAVE_RECOPY_NO_EXECUTION'
+        )
+        self.assertEqual(source_capture['observation']['paste_invocations'], 1)
+        self.assertEqual(source_capture['observation']['actions_after_paste'], 110)
+        self.assertEqual(source_capture['observation']['variables_after_paste'], 45)
+        self.assertTrue(source_capture['comparison']['lf_normalized_exact'])
+        self.assertFalse(source_capture['scope']['executed_before_capture'])
+        self.assertEqual(
+            synthetic_capture['result'], 'PASS_PAD_DESIGNER_SAVE_RECOPY_NO_EXECUTION'
+        )
+        self.assertEqual(synthetic_capture['observation']['actions_after_paste'], 40)
+        self.assertTrue(synthetic_capture['comparison']['lf_normalized_exact'])
+        self.assertEqual(run['authorization_boundary']['pad_runs_used'], 1)
+        self.assertEqual(run['authorization_boundary']['additional_pad_run'], 0)
+        self.assertEqual(run['authorization_boundary']['copilot_send'], 0)
+        self.assertEqual(run['authorization_boundary']['integrated_ex03_run'], 0)
+        self.assertEqual(run['decision'], 'PASS_ONE_DEDICATED_SYNTHETIC_PAD_RUN')
+        for name in [
+            'ImmediateVsReopenedText',
+            'ImmediateVsReopenedNumber',
+            'SourceVsImmediateText',
+            'SourceVsImmediateNumber',
+            'SourceVsReopenedText',
+            'SourceVsReopenedNumber',
+        ]:
+            self.assertTrue(run['pad_observation']['variables'][name], name)
+        self.assertEqual(
+            artifact['status'],
+            'PASS_EXTERNAL_ARTIFACT_CHECK_FOR_DEDICATED_PAD_PROBE',
+        )
+        self.assertTrue(all(artifact['checks'].values()))
+        self.assertEqual(len(artifact['checks']), 13)
+        self.assertEqual(
+            hashlib.sha256((probe / 'runtime/result.xlsx').read_bytes()).hexdigest(),
+            run['postconditions']['result_sha256'],
+        )
+
+    def test_r11_package_is_independent_and_rebuilds_byte_identically(self):
+        version = ROOT / 'copilot/versions/20260917-excel-r11'
+        manifest = json.loads((version / 'manifest.json').read_text(encoding='utf-8'))
+        instruction = (version / 'agent-instructions.txt').read_text(encoding='utf-8')
+        bundle = (version / 'knowledge/PAD-Robin-Knowledge-Bundle.txt').read_text(
+            encoding='utf-8'
+        )
+        robin_path = version / r11_builder.ROBIN_SUPPORT
+        robin = robin_path.read_text(encoding='utf-8')
+        script = (version / r11_builder.SCRIPT_SUPPORT).read_text(encoding='utf-8')
+        self.assertEqual(manifest['version'], '20260917-excel-r11')
+        self.assertEqual(manifest['base_candidate'], '20260917-excel-r10')
+        self.assertEqual(manifest['base_commit'], r11_builder.BASE_COMMIT)
+        self.assertFalse(manifest['inherits_live_acceptance'])
+        self.assertEqual(
+            manifest['status'],
+            'LOCAL_CANDIDATE_EX03_MINIMAL_POWERSHELL_PAD_RECOPIED_'
+            'SYNTHETIC_VALIDATED_NOT_COPILOT_OR_INTEGRATED_ACCEPTED',
+        )
+        self.assertEqual(
+            hashlib.sha256((version / 'agent-instructions.txt').read_bytes()).hexdigest(),
+            manifest['instruction_sha256'],
+        )
+        self.assertEqual(
+            hashlib.sha256(
+                (version / 'knowledge/PAD-Robin-Knowledge-Bundle.txt').read_bytes()
+            ).hexdigest(),
+            manifest['bundle_sha256'],
+        )
+        self.assertEqual(manifest['instruction_utf16'], len(instruction))
+        self.assertLessEqual(len(instruction), 8000)
+        self.assertEqual(manifest['evidence']['copilot_send_count'], 0)
+        self.assertEqual(manifest['evidence']['integrated_ex03_run_count'], 0)
+        self.assertEqual(manifest['evidence']['synthetic_pad_run_count'], 1)
+        self.assertTrue(manifest['evidence']['legacy_558_failure_preserved'])
+        self.assertEqual(
+            manifest['evidence']['exception_path_runtime'],
+            'NOT_RUN_STRUCTURAL_FINALLY_AND_NORMAL_PATH_RESTORATION_ONLY',
+        )
+        self.assertEqual(
+            hashlib.sha256(robin_path.read_bytes()).hexdigest(),
+            '148267f09f53d74db1059cee823a4a2e159f2bbebfa249d3a25c996796fa765b',
+        )
+        self.assertEqual(
+            hashlib.sha256(script.encode('utf-8')).hexdigest(),
+            '068e676d70c373a9cf8203d19f6154e38460f609c4fdf774dbef1528f68fc7ae',
+        )
+        self.assertIn(robin.rstrip('\r\n'), bundle)
+        for fragment in r11_builder.FORBIDDEN_FRAGMENTS:
+            self.assertNotIn(fragment, robin)
+        for term in (
+            r11_builder.FIXED_COMPLETION_TERMS
+            + r11_builder.UNIQUE_GRADER_STRINGS
+            + [r11_builder.EXPECTED_TEXT]
+        ):
+            self.assertNotIn(term, instruction)
+            self.assertNotIn(term, robin)
+            self.assertNotIn(term, script)
+        self.assertEqual(
+            hashlib.sha256(
+                (ROOT / 'catalog/acceptance/issue38/cycles/EX03-r9-G1/generated.robin').read_bytes()
+            ).hexdigest(),
+            r11_builder.EXPECTED['r9_generated'],
+        )
+        self.assertEqual(
+            hashlib.sha256(
+                (ROOT / 'catalog/acceptance/issue38/cycles/EX03-r10-G1/generated.robin').read_bytes()
+            ).hexdigest(),
+            r11_builder.EXPECTED['r10_generated'],
+        )
+
+        with tempfile.TemporaryDirectory() as directory:
+            rebuilt = Path(directory) / 'r11'
+            r11_builder.build(rebuilt)
+            for path in version.rglob('*'):
+                if path.is_file():
+                    self.assertEqual(
+                        path.read_bytes(),
+                        (rebuilt / path.relative_to(version)).read_bytes(),
+                        str(path.relative_to(version)),
+                    )
+            with self.assertRaisesRegex(ValueError, 'sealed'):
+                r11_builder.build(rebuilt)
+
+    def test_r11_final_record_does_not_claim_ex03_acceptance(self):
+        probe = (
+            ROOT
+            / 'catalog/acceptance/issue38/probes/ex03-r11-minimal-powershell'
+        )
+        acceptance = json.loads(
+            (probe / 'acceptance.json').read_text(encoding='utf-8')
+        )
+        self.assertEqual(
+            acceptance['decision']['status'],
+            'PASS_LOCAL_R11_CAUSE_BOUNDARY_AND_BOUNDED_PAD_VALIDATION_'
+            'NOT_EX03_ACCEPTANCE',
+        )
+        self.assertFalse(acceptance['decision']['accepted_for_copilot_ex03'])
+        self.assertEqual(acceptance['scope']['copilot_send'], 0)
+        self.assertEqual(acceptance['scope']['integrated_ex03_run'], 0)
+        self.assertEqual(acceptance['scope']['additional_dedicated_pad_run'], 0)
+        self.assertTrue(acceptance['scope']['legacy_558_failure_preserved'])
+        self.assertEqual(
+            acceptance['scope']['existing_output_guard_live_path'],
+            'REMAINS_UNCONFIRMED',
+        )
+        self.assertTrue(acceptance['scope']['integrated_output_path_absent'])
+        self.assertEqual(
+            acceptance['dedicated_synthetic_pad']['exception_restoration'],
+            {
+                'inner_finally_structure': 'PASS',
+                'normal_path_original_format_restored': 'PASS',
+                'forced_exception_runtime': 'NOT_RUN',
+            },
+        )
+        diff = (probe / 'r10-to-r11-script.diff').read_text(encoding='utf-8')
+        self.assertIn('-        if ([string]::Equals(', diff)
+        self.assertIn('+        if ([IO.Path]::GetFullPath(', diff)
+        self.assertIn('+            finally { $cell.NumberFormat = $beforeNumberFormat }', diff)
 
 
 if __name__ == '__main__':

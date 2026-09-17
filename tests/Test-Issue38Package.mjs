@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const requestedVersion=process.argv[2] ?? '20260915-excel-r1';
-assert.ok(['20260915-excel-r1','20260915-excel-r2','20260915-excel-r3','20260915-excel-r4','20260915-excel-r5','20260916-excel-r6','20260916-excel-r7','20260916-excel-r8','20260917-excel-r9'].includes(requestedVersion));
+assert.ok(['20260915-excel-r1','20260915-excel-r2','20260915-excel-r3','20260915-excel-r4','20260915-excel-r5','20260916-excel-r6','20260916-excel-r7','20260916-excel-r8','20260917-excel-r9','20260917-excel-r10','20260917-excel-r11'].includes(requestedVersion));
 const version=path.join(root,'copilot/versions',requestedVersion);
 const read=p=>fs.readFileSync(p);
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
@@ -44,7 +44,7 @@ if(requestedVersion!=='20260915-excel-r1'){
   for(const n of ['00-Index','04-Office-PDF','06-Examples']){
     const content=text(path.join(version,`knowledge/PAD-Robin-${n}.txt`));
     assert.ok(content.includes(write.toString('utf8').trimEnd()));
-    if(['20260915-excel-r4','20260915-excel-r5','20260916-excel-r6','20260916-excel-r7','20260916-excel-r8','20260917-excel-r9'].includes(requestedVersion)) {
+    if(['20260915-excel-r4','20260915-excel-r5','20260916-excel-r6','20260916-excel-r7','20260916-excel-r8','20260917-excel-r9','20260917-excel-r10','20260917-excel-r11'].includes(requestedVersion)) {
       assert.ok(content.includes('型識別アクション・厳密型比較のPAD原文は未採取'));
       assert.ok(content.includes('書式・寸法558差分のFAIL'));
       assert.ok(content.includes('2Run終了を観測済み'));
@@ -319,6 +319,67 @@ if(requestedVersion==='20260917-excel-r9') {
   assert.equal(manifest.status,'FROZEN_CANDIDATE_EX03_ESCAPE_FIDELITY_GATE_NOT_COPILOT_OR_RUNTIME_ACCEPTED');
   assert.equal(manifest.base_candidate,'20260916-excel-r8');
   assert.equal(manifest.base_commit,'8e9dfc6baefba6d39d9b3d54d9adfceebdb12836');
+}
+if(requestedVersion==='20260917-excel-r11') {
+  for(const [p,h] of Object.entries(manifest.evidence_inputs)) assert.equal(sha(read(path.join(root,p))),h,p);
+  const r10=path.join(root,'copilot/versions/20260917-excel-r10');
+  for(const name of ['PAD-Robin-01-Basics.txt','PAD-Robin-02-Control.txt','PAD-Robin-03-Files.txt','PAD-Robin-05-UI-Web.txt']) {
+    assert.deepEqual(
+      read(path.join(version,'knowledge',name)),
+      read(path.join(r10,'knowledge',name)),
+      'unchanged r10 knowledge retained byte-for-byte: '+name,
+    );
+  }
+  assert.equal(manifest.support_files.length,3);
+  for(const record of manifest.support_files) {
+    const support=read(path.join(version,record.path));
+    assert.equal(support.length,record.bytes);
+    assert.equal(sha(support),record.sha256);
+  }
+  const probeRoot=path.join(root,'catalog/acceptance/issue38/probes/ex03-r11-minimal-powershell');
+  const prepared=text(path.join(probeRoot,'independent-candidate.robin'));
+  const recopyBytes=read(path.join(probeRoot,'independent-pad-recopy.robin'));
+  const recopy=recopyBytes.toString('utf8');
+  const packagedRecopy=read(path.join(version,'support/EX03-R11-Independent-PAD-Recopy.robin'));
+  const script=read(path.join(version,'support/EX03-R11-Independent-Minimal-FormatSandwich.ps1.txt'));
+  const contract=text(path.join(version,'support/EX03-R11-Minimal-Structural-Contract.txt'));
+  const normalizeRobin=value=>value.replace(/\r\n/g,'\n').replace(/\n+$/,'');
+  assert.equal(normalizeRobin(prepared),normalizeRobin(recopy));
+  assert.deepEqual(packagedRecopy,recopyBytes,'authoritative r11 PAD re-copy retained byte-for-byte');
+  assert.equal(sha(recopyBytes),'148267f09f53d74db1059cee823a4a2e159f2bbebfa249d3a25c996796fa765b');
+  assert.equal(sha(script),'068e676d70c373a9cf8203d19f6154e38460f609c4fdf774dbef1528f68fc7ae');
+  assert.equal((recopy.match(/\r\n/g) ?? []).length,110);
+  assert.equal((recopy.replace(/\r\n/g,'').match(/\n/g) ?? []).length,57);
+  assert.ok(bundle.toString('utf8').includes(recopy.trimEnd()),'complete r11 independent PAD re-copy included');
+  assert.equal((recopy.match(/Scripting\.RunPowershellScript\.RunScript/g) ?? []).length,1);
+  assert.equal((recopy.match(/Excel\.WriteToExcel\.WriteCell Instance: Work Value: NumberSource/g) ?? []).length,5);
+  assert.equal((recopy.match(/_ValueTypeMatch TO SourceCellJson = SavedCellJson/g) ?? []).length,12);
+  for(const retired of ['[string]::Equals(','[StringComparison]::OrdinalIgnoreCase','[string]::IsNullOrEmpty(',':Equals([IO.Path]','-not :IsNullOrEmpty(','[IO.Path]::GetFulling]']) assert.ok(!recopy.includes(retired),retired);
+  for(const required of ['minimal embedded-PowerShell structural contract','Require zero occurrences','does not prove EX03 execution']) assert.ok(contract.includes(required),required);
+  const fixedTerms=[
+    String.raw`C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力い.xlsx`,
+    String.raw`C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力ろ.xlsx`,
+    String.raw`C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\work.xlsx`,
+    String.raw`C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx`,
+    '受取明細','追加項目','集計先','追記先','春','夏','秋','項目甲','項目乙',
+  ];
+  for(const value of [instruction,bundle.toString('utf8'),recopy,script.toString('utf8')]) {
+    for(const term of fixedTerms) assert.ok(!value.includes(term),'fixed answer absent: '+term);
+  }
+  assert.ok(!instruction.includes('100%'));
+  assert.ok(!recopy.includes('100%'));
+  assert.ok(!script.toString('utf8').includes('100%'));
+  assert.equal(manifest.evidence.source_lf_normalized_exact,true);
+  assert.equal(manifest.evidence.source_executed,false);
+  assert.equal(manifest.evidence.synthetic_pad_run_count,1);
+  assert.equal(manifest.evidence.copilot_send_count,0);
+  assert.equal(manifest.evidence.integrated_ex03_run_count,0);
+  assert.equal(manifest.evidence.exception_path_runtime,'NOT_RUN_STRUCTURAL_FINALLY_AND_NORMAL_PATH_RESTORATION_ONLY');
+  assert.equal(manifest.evidence.legacy_558_failure_preserved,true);
+  assert.equal(manifest.evidence.existing_output_guard,'STATIC_ONLY_NOT_LIVE_TESTED');
+  assert.equal(manifest.status,'LOCAL_CANDIDATE_EX03_MINIMAL_POWERSHELL_PAD_RECOPIED_SYNTHETIC_VALIDATED_NOT_COPILOT_OR_INTEGRATED_ACCEPTED');
+  assert.equal(manifest.base_candidate,'20260917-excel-r10');
+  assert.equal(manifest.base_commit,'ac90b0943d2ff4e1172c23712ef49fe93787b7b2');
 }
 assert.equal(sha(read(frozen)),manifest.acceptance_freeze_sha256);
 for(const [p,h] of Object.entries(JSON.parse(read(frozen)).files)) assert.equal(sha(read(path.join(path.dirname(frozen),p))),h,p);
