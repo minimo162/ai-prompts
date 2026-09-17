@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "prototype_id": "EX03-R12-FIXED-HELPER-P1",
+  "status": "LOCAL_NON_LIVE_PROTOTYPE_NOT_EX03_ACCEPTANCE",
+  "base_commit": "8baf8493cbd2c1e890779dfd59ac4381744a1932",
+  "replaces_r12": false,
+  "replaces_existing_usage": false,
+  "artifacts": {
+    "helper": {
+      "path": "EX03-R12-Fixed-StringTransfer.ps1",
+      "sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+      "bytes": 8222
+    },
+    "invocation": {
+      "path": "invocation.json",
+      "sha256": "9ff979598a0383099aec88ca3aace330f29ed519cc66d9cf6ca63e31d962227a",
+      "bytes": 1224
+    },
+    "launcher": {
+      "path": "launcher.ps1",
+      "sha256": "b509339998887977fc272613e9c6a479e444dfbed1e957d63588a89ac53bfbaf",
+      "bytes": 2109
+    }
+  },
+  "launcher_contract": {
+    "expected_helper_sha256_source": "VERIFIER_COMPUTED_FROM_LOCAL_BYTES_BEFORE_LAUNCHER_CREATION",
+    "expected_invocation_sha256_source": "VERIFIER_COMPUTED_FROM_LOCAL_BYTES_BEFORE_LAUNCHER_CREATION",
+    "helper_presence_checked_before_invocation": true,
+    "invocation_presence_checked_before_invocation": true,
+    "helper_sha_checked_before_invocation": true,
+    "invocation_sha_checked_before_invocation": true,
+    "exact_success_output": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}",
+    "empty_output_rejected": true,
+    "unexpected_output_rejected": true
+  },
+  "helper_contract": {
+    "json_payload_file_count": 7,
+    "mode_json_file_count": 1,
+    "text_write_count": 7,
+    "input_values_directly_interpolated_into_code": false,
+    "target_workbook_selected_by_exact_full_path": true,
+    "target_workbook_required_match_count": 1,
+    "formula_targets_rejected": true,
+    "number_format_restored_in_finally": true,
+    "prefix_and_formula_checked_after_write": true,
+    "normal_success_requires_all_text_writes": true,
+    "helper_contains_fixed_ex03_paths_sheets_or_cells": false,
+    "fixed_ex03_routing_isolated_in_verifier_owned_invocation": true
+  },
+  "preserved_inputs": {
+    "r12_instruction_sha256": "11321acdbb96632221b02b7b737d12ba816ea4cf9f35f933a114c7f857539c06",
+    "r12_bundle_sha256": "ddee43a1eddc966f62095b63a23b135df184f3cbe0ded635cbf72520e6744b97",
+    "r12_manifest_sha256": "a6f65db93d56c1e0a212a8059f034240489b29ee4cfd4abc6b998e73ea2cefb1",
+    "fixed_request_sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+    "fixed_spec_sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+    "fixed_expected_sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+    "legacy_extractor_sha256": "9c8f2cab7e154e38351251327c4f31fe6b53ff0fc5665c8bc8f6504c14545746"
+  },
+  "scope": {
+    "real_helper_execution": false,
+    "copilot_send_count": 0,
+    "pad_run_count": 0,
+    "excel_run_count": 0,
+    "full_regression": "NOT_RUN_BY_SCOPE",
+    "execution_policy_changed": false,
+    "permissions_changed": false,
+    "github_write": false,
+    "inherits_prior_acceptance": false
+  }
+}

@@ -24,6 +24,7 @@ LIVE_SEND = CYCLE / "live-send.json"
 TEACHING = VERSION / "support/EX03-R12-Prepared-Normal.robin"
 TEACHING_SCRIPT = VERSION / "support/EX03-R12-JSON-File-Handoff.ps1.txt"
 SOURCE_TOOL = ROOT / "tools/Prepare-Issue38Ex03R8IndependentSource.py"
+R12_EXTRACTOR_TOOL = ROOT / "tools/Build-Issue38Ex03CandidateR12.py"
 PARSER_TOOL = ROOT / "tools/Analyze-Issue38Ex03R11Generation.py"
 
 EXPECTED = {
@@ -60,6 +61,7 @@ def load(name: str, path: Path):
 
 
 source_tool = load("issue38_r12_source", SOURCE_TOOL)
+r12_extractor_tool = load("issue38_r12_extractor", R12_EXTRACTOR_TOOL)
 parser_tool = load("issue38_r12_parser", PARSER_TOOL)
 
 
@@ -73,6 +75,11 @@ def rel(path: Path) -> str:
 
 def normalized(value: str) -> str:
     return value.replace("\r\n", "\n").rstrip("\n")
+
+
+def extract_embedded_script(robin: str) -> str:
+    """Extract an r12 RunScript payload without legacy flow-indent removal."""
+    return r12_extractor_tool.embedded_script(robin)
 
 
 def expected_adaptation(teaching: str) -> tuple[str, list[dict[str, object]]]:
@@ -159,12 +166,12 @@ def audit() -> dict[str, object]:
     expected = normalized(expected)
     hunks = diff_hunks(expected, generated)
 
-    action = source_tool.extract_action(generated)
-    embedded = source_tool.decode_robin_string(source_tool.action_payload(action))
+    embedded = extract_embedded_script(generated)
+    teaching_embedded = extract_embedded_script(teaching)
+    if teaching_embedded != TEACHING_SCRIPT.read_text(encoding="utf-8").rstrip("\r\n"):
+        raise ValueError("Prepared r12 Robin no longer embeds the fixed teaching script")
     parser_errors = parser_tool.parse_powershell(embedded)
-    teaching_parser_errors = parser_tool.parse_powershell(
-        TEACHING_SCRIPT.read_text(encoding="utf-8")
-    )
+    teaching_parser_errors = parser_tool.parse_powershell(teaching_embedded)
     dom = json.loads(RESPONSE_DOM.read_bytes())
     send = json.loads(LIVE_SEND.read_bytes())
     response_text = RESPONSE.read_text(encoding="utf-8")
@@ -286,9 +293,11 @@ def audit() -> dict[str, object]:
             "exact_match": not hunks,
         },
         "powershell_parser": {
+            "extractor": "r12 prefix/suffix extraction without legacy four-character deindent",
             "generated_error_count": len(parser_errors),
             "generated_errors": parser_errors,
             "prepared_script_error_count": len(teaching_parser_errors),
+            "prepared_embedded_matches_support_without_final_newline": True,
             "executed": False,
         },
         "structure": {

@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-09-18T05:36:08+09:00",
+  "prototype_id": "EX03-R12-FIXED-HELPER-P1",
+  "base_commit": "8baf8493cbd2c1e890779dfd59ac4381744a1932",
+  "result": "PASS_LIMITED_NON_LIVE_PROTOTYPE_NOT_EX03_ACCEPTANCE",
+  "artifacts": {
+    "helper": {
+      "sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+      "bytes": 8222,
+      "lines": 179
+    },
+    "invocation": {
+      "sha256": "9ff979598a0383099aec88ca3aace330f29ed519cc66d9cf6ca63e31d962227a",
+      "bytes": 1224,
+      "lines": 51
+    },
+    "launcher": {
+      "sha256": "b509339998887977fc272613e9c6a479e444dfbed1e957d63588a89ac53bfbaf",
+      "bytes": 2109,
+      "lines": 60
+    },
+    "manifest": {
+      "sha256": "911bb1e864fe1e183a839f094052ee895c0caad7968a8f038fd950f5ad0ffe01",
+      "bytes": 3036,
+      "lines": 70
+    }
+  },
+  "checks": [
+    {
+      "command": "python -m py_compile tools/Analyze-Issue38Ex03R12Generation.py tests/Test-Issue38Ex03R12Extraction.py tests/Test-Issue38Ex03FixedHelperPrototype.py tests/Test-Issue38Ex03R12Candidate.py",
+      "result": "PASS"
+    },
+    {
+      "command": "python -m unittest tests.Test-Issue38Ex03R12Extraction tests.Test-Issue38Ex03FixedHelperPrototype tests.Test-Issue38Ex03R12Candidate -v",
+      "result": "PASS_24_OF_24",
+      "groups": {
+        "r12_extraction": "PASS_5_OF_5",
+        "fixed_helper_prototype": "PASS_8_OF_8",
+        "preserved_r12_candidate": "PASS_11_OF_11"
+      }
+    },
+    {
+      "check": "PowerShell AST for real helper and launcher",
+      "result": "PASS_ZERO_PARSE_ERRORS"
+    },
+    {
+      "check": "r12 analyzer uses one non-deindenting extraction path for generated and teaching Robin",
+      "result": "PASS_TEACHING_0_GENERATED_1_BLANK_ONLY_0"
+    }
+  ],
+  "stub_matrix": {
+    "normal": {
+      "exit_code": 0,
+      "stdout": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}",
+      "helper_marker_created": true,
+      "result": "PASS"
+    },
+    "helper_missing": {
+      "exit_code": 41,
+      "stdout": "{\"status\":\"ERROR\",\"error_code\":\"HELPER_NOT_FOUND\"}",
+      "helper_marker_created": false,
+      "result": "PASS_STOP_BEFORE_HELPER"
+    },
+    "helper_sha_modified": {
+      "exit_code": 43,
+      "stdout": "{\"status\":\"ERROR\",\"error_code\":\"HELPER_SHA256_MISMATCH\"}",
+      "helper_marker_created": false,
+      "result": "PASS_STOP_BEFORE_HELPER"
+    },
+    "success_output_missing": {
+      "exit_code": 46,
+      "stdout": "{\"status\":\"ERROR\",\"error_code\":\"HELPER_SUCCESS_OUTPUT_MISSING\"}",
+      "helper_marker_created": true,
+      "result": "PASS_REJECT_AFTER_HARMLESS_STUB"
+    }
+  },
+  "scope": {
+    "stub_side_effect": "temporary marker file only",
+    "real_helper_execution": false,
+    "excel_com_execution": false,
+    "copilot_send_count": 0,
+    "pad_run_count": 0,
+    "full_regression": "NOT_RUN_BY_SCOPE",
+    "r12_acceptance_changed": false,
+    "github_write": false
+  }
+}
