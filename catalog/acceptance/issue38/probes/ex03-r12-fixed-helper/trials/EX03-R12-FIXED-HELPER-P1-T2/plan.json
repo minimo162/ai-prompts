@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-P1-T2",
+  "baseline_commit": "6a48efc009efe10cedbeab015eb0d3cfce751b94",
+  "classification": "FIXED_HELPER_AUXILIARY_ONLY_NOT_FORMAL_EX03_R12_ACCEPTANCE",
+  "execution_baseline": {
+    "source_trial": "EX03-R12-FIXED-HELPER-P1-T1",
+    "pad_recopy_sha256": "da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa",
+    "unknown_content_differences": 0,
+    "known_content_difference_hunks": 1,
+    "known_differences": [
+      "Robin escaping of eight JSON double quotes in launcher expectedSuccess",
+      "line-ending serialization and final newline"
+    ],
+    "decoded_launcher_exact": true
+  },
+  "authorization": {
+    "normal_pad_runs": 1,
+    "additional_runs": 0,
+    "repaste": 0,
+    "resave": 0,
+    "copilot_sends": 0,
+    "formal_ex03_r12_runs": 0,
+    "github_writes": 0
+  },
+  "stop_conditions": [
+    "saved flow differs from the fixed T1 re-copy baseline",
+    "unknown difference or code change",
+    "PAD refusal, error, mismatch, or unknown result"
+  ]
+}

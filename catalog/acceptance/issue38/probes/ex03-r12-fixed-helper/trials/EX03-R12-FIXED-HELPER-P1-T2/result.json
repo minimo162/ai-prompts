@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-P1-T2",
+  "decision": "PASS_FIXED_HELPER_AUXILIARY_NORMAL_RUN1",
+  "scope": "Fixed-helper alternate-path auxiliary test only; not formal EX03-r12 acceptance.",
+  "execution_identity": {
+    "saved_flow_sha256": "da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa",
+    "byte_exact_to_t1_recopy": true,
+    "known_difference_hunks": 1,
+    "unknown_difference_count": 0,
+    "decoded_launcher_exact": true,
+    "helper_sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+    "invocation_sha256": "92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6",
+    "launcher_sha256": "1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1",
+    "fixed_paths_unchanged": true
+  },
+  "pad": {
+    "flow_name": "無題 (14)",
+    "flow_window_id": 1382846,
+    "repaste_count": 0,
+    "resave_count": 0,
+    "verification_recopy_count": 1,
+    "run_count": 1,
+    "terminal": {
+      "status_bar": "READY",
+      "run_button_enabled": true,
+      "stop_button_disabled": true,
+      "designer_error_observed": false,
+      "normal_termination_observed": true
+    },
+    "powershell_stdout": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}",
+    "stderr": {
+      "designer_error_observed": false,
+      "separate_pad_variable_available": false,
+      "empty_stderr_directly_proven": false,
+      "fixed_scripts_explicit_stderr_emitters": {
+        "[Console]::Error": 0,
+        "Write-Error": 0,
+        "2>": 0,
+        "2>&1": 0
+      },
+      "boundary": "No separate stderr variable exists in the fixed saved Robin; exact success JSON, fail-closed launcher, READY terminal state, and no Designer error were observed."
+    },
+    "transfer_state": "SAVED_REOPENED_12_JSON_COMPARISONS_READY",
+    "value_type_match_true": 12,
+    "value_type_match_false": 0
+  },
+  "artifact": {
+    "result_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T2\\run1\\result.xlsx",
+    "result_sha256": "e3f631f305389229edd5505e922263dc2d4cf1ca9325267cf7483d2ea5502ded",
+    "result_bytes": 11348,
+    "runtime_output_preserved_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T2\\run1\\runtime-output-after-run.xlsx",
+    "runtime_output_absent_after_preservation": true,
+    "runtime_json_absent_after_preservation": true,
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_matches_template": true
+  },
+  "comparison": {
+    "target_cells": {
+      "checked": 12,
+      "mismatches": 0,
+      "status": "PASS"
+    },
+    "outside_cells": {
+      "checked": 468,
+      "mismatches": 0,
+      "status": "PASS"
+    },
+    "formulas": {
+      "mismatches": 0,
+      "status": "PASS"
+    },
+    "effective_format": {
+      "checked_cells": 480,
+      "checked_rows": 48,
+      "checked_columns": 30,
+      "difference_attribute_counts": {
+        "cell_style": 0,
+        "row_dimension": 0,
+        "column_dimension": 0,
+        "sheet_structure": 0
+      },
+      "status": "MATCH_EFFECTIVE_FORMAT"
+    },
+    "f6": {
+      "value": "100%",
+      "dotnet_type": "System.String",
+      "number_format": "G/標準",
+      "prefix": "",
+      "has_formula": false,
+      "status": "PASS_F6_SYSTEM_STRING_100_PERCENT_ORIGINAL_FORMAT_EMPTY_PREFIX_NO_FORMULA"
+    },
+    "legacy_raw_diagnostic": {
+      "status": "FAIL_PRESERVED_NOT_USED_AS_EFFECTIVE_FORMAT_GATE",
+      "failure_counts": {
+        "row_dimensions": 48,
+        "column_dimensions": 30,
+        "styles": 480
+      },
+      "total": 558
+    },
+    "original_inputs_unchanged": true,
+    "template_unchanged": true
+  },
+  "preservation": {
+    "t1_fail_run0_records_unchanged": true,
+    "formal_ex03_r12_unchanged": true,
+    "protected_tracked_mismatch_count": 0,
+    "github_write": false
+  },
+  "remaining": [
+    "The fixed saved Robin has no separate stderr output variable; empty stderr is not directly claimed.",
+    "This auxiliary PASS does not replace or broaden formal EX03-r12 acceptance.",
+    "No type, workbook shape, or PAD environment beyond the fixed EX03 case is generalized."
+  ],
+  "decided_at": "2026-09-17T22:15:48.821399+00:00"
+}

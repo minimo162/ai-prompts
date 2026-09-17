@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-P1-T2",
+  "run_id": "EX03-R12-FIXED-HELPER-P1-T2-RUN1",
+  "flow_name": "無題 (14)",
+  "flow_window_id": 1382846,
+  "run_index": 1,
+  "run_invocations_total": 1,
+  "started_utc": "2026-09-17T22:03:01.677Z",
+  "terminal_observed_utc": "2026-09-17T22:04:18.466Z",
+  "variables_observed_utc": "2026-09-17T22:09:48.882Z",
+  "terminal_observation": {
+    "status_bar": "READY",
+    "run_button_enabled": true,
+    "stop_button_disabled": true,
+    "designer_error_observed": false,
+    "normal_termination_observed": true
+  },
+  "powershell": {
+    "stdout_variable": "PowershellOutput",
+    "stdout_observed": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}",
+    "stdout_matches_fixed_success_json": true,
+    "separate_stderr_variable_in_saved_robin": false,
+    "stderr_observation": "NO_DESIGNER_ERROR_OBSERVED; NO_SEPARATE_STDERR_VARIABLE",
+    "stderr_empty_not_claimed": true
+  },
+  "status": "PASS_TERMINAL_READY_SUCCESS_JSON_NO_DESIGNER_ERROR"
+}
