@@ -24,10 +24,13 @@ WORK = RUNTIME / "work.xlsx"
 OUTPUT = RUNTIME / "照合結果.xlsx"
 RESULT_XLSX = RUN / "result.xlsx"
 TEMPLATE = ROOT / "catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx"
+FIXED_SPEC = ROOT / "catalog/acceptance/issue38/spec.json"
 HELPER = PROBE / "EX03-R12-Fixed-StringTransfer.ps1"
 INVOCATION = T1 / "invocation.json"
 LAUNCHER = T1 / "launcher.ps1"
 R11_FINALIZER_PATH = ROOT / "tools/Finalize-Issue38Ex03R11FileAux.py"
+TRIAL_ID = "EX03-R12-FIXED-HELPER-P1-T2"
+RUN_ID = "EX03-R12-FIXED-HELPER-P1-T2-RUN1"
 EXPECTED_WORK_SHA = "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
 EXPECTED_SUCCESS = '{"status":"OK","mode":"NORMAL","text_writes":7,"formats_restored":true}'
 EXPECTED_FIXED_SHA = {
@@ -80,6 +83,203 @@ def path_is(value: object, expected: Path, label: str) -> bool:
     return recorded_path(value, label) == expected.resolve()
 
 
+def require_keys(value: object, required: set[str], label: str) -> dict:
+    require(isinstance(value, dict), f"{label} must be an object")
+    missing = sorted(required - set(value))
+    require(not missing, f"{label} missing required keys: {missing}")
+    return value
+
+
+def parse_a1_cell(value: object, label: str) -> tuple[int, int]:
+    require(isinstance(value, str), f"{label} must be an A1 cell")
+    match = re.fullmatch(r"([A-Za-z]+)([1-9][0-9]*)", value)
+    require(match is not None, f"{label} must be an A1 cell")
+    column = 0
+    for character in match.group(1).upper():
+        column = column * 26 + ord(character) - ord("A") + 1
+    return int(match.group(2)), column
+
+
+def format_a1_cell(row: int, column: int) -> str:
+    require(row >= 1 and column >= 1, "A1 row and column must be positive")
+    letters = []
+    while column:
+        column, remainder = divmod(column - 1, 26)
+        letters.append(chr(ord("A") + remainder))
+    return "".join(reversed(letters)) + str(row)
+
+
+def expected_value_type_match_names(fixed_spec: dict) -> frozenset[str]:
+    spec = require_keys(fixed_spec, {"cases"}, "fixed spec")
+    require(isinstance(spec["cases"], list), "fixed spec cases must be a list")
+    cases = [item for item in spec["cases"] if isinstance(item, dict) and item.get("id") == "EX03"]
+    require(len(cases) == 1, "fixed spec must contain exactly one EX03 case")
+    case = require_keys(cases[0], {"inputs"}, "fixed EX03 case")
+    require(isinstance(case["inputs"], list) and case["inputs"], "fixed EX03 inputs missing")
+
+    names: set[str] = set()
+    expected_count = 0
+    for index, raw_input in enumerate(case["inputs"], start=1):
+        item = require_keys(
+            raw_input,
+            {"range", "target_sheet", "target_start"},
+            f"fixed EX03 input {index}",
+        )
+        require(isinstance(item["range"], str), f"fixed EX03 input {index} range missing")
+        endpoints = item["range"].split(":")
+        require(len(endpoints) == 2, f"fixed EX03 input {index} range must be rectangular")
+        source_start_row, source_start_column = parse_a1_cell(
+            endpoints[0], f"fixed EX03 input {index} range start"
+        )
+        source_end_row, source_end_column = parse_a1_cell(
+            endpoints[1], f"fixed EX03 input {index} range end"
+        )
+        require(
+            source_end_row >= source_start_row and source_end_column >= source_start_column,
+            f"fixed EX03 input {index} range is reversed",
+        )
+        target_start_row, target_start_column = parse_a1_cell(
+            item["target_start"], f"fixed EX03 input {index} target start"
+        )
+        require(
+            isinstance(item["target_sheet"], str) and bool(item["target_sheet"]),
+            f"fixed EX03 input {index} target sheet missing",
+        )
+        row_count = source_end_row - source_start_row + 1
+        column_count = source_end_column - source_start_column + 1
+        expected_count += row_count * column_count
+        for row_offset in range(row_count):
+            for column_offset in range(column_count):
+                target_cell = format_a1_cell(
+                    target_start_row + row_offset,
+                    target_start_column + column_offset,
+                )
+                names.add(f"{item['target_sheet']}_{target_cell}_ValueTypeMatch")
+
+    require(expected_count == 12, f"fixed EX03 spec must derive 12 target cells, got {expected_count}")
+    require(len(names) == expected_count, "fixed EX03 spec derives duplicate ValueTypeMatch names")
+    return frozenset(names)
+
+
+def validate_pad_observation_records(
+    pad_variables: dict,
+    pad_run: dict,
+    artifact: dict,
+    fixed_spec: dict,
+) -> frozenset[str]:
+    """Validate fixed T2 PAD observations without writing or moving artifacts."""
+
+    variables = require_keys(
+        pad_variables,
+        {
+            "trial_id",
+            "run_id",
+            "powershell_output",
+            "transfer_state",
+            "value_type_matches",
+            "counts",
+            "status",
+        },
+        "PAD variables record",
+    )
+    run = require_keys(
+        pad_run,
+        {
+            "trial_id",
+            "run_id",
+            "run_index",
+            "run_invocations_total",
+            "terminal_observation",
+            "powershell",
+            "status",
+        },
+        "PAD Run record",
+    )
+    artifact_record = require_keys(artifact, {"trial_id", "run_id"}, "artifact record")
+
+    for label, record in (
+        ("PAD variables record", variables),
+        ("PAD Run record", run),
+        ("artifact record", artifact_record),
+    ):
+        require(record["trial_id"] == TRIAL_ID, f"{label} trial_id mismatch")
+        require(record["run_id"] == RUN_ID, f"{label} run_id mismatch")
+    require(
+        variables["trial_id"] == run["trial_id"] == artifact_record["trial_id"]
+        and variables["run_id"] == run["run_id"] == artifact_record["run_id"],
+        "PAD variables, PAD Run, and artifact identities are not bound",
+    )
+
+    require(run["run_index"] == 1 and run["run_invocations_total"] == 1, "PAD Run count mismatch")
+    terminal = run["terminal_observation"]
+    require(
+        terminal
+        == {
+            "status_bar": "READY",
+            "run_button_enabled": True,
+            "stop_button_disabled": True,
+            "designer_error_observed": False,
+            "normal_termination_observed": True,
+        },
+        "PAD terminal observation mismatch",
+    )
+    powershell = require_keys(
+        run["powershell"],
+        {
+            "stdout_variable",
+            "stdout_observed",
+            "stdout_matches_fixed_success_json",
+            "separate_stderr_variable_in_saved_robin",
+            "stderr_empty_not_claimed",
+        },
+        "PAD Run PowerShell observation",
+    )
+    require(powershell["stdout_variable"] == "PowershellOutput", "PowerShell output variable mismatch")
+    require(powershell["stdout_observed"] == EXPECTED_SUCCESS, "PowerShell success JSON mismatch")
+    require(powershell["stdout_matches_fixed_success_json"] is True, "PowerShell success gate mismatch")
+    require(powershell["separate_stderr_variable_in_saved_robin"] is False, "Unexpected stderr claim")
+    require(powershell["stderr_empty_not_claimed"] is True, "Unproven empty stderr claim")
+    require(
+        run["status"] == "PASS_TERMINAL_READY_SUCCESS_JSON_NO_DESIGNER_ERROR",
+        "PAD Run status mismatch",
+    )
+
+    require(
+        variables["powershell_output"] == {"observed_value": EXPECTED_SUCCESS, "match": True},
+        "PAD PowershellOutput observation mismatch",
+    )
+    require(
+        variables["transfer_state"]
+        == {"observed_value": "SAVED_REOPENED_12_JSON_COMPARISONS_READY", "match": True},
+        "PAD TransferState mismatch",
+    )
+    expected_names = expected_value_type_match_names(fixed_spec)
+    matches = require_keys(variables["value_type_matches"], set(), "PAD value/type matches")
+    observed_names = set(matches)
+    require(
+        observed_names == expected_names,
+        "PAD ValueTypeMatch variable set mismatch: "
+        f"missing={sorted(expected_names - observed_names)}, "
+        f"unexpected={sorted(observed_names - expected_names)}",
+    )
+    for name in sorted(expected_names):
+        observation = require_keys(
+            matches[name], {"observed_value", "match"}, f"PAD ValueTypeMatch {name}"
+        )
+        require(
+            set(observation) == {"observed_value", "match"},
+            f"PAD ValueTypeMatch {name} key set mismatch",
+        )
+        require(observation["observed_value"] is True, f"PAD ValueTypeMatch {name} observed false")
+        require(observation["match"] is True, f"PAD ValueTypeMatch {name} match false")
+    require(variables["counts"] == {"true": 12, "false": 0, "total": 12}, "PAD type counts mismatch")
+    require(
+        variables["status"] == "PASS_SUCCESS_JSON_TRANSFER_STATE_AND_12_VALUE_TYPE_MATCH",
+        "PAD variables status mismatch",
+    )
+    return expected_names
+
+
 def main() -> int:
     for path in (T2 / "result.json", T2 / "RESULT.md"):
         if path.exists():
@@ -95,6 +295,7 @@ def main() -> int:
     legacy = load(RUN / "comparison.json")
     native = load(RUN / "native-styles.json")
     f6 = load(RUN / "f6-native.json")
+    fixed_spec = load(FIXED_SPEC)
     contract = r11.fixed_contract()
 
     require(
@@ -137,49 +338,8 @@ def main() -> int:
         "Fixed helper/launcher error-stop contract changed",
     )
 
-    require(pad_run["run_id"] == "EX03-R12-FIXED-HELPER-P1-T2-RUN1", "PAD Run id mismatch")
-    require(pad_run["run_index"] == 1 and pad_run["run_invocations_total"] == 1, "PAD Run count mismatch")
+    validate_pad_observation_records(pad_variables, pad_run, artifact, fixed_spec)
     terminal = pad_run["terminal_observation"]
-    require(
-        terminal
-        == {
-            "status_bar": "READY",
-            "run_button_enabled": True,
-            "stop_button_disabled": True,
-            "designer_error_observed": False,
-            "normal_termination_observed": True,
-        },
-        "PAD terminal observation mismatch",
-    )
-    powershell = pad_run["powershell"]
-    require(powershell["stdout_variable"] == "PowershellOutput", "PowerShell output variable mismatch")
-    require(powershell["stdout_observed"] == EXPECTED_SUCCESS, "PowerShell success JSON mismatch")
-    require(powershell["stdout_matches_fixed_success_json"] is True, "PowerShell success gate mismatch")
-    require(powershell["separate_stderr_variable_in_saved_robin"] is False, "Unexpected stderr claim")
-    require(powershell["stderr_empty_not_claimed"] is True, "Unproven empty stderr claim")
-    require(
-        pad_run["status"] == "PASS_TERMINAL_READY_SUCCESS_JSON_NO_DESIGNER_ERROR",
-        "PAD Run status mismatch",
-    )
-
-    require(
-        pad_variables["powershell_output"] == {"observed_value": EXPECTED_SUCCESS, "match": True},
-        "PAD PowershellOutput observation mismatch",
-    )
-    require(
-        pad_variables["transfer_state"]
-        == {"observed_value": "SAVED_REOPENED_12_JSON_COMPARISONS_READY", "match": True},
-        "PAD TransferState mismatch",
-    )
-    require(pad_variables["counts"] == {"true": 12, "false": 0, "total": 12}, "PAD type counts mismatch")
-    require(len(pad_variables["value_type_matches"]) == 12, "PAD type mapping count mismatch")
-    require(
-        all(
-            value == {"observed_value": True, "match": True}
-            for value in pad_variables["value_type_matches"].values()
-        ),
-        "PAD value/type match failure",
-    )
 
     require(RESULT_XLSX.is_file(), "Preserved result missing")
     require((RUN / "work.xlsx").is_file(), "Preserved work missing")
