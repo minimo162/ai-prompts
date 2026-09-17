@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R11-FILE-AUX1-RUN1",
+  "decided_at": "2026-09-17T03:54:54.333637+00:00",
+  "checks": {
+    "pad_terminal_ready": true,
+    "pad_12_json_value_and_type_matches": true,
+    "artifact_preserved": true,
+    "fixed_typed_transfer": true,
+    "typed_mismatches_zero": true,
+    "originals_unchanged": true,
+    "legacy_raw_fail_preserved": true,
+    "legacy_558_exact": true,
+    "legacy_target_mismatches_zero": true,
+    "legacy_outside_mismatches_zero": true,
+    "excel_effective_format_matches": true,
+    "excel_effective_attribute_differences_zero": true,
+    "excel_effective_location_differences_zero": true,
+    "f6_native_contract": true,
+    "work_still_frozen_template": true,
+    "runtime_output_exists": true,
+    "runtime_output_matches_preserved": true
+  },
+  "fixed_scope": {
+    "target_cells": 12,
+    "target_mismatches": 0,
+    "outside_cells": 468,
+    "outside_value_type_formula_mismatches": 0,
+    "pad_json_value_and_type_true": 12,
+    "pad_json_value_and_type_false": 0
+  },
+  "legacy_raw_diagnostic": {
+    "status": "FAIL_PRESERVED_NOT_USED_AS_EFFECTIVE_FORMAT_GATE",
+    "failure_counts": {
+      "row_dimensions": 48,
+      "column_dimensions": 30,
+      "styles": 480
+    },
+    "total": 558,
+    "classification": "The existing raw openpyxl comparison reports serialization/comparison differences; the read-only Excel-effective comparison reports zero format, row, column, or sheet-structure differences."
+  },
+  "run2_gate": "PASS_AUTHORIZED_BY_FIXED_RULES",
+  "formal_ex03_r11_g1_result": "FAIL_R11_REQUIRED_CODE_BLOCK_ABSENT_STOP_BEFORE_PAD_PRESERVED",
+  "acceptance_boundary": "Auxiliary downloaded-file PAD evidence only; it does not replace or offset the formal EX03-r11-G1 delivery-contract failure and is not generalized beyond the fixed EX03 text/number mapping."
+}

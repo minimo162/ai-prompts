@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "advanced_at": "2026-09-17T03:54:54.340696+00:00",
+  "run1_runtime_output_preserved_as": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run1/runtime-output-before-run2.xlsx",
+  "run1_runtime_output_sha256": "ddcd8fdd443262edeba6ad2f1523e175ca4d94431d9df14122605bb4fc34a38f",
+  "runtime_output_absent_before_run2": true,
+  "runtime_work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+  "runtime_work_matches_frozen_template": true,
+  "status": "PASS_READY_FOR_RUN2"
+}

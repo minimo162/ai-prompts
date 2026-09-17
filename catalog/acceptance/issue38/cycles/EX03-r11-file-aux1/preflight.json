@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R11-FILE-AUX1",
+  "recorded_at": "2026-09-17T12:29:58.197288+09:00",
+  "status": "PASS_READY_FOR_DEDICATED_PAD_SAVE_RECOPY_THEN_AT_MOST_TWO_RUNS",
+  "checks": {
+    "head_is_fixed_checkpoint": true,
+    "worktree_had_only_two_new_evidence_tools": true,
+    "download_preserved_generated_and_audit_target_sha_identical": true,
+    "source_copy_is_byte_exact": true,
+    "r11_static_fidelity_pass": true,
+    "r11_static_safety_pass": true,
+    "r11_g1_formal_fail_and_no_pad_record_preserved": true,
+    "fixed_version_request_spec_expected_fixtures_unchanged": true,
+    "work_matches_frozen_template": true,
+    "output_absent": true
+  },
+  "flow_name": "RobinIssue38EX03R11FileAux1_20260917A",
+  "protected_tracked_file_count": 4397
+}

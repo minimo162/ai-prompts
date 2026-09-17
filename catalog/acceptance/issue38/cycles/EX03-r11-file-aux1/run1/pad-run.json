@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R11-FILE-AUX1-RUN1",
+  "flow_name": "無題 (10)",
+  "flow_window_id": 71280,
+  "run_index": 1,
+  "run_invocations_total": 1,
+  "started_utc": "2026-09-17T03:42:04.187Z",
+  "terminal_observed_utc": "2026-09-17T03:42:37.329Z",
+  "variables_observed_utc": "2026-09-17T03:44:32.140Z",
+  "terminal_observation": {
+    "status_bar": "READY",
+    "run_button_enabled": true,
+    "stop_button_disabled": true,
+    "designer_error_observed": false
+  },
+  "status": "PASS_TERMINAL_READY_NO_ERROR_OBSERVED"
+}

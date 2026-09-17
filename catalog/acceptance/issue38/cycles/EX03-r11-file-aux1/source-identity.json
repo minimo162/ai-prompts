@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R11-FILE-AUX1",
+  "recorded_at": "2026-09-17T12:29:58.197288+09:00",
+  "source_cycle": "EX03-R11-G1",
+  "source_cycle_formal_result": "FAIL_R11_REQUIRED_CODE_BLOCK_ABSENT_STOP_BEFORE_PAD",
+  "download_path": "C:\\Users\\yuuki\\Downloads\\ex03.robin",
+  "preserved_generated_path": "catalog/acceptance/issue38/cycles/EX03-r11-G1/generated.robin",
+  "safety_audit_path": "catalog/acceptance/issue38/cycles/EX03-r11-G1/generation-safety-audit.json",
+  "auxiliary_preserved_download_path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/copilot-downloaded-ex03.robin",
+  "sha256": {
+    "copilot_download": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875",
+    "preserved_generated_robin": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875",
+    "safety_audit_recorded_target": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875"
+  },
+  "all_three_identical": true,
+  "download_copy_sha256": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875",
+  "download_copy_exact": true,
+  "manual_reconstruction_or_repair": false
+}

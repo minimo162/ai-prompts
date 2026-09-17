@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R11-FILE-AUX1",
+  "recorded_at": "2026-09-17T04:05:43.896184+00:00",
+  "candidate": {
+    "version": "20260917-excel-r11",
+    "instruction_sha256": "bceb1c7e4f47c0cd6a92ad698d08108175002bffcaaaff492a309ca74a122aa1",
+    "bundle_sha256": "2d95ce344ff66195061fd15010d13b75937888575fa2345fb543ae2115242f69",
+    "manifest_sha256": "295306ea7e2e45da8cf77dec2784e94ea8ea8333da0df6a4000f83e9228b509e",
+    "submitted_body_sha256": "4bd51be17353634c8b38cabbee91a9235a1dd1af87243675f5d42500f40c5984",
+    "generated_robin_sha256": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875"
+  },
+  "formal_ex03_r11_g1": {
+    "normal_m365_send_count": 1,
+    "generation_completed": true,
+    "refusal": false,
+    "generated_file_static_safety": "PASS",
+    "response_code_blocks": {
+      "required": 1,
+      "actual": 0
+    },
+    "delivery_contract": "FAIL",
+    "failure_code": "FAIL_R11_REQUIRED_CODE_BLOCK_ABSENT_STOP_BEFORE_PAD",
+    "formal_pad_runs": 0,
+    "accepted": false,
+    "status": "FORMAL_FAIL_PRESERVED"
+  },
+  "auxiliary_downloaded_file_validation": {
+    "classification": "SEPARATELY_IDENTIFIED_AUXILIARY_NOT_FORMAL_ACCEPTANCE",
+    "source_identity": "PASS_DOWNLOAD_PRESERVED_AUDIT_SHA_IDENTICAL",
+    "pad_flow": {
+      "name": "無題 (10)",
+      "window_id": 71280
+    },
+    "save_recopy": "PASS_UNMODIFIED_PAD_SAVE_RECOPY_BEFORE_RUN1",
+    "pad_run_count": 2,
+    "run1": {
+      "terminal": "PASS_TERMINAL_READY_NO_ERROR_OBSERVED",
+      "pad_json_type_matches": {
+        "true": 12,
+        "false": 0,
+        "total": 12
+      },
+      "artifact_sha256": "ddcd8fdd443262edeba6ad2f1523e175ca4d94431d9df14122605bb4fc34a38f",
+      "typed_transfer": "MATCH_FIXED_EX03_TEXT_NUMBER_SCOPE",
+      "effective_format": "MATCH_EFFECTIVE_FORMAT",
+      "legacy_raw_difference_count": 558,
+      "f6": "PASS_F6_SYSTEM_STRING_100_PERCENT_ORIGINAL_FORMAT_EMPTY_PREFIX_NO_FORMULA"
+    },
+    "run2": {
+      "terminal": "PASS_TERMINAL_READY_NO_ERROR_OBSERVED",
+      "pad_json_type_matches": {
+        "true": 12,
+        "false": 0,
+        "total": 12
+      },
+      "artifact_sha256": "d41fb0ac1b142c1aa1ffa3ce2f542a8cd70b4483593173c08a084dc8340ccb34",
+      "typed_transfer": "MATCH_FIXED_EX03_TEXT_NUMBER_SCOPE",
+      "effective_format": "MATCH_EFFECTIVE_FORMAT",
+      "legacy_raw_difference_count": 558,
+      "f6": "PASS_F6_SYSTEM_STRING_100_PERCENT_ORIGINAL_FORMAT_EMPTY_PREFIX_NO_FORMULA"
+    },
+    "two_run_semantic": {
+      "status": "MATCH",
+      "checked_cells": 480,
+      "binary_sha_equal": false,
+      "semantic_equal": true
+    },
+    "fixed_cell_checks": {
+      "targets": 12,
+      "target_mismatches_each_run": 0,
+      "outside_cells": 468,
+      "outside_mismatches_each_run": 0
+    },
+    "f6_saved": {
+      "sheet": "追記先",
+      "address": "F6",
+      "value2": "100%",
+      "value2_dotnet_type": "System.String",
+      "text": "100%",
+      "has_formula": false,
+      "formula": null,
+      "number_format_invariant": "G/標準",
+      "number_format_local": "G/標準",
+      "prefix_character": ""
+    },
+    "status": "PASS_AUXILIARY_DOWNLOADED_FILE_TWO_RUN_VALIDATION"
+  },
+  "preservation": {
+    "schema_version": 1,
+    "checked_at": "2026-09-17T04:05:43.894971+00:00",
+    "base_commit": "0b681b946ceafa9d938744a857d984fa8fff71e8",
+    "protected_before_sha256": "11c5be854b3abf4ed5d9178a00da3b0601f6ee66be8343525e77ca902ad5dc9c",
+    "checked_file_count": 4397,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "runtime_work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "runtime_work_matches_frozen_template": true,
+    "runtime_output_absent_after_preservation": true,
+    "status": "PASS_ALL_PROTECTED_FILES_UNCHANGED"
+  },
+  "remaining": {
+    "formal_r11_delivery_contract_fail": true,
+    "legacy_raw_558_fail_not_hidden": true,
+    "existing_output_guard_live_path": "REMAINS_UNCONFIRMED",
+    "unconfirmed_type_or_shape_generalization": false,
+    "github_write": false
+  },
+  "decision": {
+    "formal_ex03_r11_g1_accepted": false,
+    "auxiliary_validation_passed": true,
+    "issue38_closed_by_this_auxiliary": false,
+    "reason": "The downloaded file independently passed the dedicated two-run PAD path, but the fixed formal r11 response delivery contract had already failed; auxiliary success cannot replace that failure."
+  }
+}

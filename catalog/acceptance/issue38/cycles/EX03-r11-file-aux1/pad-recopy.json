@@ -1,0 +1,35 @@
+{
+    "schema_version":  1,
+    "test_id":  "EX03-R11-FILE-AUX1",
+    "captured_utc":  "2026-09-17T03:41:19.9696510Z",
+    "flow_name":  "無題 (10)",
+    "flow_window_id":  71280,
+    "flow_creation_note":  "PAD create dialog did not retain the preferred name; PAD assigned this unique new name automatically before any Robin paste.",
+    "subflow":  "Main",
+    "power_fx":  "OFF",
+    "execution_before_capture":  false,
+    "observation":  {
+                        "paste_invocations":  1,
+                        "save_invocations":  1,
+                        "recopy_invocations":  1,
+                        "actions_after_paste":  110,
+                        "variables_after_paste":  45,
+                        "designer_error_observed":  false
+                    },
+    "comparison":  {
+                       "candidate_path":  "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/copilot-downloaded-ex03.robin",
+                       "candidate_sha256":  "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875",
+                       "recopy_path":  "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/pad-recopy-before-run.robin",
+                       "recopy_sha256":  "deac46fa2a6fd27be2d1cd987f7d410188dd939046816ea28c4125291769630b",
+                       "exact_text":  false,
+                       "lf_normalized_exact":  true,
+                       "candidate_chars":  12297,
+                       "recopy_chars":  12408,
+                       "candidate_lines":  167,
+                       "recopy_raw_lines":  168,
+                       "recopy_normalized_lines":  167,
+                       "required_fragments_present":  true,
+                       "forbidden_fragments_absent":  true
+                   },
+    "result":  "PASS_UNMODIFIED_PAD_SAVE_RECOPY_BEFORE_RUN1"
+}

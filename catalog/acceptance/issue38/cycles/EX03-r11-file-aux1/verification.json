@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R11-FILE-AUX1",
+  "verified_at": "2026-09-17T04:05:43.896894+00:00",
+  "gates": {
+    "source_sha_identity": true,
+    "unmodified_pad_save_recopy": true,
+    "run1_terminal_and_all_fixed_gates": true,
+    "run1_artifact_preserved_before_run2": true,
+    "run2_terminal_and_all_fixed_gates": true,
+    "two_run_semantic_match": true,
+    "protected_files_unchanged": true,
+    "runtime_output_absent_after_preservation": true
+  },
+  "diagnostics": {
+    "legacy_raw_status": "FAIL",
+    "legacy_raw_difference_count_each_run": 558,
+    "excel_effective_difference_count_each_run": 0
+  },
+  "formal_boundary": {
+    "ex03_r11_g1_failure_code": "FAIL_R11_REQUIRED_CODE_BLOCK_ABSENT_STOP_BEFORE_PAD",
+    "formal_acceptance": false,
+    "auxiliary_acceptance": true
+  },
+  "status": "PASS_AUXILIARY_ONLY_FORMAL_FAIL_PRESERVED"
+}

@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-17T04:05:43.904488+00:00",
+  "cycle_id": "EX03-R11-FILE-AUX1",
+  "file_count": 35,
+  "files": [
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/acceptance-status.json",
+      "sha256": "4b76432cf58b7182ed1284f12abaa807794bc2f0ae53e385506e0b662938d6ea",
+      "bytes": 4400
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/copilot-downloaded-ex03.robin",
+      "sha256": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875",
+      "bytes": 12487
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/pad-recopy-before-run.robin",
+      "sha256": "deac46fa2a6fd27be2d1cd987f7d410188dd939046816ea28c4125291769630b",
+      "bytes": 12598
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/pad-recopy.json",
+      "sha256": "f35c1e737cbe538ae1a9c3d8d2359c51e6bde65dfd83b0c869d317920742eaf0",
+      "bytes": 1861
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/plan.json",
+      "sha256": "494e60def76f70efd3205cf155b1acc6427182ed49d36c0b5942a1faddead322",
+      "bytes": 2114
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/preflight.json",
+      "sha256": "a72d7a5efb2cfbb728d47266f599ae4d052f54c36be69e138aa4a7104a2d5857",
+      "bytes": 781
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/protected-after.json",
+      "sha256": "0d15d59d7947e5cdf8e710bb2074369382074113cd611f47f23cbd048762b72b",
+      "bytes": 552
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/protected-before.json",
+      "sha256": "11c5be854b3abf4ed5d9178a00da3b0601f6ee66be8343525e77ca902ad5dc9c",
+      "bytes": 782018
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/review.md",
+      "sha256": "9390f9d7af4d5de6b221b965ab00bfbc1164ab27c0c127ef10536a74247319b5",
+      "bytes": 2932
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run1/advance-to-run2.json",
+      "sha256": "46791ecc14de8c3ed78c8e5692ce07e0e3b1c8c7c3b8b7c98ca254f6530379c8",
+      "bytes": 531
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run1/artifact.json",
+      "sha256": "89e3ef73958c111baa0188859ac02437e4ba317eb24ed1f3dd7376046122b7b2",
+      "bytes": 698
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run1/comparison.json",
+      "sha256": "696d8d102bf833af8848e03377511dd8dcc6936154e3796b00cf61c6364f9b68",
+      "bytes": 141829
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run1/f6-native.json",
+      "sha256": "120402d991d75cfe4dd94c938c5ad3119619cff8785a69ca4a6c5e405fa7f477",
+      "bytes": 2140
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run1/native-styles.json",
+      "sha256": "94ec007c33c9ef5dd1fdb6a4cd838a06573109bc99bd8852920859d38e5b86fc",
+      "bytes": 3881
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run1/pad-run.json",
+      "sha256": "44cabd6a2c5447de0ab21189d8bbf2028811b0193318217bc51b0c04913454f9",
+      "bytes": 543
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run1/pad-variables.json",
+      "sha256": "e44dceab9e71aaa7d71cecb3af3d9c2029823d7fba3d0b06bf157e599db2e125",
+      "bytes": 1762
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run1/result.xlsx",
+      "sha256": "ddcd8fdd443262edeba6ad2f1523e175ca4d94431d9df14122605bb4fc34a38f",
+      "bytes": 11312
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run1/runtime-output-before-run2.xlsx",
+      "sha256": "ddcd8fdd443262edeba6ad2f1523e175ca4d94431d9df14122605bb4fc34a38f",
+      "bytes": 11312
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run1/typed-transfer.json",
+      "sha256": "73908b353237fd6c94c7abac4b666eba8788abc2f42be44328d28e18246a0fe5",
+      "bytes": 7566
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run1/verification.json",
+      "sha256": "6e9ab21b530d6d8b47fc78bee1236c36cbd3bd1a326f578a4db8d4e8bdbd4b55",
+      "bytes": 1848
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run1/work.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "bytes": 6115
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run2/artifact.json",
+      "sha256": "af15e671f8af0f8a33556de6dde438cefb50b5bbc1d43e2602d690b1a83204aa",
+      "bytes": 698
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run2/comparison.json",
+      "sha256": "bd53c6b565583be16bf81461002ec565b3d703cc0fad5f57658f868b504d93c4",
+      "bytes": 141829
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run2/f6-native.json",
+      "sha256": "9c018a71946a899475fadf822328e59f0b565ded3a37b7403fe24771494c863d",
+      "bytes": 2140
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run2/native-styles.json",
+      "sha256": "6280923c2cb74871f6a8297126928ca92533ea2194a02145171c0610698a0c47",
+      "bytes": 3881
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run2/pad-run.json",
+      "sha256": "3607f7e92f3391d6beaddb6ffed89141d9fe81eb97cbbad18c168a414d257644",
+      "bytes": 543
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run2/pad-variables.json",
+      "sha256": "9b8f7f93d98a44b54ee45825109cbf1a4d991cb9d64a4f67dd3c60a9f59a1196",
+      "bytes": 1762
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run2/result.xlsx",
+      "sha256": "d41fb0ac1b142c1aa1ffa3ce2f542a8cd70b4483593173c08a084dc8340ccb34",
+      "bytes": 11311
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run2/runtime-output-after-run2.xlsx",
+      "sha256": "d41fb0ac1b142c1aa1ffa3ce2f542a8cd70b4483593173c08a084dc8340ccb34",
+      "bytes": 11311
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run2/typed-transfer.json",
+      "sha256": "ee930eb87211ef8a41d04b7c3851d8d2857b41168a9f2e9a4ba8678dcfcfef67",
+      "bytes": 7566
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run2/verification.json",
+      "sha256": "b3a54359f591a60aa4af81874127c3cb1b325a5feb06c4b7373ed1951dc8ec5e",
+      "bytes": 1469
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run2/work.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "bytes": 6115
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/source-identity.json",
+      "sha256": "09d73635958e280dd7798b9048601f9ce2c9d78a9f57864433bd57544eb8d15f",
+      "bytes": 1132
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/two-run-semantic.json",
+      "sha256": "c0916373014570274ccbf3173887ebacf3ed22ddb5b0ced3b14483107aecfba8",
+      "bytes": 1035
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/verification.json",
+      "sha256": "5c41b0e97a47ecc15316a93a5d424de357575b1fca84a89f83942009fb6b1367",
+      "bytes": 871
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R11-FILE-AUX1-RUN1",
+  "flow_name": "無題 (10)",
+  "execution_requested_during_observation": false,
+  "method": "PAD Variables pane search after the same run: one ValueTypeMatch filter showing 12 results across top/bottom scroll positions, plus TransferState opened in the variable edit dialog and cancelled unchanged",
+  "transfer_state": {
+    "observed_value": "SAVED_REOPENED_12_JSON_COMPARISONS_READY",
+    "match": true
+  },
+  "value_type_matches": {
+    "追記先_D5_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "追記先_D6_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "追記先_E5_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "追記先_E6_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "追記先_F5_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "追記先_F6_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "集計先_F7_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "集計先_F8_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "集計先_F9_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "集計先_G7_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "集計先_G8_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "集計先_G9_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    }
+  },
+  "counts": {
+    "true": 12,
+    "false": 0,
+    "total": 12
+  },
+  "status": "PASS_12_OF_12_PAD_JSON_VALUE_AND_TYPE_MATCH"
+}

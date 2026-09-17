@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R11-FILE-AUX1",
+  "prepared_at": "2026-09-17T12:29:58.197288+09:00",
+  "base_commit": "0b681b946ceafa9d938744a857d984fa8fff71e8",
+  "flow_name": "RobinIssue38EX03R11FileAux1_20260917A",
+  "source": {
+    "version": "20260917-excel-r11",
+    "generated_sha256": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875",
+    "static_fidelity": "PASS",
+    "static_safety": "PASS",
+    "unmodified_required": true
+  },
+  "classification": {
+    "kind": "SEPARATELY_IDENTIFIED_DOWNLOADED_FILE_AUXILIARY_PAD_VALIDATION",
+    "formal_ex03_r11_g1_acceptance": false,
+    "formal_ex03_r11_g1_fail_preserved": true,
+    "may_not_offset_or_replace_formal_fail": true
+  },
+  "limits": {
+    "copilot_send": 0,
+    "max_pad_runs": 2,
+    "manual_robin_edit": 0,
+    "candidate_version_change": 0,
+    "github_write": 0,
+    "run2_requires_run1_terminal_all_comparisons_pass_and_artifact_preserved": true,
+    "stop_on_mismatch_safety_issue_or_unknown": true
+  },
+  "fixed_runtime": {
+    "work_path": "catalog/acceptance/issue38/runs/EX03-attempt1/work.xlsx",
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "template_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "output_path": "catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx",
+    "output_absent_before_run1": true
+  },
+  "required_checks": [
+    "PAD save and LF-normalized exact re-copy before Run1",
+    "twelve saved/reopened JSON value-and-type matches",
+    "fixed source/target values, types and positions",
+    "outside cells, formulas, effective formatting and dimensions",
+    "F6 System.String 100%, original format, empty prefix and no formula",
+    "original inputs and frozen template SHA unchanged"
+  ],
+  "known_residuals_preserved": [
+    "EX03-r11-G1 delivery-contract FAIL and PAD NOT_RUN",
+    "legacy 558 raw comparison differences",
+    "existing-output guard live path remains a separate unconfirmed claim",
+    "no generalization beyond the fixed EX03 text/number case and this PAD environment"
+  ]
+}
