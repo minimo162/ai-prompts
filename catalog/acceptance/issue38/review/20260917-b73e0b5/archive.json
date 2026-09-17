@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "review_id": "ISSUE38-EX01-EX05-REVIEW-B73E0B5",
+  "source_checkpoint": "b73e0b5a1a2c3f854ced3046b2a2648ddd0b8184",
+  "archive": "issue38-review-b73e0b5.zip",
+  "archive_sha256": "35778331f706f8df6cea22d56f96c46a492161fc5545a2f1cd4efbb89c0e6d7b",
+  "archive_bytes": 515978,
+  "zip_entry_count_including_manifest": 142,
+  "content_manifest_sha256": "2afe047bba7db94ba2a12567c95e268df42785251c8103bb7dfd1a7faaa5b7a6",
+  "issue38_complete": false
+}

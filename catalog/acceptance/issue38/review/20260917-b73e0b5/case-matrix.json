@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "review_id": "ISSUE38-EX01-EX05-REVIEW-B73E0B5",
+  "source_checkpoint": "b73e0b5a1a2c3f854ced3046b2a2648ddd0b8184",
+  "issue_complete": false,
+  "acceptance_conditions_changed": false,
+  "copilot_sends_added": 0,
+  "pad_runs_added": 0,
+  "candidate_versions_changed": 0,
+  "github_writes": 0,
+  "cases": [
+    {
+      "id": "EX01",
+      "used_versions": [
+        "20260915-excel-r3"
+      ],
+      "routes": [
+        {
+          "classification": "FORMAL",
+          "name": "EX01-R3-NORMAL-M365-PAD",
+          "generation": "RESPONSE_CAPTURED",
+          "pad_save_recopy": "PASS_INSTRUCTION_LINES_EQUAL_RAW_BYTES_DIFFERENT_LINE_ENDINGS",
+          "pad_runs": 2,
+          "result": "TWO_RUNS_MATCH_DISPLAY_VALUES_AND_POSITIONS",
+          "type_evaluation": "NOT_DIRECTLY_OBSERVED"
+        }
+      ],
+      "decision": {
+        "status": "PASS_SCOPED_DISPLAY_VALUE_POSITION_TWO_RUNS",
+        "new_acceptance_declared": false,
+        "issue38_complete": false
+      },
+      "evidence": [
+        "catalog/acceptance/issue38/copilot/EX01/plan.json",
+        "catalog/acceptance/issue38/copilot/EX01/roundtrip.json",
+        "catalog/acceptance/issue38/copilot/EX01/two-run-comparison.json"
+      ],
+      "residuals": [
+        "Individual runtime cell types were not directly observed.",
+        "This is a specified-sheet read result, not full transfer/save acceptance."
+      ]
+    },
+    {
+      "id": "EX02",
+      "used_versions": [
+        "20260915-excel-r5"
+      ],
+      "routes": [
+        {
+          "classification": "FORMAL",
+          "name": "EX02-R5-G2",
+          "generation": "PASS_ONE_NORMAL_M365_GENERATION",
+          "pad_save_recopy": "PASS_LF_NORMALIZED_EXACT",
+          "pad_runs": 2,
+          "result": "PASS_FIXED_EX02_TEXT_NUMBER_SCOPE",
+          "target_checks_each_run": 12,
+          "outside_checks_each_run": 468
+        },
+        {
+          "classification": "AUXILIARY_NEGATIVE",
+          "name": "EX02-R5-G2-ONE-CELL-TYPE-NEGATIVE",
+          "pad_runs": 0,
+          "result": "PASS_DETECTED_EXACTLY_ONE_TARGET_TYPE_MISMATCH",
+          "changed_cell": "Target A!D4 number 12.5 to text 12.5"
+        },
+        {
+          "classification": "POST_HOC_EVIDENCE_ANALYSIS",
+          "name": "EX02-R5-G2-FORMAT-RECONCILIATION",
+          "pad_runs": 0,
+          "legacy_raw_difference_count": 558,
+          "serialization_or_comparison_method_only": 558,
+          "actual_effective_changes": 0,
+          "unresolved": 0,
+          "intentional_negative_detected": 3,
+          "result": "FORMAT_DIMENSION_BLOCKER_RESOLVED_FOR_FIXED_EX02_SCOPE"
+        },
+        {
+          "classification": "AUXILIARY_LIVE_GUARD",
+          "name": "EX04-R5-G2-EXISTING-OUTPUT-NEG1",
+          "pad_runs": 1,
+          "result": "PASS_EXISTING_OUTPUT_GUARD_FIXED_G2_FLOW",
+          "type_evaluation": "NOT_ASSESSED_GUARD_EXITED_BEFORE_WRITE"
+        }
+      ],
+      "decision": {
+        "status": "FUNCTIONAL_FIXED_SCOPE_PASS_WITH_LATER_558_ADJUDICATION",
+        "old_pre_reconciliation_fail_preserved": true,
+        "new_acceptance_declared": false,
+        "issue38_complete": false
+      },
+      "evidence": [
+        "catalog/acceptance/issue38/cycles/EX02-r5-G2/acceptance-status.json",
+        "catalog/acceptance/issue38/cycles/EX02-r5-G2/verification.json",
+        "catalog/acceptance/issue38/cycles/EX02-r5-G2/format-reconciliation/classification.json",
+        "catalog/acceptance/issue38/cycles/EX02-r5-G2/format-reconciliation/verification.json",
+        "catalog/acceptance/issue38/cycles/EX04-r5-G2-existing-output-neg1/verification.json"
+      ],
+      "residuals": [
+        "Text/number evidence is not generalized to blank, Boolean, date, error, formula-result, object, other PAD versions, or other PCs.",
+        "The historical raw 558 FAIL remains immutable but is not an unresolved real-corruption finding after all-item reconciliation."
+      ]
+    },
+    {
+      "id": "EX03",
+      "used_versions": [
+        "20260917-excel-r11"
+      ],
+      "fixed_identity": {
+        "instruction_sha256": "bceb1c7e4f47c0cd6a92ad698d08108175002bffcaaaff492a309ca74a122aa1",
+        "bundle_sha256": "2d95ce344ff66195061fd15010d13b75937888575fa2345fb543ae2115242f69",
+        "manifest_sha256": "295306ea7e2e45da8cf77dec2784e94ea8ea8333da0df6a4000f83e9228b509e",
+        "generated_robin_sha256": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875"
+      },
+      "routes": [
+        {
+          "classification": "FORMAL",
+          "name": "EX03-R11-G1",
+          "normal_m365_sends": 1,
+          "required_text_code_blocks": 1,
+          "actual_text_code_blocks": 0,
+          "downloaded_robin_static_safety": "PASS",
+          "pad_runs": 0,
+          "result": "FAIL_R11_REQUIRED_CODE_BLOCK_ABSENT_STOP_BEFORE_PAD",
+          "accepted": false
+        },
+        {
+          "classification": "AUXILIARY_DOWNLOADED_FILE",
+          "name": "EX03-R11-FILE-AUX1",
+          "source_identity": "PASS_SHA_IDENTICAL_TO_FORMAL_DOWNLOAD",
+          "pad_save_recopy": "PASS_UNMODIFIED",
+          "pad_runs": 2,
+          "target_type_value_position_checks_each_run": 12,
+          "outside_checks_each_run": 468,
+          "effective_format_changes_each_run": 0,
+          "legacy_raw_differences_each_run": 558,
+          "result": "PASS_AUXILIARY_DOWNLOADED_FILE_TWO_RUN_VALIDATION",
+          "accepted_as_formal": false
+        },
+        {
+          "classification": "AUXILIARY_LIVE_GUARD",
+          "name": "EX03-R11-FILE-AUX1-EXISTING-OUTPUT-NEG1",
+          "pad_runs": 1,
+          "result": "PASS_FIXED_R11_FILE_AUX1_EXISTING_OUTPUT_GUARD",
+          "write_branch_entered": false,
+          "type_evaluation": "NOT_ASSESSED_GUARD_EXITED_BEFORE_WRITE"
+        }
+      ],
+      "decision": {
+        "status": "FORMAL_FAIL_AUXILIARY_TWO_RUN_AND_GUARD_PASS_SEPARATE",
+        "formal_accepted": false,
+        "auxiliary_functional_passed": true,
+        "auxiliary_guard_passed": true,
+        "issue38_complete": false
+      },
+      "evidence": [
+        "catalog/acceptance/issue38/cycles/EX03-r11-G1/acceptance-status.json",
+        "catalog/acceptance/issue38/cycles/EX03-r11-G1/verification.json",
+        "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/acceptance-status.json",
+        "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/verification.json",
+        "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/acceptance-status.json",
+        "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/verification.json"
+      ],
+      "residuals": [
+        "The fixed formal response delivery contract remains failed.",
+        "Auxiliary success cannot be substituted for formal acceptance.",
+        "Type coverage is limited to the fixed text/number cells in the two functional runs; the guard run itself did not assess types."
+      ]
+    },
+    {
+      "id": "EX04",
+      "used_versions": [
+        "20260915-excel-r3",
+        "20260915-excel-r5",
+        "20260917-excel-r11"
+      ],
+      "routes": [
+        {
+          "classification": "FORMAL_GENERATION_NEGATIVES",
+          "name": "EX04-R3-FOUR-NEGATIVES",
+          "normal_m365_requests": 4,
+          "generation_stops": 4,
+          "code_blocks": 0,
+          "pad_runs": 0,
+          "result": "PASS_GENERATION_STOP_ONLY_4_OF_4"
+        },
+        {
+          "classification": "AUXILIARY_LIVE_GUARD",
+          "name": "EX04-R5-G2-EXISTING-OUTPUT-NEG1",
+          "pad_runs": 1,
+          "result": "PASS_EXISTING_OUTPUT_GUARD_FIXED_G2_FLOW",
+          "type_evaluation": "NOT_ASSESSED_GUARD_EXITED_BEFORE_WRITE"
+        },
+        {
+          "classification": "AUXILIARY_LIVE_GUARD",
+          "name": "EX03-R11-FILE-AUX1-EXISTING-OUTPUT-NEG1",
+          "pad_runs": 1,
+          "result": "PASS_FIXED_R11_FILE_AUX1_EXISTING_OUTPUT_GUARD",
+          "type_evaluation": "NOT_ASSESSED_GUARD_EXITED_BEFORE_WRITE"
+        }
+      ],
+      "decision": {
+        "status": "PASS_GENERATION_STOPS_AND_EXISTING_OUTPUT_LIVE_GUARDS_SCOPED_ONLY",
+        "full_runtime_negative_suite_accepted": false,
+        "issue38_complete": false
+      },
+      "evidence": [
+        "catalog/acceptance/issue38/copilot/EX04-missing-sheet/result.json",
+        "catalog/acceptance/issue38/copilot/EX04-invalid-range/result.json",
+        "catalog/acceptance/issue38/copilot/EX04-same-output/result.json",
+        "catalog/acceptance/issue38/copilot/EX04-existing-output/result.json",
+        "catalog/acceptance/issue38/cycles/EX04-r5-G2-existing-output-neg1/verification.json",
+        "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/verification.json"
+      ],
+      "residuals": [
+        "Missing-sheet, invalid-range, and same-input/output live PAD runtime behavior is not measured.",
+        "Generation refusal is not substituted for runtime safety.",
+        "The live guard runs do not assess transferred cell types."
+      ]
+    },
+    {
+      "id": "EX05",
+      "used_versions": [
+        "20260915-excel-r3"
+      ],
+      "routes": [
+        {
+          "classification": "FORMAL_SCOPE_REQUESTS",
+          "name": "EX05-R3-VALUES-ONLY-AND-FULL-COPY",
+          "normal_m365_requests": 2,
+          "code_blocks": 0,
+          "pad_runs": 0,
+          "values_only_result": "PASS_SCOPE_ONLY_NO_ADVANCED_OPERATIONS_REQUIRED",
+          "full_copy_result": "PASS_SCOPE_BOUNDARY_ONLY"
+        }
+      ],
+      "decision": {
+        "status": "PASS_SCOPE_DISTINCTION_ONLY_FULL_FLOW_NOT_ACHIEVED",
+        "runtime_accepted": false,
+        "issue38_complete": false
+      },
+      "evidence": [
+        "catalog/acceptance/issue38/copilot/EX05-values-only/result.json",
+        "catalog/acceptance/issue38/copilot/EX05-full-copy/result.json"
+      ],
+      "residuals": [
+        "No generated runnable flow or PAD run exists for EX05.",
+        "Scope recognition does not prove the full transfer, guard, or comparison flow."
+      ]
+    }
+  ],
+  "legacy_558": {
+    "old_fail_record_preserved": true,
+    "raw_difference_count": 558,
+    "classification": {
+      "cell_style_serialization_or_comparison_method_only": 480,
+      "row_dimension_serialization_or_comparison_method_only": 48,
+      "column_dimension_serialization_or_comparison_method_only": 30,
+      "actual_effective_changes": 0,
+      "unresolved": 0
+    },
+    "intentional_negative": {
+      "detected_effective_changes": 3,
+      "attributes": [
+        "Target A!C4 fill",
+        "Target A row 2 height 14.7 to 30.0",
+        "Target A column B width 19.42 to 23.42"
+      ]
+    },
+    "scope": "Fixed EX02/EX03 synthetic workbook evidence only"
+  }
+}
