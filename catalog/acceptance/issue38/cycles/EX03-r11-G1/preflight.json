@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R11-G1",
+  "base_commit": "659ae9db649d33226d4bf9220965e263e34ee323",
+  "checks": {
+    "head_matches_659ae9d": true,
+    "worktree_clean_before_cycle_creation": true,
+    "fixed_fixture_spec_request_expected_hashes_match": true,
+    "r11_instruction_bundle_manifest_support_hashes_match": true,
+    "r11_all_evidence_input_hashes_match": true,
+    "r11_teaching_test_independence_pass": true,
+    "r11_teaching_robin_decodes_exactly_and_parser_zero": true,
+    "r11_structural_token_required_forbidden_gate_pass": true,
+    "fixed_complete_answer_absent_from_bundle": true,
+    "grader_only_values_absent_from_submitted_body": true,
+    "independent_example_data_absent_from_submitted_body": true,
+    "independent_source_forbidden_runtime_actions_absent": true,
+    "local_synthetic_success_not_inherited_as_ex03_acceptance": true,
+    "work_exists_and_matches_template": true,
+    "output_absent": true
+  },
+  "hashes": {
+    "submitted_body": "4bd51be17353634c8b38cabbee91a9235a1dd1af87243675f5d42500f40c5984",
+    "instruction": "bceb1c7e4f47c0cd6a92ad698d08108175002bffcaaaff492a309ca74a122aa1",
+    "bundle": "2d95ce344ff66195061fd15010d13b75937888575fa2345fb543ae2115242f69",
+    "manifest": "295306ea7e2e45da8cf77dec2784e94ea8ea8333da0df6a4000f83e9228b509e",
+    "robin_support": "148267f09f53d74db1059cee823a4a2e159f2bbebfa249d3a25c996796fa765b",
+    "script_support": "068e676d70c373a9cf8203d19f6154e38460f609c4fdf774dbef1528f68fc7ae",
+    "contract_support": "ffbe75f9803435c55341f2d7db73e85b5ce5ec961f637734da38b6ee332a1ec9",
+    "work_and_template": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "input_a": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "input_b": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+  },
+  "counts": {
+    "protected_files": 312,
+    "submitted_body_utf16_units": 7937,
+    "submitted_body_utf8_bytes": 18606,
+    "submitted_body_lines": 83,
+    "teaching_backslash_open_bracket": 0,
+    "teaching_backslash_close_bracket": 0,
+    "structural_tokens": {
+      "[string]": 12,
+      "[bool]": 2,
+      "[void]": 6,
+      "[Runtime.InteropServices.Marshal]": 7,
+      "[IO.Path]": 2,
+      "::GetFullPath(": 2,
+      "-ieq": 1,
+      "$matches[0]": 1,
+      "$beforeNumberFormat": 3
+    },
+    "required_fragments": 5,
+    "forbidden_fragments": 6
+  },
+  "decision": {
+    "local_checkpoint": "PASS",
+    "browser_staging": "NOT_STARTED",
+    "send": "NOT_SENT_ACTION_TIME_CONFIRMATION_REQUIRED",
+    "copilot_generation": "NOT_STARTED",
+    "pad_run1": "NOT_STARTED",
+    "pad_run2": "NOT_STARTED"
+  }
+}

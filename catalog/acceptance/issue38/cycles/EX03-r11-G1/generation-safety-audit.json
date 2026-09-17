@@ -1,0 +1,333 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R11-G1",
+  "recorded_at": "2026-09-17T10:35:57.900635+09:00",
+  "version": "20260917-excel-r11",
+  "inputs": {
+    "generated_robin": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-G1/generated.robin",
+      "sha256": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875"
+    },
+    "visible_response": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-G1/copilot-response.visible.txt",
+      "sha256": "41b7b4628f1114a4941ee38019f5b82ae4a4164d3b57ed0dc6c562ca7b3a2c27"
+    },
+    "response_dom_inspection": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-G1/response-dom-inspection.json",
+      "sha256": "296719f290ae07e49f20ca781e1964fcee9dcaf7e2e8db7fa1ff79d5f18ce4a6"
+    },
+    "teaching_robin": {
+      "path": "copilot/versions/20260917-excel-r11/support/EX03-R11-Independent-PAD-Recopy.robin",
+      "sha256": "148267f09f53d74db1059cee823a4a2e159f2bbebfa249d3a25c996796fa765b"
+    },
+    "teaching_script": {
+      "path": "copilot/versions/20260917-excel-r11/support/EX03-R11-Independent-Minimal-FormatSandwich.ps1.txt",
+      "sha256": "068e676d70c373a9cf8203d19f6154e38460f609c4fdf774dbef1528f68fc7ae"
+    }
+  },
+  "capture": {
+    "method": "single Copilot response blob download; copied byte-identically into cycle evidence",
+    "utf8_bytes": 12487,
+    "utf16_units": 12297,
+    "line_count": 167,
+    "line_ending": "LF",
+    "carriage_return_count": 0,
+    "final_newline": false,
+    "first_line": "SET TransferState TO $'''NOT_STARTED'''",
+    "last_line": "END",
+    "markdown_fence_count": 0,
+    "nbsp_count": 0,
+    "ellipsis_count": 0,
+    "generated_text_edited": false
+  },
+  "response_delivery_contract": {
+    "completed": true,
+    "refusal": false,
+    "required_single_text_code_block": true,
+    "actual_text_code_block_count": 0,
+    "download_file_substituted_for_required_code_block": true,
+    "response_explicitly_admits_code_block_absent": true,
+    "response_explicitly_says_download_is_not_acceptance": true,
+    "fixed_contract_satisfied": false
+  },
+  "comparison": {
+    "method": "derive fixed EX03 from the byte-preserved independent r11 teaching Robin by reversing only recorded data-slot substitutions and the teaching error label",
+    "expected_line_count": 167,
+    "generated_line_count": 167,
+    "differing_content_line_count": 0,
+    "differing_lines": [],
+    "exact_adapted_teaching_match": true,
+    "manual_repair_applied": false,
+    "fixed_request_or_expected_changed": false
+  },
+  "fidelity": {
+    "token_inventory": {
+      "[string]": {
+        "expected_count": 12,
+        "teaching_count": 12,
+        "generated_count": 12,
+        "matches_expected": true
+      },
+      "[bool]": {
+        "expected_count": 2,
+        "teaching_count": 2,
+        "generated_count": 2,
+        "matches_expected": true
+      },
+      "[void]": {
+        "expected_count": 6,
+        "teaching_count": 6,
+        "generated_count": 6,
+        "matches_expected": true
+      },
+      "[Runtime.InteropServices.Marshal]": {
+        "expected_count": 7,
+        "teaching_count": 7,
+        "generated_count": 7,
+        "matches_expected": true
+      },
+      "[IO.Path]": {
+        "expected_count": 2,
+        "teaching_count": 2,
+        "generated_count": 2,
+        "matches_expected": true
+      },
+      "::GetFullPath(": {
+        "expected_count": 2,
+        "teaching_count": 2,
+        "generated_count": 2,
+        "matches_expected": true
+      },
+      "-ieq": {
+        "expected_count": 1,
+        "teaching_count": 1,
+        "generated_count": 1,
+        "matches_expected": true
+      },
+      "$matches[0]": {
+        "expected_count": 1,
+        "teaching_count": 1,
+        "generated_count": 1,
+        "matches_expected": true
+      },
+      "$beforeNumberFormat": {
+        "expected_count": 3,
+        "teaching_count": 3,
+        "generated_count": 3,
+        "matches_expected": true
+      }
+    },
+    "required_invariant_fragments": [
+      {
+        "fragment": "if ([IO.Path]::GetFullPath([string]$candidate.FullName) -ieq $targetPath) { $matches += $candidate }",
+        "expected_count": 1,
+        "teaching_count": 1,
+        "generated_count": 1,
+        "matches_expected": true
+      },
+      {
+        "fragment": "$cell.Value2 = [string]$payload.probe",
+        "expected_count": 1,
+        "teaching_count": 1,
+        "generated_count": 1,
+        "matches_expected": true
+      },
+      {
+        "fragment": "finally { $cell.NumberFormat = $beforeNumberFormat }",
+        "expected_count": 1,
+        "teaching_count": 1,
+        "generated_count": 1,
+        "matches_expected": true
+      },
+      {
+        "fragment": "$cell.Value2 -isnot [string]",
+        "expected_count": 1,
+        "teaching_count": 1,
+        "generated_count": 1,
+        "matches_expected": true
+      },
+      {
+        "fragment": "if ([string]$cell.PrefixCharacter -cne \\'\\')",
+        "expected_count": 1,
+        "teaching_count": 1,
+        "generated_count": 1,
+        "matches_expected": true
+      }
+    ],
+    "forbidden_corruption_fragments": [
+      {
+        "fragment": "[string]::Equals(",
+        "expected_count": 0,
+        "teaching_count": 0,
+        "generated_count": 0,
+        "matches_expected": true
+      },
+      {
+        "fragment": "[StringComparison]::OrdinalIgnoreCase",
+        "expected_count": 0,
+        "teaching_count": 0,
+        "generated_count": 0,
+        "matches_expected": true
+      },
+      {
+        "fragment": "[string]::IsNullOrEmpty(",
+        "expected_count": 0,
+        "teaching_count": 0,
+        "generated_count": 0,
+        "matches_expected": true
+      },
+      {
+        "fragment": ":Equals([IO.Path]",
+        "expected_count": 0,
+        "teaching_count": 0,
+        "generated_count": 0,
+        "matches_expected": true
+      },
+      {
+        "fragment": "-not :IsNullOrEmpty(",
+        "expected_count": 0,
+        "teaching_count": 0,
+        "generated_count": 0,
+        "matches_expected": true
+      },
+      {
+        "fragment": "[IO.Path]::GetFulling]",
+        "expected_count": 0,
+        "teaching_count": 0,
+        "generated_count": 0,
+        "matches_expected": true
+      }
+    ],
+    "backslash_escaped_open_bracket_count": 0,
+    "backslash_escaped_close_bracket_count": 0,
+    "adapted_error_label_counts": {
+      "EX03 text source": 1
+    },
+    "string_targets": [
+      [
+        "追記先",
+        "D5",
+        "%TextSource4Json%"
+      ],
+      [
+        "追記先",
+        "D6",
+        "%TextSource5Json%"
+      ],
+      [
+        "追記先",
+        "F5",
+        "%TextSource6Json%"
+      ],
+      [
+        "追記先",
+        "F6",
+        "%TextSource7Json%"
+      ],
+      [
+        "集計先",
+        "F7",
+        "%TextSource1Json%"
+      ],
+      [
+        "集計先",
+        "F8",
+        "%TextSource2Json%"
+      ],
+      [
+        "集計先",
+        "F9",
+        "%TextSource3Json%"
+      ]
+    ],
+    "number_writes": [
+      [
+        "NumberSource1",
+        "G",
+        "7"
+      ],
+      [
+        "NumberSource2",
+        "G",
+        "8"
+      ],
+      [
+        "NumberSource3",
+        "G",
+        "9"
+      ],
+      [
+        "NumberSource4",
+        "E",
+        "5"
+      ],
+      [
+        "NumberSource5",
+        "E",
+        "6"
+      ]
+    ],
+    "downloaded_payload_static_fidelity_pass": true
+  },
+  "powershell_parser": {
+    "method": "extract and decode the embedded script, then parse it with the Windows PowerShell AST parser without execution",
+    "generated_embedded_script_error_count": 0,
+    "generated_embedded_script_errors": [],
+    "independent_teaching_script_error_count": 0,
+    "generated_script_executed_by_audit": false
+  },
+  "target_workbook_and_side_effect_review": {
+    "output_exists_guard_count": 1,
+    "all_excel_actions_inside_else": true,
+    "normalized_exact_fullname_match_count": 1,
+    "exactly_one_workbook_required_count": 1,
+    "selected_match_zero_index_count": 1,
+    "save_as_count": 1,
+    "write_action_count": 5,
+    "run_powershell_script_count": 1,
+    "read_only_true_count": 3,
+    "read_only_false_count": 1,
+    "source_json_actions": 7,
+    "saved_json_actions": 12,
+    "value_type_match_variables": 12,
+    "forbidden_runtime_fragments": {
+      "File.Delete": 0,
+      "Folder.Delete": 0,
+      "WebAutomation.": 0,
+      "HTTP.": 0,
+      "System.RunDOSCommand": 0,
+      "System.RunApplication": 0,
+      "Start-Process": 0,
+      "Remove-Item": 0,
+      "Invoke-WebRequest": 0
+    },
+    "payload_static_safety_pass": true
+  },
+  "scope": {
+    "verified_types": [],
+    "not_generalized_to": [
+      "text",
+      "number",
+      "blank",
+      "boolean",
+      "date",
+      "error",
+      "formula-result",
+      "object",
+      "other PAD versions or PCs"
+    ],
+    "probe_success_used_as_generated_flow_success": false,
+    "external_checker_used_as_generated_flow_success": false,
+    "static_payload_pass_used_as_pad_acceptance": false
+  },
+  "decision": {
+    "status": "FAIL_R11_REQUIRED_CODE_BLOCK_ABSENT_STOP_BEFORE_PAD",
+    "downloaded_payload_static_safety": "PASS",
+    "response_delivery_contract": "FAIL",
+    "pad_import_authorized": false,
+    "runtime_authorized": false,
+    "recopy_required_but_not_reached": true,
+    "reason": "The single response supplied zero text code blocks and substituted a blob-download file, contrary to the fixed one-code-block contract. The downloaded bytes statically match the expected r11 adaptation and parse cleanly, but the fixed mismatch stop rule prohibits PAD paste, save, re-copy, Run1, or Run2.",
+    "resend_allowed": false
+  }
+}

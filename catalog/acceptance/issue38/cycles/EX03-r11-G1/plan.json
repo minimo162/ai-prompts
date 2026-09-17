@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R11-G1",
+  "base_commit": "659ae9db649d33226d4bf9220965e263e34ee323",
+  "purpose": "One authorized normal-M365 generation and at-most-two unmodified dedicated-PAD runs for fixed EX03 using frozen r11",
+  "candidate": {
+    "version": "20260917-excel-r11",
+    "instruction_path": "copilot/versions/20260917-excel-r11/agent-instructions.txt",
+    "instruction_sha256": "bceb1c7e4f47c0cd6a92ad698d08108175002bffcaaaff492a309ca74a122aa1",
+    "bundle_path": "copilot/versions/20260917-excel-r11/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "bundle_sha256": "2d95ce344ff66195061fd15010d13b75937888575fa2345fb543ae2115242f69",
+    "manifest_path": "copilot/versions/20260917-excel-r11/manifest.json",
+    "manifest_sha256": "295306ea7e2e45da8cf77dec2784e94ea8ea8333da0df6a4000f83e9228b509e",
+    "robin_support_path": "copilot/versions/20260917-excel-r11/support/EX03-R11-Independent-PAD-Recopy.robin",
+    "robin_support_sha256": "148267f09f53d74db1059cee823a4a2e159f2bbebfa249d3a25c996796fa765b",
+    "script_support_path": "copilot/versions/20260917-excel-r11/support/EX03-R11-Independent-Minimal-FormatSandwich.ps1.txt",
+    "script_support_sha256": "068e676d70c373a9cf8203d19f6154e38460f609c4fdf774dbef1528f68fc7ae",
+    "contract_support_path": "copilot/versions/20260917-excel-r11/support/EX03-R11-Minimal-Structural-Contract.txt",
+    "contract_support_sha256": "ffbe75f9803435c55341f2d7db73e85b5ce5ec961f637734da38b6ee332a1ec9",
+    "inherits_live_acceptance": false
+  },
+  "fixed_inputs": {
+    "request": {
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370"
+    },
+    "spec": {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380"
+    },
+    "grader_only_expected": {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+      "send_to_copilot": false
+    },
+    "input_a": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力い.xlsx",
+      "sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9"
+    },
+    "input_b": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力ろ.xlsx",
+      "sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+    },
+    "template": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+    },
+    "work": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/work.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "must_match_template_before_each_run": true
+    },
+    "output": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx",
+      "must_be_absent_before_each_run": true
+    }
+  },
+  "submission": {
+    "body_path": "catalog/acceptance/issue38/cycles/EX03-r11-G1/submitted-body.txt",
+    "body_sha256": "4bd51be17353634c8b38cabbee91a9235a1dd1af87243675f5d42500f40c5984",
+    "body_contract": "unchanged full r11 instructions followed by unchanged fixed EX03 request",
+    "attachment_path": "copilot/versions/20260917-excel-r11/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "attachment_sha256": "2d95ce344ff66195061fd15010d13b75937888575fa2345fb543ae2115242f69",
+    "normal_m365_new_chat": true,
+    "model": "Think Deeper",
+    "grader_only_expected_excluded": true,
+    "fixed_completed_robin_excluded": true,
+    "independent_teaching_robin_in_bundle": true
+  },
+  "authorization": {
+    "explicit_user_authorization_received": true,
+    "r11_normal_m365_send_count": 0,
+    "r11_browser_staged": false,
+    "computer_use_action_time_confirmation_required_before_send": true
+  },
+  "limits": {
+    "max_generation_requests": 1,
+    "max_pad_runs": 2,
+    "no_regeneration_or_manual_robin_repair": true,
+    "stop_on_refusal_safety_issue_mismatch_or_unknown_result": true,
+    "run2_requires_run1_terminal_comparison_and_artifact_preserved": true,
+    "no_successful_probe_or_old_version_result_inheritance": true,
+    "no_automatic_successor": true
+  },
+  "acceptance": {
+    "scope": "fixed EX03 text/number case and r11 package only",
+    "required": [
+      "one normal-M365 send with exact full body and actual same-version bundle",
+      "unmodified generated Robin passes syntax, structure, target-workbook and bounded-side-effect gates",
+      "one new dedicated Power Fx OFF flow, save and LF-normalized exact re-copy before Run1",
+      "Run1 terminal confirmation, all comparison gates and artifact preservation before Run2",
+      "at most two runs with all twelve source/readback JSON type comparisons true",
+      "all fixed values, types, positions, outside cells, formulas and effective formats",
+      "F6 exact System.String 100%, original format, empty prefix and no formula",
+      "all protected input/template SHA values unchanged"
+    ],
+    "legacy_558_failure_preserved": true,
+    "existing_output_guard_live_path_still_required": true
+  },
+  "external_actions": {
+    "browser_staging": 0,
+    "bundle_upload": 0,
+    "copilot_send": 0,
+    "pad_import": 0,
+    "pad_save": 0,
+    "pad_recopy": 0,
+    "pad_run": 0,
+    "github_write": 0
+  },
+  "status": "READY_LOCAL_PREFLIGHT_SEND_REQUIRES_COMPUTER_USE_ACTION_TIME_CONFIRMATION"
+}

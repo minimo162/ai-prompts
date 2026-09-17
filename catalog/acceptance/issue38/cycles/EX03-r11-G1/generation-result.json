@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R11-G1",
+  "recorded_at": "2026-09-17T10:39:22.581036+09:00",
+  "checkpoint": {
+    "base_commit": "659ae9db649d33226d4bf9220965e263e34ee323",
+    "action_time_starting_head": "659ae9db649d33226d4bf9220965e263e34ee323"
+  },
+  "candidate": {
+    "version": "20260917-excel-r11",
+    "instruction_sha256": "bceb1c7e4f47c0cd6a92ad698d08108175002bffcaaaff492a309ca74a122aa1",
+    "bundle_sha256": "2d95ce344ff66195061fd15010d13b75937888575fa2345fb543ae2115242f69",
+    "manifest_sha256": "295306ea7e2e45da8cf77dec2784e94ea8ea8333da0df6a4000f83e9228b509e",
+    "teaching_robin_sha256": "148267f09f53d74db1059cee823a4a2e159f2bbebfa249d3a25c996796fa765b",
+    "teaching_script_sha256": "068e676d70c373a9cf8203d19f6154e38460f609c4fdf774dbef1528f68fc7ae",
+    "structural_contract_sha256": "ffbe75f9803435c55341f2d7db73e85b5ce5ec961f637734da38b6ee332a1ec9"
+  },
+  "conversation": {
+    "service": "Microsoft 365 Copilot Chat",
+    "normal_chat": true,
+    "url": "https://m365.cloud.microsoft/chat/conversation/5019b961-47f4-4ca9-8602-30b6fb83512c?es=SSR",
+    "title": "Power Automate for Desktop転記フロー生成",
+    "model": "Think Deeper"
+  },
+  "rendered_response": {
+    "completed": true,
+    "reasoning_steps_reported": 8,
+    "refusal": false,
+    "required_text_code_block_count": 1,
+    "actual_text_code_block_count": 0,
+    "visible_response_path": "catalog/acceptance/issue38/cycles/EX03-r11-G1/copilot-response.visible.txt",
+    "visible_response_sha256": "41b7b4628f1114a4941ee38019f5b82ae4a4164d3b57ed0dc6c562ca7b3a2c27",
+    "response_dom_inspection_path": "catalog/acceptance/issue38/cycles/EX03-r11-G1/response-dom-inspection.json",
+    "response_dom_inspection_sha256": "296719f290ae07e49f20ca781e1964fcee9dcaf7e2e8db7fa1ff79d5f18ce4a6",
+    "download_file_substituted_for_required_code_block": true,
+    "response_claims_download_is_not_acceptance": true
+  },
+  "generated_file_capture": {
+    "repository_path": "catalog/acceptance/issue38/cycles/EX03-r11-G1/generated.robin",
+    "repository_sha256": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875",
+    "downloaded_file_name": "ex03.robin",
+    "downloaded_utf8_bytes": 12487,
+    "utf16_units": 12297,
+    "line_count": 167,
+    "line_ending": "LF",
+    "final_newline": false,
+    "first_line": "SET TransferState TO $'''NOT_STARTED'''",
+    "last_line": "END",
+    "download_to_repository_relation": "byte-identical SHA-256 match",
+    "capture_method": "invoke the sole generated-file download link once and copy its bytes without editing",
+    "generated_text_edited": false
+  },
+  "static_audit": {
+    "status": "PASS",
+    "expected_adapted_teaching_differing_lines": 0,
+    "embedded_powershell_parser_errors": 0,
+    "runscript_count": 1,
+    "numeric_write_count": 5,
+    "source_json_count": 7,
+    "saved_json_count": 12,
+    "value_type_match_count": 12,
+    "normalized_exact_workbook_match_count": 1,
+    "forbidden_runtime_fragments": {
+      "File.Delete": 0,
+      "Folder.Delete": 0,
+      "WebAutomation.": 0,
+      "HTTP.": 0,
+      "System.RunDOSCommand": 0,
+      "System.RunApplication": 0,
+      "Start-Process": 0,
+      "Remove-Item": 0,
+      "Invoke-WebRequest": 0
+    },
+    "static_pass_not_used_as_pad_acceptance": true
+  },
+  "generation_requests_used": 1,
+  "generation_request_limit": 1,
+  "regeneration_requested": false,
+  "interpretation": "The only generation completed without refusal. The downloaded file passes static fidelity and parser gates, but the completed response omitted the required single text code block and substituted a download. The fixed mismatch stop rule therefore prevents PAD import or execution."
+}

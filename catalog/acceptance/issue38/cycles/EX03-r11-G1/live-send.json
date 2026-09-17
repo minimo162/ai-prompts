@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R11-G1",
+  "recorded_at": "2026-09-17T10:39:22.581036+09:00",
+  "authorization": {
+    "request": "one prepared r11 normal-M365 generation and at most two PAD runs",
+    "explicit_action_time_authorization_received": true,
+    "max_generation_requests": 1,
+    "max_pad_runs": 2,
+    "no_resend": true,
+    "no_manual_generated_robin_repair": true,
+    "no_additional_run": true,
+    "no_fixed_condition_change": true,
+    "no_automatic_successor_trial": true
+  },
+  "checkpoint": {
+    "base_commit": "659ae9db649d33226d4bf9220965e263e34ee323",
+    "action_time_starting_head": "659ae9db649d33226d4bf9220965e263e34ee323",
+    "preflight_verifier": "PASS_BEFORE_BROWSER_STAGING",
+    "r9_r10_failure_and_stop_evidence_preserved": true,
+    "protected_file_count": 312,
+    "protected_mismatch_count_before_send": 0,
+    "work_matches_template_before_send": true,
+    "output_absent_before_send": true
+  },
+  "candidate": {
+    "version": "20260917-excel-r11",
+    "instruction_sha256": "bceb1c7e4f47c0cd6a92ad698d08108175002bffcaaaff492a309ca74a122aa1",
+    "bundle_sha256": "2d95ce344ff66195061fd15010d13b75937888575fa2345fb543ae2115242f69",
+    "manifest_sha256": "295306ea7e2e45da8cf77dec2784e94ea8ea8333da0df6a4000f83e9228b509e",
+    "teaching_robin_sha256": "148267f09f53d74db1059cee823a4a2e159f2bbebfa249d3a25c996796fa765b",
+    "teaching_script_sha256": "068e676d70c373a9cf8203d19f6154e38460f609c4fdf774dbef1528f68fc7ae",
+    "structural_contract_sha256": "ffbe75f9803435c55341f2d7db73e85b5ce5ec961f637734da38b6ee332a1ec9"
+  },
+  "independence": {
+    "frozen_preflight_check": "PASS",
+    "teaching_and_test_independence_confirmed": true,
+    "grader_only_expected_sent_to_copilot": false,
+    "fixed_completed_robin_sent_to_copilot": false,
+    "independent_teaching_robin_in_bundle": true,
+    "no_old_or_probe_pass_inherited": true
+  },
+  "destination": {
+    "service": "Microsoft 365 Copilot Chat",
+    "normal_chat": true,
+    "url": "https://m365.cloud.microsoft/chat/conversation/5019b961-47f4-4ca9-8602-30b6fb83512c?es=SSR",
+    "title": "Power Automate for Desktop転記フロー生成",
+    "model": "Think Deeper"
+  },
+  "attachment": {
+    "path": "copilot/versions/20260917-excel-r11/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "ui_label": "PAD-Robin-Knowledge-Bundle.txt",
+    "sha256": "2d95ce344ff66195061fd15010d13b75937888575fa2345fb543ae2115242f69",
+    "upload_count": 1,
+    "ui_chip_visible_before_send": true,
+    "same_version_as_body": true
+  },
+  "body": {
+    "path": "catalog/acceptance/issue38/cycles/EX03-r11-G1/submitted-body.txt",
+    "sha256": "4bd51be17353634c8b38cabbee91a9235a1dd1af87243675f5d42500f40c5984",
+    "utf16_units": 7937,
+    "utf8_bytes": 18606,
+    "line_count": 83,
+    "exact_contract": "unchanged full r11 instructions followed by unchanged fixed EX03 request",
+    "visible_editor_serialization_exact": true,
+    "visible_editor_sha256": "4bd51be17353634c8b38cabbee91a9235a1dd1af87243675f5d42500f40c5984",
+    "raw_editor_copy_sha256": "bc57ef7f3f30f092de0834ae35769ae6ebed158aa156eaf6076a8b6fdcd87e75",
+    "r11_marker_count": 1
+  },
+  "editor_verification": {
+    "send_clicked_while_stale_or_mismatched": false,
+    "exact_body_inserted_as_plain_text": true,
+    "raw_editor_copy_extra_codepoints": [
+      "U+200B",
+      "U+200C"
+    ],
+    "extra_codepoint_count": 2,
+    "extra_codepoints_aria_hidden": true,
+    "visible_serialization_excluded_only_known_hidden_ui_marker": true,
+    "visible_serialization_exact_r11_body": true
+  },
+  "actions": {
+    "browser_staging": 1,
+    "bundle_upload": 1,
+    "normal_m365_send": 1,
+    "resend": 0,
+    "generation_requests": 1,
+    "response_dom_capture": 1,
+    "generated_file_download": 1,
+    "pad_import": 0,
+    "pad_save": 0,
+    "pad_recopy": 0,
+    "pad_run": 0,
+    "github_write": 0
+  },
+  "result": {
+    "send_clicked_once": true,
+    "generation_completed": true,
+    "reasoning_steps_reported": 8,
+    "refusal": false,
+    "required_text_code_block_count": 1,
+    "actual_text_code_block_count": 0,
+    "download_file_present": true,
+    "stopped_before_pad": true,
+    "stop_reason_code": "FAIL_R11_REQUIRED_CODE_BLOCK_ABSENT_STOP_BEFORE_PAD"
+  }
+}

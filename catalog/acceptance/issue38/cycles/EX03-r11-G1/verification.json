@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R11-G1",
+  "recorded_at": "2026-09-17T10:40:56.2148040+09:00",
+  "results": [
+    {
+      "command": "python -B tools/Prepare-Issue38Ex03R11Acceptance.py --verify",
+      "status": "PASS_FIXED_CHECKPOINT_REVERIFIED",
+      "meaning": "the frozen r11 package, body, bundle, fixed request, fixtures, expected hashes, teaching/test independence, work/template match and output absence remained unchanged; its pre-send action counters are an immutable checkpoint and are not the live result"
+    },
+    {
+      "command": "python -B tools/Analyze-Issue38Ex03R11Generation.py --verify",
+      "status": "PASS_REPRODUCIBLE_FAIL_CLOSED_FINDINGS",
+      "meaning": "generated SHA, 0 adapted-source differences, 0 PowerShell parser errors, static payload PASS, zero response code blocks and the delivery-contract FAIL reproduced without writing or executing the generated flow"
+    },
+    {
+      "command": "parse every EX03-r11-G1 JSON evidence file",
+      "status": "PASS",
+      "json_files": 9,
+      "failures": 0
+    },
+    {
+      "command": "git diff --check",
+      "status": "PASS",
+      "whitespace_errors": 0
+    }
+  ],
+  "intentionally_not_rerun": {
+    "successful_probes": true,
+    "cause_investigation": true,
+    "full_issue38_regression": true,
+    "reason": "the fixed request explicitly prohibited re-running successful probes, cause analysis and the full regression; this cycle reused the frozen checkpoint and targeted analyzer only"
+  },
+  "live_acceptance": {
+    "copilot_generation": "COMPLETED_ONCE_NO_REFUSAL",
+    "downloaded_robin_static_safety": "PASS",
+    "response_delivery_contract": "FAIL_REQUIRED_TEXT_CODE_BLOCK_0_OF_1",
+    "failure_code": "FAIL_R11_REQUIRED_CODE_BLOCK_ABSENT_STOP_BEFORE_PAD",
+    "pad_import": "NOT_RUN",
+    "pad_save": "NOT_RUN",
+    "pad_recopy": "NOT_RUN",
+    "run1": "NOT_RUN",
+    "run2": "NOT_RUN",
+    "accepted": false
+  },
+  "preservation": {
+    "protected_files": 312,
+    "protected_mismatches": 0,
+    "work_matches_template": true,
+    "output_absent": true,
+    "fixed_request_fixture_expected_unchanged": true,
+    "legacy_558_failure_preserved": true,
+    "existing_output_guard_live_path": "REMAINS_UNCONFIRMED",
+    "github_write": false
+  }
+}
