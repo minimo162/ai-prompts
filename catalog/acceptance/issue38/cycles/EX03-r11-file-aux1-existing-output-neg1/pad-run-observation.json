@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R11-FILE-AUX1-EXISTING-OUTPUT-NEG1",
+  "runtime": {
+    "surface": "Power Automate for desktop designer",
+    "window_title": "Power Automate | 無題 (10)",
+    "window_id": 71280,
+    "subflow": "Main",
+    "run_click_issued_at": "2026-09-17T05:15:36.152Z",
+    "run_requests_used": 1,
+    "run_request_limit": 1,
+    "retry_issued": false,
+    "action_count_visible": 110,
+    "variable_count_visible": 45
+  },
+  "direct_branch_observation": {
+    "variable_name": "TransferState",
+    "full_value_in_pad_variable_dialog": "OUTPUT_EXISTS_NO_WRITE",
+    "variable_dialog_saved": false,
+    "variable_dialog_closed_with_cancel": true,
+    "guard_branch_entered": true
+  },
+  "direct_write_side_observation": {
+    "filter": "ValueTypeMatch",
+    "matching_variables": 12,
+    "false_values": 12,
+    "all_default_false_after_guard_run": true,
+    "work_variable": "<empty>",
+    "transfer_and_save_side_entered": false
+  },
+  "direct_terminal_observation": {
+    "status_bar": "Ready",
+    "run_button_enabled": true,
+    "stop_button_disabled": true,
+    "design_or_runtime_error_observed": false,
+    "excel_process_count_after": 0
+  },
+  "structural_basis": {
+    "all_excel_actions_inside_else": true,
+    "save_as_count": 1,
+    "guard_value_only_in_existing_output_branch": true
+  },
+  "screenshots": {
+    "pad-before-run.jpg": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/pad-before-run.jpg",
+      "sha256": "958ac01c291cb2eb77d7ce6388c84f89ea8adba2b1ce4a46e572de26bef5d433",
+      "length": 140032,
+      "last_write_utc": "2026-09-17T05:15:15.172619+00:00",
+      "last_write_ns": 1789622115172619400
+    },
+    "pad-after-run-overview.jpg": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/pad-after-run-overview.jpg",
+      "sha256": "e5dbcfa12011379600584d82f35d703732ba9ee4de347f7c82c01d6410b97585",
+      "length": 138252,
+      "last_write_utc": "2026-09-17T05:15:48.583729+00:00",
+      "last_write_ns": 1789622148583728500
+    },
+    "pad-after-run-transferstate.jpg": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/pad-after-run-transferstate.jpg",
+      "sha256": "6a3b163cda3b6e175be1b8d08cf2d2cca3db6434763abb45ae752e4695d0fb93",
+      "length": 38124,
+      "last_write_utc": "2026-09-17T05:16:39.667575+00:00",
+      "last_write_ns": 1789622199667574900
+    },
+    "pad-after-run-write-side-default-false-top.jpg": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/pad-after-run-write-side-default-false-top.jpg",
+      "sha256": "d9ee38e72b3f8c0118051eb9aea70a08eaa64a8446ea94cdc37fa049078b61a5",
+      "length": 142294,
+      "last_write_utc": "2026-09-17T05:17:59.489492+00:00",
+      "last_write_ns": 1789622279489492500
+    },
+    "pad-after-run-write-side-default-false-bottom.jpg": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/pad-after-run-write-side-default-false-bottom.jpg",
+      "sha256": "bebd7e6d39e5a48adff61d9617384e673d994f5fc4d34b22105a17be1a47ba97",
+      "length": 143145,
+      "last_write_utc": "2026-09-17T05:17:59.490486+00:00",
+      "last_write_ns": 1789622279490485700
+    },
+    "pad-after-run-work-empty.jpg": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/pad-after-run-work-empty.jpg",
+      "sha256": "02fafad18b76ca52f285e8d24168797353d3f8b3784061d3d185db4a0d13a1c7",
+      "length": 127223,
+      "last_write_utc": "2026-09-17T05:18:26.334386+00:00",
+      "last_write_ns": 1789622306334386300
+    }
+  },
+  "status": "PASS_GUARD_BRANCH_WRITE_SIDE_SKIP_AND_TERMINAL_DIRECTLY_OBSERVED"
+}

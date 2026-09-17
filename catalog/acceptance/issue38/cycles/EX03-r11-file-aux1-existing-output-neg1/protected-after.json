@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R11-FILE-AUX1-EXISTING-OUTPUT-NEG1",
+  "checked_at": "2026-09-17T14:19:12.827852+09:00",
+  "base_commit": "54037bb9e4e37237907383e9e4056f878aff6da5",
+  "checked_file_count": 4439,
+  "mismatch_count": 0,
+  "mismatches": [],
+  "formal_and_aux_positive_evidence_unchanged": true,
+  "status": "PASS_ALL_PREEXISTING_TRACKED_FILES_UNCHANGED"
+}

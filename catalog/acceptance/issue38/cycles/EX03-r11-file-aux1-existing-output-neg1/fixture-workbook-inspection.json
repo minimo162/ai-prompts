@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R11-FILE-AUX1-EXISTING-OUTPUT-NEG1",
+  "workbook": {
+    "sheets": [
+      "GuardSentinel"
+    ],
+    "key_range": "GuardSentinel!A1:B6",
+    "intended_output_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx"
+  },
+  "table_inspection_ndjson": "{\"kind\":\"table\",\"sheet\":\"GuardSentinel\",\"address\":\"A1:B6\",\"rows\":6,\"cols\":2,\"values\":[[\"EX03-r11 existing-output guard fixture\",null],[\"Test ID\",\"EX03-R11-FILE-AUX1-EXISTING-OUTPUT-NEG1\"],[\"Purpose\",\"Pre-existing writable output; PAD must not overwrite it\"],[\"Expected branch\",\"OUTPUT_EXISTS_NO_WRITE\"],[\"Expected write/save actions\",0],[\"Fixture status\",\"SYNTHETIC_WRITABLE_XLSX\"]]}",
+  "formula_error_scan_ndjson": "{\"kind\":\"notice\",\"message\":\"Cell search matched 0 entries.\"}",
+  "rendered_preview": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\cycles\\EX03-r11-file-aux1-existing-output-neg1\\fixture-preview.png",
+  "status": "PASS_CREATED_SIMPLE_SYNTHETIC_WRITABLE_XLSX"
+}

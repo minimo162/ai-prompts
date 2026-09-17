@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE38_EX03_R11_FILE_AUX1_EXISTING_OUTPUT_GUARD_LIVE_VERIFICATION",
+  "test_id": "EX03-R11-FILE-AUX1-EXISTING-OUTPUT-NEG1",
+  "verified_at": "2026-09-17T14:19:12.828832+09:00",
+  "base_commit": "54037bb9e4e37237907383e9e4056f878aff6da5",
+  "flow": {
+    "title": "Power Automate | 無題 (10)",
+    "subflow": "Main",
+    "robin_sha256": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875",
+    "actions": 110,
+    "variables": 45,
+    "fresh_recopy_lf_normalized_exact": true,
+    "unmodified": true
+  },
+  "live_result": {
+    "pad_runs_used": 1,
+    "pad_run_limit": 1,
+    "retry_used": false,
+    "guard_value_directly_observed": "OUTPUT_EXISTS_NO_WRITE",
+    "write_side_variables_directly_observed_default_false": 12,
+    "work_variable_directly_observed_empty": true,
+    "terminal_state_directly_observed": "Ready; Run enabled; Stop disabled",
+    "write_or_save_branch_entered": false,
+    "runtime_error_observed": false,
+    "status": "PASS_EXISTING_OUTPUT_GUARD_FIXED_R11_FILE_AUX1_FLOW"
+  },
+  "sha_invariants": {
+    "existing_output_before_after": "dc5c158d93ec322e29181fc34c961a396964c22c39c4f23d00d3ce215ee71af9",
+    "input_a_before_after": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "input_b_before_after": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725",
+    "template_before_after": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_before_after": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "all_unchanged": true
+  },
+  "scope_separation": {
+    "formal_r11_g1": "FAIL preserved; no formal PAD run is retroactively added.",
+    "file_aux1": "Previously completed functional two-run PASS preserved and not rerun.",
+    "format": "Legacy raw 558 is preserved as historical raw-comparator FAIL; fixed-scope Excel-effective differences remain 0 and were not reinvestigated.",
+    "guard": "PASS applies only to the pre-existing fixed output branch of the unchanged r11 FILE-AUX1 flow in this PAD environment.",
+    "issue38_overall": "NOT_DECLARED_COMPLETE"
+  }
+}

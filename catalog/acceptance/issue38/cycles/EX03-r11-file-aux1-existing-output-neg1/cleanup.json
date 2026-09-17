@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R11-FILE-AUX1-EXISTING-OUTPUT-NEG1",
+  "completed_at": "2026-09-17T14:19:12.407618+09:00",
+  "operation": "Moved the verified unchanged synthetic runtime output to the dedicated after archive; no deletion and no overwrite.",
+  "runtime_output_exists_after_cleanup": false,
+  "before_archive": {
+    "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/existing-output-before.xlsx",
+    "sha256": "dc5c158d93ec322e29181fc34c961a396964c22c39c4f23d00d3ce215ee71af9",
+    "length": 3982,
+    "last_write_utc": "2026-09-17T05:14:49.385597+00:00",
+    "last_write_ns": 1789622089385597300
+  },
+  "after_archive": {
+    "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/existing-output-after.xlsx",
+    "sha256": "dc5c158d93ec322e29181fc34c961a396964c22c39c4f23d00d3ce215ee71af9",
+    "length": 3982,
+    "last_write_utc": "2026-09-17T05:13:16.726241+00:00",
+    "last_write_ns": 1789621996726241400
+  },
+  "archives_byte_identical": true,
+  "excel_process_count": 0,
+  "status": "PASS_SYNTHETIC_OUTPUT_PRESERVED_AND_RUNTIME_STATE_RESTORED"
+}

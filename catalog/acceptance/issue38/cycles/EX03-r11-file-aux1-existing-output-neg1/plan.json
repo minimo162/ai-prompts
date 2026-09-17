@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R11-FILE-AUX1-EXISTING-OUTPUT-NEG1",
+  "prepared_at": "2026-09-17T14:12:33.841440+09:00",
+  "base_commit": "54037bb9e4e37237907383e9e4056f878aff6da5",
+  "purpose": "One live negative run for the unchanged r11 FILE-AUX1 existing-output guard.",
+  "relationship": {
+    "formal_ex03_r11_g1": "FAIL_R11_REQUIRED_CODE_BLOCK_ABSENT_STOP_BEFORE_PAD_PRESERVED",
+    "file_aux1_positive": "PASS_AUXILIARY_DOWNLOADED_FILE_TWO_RUN_VALIDATION_PRESERVED",
+    "separate_from_positive_run_ids": true,
+    "positive_runs_reused_as_guard_result": false,
+    "legacy_raw_558_reinvestigated": false,
+    "effective_format_zero_reinvestigated": false
+  },
+  "flow": {
+    "window_title": "Power Automate | 無題 (10)",
+    "window_id_expected": 71280,
+    "subflow": "Main",
+    "robin_path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/copilot-downloaded-ex03.robin",
+    "robin_sha256": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875",
+    "action_count": 110,
+    "variable_count": 45,
+    "unmodified": true,
+    "repaste": false
+  },
+  "fixture": {
+    "runtime_output_path": "catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx",
+    "kind": "new simple synthetic writable xlsx",
+    "created_with": "@oai/artifact-tool",
+    "before_archive": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/existing-output-before.xlsx",
+    "after_archive": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/existing-output-after.xlsx"
+  },
+  "limits": {
+    "copilot_send": 0,
+    "pad_run_limit": 1,
+    "retry": 0,
+    "successful_two_runs_repeated": false,
+    "cause_investigation_repeated": false,
+    "full_regression": false,
+    "candidate_or_comparator_change": false,
+    "github_write": false,
+    "stop_on_mismatch_safety_issue_or_unknown": true
+  },
+  "required_direct_observation": {
+    "guard_branch_value": "OUTPUT_EXISTS_NO_WRITE",
+    "transfer_and_save_side_entered": false,
+    "terminal_state": "Ready with Run enabled and Stop disabled"
+  },
+  "required_invariants": [
+    "Existing output SHA and last-write timestamp unchanged",
+    "Input A, input B, template, and work SHA unchanged",
+    "Formal r11 G1 and FILE-AUX1 positive artifacts unchanged",
+    "Fixed runtime output restored to absent by recoverable move after preservation"
+  ]
+}
