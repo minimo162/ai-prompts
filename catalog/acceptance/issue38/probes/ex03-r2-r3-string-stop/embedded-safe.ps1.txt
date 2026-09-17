@@ -1,0 +1,136 @@
+$ErrorActionPreference = 'Stop'
+Set-StrictMode -Version 2
+$targetPath = 'C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\probes\ex03-r2-r3-string-stop\runtime\work.xlsx'
+$jsonRoot = 'C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\probes\ex03-r2-r3-string-stop\runtime'
+$excel = $null
+$workbook = $null
+$result = $null
+$mode = 'UNREAD'
+try {
+    $payloads = @(
+        (Get-Content -LiteralPath (Join-Path $jsonRoot 'source-1.json') -Raw -Encoding UTF8 | ConvertFrom-Json),
+        (Get-Content -LiteralPath (Join-Path $jsonRoot 'source-2.json') -Raw -Encoding UTF8 | ConvertFrom-Json),
+        (Get-Content -LiteralPath (Join-Path $jsonRoot 'source-3.json') -Raw -Encoding UTF8 | ConvertFrom-Json),
+        (Get-Content -LiteralPath (Join-Path $jsonRoot 'source-4.json') -Raw -Encoding UTF8 | ConvertFrom-Json)
+    )
+    $modePayload = Get-Content -LiteralPath (Join-Path $jsonRoot 'mode.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+    $mode = [string]$modePayload.probe
+    if ($mode -cne 'NORMAL' -and $mode -cne 'INJECT_AFTER_FORMAT_CHANGE') {
+        throw 'MODE_NOT_ALLOWED'
+    }
+    for ($index = 0; $index -lt 3; $index++) {
+        if ($payloads[$index].probe -isnot [string]) { throw ('TEXT_PAYLOAD_TYPE_' + ($index + 1)) }
+    }
+    $numberPayload = $payloads[3].probe
+    if ($numberPayload -isnot [double] -and $numberPayload -isnot [decimal]) {
+        throw 'NUMBER_PAYLOAD_TYPE'
+    }
+
+    $targetPath = [IO.Path]::GetFullPath($targetPath)
+    $excel = [Runtime.InteropServices.Marshal]::GetActiveObject('Excel.Application')
+    $matches = @()
+    for ($index = 1; $index -le $excel.Workbooks.Count; $index++) {
+        $candidate = $excel.Workbooks.Item($index)
+        if ([IO.Path]::GetFullPath([string]$candidate.FullName) -ieq $targetPath) {
+            $matches += $candidate
+        }
+        else {
+            [void][Runtime.InteropServices.Marshal]::ReleaseComObject($candidate)
+        }
+    }
+    if ($matches.Count -ne 1) {
+        foreach ($match in $matches) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($match) }
+        throw ('TARGET_WORKBOOK_COUNT_' + $matches.Count)
+    }
+    $workbook = $matches[0]
+    $writes = @(
+        @('Source!A2', 'A2', [string]$payloads[0].probe),
+        @('Source!B2', 'B2', [string]$payloads[1].probe),
+        @('Source!C2', 'C2', [string]$payloads[2].probe)
+    )
+    $writesCompleted = 0
+    foreach ($write in $writes) {
+        $worksheet = $null
+        $cell = $null
+        try {
+            $worksheet = $workbook.Worksheets.Item('Target')
+            $cell = $worksheet.Range([string]$write[1])
+            if ([bool]$cell.HasFormula) { throw ('FORMULA_TARGET_' + $write[1]) }
+            $beforeValue = $cell.Value2
+            $beforeType = if ($null -eq $beforeValue) { 'null' } else { $beforeValue.GetType().FullName }
+            $beforeFormat = [string]$cell.NumberFormat
+            $beforePrefix = [string]$cell.PrefixCharacter
+            $beforeFormula = [bool]$cell.HasFormula
+            $writeError = $null
+            try {
+                $cell.NumberFormat = '@'
+                if ($mode -ceq 'INJECT_AFTER_FORMAT_CHANGE' -and [string]$write[1] -ceq 'A2') {
+                    throw 'ISSUE38_INTENTIONAL_AFTER_FORMAT_CHANGE'
+                }
+                $cell.Value2 = [string]$write[2]
+            }
+            catch {
+                $writeError = $_
+            }
+            finally {
+                $cell.NumberFormat = $beforeFormat
+            }
+
+            if ($null -ne $writeError) {
+                if ($mode -ceq 'INJECT_AFTER_FORMAT_CHANGE' -and $writeError.Exception.Message -ceq 'ISSUE38_INTENTIONAL_AFTER_FORMAT_CHANGE') {
+                    $afterValue = $cell.Value2
+                    $afterType = if ($null -eq $afterValue) { 'null' } else { $afterValue.GetType().FullName }
+                    if ([string]$cell.NumberFormat -cne $beforeFormat) { throw 'NEGATIVE_FORMAT_NOT_RESTORED' }
+                    if ($afterType -cne $beforeType -or [string]$afterValue -cne [string]$beforeValue) { throw 'NEGATIVE_VALUE_CHANGED' }
+                    if ([string]$cell.PrefixCharacter -cne $beforePrefix) { throw 'NEGATIVE_PREFIX_CHANGED' }
+                    if ([bool]$cell.HasFormula -ne $beforeFormula) { throw 'NEGATIVE_FORMULA_CHANGED' }
+                    $result = [ordered]@{
+                        status = 'EXPECTED_ERROR'
+                        mode = 'INJECT_AFTER_FORMAT_CHANGE'
+                        format_restored = $true
+                        value_unchanged = $true
+                    }
+                    break
+                }
+                throw $writeError
+            }
+
+            if ($cell.Value2 -isnot [string] -or [string]$cell.Value2 -cne [string]$write[2]) {
+                throw ('TEXT_VALUE_TYPE_' + $write[1])
+            }
+            if ([string]$cell.NumberFormat -cne $beforeFormat) { throw ('FORMAT_NOT_RESTORED_' + $write[1]) }
+            if ([string]$cell.PrefixCharacter -cne '') { throw ('PREFIX_CHANGED_' + $write[1]) }
+            if ([bool]$cell.HasFormula) { throw ('FORMULA_AFTER_WRITE_' + $write[1]) }
+            $writesCompleted++
+        }
+        finally {
+            if ($null -ne $cell) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($cell) }
+            if ($null -ne $worksheet) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($worksheet) }
+        }
+    }
+
+    if ($mode -ceq 'NORMAL') {
+        if ($writesCompleted -ne 3) { throw ('NORMAL_WRITE_COUNT_' + $writesCompleted) }
+        $result = [ordered]@{
+            status = 'OK'
+            mode = 'NORMAL'
+            text_writes = 3
+            formats_restored = $true
+        }
+    }
+    elseif ($null -eq $result -or $result.status -cne 'EXPECTED_ERROR') {
+        throw 'EXPECTED_ERROR_NOT_OBSERVED'
+    }
+}
+catch {
+    $result = [ordered]@{
+        status = 'ERROR'
+        mode = $mode
+        error_code = [string]$_.Exception.Message
+    }
+}
+finally {
+    if ($null -ne $workbook) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($workbook) }
+    if ($null -ne $excel) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($excel) }
+}
+[Console]::Out.Write([string]($result | ConvertTo-Json -Compress))

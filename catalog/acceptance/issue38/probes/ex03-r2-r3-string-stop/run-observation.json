@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE38_EX03_R2_R3_DEDICATED_PAD_OBSERVATION",
+  "baseline_commit": "f8765ea42e71e43d4924a6f8101b5950db31868c",
+  "flow": {
+    "title": "Power Automate | 無題 (11)",
+    "window_id": 105976394,
+    "power_fx_enabled": false,
+    "action_count": 63,
+    "initial_paste_candidate_sha256": "d59787268539d20318190caa9309a4ee50221502f222433cd6fff986f96ec0c3",
+    "candidate_path": "candidate-normal.robin",
+    "candidate_sha256": "a9ba6694b40840a7583c5c61cf2f46a5cc7a279a337b69bfcfa23523430d2e9d",
+    "saved_recopy_sha256": "a9ba6694b40840a7583c5c61cf2f46a5cc7a279a337b69bfcfa23523430d2e9d",
+    "saved_recopy_exact": true,
+    "pad_canonicalization_before_run": {
+      "action_boundary_lf_to_crlf": 63,
+      "success_json_quote_escapes_added": 12,
+      "logic_changed": false,
+      "canonical_local_candidate_regenerated_before_run": true
+    }
+  },
+  "preconditions": {
+    "work_sha256": "108d25e5cfb86cd34422e738f7590d6050933c4f5429c672df65907fb2f31a36",
+    "template_sha256": "108d25e5cfb86cd34422e738f7590d6050933c4f5429c672df65907fb2f31a36",
+    "work_equals_template": true,
+    "result_exists": false,
+    "json_files_exist": false
+  },
+  "actual_pad_json": [
+    {
+      "path": "runtime/source-1.json",
+      "sha256": "7273709aa70b86cbdb175bc8b6bdf8ab3daccff23b0cf785064adf8a3e3917d7",
+      "encoding": "UTF-8 with BOM",
+      "json": "{\"probe\":\"O'Brien\"}"
+    },
+    {
+      "path": "runtime/source-2.json",
+      "sha256": "d1c5eba5c453454900b950e2377fcf321eafd50678a4a79c91f1a8adfaf6f93b",
+      "encoding": "UTF-8 with BOM",
+      "json": "{\"probe\":\"He said \\\"Go\\\"\\nSecond line 'quoted'\"}"
+    },
+    {
+      "path": "runtime/source-3.json",
+      "sha256": "ea52d7bfd0a3d8fa32fc37a96b68726ae91ae277a5d2862d44303148f7a61580",
+      "encoding": "UTF-8 with BOM",
+      "json": "{\"probe\":\"100%\"}"
+    },
+    {
+      "path": "runtime/source-4.json",
+      "sha256": "0300d9078e3fc280b8b7f946191afaebf0d3c7f70c9005dbb645e83bb708724a",
+      "encoding": "UTF-8 with BOM",
+      "json": "{\"probe\":42.5}"
+    },
+    {
+      "path": "runtime/mode.json",
+      "sha256": "fae5483dc7d97912790a3571f752fb76e03056557928b8c94654e4822e8ba62d",
+      "encoding": "UTF-8 with BOM",
+      "json": "{\"probe\":\"NORMAL\"}"
+    }
+  ],
+  "normal_run": {
+    "invocations": 1,
+    "terminal": "READY",
+    "powershell_output": "{\"status\":\"ERROR\",\"mode\":\"NORMAL\",\"error_code\":\"NUMBER_PAYLOAD_TYPE\"}",
+    "probe_state": "SCRIPT_NOT_SUCCESS_NO_SAVE",
+    "script_gate_passed": false,
+    "numeric_write_entered": false,
+    "save_as_entered": false,
+    "result_exists": false,
+    "work_sha256_after": "108d25e5cfb86cd34422e738f7590d6050933c4f5429c672df65907fb2f31a36",
+    "work_unchanged": true,
+    "outcome": "STOPPED_BEFORE_WRITE_AND_SAVE"
+  },
+  "negative_run": {
+    "invocations": 0,
+    "outcome": "NOT_RUN_NORMAL_FAILURE_STOP_CONDITION"
+  },
+  "cause": {
+    "actual_json_number": 42.5,
+    "pwsh_type": "System.Double",
+    "windows_powershell_5_1_type": "System.Decimal",
+    "live_script_required": "System.Double",
+    "error_code": "NUMBER_PAYLOAD_TYPE"
+  },
+  "postfix": {
+    "safe_script_sha256": "aa2091327607b9ed1496f5ebb4a8bca2968e95e56ae3337f541651141e55f571",
+    "normal_candidate_sha256": "aaac1b7c04156f8038d26f6671c692faede55c91097cbf3f5d4c575348ae3851",
+    "negative_candidate_sha256": "a1ff8f503d485402ffdbb98248a52e62eedf98ac27f95d566dbaca1800dfcd1f",
+    "accepted_number_types": [
+      "System.Double",
+      "System.Decimal"
+    ],
+    "ast_errors": 0,
+    "pad_data_placeholders": 0,
+    "live_rerun": "NOT_RUN_STOP_CONDITION"
+  },
+  "scope_limits": [
+    "Only the fixed three strings and the fixed number 42.5 are covered.",
+    "The post-fix candidate has static coverage only.",
+    "The negative format-restore path was not run because the normal Run failed.",
+    "No Copilot submission, integrated EX03 rerun, candidate version, manifest correction, full regression, or GitHub write was performed."
+  ]
+}

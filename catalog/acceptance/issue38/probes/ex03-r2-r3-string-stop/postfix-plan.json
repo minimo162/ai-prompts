@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "f8765ea42e71e43d4924a6f8101b5950db31868c",
+  "reason": "Windows PowerShell 5.1 restores JSON 42.5 as System.Decimal; accept only observed Decimal plus existing Double.",
+  "live_run_candidate_sha256": "a9ba6694b40840a7583c5c61cf2f46a5cc7a279a337b69bfcfa23523430d2e9d",
+  "postfix_safe_script_sha256": "aa2091327607b9ed1496f5ebb4a8bca2968e95e56ae3337f541651141e55f571",
+  "postfix_candidate_sha256": {
+    "normal": "aaac1b7c04156f8038d26f6671c692faede55c91097cbf3f5d4c575348ae3851",
+    "negative": "a1ff8f503d485402ffdbb98248a52e62eedf98ac27f95d566dbaca1800dfcd1f"
+  },
+  "live_rerun": "NOT_RUN_STOP_CONDITION"
+}
