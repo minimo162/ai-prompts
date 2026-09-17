@@ -1,0 +1,15 @@
+EX03 r12 JSON-file handoff and stop-gate structural contract
+1. Use the complete same-version prepared normal Robin as the adaptation source. Change only request-derived data slots and teaching-only labels; do not reconstruct other actions.
+2. Convert all seven text DataTable values and NORMAL mode to JSON in PAD, then write eight UTF-8 files in the dedicated run work area before RunScript. Never interpolate a source value or its JSON text into PowerShell source.
+3. PowerShell must read seven source JSON files plus mode.json with Get-Content -LiteralPath -Raw -Encoding UTF8 and ConvertFrom-Json. It must accept only seven System.String payloads in this path.
+4. For every text target, capture value/type/format/prefix/formula, set temporary @, write Value2, and restore the original NumberFormat in an inner finally. The injected exception point stays immediately after temporary format and before Value2.
+5. Only the exact success JSON plus NORMAL mode may enclose five numeric WriteCell actions and SaveAs. Any other output or mode closes Work without the completion path.
+6. Preserve the existing-output guard, exact workbook one-match guard, five numeric writes, twelve saved JSON comparisons, source/target shape, non-formula checks, and no-overwrite behavior.
+7. The fixed R2/R3 normal and forced-exception Runs are source evidence only. r12 has no Copilot send, PAD save/re-copy, or integrated Run, and inherits no PASS.
+8. Emit the formal answer in exactly one text code block. If any required structural check fails, emit no Robin and explain the failed check; never repair a generated answer after emission.
+
+Same-version identities calculated by the builder:
+- support script: support/EX03-R12-JSON-File-Handoff.ps1.txt / SHA-256 314b687ce8d1848558d80340b414d32c8d3baca2c5e699541db0eb062f96ba1c
+- prepared normal Robin: support/EX03-R12-Prepared-Normal.robin / SHA-256 7bde8bb20bb7f347c97722d77a4141bf8348bb40d97aaca435e01998e8b9d3a3
+- prepared exception-negative Robin: support/EX03-R12-Prepared-Exception-Negative.robin / SHA-256 2c826e2d478075991db8a264c7396adcc5cd6ce454232f8d332b558f61b0c054
+- normal and negative Robin differ only in the one RunMode assignment; the formal adaptation uses NORMAL only.
