@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R2R3-POSTFIX-20260917-T1",
+  "result": "PASS_NORMAL_AND_FORCED_EXCEPTION_ONE_RUN_EACH",
+  "baseline_commit": "1f929d6c4e1ba5bc4d963374e3e322c7a52649c1",
+  "normal": {
+    "run_invocations": 1,
+    "gate_result": "PASS_NORMAL_GATE_NEGATIVE_ONE_RUN_AUTHORIZED",
+    "result_xlsx_sha256": "a712dffdc1f9d41f0b5e034c1e8366ef4001631f3eb139d5dc8dcbe060464af3",
+    "preserved_result_sha256": "a712dffdc1f9d41f0b5e034c1e8366ef4001631f3eb139d5dc8dcbe060464af3",
+    "pad_observation": {
+      "schema_version": 1,
+      "trial_id": "EX03-R2R3-POSTFIX-20260917-T1",
+      "phase": "normal",
+      "flow": {
+        "title": "Power Automate | 無題 (12)",
+        "window_id": 3741770,
+        "power_fx_enabled": false,
+        "action_count": 63,
+        "paste_invocations": 1,
+        "save_invocations": 1,
+        "recopy_invocations": 1,
+        "run_invocations": 1,
+        "candidate_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+        "saved_recopy_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+        "saved_recopy_exact": true
+      },
+      "run": {
+        "terminal": "READY",
+        "powershell_output": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":3,\"formats_restored\":true}",
+        "probe_state": "SUCCESS_GATE_PASSED_SAVED_READBACK_READY",
+        "script_gate_passed": true,
+        "numeric_write_entered": true,
+        "save_as_entered": true,
+        "readback_rows": 1,
+        "readback_columns": 4,
+        "source1_vs_saved": true,
+        "source2_vs_saved": true,
+        "source3_vs_saved": true,
+        "source4_vs_saved": true,
+        "saved_values_visible": [
+          "O'Brien",
+          "He said \"Go\"\nSecond line 'quoted'",
+          "100%",
+          42.5
+        ]
+      },
+      "observation_method": {
+        "terminal": "PAD designer status returned to Ready with run control enabled",
+        "powershell_output": "Opened PAD flow-variable edit view and closed with Cancel without saving",
+        "probe_state": "Opened PAD flow-variable edit view and closed with Cancel without saving",
+        "booleans": "Observed directly in PAD global variable pane after the run",
+        "saved_values": "Observed directly in PAD global variable pane after the run"
+      }
+    }
+  },
+  "negative": {
+    "run_invocations": 1,
+    "powershell_output": "{\"status\":\"EXPECTED_ERROR\",\"mode\":\"INJECT_AFTER_FORMAT_CHANGE\",\"format_restored\":true,\"value_unchanged\":true}",
+    "format_restored_directly_observed_by_script": true,
+    "value_unchanged_directly_observed_by_script": true,
+    "pre_type_check_stop": false,
+    "success_gate_passed": false,
+    "numeric_write_entered": false,
+    "save_as_entered": false,
+    "completed_output_exists": false,
+    "work_sha256": "108d25e5cfb86cd34422e738f7590d6050933c4f5429c672df65907fb2f31a36",
+    "template_sha256": "108d25e5cfb86cd34422e738f7590d6050933c4f5429c672df65907fb2f31a36",
+    "work_unchanged": true,
+    "pad_json": [
+      {
+        "path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/negative/runtime/source-1.json",
+        "sha256": "7273709aa70b86cbdb175bc8b6bdf8ab3daccff23b0cf785064adf8a3e3917d7",
+        "encoding": "UTF-8 with BOM",
+        "json": "{\"probe\":\"O'Brien\"}"
+      },
+      {
+        "path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/negative/runtime/source-2.json",
+        "sha256": "d1c5eba5c453454900b950e2377fcf321eafd50678a4a79c91f1a8adfaf6f93b",
+        "encoding": "UTF-8 with BOM",
+        "json": "{\"probe\":\"He said \\\"Go\\\"\\nSecond line 'quoted'\"}"
+      },
+      {
+        "path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/negative/runtime/source-3.json",
+        "sha256": "ea52d7bfd0a3d8fa32fc37a96b68726ae91ae277a5d2862d44303148f7a61580",
+        "encoding": "UTF-8 with BOM",
+        "json": "{\"probe\":\"100%\"}"
+      },
+      {
+        "path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/negative/runtime/source-4.json",
+        "sha256": "0300d9078e3fc280b8b7f946191afaebf0d3c7f70c9005dbb645e83bb708724a",
+        "encoding": "UTF-8 with BOM",
+        "json": "{\"probe\":42.5}"
+      },
+      {
+        "path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/negative/runtime/mode.json",
+        "sha256": "a17ae53b0f6b6407fbef1b97b46421f6140d4a9520f9a272a946000b754769f6",
+        "encoding": "UTF-8 with BOM",
+        "json": "{\"probe\":\"INJECT_AFTER_FORMAT_CHANGE\"}"
+      }
+    ],
+    "pad_observation": {
+      "schema_version": 1,
+      "trial_id": "EX03-R2R3-POSTFIX-20260917-T1",
+      "phase": "negative",
+      "flow": {
+        "title": "Power Automate | 無題 (13)",
+        "window_id": 1971982,
+        "power_fx_enabled": false,
+        "action_count": 63,
+        "paste_invocations": 1,
+        "save_invocations": 1,
+        "recopy_invocations": 1,
+        "run_invocations": 1,
+        "candidate_sha256": "d1459baf69c8d412674599f2fbb0dec6772b74e8fd8104c694dcb1cea438599f",
+        "saved_recopy_sha256": "d1459baf69c8d412674599f2fbb0dec6772b74e8fd8104c694dcb1cea438599f",
+        "saved_recopy_exact": true
+      },
+      "run": {
+        "terminal": "READY",
+        "powershell_output": "{\"status\":\"EXPECTED_ERROR\",\"mode\":\"INJECT_AFTER_FORMAT_CHANGE\",\"format_restored\":true,\"value_unchanged\":true}",
+        "probe_state": "SCRIPT_NOT_SUCCESS_NO_SAVE",
+        "script_gate_passed": false,
+        "numeric_write_entered": false,
+        "save_as_entered": false,
+        "readback_rows": 0,
+        "readback_columns": 0,
+        "reopened": "",
+        "completed_output_visible": false
+      },
+      "observation_method": {
+        "terminal": "PAD designer status returned to Ready with run control enabled",
+        "powershell_output": "Opened the PAD flow-variable value viewer without saving; verified the JSON in overlapping left-to-right segments through its horizontal viewport, including format_restored:true and the final value_unchanged:true",
+        "probe_state": "Opened the PAD flow-variable edit view and observed SCRIPT_NOT_SUCCESS_NO_SAVE without saving",
+        "booleans": "Observed directly in the PAD global variable pane after the single negative run",
+        "readback": "Observed directly as 0 rows and 0 columns in the PAD global variable pane",
+        "filesystem_completion_check": "Deferred to final-verification.json; no second PAD run is used"
+      }
+    }
+  },
+  "fixed_sha256": {
+    "source_xlsx": "74d2f493e8e687859badcb9c0b13ddff54d466c7394c3212e512a050113a2dc4",
+    "template_xlsx": "108d25e5cfb86cd34422e738f7590d6050933c4f5429c672df65907fb2f31a36",
+    "fixed_script": "aa2091327607b9ed1496f5ebb4a8bca2968e95e56ae3337f541651141e55f571",
+    "fixed_normal_robin": "aaac1b7c04156f8038d26f6671c692faede55c91097cbf3f5d4c575348ae3851",
+    "fixed_negative_robin": "a1ff8f503d485402ffdbb98248a52e62eedf98ac27f95d566dbaca1800dfcd1f",
+    "trial_normal_robin": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+    "trial_negative_robin": "d1459baf69c8d412674599f2fbb0dec6772b74e8fd8104c694dcb1cea438599f"
+  },
+  "old_evidence": {
+    "unchanged": true,
+    "changed": [],
+    "checked": 27
+  },
+  "remaining": [
+    "The evidence applies only to the fixed three strings, fixed number 42.5, fixed cells, and this PAD/Excel/Windows PowerShell environment.",
+    "No Copilot submission, EX03 integrated rerun, candidate version, full regression, manifest correction, or GitHub write was performed."
+  ]
+}

@@ -1,0 +1,198 @@
+SET ProbeState TO $'''NOT_STARTED'''
+SET ScriptGatePassed TO False
+SET NumericWriteEntered TO False
+SET SaveAsEntered TO False
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\result.xlsx''') THEN
+    SET ProbeState TO $'''OUTPUT_EXISTS_NO_RUN'''
+ELSE
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\source.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> SourceBook
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: SourceBook Name: $'''Source'''
+    Excel.ReadFromExcel.ReadCells Instance: SourceBook StartColumn: $'''A''' StartRow: 2 EndColumn: $'''D''' EndRow: 2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> SourceData
+    Excel.CloseExcel.Close Instance: SourceBook
+    SET Source1 TO SourceData[0][0]
+    SET Source2 TO SourceData[0][1]
+    SET Source3 TO SourceData[0][2]
+    SET Source4 TO SourceData[0][3]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source1 } Json=> Source1Json
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source2 } Json=> Source2Json
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source3 } Json=> Source3Json
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source4 } Json=> Source4Json
+    SET RunMode TO $'''NORMAL'''
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': RunMode } Json=> RunModeJson
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\source-1.json''' TextToWrite: Source1Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\source-2.json''' TextToWrite: Source2Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\source-3.json''' TextToWrite: Source3Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\source-4.json''' TextToWrite: Source4Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\mode.json''' TextToWrite: RunModeJson AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\work.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> Work
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''Target'''
+    Scripting.RunPowershellScript.RunScript Script: $'''$ErrorActionPreference = \'Stop\'
+Set-StrictMode -Version 2
+$targetPath = \'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\work.xlsx\'
+$jsonRoot = \'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\'
+$excel = $null
+$workbook = $null
+$result = $null
+$mode = \'UNREAD\'
+try {
+    $payloads = @(
+        (Get-Content -LiteralPath (Join-Path $jsonRoot \'source-1.json\') -Raw -Encoding UTF8 | ConvertFrom-Json),
+        (Get-Content -LiteralPath (Join-Path $jsonRoot \'source-2.json\') -Raw -Encoding UTF8 | ConvertFrom-Json),
+        (Get-Content -LiteralPath (Join-Path $jsonRoot \'source-3.json\') -Raw -Encoding UTF8 | ConvertFrom-Json),
+        (Get-Content -LiteralPath (Join-Path $jsonRoot \'source-4.json\') -Raw -Encoding UTF8 | ConvertFrom-Json)
+    )
+    $modePayload = Get-Content -LiteralPath (Join-Path $jsonRoot \'mode.json\') -Raw -Encoding UTF8 | ConvertFrom-Json
+    $mode = [string]$modePayload.probe
+    if ($mode -cne \'NORMAL\' -and $mode -cne \'INJECT_AFTER_FORMAT_CHANGE\') {
+        throw \'MODE_NOT_ALLOWED\'
+    }
+    for ($index = 0; $index -lt 3; $index++) {
+        if ($payloads[$index].probe -isnot [string]) { throw (\'TEXT_PAYLOAD_TYPE_\' + ($index + 1)) }
+    }
+    $numberPayload = $payloads[3].probe
+    if ($numberPayload -isnot [double] -and $numberPayload -isnot [decimal]) {
+        throw \'NUMBER_PAYLOAD_TYPE\'
+    }
+
+    $targetPath = [IO.Path]::GetFullPath($targetPath)
+    $excel = [Runtime.InteropServices.Marshal]::GetActiveObject(\'Excel.Application\')
+    $matches = @()
+    for ($index = 1; $index -le $excel.Workbooks.Count; $index++) {
+        $candidate = $excel.Workbooks.Item($index)
+        if ([IO.Path]::GetFullPath([string]$candidate.FullName) -ieq $targetPath) {
+            $matches += $candidate
+        }
+        else {
+            [void][Runtime.InteropServices.Marshal]::ReleaseComObject($candidate)
+        }
+    }
+    if ($matches.Count -ne 1) {
+        foreach ($match in $matches) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($match) }
+        throw (\'TARGET_WORKBOOK_COUNT_\' + $matches.Count)
+    }
+    $workbook = $matches[0]
+    $writes = @(
+        @(\'Source!A2\', \'A2\', [string]$payloads[0].probe),
+        @(\'Source!B2\', \'B2\', [string]$payloads[1].probe),
+        @(\'Source!C2\', \'C2\', [string]$payloads[2].probe)
+    )
+    $writesCompleted = 0
+    foreach ($write in $writes) {
+        $worksheet = $null
+        $cell = $null
+        try {
+            $worksheet = $workbook.Worksheets.Item(\'Target\')
+            $cell = $worksheet.Range([string]$write[1])
+            if ([bool]$cell.HasFormula) { throw (\'FORMULA_TARGET_\' + $write[1]) }
+            $beforeValue = $cell.Value2
+            $beforeType = if ($null -eq $beforeValue) { \'null\' } else { $beforeValue.GetType().FullName }
+            $beforeFormat = [string]$cell.NumberFormat
+            $beforePrefix = [string]$cell.PrefixCharacter
+            $beforeFormula = [bool]$cell.HasFormula
+            $writeError = $null
+            try {
+                $cell.NumberFormat = \'@\'
+                if ($mode -ceq \'INJECT_AFTER_FORMAT_CHANGE\' -and [string]$write[1] -ceq \'A2\') {
+                    throw \'ISSUE38_INTENTIONAL_AFTER_FORMAT_CHANGE\'
+                }
+                $cell.Value2 = [string]$write[2]
+            }
+            catch {
+                $writeError = $_
+            }
+            finally {
+                $cell.NumberFormat = $beforeFormat
+            }
+
+            if ($null -ne $writeError) {
+                if ($mode -ceq \'INJECT_AFTER_FORMAT_CHANGE\' -and $writeError.Exception.Message -ceq \'ISSUE38_INTENTIONAL_AFTER_FORMAT_CHANGE\') {
+                    $afterValue = $cell.Value2
+                    $afterType = if ($null -eq $afterValue) { \'null\' } else { $afterValue.GetType().FullName }
+                    if ([string]$cell.NumberFormat -cne $beforeFormat) { throw \'NEGATIVE_FORMAT_NOT_RESTORED\' }
+                    if ($afterType -cne $beforeType -or [string]$afterValue -cne [string]$beforeValue) { throw \'NEGATIVE_VALUE_CHANGED\' }
+                    if ([string]$cell.PrefixCharacter -cne $beforePrefix) { throw \'NEGATIVE_PREFIX_CHANGED\' }
+                    if ([bool]$cell.HasFormula -ne $beforeFormula) { throw \'NEGATIVE_FORMULA_CHANGED\' }
+                    $result = [ordered]@{
+                        status = \'EXPECTED_ERROR\'
+                        mode = \'INJECT_AFTER_FORMAT_CHANGE\'
+                        format_restored = $true
+                        value_unchanged = $true
+                    }
+                    break
+                }
+                throw $writeError
+            }
+
+            if ($cell.Value2 -isnot [string] -or [string]$cell.Value2 -cne [string]$write[2]) {
+                throw (\'TEXT_VALUE_TYPE_\' + $write[1])
+            }
+            if ([string]$cell.NumberFormat -cne $beforeFormat) { throw (\'FORMAT_NOT_RESTORED_\' + $write[1]) }
+            if ([string]$cell.PrefixCharacter -cne \'\') { throw (\'PREFIX_CHANGED_\' + $write[1]) }
+            if ([bool]$cell.HasFormula) { throw (\'FORMULA_AFTER_WRITE_\' + $write[1]) }
+            $writesCompleted++
+        }
+        finally {
+            if ($null -ne $cell) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($cell) }
+            if ($null -ne $worksheet) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($worksheet) }
+        }
+    }
+
+    if ($mode -ceq \'NORMAL\') {
+        if ($writesCompleted -ne 3) { throw (\'NORMAL_WRITE_COUNT_\' + $writesCompleted) }
+        $result = [ordered]@{
+            status = \'OK\'
+            mode = \'NORMAL\'
+            text_writes = 3
+            formats_restored = $true
+        }
+    }
+    elseif ($null -eq $result -or $result.status -cne \'EXPECTED_ERROR\') {
+        throw \'EXPECTED_ERROR_NOT_OBSERVED\'
+    }
+}
+catch {
+    $result = [ordered]@{
+        status = \'ERROR\'
+        mode = $mode
+        error_code = [string]$_.Exception.Message
+    }
+}
+finally {
+    if ($null -ne $workbook) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($workbook) }
+    if ($null -ne $excel) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($excel) }
+}
+[Console]::Out.Write([string]($result | ConvertTo-Json -Compress))''' ScriptOutput=> PowershellOutput
+    IF PowershellOutput = $'''{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":3,\"formats_restored\":true}''' THEN
+        IF RunMode = $'''NORMAL''' THEN
+            SET ScriptGatePassed TO True
+            SET NumericWriteEntered TO True
+            Excel.WriteToExcel.WriteCell Instance: Work Value: Source4 Column: $'''D''' Row: 2
+            SET SaveAsEntered TO True
+            Excel.SaveExcel.SaveAs Instance: Work DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\result.xlsx'''
+            Excel.CloseExcel.Close Instance: Work
+            Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\result.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Reopened
+            Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''Target'''
+            Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''A''' StartRow: 2 EndColumn: $'''D''' EndRow: 2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback
+            Excel.CloseExcel.Close Instance: Reopened
+            SET Saved1 TO Readback[0][0]
+            SET Saved2 TO Readback[0][1]
+            SET Saved3 TO Readback[0][2]
+            SET Saved4 TO Readback[0][3]
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved1 } Json=> Saved1Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved2 } Json=> Saved2Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved3 } Json=> Saved3Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved4 } Json=> Saved4Json
+            SET Source1VsSaved TO Source1Json = Saved1Json
+            SET Source2VsSaved TO Source2Json = Saved2Json
+            SET Source3VsSaved TO Source3Json = Saved3Json
+            SET Source4VsSaved TO Source4Json = Saved4Json
+            SET ProbeState TO $'''SUCCESS_GATE_PASSED_SAVED_READBACK_READY'''
+        ELSE
+            Excel.CloseExcel.Close Instance: Work
+            SET ProbeState TO $'''MODE_NOT_NORMAL_NO_SAVE'''
+        END
+    ELSE
+        Excel.CloseExcel.Close Instance: Work
+        SET ProbeState TO $'''SCRIPT_NOT_SUCCESS_NO_SAVE'''
+    END
+END

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R2R3-POSTFIX-20260917-T1",
+  "result_xlsx_sha256_before": "a712dffdc1f9d41f0b5e034c1e8366ef4001631f3eb139d5dc8dcbe060464af3",
+  "result_xlsx_sha256_after": "a712dffdc1f9d41f0b5e034c1e8366ef4001631f3eb139d5dc8dcbe060464af3",
+  "result_xlsx_unchanged": true,
+  "sheet": "Target",
+  "range": "A2:D2",
+  "values": [
+    [
+      "O'Brien",
+      "He said \"Go\"\nSecond line 'quoted'",
+      "100%",
+      42.5
+    ]
+  ],
+  "formulas": [
+    [
+      "",
+      "",
+      "",
+      ""
+    ]
+  ],
+  "javascript_value_types": [
+    "string",
+    "string",
+    "string",
+    "number"
+  ],
+  "inspect_path": "result-artifact-inspect.ndjson",
+  "preview_path": "result-preview.png"
+}

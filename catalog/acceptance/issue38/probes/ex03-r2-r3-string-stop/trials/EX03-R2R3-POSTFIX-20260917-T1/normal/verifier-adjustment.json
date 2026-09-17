@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R2R3-POSTFIX-20260917-T1",
+  "phase": "normal",
+  "pad_run_invocations_added": 0,
+  "first_read_only_verifier_result": "REJECTED_VERIFIER_ENCODING_ASSUMPTION",
+  "observed": "Excel COM returned the Japanese general-format label through redirected Windows PowerShell output with corrupted non-ASCII bytes.",
+  "result_xlsx_sha256_before": "a712dffdc1f9d41f0b5e034c1e8366ef4001631f3eb139d5dc8dcbe060464af3",
+  "result_xlsx_sha256_after": "a712dffdc1f9d41f0b5e034c1e8366ef4001631f3eb139d5dc8dcbe060464af3",
+  "fix": "Transfer the compact JSON as UTF-8 Base64 to isolate transport. The decoded record contains the localized General label, but console rendering of that label was not treated as reliable; acceptance compares result formatting directly with the same COM reading of template.xlsx and also uses the independent artifact inspection.",
+  "acceptance_conditions_changed": false
+}

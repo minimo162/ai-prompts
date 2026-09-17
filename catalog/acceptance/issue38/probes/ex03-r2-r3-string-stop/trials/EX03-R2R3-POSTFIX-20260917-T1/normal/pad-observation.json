@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R2R3-POSTFIX-20260917-T1",
+  "phase": "normal",
+  "flow": {
+    "title": "Power Automate | 無題 (12)",
+    "window_id": 3741770,
+    "power_fx_enabled": false,
+    "action_count": 63,
+    "paste_invocations": 1,
+    "save_invocations": 1,
+    "recopy_invocations": 1,
+    "run_invocations": 1,
+    "candidate_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+    "saved_recopy_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+    "saved_recopy_exact": true
+  },
+  "run": {
+    "terminal": "READY",
+    "powershell_output": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":3,\"formats_restored\":true}",
+    "probe_state": "SUCCESS_GATE_PASSED_SAVED_READBACK_READY",
+    "script_gate_passed": true,
+    "numeric_write_entered": true,
+    "save_as_entered": true,
+    "readback_rows": 1,
+    "readback_columns": 4,
+    "source1_vs_saved": true,
+    "source2_vs_saved": true,
+    "source3_vs_saved": true,
+    "source4_vs_saved": true,
+    "saved_values_visible": [
+      "O'Brien",
+      "He said \"Go\"\nSecond line 'quoted'",
+      "100%",
+      42.5
+    ]
+  },
+  "observation_method": {
+    "terminal": "PAD designer status returned to Ready with run control enabled",
+    "powershell_output": "Opened PAD flow-variable edit view and closed with Cancel without saving",
+    "probe_state": "Opened PAD flow-variable edit view and closed with Cancel without saving",
+    "booleans": "Observed directly in PAD global variable pane after the run",
+    "saved_values": "Observed directly in PAD global variable pane after the run"
+  }
+}
