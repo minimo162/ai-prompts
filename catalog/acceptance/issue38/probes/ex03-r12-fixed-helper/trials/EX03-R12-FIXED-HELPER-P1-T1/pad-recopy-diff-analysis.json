@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-P1-T1",
+  "decision": "STOP_REQUIRED_EXACT_RECOPY_CONTRACT_FAILED",
+  "supersedes": {
+    "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/pad-recopy-diff-analysis-superseded-newline-read.json",
+    "reason": "The first analysis used universal-newline text reads for the line-ending summary. Its content hunk and stop decision remain valid; this record uses exact newline reads."
+  },
+  "candidate_sha256": "0a84679b0b9875780aa70c975602a7404af0dd82fcf9b13978fe9c1e036f5b94",
+  "recopy_sha256": "da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa",
+  "content_diff_hunks_ignoring_line_endings_and_final_newline": [
+    {
+      "operation": "replace",
+      "candidate_lines": [
+        48,
+        48
+      ],
+      "recopy_lines": [
+        48,
+        48
+      ],
+      "candidate": [
+        "$expectedSuccess = \\'{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}\\'"
+      ],
+      "recopy": [
+        "$expectedSuccess = \\'{\\\"status\\\":\\\"OK\\\",\\\"mode\\\":\\\"NORMAL\\\",\\\"text_writes\\\":7,\\\"formats_restored\\\":true}\\'"
+      ]
+    }
+  ],
+  "content_diff_hunk_count": 1,
+  "classification": {
+    "robin_double_quote_canonicalization": "PAD added Robin backslash escaping to the eight JSON double quotes in the launcher expectedSuccess assignment",
+    "decoded_embedded_launcher_exact": true,
+    "line_ending_serialization": {
+      "candidate_crlf": 0,
+      "candidate_lf_only": 194,
+      "candidate_final_newline": false,
+      "recopy_crlf": 136,
+      "recopy_lf_only": 59,
+      "recopy_final_newline": true
+    },
+    "semantic_equivalence_does_not_satisfy_byte_exact_gate": true
+  },
+  "execution": {
+    "pad_run_count": 0,
+    "launcher_invocation_count": 0,
+    "helper_invocation_count": 0,
+    "excel_execution_count": 0,
+    "artifact_comparison": "NOT_RUN_BECAUSE_PRE_RUN_RECOPY_GATE_FAILED"
+  },
+  "no_retry": {
+    "second_recopy": 0,
+    "repaste": 0,
+    "candidate_rebuild": 0,
+    "additional_pad_run": 0
+  }
+}

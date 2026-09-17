@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-P1-T1",
+  "baseline_commit": "1f1e752eb82413b07437135a70eb7349dca313f0",
+  "decision": "STOPPED_PRE_RUN_PAD_RECOPY_NOT_EXACT",
+  "scope": "Dedicated fixed-helper alternate path only; not formal EX03-r12 acceptance.",
+  "return_behavior": {
+    "real_helper_output_command": "Write-Output -NoEnumerate",
+    "launcher_capture": "(& $helperPath -InvocationPath $invocationPath | Out-String).Trim()",
+    "launcher_final_stdout": "[Console]::Out.Write($helperOutput)",
+    "existing_stub_evidence_reused_without_rerun": true,
+    "stub_stdout": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}",
+    "final_output_is_one_success_json": true,
+    "live_observation": "NOT_RUN_BECAUSE_PAD_RECOPY_GATE_FAILED"
+  },
+  "sha256": {
+    "helper": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+    "invocation": "92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6",
+    "launcher": "1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1",
+    "candidate": "0a84679b0b9875780aa70c975602a7404af0dd82fcf9b13978fe9c1e036f5b94",
+    "pad_recopy": "da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa",
+    "template": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+  },
+  "pad": {
+    "version": "2.71.115.26224",
+    "flow_name": "無題 (14)",
+    "flow_window_id": 1382846,
+    "subflow": "Main",
+    "power_fx": "OFF",
+    "paste_count": 1,
+    "save_count": 1,
+    "recopy_count": 1,
+    "run_count": 0,
+    "status_after_save": "READY"
+  },
+  "recopy": {
+    "exact": false,
+    "candidate_sha256": "0a84679b0b9875780aa70c975602a7404af0dd82fcf9b13978fe9c1e036f5b94",
+    "recopy_sha256": "da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa",
+    "content_difference_hunks": [
+      {
+        "operation": "replace",
+        "candidate_lines": [
+          48,
+          48
+        ],
+        "recopy_lines": [
+          48,
+          48
+        ],
+        "candidate": [
+          "$expectedSuccess = \\'{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}\\'"
+        ],
+        "recopy": [
+          "$expectedSuccess = \\'{\\\"status\\\":\\\"OK\\\",\\\"mode\\\":\\\"NORMAL\\\",\\\"text_writes\\\":7,\\\"formats_restored\\\":true}\\'"
+        ]
+      }
+    ],
+    "decoded_launcher_exact": true,
+    "candidate_serialization": {
+      "candidate_crlf": 0,
+      "candidate_lf_only": 194,
+      "candidate_final_newline": false,
+      "recopy_crlf": 136,
+      "recopy_lf_only": 59,
+      "recopy_final_newline": true
+    },
+    "classification": "PAD escaped the eight JSON double quotes in launcher expectedSuccess, changed newline serialization, and added a final newline.",
+    "semantic_equivalence_not_used_as_acceptance": true
+  },
+  "execution": {
+    "launcher_invocation_count": 0,
+    "helper_invocation_count": 0,
+    "excel_execution_count": 0,
+    "success_json": "NOT_OBSERVED_LIVE",
+    "stderr": "NOT_OBSERVED_LIVE",
+    "normal_termination": "NOT_OBSERVED_LIVE",
+    "numeric_write": "NOT_ENTERED",
+    "save_as": "NOT_ENTERED",
+    "output": "ABSENT"
+  },
+  "comparison": {
+    "twelve_target_cells": "NOT_RUN",
+    "outside_cells": "NOT_RUN",
+    "formulas": "NOT_RUN",
+    "effective_format": "NOT_RUN",
+    "F6_100_percent_string_original_format_empty_prefix_no_formula": "NOT_RUN",
+    "reason": "The mandatory pre-run exact PAD save/re-copy gate failed."
+  },
+  "preservation": {
+    "work_still_exact_template": true,
+    "template_and_work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "output_absent": true,
+    "json_handoff_files_absent": true,
+    "formal_r12_and_fixed_inputs_unchanged": true,
+    "existing_prototype_evidence_unchanged": true,
+    "github_write": false
+  },
+  "remaining": [
+    "A separately authorized successor trial would need a PAD-canonical candidate serialization before any Run.",
+    "The real helper success JSON, stderr, normal termination, saved workbook, 12 target cells, outside cells, formulas, effective formatting, and F6 contract remain unobserved in this trial.",
+    "Formal EX03-r12 acceptance remains unchanged and was not rerun."
+  ]
+}

@@ -1,0 +1,62 @@
+{
+    "schema_version":  1,
+    "trial_id":  "EX03-R12-FIXED-HELPER-P1-T1",
+    "recorded_utc":  "2026-09-17T21:11:28.0032821Z",
+    "decision":  "STOP_PAD_RECOPY_NOT_BYTE_EXACT_NO_RUN",
+    "flow":  {
+                 "name":  "無題 (14)",
+                 "window_id":  1382846,
+                 "subflow":  "Main",
+                 "power_fx":  "OFF"
+             },
+    "observation":  {
+                        "paste_invocations":  1,
+                        "save_invocations":  1,
+                        "recopy_invocations":  1,
+                        "pad_run_count":  0,
+                        "helper_execution_count":  0,
+                        "excel_execution_count":  0,
+                        "designer_status_after_save":  "READY",
+                        "designer_error_observed":  false
+                    },
+    "comparison":  {
+                       "candidate_path":  "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/candidate.robin",
+                       "candidate_sha256":  "0a84679b0b9875780aa70c975602a7404af0dd82fcf9b13978fe9c1e036f5b94",
+                       "candidate_characters":  15109,
+                       "candidate_utf8_bytes":  15257,
+                       "candidate_crlf_count":  0,
+                       "candidate_lf_only_count":  194,
+                       "candidate_final_newline":  false,
+                       "recopy_path":  "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/pad-recopy-mismatch.robin",
+                       "recopy_sha256":  "da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa",
+                       "recopy_characters":  15258,
+                       "recopy_utf8_bytes":  15406,
+                       "recopy_crlf_count":  136,
+                       "recopy_lf_only_count":  59,
+                       "recopy_final_newline":  true,
+                       "exact_text_and_utf8_bytes":  false,
+                       "lf_normalized_exact":  false,
+                       "lf_normalized_trim_final_newline_exact":  false,
+                       "first_utf16_difference_index":  39
+                   },
+    "stopped_state":  {
+                          "template_sha256":  "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+                          "work_sha256":  "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+                          "work_still_exact_template":  true,
+                          "output_absent":  true,
+                          "json_handoff_files_absent":  true,
+                          "launcher_not_invoked":  true,
+                          "helper_not_invoked":  true,
+                          "numeric_writes_not_entered":  true,
+                          "save_as_not_entered":  true
+                      },
+    "prohibited_after_stop":  {
+                                  "second_recopy":  0,
+                                  "repaste":  0,
+                                  "pad_run":  0,
+                                  "candidate_change":  0,
+                                  "formal_ex03_r12_run":  0,
+                                  "copilot_send":  0,
+                                  "github_write":  0
+                              }
+}
