@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-r12-G1",
+  "checked_at": "2026-09-18T04:48:34.611033+09:00",
+  "checks": {
+    "normal_m365_send_exactly_once": true,
+    "fixed_body_sha_matches": true,
+    "same_version_bundle_sha_matches": true,
+    "normal_chat_destination_and_think_deeper_observed": true,
+    "response_completed_without_refusal": true,
+    "single_text_code_block_copy_contract_pass": true,
+    "copied_robin_unmodified_and_preserved": true,
+    "prepared_source_exact_adaptation_match": false,
+    "four_unauthorized_blank_line_deletions_detected": true,
+    "convert_to_json_compress_corruption_detected": true,
+    "powershell_ast_parser_error_count_is_four": true,
+    "stop_before_pad_save_recopy_or_run": true,
+    "work_copy_unchanged": true,
+    "output_absent": true,
+    "protected_prior_evidence_unchanged": true,
+    "r11_failure_and_legacy_558_failure_preserved": true,
+    "github_write_zero": true
+  },
+  "artifacts": {
+    "submitted-body.txt": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/submitted-body.txt",
+      "sha256": "cf25fb4aa54375d992e00545d336058b67055ab7de934e52ce284dffcd9924cc"
+    },
+    "live-send.json": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/live-send.json",
+      "sha256": "3ac394c243f890b2907d0440e2f02785196bfe9f959d2c894915a22979416f03"
+    },
+    "copilot-response.visible.txt": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/copilot-response.visible.txt",
+      "sha256": "4bdb76e57c1bd023b07589e7a4cc6bcaad3e8a729eb4f62d9951a61bd0eeea7f"
+    },
+    "response-dom-inspection.json": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/response-dom-inspection.json",
+      "sha256": "3730bc8b476ca1b8dae939905c3ca98064cb106843f03b58c6a5c15a8ebd7838"
+    },
+    "generated.robin": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/generated.robin",
+      "sha256": "64b6c7de822a448a4696910cc683c77ebfc57920c91aa966851947e136b5a366"
+    },
+    "generation-safety-audit.json": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/generation-safety-audit.json",
+      "sha256": "ef9a388a785e9903d5d06e45564dcbb83452b6701f487d2f07ad9fc63f346c56"
+    },
+    "generation-result.json": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/generation-result.json",
+      "sha256": "e808b91121816ed8ef91c4d98b4353dedfc84bc36c6a2546dd647274084311e7"
+    }
+  }
+}

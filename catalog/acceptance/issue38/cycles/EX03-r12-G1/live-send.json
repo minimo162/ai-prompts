@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-r12-G1",
+  "sent_at_utc": "2026-09-17T19:45:05.624Z",
+  "destination": "normal Microsoft 365 Copilot chat",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/aa830968-4eb3-4ef2-b24d-1a14a50699a2?es=SSR",
+  "model": "Think Deeper",
+  "send_count": 1,
+  "send_limit": 1,
+  "body_path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/submitted-body.txt",
+  "body_sha256": "cf25fb4aa54375d992e00545d336058b67055ab7de934e52ce284dffcd9924cc",
+  "attachment_path": "copilot/versions/20260917-excel-r12/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+  "attachment_sha256": "ddee43a1eddc966f62095b63a23b135df184f3cbe0ded635cbf72520e6744b97",
+  "attachment_ui_name": "PAD-Robin-Knowledge-Bundle.txt",
+  "pre_send_history_query": "20260917-excel-r12",
+  "pre_send_history_result": "NO_RESULTS",
+  "generation_completed": true,
+  "regeneration_requested": false,
+  "github_write": 0
+}

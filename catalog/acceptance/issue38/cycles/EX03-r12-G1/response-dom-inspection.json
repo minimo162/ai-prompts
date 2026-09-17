@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-r12-G1",
+  "captured_at_utc": "2026-09-17T19:45:05.596Z",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/aa830968-4eb3-4ef2-b24d-1a14a50699a2?es=SSR",
+  "rendered_response": {
+    "completed": true,
+    "refusal": false,
+    "response_sha256": "4bdb76e57c1bd023b07589e7a4cc6bcaad3e8a729eb4f62d9951a61bd0eeea7f"
+  },
+  "submission": {
+    "model": "Think Deeper",
+    "attachment_name": "PAD-Robin-Knowledge-Bundle.txt",
+    "attachment_sha256": "ddee43a1eddc966f62095b63a23b135df184f3cbe0ded635cbf72520e6744b97",
+    "body_sha256": "cf25fb4aa54375d992e00545d336058b67055ab7de934e52ce284dffcd9924cc",
+    "editor_paragraph_reconstruction_exact_before_send": true,
+    "send_count": 1
+  },
+  "code_block": {
+    "scriptor_component_count": 1,
+    "language_badge": "Plain Text",
+    "copy_button_count": 1,
+    "dom_line_count": 272,
+    "clipboard_plain_sha256": "64b6c7de822a448a4696910cc683c77ebfc57920c91aa966851947e136b5a366",
+    "clipboard_plain_utf16_units": 19245,
+    "clipboard_plain_line_count": 272,
+    "clipboard_plain_matches_dom_lines": true,
+    "clipboard_plain_has_language_label": false,
+    "clipboard_plain_has_markdown_fence": false,
+    "clipboard_plain_has_visual_line_numbers": false,
+    "clipboard_plain_has_expand_control": false,
+    "first_line": "SET TransferState TO $'''NOT_STARTED'''",
+    "last_line": "END",
+    "actual_text_code_block_count": 1
+  },
+  "manual_edit_applied": false
+}

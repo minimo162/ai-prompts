@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-r12-G1",
+  "version": "20260917-excel-r12",
+  "status": "FAIL_GENERATED_ROBIN_MISMATCH_AND_POWERSHELL_PARSE_ERROR_STOP_BEFORE_PAD",
+  "accepted": false,
+  "candidate_commit": "0f6e47197ecb5f4316e00aa319efa6c4213f696f",
+  "instruction_sha256": "11321acdbb96632221b02b7b737d12ba816ea4cf9f35f933a114c7f857539c06",
+  "bundle_sha256": "ddee43a1eddc966f62095b63a23b135df184f3cbe0ded635cbf72520e6744b97",
+  "submitted_body_sha256": "cf25fb4aa54375d992e00545d336058b67055ab7de934e52ce284dffcd9924cc",
+  "generated_robin_sha256": "64b6c7de822a448a4696910cc683c77ebfc57920c91aa966851947e136b5a366",
+  "generation": {
+    "send_count": 1,
+    "send_limit": 1,
+    "refusal": false,
+    "delivery_contract_pass": true,
+    "payload_static_safety_pass": false
+  },
+  "pad": {
+    "save": "NOT_RUN_STOP_CONDITION",
+    "recopy": "NOT_RUN_STOP_CONDITION",
+    "run1": "NOT_RUN_STOP_CONDITION",
+    "run2": "NOT_RUN_STOP_CONDITION",
+    "comparison": "NOT_RUN_STOP_CONDITION"
+  },
+  "reason": "Unmodified Copilot Robin deleted four non-slot blank lines and changed ConvertTo-Json -Compress to invalid '| press'; AST parsing returned four errors.",
+  "manual_repair": false,
+  "resend": false,
+  "successor_created": false,
+  "github_write": false,
+  "remaining": [
+    "EX03-r12-G1 is not accepted and cannot proceed to PAD under the fixed stop rule.",
+    "No resend, repair, additional run, or successor is authorized by this task.",
+    "The existing-output guard live path remains unverified for r12.",
+    "Legacy 558 raw differences remain recorded as FAIL; no result here changes them."
+  ]
+}
