@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-OUTPUT-GUARD1",
+  "run_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-OUTPUT-GUARD1-RUN1",
+  "probe_state": {
+    "observed_value": "OUTPUT_EXISTS_NO_RUN",
+    "match": true
+  },
+  "script_gate_passed": {
+    "observed_value": false,
+    "expected": false,
+    "match": true
+  },
+  "numeric_write_entered": {
+    "observed_value": false,
+    "expected": false,
+    "match": true
+  },
+  "save_as_entered": {
+    "observed_value": false,
+    "expected": false,
+    "match": true
+  },
+  "powershell_output": "NOT_GRADED; value may persist from the preceding normal Run",
+  "value_type_matches": "NOT_EVALUATED_ON_GUARD_BRANCH; persisted values are not mismatches or new PASS evidence",
+  "status": "PASS_OUTPUT_GUARD_STATE_AND_NON_ENTRY_FLAGS"
+}

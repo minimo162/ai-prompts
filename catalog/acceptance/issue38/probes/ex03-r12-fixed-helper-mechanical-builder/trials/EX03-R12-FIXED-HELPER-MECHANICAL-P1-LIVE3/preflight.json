@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "campaign_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3",
+  "result": "PASS_READY_FOR_NORMAL_IDENTITY_AND_ONE_RUN",
+  "baseline_commit": "f38a69d91583a9a75f38cf499a2b5bbfeee2dff5",
+  "fixed_sha256": {
+    "generated": "3d9c1671a5debc6f0247cef8c5e0d414dc07246a7cb7ce0ac6245fb860967e47",
+    "verification": "3578d75f4c7fa7f3c6b5b997b82094299d339c30780faf1453f017a2dee241e0",
+    "wiring": "c62ec6951bdd36e895acfc937d7a1f390e75e8d984b26a9531cc2c88d970f58c",
+    "bundle": "62695ca3c007ab291732657ddaeca66723a57115d151efc7b1730ef5341c514c",
+    "assembly": "57305c13d9bff292d7c7c2bc3e3152bcd75b85fd1bd800679df1671f79c7bc6e",
+    "a4_manifest": "525c5450e1e17e68d50dbaf25556e77e6e8393cf2ad2cd15792b54859ae7242f",
+    "helper": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+    "invocation": "5c5a2008f55296a48f63fa65178aab971e4212455bb2af58e33149bdcaec40d8",
+    "launcher": "a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5",
+    "fixed_request": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+    "fixed_spec": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+    "fixed_expected": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+    "template": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "input_a": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "input_b": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+  },
+  "builder_sha256": "dc6363953d120acf9623e1c28e777b1496c3da9c392704ae4a5c79b3808dea62",
+  "saved_flow_baseline_sha256": "570b26c57abeca0e9b8e19368c6542a529b44994bac518f2e70cb69baec52c0f",
+  "live2_protected": [
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/plan.json",
+      "git_blob": "06b9099953763ee9a483bcfd0e4127f4701afc4f",
+      "sha256": "8ce3d781c565e3a19736f59895bec893516c9657f88c196d3ca7c3cde39b9ec0"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/preflight.json",
+      "git_blob": "9d20f8a7e7c74958639d7bcc450a2a5cc1f873bc",
+      "sha256": "bb62f06d40278d95dd0a13d4c4222031e44f18d31f2888c8677494e1bc4f5be2"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/result.json",
+      "git_blob": "a47c7047d536049d1b096d7bea0feed8e284eba6",
+      "sha256": "74940914a5c94a089316977ab2aba11d442e895df31a12ee4bb5078aa23b0240"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/RESULT.md",
+      "git_blob": "97bd5c7befd5064cdae577c45c0f0ca431b6d442",
+      "sha256": "1f5eb2148d2f4231a54ef08a796afabbbae3fdfab9b215b99d3db8918819b16e"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/artifact.json",
+      "git_blob": "80d57b87aef2d21a194e42b776a3540df39835ba",
+      "sha256": "3cbc96af777d11d24f0dc3cc7db719ec0ae279e27ecdb6d345e4104c76a9debf"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/comparison.json",
+      "git_blob": "68495f3600dc07a0e96382baaeb69bcf1a917f1e",
+      "sha256": "1d44a0ec34abab2d2d930dc1a4cf905e9ad6fb343d4bbdc3380b57b09256625d"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/f6-native.json",
+      "git_blob": "5e2718975cd02fd3fae379b470a6a4a21ab81eaf",
+      "sha256": "462334ba9c30b0e1885d3652249ded274710aeb3e5cb95180714d3408ae6403a"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/handoff/mode.json",
+      "git_blob": "4315e3723cc71f740d79a431872ee0ad2d59df63",
+      "sha256": "fae5483dc7d97912790a3571f752fb76e03056557928b8c94654e4822e8ba62d"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/handoff/source-1.json",
+      "git_blob": "f4dde7f4a16c5e15110d65fa12dd065bda4563a7",
+      "sha256": "0bc6c8d52b33911d928a48e61de40f8a01126161af743f817cc621e6f0e00c4a"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/handoff/source-2.json",
+      "git_blob": "5fd5dbf75984dfd1a7a643c6e16fa6769384c8c1",
+      "sha256": "61c6f623361111d60ae0c4122ab2a13bee7cd8bb577850dff4d57d822bdf5a0c"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/handoff/source-3.json",
+      "git_blob": "5e7d9e6739f3273ad2a1a8c6cdd62adcff55821d",
+      "sha256": "2542c8855672702723107d4dab43ff91ef80b516e12ecbb61bdc3491066d4d0f"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/handoff/source-4.json",
+      "git_blob": "8bcd4eb2faef8397be18f409928c0515930eb5b9",
+      "sha256": "97e1ddac773adbd9b7d18ee748307f811913a03eb1114f09297c73f624574da0"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/handoff/source-5.json",
+      "git_blob": "c2b0af0e8445d6e7a94ccfc5ebd6696fe385a833",
+      "sha256": "d1ec8833b13199c99246644ce4fb8890b8ea19eab7f9dce5c13ecde444fb7cfc"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/handoff/source-6.json",
+      "git_blob": "b1b1eba17e7be05a6d96bd1e472120a2d8c4b0bb",
+      "sha256": "c8214589974801af2e4bd4d7b0ecf322ed40b8dedef7363a75673b81e8b25aea"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/handoff/source-7.json",
+      "git_blob": "1ed35bf68fc59d1d2f3e2d9c13a892575abc9244",
+      "sha256": "ea52d7bfd0a3d8fa32fc37a96b68726ae91ae277a5d2862d44303148f7a61580"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/native-styles.json",
+      "git_blob": "7809a8872ad1eb7cdfc58de7b0944f9dedab60f9",
+      "sha256": "f209ccc7783c9eb7a76d4c55f1eba8457643bca41cb388dfb339d1390058ae4a"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/pad-run.json",
+      "git_blob": "82c5cf256cc8e5edb8076a48de2bad8774bad523",
+      "sha256": "6ce0ecc15410c813755001789a84395fb62df9fe013a67804b38a4578715d819"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/pad-variables.json",
+      "git_blob": "d249fde12dd596c353b1a9b5ccd54fc5cc2c4818",
+      "sha256": "31fe617aae34baa2afb752d3228890150233303709a939bc67f363f376e6121b"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/result.xlsx",
+      "git_blob": "b97ee5f7216d0a12ff2a6c306f68d7213b4f887b",
+      "sha256": "49e4ad48e711ecbde7a0b6ec625dad8d2c74247e54eec69fe230aaf5366da5f8"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/runtime-handoff-after-run/mode.json",
+      "git_blob": "4315e3723cc71f740d79a431872ee0ad2d59df63",
+      "sha256": "fae5483dc7d97912790a3571f752fb76e03056557928b8c94654e4822e8ba62d"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/runtime-handoff-after-run/source-1.json",
+      "git_blob": "f4dde7f4a16c5e15110d65fa12dd065bda4563a7",
+      "sha256": "0bc6c8d52b33911d928a48e61de40f8a01126161af743f817cc621e6f0e00c4a"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/runtime-handoff-after-run/source-2.json",
+      "git_blob": "5fd5dbf75984dfd1a7a643c6e16fa6769384c8c1",
+      "sha256": "61c6f623361111d60ae0c4122ab2a13bee7cd8bb577850dff4d57d822bdf5a0c"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/runtime-handoff-after-run/source-3.json",
+      "git_blob": "5e7d9e6739f3273ad2a1a8c6cdd62adcff55821d",
+      "sha256": "2542c8855672702723107d4dab43ff91ef80b516e12ecbb61bdc3491066d4d0f"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/runtime-handoff-after-run/source-4.json",
+      "git_blob": "8bcd4eb2faef8397be18f409928c0515930eb5b9",
+      "sha256": "97e1ddac773adbd9b7d18ee748307f811913a03eb1114f09297c73f624574da0"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/runtime-handoff-after-run/source-5.json",
+      "git_blob": "c2b0af0e8445d6e7a94ccfc5ebd6696fe385a833",
+      "sha256": "d1ec8833b13199c99246644ce4fb8890b8ea19eab7f9dce5c13ecde444fb7cfc"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/runtime-handoff-after-run/source-6.json",
+      "git_blob": "b1b1eba17e7be05a6d96bd1e472120a2d8c4b0bb",
+      "sha256": "c8214589974801af2e4bd4d7b0ecf322ed40b8dedef7363a75673b81e8b25aea"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/runtime-handoff-after-run/source-7.json",
+      "git_blob": "1ed35bf68fc59d1d2f3e2d9c13a892575abc9244",
+      "sha256": "ea52d7bfd0a3d8fa32fc37a96b68726ae91ae277a5d2862d44303148f7a61580"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/runtime-output-after-run.xlsx",
+      "git_blob": "b97ee5f7216d0a12ff2a6c306f68d7213b4f887b",
+      "sha256": "49e4ad48e711ecbde7a0b6ec625dad8d2c74247e54eec69fe230aaf5366da5f8"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/typed-transfer.json",
+      "git_blob": "3b47c89f48d4a42f323d88972ed5e5f437fc6ae3",
+      "sha256": "145394cfe7c8a06212f83c3682562f4c63c908cda7dc0385f037f399186670d8"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/work.xlsx",
+      "git_blob": "63d3a5e2c1366c76961620acfbe51456b03cbad4",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/saved-flow-identity.json",
+      "git_blob": "8bfd1643e305bbeaaa639872ec78175b862cda59",
+      "sha256": "238e3676cd2a51b12f87d2db180919be4fe24027cacf0e74cbdff7632831503b"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/saved-flow-recopy-before-run.robin",
+      "git_blob": "79733a7fa7e3bd1ac6e2f0d29930208509a033b6",
+      "sha256": "570b26c57abeca0e9b8e19368c6542a529b44994bac518f2e70cb69baec52c0f"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/work-before.xlsx",
+      "git_blob": "63d3a5e2c1366c76961620acfbe51456b03cbad4",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+    }
+  ],
+  "runtime_inventory": [
+    "a4-helper-json",
+    "preparation.json",
+    "work.xlsx"
+  ],
+  "known_output_retired": null,
+  "json_contract": {
+    "destinations": [
+      "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-1.json",
+      "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-2.json",
+      "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-3.json",
+      "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-4.json",
+      "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-5.json",
+      "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-6.json",
+      "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-7.json",
+      "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\mode.json"
+    ],
+    "count": 8,
+    "all_parents_are_json_root": true
+  },
+  "preplacement": {
+    "json_root": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json",
+    "directory_preexisted": true,
+    "write_probe_name": ".live3-write-probe-cce159d0b8564d0f9fde103d5b832450.tmp",
+    "write_probe_sha256": "0d7aec58ebe40f7dabb73428797c9ea72d3adbcc0b3b52a626a27c0b5a12ce53",
+    "write_probe_readback_exact": true,
+    "write_probe_removed": true,
+    "directory_empty_after_probe": true,
+    "directory_writable": true,
+    "unknown_file_moved": false,
+    "permission_changed": false
+  },
+  "pre_run": {
+    "work": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/work.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "bytes": 6115,
+      "last_write_ns": 1789459072369628800
+    },
+    "template": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "bytes": 6115,
+      "last_write_ns": 1789449862330504900
+    },
+    "input_a": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力い.xlsx",
+      "sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+      "bytes": 5015,
+      "last_write_ns": 1789449862122589600
+    },
+    "input_b": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力ろ.xlsx",
+      "sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725",
+      "bytes": 5046,
+      "last_write_ns": 1789449862225725600
+    },
+    "output_absent": true,
+    "excel_not_running": true
+  },
+  "non_repetition": {
+    "builder_generation": "NOT_REPEATED",
+    "successful_generation_tests": "NOT_REPEATED",
+    "full_regression": "NOT_REPEATED"
+  },
+  "recorded_at": "2026-09-18T18:08:33.203074+00:00"
+}

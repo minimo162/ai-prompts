@@ -1,0 +1,304 @@
+{
+  "kind": "EX03_FIXED_TEXT_NUMBER_TYPED_TRANSFER",
+  "run_label": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-NORMAL1-RUN1",
+  "status": "MATCH_FIXED_EX03_TEXT_NUMBER_SCOPE",
+  "scope": {
+    "allowed_types": [
+      "number",
+      "text"
+    ],
+    "explicitly_not_generalized_to": [
+      "blank",
+      "boolean",
+      "date",
+      "error",
+      "formula-result",
+      "object"
+    ],
+    "fixed_mapping_count": 12,
+    "method": "read saved xlsx and compare each fixed source/target coordinate with grader-only expected typed value",
+    "pad_internal_json_identity": "SEPARATE_UI_EVIDENCE"
+  },
+  "output": {
+    "path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper-mechanical-builder\\trials\\EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3\\normal\\run1\\result.xlsx",
+    "sha256_before": "fc763e4a3d7df9f673dfa6a325006310f502d37305b3559b119044eab6f47eac",
+    "sha256_after": "fc763e4a3d7df9f673dfa6a325006310f502d37305b3559b119044eab6f47eac",
+    "unchanged_by_verifier": true
+  },
+  "originals_sha256_before": {
+    "fixtures/EX03/入力い.xlsx": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "fixtures/EX03/入力ろ.xlsx": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+  },
+  "originals_sha256_after": {
+    "fixtures/EX03/入力い.xlsx": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "fixtures/EX03/入力ろ.xlsx": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+  },
+  "originals_unchanged_by_verifier": true,
+  "mappings": [
+    {
+      "source_path": "fixtures/EX03/入力い.xlsx",
+      "source_sheet": "受取明細",
+      "source_cell": "D4",
+      "target_sheet": "集計先",
+      "target_cell": "F7",
+      "grader_expected": [
+        "text",
+        "春"
+      ],
+      "source_actual": [
+        "text",
+        "春"
+      ],
+      "target_actual": [
+        "text",
+        "春"
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX03/入力い.xlsx",
+      "source_sheet": "受取明細",
+      "source_cell": "E4",
+      "target_sheet": "集計先",
+      "target_cell": "G7",
+      "grader_expected": [
+        "number",
+        21
+      ],
+      "source_actual": [
+        "number",
+        21
+      ],
+      "target_actual": [
+        "number",
+        21
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX03/入力い.xlsx",
+      "source_sheet": "受取明細",
+      "source_cell": "D5",
+      "target_sheet": "集計先",
+      "target_cell": "F8",
+      "grader_expected": [
+        "text",
+        "夏"
+      ],
+      "source_actual": [
+        "text",
+        "夏"
+      ],
+      "target_actual": [
+        "text",
+        "夏"
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX03/入力い.xlsx",
+      "source_sheet": "受取明細",
+      "source_cell": "E5",
+      "target_sheet": "集計先",
+      "target_cell": "G8",
+      "grader_expected": [
+        "number",
+        0
+      ],
+      "source_actual": [
+        "number",
+        0
+      ],
+      "target_actual": [
+        "number",
+        0
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX03/入力い.xlsx",
+      "source_sheet": "受取明細",
+      "source_cell": "D6",
+      "target_sheet": "集計先",
+      "target_cell": "F9",
+      "grader_expected": [
+        "text",
+        "秋"
+      ],
+      "source_actual": [
+        "text",
+        "秋"
+      ],
+      "target_actual": [
+        "text",
+        "秋"
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX03/入力い.xlsx",
+      "source_sheet": "受取明細",
+      "source_cell": "E6",
+      "target_sheet": "集計先",
+      "target_cell": "G9",
+      "grader_expected": [
+        "number",
+        -4.5
+      ],
+      "source_actual": [
+        "number",
+        -4.5
+      ],
+      "target_actual": [
+        "number",
+        -4.5
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX03/入力ろ.xlsx",
+      "source_sheet": "追加項目",
+      "source_cell": "B2",
+      "target_sheet": "追記先",
+      "target_cell": "D5",
+      "grader_expected": [
+        "text",
+        "項目甲"
+      ],
+      "source_actual": [
+        "text",
+        "項目甲"
+      ],
+      "target_actual": [
+        "text",
+        "項目甲"
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX03/入力ろ.xlsx",
+      "source_sheet": "追加項目",
+      "source_cell": "C2",
+      "target_sheet": "追記先",
+      "target_cell": "E5",
+      "grader_expected": [
+        "number",
+        42
+      ],
+      "source_actual": [
+        "number",
+        42
+      ],
+      "target_actual": [
+        "number",
+        42
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX03/入力ろ.xlsx",
+      "source_sheet": "追加項目",
+      "source_cell": "D2",
+      "target_sheet": "追記先",
+      "target_cell": "F5",
+      "grader_expected": [
+        "text",
+        "日本語"
+      ],
+      "source_actual": [
+        "text",
+        "日本語"
+      ],
+      "target_actual": [
+        "text",
+        "日本語"
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX03/入力ろ.xlsx",
+      "source_sheet": "追加項目",
+      "source_cell": "B3",
+      "target_sheet": "追記先",
+      "target_cell": "D6",
+      "grader_expected": [
+        "text",
+        "項目乙"
+      ],
+      "source_actual": [
+        "text",
+        "項目乙"
+      ],
+      "target_actual": [
+        "text",
+        "項目乙"
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX03/入力ろ.xlsx",
+      "source_sheet": "追加項目",
+      "source_cell": "C3",
+      "target_sheet": "追記先",
+      "target_cell": "E6",
+      "grader_expected": [
+        "number",
+        6.25
+      ],
+      "source_actual": [
+        "number",
+        6.25
+      ],
+      "target_actual": [
+        "number",
+        6.25
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX03/入力ろ.xlsx",
+      "source_sheet": "追加項目",
+      "source_cell": "D3",
+      "target_sheet": "追記先",
+      "target_cell": "F6",
+      "grader_expected": [
+        "text",
+        "100%"
+      ],
+      "source_actual": [
+        "text",
+        "100%"
+      ],
+      "target_actual": [
+        "text",
+        "100%"
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    }
+  ],
+  "mismatches": []
+}

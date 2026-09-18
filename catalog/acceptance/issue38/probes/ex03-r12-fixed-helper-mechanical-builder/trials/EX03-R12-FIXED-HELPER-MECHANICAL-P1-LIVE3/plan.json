@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "campaign_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3",
+  "baseline_commit": "f38a69d91583a9a75f38cf499a2b5bbfeee2dff5",
+  "trials": [
+    "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-NORMAL1",
+    "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-OUTPUT-GUARD1"
+  ],
+  "sequence": [
+    "normal Run1 and full comparison PASS",
+    "existing-output guard Run1"
+  ],
+  "authorization": {
+    "normal_pad_runs": 1,
+    "existing_output_guard_pad_runs": 1,
+    "guard_only_after_normal_full_pass": true,
+    "repaste_count": 0,
+    "resave_count": 0,
+    "copilot_send_count": 0,
+    "candidate_creation_count": 0,
+    "full_regression_count": 0,
+    "github_write_count": 0
+  }
+}

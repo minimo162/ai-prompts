@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-NORMAL1",
+  "run_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-NORMAL1-RUN1",
+  "decision": "PASS_LIVE3_NORMAL1_FULL_FIXED_SCOPE",
+  "scope": "Fresh fixed-EX03 mechanical-builder normal Run only.",
+  "pad": {
+    "run_count": 1,
+    "terminal_ready": true,
+    "powershell_success_json": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}",
+    "probe_state": "SUCCESS_GATE_PASSED_SAVED_READBACK_READY",
+    "value_type_match_true": 12,
+    "value_type_match_false": 0
+  },
+  "artifact": {
+    "sha256": "fc763e4a3d7df9f673dfa6a325006310f502d37305b3559b119044eab6f47eac",
+    "bytes": 11311,
+    "runtime_retained_for_guard": true
+  },
+  "comparison": {
+    "target_cells": {
+      "checked": 12,
+      "mismatches": 0
+    },
+    "outside_cells": {
+      "checked": 468,
+      "mismatches": [],
+      "status": "MATCH_SAVED_XLSX_ONLY"
+    },
+    "effective_format": {
+      "status": "MATCH_EFFECTIVE_FORMAT",
+      "differences": {
+        "cell_style": 0,
+        "row_dimension": 0,
+        "column_dimension": 0,
+        "sheet_structure": 0
+      }
+    },
+    "f6": {
+      "status": "PASS_F6_SYSTEM_STRING_100_PERCENT_ORIGINAL_FORMAT_EMPTY_PREFIX_NO_FORMULA",
+      "saved": {
+        "sheet": "追記先",
+        "address": "F6",
+        "value2": "100%",
+        "value2_dotnet_type": "System.String",
+        "text": "100%",
+        "has_formula": false,
+        "formula": null,
+        "number_format_invariant": "G/標準",
+        "number_format_local": "G/標準",
+        "prefix_character": ""
+      }
+    },
+    "live2_semantic": {
+      "schema_version": 1,
+      "kind": "LIVE3_NORMAL1_TO_LIVE2_SEMANTIC_COMPARISON",
+      "normal_trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-NORMAL1",
+      "normal_run_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-NORMAL1-RUN1",
+      "normal_artifact_sha256": "fc763e4a3d7df9f673dfa6a325006310f502d37305b3559b119044eab6f47eac",
+      "live2_trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2",
+      "live2_run_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2-RUN1",
+      "live2_artifact_sha256": "49e4ad48e711ecbde7a0b6ec625dad8d2c74247e54eec69fe230aaf5366da5f8",
+      "value_type_position": {
+        "checked": 12,
+        "mismatches": 0,
+        "status": "MATCH"
+      },
+      "effective_format": {
+        "checked_cells": 480,
+        "checked_rows": 48,
+        "checked_columns": 30,
+        "normal_snapshot_sha256": "de6c5ac6bdfcf59bf58feb475457fa9e1ace99502b1d54c0a14e26dbfe67e825",
+        "live2_snapshot_sha256": "de6c5ac6bdfcf59bf58feb475457fa9e1ace99502b1d54c0a14e26dbfe67e825",
+        "status": "MATCH"
+      },
+      "f6_contract": "MATCH",
+      "whole_xlsx_sha_equal_observed": false,
+      "whole_xlsx_sha_equality_used_as_gate": false,
+      "status": "PASS_LIVE3_NORMAL1_MATCHES_LIVE2_VALUE_TYPE_POSITION_AND_FORMAT"
+    },
+    "legacy_raw_558": {
+      "status": "FAIL_PRESERVED",
+      "failure_counts": {
+        "row_dimensions": 48,
+        "column_dimensions": 30,
+        "styles": 480
+      }
+    }
+  },
+  "guard_authorized_to_proceed": true,
+  "decided_at": "2026-09-18T18:28:31.981680+00:00"
+}

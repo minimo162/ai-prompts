@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-OUTPUT-GUARD1",
+  "run_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-OUTPUT-GUARD1-RUN1",
+  "flow_name": "無題 (3)",
+  "flow_window_id": 920594,
+  "run_index_within_trial": 1,
+  "campaign_run_index": 2,
+  "started_utc": "2026-09-18T18:31:58.185Z",
+  "terminal_observed_utc": "2026-09-18T18:32:12.593Z",
+  "variables_observed_utc": "2026-09-18T18:34:38.830Z",
+  "terminal_observation": {
+    "status_bar": "READY",
+    "run_button_enabled": true,
+    "stop_button_disabled": true,
+    "designer_error_observed": false,
+    "normal_termination_observed": true
+  },
+  "status": "PASS_GUARD_TERMINAL_READY_NO_DESIGNER_ERROR"
+}

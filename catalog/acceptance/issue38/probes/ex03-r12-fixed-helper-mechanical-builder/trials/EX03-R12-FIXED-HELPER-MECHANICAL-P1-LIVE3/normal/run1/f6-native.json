@@ -1,0 +1,43 @@
+{
+    "schema_version":  1,
+    "kind":  "EX03_R11_F6_EXCEL_NATIVE_READ_ONLY_INSPECTION",
+    "observed_at":  "2026-09-18T18:28:21.6180749Z",
+    "output_path":  "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper-mechanical-builder\\trials\\EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3\\normal\\run1\\result.xlsx",
+    "output_sha256_before":  "fc763e4a3d7df9f673dfa6a325006310f502d37305b3559b119044eab6f47eac",
+    "output_sha256_after":  "fc763e4a3d7df9f673dfa6a325006310f502d37305b3559b119044eab6f47eac",
+    "template_f6":  {
+                        "sheet":  "追記先",
+                        "address":  "F6",
+                        "value2":  null,
+                        "value2_dotnet_type":  null,
+                        "text":  "",
+                        "has_formula":  false,
+                        "formula":  null,
+                        "number_format_invariant":  "G/標準",
+                        "number_format_local":  "G/標準",
+                        "prefix_character":  ""
+                    },
+    "saved_f6":  {
+                     "sheet":  "追記先",
+                     "address":  "F6",
+                     "value2":  "100%",
+                     "value2_dotnet_type":  "System.String",
+                     "text":  "100%",
+                     "has_formula":  false,
+                     "formula":  null,
+                     "number_format_invariant":  "G/標準",
+                     "number_format_local":  "G/標準",
+                     "prefix_character":  ""
+                 },
+    "checks":  {
+                   "output_unchanged_by_read":  true,
+                   "value_is_exact_text_100_percent":  true,
+                   "displayed_text_is_100_percent":  true,
+                   "number_format_invariant_preserved":  true,
+                   "number_format_local_preserved":  true,
+                   "prefix_character_preserved_empty":  true,
+                   "no_formula":  true
+               },
+    "status":  "PASS_F6_SYSTEM_STRING_100_PERCENT_ORIGINAL_FORMAT_EMPTY_PREFIX_NO_FORMULA",
+    "scope":  "Fixed EX03 F6 target only; no type generalization."
+}

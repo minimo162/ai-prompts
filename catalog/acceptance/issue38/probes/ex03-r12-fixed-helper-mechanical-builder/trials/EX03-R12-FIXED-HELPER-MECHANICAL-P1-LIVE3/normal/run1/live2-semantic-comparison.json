@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "kind": "LIVE3_NORMAL1_TO_LIVE2_SEMANTIC_COMPARISON",
+  "normal_trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-NORMAL1",
+  "normal_run_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-NORMAL1-RUN1",
+  "normal_artifact_sha256": "fc763e4a3d7df9f673dfa6a325006310f502d37305b3559b119044eab6f47eac",
+  "live2_trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2",
+  "live2_run_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2-RUN1",
+  "live2_artifact_sha256": "49e4ad48e711ecbde7a0b6ec625dad8d2c74247e54eec69fe230aaf5366da5f8",
+  "value_type_position": {
+    "checked": 12,
+    "mismatches": 0,
+    "status": "MATCH"
+  },
+  "effective_format": {
+    "checked_cells": 480,
+    "checked_rows": 48,
+    "checked_columns": 30,
+    "normal_snapshot_sha256": "de6c5ac6bdfcf59bf58feb475457fa9e1ace99502b1d54c0a14e26dbfe67e825",
+    "live2_snapshot_sha256": "de6c5ac6bdfcf59bf58feb475457fa9e1ace99502b1d54c0a14e26dbfe67e825",
+    "status": "MATCH"
+  },
+  "f6_contract": "MATCH",
+  "whole_xlsx_sha_equal_observed": false,
+  "whole_xlsx_sha_equality_used_as_gate": false,
+  "status": "PASS_LIVE3_NORMAL1_MATCHES_LIVE2_VALUE_TYPE_POSITION_AND_FORMAT"
+}

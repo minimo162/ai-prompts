@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-NORMAL1",
+  "run_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-NORMAL1-RUN1",
+  "classification": "FRESH_FIXED_MECHANICAL_NORMAL_ONE_RUN",
+  "pad_run_limit": 1,
+  "whole_xlsx_sha_equality_to_live2_required": false,
+  "live2_comparison_required": [
+    "value",
+    "type",
+    "position",
+    "effective formatting and dimensions"
+  ]
+}
