@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "prototype_id": "EX03-R12-FIXED-HELPER-MECHANICAL-BUILDER-P1",
+  "source_commit": "6ae505aa9a77ffa7b6ec28e2de748c04ba87def5",
+  "status": "PASS_LIMITED_NON_LIVE_MECHANICAL_BUILD_ONLY_NOT_COPILOT_OR_PAD_ACCEPTANCE",
+  "inputs": {
+    "bundle": {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a4/knowledge/PAD-Robin-Fixed-Helper-A4-Bundle.txt",
+      "sha256": "62695ca3c007ab291732657ddaeca66723a57115d151efc7b1730ef5341c514c"
+    },
+    "wiring": {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a4/wiring-spec.json",
+      "sha256": "c62ec6951bdd36e895acfc937d7a1f390e75e8d984b26a9531cc2c88d970f58c"
+    },
+    "assembly_rules": {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a4/assembly-rules.json",
+      "sha256": "57305c13d9bff292d7c7c2bc3e3152bcd75b85fd1bd800679df1671f79c7bc6e"
+    },
+    "a4_manifest": {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a4/manifest.json",
+      "sha256": "525c5450e1e17e68d50dbaf25556e77e6e8393cf2ad2cd15792b54859ae7242f"
+    },
+    "helper": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/EX03-R12-Fixed-StringTransfer.ps1",
+      "sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135"
+    },
+    "invocation": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-a4/invocation.json",
+      "sha256": "5c5a2008f55296a48f63fa65178aab971e4212455bb2af58e33149bdcaec40d8"
+    },
+    "launcher": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-a4/launcher.ps1",
+      "sha256": "a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5"
+    },
+    "fixed_request": {
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370"
+    },
+    "fixed_spec": {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380"
+    },
+    "fixed_expected": {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d"
+    }
+  },
+  "component_sources": {
+    "count": 12,
+    "ids": [
+      "C01_STATE_INIT",
+      "C02_OUTPUT_GUARD",
+      "C03_READONLY_TYPED_RANGE",
+      "C04_JSON_FILE_HANDOFF",
+      "C05_EDITABLE_WORK_OPEN",
+      "C06_FIXED_LAUNCHER_RUNSCRIPT",
+      "C07_EXACT_SUCCESS_MODE_GATE",
+      "C08_TARGET_SHEET_ACTIVATION",
+      "C09_NUMERIC_WRITE",
+      "C10_SAVE_CLOSE_REOPEN_READBACK",
+      "C11_JSON_VALUE_TYPE_COMPARE",
+      "C12_FAILURE_CLOSE_NO_SAVE"
+    ],
+    "sha256": {
+      "C01_STATE_INIT": "da87bb12ea194095ca8c672b92d1c4535a873437b3ba6235c7b288c60e386fd4",
+      "C02_OUTPUT_GUARD": "0694d74e8c308f95861baab1535dd6436bb749eadb84a4a172b1674f8ef47de5",
+      "C03_READONLY_TYPED_RANGE": "918765252d61a3f6a34c9b443f4eaa0aa0161cd86ab97f043c8544ad19842932",
+      "C04_JSON_FILE_HANDOFF": "4a33eca4fc68c92ac75fbd00ecae60c9d84cd142f2c3e7c8570428bc080707c5",
+      "C05_EDITABLE_WORK_OPEN": "8b661b3545f377c99a6b25e7aa026c96bf613ff110c1346c41092d7511084e93",
+      "C06_FIXED_LAUNCHER_RUNSCRIPT": "2e2ddf38c8b51a5e434083db5b2be9a2b6253aa4f475d8888d9197bb0bb870ed",
+      "C07_EXACT_SUCCESS_MODE_GATE": "9dc3042fc22af7b0a0e90c784ef208828102af2a28087cf385f331ae1af2d412",
+      "C08_TARGET_SHEET_ACTIVATION": "9331dd5b830b9854e943e4b0e2c253d13ecc825c85b39efd436e2b9f61b537e6",
+      "C09_NUMERIC_WRITE": "c9745f104b057d9f380b535aadb467fa32a9062d6fa1e3989d5cf464e189be26",
+      "C10_SAVE_CLOSE_REOPEN_READBACK": "5cef87e70f5e723ea6bcb3316e6801cd3743a51c378deacb4a9cd2f98e3a85e0",
+      "C11_JSON_VALUE_TYPE_COMPARE": "96a84f395b60975c3f51372b2fc05e0f8d0d22e16580d993f369fa3b1e39556f",
+      "C12_FAILURE_CLOSE_NO_SAVE": "e8715546a45126cfb1c6d192444d56e61283d7948117455fce390e686f83c194"
+    }
+  },
+  "assembly_rules": {
+    "count": 4,
+    "ids": [
+      "AR04_EXPLICIT_JSON_HANDOFF",
+      "AR09_EXPLICIT_NUMERIC_WRITES",
+      "AR10_MULTIPLE_RECTANGLE_READBACK",
+      "AR11_MULTIPLE_JSON_COMPARISONS"
+    ],
+    "sha256": "57305c13d9bff292d7c7c2bc3e3152bcd75b85fd1bd800679df1671f79c7bc6e",
+    "control_event_count": 13,
+    "new_loop_allowed": false
+  },
+  "declared_parameters": {
+    "C01_STATE_INIT": [],
+    "C02_OUTPUT_GUARD": [
+      "guard_path"
+    ],
+    "C03_READONLY_TYPED_RANGE": [
+      "end_column",
+      "end_row",
+      "input_path",
+      "instance_name",
+      "range_variable",
+      "sheet",
+      "start_column",
+      "start_row"
+    ],
+    "C04_JSON_FILE_HANDOFF": [
+      "indent",
+      "json_path",
+      "source_json_variable",
+      "source_reference",
+      "source_variable"
+    ],
+    "C05_EDITABLE_WORK_OPEN": [
+      "work_path"
+    ],
+    "C06_FIXED_LAUNCHER_RUNSCRIPT": [],
+    "C07_EXACT_SUCCESS_MODE_GATE": [],
+    "C08_TARGET_SHEET_ACTIVATION": [
+      "indent",
+      "target_sheet"
+    ],
+    "C09_NUMERIC_WRITE": [
+      "indent",
+      "source_variable",
+      "target_column",
+      "target_row"
+    ],
+    "C10_SAVE_CLOSE_REOPEN_READBACK": [
+      "end_column",
+      "end_row",
+      "output_path",
+      "readback_variable",
+      "sheet",
+      "start_column",
+      "start_row"
+    ],
+    "C11_JSON_VALUE_TYPE_COMPARE": [
+      "result_variable",
+      "saved_json_variable",
+      "saved_reference",
+      "saved_variable",
+      "source_json_variable",
+      "source_reference",
+      "source_variable"
+    ],
+    "C12_FAILURE_CLOSE_NO_SAVE": []
+  },
+  "replacement_record_count": 110,
+  "replacement_records_sha256": "5f14aff61eec8d7fea90dd843d07783949e0c082cf518e3e78ec3a0dcc19c112",
+  "wiring_validation": {
+    "text_count": 7,
+    "numeric_count": 5,
+    "readback_count": 2,
+    "comparison_count": 12,
+    "source_coverage_count": 12,
+    "target_coverage_count": 12,
+    "text_mappings": [
+      [
+        "Data1[0][0]",
+        "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-1.json",
+        "集計先",
+        "F7"
+      ],
+      [
+        "Data1[1][0]",
+        "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-2.json",
+        "集計先",
+        "F8"
+      ],
+      [
+        "Data1[2][0]",
+        "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-3.json",
+        "集計先",
+        "F9"
+      ],
+      [
+        "Data2[0][0]",
+        "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-4.json",
+        "追記先",
+        "D5"
+      ],
+      [
+        "Data2[1][0]",
+        "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-5.json",
+        "追記先",
+        "D6"
+      ],
+      [
+        "Data2[0][2]",
+        "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-6.json",
+        "追記先",
+        "F5"
+      ],
+      [
+        "Data2[1][2]",
+        "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-7.json",
+        "追記先",
+        "F6"
+      ]
+    ],
+    "numeric_mappings": [
+      [
+        "Data1[0][1]",
+        "集計先",
+        "G7"
+      ],
+      [
+        "Data1[1][1]",
+        "集計先",
+        "G8"
+      ],
+      [
+        "Data1[2][1]",
+        "集計先",
+        "G9"
+      ],
+      [
+        "Data2[0][1]",
+        "追記先",
+        "E5"
+      ],
+      [
+        "Data2[1][1]",
+        "追記先",
+        "E6"
+      ]
+    ]
+  },
+  "structure": {
+    "line_count": 195,
+    "line_ending": "LF",
+    "terminal_lf": true,
+    "json_file_write_count": 8,
+    "source_json_file_write_count": 7,
+    "mode_json_file_write_count": 1,
+    "numeric_write_count": 5,
+    "readback_rectangle_count": 2,
+    "json_value_type_comparison_count": 12,
+    "source_variable_reference_count": 12,
+    "saved_variable_reference_count": 12,
+    "guard_before_inputs_work_and_helper": true,
+    "save_as_count": 1,
+    "save_as_only_after_exact_success_and_normal": true,
+    "failure_close_without_save_count": 2,
+    "balanced_control_blocks": true,
+    "new_pad_loop_count": 0,
+    "forbidden_runtime_token_count": 0,
+    "decoded_launcher_sha256": "a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5",
+    "decoded_launcher_exact": true
+  },
+  "generated": {
+    "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/generated/EX03-R12-FIXED-HELPER-MECHANICAL-P1.robin",
+    "sha256": "3d9c1671a5debc6f0247cef8c5e0d414dc07246a7cb7ce0ac6245fb860967e47",
+    "bytes": 14742,
+    "deterministic_inputs_only": true
+  },
+  "boundaries": {
+    "fixed_expected_values_used_for_generation": false,
+    "a4_copilot_generated_robin_used_for_generation": false,
+    "a4_generated_robin_modified": false,
+    "helper_invocation_launcher_or_wiring_modified": false,
+    "copilot_send_count": 0,
+    "pad_save_recopy_count": 0,
+    "pad_run_count": 0,
+    "excel_run_count": 0,
+    "full_regression": "NOT_RUN_BY_SCOPE",
+    "github_write_count": 0,
+    "copilot_generation_pass_inherited": false,
+    "ex03_acceptance_pass_claimed": false
+  }
+}
