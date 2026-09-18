@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1",
+  "result": "PASS_READY_FOR_ONE_MECHANICAL_ROBIN_NORMAL_PAD_RUN",
+  "baseline_commit": "fd2cc2c345c0e0de8778d7eb05ef18daf233dc55",
+  "build_check": {
+    "status": "PASS_LIMITED_NON_LIVE_MECHANICAL_BUILD_ONLY_NOT_COPILOT_OR_PAD_ACCEPTANCE",
+    "operation": "CHECK_BYTE_IDENTICAL",
+    "prototype_id": "EX03-R12-FIXED-HELPER-MECHANICAL-BUILDER-P1",
+    "generated_sha256": "3d9c1671a5debc6f0247cef8c5e0d414dc07246a7cb7ce0ac6245fb860967e47",
+    "json_writes": 8,
+    "numeric_writes": 5,
+    "readbacks": 2,
+    "comparisons": 12,
+    "pad_runs": 0
+  },
+  "fixed_sha256": {
+    "generated": "3d9c1671a5debc6f0247cef8c5e0d414dc07246a7cb7ce0ac6245fb860967e47",
+    "verification": "3578d75f4c7fa7f3c6b5b997b82094299d339c30780faf1453f017a2dee241e0",
+    "wiring": "c62ec6951bdd36e895acfc937d7a1f390e75e8d984b26a9531cc2c88d970f58c",
+    "bundle": "62695ca3c007ab291732657ddaeca66723a57115d151efc7b1730ef5341c514c",
+    "assembly": "57305c13d9bff292d7c7c2bc3e3152bcd75b85fd1bd800679df1671f79c7bc6e",
+    "a4_manifest": "525c5450e1e17e68d50dbaf25556e77e6e8393cf2ad2cd15792b54859ae7242f",
+    "helper": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+    "invocation": "5c5a2008f55296a48f63fa65178aab971e4212455bb2af58e33149bdcaec40d8",
+    "launcher": "a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5",
+    "fixed_request": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+    "fixed_spec": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+    "fixed_expected": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+    "template": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "input_a": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "input_b": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+  },
+  "runtime": {
+    "work_path": "catalog/acceptance/issue38/runs/EX03-attempt1/work.xlsx",
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_matches_template": true,
+    "output_path": "catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx",
+    "output_absent": true,
+    "json_root": "catalog/acceptance/issue38/runs/EX03-attempt1/a4-helper-json",
+    "json_root_absent": true,
+    "excel_not_running": true
+  },
+  "protected_files": [
+    {
+      "name": "generated",
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/generated/EX03-R12-FIXED-HELPER-MECHANICAL-P1.robin",
+      "sha256": "3d9c1671a5debc6f0247cef8c5e0d414dc07246a7cb7ce0ac6245fb860967e47",
+      "git_blob": "ab2174f46bbf5faf4ec1bb68211903c96ea86e12"
+    },
+    {
+      "name": "verification",
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/verification.json",
+      "sha256": "3578d75f4c7fa7f3c6b5b997b82094299d339c30780faf1453f017a2dee241e0",
+      "git_blob": "437ee12f26ad767d829574d532bb96322054a82c"
+    },
+    {
+      "name": "wiring",
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a4/wiring-spec.json",
+      "sha256": "c62ec6951bdd36e895acfc937d7a1f390e75e8d984b26a9531cc2c88d970f58c",
+      "git_blob": "9dcaba0fb8a699c70609cc36a9e54509a3a4a4fc"
+    },
+    {
+      "name": "bundle",
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a4/knowledge/PAD-Robin-Fixed-Helper-A4-Bundle.txt",
+      "sha256": "62695ca3c007ab291732657ddaeca66723a57115d151efc7b1730ef5341c514c",
+      "git_blob": "6925ba72a57f5373757bf18a8185f4521237c200"
+    },
+    {
+      "name": "assembly",
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a4/assembly-rules.json",
+      "sha256": "57305c13d9bff292d7c7c2bc3e3152bcd75b85fd1bd800679df1671f79c7bc6e",
+      "git_blob": "846789f507bc19390c0f51aa2bfdd531f611f201"
+    },
+    {
+      "name": "a4_manifest",
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a4/manifest.json",
+      "sha256": "525c5450e1e17e68d50dbaf25556e77e6e8393cf2ad2cd15792b54859ae7242f",
+      "git_blob": "b7ec95b6ec8383f7f02f3fe539a887eae6f4e106"
+    },
+    {
+      "name": "helper",
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/EX03-R12-Fixed-StringTransfer.ps1",
+      "sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+      "git_blob": "83f1269036c5b6eabe1097e7544a33fe24b46a22"
+    },
+    {
+      "name": "invocation",
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-a4/invocation.json",
+      "sha256": "5c5a2008f55296a48f63fa65178aab971e4212455bb2af58e33149bdcaec40d8",
+      "git_blob": "fc468a85029f6c593e1ba8f4d104edecc3e49128"
+    },
+    {
+      "name": "launcher",
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-a4/launcher.ps1",
+      "sha256": "a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5",
+      "git_blob": "fc6c09a788d26e90c9a8ba2e56ab87f6a45d8bbe"
+    },
+    {
+      "name": "fixed_request",
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+      "git_blob": "9ee08ff30b16ca2cbe4124ca96037b2409a121c0"
+    },
+    {
+      "name": "fixed_spec",
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+      "git_blob": "efa9b662d3ed007059645eb3ea86ef640efcaeb0"
+    },
+    {
+      "name": "fixed_expected",
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+      "git_blob": "6daac6896166afb3138cf6e6d7108584a957be7a"
+    },
+    {
+      "name": "template",
+      "path": "catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "git_blob": "63d3a5e2c1366c76961620acfbe51456b03cbad4"
+    },
+    {
+      "name": "input_a",
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力い.xlsx",
+      "sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+      "git_blob": "08bbbc6b78bffb007c93e3c99f7c380fdd7cdf8c"
+    },
+    {
+      "name": "input_b",
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力ろ.xlsx",
+      "sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725",
+      "git_blob": "729539c9bd935b6d43208fbe3969c25b0824fd05"
+    },
+    {
+      "name": "builder",
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/Build.py",
+      "sha256": "dc6363953d120acf9623e1c28e777b1496c3da9c392704ae4a5c79b3808dea62",
+      "git_blob": "51d6529f3630557bbb8620e7975be0300c886426"
+    }
+  ],
+  "recorded_at": "2026-09-18T12:47:39.722736+00:00"
+}

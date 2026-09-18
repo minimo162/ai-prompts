@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1",
+  "flow": {
+    "name": "無題 (3)",
+    "window_id": 920594,
+    "subflow": "Main",
+    "power_fx": "OFF"
+  },
+  "captured_utc": "2026-09-18T12:59:55.363326+00:00",
+  "candidate": {
+    "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/generated/EX03-R12-FIXED-HELPER-MECHANICAL-P1.robin",
+    "sha256": "3d9c1671a5debc6f0247cef8c5e0d414dc07246a7cb7ce0ac6245fb860967e47",
+    "characters": 14666,
+    "utf8_bytes": 14742
+  },
+  "recopy": {
+    "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1/pad-recopy-before-run.robin",
+    "sha256": "570b26c57abeca0e9b8e19368c6542a529b44994bac518f2e70cb69baec52c0f",
+    "characters": 14802,
+    "utf8_bytes": 14878,
+    "crlf_count": 136,
+    "lf_only_count": 59,
+    "terminal_newline": true
+  },
+  "classification": {
+    "normalized_line_endings_and_terminal_newline_exact": true,
+    "unknown_content_difference_count": 0,
+    "missing_command_count": 0,
+    "syntax_damage_count": 0,
+    "decoded_launcher_sha256": "a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5",
+    "decoded_launcher_exact": true,
+    "audit": {
+      "line_count": 195,
+      "line_ending": "LF",
+      "terminal_lf": true,
+      "json_file_write_count": 8,
+      "source_json_file_write_count": 7,
+      "mode_json_file_write_count": 1,
+      "numeric_write_count": 5,
+      "readback_rectangle_count": 2,
+      "json_value_type_comparison_count": 12,
+      "source_variable_reference_count": 12,
+      "saved_variable_reference_count": 12,
+      "guard_before_inputs_work_and_helper": true,
+      "save_as_count": 1,
+      "save_as_only_after_exact_success_and_normal": true,
+      "failure_close_without_save_count": 2,
+      "balanced_control_blocks": true,
+      "new_pad_loop_count": 0,
+      "forbidden_runtime_token_count": 0,
+      "decoded_launcher_sha256": "a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5",
+      "decoded_launcher_exact": true
+    }
+  },
+  "observation": {
+    "paste_count": 1,
+    "save_count": 1,
+    "recopy_count": 1,
+    "pad_run_count": 0
+  },
+  "recorder": {
+    "resumed_existing_capture_after_loader_error": true,
+    "additional_pad_copy_count": 0
+  },
+  "result": "PASS_PAD_RECOPY_ONLY_KNOWN_SERIALIZATION_DIFFERENCES_RUN_ALLOWED"
+}
