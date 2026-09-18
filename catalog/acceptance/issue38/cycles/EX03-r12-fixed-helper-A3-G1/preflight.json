@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-COPILOT-A3-G1",
+  "recorded_at": "2026-09-18T14:47:08.567181+09:00",
+  "status": "PASS_LOCAL_READY_PENDING_UI_HISTORY_RECORD",
+  "checks": {
+    "head_is_d28c689": true,
+    "candidate_manifest_identity": true,
+    "candidate_and_all_fixed_sha": true,
+    "prepared_submitted_body_exact": true,
+    "instruction_body_bundle_aligned": true,
+    "helper_invocation_launcher_fixed": true,
+    "grader_values_absent_from_body": true,
+    "comparison_criteria_fixed_before_send": true,
+    "work_matches_template": true,
+    "output_absent": true,
+    "json_handoff_residue_absent": true,
+    "local_cycle_history_absent": true,
+    "ui_send_history_checked": false,
+    "normal_m365_chat_confirmed": false
+  },
+  "next_gate": "RECORD_CONFIRMED_A3_G1_NOT_PREVIOUSLY_SENT_IN_NORMAL_M365_CHAT"
+}

@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-COPILOT-A3-G1",
+  "recorded_at": "2026-09-18T14:49:18.529989+09:00",
+  "status": "PASS_NO_TRANSMISSION_OR_RUNTIME_MUTATION",
+  "protected_file_count": 26,
+  "protected_mismatch_count": 0,
+  "protected_mismatches": [],
+  "files": [
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/EX03-R12-Fixed-StringTransfer.ps1",
+      "sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+      "bytes": 8222,
+      "matches_before": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/invocation.json",
+      "sha256": "92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6",
+      "bytes": 1339,
+      "matches_before": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/launcher.ps1",
+      "sha256": "1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1",
+      "bytes": 2144,
+      "matches_before": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+      "bytes": 1647,
+      "matches_before": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+      "bytes": 1192,
+      "matches_before": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+      "bytes": 777,
+      "matches_before": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "bytes": 6115,
+      "matches_before": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力い.xlsx",
+      "sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+      "bytes": 5015,
+      "matches_before": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力ろ.xlsx",
+      "sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725",
+      "bytes": 5046,
+      "matches_before": true
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a3/agent-instructions.txt",
+      "sha256": "87d4fad6445be8371bfcad9d35d2ce8c384758714c7d48e0232a1ce60ab89d98",
+      "bytes": 17296,
+      "matches_before": true
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a3/send-conditions.txt",
+      "sha256": "ab93331cce8902e8e0bf4c9182a1b783012a08a6b83b7812da1b5ef77014fed6",
+      "bytes": 2400,
+      "matches_before": true
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a3/submitted-body.txt",
+      "sha256": "eae9de79a8c0ec4796ee90b3dd9e41b35c72490c483d7f15723891b0441142c3",
+      "bytes": 21345,
+      "matches_before": true
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a3/knowledge/PAD-Robin-Fixed-Helper-A3-Bundle.txt",
+      "sha256": "50c60d9533b9afb4d698416d6f9bf0b30040dee69206cf1734dea565f740b0c4",
+      "bytes": 43085,
+      "matches_before": true
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a3/manifest.json",
+      "sha256": "fc8d62994e21361deea300e697167ad410c4567ed181820dd86d64a99d8f8fe4",
+      "bytes": 32622,
+      "matches_before": true
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a3/assembly-rules.json",
+      "sha256": "c43bcce32095c3a4ba3c565d3902c26f11dee66be3cb0354ff4610c37689ed0d",
+      "bytes": 55296,
+      "matches_before": true
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a3/instruction-delta.json",
+      "sha256": "be46ee0dac1a65cbdb72cad37ccd1327af1d48f87ab6dcbfd0655695b30a472e",
+      "bytes": 9379,
+      "matches_before": true
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a3/COVERAGE.md",
+      "sha256": "8080dc541d261deeb48eb4902d20c9cb0e55c144bd235d1531524f16b6879b4b",
+      "bytes": 1051,
+      "matches_before": true
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a3/PLACEMENT.md",
+      "sha256": "981030804fbaab8179047b62584ae21091300f50784be03c0bc65f49c38f7c08",
+      "bytes": 1605,
+      "matches_before": true
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a3/non-live-verification.json",
+      "sha256": "2e507cccbc30830a5699993a5261db803a55a96c13149a818c8a8ebad4ae8ccb",
+      "bytes": 7347,
+      "matches_before": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin",
+      "sha256": "da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa",
+      "bytes": 15406,
+      "matches_before": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/result.json",
+      "sha256": "66b35d9686bfc17fb8bebf0c0c65f083cba647087417d52b852d3615fe7d14c1",
+      "bytes": 4377,
+      "matches_before": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/acceptance-status.json",
+      "sha256": "216089662ce7a5170d22eb3958a7641ecdee3ca00a95526d98eff2a70dc042ab",
+      "bytes": 1629,
+      "matches_before": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A1-G1/copilot-response.txt",
+      "sha256": "ef1681063425e224fae1f1de137484dbe22434a8f71506df83ee547c48624f14",
+      "bytes": 1756,
+      "matches_before": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A1-G1/generation-assessment.json",
+      "sha256": "7be97a8b35597dfdcdb934ab52c7b621984849adfcbc20969a01a04b659f16c0",
+      "bytes": 1436,
+      "matches_before": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/copilot-response.txt",
+      "sha256": "5f26b25cddd880ce0bd4c4869a87c7a1a31829ebd22459d8d2e67bd52408061d",
+      "bytes": 1502,
+      "matches_before": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/generation-assessment.json",
+      "sha256": "8c813a695bd82e92045df63dc87167313a1557e8ff41a3bd4af359057f878c2e",
+      "bytes": 1518,
+      "matches_before": true
+    }
+  ],
+  "runtime": {
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "template_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_matches_template": true,
+    "output_absent": true,
+    "handoff_absent": true,
+    "handoff_present": []
+  }
+}
