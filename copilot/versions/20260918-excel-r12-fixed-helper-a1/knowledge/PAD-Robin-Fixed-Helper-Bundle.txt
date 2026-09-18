@@ -1,0 +1,122 @@
+PAD Robin fixed-helper alternate-route bundle
+candidate_id: 20260918-excel-r12-fixed-helper-a1
+route_id: EX03-R12-FIXED-HELPER-COPILOT-A1
+status: LOCAL_PREPARED_NON_LIVE
+
+BOUNDARY
+- This bundle is attached with the same candidate instruction.
+- The helper body, invocation JSON, fixed EX03 completed Robin, and grader expected values are intentionally absent.
+- The verifier preplaces helper and invocation and owns both expected SHA-256 values.
+- Copilot emits the fixed launcher, including verifier-owned SHA literals, inside one RunScript plus the surrounding PAD actions; it does not emit or modify helper/invocation files.
+- The T2 PAD re-copy is a validator-only source and is not copied into this attachment.
+
+VERIFIER-MANAGED IDENTITIES
+- helper: catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/EX03-R12-Fixed-StringTransfer.ps1 / SHA-256 08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135
+- invocation: catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/invocation.json / SHA-256 92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6
+- fixed launcher source: catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/launcher.ps1 / SHA-256 1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1
+- executed T2 PAD re-copy reference: catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin / SHA-256 da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa
+- Generated output copies these verifier-owned SHA literals only as part of the fixed launcher and must not replace or derive them.
+
+GENERATED SCOPE
+1. Existing-output no-write guard.
+2. Fixed request source reads, explicit sheet activation, TypedValues, and JSON handoff files.
+3. One RunScript containing the FIXED LAUNCHER SOURCE below.
+4. Exact success output {"status":"OK","mode":"NORMAL","text_writes":7,"formats_restored":true} plus PAD NORMAL gate.
+5. Five numeric writes, one SaveAs, close/reopen, and twelve individual JSON value/type comparisons.
+6. Failure closes Work and does not enter later writes or SaveAs.
+
+FIXED LAUNCHER SOURCE BEGIN
+$ErrorActionPreference = 'Stop'
+Set-StrictMode -Version 2
+
+$helperPath = 'C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\probes\ex03-r12-fixed-helper\EX03-R12-Fixed-StringTransfer.ps1'
+$invocationPath = 'C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\probes\ex03-r12-fixed-helper\trials\EX03-R12-FIXED-HELPER-P1-T1\invocation.json'
+$expectedHelperSha256 = '08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135'
+$expectedInvocationSha256 = '92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6'
+$expectedSuccess = '{"status":"OK","mode":"NORMAL","text_writes":7,"formats_restored":true}'
+
+function Stop-Launcher {
+    param([string]$Code, [int]$ExitCode)
+    $failure = [ordered]@{ status = 'ERROR'; error_code = $Code }
+    [Console]::Out.Write([string]($failure | ConvertTo-Json -Compress))
+    exit $ExitCode
+}
+
+function Get-Sha256 {
+    param([string]$Path)
+    $stream = [IO.File]::OpenRead($Path)
+    $algorithm = [Security.Cryptography.SHA256]::Create()
+    try {
+        return ([BitConverter]::ToString($algorithm.ComputeHash($stream))).Replace('-', '').ToLowerInvariant()
+    }
+    finally {
+        $algorithm.Dispose()
+        $stream.Dispose()
+    }
+}
+
+if (-not (Test-Path -LiteralPath $helperPath -PathType Leaf)) {
+    Stop-Launcher 'HELPER_NOT_FOUND' 41
+}
+if (-not (Test-Path -LiteralPath $invocationPath -PathType Leaf)) {
+    Stop-Launcher 'INVOCATION_NOT_FOUND' 42
+}
+
+$actualHelperSha256 = Get-Sha256 $helperPath
+if ($actualHelperSha256 -cne $expectedHelperSha256) {
+    Stop-Launcher 'HELPER_SHA256_MISMATCH' 43
+}
+$actualInvocationSha256 = Get-Sha256 $invocationPath
+if ($actualInvocationSha256 -cne $expectedInvocationSha256) {
+    Stop-Launcher 'INVOCATION_SHA256_MISMATCH' 44
+}
+
+try {
+    $helperOutput = (& $helperPath -InvocationPath $invocationPath | Out-String).Trim()
+}
+catch {
+    Stop-Launcher 'HELPER_INVOCATION_FAILED' 45
+}
+
+if ([string]::IsNullOrWhiteSpace($helperOutput)) {
+    Stop-Launcher 'HELPER_SUCCESS_OUTPUT_MISSING' 46
+}
+if ($helperOutput -cne $expectedSuccess) {
+    Stop-Launcher 'HELPER_UNEXPECTED_OUTPUT' 47
+}
+
+[Console]::Out.Write($helperOutput)
+FIXED LAUNCHER SOURCE END
+
+INDEPENDENT TEACHING FRAGMENTS BEGIN
+状態: STATIC_FRAGMENT_ONLY_NOT_COMPLETE_NOT_RUN
+条件: C:\\VerifierTraining\\lesson-source.xlsx / 教材入力 H3:I4 (2x2) を、lesson-work.xlsx / 教材出力 J4から扱う別条件。入力は1冊だけで、固定EX03の2入力・3x2/2x3矩形・sheet・target・期待値とは異なる。
+
+FRAGMENT A - ReadOnlyで別条件の小矩形を読む:
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\VerifierTraining\\lesson-source.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExampleInput
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExampleInput Name: $'''教材入力'''
+Excel.ReadFromExcel.ReadCells Instance: ExampleInput StartColumn: $'''H''' StartRow: 3 EndColumn: $'''I''' EndRow: 4 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ExampleData
+Excel.CloseExcel.Close Instance: ExampleInput
+
+FRAGMENT B - 1値だけをJSON primitive化して教材専用ファイルへ渡す:
+SET ExampleText TO ExampleData[0][0]
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': ExampleText } Json=> ExampleTextJson
+File.WriteText File: $'''C:\\VerifierTraining\\example-source.json''' TextToWrite: ExampleTextJson AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+
+FRAGMENT C - Robin内の短い独立RunScriptエスケープ例:
+Scripting.RunPowershellScript.RunScript Script: $'''$ErrorActionPreference = \'Stop\'
+[Console]::Out.Write(\'TRAINING_ONLY\')''' ScriptOutput=> ExampleScriptOutput
+
+FRAGMENT D - 成功出力とmodeの二重gateという形だけを示す:
+IF ExampleScriptOutput = $'''TRAINING_ONLY''' THEN
+    IF ExampleMode = $'''TRAINING''' THEN
+        SET ExampleGatePassed TO True
+    ELSE
+        SET ExampleState TO $'''MODE_REJECTED'''
+    END
+ELSE
+    SET ExampleState TO $'''SCRIPT_REJECTED'''
+END
+
+この4断片は連結可能な完成回答ではなく、SaveAs、固定launcher、固定routing、12位置照合、固定EX03の値や採点変数を含まない。
+INDEPENDENT TEACHING FRAGMENTS END
