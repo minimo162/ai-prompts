@@ -1,0 +1,8 @@
+【EX03-R12-FIXED-HELPER-COPILOT-A4 / G1 準備済み送信本文条件 — 今回は未送信】
+候補IDは 20260918-excel-r12-fixed-helper-a4、Route IDは EX03-R12-FIXED-HELPER-COPILOT-A4 です。固定EX03依頼、同版指示全文、同版 PAD-Robin-Fixed-Helper-A4-Bundle.txt を一組として扱います。
+
+A4 WIRING SPECは固定EX03の12位置、7個のhelper文字列経路、5個の数値書込み、2個のreadback矩形、12比較順、fixed work/outputとA4専用json_rootの関係を固定します。完成Robin、採取原文、実行結果、採点値ではありません。採取済みcomponentの明示的複製・接続を許可し、完成Robin不在だけを拒否理由にしません。未知のPAD構文・引数・列挙値・制御構造は作りません。
+
+helper SHA-256は 08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135、A4 invocation SHA-256は 5c5a2008f55296a48f63fa65178aab971e4212455bb2af58e33149bdcaec40d8、A4 launcher SHA-256は a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5 です。workは C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\runs\EX03-attempt1\work.xlsx、outputは C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\runs\EX03-attempt1\照合結果.xlsx、json_rootは C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\runs\EX03-attempt1\a4-helper-json です。
+
+C06はbundle内のA4固定componentを逐語使用します。WIRING SPECの位置と順序は不変で、位置ごとの一意な変数名だけ生成できます。回答形式、安全条件、停止条件は同版指示全文のままです。この本文は将来の1回送信用に固定した準備物であり、今回Copilotへ送信していません。

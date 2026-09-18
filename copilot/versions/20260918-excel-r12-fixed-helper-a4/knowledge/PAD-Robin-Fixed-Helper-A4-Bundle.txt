@@ -1,0 +1,885 @@
+PAD Robin fixed-helper A4 self-contained wiring bundle
+candidate_id: 20260918-excel-r12-fixed-helper-a4
+route_id: EX03-R12-FIXED-HELPER-COPILOT-A4
+bundle_filename: PAD-Robin-Fixed-Helper-A4-Bundle.txt
+status: LOCAL_PREPARED_LIMITED_NON_LIVE_NOT_RUN
+
+BOUNDARY
+- A1-A3, their refusal evidence, formal r12, and T2 auxiliary evidence remain unchanged.
+- A4 adds a fixed WIRING SPEC plus an A4 verifier invocation/launcher aligned to the fixed request work.
+- WIRING SPEC is not a completed Robin, raw capture, execution result, or grading-value source.
+- Captured components may be copied and connected exactly as listed; a completed Robin is not required as a generation source.
+- Unknown actions, arguments, enum values, and control shapes remain forbidden.
+- C06 is derived from the captured T2 RunScript wrapper plus the SHA-pinned A4 launcher and has not been run.
+
+A4 WIRING SPEC — HUMAN-READABLE FIXED MAP
+TEXT: input cell / DataTable index -> JSON file -> helper source_index -> target
+- fixtures/EX03/入力い.xlsx 受取明細!D4 / Data1[0][0] -> source-1.json -> 1 -> 集計先!F7
+- fixtures/EX03/入力い.xlsx 受取明細!D5 / Data1[1][0] -> source-2.json -> 2 -> 集計先!F8
+- fixtures/EX03/入力い.xlsx 受取明細!D6 / Data1[2][0] -> source-3.json -> 3 -> 集計先!F9
+- fixtures/EX03/入力ろ.xlsx 追加項目!B2 / Data2[0][0] -> source-4.json -> 4 -> 追記先!D5
+- fixtures/EX03/入力ろ.xlsx 追加項目!B3 / Data2[1][0] -> source-5.json -> 5 -> 追記先!D6
+- fixtures/EX03/入力ろ.xlsx 追加項目!D2 / Data2[0][2] -> source-6.json -> 6 -> 追記先!F5
+- fixtures/EX03/入力ろ.xlsx 追加項目!D3 / Data2[1][2] -> source-7.json -> 7 -> 追記先!F6
+NUMERIC: input cell / DataTable index -> target
+- fixtures/EX03/入力い.xlsx 受取明細!E4 / Data1[0][1] -> 集計先!G7
+- fixtures/EX03/入力い.xlsx 受取明細!E5 / Data1[1][1] -> 集計先!G8
+- fixtures/EX03/入力い.xlsx 受取明細!E6 / Data1[2][1] -> 集計先!G9
+- fixtures/EX03/入力ろ.xlsx 追加項目!C2 / Data2[0][1] -> 追記先!E5
+- fixtures/EX03/入力ろ.xlsx 追加項目!C3 / Data2[1][1] -> 追記先!E6
+READBACKS
+- 1: 集計先!F7:G9 -> Readback1
+- 2: 追記先!D5:F6 -> Readback2
+COMPARISON ORDER (source -> saved position)
+- 01: fixtures/EX03/入力い.xlsx 受取明細!D4 / Data1[0][0] -> 集計先!F7 / Readback1[0][0]
+- 02: fixtures/EX03/入力い.xlsx 受取明細!E4 / Data1[0][1] -> 集計先!G7 / Readback1[0][1]
+- 03: fixtures/EX03/入力い.xlsx 受取明細!D5 / Data1[1][0] -> 集計先!F8 / Readback1[1][0]
+- 04: fixtures/EX03/入力い.xlsx 受取明細!E5 / Data1[1][1] -> 集計先!G8 / Readback1[1][1]
+- 05: fixtures/EX03/入力い.xlsx 受取明細!D6 / Data1[2][0] -> 集計先!F9 / Readback1[2][0]
+- 06: fixtures/EX03/入力い.xlsx 受取明細!E6 / Data1[2][1] -> 集計先!G9 / Readback1[2][1]
+- 07: fixtures/EX03/入力ろ.xlsx 追加項目!B2 / Data2[0][0] -> 追記先!D5 / Readback2[0][0]
+- 08: fixtures/EX03/入力ろ.xlsx 追加項目!C2 / Data2[0][1] -> 追記先!E5 / Readback2[0][1]
+- 09: fixtures/EX03/入力ろ.xlsx 追加項目!D2 / Data2[0][2] -> 追記先!F5 / Readback2[0][2]
+- 10: fixtures/EX03/入力ろ.xlsx 追加項目!B3 / Data2[1][0] -> 追記先!D6 / Readback2[1][0]
+- 11: fixtures/EX03/入力ろ.xlsx 追加項目!C3 / Data2[1][1] -> 追記先!E6 / Readback2[1][1]
+- 12: fixtures/EX03/入力ろ.xlsx 追加項目!D3 / Data2[1][2] -> 追記先!F6 / Readback2[1][2]
+RUNTIME RELATION
+- work: C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\runs\EX03-attempt1\work.xlsx
+- output guard and SaveAs: C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\runs\EX03-attempt1\照合結果.xlsx
+- A4 json_root: C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\runs\EX03-attempt1\a4-helper-json
+- invocation: C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\probes\ex03-r12-fixed-helper-a4\invocation.json / 5c5a2008f55296a48f63fa65178aab971e4212455bb2af58e33149bdcaec40d8
+- launcher: C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\probes\ex03-r12-fixed-helper-a4\launcher.ps1 / a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5
+- unchanged helper: C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\probes\ex03-r12-fixed-helper\EX03-R12-Fixed-StringTransfer.ps1 / 08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135
+- C02 guards the fixed output before input reads, JSON writes, work open, or helper launch.
+- C04 writes source-1.json through source-7.json and mode.json into the A4 json_root.
+- C05 opens the fixed request work.xlsx as the editable Work instance.
+- C06 runs the SHA-pinned A4 launcher; its invocation targets that same fixed work.xlsx and A4 json_root.
+- The unchanged helper writes the seven text cells into the already-open Work workbook.
+- Only the exact-success and NORMAL gates permit C09 numeric writes and C10 SaveAs to the fixed output.
+
+A4_WIRING_SPEC_JSON_BEGIN
+{
+  "schema_version": 1,
+  "spec_id": "EX03-R12-FIXED-HELPER-A4-WIRING",
+  "candidate_id": "20260918-excel-r12-fixed-helper-a4",
+  "scope": "FIXED_EX03_ONLY_NOT_GENERALIZED",
+  "status": "SPECIFICATION_ONLY_NOT_COMPLETE_ROBIN_NOT_CAPTURED_NOT_RUN",
+  "inputs": [
+    {
+      "input_id": "input1",
+      "workbook": "fixtures/EX03/入力い.xlsx",
+      "sheet": "受取明細",
+      "range": "D4:E6",
+      "data_table_variable": "Data1"
+    },
+    {
+      "input_id": "input2",
+      "workbook": "fixtures/EX03/入力ろ.xlsx",
+      "sheet": "追加項目",
+      "range": "B2:D3",
+      "data_table_variable": "Data2"
+    }
+  ],
+  "runtime": {
+    "issue_root": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38",
+    "fixed_work_relative": "runs/EX03-attempt1/work.xlsx",
+    "fixed_work_absolute": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\work.xlsx",
+    "fixed_output_relative": "runs/EX03-attempt1/照合結果.xlsx",
+    "fixed_output_absolute": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx",
+    "a4_json_root_relative": "runs/EX03-attempt1/a4-helper-json",
+    "a4_json_root_absolute": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json",
+    "mode_json_file": "mode.json",
+    "mode_source_variable": "RunMode",
+    "normal_mode_literal": "NORMAL",
+    "helper_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\EX03-R12-Fixed-StringTransfer.ps1",
+    "helper_sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+    "invocation_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper-a4\\invocation.json",
+    "invocation_sha256": "5c5a2008f55296a48f63fa65178aab971e4212455bb2af58e33149bdcaec40d8",
+    "launcher_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper-a4\\launcher.ps1",
+    "launcher_sha256": "a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5",
+    "fixed_relation": [
+      "C02 guards the fixed output before input reads, JSON writes, work open, or helper launch.",
+      "C04 writes source-1.json through source-7.json and mode.json into the A4 json_root.",
+      "C05 opens the fixed request work.xlsx as the editable Work instance.",
+      "C06 runs the SHA-pinned A4 launcher; its invocation targets that same fixed work.xlsx and A4 json_root.",
+      "The unchanged helper writes the seven text cells into the already-open Work workbook.",
+      "Only the exact-success and NORMAL gates permit C09 numeric writes and C10 SaveAs to the fixed output."
+    ],
+    "verifier_preplaces": [
+      "work.xlsx",
+      "helper",
+      "invocation.json",
+      "launcher.ps1",
+      "A4 json_root directory"
+    ],
+    "flow_creates_before_helper": [
+      "source-1.json through source-7.json",
+      "mode.json"
+    ],
+    "output_precondition": "fixed output does not exist"
+  },
+  "text_mappings": [
+    {
+      "helper_source_index": 1,
+      "input_id": "input1",
+      "input_workbook": "fixtures/EX03/入力い.xlsx",
+      "input_sheet": "受取明細",
+      "input_cell": "D4",
+      "data_table_variable": "Data1",
+      "data_table_index": [
+        0,
+        0
+      ],
+      "source_reference": "Data1[0][0]",
+      "source_json_file": "source-1.json",
+      "source_json_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-1.json",
+      "helper_target_sheet": "集計先",
+      "helper_target_cell": "F7"
+    },
+    {
+      "helper_source_index": 2,
+      "input_id": "input1",
+      "input_workbook": "fixtures/EX03/入力い.xlsx",
+      "input_sheet": "受取明細",
+      "input_cell": "D5",
+      "data_table_variable": "Data1",
+      "data_table_index": [
+        1,
+        0
+      ],
+      "source_reference": "Data1[1][0]",
+      "source_json_file": "source-2.json",
+      "source_json_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-2.json",
+      "helper_target_sheet": "集計先",
+      "helper_target_cell": "F8"
+    },
+    {
+      "helper_source_index": 3,
+      "input_id": "input1",
+      "input_workbook": "fixtures/EX03/入力い.xlsx",
+      "input_sheet": "受取明細",
+      "input_cell": "D6",
+      "data_table_variable": "Data1",
+      "data_table_index": [
+        2,
+        0
+      ],
+      "source_reference": "Data1[2][0]",
+      "source_json_file": "source-3.json",
+      "source_json_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-3.json",
+      "helper_target_sheet": "集計先",
+      "helper_target_cell": "F9"
+    },
+    {
+      "helper_source_index": 4,
+      "input_id": "input2",
+      "input_workbook": "fixtures/EX03/入力ろ.xlsx",
+      "input_sheet": "追加項目",
+      "input_cell": "B2",
+      "data_table_variable": "Data2",
+      "data_table_index": [
+        0,
+        0
+      ],
+      "source_reference": "Data2[0][0]",
+      "source_json_file": "source-4.json",
+      "source_json_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-4.json",
+      "helper_target_sheet": "追記先",
+      "helper_target_cell": "D5"
+    },
+    {
+      "helper_source_index": 5,
+      "input_id": "input2",
+      "input_workbook": "fixtures/EX03/入力ろ.xlsx",
+      "input_sheet": "追加項目",
+      "input_cell": "B3",
+      "data_table_variable": "Data2",
+      "data_table_index": [
+        1,
+        0
+      ],
+      "source_reference": "Data2[1][0]",
+      "source_json_file": "source-5.json",
+      "source_json_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-5.json",
+      "helper_target_sheet": "追記先",
+      "helper_target_cell": "D6"
+    },
+    {
+      "helper_source_index": 6,
+      "input_id": "input2",
+      "input_workbook": "fixtures/EX03/入力ろ.xlsx",
+      "input_sheet": "追加項目",
+      "input_cell": "D2",
+      "data_table_variable": "Data2",
+      "data_table_index": [
+        0,
+        2
+      ],
+      "source_reference": "Data2[0][2]",
+      "source_json_file": "source-6.json",
+      "source_json_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-6.json",
+      "helper_target_sheet": "追記先",
+      "helper_target_cell": "F5"
+    },
+    {
+      "helper_source_index": 7,
+      "input_id": "input2",
+      "input_workbook": "fixtures/EX03/入力ろ.xlsx",
+      "input_sheet": "追加項目",
+      "input_cell": "D3",
+      "data_table_variable": "Data2",
+      "data_table_index": [
+        1,
+        2
+      ],
+      "source_reference": "Data2[1][2]",
+      "source_json_file": "source-7.json",
+      "source_json_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-7.json",
+      "helper_target_sheet": "追記先",
+      "helper_target_cell": "F6"
+    }
+  ],
+  "numeric_mappings": [
+    {
+      "order": 1,
+      "input_id": "input1",
+      "input_workbook": "fixtures/EX03/入力い.xlsx",
+      "input_sheet": "受取明細",
+      "input_cell": "E4",
+      "data_table_variable": "Data1",
+      "data_table_index": [
+        0,
+        1
+      ],
+      "source_reference": "Data1[0][1]",
+      "target_sheet": "集計先",
+      "target_cell": "G7"
+    },
+    {
+      "order": 2,
+      "input_id": "input1",
+      "input_workbook": "fixtures/EX03/入力い.xlsx",
+      "input_sheet": "受取明細",
+      "input_cell": "E5",
+      "data_table_variable": "Data1",
+      "data_table_index": [
+        1,
+        1
+      ],
+      "source_reference": "Data1[1][1]",
+      "target_sheet": "集計先",
+      "target_cell": "G8"
+    },
+    {
+      "order": 3,
+      "input_id": "input1",
+      "input_workbook": "fixtures/EX03/入力い.xlsx",
+      "input_sheet": "受取明細",
+      "input_cell": "E6",
+      "data_table_variable": "Data1",
+      "data_table_index": [
+        2,
+        1
+      ],
+      "source_reference": "Data1[2][1]",
+      "target_sheet": "集計先",
+      "target_cell": "G9"
+    },
+    {
+      "order": 4,
+      "input_id": "input2",
+      "input_workbook": "fixtures/EX03/入力ろ.xlsx",
+      "input_sheet": "追加項目",
+      "input_cell": "C2",
+      "data_table_variable": "Data2",
+      "data_table_index": [
+        0,
+        1
+      ],
+      "source_reference": "Data2[0][1]",
+      "target_sheet": "追記先",
+      "target_cell": "E5"
+    },
+    {
+      "order": 5,
+      "input_id": "input2",
+      "input_workbook": "fixtures/EX03/入力ろ.xlsx",
+      "input_sheet": "追加項目",
+      "input_cell": "C3",
+      "data_table_variable": "Data2",
+      "data_table_index": [
+        1,
+        1
+      ],
+      "source_reference": "Data2[1][1]",
+      "target_sheet": "追記先",
+      "target_cell": "E6"
+    }
+  ],
+  "readbacks": [
+    {
+      "order": 1,
+      "sheet": "集計先",
+      "range": "F7:G9",
+      "variable": "Readback1",
+      "rows": 3,
+      "columns": 2
+    },
+    {
+      "order": 2,
+      "sheet": "追記先",
+      "range": "D5:F6",
+      "variable": "Readback2",
+      "rows": 2,
+      "columns": 3
+    }
+  ],
+  "comparison_contract": {
+    "count": 12,
+    "order": "input rectangles in request order, each rectangle row-major",
+    "source_and_saved_positions_immutable": true,
+    "per_position_variable_names_may_be_generated": true,
+    "comparison_primitive": "captured JSON probe string equality from C11",
+    "positions": [
+      {
+        "order": 1,
+        "kind": "text",
+        "source_workbook": "fixtures/EX03/入力い.xlsx",
+        "source_sheet": "受取明細",
+        "source_cell": "D4",
+        "source_reference": "Data1[0][0]",
+        "saved_sheet": "集計先",
+        "saved_cell": "F7",
+        "saved_reference": "Readback1[0][0]",
+        "source_and_saved_positions_immutable": true,
+        "per_position_variable_names_may_be_generated": true
+      },
+      {
+        "order": 2,
+        "kind": "number",
+        "source_workbook": "fixtures/EX03/入力い.xlsx",
+        "source_sheet": "受取明細",
+        "source_cell": "E4",
+        "source_reference": "Data1[0][1]",
+        "saved_sheet": "集計先",
+        "saved_cell": "G7",
+        "saved_reference": "Readback1[0][1]",
+        "source_and_saved_positions_immutable": true,
+        "per_position_variable_names_may_be_generated": true
+      },
+      {
+        "order": 3,
+        "kind": "text",
+        "source_workbook": "fixtures/EX03/入力い.xlsx",
+        "source_sheet": "受取明細",
+        "source_cell": "D5",
+        "source_reference": "Data1[1][0]",
+        "saved_sheet": "集計先",
+        "saved_cell": "F8",
+        "saved_reference": "Readback1[1][0]",
+        "source_and_saved_positions_immutable": true,
+        "per_position_variable_names_may_be_generated": true
+      },
+      {
+        "order": 4,
+        "kind": "number",
+        "source_workbook": "fixtures/EX03/入力い.xlsx",
+        "source_sheet": "受取明細",
+        "source_cell": "E5",
+        "source_reference": "Data1[1][1]",
+        "saved_sheet": "集計先",
+        "saved_cell": "G8",
+        "saved_reference": "Readback1[1][1]",
+        "source_and_saved_positions_immutable": true,
+        "per_position_variable_names_may_be_generated": true
+      },
+      {
+        "order": 5,
+        "kind": "text",
+        "source_workbook": "fixtures/EX03/入力い.xlsx",
+        "source_sheet": "受取明細",
+        "source_cell": "D6",
+        "source_reference": "Data1[2][0]",
+        "saved_sheet": "集計先",
+        "saved_cell": "F9",
+        "saved_reference": "Readback1[2][0]",
+        "source_and_saved_positions_immutable": true,
+        "per_position_variable_names_may_be_generated": true
+      },
+      {
+        "order": 6,
+        "kind": "number",
+        "source_workbook": "fixtures/EX03/入力い.xlsx",
+        "source_sheet": "受取明細",
+        "source_cell": "E6",
+        "source_reference": "Data1[2][1]",
+        "saved_sheet": "集計先",
+        "saved_cell": "G9",
+        "saved_reference": "Readback1[2][1]",
+        "source_and_saved_positions_immutable": true,
+        "per_position_variable_names_may_be_generated": true
+      },
+      {
+        "order": 7,
+        "kind": "text",
+        "source_workbook": "fixtures/EX03/入力ろ.xlsx",
+        "source_sheet": "追加項目",
+        "source_cell": "B2",
+        "source_reference": "Data2[0][0]",
+        "saved_sheet": "追記先",
+        "saved_cell": "D5",
+        "saved_reference": "Readback2[0][0]",
+        "source_and_saved_positions_immutable": true,
+        "per_position_variable_names_may_be_generated": true
+      },
+      {
+        "order": 8,
+        "kind": "number",
+        "source_workbook": "fixtures/EX03/入力ろ.xlsx",
+        "source_sheet": "追加項目",
+        "source_cell": "C2",
+        "source_reference": "Data2[0][1]",
+        "saved_sheet": "追記先",
+        "saved_cell": "E5",
+        "saved_reference": "Readback2[0][1]",
+        "source_and_saved_positions_immutable": true,
+        "per_position_variable_names_may_be_generated": true
+      },
+      {
+        "order": 9,
+        "kind": "text",
+        "source_workbook": "fixtures/EX03/入力ろ.xlsx",
+        "source_sheet": "追加項目",
+        "source_cell": "D2",
+        "source_reference": "Data2[0][2]",
+        "saved_sheet": "追記先",
+        "saved_cell": "F5",
+        "saved_reference": "Readback2[0][2]",
+        "source_and_saved_positions_immutable": true,
+        "per_position_variable_names_may_be_generated": true
+      },
+      {
+        "order": 10,
+        "kind": "text",
+        "source_workbook": "fixtures/EX03/入力ろ.xlsx",
+        "source_sheet": "追加項目",
+        "source_cell": "B3",
+        "source_reference": "Data2[1][0]",
+        "saved_sheet": "追記先",
+        "saved_cell": "D6",
+        "saved_reference": "Readback2[1][0]",
+        "source_and_saved_positions_immutable": true,
+        "per_position_variable_names_may_be_generated": true
+      },
+      {
+        "order": 11,
+        "kind": "number",
+        "source_workbook": "fixtures/EX03/入力ろ.xlsx",
+        "source_sheet": "追加項目",
+        "source_cell": "C3",
+        "source_reference": "Data2[1][1]",
+        "saved_sheet": "追記先",
+        "saved_cell": "E6",
+        "saved_reference": "Readback2[1][1]",
+        "source_and_saved_positions_immutable": true,
+        "per_position_variable_names_may_be_generated": true
+      },
+      {
+        "order": 12,
+        "kind": "text",
+        "source_workbook": "fixtures/EX03/入力ろ.xlsx",
+        "source_sheet": "追加項目",
+        "source_cell": "D3",
+        "source_reference": "Data2[1][2]",
+        "saved_sheet": "追記先",
+        "saved_cell": "F6",
+        "saved_reference": "Readback2[1][2]",
+        "source_and_saved_positions_immutable": true,
+        "per_position_variable_names_may_be_generated": true
+      }
+    ]
+  },
+  "generation_contract": {
+    "explicit_copy_and_connection_from_captured_components_allowed": true,
+    "completed_robin_required_as_generation_source": false,
+    "unknown_action_argument_enum_or_control_fabrication_allowed": false,
+    "new_pad_loop_allowed": false,
+    "cell_or_grader_values_included": false
+  }
+}
+A4_WIRING_SPEC_JSON_END
+
+IN-BUNDLE INDEX
+[C01_STATE_INIT] state and gate initialization
+  component_kind: RAW_CAPTURE_SLICE
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 1-4
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: da87bb12ea194095ca8c672b92d1c4535a873437b3ba6235c7b288c60e386fd4
+  dependencies: none
+  mutable_parameters: state variable names; initial state label
+  immutable_syntax: SET syntax; False boolean literal
+  prior_execution_scope: captured and executed only in the R2/R3 one-row probe
+[C02_OUTPUT_GUARD] existing-output guard and open ELSE branch
+  component_kind: RAW_CAPTURE_SLICE
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 5-7
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: 0694d74e8c308f95861baab1535dd6436bb749eadb84a4a172b1674f8ef47de5
+  dependencies: C01_STATE_INIT
+  mutable_parameters: guard path; state variable name and stop label
+  immutable_syntax: File.IfFile.Exists; IF/THEN/ELSE opening shape; final outer END supplied by C12
+  prior_execution_scope: captured and executed around the complete R2/R3 normal probe; dedicated output-guard recopy is separately SHA-pinned
+[C03_READONLY_TYPED_RANGE] read-only workbook, sheet activation, TypedValues range read, close
+  component_kind: RAW_CAPTURE_SLICE
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 8-11
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: 918765252d61a3f6a34c9b443f4eaa0aa0161cd86ab97f043c8544ad19842932
+  dependencies: C02_OUTPUT_GUARD
+  mutable_parameters: input path; instance name; sheet; range; range output name; repeat for second input
+  immutable_syntax: ReadOnly: True; UseMachineLocale: False; TypedValues; FirstLineIsHeader: False
+  prior_execution_scope: captured and executed for one read-only source range in the R2/R3 probe; scalar/type recopy is separately SHA-pinned
+[C04_JSON_FILE_HANDOFF] data slots to JSON primitives and UTF-8 handoff files
+  component_kind: RAW_CAPTURE_SLICE
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 12-26
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: 4a33eca4fc68c92ac75fbd00ecae60c9d84cd142f2c3e7c8570428bc080707c5
+  dependencies: C03_READONLY_TYPED_RANGE
+  mutable_parameters: data slot count/indexes; variable names; handoff paths; mode value
+  immutable_syntax: ConvertCustomObjectToJson { 'probe': value }; AppendNewLine: False; Overwrite; UTF8
+  prior_execution_scope: captured and executed only with four source values plus mode in R2/R3
+[C05_EDITABLE_WORK_OPEN] editable work-copy open
+  component_kind: RAW_CAPTURE_SLICE
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 27-27
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: 8b661b3545f377c99a6b25e7aa026c96bf613ff110c1346c41092d7511084e93
+  dependencies: C02_OUTPUT_GUARD,C04_JSON_FILE_HANDOFF
+  mutable_parameters: work-copy path; instance name
+  immutable_syntax: ReadOnly: False; UseMachineLocale: False
+  prior_execution_scope: captured and executed only in the R2/R3 work-copy probe
+[C06_FIXED_LAUNCHER_RUNSCRIPT] fixed A4 Run PowerShell Script component from captured wrapper plus A4 launcher
+  component_kind: DERIVED_FIXED_A4_LAUNCHER_NOT_RUN
+  source: catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin lines 41-100
+  source_sha256: da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa
+  excerpt_sha256: 2e2ddf38c8b51a5e434083db5b2be9a2b6253aa4f475d8888d9197bb0bb870ed
+  dependencies: C04_JSON_FILE_HANDOFF,C05_EDITABLE_WORK_OPEN
+  mutable_parameters: none
+  immutable_syntax: entire derived A4 component; captured RunScript prefix and ScriptOutput suffix; A4 fixed paths and SHA literals; expectedSuccess
+  prior_execution_scope: outer RunScript wrapper executed in T2; A4 launcher content not run
+  embedded_launcher: catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-a4/launcher.ps1 / a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5
+[C07_EXACT_SUCCESS_MODE_GATE] fixed exact-success output and PAD NORMAL double gate
+  component_kind: RAW_CAPTURE_SLICE
+  source: catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin lines 101-103
+  source_sha256: da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa
+  excerpt_sha256: 9dc3042fc22af7b0a0e90c784ef208828102af2a28087cf385f331ae1af2d412
+  dependencies: C06_FIXED_LAUNCHER_RUNSCRIPT
+  mutable_parameters: none
+  immutable_syntax: exact success JSON; RunMode NORMAL check; nested IF shape
+  prior_execution_scope: captured, saved, re-copied, and executed only in fixed-helper T2 auxiliary Run1
+[C08_TARGET_SHEET_ACTIVATION] explicit target worksheet activation shape
+  component_kind: RAW_CAPTURE_SLICE
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 28-28
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: 9331dd5b830b9854e943e4b0e2c253d13ecc825c85b39efd436e2b9f61b537e6
+  dependencies: C07_EXACT_SUCCESS_MODE_GATE
+  mutable_parameters: instance name; target sheet; repeat between target-sheet groups; leading indentation inside success gate
+  immutable_syntax: ActivateWorksheetByName action and Name argument shape
+  prior_execution_scope: captured and executed only for the R2/R3 target sheet; success-gate nesting is a new composition
+[C09_NUMERIC_WRITE] numeric source gate marker and one WriteCell shape
+  component_kind: RAW_CAPTURE_SLICE
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 168-169
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: c9745f104b057d9f380b535aadb467fa32a9062d6fa1e3989d5cf464e189be26
+  dependencies: C04_JSON_FILE_HANDOFF,C07_EXACT_SUCCESS_MODE_GATE,C08_TARGET_SHEET_ACTIVATION
+  mutable_parameters: source variable; target column; target row; repeat count
+  immutable_syntax: WriteCell action shape inside success branch
+  prior_execution_scope: captured and executed for one numeric write in the R2/R3 one-row probe
+[C10_SAVE_CLOSE_REOPEN_READBACK] SaveAs, close, read-only reopen, TypedValues readback, close
+  component_kind: RAW_CAPTURE_SLICE
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 170-176
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: 5cef87e70f5e723ea6bcb3316e6801cd3743a51c378deacb4a9cd2f98e3a85e0
+  dependencies: C09_NUMERIC_WRITE
+  mutable_parameters: output path; sheet; readback range; readback variable; repeat read for second rectangle
+  immutable_syntax: OpenXmlWorkbook SaveAs; close before reopen; ReadOnly: True; TypedValues
+  prior_execution_scope: captured and executed for one readback rectangle in the R2/R3 one-row probe
+[C11_JSON_VALUE_TYPE_COMPARE] saved slots to JSON primitives and source-versus-saved comparisons
+  component_kind: RAW_CAPTURE_SLICE
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 177-189
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: 96a84f395b60975c3f51372b2fc05e0f8d0d22e16580d993f369fa3b1e39556f
+  dependencies: C04_JSON_FILE_HANDOFF,C10_SAVE_CLOSE_REOPEN_READBACK
+  mutable_parameters: readback indexes; variable names; comparison count; success state label
+  immutable_syntax: ConvertCustomObjectToJson { 'probe': value }; JSON string equality shape
+  prior_execution_scope: captured and executed for four positions in the R2/R3 one-row probe
+[C12_FAILURE_CLOSE_NO_SAVE] mode/script rejection branches close Work without SaveAs
+  component_kind: RAW_CAPTURE_SLICE
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 190-198
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: e8715546a45126cfb1c6d192444d56e61283d7948117455fce390e686f83c194
+  dependencies: C07_EXACT_SUCCESS_MODE_GATE
+  mutable_parameters: failure state labels; instance name
+  immutable_syntax: ELSE nesting; Close action; absence of SaveAs in failure branches
+  prior_execution_scope: captured in R2/R3; script-rejection branch executed by its forced-exception negative run
+
+SOURCE-LINE ASSEMBLY RULES
+[AR04_EXPLICIT_JSON_HANDOFF] component=C04_JSON_FILE_HANDOFF
+  purpose: explicitly duplicate source-slot JSON handoff commands without a PAD loop
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:12-15 => SET source variable definitions
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:16-19 => source JSON conversions
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:20-21 => single mode definition and conversion
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:22-25 => source JSON file writes
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:26-26 => single mode file write
+  immutable_parts: SET command shape; ConvertCustomObjectToJson CustomObject probe wrapper and Json output shape; File.WriteText AppendNewLine False, Overwrite, UTF8 arguments; mode definition/conversion/write occurs once
+  mutable_parts: source variable and JSON variable names; DataTable row/column indexes; source-N JSON path and N; explicit source-slot copy count; leading indentation needed by the outer ELSE body
+  definitions: each source variable; each source JSON variable; RunMode; RunModeJson
+  references: C03 DataTable outputs; each source JSON variable at its matching write
+  order_1: all source SET definitions
+  order_2: all source JSON conversions
+  order_3: RunMode SET and JSON conversion once
+  order_4: all matching source-N writes
+  order_5: mode write once
+  connection: after all C03 reads and before C05/C06; every reference follows its definition
+  copy_method: copy the captured command lines explicitly once per slot; do not create a LOOP
+[AR09_EXPLICIT_NUMERIC_WRITES] component=C09_NUMERIC_WRITE
+  purpose: define numeric source variables and duplicate WriteCell explicitly inside the success branch
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:12-15 => SET-from-DataTable definition template
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:28-28 => target-sheet activation template
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:168-168 => single branch-entry marker
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:169-169 => WriteCell template
+  immutable_parts: SET definition shape; ActivateWorksheetByName action and Name argument shape; NumericWriteEntered marker occurs once; WriteCell action and Instance/Value/Column/Row argument names
+  mutable_parts: numeric variable names and DataTable indexes; target sheet; target column and row; explicit WriteCell copy count; leading indentation for the NORMAL success body
+  definitions: every numeric source variable before its first WriteCell; NumericWriteEntered once
+  references: C03 DataTable outputs; Work from C05; numeric variable at each WriteCell
+  order_1: C07 exact-success and NORMAL gates pass
+  order_2: define all numeric source variables
+  order_3: activate the first target sheet
+  order_4: set NumericWriteEntered once
+  order_5: emit each WriteCell in source order, activating a different sheet before its group
+  connection: inside the NORMAL branch after C07 line 103 and before C10 SaveAs
+  copy_method: copy SET, activation, and WriteCell lines explicitly; do not create a LOOP
+[AR10_MULTIPLE_RECTANGLE_READBACK] component=C10_SAVE_CLOSE_REOPEN_READBACK
+  purpose: save/reopen once and duplicate only activation plus TypedValues read for each rectangle
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:170-173 => single SaveAs marker, SaveAs, close, read-only reopen
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:174-175 => rectangle activation and TypedValues read pair
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:176-176 => single close after all rectangle reads
+  immutable_parts: SaveAs OpenXmlWorkbook shape; close Work before read-only reopen; ReadOnly True and UseMachineLocale False; TypedValues and FirstLineIsHeader False; close Reopened once after the final read
+  mutable_parts: output path; sheet, start/end columns and rows; readback variable name; explicit activation/read pair copy count
+  definitions: Reopened at the single reopen; one readback variable per rectangle
+  references: Work from C05; output path; Reopened for every activation/read and final close
+  order_1: set SaveAsEntered once
+  order_2: SaveAs once
+  order_3: close Work once
+  order_4: reopen output ReadOnly once
+  order_5: for each rectangle explicitly emit activation then read
+  order_6: close Reopened once
+  connection: after the last C09 WriteCell and before C11 saved-value definitions
+  copy_method: copy only the captured activation/read pair per rectangle; do not duplicate SaveAs/reopen and do not create a LOOP
+[AR11_MULTIPLE_JSON_COMPARISONS] component=C11_JSON_VALUE_TYPE_COMPARE
+  purpose: duplicate saved-slot definitions, JSON conversions, and equality comparisons by position
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:177-180 => saved variable definitions
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:181-184 => saved JSON conversions
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:185-188 => source JSON versus saved JSON comparisons
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:189-189 => single success-state assignment
+  immutable_parts: SET saved variable shape; ConvertCustomObjectToJson probe wrapper and Json output shape; JSON string equality shape; success-state assignment occurs once after all comparisons
+  mutable_parts: readback variable and row/column indexes; saved/source JSON and boolean result variable names; explicit position copy count; final success-state variable and label
+  definitions: every saved variable; every saved JSON variable; every comparison boolean; final state
+  references: all C10 readback variables; matching source JSON variables; matching saved JSON variables
+  order_1: define every saved variable in fixed position order
+  order_2: convert every saved value to JSON in the same order
+  order_3: compare matching source and saved JSON variables in the same order
+  order_4: set success state once
+  connection: after C10 closes Reopened and before C12 begins the NORMAL failure ELSE
+  copy_method: copy each captured command line explicitly per position; do not create a LOOP
+
+CONTROL BLOCK MAP
+- 01 OPEN OUTPUT_GUARD => C02_OUTPUT_GUARD / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:5
+- 02 ELSE OUTPUT_GUARD => C02_OUTPUT_GUARD / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:7
+- 03 BODY OUTPUT_GUARD => C06_FIXED_LAUNCHER_RUNSCRIPT / catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin:100
+- 04 OPEN EXACT_SUCCESS => C07_EXACT_SUCCESS_MODE_GATE / catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin:101
+- 05 OPEN NORMAL_MODE => C07_EXACT_SUCCESS_MODE_GATE / catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin:102
+- 06 SUCCESS_BODY_START NORMAL_MODE => C07_EXACT_SUCCESS_MODE_GATE / catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin:103
+- 07 ELSE NORMAL_MODE => C12_FAILURE_CLOSE_NO_SAVE / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:190
+- 08 CLOSE_WORK_NO_SAVE NORMAL_MODE => C12_FAILURE_CLOSE_NO_SAVE / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:191
+- 09 END NORMAL_MODE => C12_FAILURE_CLOSE_NO_SAVE / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:193
+- 10 ELSE EXACT_SUCCESS => C12_FAILURE_CLOSE_NO_SAVE / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:194
+- 11 CLOSE_WORK_NO_SAVE EXACT_SUCCESS => C12_FAILURE_CLOSE_NO_SAVE / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:195
+- 12 END EXACT_SUCCESS => C12_FAILURE_CLOSE_NO_SAVE / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:197
+- 13 END OUTPUT_GUARD => C12_FAILURE_CLOSE_NO_SAVE / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:198
+- C12 line 193 closes NORMAL_MODE.
+- C12 line 197 closes EXACT_SUCCESS.
+- C12 line 198 closes OUTPUT_GUARD.
+- C12 lines 191 and 195 close Work without SaveAs in the two failure branches.
+
+COMPONENT BLOCKS
+
+COMPONENT METADATA C01_STATE_INIT
+COMPONENT C01_STATE_INIT BEGIN
+SET ProbeState TO $'''NOT_STARTED'''
+SET ScriptGatePassed TO False
+SET NumericWriteEntered TO False
+SET SaveAsEntered TO False
+COMPONENT C01_STATE_INIT END
+
+COMPONENT METADATA C02_OUTPUT_GUARD
+COMPONENT C02_OUTPUT_GUARD BEGIN
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\result.xlsx''') THEN
+    SET ProbeState TO $'''OUTPUT_EXISTS_NO_RUN'''
+ELSE
+COMPONENT C02_OUTPUT_GUARD END
+
+COMPONENT METADATA C03_READONLY_TYPED_RANGE
+COMPONENT C03_READONLY_TYPED_RANGE BEGIN
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\source.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> SourceBook
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: SourceBook Name: $'''Source'''
+    Excel.ReadFromExcel.ReadCells Instance: SourceBook StartColumn: $'''A''' StartRow: 2 EndColumn: $'''D''' EndRow: 2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> SourceData
+    Excel.CloseExcel.Close Instance: SourceBook
+COMPONENT C03_READONLY_TYPED_RANGE END
+
+COMPONENT METADATA C04_JSON_FILE_HANDOFF
+COMPONENT C04_JSON_FILE_HANDOFF BEGIN
+    SET Source1 TO SourceData[0][0]
+    SET Source2 TO SourceData[0][1]
+    SET Source3 TO SourceData[0][2]
+    SET Source4 TO SourceData[0][3]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source1 } Json=> Source1Json
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source2 } Json=> Source2Json
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source3 } Json=> Source3Json
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source4 } Json=> Source4Json
+    SET RunMode TO $'''NORMAL'''
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': RunMode } Json=> RunModeJson
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\source-1.json''' TextToWrite: Source1Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\source-2.json''' TextToWrite: Source2Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\source-3.json''' TextToWrite: Source3Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\source-4.json''' TextToWrite: Source4Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\mode.json''' TextToWrite: RunModeJson AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+COMPONENT C04_JSON_FILE_HANDOFF END
+
+COMPONENT METADATA C05_EDITABLE_WORK_OPEN
+COMPONENT C05_EDITABLE_WORK_OPEN BEGIN
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\work.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> Work
+COMPONENT C05_EDITABLE_WORK_OPEN END
+
+COMPONENT METADATA C06_FIXED_LAUNCHER_RUNSCRIPT
+COMPONENT C06_FIXED_LAUNCHER_RUNSCRIPT BEGIN
+    Scripting.RunPowershellScript.RunScript Script: $'''$ErrorActionPreference = \'Stop\'
+Set-StrictMode -Version 2
+
+$helperPath = \'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\EX03-R12-Fixed-StringTransfer.ps1\'
+$invocationPath = \'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper-a4\\invocation.json\'
+$expectedHelperSha256 = \'08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135\'
+$expectedInvocationSha256 = \'5c5a2008f55296a48f63fa65178aab971e4212455bb2af58e33149bdcaec40d8\'
+$expectedSuccess = \'{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}\'
+
+function Stop-Launcher {
+    param([string]$Code, [int]$ExitCode)
+    $failure = [ordered]@{ status = \'ERROR\'; error_code = $Code }
+    [Console]::Out.Write([string]($failure | ConvertTo-Json -Compress))
+    exit $ExitCode
+}
+
+function Get-Sha256 {
+    param([string]$Path)
+    $stream = [IO.File]::OpenRead($Path)
+    $algorithm = [Security.Cryptography.SHA256]::Create()
+    try {
+        return ([BitConverter]::ToString($algorithm.ComputeHash($stream))).Replace(\'-\', \'\').ToLowerInvariant()
+    }
+    finally {
+        $algorithm.Dispose()
+        $stream.Dispose()
+    }
+}
+
+if (-not (Test-Path -LiteralPath $helperPath -PathType Leaf)) {
+    Stop-Launcher \'HELPER_NOT_FOUND\' 41
+}
+if (-not (Test-Path -LiteralPath $invocationPath -PathType Leaf)) {
+    Stop-Launcher \'INVOCATION_NOT_FOUND\' 42
+}
+
+$actualHelperSha256 = Get-Sha256 $helperPath
+if ($actualHelperSha256 -cne $expectedHelperSha256) {
+    Stop-Launcher \'HELPER_SHA256_MISMATCH\' 43
+}
+$actualInvocationSha256 = Get-Sha256 $invocationPath
+if ($actualInvocationSha256 -cne $expectedInvocationSha256) {
+    Stop-Launcher \'INVOCATION_SHA256_MISMATCH\' 44
+}
+
+try {
+    $helperOutput = (& $helperPath -InvocationPath $invocationPath | Out-String).Trim()
+}
+catch {
+    Stop-Launcher \'HELPER_INVOCATION_FAILED\' 45
+}
+
+if ([string]::IsNullOrWhiteSpace($helperOutput)) {
+    Stop-Launcher \'HELPER_SUCCESS_OUTPUT_MISSING\' 46
+}
+if ($helperOutput -cne $expectedSuccess) {
+    Stop-Launcher \'HELPER_UNEXPECTED_OUTPUT\' 47
+}
+
+[Console]::Out.Write($helperOutput)''' ScriptOutput=> PowershellOutput
+COMPONENT C06_FIXED_LAUNCHER_RUNSCRIPT END
+
+COMPONENT METADATA C07_EXACT_SUCCESS_MODE_GATE
+COMPONENT C07_EXACT_SUCCESS_MODE_GATE BEGIN
+    IF PowershellOutput = $'''{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}''' THEN
+        IF RunMode = $'''NORMAL''' THEN
+            SET ScriptGatePassed TO True
+COMPONENT C07_EXACT_SUCCESS_MODE_GATE END
+
+COMPONENT METADATA C08_TARGET_SHEET_ACTIVATION
+COMPONENT C08_TARGET_SHEET_ACTIVATION BEGIN
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''Target'''
+COMPONENT C08_TARGET_SHEET_ACTIVATION END
+
+COMPONENT METADATA C09_NUMERIC_WRITE
+COMPONENT C09_NUMERIC_WRITE BEGIN
+            SET NumericWriteEntered TO True
+            Excel.WriteToExcel.WriteCell Instance: Work Value: Source4 Column: $'''D''' Row: 2
+COMPONENT C09_NUMERIC_WRITE END
+
+COMPONENT METADATA C10_SAVE_CLOSE_REOPEN_READBACK
+COMPONENT C10_SAVE_CLOSE_REOPEN_READBACK BEGIN
+            SET SaveAsEntered TO True
+            Excel.SaveExcel.SaveAs Instance: Work DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\result.xlsx'''
+            Excel.CloseExcel.Close Instance: Work
+            Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\result.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Reopened
+            Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''Target'''
+            Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''A''' StartRow: 2 EndColumn: $'''D''' EndRow: 2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback
+            Excel.CloseExcel.Close Instance: Reopened
+COMPONENT C10_SAVE_CLOSE_REOPEN_READBACK END
+
+COMPONENT METADATA C11_JSON_VALUE_TYPE_COMPARE
+COMPONENT C11_JSON_VALUE_TYPE_COMPARE BEGIN
+            SET Saved1 TO Readback[0][0]
+            SET Saved2 TO Readback[0][1]
+            SET Saved3 TO Readback[0][2]
+            SET Saved4 TO Readback[0][3]
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved1 } Json=> Saved1Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved2 } Json=> Saved2Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved3 } Json=> Saved3Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved4 } Json=> Saved4Json
+            SET Source1VsSaved TO Source1Json = Saved1Json
+            SET Source2VsSaved TO Source2Json = Saved2Json
+            SET Source3VsSaved TO Source3Json = Saved3Json
+            SET Source4VsSaved TO Source4Json = Saved4Json
+            SET ProbeState TO $'''SUCCESS_GATE_PASSED_SAVED_READBACK_READY'''
+COMPONENT C11_JSON_VALUE_TYPE_COMPARE END
+
+COMPONENT METADATA C12_FAILURE_CLOSE_NO_SAVE
+COMPONENT C12_FAILURE_CLOSE_NO_SAVE BEGIN
+        ELSE
+            Excel.CloseExcel.Close Instance: Work
+            SET ProbeState TO $'''MODE_NOT_NORMAL_NO_SAVE'''
+        END
+    ELSE
+        Excel.CloseExcel.Close Instance: Work
+        SET ProbeState TO $'''SCRIPT_NOT_SUCCESS_NO_SAVE'''
+    END
+END
+COMPONENT C12_FAILURE_CLOSE_NO_SAVE END
+
+END OF SELF-CONTAINED A4 BUNDLE
+The blocks and WIRING SPEC are generation inputs, not a complete captured or executed A4 Robin.
