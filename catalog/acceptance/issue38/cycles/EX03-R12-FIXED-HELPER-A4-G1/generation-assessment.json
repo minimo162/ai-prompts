@@ -1,0 +1,572 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-A4-G1",
+  "candidate_id": "20260918-excel-r12-fixed-helper-a4",
+  "route_id": "EX03-R12-FIXED-HELPER-COPILOT-A4",
+  "recorded_at": "2026-09-18T19:18:28.366643+09:00",
+  "generation_status": "GENERATED_ONE_UNMODIFIED_ROBIN_BUT_REJECTED_BEFORE_PAD",
+  "fixed_identity": {
+    "instruction_sha256": "93cfd7aa5d0f1c380e1a5c50f764794a7bab2e676f1d064c9fe9b349788f3829",
+    "submitted_body_sha256": "8924f824256a161f035f686b221ea58bf2033a66e0ef359c8968506c338f9647",
+    "bundle_sha256": "62695ca3c007ab291732657ddaeca66723a57115d151efc7b1730ef5341c514c",
+    "wiring_sha256": "c62ec6951bdd36e895acfc937d7a1f390e75e8d984b26a9531cc2c88d970f58c",
+    "helper_sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+    "invocation_sha256": "5c5a2008f55296a48f63fa65178aab971e4212455bb2af58e33149bdcaec40d8",
+    "launcher_sha256": "a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5"
+  },
+  "delivery": {
+    "send_count": 1,
+    "send_limit": 1,
+    "ui_plain_text_code_preview_count": 1,
+    "dom_pre_element_count": 0,
+    "dom_code_element_count": 0,
+    "generated_robin_unmodified": true,
+    "generated_robin_sha256": "eb5648631466da3431a21cf8df98fb06e5fece8876c3705b6483b4d74b58e290",
+    "generated_robin_utf8_bytes": 10713,
+    "generated_robin_line_count": 113,
+    "generated_robin_final_newline": false,
+    "pass": true
+  },
+  "syntax_and_structure": {
+    "control_balance": {
+      "counts": {
+        "if": 3,
+        "else": 3,
+        "end": 3
+      },
+      "errors": [],
+      "balanced": true
+    },
+    "first_nonempty_line": "SET ProbeState TO $'''NOT_STARTED'''",
+    "last_nonempty_line": "END",
+    "first_and_last_are_pad_instructions": true,
+    "output_guard_count": 1,
+    "readonly_input_open_count": 2,
+    "typed_input_range_read_count": 2,
+    "fixed_input1_open_count": 1,
+    "fixed_input2_open_count": 1,
+    "fixed_input1_sheet_count": 1,
+    "fixed_input2_sheet_count": 1,
+    "fixed_input1_typed_range_count": 1,
+    "fixed_input2_typed_range_count": 1,
+    "source_sets": [
+      [
+        "1",
+        "Data1[0][0]"
+      ],
+      [
+        "2",
+        "Data1[1][0]"
+      ],
+      [
+        "3",
+        "Data1[2][0]"
+      ],
+      [
+        "4",
+        "Data2[0][0]"
+      ],
+      [
+        "5",
+        "Data2[1][0]"
+      ],
+      [
+        "6",
+        "Data2[0][2]"
+      ],
+      [
+        "7",
+        "Data2[1][2]"
+      ]
+    ],
+    "source_sets_match_wiring": true,
+    "source_json_conversion_count": 7,
+    "source_json_conversions_pair_indexes": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "source_json_write_count": 7,
+    "source_json_write_indexes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "source_json_write_variable_indexes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "source_json_writes_match_indexes": true,
+    "source_json_write_all_under_fixed_root": true,
+    "mode_json_write_count": 1,
+    "mode_json_write_under_fixed_root": true,
+    "editable_work_open_count": 1,
+    "run_script_count": 1,
+    "exact_success_gate_count": 1,
+    "normal_gate_count": 1,
+    "numeric_sets": [
+      [
+        "1",
+        "Data1[0][1]"
+      ],
+      [
+        "2",
+        "Data1[1][1]"
+      ],
+      [
+        "3",
+        "Data1[2][1]"
+      ],
+      [
+        "4",
+        "Data2[0][1]"
+      ],
+      [
+        "5",
+        "Data2[1][1]"
+      ]
+    ],
+    "numeric_sets_match_wiring": true,
+    "numeric_writes": [
+      [
+        "Num1",
+        "G",
+        "7"
+      ],
+      [
+        "Num2",
+        "G",
+        "8"
+      ],
+      [
+        "Num3",
+        "G",
+        "9"
+      ],
+      [
+        "Num4",
+        "E",
+        "5"
+      ],
+      [
+        "Num5",
+        "E",
+        "6"
+      ]
+    ],
+    "numeric_writes_match_wiring": true,
+    "target_collect_sheet_activation_count": 1,
+    "target_append_sheet_activation_count": 1,
+    "save_as_count": 1,
+    "save_as_fixed_output_count": 1,
+    "readonly_output_reopen_count": 1,
+    "typed_readback_rectangle_count": 2,
+    "fixed_readback1_count": 1,
+    "fixed_readback2_count": 1,
+    "saved_sets": [
+      [
+        "1",
+        "Readback1[0][0]"
+      ],
+      [
+        "2",
+        "Readback1[0][1]"
+      ],
+      [
+        "3",
+        "Readback1[1][0]"
+      ],
+      [
+        "4",
+        "Readback1[1][1]"
+      ],
+      [
+        "5",
+        "Readback1[2][0]"
+      ],
+      [
+        "6",
+        "Readback1[2][1]"
+      ],
+      [
+        "7",
+        "Readback2[0][0]"
+      ],
+      [
+        "8",
+        "Readback2[0][1]"
+      ],
+      [
+        "9",
+        "Readback2[0][2]"
+      ],
+      [
+        "10",
+        "Readback2[1][0]"
+      ],
+      [
+        "11",
+        "Readback2[1][1]"
+      ],
+      [
+        "12",
+        "Readback2[1][2]"
+      ]
+    ],
+    "saved_sets_match_wiring": true,
+    "saved_json_conversion_count": 12,
+    "saved_json_conversions_pair_indexes": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "json_value_type_comparison_count": 7,
+    "comparison_saved_indexes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "observed_comparison_texts_match_fixed_positions_1_through_7": true,
+    "comparison_required_indexes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "comparison_missing_indexes": [
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "inline_uncaptured_action_expression_count": 3,
+    "inline_uncaptured_action_expressions": [
+      {
+        "line": 98,
+        "text": "SET Source2VsSaved TO Variables.ConvertCustomObjectToJson({ 'probe': Data1[0][1] }) = Saved2Json"
+      },
+      {
+        "line": 100,
+        "text": "SET Source4VsSaved TO Variables.ConvertCustomObjectToJson({ 'probe': Data1[1][1] }) = Saved4Json"
+      },
+      {
+        "line": 102,
+        "text": "SET Source6VsSaved TO Variables.ConvertCustomObjectToJson({ 'probe': Data1[2][1] }) = Saved6Json"
+      }
+    ],
+    "failure_close_no_save_else_count": 2,
+    "major_execution_order_marker_count": 27,
+    "major_execution_order_positions": [
+      127,
+      327,
+      565,
+      658,
+      881,
+      930,
+      1168,
+      1261,
+      1484,
+      1533,
+      2535,
+      4707,
+      4945,
+      5683,
+      5809,
+      5894,
+      6074,
+      6211,
+      6487,
+      6580,
+      6802,
+      7072,
+      7615,
+      7944,
+      8033,
+      8540,
+      9746
+    ],
+    "major_execution_order_valid": true,
+    "pre_comparison_structure_pass": true,
+    "comparison_structure_pass": false,
+    "pass": false
+  },
+  "fixed_launcher": {
+    "expected_path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-a4/launcher.ps1",
+    "expected_sha256": "a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5",
+    "decoded_terminal_lf_restored_sha256": "b4674b8c3c50685c30e58af42388525723823841ab9b3bc25b7f43c653c8dae5",
+    "exact_match": false,
+    "expected_line_count": 60,
+    "decoded_line_count": 7,
+    "powershell_parser_error_count": 1,
+    "powershell_parser_errors": [
+      {
+        "error_id": "TerminatorExpectedAtEndOfString",
+        "message": "The string is missing the terminator: '.",
+        "line": 7,
+        "column": 20,
+        "token": "'{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}\\"
+      }
+    ],
+    "helper_invocation_count": 0,
+    "helper_sha_check_count": 0,
+    "invocation_sha_check_count": 0,
+    "expected_stdout_literal_count": 1,
+    "unified_diff": [
+      "--- fixed-launcher.ps1",
+      "+++ generated-decoded-launcher.ps1",
+      "@@ -1,60 +1,7 @@",
+      " $ErrorActionPreference = 'Stop'",
+      " Set-StrictMode -Version 2",
+      "-",
+      " $helperPath = 'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\EX03-R12-Fixed-StringTransfer.ps1'",
+      " $invocationPath = 'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper-a4\\invocation.json'",
+      " $expectedHelperSha256 = '08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135'",
+      " $expectedInvocationSha256 = '5c5a2008f55296a48f63fa65178aab971e4212455bb2af58e33149bdcaec40d8'",
+      "-$expectedSuccess = '{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}'",
+      "-",
+      "-function Stop-Launcher {",
+      "-    param([string]$Code, [int]$ExitCode)",
+      "-    $failure = [ordered]@{ status = 'ERROR'; error_code = $Code }",
+      "-    [Console]::Out.Write([string]($failure | ConvertTo-Json -Compress))",
+      "-    exit $ExitCode",
+      "-}",
+      "-",
+      "-function Get-Sha256 {",
+      "-    param([string]$Path)",
+      "-    $stream = [IO.File]::OpenRead($Path)",
+      "-    $algorithm = [Security.Cryptography.SHA256]::Create()",
+      "-    try {",
+      "-        return ([BitConverter]::ToString($algorithm.ComputeHash($stream))).Replace('-', '').ToLowerInvariant()",
+      "-    }",
+      "-    finally {",
+      "-        $algorithm.Dispose()",
+      "-        $stream.Dispose()",
+      "-    }",
+      "-}",
+      "-",
+      "-if (-not (Test-Path -LiteralPath $helperPath -PathType Leaf)) {",
+      "-    Stop-Launcher 'HELPER_NOT_FOUND' 41",
+      "-}",
+      "-if (-not (Test-Path -LiteralPath $invocationPath -PathType Leaf)) {",
+      "-    Stop-Launcher 'INVOCATION_NOT_FOUND' 42",
+      "-}",
+      "-",
+      "-$actualHelperSha256 = Get-Sha256 $helperPath",
+      "-if ($actualHelperSha256 -cne $expectedHelperSha256) {",
+      "-    Stop-Launcher 'HELPER_SHA256_MISMATCH' 43",
+      "-}",
+      "-$actualInvocationSha256 = Get-Sha256 $invocationPath",
+      "-if ($actualInvocationSha256 -cne $expectedInvocationSha256) {",
+      "-    Stop-Launcher 'INVOCATION_SHA256_MISMATCH' 44",
+      "-}",
+      "-",
+      "-try {",
+      "-    $helperOutput = (& $helperPath -InvocationPath $invocationPath | Out-String).Trim()",
+      "-}",
+      "-catch {",
+      "-    Stop-Launcher 'HELPER_INVOCATION_FAILED' 45",
+      "-}",
+      "-",
+      "-if ([string]::IsNullOrWhiteSpace($helperOutput)) {",
+      "-    Stop-Launcher 'HELPER_SUCCESS_OUTPUT_MISSING' 46",
+      "-}",
+      "-if ($helperOutput -cne $expectedSuccess) {",
+      "-    Stop-Launcher 'HELPER_UNEXPECTED_OUTPUT' 47",
+      "-}",
+      "-",
+      "-[Console]::Out.Write($helperOutput)",
+      "+$expectedSuccess = '{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}\\"
+    ],
+    "pass": false
+  },
+  "wiring_conformance": {
+    "required_text_mappings": 7,
+    "observed_text_source_sets": 7,
+    "text_source_sets_match_wiring": true,
+    "observed_text_source_json_conversions": 7,
+    "observed_text_source_json_writes": 7,
+    "required_numeric_mappings": 5,
+    "observed_numeric_writes": 5,
+    "required_readbacks": 2,
+    "observed_readbacks": 2,
+    "required_comparisons": 12,
+    "observed_comparisons": 7,
+    "comparison_lines": [
+      {
+        "line": 97,
+        "text": "SET Source1VsSaved TO Source1Json = Saved1Json"
+      },
+      {
+        "line": 98,
+        "text": "SET Source2VsSaved TO Variables.ConvertCustomObjectToJson({ 'probe': Data1[0][1] }) = Saved2Json"
+      },
+      {
+        "line": 99,
+        "text": "SET Source3VsSaved TO Source2Json = Saved3Json"
+      },
+      {
+        "line": 100,
+        "text": "SET Source4VsSaved TO Variables.ConvertCustomObjectToJson({ 'probe': Data1[1][1] }) = Saved4Json"
+      },
+      {
+        "line": 101,
+        "text": "SET Source5VsSaved TO Source3Json = Saved5Json"
+      },
+      {
+        "line": 102,
+        "text": "SET Source6VsSaved TO Variables.ConvertCustomObjectToJson({ 'probe': Data1[2][1] }) = Saved6Json"
+      },
+      {
+        "line": 103,
+        "text": "SET Source7VsSaved TO Source4Json = Saved7Json"
+      }
+    ],
+    "observed_comparison_texts_match_fixed_positions_1_through_7": true,
+    "missing_positions": [
+      {
+        "order": 8,
+        "source": "fixtures/EX03/入力ろ.xlsx!追加項目!C2",
+        "source_reference": "Data2[0][1]",
+        "saved": "追記先!E5",
+        "saved_reference": "Readback2[0][1]",
+        "kind": "number"
+      },
+      {
+        "order": 9,
+        "source": "fixtures/EX03/入力ろ.xlsx!追加項目!D2",
+        "source_reference": "Data2[0][2]",
+        "saved": "追記先!F5",
+        "saved_reference": "Readback2[0][2]",
+        "kind": "text"
+      },
+      {
+        "order": 10,
+        "source": "fixtures/EX03/入力ろ.xlsx!追加項目!B3",
+        "source_reference": "Data2[1][0]",
+        "saved": "追記先!D6",
+        "saved_reference": "Readback2[1][0]",
+        "kind": "text"
+      },
+      {
+        "order": 11,
+        "source": "fixtures/EX03/入力ろ.xlsx!追加項目!C3",
+        "source_reference": "Data2[1][1]",
+        "saved": "追記先!E6",
+        "saved_reference": "Readback2[1][1]",
+        "kind": "number"
+      },
+      {
+        "order": 12,
+        "source": "fixtures/EX03/入力ろ.xlsx!追加項目!D3",
+        "source_reference": "Data2[1][2]",
+        "saved": "追記先!F6",
+        "saved_reference": "Readback2[1][2]",
+        "kind": "text"
+      }
+    ],
+    "source_and_saved_position_coverage": "7/12",
+    "component_assessment": {
+      "C01_STATE_INIT": "PASS_PRESENT",
+      "C02_OUTPUT_GUARD": "PASS_PRESENT",
+      "C03_READONLY_TYPED_RANGE": "PASS_TWO_FIXED_PATH_SHEET_RANGE_READS",
+      "C04_JSON_FILE_HANDOFF": "PASS_SEVEN_FIXED_SOURCE_MAPPINGS_PLUS_ONE_MODE_WRITE",
+      "C05_EDITABLE_WORK_OPEN": "PASS_FIXED_WORK",
+      "C06_FIXED_LAUNCHER_RUNSCRIPT": "FAIL_DECODED_LAUNCHER_NOT_FIXED_SHA_AND_POWERSHELL_PARSE_ERROR",
+      "C07_EXACT_SUCCESS_MODE_GATE": "PASS_PRESENT",
+      "C08_TARGET_SHEET_ACTIVATION": "PASS_TWO_FIXED_TARGET_ACTIVATIONS",
+      "C09_NUMERIC_WRITE": "PASS_FIVE_FIXED_WRITES",
+      "C10_SAVE_CLOSE_REOPEN_READBACK": "PASS_FIXED_OUTPUT_AND_TWO_RECTANGLES",
+      "C11_JSON_VALUE_TYPE_COMPARE": "FAIL_SEVEN_OF_TWELVE_AND_THREE_UNCAPTURED_INLINE_EXPRESSIONS",
+      "C12_FAILURE_CLOSE_NO_SAVE": "PASS_TWO_FAILURE_BRANCHES"
+    },
+    "pass": false
+  },
+  "safety": {
+    "kind": "STATIC_TOKEN_AND_FIXED_PATH_AUDIT_ONLY_NOT_EXECUTION",
+    "forbidden_runtime_fragments": {
+      "File.Delete": 0,
+      "Folder.Delete": 0,
+      "WebAutomation.": 0,
+      "HTTP.": 0,
+      "System.RunDOSCommand": 0,
+      "System.RunApplication": 0,
+      "Start-Process": 0,
+      "Remove-Item": 0,
+      "Invoke-WebRequest": 0,
+      "Invoke-RestMethod": 0,
+      "Invoke-Expression": 0,
+      "ScriptBlock]::Create": 0,
+      "Add-Type": 0,
+      "Set-ExecutionPolicy": 0,
+      "Unblock-File": 0
+    },
+    "file_writes": {
+      "source_json_count": 7,
+      "mode_json_count": 1,
+      "all_under_fixed_a4_json_root": true
+    },
+    "save_as_only_fixed_output": true,
+    "helper_invocation_or_launcher_creation_or_modification": false,
+    "network_or_delete_or_security_setting_token_count": 0,
+    "pass": true
+  },
+  "acceptance": {
+    "pass": false,
+    "final_status": "STOPPED_FAIL_GENERATED_ROBIN_WIRING_AND_FIXED_LAUNCHER_MISMATCH",
+    "stop_reasons": [
+      "Decoded C06 launcher does not equal the fixed A4 launcher SHA, has a PowerShell parser error, and omits helper execution and SHA-validation logic.",
+      "C11 contains 7 of the required 12 source/saved JSON comparisons; positions 8 through 12 are absent.",
+      "Three numeric comparisons use an uncaptured inline Variables.ConvertCustomObjectToJson(...) expression instead of an observed PAD action/output shape."
+    ],
+    "pad_save": "NOT_RUN_STOPPED_ON_GENERATED_ROBIN_MISMATCH",
+    "pad_recopy": "NOT_RUN_STOPPED_ON_GENERATED_ROBIN_MISMATCH",
+    "run1": "NOT_RUN_STOPPED_BEFORE_PAD",
+    "run2": "NOT_RUN_STOPPED_BEFORE_PAD",
+    "pad_run_count": 0,
+    "resend": "NOT_RUN_LIMIT_CONSUMED_AND_STOP_CONDITION",
+    "manual_generated_robin_edit": false,
+    "next_candidate_created": false,
+    "github_write": false
+  },
+  "preserved_boundaries": {
+    "formal_r12_status": "UNCHANGED_FAIL",
+    "past_t2_auxiliary_status": "UNCHANGED_PASS_NOT_INHERITED",
+    "a3_status": "UNCHANGED_REFUSAL_NOT_REUSED",
+    "legacy_558_difference_record": "PRESERVED_NOT_RECLASSIFIED"
+  }
+}

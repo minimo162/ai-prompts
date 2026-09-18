@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-A4-G1",
+  "recorded_at": "2026-09-18T18:59:43.319540+09:00",
+  "status": "PASS_LOCAL_READY_PENDING_UI_HISTORY_RECORD",
+  "checks": {
+    "head_is_4a1e890": true,
+    "candidate_manifest_identity": true,
+    "candidate_and_all_fixed_sha": true,
+    "prepared_submitted_body_exact": true,
+    "instruction_body_bundle_aligned": true,
+    "wiring_spec_machine_and_bundle_exact": true,
+    "wiring_7_5_2_12_coverage_disjointness": true,
+    "helper_invocation_launcher_fixed_and_runtime_aligned": true,
+    "grader_text_absent_from_wiring_and_bundle": true,
+    "distinctive_grader_text_absent_from_body": true,
+    "comparison_criteria_fixed_before_send": true,
+    "work_matches_template": true,
+    "output_absent": true,
+    "a4_json_root_absent_before_send": true,
+    "local_cycle_history_absent": true,
+    "ui_send_history_checked": false,
+    "normal_m365_chat_confirmed": false
+  },
+  "next_gate": "RECORD_CONFIRMED_A4_G1_NOT_PREVIOUSLY_SENT_IN_NORMAL_M365_CHAT"
+}

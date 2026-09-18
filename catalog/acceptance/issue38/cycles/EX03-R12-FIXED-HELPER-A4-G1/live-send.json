@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-A4-G1",
+  "recorded_at": "2026-09-18T19:18:28.366598+09:00",
+  "status": "SENT_ONCE_RESPONSE_COMPLETE_ONE_PLAIN_TEXT_CODE_PREVIEW_GENERATED",
+  "resumed_from_commit": "4a1e890fa95bc55cbe981578a2694548bb310c94",
+  "target": "NORMAL_MICROSOFT_365_COPILOT_CHAT",
+  "conversation_url": "https://m365.cloud.microsoft/chat/conversation/442418c7-e760-4245-965d-9c08a1daa2de?es=SSR",
+  "pre_send": {
+    "new_chat_without_observed_message_history": true,
+    "normal_m365_chat_confirmed": true,
+    "submitted_body_characters": 8900,
+    "submitted_body_sha256": "8924f824256a161f035f686b221ea58bf2033a66e0ef359c8968506c338f9647",
+    "submitted_body_dom_reconstruction_exact": true,
+    "bundle_filename": "PAD-Robin-Fixed-Helper-A4-Bundle.txt",
+    "bundle_sha256": "62695ca3c007ab291732657ddaeca66723a57115d151efc7b1730ef5341c514c",
+    "visible_attachment_count": 1
+  },
+  "send_button_clicked": true,
+  "send_count": 1,
+  "send_limit_total": 1,
+  "send_limit_consumed": true,
+  "response_observed_complete": true,
+  "response_ui_inner_text_sha256": "3a241e5fab1ad0055266d162309ee26defc4ffa8959b9fb5bb2caeb5634e5451",
+  "generated_robin_sha256": "eb5648631466da3431a21cf8df98fb06e5fece8876c3705b6483b4d74b58e290",
+  "generated_copy": {
+    "method": "normal M365 Copilot code copy button and browser clipboard text/plain read",
+    "characters": 10637,
+    "utf8_bytes": 10713,
+    "sha256": "eb5648631466da3431a21cf8df98fb06e5fece8876c3705b6483b4d74b58e290",
+    "line_count": 113,
+    "line_ending": "LF",
+    "final_newline": false,
+    "contains_markdown_fence": false,
+    "contains_visual_line_number_prefix": false,
+    "manual_edit": false
+  },
+  "resend_performed": false
+}

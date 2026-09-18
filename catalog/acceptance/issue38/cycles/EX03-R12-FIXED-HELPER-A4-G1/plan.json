@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-A4-G1",
+  "route_id": "EX03-R12-FIXED-HELPER-COPILOT-A4",
+  "candidate_id": "20260918-excel-r12-fixed-helper-a4",
+  "prepared_at": "2026-09-18T18:59:43.319540+09:00",
+  "base_commit": "4a1e890fa95bc55cbe981578a2694548bb310c94",
+  "target": "NORMAL_MICROSOFT_365_COPILOT_CHAT",
+  "send": {
+    "limit_total": 1,
+    "local_recorded_before": 0,
+    "ui_history_absence_required_before_send": true,
+    "resend": 0
+  },
+  "input": {
+    "submitted_body_path": "copilot/versions/20260918-excel-r12-fixed-helper-a4/submitted-body.txt",
+    "submitted_body_sha256": "8924f824256a161f035f686b221ea58bf2033a66e0ef359c8968506c338f9647",
+    "attachment_path": "copilot/versions/20260918-excel-r12-fixed-helper-a4/knowledge/PAD-Robin-Fixed-Helper-A4-Bundle.txt",
+    "attachment_sha256": "62695ca3c007ab291732657ddaeca66723a57115d151efc7b1730ef5341c514c",
+    "wiring_spec_path": "copilot/versions/20260918-excel-r12-fixed-helper-a4/wiring-spec.json",
+    "wiring_spec_sha256": "c62ec6951bdd36e895acfc937d7a1f390e75e8d984b26a9531cc2c88d970f58c"
+  },
+  "runtime": {
+    "root": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1",
+    "work": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\work.xlsx",
+    "output": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx",
+    "json_root": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json",
+    "helper": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\EX03-R12-Fixed-StringTransfer.ps1",
+    "invocation": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper-a4\\invocation.json",
+    "launcher": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper-a4\\launcher.ps1",
+    "helper_sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+    "invocation_sha256": "5c5a2008f55296a48f63fa65178aab971e4212455bb2af58e33149bdcaec40d8",
+    "launcher_sha256": "a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5"
+  },
+  "limits": {
+    "copilot_generations_max": 1,
+    "pad_runs_max": 2,
+    "run2_requires_run1_terminal_all_comparisons_pass_and_artifact_preserved": true,
+    "manual_generated_robin_edit": 0,
+    "additional_run": 0,
+    "next_candidate": 0,
+    "github_write": 0,
+    "stop_on_refusal_mismatch_safety_issue_or_unknown": true
+  },
+  "classification": {
+    "formal_r12_request_text_modified": false,
+    "a4_wiring_spec_is_generation_basis": true,
+    "formal_r12_work_and_output_paths_aligned": true,
+    "fixed_input_sheet_range_target_expected_preserved": true,
+    "t2_auxiliary_pass_inherited": false
+  }
+}
