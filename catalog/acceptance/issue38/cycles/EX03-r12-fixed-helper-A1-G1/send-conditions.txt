@@ -1,0 +1,25 @@
+【EX03-R12-FIXED-HELPER-COPILOT-A1 / G1 専用送信条件】
+このブロックはA1-G1の別経路条件であり、直前の正式EX03固定依頼を変更しません。入力ファイル、シート、範囲、転記位置、値・型・位置の期待値は固定依頼とspec/expectedのままです。正式r12の受入結果へは転用しません。
+
+候補ID: 20260918-excel-r12-fixed-helper-a1
+Route ID: EX03-R12-FIXED-HELPER-COPILOT-A1
+A1-G1 cycle ID: EX03-R12-FIXED-HELPER-COPILOT-A1-G1
+A1専用runtime実パス: C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\probes\ex03-r12-fixed-helper\trials\EX03-R12-FIXED-HELPER-P1-T1\runtime
+A1専用work実パス: C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\probes\ex03-r12-fixed-helper\trials\EX03-R12-FIXED-HELPER-P1-T1\runtime\work.xlsx
+A1専用output実パス: C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\probes\ex03-r12-fixed-helper\trials\EX03-R12-FIXED-HELPER-P1-T1\runtime\照合結果.xlsx
+
+検証者が事前配置し、生成物から変更させない物:
+- helper: C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\probes\ex03-r12-fixed-helper\EX03-R12-Fixed-StringTransfer.ps1
+  SHA-256: 08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135
+- invocation: C:\Users\yuuki\ai-prompts-issue38\catalog\acceptance\issue38\probes\ex03-r12-fixed-helper\trials\EX03-R12-FIXED-HELPER-P1-T1\invocation.json
+  SHA-256: 92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6
+
+この試験は、日本語依頼からhelper、invocation、runtime、期待SHAなどの実行設定まで自動生成する試験ではありません。Copilotはhelper本体とinvocation JSONを出力せず、同版bundleのFIXED LAUNCHER SOURCEを検証者固定SHAリテラルごと変更せず1個のRun PowerShell Scriptへ埋め込み、その前後のPAD処理だけを生成してください。
+
+固定依頼内の runs\EX03-attempt1 のwork/outputパスは凍結文面として保持しますが、このA1別経路の実行設定には使いません。A1-G1では上記の事前配置invocationとruntime実パスを優先します。このため、A1の固定条件に限る判定であり、正式r12の依頼パス適合は主張しません。
+
+回答は貼付け用Robin全体をMarkdownの `text` コードブロック1個だけに入れてください。コードブロック内に説明、行番号、Plain Text、JSON、疑似コード、省略記号を入れません。helper/invocationの作成・変更、SHAの再計算・置換、network、delete、既存output上書き、Invoke-Expression、権限・security・Excel設定変更を入れません。
+
+PowerShell出力が {"status":"OK","mode":"NORMAL","text_writes":7,"formats_restored":true} と完全一致し、PAD側RunModeがNORMALの場合だけ数値書込みとSaveAsへ進めます。それ以外は後続書込み・SaveAsへ進めず、Workを閉じます。既存output guardは入力読取り、JSON生成、Work起動、helper実行より前に置いてください。
+
+教材は別条件の未完成断片です。固定EX03の完成Robinや採点値として扱わず、回答へコピーしません。生成物自体は未実行として提示し、無修正原文の安全検査とPAD保存・再コピー一致より前に成功扱いしません。

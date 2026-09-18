@@ -1,0 +1,32 @@
+{
+  "cycle_id": "EX03-R12-FIXED-HELPER-COPILOT-A1-G1",
+  "candidate_id": "20260918-excel-r12-fixed-helper-a1",
+  "route_id": "EX03-R12-FIXED-HELPER-COPILOT-A1",
+  "generation_status": "FAIL_REFUSAL_NO_ROBIN",
+  "copilot_send_count": 1,
+  "copilot_send_limit": 1,
+  "response_structure": {
+    "paragraph_count": 6,
+    "list_item_count": 4,
+    "pre_block_count": 0,
+    "code_element_count": 0,
+    "required_text_code_block_count": 0,
+    "explicit_refusal_phrase_count": 1
+  },
+  "required_code_block": "FAIL_MISSING",
+  "unmodified_generation_syntax_check": "NOT_RUN_NO_GENERATED_ROBIN",
+  "decoded_launcher_exactness": "NOT_RUN_NO_GENERATED_ROBIN",
+  "fixed_sha_check": "NOT_RUN_NO_GENERATED_ROBIN",
+  "invocation_and_path_consistency": "NOT_RUN_NO_GENERATED_ROBIN",
+  "json_handoff_check": "NOT_RUN_NO_GENERATED_ROBIN",
+  "success_gate_and_save_branch_check": "NOT_RUN_NO_GENERATED_ROBIN",
+  "pad_save": "NOT_RUN_STOPPED_ON_REFUSAL",
+  "pad_recopy": "NOT_RUN_STOPPED_ON_REFUSAL",
+  "run1": "NOT_RUN_STOPPED_ON_REFUSAL",
+  "run2": "NOT_RUN_STOPPED_ON_REFUSAL",
+  "resend": "NOT_RUN_FORBIDDEN_BY_LIMIT_AND_STOP_CONDITION",
+  "final_status": "STOPPED_FAIL_REFUSAL",
+  "formal_r12_status": "UNCHANGED_FAIL",
+  "past_t2_auxiliary_status": "UNCHANGED_PASS_NOT_INHERITED",
+  "reason": "Copilot explicitly declined to output the required Robin code block; the fixed stop condition therefore prohibited PAD save, re-copy, or execution."
+}

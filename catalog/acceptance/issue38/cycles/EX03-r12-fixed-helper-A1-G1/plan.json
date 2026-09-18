@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-COPILOT-A1-G1",
+  "route_id": "EX03-R12-FIXED-HELPER-COPILOT-A1",
+  "candidate_id": "20260918-excel-r12-fixed-helper-a1",
+  "prepared_at": "2026-09-18T09:39:06.318009+09:00",
+  "base_commit": "55de244bee8394b2909c8af9d568701594cb40b9",
+  "target": "NORMAL_MICROSOFT_365_COPILOT_CHAT",
+  "send": {
+    "limit_total": 1,
+    "local_recorded_before": 0,
+    "ui_history_absence_required_before_send": true,
+    "resend": 0
+  },
+  "input": {
+    "fixed_request_path": "catalog/acceptance/issue38/requests/EX03.txt",
+    "fixed_request_sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+    "send_conditions_path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A1-G1/send-conditions.txt",
+    "instruction_path": "copilot/versions/20260918-excel-r12-fixed-helper-a1/agent-instructions.txt",
+    "instruction_sha256": "0335ade50639ac8b115c0ef7281be66c60ae0719852865c50cc8ca83ae4a8c73",
+    "submitted_body_path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A1-G1/submitted-body.txt",
+    "submitted_body_sha256": "ac9fded61dbc998bd5646e4dd47e073e0c3921b15873022666e1893fe4bcad26",
+    "attachment_path": "copilot/versions/20260918-excel-r12-fixed-helper-a1/knowledge/PAD-Robin-Fixed-Helper-Bundle.txt",
+    "attachment_sha256": "380c498f513019c49523adc362ad917fbf2199e426c766468231df50820ae4ca"
+  },
+  "runtime": {
+    "root": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\runtime",
+    "work": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\runtime\\work.xlsx",
+    "output": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\runtime\\照合結果.xlsx",
+    "helper": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\EX03-R12-Fixed-StringTransfer.ps1",
+    "invocation": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\invocation.json",
+    "helper_sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+    "invocation_sha256": "92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6",
+    "launcher_sha256": "1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1"
+  },
+  "limits": {
+    "normal_pad_runs_max": 2,
+    "run2_requires_run1_terminal_all_comparisons_pass_and_artifact_preserved": true,
+    "manual_generated_robin_edit": 0,
+    "additional_run": 0,
+    "next_candidate": 0,
+    "github_write": 0,
+    "stop_on_refusal_mismatch_safety_issue_or_unknown": true
+  },
+  "classification": {
+    "formal_r12_request_text_modified": false,
+    "a1_conditions_separate": true,
+    "formal_r12_path_compliance_claimed": false,
+    "fixed_input_sheet_range_target_expected_preserved": true,
+    "automatic_execution_configuration_from_japanese_request": false,
+    "t2_auxiliary_pass_inherited": false
+  }
+}
