@@ -1,0 +1,794 @@
+{
+  "schema_version": 1,
+  "candidate_id": "20260918-excel-r12-fixed-helper-a3",
+  "route_id": "EX03-R12-FIXED-HELPER-COPILOT-A3",
+  "status": "LOCAL_PREPARED_LIMITED_NON_LIVE_NOT_COPILOT_OR_PAD_ACCEPTED",
+  "base_commit": "37d4ef462aca52d1a6855ce549eac87463b008ca",
+  "successor_to": "20260918-excel-r12-fixed-helper-a2",
+  "a2_files_modified": false,
+  "replaces_formal_r12": false,
+  "inherits_t2_auxiliary_pass": false,
+  "artifacts": {
+    "instruction": {
+      "path": "agent-instructions.txt",
+      "sha256": "87d4fad6445be8371bfcad9d35d2ce8c384758714c7d48e0232a1ce60ab89d98",
+      "bytes": 17296
+    },
+    "send_conditions": {
+      "path": "send-conditions.txt",
+      "sha256": "ab93331cce8902e8e0bf4c9182a1b783012a08a6b83b7812da1b5ef77014fed6",
+      "bytes": 2400
+    },
+    "submitted_body": {
+      "path": "submitted-body.txt",
+      "sha256": "eae9de79a8c0ec4796ee90b3dd9e41b35c72490c483d7f15723891b0441142c3",
+      "bytes": 21345
+    },
+    "bundle": {
+      "path": "knowledge/PAD-Robin-Fixed-Helper-A3-Bundle.txt",
+      "sha256": "50c60d9533b9afb4d698416d6f9bf0b30040dee69206cf1734dea565f740b0c4",
+      "bytes": 43085
+    },
+    "assembly_rules": {
+      "path": "assembly-rules.json",
+      "sha256": "c43bcce32095c3a4ba3c565d3902c26f11dee66be3cb0354ff4610c37689ed0d",
+      "bytes": 55296
+    },
+    "instruction_delta": {
+      "path": "instruction-delta.json",
+      "sha256": "be46ee0dac1a65cbdb72cad37ccd1327af1d48f87ab6dcbfd0655695b30a472e",
+      "bytes": 9379
+    },
+    "coverage": {
+      "path": "COVERAGE.md",
+      "sha256": "8080dc541d261deeb48eb4902d20c9cb0e55c144bd235d1531524f16b6879b4b",
+      "bytes": 1051
+    },
+    "placement": {
+      "path": "PLACEMENT.md",
+      "sha256": "981030804fbaab8179047b62584ae21091300f50784be03c0bc65f49c38f7c08",
+      "bytes": 1605
+    },
+    "non_live_verification": {
+      "path": "non-live-verification.json",
+      "sha256": "2e507cccbc30830a5699993a5261db803a55a96c13149a818c8a8ebad4ae8ccb",
+      "bytes": 7347
+    }
+  },
+  "candidate_payload_sha256": "ae889f6ab810224c841769607aaa79af5ebb38dcb29422b4c8fc23495ae867b5",
+  "candidate_payload_sha256_algorithm": "SHA256(sorted relative UTF-8 path + NUL + bytes + NUL)",
+  "source_evidence": {
+    "helper": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/EX03-R12-Fixed-StringTransfer.ps1",
+      "sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+      "bytes": 8222,
+      "role": "VERIFIER_PREPLACED_RUNTIME_DEPENDENCY_UNCHANGED",
+      "copilot_attachment": false
+    },
+    "invocation": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/invocation.json",
+      "sha256": "92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6",
+      "bytes": 1339,
+      "role": "VERIFIER_PREPLACED_FIXED_CONFIGURATION_UNCHANGED",
+      "copilot_attachment": false
+    },
+    "launcher": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/launcher.ps1",
+      "sha256": "1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1",
+      "bytes": 2144,
+      "role": "FIXED_LAUNCHER_CANONICAL_SOURCE_UNCHANGED",
+      "copilot_attachment": false
+    },
+    "t2_pad_recopy": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin",
+      "sha256": "da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa",
+      "bytes": 15406,
+      "role": "CAPTURED_FIXED_LAUNCHER_RUNSCRIPT_AND_SUCCESS_GATE_SOURCE",
+      "copilot_attachment": false
+    },
+    "t2_result": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/result.json",
+      "sha256": "66b35d9686bfc17fb8bebf0c0c65f083cba647087417d52b852d3615fe7d14c1",
+      "bytes": 4377,
+      "role": "AUXILIARY_RESULT_BOUNDARY_NOT_INHERITED",
+      "copilot_attachment": false
+    },
+    "output_guard_recopy": {
+      "path": "catalog/acceptance/issue38/probes/output-guard/recopy-after-run2.robin",
+      "sha256": "477b7c174b1d74015ed7ee9ff3f0cbf3e768ec6adc9cc1e4ea05eb56a9c67272",
+      "bytes": 563,
+      "role": "CAPTURED_DIFFERENT_CONDITION_OUTPUT_GUARD_SOURCE",
+      "copilot_attachment": false
+    },
+    "typed_read_recopy": {
+      "path": "catalog/acceptance/issue38/probes/scalar-compare/captured-full.robin",
+      "sha256": "0b13b8aed3130022535b32020647b7b8e69dd3e7c1d498c342877567271e71d2",
+      "bytes": 1003,
+      "role": "CAPTURED_DIFFERENT_CONDITION_TYPED_READ_SOURCE",
+      "copilot_attachment": false
+    },
+    "r2r3_normal_recopy": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "bytes": 12844,
+      "role": "CAPTURED_DIFFERENT_CONDITION_HANDOFF_GATE_SAVE_READBACK_SOURCE",
+      "copilot_attachment": false
+    },
+    "r2r3_final_verification": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/final-verification.json",
+      "sha256": "6bf5de9c8df3d8526830fa85a5f34cea6dffc724ce0961c4a359ebaa796671d9",
+      "bytes": 7739,
+      "role": "SOURCE_COMPONENT_EXECUTION_SCOPE_EVIDENCE_ONLY",
+      "copilot_attachment": false
+    },
+    "fixed_request": {
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+      "bytes": 1647,
+      "role": "FIXED_REQUEST_UNCHANGED_NOT_BUNDLED",
+      "copilot_attachment": false
+    },
+    "fixed_spec": {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+      "bytes": 1192,
+      "role": "FIXED_SPEC_UNCHANGED_NOT_BUNDLED",
+      "copilot_attachment": false
+    },
+    "fixed_expected": {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+      "bytes": 777,
+      "role": "FIXED_GRADING_DATA_UNCHANGED_NOT_BUNDLED",
+      "copilot_attachment": false
+    },
+    "r12_instruction": {
+      "path": "copilot/versions/20260917-excel-r12/agent-instructions.txt",
+      "sha256": "11321acdbb96632221b02b7b737d12ba816ea4cf9f35f933a114c7f857539c06",
+      "bytes": 15987,
+      "role": "GENERIC_INSTRUCTION_PREFIX_SOURCE",
+      "copilot_attachment": false
+    },
+    "formal_r12_status": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/acceptance-status.json",
+      "sha256": "216089662ce7a5170d22eb3958a7641ecdee3ca00a95526d98eff2a70dc042ab",
+      "bytes": 1629,
+      "role": "FORMAL_R12_FAIL_BOUNDARY_PRESERVED",
+      "copilot_attachment": false
+    },
+    "a1_instruction": {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a1/agent-instructions.txt",
+      "sha256": "0335ade50639ac8b115c0ef7281be66c60ae0719852865c50cc8ca83ae4a8c73",
+      "bytes": 17387,
+      "role": "A1_PRESERVED",
+      "copilot_attachment": false
+    },
+    "a1_bundle": {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a1/knowledge/PAD-Robin-Fixed-Helper-Bundle.txt",
+      "sha256": "380c498f513019c49523adc362ad917fbf2199e426c766468231df50820ae4ca",
+      "bytes": 6498,
+      "role": "A1_PRESERVED",
+      "copilot_attachment": false
+    },
+    "a1_manifest": {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a1/manifest.json",
+      "sha256": "71bd0344cd6b225113b43cbc92146c9c060e0fb3bce31e5e1246bee06ef581b5",
+      "bytes": 8357,
+      "role": "A1_PRESERVED",
+      "copilot_attachment": false
+    },
+    "a1_placement": {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a1/PLACEMENT.md",
+      "sha256": "fbdef6cf15db1f6983cd902a67a5dbfeea170c5b7f362b3abb310a867a4f8810",
+      "bytes": 3159,
+      "role": "A1_PRESERVED",
+      "copilot_attachment": false
+    },
+    "a1_response": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A1-G1/copilot-response.txt",
+      "sha256": "ef1681063425e224fae1f1de137484dbe22434a8f71506df83ee547c48624f14",
+      "bytes": 1756,
+      "role": "A1_REFUSAL_PRESERVED",
+      "copilot_attachment": false
+    },
+    "a1_assessment": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A1-G1/generation-assessment.json",
+      "sha256": "7be97a8b35597dfdcdb934ab52c7b621984849adfcbc20969a01a04b659f16c0",
+      "bytes": 1436,
+      "role": "A1_REFUSAL_ASSESSMENT_PRESERVED",
+      "copilot_attachment": false
+    },
+    "a2_builder": {
+      "path": "tools/Build-Issue38Ex03FixedHelperCopilotCandidateA2.py",
+      "sha256": "38119eb83844bc9be75c06d0afd883f4cc1fd4d0ed064591e492fe2350cc777a",
+      "bytes": 44209,
+      "role": "A2_REPRODUCIBLE_BUILDER_PRESERVED",
+      "copilot_attachment": false
+    },
+    "a2_test": {
+      "path": "tests/Test-Issue38Ex03FixedHelperCopilotCandidateA2.py",
+      "sha256": "02340fa7cbcc4610211864a5d2a053dd11e8ca3ae45a0fe3880aa3d04c2f74a1",
+      "bytes": 13596,
+      "role": "A2_LIMITED_TEST_PRESERVED",
+      "copilot_attachment": false
+    },
+    "a2_instruction": {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/agent-instructions.txt",
+      "sha256": "def1af576bac79d5dbf321ac38d7702d3d968932b2e0767265f9544eb18ebe60",
+      "bytes": 16547,
+      "role": "A2_INSTRUCTION_BASE_PRESERVED",
+      "copilot_attachment": false
+    },
+    "a2_bundle": {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/knowledge/PAD-Robin-Fixed-Helper-A2-Bundle.txt",
+      "sha256": "009a830d7a1bb431c1f02933e45933c2d7466260c616e46114255605dc3e5b1c",
+      "bytes": 22765,
+      "role": "A2_TEACHING_BUNDLE_PRESERVED_NOT_ATTACHED_TO_A3",
+      "copilot_attachment": false
+    },
+    "a2_manifest": {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/manifest.json",
+      "sha256": "afe054f0e532c7c69b1359b54fe07dc05c42bb99e196be07cf3dd826977f008d",
+      "bytes": 24774,
+      "role": "A2_MANIFEST_PRESERVED",
+      "copilot_attachment": false
+    },
+    "a2_coverage": {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/COVERAGE.md",
+      "sha256": "8813198b1f76c6034918294908fa86ec2c0a2637e186bd1c6aead65d97e2f2d3",
+      "bytes": 3079,
+      "role": "A2_COVERAGE_PRESERVED",
+      "copilot_attachment": false
+    },
+    "a2_placement": {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/PLACEMENT.md",
+      "sha256": "74f8fe4013ceb492fc2ebed661a417749f46c47d147e4ea2c64487909cde556a",
+      "bytes": 2442,
+      "role": "A2_PLACEMENT_PRESERVED",
+      "copilot_attachment": false
+    },
+    "a2_non_live": {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/non-live-verification.json",
+      "sha256": "8520b68a557a49c2324a3c6e78efc2111de2758cb6136d43e033a960bd0b57f0",
+      "bytes": 14047,
+      "role": "A2_NON_LIVE_RESULT_PRESERVED",
+      "copilot_attachment": false
+    },
+    "a2_response": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/copilot-response.txt",
+      "sha256": "5f26b25cddd880ce0bd4c4869a87c7a1a31829ebd22459d8d2e67bd52408061d",
+      "bytes": 1502,
+      "role": "A2_G1_REFUSAL_PRESERVED",
+      "copilot_attachment": false
+    },
+    "a2_assessment": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/generation-assessment.json",
+      "sha256": "8c813a695bd82e92045df63dc87167313a1557e8ff41a3bd4af359057f878c2e",
+      "bytes": 1518,
+      "role": "A2_G1_ASSESSMENT_PRESERVED",
+      "copilot_attachment": false
+    },
+    "a2_result": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/RESULT.md",
+      "sha256": "5bf717f3053c873d9e0f071a027b344b17d9cd279343fbdbfeacfdc6c21217f7",
+      "bytes": 2279,
+      "role": "A2_G1_RESULT_PRESERVED",
+      "copilot_attachment": false
+    }
+  },
+  "preserved_a2_files": [
+    {
+      "path": "tools/Build-Issue38Ex03FixedHelperCopilotCandidateA2.py",
+      "sha256": "38119eb83844bc9be75c06d0afd883f4cc1fd4d0ed064591e492fe2350cc777a",
+      "bytes": 44209,
+      "matches_base_commit": true
+    },
+    {
+      "path": "tests/Test-Issue38Ex03FixedHelperCopilotCandidateA2.py",
+      "sha256": "02340fa7cbcc4610211864a5d2a053dd11e8ca3ae45a0fe3880aa3d04c2f74a1",
+      "bytes": 13596,
+      "matches_base_commit": true
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/agent-instructions.txt",
+      "sha256": "def1af576bac79d5dbf321ac38d7702d3d968932b2e0767265f9544eb18ebe60",
+      "bytes": 16547,
+      "matches_base_commit": true
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/COVERAGE.md",
+      "sha256": "8813198b1f76c6034918294908fa86ec2c0a2637e186bd1c6aead65d97e2f2d3",
+      "bytes": 3079,
+      "matches_base_commit": true
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/knowledge/PAD-Robin-Fixed-Helper-A2-Bundle.txt",
+      "sha256": "009a830d7a1bb431c1f02933e45933c2d7466260c616e46114255605dc3e5b1c",
+      "bytes": 22765,
+      "matches_base_commit": true
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/manifest.json",
+      "sha256": "afe054f0e532c7c69b1359b54fe07dc05c42bb99e196be07cf3dd826977f008d",
+      "bytes": 24774,
+      "matches_base_commit": true
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/non-live-verification.json",
+      "sha256": "8520b68a557a49c2324a3c6e78efc2111de2758cb6136d43e033a960bd0b57f0",
+      "bytes": 14047,
+      "matches_base_commit": true
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/PLACEMENT.md",
+      "sha256": "74f8fe4013ceb492fc2ebed661a417749f46c47d147e4ea2c64487909cde556a",
+      "bytes": 2442,
+      "matches_base_commit": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/RESULT.md",
+      "sha256": "5bf717f3053c873d9e0f071a027b344b17d9cd279343fbdbfeacfdc6c21217f7",
+      "bytes": 2279,
+      "matches_base_commit": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/copilot-response.txt",
+      "sha256": "5f26b25cddd880ce0bd4c4869a87c7a1a31829ebd22459d8d2e67bd52408061d",
+      "bytes": 1502,
+      "matches_base_commit": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/generation-acceptance-criteria.json",
+      "sha256": "148a4e1309264850cb75b89aafe33a907a6e1081f5ed91c59817b0143932c7c5",
+      "bytes": 4700,
+      "matches_base_commit": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/generation-assessment.json",
+      "sha256": "8c813a695bd82e92045df63dc87167313a1557e8ff41a3bd4af359057f878c2e",
+      "bytes": 1518,
+      "matches_base_commit": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/history-check.json",
+      "sha256": "98e565894445f244ef03f6004a0fd15eb7bad45845a62f87e03fa969de00aa2e",
+      "bytes": 913,
+      "matches_base_commit": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/live-send.json",
+      "sha256": "61321c6da7454b75449935f1149f19082b940fb3c2e18db2e3dec40725ce9e07",
+      "bytes": 1345,
+      "matches_base_commit": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/plan.json",
+      "sha256": "b1e9e9932ecc83a380cbd99b9b7c4e76f78ce210e5e20039430f13f69dcd6c30",
+      "bytes": 3497,
+      "matches_base_commit": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/post-stop-integrity.json",
+      "sha256": "634997713df2e3d921ef84c26e19e00453704f865ebc982e54edfcb3210d1376",
+      "bytes": 978,
+      "matches_base_commit": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/preflight.json",
+      "sha256": "353cde792f440b3c81bb80559e89e0488ab8ef63bedff18a4b2c77f16d254cab",
+      "bytes": 1031,
+      "matches_base_commit": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/protected-before.json",
+      "sha256": "720cd6601e5edf542704afba163417a15399b11aba9fe2038a07b827e2a585d9",
+      "bytes": 5532,
+      "matches_base_commit": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/send-conditions.txt",
+      "sha256": "1065fe2293789ebd935e6495f925586fa40dea61f757dc1b7e67ac28faad7447",
+      "bytes": 4238,
+      "matches_base_commit": true
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/submitted-body.txt",
+      "sha256": "1f151cee4d822ca4b9a5585683d4f0efbf766e21b5d0b67fd1eaa3d7041531c6",
+      "bytes": 22434,
+      "matches_base_commit": true
+    }
+  ],
+  "instruction_contract": {
+    "utf16_code_units": 7215,
+    "max_utf16_code_units": 8000,
+    "bundle_filename": "PAD-Robin-Fixed-Helper-A3-Bundle.txt",
+    "verbatim_scope": "ENTIRE_C06_AND_RULE_LISTED_IMMUTABLE_PORTIONS_ONLY",
+    "listed_replacement_duplication_connection_and_indentation_changes_allowed": true,
+    "complete_flow_capture_or_execution_required_before_generation": false,
+    "fabrication_of_unknown_action_argument_enum_or_control_allowed": false
+  },
+  "assembly_contract": {
+    "rule_ids": [
+      "AR04_EXPLICIT_JSON_HANDOFF",
+      "AR09_EXPLICIT_NUMERIC_WRITES",
+      "AR10_MULTIPLE_RECTANGLE_READBACK",
+      "AR11_MULTIPLE_JSON_COMPARISONS"
+    ],
+    "explicit_command_copy_only": true,
+    "new_pad_loop_commands": 0,
+    "control_block_map_balanced": true,
+    "derived_example_status": "NOT_CAPTURED_NOT_COMPLETE_NOT_RUN"
+  },
+  "fixed_contract": {
+    "helper_sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+    "invocation_sha256": "92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6",
+    "launcher_sha256": "1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1",
+    "decoded_launcher_terminal_lf_restored_sha256": "1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1",
+    "success_output": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}",
+    "helper_invocation_runtime_fixed_request_expected_output_format_changed": false
+  },
+  "component_records": [
+    {
+      "id": "C01_STATE_INIT",
+      "title": "state and gate initialization",
+      "source": "r2r3_normal_recopy",
+      "start_line": 1,
+      "end_line": 4,
+      "dependencies": [],
+      "mutable_parameters": [
+        "state variable names",
+        "initial state label"
+      ],
+      "immutable_syntax": [
+        "SET syntax",
+        "False boolean literal"
+      ],
+      "execution_scope": "captured and executed only in the R2/R3 one-row probe",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "excerpt_sha256": "da87bb12ea194095ca8c672b92d1c4535a873437b3ba6235c7b288c60e386fd4",
+      "excerpt_bytes": 131
+    },
+    {
+      "id": "C02_OUTPUT_GUARD",
+      "title": "existing-output guard and open ELSE branch",
+      "source": "r2r3_normal_recopy",
+      "start_line": 5,
+      "end_line": 7,
+      "dependencies": [
+        "C01_STATE_INIT"
+      ],
+      "mutable_parameters": [
+        "guard path",
+        "state variable name and stop label"
+      ],
+      "immutable_syntax": [
+        "File.IfFile.Exists",
+        "IF/THEN/ELSE opening shape",
+        "final outer END supplied by C12"
+      ],
+      "execution_scope": "captured and executed around the complete R2/R3 normal probe; dedicated output-guard recopy is separately SHA-pinned",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "excerpt_sha256": "0694d74e8c308f95861baab1535dd6436bb749eadb84a4a172b1674f8ef47de5",
+      "excerpt_bytes": 268
+    },
+    {
+      "id": "C03_READONLY_TYPED_RANGE",
+      "title": "read-only workbook, sheet activation, TypedValues range read, close",
+      "source": "r2r3_normal_recopy",
+      "start_line": 8,
+      "end_line": 11,
+      "dependencies": [
+        "C02_OUTPUT_GUARD"
+      ],
+      "mutable_parameters": [
+        "input path",
+        "instance name",
+        "sheet",
+        "range",
+        "range output name",
+        "repeat for second input"
+      ],
+      "immutable_syntax": [
+        "ReadOnly: True",
+        "UseMachineLocale: False",
+        "TypedValues",
+        "FirstLineIsHeader: False"
+      ],
+      "execution_scope": "captured and executed for one read-only source range in the R2/R3 probe; scalar/type recopy is separately SHA-pinned",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "excerpt_sha256": "918765252d61a3f6a34c9b443f4eaa0aa0161cd86ab97f043c8544ad19842932",
+      "excerpt_bytes": 629
+    },
+    {
+      "id": "C04_JSON_FILE_HANDOFF",
+      "title": "data slots to JSON primitives and UTF-8 handoff files",
+      "source": "r2r3_normal_recopy",
+      "start_line": 12,
+      "end_line": 26,
+      "dependencies": [
+        "C03_READONLY_TYPED_RANGE"
+      ],
+      "mutable_parameters": [
+        "data slot count/indexes",
+        "variable names",
+        "handoff paths",
+        "mode value"
+      ],
+      "immutable_syntax": [
+        "ConvertCustomObjectToJson { 'probe': value }",
+        "AppendNewLine: False",
+        "Overwrite",
+        "UTF8"
+      ],
+      "execution_scope": "captured and executed only with four source values plus mode in R2/R3",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "excerpt_sha256": "4a33eca4fc68c92ac75fbd00ecae60c9d84cd142f2c3e7c8570428bc080707c5",
+      "excerpt_bytes": 2273
+    },
+    {
+      "id": "C05_EDITABLE_WORK_OPEN",
+      "title": "editable work-copy open",
+      "source": "r2r3_normal_recopy",
+      "start_line": 27,
+      "end_line": 27,
+      "dependencies": [
+        "C02_OUTPUT_GUARD",
+        "C04_JSON_FILE_HANDOFF"
+      ],
+      "mutable_parameters": [
+        "work-copy path",
+        "instance name"
+      ],
+      "immutable_syntax": [
+        "ReadOnly: False",
+        "UseMachineLocale: False"
+      ],
+      "execution_scope": "captured and executed only in the R2/R3 work-copy probe",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "excerpt_sha256": "8b661b3545f377c99a6b25e7aa026c96bf613ff110c1346c41092d7511084e93",
+      "excerpt_bytes": 306
+    },
+    {
+      "id": "C06_FIXED_LAUNCHER_RUNSCRIPT",
+      "title": "complete captured Run PowerShell Script action with fixed launcher",
+      "source": "t2_pad_recopy",
+      "start_line": 41,
+      "end_line": 100,
+      "dependencies": [
+        "C04_JSON_FILE_HANDOFF",
+        "C05_EDITABLE_WORK_OPEN"
+      ],
+      "mutable_parameters": [],
+      "immutable_syntax": [
+        "entire raw component",
+        "fixed paths",
+        "fixed SHA literals",
+        "expectedSuccess",
+        "ScriptOutput name"
+      ],
+      "execution_scope": "captured, saved, re-copied, and executed only in fixed-helper T2 auxiliary Run1",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin",
+      "source_sha256": "da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa",
+      "excerpt_sha256": "e42dce038ff84f0af9d915db7146fbbe2088a583157f23a5935236305fbe0394",
+      "excerpt_bytes": 2300
+    },
+    {
+      "id": "C07_EXACT_SUCCESS_MODE_GATE",
+      "title": "fixed exact-success output and PAD NORMAL double gate",
+      "source": "t2_pad_recopy",
+      "start_line": 101,
+      "end_line": 103,
+      "dependencies": [
+        "C06_FIXED_LAUNCHER_RUNSCRIPT"
+      ],
+      "mutable_parameters": [],
+      "immutable_syntax": [
+        "exact success JSON",
+        "RunMode NORMAL check",
+        "nested IF shape"
+      ],
+      "execution_scope": "captured, saved, re-copied, and executed only in fixed-helper T2 auxiliary Run1",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin",
+      "source_sha256": "da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa",
+      "excerpt_sha256": "9dc3042fc22af7b0a0e90c784ef208828102af2a28087cf385f331ae1af2d412",
+      "excerpt_bytes": 206
+    },
+    {
+      "id": "C08_TARGET_SHEET_ACTIVATION",
+      "title": "explicit target worksheet activation shape",
+      "source": "r2r3_normal_recopy",
+      "start_line": 28,
+      "end_line": 28,
+      "dependencies": [
+        "C07_EXACT_SUCCESS_MODE_GATE"
+      ],
+      "mutable_parameters": [
+        "instance name",
+        "target sheet",
+        "repeat between target-sheet groups",
+        "leading indentation inside success gate"
+      ],
+      "immutable_syntax": [
+        "ActivateWorksheetByName action and Name argument shape"
+      ],
+      "execution_scope": "captured and executed only for the R2/R3 target sheet; success-gate nesting is a new composition",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "excerpt_sha256": "9331dd5b830b9854e943e4b0e2c253d13ecc825c85b39efd436e2b9f61b537e6",
+      "excerpt_bytes": 89
+    },
+    {
+      "id": "C09_NUMERIC_WRITE",
+      "title": "numeric source gate marker and one WriteCell shape",
+      "source": "r2r3_normal_recopy",
+      "start_line": 168,
+      "end_line": 169,
+      "dependencies": [
+        "C04_JSON_FILE_HANDOFF",
+        "C07_EXACT_SUCCESS_MODE_GATE",
+        "C08_TARGET_SHEET_ACTIVATION"
+      ],
+      "mutable_parameters": [
+        "source variable",
+        "target column",
+        "target row",
+        "repeat count"
+      ],
+      "immutable_syntax": [
+        "WriteCell action shape inside success branch"
+      ],
+      "execution_scope": "captured and executed for one numeric write in the R2/R3 one-row probe",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "excerpt_sha256": "c9745f104b057d9f380b535aadb467fa32a9062d6fa1e3989d5cf464e189be26",
+      "excerpt_bytes": 141
+    },
+    {
+      "id": "C10_SAVE_CLOSE_REOPEN_READBACK",
+      "title": "SaveAs, close, read-only reopen, TypedValues readback, close",
+      "source": "r2r3_normal_recopy",
+      "start_line": 170,
+      "end_line": 176,
+      "dependencies": [
+        "C09_NUMERIC_WRITE"
+      ],
+      "mutable_parameters": [
+        "output path",
+        "sheet",
+        "readback range",
+        "readback variable",
+        "repeat read for second rectangle"
+      ],
+      "immutable_syntax": [
+        "OpenXmlWorkbook SaveAs",
+        "close before reopen",
+        "ReadOnly: True",
+        "TypedValues"
+      ],
+      "execution_scope": "captured and executed for one readback rectangle in the R2/R3 one-row probe",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "excerpt_sha256": "5cef87e70f5e723ea6bcb3316e6801cd3743a51c378deacb4a9cd2f98e3a85e0",
+      "excerpt_bytes": 1087
+    },
+    {
+      "id": "C11_JSON_VALUE_TYPE_COMPARE",
+      "title": "saved slots to JSON primitives and source-versus-saved comparisons",
+      "source": "r2r3_normal_recopy",
+      "start_line": 177,
+      "end_line": 189,
+      "dependencies": [
+        "C04_JSON_FILE_HANDOFF",
+        "C10_SAVE_CLOSE_REOPEN_READBACK"
+      ],
+      "mutable_parameters": [
+        "readback indexes",
+        "variable names",
+        "comparison count",
+        "success state label"
+      ],
+      "immutable_syntax": [
+        "ConvertCustomObjectToJson { 'probe': value }",
+        "JSON string equality shape"
+      ],
+      "execution_scope": "captured and executed for four positions in the R2/R3 one-row probe",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "excerpt_sha256": "96a84f395b60975c3f51372b2fc05e0f8d0d22e16580d993f369fa3b1e39556f",
+      "excerpt_bytes": 891
+    },
+    {
+      "id": "C12_FAILURE_CLOSE_NO_SAVE",
+      "title": "mode/script rejection branches close Work without SaveAs",
+      "source": "r2r3_normal_recopy",
+      "start_line": 190,
+      "end_line": 198,
+      "dependencies": [
+        "C07_EXACT_SUCCESS_MODE_GATE"
+      ],
+      "mutable_parameters": [
+        "failure state labels",
+        "instance name"
+      ],
+      "immutable_syntax": [
+        "ELSE nesting",
+        "Close action",
+        "absence of SaveAs in failure branches"
+      ],
+      "execution_scope": "captured in R2/R3; script-rejection branch executed by its forced-exception negative run",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "excerpt_sha256": "e8715546a45126cfb1c6d192444d56e61283d7948117455fce390e686f83c194",
+      "excerpt_bytes": 272
+    }
+  ],
+  "teaching_independence": {
+    "complete_fixed_ex03_robin_in_bundle": false,
+    "fixed_expected_or_grader_values_in_bundle": false,
+    "fixed_ex03_full_wiring_in_bundle": false,
+    "helper_body_in_bundle": false,
+    "invocation_json_in_bundle": false,
+    "fixed_launcher_runscript_in_bundle": true,
+    "derived_example_is_different_condition": true,
+    "derived_example_marked_not_run": true,
+    "status": "PASS"
+  },
+  "limited_verification": {
+    "cited_component_source_identity": {
+      "status": "PASS",
+      "component_count": 12,
+      "all_exact": true
+    },
+    "derived_example_variables_and_block_pairing": {
+      "status": "PASS",
+      "example_line_count": 42,
+      "unresolved_references": [],
+      "new_pad_loop_commands": 0,
+      "control": {
+        "balanced": true,
+        "closed_in_order": [
+          "NORMAL_MODE",
+          "EXACT_SUCCESS",
+          "OUTPUT_GUARD"
+        ],
+        "outer_guard_closed_by": "C12 line 198",
+        "normal_closed_by": "C12 line 193",
+        "exact_success_closed_by": "C12 line 197",
+        "failure_close_count": 2,
+        "failure_save_as_count": 0
+      }
+    },
+    "fixed_launcher_unchanged": {
+      "status": "PASS",
+      "sha256": "1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1"
+    },
+    "teaching_test_independence": {
+      "status": "PASS",
+      "complete_fixed_ex03_robin_absent": true,
+      "fixed_grader_values_absent": true,
+      "fixed_ex03_full_wiring_absent": true,
+      "derived_example_marked_not_captured_not_complete_not_run": true
+    }
+  },
+  "preserved_boundaries": {
+    "formal_r12_status": "FAIL_GENERATED_ROBIN_MISMATCH_AND_POWERSHELL_PARSE_ERROR_STOP_BEFORE_PAD",
+    "formal_r12_accepted": false,
+    "t2_decision": "PASS_FIXED_HELPER_AUXILIARY_NORMAL_RUN1",
+    "a2_result": "STOPPED_FAIL_REFUSAL",
+    "legacy_558_difference_record": "PRESERVED_NOT_RECLASSIFIED"
+  },
+  "scope": {
+    "copilot_send_count": 0,
+    "pad_save_recopy_count": 0,
+    "pad_run_count": 0,
+    "excel_run_count": 0,
+    "new_capture_count": 0,
+    "full_regression": "NOT_RUN_BY_SCOPE",
+    "github_write_count": 0
+  }
+}

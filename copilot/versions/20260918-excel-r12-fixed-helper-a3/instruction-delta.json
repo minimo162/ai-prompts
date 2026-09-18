@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "base_candidate": "20260918-excel-r12-fixed-helper-a2",
+  "base_instruction_path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/agent-instructions.txt",
+  "base_instruction_sha256": "def1af576bac79d5dbf321ac38d7702d3d968932b2e0767265f9544eb18ebe60",
+  "candidate_id": "20260918-excel-r12-fixed-helper-a3",
+  "base_bundle_filename_occurrences": 2,
+  "transforms": [
+    {
+      "kind": "ROUTE_BLOCK_REPLACEMENT",
+      "occurrences": 1,
+      "before": "【Excel値転記・固定helper別経路 20260918-excel-r12-fixed-helper-a2】\nこのA2は、A1の拒否原文と全証跡を変更せず、添付教材の不足と指示の矛盾だけを直した後継の未使用候補です。正式r12 FAIL、固定helper T2補助PASS、A1拒否、旧558 raw差分を分離して保持し、いずれもA2のCopilot生成・PAD受入へ継承しません。\n\n標準入力は、変更していない固定EX03依頼、そのままのこの指示全文、同じ候補IDの `PAD-Robin-Fixed-Helper-A2-Bundle.txt` 実添付です。bundle内のIN-BUNDLE INDEXとRAW_COMPONENTだけで、この限定経路に必要な確認済みRobin構文を参照できます。外部索引や未添付原文を生成前提にしません。\n\nbundleの確認済みRAW_COMPONENTは、再利用、組合せ、IN-BUNDLE INDEXで明示したパラメーター変更、必要回数への反復ができます。ただし、組み上げたA2全体は `NOT_RUN_NEW_COMBINATION` であり、実行済み・受入済みとは表示しません。完成した固定EX03 Robin、採点値、固定EX03専用の全体配線、組合せ後の実行証跡が教材にないことは、生成拒否の理由にしません。完成フローの過去実行証跡は生成前の必須条件ではありません。\n\n未採取の命令名、引数名、列挙値、ブロック構造を捏造してはいけません。IN-BUNDLE INDEXの工程対応を確認し、実際に根拠がない工程が残る場合だけRobinを出さず、その不足工程だけを具体的に報告します。掲載済み工程を、完成回答がないことだけで不足扱いにしません。\n\nhelper、invocation、launcher、実行パス、固定依頼、期待値、正式出力形式は変更しません。検証者がhelperとinvocationを指定済みパスへ事前配置します。C06_FIXED_LAUNCHER_RUNSCRIPTは、外側のRunScript行を含む掲載原文をバイトどおり使い、内部launcher、固定パス、SHAリテラル、expectedSuccessを編集・再計算・提案しません。helper本体やinvocation JSONを生成・展開・書換えしません。\n\n工程は、既存output guard、2入力のReadOnly読取りと明示的sheet切替、TypedValues矩形読取り、文字列7位置のJSON primitive化とsource-1.jsonからsource-7.jsonへのUTF-8保存、NORMALのmode.json保存、work.xlsxの編集用起動、固定launcherのRunScript 1回、exact success JSONとPAD側NORMALの二重gate、数値5位置のWriteCell、未存在outputへのSaveAs 1回、close、ReadOnly再開、2矩形12位置の個別JSON値型比較、失敗側close/no-saveです。反復回数と固定依頼によるpath・sheet・range・target・変数名への置換は新しい組合せであり未実行です。\n\n入力と原本はReadOnly、検証者が用意したwork copyだけを編集します。既存output時はJSON生成、work起動、helper実行より前に停止します。空、ERROR、別出力、別modeでは数値書込み、SaveAs、完成状態へ進みません。network、delete、既存output上書き、Invoke-Expression、外部取得SHA、権限・security・Excel設定変更を追加しません。\n\n回答は説明の後に、全工程のRobinだけを正確に1個のMarkdown `text` コードブロックへ入れます。コードブロック内へ説明、見出し、行番号、Plain Text、JSON、Markdownフェンス文字列、省略記号、疑似コードを入れません。先頭行と最終非空行は実際のPAD命令です。\n\nこのA2はCopilot未送信、PAD保存・再コピー未実施、PAD/Excel Run 0です。生成後も無修正原文の安全検査と保存・再コピー一致が通るまで、完成・実行済み・受入済みと表示しません。\n",
+      "after": "【Excel値転記・固定helper別経路 20260918-excel-r12-fixed-helper-a3】\nこのA3はA2とA2-G1拒否を変更せず、拒否で不足とされた「採取済み部品の組立規則」だけを追加した後継の未使用候補です。正式r12 FAIL、固定helper T2補助PASS、A1/A2拒否、旧558 raw差分を分離して保持し、A3へ成功として継承しません。\n\nRoute IDは EX03-R12-FIXED-HELPER-COPILOT-A3 です。組立規則IDは AR04_EXPLICIT_JSON_HANDOFF、AR09_EXPLICIT_NUMERIC_WRITES、AR10_MULTIPLE_RECTANGLE_READBACK、AR11_MULTIPLE_JSON_COMPARISONS です。\n\n標準入力は、変更していない固定EX03依頼、この指示全文、同じ候補IDの `PAD-Robin-Fixed-Helper-A3-Bundle.txt` 実添付です。bundle内のIN-BUNDLE INDEX、SOURCE-LINE ASSEMBLY RULES、CONTROL BLOCK MAP、DERIVED SMALL EXAMPLE、RAW_COMPONENTだけを参照し、外部索引や未添付原文を生成前提にしません。\n\n逐語保持の対象はC06_FIXED_LAUNCHER_RUNSCRIPT全体と、各組立規則でimmutableとされた未変更構文部分だけです。mutableとして明示した変数名、DataTable索引、パス、sheet、range、target、出力変数、状態名、必要回数の明示的複製、接続位置、ブロック深度に合わせた先頭インデントは変更できます。RAW_COMPONENT全体の逐語複写を、明示変更部分まで含めて要求しません。\n\nC04はSET定義群、JSON変換群、mode定義、source書込み群、mode書込みの順で、必要な命令行を明示的に複製します。C09は成功分岐内で数値変数を先に定義し、対象sheetを明示してWriteCellを1行ずつ複製します。C10はSaveAsと再開を各1回だけ行い、sheet切替＋TypedValues読取りの2行を矩形ごとに複製してから1回だけ閉じます。C11は保存値定義群、JSON変換群、source/saved比較群、完了状態の順で位置ごとに明示的に複製します。新しいPAD LOOP、未採取の命令、引数、列挙値、制御構造を作りません。\n\n外側output guardはC02のIF/ELSEを開き、C12末尾ENDが閉じます。C07のexact-success IFの内側にNORMAL IFを置き、成功処理はNORMAL側だけです。C12の最初のELSE/ENDはNORMAL分岐、次のELSE/ENDはexact-success分岐、最後のENDはoutput guardに対応します。両失敗側はWorkをcloseし、SaveAsを含めません。\n\nbundleの小例は別条件の派生断片で、採取原文、完成Robin、固定EX03配線ではなくNOT_CAPTURED_NOT_COMPLETE_NOT_RUNです。行ごとの出典と許可置換を示すためだけに使い、例のE番号や注釈を生成Robinへ入れません。完成した固定EX03 Robin、採点値、固定EX03専用全配線、完成フローの採取・実行済み原文が教材にないことは生成拒否の理由にしません。\n\nhelper、invocation、launcher、runtime、固定依頼、期待値、正式出力形式は変更しません。検証者がhelperとinvocationを固定パスへ事前配置します。C06は固定パス、SHA、expectedSuccess、外側RunScript行を含めて変更せず使い、helper本体やinvocation JSONを生成・展開・書換えしません。\n\nIN-BUNDLE INDEXと組立規則を照合し、実際に根拠がない命令または接続が残る場合だけRobinを出さず、component ID、出典命令行、未解決の接続前後を具体的に報告します。完成回答を丸ごと教材へ足す要求で補いません。\n\n入力と原本はReadOnly、検証者が用意したwork copyだけを編集します。既存output時は入力読取り、JSON生成、work起動、helper実行より前に停止します。空、ERROR、別出力、別modeでは数値書込み、SaveAs、完成状態へ進みません。network、delete、既存output上書き、Invoke-Expression、外部取得SHA、権限・security・Excel設定変更を追加しません。\n\n回答は説明の後に、全工程のRobinだけを正確に1個のMarkdown `text` コードブロックへ入れます。コードブロック内へ説明、見出し、E番号、行番号、Plain Text、JSON、Markdownフェンス文字列、省略記号、疑似コードを入れません。先頭行と最終非空行は実際のPAD命令です。\n\nこのA3はCopilot未送信、PAD保存・再コピー未実施、PAD/Excel Run 0です。生成後も無修正原文の安全検査と保存・再コピー一致が通るまで、完成・実行済み・受入済みと表示しません。\n"
+    },
+    {
+      "kind": "BUNDLE_FILENAME_REPLACEMENT",
+      "occurrences": 1,
+      "before": "PAD-Robin-Fixed-Helper-A2-Bundle.txt",
+      "after": "PAD-Robin-Fixed-Helper-A3-Bundle.txt"
+    }
+  ],
+  "other_transformations": 0,
+  "reconstructs_candidate_exactly": true,
+  "candidate_instruction_sha256": "87d4fad6445be8371bfcad9d35d2ce8c384758714c7d48e0232a1ce60ab89d98",
+  "candidate_instruction_utf16_units": 7215
+}

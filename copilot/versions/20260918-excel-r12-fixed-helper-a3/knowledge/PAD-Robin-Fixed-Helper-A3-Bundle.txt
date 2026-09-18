@@ -1,0 +1,431 @@
+PAD Robin fixed-helper A3 self-contained assembly-rule bundle
+candidate_id: 20260918-excel-r12-fixed-helper-a3
+route_id: EX03-R12-FIXED-HELPER-COPILOT-A3
+bundle_filename: PAD-Robin-Fixed-Helper-A3-Bundle.txt
+status: LOCAL_PREPARED_LIMITED_NON_LIVE_NOT_RUN
+
+BOUNDARY
+- A2 and the A2-G1 refusal remain unchanged; this successor adds assembly rules only.
+- RAW_COMPONENT blocks are exact byte slices of existing PAD captures/re-copies.
+- Verbatim preservation applies to the complete fixed C06 launcher block and each rule's immutable portions.
+- Listed mutable substitutions, explicit command-line copies, connections, and required indentation changes are allowed.
+- No new PAD LOOP command is introduced. Unknown actions, arguments, enum values, and block shapes remain forbidden.
+- The derived small example is NOT_CAPTURED_NOT_COMPLETE_NOT_RUN and is not a fixed-EX03 answer.
+- A complete fixed-EX03 Robin, grading values, and fixed-EX03 full wiring are intentionally absent.
+- A captured or executed complete flow is not a prerequisite for generation from the listed rules.
+
+VERIFIER-MANAGED FIXED IDENTITIES (NOT MUTABLE)
+- helper: catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/EX03-R12-Fixed-StringTransfer.ps1 / SHA-256 08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135
+- invocation: catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/invocation.json / SHA-256 92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6
+- launcher: catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/launcher.ps1 / SHA-256 1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1
+- exact success: {"status":"OK","mode":"NORMAL","text_writes":7,"formats_restored":true}
+- helper and invocation are preplaced by the verifier and must not be emitted or modified.
+
+IN-BUNDLE INDEX
+[C01_STATE_INIT] state and gate initialization
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 1-4
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: da87bb12ea194095ca8c672b92d1c4535a873437b3ba6235c7b288c60e386fd4
+  dependencies: none
+  mutable_parameters: state variable names; initial state label
+  immutable_syntax: SET syntax; False boolean literal
+  prior_execution_scope: captured and executed only in the R2/R3 one-row probe
+[C02_OUTPUT_GUARD] existing-output guard and open ELSE branch
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 5-7
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: 0694d74e8c308f95861baab1535dd6436bb749eadb84a4a172b1674f8ef47de5
+  dependencies: C01_STATE_INIT
+  mutable_parameters: guard path; state variable name and stop label
+  immutable_syntax: File.IfFile.Exists; IF/THEN/ELSE opening shape; final outer END supplied by C12
+  prior_execution_scope: captured and executed around the complete R2/R3 normal probe; dedicated output-guard recopy is separately SHA-pinned
+[C03_READONLY_TYPED_RANGE] read-only workbook, sheet activation, TypedValues range read, close
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 8-11
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: 918765252d61a3f6a34c9b443f4eaa0aa0161cd86ab97f043c8544ad19842932
+  dependencies: C02_OUTPUT_GUARD
+  mutable_parameters: input path; instance name; sheet; range; range output name; repeat for second input
+  immutable_syntax: ReadOnly: True; UseMachineLocale: False; TypedValues; FirstLineIsHeader: False
+  prior_execution_scope: captured and executed for one read-only source range in the R2/R3 probe; scalar/type recopy is separately SHA-pinned
+[C04_JSON_FILE_HANDOFF] data slots to JSON primitives and UTF-8 handoff files
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 12-26
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: 4a33eca4fc68c92ac75fbd00ecae60c9d84cd142f2c3e7c8570428bc080707c5
+  dependencies: C03_READONLY_TYPED_RANGE
+  mutable_parameters: data slot count/indexes; variable names; handoff paths; mode value
+  immutable_syntax: ConvertCustomObjectToJson { 'probe': value }; AppendNewLine: False; Overwrite; UTF8
+  prior_execution_scope: captured and executed only with four source values plus mode in R2/R3
+[C05_EDITABLE_WORK_OPEN] editable work-copy open
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 27-27
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: 8b661b3545f377c99a6b25e7aa026c96bf613ff110c1346c41092d7511084e93
+  dependencies: C02_OUTPUT_GUARD,C04_JSON_FILE_HANDOFF
+  mutable_parameters: work-copy path; instance name
+  immutable_syntax: ReadOnly: False; UseMachineLocale: False
+  prior_execution_scope: captured and executed only in the R2/R3 work-copy probe
+[C06_FIXED_LAUNCHER_RUNSCRIPT] complete captured Run PowerShell Script action with fixed launcher
+  source: catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin lines 41-100
+  source_sha256: da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa
+  excerpt_sha256: e42dce038ff84f0af9d915db7146fbbe2088a583157f23a5935236305fbe0394
+  dependencies: C04_JSON_FILE_HANDOFF,C05_EDITABLE_WORK_OPEN
+  mutable_parameters: none
+  immutable_syntax: entire raw component; fixed paths; fixed SHA literals; expectedSuccess; ScriptOutput name
+  prior_execution_scope: captured, saved, re-copied, and executed only in fixed-helper T2 auxiliary Run1
+[C07_EXACT_SUCCESS_MODE_GATE] fixed exact-success output and PAD NORMAL double gate
+  source: catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin lines 101-103
+  source_sha256: da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa
+  excerpt_sha256: 9dc3042fc22af7b0a0e90c784ef208828102af2a28087cf385f331ae1af2d412
+  dependencies: C06_FIXED_LAUNCHER_RUNSCRIPT
+  mutable_parameters: none
+  immutable_syntax: exact success JSON; RunMode NORMAL check; nested IF shape
+  prior_execution_scope: captured, saved, re-copied, and executed only in fixed-helper T2 auxiliary Run1
+[C08_TARGET_SHEET_ACTIVATION] explicit target worksheet activation shape
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 28-28
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: 9331dd5b830b9854e943e4b0e2c253d13ecc825c85b39efd436e2b9f61b537e6
+  dependencies: C07_EXACT_SUCCESS_MODE_GATE
+  mutable_parameters: instance name; target sheet; repeat between target-sheet groups; leading indentation inside success gate
+  immutable_syntax: ActivateWorksheetByName action and Name argument shape
+  prior_execution_scope: captured and executed only for the R2/R3 target sheet; success-gate nesting is a new composition
+[C09_NUMERIC_WRITE] numeric source gate marker and one WriteCell shape
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 168-169
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: c9745f104b057d9f380b535aadb467fa32a9062d6fa1e3989d5cf464e189be26
+  dependencies: C04_JSON_FILE_HANDOFF,C07_EXACT_SUCCESS_MODE_GATE,C08_TARGET_SHEET_ACTIVATION
+  mutable_parameters: source variable; target column; target row; repeat count
+  immutable_syntax: WriteCell action shape inside success branch
+  prior_execution_scope: captured and executed for one numeric write in the R2/R3 one-row probe
+[C10_SAVE_CLOSE_REOPEN_READBACK] SaveAs, close, read-only reopen, TypedValues readback, close
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 170-176
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: 5cef87e70f5e723ea6bcb3316e6801cd3743a51c378deacb4a9cd2f98e3a85e0
+  dependencies: C09_NUMERIC_WRITE
+  mutable_parameters: output path; sheet; readback range; readback variable; repeat read for second rectangle
+  immutable_syntax: OpenXmlWorkbook SaveAs; close before reopen; ReadOnly: True; TypedValues
+  prior_execution_scope: captured and executed for one readback rectangle in the R2/R3 one-row probe
+[C11_JSON_VALUE_TYPE_COMPARE] saved slots to JSON primitives and source-versus-saved comparisons
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 177-189
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: 96a84f395b60975c3f51372b2fc05e0f8d0d22e16580d993f369fa3b1e39556f
+  dependencies: C04_JSON_FILE_HANDOFF,C10_SAVE_CLOSE_REOPEN_READBACK
+  mutable_parameters: readback indexes; variable names; comparison count; success state label
+  immutable_syntax: ConvertCustomObjectToJson { 'probe': value }; JSON string equality shape
+  prior_execution_scope: captured and executed for four positions in the R2/R3 one-row probe
+[C12_FAILURE_CLOSE_NO_SAVE] mode/script rejection branches close Work without SaveAs
+  source: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin lines 190-198
+  source_sha256: 28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1
+  excerpt_sha256: e8715546a45126cfb1c6d192444d56e61283d7948117455fce390e686f83c194
+  dependencies: C07_EXACT_SUCCESS_MODE_GATE
+  mutable_parameters: failure state labels; instance name
+  immutable_syntax: ELSE nesting; Close action; absence of SaveAs in failure branches
+  prior_execution_scope: captured in R2/R3; script-rejection branch executed by its forced-exception negative run
+
+SOURCE-LINE ASSEMBLY RULES
+[AR04_EXPLICIT_JSON_HANDOFF] component=C04_JSON_FILE_HANDOFF
+  purpose: explicitly duplicate source-slot JSON handoff commands without a PAD loop
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:12-15 => SET source variable definitions
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:16-19 => source JSON conversions
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:20-21 => single mode definition and conversion
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:22-25 => source JSON file writes
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:26-26 => single mode file write
+  immutable_parts: SET command shape; ConvertCustomObjectToJson CustomObject probe wrapper and Json output shape; File.WriteText AppendNewLine False, Overwrite, UTF8 arguments; mode definition/conversion/write occurs once
+  mutable_parts: source variable and JSON variable names; DataTable row/column indexes; source-N JSON path and N; explicit source-slot copy count; leading indentation needed by the outer ELSE body
+  definitions: each source variable; each source JSON variable; RunMode; RunModeJson
+  references: C03 DataTable outputs; each source JSON variable at its matching write
+  order_1: all source SET definitions
+  order_2: all source JSON conversions
+  order_3: RunMode SET and JSON conversion once
+  order_4: all matching source-N writes
+  order_5: mode write once
+  connection: after all C03 reads and before C05/C06; every reference follows its definition
+  copy_method: copy the captured command lines explicitly once per slot; do not create a LOOP
+[AR09_EXPLICIT_NUMERIC_WRITES] component=C09_NUMERIC_WRITE
+  purpose: define numeric source variables and duplicate WriteCell explicitly inside the success branch
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:12-15 => SET-from-DataTable definition template
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:28-28 => target-sheet activation template
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:168-168 => single branch-entry marker
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:169-169 => WriteCell template
+  immutable_parts: SET definition shape; ActivateWorksheetByName action and Name argument shape; NumericWriteEntered marker occurs once; WriteCell action and Instance/Value/Column/Row argument names
+  mutable_parts: numeric variable names and DataTable indexes; target sheet; target column and row; explicit WriteCell copy count; leading indentation for the NORMAL success body
+  definitions: every numeric source variable before its first WriteCell; NumericWriteEntered once
+  references: C03 DataTable outputs; Work from C05; numeric variable at each WriteCell
+  order_1: C07 exact-success and NORMAL gates pass
+  order_2: define all numeric source variables
+  order_3: activate the first target sheet
+  order_4: set NumericWriteEntered once
+  order_5: emit each WriteCell in source order, activating a different sheet before its group
+  connection: inside the NORMAL branch after C07 line 103 and before C10 SaveAs
+  copy_method: copy SET, activation, and WriteCell lines explicitly; do not create a LOOP
+[AR10_MULTIPLE_RECTANGLE_READBACK] component=C10_SAVE_CLOSE_REOPEN_READBACK
+  purpose: save/reopen once and duplicate only activation plus TypedValues read for each rectangle
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:170-173 => single SaveAs marker, SaveAs, close, read-only reopen
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:174-175 => rectangle activation and TypedValues read pair
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:176-176 => single close after all rectangle reads
+  immutable_parts: SaveAs OpenXmlWorkbook shape; close Work before read-only reopen; ReadOnly True and UseMachineLocale False; TypedValues and FirstLineIsHeader False; close Reopened once after the final read
+  mutable_parts: output path; sheet, start/end columns and rows; readback variable name; explicit activation/read pair copy count
+  definitions: Reopened at the single reopen; one readback variable per rectangle
+  references: Work from C05; output path; Reopened for every activation/read and final close
+  order_1: set SaveAsEntered once
+  order_2: SaveAs once
+  order_3: close Work once
+  order_4: reopen output ReadOnly once
+  order_5: for each rectangle explicitly emit activation then read
+  order_6: close Reopened once
+  connection: after the last C09 WriteCell and before C11 saved-value definitions
+  copy_method: copy only the captured activation/read pair per rectangle; do not duplicate SaveAs/reopen and do not create a LOOP
+[AR11_MULTIPLE_JSON_COMPARISONS] component=C11_JSON_VALUE_TYPE_COMPARE
+  purpose: duplicate saved-slot definitions, JSON conversions, and equality comparisons by position
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:177-180 => saved variable definitions
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:181-184 => saved JSON conversions
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:185-188 => source JSON versus saved JSON comparisons
+  source_lines: catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:189-189 => single success-state assignment
+  immutable_parts: SET saved variable shape; ConvertCustomObjectToJson probe wrapper and Json output shape; JSON string equality shape; success-state assignment occurs once after all comparisons
+  mutable_parts: readback variable and row/column indexes; saved/source JSON and boolean result variable names; explicit position copy count; final success-state variable and label
+  definitions: every saved variable; every saved JSON variable; every comparison boolean; final state
+  references: all C10 readback variables; matching source JSON variables; matching saved JSON variables
+  order_1: define every saved variable in fixed position order
+  order_2: convert every saved value to JSON in the same order
+  order_3: compare matching source and saved JSON variables in the same order
+  order_4: set success state once
+  connection: after C10 closes Reopened and before C12 begins the NORMAL failure ELSE
+  copy_method: copy each captured command line explicitly per position; do not create a LOOP
+
+CONTROL BLOCK MAP
+- 01 OPEN OUTPUT_GUARD => C02_OUTPUT_GUARD / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:5
+- 02 ELSE OUTPUT_GUARD => C02_OUTPUT_GUARD / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:7
+- 03 BODY OUTPUT_GUARD => C06_FIXED_LAUNCHER_RUNSCRIPT / catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin:100
+- 04 OPEN EXACT_SUCCESS => C07_EXACT_SUCCESS_MODE_GATE / catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin:101
+- 05 OPEN NORMAL_MODE => C07_EXACT_SUCCESS_MODE_GATE / catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin:102
+- 06 SUCCESS_BODY_START NORMAL_MODE => C07_EXACT_SUCCESS_MODE_GATE / catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin:103
+- 07 ELSE NORMAL_MODE => C12_FAILURE_CLOSE_NO_SAVE / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:190
+- 08 CLOSE_WORK_NO_SAVE NORMAL_MODE => C12_FAILURE_CLOSE_NO_SAVE / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:191
+- 09 END NORMAL_MODE => C12_FAILURE_CLOSE_NO_SAVE / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:193
+- 10 ELSE EXACT_SUCCESS => C12_FAILURE_CLOSE_NO_SAVE / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:194
+- 11 CLOSE_WORK_NO_SAVE EXACT_SUCCESS => C12_FAILURE_CLOSE_NO_SAVE / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:195
+- 12 END EXACT_SUCCESS => C12_FAILURE_CLOSE_NO_SAVE / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:197
+- 13 END OUTPUT_GUARD => C12_FAILURE_CLOSE_NO_SAVE / catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:198
+- C12 line 193 closes NORMAL_MODE.
+- C12 line 197 closes EXACT_SUCCESS.
+- C12 line 198 closes OUTPUT_GUARD.
+- C12 lines 191 and 195 close Work without SaveAs in the two failure branches.
+
+DERIVED SMALL ASSEMBLY EXAMPLE — NOT RAW CAPTURE / NOT COMPLETE ROBIN / NOT RUN
+- Different condition: one four-cell DemoData row, two demo target sheets, two numeric writes, two one-row readback rectangles, four JSON comparisons.
+- This fragment omits C01/C02/C05/C06/C07/C12 commands and is not connected to the fixed invocation.
+- E numbers and source annotations are teaching metadata and must never be copied into generated Robin.
+E001 [AR04_EXPLICIT_JSON_HANDOFF] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:12 |     SET DemoSource1 TO DemoData[0][0]
+E002 [AR04_EXPLICIT_JSON_HANDOFF] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:12 |     SET DemoSource2 TO DemoData[0][1]
+E003 [AR04_EXPLICIT_JSON_HANDOFF] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:12 |     SET DemoSource3 TO DemoData[0][2]
+E004 [AR04_EXPLICIT_JSON_HANDOFF] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:12 |     SET DemoSource4 TO DemoData[0][3]
+E005 [AR04_EXPLICIT_JSON_HANDOFF] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:16 |     Variables.ConvertCustomObjectToJson CustomObject: { 'probe': DemoSource1 } Json=> DemoSource1Json
+E006 [AR04_EXPLICIT_JSON_HANDOFF] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:16 |     Variables.ConvertCustomObjectToJson CustomObject: { 'probe': DemoSource2 } Json=> DemoSource2Json
+E007 [AR04_EXPLICIT_JSON_HANDOFF] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:16 |     Variables.ConvertCustomObjectToJson CustomObject: { 'probe': DemoSource3 } Json=> DemoSource3Json
+E008 [AR04_EXPLICIT_JSON_HANDOFF] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:16 |     Variables.ConvertCustomObjectToJson CustomObject: { 'probe': DemoSource4 } Json=> DemoSource4Json
+E009 [AR04_EXPLICIT_JSON_HANDOFF] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:20 |     SET RunMode TO $'''NORMAL'''
+E010 [AR04_EXPLICIT_JSON_HANDOFF] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:21 |     Variables.ConvertCustomObjectToJson CustomObject: { 'probe': RunMode } Json=> RunModeJson
+E011 [AR04_EXPLICIT_JSON_HANDOFF] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:22 |     File.WriteText File: $'''C:\\A3-DERIVED-NOT-RUN\\source-1.json''' TextToWrite: DemoSource1Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+E012 [AR04_EXPLICIT_JSON_HANDOFF] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:22 |     File.WriteText File: $'''C:\\A3-DERIVED-NOT-RUN\\source-2.json''' TextToWrite: DemoSource2Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+E013 [AR04_EXPLICIT_JSON_HANDOFF] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:22 |     File.WriteText File: $'''C:\\A3-DERIVED-NOT-RUN\\source-3.json''' TextToWrite: DemoSource3Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+E014 [AR04_EXPLICIT_JSON_HANDOFF] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:22 |     File.WriteText File: $'''C:\\A3-DERIVED-NOT-RUN\\source-4.json''' TextToWrite: DemoSource4Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+E015 [AR04_EXPLICIT_JSON_HANDOFF] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:26 |     File.WriteText File: $'''C:\\A3-DERIVED-NOT-RUN\\mode.json''' TextToWrite: RunModeJson AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+E016 [AR09_EXPLICIT_NUMERIC_WRITES] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:28 |     Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''DemoTargetOne'''
+E017 [AR09_EXPLICIT_NUMERIC_WRITES] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:168 |             SET NumericWriteEntered TO True
+E018 [AR09_EXPLICIT_NUMERIC_WRITES] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:169 |             Excel.WriteToExcel.WriteCell Instance: Work Value: DemoSource3 Column: $'''B''' Row: 2
+E019 [AR09_EXPLICIT_NUMERIC_WRITES] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:28 |     Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''DemoTargetTwo'''
+E020 [AR09_EXPLICIT_NUMERIC_WRITES] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:169 |             Excel.WriteToExcel.WriteCell Instance: Work Value: DemoSource4 Column: $'''D''' Row: 4
+E021 [AR10_MULTIPLE_RECTANGLE_READBACK] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:170 |             SET SaveAsEntered TO True
+E022 [AR10_MULTIPLE_RECTANGLE_READBACK] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:171 |             Excel.SaveExcel.SaveAs Instance: Work DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\A3-DERIVED-NOT-RUN\\demo-output.xlsx'''
+E023 [AR10_MULTIPLE_RECTANGLE_READBACK] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:172 |             Excel.CloseExcel.Close Instance: Work
+E024 [AR10_MULTIPLE_RECTANGLE_READBACK] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:173 |             Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\A3-DERIVED-NOT-RUN\\demo-output.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Reopened
+E025 [AR10_MULTIPLE_RECTANGLE_READBACK] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:174 |             Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''DemoTargetOne'''
+E026 [AR10_MULTIPLE_RECTANGLE_READBACK] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:175 |             Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''A''' StartRow: 2 EndColumn: $'''B''' EndRow: 2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> DemoReadbackOne
+E027 [AR10_MULTIPLE_RECTANGLE_READBACK] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:174 |             Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''DemoTargetTwo'''
+E028 [AR10_MULTIPLE_RECTANGLE_READBACK] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:175 |             Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''C''' StartRow: 4 EndColumn: $'''D''' EndRow: 4 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> DemoReadbackTwo
+E029 [AR10_MULTIPLE_RECTANGLE_READBACK] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:176 |             Excel.CloseExcel.Close Instance: Reopened
+E030 [AR11_MULTIPLE_JSON_COMPARISONS] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:177 |             SET DemoSaved1 TO DemoReadbackOne[0][0]
+E031 [AR11_MULTIPLE_JSON_COMPARISONS] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:177 |             SET DemoSaved2 TO DemoReadbackOne[0][1]
+E032 [AR11_MULTIPLE_JSON_COMPARISONS] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:177 |             SET DemoSaved3 TO DemoReadbackTwo[0][0]
+E033 [AR11_MULTIPLE_JSON_COMPARISONS] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:177 |             SET DemoSaved4 TO DemoReadbackTwo[0][1]
+E034 [AR11_MULTIPLE_JSON_COMPARISONS] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:181 |             Variables.ConvertCustomObjectToJson CustomObject: { 'probe': DemoSaved1 } Json=> DemoSaved1Json
+E035 [AR11_MULTIPLE_JSON_COMPARISONS] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:181 |             Variables.ConvertCustomObjectToJson CustomObject: { 'probe': DemoSaved2 } Json=> DemoSaved2Json
+E036 [AR11_MULTIPLE_JSON_COMPARISONS] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:181 |             Variables.ConvertCustomObjectToJson CustomObject: { 'probe': DemoSaved3 } Json=> DemoSaved3Json
+E037 [AR11_MULTIPLE_JSON_COMPARISONS] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:181 |             Variables.ConvertCustomObjectToJson CustomObject: { 'probe': DemoSaved4 } Json=> DemoSaved4Json
+E038 [AR11_MULTIPLE_JSON_COMPARISONS] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:185 |             SET DemoMatch1 TO DemoSource1Json = DemoSaved1Json
+E039 [AR11_MULTIPLE_JSON_COMPARISONS] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:185 |             SET DemoMatch2 TO DemoSource2Json = DemoSaved2Json
+E040 [AR11_MULTIPLE_JSON_COMPARISONS] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:185 |             SET DemoMatch3 TO DemoSource3Json = DemoSaved3Json
+E041 [AR11_MULTIPLE_JSON_COMPARISONS] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:185 |             SET DemoMatch4 TO DemoSource4Json = DemoSaved4Json
+E042 [AR11_MULTIPLE_JSON_COMPARISONS] from catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin:189 |             SET DemoState TO $'''DERIVED_EXAMPLE_READY_NOT_RUN'''
+
+RAW COMPONENTS
+
+RAW COMPONENT METADATA C01_STATE_INIT
+RAW_COMPONENT C01_STATE_INIT BEGIN
+SET ProbeState TO $'''NOT_STARTED'''
+SET ScriptGatePassed TO False
+SET NumericWriteEntered TO False
+SET SaveAsEntered TO False
+RAW_COMPONENT C01_STATE_INIT END
+
+RAW COMPONENT METADATA C02_OUTPUT_GUARD
+RAW_COMPONENT C02_OUTPUT_GUARD BEGIN
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\result.xlsx''') THEN
+    SET ProbeState TO $'''OUTPUT_EXISTS_NO_RUN'''
+ELSE
+RAW_COMPONENT C02_OUTPUT_GUARD END
+
+RAW COMPONENT METADATA C03_READONLY_TYPED_RANGE
+RAW_COMPONENT C03_READONLY_TYPED_RANGE BEGIN
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\source.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> SourceBook
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: SourceBook Name: $'''Source'''
+    Excel.ReadFromExcel.ReadCells Instance: SourceBook StartColumn: $'''A''' StartRow: 2 EndColumn: $'''D''' EndRow: 2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> SourceData
+    Excel.CloseExcel.Close Instance: SourceBook
+RAW_COMPONENT C03_READONLY_TYPED_RANGE END
+
+RAW COMPONENT METADATA C04_JSON_FILE_HANDOFF
+RAW_COMPONENT C04_JSON_FILE_HANDOFF BEGIN
+    SET Source1 TO SourceData[0][0]
+    SET Source2 TO SourceData[0][1]
+    SET Source3 TO SourceData[0][2]
+    SET Source4 TO SourceData[0][3]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source1 } Json=> Source1Json
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source2 } Json=> Source2Json
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source3 } Json=> Source3Json
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source4 } Json=> Source4Json
+    SET RunMode TO $'''NORMAL'''
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': RunMode } Json=> RunModeJson
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\source-1.json''' TextToWrite: Source1Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\source-2.json''' TextToWrite: Source2Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\source-3.json''' TextToWrite: Source3Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\source-4.json''' TextToWrite: Source4Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\mode.json''' TextToWrite: RunModeJson AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+RAW_COMPONENT C04_JSON_FILE_HANDOFF END
+
+RAW COMPONENT METADATA C05_EDITABLE_WORK_OPEN
+RAW_COMPONENT C05_EDITABLE_WORK_OPEN BEGIN
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\work.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> Work
+RAW_COMPONENT C05_EDITABLE_WORK_OPEN END
+
+RAW COMPONENT METADATA C06_FIXED_LAUNCHER_RUNSCRIPT
+RAW_COMPONENT C06_FIXED_LAUNCHER_RUNSCRIPT BEGIN
+    Scripting.RunPowershellScript.RunScript Script: $'''$ErrorActionPreference = \'Stop\'
+Set-StrictMode -Version 2
+
+$helperPath = \'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\EX03-R12-Fixed-StringTransfer.ps1\'
+$invocationPath = \'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\invocation.json\'
+$expectedHelperSha256 = \'08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135\'
+$expectedInvocationSha256 = \'92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6\'
+$expectedSuccess = \'{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}\'
+
+function Stop-Launcher {
+    param([string]$Code, [int]$ExitCode)
+    $failure = [ordered]@{ status = \'ERROR\'; error_code = $Code }
+    [Console]::Out.Write([string]($failure | ConvertTo-Json -Compress))
+    exit $ExitCode
+}
+
+function Get-Sha256 {
+    param([string]$Path)
+    $stream = [IO.File]::OpenRead($Path)
+    $algorithm = [Security.Cryptography.SHA256]::Create()
+    try {
+        return ([BitConverter]::ToString($algorithm.ComputeHash($stream))).Replace(\'-\', \'\').ToLowerInvariant()
+    }
+    finally {
+        $algorithm.Dispose()
+        $stream.Dispose()
+    }
+}
+
+if (-not (Test-Path -LiteralPath $helperPath -PathType Leaf)) {
+    Stop-Launcher \'HELPER_NOT_FOUND\' 41
+}
+if (-not (Test-Path -LiteralPath $invocationPath -PathType Leaf)) {
+    Stop-Launcher \'INVOCATION_NOT_FOUND\' 42
+}
+
+$actualHelperSha256 = Get-Sha256 $helperPath
+if ($actualHelperSha256 -cne $expectedHelperSha256) {
+    Stop-Launcher \'HELPER_SHA256_MISMATCH\' 43
+}
+$actualInvocationSha256 = Get-Sha256 $invocationPath
+if ($actualInvocationSha256 -cne $expectedInvocationSha256) {
+    Stop-Launcher \'INVOCATION_SHA256_MISMATCH\' 44
+}
+
+try {
+    $helperOutput = (& $helperPath -InvocationPath $invocationPath | Out-String).Trim()
+}
+catch {
+    Stop-Launcher \'HELPER_INVOCATION_FAILED\' 45
+}
+
+if ([string]::IsNullOrWhiteSpace($helperOutput)) {
+    Stop-Launcher \'HELPER_SUCCESS_OUTPUT_MISSING\' 46
+}
+if ($helperOutput -cne $expectedSuccess) {
+    Stop-Launcher \'HELPER_UNEXPECTED_OUTPUT\' 47
+}
+
+[Console]::Out.Write($helperOutput)''' ScriptOutput=> PowershellOutput
+RAW_COMPONENT C06_FIXED_LAUNCHER_RUNSCRIPT END
+
+RAW COMPONENT METADATA C07_EXACT_SUCCESS_MODE_GATE
+RAW_COMPONENT C07_EXACT_SUCCESS_MODE_GATE BEGIN
+    IF PowershellOutput = $'''{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}''' THEN
+        IF RunMode = $'''NORMAL''' THEN
+            SET ScriptGatePassed TO True
+RAW_COMPONENT C07_EXACT_SUCCESS_MODE_GATE END
+
+RAW COMPONENT METADATA C08_TARGET_SHEET_ACTIVATION
+RAW_COMPONENT C08_TARGET_SHEET_ACTIVATION BEGIN
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''Target'''
+RAW_COMPONENT C08_TARGET_SHEET_ACTIVATION END
+
+RAW COMPONENT METADATA C09_NUMERIC_WRITE
+RAW_COMPONENT C09_NUMERIC_WRITE BEGIN
+            SET NumericWriteEntered TO True
+            Excel.WriteToExcel.WriteCell Instance: Work Value: Source4 Column: $'''D''' Row: 2
+RAW_COMPONENT C09_NUMERIC_WRITE END
+
+RAW COMPONENT METADATA C10_SAVE_CLOSE_REOPEN_READBACK
+RAW_COMPONENT C10_SAVE_CLOSE_REOPEN_READBACK BEGIN
+            SET SaveAsEntered TO True
+            Excel.SaveExcel.SaveAs Instance: Work DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\result.xlsx'''
+            Excel.CloseExcel.Close Instance: Work
+            Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r2-r3-string-stop\\trials\\EX03-R2R3-POSTFIX-20260917-T1\\normal\\runtime\\result.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Reopened
+            Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''Target'''
+            Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''A''' StartRow: 2 EndColumn: $'''D''' EndRow: 2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback
+            Excel.CloseExcel.Close Instance: Reopened
+RAW_COMPONENT C10_SAVE_CLOSE_REOPEN_READBACK END
+
+RAW COMPONENT METADATA C11_JSON_VALUE_TYPE_COMPARE
+RAW_COMPONENT C11_JSON_VALUE_TYPE_COMPARE BEGIN
+            SET Saved1 TO Readback[0][0]
+            SET Saved2 TO Readback[0][1]
+            SET Saved3 TO Readback[0][2]
+            SET Saved4 TO Readback[0][3]
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved1 } Json=> Saved1Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved2 } Json=> Saved2Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved3 } Json=> Saved3Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved4 } Json=> Saved4Json
+            SET Source1VsSaved TO Source1Json = Saved1Json
+            SET Source2VsSaved TO Source2Json = Saved2Json
+            SET Source3VsSaved TO Source3Json = Saved3Json
+            SET Source4VsSaved TO Source4Json = Saved4Json
+            SET ProbeState TO $'''SUCCESS_GATE_PASSED_SAVED_READBACK_READY'''
+RAW_COMPONENT C11_JSON_VALUE_TYPE_COMPARE END
+
+RAW COMPONENT METADATA C12_FAILURE_CLOSE_NO_SAVE
+RAW_COMPONENT C12_FAILURE_CLOSE_NO_SAVE BEGIN
+        ELSE
+            Excel.CloseExcel.Close Instance: Work
+            SET ProbeState TO $'''MODE_NOT_NORMAL_NO_SAVE'''
+        END
+    ELSE
+        Excel.CloseExcel.Close Instance: Work
+        SET ProbeState TO $'''SCRIPT_NOT_SUCCESS_NO_SAVE'''
+    END
+END
+RAW_COMPONENT C12_FAILURE_CLOSE_NO_SAVE END
+
+END OF SELF-CONTAINED A3 BUNDLE
+The raw blocks are captured source. The assembly rules and E-lines are derived teaching material, not a complete fixed-EX03 answer and not an executed A3 flow.
