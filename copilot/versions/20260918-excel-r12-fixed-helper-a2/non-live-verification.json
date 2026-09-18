@@ -1,0 +1,396 @@
+{
+  "schema_version": 1,
+  "candidate_id": "20260918-excel-r12-fixed-helper-a2",
+  "route_id": "EX03-R12-FIXED-HELPER-COPILOT-A2",
+  "decision": "PASS_TEACHING_PREPARATION_NON_LIVE_ONLY",
+  "checks": {
+    "protected_source_sha256_all_match": true,
+    "a1_instruction_bundle_manifest_placement_response_assessment_unchanged": true,
+    "same_version_bundle_internal_index_present": true,
+    "required_raw_components_in_same_bundle": true,
+    "raw_component_count": 12,
+    "raw_components_byte_exact_to_cited_source_slices": true,
+    "requirement_count": 11,
+    "requirements_covered": 11,
+    "missing_required_steps": [],
+    "decoded_launcher_exact_before_terminal_lf": true,
+    "decoded_launcher_terminal_lf_restored_sha256": "1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1",
+    "decoded_launcher_matches_fixed_launcher_sha256": true,
+    "fixed_launcher_sha256": "1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1",
+    "instruction_uses_internal_index_not_external_index": true,
+    "instruction_allows_verified_reuse_combination_and_listed_parameter_changes": true,
+    "new_combination_marked_not_run": true,
+    "prior_complete_flow_execution_not_generation_prerequisite": true,
+    "no_fabrication_rule_preserved": true,
+    "complete_fixed_ex03_robin_absent": true,
+    "fixed_grader_values_absent": true,
+    "fixed_ex03_full_wiring_absent": true,
+    "helper_body_absent": true,
+    "invocation_json_absent": true,
+    "teaching_test_independence": "PASS"
+  },
+  "components": [
+    {
+      "id": "C01_STATE_INIT",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "source_lines": [
+        1,
+        4
+      ],
+      "excerpt_sha256": "da87bb12ea194095ca8c672b92d1c4535a873437b3ba6235c7b288c60e386fd4",
+      "excerpt_bytes": 131,
+      "dependencies": [],
+      "mutable_parameters": [
+        "state variable names",
+        "initial state label"
+      ],
+      "execution_scope": "captured and executed only in the R2/R3 one-row probe",
+      "bundle_exact": true
+    },
+    {
+      "id": "C02_OUTPUT_GUARD",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "source_lines": [
+        5,
+        7
+      ],
+      "excerpt_sha256": "0694d74e8c308f95861baab1535dd6436bb749eadb84a4a172b1674f8ef47de5",
+      "excerpt_bytes": 268,
+      "dependencies": [
+        "C01_STATE_INIT"
+      ],
+      "mutable_parameters": [
+        "guard path",
+        "state variable name and stop label"
+      ],
+      "execution_scope": "captured and executed around the complete R2/R3 normal probe; dedicated output-guard recopy is separately SHA-pinned",
+      "bundle_exact": true
+    },
+    {
+      "id": "C03_READONLY_TYPED_RANGE",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "source_lines": [
+        8,
+        11
+      ],
+      "excerpt_sha256": "918765252d61a3f6a34c9b443f4eaa0aa0161cd86ab97f043c8544ad19842932",
+      "excerpt_bytes": 629,
+      "dependencies": [
+        "C02_OUTPUT_GUARD"
+      ],
+      "mutable_parameters": [
+        "input path",
+        "instance name",
+        "sheet",
+        "range",
+        "range output name",
+        "repeat for second input"
+      ],
+      "execution_scope": "captured and executed for one read-only source range in the R2/R3 probe; scalar/type recopy is separately SHA-pinned",
+      "bundle_exact": true
+    },
+    {
+      "id": "C04_JSON_FILE_HANDOFF",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "source_lines": [
+        12,
+        26
+      ],
+      "excerpt_sha256": "4a33eca4fc68c92ac75fbd00ecae60c9d84cd142f2c3e7c8570428bc080707c5",
+      "excerpt_bytes": 2273,
+      "dependencies": [
+        "C03_READONLY_TYPED_RANGE"
+      ],
+      "mutable_parameters": [
+        "data slot count/indexes",
+        "variable names",
+        "handoff paths",
+        "mode value"
+      ],
+      "execution_scope": "captured and executed only with four source values plus mode in R2/R3",
+      "bundle_exact": true
+    },
+    {
+      "id": "C05_EDITABLE_WORK_OPEN",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "source_lines": [
+        27,
+        27
+      ],
+      "excerpt_sha256": "8b661b3545f377c99a6b25e7aa026c96bf613ff110c1346c41092d7511084e93",
+      "excerpt_bytes": 306,
+      "dependencies": [
+        "C02_OUTPUT_GUARD",
+        "C04_JSON_FILE_HANDOFF"
+      ],
+      "mutable_parameters": [
+        "work-copy path",
+        "instance name"
+      ],
+      "execution_scope": "captured and executed only in the R2/R3 work-copy probe",
+      "bundle_exact": true
+    },
+    {
+      "id": "C06_FIXED_LAUNCHER_RUNSCRIPT",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin",
+      "source_sha256": "da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa",
+      "source_lines": [
+        41,
+        100
+      ],
+      "excerpt_sha256": "e42dce038ff84f0af9d915db7146fbbe2088a583157f23a5935236305fbe0394",
+      "excerpt_bytes": 2300,
+      "dependencies": [
+        "C04_JSON_FILE_HANDOFF",
+        "C05_EDITABLE_WORK_OPEN"
+      ],
+      "mutable_parameters": [],
+      "execution_scope": "captured, saved, re-copied, and executed only in fixed-helper T2 auxiliary Run1",
+      "bundle_exact": true
+    },
+    {
+      "id": "C07_EXACT_SUCCESS_MODE_GATE",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin",
+      "source_sha256": "da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa",
+      "source_lines": [
+        101,
+        103
+      ],
+      "excerpt_sha256": "9dc3042fc22af7b0a0e90c784ef208828102af2a28087cf385f331ae1af2d412",
+      "excerpt_bytes": 206,
+      "dependencies": [
+        "C06_FIXED_LAUNCHER_RUNSCRIPT"
+      ],
+      "mutable_parameters": [],
+      "execution_scope": "captured, saved, re-copied, and executed only in fixed-helper T2 auxiliary Run1",
+      "bundle_exact": true
+    },
+    {
+      "id": "C08_TARGET_SHEET_ACTIVATION",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "source_lines": [
+        28,
+        28
+      ],
+      "excerpt_sha256": "9331dd5b830b9854e943e4b0e2c253d13ecc825c85b39efd436e2b9f61b537e6",
+      "excerpt_bytes": 89,
+      "dependencies": [
+        "C07_EXACT_SUCCESS_MODE_GATE"
+      ],
+      "mutable_parameters": [
+        "instance name",
+        "target sheet",
+        "repeat between target-sheet groups",
+        "leading indentation inside success gate"
+      ],
+      "execution_scope": "captured and executed only for the R2/R3 target sheet; success-gate nesting is a new composition",
+      "bundle_exact": true
+    },
+    {
+      "id": "C09_NUMERIC_WRITE",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "source_lines": [
+        168,
+        169
+      ],
+      "excerpt_sha256": "c9745f104b057d9f380b535aadb467fa32a9062d6fa1e3989d5cf464e189be26",
+      "excerpt_bytes": 141,
+      "dependencies": [
+        "C04_JSON_FILE_HANDOFF",
+        "C07_EXACT_SUCCESS_MODE_GATE",
+        "C08_TARGET_SHEET_ACTIVATION"
+      ],
+      "mutable_parameters": [
+        "source variable",
+        "target column",
+        "target row",
+        "repeat count"
+      ],
+      "execution_scope": "captured and executed for one numeric write in the R2/R3 one-row probe",
+      "bundle_exact": true
+    },
+    {
+      "id": "C10_SAVE_CLOSE_REOPEN_READBACK",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "source_lines": [
+        170,
+        176
+      ],
+      "excerpt_sha256": "5cef87e70f5e723ea6bcb3316e6801cd3743a51c378deacb4a9cd2f98e3a85e0",
+      "excerpt_bytes": 1087,
+      "dependencies": [
+        "C09_NUMERIC_WRITE"
+      ],
+      "mutable_parameters": [
+        "output path",
+        "sheet",
+        "readback range",
+        "readback variable",
+        "repeat read for second rectangle"
+      ],
+      "execution_scope": "captured and executed for one readback rectangle in the R2/R3 one-row probe",
+      "bundle_exact": true
+    },
+    {
+      "id": "C11_JSON_VALUE_TYPE_COMPARE",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "source_lines": [
+        177,
+        189
+      ],
+      "excerpt_sha256": "96a84f395b60975c3f51372b2fc05e0f8d0d22e16580d993f369fa3b1e39556f",
+      "excerpt_bytes": 891,
+      "dependencies": [
+        "C04_JSON_FILE_HANDOFF",
+        "C10_SAVE_CLOSE_REOPEN_READBACK"
+      ],
+      "mutable_parameters": [
+        "readback indexes",
+        "variable names",
+        "comparison count",
+        "success state label"
+      ],
+      "execution_scope": "captured and executed for four positions in the R2/R3 one-row probe",
+      "bundle_exact": true
+    },
+    {
+      "id": "C12_FAILURE_CLOSE_NO_SAVE",
+      "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+      "source_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "source_lines": [
+        190,
+        198
+      ],
+      "excerpt_sha256": "e8715546a45126cfb1c6d192444d56e61283d7948117455fce390e686f83c194",
+      "excerpt_bytes": 272,
+      "dependencies": [
+        "C07_EXACT_SUCCESS_MODE_GATE"
+      ],
+      "mutable_parameters": [
+        "failure state labels",
+        "instance name"
+      ],
+      "execution_scope": "captured in R2/R3; script-rejection branch executed by its forced-exception negative run",
+      "bundle_exact": true
+    }
+  ],
+  "coverage": [
+    {
+      "id": "R01",
+      "requirement": "state initialization",
+      "components": [
+        "C01_STATE_INIT"
+      ],
+      "status": "COVERED"
+    },
+    {
+      "id": "R02",
+      "requirement": "existing-output no-write guard",
+      "components": [
+        "C02_OUTPUT_GUARD"
+      ],
+      "status": "COVERED"
+    },
+    {
+      "id": "R03",
+      "requirement": "read-only input, sheet activation, TypedValues read",
+      "components": [
+        "C03_READONLY_TYPED_RANGE"
+      ],
+      "status": "COVERED"
+    },
+    {
+      "id": "R04",
+      "requirement": "JSON primitive conversion and UTF-8 handoff save",
+      "components": [
+        "C04_JSON_FILE_HANDOFF"
+      ],
+      "status": "COVERED"
+    },
+    {
+      "id": "R05",
+      "requirement": "editable work-copy open",
+      "components": [
+        "C05_EDITABLE_WORK_OPEN"
+      ],
+      "status": "COVERED"
+    },
+    {
+      "id": "R06",
+      "requirement": "complete RunScript with fixed launcher",
+      "components": [
+        "C06_FIXED_LAUNCHER_RUNSCRIPT"
+      ],
+      "status": "COVERED"
+    },
+    {
+      "id": "R07",
+      "requirement": "exact-success and NORMAL branching",
+      "components": [
+        "C07_EXACT_SUCCESS_MODE_GATE"
+      ],
+      "status": "COVERED"
+    },
+    {
+      "id": "R08",
+      "requirement": "explicit target-sheet activation and numeric WriteCell",
+      "components": [
+        "C08_TARGET_SHEET_ACTIVATION",
+        "C09_NUMERIC_WRITE"
+      ],
+      "status": "COVERED"
+    },
+    {
+      "id": "R09",
+      "requirement": "SaveAs and close/reopen readback",
+      "components": [
+        "C10_SAVE_CLOSE_REOPEN_READBACK"
+      ],
+      "status": "COVERED"
+    },
+    {
+      "id": "R10",
+      "requirement": "saved value/type comparison through JSON",
+      "components": [
+        "C11_JSON_VALUE_TYPE_COMPARE"
+      ],
+      "status": "COVERED"
+    },
+    {
+      "id": "R11",
+      "requirement": "failure close/no-save",
+      "components": [
+        "C12_FAILURE_CLOSE_NO_SAVE"
+      ],
+      "status": "COVERED"
+    }
+  ],
+  "preserved_boundaries": {
+    "formal_r12_status": "FAIL_GENERATED_ROBIN_MISMATCH_AND_POWERSHELL_PARSE_ERROR_STOP_BEFORE_PAD",
+    "formal_r12_accepted": false,
+    "t2_decision": "PASS_FIXED_HELPER_AUXILIARY_NORMAL_RUN1",
+    "t2_scope": "Fixed-helper alternate-path auxiliary test only; not formal EX03-r12 acceptance.",
+    "r2r3_result": "PASS_NORMAL_AND_FORCED_EXCEPTION_ONE_RUN_EACH",
+    "a1_result": "REFUSED_NO_CODE_BLOCK_PAD_NOT_RUN",
+    "legacy_558_difference_record": "PRESERVED_NOT_RECLASSIFIED"
+  },
+  "scope": {
+    "copilot_send_count": 0,
+    "pad_save_recopy_count": 0,
+    "pad_run_count": 0,
+    "excel_run_count": 0,
+    "new_capture_count": 0,
+    "successful_probe_rerun_count": 0,
+    "full_regression": "NOT_RUN_BY_SCOPE",
+    "github_write_count": 0
+  }
+}
