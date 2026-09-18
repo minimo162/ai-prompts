@@ -1,8 +1,9 @@
 # EX03 fixed-helper mechanical Robin builder P1
 
 This is a local, fixed-EX03 prototype separate from the A4 Copilot generation
-route. It does not create A5, send to Copilot, edit the A4 response, or run PAD
-or Excel.
+route. The builder does not create A5, send to Copilot, edit the A4 response,
+or run PAD or Excel. Separately authorized live evidence, when present, is kept
+under `trials/` and does not change that builder boundary.
 
 ## Inputs and output
 
@@ -48,11 +49,31 @@ rule SHAs are checked first.
 
 ## User-operation impact
 
-For local verification, the only added operation is the `--check` command
-above. If a later, separately authorized PAD trial uses this artifact, the user
-would still need to import the unmodified Robin into the dedicated flow and
-perform the existing save/re-copy/run gates. None of those live operations is
-performed or accepted here.
+For non-live local verification, the only added operation is the `--check`
+command above. A separately authorized PAD trial still requires the unmodified
+Robin in the dedicated flow and the existing save/re-copy/run gates. Such a
+trial is recorded independently under `trials/`; its result is not part of the
+builder's static acceptance claim.
+
+### Live PAD preplacement: A4 json_root
+
+Before a separately authorized live PAD Run, the verifier must read
+`json_root` from the fixed A4 `invocation.json` and
+`runtime.a4_json_root_absolute` from `wiring-spec.json`. The two absolute paths
+must be identical and must resolve to the synthetic test runtime directory
+`catalog/acceptance/issue38/runs/EX03-attempt1/a4-helper-json`.
+
+If that fixed directory is absent, the verifier creates that directory only.
+It must not delete existing files or change permissions. Before Run, the
+verifier checks that all eight fixed destinations (`source-1.json` through
+`source-7.json` and `mode.json`) have that directory as their parent, then
+writes, reads back, and removes one uniquely named temporary probe. The
+directory must be empty and writable afterward. The verifier also requires the
+fixed output to be absent and `work.xlsx` to remain byte-identical to the fixed
+template.
+
+The verifier preplaces only the directory. The saved PAD flow creates the eight
+JSON files during the Run; the verifier does not precreate or populate them.
 
 ## Scope boundary
 

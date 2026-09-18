@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2",
+  "result": "PASS_READY_FOR_SAVED_FLOW_IDENTITY_AND_ONE_NORMAL_RUN",
+  "baseline_commit": "dc927db9acce13f8c51cfee81b85622bd22852e2",
+  "fixed_sha256": {
+    "generated": "3d9c1671a5debc6f0247cef8c5e0d414dc07246a7cb7ce0ac6245fb860967e47",
+    "verification": "3578d75f4c7fa7f3c6b5b997b82094299d339c30780faf1453f017a2dee241e0",
+    "wiring": "c62ec6951bdd36e895acfc937d7a1f390e75e8d984b26a9531cc2c88d970f58c",
+    "bundle": "62695ca3c007ab291732657ddaeca66723a57115d151efc7b1730ef5341c514c",
+    "assembly": "57305c13d9bff292d7c7c2bc3e3152bcd75b85fd1bd800679df1671f79c7bc6e",
+    "a4_manifest": "525c5450e1e17e68d50dbaf25556e77e6e8393cf2ad2cd15792b54859ae7242f",
+    "helper": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+    "invocation": "5c5a2008f55296a48f63fa65178aab971e4212455bb2af58e33149bdcaec40d8",
+    "launcher": "a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5",
+    "fixed_request": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+    "fixed_spec": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+    "fixed_expected": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+    "template": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "input_a": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "input_b": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+  },
+  "builder_sha256": "dc6363953d120acf9623e1c28e777b1496c3da9c392704ae4a5c79b3808dea62",
+  "json_contract": {
+    "invocation_path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-a4/invocation.json",
+    "wiring_path": "copilot/versions/20260918-excel-r12-fixed-helper-a4/wiring-spec.json",
+    "invocation_json_root": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json",
+    "wiring_json_root": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json",
+    "roots_exact": true,
+    "inside_synthetic_runtime": true,
+    "destination_count": 8,
+    "destinations": [
+      "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-1.json",
+      "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-2.json",
+      "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-3.json",
+      "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-4.json",
+      "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-5.json",
+      "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-6.json",
+      "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-7.json",
+      "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\mode.json"
+    ],
+    "all_parent_directories_exact_json_root": true
+  },
+  "preplacement": {
+    "created_directory": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json",
+    "created_directory_was_absent": true,
+    "existing_file_deleted": false,
+    "permission_changed": false,
+    "write_probe_name": ".live2-write-probe-e3368cac229947f2b8d591d9fb856b88.tmp",
+    "write_probe_sha256": "ec9cda16b71672eaa01b57c238b31eaeb24e2c2f00bde986cf4120e613ff466d",
+    "write_probe_readback_exact": true,
+    "write_probe_removed": true,
+    "directory_empty_after_probe": true,
+    "directory_writable": true
+  },
+  "pre_run": {
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "template_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_matches_template": true,
+    "work_before_path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/work-before.xlsx",
+    "output_absent": true,
+    "excel_not_running": true
+  },
+  "live1_protected": [
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1/pad-recopy-before-run.robin",
+      "git_blob": "79733a7fa7e3bd1ac6e2f0d29930208509a033b6",
+      "sha256": "570b26c57abeca0e9b8e19368c6542a529b44994bac518f2e70cb69baec52c0f"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1/pad-recopy.json",
+      "git_blob": "d9b898fc186af7d53611ec0bffa766066f04637a",
+      "sha256": "6dd4fb497a35d4b248eeae8000c7e4f6e1f2e4c496df43e2e248ede5579e2143"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1/plan.json",
+      "git_blob": "ca20a99ae5ec5b4cc47d18cf39b3d9d86f430e4f",
+      "sha256": "0c0a22a1bffc98befa329600922d1a08e9b0be0325b610b179785c001da5a7be"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1/preflight.json",
+      "git_blob": "56795d4eee38be2025b29dcbe52ec2e05b8606c0",
+      "sha256": "3601a81e886a2f602d04219fd7730bb7b18f372f3cb83aa2b7ea39ecc4aead03"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1/result.json",
+      "git_blob": "be66a7c6dfe34b9e9bd619235ec0650bcd7ff5bd",
+      "sha256": "b7603ef12703d677f24814509890d6046bde8e5882e8f82e48766bcf5d140231"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1/RESULT.md",
+      "git_blob": "0d297ccf10e02f92e1a01aa04b0d896a556cd5e6",
+      "sha256": "c0fba07036dd70d382bc1a31768f95410e74e636188d533ca8ce77d452d0a4f2"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1/run1/artifact-absence.json",
+      "git_blob": "928ccc4e6855fc75d2e2e2972ff062f0346d2ab4",
+      "sha256": "0435ea30a1f934e225f95a420210db7e4e75ac2bbd1d323402c6c3ef60b59f9b"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1/run1/pad-run.json",
+      "git_blob": "c580330235da8608165dffa726096bd435026d79",
+      "sha256": "25a2d8e04e193b48833a8a02593736c26417389530d2f12b293b23f17edc6ba3"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1/work-before.xlsx",
+      "git_blob": "63d3a5e2c1366c76961620acfbe51456b03cbad4",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+    }
+  ],
+  "non_repetition": {
+    "Build.py_check": "NOT_REPEATED; fixed committed SHA verified directly",
+    "focused_builder_tests": "NOT_REPEATED",
+    "full_regression": "NOT_REPEATED"
+  },
+  "recorded_at": "2026-09-18T13:38:59.311564+00:00"
+}

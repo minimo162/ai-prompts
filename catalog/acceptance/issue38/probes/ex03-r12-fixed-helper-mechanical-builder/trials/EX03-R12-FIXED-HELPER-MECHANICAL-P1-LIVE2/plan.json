@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2",
+  "baseline_commit": "dc927db9acce13f8c51cfee81b85622bd22852e2",
+  "classification": "MECHANICAL_BUILDER_PATH_LIVE2_ONE_NORMAL_RUN_ONLY",
+  "source_saved_flow": {
+    "trial": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1",
+    "recopy_sha256": "570b26c57abeca0e9b8e19368c6542a529b44994bac518f2e70cb69baec52c0f",
+    "repaste_allowed": false,
+    "resave_allowed": false
+  },
+  "authorization": {
+    "create_fixed_json_root": 1,
+    "write_probe_create_delete": 1,
+    "saved_flow_identity_recopy": 1,
+    "normal_pad_runs": 1,
+    "additional_runs": 0,
+    "run2": 0,
+    "copilot_sends": 0,
+    "candidate_creation": 0,
+    "builder_or_fixed_code_modification": 0,
+    "github_writes": 0
+  },
+  "successful_generation_checks_repeated": false,
+  "full_regression_repeated": false
+}

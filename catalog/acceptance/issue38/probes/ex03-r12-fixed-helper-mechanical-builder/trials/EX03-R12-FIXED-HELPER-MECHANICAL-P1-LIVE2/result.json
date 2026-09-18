@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2",
+  "decision": "PASS_MECHANICAL_BUILDER_PATH_LIVE2_NORMAL_RUN1",
+  "scope": "This one fixed mechanical-builder-path Run only; not Copilot generation or Issue #38 overall acceptance.",
+  "baseline_commit": "dc927db9acce13f8c51cfee81b85622bd22852e2",
+  "preplacement": {
+    "json_root": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json",
+    "invocation_wiring_exact": true,
+    "inside_synthetic_runtime": true,
+    "eight_destination_parents_ready": true,
+    "write_probe_readback_and_cleanup": true,
+    "existing_file_deleted": false,
+    "permission_changed": false
+  },
+  "execution_identity": {
+    "generated_robin_sha256": "3d9c1671a5debc6f0247cef8c5e0d414dc07246a7cb7ce0ac6245fb860967e47",
+    "saved_flow_recopy_sha256": "570b26c57abeca0e9b8e19368c6542a529b44994bac518f2e70cb69baec52c0f",
+    "byte_exact_to_live1_saved_flow": true,
+    "repaste_count": 0,
+    "resave_count": 0
+  },
+  "pad": {
+    "flow_name": "無題 (3)",
+    "run_count": 1,
+    "terminal": {
+      "status_bar": "READY",
+      "run_button_enabled": true,
+      "stop_button_disabled": true,
+      "designer_error_observed": false,
+      "normal_termination_observed": true
+    },
+    "powershell_stdout": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}",
+    "stderr_empty_directly_proven": false,
+    "probe_state": "SUCCESS_GATE_PASSED_SAVED_READBACK_READY",
+    "value_type_match_true": 12,
+    "value_type_match_false": 0
+  },
+  "artifact": {
+    "result_path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/result.xlsx",
+    "result_sha256": "49e4ad48e711ecbde7a0b6ec625dad8d2c74247e54eec69fe230aaf5366da5f8",
+    "result_bytes": 11310,
+    "runtime_output_preserved_path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/runtime-output-after-run.xlsx",
+    "runtime_output_absent_after_preservation": true,
+    "json_root_preserved_empty": true,
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_matches_template": true
+  },
+  "comparison": {
+    "target_cells": {
+      "checked": 12,
+      "mismatches": 0,
+      "status": "MATCH_FIXED_EX03_TEXT_NUMBER_SCOPE"
+    },
+    "outside_cells": {
+      "checked": 468,
+      "mismatches": [],
+      "status": "MATCH_SAVED_XLSX_ONLY"
+    },
+    "formulas": {
+      "mismatches": 0,
+      "status": "PASS"
+    },
+    "effective_format": {
+      "checked_cells": 480,
+      "checked_rows": 48,
+      "checked_columns": 30,
+      "difference_attribute_counts": {
+        "cell_style": 0,
+        "row_dimension": 0,
+        "column_dimension": 0,
+        "sheet_structure": 0
+      },
+      "status": "MATCH_EFFECTIVE_FORMAT"
+    },
+    "f6": {
+      "value": "100%",
+      "dotnet_type": "System.String",
+      "number_format": "G/標準",
+      "prefix": "",
+      "has_formula": false,
+      "status": "PASS_F6_SYSTEM_STRING_100_PERCENT_ORIGINAL_FORMAT_EMPTY_PREFIX_NO_FORMULA"
+    },
+    "legacy_raw_diagnostic": {
+      "status": "FAIL_PRESERVED_NOT_USED_AS_EFFECTIVE_FORMAT_GATE",
+      "failure_counts": {
+        "row_dimensions": 48,
+        "column_dimensions": 30,
+        "styles": 480
+      },
+      "total": 558
+    },
+    "original_inputs_unchanged": true,
+    "template_unchanged": true,
+    "work_unchanged": true
+  },
+  "preservation": {
+    "live1_stop_evidence_unchanged": true,
+    "fixed_helper_invocation_launcher_builder_robin_unchanged": true,
+    "additional_pad_run_count": 0,
+    "run2_count": 0,
+    "copilot_send_count": 0,
+    "github_write_count": 0
+  },
+  "remaining": [
+    "The saved Robin has no separate stderr PAD variable; empty stderr is not directly claimed.",
+    "This PASS is limited to this fixed mechanical-builder-path LIVE2 Run1.",
+    "Copilot generation and Issue #38 overall acceptance are not established by this trial."
+  ],
+  "decided_at": "2026-09-18T13:54:20.123658+00:00"
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2",
+  "run_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2-RUN1",
+  "flow_name": "無題 (3)",
+  "execution_requested_during_observation": false,
+  "method": "PAD Variables pane after the same Run: PowershellOutput was opened and canceled without edits; the ProbeState filter and fixed assignment action showed the success-gate value; Position ValueTypeMatch search showed 12 results, all true.",
+  "powershell_output": {
+    "observed_value": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}",
+    "match": true
+  },
+  "probe_state": {
+    "observed_value": "SUCCESS_GATE_PASSED_SAVED_READBACK_READY",
+    "match": true
+  },
+  "value_type_matches": {
+    "Position1ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "Position2ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "Position3ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "Position4ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "Position5ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "Position6ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "Position7ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "Position8ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "Position9ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "Position10ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "Position11ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "Position12ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    }
+  },
+  "counts": {
+    "true": 12,
+    "false": 0,
+    "total": 12
+  },
+  "status": "PASS_SUCCESS_JSON_PROBE_STATE_AND_12_VALUE_TYPE_MATCH"
+}
