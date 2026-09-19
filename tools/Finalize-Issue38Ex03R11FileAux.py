@@ -343,7 +343,8 @@ def validate_pad_records(
 
 
 def validate_typed_report(
-    typed: dict, run_number: int, result: Path, result_sha: str, contract: dict
+    typed: dict, run_number: int, result: Path, result_sha: str, contract: dict,
+    *, expected_run_label: str | None = None,
 ) -> None:
     require_keys(
         typed,
@@ -363,7 +364,10 @@ def validate_typed_report(
     )
     require(typed["kind"] == "EX03_FIXED_TEXT_NUMBER_TYPED_TRANSFER", "typed case mismatch")
     require(
-        typed["run_label"] == f"EX03-R11-FILE-AUX1-RUN{run_number}",
+        typed["run_label"] == (
+            f"EX03-R11-FILE-AUX1-RUN{run_number}"
+            if expected_run_label is None else expected_run_label
+        ),
         "typed Run label mismatch",
     )
     require(typed["status"] == "MATCH_FIXED_EX03_TEXT_NUMBER_SCOPE", "typed status mismatch")

@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import copy
 import json
 import os
 import shutil
@@ -37,6 +36,7 @@ def load_module(name: str, path: Path):
 
 
 base = load_module("issue38_mechanical_live1_recorder", PROBE / "LiveTrial.py")
+reports = load_module("issue38_mechanical_report_validator", ROOT / "tools/Finalize-Issue38Ex03R11FileAux.py")
 
 RUNTIME = base.RUNTIME
 WORK = base.WORK
@@ -387,18 +387,116 @@ def capture_run(args: argparse.Namespace) -> None:
     print(json.dumps({"status": "PASS_LIVE2_RUN1_PRESERVED", "output_sha256": output_sha, "handoff_files": 8}, ensure_ascii=False))
 
 
-def validate_pad_records(run: dict, variables: dict, artifact: dict) -> None:
-    for record in (run, variables, artifact):
-        require(record["trial_id"] == TRIAL_ID and record["run_id"] == RUN_ID, "Run evidence identity mismatch")
-    require(run["run_index"] == 1 and run["run_invocations_total"] == 1, "Run count mismatch")
-    require(run["status"] == "PASS_TERMINAL_READY_SUCCESS_JSON_NO_DESIGNER_ERROR", "PAD Run status mismatch")
-    require(run["powershell"]["stdout_observed"] == EXPECTED_SUCCESS, "PowerShell observation mismatch")
-    require(variables["probe_state"] == {"observed_value": EXPECTED_STATE, "match": True}, "ProbeState observation mismatch")
-    require(variables["counts"] == {"true": 12, "false": 0, "total": 12}, "PAD comparison count mismatch")
+def validate_record_identity(record: dict, trial_id: str, run_id: str, label: str) -> None:
+    reports.require_keys(record, {"schema_version", "trial_id", "run_id"}, label)
+    require(type(record["schema_version"]) is int and record["schema_version"] == 1, f"{label} schema mismatch")
+    require(record["trial_id"] == trial_id and record["run_id"] == run_id, f"{label} trial/Run mismatch")
+
+
+def validate_observed_value(record: dict, expected: object, label: str) -> None:
+    reports.require_keys(record, {"observed_value", "match"}, label)
+    require(type(record["observed_value"]) is type(expected) and record["observed_value"] == expected, f"{label} value mismatch")
+    require(record["match"] is True, f"{label} match flag mismatch")
+
+
+def validate_pad_observations(
+    run: dict, variables: dict, trial_id: str, run_id: str, *, profile: str,
+) -> None:
+    """Read-only gate for LIVE2/LIVE3 records, including the ungraded guard branch."""
+    statuses = {
+        "LIVE2": ("PASS_TERMINAL_READY_SUCCESS_JSON_NO_DESIGNER_ERROR", "PASS_SUCCESS_JSON_PROBE_STATE_AND_12_VALUE_TYPE_MATCH"),
+        "LIVE3_NORMAL": ("PASS_NORMAL_TERMINAL_READY_SUCCESS_JSON", "PASS_NORMAL_SUCCESS_GATE_AND_12_VALUE_TYPE_MATCH"),
+        "LIVE3_GUARD": ("PASS_GUARD_TERMINAL_READY_NO_DESIGNER_ERROR", "PASS_OUTPUT_GUARD_STATE_AND_NON_ENTRY_FLAGS"),
+    }
+    require(profile in statuses, "Unknown PAD observation profile")
+    for label, record in (("pad-run", run), ("pad-variables", variables)):
+        validate_record_identity(record, trial_id, run_id, label)
+    reports.require_keys(run, {"status", "terminal_observation"}, "pad-run")
+    reports.require_keys(variables, {"status", "probe_state", "value_type_matches"}, "pad-variables")
+    require((run["status"], variables["status"]) == statuses[profile], "PAD observation status mismatch")
+    indexes = ({"run_index": 1, "run_invocations_total": 1} if profile == "LIVE2" else
+               {"run_index_within_trial": 1, "campaign_run_index": 2 if profile == "LIVE3_GUARD" else 1})
+    reports.require_keys(run, set(indexes), "pad-run indexes")
+    require(all(type(run[key]) is int and run[key] == value for key, value in indexes.items()), "PAD Run count mismatch")
+    terminal_expected = {
+        "status_bar": "READY", "run_button_enabled": True, "stop_button_disabled": True,
+        "designer_error_observed": False, "normal_termination_observed": True,
+    }
+    terminal = reports.require_keys(run["terminal_observation"], set(terminal_expected), "PAD terminal")
+    require(all(type(terminal[key]) is type(value) and terminal[key] == value for key, value in terminal_expected.items()), "PAD terminal state mismatch")
+
+    if profile == "LIVE3_GUARD":
+        validate_observed_value(variables["probe_state"], "OUTPUT_EXISTS_NO_RUN", "guard ProbeState")
+        flags = {"script_gate_passed", "numeric_write_entered", "save_as_entered"}
+        reports.require_keys(variables, flags | {"powershell_output"}, "guard observations")
+        for key in flags:
+            validate_observed_value(variables[key], False, key)
+            reports.require_keys(variables[key], {"expected"}, key)
+            require(variables[key]["expected"] is False, f"{key} expected value changed")
+        require(variables["value_type_matches"] == "NOT_EVALUATED_ON_GUARD_BRANCH; persisted values are not mismatches or new PASS evidence", "guard type comparisons must remain NOT_EVALUATED")
+        require(variables["powershell_output"] == "NOT_GRADED; value may persist from the preceding normal Run", "guard stdout must remain ungraded")
+        return
+
+    reports.require_keys(run, {"powershell"}, "normal pad-run")
+    powershell = reports.require_keys(run["powershell"], {"stdout_observed", "stdout_matches_fixed_success_json", "stderr_empty_not_claimed"}, "normal PowerShell")
+    require(powershell["stdout_observed"] == EXPECTED_SUCCESS and powershell["stdout_matches_fixed_success_json"] is True, "PowerShell observation mismatch")
+    require(powershell["stderr_empty_not_claimed"] is True, "stderr was not directly observed")
+    validate_observed_value(variables["probe_state"], EXPECTED_STATE, "normal ProbeState")
     names = {f"Position{index}ValueTypeMatch" for index in range(1, 13)}
-    require(set(variables["value_type_matches"]) == names, "PAD comparison variable set mismatch")
-    require(all(item == {"observed_value": True, "match": True} for item in variables["value_type_matches"].values()), "one or more PAD comparisons are false")
-    require(artifact["status"] == "PASS_LIVE2_RUN1_ARTIFACT_AND_HANDOFF_PRESERVED", "artifact status mismatch")
+    matches = reports.require_keys(variables["value_type_matches"], names, "PAD comparisons")
+    require(set(matches) == names, "PAD comparison variable set mismatch")
+    for name, item in matches.items():
+        validate_observed_value(item, True, name)
+    reports.require_keys(variables, {"counts"}, "normal PAD variables")
+    counts = reports.require_keys(variables["counts"], {"true", "false", "total"}, "PAD counts")
+    observed_counts = {
+        "true": sum(item["observed_value"] is True for item in matches.values()),
+        "false": sum(item["observed_value"] is False for item in matches.values()),
+        "total": len(matches),
+    }
+    require(all(type(value) is int for value in counts.values()) and counts == observed_counts == {"true": 12, "false": 0, "total": 12}, "PAD comparison counts do not match individual observations")
+    if profile == "LIVE2":
+        reports.require_keys(run, {"flow_name"}, "LIVE2 pad-run")
+        reports.require_keys(variables, {"flow_name", "execution_requested_during_observation", "powershell_output"}, "LIVE2 variables")
+        require(variables["flow_name"] == run["flow_name"], "LIVE2 flow identity mismatch")
+        require(variables["execution_requested_during_observation"] is False, "observation requested execution")
+        validate_observed_value(variables["powershell_output"], EXPECTED_SUCCESS, "LIVE2 stdout")
+    else:
+        reports.require_keys(variables, {"type_comparison_evaluation"}, "LIVE3 normal variables")
+        require(variables["type_comparison_evaluation"] == "EVALUATED_THIS_NORMAL_RUN", "normal type comparisons were not evaluated")
+
+
+def validate_normal_records(
+    run: dict, variables: dict, artifact: dict, typed: dict, legacy: dict, native: dict,
+    f6: dict, result_xlsx: Path, *, trial_id: str, run_id: str, profile: str,
+) -> str:
+    """Validate archived observations/reports without rewriting labels or moving files."""
+    require(profile in {"LIVE2", "LIVE3_NORMAL"}, "Not a normal Run profile")
+    validate_pad_observations(run, variables, trial_id, run_id, profile=profile)
+    validate_record_identity(artifact, trial_id, run_id, "artifact")
+    reports.require_keys(artifact, {"status", "runtime_output_path", "preserved_output_path", "output_sha256", "output_bytes", "work_sha256", "handoff_sha256"}, "artifact")
+    status = "PASS_LIVE2_RUN1_ARTIFACT_AND_HANDOFF_PRESERVED" if profile == "LIVE2" else "PASS_NORMAL_ARTIFACT_AND_HANDOFF_PRESERVED"
+    require(artifact["status"] == status, "artifact status mismatch")
+    result_sha = sha256(result_xlsx)
+    require(artifact["output_sha256"] == result_sha, "artifact/result SHA mismatch")
+    require(type(artifact["output_bytes"]) is int and artifact["output_bytes"] == result_xlsx.stat().st_size, "artifact/result size mismatch")
+    require(reports.path_is(artifact["preserved_output_path"], result_xlsx, "artifact preserved path"), "artifact preserved path mismatch")
+    require(reports.path_is(artifact["runtime_output_path"], OUTPUT, "artifact runtime path"), "artifact runtime path mismatch")
+    require(artifact["work_sha256"] == sha256(result_xlsx.parent / "work.xlsx") == EXPECTED_WORK_SHA, "artifact/work SHA mismatch")
+    names = {f"source-{index}.json" for index in range(1, 8)} | {"mode.json"}
+    handoff = reports.require_keys(artifact["handoff_sha256"], names, "artifact handoff")
+    require(set(handoff) == names, "artifact handoff file set mismatch")
+    require(all(handoff[name] == sha256(result_xlsx.parent / "handoff" / name) for name in names), "artifact handoff SHA mismatch")
+    flag = "preserved_output_exact" if profile == "LIVE2" else "runtime_output_retained_for_guard"
+    reports.require_keys(artifact, {flag}, "artifact output flag")
+    require(artifact[flag] is True, "artifact output flag mismatch")
+
+    contract = reports.fixed_contract()
+    reports.validate_typed_report(typed, 1, result_xlsx, result_sha, contract, expected_run_label=run_id)
+    reports.validate_legacy_report(legacy, result_sha, contract)
+    reports.validate_native_report(native, result_xlsx, result_sha, contract)
+    reports.validate_f6_report(f6, result_xlsx, result_sha, contract)
+    return result_sha
 
 
 def finalize() -> None:
@@ -417,19 +515,11 @@ def finalize() -> None:
     require(preflight["result"] == "PASS_READY_FOR_SAVED_FLOW_IDENTITY_AND_ONE_NORMAL_RUN", "preflight mismatch")
     require(identity["result"] == "PASS_CURRENT_SAVED_FLOW_BYTE_EXACT_TO_LIVE1_BASELINE", "identity mismatch")
     require(identity["byte_exact_to_live1_saved_flow"] is True, "saved flow is not LIVE1 exact")
-    validate_pad_records(pad_run, pad_variables, artifact)
     result_xlsx = RUN / "result.xlsx"
-    result_sha = sha256(result_xlsx)
-    require(artifact["output_sha256"] == result_sha, "artifact/result SHA mismatch")
-
-    shared = load_module("issue38_r11_live2_validator", ROOT / "tools/Finalize-Issue38Ex03R11FileAux.py")
-    contract = shared.fixed_contract()
-    typed_for_shared = copy.deepcopy(typed)
-    typed_for_shared["run_label"] = "EX03-R11-FILE-AUX1-RUN1"
-    shared.validate_typed_report(typed_for_shared, 1, result_xlsx, result_sha, contract)
-    shared.validate_legacy_report(legacy, result_sha, contract)
-    shared.validate_native_report(native, result_xlsx, result_sha, contract)
-    shared.validate_f6_report(f6, result_xlsx, result_sha, contract)
+    result_sha = validate_normal_records(
+        pad_run, pad_variables, artifact, typed, legacy, native, f6, result_xlsx,
+        trial_id=TRIAL_ID, run_id=RUN_ID, profile="LIVE2",
+    )
 
     require(README_MARKER in README.read_text(encoding="utf-8"), "README preplacement section is absent")
     require(sha256(WORK) == sha256(TEMPLATE) == EXPECTED_WORK_SHA, "work/template changed")

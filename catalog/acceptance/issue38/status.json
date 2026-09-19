@@ -91,7 +91,7 @@
       {
         "id": "A4",
         "decision": "STOPPED_FAIL_GENERATED_ROBIN_WIRING_AND_FIXED_LAUNCHER_MISMATCH",
-        "evidence": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A4-G1/RESULT.md",
+        "evidence": "catalog/acceptance/issue38/cycles/EX03-R12-FIXED-HELPER-A4-G1/RESULT.md",
         "details": "比較7/12、固定launcher SHA不一致・構文破損、未採取inline式",
         "normal_m365_sends": 1,
         "pad_runs": 0

@@ -46,7 +46,7 @@ Issue #38全体は未完了です。**固定EX03の機械ビルダー経路だ�
 | 試行 | 結果・停止理由 |
 |---|---|
 | [A1](cycles/EX03-r12-fixed-helper-A1-G1/RESULT.md) / [A2](cycles/EX03-r12-fixed-helper-A2-G1/RESULT.md) / [A3](cycles/EX03-r12-fixed-helper-A3-G1/FINAL-RESULT.md) | 生成拒否、必要なコードブロックなし、PAD未実施 |
-| [A4](cycles/EX03-r12-fixed-helper-A4-G1/RESULT.md) | 比較7/12で5件欠落、固定launcher不一致・PowerShell構文破損、未採取inline式。PAD前で停止 |
+| [A4](cycles/EX03-R12-FIXED-HELPER-A4-G1/RESULT.md) | 比較7/12で5件欠落、固定launcher不一致・PowerShell構文破損、未採取inline式。PAD前で停止 |
 | [正式r12](cycles/EX03-r12-G1/acceptance-status.json) | `FAIL_GENERATED_ROBIN_MISMATCH_AND_POWERSHELL_PARSE_ERROR_STOP_BEFORE_PAD`、未受入。r12の実機出力ガードも未確認 |
 
 Copilot経路や旧補助probeのPASSを機械ビルダーへ転用していません。逆に、今回整理した機械ビルダーの限定PASSで、正式r12・A1〜A4の停止やr11の正式提出条件FAILを解消した扱いにもしません。

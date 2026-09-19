@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import copy
 import json
 import os
 import shutil
@@ -509,30 +508,21 @@ def finalize_normal() -> None:
     native = load(NORMAL_RUN / "native-styles.json")
     f6 = load(NORMAL_RUN / "f6-native.json")
     result_xlsx = NORMAL_RUN / "result.xlsx"
-    result_sha = sha256(result_xlsx)
-
-    require(pad_run["trial_id"] == NORMAL_ID and pad_run["run_id"] == NORMAL_RUN_ID, "normal PAD identity mismatch")
-    require(pad_run["campaign_run_index"] == 1, "normal campaign Run index mismatch")
-    require(pad_run["status"] == "PASS_NORMAL_TERMINAL_READY_SUCCESS_JSON", "normal PAD status mismatch")
-    require(pad_run["powershell"]["stdout_observed"] == EXPECTED_SUCCESS, "normal PowerShell observation mismatch")
-    require(pad_variables["probe_state"] == {"observed_value": EXPECTED_STATE, "match": True}, "normal ProbeState mismatch")
-    require(pad_variables["counts"] == {"true": 12, "false": 0, "total": 12}, "normal PAD comparison count mismatch")
-    require(artifact["output_sha256"] == result_sha, "normal artifact SHA mismatch")
-
-    shared = load_module("issue38_r11_live3_validator", ROOT / "tools/Finalize-Issue38Ex03R11FileAux.py")
-    contract = shared.fixed_contract()
-    typed_for_shared = copy.deepcopy(typed)
-    typed_for_shared["run_label"] = "EX03-R11-FILE-AUX1-RUN1"
-    shared.validate_typed_report(typed_for_shared, 1, result_xlsx, result_sha, contract)
-    shared.validate_legacy_report(legacy, result_sha, contract)
-    shared.validate_native_report(native, result_xlsx, result_sha, contract)
-    shared.validate_f6_report(f6, result_xlsx, result_sha, contract)
+    result_sha = live2.validate_normal_records(
+        pad_run, pad_variables, artifact, typed, legacy, native, f6, result_xlsx,
+        trial_id=NORMAL_ID, run_id=NORMAL_RUN_ID, profile="LIVE3_NORMAL",
+    )
 
     live2_artifact = load(LIVE2_RUN / "artifact.json")
     live2_typed = load(LIVE2_RUN / "typed-transfer.json")
     live2_native = load(LIVE2_RUN / "native-styles.json")
     live2_f6 = load(LIVE2_RUN / "f6-native.json")
-    require(live2_artifact["output_sha256"] == sha256(LIVE2_RUN / "result.xlsx"), "LIVE2 artifact binding changed")
+    live2.validate_normal_records(
+        load(LIVE2_RUN / "pad-run.json"), load(LIVE2_RUN / "pad-variables.json"),
+        live2_artifact, live2_typed, load(LIVE2_RUN / "comparison.json"), live2_native,
+        live2_f6, LIVE2_RUN / "result.xlsx",
+        trial_id=live2.TRIAL_ID, run_id=live2.RUN_ID, profile="LIVE2",
+    )
     normal_projection = mapping_projection(typed)
     live2_projection = mapping_projection(live2_typed)
     require(len(normal_projection) == 12 and normal_projection == live2_projection, "normal/LIVE2 value-type-position comparison mismatch")
@@ -730,6 +720,59 @@ def capture_guard(args: argparse.Namespace) -> None:
     print(json.dumps({"status": "PASS_GUARD_RUN_CAPTURED", "probe_state": args.probe_state, "protected_files": len(after)}, ensure_ascii=False))
 
 
+def validate_guard_records(
+    normal: dict, preflight: dict, pad_run: dict, variables: dict, hashes: dict,
+) -> None:
+    """Read archived evidence only; never use persisted type flags as a new PASS."""
+    keys = live2.reports.require_keys
+    live2.validate_pad_observations(pad_run, variables, GUARD_ID, GUARD_RUN_ID, profile="LIVE3_GUARD")
+    live2.validate_record_identity(normal, NORMAL_ID, NORMAL_RUN_ID, "normal prerequisite")
+    for label, record in (("guard preflight", preflight), ("guard hashes", hashes)):
+        live2.validate_record_identity(record, GUARD_ID, GUARD_RUN_ID, label)
+    keys(normal, {"decision", "artifact", "guard_authorized_to_proceed"}, "normal prerequisite")
+    require(normal["decision"] == "PASS_LIVE3_NORMAL1_FULL_FIXED_SCOPE", "normal result changed")
+    require(normal["guard_authorized_to_proceed"] is True, "normal did not authorize guard")
+    artifact = keys(normal["artifact"], {"sha256", "bytes", "runtime_retained_for_guard"}, "normal artifact")
+    result_xlsx = NORMAL_RUN / "result.xlsx"
+    result_sha = sha256(result_xlsx)
+    require(artifact["sha256"] == result_sha, "normal prerequisite artifact SHA mismatch")
+    require(type(artifact["bytes"]) is int and artifact["bytes"] == result_xlsx.stat().st_size, "normal prerequisite artifact size mismatch")
+    require(artifact["runtime_retained_for_guard"] is True, "normal output was not retained for guard")
+
+    keys(preflight, {"result", "normal_prerequisite", "protected_before", "type_comparison_policy"}, "guard preflight")
+    require(preflight["result"] == "PASS_READY_FOR_ONE_EXISTING_OUTPUT_GUARD_RUN", "guard preflight status mismatch")
+    require(preflight["normal_prerequisite"] == {"trial_id": NORMAL_ID, "decision": normal["decision"], "artifact_sha256": result_sha}, "guard prerequisite binding mismatch")
+    require(preflight["type_comparison_policy"] == "NOT_EVALUATED_ON_GUARD_BRANCH; persisted PAD values are not graded", "guard type policy changed")
+    keys(hashes, {"status", "protected_before", "protected_after", "sha_size_mtime_exact", "existing_output_before_archive_sha256", "existing_output_after_archive_sha256"}, "guard hashes")
+    require(hashes["status"] == "PASS_ALL_GUARD_PROTECTED_FILES_UNCHANGED", "guard hash status mismatch")
+    require(hashes["sha_size_mtime_exact"] is True, "guard protected hashes were not exact")
+    # Runtime files have already been preserved; use their archived counterparts,
+    # not today's runtime inventory, and compare recorded mtime only before/after.
+    archives = {
+        relative(OUTPUT): result_xlsx,
+        relative(INPUT_A): INPUT_A, relative(INPUT_B): INPUT_B, relative(TEMPLATE): TEMPLATE,
+        relative(WORK): NORMAL_RUN / "work.xlsx",
+        **{relative(JSON_ROOT / name): NORMAL_RUN / "handoff" / name for name in HANDOFF_NAMES},
+    }
+    for label, records in (
+        ("preflight before", preflight["protected_before"]),
+        ("hashes before", hashes["protected_before"]),
+        ("hashes after", hashes["protected_after"]),
+    ):
+        keys(records, set(archives), label)
+        require(set(records) == set(archives), f"{label} protected file set mismatch")
+        for path, archived in archives.items():
+            item = keys(records[path], {"path", "sha256", "bytes", "last_write_ns"}, f"{label} {path}")
+            require(item["path"] == path, f"{label} nested path mismatch")
+            require(item["sha256"] == sha256(archived), f"{label} archived SHA mismatch: {path}")
+            require(type(item["bytes"]) is int and item["bytes"] == archived.stat().st_size, f"{label} size mismatch: {path}")
+            require(type(item["last_write_ns"]) is int and item["last_write_ns"] > 0, f"{label} mtime missing: {path}")
+    require_same_snapshot(preflight["protected_before"], hashes["protected_before"], "guard before-record binding")
+    require_same_snapshot(preflight["protected_before"], hashes["protected_after"], "final guard-protected files")
+    for stage in ("before", "after"):
+        require(hashes[f"existing_output_{stage}_archive_sha256"] == sha256(GUARD / f"existing-output-{stage}.xlsx") == result_sha, f"guard {stage} archive binding mismatch")
+
+
 def finalize() -> None:
     require(not (CAMPAIGN / "result.json").exists(), "campaign result already exists")
     normal = load(NORMAL / "result.json")
@@ -737,17 +780,7 @@ def finalize() -> None:
     pad_run = load(GUARD / "pad-run.json")
     variables = load(GUARD / "pad-variables.json")
     hashes = load(GUARD / "hashes-after-run.json")
-    require(normal["decision"] == "PASS_LIVE3_NORMAL1_FULL_FIXED_SCOPE", "normal result changed")
-    require(pad_run["trial_id"] == GUARD_ID and pad_run["run_id"] == GUARD_RUN_ID, "guard PAD identity mismatch")
-    require(pad_run["campaign_run_index"] == 2, "guard campaign Run index mismatch")
-    require(pad_run["status"] == "PASS_GUARD_TERMINAL_READY_NO_DESIGNER_ERROR", "guard terminal mismatch")
-    require(variables["probe_state"] == {"observed_value": EXPECTED_GUARD_STATE, "match": True}, "guard state evidence mismatch")
-    require(variables["script_gate_passed"]["observed_value"] is False, "script gate evidence mismatch")
-    require(variables["numeric_write_entered"]["observed_value"] is False, "numeric entry evidence mismatch")
-    require(variables["save_as_entered"]["observed_value"] is False, "SaveAs entry evidence mismatch")
-    require(hashes["sha_size_mtime_exact"] is True, "guard protected hashes were not exact")
-    require_same_snapshot(preflight["protected_before"], hashes["protected_after"], "final guard-protected files")
-    require(sha256(GUARD / "existing-output-before.xlsx") == sha256(GUARD / "existing-output-after.xlsx"), "guard archives changed")
+    validate_guard_records(normal, preflight, pad_run, variables, hashes)
     require(OUTPUT.is_file(), "fixed output disappeared before final preservation")
     validate_handoff()
     require(not excel_running(), "Excel is running during finalization")
