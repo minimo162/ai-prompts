@@ -1,113 +1,242 @@
 {
-  "schema_version": 1,
-  "version": "20260915-excel-r4",
-  "status": "PARTIAL_EX02_R4_REFUSED_STRICT_TYPE_MISSING",
+  "schema_version": 2,
+  "source_checkpoint": "3d593a6ada96af805e7800c6a7daff7b3cfc479d",
+  "status": "PARTIAL_FIXED_EX03_MECHANICAL_BUILDER_LIMITED_ACCEPTANCE",
   "issue_complete": false,
   "inherits_legacy_pass": false,
-  "environment": {
-    "browser": "Normal in-app M365 chat available; nine r3 new-chat requests with actual bundle attachments completed",
-    "copilot_uploads": 9,
-    "copilot_generation_requests": 9,
-    "pad_package": "Microsoft.PowerAutomateDesktop 11.2608.115.0",
-    "pad_run_requests": 8,
-    "additional_write_capture": "CAPTURED_FROM_PAD_UI; matrix probe values matched; full acceptance pending",
-    "prior_pad_route_failure": {
-      "pad_launch_attempts": 2,
-      "pad_launch_error": "GetCursorPos failed: Access denied (0x80070005)",
-      "pad_followup_observation": "Second goal turn: same GetCursorPos 0x80070005; sky.list_windows still has no PAD target. No more launch retries without environment change."
-    },
-    "pad_current_route": "AppxManifest PAD.Console executable + direct PowerShell UIA: startup, dedicated flow creation, paste/save/recopy succeeded",
-    "browser_followup": "CUA getState: only in-app browser; createBrowserTab chrome failed Browser is not available: chrome. No message submitted.",
-    "chrome_launch_followup": "Launch command rejected before execution: blocked by policy. No bypass or resend.",
-    "pad_current_followup": "Matrix, output guard and scalar comparison each completed two runs; focus recovery observations saved separately from original timeouts."
+  "path_base": "repository_root",
+  "recommended_route": {
+    "id": "FIXED_WIRING_VALIDATOR_DETERMINISTIC_BUILDER_PAD",
+    "architecture": "自然言語要求 → WIRING SPEC → validator → deterministic Robin builder → PAD",
+    "entry": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/README.md",
+    "wiring_owner": "VERIFIER_MANAGED",
+    "natural_language_to_wiring": "NOT_VERIFIED",
+    "builder_placement": "KEEP_EXISTING_SINGLE_IMPLEMENTATION_UNDER_PROBES",
+    "future_tools_entry": "PROPOSAL_ONLY_THIN_WRAPPER_NO_MOVE_OR_COPY"
   },
-  "cases": {
-    "EX01": {
-      "generation": "RESPONSE_CAPTURED",
-      "copy_ui": "CODE_COPY_BUTTON_OBSERVED",
-      "copy_payload": "606_UTF16_4_ROBIN_LINES; async completion observed; no edits",
-      "paste_save_recopy": "SAVED; instruction lines equal; PAD CRLF/final newline changed bytes",
-      "run1": "COMPLETION_OBSERVED; six display values and positions match; cell types not directly observed",
-      "run2": "COMPLETION_OBSERVED; six displayed values and positions match after clearing prior previews",
-      "non_live": "fixture active Decoy and expected source rectangle checked",
-      "scope_result": "2 runs match specified-sheet rectangle; individual runtime cell types not directly observed"
-    },
-    "EX02": {
-      "generation": "REFUSED_STRICT_TYPE_PRIMITIVE_MISSING",
-      "copy_ui": "NO_CODE_BLOCK",
-      "copy_payload": "NOT_APPLICABLE_NO_CODE",
-      "paste_save_recopy": "NOT_RUN_NO_CODE",
-      "run1": "NOT_RUN_NO_CODE",
-      "run2": "NOT_RUN_NO_CODE",
-      "non_live": "r4 package and deterministic rebuild; EX02 diagnostics with negative mutations; previous 558 FAIL preserved",
-      "scope_result": "NOT_ACCEPTED",
-      "evidence": "cycles/EX02-r4/generation-result.json"
-    },
-    "EX03": {
-      "generation": "FAIL_UNCAPTURED_EXIT_AND_MISSING_COMPARISON",
-      "copy_ui": "OBSERVED",
-      "copy_payload": "SAVED_UNMODIFIED_3097_UTF16",
-      "paste_save_recopy": "NOT_RUN_UNVERIFIED_COMMAND",
-      "run1": "NOT_RUN",
-      "run2": "NOT_RUN",
-      "non_live": "12 target cells in changed Japanese sheets and rectangles; oracle simulation only",
-      "parameter_following": "Japanese filenames/sheets and changed ranges/destinations represented; runtime untested"
-    },
-    "EX04": {
-      "generation_stop": "all four cases PASS_GENERATION_STOP_ONLY",
-      "pad_runtime_stop": "all four cases NOT_APPLICABLE_NO_CODE; no PAD runtime safety claim",
-      "non_live": "Python preflight rejects missing sheet, invalid rectangle, same output, existing output; no claim about generated PAD safety"
-    },
-    "EX05": {
-      "generation_scope": "values-only PASS_SCOPE_ONLY_NO_ADVANCED_OPERATIONS_REQUIRED; full-copy PASS_SCOPE_BOUNDARY_ONLY; full flow remains unachieved",
-      "pad_runtime": "both NOT_APPLICABLE_NO_CODE",
-      "non_live": "Values-only and full-copy boundary stated; scope behavior observed in two real Copilot requests"
+  "case_matrix": "catalog/acceptance/issue38/case-matrix.json",
+  "report": "catalog/acceptance/issue38/report.md",
+  "limited_acceptance": {
+    "case": "EX03",
+    "status": "LIMITED_ACCEPTANCE_FIXED_EX03_MECHANICAL_BUILDER",
+    "evidence": [
+      {
+        "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2",
+        "kind": "NORMAL",
+        "pad_runs": 1,
+        "decision": "PASS_MECHANICAL_BUILDER_PATH_LIVE2_NORMAL_RUN1",
+        "result": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/result.json",
+        "artifact": {
+          "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/result.xlsx",
+          "sha256": "49e4ad48e711ecbde7a0b6ec625dad8d2c74247e54eec69fe230aaf5366da5f8"
+        }
+      },
+      {
+        "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-NORMAL1",
+        "run_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-NORMAL1-RUN1",
+        "kind": "NORMAL",
+        "pad_runs": 1,
+        "decision": "PASS_LIVE3_NORMAL1_FULL_FIXED_SCOPE",
+        "result": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/result.json",
+        "artifact": {
+          "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/run1/result.xlsx",
+          "sha256": "fc763e4a3d7df9f673dfa6a325006310f502d37305b3559b119044eab6f47eac"
+        }
+      },
+      {
+        "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-OUTPUT-GUARD1",
+        "run_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-OUTPUT-GUARD1-RUN1",
+        "kind": "EXISTING_OUTPUT_GUARD",
+        "pad_runs": 1,
+        "decision": "PASS_LIVE3_EXISTING_OUTPUT_GUARD1",
+        "result": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/existing-output-guard/result.json",
+        "sequence_gate": "GUARD_RAN_ONLY_AFTER_NORMAL_FULL_PASS",
+        "probe_state": "OUTPUT_EXISTS_NO_RUN",
+        "success_gate_entered": false,
+        "numeric_write_entered": false,
+        "save_as_entered": false,
+        "protected_files_unchanged_sha_size_mtime": 13,
+        "type_comparisons": "NOT_EVALUATED_ON_GUARD_BRANCH",
+        "powershell_output": "NOT_GRADED_AS_FRESH_OUTPUT"
+      }
+    ],
+    "scope": "固定合成入力の文字列7・数値5、3x2／2x3矩形、指定転記先・比較範囲・固定SHAのみ。別試行の正常各1Runとガード1Run。",
+    "copilot_path_pass_inherited": false,
+    "proves_copilot_generation": false
+  },
+  "copilot_direct_generation": {
+    "classification": "EXPERIMENTAL_NOT_RECOMMENDED_FOR_FIXED_EX03",
+    "trials": [
+      {
+        "id": "A1",
+        "decision": "FAIL_REFUSAL_NO_ROBIN",
+        "evidence": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A1-G1/RESULT.md",
+        "normal_m365_sends": 1,
+        "pad_runs": 0
+      },
+      {
+        "id": "A2",
+        "decision": "FAIL_REFUSAL_NO_ROBIN",
+        "evidence": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/RESULT.md",
+        "normal_m365_sends": 1,
+        "pad_runs": 0
+      },
+      {
+        "id": "A3",
+        "decision": "STOPPED_FAIL_REFUSAL",
+        "evidence": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A3-G1/FINAL-RESULT.md",
+        "normal_m365_sends": 1,
+        "pad_runs": 0
+      },
+      {
+        "id": "A4",
+        "decision": "STOPPED_FAIL_GENERATED_ROBIN_WIRING_AND_FIXED_LAUNCHER_MISMATCH",
+        "evidence": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A4-G1/RESULT.md",
+        "details": "比較7/12、固定launcher SHA不一致・構文破損、未採取inline式",
+        "normal_m365_sends": 1,
+        "pad_runs": 0
+      }
+    ],
+    "formal_r12": {
+      "id": "EX03-r12-G1",
+      "version": "20260917-excel-r12",
+      "status": "FAIL_GENERATED_ROBIN_MISMATCH_AND_POWERSHELL_PARSE_ERROR_STOP_BEFORE_PAD",
+      "accepted": false,
+      "evidence": "catalog/acceptance/issue38/cycles/EX03-r12-G1/acceptance-status.json",
+      "existing_output_guard": "NOT_VERIFIED_FOR_FORMAL_R12"
     }
   },
   "remaining": [
-    "Capture and verify strict type distinction inside a PAD flow using an available permitted route; equality is insufficient",
-    "Freeze another version after any material improvement; EX02 Copilot generation and unmodified PAD two-run acceptance remain outstanding",
-    "Style preservation acceptance remains unresolved: original 558 FAIL and native limited match both preserved; no-op Excel save reproduces differences",
-    "EX03 onward not retested in this cycle"
+    "保存Robinにはstderr用PAD変数がなく、stderr空は独立観測されていない。",
+    "固定合成入力の文字列／数値、3x2と2x3のshapeのみ。空白・Boolean・日付・エラー・数式結果・object、任意文字列・パス・PC・PAD/Excel版へ一般化しない。",
+    "自然言語からWIRING SPECを自動生成・受入する部分は未検証。現時点のWIRING SPECは検証者管理。",
+    "正式r12はFAILで、r12の実機既存出力ガードも未確認。機械ビルダーのPASSで置き換えない。",
+    "EX01の個別実行時型、EX04の残る実機異常系、EX05の全フロー等、他ケースの残件は維持する。",
+    "汎用validatorおよびtools入口の正式化は未実施。現配置の単一実装を保持する。"
   ],
-  "primitive_probe": {
-    "generated_by": "implementation AI assembly, not Copilot",
-    "flow": "RobinIssue38MatrixRuntime20260915A",
-    "actions": 21,
-    "paste_save_recopy": "EXACT_SHA_MATCH",
-    "run1": "COMPLETION_OBSERVED_AFTER_FOCUS_RECOVERY",
-    "logical_comparison": "FAIL",
-    "matched_target_values_types_positions": 12,
-    "checked_cells": 480,
-    "run2": "COMPLETION_OBSERVED",
-    "evidence": "probes/matrix-write/",
-    "followup": "Both runs: 12 target values/types/positions match; original openpyxl 558 style/dimension failures preserved; native styles match within recorded scope.",
-    "native_styles": "480 cells specified style attributes and row/column properties MATCH_WITHIN_RECORDED_SCOPE; file SHAs unchanged; supplemental only"
+  "legacy_558": "旧raw FAILを保持。後続の実効書式差0と区別し、詳細は現行case matrixと原記録を参照。",
+  "documentation_change": {
+    "copilot_sends": 0,
+    "pad_runs": 0,
+    "excel_runs": 0,
+    "candidate_versions_changed": 0,
+    "full_regression": "NOT_RUN_BY_SCOPE",
+    "github_writes": 0,
+    "issue_closed": false,
+    "original_evidence_and_expected_values_changed": false
   },
-  "candidate_history": {
-    "20260915-excel-r1": "PRESERVED",
-    "20260915-excel-r2": "INVALID_UTF16_MANIFEST_5911_VS_5844; never sent or run",
-    "20260915-excel-r3": "PASS_NON_LIVE_PACKAGE; EX01 two runs display match; EX02 refused; EX03 uncaptured EXIT; four EX04 generation stops; EX05 scope distinction",
-    "20260915-excel-r4": "PASS_NON_LIVE_PACKAGE; 1 real Copilot request refused strict type gap; no code/PAD runs; no-op Excel control reproduces 558 style/dimension differences"
-  },
-  "prior_status_snapshot": "cycles/EX02-r4/prior-status.json",
-  "case_versions": {
-    "EX01": "20260915-excel-r3",
-    "EX02": "20260915-excel-r4",
-    "EX03": "20260915-excel-r3",
-    "EX04": "20260915-excel-r3",
-    "EX05": "20260915-excel-r3"
-  },
-  "environment_version": "20260915-excel-r3 historical; current EX02 cycle below",
-  "current_cycle": {
-    "id": "EX02-R4-G1",
-    "evidence": "cycles/EX02-r4/",
-    "copilot_generation_requests": 1,
-    "actual_bundle_uploads": 1,
-    "pad_create_attempts": 1,
-    "pad_created_flows": 0,
-    "pad_run_requests": 0,
-    "pad_route": "sky new-flow name not reflected; cancelled; no direct UIA mixed this turn",
-    "github_writes": 0
+  "historical_r3_r4_note": "以下は旧status全体を内容不変で保持した履歴。旧remaining/current_cycleは当時の記録であり、現行判定ではない。",
+  "historical_r3_r4": {
+    "schema_version": 1,
+    "version": "20260915-excel-r4",
+    "status": "PARTIAL_EX02_R4_REFUSED_STRICT_TYPE_MISSING",
+    "issue_complete": false,
+    "inherits_legacy_pass": false,
+    "environment": {
+      "browser": "Normal in-app M365 chat available; nine r3 new-chat requests with actual bundle attachments completed",
+      "copilot_uploads": 9,
+      "copilot_generation_requests": 9,
+      "pad_package": "Microsoft.PowerAutomateDesktop 11.2608.115.0",
+      "pad_run_requests": 8,
+      "additional_write_capture": "CAPTURED_FROM_PAD_UI; matrix probe values matched; full acceptance pending",
+      "prior_pad_route_failure": {
+        "pad_launch_attempts": 2,
+        "pad_launch_error": "GetCursorPos failed: Access denied (0x80070005)",
+        "pad_followup_observation": "Second goal turn: same GetCursorPos 0x80070005; sky.list_windows still has no PAD target. No more launch retries without environment change."
+      },
+      "pad_current_route": "AppxManifest PAD.Console executable + direct PowerShell UIA: startup, dedicated flow creation, paste/save/recopy succeeded",
+      "browser_followup": "CUA getState: only in-app browser; createBrowserTab chrome failed Browser is not available: chrome. No message submitted.",
+      "chrome_launch_followup": "Launch command rejected before execution: blocked by policy. No bypass or resend.",
+      "pad_current_followup": "Matrix, output guard and scalar comparison each completed two runs; focus recovery observations saved separately from original timeouts."
+    },
+    "cases": {
+      "EX01": {
+        "generation": "RESPONSE_CAPTURED",
+        "copy_ui": "CODE_COPY_BUTTON_OBSERVED",
+        "copy_payload": "606_UTF16_4_ROBIN_LINES; async completion observed; no edits",
+        "paste_save_recopy": "SAVED; instruction lines equal; PAD CRLF/final newline changed bytes",
+        "run1": "COMPLETION_OBSERVED; six display values and positions match; cell types not directly observed",
+        "run2": "COMPLETION_OBSERVED; six displayed values and positions match after clearing prior previews",
+        "non_live": "fixture active Decoy and expected source rectangle checked",
+        "scope_result": "2 runs match specified-sheet rectangle; individual runtime cell types not directly observed"
+      },
+      "EX02": {
+        "generation": "REFUSED_STRICT_TYPE_PRIMITIVE_MISSING",
+        "copy_ui": "NO_CODE_BLOCK",
+        "copy_payload": "NOT_APPLICABLE_NO_CODE",
+        "paste_save_recopy": "NOT_RUN_NO_CODE",
+        "run1": "NOT_RUN_NO_CODE",
+        "run2": "NOT_RUN_NO_CODE",
+        "non_live": "r4 package and deterministic rebuild; EX02 diagnostics with negative mutations; previous 558 FAIL preserved",
+        "scope_result": "NOT_ACCEPTED",
+        "evidence": "cycles/EX02-r4/generation-result.json"
+      },
+      "EX03": {
+        "generation": "FAIL_UNCAPTURED_EXIT_AND_MISSING_COMPARISON",
+        "copy_ui": "OBSERVED",
+        "copy_payload": "SAVED_UNMODIFIED_3097_UTF16",
+        "paste_save_recopy": "NOT_RUN_UNVERIFIED_COMMAND",
+        "run1": "NOT_RUN",
+        "run2": "NOT_RUN",
+        "non_live": "12 target cells in changed Japanese sheets and rectangles; oracle simulation only",
+        "parameter_following": "Japanese filenames/sheets and changed ranges/destinations represented; runtime untested"
+      },
+      "EX04": {
+        "generation_stop": "all four cases PASS_GENERATION_STOP_ONLY",
+        "pad_runtime_stop": "all four cases NOT_APPLICABLE_NO_CODE; no PAD runtime safety claim",
+        "non_live": "Python preflight rejects missing sheet, invalid rectangle, same output, existing output; no claim about generated PAD safety"
+      },
+      "EX05": {
+        "generation_scope": "values-only PASS_SCOPE_ONLY_NO_ADVANCED_OPERATIONS_REQUIRED; full-copy PASS_SCOPE_BOUNDARY_ONLY; full flow remains unachieved",
+        "pad_runtime": "both NOT_APPLICABLE_NO_CODE",
+        "non_live": "Values-only and full-copy boundary stated; scope behavior observed in two real Copilot requests"
+      }
+    },
+    "remaining": [
+      "Capture and verify strict type distinction inside a PAD flow using an available permitted route; equality is insufficient",
+      "Freeze another version after any material improvement; EX02 Copilot generation and unmodified PAD two-run acceptance remain outstanding",
+      "Style preservation acceptance remains unresolved: original 558 FAIL and native limited match both preserved; no-op Excel save reproduces differences",
+      "EX03 onward not retested in this cycle"
+    ],
+    "primitive_probe": {
+      "generated_by": "implementation AI assembly, not Copilot",
+      "flow": "RobinIssue38MatrixRuntime20260915A",
+      "actions": 21,
+      "paste_save_recopy": "EXACT_SHA_MATCH",
+      "run1": "COMPLETION_OBSERVED_AFTER_FOCUS_RECOVERY",
+      "logical_comparison": "FAIL",
+      "matched_target_values_types_positions": 12,
+      "checked_cells": 480,
+      "run2": "COMPLETION_OBSERVED",
+      "evidence": "probes/matrix-write/",
+      "followup": "Both runs: 12 target values/types/positions match; original openpyxl 558 style/dimension failures preserved; native styles match within recorded scope.",
+      "native_styles": "480 cells specified style attributes and row/column properties MATCH_WITHIN_RECORDED_SCOPE; file SHAs unchanged; supplemental only"
+    },
+    "candidate_history": {
+      "20260915-excel-r1": "PRESERVED",
+      "20260915-excel-r2": "INVALID_UTF16_MANIFEST_5911_VS_5844; never sent or run",
+      "20260915-excel-r3": "PASS_NON_LIVE_PACKAGE; EX01 two runs display match; EX02 refused; EX03 uncaptured EXIT; four EX04 generation stops; EX05 scope distinction",
+      "20260915-excel-r4": "PASS_NON_LIVE_PACKAGE; 1 real Copilot request refused strict type gap; no code/PAD runs; no-op Excel control reproduces 558 style/dimension differences"
+    },
+    "prior_status_snapshot": "cycles/EX02-r4/prior-status.json",
+    "case_versions": {
+      "EX01": "20260915-excel-r3",
+      "EX02": "20260915-excel-r4",
+      "EX03": "20260915-excel-r3",
+      "EX04": "20260915-excel-r3",
+      "EX05": "20260915-excel-r3"
+    },
+    "environment_version": "20260915-excel-r3 historical; current EX02 cycle below",
+    "current_cycle": {
+      "id": "EX02-R4-G1",
+      "evidence": "cycles/EX02-r4/",
+      "copilot_generation_requests": 1,
+      "actual_bundle_uploads": 1,
+      "pad_create_attempts": 1,
+      "pad_created_flows": 0,
+      "pad_run_requests": 0,
+      "pad_route": "sky new-flow name not reflected; cancelled; no direct UIA mixed this turn",
+      "github_writes": 0
+    }
   }
 }

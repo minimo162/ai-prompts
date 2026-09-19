@@ -1,0 +1,349 @@
+{
+  "schema_version": 2,
+  "review_id": "ISSUE38-FIXED-EX03-MECHANICAL-LIMITED-ACCEPTANCE-3D593A6",
+  "source_checkpoint": "3d593a6ada96af805e7800c6a7daff7b3cfc479d",
+  "path_base": "repository_root",
+  "architecture": "自然言語要求 → WIRING SPEC → validator → deterministic Robin builder → PAD",
+  "issue_complete": false,
+  "historical_matrix": "catalog/acceptance/issue38/review/20260917-b73e0b5/case-matrix.json",
+  "documentation_only": true,
+  "acceptance_conditions_changed": false,
+  "copilot_sends_added": 0,
+  "pad_runs_added": 0,
+  "excel_runs_added": 0,
+  "candidate_versions_changed": 0,
+  "full_regression": "NOT_RUN_BY_SCOPE",
+  "github_writes": 0,
+  "cases": [
+    {
+      "id": "EX01",
+      "decision": "PASS_SCOPED_DISPLAY_VALUE_POSITION_TWO_RUNS",
+      "new_acceptance_declared": false,
+      "summary": "r3の2Runで指定シート6セルの表示値・位置一致。個別実行時型は直接未観測。",
+      "evidence": [
+        "catalog/acceptance/issue38/copilot/EX01/two-run-comparison.json",
+        "catalog/acceptance/issue38/review/20260917-b73e0b5/case-matrix.json"
+      ],
+      "residuals": [
+        "個別実行時型および全転記・保存の受入へ一般化しない。"
+      ]
+    },
+    {
+      "id": "EX02",
+      "decision": "FUNCTIONAL_FIXED_SCOPE_PASS_WITH_LATER_558_ADJUDICATION",
+      "new_acceptance_declared": false,
+      "summary": "r5-G2の無修正生成物2Run、各12対象・468対象外の機能PASS。1セル型変更負例と後続の全558件分類・書式寸法負例は既存記録を保持。",
+      "evidence": [
+        "catalog/acceptance/issue38/cycles/EX02-r5-G2/acceptance-status.json",
+        "catalog/acceptance/issue38/cycles/EX02-r5-G2/verification.json",
+        "catalog/acceptance/issue38/cycles/EX02-r5-G2/format-reconciliation/classification.json",
+        "catalog/acceptance/issue38/cycles/EX02-r5-G2/format-reconciliation/verification.json",
+        "catalog/acceptance/issue38/review/20260917-b73e0b5/case-matrix.json"
+      ],
+      "residuals": [
+        "固定文字列／数値以外の型や別環境へ一般化しない。旧raw FAILは上書きしない。"
+      ]
+    },
+    {
+      "id": "EX03",
+      "decision": "LIMITED_ACCEPTANCE_FIXED_EX03_MECHANICAL_BUILDER",
+      "accepted_route": "FIXED_WIRING_VALIDATOR_DETERMINISTIC_BUILDER_PAD",
+      "current_entry": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/README.md",
+      "wiring_owner": "VERIFIER_MANAGED",
+      "natural_language_to_wiring": "NOT_VERIFIED",
+      "fixed_identity": {
+        "builder": {
+          "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/Build.py",
+          "sha256": "dc6363953d120acf9623e1c28e777b1496c3da9c392704ae4a5c79b3808dea62"
+        },
+        "bundle": {
+          "path": "copilot/versions/20260918-excel-r12-fixed-helper-a4/knowledge/PAD-Robin-Fixed-Helper-A4-Bundle.txt",
+          "sha256": "62695ca3c007ab291732657ddaeca66723a57115d151efc7b1730ef5341c514c"
+        },
+        "wiring": {
+          "path": "copilot/versions/20260918-excel-r12-fixed-helper-a4/wiring-spec.json",
+          "sha256": "c62ec6951bdd36e895acfc937d7a1f390e75e8d984b26a9531cc2c88d970f58c"
+        },
+        "assembly_rules": {
+          "path": "copilot/versions/20260918-excel-r12-fixed-helper-a4/assembly-rules.json",
+          "sha256": "57305c13d9bff292d7c7c2bc3e3152bcd75b85fd1bd800679df1671f79c7bc6e"
+        },
+        "a4_manifest": {
+          "path": "copilot/versions/20260918-excel-r12-fixed-helper-a4/manifest.json",
+          "sha256": "525c5450e1e17e68d50dbaf25556e77e6e8393cf2ad2cd15792b54859ae7242f"
+        },
+        "helper": {
+          "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/EX03-R12-Fixed-StringTransfer.ps1",
+          "sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135"
+        },
+        "invocation": {
+          "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-a4/invocation.json",
+          "sha256": "5c5a2008f55296a48f63fa65178aab971e4212455bb2af58e33149bdcaec40d8"
+        },
+        "launcher": {
+          "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-a4/launcher.ps1",
+          "sha256": "a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5"
+        },
+        "fixed_request": {
+          "path": "catalog/acceptance/issue38/requests/EX03.txt",
+          "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370"
+        },
+        "fixed_spec": {
+          "path": "catalog/acceptance/issue38/spec.json",
+          "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380"
+        },
+        "fixed_expected": {
+          "path": "catalog/acceptance/issue38/expected.json",
+          "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d"
+        },
+        "generated_robin": {
+          "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/generated/EX03-R12-FIXED-HELPER-MECHANICAL-P1.robin",
+          "sha256": "3d9c1671a5debc6f0247cef8c5e0d414dc07246a7cb7ce0ac6245fb860967e47"
+        },
+        "pad_saved_recopy": {
+          "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1/pad-recopy-before-run.robin",
+          "sha256": "570b26c57abeca0e9b8e19368c6542a529b44994bac518f2e70cb69baec52c0f"
+        }
+      },
+      "identity_evidence": [
+        "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/verification.json",
+        "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/preflight.json"
+      ],
+      "scope": {
+        "fixture": "FIXED_SYNTHETIC_EX03_ONLY",
+        "mappings": [
+          {
+            "input_workbook": "入力い.xlsx",
+            "input_sheet": "受取明細",
+            "input_rectangle": "D4:E6",
+            "shape": [
+              3,
+              2
+            ],
+            "target_sheet": "集計先",
+            "target_rectangle": "F7:G9"
+          },
+          {
+            "input_workbook": "入力ろ.xlsx",
+            "input_sheet": "追加項目",
+            "input_rectangle": "B2:D3",
+            "shape": [
+              2,
+              3
+            ],
+            "target_sheet": "追記先",
+            "target_rectangle": "D5:F6"
+          }
+        ],
+        "normal_trials": 2,
+        "normal_runs_per_trial": 1,
+        "guard_runs": 1,
+        "relabelled_as_copilot_two_run_acceptance": false,
+        "checks_each_normal_run": {
+          "pad_normal_termination": true,
+          "pad_value_type_true": 12,
+          "target_value_type_position_checks": 12,
+          "target_mismatches": 0,
+          "outside_cell_checks": 468,
+          "outside_mismatches": 0,
+          "formula_mismatches": 0,
+          "effective_format_cells": 480,
+          "effective_format_rows": 48,
+          "effective_format_columns": 30,
+          "effective_format_differences": 0,
+          "original_inputs_template_work_sha_unchanged": true,
+          "f6": {
+            "sheet": "追記先",
+            "cell": "F6",
+            "value": "100%",
+            "type": "System.String",
+            "original_number_format": "G/標準",
+            "prefix": "",
+            "has_formula": false
+          },
+          "stderr_empty_directly_proven": false
+        },
+        "live2_live3_semantic_match": true,
+        "whole_xlsx_sha_equality_used_as_gate": false
+      },
+      "evidence": [
+        {
+          "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2",
+          "kind": "NORMAL",
+          "pad_runs": 1,
+          "decision": "PASS_MECHANICAL_BUILDER_PATH_LIVE2_NORMAL_RUN1",
+          "result": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/result.json",
+          "artifact": {
+            "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/result.xlsx",
+            "sha256": "49e4ad48e711ecbde7a0b6ec625dad8d2c74247e54eec69fe230aaf5366da5f8"
+          },
+          "reports": [
+            "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/artifact.json",
+            "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/pad-run.json",
+            "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/pad-variables.json",
+            "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/typed-transfer.json",
+            "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/comparison.json",
+            "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/native-styles.json",
+            "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/f6-native.json"
+          ]
+        },
+        {
+          "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-NORMAL1",
+          "run_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-NORMAL1-RUN1",
+          "kind": "NORMAL",
+          "pad_runs": 1,
+          "decision": "PASS_LIVE3_NORMAL1_FULL_FIXED_SCOPE",
+          "result": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/result.json",
+          "artifact": {
+            "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/run1/result.xlsx",
+            "sha256": "fc763e4a3d7df9f673dfa6a325006310f502d37305b3559b119044eab6f47eac"
+          },
+          "reports": [
+            "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/run1/artifact.json",
+            "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/run1/pad-run.json",
+            "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/run1/pad-variables.json",
+            "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/run1/typed-transfer.json",
+            "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/run1/comparison.json",
+            "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/run1/native-styles.json",
+            "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/run1/f6-native.json",
+            "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/run1/live2-semantic-comparison.json"
+          ]
+        },
+        {
+          "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-OUTPUT-GUARD1",
+          "run_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-OUTPUT-GUARD1-RUN1",
+          "kind": "EXISTING_OUTPUT_GUARD",
+          "pad_runs": 1,
+          "decision": "PASS_LIVE3_EXISTING_OUTPUT_GUARD1",
+          "result": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/existing-output-guard/result.json",
+          "sequence_gate": "GUARD_RAN_ONLY_AFTER_NORMAL_FULL_PASS",
+          "probe_state": "OUTPUT_EXISTS_NO_RUN",
+          "success_gate_entered": false,
+          "numeric_write_entered": false,
+          "save_as_entered": false,
+          "protected_files_unchanged_sha_size_mtime": 13,
+          "type_comparisons": "NOT_EVALUATED_ON_GUARD_BRANCH",
+          "powershell_output": "NOT_GRADED_AS_FRESH_OUTPUT",
+          "reports": [
+            "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/existing-output-guard/preflight.json",
+            "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/existing-output-guard/hashes-after-run.json"
+          ]
+        }
+      ],
+      "formal_r12": {
+        "id": "EX03-r12-G1",
+        "version": "20260917-excel-r12",
+        "status": "FAIL_GENERATED_ROBIN_MISMATCH_AND_POWERSHELL_PARSE_ERROR_STOP_BEFORE_PAD",
+        "accepted": false,
+        "evidence": "catalog/acceptance/issue38/cycles/EX03-r12-G1/acceptance-status.json",
+        "existing_output_guard": "NOT_VERIFIED_FOR_FORMAL_R12"
+      },
+      "direct_copilot": {
+        "classification": "EXPERIMENTAL_NOT_RECOMMENDED_FOR_FIXED_EX03",
+        "trials": [
+          {
+            "id": "A1",
+            "decision": "FAIL_REFUSAL_NO_ROBIN",
+            "evidence": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A1-G1/RESULT.md",
+            "normal_m365_sends": 1,
+            "pad_runs": 0
+          },
+          {
+            "id": "A2",
+            "decision": "FAIL_REFUSAL_NO_ROBIN",
+            "evidence": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1/RESULT.md",
+            "normal_m365_sends": 1,
+            "pad_runs": 0
+          },
+          {
+            "id": "A3",
+            "decision": "STOPPED_FAIL_REFUSAL",
+            "evidence": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A3-G1/FINAL-RESULT.md",
+            "normal_m365_sends": 1,
+            "pad_runs": 0
+          },
+          {
+            "id": "A4",
+            "decision": "STOPPED_FAIL_GENERATED_ROBIN_WIRING_AND_FIXED_LAUNCHER_MISMATCH",
+            "evidence": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A4-G1/RESULT.md",
+            "details": "比較7/12、固定launcher SHA不一致・構文破損、未採取inline式",
+            "normal_m365_sends": 1,
+            "pad_runs": 0
+          }
+        ],
+        "generated_robin_repaired_for_builder": false,
+        "copilot_pass_inherited_by_builder": false,
+        "builder_pass_inherited_by_copilot": false
+      },
+      "historical_r11": "正式提出条件FAILと別許可の補助ファイル2Run・ガードPASSは凍結matrixのEX03に保持。現在の機械経路へ転用しない。",
+      "historical_r11_evidence": "catalog/acceptance/issue38/review/20260917-b73e0b5/case-matrix.json",
+      "residuals": [
+        "保存Robinにはstderr用PAD変数がなく、stderr空は独立観測されていない。",
+        "固定合成入力の文字列／数値、3x2と2x3のshapeのみ。空白・Boolean・日付・エラー・数式結果・object、任意文字列・パス・PC・PAD/Excel版へ一般化しない。",
+        "自然言語からWIRING SPECを自動生成・受入する部分は未検証。現時点のWIRING SPECは検証者管理。",
+        "正式r12はFAILで、r12の実機既存出力ガードも未確認。機械ビルダーのPASSで置き換えない。",
+        "EX01の個別実行時型、EX04の残る実機異常系、EX05の全フロー等、他ケースの残件は維持する。",
+        "汎用validatorおよびtools入口の正式化は未実施。現配置の単一実装を保持する。"
+      ]
+    },
+    {
+      "id": "EX04",
+      "decision": "PASS_GENERATION_STOPS_AND_EXISTING_OUTPUT_LIVE_GUARDS_SCOPED_ONLY",
+      "new_acceptance_declared": false,
+      "full_runtime_negative_suite_accepted": false,
+      "summary": "r3の4条件生成停止と、r5-G2／r11補助経路の固定既存出力ガードは従来範囲のまま。LIVE3機械経路のガードは本matrixのEX03に分離。",
+      "evidence": [
+        "catalog/acceptance/issue38/review/20260917-b73e0b5/case-matrix.json",
+        "catalog/acceptance/issue38/cycles/EX04-r5-G2-existing-output-neg1/verification.json",
+        "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/verification.json"
+      ],
+      "residuals": [
+        "missing-sheet、invalid-range、same-input/outputの実機PAD異常系は未測定。生成拒否を実行時停止の証明へ転用しない。"
+      ]
+    },
+    {
+      "id": "EX05",
+      "decision": "PASS_SCOPE_DISTINCTION_ONLY_FULL_FLOW_NOT_ACHIEVED",
+      "new_acceptance_declared": false,
+      "runtime_accepted": false,
+      "summary": "r3で値だけ転記と完全コピーの範囲区別のみ確認。",
+      "evidence": [
+        "catalog/acceptance/issue38/copilot/EX05-values-only/result.json",
+        "catalog/acceptance/issue38/copilot/EX05-full-copy/result.json",
+        "catalog/acceptance/issue38/review/20260917-b73e0b5/case-matrix.json"
+      ],
+      "residuals": [
+        "実行可能な生成フロー・PAD実行・全転記受入は未達。"
+      ]
+    }
+  ],
+  "legacy_558": {
+    "old_raw_fail_preserved": true,
+    "raw_count_each_normal_run": 558,
+    "raw_counts": {
+      "cell_style": 480,
+      "row_dimension": 48,
+      "column_dimension": 30
+    },
+    "fixed_ex02_later_all_item_reconciliation": {
+      "serialization_or_comparison_method_only": 558,
+      "actual_effective_changes": 0,
+      "unresolved": 0,
+      "intentional_format_height_width_negative_changes_detected": 3,
+      "evidence": [
+        "catalog/acceptance/issue38/cycles/EX02-r5-G2/format-reconciliation/classification.json",
+        "catalog/acceptance/issue38/cycles/EX02-r5-G2/format-reconciliation/verification.json"
+      ]
+    },
+    "mechanical_live2_live3_effective_changes": 0,
+    "mechanical_raw_fail_evidence": [
+      "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/comparison.json",
+      "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/run1/comparison.json"
+    ],
+    "mechanical_effective_evidence": [
+      "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/run1/native-styles.json",
+      "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/run1/native-styles.json"
+    ],
+    "decision_boundary": "raw FAILと実効書式判定は別記録。今回再分類していない。無編集SaveAsでの再現や件数一致だけを無害判定の根拠にしない。"
+  }
+}

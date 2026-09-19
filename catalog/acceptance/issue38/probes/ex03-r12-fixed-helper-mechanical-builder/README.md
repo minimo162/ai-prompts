@@ -5,6 +5,38 @@ route. The builder does not create A5, send to Copilot, edit the A4 response,
 or run PAD or Excel. Separately authorized live evidence, when present, is kept
 under `trials/` and does not change that builder boundary.
 
+## Current entry and limited acceptance (2026-09-19)
+
+推奨アーキテクチャは「自然言語要求 → WIRING SPEC → validator → deterministic Robin builder → PAD」。現時点のWIRING SPECは**検証者管理**です。自然言語からWIRING SPECを自動生成・受入する部分は未検証で、任意の要求を自動実行できる入口ではありません。
+
+The validator currently lives inside [Build.py](Build.py):
+`validate_fixed_sources()` / `validate_wiring()` run before rendering, and
+`audit_robin()` checks the assembled result. There is no separate general-purpose
+validator CLI. Fixed A4 WIRING, captured C01-C12 components, assembly rules,
+helper, invocation, and launcher are the inputs; the A4 Copilot output is not.
+
+At evidence checkpoint `3d593a6ada96af805e7800c6a7daff7b3cfc479d`, this fixed
+EX03 mechanical-builder path is **LIMITED_ACCEPTANCE_FIXED_EX03**:
+
+| Existing evidence | Accepted observation |
+|---|---|
+| [LIVE2 result](trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/result.json) | One normal Run PASS |
+| [LIVE3 normal result](trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/result.json) | One fresh normal Run PASS; values/types/positions/effective format match LIVE2 |
+| [LIVE3 output-guard result](trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/existing-output-guard/result.json) | One Run after normal full PASS; `OUTPUT_EXISTS_NO_RUN`, no write/helper/SaveAs branch entry, protected files unchanged |
+
+These are two separate normal trials and one guard trial, not a relabelled
+Copilot two-Run acceptance. Both normal trials cover the fixed 12 text/number
+targets, 468 outside cells and formulas, 480 effective-format cells / 48 rows /
+30 columns, original SHAs, and F6 text `100%` with original format, empty prefix,
+and no formula. Guard type comparisons are `NOT_EVALUATED`.
+
+[Current report](../../report.md) and [case matrix](../../case-matrix.json)
+record the scope and fixed identities. A1-A3 refusals, A4 missing comparisons /
+damaged launcher, and formal r12 FAIL remain separate. No Copilot-path PASS is
+inherited by this builder, and these live results do not make Copilot generation
+PASS. The original [non-live result](RESULT.md) and [verification](verification.json)
+retain their original static-only decisions.
+
 ## Inputs and output
 
 `Build.py` reads the existing A4 files without modifying them:
@@ -57,7 +89,7 @@ builder's static acceptance claim.
 
 ### Live PAD preplacement: A4 json_root
 
-Before a separately authorized live PAD Run, the verifier must read
+Before a separately authorized normal live PAD Run, the verifier must read
 `json_root` from the fixed A4 `invocation.json` and
 `runtime.a4_json_root_absolute` from `wiring-spec.json`. The two absolute paths
 must be identical and must resolve to the synthetic test runtime directory
@@ -75,12 +107,38 @@ template.
 The verifier preplaces only the directory. The saved PAD flow creates the eight
 JSON files during the Run; the verifier does not precreate or populate them.
 
+The separate LIVE3 existing-output guard trial deliberately retained the normal
+output and its eight handoff files. That trial's [preflight](trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/existing-output-guard/preflight.json)
+and [before/after hashes](trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/existing-output-guard/hashes-after-run.json)
+define that exception; it is not permission to overwrite a collision.
+
 ## Scope boundary
 
-The non-live result proves deterministic mechanical assembly and the static
+The original non-live result proves deterministic mechanical assembly and the static
 8 JSON-file writes, 5 numeric writes, 2 readback rectangles, and 12 JSON
-value/type comparisons. It does not prove PAD import syntax, PAD save/re-copy,
-helper execution through this generated Robin, Excel results, Copilot
-generation, or EX03 acceptance. The fixed expected-value file is read only as
+value/type comparisons. Runtime limited acceptance comes only from the separate
+LIVE2/LIVE3 evidence above. The fixed expected-value file is read only as
 bytes for a SHA-256 preservation check; its grader values are neither parsed
 nor emitted by the builder.
+
+- The saved Robin has no independently observed stderr PAD variable; empty stderr is not proven.
+- Only the fixed synthetic text/number cells and the 3x2 / 2x3 input rectangles are covered. Blank, Boolean, date, error, formula-result, object, other shapes, arbitrary strings, paths, PCs, and PAD/Excel versions are not accepted by extension.
+- Natural-language-to-WIRING generation/acceptance and Issue #38's other cases remain outside this mechanical path's acceptance. Their prior scoped results remain in the case matrix.
+- The old raw 558 FAIL records remain unchanged. Later effective-format comparisons report zero differences; raw serialization/comparison and effective formatting are separate judgments.
+- This documentation decision does not close Issue #38 or change the fixed request, expected values, or formal delivery conditions.
+
+## Placement decision and later tools entry
+
+Keep the implementation at this path for now; do not move or duplicate it into
+`tools/`. `Build.py` resolves the repository with `Path(__file__).resolve().parents[5]`
+and fixes its output path here. [The focused tests](../../../../../tests/Test-Issue38Ex03FixedHelperMechanicalBuilder.py)
+and [LiveTrial.py](LiveTrial.py) import this location; [Live3Trial.py](Live3Trial.py)
+pins the builder SHA. Moving changes path resolution, while an independent copy
+would create two implementation identities without live evidence for the second.
+
+The history is retained at `fd2cc2c` (builder), `dc927db` (LIVE1 stop),
+`f38a69d` (LIVE2), and `3d593a6` (LIVE3). A later formal tools entry can be a thin
+wrapper that loads this single implementation, with explicit repository-root
+handling and a separate review of path/byte identity and evidence links.
+That wrapper is a proposal only: it is not implemented or accepted here, and
+no historical SHA or trial record should be rewritten to introduce it.
