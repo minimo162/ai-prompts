@@ -1,0 +1,14 @@
+{
+  "status": "saved",
+  "status_id": "Flow_status_saved",
+  "running": false,
+  "idle": true,
+  "editable": true,
+  "can_run": true,
+  "ready": true,
+  "errors": 0,
+  "errors_known": true,
+  "subflows": [
+    "Main"
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "schema_version": 3,
+  "kind": "EX02_EXCEL_EFFECTIVE_FORMAT_COMPARISON",
+  "observed_at": "2026-09-15T22:28:49.7909558Z",
+  "read_only": true,
+  "paths": {
+    "reference": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX02\\template.xlsx",
+    "output": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\cycles\\EX02-r5-G2\\run2\\result.xlsx"
+  },
+  "sha256_before": {
+    "reference": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+    "output": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9"
+  },
+  "sha256_after": {
+    "reference": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+    "output": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9"
+  },
+  "bounds": {
+    "sheets": [
+      "Decoy",
+      "Target A",
+      "Target B"
+    ],
+    "rows_per_sheet": 16,
+    "columns_per_sheet": 10,
+    "checked_cells": 480,
+    "checked_rows": 48,
+    "checked_columns": 30
+  },
+  "attributes": {
+    "cell": [
+      "font",
+      "fill",
+      "number_format",
+      "alignment",
+      "protection",
+      "merge_cells",
+      "invariant style_name",
+      "six edge and diagonal borders"
+    ],
+    "row": [
+      "height",
+      "hidden"
+    ],
+    "column": [
+      "width",
+      "hidden"
+    ]
+  },
+  "comparison_policy": {
+    "named_style_identity": "Excel COM Style.Name (invariant)",
+    "localized_style_label": "Style.NameLocal excluded because it is a UI-language label, not formatting identity"
+  },
+  "snapshot_sha256": {
+    "reference": "28a5ca0636f95e679c3d4834e13ec248fef5e5fd8829463051759a8250186ea4",
+    "output": "28a5ca0636f95e679c3d4834e13ec248fef5e5fd8829463051759a8250186ea4"
+  },
+  "difference_attribute_counts": {
+    "cell_style": 0,
+    "row_dimension": 0,
+    "column_dimension": 0,
+    "sheet_structure": 0
+  },
+  "difference_location_counts": {
+    "cell_style": 0,
+    "row_dimension": 0,
+    "column_dimension": 0,
+    "sheet_structure": 0
+  },
+  "differences": [],
+  "status": "MATCH_EFFECTIVE_FORMAT",
+  "scope": "Excel-effective formatting and dimensions in the fixed EX02 A1:J16 contract area",
+  "acceptance_boundary": "Does not grade values, types, formulas, outside-sheet metadata, PAD completion, or Copilot provenance."
+}

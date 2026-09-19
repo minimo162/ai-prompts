@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "run_id": "EX03-R11-MINIMAL-POWERSHELL-SYNTHETIC-RUN1",
+  "observed_at": "2026-09-17T09:13:00+09:00",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": "OFF",
+    "flow_name": "無題 (9)",
+    "subflow": "Main"
+  },
+  "authorization_boundary": {
+    "dedicated_synthetic_pad_run_max": 1,
+    "pad_runs_used": 1,
+    "additional_pad_run": 0,
+    "copilot_send": 0,
+    "integrated_ex03_run": 0,
+    "github_write": 0
+  },
+  "preconditions": {
+    "preflight_status": "PASS_READY_FOR_ONE_DEDICATED_SYNTHETIC_PAD_RUN",
+    "saved_and_recopy_lf_normalized_exact": true,
+    "source_and_work_open_during_exact_fullname_selection": true,
+    "result_path_absent_before_run": true,
+    "excel_process_count_before_run": 0
+  },
+  "pad_observation": {
+    "run_button_reenabled": true,
+    "visible_error_observed": false,
+    "last_action_reached": 40,
+    "probe_state_visible_prefix": "R11_MINIMAL_FI",
+    "powershell_output": "",
+    "variables": {
+      "BeforeText": "BEFORE_TEXT",
+      "BeforeNumber": 7,
+      "ImmediateText": "100%",
+      "ImmediateNumber": 42.5,
+      "ImmediateTextJson": "{\"probe\":\"100%\"}",
+      "ImmediateNumberJson": "{\"probe\":42.5}",
+      "ReopenedText": "100%",
+      "ReopenedNumber": 42.5,
+      "ReopenedTextJson": "{\"probe\":\"100%\"}",
+      "ReopenedNumberJson": "{\"probe\":42.5}",
+      "ImmediateVsReopenedText": true,
+      "ImmediateVsReopenedNumber": true,
+      "SourceVsImmediateText": true,
+      "SourceVsImmediateNumber": true,
+      "SourceVsReopenedText": true,
+      "SourceVsReopenedNumber": true
+    }
+  },
+  "postconditions": {
+    "result_path_exists": true,
+    "excel_process_count_after_run": 0,
+    "source_sha256_unchanged": "dda07aac129a7f2f55bbd40067eda426b4b8f4f997254e7e9f69059803ac5874",
+    "work_sha256_unchanged": "13855dcaf2fa8a9dd8d282197fd74c2f138d9ebc5552debbedbc5886296d2bde",
+    "result_sha256": "3f10c3ee8ca916f525bdcf881a959e3d5bd8f22d2275dbae6af60b7b7a8e52ee",
+    "external_artifact_verification": "PASS_EXTERNAL_ARTIFACT_CHECK_FOR_DEDICATED_PAD_PROBE"
+  },
+  "decision": "PASS_ONE_DEDICATED_SYNTHETIC_PAD_RUN",
+  "limits": [
+    "This is a dedicated two-cell synthetic validation, not a Copilot-generated EX03 integrated run.",
+    "The visible ProbeState value was clipped by the PAD variables pane; action 40 completion and the visible prefix were observed separately.",
+    "The inner finally is structurally present and normal-path format restoration passed; an injected exception-path run was not performed.",
+    "No result is generalized beyond text 100% and number 42.5 at the synthetic A2:B2 scope."
+  ]
+}

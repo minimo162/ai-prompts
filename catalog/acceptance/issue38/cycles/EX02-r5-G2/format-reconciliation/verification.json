@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "kind": "EX02_FORMAT_RECONCILIATION_VERIFICATION",
+  "observed_at": "2026-09-15T22:30:50.4586140Z",
+  "base_commit": "7131d60b0b4cb202f5ff71debcaf15d101688459",
+  "candidate_version": "20260915-excel-r5",
+  "scope": "Existing-evidence analysis and comparator correction only",
+  "evidence": {
+    "old_fail_preserved": {
+      "path": "catalog/acceptance/issue38/cycles/EX02-r5-G2/acceptance-status.json",
+      "sha256": "634298a3619039ff2e2fad0028e407e71b29ced8749bbbe6788176476b257292",
+      "status": "NOT_ACCEPTED_LEGACY_STYLE_DIMENSION_558_UNRESOLVED"
+    },
+    "positive_effective_comparisons": {
+      "status": "MATCH_EFFECTIVE_FORMAT",
+      "common_snapshot_sha256": "28a5ca0636f95e679c3d4834e13ec248fef5e5fd8829463051759a8250186ea4",
+      "difference_count": 0,
+      "checked": {
+        "cells": 480,
+        "rows": 48,
+        "columns": 30
+      },
+      "full_attribute_snapshot": "run1-effective.json",
+      "summary_and_snapshot_hash_only": [
+        "noop-effective.json",
+        "run2-effective.json"
+      ],
+      "files": {
+        "noop-effective.json": "c0a0a745d7c7a3917fe8eb22cb05b1d1046902626112d8fa4432c0c9f7336118",
+        "run1-effective.json": "cc752743eb5253268d17636c19269c589820f675f830fc9d787c000e9431675e",
+        "run2-effective.json": "252f66e78c0efaacd746d2f1ba07a565f4be3399119e9145575e4b0333878ec9"
+      }
+    },
+    "classification": {
+      "path": "classification.json",
+      "sha256": "eebb135d4e5ed9ac42ff6318a985c9f51336b51685200d84e12302d9ee05c5a1",
+      "serialization_or_comparison_method_only": 558,
+      "actual_effective_changes": 0,
+      "unresolved": 0,
+      "by_category": {
+        "cell_style": 480,
+        "row_dimension": 48,
+        "column_dimension": 30
+      }
+    },
+    "negative": {
+      "status": "PASS_EXACT_THREE_EFFECTIVE_CHANGES",
+      "workbook_sha256": "4ebf7b15d34b67c59dcc36c4c4b58a332354c7cfdc9ed2111a870416001212ea",
+      "effective_evidence_sha256": "ac4273008e56d385bbf396123c8ee28263778e6c430a08ab4b366160679f48f1",
+      "differences": [
+        "Target A!C4 fill",
+        "Target A row 2 height 14.7 -> 30.0",
+        "Target A column B width 19.42 -> 23.42"
+      ],
+      "target_value_type_position_mismatches": 0,
+      "outside_value_type_formula_mismatches": 0,
+      "artifact_authoring_exit_1_used_as_pass": false,
+      "independent_saved_file_validation": "PASS"
+    },
+    "implementation": {
+      "comparator_sha256": "144988e91b17faf615fe133ce6fdee83cfb4acc1855ee73254ff2fa57e67c71f",
+      "classifier_sha256": "9d8ffbcfbb2914abbfe9882f58d8c14c02281c90a480f1e72c8772ce40d8e36b",
+      "review_sha256": "352ec2638bb010812f4846c8cca87db2b6fdaa7639735f5840f99fa00ef53c70"
+    }
+  },
+  "preservation": {
+    "template_run1_run2_and_old_acceptance_match_base_commit": true,
+    "legacy_comparators_and_old_fail_rewritten": false,
+    "candidate_version_changed": false,
+    "copilot_regenerated": false,
+    "pad_additional_run": false,
+    "github_write": false
+  },
+  "validation": [
+    {
+      "command": "python -B tests/Test-Issue38Ex02.py",
+      "exit_code": 0,
+      "result": "18 tests passed"
+    },
+    {
+      "command": "python -B tests/Test-Issue38Excel.py",
+      "exit_code": 0,
+      "result": "13 tests passed"
+    },
+    {
+      "command": "node tests/Test-Issue38Package.mjs 20260915-excel-r5",
+      "exit_code": 0,
+      "result": "PASS_NON_LIVE_PACKAGE"
+    },
+    {
+      "command": "pwsh -NoProfile -File tests/Test-RobinCatalog.ps1",
+      "exit_code": 0,
+      "result": "107 checks passed; no PAD/Copilot invoked"
+    },
+    {
+      "command": "pwsh -NoProfile -File tests/Test-CopilotRobinPackage.ps1",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "command": "PowerShell parser: tools/Compare-Issue38NativeStyles.ps1",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "command": "JSON load and fixed-invariant assertions",
+      "exit_code": 0,
+      "result": "8 evidence JSON files parsed; all assertions passed"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "PASS"
+    }
+  ],
+  "verdict": {
+    "format_dimension_blocker": "RESOLVED_FOR_FIXED_EX02_SCOPE",
+    "functional_g2_status": "PASS_FIXED_EX02_TEXT_NUMBER_SCOPE",
+    "overall_issue38_acceptance": "NOT_DECLARED_COMPLETE",
+    "remaining_item": "Existing-output guard branch is not live-tested"
+  }
+}

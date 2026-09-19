@@ -1,0 +1,8385 @@
+{
+  "status": "FAIL",
+  "kind": "EX02_INDEPENDENT_DIAGNOSTIC",
+  "legacy": {
+    "status": "FAIL",
+    "case": "EX02",
+    "checked_cells": 480,
+    "target_cells": 12,
+    "failures": [
+      "Decoy: row dimension 1",
+      "Decoy: row dimension 2",
+      "Decoy: row dimension 3",
+      "Decoy: row dimension 4",
+      "Decoy: row dimension 5",
+      "Decoy: row dimension 6",
+      "Decoy: row dimension 7",
+      "Decoy: row dimension 8",
+      "Decoy: row dimension 9",
+      "Decoy: row dimension 10",
+      "Decoy: row dimension 11",
+      "Decoy: row dimension 12",
+      "Decoy: row dimension 13",
+      "Decoy: row dimension 14",
+      "Decoy: row dimension 15",
+      "Decoy: row dimension 16",
+      "Decoy: column dimension B",
+      "Decoy: column dimension F",
+      "Decoy: column dimension E",
+      "Decoy: column dimension G",
+      "Decoy: column dimension I",
+      "Decoy: column dimension A",
+      "Decoy: column dimension D",
+      "Decoy: column dimension H",
+      "Decoy: column dimension C",
+      "Decoy: column dimension J",
+      "Decoy!A1: style changed",
+      "Decoy!B1: style changed",
+      "Decoy!C1: style changed",
+      "Decoy!D1: style changed",
+      "Decoy!E1: style changed",
+      "Decoy!F1: style changed",
+      "Decoy!G1: style changed",
+      "Decoy!H1: style changed",
+      "Decoy!I1: style changed",
+      "Decoy!J1: style changed",
+      "Decoy!A2: style changed",
+      "Decoy!B2: style changed",
+      "Decoy!C2: style changed",
+      "Decoy!D2: style changed",
+      "Decoy!E2: style changed",
+      "Decoy!F2: style changed",
+      "Decoy!G2: style changed",
+      "Decoy!H2: style changed",
+      "Decoy!I2: style changed",
+      "Decoy!J2: style changed",
+      "Decoy!A3: style changed",
+      "Decoy!B3: style changed",
+      "Decoy!C3: style changed",
+      "Decoy!D3: style changed",
+      "Decoy!E3: style changed",
+      "Decoy!F3: style changed",
+      "Decoy!G3: style changed",
+      "Decoy!H3: style changed",
+      "Decoy!I3: style changed",
+      "Decoy!J3: style changed",
+      "Decoy!A4: style changed",
+      "Decoy!B4: style changed",
+      "Decoy!C4: style changed",
+      "Decoy!D4: style changed",
+      "Decoy!E4: style changed",
+      "Decoy!F4: style changed",
+      "Decoy!G4: style changed",
+      "Decoy!H4: style changed",
+      "Decoy!I4: style changed",
+      "Decoy!J4: style changed",
+      "Decoy!A5: style changed",
+      "Decoy!B5: style changed",
+      "Decoy!C5: style changed",
+      "Decoy!D5: style changed",
+      "Decoy!E5: style changed",
+      "Decoy!F5: style changed",
+      "Decoy!G5: style changed",
+      "Decoy!H5: style changed",
+      "Decoy!I5: style changed",
+      "Decoy!J5: style changed",
+      "Decoy!A6: style changed",
+      "Decoy!B6: style changed",
+      "Decoy!C6: style changed",
+      "Decoy!D6: style changed",
+      "Decoy!E6: style changed",
+      "Decoy!F6: style changed",
+      "Decoy!G6: style changed",
+      "Decoy!H6: style changed",
+      "Decoy!I6: style changed",
+      "Decoy!J6: style changed",
+      "Decoy!A7: style changed",
+      "Decoy!B7: style changed",
+      "Decoy!C7: style changed",
+      "Decoy!D7: style changed",
+      "Decoy!E7: style changed",
+      "Decoy!F7: style changed",
+      "Decoy!G7: style changed",
+      "Decoy!H7: style changed",
+      "Decoy!I7: style changed",
+      "Decoy!J7: style changed",
+      "Decoy!A8: style changed",
+      "Decoy!B8: style changed",
+      "Decoy!C8: style changed",
+      "Decoy!D8: style changed",
+      "Decoy!E8: style changed",
+      "Decoy!F8: style changed",
+      "Decoy!G8: style changed",
+      "Decoy!H8: style changed",
+      "Decoy!I8: style changed",
+      "Decoy!J8: style changed",
+      "Decoy!A9: style changed",
+      "Decoy!B9: style changed",
+      "Decoy!C9: style changed",
+      "Decoy!D9: style changed",
+      "Decoy!E9: style changed",
+      "Decoy!F9: style changed",
+      "Decoy!G9: style changed",
+      "Decoy!H9: style changed",
+      "Decoy!I9: style changed",
+      "Decoy!J9: style changed",
+      "Decoy!A10: style changed",
+      "Decoy!B10: style changed",
+      "Decoy!C10: style changed",
+      "Decoy!D10: style changed",
+      "Decoy!E10: style changed",
+      "Decoy!F10: style changed",
+      "Decoy!G10: style changed",
+      "Decoy!H10: style changed",
+      "Decoy!I10: style changed",
+      "Decoy!J10: style changed",
+      "Decoy!A11: style changed",
+      "Decoy!B11: style changed",
+      "Decoy!C11: style changed",
+      "Decoy!D11: style changed",
+      "Decoy!E11: style changed",
+      "Decoy!F11: style changed",
+      "Decoy!G11: style changed",
+      "Decoy!H11: style changed",
+      "Decoy!I11: style changed",
+      "Decoy!J11: style changed",
+      "Decoy!A12: style changed",
+      "Decoy!B12: style changed",
+      "Decoy!C12: style changed",
+      "Decoy!D12: style changed",
+      "Decoy!E12: style changed",
+      "Decoy!F12: style changed",
+      "Decoy!G12: style changed",
+      "Decoy!H12: style changed",
+      "Decoy!I12: style changed",
+      "Decoy!J12: style changed",
+      "Decoy!A13: style changed",
+      "Decoy!B13: style changed",
+      "Decoy!C13: style changed",
+      "Decoy!D13: style changed",
+      "Decoy!E13: style changed",
+      "Decoy!F13: style changed",
+      "Decoy!G13: style changed",
+      "Decoy!H13: style changed",
+      "Decoy!I13: style changed",
+      "Decoy!J13: style changed",
+      "Decoy!A14: style changed",
+      "Decoy!B14: style changed",
+      "Decoy!C14: style changed",
+      "Decoy!D14: style changed",
+      "Decoy!E14: style changed",
+      "Decoy!F14: style changed",
+      "Decoy!G14: style changed",
+      "Decoy!H14: style changed",
+      "Decoy!I14: style changed",
+      "Decoy!J14: style changed",
+      "Decoy!A15: style changed",
+      "Decoy!B15: style changed",
+      "Decoy!C15: style changed",
+      "Decoy!D15: style changed",
+      "Decoy!E15: style changed",
+      "Decoy!F15: style changed",
+      "Decoy!G15: style changed",
+      "Decoy!H15: style changed",
+      "Decoy!I15: style changed",
+      "Decoy!J15: style changed",
+      "Decoy!A16: style changed",
+      "Decoy!B16: style changed",
+      "Decoy!C16: style changed",
+      "Decoy!D16: style changed",
+      "Decoy!E16: style changed",
+      "Decoy!F16: style changed",
+      "Decoy!G16: style changed",
+      "Decoy!H16: style changed",
+      "Decoy!I16: style changed",
+      "Decoy!J16: style changed",
+      "Target A: row dimension 1",
+      "Target A: row dimension 2",
+      "Target A: row dimension 3",
+      "Target A: row dimension 4",
+      "Target A: row dimension 5",
+      "Target A: row dimension 6",
+      "Target A: row dimension 7",
+      "Target A: row dimension 8",
+      "Target A: row dimension 9",
+      "Target A: row dimension 10",
+      "Target A: row dimension 11",
+      "Target A: row dimension 12",
+      "Target A: row dimension 13",
+      "Target A: row dimension 14",
+      "Target A: row dimension 15",
+      "Target A: row dimension 16",
+      "Target A: column dimension B",
+      "Target A: column dimension F",
+      "Target A: column dimension E",
+      "Target A: column dimension G",
+      "Target A: column dimension I",
+      "Target A: column dimension A",
+      "Target A: column dimension D",
+      "Target A: column dimension H",
+      "Target A: column dimension C",
+      "Target A: column dimension J",
+      "Target A!A1: style changed",
+      "Target A!B1: style changed",
+      "Target A!C1: style changed",
+      "Target A!D1: style changed",
+      "Target A!E1: style changed",
+      "Target A!F1: style changed",
+      "Target A!G1: style changed",
+      "Target A!H1: style changed",
+      "Target A!I1: style changed",
+      "Target A!J1: style changed",
+      "Target A!A2: style changed",
+      "Target A!B2: style changed",
+      "Target A!C2: style changed",
+      "Target A!D2: style changed",
+      "Target A!E2: style changed",
+      "Target A!F2: style changed",
+      "Target A!G2: style changed",
+      "Target A!H2: style changed",
+      "Target A!I2: style changed",
+      "Target A!J2: style changed",
+      "Target A!A3: style changed",
+      "Target A!B3: style changed",
+      "Target A!C3: style changed",
+      "Target A!D3: style changed",
+      "Target A!E3: style changed",
+      "Target A!F3: style changed",
+      "Target A!G3: style changed",
+      "Target A!H3: style changed",
+      "Target A!I3: style changed",
+      "Target A!J3: style changed",
+      "Target A!A4: style changed",
+      "Target A!B4: style changed",
+      "Target A!C4: style changed",
+      "Target A!D4: style changed",
+      "Target A!E4: style changed",
+      "Target A!F4: style changed",
+      "Target A!G4: style changed",
+      "Target A!H4: style changed",
+      "Target A!I4: style changed",
+      "Target A!J4: style changed",
+      "Target A!A5: style changed",
+      "Target A!B5: style changed",
+      "Target A!C5: style changed",
+      "Target A!D5: style changed",
+      "Target A!E5: style changed",
+      "Target A!F5: style changed",
+      "Target A!G5: style changed",
+      "Target A!H5: style changed",
+      "Target A!I5: style changed",
+      "Target A!J5: style changed",
+      "Target A!A6: style changed",
+      "Target A!B6: style changed",
+      "Target A!C6: style changed",
+      "Target A!D6: style changed",
+      "Target A!E6: style changed",
+      "Target A!F6: style changed",
+      "Target A!G6: style changed",
+      "Target A!H6: style changed",
+      "Target A!I6: style changed",
+      "Target A!J6: style changed",
+      "Target A!A7: style changed",
+      "Target A!B7: style changed",
+      "Target A!C7: style changed",
+      "Target A!D7: style changed",
+      "Target A!E7: style changed",
+      "Target A!F7: style changed",
+      "Target A!G7: style changed",
+      "Target A!H7: style changed",
+      "Target A!I7: style changed",
+      "Target A!J7: style changed",
+      "Target A!A8: style changed",
+      "Target A!B8: style changed",
+      "Target A!C8: style changed",
+      "Target A!D8: style changed",
+      "Target A!E8: style changed",
+      "Target A!F8: style changed",
+      "Target A!G8: style changed",
+      "Target A!H8: style changed",
+      "Target A!I8: style changed",
+      "Target A!J8: style changed",
+      "Target A!A9: style changed",
+      "Target A!B9: style changed",
+      "Target A!C9: style changed",
+      "Target A!D9: style changed",
+      "Target A!E9: style changed",
+      "Target A!F9: style changed",
+      "Target A!G9: style changed",
+      "Target A!H9: style changed",
+      "Target A!I9: style changed",
+      "Target A!J9: style changed",
+      "Target A!A10: style changed",
+      "Target A!B10: style changed",
+      "Target A!C10: style changed",
+      "Target A!D10: style changed",
+      "Target A!E10: style changed",
+      "Target A!F10: style changed",
+      "Target A!G10: style changed",
+      "Target A!H10: style changed",
+      "Target A!I10: style changed",
+      "Target A!J10: style changed",
+      "Target A!A11: style changed",
+      "Target A!B11: style changed",
+      "Target A!C11: style changed",
+      "Target A!D11: style changed",
+      "Target A!E11: style changed",
+      "Target A!F11: style changed",
+      "Target A!G11: style changed",
+      "Target A!H11: style changed",
+      "Target A!I11: style changed",
+      "Target A!J11: style changed",
+      "Target A!A12: style changed",
+      "Target A!B12: style changed",
+      "Target A!C12: style changed",
+      "Target A!D12: style changed",
+      "Target A!E12: style changed",
+      "Target A!F12: style changed",
+      "Target A!G12: style changed",
+      "Target A!H12: style changed",
+      "Target A!I12: style changed",
+      "Target A!J12: style changed",
+      "Target A!A13: style changed",
+      "Target A!B13: style changed",
+      "Target A!C13: style changed",
+      "Target A!D13: style changed",
+      "Target A!E13: style changed",
+      "Target A!F13: style changed",
+      "Target A!G13: style changed",
+      "Target A!H13: style changed",
+      "Target A!I13: style changed",
+      "Target A!J13: style changed",
+      "Target A!A14: style changed",
+      "Target A!B14: style changed",
+      "Target A!C14: style changed",
+      "Target A!D14: style changed",
+      "Target A!E14: style changed",
+      "Target A!F14: style changed",
+      "Target A!G14: style changed",
+      "Target A!H14: style changed",
+      "Target A!I14: style changed",
+      "Target A!J14: style changed",
+      "Target A!A15: style changed",
+      "Target A!B15: style changed",
+      "Target A!C15: style changed",
+      "Target A!D15: style changed",
+      "Target A!E15: style changed",
+      "Target A!F15: style changed",
+      "Target A!G15: style changed",
+      "Target A!H15: style changed",
+      "Target A!I15: style changed",
+      "Target A!J15: style changed",
+      "Target A!A16: style changed",
+      "Target A!B16: style changed",
+      "Target A!C16: style changed",
+      "Target A!D16: style changed",
+      "Target A!E16: style changed",
+      "Target A!F16: style changed",
+      "Target A!G16: style changed",
+      "Target A!H16: style changed",
+      "Target A!I16: style changed",
+      "Target A!J16: style changed",
+      "Target B: row dimension 1",
+      "Target B: row dimension 2",
+      "Target B: row dimension 3",
+      "Target B: row dimension 4",
+      "Target B: row dimension 5",
+      "Target B: row dimension 6",
+      "Target B: row dimension 7",
+      "Target B: row dimension 8",
+      "Target B: row dimension 9",
+      "Target B: row dimension 10",
+      "Target B: row dimension 11",
+      "Target B: row dimension 12",
+      "Target B: row dimension 13",
+      "Target B: row dimension 14",
+      "Target B: row dimension 15",
+      "Target B: row dimension 16",
+      "Target B: column dimension B",
+      "Target B: column dimension F",
+      "Target B: column dimension E",
+      "Target B: column dimension G",
+      "Target B: column dimension I",
+      "Target B: column dimension A",
+      "Target B: column dimension D",
+      "Target B: column dimension H",
+      "Target B: column dimension C",
+      "Target B: column dimension J",
+      "Target B!A1: style changed",
+      "Target B!B1: style changed",
+      "Target B!C1: style changed",
+      "Target B!D1: style changed",
+      "Target B!E1: style changed",
+      "Target B!F1: style changed",
+      "Target B!G1: style changed",
+      "Target B!H1: style changed",
+      "Target B!I1: style changed",
+      "Target B!J1: style changed",
+      "Target B!A2: style changed",
+      "Target B!B2: style changed",
+      "Target B!C2: style changed",
+      "Target B!D2: style changed",
+      "Target B!E2: style changed",
+      "Target B!F2: style changed",
+      "Target B!G2: style changed",
+      "Target B!H2: style changed",
+      "Target B!I2: style changed",
+      "Target B!J2: style changed",
+      "Target B!A3: style changed",
+      "Target B!B3: style changed",
+      "Target B!C3: style changed",
+      "Target B!D3: style changed",
+      "Target B!E3: style changed",
+      "Target B!F3: style changed",
+      "Target B!G3: style changed",
+      "Target B!H3: style changed",
+      "Target B!I3: style changed",
+      "Target B!J3: style changed",
+      "Target B!A4: style changed",
+      "Target B!B4: style changed",
+      "Target B!C4: style changed",
+      "Target B!D4: style changed",
+      "Target B!E4: style changed",
+      "Target B!F4: style changed",
+      "Target B!G4: style changed",
+      "Target B!H4: style changed",
+      "Target B!I4: style changed",
+      "Target B!J4: style changed",
+      "Target B!A5: style changed",
+      "Target B!B5: style changed",
+      "Target B!C5: style changed",
+      "Target B!D5: style changed",
+      "Target B!E5: style changed",
+      "Target B!F5: style changed",
+      "Target B!G5: style changed",
+      "Target B!H5: style changed",
+      "Target B!I5: style changed",
+      "Target B!J5: style changed",
+      "Target B!A6: style changed",
+      "Target B!B6: style changed",
+      "Target B!C6: style changed",
+      "Target B!D6: style changed",
+      "Target B!E6: style changed",
+      "Target B!F6: style changed",
+      "Target B!G6: style changed",
+      "Target B!H6: style changed",
+      "Target B!I6: style changed",
+      "Target B!J6: style changed",
+      "Target B!A7: style changed",
+      "Target B!B7: style changed",
+      "Target B!C7: style changed",
+      "Target B!D7: style changed",
+      "Target B!E7: style changed",
+      "Target B!F7: style changed",
+      "Target B!G7: style changed",
+      "Target B!H7: style changed",
+      "Target B!I7: style changed",
+      "Target B!J7: style changed",
+      "Target B!A8: style changed",
+      "Target B!B8: style changed",
+      "Target B!C8: style changed",
+      "Target B!D8: style changed",
+      "Target B!E8: style changed",
+      "Target B!F8: style changed",
+      "Target B!G8: style changed",
+      "Target B!H8: style changed",
+      "Target B!I8: style changed",
+      "Target B!J8: style changed",
+      "Target B!A9: style changed",
+      "Target B!B9: style changed",
+      "Target B!C9: style changed",
+      "Target B!D9: style changed",
+      "Target B!E9: style changed",
+      "Target B!F9: style changed",
+      "Target B!G9: style changed",
+      "Target B!H9: style changed",
+      "Target B!I9: style changed",
+      "Target B!J9: style changed",
+      "Target B!A10: style changed",
+      "Target B!B10: style changed",
+      "Target B!C10: style changed",
+      "Target B!D10: style changed",
+      "Target B!E10: style changed",
+      "Target B!F10: style changed",
+      "Target B!G10: style changed",
+      "Target B!H10: style changed",
+      "Target B!I10: style changed",
+      "Target B!J10: style changed",
+      "Target B!A11: style changed",
+      "Target B!B11: style changed",
+      "Target B!C11: style changed",
+      "Target B!D11: style changed",
+      "Target B!E11: style changed",
+      "Target B!F11: style changed",
+      "Target B!G11: style changed",
+      "Target B!H11: style changed",
+      "Target B!I11: style changed",
+      "Target B!J11: style changed",
+      "Target B!A12: style changed",
+      "Target B!B12: style changed",
+      "Target B!C12: style changed",
+      "Target B!D12: style changed",
+      "Target B!E12: style changed",
+      "Target B!F12: style changed",
+      "Target B!G12: style changed",
+      "Target B!H12: style changed",
+      "Target B!I12: style changed",
+      "Target B!J12: style changed",
+      "Target B!A13: style changed",
+      "Target B!B13: style changed",
+      "Target B!C13: style changed",
+      "Target B!D13: style changed",
+      "Target B!E13: style changed",
+      "Target B!F13: style changed",
+      "Target B!G13: style changed",
+      "Target B!H13: style changed",
+      "Target B!I13: style changed",
+      "Target B!J13: style changed",
+      "Target B!A14: style changed",
+      "Target B!B14: style changed",
+      "Target B!C14: style changed",
+      "Target B!D14: style changed",
+      "Target B!E14: style changed",
+      "Target B!F14: style changed",
+      "Target B!G14: style changed",
+      "Target B!H14: style changed",
+      "Target B!I14: style changed",
+      "Target B!J14: style changed",
+      "Target B!A15: style changed",
+      "Target B!B15: style changed",
+      "Target B!C15: style changed",
+      "Target B!D15: style changed",
+      "Target B!E15: style changed",
+      "Target B!F15: style changed",
+      "Target B!G15: style changed",
+      "Target B!H15: style changed",
+      "Target B!I15: style changed",
+      "Target B!J15: style changed",
+      "Target B!A16: style changed",
+      "Target B!B16: style changed",
+      "Target B!C16: style changed",
+      "Target B!D16: style changed",
+      "Target B!E16: style changed",
+      "Target B!F16: style changed",
+      "Target B!G16: style changed",
+      "Target B!H16: style changed",
+      "Target B!I16: style changed",
+      "Target B!J16: style changed"
+    ],
+    "output_sha256": "c678ae701725716d62aa945d73e341e0122db7e37a4ad35bc670108aeab68325",
+    "copilot_generation": "NOT_ASSERTED",
+    "pad_execution": "NOT_ASSERTED"
+  },
+  "failure_counts": {
+    "row_dimensions": 48,
+    "column_dimensions": 30,
+    "styles": 480
+  },
+  "checks": {
+    "target_values_types_positions": {
+      "checked": 12,
+      "mismatches": [],
+      "status": "MATCH_SAVED_XLSX_ONLY"
+    },
+    "outside_values_types_formulas": {
+      "checked": 468,
+      "mismatches": [],
+      "status": "MATCH_SAVED_XLSX_ONLY"
+    }
+  },
+  "style_attribute_difference_counts": {
+    "font": 480,
+    "border": 480
+  },
+  "dimension_differences": [
+    {
+      "sheet": "Decoy",
+      "row": 1,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 2,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 3,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 4,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 5,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 6,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 7,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 8,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 9,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 10,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 11,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 12,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 13,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 14,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 15,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 16,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "A",
+      "before": [
+        20.0,
+        false,
+        1,
+        1
+      ],
+      "after": [
+        20.0,
+        false,
+        1,
+        10
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "B",
+      "before": [
+        20.0,
+        false,
+        2,
+        2
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "C",
+      "before": [
+        20.0,
+        false,
+        3,
+        3
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "D",
+      "before": [
+        20.0,
+        false,
+        4,
+        4
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "E",
+      "before": [
+        20.0,
+        false,
+        5,
+        5
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "F",
+      "before": [
+        20.0,
+        false,
+        6,
+        6
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "G",
+      "before": [
+        20.0,
+        false,
+        7,
+        7
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "H",
+      "before": [
+        20.0,
+        false,
+        8,
+        8
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "I",
+      "before": [
+        20.0,
+        false,
+        9,
+        9
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "J",
+      "before": [
+        20.0,
+        false,
+        10,
+        10
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "row": 1,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "row": 2,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "row": 3,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "row": 4,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "row": 5,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "row": 6,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "row": 7,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "row": 8,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "row": 9,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "row": 10,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "row": 11,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "row": 12,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "row": 13,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "row": 14,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "row": 15,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "row": 16,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "column": "A",
+      "before": [
+        20.0,
+        false,
+        1,
+        1
+      ],
+      "after": [
+        20.0,
+        false,
+        1,
+        10
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "column": "B",
+      "before": [
+        20.0,
+        false,
+        2,
+        2
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "column": "C",
+      "before": [
+        20.0,
+        false,
+        3,
+        3
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "column": "D",
+      "before": [
+        20.0,
+        false,
+        4,
+        4
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "column": "E",
+      "before": [
+        20.0,
+        false,
+        5,
+        5
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "column": "F",
+      "before": [
+        20.0,
+        false,
+        6,
+        6
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "column": "G",
+      "before": [
+        20.0,
+        false,
+        7,
+        7
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "column": "H",
+      "before": [
+        20.0,
+        false,
+        8,
+        8
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "column": "I",
+      "before": [
+        20.0,
+        false,
+        9,
+        9
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target A",
+      "column": "J",
+      "before": [
+        20.0,
+        false,
+        10,
+        10
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "row": 1,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "row": 2,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "row": 3,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "row": 4,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "row": 5,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "row": 6,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "row": 7,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "row": 8,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "row": 9,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "row": 10,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "row": 11,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "row": 12,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "row": 13,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "row": 14,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "row": 15,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "row": 16,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "column": "A",
+      "before": [
+        20.0,
+        false,
+        1,
+        1
+      ],
+      "after": [
+        20.0,
+        false,
+        1,
+        10
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "column": "B",
+      "before": [
+        20.0,
+        false,
+        2,
+        2
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "column": "C",
+      "before": [
+        20.0,
+        false,
+        3,
+        3
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "column": "D",
+      "before": [
+        20.0,
+        false,
+        4,
+        4
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "column": "E",
+      "before": [
+        20.0,
+        false,
+        5,
+        5
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "column": "F",
+      "before": [
+        20.0,
+        false,
+        6,
+        6
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "column": "G",
+      "before": [
+        20.0,
+        false,
+        7,
+        7
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "column": "H",
+      "before": [
+        20.0,
+        false,
+        8,
+        8
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "column": "I",
+      "before": [
+        20.0,
+        false,
+        9,
+        9
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Target B",
+      "column": "J",
+      "before": [
+        20.0,
+        false,
+        10,
+        10
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    }
+  ],
+  "cells": [
+    {
+      "sheet": "Decoy",
+      "cell": "A1",
+      "target": false,
+      "expected": [
+        "text",
+        "DO NOT READ THIS SHEET"
+      ],
+      "actual": [
+        "text",
+        "DO NOT READ THIS SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B2",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C2",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D2",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E2",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B3",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C3",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D3",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E3",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B4",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C4",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D4",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E4",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B5",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C5",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D5",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E5",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B6",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C6",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D6",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E6",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "A1",
+      "target": false,
+      "expected": [
+        "text",
+        "KEEP TEMPLATE"
+      ],
+      "actual": [
+        "text",
+        "KEEP TEMPLATE"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "B1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "C1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "D1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "E1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "F1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "G1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "H1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "I1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "J1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "A2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "B2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "C2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "D2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "E2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "F2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "G2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "H2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "I2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "J2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "A3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "B3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "C3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "D3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "E3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "F3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "G3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "H3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "I3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "J3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "A4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "B4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "C4",
+      "target": true,
+      "expected": [
+        "text",
+        "Alpha"
+      ],
+      "actual": [
+        "text",
+        "Alpha"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "D4",
+      "target": true,
+      "expected": [
+        "number",
+        12.5
+      ],
+      "actual": [
+        "number",
+        12.5
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "E4",
+      "target": true,
+      "expected": [
+        "number",
+        0
+      ],
+      "actual": [
+        "number",
+        0
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "F4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "G4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "H4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "I4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "J4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "A5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "B5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "C5",
+      "target": true,
+      "expected": [
+        "text",
+        "Beta"
+      ],
+      "actual": [
+        "text",
+        "Beta"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "D5",
+      "target": true,
+      "expected": [
+        "number",
+        -3
+      ],
+      "actual": [
+        "number",
+        -3
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "E5",
+      "target": true,
+      "expected": [
+        "number",
+        100
+      ],
+      "actual": [
+        "number",
+        100
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "F5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "G5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "H5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "I5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "J5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "A6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "B6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "C6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "D6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "E6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "F6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "G6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "H6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "I6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "J6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "A7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "B7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "C7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "D7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "E7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "F7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "G7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "H7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "I7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "J7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "A8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "B8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "C8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "D8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "E8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "F8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "G8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "H8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "I8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "J8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "A9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "B9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "C9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "D9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "E9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "F9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "G9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "H9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "I9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "J9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "A10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "B10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "C10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "D10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "E10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "F10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "G10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "H10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "I10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "J10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "A11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "B11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "C11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "D11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "E11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "F11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "G11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "H11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "I11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "J11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "A12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "B12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "C12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "D12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "E12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "F12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "G12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "H12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "I12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "J12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "A13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "B13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "C13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "D13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "E13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "F13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "G13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "H13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "I13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "J13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "A14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "B14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "C14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "D14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "E14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "F14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "G14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "H14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "I14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "J14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "A15",
+      "target": false,
+      "expected": [
+        "text",
+        "KEEP OUTSIDE"
+      ],
+      "actual": [
+        "text",
+        "KEEP OUTSIDE"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "B15",
+      "target": false,
+      "expected": [
+        "formula",
+        "=2+3"
+      ],
+      "actual": [
+        "formula",
+        "=2+3"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "C15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "D15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "E15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "F15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "G15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "H15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "I15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "J15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "A16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "B16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "C16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "D16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "E16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "F16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "G16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "H16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "I16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target A",
+      "cell": "J16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "A1",
+      "target": false,
+      "expected": [
+        "text",
+        "KEEP TEMPLATE"
+      ],
+      "actual": [
+        "text",
+        "KEEP TEMPLATE"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "B1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "C1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "D1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "E1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "F1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "G1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "H1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "I1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "J1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "A2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "B2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "C2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "D2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "E2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "F2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "G2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "H2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "I2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "J2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "A3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "B3",
+      "target": true,
+      "expected": [
+        "text",
+        "Gamma"
+      ],
+      "actual": [
+        "text",
+        "Gamma"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "C3",
+      "target": true,
+      "expected": [
+        "number",
+        7
+      ],
+      "actual": [
+        "number",
+        7
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "D3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "E3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "F3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "G3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "H3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "I3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "J3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "A4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "B4",
+      "target": true,
+      "expected": [
+        "text",
+        "Delta"
+      ],
+      "actual": [
+        "text",
+        "Delta"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "C4",
+      "target": true,
+      "expected": [
+        "number",
+        8
+      ],
+      "actual": [
+        "number",
+        8
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "D4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "E4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "F4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "G4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "H4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "I4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "J4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "A5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "B5",
+      "target": true,
+      "expected": [
+        "text",
+        "Epsilon"
+      ],
+      "actual": [
+        "text",
+        "Epsilon"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "C5",
+      "target": true,
+      "expected": [
+        "number",
+        9
+      ],
+      "actual": [
+        "number",
+        9
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "D5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "E5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "F5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "G5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "H5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "I5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "J5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "A6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "B6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "C6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "D6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "E6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "F6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "G6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "H6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "I6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "J6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "A7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "B7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "C7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "D7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "E7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "F7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "G7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "H7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "I7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "J7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "A8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "B8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "C8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "D8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "E8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "F8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "G8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "H8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "I8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "J8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "A9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "B9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "C9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "D9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "E9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "F9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "G9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "H9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "I9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "J9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "A10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "B10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "C10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "D10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "E10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "F10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "G10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "H10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "I10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "J10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "A11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "B11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "C11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "D11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "E11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "F11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "G11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "H11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "I11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "J11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "A12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "B12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "C12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "D12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "E12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "F12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "G12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "H12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "I12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "J12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "A13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "B13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "C13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "D13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "E13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "F13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "G13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "H13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "I13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "J13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "A14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "B14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "C14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "D14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "E14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "F14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "G14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "H14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "I14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "J14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "A15",
+      "target": false,
+      "expected": [
+        "text",
+        "KEEP OUTSIDE"
+      ],
+      "actual": [
+        "text",
+        "KEEP OUTSIDE"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "B15",
+      "target": false,
+      "expected": [
+        "formula",
+        "=2+3"
+      ],
+      "actual": [
+        "formula",
+        "=2+3"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "C15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "D15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "E15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "F15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "G15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "H15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "I15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "J15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "A16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "B16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "C16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "D16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "E16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "F16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "G16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "H16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "I16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Target B",
+      "cell": "J16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    }
+  ],
+  "output_sha_before": "c678ae701725716d62aa945d73e341e0122db7e37a4ad35bc670108aeab68325",
+  "output_sha_after": "c678ae701725716d62aa945d73e341e0122db7e37a4ad35bc670108aeab68325",
+  "originals_sha256": {
+    "fixtures/EX02/input-a.xlsx": "f655b62c82750fc07f4e54bcfd098e8e7c0b771c9422c4321cc413a4d6d07fa9",
+    "fixtures/EX02/input-b.xlsx": "69627e161747fedad0f7c3b410c1d625b29a553786be0c145e83aaf43d1b105a",
+    "fixtures/EX02/template.xlsx": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457"
+  },
+  "native_styles": "NOT_RUN_BY_THIS_COMPARATOR",
+  "flow_internal_type_check": "NOT_PROVEN",
+  "copilot_generation": "NOT_ASSERTED",
+  "pad_execution": "NOT_ASSERTED"
+}

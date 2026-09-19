@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "kind": "EX02_NEGATIVE_SAME_DISPLAY_RENDER_CHECK",
+  "positive_render": "catalog/acceptance/issue38/cycles/EX02-r5-G2/run2/target-a-render.png",
+  "positive_render_sha256": "0922b8f748bc0faba2a072ec5da726d87498dfec14be1f7c2633e88cac81a9de",
+  "negative_render": "catalog/acceptance/issue38/cycles/EX02-r5-G2/negative/target-a-render.png",
+  "negative_render_sha256": "0922b8f748bc0faba2a072ec5da726d87498dfec14be1f7c2633e88cac81a9de",
+  "render_bytes_equal": true,
+  "fixed_cell": "Target A!D4",
+  "positive_typed_value": [
+    "number",
+    12.5
+  ],
+  "negative_typed_value": [
+    "text",
+    "12.5"
+  ],
+  "interpretation": "The visible target range is byte-identical when rendered, while the fixed typed oracle detects the intended one-cell type mismatch."
+}

@@ -1,0 +1,240 @@
+Copilot said:
+
+前提・未確認点:
+
+添付 bundle は完成 Robin ではなく、コンポーネントと接続規約です。PAD-Robin-Fixed-Helper-A4-Bundle に含まれる C01-C12、A4 WIRING SPEC、ASSEMBLY RULES を根拠に合成しています。
+C06 の RunPowerShellScript 部分は bundle に固定原文が収録されていますが、A4 専用 invocation/work/json_root に接続したまま未実行採取扱いです。bundle 自身も「NOT_RUN」と明記しています。
+本回答では bundle が許可している「captured component の複製・接続」に従い、7 個の文字列経路、5 個の数値書込み、2 個の readback、12 比較順を A4 WIRING SPEC の固定位置へ配線しています。
+
+コードブロックにコピー機能が表示されている場合は、それでコード部分だけをコピーし、PAD の対象サブフローへ貼り付けてください。
+
+Plain Text
+1
+SET ProbeState TO $'''NOT_STARTED'''
+2
+SET ScriptGatePassed TO False
+3
+SET NumericWriteEntered TO False
+4
+SET SaveAsEntered TO False
+5
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx''') THEN
+6
+    SET ProbeState TO $'''OUTPUT_EXISTS_NO_RUN'''
+7
+ELSE
+8
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力い.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> SourceBook1
+9
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: SourceBook1 Name: $'''受取明細'''
+10
+    Excel.ReadFromExcel.ReadCells Instance: SourceBook1 StartColumn: $'''D''' StartRow: 4 EndColumn: $'''E''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Data1
+11
+    Excel.CloseExcel.Close Instance: SourceBook1
+12
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力ろ.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> SourceBook2
+13
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: SourceBook2 Name: $'''追加項目'''
+14
+    Excel.ReadFromExcel.ReadCells Instance: SourceBook2 StartColumn: $'''B''' StartRow: 2 EndColumn: $'''D''' EndRow: 3 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Data2
+15
+    Excel.CloseExcel.Close Instance: SourceBook2
+16
+    SET Source1 TO Data1[0][0]
+17
+    SET Source2 TO Data1[1][0]
+18
+    SET Source3 TO Data1[2][0]
+19
+    SET Source4 TO Data2[0][0]
+20
+    SET Source5 TO Data2[1][0]
+21
+    SET Source6 TO Data2[0][2]
+22
+    SET Source7 TO Data2[1][2]
+23
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source1 } Json=> Source1Json
+24
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source2 } Json=> Source2Json
+25
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source3 } Json=> Source3Json
+26
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source4 } Json=> Source4Json
+27
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source5 } Json=> Source5Json
+28
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source6 } Json=> Source6Json
+29
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Source7 } Json=> Source7Json
+30
+    SET RunMode TO $'''NORMAL'''
+31
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': RunMode } Json=> RunModeJson
+32
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-1.json''' TextToWrite: Source1Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+33
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-2.json''' TextToWrite: Source2Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+34
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-3.json''' TextToWrite: Source3Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+35
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-4.json''' TextToWrite: Source4Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+36
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-5.json''' TextToWrite: Source5Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+37
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-6.json''' TextToWrite: Source6Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+38
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-7.json''' TextToWrite: Source7Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+39
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\mode.json''' TextToWrite: RunModeJson AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+40
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\work.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> Work
+41
+    Scripting.RunPowershellScript.RunScript Script: $'''$ErrorActionPreference = \'Stop\'
+42
+Set-StrictMode -Version 2
+43
+$helperPath = \'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\EX03-R12-Fixed-StringTransfer.ps1\'
+44
+$invocationPath = \'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper-a4\\invocation.json\'
+45
+$expectedHelperSha256 = \'08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135\'
+46
+$expectedInvocationSha256 = \'5c5a2008f55296a48f63fa65178aab971e4212455bb2af58e33149bdcaec40d8\'
+47
+$expectedSuccess = \'{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}\''' ScriptOutput=> PowershellOutput
+48
+    IF PowershellOutput = $'''{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}''' THEN
+49
+        IF RunMode = $'''NORMAL''' THEN
+50
+            SET ScriptGatePassed TO True
+51
+            SET Num1 TO Data1[0][1]
+52
+            SET Num2 TO Data1[1][1]
+53
+            SET Num3 TO Data1[2][1]
+54
+            SET Num4 TO Data2[0][1]
+55
+            SET Num5 TO Data2[1][1]
+56
+            Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''集計先'''
+57
+            SET NumericWriteEntered TO True
+58
+            Excel.WriteToExcel.WriteCell Instance: Work Value: Num1 Column: $'''G''' Row: 7
+59
+            Excel.WriteToExcel.WriteCell Instance: Work Value: Num2 Column: $'''G''' Row: 8
+60
+            Excel.WriteToExcel.WriteCell Instance: Work Value: Num3 Column: $'''G''' Row: 9
+61
+            Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''追記先'''
+62
+            Excel.WriteToExcel.WriteCell Instance: Work Value: Num4 Column: $'''E''' Row: 5
+63
+            Excel.WriteToExcel.WriteCell Instance: Work Value: Num5 Column: $'''E''' Row: 6
+64
+            SET SaveAsEntered TO True
+65
+            Excel.SaveExcel.SaveAs Instance: Work DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx'''
+66
+            Excel.CloseExcel.Close Instance: Work
+67
+            Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Reopened
+68
+            Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''集計先'''
+69
+            Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''F''' StartRow: 7 EndColumn: $'''G''' EndRow: 9 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback1
+70
+            Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''追記先'''
+71
+            Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''D''' StartRow: 5 EndColumn: $'''F''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback2
+72
+            Excel.CloseExcel.Close Instance: Reopened
+73
+            SET Saved1 TO Readback1[0][0]
+74
+            SET Saved2 TO Readback1[0][1]
+75
+            SET Saved3 TO Readback1[1][0]
+76
+            SET Saved4 TO Readback1[1][1]
+77
+            SET Saved5 TO Readback1[2][0]
+78
+            SET Saved6 TO Readback1[2][1]
+79
+            SET Saved7 TO Readback2[0][0]
+80
+            SET Saved8 TO Readback2[0][1]
+81
+            SET Saved9 TO Readback2[0][2]
+82
+            SET Saved10 TO Readback2[1][0]
+83
+            SET Saved11 TO Readback2[1][1]
+84
+            SET Saved12 TO Readback2[1][2]
+85
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved1 } Json=> Saved1Json
+86
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved2 } Json=> Saved2Json
+87
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved3 } Json=> Saved3Json
+88
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved4 } Json=> Saved4Json
+89
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved5 } Json=> Saved5Json
+90
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved6 } Json=> Saved6Json
+91
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved7 } Json=> Saved7Json
+92
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved8 } Json=> Saved8Json
+93
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved9 } Json=> Saved9Json
+94
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved10 } Json=> Saved10Json
+95
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved11 } Json=> Saved11Json
+96
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved12 } Json=> Saved12Json
+97
+            SET Source1VsSaved TO Source1Json = Saved1Json
+98
+            SET Source2VsSaved TO Variables.ConvertCustomObjectToJson({ 'probe': Data1[0][1] }) = Saved2Json
+99
+            SET Source3VsSaved TO Source2Json = Saved3Json
+100
+            SET Source4VsSaved TO Variables.ConvertCustomObjectToJson({ 'probe': Data1[1][1] }) = Saved4Json
+101
+            SET Source5VsSaved TO Source3Json = Saved5Json
+102
+            SET Source6VsSaved TO Variables.ConvertCustomObjectToJson({ 'probe': Data1[2][1] }) = Saved6Json
+103
+            SET Source7VsSaved TO Source4Json = Saved7Json
+104
+            SET ProbeState TO $'''SUCCESS_GATE_PASSED_SAVED_READBACK_READY'''
+105
+        ELSE
+106
+            Excel.CloseExcel.Close Instance: Work
+107
+            SET ProbeState TO $'''MODE_NOT_NORMAL_NO_SAVE'''
+108
+        END
+109
+    ELSE
+110
+        Excel.CloseExcel.Close Instance: Work
+111
+        SET ProbeState TO $'''SCRIPT_NOT_SUCCESS_NO_SAVE'''
+112
+    END
+113
+END
+その他の行を表示する
+コードをコピー
+ソース

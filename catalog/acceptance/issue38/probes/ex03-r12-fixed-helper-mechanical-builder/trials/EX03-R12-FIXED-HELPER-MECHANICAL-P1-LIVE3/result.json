@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "campaign_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3",
+  "decision": "PASS_LIVE3_NORMAL1_THEN_EXISTING_OUTPUT_GUARD1",
+  "scope": "Fixed EX03 mechanical-builder path only; not Copilot generation or Issue #38 overall acceptance.",
+  "baseline_commit": "f38a69d91583a9a75f38cf499a2b5bbfeee2dff5",
+  "normal": {
+    "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-NORMAL1",
+    "decision": "PASS_LIVE3_NORMAL1_FULL_FIXED_SCOPE",
+    "artifact_sha256": "fc763e4a3d7df9f673dfa6a325006310f502d37305b3559b119044eab6f47eac",
+    "pad_runs": 1
+  },
+  "guard": {
+    "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-OUTPUT-GUARD1",
+    "decision": "PASS_LIVE3_EXISTING_OUTPUT_GUARD1",
+    "pad_runs": 1,
+    "type_comparisons": "NOT_EVALUATED"
+  },
+  "sequence_gate": "GUARD_RAN_ONLY_AFTER_NORMAL_FULL_PASS",
+  "preservation": {
+    "live2_unchanged": true,
+    "fixed_builder_wiring_helper_invocation_launcher_robin_unchanged": true,
+    "runtime_output_preserved_then_removed_from_fixed_path": true,
+    "runtime_handoff_preserved_then_json_root_emptied": true
+  },
+  "not_run": [
+    "Copilot send",
+    "candidate creation",
+    "full regression",
+    "additional PAD Run",
+    "GitHub write"
+  ],
+  "remaining": [
+    "The saved Robin has no separate stderr PAD variable; empty stderr is not directly claimed.",
+    "This campaign does not establish Copilot generation or Issue #38 overall acceptance."
+  ],
+  "decided_at": "2026-09-18T18:35:08.332523+00:00"
+}

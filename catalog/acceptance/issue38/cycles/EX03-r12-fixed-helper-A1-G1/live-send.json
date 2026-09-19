@@ -1,0 +1,21 @@
+{
+  "cycle_id": "EX03-R12-FIXED-HELPER-COPILOT-A1-G1",
+  "candidate_id": "20260918-excel-r12-fixed-helper-a1",
+  "route_id": "EX03-R12-FIXED-HELPER-COPILOT-A1",
+  "sent_at": "2026-09-18T09:47:08.2558100+09:00",
+  "destination": "normal Microsoft 365 Copilot Chat",
+  "url": "https://m365.cloud.microsoft/chat?es=SSR",
+  "browser": "Chrome",
+  "body_sha256": "ac9fded61dbc998bd5646e4dd47e073e0c3921b15873022666e1893fe4bcad26",
+  "body_characters": 10276,
+  "bundle_filename": "PAD-Robin-Fixed-Helper-Bundle.txt",
+  "bundle_sha256": "380c498f513019c49523adc362ad917fbf2199e426c766468231df50820ae4ca",
+  "pre_send_body_match": "PASS_EXACT_AFTER_LEXICAL_PARAGRAPH_NORMALIZATION",
+  "pre_send_attachment_match": "PASS_ONE_EXACT_FILENAME",
+  "send_count_this_cycle": 1,
+  "send_limit": 1,
+  "resend_allowed": false,
+  "status": "SENT_ONCE_RESPONSE_REFUSAL_STOPPED",
+  "response_code_block_count": 0,
+  "pad_runs": 0
+}

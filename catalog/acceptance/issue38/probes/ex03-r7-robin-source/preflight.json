@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "capture_id": "EX03-R7-ROBIN-SOURCE",
+  "prepared_utc": "2026-09-16T11:45:15.056950+00:00",
+  "purpose": "Dedicated PAD paste/save/re-copy only; no Copilot send and no EX03 execution",
+  "source_version": "20260916-excel-r6",
+  "source_bundle": {
+    "path": "copilot/versions/20260916-excel-r6/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "sha256": "9c566e7f85a431f1869302c6a40985e2f81237f17ac4fbbdc9a73e62a646b580"
+  },
+  "candidate_full": {
+    "path": "catalog/acceptance/issue38/probes/ex03-r7-robin-source/candidate-full.robin",
+    "sha256": "1f6ea14ea59242d7351d01ef75cd9571eb90676ab3845ffd2a842f01d84c771b",
+    "utf8_bytes": 14320,
+    "lines": 197
+  },
+  "candidate_action": {
+    "path": "catalog/acceptance/issue38/probes/ex03-r7-robin-source/candidate-action.robin",
+    "sha256": "1356bf8bb8021700fc75cd88edcb5b58a94cbf99c96a141e9008f62a68ced024",
+    "utf8_bytes": 5156,
+    "lines": 88
+  },
+  "mechanical_checks": {
+    "r6_flow_in_actual_sent_bundle_exact": true,
+    "r6_action_in_flow_exact_with_else_indent": true,
+    "r6_action_decodes_to_support_exact_ignoring_final_lf": true,
+    "measured_probe_action_decodes_to_recorded_script_exact_ignoring_final_lf": true,
+    "r5_generated_equals_pad_recopy_lf_normalized": true,
+    "actual_bundle_has_no_backslash_markdown_escape_before_arrow": true,
+    "actual_bundle_has_no_backslash_markdown_escape_before_underscore": true,
+    "actual_bundle_has_no_backslash_markdown_escape_before_left_bracket": true,
+    "actual_bundle_contains_raw_arrow": true,
+    "actual_bundle_contains_raw_value_type_variable": true,
+    "actual_bundle_contains_raw_datatable_index": true
+  },
+  "diagnosis_before_pad": {
+    "copilot_reported_escape_sequences_present_in_actual_bundle": false,
+    "r6_embedded_script_mismatch": false,
+    "missing_evidence": "The exact r6 integrated Robin has not yet been accepted and re-copied by PAD Designer."
+  },
+  "live_limits": {
+    "dedicated_flow_name": "RobinIssue38EX03R7Source20260916A",
+    "paste_save_recopy_only": true,
+    "execute": false,
+    "copilot_send": false,
+    "integrated_ex03_run": false,
+    "github_write": false
+  }
+}

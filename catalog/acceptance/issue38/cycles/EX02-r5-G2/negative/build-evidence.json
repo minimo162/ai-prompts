@@ -1,0 +1,92 @@
+{
+  "kind": "EX02_FIXED_ONE_CELL_TYPE_NEGATIVE",
+  "status": "CREATED_AND_ONE_LOGICAL_TYPE_MISMATCH_PROVEN",
+  "scope": {
+    "verified_before_type": "number",
+    "verified_after_type": "text",
+    "explicitly_not_generalized_to": [
+      "blank",
+      "boolean",
+      "date",
+      "error",
+      "formula-result",
+      "object"
+    ]
+  },
+  "positive_source": {
+    "path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\cycles\\EX02-r5-G2\\run2\\result.xlsx",
+    "sha256_before": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9",
+    "sha256_after": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9",
+    "unchanged": true
+  },
+  "negative_output": {
+    "path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\cycles\\EX02-r5-G2\\negative\\result-one-type-changed.xlsx",
+    "sha256": "776ebd082b750f6952e8f6bcf83566bda0ddb6cac7908b9e50da78542613857b"
+  },
+  "fixed_change": {
+    "sheet": "Target A",
+    "cell": "D4",
+    "before": [
+      "number",
+      12.5
+    ],
+    "after": [
+      "text",
+      "12.5"
+    ],
+    "same_display_text": true,
+    "style_unchanged": true,
+    "comment_unchanged": true
+  },
+  "package_payload": {
+    "member_count": 13,
+    "changed_members": [
+      "xl/worksheets/sheet2.xml"
+    ],
+    "unchanged_member_count": 12,
+    "source_member_sha256": "80366c88fdb99aeca53c0ae552d271da75e39b6319856e8bb9222ddc77753ee7",
+    "negative_member_sha256": "15f7473b1d8ff0b16cc75f941f7fd02b309e8e7c3b6810d43bf29084d40a390b",
+    "original_cell_xml": "<c r=\"D4\" s=\"2\"><v>12.5</v></c>",
+    "negative_cell_xml": "<c r=\"D4\" s=\"2\" t=\"inlineStr\"><is><t>12.5</t></is></c>"
+  },
+  "semantic_delta_count": 1,
+  "semantic_deltas": [
+    {
+      "kind": "cell",
+      "sheet": "Target A",
+      "cell": "D4",
+      "before": {
+        "cell": "D4",
+        "value": [
+          "number",
+          12.5
+        ],
+        "style": [
+          "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=128, family=3.0, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None",
+          "<openpyxl.styles.fills.PatternFill object>\nParameters:\npatternType='solid', fgColor=<openpyxl.styles.colors.Color object>\nParameters:\nrgb='FFFFF2CC', indexed=None, auto=None, theme=None, tint=0.0, type='rgb', bgColor=<openpyxl.styles.colors.Color object>\nParameters:\nrgb='00000000', indexed=None, auto=None, theme=None, tint=0.0, type='rgb'",
+          "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, right=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, top=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, bottom=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, diagonal=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, vertical=None, horizontal=None",
+          "<openpyxl.styles.alignment.Alignment object>\nParameters:\nhorizontal=None, vertical=None, textRotation=0, wrapText=None, shrinkToFit=None, indent=0.0, relativeIndent=0.0, justifyLastLine=None, readingOrder=0.0",
+          "General",
+          "<openpyxl.styles.protection.Protection object>\nParameters:\nlocked=True, hidden=False"
+        ],
+        "comment": null
+      },
+      "after": {
+        "cell": "D4",
+        "value": [
+          "text",
+          "12.5"
+        ],
+        "style": [
+          "<openpyxl.styles.fonts.Font object>\nParameters:\nname='Yu Gothic', charset=128, family=3.0, b=False, i=False, strike=None, outline=None, shadow=None, condense=None, color=None, extend=None, sz=11.0, u=None, vertAlign=None, scheme=None",
+          "<openpyxl.styles.fills.PatternFill object>\nParameters:\npatternType='solid', fgColor=<openpyxl.styles.colors.Color object>\nParameters:\nrgb='FFFFF2CC', indexed=None, auto=None, theme=None, tint=0.0, type='rgb', bgColor=<openpyxl.styles.colors.Color object>\nParameters:\nrgb='00000000', indexed=None, auto=None, theme=None, tint=0.0, type='rgb'",
+          "<openpyxl.styles.borders.Border object>\nParameters:\noutline=True, diagonalUp=False, diagonalDown=False, start=None, end=None, left=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, right=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, top=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, bottom=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, diagonal=<openpyxl.styles.borders.Side object>\nParameters:\nstyle=None, color=None, vertical=None, horizontal=None",
+          "<openpyxl.styles.alignment.Alignment object>\nParameters:\nhorizontal=None, vertical=None, textRotation=0, wrapText=None, shrinkToFit=None, indent=0.0, relativeIndent=0.0, justifyLastLine=None, readingOrder=0.0",
+          "General",
+          "<openpyxl.styles.protection.Protection object>\nParameters:\nlocked=True, hidden=False"
+        ],
+        "comment": null
+      }
+    }
+  ]
+}

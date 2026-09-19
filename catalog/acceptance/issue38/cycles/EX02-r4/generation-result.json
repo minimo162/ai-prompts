@@ -1,0 +1,17 @@
+{
+  "test_id": "EX02-R4-G1",
+  "version": "20260915-excel-r4",
+  "requests": 1,
+  "uploads": 1,
+  "response_sha256": "2738b7e25c50be63e5f2fc57268c08b8e9a7293f61a8708ab3fd6e07bd8196b5",
+  "response_utf16": 2555,
+  "code_blocks": 0,
+  "generation": "REFUSED_STRICT_TYPE_PRIMITIVE_MISSING",
+  "completed_response_observed": true,
+  "copy_ui": "NO_CODE_BLOCK",
+  "copy_payload": "NOT_APPLICABLE_NO_CODE",
+  "paste_save_recopy": "NOT_RUN_NO_CODE",
+  "run1": "NOT_RUN_NO_CODE",
+  "run2": "NOT_RUN_NO_CODE",
+  "at": "2026-09-15T09:56:36.276Z"
+}

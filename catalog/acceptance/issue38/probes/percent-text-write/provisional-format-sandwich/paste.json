@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-16T08:07:05.9345251Z",
+  "flow_name": "RobinIssue38PercentTextWrite20260916A",
+  "process_id": 3168,
+  "source_robin": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\percent-text-write\\candidate-format-sandwich.robin",
+  "source_sha256": "f9d5679195e86de7790a30cf23cfcd7cf1404f0e3268491ff72e0eaf9cf0e418",
+  "source_bytes": 7058,
+  "empty_before_paste": true,
+  "paste_confirmed": true,
+  "visible_action_count": 4,
+  "designer_action_count": 40,
+  "designer_status": "40 選択されたアクション",
+  "virtualized_list_false_negative": true,
+  "saved_confirmed": false,
+  "execution_requested": false,
+  "clipboard_restoration": "user_authorized_not_preserved",
+  "clipboard_restore_skipped_by_explicit_user_direction": true,
+  "clipboard_all_format_raw_equality": "NOT_ASSESSED"
+}

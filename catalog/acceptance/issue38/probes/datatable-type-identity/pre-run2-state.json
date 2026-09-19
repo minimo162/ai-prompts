@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-15T13:00:48.7127844Z",
+  "flow_name": "RobinIssue38DataTableType20260915A",
+  "run1_artifacts_saved": true,
+  "run1_reconciled": true,
+  "run1_status": "PASS_EXCEL_DERIVED_TYPE_IDENTITY_RUN1",
+  "run1_recopy_raw_equal": true,
+  "clear_values_invocations": 1,
+  "variable_preview_count_after_clear": 0,
+  "dialog_count": 0,
+  "run2_may_start": true
+}

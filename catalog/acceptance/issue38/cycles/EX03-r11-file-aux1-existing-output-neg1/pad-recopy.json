@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R11-FILE-AUX1-EXISTING-OUTPUT-NEG1",
+  "captured_utc": "2026-09-17T05:12:56.4261094Z",
+  "flow_name": "無題 (10)",
+  "flow_window_id": 71280,
+  "subflow": "Main",
+  "power_fx": "OFF",
+  "guard_run_execution_before_capture": false,
+  "observation": {
+    "recopy_invocations": 1,
+    "actions_visible": 110,
+    "variables_visible": 45,
+    "designer_error_observed": false
+  },
+  "comparison": {
+    "candidate_path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/copilot-downloaded-ex03.robin",
+    "candidate_sha256": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875",
+    "recopy_path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/pad-recopy-before-guard-run.robin",
+    "recopy_sha256": "deac46fa2a6fd27be2d1cd987f7d410188dd939046816ea28c4125291769630b",
+    "exact_text": false,
+    "lf_normalized_exact": true,
+    "candidate_lines": 167,
+    "recopy_raw_lines": 168,
+    "recopy_normalized_lines": 167,
+    "guard_fragment_present": true,
+    "save_as_count": 1
+  },
+  "result": "PASS_UNMODIFIED_R11_FILE_AUX1_PAD_RECOPY_BEFORE_GUARD_RUN"
+}

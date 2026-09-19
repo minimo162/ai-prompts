@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "test_id": "EX04-R5-G2-EXISTING-OUTPUT-NEG1",
+  "completed_at": "2026-09-15T22:57:53.9583104Z",
+  "operation": "Moved the verified unchanged synthetic runtime result into the dedicated after archive; no deletion and no overwrite.",
+  "runtime_result_exists_after_cleanup": false,
+  "before_archive": {
+    "path": "catalog/acceptance/issue38/cycles/EX04-r5-G2-existing-output-neg1/existing-output-before.xlsx",
+    "sha256": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9"
+  },
+  "after_archive": {
+    "path": "catalog/acceptance/issue38/cycles/EX04-r5-G2-existing-output-neg1/existing-output-after.xlsx",
+    "sha256": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9"
+  },
+  "archives_byte_identical": true,
+  "excel_process_count": 0,
+  "protected_scope_matches_commit_a6662d8": true,
+  "status": "PASS_SYNTHETIC_OUTPUT_PRESERVED_AND_RUNTIME_STATE_RESTORED"
+}

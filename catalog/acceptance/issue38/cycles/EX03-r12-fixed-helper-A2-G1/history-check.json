@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-COPILOT-A2-G1",
+  "recorded_at": "2026-09-18T10:55:28.8730881+09:00",
+  "target": {
+    "service": "Microsoft 365 Copilot",
+    "surface": "normal chat",
+    "chat_url": "https://m365.cloud.microsoft/chat?es=SSR",
+    "history_url": "https://m365.cloud.microsoft/chat/all?es=SSR",
+    "browser": "Chrome"
+  },
+  "queries": [
+    {
+      "value": "20260918-excel-r12-fixed-helper-a2",
+      "visible_result": "結果が見つかりませんでした"
+    },
+    {
+      "value": "EX03-R12-FIXED-HELPER-COPILOT-A2",
+      "visible_result": "結果が見つかりませんでした"
+    }
+  ],
+  "normal_chat_visible_state": "NEW_EMPTY_CHAT_EDITOR",
+  "local_cycle_existed_before_preparation": false,
+  "local_send_record_before": 0,
+  "decision": "PASS_A2_G1_NOT_PREVIOUSLY_SENT_READY_FOR_ONE_SEND",
+  "send_limit_total": 1,
+  "resend_allowed": false
+}

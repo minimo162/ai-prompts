@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R2R3-POSTFIX-20260917-T1",
+  "phase": "normal",
+  "result": "PASS_NORMAL_GATE_NEGATIVE_ONE_RUN_AUTHORIZED",
+  "candidate_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+  "recopy_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+  "result_xlsx_sha256": "a712dffdc1f9d41f0b5e034c1e8366ef4001631f3eb139d5dc8dcbe060464af3",
+  "preserved_result_sha256": "a712dffdc1f9d41f0b5e034c1e8366ef4001631f3eb139d5dc8dcbe060464af3",
+  "pad_json": [
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/runtime/source-1.json",
+      "sha256": "7273709aa70b86cbdb175bc8b6bdf8ab3daccff23b0cf785064adf8a3e3917d7",
+      "encoding": "UTF-8 with BOM",
+      "json": "{\"probe\":\"O'Brien\"}"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/runtime/source-2.json",
+      "sha256": "d1c5eba5c453454900b950e2377fcf321eafd50678a4a79c91f1a8adfaf6f93b",
+      "encoding": "UTF-8 with BOM",
+      "json": "{\"probe\":\"He said \\\"Go\\\"\\nSecond line 'quoted'\"}"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/runtime/source-3.json",
+      "sha256": "ea52d7bfd0a3d8fa32fc37a96b68726ae91ae277a5d2862d44303148f7a61580",
+      "encoding": "UTF-8 with BOM",
+      "json": "{\"probe\":\"100%\"}"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/runtime/source-4.json",
+      "sha256": "0300d9078e3fc280b8b7f946191afaebf0d3c7f70c9005dbb645e83bb708724a",
+      "encoding": "UTF-8 with BOM",
+      "json": "{\"probe\":42.5}"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/runtime/mode.json",
+      "sha256": "fae5483dc7d97912790a3571f752fb76e03056557928b8c94654e4822e8ba62d",
+      "encoding": "UTF-8 with BOM",
+      "json": "{\"probe\":\"NORMAL\"}"
+    }
+  ],
+  "pad_observation": {
+    "schema_version": 1,
+    "trial_id": "EX03-R2R3-POSTFIX-20260917-T1",
+    "phase": "normal",
+    "flow": {
+      "title": "Power Automate | 無題 (12)",
+      "window_id": 3741770,
+      "power_fx_enabled": false,
+      "action_count": 63,
+      "paste_invocations": 1,
+      "save_invocations": 1,
+      "recopy_invocations": 1,
+      "run_invocations": 1,
+      "candidate_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "saved_recopy_sha256": "28f1349b68125ab32e0f2139fb967b91f99377a756f9b8d9bbf1f354c9b5c0e1",
+      "saved_recopy_exact": true
+    },
+    "run": {
+      "terminal": "READY",
+      "powershell_output": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":3,\"formats_restored\":true}",
+      "probe_state": "SUCCESS_GATE_PASSED_SAVED_READBACK_READY",
+      "script_gate_passed": true,
+      "numeric_write_entered": true,
+      "save_as_entered": true,
+      "readback_rows": 1,
+      "readback_columns": 4,
+      "source1_vs_saved": true,
+      "source2_vs_saved": true,
+      "source3_vs_saved": true,
+      "source4_vs_saved": true,
+      "saved_values_visible": [
+        "O'Brien",
+        "He said \"Go\"\nSecond line 'quoted'",
+        "100%",
+        42.5
+      ]
+    },
+    "observation_method": {
+      "terminal": "PAD designer status returned to Ready with run control enabled",
+      "powershell_output": "Opened PAD flow-variable edit view and closed with Cancel without saving",
+      "probe_state": "Opened PAD flow-variable edit view and closed with Cancel without saving",
+      "booleans": "Observed directly in PAD global variable pane after the run",
+      "saved_values": "Observed directly in PAD global variable pane after the run"
+    }
+  },
+  "artifact_inspection": {
+    "schema_version": 1,
+    "trial_id": "EX03-R2R3-POSTFIX-20260917-T1",
+    "result_xlsx_sha256_before": "a712dffdc1f9d41f0b5e034c1e8366ef4001631f3eb139d5dc8dcbe060464af3",
+    "result_xlsx_sha256_after": "a712dffdc1f9d41f0b5e034c1e8366ef4001631f3eb139d5dc8dcbe060464af3",
+    "result_xlsx_unchanged": true,
+    "sheet": "Target",
+    "range": "A2:D2",
+    "values": [
+      [
+        "O'Brien",
+        "He said \"Go\"\nSecond line 'quoted'",
+        "100%",
+        42.5
+      ]
+    ],
+    "formulas": [
+      [
+        "",
+        "",
+        "",
+        ""
+      ]
+    ],
+    "javascript_value_types": [
+      "string",
+      "string",
+      "string",
+      "number"
+    ],
+    "inspect_path": "result-artifact-inspect.ndjson",
+    "preview_path": "result-preview.png"
+  },
+  "excel_com_inspection": {
+    "result": {
+      "read_only": true,
+      "cells": [
+        {
+          "address": "A2",
+          "value": "O'Brien",
+          "value_type": "System.String",
+          "number_format": "G/標準",
+          "number_format_local": "G/標準",
+          "prefix": "",
+          "has_formula": false
+        },
+        {
+          "address": "B2",
+          "value": "He said \"Go\"\nSecond line 'quoted'",
+          "value_type": "System.String",
+          "number_format": "0.00",
+          "number_format_local": "0.00",
+          "prefix": "",
+          "has_formula": false
+        },
+        {
+          "address": "C2",
+          "value": "100%",
+          "value_type": "System.String",
+          "number_format": "G/標準",
+          "number_format_local": "G/標準",
+          "prefix": "",
+          "has_formula": false
+        },
+        {
+          "address": "D2",
+          "value": 42.5,
+          "value_type": "System.Double",
+          "number_format": "0.00",
+          "number_format_local": "0.00",
+          "prefix": "",
+          "has_formula": false
+        }
+      ],
+      "result_xlsx_sha256_before": "a712dffdc1f9d41f0b5e034c1e8366ef4001631f3eb139d5dc8dcbe060464af3",
+      "result_xlsx_sha256_after": "a712dffdc1f9d41f0b5e034c1e8366ef4001631f3eb139d5dc8dcbe060464af3",
+      "result_xlsx_unchanged": true
+    },
+    "template": {
+      "read_only": true,
+      "cells": [
+        {
+          "address": "A2",
+          "value": "BEFORE_A",
+          "value_type": "System.String",
+          "number_format": "G/標準",
+          "number_format_local": "G/標準",
+          "prefix": "",
+          "has_formula": false
+        },
+        {
+          "address": "B2",
+          "value": "BEFORE_B",
+          "value_type": "System.String",
+          "number_format": "0.00",
+          "number_format_local": "0.00",
+          "prefix": "",
+          "has_formula": false
+        },
+        {
+          "address": "C2",
+          "value": "BEFORE_C",
+          "value_type": "System.String",
+          "number_format": "G/標準",
+          "number_format_local": "G/標準",
+          "prefix": "",
+          "has_formula": false
+        },
+        {
+          "address": "D2",
+          "value": 7,
+          "value_type": "System.Double",
+          "number_format": "0.00",
+          "number_format_local": "0.00",
+          "prefix": "",
+          "has_formula": false
+        }
+      ],
+      "result_xlsx_sha256_before": "108d25e5cfb86cd34422e738f7590d6050933c4f5429c672df65907fb2f31a36",
+      "result_xlsx_sha256_after": "108d25e5cfb86cd34422e738f7590d6050933c4f5429c672df65907fb2f31a36",
+      "result_xlsx_unchanged": true
+    },
+    "all_number_format_prefix_formula_equal": true
+  },
+  "old_evidence": {
+    "unchanged": true,
+    "changed": [],
+    "checked": 27
+  }
+}

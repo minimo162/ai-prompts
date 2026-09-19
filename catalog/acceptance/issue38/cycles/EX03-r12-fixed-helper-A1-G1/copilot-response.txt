@@ -1,0 +1,16 @@
+提示された添付の PAD-Robin-Fixed-Helper-Bundle を確認しました。
+
+ただし、この bundle 自体に「固定EX03完成Robin」は含まれておらず、「helper body」「invocation JSON」「固定EX03 completed Robin」「grader expected values は intentionally absent」と明記されています。さらに、教材断片は「STATIC_FRAGMENT_ONLY_NOT_COMPLETE_NOT_RUN」「連結可能な完成回答ではない」と明示されており、完成フローを再構成する根拠として使うことが否定されています。
+
+また、依頼文では「PADの実測済みRobin形式を根拠にすること」「ナレッジにない命令名や引数を推測しないこと」「未確認なら追加採取を求めること」が要求されています。一方で、添付資料には完成Robin原文や実測済みアクション列が含まれていないため、ここで貼付け用Robinを生成すると未確認のPAD構文・アクション・引数を推測することになり、依頼条件に反します。
+
+そのため、この条件では貼付け用Robinコードブロックは出力できません。
+
+不足している根拠は少なくとも次のいずれかです。
+
+- 固定EX03完成Robin原文
+- FIXED LAUNCHER SOURCE を埋め込む実測済み PAD Run PowerShell Script アクションのRobin原文
+- EX03用の実測済み Excel 読取り、TypedValues取得、JSON保存、SaveAs、再読取り照合のRobin原文
+- 指示文で参照している PAD ナレッジ実体（索引および該当原文）
+
+これらの実測原文がないため、要求された「通常のPAD（Power Fx OFF）へ貼付けるフロー」を根拠付きで生成することはできません。

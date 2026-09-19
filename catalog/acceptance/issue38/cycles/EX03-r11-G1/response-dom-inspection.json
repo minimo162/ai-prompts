@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R11-G1",
+  "recorded_at": "2026-09-17T10:31:59.4521033+09:00",
+  "conversation": {
+    "service": "Microsoft 365 Copilot Chat",
+    "normal_chat": true,
+    "url": "https://m365.cloud.microsoft/chat/conversation/5019b961-47f4-4ca9-8602-30b6fb83512c?es=SSR",
+    "title": "Power Automate for Desktop転記フロー生成",
+    "model": "Think Deeper"
+  },
+  "rendered_response": {
+    "completed": true,
+    "reasoning_steps_reported": 8,
+    "refusal": false,
+    "pre_element_count": 0,
+    "pre_code_element_count": 0,
+    "download_link_count": 1,
+    "download_link_text": "EX03 r11 Robin候補をダウンロード",
+    "download_link_scheme": "blob",
+    "downloaded_file_name": "ex03.robin",
+    "downloaded_file_utf8_bytes": 12487,
+    "downloaded_file_sha256": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875",
+    "visible_response_path": "catalog/acceptance/issue38/cycles/EX03-r11-G1/copilot-response.visible.txt",
+    "visible_response_capture_method": "read the completed response container innerText before invoking the download link",
+    "visible_response_is_clipboard_raw": false,
+    "generated_file_edited": false
+  },
+  "contract_observation": {
+    "required_single_text_code_block": true,
+    "actual_text_code_block_count": 0,
+    "download_file_substituted_for_required_code_block": true,
+    "fixed_output_contract_satisfied": false
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "case_id": "EX03-R7-SOURCE",
+  "result": "PASS_SCOPED_NON_LIVE_WITH_ONE_PRESERVED_LEGACY_FAILURE",
+  "checks": [
+    {
+      "command": "node tests/Test-Issue38Package.mjs 20260916-excel-r7",
+      "result": "PASS_NON_LIVE_PACKAGE",
+      "instruction_utf16": 6350,
+      "source_files": 7,
+      "live": "NOT_RUN"
+    },
+    {
+      "command": "python -B tests/Test-Issue38Ex03.py",
+      "result": "PASS",
+      "tests": 8,
+      "coverage": [
+        "refusal versus actually sent bundle token audit",
+        "candidate versus PAD re-copy normalized identity",
+        "PAD re-copy RunScript versus support script identity",
+        "one RunScript before five numeric writes and SaveAs",
+        "twelve scoped JSON comparisons",
+        "number-as-text negative detection",
+        "byte-identical r7 rebuild and sealed destination refusal"
+      ]
+    },
+    {
+      "command": "python -B tests/Test-Issue38Excel.py",
+      "result": "PASS",
+      "tests": 13
+    },
+    {
+      "command": "python -B tests/Test-Issue38Ex02.py",
+      "result": "PASS",
+      "tests": 18
+    },
+    {
+      "command": "python -B tests/Test-Issue38Ex04ExistingOutput.py",
+      "result": "PASS",
+      "tests": 4
+    },
+    {
+      "command": "node tests/Test-Issue38Package.mjs <version>",
+      "result": "PASS",
+      "versions": [
+        "20260915-excel-r1",
+        "20260915-excel-r3",
+        "20260915-excel-r4",
+        "20260915-excel-r5",
+        "20260916-excel-r6",
+        "20260916-excel-r7"
+      ]
+    },
+    {
+      "command": "node tests/Test-Issue38Package.mjs 20260915-excel-r2",
+      "result": "FAIL_PRESERVED_PREEXISTING",
+      "details": "Checked-in r2 instruction has 67 CRLF separators, actual UTF-16 length 5911, but its unchanged manifest records 5844. File SHA still matches the unchanged manifest and git diff versus HEAD is empty. r2 was not modified."
+    },
+    {
+      "command": "git diff --check; Python AST parse; PowerShell parser; node --check",
+      "result": "PASS"
+    }
+  ],
+  "live_limits": {
+    "copilot_send": false,
+    "ex03_run1": false,
+    "ex03_run2": false,
+    "github_write": false
+  }
+}

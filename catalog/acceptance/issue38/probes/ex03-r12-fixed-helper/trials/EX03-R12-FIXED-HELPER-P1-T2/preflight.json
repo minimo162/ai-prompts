@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-P1-T2",
+  "result": "PASS_READY_FOR_ONE_SAVED_FLOW_NORMAL_PAD_RUN",
+  "baseline_commit": "6a48efc009efe10cedbeab015eb0d3cfce751b94",
+  "flow": {
+    "name": "無題 (14)",
+    "window_id": 1382846,
+    "subflow": "Main",
+    "power_fx": "OFF",
+    "status_before_run": "READY"
+  },
+  "fixed_sha256": {
+    "helper": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+    "invocation": "92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6",
+    "launcher": "1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1",
+    "execution_recopy": "da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa",
+    "template": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+  },
+  "fixed_paths": {
+    "helper": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\EX03-R12-Fixed-StringTransfer.ps1",
+    "invocation": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\invocation.json",
+    "launcher": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\launcher.ps1",
+    "target_workbook": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\runtime\\work.xlsx",
+    "json_root": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\runtime",
+    "output": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\runtime\\照合結果.xlsx"
+  },
+  "identity": {
+    "current_saved_flow_byte_exact_to_t1_recopy": true,
+    "known_content_difference_hunks": [
+      {
+        "operation": "replace",
+        "candidate_lines": [
+          48,
+          48
+        ],
+        "recopy_lines": [
+          48,
+          48
+        ],
+        "candidate": [
+          "$expectedSuccess = \\'{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}\\'"
+        ],
+        "recopy": [
+          "$expectedSuccess = \\'{\\\"status\\\":\\\"OK\\\",\\\"mode\\\":\\\"NORMAL\\\",\\\"text_writes\\\":7,\\\"formats_restored\\\":true}\\'"
+        ]
+      }
+    ],
+    "unknown_content_difference_count": 0,
+    "decoded_candidate_launcher_exact": true,
+    "decoded_saved_flow_launcher_exact": true,
+    "other_robin_processing_exact_after_known_difference": true
+  },
+  "pre_run": {
+    "work_matches_template": true,
+    "work_before_path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/work-before.xlsx",
+    "output_absent": true,
+    "json_handoff_absent": true,
+    "excel_not_running": true
+  },
+  "protected_tracked_files": [
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/EX03-R12-Fixed-StringTransfer.ps1",
+      "git_blob": "83f1269036c5b6eabe1097e7544a33fe24b46a22"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/invocation.json",
+      "git_blob": "a8e625774e68839ea47e30bf789eef7ba1a757db"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/launcher.ps1",
+      "git_blob": "2ea2518eade5528ba23279b22c95b5c680268aee"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/candidate.robin",
+      "git_blob": "ddfc94ace3c084ede2f623c4e1703ebfbea38f8a"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/pad-recopy-mismatch.robin",
+      "git_blob": "44b440a2d163717f6bf6f5a54a19b1cdb7c8603e"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/pad-recopy-mismatch.json",
+      "git_blob": "51d5ccd16a016b74e174a60fb81bdbdf2e18d0cc"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/pad-recopy-diff-analysis.json",
+      "git_blob": "234779e123dacabc34c4105334e85d204c946d8d"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/result.json",
+      "git_blob": "e32ac717b99cc1aa9c662c09c12abed5ab0dc396"
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/RESULT.md",
+      "git_blob": "0a68ca737ee7b1124de3be084a5ec4a2d5ed94fb"
+    },
+    {
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "git_blob": "9ee08ff30b16ca2cbe4124ca96037b2409a121c0"
+    },
+    {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "git_blob": "efa9b662d3ed007059645eb3ea86ef640efcaeb0"
+    },
+    {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "git_blob": "6daac6896166afb3138cf6e6d7108584a957be7a"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/generated.robin",
+      "git_blob": "1d18d3fad2c3d5f14c1486f1bfe8209325d9a8a2"
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/generation-safety-audit.json",
+      "git_blob": "30b61e413780aa7a785b477ad08b1b5cd2e65e18"
+    },
+    {
+      "path": "copilot/versions/20260917-excel-r12/agent-instructions.txt",
+      "git_blob": "610aeac621cc727dbfb31ac55bc36b26eab75e4b"
+    },
+    {
+      "path": "copilot/versions/20260917-excel-r12/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+      "git_blob": "ba2751bd3347f2c8110170cfe553001a59a8bcec"
+    },
+    {
+      "path": "copilot/versions/20260917-excel-r12/manifest.json",
+      "git_blob": "9a91cd6c79f8f93c10d75caa7c1e55a08e10aeff"
+    }
+  ]
+}

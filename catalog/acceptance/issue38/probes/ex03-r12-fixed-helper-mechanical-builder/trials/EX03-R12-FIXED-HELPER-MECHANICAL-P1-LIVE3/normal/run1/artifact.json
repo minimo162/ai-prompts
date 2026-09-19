@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-NORMAL1",
+  "run_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-NORMAL1-RUN1",
+  "runtime_output_path": "catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx",
+  "preserved_output_path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/run1/result.xlsx",
+  "output_sha256": "fc763e4a3d7df9f673dfa6a325006310f502d37305b3559b119044eab6f47eac",
+  "output_bytes": 11311,
+  "runtime_output_retained_for_guard": true,
+  "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+  "handoff_sha256": {
+    "source-1.json": "0bc6c8d52b33911d928a48e61de40f8a01126161af743f817cc621e6f0e00c4a",
+    "source-2.json": "61c6f623361111d60ae0c4122ab2a13bee7cd8bb577850dff4d57d822bdf5a0c",
+    "source-3.json": "2542c8855672702723107d4dab43ff91ef80b516e12ecbb61bdc3491066d4d0f",
+    "source-4.json": "97e1ddac773adbd9b7d18ee748307f811913a03eb1114f09297c73f624574da0",
+    "source-5.json": "d1ec8833b13199c99246644ce4fb8890b8ea19eab7f9dce5c13ecde444fb7cfc",
+    "source-6.json": "c8214589974801af2e4bd4d7b0ecf322ed40b8dedef7363a75673b81e8b25aea",
+    "source-7.json": "ea52d7bfd0a3d8fa32fc37a96b68726ae91ae277a5d2862d44303148f7a61580",
+    "mode.json": "fae5483dc7d97912790a3571f752fb76e03056557928b8c94654e4822e8ba62d"
+  },
+  "handoff_stats_before_guard": {
+    "source-1.json": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/a4-helper-json/source-1.json",
+      "sha256": "0bc6c8d52b33911d928a48e61de40f8a01126161af743f817cc621e6f0e00c4a",
+      "bytes": 18,
+      "last_write_ns": 1789755038643507100
+    },
+    "source-2.json": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/a4-helper-json/source-2.json",
+      "sha256": "61c6f623361111d60ae0c4122ab2a13bee7cd8bb577850dff4d57d822bdf5a0c",
+      "bytes": 18,
+      "last_write_ns": 1789755038714501000
+    },
+    "source-3.json": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/a4-helper-json/source-3.json",
+      "sha256": "2542c8855672702723107d4dab43ff91ef80b516e12ecbb61bdc3491066d4d0f",
+      "bytes": 18,
+      "last_write_ns": 1789755038780804600
+    },
+    "source-4.json": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/a4-helper-json/source-4.json",
+      "sha256": "97e1ddac773adbd9b7d18ee748307f811913a03eb1114f09297c73f624574da0",
+      "bytes": 24,
+      "last_write_ns": 1789755038842887100
+    },
+    "source-5.json": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/a4-helper-json/source-5.json",
+      "sha256": "d1ec8833b13199c99246644ce4fb8890b8ea19eab7f9dce5c13ecde444fb7cfc",
+      "bytes": 24,
+      "last_write_ns": 1789755038907086700
+    },
+    "source-6.json": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/a4-helper-json/source-6.json",
+      "sha256": "c8214589974801af2e4bd4d7b0ecf322ed40b8dedef7363a75673b81e8b25aea",
+      "bytes": 24,
+      "last_write_ns": 1789755038968565900
+    },
+    "source-7.json": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/a4-helper-json/source-7.json",
+      "sha256": "ea52d7bfd0a3d8fa32fc37a96b68726ae91ae277a5d2862d44303148f7a61580",
+      "bytes": 19,
+      "last_write_ns": 1789755039031553500
+    },
+    "mode.json": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/a4-helper-json/mode.json",
+      "sha256": "fae5483dc7d97912790a3571f752fb76e03056557928b8c94654e4822e8ba62d",
+      "bytes": 21,
+      "last_write_ns": 1789755039094868600
+    }
+  },
+  "status": "PASS_NORMAL_ARTIFACT_AND_HANDOFF_PRESERVED"
+}

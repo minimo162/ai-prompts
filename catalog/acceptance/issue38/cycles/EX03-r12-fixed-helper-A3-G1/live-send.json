@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-COPILOT-A3-G1",
+  "recorded_at": "2026-09-18T14:49:18.529989+09:00",
+  "status": "STOPPED_BEFORE_SEND_COMPUTER_USE_URL_UNVERIFIED",
+  "target": "NORMAL_MICROSOFT_365_COPILOT_CHAT",
+  "observed_window": {
+    "app": "Chrome",
+    "title": "チャット | Microsoft Copilot - Google Chrome",
+    "candidate_window_count": 1,
+    "current_url_verified": false
+  },
+  "computer_use_error": "Computer Use has been stopped for this turn because it could not determine the current browser URL on Windows with enough confidence to enforce policy.",
+  "body_entered": false,
+  "bundle_attached": false,
+  "send_button_clicked": false,
+  "send_count": 0,
+  "send_limit_total": 1,
+  "send_limit_consumed": false,
+  "response_observed": false
+}

@@ -1,0 +1,195 @@
+SET ProbeState TO $'''NOT_STARTED'''
+SET ScriptGatePassed TO False
+SET NumericWriteEntered TO False
+SET SaveAsEntered TO False
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx''') THEN
+    SET ProbeState TO $'''OUTPUT_EXISTS_NO_RUN'''
+ELSE
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力い.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> SourceBook1
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: SourceBook1 Name: $'''受取明細'''
+    Excel.ReadFromExcel.ReadCells Instance: SourceBook1 StartColumn: $'''D''' StartRow: 4 EndColumn: $'''E''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Data1
+    Excel.CloseExcel.Close Instance: SourceBook1
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力ろ.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> SourceBook2
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: SourceBook2 Name: $'''追加項目'''
+    Excel.ReadFromExcel.ReadCells Instance: SourceBook2 StartColumn: $'''B''' StartRow: 2 EndColumn: $'''D''' EndRow: 3 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Data2
+    Excel.CloseExcel.Close Instance: SourceBook2
+    SET TextSource1 TO Data1[0][0]
+    SET TextSource2 TO Data1[1][0]
+    SET TextSource3 TO Data1[2][0]
+    SET TextSource4 TO Data2[0][0]
+    SET TextSource5 TO Data2[1][0]
+    SET TextSource6 TO Data2[0][2]
+    SET TextSource7 TO Data2[1][2]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource1 } Json=> TextSource1Json
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource2 } Json=> TextSource2Json
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource3 } Json=> TextSource3Json
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource4 } Json=> TextSource4Json
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource5 } Json=> TextSource5Json
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource6 } Json=> TextSource6Json
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource7 } Json=> TextSource7Json
+    SET RunMode TO $'''NORMAL'''
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': RunMode } Json=> RunModeJson
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-1.json''' TextToWrite: TextSource1Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-2.json''' TextToWrite: TextSource2Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-3.json''' TextToWrite: TextSource3Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-4.json''' TextToWrite: TextSource4Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-5.json''' TextToWrite: TextSource5Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-6.json''' TextToWrite: TextSource6Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-7.json''' TextToWrite: TextSource7Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\mode.json''' TextToWrite: RunModeJson AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\work.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> Work
+    Scripting.RunPowershellScript.RunScript Script: $'''$ErrorActionPreference = \'Stop\'
+Set-StrictMode -Version 2
+
+$helperPath = \'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\EX03-R12-Fixed-StringTransfer.ps1\'
+$invocationPath = \'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper-a4\\invocation.json\'
+$expectedHelperSha256 = \'08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135\'
+$expectedInvocationSha256 = \'5c5a2008f55296a48f63fa65178aab971e4212455bb2af58e33149bdcaec40d8\'
+$expectedSuccess = \'{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}\'
+
+function Stop-Launcher {
+    param([string]$Code, [int]$ExitCode)
+    $failure = [ordered]@{ status = \'ERROR\'; error_code = $Code }
+    [Console]::Out.Write([string]($failure | ConvertTo-Json -Compress))
+    exit $ExitCode
+}
+
+function Get-Sha256 {
+    param([string]$Path)
+    $stream = [IO.File]::OpenRead($Path)
+    $algorithm = [Security.Cryptography.SHA256]::Create()
+    try {
+        return ([BitConverter]::ToString($algorithm.ComputeHash($stream))).Replace(\'-\', \'\').ToLowerInvariant()
+    }
+    finally {
+        $algorithm.Dispose()
+        $stream.Dispose()
+    }
+}
+
+if (-not (Test-Path -LiteralPath $helperPath -PathType Leaf)) {
+    Stop-Launcher \'HELPER_NOT_FOUND\' 41
+}
+if (-not (Test-Path -LiteralPath $invocationPath -PathType Leaf)) {
+    Stop-Launcher \'INVOCATION_NOT_FOUND\' 42
+}
+
+$actualHelperSha256 = Get-Sha256 $helperPath
+if ($actualHelperSha256 -cne $expectedHelperSha256) {
+    Stop-Launcher \'HELPER_SHA256_MISMATCH\' 43
+}
+$actualInvocationSha256 = Get-Sha256 $invocationPath
+if ($actualInvocationSha256 -cne $expectedInvocationSha256) {
+    Stop-Launcher \'INVOCATION_SHA256_MISMATCH\' 44
+}
+
+try {
+    $helperOutput = (& $helperPath -InvocationPath $invocationPath | Out-String).Trim()
+}
+catch {
+    Stop-Launcher \'HELPER_INVOCATION_FAILED\' 45
+}
+
+if ([string]::IsNullOrWhiteSpace($helperOutput)) {
+    Stop-Launcher \'HELPER_SUCCESS_OUTPUT_MISSING\' 46
+}
+if ($helperOutput -cne $expectedSuccess) {
+    Stop-Launcher \'HELPER_UNEXPECTED_OUTPUT\' 47
+}
+
+[Console]::Out.Write($helperOutput)''' ScriptOutput=> PowershellOutput
+    IF PowershellOutput = $'''{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}''' THEN
+        IF RunMode = $'''NORMAL''' THEN
+            SET ScriptGatePassed TO True
+            SET NumberSource1 TO Data1[0][1]
+            SET NumberSource2 TO Data1[1][1]
+            SET NumberSource3 TO Data1[2][1]
+            SET NumberSource4 TO Data2[0][1]
+            SET NumberSource5 TO Data2[1][1]
+            Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''集計先'''
+            SET NumericWriteEntered TO True
+            Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource1 Column: $'''G''' Row: 7
+            Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource2 Column: $'''G''' Row: 8
+            Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource3 Column: $'''G''' Row: 9
+            Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''追記先'''
+            Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource4 Column: $'''E''' Row: 5
+            Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource5 Column: $'''E''' Row: 6
+            SET SaveAsEntered TO True
+            Excel.SaveExcel.SaveAs Instance: Work DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx'''
+            Excel.CloseExcel.Close Instance: Work
+            Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Reopened
+            Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''集計先'''
+            Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''F''' StartRow: 7 EndColumn: $'''G''' EndRow: 9 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback1
+            Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''追記先'''
+            Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''D''' StartRow: 5 EndColumn: $'''F''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback2
+            Excel.CloseExcel.Close Instance: Reopened
+            SET CompareSource1 TO Data1[0][0]
+            SET Saved1 TO Readback1[0][0]
+            SET CompareSource2 TO Data1[0][1]
+            SET Saved2 TO Readback1[0][1]
+            SET CompareSource3 TO Data1[1][0]
+            SET Saved3 TO Readback1[1][0]
+            SET CompareSource4 TO Data1[1][1]
+            SET Saved4 TO Readback1[1][1]
+            SET CompareSource5 TO Data1[2][0]
+            SET Saved5 TO Readback1[2][0]
+            SET CompareSource6 TO Data1[2][1]
+            SET Saved6 TO Readback1[2][1]
+            SET CompareSource7 TO Data2[0][0]
+            SET Saved7 TO Readback2[0][0]
+            SET CompareSource8 TO Data2[0][1]
+            SET Saved8 TO Readback2[0][1]
+            SET CompareSource9 TO Data2[0][2]
+            SET Saved9 TO Readback2[0][2]
+            SET CompareSource10 TO Data2[1][0]
+            SET Saved10 TO Readback2[1][0]
+            SET CompareSource11 TO Data2[1][1]
+            SET Saved11 TO Readback2[1][1]
+            SET CompareSource12 TO Data2[1][2]
+            SET Saved12 TO Readback2[1][2]
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': CompareSource1 } Json=> CompareSource1Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved1 } Json=> Saved1Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': CompareSource2 } Json=> CompareSource2Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved2 } Json=> Saved2Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': CompareSource3 } Json=> CompareSource3Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved3 } Json=> Saved3Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': CompareSource4 } Json=> CompareSource4Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved4 } Json=> Saved4Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': CompareSource5 } Json=> CompareSource5Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved5 } Json=> Saved5Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': CompareSource6 } Json=> CompareSource6Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved6 } Json=> Saved6Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': CompareSource7 } Json=> CompareSource7Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved7 } Json=> Saved7Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': CompareSource8 } Json=> CompareSource8Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved8 } Json=> Saved8Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': CompareSource9 } Json=> CompareSource9Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved9 } Json=> Saved9Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': CompareSource10 } Json=> CompareSource10Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved10 } Json=> Saved10Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': CompareSource11 } Json=> CompareSource11Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved11 } Json=> Saved11Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': CompareSource12 } Json=> CompareSource12Json
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': Saved12 } Json=> Saved12Json
+            SET Position1ValueTypeMatch TO CompareSource1Json = Saved1Json
+            SET Position2ValueTypeMatch TO CompareSource2Json = Saved2Json
+            SET Position3ValueTypeMatch TO CompareSource3Json = Saved3Json
+            SET Position4ValueTypeMatch TO CompareSource4Json = Saved4Json
+            SET Position5ValueTypeMatch TO CompareSource5Json = Saved5Json
+            SET Position6ValueTypeMatch TO CompareSource6Json = Saved6Json
+            SET Position7ValueTypeMatch TO CompareSource7Json = Saved7Json
+            SET Position8ValueTypeMatch TO CompareSource8Json = Saved8Json
+            SET Position9ValueTypeMatch TO CompareSource9Json = Saved9Json
+            SET Position10ValueTypeMatch TO CompareSource10Json = Saved10Json
+            SET Position11ValueTypeMatch TO CompareSource11Json = Saved11Json
+            SET Position12ValueTypeMatch TO CompareSource12Json = Saved12Json
+            SET ProbeState TO $'''SUCCESS_GATE_PASSED_SAVED_READBACK_READY'''
+        ELSE
+            Excel.CloseExcel.Close Instance: Work
+            SET ProbeState TO $'''MODE_NOT_NORMAL_NO_SAVE'''
+        END
+    ELSE
+        Excel.CloseExcel.Close Instance: Work
+        SET ProbeState TO $'''SCRIPT_NOT_SUCCESS_NO_SAVE'''
+    END
+END

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1",
+  "baseline_commit": "fd2cc2c345c0e0de8778d7eb05ef18daf233dc55",
+  "flow_name": "Issue38 EX03 Mechanical P1 Live1",
+  "classification": "MECHANICAL_BUILDER_PATH_LIMITED_LIVE_PAD_TRIAL_ONLY",
+  "authorization": {
+    "pad_paste_save_recopy": 1,
+    "normal_pad_runs": 1,
+    "run2": 0,
+    "negative_runs": 0,
+    "copilot_sends": 0,
+    "candidate_creation": 0,
+    "builder_modification": 0,
+    "github_writes": 0
+  },
+  "stop_conditions": [
+    "Build.py --check or fixed SHA mismatch",
+    "unknown PAD re-copy content difference, missing command, or syntax damage",
+    "PAD error, comparison mismatch, safety issue, or unknown result"
+  ],
+  "scope_boundary": "Not Copilot generation acceptance and not Issue #38 overall acceptance."
+}

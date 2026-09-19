@@ -1,0 +1,43 @@
+{
+    "schema_version":  1,
+    "kind":  "EX03_R11_F6_EXCEL_NATIVE_READ_ONLY_INSPECTION",
+    "observed_at":  "2026-09-17T03:53:35.7903727Z",
+    "output_path":  "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\cycles\\EX03-r11-file-aux1\\run1\\result.xlsx",
+    "output_sha256_before":  "ddcd8fdd443262edeba6ad2f1523e175ca4d94431d9df14122605bb4fc34a38f",
+    "output_sha256_after":  "ddcd8fdd443262edeba6ad2f1523e175ca4d94431d9df14122605bb4fc34a38f",
+    "template_f6":  {
+                        "sheet":  "追記先",
+                        "address":  "F6",
+                        "value2":  null,
+                        "value2_dotnet_type":  null,
+                        "text":  "",
+                        "has_formula":  false,
+                        "formula":  null,
+                        "number_format_invariant":  "G/標準",
+                        "number_format_local":  "G/標準",
+                        "prefix_character":  ""
+                    },
+    "saved_f6":  {
+                     "sheet":  "追記先",
+                     "address":  "F6",
+                     "value2":  "100%",
+                     "value2_dotnet_type":  "System.String",
+                     "text":  "100%",
+                     "has_formula":  false,
+                     "formula":  null,
+                     "number_format_invariant":  "G/標準",
+                     "number_format_local":  "G/標準",
+                     "prefix_character":  ""
+                 },
+    "checks":  {
+                   "output_unchanged_by_read":  true,
+                   "value_is_exact_text_100_percent":  true,
+                   "displayed_text_is_100_percent":  true,
+                   "number_format_invariant_preserved":  true,
+                   "number_format_local_preserved":  true,
+                   "prefix_character_preserved_empty":  true,
+                   "no_formula":  true
+               },
+    "status":  "PASS_F6_SYSTEM_STRING_100_PERCENT_ORIGINAL_FORMAT_EMPTY_PREFIX_NO_FORMULA",
+    "scope":  "Fixed EX03 F6 target only; no type generalization."
+}

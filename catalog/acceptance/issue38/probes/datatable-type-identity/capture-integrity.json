@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "audited_at": "2026-09-15T13:06:56.9128427Z",
+  "final_capture": {
+    "path": "captured-final.robin",
+    "sha256": "02d664b5ae246bd57e2b44d454a5cd3cb01991a78b6fff8548d208759f1b1fb6",
+    "bytes": 1457,
+    "actions": 17,
+    "utf8_bom": false,
+    "line_endings": "CRLF only",
+    "final_crlf": true,
+    "linewise_equal_to_assembled_candidate": true
+  },
+  "after_run1": {
+    "path": "recopy-after-run1.robin",
+    "sha256": "02d664b5ae246bd57e2b44d454a5cd3cb01991a78b6fff8548d208759f1b1fb6",
+    "raw_equal_to_final_capture": true
+  },
+  "after_run2": {
+    "path": "recopy-after-run2.robin",
+    "sha256": "02d664b5ae246bd57e2b44d454a5cd3cb01991a78b6fff8548d208759f1b1fb6",
+    "raw_equal_to_final_capture": true
+  },
+  "run1_run2_named_variable_values_equal": true
+}

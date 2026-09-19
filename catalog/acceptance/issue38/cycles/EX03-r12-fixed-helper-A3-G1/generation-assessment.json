@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-COPILOT-A3-G1",
+  "recorded_at": "2026-09-18T14:49:18.529989+09:00",
+  "final_status": "STOPPED_BEFORE_SEND_COMPUTER_USE_URL_UNVERIFIED",
+  "generation": "NOT_RUN",
+  "copilot_response": "NOT_AVAILABLE_NO_SEND",
+  "text_code_block_count": 0,
+  "generated_robin": false,
+  "generated_robin_sha256": null,
+  "safety_audit": "NOT_RUN_NO_GENERATED_ROBIN",
+  "pad_save": "NOT_RUN",
+  "pad_recopy": "NOT_RUN",
+  "pad_run1": "NOT_RUN",
+  "pad_run2": "NOT_RUN",
+  "pad_run_count": 0,
+  "stop_reason": "Computer Use has been stopped for this turn because it could not determine the current browser URL on Windows with enough confidence to enforce policy.",
+  "resend_performed": false,
+  "manual_generated_robin_edit": false,
+  "next_candidate_created": false,
+  "github_write": false
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "audit_id": "EX03-R7-TEACHING-INDEPENDENCE",
+  "audited_utc": "2026-09-16T12:29:08.914096+00:00",
+  "base_commit": "806e4095a926fa0c7e020811c09770b5e5292841",
+  "base_version": "20260916-excel-r7",
+  "decision": "FAIL_R7_CONTAINS_FIXED_EX03_COMPLETE_ANSWER",
+  "fixed_inputs": {
+    "fixed_request": {
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370"
+    },
+    "fixed_spec": {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380"
+    },
+    "grader_expected": {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d"
+    }
+  },
+  "fixed_identifiers": {
+    "source_one_file": "fixtures/EX03/入力い.xlsx",
+    "source_one_sheet": "受取明細",
+    "source_one_range": "D4:E6",
+    "source_one_target_sheet": "集計先",
+    "source_one_target_start": "F7",
+    "source_two_file": "fixtures/EX03/入力ろ.xlsx",
+    "source_two_sheet": "追加項目",
+    "source_two_range": "B2:D3",
+    "source_two_target_sheet": "追記先",
+    "source_two_target_start": "D5",
+    "output": "照合結果.xlsx"
+  },
+  "findings": {
+    "all_fixed_paths_present_in_complete_robin": true,
+    "all_fixed_sheet_names_present_in_complete_robin": true,
+    "all_fixed_target_cells_present_in_complete_robin": true,
+    "complete_flow_includes_guard_read_write_save_reopen_compare": true,
+    "grader_only_values_literal_in_robin": false,
+    "independence_failure_reason": "The r7 PAD-recopied full Robin is a complete answer for the exact fixed EX03 paths, sheets, ranges, output, and twelve target cells."
+  },
+  "causal_boundary": "This audit establishes teaching/test coupling. It does not claim that literal grader-only values were exposed or infer Copilot internals.",
+  "r7_instruction_contains_fixed_answer_directive": true,
+  "r7_bundle_contains_full_fixed_robin": true
+}

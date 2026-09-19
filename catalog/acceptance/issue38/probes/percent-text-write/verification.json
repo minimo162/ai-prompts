@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-09-16T08:34:00Z",
+  "status": "PASS_LOCAL_PROBE_ONLY",
+  "checks": {
+    "powershell_parse": "PASS",
+    "node_syntax": "PASS",
+    "all_json_parse": "PASS",
+    "render_and_inspect_run1": "PASS",
+    "render_and_inspect_run2": "PASS",
+    "visual_run1_matches_expected": true,
+    "visual_run2_matches_expected": true,
+    "test_issue38_ex03": "3/3 PASS",
+    "test_issue38_ex02": "18/18 PASS",
+    "test_issue38_excel": "13/13 PASS",
+    "test_issue38_package_r5": "PASS_NON_LIVE_PACKAGE"
+  },
+  "r5_fixed_hashes": {
+    "instruction_sha256": "fe57e45c170fcdfe8f94d8e23f9cb58f00d5b54ae4abe35a43189767032b5aaa",
+    "bundle_sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3"
+  },
+  "rendered_values": {
+    "run1": [
+      "100%",
+      42.5
+    ],
+    "run2": [
+      "100%",
+      42.5
+    ]
+  },
+  "notes": [
+    "Both rendered outputs visually preserve the template's distinct A2 and B2 formatting.",
+    "Static package checks do not replace the recorded live PAD two-run evidence.",
+    "No Copilot resend or full EX03 rerun was performed."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-15T12:57:52.5905292Z",
+  "flow_name": "RobinIssue38DataTableType20260915A",
+  "pad_process_id": 33720,
+  "pad_file_version": "2.71.115.26224",
+  "designer_action_count": 17,
+  "captured_robin": "captured-final.robin",
+  "captured_robin_sha256": "02d664b5ae246bd57e2b44d454a5cd3cb01991a78b6fff8548d208759f1b1fb6",
+  "ready_observed": true,
+  "start_enabled": true,
+  "dialog_count": 0,
+  "visible_error_like_elements": 0,
+  "excel_processes_before": []
+}

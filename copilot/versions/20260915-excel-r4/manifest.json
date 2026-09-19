@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "version": "20260915-excel-r4",
+  "status": "FROZEN_CANDIDATE_TYPE_GAP_NOT_ACCEPTED",
+  "inherits_live_acceptance": false,
+  "base_commit": "d0bd39699fcc92773ef0238f29701f9e310a7693",
+  "base_version": "20260913e",
+  "copy_rule_version": "20260915-copyable-r2",
+  "instruction_path": "agent-instructions.txt",
+  "instruction_sha256": "eb23d43327d4c5f81987e53d3f3d3bdf59ba9699d8dcf8bf4a5cc836276add72",
+  "instruction_utf16": 5867,
+  "bundle_path": "knowledge/PAD-Robin-Knowledge-Bundle.txt",
+  "bundle_sha256": "aa1fb5aff28c1cbb5ffc51d78459a51af846823a2ab168d6f32ed8bbef2096dd",
+  "source_files": [
+    {
+      "bytes": 20320,
+      "sha256": "bc2a3eef5fe44c6640bb29f95883954005952f666aca6c73b81b56faba32ea2d",
+      "path": "knowledge/PAD-Robin-00-Index.txt"
+    },
+    {
+      "bytes": 12741,
+      "sha256": "abe921c3e7aa19ce5410fe746fe4c4f5c7fc7ee3ffd18c4b6747686a41fdbf31",
+      "path": "knowledge/PAD-Robin-01-Basics.txt"
+    },
+    {
+      "bytes": 17275,
+      "sha256": "19f8698fba5702a42dfd0322ce90be0f26c3fd4ae048f13bbff35705bd4397fe",
+      "path": "knowledge/PAD-Robin-02-Control.txt"
+    },
+    {
+      "bytes": 25350,
+      "sha256": "a541082a650a7cfae9d2b2cfb47026d7b8ee81bc542f30ba409af5e6291c9aea",
+      "path": "knowledge/PAD-Robin-03-Files.txt"
+    },
+    {
+      "bytes": 25524,
+      "sha256": "d305c8fafcb4fe331834f63d44b800f70fd36f5ac344bdfdac2e8a641275a441",
+      "path": "knowledge/PAD-Robin-04-Office-PDF.txt"
+    },
+    {
+      "bytes": 8995,
+      "sha256": "e62a78aa92941984bacbdc59d4c6561104a9eca5b9d0e45b817f539e4558d867",
+      "path": "knowledge/PAD-Robin-05-UI-Web.txt"
+    },
+    {
+      "bytes": 26683,
+      "sha256": "ba9183d0acf6ba3062a5ddba5bf4b698781595c923f9cdc16ad36736b888def1",
+      "path": "knowledge/PAD-Robin-06-Examples.txt"
+    }
+  ],
+  "acceptance_freeze_sha256": "ac94fb92d2db99eab4f3b7abd18befa13c5e78572377de068368d7cabc3c79f0",
+  "evidence": {
+    "copilot": "NOT_RUN_AT_FREEZE",
+    "pad": "PRIMITIVES_REUSED_NOT_CANDIDATE_ACCEPTANCE",
+    "sheet_probe_scope": "Historical editable Sheet1 only",
+    "sheet_probe_sha256": "c7f3fa0408463de8ee36bf5b865720c64799f4a92cbf2a3b7efee4cfa1907c29",
+    "matrix_write": "Two probe runs completed; 12 target cells match; 558 XML differences retained",
+    "matrix_write_sha256": "39ceb68d225f61cf87e8c4c173fe3993699d52ff9e23b0457cb614945e423207",
+    "type_comparison": "NOT_CAPTURED_NOT_PROVEN"
+  },
+  "base_candidate": "20260915-excel-r3",
+  "evidence_inputs": {
+    "catalog/acceptance/issue38/probes/output-guard/captured-uia.robin": "477b7c174b1d74015ed7ee9ff3f0cbf3e768ec6adc9cc1e4ea05eb56a9c67272",
+    "catalog/acceptance/issue38/probes/scalar-compare/captured-full.robin": "0b13b8aed3130022535b32020647b7b8e69dd3e7c1d498c342877567271e71d2",
+    "catalog/acceptance/issue38/probes/matrix-write/assembled-probe-rev2.robin": "46ca4731a2c83c8b5a9e0ad069a1da72f11a7e6030a45a2352c37d11812a57aa",
+    "catalog/acceptance/issue38/probes/output-guard/two-run-result.json": "2c6c9332e6cfbfb740475f637f6292210c587efab70a1b815611a338a120d501",
+    "catalog/acceptance/issue38/probes/scalar-compare/two-run-result.json": "7c4e8d23a00d88017a5284dcb72cc63baf38364c956bd555911abd5f22f1636c",
+    "catalog/acceptance/issue38/probes/matrix-write/two-run-result.json": "3f292fc60c2a4f50733e49a3b6e204a4fb568c73a0708ec1112fc73781766bbc"
+  },
+  "builder": "tools/Build-Issue38Ex02Candidate.py"
+}

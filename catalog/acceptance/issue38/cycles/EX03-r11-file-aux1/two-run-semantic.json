@@ -1,0 +1,19 @@
+{
+  "kind": "EX03_TWO_POSITIVE_RUN_SEMANTIC_COMPARISON",
+  "status": "MATCH",
+  "run1": {
+    "path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\cycles\\EX03-r11-file-aux1\\run1\\result.xlsx",
+    "sha256_before": "ddcd8fdd443262edeba6ad2f1523e175ca4d94431d9df14122605bb4fc34a38f",
+    "sha256_after": "ddcd8fdd443262edeba6ad2f1523e175ca4d94431d9df14122605bb4fc34a38f"
+  },
+  "run2": {
+    "path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\cycles\\EX03-r11-file-aux1\\run2\\result.xlsx",
+    "sha256_before": "d41fb0ac1b142c1aa1ffa3ce2f542a8cd70b4483593173c08a084dc8340ccb34",
+    "sha256_after": "d41fb0ac1b142c1aa1ffa3ce2f542a8cd70b4483593173c08a084dc8340ccb34"
+  },
+  "binary_sha_equal": false,
+  "semantic_equal": true,
+  "scope": "all used cells, typed values/formulas, semantic styles, comments, merges, row and column dimensions",
+  "checked_cells": 480,
+  "note": "Binary archive equality is not required; each run is independently checked against the fixed EX03 oracle."
+}

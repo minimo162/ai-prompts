@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-A4-G1",
+  "recorded_at": "2026-09-18T19:18:28.369028+09:00",
+  "status": "PASS_STOPPED_WITHOUT_PAD_OR_RUNTIME_MUTATION",
+  "protected_file_count": 25,
+  "protected_mismatch_count": 0,
+  "protected_mismatches": [],
+  "runtime": {
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "template_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_matches_template": true,
+    "output_absent": true,
+    "a4_json_root_absent": true
+  },
+  "pad_save": "NOT_RUN",
+  "pad_recopy": "NOT_RUN",
+  "pad_run_count": 0,
+  "manual_generated_robin_edit": false,
+  "next_candidate_created": false,
+  "github_write": false
+}

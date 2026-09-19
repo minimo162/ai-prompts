@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "capture_id": "EX03-R11-SOURCE-PAD-RECOPY",
+  "captured_utc": "2026-09-17T00:06:29.6363415Z",
+  "environment": {
+    "pad_file_version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": "OFF",
+    "flow_name": "無題 (8)",
+    "subflow": "Main"
+  },
+  "scope": {
+    "mode": "Source",
+    "executed_before_capture": false,
+    "copilot_send": false,
+    "integrated_ex03_run": false,
+    "github_write": false
+  },
+  "observation": {
+    "initial_actions": 0,
+    "paste_invocations": 1,
+    "selected_actions_after_paste": 110,
+    "actions_after_paste": 110,
+    "variables_after_paste": 45,
+    "save_invocations": 1,
+    "recopy_invocations": 1,
+    "designer_status_after_save": "READY",
+    "designer_error_observed": false
+  },
+  "comparison": {
+    "candidate_path": "catalog/acceptance/issue38/probes/ex03-r11-minimal-powershell/independent-candidate.robin",
+    "candidate_sha256": "d2cac7051bb54cba44edb61aba48a7af7b8db9d4962425a519f48a6d137d25de",
+    "candidate_chars": 12328,
+    "recopy_path": "catalog/acceptance/issue38/probes/ex03-r11-minimal-powershell/independent-pad-recopy.robin",
+    "recopy_sha256": "148267f09f53d74db1059cee823a4a2e159f2bbebfa249d3a25c996796fa765b",
+    "recopy_chars": 12438,
+    "exact_bytes": false,
+    "lf_normalized_exact": true,
+    "candidate_crlf_count": 0,
+    "candidate_lf_only_count": 167,
+    "recopy_crlf_count": 110,
+    "recopy_lf_only_count": 57,
+    "required_fragments_present": true,
+    "forbidden_fragments_absent": true
+  },
+  "result": "PASS_PAD_DESIGNER_SAVE_RECOPY_NO_EXECUTION"
+}

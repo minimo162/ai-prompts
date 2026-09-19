@@ -1,0 +1,20 @@
+{
+    "schema_version":  1,
+    "captured_at":  "2026-09-16T07:12:00.6076786Z",
+    "flow_name":  "RobinIssue38EX03R5G1_20260916A",
+    "process_id":  33224,
+    "source_robin":  ".\\catalog\\acceptance\\issue38\\cycles\\EX03-r5-G1\\generated.robin",
+    "source_sha256":  "4ab085c52ba6f40fc52a55d910459eb917cb7ea3f4174737879d8bb4e5361f7e",
+    "source_bytes":  7373,
+    "empty_before_paste":  true,
+    "paste_confirmed":  true,
+    "visible_action_count":  3,
+    "designer_action_count":  87,
+    "designer_status":  "87 選択されたアクション",
+    "virtualized_list_false_negative":  true,
+    "saved_confirmed":  false,
+    "execution_requested":  false,
+    "clipboard_restoration":  "user_authorized_not_preserved",
+    "clipboard_restore_skipped_by_explicit_user_direction":  true,
+    "clipboard_all_format_raw_equality":  "NOT_ASSESSED"
+}

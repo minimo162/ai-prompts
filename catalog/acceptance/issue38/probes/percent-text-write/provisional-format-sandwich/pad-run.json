@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-16T08:09:07.4507478Z",
+  "flow_name": "RobinIssue38PercentTextWrite20260916A",
+  "run_status": "completion_not_observed",
+  "timeout_seconds": 90,
+  "ready_observed": true,
+  "start_enabled_after": false,
+  "variable_previews": [
+    "1 行, 2 列",
+    "7",
+    "{\"probe\":7.0}"
+  ]
+}

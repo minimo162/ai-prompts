@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R9-G1",
+  "recorded_at": "2026-09-17T07:09:12.4414397+09:00",
+  "candidate": {
+    "version": "20260917-excel-r9",
+    "base_commit": "969a64e41638cc1e0ffca64ef7b6ed1668b80027",
+    "instruction_sha256": "a699dd910a4b0529fc71c9b8045b845bf49b8a407df9da88027a0ca0ab0f51fa",
+    "bundle_sha256": "b402a6c78fb39cb68dd4111590122b9f9be3364609358fd58a9ad3880d29b993",
+    "manifest_sha256": "1b64005c85aee3215160c9381d956a64531863b5d838d9091009fded5007f540"
+  },
+  "generation": {
+    "normal_m365_send_count": 1,
+    "resend_count": 0,
+    "completed": true,
+    "refusal": false,
+    "generated_raw_clipboard_utf8_sha256": "dce9d6f01de53252050b53de46283563f56226b1635a2ccdcbd71d2dfd2636bf",
+    "generated_robin_sha256": "7a02ea0d073adde698578b8fa578f5701c728114ee55fbf20aa0ecdaaa32cb14",
+    "safety_audit": "FAIL_GENERATED_ROBIN_SYNTAX_CORRUPTION_STOP_BEFORE_PAD"
+  },
+  "pad_import": {
+    "dedicated_flow_opened": false,
+    "unmodified_paste_count": 0,
+    "saved": false,
+    "recopy": "NOT_RUN_GENERATED_ROBIN_FAILED_SAFETY_AUDIT",
+    "recopy_match": "NOT_RUN",
+    "manual_repair": false
+  },
+  "runs": {
+    "run1": "NOT_RUN_STOPPED_BEFORE_PAD_IMPORT",
+    "run2": "NOT_RUN_RUN1_WAS_NOT_AUTHORIZED",
+    "pad_runs_used": 0,
+    "pad_run_limit": 2
+  },
+  "comparisons": {
+    "run1_artifact": "NOT_CREATED",
+    "run1_fixed_value_type_position_comparison": "NOT_RUN",
+    "run1_original_outside_formula_format_comparison": "NOT_RUN",
+    "run2_artifact": "NOT_CREATED",
+    "run2_fixed_value_type_position_comparison": "NOT_RUN",
+    "run2_original_outside_formula_format_comparison": "NOT_RUN",
+    "negative_copy": "NOT_RUN",
+    "reason": "No PAD execution or output was allowed after the generation safety failure."
+  },
+  "artifacts": {
+    "runtime_output_exists": false,
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "template_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_matches_template": true,
+    "protected_file_count": 233,
+    "protected_file_mismatch_count": 0,
+    "fixed_expected_changed": false,
+    "legacy_558_failure_preserved": true
+  },
+  "scope": {
+    "other_case_or_probe_pass_inherited": false,
+    "unconfirmed_types_or_shapes_generalized": false,
+    "existing_output_guard_live_path": "REMAINS_UNCONFIRMED"
+  },
+  "decision": {
+    "accepted": false,
+    "status": "STOPPED_BEFORE_PAD_GENERATED_ROBIN_SAFETY_FAILURE",
+    "reason": "The single r9 generation completed, but two malformed PowerShell fragments make the unmodified payload unsafe and unparsable. Per the fixed conditions, PAD import, re-copy, Run1, and Run2 were not performed."
+  },
+  "github_write": false
+}

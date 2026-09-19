@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R9-G1",
+  "recorded_at": "2026-09-17T06:24:50.3273633+09:00",
+  "checkpoint": {
+    "head": "5bc0460010247b8de00fcc4594c9d36020c72e69",
+    "action_time_verifier": "PASS",
+    "submitted_body_sha256": "f6c6e59d719548ba54d6207fc6d6499a9ae7c699339ac855e3d4ea4a6f26aee4",
+    "bundle_sha256": "b402a6c78fb39cb68dd4111590122b9f9be3364609358fd58a9ad3880d29b993"
+  },
+  "destination": {
+    "service": "Microsoft 365 Copilot Chat",
+    "url": "https://m365.cloud.microsoft/chat?es=SSR",
+    "title": "\u30c1\u30e3\u30c3\u30c8 | Microsoft Copilot",
+    "normal_chat": true,
+    "model_selected": "Think Deeper"
+  },
+  "staging": {
+    "browser_opened": true,
+    "blank_editor_confirmed": true,
+    "model_selected": true,
+    "body_staged": false,
+    "attachment_staged": false,
+    "send_clicked": false,
+    "generation_started": false
+  },
+  "pad": {
+    "flow_created": false,
+    "robin_pasted": false,
+    "recopy_performed": false,
+    "run1": "NOT_RUN",
+    "run2": "NOT_RUN",
+    "pad_runs_used": 0
+  },
+  "stop": {
+    "status": "STOPPED_BEFORE_BODY_OR_ATTACHMENT_STAGING",
+    "reason": "Windows Computer Use could not establish the active Chrome URL with sufficient confidence and ended the UI session before data staging.",
+    "same_turn_ui_retry": false,
+    "send_authorization_consumed": false
+  },
+  "github_write": false
+}

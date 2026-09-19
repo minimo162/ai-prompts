@@ -1,0 +1,9 @@
+EX03 r11 minimal embedded-PowerShell structural contract
+1. Use the complete independent PAD-recopied Robin as the source. Change only request-derived data slots and teaching-only labels; do not paraphrase or reconstruct other lines.
+2. Raw Robin must contain zero backslash-open-bracket and zero backslash-close-bracket sequences.
+3. Require these exact raw token counts after adaptation: `[string]` 12; `[bool]` 2; `[void]` 6; `[Runtime.InteropServices.Marshal]` 7; `[IO.Path]` 2; `::GetFullPath(` 2; `-ieq` 1; `$matches[0]` 1; `$beforeNumberFormat` 3.
+4. Require exactly once: the normalized FullName `-ieq` match; string Value2 assignment; inner-finally NumberFormat restoration; destination string-type check; empty PrefixCharacter check.
+5. Require zero occurrences of the retired or observed corrupt fragments: `[string]::Equals(`; `[StringComparison]::OrdinalIgnoreCase`; `[string]::IsNullOrEmpty(`; `:Equals([IO.Path]`; `-not :IsNullOrEmpty(`; `[IO.Path]::GetFulling]`.
+6. Preserve one RunScript, five numeric WriteCell actions, twelve JSON source/readback comparisons, exact workbook one-match guard, non-formula guards, and fail-before-SaveAs behavior.
+7. If any check fails, emit no Robin and report the failed check. Do not repair generated output after emission. A refusal or no-code result is not a runtime PASS.
+8. This contract is limited to the independently captured text/number shapes. It does not prove EX03 execution or unobserved types.

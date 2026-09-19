@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R5-G1-RUN1",
+  "decided_at": "2026-09-16T07:22:50.1223356Z",
+  "pad": {
+    "run_invocations": 1,
+    "run_limit": 2,
+    "raw_completion_observer": {
+      "status": "completion_not_observed",
+      "timeout_seconds": 120,
+      "ready_observed": true,
+      "start_enabled_after": false,
+      "evidence": "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/pad-run.json"
+    },
+    "same_run_followup_read_only_observation": {
+      "new_run_invoked": false,
+      "transfer_state": "SAVED_REOPENED_12_JSON_COMPARISONS_READY",
+      "value_type_match_true": 11,
+      "value_type_match_false": 1,
+      "false_variable": "追記先_F6_ValueTypeMatch",
+      "source_cell_preview": "100%",
+      "saved_cell_preview": "1",
+      "source_cell_json": "{\"probe\":\"100%\"}",
+      "saved_cell_json": "{\"probe\":1.0}",
+      "evidence": [
+        "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/pad-variables.json",
+        "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/pad-f6-json-variables.json"
+      ]
+    }
+  },
+  "artifact": {
+    "runtime_path": "catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx",
+    "preserved_path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/result.xlsx",
+    "sha256": "726e2a0bea07e690f8945bc099b3e39aea6bf9d33755440d9245ec0dedb83475",
+    "byte_count": 11313,
+    "preserved_copy_exact": true,
+    "verifier_read_only_sha_unchanged": true
+  },
+  "fixed_expected_comparison": {
+    "status": "FAIL",
+    "checked_target_cells": 12,
+    "matching_target_cells": 11,
+    "mismatching_target_cells": 1,
+    "mismatch": {
+      "source": "入力ろ.xlsx / 追加項目!D3",
+      "target": "追記先!F6",
+      "expected_and_source": [
+        "text",
+        "100%"
+      ],
+      "saved_target": [
+        "number",
+        1
+      ]
+    },
+    "outside_values_types_formulas_checked": 468,
+    "outside_mismatches": 0,
+    "evidence": [
+      "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/typed-transfer.json",
+      "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/comparison.json"
+    ]
+  },
+  "format_and_dimensions": {
+    "legacy_gate_status": "FAIL",
+    "legacy_failure_counts": {
+      "styles": 480,
+      "row_dimensions": 48,
+      "column_dimensions": 30,
+      "values_types_positions": 1
+    },
+    "legacy_558_not_hidden": true,
+    "excel_effective_comparison": {
+      "status": "DIFFERENCES_FOUND",
+      "checked_cells": 480,
+      "checked_rows": 48,
+      "checked_columns": 30,
+      "cell_style_differences": 1,
+      "row_dimension_differences": 0,
+      "column_dimension_differences": 0,
+      "difference": "追記先!F6 number_format: G/標準 -> 0%"
+    },
+    "evidence": "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/native-styles.json"
+  },
+  "protected_inputs": {
+    "input_a_sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "input_b_sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725",
+    "template_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "runtime_work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "unchanged": true
+  },
+  "decision": {
+    "status": "FAIL_FIXED_EXPECTED_TYPE_AND_FORMAT_AT_追記先_F6",
+    "accepted": false,
+    "run2_authorized_after_result": false,
+    "reason": "The flow itself detected text 100% becoming numeric 1 after save/reopen, and the independent artifact comparison confirmed the same typed mismatch and a 0% number-format change."
+  }
+}

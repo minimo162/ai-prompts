@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R5-G1",
+  "recorded_at": "2026-09-16T07:06:10.6838726Z",
+  "normal_m365": {
+    "browser": "Google Chrome",
+    "conversation_url": "https://m365.cloud.microsoft/chat/conversation/1e64e2ae-44c4-420c-8868-155cc9f76783?es=SSR",
+    "conversation_title": "Power Automate貼付け用フロー生成",
+    "model": "Think Deeper",
+    "new_chat": true,
+    "generation_requests_used": 1,
+    "generation_request_limit": 1,
+    "retry_or_regeneration": false
+  },
+  "pre_send_revalidation": {
+    "destination": "normal Microsoft 365 Copilot Chat",
+    "attachment_count": 1,
+    "attachment_name": "PAD-Robin-Knowledge-Bundle.txt",
+    "editor_paragraph_count": 80,
+    "canonical_body_chars": 6671,
+    "canonical_body_utf8_bytes": 16910,
+    "canonical_body_sha256": "277ee66f9765e57aa2d8b4c48b680b2a573cd37628284420d147322f85c0a9ca",
+    "send_button_unique_and_enabled": true
+  },
+  "submission": {
+    "body_path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/submitted-body.txt",
+    "body_sha256": "277ee66f9765e57aa2d8b4c48b680b2a573cd37628284420d147322f85c0a9ca",
+    "same_as_prepared_fixed_body": true,
+    "attachment_path": "copilot/versions/20260915-excel-r5/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "attachment_sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3",
+    "grader_only_expected_sent": false,
+    "completed_robin_sent": false
+  },
+  "same_version": {
+    "version": "20260915-excel-r5",
+    "instruction_sha256": "fe57e45c170fcdfe8f94d8e23f9cb58f00d5b54ae4abe35a43189767032b5aaa",
+    "bundle_sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3",
+    "manifest_sha256": "1ffacd9f478346fb38b146f135e19fd743d2b9a0ce1ab85d8b6b452899dcfd89",
+    "fixed_request_sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+    "fixed_spec_sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+    "grader_only_expected_sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d"
+  },
+  "observed_result": {
+    "one_user_message": true,
+    "one_completed_copilot_response": true,
+    "refusal": false,
+    "response_code_editor_count": 1,
+    "response_code_lines": 87,
+    "resend_or_regeneration": false
+  },
+  "github_write": false
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-COPILOT-A2-G1",
+  "recorded_at": "2026-09-18T10:55:19.409108+09:00",
+  "status": "PASS_READY_FOR_ONE_COPILOT_SEND",
+  "checks": {
+    "head_is_e768b2a": true,
+    "candidate_manifest_identity": true,
+    "candidate_and_all_fixed_sha": true,
+    "fixed_request_is_verbatim_leading_component": true,
+    "a1_component_reuse_prohibition_absent": true,
+    "a2_reuse_combination_parameter_change_allowed": true,
+    "actual_runtime_paths_in_body": true,
+    "helper_invocation_launcher_paths_and_sha_in_body": true,
+    "grader_values_absent_from_body": true,
+    "comparison_criteria_fixed_before_send": true,
+    "work_matches_template": true,
+    "output_absent": true,
+    "json_handoff_residue_absent": true,
+    "ui_send_history_checked": true,
+    "candidate_id_history_absent": true,
+    "route_id_history_absent": true,
+    "normal_m365_chat_confirmed": true,
+    "normal_m365_chat_empty_editor_confirmed": true
+  },
+  "next_gate": "ONE_AUTHORIZED_COPILOT_SEND"
+}

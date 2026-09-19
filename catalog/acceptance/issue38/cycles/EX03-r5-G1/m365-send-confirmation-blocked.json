@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R5-G1",
+  "observed_at": "2026-09-16T12:44:25.2132403+09:00",
+  "status": "BLOCKED_AWAITING_ACTION_TIME_SEND_CONFIRMATION",
+  "consecutive_goal_turns_with_same_blocker": 3,
+  "live_state": {
+    "normal_m365_new_chat_url": "https://m365.cloud.microsoft/chat/?es=SSR",
+    "model": "Think Deeper",
+    "bundle_attachment_visible": true,
+    "bundle_name": "PAD-Robin-Knowledge-Bundle.txt",
+    "submission_body_present": true,
+    "send_button_visible": true,
+    "send_button_enabled": true
+  },
+  "counters": {
+    "generation_requests_used": 0,
+    "pad_runs_used": 0
+  },
+  "blocked_action": "Click Send exactly once to transmit the frozen instructions and attached r5 bundle to Microsoft Copilot.",
+  "required_input": "Explicit action-time user confirmation to send.",
+  "resume_rule": "Revalidate the preserved tab, body identity, attachment, model, and zero generation counter; then click Send exactly once without recreating the draft.",
+  "candidate_or_fixture_changed": false
+}

@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "case_id": "EX03-R6-REFUSAL-TO-R7-SOURCE",
+  "result": "PACKAGE_EVIDENCE_GAP_CONFIRMED_AND_SCOPED_SUCCESSOR_FROZEN",
+  "acceptance": "R7_PACKAGE_ONLY_NOT_COPILOT_OR_EX03_RUNTIME_ACCEPTED",
+  "inputs": {
+    "refusal": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r6-G1/response-rendered.txt",
+      "sha256": "7c6f30590b3ee7905038f142c1974d7639c4579c44a6f445ae0a9ea22f58b342"
+    },
+    "actually_sent_bundle": {
+      "path": "copilot/versions/20260916-excel-r6/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+      "sha256": "9c566e7f85a431f1869302c6a40985e2f81237f17ac4fbbdc9a73e62a646b580"
+    },
+    "pad_recopy": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r7-robin-source/pad-recopy-full.robin",
+      "sha256": "529d66dd598c395c6313a6f6d6b44c80049effb79de96b675a37f7dc99596d89"
+    }
+  },
+  "classification": {
+    "refuted": [
+      {
+        "hypothesis": "The actually sent r6 bundle contains Markdown-style backslashes before Robin arrow, underscore, or left bracket tokens.",
+        "evidence": {
+          "=\\>": 0,
+          "\\_": 0,
+          "\\[": 0,
+          "raw_=>": 184,
+          "raw__ValueTypeMatch": 60,
+          "raw_Data1[0][0]": 12
+        }
+      },
+      {
+        "hypothesis": "The r6 Robin RunScript payload differs from the bundled support script.",
+        "evidence": "Observed Robin escapes decode to the support script exactly, ignoring only the final LF."
+      }
+    ],
+    "confirmed_package_gap": {
+      "before": "r6 labeled the full integration as an implementer candidate and had no PAD Designer save/re-copy evidence for that exact full Robin.",
+      "impact": "The general fail-closed copy contract did not distinguish runtime-unaccepted status from permission to emit an exact fixed candidate source.",
+      "causal_limit": "This is an evidence-backed package weakness; it is not a claim about Copilot's internal cause based only on its refusal explanation."
+    }
+  },
+  "dedicated_pad_check": {
+    "version": "2.71.115.26224",
+    "language": "ja-JP",
+    "power_fx": "OFF",
+    "flow": "無題 (5)",
+    "subflow": "Main",
+    "initial_actions": 0,
+    "paste_invocations": 1,
+    "actions_after_paste": 110,
+    "variables_after_paste": 45,
+    "save_invocations": 1,
+    "recopy_invocations": 1,
+    "executed": false,
+    "candidate_sha256": "1f6ea14ea59242d7351d01ef75cd9571eb90676ab3845ffd2a842f01d84c771b",
+    "recopy_sha256": "529d66dd598c395c6313a6f6d6b44c80049effb79de96b675a37f7dc99596d89",
+    "lf_normalized_exact": true,
+    "candidate_line_endings": {
+      "crlf": 0,
+      "lf_only": 197
+    },
+    "recopy_line_endings": {
+      "crlf": 110,
+      "lf_only": 87
+    },
+    "run_script_decodes_to_support": true
+  },
+  "successor": {
+    "version": "20260916-excel-r7",
+    "instruction_sha256": "b888b7497c2c5a7fb79860c22da6be4b62f013731ab920e87dbb503ef1f0d7fa",
+    "bundle_sha256": "228329f60f17192f87878fb6393abf22520d051a1225d9905f2f71354216f1ed",
+    "manifest_sha256": "38517f37be934b1bcf37c0e12f9f33c9e803fa174af15e41579ccdd612dc4e3f",
+    "pad_recopy_support_sha256": "529d66dd598c395c6313a6f6d6b44c80049effb79de96b675a37f7dc99596d89",
+    "script_support_sha256": "d0a5df36516fcf4e27f6d789300ee5a03789aba8176571b1ab86fe84f15fba1a",
+    "changes": [
+      "Replaced only the r6 successor sections in knowledge 00, 04, and 06.",
+      "Embedded the exact PAD-saved/re-copied full Robin as the fixed EX03 generation source.",
+      "Recorded refusal-versus-sent-bundle token audit and Robin-to-script mechanical identity.",
+      "Clarified that non-execution prevents acceptance claims but does not prohibit emitting this exact fixed source."
+    ]
+  },
+  "unchanged": [
+    "Fixed EX03 request, specification, grader-only expected values, fixtures, and work template",
+    "r6 and all earlier sealed versions and evidence",
+    "Knowledge files 01, 02, 03, and 05 byte-for-byte from r6",
+    "Original, non-target-cell, formula, effective-format, and 558-difference checks",
+    "Safety, no-overwrite, exact-workbook, fixed-target, fail-closed, and no-generalization boundaries"
+  ],
+  "not_run": [
+    "Microsoft 365 Copilot send",
+    "EX03 integrated Run1 or Run2",
+    "Existing-output guard live path",
+    "Saved workbook artifact comparison",
+    "GitHub write"
+  ]
+}

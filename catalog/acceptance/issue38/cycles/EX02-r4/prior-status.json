@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "version": "20260915-excel-r3",
+  "status": "PARTIAL_EX02_EX03_NOT_ACCEPTED",
+  "issue_complete": false,
+  "inherits_legacy_pass": false,
+  "environment": {
+    "browser": "Normal in-app M365 chat available; nine r3 new-chat requests with actual bundle attachments completed",
+    "copilot_uploads": 9,
+    "copilot_generation_requests": 9,
+    "pad_package": "Microsoft.PowerAutomateDesktop 11.2608.115.0",
+    "pad_run_requests": 8,
+    "additional_write_capture": "CAPTURED_FROM_PAD_UI; matrix probe values matched; full acceptance pending",
+    "prior_pad_route_failure": {
+      "pad_launch_attempts": 2,
+      "pad_launch_error": "GetCursorPos failed: Access denied (0x80070005)",
+      "pad_followup_observation": "Second goal turn: same GetCursorPos 0x80070005; sky.list_windows still has no PAD target. No more launch retries without environment change."
+    },
+    "pad_current_route": "AppxManifest PAD.Console executable + direct PowerShell UIA: startup, dedicated flow creation, paste/save/recopy succeeded",
+    "browser_followup": "CUA getState: only in-app browser; createBrowserTab chrome failed Browser is not available: chrome. No message submitted.",
+    "chrome_launch_followup": "Launch command rejected before execution: blocked by policy. No bypass or resend.",
+    "pad_current_followup": "Matrix, output guard and scalar comparison each completed two runs; focus recovery observations saved separately from original timeouts."
+  },
+  "cases": {
+    "EX01": {
+      "generation": "RESPONSE_CAPTURED",
+      "copy_ui": "CODE_COPY_BUTTON_OBSERVED",
+      "copy_payload": "606_UTF16_4_ROBIN_LINES; async completion observed; no edits",
+      "paste_save_recopy": "SAVED; instruction lines equal; PAD CRLF/final newline changed bytes",
+      "run1": "COMPLETION_OBSERVED; six display values and positions match; cell types not directly observed",
+      "run2": "COMPLETION_OBSERVED; six displayed values and positions match after clearing prior previews",
+      "non_live": "fixture active Decoy and expected source rectangle checked",
+      "scope_result": "2 runs match specified-sheet rectangle; individual runtime cell types not directly observed"
+    },
+    "EX02": {
+      "generation": "REFUSED_MISSING_STOP_AND_READBACK_COMPARISON_COMPOSITION",
+      "copy_ui": "NO_CODE_BLOCK",
+      "copy_payload": "NOT_APPLICABLE_NO_CODE",
+      "paste_save_recopy": "NOT_RUN_NO_CODE",
+      "run1": "NOT_RUN_NO_CODE",
+      "run2": "NOT_RUN_NO_CODE",
+      "non_live": "12 target cells; oracle simulations and mutation tests only"
+    },
+    "EX03": {
+      "generation": "FAIL_UNCAPTURED_EXIT_AND_MISSING_COMPARISON",
+      "copy_ui": "OBSERVED",
+      "copy_payload": "SAVED_UNMODIFIED_3097_UTF16",
+      "paste_save_recopy": "NOT_RUN_UNVERIFIED_COMMAND",
+      "run1": "NOT_RUN",
+      "run2": "NOT_RUN",
+      "non_live": "12 target cells in changed Japanese sheets and rectangles; oracle simulation only",
+      "parameter_following": "Japanese filenames/sheets and changed ranges/destinations represented; runtime untested"
+    },
+    "EX04": {
+      "generation_stop": "all four cases PASS_GENERATION_STOP_ONLY",
+      "pad_runtime_stop": "all four cases NOT_APPLICABLE_NO_CODE; no PAD runtime safety claim",
+      "non_live": "Python preflight rejects missing sheet, invalid rectangle, same output, existing output; no claim about generated PAD safety"
+    },
+    "EX05": {
+      "generation_scope": "values-only PASS_SCOPE_ONLY_NO_ADVANCED_OPERATIONS_REQUIRED; full-copy PASS_SCOPE_BOUNDARY_ONLY; full flow remains unachieved",
+      "pad_runtime": "both NOT_APPLICABLE_NO_CODE",
+      "non_live": "Values-only and full-copy boundary stated; scope behavior observed in two real Copilot requests"
+    }
+  },
+  "remaining": [
+    "Integrate measured guard and readback comparison into a separately frozen candidate; strict type comparison remains unproven",
+    "EX02-EX03 same-version Copilot generation and unmodified PAD two-run full acceptance",
+    "Preserve XML oracle FAIL; resolve style representation acceptance without changing frozen expectations"
+  ],
+  "primitive_probe": {
+    "generated_by": "implementation AI assembly, not Copilot",
+    "flow": "RobinIssue38MatrixRuntime20260915A",
+    "actions": 21,
+    "paste_save_recopy": "EXACT_SHA_MATCH",
+    "run1": "COMPLETION_OBSERVED_AFTER_FOCUS_RECOVERY",
+    "logical_comparison": "FAIL",
+    "matched_target_values_types_positions": 12,
+    "checked_cells": 480,
+    "run2": "COMPLETION_OBSERVED",
+    "evidence": "probes/matrix-write/",
+    "followup": "Both runs: 12 target values/types/positions match; original openpyxl 558 style/dimension failures preserved; native styles match within recorded scope.",
+    "native_styles": "480 cells specified style attributes and row/column properties MATCH_WITHIN_RECORDED_SCOPE; file SHAs unchanged; supplemental only"
+  },
+  "candidate_history": {
+    "20260915-excel-r1": "PRESERVED",
+    "20260915-excel-r2": "INVALID_UTF16_MANIFEST_5911_VS_5844; never sent or run",
+    "20260915-excel-r3": "PASS_NON_LIVE_PACKAGE; EX01 two runs display match; EX02 refused; EX03 uncaptured EXIT; four EX04 generation stops; EX05 scope distinction"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "probe_id": "EX03-R10-STRUCTURAL-FIDELITY",
+  "cycle_id": "EX03-R9-G1",
+  "observed_at": "2026-09-17T07:29:02.5972951+09:00",
+  "source": {
+    "service": "Microsoft 365 Copilot Chat",
+    "normal_chat": true,
+    "conversation_url": "https://m365.cloud.microsoft/chat/conversation/b4fb07d7-41ce-4a2d-97c3-17b8145f32a4?es=SSR",
+    "title": "Power Automate for Desktopフロー生成指示",
+    "response_code_block_count": 1
+  },
+  "method": {
+    "access": "read-only DOM inspection of the existing completed response",
+    "selector": "[data-line-index]",
+    "ordering": "numeric data-line-index ascending",
+    "serialization": "textContent joined with CRLF and no final newline",
+    "copy_control_invoked_by_this_probe": false,
+    "response_regenerated": false,
+    "message_sent": false,
+    "pad_opened": false
+  },
+  "code_dom": {
+    "line_node_count": 197,
+    "first_index": 0,
+    "last_index": 196,
+    "utf16_units": 14269,
+    "utf8_bytes": 14471,
+    "final_newline": false,
+    "sha256": "dce9d6f01de53252050b53de46283563f56226b1635a2ccdcbd71d2dfd2636bf",
+    "matches_preserved_windows_clipboard_utf8": true
+  },
+  "defects": [
+    {
+      "robin_line": 50,
+      "data_line_index": 49,
+      "text": "            if ([string]::Equals([IO.Path]::GetFulling]$candidate.FullName), $targetPath, :OrdinalIgnoreCase)) {",
+      "dom_text_content_equals_inner_text": true,
+      "single_text_child_node": true,
+      "expected_fragment_missing": "[IO.Path]::GetFullPath([string]$candidate.FullName), $targetPath, [StringComparison]::OrdinalIgnoreCase"
+    },
+    {
+      "robin_line": 90,
+      "data_line_index": 89,
+      "text": "                if ($afterPrefixCharacter -cne $beforePrefixCharacter -or -not :IsNullOrEmpty($afterPrefixCharacter)) { throw (\\'Prefix character changed or remained: \\' + $sheetName + \\'!\\' + $cellAddress) }",
+      "dom_text_content_equals_inner_text": true,
+      "single_text_child_node": true,
+      "expected_fragment_missing": "[string]::IsNullOrEmpty($afterPrefixCharacter)"
+    }
+  ],
+  "classification": {
+    "confirmed": "The two corruptions are present in the rendered code editor DOM and the DOM serialization is byte-identical to the preserved Windows clipboard payload.",
+    "ruled_out": "These two corruptions were not introduced by the code-copy control, clipboard encoding, repository newline normalization, or PAD.",
+    "not_claimed": "The model or service's hidden internal cause is unknown.",
+    "safety_effect": "The unmodified r9 payload remains unsafe and was correctly stopped before PAD."
+  },
+  "actions": {
+    "copilot_send": 0,
+    "copilot_regeneration": 0,
+    "code_copy": 0,
+    "pad_import": 0,
+    "pad_run": 0,
+    "github_write": 0
+  }
+}

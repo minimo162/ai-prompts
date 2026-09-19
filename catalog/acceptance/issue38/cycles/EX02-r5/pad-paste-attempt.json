@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "test_id": "EX02-R5-G1",
+  "observed_at": "2026-09-15T14:21:05.464Z",
+  "pad": {
+    "surface": "Power Automate for desktop designer",
+    "power_fx": "OFF observed in the create-flow dialog",
+    "flow_title": "Power Automate | 無題 (3)",
+    "window_id_observation_only": 263140,
+    "subflow": "Main",
+    "initial_action_count": 0
+  },
+  "source": {
+    "normal_m365_conversation": "https://m365.cloud.microsoft/chat/conversation/40ad4cdc-012b-45bb-a13f-97b768d921ba?es=SSR",
+    "capture": "the sole Code Copy control in the completed response",
+    "clipboard_matches_preserved_generated_robin": true,
+    "clipboard_utf16_chars": 7403,
+    "clipboard_sha256": "c26b5c6cf42b66fecb1272222b64c2ab7aaa38921802945d9a58d7636c6a7dec",
+    "manual_edit": false
+  },
+  "operation": {
+    "attempts": 1,
+    "method": "Main canvas context menu Paste",
+    "post_paste_wait_seconds": 6,
+    "error_dialog_observed": false,
+    "error_text": "NOT_EXPOSED_BY_PAD",
+    "final_action_count": 0,
+    "actions_imported": false
+  },
+  "result": {
+    "status": "FAIL_UNMODIFIED_ROBIN_NOT_IMPORTED",
+    "causal_inference": "The preserved code differs from the frozen valid composition only by a final standalone backtick, so that token is the leading explanation. PAD exposed no error text, therefore the cause is not promoted beyond an inference.",
+    "saved": false,
+    "recopied": false,
+    "run1": "NOT_RUN",
+    "run2": "NOT_RUN",
+    "twelve_value_type_position_results": "NOT_RUN",
+    "reason_runs_not_started": "Zero actions were imported. Removing the observed token would be a prohibited generated-code repair.",
+    "probe_or_external_success_used_as_generated_flow_success": false
+  }
+}

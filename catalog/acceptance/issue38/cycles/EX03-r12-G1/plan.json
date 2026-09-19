@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-r12-G1",
+  "base_commit": "0f6e47197ecb5f4316e00aa319efa6c4213f696f",
+  "candidate": {
+    "version": "20260917-excel-r12",
+    "instruction_path": "copilot/versions/20260917-excel-r12/agent-instructions.txt",
+    "bundle_path": "copilot/versions/20260917-excel-r12/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "manifest_path": "copilot/versions/20260917-excel-r12/manifest.json",
+    "instruction_sha256": "11321acdbb96632221b02b7b737d12ba816ea4cf9f35f933a114c7f857539c06",
+    "bundle_sha256": "ddee43a1eddc966f62095b63a23b135df184f3cbe0ded635cbf72520e6744b97",
+    "manifest_sha256": "a6f65db93d56c1e0a212a8059f034240489b29ee4cfd4abc6b998e73ea2cefb1",
+    "inherits_live_acceptance": false,
+    "teaching_test_independence": "PASS_R12_FIXED_EX03_COMPLETE_ANSWER_ABSENT_FROM_INSTRUCTION_AND_NEW_SOURCE"
+  },
+  "submission": {
+    "destination": "normal Microsoft 365 Copilot chat",
+    "body_path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/submitted-body.txt",
+    "body_sha256": "cf25fb4aa54375d992e00545d336058b67055ab7de934e52ce284dffcd9924cc",
+    "body_contract": "unchanged full r12 instruction followed by unchanged fixed EX03 request",
+    "attachment_path": "copilot/versions/20260917-excel-r12/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "attachment_sha256": "ddee43a1eddc966f62095b63a23b135df184f3cbe0ded635cbf72520e6744b97",
+    "required_text_code_blocks": 1,
+    "generated_robin_must_be_unmodified": true
+  },
+  "limits": {
+    "total_copilot_sends": 1,
+    "total_pad_runs": 2,
+    "run2_requires_run1_normal_exit_all_comparisons_pass_and_artifact_preserved": true,
+    "stop_on_refusal_mismatch_safety_issue_or_unknown": true,
+    "no_resend_manual_repair_extra_run_successor_or_github_write": true
+  },
+  "fixed_inputs": {
+    "request": {
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370"
+    },
+    "spec": {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380"
+    },
+    "expected": {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d"
+    },
+    "input_a": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力い.xlsx",
+      "sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9"
+    },
+    "input_b": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力ろ.xlsx",
+      "sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+    },
+    "template": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+    },
+    "work": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/work.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+    }
+  },
+  "output": {
+    "path": "catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx",
+    "exists_before_send": false
+  },
+  "status": "READY_ONE_SEND_AFTER_SEND_HISTORY_CONFIRMED_EMPTY"
+}

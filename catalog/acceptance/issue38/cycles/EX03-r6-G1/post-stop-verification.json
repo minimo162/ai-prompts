@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R6-G1",
+  "verified_at": "2026-09-16T10:38:16.5892068Z",
+  "status": "PASS_RECORD_INTEGRITY_AFTER_REQUIRED_STOP",
+  "checks": [
+    {
+      "name": "r6 package",
+      "command": "node tests/Test-Issue38Package.mjs 20260916-excel-r6",
+      "result": "PASS_NON_LIVE_PACKAGE"
+    },
+    {
+      "name": "r5 retained package",
+      "command": "node tests/Test-Issue38Package.mjs 20260915-excel-r5",
+      "result": "PASS_NON_LIVE_PACKAGE"
+    },
+    {
+      "name": "EX03 EX02 Excel EX04 regression",
+      "command": "python -B -m unittest tests/Test-Issue38Ex03.py tests/Test-Issue38Ex02.py tests/Test-Issue38Excel.py tests/Test-Issue38Ex04ExistingOutput.py",
+      "result": "PASS_40_OF_40"
+    },
+    {
+      "name": "git diff whitespace",
+      "command": "git diff --check",
+      "result": "PASS"
+    }
+  ],
+  "artifact_checks": {
+    "protected_files_match": "150_OF_150",
+    "response_sha256_matches_record": true,
+    "runtime_output_exists": false,
+    "generated_robin_exists": false,
+    "generation_requests_used": 1,
+    "pad_runs_used": 0,
+    "accepted": false
+  }
+}

@@ -1,0 +1,17 @@
+Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\datatable-type-identity\\synthetic.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> ExcelInstance
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelInstance Name: $'''TypeProbe'''
+Excel.ReadFromExcel.ReadCells Instance: ExcelInstance StartColumn: $'''A''' StartRow: 2 EndColumn: $'''B''' EndRow: 2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> ExcelData
+Excel.CloseExcel.Close Instance: ExcelInstance
+SET ExcelNumber TO ExcelData[0][0]
+SET ExcelText TO ExcelData[0][1]
+SET KnownNumber TO 1
+SET KnownText TO $'''%'1'%'''
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': ExcelNumber } Json=> ExcelNumberJson
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': ExcelText } Json=> ExcelTextJson
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': KnownNumber } Json=> KnownNumberJson
+Variables.ConvertCustomObjectToJson CustomObject: { 'probe': KnownText } Json=> KnownTextJson
+SET PositiveExcelNumber TO ExcelNumberJson = KnownNumberJson
+SET PositiveExcelText TO ExcelTextJson = KnownTextJson
+SET NegativeExcelNumberText TO ExcelNumberJson = KnownTextJson
+SET NegativeExcelTextNumber TO ExcelTextJson = KnownNumberJson
+SET DataTableProbeCompleted TO $'''DATATABLE_TYPE_PROBE_FINISHED'''

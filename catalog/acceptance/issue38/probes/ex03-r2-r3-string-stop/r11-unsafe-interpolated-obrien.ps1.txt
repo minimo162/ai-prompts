@@ -1,0 +1,58 @@
+$ErrorActionPreference = 'Stop'
+$targetPath = 'C:\Users\yuuki\ai-prompts-issue38\catalog\teaching\excel-r8-example\work-copy.xlsx'
+$writes = @(
+    @('Data1[0][0]', '教材出力一', 'J4', '{"probe":"O'Brien"}'),
+    @('Data1[1][0]', '教材出力一', 'J5', '{"probe":"He said \"Go\"\nSecond line 'quoted'"}'),
+    @('Data1[2][0]', '教材出力一', 'J6', '{"probe":"100%"}'),
+    @('Data2[0][0]', '教材出力二', 'B10', '{"probe":"O'Brien"}'),
+    @('Data2[1][0]', '教材出力二', 'B11', '{"probe":"He said \"Go\"\nSecond line 'quoted'"}'),
+    @('Data2[0][2]', '教材出力二', 'D10', '{"probe":"100%"}'),
+    @('Data2[1][2]', '教材出力二', 'D11', '{"probe":"O'Brien"}')
+)
+$targetPath = [IO.Path]::GetFullPath($targetPath)
+$excel = [Runtime.InteropServices.Marshal]::GetActiveObject('Excel.Application')
+$workbook = $null
+try {
+    $matches = @()
+    for ($index = 1; $index -le $excel.Workbooks.Count; $index++) {
+        $candidate = $excel.Workbooks.Item($index)
+        if ([IO.Path]::GetFullPath([string]$candidate.FullName) -ieq $targetPath) { $matches += $candidate }
+        else { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($candidate) }
+    }
+    if ($matches.Count -ne 1) {
+        foreach ($match in $matches) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($match) }
+        throw ('Expected one exact target workbook, found ' + $matches.Count)
+    }
+    $workbook = $matches[0]
+    foreach ($write in $writes) {
+        $worksheet = $null
+        $cell = $null
+        try {
+            $sheetName = [string]$write[1]
+            $cellAddress = [string]$write[2]
+            $payload = [string]$write[3] | ConvertFrom-Json
+            if ($payload.probe -isnot [string]) { throw ('Teaching text source is not a string: ' + $write[0]) }
+            $worksheet = $workbook.Worksheets.Item($sheetName)
+            $cell = $worksheet.Range($cellAddress)
+            if ([bool]$cell.HasFormula) { throw ('Refusing to replace a formula cell: ' + $sheetName + '!' + $cellAddress) }
+            $beforeNumberFormat = [string]$cell.NumberFormat
+            try {
+                $cell.NumberFormat = '@'
+                $cell.Value2 = [string]$payload.probe
+            }
+            finally { $cell.NumberFormat = $beforeNumberFormat }
+            if ($cell.Value2 -isnot [string] -or [string]$cell.Value2 -cne [string]$payload.probe) { throw ('Text value/type was not preserved: ' + $sheetName + '!' + $cellAddress) }
+            if ([string]$cell.NumberFormat -cne $beforeNumberFormat) { throw ('Original number format was not restored: ' + $sheetName + '!' + $cellAddress) }
+            if ([string]$cell.PrefixCharacter -cne '') { throw ('Prefix character changed or remained: ' + $sheetName + '!' + $cellAddress) }
+            if ([bool]$cell.HasFormula) { throw ('A formula remained after text write: ' + $sheetName + '!' + $cellAddress) }
+        }
+        finally {
+            if ($null -ne $cell) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($cell) }
+            if ($null -ne $worksheet) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($worksheet) }
+        }
+    }
+}
+finally {
+    if ($null -ne $workbook) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($workbook) }
+    if ($null -ne $excel) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($excel) }
+}

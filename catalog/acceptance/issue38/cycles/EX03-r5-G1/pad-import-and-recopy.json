@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R5-G1",
+  "pad": {
+    "surface": "Power Automate for desktop designer",
+    "flow_title": "Power Automate | RobinIssue38EX03R5G1_20260916A",
+    "process_id": 33224,
+    "subflow": "Main",
+    "power_fx": "OFF",
+    "dedicated_new_flow": true,
+    "other_flows_modified_or_run": 0
+  },
+  "creation": {
+    "create_invocations": 1,
+    "ok_invocations": 1,
+    "creation_retry": false,
+    "initial_guard_false_negative_preserved": "catalog/acceptance/issue38/cycles/EX03-r5-G1/pad-flow-created.json",
+    "read_only_validation": "catalog/acceptance/issue38/cycles/EX03-r5-G1/pad-flow-validated-after-create.json",
+    "dormant_designer_process_reused": true,
+    "exact_title_uia_count": 1,
+    "initial_action_count": 0
+  },
+  "import": {
+    "source": "completed normal-M365 response sole code editor DOM",
+    "source_path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/generated.robin",
+    "source_sha256": "4ab085c52ba6f40fc52a55d910459eb917cb7ea3f4174737879d8bb4e5361f7e",
+    "paste_attempts": 1,
+    "initial_action_count": 0,
+    "designer_action_count": 87,
+    "design_error_count": 0,
+    "manual_edit": false,
+    "saved": true
+  },
+  "clipboard": {
+    "original_content_preserved": false,
+    "reason": "explicit user direction for this task",
+    "shared_default_restore_guard_preserved": true,
+    "task_scoped_opt_in": "AllowClipboardOverwriteWithoutRestore"
+  },
+  "recopy_after_save_before_run1": {
+    "path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/pad-recopy-before-run1.robin",
+    "selected_action_count": 87,
+    "clipboard_bytes": 7460,
+    "clipboard_crlf_count": 87,
+    "clipboard_final_lf": true,
+    "clipboard_sha256": "66a77eb39a8695bd8acd02538775705b06b520eadd968fd86fd1096cf45c2393",
+    "lf_normalized_chars": 7225,
+    "lf_normalized_sha256": "4ab085c52ba6f40fc52a55d910459eb917cb7ea3f4174737879d8bb4e5361f7e",
+    "lf_normalized_exact_generated_robin": true
+  },
+  "status": "PASS_UNMODIFIED_IMPORT_SAVE_RECOPY"
+}

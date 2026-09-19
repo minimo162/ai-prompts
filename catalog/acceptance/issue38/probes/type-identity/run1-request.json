@@ -1,0 +1,17 @@
+{
+  "at": "2026-09-15T11:25:23.4330864Z",
+  "run": 1,
+  "flow": "RobinIssue38TypeIdentity20260915C",
+  "processId": 25524,
+  "rawSha256": "27a89c538916ac083be0c39864a617521646a27f83993837519eddde96197798",
+  "planSha256": "d19639cbb62d8225ccd2c240497677928298cdc33845468195341c54979012fc",
+  "expected": {
+    "PositiveNumber": true,
+    "PositiveText": true,
+    "NegativeNumberText": false,
+    "NegativeTextNumber": false,
+    "ProbeCompleted": "TYPE_PROBE_FINISHED"
+  },
+  "previewsBefore": [],
+  "startInvocationsPlanned": 1
+}

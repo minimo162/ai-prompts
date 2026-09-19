@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-09-17T09:25:58.092430+09:00",
+  "probe_id": "EX03-R11-MINIMAL-POWERSHELL",
+  "base_commit": "ac90b0943d2ff4e1172c23712ef49fe93787b7b2",
+  "version": {
+    "id": "20260917-excel-r11",
+    "status": "LOCAL_CANDIDATE_EX03_MINIMAL_POWERSHELL_PAD_RECOPIED_SYNTHETIC_VALIDATED_NOT_COPILOT_OR_INTEGRATED_ACCEPTED",
+    "instruction_sha256": "bceb1c7e4f47c0cd6a92ad698d08108175002bffcaaaff492a309ca74a122aa1",
+    "instruction_utf16": 7240,
+    "bundle_sha256": "2d95ce344ff66195061fd15010d13b75937888575fa2345fb543ae2115242f69",
+    "manifest_sha256": "295306ea7e2e45da8cf77dec2784e94ea8ea8333da0df6a4000f83e9228b509e",
+    "teaching_script_sha256": "068e676d70c373a9cf8203d19f6154e38460f609c4fdf774dbef1528f68fc7ae",
+    "prepared_robin_sha256": "d2cac7051bb54cba44edb61aba48a7af7b8db9d4962425a519f48a6d137d25de",
+    "pad_recopy_sha256": "148267f09f53d74db1059cee823a4a2e159f2bbebfa249d3a25c996796fa765b"
+  },
+  "cause_boundary": {
+    "classification": "ACQUISITION_COPY_SAVE_EXTRACTION_DECODE_NOT_CAUSAL",
+    "r9_earliest_confirmed_missing_stage": "rendered_response_code_dom",
+    "r10_earliest_confirmed_missing_stage": "copied_full_response",
+    "copy_save_extract_decode_causal": false,
+    "hidden_model_or_service_cause": "UNKNOWN_NOT_CLAIMED"
+  },
+  "extraction_decode": {
+    "known_good_parser_error_count": 0,
+    "intentional_negative_mutations_preserved": true,
+    "intentional_negative_parser_error_count": 19,
+    "intentional_negative_executed": false
+  },
+  "implementation_change": {
+    "old_lines": 88,
+    "new_lines": 58,
+    "old_utf8_bytes_without_final_newline": 5011,
+    "new_utf8_bytes_without_final_newline": 3300,
+    "retired_fragments": [
+      "[string]::Equals(",
+      "[StringComparison]::OrdinalIgnoreCase",
+      "[string]::IsNullOrEmpty("
+    ],
+    "diff": "r10-to-r11-script.diff",
+    "new_parser_error_count": 0
+  },
+  "independent_source_pad": {
+    "result": "PASS_PAD_DESIGNER_SAVE_RECOPY_NO_EXECUTION",
+    "flow_name": "無題 (8)",
+    "paste_count": 1,
+    "save_count": 1,
+    "recopy_count": 1,
+    "actions": 110,
+    "variables": 45,
+    "lf_normalized_exact": true,
+    "executed": false
+  },
+  "dedicated_synthetic_pad": {
+    "recopy_result": "PASS_PAD_DESIGNER_SAVE_RECOPY_NO_EXECUTION",
+    "run_result": "PASS_ONE_DEDICATED_SYNTHETIC_PAD_RUN",
+    "pad_runs_used": 1,
+    "additional_run": 0,
+    "pad_json_comparisons": {
+      "ImmediateVsReopenedText": true,
+      "ImmediateVsReopenedNumber": true,
+      "SourceVsImmediateText": true,
+      "SourceVsImmediateNumber": true,
+      "SourceVsReopenedText": true,
+      "SourceVsReopenedNumber": true
+    },
+    "external_artifact_result": "PASS_EXTERNAL_ARTIFACT_CHECK_FOR_DEDICATED_PAD_PROBE",
+    "external_artifact_checks_passed": 13,
+    "external_artifact_checks_total": 13,
+    "result_sha256": "3f10c3ee8ca916f525bdcf881a959e3d5bd8f22d2275dbae6af60b7b7a8e52ee",
+    "scope": "text and number at synthetic A2:B2 only",
+    "exception_restoration": {
+      "inner_finally_structure": "PASS",
+      "normal_path_original_format_restored": "PASS",
+      "forced_exception_runtime": "NOT_RUN"
+    }
+  },
+  "protected_inputs": {
+    "fixed_request_sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+    "fixed_spec_sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+    "fixed_expected_sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+    "r9_generated_sha256": "7a02ea0d073adde698578b8fa578f5701c728114ee55fbf20aa0ecdaaa32cb14",
+    "r10_generated_sha256": "4946431c9ce47f986b841115fbfd328036356c4e12ae7cbe912c2bf06e2b1ed3",
+    "legacy_558_record_sha256": "3f292fc60c2a4f50733e49a3b6e204a4fb568c73a0708ec1112fc73781766bbc",
+    "r9_r10_generated_outputs_modified": false
+  },
+  "scope": {
+    "copilot_send": 0,
+    "integrated_ex03_run": 0,
+    "additional_dedicated_pad_run": 0,
+    "github_write": 0,
+    "legacy_558_failure_preserved": true,
+    "existing_output_guard_live_path": "REMAINS_UNCONFIRMED",
+    "integrated_output_path_absent": true
+  },
+  "decision": {
+    "status": "PASS_LOCAL_R11_CAUSE_BOUNDARY_AND_BOUNDED_PAD_VALIDATION_NOT_EX03_ACCEPTANCE",
+    "accepted_for_copilot_ex03": false,
+    "reason": "Copilot send and integrated EX03 PAD Run1/Run2 were not authorized in this task and remain not run."
+  }
+}

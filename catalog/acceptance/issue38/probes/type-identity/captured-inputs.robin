@@ -1,0 +1,4 @@
+SET NumberOne TO 1
+SET TextOne TO $'''%'1'%'''
+SET NumberOneCopy TO 1
+SET TextOneCopy TO $'''%'1'%'''

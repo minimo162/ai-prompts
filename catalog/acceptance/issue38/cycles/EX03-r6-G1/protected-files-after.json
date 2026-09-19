@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R6-G1",
+  "checked_at": "2026-09-16T10:38:16.5892068Z",
+  "source": "protected-files-before.json",
+  "source_sha256": "aa71b3056e2e6efb4fc34ef5e04729dc11192afa973a3fd9d4882f6b1956f8a3",
+  "protected_file_count": 150,
+  "matched_file_count": 150,
+  "mismatch_count": 0,
+  "missing_count": 0,
+  "all_match": true,
+  "mismatches": [],
+  "fixed_artifacts": {
+    "input_a_sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "input_b_sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725",
+    "template_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "request_sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+    "spec_sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+    "expected_sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d"
+  },
+  "runtime_output_exists": false
+}

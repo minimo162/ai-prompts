@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "test_id": "EX02-R5-G2",
+  "decided_at": "2026-09-15T20:29:32.1979436Z",
+  "version": {
+    "name": "20260915-excel-r5",
+    "instruction_sha256": "fe57e45c170fcdfe8f94d8e23f9cb58f00d5b54ae4abe35a43189767032b5aaa",
+    "bundle_sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3",
+    "manifest_sha256": "1ffacd9f478346fb38b146f135e19fd743d2b9a0ce1ab85d8b6b452899dcfd89",
+    "submitted_body_sha256": "03caf7342e8b5cb33264c4c4ad1fc01f8ae8e5553e151d8c2800ffeed0d153d5",
+    "base_type_probe_commit": "78ccbcf10551542d7891ac25af6a2445a3381443",
+    "r4_preserved": true,
+    "r5_g1_preserved": true
+  },
+  "stages": {
+    "same_fixed_request_and_acceptance": "PASS",
+    "normal_m365_same_version_attachment": "PASS_ONE_REAL_ATTACHMENT",
+    "normal_m365_single_generation": "PASS_1_OF_1",
+    "copilot_code_copy_integrity": "PASS_87_LINES_NO_EXTRA_TOKEN",
+    "unmodified_pad_import": "PASS_87_ACTIONS",
+    "pad_save_recopy": "PASS_LF_NORMALIZED_EXACT",
+    "positive_run1": "PASS_FIXED_TEXT_NUMBER_SCOPE",
+    "run1_preserved_before_run2": "PASS",
+    "positive_run2": "PASS_FIXED_TEXT_NUMBER_SCOPE",
+    "saved_closed_readonly_reopen": "PASS_BY_UNMODIFIED_PAD_ACTIONS_AND_RUN_OUTPUT",
+    "twelve_source_target_value_type_position_checks": "PASS_12_OF_12_BOTH_RUNS",
+    "grader_only_fixed_expected_checks": "PASS_12_OF_12_BOTH_RUNS",
+    "outside_values_types_formulas": "PASS_468_OF_468_BOTH_RUNS",
+    "native_style_supplement": "MATCH_WITHIN_RECORDED_SCOPE_480_BOTH_RUNS",
+    "one_cell_same_display_type_negative": "PASS_DETECTED_EXACTLY_ONE_TARGET_MISMATCH",
+    "protected_source_files": "PASS_BYTE_IDENTICAL",
+    "legacy_style_dimension_gate": "FAIL_558_UNRESOLVED"
+  },
+  "positive_outputs": {
+    "run1_sha256": "c678ae701725716d62aa945d73e341e0122db7e37a4ad35bc670108aeab68325",
+    "run2_sha256": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9",
+    "binary_sha_equal": false,
+    "semantic_comparison": "MATCH_480_CELLS"
+  },
+  "negative": {
+    "output_sha256": "776ebd082b750f6952e8f6bcf83566bda0ddb6cac7908b9e50da78542613857b",
+    "fixed_change": "Target A!D4 number 12.5 to text 12.5",
+    "semantic_delta_count": 1,
+    "target_mismatch_count": 1,
+    "outside_mismatch_count": 0,
+    "style_vs_positive": "MATCH_WITHIN_RECORDED_SCOPE_480",
+    "same_display_render": true,
+    "not_used_as_positive_run2": true
+  },
+  "legacy_558": {
+    "status": "UNRESOLVED_AND_VISIBLE",
+    "count": 558,
+    "failure_counts": {
+      "row_dimensions": 48,
+      "column_dimensions": 30,
+      "styles": 480
+    },
+    "native_style_supplement_does_not_override_gate": true,
+    "not_relabelled_as_pass": true
+  },
+  "scope": {
+    "confirmed_in_this_generated_flow": "fixed EX02 12 cells containing text or number only",
+    "generalized_to_unconfirmed_types": false,
+    "probe_success_used_as_generated_flow_success": false,
+    "external_checker_used_as_generated_flow_success": false,
+    "manual_generated_robin_repair": false
+  },
+  "overall": {
+    "accepted": false,
+    "functional_generated_pad_path": "PASS_FIXED_EX02_TEXT_NUMBER_SCOPE",
+    "status": "NOT_ACCEPTED_LEGACY_STYLE_DIMENSION_558_UNRESOLVED",
+    "fixed_request_or_acceptance_changed": false,
+    "generation_requests_used": 1,
+    "generation_request_limit": 1,
+    "pad_runs_used": 2,
+    "pad_run_limit": 2,
+    "github_write": false
+  },
+  "remaining": [
+    "Resolve or explicitly adjudicate the preserved 558 style and dimension differences before declaring full EX02 acceptance.",
+    "Do not generalize the number/text result to blank, boolean, date, error, formula-result, object, other PAD versions or other PCs without separate evidence.",
+    "The existing-output guard branch is present and statically reviewed but was not consumed as a third PAD run because the fixed positive-run limit was two."
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R5-G1",
+  "observed_at": "2026-09-16T12:40:33.2271978+09:00",
+  "status": "READY_TO_SEND_AWAITING_ACTION_TIME_CONFIRMATION",
+  "destination": "normal M365 Copilot Chat",
+  "new_chat_confirmed": true,
+  "model": "Think Deeper",
+  "attachment": {
+    "name_observed_in_ui": "PAD-Robin-Knowledge-Bundle.txt",
+    "source_path": "copilot/versions/20260915-excel-r5/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3",
+    "actual_file_chooser_upload": true
+  },
+  "submission_body": {
+    "source_path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/submitted-body.txt",
+    "sha256": "277ee66f9765e57aa2d8b4c48b680b2a573cd37628284420d147322f85c0a9ca",
+    "utf8_bytes": 16910,
+    "characters": 6671,
+    "logical_lines": 80,
+    "editor_canonical_sha256": "277ee66f9765e57aa2d8b4c48b680b2a573cd37628284420d147322f85c0a9ca",
+    "editor_canonical_exact_match": true
+  },
+  "excluded_from_submission": {
+    "grader_only_expected_values": true,
+    "completed_robin": true
+  },
+  "counters": {
+    "generation_requests_used": 0,
+    "pad_runs_used": 0
+  },
+  "previous_attachment_block_resolution": "The hidden file input remained non-clickable, but the visible Add and manage sources > Images and files upload menu item produced a file chooser and accepted the frozen bundle.",
+  "next_action": "After explicit action-time confirmation, click Send exactly once and wait for the sole Copilot response.",
+  "candidate_or_fixture_changed": false
+}

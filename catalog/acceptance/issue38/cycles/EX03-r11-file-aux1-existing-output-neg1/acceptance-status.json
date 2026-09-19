@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R11-FILE-AUX1-EXISTING-OUTPUT-NEG1",
+  "recorded_at": "2026-09-17T14:19:12.828340+09:00",
+  "version": "20260917-excel-r11",
+  "generated_robin_sha256": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875",
+  "formal_ex03_r11_g1": {
+    "status": "FAIL_R11_REQUIRED_CODE_BLOCK_ABSENT_STOP_BEFORE_PAD_PRESERVED",
+    "accepted": false,
+    "formal_pad_runs": 0
+  },
+  "file_aux1_positive": {
+    "status": "PASS_AUXILIARY_DOWNLOADED_FILE_TWO_RUN_VALIDATION_PRESERVED",
+    "pad_runs": 2,
+    "legacy_raw_difference_count_each_run": 558,
+    "excel_effective_difference_count_each_run": 0
+  },
+  "existing_output_guard": {
+    "test_id": "EX03-R11-FILE-AUX1-EXISTING-OUTPUT-NEG1",
+    "pad_runs": 1,
+    "retry_count": 0,
+    "guard_value": "OUTPUT_EXISTS_NO_WRITE",
+    "write_save_side_entered": false,
+    "terminal": "PASS_READY_NO_ERROR",
+    "all_required_sha_unchanged": true,
+    "status": "PASS_FIXED_R11_FILE_AUX1_EXISTING_OUTPUT_GUARD"
+  },
+  "preservation": {
+    "copilot_send": 0,
+    "robin_edit": 0,
+    "positive_run_rerun": 0,
+    "additional_guard_run": 0,
+    "candidate_or_comparator_change": 0,
+    "github_write": false,
+    "protected_mismatch_count": 0
+  },
+  "decision": {
+    "formal_ex03_r11_g1_accepted": false,
+    "file_aux1_functional_two_run_passed": true,
+    "existing_output_guard_passed": true,
+    "issue38_closed_by_guard": false
+  }
+}

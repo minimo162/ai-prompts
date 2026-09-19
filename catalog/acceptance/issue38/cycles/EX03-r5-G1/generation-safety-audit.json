@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R5-G1",
+  "version": "20260915-excel-r5",
+  "generated_robin_sha256": "4ab085c52ba6f40fc52a55d910459eb917cb7ea3f4174737879d8bb4e5361f7e",
+  "comparison": {
+    "instruction_line_count": 87,
+    "extra_line_or_token": false,
+    "manual_repair_applied": false,
+    "fixed_request_or_expected_changed": false
+  },
+  "bounded_side_effect_review": {
+    "output_exists_guard": true,
+    "all_excel_actions_inside_else": true,
+    "excel_action_before_else_count": 0,
+    "save_as_count": 1,
+    "write_action_count": 2,
+    "read_only_true_count": 3,
+    "source_json_actions": 12,
+    "saved_json_actions": 12,
+    "value_type_match_variables": 12,
+    "delete_or_remove_action_count": 0,
+    "shell_or_web_automation_action_count": 0,
+    "input_paths_read_only": true,
+    "output_path": "catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx",
+    "output_must_be_absent_before_each_positive_run": true
+  },
+  "fixed_mapping": {
+    "input_a": "入力い.xlsx / 受取明細 / D4:E6 -> 集計先 / F7:G9",
+    "input_b": "入力ろ.xlsx / 追加項目 / B2:D3 -> 追記先 / D5:F6",
+    "target_cells": 12,
+    "output_name": "照合結果.xlsx"
+  },
+  "scope": {
+    "verified_types": [
+      "text",
+      "number"
+    ],
+    "not_generalized_to": [
+      "blank",
+      "boolean",
+      "date",
+      "error",
+      "formula-result",
+      "object",
+      "other PAD versions or PCs"
+    ],
+    "probe_success_used_as_generated_flow_success": false,
+    "external_checker_used_as_generated_flow_success": false
+  },
+  "decision": {
+    "status": "PASS_SAFE_FOR_FIXED_EX03_PAD_IMPORT_AND_AT_MOST_TWO_POSITIVE_RUNS",
+    "reason": "The sole completed response contains one bounded 87-line composition, no extra token, and all Excel writes remain behind the absent-output guard.",
+    "overall_ex03_acceptance_inherited": false
+  }
+}

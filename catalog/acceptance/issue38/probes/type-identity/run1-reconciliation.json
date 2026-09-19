@@ -1,0 +1,56 @@
+{
+  "at": "2026-09-15T11:28:09.6017503Z",
+  "status": "PASS_PAD_TYPE_PROBE_RUN1",
+  "scope": "Reconcile PAD-computed comparison results with pre-run expectations; no external comparison of numeric/text inputs",
+  "checks": [
+    {
+      "expected": "True",
+      "padObserved": "True",
+      "name": "PositiveNumber",
+      "pass": true
+    },
+    {
+      "expected": "True",
+      "padObserved": "True",
+      "name": "PositiveText",
+      "pass": true
+    },
+    {
+      "expected": "False",
+      "padObserved": "False",
+      "name": "NegativeNumberText",
+      "pass": true
+    },
+    {
+      "expected": "False",
+      "padObserved": "False",
+      "name": "NegativeTextNumber",
+      "pass": true
+    },
+    {
+      "expected": "TYPE_PROBE_FINISHED",
+      "padObserved": "TYPE_PROBE_FINISHED",
+      "name": "ProbeCompleted",
+      "pass": true
+    }
+  ],
+  "rawUnchanged": true,
+  "observedPadValues": {
+    "CustomObjectAsJson": "{\"probe\":1.0}",
+    "CustomObjectAsJson2": "{\"probe\":\"1\"}",
+    "CustomObjectAsJson3": "{\"probe\":1.0}",
+    "CustomObjectAsJson4": "{\"probe\":\"1\"}",
+    "NegativeNumberText": "False",
+    "NegativeTextNumber": "False",
+    "NumberOne": "1",
+    "NumberOneCopy": "1",
+    "PositiveNumber": "True",
+    "PositiveText": "True",
+    "ProbeCompleted": "TYPE_PROBE_FINISHED",
+    "ScalarEquality": "True",
+    "TextOne": "1",
+    "TextOneCopy": "1"
+  },
+  "runtimeInputTypeEvidence": "run1-input-types.png: numeric # for NumberOne/NumberOneCopy and text T for TextOne/TextOneCopy",
+  "run2MayStart": true
+}

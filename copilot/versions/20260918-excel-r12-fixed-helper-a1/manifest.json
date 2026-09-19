@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "candidate_id": "20260918-excel-r12-fixed-helper-a1",
+  "route_id": "EX03-R12-FIXED-HELPER-COPILOT-A1",
+  "status": "LOCAL_PREPARED_NON_LIVE_NOT_COPILOT_OR_PAD_ACCEPTED",
+  "base_commit": "11a1c49cf7259f4b904294f934138bf5304eddc9",
+  "replaces_formal_r12": false,
+  "inherits_t2_auxiliary_pass": false,
+  "artifacts": {
+    "instruction": {
+      "path": "agent-instructions.txt",
+      "sha256": "0335ade50639ac8b115c0ef7281be66c60ae0719852865c50cc8ca83ae4a8c73",
+      "bytes": 17387
+    },
+    "bundle": {
+      "path": "knowledge/PAD-Robin-Fixed-Helper-Bundle.txt",
+      "sha256": "380c498f513019c49523adc362ad917fbf2199e426c766468231df50820ae4ca",
+      "bytes": 6498
+    },
+    "placement": {
+      "path": "PLACEMENT.md",
+      "sha256": "fbdef6cf15db1f6983cd902a67a5dbfeea170c5b7f362b3abb310a867a4f8810",
+      "bytes": 3159
+    }
+  },
+  "candidate_payload_sha256": "306c056e04c0ae388a6b47903fb60cb529a02d396bca28c6c1bd944f7147cc94",
+  "candidate_payload_sha256_algorithm": "SHA256(sorted relative UTF-8 path + NUL + bytes + NUL)",
+  "source_evidence": {
+    "helper": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/EX03-R12-Fixed-StringTransfer.ps1",
+      "sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+      "bytes": 8222,
+      "role": "VERIFIER_PREPLACED_RUNTIME_DEPENDENCY_NOT_COPILOT_OUTPUT",
+      "copilot_attachment": false
+    },
+    "invocation": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/invocation.json",
+      "sha256": "92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6",
+      "bytes": 1339,
+      "role": "VERIFIER_PREPLACED_FIXED_EX03_CONFIGURATION_NOT_COPILOT_OUTPUT",
+      "copilot_attachment": false
+    },
+    "launcher": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/launcher.ps1",
+      "sha256": "1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1",
+      "bytes": 2144,
+      "role": "VERIFIER_FIXED_SOURCE_COPIED_INTO_GENERATED_RUNSCRIPT",
+      "copilot_attachment": false
+    },
+    "t2_pad_recopy": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin",
+      "sha256": "da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa",
+      "bytes": 15406,
+      "role": "VALIDATOR_ONLY_EXECUTED_REFERENCE_NOT_COPILOT_ATTACHMENT",
+      "copilot_attachment": false
+    },
+    "fixed_request": {
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+      "bytes": 1647,
+      "role": "VERBATIM_LOGICAL_REQUEST_PRESERVED",
+      "copilot_attachment": false
+    },
+    "fixed_spec": {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+      "bytes": 1192,
+      "role": "VERIFIER_FIXED_SPEC_NOT_COPILOT_ATTACHMENT",
+      "copilot_attachment": false
+    },
+    "fixed_expected": {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+      "bytes": 777,
+      "role": "VERIFIER_GRADING_DATA_NOT_COPILOT_ATTACHMENT",
+      "copilot_attachment": false
+    },
+    "r12_instruction": {
+      "path": "copilot/versions/20260917-excel-r12/agent-instructions.txt",
+      "sha256": "11321acdbb96632221b02b7b737d12ba816ea4cf9f35f933a114c7f857539c06",
+      "bytes": 15987,
+      "role": "GENERIC_INSTRUCTION_PREFIX_SOURCE",
+      "copilot_attachment": false
+    },
+    "formal_r12_status": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/acceptance-status.json",
+      "sha256": "216089662ce7a5170d22eb3958a7641ecdee3ca00a95526d98eff2a70dc042ab",
+      "bytes": 1629,
+      "role": "PRESERVED_FORMAL_FAIL_BOUNDARY",
+      "copilot_attachment": false
+    },
+    "t2_result": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/result.json",
+      "sha256": "66b35d9686bfc17fb8bebf0c0c65f083cba647087417d52b852d3615fe7d14c1",
+      "bytes": 4377,
+      "role": "PRESERVED_AUXILIARY_PASS_NOT_INHERITED",
+      "copilot_attachment": false
+    },
+    "fh_r1_validator": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/Finalize-TrialT2.py",
+      "sha256": "938c233a7ce380dcf218fbae026a02b7eb757e92f7aac559962154dd00acf48f",
+      "bytes": 24119,
+      "role": "FH_R1_READ_ONLY_OBSERVATION_VALIDATOR",
+      "copilot_attachment": false
+    },
+    "fh_r1_tests": {
+      "path": "tests/Test-Issue38Ex03FixedHelperTrialT2.py",
+      "sha256": "a8eacf31f7d6273cd4a8c4f9efeb93a295cb6233daa2e926e783f7b1a254f2d5",
+      "bytes": 16714,
+      "role": "FH_R1_POSITIVE_AND_NEGATIVE_TESTS",
+      "copilot_attachment": false
+    },
+    "fh_r1_correction": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/reviews/FH-R1-corrections.json",
+      "sha256": "6db55a719c3f3178b27c3fd863d50ee95c2b81e48b095e29608b28470940caa0",
+      "bytes": 1923,
+      "role": "FH_N1_CORRECTION_RECORD",
+      "copilot_attachment": false
+    }
+  },
+  "copilot_input": {
+    "fixed_request_path": "catalog/acceptance/issue38/requests/EX03.txt",
+    "fixed_request_verbatim": true,
+    "fixed_request_logical_input_sheet_range_target_and_expectations_preserved": true,
+    "runtime_path_source": "VERIFIER_PREPLACED_INVOCATION_FOR_ALTERNATE_ROUTE",
+    "formal_request_runtime_path_compliance_claimed": false,
+    "instruction_path": "agent-instructions.txt",
+    "attachment_path": "knowledge/PAD-Robin-Fixed-Helper-Bundle.txt",
+    "same_candidate_id": true
+  },
+  "preplaced_by_verifier": {
+    "helper": {
+      "path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\EX03-R12-Fixed-StringTransfer.ps1",
+      "expected_sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+      "expected_sha256_owner": "VERIFIER"
+    },
+    "invocation": {
+      "path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\invocation.json",
+      "expected_sha256": "92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6",
+      "expected_sha256_owner": "VERIFIER"
+    },
+    "automatic_execution_configuration_from_japanese_request": false
+  },
+  "copilot_generated": {
+    "helper_body": false,
+    "invocation_json": false,
+    "helper_or_invocation_expected_sha_derived_or_changed": false,
+    "verifier_owned_expected_sha_literals_copied_in_fixed_launcher": true,
+    "fixed_launcher_inside_one_runscript": true,
+    "pad_before_and_after_actions": true,
+    "formal_response_text_code_block_count": 1
+  },
+  "fixed_contract": {
+    "success_output": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}",
+    "pad_mode": "NORMAL",
+    "source_json_write_count": 7,
+    "mode_json_write_count": 1,
+    "numeric_write_count": 5,
+    "save_as_count": 1,
+    "saved_value_type_comparison_count": 12,
+    "existing_output_no_write": true,
+    "failure_close_no_save": true
+  },
+  "teaching_independence": {
+    "condition": "ONE_INPUT_2X2_H3_I4_TO_J4_DIFFERENT_PATH_SHEET_TARGET",
+    "complete_fixed_ex03_robin_in_bundle": false,
+    "fixed_expected_or_grader_values_in_bundle": false,
+    "t2_pad_recopy_in_bundle": false,
+    "helper_body_in_bundle": false,
+    "invocation_json_in_bundle": false,
+    "fixed_terms_absent_from_teaching_fragments": true
+  },
+  "preserved_boundaries": {
+    "formal_r12_status": "FAIL_GENERATED_ROBIN_MISMATCH_AND_POWERSHELL_PARSE_ERROR_STOP_BEFORE_PAD",
+    "formal_r12_accepted": false,
+    "t2_decision": "PASS_FIXED_HELPER_AUXILIARY_NORMAL_RUN1",
+    "t2_scope": "Fixed-helper alternate-path auxiliary test only; not formal EX03-r12 acceptance.",
+    "fh_r1_commit": "11a1c49cf7259f4b904294f934138bf5304eddc9",
+    "legacy_558_difference_record": "PRESERVED_NOT_RECLASSIFIED"
+  },
+  "scope": {
+    "copilot_send_count": 0,
+    "pad_save_recopy_count": 0,
+    "pad_run_count": 0,
+    "excel_run_count": 0,
+    "successful_probe_rerun": 0,
+    "full_regression": "NOT_RUN_BY_SCOPE",
+    "github_write_count": 0
+  }
+}

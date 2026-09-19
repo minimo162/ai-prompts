@@ -1,0 +1,240 @@
+以下は、添付された PAD-Robin-Knowledge-Bundle の「EX02 / 20260915-excel-r5」候補に基づく、通常PAD、Power Fx OFF向けの統合フロー案です。出力存在時は状態変数を設定するだけで、Excel処理はすべてELSE内に閉じ込めています。
+
+1. 前提・対象範囲・未確認点
+対象は固定EX02 fixtureの文字列・数値12セルだけです。
+入力2冊は読み取り専用で開きます。
+work.xlsxは検証者がtemplate.xlsxから事前に作成済みであることが前提です。
+result.xlsxが存在する場合、TransferStateをOUTPUT_EXISTS_NO_WRITEにして終了します。書込み、保存、再読取りには入りません。
+result.xlsxが存在しない場合だけ、値の矩形転記、SaveAs、クローズ、読み取り専用再オープン、12セルのJSON identity比較を行います。
+転記対象に日付、空白、真偽値、エラー、数式結果が含まれる場合は、この候補を実行せず追加採取が必要です。
+以下は採取済み命令を組み合わせた現版の候補であり、この回答自体について無修正貼付け、保存、再コピー、2Run、成果物照合はまだ行われていません。
+SaveAsには既存ファイルを上書きしない引数がないため、存在確認とSaveAsの間の同時生成競合は未検証です。
+2. PAD側で先に確認する設定
+通常のPADフローをPower Fx OFFで作成します。
+次のファイルが存在することを確認します。
+fixtures\EX02\input-a.xlsx
+fixtures\EX02\input-b.xlsx
+runs\EX02-attempt1\work.xlsx
+runs\EX02-attempt1\result.xlsxが存在しないことを確認します。
+Excelで各ファイルを開いて手動保存する準備はしません。
+work.xlsxにTarget AとTarget Bが存在し、対象範囲に結合セルや保護された書込み不可セルがないことを事前確認します。
+入力2冊、template.xlsx、work.xlsx、result.xlsxはすべて異なるパスとして扱います。
+
+対象サブフローはMain全体です。既存アクションがある場合は、空の複製フローへ貼り付けて検証してください。
+
+コードブロックにコピー機能が表示されている場合は、それでコード部分だけをコピーし、PADの対象サブフローへ貼り付けてください。
+
+Plain Text
+1
+SET TransferState TO $'''NOT_STARTED'''
+2
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX02-attempt1\\result.xlsx''') THEN
+3
+    SET TransferState TO $'''OUTPUT_EXISTS_NO_WRITE'''
+4
+ELSE
+5
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX02\\input-a.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Input1
+6
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Input1 Name: $'''Source A'''
+7
+    Excel.ReadFromExcel.ReadCells Instance: Input1 StartColumn: $'''B''' StartRow: 2 EndColumn: $'''D''' EndRow: 3 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Data1
+8
+    Excel.CloseExcel.Close Instance: Input1
+9
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX02\\input-b.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Input2
+10
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Input2 Name: $'''Source B'''
+11
+    Excel.ReadFromExcel.ReadCells Instance: Input2 StartColumn: $'''A''' StartRow: 3 EndColumn: $'''B''' EndRow: 5 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Data2
+12
+    Excel.CloseExcel.Close Instance: Input2
+13
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX02-attempt1\\work.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> Work
+14
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''Target A'''
+15
+    Excel.WriteToExcel.WriteCell Instance: Work Value: Data1 Column: $'''C''' Row: 4
+16
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''Target B'''
+17
+    Excel.WriteToExcel.WriteCell Instance: Work Value: Data2 Column: $'''B''' Row: 3
+18
+    Excel.SaveExcel.SaveAs Instance: Work DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX02-attempt1\\result.xlsx'''
+19
+    Excel.CloseExcel.Close Instance: Work
+20
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX02-attempt1\\result.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Reopened
+21
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''Target A'''
+22
+    Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''C''' StartRow: 4 EndColumn: $'''E''' EndRow: 5 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback1
+23
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''Target B'''
+24
+    Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''B''' StartRow: 3 EndColumn: $'''C''' EndRow: 5 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback2
+25
+    Excel.CloseExcel.Close Instance: Reopened
+26
+    SET SourceCell TO Data1[0][0]
+27
+    SET SavedCell TO Readback1[0][0]
+28
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+29
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+30
+    SET TargetA_C4_ValueTypeMatch TO SourceCellJson = SavedCellJson
+31
+    SET SourceCell TO Data1[0][1]
+32
+    SET SavedCell TO Readback1[0][1]
+33
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+34
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+35
+    SET TargetA_D4_ValueTypeMatch TO SourceCellJson = SavedCellJson
+36
+    SET SourceCell TO Data1[0][2]
+37
+    SET SavedCell TO Readback1[0][2]
+38
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+39
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+40
+    SET TargetA_E4_ValueTypeMatch TO SourceCellJson = SavedCellJson
+41
+    SET SourceCell TO Data1[1][0]
+42
+    SET SavedCell TO Readback1[1][0]
+43
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+44
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+45
+    SET TargetA_C5_ValueTypeMatch TO SourceCellJson = SavedCellJson
+46
+    SET SourceCell TO Data1[1][1]
+47
+    SET SavedCell TO Readback1[1][1]
+48
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+49
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+50
+    SET TargetA_D5_ValueTypeMatch TO SourceCellJson = SavedCellJson
+51
+    SET SourceCell TO Data1[1][2]
+52
+    SET SavedCell TO Readback1[1][2]
+53
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+54
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+55
+    SET TargetA_E5_ValueTypeMatch TO SourceCellJson = SavedCellJson
+56
+    SET SourceCell TO Data2[0][0]
+57
+    SET SavedCell TO Readback2[0][0]
+58
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+59
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+60
+    SET TargetB_B3_ValueTypeMatch TO SourceCellJson = SavedCellJson
+61
+    SET SourceCell TO Data2[0][1]
+62
+    SET SavedCell TO Readback2[0][1]
+63
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+64
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+65
+    SET TargetB_C3_ValueTypeMatch TO SourceCellJson = SavedCellJson
+66
+    SET SourceCell TO Data2[1][0]
+67
+    SET SavedCell TO Readback2[1][0]
+68
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+69
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+70
+    SET TargetB_B4_ValueTypeMatch TO SourceCellJson = SavedCellJson
+71
+    SET SourceCell TO Data2[1][1]
+72
+    SET SavedCell TO Readback2[1][1]
+73
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+74
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+75
+    SET TargetB_C4_ValueTypeMatch TO SourceCellJson = SavedCellJson
+76
+    SET SourceCell TO Data2[2][0]
+77
+    SET SavedCell TO Readback2[2][0]
+78
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+79
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+80
+    SET TargetB_B5_ValueTypeMatch TO SourceCellJson = SavedCellJson
+81
+    SET SourceCell TO Data2[2][1]
+82
+    SET SavedCell TO Readback2[2][1]
+83
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+84
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+85
+    SET TargetB_C5_ValueTypeMatch TO SourceCellJson = SavedCellJson
+86
+    SET TransferState TO $'''SAVED_REOPENED_12_JSON_COMPARISONS_READY'''
+87
+END
+88
+`
+その他の行を表示する
+4. デザイナー上での確認
+
+貼り付け直後、実行前に次を確認してください。
+
+先頭がSET TransferState、末尾が出力存在分岐のENDになっている。
+IFの直下は既存出力時の状態設定だけで、ExcelアクションはすべてELSE内にある。
+ExcelインスタンスがInput1、Input2、Work、Reopenedに分離されている。
+Data1は2行3列、Data2は3行2列のDataTableとして扱われる。
+Readback1は2行3列、Readback2は3行2列になる設定である。
+12個の結果変数が存在し、すべてBoolean型になる。
+TargetA_C4_ValueTypeMatchからTargetB_C5_ValueTypeMatchまで、位置対応に漏れや重複がない。
+デザイナーのエラー一覧が0件である。
+各IF、ELSE、ENDのブロック対応が崩れていない。
+パス内の各区切りが2個のバックスラッシュであり、変数名のアンダースコア前にバックスラッシュがない。
+貼付け後にPADから再コピーし、元のコード部分に対して意図しない文字変更がないことを保存前に比較する。
+5. 合成データでの実行・照合
+出力存在時の負経路
+テスト用のresult.xlsxを既存状態にします。
+実行します。
+TransferStateがOUTPUT_EXISTS_NO_WRITEであることを確認します。
+入力2冊、work.xlsx、既存result.xlsxのSHAと更新日時を照合します。
+Excel処理が実行されず、既存出力が変更されていないことを確認します。
+出力未存在時の正経路
+result.xlsxが存在しないことを再確認します。
+入力2冊、template.xlsx、事前作成したwork.xlsxのSHAを記録します。
+フローを実行し、すべてのExcelインスタンスが閉じたことを確認します。
+TransferStateがSAVED_REOPENED_12_JSON_COMPARISONS_READYであることを確認します。
+12個のValueTypeMatch結果がすべてTrueであることを確認します。
+閉じたresult.xlsxを検証者側の固定期待値と独立照合します。
+対象12セルについて、値、型タグ、座標を照合します。
+対象外全セル、数式、コメント、原本SHAをそれぞれ独立して照合します。
+書式・寸法については既存証拠に558差分のFAILが残っているため、値・型の一致を「書式保持まで全体PASS」と扱いません。
+result.xlsxを残したまま再実行し、既存出力経路へ入り、書込みやSaveAsが再度実行されないことを確認します。
+現版での受入ラベル
+
+この回答時点の表記は「貼付け・実行未確認のr5統合候補」です。完成扱いにするには、コードコピー原文、無修正貼付け、保存、再コピー、正例2Run、12結果変数、保存xlsx独立検査、既存出力負経路を別々に記録してください。

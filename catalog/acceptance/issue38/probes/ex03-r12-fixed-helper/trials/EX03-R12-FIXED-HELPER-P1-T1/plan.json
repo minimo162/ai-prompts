@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-P1-T1",
+  "flow_name": "Issue38Ex03R12FixedHelperP1T1",
+  "kind": "ISSUE38_EX03_R12_FIXED_HELPER_ONE_NORMAL_LIVE_TRIAL",
+  "baseline_commit": "1f1e752eb82413b07437135a70eb7349dca313f0",
+  "scope": "Dedicated fixed EX03 helper path only; not formal r12 acceptance.",
+  "authorization": {
+    "normal_pad_runs": 1,
+    "reruns": 0,
+    "copilot_sends": 0
+  },
+  "success_output": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}",
+  "stop_conditions": [
+    "PAD save or re-copy is not exact",
+    "PowerShell output, terminal state, or any comparison is not clearly PASS",
+    "safety issue or result unknown"
+  ],
+  "out_of_scope": [
+    "Copilot send",
+    "formal EX03-r12 acceptance run",
+    "candidate version creation",
+    "full regression",
+    "GitHub write",
+    "generalization beyond fixed EX03 cells and values"
+  ]
+}

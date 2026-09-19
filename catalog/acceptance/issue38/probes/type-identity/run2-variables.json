@@ -1,0 +1,230 @@
+[
+  {
+    "at": "2026-09-15T11:29:43.9601497Z",
+    "variables": [
+      {
+        "name": "CustomObjectAsJson",
+        "parts": [
+          {
+            "name": "CustomObjectAsJson",
+            "help": "",
+            "id": "VariableTextBlock"
+          },
+          {
+            "name": "{\"probe\":1.0}",
+            "help": "{\"probe\":1.0}",
+            "id": "VariablePreviewTextBlock"
+          }
+        ]
+      },
+      {
+        "name": "CustomObjectAsJson2",
+        "parts": [
+          {
+            "name": "CustomObjectAsJson2",
+            "help": "",
+            "id": "VariableTextBlock"
+          },
+          {
+            "name": "{\"probe\":\"1\"}",
+            "help": "{\"probe\":\"1\"}",
+            "id": "VariablePreviewTextBlock"
+          }
+        ]
+      },
+      {
+        "name": "CustomObjectAsJson3",
+        "parts": [
+          {
+            "name": "CustomObjectAsJson3",
+            "help": "",
+            "id": "VariableTextBlock"
+          },
+          {
+            "name": "{\"probe\":1.0}",
+            "help": "{\"probe\":1.0}",
+            "id": "VariablePreviewTextBlock"
+          }
+        ]
+      },
+      {
+        "name": "CustomObjectAsJson4",
+        "parts": [
+          {
+            "name": "CustomObjectAsJson4",
+            "help": "",
+            "id": "VariableTextBlock"
+          },
+          {
+            "name": "{\"probe\":\"1\"}",
+            "help": "{\"probe\":\"1\"}",
+            "id": "VariablePreviewTextBlock"
+          }
+        ]
+      },
+      {
+        "name": "NegativeNumberText",
+        "parts": [
+          {
+            "name": "NegativeNumberText",
+            "help": "",
+            "id": "VariableTextBlock"
+          },
+          {
+            "name": "False",
+            "help": "False",
+            "id": "VariablePreviewTextBlock"
+          }
+        ]
+      },
+      {
+        "name": "NegativeTextNumber",
+        "parts": [
+          {
+            "name": "NegativeTextNumber",
+            "help": "",
+            "id": "VariableTextBlock"
+          },
+          {
+            "name": "False",
+            "help": "False",
+            "id": "VariablePreviewTextBlock"
+          }
+        ]
+      },
+      {
+        "name": "NumberOne",
+        "parts": [
+          {
+            "name": "NumberOne",
+            "help": "",
+            "id": "VariableTextBlock"
+          },
+          {
+            "name": "1",
+            "help": "1",
+            "id": "VariablePreviewTextBlock"
+          }
+        ]
+      },
+      {
+        "name": "NumberOneCopy",
+        "parts": [
+          {
+            "name": "NumberOneCopy",
+            "help": "",
+            "id": "VariableTextBlock"
+          },
+          {
+            "name": "1",
+            "help": "1",
+            "id": "VariablePreviewTextBlock"
+          }
+        ]
+      },
+      {
+        "name": "PositiveNumber",
+        "parts": [
+          {
+            "name": "PositiveNumber",
+            "help": "",
+            "id": "VariableTextBlock"
+          },
+          {
+            "name": "True",
+            "help": "True",
+            "id": "VariablePreviewTextBlock"
+          }
+        ]
+      },
+      {
+        "name": "PositiveText",
+        "parts": [
+          {
+            "name": "PositiveText",
+            "help": "",
+            "id": "VariableTextBlock"
+          },
+          {
+            "name": "True",
+            "help": "True",
+            "id": "VariablePreviewTextBlock"
+          }
+        ]
+      },
+      {
+        "name": "ProbeCompleted",
+        "parts": [
+          {
+            "name": "ProbeCompleted",
+            "help": "",
+            "id": "VariableTextBlock"
+          },
+          {
+            "name": "TYPE_PROBE_FINISHED",
+            "help": "TYPE_PROBE_FINISHED",
+            "id": "VariablePreviewTextBlock"
+          }
+        ]
+      }
+    ],
+    "filter": ""
+  },
+  {
+    "at": "2026-09-15T11:29:44.4483666Z",
+    "variables": [
+      {
+        "name": "ScalarEquality",
+        "parts": [
+          {
+            "name": "ScalarEquality",
+            "help": "",
+            "id": "VariableTextBlock"
+          },
+          {
+            "name": "True",
+            "help": "True",
+            "id": "VariablePreviewTextBlock"
+          }
+        ]
+      }
+    ],
+    "filter": "ScalarEquality"
+  },
+  {
+    "at": "2026-09-15T11:29:44.8844553Z",
+    "variables": [
+      {
+        "name": "TextOne",
+        "parts": [
+          {
+            "name": "TextOne",
+            "help": "",
+            "id": "VariableTextBlock"
+          },
+          {
+            "name": "1",
+            "help": "1",
+            "id": "VariablePreviewTextBlock"
+          }
+        ]
+      },
+      {
+        "name": "TextOneCopy",
+        "parts": [
+          {
+            "name": "TextOneCopy",
+            "help": "",
+            "id": "VariableTextBlock"
+          },
+          {
+            "name": "1",
+            "help": "1",
+            "id": "VariablePreviewTextBlock"
+          }
+        ]
+      }
+    ],
+    "filter": "TextOne"
+  }
+]

@@ -1,0 +1,1391 @@
+{
+  "schema_version": 1,
+  "candidate_id": "20260918-excel-r12-fixed-helper-a4",
+  "status": "RULES_PRESERVED_FROM_A3_PLUS_FIXED_A4_WIRING_NOT_RUN",
+  "rules": [
+    {
+      "id": "AR04_EXPLICIT_JSON_HANDOFF",
+      "component": "C04_JSON_FILE_HANDOFF",
+      "purpose": "explicitly duplicate source-slot JSON handoff commands without a PAD loop",
+      "line_bindings": [
+        {
+          "source": "r2r3_normal_recopy",
+          "lines": [
+            12,
+            15
+          ],
+          "role": "SET source variable definitions"
+        },
+        {
+          "source": "r2r3_normal_recopy",
+          "lines": [
+            16,
+            19
+          ],
+          "role": "source JSON conversions"
+        },
+        {
+          "source": "r2r3_normal_recopy",
+          "lines": [
+            20,
+            21
+          ],
+          "role": "single mode definition and conversion"
+        },
+        {
+          "source": "r2r3_normal_recopy",
+          "lines": [
+            22,
+            25
+          ],
+          "role": "source JSON file writes"
+        },
+        {
+          "source": "r2r3_normal_recopy",
+          "lines": [
+            26,
+            26
+          ],
+          "role": "single mode file write"
+        }
+      ],
+      "immutable_parts": [
+        "SET command shape",
+        "ConvertCustomObjectToJson CustomObject probe wrapper and Json output shape",
+        "File.WriteText AppendNewLine False, Overwrite, UTF8 arguments",
+        "mode definition/conversion/write occurs once"
+      ],
+      "mutable_parts": [
+        "source variable and JSON variable names",
+        "DataTable row/column indexes",
+        "source-N JSON path and N",
+        "explicit source-slot copy count",
+        "leading indentation needed by the outer ELSE body"
+      ],
+      "definitions": [
+        "each source variable",
+        "each source JSON variable",
+        "RunMode",
+        "RunModeJson"
+      ],
+      "references": [
+        "C03 DataTable outputs",
+        "each source JSON variable at its matching write"
+      ],
+      "execution_order": [
+        "all source SET definitions",
+        "all source JSON conversions",
+        "RunMode SET and JSON conversion once",
+        "all matching source-N writes",
+        "mode write once"
+      ],
+      "connection": "after all C03 reads and before C05/C06; every reference follows its definition",
+      "copy_method": "copy the captured command lines explicitly once per slot; do not create a LOOP"
+    },
+    {
+      "id": "AR09_EXPLICIT_NUMERIC_WRITES",
+      "component": "C09_NUMERIC_WRITE",
+      "purpose": "define numeric source variables and duplicate WriteCell explicitly inside the success branch",
+      "line_bindings": [
+        {
+          "source": "r2r3_normal_recopy",
+          "lines": [
+            12,
+            15
+          ],
+          "role": "SET-from-DataTable definition template"
+        },
+        {
+          "source": "r2r3_normal_recopy",
+          "lines": [
+            28,
+            28
+          ],
+          "role": "target-sheet activation template"
+        },
+        {
+          "source": "r2r3_normal_recopy",
+          "lines": [
+            168,
+            168
+          ],
+          "role": "single branch-entry marker"
+        },
+        {
+          "source": "r2r3_normal_recopy",
+          "lines": [
+            169,
+            169
+          ],
+          "role": "WriteCell template"
+        }
+      ],
+      "immutable_parts": [
+        "SET definition shape",
+        "ActivateWorksheetByName action and Name argument shape",
+        "NumericWriteEntered marker occurs once",
+        "WriteCell action and Instance/Value/Column/Row argument names"
+      ],
+      "mutable_parts": [
+        "numeric variable names and DataTable indexes",
+        "target sheet",
+        "target column and row",
+        "explicit WriteCell copy count",
+        "leading indentation for the NORMAL success body"
+      ],
+      "definitions": [
+        "every numeric source variable before its first WriteCell",
+        "NumericWriteEntered once"
+      ],
+      "references": [
+        "C03 DataTable outputs",
+        "Work from C05",
+        "numeric variable at each WriteCell"
+      ],
+      "execution_order": [
+        "C07 exact-success and NORMAL gates pass",
+        "define all numeric source variables",
+        "activate the first target sheet",
+        "set NumericWriteEntered once",
+        "emit each WriteCell in source order, activating a different sheet before its group"
+      ],
+      "connection": "inside the NORMAL branch after C07 line 103 and before C10 SaveAs",
+      "copy_method": "copy SET, activation, and WriteCell lines explicitly; do not create a LOOP"
+    },
+    {
+      "id": "AR10_MULTIPLE_RECTANGLE_READBACK",
+      "component": "C10_SAVE_CLOSE_REOPEN_READBACK",
+      "purpose": "save/reopen once and duplicate only activation plus TypedValues read for each rectangle",
+      "line_bindings": [
+        {
+          "source": "r2r3_normal_recopy",
+          "lines": [
+            170,
+            173
+          ],
+          "role": "single SaveAs marker, SaveAs, close, read-only reopen"
+        },
+        {
+          "source": "r2r3_normal_recopy",
+          "lines": [
+            174,
+            175
+          ],
+          "role": "rectangle activation and TypedValues read pair"
+        },
+        {
+          "source": "r2r3_normal_recopy",
+          "lines": [
+            176,
+            176
+          ],
+          "role": "single close after all rectangle reads"
+        }
+      ],
+      "immutable_parts": [
+        "SaveAs OpenXmlWorkbook shape",
+        "close Work before read-only reopen",
+        "ReadOnly True and UseMachineLocale False",
+        "TypedValues and FirstLineIsHeader False",
+        "close Reopened once after the final read"
+      ],
+      "mutable_parts": [
+        "output path",
+        "sheet, start/end columns and rows",
+        "readback variable name",
+        "explicit activation/read pair copy count"
+      ],
+      "definitions": [
+        "Reopened at the single reopen",
+        "one readback variable per rectangle"
+      ],
+      "references": [
+        "Work from C05",
+        "output path",
+        "Reopened for every activation/read and final close"
+      ],
+      "execution_order": [
+        "set SaveAsEntered once",
+        "SaveAs once",
+        "close Work once",
+        "reopen output ReadOnly once",
+        "for each rectangle explicitly emit activation then read",
+        "close Reopened once"
+      ],
+      "connection": "after the last C09 WriteCell and before C11 saved-value definitions",
+      "copy_method": "copy only the captured activation/read pair per rectangle; do not duplicate SaveAs/reopen and do not create a LOOP"
+    },
+    {
+      "id": "AR11_MULTIPLE_JSON_COMPARISONS",
+      "component": "C11_JSON_VALUE_TYPE_COMPARE",
+      "purpose": "duplicate saved-slot definitions, JSON conversions, and equality comparisons by position",
+      "line_bindings": [
+        {
+          "source": "r2r3_normal_recopy",
+          "lines": [
+            177,
+            180
+          ],
+          "role": "saved variable definitions"
+        },
+        {
+          "source": "r2r3_normal_recopy",
+          "lines": [
+            181,
+            184
+          ],
+          "role": "saved JSON conversions"
+        },
+        {
+          "source": "r2r3_normal_recopy",
+          "lines": [
+            185,
+            188
+          ],
+          "role": "source JSON versus saved JSON comparisons"
+        },
+        {
+          "source": "r2r3_normal_recopy",
+          "lines": [
+            189,
+            189
+          ],
+          "role": "single success-state assignment"
+        }
+      ],
+      "immutable_parts": [
+        "SET saved variable shape",
+        "ConvertCustomObjectToJson probe wrapper and Json output shape",
+        "JSON string equality shape",
+        "success-state assignment occurs once after all comparisons"
+      ],
+      "mutable_parts": [
+        "readback variable and row/column indexes",
+        "saved/source JSON and boolean result variable names",
+        "explicit position copy count",
+        "final success-state variable and label"
+      ],
+      "definitions": [
+        "every saved variable",
+        "every saved JSON variable",
+        "every comparison boolean",
+        "final state"
+      ],
+      "references": [
+        "all C10 readback variables",
+        "matching source JSON variables",
+        "matching saved JSON variables"
+      ],
+      "execution_order": [
+        "define every saved variable in fixed position order",
+        "convert every saved value to JSON in the same order",
+        "compare matching source and saved JSON variables in the same order",
+        "set success state once"
+      ],
+      "connection": "after C10 closes Reopened and before C12 begins the NORMAL failure ELSE",
+      "copy_method": "copy each captured command line explicitly per position; do not create a LOOP"
+    }
+  ],
+  "control_events": [
+    {
+      "sequence": 1,
+      "component": "C02_OUTPUT_GUARD",
+      "source": "r2r3_normal_recopy",
+      "line": 5,
+      "event": "OPEN",
+      "block": "OUTPUT_GUARD"
+    },
+    {
+      "sequence": 2,
+      "component": "C02_OUTPUT_GUARD",
+      "source": "r2r3_normal_recopy",
+      "line": 7,
+      "event": "ELSE",
+      "block": "OUTPUT_GUARD"
+    },
+    {
+      "sequence": 3,
+      "component": "C06_FIXED_LAUNCHER_RUNSCRIPT",
+      "source": "t2_pad_recopy",
+      "line": 100,
+      "event": "BODY",
+      "block": "OUTPUT_GUARD"
+    },
+    {
+      "sequence": 4,
+      "component": "C07_EXACT_SUCCESS_MODE_GATE",
+      "source": "t2_pad_recopy",
+      "line": 101,
+      "event": "OPEN",
+      "block": "EXACT_SUCCESS"
+    },
+    {
+      "sequence": 5,
+      "component": "C07_EXACT_SUCCESS_MODE_GATE",
+      "source": "t2_pad_recopy",
+      "line": 102,
+      "event": "OPEN",
+      "block": "NORMAL_MODE"
+    },
+    {
+      "sequence": 6,
+      "component": "C07_EXACT_SUCCESS_MODE_GATE",
+      "source": "t2_pad_recopy",
+      "line": 103,
+      "event": "SUCCESS_BODY_START",
+      "block": "NORMAL_MODE"
+    },
+    {
+      "sequence": 7,
+      "component": "C12_FAILURE_CLOSE_NO_SAVE",
+      "source": "r2r3_normal_recopy",
+      "line": 190,
+      "event": "ELSE",
+      "block": "NORMAL_MODE"
+    },
+    {
+      "sequence": 8,
+      "component": "C12_FAILURE_CLOSE_NO_SAVE",
+      "source": "r2r3_normal_recopy",
+      "line": 191,
+      "event": "CLOSE_WORK_NO_SAVE",
+      "block": "NORMAL_MODE"
+    },
+    {
+      "sequence": 9,
+      "component": "C12_FAILURE_CLOSE_NO_SAVE",
+      "source": "r2r3_normal_recopy",
+      "line": 193,
+      "event": "END",
+      "block": "NORMAL_MODE"
+    },
+    {
+      "sequence": 10,
+      "component": "C12_FAILURE_CLOSE_NO_SAVE",
+      "source": "r2r3_normal_recopy",
+      "line": 194,
+      "event": "ELSE",
+      "block": "EXACT_SUCCESS"
+    },
+    {
+      "sequence": 11,
+      "component": "C12_FAILURE_CLOSE_NO_SAVE",
+      "source": "r2r3_normal_recopy",
+      "line": 195,
+      "event": "CLOSE_WORK_NO_SAVE",
+      "block": "EXACT_SUCCESS"
+    },
+    {
+      "sequence": 12,
+      "component": "C12_FAILURE_CLOSE_NO_SAVE",
+      "source": "r2r3_normal_recopy",
+      "line": 197,
+      "event": "END",
+      "block": "EXACT_SUCCESS"
+    },
+    {
+      "sequence": 13,
+      "component": "C12_FAILURE_CLOSE_NO_SAVE",
+      "source": "r2r3_normal_recopy",
+      "line": 198,
+      "event": "END",
+      "block": "OUTPUT_GUARD"
+    }
+  ],
+  "control_validation": {
+    "balanced": true,
+    "closed_in_order": [
+      "NORMAL_MODE",
+      "EXACT_SUCCESS",
+      "OUTPUT_GUARD"
+    ],
+    "outer_guard_closed_by": "C12 line 198",
+    "normal_closed_by": "C12 line 193",
+    "exact_success_closed_by": "C12 line 197",
+    "failure_close_count": 2,
+    "failure_save_as_count": 0
+  },
+  "derived_example": {
+    "status": "A3_DIFFERENT_CONDITION_EXAMPLE_PRESERVED_NOT_RUN",
+    "records": [
+      {
+        "rule_id": "AR04_EXPLICIT_JSON_HANDOFF",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 12,
+        "template_sha256": "133d9da02b76bfc35974327022d5ef4745d6cf8623fc3043f323300503d0a062",
+        "immutable_skeleton_sha256": "6d3b241b5dfd0324c4e59795c29648fa2208d2913efc23721c96e4e4ad5e125c",
+        "mutable_replacements": [
+          {
+            "source_token": "SET Source1 TO",
+            "derived_token": "SET DemoSource1 TO"
+          },
+          {
+            "source_token": "SourceData[0][0]",
+            "derived_token": "DemoData[0][0]"
+          }
+        ],
+        "defines": [
+          "DemoSource1"
+        ],
+        "references": [
+          "DemoData"
+        ],
+        "text": "    SET DemoSource1 TO DemoData[0][0]"
+      },
+      {
+        "rule_id": "AR04_EXPLICIT_JSON_HANDOFF",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 12,
+        "template_sha256": "133d9da02b76bfc35974327022d5ef4745d6cf8623fc3043f323300503d0a062",
+        "immutable_skeleton_sha256": "6d3b241b5dfd0324c4e59795c29648fa2208d2913efc23721c96e4e4ad5e125c",
+        "mutable_replacements": [
+          {
+            "source_token": "SET Source1 TO",
+            "derived_token": "SET DemoSource2 TO"
+          },
+          {
+            "source_token": "SourceData[0][0]",
+            "derived_token": "DemoData[0][1]"
+          }
+        ],
+        "defines": [
+          "DemoSource2"
+        ],
+        "references": [
+          "DemoData"
+        ],
+        "text": "    SET DemoSource2 TO DemoData[0][1]"
+      },
+      {
+        "rule_id": "AR04_EXPLICIT_JSON_HANDOFF",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 12,
+        "template_sha256": "133d9da02b76bfc35974327022d5ef4745d6cf8623fc3043f323300503d0a062",
+        "immutable_skeleton_sha256": "6d3b241b5dfd0324c4e59795c29648fa2208d2913efc23721c96e4e4ad5e125c",
+        "mutable_replacements": [
+          {
+            "source_token": "SET Source1 TO",
+            "derived_token": "SET DemoSource3 TO"
+          },
+          {
+            "source_token": "SourceData[0][0]",
+            "derived_token": "DemoData[0][2]"
+          }
+        ],
+        "defines": [
+          "DemoSource3"
+        ],
+        "references": [
+          "DemoData"
+        ],
+        "text": "    SET DemoSource3 TO DemoData[0][2]"
+      },
+      {
+        "rule_id": "AR04_EXPLICIT_JSON_HANDOFF",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 12,
+        "template_sha256": "133d9da02b76bfc35974327022d5ef4745d6cf8623fc3043f323300503d0a062",
+        "immutable_skeleton_sha256": "6d3b241b5dfd0324c4e59795c29648fa2208d2913efc23721c96e4e4ad5e125c",
+        "mutable_replacements": [
+          {
+            "source_token": "SET Source1 TO",
+            "derived_token": "SET DemoSource4 TO"
+          },
+          {
+            "source_token": "SourceData[0][0]",
+            "derived_token": "DemoData[0][3]"
+          }
+        ],
+        "defines": [
+          "DemoSource4"
+        ],
+        "references": [
+          "DemoData"
+        ],
+        "text": "    SET DemoSource4 TO DemoData[0][3]"
+      },
+      {
+        "rule_id": "AR04_EXPLICIT_JSON_HANDOFF",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 16,
+        "template_sha256": "dfa4d44b50d4a66d183f63947c2902af73e09f30d0771bcdc193319cd0d2f1d0",
+        "immutable_skeleton_sha256": "216eb6dea609b43d800f7e10ee1a51704b38b8b3035c7d0795166bb90c4054e0",
+        "mutable_replacements": [
+          {
+            "source_token": "CustomObject: { 'probe': Source1 }",
+            "derived_token": "CustomObject: { 'probe': DemoSource1 }"
+          },
+          {
+            "source_token": "Json=> Source1Json",
+            "derived_token": "Json=> DemoSource1Json"
+          }
+        ],
+        "defines": [
+          "DemoSource1Json"
+        ],
+        "references": [
+          "DemoSource1"
+        ],
+        "text": "    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': DemoSource1 } Json=> DemoSource1Json"
+      },
+      {
+        "rule_id": "AR04_EXPLICIT_JSON_HANDOFF",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 16,
+        "template_sha256": "dfa4d44b50d4a66d183f63947c2902af73e09f30d0771bcdc193319cd0d2f1d0",
+        "immutable_skeleton_sha256": "216eb6dea609b43d800f7e10ee1a51704b38b8b3035c7d0795166bb90c4054e0",
+        "mutable_replacements": [
+          {
+            "source_token": "CustomObject: { 'probe': Source1 }",
+            "derived_token": "CustomObject: { 'probe': DemoSource2 }"
+          },
+          {
+            "source_token": "Json=> Source1Json",
+            "derived_token": "Json=> DemoSource2Json"
+          }
+        ],
+        "defines": [
+          "DemoSource2Json"
+        ],
+        "references": [
+          "DemoSource2"
+        ],
+        "text": "    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': DemoSource2 } Json=> DemoSource2Json"
+      },
+      {
+        "rule_id": "AR04_EXPLICIT_JSON_HANDOFF",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 16,
+        "template_sha256": "dfa4d44b50d4a66d183f63947c2902af73e09f30d0771bcdc193319cd0d2f1d0",
+        "immutable_skeleton_sha256": "216eb6dea609b43d800f7e10ee1a51704b38b8b3035c7d0795166bb90c4054e0",
+        "mutable_replacements": [
+          {
+            "source_token": "CustomObject: { 'probe': Source1 }",
+            "derived_token": "CustomObject: { 'probe': DemoSource3 }"
+          },
+          {
+            "source_token": "Json=> Source1Json",
+            "derived_token": "Json=> DemoSource3Json"
+          }
+        ],
+        "defines": [
+          "DemoSource3Json"
+        ],
+        "references": [
+          "DemoSource3"
+        ],
+        "text": "    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': DemoSource3 } Json=> DemoSource3Json"
+      },
+      {
+        "rule_id": "AR04_EXPLICIT_JSON_HANDOFF",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 16,
+        "template_sha256": "dfa4d44b50d4a66d183f63947c2902af73e09f30d0771bcdc193319cd0d2f1d0",
+        "immutable_skeleton_sha256": "216eb6dea609b43d800f7e10ee1a51704b38b8b3035c7d0795166bb90c4054e0",
+        "mutable_replacements": [
+          {
+            "source_token": "CustomObject: { 'probe': Source1 }",
+            "derived_token": "CustomObject: { 'probe': DemoSource4 }"
+          },
+          {
+            "source_token": "Json=> Source1Json",
+            "derived_token": "Json=> DemoSource4Json"
+          }
+        ],
+        "defines": [
+          "DemoSource4Json"
+        ],
+        "references": [
+          "DemoSource4"
+        ],
+        "text": "    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': DemoSource4 } Json=> DemoSource4Json"
+      },
+      {
+        "rule_id": "AR04_EXPLICIT_JSON_HANDOFF",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 20,
+        "template_sha256": "039dd72cab7d077fc368b7bacac866891bcf72c9e18d930dcae211af136e1ed6",
+        "immutable_skeleton_sha256": "039dd72cab7d077fc368b7bacac866891bcf72c9e18d930dcae211af136e1ed6",
+        "mutable_replacements": [],
+        "defines": [
+          "RunMode"
+        ],
+        "references": [],
+        "text": "    SET RunMode TO $'''NORMAL'''"
+      },
+      {
+        "rule_id": "AR04_EXPLICIT_JSON_HANDOFF",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 21,
+        "template_sha256": "ad682481086e0e0af31aaf255065588bc9970a7a31450dc0ddb54922e58f09a7",
+        "immutable_skeleton_sha256": "ad682481086e0e0af31aaf255065588bc9970a7a31450dc0ddb54922e58f09a7",
+        "mutable_replacements": [],
+        "defines": [
+          "RunModeJson"
+        ],
+        "references": [
+          "RunMode"
+        ],
+        "text": "    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': RunMode } Json=> RunModeJson"
+      },
+      {
+        "rule_id": "AR04_EXPLICIT_JSON_HANDOFF",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 22,
+        "template_sha256": "99ffbfb97f8e283ce952dba7e256de6941307d7c3e1dfd50124b17f968d9ed31",
+        "immutable_skeleton_sha256": "0f307c56c458eca42cff11096c55d9247898ba73c2279e477412f8a4f76b434a",
+        "mutable_replacements": [
+          {
+            "source_token": "File: $'''C:\\\\Users\\\\yuuki\\\\ai-prompts-issue38\\\\catalog\\\\acceptance\\\\issue38\\\\probes\\\\ex03-r2-r3-string-stop\\\\trials\\\\EX03-R2R3-POSTFIX-20260917-T1\\\\normal\\\\runtime\\\\source-1.json'''",
+            "derived_token": "File: $'''C:\\\\A3-DERIVED-NOT-RUN\\\\source-1.json'''"
+          },
+          {
+            "source_token": "TextToWrite: Source1Json",
+            "derived_token": "TextToWrite: DemoSource1Json"
+          }
+        ],
+        "defines": [],
+        "references": [
+          "DemoSource1Json"
+        ],
+        "text": "    File.WriteText File: $'''C:\\\\A3-DERIVED-NOT-RUN\\\\source-1.json''' TextToWrite: DemoSource1Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8"
+      },
+      {
+        "rule_id": "AR04_EXPLICIT_JSON_HANDOFF",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 22,
+        "template_sha256": "99ffbfb97f8e283ce952dba7e256de6941307d7c3e1dfd50124b17f968d9ed31",
+        "immutable_skeleton_sha256": "0f307c56c458eca42cff11096c55d9247898ba73c2279e477412f8a4f76b434a",
+        "mutable_replacements": [
+          {
+            "source_token": "File: $'''C:\\\\Users\\\\yuuki\\\\ai-prompts-issue38\\\\catalog\\\\acceptance\\\\issue38\\\\probes\\\\ex03-r2-r3-string-stop\\\\trials\\\\EX03-R2R3-POSTFIX-20260917-T1\\\\normal\\\\runtime\\\\source-1.json'''",
+            "derived_token": "File: $'''C:\\\\A3-DERIVED-NOT-RUN\\\\source-2.json'''"
+          },
+          {
+            "source_token": "TextToWrite: Source1Json",
+            "derived_token": "TextToWrite: DemoSource2Json"
+          }
+        ],
+        "defines": [],
+        "references": [
+          "DemoSource2Json"
+        ],
+        "text": "    File.WriteText File: $'''C:\\\\A3-DERIVED-NOT-RUN\\\\source-2.json''' TextToWrite: DemoSource2Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8"
+      },
+      {
+        "rule_id": "AR04_EXPLICIT_JSON_HANDOFF",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 22,
+        "template_sha256": "99ffbfb97f8e283ce952dba7e256de6941307d7c3e1dfd50124b17f968d9ed31",
+        "immutable_skeleton_sha256": "0f307c56c458eca42cff11096c55d9247898ba73c2279e477412f8a4f76b434a",
+        "mutable_replacements": [
+          {
+            "source_token": "File: $'''C:\\\\Users\\\\yuuki\\\\ai-prompts-issue38\\\\catalog\\\\acceptance\\\\issue38\\\\probes\\\\ex03-r2-r3-string-stop\\\\trials\\\\EX03-R2R3-POSTFIX-20260917-T1\\\\normal\\\\runtime\\\\source-1.json'''",
+            "derived_token": "File: $'''C:\\\\A3-DERIVED-NOT-RUN\\\\source-3.json'''"
+          },
+          {
+            "source_token": "TextToWrite: Source1Json",
+            "derived_token": "TextToWrite: DemoSource3Json"
+          }
+        ],
+        "defines": [],
+        "references": [
+          "DemoSource3Json"
+        ],
+        "text": "    File.WriteText File: $'''C:\\\\A3-DERIVED-NOT-RUN\\\\source-3.json''' TextToWrite: DemoSource3Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8"
+      },
+      {
+        "rule_id": "AR04_EXPLICIT_JSON_HANDOFF",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 22,
+        "template_sha256": "99ffbfb97f8e283ce952dba7e256de6941307d7c3e1dfd50124b17f968d9ed31",
+        "immutable_skeleton_sha256": "0f307c56c458eca42cff11096c55d9247898ba73c2279e477412f8a4f76b434a",
+        "mutable_replacements": [
+          {
+            "source_token": "File: $'''C:\\\\Users\\\\yuuki\\\\ai-prompts-issue38\\\\catalog\\\\acceptance\\\\issue38\\\\probes\\\\ex03-r2-r3-string-stop\\\\trials\\\\EX03-R2R3-POSTFIX-20260917-T1\\\\normal\\\\runtime\\\\source-1.json'''",
+            "derived_token": "File: $'''C:\\\\A3-DERIVED-NOT-RUN\\\\source-4.json'''"
+          },
+          {
+            "source_token": "TextToWrite: Source1Json",
+            "derived_token": "TextToWrite: DemoSource4Json"
+          }
+        ],
+        "defines": [],
+        "references": [
+          "DemoSource4Json"
+        ],
+        "text": "    File.WriteText File: $'''C:\\\\A3-DERIVED-NOT-RUN\\\\source-4.json''' TextToWrite: DemoSource4Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8"
+      },
+      {
+        "rule_id": "AR04_EXPLICIT_JSON_HANDOFF",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 26,
+        "template_sha256": "b987b0096d1e82272ebee2936af617257cfa561d8fb5821d0af35adb1ff848b2",
+        "immutable_skeleton_sha256": "d6b8ba9c8cde5b66b4353f0dd4beb253eebdb26b1cba43a656a696dde8890e43",
+        "mutable_replacements": [
+          {
+            "source_token": "File: $'''C:\\\\Users\\\\yuuki\\\\ai-prompts-issue38\\\\catalog\\\\acceptance\\\\issue38\\\\probes\\\\ex03-r2-r3-string-stop\\\\trials\\\\EX03-R2R3-POSTFIX-20260917-T1\\\\normal\\\\runtime\\\\mode.json'''",
+            "derived_token": "File: $'''C:\\\\A3-DERIVED-NOT-RUN\\\\mode.json'''"
+          }
+        ],
+        "defines": [],
+        "references": [
+          "RunModeJson"
+        ],
+        "text": "    File.WriteText File: $'''C:\\\\A3-DERIVED-NOT-RUN\\\\mode.json''' TextToWrite: RunModeJson AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8"
+      },
+      {
+        "rule_id": "AR09_EXPLICIT_NUMERIC_WRITES",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 28,
+        "template_sha256": "6259712bc77ac5b88343becdfb712f7a7b06029ef34df904914bdc857423b13e",
+        "immutable_skeleton_sha256": "d24be1428fa60b00119621b540553e2903646d1f3d090ada3dd01dfe5668c5c5",
+        "mutable_replacements": [
+          {
+            "source_token": "Name: $'''Target'''",
+            "derived_token": "Name: $'''DemoTargetOne'''"
+          }
+        ],
+        "defines": [],
+        "references": [
+          "Work"
+        ],
+        "text": "    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''DemoTargetOne'''"
+      },
+      {
+        "rule_id": "AR09_EXPLICIT_NUMERIC_WRITES",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 168,
+        "template_sha256": "0510382f7b0121fe7a8cd39b4aa0463fbf62fa55e35aafc61850e297036f4107",
+        "immutable_skeleton_sha256": "0510382f7b0121fe7a8cd39b4aa0463fbf62fa55e35aafc61850e297036f4107",
+        "mutable_replacements": [],
+        "defines": [
+          "NumericWriteEntered"
+        ],
+        "references": [],
+        "text": "            SET NumericWriteEntered TO True"
+      },
+      {
+        "rule_id": "AR09_EXPLICIT_NUMERIC_WRITES",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 169,
+        "template_sha256": "8c239b7b03dbb0c55345bf9f2f59de699019c931256fc19f60f55cab0bd905f9",
+        "immutable_skeleton_sha256": "0c571910a97cd2a2e22b8b9ca2cec62ef29e2d242cf06ead9f4063d8396f2a79",
+        "mutable_replacements": [
+          {
+            "source_token": "Value: Source4",
+            "derived_token": "Value: DemoSource3"
+          },
+          {
+            "source_token": "Column: $'''D'''",
+            "derived_token": "Column: $'''B'''"
+          },
+          {
+            "source_token": "Row: 2",
+            "derived_token": "Row: 2"
+          }
+        ],
+        "defines": [],
+        "references": [
+          "Work",
+          "DemoSource3"
+        ],
+        "text": "            Excel.WriteToExcel.WriteCell Instance: Work Value: DemoSource3 Column: $'''B''' Row: 2"
+      },
+      {
+        "rule_id": "AR09_EXPLICIT_NUMERIC_WRITES",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 28,
+        "template_sha256": "6259712bc77ac5b88343becdfb712f7a7b06029ef34df904914bdc857423b13e",
+        "immutable_skeleton_sha256": "d24be1428fa60b00119621b540553e2903646d1f3d090ada3dd01dfe5668c5c5",
+        "mutable_replacements": [
+          {
+            "source_token": "Name: $'''Target'''",
+            "derived_token": "Name: $'''DemoTargetTwo'''"
+          }
+        ],
+        "defines": [],
+        "references": [
+          "Work"
+        ],
+        "text": "    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''DemoTargetTwo'''"
+      },
+      {
+        "rule_id": "AR09_EXPLICIT_NUMERIC_WRITES",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 169,
+        "template_sha256": "8c239b7b03dbb0c55345bf9f2f59de699019c931256fc19f60f55cab0bd905f9",
+        "immutable_skeleton_sha256": "0c571910a97cd2a2e22b8b9ca2cec62ef29e2d242cf06ead9f4063d8396f2a79",
+        "mutable_replacements": [
+          {
+            "source_token": "Value: Source4",
+            "derived_token": "Value: DemoSource4"
+          },
+          {
+            "source_token": "Column: $'''D'''",
+            "derived_token": "Column: $'''D'''"
+          },
+          {
+            "source_token": "Row: 2",
+            "derived_token": "Row: 4"
+          }
+        ],
+        "defines": [],
+        "references": [
+          "Work",
+          "DemoSource4"
+        ],
+        "text": "            Excel.WriteToExcel.WriteCell Instance: Work Value: DemoSource4 Column: $'''D''' Row: 4"
+      },
+      {
+        "rule_id": "AR10_MULTIPLE_RECTANGLE_READBACK",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 170,
+        "template_sha256": "d5ebb145b9585630a817177f105bd65540780d6436a387b8f96d519e762631f6",
+        "immutable_skeleton_sha256": "d5ebb145b9585630a817177f105bd65540780d6436a387b8f96d519e762631f6",
+        "mutable_replacements": [],
+        "defines": [
+          "SaveAsEntered"
+        ],
+        "references": [],
+        "text": "            SET SaveAsEntered TO True"
+      },
+      {
+        "rule_id": "AR10_MULTIPLE_RECTANGLE_READBACK",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 171,
+        "template_sha256": "7ac555dc6017986642eb611d25309500ea1fbad080a606dbaec97ace4fb3d158",
+        "immutable_skeleton_sha256": "7306adc52efd23d18e511cf5ac18db5f42bebd45530684299e9ed6b06e707029",
+        "mutable_replacements": [
+          {
+            "source_token": "DocumentPath: $'''C:\\\\Users\\\\yuuki\\\\ai-prompts-issue38\\\\catalog\\\\acceptance\\\\issue38\\\\probes\\\\ex03-r2-r3-string-stop\\\\trials\\\\EX03-R2R3-POSTFIX-20260917-T1\\\\normal\\\\runtime\\\\result.xlsx'''",
+            "derived_token": "DocumentPath: $'''C:\\\\A3-DERIVED-NOT-RUN\\\\demo-output.xlsx'''"
+          }
+        ],
+        "defines": [],
+        "references": [
+          "Work"
+        ],
+        "text": "            Excel.SaveExcel.SaveAs Instance: Work DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\\\A3-DERIVED-NOT-RUN\\\\demo-output.xlsx'''"
+      },
+      {
+        "rule_id": "AR10_MULTIPLE_RECTANGLE_READBACK",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 172,
+        "template_sha256": "bad7886996cdb54f906e32fe45cb7d778d93e7079349a5dccb3ca4ea02878372",
+        "immutable_skeleton_sha256": "bad7886996cdb54f906e32fe45cb7d778d93e7079349a5dccb3ca4ea02878372",
+        "mutable_replacements": [],
+        "defines": [],
+        "references": [
+          "Work"
+        ],
+        "text": "            Excel.CloseExcel.Close Instance: Work"
+      },
+      {
+        "rule_id": "AR10_MULTIPLE_RECTANGLE_READBACK",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 173,
+        "template_sha256": "00171d92ff9ff2dbf9d57b20bfbaaae04dbbae7fd0f4eadbd09266e475c4e924",
+        "immutable_skeleton_sha256": "10a9c9f5cb61b1a09ac4b0c3f7f46cb2bbe2f42a5ff47c188cdde9b5a0dc2d28",
+        "mutable_replacements": [
+          {
+            "source_token": "Path: $'''C:\\\\Users\\\\yuuki\\\\ai-prompts-issue38\\\\catalog\\\\acceptance\\\\issue38\\\\probes\\\\ex03-r2-r3-string-stop\\\\trials\\\\EX03-R2R3-POSTFIX-20260917-T1\\\\normal\\\\runtime\\\\result.xlsx'''",
+            "derived_token": "Path: $'''C:\\\\A3-DERIVED-NOT-RUN\\\\demo-output.xlsx'''"
+          }
+        ],
+        "defines": [
+          "Reopened"
+        ],
+        "references": [],
+        "text": "            Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\\\A3-DERIVED-NOT-RUN\\\\demo-output.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Reopened"
+      },
+      {
+        "rule_id": "AR10_MULTIPLE_RECTANGLE_READBACK",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 174,
+        "template_sha256": "b5563b0cc625950d9b572d590d2fc7c6fc8a97f3ce2129cd73dc4b244f922c31",
+        "immutable_skeleton_sha256": "0d07900ff43d69e00975c45ddd5e4a64d877b1aba8795e3f0ec08b6f5efe312d",
+        "mutable_replacements": [
+          {
+            "source_token": "Name: $'''Target'''",
+            "derived_token": "Name: $'''DemoTargetOne'''"
+          }
+        ],
+        "defines": [],
+        "references": [
+          "Reopened"
+        ],
+        "text": "            Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''DemoTargetOne'''"
+      },
+      {
+        "rule_id": "AR10_MULTIPLE_RECTANGLE_READBACK",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 175,
+        "template_sha256": "b50070145dfffe1a8d1f435249b63f1cca38bece18ca44c66c80e1fd109a1505",
+        "immutable_skeleton_sha256": "0ab174aa7c5bea369fc2d45728c5805c67b68a0f9b984846f6b7182b22c20f97",
+        "mutable_replacements": [
+          {
+            "source_token": "StartColumn: $'''A'''",
+            "derived_token": "StartColumn: $'''A'''"
+          },
+          {
+            "source_token": "StartRow: 2",
+            "derived_token": "StartRow: 2"
+          },
+          {
+            "source_token": "EndColumn: $'''D'''",
+            "derived_token": "EndColumn: $'''B'''"
+          },
+          {
+            "source_token": "EndRow: 2",
+            "derived_token": "EndRow: 2"
+          },
+          {
+            "source_token": "RangeValue=> Readback",
+            "derived_token": "RangeValue=> DemoReadbackOne"
+          }
+        ],
+        "defines": [
+          "DemoReadbackOne"
+        ],
+        "references": [
+          "Reopened"
+        ],
+        "text": "            Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''A''' StartRow: 2 EndColumn: $'''B''' EndRow: 2 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> DemoReadbackOne"
+      },
+      {
+        "rule_id": "AR10_MULTIPLE_RECTANGLE_READBACK",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 174,
+        "template_sha256": "b5563b0cc625950d9b572d590d2fc7c6fc8a97f3ce2129cd73dc4b244f922c31",
+        "immutable_skeleton_sha256": "0d07900ff43d69e00975c45ddd5e4a64d877b1aba8795e3f0ec08b6f5efe312d",
+        "mutable_replacements": [
+          {
+            "source_token": "Name: $'''Target'''",
+            "derived_token": "Name: $'''DemoTargetTwo'''"
+          }
+        ],
+        "defines": [],
+        "references": [
+          "Reopened"
+        ],
+        "text": "            Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''DemoTargetTwo'''"
+      },
+      {
+        "rule_id": "AR10_MULTIPLE_RECTANGLE_READBACK",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 175,
+        "template_sha256": "b50070145dfffe1a8d1f435249b63f1cca38bece18ca44c66c80e1fd109a1505",
+        "immutable_skeleton_sha256": "0ab174aa7c5bea369fc2d45728c5805c67b68a0f9b984846f6b7182b22c20f97",
+        "mutable_replacements": [
+          {
+            "source_token": "StartColumn: $'''A'''",
+            "derived_token": "StartColumn: $'''C'''"
+          },
+          {
+            "source_token": "StartRow: 2",
+            "derived_token": "StartRow: 4"
+          },
+          {
+            "source_token": "EndColumn: $'''D'''",
+            "derived_token": "EndColumn: $'''D'''"
+          },
+          {
+            "source_token": "EndRow: 2",
+            "derived_token": "EndRow: 4"
+          },
+          {
+            "source_token": "RangeValue=> Readback",
+            "derived_token": "RangeValue=> DemoReadbackTwo"
+          }
+        ],
+        "defines": [
+          "DemoReadbackTwo"
+        ],
+        "references": [
+          "Reopened"
+        ],
+        "text": "            Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''C''' StartRow: 4 EndColumn: $'''D''' EndRow: 4 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> DemoReadbackTwo"
+      },
+      {
+        "rule_id": "AR10_MULTIPLE_RECTANGLE_READBACK",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 176,
+        "template_sha256": "fd70a35b5a96395919c7662e278d14d1024c72119e2d85d89ee5a8b3bc2d854a",
+        "immutable_skeleton_sha256": "fd70a35b5a96395919c7662e278d14d1024c72119e2d85d89ee5a8b3bc2d854a",
+        "mutable_replacements": [],
+        "defines": [],
+        "references": [
+          "Reopened"
+        ],
+        "text": "            Excel.CloseExcel.Close Instance: Reopened"
+      },
+      {
+        "rule_id": "AR11_MULTIPLE_JSON_COMPARISONS",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 177,
+        "template_sha256": "0db1b597746a5242a749b622f7cedc2c89c776b33114766f17a0139634151766",
+        "immutable_skeleton_sha256": "d9b594efa732e0cd6273963ff09398f2bafc347a394d6d7df2d8184e819986fe",
+        "mutable_replacements": [
+          {
+            "source_token": "SET Saved1 TO",
+            "derived_token": "SET DemoSaved1 TO"
+          },
+          {
+            "source_token": "Readback[0][0]",
+            "derived_token": "DemoReadbackOne[0][0]"
+          }
+        ],
+        "defines": [
+          "DemoSaved1"
+        ],
+        "references": [
+          "DemoReadbackOne"
+        ],
+        "text": "            SET DemoSaved1 TO DemoReadbackOne[0][0]"
+      },
+      {
+        "rule_id": "AR11_MULTIPLE_JSON_COMPARISONS",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 177,
+        "template_sha256": "0db1b597746a5242a749b622f7cedc2c89c776b33114766f17a0139634151766",
+        "immutable_skeleton_sha256": "d9b594efa732e0cd6273963ff09398f2bafc347a394d6d7df2d8184e819986fe",
+        "mutable_replacements": [
+          {
+            "source_token": "SET Saved1 TO",
+            "derived_token": "SET DemoSaved2 TO"
+          },
+          {
+            "source_token": "Readback[0][0]",
+            "derived_token": "DemoReadbackOne[0][1]"
+          }
+        ],
+        "defines": [
+          "DemoSaved2"
+        ],
+        "references": [
+          "DemoReadbackOne"
+        ],
+        "text": "            SET DemoSaved2 TO DemoReadbackOne[0][1]"
+      },
+      {
+        "rule_id": "AR11_MULTIPLE_JSON_COMPARISONS",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 177,
+        "template_sha256": "0db1b597746a5242a749b622f7cedc2c89c776b33114766f17a0139634151766",
+        "immutable_skeleton_sha256": "d9b594efa732e0cd6273963ff09398f2bafc347a394d6d7df2d8184e819986fe",
+        "mutable_replacements": [
+          {
+            "source_token": "SET Saved1 TO",
+            "derived_token": "SET DemoSaved3 TO"
+          },
+          {
+            "source_token": "Readback[0][0]",
+            "derived_token": "DemoReadbackTwo[0][0]"
+          }
+        ],
+        "defines": [
+          "DemoSaved3"
+        ],
+        "references": [
+          "DemoReadbackTwo"
+        ],
+        "text": "            SET DemoSaved3 TO DemoReadbackTwo[0][0]"
+      },
+      {
+        "rule_id": "AR11_MULTIPLE_JSON_COMPARISONS",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 177,
+        "template_sha256": "0db1b597746a5242a749b622f7cedc2c89c776b33114766f17a0139634151766",
+        "immutable_skeleton_sha256": "d9b594efa732e0cd6273963ff09398f2bafc347a394d6d7df2d8184e819986fe",
+        "mutable_replacements": [
+          {
+            "source_token": "SET Saved1 TO",
+            "derived_token": "SET DemoSaved4 TO"
+          },
+          {
+            "source_token": "Readback[0][0]",
+            "derived_token": "DemoReadbackTwo[0][1]"
+          }
+        ],
+        "defines": [
+          "DemoSaved4"
+        ],
+        "references": [
+          "DemoReadbackTwo"
+        ],
+        "text": "            SET DemoSaved4 TO DemoReadbackTwo[0][1]"
+      },
+      {
+        "rule_id": "AR11_MULTIPLE_JSON_COMPARISONS",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 181,
+        "template_sha256": "4f513e939b17cb2335b987c4df339ce73d6e9b0f6a06c8a9864a85acd44e901b",
+        "immutable_skeleton_sha256": "8596cc73e71434a2e22595bd22bab1764e70769ddc2a177c786b2911bd97113a",
+        "mutable_replacements": [
+          {
+            "source_token": "CustomObject: { 'probe': Saved1 }",
+            "derived_token": "CustomObject: { 'probe': DemoSaved1 }"
+          },
+          {
+            "source_token": "Json=> Saved1Json",
+            "derived_token": "Json=> DemoSaved1Json"
+          }
+        ],
+        "defines": [
+          "DemoSaved1Json"
+        ],
+        "references": [
+          "DemoSaved1"
+        ],
+        "text": "            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': DemoSaved1 } Json=> DemoSaved1Json"
+      },
+      {
+        "rule_id": "AR11_MULTIPLE_JSON_COMPARISONS",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 181,
+        "template_sha256": "4f513e939b17cb2335b987c4df339ce73d6e9b0f6a06c8a9864a85acd44e901b",
+        "immutable_skeleton_sha256": "8596cc73e71434a2e22595bd22bab1764e70769ddc2a177c786b2911bd97113a",
+        "mutable_replacements": [
+          {
+            "source_token": "CustomObject: { 'probe': Saved1 }",
+            "derived_token": "CustomObject: { 'probe': DemoSaved2 }"
+          },
+          {
+            "source_token": "Json=> Saved1Json",
+            "derived_token": "Json=> DemoSaved2Json"
+          }
+        ],
+        "defines": [
+          "DemoSaved2Json"
+        ],
+        "references": [
+          "DemoSaved2"
+        ],
+        "text": "            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': DemoSaved2 } Json=> DemoSaved2Json"
+      },
+      {
+        "rule_id": "AR11_MULTIPLE_JSON_COMPARISONS",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 181,
+        "template_sha256": "4f513e939b17cb2335b987c4df339ce73d6e9b0f6a06c8a9864a85acd44e901b",
+        "immutable_skeleton_sha256": "8596cc73e71434a2e22595bd22bab1764e70769ddc2a177c786b2911bd97113a",
+        "mutable_replacements": [
+          {
+            "source_token": "CustomObject: { 'probe': Saved1 }",
+            "derived_token": "CustomObject: { 'probe': DemoSaved3 }"
+          },
+          {
+            "source_token": "Json=> Saved1Json",
+            "derived_token": "Json=> DemoSaved3Json"
+          }
+        ],
+        "defines": [
+          "DemoSaved3Json"
+        ],
+        "references": [
+          "DemoSaved3"
+        ],
+        "text": "            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': DemoSaved3 } Json=> DemoSaved3Json"
+      },
+      {
+        "rule_id": "AR11_MULTIPLE_JSON_COMPARISONS",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 181,
+        "template_sha256": "4f513e939b17cb2335b987c4df339ce73d6e9b0f6a06c8a9864a85acd44e901b",
+        "immutable_skeleton_sha256": "8596cc73e71434a2e22595bd22bab1764e70769ddc2a177c786b2911bd97113a",
+        "mutable_replacements": [
+          {
+            "source_token": "CustomObject: { 'probe': Saved1 }",
+            "derived_token": "CustomObject: { 'probe': DemoSaved4 }"
+          },
+          {
+            "source_token": "Json=> Saved1Json",
+            "derived_token": "Json=> DemoSaved4Json"
+          }
+        ],
+        "defines": [
+          "DemoSaved4Json"
+        ],
+        "references": [
+          "DemoSaved4"
+        ],
+        "text": "            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': DemoSaved4 } Json=> DemoSaved4Json"
+      },
+      {
+        "rule_id": "AR11_MULTIPLE_JSON_COMPARISONS",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 185,
+        "template_sha256": "152be9ec909fc0ced304667824fddcaf0afdaf0907b2a4d5a5d68080a519c8c2",
+        "immutable_skeleton_sha256": "d9b594efa732e0cd6273963ff09398f2bafc347a394d6d7df2d8184e819986fe",
+        "mutable_replacements": [
+          {
+            "source_token": "SET Source1VsSaved TO",
+            "derived_token": "SET DemoMatch1 TO"
+          },
+          {
+            "source_token": "Source1Json = Saved1Json",
+            "derived_token": "DemoSource1Json = DemoSaved1Json"
+          }
+        ],
+        "defines": [
+          "DemoMatch1"
+        ],
+        "references": [
+          "DemoSource1Json",
+          "DemoSaved1Json"
+        ],
+        "text": "            SET DemoMatch1 TO DemoSource1Json = DemoSaved1Json"
+      },
+      {
+        "rule_id": "AR11_MULTIPLE_JSON_COMPARISONS",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 185,
+        "template_sha256": "152be9ec909fc0ced304667824fddcaf0afdaf0907b2a4d5a5d68080a519c8c2",
+        "immutable_skeleton_sha256": "d9b594efa732e0cd6273963ff09398f2bafc347a394d6d7df2d8184e819986fe",
+        "mutable_replacements": [
+          {
+            "source_token": "SET Source1VsSaved TO",
+            "derived_token": "SET DemoMatch2 TO"
+          },
+          {
+            "source_token": "Source1Json = Saved1Json",
+            "derived_token": "DemoSource2Json = DemoSaved2Json"
+          }
+        ],
+        "defines": [
+          "DemoMatch2"
+        ],
+        "references": [
+          "DemoSource2Json",
+          "DemoSaved2Json"
+        ],
+        "text": "            SET DemoMatch2 TO DemoSource2Json = DemoSaved2Json"
+      },
+      {
+        "rule_id": "AR11_MULTIPLE_JSON_COMPARISONS",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 185,
+        "template_sha256": "152be9ec909fc0ced304667824fddcaf0afdaf0907b2a4d5a5d68080a519c8c2",
+        "immutable_skeleton_sha256": "d9b594efa732e0cd6273963ff09398f2bafc347a394d6d7df2d8184e819986fe",
+        "mutable_replacements": [
+          {
+            "source_token": "SET Source1VsSaved TO",
+            "derived_token": "SET DemoMatch3 TO"
+          },
+          {
+            "source_token": "Source1Json = Saved1Json",
+            "derived_token": "DemoSource3Json = DemoSaved3Json"
+          }
+        ],
+        "defines": [
+          "DemoMatch3"
+        ],
+        "references": [
+          "DemoSource3Json",
+          "DemoSaved3Json"
+        ],
+        "text": "            SET DemoMatch3 TO DemoSource3Json = DemoSaved3Json"
+      },
+      {
+        "rule_id": "AR11_MULTIPLE_JSON_COMPARISONS",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 185,
+        "template_sha256": "152be9ec909fc0ced304667824fddcaf0afdaf0907b2a4d5a5d68080a519c8c2",
+        "immutable_skeleton_sha256": "d9b594efa732e0cd6273963ff09398f2bafc347a394d6d7df2d8184e819986fe",
+        "mutable_replacements": [
+          {
+            "source_token": "SET Source1VsSaved TO",
+            "derived_token": "SET DemoMatch4 TO"
+          },
+          {
+            "source_token": "Source1Json = Saved1Json",
+            "derived_token": "DemoSource4Json = DemoSaved4Json"
+          }
+        ],
+        "defines": [
+          "DemoMatch4"
+        ],
+        "references": [
+          "DemoSource4Json",
+          "DemoSaved4Json"
+        ],
+        "text": "            SET DemoMatch4 TO DemoSource4Json = DemoSaved4Json"
+      },
+      {
+        "rule_id": "AR11_MULTIPLE_JSON_COMPARISONS",
+        "source": "r2r3_normal_recopy",
+        "source_path": "catalog/acceptance/issue38/probes/ex03-r2-r3-string-stop/trials/EX03-R2R3-POSTFIX-20260917-T1/normal/pad-recopy-before-run.robin",
+        "source_line": 189,
+        "template_sha256": "6bc8c59ea6962ab11ba6a691919aa2bb0a9d80f27c21d5483942574bf3241eb8",
+        "immutable_skeleton_sha256": "d9b594efa732e0cd6273963ff09398f2bafc347a394d6d7df2d8184e819986fe",
+        "mutable_replacements": [
+          {
+            "source_token": "SET ProbeState TO",
+            "derived_token": "SET DemoState TO"
+          },
+          {
+            "source_token": "$'''SUCCESS_GATE_PASSED_SAVED_READBACK_READY'''",
+            "derived_token": "$'''DERIVED_EXAMPLE_READY_NOT_RUN'''"
+          }
+        ],
+        "defines": [
+          "DemoState"
+        ],
+        "references": [],
+        "text": "            SET DemoState TO $'''DERIVED_EXAMPLE_READY_NOT_RUN'''"
+      }
+    ],
+    "validation": {
+      "predefined": [
+        "DemoData",
+        "Work"
+      ],
+      "defined_count": 30,
+      "unresolved_references": [],
+      "execution_order_valid": true,
+      "new_pad_loop_commands": 0
+    }
+  }
+}

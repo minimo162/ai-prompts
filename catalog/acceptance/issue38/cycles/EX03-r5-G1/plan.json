@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R5-G1",
+  "base_commit": "0754437598d5717bc0e1d2d7f89aa258638e2854",
+  "purpose": "Fixed EX03 parameter-change acceptance on the frozen r5 candidate",
+  "candidate": {
+    "version": "20260915-excel-r5",
+    "instruction_path": "copilot/versions/20260915-excel-r5/agent-instructions.txt",
+    "instruction_sha256": "fe57e45c170fcdfe8f94d8e23f9cb58f00d5b54ae4abe35a43189767032b5aaa",
+    "bundle_path": "copilot/versions/20260915-excel-r5/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "bundle_sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3",
+    "manifest_path": "copilot/versions/20260915-excel-r5/manifest.json",
+    "manifest_sha256": "1ffacd9f478346fb38b146f135e19fd743d2b9a0ce1ab85d8b6b452899dcfd89",
+    "candidate_changed": false
+  },
+  "fixed_inputs": {
+    "request": {
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370"
+    },
+    "spec": {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380"
+    },
+    "grader_only_expected": {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+      "send_to_copilot": false
+    },
+    "input_a": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力い.xlsx",
+      "sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9"
+    },
+    "input_b": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力ろ.xlsx",
+      "sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+    },
+    "template": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+    },
+    "existing_preparation": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/preparation.json",
+      "sha256": "b1580198f5d2465b332a9ae95bbd5c613133558af23cf81241b63f3c7921d8f8"
+    },
+    "work": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/work.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "must_match_template_before_each_run": true
+    },
+    "output": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx",
+      "must_be_absent_before_each_run": true
+    }
+  },
+  "parameters": {
+    "input_a": "入力い.xlsx / 受取明細 / D4:E6 -> 集計先 / F7:G9",
+    "input_b": "入力ろ.xlsx / 追加項目 / B2:D3 -> 追記先 / D5:F6",
+    "template": "ひな形.xlsx",
+    "output": "照合結果.xlsx",
+    "target_cells_derived_from_ex03_spec": 12
+  },
+  "submission": {
+    "body_path": "catalog/acceptance/issue38/cycles/EX03-r5-G1/submitted-body.txt",
+    "body_sha256": "277ee66f9765e57aa2d8b4c48b680b2a573cd37628284420d147322f85c0a9ca",
+    "body_contract": "unchanged full r5 instructions followed by unchanged EX03 request",
+    "attachment_path": "copilot/versions/20260915-excel-r5/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "attachment_sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3",
+    "normal_m365_new_chat": true,
+    "model": "Think Deeper",
+    "grader_only_expected_excluded": true,
+    "completed_robin_excluded": true
+  },
+  "limits": {
+    "max_generation_requests": 1,
+    "max_pad_runs": 2,
+    "no_regeneration_or_manual_robin_repair": true,
+    "stop_on_refusal_uncaptured_command_or_unknown_result": true
+  },
+  "pad": {
+    "new_dedicated_flow": true,
+    "power_fx": "OFF",
+    "unmodified_code_copy_only": true,
+    "save_and_recopy_before_run1": true,
+    "preserve_run1_before_run2": true,
+    "restore_work_from_frozen_template_before_run2": true,
+    "output_absent_before_run2": true
+  },
+  "acceptance": {
+    "scope": "fixed EX03 text/number parameter-change case only",
+    "required": [
+      "Japanese filenames and sheet names",
+      "EX03 source rectangles, target starts, and output name",
+      "unmodified PAD import/save/recopy",
+      "Run1 preserved before Run2 and collision-safe preparation",
+      "two PAD runs with source/readback JSON type identity",
+      "all EX03 target values, types, and positions against grader-only expectations",
+      "outside cells, formulas, representative styles, and original hashes"
+    ],
+    "no_other_case_or_issue_wide_generalization": true
+  },
+  "github_write": false,
+  "status": "READY_AFTER_PREFLIGHT"
+}

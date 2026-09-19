@@ -1,0 +1,385 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-r12-G1",
+  "recorded_at": "2026-09-18T04:47:01.916696+09:00",
+  "version": "20260917-excel-r12",
+  "inputs": {
+    "generated_robin": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/generated.robin",
+      "sha256": "64b6c7de822a448a4696910cc683c77ebfc57920c91aa966851947e136b5a366"
+    },
+    "visible_response": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/copilot-response.visible.txt",
+      "sha256": "4bdb76e57c1bd023b07589e7a4cc6bcaad3e8a729eb4f62d9951a61bd0eeea7f"
+    },
+    "response_dom": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/response-dom-inspection.json",
+      "sha256": "3730bc8b476ca1b8dae939905c3ca98064cb106843f03b58c6a5c15a8ebd7838"
+    },
+    "live_send": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/live-send.json",
+      "sha256": "3ac394c243f890b2907d0440e2f02785196bfe9f959d2c894915a22979416f03"
+    },
+    "prepared_normal": {
+      "path": "copilot/versions/20260917-excel-r12/support/EX03-R12-Prepared-Normal.robin",
+      "sha256": "7bde8bb20bb7f347c97722d77a4141bf8348bb40d97aaca435e01998e8b9d3a3"
+    }
+  },
+  "generation": {
+    "send_count": 1,
+    "send_limit": 1,
+    "conversation_url": "https://m365.cloud.microsoft/chat/conversation/aa830968-4eb3-4ef2-b24d-1a14a50699a2?es=SSR",
+    "refusal": false,
+    "completed": true,
+    "regeneration_requested": false
+  },
+  "delivery_contract": {
+    "required_text_code_block_count": 1,
+    "actual_text_code_block_count": 1,
+    "language_badge": "Plain Text",
+    "clipboard_plain_matches_rendered_code_lines": true,
+    "clipboard_plain_excludes_ui_label_line_numbers_and_expand_control": true,
+    "pass": true
+  },
+  "capture": {
+    "method": "normal M365 Copilot code-block copy text/plain captured without editing",
+    "sha256": "64b6c7de822a448a4696910cc683c77ebfc57920c91aa966851947e136b5a366",
+    "utf8_bytes": 19435,
+    "utf16_units": 19245,
+    "line_count": 272,
+    "line_ending": "LF",
+    "final_newline": false,
+    "first_line": "SET TransferState TO $'''NOT_STARTED'''",
+    "last_line": "END",
+    "manual_edit_applied": false
+  },
+  "adapted_source_comparison": {
+    "method": "replace only recorded r12 teaching data slots and teaching-only labels/root",
+    "replacement_counts": [
+      {
+        "label": "error_type",
+        "count": 0
+      },
+      {
+        "label": "error_scope",
+        "count": 0
+      },
+      {
+        "label": "target_two_text_4",
+        "count": 2
+      },
+      {
+        "label": "target_two_number_2",
+        "count": 1
+      },
+      {
+        "label": "target_two_text_3",
+        "count": 2
+      },
+      {
+        "label": "target_two_text_2",
+        "count": 2
+      },
+      {
+        "label": "target_two_number_1",
+        "count": 1
+      },
+      {
+        "label": "target_two_text_1",
+        "count": 2
+      },
+      {
+        "label": "target_one_number_3",
+        "count": 1
+      },
+      {
+        "label": "target_one_text_3",
+        "count": 2
+      },
+      {
+        "label": "target_one_number_2",
+        "count": 1
+      },
+      {
+        "label": "target_one_text_2",
+        "count": 2
+      },
+      {
+        "label": "target_one_number_1",
+        "count": 1
+      },
+      {
+        "label": "target_one_text_1",
+        "count": 2
+      },
+      {
+        "label": "target_two_sheet",
+        "count": 12
+      },
+      {
+        "label": "target_one_sheet",
+        "count": 11
+      },
+      {
+        "label": "source_two_sheet",
+        "count": 1
+      },
+      {
+        "label": "source_one_sheet",
+        "count": 1
+      },
+      {
+        "label": "readback_two_range",
+        "count": 1
+      },
+      {
+        "label": "readback_one_range",
+        "count": 1
+      },
+      {
+        "label": "source_two_range",
+        "count": 1
+      },
+      {
+        "label": "source_one_range",
+        "count": 1
+      },
+      {
+        "label": "work_path",
+        "count": 2
+      },
+      {
+        "label": "source_two_path",
+        "count": 1
+      },
+      {
+        "label": "source_one_path",
+        "count": 1
+      },
+      {
+        "label": "output_path",
+        "count": 3
+      },
+      {
+        "label": "json_handoff_root",
+        "count": 9
+      }
+    ],
+    "expected_line_count": 276,
+    "actual_line_count": 272,
+    "difference_hunk_count": 5,
+    "difference_hunks": [
+      {
+        "operation": "delete",
+        "expected_lines": [
+          67,
+          67
+        ],
+        "actual_lines": [
+          67,
+          66
+        ],
+        "expected": [
+          ""
+        ],
+        "actual": []
+      },
+      {
+        "operation": "delete",
+        "expected_lines": [
+          123,
+          123
+        ],
+        "actual_lines": [
+          122,
+          121
+        ],
+        "expected": [
+          ""
+        ],
+        "actual": []
+      },
+      {
+        "operation": "delete",
+        "expected_lines": [
+          142,
+          142
+        ],
+        "actual_lines": [
+          140,
+          139
+        ],
+        "expected": [
+          ""
+        ],
+        "actual": []
+      },
+      {
+        "operation": "delete",
+        "expected_lines": [
+          156,
+          156
+        ],
+        "actual_lines": [
+          153,
+          152
+        ],
+        "expected": [
+          ""
+        ],
+        "actual": []
+      },
+      {
+        "operation": "replace",
+        "expected_lines": [
+          181,
+          181
+        ],
+        "actual_lines": [
+          177,
+          177
+        ],
+        "expected": [
+          "[Console]::Out.Write([string]($result | ConvertTo-Json -Compress))''' ScriptOutput=> PowershellOutput"
+        ],
+        "actual": [
+          "[Console]::Out.Write([string]($result | press)''' ScriptOutput=> PowershellOutput"
+        ]
+      }
+    ],
+    "exact_match": false
+  },
+  "powershell_parser": {
+    "generated_error_count": 4,
+    "generated_errors": [
+      {
+        "error_id": "MissingEndParenthesisInExpression",
+        "message": "Missing closing ')' in expression.",
+        "line": 137,
+        "column": 43,
+        "token": ""
+      },
+      {
+        "error_id": "MissingEndCurlyBrace",
+        "message": "Missing closing '}' in statement block or type definition.",
+        "line": 133,
+        "column": 5,
+        "token": "{"
+      },
+      {
+        "error_id": "MissingEndCurlyBrace",
+        "message": "Missing closing '}' in statement block or type definition.",
+        "line": 126,
+        "column": 3,
+        "token": "{"
+      },
+      {
+        "error_id": "MissingEndCurlyBrace",
+        "message": "Missing closing '}' in statement block or type definition.",
+        "line": 9,
+        "column": 1,
+        "token": "{"
+      }
+    ],
+    "prepared_script_error_count": 0,
+    "executed": false
+  },
+  "structure": {
+    "run_script_count": 1,
+    "source_json_write_count": 7,
+    "mode_json_write_count": 1,
+    "source_json_read_count": 7,
+    "mode_json_read_count": 1,
+    "inner_format_finally_count": 1,
+    "exact_success_gate_count": 1,
+    "normal_gate_count": 1,
+    "numeric_write_count": 5,
+    "save_as_count": 1,
+    "json_comparison_count": 12,
+    "convert_to_json_compress_count": 0,
+    "corrupt_press_pipeline_count": 1,
+    "direct_text_json_interpolation_count": 0,
+    "string_targets": [
+      [
+        "追記先",
+        "D5"
+      ],
+      [
+        "追記先",
+        "D6"
+      ],
+      [
+        "追記先",
+        "F5"
+      ],
+      [
+        "追記先",
+        "F6"
+      ],
+      [
+        "集計先",
+        "F7"
+      ],
+      [
+        "集計先",
+        "F8"
+      ],
+      [
+        "集計先",
+        "F9"
+      ]
+    ],
+    "number_writes": [
+      [
+        "NumberSource1",
+        "G",
+        "7"
+      ],
+      [
+        "NumberSource2",
+        "G",
+        "8"
+      ],
+      [
+        "NumberSource3",
+        "G",
+        "9"
+      ],
+      [
+        "NumberSource4",
+        "E",
+        "5"
+      ],
+      [
+        "NumberSource5",
+        "E",
+        "6"
+      ]
+    ],
+    "forbidden_runtime_fragments": {
+      "File.Delete": 0,
+      "Folder.Delete": 0,
+      "WebAutomation.": 0,
+      "HTTP.": 0,
+      "System.RunDOSCommand": 0,
+      "System.RunApplication": 0,
+      "Start-Process": 0,
+      "Remove-Item": 0,
+      "Invoke-WebRequest": 0,
+      "Invoke-Expression": 0
+    },
+    "pass": false
+  },
+  "response_contains_refusal_language": false,
+  "decision": "FAIL_GENERATED_ROBIN_MISMATCH_AND_POWERSHELL_PARSE_ERROR_STOP_BEFORE_PAD",
+  "stop": {
+    "reason": "Generated copy changed four non-slot blank lines and replaced ConvertTo-Json -Compress with invalid '| press', causing a PowerShell parse error.",
+    "pad_save": 0,
+    "pad_recopy": 0,
+    "pad_run": 0,
+    "manual_repair": 0,
+    "resend": 0,
+    "successor_created": 0,
+    "github_write": 0
+  }
+}

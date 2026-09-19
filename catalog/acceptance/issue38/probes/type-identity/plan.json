@@ -1,0 +1,27 @@
+{
+  "id": "ISSUE38-TYPE-IDENTITY-20260915",
+  "baseCommit": "02e33b4702ed88c3ff7138f5cf59f429f48138a0",
+  "scope": "PAD numeric 1 vs text 1 primitive only; no candidate version, EX02 rerun or GitHub writes",
+  "flow": "RobinIssue38TypeIdentity20260915C",
+  "inputs": {
+    "NumberOne": 1,
+    "TextOne": "1",
+    "NumberOneCopy": 1,
+    "TextOneCopy": "1"
+  },
+  "expected": {
+    "number_number": "MATCH",
+    "text_text": "MATCH",
+    "number_text": "DIFFERENT",
+    "text_number": "DIFFERENT"
+  },
+  "diagnostic": "Observe ordinary scalar equality separately; it is not the type oracle",
+  "candidate": "Wrap each runtime scalar in the same one-property custom object and use PAD Convert custom object to JSON; compare JSON text in PAD IF",
+  "source": "PAD UI action configuration and copied Robin; not Copilot generation",
+  "run2Gate": "Run1 terminal state and raw/results saved, compared with frozen expectations before Run2",
+  "limits": [
+    "Does not establish arbitrary types",
+    "Does not establish full DataTable/Excel integration",
+    "Does not establish EX02 full acceptance"
+  ]
+}

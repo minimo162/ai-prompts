@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-P1-T1",
+  "result": "PASS_READY_FOR_ONE_NORMAL_PAD_RUN_ONLY",
+  "baseline_commit": "1f1e752eb82413b07437135a70eb7349dca313f0",
+  "return_behavior": {
+    "real_helper_output_command": "Write-Output -NoEnumerate",
+    "launcher_capture": "(& $helperPath -InvocationPath $invocationPath | Out-String).Trim()",
+    "launcher_final_stdout": "[Console]::Out.Write($helperOutput)",
+    "existing_stub_evidence_reused_without_rerun": true,
+    "stub_stdout": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}",
+    "final_output_is_one_success_json": true
+  },
+  "files": {
+    "helper": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/EX03-R12-Fixed-StringTransfer.ps1",
+      "sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135"
+    },
+    "invocation": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/invocation.json",
+      "sha256": "92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6"
+    },
+    "launcher": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/launcher.ps1",
+      "sha256": "1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1"
+    },
+    "candidate": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/candidate.robin",
+      "sha256": "0a84679b0b9875780aa70c975602a7404af0dd82fcf9b13978fe9c1e036f5b94"
+    },
+    "input_a": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力い.xlsx",
+      "sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9"
+    },
+    "input_b": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力ろ.xlsx",
+      "sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+    },
+    "template": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+    },
+    "work": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/runtime/work.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+    },
+    "output": {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/runtime/照合結果.xlsx",
+      "exists": false
+    }
+  },
+  "fixed_sha256": {
+    "helper": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+    "base_invocation": "9ff979598a0383099aec88ca3aace330f29ed519cc66d9cf6ca63e31d962227a",
+    "base_launcher": "b509339998887977fc272613e9c6a479e444dfbed1e957d63588a89ac53bfbaf",
+    "prototype_manifest": "911bb1e864fe1e183a839f094052ee895c0caad7968a8f038fd950f5ad0ffe01",
+    "prototype_verification": "145027406d0a45ce7f2739d7ec7d0b6041a570f6d50a472cf9e240df7fb0d23d",
+    "teaching": "7bde8bb20bb7f347c97722d77a4141bf8348bb40d97aaca435e01998e8b9d3a3",
+    "template": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "input_a": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "input_b": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725",
+    "request": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+    "spec": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+    "expected": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d"
+  },
+  "protected_baseline_blobs": {
+    "catalog/acceptance/issue38/requests/EX03.txt": "9ee08ff30b16ca2cbe4124ca96037b2409a121c0",
+    "catalog/acceptance/issue38/spec.json": "efa9b662d3ed007059645eb3ea86ef640efcaeb0",
+    "catalog/acceptance/issue38/expected.json": "6daac6896166afb3138cf6e6d7108584a957be7a",
+    "catalog/acceptance/issue38/cycles/EX03-r12-G1/generated.robin": "1d18d3fad2c3d5f14c1486f1bfe8209325d9a8a2",
+    "catalog/acceptance/issue38/cycles/EX03-r12-G1/generation-safety-audit.json": "30b61e413780aa7a785b477ad08b1b5cd2e65e18",
+    "copilot/versions/20260917-excel-r12/agent-instructions.txt": "610aeac621cc727dbfb31ac55bc36b26eab75e4b",
+    "copilot/versions/20260917-excel-r12/knowledge/PAD-Robin-Knowledge-Bundle.txt": "ba2751bd3347f2c8110170cfe553001a59a8bcec",
+    "copilot/versions/20260917-excel-r12/manifest.json": "9a91cd6c79f8f93c10d75caa7c1e55a08e10aeff"
+  },
+  "adaptation": {
+    "source": "copilot/versions/20260917-excel-r12/support/EX03-R12-Prepared-Normal.robin",
+    "replacement_counts": [
+      {
+        "label": "error_type",
+        "count": 0
+      },
+      {
+        "label": "error_scope",
+        "count": 0
+      },
+      {
+        "label": "target_two_text_4",
+        "count": 2
+      },
+      {
+        "label": "target_two_number_2",
+        "count": 1
+      },
+      {
+        "label": "target_two_text_3",
+        "count": 2
+      },
+      {
+        "label": "target_two_text_2",
+        "count": 2
+      },
+      {
+        "label": "target_two_number_1",
+        "count": 1
+      },
+      {
+        "label": "target_two_text_1",
+        "count": 2
+      },
+      {
+        "label": "target_one_number_3",
+        "count": 1
+      },
+      {
+        "label": "target_one_text_3",
+        "count": 2
+      },
+      {
+        "label": "target_one_number_2",
+        "count": 1
+      },
+      {
+        "label": "target_one_text_2",
+        "count": 2
+      },
+      {
+        "label": "target_one_number_1",
+        "count": 1
+      },
+      {
+        "label": "target_one_text_1",
+        "count": 2
+      },
+      {
+        "label": "target_two_sheet",
+        "count": 12
+      },
+      {
+        "label": "target_one_sheet",
+        "count": 11
+      },
+      {
+        "label": "source_two_sheet",
+        "count": 1
+      },
+      {
+        "label": "source_one_sheet",
+        "count": 1
+      },
+      {
+        "label": "readback_two_range",
+        "count": 1
+      },
+      {
+        "label": "readback_one_range",
+        "count": 1
+      },
+      {
+        "label": "source_two_range",
+        "count": 1
+      },
+      {
+        "label": "source_one_range",
+        "count": 1
+      },
+      {
+        "label": "work_path",
+        "count": 2
+      },
+      {
+        "label": "source_two_path",
+        "count": 1
+      },
+      {
+        "label": "source_one_path",
+        "count": 1
+      },
+      {
+        "label": "output_path",
+        "count": 3
+      },
+      {
+        "label": "json_handoff_root",
+        "count": 9
+      }
+    ],
+    "fixed_runtime_path_replacements_before_helper_swap": 14,
+    "embedded_launcher_exact": true,
+    "ast_error_count": 0,
+    "forbidden_counts": {
+      "Invoke-Expression": 0,
+      "ScriptBlock]::Create": 0,
+      "Add-Type": 0,
+      "Start-Process": 0,
+      "Remove-Item": 0,
+      "Invoke-WebRequest": 0,
+      "Invoke-RestMethod": 0,
+      "System.RunDOSCommand": 0,
+      "System.RunApplication": 0,
+      "File.Delete": 0,
+      "Folder.Delete": 0,
+      "WebAutomation.": 0,
+      "HTTP.": 0
+    },
+    "structure": {
+      "run_script_count": 1,
+      "source_json_write_count": 7,
+      "mode_json_write_count": 1,
+      "numeric_write_count": 5,
+      "save_as_count": 1,
+      "json_comparison_count": 12,
+      "success_gate_count": 1,
+      "trial_runtime_count_after_helper_replacement": 12
+    }
+  },
+  "paths": {
+    "helper": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\EX03-R12-Fixed-StringTransfer.ps1",
+    "invocation": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\invocation.json",
+    "launcher": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\launcher.ps1",
+    "target_workbook": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\runtime\\work.xlsx",
+    "json_root": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\runtime",
+    "output": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\runtime\\照合結果.xlsx"
+  },
+  "pre_run": {
+    "work_matches_template": true,
+    "output_absent": true,
+    "json_files_absent": true,
+    "real_helper_not_executed_by_preflight": true,
+    "pad_save_count": 0,
+    "pad_recopy_count": 0,
+    "pad_run_count": 0
+  }
+}

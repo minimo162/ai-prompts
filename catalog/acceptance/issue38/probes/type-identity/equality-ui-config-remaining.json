@@ -1,0 +1,32 @@
+[
+  {
+    "name": "PositiveText",
+    "at": "2026-09-15T11:23:45.8558929Z",
+    "value": "%CustomObjectAsJson2 = CustomObjectAsJson4%",
+    "source": "PAD action dialog"
+  },
+  {
+    "name": "NegativeNumberText",
+    "at": "2026-09-15T11:23:47.8110620Z",
+    "value": "%CustomObjectAsJson = CustomObjectAsJson2%",
+    "source": "PAD action dialog"
+  },
+  {
+    "name": "NegativeTextNumber",
+    "at": "2026-09-15T11:23:49.7348353Z",
+    "value": "%CustomObjectAsJson2 = CustomObjectAsJson%",
+    "source": "PAD action dialog"
+  },
+  {
+    "name": "ScalarEquality",
+    "at": "2026-09-15T11:23:51.6429575Z",
+    "value": "%NumberOne = TextOne%",
+    "source": "PAD action dialog"
+  },
+  {
+    "name": "ProbeCompleted",
+    "at": "2026-09-15T11:23:53.4549586Z",
+    "value": "TYPE_PROBE_FINISHED",
+    "source": "PAD action dialog"
+  }
+]

@@ -1,0 +1,119 @@
+{
+  "schema_version": 3,
+  "kind": "EX02_EXCEL_EFFECTIVE_FORMAT_COMPARISON",
+  "observed_at": "2026-09-15T22:30:30.5982439Z",
+  "read_only": true,
+  "paths": {
+    "reference": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\cycles\\EX02-r5-G2\\run2\\result.xlsx",
+    "output": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\cycles\\EX02-r5-G2\\format-reconciliation\\negative-format-dimensions.xlsx"
+  },
+  "sha256_before": {
+    "reference": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9",
+    "output": "4ebf7b15d34b67c59dcc36c4c4b58a332354c7cfdc9ed2111a870416001212ea"
+  },
+  "sha256_after": {
+    "reference": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9",
+    "output": "4ebf7b15d34b67c59dcc36c4c4b58a332354c7cfdc9ed2111a870416001212ea"
+  },
+  "bounds": {
+    "sheets": [
+      "Decoy",
+      "Target A",
+      "Target B"
+    ],
+    "rows_per_sheet": 16,
+    "columns_per_sheet": 10,
+    "checked_cells": 480,
+    "checked_rows": 48,
+    "checked_columns": 30
+  },
+  "attributes": {
+    "cell": [
+      "font",
+      "fill",
+      "number_format",
+      "alignment",
+      "protection",
+      "merge_cells",
+      "invariant style_name",
+      "six edge and diagonal borders"
+    ],
+    "row": [
+      "height",
+      "hidden"
+    ],
+    "column": [
+      "width",
+      "hidden"
+    ]
+  },
+  "comparison_policy": {
+    "named_style_identity": "Excel COM Style.Name (invariant)",
+    "localized_style_label": "Style.NameLocal excluded because it is a UI-language label, not formatting identity"
+  },
+  "snapshot_sha256": {
+    "reference": "28a5ca0636f95e679c3d4834e13ec248fef5e5fd8829463051759a8250186ea4",
+    "output": "53ca837c4073d1c32d27d826ebd8698868b249bf19aa46d8374a6f7410428288"
+  },
+  "difference_attribute_counts": {
+    "cell_style": 1,
+    "row_dimension": 1,
+    "column_dimension": 1,
+    "sheet_structure": 0
+  },
+  "difference_location_counts": {
+    "cell_style": 1,
+    "row_dimension": 1,
+    "column_dimension": 1,
+    "sheet_structure": 0
+  },
+  "differences": [
+    {
+      "category": "row_dimension",
+      "sheet": "Target A",
+      "location": "2",
+      "attribute": "height",
+      "before": 14.7,
+      "after": 30.0
+    },
+    {
+      "category": "column_dimension",
+      "sheet": "Target A",
+      "location": "2",
+      "attribute": "width",
+      "before": 19.42,
+      "after": 23.42
+    },
+    {
+      "category": "cell_style",
+      "sheet": "Target A",
+      "location": "C4",
+      "attribute": "fill",
+      "before": {
+        "color": 13431551.0,
+        "color_index": 19,
+        "pattern": 1,
+        "pattern_color": 0,
+        "pattern_color_index": -4105,
+        "theme_color": 0,
+        "tint_and_shade": 0.0,
+        "pattern_theme_color": 0,
+        "pattern_tint_and_shade": 0.0
+      },
+      "after": {
+        "color": 255.0,
+        "color_index": 3,
+        "pattern": 1,
+        "pattern_color": 0,
+        "pattern_color_index": -4105,
+        "theme_color": 0,
+        "tint_and_shade": 0.0,
+        "pattern_theme_color": 0,
+        "pattern_tint_and_shade": 0.0
+      }
+    }
+  ],
+  "status": "DIFFERENCES_FOUND",
+  "scope": "Excel-effective formatting and dimensions in the fixed EX02 A1:J16 contract area",
+  "acceptance_boundary": "Does not grade values, types, formulas, outside-sheet metadata, PAD completion, or Copilot provenance."
+}

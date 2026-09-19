@@ -1,0 +1,8403 @@
+{
+  "status": "FAIL",
+  "kind": "EX03_INDEPENDENT_DIAGNOSTIC",
+  "legacy": {
+    "status": "FAIL",
+    "case": "EX03",
+    "checked_cells": 480,
+    "target_cells": 12,
+    "failures": [
+      "Decoy: row dimension 1",
+      "Decoy: row dimension 2",
+      "Decoy: row dimension 3",
+      "Decoy: row dimension 4",
+      "Decoy: row dimension 5",
+      "Decoy: row dimension 6",
+      "Decoy: row dimension 7",
+      "Decoy: row dimension 8",
+      "Decoy: row dimension 9",
+      "Decoy: row dimension 10",
+      "Decoy: row dimension 11",
+      "Decoy: row dimension 12",
+      "Decoy: row dimension 13",
+      "Decoy: row dimension 14",
+      "Decoy: row dimension 15",
+      "Decoy: row dimension 16",
+      "Decoy: column dimension D",
+      "Decoy: column dimension B",
+      "Decoy: column dimension I",
+      "Decoy: column dimension G",
+      "Decoy: column dimension E",
+      "Decoy: column dimension C",
+      "Decoy: column dimension F",
+      "Decoy: column dimension J",
+      "Decoy: column dimension A",
+      "Decoy: column dimension H",
+      "Decoy!A1: style changed",
+      "Decoy!B1: style changed",
+      "Decoy!C1: style changed",
+      "Decoy!D1: style changed",
+      "Decoy!E1: style changed",
+      "Decoy!F1: style changed",
+      "Decoy!G1: style changed",
+      "Decoy!H1: style changed",
+      "Decoy!I1: style changed",
+      "Decoy!J1: style changed",
+      "Decoy!A2: style changed",
+      "Decoy!B2: style changed",
+      "Decoy!C2: style changed",
+      "Decoy!D2: style changed",
+      "Decoy!E2: style changed",
+      "Decoy!F2: style changed",
+      "Decoy!G2: style changed",
+      "Decoy!H2: style changed",
+      "Decoy!I2: style changed",
+      "Decoy!J2: style changed",
+      "Decoy!A3: style changed",
+      "Decoy!B3: style changed",
+      "Decoy!C3: style changed",
+      "Decoy!D3: style changed",
+      "Decoy!E3: style changed",
+      "Decoy!F3: style changed",
+      "Decoy!G3: style changed",
+      "Decoy!H3: style changed",
+      "Decoy!I3: style changed",
+      "Decoy!J3: style changed",
+      "Decoy!A4: style changed",
+      "Decoy!B4: style changed",
+      "Decoy!C4: style changed",
+      "Decoy!D4: style changed",
+      "Decoy!E4: style changed",
+      "Decoy!F4: style changed",
+      "Decoy!G4: style changed",
+      "Decoy!H4: style changed",
+      "Decoy!I4: style changed",
+      "Decoy!J4: style changed",
+      "Decoy!A5: style changed",
+      "Decoy!B5: style changed",
+      "Decoy!C5: style changed",
+      "Decoy!D5: style changed",
+      "Decoy!E5: style changed",
+      "Decoy!F5: style changed",
+      "Decoy!G5: style changed",
+      "Decoy!H5: style changed",
+      "Decoy!I5: style changed",
+      "Decoy!J5: style changed",
+      "Decoy!A6: style changed",
+      "Decoy!B6: style changed",
+      "Decoy!C6: style changed",
+      "Decoy!D6: style changed",
+      "Decoy!E6: style changed",
+      "Decoy!F6: style changed",
+      "Decoy!G6: style changed",
+      "Decoy!H6: style changed",
+      "Decoy!I6: style changed",
+      "Decoy!J6: style changed",
+      "Decoy!A7: style changed",
+      "Decoy!B7: style changed",
+      "Decoy!C7: style changed",
+      "Decoy!D7: style changed",
+      "Decoy!E7: style changed",
+      "Decoy!F7: style changed",
+      "Decoy!G7: style changed",
+      "Decoy!H7: style changed",
+      "Decoy!I7: style changed",
+      "Decoy!J7: style changed",
+      "Decoy!A8: style changed",
+      "Decoy!B8: style changed",
+      "Decoy!C8: style changed",
+      "Decoy!D8: style changed",
+      "Decoy!E8: style changed",
+      "Decoy!F8: style changed",
+      "Decoy!G8: style changed",
+      "Decoy!H8: style changed",
+      "Decoy!I8: style changed",
+      "Decoy!J8: style changed",
+      "Decoy!A9: style changed",
+      "Decoy!B9: style changed",
+      "Decoy!C9: style changed",
+      "Decoy!D9: style changed",
+      "Decoy!E9: style changed",
+      "Decoy!F9: style changed",
+      "Decoy!G9: style changed",
+      "Decoy!H9: style changed",
+      "Decoy!I9: style changed",
+      "Decoy!J9: style changed",
+      "Decoy!A10: style changed",
+      "Decoy!B10: style changed",
+      "Decoy!C10: style changed",
+      "Decoy!D10: style changed",
+      "Decoy!E10: style changed",
+      "Decoy!F10: style changed",
+      "Decoy!G10: style changed",
+      "Decoy!H10: style changed",
+      "Decoy!I10: style changed",
+      "Decoy!J10: style changed",
+      "Decoy!A11: style changed",
+      "Decoy!B11: style changed",
+      "Decoy!C11: style changed",
+      "Decoy!D11: style changed",
+      "Decoy!E11: style changed",
+      "Decoy!F11: style changed",
+      "Decoy!G11: style changed",
+      "Decoy!H11: style changed",
+      "Decoy!I11: style changed",
+      "Decoy!J11: style changed",
+      "Decoy!A12: style changed",
+      "Decoy!B12: style changed",
+      "Decoy!C12: style changed",
+      "Decoy!D12: style changed",
+      "Decoy!E12: style changed",
+      "Decoy!F12: style changed",
+      "Decoy!G12: style changed",
+      "Decoy!H12: style changed",
+      "Decoy!I12: style changed",
+      "Decoy!J12: style changed",
+      "Decoy!A13: style changed",
+      "Decoy!B13: style changed",
+      "Decoy!C13: style changed",
+      "Decoy!D13: style changed",
+      "Decoy!E13: style changed",
+      "Decoy!F13: style changed",
+      "Decoy!G13: style changed",
+      "Decoy!H13: style changed",
+      "Decoy!I13: style changed",
+      "Decoy!J13: style changed",
+      "Decoy!A14: style changed",
+      "Decoy!B14: style changed",
+      "Decoy!C14: style changed",
+      "Decoy!D14: style changed",
+      "Decoy!E14: style changed",
+      "Decoy!F14: style changed",
+      "Decoy!G14: style changed",
+      "Decoy!H14: style changed",
+      "Decoy!I14: style changed",
+      "Decoy!J14: style changed",
+      "Decoy!A15: style changed",
+      "Decoy!B15: style changed",
+      "Decoy!C15: style changed",
+      "Decoy!D15: style changed",
+      "Decoy!E15: style changed",
+      "Decoy!F15: style changed",
+      "Decoy!G15: style changed",
+      "Decoy!H15: style changed",
+      "Decoy!I15: style changed",
+      "Decoy!J15: style changed",
+      "Decoy!A16: style changed",
+      "Decoy!B16: style changed",
+      "Decoy!C16: style changed",
+      "Decoy!D16: style changed",
+      "Decoy!E16: style changed",
+      "Decoy!F16: style changed",
+      "Decoy!G16: style changed",
+      "Decoy!H16: style changed",
+      "Decoy!I16: style changed",
+      "Decoy!J16: style changed",
+      "集計先: row dimension 1",
+      "集計先: row dimension 2",
+      "集計先: row dimension 3",
+      "集計先: row dimension 4",
+      "集計先: row dimension 5",
+      "集計先: row dimension 6",
+      "集計先: row dimension 7",
+      "集計先: row dimension 8",
+      "集計先: row dimension 9",
+      "集計先: row dimension 10",
+      "集計先: row dimension 11",
+      "集計先: row dimension 12",
+      "集計先: row dimension 13",
+      "集計先: row dimension 14",
+      "集計先: row dimension 15",
+      "集計先: row dimension 16",
+      "集計先: column dimension D",
+      "集計先: column dimension B",
+      "集計先: column dimension I",
+      "集計先: column dimension G",
+      "集計先: column dimension E",
+      "集計先: column dimension C",
+      "集計先: column dimension F",
+      "集計先: column dimension J",
+      "集計先: column dimension A",
+      "集計先: column dimension H",
+      "集計先!A1: style changed",
+      "集計先!B1: style changed",
+      "集計先!C1: style changed",
+      "集計先!D1: style changed",
+      "集計先!E1: style changed",
+      "集計先!F1: style changed",
+      "集計先!G1: style changed",
+      "集計先!H1: style changed",
+      "集計先!I1: style changed",
+      "集計先!J1: style changed",
+      "集計先!A2: style changed",
+      "集計先!B2: style changed",
+      "集計先!C2: style changed",
+      "集計先!D2: style changed",
+      "集計先!E2: style changed",
+      "集計先!F2: style changed",
+      "集計先!G2: style changed",
+      "集計先!H2: style changed",
+      "集計先!I2: style changed",
+      "集計先!J2: style changed",
+      "集計先!A3: style changed",
+      "集計先!B3: style changed",
+      "集計先!C3: style changed",
+      "集計先!D3: style changed",
+      "集計先!E3: style changed",
+      "集計先!F3: style changed",
+      "集計先!G3: style changed",
+      "集計先!H3: style changed",
+      "集計先!I3: style changed",
+      "集計先!J3: style changed",
+      "集計先!A4: style changed",
+      "集計先!B4: style changed",
+      "集計先!C4: style changed",
+      "集計先!D4: style changed",
+      "集計先!E4: style changed",
+      "集計先!F4: style changed",
+      "集計先!G4: style changed",
+      "集計先!H4: style changed",
+      "集計先!I4: style changed",
+      "集計先!J4: style changed",
+      "集計先!A5: style changed",
+      "集計先!B5: style changed",
+      "集計先!C5: style changed",
+      "集計先!D5: style changed",
+      "集計先!E5: style changed",
+      "集計先!F5: style changed",
+      "集計先!G5: style changed",
+      "集計先!H5: style changed",
+      "集計先!I5: style changed",
+      "集計先!J5: style changed",
+      "集計先!A6: style changed",
+      "集計先!B6: style changed",
+      "集計先!C6: style changed",
+      "集計先!D6: style changed",
+      "集計先!E6: style changed",
+      "集計先!F6: style changed",
+      "集計先!G6: style changed",
+      "集計先!H6: style changed",
+      "集計先!I6: style changed",
+      "集計先!J6: style changed",
+      "集計先!A7: style changed",
+      "集計先!B7: style changed",
+      "集計先!C7: style changed",
+      "集計先!D7: style changed",
+      "集計先!E7: style changed",
+      "集計先!F7: style changed",
+      "集計先!G7: style changed",
+      "集計先!H7: style changed",
+      "集計先!I7: style changed",
+      "集計先!J7: style changed",
+      "集計先!A8: style changed",
+      "集計先!B8: style changed",
+      "集計先!C8: style changed",
+      "集計先!D8: style changed",
+      "集計先!E8: style changed",
+      "集計先!F8: style changed",
+      "集計先!G8: style changed",
+      "集計先!H8: style changed",
+      "集計先!I8: style changed",
+      "集計先!J8: style changed",
+      "集計先!A9: style changed",
+      "集計先!B9: style changed",
+      "集計先!C9: style changed",
+      "集計先!D9: style changed",
+      "集計先!E9: style changed",
+      "集計先!F9: style changed",
+      "集計先!G9: style changed",
+      "集計先!H9: style changed",
+      "集計先!I9: style changed",
+      "集計先!J9: style changed",
+      "集計先!A10: style changed",
+      "集計先!B10: style changed",
+      "集計先!C10: style changed",
+      "集計先!D10: style changed",
+      "集計先!E10: style changed",
+      "集計先!F10: style changed",
+      "集計先!G10: style changed",
+      "集計先!H10: style changed",
+      "集計先!I10: style changed",
+      "集計先!J10: style changed",
+      "集計先!A11: style changed",
+      "集計先!B11: style changed",
+      "集計先!C11: style changed",
+      "集計先!D11: style changed",
+      "集計先!E11: style changed",
+      "集計先!F11: style changed",
+      "集計先!G11: style changed",
+      "集計先!H11: style changed",
+      "集計先!I11: style changed",
+      "集計先!J11: style changed",
+      "集計先!A12: style changed",
+      "集計先!B12: style changed",
+      "集計先!C12: style changed",
+      "集計先!D12: style changed",
+      "集計先!E12: style changed",
+      "集計先!F12: style changed",
+      "集計先!G12: style changed",
+      "集計先!H12: style changed",
+      "集計先!I12: style changed",
+      "集計先!J12: style changed",
+      "集計先!A13: style changed",
+      "集計先!B13: style changed",
+      "集計先!C13: style changed",
+      "集計先!D13: style changed",
+      "集計先!E13: style changed",
+      "集計先!F13: style changed",
+      "集計先!G13: style changed",
+      "集計先!H13: style changed",
+      "集計先!I13: style changed",
+      "集計先!J13: style changed",
+      "集計先!A14: style changed",
+      "集計先!B14: style changed",
+      "集計先!C14: style changed",
+      "集計先!D14: style changed",
+      "集計先!E14: style changed",
+      "集計先!F14: style changed",
+      "集計先!G14: style changed",
+      "集計先!H14: style changed",
+      "集計先!I14: style changed",
+      "集計先!J14: style changed",
+      "集計先!A15: style changed",
+      "集計先!B15: style changed",
+      "集計先!C15: style changed",
+      "集計先!D15: style changed",
+      "集計先!E15: style changed",
+      "集計先!F15: style changed",
+      "集計先!G15: style changed",
+      "集計先!H15: style changed",
+      "集計先!I15: style changed",
+      "集計先!J15: style changed",
+      "集計先!A16: style changed",
+      "集計先!B16: style changed",
+      "集計先!C16: style changed",
+      "集計先!D16: style changed",
+      "集計先!E16: style changed",
+      "集計先!F16: style changed",
+      "集計先!G16: style changed",
+      "集計先!H16: style changed",
+      "集計先!I16: style changed",
+      "集計先!J16: style changed",
+      "追記先: row dimension 1",
+      "追記先: row dimension 2",
+      "追記先: row dimension 3",
+      "追記先: row dimension 4",
+      "追記先: row dimension 5",
+      "追記先: row dimension 6",
+      "追記先: row dimension 7",
+      "追記先: row dimension 8",
+      "追記先: row dimension 9",
+      "追記先: row dimension 10",
+      "追記先: row dimension 11",
+      "追記先: row dimension 12",
+      "追記先: row dimension 13",
+      "追記先: row dimension 14",
+      "追記先: row dimension 15",
+      "追記先: row dimension 16",
+      "追記先: column dimension D",
+      "追記先: column dimension B",
+      "追記先: column dimension I",
+      "追記先: column dimension G",
+      "追記先: column dimension E",
+      "追記先: column dimension C",
+      "追記先: column dimension F",
+      "追記先: column dimension J",
+      "追記先: column dimension A",
+      "追記先: column dimension H",
+      "追記先!A1: style changed",
+      "追記先!B1: style changed",
+      "追記先!C1: style changed",
+      "追記先!D1: style changed",
+      "追記先!E1: style changed",
+      "追記先!F1: style changed",
+      "追記先!G1: style changed",
+      "追記先!H1: style changed",
+      "追記先!I1: style changed",
+      "追記先!J1: style changed",
+      "追記先!A2: style changed",
+      "追記先!B2: style changed",
+      "追記先!C2: style changed",
+      "追記先!D2: style changed",
+      "追記先!E2: style changed",
+      "追記先!F2: style changed",
+      "追記先!G2: style changed",
+      "追記先!H2: style changed",
+      "追記先!I2: style changed",
+      "追記先!J2: style changed",
+      "追記先!A3: style changed",
+      "追記先!B3: style changed",
+      "追記先!C3: style changed",
+      "追記先!D3: style changed",
+      "追記先!E3: style changed",
+      "追記先!F3: style changed",
+      "追記先!G3: style changed",
+      "追記先!H3: style changed",
+      "追記先!I3: style changed",
+      "追記先!J3: style changed",
+      "追記先!A4: style changed",
+      "追記先!B4: style changed",
+      "追記先!C4: style changed",
+      "追記先!D4: style changed",
+      "追記先!E4: style changed",
+      "追記先!F4: style changed",
+      "追記先!G4: style changed",
+      "追記先!H4: style changed",
+      "追記先!I4: style changed",
+      "追記先!J4: style changed",
+      "追記先!A5: style changed",
+      "追記先!B5: style changed",
+      "追記先!C5: style changed",
+      "追記先!D5: style changed",
+      "追記先!E5: style changed",
+      "追記先!F5: style changed",
+      "追記先!G5: style changed",
+      "追記先!H5: style changed",
+      "追記先!I5: style changed",
+      "追記先!J5: style changed",
+      "追記先!A6: style changed",
+      "追記先!B6: style changed",
+      "追記先!C6: style changed",
+      "追記先!D6: style changed",
+      "追記先!E6: style changed",
+      "追記先!F6: value/type/position",
+      "追記先!F6: style changed",
+      "追記先!G6: style changed",
+      "追記先!H6: style changed",
+      "追記先!I6: style changed",
+      "追記先!J6: style changed",
+      "追記先!A7: style changed",
+      "追記先!B7: style changed",
+      "追記先!C7: style changed",
+      "追記先!D7: style changed",
+      "追記先!E7: style changed",
+      "追記先!F7: style changed",
+      "追記先!G7: style changed",
+      "追記先!H7: style changed",
+      "追記先!I7: style changed",
+      "追記先!J7: style changed",
+      "追記先!A8: style changed",
+      "追記先!B8: style changed",
+      "追記先!C8: style changed",
+      "追記先!D8: style changed",
+      "追記先!E8: style changed",
+      "追記先!F8: style changed",
+      "追記先!G8: style changed",
+      "追記先!H8: style changed",
+      "追記先!I8: style changed",
+      "追記先!J8: style changed",
+      "追記先!A9: style changed",
+      "追記先!B9: style changed",
+      "追記先!C9: style changed",
+      "追記先!D9: style changed",
+      "追記先!E9: style changed",
+      "追記先!F9: style changed",
+      "追記先!G9: style changed",
+      "追記先!H9: style changed",
+      "追記先!I9: style changed",
+      "追記先!J9: style changed",
+      "追記先!A10: style changed",
+      "追記先!B10: style changed",
+      "追記先!C10: style changed",
+      "追記先!D10: style changed",
+      "追記先!E10: style changed",
+      "追記先!F10: style changed",
+      "追記先!G10: style changed",
+      "追記先!H10: style changed",
+      "追記先!I10: style changed",
+      "追記先!J10: style changed",
+      "追記先!A11: style changed",
+      "追記先!B11: style changed",
+      "追記先!C11: style changed",
+      "追記先!D11: style changed",
+      "追記先!E11: style changed",
+      "追記先!F11: style changed",
+      "追記先!G11: style changed",
+      "追記先!H11: style changed",
+      "追記先!I11: style changed",
+      "追記先!J11: style changed",
+      "追記先!A12: style changed",
+      "追記先!B12: style changed",
+      "追記先!C12: style changed",
+      "追記先!D12: style changed",
+      "追記先!E12: style changed",
+      "追記先!F12: style changed",
+      "追記先!G12: style changed",
+      "追記先!H12: style changed",
+      "追記先!I12: style changed",
+      "追記先!J12: style changed",
+      "追記先!A13: style changed",
+      "追記先!B13: style changed",
+      "追記先!C13: style changed",
+      "追記先!D13: style changed",
+      "追記先!E13: style changed",
+      "追記先!F13: style changed",
+      "追記先!G13: style changed",
+      "追記先!H13: style changed",
+      "追記先!I13: style changed",
+      "追記先!J13: style changed",
+      "追記先!A14: style changed",
+      "追記先!B14: style changed",
+      "追記先!C14: style changed",
+      "追記先!D14: style changed",
+      "追記先!E14: style changed",
+      "追記先!F14: style changed",
+      "追記先!G14: style changed",
+      "追記先!H14: style changed",
+      "追記先!I14: style changed",
+      "追記先!J14: style changed",
+      "追記先!A15: style changed",
+      "追記先!B15: style changed",
+      "追記先!C15: style changed",
+      "追記先!D15: style changed",
+      "追記先!E15: style changed",
+      "追記先!F15: style changed",
+      "追記先!G15: style changed",
+      "追記先!H15: style changed",
+      "追記先!I15: style changed",
+      "追記先!J15: style changed",
+      "追記先!A16: style changed",
+      "追記先!B16: style changed",
+      "追記先!C16: style changed",
+      "追記先!D16: style changed",
+      "追記先!E16: style changed",
+      "追記先!F16: style changed",
+      "追記先!G16: style changed",
+      "追記先!H16: style changed",
+      "追記先!I16: style changed",
+      "追記先!J16: style changed"
+    ],
+    "output_sha256": "726e2a0bea07e690f8945bc099b3e39aea6bf9d33755440d9245ec0dedb83475",
+    "copilot_generation": "NOT_ASSERTED",
+    "pad_execution": "NOT_ASSERTED"
+  },
+  "failure_counts": {
+    "row_dimensions": 48,
+    "column_dimensions": 30,
+    "styles": 480,
+    "values_types_positions": 1
+  },
+  "checks": {
+    "target_values_types_positions": {
+      "checked": 12,
+      "mismatches": [
+        {
+          "sheet": "追記先",
+          "cell": "F6",
+          "target": true,
+          "expected": [
+            "text",
+            "100%"
+          ],
+          "actual": [
+            "number",
+            1
+          ],
+          "match": false
+        }
+      ],
+      "status": "FAIL"
+    },
+    "outside_values_types_formulas": {
+      "checked": 468,
+      "mismatches": [],
+      "status": "MATCH_SAVED_XLSX_ONLY"
+    }
+  },
+  "style_attribute_difference_counts": {
+    "font": 480,
+    "border": 480,
+    "number_format": 1
+  },
+  "dimension_differences": [
+    {
+      "sheet": "Decoy",
+      "row": 1,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 2,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 3,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 4,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 5,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 6,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 7,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 8,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 9,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 10,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 11,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 12,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 13,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 14,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 15,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "row": 16,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "A",
+      "before": [
+        20.0,
+        false,
+        1,
+        1
+      ],
+      "after": [
+        20.0,
+        false,
+        1,
+        10
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "B",
+      "before": [
+        20.0,
+        false,
+        2,
+        2
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "C",
+      "before": [
+        20.0,
+        false,
+        3,
+        3
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "D",
+      "before": [
+        20.0,
+        false,
+        4,
+        4
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "E",
+      "before": [
+        20.0,
+        false,
+        5,
+        5
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "F",
+      "before": [
+        20.0,
+        false,
+        6,
+        6
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "G",
+      "before": [
+        20.0,
+        false,
+        7,
+        7
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "H",
+      "before": [
+        20.0,
+        false,
+        8,
+        8
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "I",
+      "before": [
+        20.0,
+        false,
+        9,
+        9
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "Decoy",
+      "column": "J",
+      "before": [
+        20.0,
+        false,
+        10,
+        10
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "row": 1,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "row": 2,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "row": 3,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "row": 4,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "row": 5,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "row": 6,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "row": 7,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "row": 8,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "row": 9,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "row": 10,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "row": 11,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "row": 12,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "row": 13,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "row": 14,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "row": 15,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "row": 16,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "column": "A",
+      "before": [
+        20.0,
+        false,
+        1,
+        1
+      ],
+      "after": [
+        20.0,
+        false,
+        1,
+        10
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "column": "B",
+      "before": [
+        20.0,
+        false,
+        2,
+        2
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "column": "C",
+      "before": [
+        20.0,
+        false,
+        3,
+        3
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "column": "D",
+      "before": [
+        20.0,
+        false,
+        4,
+        4
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "column": "E",
+      "before": [
+        20.0,
+        false,
+        5,
+        5
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "column": "F",
+      "before": [
+        20.0,
+        false,
+        6,
+        6
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "column": "G",
+      "before": [
+        20.0,
+        false,
+        7,
+        7
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "column": "H",
+      "before": [
+        20.0,
+        false,
+        8,
+        8
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "column": "I",
+      "before": [
+        20.0,
+        false,
+        9,
+        9
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "集計先",
+      "column": "J",
+      "before": [
+        20.0,
+        false,
+        10,
+        10
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "row": 1,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "row": 2,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "row": 3,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "row": 4,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "row": 5,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "row": 6,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "row": 7,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "row": 8,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "row": 9,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "row": 10,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "row": 11,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "row": 12,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "row": 13,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "row": 14,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "row": 15,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "row": 16,
+      "before": [
+        22.0,
+        false
+      ],
+      "after": [
+        14.65,
+        false
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "column": "A",
+      "before": [
+        20.0,
+        false,
+        1,
+        1
+      ],
+      "after": [
+        20.0,
+        false,
+        1,
+        10
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "column": "B",
+      "before": [
+        20.0,
+        false,
+        2,
+        2
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "column": "C",
+      "before": [
+        20.0,
+        false,
+        3,
+        3
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "column": "D",
+      "before": [
+        20.0,
+        false,
+        4,
+        4
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "column": "E",
+      "before": [
+        20.0,
+        false,
+        5,
+        5
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "column": "F",
+      "before": [
+        20.0,
+        false,
+        6,
+        6
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "column": "G",
+      "before": [
+        20.0,
+        false,
+        7,
+        7
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "column": "H",
+      "before": [
+        20.0,
+        false,
+        8,
+        8
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "column": "I",
+      "before": [
+        20.0,
+        false,
+        9,
+        9
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "sheet": "追記先",
+      "column": "J",
+      "before": [
+        20.0,
+        false,
+        10,
+        10
+      ],
+      "after": [
+        13.0,
+        false,
+        null,
+        null
+      ]
+    }
+  ],
+  "cells": [
+    {
+      "sheet": "Decoy",
+      "cell": "A1",
+      "target": false,
+      "expected": [
+        "text",
+        "DO NOT READ THIS SHEET"
+      ],
+      "actual": [
+        "text",
+        "DO NOT READ THIS SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B2",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C2",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D2",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E2",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B3",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C3",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D3",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E3",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B4",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C4",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D4",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E4",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B5",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C5",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D5",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E5",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B6",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C6",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D6",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E6",
+      "target": false,
+      "expected": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "actual": [
+        "text",
+        "WRONG_SHEET"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "A16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "B16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "C16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "D16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "E16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "F16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "G16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "H16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "I16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "Decoy",
+      "cell": "J16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "A1",
+      "target": false,
+      "expected": [
+        "text",
+        "KEEP TEMPLATE"
+      ],
+      "actual": [
+        "text",
+        "KEEP TEMPLATE"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "B1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "C1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "D1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "E1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "F1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "G1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "H1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "I1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "J1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "A2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "B2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "C2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "D2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "E2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "F2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "G2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "H2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "I2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "J2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "A3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "B3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "C3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "D3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "E3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "F3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "G3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "H3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "I3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "J3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "A4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "B4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "C4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "D4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "E4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "F4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "G4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "H4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "I4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "J4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "A5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "B5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "C5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "D5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "E5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "F5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "G5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "H5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "I5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "J5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "A6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "B6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "C6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "D6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "E6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "F6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "G6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "H6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "I6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "J6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "A7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "B7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "C7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "D7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "E7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "F7",
+      "target": true,
+      "expected": [
+        "text",
+        "春"
+      ],
+      "actual": [
+        "text",
+        "春"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "G7",
+      "target": true,
+      "expected": [
+        "number",
+        21
+      ],
+      "actual": [
+        "number",
+        21
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "H7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "I7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "J7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "A8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "B8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "C8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "D8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "E8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "F8",
+      "target": true,
+      "expected": [
+        "text",
+        "夏"
+      ],
+      "actual": [
+        "text",
+        "夏"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "G8",
+      "target": true,
+      "expected": [
+        "number",
+        0
+      ],
+      "actual": [
+        "number",
+        0
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "H8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "I8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "J8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "A9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "B9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "C9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "D9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "E9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "F9",
+      "target": true,
+      "expected": [
+        "text",
+        "秋"
+      ],
+      "actual": [
+        "text",
+        "秋"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "G9",
+      "target": true,
+      "expected": [
+        "number",
+        -4.5
+      ],
+      "actual": [
+        "number",
+        -4.5
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "H9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "I9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "J9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "A10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "B10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "C10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "D10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "E10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "F10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "G10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "H10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "I10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "J10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "A11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "B11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "C11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "D11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "E11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "F11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "G11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "H11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "I11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "J11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "A12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "B12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "C12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "D12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "E12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "F12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "G12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "H12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "I12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "J12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "A13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "B13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "C13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "D13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "E13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "F13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "G13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "H13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "I13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "J13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "A14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "B14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "C14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "D14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "E14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "F14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "G14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "H14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "I14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "J14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "A15",
+      "target": false,
+      "expected": [
+        "text",
+        "KEEP OUTSIDE"
+      ],
+      "actual": [
+        "text",
+        "KEEP OUTSIDE"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "B15",
+      "target": false,
+      "expected": [
+        "formula",
+        "=2+3"
+      ],
+      "actual": [
+        "formula",
+        "=2+3"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "C15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "D15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "E15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "F15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "G15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "H15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "I15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "J15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "A16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "B16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "C16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "D16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "E16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "F16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "G16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "H16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "I16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "集計先",
+      "cell": "J16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "A1",
+      "target": false,
+      "expected": [
+        "text",
+        "KEEP TEMPLATE"
+      ],
+      "actual": [
+        "text",
+        "KEEP TEMPLATE"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "B1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "C1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "D1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "E1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "F1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "G1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "H1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "I1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "J1",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "A2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "B2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "C2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "D2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "E2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "F2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "G2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "H2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "I2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "J2",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "A3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "B3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "C3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "D3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "E3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "F3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "G3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "H3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "I3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "J3",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "A4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "B4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "C4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "D4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "E4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "F4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "G4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "H4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "I4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "J4",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "A5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "B5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "C5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "D5",
+      "target": true,
+      "expected": [
+        "text",
+        "項目甲"
+      ],
+      "actual": [
+        "text",
+        "項目甲"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "E5",
+      "target": true,
+      "expected": [
+        "number",
+        42
+      ],
+      "actual": [
+        "number",
+        42
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "F5",
+      "target": true,
+      "expected": [
+        "text",
+        "日本語"
+      ],
+      "actual": [
+        "text",
+        "日本語"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "G5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "H5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "I5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "J5",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "A6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "B6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "C6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "D6",
+      "target": true,
+      "expected": [
+        "text",
+        "項目乙"
+      ],
+      "actual": [
+        "text",
+        "項目乙"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "E6",
+      "target": true,
+      "expected": [
+        "number",
+        6.25
+      ],
+      "actual": [
+        "number",
+        6.25
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "F6",
+      "target": true,
+      "expected": [
+        "text",
+        "100%"
+      ],
+      "actual": [
+        "number",
+        1
+      ],
+      "match": false
+    },
+    {
+      "sheet": "追記先",
+      "cell": "G6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "H6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "I6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "J6",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "A7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "B7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "C7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "D7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "E7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "F7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "G7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "H7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "I7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "J7",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "A8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "B8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "C8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "D8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "E8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "F8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "G8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "H8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "I8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "J8",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "A9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "B9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "C9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "D9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "E9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "F9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "G9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "H9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "I9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "J9",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "A10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "B10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "C10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "D10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "E10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "F10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "G10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "H10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "I10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "J10",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "A11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "B11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "C11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "D11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "E11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "F11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "G11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "H11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "I11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "J11",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "A12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "B12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "C12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "D12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "E12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "F12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "G12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "H12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "I12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "J12",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "A13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "B13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "C13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "D13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "E13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "F13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "G13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "H13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "I13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "J13",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "A14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "B14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "C14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "D14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "E14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "F14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "G14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "H14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "I14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "J14",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "A15",
+      "target": false,
+      "expected": [
+        "text",
+        "KEEP OUTSIDE"
+      ],
+      "actual": [
+        "text",
+        "KEEP OUTSIDE"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "B15",
+      "target": false,
+      "expected": [
+        "formula",
+        "=2+3"
+      ],
+      "actual": [
+        "formula",
+        "=2+3"
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "C15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "D15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "E15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "F15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "G15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "H15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "I15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "J15",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "A16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "B16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "C16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "D16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "E16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "F16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "G16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "H16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "I16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    },
+    {
+      "sheet": "追記先",
+      "cell": "J16",
+      "target": false,
+      "expected": [
+        "blank",
+        null
+      ],
+      "actual": [
+        "blank",
+        null
+      ],
+      "match": true
+    }
+  ],
+  "output_sha_before": "726e2a0bea07e690f8945bc099b3e39aea6bf9d33755440d9245ec0dedb83475",
+  "output_sha_after": "726e2a0bea07e690f8945bc099b3e39aea6bf9d33755440d9245ec0dedb83475",
+  "originals_sha256": {
+    "fixtures/EX03/入力い.xlsx": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "fixtures/EX03/入力ろ.xlsx": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725",
+    "fixtures/EX03/ひな形.xlsx": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21"
+  },
+  "native_styles": "NOT_RUN_BY_THIS_COMPARATOR",
+  "flow_internal_type_check": "NOT_PROVEN",
+  "copilot_generation": "NOT_ASSERTED",
+  "pad_execution": "NOT_ASSERTED"
+}

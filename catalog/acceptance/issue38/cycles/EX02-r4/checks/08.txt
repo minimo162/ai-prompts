@@ -1,0 +1,1 @@
+PASS: 107 Robin catalog checks; no PAD/Copilot invoked.

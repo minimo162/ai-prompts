@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R2R3-POSTFIX-20260917-T1",
+  "phase": "negative",
+  "result": "PASS_EXACT_PAD_SAVE_RECOPY_BEFORE_RUN",
+  "candidate_path": "trials/EX03-R2R3-POSTFIX-20260917-T1/negative/candidate.robin",
+  "candidate_sha256": "d1459baf69c8d412674599f2fbb0dec6772b74e8fd8104c694dcb1cea438599f",
+  "recopy_path": "trials/EX03-R2R3-POSTFIX-20260917-T1/negative/pad-recopy-before-run.robin",
+  "recopy_sha256": "d1459baf69c8d412674599f2fbb0dec6772b74e8fd8104c694dcb1cea438599f",
+  "exact_text": true,
+  "exact_bytes": true,
+  "recopy_chars": 12886,
+  "recopy_crlf_count": 63,
+  "recopy_lf_only_count": 135,
+  "paste_invocations": 1,
+  "save_invocations": 1,
+  "recopy_invocations": 1,
+  "run_invocations_at_capture": 0
+}

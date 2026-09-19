@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R10-G1",
+  "recorded_at": "2026-09-17T08:20:38.8419741+09:00",
+  "checkpoint": {
+    "frozen_r10_checkpoint_commit": "d510252b481a9ec4aa93b8db23961ab6da3e7771",
+    "action_time_starting_head": "9935d88ea282611e91ab50d3acda3af0f4bea435"
+  },
+  "candidate": {
+    "version": "20260917-excel-r10",
+    "candidate_commit": "06aa0a572c58a09357ac1ac27a0a04eeaa4d680d",
+    "instruction_sha256": "9434c976457b2fec14ad24d8ee57a3400e7eb092ba38259e3f8f728139c20681",
+    "bundle_sha256": "0c53d6ce82fc5e23363332420b59c34470decbb123f804b2e628d26d58928ec6",
+    "manifest_sha256": "7807e31e8177b05dc89d235496ee1b5978502f7406586dff2621d769981d6cbe"
+  },
+  "conversation": {
+    "service": "Microsoft 365 Copilot Chat",
+    "normal_chat": true,
+    "url": "https://m365.cloud.microsoft/chat/conversation/b0df40da-e1a7-4a85-a107-ff963d94d307?es=SSR",
+    "title": "Power Automate貼付け用フロー生成",
+    "model": "Think Deeper"
+  },
+  "rendered_response": {
+    "completed": true,
+    "reasoning_steps_reported": 19,
+    "refusal": false,
+    "code_block_count": 1,
+    "raw_response_base64_path": "catalog/acceptance/issue38/cycles/EX03-r10-G1/copilot-response.clipboard.utf8.b64",
+    "raw_response_base64_file_sha256": "89d297796148810d5c99b57977b5a7a316d5cf7a8d08e42f861df47e9c16064a",
+    "raw_response_utf8_sha256": "870a7e04562d558a2c3574e8c4b5ab21ae566d7487ffc50e34e28c41dd08f376",
+    "raw_response_utf8_bytes": 18556,
+    "raw_response_utf16_units": 16004,
+    "raw_response_line_count": 252,
+    "raw_response_line_ending": "LF",
+    "raw_response_final_newline": false,
+    "self_reported_fidelity_gate_pass": true,
+    "self_reported_generated_sha256": "e14b1ae8dd2652eccc6d0537705c01de977f4657536c338580c8b681e020356c",
+    "self_reported_sha_matches_code_copy": false,
+    "self_report_not_used_as_safety_evidence": true
+  },
+  "code_capture": {
+    "raw_clipboard_base64_path": "catalog/acceptance/issue38/cycles/EX03-r10-G1/generated-robin.clipboard.utf8.b64",
+    "raw_clipboard_base64_file_sha256": "b329276f3447290034680790936a4d88fb99e0d38bb579882440d22ff586016e",
+    "raw_clipboard_utf8_sha256": "4946431c9ce47f986b841115fbfd328036356c4e12ae7cbe912c2bf06e2b1ed3",
+    "raw_clipboard_utf8_bytes": 14275,
+    "raw_clipboard_utf16_units": 14073,
+    "raw_clipboard_line_count": 197,
+    "raw_clipboard_line_ending": "LF",
+    "raw_clipboard_final_newline": false,
+    "repository_path": "catalog/acceptance/issue38/cycles/EX03-r10-G1/generated.robin",
+    "repository_sha256": "4946431c9ce47f986b841115fbfd328036356c4e12ae7cbe912c2bf06e2b1ed3",
+    "repository_relation": "byte-identical to the decoded browser-session Code Copy payload",
+    "capture_method": "invoke the sole Code Copy control once, read the browser-session clipboard, and transfer the UTF-8 bytes directly to local evidence without editing",
+    "code_copy_invocations": 1,
+    "code_copy_retry": false,
+    "windows_system_clipboard_result": "UNCHANGED_STILL_CONTAINED_EXACT_R10_SUBMITTED_BODY",
+    "browser_session_clipboard_result": "EXACT_GENERATED_ROBIN_CAPTURED",
+    "first_line": "SET TransferState TO $'''NOT_STARTED'''",
+    "last_line": "END",
+    "markdown_fence_count": 0,
+    "nbsp_count": 0,
+    "ellipsis_count": 0,
+    "generated_text_edited": false
+  },
+  "comparison_with_r9": {
+    "r9_generated_sha256": "7a02ea0d073adde698578b8fa578f5701c728114ee55fbf20aa0ecdaaa32cb14",
+    "same_content_line_count": 196,
+    "different_content_lines": [
+      50
+    ],
+    "line_90_corruption_repeated": true,
+    "line_50_r9": "            if ([string]::Equals([IO.Path]::GetFulling]$candidate.FullName), $targetPath, :OrdinalIgnoreCase)) {",
+    "line_50_r10": "            if (:Equals([IO.Path]::GetFullPath([string]$candidate.FullName), $targetPath, :OrdinalIgnoreCase)) {",
+    "interpretation": "r10 restored GetFullPath and its candidate cast, but dropped the string Equals qualifier and still dropped StringComparison; it did not satisfy the new gate"
+  },
+  "generation_requests_used": 1,
+  "generation_request_limit": 1,
+  "regeneration_requested": false,
+  "interpretation": "The one authorized normal-M365 generation completed without refusal, but the unmodified Robin failed the fixed structural-fidelity gate and Windows PowerShell parser, so it was not safe to import into PAD."
+}

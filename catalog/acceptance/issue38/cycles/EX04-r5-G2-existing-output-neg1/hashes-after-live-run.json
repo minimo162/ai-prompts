@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "test_id": "EX04-R5-G2-EXISTING-OUTPUT-NEG1",
+  "checked_at": "2026-09-15T22:56:05.7294804Z",
+  "files": {
+    "existing_output": {
+      "path": "catalog/acceptance/issue38/runs/EX02-attempt1/result.xlsx",
+      "sha256_before": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9",
+      "sha256_after": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9",
+      "last_write_utc_before": "2026-09-15T20:04:47.1375106Z",
+      "last_write_utc_after": "2026-09-15T20:04:47.1375106Z",
+      "unchanged": true
+    },
+    "work": {
+      "sha256_before": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+      "sha256_after": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+      "unchanged": true
+    },
+    "input_a": {
+      "sha256_before": "f655b62c82750fc07f4e54bcfd098e8e7c0b771c9422c4321cc413a4d6d07fa9",
+      "sha256_after": "f655b62c82750fc07f4e54bcfd098e8e7c0b771c9422c4321cc413a4d6d07fa9",
+      "unchanged": true
+    },
+    "input_b": {
+      "sha256_before": "69627e161747fedad0f7c3b410c1d625b29a553786be0c145e83aaf43d1b105a",
+      "sha256_after": "69627e161747fedad0f7c3b410c1d625b29a553786be0c145e83aaf43d1b105a",
+      "unchanged": true
+    },
+    "template": {
+      "sha256_before": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+      "sha256_after": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+      "unchanged": true
+    },
+    "generated_robin": {
+      "sha256_before": "0829526420158a61146e5d3fde7c4a5cc035228e2ab98be96d9697aa64d457bd",
+      "sha256_after": "0829526420158a61146e5d3fde7c4a5cc035228e2ab98be96d9697aa64d457bd",
+      "unchanged": true
+    }
+  },
+  "excel_process_count_after": 0,
+  "all_required_files_unchanged": true
+}

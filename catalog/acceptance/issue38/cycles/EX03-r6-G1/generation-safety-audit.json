@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R6-G1",
+  "version": "20260916-excel-r6",
+  "generated_robin_sha256": null,
+  "comparison": {
+    "generated_robin_present": false,
+    "manual_repair_applied": false,
+    "manual_unescape_or_reconstruction_applied": false,
+    "fixed_request_or_expected_changed": false
+  },
+  "candidate_static_review": {
+    "non_live_result": "PASS_NON_LIVE_ONLY",
+    "exact_workbook_and_fixed_cell_guards": true,
+    "formula_target_refusal": true,
+    "per_cell_finally_format_restore": true,
+    "external_runtime_file": false,
+    "network_delete_permission_or_settings_change": false
+  },
+  "generated_output_review": {
+    "status": "NOT_APPLICABLE_NO_GENERATED_ROBIN",
+    "safe_for_pad_import": false,
+    "bounded_side_effects_verified": false,
+    "reason": "Copilot returned prose only and explicitly withheld the Robin code block."
+  },
+  "scope": {
+    "probe_success_used_as_generated_flow_success": false,
+    "external_checker_used_as_generated_flow_success": false,
+    "r5_or_other_case_pass_inherited": false,
+    "generalized_to_unconfirmed_types": false
+  },
+  "decision": {
+    "status": "STOP_REFUSAL_NO_ROBIN",
+    "reason": "The user required an immediate stop on refusal, safety concern, or unknown result. No PAD import or run is authorized from this response.",
+    "overall_ex03_acceptance_inherited": false
+  }
+}

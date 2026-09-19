@@ -1,0 +1,197 @@
+SET TransferState TO $'''NOT_STARTED'''
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx''') THEN
+    SET TransferState TO $'''OUTPUT_EXISTS_NO_WRITE'''
+ELSE
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力い.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Input1
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Input1 Name: $'''受取明細'''
+    Excel.ReadFromExcel.ReadCells Instance: Input1 StartColumn: $'''D''' StartRow: 4 EndColumn: $'''E''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Data1
+    Excel.CloseExcel.Close Instance: Input1
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力ろ.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Input2
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Input2 Name: $'''追加項目'''
+    Excel.ReadFromExcel.ReadCells Instance: Input2 StartColumn: $'''B''' StartRow: 2 EndColumn: $'''D''' EndRow: 3 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Data2
+    Excel.CloseExcel.Close Instance: Input2
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\work.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> Work
+    SET TextSource1 TO Data1[0][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource1 } Json=> TextSource1Json
+    SET TextSource2 TO Data1[1][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource2 } Json=> TextSource2Json
+    SET TextSource3 TO Data1[2][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource3 } Json=> TextSource3Json
+    SET TextSource4 TO Data2[0][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource4 } Json=> TextSource4Json
+    SET TextSource5 TO Data2[1][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource5 } Json=> TextSource5Json
+    SET TextSource6 TO Data2[0][2]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource6 } Json=> TextSource6Json
+    SET TextSource7 TO Data2[1][2]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource7 } Json=> TextSource7Json
+    Scripting.RunPowershellScript.RunScript Script: $'''$ErrorActionPreference = \'Stop\'
+    $targetPath = \'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\work.xlsx\'
+    $writes = @(
+        [ordered]@{ Source = \'Data1[0][0]\'; Sheet = \'集計先\'; Cell = \'F7\'; Json = \'%TextSource1Json%\' },
+        [ordered]@{ Source = \'Data1[1][0]\'; Sheet = \'集計先\'; Cell = \'F8\'; Json = \'%TextSource2Json%\' },
+        [ordered]@{ Source = \'Data1[2][0]\'; Sheet = \'集計先\'; Cell = \'F9\'; Json = \'%TextSource3Json%\' },
+        [ordered]@{ Source = \'Data2[0][0]\'; Sheet = \'追記先\'; Cell = \'D5\'; Json = \'%TextSource4Json%\' },
+        [ordered]@{ Source = \'Data2[1][0]\'; Sheet = \'追記先\'; Cell = \'D6\'; Json = \'%TextSource5Json%\' },
+        [ordered]@{ Source = \'Data2[0][2]\'; Sheet = \'追記先\'; Cell = \'F5\'; Json = \'%TextSource6Json%\' },
+        [ordered]@{ Source = \'Data2[1][2]\'; Sheet = \'追記先\'; Cell = \'F6\'; Json = \'%TextSource7Json%\' }
+    )
+    $allowedTargets = @{
+        \'集計先\' = @(\'F7\', \'F8\', \'F9\')
+        \'追記先\' = @(\'D5\', \'D6\', \'F5\', \'F6\')
+    }
+    $excel = [Runtime.InteropServices.Marshal]::GetActiveObject(\'Excel.Application\')
+    $workbook = $null
+    $audit = @()
+    try {
+        $matches = @()
+        for ($index = 1; $index -le $excel.Workbooks.Count; $index++) {
+            $candidate = $excel.Workbooks.Item($index)
+            if ([string]::Equals([IO.Path]::GetFulling]$candidate.FullName), $targetPath, :OrdinalIgnoreCase)) {
+                $matches += $candidate
+            }
+            else {
+                [void][Runtime.InteropServices.Marshal]::ReleaseComObject($candidate)
+            }
+        }
+        if ($matches.Count -ne 1) { throw (\'Expected one exact target workbook, found \' + $matches.Count) }
+        $workbook = $matches[0]
+        foreach ($write in $writes) {
+            $sheetName = [string]$write.Sheet
+            $cellAddress = [string]$write.Cell
+            if (-not $allowedTargets.ContainsKey($sheetName) -or $allowedTargets[$sheetName] -cnotcontains $cellAddress) {
+                throw (\'Target is outside the EX03 text mapping: \' + $sheetName + \'!\' + $cellAddress)
+            }
+            $payload = [string]$write.Json | ConvertFrom-Json
+            if ($payload.probe -isnot [string]) { throw (\'EX03 text source is not a string: \' + $write.Source) }
+            $worksheet = $null
+            $cell = $null
+            try {
+                $worksheet = $workbook.Worksheets.Item($sheetName)
+                $cell = $worksheet.Range($cellAddress)
+                if ([bool]$cell.HasFormula) { throw (\'Refusing to replace a formula cell: \' + $sheetName + \'!\' + $cellAddress) }
+                $beforeValue = $cell.Value2
+                $beforeValueType = if ($null -eq $beforeValue) { \'null\' } else { $beforeValue.GetType().FullName }
+                $beforeNumberFormat = [string]$cell.NumberFormat
+                $beforePrefixCharacter = [string]$cell.PrefixCharacter
+                try {
+                    $cell.NumberFormat = \'@\'
+                    $cell.Value2 = [string]$payload.probe
+                }
+                finally {
+                    $cell.NumberFormat = $beforeNumberFormat
+                }
+                $afterValue = $cell.Value2
+                $afterValueType = if ($null -eq $afterValue) { \'null\' } else { $afterValue.GetType().FullName }
+                $afterNumberFormat = [string]$cell.NumberFormat
+                $afterPrefixCharacter = [string]$cell.PrefixCharacter
+                if ($afterValue -isnot [string] -or $afterValue -cne [string]$payload.probe) { throw (\'Text value/type was not preserved: \' + $sheetName + \'!\' + $cellAddress) }
+                if ($afterNumberFormat -cne $beforeNumberFormat) { throw (\'Original number format was not restored: \' + $sheetName + \'!\' + $cellAddress) }
+                if ($afterPrefixCharacter -cne $beforePrefixCharacter -or -not :IsNullOrEmpty($afterPrefixCharacter)) { throw (\'Prefix character changed or remained: \' + $sheetName + \'!\' + $cellAddress) }
+                if ([bool]$cell.HasFormula) { throw (\'A formula remained after text write: \' + $sheetName + \'!\' + $cellAddress) }
+                $audit += [ordered]@{
+                    source = $write.Source
+                    target = $sheetName + \'!\' + $cellAddress
+                    before = $beforeValue
+                    beforeType = $beforeValueType
+                    beforeFormat = $beforeNumberFormat
+                    beforePrefix = $beforePrefixCharacter
+                    after = $afterValue
+                    afterType = $afterValueType
+                    afterFormat = $afterNumberFormat
+                    afterPrefix = $afterPrefixCharacter
+                }
+            }
+            finally {
+                if ($null -ne $cell) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($cell) }
+                if ($null -ne $worksheet) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($worksheet) }
+            }
+        }
+        $audit | ConvertTo-Json -Compress
+    }
+    finally {
+        if ($null -ne $workbook) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($workbook) }
+        if ($null -ne $excel) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($excel) }
+    }''' ScriptOutput=> PowershellOutput
+    SET NumberSource1 TO Data1[0][1]
+    SET NumberSource2 TO Data1[1][1]
+    SET NumberSource3 TO Data1[2][1]
+    SET NumberSource4 TO Data2[0][1]
+    SET NumberSource5 TO Data2[1][1]
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''集計先'''
+    Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource1 Column: $'''G''' Row: 7
+    Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource2 Column: $'''G''' Row: 8
+    Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource3 Column: $'''G''' Row: 9
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''追記先'''
+    Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource4 Column: $'''E''' Row: 5
+    Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource5 Column: $'''E''' Row: 6
+    Excel.SaveExcel.SaveAs Instance: Work DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx'''
+    Excel.CloseExcel.Close Instance: Work
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Reopened
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''集計先'''
+    Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''F''' StartRow: 7 EndColumn: $'''G''' EndRow: 9 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback1
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''追記先'''
+    Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''D''' StartRow: 5 EndColumn: $'''F''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback2
+    Excel.CloseExcel.Close Instance: Reopened
+    SET SourceCell TO Data1[0][0]
+    SET SavedCell TO Readback1[0][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET 集計先_F7_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data1[0][1]
+    SET SavedCell TO Readback1[0][1]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET 集計先_G7_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data1[1][0]
+    SET SavedCell TO Readback1[1][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET 集計先_F8_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data1[1][1]
+    SET SavedCell TO Readback1[1][1]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET 集計先_G8_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data1[2][0]
+    SET SavedCell TO Readback1[2][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET 集計先_F9_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data1[2][1]
+    SET SavedCell TO Readback1[2][1]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET 集計先_G9_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data2[0][0]
+    SET SavedCell TO Readback2[0][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET 追記先_D5_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data2[0][1]
+    SET SavedCell TO Readback2[0][1]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET 追記先_E5_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data2[0][2]
+    SET SavedCell TO Readback2[0][2]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET 追記先_F5_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data2[1][0]
+    SET SavedCell TO Readback2[1][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET 追記先_D6_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data2[1][1]
+    SET SavedCell TO Readback2[1][1]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET 追記先_E6_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET SourceCell TO Data2[1][2]
+    SET SavedCell TO Readback2[1][2]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+    SET 追記先_F6_ValueTypeMatch TO SourceCellJson = SavedCellJson
+    SET TransferState TO $'''SAVED_REOPENED_12_JSON_COMPARISONS_READY'''
+END

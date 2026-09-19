@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "prototype_id": "EX03-R12-FIXED-HELPER-A4-VERIFIER",
+  "scope": "FIXED_EX03_ONLY_NOT_GENERALIZED",
+  "target_workbook": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\work.xlsx",
+  "json_root": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json",
+  "text_writes": [
+    {
+      "source_index": 1,
+      "source_label": "Data1[0][0]",
+      "sheet": "集計先",
+      "cell": "F7"
+    },
+    {
+      "source_index": 2,
+      "source_label": "Data1[1][0]",
+      "sheet": "集計先",
+      "cell": "F8"
+    },
+    {
+      "source_index": 3,
+      "source_label": "Data1[2][0]",
+      "sheet": "集計先",
+      "cell": "F9"
+    },
+    {
+      "source_index": 4,
+      "source_label": "Data2[0][0]",
+      "sheet": "追記先",
+      "cell": "D5"
+    },
+    {
+      "source_index": 5,
+      "source_label": "Data2[1][0]",
+      "sheet": "追記先",
+      "cell": "D6"
+    },
+    {
+      "source_index": 6,
+      "source_label": "Data2[0][2]",
+      "sheet": "追記先",
+      "cell": "F5"
+    },
+    {
+      "source_index": 7,
+      "source_label": "Data2[1][2]",
+      "sheet": "追記先",
+      "cell": "F6"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-COPILOT-A2-G1",
+  "fixed_before_send": true,
+  "response": {
+    "markdown_text_code_block_count": 1,
+    "generated_robin_unmodified": true,
+    "code_first_and_last_nonempty_lines_are_pad_instructions": true,
+    "no_explanation_heading_line_number_fence_or_pseudocode_inside": true,
+    "refusal_or_no_code": "STOP"
+  },
+  "syntax_and_structure": {
+    "balanced_if_else_end": true,
+    "actions_must_use_bundle_observed_command_argument_enum_shapes": true,
+    "existing_output_guard_before_read_json_work_and_helper": true,
+    "read_only_input_open_count": 2,
+    "typed_input_range_read_count": 2,
+    "source_json_write_count": 7,
+    "mode_json_write_count": 1,
+    "fixed_runscript_count": 1,
+    "exact_success_and_normal_double_gate": true,
+    "numeric_write_count": 5,
+    "save_as_count": 1,
+    "read_only_output_reopen_count": 1,
+    "typed_readback_rectangle_count": 2,
+    "json_value_type_comparison_count": 12,
+    "failure_close_no_save": true,
+    "pad_action_count": "DERIVE_FROM_ACCEPTED_GENERATED_ROBIN_AND_MATCH_DESIGNER"
+  },
+  "fixed_paths_and_parameters": {
+    "input1": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力い.xlsx",
+    "input1_sheet": "受取明細",
+    "input1_range": "D4:E6",
+    "input2": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力ろ.xlsx",
+    "input2_sheet": "追加項目",
+    "input2_range": "B2:D3",
+    "work": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\runtime\\work.xlsx",
+    "output": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\runtime\\照合結果.xlsx",
+    "target1_sheet": "集計先",
+    "target1_start": "F7",
+    "target2_sheet": "追記先",
+    "target2_start": "D5",
+    "json_root": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\runtime",
+    "source_json_names": [
+      "source-1.json",
+      "source-2.json",
+      "source-3.json",
+      "source-4.json",
+      "source-5.json",
+      "source-6.json",
+      "source-7.json"
+    ],
+    "mode_json_name": "mode.json"
+  },
+  "fixed_launcher": {
+    "helper_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\EX03-R12-Fixed-StringTransfer.ps1",
+    "helper_sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+    "invocation_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\invocation.json",
+    "invocation_sha256": "92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6",
+    "launcher_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\probes\\ex03-r12-fixed-helper\\trials\\EX03-R12-FIXED-HELPER-P1-T1\\launcher.ps1",
+    "launcher_sha256": "1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1",
+    "decoded_launcher_terminal_lf_restored_sha256": "1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1",
+    "expected_stdout": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}",
+    "no_launcher_changes": true
+  },
+  "safety": {
+    "helper_or_invocation_creation_or_modification": false,
+    "network": false,
+    "delete": false,
+    "overwrite_existing_output": false,
+    "invoke_expression": false,
+    "permission_security_excel_setting_change": false,
+    "manual_generated_robin_edit": false,
+    "unknown_difference_after_pad_recopy": "STOP"
+  },
+  "comparison_rule": {
+    "t2_complete_flow_verbatim_equality_required": false,
+    "observed_escape_and_line_ending_differences": "CLASSIFY_WITH_EXISTING_RULES",
+    "all_other_differences": "STOP"
+  },
+  "run_gate": {
+    "max_runs": 2,
+    "run1_requires_all_comparisons_and_preservation_before_run2": true,
+    "each_run_target_value_type_position_count": 12,
+    "each_run_outside_value_type_formula_count": 468,
+    "each_run_effective_format_cells": 480,
+    "each_run_effective_format_rows": 48,
+    "each_run_effective_format_columns": 30,
+    "f6": {
+      "value": "100%",
+      "dotnet_type": "System.String",
+      "number_format": "G/標準",
+      "prefix": "",
+      "has_formula": false
+    },
+    "original_input_and_template_sha_unchanged": true,
+    "collision_avoidance": "MOVE_RUN_OUTPUT_AND_HANDOFF_TO_RUN_EVIDENCE_THEN_VERIFY_RUNTIME_OUTPUT_JSON_ABSENT_AND_WORK_EQUALS_TEMPLATE"
+  }
+}

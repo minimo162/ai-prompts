@@ -1,0 +1,11 @@
+{
+  "old_probe_failures": 558,
+  "noop_failures": 570,
+  "same_dimension_before_after": true,
+  "noop_target_mismatches_expected_for_control": 12,
+  "native_noop": "MATCH_WITHIN_RECORDED_SCOPE",
+  "interpretation": "No-cell-write Excel load/save is sufficient to reproduce the old 558 differences. Not proof that arbitrary template formatting is preserved. Old FAIL unchanged. Row-height persistence remains a real serialized difference; native render attributes alone do not close acceptance.",
+  "style_failure_sequence_equal": false,
+  "same_558_style_failure_location_multiset": true,
+  "sequence_note": "Legacy comparison iterates sets of dimension keys; order alone is not a location difference. Original lists remain in each comparison JSON."
+}

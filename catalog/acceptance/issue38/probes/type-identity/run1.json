@@ -1,0 +1,22 @@
+{
+    "schema_version":  1,
+    "observed_at":  "2026-09-15T11:25:27.2687053Z",
+    "flow_name":  "RobinIssue38TypeIdentity20260915C",
+    "run_status":  "success",
+    "timeout_seconds":  30,
+    "ready_observed":  true,
+    "start_enabled_after":  true,
+    "variable_previews":  [
+                              "{\"probe\":1.0}",
+                              "{\"probe\":\"1\"}",
+                              "{\"probe\":1.0}",
+                              "{\"probe\":\"1\"}",
+                              "False",
+                              "False",
+                              "1",
+                              "1",
+                              "True",
+                              "True",
+                              "TYPE_PROBE_FINISHED"
+                          ]
+}

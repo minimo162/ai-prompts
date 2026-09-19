@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-r12-G1",
+  "checked_at_utc": "2026-09-17T19:37:22.785476+00:00",
+  "checks": {
+    "head_and_worktree_match_checkpoint": true,
+    "candidate_and_fixed_sha_match": true,
+    "manifest_member_sha_match": true,
+    "teaching_test_independence_pass": true,
+    "candidate_reports_zero_send_save_recopy_and_integrated_runs": true,
+    "work_matches_frozen_template": true,
+    "output_absent": true,
+    "local_r12_cycle_absent_before_preparation": true,
+    "copilot_history_query": "20260917-excel-r12",
+    "copilot_history_result": "NO_RESULTS",
+    "send_history_conclusion": "UNSENT_CONFIRMED"
+  },
+  "external_actions_before_checkpoint": {
+    "copilot_send": 0,
+    "pad_save_recopy": 0,
+    "pad_run": 0,
+    "github_write": 0
+  }
+}

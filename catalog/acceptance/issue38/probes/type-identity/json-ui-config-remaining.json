@@ -1,0 +1,20 @@
+[
+  {
+    "input": "%{ 'probe': TextOne }%",
+    "at": "2026-09-15T11:21:14.2589389Z",
+    "output": "CustomObjectAsJson2",
+    "source": "PAD action dialog"
+  },
+  {
+    "input": "%{ 'probe': NumberOneCopy }%",
+    "at": "2026-09-15T11:21:15.9018611Z",
+    "output": "CustomObjectAsJson3",
+    "source": "PAD action dialog"
+  },
+  {
+    "input": "%{ 'probe': TextOneCopy }%",
+    "at": "2026-09-15T11:21:17.2450627Z",
+    "output": "CustomObjectAsJson4",
+    "source": "PAD action dialog"
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1",
+  "run_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1-RUN1",
+  "runtime_output_path": "catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx",
+  "output_absent": true,
+  "json_root": "catalog/acceptance/issue38/runs/EX03-attempt1/a4-helper-json",
+  "json_root_absent": true,
+  "excel_process_count": 0,
+  "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+  "work_matches_template": true,
+  "input_sha256": {
+    "入力い.xlsx": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "入力ろ.xlsx": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+  },
+  "input_template_work_unchanged": true,
+  "helper_success_json": "NOT_OBSERVED_RUN_STOPPED_BEFORE_HELPER",
+  "target_comparison": "NOT_RUN_NO_OUTPUT",
+  "outside_cell_comparison": "NOT_RUN_NO_OUTPUT",
+  "effective_format_comparison": "NOT_RUN_NO_OUTPUT",
+  "f6_comparison": "NOT_RUN_NO_OUTPUT",
+  "status": "PASS_ABSENCE_AND_ORIGINAL_PRESERVATION_AFTER_STOP"
+}

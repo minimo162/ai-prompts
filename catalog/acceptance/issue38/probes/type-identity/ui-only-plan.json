@@ -1,0 +1,19 @@
+{
+  "id": "ISSUE38-TYPE-IDENTITY-20260915-UI",
+  "supersedesImplementationOnly": "plan.json",
+  "recordedBeforeAnyProbeRun": true,
+  "reason": "Append was refused before paste due to unsupported native clipboard formats. Configure remaining actions through PAD dialogs, keeping the saved five actions.",
+  "method": "Convert four same-key custom objects carrying runtime scalars to JSON; compute equality expressions in PAD Set variable actions.",
+  "inputsUnchanged": {"NumberOne": 1, "TextOne": "1", "NumberOneCopy": 1, "TextOneCopy": "1"},
+  "expected": {
+    "PositiveNumber": true,
+    "PositiveText": true,
+    "NegativeNumberText": false,
+    "NegativeTextNumber": false,
+    "ProbeCompleted": "TYPE_PROBE_FINISHED"
+  },
+  "originalExpectationMapping": {"true": "MATCH", "false": "DIFFERENT"},
+  "diagnosticOnly": "Observe ScalarEquality independently; it is not a strict-type oracle.",
+  "run2Gate": "Save Run1 terminal/result evidence and reconcile all four fixed cases before Run2.",
+  "scope": "Numeric 1 versus text 1 in PAD only; no new teaching version, no EX02 complete rerun, no GitHub writes."
+}

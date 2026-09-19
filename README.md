@@ -1,19 +1,21 @@
 # PAD Robin Copilot ナレッジ
 
-Power Automate for desktop（PAD）の**実測済みRobin**を根拠に、Microsoft 365 Copilotへ日本語で依頼し、PADへ貼り付けて確認できるフロー案を作るためのリポジトリです。
+Power Automate for desktop（PAD）の**実測済みRobin部品**からフローを構成し、保存・実行・成果物を照合するためのリポジトリです。Copilot向けの指示・ナレッジと、固定EX03用の決定論的Robinビルダーを収録しています。
 
-現在の主成果物は [`copilot/`](copilot/) 配下です。`App.ps1` / `index.html` / `業務エージェント.cmd` は過去に開発した汎用業務エージェントの資産で、現在の推奨入口ではありません。
+配布物は [`copilot/`](copilot/)、Issue #38の固定EX03向け推奨入口は[機械ビルダー利用案内](catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/README.md)です。`App.ps1` / `index.html` / `業務エージェント.cmd` は過去に開発した汎用業務エージェントの資産です。
 
 > **受入済み基準版の状態（2026-09-15）**  
 > 基準版 `20260913e` は、通常の Microsoft 365 Copilot Chat + PAD で指定受入を完了しています。Issue [#5](https://github.com/minimo162/ai-prompts/issues/5) / [#27](https://github.com/minimo162/ai-prompts/issues/27) は CLOSED / COMPLETED です。T10の transport-level raw-byte strict は `NOT_PROVEN` のままですが、現在の必須完了条件では非ブロッカーです。詳細は [最終受入監査](catalog/evidence/final-content-acceptance-20260915.md) を参照してください。
 
 ## まず使う
 
-**Issue #38のExcel拡張は `20260915-excel-r3` 候補です（実機未受入）。** [候補指示](copilot/versions/20260915-excel-r3/agent-instructions.txt)の全文と、[同版bundle](copilot/versions/20260915-excel-r3/knowledge/PAD-Robin-Knowledge-Bundle.txt)の実添付をセットで使います。シート切替原文を収録しましたが、DataTable矩形書込み原文を追加採取し、12セルの値・型・位置一致まで観測しました。終了未確認・書式照合FAILが残り、EX01〜EX05の実Copilot/PAD受入は未実施です。[差分・結果・再開条件](catalog/acceptance/issue38/report.md)を確認してください。受入済み20260913eおよび既存r2は保持しています。
+**Issue #38の固定EX03は、固定WIRING SPEC・helper・launcher・決定論的builderを使う経路を限定受入とします。** [利用案内・事前配置条件](catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/README.md)から始めてください。推奨アーキテクチャは「自然言語要求 → WIRING SPEC → validator → deterministic Robin builder → PAD」です。自然言語からのWIRING SPEC自動生成・受入は未検証で、現時点のWIRING SPECは検証者管理です。任意の型・shape・業務ファイルへの適用は受入範囲に含みません。
+
+根拠はLIVE2正常1Run、LIVE3正常1Runと既存出力ガードのPASSです。通常M365 CopilotによるRobin直接生成はA1〜A4で拒否・欠落・破損が続いており、この固定EX03では非推奨の実験経路です。正式r12はFAILのまま、経路間でPASSを転用していません。[現行判定と履歴への入口](catalog/acceptance/issue38/report.md)／[case matrix](catalog/acceptance/issue38/case-matrix.json)で、他ケース・旧558 raw比較FAIL・残件を確認できます。
 
 **コピー用コードブロック改善版は `20260915-copyable-r2` です。** 初版では実Copilot上でコピーボタンの表示までは確認できましたが、閉じMarkdownフェンスがコピー対象へ混入し、PADでエラーになる実機結果がありました。r2はその漏れを防ぐ指示へ修正した静的検査版で、実Copilot/PADでの再試験はこれからです。基準版の受入結果をr2へ継承しません。[改善内容・検証範囲](copilot/copyable-output.md)を確認してください。
 
-### 必要なもの
+### 既存Copilot経路の必要なもの
 
 起動・接続・貼付けで困った場合は、[PAD・Copilotの操作入口](docs/pad-copilot-operation-guide.md)を参照してください。過去の成功経路と、今回の環境で確認すべき条件をまとめています。
 
@@ -21,7 +23,7 @@ Power Automate for desktop（PAD）の**実測済みRobin**を根拠に、Micros
 - Power Automate for desktop（PAD）
 - 現在の検証条件に合わせる場合は、通常のM365 Copilot Chatと日本語表示のPAD
 
-Agent Builder / Copilot Studioではなく、**通常のM365 Copilot Chat** が現行受入の対象です。
+以下は基準版・コピー改善版のCopilot経路です。対象は**通常のM365 Copilot Chat**であり、固定EX03の機械ビルダー経路の手順とは別です。
 
 ### 5分で始める
 
@@ -97,6 +99,7 @@ C:\Work\output.xlsx へ保存するPADフローを作ってください。
 | [`docs/`](docs/) | 採取方法、検証、復旧、過去方式などの詳細資料 |
 | [`tests/`](tests/) | 検査・回帰テスト |
 | [`tools/`](tools/) | bundle生成、比較、保存、リリース補助など |
+| [固定EX03機械ビルダー](catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/README.md) | 検証者管理WIRINGからの限定受入経路。実装と証跡の既存配置を保持 |
 | [`pad-robin-prompts.md`](pad-robin-prompts.md) | 編集・採取用の過去原稿。現行指示欄へ二重投入しない |
 | `App.ps1` / `index.html` / `業務エージェント.cmd` | 過去資産の汎用業務エージェント |
 
@@ -171,5 +174,6 @@ index.html
 - [`catalog/evidence/final-content-acceptance-20260915.json`](catalog/evidence/final-content-acceptance-20260915.json) — 機械可読の判定
 - [`catalog/evidence/final-content-verification-20260915.json`](catalog/evidence/final-content-verification-20260915.json) — 最終検証記録
 - [`catalog/evidence/`](catalog/evidence/) — 過去の成功・失敗・NOT_PROVENを含む原証跡
+- [Issue #38受入報告](catalog/acceptance/issue38/report.md) — 固定EX03の限定受入、Copilot経路の停止、EX01〜EX05の判断と詳細履歴
 
-README整理前の長い時系列説明はGit履歴にも残ります。現在の判定は、古い `OPEN / partial` 表記ではなく上記の最終受入を優先してください。
+README整理前の長い時系列説明はGit履歴にも残ります。#5/#27の判定は上記の最終受入を参照してください。Issue #38は別の追加範囲であり、全体は未完了です。

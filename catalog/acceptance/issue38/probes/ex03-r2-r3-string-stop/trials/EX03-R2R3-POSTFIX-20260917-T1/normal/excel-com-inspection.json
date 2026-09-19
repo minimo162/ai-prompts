@@ -1,0 +1,91 @@
+{
+  "result": {
+    "read_only": true,
+    "cells": [
+      {
+        "address": "A2",
+        "value": "O'Brien",
+        "value_type": "System.String",
+        "number_format": "G/標準",
+        "number_format_local": "G/標準",
+        "prefix": "",
+        "has_formula": false
+      },
+      {
+        "address": "B2",
+        "value": "He said \"Go\"\nSecond line 'quoted'",
+        "value_type": "System.String",
+        "number_format": "0.00",
+        "number_format_local": "0.00",
+        "prefix": "",
+        "has_formula": false
+      },
+      {
+        "address": "C2",
+        "value": "100%",
+        "value_type": "System.String",
+        "number_format": "G/標準",
+        "number_format_local": "G/標準",
+        "prefix": "",
+        "has_formula": false
+      },
+      {
+        "address": "D2",
+        "value": 42.5,
+        "value_type": "System.Double",
+        "number_format": "0.00",
+        "number_format_local": "0.00",
+        "prefix": "",
+        "has_formula": false
+      }
+    ],
+    "result_xlsx_sha256_before": "a712dffdc1f9d41f0b5e034c1e8366ef4001631f3eb139d5dc8dcbe060464af3",
+    "result_xlsx_sha256_after": "a712dffdc1f9d41f0b5e034c1e8366ef4001631f3eb139d5dc8dcbe060464af3",
+    "result_xlsx_unchanged": true
+  },
+  "template": {
+    "read_only": true,
+    "cells": [
+      {
+        "address": "A2",
+        "value": "BEFORE_A",
+        "value_type": "System.String",
+        "number_format": "G/標準",
+        "number_format_local": "G/標準",
+        "prefix": "",
+        "has_formula": false
+      },
+      {
+        "address": "B2",
+        "value": "BEFORE_B",
+        "value_type": "System.String",
+        "number_format": "0.00",
+        "number_format_local": "0.00",
+        "prefix": "",
+        "has_formula": false
+      },
+      {
+        "address": "C2",
+        "value": "BEFORE_C",
+        "value_type": "System.String",
+        "number_format": "G/標準",
+        "number_format_local": "G/標準",
+        "prefix": "",
+        "has_formula": false
+      },
+      {
+        "address": "D2",
+        "value": 7,
+        "value_type": "System.Double",
+        "number_format": "0.00",
+        "number_format_local": "0.00",
+        "prefix": "",
+        "has_formula": false
+      }
+    ],
+    "result_xlsx_sha256_before": "108d25e5cfb86cd34422e738f7590d6050933c4f5429c672df65907fb2f31a36",
+    "result_xlsx_sha256_after": "108d25e5cfb86cd34422e738f7590d6050933c4f5429c672df65907fb2f31a36",
+    "result_xlsx_unchanged": true
+  },
+  "all_number_format_prefix_formula_equal": true
+}

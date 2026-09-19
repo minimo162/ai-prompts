@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "reconciled_at": "2026-09-15T13:01:54.3273699Z",
+  "flow_name": "RobinIssue38DataTableType20260915A",
+  "run": 2,
+  "status": "PASS_EXCEL_DERIVED_TYPE_IDENTITY_RUN2",
+  "scope": "Excel-derived values from DataTable cells only; not full EX02 acceptance",
+  "cells": [
+    {
+      "address": "A2",
+      "datatable_expression": "ExcelData[0][0]",
+      "actual_json": "{\"probe\":1.0}",
+      "reference_json": "{\"probe\":1.0}",
+      "positive_match": true,
+      "cross_type_negative_match": false,
+      "pass": true
+    },
+    {
+      "address": "B2",
+      "datatable_expression": "ExcelData[0][1]",
+      "actual_json": "{\"probe\":\"1\"}",
+      "reference_json": "{\"probe\":\"1\"}",
+      "positive_match": true,
+      "cross_type_negative_match": false,
+      "pass": true
+    }
+  ],
+  "checks": {
+    "PositiveExcelNumber": { "expected": "True", "actual": "True", "pass": true },
+    "PositiveExcelText": { "expected": "True", "actual": "True", "pass": true },
+    "NegativeExcelNumberText": { "expected": "False", "actual": "False", "pass": true },
+    "NegativeExcelTextNumber": { "expected": "False", "actual": "False", "pass": true },
+    "DataTableProbeCompleted": { "expected": "DATATABLE_TYPE_PROBE_FINISHED", "actual": "DATATABLE_TYPE_PROBE_FINISHED", "pass": true }
+  },
+  "type_loss_observed": false,
+  "settings_change_probe_required": false,
+  "run1_run2_values_equal": true
+}

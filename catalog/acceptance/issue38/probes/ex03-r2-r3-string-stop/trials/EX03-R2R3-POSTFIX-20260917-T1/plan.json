@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R2R3-POSTFIX-20260917-T1",
+  "kind": "ISSUE38_EX03_R2_R3_POSTFIX_LIVE_TRIAL",
+  "baseline_commit": "1f929d6c4e1ba5bc4d963374e3e322c7a52649c1",
+  "scope": "Dedicated postfix probe only; path-bound execution copies, no candidate version.",
+  "authorization": {
+    "normal_runs": 1,
+    "negative_runs_after_normal_full_pass": 1,
+    "reruns": 0
+  },
+  "fixed_values": {
+    "Source!A2": "O'Brien",
+    "Source!B2": "He said \"Go\"\nSecond line 'quoted'",
+    "Source!C2": "100%",
+    "Source!D2": 42.5
+  },
+  "target_before": {
+    "Target!A2": [
+      "BEFORE_A",
+      "System.String",
+      "General",
+      "",
+      false
+    ],
+    "Target!B2": [
+      "BEFORE_B",
+      "System.String",
+      "0.00",
+      "",
+      false
+    ],
+    "Target!C2": [
+      "BEFORE_C",
+      "System.String",
+      "General",
+      "",
+      false
+    ],
+    "Target!D2": [
+      7,
+      "System.Double",
+      "0.00",
+      "",
+      false
+    ]
+  },
+  "target_after_normal": {
+    "Target!A2": [
+      "O'Brien",
+      "System.String",
+      "General",
+      "",
+      false
+    ],
+    "Target!B2": [
+      "He said \"Go\"\nSecond line 'quoted'",
+      "System.String",
+      "0.00",
+      "",
+      false
+    ],
+    "Target!C2": [
+      "100%",
+      "System.String",
+      "General",
+      "",
+      false
+    ],
+    "Target!D2": [
+      42.5,
+      "System.Double",
+      "0.00",
+      "",
+      false
+    ]
+  },
+  "normal_success_output": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":3,\"formats_restored\":true}",
+  "negative_expected_output": "{\"status\":\"EXPECTED_ERROR\",\"mode\":\"INJECT_AFTER_FORMAT_CHANGE\",\"format_restored\":true,\"value_unchanged\":true}",
+  "negative_injection": "Target!A2 immediately after NumberFormat='@' and before Value2 assignment",
+  "stop_conditions": [
+    "normal PAD terminal or any comparison is not clearly PASS",
+    "saved re-copy differs",
+    "safety issue",
+    "result is unclear"
+  ],
+  "out_of_scope": [
+    "Copilot submission",
+    "EX03 integrated rerun",
+    "candidate version",
+    "full regression",
+    "GitHub write",
+    "type generalization beyond the fixed values"
+  ]
+}

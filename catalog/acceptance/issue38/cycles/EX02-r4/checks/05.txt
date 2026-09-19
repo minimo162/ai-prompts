@@ -1,0 +1,16 @@
+test_example_does_not_write_outside_missing_output_branch (__main__.Ex02Tests.test_example_does_not_write_outside_missing_output_branch) ... ok
+test_legacy_558_failures_are_preserved (__main__.Ex02Tests.test_legacy_558_failures_are_preserved) ... ok
+test_number_one_and_text_one_remain_different (__main__.Ex02Tests.test_number_one_and_text_one_remain_different) ... ok
+test_outside_formula_detected (__main__.Ex02Tests.test_outside_formula_detected) ... ok
+test_positive_independent_output_is_not_runtime_pass (__main__.Ex02Tests.test_positive_independent_output_is_not_runtime_pass) ... ok
+test_rebuild_is_byte_identical_and_existing_version_refused (__main__.Ex02Tests.test_rebuild_is_byte_identical_and_existing_version_refused) ... aa1fb5aff28c1cbb5ffc51d78459a51af846823a2ab168d6f32ed8bbef2096dd
+ok
+test_style_and_dimension_negatives_remain_fail (__main__.Ex02Tests.test_style_and_dimension_negatives_remain_fail) ... ok
+test_wrong_position_detected (__main__.Ex02Tests.test_wrong_position_detected) ... ok
+test_wrong_value_detected (__main__.Ex02Tests.test_wrong_value_detected) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 1.398s
+
+OK
+{"version": "20260915-excel-r4", "instruction_utf16": 5867, "instruction_sha256": "eb23d43327d4c5f81987e53d3f3d3bdf59ba9699d8dcf8bf4a5cc836276add72", "bundle_sha256": "aa1fb5aff28c1cbb5ffc51d78459a51af846823a2ab168d6f32ed8bbef2096dd"}

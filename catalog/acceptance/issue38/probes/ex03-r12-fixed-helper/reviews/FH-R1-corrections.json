@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "review_id": "FH-R1",
+  "source_commit": "243b23b61a45270546b71c4228904d4e52f04d5c",
+  "record_type": "CORRECTION_RECORD_PRESERVES_ORIGINAL_EVIDENCE",
+  "corrections": [
+    {
+      "finding_id": "FH-N1",
+      "subject": "launcher expectedSuccess JSON quote canonicalization count",
+      "previous_recorded_count": 8,
+      "correct_observed_count": 12,
+      "measurement": {
+        "candidate_path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/candidate.robin",
+        "candidate_sha256": "0a84679b0b9875780aa70c975602a7404af0dd82fcf9b13978fe9c1e036f5b94",
+        "candidate_line": 48,
+        "candidate_double_quote_count": 12,
+        "recopy_path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/pad-recopy-mismatch.robin",
+        "recopy_sha256": "da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa",
+        "recopy_line": 48,
+        "recopy_double_quote_count": 12,
+        "recopy_backslash_escaped_double_quote_count": 12
+      },
+      "explanation": "The exact JSON contains four quoted keys and two quoted string values, for 12 double quote characters. The numeric and Boolean values are unquoted.",
+      "acceptance_effect": "This corrects the descriptive count only and does not change any past decision."
+    }
+  ],
+  "preservation": {
+    "old_evidence_modified": false,
+    "unchanged_evidence_paths": [
+      "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/pad-recopy-diff-analysis.json",
+      "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/RESULT.md"
+    ],
+    "past_decisions_changed": false
+  },
+  "scope": {
+    "live_copilot": "NOT_RUN",
+    "live_pad": "NOT_RUN",
+    "live_excel": "NOT_RUN",
+    "candidate_created": false,
+    "full_regression": "NOT_RUN"
+  }
+}

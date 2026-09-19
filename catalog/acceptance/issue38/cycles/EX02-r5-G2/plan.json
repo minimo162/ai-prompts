@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX02-R5-G2",
+  "created_at": "2026-09-16T04:23:01.8580090+09:00",
+  "authorization": {
+    "source": "user-provided resumed goal on 2026-09-16",
+    "scope": "one additional normal-M365 Copilot generation in a separate cycle under the unchanged fixed request and acceptance conditions",
+    "does_not_modify_prior_cycle_limit": true
+  },
+  "predecessor": {
+    "cycle_id": "EX02-R5-G1",
+    "path": "catalog/acceptance/issue38/cycles/EX02-r5",
+    "max_generation_requests": 1,
+    "generation_requests_used": 1,
+    "acceptance": "NOT_ACCEPTED_GENERATED_ROBIN_NOT_IMPORTABLE_UNMODIFIED",
+    "pad_actions_imported": 0,
+    "result_xlsx": "ABSENT",
+    "preservation": "immutable evidence input for this cycle"
+  },
+  "candidate": {
+    "version": "20260915-excel-r5",
+    "instruction_path": "copilot/versions/20260915-excel-r5/agent-instructions.txt",
+    "instruction_sha256": "fe57e45c170fcdfe8f94d8e23f9cb58f00d5b54ae4abe35a43189767032b5aaa",
+    "bundle_path": "copilot/versions/20260915-excel-r5/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "bundle_sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3",
+    "manifest_path": "copilot/versions/20260915-excel-r5/manifest.json",
+    "manifest_sha256": "1ffacd9f478346fb38b146f135e19fd743d2b9a0ce1ab85d8b6b452899dcfd89"
+  },
+  "fixed_inputs": {
+    "request": {
+      "path": "catalog/acceptance/issue38/requests/EX02.txt",
+      "sha256": "39ef21927f5ce454bc9a407c54bec21125816bcb9a2d902074521111e1fada39"
+    },
+    "spec": {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380"
+    },
+    "grader_only_expected": {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+      "send_to_copilot": false
+    },
+    "input_a": {
+      "path": "catalog/acceptance/issue38/fixtures/EX02/input-a.xlsx",
+      "sha256": "f655b62c82750fc07f4e54bcfd098e8e7c0b771c9422c4321cc413a4d6d07fa9"
+    },
+    "input_b": {
+      "path": "catalog/acceptance/issue38/fixtures/EX02/input-b.xlsx",
+      "sha256": "69627e161747fedad0f7c3b410c1d625b29a553786be0c145e83aaf43d1b105a"
+    },
+    "template": {
+      "path": "catalog/acceptance/issue38/fixtures/EX02/template.xlsx",
+      "sha256": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457"
+    },
+    "work": {
+      "path": "catalog/acceptance/issue38/runs/EX02-attempt1/work.xlsx",
+      "sha256": "0e3cf3b1c9e6e73e835c324b71602b50f708df689944a3760e4b411959f3b457",
+      "must_match_template_before_each_positive_run": true
+    },
+    "result": {
+      "path": "catalog/acceptance/issue38/runs/EX02-attempt1/result.xlsx",
+      "must_be_absent_before_each_positive_run": true
+    }
+  },
+  "submission": {
+    "body_path": "catalog/acceptance/issue38/cycles/EX02-r5/submitted-body.txt",
+    "body_sha256": "03caf7342e8b5cb33264c4c4ad1fc01f8ae8e5553e151d8c2800ffeed0d153d5",
+    "body_contract": "unchanged full same-version instructions followed by unchanged EX02 request",
+    "attachment_path": "copilot/versions/20260915-excel-r5/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+    "attachment_sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3",
+    "normal_m365_new_chat": true,
+    "model": "Think Deeper",
+    "grader_only_expected_excluded": true,
+    "completed_robin_excluded": true
+  },
+  "limits": {
+    "max_generation_requests": 1,
+    "max_pad_runs": 2,
+    "no_retry_or_regeneration_after_failure": true
+  },
+  "pad": {
+    "new_dedicated_flow": true,
+    "power_fx": "OFF",
+    "unmodified_code_copy_only": true,
+    "stop_without_run_if_zero_actions_or_import_failure": true,
+    "preserve_run1_output_and_comparison_before_run2": true
+  },
+  "acceptance": {
+    "required": "unmodified PAD import and save, re-copy, Run1 preservation and comparison, Run2, twelve source/readback value-type-position checks, grader-only fixed expectations, originals/outside cells/formulas/representative styles, and separate one-cell same-display different-type negative detection",
+    "legacy_558": "UNRESOLVED_AND_MUST_REMAIN_VISIBLE",
+    "probe_or_external_success_inheritance": false
+  },
+  "github_write": false,
+  "status": "READY_AFTER_FIXED_INPUT_PREFLIGHT"
+}

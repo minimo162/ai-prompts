@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-COPILOT-A3-G1",
+  "recorded_at": "2026-09-18T14:49:18.529989+09:00",
+  "local_previous_cycle_or_send_record_found_before_prepare": false,
+  "ui_history_checked": false,
+  "ui_history_result": "NOT_CONFIRMED_COMPUTER_USE_STOPPED_BEFORE_URL_VERIFICATION",
+  "send_allowed_after_history_gate": false
+}

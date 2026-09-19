@@ -4,7 +4,8 @@ param(
     [Parameter(Mandatory = $true)][string]$FlowName,
     [Parameter(Mandatory = $true)][string]$InputPath,
     [Parameter(Mandatory = $true)][string]$EvidencePath,
-    [Parameter(Mandatory = $true)][int]$ExpectedActionCount
+    [Parameter(Mandatory = $true)][int]$ExpectedActionCount,
+    [switch]$AllowClipboardOverwriteWithoutRestore
 )
 
 $ErrorActionPreference = 'Stop'
@@ -25,10 +26,10 @@ if ($beforeCount -ne 0) { throw 'Roundtrip flow is not empty' }
 $input = [IO.Path]::GetFullPath($InputPath)
 $text = [IO.File]::ReadAllText($input, (New-Object Text.UTF8Encoding($false)))
 if ([string]::IsNullOrWhiteSpace($text)) { throw 'Input Robin is empty' }
-if (-not ('PadClipboard.Lease' -as [type])) {
+if (-not $AllowClipboardOverwriteWithoutRestore -and -not ('PadClipboard.Lease' -as [type])) {
     Add-Type -Path (Join-Path $PSScriptRoot 'PadClipboardLease.cs') -ReferencedAssemblies System.Windows.Forms
 }
-$nativeClipboard = New-Object PadClipboard.NativeClipboard
+$nativeClipboard = if ($AllowClipboardOverwriteWithoutRestore) { $null } else { New-Object PadClipboard.NativeClipboard }
 $clipboardLease = $null
 $clipboardRestoration = 'not_changed'
 $settled = $false
@@ -38,7 +39,14 @@ try {
     [void][AgentPadNative]::SetForegroundWindow($window.Current.NativeWindowHandle)
     $list.SetFocus()
     if ([AgentPadNative]::GetForegroundWindow() -ne $window.Current.NativeWindowHandle) { throw 'Foreground changed' }
-    $clipboardLease = [PadClipboard.Lease]::Begin($nativeClipboard, $text)
+    if ($AllowClipboardOverwriteWithoutRestore) {
+        [Windows.Forms.Clipboard]::SetText($text)
+        if ((Get-AgentPadClipboardText) -cne $text) { throw 'Clipboard write verification failed; paste not requested' }
+        $clipboardRestoration = 'user_authorized_not_preserved'
+    }
+    else {
+        $clipboardLease = [PadClipboard.Lease]::Begin($nativeClipboard, $text)
+    }
     [Windows.Forms.SendKeys]::SendWait('^v')
     # Excel actions can take longer than the list virtualization update.  Keep
     # waiting for the Designer's status summary (rather than treating the
@@ -65,7 +73,10 @@ finally {
     # Also run on observation failure; never retry Paste or Run.
     try {
         if ($null -ne $clipboardLease) { $clipboardRestoration = $clipboardLease.Restore() }
-    } finally { $nativeClipboard.Dispose() }
+    }
+    finally {
+        if ($null -ne $nativeClipboard) { $nativeClipboard.Dispose() }
+    }
 }
 $evidence = [ordered]@{
     schema_version = 1
@@ -84,6 +95,7 @@ $evidence = [ordered]@{
     saved_confirmed = $false
     execution_requested = $false
     clipboard_restoration = $clipboardRestoration
+    clipboard_restore_skipped_by_explicit_user_direction = [bool]$AllowClipboardOverwriteWithoutRestore
     clipboard_all_format_raw_equality = 'NOT_ASSESSED'
 }
 $out = [IO.Path]::GetFullPath($EvidencePath)

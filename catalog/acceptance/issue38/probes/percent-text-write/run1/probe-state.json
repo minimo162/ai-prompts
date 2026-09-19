@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-16T08:18:17.8623191Z",
+  "flow_name": "RobinIssue38PercentTextWrite20260916A",
+  "process_id": 3168,
+  "filter_method": "VariablesPanelSearchVariablesSearchBox ValuePattern with exact per-variable name",
+  "execution_requested": false,
+  "status": "OBSERVED_EXACT_FILTERED_VARIABLES",
+  "variables": {
+    "ProbeState": {
+      "preview": "FORMAT_SANDWICH_FINISHED",
+      "help_text": "FORMAT_SANDWICH_FINISHED",
+      "preview_help_exact": true
+    }
+  },
+  "error": null
+}

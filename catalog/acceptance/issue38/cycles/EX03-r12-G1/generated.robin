@@ -1,0 +1,272 @@
+SET TransferState TO $'''NOT_STARTED'''
+SET ScriptGatePassed TO False
+SET NumericWriteEntered TO False
+SET SaveAsEntered TO False
+IF (File.IfFile.Exists File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx''') THEN
+    SET TransferState TO $'''OUTPUT_EXISTS_NO_WRITE'''
+ELSE
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力い.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Input1
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Input1 Name: $'''受取明細'''
+    Excel.ReadFromExcel.ReadCells Instance: Input1 StartColumn: $'''D''' StartRow: 4 EndColumn: $'''E''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Data1
+    Excel.CloseExcel.Close Instance: Input1
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\fixtures\\EX03\\入力ろ.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Input2
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Input2 Name: $'''追加項目'''
+    Excel.ReadFromExcel.ReadCells Instance: Input2 StartColumn: $'''B''' StartRow: 2 EndColumn: $'''D''' EndRow: 3 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Data2
+    Excel.CloseExcel.Close Instance: Input2
+    SET TextSource1 TO Data1[0][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource1 } Json=> TextSource1Json
+    SET TextSource2 TO Data1[1][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource2 } Json=> TextSource2Json
+    SET TextSource3 TO Data1[2][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource3 } Json=> TextSource3Json
+    SET TextSource4 TO Data2[0][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource4 } Json=> TextSource4Json
+    SET TextSource5 TO Data2[1][0]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource5 } Json=> TextSource5Json
+    SET TextSource6 TO Data2[0][2]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource6 } Json=> TextSource6Json
+    SET TextSource7 TO Data2[1][2]
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': TextSource7 } Json=> TextSource7Json
+    SET RunMode TO $'''NORMAL'''
+    Variables.ConvertCustomObjectToJson CustomObject: { 'probe': RunMode } Json=> RunModeJson
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\source-1.json''' TextToWrite: TextSource1Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\source-2.json''' TextToWrite: TextSource2Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\source-3.json''' TextToWrite: TextSource3Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\source-4.json''' TextToWrite: TextSource4Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\source-5.json''' TextToWrite: TextSource5Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\source-6.json''' TextToWrite: TextSource6Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\source-7.json''' TextToWrite: TextSource7Json AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    File.WriteText File: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\mode.json''' TextToWrite: RunModeJson AppendNewLine: False IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\work.xlsx''' Visible: True ReadOnly: False UseMachineLocale: False Instance=> Work
+    Scripting.RunPowershellScript.RunScript Script: $'''$ErrorActionPreference = \'Stop\'
+Set-StrictMode -Version 2
+$targetPath = \'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\work.xlsx\'
+$jsonRoot = \'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\'
+$excel = $null
+$workbook = $null
+$result = $null
+$mode = \'UNREAD\'
+try {
+    $payloads = @(
+        (Get-Content -LiteralPath (Join-Path $jsonRoot \'source-1.json\') -Raw -Encoding UTF8 | ConvertFrom-Json),
+        (Get-Content -LiteralPath (Join-Path $jsonRoot \'source-2.json\') -Raw -Encoding UTF8 | ConvertFrom-Json),
+        (Get-Content -LiteralPath (Join-Path $jsonRoot \'source-3.json\') -Raw -Encoding UTF8 | ConvertFrom-Json),
+        (Get-Content -LiteralPath (Join-Path $jsonRoot \'source-4.json\') -Raw -Encoding UTF8 | ConvertFrom-Json),
+        (Get-Content -LiteralPath (Join-Path $jsonRoot \'source-5.json\') -Raw -Encoding UTF8 | ConvertFrom-Json),
+        (Get-Content -LiteralPath (Join-Path $jsonRoot \'source-6.json\') -Raw -Encoding UTF8 | ConvertFrom-Json),
+        (Get-Content -LiteralPath (Join-Path $jsonRoot \'source-7.json\') -Raw -Encoding UTF8 | ConvertFrom-Json)
+    )
+    $modePayload = Get-Content -LiteralPath (Join-Path $jsonRoot \'mode.json\') -Raw -Encoding UTF8 | ConvertFrom-Json
+    $mode = [string]$modePayload.probe
+    if ($mode -cne \'NORMAL\' -and $mode -cne \'INJECT_AFTER_FORMAT_CHANGE\') {
+        throw \'MODE_NOT_ALLOWED\'
+    }
+    for ($index = 0; $index -lt 7; $index++) {
+        if ($payloads[$index].probe -isnot [string]) { throw (\'TEXT_PAYLOAD_TYPE_\' + ($index + 1)) }
+    }
+    $targetPath = [IO.Path]::GetFullPath($targetPath)
+    $excel = [Runtime.InteropServices.Marshal]::GetActiveObject(\'Excel.Application\')
+    $matches = @()
+    for ($index = 1; $index -le $excel.Workbooks.Count; $index++) {
+        $candidate = $excel.Workbooks.Item($index)
+        if ([IO.Path]::GetFullPath([string]$candidate.FullName) -ieq $targetPath) {
+            $matches += $candidate
+        }
+        else {
+            [void][Runtime.InteropServices.Marshal]::ReleaseComObject($candidate)
+        }
+    }
+    if ($matches.Count -ne 1) {
+        foreach ($match in $matches) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($match) }
+        throw (\'TARGET_WORKBOOK_COUNT_\' + $matches.Count)
+    }
+    $workbook = $matches[0]
+    $writes = @(
+        @(\'Data1[0][0]\', \'集計先\', \'F7\', [string]$payloads[0].probe),
+        @(\'Data1[1][0]\', \'集計先\', \'F8\', [string]$payloads[1].probe),
+        @(\'Data1[2][0]\', \'集計先\', \'F9\', [string]$payloads[2].probe),
+        @(\'Data2[0][0]\', \'追記先\', \'D5\', [string]$payloads[3].probe),
+        @(\'Data2[1][0]\', \'追記先\', \'D6\', [string]$payloads[4].probe),
+        @(\'Data2[0][2]\', \'追記先\', \'F5\', [string]$payloads[5].probe),
+        @(\'Data2[1][2]\', \'追記先\', \'F6\', [string]$payloads[6].probe)
+    )
+    $writesCompleted = 0
+    foreach ($write in $writes) {
+        $worksheet = $null
+        $cell = $null
+        try {
+            $sheetName = [string]$write[1]
+            $cellAddress = [string]$write[2]
+            $worksheet = $workbook.Worksheets.Item($sheetName)
+            $cell = $worksheet.Range($cellAddress)
+            if ([bool]$cell.HasFormula) { throw (\'FORMULA_TARGET_\' + $sheetName + \'!\' + $cellAddress) }
+            $beforeValue = $cell.Value2
+            $beforeType = if ($null -eq $beforeValue) { \'null\' } else { $beforeValue.GetType().FullName }
+            $beforeFormat = [string]$cell.NumberFormat
+            $beforePrefix = [string]$cell.PrefixCharacter
+            $beforeFormula = [bool]$cell.HasFormula
+            $writeError = $null
+            try {
+                $cell.NumberFormat = \'@\'
+                if ($mode -ceq \'INJECT_AFTER_FORMAT_CHANGE\' -and $writesCompleted -eq 0) {
+                    throw \'ISSUE38_INTENTIONAL_AFTER_FORMAT_CHANGE\'
+                }
+                $cell.Value2 = [string]$write[3]
+            }
+            catch {
+                $writeError = $_
+            }
+            finally {
+                $cell.NumberFormat = $beforeFormat
+            }
+            if ($null -ne $writeError) {
+                if ($mode -ceq \'INJECT_AFTER_FORMAT_CHANGE\' -and $writeError.Exception.Message -ceq \'ISSUE38_INTENTIONAL_AFTER_FORMAT_CHANGE\') {
+                    $afterValue = $cell.Value2
+                    $afterType = if ($null -eq $afterValue) { \'null\' } else { $afterValue.GetType().FullName }
+                    if ([string]$cell.NumberFormat -cne $beforeFormat) { throw \'NEGATIVE_FORMAT_NOT_RESTORED\' }
+                    if ($afterType -cne $beforeType -or [string]$afterValue -cne [string]$beforeValue) { throw \'NEGATIVE_VALUE_CHANGED\' }
+                    if ([string]$cell.PrefixCharacter -cne $beforePrefix) { throw \'NEGATIVE_PREFIX_CHANGED\' }
+                    if ([bool]$cell.HasFormula -ne $beforeFormula) { throw \'NEGATIVE_FORMULA_CHANGED\' }
+                    $result = [ordered]@{
+                        status = \'EXPECTED_ERROR\'
+                        mode = \'INJECT_AFTER_FORMAT_CHANGE\'
+                        format_restored = $true
+                        value_unchanged = $true
+                    }
+                    break
+                }
+                throw $writeError
+            }
+            if ($cell.Value2 -isnot [string] -or [string]$cell.Value2 -cne [string]$write[3]) {
+                throw (\'TEXT_VALUE_TYPE_\' + $sheetName + \'!\' + $cellAddress)
+            }
+            if ([string]$cell.NumberFormat -cne $beforeFormat) { throw (\'FORMAT_NOT_RESTORED_\' + $sheetName + \'!\' + $cellAddress) }
+            if ([string]$cell.PrefixCharacter -cne \'\') { throw (\'PREFIX_CHANGED_\' + $sheetName + \'!\' + $cellAddress) }
+            if ([bool]$cell.HasFormula) { throw (\'FORMULA_AFTER_WRITE_\' + $sheetName + \'!\' + $cellAddress) }
+            $writesCompleted++
+        }
+        finally {
+            if ($null -ne $cell) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($cell) }
+            if ($null -ne $worksheet) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($worksheet) }
+        }
+    }
+    if ($mode -ceq \'NORMAL\') {
+        if ($writesCompleted -ne 7) { throw (\'NORMAL_WRITE_COUNT_\' + $writesCompleted) }
+        $result = [ordered]@{
+            status = \'OK\'
+            mode = \'NORMAL\'
+            text_writes = 7
+            formats_restored = $true
+        }
+    }
+    elseif ($null -eq $result -or $result.status -cne \'EXPECTED_ERROR\') {
+        throw \'EXPECTED_ERROR_NOT_OBSERVED\'
+    }
+}
+catch {
+    $result = [ordered]@{
+        status = \'ERROR\'
+        mode = $mode
+        error_code = [string]$_.Exception.Message
+    }
+}
+finally {
+    if ($null -ne $workbook) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($workbook) }
+    if ($null -ne $excel) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($excel) }
+}
+[Console]::Out.Write([string]($result | press)''' ScriptOutput=> PowershellOutput
+    IF PowershellOutput = $'''{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}''' THEN
+        IF RunMode = $'''NORMAL''' THEN
+            SET ScriptGatePassed TO True
+            SET NumberSource1 TO Data1[0][1]
+            SET NumberSource2 TO Data1[1][1]
+            SET NumberSource3 TO Data1[2][1]
+            SET NumberSource4 TO Data2[0][1]
+            SET NumberSource5 TO Data2[1][1]
+            Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''集計先'''
+            SET NumericWriteEntered TO True
+            Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource1 Column: $'''G''' Row: 7
+            Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource2 Column: $'''G''' Row: 8
+            Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource3 Column: $'''G''' Row: 9
+            Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Work Name: $'''追記先'''
+            Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource4 Column: $'''E''' Row: 5
+            Excel.WriteToExcel.WriteCell Instance: Work Value: NumberSource5 Column: $'''E''' Row: 6
+            SET SaveAsEntered TO True
+            Excel.SaveExcel.SaveAs Instance: Work DocumentFormat: Excel.ExcelFormat.OpenXmlWorkbook DocumentPath: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx'''
+            Excel.CloseExcel.Close Instance: Work
+            Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: $'''C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\照合結果.xlsx''' Visible: True ReadOnly: True UseMachineLocale: False Instance=> Reopened
+            Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''集計先'''
+            Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''F''' StartRow: 7 EndColumn: $'''G''' EndRow: 9 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback1
+            Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Reopened Name: $'''追記先'''
+            Excel.ReadFromExcel.ReadCells Instance: Reopened StartColumn: $'''D''' StartRow: 5 EndColumn: $'''F''' EndRow: 6 GetCellContentsMode: Excel.GetCellContentsMode.TypedValues FirstLineIsHeader: False RangeValue=> Readback2
+            Excel.CloseExcel.Close Instance: Reopened
+            SET SourceCell TO Data1[0][0]
+            SET SavedCell TO Readback1[0][0]
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+            SET 集計先_F7_ValueTypeMatch TO SourceCellJson = SavedCellJson
+            SET SourceCell TO Data1[0][1]
+            SET SavedCell TO Readback1[0][1]
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+            SET 集計先_G7_ValueTypeMatch TO SourceCellJson = SavedCellJson
+            SET SourceCell TO Data1[1][0]
+            SET SavedCell TO Readback1[1][0]
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+            SET 集計先_F8_ValueTypeMatch TO SourceCellJson = SavedCellJson
+            SET SourceCell TO Data1[1][1]
+            SET SavedCell TO Readback1[1][1]
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+            SET 集計先_G8_ValueTypeMatch TO SourceCellJson = SavedCellJson
+            SET SourceCell TO Data1[2][0]
+            SET SavedCell TO Readback1[2][0]
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+            SET 集計先_F9_ValueTypeMatch TO SourceCellJson = SavedCellJson
+            SET SourceCell TO Data1[2][1]
+            SET SavedCell TO Readback1[2][1]
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+            SET 集計先_G9_ValueTypeMatch TO SourceCellJson = SavedCellJson
+            SET SourceCell TO Data2[0][0]
+            SET SavedCell TO Readback2[0][0]
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+            SET 追記先_D5_ValueTypeMatch TO SourceCellJson = SavedCellJson
+            SET SourceCell TO Data2[0][1]
+            SET SavedCell TO Readback2[0][1]
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+            SET 追記先_E5_ValueTypeMatch TO SourceCellJson = SavedCellJson
+            SET SourceCell TO Data2[0][2]
+            SET SavedCell TO Readback2[0][2]
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+            SET 追記先_F5_ValueTypeMatch TO SourceCellJson = SavedCellJson
+            SET SourceCell TO Data2[1][0]
+            SET SavedCell TO Readback2[1][0]
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+            SET 追記先_D6_ValueTypeMatch TO SourceCellJson = SavedCellJson
+            SET SourceCell TO Data2[1][1]
+            SET SavedCell TO Readback2[1][1]
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+            SET 追記先_E6_ValueTypeMatch TO SourceCellJson = SavedCellJson
+            SET SourceCell TO Data2[1][2]
+            SET SavedCell TO Readback2[1][2]
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SourceCell } Json=> SourceCellJson
+            Variables.ConvertCustomObjectToJson CustomObject: { 'probe': SavedCell } Json=> SavedCellJson
+            SET 追記先_F6_ValueTypeMatch TO SourceCellJson = SavedCellJson
+            SET TransferState TO $'''SAVED_REOPENED_12_JSON_COMPARISONS_READY'''
+        ELSE
+            Excel.CloseExcel.Close Instance: Work
+            SET TransferState TO $'''MODE_NOT_NORMAL_NO_SAVE'''
+        END
+    ELSE
+        Excel.CloseExcel.Close Instance: Work
+        SET TransferState TO $'''SCRIPT_NOT_SUCCESS_NO_SAVE'''
+    END
+END

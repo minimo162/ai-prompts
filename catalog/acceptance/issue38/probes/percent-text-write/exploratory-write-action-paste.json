@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-16T07:42:20.8111426Z",
+  "flow_name": "RobinIssue38PercentTextWrite20260916A",
+  "process_id": 3168,
+  "source_robin": ".\\catalog\\acceptance\\issue38\\probes\\matrix-write\\captured-action.robin",
+  "source_sha256": "39ceb68d225f61cf87e8c4c173fe3993699d52ff9e23b0457cb614945e423207",
+  "source_bytes": 95,
+  "empty_before_paste": true,
+  "paste_confirmed": true,
+  "visible_action_count": 1,
+  "designer_action_count": 1,
+  "designer_status": "1 選択されたアクション",
+  "virtualized_list_false_negative": false,
+  "saved_confirmed": false,
+  "execution_requested": false,
+  "clipboard_restoration": "user_authorized_not_preserved",
+  "clipboard_restore_skipped_by_explicit_user_direction": true,
+  "clipboard_all_format_raw_equality": "NOT_ASSESSED"
+}

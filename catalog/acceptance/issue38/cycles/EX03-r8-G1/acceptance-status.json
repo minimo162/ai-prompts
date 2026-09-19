@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R8-G1",
+  "recorded_at": "2026-09-17T05:34:21.0650289+09:00",
+  "candidate": {
+    "version": "20260916-excel-r8",
+    "base_commit": "eb8693c5157563bbc69d47d8410093ca30565a30",
+    "instruction_sha256": "57f0cdb656e919f8fd83252a6adcd4d12788dac9bf6833db2f2e942eada23bcb",
+    "bundle_sha256": "164c99e59204efd863f4fe283e8f84ce2902ee760ab90e45cf7c5336631aaddb",
+    "manifest_sha256": "9025c8869b84d27e4f39512ce157a114a5231041e641ae12ef36c061eae29d3e"
+  },
+  "generation": {
+    "normal_m365_send_count": 1,
+    "resend_count": 0,
+    "completed": true,
+    "refusal": false,
+    "generated_robin_sha256": "711bd5b3a5eb1cba48f6872cd5aa8f718ab3534de4d0e069d5fd1eb7b9d1ed89"
+  },
+  "pad_import": {
+    "dedicated_power_fx_off_flow": true,
+    "unmodified_paste_count": 1,
+    "action_count": 110,
+    "variable_count": 45,
+    "saved": true,
+    "recopy_exact": false,
+    "recopy_differing_lines": 30,
+    "manual_repair": false
+  },
+  "runs": {
+    "run1": "NOT_RUN_STOP_RULE_TRIGGERED_PRE_RUN_RECOPY_MISMATCH",
+    "run2": "NOT_RUN_RUN1_WAS_NOT_AUTHORIZED",
+    "pad_runs_used": 0,
+    "pad_run_limit": 2
+  },
+  "artifacts": {
+    "runtime_output_exists": false,
+    "work_matches_template": true,
+    "protected_file_count": 199,
+    "protected_file_mismatch_count": 0,
+    "fixed_expected_changed": false,
+    "legacy_558_failure_preserved": true
+  },
+  "scope": {
+    "other_case_or_probe_pass_inherited": false,
+    "unconfirmed_types_or_shapes_generalized": false,
+    "existing_output_guard_live_path": "REMAINS_UNCONFIRMED"
+  },
+  "decision": {
+    "accepted": false,
+    "status": "STOPPED_BEFORE_RUN1_PAD_RECOPY_MISMATCH",
+    "reason": "The one authorized Copilot generation completed, but PAD save/re-copy did not preserve it. The generated backslashes before PowerShell square brackets were reserialized as literal doubled backslashes on 30 lines. Fixed conditions forbid manual repair or execution after a mismatch."
+  },
+  "github_write": false
+}

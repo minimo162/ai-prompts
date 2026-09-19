@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "main_action_count": null,
+  "flow_name": "RobinIssue38PercentPrefixCapture20260916A",
+  "designer_session_id": null,
+  "status": "FAILED_STOP_NO_RETRY",
+  "power_fx_before": "Off",
+  "ok_invocations": 1,
+  "console_process_id": 15416,
+  "requested_at": "2026-09-16T07:52:55.2234540Z",
+  "designer_precreate_title": "",
+  "create_invocations": 1,
+  "designer_title": null,
+  "designer_hwnd": null,
+  "power_fx_after": "Off",
+  "dialog_count_after_create": 1,
+  "designer_precreate_hwnd": {
+    "value": 0
+  },
+  "error": "Main action list is not unique",
+  "designer_process_reused": true,
+  "power_fx_toggle_invocations": 0,
+  "designer_process_id": null,
+  "dialog_count_before": 0
+}

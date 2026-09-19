@@ -1,0 +1,13 @@
+{
+  "test_id": "EX02-R4-G1",
+  "version": "20260915-excel-r4",
+  "max_generation_requests": 1,
+  "max_pad_runs": 2,
+  "request": "requests/EX02.txt unchanged; uses existing prepared EX02-attempt1 paths",
+  "output_collision": "no overwrite; verify existing work SHA and output absence before any generation/run",
+  "run2_gate": "Run1 terminal, output closed, saved separately, independent comparison and verdict preserved before preparing Run2",
+  "generation_timeout_seconds": 180,
+  "unknown_result": "observe same request; never resend because observation expired",
+  "known_gap": "strict type operation not captured; full acceptance not asserted",
+  "pad_route_observation": "sky console creation dialog opened; name typing 1 call not reflected; cancel observed; created flows 0; pasted 0; runs 0; no PS UIA mixed this turn"
+}

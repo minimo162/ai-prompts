@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "runtime_output_path": "catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx",
+  "preserved_output_path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run1/result.xlsx",
+  "output_sha256": "ddcd8fdd443262edeba6ad2f1523e175ca4d94431d9df14122605bb4fc34a38f",
+  "output_bytes": 11312,
+  "preserved_output_exact": true,
+  "runtime_work_path": "catalog/acceptance/issue38/runs/EX03-attempt1/work.xlsx",
+  "preserved_work_path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/run1/work.xlsx",
+  "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+  "preserved_work_exact": true,
+  "status": "PASS_ARTIFACT_PRESERVED"
+}

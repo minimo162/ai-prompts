@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "candidate_id": "20260918-excel-r12-fixed-helper-a4",
+  "route_id": "EX03-R12-FIXED-HELPER-COPILOT-A4",
+  "decision": "PASS_LIMITED_NON_LIVE_A4_WIRING_PREPARATION_ONLY",
+  "authorized_checks": {
+    "wiring_coverage_disjointness_and_order": {
+      "status": "PASS",
+      "text_count": 7,
+      "numeric_count": 5,
+      "readback_count": 2,
+      "comparison_count": 12,
+      "source_coverage_count": 12,
+      "target_coverage_count": 12,
+      "text_numeric_source_overlap": 0,
+      "text_numeric_target_overlap": 0,
+      "fixed_order": true
+    },
+    "runtime_path_and_sha_alignment": {
+      "status": "PASS",
+      "helper_sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+      "invocation_sha256": "5c5a2008f55296a48f63fa65178aab971e4212455bb2af58e33149bdcaec40d8",
+      "launcher_sha256": "a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5"
+    },
+    "c06_captured_wrapper_plus_fixed_launcher": {
+      "status": "PASS",
+      "captured_wrapper_source_sha256": "da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa",
+      "captured_prefix_and_suffix_exact": true,
+      "embedded_launcher_terminal_lf_restored_sha256": "a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5",
+      "component_sha256": "2e2ddf38c8b51a5e434083db5b2be9a2b6253aa4f475d8888d9197bb0bb870ed",
+      "execution_status": "NOT_RUN_A4"
+    },
+    "helper_preservation": {
+      "status": "PASS",
+      "unchanged_sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135"
+    },
+    "no_complete_robin_or_grader_values": {
+      "status": "PASS",
+      "complete_robin_present": false,
+      "cell_or_grader_values_present": false,
+      "wiring_spec_status": "SPECIFICATION_ONLY_NOT_COMPLETE_ROBIN_NOT_CAPTURED_NOT_RUN"
+    },
+    "protected_evidence": {
+      "status": "PASS",
+      "base_commit": "1fe070fbfd0fce57acb65d8a2ee5152f8450a434",
+      "prefixes": [
+        "copilot/versions/20260918-excel-r12-fixed-helper-a1",
+        "copilot/versions/20260918-excel-r12-fixed-helper-a2",
+        "copilot/versions/20260918-excel-r12-fixed-helper-a3",
+        "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A1-G1",
+        "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A2-G1",
+        "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A3-G1",
+        "catalog/acceptance/issue38/cycles/EX03-r12-G1",
+        "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper",
+        "catalog/acceptance/issue38/fixtures/EX03",
+        "catalog/acceptance/issue38/requests/EX03.txt",
+        "catalog/acceptance/issue38/spec.json",
+        "catalog/acceptance/issue38/expected.json",
+        "tools/Build-Issue38Ex03FixedHelperCopilotCandidateA1.py",
+        "tools/Build-Issue38Ex03FixedHelperCopilotCandidateA2.py",
+        "tools/Build-Issue38Ex03FixedHelperCopilotCandidateA3.py",
+        "tests/Test-Issue38Ex03FixedHelperCopilotCandidateA1.py",
+        "tests/Test-Issue38Ex03FixedHelperCopilotCandidateA2.py",
+        "tests/Test-Issue38Ex03FixedHelperCopilotCandidateA3.py"
+      ],
+      "file_count": 149,
+      "aggregate_sha256": "02c59476c223293949664b03e6702ef7914237880c68e752612e4b822fa78475",
+      "all_match_base_commit": true
+    }
+  },
+  "preserved_boundaries": {
+    "formal_r12_status": "FAIL_GENERATED_ROBIN_MISMATCH_AND_POWERSHELL_PARSE_ERROR_STOP_BEFORE_PAD",
+    "formal_r12_accepted": false,
+    "t2_decision": "PASS_FIXED_HELPER_AUXILIARY_NORMAL_RUN1",
+    "t2_pass_inherited": false,
+    "a3_final_status": "STOPPED_FAIL_REFUSAL",
+    "a3_result_reused": false,
+    "legacy_558_difference_record": "PRESERVED_NOT_RECLASSIFIED"
+  },
+  "scope": {
+    "copilot_send_count": 0,
+    "pad_save_recopy_count": 0,
+    "pad_run_count": 0,
+    "excel_run_count": 0,
+    "new_capture_count": 0,
+    "full_regression": "NOT_RUN_BY_SCOPE",
+    "github_write_count": 0
+  }
+}

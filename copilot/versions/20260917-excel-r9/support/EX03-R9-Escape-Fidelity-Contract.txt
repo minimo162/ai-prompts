@@ -1,0 +1,9 @@
+EX03 r9 generation escape-fidelity contract
+This contract applies to the one text code block returned from the independent PAD-recopied source.
+1. A text code block is raw Robin text. Do not apply Markdown escaping to its contents.
+2. Inside Scripting.RunPowershellScript.RunScript, PowerShell square brackets are literal raw `[` and `]` characters. Never prefix them with a backslash.
+3. Preserve raw forms such as `[ordered]`, `[string]`, `[bool]`, `[void]`, `[Runtime.InteropServices.Marshal]`, `[IO.Path]`, `[StringComparison]`, `$matches[0]`, `$allowedTargets[$sheetName]`, and DataTable indexers. These examples constrain characters and do not supply request data.
+4. Before emitting Robin, count the exact substrings backslash-open-bracket and backslash-close-bracket in the candidate. Both counts must be zero. Do not repair the text after output.
+5. Replace every independent-example data slot consistently, including paths, sheet names, ranges, target cells, allowed-target entries, and teaching-only error labels. No teaching-only label may remain in an adapted candidate.
+6. If any fidelity check fails, emit no Robin and report the failed check. A refusal/no-code result is not a runtime PASS.
+7. This gate prevents the observed r8 G1 text drift only. It does not prove execution, types outside text/number, other shapes, another PAD version, or another PC.

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R10-G1",
+  "base_commit": "06aa0a572c58a09357ac1ac27a0a04eeaa4d680d",
+  "checks": {
+    "base_commit_matches_frozen_r10": true,
+    "fixed_fixture_spec_request_expected_hashes_match": true,
+    "r10_instruction_bundle_manifest_support_hashes_match": true,
+    "r10_all_evidence_input_hashes_match": true,
+    "r10_teaching_test_independence_pass": true,
+    "r10_teaching_robin_and_script_byte_identical_to_r9": true,
+    "r10_structural_token_and_fragment_gate_in_bundle": true,
+    "r9_response_dom_matches_preserved_raw_clipboard": true,
+    "fixed_complete_answer_absent_from_r10_bundle": true,
+    "grader_only_values_absent_from_submitted_body": true,
+    "independent_example_data_absent_from_submitted_body": true,
+    "independent_source_forbidden_runtime_actions_absent": true,
+    "r9_one_send_consumed_and_no_resend": true,
+    "r9_stop_before_pad_preserved": true,
+    "work_exists_and_matches_template": true,
+    "output_absent": true
+  },
+  "hashes": {
+    "submitted_body": "751252c0ca263be62c01dce3dc83b10d733579bc395bc4bea01903d543be6247",
+    "instruction": "9434c976457b2fec14ad24d8ee57a3400e7eb092ba38259e3f8f728139c20681",
+    "bundle": "0c53d6ce82fc5e23363332420b59c34470decbb123f804b2e628d26d58928ec6",
+    "manifest": "7807e31e8177b05dc89d235496ee1b5978502f7406586dff2621d769981d6cbe",
+    "robin_support": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb",
+    "script_support": "65b86b0e5be4ec2da30e57a6bd858e395d1103da2d05ab2e7607362772d1dfd9",
+    "fidelity_support": "4b704ade5343b1a28bc0101080d5756107e02210be40445082de3ab30315079d",
+    "work_and_template": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "input_a": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "input_b": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+  },
+  "counts": {
+    "protected_files": 264,
+    "submitted_body_utf16_units": 8093,
+    "submitted_body_utf8_bytes": 18802,
+    "submitted_body_lines": 83,
+    "teaching_backslash_open_bracket": 0,
+    "teaching_backslash_close_bracket": 0,
+    "structural_tokens": {
+      "[ordered]": 8,
+      "[string]": 14,
+      "[bool]": 2,
+      "[void]": 5,
+      "[Runtime.InteropServices.Marshal]": 6,
+      "[IO.Path]": 1,
+      "[StringComparison]": 1,
+      "::GetFullPath(": 1,
+      "::OrdinalIgnoreCase": 1,
+      "::IsNullOrEmpty(": 1,
+      "$matches[0]": 1,
+      "$allowedTargets[$sheetName]": 1
+    },
+    "required_invariant_fragments": 2,
+    "forbidden_corruption_fragments": 3
+  },
+  "decision": {
+    "local_checkpoint": "PASS",
+    "browser_staging": "NOT_STARTED_REQUIRES_NEW_ACTION_TIME_CONFIRMATION",
+    "send": "NOT_SENT_REQUIRES_NEW_ACTION_TIME_CONFIRMATION",
+    "copilot_generation": "NOT_STARTED",
+    "pad_run1": "NOT_STARTED",
+    "pad_run2": "NOT_STARTED"
+  }
+}

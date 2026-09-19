@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "f8765ea42e71e43d4924a6f8101b5950db31868c",
+  "scope": "Dedicated local synthetic probe only; no r11/candidate/Copilot/EX03 integration changes.",
+  "fixed_values": {
+    "Source!A2": "O'Brien",
+    "Source!B2": "He said \"Go\"\nSecond line 'quoted'",
+    "Source!C2": "100%",
+    "Source!D2": 42.5
+  },
+  "target_before": {
+    "Target!A2": [
+      "BEFORE_A",
+      "System.String",
+      "General"
+    ],
+    "Target!B2": [
+      "BEFORE_B",
+      "System.String",
+      "0.00"
+    ],
+    "Target!C2": [
+      "BEFORE_C",
+      "System.String",
+      "General"
+    ],
+    "Target!D2": [
+      7,
+      "System.Double",
+      "0.00"
+    ]
+  },
+  "runs": [
+    {
+      "id": "normal",
+      "mode": "NORMAL",
+      "maximum": 1
+    },
+    {
+      "id": "negative",
+      "mode": "INJECT_AFTER_FORMAT_CHANGE",
+      "maximum": 1
+    }
+  ],
+  "negative_injection": "Target!A2 immediately after NumberFormat='@' and before Value2 assignment",
+  "success_output": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":3,\"formats_restored\":true}",
+  "required_stop_gate": "Only exact success output plus NORMAL mode encloses numeric write and SaveAs.",
+  "preserved_git_objects": {
+    "r11_candidate": "ef3b9a1a3721e951363b3ce09858ec4098d5b158",
+    "r11_robin": "7c5bfa1750d2608add873d3b373b8e18ffcd7f37",
+    "r11_script": "652d1f49e4ae6cd325158481dc2775f98fc80799",
+    "r1_finalizer": "2c133940e964436a64cb5e2d3764d3d92861d907",
+    "r1_test": "f188c472758a2d9fa849cfb5e133049ea3fbb461"
+  },
+  "sha256": {
+    "source_xlsx": "74d2f493e8e687859badcb9c0b13ddff54d466c7394c3212e512a050113a2dc4",
+    "template_xlsx": "108d25e5cfb86cd34422e738f7590d6050933c4f5429c672df65907fb2f31a36",
+    "safe_script": "cdd0dc9db4c9e89b6d598a8df65b64ea1427e7c7b75bcadd3328c56635f6973a",
+    "r11_robin": "148267f09f53d74db1059cee823a4a2e159f2bbebfa249d3a25c996796fa765b",
+    "r11_script": "068e676d70c373a9cf8203d19f6154e38460f609c4fdf774dbef1528f68fc7ae"
+  },
+  "out_of_scope": [
+    "r11 modification",
+    "new candidate version",
+    "Copilot submission",
+    "EX03 integrated rerun",
+    "manifest correction",
+    "GitHub write",
+    "type generalization beyond these three strings and one number"
+  ]
+}

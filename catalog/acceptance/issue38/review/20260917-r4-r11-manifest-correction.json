@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "review_item": "R4",
+  "recorded_at": "2026-09-17T23:31:35+09:00",
+  "frozen_candidate": "20260917-excel-r11",
+  "frozen_manifest": {
+    "path": "copilot/versions/20260917-excel-r11/manifest.json",
+    "sha256": "295306ea7e2e45da8cf77dec2784e94ea8ea8333da0df6a4000f83e9228b509e",
+    "modified": false
+  },
+  "correction": {
+    "field": "evidence.source_recopy_lf_only_count",
+    "recorded_value": 87,
+    "corrected_value": 57,
+    "source_path": "copilot/versions/20260917-excel-r11/support/EX03-R11-Independent-PAD-Recopy.robin",
+    "source_sha256": "148267f09f53d74db1059cee823a4a2e159f2bbebfa249d3a25c996796fa765b",
+    "source_bytes": 12688,
+    "crlf_count": 110,
+    "lf_only_count": 57,
+    "final_lf": true,
+    "computed_from_file_bytes": true
+  },
+  "unaffected_source_candidate_record": {
+    "path": "catalog/acceptance/issue38/probes/ex03-r8-independent-source/candidate-full.robin",
+    "sha256": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb",
+    "crlf_count": 110,
+    "lf_only_count": 87,
+    "reason": "The r11 source_candidate fields refer to this separate r8 source and remain accurate."
+  },
+  "policy": {
+    "r11_files_changed": false,
+    "success_status_changed": false,
+    "successor_builders_must_compute_sha_and_newline_metrics_from_actual_files": true
+  }
+}

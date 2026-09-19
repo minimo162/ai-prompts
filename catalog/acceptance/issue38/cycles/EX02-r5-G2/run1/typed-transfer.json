@@ -1,0 +1,304 @@
+{
+  "kind": "EX02_FIXED_TEXT_NUMBER_TYPED_TRANSFER",
+  "run_label": "Run1",
+  "status": "MATCH_FIXED_EX02_TEXT_NUMBER_SCOPE",
+  "scope": {
+    "allowed_types": [
+      "number",
+      "text"
+    ],
+    "explicitly_not_generalized_to": [
+      "blank",
+      "boolean",
+      "date",
+      "error",
+      "formula-result",
+      "object"
+    ],
+    "fixed_mapping_count": 12,
+    "method": "read saved xlsx and compare each fixed source/target coordinate with grader-only expected typed value",
+    "pad_internal_json_identity": "SEPARATE_UI_EVIDENCE"
+  },
+  "output": {
+    "path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\cycles\\EX02-r5-G2\\run1\\result.xlsx",
+    "sha256_before": "c678ae701725716d62aa945d73e341e0122db7e37a4ad35bc670108aeab68325",
+    "sha256_after": "c678ae701725716d62aa945d73e341e0122db7e37a4ad35bc670108aeab68325",
+    "unchanged_by_verifier": true
+  },
+  "originals_sha256_before": {
+    "fixtures/EX02/input-a.xlsx": "f655b62c82750fc07f4e54bcfd098e8e7c0b771c9422c4321cc413a4d6d07fa9",
+    "fixtures/EX02/input-b.xlsx": "69627e161747fedad0f7c3b410c1d625b29a553786be0c145e83aaf43d1b105a"
+  },
+  "originals_sha256_after": {
+    "fixtures/EX02/input-a.xlsx": "f655b62c82750fc07f4e54bcfd098e8e7c0b771c9422c4321cc413a4d6d07fa9",
+    "fixtures/EX02/input-b.xlsx": "69627e161747fedad0f7c3b410c1d625b29a553786be0c145e83aaf43d1b105a"
+  },
+  "originals_unchanged_by_verifier": true,
+  "mappings": [
+    {
+      "source_path": "fixtures/EX02/input-a.xlsx",
+      "source_sheet": "Source A",
+      "source_cell": "B2",
+      "target_sheet": "Target A",
+      "target_cell": "C4",
+      "grader_expected": [
+        "text",
+        "Alpha"
+      ],
+      "source_actual": [
+        "text",
+        "Alpha"
+      ],
+      "target_actual": [
+        "text",
+        "Alpha"
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX02/input-a.xlsx",
+      "source_sheet": "Source A",
+      "source_cell": "C2",
+      "target_sheet": "Target A",
+      "target_cell": "D4",
+      "grader_expected": [
+        "number",
+        12.5
+      ],
+      "source_actual": [
+        "number",
+        12.5
+      ],
+      "target_actual": [
+        "number",
+        12.5
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX02/input-a.xlsx",
+      "source_sheet": "Source A",
+      "source_cell": "D2",
+      "target_sheet": "Target A",
+      "target_cell": "E4",
+      "grader_expected": [
+        "number",
+        0
+      ],
+      "source_actual": [
+        "number",
+        0
+      ],
+      "target_actual": [
+        "number",
+        0
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX02/input-a.xlsx",
+      "source_sheet": "Source A",
+      "source_cell": "B3",
+      "target_sheet": "Target A",
+      "target_cell": "C5",
+      "grader_expected": [
+        "text",
+        "Beta"
+      ],
+      "source_actual": [
+        "text",
+        "Beta"
+      ],
+      "target_actual": [
+        "text",
+        "Beta"
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX02/input-a.xlsx",
+      "source_sheet": "Source A",
+      "source_cell": "C3",
+      "target_sheet": "Target A",
+      "target_cell": "D5",
+      "grader_expected": [
+        "number",
+        -3
+      ],
+      "source_actual": [
+        "number",
+        -3
+      ],
+      "target_actual": [
+        "number",
+        -3
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX02/input-a.xlsx",
+      "source_sheet": "Source A",
+      "source_cell": "D3",
+      "target_sheet": "Target A",
+      "target_cell": "E5",
+      "grader_expected": [
+        "number",
+        100
+      ],
+      "source_actual": [
+        "number",
+        100
+      ],
+      "target_actual": [
+        "number",
+        100
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX02/input-b.xlsx",
+      "source_sheet": "Source B",
+      "source_cell": "A3",
+      "target_sheet": "Target B",
+      "target_cell": "B3",
+      "grader_expected": [
+        "text",
+        "Gamma"
+      ],
+      "source_actual": [
+        "text",
+        "Gamma"
+      ],
+      "target_actual": [
+        "text",
+        "Gamma"
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX02/input-b.xlsx",
+      "source_sheet": "Source B",
+      "source_cell": "B3",
+      "target_sheet": "Target B",
+      "target_cell": "C3",
+      "grader_expected": [
+        "number",
+        7
+      ],
+      "source_actual": [
+        "number",
+        7
+      ],
+      "target_actual": [
+        "number",
+        7
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX02/input-b.xlsx",
+      "source_sheet": "Source B",
+      "source_cell": "A4",
+      "target_sheet": "Target B",
+      "target_cell": "B4",
+      "grader_expected": [
+        "text",
+        "Delta"
+      ],
+      "source_actual": [
+        "text",
+        "Delta"
+      ],
+      "target_actual": [
+        "text",
+        "Delta"
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX02/input-b.xlsx",
+      "source_sheet": "Source B",
+      "source_cell": "B4",
+      "target_sheet": "Target B",
+      "target_cell": "C4",
+      "grader_expected": [
+        "number",
+        8
+      ],
+      "source_actual": [
+        "number",
+        8
+      ],
+      "target_actual": [
+        "number",
+        8
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX02/input-b.xlsx",
+      "source_sheet": "Source B",
+      "source_cell": "A5",
+      "target_sheet": "Target B",
+      "target_cell": "B5",
+      "grader_expected": [
+        "text",
+        "Epsilon"
+      ],
+      "source_actual": [
+        "text",
+        "Epsilon"
+      ],
+      "target_actual": [
+        "text",
+        "Epsilon"
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    },
+    {
+      "source_path": "fixtures/EX02/input-b.xlsx",
+      "source_sheet": "Source B",
+      "source_cell": "B5",
+      "target_sheet": "Target B",
+      "target_cell": "C5",
+      "grader_expected": [
+        "number",
+        9
+      ],
+      "source_actual": [
+        "number",
+        9
+      ],
+      "target_actual": [
+        "number",
+        9
+      ],
+      "source_matches_expected": true,
+      "target_matches_expected": true,
+      "source_matches_target": true
+    }
+  ],
+  "mismatches": []
+}

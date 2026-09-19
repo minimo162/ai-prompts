@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-COPILOT-A1-G1",
+  "checked_at": "2026-09-18T09:49:57.1021089+09:00",
+  "response_preservation": {
+    "browser_dom_characters": 818,
+    "preserved_file_characters": 818,
+    "exact_after_semantic_list_rendering": true,
+    "preserved_response_sha256": "ef1681063425e224fae1f1de137484dbe22434a8f71506df83ee547c48624f14"
+  },
+  "protected_files": {
+    "expected_count": 17,
+    "unchanged_count": 17,
+    "all_unchanged": true,
+    "mismatches": []
+  },
+  "runtime": {
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_matches_preflight": true,
+    "output_absent": true,
+    "handoff_expected_absent_count": 8,
+    "handoff_absent_count": 8,
+    "pad_runs": 0
+  },
+  "status": "PASS_PRESERVATION_AFTER_STOP"
+}

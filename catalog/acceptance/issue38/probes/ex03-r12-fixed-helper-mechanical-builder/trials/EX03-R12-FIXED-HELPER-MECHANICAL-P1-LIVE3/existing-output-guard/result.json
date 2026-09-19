@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-OUTPUT-GUARD1",
+  "run_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3-OUTPUT-GUARD1-RUN1",
+  "decision": "PASS_LIVE3_EXISTING_OUTPUT_GUARD1",
+  "scope": "Fixed EX03 mechanical-builder existing-output branch only.",
+  "guard": {
+    "probe_state": "OUTPUT_EXISTS_NO_RUN",
+    "static_else_contains_all_sensitive_actions": true,
+    "script_gate_passed": false,
+    "numeric_write_entered": false,
+    "save_as_entered": false,
+    "json_handoff_sha_size_mtime_unchanged": true,
+    "existing_output_sha_size_mtime_unchanged": true,
+    "inputs_template_work_sha_size_mtime_unchanged": true,
+    "normal_termination": true
+  },
+  "type_comparisons": "NOT_EVALUATED_ON_GUARD_BRANCH",
+  "powershell_output": "NOT_GRADED_AS_FRESH_OUTPUT",
+  "runtime_after_preservation": {
+    "output_absent": true,
+    "json_root_empty": true,
+    "excel_not_running": true
+  },
+  "decided_at": "2026-09-18T18:35:08.330269+00:00"
+}

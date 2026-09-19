@@ -1,0 +1,17 @@
+貼付け用Robinは出力できません。
+
+理由:
+
+添付 bundle は PAD-Robin-Fixed-Helper-A2-Bundle.txt の IN-BUNDLE INDEX と RAW_COMPONENT だけが根拠ですが、実測原文として存在するのは 4値→JSON、1回の WriteCell、1矩形の Readback、4比較までです。
+同 bundle 自体が「NEW COMPOSITION PARAMETERS — NOT ROBIN / NOT CAPTURED / NOT RUN」で、7個の source-1.json ～ source-7.json、5数値書込み、2矩形12位置比較への拡張は“記述された新しい組合せ”であり、対応する完成 Robin 原文は掲載していません。
+依頼条件では「未採取の命令名・引数名・列挙値・ブロック構造を捏造してはいけません」「実際に根拠がない工程が残る場合だけRobinを出さず、その不足工程だけを具体的に報告します」とされており、現状は拡張後の完成 Robin を逐語生成する根拠が不足しています。
+
+不足している根拠:
+
+C04 を 7 スロットへ拡張した実測 Robin 原文。
+C09 を 5 書込みへ反復した実測 Robin 原文または完成合成原文。
+C10 の 2 矩形 Readback 実測原文。
+C11 の 12 位置比較実測原文。
+C01～C12 を結合した完成 Robin 原文、または結合規則を PAD の実際の命令行単位で示した原文。
+
+そのため、要件どおり「未採取部分を捏造しない」という制約上、貼付け用 Robin コードブロックは生成できません。

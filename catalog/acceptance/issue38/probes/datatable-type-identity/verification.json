@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-09-15T13:10:46.9701455Z",
+  "status": "PASS_SCOPED_VERIFICATION",
+  "checks": [
+    {
+      "name": "live PAD Run1",
+      "result": "PASS",
+      "evidence": ["run1.json", "run1-variables.json", "run1-reconciliation.json", "run1-terminal-state.json"]
+    },
+    {
+      "name": "live PAD Run2",
+      "result": "PASS",
+      "evidence": ["run2.json", "run2-variables.json", "run2-reconciliation.json", "run2-terminal-state.json"]
+    },
+    {
+      "name": "stored evidence audit",
+      "result": "PASS",
+      "details": "17 JSON files parsed; 25 manifest hashes matched; 17 Robin lines matched; both recaptures were raw-equal; report code block matched; fixed Run values matched; Run2 gate ordering matched; Open XML A2=n:1 and B2=str:1; r4 and prior scalar probe unchanged"
+    },
+    {
+      "name": "node tests/Test-Issue38Package.mjs 20260915-excel-r4",
+      "result": "PASS_NON_LIVE_PACKAGE",
+      "details": "instruction_utf16=5867; source_files=7; live=NOT_RUN"
+    },
+    {
+      "name": "tests/Test-CDataTableCellRead.ps1",
+      "result": "PASS",
+      "details": "82 C DataTable cell-read evidence checks; no PAD/Copilot actions"
+    },
+    {
+      "name": "tests/Test-PadPasteClipboardFinally.ps1",
+      "result": "PASS",
+      "details": "5 paste finally/encoding checks; native clipboard not accessed"
+    },
+    {
+      "name": "git diff --check",
+      "result": "PASS"
+    }
+  ],
+  "fixture": {
+    "initial_combined_build_render_exit_code": 1,
+    "committed_builder_exit_code": 0,
+    "committed_builder_openxml": "A2=n:1; B2=str:1",
+    "render_step_separated_from_committed_builder": true,
+    "builder_output_used_as_acceptance_without_independent_check": false,
+    "independent_checks": [
+      "Artifact Tool reimport distinguished JavaScript number and string",
+      "Open XML inspection distinguished n and str cell types",
+      "rendered A1:B2 visual check passed",
+      "the workbook completed both live PAD runs"
+    ]
+  },
+  "not_run": [
+    "full EX02",
+    "Copilot generation",
+    "new knowledge version",
+    "GitHub publishing"
+  ]
+}

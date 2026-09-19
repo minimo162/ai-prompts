@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R11-FILE-AUX1-EXISTING-OUTPUT-NEG1",
+  "checked_at": "2026-09-17T14:19:12.406161+09:00",
+  "existing_output": {
+    "path": "catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx",
+    "sha256_before": "dc5c158d93ec322e29181fc34c961a396964c22c39c4f23d00d3ce215ee71af9",
+    "sha256_after": "dc5c158d93ec322e29181fc34c961a396964c22c39c4f23d00d3ce215ee71af9",
+    "last_write_ns_before": 1789621996726241400,
+    "last_write_ns_after": 1789621996726241400,
+    "unchanged": true
+  },
+  "fixed_files": {
+    "input_a": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力い.xlsx",
+      "sha256_before": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+      "sha256_after": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+      "unchanged": true
+    },
+    "input_b": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力ろ.xlsx",
+      "sha256_before": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725",
+      "sha256_after": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725",
+      "unchanged": true
+    },
+    "template": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx",
+      "sha256_before": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "sha256_after": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "unchanged": true
+    },
+    "work": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/work.xlsx",
+      "sha256_before": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "sha256_after": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "unchanged": true
+    },
+    "robin": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/copilot-downloaded-ex03.robin",
+      "sha256_before": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875",
+      "sha256_after": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875",
+      "unchanged": true
+    },
+    "formal_status": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-G1/acceptance-status.json",
+      "sha256_before": "87536bbc5da9347401e2e9d3982e8d77caaad1d5fb5b42bf782e71c5aca167b4",
+      "sha256_after": "87536bbc5da9347401e2e9d3982e8d77caaad1d5fb5b42bf782e71c5aca167b4",
+      "unchanged": true
+    },
+    "aux_status": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/acceptance-status.json",
+      "sha256_before": "4b76432cf58b7182ed1284f12abaa807794bc2f0ae53e385506e0b662938d6ea",
+      "sha256_after": "4b76432cf58b7182ed1284f12abaa807794bc2f0ae53e385506e0b662938d6ea",
+      "unchanged": true
+    }
+  },
+  "excel_process_count_after": 0,
+  "all_required_files_unchanged": true
+}

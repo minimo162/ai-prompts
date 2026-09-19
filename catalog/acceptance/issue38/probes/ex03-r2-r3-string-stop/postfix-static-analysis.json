@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE38_EX03_R2_R3_NON_EXECUTING_PREFLIGHT",
+  "executed_embedded_scripts": false,
+  "r11_unsafe_interpolated_example": {
+    "path": "r11-unsafe-interpolated-obrien.ps1.txt",
+    "sha256": "fed41170d0c5891fa678a6573de38cee1c55442fdb0c64bc39596499cef78d85",
+    "ast_error_count": 7,
+    "ast_errors": [
+      "Unexpected token 'Brien\"}'),\n    @('Data1[1][0]', '謨呎攝蜃ｺ蜉帑ｸ', 'J5', '{\"probe\":\"He' in expression or statement.",
+      "Unexpected token 'B11', '' in expression or statement.",
+      "Unexpected token ':\"He said \\\"Go\\\"\\nSecond line 'quoted'\"' in expression or statement.",
+      "Unexpected token 'D11', '' in expression or statement.",
+      "Unexpected token ':\"O'Brien\"' in expression or statement.",
+      "The string is missing the terminator: '.",
+      "Missing closing ')' in subexpression."
+    ],
+    "result": "REJECT_BEFORE_EXECUTION"
+  },
+  "safe_script": {
+    "path": "embedded-safe.ps1.txt",
+    "sha256": "aa2091327607b9ed1496f5ebb4a8bca2968e95e56ae3337f541651141e55f571",
+    "ast_error_count": 0,
+    "pad_data_placeholders": 0,
+    "fixed_json_file_reads": 5,
+    "result": "PASS_STATIC_ONLY"
+  },
+  "actual_pad_json": [
+    "{\"probe\":\"O'Brien\"}",
+    "{\"probe\":\"He said \\\"Go\\\"\\nSecond line 'quoted'\"}",
+    "{\"probe\":\"100%\"}",
+    "{\"probe\":42.5}"
+  ],
+  "actual_pad_json_utf8_bom": [
+    true,
+    true,
+    true,
+    true
+  ],
+  "actual_pad_mode_json": "{\"probe\":\"NORMAL\"}",
+  "actual_pad_mode_utf8_bom": true,
+  "handoff": {
+    "method": "PAD ConvertCustomObjectToJson -> UTF-8 fixed files -> PowerShell Get-Content -Raw -> ConvertFrom-Json",
+    "json_is_powershell_source_code": false,
+    "normal_and_negative_robin_differ_only_by_mode": true
+  },
+  "gate_simulation": {
+    "exact_success_normal": true,
+    "missing_output_normal": false,
+    "empty_output_normal": false,
+    "error_output_normal": false,
+    "exact_success_negative_mode": false,
+    "expected_error_negative_mode": false
+  },
+  "candidate_sha256": {
+    "live_normal": "a9ba6694b40840a7583c5c61cf2f46a5cc7a279a337b69bfcfa23523430d2e9d",
+    "live_negative_not_run": "5ed04571fbe613ec342286d66727863fb1803a1b71f1f9db7a2989b14a431cec",
+    "normal": "aaac1b7c04156f8038d26f6671c692faede55c91097cbf3f5d4c575348ae3851",
+    "negative": "a1ff8f503d485402ffdbb98248a52e62eedf98ac27f95d566dbaca1800dfcd1f"
+  },
+  "live_result": "NORMAL_STOPPED_NUMBER_PAYLOAD_TYPE_NEGATIVE_NOT_RUN",
+  "decision": "POSTFIX_STATIC_PASS_LIVE_RERUN_NOT_RUN_STOP_CONDITION"
+}

@@ -1,0 +1,20 @@
+{
+    "power_fx_toggle_invocations":  0,
+    "designer_process_id":  null,
+    "designer_session_id":  null,
+    "status":  "FAILED_STOP_NO_RETRY",
+    "console_process_id":  15416,
+    "requested_at":  "2026-09-16T07:09:57.3018643Z",
+    "designer_hwnd":  null,
+    "ok_invocations":  1,
+    "power_fx_after":  "Off",
+    "dialog_count_after_create":  1,
+    "flow_name":  "RobinIssue38EX03R5G1_20260916A",
+    "error":  "Created Designer reused a pre-existing process",
+    "create_invocations":  1,
+    "designer_title":  null,
+    "main_action_count":  null,
+    "dialog_count_before":  0,
+    "schema_version":  1,
+    "power_fx_before":  "Off"
+}

@@ -1,0 +1,12 @@
+{
+  "test_id": "EX02-R5-G1",
+  "started_at": "2026-09-15T13:42:18.221Z",
+  "worktree": "C:/Users/yuuki/ai-prompts-issue38",
+  "branch": "codex/issue38-type-probe-20260915",
+  "head_at_start": "78ccbcf10551542d7891ac25af6a2445a3381443",
+  "base_main": "d0bd39699fcc92773ef0238f29701f9e310a7693",
+  "user_request": "Use commit 78ccbcf scoped type identity, preserve r4 and fixed acceptance, run normal M365 Copilot plus unmodified PAD two-run acceptance and a one-cell type negative, keep 558 failures, local commit only.",
+  "prior_probe_reused_without_recollection": true,
+  "github_write": false
+}
+

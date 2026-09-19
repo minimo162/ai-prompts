@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R5-G1",
+  "observed_at": "2026-09-16T12:26:26.4137444+09:00",
+  "status": "STOPPED_BEFORE_TRANSMISSION",
+  "browser": "Google Chrome",
+  "destination": "normal M365 Copilot Chat",
+  "model_selected": "Think Deeper",
+  "new_chat_confirmed": true,
+  "submission_body_entered": false,
+  "bundle_attachment_present": false,
+  "generation_requests_used": 0,
+  "pad_runs_used": 0,
+  "observations": [
+    "The M365 accessibility tree showed a blank new-chat editor and no attachment chip.",
+    "The Add and manage sources menu exposed the Images and files upload command.",
+    "The browser file chooser did not become available to the automation after the upload command or a direct file-input click.",
+    "The browser upload troubleshooting guidance requires Allow access to file URLs for the ChatGPT browser extension.",
+    "A read-only attempt to inspect chrome://extensions was rejected by the browser URL security policy; no workaround was attempted."
+  ],
+  "required_user_action": "Open chrome://extensions, open Details for the ChatGPT browser extension, and enable Allow access to file URLs.",
+  "resume_rule": "Reconfirm the blank new chat and zero counters, attach only the frozen r5 bundle, enter the frozen submission body, and stop immediately before Send for action-time confirmation.",
+  "candidate_or_fixture_changed": false
+}

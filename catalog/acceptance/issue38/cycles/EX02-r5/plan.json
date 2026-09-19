@@ -1,0 +1,16 @@
+{
+  "test_id": "EX02-R5-G1",
+  "version": "20260915-excel-r5",
+  "max_generation_requests": 1,
+  "max_pad_runs": 2,
+  "request": "catalog/acceptance/issue38/requests/EX02.txt unchanged",
+  "copilot_input": "same-version full instructions in composer plus same-version bundle uploaded; grader-only expected.json excluded",
+  "probe_recollection": "NOT_RUN_ALREADY_ACCEPTED_AT_78ccbcf",
+  "type_scope": "captured JSON identity for Excel DataTable number 1 versus text 1; fixed EX02 text/number cells are the live integration scope; no other types generalized",
+  "output_collision": "no overwrite; work SHA must equal template and result must be absent before each positive run",
+  "run2_gate": "preserve Run1 output and comparison before preparing a new identical work copy with absent result",
+  "negative_gate": "after both positive runs, make a separate copy of a preserved output, change one target cell from number to same-display text only, and prove mismatch detection; never count it as positive Run2",
+  "acceptance": "Copilot response, copied Robin, unmodified PAD paste/save/recopy, two terminal runs, twelve source/readback JSON comparisons, fixed expectations, originals/outside/formulas/styles, and 558 differences are separate claims",
+  "github_write": false
+}
+

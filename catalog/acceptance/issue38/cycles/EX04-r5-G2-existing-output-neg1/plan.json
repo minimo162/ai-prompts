@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "test_id": "EX04-R5-G2-EXISTING-OUTPUT-NEG1",
+  "relationship": {
+    "source_cycle": "EX02-R5-G2",
+    "separate_from_positive_run_ids": true,
+    "positive_runs_reused_as_this_result": false,
+    "format_558_reinvestigated": false
+  },
+  "purpose": "Live-test the existing-output guard in the unchanged 87-action G2 flow with a synthetic existing output.",
+  "flow": {
+    "window_title": "Power Automate | 無題 (4)",
+    "subflow": "Main",
+    "robin_path": "catalog/acceptance/issue38/cycles/EX02-r5-G2/generated.robin",
+    "robin_sha256": "0829526420158a61146e5d3fde7c4a5cc035228e2ab98be96d9697aa64d457bd",
+    "action_count": 87,
+    "manual_edit": false,
+    "repaste": false
+  },
+  "fixture": {
+    "existing_output_source": "catalog/acceptance/issue38/cycles/EX02-r5-G2/run2/result.xlsx",
+    "existing_output_source_sha256": "826d09ab3b5818326fa0dedac0af8a87f74057f4431e29e8a59c72ca7e08fda9",
+    "runtime_output_path": "catalog/acceptance/issue38/runs/EX02-attempt1/result.xlsx",
+    "before_archive": "catalog/acceptance/issue38/cycles/EX04-r5-G2-existing-output-neg1/existing-output-before.xlsx",
+    "after_archive": "catalog/acceptance/issue38/cycles/EX04-r5-G2-existing-output-neg1/existing-output-after.xlsx",
+    "cleanup": "After verification, move the unchanged synthetic runtime output to the after archive; do not delete it."
+  },
+  "limits": {
+    "max_pad_runs": 1,
+    "pad_runs_used_before": 0,
+    "retry_after_failure_or_unknown": false
+  },
+  "required_direct_observation": {
+    "guard_branch_value": "OUTPUT_EXISTS_NO_WRITE",
+    "flow_terminal_state": "Ready with Run enabled and Stop disabled",
+    "writes_or_save_entered": false
+  },
+  "required_invariants": [
+    "Existing output SHA-256 is unchanged",
+    "Input A SHA-256 is unchanged",
+    "Input B SHA-256 is unchanged",
+    "Template SHA-256 is unchanged",
+    "Work-copy SHA-256 is unchanged",
+    "All protected G2 evidence and candidate files remain equal to commit a6662d8"
+  ],
+  "prohibited": {
+    "copilot_regeneration": true,
+    "robin_or_flow_edit": true,
+    "candidate_version_change": true,
+    "second_pad_run": true,
+    "github_write": true
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-COPILOT-A2-G1",
+  "checked_at": "2026-09-18T11:07:20.6025111+09:00",
+  "response_preservation": {
+    "copilot_clipboard_characters": 721,
+    "copilot_clipboard_sha256": "0f9f298fbdbe23c0750f7582e8733ff801b0eec4bae9c793d3cf3f82c82370fc",
+    "preserved_file_characters": 722,
+    "preserved_file_sha256": "5f26b25cddd880ce0bd4c4869a87c7a1a31829ebd22459d8d2e67bd52408061d",
+    "repository_text_file_terminal_lf_added": true,
+    "exact_after_removing_single_terminal_lf": true
+  },
+  "protected_files": {
+    "expected_count": 20,
+    "unchanged_count": 20,
+    "all_unchanged": true,
+    "mismatches": []
+  },
+  "runtime": {
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_matches_preflight": true,
+    "output_absent": true,
+    "handoff_expected_absent_count": 8,
+    "handoff_absent_count": 8,
+    "pad_runs": 0
+  },
+  "status": "PASS_PRESERVATION_AFTER_STOP"
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R11-FILE-AUX1-RUN2",
+  "decided_at": "2026-09-17T04:05:43.413576+00:00",
+  "checks": {
+    "pad_terminal_ready": true,
+    "pad_run_index": true,
+    "pad_json_12_true": true,
+    "artifact_preserved": true,
+    "result_sha": true,
+    "work_frozen": true,
+    "typed_transfer": true,
+    "typed_mismatches_zero": true,
+    "originals_unchanged": true,
+    "legacy_fail_preserved": true,
+    "legacy_558": true,
+    "legacy_target_mismatches_zero": true,
+    "legacy_outside_mismatches_zero": true,
+    "effective_format_match": true,
+    "effective_attribute_differences_zero": true,
+    "effective_location_differences_zero": true,
+    "f6_contract": true
+  },
+  "fixed_scope": {
+    "target_cells": 12,
+    "target_mismatches": 0,
+    "outside_cells": 468,
+    "outside_value_type_formula_mismatches": 0,
+    "pad_json_value_and_type_true": 12,
+    "pad_json_value_and_type_false": 0
+  },
+  "legacy_raw_diagnostic": {
+    "status": "FAIL_PRESERVED_NOT_USED_AS_EFFECTIVE_FORMAT_GATE",
+    "failure_counts": {
+      "row_dimensions": 48,
+      "column_dimensions": 30,
+      "styles": 480
+    },
+    "total": 558
+  },
+  "two_run_semantic_comparison": {
+    "status": "MATCH",
+    "checked_cells": 480,
+    "binary_sha_equal": false,
+    "semantic_equal": true
+  },
+  "status": "PASS_AUXILIARY_RUN2_AND_TWO_RUN_SEMANTIC_MATCH",
+  "formal_ex03_r11_g1_result": "FAIL_R11_REQUIRED_CODE_BLOCK_ABSENT_STOP_BEFORE_PAD_PRESERVED"
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2",
+  "captured_utc": "2026-09-18T13:41:00.281145+00:00",
+  "flow": {
+    "name": "無題 (3)",
+    "window_id": 920594,
+    "subflow": "Main",
+    "power_fx": "OFF"
+  },
+  "source_baseline": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1/pad-recopy-before-run.robin",
+  "source_baseline_sha256": "570b26c57abeca0e9b8e19368c6542a529b44994bac518f2e70cb69baec52c0f",
+  "captured_path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/saved-flow-recopy-before-run.robin",
+  "captured_sha256": "570b26c57abeca0e9b8e19368c6542a529b44994bac518f2e70cb69baec52c0f",
+  "byte_exact_to_live1_saved_flow": true,
+  "repaste_count": 0,
+  "resave_count": 0,
+  "identity_recopy_count": 1,
+  "pad_run_count": 0,
+  "result": "PASS_CURRENT_SAVED_FLOW_BYTE_EXACT_TO_LIVE1_BASELINE"
+}

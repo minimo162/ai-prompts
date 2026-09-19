@@ -1,0 +1,75 @@
+前提整理:
+
+目的: EX03の値のみ転記、入力2ブックを読取り専用で取得し、作業コピーへ転記、別名保存した出力を再読取りして値・型・位置照合。
+入力:
+fixtures\EX03\入力い.xlsx の「受取明細」D4:E6
+fixtures\EX03\入力ろ.xlsx の「追加項目」B2:D3
+作業コピー:
+runs\EX03-attempt1\work.xlsx
+出力:
+runs\EX03-attempt1\照合結果.xlsx
+指定 bundle:
+PAD-Robin-Fixed-Helper-A3-Bundle
+
+結論:
+
+この bundle 単体からは、要求された「貼付け可能な完成Robin」は生成できません。
+
+理由は、bundle 自身が「完成した fixed-EX03 Robin は意図的に含まれていない」と明記しており、組立規則のみを提供しているためです。
+
+未解決箇所:
+
+C06 固定 Launcher ブロック
+
+C06 は「mutable_parameters: none」で完全固定です。
+その内部では固定 invocation パス、固定 runtime パス、固定 helper SHA、固定 invocation SHA を参照します。
+しかし今回依頼の実行対象は
+catalog\acceptance\issue38\runs\EX03-attempt1\work.xlsx
+catalog\acceptance\issue38\runs\EX03-attempt1\照合結果.xlsx であり、bundle に含まれる C06 の固定 trial/runtime 構成との接続方法が提示されていません。
+
+C04 の source slot 数
+
+AR04 は「source slot count/indexes」を mutable としています。
+今回は
+D4:E6 = 6セル
+B2:D3 = 6セル
+合計12位置
+どの source-N.json にどの位置を割り当てるかの固定 EX03 規則が bundle 内にありません。
+
+C09 の転記マッピング
+
+AR09 は target column / row / target sheet / WriteCell copy count が mutable です。
+要求文から転記先座標は分かりますが、
+SourceData のどの DataTable index を
+どの WriteCell 行へ対応付けるか について、採取済み命令行の具体的複製元は bundle に存在しません。
+
+C10 再読取り矩形
+
+AR10 は activation/read pair を矩形ごとに複製すると規定されています。
+しかし EX03 用の完成配線は提供されておらず、bundle 自身も「fixed-EX03 full wiring は意図的に欠落」と記載しています。
+
+C11 比較位置定義
+
+AR11 は readback variable の行列 index を明示複製する方式です。
+今回の12セル分に対応する SavedN／SourceN 比較列挙規則が bundle 内にありません。
+
+具体的に不足している採取物:
+
+EX03 固定版で使用する C04 の source 定義行一覧
+EX03 固定版で使用する C09 の WriteCell 行一覧
+EX03 固定版で使用する C10 の readback 矩形一覧
+EX03 固定版で使用する C11 の比較位置一覧
+EX03 用に接続済みであることが確認できる完成 Robin 採取原文、またはその組立結果との差分定義
+
+bundle の規則だけでは、上記の mutable 部分を確定できず、ユーザー指示どおり「未知の命令、引数、列挙値、制御構造を捏造しない」条件を満たせないため、貼付け用 Robin コードブロックは出力できません。PAD-Robin-Fixed-Helper-A3-Bundle には「実際に根拠がない命令または接続が残る場合だけ Robin を出さず、component ID、出典命令行、未解決の接続前後を具体的に報告する」と記載されています。
+
+未解決の接続前後:
+
+C03 → C04: 12セル分の source slot 展開規則不足
+C04 → C06: EX03 用 invocation/runtime 接続規則不足
+C07 → C09: 12セル分 WriteCell 展開規則不足
+C09 → C10: EX03 用 readback 矩形定義不足
+C10 → C11: 12セル分比較位置定義不足
+C11 → C12: EX03 完成状態名および最終判定規則不足
+
+そのため、現時点では完成 Robin ではなく「根拠不足による生成停止」が妥当です。

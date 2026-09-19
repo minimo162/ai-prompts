@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "test_id": "EX02-R5-G2",
+  "verified_at": "2026-09-15T20:39:47.2159525Z",
+  "checks": [
+    {
+      "command": "python -B tests/Test-Issue38Ex02.py",
+      "status": "PASS",
+      "exit_code": 0,
+      "summary": "17 tests passed, including fixed r5 inputs, live G2 generation integrity, two positive typed runs, one-cell type negative, and preserved legacy 558 failures"
+    },
+    {
+      "command": "python -B tests/Test-Issue38Excel.py",
+      "status": "PASS",
+      "exit_code": 0,
+      "summary": "13 Excel oracle tests passed"
+    },
+    {
+      "command": "node tests/Test-Issue38Package.mjs 20260915-excel-r5",
+      "status": "PASS_NON_LIVE_PACKAGE",
+      "exit_code": 0,
+      "summary": "r5 package contract passed; live evidence is recorded separately in this cycle"
+    },
+    {
+      "command": "pwsh -NoProfile -File tests/Test-RobinCatalog.ps1",
+      "status": "PASS",
+      "exit_code": 0,
+      "summary": "107 Robin catalog checks passed; no PAD or Copilot invoked by this regression test"
+    },
+    {
+      "command": "pwsh -NoProfile -File tests/Test-CopilotRobinPackage.ps1",
+      "status": "PASS",
+      "exit_code": 0,
+      "summary": "package check passed with seven knowledge files and 87 observed actions"
+    },
+    {
+      "command": "git diff --check",
+      "status": "PASS",
+      "exit_code": 0,
+      "summary": "no whitespace errors; the Git line-ending warning for the tracked Python test is non-failing"
+    },
+    {
+      "command": "Get-FileHash assertions for eight primary generated, response, run, and negative artifacts",
+      "status": "PASS",
+      "exit_code": 0,
+      "summary": "all eight files matched the SHA-256 values recorded in their immutable cycle evidence"
+    }
+  ],
+  "live_acceptance_source": "acceptance-status.json",
+  "note": "These regression checks support but do not replace the separately recorded live normal-M365 and PAD evidence."
+}

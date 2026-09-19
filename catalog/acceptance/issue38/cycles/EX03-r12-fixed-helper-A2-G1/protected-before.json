@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-COPILOT-A2-G1",
+  "recorded_at": "2026-09-18T10:55:19.409108+09:00",
+  "base_commit": "e768b2a14dd8d154ee987554d7c13c53ca644b0f",
+  "files": [
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/EX03-R12-Fixed-StringTransfer.ps1",
+      "sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+      "bytes": 8222
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/invocation.json",
+      "sha256": "92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6",
+      "bytes": 1339
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/launcher.ps1",
+      "sha256": "1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1",
+      "bytes": 2144
+    },
+    {
+      "path": "catalog/acceptance/issue38/requests/EX03.txt",
+      "sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+      "bytes": 1647
+    },
+    {
+      "path": "catalog/acceptance/issue38/spec.json",
+      "sha256": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+      "bytes": 1192
+    },
+    {
+      "path": "catalog/acceptance/issue38/expected.json",
+      "sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+      "bytes": 777
+    },
+    {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "bytes": 6115
+    },
+    {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力い.xlsx",
+      "sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+      "bytes": 5015
+    },
+    {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力ろ.xlsx",
+      "sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725",
+      "bytes": 5046
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/agent-instructions.txt",
+      "sha256": "def1af576bac79d5dbf321ac38d7702d3d968932b2e0767265f9544eb18ebe60",
+      "bytes": 16547
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/knowledge/PAD-Robin-Fixed-Helper-A2-Bundle.txt",
+      "sha256": "009a830d7a1bb431c1f02933e45933c2d7466260c616e46114255605dc3e5b1c",
+      "bytes": 22765
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/manifest.json",
+      "sha256": "afe054f0e532c7c69b1359b54fe07dc05c42bb99e196be07cf3dd826977f008d",
+      "bytes": 24774
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/COVERAGE.md",
+      "sha256": "8813198b1f76c6034918294908fa86ec2c0a2637e186bd1c6aead65d97e2f2d3",
+      "bytes": 3079
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/PLACEMENT.md",
+      "sha256": "74f8fe4013ceb492fc2ebed661a417749f46c47d147e4ea2c64487909cde556a",
+      "bytes": 2442
+    },
+    {
+      "path": "copilot/versions/20260918-excel-r12-fixed-helper-a2/non-live-verification.json",
+      "sha256": "8520b68a557a49c2324a3c6e78efc2111de2758cb6136d43e033a960bd0b57f0",
+      "bytes": 14047
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/pad-recopy-before-run.robin",
+      "sha256": "da54e5f4388cd0bb896ee00e534e9d81a444f5b950ac1f1bf006f8ea788ad4aa",
+      "bytes": 15406
+    },
+    {
+      "path": "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T2/result.json",
+      "sha256": "66b35d9686bfc17fb8bebf0c0c65f083cba647087417d52b852d3615fe7d14c1",
+      "bytes": 4377
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-G1/acceptance-status.json",
+      "sha256": "216089662ce7a5170d22eb3958a7641ecdee3ca00a95526d98eff2a70dc042ab",
+      "bytes": 1629
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A1-G1/copilot-response.txt",
+      "sha256": "ef1681063425e224fae1f1de137484dbe22434a8f71506df83ee547c48624f14",
+      "bytes": 1756
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r12-fixed-helper-A1-G1/generation-assessment.json",
+      "sha256": "7be97a8b35597dfdcdb934ab52c7b621984849adfcbc20969a01a04b659f16c0",
+      "bytes": 1436
+    }
+  ],
+  "runtime": {
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "output_absent": true,
+    "handoff_absent": [
+      "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/runtime/source-1.json",
+      "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/runtime/source-2.json",
+      "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/runtime/source-3.json",
+      "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/runtime/source-4.json",
+      "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/runtime/source-5.json",
+      "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/runtime/source-6.json",
+      "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/runtime/source-7.json",
+      "catalog/acceptance/issue38/probes/ex03-r12-fixed-helper/trials/EX03-R12-FIXED-HELPER-P1-T1/runtime/mode.json"
+    ]
+  }
+}

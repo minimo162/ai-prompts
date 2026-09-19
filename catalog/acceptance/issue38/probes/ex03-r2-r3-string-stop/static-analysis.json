@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE38_EX03_R2_R3_NON_EXECUTING_PREFLIGHT",
+  "executed_embedded_scripts": false,
+  "r11_unsafe_interpolated_example": {
+    "path": "r11-unsafe-interpolated-obrien.ps1.txt",
+    "sha256": "fed41170d0c5891fa678a6573de38cee1c55442fdb0c64bc39596499cef78d85",
+    "ast_error_count": 7,
+    "ast_errors": [
+      "Unexpected token 'Brien\"}'),\n    @('Data1[1][0]', '謨呎攝蜃ｺ蜉帑ｸ', 'J5', '{\"probe\":\"He' in expression or statement.",
+      "Unexpected token 'B11', '' in expression or statement.",
+      "Unexpected token ':\"He said \\\"Go\\\"\\nSecond line 'quoted'\"' in expression or statement.",
+      "Unexpected token 'D11', '' in expression or statement.",
+      "Unexpected token ':\"O'Brien\"' in expression or statement.",
+      "The string is missing the terminator: '.",
+      "Missing closing ')' in subexpression."
+    ],
+    "result": "REJECT_BEFORE_EXECUTION"
+  },
+  "safe_script": {
+    "path": "embedded-safe.ps1.txt",
+    "sha256": "cdd0dc9db4c9e89b6d598a8df65b64ea1427e7c7b75bcadd3328c56635f6973a",
+    "ast_error_count": 0,
+    "pad_data_placeholders": 0,
+    "fixed_json_file_reads": 5,
+    "result": "PASS_STATIC_ONLY"
+  },
+  "expected_pad_json_not_yet_claimed_as_actual": [
+    "{\"probe\":\"O'Brien\"}",
+    "{\"probe\":\"He said \\\"Go\\\"\\nSecond line 'quoted'\"}",
+    "{\"probe\":\"100%\"}",
+    "{\"probe\":42.5}"
+  ],
+  "handoff": {
+    "method": "PAD ConvertCustomObjectToJson -> UTF-8 fixed files -> PowerShell Get-Content -Raw -> ConvertFrom-Json",
+    "json_is_powershell_source_code": false,
+    "normal_and_negative_robin_differ_only_by_mode": true
+  },
+  "gate_simulation": {
+    "exact_success_normal": true,
+    "missing_output_normal": false,
+    "empty_output_normal": false,
+    "error_output_normal": false,
+    "exact_success_negative_mode": false,
+    "expected_error_negative_mode": false
+  },
+  "candidate_sha256": {
+    "normal": "d59787268539d20318190caa9309a4ee50221502f222433cd6fff986f96ec0c3",
+    "negative": "2341732e27ccd98beaa7ad64228ae0af9b7d6fac199c0c0250cbd2e0f9e496b5"
+  },
+  "decision": "PASS_TO_DEDICATED_PAD_NORMAL_RUN_ONLY"
+}

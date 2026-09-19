@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-COPILOT-A3-G1",
+  "recorded_at": "2026-09-18T15:00:31.9775024+09:00",
+  "status": "STAGED_AWAITING_ACTION_TIME_SEND_CONFIRMATION",
+  "resumed_from_commit": "6c16d7b4ad0b9a610a935a7b29ad8e71640656e7",
+  "candidate": {
+    "id": "20260918-excel-r12-fixed-helper-a3",
+    "route_id": "EX03-R12-FIXED-HELPER-COPILOT-A3",
+    "instruction_sha256": "87d4fad6445be8371bfcad9d35d2ce8c384758714c7d48e0232a1ce60ab89d98",
+    "bundle_sha256": "50c60d9533b9afb4d698416d6f9bf0b30040dee69206cf1734dea565f740b0c4",
+    "bundle_bytes": 43085,
+    "submitted_body_sha256": "eae9de79a8c0ec4796ee90b3dd9e41b35c72490c483d7f15723891b0441142c3",
+    "submitted_body_bytes": 21345,
+    "helper_sha256": "08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135",
+    "invocation_sha256": "92ea864a7e43cec61b4215592a3bae9b8b31109af4e18d3ff0a79dcb15fc5ad6",
+    "launcher_sha256": "1e9750385455999460e9b1dce754e2a649d4837ae1939cd444376fc360a25ee1"
+  },
+  "destination": {
+    "kind": "NORMAL_MICROSOFT_365_COPILOT_CHAT",
+    "browser": "Chrome",
+    "title": "チャット | Microsoft Copilot",
+    "url": "https://m365.cloud.microsoft/chat?es=SSR",
+    "new_chat_without_observed_message_history": true
+  },
+  "submitted_body_editor_check": {
+    "expected_chars": 9414,
+    "observed_chars_including_editor_markers": 9416,
+    "trailing_editor_markers": [
+      "U+200B",
+      "U+200C"
+    ],
+    "sha256_after_removing_only_trailing_editor_markers": "eae9de79a8c0ec4796ee90b3dd9e41b35c72490c483d7f15723891b0441142c3",
+    "exact_after_removing_only_trailing_editor_markers": true
+  },
+  "attachment_check": {
+    "filename": "PAD-Robin-Fixed-Helper-A3-Bundle.txt",
+    "visible_attachment_count": 1,
+    "upload_error_visible_after_correct_attachment": false,
+    "copilot_notice": "デバイスからアップロードすると、OneDrive (個人用) にコピーが送信されます。",
+    "initial_operator_path_error": {
+      "occurred": true,
+      "wrong_path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\candidates\\20260918-excel-r12-fixed-helper-a3\\PAD-Robin-Fixed-Helper-A3-Bundle.txt",
+      "ui_error": "アップロードに失敗しました。ファイルは空です",
+      "attachment_created": false,
+      "send_performed": false,
+      "recovery": "Dismissed the error, re-read the repository path and SHA, and attached the fixed bundle from copilot/versions/20260918-excel-r12-fixed-helper-a3/knowledge."
+    }
+  },
+  "send": {
+    "button_visible": true,
+    "button_clicked": false,
+    "send_count": 0,
+    "send_limit_total": 1,
+    "send_limit_consumed": false,
+    "next_action": "CLICK_SEND_ONLY_AFTER_ACTION_TIME_CONFIRMATION"
+  },
+  "runtime_integrity": {
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_matches_fixed_template": true,
+    "output_absent": true,
+    "json_handoff_present_count": 0,
+    "pad_save": "NOT_RUN",
+    "pad_recopy": "NOT_RUN",
+    "pad_run_count": 0
+  },
+  "scope": {
+    "generated_robin": false,
+    "manual_generated_robin_edit": false,
+    "next_candidate_created": false,
+    "github_write": false
+  }
+}

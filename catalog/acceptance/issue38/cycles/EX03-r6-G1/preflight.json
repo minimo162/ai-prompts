@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R6-G1",
+  "base_commit": "1701d8dd3ca88c2c60de443205e54a764e578fc9",
+  "checks": {
+    "frozen_fixture_spec_request_expected_hashes_match": true,
+    "r6_instruction_bundle_manifest_support_hashes_match": true,
+    "r6_all_evidence_input_hashes_match": true,
+    "r5_and_old_cycle_included_in_protection_manifest": true,
+    "work_exists_and_matches_template": true,
+    "output_absent": true,
+    "grader_only_expected_values_except_authorized_percent_probe_absent_from_body": true,
+    "completed_robin_absent_from_submission": true
+  },
+  "prior_runtime_cleanup": {
+    "path": "catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx",
+    "sha256": "726e2a0bea07e690f8945bc099b3e39aea6bf9d33755440d9245ec0dedb83475",
+    "archived_as": "catalog/acceptance/issue38/cycles/EX03-r5-G1/run1/result.xlsx",
+    "archived_sha256": "726e2a0bea07e690f8945bc099b3e39aea6bf9d33755440d9245ec0dedb83475",
+    "safe_to_remove_for_new_fixed_run": true
+  },
+  "hashes": {
+    "submitted_body": "a9051689e227e74a904c20fb860f89935b5c393164629869bebbcc923e93903e",
+    "instruction": "1211ee45f80427a474d15d92dbfda3b7c90d2a78b9b7520aadb76f5f22c82fe4",
+    "bundle": "9c566e7f85a431f1869302c6a40985e2f81237f17ac4fbbdc9a73e62a646b580",
+    "manifest": "207dfa10f34f0eb7c09a3a39ecfb25c24f870fb5e639b87a0fbce0683cbc9f89",
+    "support": "d0a5df36516fcf4e27f6d789300ee5a03789aba8176571b1ab86fe84f15fba1a",
+    "work_and_template": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "input_a": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "input_b": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+  },
+  "decision": {
+    "safe_to_run_non_live_checks": true,
+    "copilot_generation": "NOT_STARTED",
+    "pad_run1": "NOT_STARTED",
+    "pad_run2": "NOT_STARTED"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "test_id": "EX02-R5-G1",
+  "audited_at": "2026-09-15T14:21:05.464Z",
+  "version": "20260915-excel-r5",
+  "copilot_code_copy": {
+    "path": "catalog/acceptance/issue38/cycles/EX02-r5/generated.robin",
+    "raw_sha256": "c26b5c6cf42b66fecb1272222b64c2ab7aaa38921802945d9a58d7636c6a7dec",
+    "clipboard_utf16_chars": 7403,
+    "displayed_lines": 88,
+    "lf_normalized_chars": 7316,
+    "lf_normalized_sha256": "1658dca3226f052692f3086b8f95ebe8e8733feed8d867e9d46b8e6d9448076e"
+  },
+  "frozen_assembled_example": {
+    "source": "tools/Build-Issue38Ex02CandidateR5.py:assembled_example",
+    "chars": 7315,
+    "lines": 87,
+    "sha256": "0829526420158a61146e5d3fde7c4a5cc035228e2ab98be96d9697aa64d457bd"
+  },
+  "comparison": {
+    "exact_match": false,
+    "only_difference": "Copilot code-copy has one extra final line containing a single backtick after END.",
+    "unified_diff": [
+      "@@ -85,3 +85,4 @@",
+      "     SET TargetB_C5_ValueTypeMatch TO SourceCellJson = SavedCellJson",
+      "     SET TransferState TO $'''SAVED_REOPENED_12_JSON_COMPARISONS_READY'''",
+      " END",
+      "+`"
+    ],
+    "matches_frozen_example_if_last_backtick_is_removed": true,
+    "repair_applied": false
+  },
+  "bounded_side_effect_review": {
+    "output_exists_guard": true,
+    "all_excel_actions_inside_else": true,
+    "save_as_count": 1,
+    "write_action_count": 2,
+    "read_only_true_count": 3,
+    "source_json_actions": 12,
+    "saved_json_actions": 12,
+    "value_type_match_variables": 12,
+    "delete_or_remove_action_count": 0,
+    "shell_or_web_automation_action_count": 0,
+    "input_paths_read_only": true,
+    "output_path": "catalog/acceptance/issue38/runs/EX02-attempt1/result.xlsx",
+    "output_absent_at_send_and_paste": true
+  },
+  "decision": {
+    "status": "FAIL_UNMODIFIED_CODE_COPY_EXTRA_BACKTICK",
+    "safe_for_single_empty_flow_import_observation": true,
+    "safe_to_save_or_run_as_accepted_flow": false,
+    "reason": "The side-effect scope is bounded, but the copied Robin is not byte/text-identical to the frozen 87-line composition and contains an unmeasured standalone token. The fixed no-repair rule forbids deleting it.",
+    "pad_success_inherited_from_probe": false
+  }
+}

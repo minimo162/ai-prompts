@@ -1,0 +1,141 @@
+PAD Robin 実測ナレッジ索引
+
+このファイルは、PADの左パネルから追加してコピーしたRobin例と、その検証範囲を探すための索引です。網羅的なPADアクション一覧でも、実行許可リストでもありません。未観測の表示名や引数は推測していません。
+
+環境記録
+- PAD: 2.71.115.26224
+- UI: 日本語（PowerPointの一部アクション名は英語）
+- Power Fx: OFF（2026-09-09の専用フロー作成ダイアログで確認。既存採取例の条件は各capture_sessionを参照）
+- データ: 合成データ、専用フロー。業務ファイル・認証情報は含めない
+- 索引原本: catalog/index.json（86の観測バリアント。既存51＋日時取得1＋空データテーブル1＋行追加失敗1＋CSV読取り2＋CSV書出し2＋FilterDataTable1＋ファイルコピー1＋サブテキスト取得1＋テキスト書出し1＋テキスト変数書込み2＋For each1＋If2＋Excel/Word編集可能起動2＋フォルダー取得2＋ファイル変数読取り1＋PDFページ2単独1＋T04 Excel読取り／変換／中間CSV／別名保存4＋T09ブラウザー起動／入力／クリック／待機／結果取得／終了6）
+
+2026-09-09の左パネル再観測
+- 専用の空フロー `RobinKnowledgeLive_20260909` で、ActionsTreeViewのグループを展開し、上端から下端までスクロールした。
+- 画面で観測したノードは412（グループ72、アクション340）。この値は今回セッションのPADデザイナー表示範囲であり、PADの全機能一覧ではない。
+- 原文: catalog/evidence/pad-action-inventory-20260909.json。採取対象へ追加・設定・コピー・実行したアクションは、この一覧観測とは別に記録する。
+- 確認できた必須範囲の表示名例: 「現在の日時を取得」「加算する日時」「日付の減算」「新しいデータ テーブルを作成する」「行をデータ テーブルに挿入する」「CSV ファイルから読み取る」「ファイルをコピー」「ファイルの移動」「ファイルの名前を変更する」「フォルダー内のファイルを取得」「フォルダーの作成」「If」「Else」「For each」「ループを抜ける」「サブフローの実行」「待機」「Web ページに移動」「Web ページのリンクをクリック」「Web ページで JavaScript 関数を実行」。
+
+カテゴリと観測されたUI名
+- 変数（10）: 新しいリストの作成、項目をリストに追加、新しいデータ テーブルを作成する、行をデータ テーブルに挿入する（失敗例含む）、データ テーブルをフィルター処理、変数の設定、変数を大きくする
+- テキスト（8）: テキストを置換する、テキストの分割、テキストの結合、テキストを数値に変換、数値をテキストに変換
+- ループ（1）: Loop
+- 日時（1）: 現在の日時を取得（今回のdate-only設定）
+- ファイル（6）: ファイルからテキストを読み取る、CSV ファイルから読み取る（ヘッダーなし／ヘッダーあり）、CSV ファイルに書き込む（PDF表／変数参照／FilteredDataTable列名付き）
+- Excel（8）: Excel の起動、Excel ワークシートに書き込む、Excel ワークシートから読み取る、Excel の保存、Excel を閉じる
+- Word（7）: Word を起動する、Word 文書に書き込む、Word 文書から読み取る、Word 文書内の単語を検索して置換する、Word を保存、Word を閉じる
+- PowerPoint（7）: Launch PowerPoint、Add slide to PowerPoint、Write to PowerPoint、Read from PowerPoint、Save PowerPoint、Close PowerPoint
+- PDF（11）: PDF からテキストを抽出、PDF からテーブルを抽出する、PDF から画像を抽出、新しい PDF ファイルへの PDF ファイル ページの抽出、PDF ファイルを統合
+
+原文と証拠の対応
+- 各UI名・設定・入力型・出力型・SHA-256: catalog/index.json
+- 単独アクション原文: catalog/actions/<action-id>/<variant>.robin
+- 前提を含むフロー原文: catalog/flows/
+- 実行値・変数・成果物: catalog/evidence/
+- 生成回答と再貼付け: catalog/generated/
+- 採取条件と制約: docs/robin-action-catalog.md、docs/office-action-capture.md、docs/pdf-action-capture.md
+
+検証状態の意味
+- verified_roundtrip_and_run: 既存の記録で再貼付け・保存／実行が区別され、期待結果の証拠がある
+- captured_partial_verification: 左パネル追加とコピーは確認済みだが、工程の一部が未確認
+- not_observed: 現在の実測カタログに原文がなく、表示名を補完していない
+- 新しいCopilotエージェントへの登録・T01〜T10は、この索引の既存証拠とは別の検証項目です
+
+今回の必須範囲との対応（現時点）
+- A 基礎: 変数、リスト作成・追加、置換、分割・結合、数値変換、サブテキストに加え、真偽値、数値減算、日時加算・減算、DateAndTime取得を専用probeで原文・実行確認済み。リスト項目の取出しは2026-09-12に`SET NewVar TO CatalogList[0]`（ダイアログへ入力しPADから再コピー、2回実行で先頭項目を取得）を確認した（01-Basics末尾）。カスタム日時書式化は未確認。
+- B 制御: 定数範囲Loop、For each／If、Else／Else-if、EXIT LOOP／NEXT LOOP、BLOCKエラー経路、P3Worker呼出しを専用probeで確認。既定のすべてのエラーへ変数設定し続行するhandlerも2回成功。For each内のIf／Else両分岐でSETと変数加算を行う組合せは2026-09-12のT03拡張子probeで2回実行した。If内If、名前付きカスタムエラー一致は未確認。
+- C データ処理: 空テーブル、3列1行DataTable作成、列付き行追加、セル更新、2行の行反復、CSV読取り／FilterDataTable／CSV書出しを実行確認済み。列数不一致へ戻る失敗例は別に保持する。
+- D ファイル: テキスト／CSV読書き、単一ファイルコピー、フォルダー取得、変数パス読取りに加え、File.Exists true/false、Folder.Create、File.Move（DoNothing衝突）、File.RenameFiles（DoNothing衝突）を専用probeで確認。ファイル変数の`.Extension`が`.txt`と等しいかの厳密判定とElse経路は2026-09-12に採取し、別フローで2回実行した（03-Files「拡張子が.txtのファイルだけを読み取り」、`catalog/evidence/t03-ext-verify-acceptance-20260912.json`）。false分岐内side effectは未確認。
+- E Excel: 起動・セル／範囲読書き・保存・終了、Sheet1選択、A1:C6 TypedValues読取り（6行3列プレビュー）、Excelデータ反復を確認。初回設定境界・ブレークポイント停止は成功証跡と分離する。
+- F Office／PDF: 既存採取と合成データ証跡を参照可能。新エージェント登録での再利用は未確認。
+- G UI／ブラウザー: T09でローカルEdgeの入力・ボタン・結果段落をPAD UI要素ピッカーから捕捉し、6アクションを空フローへ貼付け・保存した。2026-09-12に、ControlRepository付きの採取原文を別の空フローへ貼り付けて実行し、`WAIT 500`（500秒）の経過後に`AttributeValue=T09-clicked`とブラウザー終了まで完了した（05-UI-Web「2026-09-12 T09の通し実行」）。`WAIT n`の単位は秒であり、500は500ミリ秒のつもりの誤設定だったため、待機を1秒に直した再採取原文`roundtrip-wait1-20260912.robin`で2回とも数秒で完了した（05-UI-Web「2026-09-12 待機1秒での通し実行」）。T09の生成では`WAIT 1`を使う。生成Robinには要素リポジトリが含まれないため、貼付け先フローへ3要素を事前登録する。未知のセレクターは生成しない。
+
+P3追補の参照範囲（各probeは現行bundle統合後の通常チャット受入とは別）
+- A: 真偽値、数値減算、日時加算・減算、DateAndTime取得は専用probeで原文・保存・実行を確認。リスト項目取得はインデックス式`CatalogList[0]`で先頭項目の取出しを2回実行確認（`catalog/evidence/p3-list-get-index-probe-20260912.json`）。専用取得アクションは未観測。カスタム日時書式化はPAD内部例外のため未確認を維持する。証拠: `catalog/evidence/p3-boolean-probe-20260910.json`、`p3-subtract-probe-20260910.json`、`p3-date-add-probe-20260910.json`、`p3-date-subtract-probe-20260910.json`、`p3-date-format-probe-20260910.json`、`p3-date-format-dialog-crash-20260911.json`、`p3-list-get-search-boundary-20260911.json`。
+- B: Else／Else-if、EXIT LOOP／NEXT LOOP、BLOCKエラー経路、P3Worker呼出しを専用probeで確認。既定のすべてのエラーへ変数設定し続行するhandlerは2回成功、名前付きFileNotFoundルールはruntime errorのまま。証拠: `catalog/evidence/p3-else-probe-20260910.json`、`p3-else-if-probe-20260910.json`、`p3-break-probe-20260910.json`、`p3-continue-probe-20260910.json`、`p3-error-default-handler-20260911.json`、`p3-error-custom-handler-20260911.json`、`p3-subflow-probe-20260910.json`。
+- C: 3列1行DataTable作成、3値リストからの行追加、列インデックス2・行0のセル更新、2行3列のFor each反復を専用probeで確認。列数不一致へ戻る失敗例と初回タイムアウトは別証拠へ分離する。証拠: `catalog/evidence/p3-datatable-create-success-20260911.json`、`p3-datatable-row-success-20260911.json`、`p3-datatable-cell-success-20260911.json`、`p3-datatable-foreach-success-20260911.json`、`p3-datatable-row-error-state-20260911.json`。
+- D: File.Exists true/false、Folder.Create、File.Move（DoNothing衝突）、File.RenameFiles（DoNothing衝突）を専用probeで確認。false分岐内side effectは未確認。証拠: `catalog/evidence/p3-file-exists-probe-20260910.json`、`p3-file-exists-false-probe-20260910.json`、`p3-folder-create-probe-20260910.json`、`p3-file-move-probe-20260910.json`、`p3-file-rename-probe-20260910.json`。
+- E: Sheet1選択、A1:C6 TypedValues読取り（6行3列プレビュー）、`LOOP FOREACH CurrentItem IN ExcelData`と`SET ExcelRowSeen TO CurrentItem`の保存・2回実行を別probeで確認。設定境界・残留ブレークポイント停止は未成功例として分離する。証拠: `catalog/evidence/p3-excel-sheet-probe-20260910.json`、`p3-excel-read-range-probe-20260911.json`、`p3-excel-foreach-runtime-success-run1-20260911.json`、`p3-excel-foreach-runtime-success-run2-20260911.json`、`p3-excel-foreach-configuration-boundary-20260911.json`。
+
+2026-09-12の追加採取: T03の厳密な拡張子判定
+- 専用フロー`RobinKnowledgeT03ExtProbe_20260912`でIfダイアログの変数ピッカーから`CurrentFile > .Extension`を選び、`.txt`と「と等しい」で比較する条件とElseをPADから採取した（`catalog/evidence/t03-ext-probe-capture-20260912.json`）。
+- 取得→For each→If .Extension→UTF-8読取り＋SET＋変数加算→Else＋SET＋変数加算の13行原文を`RobinKnowledgeT03ExtRun_20260912`へ無修正貼付けし、2回とも`.txt`2件読取り・その他2件Else・入力不変を確認した。7行の最小形も別フローで2回実行した。詳細は02-Control、03-Files、06-Examples 例7。
+- 変数加算の変数名は変数参照で書く。文字列リテラルにするとDesignerエラーになる。
+
+配布登録はこのファイルと、01〜06の7ファイルを .txt として行います。pad-robin-prompts.md は編集用の旧原稿であり、配布用ナレッジと競合する別の指示欄として登録しません。
+
+今回の追加採取: T09ローカルUI（捕捉・貼付け、実行は未完了）
+- `catalog/fixtures/ui/t09-local-test.html` を `http://127.0.0.1:8765/t09-local-test.html` で実行し、PAD UI要素ピッカーから入力欄 `t09-input`、ボタン `t09-submit`、結果段落 `t09-result` を捕捉した。セレクターは実画面から得た `Id` 属性であり、推測ではない。
+- 実測順序は `WebAutomation.LaunchEdge` → `WebAutomation.PopulateTextField`（`T09-input`）→ `WebAutomation.Click`（実行、左クリック）→ `WAIT 1`（2026-09-10採取時は`WAIT 500`。単位は秒で、500は誤設定）→ `WebAutomation.GetDetailsOfElement`（`Own Text`）→ `WebAutomation.CloseWebBrowser`。原文フローは `catalog/flows/ui-t09-local-roundtrip/roundtrip.robin`（SHA-256: 93576858f25fdcd254994d3435c1f3fdc87c05043f41a8f4ab90b2a6639209dd）、待機1秒の再採取原文は `roundtrip-wait1-20260912.robin`（SHA-256: d8913da95757f5fff4d3d7b10c40c35120d76882dc4d516356c9c3ddf06c5571）。
+- `RobinKnowledgeT09FilterPaste_20260910` という空フローへ6アクションをファイルから貼付け、保存し、再コピーした。再コピーはアクション行6本が一致したが、PADがControlRepositoryのInstanceId／画像を再生成したため全体バイトSHAは一致しない。証拠: `catalog/evidence/t09-final-paste-acceptance-20260910.json`、再コピー `catalog/evidence/t09-final-paste-flow-recopy.robin`。
+- 元フロー・貼付けフローとも、WebAutomation実行は完了せず監視後に停止した。`AttributeValue=T09-clicked` は未観測であり、成功扱いにしない。証拠: `catalog/evidence/t09-runtime-block-20260910.json`。PADのnative CUAが未構成のため、ここでの操作は厳格なUIAフォールバックである。
+
+2026-09-12の追加採取: P3残課題（P3-1〜P3-6）
+- P3-1 リスト添字: `SET NewVar TO CatalogList[1]`をダイアログ入力→PAD再コピー→別空フロー再利用、各2回実行で`NewVar=SecondItem`（01-Basics）。添字0の既存結果は維持。
+- P3-2 制御構造: If内If＋ファイル書込み＋`EXIT LOOP`（23行）と、`LOOP … STEP`内For each＋`NEXT LOOP`（15行）を期待値固定のうえ2回実行・別フロー再利用（02-Control）。`EXIT LOOP`／`NEXT LOOP`は最も近いループにだけ作用した。
+- P3-3 ファイル境界: `.TXT`はElse（等価比較は大文字小文字を区別）、`.txt.bak`はElse、親フォルダー名`sub.txt`は影響なし、サブフォルダーは`IncludeSubfolders`で制御（03-Files）。固定T03は変更していない。
+- P3-4 SaveAs衝突: Excel／WordのSaveAsは既存出力を無警告で上書き（04-Office）。
+- P3-5 日時書式: `Text.ConvertDateTimeToText.FromCustomDateTime … CustomFormat: $'''yyyy-MM-dd'''`を新規追加で採取し、2回実行で`2026-09-12`（01-Basics）。2026-09-11の内部例外は既存アクションの編集経路で、新規追加では再現しなかった。
+- P3-6 名前付きエラー: アクション単位の`ON ERROR FileNotFoundError`が一致して`NewVar=named`のみ設定され、ブロック既定ルールは発火しない（02-Control）。ブロック側の利用者定義名`FileNotFound`は一致しない。T08の既定ハンドラー合格はそのまま。
+- 証拠: `catalog/evidence/p3-list-idx1-acceptance-20260912.json`、`p3-nested-control-acceptance-20260912.json`、`p3-file-boundary-acceptance-20260912.json`、`p3-saveas-collision-acceptance-20260912.json`、`p3-date-format-acceptance-20260912.json`、`p3-named-error-acceptance-20260912.json`。
+
+Issue #38 EX02 / 20260915-excel-r4 候補の現在の範囲
+これは既知命令を組み合わせる教材で、実装者probeとCopilot生成物の受入は別判定です。r1/r3の途中時点の不足・Run2未開始記録は旧版内に保存されています。この版では以下の現在の採取範囲を使います。
+1. File.IfFile.Exists + ELSE/END は既存/未存在パスの各分岐を2Run確認済み。既存側は状態変数の設定だけ、ELSE内に全てのExcel起動・転記・保存・再読取り・比較を置けば、既存時に書込み経路へ入らない構成候補を作れます。END後に書込みを置きません。単独EXITや未採取の停止命令は不要です。probe自体はExcel書込みを含まず、この統合形の安全性は別に確認します。
+2. DataTableをWriteCellのValueへそのまま渡す矩形転記→SaveAs→Close→読取り専用再開→各シート再選択/ReadCells→Closeの21アクションは2Run終了を観測済みです。両Runの対象12セルの保存値・保存型・位置は一致。保存ファイル480セルの旧比較には書式・寸法558差分のFAILが残り、Excelネイティブの記録属性のみの一致を全体PASSに読み替えません。
+3. DataTable[0][0]のテキストと[1][1]の数値の取出し、IFの一致・不一致は2Run確認済み。数値-3と引用テキストの等価比較もMATCHでした。数値1と文字列"1"についても同じ型混同を避ける必要がありますが、このprobeで直接実測した値は-3です。等価比較は厳密な型検証ではありません。
+4. 全12セルへの定数添字展開と取得値/再読取り値の変数同士の比較は既知のSET/IFを使う構成候補です。直接実測した添字は[0][0]と[1][1]のみです。行列数に合わせた添字の変更は値の置換として構成できますが、別の添字の実行済み証明を付けません。変数添字や型プロパティを発明しません。
+5. 型識別アクション・厳密型比較のPAD原文は未採取です。TypedValuesで取得したという設定、等価比較、一致件数、外部openpyxlの型一致だけで、生成フロー自身が型照合したとは表示しません。型照合を要求する固定EX02でこの工程が欠ければ未達です。型不足は型不足として示し、既知の転記・保存まで一律未採取と言わず、独立して提示できる構成と区別します。依頼を読取りだけへ縮小しません。
+固定する構造: 各命令名、引数名、モード、列挙値、TypedValues、FirstLineIsHeader: False、DataTable型、文字列引用/パスエスケープ、IF/ELSE/ENDと依存順。Excelインスタンスは取得元ごとに区別します。
+変更可能なデータ: ローカル合成xlsxパス、存在するシート名、有限矩形の列文字列/正の行数、転記先の列/行、未存在の出力名、定義と全参照を一貫させた変数名。既存シートやパスが例と異なるだけで拒否しません。日本語別シート・別矩形のEX03全体は実行未確認です。
+前提: 入力/テンプレート原本は編集せず、作業コピーは検証者がフロー前に準備。入力/テンプレート/作業コピー/出力は別パス。既存シート、有限範囲、対象矩形を準備時に確認。シート不存在などの未採取検査や未知の引数を作りません。既存出力チェックはフローにも置きます。同時書込み競合は未検証です。
+要求の範囲: 値の矩形転記であり、数式・書式・コメント・画像の完全コピー機能を追加条件にしません。転記先の対象外セル・数式・代表書式の保持は必要です。追加機能を理由に値転記全体を拒否しません。結合/保護セル、日付/空白/真偽値の転記は今回の固定fixture外です。
+観測を分ける: フロー内は再読取り変数と各セル等価比較（型は未証明）。独立検証は保存xlsxを閉じた状態でopenpyxlの値+型タグ+座標、対象外セル/数式/コメント、旧書式比較、Excelネイティブ属性、入力2冊/テンプレートのSHAを別々に報告。外部検査は未実装のフロー工程を代替しません。
+採取済み独立シート選択:
+Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelInstance Name: $'''Sheet1'''
+Excel.WriteToExcel.WriteCell Instance: ExcelInstance Value: ExcelData Column: $'''C''' Row: 4
+
+Issue #38 EX02 / 20260915-excel-r5 候補の現在の範囲
+この節はr4の型不足節を限定的に更新する。r4本体・r4実生成拒否・成功済み単体probeは変更も再採取もしない。実装者probeと、今回のCopilot生成物を無修正でPAD受入する結果は別判定である。
+1. r4で確認済みの出力存在分岐、21アクション矩形転記、保存・クローズ・読取り専用再開、12セルの定数添字対応を保持する。入力/テンプレート原本は編集せず、未存在の別出力だけを作る。既存出力側では状態変数だけを設定し、ELSE内に全Excel書込み経路を閉じ込める。
+2. 78ccbcfで採取したDataTable JSON identity原文により、同じ表示の数値1と文字列"1"を2Runで区別できた。確認したセル・設定・値・PAD環境だけが単体probeのPASSであり、EX02全体の成功ではない。
+3. 固定EX02 fixtureの対象12セルは文字列または数値だけである。各source/readbackセルを変換せず同じprobeキーのカスタムオブジェクトへ包み、採取済みConvertCustomObjectToJson原文でJSON化し、対応するJSON同士を個別比較する構成候補を使う。12組すべてを定数添字で明示し、結果変数を個別に残す。
+4. 日付、空白、真偽値、エラー、数式結果、任意オブジェクト、他PC/PAD版へ一般化しない。未確認型へGetTypeなどを捏造しない。12セルへの接続自体はこのr5で初めて実Copilot生成・無修正PAD 2Run・保存後再読込を受入する対象である。
+5. 固定期待値は検証者だけが保持し、Copilot本文やbundleへ正解として混ぜない。フロー内ではsource/readbackの値・JSON型・定数位置を比較し、検証者が閉じた保存xlsxを固定期待値、原本SHA、対象外全セル、数式、コメント、書式・寸法に対して独立照合する。
+6. 480セルの旧比較に残る書式・寸法558差分FAILを保持する。480セルの値/型/数式一致やExcelネイティブ限定属性一致を、書式保持の全体PASSに読み替えない。負例は正例出力の別コピー1セルだけを同表示の別型へ変え、少なくとも対象セルの型不一致を検出する。正例Run2の代用にはしない。
+固定する構造: 各命令名、引数名、モード、列挙値、TypedValues、FirstLineIsHeader: False、DataTable型、JSONのprobeキー、文字列引用/パスエスケープ、IF/ELSE/ENDと依存順、保存→閉じる→読取り専用再開→両対象矩形再読取り→12組比較→閉じる。
+変更可能なデータ: 固定依頼に示されたローカル合成xlsxパス、既存シート名、有限矩形、転記先、未存在出力名、および全参照を一貫させた変数名。型やアクション設定を変更可能データにしない。
+観測を分ける: 単体probe、Copilot応答原文、コードコピー原文、PAD貼付け/保存/再コピー、各Run終了、12結果変数、保存xlsx独立検査、負例検出を別証跡にする。手組みprobeや外部検査の成功をCopilot生成フローの成功へ転用しない。
+固定EX02の12セル位置対応（完成フローでは各組を定数添字で個別比較）:
+- Data1[0][0] -> Readback1[0][0] -> Target A!C4 -> TargetA_C4_ValueTypeMatch
+- Data1[0][1] -> Readback1[0][1] -> Target A!D4 -> TargetA_D4_ValueTypeMatch
+- Data1[0][2] -> Readback1[0][2] -> Target A!E4 -> TargetA_E4_ValueTypeMatch
+- Data1[1][0] -> Readback1[1][0] -> Target A!C5 -> TargetA_C5_ValueTypeMatch
+- Data1[1][1] -> Readback1[1][1] -> Target A!D5 -> TargetA_D5_ValueTypeMatch
+- Data1[1][2] -> Readback1[1][2] -> Target A!E5 -> TargetA_E5_ValueTypeMatch
+- Data2[0][0] -> Readback2[0][0] -> Target B!B3 -> TargetB_B3_ValueTypeMatch
+- Data2[0][1] -> Readback2[0][1] -> Target B!C3 -> TargetB_C3_ValueTypeMatch
+- Data2[1][0] -> Readback2[1][0] -> Target B!B4 -> TargetB_B4_ValueTypeMatch
+- Data2[1][1] -> Readback2[1][1] -> Target B!C4 -> TargetB_C4_ValueTypeMatch
+- Data2[2][0] -> Readback2[2][0] -> Target B!B5 -> TargetB_B5_ValueTypeMatch
+- Data2[2][1] -> Readback2[2][1] -> Target B!C5 -> TargetB_C5_ValueTypeMatch
+上記12組の値は固定fixture内では文字列または数値だけ。probe済みなのは数値1/文字列"1"の識別構文であり、他の具体値を含む12組への接続はこのr5で初めて受入する組合せである。
+各SourceCell/SavedCellを同じprobeキーでJSON化して文字列を比較する。PADの緩い直接等価比較だけを型一致としない。位置は上記の定数添字と固定転記先の対応で検査する。変数添字、ループ、GetType、未知の変換を発明しない。
+固定期待値は検証者側expected.jsonから独立照合し、Copilotへ正解として渡さない。フロー内の照合は同じRunで取得したsourceと保存・クローズ・読取り専用再読込後targetの12組に限る。
+
+Issue #38 EX03 / 20260917-excel-r10 候補の現在の範囲
+この節だけがr9後継の追加範囲である。r9以前の版、固定依頼・期待値、旧証跡、成功済みprobe、558差分FAILを変更せず、旧版の生成・Run結果をr10へ継承しない。
+1. r9 G1は通常M365 Copilotへ1回だけ送信し、再送0回で197行のRobinを生成した。固定停止条件によりPAD import、再コピー、Run1/Run2は0回である。
+2. r9の生成候補は期待適応と50行目・90行目だけが異なった。保存したclipboard payloadとCopilot応答の全197行DOMをCRLF連結したSHA-256は同一であり、2件の破損はcopy/PADより前の表示済み応答に存在した。非公開のmodel/service内部原因は不明のまま確定しない。
+3. r9のbackslash-open-bracket / backslash-close-bracket各0件ゲートはPASSしたが、必要な型・member tokenと2つのPowerShell不変断片を検証しなかったため、構造破損を止められなかった。
+4. r10はr9の独立教材Robinと内包scriptをbyte同一で再利用し、新規PAD採取を行わない。教材と固定試験の独立性を保持し、完全Robinを固定試験から教材へ混入させない。
+5. 依頼本文から列挙したdata slotと教材専用error labelだけを一貫置換し、それ以外の文字を言い換え、短縮、修復、最適化、再構成しない。error labelは正確に `EX03 text mapping` と `EX03 text source` にする。
+6. 角括弧backslash各0件に加え、source由来の12 tokenを指定件数、2不変断片を各1件、r9で観測した3破損断片を各0件と確認する。どれか不一致ならRobinを出さず、失敗項目を説明する。
+7. r10は未送信候補であり、通常M365生成、PAD貼付け・再コピー、Run1/Run2、成果物照合、既存output guard実機経路は未実施である。旧FAILと未確認範囲を維持する。
+r10独立教材例のデータ対応（固定する命令構造と、変更するdata slotを分離）:
+- source-one.xlsx / 教材入力一 H3:I5 -> 教材出力一 J4:K6。各行の第1列はtext、第2列はnumber。
+- source-two.xlsx / 教材入力二 C7:E8 -> 教材出力二 B10:D11。各行はtext, number, text。
+- work-copy.xlsxだけを編集し、未存在のexample-result.xlsxへSaveAsする。
+- 文字列7位置は同一RunのDataTableをJSON primitiveで確認して内包scriptから各1回、数値5位置は通常WriteCellから各1回だけ書く。保存・クローズ・ReadOnly再開後に12位置を個別JSON比較する。
+- 固定するもの: 命令名、引数名、mode、DataTable添字、型の役割、依存順、分岐、1 RunScript、5 numeric writes、12 JSON comparisons、RunScript内のraw角括弧。
+- 依頼から変更するもの: 同じ確認範囲内のpath、存在するsheet名、3x2と2x3のrectangle、対応する開始位置、work copy、未存在output、data slotに由来するerror label。
+- text/number以外、異なるshape、空白、真偽値、日付、error、formula result、任意object、別PC/PAD版へ一般化しない。

@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R11-G1",
+  "recorded_at": "2026-09-17T10:39:22.581036+09:00",
+  "candidate": {
+    "version": "20260917-excel-r11",
+    "base_commit": "659ae9db649d33226d4bf9220965e263e34ee323",
+    "instruction_sha256": "bceb1c7e4f47c0cd6a92ad698d08108175002bffcaaaff492a309ca74a122aa1",
+    "bundle_sha256": "2d95ce344ff66195061fd15010d13b75937888575fa2345fb543ae2115242f69",
+    "manifest_sha256": "295306ea7e2e45da8cf77dec2784e94ea8ea8333da0df6a4000f83e9228b509e",
+    "submitted_body_sha256": "4bd51be17353634c8b38cabbee91a9235a1dd1af87243675f5d42500f40c5984"
+  },
+  "predecessor_context": {
+    "r10_stop_commit": "ac90b0943d2ff4e1172c23712ef49fe93787b7b2",
+    "r10_result": "STOPPED_BEFORE_PAD_R10_GENERATION_SAFETY_FAILURE",
+    "r11_change_reason": "replace the r9/r10-fragile static method-call expressions with a shorter parser-clean -ieq and direct string/prefix checks",
+    "r11_scope_change": "new independent r11 teaching Robin and minimal embedded PowerShell; fixed EX03 request, fixtures and grader expectations unchanged",
+    "old_or_synthetic_success_inherited": false
+  },
+  "generation": {
+    "normal_m365_send_count": 1,
+    "resend_count": 0,
+    "completed": true,
+    "refusal": false,
+    "required_text_code_block_count": 1,
+    "actual_text_code_block_count": 0,
+    "generated_file_sha256": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875",
+    "generated_file_static_safety": "PASS",
+    "embedded_powershell_parser_errors": 0,
+    "delivery_contract": "FAIL",
+    "failure_code": "FAIL_R11_REQUIRED_CODE_BLOCK_ABSENT_STOP_BEFORE_PAD"
+  },
+  "pad_import": {
+    "dedicated_flow_opened": false,
+    "unmodified_paste_count": 0,
+    "saved": false,
+    "recopy": "NOT_RUN_RESPONSE_DELIVERY_CONTRACT_MISMATCH",
+    "recopy_match": "NOT_RUN",
+    "manual_repair": false
+  },
+  "runs": {
+    "run1": "NOT_RUN_STOPPED_BEFORE_PAD_IMPORT",
+    "run2": "NOT_RUN_RUN1_PREREQUISITES_NOT_REACHED",
+    "pad_runs_used": 0,
+    "pad_run_limit": 2
+  },
+  "comparisons": {
+    "run1_artifact": "NOT_CREATED",
+    "run1_fixed_value_type_position_comparison": "NOT_RUN",
+    "run1_original_outside_formula_format_comparison": "NOT_RUN",
+    "run1_f6_string_100_percent_original_format_empty_prefix_no_formula": "NOT_RUN",
+    "run2_artifact": "NOT_CREATED",
+    "run2_fixed_value_type_position_comparison": "NOT_RUN",
+    "run2_original_outside_formula_format_comparison": "NOT_RUN",
+    "reason": "No PAD paste, save, re-copy, execution or output was allowed after the completed response violated the fixed delivery contract."
+  },
+  "artifacts": {
+    "runtime_output_exists": false,
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "template_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_matches_template": true,
+    "protected_file_count": 312,
+    "protected_file_mismatch_count": 0,
+    "fixed_request_sha256": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+    "grader_only_expected_sha256": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d",
+    "fixed_expected_changed": false,
+    "legacy_558_failure_preserved": true
+  },
+  "scope": {
+    "other_case_or_probe_pass_inherited": false,
+    "unconfirmed_types_or_shapes_generalized": false,
+    "existing_output_guard_live_path": "REMAINS_UNCONFIRMED",
+    "format_and_dimension_558_difference": "REMAINS_FAIL_NOT_HIDDEN",
+    "next_version_created_or_tried": false
+  },
+  "decision": {
+    "accepted": false,
+    "status": "STOPPED_BEFORE_PAD_R11_RESPONSE_DELIVERY_MISMATCH",
+    "failure_code": "FAIL_R11_REQUIRED_CODE_BLOCK_ABSENT_STOP_BEFORE_PAD",
+    "reason": "The single generation completed and its downloaded Robin passed static safety, exact adapted-source comparison and PowerShell parsing, but the response contained zero required text code blocks and used a download link instead. The fixed stop condition therefore prohibited PAD import, re-copy, Run1 and Run2."
+  },
+  "github_write": false
+}

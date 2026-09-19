@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R6-G1-RUN1",
+  "decided_at": "2026-09-16T10:38:16.5892068Z",
+  "status": "NOT_RUN_STOP_RULE_TRIGGERED",
+  "pad_run_invocations": 0,
+  "pad_import_attempted": false,
+  "pad_save_recopy_attempted": false,
+  "generated_robin_present": false,
+  "runtime_output_exists": false,
+  "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+  "template_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+  "reason": "The only Copilot response explicitly refused to output a Robin code block. The unmodified-generated-artifact prerequisite was not met, so the required stop condition fired before PAD import or Run1.",
+  "generation_or_request_changed": false
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R12-FIXED-HELPER-COPILOT-A3-G1",
+  "recorded_at": "2026-09-18T15:09:18.8818802+09:00",
+  "status": "PASS_STOPPED_WITHOUT_PAD_OR_RUNTIME_MUTATION",
+  "protected_file_count": 26,
+  "protected_mismatch_count": 0,
+  "protected_mismatches": [],
+  "runtime": {
+    "work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "template_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "work_matches_template": true,
+    "output_absent": true,
+    "handoff_present": [],
+    "handoff_present_count": 0
+  },
+  "pad_save": "NOT_RUN",
+  "pad_recopy": "NOT_RUN",
+  "pad_run_count": 0,
+  "manual_generated_robin_edit": false,
+  "next_candidate_created": false,
+  "github_write": false
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "audited_at": "2026-09-15T13:06:56.9128427Z",
+  "status": "PASS_EXCEL_DATATABLE_TYPE_IDENTITY_EVIDENCE_AUDIT",
+  "scope": "Two-cell synthetic Excel range read into a PAD DataTable with TypedValues, followed by unconverted cell extraction and JSON identity comparisons. This is not full EX02 acceptance.",
+  "checks": {
+    "synthetic_workbook_number_and_text_storage_proven": true,
+    "same_ex02_range_read_action_and_settings_used": true,
+    "datatable_cells_extracted_without_conversion": true,
+    "scalar_probe_recollected": false,
+    "pad_captured_final_robin_17_actions": true,
+    "pad_captured_final_robin_matches_fixed_candidate_linewise": true,
+    "final_robin_raw_stable_after_run1": true,
+    "final_robin_raw_stable_after_run2": true,
+    "run1_saved_and_reconciled_before_run2": true,
+    "run1_positive_cases_true": true,
+    "run1_cross_type_negative_cases_false": true,
+    "run2_positive_cases_true": true,
+    "run2_cross_type_negative_cases_false": true,
+    "run1_run2_results_equal": true,
+    "type_loss_observed": false,
+    "read_setting_changed_after_failure": false,
+    "settings_change_probe_required": false,
+    "excel_process_closed_after_each_observed_run": true,
+    "r4_changed": false,
+    "prior_scalar_probe_changed": false,
+    "new_knowledge_version_created": false,
+    "full_ex02_rerun": false,
+    "github_write": false
+  },
+  "actual_cell_json": {
+    "A2": {
+      "datatable_expression": "ExcelData[0][0]",
+      "run1": "{\"probe\":1.0}",
+      "run2": "{\"probe\":1.0}",
+      "identity": "number"
+    },
+    "B2": {
+      "datatable_expression": "ExcelData[0][1]",
+      "run1": "{\"probe\":\"1\"}",
+      "run2": "{\"probe\":\"1\"}",
+      "identity": "string"
+    }
+  },
+  "not_proven": [
+    "full EX02 acceptance",
+    "all EX02 source and target cells",
+    "write, save, reopen, and recopy integration",
+    "general GetType behavior for arbitrary values",
+    "other PAD versions or other computers"
+  ],
+  "local_commit": "Pending; report the containing commit SHA in the final response"
+}

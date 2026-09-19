@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R2R3-POSTFIX-20260917-T1",
+  "phase": "negative",
+  "flow": {
+    "title": "Power Automate | 無題 (13)",
+    "window_id": 1971982,
+    "power_fx_enabled": false,
+    "action_count": 63,
+    "paste_invocations": 1,
+    "save_invocations": 1,
+    "recopy_invocations": 1,
+    "run_invocations": 1,
+    "candidate_sha256": "d1459baf69c8d412674599f2fbb0dec6772b74e8fd8104c694dcb1cea438599f",
+    "saved_recopy_sha256": "d1459baf69c8d412674599f2fbb0dec6772b74e8fd8104c694dcb1cea438599f",
+    "saved_recopy_exact": true
+  },
+  "run": {
+    "terminal": "READY",
+    "powershell_output": "{\"status\":\"EXPECTED_ERROR\",\"mode\":\"INJECT_AFTER_FORMAT_CHANGE\",\"format_restored\":true,\"value_unchanged\":true}",
+    "probe_state": "SCRIPT_NOT_SUCCESS_NO_SAVE",
+    "script_gate_passed": false,
+    "numeric_write_entered": false,
+    "save_as_entered": false,
+    "readback_rows": 0,
+    "readback_columns": 0,
+    "reopened": "",
+    "completed_output_visible": false
+  },
+  "observation_method": {
+    "terminal": "PAD designer status returned to Ready with run control enabled",
+    "powershell_output": "Opened the PAD flow-variable value viewer without saving; verified the JSON in overlapping left-to-right segments through its horizontal viewport, including format_restored:true and the final value_unchanged:true",
+    "probe_state": "Opened the PAD flow-variable edit view and observed SCRIPT_NOT_SUCCESS_NO_SAVE without saving",
+    "booleans": "Observed directly in the PAD global variable pane after the single negative run",
+    "readback": "Observed directly as 0 rows and 0 columns in the PAD global variable pane",
+    "filesystem_completion_check": "Deferred to final-verification.json; no second PAD run is used"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1",
+  "run_id": "EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE1-RUN1",
+  "flow_name": "無題 (3)",
+  "flow_window_id": 920594,
+  "run_index": 1,
+  "run_invocations_total": 1,
+  "started_utc": "2026-09-18T13:01:09.705Z",
+  "terminal_observed_utc": "2026-09-18T13:04:20.377Z",
+  "terminal_observation": {
+    "status_bar": "ステータス: 見つかったランタイム エラー",
+    "run_button_enabled": true,
+    "stop_button_disabled": true,
+    "designer_error_count": 1,
+    "normal_termination_observed": false
+  },
+  "error": {
+    "type": "runtime_error",
+    "visible_text_as_displayed_with_ui_truncation": "無効なディレクトリ (パス 'C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-1.json' の一部が見つかりませんでした...",
+    "subflow": "Main",
+    "line": 32,
+    "action": "File.WriteText source-1.json",
+    "path": "C:\\Users\\yuuki\\ai-prompts-issue38\\catalog\\acceptance\\issue38\\runs\\EX03-attempt1\\a4-helper-json\\source-1.json",
+    "path_parent_absent_after_stop": true
+  },
+  "status": "STOP_PAD_RUNTIME_ERROR_LINE32_INVALID_DIRECTORY"
+}

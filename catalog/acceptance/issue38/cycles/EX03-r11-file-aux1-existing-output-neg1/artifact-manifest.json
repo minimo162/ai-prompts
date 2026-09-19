@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R11-FILE-AUX1-EXISTING-OUTPUT-NEG1",
+  "recorded_at": "2026-09-17T14:19:12.841144+09:00",
+  "artifacts": [
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/acceptance-status.json",
+      "sha256": "53bca22d6b655592e1da6a6b59f45082f8d696575b1d536d5b36b5a794937e0a",
+      "length": 1432,
+      "last_write_utc": "2026-09-17T05:19:12.828598+00:00",
+      "last_write_ns": 1789622352828597800
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/cleanup.json",
+      "sha256": "4a11ce5e41f3f56a86e267e1652fe75196af9f3de50684d7522ab2eb61c3198e",
+      "length": 1143,
+      "last_write_utc": "2026-09-17T05:19:12.408552+00:00",
+      "last_write_ns": 1789622352408551800
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/existing-output-after.xlsx",
+      "sha256": "dc5c158d93ec322e29181fc34c961a396964c22c39c4f23d00d3ce215ee71af9",
+      "length": 3982,
+      "last_write_utc": "2026-09-17T05:13:16.726241+00:00",
+      "last_write_ns": 1789621996726241400
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/existing-output-before.xlsx",
+      "sha256": "dc5c158d93ec322e29181fc34c961a396964c22c39c4f23d00d3ce215ee71af9",
+      "length": 3982,
+      "last_write_utc": "2026-09-17T05:14:49.385597+00:00",
+      "last_write_ns": 1789622089385597300
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/fixture-export-inspect.ndjson",
+      "sha256": "6bf0b0af1fa187f668eb7745ac820fe5e920efd1e7922a0ea875b13a220b9ae3",
+      "length": 6571,
+      "last_write_utc": "2026-09-17T05:13:16.727538+00:00",
+      "last_write_ns": 1789621996727537800
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/fixture-preview.png",
+      "sha256": "3daacfc8ee7fae1886276e41997985edf207e0ac068390803e7a037973686ea8",
+      "length": 56009,
+      "last_write_utc": "2026-09-17T05:13:16.201830+00:00",
+      "last_write_ns": 1789621996201829700
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/fixture-staged.json",
+      "sha256": "f5e7d5181899f4ccde266cef65162211ce3a01384e2142b889617bddc2aa9b64",
+      "length": 4306,
+      "last_write_utc": "2026-09-17T05:14:49.389601+00:00",
+      "last_write_ns": 1789622089389601500
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/fixture-workbook-inspection.json",
+      "sha256": "597736ad1573749c22ab0458e85b396c75dbcf488969f76a2cd6718dedfc8216",
+      "length": 1103,
+      "last_write_utc": "2026-09-17T05:13:16.730092+00:00",
+      "last_write_ns": 1789621996730091600
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/hashes-after-live-run.json",
+      "sha256": "cd22b3e283eb261e07460a64d165828326fd7a8d46605846e4228b39bdf4d90b",
+      "length": 2813,
+      "last_write_utc": "2026-09-17T05:19:12.406125+00:00",
+      "last_write_ns": 1789622352406125400
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/pad-after-run-overview.jpg",
+      "sha256": "e5dbcfa12011379600584d82f35d703732ba9ee4de347f7c82c01d6410b97585",
+      "length": 138252,
+      "last_write_utc": "2026-09-17T05:15:48.583729+00:00",
+      "last_write_ns": 1789622148583728500
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/pad-after-run-transferstate.jpg",
+      "sha256": "6a3b163cda3b6e175be1b8d08cf2d2cca3db6434763abb45ae752e4695d0fb93",
+      "length": 38124,
+      "last_write_utc": "2026-09-17T05:16:39.667575+00:00",
+      "last_write_ns": 1789622199667574900
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/pad-after-run-work-empty.jpg",
+      "sha256": "02fafad18b76ca52f285e8d24168797353d3f8b3784061d3d185db4a0d13a1c7",
+      "length": 127223,
+      "last_write_utc": "2026-09-17T05:18:26.334386+00:00",
+      "last_write_ns": 1789622306334386300
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/pad-after-run-write-side-default-false-bottom.jpg",
+      "sha256": "bebd7e6d39e5a48adff61d9617384e673d994f5fc4d34b22105a17be1a47ba97",
+      "length": 143145,
+      "last_write_utc": "2026-09-17T05:17:59.490486+00:00",
+      "last_write_ns": 1789622279490485700
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/pad-after-run-write-side-default-false-top.jpg",
+      "sha256": "d9ee38e72b3f8c0118051eb9aea70a08eaa64a8446ea94cdc37fa049078b61a5",
+      "length": 142294,
+      "last_write_utc": "2026-09-17T05:17:59.489492+00:00",
+      "last_write_ns": 1789622279489492500
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/pad-before-run.jpg",
+      "sha256": "958ac01c291cb2eb77d7ce6388c84f89ea8adba2b1ce4a46e572de26bef5d433",
+      "length": 140032,
+      "last_write_utc": "2026-09-17T05:15:15.172619+00:00",
+      "last_write_ns": 1789622115172619400
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/pad-recopy-before-guard-run.robin",
+      "sha256": "deac46fa2a6fd27be2d1cd987f7d410188dd939046816ea28c4125291769630b",
+      "length": 12598,
+      "last_write_utc": "2026-09-17T05:12:56.425595+00:00",
+      "last_write_ns": 1789621976425595100
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/pad-recopy.json",
+      "sha256": "675c13726c5c72b7d4c21e82968e0be15fbe1a7e2d82304ed63f74ce5348f046",
+      "length": 1179,
+      "last_write_utc": "2026-09-17T05:12:56.462198+00:00",
+      "last_write_ns": 1789621976462198500
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/pad-run-observation.json",
+      "sha256": "039ed2631aaff368a262755fb537ed3b68c3ca39bfd943eee49d6db744363b9d",
+      "length": 3754,
+      "last_write_utc": "2026-09-17T05:19:12.405126+00:00",
+      "last_write_ns": 1789622352405126300
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/plan.json",
+      "sha256": "4e27d2f1ad5867a1f30adaedd4629634a6ecd68592e771cb6de7d139b8fcb010",
+      "length": 2379,
+      "last_write_utc": "2026-09-17T05:12:33.843169+00:00",
+      "last_write_ns": 1789621953843169200
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/preflight.json",
+      "sha256": "da75417b2d8ec3418d765181e04db78154def1ee8c2f627cf8567bb0c841b2bd",
+      "length": 3530,
+      "last_write_utc": "2026-09-17T05:12:33.889343+00:00",
+      "last_write_ns": 1789621953889342900
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/protected-after.json",
+      "sha256": "cd5da064480b2f7389e9c8cf21eb4a36565d6bf203c7181e91c38c56d29bf176",
+      "length": 382,
+      "last_write_utc": "2026-09-17T05:19:12.827596+00:00",
+      "last_write_ns": 1789622352827596100
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/protected-before.json",
+      "sha256": "e98e2259625de453a66954cccb50ae7ad8cf58b7c9812f4fdba2d9798076e6ea",
+      "length": 789741,
+      "last_write_utc": "2026-09-17T05:12:33.908800+00:00",
+      "last_write_ns": 1789621953908799600
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/review.md",
+      "sha256": "10bd872024d4f83a63d45175bb2cd380fa94a2e0062eaee94e44fed7e15d4fb7",
+      "length": 2866,
+      "last_write_utc": "2026-09-17T05:19:12.828598+00:00",
+      "last_write_ns": 1789622352828597800
+    },
+    {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/verification.json",
+      "sha256": "01b9db75ba9aa62756e25268ab2175297254e696c2d5bbb983b1eae15c737fd0",
+      "length": 2139,
+      "last_write_utc": "2026-09-17T05:19:12.828598+00:00",
+      "last_write_ns": 1789622352828597800
+    }
+  ]
+}

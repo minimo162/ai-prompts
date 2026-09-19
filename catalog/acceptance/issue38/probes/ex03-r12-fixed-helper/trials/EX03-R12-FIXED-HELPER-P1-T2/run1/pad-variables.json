@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "trial_id": "EX03-R12-FIXED-HELPER-P1-T2",
+  "run_id": "EX03-R12-FIXED-HELPER-P1-T2-RUN1",
+  "flow_name": "無題 (14)",
+  "execution_requested_during_observation": false,
+  "method": "PAD Variables pane after the same Run: PowershellOutput and TransferState values opened read-only/cancelled; ValueTypeMatch search showed all 12 results true",
+  "powershell_output": {
+    "observed_value": "{\"status\":\"OK\",\"mode\":\"NORMAL\",\"text_writes\":7,\"formats_restored\":true}",
+    "match": true
+  },
+  "transfer_state": {
+    "observed_value": "SAVED_REOPENED_12_JSON_COMPARISONS_READY",
+    "match": true
+  },
+  "value_type_matches": {
+    "追記先_D5_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "追記先_D6_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "追記先_E5_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "追記先_E6_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "追記先_F5_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "追記先_F6_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "集計先_F7_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "集計先_F8_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "集計先_F9_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "集計先_G7_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "集計先_G8_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    },
+    "集計先_G9_ValueTypeMatch": {
+      "observed_value": true,
+      "match": true
+    }
+  },
+  "counts": {
+    "true": 12,
+    "false": 0,
+    "total": 12
+  },
+  "status": "PASS_SUCCESS_JSON_TRANSFER_STATE_AND_12_VALUE_TYPE_MATCH"
+}

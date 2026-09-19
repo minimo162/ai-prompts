@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "test_id": "EX03-R11-FILE-AUX1-EXISTING-OUTPUT-NEG1",
+  "staged_at": "2026-09-17T14:14:49.389234+09:00",
+  "method": "A new @oai/artifact-tool workbook was exported to the fixed path, opened read/write without mutation, and copied exclusively to the before archive.",
+  "runtime_existing_output": {
+    "path": "catalog/acceptance/issue38/runs/EX03-attempt1/照合結果.xlsx",
+    "sha256": "dc5c158d93ec322e29181fc34c961a396964c22c39c4f23d00d3ce215ee71af9",
+    "length": 3982,
+    "last_write_utc": "2026-09-17T05:13:16.726241+00:00",
+    "last_write_ns": 1789621996726241400
+  },
+  "before_archive": {
+    "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/existing-output-before.xlsx",
+    "sha256": "dc5c158d93ec322e29181fc34c961a396964c22c39c4f23d00d3ce215ee71af9",
+    "length": 3982,
+    "last_write_utc": "2026-09-17T05:14:49.385597+00:00",
+    "last_write_ns": 1789622089385597300
+  },
+  "writable_open_succeeded": true,
+  "xlsx_zip_crc_passed": true,
+  "xlsx_required_members_present": true,
+  "artifact_tool_authoring_process": {
+    "reported_exit": "NONZERO_AFTER_COMPLETED_EXPORT",
+    "completed_success_record_present": true,
+    "table_inspection_present": true,
+    "formula_error_scan_zero": true,
+    "rendered_preview_present": true,
+    "exported_xlsx_present_and_valid": true,
+    "adjudication": "The process status occurred after the builder emitted its completed export record; the exported fixture itself passed independent container, content, render, and writable-open checks."
+  },
+  "preserved_export_inspection_sidecar": {
+    "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1-existing-output-neg1/fixture-export-inspect.ndjson",
+    "sha256": "6bf0b0af1fa187f668eb7745ac820fe5e920efd1e7922a0ea875b13a220b9ae3",
+    "length": 6571,
+    "last_write_utc": "2026-09-17T05:13:16.727538+00:00",
+    "last_write_ns": 1789621996727537800
+  },
+  "byte_identical": true,
+  "other_pre_run": {
+    "input_a": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力い.xlsx",
+      "sha256": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+      "length": 5015,
+      "last_write_utc": "2026-09-15T05:24:22.122590+00:00",
+      "last_write_ns": 1789449862122589600
+    },
+    "input_b": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/入力ろ.xlsx",
+      "sha256": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725",
+      "length": 5046,
+      "last_write_utc": "2026-09-15T05:24:22.225726+00:00",
+      "last_write_ns": 1789449862225725600
+    },
+    "template": {
+      "path": "catalog/acceptance/issue38/fixtures/EX03/ひな形.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "length": 6115,
+      "last_write_utc": "2026-09-15T05:24:22.330505+00:00",
+      "last_write_ns": 1789449862330504900
+    },
+    "work": {
+      "path": "catalog/acceptance/issue38/runs/EX03-attempt1/work.xlsx",
+      "sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+      "length": 6115,
+      "last_write_utc": "2026-09-15T07:57:52.369629+00:00",
+      "last_write_ns": 1789459072369628800
+    },
+    "robin": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/copilot-downloaded-ex03.robin",
+      "sha256": "a1e07de1f9370640773fcd8d36db1a2effe602f175bb437cb7c65457f6f24875",
+      "length": 12487,
+      "last_write_utc": "2026-09-17T03:29:58.194719+00:00",
+      "last_write_ns": 1789615798194719300
+    },
+    "formal_status": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-G1/acceptance-status.json",
+      "sha256": "87536bbc5da9347401e2e9d3982e8d77caaad1d5fb5b42bf782e71c5aca167b4",
+      "length": 4050,
+      "last_write_utc": "2026-09-17T01:39:22.580270+00:00",
+      "last_write_ns": 1789609162580269900
+    },
+    "aux_status": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r11-file-aux1/acceptance-status.json",
+      "sha256": "4b76432cf58b7182ed1284f12abaa807794bc2f0ae53e385506e0b662938d6ea",
+      "length": 4400,
+      "last_write_utc": "2026-09-17T04:05:43.896381+00:00",
+      "last_write_ns": 1789617943896381300
+    }
+  },
+  "excel_process_count": 0,
+  "pad_runs_used": 0,
+  "status": "READY_FOR_EXACTLY_ONE_LIVE_PAD_GUARD_RUN"
+}

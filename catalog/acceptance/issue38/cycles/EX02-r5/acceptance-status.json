@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "test_id": "EX02-R5-G1",
+  "decided_at": "2026-09-15T14:21:05.464Z",
+  "version": {
+    "name": "20260915-excel-r5",
+    "instruction_sha256": "fe57e45c170fcdfe8f94d8e23f9cb58f00d5b54ae4abe35a43189767032b5aaa",
+    "bundle_sha256": "2a0a420d9e9839f9ffe3923c43c85e37678d4f14af9b3e204fa3346cddcc57a3",
+    "submitted_body_sha256": "03caf7342e8b5cb33264c4c4ad1fc01f8ae8e5553e151d8c2800ffeed0d153d5",
+    "base_commit": "78ccbcf10551542d7891ac25af6a2445a3381443",
+    "r4_preserved": true
+  },
+  "stages": {
+    "candidate_rebuild": "PASS_BYTE_IDENTICAL_10_OF_10",
+    "normal_m365_same_version_attachment": "PASS",
+    "normal_m365_single_generation": "PASS_RESPONSE_CAPTURED",
+    "copilot_code_copy_integrity": "FAIL_EXTRA_FINAL_BACKTICK",
+    "rendered_code_editor_dom_recheck": "FAIL_TRAILING_BACKTICK_CONFIRMED_IN_EXISTING_RESPONSE",
+    "unmodified_pad_paste": "FAIL_ZERO_ACTIONS_IMPORTED",
+    "pad_zero_action_recheck": "FAIL_ZERO_ACTIONS_STILL_PRESENT",
+    "pad_save_recopy": "NOT_RUN",
+    "positive_run1": "NOT_RUN",
+    "positive_run2": "NOT_RUN",
+    "saved_closed_readonly_reopen": "NOT_RUN",
+    "twelve_source_target_value_type_position_checks": "NOT_RUN",
+    "fixed_expected_value_checks": "NOT_RUN",
+    "one_cell_type_negative_copy": "NOT_RUN_NO_ACCEPTED_POSITIVE_OUTPUT",
+    "protected_source_files": "PASS_BYTE_IDENTICAL",
+    "result_xlsx": "ABSENT"
+  },
+  "legacy_558": {
+    "status": "UNRESOLVED_AND_PRESERVED",
+    "count": 558,
+    "evidence": "tests/Test-Issue38Ex02.py::test_legacy_558_failures_are_preserved and the unchanged matrix-write/run2 result",
+    "not_relabelled_as_pass": true
+  },
+  "scope": {
+    "confirmed_type_primitive": "TypeProbe!A2 number 1 versus B2 text 1 only, two historical runs at commit 78ccbcf",
+    "generalized_to_unconfirmed_types": false,
+    "probe_success_used_as_copilot_flow_success": false,
+    "external_checker_used_as_copilot_flow_success": false
+  },
+  "continuation_evidence": {
+    "path": "catalog/acceptance/issue38/cycles/EX02-r5/continuation-recheck.json",
+    "browser_dom_extra_token_confirmed": true,
+    "pad_zero_actions_confirmed": true,
+    "additional_generation_requests": 0
+  },
+  "overall": {
+    "accepted": false,
+    "status": "NOT_ACCEPTED_GENERATED_ROBIN_NOT_IMPORTABLE_UNMODIFIED",
+    "fixed_request_or_acceptance_changed": false,
+    "generation_requests_used": 1,
+    "generation_request_limit": 1,
+    "pad_runs_used": 0,
+    "pad_run_limit": 2,
+    "github_write": false
+  },
+  "remaining": [
+    "Obtain a new, separately authorized generation cycle whose Code Copy output contains no standalone trailing token; do not repair this captured output.",
+    "Only after an unmodified paste imports the complete flow: save, re-copy, preserve Run1 before Run2, and run the two positive cycles.",
+    "Then compare all 12 fixed source/readback/target value, JSON type and position results plus grader-only expected values after save-close-readonly-reopen.",
+    "Create the separate one-cell same-display different-type output copy only from an accepted positive output and retain mismatch detection.",
+    "The 558 style/dimension differences remain unresolved and continue to block an overall preservation PASS."
+  ]
+}

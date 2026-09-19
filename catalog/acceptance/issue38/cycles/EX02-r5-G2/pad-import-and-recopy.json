@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "test_id": "EX02-R5-G2",
+  "pad": {
+    "surface": "Power Automate for desktop designer",
+    "flow_title": "Power Automate | 無題 (4)",
+    "subflow": "Main",
+    "power_fx": "OFF",
+    "dedicated_new_flow": true,
+    "predecessor_flow_untouched": "Power Automate | 無題 (3)"
+  },
+  "import": {
+    "source": "normal M365 G2 sole Code Copy clipboard",
+    "source_sha256": "3b74f7646737b0df09612605360f28c5e4cc744bf7f4fd7f860bf6a97b9ada0a",
+    "paste_attempts": 1,
+    "initial_action_count": 0,
+    "final_action_count": 87,
+    "design_error_observed": false,
+    "manual_edit": false,
+    "saved": true
+  },
+  "recopy_after_save": {
+    "selected_action_count": 87,
+    "clipboard_chars": 7402,
+    "clipboard_crlf_count": 87,
+    "clipboard_final_lf": true,
+    "clipboard_sha256": "728b75fca2439fc9e0b015f312df325f083d269c27b68ca426ec9286ca9eb3c0",
+    "lf_normalized_chars": 7315,
+    "lf_normalized_sha256": "0829526420158a61146e5d3fde7c4a5cc035228e2ab98be96d9697aa64d457bd",
+    "lf_normalized_exact_generated_robin": true,
+    "interpretation": "PAD canonicalized line endings to CRLF and added the terminal line break; action text is exact after LF normalization."
+  },
+  "recopy_after_run1": {
+    "selected_action_count": 87,
+    "clipboard_sha256": "728b75fca2439fc9e0b015f312df325f083d269c27b68ca426ec9286ca9eb3c0",
+    "lf_normalized_exact_generated_robin": true,
+    "screenshot": "catalog/acceptance/issue38/cycles/EX02-r5-G2/run1/pad-recopy-87-selected.jpg"
+  },
+  "recopy_after_run2": {
+    "selected_action_count": 87,
+    "clipboard_sha256": "728b75fca2439fc9e0b015f312df325f083d269c27b68ca426ec9286ca9eb3c0",
+    "lf_normalized_exact_generated_robin": true,
+    "screenshot": "catalog/acceptance/issue38/cycles/EX02-r5-G2/run2/pad-recopy-87-selected.jpg"
+  },
+  "status": "PASS_UNMODIFIED_IMPORT_SAVE_RECOPY"
+}

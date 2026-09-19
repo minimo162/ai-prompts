@@ -1,6 +1,81 @@
 # Issue #38 実装・検証報告
 
-状態: **PARTIAL / r3候補、実機受入を一部実施・全体未達**。読取りプレビューだけで完了にしていない。
+## 現行入口と判断（2026-09-19、証跡基点3d593a6）
+
+Issue #38全体は未完了です。**固定EX03の機械ビルダー経路だけを限定受入**とします。利用者向け入口は[機械ビルダー利用案内・事前配置条件](probes/ex03-r12-fixed-helper-mechanical-builder/README.md)、機械可読の現行判定は[status.json](status.json)と[case-matrix.json](case-matrix.json)です。新候補や新しい試験結果ではなく、コミット`3d593a6ada96af805e7800c6a7daff7b3cfc479d`までの既存証跡の整理です。
+
+推奨アーキテクチャは「自然言語要求 → WIRING SPEC → validator → deterministic Robin builder → PAD」です。ただし、自然言語からWIRING SPECを自動生成・受入する部分は未検証で、**現時点のWIRING SPECは検証者管理**です。[Build.py](probes/ex03-r12-fixed-helper-mechanical-builder/Build.py)内の`validate_fixed_sources()`と`validate_wiring()`が固定入力・座標・参照を検査してから組み立て、`audit_robin()`が生成構造を検査します。任意仕様を扱う汎用validatorが完成したという意味ではありません。
+
+### 限定受入の根拠と範囲
+
+| 既存試行 | 判定・観測 | 原記録 |
+|---|---|---|
+| LIVE2 正常1Run | `PASS_MECHANICAL_BUILDER_PATH_LIVE2_NORMAL_RUN1` | [result.json](probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE2/result.json) |
+| LIVE3 正常1Run | `PASS_LIVE3_NORMAL1_FULL_FIXED_SCOPE`。LIVE2との値・型・位置・実効書式も一致 | [result.json](probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/result.json) |
+| LIVE3 既存出力ガード1Run | `PASS_LIVE3_EXISTING_OUTPUT_GUARD1`。正常試行の全照合PASS・保全後に実施 | [result.json](probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/existing-output-guard/result.json) |
+
+正常試行は別試行IDで各1Runです。Copilot生成フローの連続2Runへ読み替えません。適用範囲は固定合成入力の`入力い.xlsx / 受取明細 D4:E6`（3×2）→`集計先 F7:G9`、`入力ろ.xlsx / 追加項目 B2:D3`（2×3）→`追記先 D5:F6`です。
+
+- 両正常RunともPAD正常終了、成功JSON・成功gate、PAD内の型照合12/12 Trueを観測。保存・クローズ・再読込後の対象12セルの値・型・位置、固定期待値、対象外468セルと数式、原本・template・workのSHAを照合しています。
+- 実効書式は3シート各A1:J16の480セル、48行、30列で差0。`追記先!F6`は`System.String`の`100%`、元の表示形式`G/標準`、prefix空、数式なしです。
+- LIVE2成果物SHAは`49e4ad48e711ecbde7a0b6ec625dad8d2c74247e54eec69fe230aaf5366da5f8`、LIVE3は`fc763e4a3d7df9f673dfa6a325006310f502d37305b3559b119044eab6f47eac`。xlsx全体のbyte一致は要求せず、[保存内容・実効書式の照合記録](probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/normal/run1/live2-semantic-comparison.json)を根拠とします。
+- ガードでは`OUTPUT_EXISTS_NO_RUN`、成功gate・数値書込み・SaveAsの進入フラグがすべてFalse。静的ELSE内包含と合わせ、出力・8 JSON・入力2・template・workの13ファイルについてSHA／サイズ／mtime不変を確認しています。型比較は`NOT_EVALUATED_ON_GUARD_BRANCH`、残存PowerShell出力は新規実行結果として採点していません。
+
+### 固定構成と入口の配置
+
+入力はA4の固定WIRING SPEC、採取済みC01〜C12部品、4組立規則、固定helper・invocation・launcherです。A4の不合格Copilot生成Robinは使用・修正せず、期待値ファイルはSHA保全だけに使い、採点値を生成へ埋め込んでいません。
+
+| 固定要素 | SHA-256 |
+|---|---|
+| Build.py | `dc6363953d120acf9623e1c28e777b1496c3da9c392704ae4a5c79b3808dea62` |
+| WIRING SPEC | `c62ec6951bdd36e895acfc937d7a1f390e75e8d984b26a9531cc2c88d970f58c` |
+| helper | `08d1a307dfc72d375018a6f70a4abdc33d6efe42009bb100e67712098c02d135` |
+| invocation | `5c5a2008f55296a48f63fa65178aab971e4212455bb2af58e33149bdcaec40d8` |
+| launcher（復号後も一致） | `a286179f8fb7f8febc87f1915cf10965ee0a50769251ecb17573c00926c174d5` |
+| 生成Robin | `3d9c1671a5debc6f0247cef8c5e0d414dc07246a7cb7ce0ac6245fb860967e47` |
+| PAD保存後の再コピー原文 | `570b26c57abeca0e9b8e19368c6542a529b44994bac518f2e70cb69baec52c0f` |
+
+全入力のパス・完全SHAは[元のverification.json](probes/ex03-r12-fixed-helper-mechanical-builder/verification.json)、実行構成の固定は[LIVE3 preflight](probes/ex03-r12-fixed-helper-mechanical-builder/trials/EX03-R12-FIXED-HELPER-MECHANICAL-P1-LIVE3/preflight.json)と現行case matrixを参照してください。生成RobinとPAD再コピーは別SHAであり、原文byte一致とは記載しません。
+
+本体は`probes/ex03-r12-fixed-helper-mechanical-builder/Build.py`に保持します。`parents[5]`によるルート解決、限定テスト・LiveTrialからの現パス参照、Live3Trialによるbuilder SHA固定があり、移動や別実装の複製は今回の文書整理に不要です。将来の正式tools入口は、同じ実装を読む薄いwrapperと明示的ルート処理を別途レビューする案とし、今回は作成しません。[配置判断の詳細](probes/ex03-r12-fixed-helper-mechanical-builder/README.md#placement-decision-and-later-tools-entry)に履歴と参照元を記録しています。
+
+### Copilot直接生成は別経路・未達
+
+固定EX03における通常M365 CopilotのRobin直接生成は、現時点で**非推奨の実験経路**です。A1〜A4の結果は以下のまま保持します。Copilot一般の能力限界や、未試験の条件まで断定するものではありません。
+
+| 試行 | 結果・停止理由 |
+|---|---|
+| [A1](cycles/EX03-r12-fixed-helper-A1-G1/RESULT.md) / [A2](cycles/EX03-r12-fixed-helper-A2-G1/RESULT.md) / [A3](cycles/EX03-r12-fixed-helper-A3-G1/FINAL-RESULT.md) | 生成拒否、必要なコードブロックなし、PAD未実施 |
+| [A4](cycles/EX03-R12-FIXED-HELPER-A4-G1/RESULT.md) | 比較7/12で5件欠落、固定launcher不一致・PowerShell構文破損、未採取inline式。PAD前で停止 |
+| [正式r12](cycles/EX03-r12-G1/acceptance-status.json) | `FAIL_GENERATED_ROBIN_MISMATCH_AND_POWERSHELL_PARSE_ERROR_STOP_BEFORE_PAD`、未受入。r12の実機出力ガードも未確認 |
+
+Copilot経路や旧補助probeのPASSを機械ビルダーへ転用していません。逆に、今回整理した機械ビルダーの限定PASSで、正式r12・A1〜A4の停止やr11の正式提出条件FAILを解消した扱いにもしません。
+
+### 558差分・残件・履歴
+
+旧raw比較の558件FAIL（セル書式480・行48・列30）は原記録のまま保持します。EX02-r5-G2の[全件分類](cycles/EX02-r5-G2/format-reconciliation/classification.json)と[負例を含む検証](cycles/EX02-r5-G2/format-reconciliation/verification.json)は保存表現／比較方法の差と実効差を区別した後続判定です。LIVE2/LIVE3もraw FAILと実効書式差0を別々に記録しています。「無編集SaveAsでも再現した」ことや件数一致だけで無害とした判定ではなく、今回の文書整理で旧FAILを上書き・再分類していません。
+
+- 保存Robinにstderr用PAD変数がなく、stderr空は独立観測できていません。
+- 確認済みの固定文字列／数値以外の型（空白・Boolean・日付・エラー・数式結果・object）、別shape、任意文字列・パス・PC・PAD/Excel版へ一般化しません。
+- 自然言語→WIRING SPECの自動生成・受入、汎用validator、tools正式化は未実施です。
+- 他ケースは[現行case matrix](case-matrix.json)の従来範囲を維持します。EX01の個別実行時型、EX04のmissing-sheet／invalid-range／same-output実機異常系、EX05の実行可能な全フロー等は残件です。EX02の固定範囲PASSを汎用受入へ広げません。
+- 旧版・固定依頼・期待値・原証跡・受入条件は不変。今回の追加Copilot送信、PAD/Excel実行、候補作成、全件回帰、GitHub書込み、Issue closeはありません。
+
+`b73e0b5`時点の正式／補助経路とr11の境界は[凍結レビュー](review/20260917-b73e0b5/README.md)／[旧case matrix](review/20260917-b73e0b5/case-matrix.json)をそのまま残します。旧status全体は現行statusの`historical_r3_r4`内に保持しています。
+
+文書限定検査では、JSON 2件の読取り、旧statusの内容一致、固定ファイル13件と成果物2件のSHA、3試行のID・判定・成果物対応、Copilot停止5記録、他4ケースの判定保持を確認しました。JSON内の77参照とMarkdown内の129ローカルリンクは存在し、変更は入口・受入文書6件のみです。コード・原証跡・版・期待値の差分はなく、実機・比較器・回帰テストの再実行による結果ではありません。
+
+## r4/r3時点の履歴（以下は当時の記録）
+
+以下の「現在」「未達」「未実施」は記録当時の意味です。現行入口・判断は上の節と現行status／case matrixを参照し、過去の成功・失敗・停止を混同しないでください。
+
+状態: **PARTIAL / r4のEX02実生成を実施したが型照合不足で未達**。読取りプレビューだけで完了にしていない。
+
+現在のEX02向け入口は `20260915-excel-r4`。出力ガード・矩形転記・保存/再読取り・等価比較の原文をbundleへ統合し、非ライブ9コマンドを検査。通常Copilotへ同版指示全文＋bundleを実添付して固定EX02を1回送信しました。既知工程を認識したうえで厳密な型照合の不足を理由にコードなしとなり、PAD貼付け/Run1/Run2は未実施です。[r4の差分・検査・原回答・次の作業](cycles/EX02-r4/review.md)を参照してください。
+
+書式558差分は、セルを書き換えないExcel開く/別名保存の対照実験でも再現しました。旧FAILとExcelネイティブ限定一致はそのまま保持し、比較方法や固定期待値を緩めていません。今回のGitHub書込みは0、ローカルレビュー用です。
+
+以下はPR #39公開時点までのr3履歴です。旧statusの全文は [r4開始時snapshot](cycles/EX02-r4/prior-status.json) にも保存しています。
 
 現在の判定は[status.json](status.json)と各[Copilot証跡](copilot/)を参照する。EX01は指定シートの表示値・位置を2回確認、EX02は生成停止、EX03は未採取`EXIT`を含みPAD未実行。EX04の4条件は各新規チャットで生成停止を確認した（PAD実行時停止の証明ではない）。以下の追補には途中時点の未実施記録が残るため、現在の結果へ継承しない。
 基点は最新取得済みorigin/main `c60251d65afe30160bcb33b08a988a46028b783c`。Issue #38本文とコメント0件を確認した。

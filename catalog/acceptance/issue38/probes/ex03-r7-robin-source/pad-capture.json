@@ -1,0 +1,47 @@
+{
+    "schema_version":  1,
+    "capture_id":  "EX03-R7-ROBIN-SOURCE",
+    "captured_utc":  "2026-09-16T11:53:47.1800858Z",
+    "environment":  {
+                        "pad_file_version":  "2.71.115.26224",
+                        "language":  "ja-JP",
+                        "power_fx":  "OFF",
+                        "flow_name":  "無題 (5)",
+                        "subflow":  "Main"
+                    },
+    "scope":  {
+                  "purpose":  "Dedicated PAD Designer paste, save, and re-copy of the exact r6 integrated Robin source",
+                  "executed":  false,
+                  "copilot_send":  false,
+                  "integrated_ex03_run":  false,
+                  "github_write":  false
+              },
+    "observation":  {
+                        "initial_actions":  0,
+                        "browser_session_clipboard_paste_actions_after":  0,
+                        "native_clipboard_paste_invocations":  1,
+                        "selected_actions_after_paste":  110,
+                        "actions_after_paste":  110,
+                        "variables_after_paste":  45,
+                        "save_invocations":  1,
+                        "recopy_invocations":  1,
+                        "designer_status_after_save":  "READY",
+                        "designer_error_observed":  false
+                    },
+    "comparison":  {
+                       "candidate_path":  "catalog/acceptance/issue38/probes/ex03-r7-robin-source/candidate-full.robin",
+                       "candidate_sha256":  "1f6ea14ea59242d7351d01ef75cd9571eb90676ab3845ffd2a842f01d84c771b",
+                       "candidate_chars":  14118,
+                       "recopy_path":  "catalog/acceptance/issue38/probes/ex03-r7-robin-source/pad-recopy-full.robin",
+                       "recopy_sha256":  "529d66dd598c395c6313a6f6d6b44c80049effb79de96b675a37f7dc99596d89",
+                       "recopy_chars":  14228,
+                       "exact_bytes":  false,
+                       "lf_normalized_exact":  true,
+                       "candidate_crlf_count":  0,
+                       "candidate_lf_only_count":  197,
+                       "recopy_crlf_count":  110,
+                       "recopy_lf_only_count":  87,
+                       "permitted_difference":  "PAD changed the 110 top-level action separators from LF to CRLF; embedded script line feeds and all normalized text remained unchanged."
+                   },
+    "result":  "PASS_PAD_DESIGNER_SAVE_RECOPY_NO_EXECUTION"
+}

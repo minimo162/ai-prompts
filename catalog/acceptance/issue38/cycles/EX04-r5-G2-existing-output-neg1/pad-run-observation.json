@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "test_id": "EX04-R5-G2-EXISTING-OUTPUT-NEG1",
+  "runtime": {
+    "surface": "Power Automate for desktop designer",
+    "window_title": "Power Automate | 無題 (4)",
+    "subflow": "Main",
+    "run_click_issued_at": "2026-09-15T22:53:41.337Z",
+    "run_requests_used": 1,
+    "run_request_limit": 1,
+    "retry_issued": false,
+    "action_count_visible": 87
+  },
+  "direct_branch_observation": {
+    "variable_name": "TransferState",
+    "overview_visible_prefix": "OUTPUT_EXISTS_...",
+    "full_value_in_pad_variable_dialog": "OUTPUT_EXISTS_NO_WRITE",
+    "variable_dialog_saved": false,
+    "variable_dialog_closed_with_cancel": true,
+    "guard_branch_entered": true
+  },
+  "direct_terminal_observation": {
+    "status_bar": "Ready",
+    "run_button_enabled": true,
+    "stop_button_disabled": true,
+    "design_or_runtime_error_observed": false,
+    "excel_process_count_after": 0
+  },
+  "write_save_path": {
+    "entered": false,
+    "basis": [
+      "The unmodified Robin sets OUTPUT_EXISTS_NO_WRITE only inside the existing-output branch.",
+      "Every Excel launch, write, SaveAs, close/reopen and readback action is inside the ELSE branch.",
+      "PAD directly displayed the complete guard value and returned to Ready.",
+      "The output, work, inputs and template retained their exact pre-run SHA-256 and timestamps."
+    ]
+  },
+  "screenshots": {
+    "before_run": {
+      "path": "catalog/acceptance/issue38/cycles/EX04-r5-G2-existing-output-neg1/pad-before-run.jpg",
+      "sha256": "74e819ea033b8a73639cb821d1c966b9b299ea6414ba4b2d29395b1791bf2a81"
+    },
+    "after_run_overview": {
+      "path": "catalog/acceptance/issue38/cycles/EX04-r5-G2-existing-output-neg1/pad-after-run-overview.jpg",
+      "sha256": "42babeeb0ce3e6207642dcf3c2c7e0b2c055e1341f0a3ee092bde8c5a1b42ccc",
+      "shows": "Ready status, enabled Run, disabled Stop, 87 actions, guard-value prefix"
+    },
+    "after_run_transfer_state": {
+      "path": "catalog/acceptance/issue38/cycles/EX04-r5-G2-existing-output-neg1/pad-after-run-transferstate.jpg",
+      "sha256": "8ce2fdd7dc362635fb4e6ac159b44f21e9b1df79ebc57f5dbcfb7c1a6de1e6e5",
+      "shows": "PAD variable dialog with TransferState value OUTPUT_EXISTS_NO_WRITE"
+    }
+  },
+  "status": "PASS_GUARD_BRANCH_AND_TERMINAL_STATE_DIRECTLY_OBSERVED"
+}

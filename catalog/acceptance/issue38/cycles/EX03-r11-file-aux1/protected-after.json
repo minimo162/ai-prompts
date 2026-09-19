@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-17T04:05:43.894971+00:00",
+  "base_commit": "0b681b946ceafa9d938744a857d984fa8fff71e8",
+  "protected_before_sha256": "11c5be854b3abf4ed5d9178a00da3b0601f6ee66be8343525e77ca902ad5dc9c",
+  "checked_file_count": 4397,
+  "mismatch_count": 0,
+  "mismatches": [],
+  "runtime_work_sha256": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+  "runtime_work_matches_frozen_template": true,
+  "runtime_output_absent_after_preservation": true,
+  "status": "PASS_ALL_PROTECTED_FILES_UNCHANGED"
+}

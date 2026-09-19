@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-r12-G1",
+  "version": "20260917-excel-r12",
+  "decision": "FAIL_GENERATED_ROBIN_MISMATCH_AND_POWERSHELL_PARSE_ERROR_STOP_BEFORE_PAD",
+  "generated_robin_sha256": "64b6c7de822a448a4696910cc683c77ebfc57920c91aa966851947e136b5a366",
+  "send_count": 1,
+  "delivery_contract_pass": true,
+  "adapted_source_exact_match": false,
+  "powershell_parser_error_count": 4,
+  "structure_pass": false,
+  "pad_save_recopy_runs": 0
+}

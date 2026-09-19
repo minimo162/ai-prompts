@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "cycle_id": "EX03-R5-G1",
+  "base_commit": "0754437598d5717bc0e1d2d7f89aa258638e2854",
+  "checks": {
+    "frozen_fixture_spec_request_expected_hashes_match": true,
+    "r5_instruction_bundle_manifest_hashes_match": true,
+    "work_exists_and_matches_template": true,
+    "output_absent": true,
+    "grader_only_expected_values_absent_from_submission": true,
+    "completed_robin_absent_from_submission": true,
+    "excel_process_count_checked_separately_before_pad": true
+  },
+  "hashes": {
+    "submitted_body": "277ee66f9765e57aa2d8b4c48b680b2a573cd37628284420d147322f85c0a9ca",
+    "work_and_template": "881afa147fcdb5801aa83629988cc4314f773ef29697ff82401478229aaccd21",
+    "input_a": "c71337956da22ec9e7d23e0c3161dfb0273878d69cf33d61d90e5db0f794d0f9",
+    "input_b": "01598a797432469aa8712bbabdd4e6a875aaf6ea69fc161e1823469e250bd725"
+  },
+  "decision": {
+    "safe_to_consume_single_generation_request": true,
+    "copilot_generation": "NOT_STARTED",
+    "pad_run1": "NOT_STARTED",
+    "pad_run2": "NOT_STARTED"
+  }
+}

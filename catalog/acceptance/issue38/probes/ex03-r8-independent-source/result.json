@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "case_id": "EX03-R8-TEACHING-INDEPENDENCE",
+  "result": "PASS_PACKAGE_INDEPENDENCE_AND_PAD_SAVE_RECOPY_ONLY",
+  "acceptance": "R8_PACKAGE_ONLY_NOT_COPILOT_OR_EX03_RUNTIME_ACCEPTED",
+  "cause_classification": {
+    "copilot_refusal_internal_cause": "UNRESOLVED",
+    "refusal_escape_hypothesis": "NOT_SUPPORTED_BY_ACTUAL_SENT_R6_BUNDLE_BYTES",
+    "confirmed_package_issue": "R6_R7_COMPLETE_FIXED_EX03_ANSWER_COUPLED_TEACHING_TO_TEST",
+    "causal_boundary": "The confirmed package issue violates EX03 independence, but this evidence does not prove it was Copilot's internal reason for refusal."
+  },
+  "before": {
+    "actually_sent_r6_bundle": {
+      "path": "copilot/versions/20260916-excel-r6/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+      "sha256": "9c566e7f85a431f1869302c6a40985e2f81237f17ac4fbbdc9a73e62a646b580",
+      "claimed_escape_counts": {
+        "=\\>": 0,
+        "\\_": 0,
+        "\\[": 0
+      },
+      "raw_token_counts": {
+        "=>": 184,
+        "_ValueTypeMatch": 60,
+        "Data1[0][0]": 12
+      },
+      "complete_fixed_answer_present": true,
+      "fixed_answer_scope": "four workbook paths, four sheet names, two source rectangles, twelve target mappings, guard/read/write/save/reopen/compare"
+    },
+    "refusal": {
+      "path": "catalog/acceptance/issue38/cycles/EX03-r6-G1/response-rendered.txt",
+      "sha256": "7c6f30590b3ee7905038f142c1974d7639c4579c44a6f445ae0a9ea22f58b342"
+    },
+    "r7": {
+      "version": "20260916-excel-r7",
+      "manifest_sha256": "38517f37be934b1bcf37c0e12f9f33c9e803fa174af15e41579ccdd612dc4e3f",
+      "instruction_sha256": "b888b7497c2c5a7fb79860c22da6be4b62f013731ab920e87dbb503ef1f0d7fa",
+      "bundle_sha256": "228329f60f17192f87878fb6393abf22520d051a1225d9905f2f71354216f1ed",
+      "independence": "FAIL_R7_CONTAINS_FIXED_EX03_COMPLETE_ANSWER"
+    }
+  },
+  "after": {
+    "version": "20260916-excel-r8",
+    "status": "FROZEN_CANDIDATE_EX03_INDEPENDENT_TEACHING_PAD_RECOPIED_NOT_COPILOT_OR_RUNTIME_ACCEPTED",
+    "instruction": {
+      "path": "copilot/versions/20260916-excel-r8/agent-instructions.txt",
+      "sha256": "57f0cdb656e919f8fd83252a6adcd4d12788dac9bf6833db2f2e942eada23bcb",
+      "utf16_units": 6696
+    },
+    "bundle": {
+      "path": "copilot/versions/20260916-excel-r8/knowledge/PAD-Robin-Knowledge-Bundle.txt",
+      "sha256": "164c99e59204efd863f4fe283e8f84ce2902ee760ab90e45cf7c5336631aaddb"
+    },
+    "manifest": {
+      "path": "copilot/versions/20260916-excel-r8/manifest.json",
+      "sha256": "9025c8869b84d27e4f39512ce157a114a5231041e641ae12ef36c061eae29d3e"
+    },
+    "independent_pad_recopy": {
+      "path": "copilot/versions/20260916-excel-r8/support/EX03-R8-Independent-PAD-Recopy.robin",
+      "sha256": "6d9c23eabfacbcd65b1a18eabf5681805494e41171f94a9b01a28b24452815bb",
+      "exact_prepared_bytes": true,
+      "actions": 110,
+      "variables": 45,
+      "executed": false
+    },
+    "independent_script": {
+      "path": "copilot/versions/20260916-excel-r8/support/EX03-R8-Independent-FormatSandwich.ps1.txt",
+      "sha256": "65b86b0e5be4ec2da30e57a6bd858e395d1103da2d05ab2e7607362772d1dfd9",
+      "decoded_from_recopy": true
+    },
+    "checks": {
+      "fixed_request_spec_expected_hashes_preserved": true,
+      "fixed_complete_answer_absent_from_r8_instruction_bundle_and_support": true,
+      "unique_grader_strings_absent": true,
+      "expected_string_100_percent_absent_from_current_r8_instruction_and_support": true,
+      "explicit_data_substitution_only": true,
+      "reverse_substitution_reproduces_r7_robin": true,
+      "one_run_script": true,
+      "five_numeric_writes": true,
+      "twelve_json_comparisons": true,
+      "knowledge_01_02_03_05_byte_identical_to_r7": true,
+      "existing_output_guard": "STATIC_ONLY_NOT_LIVE_TESTED",
+      "format_dimension_558_difference_failure": "PRESERVED"
+    }
+  },
+  "not_run": [
+    "Microsoft 365 Copilot send",
+    "independent teaching example execution",
+    "EX03 integrated Run1",
+    "EX03 integrated Run2",
+    "saved workbook artifact comparison",
+    "existing-output guard live path",
+    "GitHub write"
+  ],
+  "test_results": [
+    {
+      "command": "python -m unittest tests.Test-Issue38Excel tests.Test-Issue38Ex02 tests.Test-Issue38Ex03 tests.Test-Issue38Ex04ExistingOutput -v",
+      "result": "PASS_46_OF_46"
+    },
+    {
+      "command": "node tests/Test-Issue38Package.mjs 20260915-excel-r1",
+      "result": "PASS_NON_LIVE_PACKAGE"
+    },
+    {
+      "command": "node tests/Test-Issue38Package.mjs 20260915-excel-r2",
+      "result": "PRESERVED_PREEXISTING_FAIL_ACTUAL_UTF16_5911_MANIFEST_5844",
+      "r2_files_changed": false
+    },
+    {
+      "command": "node tests/Test-Issue38Package.mjs for r3 through r8",
+      "result": "PASS_NON_LIVE_PACKAGE_ALL_SIX_VERSIONS"
+    },
+    {
+      "command": "git diff --check and JSON parse checks",
+      "result": "PASS"
+    }
+  ]
+}

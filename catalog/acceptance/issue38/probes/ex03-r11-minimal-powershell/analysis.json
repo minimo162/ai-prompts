@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "probe_id": "EX03-R11-MINIMAL-POWERSHELL",
+  "recorded_at": "2026-09-17T08:52:57.590771+09:00",
+  "base_commit": "ac90b0943d2ff4e1172c23712ef49fe93787b7b2",
+  "pipeline_boundary": {
+    "r9": {
+      "response_source": "complete rendered code DOM serialization; full prose response was not separately captured",
+      "response_code_sha256": "dce9d6f01de53252050b53de46283563f56226b1635a2ccdcbd71d2dfd2636bf",
+      "code_copy_decoded_sha256": "dce9d6f01de53252050b53de46283563f56226b1635a2ccdcbd71d2dfd2636bf",
+      "response_equals_code_copy": true,
+      "code_copy_equals_saved_robin_after_newline_normalization": true,
+      "saved_robin_sha256": "7a02ea0d073adde698578b8fa578f5701c728114ee55fbf20aa0ecdaaa32cb14",
+      "extracted_script_sha256": "3391e774e8721238f53f8b55adb681a301f38499f9324f549a9df1ec28668eb3",
+      "defect_lines": {
+        "robin_50": "            if ([string]::Equals([IO.Path]::GetFulling]$candidate.FullName), $targetPath, :OrdinalIgnoreCase)) {",
+        "script_23": "        if ([string]::Equals([IO.Path]::GetFulling]$candidate.FullName), $targetPath, :OrdinalIgnoreCase)) {",
+        "robin_90": "                if ($afterPrefixCharacter -cne $beforePrefixCharacter -or -not :IsNullOrEmpty($afterPrefixCharacter)) { throw (\\'Prefix character changed or remained: \\' + $sheetName + \\'!\\' + $cellAddress) }",
+        "script_63": "            if ($afterPrefixCharacter -cne $beforePrefixCharacter -or -not :IsNullOrEmpty($afterPrefixCharacter)) { throw ('Prefix character changed or remained: ' + $sheetName + '!' + $cellAddress) }"
+      },
+      "earliest_confirmed_missing_stage": "rendered_response_code_dom"
+    },
+    "r10": {
+      "response_copy_sha256": "870a7e04562d558a2c3574e8c4b5ab21ae566d7487ffc50e34e28c41dd08f376",
+      "code_copy_decoded_sha256": "4946431c9ce47f986b841115fbfd328036356c4e12ae7cbe912c2bf06e2b1ed3",
+      "response_contains_exact_code_copy": true,
+      "code_copy_equals_saved_robin_bytes": true,
+      "saved_robin_sha256": "4946431c9ce47f986b841115fbfd328036356c4e12ae7cbe912c2bf06e2b1ed3",
+      "extracted_script_sha256": "f2b4e41998a3b534b07ec25c7df17919e1b1e622323a212ac9d080c8d255186a",
+      "defect_lines": {
+        "robin_50": "            if (:Equals([IO.Path]::GetFullPath([string]$candidate.FullName), $targetPath, :OrdinalIgnoreCase)) {",
+        "script_23": "        if (:Equals([IO.Path]::GetFullPath([string]$candidate.FullName), $targetPath, :OrdinalIgnoreCase)) {",
+        "robin_90": "                if ($afterPrefixCharacter -cne $beforePrefixCharacter -or -not :IsNullOrEmpty($afterPrefixCharacter)) { throw (\\'Prefix character changed or remained: \\' + $sheetName + \\'!\\' + $cellAddress) }",
+        "script_63": "            if ($afterPrefixCharacter -cne $beforePrefixCharacter -or -not :IsNullOrEmpty($afterPrefixCharacter)) { throw ('Prefix character changed or remained: ' + $sheetName + '!' + $cellAddress) }"
+      },
+      "earliest_confirmed_missing_stage": "copied_full_response"
+    },
+    "classification": "ACQUISITION_COPY_SAVE_EXTRACTION_DECODE_NOT_CAUSAL",
+    "hidden_model_or_service_cause": "UNKNOWN_NOT_CLAIMED"
+  },
+  "extraction_decode_tests": {
+    "good": {
+      "source": "copilot/versions/20260917-excel-r10/support/EX03-R10-Independent-PAD-Recopy.robin",
+      "decoded_equals_support_script": true,
+      "parser_error_count": 0
+    },
+    "intentional_negative": {
+      "path": "broken-extraction-negative.robin",
+      "mutations_preserved_exactly": true,
+      "parser_error_count": 19,
+      "first_error": {
+        "error_id": "MissingExpressionAfterToken",
+        "message": "Missing expression after ','.",
+        "line": 23,
+        "column": 86,
+        "token": ""
+      },
+      "executed": false
+    }
+  },
+  "local_successor": {
+    "version_id": "20260917-excel-r11",
+    "status": "LOCAL_SOURCE_CANDIDATE_NOT_SENT_NOT_INTEGRATED",
+    "script": "independent-minimal-format-sandwich.ps1.txt",
+    "robin": "independent-candidate.robin",
+    "old_script_lines": 88,
+    "new_script_lines": 58,
+    "line_reduction": 30,
+    "old_script_utf8_bytes_without_final_newline": 5011,
+    "new_script_utf8_bytes_without_final_newline": 3300,
+    "byte_reduction": 1711,
+    "avoided_fragments": [
+      "[string]::Equals(",
+      "[StringComparison]::OrdinalIgnoreCase",
+      "[string]::IsNullOrEmpty("
+    ],
+    "preserved_contracts": [
+      "one exact normalized FullName match using -ieq",
+      "source JSON primitive must be System.String",
+      "destination Value2 remains System.String and exact value",
+      "original NumberFormat restored by inner finally",
+      "PrefixCharacter empty and HasFormula false",
+      "COM references released by finally"
+    ],
+    "parser_error_count": 0,
+    "pad_save_recopy": "PENDING",
+    "integrated_ex03_run": "NOT_AUTHORIZED_NOT_RUN"
+  },
+  "synthetic_probe": {
+    "robin": "synthetic-candidate.robin",
+    "script": "synthetic-minimal-format-sandwich.ps1.txt",
+    "source": "source.xlsx",
+    "template": "template.xlsx",
+    "work": "runtime/work.xlsx",
+    "output": "runtime/result.xlsx",
+    "keeps_source_and_work_open_during_exact_selection": true,
+    "parser_error_count": 0,
+    "pad_run": "PENDING"
+  },
+  "fixed_inputs": {
+    "fixed_request": "b530557d87ebaf7ceac01c62c7cb00f7169b3577554ef24bae646391e9a7c370",
+    "fixed_spec": "a6d6dec7ec8d76d3780ecfa5b76a9d6da5944fbdc069ff3a742379276dde4380",
+    "fixed_expected": "49c5e1c24624e0d5550e324118f67af722830f7762327135946e8214cdf89a4d"
+  },
+  "scope": {
+    "copilot_send": 0,
+    "copilot_regeneration": 0,
+    "integrated_ex03_run": 0,
+    "github_write": 0,
+    "r9_r10_generated_outputs_modified": false,
+    "legacy_558_failure_preserved": true,
+    "existing_output_guard_live_path": "REMAINS_UNCONFIRMED"
+  },
+  "decision": "PASS_BOUNDARY_AND_LOCAL_CANDIDATES_PREPARED_PAD_EVIDENCE_PENDING"
+}
