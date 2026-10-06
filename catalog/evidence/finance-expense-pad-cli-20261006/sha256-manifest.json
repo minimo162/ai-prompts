@@ -1,0 +1,74 @@
+[
+  {
+    "path": ".gitattributes",
+    "sha256": "5362c9de8274194bac8edc44249d480e614c987a52ae66ee3873cedc5c077a3c"
+  },
+  {
+    "path": "README.md",
+    "sha256": "1c08740c99473d0c0d2ac3b340e36532a0dba648aa9d7612811ac30e07012d56"
+  },
+  {
+    "path": "catalog/evidence/finance-expense-20261006/comparison.json",
+    "sha256": "75812dbda00d1c64375e0676a4570d36ce0d5f5dc9f05acb7b8b490dc82e5d39"
+  },
+  {
+    "path": "catalog/evidence/finance-expense-20261006/observations.json",
+    "sha256": "78266ec33afd3999a496a71e2bc53cc3d157d93be27e5259ef9acf4bacb9e1b5"
+  },
+  {
+    "path": "catalog/evidence/finance-expense-20261006/run1-copy.csv",
+    "sha256": "b0f4ab00a71034216bdef331a40c38b2b001de3694e77e3f35ed4519a9cf9c68"
+  },
+  {
+    "path": "catalog/evidence/finance-expense-20261006/run2-copy.csv",
+    "sha256": "40626e7708f31b3f5d86e9852f3cd63e878f20e58d468cf5a718281f5c2ee1a4"
+  },
+  {
+    "path": "catalog/evidence/finance-expense-pad-cli-20261006/observations.json",
+    "sha256": "1419183ad43781e7a1e70dee6f7c280549e96df4e40597c44663402af0414e26"
+  },
+  {
+    "path": "catalog/evidence/finance-expense-pad-cli-20261006/output/run1-output.csv",
+    "sha256": "ad2f1beb0b75f4253b1c878912d1f3689204c842b5f3b573d69eb238510f4516"
+  },
+  {
+    "path": "catalog/evidence/finance-expense-pad-cli-20261006/output/run2-output.csv",
+    "sha256": "ad2f1beb0b75f4253b1c878912d1f3689204c842b5f3b573d69eb238510f4516"
+  },
+  {
+    "path": "catalog/evidence/finance-expense-pad-cli-20261006/publication-verification.json",
+    "sha256": "d572760161ff7f6534480e164ad795a7a1af9dd5a3ae0363c8941666ee85d355"
+  },
+  {
+    "path": "catalog/evidence/finance-expense-pad-cli-20261006/report.md",
+    "sha256": "7be8b9d56a7c0b3843a4935646fb77335fa92a041713e0d994da5e009a6a10bb"
+  },
+  {
+    "path": "catalog/fixtures/finance-expense-dummy/expected.csv",
+    "sha256": "b0f4ab00a71034216bdef331a40c38b2b001de3694e77e3f35ed4519a9cf9c68"
+  },
+  {
+    "path": "catalog/fixtures/finance-expense-dummy/input.csv",
+    "sha256": "0927e45422e645daa3b92c294748a3e0e98b65078940d492d08ed6157e6af254"
+  },
+  {
+    "path": "copilot/finance/expense-dummy-prompt.txt",
+    "sha256": "a035c7198e30ec923b5a2f62f2ddea77f62ac48582304767d834b068a2f6d113"
+  },
+  {
+    "path": "docs/finance-expense-dummy-validation.md",
+    "sha256": "1d44b874ed636f4153bb2b6d9eb0e93088d0c90b122e67a42a3d64276fcb02e8"
+  },
+  {
+    "path": "docs/pad-copilot-operation-guide.md",
+    "sha256": "9764f006746fc23a8555b26fccec401e625b0124edd88ca2b6b3adf3bc144740"
+  },
+  {
+    "path": "tools/Verify-FinanceDummyCsv.mjs",
+    "sha256": "7140ba6e933ba4e4c8b020bcf7f51511e3c2d44983bac78bcdfe6e4bdeae9f66"
+  },
+  {
+    "path": "tools/Verify-FinancePadRoundTrip.mjs",
+    "sha256": "15d1840bb9d7352ae54d5e39cfcc621ea6ec5d6f3f9cbd926136cbdf8e1ee5c9"
+  }
+]

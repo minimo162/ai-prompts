@@ -14,3 +14,6 @@ index.html -text
 # Issue38 frozen fixtures, raw responses, evidence and manifests preserve exact bytes.
 catalog/acceptance/** -text -whitespace
 copilot/versions/** -text whitespace=cr-at-eol
+
+# Fixed finance inputs are hash-bound evidence; do not rewrite CSV line endings.
+catalog/fixtures/finance-expense-dummy/*.csv -text whitespace=cr-at-eol

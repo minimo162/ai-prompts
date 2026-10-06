@@ -17,6 +17,8 @@ Power Automate for desktop（PAD）の**実測済みRobin部品**からフロー
 
 ### 既存Copilot経路の必要なもの
 
+財務向け追加試験は[合成経費CSVの判定・PAD入出力](docs/finance-expense-dummy-validation.md)を参照してください。個人用表示のCopilotの2回答は固定6行の論理内容PASS、末尾LF不一致。Claude Code CLI（実モデル`claude-opus-5-5`）から専用PADフローを作成・保存・2回実行し、CSV入出力はPASS・2出力バイト一致。Robin再コピー、経費判定のPAD実装、企業用M365・標準コネクタはこの試験の検証範囲外です。
+
 起動・接続・貼付けで困った場合は、[PAD・Copilotの操作入口](docs/pad-copilot-operation-guide.md)を参照してください。過去の成功経路と、今回の環境で確認すべき条件をまとめています。
 
 - Microsoft 365 Copilotを利用できるアカウント
