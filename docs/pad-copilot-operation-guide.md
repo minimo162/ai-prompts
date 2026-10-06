@@ -7,6 +7,8 @@ EX02向けr4サイクルの現在観測: 通常M365のin-app新規チャット�
 
 ## 最初に区別すること
 
+2026-10-06 UTCの追加試験では、以前のnativeUItool未公開と別に、既存Claude Code CLIのPowerShellからWindows標準UI Automationを利用できた。専用PADフローの通常GUI作成・設定・保存・2Runを確認し、両出力は6行4列・43001円、全行論理一致・出力バイト一致。保全付きRobin貼付けは変更前に拒否され、クリップボードを使わない通常設定画面で2アクションを作成した。保存後Robin再コピーは未実施。個人用表示のCopilot判定2回答とPADのCSV入出力を分け、企業用M365やRobin輸送の受入へ転用しない。[固定試験手順](finance-expense-dummy-validation.md)と[GUI経路・証跡](../catalog/evidence/finance-expense-pad-cli-20261006/report.md)を参照。
+
 | 確認対象 | 過去に成功した経路 | それだけで否定できない観測 |
 |---|---|---|
 | PAD | Consoleから専用空フローを作り、対象Designerを特定してWindows UIA補助ツールで操作 | Computer Useの起動エラー、アプリ一覧に出ない、プロセスだけ存在する |

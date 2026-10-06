@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "repository_base": "a430b50b6883fe1397b93cd71e9d98a123f1b120",
+  "cli": {
+    "version": "2.1.286",
+    "auth_method": "claude.ai",
+    "subscription": "max",
+    "requested_model": "opus",
+    "observed_model": "claude-opus-5-5",
+    "model_confirmed_at_initialization_and_completion": true,
+    "exit_code": 0
+  },
+  "pad": {
+    "package_version": "11.2609.183.0",
+    "distribution": "Store",
+    "ui_language": "ja",
+    "flow_name": "FinanceDummy-Claude-20261007",
+    "power_fx": "Off",
+    "actions": 2,
+    "created": "PASS",
+    "saved": "PASS",
+    "saved_state_observed": true,
+    "console_search_result_count_after_save": 1
+  },
+  "route": {
+    "tool": "Claude Code CLI PowerShell",
+    "libraries": [
+      "UIAutomationClient",
+      "UIAutomationTypes",
+      "System.Windows.Forms",
+      "user32.dll"
+    ],
+    "patterns": [
+      "ValuePattern",
+      "TogglePattern",
+      "InvokePattern"
+    ],
+    "double_click": "Existing Invoke-PadActionDoubleClick.ps1: visible unique UIA target, SetForegroundWindow, cursor placement and mouse_event",
+    "workflow": "Console > New flow > Designer > action tree > configuration dialogs > Save > Run",
+    "nativeUItool": "NOT_USED",
+    "computer_use": "NOT_USED",
+    "url_or_api_execution": "NOT_USED",
+    "same_interactive_session_verified": true,
+    "pid_hwnd_and_title_guard_verified": true
+  },
+  "input": {
+    "path": "catalog/fixtures/finance-expense-dummy/input.csv",
+    "bytes": 166,
+    "sha256": "0927e45422e645daa3b92c294748a3e0e98b65078940d492d08ed6157e6af254",
+    "header": [
+      "row_id",
+      "invoice_id",
+      "amount_jpy",
+      "receipt"
+    ],
+    "unchanged_after_runs": true
+  },
+  "clipboard": {
+    "paste_attempts": 1,
+    "result": "REFUSED_BY_CLIPBOARD_GUARD",
+    "error": "PAD_CLIPBOARD: unsupported native format; paste refused",
+    "paste_sent": false,
+    "clipboard_changed": false,
+    "content_read": false,
+    "guard_changed": false,
+    "alternative": "Normal action dialogs without clipboard use",
+    "saved_robin_recopy": "NOT_RUN",
+    "saved_robin_source_identity": "NOT_VERIFIED"
+  },
+  "run_order": "Run1 > output snapshot and READY_FOR_NEXT_RUN gate > preserve first live output under a new name > confirm output absent > Run2",
+  "runs": [
+    {
+      "run": 1,
+      "success_observed_utc": "2026-10-06T20:45:56.0476107Z",
+      "run_status": "success",
+      "ready_observed": true,
+      "start_enabled_after": true,
+      "pad_variable_preview": [
+        "6 行, 4 列"
+      ],
+      "output": "output/run1-output.csv",
+      "data_rows": 6,
+      "columns": 4,
+      "first_id": "R01",
+      "last_id": "R06",
+      "sum_jpy_checked_externally": 43001,
+      "all_logical_rows_equal_input": true,
+      "bytes": 174,
+      "utf8_bom": true,
+      "line_endings": "CRLF",
+      "trailing_newline": false,
+      "sha256": "ad2f1beb0b75f4253b1c878912d1f3689204c842b5f3b573d69eb238510f4516"
+    },
+    {
+      "run": 2,
+      "success_observed_utc": "2026-10-06T20:46:36.7912050Z",
+      "run_status": "success",
+      "ready_observed": true,
+      "start_enabled_after": true,
+      "pad_variable_preview": [
+        "6 行, 4 列"
+      ],
+      "output": "output/run2-output.csv",
+      "data_rows": 6,
+      "columns": 4,
+      "first_id": "R01",
+      "last_id": "R06",
+      "sum_jpy_checked_externally": 43001,
+      "all_logical_rows_equal_input": true,
+      "bytes": 174,
+      "utf8_bom": true,
+      "line_endings": "CRLF",
+      "trailing_newline": false,
+      "sha256": "ad2f1beb0b75f4253b1c878912d1f3689204c842b5f3b573d69eb238510f4516"
+    }
+  ],
+  "raw_run_outputs_identical": true,
+  "validation": {
+    "independent_full_row_comparison": "PASS",
+    "copyable_robin_static_tests": 14,
+    "copyable_robin_static_result": "PASS",
+    "ps51_helper_tests": [
+      {
+        "name": "Test-PadWindowDiagnostic.ps1",
+        "status": "BLOCKED_EXECUTION_POLICY"
+      },
+      {
+        "name": "Test-PadPasteClipboardFinally.ps1",
+        "status": "BLOCKED_EXECUTION_POLICY"
+      }
+    ],
+    "host_test_policy_changed": false
+  },
+  "scope": "CSV read/write only; no PAD expense classification or PAD total calculation",
+  "not_verified": [
+    "Saved Robin recopy/source identity",
+    "In-progress execution state (success supported by fresh output, preview and Ready return)",
+    "Cloud saved content",
+    "Other computers",
+    "Enterprise tenant, licensing and DLP",
+    "CSV quoting, malformed or missing inputs"
+  ],
+  "existing_flows_touched": false,
+  "new_login_install_permission_billing_settings": false,
+  "publication": "Curated summary derived from local observations; raw GUI dumps, process inventory, clipboard format inventory, machine paths and session logs omitted. Portable CSV outputs retain original bytes."
+}

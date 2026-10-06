@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "candidate_files": 19,
+  "privacy_scan": "PASS_CHANGED_FILES",
+  "json_parse": "PASS",
+  "local_links_checked": 83,
+  "diff_check": "PASS",
+  "tests": [
+    {
+      "name": "copilot-fixture",
+      "exit_code": 0
+    },
+    {
+      "name": "pad-roundtrip",
+      "exit_code": 0
+    },
+    {
+      "name": "copyable-robin",
+      "exit_code": 0
+    },
+    {
+      "name": "final-content-acceptance",
+      "exit_code": 0
+    },
+    {
+      "name": "issue38-package",
+      "exit_code": 0
+    },
+    {
+      "name": "changed-amount",
+      "expected": "REJECT",
+      "status": "PASS"
+    },
+    {
+      "name": "raw-only-newline-change",
+      "expected": "REJECT",
+      "status": "PASS"
+    },
+    {
+      "name": "fence-contamination",
+      "expected": "REJECT",
+      "status": "PASS"
+    }
+  ],
+  "ps51_helper_tests": "BLOCKED_EXECUTION_POLICY_IN_PRIOR_HOST_CONTEXT_NOT_RERUN"
+}

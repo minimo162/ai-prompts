@@ -1,0 +1,10 @@
+合成ダミーデータの財務検証です。会社情報、Web検索、既存ファイル、メールを参照せず、この本文だけで判定してください。支払承認はしません。
+規則: amount_jpy が10000を超える行は LIMIT。receipt が N は MISSING。invoice_id が他の行と同じなら、その重複グループの全行を DUPLICATE。複数理由は LIMIT;MISSING;DUPLICATE の順で連結。該当しない行は OK。件数・金額は入力に忠実に。
+全6行を row_id 昇順、列 row_id,invoice_id,amount_jpy,result の CSV の単一コードブロックだけで返してください。コードの中へ説明、行番号、Markdownフェンスそのものを含めないでください。
+row_id,invoice_id,amount_jpy,receipt
+R01,DUMMY-001,10000,Y
+R02,DUMMY-002,10001,Y
+R03,DUMMY-003,8000,N
+R04,DUMMY-004,1500,Y
+R05,DUMMY-004,1500,Y
+R06,DUMMY-006,12000,N

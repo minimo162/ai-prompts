@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "file": "catalog/evidence/finance-expense-20261006/run1-copy.csv",
+      "status": "PASS_FIXED_CSV_CONTENT",
+      "rows": 6,
+      "total_jpy": 43001,
+      "sha256": "b0f4ab00a71034216bdef331a40c38b2b001de3694e77e3f35ed4519a9cf9c68",
+      "final_lf": true,
+      "bytes": 204
+    },
+    {
+      "file": "catalog/evidence/finance-expense-20261006/run2-copy.csv",
+      "status": "PASS_FIXED_CSV_CONTENT",
+      "rows": 6,
+      "total_jpy": 43001,
+      "sha256": "40626e7708f31b3f5d86e9852f3cd63e878f20e58d468cf5a718281f5c2ee1a4",
+      "final_lf": false,
+      "bytes": 203
+    }
+  ],
+  "same_raw_bytes": false,
+  "native_pad": "NOT_RUN",
+  "corporate_m365": "NOT_RUN",
+  "connector_execution": "NOT_RUN"
+}
